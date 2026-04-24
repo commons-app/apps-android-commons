@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -232,6 +233,23 @@ class CustomSelectorActivity :
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+                val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+                if (fragment != null && fragment is FolderFragment) {
+                    isImageFragmentOpen = false
+                    changeTitle(getString(R.string.custom_selector_title), 0)
+                }
+
+                //hide overflow menu when not in folder
+                showOverflowMenu = false
+                setUpToolbar()
+            }
+        })
     }
 
     override fun onRequestPermissionsResult(
@@ -450,7 +468,7 @@ class CustomSelectorActivity :
      */
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
-        back.setOnClickListener { onBackPressed() }
+        back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val limitError: ImageButton = findViewById(R.id.image_limit_error)
         limitError.visibility = View.INVISIBLE
@@ -676,23 +694,6 @@ class CustomSelectorActivity :
         data.putParcelableArrayListExtra("Images", images)
         setResult(Activity.RESULT_OK, data)
         finish()
-    }
-
-    /**
-     * Back pressed.
-     * Change toolbar title.
-     */
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment != null && fragment is FolderFragment) {
-            isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title), 0)
-        }
-
-        //hide overflow menu when not in folder
-        showOverflowMenu = false
-        setUpToolbar()
     }
 
     /**

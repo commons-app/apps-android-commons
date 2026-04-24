@@ -61,6 +61,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
@@ -137,6 +138,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
+import androidx.core.view.isVisible
 
 class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
     private var editable: Boolean = false
@@ -192,6 +194,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     lateinit var applicationKvStore: JsonKvStore
 
     private val viewModel: MediaDetailViewModel by viewModels<MediaDetailViewModel> { mediaDetailViewModelFactory }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+        }
+    }
 
     private var initialListTop: Int = 0
 
@@ -335,8 +343,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.nominateDeletion.visibility = View.GONE
             binding.coordinateEdit.visibility = View.GONE
         }
-
-        handleBackEvent(view)
 
         //set onCLick listeners
         binding.mediaDetailLicense.setOnClickListener { onMediaDetailLicenceClicked() }
@@ -802,6 +808,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
         if (activity is MainActivity) {
             //explicitly hides the tabs when the media details screen is opened.
             (activity as MainActivity).hideTabs()
@@ -1974,9 +1981,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     fun showCaptionAndDescription() {
         if (binding.dummyCaptionDescriptionContainer.visibility == View.GONE) {
             binding.dummyCaptionDescriptionContainer.visibility = View.VISIBLE
+            onBackPressedCallback.isEnabled = true
             setUpCaptionAndDescriptionLayout()
         } else {
             binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+            onBackPressedCallback.isEnabled = false
         }
     }
 
@@ -2046,26 +2055,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.showCaptionsBinding.descriptionWebview
             .loadDataWithBaseURL(null, descriptionHtmlCode!!, "text/html", "utf-8", null)
         binding.showCaptionsBinding.pbCircular.visibility = View.GONE
-    }
-
-    /**
-     * Handle back event when fragment when showCaptionAndDescriptionContainer is visible
-     */
-    private fun handleBackEvent(view: View) {
-        view.isFocusableInTouchMode = true
-        view.requestFocus()
-        view.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(view: View, keycode: Int, keyEvent: KeyEvent): Boolean {
-                if (keycode == KeyEvent.KEYCODE_BACK) {
-                    if (binding.dummyCaptionDescriptionContainer.visibility == View.VISIBLE) {
-                        binding.dummyCaptionDescriptionContainer.visibility =
-                            View.GONE
-                        return true
-                    }
-                }
-                return false
-            }
-        })
     }
 
 
