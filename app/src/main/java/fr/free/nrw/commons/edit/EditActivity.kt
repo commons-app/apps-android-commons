@@ -275,10 +275,11 @@ class EditActivity : AppCompatActivity() {
     private fun saveEditedImage() {
         val filePath = imageUri.toUri().path
         var file = filePath?.let { File(it) }
+        val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
 
         // Apply rotation first if needed
-        if (imageRotation != 0 && file != null) {
-            val rotatedImage = vm.rotateImage(imageRotation, file, applicationContext.cacheDir)
+        if (relativeRotation != 0 && file != null) {
+            val rotatedImage = vm.rotateImage(relativeRotation, file, applicationContext.cacheDir)
             if (rotatedImage == null) {
                 Toast.makeText(this, "Failed to rotate image", Toast.LENGTH_LONG).show()
                 return

@@ -301,6 +301,7 @@
   <string name="explore_tab_title_map">نخشه</string>
   <string name="successful_wikidata_edit">انځور په ویکي‌اومتوک کې %1$s ته ورگډ شو!</string>
   <string name="question">پوښتنه</string>
+  <string name="quiz_i_am_not_sure">ډاډه نه يم</string>
   <string name="result">پايله</string>
   <string name="quiz_continue">پرله‌پورې</string>
   <string name="continue_message">پرله‌پورې</string>
@@ -308,6 +309,8 @@
   <string name="wrong">ناسم ځواب</string>
   <string name="share_app_title">کاریال وېشل</string>
   <string name="rotate">تاوول</string>
+  <string name="no_pictures_in_this_area">دې سيمه کې هېڅ انځور نشته</string>
+  <string name="no_nearby_places_around">شاوخوا څېرمه ځايونه نشته</string>
   <string name="cancel_upload_dialog">ايا تاسو ډاډه ياست چې دا راپورته‌کول ناگارل غواړئ؟</string>
   <string name="delete_search_dialog">ايا تاسو غواړئ چې دا لټون ړنگ کړئ؟</string>
   <string name="search_history_deleted">د پلټنې پېښليک ړنگ شو</string>
