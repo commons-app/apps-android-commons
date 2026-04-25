@@ -236,6 +236,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
+        binding.tvTitle.text = getString(
+            R.string.step_count, (indexOfFragment + 1),
+            fragmentCallback!!.totalNumberOfSteps, getString(R.string.media_detail_step_title)
+        ) 
         binding.tooltip.setOnClickListener {
             showInfoAlert(
                 R.string.media_detail_step_title,
@@ -421,7 +425,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
     private fun showNearbyPlaceFound(place: Place) {
         val customLayout = layoutInflater.inflate(R.layout.custom_nearby_found, null)
         val nearbyFoundImage = customLayout.findViewById<ImageView>(R.id.nearbyItemImage)
@@ -513,7 +516,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     override fun showMessage(message: String, colorResourceId: Int) =
         showLongToast(requireContext(), message)
 
-    @SuppressLint("StringFormatInvalid")
     override fun showDuplicatePicturePopup(uploadItem: UploadItem) {
         if (defaultKvStore.getBoolean("showDuplicatePicturePopup", true)) {
             val uploadTitleFormat = getString(R.string.upload_title_duplicate)

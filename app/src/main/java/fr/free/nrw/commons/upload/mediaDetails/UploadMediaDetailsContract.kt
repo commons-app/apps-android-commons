@@ -12,7 +12,7 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 
 /**
- * The contract with UploadMediaDetails and its presenter would talk to each other
+ * The contract with with UploadMediaDetails and its presenter would talk to each other
  */
 interface UploadMediaDetailsContract {
     interface View : SimilarImageInterface {
