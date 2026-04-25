@@ -838,6 +838,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Creà da %1$s e carià da %2$s</string>
   <string name="nominated_for_deletion_btn">Nominà për esse dëscancelà</string>
   <string name="custom_selector_max_image_limit_reached">A peul selessioné al màssim %d plance.</string>
+  <string name="edit_unsupported_format_explanation">Le modìfiche andrinta a l\'aplicassion a son disponìbij mach për j\'archivi JPEG. Për modifiché d\'àutri formà, për piasì ch\'a deuvra n\'utiss estern.</string>
   <string name="license_cc0_description">Gnun drit d\'autor. Chiel a conced tuti ij drit, parèj che tuti a peulo dovré cost travaj an qualsëssìa manera.</string>
   <string name="license_cc_by_description">Atribussion. J\'àutri a son lìber ëd partagé e adaté, për tant che a-j dan l\'arconossiment.</string>
   <string name="license_cc_by_sa_description">Atribussion-PartagiUgual. J\'àutri a peulo partagé e adaté, ma a devo dovré la midema licensa e deje l\'arconossiment.</string>

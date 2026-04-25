@@ -71,7 +71,7 @@ abstract class PageableMediaFragment :
      * @param index item position that has been nominated
      */
     override fun refreshNominatedMedia(index: Int) {
-        activity?.onBackPressed()
+        activity?.onBackPressedDispatcher?.onBackPressed()
         categoryImagesCallback.onMediaClicked(index)
     }
 }
