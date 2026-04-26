@@ -277,6 +277,7 @@
   <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
   <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
   <string name="upload_problem_image_duplicate">Η εικόνα είναι ήδη στα Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Η εικόνα σας είναι σε μορφή που δεν υποστηρίζεται από τον διακομιστή του Commons, οπότε η εφαρμογή την μετατρέψε σε JPG.</string>
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
   <string name="upload_problem_fbmd">Παρακαλούμε ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Μην ανεβάζετε φωτογραφίες που έχετε βρει σε λογαριασμούς άλλων ατόμων στο Facebook.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμα να ανεβάσετε αυτήν την φωτογραφία;</string>
@@ -444,7 +445,9 @@
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>
   <string name="no_depictions_selected">Δεν έχουν επιλεγεί απεικονίσεις</string>
   <string name="no_depictions_selected_warning_desc">Οι εικόνες με απεικονίσεις είναι πιο εύκολα ανιχνεύσιμες και πιο πιθανό να χρησιμοποιηθούν. Θέλετε σίγουρα να συνεχίσετε χωρίς να επιλέξετε απεικονίσεις;</string>
+  <string name="depictions_choose_from_map">Επιλέξτε από τον χάρτη</string>
   <string name="depictions_map_confirm">Επιβεβαίωση</string>
+  <string name="depictions_map_no_photo_location">Η φωτογραφία δεν έχει τοποθεσία, εμφανίζοντας την τρέχουσα τοποθεσία σας</string>
   <string name="back_button_warning">Ακύρωση Μεταφόρτωσης</string>
   <string name="back_button_warning_desc">Χρησιμοποιώντας το κουμπί επιστροφής θα ακυρώσετε αυτή τη μεταφόρτωση και θα χάσετε την πρόοδό σας</string>
   <string name="back_button_continue">Συνέχιση Μεταφόρτωσης</string>
