@@ -164,9 +164,12 @@ class UploadModel @Inject internal constructor(
 
     fun buildContributions(): Observable<Contribution> {
         return Observable.fromIterable(items).map { item: UploadItem ->
-            val imageSHA1 = getSHA1(
-                context.contentResolver.openInputStream(item.contentUri!!)!!
-            )
+            val inputStream = requireNotNull(context.contentResolver.openInputStream(item.contentUri!!)) {
+                "Unable to open InputStream for contentUri: ${item.contentUri}"
+            }
+            val imageSHA1 = inputStream.use {
+                getSHA1(it)
+            }
             val contribution = Contribution(
                 item,
                 sessionManager,
