@@ -239,7 +239,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         binding.tvTitle.text = getString(
             R.string.step_count, (indexOfFragment + 1),
             fragmentCallback!!.totalNumberOfSteps, getString(R.string.media_detail_step_title)
-        )
+        ) 
         binding.tooltip.setOnClickListener {
             showInfoAlert(
                 R.string.media_detail_step_title,
@@ -425,7 +425,6 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
     private fun showNearbyPlaceFound(place: Place) {
         val customLayout = layoutInflater.inflate(R.layout.custom_nearby_found, null)
         val nearbyFoundImage = customLayout.findViewById<ImageView>(R.id.nearbyItemImage)
@@ -495,6 +494,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             return
         }
         presenter.fetchTitleAndDescription(indexOfFragment)
+        if (indexOfFragment > 0) {
+            presenter.verifyImageQuality(indexOfFragment)
+        }
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers!!.containsKey(nearbyPlace!!)) {
                 val response = UploadActivity.nearbyPopupAnswers!![nearbyPlace!!]!!

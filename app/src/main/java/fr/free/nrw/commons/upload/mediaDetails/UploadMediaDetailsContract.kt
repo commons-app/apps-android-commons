@@ -124,5 +124,10 @@ interface UploadMediaDetailsContract {
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
         fun onUserConfirmedUploadIsOfPlace(place: Place?, uploadItemIndex: Int)
+
+        /**
+         * Forces a check on the image quality for a specific fragment index
+         */
+        fun verifyImageQuality(index: Int)
     }
 }
