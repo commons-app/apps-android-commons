@@ -21,10 +21,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.generic.GenericDraweeHierarchy
-import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.soloader.SoLoader
+import android.widget.ImageView
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
@@ -114,7 +111,7 @@ class MediaDetailFragmentUnitTests {
     private lateinit var media: Media
 
     @Mock
-    private lateinit var simpleDraweeView: SimpleDraweeView
+    private lateinit var imageView: ImageView
 
     @Mock
     private lateinit var textView: TextView
@@ -124,9 +121,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var linearLayout: LinearLayout
-
-    @Mock
-    private lateinit var genericDraweeHierarchy: GenericDraweeHierarchy
 
     @Mock
     private lateinit var button: Button
@@ -169,10 +163,6 @@ class MediaDetailFragmentUnitTests {
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        SoLoader.setInTestMode()
-
-        Fresco.initialize(ApplicationProvider.getApplicationContext())
-
         activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
 
         fragment = MediaDetailFragment()
@@ -198,14 +188,13 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
         Whitebox.setInternalState(fragment, "_binding", _binding)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
-        Whitebox.setInternalState(_binding, "mediaDetailImageView", simpleDraweeView)
+        Whitebox.setInternalState(_binding, "mediaDetailImageView", imageView)
         Whitebox.setInternalState(_binding, "mediaDetailTitle", textView)
         Whitebox.setInternalState(_binding, "mediaDetailDepictionContainer", linearLayout)
         Whitebox.setInternalState(_binding, "dummyCaptionDescriptionContainer", linearLayout)
         Whitebox.setInternalState(_binding, "depictionsEditButton", button)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
 
-        `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
         val map = HashMap<String, String>()
         map[Locale.getDefault().language] = ""
         `when`(media.descriptions).thenReturn(map)
@@ -860,7 +849,7 @@ class MediaDetailFragmentUnitTests {
 
         spyFragment.onImageBackgroundChanged(color)
 
-        verify(simpleDraweeView, times(1)).setBackgroundColor(color)
+        verify(imageView, times(1)).setBackgroundColor(color)
         verify(mockSharedPreferencesEditor, times(1)).putInt(anyString(), anyInt())
     }
 
@@ -872,7 +861,7 @@ class MediaDetailFragmentUnitTests {
         doReturn(color).`when`(mockSharedPreferences).getInt(anyString(), anyInt())
 
         spyFragment.onImageBackgroundChanged(color)
-        verify(simpleDraweeView, never()).setBackgroundColor(anyInt())
+        verify(imageView, never()).setBackgroundColor(anyInt())
         verify(mockSharedPreferencesEditor, never()).putInt(anyString(), anyInt())
     }
 }

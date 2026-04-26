@@ -11,8 +11,17 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipelineConfig
+import coil3.ImageLoader
+import coil3.request.crossfade
+import coil3.SingletonImageLoader
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.intercept.Interceptor as CoilInterceptor
+import coil3.request.ErrorResult
+import coil3.request.ImageResult
+import okhttp3.OkHttpClient
+import okio.Path.Companion.toPath
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -28,7 +37,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
-import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
@@ -83,7 +91,7 @@ class CommonsApplication : MultiDexApplication() {
     lateinit var cookieJar: CommonsCookieJar
 
     @Inject
-    lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
+    lateinit var okHttpClient: OkHttpClient
 
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
@@ -116,17 +124,29 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        //        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        val config = ImagePipelineConfig.newBuilder(this)
-            .setNetworkFetcher(customOkHttpNetworkFetcher)
-            .setDownsampleEnabled(true)
+        // Initialize Coil with the shared app OkHttpClient so image requests keep the
+        // existing headers, logging, timeout, and HTTP cache configuration.
+        val imageLoader = ImageLoader.Builder(this)
+            .crossfade(true)
+            .components {
+                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+                // Skip image loading when limited connection mode is enabled
+                // (replaces the original CustomOkHttpNetworkFetcher behavior)
+                add(LimitedConnectionModeInterceptor(defaultPrefs))
+            }
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(this, 0.25)
+                    .build()
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory(cacheDir.resolve("image_cache").absolutePath.toPath())
+                    .maxSizePercent(0.02)
+                    .build()
+            }
             .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
-        }
+        SingletonImageLoader.setSafe { imageLoader }
 
         createNotificationChannel(this)
 
@@ -227,11 +247,12 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     /**
-     * Clear all images cache held by Fresco
+     * Clear all images cache held by Coil
      */
     private fun clearImageCache() {
-        val imagePipeline = Fresco.getImagePipeline()
-        imagePipeline.clearCaches()
+        val imageLoader = SingletonImageLoader.get(this)
+        imageLoader.memoryCache?.clear()
+        imageLoader.diskCache?.clear()
     }
 
     /**
@@ -416,3 +437,29 @@ class CommonsApplication : MultiDexApplication() {
     }
 }
 
+/**
+ * Coil interceptor that skips network image loading when limited connection mode is enabled.
+ * This replaces the original CustomOkHttpNetworkFetcher behavior from the Fresco setup.
+ */
+class LimitedConnectionModeInterceptor(
+    private val defaultKvStore: JsonKvStore
+) : CoilInterceptor {
+
+    override suspend fun intercept(chain: CoilInterceptor.Chain): ImageResult {
+        val isLimitedConnectionMode = defaultKvStore.getBoolean(
+            CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false
+        )
+        if (isLimitedConnectionMode && chain.request.data is String) {
+            val url = chain.request.data as String
+            if (url.startsWith("http://") || url.startsWith("https://")) {
+                Timber.d("Skipping image load in limited connection mode: %s", url)
+                return ErrorResult(
+                    image = null,
+                    request = chain.request,
+                    throwable = Exception("Limited connection mode enabled")
+                )
+            }
+        }
+        return chain.proceed()
+    }
+}
