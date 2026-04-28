@@ -405,16 +405,23 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             )
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { _ ->
-                    Timber.d("Coordinates removed from the image")
-                }?.let { it1 ->
-                    compositeDisposable.add(
-                        it1
-                    )
+                ?.subscribe(
+                    { _ ->
+                        Timber.d("Coordinates removed from the image")
+                        // Finish AFTER removal is complete
+                        setResult(RESULT_OK, Intent())
+                        finish()
+                    },
+                    { error ->
+                        Timber.e(error, "Failed to remove coordinates")
+                        // Handle error gracefully
+                        setResult(RESULT_CANCELED, Intent())
+                        finish()
+                    }
+                )?.let { it1 ->
+                    compositeDisposable.add(it1)
                 }
         }
-        setResult(RESULT_OK, Intent())
-        finish()
     }
 
     /**
