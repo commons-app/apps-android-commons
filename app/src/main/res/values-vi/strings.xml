@@ -19,6 +19,7 @@
 * Phjtieudoc
 * Thanhtai2009
 * Thienhau2003
+* Trần Xuân
 * Tuankiet65
 * Vinhtantran
 * Yuki Wulf
@@ -33,6 +34,8 @@
   <string name="add_new_contribution">Thêm đóng góp mới</string>
   <string name="add_contribution_from_camera">Thêm đóng góp từ máy ảnh</string>
   <string name="add_contribution_from_photos">Thêm đóng góp từ Ảnh</string>
+  <string name="show_captions">Chú thích</string>
+  <string name="row_item_caption">Chú thích</string>
   <string name="show_captions_description">Miêu tả</string>
   <string name="nearby_row_image">Hình ảnh</string>
   <string name="nearby_all">Tất cả</string>
@@ -71,6 +74,7 @@
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
+  <string name="updating_caption_title">Cập nhật chú thích và mô tả</string>
   <string name="updating_caption_message">Vui lòng chờ…</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
@@ -121,6 +125,7 @@
   <string name="display_list_button">Danh sách</string>
   <string name="contributions_subtitle_zero">(Chưa có tập tin tải lên)</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
+  <string name="depictions_not_found">Không tìm thấy mục Wikidata nào khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để giúp chúng dễ tìm kiếm hơn trên Wikimedia Commons.\nHãy bắt đầu nhập để thêm thể loại.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="title_activity_settings">Cài đặt</string>
@@ -141,6 +146,9 @@
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
+  <string name="language_search_type_language_name">Nhập tên ngôn ngữ</string>
+  <string name="language_search_recent_searches">Tìm kiếm gần đây</string>
+  <string name="language_search_all_languages">Tất cả ngôn ngữ</string>
   <string name="media_upload_policy">Với việc tải lên hình ảnh này, tôi tuyên bố rằng đây là tác phẩm của chính mình,  không chứa nội dung có bản quyền hoặc ảnh tự chụp và tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định của Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép mặc định</string>
@@ -239,16 +247,20 @@
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Bài Wikipedia</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="caption_info">Vui lòng viết một đoạn mô tả ngắn về hình ảnh. Câu mô tả đầu tiên sẽ được sử dụng làm tiêu đề cho hình ảnh. Giới hạn 255 ký tự.</string>
   <string name="upload_problem_exist">Có vấn đề tiềm ẩn với hình ảnh này:</string>
   <string name="upload_problem_image_dark">Hình ảnh quá tối.</string>
   <string name="upload_problem_image_blurry">Hình ảnh bị nhòe.</string>
   <string name="upload_problem_image_duplicate">Hình ảnh đã có trên Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Hình ảnh của bạn có định dạng không được máy chủ Commons hỗ trợ, vì vậy ứng dụng đã chuyển đổi nó sang định dạng JPG.</string>
   <string name="upload_problem_different_geolocation">Bức ảnh này được chụp ở một địa điểm khác.</string>
   <string name="upload_problem_fbmd">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tìm thấy trên tài không Facebook của người khác.</string>
   <string name="upload_problem_do_you_continue">Bạn vẫn muốn đăng tải bức ảnh này?</string>
   <string name="upload_connection_error_alert_title">Lỗi kết nối</string>
   <string name="upload_connection_error_alert_detail">Quá trình tải lên yêu cầu phải có kết nối internet. Vui lòng kiểm tra kết nối mạng của bạn.</string>
   <string name="upload_problem_image">Các vấn đề được phát hiện trong hình ảnh</string>
+  <string name="internet_downloaded">Vui lòng chỉ đăng tải hình ảnh bạn đã tự chụp. Xin đừng đăng tải hình ảnh bạn tải về từ Internet.</string>
+  <string name="preferences_uploads">Tải lên</string>
   <string name="use_external_storage">Lưu ảnh trong ứng dụng</string>
   <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào bộ nhớ thiết bị của bạn</string>
   <string name="login_to_your_account">Đăng nhập vào tài khoản của bạn</string>
@@ -262,6 +274,7 @@
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>
   <string name="skip_login_title">Bạn có thực sự muốn bỏ qua bước đăng nhập không?</string>
+  <string name="skip_login_message">Bạn sẽ cần phải đăng nhập để tải lên hình ảnh trong tương lai.</string>
   <string name="login_alert_message">Vui lòng đăng nhập để sử dụng được tính năng này</string>
   <string name="copy_wikicode">Sao chép wikitext vào bảng tạm</string>
   <string name="wikicode_copied">Wikitext đã được sao chép vào bảng tạm</string>
@@ -287,6 +300,8 @@
   <string name="about_translate_cancel">Hủy bỏ</string>
   <string name="retry">Thử lại</string>
   <string name="showcase_view_needs_photo">Chỗ này cần một bức ảnh.</string>
+  <string name="showcase_view_has_photo">Địa điểm này đã có ảnh rồi.</string>
+  <string name="showcase_view_no_longer_exists">Nơi này không còn tồn tại nữa.</string>
   <string name="no_images_found">Không tìm thấy hình ảnh!</string>
   <string name="error_loading_images">Đã xuất hiện lỗi khi tải hình ảnh.</string>
   <string name="image_uploaded_by">Tải lên bởi: %1$s</string>
@@ -314,11 +329,13 @@
   <string name="quiz">Thách đố</string>
   <string name="quiz_question_string">Có thể tải lên hình ảnh này được không?</string>
   <string name="question">Câu hỏi</string>
+  <string name="quiz_i_am_not_sure">Tôi không chắc</string>
   <string name="result">Kết quả</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
   <string name="blurry_image_answer">Một trong những mục tiêu của Commons là thu thập hình ảnh chất lượng. Do đó, không nên tải lên những hình ảnh mờ. Hãy luôn cố gắng chụp những hình ảnh đẹp với ánh sáng tốt.</string>
   <string name="construction_event_answer">Những hình ảnh thể hiện được công nghệ hoặc văn hóa luôn được hoan nghênh trên Commons.</string>
   <string name="congratulatory_message_quiz">Bạn trả lời đúng %1$s câu hỏi. Xin chúc mừng!</string>
+  <string name="quiz_continue">Tiếp tục</string>
   <string name="warning_for_no_answer">Chọn một trong hai lựa chọn để trả lời câu hỏi</string>
   <string name="user_not_logged_in">Lượt đăng nhập đã hết hạn. Vui lòng đăng nhập lại</string>
   <string name="quiz_result_share_message">Chia sẻ bài kiểm tra của bạn với bạn bè!</string>
@@ -327,10 +344,13 @@
   <string name="wrong">Câu trả lời sai</string>
   <string name="quiz_screenshot_question">Có thể tải lên hình chụp màn hình này được không?</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
+  <string name="rotate">Xoay</string>
   <string name="error_fetching_nearby_places">Không thể tải các nơi lân cận.</string>
   <string name="no_pictures_in_this_area">Không có hình ảnh trong khu vực này</string>
+  <string name="no_nearby_places_around">Không có địa điểm nào gần đó</string>
   <string name="no_recent_searches">Không có kết quả tìm kiếm gần đây</string>
   <string name="delete_recent_searches_dialog">Bạn có chắc chắn muốn xóa lịch sử tìm kiếm của bạn không?</string>
+  <string name="cancel_upload_dialog">Bạn có chắc muốn hủy việc tải lên này không?</string>
   <string name="delete_search_dialog">Bạn có muốn xóa kết quả tìm kiếm này không?</string>
   <string name="search_history_deleted">Lịch sử tìm kiếm đã bị xóa</string>
   <string name="nominate_delete">Đề nghị xóa</string>
@@ -345,6 +365,10 @@
   <string name="images_used_by_wiki">Hình ảnh đã được sử dụng</string>
   <string name="achievements_share_message">Chia sẻ thành tích của bạn đến bạn bè!</string>
   <string name="achievements_revert_limit_message">yêu cầu tối thiểu:</string>
+  <string name="images_uploaded_explanation">Số hình ảnh bạn đã tải lên Wikimedia Commons, thông qua tất cả các phần mềm tải lên.</string>
+  <string name="images_reverted_explanation">Tỷ lệ phần trăm hình ảnh bạn đã tải lên Commons mà không bị xóa.</string>
+  <string name="images_used_explanation">Số hình ảnh bạn đã tải lên Commons mà được sử dụng trong các bài viết của Wikimedia.</string>
+  <string name="error_occurred">Đã xảy ra lỗi!</string>
   <string name="notifications_channel_name_all">Thông báo Commons</string>
   <string name="preference_author_name_toggle">Sử dụng tên tác giả tùy chỉnh</string>
   <string name="preference_author_name">Tên tác giả tùy chỉnh</string>
@@ -371,19 +395,28 @@
   <string name="deletion_reason_bad_for_my_privacy">Tôi nhận ra rằng điều đó không tốt cho sự riêng tư của tôi</string>
   <string name="deletion_reason_no_longer_want_public">Tôi đã thay đổi ý định, tôi không muốn nó được công khai nữa</string>
   <string name="deletion_reason_not_interesting">Xin lỗi, bức ảnh này không thú vị cho một cuốn bách khoa toàn thư</string>
+  <string name="uploaded_by_myself">Tự tải lên vào ngày %1$s và đã sử dụng trong ít nhất %2$d bài viết.</string>
   <string name="no_uploads">Chào mừng đến với Commons!\n\nTải lên phương tiện đầu tiên của bạn bằng cách nhấp vào nút thêm.</string>
   <string name="no_categories_selected">Không có thể loại nào được chọn</string>
   <string name="no_categories_selected_warning_desc">Hình ảnh không có thể loại hiếm khi được sử dụng. Bạn có chắc chắn muốn tiếp tục mà không chọn thể loại không?</string>
   <string name="no_depictions_selected">Không có miêu tả nào được chọn</string>
+  <string name="depictions_map_confirm">Xác nhận</string>
   <string name="back_button_warning">Hủy bỏ tải lên</string>
   <string name="back_button_continue">Tiếp tục tải lên</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="nearby_card_permission_title">Yêu cầu quyền</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Có gì đó không đúng, Chúng tôi không thể tải được thành tích.</string>
+  <string name="nearby_card_permission_explanation">Bạn có muốn chúng tôi sử dụng vị trí hiện tại của bạn để hiển thị địa điểm gần nhất cần chụp ảnh không?</string>
+  <string name="unable_to_display_nearest_place">Không thể hiển thị địa điểm gần nhất cần chụp ảnh nếu không có quyền truy cập vị trí</string>
+  <string name="display_location_permission_title">Yêu cầu quyền truy cập vị trí</string>
+  <string name="achievements_fetch_failed">Có gì đó không đúng, chúng tôi không thể tải được thành tích.</string>
+  <string name="ends_on">Kết thúc vào:</string>
   <string name="display_campaigns">Hiển thị chiến dịch</string>
   <string name="display_campaigns_explanation">Xem các chiến dịch đang diễn ra</string>
+  <string name="show_deletion_button">Hiển thị nút xóa</string>
   <string name="option_allow">Cho phép</string>
   <string name="option_dismiss">Bỏ qua</string>
+  <string name="this_function_needs_network_connection">Chức năng này yêu cầu kết nối mạng. Vui lòng kiểm tra cài đặt kết nối của bạn.</string>
+  <string name="error_processing_image">Đã xảy ra lỗi trong quá trình xử lý hình ảnh. Vui lòng thử lại!</string>
   <string name="check_category_edit_summary">Yêu cầu kiểm tra thể loại</string>
   <string name="check_category_success_title">Đã yêu cầu kiểm tra thể loại</string>
   <string name="check_category_failure_title">Yêu cầu kiểm tra thể loại không hoạt động</string>
@@ -391,14 +424,21 @@
   <string name="check_category_failure_message">Không thể yêu cầu kiểm tra thể loại cho %1$s</string>
   <string name="check_category_toast">Đang yêu cầu kiểm tra thể loại cho %1$s</string>
   <string name="nominate_for_deletion_done">Xong</string>
-  <string name="send_thank_success_title" fuzzy="true">Gửi lời cảm ơn: Thành công</string>
-  <string name="send_thank_success_message" fuzzy="true">Đã gửi thành công lời cảm ơn tới %1$s</string>
-  <string name="send_thank_failure_message" fuzzy="true">Không gửi được lời cảm ơn tới %1$s</string>
-  <string name="send_thank_failure_title" fuzzy="true">Gửi lời cảm ơn: Thất bại</string>
-  <string name="send_thank_toast" fuzzy="true">Đang gửi lời cảm ơn tới %1$s</string>
+  <string name="send_thank_success_title">Gửi lời cảm ơn: Thành công</string>
+  <string name="send_thank_success_message">Đã gửi thành công lời cảm ơn tới %1$s</string>
+  <string name="send_thank_failure_message">Không gửi được lời cảm ơn tới %1$s</string>
+  <string name="send_thank_failure_title">Gửi lời cảm ơn: Thất bại</string>
+  <string name="send_thank_toast">Đang gửi lời cảm ơn tới %1$s</string>
+  <string name="review_thanks">Bạn có muốn gửi lời cảm ơn đến người đóng góp không?</string>
+  <string name="review_category_explanation">Hình ảnh này thuộc thể loại %1$s.</string>
   <string name="review_thanks_yes_button_text">Hình ảnh sau</string>
   <string name="review_thanks_no_button_text">Vâng, tại sao không?</string>
+  <string name="no_image">Không có hình ảnh nào được sử dụng</string>
+  <string name="no_image_reverted">Không có hình ảnh nào bị lùi lại</string>
+  <string name="no_image_uploaded">Chưa tải lên hình ảnh nào</string>
+  <string name="no_notification">Bạn không có thông báo nào chưa đọc</string>
   <string name="check_your_email_inbox">Kiểm tra hộp thư đến của bạn</string>
+  <string name="error_occurred_in_picking_images">Đã xảy ra lỗi khi chọn ảnh</string>
   <string name="please_wait">Vui lòng chờ...</string>
   <string name="copied_successfully">Đã sao chép</string>
   <string name="skip_image">Bỏ qua hình ảnh này</string>
@@ -406,18 +446,49 @@
   <string name="exif_tag_name_copyright">Bản quyền</string>
   <string name="exif_tag_name_location">Vị trí</string>
   <string name="exif_tag_name_cameraModel">Dòng máy ảnh</string>
+  <string name="exif_tag_name_serialNumbers">Số series</string>
   <string name="exif_tag_name_software">Phần mềm</string>
+  <string name="share_text">Tải ảnh trực tiếp từ điện thoại của bạn lên Wikimedia Commons. Tải ứng dụng Commons ngay: %1$s</string>
+  <string name="share_via">Chia sẻ ứng dụng qua...</string>
+  <string name="image_info">Thông tin hình ảnh</string>
+  <string name="no_categories_found">Không tìm thấy thể loại</string>
+  <string name="upload_cancelled">Đã hủy tải lên</string>
+  <string name="dialog_box_text_nomination">Tại sao %1$s nên bị xóa?</string>
+  <string name="review_is_uploaded_by">%1$s được tải lên bởi: %2$s</string>
+  <string name="default_description_language">Ngôn ngữ mô tả mặc định</string>
   <string name="delete_helper_show_deletion_title_success">Thành công</string>
   <string name="delete_helper_show_deletion_title_failed">Thất bại</string>
+  <string name="delete_helper_show_deletion_message_else">Không thể yêu cầu xóa.</string>
+  <string name="delete_helper_ask_spam_nonsense">Vô nghĩa, hoàn toàn không thể sử dụng trong bất kỳ bài viết nào.</string>
+  <string name="delete_helper_ask_spam_other">Khác: vui lòng ghi rõ bên dưới</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
   <string name="category_edit_helper_show_edit_title">Cập nhật danh mục</string>
   <string name="category_edit_helper_show_edit_title_success">Thành công</string>
   <string name="category_edit_helper_edit_message_else">Không thể thêm danh mục.</string>
   <string name="category_edit_button_text">Cập nhật danh mục</string>
+  <string name="coordinates_edit_helper_show_edit_title">Cập nhật tọa độ</string>
+  <string name="description_edit_helper_show_edit_title">Cập nhật mô tả</string>
+  <string name="caption_edit_helper_show_edit_title">Cập nhật chú thích</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Thành công</string>
+  <string name="coordinates_edit_helper_show_edit_message">Tọa độ %1$s đã được được thêm vào.</string>
+  <string name="description_edit_helper_show_edit_message">Mô tả đã được thêm vào.</string>
+  <string name="caption_edit_helper_show_edit_message">Chú thích đã được thêm vào.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Không thể thêm tọa độ.</string>
   <string name="description_edit_helper_edit_message_else">Không thể thêm mô tả.</string>
+  <string name="caption_edit_helper_edit_message_else">Không thể thêm chú thích.</string>
+  <string name="coordinates_picking_unsuccessful">Tọa độ của hình ảnh chưa được cập nhật</string>
+  <string name="description_activity_title">Chỉnh sửa mô tả và chú thích</string>
+  <string name="share_image_via">Chia sẻ hình ảnh qua</string>
+  <string name="you_have_no_achievements_yet">Bạn chưa có đóng góp gì cả</string>
+  <string name="no_achievements_yet">%1$s chưa có đóng góp gì cả</string>
+  <string name="account_created">Đã mở tài khoản thành công!</string>
+  <string name="some_error">Đã xảy ra lỗi!</string>
   <string name="title_app_shortcut_setting">Tùy chọn</string>
+  <string name="theme_dark_name">Tối</string>
+  <string name="theme_light_name">Sáng</string>
+  <string name="cannot_open_location_settings">Không thể mở cài đặt vị trí. Vui lòng bật định vị thủ công.</string>
+  <string name="ask_to_turn_location_on">Bật định vị?</string>
   <string name="load_more">Tải thêm</string>
   <string name="nearby_no_results">Không tìm thấy địa điểm nào, hãy thử thay đổi tiêu chí tìm kiếm.</string>
   <string name="todo_improve">Các cải thiện được đề xuất:</string>
@@ -433,7 +504,7 @@
   <string name="wikipedia_instructions_step_5">5. Dán wikitext vào đúng vị trí.</string>
   <string name="wikipedia_instructions_step_6">6. Chỉnh sửa wikitext cho phù hợp nếu cần. Để biết thêm thông tin, xem &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;tại đây&lt;/a&gt; .</string>
   <string name="wikipedia_instructions_step_7">7. Xuất bản bài viết</string>
-  <string name="copy_wikicode_to_clipboard" fuzzy="true">Sao chép wikicode vào bảng tạm</string>
+  <string name="copy_wikicode_to_clipboard">Sao chép wikitext vào bảng tạm</string>
   <string name="pause">tạm ngừng</string>
   <string name="resume">tiếp tục</string>
   <string name="paused">Đã tạm ngừng</string>
@@ -445,6 +516,8 @@
   <string name="count_prefix">Tổng số:</string>
   <string name="leaderboard_column_rank">Hạng</string>
   <string name="leaderboard_column_user">Thành viên</string>
+  <string name="leaderboard_column_count">Số lượng</string>
+  <string name="setting_avatar_dialog_message">Đang đặt làm ảnh đại diện, vui lòng chờ</string>
   <string name="avatar_set_successfully">Đặt ảnh đại diện</string>
   <string name="avatar_set_unsuccessfully">Lỗi khi đặt ảnh đại diện mới, vui lòng thử lại</string>
   <string name="menu_set_avatar">Đặt làm ảnh đại diện</string>
@@ -455,7 +528,13 @@
   <string name="leaderboard_nearby">Lân cận</string>
   <string name="leaderboard_my_rank_button_text">Hạng của tôi</string>
   <string name="statistics_quality">Hình ảnh chất lượng</string>
+  <string name="resuming_upload">Đang tiếp tục tải lên…</string>
+  <string name="pausing_upload">Đang tạm dừng tải lên…</string>
+  <string name="cancelling_upload">Đang hủy tải lên…</string>
+  <string name="cancel_upload">Hủy bỏ tải lên</string>
   <string name="license_step_title">Giấy phép Phương tiện</string>
+  <string name="read_help_link">Đọc thêm</string>
+  <string name="choose_a_location">Chọn vị trí</string>
   <string name="modify_location">Sửa đổi vị trí</string>
   <string name="image_location">Vị trí hình</string>
   <string name="label">Nhãn</string>
@@ -464,23 +543,79 @@
   <string name="custom_selector_empty_text">Không có hình ảnh</string>
   <string name="done">Xong</string>
   <string name="back">Trở lại</string>
+  <string name="welcome_custom_selector_ok">Tuyệt vời</string>
+  <string name="custom_selector_already_uploaded_image_text">Hình ảnh này đã được tải lên Commons rồi.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Bỏ qua</string>
   <string name="custom_selector_button_limit_text">Tối đa: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Lỗi: Đã vượt quá giới hạn tải lên</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
+  <string name="contributions_of_user">Đóng góp của người dùng: %1$s</string>
+  <string name="achievements_of_user">Thành tích của người dùng: %1$s</string>
+  <string name="menu_view_user_page">Xem hồ sơ người dùng</string>
+  <string name="edit_categories">Sửa thể loại</string>
+  <string name="advanced_options">Tùy chọn nâng cao</string>
   <string name="apply">Áp dụng</string>
   <string name="reset">Mặc định lại</string>
+  <string name="no_location_found_title">Không tìm thấy vị trí</string>
+  <string name="add_location">Thêm vị trí</string>
+  <string name="explore_map_details">Chi tiết</string>
   <string name="android_version">Phiên bản Android</string>
   <string name="device_manufacturer">Nhà sản xuất thiết bị</string>
   <string name="device_model">Mẫu thiết bị</string>
   <string name="device_name">Tên thiết bị</string>
+  <string name="thanks_feedback">Cảm ơn bạn đã phản hồi.</string>
+  <string name="error_feedback">Đã xảy ra lỗi khi gửi phản hồi</string>
+  <string name="enter_description">Phản hồi của bạn là gì?</string>
+  <string name="your_feedback">Phản hồi của bạn</string>
+  <string name="no_more_images_found">Không tìm thấy thêm hình ảnh nào</string>
+  <string name="this_image_is_already_uploaded">Hình ảnh này đã được tải lên rồi</string>
+  <string name="can_not_select_this_image_for_upload">Không thể chọn hình ảnh này để tải lên</string>
   <string name="image_selected">Hình ảnh đã chọn</string>
   <string name="menu_view_report">Báo cáo</string>
+  <string name="menu_view_set_white_background">Đặt nền trắng</string>
+  <string name="menu_view_set_black_background">Đặt nền đen</string>
+  <string name="report_violation">Báo cáo vi phạm</string>
   <string name="report_user">Báo cáo thành viên này</string>
   <string name="report_content">Báo cáo nội dung này</string>
+  <string name="request_user_block">Yêu cầu cấm người dùng này</string>
+  <string name="full_screen_mode_zoom_info">Dùng hai ngón tay để phóng to và thu nhỏ.</string>
+  <string name="unable_to_share_upload_item">Không thể chia sẻ mục này</string>
   <string name="see_your_achievements">Xem thành tích của bạn</string>
   <string name="edit_image">Sửa đổi hình ảnh</string>
   <string name="edit_location">Sửa đổi Vị trí</string>
   <string name="location_updated">Vị trí đã được cập nhật!</string>
   <string name="remove_location">Xóa vị trí</string>
+  <string name="remove_location_warning_title">Cảnh báo về xóa vị trí</string>
+  <string name="location_removed">Vị trí đã bị xóa!</string>
   <string name="send_thanks_to_author">Cảm ơn tác giả</string>
+  <string name="file_saved_successfully">Tập tin đã được lưu thành công</string>
+  <string name="do_you_want_to_open_gpx_file">Bạn có muốn mở tập tin GPX không?</string>
+  <string name="do_you_want_to_open_kml_file">Bạn có muốn mở tập tin KML không?</string>
+  <string name="failed_to_save_kml_file">Không thể lưu tập tin KML.</string>
+  <string name="failed_to_save_gpx_file">Không thể lưu tập tin GPX.</string>
+  <string name="saving_kml_file">Đang lưu dưới dạng tập tin KML...</string>
+  <string name="saving_gpx_file">Đang lưu dưới dạng tập tin GPX...</string>
+  <string name="multiple_files_depiction_header">Lưu ý về việc tải lên nhiều tập tin cùng lúc</string>
+  <string name="nearby_wikitalk">Báo cáo sự cố về mục này cho Wikidata</string>
+  <string name="talk">Thảo luận</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Bạn có chắc muốn hủy tất cả các tác vụ đang tải lên không?</string>
+  <string name="cancelling_all_the_uploads">Đang hủy tất cả tác vụ tải lên...</string>
+  <string name="uploads">Tải lên</string>
+  <string name="pending">Đang chờ</string>
+  <string name="failed">Thất bại</string>
+  <string name="could_not_load_place_data">Không thể tải dữ liệu địa điểm</string>
+  <string name="warning_for_no_option_selected">Chọn một trong các lựa chọn để trả lời câu hỏi</string>
+  <string name="custom_selector_delete_folder">Xóa thư mục</string>
+  <string name="custom_selector_confirm_deletion_title">Xác nhận xóa</string>
+  <string name="custom_selector_confirm_deletion_message">Bạn có chắc muốn xóa thư mục %1$s chứa %2$d mục không?</string>
+  <string name="custom_selector_delete">Xóa</string>
+  <string name="custom_selector_cancel">Hủy bỏ</string>
+  <string name="green_pin">Địa điểm này đã có ảnh rồi.</string>
+  <string name="error_while_loading">Đã xảy ra lỗi trong quá trình tải</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Các wiki khác</string>
+  <string name="account">Tài khoản</string>
+  <string name="image_tag_line_created_and_uploaded_by">Được tạo và tải lên bởi: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Được tạo bởi %1$s và tải lên bởi %2$s</string>
+  <string name="custom_selector_max_image_limit_reached">Bạn chỉ có thể chọn tối đa %d hình ảnh.</string>
 </resources>
