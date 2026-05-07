@@ -233,8 +233,8 @@
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
   <string name="welcome_image_tulip">튤립</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">환영 위키백과</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">환영 저작권</string>
+  <string name="welcome_image_welcome_wikipedia">일반적인 위키백과 문서의 개략도입니다.</string>
+  <string name="welcome_image_welcome_copyright">저작권 표시가 지워진 서류 뭉치 그림.</string>
   <string name="welcome_image_sydney_opera_house">시드니 오페라 하우스</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
