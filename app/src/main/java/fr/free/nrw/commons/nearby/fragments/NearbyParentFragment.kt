@@ -2353,9 +2353,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * their bookmarked status
      */
     override fun replaceMarkerOverlays(markerPlaceGroups: List<MarkerPlaceGroup>) {
-        // Sort ascending by priority: lower-priority markers are added first (drawn at the
-        // bottom), higher-priority markers are added last (drawn on top).
-        val sortedGroups = markerPlaceGroups.sortedBy { getMarkerPriority(it.place, it.isBookmarked) }
+        // Reverse the list first to make it farthest-first (since it comes nearest-first).
+        // Then sort by priority (stable sort). This ensures that within the same priority,
+        // farthest markers are added first (drawn bottom) and nearest are added last (drawn top).
+        val sortedGroups = markerPlaceGroups.reversed().sortedBy { getMarkerPriority(it.place, it.isBookmarked) }
         val newMarkers = sortedGroups.map { group ->
             convertToMarker(group.place, group.isBookmarked)
         }

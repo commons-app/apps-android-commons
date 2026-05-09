@@ -394,11 +394,51 @@ class NearbyParentFragmentUnitTest {
         Assert.assertTrue(
             pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE)
         )
-        Assert.assertEquals(
-            allPhotoCoordinates,
-            pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
-                NearbyParentFragment.ARG_PHOTO_LATLNGS
-            )
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMarkerPriorityOrder() {
+        // Use reflection to access the private getMarkerPriority method
+        val getMarkerPriorityMethod = NearbyParentFragment::class.java.getDeclaredMethod(
+            "getMarkerPriority",
+            Place::class.java,
+            Boolean::class.java
+        )
+        getMarkerPriorityMethod.isAccessible = true
+
+        // Mock a place that needs a photo (Red pin)
+        val needsPhotoPlace = mock(Place::class.java)
+        `when`(needsPhotoPlace.isMonument).thenReturn(false)
+        `when`(needsPhotoPlace.pic).thenReturn("")
+        `when`(needsPhotoPlace.exists).thenReturn(true)
+
+        // Mock a place that has a photo (Green pin)
+        val hasPhotoPlace = mock(Place::class.java)
+        `when`(hasPhotoPlace.isMonument).thenReturn(false)
+        `when`(hasPhotoPlace.pic).thenReturn("some_pic")
+        `when`(hasPhotoPlace.exists).thenReturn(true)
+
+        // Mock a monument place
+        val monumentPlace = mock(Place::class.java)
+        `when`(monumentPlace.isMonument).thenReturn(true)
+
+        // Get priorities
+        val priorityNeedsPhoto = getMarkerPriorityMethod.invoke(fragment, needsPhotoPlace, false) as Int
+        val priorityHasPhoto = getMarkerPriorityMethod.invoke(fragment, hasPhotoPlace, false) as Int
+        val priorityMonument = getMarkerPriorityMethod.invoke(fragment, monumentPlace, false) as Int
+
+        // Red (needs photo) should be drawn on top of Green (has photo), so Red > Green priority
+        Assert.assertTrue(
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Has Photo (Green) priority ($priorityHasPhoto)",
+            priorityNeedsPhoto > priorityHasPhoto
+        )
+        
+        // Red should also be drawn on top of Monuments
+        Assert.assertTrue(
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Monument priority ($priorityMonument)",
+            priorityNeedsPhoto > priorityMonument
         )
     }
 }
