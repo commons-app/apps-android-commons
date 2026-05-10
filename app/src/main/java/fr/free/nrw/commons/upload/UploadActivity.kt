@@ -511,6 +511,18 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             receiveInternalSharedItems()
         }
 
+        // Filter the files using the correct property
+        val originalSize = uploadableFiles.size
+        uploadableFiles = uploadableFiles.filter { file ->
+            file.contentUri?.let { uri ->
+                FileUtils.isSupportedFileType(this, uri)
+            } ?: false
+        }.toMutableList()
+
+        // Notify the user if any files were rejected
+        if (uploadableFiles.size < originalSize) {
+            showLongToast(this, R.string.unsupported_file_type)
+        }
         if (uploadableFiles.isEmpty()) {
             handleNullMedia()
         } else {
