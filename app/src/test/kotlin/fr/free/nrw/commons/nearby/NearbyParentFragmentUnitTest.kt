@@ -394,6 +394,11 @@ class NearbyParentFragmentUnitTest {
         Assert.assertTrue(
             pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE)
         )
+        Assert.assertEquals(
+            allPhotoCoordinates,
+            pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
+                NearbyParentFragment.ARG_PHOTO_LATLNGS
+            )
         )
     }
 
