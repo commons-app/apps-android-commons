@@ -66,6 +66,11 @@ class UploadProgressActivity : BaseActivity() {
             },
         )
         setTabs()
+
+        val targetTab = intent.getIntExtra("upload_target_tab", 0)
+        if (targetTab != 0) {
+            binding.uploadProgressViewPager.currentItem = targetTab
+        }
     }
 
     /**
