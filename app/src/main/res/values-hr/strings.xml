@@ -4,6 +4,7 @@
 * Astrind
 * Bugoslav
 * MaGa
+* Mnalis
 * Neptune, the Mystic
 * Ponor
 -->
@@ -198,6 +199,7 @@
   <string name="upload_problem_image_dark">Slika je pretamna.</string>
   <string name="upload_problem_image_blurry">Slika je mutna.</string>
   <string name="upload_problem_image_duplicate">Slika se već nalazi na Zajedničkom poslužitelju.</string>
+  <string name="upload_problem_image_format_unsupported">Vaša je slika u formatu koji Commons poslužitelj ne podržava, pa ju je aplikacija pretvorila u JPG.</string>
   <string name="upload_problem_different_geolocation">Slika je snimljena na drugoj lokaciji.</string>
   <string name="upload_problem_fbmd">Molimo Vas da samo postavljate slike koje ste sami snimili. Ne postavljajte slike koje ste našli na profilima drugih ljudi na Facebooku.</string>
   <string name="upload_problem_do_you_continue">Želite li i dalje postaviti ovu sliku?</string>

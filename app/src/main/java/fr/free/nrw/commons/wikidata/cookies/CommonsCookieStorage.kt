@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
+import fr.free.nrw.commons.crypto.CryptoUtils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import okhttp3.Cookie
@@ -39,14 +40,26 @@ class CommonsCookieStorage(
 
     fun load() {
         cookieMap.clear()
-        val json = preferences!!.getString(COOKIE_STORE, null)
+        val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
+        val json = CryptoUtils.decrypt(encryptedJson)
+        
         if (!json.isNullOrEmpty()) {
             val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
             cookieMap.putAll(serializedData.cookieMap)
+            
+            // If the loaded json wasn't encrypted (e.g. migrating from older version)
+            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
+            if (encryptedJson == json) {
+               save()
+            }
         }
     }
 
-    fun save() = preferences!!.putString(COOKIE_STORE, gson.toJson(this))
+    fun save() {
+        val json = gson.toJson(this)
+        val encryptedJson = CryptoUtils.encrypt(json)
+        preferences!!.putString(COOKIE_STORE, encryptedJson ?: json)
+    }
 
     fun contains(domainSpec: String): Boolean = cookieMap.containsKey(domainSpec)
 

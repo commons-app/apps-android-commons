@@ -15,6 +15,7 @@
 * Ohw0zuz4
 * Revi
 * Suleiman the Magnificent Television
+* Tensama0415
 * Theshinster123
 * YeBoy371
 * Ykhwong
@@ -119,7 +120,7 @@
   <string name="login_failed_network">로그인할 수 없습니다 - 네트워크 오류입니다</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되었습니다</string>
-  <string name="login_failed_2fa_needed">2요소 인증 코드를 제공해야 합니다.</string>
+  <string name="login_failed_2fa_needed">2단계 인증 코드를 제공해야 합니다.</string>
   <string name="login_failed_generic">로그인 실패</string>
   <string name="share_upload_button">올리기</string>
   <string name="multiple_share_base_title">이 집합의 이름 짓기</string>
@@ -232,8 +233,8 @@
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
   <string name="welcome_image_tulip">튤립</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">환영 위키백과</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">환영 저작권</string>
+  <string name="welcome_image_welcome_wikipedia">일반적인 위키백과 문서의 개략도입니다.</string>
+  <string name="welcome_image_welcome_copyright">저작권 표시가 지워진 서류 뭉치 그림.</string>
   <string name="welcome_image_sydney_opera_house">시드니 오페라 하우스</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
@@ -266,6 +267,7 @@
   <string name="upload_connection_error_alert_detail">파일을 올리기 위해서는 인터넷 연결이 필요합니다. 네트워크 연결을 확인해 주세요.</string>
   <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="internet_downloaded">직접 찍은 사진만 업로드하세요. 인터넷에서 다운로드한 사진을 업로드하지 마세요.</string>
+  <string name="preferences_uploads">업로드</string>
   <string name="use_external_storage">인앱으로 찍은 사진 저장하기</string>
   <string name="use_external_storage_summary">인앱 카메라로 찍은 사진을 기기에 저장하기</string>
   <string name="login_to_your_account">자신의 계정으로 로그인</string>
@@ -336,6 +338,7 @@
   <string name="quiz">퀴즈</string>
   <string name="quiz_question_string">이 사진을 업로드하시겠습니까?</string>
   <string name="question">질문</string>
+  <string name="quiz_i_am_not_sure">확실하지 않음</string>
   <string name="result">결과</string>
   <string name="quiz_back_button">삭제가 필요한 그림을 계속 올리신다면 계정이 차단될 수 있습니다. 퀴즈를 끝내시겠습니까?</string>
   <string name="quiz_alert_message">업로드한 그림 중 %1$s개 이상이 삭제되었습니다. 삭제가 필요한 그림을 계속 올리시면 계정이 차단될 수 있습니다.\n\n강좌를 다시 본 다음 퀴즈를 풀면서 올려도 되거나 그렇지 않은 사진의 유형에 대해 배워보시겠습니까?</string>
@@ -345,6 +348,7 @@
   <string name="blurry_image_answer">공용의 목표 중 하나는 질좋은 그림을 모으는 것입니다. 그러므로 흐릿한 그림은 올리지 않는 것이 좋습니다. 조명 상태가 좋은 멋진 사진을 늘 찍어 주십시오.</string>
   <string name="construction_event_answer">기술이나 문화를 보여주는 사진은 공용에서 기꺼이 환영합니다.</string>
   <string name="congratulatory_message_quiz">정답 %1$s개를 맞추셨습니다. 축하드립니다!</string>
+  <string name="quiz_continue">계속</string>
   <string name="warning_for_no_answer">질문에 답하기 위해 옵션 2개 중 하나를 선택하십시오</string>
   <string name="user_not_logged_in">로그인 세션 만료. 다시 로그인해 주십시오.</string>
   <string name="quiz_result_share_message">친구들과 퀴즈를 공유하세요!</string>
@@ -594,6 +598,8 @@
   <string name="cancel_upload">올리기 취소</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
+  <string name="depicts_label">레이블</string>
+  <string name="depicts_description">설명</string>
   <string name="license_step_title">미디어 라이선스</string>
   <string name="media_detail_step_title">미디어 상세 정보</string>
   <string name="menu_view_category_page">분류 문서 보기</string>
