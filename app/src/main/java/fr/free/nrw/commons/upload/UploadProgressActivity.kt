@@ -67,7 +67,7 @@ class UploadProgressActivity : BaseActivity() {
         )
         setTabs()
 
-        val targetTab = intent.getIntExtra("upload_target_tab", 0)
+        val targetTab = intent.getIntExtra(EXTRA_TARGET_TAB, 0)
         if (targetTab != 0) {
             binding.uploadProgressViewPager.currentItem = targetTab
         }
@@ -92,7 +92,7 @@ class UploadProgressActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_uploads, menu)
         this.menu = menu
-        updateMenuItems(0)
+        updateMenuItems(binding.uploadProgressViewPager.currentItem)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -212,5 +212,10 @@ class UploadProgressActivity : BaseActivity() {
     fun setErrorIconsVisibility(visible: Boolean) {
         isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
+    }
+
+    companion object {
+        const val EXTRA_TARGET_TAB = "upload_target_tab"
+        const val TAB_FAILED = 1
     }
 }

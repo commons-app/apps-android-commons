@@ -629,7 +629,7 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, 1))
+        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, UploadProgressActivity.TAB_FAILED))
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -671,7 +671,7 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, 1))
+        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, UploadProgressActivity.TAB_FAILED))
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -741,7 +741,7 @@ class UploadWorker(
      */
     private fun getPendingIntent(toClass: Class<out BaseActivity>, targetTab: Int = 0): PendingIntent {
         val intent = Intent(appContext, toClass)
-        intent.putExtra("upload_target_tab", targetTab)
+        intent.putExtra(UploadProgressActivity.EXTRA_TARGET_TAB, targetTab)
         return TaskStackBuilder.create(appContext).run {
             addNextIntentWithParentStack(intent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
