@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 
 import androidx.appcompat.app.AlertDialog
@@ -59,8 +60,20 @@ class QuizResultActivity : AppCompatActivity() {
                 this, MainActivity::class.java,
                 Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
             )
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                startActivityWithFlags(
+                    this@QuizResultActivity, MainActivity::class.java,
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
+                )
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -89,14 +102,6 @@ class QuizResultActivity : AppCompatActivity() {
             this, MainActivity::class.java,
             Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
         )
-    }
-
-    override fun onBackPressed() {
-        startActivityWithFlags(
-            this, MainActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
-        )
-        super.onBackPressed()
     }
 
     /**

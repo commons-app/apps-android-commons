@@ -18,7 +18,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-oldal</string>
-  <string name="commons_github" fuzzy="true">Commons Github forráskód</string>
+  <string name="commons_github">Commons Github forráskód</string>
   <string name="commons_logo">Commons Logo</string>
   <string name="commons_website">Commons weboldal</string>
   <string name="submit">Küldés</string>
@@ -65,6 +65,7 @@
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
+  <string name="updating_caption_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>

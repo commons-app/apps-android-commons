@@ -266,6 +266,7 @@
   <string name="upload_problem_image_dark">Tá an íomhá ró-dhorcha.</string>
   <string name="upload_problem_image_blurry">Tá an íomhá doiléir.</string>
   <string name="upload_problem_image_duplicate">Tá an íomhá ar Commons cheana féin.</string>
+  <string name="upload_problem_image_format_unsupported">Tá d’íomhá i bhformáid nach dtacaíonn freastalaí Commons léi, mar sin rinne an aip í a thiontú go JPG.</string>
   <string name="upload_problem_different_geolocation">Tógadh an pictiúr seo in áit eile.</string>
   <string name="upload_problem_fbmd">Ná huaslódáil ach pictiúir a thóg tú féin. Ná huaslódáil pictiúir a fuair tú ar chuntais Facebook daoine eile.</string>
   <string name="upload_problem_do_you_continue">Ar mhaith leat an pictiúr seo a uaslódáil fós?</string>
@@ -858,7 +859,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Cruthaithe ag %1$s agus uaslódáilte ag %2$s</string>
   <string name="nominated_for_deletion_btn">Ainmnithe le haghaidh Scriosadh</string>
   <string name="custom_selector_max_image_limit_reached">Ní féidir leat ach %d íomhá ar a mhéad a roghnú.</string>
-  <string name="edit_unsupported_format_explanation">&amp;nbsp;</string>
+  <string name="edit_unsupported_format_explanation">Níl eagarthóireacht san aip ar fáil ach amháin le haghaidh comhaid JPEG. Chun formáidí eile a chur in eagar, bain úsáid as uirlis tríú páirtí.</string>
   <string name="license_cc0_description">Gan cóipcheart. Scaoileann tú gach ceart ionas gur féidir le duine ar bith an saothar seo a úsáid ar aon bhealach.</string>
   <string name="license_cc_by_description">Creidmheas. Tá cead ag daoine eile a roinnt agus a oiriúnú chomh fada agus a thugann siad creidmheas duit.</string>
   <string name="license_cc_by_sa_description">Admháil-Comhroinnt coinníollacha. Is féidir le daoine eile é a roinnt agus a oiriúnú, ach ní mór dóibh an ceadúnas céanna a úsáid agus creidiúint a thabhairt duit.</string>
