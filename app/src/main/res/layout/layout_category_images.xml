@@ -18,11 +18,11 @@
         android:layout_gravity="end|bottom"
         />
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/categoryImageView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/very_large_height"
-        app:actualImageScaleType="centerCrop"
+        android:scaleType="centerCrop"
         />
 
     <LinearLayout

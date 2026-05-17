@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
@@ -45,8 +44,6 @@ class ZoomableActivityUnitTests {
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
         context = ApplicationProvider.getApplicationContext()
-        SoLoader.setInTestMode()
-        Fresco.initialize(context)
         val intent = Intent().setData(uri)
         activity = Robolectric.buildActivity(ZoomableActivity::class.java, intent).create().get()
 
