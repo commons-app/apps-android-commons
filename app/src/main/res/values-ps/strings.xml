@@ -57,7 +57,7 @@
   </plurals>
   <string name="navigation_item_explore">سپړنه</string>
   <string name="preference_category_appearance">ښکارېدنه</string>
-  <string name="preference_category_general">ټولگړی</string>
+  <string name="preference_category_general">ټولواله</string>
   <string name="preference_category_feedback">غبرگون</string>
   <string name="preference_category_privacy">پټنتيا</string>
   <string name="app_name">ويکي‌خونديځ</string>
@@ -427,6 +427,9 @@
   <string name="share_via">کاريال د...لارې وېشل</string>
   <string name="image_info">انځور مالومات</string>
   <string name="no_categories_found">هېڅ وېشنيزې ونه موندل شوې</string>
+  <string name="no_depiction_found">هېڅ انځورونه ونه‌موندل شول</string>
+  <string name="upload_cancelled">ناگارل شوې راپورته‌کېدنې</string>
+  <string name="delete_helper_show_deletion_title_success">بریالیتوب</string>
   <string name="delete_helper_ask_reason_copyright_logo">نښان</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ځکه چې دا</string>
   <string name="category_edit_helper_make_edit_toast">د وېشنيزو هم‌‌مهالولو هڅه‌کول.</string>
@@ -445,7 +448,18 @@
   <string name="coordinates_edit_helper_edit_message_else">همغږيتوبونه نشي ورگډېدای.</string>
   <string name="description_edit_helper_edit_message_else">څرگنداوی نشي ورگډېدای.</string>
   <string name="share_image_via">انځور وېشل په وسيله د</string>
+  <string name="title_for_media">رسنۍ</string>
+  <string name="title_for_child_classes">ماشومانو ټولگي</string>
+  <string name="title_for_parent_classes">مور او پلار ټولگي</string>
+  <string name="title_for_subcategories">څېرمه‌وېشنيزې</string>
+  <string name="title_for_parent_categories">ارې وېشنيزې</string>
+  <string name="upload_nearby_place_found_title">څېرمه‌ځای وموندل شو</string>
+  <string name="upload_nearby_place_found_description_plural">ايا دا د %1$s انځورونه دي؟</string>
+  <string name="upload_nearby_place_found_description_singular">ايا دا د %1$s انځور دی؟</string>
+  <string name="title_app_shortcut_bookmark">کتاب‌‌نښې</string>
   <string name="title_app_shortcut_setting">اوڼنې</string>
+  <string name="remove_bookmark">له کتاب‌نښو لرې شو</string>
+  <string name="add_bookmark">کتاب‌نښو ته ورگډ شو</string>
   <string name="theme_dark_name">تياره</string>
   <string name="theme_light_name">روښانه</string>
   <string name="ask_to_turn_location_on">ځای‌ښودنه بلول</string>
