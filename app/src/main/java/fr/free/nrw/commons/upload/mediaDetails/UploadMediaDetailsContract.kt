@@ -106,6 +106,12 @@ interface UploadMediaDetailsContract {
         fun checkImageQuality(uploadItem: UploadItem, index: Int)
 
         /**
+         * Forces a check on the image quality for a specific fragment index
+         * * @param index Index of the UploadItem whose quality is to be checked
+         */
+        fun checkImageQuality(index: Int)
+
+        /**
          * Updates the image qualities stored in JSON, whenever an image is deleted
          *
          * @param size Size of uploadableFiles
