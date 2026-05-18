@@ -158,6 +158,7 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
+  <string name="language_search_all_languages">모든 언어</string>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
@@ -205,6 +206,8 @@
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
   <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라/갤러리에 접근할 수 없습니다.</string>
   <string name="location_permission_title">위치 권한 요청 중</string>
+  <string name="in_app_camera_location_permission_title">인앱 촬영을 위한 위치 기록</string>
+  <string name="in_app_camera_location_switch_pref_summary">기기 카메라가 위치를 기록하지 못하는 경우 인앱 카메라로 위치를 기록하려면 이 옵션을 활성화합니다</string>
   <string name="ok">확인</string>
   <string name="warning">경고</string>
   <string name="duplicate_file_name">중복 파일 이름이 있습니다</string>
@@ -260,6 +263,7 @@
   <string name="upload_problem_image_dark">이미지가 너무 어둡습니다.</string>
   <string name="upload_problem_image_blurry">이미지가 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
+  <string name="upload_problem_image_format_unsupported">이미지 형식이 공용 서버에서 지원하지 않으므로 앱에서 JPG 형식으로 변환했습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
   <string name="upload_problem_fbmd">당신이 직접 찍은 사진만 업로드하세요. 다른 사람의 페이스북 계정에서 찾은 사진을 업로드하지마세요.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
@@ -287,6 +291,7 @@
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>
   <string name="nearby_location_not_available">주변이 제대로 작동되지 않을 수 있습니다. 위치를 사용할 수 없습니다.</string>
   <string name="nearby_showing_pins_offline">인터넷을 사용할 수 없습니다. 캐시된 장소만 표시합니다.</string>
+  <string name="upload_location_access_denied">위치 접근이 거부되었습니다. 이 기능을 사용하려면 위치를 수동으로 설정해 주세요.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
   <string name="location_permission_rationale_explore">주변 장소의 이미지 목록을 표시하기 위한 권한이 필요합니다</string>
   <string name="nearby_directions">방향</string>
@@ -358,6 +363,7 @@
   <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
   <string name="share_app_title">앱 공유</string>
   <string name="rotate">회전</string>
+  <string name="crop">자르기</string>
   <string name="error_fetching_nearby_places">주변 장소를 불러오지 못했습니다</string>
   <string name="no_pictures_in_this_area">이 지역에는 사진이 없습니다</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
@@ -434,8 +440,19 @@
   <string name="achievements_fetch_failed">문제가 발생하여, 업적을 가져올 수 없습니다.</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
+  <string name="show_deletion_button">삭제 버튼 표시</string>
+  <string name="show_deletion_button_explanation">사용자 지정 선택기에서 \"폴더 삭제\" 버튼을 활성화합니다</string>
+  <string name="in_app_camera_location_access_explanation">카메라가 위치 정보를 기록하지 않는 경우 앱이 위치 정보를 가져오도록 허용해 주세요. 일부 기기의 카메라는 위치 정보를 기록하지 않습니다. 이러한 경우 앱이 위치 정보를 가져와 데이터에 첨부하도록 허용하면 사용자의 참여가 더욱 유용해집니다. 이 설정은 언제든지 설정에서 변경할 수 있습니다</string>
   <string name="option_allow">허용</string>
   <string name="option_dismiss">숨기기</string>
+  <string name="in_app_camera_needs_location">설정에서 위치 접근 권한을 켜고 다시 시도해 주세요.\n\n참고: 앱이 짧은 시간 내에 기기에서 위치 정보를 가져오지 못하면 업로드된 이미지에 위치 정보가 포함되지 않을 수 있습니다.</string>
+  <string name="in_app_camera_location_permission_rationale">앱 내 카메라가 EXIF 정보에 위치 정보가 없는 경우 이미지에 위치 정보를 첨부하려면 위치 권한이 필요합니다. 앱이 위치 정보에 접근하도록 허용한 후 다시 시도해 주세요.\n\n참고: 앱이 짧은 시간 내에 기기에서 위치 정보를 가져오지 못하면 업로드된 이미지에 위치 정보가 포함되지 않을 수 있습니다.</string>
+  <string name="in_app_camera_location_permission_denied">위치 정보 권한이 없어서 앱이 이미지에 위치 정보를 기록하지 못했습니다</string>
+  <string name="in_app_camera_location_unavailable">GPS가 꺼져 있으면 앱은 촬영 시 위치 정보를 함께 기록하지 않습니다</string>
+  <string name="open_document_photo_picker_title">문서 기반 사진 선택기를 사용합니다</string>
+  <string name="open_document_photo_picker_explanation">새로운 안드로이드 사진 선택기는 위치 정보 손실 위험이 있습니다. 해당 기능을 사용하는 경우 활성화하세요.</string>
+  <string name="location_loss_warning">이 기능을 끄면 새로운 안드로이드 사진 선택기가 실행될 수 있습니다. 이로 인해 위치 정보가 손실될 위험이 있습니다.\n\n자세한 내용은 \'더 보기\'를 탭하세요.</string>
+  <string name="nearby_campaign_dismiss_message">더 이상 캠페인을 보지 못하게 됩니다. 그러나 원할 경우 설정에서 이 알림을 다시 활성화할 수 있습니다.</string>
   <string name="this_function_needs_network_connection">이 기능을 사용하려면 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
   <string name="getting_edit_token">편집을 위한 토큰을 가져옵니다</string>
