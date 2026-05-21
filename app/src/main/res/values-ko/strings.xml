@@ -66,7 +66,7 @@
     <item quantity="other">%1$d개 업로드</item>
   </plurals>
   <string name="navigation_item_explore">찾아보기</string>
-  <string name="preference_category_appearance">보이기</string>
+  <string name="preference_category_appearance">외관</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">피드백</string>
   <string name="preference_category_privacy">개인정보</string>
@@ -158,6 +158,8 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
+  <string name="language_search_type_language_name">언어 이름을 입력하세요</string>
+  <string name="language_search_recent_searches">최근 검색</string>
   <string name="language_search_all_languages">모든 언어</string>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
@@ -367,7 +369,7 @@
   <string name="error_fetching_nearby_places">주변 장소를 불러오지 못했습니다</string>
   <string name="no_pictures_in_this_area">이 지역에는 사진이 없습니다</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
-  <string name="error_fetching_nearby_monuments">주변 명소를 가져오는 중에 오류가 발생했습니다.</string>
+  <string name="error_fetching_nearby_monuments">주변 명소를 가져오던 중에 오류가 발생했습니다.</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="cancel_upload_dialog">이 업로드를 취소하시겠습니까?</string>
@@ -417,7 +419,7 @@
   <string name="provider_bookmarks">북마크</string>
   <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>
   <string name="provider_bookmarks_location">북마크</string>
-  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
+  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 작업을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
   <string name="deletion_reason_uploaded_by_mistake">실수로 업로드했습니다</string>
   <string name="deletion_reason_publicly_visible">공개가 되는 줄 몰랐습니다</string>
   <string name="deletion_reason_bad_for_my_privacy">제 개인정보에 부적절하다는 것을 인식했습니다</string>
@@ -429,6 +431,7 @@
   <string name="no_depictions_selected">선택된 서술 없음</string>
   <string name="depictions_choose_from_map">지도에서 선택</string>
   <string name="depictions_map_confirm">확인</string>
+  <string name="depictions_map_no_photo_location">사진에는 위치가 없습니다. 현재 위치가 표시됩니다.</string>
   <string name="back_button_warning">올리기 취소</string>
   <string name="back_button_continue">계속 올리기</string>
   <string name="search_this_area">이 지역을 검색</string>
@@ -504,9 +507,11 @@
   <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
+  <string name="upload_categories_dont_show_this_message_again">이 메시지를 더 이상 보지 않기</string>
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
+  <string name="previous_image_title_description_not_found">이전 이미지의 제목이나 설명에 대한 데이터가 없습니다</string>
   <string name="dialog_box_text_nomination">%1$s을(를) 삭제해야 하는 이유는 무엇인가요?</string>
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title">삭제 신청</string>
@@ -739,6 +744,7 @@
   <string name="red_pin">이 장소에 아직 사진이 없습니다. 사진을 찍어보세요!</string>
   <string name="green_pin">이 장소에 이미 사진이 있습니다.</string>
   <string name="grey_pin">지금 이 장소에 사진이 있는지 확인 중입니다.</string>
+  <string name="error_while_loading">불러오는 동안 오류가 발생했습니다</string>
   <string name="usages_on_commons_heading">공용</string>
   <string name="usages_on_other_wikis_heading">다른 위키</string>
   <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
@@ -747,4 +753,5 @@
   <string name="account_vanish_request_confirm">버리기는 &lt;b&gt;최후의 수단&lt;/b&gt;이며 &lt;b&gt;영원히 편집을 중단하고 싶을 때&lt;/b&gt;와 가능한 한 많은 과거 연관성을 숨기고 싶을 때만 사용해야 합니다.&lt;br/&gt;&lt;br/&gt;위키미디어 공용에서 계정을 삭제하려면 계정 이름을 변경하여 다른 사람이 기여한 내용을 알아볼 수 없도록 하는 계정 버리기라는 프로세스를 거쳐야 합니다. &lt;b&gt;버리기는 완전한 익명성을 보장하지 않으며 프로젝트에 수행한 기여를 제거하지 않습니다&lt;/b&gt;.</string>
   <string name="caption">캡션</string>
   <string name="caption_copied_to_clipboard">캡션이 클립보드에 복사되었습니다</string>
+  <string name="nominated_for_deletion_btn">삭제 선정함</string>
 </resources>
