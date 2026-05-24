@@ -284,7 +284,7 @@
   <string name="upload_problem_image_dark">התמונה חשוכה מדי.</string>
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
   <string name="upload_problem_image_duplicate">התמונה כבר נמצאת בוויקישיתוף.</string>
-  <string name="upload_problem_image_format_unsupported">התמונה שלך אינה בתסדיר שנתמך על ידי שרת ויקישיתוף, לכן היישומון המיר אותה ל־JPG.</string>
+  <string name="upload_problem_image_format_unsupported">התמונה שלך אינה בתסדיר שנתמך על־ידי שרת ויקישיתוף, לכן היישום המיר אותה ל־JPG.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
