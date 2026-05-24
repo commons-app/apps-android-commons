@@ -66,7 +66,7 @@
     <item quantity="other">%1$d개 업로드</item>
   </plurals>
   <string name="navigation_item_explore">찾아보기</string>
-  <string name="preference_category_appearance">보이기</string>
+  <string name="preference_category_appearance">외관</string>
   <string name="preference_category_general">일반</string>
   <string name="preference_category_feedback">피드백</string>
   <string name="preference_category_privacy">개인정보</string>
@@ -158,6 +158,9 @@
   <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
   <string name="menu_retry_upload">다시 시도</string>
   <string name="menu_cancel_upload">취소</string>
+  <string name="language_search_type_language_name">언어 이름을 입력하세요</string>
+  <string name="language_search_recent_searches">최근 검색</string>
+  <string name="language_search_all_languages">모든 언어</string>
   <string name="media_upload_policy">이 이미지에 대해서, 이것이 본인이 창작한 저작물이며, 저작권에 위배되는 것이 포함되지 않았으며, &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;위키미디어 공용 정책&lt;/a&gt;에 위배되지 않는다는 것에 동의합니다.</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">기본 라이선스</string>
@@ -205,6 +208,8 @@
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 갤러리에 접근할 수 없습니다.</string>
   <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 카메라/갤러리에 접근할 수 없습니다.</string>
   <string name="location_permission_title">위치 권한 요청 중</string>
+  <string name="in_app_camera_location_permission_title">인앱 촬영을 위한 위치 기록</string>
+  <string name="in_app_camera_location_switch_pref_summary">기기 카메라가 위치를 기록하지 못하는 경우 인앱 카메라로 위치를 기록하려면 이 옵션을 활성화합니다</string>
   <string name="ok">확인</string>
   <string name="warning">경고</string>
   <string name="duplicate_file_name">중복 파일 이름이 있습니다</string>
@@ -233,8 +238,8 @@
   <string name="welcome_image_llamas">라마</string>
   <string name="welcome_image_rainbow_bridge">레인보우 브리지</string>
   <string name="welcome_image_tulip">튤립</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">환영 위키백과</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">환영 저작권</string>
+  <string name="welcome_image_welcome_wikipedia">일반적인 위키백과 문서의 개략도입니다.</string>
+  <string name="welcome_image_welcome_copyright">저작권 표시가 지워진 서류 뭉치 그림.</string>
   <string name="welcome_image_sydney_opera_house">시드니 오페라 하우스</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
@@ -260,6 +265,7 @@
   <string name="upload_problem_image_dark">이미지가 너무 어둡습니다.</string>
   <string name="upload_problem_image_blurry">이미지가 흐릿합니다.</string>
   <string name="upload_problem_image_duplicate">이미지가 이미 공용에 있습니다.</string>
+  <string name="upload_problem_image_format_unsupported">이미지 형식이 공용 서버에서 지원하지 않으므로 앱에서 JPG 형식으로 변환했습니다.</string>
   <string name="upload_problem_different_geolocation">이 사진은 다른 위치에서 찍었습니다.</string>
   <string name="upload_problem_fbmd">당신이 직접 찍은 사진만 업로드하세요. 다른 사람의 페이스북 계정에서 찾은 사진을 업로드하지마세요.</string>
   <string name="upload_problem_do_you_continue">그래도 이 사진을 업로드하시겠습니까?</string>
@@ -267,6 +273,7 @@
   <string name="upload_connection_error_alert_detail">파일을 올리기 위해서는 인터넷 연결이 필요합니다. 네트워크 연결을 확인해 주세요.</string>
   <string name="upload_problem_image">이미지에 문제가 있습니다</string>
   <string name="internet_downloaded">직접 찍은 사진만 업로드하세요. 인터넷에서 다운로드한 사진을 업로드하지 마세요.</string>
+  <string name="preferences_uploads">업로드</string>
   <string name="use_external_storage">인앱으로 찍은 사진 저장하기</string>
   <string name="use_external_storage_summary">인앱 카메라로 찍은 사진을 기기에 저장하기</string>
   <string name="login_to_your_account">자신의 계정으로 로그인</string>
@@ -286,6 +293,7 @@
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>
   <string name="nearby_location_not_available">주변이 제대로 작동되지 않을 수 있습니다. 위치를 사용할 수 없습니다.</string>
   <string name="nearby_showing_pins_offline">인터넷을 사용할 수 없습니다. 캐시된 장소만 표시합니다.</string>
+  <string name="upload_location_access_denied">위치 접근이 거부되었습니다. 이 기능을 사용하려면 위치를 수동으로 설정해 주세요.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
   <string name="location_permission_rationale_explore">주변 장소의 이미지 목록을 표시하기 위한 권한이 필요합니다</string>
   <string name="nearby_directions">방향</string>
@@ -337,6 +345,7 @@
   <string name="quiz">퀴즈</string>
   <string name="quiz_question_string">이 사진을 업로드하시겠습니까?</string>
   <string name="question">질문</string>
+  <string name="quiz_i_am_not_sure">확실하지 않음</string>
   <string name="result">결과</string>
   <string name="quiz_back_button">삭제가 필요한 그림을 계속 올리신다면 계정이 차단될 수 있습니다. 퀴즈를 끝내시겠습니까?</string>
   <string name="quiz_alert_message">업로드한 그림 중 %1$s개 이상이 삭제되었습니다. 삭제가 필요한 그림을 계속 올리시면 계정이 차단될 수 있습니다.\n\n강좌를 다시 본 다음 퀴즈를 풀면서 올려도 되거나 그렇지 않은 사진의 유형에 대해 배워보시겠습니까?</string>
@@ -346,6 +355,7 @@
   <string name="blurry_image_answer">공용의 목표 중 하나는 질좋은 그림을 모으는 것입니다. 그러므로 흐릿한 그림은 올리지 않는 것이 좋습니다. 조명 상태가 좋은 멋진 사진을 늘 찍어 주십시오.</string>
   <string name="construction_event_answer">기술이나 문화를 보여주는 사진은 공용에서 기꺼이 환영합니다.</string>
   <string name="congratulatory_message_quiz">정답 %1$s개를 맞추셨습니다. 축하드립니다!</string>
+  <string name="quiz_continue">계속</string>
   <string name="warning_for_no_answer">질문에 답하기 위해 옵션 2개 중 하나를 선택하십시오</string>
   <string name="user_not_logged_in">로그인 세션 만료. 다시 로그인해 주십시오.</string>
   <string name="quiz_result_share_message">친구들과 퀴즈를 공유하세요!</string>
@@ -355,10 +365,11 @@
   <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
   <string name="share_app_title">앱 공유</string>
   <string name="rotate">회전</string>
+  <string name="crop">자르기</string>
   <string name="error_fetching_nearby_places">주변 장소를 불러오지 못했습니다</string>
   <string name="no_pictures_in_this_area">이 지역에는 사진이 없습니다</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
-  <string name="error_fetching_nearby_monuments">주변 명소를 가져오는 중에 오류가 발생했습니다.</string>
+  <string name="error_fetching_nearby_monuments">주변 명소를 가져오던 중에 오류가 발생했습니다.</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="cancel_upload_dialog">이 업로드를 취소하시겠습니까?</string>
@@ -408,7 +419,7 @@
   <string name="provider_bookmarks">북마크</string>
   <string name="bookmark_empty">북마크를 추가하지 않았습니다</string>
   <string name="provider_bookmarks_location">북마크</string>
-  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 동작을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
+  <string name="log_collection_started">로그 수집이 시작되었습니다. 이 앱을 다시 시작하고 기록을 원하는 작업을 수행한 다음 \'로그 파일 보내기\'를 다시 탭해 주십시오</string>
   <string name="deletion_reason_uploaded_by_mistake">실수로 업로드했습니다</string>
   <string name="deletion_reason_publicly_visible">공개가 되는 줄 몰랐습니다</string>
   <string name="deletion_reason_bad_for_my_privacy">제 개인정보에 부적절하다는 것을 인식했습니다</string>
@@ -420,6 +431,7 @@
   <string name="no_depictions_selected">선택된 서술 없음</string>
   <string name="depictions_choose_from_map">지도에서 선택</string>
   <string name="depictions_map_confirm">확인</string>
+  <string name="depictions_map_no_photo_location">사진에는 위치가 없습니다. 현재 위치가 표시됩니다.</string>
   <string name="back_button_warning">올리기 취소</string>
   <string name="back_button_continue">계속 올리기</string>
   <string name="search_this_area">이 지역을 검색</string>
@@ -431,8 +443,19 @@
   <string name="achievements_fetch_failed">문제가 발생하여, 업적을 가져올 수 없습니다.</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
+  <string name="show_deletion_button">삭제 버튼 표시</string>
+  <string name="show_deletion_button_explanation">사용자 지정 선택기에서 \"폴더 삭제\" 버튼을 활성화합니다</string>
+  <string name="in_app_camera_location_access_explanation">카메라가 위치 정보를 기록하지 않는 경우 앱이 위치 정보를 가져오도록 허용해 주세요. 일부 기기의 카메라는 위치 정보를 기록하지 않습니다. 이러한 경우 앱이 위치 정보를 가져와 데이터에 첨부하도록 허용하면 사용자의 참여가 더욱 유용해집니다. 이 설정은 언제든지 설정에서 변경할 수 있습니다</string>
   <string name="option_allow">허용</string>
   <string name="option_dismiss">숨기기</string>
+  <string name="in_app_camera_needs_location">설정에서 위치 접근 권한을 켜고 다시 시도해 주세요.\n\n참고: 앱이 짧은 시간 내에 기기에서 위치 정보를 가져오지 못하면 업로드된 이미지에 위치 정보가 포함되지 않을 수 있습니다.</string>
+  <string name="in_app_camera_location_permission_rationale">앱 내 카메라가 EXIF 정보에 위치 정보가 없는 경우 이미지에 위치 정보를 첨부하려면 위치 권한이 필요합니다. 앱이 위치 정보에 접근하도록 허용한 후 다시 시도해 주세요.\n\n참고: 앱이 짧은 시간 내에 기기에서 위치 정보를 가져오지 못하면 업로드된 이미지에 위치 정보가 포함되지 않을 수 있습니다.</string>
+  <string name="in_app_camera_location_permission_denied">위치 정보 권한이 없어서 앱이 이미지에 위치 정보를 기록하지 못했습니다</string>
+  <string name="in_app_camera_location_unavailable">GPS가 꺼져 있으면 앱은 촬영 시 위치 정보를 함께 기록하지 않습니다</string>
+  <string name="open_document_photo_picker_title">문서 기반 사진 선택기를 사용합니다</string>
+  <string name="open_document_photo_picker_explanation">새로운 안드로이드 사진 선택기는 위치 정보 손실 위험이 있습니다. 해당 기능을 사용하는 경우 활성화하세요.</string>
+  <string name="location_loss_warning">이 기능을 끄면 새로운 안드로이드 사진 선택기가 실행될 수 있습니다. 이로 인해 위치 정보가 손실될 위험이 있습니다.\n\n자세한 내용은 \'더 보기\'를 탭하세요.</string>
+  <string name="nearby_campaign_dismiss_message">더 이상 캠페인을 보지 못하게 됩니다. 그러나 원할 경우 설정에서 이 알림을 다시 활성화할 수 있습니다.</string>
   <string name="this_function_needs_network_connection">이 기능을 사용하려면 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
   <string name="getting_edit_token">편집을 위한 토큰을 가져옵니다</string>
@@ -484,9 +507,11 @@
   <string name="exif_tag_name_software">소프트웨어</string>
   <string name="share_via">앱 공유...</string>
   <string name="image_info">이미지 정보</string>
+  <string name="upload_categories_dont_show_this_message_again">이 메시지를 더 이상 보지 않기</string>
   <string name="no_categories_found">분류가 없습니다</string>
   <string name="no_depiction_found">서술이 발견되지 않았습니다</string>
   <string name="upload_cancelled">업로드 취소됨</string>
+  <string name="previous_image_title_description_not_found">이전 이미지의 제목이나 설명에 대한 데이터가 없습니다</string>
   <string name="dialog_box_text_nomination">%1$s을(를) 삭제해야 하는 이유는 무엇인가요?</string>
   <string name="default_description_language">기본 설명 언어</string>
   <string name="delete_helper_show_deletion_title">삭제 신청</string>
@@ -595,6 +620,8 @@
   <string name="cancel_upload">올리기 취소</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
+  <string name="depicts_label">레이블</string>
+  <string name="depicts_description">설명</string>
   <string name="license_step_title">미디어 라이선스</string>
   <string name="media_detail_step_title">미디어 상세 정보</string>
   <string name="menu_view_category_page">분류 문서 보기</string>
@@ -717,6 +744,7 @@
   <string name="red_pin">이 장소에 아직 사진이 없습니다. 사진을 찍어보세요!</string>
   <string name="green_pin">이 장소에 이미 사진이 있습니다.</string>
   <string name="grey_pin">지금 이 장소에 사진이 있는지 확인 중입니다.</string>
+  <string name="error_while_loading">불러오는 동안 오류가 발생했습니다</string>
   <string name="usages_on_commons_heading">공용</string>
   <string name="usages_on_other_wikis_heading">다른 위키</string>
   <string name="file_usages_container_heading">이 파일을 사용하는 문서</string>
@@ -725,4 +753,5 @@
   <string name="account_vanish_request_confirm">버리기는 &lt;b&gt;최후의 수단&lt;/b&gt;이며 &lt;b&gt;영원히 편집을 중단하고 싶을 때&lt;/b&gt;와 가능한 한 많은 과거 연관성을 숨기고 싶을 때만 사용해야 합니다.&lt;br/&gt;&lt;br/&gt;위키미디어 공용에서 계정을 삭제하려면 계정 이름을 변경하여 다른 사람이 기여한 내용을 알아볼 수 없도록 하는 계정 버리기라는 프로세스를 거쳐야 합니다. &lt;b&gt;버리기는 완전한 익명성을 보장하지 않으며 프로젝트에 수행한 기여를 제거하지 않습니다&lt;/b&gt;.</string>
   <string name="caption">캡션</string>
   <string name="caption_copied_to_clipboard">캡션이 클립보드에 복사되었습니다</string>
+  <string name="nominated_for_deletion_btn">삭제 선정함</string>
 </resources>
