@@ -284,6 +284,7 @@
   <string name="upload_problem_image_dark">התמונה חשוכה מדי.</string>
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
   <string name="upload_problem_image_duplicate">התמונה כבר נמצאת בוויקישיתוף.</string>
+  <string name="upload_problem_image_format_unsupported">התמונה שלך אינה בתסדיר שנתמך על־ידי שרת ויקישיתוף, לכן היישום המיר אותה ל־JPG.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
@@ -451,6 +452,9 @@
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
   <string name="no_depictions_selected">לא נבחרו מוצגים</string>
   <string name="no_depictions_selected_warning_desc">קל יותר למצוא תמונות עם מוצגים ויש סיכוי גבוה יותר שמישהו ישתמש בהן. האם ברצונך באמת להמשיך בלי לבחור מוצגים?</string>
+  <string name="depictions_choose_from_map">בחירה מהמפה</string>
+  <string name="depictions_map_confirm">אישור</string>
+  <string name="depictions_map_no_photo_location">זאת תמונה ללא מיקום, המקום הנוכחי שלך מוצג</string>
   <string name="back_button_warning">ביטול ההעלאה</string>
   <string name="back_button_warning_desc">שימוש בכתפור החזרה יבטל את ההעלאה הזאת וההתקדמות שלך תלך לאיבוד</string>
   <string name="back_button_continue">המשך ההעלאה</string>

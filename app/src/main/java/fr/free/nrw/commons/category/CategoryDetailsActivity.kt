@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -78,6 +79,18 @@ class CategoryDetailsActivity : BaseActivity(),
             }
         }
 
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount == 1) {
+                    binding.tabLayout.visibility = View.VISIBLE
+                    binding.viewPager.visibility = View.VISIBLE
+                    binding.mediaContainer.visibility = View.GONE
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        })
     }
 
     /**
@@ -181,7 +194,7 @@ class CategoryDetailsActivity : BaseActivity(),
      */
     override fun refreshNominatedMedia(index: Int) {
         if (supportFragmentManager.backStackEntryCount == 1) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             onMediaClicked(index)
         }
     }
@@ -215,7 +228,7 @@ class CategoryDetailsActivity : BaseActivity(),
             }
 
             android.R.id.home -> {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -236,23 +249,6 @@ class CategoryDetailsActivity : BaseActivity(),
             }
         }
         return super.onPrepareOptionsMenu(menu)
-    }
-
-    /**
-     * This method is called on backPressed of anyFragment in the activity.
-     * If condition is called when mediaDetailFragment is opened.
-     */
-    @Deprecated("This method has been deprecated in favor of using the" +
-            "{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}." +
-            "The OnBackPressedDispatcher controls how back button events are dispatched" +
-            "to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            binding.tabLayout.visibility = View.VISIBLE
-            binding.viewPager.visibility = View.VISIBLE
-            binding.mediaContainer.visibility = View.GONE
-        }
-        super.onBackPressed()
     }
 
     /**

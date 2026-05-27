@@ -308,6 +308,7 @@
   <string name="upload_problem_image_dark">الصورة مظلمة للغاية.</string>
   <string name="upload_problem_image_blurry">الصورة ضبابية.</string>
   <string name="upload_problem_image_duplicate">الصورة موجودة بالفعل في كومنز.</string>
+  <string name="upload_problem_image_format_unsupported">صورتك بتنسيق غير مدعوم من قبل خادم Commons، لذلك قام التطبيق بتحويلها إلى JPG.</string>
   <string name="upload_problem_different_geolocation">تم التقاط هذه الصورة في موقع مختلف.</string>
   <string name="upload_problem_fbmd">من فضلك فقط ارفع الصور التي التقطها بنفسك. لا ترفع الصور التي وجدتها على حسابات الآخرين في فيسبوك.</string>
   <string name="upload_problem_do_you_continue">هل ما زلت تريد رفع هذه الصورة؟</string>
@@ -898,7 +899,7 @@
   <string name="account_vanish_request_confirm_title">تحذير من اختفاء الحساب</string>
   <string name="account_vanish_request_confirm">الاختفاء هو &lt;b&gt;الملاذ الأخير&lt;/b&gt; ويجب &lt;b&gt;استخدامه فقط عندما ترغب في التوقف عن التحرير إلى الأبد&lt;/b&gt; وأيضًا لإخفاء أكبر عدد ممكن من ارتباطاتك السابقة.&lt;br/&gt;&lt;br/&gt; يتم حذف الحساب على ويكيميديا كومنز عن طريق تغيير اسم حسابك بحيث لا يتمكن الآخرون من التعرف على مساهماتك في عملية تسمى اختفاء الحساب. &lt;b&gt;لا يضمن الاختفاء عدم الكشف عن الهوية تمامًا أو إزالة المساهمات في المشاريع&lt;/b&gt; .</string>
   <string name="caption">الشرح</string>
-  <string name="caption_copied_to_clipboard">تم نسخ التسمية التوضيحية إلى الحافظة</string>
+  <string name="caption_copied_to_clipboard">نُسخت التعليق إلى الحافظة</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبروك، جميع الصور الموجودة في هذا الألبوم تم تحميلها أو تم وضع علامة عليها بأنها غير قابلة للتحميل.</string>
   <string name="show_in_explore">عرض في استكشاف</string>
   <string name="show_in_nearby">عرض في المناطق القريبة</string>
@@ -906,6 +907,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
   <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
+  <string name="edit_unsupported_format_explanation">تتوفر خاصية التحرير داخل التطبيق لملفات JPEG فقط. لتحرير الصيغ الأخرى، يُرجى استخدام أداة خارجية.</string>
   <string name="license_cc0_description">لا توجد حقوق ملكية فكرية. أنت تتنازل عن جميع الحقوق، لذا يمكن لأي شخص استخدام هذا العمل بأي شكل من الأشكال.</string>
   <string name="license_cc_by_description">الإسناد. يحق للآخرين المشاركة والتعديل طالما أنهم ينسبون الفضل إليك.</string>
   <string name="license_cc_by_sa_description">نسب العمل إليك - المشاركة بالمثل. يمكن للآخرين المشاركة والتعديل، ولكن يجب عليهم استخدام نفس الترخيص ونسب العمل إليك.</string>

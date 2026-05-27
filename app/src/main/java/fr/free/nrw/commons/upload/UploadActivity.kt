@@ -192,10 +192,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     getString(R.string.back_button_warning_desc),
                     getString(R.string.back_button_continue),
                     getString(R.string.back_button_warning),
-                    null
-                ) {
-                    finish()
-                }
+                    null,
+                    { finish() },
+                    false
+                )
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -437,7 +437,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onNewIntent(intent)
         setIntent(intent)
         val action = intent.action
-        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action || ContributionController.ACTION_INTERNAL_UPLOADS == action) {
             // clear the old fragments
             val fm = supportFragmentManager
             if (fm.fragments.isNotEmpty()) {
@@ -936,6 +936,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onDestroy()
         // Resetting all values in store by clearing them
         store!!.clearAll()
+        if (isFinishing) {
+            presenter?.cleanup()
+        }
         presenter!!.onDetachView()
         compositeDisposable.clear()
         fragments = null
