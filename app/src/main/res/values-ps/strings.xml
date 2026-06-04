@@ -34,6 +34,10 @@
     <item quantity="one">%1$d دوتنه راپورته‌کول</item>
     <item quantity="other"> %1$d دوتنې راپورته‌کول</item>
   </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
   <string name="starting_uploads">راپورته‌کول پيلول</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">راپورته‌کولو  %1$d بهير</item>
@@ -568,6 +572,7 @@
   <string name="no_usages_found">هېڅ کاره‌ونه ونه موندل شوه</string>
   <string name="usages_on_commons_heading">خونديځ</string>
   <string name="usages_on_other_wikis_heading">نورې ويکي‌گانې</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">دوتنې کارېدنې</string>
   <string name="account">گڼون</string>
   <string name="vanish_account">گڼون له منځه وړل</string>
