@@ -627,7 +627,7 @@
   <string name="cannot_open_location_settings">Kan locatie-instellingen niet openen. Schakel locatie handmatig in</string>
   <string name="recommend_high_accuracy_mode">Kies voor de beste resultaten de modus van hoge nauwkeurigheid.</string>
   <string name="ask_to_turn_location_on">Locatie inschakelen?</string>
-  <string name="ask_to_turn_location_on_text">Schakel locatiediensten in zodat de app uw huidige locatie toont</string>
+  <string name="ask_to_turn_location_on_text">Schakel locatiediensten in zodat de app uw huidige locatie weergeeft</string>
   <string name="nearby_needs_location">‘In de buurt’ heeft locatietoegang nodig om correct te werken</string>
   <string name="explore_map_needs_location">Voor de verkenningskaart is locatietoestemming nodig om afbeeldingen in de buurt weer te geven</string>
   <string name="upload_map_location_access">U moet locatietoestemming geven om de locatie automatisch in te stellen.</string>
@@ -803,7 +803,7 @@
   <string name="send_thanks_to_author">Auteur bedanken</string>
   <string name="error_sending_thanks">Fout bij het bedanken van de auteur.</string>
   <string name="invalid_login_message">Uw sessie is verlopen, meld u opnieuw aan.</string>
-  <string name="no_application_available_to_open_gpx_files">Er is geen applicatie beschikbaar om GPX-bestanden te openen</string>
+  <string name="no_application_available_to_open_gpx_files">Er is geen toepassing beschikbaar om GPX-bestanden te openen</string>
   <string name="file_saved_successfully">Het bestand is opgeslagen</string>
   <string name="do_you_want_to_open_gpx_file">Wilt u het GPX-bestand openen?</string>
   <string name="do_you_want_to_open_kml_file">Wilt u het KML-bestand openen?</string>
