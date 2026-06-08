@@ -446,6 +446,8 @@
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
   <string name="no_depictions_selected">沒有選擇描寫</string>
   <string name="no_depictions_selected_warning_desc">帶有描述的圖像更容易找到並且更有可能被使用。您確定要繼續而不選擇描述嗎？</string>
+  <string name="depictions_choose_from_map">從地圖選擇</string>
+  <string name="depictions_map_confirm">確認</string>
   <string name="back_button_warning">取消上傳</string>
   <string name="back_button_warning_desc">使用後退按鈕將取消此上傳，並且您將丟失進度</string>
   <string name="back_button_continue">繼續上傳</string>
