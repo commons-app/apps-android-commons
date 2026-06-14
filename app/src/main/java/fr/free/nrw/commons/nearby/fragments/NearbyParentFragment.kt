@@ -1344,12 +1344,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      *
      * @return a `LatLng` object denoting the location of the top right corner of the map.
      */
-    override fun getScreenTopRight(): LatLng {
-        val screenTopRight = binding!!.map.projection
-            .fromPixels(binding!!.map.width, 0)
-        return LatLng(
-            screenTopRight.latitude, screenTopRight.longitude, 0f
-        )
+    override fun getScreenTopRight(): LatLng? {
+        val map = binding?.map ?: return null
+        val projection = map.projection ?: return null
+
+        val screenTopRight = projection.fromPixels(map.width, 0)
+        return if (screenTopRight != null) {
+            LatLng(screenTopRight.latitude, screenTopRight.longitude, 0f)
+        } else null
     }
 
     /**
@@ -1357,12 +1359,14 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      *
      * @return a `LatLng` object denoting the location of the bottom left corner of the map.
      */
-    override fun getScreenBottomLeft(): LatLng {
-        val screenBottomLeft = binding!!.map.projection
-            .fromPixels(0, binding!!.map.height)
-        return LatLng(
-            screenBottomLeft.latitude, screenBottomLeft.longitude, 0f
-        )
+    override fun getScreenBottomLeft(): LatLng? {
+        val map = binding?.map ?: return null
+        val projection = map.projection ?: return null
+
+        val screenBottomLeft = projection.fromPixels(0, map.height)
+        return if (screenBottomLeft != null) {
+            LatLng(screenBottomLeft.latitude, screenBottomLeft.longitude, 0f)
+        } else null
     }
 
     override fun populatePlaces(currentLatLng: LatLng) {
@@ -1379,7 +1383,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng.latitude == 0.0 && screenTopRightLatLng.longitude == 0.0 && screenBottomLeftLatLng.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
+        if (screenTopRightLatLng?.latitude == 0.0 && screenTopRightLatLng?.longitude == 0.0 && screenBottomLeftLatLng?.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
             val delta = 0.009
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta
@@ -1704,8 +1708,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun populatePlacesForCurrentLocation(
         currentLatLng: LatLng?,
-        screenTopRight: LatLng,
-        screenBottomLeft: LatLng,
+        screenTopRight: LatLng?,
+        screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
         customQuery: String?
     ) {
@@ -1757,8 +1761,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     private fun populatePlacesForAnotherLocation(
         currentLatLng: LatLng?,
-        screenTopRight: LatLng,
-        screenBottomLeft: LatLng,
+        screenTopRight: LatLng?,
+        screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
         customQuery: String?
     ) {
@@ -2314,21 +2318,47 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     /**
+     * Returns a rendering priority for a marker derived from [getIconFor], where a higher value
+     * means the marker is drawn on top (OSMDroid renders overlays last-in = on top).
+     * All place-type logic stays in [getIconFor]; this method only maps icon → priority.
+     *
+     *  5 – Purple  : nearest / highlighted place
+     *  4 – Red     : exists, needs a photo  ← must always be above green
+     *  3 – Monument: WLM monument markers
+     *  2 – Green   : already has a photo
+     *  1 – Grey    : loading (no name yet)
+     *  0 – Clear   : does not exist in the real world
+     */
+    private fun getMarkerPriority(place: Place, isBookmarked: Boolean): Int =
+        when (getIconFor(place, isBookmarked)) {
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked -> 5
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked -> 4
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> 3
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked -> 2
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked -> 1
+            else -> 0 // ic_clear_black_24dp – place does not exist in the real world
+        }
+
+    /**
      * Adds multiple markers representing places to the map and handles item gestures.
+     * Markers are sorted by priority before being added so that higher-priority pins
+     * (e.g. red "needs photo" pins) are always rendered on top of lower-priority ones
+     * (e.g. green "has photo" pins) in the OSMDroid overlay list.
      *
      * @param markerPlaceGroups The list of marker place groups containing the places and
      * their bookmarked status
      */
     override fun replaceMarkerOverlays(markerPlaceGroups: List<MarkerPlaceGroup>) {
-        val newMarkers = ArrayList<Marker>(markerPlaceGroups.size)
-        // iterate in reverse so that the nearest pins get rendered on top
-        for (i in markerPlaceGroups.indices.reversed()) {
-            newMarkers.add(
-                convertToMarker(
-                    markerPlaceGroups[i].place,
-                    markerPlaceGroups[i].isBookmarked
-                )
-            )
+        // Reverse the list first to make it farthest-first (since it comes nearest-first).
+        // Then sort by priority (stable sort). This ensures that within the same priority,
+        // farthest markers are added first (drawn bottom) and nearest are added last (drawn top).
+        val sortedGroups = markerPlaceGroups.reversed().sortedBy { getMarkerPriority(it.place, it.isBookmarked) }
+        val newMarkers = sortedGroups.map { group ->
+            convertToMarker(group.place, group.isBookmarked)
         }
         clearAllMarkers()
         binding!!.map.overlays.addAll(newMarkers)

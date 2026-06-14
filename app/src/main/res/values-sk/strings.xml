@@ -520,6 +520,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, ktorá nie je použitá v žiadnom článku</string>
   <string name="delete_helper_ask_spam_blurry">úplne rozmazané</string>
   <string name="delete_helper_ask_spam_nonsense">nezmysel, úplne nepoužiteľné v akomkoľvek článku</string>
+  <string name="delete_helper_ask_spam_other">Iné</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tlačová fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

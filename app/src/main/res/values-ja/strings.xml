@@ -24,6 +24,7 @@
 * Tamaki Wakita
 * Tmv
 * Whym
+* YeBoy371
 * Yusuke1109
 * Yuukin0248
 * もなー(偽物)
@@ -96,7 +97,7 @@
   <string name="uploading_queued">アップロードは待機中です（限定接続モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
-  <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
+  <string name="upload_progress_notification_title_start">アップロードを開始中: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
@@ -528,6 +529,7 @@
   <string name="delete_helper_ask_spam_selfie">どの記事にも使われていない自撮り</string>
   <string name="delete_helper_ask_spam_blurry">完全にぼやけている</string>
   <string name="delete_helper_ask_spam_nonsense">無意味、どの記事にも全く使えない</string>
+  <string name="delete_helper_ask_spam_other">それ以外</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">広報用の写真</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">インターネットで拾った無関係な画像です</string>
   <string name="delete_helper_ask_reason_copyright_logo">ロゴ</string>

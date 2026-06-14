@@ -284,6 +284,7 @@
   <string name="upload_problem_image_dark">Зображення надто темне.</string>
   <string name="upload_problem_image_blurry">Зображення розмите.</string>
   <string name="upload_problem_image_duplicate">Зображення вже існує на Вікісховищі.</string>
+  <string name="upload_problem_image_format_unsupported">Ваше зображення має формат, який не підтримується сервером Commons, тому програма конвертувала його у JPG.</string>
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
@@ -383,6 +384,7 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="rotate">Повернути</string>
+  <string name="crop">Обрізати</string>
   <string name="error_fetching_nearby_places">Не вдалося завантажити місця поблизу</string>
   <string name="no_pictures_in_this_area">Немає зображень з цієї місцевості</string>
   <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
@@ -450,6 +452,9 @@
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
   <string name="no_depictions_selected">Описів зображеного не вибрано</string>
   <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані описи, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши описи?</string>
+  <string name="depictions_choose_from_map">Виберіть з карти</string>
+  <string name="depictions_map_confirm">Підтвердити</string>
+  <string name="depictions_map_no_photo_location">Фотографія не має геоданих, відображається ваше поточне місцезнаходження</string>
   <string name="back_button_warning">Скасувати завантаження</string>
   <string name="back_button_warning_desc">Використання кнопки \"Назад\" скасує це завантаження</string>
   <string name="back_button_continue">Продовжити завантаження</string>
@@ -558,6 +563,8 @@
   <string name="delete_helper_ask_spam_selfie">селфі, яке не використовується в жодній статті</string>
   <string name="delete_helper_ask_spam_blurry">повністю розмито</string>
   <string name="delete_helper_ask_spam_nonsense">нісенітниця, абсолютно непридатна для будь-якої статті</string>
+  <string name="delete_helper_ask_spam_other">Інше</string>
+  <string name="delete_helper_other_notes_hint">Обґрунтування</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
@@ -838,6 +845,7 @@
   <string name="pending">В очікуванні</string>
   <string name="failed">Не вдалося</string>
   <string name="could_not_load_place_data">Не вдалося завантажити дані про місце</string>
+  <string name="warning_for_no_option_selected">Виберіть будь-який із варіантів відповіді на запитання</string>
   <string name="custom_selector_delete_folder">Вилучити папку</string>
   <string name="custom_selector_confirm_deletion_title">Підтвердити вилучення</string>
   <string name="custom_selector_confirm_deletion_message">Ви впевнені, що бажаєте вилучити папку %1$s, у якій міститься %2$d елемент(ів)?</string>
@@ -868,4 +876,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Створено %1$s та завантажено %2$s</string>
   <string name="nominated_for_deletion_btn">Номіновано на вилучення</string>
   <string name="custom_selector_max_image_limit_reached">Ви можете вибрати максимум %d зображень.</string>
+  <string name="edit_unsupported_format_explanation">Редагування в додатку доступне лише для файлів JPEG. Щоб редагувати інші формати, скористайтеся сторонніми інструментами.</string>
+  <string name="license_cc0_description">Без авторських прав. Ви відмовляєтеся від усіх прав, щоб будь-хто міг використовувати цю роботу будь-яким способом.</string>
+  <string name="license_cc_by_description">Attribution. Інші можуть вільно поширювати та адаптувати матеріали, якщо вони вкажуть ваше авторство.</string>
+  <string name="license_cc_by_sa_description">Attribution-ShareAlike. Інші можуть поширювати та адаптувати, але повинні використовувати ту саму ліцензію та вказувати ваше авторство.</string>
+  <string name="license_cc0_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі без жодних умов.</string>
+  <string name="license_cc_by_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі, навіть у комерційних цілях, за умови зазначення авторства.</string>
+  <string name="license_cc_by_sa_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі, навіть у комерційних цілях, за умови зазначення авторства, а нова робота ліцензована на ідентичних умовах.</string>
 </resources>
