@@ -540,6 +540,7 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random fénykép az Internetről</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Azért, mert</string>
+  <string name="category_edit_helper_show_edit_title_success">Sikeres</string>
   <string name="share_image_via">Kép megosztása ezen keresztül:</string>
   <string name="no_achievements_yet">%1$s még nem adott hozzájárulást</string>
   <string name="account_created">Fiók létrehozva!</string>
@@ -559,6 +560,11 @@
   <string name="theme_default_name">Rendszerbeállítás követése</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
+  <string name="cannot_open_location_settings">Nem sikerült megnyitni a helybeállításokat. Kapcsold be a helymeghatározást kézzel.</string>
+  <string name="recommend_high_accuracy_mode">A legjobb eredmény érdekében válaszd a Nagy pontosságú módot.</string>
+  <string name="ask_to_turn_location_on">Bekapcsolod a helymeghatározást?</string>
+  <string name="ask_to_turn_location_on_text">Kapcsold be a helyszolgáltatásokat, hogy az alkalmazás megjeleníthesse a jelenlegi helyedet</string>
+  <string name="nearby_needs_location">A Közeli funkció megfelelő működéséhez be kell kapcsolni a helymeghatározást</string>
   <string name="confirm">Megerősítés</string>
   <string name="instructions_title">Útmutatók</string>
   <string name="achievements_tab_title">Eredmények</string>
