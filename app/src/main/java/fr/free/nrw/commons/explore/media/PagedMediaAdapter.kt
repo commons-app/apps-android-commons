@@ -60,7 +60,7 @@ class PagedMediaAdapter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {  idAndLabels ->
-                        media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels);
+                        media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels)
                         holder.setAuthorText(media)
                     },
                     { t: Throwable? -> Timber.e(t) })
@@ -83,6 +83,6 @@ class SearchImagesViewHolder(
     }
 
     fun setAuthorText(media: Media) {
-        binding.categoryImageAuthor.text = MediaAttributionUtil.getTagLine(media, containerView.context)
+        binding.categoryImageAuthor.text = MediaAttributionUtil.getTagLine(media, itemView.context)
     }
 }
