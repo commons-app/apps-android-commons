@@ -34,6 +34,10 @@
     <item quantity="one">%1$d دوتنه راپورته‌کول</item>
     <item quantity="other"> %1$d دوتنې راپورته‌کول</item>
   </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
+  </plurals>
   <string name="starting_uploads">راپورته‌کول پيلول</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">راپورته‌کولو  %1$d بهير</item>
@@ -367,6 +371,7 @@
   <string name="deletion_reason_no_longer_want_public">زما اند توپير وکړ، زه نه غواړم چې دا نور په ټوليزه توگه ښکاره شي</string>
   <string name="deletion_reason_not_interesting">په بښنې سره دا انځور د يو پوهنغونډ لپاره خواپورې نه دی</string>
   <string name="no_categories_selected">هېڅ وېشنيزې نه دې ټاکل شوې</string>
+  <string name="depictions_map_confirm">تاييد</string>
   <string name="back_button_warning">راپورته‌کول ناگارل</string>
   <string name="search_this_area">دا سيمه وپلټئ</string>
   <string name="nearby_card_permission_title">اجازې غوښتنه</string>
@@ -448,6 +453,8 @@
   <string name="coordinates_edit_helper_edit_message_else">همغږيتوبونه نشي ورگډېدای.</string>
   <string name="description_edit_helper_edit_message_else">څرگنداوی نشي ورگډېدای.</string>
   <string name="share_image_via">انځور وېشل په وسيله د</string>
+  <string name="account_created">گڼون جوړ شو!</string>
+  <string name="text_copy">ليک ټينگدړې ته ولمېسل شو</string>
   <string name="title_for_media">رسنۍ</string>
   <string name="title_for_child_classes">ماشومانو ټولگي</string>
   <string name="title_for_parent_classes">مور او پلار ټولگي</string>
@@ -568,6 +575,7 @@
   <string name="no_usages_found">هېڅ کاره‌ونه ونه موندل شوه</string>
   <string name="usages_on_commons_heading">خونديځ</string>
   <string name="usages_on_other_wikis_heading">نورې ويکي‌گانې</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">دوتنې کارېدنې</string>
   <string name="account">گڼون</string>
   <string name="vanish_account">گڼون له منځه وړل</string>

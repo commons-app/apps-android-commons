@@ -7,6 +7,7 @@
 * Emperyan
 * Ft.Rath
 * Grkn gll
+* HakanIST
 * Hedda
 * Incelemeelemani
 * JackUKElliott
@@ -58,6 +59,10 @@
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosya yükleniyor</item>
     <item quantity="other">%1$d dosya yükleniyor</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Yüklemeye Başlıyor</string>
   <plurals name="starting_multiple_uploads">
@@ -177,6 +182,9 @@
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
+  <string name="language_search_type_language_name">Dil Adı Yazın</string>
+  <string name="language_search_recent_searches">Son Aramalar</string>
+  <string name="language_search_all_languages">Tüm Diller</string>
   <string name="media_upload_policy">Bu resmi göndererek bunun kendi çalışmam olduğunu, telif hakkıyla korunan materyal veya özçekim (selfie) içermediğini ve diğer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/tr\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Varsayılan Lisans</string>
@@ -281,6 +289,7 @@
   <string name="upload_problem_image_dark">Görüntü çok karanlık.</string>
   <string name="upload_problem_image_blurry">Görüntü bulanık.</string>
   <string name="upload_problem_image_duplicate">Görüntü zaten Commons\'ta mevcut.</string>
+  <string name="upload_problem_image_format_unsupported">Görseliniz Commons sunucusu tarafından desteklenmeyen bir biçimdedir, bu yüzden uygulama onu JPG\'ye dönüştürdü.</string>
   <string name="upload_problem_different_geolocation">Bu resim farklı bir yerde çekilmiş.</string>
   <string name="upload_problem_fbmd">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. Başkalarının Facebook hesaplarında bulduğunuz resimleri yüklemeyin.</string>
   <string name="upload_problem_do_you_continue">Hâlâ bu resmi yüklemek istiyor musunuz?</string>
@@ -288,6 +297,7 @@
   <string name="upload_connection_error_alert_detail">Yükleme işlemi etkin internet erişimine ihtiyaç duyar.\n    Lütfen ağ bağlantınızı kontrol edin.</string>
   <string name="upload_problem_image">Resimde bulunan sorunlar</string>
   <string name="internet_downloaded">Lütfen yalnızca kendi çektiğiniz resimleri yükleyin. İnternetten indirdiğiniz resimleri yüklemeyin.</string>
+  <string name="preferences_uploads">Yüklemeler</string>
   <string name="use_external_storage">Uygulama içi çekimleri kaydedin</string>
   <string name="use_external_storage_summary">Uygulama içi kamera ile çekilmiş resimleri cihazınızın depolama alanına kaydedin</string>
   <string name="login_to_your_account">Hesabınızda oturum açın</string>
@@ -359,6 +369,7 @@
   <string name="quiz">Kısa Sınav</string>
   <string name="quiz_question_string">Bu resim yüklemeye uygun mu?</string>
   <string name="question">Soru</string>
+  <string name="quiz_i_am_not_sure">Emin değilim</string>
   <string name="result">Sonuç</string>
   <string name="quiz_back_button">Silinmesi gereken resimleri yüklemeye devam ederseniz hesabınız büyük olasılıkla engellenecektir. Sınavı bitirmek istediğinizden emin misiniz?</string>
   <string name="quiz_alert_message">Yüklediğiniz görüntülerin silinme sayısı: %1$s. Silinmesi gereken resimleri yüklemeye devam ederseniz hesabınız büyük olasılıkla yasaklanacaktır.\n\nEğiticiyi tekrar görüntülemek ve ardından ne tür resimler yüklemeniz veya yüklememeniz gerektiğini öğrenmenize yardımcı olacak bir test yapmak ister misiniz?</string>
@@ -368,6 +379,7 @@
   <string name="blurry_image_answer">Commons\'ın amaçlarından biri kaliteli görüntüler toplamaktır. Bu nedenle, bulanık görüntüler yüklenmemelidir. Her zaman iyi ışıkla güzel fotoğraflar çekmeye çalışın.</string>
   <string name="construction_event_answer">Commons\'ta teknoloji veya kültür resimleri oldukça hoş karşılanır.</string>
   <string name="congratulatory_message_quiz">Doğru cevap sayınız: %1$s. Tebrikler!</string>
+  <string name="quiz_continue">Devam et</string>
   <string name="warning_for_no_answer">Soruyu cevaplamak için iki seçenekten birini seçin</string>
   <string name="user_not_logged_in">Giriş oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.</string>
   <string name="quiz_result_share_message">Sınavınızı arkadaşlarınızla paylaşın!</string>
@@ -377,6 +389,7 @@
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="rotate">Döndür</string>
+  <string name="crop">Kırp</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler yüklenemedi</string>
   <string name="no_pictures_in_this_area">Bu bölgede resim yok</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
@@ -396,6 +409,7 @@
   <string name="statistics_wikidata_edits">\"Yakındaki Yerler\"den Resimler</string>
   <string name="level">Seviye %1$d</string>
   <string name="profile_withLevel">%1$s (Seviye %2$s)</string>
+  <string name="profile_withoutLevel">%1$s (%2$s)</string>
   <string name="images_uploaded">Resimler Yüklendi</string>
   <string name="image_reverts">Resimler Geri Alınmadı</string>
   <string name="images_used_by_wiki">Resimler Kullanıldı</string>
@@ -444,6 +458,9 @@
   <string name="no_categories_selected_warning_desc">Kategorisiz görüntüler nadiren kullanılabilir. Kategori seçmeden devam etmek istediğinizden emin misiniz?</string>
   <string name="no_depictions_selected">Hiçbir Tasvir Seçilmedi</string>
   <string name="no_depictions_selected_warning_desc">Tasvirleri olan resimler daha kolay bulunur ve kullanılması daha olasıdır. Tasvirleri seçmeden devam etmek istediğinizden emin misiniz?</string>
+  <string name="depictions_choose_from_map">Haritadan seç</string>
+  <string name="depictions_map_confirm">Onayla</string>
+  <string name="depictions_map_no_photo_location">Fotoğrafın konumu yok, mevcut konumunuz gösteriliyor</string>
   <string name="back_button_warning">Yüklemeyi İptal Et</string>
   <string name="back_button_warning_desc">Geri düğmesini kullanmak, bu yüklemeyi iptal eder ve ilerlemenizi kaybedersiniz</string>
   <string name="back_button_continue">Yüklemeye Devam Et</string>
@@ -460,6 +477,8 @@
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden çalışmaları görün</string>
+  <string name="show_deletion_button">Silme düğmesini göster</string>
+  <string name="show_deletion_button_explanation">Özel seçicide \"Klasörü Sil\" düğmesini etkinleştir</string>
   <string name="in_app_camera_location_access_explanation">Kameranın kaydetmemesi durumunda uygulamanın konumu almasına izin verin. Bazı cihaz kameraları konum kaydetmez. Bu gibi durumlarda uygulamanın konum alıp eklemesine izin vermeniz katkınızı daha faydalı hale getirir. Bunu istediğiniz zaman Ayarlar\'dan değiştirebilirsiniz.</string>
   <string name="option_allow">İzin ver</string>
   <string name="option_dismiss">Kapat</string>
@@ -534,6 +553,7 @@
   <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı şununla paylaşın:</string>
   <string name="image_info">Resim Bilgisi</string>
+  <string name="upload_categories_dont_show_this_message_again">Bu mesajı bir daha gösterme</string>
   <string name="no_categories_found">Kategori bulunamadı</string>
   <string name="no_depiction_found">Hiçbir Tasvir Bulunamadı</string>
   <string name="upload_cancelled">İptal Edilen Yükleme</string>
@@ -550,6 +570,7 @@
   <string name="delete_helper_ask_spam_blurry">tamamen bulanık</string>
   <string name="delete_helper_ask_spam_nonsense">anlamsız, herhangi bir makalede kesinlikle kullanılamaz</string>
   <string name="delete_helper_ask_spam_other">Diğer</string>
+  <string name="delete_helper_other_notes_hint">Gerekçe</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -665,6 +686,7 @@
   <string name="leaderboard_nearby">Yakınımdakiler</string>
   <string name="leaderboard_used">Kullanılan</string>
   <string name="leaderboard_my_rank_button_text">Sıralamam</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Sınırlı bağlantı modu etkinleştirildi!</string>
   <string name="limited_connection_disabled">Sınırlı bağlantı modu devre dışı bırakıldı. Bekleyen yüklemeler şimdi devam ettirilecek.</string>
   <string name="limited_connection_mode">Sınırlı Bağlantı Modu</string>
@@ -681,6 +703,8 @@
   <string name="categories_tooltip">Lütfen uygun kategorileri seçin. Tasvirlerin aksine, kategoriler yalnızca İngilizce\'dir.</string>
   <string name="license_tooltip">Commons, resimlerinizi herkes tarafından yeniden kullanılabilir ve uyarlanabilir hale getirir. Tüm haklardan feragat etmek istiyor musunuz? İlişkilendirilmek istiyor musunuz? Uyarlamaların aynı lisansı kullanmasını ister misiniz?</string>
   <string name="depicts_step_title">Tasvir</string>
+  <string name="depicts_label">Etiket</string>
+  <string name="depicts_description">Açıklama</string>
   <string name="license_step_title">Medya Lisansı</string>
   <string name="media_detail_step_title">Medya Ayrıntılar</string>
   <string name="menu_view_category_page">Kategori sayfasını görüntüle</string>
@@ -714,13 +738,16 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Reddet</string>
   <string name="custom_selector_button_limit_text">Maks: %1$d</string>
   <string name="custom_selector_limit_error_desc">Hata: Yükleme Sınırı Aşıldı</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Bu resim, Viki Anıtları Seviyor yarışmasına katılacaktır</string>
   <string name="display_monuments">Anıtları göster</string>
   <string name="wlm_month_message">Viki, Anıtları Seviyor ayı!</string>
   <string name="learn_more">DAHA FAZLA BİLGİ EDİN</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Viki, Anıtları Seviyor; Wikimedia tarafından düzenlenen anıtlar için uluslararası bir fotoğraf yarışmasıdır.</string>
   <string name="need_permission">İzin Gerekiyor</string>
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
+  <string name="location_off_dialog_text">Yakındaki yerleri görüntülemek için lütfen konum hizmetlerini açın.</string>
   <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konumu al</string>
   <string name="contributions_of_user">Kullanıcının katkıları: %1$s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %1$s</string>
@@ -819,6 +846,7 @@
   <string name="pending">Beklemede</string>
   <string name="failed">Başarısız</string>
   <string name="could_not_load_place_data">Yer verileri yüklenemedi</string>
+  <string name="warning_for_no_option_selected">Soruyu yanıtlamak için seçeneklerden birini seçin</string>
   <string name="custom_selector_delete_folder">Klasörü Sil</string>
   <string name="custom_selector_confirm_deletion_title">Silmeyi Onayla</string>
   <string name="custom_selector_confirm_deletion_message">%2$d öğe içeren %1$s klasörünü silmek istediğinizden emin misiniz?</string>
@@ -835,6 +863,7 @@
   <string name="no_usages_found">Hiçbir kullanım bulunamadı</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Diğer vikiler</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Dosya kullanımları</string>
   <string name="account">Hesap</string>
   <string name="vanish_account">Kaybolma</string>
@@ -848,4 +877,12 @@
   <string name="image_tag_line_created_and_uploaded_by">Oluşturan ve yükleyen: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tarafından oluşturuldu ve %2$s tarafından yüklendi</string>
   <string name="nominated_for_deletion_btn">Silinmeye aday gösterildi</string>
+  <string name="custom_selector_max_image_limit_reached">En fazla %d görsel seçebilirsiniz.</string>
+  <string name="edit_unsupported_format_explanation">Uygulama içi düzenleme yalnızca JPEG dosyaları için kullanılabilir. Diğer biçimleri düzenlemek için lütfen üçüncü taraf bir araç kullanın.</string>
+  <string name="license_cc0_description">Telif hakkı yok. Herkesin bu eseri herhangi bir şekilde kullanabilmesi için tüm haklarınızdan vazgeçiyorsunuz.</string>
+  <string name="license_cc_by_description">Atıf. Diğerleri, size atıfta bulundukları sürece paylaşmakta ve uyarlamakta serbesttir.</string>
+  <string name="license_cc_by_sa_description">Atıf-AynıLisanslaPaylaş. Diğerleri paylaşabilir ve uyarlayabilir, ancak aynı lisansı kullanmalı ve size atıfta bulunmalıdır.</string>
+  <string name="license_cc0_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde hiçbir koşul olmaksızın dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir.</string>
+  <string name="license_cc_by_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması gerekir.</string>
+  <string name="license_cc_by_sa_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması ve aynı lisansın kullanılması gerekir.</string>
 </resources>
