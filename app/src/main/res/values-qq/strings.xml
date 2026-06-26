@@ -21,6 +21,7 @@
 * Rodney Araujo
 * Shirayuki
 * Siebrand
+* Stjn
 * Verdy p
 * Whym
 * Woytecr
@@ -546,7 +547,7 @@
   <string name="category_edit_helper_show_edit_title">Shown after trying to update categories.</string>
   <string name="category_edit_helper_show_edit_title_success">Shown after {{Msg-wm|depictions_edit_helper_show_edit_title}} (Lego.)</string>
   <string name="category_edit_helper_show_edit_message_if">Status message.</string>
-  <string name="category_edit_helper_edit_message_else">Shown after {{msg-mw|category_edit_helper_show_edit_title}}</string>
+  <string name="category_edit_helper_edit_message_else">Shown after {{msg-wm|Commons-android-strings-category_edit_helper_show_edit_title}}</string>
   <string name="category_edit_button_text">Seems to be unused.</string>
   <string name="depictions_edit_helper_make_edit_toast">{{Doc-commons-app-depicts}}</string>
   <string name="depictions_edit_helper_show_edit_title">{{Doc-commons-app-depicts}}</string>
