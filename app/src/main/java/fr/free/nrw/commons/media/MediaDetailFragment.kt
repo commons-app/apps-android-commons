@@ -521,14 +521,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             enableProgressBar()
         }
 
-        if (getUserName(requireContext()) != null && media != null && getUserName(
-                requireContext()
-            ) == media!!.author
-        ) {
-            binding.sendThanks.visibility = View.GONE
-        } else {
-            binding.sendThanks.visibility = View.VISIBLE
-        }
+        binding.sendThanks.visibility =
+            if (isOwnUpload()) View.GONE else View.VISIBLE
 
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
@@ -617,6 +611,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         )
     }
 
+    private fun isOwnUpload(): Boolean {
+        val currentUser = getUserName(requireContext())?.trim()
+        val uploader = media?.user?.trim()
+        return !currentUser.isNullOrEmpty() &&
+                !uploader.isNullOrEmpty() &&
+                currentUser.equals(uploader, ignoreCase = true)
+    }
+
     private fun onMediaRefreshed(media: Media) {
         media.categories = this.media!!.categories
         this.media = media
@@ -636,10 +638,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
-        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
+        val currentUser = getUserName(requireContext())?.trim()
+        if (currentUser == null) {
             binding.nominateDeletion.visibility = View.GONE
             binding.nominatedDeletionBanner.visibility = View.GONE
-        } else if (deletionPageExists) {
+            return }
+        if (deletionPageExists) {
             if (applicationKvStore.getBoolean(
                     String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false
                 )
@@ -1642,7 +1646,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     @SuppressLint("StringFormatInvalid")
     fun onDeleteButtonClicked() {
-        if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
+        if (isOwnUpload()) {
             val languageAdapter: ArrayAdapter<String> = ArrayAdapter(
                 requireActivity(),
                 R.layout.simple_spinner_dropdown_list, reasonList
