@@ -1,5 +1,17 @@
 # Wikimedia Commons for Android
 
+## v6.6.0
+
+### What's changed
+- Bookmarks display correctly and are no longer empty
+- Rotated photos now display without border artifacts
+- Support for Android API level 36
+- Upload activity no longer shows stale edited images
+- Nearby map pins render correctly, with red pins appearing above green pins for better visibility
+- Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.5.0...v6.6.0
+
 ## v6.5.0
 
 ### What's changed
