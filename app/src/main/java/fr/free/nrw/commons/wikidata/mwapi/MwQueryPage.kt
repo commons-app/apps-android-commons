@@ -54,6 +54,15 @@ class MwQueryPage : BaseModel() {
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
 
+    /**
+     * Get imageInfo objects included in this API response.
+     * NOTE: Due to MediaWiki API pagination, this returns only the revisions included
+     * in the current API response (typically ~50 max). For files with extensive history,
+     * continuation tokens would be needed to fetch remaining revisions.
+     * Used for finding uploaders when nominating files for deletion.
+     */
+    fun imageInfoList(): List<ImageInfo> = imageInfo ?: emptyList()
+
     fun redirectFrom(from: String?) {
         redirectFrom = from
     }

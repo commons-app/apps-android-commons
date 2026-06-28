@@ -17,6 +17,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.notification.NotificationHelper.Companion.NOTIFICATION_DELETE
 import fr.free.nrw.commons.review.ReviewController
@@ -42,6 +43,7 @@ class DeleteHelper @Inject constructor(
     private val notificationHelper: NotificationHelper,
     @Named("commons-page-edit") private val pageEditClient: PageEditClient,
     private val viewUtil: ViewUtilWrapper,
+    private val mediaClient: MediaClient,
     @Named("username") private val username: String
 ) {
     private var d: AlertDialog? = null
@@ -153,11 +155,55 @@ class DeleteHelper @Inject constructor(
                 }
             }
             .flatMap { result: Boolean ->
-                if (result) {
-                    pageEditClient.appendEdit("User_Talk:$creator", "$userPageString\n", summary)
-                } else {
-                    Observable.error(RuntimeException("Failed to nominate for deletion"))
+                if (!result) {
+                    return@flatMap Observable.error<Boolean>(
+                        RuntimeException("Failed to nominate for deletion")
+                    )
                 }
+
+                mediaClient.getImageInfoList(media.filename!!)
+                    .toObservable()
+                    .flatMap { imageInfos ->
+
+                        val uploaders = imageInfos
+                            .map { it.getUser() }
+                            .filter { it.isNotBlank() }
+                            .toSet()
+
+                        if (uploaders.isEmpty()) {
+                            // No uploaders found, fallback to creator
+                            val creator = media.getAuthorOrUser()
+                            if (!creator.isNullOrBlank()) {
+                                return@flatMap Observable.just(creator)
+                                    .concatMap { user ->
+                                        pageEditClient.appendEdit(
+                                            "User_Talk:$user",
+                                            "$userPageString\n",
+                                            summary
+                                        )
+                                    }
+                            }
+                            // If creator also empty, still return success
+                            return@flatMap Observable.just(true)
+                        }
+
+                        Observable.fromIterable(uploaders)
+                            .concatMap { user ->
+                                pageEditClient.appendEdit(
+                                    "User_Talk:$user",
+                                    "$userPageString\n",
+                                    summary
+                                )
+                            }
+                            .toList()
+                            .map { results -> results.all { it } }
+                            .toObservable()
+                    }
+                    .doOnError { throwable ->
+                        // Log error but don't fail - deletion was already successful
+                        Timber.w(throwable, "Failed to fetch uploaders for notifications")
+                    }
+                    .onErrorReturnItem(true)  // If uploader fetch fails, deletion already succeeded
             }
     }
 
