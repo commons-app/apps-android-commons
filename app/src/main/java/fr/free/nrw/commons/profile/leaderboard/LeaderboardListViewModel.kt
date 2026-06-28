@@ -51,4 +51,8 @@ class LeaderboardListViewModel(
         dataSourceFactory.limit = limit
         dataSourceFactory.offset = offset
     }
+
+    fun setUserName(userName: String?) {
+        dataSourceFactory.userName = userName
+    }
 }
