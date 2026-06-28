@@ -753,6 +753,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     }
 
     override fun onDestroyView() {
+        contributionController?.cleanup()
         super.onDestroyView()
         presenter!!.onDetachView()
     }
@@ -859,9 +860,10 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 binding!!.cardViewNearby.visibility = View.GONE
             }
             removeFragment(mediaDetailPagerFragment!!)
+            mediaDetailPagerFragment = null
             showFragment(
                 contributionsListFragment!!, CONTRIBUTION_LIST_FRAGMENT_TAG,
-                mediaDetailPagerFragment
+                null
             )
             if (isUserProfile) {
                 // Fragment is associated with ProfileActivity
@@ -965,8 +967,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         if (mediaDetailPagerFragment != null && !contributionsListFragment!!.isVisible) {
             removeFragment(mediaDetailPagerFragment!!)
             mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true)
-            mediaDetailPagerFragment?.showImage(index)
             showMediaDetailPagerFragment()
+            mediaDetailPagerFragment?.showImage(index)
         }
     }
 
