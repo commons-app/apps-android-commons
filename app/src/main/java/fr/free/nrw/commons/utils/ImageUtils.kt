@@ -104,6 +104,9 @@ object ImageUtils {
      */
     @JvmStatic
     fun checkIfImageIsTooDark(imagePath: String): Int {
+        if (imagePath.endsWith(".svg", ignoreCase = true)) {
+            return IMAGE_OK
+        }
         val millis = System.currentTimeMillis()
         return try {
             var bmp = ExifInterface(imagePath).thumbnailBitmap
