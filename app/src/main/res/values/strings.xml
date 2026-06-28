@@ -205,6 +205,7 @@
   <string name="in_app_camera_location_switch_pref_summary">Enable this to record location with in-app shots in case the device camera does not record it</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
+  <string name="duplicates_removed_before_upload">Some selected images were duplicates and have been removed before upload.</string>
   <string name="duplicate_file_name">Duplicate File Name found</string>
   <string name="upload">Upload</string>
   <string name="yes">Yes</string>
