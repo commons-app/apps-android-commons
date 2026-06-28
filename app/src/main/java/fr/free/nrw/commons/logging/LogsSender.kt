@@ -113,8 +113,8 @@ abstract class LogsSender(
                 attachExtraInfo(this)
             }
             val metaData = builder.toString().toByteArray(Charsets.UTF_8)
-            val zipFile = File(LogUtils.getLogZipDirectory(), logFileName ?: "logs.zip")
-            writeLogToZipFile(metaData, zipFile)
+            val zipFile = File(LogUtils.getLogZipDirectory(context), logFileName ?: "logs.zip")
+            writeLogToZipFile(context, metaData, zipFile)
             FileProvider.getUriForFile(
                 context,
                 "${context.applicationContext.packageName}.provider",
@@ -164,8 +164,8 @@ abstract class LogsSender(
      * @throws IOException If an I/O error occurs.
      */
     @Throws(IOException::class)
-    private fun writeLogToZipFile(metaData: ByteArray, zipFile: File) {
-        val logDir = File(LogUtils.getLogDirectory())
+    private fun writeLogToZipFile(context: Context, metaData: ByteArray, zipFile: File) {
+        val logDir = File(LogUtils.getLogDirectory(context))
         if (!logDir.exists() || logDir.listFiles().isNullOrEmpty()) return
 
         ZipOutputStream(BufferedOutputStream(FileOutputStream(zipFile))).use { zos ->
