@@ -178,8 +178,8 @@
   <string name="license_name_cc_by_sa">저작자표시-동일조건변경허락 3.0</string>
   <string name="license_name_cc_by">저작자표시 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0</string>
-  <string name="license_name_cc_by_3_0">크리에이티브 커먼즈 저작자표시 3.0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">위키미디어 공용은 위키백과에 쓰이는 대부분의 이미지를 호스팅합니다.</string>
