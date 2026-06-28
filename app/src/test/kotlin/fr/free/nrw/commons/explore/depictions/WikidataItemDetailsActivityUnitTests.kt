@@ -35,7 +35,7 @@ class WikidataItemDetailsActivityUnitTests {
     private lateinit var mediaDetailPagerFragment: MediaDetailPagerFragment
 
     @Mock
-    private lateinit var depictionImagesListFragment: DepictedImagesFragment
+    private lateinit var depictedImagesListFragment: DepictedImagesFragment
 
     @Mock
     private lateinit var supportFragmentManager: FragmentManager
@@ -65,8 +65,8 @@ class WikidataItemDetailsActivityUnitTests {
         Whitebox.setInternalState(activity, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         Whitebox.setInternalState(
             activity,
-            "depictionImagesListFragment",
-            depictionImagesListFragment,
+            "depictedImagesListFragment",
+            depictedImagesListFragment,
         )
         Whitebox.setInternalState(activity, "supportFragmentManager", supportFragmentManager)
 
