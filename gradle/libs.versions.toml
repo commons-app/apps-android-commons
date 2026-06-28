@@ -70,6 +70,7 @@ soloader = "0.10.5"
 timber = "4.7.1"
 uiautomator = "2.2.0"
 workManager = "2.8.1"
+roomKtx = "2.8.4"
 
 [libraries]
 # AndroidX Core Dependencies
@@ -202,6 +203,7 @@ coordinates2country-android = { module = "io.github.coordinates2country:coordina
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlinStdlib" }
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinStdlib" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

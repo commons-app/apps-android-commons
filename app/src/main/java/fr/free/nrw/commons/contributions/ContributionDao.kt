@@ -16,10 +16,16 @@ import java.util.Calendar
 @Dao
 abstract class ContributionDao {
     @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
-    abstract fun fetchContributions(): DataSource.Factory<Int, Contribution>
+    protected abstract fun fetchContributionsInternal(): DataSource.Factory<Int, ContributionRoomEntity>
+
+    fun fetchContributions(): DataSource.Factory<Int, Contribution> =
+        fetchContributionsInternal().map { fromEntity(it) }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun saveSynchronous(contribution: Contribution)
+    protected abstract fun saveSynchronousInternal(contribution: ContributionRoomEntity)
+
+    fun saveSynchronous(contribution: Contribution) =
+        saveSynchronousInternal(toEntity(contribution))
 
     fun save(contribution: Contribution): Completable {
         return Completable
@@ -42,10 +48,16 @@ abstract class ContributionDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun save(contribution: List<Contribution>): Single<List<Long>>
+    protected abstract fun saveInternal(contribution: List<ContributionRoomEntity>): Single<List<Long>>
+
+    fun save(contribution: List<Contribution>): Single<List<Long>> =
+        saveInternal(contribution.map { toEntity(it) })
 
     @Delete
-    abstract fun deleteSynchronous(contribution: Contribution)
+    protected abstract fun deleteSynchronousInternal(contribution: ContributionRoomEntity)
+
+    fun deleteSynchronous(contribution: Contribution) =
+        deleteSynchronousInternal(toEntity(contribution))
 
     /**
      * Deletes contributions with specific states from the database.
@@ -74,35 +86,38 @@ abstract class ContributionDao {
     }
 
     @Query("SELECT * from contribution WHERE media_filename=:fileName")
-    abstract fun getContributionWithTitle(fileName: String): List<Contribution>
+    protected abstract fun getContributionWithTitleInternal(fileName: String): List<ContributionRoomEntity>
+
+    fun getContributionWithTitle(fileName: String): List<Contribution> =
+        getContributionWithTitleInternal(fileName).map { fromEntity(it) }
 
     @Query("SELECT * from contribution WHERE pageId=:pageId")
-    abstract fun getContribution(pageId: String): Contribution
+    protected abstract fun getContributionInternal(pageId: String): ContributionRoomEntity
+
+    fun getContribution(pageId: String): Contribution =
+        fromEntity(getContributionInternal(pageId))
 
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
-    abstract fun getContribution(states: List<Int>): Single<List<Contribution>>
+    protected abstract fun getContributionInternal(states: List<Int>): Single<List<ContributionRoomEntity>>
 
-    /**
-     * Gets contributions with specific states in descending order by the date they were uploaded.
-     *
-     * @param states The states of the contributions to fetch.
-     * @return A DataSource factory for paginated contributions with the specified states.
-     */
+    fun getContribution(states: List<Int>): Single<List<Contribution>> =
+        getContributionInternal(states).map { entities -> entities.map { fromEntity(it) } }
+
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
-    abstract fun getContributions(
+    protected abstract fun getContributionsInternal(
         states: List<Int>
-    ): DataSource.Factory<Int, Contribution>
+    ): DataSource.Factory<Int, ContributionRoomEntity>
 
-    /**
-     * Gets contributions with specific states in ascending order by the date the upload started.
-     *
-     * @param states The states of the contributions to fetch.
-     * @return A DataSource factory for paginated contributions with the specified states.
-     */
+    fun getContributions(states: List<Int>): DataSource.Factory<Int, Contribution> =
+        getContributionsInternal(states).map { fromEntity(it) }
+
     @Query("SELECT * from contribution WHERE state IN (:states) order by dateUploadStarted ASC")
-    abstract fun getContributionsSortedByDateUploadStarted(
+    protected abstract fun getContributionsSortedByDateUploadStartedInternal(
         states: List<Int>
-    ): DataSource.Factory<Int, Contribution>
+    ): DataSource.Factory<Int, ContributionRoomEntity>
+
+    fun getContributionsSortedByDateUploadStarted(states: List<Int>): DataSource.Factory<Int, Contribution> =
+        getContributionsSortedByDateUploadStartedInternal(states).map { fromEntity(it) }
 
     @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
     abstract fun getPendingUploads(toUpdateStates: IntArray): Single<Int>
@@ -112,14 +127,11 @@ abstract class ContributionDao {
     abstract fun deleteAll()
 
     @Update
-    abstract fun updateSynchronous(contribution: Contribution)
+    protected abstract fun updateSynchronousInternal(contribution: ContributionRoomEntity)
 
-    /**
-     * Updates the state of contributions with specific states.
-     *
-     * @param states   The current states of the contributions to update.
-     * @param newState The new state to set.
-     */
+    fun updateSynchronous(contribution: Contribution) =
+        updateSynchronousInternal(toEntity(contribution))
+
     @Query("UPDATE contribution SET state = :newState WHERE state IN (:states)")
     abstract fun updateContributionsState(states: List<Int>, newState: Int)
 
@@ -130,19 +142,62 @@ abstract class ContributionDao {
         }
     }
 
-
-
-    /**
-     * Updates the state of contributions with specific states asynchronously.
-     *
-     * @param states   The current states of the contributions to update.
-     * @param newState The new state to set.
-     * @return A Completable indicating the result of the operation.
-     */
     fun updateContributionsWithStates(states: List<Int>, newState: Int): Completable {
         return Completable
             .fromAction {
                 updateContributionsState(states, newState)
             }
     }
+
+    private fun toEntity(contribution: Contribution): ContributionRoomEntity =
+        ContributionRoomEntity(
+            media = contribution.media,
+            pageId = contribution.pageId,
+            state = contribution.state,
+            transferred = contribution.transferred,
+            decimalCoords = contribution.decimalCoords,
+            dateCreatedSource = contribution.dateCreatedSource,
+            wikidataPlace = contribution.wikidataPlace,
+            chunkInfo = contribution.chunkInfo,
+            errorInfo = contribution.errorInfo,
+            depictedItems = contribution.depictedItems,
+            mimeType = contribution.mimeType,
+            localUri = contribution.localUri,
+            dataLength = contribution.dataLength,
+            dateCreated = contribution.dateCreated,
+            dateCreatedString = contribution.dateCreatedString,
+            dateModified = contribution.dateModified,
+            dateUploadStarted = contribution.dateUploadStarted,
+            hasInvalidLocation = contribution.hasInvalidLocation,
+            contentUri = contribution.contentUri,
+            countryCode = contribution.countryCode,
+            imageSHA1 = contribution.imageSHA1,
+            retries = contribution.retries
+        )
+
+    private fun fromEntity(entity: ContributionRoomEntity): Contribution =
+        Contribution(
+            media = entity.media,
+            pageId = entity.pageId,
+            state = entity.state,
+            transferred = entity.transferred,
+            decimalCoords = entity.decimalCoords,
+            dateCreatedSource = entity.dateCreatedSource,
+            wikidataPlace = entity.wikidataPlace,
+            chunkInfo = entity.chunkInfo,
+            errorInfo = entity.errorInfo,
+            depictedItems = entity.depictedItems,
+            mimeType = entity.mimeType,
+            localUri = entity.localUri,
+            dataLength = entity.dataLength,
+            dateCreated = entity.dateCreated,
+            dateCreatedString = entity.dateCreatedString,
+            dateModified = entity.dateModified,
+            dateUploadStarted = entity.dateUploadStarted,
+            hasInvalidLocation = entity.hasInvalidLocation,
+            contentUri = entity.contentUri,
+            countryCode = entity.countryCode,
+            imageSHA1 = entity.imageSHA1,
+            retries = entity.retries
+        )
 }

@@ -34,7 +34,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.locationpicker.LocationPicker.getCameraPosition
 import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment
@@ -75,7 +75,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     lateinit var defaultKvStore: JsonKvStore
 
     @Inject
-    lateinit var recentLanguagesDao: RecentLanguagesDao
+    lateinit var recentLanguagesDao: RecentLanguagesRoomDao
 
     /**
      * True when user removes location from the current image

@@ -23,9 +23,9 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
             query = "Test Search",
             lastSearched = date
         )
-        dao.insert(search)
+        dao.insert(search).blockingGet()
 
-        val retrieved = dao.findEntity("Test Search")
+        val retrieved = dao.findEntity("Test Search").blockingGet().firstOrNull()
         assertNotNull(retrieved)
         assertEquals("Test Search", retrieved?.query)
         // Date might lose some precision in DB, but should be close
@@ -42,7 +42,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
         val now = System.currentTimeMillis()
         db.execSQL("INSERT INTO recent_searches (name, last_used) VALUES ('Legacy Search', $now);")
 
-        val entity = dao.findEntity("Legacy Search")
+        val entity = dao.findEntity("Legacy Search").blockingGet().firstOrNull()
         assertNotNull(entity)
         assertEquals("Legacy Search", entity?.query)
         assertEquals(now, entity?.lastSearched?.time)
@@ -52,8 +52,8 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testDeleteTable() {
         val dao = roomDatabase.recentSearchesRoomDao()
-        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date()))
-        dao.insert(RecentSearchRoomEntity(query = "Search 2", lastSearched = Date()))
+        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date())).blockingGet()
+        dao.insert(RecentSearchRoomEntity(query = "Search 2", lastSearched = Date())).blockingGet()
         assertRowCount(RecentSearchesTable.TABLE_NAME, 2)
 
         dao.deleteTable().blockingAwait()
@@ -63,7 +63,7 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testClearAllTables() {
         val dao = roomDatabase.recentSearchesRoomDao()
-        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date()))
+        dao.insert(RecentSearchRoomEntity(query = "Search 1", lastSearched = Date())).blockingGet()
         assertRowCount(RecentSearchesTable.TABLE_NAME, 1)
 
         clearAllTables()

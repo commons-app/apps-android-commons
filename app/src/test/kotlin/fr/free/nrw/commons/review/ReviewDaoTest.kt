@@ -51,8 +51,8 @@ class ReviewDaoTest {
     fun insert() {
         // Insert data
         val imageId = "1234"
-        val reviewEntity = ReviewEntity(imageId)
-        reviewDao.insert(reviewEntity)
+        val reviewImage = ReviewImage(imageId)
+        reviewDao.insert(reviewImage)
 
         // Check insertion
         // Covers the case where the image exists in the database
