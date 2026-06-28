@@ -534,6 +534,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      */
     private fun checkAccount(): Boolean {
         val currentAccount = sessionManager.currentAccount
+        if (!userName.isNullOrBlank()) {
+            return true
+        }
         if (currentAccount == null) {
             Timber.d("Current account is null")
             showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))
