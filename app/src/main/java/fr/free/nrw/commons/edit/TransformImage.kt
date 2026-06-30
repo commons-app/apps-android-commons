@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.edit
 
+import android.content.Context
+import android.net.Uri
+import fr.free.nrw.commons.ajpegtran.Jpegtran
+import fr.free.nrw.commons.ajpegtran.Properties
+import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import java.io.File
 
 /**
@@ -9,6 +14,22 @@ import java.io.File
  * implementations to provide specific functionality for tasks like rotating images.
  */
 interface TransformImage {
+
+    /**
+     * Initialize the single Jpegtran instance for this editing session.
+     */
+    fun initJpegtran(context: Context, imagePath: String)
+
+    /**
+     * Returns properties of the JPEG image.
+     */
+    fun getProperties(uri: Uri): Properties
+
+    /**
+     * Clear and cleanup temporary files in Jpegtran.
+     */
+    fun cleanup()
+
     /**
      * Rotates the specified image file by the given degree.
      *
