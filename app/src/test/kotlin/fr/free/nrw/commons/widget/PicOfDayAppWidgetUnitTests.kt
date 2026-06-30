@@ -4,8 +4,6 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.widget.RemoteViews
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.imagepipeline.core.ImagePipelineFactory
-import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
@@ -47,8 +45,6 @@ class PicOfDayAppWidgetUnitTests {
     fun setUp() {
         OkHttpConnectionFactory.CLIENT = createTestClient()
         context = ApplicationProvider.getApplicationContext()
-        SoLoader.setInTestMode()
-        ImagePipelineFactory.initialize(context)
         MockitoAnnotations.openMocks(this)
         widget = PicOfDayAppWidget()
         Whitebox.setInternalState(widget, "compositeDisposable", compositeDisposable)
