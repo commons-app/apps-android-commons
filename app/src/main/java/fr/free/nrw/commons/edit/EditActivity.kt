@@ -17,14 +17,18 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
-import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -32,7 +36,7 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 /**
- * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
+ * An activity class for editing and rotating images using Jpegtran.
  *
  * This activity allows loads an image, allows users to rotate it by 90-degree increments, and
  * save the edited image while preserving its EXIF attributes. The class includes methods
@@ -62,12 +66,13 @@ class EditActivity : AppCompatActivity() {
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
+        vm.initJpegtran(applicationContext, imageUri)
 
         val sourceExif = try {
             ExifInterface(imageUri)
         } catch (e: Exception) {
             try {
-                contentResolver.openInputStream(Uri.parse(imageUri))?.use {
+                contentResolver.openInputStream(imageUri.toUri())?.use {
                     ExifInterface(it)
                 }
             } catch (e2: Exception) {
@@ -87,35 +92,6 @@ class EditActivity : AppCompatActivity() {
 
         applyEdgeToEdgeBottomInsets(binding.root, false)
         binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
-
-        val exifTags =
-            arrayOf(
-                ExifInterface.TAG_F_NUMBER,
-                ExifInterface.TAG_DATETIME,
-                ExifInterface.TAG_EXPOSURE_TIME,
-                ExifInterface.TAG_FLASH,
-                ExifInterface.TAG_FOCAL_LENGTH,
-                ExifInterface.TAG_GPS_ALTITUDE,
-                ExifInterface.TAG_GPS_ALTITUDE_REF,
-                ExifInterface.TAG_GPS_DATESTAMP,
-                ExifInterface.TAG_GPS_LATITUDE,
-                ExifInterface.TAG_GPS_LATITUDE_REF,
-                ExifInterface.TAG_GPS_LONGITUDE,
-                ExifInterface.TAG_GPS_LONGITUDE_REF,
-                ExifInterface.TAG_GPS_PROCESSING_METHOD,
-                ExifInterface.TAG_GPS_TIMESTAMP,
-                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
-                ExifInterface.TAG_MAKE,
-                ExifInterface.TAG_MODEL,
-                ExifInterface.TAG_WHITE_BALANCE,
-                ExifInterface.WHITE_BALANCE_AUTO,
-                ExifInterface.WHITE_BALANCE_MANUAL,
-            )
-        for (tag in exifTags) {
-            val attribute = sourceExif?.getAttribute(tag.toString())
-            sourceExifAttributeList.add(Pair(tag.toString(), attribute))
-        }
-
         init()
     }
 
@@ -275,78 +251,77 @@ class EditActivity : AppCompatActivity() {
     private fun saveEditedImage() {
         val filePath = imageUri.toUri().path
         var file = filePath?.let { File(it) }
-        val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
 
-        // Apply rotation first if needed
-        if (relativeRotation != 0 && file != null) {
-            val rotatedImage = vm.rotateImage(relativeRotation, file, applicationContext.cacheDir)
-            if (rotatedImage == null) {
-                Toast.makeText(this, "Failed to rotate image", Toast.LENGTH_LONG).show()
-                return
-            }
-            file = rotatedImage
-        }
+        try {
+            val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
+            val currentUri = Uri.fromFile(File(imageUri))
 
-        // Apply crop if in crop mode
-        if (isCropMode && file != null) {
-            // Read ACTUAL dimensions of the (possibly rotated) file
-            val fileDimensions = getImageFileDimensions(file)
-            if (fileDimensions == null) {
-                Toast.makeText(this, "Failed to read image dimensions", Toast.LENGTH_LONG).show()
-                return
-            }
-
-            val (actualWidth, actualHeight) = fileDimensions
-            Timber.d("Actual file dimensions after rotation: ${actualWidth}x${actualHeight}")
-
-            val cropRect = binding.cropOverlay.getCropRect()
-            val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
-
-            if (cropCoords != null) {
-                val croppedImage = vm.cropImage(
-                    file,
-                    cropCoords.left,
-                    cropCoords.top,
-                    cropCoords.width,
-                    cropCoords.height,
-                    applicationContext.cacheDir
-                )
-                if (croppedImage == null) {
-                    Toast.makeText(this, "Failed to crop image", Toast.LENGTH_LONG).show()
+            // Apply rotation first if needed
+            if (relativeRotation != 0 && file != null) {
+                val rotatedImage =
+                    vm.rotateImage(
+                        file, relativeRotation,
+                        applicationContext.cacheDir
+                    )
+                if (rotatedImage == null) {
+                    Toast.makeText(
+                        this@EditActivity,
+                        "Failed to rotate image",
+                        Toast.LENGTH_LONG
+                    ).show()
                     return
                 }
-                file = croppedImage
+                file = rotatedImage
             }
-        }
 
-        // Copy EXIF data
-        if (file?.path != null) {
-            val editedImageExif = ExifInterface(file.path)
-            copyExifData(editedImageExif)
-        }
+            // Apply crop if in crop mode
+            if (isCropMode && file != null) {
+                val properties =
+                    vm.getProperties(currentUri)
 
-        val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath", file?.toUri()?.path ?: "Error")
-        setResult(RESULT_OK, resultIntent)
-        finish()
-    }
-
-    /**
-     * Reads the actual dimensions of an image file.
-     * Returns Pair(width, height) or null if unable to read.
-     */
-    private fun getImageFileDimensions(file: File): Pair<Int, Int>? {
-        return try {
-            val options = BitmapFactory.Options().apply {
-                inJustDecodeBounds = true
+                val actualWidth = properties.width
+                val actualHeight = properties.height
+                val cropRect = binding.cropOverlay.getCropRect()
+                val cropCoords = convertViewCropToImageCrop(
+                    cropRect,
+                    actualWidth, actualHeight
+                )
+                if (cropCoords != null) {
+                    val croppedImage =
+                        vm.cropImage(
+                            file!!,
+                            cropCoords.left,
+                            cropCoords.top,
+                            cropCoords.width,
+                            cropCoords.height,
+                            applicationContext.cacheDir
+                        )
+                    if (croppedImage == null) {
+                        Toast.makeText(
+                            this@EditActivity,
+                            "Failed to crop image",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        return
+                    }
+                    file = croppedImage
+                }
             }
-            BitmapFactory.decodeFile(file.path, options)
-            if (options.outWidth > 0 && options.outHeight > 0) {
-                Pair(options.outWidth, options.outHeight)
-            } else null
+
+            val finalPath = file?.absolutePath
+            val resultIntent = Intent().apply {
+                putExtra("editedImageFilePath", finalPath)
+            }
+            setResult(RESULT_OK, resultIntent)
         } catch (e: Exception) {
-            Timber.e(e, "Failed to read image dimensions")
-            null
+            Timber.e(e, "saveEditedImage: Exception occurred during save process")
+            Toast.makeText(
+                this@EditActivity,
+                "Failed to save image: ${e.localizedMessage}",
+                Toast.LENGTH_LONG
+            ).show()
+        } finally {
+            finish()
         }
     }
 
@@ -534,23 +509,6 @@ class EditActivity : AppCompatActivity() {
         animator.start()
     }
 
-    /**
-     * Copies EXIF data from sourceExifAttributeList to the provided ExifInterface object.
-     *
-     * This function iterates over the `sourceExifAttributeList` and sets the EXIF attributes
-     * on the provided `editedImageExif` object.
-     *
-     * @param editedImageExif The ExifInterface object for the edited image.
-     */
-    private fun copyExifData(editedImageExif: ExifInterface?) {
-        for (attr in sourceExifAttributeList) {
-            Timber.d("Value is ${attr.second}")
-            editedImageExif!!.setAttribute(attr.first, attr.second)
-            Timber.d("Value is ${attr.second}")
-        }
-
-        editedImageExif?.saveAttributes()
-    }
 
     /**
      * Calculates the scale factor to be used for scaling down a bitmap based on its original
