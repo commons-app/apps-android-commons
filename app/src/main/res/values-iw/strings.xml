@@ -148,7 +148,7 @@
   <string name="depicts_search_text_hint">נא לחפש פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="menu_overflow_desc">תפריט גלישה</string>
-  <string name="refresh_button">רענון</string>
+  <string name="refresh_button">ריענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
@@ -222,7 +222,7 @@
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_discussion_empty">אין דיון</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
-  <string name="menu_refresh">רענון</string>
+  <string name="menu_refresh">ריענון</string>
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
   <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
@@ -284,6 +284,7 @@
   <string name="upload_problem_image_dark">התמונה חשוכה מדי.</string>
   <string name="upload_problem_image_blurry">התמונה מטושטשת.</string>
   <string name="upload_problem_image_duplicate">התמונה כבר נמצאת בוויקישיתוף.</string>
+  <string name="upload_problem_image_format_unsupported">התמונה שלך אינה בתסדיר שנתמך על־ידי שרת ויקישיתוף, לכן היישום המיר אותה ל־JPG.</string>
   <string name="upload_problem_different_geolocation">התמונה צולמה במקום אחר.</string>
   <string name="upload_problem_fbmd">נא להעלות רק תמונות שהעלית בעצמך. לא להעלות תמונות שמצאת בחשבונות של כל מיני אנשים בפייסבוק.</string>
   <string name="upload_problem_do_you_continue">האם ברצונך עדיין להעלות את התמונה הזאת?</string>
@@ -451,6 +452,9 @@
   <string name="no_categories_selected_warning_desc">תמונות ללא קטגוריות בדרך כלל אינן שימושיות. להמשיך ללא בחירת קטגוריות?</string>
   <string name="no_depictions_selected">לא נבחרו מוצגים</string>
   <string name="no_depictions_selected_warning_desc">קל יותר למצוא תמונות עם מוצגים ויש סיכוי גבוה יותר שמישהו ישתמש בהן. האם ברצונך באמת להמשיך בלי לבחור מוצגים?</string>
+  <string name="depictions_choose_from_map">בחירה מהמפה</string>
+  <string name="depictions_map_confirm">אישור</string>
+  <string name="depictions_map_no_photo_location">זאת תמונה ללא מיקום, המקום הנוכחי שלך מוצג</string>
   <string name="back_button_warning">ביטול ההעלאה</string>
   <string name="back_button_warning_desc">שימוש בכתפור החזרה יבטל את ההעלאה הזאת וההתקדמות שלך תלך לאיבוד</string>
   <string name="back_button_continue">המשך ההעלאה</string>
@@ -872,4 +876,6 @@
   <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
   <string name="nominated_for_deletion_btn">הועמדה למחיקה</string>
   <string name="custom_selector_max_image_limit_reached">אפשר לבחור עד %d תמונות.</string>
+  <string name="edit_unsupported_format_explanation">עריכה פנימית ביישום זמינה רק לקובצי JPEG. Dad l כדי לערוך תסדירים אחרים, נא להשתמש בכלים חיצוניים.</string>
+  <string name="license_cc0_description">אין זכויות יוצרים. ויתרת על כל הזכויות כך שכולם יכולים להשתמש ביצירה הזאת כראות עיניהם.</string>
 </resources>

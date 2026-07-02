@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxSearchView
+import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
@@ -55,7 +56,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         title = getString(R.string.title_activity_search)
         setSupportActionBar(binding!!.toolbarSearch)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        binding!!.toolbarSearch.setNavigationOnClickListener { onBackPressed() }
+        binding!!.toolbarSearch.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         supportFragmentManager = getSupportFragmentManager()
         setSearchHistoryFragment()
         viewPagerAdapter = ViewPagerAdapter(this, getSupportFragmentManager())
@@ -66,6 +67,33 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         binding!!.searchBox.queryHint = getString(R.string.search_commons)
         binding!!.searchBox.onActionViewExpanded()
         binding!!.searchBox.clearFocus()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                //Remove the backstack entry that gets added when share button is clicked
+                //fixing:https://github.com/commons-app/apps-android-commons/issues/2296
+                if (supportFragmentManager!!.backStackEntryCount == 2) {
+                    supportFragmentManager!!
+                        .beginTransaction()
+                        .remove(mediaDetails!!)
+                        .commit()
+                    supportFragmentManager!!.popBackStack()
+                    supportFragmentManager!!.executePendingTransactions()
+                }
+                if (supportFragmentManager!!.backStackEntryCount == 1) {
+                    // back to search so show search toolbar and hide navigation toolbar
+                    binding!!.searchBox.visibility = View.VISIBLE //set the searchview
+                    binding!!.tabLayout.visibility = View.VISIBLE
+                    binding!!.viewPager.visibility = View.VISIBLE
+                    binding!!.mediaContainer.visibility = View.GONE
+                } else {
+                    binding!!.toolbarSearch.visibility = View.GONE
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        })
     }
 
     /**
@@ -153,7 +181,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
      */
     override fun refreshNominatedMedia(index: Int) {
         if (getSupportFragmentManager().backStackEntryCount == 1) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             onMediaClicked(index)
         }
     }
@@ -202,36 +230,9 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
             //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
             //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
             // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         super.onResume()
-    }
-
-    /**
-     * This method is called on backPressed of anyFragment in the activity.
-     * If condition is called when mediaDetailFragment is opened.
-     */
-    override fun onBackPressed() {
-        //Remove the backstack entry that gets added when share button is clicked
-        //fixing:https://github.com/commons-app/apps-android-commons/issues/2296
-        if (getSupportFragmentManager().backStackEntryCount == 2) {
-            supportFragmentManager!!
-                .beginTransaction()
-                .remove(mediaDetails!!)
-                .commit()
-            supportFragmentManager!!.popBackStack()
-            supportFragmentManager!!.executePendingTransactions()
-        }
-        if (getSupportFragmentManager().backStackEntryCount == 1) {
-            // back to search so show search toolbar and hide navigation toolbar
-            binding!!.searchBox.visibility = View.VISIBLE //set the searchview
-            binding!!.tabLayout.visibility = View.VISIBLE
-            binding!!.viewPager.visibility = View.VISIBLE
-            binding!!.mediaContainer.visibility = View.GONE
-        } else {
-            binding!!.toolbarSearch.visibility = View.GONE
-        }
-        super.onBackPressed()
     }
 
     /**

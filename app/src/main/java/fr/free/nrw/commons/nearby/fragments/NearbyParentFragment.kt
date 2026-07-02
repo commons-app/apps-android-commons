@@ -2323,21 +2323,47 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     /**
+     * Returns a rendering priority for a marker derived from [getIconFor], where a higher value
+     * means the marker is drawn on top (OSMDroid renders overlays last-in = on top).
+     * All place-type logic stays in [getIconFor]; this method only maps icon → priority.
+     *
+     *  5 – Purple  : nearest / highlighted place
+     *  4 – Red     : exists, needs a photo  ← must always be above green
+     *  3 – Monument: WLM monument markers
+     *  2 – Green   : already has a photo
+     *  1 – Grey    : loading (no name yet)
+     *  0 – Clear   : does not exist in the real world
+     */
+    private fun getMarkerPriority(place: Place, isBookmarked: Boolean): Int =
+        when (getIconFor(place, isBookmarked)) {
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked -> 5
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked -> 4
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> 3
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked -> 2
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked -> 1
+            else -> 0 // ic_clear_black_24dp – place does not exist in the real world
+        }
+
+    /**
      * Adds multiple markers representing places to the map and handles item gestures.
+     * Markers are sorted by priority before being added so that higher-priority pins
+     * (e.g. red "needs photo" pins) are always rendered on top of lower-priority ones
+     * (e.g. green "has photo" pins) in the OSMDroid overlay list.
      *
      * @param markerPlaceGroups The list of marker place groups containing the places and
      * their bookmarked status
      */
     override fun replaceMarkerOverlays(markerPlaceGroups: List<MarkerPlaceGroup>) {
-        val newMarkers = ArrayList<Marker>(markerPlaceGroups.size)
-        // iterate in reverse so that the nearest pins get rendered on top
-        for (i in markerPlaceGroups.indices.reversed()) {
-            newMarkers.add(
-                convertToMarker(
-                    markerPlaceGroups[i].place,
-                    markerPlaceGroups[i].isBookmarked
-                )
-            )
+        // Reverse the list first to make it farthest-first (since it comes nearest-first).
+        // Then sort by priority (stable sort). This ensures that within the same priority,
+        // farthest markers are added first (drawn bottom) and nearest are added last (drawn top).
+        val sortedGroups = markerPlaceGroups.reversed().sortedBy { getMarkerPriority(it.place, it.isBookmarked) }
+        val newMarkers = sortedGroups.map { group ->
+            convertToMarker(group.place, group.isBookmarked)
         }
         clearAllMarkers()
         binding!!.map.overlays.addAll(newMarkers)

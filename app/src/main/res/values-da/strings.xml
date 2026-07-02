@@ -261,6 +261,7 @@
   <string name="upload_problem_image_dark">Billedet er for mørkt.</string>
   <string name="upload_problem_image_blurry">Billedet er slørret.</string>
   <string name="upload_problem_image_duplicate">Billedet er allerede på Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Dit billede er i et format, der ikke understøttes af Commons-serveren, så appen konverterede det til JPG.</string>
   <string name="upload_problem_different_geolocation">Billedet blev taget et andet sted.</string>
   <string name="upload_problem_fbmd">Upload kun billeder, som du selv har taget. Lad være med at uploade billeder, som du har fundet på andre folks Facebook-konti.</string>
   <string name="upload_problem_do_you_continue">Ønsker du stadig at uploade dette billede?</string>
@@ -845,6 +846,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
   <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
   <string name="custom_selector_max_image_limit_reached">Du kan højst vælge %d billeder.</string>
+  <string name="edit_unsupported_format_explanation">Redigering i appen er kun tilgængelig for JPEG-filer. Brug et tredjepartsværktøj til at redigere andre formater.</string>
   <string name="license_cc0_description">Ingen ophavsret. Du frasiger dig alle rettigheder, så alle kan bruge dette værk på enhver måde.</string>
   <string name="license_cc_by_description">Kreditering. Andre må gerne dele og tilpasse, så længe de angiver dig som kilde.</string>
   <string name="license_cc_by_sa_description">Kreditering-DelPåSammeVilkår. Andre kan dele og tilpasse, men skal bruge den samme licens og angive dig som kilde.</string>
