@@ -3,13 +3,11 @@ package fr.free.nrw.commons.edit
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
-import fr.free.nrw.commons.ajpegtran.Jpegtran
 import fr.free.nrw.commons.ajpegtran.Properties
 import java.io.File
 
 /**
  * ViewModel for image editing operations.
- * Holds a single [Jpegtran] instance for the entire editing session.
  */
 class EditViewModel : ViewModel() {
     // Ideally should be injected using DI
@@ -18,7 +16,6 @@ class EditViewModel : ViewModel() {
     /**
      * Initialize the single Jpegtran instance for this editing session.
      * Must be called with Application Context from EditActivity.
-     * Keeping in ViewModel to handle configuration changes.
      */
     fun initJpegtran(context: Context, imagePath: String) {
         transformImage.initJpegtran(context, imagePath)
