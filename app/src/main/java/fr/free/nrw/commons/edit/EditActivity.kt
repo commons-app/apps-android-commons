@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.RectF
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -41,7 +40,6 @@ import kotlin.math.roundToInt
 class EditActivity : AppCompatActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
-    private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
     // variable to store the initial exif orientation
     private var startOrientation = 0
@@ -275,7 +273,7 @@ class EditActivity : AppCompatActivity() {
                 if (cropCoords != null) {
                     val croppedImage =
                         vm.cropImage(
-                            file!!,
+                            file,
                             cropCoords.left,
                             cropCoords.top,
                             cropCoords.width,
@@ -362,8 +360,11 @@ class EditActivity : AppCompatActivity() {
         val validLeft = cropLeft.coerceIn(0, actualFileWidth - width)
         val validTop = cropTop.coerceIn(0, actualFileHeight - height)
 
-        Timber.d("Crop conversion: file=${actualFileWidth}x${actualFileHeight}, " +
-                 "crop=($validLeft, $validTop, $width, $height)")
+        Timber.d(
+            "%s%s",
+            "Crop conversion: file=${actualFileWidth}x${actualFileHeight}, ",
+            "crop=($validLeft, $validTop, $width, $height)"
+        )
 
         return CropCoordinates(validLeft, validTop, width, height)
     }
