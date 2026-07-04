@@ -1,18 +1,13 @@
 package fr.free.nrw.commons.edit
 
 import android.content.Context
-import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import androidx.core.net.toUri
 import fr.free.nrw.commons.ajpegtran.Jpegtran
 import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 /**
  * Implementation of the TransformImage interface for image rotation and crop operations.
