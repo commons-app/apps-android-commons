@@ -19,14 +19,14 @@
   <string name="add_contribution_from_photos">បន្ថែមការចូលរួមចំណែកពីរូបថត</string>
   <string name="row_item_language_description">ការពណ៌នាអំពីភាសា</string>
   <string name="row_item_caption">ចំណងជើងរង</string>
-  <string name="show_captions_description">ពិពណ៌នា</string>
+  <string name="show_captions_description">ការពិពណ៌នា</string>
   <string name="nearby_row_image">រូបភាព</string>
   <string name="nearby_all">ទាំងអស់</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
     <item quantity="other">%1$d ឯកសារកំពុងផ្ទុកឡើង</item>
   </plurals>
-  <string name="starting_uploads">ចាប់ផ្ដើមផ្ទុកឡើង</string>
+  <string name="starting_uploads">ចាប់ផ្ដើមអាប់ឡូដ</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ចាប់ផ្ដើមផ្ទុកឡើង %1$d </item>
     <item quantity="other">ចាប់ផ្ដើមផ្ទុកឡើង %1$d</item>
@@ -46,24 +46,24 @@
   <string name="preference_category_general">ទូទៅ​</string>
   <string name="preference_category_feedback">មតិយោបល់</string>
   <string name="preference_category_privacy">ឯកជនភាព</string>
-  <string name="app_name">ទូទៅ</string>
+  <string name="app_name">វិគីមេឌារួម</string>
   <string name="menu_settings">ការកំណត់​</string>
   <string name="intent_share_upload_label">អាប់ឡូដទៅកាន់ Commons</string>
   <string name="upload_in_progress">អាប់ឡូដកំពុងដំណើរការ</string>
-  <string name="username">ឈ្មោះអ្នកប្រើ</string>
+  <string name="username">អត្ថនាម</string>
   <string name="password">ពាក្យ​សម្ងាត់</string>
-  <string name="login_credential">កត់ឈ្មោះចូលទៅក្នុងគណនីវិគីមេឌារួមបេតា</string>
-  <string name="login">កត់ឈ្មោះចូល</string>
+  <string name="login_credential">បញ្ជាប់ចូលទៅក្នុងគណនីវិគីមេឌារួមបេតា</string>
+  <string name="login">បញ្ជាប់ចូល</string>
   <string name="forgot_password">ភ្លេច​ពាក្យ​សម្ងាត់?</string>
   <string name="signup">ចុះ​ឈ្មោះ</string>
-  <string name="logging_in_title">កំពុងកត់ឈ្មោះចូល</string>
+  <string name="logging_in_title">កំពុងបញ្ជាប់ចូល</string>
   <string name="logging_in_message">សូមរង់ចាំបន្តិច…</string>
-  <string name="updating_caption_message">សូមរង់ចាំ…</string>
+  <string name="updating_caption_message">សូមរង់ចាំបន្តិច…</string>
   <string name="login_success">បញ្ជាប់ចូលបានជោគជ័យ!</string>
   <string name="login_failed">បញ្ជាប់ចូលបានបរាជ័យ!</string>
   <string name="upload_failed">រកមិនឃើញឯកសារទេ។ សូមសាកល្បងជាមួយឯកសារផ្សេងមួយទៀត។</string>
   <string name="authentication_failed">យថាភូតកម្មបានបរាជ័យ។ សូមបញ្ជាប់ចូលម្ដងទៀត។</string>
-  <string name="uploading_started">ការផ្ទុកឡើងបានចាប់ផ្តើមហើយ!</string>
+  <string name="uploading_started">អាប់ឡូដបានចាប់ផ្តើមហើយ!</string>
   <string name="uploading_queued">ជួរផ្ទុកឡើង (បានបើកម៉ូតដែនកំហិតតភ្ជាប់)</string>
   <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
   <string name="upload_completed_notification_text">ចុចដើម្បីមើលអ្វីដែលអ្នកផ្ទុកឡើង</string>
@@ -105,7 +105,7 @@
   <string name="refresh_button">ផ្ទុកឡើងវិញ</string>
   <string name="display_list_button">បញ្ជី</string>
   <string name="contributions_subtitle_zero">(មិនទាន់អាប់ឡូដនៅឡើយ)</string>
-  <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
+  <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ឡើយ</string>
   <string name="depictions_not_found">រកមិនឃើញធាតុវិធីទិន្នន័យដែលត្រូវគ្នានឹង %1$s ឡើយ</string>
   <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរកក្នុងវិគីមេឌារួម។ ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។</string>
   <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
@@ -113,9 +113,9 @@
   <string name="title_activity_signup">ចុះឈ្មោះ​</string>
   <string name="title_activity_featured_images">រូបភាពឆ្នើម</string>
   <string name="menu_about">អំពី</string>
-  <string name="about_license">កម្មវិធីវិគីមេឌៀទូទៅ គឺជាកម្មវិធីប្រភពបើកទូលាយដែលបានបង្កើតនិងបានថែទាំ ដោយអនុប្បទានិកនិងអ្នកស្ម័គ្រចិត្តនៃសហគមន៍វិគីមេឌៀ។ មូលនិធិវិគីមេឌៀ គឺមិនបានចូលរួមក្នុងការបង្កើត អភិវឌ្ឍន៍ រឺក៏ថែទាំកម្មវិធីនេះដែរ។</string>
+  <string name="about_license">កម្មវិធីវិគីមេឌារួម គឺជាកម្មវិធីប្រភពបើកចំហដែលត្រូវបានបង្កើត និងថែទាំដោយអនុប្បទានិក និងអ្នកស្ម័គ្រចិត្តនៃសហគមន៍វិគីមេឌា។ មូលនិធិវិគីមេឌាមិនបានពាក់ព័ន្ធនឹងការបង្កើត ការអភិវឌ្ឍ ឬថែទាំកម្មវិធីនោះទេ។</string>
   <string name="about_improve">បង្កើត &lt;a href=\"%1$s\"&gt;បញ្ហាថ្មីនៃ GitHub&lt;/a&gt; សម្រាប់របាយការណ៍កំហុស និងការណែនាំនានា។</string>
-  <string name="about_privacy_policy">គោលការណ៍​ភាព​ឯកជន</string>
+  <string name="about_privacy_policy">គោលការណ៍ឯកជនភាព</string>
   <string name="about_credits">ក្រេឌីត</string>
   <string name="title_activity_about">អំពី</string>
   <string name="menu_feedback">ផ្ញើមតិយោបល់ (តាមអ៊ីមែល)</string>
@@ -126,7 +126,7 @@
   <string name="menu_cancel_upload">បោះបង់</string>
   <string name="language_search_all_languages">ភាសាទាំងអស់</string>
   <string name="menu_download">ទាញយក</string>
-  <string name="preference_license">អាជ្ញាបណ្ណលំនាំដើម</string>
+  <string name="preference_license">អាជ្ញាបណ្ណបុរេជម្រើស</string>
   <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -142,25 +142,25 @@
   <string name="detail_panel_cats_loading">កំពុងផ្ទុក…</string>
   <string name="detail_panel_cats_none">គ្មានអ្វីត្រូវបានជ្រើសយកទេ</string>
   <string name="detail_description_empty">គ្មាន​ការ​ពណ៌នា</string>
-  <string name="detail_license_empty">Unknown license</string>
-  <string name="menu_refresh">ធ្វើឱ្យស្រស់</string>
+  <string name="detail_license_empty">អាជ្ញាបណ្ណមិនស្គាល់</string>
+  <string name="menu_refresh">ផ្ទុកឡើងវិញ</string>
   <string name="welcome_image_mount_zao">ភ្នំហ្សាអូ</string>
   <string name="welcome_image_rainbow_bridge">ស្ពានឥន្ទធនូ</string>
-  <string name="welcome_image_sydney_opera_house">មហោស្រពអូប៉េរាទីក្រុងស៊ីដនី</string>
+  <string name="welcome_image_sydney_opera_house">មហោស្រពអូប៉េរ៉ាទីក្រុងស៊ីដនី</string>
   <string name="cancel">បោះបង់</string>
   <string name="navigation_drawer_open">បើក</string>
   <string name="navigation_drawer_close">បិទ</string>
   <string name="navigation_item_home">ទំព័រដើម</string>
-  <string name="navigation_item_upload">ផ្ទុកឡើង​</string>
+  <string name="navigation_item_upload">អាប់ឡូដ</string>
   <string name="navigation_item_nearby">ជិតខាង</string>
   <string name="navigation_item_about">អំពី</string>
   <string name="navigation_item_settings">ការកំណត់​</string>
   <string name="navigation_item_feedback">មតិយោបល់</string>
-  <string name="navigation_item_logout">កត់ឈ្មោះចេញ</string>
+  <string name="navigation_item_logout">បណ្ដាច់ចេញ</string>
   <string name="navigation_item_info">រៀនប្រើ</string>
   <string name="navigation_item_notification">សារជូនដំណឹង</string>
   <string name="no_description_found">គ្មានការពិពណ៌នា</string>
-  <string name="nearby_info_menu_wikidata_article">វត្ថុក្នុងវិគីទិន្នន័យ</string>
-  <string name="nearby_info_menu_wikipedia_article">អត្ថបទវិគីភីឌៀ</string>
-  <string name="nearby_wikipedia">វិគីភីឌៀ</string>
+  <string name="nearby_info_menu_wikidata_article">ធាតុនៃវិគីទិន្នន័យ</string>
+  <string name="nearby_info_menu_wikipedia_article">អត្ថបទវិគីភីឌា</string>
+  <string name="nearby_wikipedia">វិគីភីឌា</string>
 </resources>
