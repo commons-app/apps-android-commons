@@ -33,8 +33,8 @@ import kotlin.math.roundToInt
  * An activity class for editing and rotating images using Jpegtran.
  *
  * This activity allows loads an image, allows users to rotate it by 90-degree increments, and
- * save the edited image while preserving its EXIF attributes. The class includes methods
- * for initializing the UI, animating image rotations, copying EXIF data, and handling
+ * save the edited image while preserving its EXIF attributes by default with jpegtran. The class includes methods
+ * for initializing the UI, animating image rotations and handling
  * the image-saving process.
  */
 class EditActivity : AppCompatActivity() {
