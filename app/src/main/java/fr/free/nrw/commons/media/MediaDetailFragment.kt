@@ -409,13 +409,17 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
          * of the picture.
          */
-        view.post{
+        view.post {
+            if (_binding == null) return@post
             val width = binding.mediaDetailScrollView.width
             if (width > 0) {
                 frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
                 updateAspectRatio(width)
             } else {
-                view.postDelayed({ updateAspectRatio(binding.root.width) }, 1)
+                view.postDelayed({
+                    if (_binding == null) return@postDelayed
+                    updateAspectRatio(binding.root.width)
+                }, 1)
             }
         }
 
@@ -533,7 +537,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    if (context == null) {
+                    if (context == null || _binding == null) {
                         return
                     }
                     binding.mediaDetailScrollView.viewTreeObserver.removeOnGlobalLayoutListener(
@@ -553,13 +557,20 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
+        if (_binding == null) {
+            return
+        }
         binding.mediaDetailScrollView.viewTreeObserver.addOnGlobalLayoutListener(
             object : OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
+                    if (_binding == null) {
+                        return
+                    }
                     /**
                      * We update the height of the frame layout as the configuration changes.
                      */
                     binding.mediaDetailFrameLayout.post {
+                        if (_binding == null) return@post
                         frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
                         updateAspectRatio(binding.mediaDetailScrollView.width)
                     }
@@ -719,6 +730,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         object : BaseControllerListener<ImageInfo?>() {
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
                 imageInfoCache = imageInfo
+                if (_binding == null) return
                 updateAspectRatio(binding.mediaDetailScrollView.width)
             }
 
@@ -728,6 +740,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 animatable: Animatable?
             ) {
                 imageInfoCache = imageInfo
+                if (_binding == null) return
                 updateAspectRatio(binding.mediaDetailScrollView.width)
             }
         }
@@ -799,6 +812,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         compositeDisposable.clear()
 
+        _binding = null
         super.onDestroyView()
     }
 
