@@ -70,7 +70,6 @@ soloader = "0.10.5"
 timber = "4.7.1"
 uiautomator = "2.2.0"
 workManager = "2.8.1"
-runtime = "1.0.0-alpha15"
 
 [libraries]
 # AndroidX Core Dependencies
@@ -205,7 +204,6 @@ coordinates2country-android = { module = "io.github.coordinates2country:coordina
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlinStdlib" }
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinStdlib" }
-androidx-runtime = { group = "androidx.xr.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

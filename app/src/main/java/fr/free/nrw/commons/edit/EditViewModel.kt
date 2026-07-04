@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.ajpegtran.Jpegtran
 import fr.free.nrw.commons.ajpegtran.Properties
-import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import java.io.File
 
 /**
@@ -53,7 +52,7 @@ class EditViewModel : ViewModel() {
         imageFile: File,
         degree: Int,
         savePath: File
-    ): File? {
+    ): File {
         return transformImage.rotateImage(imageFile, degree, savePath)
     }
 
@@ -74,5 +73,5 @@ class EditViewModel : ViewModel() {
         width: Int,
         height: Int,
         savePath: File,
-    ): File? = transformImage.cropImage(imageFile, left, top, width, height, savePath)
+    ): File = transformImage.cropImage(imageFile, left, top, width, height, savePath)
 }

@@ -289,7 +289,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     View.VISIBLE
                 }
 
-            // Jpegtran only supports lossless JPEG rotation, so we disable editing for other formatts
+            // Jpegtran only supports lossless JPEG rotation, so we disable editing for other formats
             val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
             val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
                     || filePath.endsWith(".jpg", ignoreCase = true)
