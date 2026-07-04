@@ -30,8 +30,15 @@ class TransformImageImpl : TransformImage {
      */
     override fun initJpegtran(context: Context, imagePath: String) {
         if (jpegtran == null) {
+            val imageUri =
+                if (imagePath.startsWith("content://") || imagePath.startsWith("file://"))
+                // It's a URI string, parse it directly.
+                    imagePath.toUri()
+                else
+                // It's a raw file path, convert it safely.
+                    File(imagePath).toUri()
             jpegtran = Jpegtran(
-                context, Uri.fromFile(File(imagePath))
+                context, imageUri
             )
         }
     }
@@ -78,11 +85,11 @@ class TransformImageImpl : TransformImage {
         try {
             jpegtran!!.rotate(rotationDegree)
             jpegtran!!.save(output.toUri())
+            return output
         } catch (e: Exception) {
             Timber.e(e, "saveEditedImage: Failed to rotate image")
             throw e
         }
-        return output
     }
 
     /**
@@ -116,10 +123,10 @@ class TransformImageImpl : TransformImage {
                 top
             )
             jpegtran!!.save(output.toUri())
+            return output
         } catch (e: Exception) {
-            Timber.e(e, "saveEditedImage: Failed to rotate image")
+            Timber.e(e, "saveEditedImage: Failed to crop image")
             throw e
         }
-        return output
     }
 }

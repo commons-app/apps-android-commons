@@ -2,9 +2,7 @@ package fr.free.nrw.commons.edit
 
 import android.content.Context
 import android.net.Uri
-import fr.free.nrw.commons.ajpegtran.Jpegtran
 import fr.free.nrw.commons.ajpegtran.Properties
-import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import java.io.File
 
 /**
@@ -41,7 +39,8 @@ interface TransformImage {
     fun rotateImage(
         imageFile: File,
         degree: Int,
-        savePath: File): File?
+        savePath: File
+    ): File
 
     /**
      * Crops the specified image file using lossless JPEG cropping.
@@ -60,5 +59,5 @@ interface TransformImage {
         width: Int,
         height: Int,
         savePath: File,
-    ): File?
+    ): File
 }

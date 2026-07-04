@@ -21,14 +21,9 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -254,7 +249,6 @@ class EditActivity : AppCompatActivity() {
 
         try {
             val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
-            val currentUri = Uri.fromFile(File(imageUri))
 
             // Apply rotation first if needed
             if (relativeRotation != 0 && file != null) {
@@ -263,21 +257,13 @@ class EditActivity : AppCompatActivity() {
                         file, relativeRotation,
                         applicationContext.cacheDir
                     )
-                if (rotatedImage == null) {
-                    Toast.makeText(
-                        this@EditActivity,
-                        "Failed to rotate image",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    return
-                }
                 file = rotatedImage
             }
 
             // Apply crop if in crop mode
             if (isCropMode && file != null) {
                 val properties =
-                    vm.getProperties(currentUri)
+                    vm.getProperties(file.toUri())
 
                 val actualWidth = properties.width
                 val actualHeight = properties.height
@@ -296,14 +282,6 @@ class EditActivity : AppCompatActivity() {
                             cropCoords.height,
                             applicationContext.cacheDir
                         )
-                    if (croppedImage == null) {
-                        Toast.makeText(
-                            this@EditActivity,
-                            "Failed to crop image",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        return
-                    }
                     file = croppedImage
                 }
             }
