@@ -540,6 +540,7 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random fénykép az Internetről</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Azért, mert</string>
+  <string name="category_edit_helper_show_edit_title_success">Sikeres</string>
   <string name="share_image_via">Kép megosztása ezen keresztül:</string>
   <string name="no_achievements_yet">%1$s még nem adott hozzájárulást</string>
   <string name="account_created">Fiók létrehozva!</string>
@@ -559,8 +560,31 @@
   <string name="theme_default_name">Rendszerbeállítás követése</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
+  <string name="cannot_open_location_settings">Nem sikerült megnyitni a helybeállításokat. Kapcsold be a helymeghatározást kézzel.</string>
+  <string name="recommend_high_accuracy_mode">A legjobb eredmény érdekében válaszd a Nagy pontosságú módot.</string>
+  <string name="ask_to_turn_location_on">Bekapcsolod a helymeghatározást?</string>
+  <string name="ask_to_turn_location_on_text">Kapcsold be a helyszolgáltatásokat, hogy az alkalmazás megjeleníthesse a jelenlegi helyedet</string>
+  <string name="nearby_needs_location">A Közeli funkció megfelelő működéséhez be kell kapcsolni a helymeghatározást</string>
+  <string name="todo_improve">Javasolt javítások:</string>
+  <string name="missing_category">- Adj kategóriákat ehhez a képhez a használhatóság javítása érdekében.</string>
+  <string name="missing_article">- Add hozzá ezt a képet a kapcsolódó, képek nélküli Wikipédia-szócikkhez.</string>
+  <string name="add_picture_to_wikipedia_article_title">Kép hozzáadása a Wikipédiához</string>
+  <string name="add_picture_to_wikipedia_article_desc">Szeretnéd hozzáadni ezt a képet a(z) %1$s nyelvű Wikipédia-szócikkhez?</string>
   <string name="confirm">Megerősítés</string>
   <string name="instructions_title">Útmutatók</string>
+  <string name="wikipedia_instructions_step_1">1. Használd az alábbi wikiszöveget:</string>
+  <string name="wikipedia_instructions_step_2">2. A Megerősítés gombra kattintva megnyílik a Wikipédia-szócikk</string>
+  <string name="wikipedia_instructions_step_3">3. Keress megfelelő szakaszt a szócikkben a képed számára</string>
+  <string name="wikipedia_instructions_step_4">4. Kattints az adott szakasznál a Szerkesztés ikonra, amely ceruzára hasonlít.</string>
+  <string name="wikipedia_instructions_step_5">5. Illeszd be a wikiszöveget a megfelelő helyre.</string>
+  <string name="wikipedia_instructions_step_6">6. Szükség esetén szerkeszd a wikiszöveget a megfelelő elhelyezés érdekében. További információért lásd &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;itt&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_7">7. Tedd közzé a szócikket</string>
+  <string name="copy_wikicode_to_clipboard">Wikiszöveg másolása a vágólapra</string>
+  <string name="pause">szüneteltetés</string>
+  <string name="resume">folytatás</string>
+  <string name="paused">Szüneteltetve</string>
+  <string name="more">Több</string>
+  <string name="bookmarks">Könyvjelzők</string>
   <string name="achievements_tab_title">Eredmények</string>
   <string name="leaderboard_tab_title">Ranglista</string>
   <string name="rank_prefix">Helyezés:</string>
@@ -585,6 +609,7 @@
   <string name="limited_connection_mode">Korlátozott kapcsolat mód</string>
   <string name="statistics_quality">Minőségi képek</string>
   <string name="quality_images_info">A minőségi képek olyan ábrák vagy fényképek, amelyek megfelelnek bizonyos, többnyire technikai jellegű minőségi követelményeknek, és értékesek a Wikimédia-projektek számára</string>
+  <string name="resuming_upload">Feltöltés folytatása…</string>
   <string name="pausing_upload">Feltöltés szüneteltetése…</string>
   <string name="cancelling_upload">Feltöltés megszakítása…</string>
   <string name="cancel_upload">Feltöltés megszakítása</string>
@@ -662,4 +687,13 @@
   <string name="account_vanish_request_confirm_title">Figyelmeztetés a fiók eltüntetéséről</string>
   <string name="account_vanish_request_confirm">Az eltüntetés &lt;b&gt;végső megoldás&lt;/b&gt;, és &lt;b&gt;csak akkor használd, ha végleg abba szeretnéd hagyni a szerkesztést&lt;/b&gt;, valamint a lehető legtöbb korábbi kapcsolódásodat el szeretnéd rejteni.&lt;br/&gt;&lt;br/&gt;A Wikimédia Commonsban a fiók törlése úgy történik, hogy a fióknevedet megváltoztatják, hogy mások ne ismerhessék fel a közreműködéseidet; ezt a folyamatot fiókeltüntetésnek nevezik. &lt;b&gt;A fiók eltüntetése nem garantál teljes névtelenséget, és nem távolítja el a projektekhez tett közreműködéseidet&lt;/b&gt;.</string>
   <string name="caption">Képaláírás</string>
+  <string name="nominated_for_deletion_btn">Törlésre jelölve</string>
+  <string name="custom_selector_max_image_limit_reached">Legfeljebb %d képet tudsz kijelölni.</string>
+  <string name="edit_unsupported_format_explanation">Az alkalmazáson belüli szerkesztés csak JPEG-fájloknál érhető el. Más formátumok szerkesztéséhez használj külső eszközt.</string>
+  <string name="license_cc0_description">Szerzői jogok nélkül. Lemondasz minden jogodról, így bárki bármilyen módon felhasználhatja ezt a művet.</string>
+  <string name="license_cc_by_description">Nevezd meg! Mások szabadon megoszthatják és átdolgozhatják, amennyiben feltüntetnek szerzőként.</string>
+  <string name="license_cc_by_sa_description">Nevezd meg! – Így add tovább! Mások megoszthatják és átdolgozhatják, de ugyanazt a licencet kell használniuk, és fel kell tüntetniük szerzőként.</string>
+  <string name="license_cc0_long_description">Ez a licenc lehetővé teszi az újrafelhasználók számára, hogy az anyagot bármilyen médiumban vagy formátumban terjesszék, remixeljék, átdolgozzák és továbbépítsék, feltételek nélkül.</string>
+  <string name="license_cc_by_long_description">Ez a licenc lehetővé teszi az újrafelhasználók számára, hogy az anyagot bármilyen médiumban vagy formátumban terjesszék, remixeljék, átdolgozzák és továbbépítsék, akár kereskedelmi célból is, amennyiben feltüntetik az alkotót.</string>
+  <string name="license_cc_by_sa_long_description">Ez a licenc lehetővé teszi az újrafelhasználók számára, hogy az anyagot bármilyen médiumban vagy formátumban terjesszék, remixeljék, átdolgozzák és továbbépítsék, akár kereskedelmi célból is, amennyiben feltüntetik az alkotót, és az új művet azonos feltételekkel licencelik.</string>
 </resources>
