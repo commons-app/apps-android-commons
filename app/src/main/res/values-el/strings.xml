@@ -277,6 +277,7 @@
   <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
   <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
   <string name="upload_problem_image_duplicate">Η εικόνα είναι ήδη στα Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Η εικόνα σας είναι σε μορφή που δεν υποστηρίζεται από τον διακομιστή του Commons, οπότε η εφαρμογή την μετατρέψε σε JPG.</string>
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
   <string name="upload_problem_fbmd">Παρακαλούμε ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Μην ανεβάζετε φωτογραφίες που έχετε βρει σε λογαριασμούς άλλων ατόμων στο Facebook.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμα να ανεβάσετε αυτήν την φωτογραφία;</string>
@@ -444,7 +445,9 @@
   <string name="no_categories_selected_warning_desc">Οι εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες;</string>
   <string name="no_depictions_selected">Δεν έχουν επιλεγεί απεικονίσεις</string>
   <string name="no_depictions_selected_warning_desc">Οι εικόνες με απεικονίσεις είναι πιο εύκολα ανιχνεύσιμες και πιο πιθανό να χρησιμοποιηθούν. Θέλετε σίγουρα να συνεχίσετε χωρίς να επιλέξετε απεικονίσεις;</string>
+  <string name="depictions_choose_from_map">Επιλέξτε από τον χάρτη</string>
   <string name="depictions_map_confirm">Επιβεβαίωση</string>
+  <string name="depictions_map_no_photo_location">Η φωτογραφία δεν έχει τοποθεσία, εμφανίζοντας την τρέχουσα τοποθεσία σας</string>
   <string name="back_button_warning">Ακύρωση Μεταφόρτωσης</string>
   <string name="back_button_warning_desc">Χρησιμοποιώντας το κουμπί επιστροφής θα ακυρώσετε αυτή τη μεταφόρτωση και θα χάσετε την πρόοδό σας</string>
   <string name="back_button_continue">Συνέχιση Μεταφόρτωσης</string>
@@ -553,6 +556,8 @@
   <string name="delete_helper_ask_spam_selfie">μια selfie που δεν χρησιμοποιείται σε κανένα άρθρο</string>
   <string name="delete_helper_ask_spam_blurry">εντελώς θολή</string>
   <string name="delete_helper_ask_spam_nonsense">ανοησίες, απολύτως άχρηστες σε οποιοδήποτε άρθρο</string>
+  <string name="delete_helper_ask_spam_other">Άλλο: προσδιορίστε παρακάτω</string>
+  <string name="delete_helper_other_notes_hint">Αιτιολόγηση</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Πατήστε φωτογραφία</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Τυχαία φωτογραφία από το διαδίκτυο</string>
   <string name="delete_helper_ask_reason_copyright_logo">Λογότυπο</string>
@@ -825,6 +830,7 @@
   <string name="pending">Σε εκκρεμότητα</string>
   <string name="failed">Απέτυχε</string>
   <string name="could_not_load_place_data">Δεν ήταν δυνατή η φόρτωση δεδομένων της θέσης</string>
+  <string name="warning_for_no_option_selected">Επιλέξτε οποιαδήποτε από τις επιλογές για να απαντήσετε στην ερώτηση</string>
   <string name="custom_selector_delete_folder">Διαγραφή φακέλου</string>
   <string name="custom_selector_confirm_deletion_title">Επιβεβαίωση διαγραφής</string>
   <string name="custom_selector_confirm_deletion_message">Είστε βέβαιοι ότι θέλετε να διαγράψετε τον φάκελο %1$s που περιέχει %2$d στοιχεία;</string>
@@ -833,13 +839,19 @@
   <string name="custom_selector_folder_deleted_success">Ο φάκελος %1$s διαγράφηκε με επιτυχία</string>
   <string name="custom_selector_folder_deleted_failure">Αποτυχία διαγραφής του φακέλου %1$s</string>
   <string name="custom_selector_error_trashing_folder_contents">Σφάλμα κατά την αποστολή των περιεχομένων του φακέλου στον κάδο απορριμμάτων: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Αποτυχία ανάκτησης διαδρομής φακέλου για το αναγνωριστικό κάδου: %1$d</string>
   <string name="red_pin">Αυτό το μέρος δεν έχει ακόμα φωτογραφία, πήγαινε να βγάλεις μία!</string>
   <string name="green_pin">Αυτό το μέρος έχει ήδη μια φωτογραφία.</string>
   <string name="grey_pin">Τώρα ελέγχεται αν αυτό το μέρος έχει φωτογραφία.</string>
   <string name="error_while_loading">Σφάλμα κατά τη φόρτωση</string>
   <string name="no_usages_found">Δεν βρέθηκαν χρήσεις</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Άλλα wiki</string>
   <string name="file_usages_container_heading">Χρήσεις αρχείου</string>
   <string name="account">Λογαριασμός</string>
+  <string name="vanish_account">Εξαφάνιση Λογαριασμού</string>
+  <string name="account_vanish_request_confirm_title">Προειδοποίηση εξαφάνισης λογαριασμού</string>
+  <string name="account_vanish_request_confirm">Η εξαφάνιση είναι η &lt;b&gt;έσχατη λύση&lt;/b&gt; και θα πρέπει &lt;b&gt;να χρησιμοποιείται μόνο όταν θέλετε να σταματήσετε την επεξεργασία για πάντα&lt;/b&gt; και επίσης να αποκρύψετε όσο το δυνατόν περισσότερες από τις προηγούμενες συσχετίσεις σας.&lt;br/&gt;&lt;br/&gt;Η διαγραφή λογαριασμού στα Wikimedia Commons γίνεται αλλάζοντας το όνομα του λογαριασμού σας, ώστε άλλοι να μην μπορούν να αναγνωρίσουν τις συνεισφορές σας, σε μια διαδικασία που ονομάζεται εξαφάνιση λογαριασμού. &lt;b&gt;Η εξαφάνιση δεν εγγυάται πλήρη ανωνυμία ούτε την κατάργηση συνεισφορών στα έργα&lt;/b&gt;.</string>
   <string name="caption">Λεζάντα</string>
   <string name="caption_copied_to_clipboard">Η λεζάντα αντιγράφηκε στο πρόχειρο</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Συγχαρητήρια, όλες οι φωτογραφίες σε αυτό το άλμπουμ έχουν είτε μεταφορτωθεί είτε επισημανθεί για μη μεταφόρτωση.</string>
@@ -849,4 +861,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Δημιουργήθηκε από %1$s και μεταφορτώθηκε από %2$s</string>
   <string name="nominated_for_deletion_btn">Προτάθηκε για Διαγραφή</string>
   <string name="custom_selector_max_image_limit_reached">Μπορείτε να επιλέξετε μόνο έως %d εικόνες.</string>
+  <string name="edit_unsupported_format_explanation">Η επεξεργασία εντός της εφαρμογής είναι διαθέσιμη μόνο για αρχεία JPEG. Για να επεξεργαστείτε άλλες μορφές, χρησιμοποιήστε ένα εργαλείο τρίτου μέρους.</string>
+  <string name="license_cc0_description">Δεν υπάρχουν πνευματικά δικαιώματα. Απελευθερώνετε όλα τα δικαιώματα, ώστε ο καθένας να μπορεί να χρησιμοποιήσει αυτό το έργο με οποιονδήποτε τρόπο.</string>
+  <string name="license_cc_by_description">Αναφορά προέλευσης. Άλλοι είναι ελεύθεροι να κοινοποιήσουν και να προσαρμόσουν, εφόσον σας αναφέρουν.</string>
+  <string name="license_cc_by_sa_description">Αναφορά-Παρόμοια Διανομή. Άλλοι μπορούν να κοινοποιήσουν και να προσαρμόσουν, αλλά πρέπει να χρησιμοποιούν την ίδια άδεια χρήσης και να σας αναφέρουν στην αναφορά.</string>
+  <string name="license_cc0_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, χωρίς όρους.</string>
+  <string name="license_cc_by_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, ακόμη και για εμπορικούς σκοπούς, εφόσον αναφέρεται ο δημιουργός.</string>
+  <string name="license_cc_by_sa_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, ακόμη και για εμπορικούς σκοπούς, εφόσον αναφέρεται ο δημιουργός και το νέο έργο διατίθεται με τους ίδιους όρους.</string>
 </resources>

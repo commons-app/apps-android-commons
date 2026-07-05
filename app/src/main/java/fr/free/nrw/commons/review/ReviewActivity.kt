@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.getUserName
@@ -26,6 +27,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.Locale
 import javax.inject.Inject
+import androidx.core.view.isVisible
 
 class ReviewActivity : BaseActivity() {
 
@@ -120,10 +122,22 @@ class ReviewActivity : BaseActivity() {
                 false
             }
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.mediaDetailContainer.isVisible) {
+                    binding.mediaDetailContainer.visibility = View.GONE
+                    binding.reviewActivityContainer.visibility = View.VISIBLE
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -307,22 +321,6 @@ class ReviewActivity : BaseActivity() {
                 .addToBackStack("MediaDetail")
                 .commit()
         }
-    }
-
-    /**
-     * handle the back pressed event of this activity
-     * this function call every time when back button is pressed
-     */
-    @Deprecated("This method has been deprecated in favor of using the" +
-            "{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}." +
-            "The OnBackPressedDispatcher controls how back button events are dispatched" +
-            "to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        if (binding.mediaDetailContainer.visibility == View.VISIBLE) {
-            binding.mediaDetailContainer.visibility = View.GONE
-            binding.reviewActivityContainer.visibility = View.VISIBLE
-        }
-        super.onBackPressed()
     }
 
     /**

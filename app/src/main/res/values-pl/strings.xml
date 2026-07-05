@@ -161,7 +161,7 @@
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
-  <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
+  <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidanych pasujących do %1$s</string>
   <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>
   <string name="no_parent_classes">%1$s nie ma klas nadrzędnych</string>
   <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
@@ -361,7 +361,7 @@
   <string name="explore_tab_title_mobile">Przesłane z aplikacji</string>
   <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Dodano do %1$s w Wikidanych!</string>
-  <string name="wikidata_edit_failure">Nie udało się zaktualizować odpowiedniego obiektu Wikidata!</string>
+  <string name="wikidata_edit_failure">Nie udało się zaktualizować odpowiedniego obiektu Wikidanych!</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
@@ -816,7 +816,7 @@
   </plurals>
   <string name="multiple_files_depiction">Pamiętaj, że wszystkie obrazy w wielokrotnym przesłaniu mają te same kategorie i przedstawienia. Jeśli obrazy nie mają wspólnych przedstawień i kategorii, wykonaj kilka oddzielnych przesłań.</string>
   <string name="multiple_files_depiction_header">Uwaga dotycząca przesyłania wielu obrazów na raz</string>
-  <string name="nearby_wikitalk">Zgłoś problem dotyczący tego elementu do Wikidata</string>
+  <string name="nearby_wikitalk">Zgłoś problem dotyczący tego elementu do Wikidanych</string>
   <string name="please_enter_some_comments">Wprowadź komentarz poniżej</string>
   <string name="talk">Dyskusja</string>
   <string name="write_something_about_the_item">Napisz coś o elemencie \' %1$s\'. Będzie to publicznie widoczne.</string>
