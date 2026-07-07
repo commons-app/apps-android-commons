@@ -534,7 +534,10 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      */
     private fun checkAccount(): Boolean {
         val currentAccount = sessionManager.currentAccount
-        if (!userName.isNullOrBlank()) {
+        // Allow viewing another user's public profile without requiring login
+        if (!userName.isNullOrBlank() &&
+            userName != sessionManager.userName
+        ) {
             return true
         }
         if (currentAccount == null) {
