@@ -511,7 +511,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             receiveInternalSharedItems()
         }
 
-        // Filter the files using the correct property
+        // Filter out unsupported image types (like HEIC, WebP, GIF) to ensure we strictly accept only JPEG, PNG, and SVG formats, while allowing valid audio files to pass through
         val originalSize = uploadableFiles.size
         uploadableFiles = uploadableFiles.filter { file ->
             file.contentUri?.let { uri ->
@@ -725,11 +725,12 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
      */
 
 
+    val supportedFormatsList = "\n• JPEG\n• PNG\n• SVG\n• OGG (Audio)"
         if (uploadableFiles.isEmpty() && originalSize > 0) {
             showAlertDialog(
                 this,
                 getString(R.string.unsupported_format_title),
-                getString(R.string.unsupported_format_desc),
+                getString(R.string.unsupported_format_desc) + supportedFormatsList,
                 getString(R.string.ok)
             ) {
                 finish()
@@ -741,7 +742,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             showAlertDialog(
                 this,
                 getString(R.string.unsupported_files_skipped_title),
-                getString(R.string.unsupported_files_skipped_desc),
+                getString(R.string.unsupported_files_skipped_desc) + supportedFormatsList,
                 getString(R.string.ok)
             ) {
                 proceedWithSetup()
