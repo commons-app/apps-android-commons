@@ -161,7 +161,8 @@ object FileUtils {
         "image/jpeg",
         "image/jpg",
         "image/png",
-        "image/svg+xml"
+        "image/svg+xml",
+        "audio/ogg"
     )
 
     fun isSupportedFileType(context: Context, uri: Uri): Boolean {
