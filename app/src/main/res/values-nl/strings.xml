@@ -778,9 +778,9 @@
   <string name="menu_view_report">Rapporteren</string>
   <string name="menu_view_set_white_background">Witte achtergrond instellen</string>
   <string name="menu_view_set_black_background">Zwarte achtergrond instellen</string>
-  <string name="report_violation">Overtreding rapporteren</string>
-  <string name="report_user">Deze gebruiker rapporteren</string>
-  <string name="report_content">Deze inhoud rapporteren</string>
+  <string name="report_violation">Overtreding melden</string>
+  <string name="report_user">Deze gebruiker melden</string>
+  <string name="report_content">Deze inhoud melden</string>
   <string name="request_user_block">Verzoeken deze gebruiker te blokkeren</string>
   <string name="welcome_to_full_screen_mode_text">Welkom bij de selectiemodus op volledig scherm</string>
   <string name="full_screen_mode_zoom_info">Gebruik twee vingers om in en uit te zoomen.</string>

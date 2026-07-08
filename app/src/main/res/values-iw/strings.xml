@@ -148,7 +148,7 @@
   <string name="depicts_search_text_hint">נא לחפש פריטים שהמדיה שלך מציגה (הר, טאג\' מהאל וכו\')</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="menu_overflow_desc">תפריט גלישה</string>
-  <string name="refresh_button">רענון</string>
+  <string name="refresh_button">ריענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
@@ -222,7 +222,7 @@
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_discussion_empty">אין דיון</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
-  <string name="menu_refresh">רענון</string>
+  <string name="menu_refresh">ריענון</string>
   <string name="storage_permission_title">בקשת הרשאה לאחסון</string>
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
   <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
