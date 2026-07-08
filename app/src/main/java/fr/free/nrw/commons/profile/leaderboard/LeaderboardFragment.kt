@@ -290,7 +290,10 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      */
     private fun checkAccount(): Boolean {
 
-        if (!userName.isNullOrBlank()) {
+        // Allow viewing another user's public profile without requiring login
+        if (!userName.isNullOrBlank() &&
+            userName != sessionManager.userName
+        ) {
             return true
         }
 
