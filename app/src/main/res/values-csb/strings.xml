@@ -24,7 +24,7 @@
     <item quantity="other">Neni òbrôzki bãdze ùprzistãpniony wedle licencëji %1$s</item>
   </plurals>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Nastôwë</string>
+  <string name="menu_settings">Nastôw</string>
   <string name="username">Miono brëkòwnika</string>
   <string name="password">Zéwiszcze</string>
   <string name="login">Wlogùjë mie</string>
@@ -70,7 +70,7 @@
   <string name="contributions_subtitle_zero" fuzzy="true">Nie dô jesz wladënków</string>
   <string name="categories_not_found">Felënk pasowny kategòrëji do %1$s</string>
   <string name="categories_activity_title">Kategòrëje</string>
-  <string name="title_activity_settings">Nastôwë</string>
+  <string name="title_activity_settings">Nastôw</string>
   <string name="title_activity_signup">Wregistrëjë sã</string>
   <string name="menu_about">Ò aplikacëji</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pòlitika priwatnotë&lt;/a&gt;</string>
@@ -132,7 +132,7 @@
   <string name="navigation_item_upload">Wladënk</string>
   <string name="navigation_item_nearby">W òkòlim</string>
   <string name="navigation_item_about">Ò aplikacëji</string>
-  <string name="navigation_item_settings">Nastôwë</string>
+  <string name="navigation_item_settings">Nastôw</string>
   <string name="navigation_item_feedback">Òpinije</string>
   <string name="navigation_item_logout">Wëlogùjë</string>
   <string name="navigation_item_info">Samòùczk</string>
