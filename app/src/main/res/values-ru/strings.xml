@@ -576,7 +576,7 @@
   <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
-  <string name="upload_categories_dont_show_this_message_again">Не показывать это сообщение повторно</string>
+  <string name="upload_categories_dont_show_this_message_again">Не показывать это сообщение снова</string>
   <string name="no_categories_found">Категории не найдены.</string>
   <string name="no_depiction_found">Описания не найдены</string>
   <string name="upload_cancelled">Загрузка отменена</string>
