@@ -154,7 +154,7 @@
   <string name="provider_modifications">Zmiany</string>
   <string name="menu_upload_single">Prześlij</string>
   <string name="categories_search_text_hint">Szukaj kategorii</string>
-  <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają twoje media (góra, Tadż Mahal itp.)</string>
+  <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają Twoje media (góra, Tadż Mahal itp.)</string>
   <string name="menu_save_categories">Zapisz</string>
   <string name="menu_overflow_desc">Rozszerzone menu</string>
   <string name="refresh_button">Odśwież</string>
@@ -186,7 +186,7 @@
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
-  <string name="language_search_type_language_name">Nazwa języka</string>
+  <string name="language_search_type_language_name">Wpisz nazwę języka</string>
   <string name="language_search_recent_searches">Ostatnio wyszukiwane</string>
   <string name="language_search_all_languages">Wszystkie języki</string>
   <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
@@ -250,7 +250,7 @@
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_discussion">Dyskusja</string>
   <string name="media_detail_author">Autor</string>
-  <string name="media_detail_uploader">Przesyłający</string>
+  <string name="media_detail_uploader">Osoba przesyłająca</string>
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
@@ -373,7 +373,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Czy to zdjęcie nadaje się do przesłania?</string>
   <string name="question">Pytanie</string>
-  <string name="quiz_i_am_not_sure">Nie jestem pewien</string>
+  <string name="quiz_i_am_not_sure">Nie mam pewności</string>
   <string name="result">Wynik</string>
   <string name="quiz_back_button">Jeśli będziesz kontynuować przesyłanie zdjęć wymagających usunięcia, Twoje konto prawdopodobnie zostanie zablokowane. Czy na pewno chcesz zakończyć quiz?</string>
   <string name="quiz_alert_message">Ponad %1$s przesłanych prze Ciebie zdjęć zostało usuniętych. Jeśli dalej będziesz przesyłać zdjęcia wymagające usunięcia, Twoje konto zostanie prawdopodobnie zablokowane.\n\nCzy chcesz ponownie wyświetlić samouczek, a następnie wziąć udział w quizie, aby dowiedzieć się, jakiego rodzaju zdjęć powinieneś/nie powinieneś przesłać?</string>
@@ -463,7 +463,7 @@
   <string name="no_depictions_selected_warning_desc">Obrazy ze wskazanymi przedstawieniami są łatwiejsze do znalezienia i częściej używane. Czy na pewno chcesz kontynuować bez wybierania przedstawień?</string>
   <string name="depictions_choose_from_map">Wybierz z mapy</string>
   <string name="depictions_map_confirm">Potwierdź</string>
-  <string name="depictions_map_no_photo_location">Zdjęcie nie ma podanej lokalizacji; pokazuje Twoją aktualną lokalizację</string>
+  <string name="depictions_map_no_photo_location">Zdjęcie nie ma podanej lokalizacji; pokazano Twoją aktualną lokalizację</string>
   <string name="back_button_warning">Anuluj przesyłanie</string>
   <string name="back_button_warning_desc">Użycie przycisku „Wstecz” spowoduje anulowanie przesyłania i utratę postępów</string>
   <string name="back_button_continue">Kontynuuj przesyłanie</string>
@@ -751,7 +751,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
   <string name="need_permission">Wymagane uprawnienie</string>
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
-  <string name="location_off_dialog_text">Proszę włączyć usługi lokalizacji, aby zobaczyć pobliskie miejsca.</string>
+  <string name="location_off_dialog_text">Włączyć usługi określania lokalizacji, aby wyświetlić miejsca w pobliżu.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="contributions_of_user">Wkład użytkownika: %1$s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %1$s</string>
@@ -882,12 +882,12 @@
   <string name="image_tag_line_created_and_uploaded_by">Utworzone i przesłane przez: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Utworzone przez %1$s i przesłane przez %2$s</string>
   <string name="nominated_for_deletion_btn">Zgłoszone do usunięcia</string>
-  <string name="custom_selector_max_image_limit_reached">Można wybrać maksymalnie %d obrazów.</string>
+  <string name="custom_selector_max_image_limit_reached">Maksymalna liczba obrazów do wyboru wynosi %d.</string>
   <string name="edit_unsupported_format_explanation">Edycja w aplikacji jest dostępna tylko dla plików JPEG. Aby edytować inne formaty, skorzystaj z narzędzia innej firmy.</string>
   <string name="license_cc0_description">Brak praw autorskich. Zrzekasz się wszelkich praw, aby każdy mógł wykorzystać to dzieło w dowolny sposób.</string>
-  <string name="license_cc_by_description">Uznanie autorstwa. Inni mogą udostępniać i adaptować utwory, pod warunkiem podania źródła.</string>
-  <string name="license_cc_by_sa_description">Uznanie autorstwa - Na tych samych warunkach. Inni mogą udostępniać i adaptować, ale muszą korzystać z tej samej licencji i podawać autora.</string>
-  <string name="license_cc0_long_description">Niniejsza licencja pozwala użytkownikom na dystrybucję, remiksowanie, adaptowanie i tworzenie na podstawie materiału w dowolnym medium lub formacie, bez żadnych warunków.</string>
-  <string name="license_cc_by_long_description">Niniejsza licencja pozwala użytkownikom na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania twórcy.</string>
-  <string name="license_cc_by_sa_long_description">Niniejsza licencja pozwala użytkownikom na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autora i udostępnienia nowego dzieła na tej samej licencji.</string>
+  <string name="license_cc_by_description">Uznanie autorstwa. Inni mogą udostępniać i adaptować utwory, pod warunkiem wskazania autorstwa.</string>
+  <string name="license_cc_by_sa_description">Uznanie autorstwa – Na tych samych warunkach. Inni mogą udostępniać i adaptować dzieło, ale muszą korzystać z tej samej licencji oraz wskazać autorstwo.</string>
+  <string name="license_cc0_long_description">Niniejsza licencja pozwala na dystrybucję, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, bez żadnych warunków.</string>
+  <string name="license_cc_by_long_description">Niniejsza licencja pozwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa.</string>
+  <string name="license_cc_by_sa_long_description">Niniejsza licencja zezwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa oraz udostępnienia nowego dzieła na tej samej licencji.</string>
 </resources>
