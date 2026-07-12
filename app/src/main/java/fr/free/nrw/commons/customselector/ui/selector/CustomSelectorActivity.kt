@@ -681,7 +681,7 @@ class CustomSelectorActivity :
     private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
         AlertDialog.Builder(this)
             .setTitle(R.string.warning)
-            .setMessage(R.string.duplicates_removed_before_upload)
+            .setMessage(R.string.custom_selector_duplicates_warning)
             .setCancelable(false)
             .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
             .show()
