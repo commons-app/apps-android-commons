@@ -679,7 +679,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 showAlertDialog(
                     this,
                     getString(R.string.warning),
-                    getString(R.string.duplicates_removed_before_upload),
+                    getString(R.string.normal_selector_duplicates_warning),
                     getString(R.string.ok)
                 ) { }
                 shouldShowDuplicatesRemovedWarning = false
