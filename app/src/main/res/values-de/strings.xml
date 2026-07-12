@@ -570,6 +570,7 @@
   <string name="delete_helper_ask_spam_selfie">ein Selfie, das in keinem Artikel verwendet wird</string>
   <string name="delete_helper_ask_spam_blurry">total verschwommen</string>
   <string name="delete_helper_ask_spam_nonsense">Unsinn, absolut unbrauchbar in jedem Artikel</string>
+  <string name="delete_helper_ask_spam_other">Andere</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

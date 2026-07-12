@@ -305,6 +305,7 @@
   <string name="review_is_uploaded_by">%1$s kaunggah olih: %2$s</string>
   <string name="delete_helper_show_deletion_title">Pangusulan antuk kaapus</string>
   <string name="delete_helper_show_deletion_title_success">Suksés</string>
+  <string name="delete_helper_ask_spam_other">Lianan</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title">Panganyaran kategori</string>
   <string name="category_edit_helper_show_edit_title_success">Suksés</string>

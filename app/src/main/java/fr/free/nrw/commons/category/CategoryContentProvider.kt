@@ -5,10 +5,11 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.content.UriMatcher.NO_MATCH
 import android.database.Cursor
-import android.database.sqlite.SQLiteQueryBuilder
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.text.TextUtils
 import androidx.core.net.toUri
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.category.CategoryTable.ALL_FIELDS
 import fr.free.nrw.commons.category.CategoryTable.COLUMN_ID
@@ -25,31 +26,27 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
     @SuppressWarnings("ConstantConditions")
     override fun query(uri: Uri, projection: Array<String>?, selection: String?,
                        selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
-        val queryBuilder = SQLiteQueryBuilder().apply {
-            tables = TABLE_NAME
-        }
 
         val uriType = uriMatcher.match(uri)
         val db = requireDb()
 
         val cursor: Cursor? = when (uriType) {
-            CATEGORIES -> queryBuilder.query(
-                db,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
+            CATEGORIES -> db.query(
+                SupportSQLiteQueryBuilder.builder(
+                    TABLE_NAME
+                ).selection(selection, selectionArgs)
+                    .columns(projection)
+                    .orderBy(sortOrder)
+                    .create()
             )
-            CATEGORIES_ID -> queryBuilder.query(
-                db,
-                ALL_FIELDS,
-                "_id = ?",
-                arrayOf(uri.lastPathSegment),
-                null,
-                null,
-                sortOrder
+
+            CATEGORIES_ID -> db.query(
+                SupportSQLiteQueryBuilder.builder(
+                    TABLE_NAME
+                ).selection("_id = ?", arrayOf(uri.lastPathSegment))
+                    .columns(ALL_FIELDS)
+                    .orderBy(sortOrder)
+                    .create()
             )
             else -> throw IllegalArgumentException("Unknown URI $uri")
         }
@@ -63,10 +60,12 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
     @SuppressWarnings("ConstantConditions")
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri {
         val uriType = uriMatcher.match(uri)
-        val id: Long
+        var id: Long = 0L
         when (uriType) {
             CATEGORIES -> {
-                id = requireDb().insert(TABLE_NAME, null, contentValues)
+                contentValues?.let {
+                    id = requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it)
+                }
             }
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
@@ -85,7 +84,7 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
         when (uriType) {
             CATEGORIES -> {
                 for (value in values) {
-                    sqlDB.insert(TABLE_NAME, null, value)
+                    sqlDB.insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, value)
                 }
                 sqlDB.setTransactionSuccessful()
             }
@@ -100,18 +99,21 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
     override fun update(uri: Uri, contentValues: ContentValues?, selection: String?,
                         selectionArgs: Array<String>?): Int {
         val uriType = uriMatcher.match(uri)
-        val rowsUpdated: Int
+        var rowsUpdated: Int = 0
         when (uriType) {
             CATEGORIES_ID -> {
                 if (TextUtils.isEmpty(selection)) {
                     val id = uri.lastPathSegment?.toInt()
                         ?: throw IllegalArgumentException("Invalid ID")
-                    rowsUpdated = requireDb().update(
-                        TABLE_NAME,
-                        contentValues,
-                        "$COLUMN_ID = ?",
-                        arrayOf(id.toString())
-                    )
+                    contentValues?.let {
+                        rowsUpdated = requireDb().update(
+                            TABLE_NAME,
+                            SQLiteDatabase.CONFLICT_NONE,
+                            it,
+                            "$COLUMN_ID = ?",
+                            arrayOf(id.toString())
+                        )
+                    }
                 } else {
                     throw IllegalArgumentException(
                         "Parameter `selection` should be empty when updating an ID")

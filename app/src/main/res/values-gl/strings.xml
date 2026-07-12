@@ -460,6 +460,7 @@
   <string name="delete_helper_ask_spam_selfie">Un autorretrato que non se emprega en ningún artigo</string>
   <string name="delete_helper_ask_spam_blurry">completamente borrosa</string>
   <string name="delete_helper_ask_spam_nonsense">sen sentido, totalmente inusable en calquera artigo</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto de prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatoria de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotipo</string>

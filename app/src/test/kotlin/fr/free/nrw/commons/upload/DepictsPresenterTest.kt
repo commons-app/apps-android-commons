@@ -7,12 +7,14 @@ import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -196,5 +198,20 @@ class DepictsPresenterTest {
             )
         method.isAccessible = true
         method.invoke(depictsPresenter)
+    }
+
+    @Test
+    fun testDepictionFetchAndSelection() {
+        val place = Mockito.mock(Place::class.java)
+        whenever(place.wikiDataEntityId).thenReturn("Q12345")
+
+        val item = depictedItem(id = "Q12345", isSelected = false)
+        whenever(repository.getDepictions(listOf("Q12345")))
+            .thenReturn(Flowable.just(listOf(item)))
+
+        depictsPresenter.onPlaceSelectedFromMap(place)
+        testScheduler.triggerActions()
+
+        Assert.assertTrue(item.isSelected)
     }
 }

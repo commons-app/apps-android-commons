@@ -85,7 +85,7 @@
   <string name="retry_limit_reached">Maksimum təkrar cəhd limitinə çatdınız! Zəhmət olmasa, yükləməni ləğv edin və yenidən cəhd edin</string>
   <string name="unrestricted_battery_mode">Batareya optimallaşdırılması söndürülsün?</string>
   <string name="suggest_unrestricted_mode">3-dən çox şəklin yüklənməsi batareyanın optimallaşdırılması söndürüldükdə daha yaxşı işləyir. Rahat yükləmə təcrübəsi üçün Vikianbar tətbiqi üçün batareyanın optimallaşdırılmasını parametrlərdən söndürün. \n\nBatareyanın optimallaşdırılmasını söndürmək üçün mümkün addımlar:\n\nAddım 1: Aşağıdakı \"Parametrlər\" düyməsinə toxunun.\n\nAddım 2: \"Optimallaşdırılmayıb\"dan \"Bütün proqramlar\"a keçin.\n\nAddım 3: \"Commons\" və ya \"fr.free.nrw.commons\" axtarın.\n\nAddım 4: \"Optimallaşdırma\"nı seçin.\n\nAddım 5: \'Bitti\' düyməsini basın.</string>
-  <string name="authentication_failed">Doğrulama alınmadı. Zəhmət olmasa, yenidən daxil olun</string>
+  <string name="authentication_failed">Təsdiqləmə uğursuz oldu. Zəhmət olmasa, yenidən daxil olun.</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="uploading_queued">Yükləmə növbədə (məhdud əlaqə rejimi aktivdir)</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
@@ -118,7 +118,7 @@
   <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
   <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Vikianbardan bloklanıb</string>
   <string name="login_failed_2fa_needed">Siz iki faktorlu autentifikasiya kodunuzu təqdim etməlisiniz.</string>
-  <string name="login_failed_email_auth_needed">E-poçt ünvanınıza giriş doğrulama kodu göndərildi. Daxil olmaq üçün kodu daxil edin.</string>
+  <string name="login_failed_email_auth_needed">E-poçt ünvanınıza girişi təsdiqləmə kodu göndərildi. Daxil olmaq üçün kodu daxil edin.</string>
   <string name="login_failed_generic">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
   <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
@@ -225,7 +225,7 @@
   <string name="become_a_tester_title">Beta Tester ol</string>
   <string name="become_a_tester_description">Google Play-də beta kanalımıza qoşulun və yeni funksiyalara və xəta həllərinə erkən giriş əldə edin</string>
   <string name="_2fa_code">2FA kodu</string>
-  <string name="email_auth_code">E-poçt doğrulama kodu</string>
+  <string name="email_auth_code">E-poçt təsdiqləmə kodu</string>
   <string name="logout_verification">Həqiqətən çıxış etmək istəyirsiniz?</string>
   <string name="no_subcategory_found">Heç bir alt kateqoriya tapılmadı</string>
   <string name="no_parentcategory_found">Heç bir üst kateqoriya tapılmadı</string>
@@ -260,6 +260,7 @@
   <string name="upload_problem_image_dark">Şəkil çox qaranlıqdır.</string>
   <string name="upload_problem_image_blurry">Şəkil bulanıqdır.</string>
   <string name="upload_problem_image_duplicate">Şəkil artıq Vikianbarda var.</string>
+  <string name="upload_problem_image_format_unsupported">Şəkliniz Commons serveri tərəfindən dəstəklənməyən formatdadır, ona görə də tətbiq onu JPG-yə çevirdi.</string>
   <string name="upload_problem_different_geolocation">Bu şəkil başqa yerdə çəkilib.</string>
   <string name="upload_problem_fbmd">Zəhmət olmasa, yalnız özünüz çəkdiyiniz şəkilləri yükləyin. Başqalarının Facebook hesablarında tapdığınız şəkilləri yükləməyin.</string>
   <string name="upload_problem_do_you_continue">Hələ də bu şəkli yükləmək istəyirsiniz?</string>
@@ -427,6 +428,9 @@
   <string name="no_categories_selected_warning_desc">Kateqoriyaları olmayan şəkillər nadir hallarda istifadə olunur. Kateqoriya seçmədən davam etmək istədiyinizə əminsiniz?</string>
   <string name="no_depictions_selected">Heç bir təsvir seçilməyib</string>
   <string name="no_depictions_selected_warning_desc">Nəyi təsvir etdiyi qeyd olunan şəkillər daha asan tapılır və istifadə olunma ehtimalı daha yüksəkdir. Bunsuz davam etmək istədiyinizə əminsiniz?</string>
+  <string name="depictions_choose_from_map">Xəritədən seç</string>
+  <string name="depictions_map_confirm">Təsdiqlə</string>
+  <string name="depictions_map_no_photo_location">Fotonun əlavə olunmuş koordinatı yoxdur, cari yerinizi göstərir</string>
   <string name="back_button_warning">Yükləməni ləğv et</string>
   <string name="back_button_warning_desc">Geri düyməsini istifadə etmək bu yükləməni ləğv edəcək və siz irəliləyişinizi itirəcəksiniz</string>
   <string name="back_button_continue">Yükləməyə davam et</string>
@@ -535,6 +539,8 @@
   <string name="delete_helper_ask_spam_selfie">heç bir məqalədə istifadə olunmayan selfi</string>
   <string name="delete_helper_ask_spam_blurry">tamamilə bulanıq</string>
   <string name="delete_helper_ask_spam_nonsense">mənasız, məqalədə istifadəyə tamamilə yararsızdır</string>
+  <string name="delete_helper_ask_spam_other">Digər: aşağıda qeyd edin</string>
+  <string name="delete_helper_other_notes_hint">Əsaslandırma</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Mətbuat fotosu</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetdən təsadüfi foto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Loqo</string>
@@ -839,4 +845,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tərəfindən yaradılmış və %2$s tərəfindən yüklənmişdir</string>
   <string name="nominated_for_deletion_btn">Silinməyə namizəd göstərilib</string>
   <string name="custom_selector_max_image_limit_reached">Siz maksimum %d şəkil seçə bilərsiniz.</string>
+  <string name="edit_unsupported_format_explanation">Tətbiqdaxili redaktə yalnız JPEG faylları üçün mümkündür. Digər formatları redaktə etmək üçün üçüncü partiya alətlərdən istifadə edin.</string>
+  <string name="license_cc0_description">Müəllif hüquqları yoxdur. Siz bütün hüquqları buraxırsınız ki, hər kəs bu əsərdən istənilən şəkildə istifadə edə bilsin.</string>
+  <string name="license_cc_by_description">Atribusiya. Digərləri sizə istinad verdikləri müddətcə paylaşmaqda və uyğunlaşdırmaqda sərbəstdirlər.</string>
+  <string name="license_cc_by_sa_description">Atribut-ShareAlike. Başqaları paylaşa və uyğunlaşdıra bilər, lakin eyni lisenziyadan istifadə etməli və sizə istinad verməlidirlər.</string>
+  <string name="license_cc0_long_description">Bu lisenziya təkrar istifadəçilərə heç bir şərt qoymadan istənilən media və formatda materialı yaymaq, remiks etmək, uyğunlaşdırmaq və inkişaf etdirmək imkanı verir.</string>
+  <string name="license_cc_by_long_description">Bu lisenziya, müəllifə istinad edildiyi təqdirdə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
+  <string name="license_cc_by_sa_long_description">Bu lisenziya, müəllifə istinad edildiyi və yeni əsərin eyni şərtlər altında lisenziyalaşdırıldığı şərtilə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
 </resources>

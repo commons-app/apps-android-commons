@@ -8,11 +8,12 @@
 * Patrik L.
 * Sudo77(new)
 * TomášPolonec
+* Wizzard
 * Yardom78
 -->
 <resources>
   <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github" fuzzy="true">Zdrojový kód Commons na Githube</string>
+  <string name="commons_github">Zdrojový kód Commons na GitHube</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Webová stránka Commons</string>
   <string name="exit_location_picker">Odísť z výberu polohy</string>
@@ -37,6 +38,12 @@
     <item quantity="few">nahrávajú sa %1$d súbory</item>
     <item quantity="many">nahráva sa %1$d súborov</item>
     <item quantity="other">nahráva sa %1$d súborov</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="many">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Začatie nahrávania</string>
   <plurals name="starting_multiple_uploads">
@@ -93,6 +100,7 @@
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
   <string name="retry_limit_reached">Maximálny limit opätovného skúšania dosiahnutý! Prosím, zrušte nahrávanie a skúste znova</string>
   <string name="unrestricted_battery_mode">Vypnúť optimalizáciu batérie?</string>
+  <string name="suggest_unrestricted_mode">Nahrávanie viac než 3 obrázkov funguje spoľahlivejšie, keď je vypnutá optimalizácia batérie. Pre plynulé nahrávanie, prosím, vypnite optimalizáciu batérie pre aplikáciu Commons v nastaveniach. \n\nMožné kroky na vypnutie optimalizácie batérie:\n\nKrok 1: Ťuknite na tlačidlo „Nastavenia“ nižšie.\n\nKrok 2: Prepnite z „Neoptimalizované“ na „Všetky aplikácie“.\n\nKrok 3: Vyhľadajte „Commons“ alebo „fr.free.nrw.commons“.\n\nKrok 4: Ťuknite naň a vyberte „Neoptimalizovať“.\n\nKrok 5: Stlačte „Hotovo“.</string>
   <string name="authentication_failed">Overenie zlyhalo. Prosím, prihláste sa znovu.</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
@@ -114,6 +122,8 @@
   <string name="menu_from_camera">Odfotiť</string>
   <string name="menu_nearby">V okolí</string>
   <string name="provider_contributions">Moje obrázky</string>
+  <string name="menu_copy_link">Kopírovať odkaz</string>
+  <string name="menu_link_copied">Odkaz bol skopírovaný do schránky</string>
   <string name="menu_share">Zdieľať</string>
   <string name="menu_view_file_page">Zobraziť stránku súboru</string>
   <string name="share_title_hint">Popisok (povinné)</string>
@@ -124,6 +134,7 @@
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_2fa_needed">Musíte vložiť kód pre dvojfaktorovú autentifikáciu.</string>
+  <string name="login_failed_email_auth_needed">Na vašu e-mailovú adresu bol odoslaný overovací kód na prihlásenie. Na prihlásenie, prosím, zadajte tento kód.</string>
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
   <string name="multiple_share_base_title">Názov tejto sady</string>
@@ -132,6 +143,7 @@
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
   <string name="depicts_search_text_hint">Hľadať položky, ktoré váš multimediálny súbor zobrazuje (vrch, Tádž Mahal atď.)</string>
   <string name="menu_save_categories">Uložiť</string>
+  <string name="menu_overflow_desc">Rozšírená ponuka</string>
   <string name="refresh_button">Obnoviť</string>
   <string name="display_list_button">Zoznam</string>
   <string name="contributions_subtitle_zero">(Žiadne nahrané súbory)</string>
@@ -144,7 +156,7 @@
   <string name="title_activity_settings">Nastavenia</string>
   <string name="title_activity_signup">Zaregistrovať sa</string>
   <string name="title_activity_featured_images">Najlepšie obrázky</string>
-  <string name="images_featured_explanation" fuzzy="true">Najlepšie obrázky sú fotografie od vysoko skúsených fotografov a ilustrátorov, ktoré vybrala komunita Wikimedie Commons ako jedny z najkvalitnejších na stránke.</string>
+  <string name="images_featured_explanation">Vybrané obrázky sú príspevky vysoko zručných fotografov a ilustrátorov, ktoré komunita Wikimedia Commons vybrala ako jedny z najkvalitnejších na stránke.</string>
   <string name="title_activity_custom_selector">Vlastný výber</string>
   <string name="title_activity_category_details">Kategória</string>
   <string name="title_activity_review">Kontrola</string>
@@ -161,15 +173,18 @@
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
+  <string name="language_search_type_language_name">Zadajte názov jazyka</string>
+  <string name="language_search_recent_searches">Nedávne hľadania</string>
+  <string name="language_search_all_languages">Všetky jazyky</string>
   <string name="media_upload_policy">Odoslaním tohto súboru potvrdzujem, že je mojím vlastným dielom, neobsahuje autorskoprávne chránený materiál a nejedná sa o selfie a ani inak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Pravidlá a odporúčania Wikimedie Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Predvolená licencia</string>
   <string name="use_previous">Použiť predchádzajúci názov a popis</string>
   <string name="preference_theme">Motív</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -222,6 +237,7 @@
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_discussion">Diskusia</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Nahral</string>
   <string name="media_detail_uploaded_date">Dátum nahrania</string>
   <string name="media_detail_license">Licencia</string>
   <string name="media_detail_coordinates">Súradnice</string>
@@ -229,6 +245,7 @@
   <string name="become_a_tester_title">Staňte sa beta testerom</string>
   <string name="become_a_tester_description">Prihlásiť sa do nášho beta kanálu na Google Play a získavať včasný prístup k novinkám a opravám chýb</string>
   <string name="_2fa_code">Kód pre dvojfaktorové overenie (2FA)</string>
+  <string name="email_auth_code">Overovací kód e-mailu</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
   <string name="no_subcategory_found">Neboli nájdené žiadne podkategórie</string>
   <string name="no_parentcategory_found">Neboli nájdené žiadne rodičovské kategórie</string>
@@ -236,8 +253,8 @@
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Dúhový most</string>
   <string name="welcome_image_tulip">Tulipán</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Vitajte na Wikipédii</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Úvod do autorských práv</string>
+  <string name="welcome_image_welcome_wikipedia">Schematický obrázok všeobecného článku na Wikipédii.</string>
+  <string name="welcome_image_welcome_copyright">Kresba kopy papierov s prečiarknutým symbolom autorských práv.</string>
   <string name="welcome_image_sydney_opera_house">Opera v Sydney</string>
   <string name="cancel">Zrušiť</string>
   <string name="navigation_drawer_open">Otvoriť</string>
@@ -263,6 +280,7 @@
   <string name="upload_problem_image_dark">Obrázok je príliš tmavý.</string>
   <string name="upload_problem_image_blurry">Obrázok je rozmazaný.</string>
   <string name="upload_problem_image_duplicate">Obrázok už na Commons je.</string>
+  <string name="upload_problem_image_format_unsupported">Váš obrázok je vo formáte, ktorý server Commons nepodporuje, preto ho aplikácia previedla na JPG.</string>
   <string name="upload_problem_different_geolocation">Tento obrázok bol zhotovený na inom mieste.</string>
   <string name="upload_problem_fbmd">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste našli na Facebookovom profile niekoho iného.</string>
   <string name="upload_problem_do_you_continue">Naozaj chcete nahrať tento obrázok?</string>
@@ -270,6 +288,7 @@
   <string name="upload_connection_error_alert_detail">Proces nahrávania vyžaduje aktívny internetový prístup. Prosím skontrolujte svoje internetové pripojenie.</string>
   <string name="upload_problem_image">Na obrázku boli nájdené nejaké problémy</string>
   <string name="internet_downloaded">Nahrávajte, prosím, len obrázky, ktoré ste sami zhotovili. Nenahrávajte obrázky, ktoré ste stiahli z internetu.</string>
+  <string name="preferences_uploads">Nahrávania</string>
   <string name="use_external_storage">Použiť externé úložisko</string>
   <string name="use_external_storage_summary">Uložiť obrázky urobené fotoaparátom, ktorý je súčasťou tejto aplikácie</string>
   <string name="login_to_your_account">Prihlásiť sa do účtu</string>
@@ -288,6 +307,7 @@
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext bol skopírovaný do schránky</string>
   <string name="nearby_location_not_available">Funkcia V okolí nemusí pracovať správne, poloha nie je dostupná.</string>
+  <string name="nearby_showing_pins_offline">Internet nie je dostupný. Zobrazujú sa len miesta z vyrovnávacej pamäte.</string>
   <string name="upload_location_access_denied">Prístup k polohe bol odmietnutý. Ak chcete použiť túto funkciu, nastavte svoju polohu manuálne.</string>
   <string name="location_permission_rationale_nearby">Zobrazenie zoznamu miest v okolí vyžaduje povolenie</string>
   <string name="location_permission_rationale_explore">Povolenie je potrebné na zobrazenie zoznamu obrázkov v blízkosti</string>
@@ -340,6 +360,7 @@
   <string name="quiz">Kvíz</string>
   <string name="quiz_question_string">Je tento obrázok v poriadku na nahranie?</string>
   <string name="question">Otázka</string>
+  <string name="quiz_i_am_not_sure">Nie som si istý</string>
   <string name="result">Výsledok</string>
   <string name="quiz_back_button">Pokiaľ budete naďalej nahrávať obrázky, ktoré vyžadujú následne zmazanie, váš účet bude pravdepodobne zablokovaný. Ste si istí, že chcete ukončiť kvíz?</string>
   <string name="quiz_alert_message">Viac ako %1$s vami nahraných obrázkov bolo zmazaných. Pokiaľ budete v nahrávaní takýchto obrázkov pokračovať, váš účet bude pravdepodobne zablokovaný.\n\nChceli by ste si sprievodcu prejsť ešte raz a potom sa kvízom uistiť, že rozumiete tomu, ktoré obrázky môžete nahrávať a ktoré nie?</string>
@@ -349,6 +370,7 @@
   <string name="blurry_image_answer">Jedným z cieľov Wikimedie Commons je zhromaždovať kvalitné obrázky. Preto by ste nemali nahrávať rozmazané fotografie. Vždy sa snažte urobiť pekné, kvalitne nasvietené fotky.</string>
   <string name="construction_event_answer">Obrázky s technickou či kultúrnou tematikou sú na Commons vítané.</string>
   <string name="congratulatory_message_quiz">Na %1$s otázok ste odpovedali správne! Gratulujeme!</string>
+  <string name="quiz_continue">Pokračovať</string>
   <string name="warning_for_no_answer">Vyberte správnu možnosť</string>
   <string name="user_not_logged_in">Platnosť vášho prihlásenia vypršala. Prihláste sa znovu, prosím.</string>
   <string name="quiz_result_share_message">Zdieľajte váš kvíz s priateľmi!</string>
@@ -358,6 +380,7 @@
   <string name="quiz_screenshot_question">Je v poriadku nahrať túto snímku obrazovky?</string>
   <string name="share_app_title">Zdieľať aplikáciu</string>
   <string name="rotate">Otočiť</string>
+  <string name="crop">Orezať</string>
   <string name="error_fetching_nearby_places">Nepodarilo sa načítať miesta v okolí</string>
   <string name="no_pictures_in_this_area">V tejto oblasti nie sú žiadne obrázky</string>
   <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>
@@ -371,10 +394,13 @@
   <string name="delete">Zmazať</string>
   <string name="Achievements">Úspechy</string>
   <string name="Profile">Profil</string>
+  <string name="badges">Odznaky</string>
   <string name="statistics_thanks">Obdržané poďakovania</string>
   <string name="statistics_featured">Najlepšie obrázky</string>
   <string name="statistics_wikidata_edits">Obrázky cez „Miesta v okolí“</string>
-  <string name="level" fuzzy="true">Úroveň %1$d</string>
+  <string name="level">Úroveň %1$d</string>
+  <string name="profile_withLevel">%1$s (úroveň %2$s)</string>
+  <string name="profile_withoutLevel">%1$s (%2$s)</string>
   <string name="images_uploaded">Nahrané obrázky</string>
   <string name="image_reverts">Nerevertované obrázky</string>
   <string name="images_used_by_wiki">Použité obrázky</string>
@@ -406,6 +432,7 @@
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
   <string name="title_page_bookmarks_locations">Miesta</string>
+  <string name="title_page_bookmarks_categories">Kategórie</string>
   <string name="menu_bookmark">Pridať/odstrániť zo záložiek</string>
   <string name="provider_bookmarks">Záložky</string>
   <string name="bookmark_empty">Zatiaľ nemáte žiadne záložky</string>
@@ -416,12 +443,15 @@
   <string name="deletion_reason_bad_for_my_privacy">Uvedomil/a som si, že je to zlé pre moje súkromie</string>
   <string name="deletion_reason_no_longer_want_public">Zmenil/a som názor, nechcem byť viac verejne viditeľný/á</string>
   <string name="deletion_reason_not_interesting">Prepáčte, tento obrázok pre encyklopédiu nie je zaujímavý</string>
-  <string name="uploaded_by_myself" fuzzy="true">Nahrané mnou %1$s, použité v %2$d článku/článkoch.</string>
+  <string name="uploaded_by_myself">Nahraté mnou %1$s, použité aspoň v %2$d článkoch.</string>
   <string name="no_uploads">Vitajte na Commons!\n\nNahrajte svoje prvé súbory ťuknutím na tlačidlo pridať.</string>
   <string name="no_categories_selected">Neboli vybrané žiadne kategórie</string>
   <string name="no_categories_selected_warning_desc">Obrázky bez kategórií sú zriedka použiteľné. Naozaj chcete nahrať obrázok bez výberu kategórií?</string>
   <string name="no_depictions_selected">Neboli zvolené žiadne zobrazenia</string>
   <string name="no_depictions_selected_warning_desc">Kreslené alebo maľované obrázky je ľahšie nájsť a použiť. Chcete naozaj pokračovať bez zadania spôsobu vykresľovania obrázkov?</string>
+  <string name="depictions_choose_from_map">Vybrať z mapy</string>
+  <string name="depictions_map_confirm">Potvrdiť</string>
+  <string name="depictions_map_no_photo_location">Fotografia nemá polohu, zobrazuje sa vaša aktuálna poloha</string>
   <string name="back_button_warning">Zrušiť nahrávanie</string>
   <string name="back_button_warning_desc">Použitím tlačidla späť zrušíte toto nahrávanie aj celý pokrok nahrávania</string>
   <string name="back_button_continue">Pokračujte v nahrávaní</string>
@@ -433,15 +463,23 @@
   <string name="never_ask_again">Znovu nezobrazovať</string>
   <string name="display_location_permission_title">Žiadať povolenie prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Nastala chyba, úspechy sa nám nepodarilo načítať</string>
+  <string name="achievements_fetch_failed">Niečo sa pokazilo a nepodarilo sa nám načítať úspechy</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobraziť kampane</string>
   <string name="display_campaigns_explanation">Zobrazovať prebiehajúce kampane</string>
+  <string name="show_deletion_button">Zobraziť tlačidlo mazania</string>
+  <string name="show_deletion_button_explanation">Povoliť tlačidlo „Zmazať priečinok“ vo vlastnom výbere</string>
+  <string name="in_app_camera_location_access_explanation">Povoľte aplikácii zistiť polohu pre prípad, že ju nezaznamená fotoaparát. Niektoré fotoaparáty zariadení polohu nezaznamenávajú. V takých prípadoch je váš príspevok užitočnejší, ak aplikácii umožníte polohu zistiť a pripojiť. Toto môžete kedykoľvek zmeniť v nastaveniach</string>
   <string name="option_allow">Povoliť</string>
   <string name="option_dismiss">Odmietnuť</string>
+  <string name="in_app_camera_needs_location">Zapnite, prosím, prístup k polohe v nastaveniach a skúste to znova. \n\nPoznámka: Nahratý súbor nemusí mať polohu, ak aplikácia nedokáže polohu zo zariadenia získať v krátkom intervale.</string>
+  <string name="in_app_camera_location_permission_rationale">Fotoaparát v aplikácii potrebuje povolenie polohy, aby ju pripojil k vašim obrázkom v prípade, že poloha nie je dostupná v EXIF. Povoľte, prosím, aplikácii prístup k vašej polohe a skúste to znova.\n\nPoznámka: Nahratý súbor nemusí mať polohu, ak aplikácia nedokáže polohu zo zariadenia získať v krátkom intervale.</string>
   <string name="in_app_camera_location_permission_denied">Aplikácia nezaznamená polohu k záberom v aplikácii z dôvodu chýbajúceho prístupu k polohe</string>
   <string name="in_app_camera_location_unavailable">Aplikácia nezaznamená polohu k záberom v aplikácii z dôvodu vypnutej GPS</string>
+  <string name="open_document_photo_picker_title">Použiť výber fotografií založený na dokumentoch</string>
+  <string name="open_document_photo_picker_explanation">Nový výber fotografií systému Android riskuje stratu informácie o polohe. Povoľte, ak sa zdá, že ho používate.</string>
+  <string name="location_loss_warning">Vypnutie tohto môže vyvolať nový výber fotografií systému Android. Riskuje to stratu informácie o polohe.\n\nViac informácií získate ťuknutím na „Čítať viac“.</string>
   <string name="nearby_campaign_dismiss_message">Kampane už neuvidíte. Znovu ich zapnúť môžete v Nastaveniach.</string>
   <string name="this_function_needs_network_connection">Táto funkcia vyžaduje pripojenie k sieti. Prosím, skontrolujte nastavenie pripojenia.</string>
   <string name="error_processing_image">Počas spracovania obrázku nastala chyba. Prosím, skúste to znovu.</string>
@@ -455,11 +493,11 @@
   <string name="check_category_failure_message">Nepodarilo sa vyžiadať kontrolu kategórie %1$s</string>
   <string name="check_category_toast">Posielam požiadavku na kontrolu kategórie %1$s</string>
   <string name="nominate_for_deletion_done">Hotovo</string>
-  <string name="send_thank_success_title" fuzzy="true">Posielanie poďakovania bolo úspešné</string>
-  <string name="send_thank_success_message" fuzzy="true">Úspešne ste poďakovali používateľovi/používateľke %1$s</string>
-  <string name="send_thank_failure_message" fuzzy="true">Poďakovanie používateľovi/používateľke %1$s sa nepodarilo</string>
-  <string name="send_thank_failure_title" fuzzy="true">Poslanie poďakovania bolo neúspešné</string>
-  <string name="send_thank_toast" fuzzy="true">Posielanie poďakovania používateľovi/používateľke %1$s</string>
+  <string name="send_thank_success_title">Odoslanie poďakovania: Úspech</string>
+  <string name="send_thank_success_message">Poďakovanie odoslané používateľovi %1$s</string>
+  <string name="send_thank_failure_message">Nepodarilo sa odoslať poďakovanie používateľovi %1$s</string>
+  <string name="send_thank_failure_title">Odoslanie poďakovania: Zlyhanie</string>
+  <string name="send_thank_toast">Odosiela sa poďakovanie za %1$s</string>
   <string name="review_copyright">Je to v súlade s pravidlami autorských práv?</string>
   <string name="review_category">Je to kategorizované správne?</string>
   <string name="review_spam">Je to v poriadku?</string>
@@ -481,18 +519,19 @@
   <string name="no_notification">Nemáte žiadne neprečítané upozornenia</string>
   <string name="no_read_notification">Nemáte žiadne prečítané upozornenia</string>
   <string name="share_logs_using">Zdieľať log pomocou</string>
+  <string name="check_your_email_inbox">Skontrolujte si e-mailovú schránku</string>
   <string name="menu_option_read">Zobraziť prečítané</string>
   <string name="menu_option_unread">Zobraziť neprečítané</string>
   <string name="error_occurred_in_picking_images">Nastala chyba pri vyberaní obrázkov</string>
   <string name="please_wait">Čakajte, prosím...</string>
   <string name="images_via_nearby_explanation">Obrázky nahrané cez Miesta v okolí sú obrázky, ktoré sú nahrané vďaka objavovaniu miest na mape.</string>
   <string name="thanks_received_explanation">Táto funkcia umožňuje poslať poďakovanie za užitočné úpravy používateľom – použitím malého odkazu poďakovať v histórií stránky alebo na stránke rozdielu medzi revíziami.</string>
-  <string name="copy_image_caption_description" fuzzy="true">Kopírovať do nasledovného média</string>
+  <string name="copy_image_caption_description">Kopírovať do ďalších položiek</string>
   <string name="copied_successfully">Skopírované</string>
   <string name="welcome_do_upload_content_description">Príklady dobrých obrázkov na nahranie na Commons</string>
   <string name="welcome_dont_upload_content_description">Príklady obrázkov, ktoré by ste nemali nahrávať</string>
   <string name="skip_image">Preskočiť obrázok</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Sťahovanie zlyhalo! Nemôžeme stiahnuť súbor bez povolenia k prístupu k externému úložisku.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Sťahovanie zlyhalo. Bez povolenia na externé úložisko nemôžeme súbor stiahnuť.</string>
   <string name="manage_exif_tags">Spravovať EXIF dáta</string>
   <string name="manage_exif_tags_summary">Vybrať, ktoré EXIF dáta sa ponechajú</string>
   <string name="exif_tag_name_author">Autor</string>
@@ -505,6 +544,7 @@
   <string name="share_text">Nahrávajte fotky na Wikimedia Commons priamo z vášho mobilu. Stiahnite si aplikáciu Wikimedia Commons teraz: %1$s</string>
   <string name="share_via">Zdieľať aplikáciu cez...</string>
   <string name="image_info">Informácie o obrázku</string>
+  <string name="upload_categories_dont_show_this_message_again">Túto správu už nezobrazovať</string>
   <string name="no_categories_found">Nenájdené žiadne kategórie</string>
   <string name="no_depiction_found">Neboli nájdené spôsoby vykreslovania</string>
   <string name="upload_cancelled">Zrušené nahranie</string>
@@ -520,9 +560,12 @@
   <string name="delete_helper_ask_spam_selfie">selfie, ktorá nie je použitá v žiadnom článku</string>
   <string name="delete_helper_ask_spam_blurry">úplne rozmazané</string>
   <string name="delete_helper_ask_spam_nonsense">nezmysel, úplne nepoužiteľné v akomkoľvek článku</string>
+  <string name="delete_helper_ask_spam_other">Iné</string>
+  <string name="delete_helper_other_notes_hint">Odôvodnenie</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tlačová fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Porušenie slobody panorámy</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Pretože to je</string>
   <string name="category_edit_helper_make_edit_toast">Pokus o obnovu kategórií.</string>
   <string name="category_edit_helper_show_edit_title">Obnovenie kategórií</string>
@@ -569,11 +612,13 @@
   <string name="place_state_exists">Existuje</string>
   <string name="place_state_needs_photo">Potrebuje fotku</string>
   <string name="place_type">Typ miesta:</string>
-  <string name="nearby_search_hint" fuzzy="true">Most, múzeum, hotel atď.</string>
+  <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
   <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba. Musíte si obnoviť vaše heslo!</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">DETSKÉ TRIEDY</string>
   <string name="title_for_parent_classes">RODIČOVSKÉ TRIEDY</string>
+  <string name="title_for_subcategories">PODKATEGÓRIE</string>
+  <string name="title_for_parent_categories">NADRADENÉ KATEGÓRIE</string>
   <string name="upload_nearby_place_found_title">Miesto v okolí nájdené</string>
   <string name="upload_nearby_place_found_description_plural">Je na týchto obrázkoch %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Je na tomto obrázku %1$s?</string>
@@ -611,7 +656,7 @@
   <string name="wikipedia_instructions_step_5">5. Vložte wikitext na vhodné miesto.</string>
   <string name="wikipedia_instructions_step_6">6. Ak načim, upravte wikitext pre vhodné umiestnenie. Pre viac informácií, pozrite &lt;a href=\"https://sk.wikipedia.org/wiki/Pomoc:Obrázok#Vloženie_obrázku_do_článku\"&gt;sem&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Uložte článok</string>
-  <string name="copy_wikicode_to_clipboard" fuzzy="true">Skopírujte wikikód</string>
+  <string name="copy_wikicode_to_clipboard">Kopírovať wikitext do schránky</string>
   <string name="pause">pozastaviť</string>
   <string name="resume">pokračovať</string>
   <string name="paused">Pozastavené</string>
@@ -636,6 +681,7 @@
   <string name="leaderboard_nearby">V okolí</string>
   <string name="leaderboard_used">Použitia</string>
   <string name="leaderboard_my_rank_button_text">Moje poradie</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Zapnutý mód limitovaného pripojenia!</string>
   <string name="limited_connection_disabled">Mód limitovaného pripojenia vypnutý. Nedokončené nahrávania budú teraz pokračovať.</string>
   <string name="limited_connection_mode">Mód limitovaného pripojenia</string>
@@ -652,6 +698,8 @@
   <string name="categories_tooltip">Prosím vyberte vhodné kategórie. Na rozdiel od vyobrazení, kategórie sú len v angličtine.</string>
   <string name="license_tooltip">Commons umožňuje každému používať Vaše obrázky. Chcete sa vzdať všetkých svojich práv? Chcete aby adaptácie používali tú istú licenciu?</string>
   <string name="depicts_step_title">Líčiť</string>
+  <string name="depicts_label">Menovka</string>
+  <string name="depicts_description">Popis</string>
   <string name="license_step_title">Licencia média</string>
   <string name="media_detail_step_title">Detaily média</string>
   <string name="menu_view_category_page">Zobraziť stránku kategórie</string>
@@ -678,20 +726,23 @@
   <string name="back">Späť</string>
   <string name="welcome_custom_picture_selector_text">Vitajte vo vlastnom výbere obrázkov</string>
   <string name="custom_selector_info_text1">Tento výberový nástroj vám ukazuje, ktoré obrázky ste už nahrali na Commons.</string>
-  <string name="custom_selector_info_text2" fuzzy="true">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
+  <string name="custom_selector_info_text2">Na rozdiel od obrázka vľavo má obrázok vpravo logo Commons, ktoré znamená, že je už nahratý.\n\nNáhľad obrázka zobrazíte stlačením a podržaním.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>
   <string name="custom_selector_over_limit_warning">Z technických dôvodov aplikácia nemôže spoľahlivo nahrať viac ako %1$d obrázkov naraz. Maximálny počet %1$d bol prekročený o %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Zrušiť</string>
   <string name="custom_selector_button_limit_text">Maximum: %1$d</string>
   <string name="custom_selector_limit_error_desc">Chyba: Prekročený limit nahrávania</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Tento obrázok bude zaradený do súťaže Wiki miluje pamiatky</string>
   <string name="display_monuments">Zobraziť monumenty</string>
   <string name="wlm_month_message">Je mesiac Wiki miluje monumenty!</string>
   <string name="learn_more">ZISTIŤ VIAC</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wkki miluje monumenty je medzinárodná súťaž fotografií monumentov organizovaná Wikemédiou</string>
   <string name="need_permission">Potrebné povolenie</string>
   <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
+  <string name="location_off_dialog_text">Zapnite, prosím, služby určovania polohy, aby ste videli miesta v okolí.</string>
   <string name="location_permission_rationale">Voliteľné oprávnenie: Umožniť aplikácii, aby získavala aktuálnu polohu a ponúkala na jej základe navrhované kategórie</string>
   <string name="contributions_of_user">Príspevky používateľa:  %1$s</string>
   <string name="achievements_of_user">Úspechy používateľa: %1$s</string>
@@ -705,7 +756,7 @@
   <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
   <string name="no_location_found_title">Nenašli sa žiadne polohy</string>
   <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
-  <string name="add_location" fuzzy="true">Pridať polohu</string>
+  <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím, odstráňte z tohto e-mailu informácie, ktoré nechcete zverejniť. Tiež, prosím, berte na vedomie, že vaša e-mailová adresa, z ktorej posielate príspevky, bude zverejnená.</string>
   <string name="explore_map_details">Podrobnosti</string>
   <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím, skontrolujte vývojársku dokumentáciu.</string>
@@ -726,8 +777,8 @@
   <string name="unmark_as_not_for_upload">Zrušiť označenie, že obrázok nie je určený na nahratie</string>
   <string name="marking_as_not_for_upload">Obrázok sa označuje ako nevhodný na nahratie</string>
   <string name="unmarking_as_not_for_upload">Ruší sa označenie, že obrázok nie je určený na nahratie</string>
-  <string name="show_already_actioned_pictures" fuzzy="true">Zobraziť už spracované obrázky</string>
-  <string name="hiding_already_actioned_pictures" fuzzy="true">Už spracované obrázky sú skryté</string>
+  <string name="show_already_actioned_pictures">Zobraziť už spracované obrázky</string>
+  <string name="hiding_already_actioned_pictures">Skrývajú sa už spracované obrázky</string>
   <string name="no_more_images_found">Nenašli sa žiadne ďalšie obrázky</string>
   <string name="this_image_is_already_uploaded">Tento obrázok je už nahratý</string>
   <string name="can_not_select_this_image_for_upload">Tento obrázok nebolo možné vybrať na nahratie</string>
@@ -742,13 +793,15 @@
   <string name="request_user_block">Žiadosť o zablokovanie tohto používateľa</string>
   <string name="welcome_to_full_screen_mode_text">Vitajte v režime výberu na celú obrazovku</string>
   <string name="full_screen_mode_zoom_info">Na priblíženie a oddialenie použite dva prsty.</string>
+  <string name="full_screen_mode_features_info">Rýchlym a dlhým potiahnutím vykonáte tieto akcie: \n- Vľavo/vpravo: prejsť na predchádzajúci/nasledujúci \n- Hore: vybrať\n- Dole: označiť ako nie na nahranie.</string>
+  <string name="set_up_avatar_toast_string">Ak chcete nastaviť svoj avatar v rebríčku, ťuknite na „Nastaviť ako avatar“ v ponuke s tromi bodkami pri ktoromkoľvek obrázku.</string>
   <string name="similar_coordinate_description_auto_set">Súradnice nie sú presné, ale osoba, ktorá nahrala tento obrázok, si myslí, že sú dostatočne blízko.</string>
   <string name="storage_permissions_denied">Prístup k úložisku odmietnutý</string>
   <string name="unable_to_share_upload_item">Nemožno zdielať túto položku</string>
   <string name="permissions_are_required_for_functionality">Povolenia sú potrebné pre zabezpečenie funkčnosti</string>
   <string name="learn_how_to_write_a_useful_description">Zistite, ako napísať užitočný popis</string>
   <string name="learn_how_to_write_a_useful_caption">Zistite, ako napísať užitočný titulok</string>
-  <string name="see_your_achievements" fuzzy="true">Pozrite si svoje úspechy</string>
+  <string name="see_your_achievements">Zobraziť svoje úspechy</string>
   <string name="edit_image">Upraviť obrázok</string>
   <string name="edit_location">Upraviť polohu</string>
   <string name="location_updated">Poloha aktualizovaná!</string>
@@ -761,12 +814,18 @@
   <string name="invalid_login_message">Platnosť vášho prihlásenia vypršala. Prihláste sa znovu, prosím.</string>
   <string name="no_application_available_to_open_gpx_files">Nie je k dispozícii žiadna aplikácia na otvorenie GPX súborov</string>
   <string name="file_saved_successfully">Súbor úspešne uložený</string>
-  <string name="do_you_want_to_open_gpx_file" fuzzy="true">Chcete otvoriť GPX súbor?</string>
-  <string name="do_you_want_to_open_kml_file" fuzzy="true">Chcete otvoriť KML súbor?</string>
-  <string name="failed_to_save_kml_file" fuzzy="true">KML súbor sa nepodarilo uložiť.</string>
-  <string name="failed_to_save_gpx_file" fuzzy="true">GPX súbor sa nepodarilo uložiť.</string>
-  <string name="saving_kml_file" fuzzy="true">KML súbor sa ukladá</string>
-  <string name="saving_gpx_file" fuzzy="true">GPX súbor sa ukladá</string>
+  <string name="do_you_want_to_open_gpx_file">Chcete otvoriť súbor GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Chcete otvoriť súbor KML?</string>
+  <string name="failed_to_save_kml_file">Nepodarilo sa uložiť súbor KML.</string>
+  <string name="failed_to_save_gpx_file">Nepodarilo sa uložiť súbor GPX.</string>
+  <string name="saving_kml_file">Ukladá sa ako súbor KML...</string>
+  <string name="saving_gpx_file">Ukladá sa ako súbor GPX...</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">vybraný %1$d obrázok</item>
+    <item quantity="few">vybrané %1$d obrázky</item>
+    <item quantity="many">vybraných %1$d obrázka</item>
+    <item quantity="other">vybraných %1$d obrázkov</item>
+  </plurals>
   <string name="multiple_files_depiction">Pamätajte, že všetkým obrázkom vo viacnásobnom nahratí budú pridelené rovnaké kategórie a popisy. Ak obrázky nezdieľajú rovnaký popis a kategórie, vykonajte niekoľko samostatných nahratí, prosím.</string>
   <string name="multiple_files_depiction_header">Poznámka k viacnásobnému nahrávaniu</string>
   <string name="nearby_wikitalk">Oznámte problém s touto položkou na Wikiúdajoch</string>
@@ -774,6 +833,7 @@
   <string name="talk">Diskusia</string>
   <string name="write_something_about_the_item">Napíšte niečo o „%1$s“. Bude to verejne viditeľné.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ už neexistuje, nedá sa z neho urobiť žiadna fotografia.</string>
+  <string name="is_at_a_different_place_wikidata">„%1$s“ sa nachádza na inom mieste.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ je na inom mieste. Nižšie, prosím, uveďte správne miesto a ak je to možné, napíšte správnu zemepisnú šírku a dĺžku.</string>
   <string name="other_problem_or_information_please_explain_below">Iný problém alebo informácia (vysvetlite nižšie).</string>
   <string name="feedback_destination_note">Vaša spätná väzba sa zverejní na nasledujúcej wiki stránke: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
@@ -783,4 +843,43 @@
   <string name="pending">Čakajúce</string>
   <string name="failed">Zlyhané</string>
   <string name="could_not_load_place_data">Nepodarilo sa načítať údaje o polohe</string>
+  <string name="warning_for_no_option_selected">Na zodpovedanie otázky vyberte niektorú z možností</string>
+  <string name="custom_selector_delete_folder">Zmazať priečinok</string>
+  <string name="custom_selector_confirm_deletion_title">Potvrdiť zmazanie</string>
+  <string name="custom_selector_confirm_deletion_message">Naozaj chcete zmazať priečinok %1$s obsahujúci %2$d položiek?</string>
+  <string name="custom_selector_delete">Zmazať</string>
+  <string name="custom_selector_cancel">Zrušiť</string>
+  <string name="custom_selector_folder_deleted_success">Priečinok %1$s bol úspešne zmazaný</string>
+  <string name="custom_selector_folder_deleted_failure">Nepodarilo sa zmazať priečinok %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Chyba pri presúvaní obsahu priečinka do koša: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Nepodarilo sa získať cestu priečinka pre ID priečinka (bucket): %1$d</string>
+  <string name="red_pin">Toto miesto ešte nemá obrázok, choďte nejaký odfotiť!</string>
+  <string name="green_pin">Toto miesto už má obrázok.</string>
+  <string name="grey_pin">Práve sa kontroluje, či toto miesto má obrázok.</string>
+  <string name="error_while_loading">Chyba pri načítavaní</string>
+  <string name="no_usages_found">Nenašlo sa žiadne použitie</string>
+  <string name="usages_on_commons_heading">Commons</string>
+  <string name="usages_on_other_wikis_heading">Ostatné wiki</string>
+  <string name="bullet_point">•</string>
+  <string name="file_usages_container_heading">Použitia súboru</string>
+  <string name="account">Účet</string>
+  <string name="vanish_account">Zrušenie účtu (vanish)</string>
+  <string name="account_vanish_request_confirm_title">Upozornenie o zrušení účtu (vanish)</string>
+  <string name="account_vanish_request_confirm">Zrušenie účtu (vanishing) je &lt;b&gt;posledná možnosť&lt;/b&gt; a malo by sa &lt;b&gt;použiť len vtedy, keď chcete navždy prestať s úpravami&lt;/b&gt; a zároveň skryť čo najviac svojich minulých prepojení.&lt;br/&gt;&lt;br/&gt;Zmazanie účtu na Wikimedia Commons sa vykonáva zmenou názvu vášho účtu tak, aby ostatní nedokázali rozpoznať vaše príspevky, v procese nazývanom zrušenie účtu (vanishing). &lt;b&gt;Zrušenie účtu nezaručuje úplnú anonymitu ani neodstráni príspevky do projektov&lt;/b&gt;.</string>
+  <string name="caption">Popisok</string>
+  <string name="caption_copied_to_clipboard">Popisok skopírovaný do schránky</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Blahoželáme, všetky obrázky v tomto albume boli buď nahraté, alebo označené ako nie na nahranie.</string>
+  <string name="show_in_explore">Zobraziť v sekcii Preskúmať</string>
+  <string name="show_in_nearby">Zobraziť v sekcii V okolí</string>
+  <string name="image_tag_line_created_and_uploaded_by">Vytvoril a nahral: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Vytvoril %1$s a nahral %2$s</string>
+  <string name="nominated_for_deletion_btn">Navrhnuté na zmazanie</string>
+  <string name="custom_selector_max_image_limit_reached">Môžete vybrať najviac %d obrázkov.</string>
+  <string name="edit_unsupported_format_explanation">Úpravy v aplikácii sú dostupné len pre súbory JPEG. Na úpravu iných formátov, prosím, použite nástroj tretej strany.</string>
+  <string name="license_cc0_description">Žiadne autorské práva. Uvoľňujete všetky práva, takže ktokoľvek môže toto dielo akokoľvek použiť.</string>
+  <string name="license_cc_by_description">Uvedenie autora. Ostatní môžu dielo voľne zdieľať a upravovať, pokiaľ vás uvedú ako autora.</string>
+  <string name="license_cc_by_sa_description">Uvedenie autora a rovnaké zdieľanie. Ostatní môžu dielo zdieľať a upravovať, no musia použiť rovnakú licenciu a uviesť vás ako autora.</string>
+  <string name="license_cc0_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, bez akýchkoľvek podmienok.</string>
+  <string name="license_cc_by_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, dokonca aj na komerčné účely, pokiaľ je uvedený autor diela.</string>
+  <string name="license_cc_by_sa_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, dokonca aj na komerčné účely, pokiaľ je uvedený autor diela a nové dielo je licencované za rovnakých podmienok.</string>
 </resources>

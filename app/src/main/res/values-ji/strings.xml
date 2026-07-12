@@ -5,15 +5,16 @@
 * פוילישער
 -->
 <resources>
+  <string name="commons_facebook">קאַמאָנס פֿייסבוק בלאַט</string>
   <string name="commons_logo">קאמאנס־לאגא</string>
   <string name="appwidget_img">בילד פונעם טאָג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d טעקע לאדט אן</item>
     <item quantity="other">%1$d טעקעס לאדן אן</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
-    <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">פֿארארבעט %1$d ארויפֿלאד</item>
+    <item quantity="other">פֿארארבעט %1$d ארויפֿלאדן</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d ארויפֿלאד</item>
@@ -29,17 +30,17 @@
   <string name="signup">אײַנשרייבן</string>
   <string name="logging_in_title">ארײַנלאגירן</string>
   <string name="logging_in_message">ביטע ווארטן</string>
-  <string name="login_success" fuzzy="true">אריינלאגירט מיט הצלחה!</string>
-  <string name="login_failed" fuzzy="true">ארײַנלאגירן אדורכגעפאלן!</string>
+  <string name="login_success">אריינלאגירט מיט הצלחה!</string>
+  <string name="login_failed">ארײַנלאגירן אדורכגעפֿאלן!</string>
   <string name="upload_failed">טעקע נישט געראפן.  פרובירט אפשר אן אנדער טעקע.</string>
-  <string name="authentication_failed" fuzzy="true">אויטענטיפֿיצירן דורכגעפֿאלן, ביטע אריינלאגירן נאכאמאל</string>
+  <string name="authentication_failed">אויטענטיפֿיצירן דורכגעפֿאלן, ביטע אריינלאגירן נאכאמאל</string>
   <string name="uploading_started">ארויפלאדן אנגעהויבן!</string>
   <string name="upload_completed_notification_title">%1$s ארויפגעלאדן!!</string>
   <string name="upload_completed_notification_text">דרוקט צו זען אײַער ארויפֿלאד</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">אנהייבן %1$s ארויפלאד</string>
+  <string name="upload_progress_notification_title_start">ארויפֿלאדן טעקע: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ארויפֿלאדן!!</string>
   <string name="upload_progress_notification_title_finishing">געענדיקט ארויפֿלאדן %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
+  <string name="upload_failed_notification_title">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
   <string name="title_activity_contributions">מײַנע לעצטיקע ארויפֿלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
@@ -51,10 +52,10 @@
   <string name="menu_nearby">דערבײ</string>
   <string name="provider_contributions">מײַנע ארויפלאדן</string>
   <string name="menu_share">טיילן</string>
-  <string name="share_title_hint" fuzzy="true">טיטל (געפֿאדערט)</string>
+  <string name="share_title_hint">טיטל (געפֿאדערט)</string>
   <string name="share_description_hint">באַשרײַבונג</string>
-  <string name="login_failed_network" fuzzy="true">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
-  <string name="login_failed_generic" fuzzy="true">ארײַנלאגירן אדורכגעפאלן!</string>
+  <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
+  <string name="login_failed_generic">ארײַנלאגירן אדורכגעפֿאלן!</string>
   <string name="share_upload_button">אַרויפֿלאָדן</string>
   <string name="provider_modifications">פֿארענדערונגען</string>
   <string name="menu_upload_single">אַרויפֿלאָדן</string>
@@ -75,8 +76,8 @@
   <string name="menu_cancel_upload">אַנולירן</string>
   <string name="menu_download">אראָפלאָדן</string>
   <string name="preference_license">סטאנדארט־ליצענץ</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Attribution 3.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -114,7 +115,7 @@
   <string name="about_translate_title">שפּראַכן</string>
   <string name="about_translate_cancel">אַנולירן</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
-  <string name="search_tab_title_media" fuzzy="true">מעדיע</string>
-  <string name="search_tab_title_categories" fuzzy="true">קאַטעגאריעס</string>
+  <string name="search_tab_title_media">מעדיע</string>
+  <string name="search_tab_title_categories">קאַטעגאריעס</string>
   <string name="wikidata_edit_failure">ס׳איז ניט געלונגען צו דערהיינטיקן דעם אַנטשפּרעכנדיקן בלאַט אין וויקידאַטן.</string>
 </resources>

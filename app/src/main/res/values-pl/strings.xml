@@ -154,14 +154,14 @@
   <string name="provider_modifications">Zmiany</string>
   <string name="menu_upload_single">Prześlij</string>
   <string name="categories_search_text_hint">Szukaj kategorii</string>
-  <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają twoje media (góra, Tadż Mahal itp.)</string>
+  <string name="depicts_search_text_hint">Wyszukiwanie elementów, które przedstawiają Twoje media (góra, Tadż Mahal itp.)</string>
   <string name="menu_save_categories">Zapisz</string>
   <string name="menu_overflow_desc">Rozszerzone menu</string>
   <string name="refresh_button">Odśwież</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
-  <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidata pasujących do %1$s</string>
+  <string name="depictions_not_found">Nie znaleziono przedmiotów Wikidanych pasujących do %1$s</string>
   <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>
   <string name="no_parent_classes">%1$s nie ma klas nadrzędnych</string>
   <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
@@ -186,6 +186,9 @@
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
+  <string name="language_search_type_language_name">Wpisz nazwę języka</string>
+  <string name="language_search_recent_searches">Ostatnio wyszukiwane</string>
+  <string name="language_search_all_languages">Wszystkie języki</string>
   <string name="media_upload_policy">Przesyłając ten obraz deklaruję, że jest on moją własną pracą, nie zawiera elementów objętych prawem autorskim lub selfie i jest zgodny z &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/pl\"&gt;Zasadami i zaleceniami Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Domyślna licencja</string>
@@ -247,6 +250,7 @@
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_discussion">Dyskusja</string>
   <string name="media_detail_author">Autor</string>
+  <string name="media_detail_uploader">Osoba przesyłająca</string>
   <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
@@ -289,6 +293,7 @@
   <string name="upload_problem_image_dark">Obraz jest zbyt ciemny.</string>
   <string name="upload_problem_image_blurry">Obraz jest rozmyty.</string>
   <string name="upload_problem_image_duplicate">Obraz jest już na Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Twój obraz jest w formacie nieobsługiwanym przez serwer Commons, więc aplikacja przekonwertowała go do formatu JPG.</string>
   <string name="upload_problem_different_geolocation">To zdjęcie zostało zrobione w innym miejscu.</string>
   <string name="upload_problem_fbmd">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć znalezionych na kontach innych osób na Facebooku.</string>
   <string name="upload_problem_do_you_continue">Czy nadal chcesz przesłać to zdjęcie?</string>
@@ -296,6 +301,7 @@
   <string name="upload_connection_error_alert_detail">Proces przesyłania wymaga aktywnego dostępu do Internetu. Sprawdź połączenie sieciowe.</string>
   <string name="upload_problem_image">Problemy znalezione na obrazie</string>
   <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
+  <string name="preferences_uploads">Przesłania</string>
   <string name="use_external_storage">Zapisz zdjęcia wykonane w aplikacji</string>
   <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji w pamięci swojego urządzenia</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
@@ -361,12 +367,13 @@
   <string name="explore_tab_title_mobile">Przesłane z aplikacji</string>
   <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Dodano do %1$s w Wikidanych!</string>
-  <string name="wikidata_edit_failure">Nie udało się zaktualizować odpowiedniego obiektu Wikidata!</string>
+  <string name="wikidata_edit_failure">Nie udało się zaktualizować odpowiedniego obiektu Wikidanych!</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
   <string name="wallpaper_set_successfully">Tapeta ustawiona pomyślnie!</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Czy to zdjęcie nadaje się do przesłania?</string>
   <string name="question">Pytanie</string>
+  <string name="quiz_i_am_not_sure">Nie mam pewności</string>
   <string name="result">Wynik</string>
   <string name="quiz_back_button">Jeśli będziesz kontynuować przesyłanie zdjęć wymagających usunięcia, Twoje konto prawdopodobnie zostanie zablokowane. Czy na pewno chcesz zakończyć quiz?</string>
   <string name="quiz_alert_message">Ponad %1$s przesłanych prze Ciebie zdjęć zostało usuniętych. Jeśli dalej będziesz przesyłać zdjęcia wymagające usunięcia, Twoje konto zostanie prawdopodobnie zablokowane.\n\nCzy chcesz ponownie wyświetlić samouczek, a następnie wziąć udział w quizie, aby dowiedzieć się, jakiego rodzaju zdjęć powinieneś/nie powinieneś przesłać?</string>
@@ -376,6 +383,7 @@
   <string name="blurry_image_answer">Jednym z celów Commons jest gromadzenie zdjęć wysokiej jakości, dlatego powinny być zamazane. Zawsze staraj się robić ładne zdjęcia z dobrym oświetleniem.</string>
   <string name="construction_event_answer">Zdjęcia przedstawiające technologię lub kulturę są bardzo mile widziane na Commons.</string>
   <string name="congratulatory_message_quiz">Masz %1$s poprawnych odpowiedzi. Gratulacje!</string>
+  <string name="quiz_continue">Kontynuuj</string>
   <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
   <string name="user_not_logged_in">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
   <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
@@ -385,6 +393,7 @@
   <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
   <string name="share_app_title">Udostępnij aplikację</string>
   <string name="rotate">Obrót</string>
+  <string name="crop">Przytnij</string>
   <string name="error_fetching_nearby_places">Nie udało się wczytać miejsc w pobliżu</string>
   <string name="no_pictures_in_this_area">Brak zdjęć w tym obszarze</string>
   <string name="no_nearby_places_around">Brak miejsc w pobliżu</string>
@@ -452,6 +461,9 @@
   <string name="no_categories_selected_warning_desc">Obrazy bez kategorii rzadko nadają się do użycia. Czy na pewno chcesz kontynuować bez wybierania kategorii?</string>
   <string name="no_depictions_selected">Nie wybrano żadnych obrazów</string>
   <string name="no_depictions_selected_warning_desc">Obrazy ze wskazanymi przedstawieniami są łatwiejsze do znalezienia i częściej używane. Czy na pewno chcesz kontynuować bez wybierania przedstawień?</string>
+  <string name="depictions_choose_from_map">Wybierz z mapy</string>
+  <string name="depictions_map_confirm">Potwierdź</string>
+  <string name="depictions_map_no_photo_location">Zdjęcie nie ma podanej lokalizacji; pokazano Twoją aktualną lokalizację</string>
   <string name="back_button_warning">Anuluj przesyłanie</string>
   <string name="back_button_warning_desc">Użycie przycisku „Wstecz” spowoduje anulowanie przesyłania i utratę postępów</string>
   <string name="back_button_continue">Kontynuuj przesyłanie</string>
@@ -468,6 +480,8 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
+  <string name="show_deletion_button">Pokaż przycisk usuwania</string>
+  <string name="show_deletion_button_explanation">Włącz przycisk „Usuń folder” w selektorze niestandardowym</string>
   <string name="in_app_camera_location_access_explanation">Zezwól aplikacji na pobieranie lokalizacji, jeśli kamera jej nie rejestruje. Niektóre kamery urządzeń nie rejestrują lokalizacji. W takich przypadkach pozwolenie aplikacji na pobieranie i dołączanie do niej lokalizacji sprawia, że Twój wkład jest bardziej użyteczny. Możesz to zmienić w dowolnym momencie w Ustawieniach</string>
   <string name="option_allow">Zezwól</string>
   <string name="option_dismiss">Odrzuć</string>
@@ -542,6 +556,7 @@
   <string name="share_text">Prześlij zdjęcia do Wikimedia Commons bezpośrednio z telefonu. Pobierz teraz aplikację Commons: %1$s</string>
   <string name="share_via">Udostępnij za pośrednictwem…</string>
   <string name="image_info">Informacje o obrazie</string>
+  <string name="upload_categories_dont_show_this_message_again">Nie pokazuj ponownie tego komunikatu</string>
   <string name="no_categories_found">Nie znaleziono kategorii</string>
   <string name="no_depiction_found">Nie znaleziono zdjęć</string>
   <string name="upload_cancelled">Anulowano przesyłanie</string>
@@ -557,6 +572,8 @@
   <string name="delete_helper_ask_spam_selfie">selfie, które nie jest używane w żadnym artykule</string>
   <string name="delete_helper_ask_spam_blurry">całkowicie niewyraźne</string>
   <string name="delete_helper_ask_spam_nonsense">nonsens, absolutnie nieprzydatny w żadnym artykule</string>
+  <string name="delete_helper_ask_spam_other">Inne</string>
+  <string name="delete_helper_other_notes_hint">Uzasadnienie</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -612,6 +629,8 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
+  <string name="title_for_subcategories">PODKATEGORIE</string>
+  <string name="title_for_parent_categories">KATEGORIE NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
   <string name="upload_nearby_place_found_description_plural">Czy to są zdjęcia %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Czy to jest zdjęcie %1$s?</string>
@@ -690,6 +709,8 @@
   <string name="categories_tooltip">Wybierz odpowiednie kategorie. W przeciwieństwie do przedstawień kategorie są dostępne tylko w języku angielskim.</string>
   <string name="license_tooltip">Commons umożliwia ponowne użycie i dostosowanie Twoich zdjęć przez wszystkich. Czy chcesz zrzec się wszelkich praw? Czy chcesz, aby Ci przypisywano? Czy chcesz, aby adaptacje korzystały z tej samej licencji?</string>
   <string name="depicts_step_title">Przedstawia</string>
+  <string name="depicts_label">Etykieta</string>
+  <string name="depicts_description">Opis</string>
   <string name="license_step_title">Licencja dla mediów</string>
   <string name="media_detail_step_title">Szczegóły mediów</string>
   <string name="menu_view_category_page">Zobacz stronę kategorii</string>
@@ -730,6 +751,7 @@
   <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
   <string name="need_permission">Wymagane uprawnienie</string>
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
+  <string name="location_off_dialog_text">Włączyć usługi określania lokalizacji, aby wyświetlić miejsca w pobliżu.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="contributions_of_user">Wkład użytkownika: %1$s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %1$s</string>
@@ -815,7 +837,7 @@
   </plurals>
   <string name="multiple_files_depiction">Pamiętaj, że wszystkie obrazy w wielokrotnym przesłaniu mają te same kategorie i przedstawienia. Jeśli obrazy nie mają wspólnych przedstawień i kategorii, wykonaj kilka oddzielnych przesłań.</string>
   <string name="multiple_files_depiction_header">Uwaga dotycząca przesyłania wielu obrazów na raz</string>
-  <string name="nearby_wikitalk">Zgłoś problem dotyczący tego elementu do Wikidata</string>
+  <string name="nearby_wikitalk">Zgłoś problem dotyczący tego elementu do Wikidanych</string>
   <string name="please_enter_some_comments">Wprowadź komentarz poniżej</string>
   <string name="talk">Dyskusja</string>
   <string name="write_something_about_the_item">Napisz coś o elemencie \' %1$s\'. Będzie to publicznie widoczne.</string>
@@ -830,6 +852,7 @@
   <string name="pending">Oczekujące</string>
   <string name="failed">Nieudane</string>
   <string name="could_not_load_place_data">Nie można wczytać danych o miejscu</string>
+  <string name="warning_for_no_option_selected">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
   <string name="custom_selector_delete_folder">Usuń folder</string>
   <string name="custom_selector_confirm_deletion_title">Potwierdź usunięcie</string>
   <string name="custom_selector_confirm_deletion_message">Czy na pewno chcesz usunąć folder %1$s zawierający %2$d elementów?</string>
@@ -859,4 +882,12 @@
   <string name="image_tag_line_created_and_uploaded_by">Utworzone i przesłane przez: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Utworzone przez %1$s i przesłane przez %2$s</string>
   <string name="nominated_for_deletion_btn">Zgłoszone do usunięcia</string>
+  <string name="custom_selector_max_image_limit_reached">Maksymalna liczba obrazów do wyboru wynosi %d.</string>
+  <string name="edit_unsupported_format_explanation">Edycja w aplikacji jest dostępna tylko dla plików JPEG. Aby edytować inne formaty, skorzystaj z narzędzia innej firmy.</string>
+  <string name="license_cc0_description">Brak praw autorskich. Zrzekasz się wszelkich praw, aby każdy mógł wykorzystać to dzieło w dowolny sposób.</string>
+  <string name="license_cc_by_description">Uznanie autorstwa. Inni mogą udostępniać i adaptować utwory, pod warunkiem wskazania autorstwa.</string>
+  <string name="license_cc_by_sa_description">Uznanie autorstwa – Na tych samych warunkach. Inni mogą udostępniać i adaptować dzieło, ale muszą korzystać z tej samej licencji oraz wskazać autorstwo.</string>
+  <string name="license_cc0_long_description">Niniejsza licencja pozwala na dystrybucję, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, bez żadnych warunków.</string>
+  <string name="license_cc_by_long_description">Niniejsza licencja pozwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa.</string>
+  <string name="license_cc_by_sa_long_description">Niniejsza licencja zezwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa oraz udostępnienia nowego dzieła na tej samej licencji.</string>
 </resources>

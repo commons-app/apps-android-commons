@@ -323,6 +323,7 @@
   <string name="delete_helper_show_deletion_title_failed">ناڪام</string>
   <string name="delete_helper_show_deletion_message_else">ڊاھ جي درخواست نہ ٿي سگهي.</string>
   <string name="delete_helper_ask_spam_selfie">سيلفي ڪنھن بہ مضمون ۾ استعمال نہ ڪئي ويندي آھي</string>
+  <string name="delete_helper_ask_spam_other">ٻيو</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">انٽرنيٽ مان بلاترتيب ڦوٽو</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>

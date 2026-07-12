@@ -4,8 +4,8 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.inOrder
@@ -40,7 +40,7 @@ class RecentLanguagesDaoUnitTest {
         )
 
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
     private lateinit var testObject: RecentLanguagesDao
