@@ -178,8 +178,8 @@
   <string name="license_name_cc_by_sa">저작자표시-동일조건변경허락 3.0</string>
   <string name="license_name_cc_by">저작자표시 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0</string>
-  <string name="license_name_cc_by_3_0">크리에이티브 커먼즈 저작자표시 3.0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">위키미디어 공용은 위키백과에 쓰이는 대부분의 이미지를 호스팅합니다.</string>
@@ -715,6 +715,7 @@
   <string name="custom_selector_already_uploaded_image_text">이 이미지는 이미 커먼즈에 업로드되었습니다.</string>
   <string name="custom_selector_over_limit_warning">기술적인 문제로 인해 앱은 %1$d개 이상의 사진을 한 번에 안정적으로 업로드할 수 없습니다. 업로드 제한인(%1$d)이 %2$d 만큼 초괴되었습니다.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">숨기기</string>
+  <string name="custom_selector_duplicates_warning">선택된 이미지 중 일부는 중복이므로 업로드 전에 제거될 예정입니다.</string>
   <string name="custom_selector_button_limit_text">최대: %1$d</string>
   <string name="custom_selector_limit_error_desc">오류: 업로드 제한에 도달했습니다</string>
   <string name="wlm_upload_info">이 이미지는 위키 기념물을 사랑하다 공모전에 출품할 예정입니다</string>
