@@ -264,6 +264,7 @@
   <string name="use_external_storage_summary">د کاريال له خوا اخيستل شوې انځورونه په خپل سولگر زخيره کې خوندي کړئ</string>
   <string name="login_to_your_account">خپل گڼون ته ننوځئ</string>
   <string name="send_log_file">يادښت دوتنه لېږل</string>
+  <string name="no_web_browser">هېڅ وېب ښوونگر ونه موندل شو چې وېبتړ پرانېځي</string>
   <string name="null_url">تېروتنه! وېبتړ ونه موندل شو</string>
   <string name="nominate_deletion">ړنگېدو ته نوماند</string>
   <string name="nominated_for_deletion">دا انځور ړنگېدو ته نوماند شوی دی.</string>
@@ -278,6 +279,8 @@
   <string name="nearby_location_not_available">څېرمه ځايونه شايد په سمه توگه کار ونکړي، ځکه ځای د لاسرسي وړ نه دي.</string>
   <string name="nearby_showing_pins_offline">اينټرنېټ د لاسرسي وړ نه دي. يوازې زېرمه شوي ځايونه ښيي.</string>
   <string name="upload_location_access_denied">ځای لاسرسی ناگاره شو. مهرباني وکړئ د دې ځانگړنې کارولو لپاره خپل ځای په لاسي ډول واوڼئ.</string>
+  <string name="location_permission_rationale_nearby">د څېرمه ځایونو لړليک ښودلو لپاره اجازې ته اړتیا ده</string>
+  <string name="location_permission_rationale_explore">د څېرمه انځورونو لړليک ښودلو لپاره اجازې ته اړتيا ده</string>
   <string name="nearby_directions">تگلوري</string>
   <string name="nearby_wikidata">ويکي‌اومتوک</string>
   <string name="nearby_wikipedia">ويکيپېډيا</string>
@@ -312,6 +315,8 @@
   <string name="search_recent_header">وروستۍ پلټنې:</string>
   <string name="provider_searches">وروستۍ پلټل شوې پوښتنې</string>
   <string name="provider_recent_languages">وروستۍ ژبې پوښتنې</string>
+  <string name="error_loading_categories">د وېشنيزو د راپورته‌کولو پرمهال تېروتنه رامنځته شوه.</string>
+  <string name="error_loading_depictions">د انځورونو د راپورته‌کولو پرمهال تېروتنه رامنځته شوه.</string>
   <string name="search_tab_title_media">رسنۍ</string>
   <string name="search_tab_title_categories">وېشنيزې</string>
   <string name="search_tab_title_depictions">توکي</string>
@@ -319,6 +324,7 @@
   <string name="explore_tab_title_mobile">موبايل له لارې راپورته‌شوی</string>
   <string name="explore_tab_title_map">نخشه</string>
   <string name="successful_wikidata_edit">انځور په ویکي‌اومتوک کې %1$s ته ورگډ شو!</string>
+  <string name="wikidata_edit_failure">د اړوند ويکي‌اومتوک شتونتيا هممهالولو کې پاتې راغی!</string>
   <string name="quiz_question_string">ايا دا انځور د راپورته‌کولو لپاره مناسب دی؟</string>
   <string name="question">پوښتنه</string>
   <string name="quiz_i_am_not_sure">ډاډه نه يم</string>
@@ -348,6 +354,8 @@
   <string name="image_reverts">انځورونه په څټ‌گرځول‌شوي نه دي</string>
   <string name="images_used_by_wiki">کارول‌شوي انځورونه</string>
   <string name="error_occurred">تېروتنه رامنځته شوه!</string>
+  <string name="notifications_channel_name_all">ټولگړې خبرتيا</string>
+  <string name="preference_author_name_toggle">د ليکوال دوديزول نوم کارول</string>
   <string name="preference_author_name">د ليکوال نوم دوديزول</string>
   <string name="contributions_fragment">ونډې</string>
   <string name="nearby_fragment">څېرمه</string>
@@ -454,6 +462,8 @@
   <string name="category_edit_button_text">وېشنيزې هم‌مهالول</string>
   <string name="depictions_edit_helper_make_edit_toast">د ښودنو هم‌مهالولو هڅه‌کول.</string>
   <string name="depictions_edit_helper_show_edit_title">ښودنې سمول</string>
+  <string name="coordinates_edit_helper_make_edit_toast">د همغږۍ د هممهالولو هڅه کول.</string>
+  <string name="coordinates_edit_helper_show_edit_title">همغږۍ هممهالول</string>
   <string name="description_edit_helper_show_edit_title">څرگنداوی هم‌مهالول</string>
   <string name="caption_edit_helper_show_edit_title">نيونگ هم‌مهالول</string>
   <string name="coordinates_edit_helper_show_edit_title_success">بریالیتوب</string>
@@ -462,9 +472,16 @@
   <string name="caption_edit_helper_show_edit_message">نيونگ ورگډ شو.</string>
   <string name="coordinates_edit_helper_edit_message_else">همغږيتوبونه نشي ورگډېدای.</string>
   <string name="description_edit_helper_edit_message_else">څرگنداوی نشي ورگډېدای.</string>
+  <string name="caption_edit_helper_edit_message_else">نيونگ نشي ورگډېدای.</string>
+  <string name="coordinates_picking_unsuccessful">انځور همغږۍ هممهاله نشوې</string>
+  <string name="descriptions_picking_unsuccessful">څرگنداويو ترلاسه کولو وړتيا نلري.</string>
+  <string name="description_activity_title">څرگتداوي او نيونگې سمول</string>
   <string name="share_image_via">انځور وېشل په وسيله د</string>
+  <string name="you_have_no_achievements_yet">تاسو تراوسه هېڅ ونډه نه ده ترسره کړې</string>
   <string name="account_created">گڼون جوړ شو!</string>
   <string name="text_copy">ليک ټينگدړې ته ولمېسل شو</string>
+  <string name="notification_mark_read">خبرتيا د لوستې په توگه په نښه شوې</string>
+  <string name="some_error">څه تېروتنه وه!</string>
   <string name="place_state_exists">شتون لري</string>
   <string name="place_state_needs_photo">انځور ته اړتيا لري</string>
   <string name="place_type">د ځای ډول:</string>

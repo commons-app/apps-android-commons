@@ -706,6 +706,7 @@
   <string name="custom_selector_already_uploaded_image_text">Dette billede er allerede blevet uploadet til Commons.</string>
   <string name="custom_selector_over_limit_warning">Af tekniske årsager kan appen ikke pålideligt uploade mere end %1$d billeder på én gang. Uploadgrænsen på %1$d er blevet overskredet med %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Afvis</string>
+  <string name="custom_selector_duplicates_warning">Nogle valgte billeder er dubletter og vil blive fjernet inden upload.</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fejl: Upload-grænse overskredet</string>
   <string name="wlm_upload_info">Dette billede deltager i Wiki Loves Monuments-konkurrencen</string>
