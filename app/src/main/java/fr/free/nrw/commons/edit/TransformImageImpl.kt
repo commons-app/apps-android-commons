@@ -64,8 +64,8 @@ class TransformImageImpl : TransformImage {
         savePath: File
     ): File {
         Timber.tag("Trying to rotate image").d("Starting")
-        val imagePath = System.currentTimeMillis()
-        val output = File(savePath, "rotated_$imagePath.jpg")
+        val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
         val normalizedDegree = ((degree % 360) + 360) % 360
         if (normalizedDegree == 0) {
             imageFile.copyTo(output, overwrite = true)
@@ -90,7 +90,6 @@ class TransformImageImpl : TransformImage {
     /**
      * Crops the specified image file using lossless JPEG cropping via Jpegtran.
      *
-     * @param imageFile The File representing the image to be cropped.
      * @param left The left coordinate of the crop rectangle.
      * @param top The top coordinate of the crop rectangle.
      * @param width The width of the crop rectangle.
@@ -98,7 +97,6 @@ class TransformImageImpl : TransformImage {
      * @return The cropped image File, or null if the crop operation fails.
      */
     override fun cropImage(
-        imageFile: File,
         left: Int,
         top: Int,
         width: Int,
@@ -108,8 +106,8 @@ class TransformImageImpl : TransformImage {
         Timber.tag("Trying to crop image").d(
             "Starting crop: left=$left, top=$top, width=$width, height=$height"
         )
-        val imagePath = System.currentTimeMillis()
-        val output = File(savePath, "cropped_$imagePath.jpg")
+        val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
         try {
             jpegtran!!.crop(
                 width,

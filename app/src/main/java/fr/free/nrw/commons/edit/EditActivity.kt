@@ -99,93 +99,48 @@ class EditActivity : AppCompatActivity() {
         binding.iv.adjustViewBounds = true
         binding.iv.scaleType = ImageView.ScaleType.MATRIX
         binding.iv.post {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(imageUri, options)
-
-            val bitmapWidth = options.outWidth
-            val bitmapHeight = options.outHeight
-
-            // Store original dimensions for crop calculation
-            originalBitmapWidth = bitmapWidth
-            originalBitmapHeight = bitmapHeight
-
             maxAvailableHeight = binding.iv.measuredHeight.toFloat()
-
-            // Check if the bitmap dimensions exceed a certain threshold
-            val maxBitmapSize = 2000
-            var finalBitmap: Bitmap?
-            if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
-                val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
-                options.inSampleSize = scaleFactor
-                options.inJustDecodeBounds = false
-                finalBitmap = BitmapFactory.decodeFile(imageUri, options)
-            } else {
-                options.inJustDecodeBounds = false
-                finalBitmap = BitmapFactory.decodeFile(imageUri, options)
-            }
-
-            if (finalBitmap != null) {
-                binding.iv.setImageBitmap(finalBitmap)
-                binding.iv.rotation = 0f
-                imageRotation = startOrientation
-                val viewWidth = binding.iv.measuredWidth.toFloat()
-                val bmpWidth = finalBitmap.width.toFloat()
-                val bmpHeight = finalBitmap.height.toFloat()
-
-                val matrix = Matrix()
-                val isRotated90 = (startOrientation == 90 || startOrientation == 270)
-
-                val scale = if (isRotated90) {
-                    min(viewWidth / bmpHeight, maxAvailableHeight / bmpWidth)
-                } else {
-                    min(viewWidth / bmpWidth, maxAvailableHeight / bmpHeight)
-                }
-
-                val viewHeight = if (isRotated90) {
-                    min((scale * bmpWidth).toInt(), maxAvailableHeight.toInt())
-                } else {
-                    min((scale * bmpHeight).toInt(), maxAvailableHeight.toInt())
-                }
-
-                binding.iv.layoutParams.height = viewHeight
-                // rotate around center of the bitmap
-                matrix.postRotate(startOrientation.toFloat(), bmpWidth / 2, bmpHeight / 2)
-                matrix.postScale(scale, scale, bmpWidth / 2, bmpHeight / 2)
-                val bmpCenterX = bmpWidth / 2
-                val bmpCenterY = bmpHeight / 2
-                val viewCenterX = viewWidth / 2
-                val viewCenterY = viewHeight.toFloat() / 2
-
-                matrix.postTranslate(viewCenterX - bmpCenterX, viewCenterY - bmpCenterY)
-
-                binding.iv.imageMatrix = matrix
-            }
-
+            updateImagePreview()
         }
         binding.rotateBtn.setOnClickListener {
             // Allow rotation while in crop mode - overlay will update after animation
             animateImageHeight()
         }
         binding.cropBtn.setOnClickListener {
-            toggleCropMode()
+            if (!isCropMode) {
+                enterCropMode()
+                toggleApplyEditMode(true)
+            }
         }
         binding.btnSave.setOnClickListener {
             saveEditedImage()
         }
         binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.editApplyBtn.setOnClickListener {
+            if (isCropMode) {
+                applyCrop()
+            }
+        }
+        binding.editCancelBtn.setOnClickListener {
+            exitCropMode()
+            toggleApplyEditMode(false)
+        }
     }
 
     /**
-     * Toggles crop mode on and off.
+     * Toggles between the main toolbar (Rotate/Crop/Save) and the edit toolbar (Apply/Cancel).
+     *
+     * @param activate true to show Apply/Cancel and hide main buttons, false to restore main buttons.
      */
-    private fun toggleCropMode() {
-        if (isCropMode) {
-            exitCropMode()
-        } else {
-            enterCropMode()
-        }
+    private fun toggleApplyEditMode(activate: Boolean) {
+        val mainVisibility = if (activate) View.GONE else View.VISIBLE
+        val editVisibility = if (activate) View.VISIBLE else View.GONE
+        binding.rotateBtn.visibility = mainVisibility
+        binding.cropBtn.visibility = mainVisibility
+        binding.btnSave.visibility = mainVisibility
+        binding.editOptionsLayout.visibility = editVisibility
     }
+
 
     /**
      * Enters crop mode, showing the crop overlay.
@@ -239,56 +194,139 @@ class EditActivity : AppCompatActivity() {
     }
 
     /**
-     * Saves the edited image (with rotation and/or crop applied).
+     * Applies the current crop selection immediately via JNI, reloads the cropped image
+     * in the ImageView, and returns to the main toolbar.
+     */
+    private fun applyCrop() {
+        val filePath = imageUri.toUri().path
+        try {
+            var file = File(filePath.toString())
+            // Apply rotation if pending so crop coordinates match.
+            file = applyPendingRotation(file)
+
+            val properties = vm.getProperties(file.toUri())
+            val actualWidth = properties.width
+            val actualHeight = properties.height
+            val cropRect = binding.cropOverlay.getCropRect()
+            val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
+
+            if (cropCoords != null) {
+                val croppedFile = vm.cropImage(
+                    cropCoords.left,
+                    cropCoords.top,
+                    cropCoords.width,
+                    cropCoords.height,
+                    applicationContext.cacheDir
+                )
+                imageUri = croppedFile.absolutePath
+                // Update the image preview.
+                updateImagePreview()
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "applyCrop: Failed to apply crop")
+            Toast.makeText(
+                this,
+                "Failed to apply crop: ${e.localizedMessage}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        exitCropMode()
+        toggleApplyEditMode(false)
+    }
+
+    /**
+     * Loads the current [imageUri] into the ImageView with downsampling, EXIF rotation
+     * handling, and proper matrix fitting.
+     */
+    private fun updateImagePreview() {
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(imageUri, options)
+
+        val bitmapWidth = options.outWidth
+        val bitmapHeight = options.outHeight
+        originalBitmapWidth = bitmapWidth
+        originalBitmapHeight = bitmapHeight
+
+        val maxBitmapSize = 2000
+        val finalBitmap: Bitmap?
+        if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
+            val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
+            options.inSampleSize = scaleFactor
+            options.inJustDecodeBounds = false
+            finalBitmap = BitmapFactory.decodeFile(imageUri, options)
+        } else {
+            options.inJustDecodeBounds = false
+            finalBitmap = BitmapFactory.decodeFile(imageUri, options)
+        }
+
+        if (finalBitmap != null) {
+            binding.iv.setImageBitmap(finalBitmap)
+            binding.iv.rotation = 0f
+            imageRotation = startOrientation
+
+            val viewWidth = binding.iv.measuredWidth.toFloat()
+            val bmpWidth = finalBitmap.width.toFloat()
+            val bmpHeight = finalBitmap.height.toFloat()
+
+            val matrix = Matrix()
+            val isRotated90 = (startOrientation == 90 || startOrientation == 270)
+
+            val scale = if (isRotated90) {
+                min(viewWidth / bmpHeight, maxAvailableHeight / bmpWidth)
+            } else {
+                min(viewWidth / bmpWidth, maxAvailableHeight / bmpHeight)
+            }
+
+            val viewHeight = if (isRotated90) {
+                min((scale * bmpWidth).toInt(), maxAvailableHeight.toInt())
+            } else {
+                min((scale * bmpHeight).toInt(), maxAvailableHeight.toInt())
+            }
+
+            binding.iv.layoutParams.height = viewHeight
+            matrix.postRotate(startOrientation.toFloat(), bmpWidth / 2, bmpHeight / 2)
+            matrix.postScale(scale, scale, bmpWidth / 2, bmpHeight / 2)
+            matrix.postTranslate(
+                viewWidth / 2 - bmpWidth / 2,
+                viewHeight.toFloat() / 2 - bmpHeight / 2
+            )
+            binding.iv.imageMatrix = matrix
+            binding.iv.requestLayout()
+        }
+    }
+
+    /**
+     * Applies any pending rotation to the given file via JNI and resets the rotation baseline.
+     * Returns the rotated file, or the original file if no rotation was pending.
+     */
+    private fun applyPendingRotation(file: File): File {
+        val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
+        if (relativeRotation == 0) return file
+        val rotated = vm.rotateImage(file, relativeRotation, applicationContext.cacheDir)
+        // Reset rotation baseline since the file is now oriented correctly.
+        startOrientation = 0
+        imageRotation = 0
+        return rotated
+    }
+
+    /**
+     * Checks for any pending roation and applies rotation.
+     * Saves the edited image.
      */
     private fun saveEditedImage() {
         val filePath = imageUri.toUri().path
-        var file = filePath?.let { File(it) }
 
         try {
-            val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
+            var file = File(filePath.toString())
+            file = applyPendingRotation(file)
 
-            // Apply rotation first if needed
-            if (relativeRotation != 0 && file != null) {
-                val rotatedImage =
-                    vm.rotateImage(
-                        file, relativeRotation,
-                        applicationContext.cacheDir
-                    )
-                file = rotatedImage
-            }
-
-            // Apply crop if in crop mode
-            if (isCropMode && file != null) {
-                val properties =
-                    vm.getProperties(file.toUri())
-
-                val actualWidth = properties.width
-                val actualHeight = properties.height
-                val cropRect = binding.cropOverlay.getCropRect()
-                val cropCoords = convertViewCropToImageCrop(
-                    cropRect,
-                    actualWidth, actualHeight
-                )
-                if (cropCoords != null) {
-                    val croppedImage =
-                        vm.cropImage(
-                            file,
-                            cropCoords.left,
-                            cropCoords.top,
-                            cropCoords.width,
-                            cropCoords.height,
-                            applicationContext.cacheDir
-                        )
-                    file = croppedImage
-                }
-            }
-
-            val finalPath = file?.absolutePath
+            val finalPath = file.absolutePath
             val resultIntent = Intent().apply {
                 putExtra("editedImageFilePath", finalPath)
             }
             setResult(RESULT_OK, resultIntent)
+            finish()
         } catch (e: Exception) {
             Timber.e(e, "saveEditedImage: Exception occurred during save process")
             Toast.makeText(
@@ -296,8 +334,6 @@ class EditActivity : AppCompatActivity() {
                 "Failed to save image: ${e.localizedMessage}",
                 Toast.LENGTH_LONG
             ).show()
-        } finally {
-            finish()
         }
     }
 

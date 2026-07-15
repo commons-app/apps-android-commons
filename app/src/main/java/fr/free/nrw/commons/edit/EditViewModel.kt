@@ -56,7 +56,6 @@ class EditViewModel : ViewModel() {
     /**
      * Crops the specified image file using lossless JPEG cropping.
      *
-     * @param imageFile The File representing the image to be cropped.
      * @param left The left coordinate of the crop rectangle.
      * @param top The top coordinate of the crop rectangle.
      * @param width The width of the crop rectangle.
@@ -64,11 +63,10 @@ class EditViewModel : ViewModel() {
      * @return The cropped image File, or null if the crop operation fails.
      */
     fun cropImage(
-        imageFile: File,
         left: Int,
         top: Int,
         width: Int,
         height: Int,
         savePath: File,
-    ): File = transformImage.cropImage(imageFile, left, top, width, height, savePath)
+    ): File = transformImage.cropImage(left, top, width, height, savePath)
 }
