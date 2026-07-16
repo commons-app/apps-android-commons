@@ -45,9 +45,10 @@ class EditActivity : AppCompatActivity() {
     private var startOrientation = 0
 
     private var isCropMode = false
+    private var isBlurMode = false
+    private var baseImageMatrix: Matrix? = null
     private var originalBitmapWidth = 0
     private var originalBitmapHeight = 0
-    private var displayScale = 1f
     private var maxAvailableHeight = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,10 +121,25 @@ class EditActivity : AppCompatActivity() {
             if (isCropMode) {
                 applyCrop()
             }
+            if (isBlurMode) {
+                applyBlur()
+            }
         }
         binding.editCancelBtn.setOnClickListener {
-            exitCropMode()
+            if (isCropMode) {
+                exitCropMode()
+            }
+            if (isBlurMode) {
+                exitBlurMode()
+            }
             toggleApplyEditMode(false)
+        }
+        binding.blurBtn.setOnClickListener {
+            if (!isBlurMode) {
+                enterBlurMode()
+                toggleApplyEditMode(true)
+            }
+
         }
     }
 
@@ -137,8 +153,42 @@ class EditActivity : AppCompatActivity() {
         val editVisibility = if (activate) View.VISIBLE else View.GONE
         binding.rotateBtn.visibility = mainVisibility
         binding.cropBtn.visibility = mainVisibility
-        binding.btnSave.visibility = mainVisibility
+        binding.blurBtn.visibility = mainVisibility
+        // Keep the save button in the view, so there is no layout shift.
+        binding.btnSave.visibility = if (!activate) View.VISIBLE else View.INVISIBLE
         binding.editOptionsLayout.visibility = editVisibility
+    }
+
+    /**
+     * Enters blur mode, showing the blur overlay and isolating its controls.
+     */
+    private fun enterBlurMode() {
+        if (imageUri.isEmpty()) {
+            Toast.makeText(
+                this, "Please open an image first",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        isBlurMode = true
+        // Hide crop overlay (if visible) to avoid conflict
+        binding.cropOverlay.visibility = View.GONE
+        binding.blurOverlay.visibility = View.VISIBLE
+
+        // Match the blur overlay size to the ImageView so they share identical bounds.
+        binding.blurOverlay.layoutParams.height = binding.iv.layoutParams.height
+        binding.blurOverlay.requestLayout()
+
+        // Save current matrix, BlurOverlayView will modify it directly for zoom/pan.
+        baseImageMatrix = Matrix(binding.iv.imageMatrix)
+        binding.iv.scaleType = ImageView.ScaleType.MATRIX
+
+        // Explicitly re-apply the matrix after switching scaleType to MATRIX,
+        // because ImageView resets to its user-set matrix.
+        binding.iv.imageMatrix = Matrix(baseImageMatrix!!)
+        binding.blurOverlay.setImageView(binding.iv)
+        binding.blurOverlay.setBaseMatrix(baseImageMatrix!!)
     }
 
 
@@ -191,6 +241,68 @@ class EditActivity : AppCompatActivity() {
     private fun exitCropMode() {
         isCropMode = false
         binding.cropOverlay.visibility = View.GONE
+    }
+
+    /**
+     * Exits blur mode, restoring the original layout and image view state.
+     */
+    private fun exitBlurMode() {
+        isBlurMode = false
+        binding.blurOverlay.visibility = View.GONE
+        binding.blurOverlay.clearRegions()
+        binding.blurOverlay.resetZoom()
+
+        // Restore overlay height back to match_parent.
+        binding.blurOverlay.layoutParams.height =
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT
+        binding.blurOverlay.requestLayout()
+
+        // Restore image view matrix.
+        baseImageMatrix?.let {
+            binding.iv.imageMatrix = it
+        }
+    }
+
+    /**
+     * Applies the blur to the selected regions of the image using Jpegtran.
+     */
+    private fun applyBlur() {
+        Timber.d(
+            "%s%s",
+            "applyBlur: originalBitmapWidth=$originalBitmapWidth,",
+            " originalBitmapHeight=$originalBitmapHeight"
+        )
+        val regions = binding.blurOverlay.getMappedBlurRegions(
+            binding.iv,
+            originalBitmapWidth,
+            originalBitmapHeight
+        )
+        Timber.d("applyBlur: mappedRegionsCount=${regions.size}")
+
+        if (regions.isEmpty()) {
+            Toast.makeText(
+                this,
+                "Please draw at least one rectangle on the photo",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        try {
+            val blurredFile = vm.blurImage(regions, applicationContext.cacheDir)
+            imageUri = blurredFile.absolutePath
+            // Reload the image displaying the applied blur.
+            updateImagePreview()
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to apply blur")
+            Toast.makeText(
+                this@EditActivity,
+                "Error applying blur: ${e.localizedMessage}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        exitBlurMode()
+        toggleApplyEditMode(false)
     }
 
     /**

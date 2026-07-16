@@ -41,6 +41,17 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btn_save"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/baseline_save_24"
+      android:drawablePadding="4dp"
+      android:text="@string/menu_save_categories"
+      android:textColor="@android:color/white"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,6 +70,16 @@
 
     <fr.free.nrw.commons.edit.CropOverlayView
       android:id="@+id/crop_overlay"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:visibility="gone" />
+
+    <fr.free.nrw.commons.edit.BlurOverlayView
+      android:id="@+id/blur_overlay"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -98,12 +119,12 @@
         android:textColor="@android:color/white" />
 
       <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save"
+        android:id="@+id/blur_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/baseline_save_24"
+        android:drawableStart="@drawable/baseline_blur_24"
         android:drawablePadding="4dp"
-        android:text="@string/menu_save_categories"
+        android:text="@string/blur"
         android:textColor="@android:color/white" />
 
       <LinearLayout
@@ -118,6 +139,7 @@
           android:id="@+id/edit_cancel_btn"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginEnd="@dimen/tiny_margin"
           android:text="@string/cancel"
           android:textColor="@android:color/white"
           android:visibility="visible" />
@@ -126,6 +148,7 @@
           android:id="@+id/edit_apply_btn"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/tiny_margin"
           android:text="@string/apply"
           android:textColor="@android:color/white"
           android:visibility="visible" />

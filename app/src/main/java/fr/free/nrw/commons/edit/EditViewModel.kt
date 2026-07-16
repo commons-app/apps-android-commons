@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.ajpegtran.Properties
+import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
 import java.io.File
 
 /**
@@ -69,4 +70,16 @@ class EditViewModel : ViewModel() {
         height: Int,
         savePath: File,
     ): File = transformImage.cropImage(left, top, width, height, savePath)
+
+    /**
+     * Blurs the specified regions of the image file.
+     *
+     * @param regions The list of regions to blur.
+     * @param savePath The directory to save the blurred image in.
+     * @return The blurred image File, or null if the blur operation fails.
+     */
+    fun blurImage(
+        regions: List<BlurRegion>,
+        savePath: File
+    ): File = transformImage.blurImage(regions, savePath)
 }
