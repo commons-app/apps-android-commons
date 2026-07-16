@@ -9,6 +9,7 @@
 * Overlaet
 * Peterleth
 * Saederup92
+* Steenth
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-side</string>
@@ -60,7 +61,7 @@
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
-  <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_feedback">Tilbagemelding</string>
   <string name="preference_category_privacy">Privatliv</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Indstillinger</string>
@@ -245,7 +246,7 @@
   <string name="navigation_item_nearby">I nærheden</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Indstillinger</string>
-  <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback">Tilbagemelding</string>
   <string name="navigation_item_feedback_github">Feedback via GitHub</string>
   <string name="navigation_item_logout">Log af</string>
   <string name="navigation_item_info">Vejledning</string>

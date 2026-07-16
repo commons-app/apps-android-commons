@@ -722,6 +722,7 @@
   <string name="custom_selector_already_uploaded_image_text">Deze afbeelding is al geüpload op Wikimedia Commons.</string>
   <string name="custom_selector_over_limit_warning">Om technische redenen kan de app niet op betrouwbare wijze meer dan %1$d afbeeldingen tegelijk uploaden. De uploadlimiet van %1$d is met %2$d overschreden.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Sluiten</string>
+  <string name="custom_selector_duplicates_warning">Sommige geselecteerde afbeeldingen zijn duplicaten en worden vóór het uploaden verwijderd.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fout: uploadlimiet overschreden</string>
   <string name="place_state_wlm">WLM</string>

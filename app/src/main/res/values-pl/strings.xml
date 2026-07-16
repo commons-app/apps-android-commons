@@ -665,8 +665,8 @@
   <string name="wikipedia_instructions_step_2">2. Kliknij Potwierdź spowoduje otwarcie artykułu w Wikipedii</string>
   <string name="wikipedia_instructions_step_3">3. Znajdź odpowiednią sekcję w artykule dla swojego obrazu</string>
   <string name="wikipedia_instructions_step_4">4. Kliknij ikonę Edytuj (ołówek) dla tej sekcji.</string>
-  <string name="wikipedia_instructions_step_5">5. Wklej wikitekst w odpowiednim miejscu.</string>
-  <string name="wikipedia_instructions_step_6">6. Edytuj wikitekst w celu odpowiedniego pozycjonowania, jeśli to konieczne. Aby uzyskać więcej informacji, zobacz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_5">5. Wklej wikikod w odpowiednim miejscu.</string>
+  <string name="wikipedia_instructions_step_6">6. Edytuj wikikod w celu odpowiedniego pozycjonowania, jeśli to konieczne. Więcej informacji znajdziesz &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;tutaj&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Opublikuj artykuł</string>
   <string name="copy_wikicode_to_clipboard">Skopiuj wikikod do schowka</string>
   <string name="pause">zatrzymaj</string>
