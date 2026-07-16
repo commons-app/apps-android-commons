@@ -3,11 +3,11 @@ agp = "8.13.0"
 acra = "5.8.4"
 activityCompose = "1.9.3"
 adapterdelegates = "4.3.0"
-androidmediautil = "v1.0-1"
 androidSdkVersion = "11.13.5"
 androidPluginScalebar = "1.0.0"
 androidxJunitVersion = "1.1.5"
 annotation = "1.3.0"
+ajpegtran = "0.1.11"
 browser = "1.3.0"
 cardview = "1.0.0"
 commonsIo = "2.6"
@@ -132,6 +132,9 @@ glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 kotlinx-coroutines-rx2 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2", version.ref = "kotlinxCoroutinesRx2" }
 photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoviewVersion" }
 
+# Image editing
+ajpegtran = { module = "io.github.commons-app:ajpegtran", version.ref = "ajpegtran" }
+
 # RxJava and Reactive Programming
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
@@ -183,7 +186,6 @@ retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ve
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 apache-commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLang3Version" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
-juanitobananas-androidDmediaUtil = { module = "com.github.juanitobananas:AndroidMediaUtil", version.ref = "androidmediautil" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
