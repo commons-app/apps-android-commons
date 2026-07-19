@@ -161,14 +161,6 @@ class EditActivity : BaseActivity() {
      * Enters blur mode, showing the blur overlay and isolating its controls.
      */
     private fun enterBlurMode() {
-        if (imageUri.isEmpty()) {
-            Toast.makeText(
-                this, "Please open an image first",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
         isBlurMode = true
         // Hide crop overlay (if visible) to avoid conflict
         binding.cropOverlay.visibility = View.GONE
@@ -284,6 +276,10 @@ class EditActivity : BaseActivity() {
             ).show()
             return
         }
+        // Exit blur mode before updating the preview
+        // because exitBlurMode() restores the pre-blur matrix.
+        exitBlurMode()
+        toggleApplyEditMode(false)
 
         try {
             val blurredFile = vm.blurImage(regions, applicationContext.cacheDir)
@@ -298,8 +294,6 @@ class EditActivity : BaseActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-        exitBlurMode()
-        toggleApplyEditMode(false)
     }
 
     /**

@@ -65,7 +65,7 @@ interface TransformImage {
      *
      * @param regions The list of regions to blur.
      * @param savePath The directory to save the blurred image in.
-     * @return The blurred image File, or null if the blur operation fails.
+     * @return The blurred image File.
      */
     fun blurImage(
         regions: List<BlurRegion>,

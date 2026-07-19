@@ -483,7 +483,7 @@ class BlurOverlayView @JvmOverloads constructor(
 
                 // End drawing.
                 currentActiveBox?.let { activeBox ->
-                    if (activeBox.width() > 15 || activeBox.height() > 15) {
+                    if (activeBox.width() > 15 && activeBox.height() > 15) {
                         regions.add(activeBox)
                     }
                     currentActiveBox = null
