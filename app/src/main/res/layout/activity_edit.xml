@@ -11,7 +11,7 @@
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primaryColor"
+    android:background="?attr/mainBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="12dp"
@@ -26,7 +26,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:tint="@color/white" />
+      app:tint="?attr/toolbar_text_color" />
 
     <TextView
       android:id="@+id/selection_count"
@@ -35,7 +35,7 @@
       android:layout_height="wrap_content"
       android:text="@string/edit_image"
       android:textAlignment="center"
-      android:textColor="@color/white"
+      android:textColor="?attr/toolbar_text_color"
       android:textSize="@dimen/subheading_text_size"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
       android:drawableStart="@drawable/baseline_save_24"
       android:drawablePadding="4dp"
       android:text="@string/menu_save_categories"
-      android:textColor="@android:color/white"
+      android:textColor="@color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>

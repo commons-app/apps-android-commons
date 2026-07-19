@@ -13,14 +13,13 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
+import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import timber.log.Timber
@@ -37,7 +36,7 @@ import kotlin.math.roundToInt
  * for initializing the UI, animating image rotations and handling
  * the image-saving process.
  */
-class EditActivity : AppCompatActivity() {
+class EditActivity : BaseActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
     private lateinit var binding: ActivityEditBinding
@@ -52,7 +51,6 @@ class EditActivity : AppCompatActivity() {
     private var maxAvailableHeight = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -198,7 +196,6 @@ class EditActivity : AppCompatActivity() {
     private fun enterCropMode() {
         isCropMode = true
         binding.cropOverlay.visibility = View.VISIBLE
-        // Allow rotation while in crop mode for flexibility
 
         binding.iv.post {
             updateCropOverlayBounds()

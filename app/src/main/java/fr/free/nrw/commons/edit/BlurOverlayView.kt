@@ -65,6 +65,9 @@ class BlurOverlayView @JvmOverloads constructor(
     private lateinit var handlePaint: Paint
     private lateinit var activeHandlePaint: Paint
     private lateinit var handleBorderPaint: Paint
+    private var moveRegionIndex = -1
+    private var lastTouchX = 0f
+    private var lastTouchY = 0f
 
     private enum class Handle {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,
@@ -369,10 +372,20 @@ class BlurOverlayView @JvmOverloads constructor(
                 resizeRegionIndex = -1
                 resizeHandle = null
 
-                // Check delete markers first.
+                // Check if event is for rectangles movement first,
+                // then for the delete markers.
                 val touchRadius = deleteMarkerTouchRadiusDp * density
                 val cornerPt = FloatArray(2)
                 for (i in regions.indices) {
+                    // Move Rectangle
+                    if (regions[i].contains(x, y)) {
+                        moveRegionIndex = i
+                        lastTouchX = x
+                        lastTouchY = y
+                        parent?.requestDisallowInterceptTouchEvent(true)
+                        return true
+                    }
+                    // Delete markers.
                     cornerPt[0] = regions[i].right
                     cornerPt[1] = regions[i].top
                     ivMatrix.mapPoints(cornerPt)
@@ -401,6 +414,18 @@ class BlurOverlayView @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_MOVE -> {
+                // Move rectangle.
+                if (moveRegionIndex != -1) {
+                    val dx = x - lastTouchX
+                    val dy = y - lastTouchY
+
+                    // Shift the entire rectangle boundaries by the offest.
+                    regions[moveRegionIndex].offset(dx, dy)
+                    lastTouchX = x
+                    lastTouchY = y
+                    invalidate()
+                    return true
+                }
                 // Delete marker drag-cancel check.
                 if (deleteBoxIndex != -1) {
                     val dxDrag = event.x - startScreenX
@@ -434,6 +459,9 @@ class BlurOverlayView @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_UP -> {
+                // Rectangle movement.
+                if (moveRegionIndex != -1)
+                    moveRegionIndex = -1
                 // Delete marker tap.
                 if (deleteBoxIndex != -1) {
                     if (deleteBoxIndex < regions.size) {
@@ -465,6 +493,7 @@ class BlurOverlayView @JvmOverloads constructor(
             }
 
             MotionEvent.ACTION_CANCEL -> {
+                moveRegionIndex = -1
                 deleteBoxIndex = -1
                 currentActiveBox = null
                 resizeRegionIndex = -1
