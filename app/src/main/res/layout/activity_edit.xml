@@ -56,37 +56,38 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/achievementBackground">
 
     <ImageView
       android:id="@+id/iv"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_gravity="center" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <fr.free.nrw.commons.edit.CropOverlayView
       android:id="@+id/crop_overlay"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:visibility="gone" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <fr.free.nrw.commons.edit.BlurOverlayView
       android:id="@+id/blur_overlay"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:visibility="gone" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
       android:id="@+id/linearLayout"
