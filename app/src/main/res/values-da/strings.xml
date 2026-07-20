@@ -9,6 +9,7 @@
 * Overlaet
 * Peterleth
 * Saederup92
+* Steenth
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-side</string>
@@ -60,7 +61,7 @@
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
-  <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_feedback">Tilbagemelding</string>
   <string name="preference_category_privacy">Privatliv</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Indstillinger</string>
@@ -245,7 +246,7 @@
   <string name="navigation_item_nearby">I nærheden</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Indstillinger</string>
-  <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback">Tilbagemelding</string>
   <string name="navigation_item_feedback_github">Feedback via GitHub</string>
   <string name="navigation_item_logout">Log af</string>
   <string name="navigation_item_info">Vejledning</string>
@@ -330,7 +331,7 @@
   <string name="error_loading_depictions">Der opstod en fejl under indlæsning af afbildninger.</string>
   <string name="search_tab_title_media">Medier</string>
   <string name="search_tab_title_categories">Kategorier</string>
-  <string name="search_tab_title_depictions">Elementer</string>
+  <string name="search_tab_title_depictions">Emner</string>
   <string name="explore_tab_title_featured">Fremhævet</string>
   <string name="explore_tab_title_mobile">Uploadet via mobil</string>
   <string name="explore_tab_title_map">Kort</string>
@@ -694,7 +695,7 @@
   <string name="check_whether_location_is_correct">Tjek, om placeringen er korrekt</string>
   <string name="label">Etiket</string>
   <string name="description">Beskrivelse</string>
-  <string name="title_page_bookmarks_items">Elementer</string>
+  <string name="title_page_bookmarks_items">Emner</string>
   <string name="custom_selector_title">Brugerdefineret vælger</string>
   <string name="custom_selector_empty_text">Ingen billeder</string>
   <string name="done">Færdig</string>
@@ -706,6 +707,7 @@
   <string name="custom_selector_already_uploaded_image_text">Dette billede er allerede blevet uploadet til Commons.</string>
   <string name="custom_selector_over_limit_warning">Af tekniske årsager kan appen ikke pålideligt uploade mere end %1$d billeder på én gang. Uploadgrænsen på %1$d er blevet overskredet med %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Afvis</string>
+  <string name="custom_selector_duplicates_warning">Nogle valgte billeder er dubletter og vil blive fjernet inden upload.</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fejl: Upload-grænse overskredet</string>
   <string name="wlm_upload_info">Dette billede deltager i Wiki Loves Monuments-konkurrencen</string>

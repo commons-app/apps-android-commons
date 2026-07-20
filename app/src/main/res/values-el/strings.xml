@@ -722,6 +722,7 @@
   <string name="custom_selector_already_uploaded_image_text">Αυτή η εικόνα έχει ήδη μεταφορτωθεί στο Commons.</string>
   <string name="custom_selector_over_limit_warning">Για τεχνικούς λόγους, η εφαρμογή δεν μπορεί να ανεβάσει αξιόπιστα περισσότερες από %1$d φωτογραφίες ταυτόχρονα. Το όριο μεταφόρτωσης του %1$d έχει ξεπεραστεί κατά %2$d .</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Απόρριψη</string>
+  <string name="custom_selector_duplicates_warning">Ορισμένες επιλεγμένες εικόνες είναι διπλότυπες και θα αφαιρεθούν πριν από τη μεταφόρτωση.</string>
   <string name="custom_selector_button_limit_text">Μέγιστο: %1$d</string>
   <string name="custom_selector_limit_error_desc">Σφάλμα: Υπέρβαση ορίου μεταφόρτωσης</string>
   <string name="wlm_upload_info">Αυτή η εικόνα θα συμμετάσχει στον διαγωνισμό Wiki Loves Monuments</string>

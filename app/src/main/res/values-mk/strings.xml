@@ -355,7 +355,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="rotate">Сврти</string>
-  <string name="crop">Скастри</string>
+  <string name="crop">Поткастри</string>
   <string name="error_fetching_nearby_places">Не можам да ги вчитам околните места.</string>
   <string name="no_pictures_in_this_area">Нема слики за ова подрачје</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
@@ -700,6 +700,7 @@
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
   <string name="custom_selector_over_limit_warning">Од технички причини прилогот не може поуздано да вчита повеќе од %1$d слики наеднап. Имате %2$d повеќе од дозволените %1$d подигања.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Тргни</string>
+  <string name="custom_selector_duplicates_warning">Некои избрани слики се дупликати и ќе бидат отстранети пред подигањето.</string>
   <string name="custom_selector_button_limit_text">Највеќе: %1$d</string>
   <string name="custom_selector_limit_error_desc">Грешка: Надминато е ограничувањето на подигања</string>
   <string name="place_state_wlm">WLM</string>
