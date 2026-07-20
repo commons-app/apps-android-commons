@@ -331,7 +331,7 @@
   <string name="error_loading_depictions">Der opstod en fejl under indlæsning af afbildninger.</string>
   <string name="search_tab_title_media">Medier</string>
   <string name="search_tab_title_categories">Kategorier</string>
-  <string name="search_tab_title_depictions">Elementer</string>
+  <string name="search_tab_title_depictions">Emner</string>
   <string name="explore_tab_title_featured">Fremhævet</string>
   <string name="explore_tab_title_mobile">Uploadet via mobil</string>
   <string name="explore_tab_title_map">Kort</string>
@@ -695,7 +695,7 @@
   <string name="check_whether_location_is_correct">Tjek, om placeringen er korrekt</string>
   <string name="label">Etiket</string>
   <string name="description">Beskrivelse</string>
-  <string name="title_page_bookmarks_items">Elementer</string>
+  <string name="title_page_bookmarks_items">Emner</string>
   <string name="custom_selector_title">Brugerdefineret vælger</string>
   <string name="custom_selector_empty_text">Ingen billeder</string>
   <string name="done">Færdig</string>

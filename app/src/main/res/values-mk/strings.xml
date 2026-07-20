@@ -355,7 +355,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="rotate">Сврти</string>
-  <string name="crop">Скастри</string>
+  <string name="crop">Поткастри</string>
   <string name="error_fetching_nearby_places">Не можам да ги вчитам околните места.</string>
   <string name="no_pictures_in_this_area">Нема слики за ова подрачје</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
