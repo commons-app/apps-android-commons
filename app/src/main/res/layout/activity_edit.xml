@@ -89,13 +89,13 @@
         android:textColor="@android:color/white" />
 
       <androidx.appcompat.widget.AppCompatButton
-        android:drawablePadding="4dp"
-        android:drawableStart="@drawable/baseline_crop_24"
         android:id="@+id/crop_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="@string/crop"/>
+        android:drawableStart="@drawable/baseline_crop_24"
+        android:drawablePadding="4dp"
+        android:text="@string/crop"
+        android:textColor="@android:color/white" />
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
@@ -105,6 +105,31 @@
         android:drawablePadding="4dp"
         android:text="@string/menu_save_categories"
         android:textColor="@android:color/white" />
+
+      <LinearLayout
+        android:id="@+id/edit_options_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/edit_cancel_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/cancel"
+          android:textColor="@android:color/white"
+          android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/edit_apply_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/apply"
+          android:textColor="@android:color/white"
+          android:visibility="visible" />
+      </LinearLayout>
     </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.edit
 
+import android.content.Context
+import android.net.Uri
+import fr.free.nrw.commons.ajpegtran.Properties
 import java.io.File
 
 /**
@@ -9,6 +12,22 @@ import java.io.File
  * implementations to provide specific functionality for tasks like rotating images.
  */
 interface TransformImage {
+
+    /**
+     * Initialize the single Jpegtran instance for this editing session.
+     */
+    fun initJpegtran(context: Context, imagePath: String)
+
+    /**
+     * Returns properties of the JPEG image.
+     */
+    fun getProperties(uri: Uri): Properties
+
+    /**
+     * Clear and cleanup temporary files in Jpegtran.
+     */
+    fun cleanup()
+
     /**
      * Rotates the specified image file by the given degree.
      *
@@ -20,12 +39,12 @@ interface TransformImage {
     fun rotateImage(
         imageFile: File,
         degree: Int,
-        savePath: File): File?
+        savePath: File
+    ): File
 
     /**
      * Crops the specified image file using lossless JPEG cropping.
      *
-     * @param imageFile The File representing the image to be cropped.
      * @param left The left coordinate of the crop rectangle.
      * @param top The top coordinate of the crop rectangle.
      * @param width The width of the crop rectangle.
@@ -33,11 +52,10 @@ interface TransformImage {
      * @return The cropped image File, or null if the crop operation fails.
      */
     fun cropImage(
-        imageFile: File,
         left: Int,
         top: Int,
         width: Int,
         height: Int,
         savePath: File,
-    ): File?
+    ): File
 }

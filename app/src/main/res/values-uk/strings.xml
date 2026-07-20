@@ -733,6 +733,7 @@
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
   <string name="custom_selector_over_limit_warning">З технічних причин програма не може надійно вивантажувати більше ніж %1$d зображення/ь одночасно. Обмеження завантаження %1$d перевищено на %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Відхилити</string>
+  <string name="custom_selector_duplicates_warning">Деякі вибрані зображення є дублікатами та будуть видалені перед завантаженням.</string>
   <string name="custom_selector_button_limit_text">Максимум: %1$d</string>
   <string name="custom_selector_limit_error_desc">Помилка: перевищено ліміт завантаження</string>
   <string name="place_state_wlm">ВЛП</string>
