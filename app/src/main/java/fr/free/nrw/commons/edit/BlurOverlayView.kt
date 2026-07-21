@@ -664,7 +664,7 @@ class BlurOverlayView @JvmOverloads constructor(
                 mappedRegions.add(
                     BlurRegion(
                         w, h, cornerX, cornerY,
-                        100, 100, true
+                        -1, -1, true
                     )
                 )
             }
