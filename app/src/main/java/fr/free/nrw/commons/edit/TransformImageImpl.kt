@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.core.net.toUri
 import fr.free.nrw.commons.ajpegtran.Jpegtran
 import fr.free.nrw.commons.ajpegtran.Properties
+import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
 import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import timber.log.Timber
 import java.io.File
@@ -121,5 +122,25 @@ class TransformImageImpl : TransformImage {
             Timber.e(e, "saveEditedImage: Failed to crop image")
             throw e
         }
+    }
+
+    /**
+     * Blurs the specified regions of the image file.
+     */
+    override fun blurImage(
+        regions: List<BlurRegion>,
+        savePath: File
+    ): File {
+        Timber.tag("Trying to blur image").d("Starting blur of ${regions.size} regions")
+        val imagePath = "blurred_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
+        try {
+            jpegtran!!.blur(regions)
+            jpegtran!!.save(output.toUri())
+        } catch (e: Exception) {
+            Timber.e(e, "blurImage: Failed to blur image")
+            throw e
+        }
+        return output
     }
 }
