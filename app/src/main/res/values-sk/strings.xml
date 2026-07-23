@@ -381,6 +381,7 @@
   <string name="share_app_title">Zdieľať aplikáciu</string>
   <string name="rotate">Otočiť</string>
   <string name="crop">Orezať</string>
+  <string name="blur">Rozmazanie</string>
   <string name="error_fetching_nearby_places">Nepodarilo sa načítať miesta v okolí</string>
   <string name="no_pictures_in_this_area">V tejto oblasti nie sú žiadne obrázky</string>
   <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>

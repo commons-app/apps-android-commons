@@ -391,6 +391,7 @@
   <string name="send_thank_toast">Dem Benotzer %1$s e Merci schécken</string>
   <string name="review_copyright">Entsprécht dat de Copyright-Reegelen?</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
+  <string name="review_thanks">Wëllt Dir dem Contributeur Merci soen?</string>
   <string name="review_spam_explanation">Klickt op NEE fir virzeschloen, datt dëst Bild geläscht gi soll, falls et guer net nëtzlech ass.</string>
   <string name="review_copyright_explanation">Logoen, Screenshotten oder Filmplakate sinn oft Urheberrechtsverletzungen.\nKlickt op NEE fir virzeschloen, datt dëst Bild geläscht gi soll</string>
   <string name="review_no_category">Oh, dat ass mol net kategoriséiert!</string>

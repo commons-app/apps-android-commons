@@ -385,6 +385,7 @@
   <string name="share_app_title">Поширити програму</string>
   <string name="rotate">Повернути</string>
   <string name="crop">Обрізати</string>
+  <string name="blur">Розмиття</string>
   <string name="error_fetching_nearby_places">Не вдалося завантажити місця поблизу</string>
   <string name="no_pictures_in_this_area">Немає зображень з цієї місцевості</string>
   <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
