@@ -24,7 +24,9 @@ object StringUtil {
             .replace("&#8206;", "\u200E")
             .replace("&#8207;", "\u200F")
             .replace("&amp;", "&")
+            .replace(Regex("(?is)<img\\b[^>]*>"), "")
 
         return HtmlCompat.fromHtml(processedSource, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
+
 }
