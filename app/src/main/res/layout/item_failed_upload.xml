@@ -3,18 +3,16 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:fresco="http://schemas.android.com/tools"
   android:paddingBottom="8dp"
   android:gravity="center"
   android:orientation="horizontal">
 
-  <com.facebook.drawee.view.SimpleDraweeView
+  <ImageView
     android:id="@+id/itemImage"
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:background="?attr/mainBackground"
-    app:actualImageScaleType="centerCrop"
-    fresco:placeholderImage="@drawable/ic_image_black_24dp" />
+    android:scaleType="centerCrop" />
 
   <LinearLayout
     android:layout_width="match_parent"
