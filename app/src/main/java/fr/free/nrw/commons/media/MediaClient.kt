@@ -6,6 +6,7 @@ import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
@@ -128,6 +129,25 @@ class MediaClient
         fun getMedia(titles: String?): Single<Media> =
             responseMapper(mediaInterface.getMedia(titles))
                 .map { it.first() }
+
+        /**
+         * Gets file revisions (uploader information) for a given file.
+         * Used primarily for getting uploaders when nominating for deletion.
+         * 
+         * NOTE: Due to MediaWiki API pagination, this returns revisions included in the response.
+         * For files with extensive history (50+ revisions), continuation tokens would be needed
+         * to fetch all revisions. For typical files, this covers most uploaders.
+         *
+         * @param titles the file name to get revisions for
+         * @return List of ImageInfo objects from the API response
+         */
+        fun getImageInfoList(titles: String?): Single<List<ImageInfo>> =
+            mediaInterface.getAllFileRevisions(titles)
+                .map { response ->
+                    response.query()?.pages()?.flatMap { page ->
+                        page.imageInfoList()
+                    } ?: emptyList()
+                }
 
         /**
          * Fetches Media object from the imageInfo API but suppress (known) errors
