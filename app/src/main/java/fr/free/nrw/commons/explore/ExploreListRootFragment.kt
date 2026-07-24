@@ -175,8 +175,7 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         binding = null
+        super.onDestroy()
     }
 }
