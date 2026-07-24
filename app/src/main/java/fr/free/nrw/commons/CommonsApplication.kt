@@ -147,7 +147,7 @@ class CommonsApplication : MultiDexApplication() {
         val isBeta = isBetaFlavour
         val logFileName =
             if (isBeta) "CommonsBetaAppLogs" else "CommonsAppLogs"
-        val logDirectory = LogUtils.getLogDirectory()
+        val logDirectory = LogUtils.getLogDirectory(this)
         //Delete stale logs if they have exceeded the specified size
         deleteStaleLogs(logFileName, logDirectory)
 
