@@ -46,10 +46,10 @@ abstract class BookmarkLocationsDao {
         val exists = findBookmarkLocation(bookmarkLocation.name)
 
         if (exists) {
-            deleteBookmarkLocation(bookmarkLocation.toBookmarksLocations())
+            deleteBookmarkLocation(toEntity(bookmarkLocation))
             NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, false)
         } else {
-            addBookmarkLocation(bookmarkLocation.toBookmarksLocations())
+            addBookmarkLocation(toEntity(bookmarkLocation))
             NearbyController.updateMarkerLabelListBookmark(bookmarkLocation, true)
         }
 
@@ -60,6 +60,51 @@ abstract class BookmarkLocationsDao {
      * Fetches all bookmark locations as `Place` objects.
      */
     suspend fun getAllBookmarksLocationsPlace(): List<Place> {
-        return getAllBookmarksLocations().map { it.toPlace() }
+        return getAllBookmarksLocations().map { fromEntity(it) }
+    }
+
+    fun toEntity(place: Place): BookmarksLocations {
+        return BookmarksLocations(
+            locationName = place.name,
+            locationLanguage = place.language,
+            locationDescription = place.longDescription,
+            locationCategory = place.category,
+            locationLat = place.location.latitude,
+            locationLong = place.location.longitude,
+            locationLabelText = place.label?.text ?: "",
+            locationLabelIcon = place.label?.icon,
+            locationImageUrl = place.pic,
+            locationWikipediaLink = place.siteLinks.wikipediaLink.toString(),
+            locationWikidataLink = place.siteLinks.wikidataLink.toString(),
+            locationCommonsLink = place.siteLinks.commonsLink.toString(),
+            locationPic = place.pic,
+            locationExists = place.exists
+        )
+    }
+
+    private fun fromEntity(entity: BookmarksLocations): Place {
+        val location = fr.free.nrw.commons.location.LatLng(
+            entity.locationLat,
+            entity.locationLong,
+            1F
+        )
+
+        val builder = fr.free.nrw.commons.nearby.Sitelinks.Builder().apply {
+            setWikipediaLink(entity.locationWikipediaLink)
+            setWikidataLink(entity.locationWikidataLink)
+            setCommonsLink(entity.locationCommonsLink)
+        }
+
+        return Place(
+            entity.locationLanguage,
+            entity.locationName,
+            fr.free.nrw.commons.nearby.Label.fromText(entity.locationLabelText),
+            entity.locationDescription,
+            location,
+            entity.locationCategory,
+            builder.build(),
+            entity.locationPic,
+            entity.locationExists
+        )
     }
 }
