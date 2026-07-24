@@ -1,0 +1,16 @@
+from login_failed_exception import LoginFailedException
+
+class LoginCallback:
+    def on_login_failed(self, exception):
+        if isinstance(exception, LoginFailedException):
+            error_type = exception.get_error_type()
+            if error_type == "SERVER_ERROR":
+                return "Server error"
+            elif error_type == "AUTH_ERROR":
+                return "Authentication error"
+            elif error_type == "NETWORK_ERROR":
+                return "Network error"
+            else:
+                return "Unknown error"
+        else:
+            return "Unknown error"
