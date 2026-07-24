@@ -699,6 +699,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_nearby">Nearby</string>
   <string name="leaderboard_used">Used</string>
   <string name="leaderboard_my_rank_button_text">My Rank</string>
+  <string name="leaderboard_go_to_top_button_text">Go to Top</string>
   <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></string>
   <string name="limited_connection_enabled">Limited connection mode enabled!</string>
   <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
