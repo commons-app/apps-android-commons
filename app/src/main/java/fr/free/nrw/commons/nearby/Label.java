@@ -7,9 +7,7 @@ import android.os.Parcel;
 import androidx.annotation.DrawableRes;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import fr.free.nrw.commons.R;
 
@@ -53,9 +51,14 @@ public enum Label {
     UNKNOWN(0, R.drawable.round_icon_unknown);
 
     /**
-     * Lookup map which maps Q-ID -> Label.
+     * Sorted array of Q-ID integers for binary-search lookup.
      */
-    public static final Map<String, Label> TEXT_TO_DESCRIPTION = new HashMap<>();
+    private static volatile int[] QIDS = new int[0];
+
+    /**
+     * Labels parallel to {@link #QIDS}: QIDS[i] maps to QID_LABELS[i].
+     */
+    private static volatile Label[] QID_LABELS = new Label[0];
 
     private final int arrayResId;
     @DrawableRes
@@ -73,21 +76,104 @@ public enum Label {
     }
 
     /**
-     * Loads Q-IDs from Android resources
+     * Loads Q-IDs from Android resources into sorted primitive arrays.
+     * This method is idempotent; subsequent calls after the first are no-ops.
      *
-     * @param context any Android context applicationContext - much safer
+     * @param context any Android context; applicationContext is safest
      */
-    public static void init(final Context context) {
+    public static synchronized void init(final Context context) {
+        if (QIDS.length != 0) {
+            return;
+        }
         final Resources res = context.getResources();
+        int total = 0;
+        for (final Label label : values()) {
+            if (label.arrayResId != 0) {
+                total += res.getIntArray(label.arrayResId).length;
+            }
+        }
+        final int[] ids = new int[total];
+        final Label[] labels = new Label[total];
+        int pos = 0;
         for (final Label label : values()) {
             if (label.arrayResId != 0) {
                 final int[] resArray = res.getIntArray(label.arrayResId);
                 for (final int id : resArray) {
-                    final String qid = "Q" + id;
-                    TEXT_TO_DESCRIPTION.put(qid, label);
+                    ids[pos] = id;
+                    labels[pos] = label;
+                    pos++;
                 }
             }
         }
+        // Sort both arrays by ID so binary search works correctly.
+        // Arrays.sort(Object[]) is stable, so for equal IDs the later enum ordinal comes last,
+        // matching the original HashMap.put semantics where the last put wins.
+        final Integer[] sortIndices = new Integer[total];
+        for (int i = 0; i < total; i++) {
+            sortIndices[i] = i;
+        }
+        Arrays.sort(sortIndices, (a, b) -> Integer.compare(ids[a], ids[b]));
+
+        // Count unique IDs (deduplicate: for equal IDs keep only the last entry)
+        int uniqueCount = 0;
+        for (int i = 0; i < total; i++) {
+            if (i == total - 1 || ids[sortIndices[i]] != ids[sortIndices[i + 1]]) {
+                uniqueCount++;
+            }
+        }
+
+        final int[] sortedIds = new int[uniqueCount];
+        final Label[] sortedLabels = new Label[uniqueCount];
+        int outPos = 0;
+        for (int i = 0; i < total; i++) {
+            final boolean isLast = (i == total - 1)
+                    || ids[sortIndices[i]] != ids[sortIndices[i + 1]];
+            if (isLast) {
+                sortedIds[outPos] = ids[sortIndices[i]];
+                sortedLabels[outPos] = labels[sortIndices[i]];
+                outPos++;
+            }
+        }
+        QIDS = sortedIds;
+        QID_LABELS = sortedLabels;
+    }
+
+    /**
+     * Parses the numeric part of a Q-ID string (e.g. "Q16970") without allocating a substring.
+     * The string must start with 'Q' or 'q' followed by at least one decimal digit.
+     *
+     * @param text the Q-ID string
+     * @return the parsed integer
+     * @throws NumberFormatException if the string is not a valid Q-ID or the value overflows int
+     */
+    private static int parseQidNoAlloc(final String text) {
+        if (text == null || text.length() < 2
+                || (text.charAt(0) != 'Q' && text.charAt(0) != 'q')) {
+            throw new NumberFormatException("Not a valid QID: " + text);
+        }
+        long result = 0;
+        for (int i = 1; i < text.length(); i++) {
+            final char c = text.charAt(i);
+            if (c < '0' || c > '9') {
+                throw new NumberFormatException("Not a valid QID: " + text);
+            }
+            result = result * 10 + (c - '0');
+            if (result > Integer.MAX_VALUE) {
+                throw new NumberFormatException("QID value too large: " + text);
+            }
+        }
+        return (int) result;
+    }
+
+    /**
+     * Looks up a Label by its numeric Q-ID using binary search.
+     *
+     * @param id the integer Q-ID (e.g. 16970)
+     * @return the matching {@link Label}, or {@link Label#UNKNOWN} if not found
+     */
+    public static Label fromQidInt(final int id) {
+        final int pos = Arrays.binarySearch(QIDS, id);
+        return pos >= 0 ? QID_LABELS[pos] : UNKNOWN;
     }
 
     /**
@@ -116,8 +202,11 @@ public enum Label {
         if ("BOOKMARK".equals(text)) {
             return BOOKMARKS;
         }
-        final Label label = TEXT_TO_DESCRIPTION.get(text);
-        return label == null ? UNKNOWN : label;
+        try {
+            return fromQidInt(parseQidNoAlloc(text));
+        } catch (final NumberFormatException e) {
+            return UNKNOWN;
+        }
     }
 
     public static List<Label> valuesAsList() {
