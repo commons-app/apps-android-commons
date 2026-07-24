@@ -1,0 +1,43 @@
+name: Welcome New Contributors
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Welcome new contributor
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { Octokit } = require('@octokit/octokit');
+            const octokit = new Octokit({
+              auth: process.env.GITHUB_TOKEN,
+            });
+
+            const pr = octokit.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.pullRequest.number,
+            });
+
+            const contributor = octokit.users.get({
+              username: context.pullRequest.user.login,
+            });
+
+            const welcomeMessage = `Welcome to the project, @${contributor.data.login}! We're excited to have you on board.`;
+
+            octokit.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.pullRequest.number,
+              body: welcomeMessage,
+            });
