@@ -300,14 +300,14 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { result: Boolean? -> result!! }
-                .subscribe { _: Boolean? ->
+                .subscribe({ _: Boolean? ->
                     showAlertDialog(
                         this,
                         getString(R.string.block_notification_title),
                         getString(R.string.block_notification),
                         getString(R.string.ok)
                     ) { finish() }
-                })
+                }, { Timber.e(it) }))
     }
 
     private fun checkStoragePermissions() {

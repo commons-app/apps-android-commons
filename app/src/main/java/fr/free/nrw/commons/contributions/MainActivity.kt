@@ -378,7 +378,7 @@ after opening the app.
                 contribution.dateUploadStarted = Calendar.getInstance().time
                 Completable.fromAction { contributionDao!!.saveSynchronous(contribution) }
                     .subscribeOn(Schedulers.io())
-                    .subscribe()
+                    .subscribe({ }, { Timber.e(it) })
             }
             makeOneTimeWorkRequest(
                 this, ExistingWorkPolicy.APPEND_OR_REPLACE
@@ -433,11 +433,11 @@ after opening the app.
         contributionDao
             ?.getContribution(listOf(Contribution.STATE_FAILED))
             ?.subscribeOn(Schedulers.io())
-            ?.subscribe { failedUploads ->
+            ?.subscribe({ failedUploads ->
                 failedUploads.forEach { contribution ->
                     contributionsFragment?.retryUpload(contribution)
                 }
-            }
+            }, { Timber.e(it) })
     }
 
     /**
