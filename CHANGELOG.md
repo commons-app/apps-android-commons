@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v6.7.0
+
+### What's changed
+- Users can now blur sensitive parts of images from within the app before uploading them to Commons
+- Minor bug fixes
+
 ## v6.6.0
 
 ### What's changed
