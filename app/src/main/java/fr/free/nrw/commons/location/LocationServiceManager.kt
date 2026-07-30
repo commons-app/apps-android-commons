@@ -199,6 +199,7 @@ class LocationServiceManager(private val context: Context) : LocationListener {
             lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedSignificantly(LatLng.from(location)) }
         } else if (lastLocationVar?.let { location.distanceTo(it) }!! >= 500) {
+            lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedMedium(LatLng.from(location)) }
         } else if (changeType == LocationChangeType.LOCATION_SLIGHTLY_CHANGED) {
             lastLocationVar = location

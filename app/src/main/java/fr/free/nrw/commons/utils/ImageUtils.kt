@@ -73,6 +73,7 @@ object ImageUtils {
     const val EMPTY_CAPTION = -3
     const val FILE_NAME_EXISTS = 1 shl 6 // 64
     const val NO_CATEGORY_SELECTED = -5
+    const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
 
     private var progressDialogWallpaper: ProgressDialog? = null
 
@@ -90,7 +91,8 @@ object ImageUtils {
             EMPTY_CAPTION,
             FILE_NAME_EXISTS,
             NO_CATEGORY_SELECTED,
-            IMAGE_GEOLOCATION_DIFFERENT
+            IMAGE_GEOLOCATION_DIFFERENT,
+            IMAGE_FORMAT_UNSUPPORTED
         ]
     )
     @Retention
@@ -348,6 +350,10 @@ object ImageUtils {
             if (result and IMAGE_DUPLICATE != 0) {
                 errorMessage.append("\n - ").
                 append(context.getString(R.string.upload_problem_image_duplicate))
+            }
+            if (result and IMAGE_FORMAT_UNSUPPORTED != 0) {
+                errorMessage.append("\n - ")
+                    .append(context.getString(R.string.upload_problem_image_format_unsupported))
             }
             if (result and IMAGE_GEOLOCATION_DIFFERENT != 0) {
                 errorMessage.append("\n - ")

@@ -416,6 +416,7 @@
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">ภาพเซลฟี</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">ภาพเบลอ</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">ไร้สาระ</string>
+  <string name="delete_helper_ask_spam_other">อื่น ๆ</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ภาพจากสื่อข่าว</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ภาพสุ่มจากอินเทอร์เน็ต</string>
   <string name="delete_helper_ask_reason_copyright_logo">โลโก้</string>

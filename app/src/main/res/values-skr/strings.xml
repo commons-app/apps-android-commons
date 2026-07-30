@@ -165,6 +165,7 @@
   <string name="correct">درست جواب</string>
   <string name="wrong">غلط جواب</string>
   <string name="rotate">بھن٘واؤ</string>
+  <string name="crop">کپو</string>
   <string name="delete">مٹاؤ</string>
   <string name="Achievements">کامیابیاں</string>
   <string name="Profile">پروفائل</string>
@@ -182,6 +183,7 @@
   <string name="title_page_bookmarks_categories">ونکیاں</string>
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
+  <string name="depictions_map_confirm">تصدیق</string>
   <string name="back_button_warning">اپ لوڈ منسوخ کرو</string>
   <string name="back_button_continue">اپ لوڈ کرݨ جاری رکھو</string>
   <string name="search_this_area">ایں علاقے وچ ڳولو</string>
@@ -203,6 +205,7 @@
   <string name="no_categories_found">کوئی ونکیاں کائنی لبھیاں</string>
   <string name="delete_helper_show_deletion_title_success">کامیابی</string>
   <string name="delete_helper_show_deletion_title_failed">ناکام تھیا</string>
+  <string name="delete_helper_other_notes_hint">جواز</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="category_edit_helper_show_edit_title_success">کامیابی</string>
   <string name="category_edit_button_text">ونکیاں اپ ڈیٹ کرو</string>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".edit.EditActivity" >
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/topBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primaryColor"
+    android:background="?attr/mainBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="12dp"
@@ -26,7 +26,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:tint="@color/white" />
+      app:tint="?attr/toolbar_text_color" />
 
     <TextView
       android:id="@+id/selection_count"
@@ -35,26 +35,59 @@
       android:layout_height="wrap_content"
       android:text="@string/edit_image"
       android:textAlignment="center"
-      android:textColor="@color/white"
+      android:textColor="?attr/toolbar_text_color"
       android:textSize="@dimen/subheading_text_size"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/btn_save"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:drawableStart="@drawable/baseline_save_24"
+      android:drawablePadding="4dp"
+      android:text="@string/menu_save_categories"
+      android:textColor="@color/white"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/achievementBackground">
+
     <ImageView
       android:id="@+id/iv"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <fr.free.nrw.commons.edit.CropOverlayView
+      android:id="@+id/crop_overlay"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      android:layout_gravity="center" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <fr.free.nrw.commons.edit.BlurOverlayView
+      android:id="@+id/blur_overlay"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
       android:id="@+id/linearLayout"
@@ -78,14 +111,49 @@
         android:textColor="@android:color/white" />
 
       <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save"
+        android:id="@+id/crop_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/baseline_save_24"
+        android:drawableStart="@drawable/baseline_crop_24"
         android:drawablePadding="4dp"
-        android:onClick="getRotatedImage"
-        android:text="@string/menu_save_categories"
+        android:text="@string/crop"
         android:textColor="@android:color/white" />
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/blur_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/baseline_blur_24"
+        android:drawablePadding="4dp"
+        android:text="@string/blur"
+        android:textColor="@android:color/white" />
+
+      <LinearLayout
+        android:id="@+id/edit_options_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/edit_cancel_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="@dimen/tiny_margin"
+          android:text="@string/cancel"
+          android:textColor="@android:color/white"
+          android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/edit_apply_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/tiny_margin"
+          android:text="@string/apply"
+          android:textColor="@android:color/white"
+          android:visibility="visible" />
+      </LinearLayout>
     </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

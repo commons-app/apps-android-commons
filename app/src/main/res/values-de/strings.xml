@@ -11,6 +11,7 @@
 * FF-11
 * FF11
 * Ferdinand0101
+* GPSLeo
 * Icke
 * Ignatgg
 * Inkowik
@@ -296,6 +297,7 @@
   <string name="upload_problem_image_dark">Das Bild ist zu dunkel.</string>
   <string name="upload_problem_image_blurry">Das Bild ist unscharf.</string>
   <string name="upload_problem_image_duplicate">Das Bild ist bereits auf Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Dein gewähltes Dateiformat wird von den Servern von Commons nicht unterstützt, die App wird es zu JPG konvertieren.</string>
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
   <string name="upload_problem_do_you_continue">Möchtest du dieses Bild trotzdem hochladen?</string>
@@ -395,6 +397,8 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="rotate">Drehen</string>
+  <string name="crop">Zuschneiden</string>
+  <string name="blur">Unkenntlich machen</string>
   <string name="error_fetching_nearby_places">Konnte keine Orte in der Nähe laden</string>
   <string name="no_pictures_in_this_area">Keine Bilder in diesem Bereich</string>
   <string name="no_nearby_places_around">Keine Orte in der Nähe gefunden</string>
@@ -462,6 +466,9 @@
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="no_depictions_selected">Keine Motive ausgewählt</string>
   <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist du sicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
+  <string name="depictions_choose_from_map">Wähle auf der Karte aus</string>
+  <string name="depictions_map_confirm">Bestätigen</string>
+  <string name="depictions_map_no_photo_location">Das Foto hat keinen Standort, dein Standort wird gezeigt.</string>
   <string name="back_button_warning">Hochladen abbrechen</string>
   <string name="back_button_warning_desc">Wenn du den Zurück-Button verwendest, wird das Hochladen abgebrochen und dein Fortschritt geht verloren</string>
   <string name="back_button_continue">Hochladen fortsetzen</string>
@@ -570,6 +577,8 @@
   <string name="delete_helper_ask_spam_selfie">ein Selfie, das in keinem Artikel verwendet wird</string>
   <string name="delete_helper_ask_spam_blurry">total verschwommen</string>
   <string name="delete_helper_ask_spam_nonsense">Unsinn, absolut unbrauchbar in jedem Artikel</string>
+  <string name="delete_helper_ask_spam_other">Andere</string>
+  <string name="delete_helper_other_notes_hint">Rechtfertigung</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -734,6 +743,7 @@
   <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
   <string name="custom_selector_over_limit_warning">Aus technischen Gründen kann die Anwendung nicht mehr als %1$d Bilder auf einmal verlässlich hochladen. Die Grenze für das Hochladen von %1$d wurde um %2$d überschritten.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Ausblenden</string>
+  <string name="custom_selector_duplicates_warning">Einige der ausgewählten Bilder sind Duplikate und werden vor dem Hochladen entfernt.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fehler: Grenze für das Hochladen wurde überschritten</string>
   <string name="wlm_upload_info">Dieses Bild wird am Wiki-Loves-Monuments-Wettbewerb teilnehmen</string>
@@ -842,6 +852,7 @@
   <string name="pending">Ausstehend</string>
   <string name="failed">Fehlgeschlagen</string>
   <string name="could_not_load_place_data">Ortsdaten konnten nicht geladen werden</string>
+  <string name="warning_for_no_option_selected">Wähle eine der Optionen, um die Frage zu beantworten</string>
   <string name="custom_selector_delete_folder">Ordner löschen</string>
   <string name="custom_selector_confirm_deletion_title">Löschung bestätigen</string>
   <string name="custom_selector_confirm_deletion_message">Bist du sicher, dass du den Ordner %1$s löschen möchten, der %2$d Datenobjekte enthält?</string>
@@ -871,4 +882,10 @@
   <string name="image_tag_line_created_and_uploaded_by">Erstellt und hochgeladen von: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Erstellt von %1$s und hochgeladen von %2$s</string>
   <string name="nominated_for_deletion_btn">Zur Löschung vorschlagen</string>
+  <string name="custom_selector_max_image_limit_reached">Du kannst maximal %d Bilder auswählen.</string>
+  <string name="edit_unsupported_format_explanation">Bearbeitungen in der App sind nur für Dateien im JPEG-Format möglich. Um andere Formate zu bearbeiten, nutzte bitte Werkzeuge von Dritten.</string>
+  <string name="license_cc0_description">Keine Schutzrechte. Du gibt alle deine Verwertungsrechte ab, so dass alle dein Werk in jeder Weise nutzen können.</string>
+  <string name="license_cc_by_description">Namensnennung. Andere können das Werk frei teilen und bearbeiten, solange sie dich nennen.</string>
+  <string name="license_cc_by_sa_description">Namensnennung – Weitergabe unter gleichen Bedingungen. Andere dürfen das Werk teilen und bearbeiten, müssen aber dieselbe Lizenz verwenden und dich nennen.</string>
+  <string name="license_cc0_long_description">Diese Lizenz erlaubt Nachnutzenden ohne Bedingungen, das Werk zu teilen, zu remixen und neue Werke daraus bilden.</string>
 </resources>

@@ -2,11 +2,15 @@ package fr.free.nrw.commons.filepicker
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.webkit.MimeTypeMap
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.filepicker.Constants.Companion.DEFAULT_FOLDER_NAME
 import timber.log.Timber
 import java.io.File
@@ -143,8 +147,19 @@ object PickedFiles : Constants {
     @JvmStatic
     fun pickedExistingPicture(context: Context, photoUri: Uri): UploadableFile {
         val directory = tempImageDirectory(context)
-        val mimeType = getMimeType(context, photoUri)
-        val photoFile = File(directory, "${UUID.randomUUID()}.$mimeType")
+        val ext = getMimeType(context, photoUri)
+        val isHeic = ext.equals("heic", true) || ext.equals("heif", true)
+        val photoFile = File(directory, "${UUID.randomUUID()}.${if (isHeic) "jpg" else ext}")
+
+        if (isHeic) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) throw IOException("HEIC not supported on this Android version")
+            val srcExif = context.contentResolver.openInputStream(photoUri)?.use { ExifInterface(it) }
+            HeicApi28.transcodeToJpeg(context.contentResolver, photoUri, photoFile)
+            srcExif?.let { copyExif(it, photoFile) }
+            return UploadableFile(photoUri, photoFile).apply {
+                hasUnsupportedFormat = true
+            }
+        }
 
         if (photoFile.createNewFile()) {
             context.contentResolver.openInputStream(photoUri)?.use { inputStream ->
@@ -154,6 +169,33 @@ object PickedFiles : Constants {
             throw IOException("Could not create photoFile to write upon")
         }
         return UploadableFile(photoUri, photoFile)
+    }
+
+    private fun copyExif(src: ExifInterface, dstFile: File) {
+        val dst = ExifInterface(dstFile.absolutePath)
+        arrayOf(
+            ExifInterface.TAG_DATETIME_ORIGINAL, ExifInterface.TAG_DATETIME,
+            ExifInterface.TAG_GPS_LATITUDE, ExifInterface.TAG_GPS_LATITUDE_REF,
+            ExifInterface.TAG_GPS_LONGITUDE, ExifInterface.TAG_GPS_LONGITUDE_REF,
+            ExifInterface.TAG_GPS_ALTITUDE, ExifInterface.TAG_GPS_ALTITUDE_REF,
+            ExifInterface.TAG_GPS_DATESTAMP, ExifInterface.TAG_GPS_TIMESTAMP,
+            ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL,
+            ExifInterface.TAG_F_NUMBER, ExifInterface.TAG_EXPOSURE_TIME,
+            ExifInterface.TAG_FLASH, ExifInterface.TAG_FOCAL_LENGTH,
+            ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY, ExifInterface.TAG_WHITE_BALANCE,
+            ExifInterface.TAG_IMAGE_WIDTH, ExifInterface.TAG_IMAGE_LENGTH,
+        ).forEach { tag -> src.getAttribute(tag)?.let { dst.setAttribute(tag, it) } }
+        dst.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
+        dst.saveAttributes()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private object HeicApi28 {
+        fun transcodeToJpeg(cr: ContentResolver, uri: Uri, outFile: File) {
+            val src = android.graphics.ImageDecoder.createSource(cr, uri)
+            val bmp = android.graphics.ImageDecoder.decodeBitmap(src)
+            FileOutputStream(outFile).use { bmp.compress(Bitmap.CompressFormat.JPEG, 95, it) }
+        }
     }
 
     /**

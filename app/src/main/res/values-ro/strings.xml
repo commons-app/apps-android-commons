@@ -503,6 +503,7 @@
   <string name="delete_helper_ask_spam_selfie">un selfie care nu este folosit în niciun articol</string>
   <string name="delete_helper_ask_spam_blurry">complet neclar</string>
   <string name="delete_helper_ask_spam_nonsense">prostii, absolut inutilizabile în orice articol</string>
+  <string name="delete_helper_ask_spam_other">Altele</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto din presă</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografie aleatorie de pe internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

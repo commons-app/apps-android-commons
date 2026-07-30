@@ -26,7 +26,7 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="@dimen/dimen_250"
       android:layout_gravity="center_horizontal"
       app:actualImageScaleType="none" />
@@ -37,7 +37,9 @@
       android:layout_height="wrap_content"
       android:background="@android:color/transparent"
       android:cacheColorHint="@android:color/transparent"
-      android:fillViewport="true">
+      android:fillViewport="true"
+      android:visibility="invisible"
+      tools:visibility="visible">
 
         <LinearLayout
           android:layout_width="match_parent"

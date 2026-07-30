@@ -59,11 +59,12 @@ class ImageProcessingService @Inject constructor(
             checkFBMD(filePath),
             checkEXIF(filePath)
         ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
+            val unsupportedFormatResult = if (uploadItem.hasUnsupportedFormat) fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED else 0
             Timber.d(
-                "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d",
-                duplicateImage, wrongGeoLocation, darkImage, fbmd, exif
+                "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d, unsupported: %d",
+                duplicateImage, wrongGeoLocation, darkImage, fbmd, exif, unsupportedFormatResult
             )
-            return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif
+            return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif or unsupportedFormatResult
         }
     }
 

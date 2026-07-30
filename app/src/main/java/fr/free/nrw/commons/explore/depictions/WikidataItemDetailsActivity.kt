@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
@@ -69,6 +70,19 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setTabs()
         setPageTitle()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager!!.backStackEntryCount == 1) {
+                    binding!!.tabLayout.visibility = View.VISIBLE
+                    binding!!.viewPager.visibility = View.VISIBLE
+                    binding!!.mediaContainer.visibility = View.GONE
+                }
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        })
     }
 
     /**
@@ -152,19 +166,6 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
     }
 
     /**
-     * This method is called on backPressed of anyFragment in the activity.
-     * If condition is called when mediaDetailFragment is opened.
-     */
-    override fun onBackPressed() {
-        if (supportFragmentManager!!.backStackEntryCount == 1) {
-            binding!!.tabLayout.visibility = View.VISIBLE
-            binding!!.viewPager.visibility = View.VISIBLE
-            binding!!.mediaContainer.visibility = View.GONE
-        }
-        super.onBackPressed()
-    }
-
-    /**
      * This method is called on from getCount of MediaDetailPagerFragment
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
@@ -180,7 +181,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
      */
     override fun refreshNominatedMedia(index: Int) {
         if (getSupportFragmentManager().backStackEntryCount == 1) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             onMediaClicked(index)
         }
     }
@@ -257,7 +258,7 @@ class WikidataItemDetailsActivity : BaseActivity(), MediaDetailProvider, Categor
             }
 
             android.R.id.home -> {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
                 return true
             }
 

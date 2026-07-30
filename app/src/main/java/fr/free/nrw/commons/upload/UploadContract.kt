@@ -64,6 +64,7 @@ interface UploadContract {
     }
 
     interface UserActionListener : BasePresenter<View> {
+        fun cleanup()
         fun handleSubmit()
 
         fun deletePictureAtIndex(index: Int)

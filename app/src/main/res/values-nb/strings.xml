@@ -264,6 +264,7 @@
   <string name="upload_problem_image_dark">Bildet er for mørkt.</string>
   <string name="upload_problem_image_blurry">Bildet er uklart.</string>
   <string name="upload_problem_image_duplicate">Bildet finnes allerede på Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Bildet ditt er i et format som ikke støttes av Commons-tjeneren, så appen konverterte det til JPG.</string>
   <string name="upload_problem_different_geolocation">Dette bildet ble tatt et annet sted.</string>
   <string name="upload_problem_fbmd">Last kun opp bilder du har tatt selv. Ikke last opp bilder du har funnet på andres Facebook-kontoer.</string>
   <string name="upload_problem_do_you_continue">Ønsker du fortsatt å laste opp dette bildet?</string>
@@ -363,6 +364,8 @@
   <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
   <string name="share_app_title">Del appen</string>
   <string name="rotate">Roter</string>
+  <string name="crop">Beskjær</string>
+  <string name="blur">Gjør uskarp</string>
   <string name="error_fetching_nearby_places">Kunne ikke laste inn steder i nærheten.</string>
   <string name="no_pictures_in_this_area">Ingen bilder i dette området</string>
   <string name="no_nearby_places_around">Ingen steder funnet i nærheten</string>
@@ -429,6 +432,10 @@
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil fortsette uten å velge kategorier?</string>
   <string name="no_depictions_selected">Ingen avbildninger valgt</string>
+  <string name="no_depictions_selected_warning_desc">Bilder med avbildninger er lettere å finne og blir mer sannsynlig brukt. Er du sikker på at du vil fortsette uten å velge avbildninger?</string>
+  <string name="depictions_choose_from_map">Velg fra kart</string>
+  <string name="depictions_map_confirm">Bekreft</string>
+  <string name="depictions_map_no_photo_location">Bilde har ingen posisjon. Viser din nåværende plassering</string>
   <string name="back_button_warning">Avbryt opplasting</string>
   <string name="back_button_warning_desc">Tilbakeknappen avbryter opplastingen, og du vil miste framgangen din.</string>
   <string name="back_button_continue">Fortsett opplasting</string>
@@ -452,6 +459,7 @@
   <string name="option_dismiss">Lukk</string>
   <string name="in_app_camera_needs_location">Slå på posisjonstilgang fra innstillingene og prøv igjen.\n\nMerk: Opplastingen vil kanskje ikke ha posisjonsdata hvis appen ikke kunne hente disse fra enheten innen kort tid.</string>
   <string name="in_app_camera_location_permission_rationale">Kameraet i appen trenger posisjonstilgang for å legge det til på bildet i tilfelle dette ikke er tilgjengelig i EXIF. La appen få tilgang til posisjonen din og prøv igjen.\n\nMerk: Opplastingen vil kanskje ikke ha posisjon dersom appen ikke kunne hente dette fra enheten i løpet av kort tid.</string>
+  <string name="in_app_camera_location_permission_denied">Appen kunne ikke registrere posisjon sammen med bilder på grunn av mangel på tillatelse</string>
   <string name="open_document_photo_picker_title">Bruk dokumentbasert bildevelger</string>
   <string name="nearby_campaign_dismiss_message">Du vil ikke se kampanjer lenger. Du kan slå på dette igjen i innstillingene om du ønsker.</string>
   <string name="this_function_needs_network_connection" fuzzy="true">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>
@@ -466,11 +474,11 @@
   <string name="check_category_failure_message">Kunne ikke be om kategorisjekk for %1$s</string>
   <string name="check_category_toast">Ber om kategorisjekk for %1$s</string>
   <string name="nominate_for_deletion_done">Gjort</string>
-  <string name="send_thank_success_title" fuzzy="true">Sender takk: Ferdig</string>
-  <string name="send_thank_success_message" fuzzy="true">Sendte takk til %1$s</string>
-  <string name="send_thank_failure_message" fuzzy="true">Kunne ikke sende takk %1$s</string>
-  <string name="send_thank_failure_title" fuzzy="true">Sender takk: Mislyktes</string>
-  <string name="send_thank_toast" fuzzy="true">Sender takk for %1$s</string>
+  <string name="send_thank_success_title">Sender takk: Ferdig</string>
+  <string name="send_thank_success_message">Sendte takk til %1$s</string>
+  <string name="send_thank_failure_message">Kunne ikke sende takk til %1$s</string>
+  <string name="send_thank_failure_title">Sender takk: Mislyktes</string>
+  <string name="send_thank_toast">Sender takk for %1$s</string>
   <string name="review_copyright">Følger dette opphavsrettsreglene?</string>
   <string name="review_category">Er dette riktig kategorisert?</string>
   <string name="review_spam">Er dette relevant?</string>
@@ -492,18 +500,19 @@
   <string name="no_notification">Du har uleste varsler</string>
   <string name="no_read_notification">Du har ingen leste varsler</string>
   <string name="share_logs_using">Del logger ved hjelp av</string>
+  <string name="check_your_email_inbox">Sjekk e-postinnboksen din</string>
   <string name="menu_option_read">Vis leste</string>
   <string name="menu_option_unread">Vis uleste</string>
   <string name="error_occurred_in_picking_images">Feil under utvalg av bilder</string>
   <string name="please_wait">Vennligst vent…</string>
   <string name="images_via_nearby_explanation">Bilder lastet opp via steder i nærheten er bilder som lastes opp ved å oppdage steder på kartet.</string>
   <string name="thanks_received_explanation">Denne funksjonen lar brukere sende takk til brukere som gjør nyttige endringer – ved å bruke en liten takkelenke på historikksider eller diffsider.</string>
-  <string name="copy_image_caption_description" fuzzy="true">Kopier til påfølgende media</string>
+  <string name="copy_image_caption_description">Kopier til påfølgende elementer</string>
   <string name="copied_successfully">Kopiert</string>
   <string name="welcome_do_upload_content_description">Eksempler på gode bilder å laste opp til Commons</string>
   <string name="welcome_dont_upload_content_description">Eksempler på bilder som ikke bør lastes opp</string>
   <string name="skip_image">Hopp over dette bildet</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">Nedlasting feilet! Vi kan ikke laste ned fila uten lagringstillatelse.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Nedlasting feilet. Vi kan ikke laste ned fila uten lagringstillatelse.</string>
   <string name="manage_exif_tags">Behandle EXIF-tagger</string>
   <string name="manage_exif_tags_summary">Velg hvilke EXIF-tagger som skal beholdes under opplatsing</string>
   <string name="exif_tag_name_author">Opphavsperson</string>
@@ -513,10 +522,12 @@
   <string name="exif_tag_name_lensModel">Linsemodell</string>
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="exif_tag_name_software">Programvare</string>
-  <string name="share_text" fuzzy="true">Last opp bilder til Wikimedia Commons med din telefon. Last ned Commons-appen: %1$s</string>
+  <string name="share_text">Last opp bilder til Wikimedia Commons direkte fra din telefon. Last ned Commons-appen nå: %1$s</string>
   <string name="share_via">Del appen via …</string>
   <string name="image_info">Bildeinfo</string>
+  <string name="upload_categories_dont_show_this_message_again">Ikke vis denne meldingen igjen</string>
   <string name="no_categories_found">Ingen kategorier funnet</string>
+  <string name="no_depiction_found">Ingen avbildninger funnet</string>
   <string name="upload_cancelled">Opplastingen ble avbrutt</string>
   <string name="previous_image_title_description_not_found">Det finnes ikke noe data for forrige bildes tittel eller beskrivelse</string>
   <string name="dialog_box_text_nomination">Hvorfor bør %1$s slettes?</string>
@@ -530,6 +541,8 @@
   <string name="delete_helper_ask_spam_selfie">en selfie som ikke brukes i noen artikkel</string>
   <string name="delete_helper_ask_spam_blurry">helt uklart</string>
   <string name="delete_helper_ask_spam_nonsense">tull, helt ubrukelig i enhver artikkel</string>
+  <string name="delete_helper_ask_spam_other">Annet</string>
+  <string name="delete_helper_other_notes_hint">Begrunnelse</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Tilfeldig bilde fra internett</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -538,8 +551,14 @@
   <string name="category_edit_helper_make_edit_toast">Prøver å oppdatere kategorier.</string>
   <string name="category_edit_helper_show_edit_title">Kategorioppdatering</string>
   <string name="category_edit_helper_show_edit_title_success">Suksess</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Kategorien %1$s tilføyd.</item>
+    <item quantity="other">Kategoriene %1$s tilføyd.</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">Kunne ikke legge til kategorier.</string>
   <string name="category_edit_button_text">Oppdater kategorier</string>
+  <string name="depictions_edit_helper_make_edit_toast">Prøver å oppdatere avbildninger.</string>
+  <string name="depictions_edit_helper_show_edit_title">Rediger avbildninger</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinatoppdatering</string>
   <string name="description_edit_helper_show_edit_title">Beskrivelsesoppdatering</string>
   <string name="caption_edit_helper_show_edit_title">Bildetekstoppdatering</string>
@@ -569,8 +588,11 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERKLASSER</string>
   <string name="title_for_parent_classes">OVERKLASSER</string>
+  <string name="title_for_subcategories">UNDERKATEGORIER</string>
+  <string name="title_for_parent_categories">FORELDREKATEGORIER</string>
   <string name="upload_nearby_place_found_title">Sted i nærheten funnet</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Er dette et bilde av %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Er disse bilder av %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Er dette et bilde av %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmerker</string>
   <string name="title_app_shortcut_setting">Innstillinger</string>
   <string name="remove_bookmark">Fjernet fra bokmerker</string>

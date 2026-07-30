@@ -17,11 +17,12 @@ class DataSourceFactory(
     var category: String? = null
     var limit: Int = 0
     var offset: Int = 0
+    var userName: String? = null
 
     /**
      * Creates the new instance of data source class
      */
     override fun create(): DataSource<Int, LeaderboardList> = DataSourceClass(
-        okHttpJsonApiClient, sessionManager, duration, category, limit, offset
+        okHttpJsonApiClient, sessionManager, userName, duration, category, limit, offset
     ).also { mutableLiveData.postValue(it) }
 }

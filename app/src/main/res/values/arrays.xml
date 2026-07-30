@@ -76,4 +76,958 @@
         <item>@string/request_user_block</item>
     </string-array>
 
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ41176%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="building_QIDs">
+        <item>41176</item>  <!--building-->
+        <item>16970</item>  <!--church building-->
+        <item>32815</item>  <!--mosue-->
+        <item>3947</item>  <!--house-->
+        <item>27686</item>  <!--hotel-->
+        <item>61443690</item>  <!--branch post office-->
+        <item>55488</item>  <!--railway station-->
+        <item>108325</item>  <!--chapel-->
+        <item>128302279</item>  <!--gas station-->
+        <item>585956</item>  <!--masia-->
+        <item>489357</item>  <!--farmhouse-->
+        <item>16917</item>  <!--hospital-->
+        <item>2309609</item>  <!--wayside cross-->
+        <item>5783996</item>  <!--cottage-->
+        <item>845945</item>  <!--Shinto shrine-->
+        <item>11755880</item>  <!--residential building-->
+        <item>5393308</item>  <!--Buddhist temple-->
+        <item>751876</item>  <!--chÃ¢teau-->
+        <item>65954115</item>  <!--State Bank of India branch-->
+        <item>67015940</item>  <!--Government Boys' Primary School-->
+        <item>212198</item>  <!--pub-->
+        <item>61443650</item>  <!--sub post office-->
+        <item>1248784</item>  <!--airport-->
+        <item>2175765</item>  <!--tram stop-->
+        <item>3950</item>  <!--villa-->
+        <item>1303167</item>  <!--barn-->
+        <item>1577547</item>  <!--revenue house-->
+        <item>62447</item>  <!--aerodrome-->
+        <item>928830</item>  <!--metro station-->
+        <item>1244442</item>  <!--school building-->
+        <item>842402</item>  <!--Hindu temple-->
+        <item>16560</item>  <!--palace-->
+        <item>13360578</item>  <!--thatched cottage-->
+        <item>44613</item>  <!--monastery-->
+        <item>35054</item>  <!--post office-->
+        <item>24354</item>  <!--theatre building-->
+        <item>607241</item>  <!--clergy house-->
+        <item>317557</item>  <!--parish church-->
+        <item>12496021</item>  <!--Madrasah Tsanawiyah-->
+        <item>22808403</item>  <!--underground station-->
+        <item>55678</item>  <!--railway stop-->
+        <item>61278455</item>  <!--health sub-centre-->
+        <item>879050</item>  <!--manor house-->
+        <item>1362233</item>  <!--Upper Lusatian house-->
+        <item>25550691</item>  <!--city hall-->
+        <item>30114662</item>  <!--accommodation facility for dependent elderly people-->
+        <item>12496019</item>  <!--madrasah aliyah-->
+        <item>654772</item>  <!--hostel-->
+        <item>39715</item>  <!--lighthouse-->
+        <item>35112127</item>  <!--historic building-->
+        <item>66619497</item>  <!--HDFC Bank branch-->
+        <item>3395121</item>  <!--wayside shrine-->
+        <item>15911738</item>  <!--hydroelectric power station-->
+        <item>483110</item>  <!--stadium-->
+        <item>718966</item>  <!--doctor's office-->
+        <item>11315</item>  <!--shopping center-->
+        <item>22808404</item>  <!--station located on surface-->
+        <item>12661150</item>  <!--column shrine-->
+        <item>112793351</item>  <!--casa consistorial-->
+        <item>4663385</item>  <!--former railway station-->
+        <item>12518</item>  <!--tower-->
+        <item>44539</item>  <!--temple-->
+        <item>185187</item>  <!--watermill-->
+        <item>1195942</item>  <!--fire station-->
+        <item>207694</item>  <!--art museum-->
+        <item>875016</item>  <!--terrace house-->
+        <item>14552192</item>  <!--chapel-shrine-->
+        <item>502074</item>  <!--heliport-->
+        <item>44782</item>  <!--port-->
+        <item>1399033</item>  <!--statio-->
+        <item>569500</item>  <!--community health center-->
+        <item>65954144</item>  <!--Canara Bank branch-->
+        <item>277760</item>  <!--gatehouse-->
+        <item>1021645</item>  <!--office building-->
+        <item>1088552</item>  <!--Catholic church building-->
+        <item>13402009</item>  <!--apartment building-->
+        <item>580499</item>  <!--oratory-->
+        <item>83405</item>  <!--factory-->
+        <item>96386155</item>  <!--national school-->
+        <item>1003207</item>  <!--photovoltaic power station-->
+        <item>1498804</item>  <!--multifamily residential-->
+        <item>5890494</item>  <!--homestead-->
+        <item>65954135</item>  <!--ICICI Bank branch-->
+        <item>655686</item>  <!--commercial building-->
+        <item>3044808</item>  <!--outbuilding-->
+        <item>114768</item>  <!--granary-->
+        <item>67015944</item>  <!--Government Girls Primary School-->
+        <item>65954142</item>  <!--Bank of Baroda branch-->
+        <item>134917286</item>  <!--Shikinaisha-->
+        <item>1723032</item>  <!--kamienica-->
+        <item>2031836</item>  <!--Eastern Orthodox church building-->
+        <item>11303</item>  <!--skyscraper-->
+        <item>44494</item>  <!--mill-->
+        <item>1129743</item>  <!--filial church-->
+        <item>34627</item>  <!--synagogue-->
+        <item>4312270</item>  <!--railway station above ground-->
+        <item>688292</item>  <!--nuraghe-->
+        <item>427287</item>  <!--wat-->
+        <item>11670533</item>  <!--elevated station-->
+        <item>73580208</item>  <!--Central Bank of India branch-->
+        <item>134917287</item>  <!--Shikinai ShÅsha-->
+        <item>1307276</item>  <!--single-family detached home-->
+        <item>54074585</item>  <!--Tibetan Buddhist monastery-->
+        <item>94993988</item>  <!--commercial traffic aerodrome-->
+        <item>3649129</item>  <!--cabana-->
+        <item>256020</item>  <!--inn-->
+        <item>1021106</item>  <!--bourgeois house-->
+        <item>10480682</item>  <!--agricultural structure-->
+        <item>1154710</item>  <!--association football venue-->
+        <item>19844914</item>  <!--university building-->
+        <item>131734</item>  <!--brewery-->
+        <item>65954138</item>  <!--Axis Bank branch-->
+        <item>861951</item>  <!--police station-->
+        <item>543654</item>  <!--Rathaus-->
+        <item>5773747</item>  <!--historic house-->
+        <item>5526694</item>  <!--Gasthaus-->
+        <item>2460422</item>  <!--guest house-->
+        <item>200334</item>  <!--bell tower-->
+        <item>17489143</item>  <!--building with cornice-->
+        <item>200764</item>  <!--bookstore-->
+        <item>18761864</item>  <!--bank building-->
+        <item>208820</item>  <!--baptismal font-->
+        <item>12020836</item>  <!--timber-framed house-->
+        <item>1638962</item>  <!--chitalishte-->
+        <item>56242063</item>  <!--Protestant church building-->
+        <item>182676</item>  <!--mountain hut-->
+        <item>83554028</item>  <!--Gendarmerie barracks-->
+        <item>11755959</item>  <!--multi-story urban building-->
+        <item>213441</item>  <!--shop-->
+        <item>162875</item>  <!--mausoleum-->
+        <item>2651004</item>  <!--Palazzo-->
+        <item>12496022</item>  <!--madrasah ibtidaiyah-->
+        <item>22713629</item>  <!--girls' school-->
+        <item>73839412</item>  <!--Indian Overseas Bank branch-->
+        <item>918230</item>  <!--Roman villa-->
+        <item>65954125</item>  <!--Yes Bank branch-->
+        <item>1078374</item>  <!--tenement-->
+        <item>1169748</item>  <!--cascina a corte-->
+        <item>494829</item>  <!--bus station-->
+        <item>1365179</item>  <!--private mansion-->
+        <item>69529214</item>  <!--Allahabad Bank branch-->
+        <item>517820</item>  <!--carriage house-->
+        <item>1424583</item>  <!--sepulchral chapel-->
+        <item>56750657</item>  <!--hermitage church-->
+        <item>1128397</item>  <!--convent-->
+        <item>695850</item>  <!--air base-->
+        <item>71713967</item>  <!--Union Bank of India branch-->
+        <item>274153</item>  <!--water tower-->
+        <item>3498533</item>  <!--natural gas-fired power station-->
+        <item>64578911</item>  <!--former hospital-->
+        <item>85882206</item>  <!--unmanned station-->
+        <item>63099748</item>  <!--hotel building-->
+        <item>16974307</item>  <!--dwÃ³r-->
+        <item>7257872</item>  <!--public hospital-->
+        <item>66496996</item>  <!--Andhra Bank branch-->
+        <item>73986959</item>  <!--Indian Bank branch-->
+        <item>1802963</item>  <!--mansion-->
+        <item>73717181</item>  <!--Industrial Development Bank of India branch-->
+        <item>757292</item>  <!--border checkpoint-->
+        <item>66877717</item>  <!--UCO Bank branch-->
+        <item>55876909</item>  <!--Catholic parish church-->
+        <item>464780</item>  <!--mint-->
+        <item>18760306</item>  <!--residential and commercial building-->
+        <item>66768699</item>  <!--Corporation Bank branch-->
+        <item>1662011</item>  <!--industrial building-->
+        <item>109838242</item>  <!--thatched farmhouse-->
+        <item>856584</item>  <!--library building-->
+        <item>135022904</item>  <!--Shikinai Ronsha-->
+        <item>66576265</item>  <!--Bank of India branch-->
+        <item>2087181</item>  <!--historic house museum-->
+        <item>1137809</item>  <!--courthouse-->
+        <item>3329412</item>  <!--archaeological museum-->
+        <item>948878</item>  <!--dovecote-->
+        <item>160742</item>  <!--abbey-->
+        <item>131263</item>  <!--barracks-->
+        <item>507619</item>  <!--retail chain-->
+        <item>174814</item>  <!--electrical substation-->
+        <item>118143740</item>  <!--mailing post office-->
+        <item>672070</item>  <!--photographic studio-->
+        <item>2932238</item>  <!--dry stone hut-->
+        <item>18142</item>  <!--tower block-->
+        <item>269770</item>  <!--boarding school-->
+        <item>1339195</item>  <!--station building-->
+        <item>1420027</item>  <!--fishing port-->
+        <item>24699794</item>  <!--museum building-->
+        <item>135026601</item>  <!--Shikinai Hiteisha-->
+        <item>1362225</item>  <!--warehouse-->
+        <item>6558431</item>  <!--coal-fired power station-->
+        <item>81917</item>  <!--fortified tower-->
+        <item>1343246</item>  <!--English country house-->
+        <item>71574305</item>  <!--United Bank of India branch-->
+        <item>73865589</item>  <!--Syndicate Bank branch-->
+        <item>1774898</item>  <!--clinic-->
+        <item>14752696</item>  <!--ancient Roman structure-->
+        <item>130003</item>  <!--ski resort-->
+        <item>27996460</item>  <!--Haltepunkt (train stop)-->
+        <item>655311</item>  <!--onsen-->
+        <item>11390939</item>  <!--Hachiman shrine-->
+        <item>70081950</item>  <!--Bank of Maharashtra branch-->
+        <item>56242215</item>  <!--Catholic cathedral-->
+        <item>1440300</item>  <!--observation tower-->
+        <item>1975485</item>  <!--Orthodox chapel-->
+        <item>697295</item>  <!--shrine-->
+        <item>2977</item>  <!--cathedral-->
+        <item>2519340</item>  <!--administrative building-->
+        <item>1457501</item>  <!--cemetery chapel-->
+        <item>123094976</item>  <!--123094976-->
+        <item>744296</item>  <!--wooden church-->
+        <item>748998</item>  <!--fire lookout tower-->
+        <item>12029081</item>  <!--kaÅ¡na-->
+        <item>74539826</item>  <!--Kotak Mahindra Bank branch-->
+        <item>56822897</item>  <!--mill building-->
+        <item>24398318</item>  <!--religious building-->
+        <item>12708689</item>  <!--national secondary school-->
+        <item>66771621</item>  <!--Dena Bank branch-->
+        <item>3208559</item>  <!--CandomblÃ© terreiro-->
+        <item>1435490</item>  <!--people's house-->
+        <item>4260475</item>  <!--medical facility-->
+        <item>50687555</item>  <!--onshore wind farm-->
+        <item>877290</item>  <!--Gemeindebau-->
+        <item>17456783</item>  <!--building with triangular gable-->
+        <item>122397434</item>  <!--122397434-->
+        <item>1690211</item>  <!--lavoir-->
+        <item>88397339</item>  <!--railway point in Canada-->
+        <item>40558</item>  <!--smithy-->
+        <item>1408475</item>  <!--fortified house-->
+        <item>18534542</item>  <!--restaurant chain-->
+        <item>838159</item>  <!--tÃ¼rbe-->
+        <item>2910662</item>  <!--borda-->
+        <item>190928</item>  <!--shipyard-->
+        <item>15072800</item>  <!--cemetery cross-->
+        <item>2680845</item>  <!--Chinese temple-->
+        <item>30022</item>  <!--cafÃ©-->
+        <item>294422</item>  <!--public building-->
+        <item>261604</item>  <!--oil-fired power station-->
+        <item>16884952</item>  <!--country house-->
+        <item>681337</item>  <!--cowshed-->
+        <item>64037785</item>  <!--county courthouse-->
+        <item>2750108</item>  <!--priory-->
+        <item>699405</item>  <!--dwelling-->
+        <item>17391474</item>  <!--neck gable building-->
+        <item>73887153</item>  <!--Oriental Bank of Commerce branch-->
+        <item>1763828</item>  <!--multi-purpose hall-->
+        <item>120560</item>  <!--minor basilica-->
+        <item>1713379</item>  <!--boys' school-->
+        <item>65954323</item>  <!--tree shrine-->
+        <item>1202402</item>  <!--townhouse-->
+        <item>4346602</item>  <!--passenger railway station-->
+        <item>1060829</item>  <!--concert hall-->
+        <item>188507</item>  <!--apartment-->
+        <item>19899465</item>  <!--former church-->
+        <item>194356</item>  <!--wind farm-->
+        <item>65464941</item>  <!--former railway stop-->
+        <item>181623</item>  <!--warehouse-->
+        <item>18206833</item>  <!--engine power plant-->
+        <item>28077</item>  <!--hammam-->
+        <item>39364723</item>  <!--hospital building-->
+        <item>72984778</item>  <!--Federal Bank-->
+        <item>644371</item>  <!--international airport-->
+        <item>159719</item>  <!--power station-->
+        <item>69106538</item>  <!--Chinese national type school-->
+        <item>787078</item>  <!--sector light-->
+        <item>15513569</item>  <!--timber-framed building-->
+        <item>42896655</item>  <!--farm building-->
+        <item>1427536</item>  <!--gas turbine power station-->
+        <item>1187691</item>  <!--roadside station in Japan-->
+        <item>17448832</item>  <!--building with stepped gable-->
+        <item>16823155</item>  <!--Schloss-->
+        <item>514480</item>  <!--Inari shrine-->
+        <item>17450736</item>  <!--building with clock gable-->
+        <item>10861631</item>  <!--small bell tower-->
+        <item>216107</item>  <!--department store-->
+        <item>66538936</item>  <!--Vijaya Bank branch-->
+        <item>375336</item>  <!--film studio-->
+        <item>279118</item>  <!--wooden house-->
+        <item>947103</item>  <!--watchtower-->
+        <item>198632</item>  <!--brickworks-->
+        <item>14092</item>  <!--gym-->
+        <item>75804428</item>  <!--Pragathi Krishna Gramin Bank branch-->
+        <item>1147171</item>  <!--interchange station-->
+        <item>1207909</item>  <!--livestock housing-->
+        <item>488654</item>  <!--rearhouse-->
+        <item>111792889</item>  <!--thatched building-->
+        <item>7243073</item>  <!--primary health centre-->
+        <item>371752</item>  <!--calvary-->
+        <item>11606300</item>  <!--last station-->
+        <item>18043413</item>  <!--supermarket chain-->
+        <item>67015947</item>  <!--Govt: (B) H/Sec: School Hingorno-->
+        <item>17051104</item>  <!--manse-->
+        <item>838858</item>  <!--cistern-->
+        <item>2588110</item>  <!--aisled house-->
+        <item>75543355</item>  <!--Jammu & Kashmir Bank branch-->
+        <item>2713614</item>  <!--Maria column-->
+        <item>55493</item>  <!--goods station-->
+        <item>3469910</item>  <!--performing arts center-->
+        <item>17485079</item>  <!--church ruin-->
+        <item>2080521</item>  <!--market hall-->
+        <item>18760388</item>  <!--retail building-->
+        <item>88205</item>  <!--castrum-->
+        <item>1220959</item>  <!--building of public administration-->
+        <item>55491</item>  <!--underground railway station-->
+        <item>3397526</item>  <!--stone bridge-->
+        <item>75151507</item>  <!--Punjab and Sind Bank branch-->
+        <item>18814858</item>  <!--terrace of houses-->
+        <item>132834</item>  <!--madrasa-->
+        <item>67646671</item>  <!--South Indian Bank branch-->
+        <item>108860593</item>  <!--museum of modern art-->
+        <item>200297</item>  <!--thermal power station-->
+        <item>1500368</item>  <!--municipal office-->
+        <item>186347</item>  <!--caravanserai-->
+        <item>12161100</item>  <!--cortijo-->
+        <item>853854</item>  <!--clock tower-->
+        <item>3143713</item>  <!--seaplane base-->
+        <item>622425</item>  <!--nightclub-->
+        <item>7373622</item>  <!--Royal Air Force station-->
+        <item>213643</item>  <!--silo-->
+        <item>332496</item>  <!--overtaking station-->
+        <item>91312</item>  <!--tower house-->
+        <item>875157</item>  <!--resort-->
+        <item>55485</item>  <!--dead-end railway station-->
+        <item>187456</item>  <!--bar-->
+        <item>785952</item>  <!--bathhouse-->
+        <item>3661265</item>  <!--university dormitory-->
+        <item>67015942</item>  <!--Government Boys' Lower Secondary School-->
+        <item>1193438</item>  <!--bullring-->
+        <item>121844689</item>  <!--contracted station-->
+        <item>74666911</item>  <!--CSB Bank Branch-->
+        <item>15548045</item>  <!--almshouse-->
+        <item>66789788</item>  <!--Karnataka Bank Limited branch-->
+        <item>1251750</item>  <!--distillery-->
+        <item>746369</item>  <!--recording studio-->
+        <item>17087359</item>  <!--wilderness hut-->
+        <item>118143733</item>  <!--post office Partner-->
+        <item>61443591</item>  <!--head post office-->
+        <item>7419624</item>  <!--semi-detached house-->
+        <item>135038714</item>  <!--Disputed Shikinaisha or Shikigeisha-->
+        <item>109874977</item>  <!--thatched barn-->
+        <item>210999</item>  <!--psychiatric hospital-->
+        <item>668130</item>  <!--provosty-->
+        <item>17501774</item>  <!--corner house-->
+        <item>153562</item>  <!--opera house-->
+        <item>1107679</item>  <!--animation studio-->
+        <item>1793804</item>  <!--S-Bahn station-->
+        <item>11269813</item>  <!--cave with prehistoric art-->
+        <item>69981114</item>  <!--Andhra Pradesh Grameena Vikas Bank branch-->
+        <item>135160338</item>  <!--Kanpei-sha-->
+        <item>11183017</item>  <!--sylvan theater-->
+        <item>1509716</item>  <!--collegiate church-->
+        <item>721207</item>  <!--marina-->
+        <item>798436</item>  <!--bakehouse-->
+        <item>20202072</item>  <!--terminus-->
+        <item>133215</item>  <!--casino-->
+        <item>67994584</item>  <!--Karur Vysya Bank branch-->
+        <item>2142091</item>  <!--over-track railway station-->
+        <item>75793280</item>  <!--Rajasthan Marudhara Gramin Bank branch-->
+        <item>617839</item>  <!--apartment hotel-->
+        <item>274393</item>  <!--bakery-->
+        <item>334383</item>  <!--abbey church-->
+        <item>11590310</item>  <!--Shinmei shrine-->
+        <item>798838</item>  <!--TenmangÅ« (worship)-->
+        <item>121844395</item>  <!--121844395-->
+        <item>18509232</item>  <!--fast food restaurant chain-->
+        <item>3631092</item>  <!--airstrip-->
+        <item>81851</item>  <!--bastion-->
+        <item>252021</item>  <!--villa rustica-->
+        <item>39015397</item>  <!--signal box-->
+        <item>27996466</item>  <!--Bahnhof (station)-->
+        <item>73634133</item>  <!--City Union Bank Limited branch-->
+        <item>5116768</item>  <!--church hall-->
+        <item>8066418</item>  <!--Zapis-->
+        <item>160645</item>  <!--orphanage-->
+        <item>68000128</item>  <!--Kerala Gramin Bank branch-->
+        <item>39804</item>  <!--cruise ship-->
+        <item>108840195</item>  <!--lodge-->
+        <item>134570449</item>  <!--building used for both residential and stable/barn-->
+        <item>6852233</item>  <!--military building-->
+        <item>20034791</item>  <!--defensive tower-->
+        <item>11997323</item>  <!--lifeboat station-->
+        <item>1043939</item>  <!--Carnegie library-->
+        <item>69739777</item>  <!--Bandhan Bank branch-->
+        <item>1617500</item>  <!--hieron-->
+        <item>3200355</item>  <!--Kumano shrine-->
+        <item>1454583</item>  <!--Masonic temple-->
+        <item>31374404</item>  <!--shopping mall-->
+        <item>513550</item>  <!--hermitage-->
+        <item>2920759</item>  <!--bus terminus-->
+        <item>810924</item>  <!--battery storage power station-->
+        <item>4284971</item>  <!--private hospital-->
+        <item>505213</item>  <!--sawmill-->
+        <item>656720</item>  <!--workshop-->
+        <item>11588442</item>  <!--Gion shrine-->
+        <item>6451172</item>  <!--morgue-->
+        <item>74784444</item>  <!--Lakshmi Vilas Bank branch-->
+        <item>1406318</item>  <!--holiday village-->
+        <item>26791288</item>  <!--Sokol house-->
+        <item>75694364</item>  <!--Ujjivan Small Finance Bank branch-->
+        <item>10283556</item>  <!--motive power depot-->
+        <item>10631691</item>  <!--Catholic pilgrimage church-->
+        <item>29553</item>  <!--sanctuary-->
+        <item>14723701</item>  <!--aljibe-->
+        <item>66495884</item>  <!--Andhra Pragathi Grameena Bank branch-->
+        <item>1411996</item>  <!--run-of-river hydroelectric power station-->
+        <item>303874</item>  <!--ab anbar-->
+        <item>339969</item>  <!--Alpine club hut-->
+        <item>69106233</item>  <!--Tamil national type school-->
+        <item>3363945</item>  <!--archaeological park-->
+        <item>1631129</item>  <!--hotel chain-->
+        <item>75095923</item>  <!--Tamilnad Mercantile Bank branch-->
+        <item>64027599</item>  <!--gas station chain-->
+        <item>22733</item>  <!--garage-->
+        <item>22908</item>  <!--retirement home-->
+        <item>11784935</item>  <!--eastern orthodox monastery-->
+        <item>67015950</item>  <!--Government Girls' Higher Secondary School, Haflong-->
+        <item>205495</item>  <!--filling station-->
+        <item>87487749</item>  <!--former hotel-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ22687%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E50%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="bank_QIDs">
+        <item>22687</item><!-- bank-->
+        <item>66619497</item><!--HDFC Bank branch-->
+        <item>13601825</item><!-- Sparkasse-->
+        <item>157963</item><!-- savings bank-->
+        <item>848507</item><!-- commercial bank-->
+        <item>66344</item><!-- central bank-->
+        <item>2111088</item><!-- private bank-->
+        <item>568041</item><!-- universal bank-->
+        <item>1553482</item><!-- specialized bank-->
+        <item>1641457</item><!-- mortgage bank-->
+        <item>116763799</item><!-- federal credit union-->
+        <item>116763871</item><!-- federally insured state-chartered credit union-->
+        <item>2917176</item><!-- savings bank-->
+        <item>60767305</item><!-- neobank-->
+        <item>7309198</item><!-- regional bank-->
+        <item>319845</item><!-- investment bank-->
+        <item>118719824</item><!-- caja rural-->
+        <item>131441953</item><!-- Romanian bank-->
+        <item>5266746</item><!-- development bank-->
+        <item>1227557</item><!-- direct bank-->
+        <item>665634</item><!-- cantonal bank-->
+        <item>124014095</item><!-- state-chartered bank-->
+        <item>486547</item><!-- Shinkin bank-->
+        <item>76218249</item><!-- retail bank-->
+        <item>105758271</item><!-- multilateral development bank-->
+        <item>6972269</item><!-- national development bank-->
+        <item>1802186</item><!-- state development institution-->
+        <item>5154919</item><!-- community bank-->
+        <item>57775246</item><!-- agricultural bank-->
+        <item>4481787</item><!-- Federal Reserve Bank-->
+        <item>14948396</item><!-- Regional Rural Bank-->
+        <item>65954115</item><!-- State Bank of India branch-->
+        <item>65954144</item><!-- Canara bank branch-->
+        <item>251927</item><!-- public bank-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ16917%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E200%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="hospital_QIDs">
+        <item>16917</item><!-- hospital-->
+        <item>64578911</item><!-- former hospital-->
+        <item>7257872</item><!-- public hospital-->
+        <item>210999</item><!-- psychiatric hospital-->
+        <item>4284971</item><!-- private hospital-->
+        <item>1059324</item><!-- university hospital-->
+        <item>2387974</item><!-- military hospital-->
+        <item>2440002</item><!-- general hospital-->
+        <item>2945655</item><!-- centre hospitalier-->
+        <item>61451856</item><!-- rural hospital-->
+        <item>644264</item><!-- children's hospital-->
+        <item>1813474</item><!-- teaching hospital-->
+        <item>958822</item><!-- maternity hospital-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ3947%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="house_QIDs">
+        <item>3947</item>  <!--house-->
+        <item>585956</item>  <!--masia-->
+        <item>489357</item>  <!--farmhouse-->
+        <item>5783996</item>  <!--cottage-->
+        <item>3950</item>  <!--villa-->
+        <item>16560</item>  <!--palace-->
+        <item>13360578</item>  <!--thatched cottage-->
+        <item>607241</item>  <!--clergy house-->
+        <item>1362233</item>  <!--Upper Lusatian house-->
+        <item>875016</item>  <!--terrace house-->
+        <item>1307276</item>  <!--single-family detached home-->
+        <item>3649129</item>  <!--cabana-->
+        <item>5773747</item>  <!--historic house-->
+        <item>12020836</item>  <!--timber-framed house-->
+        <item>2651004</item>  <!--Palazzo-->
+        <item>918230</item>  <!--Roman villa-->
+        <item>1078374</item>  <!--tenement-->
+        <item>1169748</item>  <!--cascina a corte-->
+        <item>1365179</item>  <!--private mansion-->
+        <item>1802963</item>  <!--mansion-->
+        <item>109838242</item>  <!--thatched farmhouse-->
+        <item>2087181</item>  <!--historic house museum-->
+        <item>2932238</item>  <!--dry stone hut-->
+        <item>1343246</item>  <!--English country house-->
+        <item>1408475</item>  <!--fortified house-->
+        <item>16884952</item>  <!--country house-->
+        <item>1202402</item>  <!--townhouse-->
+        <item>279118</item>  <!--wooden house-->
+        <item>17051104</item>  <!--manse-->
+        <item>2588110</item>  <!--aisled house-->
+        <item>91312</item>  <!--tower house-->
+        <item>17087359</item>  <!--wilderness hut-->
+        <item>7419624</item>  <!--semi-detached house-->
+        <item>17501774</item>  <!--corner house-->
+        <item>252021</item>  <!--villa rustica-->
+        <item>108840195</item>  <!--lodge-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ5783996%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E100%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="cottage_QIDs">
+        <item>5783996</item><!-- cottage-->
+        <item>13360578</item><!-- thatched cottage-->
+        <item>108618134</item><!-- workers cottage-->
+        <item>108618186</item><!-- farm labourers cottage-->
+        <item>108618194</item><!-- estate cottage-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ489357%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E15%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="farmhouse_QIDs">
+        <item>489357</item><!-- farmhouse-->
+        <item>109838242</item><!-- thatched farmhouse-->
+        <item>252021</item><!-- villa rustica-->
+        <item>2735929</item><!-- baserri-->
+        <item>25339974</item><!-- uinta-->
+        <item>5670577</item><!-- alueria-->
+        <item>107357065</item><!-- Staphorster boerderij-->
+        <item>1655611</item><!-- plantation house-->
+        <item>132213</item><!-- Haubarg-->
+        <item>1258093</item><!-- three-sided farm-->
+        <item>16054427</item><!-- Appenzell farmhouse-->
+        <item>494311</item><!-- Low German house-->
+        <item>280209</item><!-- mas-->
+        <item>2196898</item><!-- Frisian farmhouse-->
+        <item>2178278</item><!-- langgevelboerderij-->
+        <item>18810296</item><!-- keuterij-->
+        <item>18810430</item><!-- Frisian farmhouse-->
+        <item>8196150</item><!-- almunia-->
+        <item>2364632</item><!-- T-boerderijen-->
+        <item>452393</item><!-- Vierkanthof-->
+        <item>2295256</item><!-- castle farm-->
+        <item>108445444</item><!-- Simmental farmhouse-->
+        <item>3068953</item><!-- fortified farm-->
+        <item>17463976</item><!-- long house farms-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ44539%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="temple_QIDs">
+        <item>44539</item>  <!--temple-->
+        <item>16970</item>  <!--church building-->
+        <item>108325</item>  <!--chapel-->
+        <item>5393308</item>  <!--Buddhist temple-->
+        <item>842402</item>  <!--Hindu temple-->
+        <item>317557</item>  <!--parish church-->
+        <item>14552192</item>  <!--chapel-shrine-->
+        <item>1088552</item>  <!--Catholic church building-->
+        <item>2031836</item>  <!--Eastern Orthodox church building-->
+        <item>1129743</item>  <!--filial church-->
+        <item>56242063</item>  <!--Protestant church building-->
+        <item>56750657</item>  <!--hermitage church-->
+        <item>1424583</item>  <!--sepulchral chapel-->
+        <item>55876909</item>  <!--Catholic parish church-->
+        <item>56242215</item>  <!--Catholic cathedral-->
+        <item>1975485</item>  <!--Orthodox chapel-->
+        <item>2977</item>  <!--cathedral-->
+        <item>1457501</item>  <!--cemetery chapel-->
+        <item>744296</item>  <!--wooden church-->
+        <item>3208559</item>  <!--CandomblÃ© terreiro-->
+        <item>2680845</item>  <!--Chinese temple-->
+        <item>120560</item>  <!--minor basilica-->
+        <item>19899465</item>  <!--former church-->
+        <item>17485079</item>  <!--church ruin-->
+        <item>1509716</item>  <!--collegiate church-->
+        <item>334383</item>  <!--abbey church-->
+        <item>6451172</item>  <!--morgue-->
+        <item>10631691</item>  <!--Catholic pilgrimage church-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ16970%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="church_QIDs">
+        <item>16970</item><!-- church-->
+        <item>108325</item><!-- chapel-->
+        <item>317557</item><!-- parish church-->
+        <item>14552192</item><!-- chapel-shrine-->
+        <item>1088552</item><!-- Catholic Church building-->
+        <item>2031836</item><!-- Eastern Orthodox church building-->
+        <item>1129743</item><!-- filial church-->
+        <item>56242063</item><!-- Protestant church building-->
+        <item>1424583</item><!-- sepulchral chapel-->
+        <item>56750657</item><!-- hermitage church-->
+        <item>55876909</item><!-- Catholic parish church-->
+        <item>56242215</item><!-- Catholic cathedral-->
+        <item>1975485</item><!-- Orthodox chapel-->
+        <item>2977</item><!-- cathedral-->
+        <item>1457501</item><!-- cemetery chapel-->
+        <item>744296</item><!-- wooden church-->
+        <item>120560</item><!-- minor basilica-->
+        <item>19899465</item><!-- former church-->
+        <item>17485079</item><!-- church ruin-->
+        <item>1509716</item><!-- collegiate church-->
+        <item>334383</item><!-- abbey church-->
+        <item>10631691</item><!-- Catholic pilgrimage church-->
+    </integer-array>
+    <integer-array name="gas_station_QIDs">
+        <item>128302279</item><!-- gas station-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ55488%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="railway_station_QIDs">
+        <item>55488</item><!-- railway station-->
+        <item>928830</item><!-- metro station-->
+        <item>4663385</item><!-- former railway station-->
+        <item>4312270</item><!-- railway station above ground-->
+        <item>11670533</item><!-- elevated station-->
+        <item>85882206</item><!-- unmanned station-->
+        <item>4346602</item><!-- passenger railway station-->
+        <item>1147171</item><!-- interchange station-->
+        <item>11606300</item><!-- last station-->
+        <item>55493</item><!-- goods station-->
+        <item>55491</item><!-- underground railway station-->
+        <item>332496</item><!-- overtaking station-->
+        <item>55485</item><!-- dead-end railway station-->
+        <item>121844689</item><!-- contracted station-->
+        <item>1793804</item><!-- S-Bahn station-->
+        <item>2142091</item><!-- over-track railway station-->
+        <item>27996466</item><!-- Bahnhof (station)-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ277760%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E10%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="gatehouse_QIDs">
+        <item>277760</item><!-- Gatehouse-->
+        <item>130487075</item><!-- industrial gatehouse-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ10145%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E10%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="milestone_QIDs">
+        <item>10145</item><!-- milestone-->
+        <item>896635</item><!-- Saxon post milestone-->
+        <item>84163056</item><!-- Royal Saxon milestone-->
+        <item>13360570</item><!-- milliarium-->
+        <item>846760</item><!-- Ichirizuka-->
+        <item>329477</item><!-- kilometre zero-->
+        <item>99675033</item><!-- Liberty Road milestone-->
+        <item>31837185</item><!-- Berliner Meilensteine-->
+        <item>1470024</item><!-- myriameterstone-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ256020%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E100%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="inn_QIDs">
+        <item>256020</item><!-- inn-->
+        <item>5526694</item><!-- Gasthaus-->
+        <item>367914</item><!-- bed and breakfast-->
+        <item>1209783</item><!-- shukuba-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ27686%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="hotel_QIDs">
+        <item>27686</item><!-- hotel-->
+        <item>5526694</item><!-- Gasthaus-->
+        <item>2460422</item><!-- guest house-->
+        <item>182676</item><!-- mountain hut-->
+        <item>186347</item><!-- caravanserai-->
+        <item>617839</item><!-- apartment hotel-->
+        <item>339969</item><!-- Alpine club hut-->
+        <item>87487749</item><!-- former hotel-->
+        <item>1065252</item><!-- pension-->
+        <item>2880255</item><!-- resort hotel-->
+        <item>111137435</item><!-- villa hotel-->
+        <item>1589077</item><!-- youth hostel-->
+        <item>64995589</item><!-- country house hotel-->
+        <item>216212</item><!-- motel-->
+        <item>56439882</item><!-- lodge-->
+        <item>115040846</item><!-- hotel brand-->
+        <item>367914</item><!-- bed and breakfast-->
+        <item>562930</item><!-- ryokan-->
+        <item>1209783</item><!-- shukuba-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ515%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E150%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="city_QIDs">
+        <item>515</item><!-- city-->
+        <item>1093829</item><!-- city in the United States-->
+        <item>15661340</item><!-- ancient city-->
+        <item>1549591</item><!-- big city-->
+        <item>42744322</item><!-- urban municipality in Germany-->
+        <item>902814</item><!-- border city-->
+        <item>148837</item><!-- polis-->
+        <item>132680629</item><!-- city in North Carolina-->
+        <item>3147563</item><!-- capital of regency-->
+        <item>12131624</item><!-- city in Ukraine-->
+        <item>13218690</item><!-- town in Hungary-->
+        <item>2202509</item><!-- Roman city-->
+        <item>748149</item><!-- prefecture-level city-->
+        <item>2264924</item><!-- port city-->
+        <item>15105893</item><!-- town in Croatia-->
+        <item>63440326</item><!-- city of Oregon-->
+        <item>2616791</item><!-- urban municipality of Poland-->
+        <item>5770918</item><!-- city of Argentina-->
+        <item>707813</item><!-- Hanseatic city-->
+        <item>89691</item><!-- ksar-->
+        <item>16858213</item><!-- town in Romania-->
+        <item>7819319</item><!-- Czech municipality with expanded powers-->
+        <item>25412763</item><!-- city in Chile-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ3918%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E150%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="university_QIDs">-->
+        <item>3918</item><!-- university-->
+        <item>189004</item><!-- college-->
+        <item>902104</item><!-- private university-->
+        <item>875538</item><!-- public university-->
+        <item>845392</item><!-- polytechnic-->
+        <item>7603893</item><!-- state public university-->
+        <item>131389368</item><!-- state private university-->
+        <item>1743327</item><!-- church college-->
+        <item>1365560</item><!-- university of applied sciences-->
+        <item>1371037</item><!-- institute of technology-->
+        <item>576603</item><!-- Bible college-->
+        <item>62078547</item><!-- public research university-->
+        <item>15936437</item><!-- research university-->
+        <item>557206</item><!-- Catholic university-->
+        <item>3551775</item><!-- university in France-->
+        <item>265662</item><!-- national university-->
+        <item>615150</item><!-- land-grant university-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ3914%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="school_QIDs">
+        <item>3914</item>  <!--school-->
+        <item>9842</item>  <!--primary school-->
+        <item>1080794</item>  <!--public school-->
+        <item>19855165</item>  <!--rural school-->
+        <item>97042318</item>  <!--sekolah dasar-->
+        <item>11902693</item>  <!--coeducational school-->
+        <item>423208</item>  <!--private school-->
+        <item>97500812</item>  <!--Sekolah Menengah Pertama-->
+        <item>126807</item>  <!--kindergarten-->
+        <item>9826</item>  <!--high school-->
+        <item>67015940</item>  <!--Government Boys' Primary School-->
+        <item>159334</item>  <!--secondary school-->
+        <item>5358913</item>  <!--elementary school in Japan-->
+        <item>136386339</item>  <!--temporarily closed school-->
+        <item>322563</item>  <!--vocational school-->
+        <item>67388747</item>  <!--urban school-->
+        <item>97598588</item>  <!--Sekolah Menengah Atas-->
+        <item>12496021</item>  <!--Madrasah Tsanawiyah-->
+        <item>55521176</item>  <!--lower secondary school in Japan-->
+        <item>12496019</item>  <!--madrasah aliyah-->
+        <item>149566</item>  <!--middle school-->
+        <item>64063386</item>  <!--upper primary school-->
+        <item>4671329</item>  <!--academy school-->
+        <item>64063317</item>  <!--lower primary school-->
+        <item>123945716</item>  <!--public primary school in Morocco-->
+        <item>64062731</item>  <!--higher secondary school-->
+        <item>57775518</item>  <!--lower secondary school-->
+        <item>88965416</item>  <!--school unit-->
+        <item>5155053</item>  <!--community school-->
+        <item>20950067</item>  <!--elementary school-->
+        <item>56351315</item>  <!--Japanese high school-->
+        <item>96386155</item>  <!--national school-->
+        <item>67015944</item>  <!--Government Girls Primary School-->
+        <item>134739441</item>  <!--rural settlement school-->
+        <item>1110689</item>  <!--special education school-->
+        <item>11146499</item>  <!--aided school-->
+        <item>134739026</item>  <!--Indigenous school-->
+        <item>12496022</item>  <!--madrasah ibtidaiyah-->
+        <item>1076052</item>  <!--preschool-->
+        <item>22713629</item>  <!--girls' school-->
+        <item>11486291</item>  <!--permanently closed school-->
+        <item>7940971</item>  <!--voluntary aided school-->
+        <item>70206617</item>  <!--national primary school-->
+        <item>3803834</item>  <!--istituto tecnico-->
+        <item>2418495</item>  <!--independent school-->
+        <item>1143635</item>  <!--business school-->
+        <item>133804953</item>  <!--quilombola school-->
+        <item>55043</item>  <!--gymnasium-->
+        <item>269770</item>  <!--boarding school-->
+        <item>3803808</item>  <!--professional institute-->
+        <item>53566453</item>  <!--center for early childhood and primary education-->
+        <item>494230</item>  <!--medical school-->
+        <item>7940973</item>  <!--voluntary controlled school-->
+        <item>162633</item>  <!--academy-->
+        <item>12708689</item>  <!--national secondary school-->
+        <item>111236457</item>  <!--Catalonian school-->
+        <item>10509147</item>  <!--comprehensive school-->
+        <item>65032826</item>  <!--folkeskole-->
+        <item>1713379</item>  <!--boys' school-->
+        <item>1800213</item>  <!--primary school in Norway-->
+        <item>1021290</item>  <!--music school-->
+        <item>69106538</item>  <!--Chinese national type school-->
+        <item>11396122</item>  <!--school annex-->
+        <item>1542966</item>  <!--gymnasium-->
+        <item>43271061</item>  <!--special needs school in Japan-->
+        <item>383092</item>  <!--art academy-->
+        <item>3831968</item>  <!--liceo scientifico-->
+        <item>67015947</item>  <!--Govt: (B) H/Sec: School Hingorno-->
+        <item>1321960</item>  <!--law school-->
+        <item>10511371</item>  <!--gymnasieskola-->
+        <item>9584479</item>  <!--junior high school-->
+        <item>132834</item>  <!--madrasa-->
+        <item>2641403</item>  <!--samba school-->
+        <item>67015942</item>  <!--Government Boys' Lower Secondary School-->
+        <item>21655594</item>  <!--unified secondary school in Japan-->
+        <item>16463</item>  <!--lyceum-->
+        <item>1138671</item>  <!--Catholic school-->
+        <item>5474524</item>  <!--foundation school-->
+        <item>1935049</item>  <!--military school-->
+        <item>2648750</item>  <!--general education school-->
+        <item>446901</item>  <!--nursing school-->
+        <item>17987422</item>  <!--professional training college-->
+        <item>24898692</item>  <!--specialized training college-->
+        <item>136402640</item>  <!--Q136402640-->
+        <item>3807410</item>  <!--IES-->
+        <item>184644</item>  <!--conservatory-->
+        <item>86991207</item>  <!--unaided school-->
+        <item>50359544</item>  <!--Catalonia Institute-->
+        <item>2511322</item>  <!--lycÃ©e-->
+        <item>110296306</item>  <!--junior college in Japan-->
+        <item>5150914</item>  <!--combined school-->
+        <item>52017007</item>  <!--Permanent Territorial Center-->
+        <item>69106233</item>  <!--Tamil national type school-->
+        <item>917182</item>  <!--military academy-->
+        <item>5518</item>  <!--liceo classico-->
+        <item>67015950</item>  <!--Government Girls' Higher Secondary School, Haflong-->
+        <item>105416218</item>  <!--Controlled School-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ8434%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E200%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="education_QIDs">
+        <item>8434</item><!-- education-->
+        <item>11900959</item><!-- online course-->
+        <item>64801076</item><!-- education in country or region-->
+        <item>541394</item><!-- mixed-sex education-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ23442%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="island_QIDs">
+        <item>23442</item><!-- island-->
+        <item>207524</item><!-- islet-->
+        <item>162602</item><!-- river island-->
+        <item>216851</item><!-- skerry-->
+        <item>28337</item> <!--shoal-->
+        <item>184358</item><!--reef-->
+        <item>34198935</item><!--submerged rock-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ8502%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E100%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="mountain_QIDs">
+        <item>8502</item><!-- mountain-->
+        <item>8072</item><!-- volcano-->
+        <item>503269</item><!-- seamount-->
+        <item>169358</item><!-- stratovolcano-->
+        <item>429088</item><!-- mons-->
+        <item>5421955</item><!-- fell-->
+        <item>1197120</item><!-- extinct volcano-->
+        <item>1368970</item><!-- volcanic cone-->
+        <item>623319</item><!-- mesa-->
+        <item>212057</item><!-- shield volcano-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ1248784%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E10%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="airport_QIDs">
+        <item>1248784</item><!-- airport-->
+        <item>644371</item><!-- international airport-->
+        <item>837800</item><!-- domestic airport-->
+        <item>106643740</item><!-- federal aeroport-->
+        <item>21836433</item><!-- commercial airport-->
+        <item>55612991</item><!-- greenfield airport-->
+        <item>20992031</item><!-- abandoned airport-->
+        <item>104905692</item><!-- airport straddling borders-->
+        <item>28692646</item><!-- artificial island airport-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ12280%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="bridge_QIDs">
+        <item>12280</item><!-- bridge-->
+        <item>537127</item><!-- road bridge-->
+        <item>1210334</item><!-- railway bridge-->
+        <item>1068842</item><!-- footbridge-->
+        <item>158438</item><!-- arch bridge-->
+        <item>1825472</item><!-- covered bridge-->
+        <item>39486269</item><!-- railway viaduct-->
+        <item>158218</item><!-- truss bridge-->
+        <item>3397526</item><!-- stone bridge-->
+        <item>181348</item><!-- viaduct-->
+        <item>12570</item><!-- suspension bridge-->
+        <item>12042110</item><!-- steel bridge-->
+        <item>7197275</item><!-- pipeline bridge-->
+        <item>43514341</item><!-- highway bridge-->
+        <item>1055465</item><!-- girder bridge-->
+        <item>158555</item><!-- cable-stayed bridge-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ34442%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="road_QIDs">
+        <item>79007</item>  <!--street-->
+        <item>34442</item>  <!--road-->
+        <item>207934</item>  <!--avenue-->
+        <item>12763914</item>  <!--third-class road-->
+        <item>7543083</item>  <!--avenue-->
+        <item>19796778</item>  <!--route dÃ©partementale-->
+        <item>12731</item>  <!--dead end street-->
+        <item>1251403</item>  <!--alley-->
+        <item>54114</item>  <!--boulevard-->
+        <item>46622</item>  <!--controlled-access highway-->
+        <item>89021600</item>  <!--B road-->
+        <item>18019452</item>  <!--A road-->
+        <item>1426271</item>  <!--route nationale-->
+        <item>269949</item>  <!--highway-->
+        <item>1525</item>  <!--roundabout-->
+        <item>3558430</item>  <!--villa-->
+        <item>1788582</item>  <!--state highway-->
+        <item>194029</item>  <!--Roman road-->
+        <item>1169870</item>  <!--educational trail-->
+        <item>1821082</item>  <!--national road in Belgium-->
+        <item>2145163</item>  <!--trunk road-->
+        <item>1259617</item>  <!--Voivodeship road-->
+        <item>3840711</item>  <!--riverfront-->
+        <item>896009</item>  <!--LandesstraÃŸe-->
+        <item>787113</item>  <!--promenade-->
+        <item>2116321</item>  <!--rail trail-->
+        <item>703941</item>  <!--private road-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ4421%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E100%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="forest_QIDs">
+        <item>4421</item><!-- forest-->
+        <item>7315273</item><!-- forest reserve-->
+        <item>2324919</item><!-- state forest-->
+        <item>612741</item><!-- United States National Forest-->
+        <item>64148071</item><!-- classified forest-->
+        <item>15900779</item><!-- Bannwald-->
+        <item>6629955</item><!-- forest park-->
+        <item>1197552</item><!-- urban forest-->
+        <item>208478</item><!-- old-growth forest-->
+        <item>3079027</item><!-- national forest-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ22698%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E500%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="park_QIDs">
+        <item>22698</item><!-- park-->
+        <item>22746</item><!-- urban park-->
+        <item>167346</item><!-- botanical garden-->
+        <item>46169</item><!-- national park-->
+        <item>43501</item><!-- zoo-->
+        <item>22652</item><!-- urban green space-->
+        <item>194195</item><!-- amusement park-->
+        <item>2006279</item><!-- provincial park of Canada-->
+        <item>18618819</item><!-- national park of Australia-->
+        <item>6063204</item><!-- regional park-->
+        <item>272231</item><!-- arboretum-->
+        <item>3363945</item><!-- archaeological park-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ4022%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E100%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="river_QIDs">
+        <item>4022</item><!-- river-->
+        <item>187971</item><!-- wadi-->
+        <item>16465938</item><!-- seasonal river-->
+        <item>591942</item><!-- distributary-->
+        <item>373315</item><!-- arroyo-->
+        <item>4792460</item><!-- arm-->
+        <item>573344</item><!-- main stem-->
+        <item>4366834</item><!-- transboundary river-->
+        <item>27067659</item><!-- former river-->
+        <item>108822533</item><!-- border river-->
+    </integer-array>
+    <!--https://query.wikidata.org/#SELECT%20%20%3FchildID%20%3FsubClass%20%3FsubClassLabel%20%3FinstanceCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3FsubClass%20%28COUNT%28%3Finstance%29%20AS%20%3FinstanceCount%29%20WHERE%20%7B%0A%20%20%20%20%20%3FsubClass%20%20wdt%3AP279%2a%20%20%20%20%20wd%3AQ34038%20%20.%0A%20%20%20%20%20%20%3Finstance%20wdt%3AP31%20%3FsubClass.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3FsubClass%0A%20%20%20%20HAVING%20%28%3FinstanceCount%20%3E10%29%0A%20%20%7D%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20BIND%28CONCAT%28STRAFTER%28STR%28%3FsubClass%29%2C%20%22entity%2F%22%29%29%20AS%20%3FchildID%29%0A%7D%0AORDER%20BY%20DESC%28%3FinstanceCount%29-->
+    <integer-array name="waterfall_QIDs">
+        <item>34038</item><!-- waterfall-->
+        <item>12053053</item><!-- artificial waterfall-->
+        <item>2967706</item><!-- coastal waterfall-->
+    </integer-array>
 </resources>

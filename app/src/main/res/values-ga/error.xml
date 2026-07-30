@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Aindriu80
+-->
+<resources>
+  <string name="crash_dialog_title">Tá Commons tar éis titim</string>
+  <string name="crash_dialog_text">Úps. Chuaigh rud éigin mícheart!</string>
+  <string name="crash_dialog_comment_prompt">Inis dúinn cad a bhí á dhéanamh agat, agus ansin roinn linn é trí ríomhphost. Cabhróidh sé linn é a shocrú!</string>
+  <string name="crash_dialog_ok_toast">Go raibh maith agat!</string>
+</resources>

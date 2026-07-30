@@ -95,6 +95,15 @@ public class Place implements Parcelable {
         this.entityID = entityID;
     }
 
+    /**
+     * Reconstructs a Place object from a Parcel.
+     *
+     * IMPORTANT: The fields must be read in the exact same order in which they
+     * are written in writeToParcel(). Changing the order will lead to incorrect
+     * or failed deserialization of the object.
+     *
+     * @param in Parcel containing the serialized Place data
+     */
     public Place(Parcel in) {
         this.language = in.readString();
         this.name = in.readString();
@@ -105,10 +114,10 @@ public class Place implements Parcelable {
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         String picString = in.readString();
         this.pic = (picString == null) ? "" : picString;
+        this.entityID = in.readString();
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
-        this.entityID = in.readString();
     }
 
     public static Place from(NearbyResultItem item) {

@@ -1,22 +1,57 @@
 package fr.free.nrw.commons.edit
 
-import android.mediautil.image.jpeg.LLJTran
-import android.mediautil.image.jpeg.LLJTranException
-import android.os.Environment
-import androidx.exifinterface.media.ExifInterface
+import android.content.Context
+import android.net.Uri
+import androidx.core.net.toUri
+import fr.free.nrw.commons.ajpegtran.Jpegtran
+import fr.free.nrw.commons.ajpegtran.Properties
+import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
+import fr.free.nrw.commons.ajpegtran.rotate.RotationDegree
 import timber.log.Timber
-import java.io.BufferedOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 /**
- * Implementation of the TransformImage interface for image rotation operations.
+ * Implementation of the TransformImage interface for image rotation and crop operations.
  *
- * This class provides an implementation for the TransformImage interface, right now it exposes a
- * function for rotating images by a specified degree using the LLJTran library. Right now it reads
- * the input image file, performs the rotation, and saves the rotated image to a new file.
+ * This class provides an implementation for the TransformImage interface, exposing functions
+ * for rotating and cropping images using the Jpegtran library for lossless JPEG transforms.
  */
 class TransformImageImpl : TransformImage {
+
+    private var jpegtran: Jpegtran? = null
+
+
+    /**
+     * Initialize the single Jpegtran instance for this editing session.
+     */
+    override fun initJpegtran(context: Context, imagePath: String) {
+        if (jpegtran == null) {
+            val imageUri =
+                if (imagePath.startsWith("content://") || imagePath.startsWith("file://"))
+                // It's a URI string, parse it directly.
+                    imagePath.toUri()
+                else
+                // It's a raw file path, convert it safely.
+                    File(imagePath).toUri()
+            jpegtran = Jpegtran(
+                context, imageUri
+            )
+        }
+    }
+
+    /**
+     * Returns properties of the JPEG image.
+     */
+    override fun getProperties(uri: Uri): Properties {
+        return jpegtran?.getProperties(uri)
+            ?: throw IllegalStateException("Jpegtran not initialized")
+    }
+
+    override fun cleanup() {
+        jpegtran?.cleanup()
+        jpegtran = null
+    }
+
     /**
      * Rotates the specified image file by the given degree.
      *
@@ -28,53 +63,83 @@ class TransformImageImpl : TransformImage {
         imageFile: File,
         degree: Int,
         savePath: File
-    ): File? {
+    ): File {
         Timber.tag("Trying to rotate image").d("Starting")
+        val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
+        val normalizedDegree = ((degree % 360) + 360) % 360
+        if (normalizedDegree == 0) {
+            imageFile.copyTo(output, overwrite = true)
+            return output
+        }
+        val rotationDegree = when (normalizedDegree) {
+            90 -> RotationDegree.ROTATE_90
+            180 -> RotationDegree.ROTATE_180
+            270 -> RotationDegree.ROTATE_270
+            else -> throw IllegalArgumentException("Unsupported degree: $degree")
+        }
+        try {
+            jpegtran!!.rotate(rotationDegree)
+            jpegtran!!.save(output.toUri())
+            return output
+        } catch (e: Exception) {
+            Timber.e(e, "saveEditedImage: Failed to rotate image")
+            throw e
+        }
+    }
 
-        val path =
-            Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS,
+    /**
+     * Crops the specified image file using lossless JPEG cropping via Jpegtran.
+     *
+     * @param left The left coordinate of the crop rectangle.
+     * @param top The top coordinate of the crop rectangle.
+     * @param width The width of the crop rectangle.
+     * @param height The height of the crop rectangle.
+     * @return The cropped image File, or null if the crop operation fails.
+     */
+    override fun cropImage(
+        left: Int,
+        top: Int,
+        width: Int,
+        height: Int,
+        savePath: File,
+    ): File {
+        Timber.tag("Trying to crop image").d(
+            "Starting crop: left=$left, top=$top, width=$width, height=$height"
+        )
+        val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
+        try {
+            jpegtran!!.crop(
+                width,
+                height,
+                left,
+                top
             )
+            jpegtran!!.save(output.toUri())
+            return output
+        } catch (e: Exception) {
+            Timber.e(e, "saveEditedImage: Failed to crop image")
+            throw e
+        }
+    }
 
-        val imagePath = System.currentTimeMillis()
-        val output = File(savePath, "rotated_$imagePath.jpg")
-
-        val rotated =
-            try {
-                val lljTran = LLJTran(imageFile)
-                lljTran.read(
-                    LLJTran.READ_ALL,
-                    false,
-                ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
-                lljTran.transform(
-                    when (degree) {
-                        90 -> LLJTran.ROT_90
-                        180 -> LLJTran.ROT_180
-                        270 -> LLJTran.ROT_270
-                        else -> LLJTran.OPT_DEFAULTS
-                    },
-                    LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION,
-                )
-                BufferedOutputStream(FileOutputStream(output)).use { writer ->
-                    lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
-                }
-                lljTran.freeMemory()
-                try {
-                    val exif = ExifInterface(output.absolutePath)
-                    exif.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
-                    exif.saveAttributes()
-                } catch (ex: Exception) {
-                    Timber.w(ex, "Failed to force EXIF orientation to tha Normal")
-                }
-                true
-            } catch (e: LLJTranException) {
-                Timber.tag("Error").d(e)
-                return null
-            }
-
-        if (rotated) {
-            Timber.tag("Done rotating image").d("Done")
-            Timber.tag("Add").d(output.absolutePath)
+    /**
+     * Blurs the specified regions of the image file.
+     */
+    override fun blurImage(
+        regions: List<BlurRegion>,
+        savePath: File
+    ): File {
+        Timber.tag("Trying to blur image").d("Starting blur of ${regions.size} regions")
+        val imagePath = "blurred_${System.currentTimeMillis()}.jpg"
+        val output = File(savePath, imagePath)
+        try {
+            jpegtran!!.blur(regions)
+            jpegtran!!.save(output.toUri())
+        } catch (e: Exception) {
+            Timber.e(e, "blurImage: Failed to blur image")
+            throw e
         }
         return output
     }

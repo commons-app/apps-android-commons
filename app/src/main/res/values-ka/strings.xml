@@ -453,6 +453,7 @@
   <string name="exif_tag_name_software">პროგრამული უზრუნველყოფა</string>
   <string name="delete_helper_ask_spam_selfie">სელფი, რომელიც არცერთ სტატიაში არ არის გამოყენებული</string>
   <string name="delete_helper_ask_spam_blurry">სრულიად ბუნდოვანი</string>
+  <string name="delete_helper_ask_spam_other">სხვა</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">შემთხვევითი ფოტო ინტერნეტიდან</string>
   <string name="delete_helper_ask_reason_copyright_logo">ლოგო</string>
   <string name="coordinates_edit_helper_show_edit_title_success">წარმატება</string>

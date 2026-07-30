@@ -27,8 +27,10 @@
 * McDutchie
 * Mishidexfc
 * NACHOgao3
+* Peterxy
 * Peterxy12
 * Qiyue2001
+* Rsjww
 * Shizhao
 * Shuiwater
 * ShuyanW
@@ -313,6 +315,7 @@
   <string name="upload_problem_image_dark">图像过暗。</string>
   <string name="upload_problem_image_blurry">图片模糊。</string>
   <string name="upload_problem_image_duplicate">图像已在共享资源上存在。</string>
+  <string name="upload_problem_image_format_unsupported">您所上传图像的格式不受共享资源服务器支持，所以应用已将其转换为JPG。</string>
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
   <string name="upload_problem_fbmd">请仅上传由您自己拍摄的图像。请勿上传您在他人的Facebook账户上所发现的图像。</string>
   <string name="upload_problem_do_you_continue">仍然上传这张图片？</string>
@@ -412,6 +415,8 @@
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
+  <string name="crop">裁剪</string>
+  <string name="blur">模糊</string>
   <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
@@ -480,6 +485,9 @@
   <string name="no_categories_selected_warning_desc">不带分类的图片很难有机会被利用到，您确定您要不选择分类来继续吗？</string>
   <string name="no_depictions_selected">没有选择描写</string>
   <string name="no_depictions_selected_warning_desc">带有描述的图像更容易被发现并且更可能被使用。您确定不选择描述继续吗？</string>
+  <string name="depictions_choose_from_map">从地图选择</string>
+  <string name="depictions_map_confirm">确认</string>
+  <string name="depictions_map_no_photo_location">图片没有位置，正在显示您的当前位置</string>
   <string name="back_button_warning">取消上传</string>
   <string name="back_button_warning_desc">点击退后按钮，您将取消上传并丢失进度</string>
   <string name="back_button_continue">继续上传</string>
@@ -588,6 +596,8 @@
   <string name="delete_helper_ask_spam_selfie">未在任何条目中使用的自拍</string>
   <string name="delete_helper_ask_spam_blurry">完全模糊</string>
   <string name="delete_helper_ask_spam_nonsense">无意义，在任何条目中都完全无法使用</string>
+  <string name="delete_helper_ask_spam_other">其他</string>
+  <string name="delete_helper_other_notes_hint">正当理由</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">按压图片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
@@ -752,6 +762,7 @@
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
   <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">关闭</string>
+  <string name="custom_selector_duplicates_warning">部分所选图像为重复图像，上传前会将其移除。</string>
   <string name="custom_selector_button_limit_text">最大：%1$d</string>
   <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
   <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
@@ -861,6 +872,7 @@
   <string name="pending">待处理</string>
   <string name="failed">失败</string>
   <string name="could_not_load_place_data">无法加载地点数据</string>
+  <string name="warning_for_no_option_selected">请选择任意一个选项来回答问题</string>
   <string name="custom_selector_delete_folder">删除文件夹</string>
   <string name="custom_selector_confirm_deletion_title">确认删除</string>
   <string name="custom_selector_confirm_deletion_message">您确定要删除包含%2$d的文件夹%1$s吗？</string>
@@ -891,4 +903,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
   <string name="nominated_for_deletion_btn">已提名删除</string>
   <string name="custom_selector_max_image_limit_reached">您最多只能选择%d张图片。</string>
+  <string name="edit_unsupported_format_explanation">应用内编辑仅支持JPEG文件。若要编辑其他格式，请使用第三方工具。</string>
+  <string name="license_cc0_description">无版权。您放弃所有权利，任何人都可以以任意形式使用此作品。</string>
+  <string name="license_cc_by_description">署名。其他人只要注明您为原作者，即可自由分享和演绎。</string>
+  <string name="license_cc_by_sa_description">署名-相同方式。其他人可以分享和演绎，但必须使用相同的许可协议并注明您为原作者。</string>
+  <string name="license_cc0_long_description">此许可协议允许再使用者无条件地以任何媒介或格式，分发、改编、演绎和构建材料。</string>
+  <string name="license_cc_by_long_description">此许可协议允许再使用者只要注明创作者，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
+  <string name="license_cc_by_sa_long_description">此许可协议允许再使用者只要注明创作者，并将新作品依据相同条款获得许可，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
 </resources>

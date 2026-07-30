@@ -20,6 +20,7 @@ class UploadableFile : Parcelable {
 
     val contentUri: Uri
     val file: File
+    var hasUnsupportedFormat: Boolean = false
 
     constructor(contentUri: Uri, file: File) {
         this.contentUri = contentUri
@@ -34,6 +35,7 @@ class UploadableFile : Parcelable {
     private constructor(parcel: Parcel) {
         contentUri = parcel.readParcelable(Uri::class.java.classLoader)!!
         file = parcel.readSerializable() as File
+        hasUnsupportedFormat = parcel.readInt() == 1
     }
 
     fun getFilePath(): String {
@@ -126,6 +128,7 @@ class UploadableFile : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(contentUri, flags)
         parcel.writeSerializable(file)
+        parcel.writeInt(if (hasUnsupportedFormat) 1 else 0)
     }
 
     class DateTimeWithSource {

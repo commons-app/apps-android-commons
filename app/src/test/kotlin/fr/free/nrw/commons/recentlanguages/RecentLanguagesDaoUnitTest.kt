@@ -4,21 +4,21 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_CODE
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onCreate
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onDelete
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.onUpdate
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_CODE
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.onCreate
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.onDelete
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.onUpdate
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -40,7 +40,7 @@ class RecentLanguagesDaoUnitTest {
         )
 
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
     private lateinit var testObject: RecentLanguagesDao

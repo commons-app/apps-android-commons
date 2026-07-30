@@ -8,7 +8,9 @@ import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
+import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
@@ -165,6 +167,28 @@ class DepictsPresenter
         override fun clearPreviousSelection() {
             repository.cleanup()
         }
+
+    /**
+     * Update Depictions list which are selected from the map
+     */
+    override fun onPlaceSelectedFromMap(place: Place) {
+        place.wikiDataEntityId?.let { qid ->
+            compositeDisposable.add(
+                repository.getDepictions(listOf(qid))
+                    .subscribeOn(ioScheduler)
+                    .observeOn(mainThreadScheduler)
+                    .subscribe({ depictedItems ->
+                        selectNewDepictions(depictedItems)
+                    }, { error ->
+                        Timber.e(error, "Failed to fetch depiction for place from map")
+                    })
+            )
+        }
+    }
+    
+    override fun getUploads(): List<UploadItem> {
+        return repository.getUploads()
+    }
 
         override fun onPreviousButtonClicked() {
             view.goToPreviousScreen()

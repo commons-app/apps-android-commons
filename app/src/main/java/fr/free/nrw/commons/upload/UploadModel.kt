@@ -145,7 +145,8 @@ class UploadModel @Inject internal constructor(
             uploadableFile?.getMimeType(context), imageCoordinates, place, fileCreatedDate,
             createdTimestampSource,
             uploadableFile?.contentUri,
-            fileCreatedDateString
+            fileCreatedDateString,
+            uploadableFile?.hasUnsupportedFormat ?: false
         )
 
         // If an uploadItem of the same uploadableFile has been created before, we return that.

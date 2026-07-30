@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.theme.BaseActivity
@@ -31,14 +32,18 @@ class SignupActivity : BaseActivity() {
             settings.javaScriptEnabled = true
             loadUrl(BuildConfig.SIGNUP_LANDING_URL)
         }
-    }
 
-    override fun onBackPressed() {
-        if (webView!!.canGoBack()) {
-            webView!!.goBack()
-        } else {
-            super.onBackPressed()
-        }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (webView!!.canGoBack()) {
+                    webView!!.goBack()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
     }
 
     /**

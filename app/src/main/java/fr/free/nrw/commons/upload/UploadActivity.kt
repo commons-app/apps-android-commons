@@ -191,10 +191,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     getString(R.string.back_button_warning_desc),
                     getString(R.string.back_button_continue),
                     getString(R.string.back_button_warning),
-                    null
-                ) {
-                    finish()
-                }
+                    null,
+                    { finish() },
+                    false
+                )
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -432,6 +432,30 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         )
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val action = intent.action
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action || ContributionController.ACTION_INTERNAL_UPLOADS == action) {
+            // clear the old fragments
+            val fm = supportFragmentManager
+            if (fm.fragments.isNotEmpty()) {
+                val tp = fm.beginTransaction()
+                for (fragment in fm.fragments) {
+                    tp.remove(fragment)
+                }
+                tp.commitNowAllowingStateLoss()
+            }
+            // wipe the shared model and the ui lists
+            presenter?.cleanup()
+            uploadableFiles.clear()
+            fragments = null
+            uploadImagesAdapter = null
+            isFragmentsSaved = false
+        }
+        checkStoragePermissions()
+    }
+
     override fun askUserToLogIn() {
         Timber.d("current session is null, asking user to login")
         showLongToast(this, getString(R.string.user_not_logged_in))
@@ -530,6 +554,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     currLocation
                 }
 
+                if (uploadImagesAdapter == null) {
+                    initViewPager()
+                }
                 val uploadMediaDetailFragmentCallback: UploadMediaDetailFragmentCallback =
                     object : UploadMediaDetailFragmentCallback {
                         override fun deletePictureAtIndex(index: Int) {
@@ -895,6 +922,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onDestroy()
         // Resetting all values in store by clearing them
         store!!.clearAll()
+        if (isFinishing) {
+            presenter?.cleanup()
+        }
         presenter!!.onDetachView()
         compositeDisposable.clear()
         fragments = null

@@ -2,11 +2,12 @@ package fr.free.nrw.commons.bookmarks.pictures
 
 import android.content.ContentValues
 import android.database.Cursor
-import android.database.sqlite.SQLiteQueryBuilder
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_MEDIA_NAME
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.TABLE_NAME
 
@@ -28,17 +29,14 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor {
-        val queryBuilder = SQLiteQueryBuilder().apply {
-            tables = TABLE_NAME
+        val query = SupportSQLiteQueryBuilder
+            .builder(TABLE_NAME)
+            .columns(projection)
+            .selection(selection, selectionArgs)
+            .orderBy(sortOrder).create()
+        return requireDb().query(query).apply {
+            setNotificationUri(context?.contentResolver, uri)
         }
-
-        val cursor = queryBuilder.query(
-            requireDb(), projection, selection,
-            selectionArgs, null, null, sortOrder
-        )
-        cursor.setNotificationUri(context?.contentResolver, uri)
-
-        return cursor
     }
 
     /**
@@ -52,15 +50,18 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
         uri: Uri, contentValues: ContentValues?, selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-        val rowsUpdated: Int
+        val rowsUpdated: Int =
         if (selection.isNullOrEmpty()) {
             val id = uri.lastPathSegment!!.toInt()
-            rowsUpdated = requireDb().update(
-                TABLE_NAME,
-                contentValues,
-                "$COLUMN_MEDIA_NAME = ?",
-                arrayOf(id.toString())
-            )
+            contentValues?.let {
+                requireDb().update(
+                    TABLE_NAME,
+                    SQLiteDatabase.CONFLICT_NONE,
+                    it,
+                    "$COLUMN_MEDIA_NAME = ?",
+                    arrayOf(id.toString())
+                )
+            } ?: 0
         } else {
             throw IllegalArgumentException(
                 "Parameter `selection` should be empty when updating an ID"
@@ -74,7 +75,8 @@ class BookmarkPicturesContentProvider : CommonsDaggerContentProvider() {
      * Handles the insertion of new bookmark pictures record to local SQLite Database
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri {
-        val id = requireDb().insert(TABLE_NAME, null, contentValues)
+        val id =
+            contentValues?.let { requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it) }
         context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }

@@ -102,7 +102,7 @@ class BookmarkItemsFragmentUnitTest {
 
         statusTextView = view.findViewById(R.id.status_message)
         progressBar = view.findViewById(R.id.loading_images_progress_bar)
-        recyclerView = view.findViewById(R.id.list_view)
+        recyclerView = view.findViewById(R.id.recyclerView)
 
         fragment.controller = controller
 

@@ -248,6 +248,7 @@
   <string name="quiz_screenshot_question">Da li ovaj ekranski snimak je u redu za otpremanje?</string>
   <string name="share_app_title">Dijeli privitak</string>
   <string name="delete_helper_show_deletion_title_failed">Nije uspelo</string>
+  <string name="delete_helper_ask_spam_other">Ostalo</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="location_permission_rationale">Dozvola po potrebi: Utvrđavanje trenutne lokacije za predlaganje kategorija</string>
   <string name="contributions_of_user">Doprinosi korisnika: %1$s</string>
