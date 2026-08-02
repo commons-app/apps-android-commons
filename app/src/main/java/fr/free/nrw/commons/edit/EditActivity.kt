@@ -283,7 +283,11 @@ class EditActivity : BaseActivity() {
 
         try {
             val blurredFile = vm.blurImage(regions, applicationContext.cacheDir)
+            // Update imageUri to point to latest blurred file.
             imageUri = blurredFile.absolutePath
+            // Apply pending rotation.
+            val file = applyPendingRotation()
+            imageUri = file.absolutePath
             // Reload the image displaying the applied blur.
             updateImagePreview()
         } catch (e: Exception) {
@@ -301,11 +305,9 @@ class EditActivity : BaseActivity() {
      * in the ImageView, and returns to the main toolbar.
      */
     private fun applyCrop() {
-        val filePath = imageUri.toUri().path
         try {
-            var file = File(filePath.toString())
-            // Apply rotation if pending so crop coordinates match.
-            file = applyPendingRotation(file)
+            // Apply pending rotation if any.
+            val file = applyPendingRotation()
 
             val properties = vm.getProperties(file.toUri())
             val actualWidth = properties.width
@@ -403,7 +405,9 @@ class EditActivity : BaseActivity() {
      * Applies any pending rotation to the given file via JNI and resets the rotation baseline.
      * Returns the rotated file, or the original file if no rotation was pending.
      */
-    private fun applyPendingRotation(file: File): File {
+    private fun applyPendingRotation(): File {
+        val filePath = imageUri.toUri().path
+        val file = File(filePath.toString())
         val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
         if (relativeRotation == 0) return file
         val rotated = vm.rotateImage(file, relativeRotation, applicationContext.cacheDir)
@@ -418,13 +422,8 @@ class EditActivity : BaseActivity() {
      * Saves the edited image.
      */
     private fun saveEditedImage() {
-        val filePath = imageUri.toUri().path
-
         try {
-            var file = File(filePath.toString())
-            file = applyPendingRotation(file)
-
-            val finalPath = file.absolutePath
+            val finalPath = imageUri.toUri().path
             val resultIntent = Intent().apply {
                 putExtra("editedImageFilePath", finalPath)
             }
