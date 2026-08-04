@@ -17,6 +17,7 @@ import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
 import kotlin.math.max
 import kotlin.math.min
 import androidx.core.graphics.withMatrix
+import org.commons.ai.common.Detection
 
 /**
  * Custom overlay view to allow users to draw and select multiple rectangular
@@ -504,6 +505,11 @@ class BlurOverlayView @JvmOverloads constructor(
             }
         }
         return super.onTouchEvent(event)
+    }
+    
+    fun addRegions(newRegions: List<RectF>) {
+        regions.addAll(newRegions)
+        invalidate()
     }
 
     /**

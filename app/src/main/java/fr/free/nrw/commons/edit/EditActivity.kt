@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.RectF
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -18,10 +19,17 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
+import org.commons.ai.common.DetectionResult
+import org.commons.ai.vision.CommonsVision
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -139,6 +147,82 @@ class EditActivity : BaseActivity() {
             }
 
         }
+        binding.autoblurBtn.setOnClickListener {
+            lifecycleScope.launch {
+                val decodedBitmap = loadBitmapForDetection(imageUri)
+                if (decodedBitmap == null) {
+                    Toast.makeText(
+                        this@EditActivity,
+                        "Failed to load image for AutoBlur",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Timber.e("AutoBlur: decodedBitmap is null for $imageUri")
+                    return@launch
+                }
+
+                if (!isBlurMode) {
+                    enterBlurMode()
+                    toggleApplyEditMode(true)
+                }
+
+                val detector = CommonsVision.detector(applicationContext)
+                val detectionResult = withContext(Dispatchers.Default) {
+                    detector.detect(decodedBitmap)
+                }
+                val rawDetections = when (detectionResult) {
+                    is DetectionResult.Success -> detectionResult.detections
+                    is DetectionResult.Partial -> {
+                        Timber.w("Partial detection result: unavailable capabilities = ${detectionResult.detections}")
+                        detectionResult.detections
+                    }
+
+                    else -> emptyList()
+                }
+
+                val drawable = binding.iv.drawable
+                if (drawable != null && rawDetections.isNotEmpty() && decodedBitmap.width > 0 && decodedBitmap.height > 0) {
+                    val scaleX = drawable.intrinsicWidth.toFloat() / decodedBitmap.width
+                    val scaleY = drawable.intrinsicHeight.toFloat() / decodedBitmap.height
+
+                    val scaledRects = rawDetections.map { detection ->
+                        val b = detection.bounds
+                        RectF(
+                            b.left * scaleX,
+                            b.top * scaleY,
+                            b.right * scaleX,
+                            b.bottom * scaleY
+                        )
+                    }
+                    binding.blurOverlay.addRegions(scaledRects)
+                } else if (rawDetections.isEmpty()) {
+                    Toast.makeText(
+                        this@EditActivity,
+                        "No regions detected for AutoBlur",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    /**
+     * Safely decodes a bitmap from a content URI or file path off the main thread.
+     */
+    private suspend fun loadBitmapForDetection(pathOrUri: String): Bitmap? =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val uri = pathOrUri.toUri()
+                if (uri.scheme == "content") {
+                    contentResolver.openInputStream(uri)?.use { stream ->
+                        BitmapFactory.decodeStream(stream)
+                    }
+                } else {
+                    val filePath = if (uri.scheme == "file") uri.path ?: pathOrUri else pathOrUri
+                    BitmapFactory.decodeFile(filePath)
+                }
+            }.onFailure { e ->
+                Timber.e(e, "Failed to load bitmap for detection from pathOrUri: $pathOrUri")
+            }.getOrNull()
     }
 
     /**
