@@ -236,6 +236,7 @@ class EditActivity : BaseActivity() {
         binding.rotateBtn.visibility = mainVisibility
         binding.cropBtn.visibility = mainVisibility
         binding.blurBtn.visibility = mainVisibility
+        binding.autoblurBtn.visibility = mainVisibility
         // Keep the save button in the view, so there is no layout shift.
         binding.btnSave.visibility = if (!activate) View.VISIBLE else View.INVISIBLE
         binding.editOptionsLayout.visibility = editVisibility
