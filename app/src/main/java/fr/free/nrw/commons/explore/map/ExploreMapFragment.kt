@@ -95,7 +95,6 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var clickedMarker: BaseMarker? = null
     private var mapCenter: GeoPoint? = null
     private var lastMapFocus: GeoPoint? = null
-    private var isAnimatingCamera = false
     private var intentFilter: IntentFilter = IntentFilter(MapUtils.NETWORK_INTENT_ACTION)
     private var baseMarkerOverlayMap: MutableMap<BaseMarker?, Overlay?>? = null
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
@@ -1023,10 +1022,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * @param geoPoint The GeoPoint representing the new camera position for the map.
      */
     private fun moveCameraToPosition(geoPoint: GeoPoint?) {
-        if (isAnimatingCamera) return
-        isAnimatingCamera = true
+        if (binding!!.mapView.isAnimating) return
         binding!!.mapView.controller.animateTo(geoPoint)
-        isAnimatingCamera = false
     }
 
     /**
@@ -1038,10 +1035,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * @param speed    Speed of animation
      */
     private fun moveCameraToPosition(geoPoint: GeoPoint?, zoom: Double, speed: Long) {
-        if (isAnimatingCamera) return
-        isAnimatingCamera = true
+        if (binding!!.mapView.isAnimating) return
         binding!!.mapView.controller.animateTo(geoPoint, zoom, speed)
-        isAnimatingCamera = false
     }
 
     override fun getLastMapFocus(): LatLng? = if (lastMapFocus == null) {
