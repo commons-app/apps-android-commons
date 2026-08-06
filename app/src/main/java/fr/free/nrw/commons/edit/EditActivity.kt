@@ -165,7 +165,7 @@ class EditActivity : BaseActivity() {
                     toggleApplyEditMode(true)
                 }
 
-                val detector = CommonsVision.detector(applicationContext)
+                val detector = CommonsVision(applicationContext)
                 val detectionResult = withContext(Dispatchers.Default) {
                     detector.detect(decodedBitmap)
                 }
