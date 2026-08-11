@@ -73,13 +73,13 @@ class RandomAccessFileExifWriterTest {
         RandomAccessFileExifWriter.writeTags(
             testFile, mapOf(
                 ExifInterface.TAG_ORIENTATION to "3",
-                ExifInterface.TAG_MAKE to "TestMake"
+                ExifInterface.TAG_SOFTWARE to "TestSoftware"
             )
         )
 
         val after = ExifInterface(testFile.absolutePath)
         assertEquals("3", after.getAttribute(ExifInterface.TAG_ORIENTATION))
-        assertEquals("TestMake", after.getAttribute(ExifInterface.TAG_MAKE))
+        assertEquals("TestSoftware", after.getAttribute(ExifInterface.TAG_SOFTWARE))
     }
 
     @Test
@@ -110,20 +110,20 @@ class RandomAccessFileExifWriterTest {
         RandomAccessFileExifWriter.writeTags(
             testFile, mapOf(
                 ExifInterface.TAG_ORIENTATION to "1",
-                ExifInterface.TAG_MAKE to "TestMake"
+                ExifInterface.TAG_SOFTWARE to "TestSoftware"
             )
         )
 
         RandomAccessFileExifWriter.redactTags(
             testFile, setOf(
                 ExifInterface.TAG_ORIENTATION,
-                ExifInterface.TAG_MAKE
+                ExifInterface.TAG_SOFTWARE
             )
         )
 
         val after = ExifInterface(testFile.absolutePath)
         assertNull(after.getAttribute(ExifInterface.TAG_ORIENTATION))
-        assertNull(after.getAttribute(ExifInterface.TAG_MAKE))
+        assertNull(after.getAttribute(ExifInterface.TAG_SOFTWARE))
     }
 
     @Test

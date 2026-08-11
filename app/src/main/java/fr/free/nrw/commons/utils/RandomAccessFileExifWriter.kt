@@ -199,8 +199,10 @@ object RandomAccessFileExifWriter {
                                 raf, tiffBase, tiffBase + ifd0Off,
                                 order, updates,
                             )
+                            break
+                        } else {
+                            raf.seek(next)
                         }
-                        break
                     } else if (marker == 0xFFDA) break
                     else raf.seek(next)
                 }
@@ -221,6 +223,7 @@ object RandomAccessFileExifWriter {
         ifdPos: Long,
         order: ByteOrder,
         updates: Map<Int, String?>,
+        isMainIfd: Boolean = true,
     ) {
         if (ifdPos >= raf.length() - 2) return
         raf.seek(ifdPos)
@@ -238,7 +241,7 @@ object RandomAccessFileExifWriter {
             // Recurse sub-IFDs.
             if ((tagId == 0x8769 || tagId == 0x8825) && valOrOff > 0) {
                 scanAndUpdateIfd(
-                    raf, tiffBase, tiffBase + valOrOff, order, updates,
+                    raf, tiffBase, tiffBase + valOrOff, order, updates, isMainIfd = false,
                 )
                 raf.seek(afterEntry)
             }
@@ -247,7 +250,7 @@ object RandomAccessFileExifWriter {
             if (!updates.containsKey(tagId)) continue
 
             if (updates[tagId] == null) {
-                // Zero out the 12-byte entry to remove the tag
+                // Zero out the entire 12-byte IFD entry to remove the tag
                 raf.seek(entryPos)
                 raf.write(ByteArray(12))
                 raf.seek(afterEntry)
@@ -278,12 +281,12 @@ object RandomAccessFileExifWriter {
             }
         }
 
-        // update next IFD if present (e.g. IFD0 -> IFD1 thumbnail IFD).
-        if (raf.filePointer <= raf.length() - 4) {
+        // Only main IFDs (e.g. IFD0 -> IFD1 thumbnail IFD) have a next-IFD offset pointer.
+        if (isMainIfd && raf.filePointer <= raf.length() - 4) {
             val nextIfdOff = readU32(raf, order)
             if (nextIfdOff > 0) {
                 scanAndUpdateIfd(
-                    raf, tiffBase, tiffBase + nextIfdOff, order, updates,
+                    raf, tiffBase, tiffBase + nextIfdOff, order, updates, isMainIfd = true,
                 )
             }
         }
