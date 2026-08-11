@@ -60,7 +60,7 @@ class CustomSelectorUtils {
                         Timber.e(e)
                         null
                     }
-                fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
+                fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact(), uploadableFile.getFilePath())
                 val sha1 =
                     fileUtilsWrapper.getSHA1(
                         fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),

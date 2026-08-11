@@ -19,7 +19,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.exifinterface.media.ExifInterface
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.chrisbanes.photoview.PhotoView
 import fr.free.nrw.commons.CameraPosition
@@ -37,6 +36,7 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.ImageCoordinates
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
@@ -761,20 +761,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     private fun removeLocation() {
         editableUploadItem!!.gpsCoords!!.decimalCoords = null
         try {
-            val sourceExif = ExifInterface(
-                uploadableFile!!.getFilePath()
-            )
-            val exifTags = arrayOf(
-                ExifInterface.TAG_GPS_LATITUDE,
-                ExifInterface.TAG_GPS_LATITUDE_REF,
-                ExifInterface.TAG_GPS_LONGITUDE,
-                ExifInterface.TAG_GPS_LONGITUDE_REF,
-            )
-
-            for (tag in exifTags) {
-                sourceExif.setAttribute(tag, null)
-            }
-            sourceExif.saveAttributes()
+            val filePath = uploadableFile!!.getFilePath()
+            RandomAccessFileExifWriter.removeLocation(File(filePath))
 
             val mapQuestion =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_map_not_available_20dp)
