@@ -44,17 +44,25 @@ class RandomAccessFileExifWriterTest {
     fun `writeTag removes a tag when value is null`() {
         // Write a tag first to ensure it's set
         RandomAccessFileExifWriter.writeTag(
-            testFile, ExifInterface.TAG_ORIENTATION, "1"
+            testFile, ExifInterface.TAG_ORIENTATION, "6"
+        )
+        RandomAccessFileExifWriter.writeTag(
+            testFile, ExifInterface.TAG_SOFTWARE, "TestSoftware"
         )
         val before = ExifInterface(testFile.absolutePath)
-        assertNotNull(before.getAttribute(ExifInterface.TAG_ORIENTATION))
+        assertEquals("6", before.getAttribute(ExifInterface.TAG_ORIENTATION))
+        assertEquals("TestSoftware", before.getAttribute(ExifInterface.TAG_SOFTWARE))
 
-        // Remove tag by passing null
+        // Remove tag by passing null (resets orientation to 1 / normal, software becomes null)
         RandomAccessFileExifWriter.writeTag(
             testFile, ExifInterface.TAG_ORIENTATION, null
         )
+        RandomAccessFileExifWriter.writeTag(
+            testFile, ExifInterface.TAG_SOFTWARE, null
+        )
         val after = ExifInterface(testFile.absolutePath)
-        assertNull(after.getAttribute(ExifInterface.TAG_ORIENTATION))
+        assertEquals("1", after.getAttribute(ExifInterface.TAG_ORIENTATION))
+        assertNull(after.getAttribute(ExifInterface.TAG_SOFTWARE))
     }
 
     @Test
@@ -109,7 +117,7 @@ class RandomAccessFileExifWriterTest {
     fun `redactTags removes specified tags`() {
         RandomAccessFileExifWriter.writeTags(
             testFile, mapOf(
-                ExifInterface.TAG_ORIENTATION to "1",
+                ExifInterface.TAG_ORIENTATION to "6",
                 ExifInterface.TAG_SOFTWARE to "TestSoftware"
             )
         )
@@ -122,7 +130,7 @@ class RandomAccessFileExifWriterTest {
         )
 
         val after = ExifInterface(testFile.absolutePath)
-        assertNull(after.getAttribute(ExifInterface.TAG_ORIENTATION))
+        assertEquals("1", after.getAttribute(ExifInterface.TAG_ORIENTATION))
         assertNull(after.getAttribute(ExifInterface.TAG_SOFTWARE))
     }
 

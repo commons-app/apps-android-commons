@@ -106,7 +106,8 @@ object RandomAccessFileExifWriter {
         val updates = mutableMapOf<Int, String?>()
         for ((name, value) in tags) {
             val spec = TAG_REGISTRY[name] ?: continue
-            updates[spec.id] = value
+            val targetValue = if (name == ExifInterface.TAG_ORIENTATION && value == null) "1" else value
+            updates[spec.id] = targetValue
             if (value == null && spec.ifd == IfdGroup.GPS) {
                 updates[TAG_ID_GPS_IFD_POINTER] = null
             }
@@ -141,7 +142,8 @@ object RandomAccessFileExifWriter {
         val updates = mutableMapOf<Int, String?>()
         for (name in redactTags) {
             val spec = TAG_REGISTRY[name] ?: continue
-            updates[spec.id] = null
+            val targetValue = if (name == ExifInterface.TAG_ORIENTATION) "1" else null
+            updates[spec.id] = targetValue
             if (spec.ifd == IfdGroup.GPS) updates[TAG_ID_GPS_IFD_POINTER] = null
         }
         if (updates.isEmpty()) return
