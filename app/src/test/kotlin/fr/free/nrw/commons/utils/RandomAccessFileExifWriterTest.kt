@@ -14,7 +14,7 @@ import java.io.File
  */
 class RandomAccessFileExifWriterTest {
 
-    private val sampleImagePath = "src/test/resources/ImageTest/ok1.jpg"
+    private val sampleImagePath = "src/test/resources/ImageTest/dark1.jpg"
     private lateinit var testFile: File
 
     @Before
