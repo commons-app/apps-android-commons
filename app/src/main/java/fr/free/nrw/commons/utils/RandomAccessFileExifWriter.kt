@@ -254,7 +254,7 @@ object RandomAccessFileExifWriter {
             } else {
                 val encoded = encodeValue(type, updates[tagId]!!, order) ?: continue
                 val unitSize = typeUnitSize(type)
-                val existingBytes = unitSize * cnt.toInt()
+                val existingBytes = unitSize * cnt
 
                 if (existingBytes <= 4) {
                     if (encoded.size <= 4) {
@@ -275,6 +275,16 @@ object RandomAccessFileExifWriter {
                     }
                 }
                 raf.seek(afterEntry)
+            }
+        }
+
+        // update next IFD if present (e.g. IFD0 -> IFD1 thumbnail IFD).
+        if (raf.filePointer <= raf.length() - 4) {
+            val nextIfdOff = readU32(raf, order)
+            if (nextIfdOff > 0) {
+                scanAndUpdateIfd(
+                    raf, tiffBase, tiffBase + nextIfdOff, order, updates,
+                )
             }
         }
     }
