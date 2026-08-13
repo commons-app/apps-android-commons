@@ -18,6 +18,7 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
@@ -49,6 +50,7 @@ class EditActivity : BaseActivity() {
     private var originalBitmapWidth = 0
     private var originalBitmapHeight = 0
     private var maxAvailableHeight = 0f
+    private var properties: Properties? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +61,7 @@ class EditActivity : BaseActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         vm.initJpegtran(applicationContext, imageUri)
-
+        fetchAndSetImageProperties()
         val sourceExif = try {
             ExifInterface(imageUri)
         } catch (e: Exception) {
@@ -138,6 +140,23 @@ class EditActivity : BaseActivity() {
                 toggleApplyEditMode(true)
             }
 
+        }
+    }
+
+    /**
+     * Gets the current image properties and update those properties in [BlurOverlayView].
+     * */
+    private fun fetchAndSetImageProperties() {
+        try {
+            properties = vm.getProperties(File(imageUri).toUri())
+            binding.blurOverlay.setImageProperties(properties!!)
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting image properties: ${e.localizedMessage}")
+            Toast.makeText(
+                this@EditActivity,
+                "Error getting image properties: ${e.localizedMessage}",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -308,9 +327,8 @@ class EditActivity : BaseActivity() {
             // Apply pending rotation if any.
             applyPendingRotation()
 
-            val properties = vm.getProperties(File(imageUri).toUri())
-            val actualWidth = properties.width
-            val actualHeight = properties.height
+            val actualWidth = properties!!.width
+            val actualHeight = properties!!.height
             val cropRect = binding.cropOverlay.getCropRect()
             val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
 
@@ -414,6 +432,7 @@ class EditActivity : BaseActivity() {
         imageRotation = 0
         // Update imageUri
         imageUri = rotated.absolutePath
+        fetchAndSetImageProperties()
     }
 
     /**

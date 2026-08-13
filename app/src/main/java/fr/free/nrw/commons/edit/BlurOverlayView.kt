@@ -14,9 +14,12 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.ImageView
 import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
+import kotlin.math.ceil
+import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import androidx.core.graphics.withMatrix
+import fr.free.nrw.commons.ajpegtran.Properties
 
 /**
  * Custom overlay view to allow users to draw and select multiple rectangular
@@ -68,6 +71,7 @@ class BlurOverlayView @JvmOverloads constructor(
     private var moveRegionIndex = -1
     private var lastTouchX = 0f
     private var lastTouchY = 0f
+    private var imageProperties: Properties? = null
 
     private enum class Handle {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,
@@ -460,8 +464,10 @@ class BlurOverlayView @JvmOverloads constructor(
 
             MotionEvent.ACTION_UP -> {
                 // Rectangle movement.
-                if (moveRegionIndex != -1)
+                if (moveRegionIndex != -1) {
+                    snapToMCU(regions[moveRegionIndex])
                     moveRegionIndex = -1
+                }
                 // Delete marker tap.
                 if (deleteBoxIndex != -1) {
                     if (deleteBoxIndex < regions.size) {
@@ -474,6 +480,7 @@ class BlurOverlayView @JvmOverloads constructor(
 
                 // End resize.
                 if (resizeRegionIndex != -1) {
+                    snapToMCU(regions[resizeRegionIndex])
                     parent?.requestDisallowInterceptTouchEvent(false)
                     resizeRegionIndex = -1
                     resizeHandle = null
@@ -484,6 +491,7 @@ class BlurOverlayView @JvmOverloads constructor(
                 // End drawing.
                 currentActiveBox?.let { activeBox ->
                     if (activeBox.width() > 15 && activeBox.height() > 15) {
+                        snapToMCU(activeBox)
                         regions.add(activeBox)
                     }
                     currentActiveBox = null
@@ -617,6 +625,40 @@ class BlurOverlayView @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Initializes the [imageProperties] with current image properties.
+     * */
+    fun setImageProperties(properties: Properties) {
+        imageProperties = properties
+    }
+
+    /**
+     * Snaps the selection bounding box to MCU boundaries in drawable space
+     * The on-screen bounding box exactly matches what gets blurred.
+     */
+    private fun snapToMCU(rect: RectF) {
+
+        // Pre-check.
+        val props = imageProperties ?: return
+        val drawable = imageView?.drawable ?: return
+        if (props.MCU_Width <= 0 || props.MCU_Height <= 0) return
+
+        // MCU size in drawable-pixel space.
+        val mcuW = props.MCU_Width.toFloat() * drawable.intrinsicWidth / props.width
+        val mcuH = props.MCU_Height.toFloat() * drawable.intrinsicHeight / props.height
+
+        // Snap left/top DOWN, right/bottom UP to nearest MCU boundary.
+        rect.left = floor(rect.left.toDouble() / mcuW).toFloat() * mcuW
+        rect.top = floor(rect.top.toDouble() / mcuH).toFloat() * mcuH
+        rect.right = ceil(rect.right.toDouble() / mcuW).toFloat() * mcuW
+        rect.bottom = ceil(rect.bottom.toDouble() / mcuH).toFloat() * mcuH
+
+        // Update Snap in drawable bounds.
+        rect.left = max(0f, rect.left)
+        rect.top = max(0f, rect.top)
+        rect.right = min(drawable.intrinsicWidth.toFloat(), rect.right)
+        rect.bottom = min(drawable.intrinsicHeight.toFloat(), rect.bottom)
+    }
 
     fun resetZoom() {
         val iv = imageView ?: return
