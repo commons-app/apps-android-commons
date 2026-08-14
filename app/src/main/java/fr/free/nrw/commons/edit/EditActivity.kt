@@ -24,7 +24,6 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
