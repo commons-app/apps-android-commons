@@ -14,9 +14,13 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.ImageView
 import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
+import kotlin.math.ceil
+import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.round
 import androidx.core.graphics.withMatrix
+import fr.free.nrw.commons.ajpegtran.Properties
 
 /**
  * Custom overlay view to allow users to draw and select multiple rectangular
@@ -61,13 +65,15 @@ class BlurOverlayView @JvmOverloads constructor(
     private val edgeHandleRadiusDp = 2f
     private val cornerTouchSlopDp = 24f
     private val edgeTouchSlopDp = 20f
-    private val minRegionSizeDp = 20f
+    private val borderStrokeWidth = 1.5f
+    private val minRegionSizeDp = 10f
     private lateinit var handlePaint: Paint
     private lateinit var activeHandlePaint: Paint
     private lateinit var handleBorderPaint: Paint
     private var moveRegionIndex = -1
     private var lastTouchX = 0f
     private var lastTouchY = 0f
+    private var imageProperties: Properties? = null
 
     private enum class Handle {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,
@@ -96,7 +102,7 @@ class BlurOverlayView @JvmOverloads constructor(
         borderPaint = Paint().apply {
             color = Color.CYAN
             style = Paint.Style.STROKE
-            strokeWidth = 4.0f
+            strokeWidth = borderStrokeWidth
             isAntiAlias = true
         }
 
@@ -460,8 +466,10 @@ class BlurOverlayView @JvmOverloads constructor(
 
             MotionEvent.ACTION_UP -> {
                 // Rectangle movement.
-                if (moveRegionIndex != -1)
+                if (moveRegionIndex != -1) {
+                    snapRectToMCU(regions[moveRegionIndex])
                     moveRegionIndex = -1
+                }
                 // Delete marker tap.
                 if (deleteBoxIndex != -1) {
                     if (deleteBoxIndex < regions.size) {
@@ -474,6 +482,7 @@ class BlurOverlayView @JvmOverloads constructor(
 
                 // End resize.
                 if (resizeRegionIndex != -1) {
+                    snapRectToMCU(regions[resizeRegionIndex])
                     parent?.requestDisallowInterceptTouchEvent(false)
                     resizeRegionIndex = -1
                     resizeHandle = null
@@ -484,6 +493,7 @@ class BlurOverlayView @JvmOverloads constructor(
                 // End drawing.
                 currentActiveBox?.let { activeBox ->
                     if (activeBox.width() > 15 && activeBox.height() > 15) {
+                        snapRectToMCU(activeBox)
                         regions.add(activeBox)
                     }
                     currentActiveBox = null
@@ -622,6 +632,73 @@ class BlurOverlayView @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Initializes the [imageProperties] with current image properties.
+     * */
+    fun setImageProperties(properties: Properties) {
+        imageProperties = properties
+    }
+
+    /**
+     * Snaps [rect] to MCU boundaries in drawable-pixel space.
+     * If the rect's dimensions are already MCU-aligned, snaps position to the nearest MCU grid line,
+     * While preserving size.
+     * Otherwise, expands outward to cover full MCU blocks.
+     */
+    private fun snapRectToMCU(rect: RectF) {
+
+        // Pre-check.
+        val props = imageProperties ?: return
+        val drawable = imageView?.drawable ?: return
+        if (props.MCU_Width <= 0 || props.MCU_Height <= 0) return
+
+        // MCU size in drawable-pixel space.
+        val mcuW = props.MCU_Width.toFloat() * drawable.intrinsicWidth / props.width
+        val mcuH = props.MCU_Height.toFloat() * drawable.intrinsicHeight / props.height
+        val maxW = drawable.intrinsicWidth.toFloat()
+        val maxH = drawable.intrinsicHeight.toFloat()
+
+        val widthRemainder = rect.width() % mcuW
+        val widthAligned = widthRemainder < 0.01f || widthRemainder > (mcuW - 0.01f)
+        val heightRemainder = rect.height() % mcuH
+        val heightAligned = heightRemainder < 0.01f || heightRemainder > (mcuH - 0.01f)
+
+        // Already MCU-sized, Snap to nearest border position only, preserve size.
+        if (widthAligned && heightAligned) {
+            val w = rect.width()
+            val h = rect.height()
+            rect.left = round(rect.left / mcuW) * mcuW
+            rect.top = round(rect.top / mcuH) * mcuH
+            rect.right = rect.left + w
+            rect.bottom = rect.top + h
+
+            // Shift back if pushed past total image size.
+            if (rect.right > maxW) {
+                rect.offset(maxW - rect.right, 0f)
+            }
+            if (rect.bottom > maxH) {
+                rect.offset(0f, maxH - rect.bottom)
+            }
+            if (rect.left < 0f) {
+                rect.offset(-rect.left, 0f)
+            }
+            if (rect.top < 0f) {
+                rect.offset(0f, -rect.top)
+            }
+        } else {
+            // Not aligned, Expand outward to full MCU blocks.
+            rect.left = floor(rect.left.toDouble() / mcuW).toFloat() * mcuW
+            rect.top = floor(rect.top.toDouble() / mcuH).toFloat() * mcuH
+            rect.right = ceil(rect.right.toDouble() / mcuW).toFloat() * mcuW
+            rect.bottom = ceil(rect.bottom.toDouble() / mcuH).toFloat() * mcuH
+
+            // Clamp to drawable bounds.
+            rect.left = max(0f, rect.left)
+            rect.top = max(0f, rect.top)
+            rect.right = min(maxW, rect.right)
+            rect.bottom = min(maxH, rect.bottom)
+        }
+    }
 
     fun resetZoom() {
         val iv = imageView ?: return
