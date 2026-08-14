@@ -18,6 +18,7 @@ import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
@@ -154,7 +155,7 @@ class EditActivity : BaseActivity() {
             Timber.e(e, "Error getting image properties: ${e.localizedMessage}")
             Toast.makeText(
                 this@EditActivity,
-                "Error getting image properties: ${e.localizedMessage}",
+                getString(R.string.error_getting_image_properties),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -289,8 +290,8 @@ class EditActivity : BaseActivity() {
 
         if (regions.isEmpty()) {
             Toast.makeText(
-                this,
-                "Please draw at least one rectangle on the photo",
+                this@EditActivity,
+                getString(R.string.error_blur_no_rectangle),
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -310,10 +311,10 @@ class EditActivity : BaseActivity() {
             updateImagePreview()
             fetchAndUpdateImageProperties()
         } catch (e: Exception) {
-            Timber.e(e, "Failed to apply blur")
+            Timber.e(e, "Failed to apply blur ${e.localizedMessage}")
             Toast.makeText(
                 this@EditActivity,
-                "Error applying blur: ${e.localizedMessage}",
+                getString(R.string.error_applying_blur),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -347,10 +348,10 @@ class EditActivity : BaseActivity() {
                 fetchAndUpdateImageProperties()
             }
         } catch (e: Exception) {
-            Timber.e(e, "applyCrop: Failed to apply crop")
+            Timber.e(e, "applyCrop: Failed to apply crop ${e.localizedMessage}")
             Toast.makeText(
-                this,
-                "Failed to apply crop: ${e.localizedMessage}",
+                this@EditActivity,
+                getString(R.string.failed_to_apply_crop),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -450,10 +451,13 @@ class EditActivity : BaseActivity() {
             setResult(RESULT_OK, resultIntent)
             finish()
         } catch (e: Exception) {
-            Timber.e(e, "saveEditedImage: Exception occurred during save process")
+            Timber.e(
+                e,
+                "saveEditedImage: Exception occurred during save process ${e.localizedMessage}"
+            )
             Toast.makeText(
                 this@EditActivity,
-                "Failed to save image: ${e.localizedMessage}",
+                getString(R.string.failed_to_save_image),
                 Toast.LENGTH_LONG
             ).show()
         }
