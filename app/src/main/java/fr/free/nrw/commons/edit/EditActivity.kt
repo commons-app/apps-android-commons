@@ -61,7 +61,7 @@ class EditActivity : BaseActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         vm.initJpegtran(applicationContext, imageUri)
-        fetchAndSetImageProperties()
+        fetchAndUpdateImageProperties()
         val sourceExif = try {
             ExifInterface(imageUri)
         } catch (e: Exception) {
@@ -146,7 +146,7 @@ class EditActivity : BaseActivity() {
     /**
      * Gets the current image properties and update those properties in [BlurOverlayView].
      * */
-    private fun fetchAndSetImageProperties() {
+    private fun fetchAndUpdateImageProperties() {
         try {
             properties = vm.getProperties(File(imageUri).toUri())
             binding.blurOverlay.setImageProperties(properties!!)
@@ -432,7 +432,7 @@ class EditActivity : BaseActivity() {
         imageRotation = 0
         // Update imageUri
         imageUri = rotated.absolutePath
-        fetchAndSetImageProperties()
+        fetchAndUpdateImageProperties()
     }
 
     /**
