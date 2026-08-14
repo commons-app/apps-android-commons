@@ -9,17 +9,21 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.RectF
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.rotationMatrix
 import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
@@ -27,9 +31,8 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
-import org.commons.ai.common.DetectionResult
-import org.commons.ai.vision.CommonsVision
+import org.commons.ml.common.DetectionResult
+import org.commons.ml.vision.CommonsVision
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -149,8 +152,22 @@ class EditActivity : BaseActivity() {
         }
         binding.autoblurBtn.setOnClickListener {
             lifecycleScope.launch {
+                // Build and show the progress dialog
+                val dialogView = LayoutInflater.from(this@EditActivity)
+                    .inflate(R.layout.dialog_autodetect_progress, null)
+                val progressBar = dialogView.findViewById<ProgressBar>(R.id.autodetect_progress)
+                val statusText = dialogView.findViewById<TextView>(R.id.autodetect_status)
+                val progressDialog = AlertDialog.Builder(this@EditActivity)
+                    .setView(dialogView)
+                    .setCancelable(false)
+                    .create()
+                progressDialog.show()
+
+                statusText.setText(R.string.autodetect_step_loading)
+                progressBar.progress = 25
                 val decodedBitmap = loadBitmapForDetection(imageUri)
                 if (decodedBitmap == null) {
+                    progressDialog.dismiss()
                     Toast.makeText(
                         this@EditActivity,
                         "Failed to load image for AutoBlur",
@@ -160,11 +177,8 @@ class EditActivity : BaseActivity() {
                     return@launch
                 }
 
-                if (!isBlurMode) {
-                    enterBlurMode()
-                    toggleApplyEditMode(true)
-                }
-
+                statusText.setText(R.string.autodetect_step_detecting)
+                progressBar.progress = 50
                 val detector = CommonsVision(applicationContext)
                 val detectionResult = withContext(Dispatchers.Default) {
                     detector.detect(decodedBitmap)
@@ -175,8 +189,17 @@ class EditActivity : BaseActivity() {
                         Timber.w("Partial detection result: unavailable capabilities = ${detectionResult.detections}")
                         detectionResult.detections
                     }
-
                     else -> emptyList()
+                }
+
+                statusText.setText(R.string.autodetect_step_processing)
+                progressBar.progress = 75
+
+                statusText.setText(R.string.autodetect_step_blur_mode)
+                progressBar.progress = 100
+                if (!isBlurMode) {
+                    enterBlurMode()
+                    toggleApplyEditMode(true)
                 }
 
                 val drawable = binding.iv.drawable
@@ -201,6 +224,11 @@ class EditActivity : BaseActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
+                // Dismiss dialog after a short delay for visual feedback.
+                progressBar.postDelayed({
+                    progressDialog.dismiss()
+                }, 300)
             }
         }
     }
