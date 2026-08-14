@@ -308,6 +308,7 @@ class EditActivity : BaseActivity() {
             applyPendingRotation()
             // Reload the image displaying the applied blur.
             updateImagePreview()
+            fetchAndUpdateImageProperties()
         } catch (e: Exception) {
             Timber.e(e, "Failed to apply blur")
             Toast.makeText(
@@ -343,6 +344,7 @@ class EditActivity : BaseActivity() {
                 imageUri = croppedFile.absolutePath
                 // Update the image preview.
                 updateImagePreview()
+                fetchAndUpdateImageProperties()
             }
         } catch (e: Exception) {
             Timber.e(e, "applyCrop: Failed to apply crop")
@@ -432,7 +434,6 @@ class EditActivity : BaseActivity() {
         imageRotation = 0
         // Update imageUri
         imageUri = rotated.absolutePath
-        fetchAndUpdateImageProperties()
     }
 
     /**

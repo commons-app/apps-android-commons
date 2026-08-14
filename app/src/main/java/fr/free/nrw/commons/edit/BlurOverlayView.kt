@@ -65,7 +65,7 @@ class BlurOverlayView @JvmOverloads constructor(
     private val edgeHandleRadiusDp = 2f
     private val cornerTouchSlopDp = 24f
     private val edgeTouchSlopDp = 20f
-    private val borderStrokeWidth = 3.0f
+    private val borderStrokeWidth = 1.5f
     private val minRegionSizeDp = 10f
     private lateinit var handlePaint: Paint
     private lateinit var activeHandlePaint: Paint
