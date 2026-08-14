@@ -357,7 +357,7 @@ dependencies {
     implementation(libs.ajpegtran)
 
     // AutoDetect
-    implementation(files("libs/library-release.aar"))
+    implementation(libs.commons.ml)
 
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")
