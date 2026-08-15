@@ -184,18 +184,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             Timber.d("Restoring state: savedItems size = %s", savedItems?.size ?: "null")
             if (savedItems != null && savedItems.isNotEmpty()) {
                 uploadMediaDetailAdapter.items = savedItems
-                // only call setUploadMediaDetails if indexOfFragment is valid
-                if (fragmentCallback != null) {
-                    indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
-                    if (indexOfFragment >= 0) {
-                        presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
-                        Timber.d("Restored and set upload media details for index %d", indexOfFragment)
-                    } else {
-                        Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
-                    }
-                } else {
-                    Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
-                }
+                Timber.d("Restoring upload media details, size = %d", savedItems.size)
+                persistMediaDetails()
             } else {
                 // initialize with a default UploadMediaDetail if saved state is empty or null
                 uploadMediaDetailAdapter.items = mutableListOf(UploadMediaDetail())
@@ -485,6 +475,32 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
         fragmentCallback!!.onNextButtonClicked(indexOfFragment)
     }
+
+    /**
+     * Persists the RecyclerView adapter's current list of captions/descriptions back into the
+     * [UploadItem] backing this fragment, so it survives the fragment being repopulated (e.g.
+     * navigating to another step and back re-reads the [UploadItem] via [updateMediaDetails]).
+     *
+     * Without this, language rows added via the "+" button were dropped on screen rebuild, so only the
+     * default-language caption got uploaded. (Fix for issue #6938)
+     */
+    private fun persistMediaDetails() {
+        if (fragmentCallback == null) {
+            return
+        }
+        indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
+        if (indexOfFragment >= 0) {
+            presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
+        } else {
+            Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
+        }
+    }
+
+    /**
+     * Called whenever a caption/description language row is added or removed, to keep the
+     * underlying [UploadItem] in sync with what's shown on screen.
+     */
+    override fun onMediaDetailsChanged() = persistMediaDetails()
 
     /**
      * This method gets called whenever the next/previous button is pressed

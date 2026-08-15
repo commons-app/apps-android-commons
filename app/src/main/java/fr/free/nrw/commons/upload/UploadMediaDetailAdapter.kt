@@ -122,7 +122,8 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     fun addDescription(uploadMediaDetail: UploadMediaDetail) {
         selectedLanguages[uploadMediaDetails.size] = "en"
         uploadMediaDetails.add(uploadMediaDetail)
-        notifyItemInserted(uploadMediaDetails.size)
+        notifyItemInserted(uploadMediaDetails.size - 1)
+        eventListener?.onMediaDetailsChanged()
     }
 
     private fun startSpeechInput(locale: String) {
@@ -180,6 +181,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, uploadMediaDetails.size - position)
         updateAddButtonVisibility()
+        eventListener?.onMediaDetailsChanged()
     }
 
     inner class ViewHolder(val binding: RowItemDescriptionBinding) :
@@ -558,6 +560,8 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     interface EventListener {
         fun onPrimaryCaptionTextChange(isNotEmpty: Boolean)
         fun addLanguage()
+
+        fun onMediaDetailsChanged()
     }
 
     internal enum class SelectedVoiceIcon {
