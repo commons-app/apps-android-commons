@@ -910,4 +910,9 @@
   <string name="license_cc0_long_description">此许可协议允许再使用者无条件地以任何媒介或格式，分发、改编、演绎和构建材料。</string>
   <string name="license_cc_by_long_description">此许可协议允许再使用者只要注明创作者，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
   <string name="license_cc_by_sa_long_description">此许可协议允许再使用者只要注明创作者，并将新作品依据相同条款获得许可，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
+  <string name="error_getting_image_properties">获取图像属性时出错：</string>
+  <string name="error_blur_no_rectangle">请在照片上至少绘制一个矩形</string>
+  <string name="error_applying_blur">应用模糊时出错</string>
+  <string name="failed_to_apply_crop">无法应用裁剪</string>
+  <string name="failed_to_save_image">图像保存失败</string>
 </resources>

@@ -872,4 +872,9 @@
   <string name="license_cc0_long_description">Deze licentie geeft gebruikers het recht om het materiaal in elk medium of formaat te verspreiden, te remixen, aan te passen en erop voort te bouwen, zonder enige voorwaarden.</string>
   <string name="license_cc_by_long_description">Deze licentie geeft gebruikers het recht om het materiaal te verspreiden, te remixen, aan te passen en erop voort te bouwen in elk medium of formaat, zelfs voor commerciële doeleinden, zolang de maker maar wordt vermeld.</string>
   <string name="license_cc_by_sa_long_description">Deze licentie geeft gebruikers het recht om het materiaal te verspreiden, te remixen, aan te passen en erop voort te bouwen in elk medium of formaat, zelfs voor commerciële doeleinden, zolang de maker wordt vermeld en het nieuwe werk onder dezelfde voorwaarden wordt gelicenseerd.</string>
+  <string name="error_getting_image_properties">Fout bij het ophalen van de afbeeldingseigenschappen:</string>
+  <string name="error_blur_no_rectangle">Teken minstens één rechthoek op de foto</string>
+  <string name="error_applying_blur">Fout bij het toepassen van de vervaging</string>
+  <string name="failed_to_apply_crop">Bijsnijden is mislukt</string>
+  <string name="failed_to_save_image">Het opslaan van de afbeelding is mislukt</string>
 </resources>

@@ -868,4 +868,9 @@
   <string name="license_cc0_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, gan aon choinníollacha.</string>
   <string name="license_cc_by_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, fiú chun críocha tráchtála, fad is a thugtar aitheantas don chruthaitheoir.</string>
   <string name="license_cc_by_sa_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, fiú chun críocha tráchtála, fad is a thugtar aitheantas don chruthaitheoir agus go bhfuil an saothar nua ceadúnaithe faoi théarmaí comhionanna.</string>
+  <string name="error_getting_image_properties">Earráid ag fáil airíonna íomhá:</string>
+  <string name="error_blur_no_rectangle">Tarraing dronuilleog amháin ar a laghad ar an ngrianghraf le do thoil</string>
+  <string name="error_applying_blur">Earráid i bhfeidhmiú doiléirithe</string>
+  <string name="failed_to_apply_crop">Theip ar an mbarr a chur i bhfeidhm</string>
+  <string name="failed_to_save_image">Theip ar an íomhá a shábháil</string>
 </resources>
