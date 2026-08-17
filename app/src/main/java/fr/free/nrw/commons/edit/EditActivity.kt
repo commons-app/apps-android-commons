@@ -30,6 +30,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.commons.ml.common.DetectionResult
@@ -39,6 +40,7 @@ import java.io.File
 import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * An activity class for editing and rotating images using Jpegtran.
@@ -158,15 +160,12 @@ class EditActivity : BaseActivity() {
                 val dialogView = LayoutInflater.from(this@EditActivity)
                     .inflate(R.layout.dialog_autodetect_progress, null)
                 val progressBar = dialogView.findViewById<ProgressBar>(R.id.autodetect_progress)
-                val statusText = dialogView.findViewById<TextView>(R.id.autodetect_status)
+                val percentView = dialogView.findViewById<TextView>(R.id.autodetect_percent)
                 val progressDialog = AlertDialog.Builder(this@EditActivity)
                     .setView(dialogView)
                     .setCancelable(false)
                     .create()
                 progressDialog.show()
-
-                statusText.setText(R.string.autodetect_step_loading)
-                progressBar.progress = 25
                 val decodedBitmap = loadBitmapForDetection(imageUri)
                 if (decodedBitmap == null) {
                     progressDialog.dismiss()
@@ -179,11 +178,15 @@ class EditActivity : BaseActivity() {
                     return@launch
                 }
 
-                statusText.setText(R.string.autodetect_step_detecting)
-                progressBar.progress = 50
                 val detector = CommonsVision(applicationContext)
                 val detectionResult = withContext(Dispatchers.Default) {
-                    detector.detect(decodedBitmap)
+                    detector.detect(decodedBitmap) { progress ->
+                        val percent = (progress * 100).toInt()
+                        runOnUiThread {
+                            progressBar?.progress = percent
+                            percentView?.text = "$percent%"
+                        }
+                    }
                 }
                 val rawDetections = when (detectionResult) {
                     is DetectionResult.Success -> detectionResult.detections
@@ -193,12 +196,9 @@ class EditActivity : BaseActivity() {
                     }
                     else -> emptyList()
                 }
+                delay(700.milliseconds)
+                progressDialog.dismiss()
 
-                statusText.setText(R.string.autodetect_step_processing)
-                progressBar.progress = 75
-
-                statusText.setText(R.string.autodetect_step_blur_mode)
-                progressBar.progress = 100
                 if (!isBlurMode) {
                     enterBlurMode()
                     toggleApplyEditMode(true)

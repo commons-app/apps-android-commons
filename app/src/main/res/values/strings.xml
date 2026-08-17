@@ -372,11 +372,8 @@
   <string name="crop">Crop</string>
   <string name="blur">Blur</string>
   <string name="autoblur">AutoBlur</string>
-  <string name="autodetect_in_progress">Autodetect in progress</string>
-  <string name="autodetect_step_loading">Loading image…</string>
-  <string name="autodetect_step_blur_mode">Entering blur mode…</string>
-  <string name="autodetect_step_detecting">Running detection…</string>
-  <string name="autodetect_step_processing">Processing results…</string>
+  <string name="autodetect_title">Auto-blurring faces and license plates.</string>
+  <string name="autodetect_description">You can discard false positives using the ❌ button of each blurring area.</string>
 
   <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>
