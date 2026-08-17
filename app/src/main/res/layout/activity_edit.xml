@@ -101,7 +101,7 @@
         android:id="@+id/autoblur_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/baseline_blur_24"
+        android:drawableStart="@drawable/baseline_autoblur_24"
         android:drawablePadding="4dp"
         android:text="@string/autoblur"
 
