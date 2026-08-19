@@ -171,7 +171,7 @@ class EditActivity : BaseActivity() {
                     progressDialog.dismiss()
                     Toast.makeText(
                         this@EditActivity,
-                        "Failed to load image for AutoBlur",
+                        getString(R.string.autoblur_failed_to_load),
                         Toast.LENGTH_SHORT
                     ).show()
                     Timber.e("AutoBlur: decodedBitmap is null for $imageUri")
@@ -222,7 +222,7 @@ class EditActivity : BaseActivity() {
                 } else if (rawDetections.isEmpty()) {
                     Toast.makeText(
                         this@EditActivity,
-                        "No regions detected for AutoBlur",
+                        getString(R.string.autoblur_no_region_detected),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
