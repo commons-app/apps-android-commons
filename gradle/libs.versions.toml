@@ -12,6 +12,7 @@ browser = "1.3.0"
 cardview = "1.0.0"
 commonsIo = "2.6"
 composeBom = "2024.11.00"
+commons-ml = "0.1.1"
 constraintlayout = "1.1.3"
 coordinates2country = "1.8"
 dexcount = "4.0.0"
@@ -134,6 +135,7 @@ photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photovi
 
 # Image editing
 ajpegtran = { module = "io.github.commons-app:ajpegtran", version.ref = "ajpegtran" }
+commons-ml = { module = "io.github.commons-app:commons-ml", version.ref = "commons-ml" }
 
 # RxJava and Reactive Programming
 rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid" }

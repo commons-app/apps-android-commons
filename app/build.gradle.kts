@@ -356,6 +356,9 @@ dependencies {
     // Jpegtran
     implementation(libs.ajpegtran)
 
+    // AutoDetect
+    implementation(libs.commons.ml)
+
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")
     }

@@ -391,6 +391,11 @@
   <string name="rotate">Döndür</string>
   <string name="crop">Kırp</string>
   <string name="blur">Bulanıklık</string>
+  <string name="autoblur">OtoBulanıklaştırma</string>
+  <string name="autodetect_title">Yüzleri ve araç plakalarını otomatik olarak bulanıklaştırma.</string>
+  <string name="autodetect_description">Her bulanıklaştırma alanındaki ❌ düğmesini kullanarak yanlış algılamaları kaldırabilirsiniz.</string>
+  <string name="autoblur_failed_to_load">Otomatik bulanıklaştırma için görüntü yüklenemedi.</string>
+  <string name="autoblur_no_region_detected">Otomatik bulanıklaştırma için hiçbir bölge tespit edilmedi.</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler yüklenemedi</string>
   <string name="no_pictures_in_this_area">Bu bölgede resim yok</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
@@ -887,4 +892,9 @@
   <string name="license_cc0_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde hiçbir koşul olmaksızın dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir.</string>
   <string name="license_cc_by_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması gerekir.</string>
   <string name="license_cc_by_sa_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması ve aynı lisansın kullanılması gerekir.</string>
+  <string name="error_getting_image_properties">Görüntü özellikleri alınırken hata oluştu:</string>
+  <string name="error_blur_no_rectangle">Lütfen fotoğrafın üzerine en az bir dikdörtgen çizin</string>
+  <string name="error_applying_blur">Bulanıklaştırma işleminde hata oluştu</string>
+  <string name="failed_to_apply_crop">Kırpma işlemi başarısız oldu</string>
+  <string name="failed_to_save_image">Görüntü kaydedilemedi</string>
 </resources>

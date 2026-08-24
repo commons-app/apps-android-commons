@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="24dp">
+
+  <TextView
+    android:id="@+id/autodetect_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/autodetect_title"
+    android:textColor="?android:attr/textColorPrimary"
+    android:textSize="18sp"
+    android:textStyle="bold" />
+
+  <TextView
+    android:id="@+id/autodetect_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:text="@string/autodetect_description"
+    android:textColor="?android:attr/textColorSecondary"
+    android:textSize="14sp" />
+
+  <TextView
+    android:id="@+id/autodetect_percent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:gravity="end"
+    android:text="0%"
+    android:textColor="?android:attr/textColorPrimary"
+    android:textSize="13sp"
+    android:textStyle="bold" />
+
+  <ProgressBar
+    android:id="@+id/autodetect_progress"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:indeterminate="false"
+    android:max="100"
+    android:progress="0" />
+
+</LinearLayout>
