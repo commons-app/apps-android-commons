@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import kotlinx.coroutines.Dispatchers
@@ -534,19 +535,63 @@ class EditActivity : BaseActivity() {
     }
 
     /**
-     * Applies any pending rotation to the given file via JNI and resets the rotation baseline.
+     * Applies any pending rotation to the given file.
+     *
+     * For images whose dimensions are multiples of the MCU block size ("perfect"),
+     * jpegtran physically rotates the pixels losslessly via [EditViewModel.rotateImage].
+     *
+     * For images with non-MCU-aligned dimensions ("imperfect"), the file is copied unchanged
+     * The EXIF orientation tag is updated via [RandomAccessFileExifWriter] to reflect the
+     * rotation, preserving all original pixels.
      */
     private fun applyPendingRotation() {
         val filePath = imageUri.toUri().path
         val file = File(filePath.toString())
         val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
         if (relativeRotation == 0) return
-        val rotated = vm.rotateImage(file, relativeRotation, applicationContext.cacheDir)
+
+        val props = properties
+        val isPerfect = props != null &&
+                (props.width % props.MCU_Width == 0) &&
+                (props.height % props.MCU_Height == 0)
+
+        if (isPerfect) {
+            // Physical lossless rotation — dimensions are MCU-aligned, no trimming required.
+            val rotated = vm.rotateImage(file, relativeRotation, applicationContext.cacheDir)
+            imageUri = rotated.absolutePath
+        } else {
+            // EXIF-only rotation for imperfect images.
+            val outputName = "cropped_${System.currentTimeMillis()}.jpg"
+            val output = File(applicationContext.cacheDir, outputName)
+            file.copyTo(output, overwrite = true)
+
+            // Read the present EXIF orientation and add the relative rotation on top.
+            val currentOrientation = ExifInterface(output.absolutePath)
+                .getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+            val currentDegrees =
+                orientationToDegrees(currentOrientation)
+            val newDegrees = (currentDegrees + relativeRotation) % 360
+            val newOrientation =
+                degreesToOrientation(newDegrees)
+
+            RandomAccessFileExifWriter.writeTag(
+                output,
+                ExifInterface.TAG_ORIENTATION,
+                newOrientation.toString()
+            )
+            Timber.d(
+                "applyPendingRotation: EXIF-only %d° → %d° (tag %d → %d)",
+                currentDegrees, newDegrees, currentOrientation, newOrientation
+            )
+            imageUri = output.absolutePath
+        }
+
         // Reset rotation baseline since the file is now oriented correctly.
         startOrientation = 0
         imageRotation = 0
-        // Update imageUri
-        imageUri = rotated.absolutePath
     }
 
     /**
@@ -795,6 +840,33 @@ class EditActivity : BaseActivity() {
         }
 
         return scaleFactor
+    }
+
+    /**
+     * Converts an EXIF orientation constant to clockwise degrees.
+     *
+     * @param orientation One of the [ExifInterface] ORIENTATION_* constants.
+     * @return 0, 90, 180, or 270. Unknown/mirrored values return 0.
+     */
+    private fun orientationToDegrees(orientation: Int): Int = when (orientation) {
+        ExifInterface.ORIENTATION_NORMAL -> 0
+        ExifInterface.ORIENTATION_ROTATE_90 -> 90
+        ExifInterface.ORIENTATION_ROTATE_180 -> 180
+        ExifInterface.ORIENTATION_ROTATE_270 -> 270
+        else -> 0
+    }
+
+    /**
+     * Converts clockwise degrees to an EXIF orientation constant.
+     *
+     * @param degrees Clockwise rotation in degrees (will be normalized to 0–359).
+     * @return The corresponding [ExifInterface] ORIENTATION_* constant.
+     */
+    private fun degreesToOrientation(degrees: Int): Int = when (((degrees % 360) + 360) % 360) {
+        90 -> ExifInterface.ORIENTATION_ROTATE_90
+        180 -> ExifInterface.ORIENTATION_ROTATE_180
+        270 -> ExifInterface.ORIENTATION_ROTATE_270
+        else -> ExifInterface.ORIENTATION_NORMAL
     }
 }
 
