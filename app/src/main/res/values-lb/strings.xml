@@ -229,13 +229,14 @@
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
   <string name="caption_info">Gitt wgl. eng kuerz Beschreiwung vum Bild un. Déi éischt Beschrëftung géif als Titel vum Bild benotzt ginn. Héchstens 255 Zeechen.</string>
   <string name="upload_problem_exist">Potenziell Problemer mat dësem Bild:</string>
-  <string name="upload_problem_image_dark">Bild ass ze däischter.</string>
+  <string name="upload_problem_image_dark">D\'Bild ass ze däischter.</string>
   <string name="upload_problem_image_blurry">Bild ass verschwommen.</string>
   <string name="upload_problem_image_duplicate">Bild ass schonn op Commons.</string>
   <string name="upload_problem_image_format_unsupported">Äert Bild ass an engem Format, dat vum Commons-Server net ënnerstëtzt gëtt, an dowéinst huet d\'App et an JPG ëmgewandelt.</string>
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="upload_connection_error_alert_title">Verbindungsfeeler</string>
+  <string name="upload_problem_image">Problemer mam Bild</string>
   <string name="internet_downloaded">Luet wgl. nëmme Biller erop, déi Dir selwer opgeholl hutt. Luet keng Biller erop, déi Dir aus dem Internet erofgelueden hutt.</string>
   <string name="preferences_uploads">Eroplueden</string>
   <string name="use_external_storage">Opnamen vun der In-App späicheren</string>
@@ -676,6 +677,7 @@
   <string name="nearby_wikitalk">E Problem fir dëst Element u Wikidata mellen</string>
   <string name="talk">Diskussioun</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
+  <string name="other_problem_or_information_please_explain_below">Anere Problem oder Informatioun (wgl. ënnen erklären).</string>
   <string name="feedback_destination_note">Äre Feedback kënnt op déi follgend Wikisäit stoen: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Sidd Dir sécher, datt Dir d\'Eropluede vun all Fichier ofbrieche wëllt?</string>
   <string name="cancelling_all_the_uploads">D\'Eropluede vun all Fichier ofbriechen...</string>
