@@ -31,6 +31,15 @@ object DownloadUtils {
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.substringAfter("File:")
         val imageUri = Uri.parse(imageUrl)
+
+        val versionName = try {
+            activity?.packageManager?.getPackageInfo(activity.packageName, 0)?.versionName ?: "unknown"
+        } catch (e: Exception) {
+            "unknown"
+        }
+
+        val userAgent = "CommonsAndroidApp/$versionName (https://github.com/commons-app/apps-android-commons)"
+
         val req =
             DownloadManager.Request(imageUri).apply {
                 setTitle(m.displayTitle)
@@ -38,6 +47,7 @@ object DownloadUtils {
                 setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                 allowScanningByMediaScanner()
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                addRequestHeader("User-Agent", userAgent)
             }
         PermissionUtils.checkPermissionsAndPerformAction(
             activity,
