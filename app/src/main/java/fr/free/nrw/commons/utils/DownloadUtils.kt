@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import timber.log.Timber
@@ -32,14 +33,6 @@ object DownloadUtils {
         fileName = fileName.substringAfter("File:")
         val imageUri = Uri.parse(imageUrl)
 
-        val versionName = try {
-            activity?.packageManager?.getPackageInfo(activity.packageName, 0)?.versionName ?: "unknown"
-        } catch (e: Exception) {
-            "unknown"
-        }
-
-        val userAgent = "CommonsAndroidApp/$versionName (https://github.com/commons-app/apps-android-commons)"
-
         val req =
             DownloadManager.Request(imageUri).apply {
                 setTitle(m.displayTitle)
@@ -47,7 +40,7 @@ object DownloadUtils {
                 setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
                 allowScanningByMediaScanner()
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                addRequestHeader("User-Agent", userAgent)
+                addRequestHeader("User-Agent", CommonsApplication.instance.userAgent)
             }
         PermissionUtils.checkPermissionsAndPerformAction(
             activity,
