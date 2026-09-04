@@ -48,7 +48,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -302,7 +301,7 @@ class ImageFragment :
         }
 
         val uploadingContributions = getUploadingContributions()
-        imageAdapter.init(allImages, allImages, TreeMap(), uploadingContributions)
+        imageAdapter.init(allImages, allImages, uploadingContributions)
         imageAdapter.notifyDataSetChanged()
     }
 
@@ -329,7 +328,7 @@ class ImageFragment :
             if (images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
-                imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
+                imageAdapter.init(filteredImages, allImages, uploadingContributions)
                 viewModel?.selectedImages?.value?.let { selectedImages ->
                     imageAdapter.setSelectedImages(selectedImages)
                 }
