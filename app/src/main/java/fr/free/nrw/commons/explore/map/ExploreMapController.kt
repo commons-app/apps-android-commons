@@ -3,12 +3,12 @@ package fr.free.nrw.commons.explore.map
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
+import coil3.SingletonImageLoader
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.target
+import coil3.toBitmap
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.Media
@@ -173,18 +173,15 @@ class ExploreMapController @Inject constructor(
                     )
                     baseMarker.place = explorePlace
 
-                    Glide.with(context)
-                        .asBitmap()
-                        .load(explorePlace.thumb)
-                        .placeholder(R.drawable.image_placeholder_96)
-                        .apply(RequestOptions().override(96, 96).centerCrop())
-                        .into(object : CustomTarget<Bitmap>() {
-                            // We add icons to markers when bitmaps are ready
-                            override fun onResourceReady(
-                                resource: Bitmap,
-                                transition: Transition<in Bitmap>?
-                            ) {
-                                baseMarker.icon = addRedBorder(resource, 6, context)
+                    val imageLoader = SingletonImageLoader.get(context)
+                    val request = ImageRequest.Builder(context)
+                        .data(explorePlace.thumb)
+                        .size(96, 96)
+                        .allowHardware(false)
+                        .target(
+                            onSuccess = { image ->
+                                val bitmap = image.toBitmap()
+                                baseMarker.icon = addRedBorder(bitmap, 6, context)
                                 baseMarkerList.add(baseMarker)
                                 if (baseMarkerList.size == placeList.size) {
                                     // if true, we added all markers to list and can trigger thumbs ready callback
@@ -193,13 +190,8 @@ class ExploreMapController @Inject constructor(
                                         explorePlacesInfo
                                     )
                                 }
-                            }
-
-                            override fun onLoadCleared(placeholder: Drawable?) = Unit
-
-                            // We add thumbnail icon for images that couldn't be loaded
-                            override fun onLoadFailed(errorDrawable: Drawable?) {
-                                super.onLoadFailed(errorDrawable)
+                            },
+                            onError = { _ ->
                                 baseMarker.fromResource(context, R.drawable.image_placeholder_96)
                                 baseMarkerList.add(baseMarker)
                                 if (baseMarkerList.size == placeList.size) {
@@ -210,7 +202,9 @@ class ExploreMapController @Inject constructor(
                                     )
                                 }
                             }
-                        })
+                        )
+                        .build()
+                    imageLoader.enqueue(request)
                 }
             }
             return baseMarkerList

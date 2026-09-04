@@ -5,9 +5,7 @@ import android.widget.TextView
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.view.SimpleDraweeView
-import com.facebook.soloader.SoLoader
+import android.widget.ImageView
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardList
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
@@ -38,14 +36,12 @@ class LeaderboardListAdapterUnitTests {
     private lateinit var textView: TextView
 
     @Mock
-    private lateinit var simpleDraweeView: SimpleDraweeView
+    private lateinit var imageView: ImageView
 
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
         MockitoAnnotations.initMocks(this)
-        SoLoader.setInTestMode()
-        Fresco.initialize(context)
 
         adapter = LeaderboardListAdapter()
 
@@ -57,7 +53,7 @@ class LeaderboardListAdapterUnitTests {
         val avatar: Field =
             LeaderboardListAdapter.ListViewHolder::class.java.getDeclaredField("avatar")
         avatar.isAccessible = true
-        avatar.set(viewHolder, simpleDraweeView)
+        avatar.set(viewHolder, imageView)
 
         val username: Field =
             LeaderboardListAdapter.ListViewHolder::class.java.getDeclaredField("username")

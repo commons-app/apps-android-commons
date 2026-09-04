@@ -7,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil3.load
+import coil3.request.crossfade
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.model.Folder
@@ -77,7 +78,9 @@ class FolderAdapter(
             }
         } else {
             val previewImage = folder.images[0]
-            Glide.with(holder.image).load(previewImage.uri).into(holder.image)
+            holder.image.load(previewImage.uri) {
+                crossfade(true)
+            }
             holder.name.text = folder.name
             holder.count.text = count.toString()
             holder.itemView.setOnClickListener {

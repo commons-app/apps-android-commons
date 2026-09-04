@@ -24,12 +24,27 @@
           layout="@layout/show_captions_descriptions" />
     </LinearLayout>
 
-    <com.facebook.drawee.view.SimpleDraweeView
-      android:id="@+id/mediaDetailImageView"
-      android:layout_width="0dp"
-      android:layout_height="@dimen/dimen_250"
-      android:layout_gravity="center_horizontal"
-      app:actualImageScaleType="none" />
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+        <ImageView
+          android:id="@+id/mediaDetailImageView"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dimen_250"
+          android:layout_gravity="center_horizontal"
+          android:scaleType="fitCenter" />
+
+        <ProgressBar
+          android:id="@+id/mediaDetailImageProgress"
+          style="?android:attr/progressBarStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:indeterminate="true"
+          android:visibility="gone" />
+
+    </FrameLayout>
 
     <ScrollView
       android:id="@+id/mediaDetailScrollView"

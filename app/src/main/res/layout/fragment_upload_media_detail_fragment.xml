@@ -11,7 +11,7 @@
     android:id="@+id/backgroundImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:actualImageScaleType="fitXY" />
+    android:scaleType="fitXY" />
 
   <androidx.cardview.widget.CardView
     android:id="@+id/media_detail_card_view"
