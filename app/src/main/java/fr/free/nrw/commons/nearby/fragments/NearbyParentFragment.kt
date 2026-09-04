@@ -1057,7 +1057,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { query: CharSequence ->
                     (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter).filter
-                        .filter(query.toString())
+                        .filter(query)
                 })
     }
 
