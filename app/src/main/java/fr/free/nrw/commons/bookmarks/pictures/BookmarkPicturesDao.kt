@@ -86,11 +86,7 @@ class BookmarkPicturesDao @Inject constructor(
     private fun deleteBookmark(bookmark: Bookmark) {
         val db = clientProvider.get()
         try {
-            if (bookmark.contentUri == null) {
-                throw RuntimeException("tried to delete item with no content URI")
-            } else {
-                db.delete(bookmark.contentUri!!, null, null)
-            }
+            db.delete(BASE_URI, "$COLUMN_MEDIA_NAME=?", arrayOf(bookmark.mediaName))
         } catch (e: RemoteException) {
             throw RuntimeException(e)
         } finally {
@@ -133,7 +129,7 @@ class BookmarkPicturesDao @Inject constructor(
             fileName = ""
         }
         return Bookmark(
-            fileName, cursor.getString(COLUMN_CREATOR), uriForName(fileName)
+            fileName, cursor.getString(COLUMN_CREATOR)
         )
     }
 

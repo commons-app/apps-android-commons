@@ -1,23 +1,27 @@
 package fr.free.nrw.commons.review
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 /**
  * Dao interface for reviewed images database
  */
 @Dao
-interface ReviewDao {
+abstract class ReviewDao {
 
     /**
-     * Inserts reviewed/skipped image identifier into the database
+     * Inserts reviewed/skipped image identifier into the database internally
      *
-     * @param reviewEntity
+     * @param reviewRoomEntity
      */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(reviewEntity: ReviewEntity)
+    protected abstract fun insertInternal(reviewRoomEntity: ReviewRoomEntity)
+
+    /**
+     * Public method to insert using domain model
+     */
+    fun insert(reviewImage: ReviewImage) {
+        insertInternal(toEntity(reviewImage))
+    }
 
     /**
      * Checks if the image has already been reviewed/skipped by the user
@@ -27,5 +31,8 @@ interface ReviewDao {
      * @return
      */
     @Query("SELECT EXISTS (SELECT * from `reviewed-images` where imageId = (:imageId))")
-    fun isReviewedAlready(imageId: String): Boolean
+    abstract fun isReviewedAlready(imageId: String): Boolean
+
+    private fun toEntity(reviewImage: ReviewImage): ReviewRoomEntity =
+        ReviewRoomEntity(imageId = reviewImage.imageId)
 }

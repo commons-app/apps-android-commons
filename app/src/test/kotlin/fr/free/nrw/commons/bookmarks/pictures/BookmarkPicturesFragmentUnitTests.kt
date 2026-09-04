@@ -23,6 +23,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
+import fr.free.nrw.commons.db.InMemoryDatabaseTest
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import media
@@ -43,7 +44,7 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-class BookmarkPicturesFragmentUnitTests {
+class BookmarkPicturesFragmentUnitTests : InMemoryDatabaseTest() {
     private lateinit var fragment: BookmarkPicturesFragment
 
     private lateinit var binding: FragmentBookmarksPicturesBinding
@@ -96,7 +97,7 @@ class BookmarkPicturesFragmentUnitTests {
 
         binding = FragmentBookmarksPicturesBinding.inflate(LayoutInflater.from(activity))
 
-        val bookmarkDao = BookmarkPicturesDao { client }
+        val bookmarkDao = roomDatabase.bookmarkPicturesRoomDao()
 
         controller = BookmarkPicturesController(mediaClient, bookmarkDao)
 

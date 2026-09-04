@@ -2,9 +2,6 @@ package fr.free.nrw.commons.contributions
 
 import android.net.Uri
 import android.os.Parcelable
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.upload.UploadItem
@@ -16,11 +13,10 @@ import kotlinx.parcelize.Parcelize
 import java.io.File
 import java.util.Date
 
-@Entity(tableName = "contribution")
 @Parcelize
 data class Contribution constructor(
-    @Embedded(prefix = "media_") val media: Media,
-    @PrimaryKey val pageId: String = media.pageId,
+    val media: Media,
+    val pageId: String = media.pageId,
     var state: Int = 0,
     var transferred: Long = 0,
     val decimalCoords: String? = null,
