@@ -10,16 +10,19 @@ import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.wikidata.model.RemoveClaim
 import io.reactivex.Observable
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
-import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class WikidataEditServiceTest {
     @Mock
     internal lateinit var context: Context
@@ -41,18 +44,18 @@ class WikidataEditServiceTest {
 
     @Before
     @Throws(Exception::class)
-    fun setUp() {
-        MockitoAnnotations.openMocks(this)
+    fun setUp(): Unit {
+        
     }
 
     @Test
-    fun noClaimsWhenEntityIdIsNull() {
+    fun noClaimsWhenEntityIdIsNull(): Unit = runBlocking {
         wikidataEditService.createClaim(mock(), "Test.jpg", hashMapOf())
         verifyNoInteractions(wikidataClient)
     }
 
     @Test
-    fun testUpdateDepictsProperty() {
+    fun testUpdateDepictsProperty(): Unit {
         val fileEntityId = "12345"
 
         whenever(
@@ -72,7 +75,7 @@ class WikidataEditServiceTest {
     }
 
     @Test
-    fun createImageClaim() {
+    fun createImageClaim(): Unit = runBlocking {
         whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
             .thenReturn(true)
         whenever(wikibaseClient.getFileEntityId(anyOrNull())).thenReturn(Observable.just(1L))
@@ -86,5 +89,6 @@ class WikidataEditServiceTest {
             uploadResult.filename,
             hashMapOf<String, String>(),
         )
+        Unit
     }
 }

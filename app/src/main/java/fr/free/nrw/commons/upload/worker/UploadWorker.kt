@@ -44,6 +44,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.rx2.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Date
@@ -149,7 +150,9 @@ class UploadWorker(
                 currentNotification.build(),
             )
             contribution!!.transferred = transferred
-            contributionDao.update(contribution!!).blockingAwait()
+            CoroutineScope(Dispatchers.IO).launch {
+                contributionDao.update(contribution!!).await()
+            }
         }
 
         open fun onChunkUploaded(
@@ -157,7 +160,9 @@ class UploadWorker(
             chunkInfo: ChunkInfo?,
         ) {
             contribution.chunkInfo = chunkInfo
-            contributionDao.update(contribution).blockingAwait()
+            CoroutineScope(Dispatchers.IO).launch {
+                contributionDao.update(contribution).await()
+            }
         }
     }
 
@@ -190,14 +195,14 @@ class UploadWorker(
             withContext(Dispatchers.IO) {
                 while (contributionDao
                         .getContribution(statesToProcess)
-                        .blockingGet()
+                        .await()
                         .size > 0 &&
                     contributionDao
                         .getContribution(
                             arrayListOf(
                                 Contribution.STATE_IN_PROGRESS,
                             ),
-                        ).blockingGet()
+                        ).await()
                         .size == 0
                 ) {
                     /*
@@ -213,7 +218,7 @@ class UploadWorker(
                     val queuedContributions =
                         contributionDao
                             .getContribution(statesToProcess)
-                            .blockingGet()
+                            .await()
                     // Showing initial notification for the number of uploads being processed
 
                     processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
@@ -253,7 +258,7 @@ class UploadWorker(
             // Trigger WorkManager to process any new contributions that may have been added to the queue
             val updatedContributionQueue =
                 withContext(Dispatchers.IO) {
-                    contributionDao.getContribution(statesToProcess).blockingGet()
+                    contributionDao.getContribution(statesToProcess).await()
                 }
             if (updatedContributionQueue.isNotEmpty()) {
                 return Result.retry()
@@ -353,7 +358,7 @@ class UploadWorker(
                             fileKey = null,
                             errorMessage = it.message,
                         )
-                    }.blockingSingle()
+                    }.firstOrError().await()
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
                     // If the stash upload succeeds
@@ -369,9 +374,7 @@ class UploadWorker(
                                     contribution,
                                     uniqueFileName,
                                     stashUploadResult.fileKey,
-                                ).onErrorReturn {
-                                    return@onErrorReturn null
-                                }.blockingSingle()
+                                ).firstOrError().await()
 
                         if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
@@ -380,7 +383,7 @@ class UploadWorker(
 
                             wikidataEditService
                                 .addDepictionsAndCaptions(uploadResult, contribution)
-                                .blockingSubscribe()
+                                .firstOrError().await()
                             if (contribution.wikidataPlace == null) {
                                 Timber.d(
                                     "WikiDataEdit not required, upload success",
@@ -404,7 +407,7 @@ class UploadWorker(
                             showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
-                            contributionDao.save(contribution).blockingAwait()
+                            contributionDao.save(contribution).await()
                         }
                     } catch (exception: Exception) {
                         Timber.e(exception)
@@ -496,7 +499,7 @@ class UploadWorker(
                             placesRepository
                                 .save(place)
                                 .subscribeOn(Schedulers.io())
-                                .blockingAwait()
+                                .await()
                             Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
                             }
                         }
@@ -526,7 +529,7 @@ class UploadWorker(
         saveCompletedContribution(contribution, uploadResult)
     }
 
-    private fun saveCompletedContribution(
+    private suspend fun saveCompletedContribution(
         contribution: Contribution,
         uploadResult: UploadResult,
     ) {
@@ -534,7 +537,7 @@ class UploadWorker(
             mediaClient
                 .getMedia("File:" + uploadResult.filename)
                 .map { media: Media? -> contribution.completeWith(media!!) }
-                .blockingGet()
+                .await()
         contributionFromUpload.dateModified = Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
 
@@ -562,7 +565,7 @@ class UploadWorker(
         }
     }
 
-    private fun findUniqueFileName(fileName: String): String {
+    private suspend fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
         val random = Random()
 
@@ -573,7 +576,7 @@ class UploadWorker(
                         "File:%s",
                         sequenceFileName,
                     ),
-                ).blockingGet()) {
+                ).await()) {
 
             // Generate a random 5-character alphanumeric string
             val randomHash = (random.nextInt(90000) + 10000).toString()
