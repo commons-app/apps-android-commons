@@ -28,12 +28,14 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermission
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.UploadActivity
+import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
+import java.io.FileInputStream
 import java.util.Arrays
 import javax.inject.Inject
 import javax.inject.Named
@@ -368,10 +370,35 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
                 imagesFiles: List<UploadableFile>,
                 source: FilePicker.ImageSource, type: Int
             ) {
-                val intent = handleImagesPicked(activity, imagesFiles)
+                val isNormalSelectorSource = source == FilePicker.ImageSource.GALLERY ||
+                    source == FilePicker.ImageSource.DOCUMENTS
+                val selectedFiles = if (isNormalSelectorSource) {
+                    deduplicateNormalSelectorImages(imagesFiles)
+                } else {
+                    imagesFiles
+                }
+                val intent = handleImagesPicked(activity, selectedFiles)
+                if (isNormalSelectorSource && selectedFiles.size != imagesFiles.size) {
+                    intent.putExtra(UploadActivity.EXTRA_DUPLICATES_REMOVED, true)
+                }
                 activity.startActivity(intent)
             }
         })
+    }
+
+    private fun deduplicateNormalSelectorImages(imagesFiles: List<UploadableFile>): List<UploadableFile> {
+        return imagesFiles.distinctBy(::getNormalSelectorDeduplicationKey)
+    }
+
+    private fun getNormalSelectorDeduplicationKey(uploadableFile: UploadableFile): String {
+        return try {
+            val sha1 = FileInputStream(uploadableFile.file).use { inputStream ->
+                FileUtils.getSHA1(inputStream)
+            }
+            if (sha1.isNotEmpty()) sha1 else uploadableFile.getFilePath()
+        } catch (e: Exception) {
+            uploadableFile.getFilePath()
+        }
     }
 
     fun handleExternalImagesPicked(
