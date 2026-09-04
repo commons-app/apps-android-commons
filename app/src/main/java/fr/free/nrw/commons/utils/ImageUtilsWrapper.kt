@@ -5,13 +5,14 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.rx2.rxSingle
+import kotlinx.coroutines.Dispatchers
 
 @Singleton
 class ImageUtilsWrapper @Inject constructor() {
 
     fun checkIfImageIsTooDark(bitmapPath: String): Single<Int> {
-        return Single.fromCallable { ImageUtils.checkIfImageIsTooDark(bitmapPath) }
-            .subscribeOn(Schedulers.computation())
+        return rxSingle { ImageUtils.checkIfImageIsTooDark(bitmapPath) }
     }
 
     fun checkImageGeolocationIsDifferent(
