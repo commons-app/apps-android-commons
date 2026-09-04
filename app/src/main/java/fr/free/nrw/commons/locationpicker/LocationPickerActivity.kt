@@ -663,6 +663,14 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         }
     }
 
+    override fun onLocationServiceUnAvailable() {
+        //notify the user that they must pick the location manually since theGPS is off
+        fr.free.nrw.commons.utils.ViewUtil.showLongToast(
+            this,
+            R.string.nearby_location_not_available
+        )
+    }
+
     /**
      * Adds a marker at the user's GPS location
      */
