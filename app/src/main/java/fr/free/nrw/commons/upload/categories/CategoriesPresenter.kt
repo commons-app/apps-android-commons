@@ -328,7 +328,7 @@ class CategoriesPresenter
                 repository.getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
-                    .subscribe(::selectNewCategories),
+                    .subscribe(::selectNewCategories, { Timber.e(it) }),
             )
         }
     }

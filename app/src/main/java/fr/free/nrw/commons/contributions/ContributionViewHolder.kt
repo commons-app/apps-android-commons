@@ -140,9 +140,9 @@ an upload might take a dozen seconds. */
             mediaClient.doesPageContainMedia(wikipediaArticle)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { mediaExists: Boolean ->
+                .subscribe({ mediaExists: Boolean ->
                     displayWikipediaButton(mediaExists)
-                })
+                }, { Timber.e(it) }))
     }
 
     /**
