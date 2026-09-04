@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="?attr/mainBackground"
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight="@dimen/large_height"
@@ -12,11 +11,15 @@
     android:visibility="visible"
 
     >
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
 
     <LinearLayout
       android:id="@+id/header"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
       android:orientation="vertical">
 
         <LinearLayout
@@ -85,10 +88,11 @@
       android:layout_marginBottom="@dimen/activity_margin_horizontal"
       android:background="@android:color/darker_gray" />
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/bottom_sheet_recycler_view"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/bottom_sheet_recycler_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false" />
 
     <View
       android:layout_width="match_parent"
@@ -105,6 +109,5 @@
         android:layout_marginRight="@dimen/standard_gap"
         android:layout_marginBottom="@dimen/standard_gap"
         android:textSize="16sp" />
-
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
