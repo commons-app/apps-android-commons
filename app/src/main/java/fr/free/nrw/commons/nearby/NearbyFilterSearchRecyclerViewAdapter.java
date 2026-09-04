@@ -91,7 +91,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setSelected(label.isSelected());
 
-            NearbyFilterState.setSelectedLabels(new ArrayList<>(selectedLabels));
             callback.filterByMarkerType(selectedLabels, 0, false, false);
         });
     }
@@ -153,7 +152,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
             label.setSelected(false);
             selectedLabels.remove(label);
         }
-        NearbyFilterState.setSelectedLabels(new ArrayList<>(selectedLabels));
         notifyDataSetChanged();
     }
 
@@ -165,7 +163,6 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 selectedLabels.add(label);
             }
         }
-        NearbyFilterState.setSelectedLabels(new ArrayList<>(selectedLabels));
         notifyDataSetChanged();
     }
 
