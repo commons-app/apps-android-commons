@@ -199,7 +199,7 @@
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="email_auth_code">E-Mail-Verifikatiounscode</string>
-  <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
+  <string name="logout_verification">Wëllt Dir Iech wierklech ausloggen?</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="no_parentcategory_found">Keng Iwwerkategorië fonnt</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
@@ -597,6 +597,7 @@
   <string name="custom_selector_already_uploaded_image_text">Dëst Bild gouf schonn op Commons eropgelueden.</string>
   <string name="wlm_upload_info">Dëst Bild wäert beim Concours Wiki Loves Monuments agereecht ginn.</string>
   <string name="display_monuments">Monumenter weisen</string>
+  <string name="wlm_month_message">Et ass de Mount vu Wiki Love Monuments!</string>
   <string name="learn_more">MÉI GEWUER GINN</string>
   <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments ass een internationale Fotosconcours fir Monumenter, dee vu Wikimedia organiséiert gëtt</string>
@@ -609,7 +610,7 @@
   <string name="edit_depictions">Motiver änneren</string>
   <string name="edit_categories">Kategorien änneren</string>
   <string name="advanced_options">Erweidert Optiounen</string>
-  <string name="advanced_query_info_text">Dir kënnt d\'Offroe fir „An der Géigend“ upassen. Falls Dir Feelermeldunge kritt, setzt zeréck an applizéiert.</string>
+  <string name="advanced_query_info_text">Dir kënnt d\'Offroe fir „An der Géigend“ upassen. Falls Dir Feelermeldunge kritt, setzt se zeréck a wennt se un.</string>
   <string name="apply">Uwenden</string>
   <string name="reset">Zerécksetzen</string>
   <string name="location_message">Standuertdonnéeën hëllefe Wikiediteure fir Är Foto ze fannen, wouduerch se vill méi nëtzlech gëtt.\nÄr rezent eropgeluede Fotoen hue kee Standuert.\nMir schloen Iech vir, de Standuert an den Astellunge vun Ärer Kamera-App z\'aktivéieren.\nMerci fir d\'Eroplueden!</string>
