@@ -40,6 +40,10 @@
     <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
     <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
   </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d eropgeluedene Fichier</item>
+    <item quantity="other">%1$d eropgeluede Fichieren</item>
+  </plurals>
   <string name="navigation_item_explore">Entdecken</string>
   <string name="preference_category_appearance">Ausgesinn</string>
   <string name="preference_category_general">Allgemeng</string>
