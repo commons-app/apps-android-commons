@@ -42,7 +42,7 @@ class DownloadReceiver : BroadcastReceiver() {
                         Timber.e("CAUSE: Rate limited (HTTP 429 Too Many Requests)")
                         Toast.makeText(
                             context,
-                            "Too many downloads. Please wait a moment.",
+                            "Too many downloads in a short time. Please try again in a few seconds.",
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
