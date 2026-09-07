@@ -73,6 +73,32 @@ jobs:
               return;
             }
 
+            // New contributors should start with bugs or good first issues
+            const isNewcomerFriendly = issue.data.type?.name === 'Bug'
+              || issue.data.labels.some(label => (label.name || label) === 'good first issue');
+
+            if (!isNewcomerFriendly) {
+              const mergedPullRequests = await github.rest.search.issuesAndPullRequests({
+                q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:merged author:${commenter}`,
+                per_page: 1
+              });
+
+              if (mergedPullRequests.data.total_count < 6) {
+                let body = `Hi @${commenter}! Thank you for your enthusiasm!`;
+                body += `\n\nWhile we appreciate your interest in fixing this issue, we found out that contributors who are not veterans learn better from fixing bugs (issues with Type=Bug) or working on good first issues (issues with Label=good first issue). [Our documentation](https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md) contains the details and a link to an issue search that gives you the best issues to work on.`;
+                body += `\n\nWould you mind trying that? Once you have found a suitable issue you want to solve, you can ask to be assigned there.`;
+                body += `\n\nThanks a lot!`;
+
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: body
+                });
+                return;
+              }
+            }
+
             // Check commenter's existing assignments and PR's
             const assignedIssues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
