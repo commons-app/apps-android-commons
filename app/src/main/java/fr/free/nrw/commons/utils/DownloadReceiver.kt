@@ -4,6 +4,7 @@ import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import timber.log.Timber
 
 //Added Javadocs for DownloadReceiver
@@ -37,19 +38,28 @@ class DownloadReceiver : BroadcastReceiver() {
 
                     Timber.e("DOWNLOAD FAILED! Title: $title | Reason Code: $reason")
 
-                    when (reason) {
-                        DownloadManager.ERROR_UNHANDLED_HTTP_CODE ->
-                            Timber.e("CAUSE: Server rejected request (Likely 403 Forbidden / Missing User-Agent)")
-                        DownloadManager.ERROR_HTTP_DATA_ERROR ->
-                            Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")
-                        DownloadManager.ERROR_FILE_ERROR ->
-                            Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")
-                        DownloadManager.ERROR_INSUFFICIENT_SPACE ->
-                            Timber.e("CAUSE: Device is out of storage space")
-                        DownloadManager.ERROR_CANNOT_RESUME ->
-                            Timber.e("CAUSE: Download cannot be resumed")
-                        else ->
-                            Timber.e("CAUSE: Unknown system error (Code: $reason)")
+                    if (reason == 429) {
+                        Timber.e("CAUSE: Rate limited (HTTP 429 Too Many Requests)")
+                        Toast.makeText(
+                            context,
+                            "Too many downloads. Please wait a moment.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        when (reason) {
+                            DownloadManager.ERROR_UNHANDLED_HTTP_CODE ->
+                                Timber.e("CAUSE: Server rejected request (Likely 403 Forbidden / Missing User-Agent)")
+                            DownloadManager.ERROR_HTTP_DATA_ERROR ->
+                                Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")
+                            DownloadManager.ERROR_FILE_ERROR ->
+                                Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")
+                            DownloadManager.ERROR_INSUFFICIENT_SPACE ->
+                                Timber.e("CAUSE: Device is out of storage space")
+                            DownloadManager.ERROR_CANNOT_RESUME ->
+                                Timber.e("CAUSE: Download cannot be resumed")
+                            else ->
+                                Timber.e("CAUSE: Unknown system error (Code: $reason)")
+                        }
                     }
                 }
                 cursor.close()
