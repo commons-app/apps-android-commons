@@ -8,15 +8,10 @@
         android:title="@string/menu_bookmark"
         app:showAsAction="ifRoom" />
     <item
-      android:id="@+id/menu_copy_link"
+      android:id="@+id/menu_share_current_image"
       android:icon="@drawable/menu_ic_copy_link_24dp"
-      android:title="@string/menu_copy_link"
+      android:title="@string/copy_wikicode"
       app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/menu_share_current_image"
-        android:icon="@drawable/menu_ic_share_24dp"
-        android:title="@string/menu_share"
-        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_download_current_image"
         android:icon="@drawable/menu_ic_download_24dp"

@@ -464,15 +464,6 @@
                   android:layout_height="wrap_content" />
 
                 <Button
-                  android:id="@+id/copyWikicode"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="@dimen/standard_gap"
-                  android:background="@drawable/bg_copy_wikitext_button"
-                  android:text="@string/copy_wikicode"
-                  android:textColor="@color/primaryTextColor" />
-
-                <Button
                   android:id="@+id/sendThanks"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

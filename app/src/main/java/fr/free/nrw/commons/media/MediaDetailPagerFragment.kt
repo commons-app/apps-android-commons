@@ -187,37 +187,14 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
                 return true
             }
 
-            R.id.menu_copy_link -> {
-                val uri = m!!.pageTitle.canonicalUri
-                copy("shareLink", uri, requireContext())
-                Timber.d("Copied share link to clipboard: %s", uri)
+            R.id.menu_share_current_image -> {
+                val data = "[[" + m!!.filename + "|thumb|" + m.fallbackDescription + "]]"
+                copy("wikiCode", data, requireContext())
+                Timber.d("Generated wikitext copy code via topbar action: %s", data)
                 Toast.makeText(
-                    requireContext(), getString(R.string.menu_link_copied),
+                    requireContext(), getString(R.string.wikicode_copied),
                     Toast.LENGTH_SHORT
                 ).show()
-                return true
-            }
-
-            R.id.menu_share_current_image -> {
-                val shareIntent = Intent(Intent.ACTION_SEND)
-                shareIntent.setType("text/plain")
-                shareIntent.putExtra(
-                    Intent.EXTRA_TEXT, """${m!!.displayTitle} 
-${m.pageTitle.canonicalUri}"""
-                )
-                startActivity(Intent.createChooser(shareIntent, "Share image via..."))
-
-                //Add media detail to backstack when the share button is clicked
-                //So that when the share is cancelled or completed the media detail page is on top
-                // of back stack fixing:https://github.com/commons-app/apps-android-commons/issues/2296
-                val supportFragmentManager = requireActivity().supportFragmentManager
-                if (supportFragmentManager.backStackEntryCount < 2) {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .addToBackStack(MediaDetailPagerFragment::class.java.name)
-                        .commit()
-                    supportFragmentManager.executePendingTransactions()
-                }
                 return true
             }
 
@@ -418,7 +395,6 @@ ${m.pageTitle.canonicalUri}"""
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true)
-                    menu.findItem(R.id.menu_copy_link).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true)
                         .setVisible(true)
@@ -453,8 +429,6 @@ ${m.pageTitle.canonicalUri}"""
                             Contribution.STATE_FAILED, Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED -> {
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_copy_link).setEnabled(false)
-                                    .setVisible(false)
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false)
                                     .setVisible(false)
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false)
@@ -470,8 +444,6 @@ ${m.pageTitle.canonicalUri}"""
                     }
                 } else {
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
-                        .setVisible(false)
-                    menu.findItem(R.id.menu_copy_link).setEnabled(false)
                         .setVisible(false)
                     menu.findItem(R.id.menu_share_current_image).setEnabled(false)
                         .setVisible(false)
