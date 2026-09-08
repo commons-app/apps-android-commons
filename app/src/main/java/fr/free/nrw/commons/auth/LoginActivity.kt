@@ -11,6 +11,9 @@ import android.view.KeyEvent
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.util.Base64
+import java.security.MessageDigest
+import java.security.SecureRandom
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -62,6 +65,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     lateinit var systemThemeUtils: SystemThemeUtils
 
     private var binding: ActivityLoginBinding? = null
+    private var pkceCodeVerifier: String? = null
     private var progressDialog: ProgressDialog? = null
     private val textWatcher = AbstractTextWatcher(::onTextChanged)
     private val compositeDisposable = CompositeDisposable()
@@ -102,6 +106,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
             signUpButton.setOnClickListener { signUp() }
             loginButton.setOnClickListener { performLogin() }
+            oauthLoginButton?.setOnClickListener { startOAuthLogin() }
             loginPassword.setOnEditorActionListener { textView, actionId, keyEvent ->
                 if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
                     if (actionId == EditorInfo.IME_ACTION_NEXT && lastLoginResult != null) {
@@ -133,6 +138,91 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 loginUsername.setText(it)
             }
         }
+        handleOAuthCallback(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleOAuthCallback(intent)
+    }
+
+    private fun handleOAuthCallback(intent: Intent?) {
+        val data: Uri? = intent?.data
+        if (data != null && data.scheme == "fr.free.nrw.commons" && data.host == "oauth-callback") {
+            val code = data.getQueryParameter("code")
+            if (code.isNullOrEmpty()) {
+                val error = data.getQueryParameter("error_description") ?: "OAuth login failed"
+                showMessageAndCancelDialog(error)
+                return
+            }
+
+            showLoggingProgressBar()
+            loginClient.exchangeOAuthCode(
+                code = code,
+                clientId = BuildConfig.OAUTH_CLIENT_ID,
+                clientSecret = BuildConfig.OAUTH_CLIENT_SECRET,
+                codeVerifier = pkceCodeVerifier ?: "",
+                redirectUri = OAUTH_REDIRECT_URI
+            ) { tokenResponse, throwable ->
+                if (tokenResponse != null && !tokenResponse.accessToken.isNullOrEmpty()) {
+                    fetchProfileAndLogin(tokenResponse.accessToken, tokenResponse.refreshToken ?: "")
+                } else {
+                    runOnUiThread {
+                        progressDialog?.dismiss()
+                        val errorMsg = throwable?.localizedMessage ?: "OAuth Token Exchange Failed"
+                        showMessageAndCancelDialog(errorMsg)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchProfileAndLogin(accessToken: String, refreshToken: String) {
+        loginClient.fetchOAuthUserProfile(accessToken) { username, _ ->
+            runOnUiThread {
+                progressDialog?.dismiss()
+                sessionManager.updateOAuthAccount(
+                    username = username ?: "OAuthUser",
+                    accessToken = accessToken,
+                    refreshToken = refreshToken
+                )
+                showSuccessAndDismissDialog()
+                startMainActivity()
+            }
+        }
+    }
+
+    private fun generateCodeVerifier(): String {
+        val secureRandom = SecureRandom()
+        val code = ByteArray(32)
+        secureRandom.nextBytes(code)
+        return Base64.encodeToString(code, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
+    }
+
+    private fun generateCodeChallenge(verifier: String): String {
+        val bytes = verifier.toByteArray(Charsets.US_ASCII)
+        val messageDigest = MessageDigest.getInstance("SHA-256")
+        messageDigest.update(bytes, 0, bytes.size)
+        val digest = messageDigest.digest()
+        return Base64.encodeToString(digest, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
+    }
+
+    fun startOAuthLogin() {
+        pkceCodeVerifier = generateCodeVerifier()
+        val codeChallenge = generateCodeChallenge(pkceCodeVerifier!!)
+
+        val authUrl = Uri.parse("https://meta.wikimedia.org/w/rest.php/oauth2/authorize")
+            .buildUpon()
+            .appendQueryParameter("response_type", "code")
+            .appendQueryParameter("client_id", BuildConfig.OAUTH_CLIENT_ID)
+            .appendQueryParameter("redirect_uri", OAUTH_REDIRECT_URI)
+            .appendQueryParameter("code_challenge", codeChallenge)
+            .appendQueryParameter("code_challenge_method", "S256")
+            .build()
+
+        val customTabsIntent = androidx.browser.customtabs.CustomTabsIntent.Builder().build()
+        customTabsIntent.launchUrl(this, authUrl)
     }
 
     @VisibleForTesting
@@ -234,6 +324,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         outState.putString(SAVE_ERROR_MESSAGE, binding!!.errorMessage.text.toString())
         outState.putString(SAVE_USERNAME, binding!!.loginUsername.text.toString())
         outState.putString(SAVE_PASSWORD, binding!!.loginPassword.text.toString())
+        outState.putString(SAVE_PKCE_VERIFIER, pkceCodeVerifier)
         outState.putBoolean(SAVE_TWO_FACTOR_VISIBILITY, binding!!.twoFactorContainer.visibility == View.VISIBLE)
         val loginResultType = when (lastLoginResult) {
             is LoginResult.EmailAuthResult -> RESULT_TYPE_EMAIL_AUTH
@@ -247,6 +338,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         binding!!.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
         binding!!.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
+        pkceCodeVerifier = savedInstanceState.getString(SAVE_PKCE_VERIFIER)
         val isTwoFactorVisible = savedInstanceState.getBoolean(SAVE_TWO_FACTOR_VISIBILITY, false)
         if (isTwoFactorVisible) {
             val loginResultType = savedInstanceState.getString(SAVE_LAST_LOGIN_RESULT_TYPE) ?: RESULT_TYPE_NONE
@@ -499,5 +591,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
         const val RESULT_TYPE_2FA = "2FA"
         const val RESULT_TYPE_NONE = "NONE"
+        const val SAVE_PKCE_VERIFIER = "pkce_verifier"
+        const val OAUTH_REDIRECT_URI = "fr.free.nrw.commons://oauth-callback"
     }
 }

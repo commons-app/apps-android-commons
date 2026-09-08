@@ -32,6 +32,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
 
+        // dynamically loads keys from local  properties
+        buildConfigField("String", "OAUTH_CLIENT_ID", "\"${getOAuthClientId()}\"")
+        buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"${getOAuthClientSecret()}\"")
+
         multiDexEnabled = true
 
         vectorDrawables {
@@ -394,19 +398,21 @@ project.gradle.taskGraph.whenReady {
     }
 }
 
-fun getTestUserName(): String? {
+fun getLocalProperty(key: String, defaultValue: String = ""): String {
     val propFile = rootProject.file("./local.properties")
+    if (!propFile.exists()) return defaultValue
     val properties = Properties()
     propFile.inputStream().use { properties.load(it) }
-    return properties.getProperty("TEST_USER_NAME")
+    return properties.getProperty(key) ?: defaultValue
 }
 
-fun getTestPassword(): String? {
-    val propFile = rootProject.file("./local.properties")
-    val properties = Properties()
-    propFile.inputStream().use { properties.load(it) }
-    return properties.getProperty("TEST_USER_PASSWORD")
-}
+fun getTestUserName(): String? = getLocalProperty("TEST_USER_NAME").takeIf { it.isNotEmpty() }
+
+fun getOAuthClientId(): String = getLocalProperty("OAUTH_CLIENT_ID", "YOUR_OAUTH_CLIENT_ID")
+
+fun getOAuthClientSecret(): String = getLocalProperty("OAUTH_CLIENT_SECRET", "YOUR_OAUTH_CLIENT_SECRET")
+
+fun getTestPassword(): String? = getLocalProperty("TEST_USER_PASSWORD").takeIf { it.isNotEmpty() }
 
 if (isRunningOnTravisAndIsNotPRBuild) {
     configure<com.github.triplet.gradle.play.PlayPublisherExtension> {
