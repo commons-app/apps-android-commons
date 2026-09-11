@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.wikidata.cookies
 
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
@@ -10,6 +11,7 @@ import fr.free.nrw.commons.wikidata.model.WikiSite
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import timber.log.Timber
 
 private const val COOKIE_STORE = "cookie_store"
 
@@ -42,16 +44,26 @@ class CommonsCookieStorage(
         cookieMap.clear()
         val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
         val json = CryptoUtils.decrypt(encryptedJson)
-        
-        if (!json.isNullOrEmpty()) {
-            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
-            cookieMap.putAll(serializedData.cookieMap)
-            
-            // If the loaded json wasn't encrypted (e.g. migrating from older version)
-            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
-            if (encryptedJson == json) {
-               save()
+
+        if (!json.isNullOrBlank()) {
+            try {
+                val serializedData =
+                    gson.fromJson(json, CommonsCookieStorage::class.java)
+                        ?: throw JsonSyntaxException("Cookie store must be a JSON object")
+                cookieMap.putAll(serializedData.cookieMap)
+
+                // If the loaded json wasn't encrypted (e.g. migrating from older version)
+                // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
+                if (encryptedJson == json) {
+                    save()
+                }
+            } catch (exception: JsonSyntaxException) {
+                Timber.w(exception, "Discarding malformed cookie store")
+                preferences.remove(COOKIE_STORE)
             }
+        } else if (encryptedJson != null) {
+            Timber.w("Discarding empty cookie store")
+            preferences.remove(COOKIE_STORE)
         }
     }
 
