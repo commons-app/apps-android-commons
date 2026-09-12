@@ -155,6 +155,32 @@ class UploadMediaPresenterTest {
     }
 
     /**
+     * Regression test for #6938: with multiple images in one upload session, captions
+     * for one image must not be written onto another image's UploadItem.
+     */
+    @Test
+    fun setUploadMediaDetailsOnlyUpdatesTargetedItemInMultiImageUpload() {
+        val firstItem =
+            UploadItem(Uri.EMPTY, null, null, null, 0, null, null, null)
+        val firstItemDetails =
+            listOf(UploadMediaDetail(languageCode = "en", captionText = "first"))
+        firstItem.uploadMediaDetails = firstItemDetails.toMutableList()
+        val secondItem =
+            UploadItem(Uri.EMPTY, null, null, null, 0, null, null, null)
+        whenever(repository.getUploads()).thenReturn(listOf(firstItem, secondItem))
+
+        val secondItemDetails =
+            listOf(
+                UploadMediaDetail(languageCode = "en", captionText = "second"),
+                UploadMediaDetail(languageCode = "de", captionText = "zweite"),
+            )
+        uploadMediaPresenter.setUploadMediaDetails(secondItemDetails, 1)
+
+        assertEquals(secondItemDetails, secondItem.uploadMediaDetails)
+        assertEquals(firstItemDetails, firstItem.uploadMediaDetails)
+    }
+
+    /**
      * Test for empty file name when the user presses the NEXT button
      */
     @Test
