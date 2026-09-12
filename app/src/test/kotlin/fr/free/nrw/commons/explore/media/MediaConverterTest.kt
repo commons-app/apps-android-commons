@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.explore.media
 
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
@@ -99,5 +101,28 @@ class MediaConverterTest {
         `when`(metadata.artist()).thenReturn("<a href=\"/w/index.php?title=User:Foo&action=edit&redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\">Foo</a>")
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals("Foo", media.author)
+    }
+
+    @Test
+    fun `test convert carries the api media type`() {
+        whenever(imageInfo.getMetadata()).thenReturn(metadata)
+        whenever(imageInfo.getThumbUrl()).thenReturn(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/" +
+                "Big_Buck_Bunny_medium.ogv/500px--Big_Buck_Bunny_medium.ogv.jpg",
+        )
+        whenever(imageInfo.getOriginalUrl()).thenReturn(
+            "https://upload.wikimedia.org/wikipedia/commons/4/41/Big_Buck_Bunny_medium.ogv",
+        )
+        whenever(metadata.licenseUrl()).thenReturn("https://creativecommons.org/licenses/by/3.0")
+        whenever(metadata.dateTime()).thenReturn("2010-01-16 17:34:35")
+        whenever(metadata.artist()).thenReturn("(c) copyright Blender Foundation\\www.bigbuckbunny.org")
+        whenever(page.title()).thenReturn("File:Big Buck Bunny medium.ogv")
+        whenever(imageInfo.getMimeType()).thenReturn("application/ogg")
+        whenever(imageInfo.getMediaType()).thenReturn("VIDEO")
+
+        media = mediaConverter.convert(page, entity, imageInfo)
+
+        assertEquals("application/ogg", media.mimeType)
+        assertEquals(MediaType.VIDEO, media.mediaType)
     }
 }

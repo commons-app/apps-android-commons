@@ -42,8 +42,8 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
         BookmarkPictureRoomEntity::class, BookmarkItemsRoomEntity::class,
         CategoryRoomEntity::class, RecentLanguageRoomEntity::class, RecentSearchRoomEntity::class
     ],
-    version = 22,
-    exportSchema = false,
+    version = 23,
+    exportSchema = true,
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
