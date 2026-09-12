@@ -68,7 +68,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="1.0"
       app:layout_constraintStart_toEndOf="@id/image_limit_error"
-      app:srcCompat="@drawable/ic_overflow" />
+      app:srcCompat="?attr/overflow_menu_button"/>
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>
