@@ -573,19 +573,21 @@ class UploadWorker(
                 .blockingGet()) {
             val randomHash = (random.nextInt(90000) + 10000).toString()
 
-            sequenceFileName = if (fileName.indexOf('.') == -1) {
-                // Append the random hash in parentheses if no file extension is present
-                "$fileName ($randomHash)"
-            } else {
-                val regex = Pattern.compile("^(.*)(\\..+?)$")
-                val regexMatcher = regex.matcher(fileName)
-                // Append the random hash in parentheses before the file extension
-                if (regexMatcher.find()) {
-                    "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
-                } else {
+            sequenceFileName =
+                if (fileName.indexOf('.') == -1) {
+                    // Append the random hash in parentheses if no file extension is present
                     "$fileName ($randomHash)"
+                } else {
+                    val regex =
+                        Pattern.compile("^(.*)(\\..+?)$")
+                    val regexMatcher = regex.matcher(fileName)
+                    // Append the random hash in parentheses before the file extension
+                    if (regexMatcher.find()) {
+                        "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
+                    } else {
+                        "$fileName ($randomHash)"
+                    }
                 }
-            }
         }
         return sequenceFileName!!
     }
