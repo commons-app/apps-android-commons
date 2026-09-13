@@ -2,8 +2,8 @@ package fr.free.nrw.commons.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.ProgressDialog
 import android.content.Context
+import androidx.appcompat.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -23,6 +23,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import fr.free.nrw.commons.utils.DialogUtil
 import timber.log.Timber
 import androidx.core.graphics.createBitmap
 
@@ -75,9 +76,7 @@ object ImageUtils {
     const val NO_CATEGORY_SELECTED = -5
     const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
 
-    private var progressDialogWallpaper: ProgressDialog? = null
-
-    private var progressDialogAvatar: ProgressDialog? = null
+    private var progressDialogAvatar: AlertDialog? = null
 
     @IntDef(
         flag = true,
@@ -281,25 +280,13 @@ object ImageUtils {
     }
 
     @JvmStatic
-    private fun showSettingWallpaperProgressBar(context: Context) {
-        progressDialogWallpaper = ProgressDialog.show(
-            context,
-            context.getString(R.string.setting_wallpaper_dialog_title),
-            context.getString(R.string.setting_wallpaper_dialog_message),
-            true,
-            false
-        )
-    }
-
-    @JvmStatic
     private fun showSettingAvatarProgressBar(context: Context) {
-        progressDialogAvatar = ProgressDialog.show(
-            context,
-            context.getString(R.string.setting_avatar_dialog_title),
-            context.getString(R.string.setting_avatar_dialog_message),
-            true,
-            false
+        progressDialogAvatar = DialogUtil.createProgressDialog(
+            context = context,
+            title = context.getString(R.string.setting_avatar_dialog_title),
+            message = context.getString(R.string.setting_avatar_dialog_message),
         )
+        progressDialogAvatar!!.show()
     }
 
     /**

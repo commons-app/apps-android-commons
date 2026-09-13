@@ -2,7 +2,6 @@ package fr.free.nrw.commons.description
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -37,8 +36,8 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.shadows.ShadowProgressDialog
+import org.robolectric.shadows.ShadowDialog
+
 import java.lang.reflect.Method
 import java.util.Date
 
@@ -121,7 +120,7 @@ class DescriptionEditActivityUnitTest {
             )
         method.isAccessible = true
         method.invoke(activity)
-        val dialog: ProgressDialog = ShadowProgressDialog.getLatestDialog() as ProgressDialog
+        val dialog: androidx.appcompat.app.AlertDialog = ShadowDialog.getLatestDialog() as androidx.appcompat.app.AlertDialog
         assertEquals(dialog.isShowing, true)
     }
 
@@ -196,7 +195,7 @@ class DescriptionEditActivityUnitTest {
             R.string.ok,
             R.string.ok,
         )
-        val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
+        val dialog: AlertDialog = ShadowDialog.getLatestDialog() as AlertDialog
         assertEquals(dialog.isShowing, true)
     }
 }

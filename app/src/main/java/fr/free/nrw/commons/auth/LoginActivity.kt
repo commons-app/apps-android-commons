@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.auth
 
 import android.accounts.AccountAuthenticatorActivity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -34,6 +33,7 @@ import fr.free.nrw.commons.databinding.ActivityLoginBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.AbstractTextWatcher
 import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
@@ -62,7 +62,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     lateinit var systemThemeUtils: SystemThemeUtils
 
     private var binding: ActivityLoginBinding? = null
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
     private val textWatcher = AbstractTextWatcher(::onTextChanged)
     private val compositeDisposable = CompositeDisposable()
     private val delegate: AppCompatDelegate by lazy {
@@ -403,12 +403,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun showLoggingProgressBar() {
-        progressDialog = ProgressDialog(this).apply {
-            isIndeterminate = true
-            setTitle(getString(R.string.logging_in_title))
-            setMessage(getString(R.string.logging_in_message))
-            setCancelable(false)
-        }
+        progressDialog = DialogUtil.createProgressDialog(
+            context = this,
+            title = getString(R.string.logging_in_title),
+            message = getString(R.string.logging_in_message),
+        )
         progressDialog!!.show()
     }
 

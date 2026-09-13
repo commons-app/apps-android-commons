@@ -101,7 +101,7 @@ class MoreBottomSheetFragmentUnitTests {
     fun testOnLogoutClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onLogoutClicked()
-        val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
+        val dialog: AlertDialog = ShadowDialog.getLatestDialog() as AlertDialog
         Assert.assertEquals(dialog.isShowing, true)
     }
 
