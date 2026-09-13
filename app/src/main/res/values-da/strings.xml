@@ -364,6 +364,11 @@
   <string name="rotate">Rotér</string>
   <string name="crop">Beskær</string>
   <string name="blur">Slør</string>
+  <string name="autoblur">AutoSlør</string>
+  <string name="autodetect_title">Automatisk sløring af ansigter og nummerplader.</string>
+  <string name="autodetect_description">Du kan kassere falske positiver ved hjælp af knappen ❌ for hvert sløringsområde.</string>
+  <string name="autoblur_failed_to_load">Kunne ikke indlæse billede til AutoSlør</string>
+  <string name="autoblur_no_region_detected">Ingen regioner fundet til AutoSlør</string>
   <string name="error_fetching_nearby_places">Kunne ikke indlæse steder i nærheden</string>
   <string name="no_pictures_in_this_area">Ingen billeder i dette område</string>
   <string name="no_nearby_places_around">Ingen steder i nærheden</string>
@@ -856,4 +861,9 @@
   <string name="license_cc0_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format uden nogen betingelser.</string>
   <string name="license_cc_by_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres.</string>
   <string name="license_cc_by_sa_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres, og det nye værk er licenseret på identiske vilkår.</string>
+  <string name="error_getting_image_properties">Fejl ved hentning af billedegenskaber:</string>
+  <string name="error_blur_no_rectangle">Tegn mindst ét rektangel på fotoet</string>
+  <string name="error_applying_blur">Fejl ved anvendelse af sløring</string>
+  <string name="failed_to_apply_crop">Kunne ikke anvende beskæring</string>
+  <string name="failed_to_save_image">Kunne ikke gemme billede.</string>
 </resources>

@@ -362,6 +362,11 @@
   <string name="rotate">Fırlat</string>
   <string name="crop">Kəs</string>
   <string name="blur">Bulanıqlıq</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Üzlərin və nömrə nişanlarının avtomatik bulanıqlaşdırılması.</string>
+  <string name="autodetect_description">Hər bulanıqlaşdırma sahəsindəki ❌ düyməsini istifadə edərək səhv nəticələri ləğv edə bilərsiniz.</string>
+  <string name="autoblur_failed_to_load">AutoBlur üçün şəkil yüklənmədi</string>
+  <string name="autoblur_no_region_detected">AutoBlur üçün heç bir bölgə aşkarlanmadı</string>
   <string name="error_fetching_nearby_places">Yaxınlıqdakı yerləri yükləmək mümkün olmadı</string>
   <string name="no_pictures_in_this_area">Bu ərazidə şəkillər yoxdur</string>
   <string name="no_nearby_places_around">Yaxınlıqda yer tapılmadı</string>
@@ -854,4 +859,9 @@
   <string name="license_cc0_long_description">Bu lisenziya təkrar istifadəçilərə heç bir şərt qoymadan istənilən media və formatda materialı yaymaq, remiks etmək, uyğunlaşdırmaq və inkişaf etdirmək imkanı verir.</string>
   <string name="license_cc_by_long_description">Bu lisenziya, müəllifə istinad edildiyi təqdirdə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
   <string name="license_cc_by_sa_long_description">Bu lisenziya, müəllifə istinad edildiyi və yeni əsərin eyni şərtlər altında lisenziyalaşdırıldığı şərtilə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
+  <string name="error_getting_image_properties">Şəkil xüsusiyyətlərini əldə etməkdə xəta:</string>
+  <string name="error_blur_no_rectangle">Zəhmət olmasa, fotoda ən azı bir düzbucaqlı çəkin</string>
+  <string name="error_applying_blur">Bulanıqlaşdırma tətbiq edərkən xəta</string>
+  <string name="failed_to_apply_crop">Kəsmə tətbiq edilə bilmədi</string>
+  <string name="failed_to_save_image">Şəkli yadda saxlamaq alınmadı</string>
 </resources>

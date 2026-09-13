@@ -306,7 +306,7 @@
   <string name="use_external_storage_summary">Zapisz zdjęcia zrobione w aplikacji w pamięci swojego urządzenia</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="send_log_file">Wyślij plik rejestru</string>
-  <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można cię zidentyfikować</string>
+  <string name="send_log_file_description">Wyślij plik rejestru w e-mailu do twórców, aby ułatwić im rozwiązanie aplikemów z aplikacją. Uwaga: rejestry mogą potencjalnie zawierać informacje, dzięki którym można Cię zidentyfikować</string>
   <string name="no_web_browser">Nie oznaleziono przeglądarki internetowej, aby otworzyć adres URL</string>
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
   <string name="nominate_deletion">Zgłoszone do usunięcia</string>
@@ -394,6 +394,11 @@
   <string name="share_app_title">Udostępnij aplikację</string>
   <string name="rotate">Obrót</string>
   <string name="crop">Przytnij</string>
+  <string name="autoblur">Automatyczne rozmycie</string>
+  <string name="autodetect_title">Automatyczne rozmycie twarzy i tablic rejestracyjnych.</string>
+  <string name="autodetect_description">Możesz odrzucić wyniki fałszywie pozytywne, korzystając z przycisku ❌ przy każdym obszarze rozmycia.</string>
+  <string name="autoblur_failed_to_load">Nie udało się załadować obrazu do funkcji automatycznego rozmycia</string>
+  <string name="autoblur_no_region_detected">Nie wykryto żadnych obszarów do automatycznego rozmycia</string>
   <string name="error_fetching_nearby_places">Nie udało się wczytać miejsc w pobliżu</string>
   <string name="no_pictures_in_this_area">Brak zdjęć w tym obszarze</string>
   <string name="no_nearby_places_around">Brak miejsc w pobliżu</string>
@@ -417,7 +422,7 @@
   <string name="image_reverts">Nie wycofane obrazy</string>
   <string name="images_used_by_wiki">Wykorzystane obrazy</string>
   <string name="achievements_share_message">Podziel się swoimi osiągnięciami ze znajomymi!</string>
-  <string name="achievements_info_message">Twój poziom wzrasta wraz z spełnieniem tych wymagań. Pozycje w sekcji \"statystyki\" nie są wliczane do twojego poziomu.</string>
+  <string name="achievements_info_message">Twój poziom wzrasta wraz z spełnieniem tych wymagań. Pozycje w sekcji „statystyki” nie są wliczane do Twojego poziomu.</string>
   <string name="achievements_revert_limit_message">wymagane minimum:</string>
   <string name="images_uploaded_explanation">Liczba zdjęć przesłanych do Commons za pomocą dowolnego oprogramowania</string>
   <string name="images_reverted_explanation">Procent zdjęć przesłanych do Commons, które nie zostały usunięte</string>

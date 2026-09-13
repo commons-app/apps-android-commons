@@ -378,6 +378,12 @@
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
   <string name="rotate">Περιστροφή</string>
   <string name="crop">Περικοπή</string>
+  <string name="blur">Θόλωμα</string>
+  <string name="autoblur">Αυτόματο θόλωμα</string>
+  <string name="autodetect_title">Αυτόματο θόλωμα προσώπων και πινακίδων κυκλοφορίας.</string>
+  <string name="autodetect_description">Μπορείτε να απορρίψετε τα ψευδώς θετικά αποτελέσματα χρησιμοποιώντας το κουμπί ❌ κάθε περιοχής θολώματος.</string>
+  <string name="autoblur_failed_to_load">Αποτυχία φόρτωσης εικόνας για το Αυτόματο θόλωμα</string>
+  <string name="autoblur_no_region_detected">Δεν εντοπίστηκαν περιοχές για το Αυτόματο θόλωμα</string>
   <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
   <string name="no_pictures_in_this_area">Δεν υπάρχουν φωτογραφίες σε αυτήν την περιοχή</string>
   <string name="no_nearby_places_around">Δεν υπάρχουν μέρη κοντά σας</string>
@@ -869,4 +875,9 @@
   <string name="license_cc0_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, χωρίς όρους.</string>
   <string name="license_cc_by_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, ακόμη και για εμπορικούς σκοπούς, εφόσον αναφέρεται ο δημιουργός.</string>
   <string name="license_cc_by_sa_long_description">Αυτή η άδεια χρήσης επιτρέπει στους επαναχρήστες να διανέμουν, να αναμειγνύουν, να προσαρμόζουν και να βασίζονται στο υλικό σε οποιοδήποτε μέσο ή μορφή, ακόμη και για εμπορικούς σκοπούς, εφόσον αναφέρεται ο δημιουργός και το νέο έργο διατίθεται με τους ίδιους όρους.</string>
+  <string name="error_getting_image_properties">Σφάλμα κατά τη λήψη των ιδιοτήτων εικόνας:</string>
+  <string name="error_blur_no_rectangle">Παρακαλούμε σχεδιάστε τουλάχιστον ένα ορθογώνιο στη φωτογραφία</string>
+  <string name="error_applying_blur">Σφάλμα εφαρμογής θολώματος</string>
+  <string name="failed_to_apply_crop">Αποτυχία εφαρμογής περικοπής</string>
+  <string name="failed_to_save_image">Αποτυχία αποθήκευσης εικόνας</string>
 </resources>

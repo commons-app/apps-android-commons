@@ -355,6 +355,11 @@
   <string name="rotate">Deje na gira</string>
   <string name="crop">Artajé</string>
   <string name="blur">Sfumé</string>
+  <string name="autoblur">Turbolensa automàtica</string>
+  <string name="autodetect_title">Face dla turbolensa automàtica e plache.</string>
+  <string name="autodetect_description">A peul ëscarté ij fàuss positiv dovrand ël boton ❌ ëd minca n\'àrea ëd turbolensa.</string>
+  <string name="autoblur_failed_to_load">Falì a carié la plancia për la turbolensa automàtica</string>
+  <string name="autoblur_no_region_detected">Gnun-e region trovà për la turbolensa automàtica</string>
   <string name="error_fetching_nearby_places">Impossìbil carié j\'anviron.</string>
   <string name="no_pictures_in_this_area">Gnun-e plance an cost\'àrea</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
@@ -847,4 +852,9 @@
   <string name="license_cc0_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, sensa condission.</string>
   <string name="license_cc_by_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen e formà, ëdcò con dij but comersiaj, basta mach ch\'a sia dàit l\'arconossiment al creator.</string>
   <string name="license_cc_by_sa_long_description">Costa licensa a përmet a chi a deuvra torna ël material ëd distribuilo, modifichelo, adatelo e dësvlupelo an qualsëssìa mojen o formà, ëdcò con dij but comersiaj, basta che l\'atribussion a sia dàita al creator e che ël neuv travaj a sia licensià sota j\'istess termo.</string>
+  <string name="error_getting_image_properties">Eror durant l\'oteniment ëd le propietà dla plancia:</string>
+  <string name="error_blur_no_rectangle">Për piasì, ch\'a dissegna almanch un retàngol an sla fòto</string>
+  <string name="error_applying_blur">Eror an aplicand la turbolensa</string>
+  <string name="failed_to_apply_crop">Falì a apliché l\'artaj</string>
+  <string name="failed_to_save_image">Falì a argistré la plancia</string>
 </resources>
