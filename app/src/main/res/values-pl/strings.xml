@@ -751,7 +751,7 @@
   <string name="custom_selector_limit_error_desc">Błąd: przekroczono limit przesyłania</string>
   <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments</string>
   <string name="display_monuments">Pokaż zabytki</string>
-  <string name="wlm_month_message">To jest miesiąc Wiki Lovers Monuments!</string>
+  <string name="wlm_month_message">To miesiąc akcji „Wiki Lubi Zabytki”!</string>
   <string name="learn_more">DOWIEDZ SIĘ WIĘCEJ</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
   <string name="need_permission">Wymagane uprawnienie</string>
