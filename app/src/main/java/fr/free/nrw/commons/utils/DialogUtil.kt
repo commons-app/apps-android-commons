@@ -2,7 +2,13 @@ package fr.free.nrw.commons.utils
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog as AppCompatAlertDialog
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
@@ -179,5 +185,44 @@ object DialogUtil {
                     }
                 }.create(),
         )
+    }
+    @JvmStatic
+    @JvmOverloads
+    fun createProgressDialog(
+        context: Context,
+        title: String? = null,
+        message: String,
+        cancelable: Boolean = false,
+    ): AppCompatAlertDialog {
+        val padding = context.resources
+            .getDimensionPixelSize(R.dimen.standard_gap)
+
+        val progressBar = ProgressBar(context).apply {
+            isIndeterminate = true
+        }
+
+        val messageView = TextView(context).apply {
+            text = message
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+            ).also { it.marginStart = padding }
+        }
+
+        val layout = LinearLayout(context).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(padding, padding, padding, padding)
+            addView(progressBar)
+            addView(messageView)
+        }
+
+        return AppCompatAlertDialog.Builder(context)
+            .apply {
+                title?.let { setTitle(it) }
+                setView(layout)
+                setCancelable(cancelable)
+            }
+            .create()
     }
 }

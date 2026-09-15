@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload.depicts
 
 import android.app.Activity
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,6 +33,7 @@ import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE
 import io.reactivex.Notification
@@ -65,7 +66,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     private var adapter: UploadDepictsAdapter? = null
     private var subscribe: Disposable? = null
     private var media: Media? = null
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
 
     /**
      * Determines each encounter of edit depicts
@@ -364,9 +365,10 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
      * Shows the progress dialog
      */
     override fun showProgressDialog() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage(getString(R.string.please_wait))
-        progressDialog!!.setCancelable(false)
+        progressDialog = DialogUtil.createProgressDialog(
+            context = requireContext(),
+            message = getString(R.string.please_wait),
+        )
         progressDialog!!.show()
     }
 

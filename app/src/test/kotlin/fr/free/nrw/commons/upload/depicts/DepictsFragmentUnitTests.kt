@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload.depicts
 
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +61,7 @@ class DepictsFragmentUnitTests {
     private lateinit var media: Media
 
     @Mock
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: AlertDialog
 
     @Before
     fun setUp() {

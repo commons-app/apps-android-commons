@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby.fragments
 
 import android.Manifest.permission
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -92,6 +91,7 @@ import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.model.BottomSheetItem
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
@@ -232,7 +232,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var isFABsExpanded = false
     private var selectedPlace: Place? = null
     private var clickedMarker: Marker? = null
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
     private val CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005
     private val CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004
     private var isPermissionDenied = false
@@ -388,9 +388,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             bookmarkLocationDao!!,
             placesRepository!!, nearbyController!!
         )
-        progressDialog = ProgressDialog(activity)
-        progressDialog!!.setCancelable(false)
-        progressDialog!!.setMessage("Saving in progress...")
         setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
@@ -434,7 +431,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
         saveAsGPXButton.setOnMenuItemClickListener {
             try {
-                progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_gpx_file))
+                progressDialog = DialogUtil.createProgressDialog(
+                    context = requireContext(),
+                    title = getString(fr.free.nrw.commons.R.string.saving_gpx_file),
+                    message = getString(fr.free.nrw.commons.R.string.saving_in_progress),
+                )
                 progressDialog!!.show()
                 savePlacesAsGPX()
             } catch (e: Exception) {
@@ -444,7 +445,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
         saveAsKMLButton.setOnMenuItemClickListener {
             try {
-                progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_kml_file))
+                progressDialog = DialogUtil.createProgressDialog(
+                    context = requireContext(),
+                    title = getString(fr.free.nrw.commons.R.string.saving_kml_file),
+                    message = getString(fr.free.nrw.commons.R.string.saving_in_progress),
+                )
                 progressDialog!!.show()
                 savePlacesAsKML()
             } catch (e: Exception) {
