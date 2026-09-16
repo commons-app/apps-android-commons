@@ -20,6 +20,6 @@ class NotificationController @Inject constructor(
     }
 
     fun markAsRead(notification: Notification): Observable<Boolean> {
-        return notificationClient.markNotificationAsRead(notification.notificationId)
+        return notificationClient.markNotificationAsRead(notification.notificationId, notification.wiki)
     }
 }
