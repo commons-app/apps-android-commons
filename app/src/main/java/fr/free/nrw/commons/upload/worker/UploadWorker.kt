@@ -482,10 +482,14 @@ class UploadWorker(
                 try {
                     if (!p18WasSkipped) {
                     // Only set P18 if the place does not already have a picture
+                    // Use the original (space-separated) title rather than
+                    // uploadResult.filename, which MediaWiki returns in its
+                    // underscored canonical form and triggers Wikidata's
+                    // "Commons link should be well-formed" constraint warning.
                     revisionID =
                         wikidataEditService.createClaim(
                             wikiDataPlace,
-                            uploadResult.filename,
+                            contribution.media.filename!!,
                             contribution.media.captions,
                         )
                     if (null != revisionID) {
