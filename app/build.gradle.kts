@@ -25,8 +25,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1064
-        versionName = "6.5.0"
+        versionCode = 1067
+        versionName = "6.8.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -339,8 +339,6 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.preference.ktx)
 
-    //Android Media
-    implementation(libs.juanitobananas.androidDmediaUtil)
     implementation(libs.androidx.multidex)
 
     // Kotlin + coroutines
@@ -354,6 +352,12 @@ dependencies {
     annotationProcessor(libs.glide.compiler)
     kaptTest(libs.androidx.databinding.compiler)
     kaptAndroidTest(libs.androidx.databinding.compiler)
+
+    // Jpegtran
+    implementation(libs.ajpegtran)
+
+    // AutoDetect
+    implementation(libs.commons.ml)
 
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")

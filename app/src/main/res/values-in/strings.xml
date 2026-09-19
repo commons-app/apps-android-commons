@@ -6,6 +6,7 @@
 * Arifin.wijaya
 * Bagas Chrisara
 * Bayahiu
+* Bennylin
 * Birusian
 * Boesenbergia
 * Budhiastawa
@@ -261,7 +262,7 @@
   <string name="navigation_item_settings">Pengaturan</string>
   <string name="navigation_item_feedback">Umpan balik</string>
   <string name="navigation_item_feedback_github">Ulasan melalui GitHub</string>
-  <string name="navigation_item_logout">Keluar</string>
+  <string name="navigation_item_logout">Keluar log</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Pemberitahuan</string>
   <string name="navigation_item_review">Tinjau</string>
@@ -318,7 +319,7 @@
   <string name="error_notifications">Galat penyampaian pemberitahuan</string>
   <string name="error_review">Galat mengambil gambar untuk ditinjau. Tekan segarkan untuk coba lagi.</string>
   <string name="no_notifications">Pemberitahuan tidak ditemukan</string>
-  <string name="about_translate">Pertalaghi</string>
+  <string name="about_translate">Terjemahkan</string>
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_message">Pilih bahasa untuk terjemahan yang ingin Anda kirimkan</string>
   <string name="about_translate_proceed">Lanjutkan</string>
@@ -369,7 +370,7 @@
   <string name="warning_for_no_answer">Pilih salah satu dari dua opsi untuk menjawab pertanyaan</string>
   <string name="user_not_logged_in">Sesi login telah berakhir. Silakan login kembali.</string>
   <string name="quiz_result_share_message">Bagikan hasil kuis Anda dengan teman!</string>
-  <string name="continue_message">Lanjut</string>
+  <string name="continue_message">Lanjutkan</string>
   <string name="correct">Jawaban yang benar</string>
   <string name="wrong">Jawaban yang salah</string>
   <string name="quiz_screenshot_question">Apakah tangkapan layar ini OKE untuk diunggah?</string>
@@ -488,19 +489,19 @@
   <string name="send_thank_toast">Mengucapkan terima kasih kepada %1$s</string>
   <string name="review_copyright">Apakah ini memenuhi aturan hak cipta?</string>
   <string name="review_category">Apakah ini dikategorikan dengan tepat?</string>
-  <string name="review_spam">Apakah ini sesuai dengan cakupan?</string>
+  <string name="review_spam">Apakah ini dalam lingkup?</string>
   <string name="review_thanks">Apakah Anda ingin berterima kasih kepada kontributor?</string>
   <string name="review_spam_explanation">Tekan TIDAK untuk menominasikan gambar ini untuk dihapus apabila gambarnya sama sekali tidak berguna.</string>
   <string name="review_copyright_explanation">Logo, cuplikan, poster film biasanya adalah pelanggaran hak cipta.\nTekan TIDAK untuk menominasikan gambar ini untuk dihapus</string>
   <string name="review_thanks_explanation">%1$s akan merasa didorong oleh apresiasi Anda</string>
   <string name="review_no_category">Oh, gambar ini belum pun diberi kategori!</string>
   <string name="review_category_explanation">Gambar ini ada dalam kategori %1$s.</string>
-  <string name="review_spam_report_question">Di luar cakupan karena</string>
+  <string name="review_spam_report_question">Di luar lingkup karena</string>
   <string name="review_c_violation_report_question">Pelanggaran hak cipta karena</string>
   <string name="review_thanks_yes_button_text">Gambar selanjutnya</string>
   <string name="review_thanks_no_button_text">Ya, mengapa tidak</string>
   <string name="skip_image_explanation">Menekan tombol ini akan memberikan Anda gambar lain yang baru diunggah dari Wikimedia Commons</string>
-  <string name="review_image_explanation">Anda dapat meninjau gambar untuk meningkatkan kualitas Wikimedia Commons.\nTiga parameter peninjauannya adalah: \n\n - Apakah gambar ini di dalam cakupan? \nJika Anda menekan Tidak (di luar cakupan), Anda akan menambahkan templat usulan penghapusan ke gambar ini.\n\n - Apakah gambar ini mengikuti aturan hak cipta?\nJika Anda menekan Tidak (tidak mengikuti aturan hak cipta), Anda akan menambahkan templat usulan penghapusan ke gambar ini.\n\n - Apakah gambar ini dikategorikan dengan benar? \nJika Anda menekan Tidak (tidak dikategorikan dengan benar), Anda akan menambahkan templat permintaan kategori ke gambar ini.\n\nJika tidak ada masalah, templat tidak perlu ditambahkan dan Anda juga bisa berterima kasih kepada kontributor.</string>
+  <string name="review_image_explanation">Anda bisa meninjau gambar untuk memperbagus mutu Wikimedia Commons.\nTiga parameter peninjauannya adalah: \n\n - Apakah gambar ini di dalam lingkup? \nJika Anda menekan Tidak (di luar lingkup), Anda akan menambahkan templat usulan penghapusan ke gambar ini.\n\n - Apakah gambar ini mengikuti aturan hak cipta?\nJika Anda menekan Tidak (tidak mengikuti aturan hak cipta), Anda akan menambahkan templat usulan penghapusan ke gambar ini.\n\n - Apakah gambar ini dikategorikan dengan benar? \nJika Anda menekan Tidak (tidak dikategorikan dengan benar), Anda akan menambahkan templat permintaan kategori ke gambar ini.\n\nJika tidak ada masalah, templat tidak perlu ditambahkan dan Anda juga bisa berterima kasih kepada kontributor.</string>
   <string name="no_image">Tidak ada gambar digunakan</string>
   <string name="no_image_reverted">Tidak ada gambar dibalikkan</string>
   <string name="no_image_uploaded">Tidak ada gambar diunggah</string>
@@ -515,7 +516,7 @@
   <string name="images_via_nearby_explanation">Gambar Diunggah via Tempat sekitar adalah gambar yang diunggah dengan menemukan tempat di peta.</string>
   <string name="thanks_received_explanation">Fitur ini memungkinkan penyunting mengirimkan sebuah pemberitahuan Terima kasih kepada pengguna yang membuat suntingan yang berguna – dengan menggunakan tautan terima kasih kecil di halaman riwayat atau \'\'diff\'\'.</string>
   <string name="copy_image_caption_description">Salin ke item berikutnya</string>
-  <string name="copied_successfully">Berhasil disalin</string>
+  <string name="copied_successfully">Tersalin</string>
   <string name="welcome_do_upload_content_description">Contoh gambar yang sebaiknya diunggah ke Commons</string>
   <string name="welcome_dont_upload_content_description">Contoh gambar yang sebaiknya tidak diunggah</string>
   <string name="skip_image">Lewati gambar ini</string>
@@ -783,7 +784,7 @@
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="other">%1$d gambar dipilih</item>
   </plurals>
-  <string name="talk">Bicara</string>
+  <string name="talk">Pembicaraan</string>
   <string name="cancelling_all_the_uploads">Membatalkan semua unggahan...</string>
   <string name="uploads">Unggahan</string>
   <string name="pending">Menunggu</string>

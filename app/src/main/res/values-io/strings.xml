@@ -252,6 +252,7 @@
   <string name="upload_problem_image_dark">L\'imajo esas multe obskura.</string>
   <string name="upload_problem_image_blurry">L\'imajo esas nebuloza.</string>
   <string name="upload_problem_image_duplicate">L\'imajo ja existas che Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Vua imajo esas en formato ne suportata dal servero di Commons. Pro to ol konvertesis a JPG.</string>
   <string name="upload_problem_different_geolocation">Ca imajo facesis en diferanta loko.</string>
   <string name="upload_problem_fbmd">Voluntez sendar nur imaji quin vu propra facis. Ne sendez imaji quin vu trovis en Facebook, che konti di altra personi.</string>
   <string name="upload_problem_do_you_continue">Ka vu ankore deziras sendar l\'arkivo?</string>
@@ -351,6 +352,8 @@
   <string name="quiz_screenshot_question">Ka ica skreno-kopiuro esas \'OK\' por sendar?</string>
   <string name="share_app_title">Partigez \'\'app\'\'</string>
   <string name="rotate">Rotacar</string>
+  <string name="crop">Rekortar</string>
+  <string name="blur">Nebulizar</string>
   <string name="error_fetching_nearby_places">Ne probis montrar loki proxima.</string>
   <string name="no_pictures_in_this_area">Nula pikturi en ca areo</string>
   <string name="no_nearby_places_around">Nula loki proxima trovesis</string>
@@ -418,6 +421,9 @@
   <string name="no_categories_selected_warning_desc">Imaji sen kategorii rare esas uzebla. Ka vu fakte deziras sendar ol sen selektar irga kategorio?</string>
   <string name="no_depictions_selected">Nula deskripturo selektita</string>
   <string name="no_depictions_selected_warning_desc">Imaji kun desegni esas plu facile trovebla, e plu probable uzebla. Ka vu fakte deziras durar, sen selektar desegni?</string>
+  <string name="depictions_choose_from_map">Selektar de mapo</string>
+  <string name="depictions_map_confirm">Konfirmar</string>
+  <string name="depictions_map_no_photo_location">Nula informo pri lokizo en la fotografuro. Montranta vua nuna lokizo</string>
   <string name="back_button_warning">Cesar kargajo</string>
   <string name="back_button_warning_desc">Kliktanta la butono \"desfacez/retroirar\" nihiligos la sendo dil arkivo</string>
   <string name="back_button_continue">Durar kargajo</string>
@@ -526,6 +532,8 @@
   <string name="delete_helper_ask_spam_selfie">\'\'selfie\'\'-imajo qua ne uzesas en irga artiklo</string>
   <string name="delete_helper_ask_spam_blurry">komplete neklara</string>
   <string name="delete_helper_ask_spam_nonsense">sensencajo, qua ne povas uzesar en irga artiklo</string>
+  <string name="delete_helper_ask_spam_other">Altraː informez adinfre</string>
+  <string name="delete_helper_other_notes_hint">Justifiko</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotografuro de komunikilaro</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda imajo de Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
@@ -690,6 +698,7 @@
   <string name="custom_selector_already_uploaded_image_text">Ca imajo ja sendesis a Commons.</string>
   <string name="custom_selector_over_limit_warning">Por teknikala motivi, l\'utensilo \'\'app\'\' ne povas fidinde sendar plua kam %1$d pikturi samatempe. La limito %1$d superesis per %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Eskartar</string>
+  <string name="custom_selector_duplicates_warning">Kelk imaji selektita esas duopligi, e removesos ante sendado.</string>
   <string name="custom_selector_button_limit_text">Maximo: %1$d</string>
   <string name="custom_selector_limit_error_desc">Eroro: Limito pri sendajo  transpasita</string>
   <string name="wlm_upload_info">Ca imajo partoprenos en konkurso \'\'Wiki Loves Monuments\'\'</string>
@@ -798,6 +807,7 @@
   <string name="pending">Vartanta</string>
   <string name="failed">Faliis</string>
   <string name="could_not_load_place_data">Ne povis inkluzar datumi pri la loko</string>
+  <string name="warning_for_no_option_selected">Selektez irga opciono por respondar la questiono</string>
   <string name="custom_selector_delete_folder">Efacar faldilo</string>
   <string name="custom_selector_confirm_deletion_title">Konfirmez efaco</string>
   <string name="custom_selector_confirm_deletion_message">Ka vu deziras efacar faldilo %1$s, kontenanta %2$d arkivi?</string>
@@ -828,4 +838,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Kreita da %1$s e sendita da %2$s</string>
   <string name="nominated_for_deletion_btn">Indikita por Efaco</string>
   <string name="custom_selector_max_image_limit_reached">Vu povas sendar admaxime %d imaji.</string>
+  <string name="edit_unsupported_format_explanation">Modifikuri uzanta aplo en reto nur esas disponebla por arkivi JPEG. Por altra formati, voluntez uzar extera utensilo.</string>
+  <string name="license_cc0_description">Nula autoroyuro. Vu liberigis omna autoroyuri pri ol, do irgu povas uzar ca arkivo irgamaniere.</string>
+  <string name="license_cc_by_description">Atribuo. Altri povas libere uzar ed adaptar ol, se li informez ke l\'autoro esas vu.</string>
+  <string name="license_cc_by_sa_description">Atribuo-\'\'ShareAlike\'\'. Altri povas uzar ed adaptar, tamen li mustas uzar la sama licenco kam vu, ed informar ke vu esas l\'autoro.</string>
+  <string name="license_cc0_long_description">Ca licenco posibligas altri riuzeri distribuar, mixigar, adaptar e konstruktar uzanta la materio en irga formato o suportilo, kun nula restrikto.</string>
+  <string name="license_cc_by_long_description">Ca licenco permisas riuzeri distribuar, mixigar, adaptar e konstruktar uzanta ca materio en irga formato o suportilo, mem kun skopo komercala, se li atribuos l\'autoreso a lua kreinto.</string>
+  <string name="license_cc_by_sa_long_description">Ca licenco posibligas riuzeri distribuar, mixigar, adaptar e konstruktar uzanta la materio en irga formato o suportilo, mem kun skopo komercala, se li atribuos l\'autoreso a lua kreinto, e la nova laboro licencesos sub identika kondicioni.</string>
 </resources>

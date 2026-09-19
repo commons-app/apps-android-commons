@@ -256,6 +256,14 @@
         android:resource="@xml/pic_of_day_app_widget_info" />
     </receiver>
 
+    <receiver
+      android:name=".utils.DownloadReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+      </intent-filter>
+    </receiver>
+
     <uses-library
       android:name="org.apache.http.legacy"
       android:required="false" />

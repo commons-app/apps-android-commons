@@ -533,7 +533,7 @@
   <string name="contributions_of_user">ব্যবহারকারীর অবদান: %1$s</string>
   <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">ব্যবহারকারীর পাতা দেখুন</string>
-  <string name="advanced_options">উচ্চতর বিকল্প</string>
+  <string name="advanced_options">উন্নত বিকল্প</string>
   <string name="apply">প্রয়োগ করুন</string>
   <string name="reset">পুনঃস্থাপন</string>
   <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>

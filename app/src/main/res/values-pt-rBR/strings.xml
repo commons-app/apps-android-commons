@@ -189,7 +189,7 @@
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
+  <string name="tutorial_1_text">O Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipédia.</string>
   <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
   <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
   <string name="tutorial_2_subtext_1">Objetos naturais (flores, animais, montanhas)</string>
@@ -621,7 +621,7 @@
   <string name="missing_category">- Adicione categorias a esta imagem para melhorar a usabilidade.</string>
   <string name="missing_article">- Adicione esta imagem ao artigo da Wikipédia associado que não possui imagens.</string>
   <string name="add_picture_to_wikipedia_article_title">Adicionar imagem à Wikipédia</string>
-  <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipedia em %1$s?</string>
+  <string name="add_picture_to_wikipedia_article_desc">Deseja adicionar esta imagem ao artigo da Wikipédia em %1$s?</string>
   <string name="confirm">Confirmar</string>
   <string name="instructions_title">Instruções</string>
   <string name="wikipedia_instructions_step_1">1. Use o seguinte wikitexto:</string>

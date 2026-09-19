@@ -19,6 +19,7 @@
 * Phjtieudoc
 * Thanhtai2009
 * Thienhau2003
+* ToitenAnh
 * Trần Xuân
 * Tuankiet65
 * Vinhtantran
@@ -26,7 +27,7 @@
 -->
 <resources>
   <string name="commons_facebook">Trang Facebook của Commons</string>
-  <string name="commons_github" fuzzy="true">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang web Commons</string>
   <string name="submit">Gửi</string>
@@ -154,9 +155,9 @@
   <string name="preference_license">Giấy phép mặc định</string>
   <string name="use_previous">Sử dụng tiêu đề và miêu tả trước</string>
   <string name="preference_theme">Giao diện</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Đánh giá–Chia sẻ tương tự 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">đánh giá 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">Ghi công–Chia sẻ tương tự 3.0</string>
+  <string name="license_name_cc_by_sa_four">Đánh giá–Chia sẻ tương tự 4.0</string>
+  <string name="license_name_cc_by_four">đánh giá 4.0</string>
+  <string name="license_name_cc_by_sa">Giấy phép Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -225,7 +226,7 @@
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Hình ảnh sơ đồ của một bài viết chung trên Wikipedia.</string>
+  <string name="welcome_image_welcome_wikipedia">\nHình ảnh minh họa sơ lược về một bài viết Wikipedia thông thường.</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Một bản vẽ của một đống giấy với biểu tượng bản quyền được cắt ngang.</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
   <string name="cancel">Hủy bỏ</string>

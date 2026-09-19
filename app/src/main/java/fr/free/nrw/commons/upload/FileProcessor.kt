@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -64,7 +65,7 @@ class FileProcessor
                     null
                 }
             // Redact EXIF data as indicated in preferences.
-            redactExifTags(exifInterface, getExifTagsToRedact())
+            redactExifTags(exifInterface, getExifTagsToRedact(), filePath)
             Timber.d("Calling GPSExtractor")
             val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
             if (originalImageCoordinates.decimalCoords == null) {
@@ -97,44 +98,35 @@ class FileProcessor
          *
          * @param exifInterface ExifInterface object
          * @param redactTags    tags to be redacted
+         * @param filePath      path to the file for direct metadata redaction
          */
         fun redactExifTags(
             exifInterface: ExifInterface?,
             redactTags: Set<String>,
+            filePath: String? = null,
         ) {
-            compositeDisposable.add(
-                Observable
-                    .fromIterable(redactTags)
-                    .flatMap { Observable.fromArray(*FileMetadataUtils.getTagsFromPref(it)) }
-                    .subscribe(
-                        { redactTag(exifInterface, it) },
-                        { Timber.d(it) },
-                        { save(exifInterface) },
-                    ),
-            )
-        }
-
-        private fun save(exifInterface: ExifInterface?) {
-            try {
-                exifInterface?.saveAttributes()
-            } catch (e: IOException) {
-                Timber.w("EXIF redaction failed: %s", e.toString())
+            // Expand preference-level tags into actual EXIF tag names.
+            val expandedTags = mutableSetOf<String>()
+            for (pref in redactTags) {
+                expandedTags.addAll(FileMetadataUtils.getTagsFromPref(pref))
             }
-        }
 
-        private fun redactTag(
-            exifInterface: ExifInterface?,
-            tag: String,
-        ) {
-            Timber.d("Checking for tag: %s", tag)
-            exifInterface
-                ?.getAttribute(tag)
-                ?.takeIf { it.isNotEmpty() }
-                ?.let { attributeName ->
-                    exifInterface.setAttribute(tag, null).also {
-                        Timber.d("Exif tag $tag with value $attributeName redacted.")
-                    }
+            // Redact from in-memory ExifInterface so callers see updated state.
+            for (tag in expandedTags) {
+                exifInterface?.getAttribute(tag)?.takeIf { it.isNotEmpty() }?.let {
+                    exifInterface.setAttribute(tag, null)
+                    Timber.d("Exif tag $tag with value $it redacted.")
                 }
+            }
+
+            // Write redaction to file using RandomAccessFile.
+            if (filePath != null) {
+                try {
+                    RandomAccessFileExifWriter.redactTags(File(filePath), expandedTags)
+                } catch (e: IOException) {
+                    Timber.w("EXIF redaction failed: %s", e.toString())
+                }
+            }
         }
 
     /**
