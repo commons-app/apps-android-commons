@@ -55,7 +55,9 @@ class PendingUploadsFragment :
     ): View {
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
-        pendingUploadsPresenter.onAttachView(this)
+        if (::pendingUploadsPresenter.isInitialized) {
+            pendingUploadsPresenter.onAttachView(this)
+        }
         initAdapter()
         return binding.root
     }
@@ -78,40 +80,42 @@ class PendingUploadsFragment :
     private fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter.setup()
-        pendingUploadsPresenter.totalContributionList
-            .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
-            contributionsSize = list.size
-            contributionsList = mutableListOf()
-            var pausedOrQueuedUploads = 0
-            list.forEach {
-                if (it != null) {
-                    if (it.state == STATE_PAUSED ||
-                        it.state == STATE_QUEUED ||
-                        it.state == STATE_IN_PROGRESS
-                    ) {
-                        contributionsList.add(it)
+        if (::pendingUploadsPresenter.isInitialized) {
+            pendingUploadsPresenter.setup()
+            pendingUploadsPresenter.totalContributionList
+                .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
+                    contributionsSize = list.size
+                    contributionsList = mutableListOf()
+                    var pausedOrQueuedUploads = 0
+                    list.forEach {
+                        if (it != null) {
+                            if (it.state == STATE_PAUSED ||
+                                it.state == STATE_QUEUED ||
+                                it.state == STATE_IN_PROGRESS
+                            ) {
+                                contributionsList.add(it)
+                            }
+                            if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
+                                pausedOrQueuedUploads++
+                            }
+                        }
                     }
-                    if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
-                        pausedOrQueuedUploads++
+                    if (contributionsSize == 0) {
+                        binding.nopendingTextView.visibility = View.VISIBLE
+                        binding.pendingUplaodsLl.visibility = View.GONE
+                        uploadProgressActivity.hidePendingIcons()
+                    } else {
+                        binding.nopendingTextView.visibility = View.GONE
+                        binding.pendingUplaodsLl.visibility = View.VISIBLE
+                        adapter.submitList(list)
+                        binding.progressTextView.setText("$contributionsSize uploads left")
+                        if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
+                            uploadProgressActivity.setPausedIcon(true)
+                        } else {
+                            uploadProgressActivity.setPausedIcon(false)
+                        }
                     }
                 }
-            }
-            if (contributionsSize == 0) {
-                binding.nopendingTextView.visibility = View.VISIBLE
-                binding.pendingUplaodsLl.visibility = View.GONE
-                uploadProgressActivity.hidePendingIcons()
-            } else {
-                binding.nopendingTextView.visibility = View.GONE
-                binding.pendingUplaodsLl.visibility = View.VISIBLE
-                adapter.submitList(list)
-                binding.progressTextView.setText("$contributionsSize uploads left")
-                if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
-                    uploadProgressActivity.setPausedIcon(true)
-                } else {
-                    uploadProgressActivity.setPausedIcon(false)
-                }
-            }
         }
     }
 
@@ -129,9 +133,11 @@ class PendingUploadsFragment :
             String.format(locale, activity.getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                pendingUploadsPresenter.deleteUpload(
-                    contribution, requireContext().applicationContext,
-                )
+                if (::pendingUploadsPresenter.isInitialized) {
+                    pendingUploadsPresenter.deleteUpload(
+                        contribution, requireContext().applicationContext,
+                    )
+                }
             },
             {},
         )
@@ -140,14 +146,22 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() = pendingUploadsPresenter.restartUploads(
-        contributionsList, 0, requireContext().applicationContext
-    )
+    fun restartUploads() {
+        if (::pendingUploadsPresenter.isInitialized) {
+            pendingUploadsPresenter.restartUploads(
+                contributionsList, 0, requireContext().applicationContext
+            )
+        }
+    }
 
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() = pendingUploadsPresenter.pauseUploads()
+    fun pauseUploads() {
+        if (::pendingUploadsPresenter.isInitialized) {
+            pendingUploadsPresenter.pauseUploads()
+        }
+    }
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
@@ -164,13 +178,15 @@ class PendingUploadsFragment :
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()
-                pendingUploadsPresenter.deleteUploads(
-                    listOf(
-                        STATE_QUEUED,
-                        STATE_IN_PROGRESS,
-                        STATE_PAUSED,
-                    ),
-                )
+                if (::pendingUploadsPresenter.isInitialized) {
+                    pendingUploadsPresenter.deleteUploads(
+                        listOf(
+                            STATE_QUEUED,
+                            STATE_IN_PROGRESS,
+                            STATE_PAUSED,
+                        ),
+                    )
+                }
             },
             {},
         )
