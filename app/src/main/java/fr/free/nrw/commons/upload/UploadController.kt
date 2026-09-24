@@ -60,7 +60,7 @@ class UploadController @Inject constructor(
             media.fallbackDescription = ""
         }
 
-        val license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3)
+        val license = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4)
         media.license = license
 
         buildUpload(contribution)
