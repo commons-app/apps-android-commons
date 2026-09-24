@@ -83,6 +83,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     var position: Int = 0
     private var pageBeforeScroll: Int? = null
     private var mediaFragmentBeforeScroll: MediaDetailFragment? = null
+    private var pagerScrollState: Int = ViewPager.SCROLL_STATE_IDLE
 
     /**
      * ProgressBar used to indicate the loading status of media items.
@@ -596,7 +597,32 @@ ${m.pageTitle.canonicalUri}"""
     override fun onPageSelected(i: Int) {
     }
 
+    fun onPrimaryMediaChanging(position: Int, fragment: MediaDetailFragment) {
+        if (mediaFragmentBeforeScroll == null) {
+            pageBeforeScroll = position
+            mediaFragmentBeforeScroll = fragment
+        }
+
+        val pager = binding!!.mediaDetailsPager
+        pager.post {
+            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                pauseOutgoingMedia()
+            }
+        }
+    }
+
+    private fun pauseOutgoingMedia() {
+        if (pageBeforeScroll != binding!!.mediaDetailsPager.currentItem) {
+            mediaFragmentBeforeScroll?.pauseMedia()
+        }
+
+        pageBeforeScroll = null
+        mediaFragmentBeforeScroll = null
+    }
+
     override fun onPageScrollStateChanged(i: Int) {
+        pagerScrollState = i
+
         when (i) {
             ViewPager.SCROLL_STATE_DRAGGING -> {
                 // Dragging can start again mid-settle, when the current page is
@@ -606,13 +632,8 @@ ${m.pageTitle.canonicalUri}"""
                     mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
                 }
             }
-
             ViewPager.SCROLL_STATE_IDLE -> {
-                if (pageBeforeScroll != binding!!.mediaDetailsPager.currentItem) {
-                    mediaFragmentBeforeScroll?.pauseMedia()
-                }
-                pageBeforeScroll = null
-                mediaFragmentBeforeScroll = null
+                pauseOutgoingMedia()
             }
         }
     }
