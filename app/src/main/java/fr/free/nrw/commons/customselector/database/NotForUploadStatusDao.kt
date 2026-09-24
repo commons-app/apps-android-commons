@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusRoomEntity
 
 /**
  * Dao class for Not For Upload
@@ -15,19 +16,32 @@ abstract class NotForUploadStatusDao {
      * Insert into Not For Upload status.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(notForUploadStatus: NotForUploadStatus)
+    protected abstract fun insertInternal(notForUploadStatus: NotForUploadStatusRoomEntity)
+
+    suspend fun insert(notForUploadStatus: NotForUploadStatus) {
+        insertInternal(toEntity(notForUploadStatus))
+    }
 
     /**
      * Delete Not For Upload status entry.
      */
     @Delete
-    abstract suspend fun delete(notForUploadStatus: NotForUploadStatus)
+    protected abstract fun deleteInternal(notForUploadStatus: NotForUploadStatusRoomEntity)
+
+    suspend fun delete(notForUploadStatus: NotForUploadStatus) {
+        deleteInternal(toEntity(notForUploadStatus))
+    }
 
     /**
      * Query Not For Upload status with image sha1.
      */
     @Query("SELECT * FROM images_not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
-    abstract suspend fun getFromImageSHA1(imageSHA1: String): NotForUploadStatus?
+    protected abstract fun getFromImageSHA1Internal(imageSHA1: String): NotForUploadStatusRoomEntity?
+
+    suspend fun getFromImageSHA1(imageSHA1: String): NotForUploadStatus? {
+        val entity = getFromImageSHA1Internal(imageSHA1)
+        return if (entity != null) fromEntity(entity) else null
+    }
 
     /**
      * Asynchronous image sha1 query.
@@ -50,4 +64,14 @@ abstract class NotForUploadStatusDao {
      */
     @Query("SELECT COUNT() FROM images_not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
     abstract suspend fun find(imageSHA1: String): Int
+
+    private fun toEntity(notForUploadStatus: NotForUploadStatus): NotForUploadStatusRoomEntity =
+        NotForUploadStatusRoomEntity(
+            imageSHA1 = notForUploadStatus.imageSHA1
+        )
+
+    private fun fromEntity(entity: NotForUploadStatusRoomEntity): NotForUploadStatus =
+        NotForUploadStatus(
+            imageSHA1 = entity.imageSHA1
+        )
 }

@@ -18,7 +18,7 @@ import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
@@ -70,7 +70,7 @@ class DescriptionEditActivity :
     private var progressDialog: ProgressDialog? = null
 
     @Inject
-    lateinit var recentLanguagesDao: RecentLanguagesDao
+    lateinit var recentLanguagesDao: RecentLanguagesRoomDao
 
     private lateinit var binding: ActivityDescriptionEditBinding
 

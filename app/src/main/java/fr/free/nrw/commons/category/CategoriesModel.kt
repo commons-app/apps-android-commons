@@ -15,11 +15,10 @@ import javax.inject.Inject
 /**
  * The model class for categories in upload
  */
-class CategoriesModel
-    @Inject
+class CategoriesModel @Inject
     constructor(
         private val categoryClient: CategoryClient,
-        private val categoryDao: CategoryDao,
+        private val categoryDao: CategoryRoomDao,
         private val gpsCategoryModel: GpsCategoryModel,
     ) {
         private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
@@ -72,20 +71,15 @@ class CategoriesModel
          * @param item
          */
         fun updateCategoryCount(item: CategoryItem) {
-            var category = categoryDao.find(item.name)
-
-            // Newly used category...
-            if (category == null) {
-                category = Category(
-                    null, item.name,
-                    item.description,
-                    item.thumbnail,
-                    Date(),
-                    0
-                )
-            }
+            val category = Category(
+                item.name,
+                item.description,
+                item.thumbnail,
+                Date(),
+                0
+            )
             category.incTimesUsed()
-            categoryDao.save(category)
+            categoryDao.save(category).blockingAwait()
         }
 
         /**
@@ -112,7 +106,7 @@ class CategoriesModel
                     categoriesFromDepiction(selectedDepictions),
                     gpsCategoryModel.categoriesFromLocation,
                     titleCategories(imageTitleList),
-                    Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
+                    Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT).blockingGet()),
                     Function4(::combine),
                 )
             } else {

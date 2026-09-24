@@ -48,13 +48,6 @@ class MockCommonsApplicationModule(appContext: Context) : CommonsApplicationModu
     val contributionClient: ContentProviderClient = mock()
     val modificationClient: ContentProviderClient = mock()
     val uploadPrefs: JsonKvStore = mock()
-
-    override fun provideCategoryContentProviderClient(context: Context): ContentProviderClient = categoryClient
-
-    override fun provideContributionContentProviderClient(context: Context): ContentProviderClient = contributionClient
-
-    override fun provideModificationContentProviderClient(context: Context): ContentProviderClient = modificationClient
-
     override fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore = defaultSharedPreferences
 
     override fun provideLocationServiceManager(context: Context): LocationServiceManager = locationServiceManager

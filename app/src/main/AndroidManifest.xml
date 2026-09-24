@@ -213,36 +213,6 @@
         android:name="android.support.FILE_PROVIDER_PATHS"
         android:resource="@xml/provider_paths" />
     </provider>
-    <provider
-      android:name=".category.CategoryContentProvider"
-      android:authorities="${applicationId}.categories.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_categories"
-      android:syncable="false" />
-    <provider
-      android:name=".explore.recentsearches.RecentSearchesContentProvider"
-      android:authorities="${applicationId}.explore.recentsearches.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_searches"
-      android:syncable="false" />
-    <provider
-      android:name=".recentlanguages.RecentLanguagesContentProvider"
-      android:authorities="${applicationId}.recentlanguages.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_recent_languages"
-      android:syncable="false" />
-    <provider
-      android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
-      android:authorities="${applicationId}.bookmarks.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_bookmarks"
-      android:syncable="false" />
-    <provider
-      android:name=".bookmarks.items.BookmarkItemsContentProvider"
-      android:authorities="${applicationId}.bookmarks.items.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_bookmarks_location"
-      android:syncable="false" />
 
     <receiver
       android:name=".widget.PicOfDayAppWidget"

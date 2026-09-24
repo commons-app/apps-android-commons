@@ -22,7 +22,14 @@ public abstract class PlaceDao {
      * @param place The Place object to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract void saveSynchronous(Place place);
+    public abstract void saveSynchronous(PlaceRoomEntity place);
+
+    void saveSynchronous(final Place place) {
+        saveSynchronous(new PlaceRoomEntity(place.getLanguage(), place.getName(), place.getLabel(),
+            place.getLongDescription(), place.getLocation(), place.entityID, place.getCategory(),
+            place.pic, place.exists, place.distance, place.siteLinks,
+            place.isMonument(), place.getThumb()));
+    }
 
     /**
      * Retrieves a Place object from the database based on the provided entity ID.

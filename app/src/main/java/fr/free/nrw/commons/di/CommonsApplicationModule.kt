@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.di
 
 import android.app.Activity
-import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -13,12 +12,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomDao
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesRoomDao
+import fr.free.nrw.commons.category.CategoryRoomDao
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader
@@ -90,50 +93,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         context.getString(R.string.license_name_cc_by_sa_four) to Prefs.Licenses.CC_BY_SA_4
     )
 
-    /**
-     * Provides an instance of CategoryContentProviderClient i.e. the categories
-     * that are there in local storage
-     */
-    @Provides
-    @Named("category")
-    open fun provideCategoryContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.CATEGORY_AUTHORITY)
-
-    @Provides
-    @Named("recentsearch")
-    fun provideRecentSearchContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.RECENT_SEARCH_AUTHORITY)
-
-    @Provides
-    @Named("contribution")
-    open fun provideContributionContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.CONTRIBUTION_AUTHORITY)
-
-    @Provides
-    @Named("modification")
-    open fun provideModificationContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.MODIFICATION_AUTHORITY)
-
-    @Provides
-    @Named("bookmarks")
-    fun provideBookmarkContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_AUTHORITY)
-
-    @Provides
-    @Named("bookmarksItem")
-    fun provideBookmarkItemContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY)
-
-    /**
-     * This method is used to provide instance of RecentLanguagesContentProvider
-     * which provides content of recent used languages from database
-     * @param context Context
-     * @return returns RecentLanguagesContentProvider
-     */
-    @Provides
-    @Named("recent_languages")
-    fun provideRecentLanguagesContentProviderClient(context: Context): ContentProviderClient? =
-        context.contentResolver.acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY)
 
     /**
      * Provides a Json store instance(JsonKvStore) which keeps
@@ -156,6 +115,7 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Singleton
     open fun provideLocationServiceManager(context: Context): LocationServiceManager =
         LocationServiceManager(context)
+
 
     @Provides
     @Singleton
@@ -237,6 +197,26 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     @Provides
     fun providesBookmarkCategoriesDao (appDatabase: AppDatabase): BookmarkCategoriesDao =
         appDatabase.bookmarkCategoriesDao()
+
+    @Provides
+    fun providesCategoryRoomDao(appDatabase: AppDatabase): CategoryRoomDao =
+        appDatabase.categoryRoomDao()
+
+    @Provides
+    fun providesBookmarkPicturesRoomDao(appDatabase: AppDatabase): BookmarkPicturesRoomDao =
+        appDatabase.bookmarkPicturesRoomDao()
+
+    @Provides
+    fun providesBookmarkItemsRoomDao(appDatabase: AppDatabase): BookmarkItemsRoomDao =
+        appDatabase.bookmarkItemsRoomDao()
+
+    @Provides
+    fun providesRecentLanguagesRoomDao(appDatabase: AppDatabase): RecentLanguagesRoomDao =
+        appDatabase.recentLanguagesRoomDao()
+
+    @Provides
+    fun providesRecentSearchesRoomDao(appDatabase: AppDatabase): RecentSearchesRoomDao =
+        appDatabase.recentSearchesRoomDao()
 
     @Provides
     fun providesContentResolver(context: Context): ContentResolver =

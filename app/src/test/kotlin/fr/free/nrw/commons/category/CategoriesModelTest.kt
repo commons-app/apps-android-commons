@@ -21,7 +21,7 @@ import org.mockito.MockitoAnnotations
 // class for testing CategoriesModel class
 class CategoriesModelTest {
     @Mock
-    internal lateinit var categoryDao: CategoryDao
+    internal lateinit var categoryDao: CategoryRoomDao
 
     @Mock
     internal lateinit var categoryClient: CategoryClient
@@ -35,6 +35,8 @@ class CategoriesModelTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        // Default mock returns for Room DAO reactive methods
+        whenever(categoryDao.save(any())).thenReturn(io.reactivex.Completable.complete())
         categoriesModel = CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
     }
 
@@ -139,14 +141,11 @@ class CategoriesModelTest {
             ),
         )
         whenever(categoryDao.recentCategories(25)).thenReturn(
-            listOf(
-                CategoryItem(
-                    "recentCategories",
-                    "",
-                    "",
-                    false,
-                ),
-            ),
+            Single.just(
+                listOf(
+                    CategoryItem("recentCategories", "", "", false)
+                )
+            )
         )
         whenever(
             categoryClient.getCategoriesByName(
