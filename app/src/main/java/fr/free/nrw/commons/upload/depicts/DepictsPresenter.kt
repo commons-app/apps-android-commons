@@ -141,7 +141,7 @@ class DepictsPresenter
                 repository.getPlaceDepictions()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
-                    .subscribe(::selectNewDepictions),
+                    .subscribe(::selectNewDepictions, { Timber.e(it) }),
             )
         }
 
