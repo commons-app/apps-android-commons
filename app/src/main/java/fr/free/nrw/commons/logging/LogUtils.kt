@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.logging
 
-import android.os.Environment
+import android.content.Context
 
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.ConfigUtils
@@ -14,19 +14,18 @@ object LogUtils {
     /**
      * Returns the directory for saving logs on the device.
      *
+     * Logs are written to app-scoped external storage so they do not clutter
+     * the user's Downloads folder. Falls back to internal files dir if external
+     * storage is unavailable.
+     *
      * @return The path to the log directory.
      */
-    fun getLogDirectory(): String {
+    fun getLogDirectory(context: Context): String {
+        val base = context.getExternalFilesDir(null) ?: context.filesDir
         val dirPath = if (ConfigUtils.isBetaFlavour) {
-            "${Environment
-                .getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS
-                )}/logs/beta"
+            "$base/logs/beta"
         } else {
-            "${Environment
-                .getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS
-                )}/logs/prod"
+            "$base/logs/prod"
         }
 
         FileUtils.recursivelyCreateDirs(dirPath)
@@ -38,17 +37,12 @@ object LogUtils {
      *
      * @return The path to the zipped log directory.
      */
-    fun getLogZipDirectory(): String {
+    fun getLogZipDirectory(context: Context): String {
+        val base = context.getExternalFilesDir(null) ?: context.filesDir
         val dirPath = if (ConfigUtils.isBetaFlavour) {
-            "${Environment
-                .getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS
-                )}/logs/beta/zip"
+            "$base/logs/beta/zip"
         } else {
-            "${Environment
-                .getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS
-                )}/logs/prod/zip"
+            "$base/logs/prod/zip"
         }
 
         FileUtils.recursivelyCreateDirs(dirPath)
