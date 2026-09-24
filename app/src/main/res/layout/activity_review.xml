@@ -70,7 +70,7 @@
           android:layout_marginTop="@dimen/tiny_padding"
           android:layout_weight="1">
 
-          <com.facebook.drawee.view.SimpleDraweeView
+          <ImageView
             android:id="@+id/review_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

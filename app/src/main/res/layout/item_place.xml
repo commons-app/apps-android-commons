@@ -14,7 +14,7 @@
       app:srcCompat="@drawable/ic_round_star_border_24px"
       app:tint="?attr/rowButtonColor" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/dimen_40"
         android:layout_height="@dimen/dimen_40"

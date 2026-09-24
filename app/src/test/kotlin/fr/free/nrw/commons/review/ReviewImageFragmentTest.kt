@@ -10,8 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import com.nhaarman.mockitokotlin2.doReturn
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -65,9 +64,7 @@ class ReviewImageFragmentTest {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
-        SoLoader.setInTestMode()
 
-        Fresco.initialize(context)
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
         fragment = ReviewImageFragment()
         val bundle = Bundle()

@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
           android:id="@+id/review_image_view"
           android:layout_width="match_parent"
           android:layout_height="match_parent"

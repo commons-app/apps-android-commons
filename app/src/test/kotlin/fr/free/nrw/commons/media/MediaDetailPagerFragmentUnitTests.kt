@@ -10,8 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.never
@@ -85,10 +84,6 @@ class MediaDetailPagerFragmentUnitTests {
         WorkManagerTestInitHelper.initializeTestWorkManager(context)
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
-
-        SoLoader.setInTestMode()
-
-        Fresco.initialize(context)
 
         val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         binding = FragmentMediaDetailPagerBinding.inflate(activity.layoutInflater)
