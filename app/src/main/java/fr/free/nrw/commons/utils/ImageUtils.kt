@@ -163,9 +163,13 @@ object ImageUtils {
         val brightPixelThreshold = 0.025 * allPixelsCount
         val mediumBrightPixelThreshold = 0.3 * allPixelsCount
 
-        for (x in 0 until bitmapWidth) {
-            for (y in 0 until bitmapHeight) {
-                val pixel = bitmap.getPixel(x, y)
+        val highBrightnessLuminance = 40
+        val mediumBrightnessLuminance = 26
+
+        val rowPixels = IntArray(bitmapWidth)
+        for (y in 0 until bitmapHeight) {
+            bitmap.getPixels(rowPixels, 0, bitmapWidth, 0, y, bitmapWidth, 1)
+            for (pixel in rowPixels) {
                 val r = Color.red(pixel)
                 val g = Color.green(pixel)
                 val b = Color.blue(pixel)
@@ -174,9 +178,6 @@ object ImageUtils {
                 val min = minOf(r, g, b) / 255.0
 
                 val luminance = ((max + min) / 2.0) * 100
-
-                val highBrightnessLuminance = 40
-                val mediumBrightnessLuminance = 26
 
                 if (luminance < highBrightnessLuminance) {
                     if (luminance > mediumBrightnessLuminance) {
