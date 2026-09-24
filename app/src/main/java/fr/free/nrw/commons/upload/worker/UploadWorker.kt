@@ -73,7 +73,7 @@ class UploadWorker(
     lateinit var uploadClient: UploadClient
 
     @Inject
-    lateinit var mediaClient: MediaClient
+    internal lateinit var mediaClient: MediaClient
 
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
@@ -562,20 +562,15 @@ class UploadWorker(
         }
     }
 
-    private fun findUniqueFileName(fileName: String): String {
+    internal fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
         val random = Random()
 
         // Loops until sequenceFileName does not match any existing file names
         while (mediaClient
                 .checkPageExistsUsingTitle(
-                    String.format(
-                        "File:%s",
-                        sequenceFileName,
-                    ),
-                ).blockingGet()) {
-
-            // Generate a random 5-character alphanumeric string
+                "File:$sequenceFileName")
+                .blockingGet()) {
             val randomHash = (random.nextInt(90000) + 10000).toString()
 
             sequenceFileName =
