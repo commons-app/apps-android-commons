@@ -203,7 +203,8 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
     ).addMigrations(
         MIGRATION_1_2,
         MIGRATION_19_TO_20,
-        MIGRATION_21_22
+        MIGRATION_21_22,
+        MIGRATION_22_23
     ).fallbackToDestructiveMigration().build()
 
     @Provides
@@ -516,6 +517,19 @@ val MIGRATION_21_22 = object : Migration(21, 22) {
             Timber.e(e, "Exception during legacy database migration")
             throw e
         }
+    }
+}
+
+val MIGRATION_22_23 = object : Migration(22, 23) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
+                CREATE TABLE IF NOT EXISTS `bookmarks_categories` (
+                    `categoryName` TEXT NOT NULL,
+                    PRIMARY KEY(`categoryName`)
+                )
+            """.trimIndent()
+        )
     }
 }
 
