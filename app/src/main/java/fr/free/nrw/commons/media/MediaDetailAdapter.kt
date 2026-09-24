@@ -16,6 +16,7 @@ class MediaDetailAdapter(
      * Keeps track of the current displayed fragment.
      */
     private var currentFragment: Fragment? = null
+    private var currentPosition: Int = 0
 
     override fun getItem(i: Int): Fragment {
         if (i == 0) {
@@ -69,8 +70,12 @@ class MediaDetailAdapter(
     ) {
         // Update the current fragment if changed
         if (currentFragment !== obj) {
+            currentMediaDetailFragment?.let {
+                mediaDetailPagerFragment.onPrimaryMediaChanging(currentPosition, it)
+            }
             currentFragment = (obj as Fragment)
         }
+        currentPosition = position
         super.setPrimaryItem(container, position, obj)
     }
 }

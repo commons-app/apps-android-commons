@@ -3,19 +3,43 @@ package fr.free.nrw.commons.db
 import android.content.Context
 import android.database.Cursor
 import androidx.room.Room
+import androidx.room.testing.MigrationTestHelper
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
-import fr.free.nrw.commons.di.MIGRATION_21_22
+import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.ALL_MIGRATIONS
 import org.junit.Assert
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
+private const val ROOM_DB = "commons_room.db"
+private const val LEGACY_DB = "commons.db"
+
+/**
+ * The version [AppDatabase] currently declares.
+ */
+private fun latestVersion(context: Context): Int {
+    val database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+    try {
+        return database.openHelper.readableDatabase.version
+    } finally {
+        database.close()
+    }
+}
+
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class MigrationTest {
+
+    @get:Rule
+    val helper = MigrationTestHelper(
+        InstrumentationRegistry.getInstrumentation(),
+        AppDatabase::class.java
+    )
 
     @Test
     fun testMigration() {
@@ -32,60 +56,108 @@ class MigrationTest {
         legacyDb.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('English', 'en')")
         legacyDb.close()
 
-        // mock old version to trigger migration.
-        val presentRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
-        ).allowMainThreadQueries().build()
-        presentRoomDatabase.openHelper.writableDatabase.version = 21
-        presentRoomDatabase.close()
-
-        val migratingRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
+        // build "commons_room.db" as it was at version 21, then migrate it.
+        helper.createDatabase(ROOM_DB, 21).close()
+        val migratedDb = helper.runMigrationsAndValidate(
+            ROOM_DB, latestVersion(context), true, *ALL_MIGRATIONS
         )
-            .addMigrations(MIGRATION_21_22)
-            .allowMainThreadQueries()
-            .build()
 
         // tests
         try {
             // categories
-            var cursor: Cursor = migratingRoomDatabase.query("SELECT * FROM categories", null)
+            var cursor: Cursor = migratedDb.query("SELECT * FROM categories")
             Assert.assertTrue("category migrated", cursor.moveToFirst())
             Assert.assertEquals("Nature", cursor.getString(cursor.getColumnIndex("name")))
             cursor.close()
 
             // bookmarks
-            cursor = migratingRoomDatabase.query("SELECT * FROM bookmarks", null)
+            cursor = migratedDb.query("SELECT * FROM bookmarks")
             Assert.assertTrue("bookmark migrated", cursor.moveToFirst())
             Assert.assertEquals("media1", cursor.getString(cursor.getColumnIndex("media_name")))
             cursor.close()
 
             // bookmark items
-            cursor = migratingRoomDatabase.query("SELECT * FROM bookmarksItems", null)
+            cursor = migratedDb.query("SELECT * FROM bookmarksItems")
             Assert.assertTrue("bookmarkItems migrated", cursor.moveToFirst())
             Assert.assertEquals("item1", cursor.getString(cursor.getColumnIndex("item_name")))
             cursor.close()
 
             // recent searches
-            cursor = migratingRoomDatabase.query("SELECT * FROM recent_searches", null)
+            cursor = migratedDb.query("SELECT * FROM recent_searches")
             Assert.assertTrue("recent_searches migrated", cursor.moveToFirst())
             Assert.assertEquals("search1", cursor.getString(cursor.getColumnIndex("name")))
             cursor.close()
 
             // recent languages
-            cursor = migratingRoomDatabase.query("SELECT * FROM recent_languages", null)
+            cursor = migratedDb.query("SELECT * FROM recent_languages")
             Assert.assertTrue("recent_languages migrated", cursor.moveToFirst())
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
 
         } finally {
-            migratingRoomDatabase.close()
-            context.deleteDatabase("commons.db")
-            context.deleteDatabase("commons_room.db")
+            migratedDb.close()
+            context.deleteDatabase(LEGACY_DB)
+            context.deleteDatabase(ROOM_DB)
+        }
+    }
+
+    @Test
+    fun testContributionsSurviveMigration() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val oldDb = helper.createDatabase(ROOM_DB, 21)
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                mimeType, media_pageId, media_filename, media_captions, media_descriptions,
+                media_depictionIds, media_creatorIds, media_categoriesHiddenStatus
+            ) VALUES
+                (
+                    '9000029', 1, 0, '[]', 0, 0, 0,
+                    'application/ogg', '9000029', 'File:Big Buck Bunny medium.ogv',
+                    '{}', '{}', '[]', '[]', '{}'
+                ),
+                (
+                    '6428847', 1, 0, '[]', 0, 0, 0,
+                    NULL, '6428847', 'File:Example.jpg',
+                    '{}', '{}', '[]', '[]', '{}'
+                )
+            """.trimIndent()
+        )
+        oldDb.close()
+
+        val migratedDb = helper.runMigrationsAndValidate(
+            ROOM_DB, latestVersion(context), true, *ALL_MIGRATIONS
+        )
+
+        try {
+            var cursor: Cursor =
+                migratedDb.query("SELECT * FROM contribution WHERE pageId = '9000029'")
+            // Asserts a row came back, and moves the cursor onto it for the reads below.
+            Assert.assertTrue("contribution migrated", cursor.moveToFirst())
+            Assert.assertEquals(
+                "File:Big Buck Bunny medium.ogv",
+                cursor.getString(cursor.getColumnIndex("media_filename"))
+            )
+            // application/ogg with a .ogv name, so the extension fallback decides.
+            Assert.assertEquals(
+                "VIDEO",
+                cursor.getString(cursor.getColumnIndex("media_mediaType"))
+            )
+            cursor.close()
+
+            // Nothing to classify a row with no mime type, so it keeps the default.
+            cursor = migratedDb.query("SELECT * FROM contribution WHERE pageId = '6428847'")
+            Assert.assertTrue("contribution migrated", cursor.moveToFirst())
+            Assert.assertEquals(
+                "OTHER",
+                cursor.getString(cursor.getColumnIndex("media_mediaType"))
+            )
+            cursor.close()
+        } finally {
+            migratedDb.close()
+            context.deleteDatabase(ROOM_DB)
         }
     }
 }

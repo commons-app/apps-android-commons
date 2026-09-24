@@ -1,0 +1,610 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 21,
+    "identityHash": "acf149ff10775684ee87f489f28e0bd3",
+    "entities": [
+      {
+        "tableName": "contribution",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
+        "fields": [
+          {
+            "fieldPath": "pageId",
+            "columnName": "pageId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transferred",
+            "columnName": "transferred",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "decimalCoords",
+            "columnName": "decimalCoords",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreatedSource",
+            "columnName": "dateCreatedSource",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wikidataPlace",
+            "columnName": "wikidataPlace",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "chunkInfo",
+            "columnName": "chunkInfo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "errorInfo",
+            "columnName": "errorInfo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "depictedItems",
+            "columnName": "depictedItems",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mimeType",
+            "columnName": "mimeType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "localUri",
+            "columnName": "localUri",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataLength",
+            "columnName": "dataLength",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreatedString",
+            "columnName": "dateCreatedString",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateUploadStarted",
+            "columnName": "dateUploadStarted",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hasInvalidLocation",
+            "columnName": "hasInvalidLocation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contentUri",
+            "columnName": "contentUri",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "countryCode",
+            "columnName": "countryCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "retries",
+            "columnName": "retries",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.pageId",
+            "columnName": "media_pageId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.thumbUrl",
+            "columnName": "media_thumbUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.imageUrl",
+            "columnName": "media_imageUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.filename",
+            "columnName": "media_filename",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.fallbackDescription",
+            "columnName": "media_fallbackDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.dateUploaded",
+            "columnName": "media_dateUploaded",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.license",
+            "columnName": "media_license",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.licenseUrl",
+            "columnName": "media_licenseUrl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.author",
+            "columnName": "media_author",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.user",
+            "columnName": "media_user",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.creatorName",
+            "columnName": "media_creatorName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.categories",
+            "columnName": "media_categories",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.coordinates",
+            "columnName": "media_coordinates",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "media.captions",
+            "columnName": "media_captions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.descriptions",
+            "columnName": "media_descriptions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.depictionIds",
+            "columnName": "media_depictionIds",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.creatorIds",
+            "columnName": "media_creatorIds",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.categoriesHiddenStatus",
+            "columnName": "media_categoriesHiddenStatus",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.addedCategories",
+            "columnName": "media_addedCategories",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "pageId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "depicts_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`item` TEXT NOT NULL, `lastUsed` INTEGER NOT NULL, PRIMARY KEY(`item`))",
+        "fields": [
+          {
+            "fieldPath": "item",
+            "columnName": "item",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUsed",
+            "columnName": "lastUsed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "item"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "uploaded_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageSHA1` TEXT NOT NULL, `modifiedImageSHA1` TEXT NOT NULL, `imageResult` INTEGER NOT NULL, `modifiedImageResult` INTEGER NOT NULL, `lastUpdated` INTEGER, PRIMARY KEY(`imageSHA1`))",
+        "fields": [
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modifiedImageSHA1",
+            "columnName": "modifiedImageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageResult",
+            "columnName": "imageResult",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modifiedImageResult",
+            "columnName": "modifiedImageResult",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageSHA1"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_uploaded_table_modifiedImageSHA1",
+            "unique": true,
+            "columnNames": [
+              "modifiedImageSHA1"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_uploaded_table_modifiedImageSHA1` ON `${TABLE_NAME}` (`modifiedImageSHA1`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "images_not_for_upload_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageSHA1` TEXT NOT NULL, PRIMARY KEY(`imageSHA1`))",
+        "fields": [
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageSHA1"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "reviewed-images",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageId` TEXT NOT NULL, PRIMARY KEY(`imageId`))",
+        "fields": [
+          {
+            "fieldPath": "imageId",
+            "columnName": "imageId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "place",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`language` TEXT, `name` TEXT, `label` TEXT, `longDescription` TEXT, `entityID` TEXT NOT NULL, `category` TEXT, `pic` TEXT, `exists` INTEGER, `distance` TEXT, `siteLinks` TEXT, `isMonument` INTEGER NOT NULL, `thumb` TEXT, `latitude` REAL, `longitude` REAL, `accuracy` REAL, PRIMARY KEY(`entityID`))",
+        "fields": [
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longDescription",
+            "columnName": "longDescription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "entityID",
+            "columnName": "entityID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pic",
+            "columnName": "pic",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "exists",
+            "columnName": "exists",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "distance",
+            "columnName": "distance",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "siteLinks",
+            "columnName": "siteLinks",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isMonument",
+            "columnName": "isMonument",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumb",
+            "columnName": "thumb",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location.accuracy",
+            "columnName": "accuracy",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "entityID"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "bookmarks_categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryName` TEXT NOT NULL, PRIMARY KEY(`categoryName`))",
+        "fields": [
+          {
+            "fieldPath": "categoryName",
+            "columnName": "categoryName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "categoryName"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "bookmarks_locations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_name` TEXT NOT NULL, `location_language` TEXT NOT NULL, `location_description` TEXT NOT NULL, `location_lat` REAL NOT NULL, `location_long` REAL NOT NULL, `location_category` TEXT NOT NULL, `location_label_text` TEXT NOT NULL, `location_label_icon` INTEGER, `location_image_url` TEXT NOT NULL, `location_wikipedia_link` TEXT NOT NULL, `location_wikidata_link` TEXT NOT NULL, `location_commons_link` TEXT NOT NULL, `location_pic` TEXT NOT NULL, `location_exists` INTEGER NOT NULL, PRIMARY KEY(`location_name`))",
+        "fields": [
+          {
+            "fieldPath": "locationName",
+            "columnName": "location_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLanguage",
+            "columnName": "location_language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationDescription",
+            "columnName": "location_description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLat",
+            "columnName": "location_lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLong",
+            "columnName": "location_long",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationCategory",
+            "columnName": "location_category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLabelText",
+            "columnName": "location_label_text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLabelIcon",
+            "columnName": "location_label_icon",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "locationImageUrl",
+            "columnName": "location_image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationWikipediaLink",
+            "columnName": "location_wikipedia_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationWikidataLink",
+            "columnName": "location_wikidata_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationCommonsLink",
+            "columnName": "location_commons_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationPic",
+            "columnName": "location_pic",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationExists",
+            "columnName": "location_exists",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "location_name"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'acf149ff10775684ee87f489f28e0bd3')"
+    ]
+  }
+}

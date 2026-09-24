@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
@@ -14,10 +16,15 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaType
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
@@ -121,6 +128,52 @@ class MediaDetailPagerFragmentUnitTests {
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
         Assert.assertNotNull(fragment)
+    }
+
+    private fun createOptionsMenuFor(mediaType: MediaType): Menu {
+        val provider = mock<MediaDetailProvider>()
+        doReturn(media).whenever(provider).getMediaAtPosition(any())
+        doReturn(null).whenever(provider).getContributionStateAt(any())
+        fragment.mediaDetailProvider = provider
+
+        whenever(media.mediaType).thenReturn(mediaType)
+        whenever(media.filename).thenReturn("File:Big Buck Bunny medium.ogv")
+        whenever(sessionManager!!.isUserLoggedIn).thenReturn(true)
+        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+        Whitebox.setInternalState(fragment, "bookmarkDao", mock<BookmarkPicturesDao>())
+
+        val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
+        val realMenu = PopupMenu(activity, View(activity)).menu
+        fragment.onCreateOptionsMenu(realMenu, activity.menuInflater)
+
+        return realMenu
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testWallpaperAndAvatarAreHiddenForVideo() {
+        val menu = createOptionsMenuFor(MediaType.VIDEO)
+
+        Assert.assertFalse(menu.findItem(R.id.menu_set_as_wallpaper).isVisible)
+        Assert.assertFalse(menu.findItem(R.id.menu_set_as_avatar).isVisible)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testWallpaperAndAvatarAreHiddenForAudio() {
+        val menu = createOptionsMenuFor(MediaType.AUDIO)
+
+        Assert.assertFalse(menu.findItem(R.id.menu_set_as_wallpaper).isVisible)
+        Assert.assertFalse(menu.findItem(R.id.menu_set_as_avatar).isVisible)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testWallpaperAndAvatarStayVisibleForImages() {
+        val menu = createOptionsMenuFor(MediaType.IMAGE)
+
+        Assert.assertTrue(menu.findItem(R.id.menu_set_as_wallpaper).isVisible)
+        Assert.assertTrue(menu.findItem(R.id.menu_set_as_avatar).isVisible)
     }
 
     @Test
