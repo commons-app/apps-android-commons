@@ -843,7 +843,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         when (media.mediaType) {
             MediaType.VIDEO,
             MediaType.AUDIO -> prepareMedia()
-            MediaType.IMAGE,
+            MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
             MediaType.OTHER -> Unit
         }
     }
