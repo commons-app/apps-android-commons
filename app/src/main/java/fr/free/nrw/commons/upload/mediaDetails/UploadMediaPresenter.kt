@@ -373,6 +373,18 @@ class UploadMediaPresenter @Inject constructor(
     }
 
     /**
+     * Forces a check on the image quality for a specific fragment index
+     *
+     * @param index Index of the UploadItem whose quality is to be checked
+     */
+    override fun checkImageQuality(index: Int) {
+        val uploadItems = repository.getUploads()
+        if (index in uploadItems.indices) {
+            checkImageQuality(uploadItems[index], index)
+        }
+    }
+
+    /**
      * Updates the image qualities stored in JSON, whenever an image is deleted
      *
      * @param size Size of uploadableFiles
