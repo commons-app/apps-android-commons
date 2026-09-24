@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -45,4 +46,20 @@ interface LoginInterface {
     fun getUserInfo(
         @Query("ususers") userName: String,
     ): Observable<MwQueryResponse?>
+
+    @GET("w/rest.php/oauth2/resource/profile")
+    fun getOAuthProfile(
+        @Header("Authorization") bearerToken: String
+    ): Call<OAuthProfileResponse>
+
+    @FormUrlEncoded
+    @POST("w/rest.php/oauth2/access_token")
+    fun grantOAuthToken(
+        @Field("grant_type") grantType: String = "authorization_code",
+        @Field("code") code: String,
+        @Field("client_id") clientId: String,
+        @Field("client_secret") clientSecret: String,
+        @Field("code_verifier") codeVerifier: String,
+        @Field("redirect_uri") redirectUri: String
+    ): Call<OAuthTokenResponse>
 }
