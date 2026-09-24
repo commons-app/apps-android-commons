@@ -27,6 +27,7 @@ import fr.free.nrw.commons.wikidata.model.WikiBaseMonolingualTextValue
 import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.rx2.await
 import timber.log.Timber
 import java.util.Arrays
 import java.util.Collections
@@ -80,37 +81,37 @@ class WikidataEditService @Inject constructor(
         depictedItems: List<String>
     ): Observable<Boolean> {
         val entityId: String = PAGE_ID_PREFIX + fileEntityId
-        val claimIds = getDepictionsClaimIds(entityId)
+        return getDepictionsClaimIds(entityId).flatMap { claimIds ->
 
-        /* Please consider removeClaim scenario for BetaDebug */
-        val data = RemoveClaim.from(if (isBetaFlavour) listOf("Q10") else claimIds)
+            /* Please consider removeClaim scenario for BetaDebug */
+            val data = RemoveClaim.from(if (isBetaFlavour) listOf("Q10") else claimIds)
 
-        return wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
-            .doOnError { throwable: Throwable? ->
-                Timber.e(
-                    throwable,
-                    "Error occurred while removing existing claims for DEPICTS property"
-                )
-                showLongToast(
-                    context,
-                    context.getString(R.string.wikidata_edit_failure)
-                )
-            }.switchMap { success: Boolean ->
-                if (success) {
-                    Timber.d("DEPICTS property was deleted successfully")
-                    return@switchMap addDepictsProperty(fileEntityId!!, depictedItems)
-                } else {
-                    Timber.d("Unable to delete DEPICTS property")
-                    return@switchMap Observable.empty<Boolean>()
+            wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
+                .doOnError { throwable: Throwable? ->
+                    Timber.e(
+                        throwable,
+                        "Error occurred while removing existing claims for DEPICTS property"
+                    )
+                    showLongToast(
+                        context,
+                        context.getString(R.string.wikidata_edit_failure)
+                    )
+                }.switchMap { success: Boolean ->
+                    if (success) {
+                        Timber.d("DEPICTS property was deleted successfully")
+                        return@switchMap addDepictsProperty(fileEntityId!!, depictedItems)
+                    } else {
+                        Timber.d("Unable to delete DEPICTS property")
+                        return@switchMap Observable.empty<Boolean>()
+                    }
                 }
-            }
+        }
     }
 
     @SuppressLint("CheckResult")
-    private fun getDepictionsClaimIds(entityId: String): List<String> {
+    private fun getDepictionsClaimIds(entityId: String): Observable<List<String>> {
         return wikiBaseClient.getClaimIdsByProperty(entityId, DEPICTS.propertyName)
             .subscribeOn(Schedulers.io())
-            .blockingFirst()
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -151,7 +152,7 @@ class WikidataEditService @Inject constructor(
         }
     }
 
-    fun createClaim(
+    suspend fun createClaim(
         wikidataPlace: WikidataPlace?, fileName: String,
         captions: Map<String, String>
     ): Long? {
@@ -164,7 +165,7 @@ class WikidataEditService @Inject constructor(
         return addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
     }
 
-    fun addImageAndMediaLegends(
+    suspend fun addImageAndMediaLegends(
         wikidataItem: WikidataItem, fileName: String,
         captions: Map<String, String>
     ): Long {
@@ -193,7 +194,7 @@ class WikidataEditService @Inject constructor(
             ), Arrays.asList(MEDIA_LEGENDS.propertyName)
         )
 
-        return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
+        return wikidataClient.setClaim(claim, COMMONS_APP_TAG).firstOrError().await()
     }
 
     fun handleImageClaimResult(wikidataItem: WikidataItem, revisionId: Long?, p18WasSkipped: Boolean = false) {
