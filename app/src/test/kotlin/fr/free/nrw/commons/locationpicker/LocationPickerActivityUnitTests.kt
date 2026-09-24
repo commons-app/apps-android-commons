@@ -8,21 +8,26 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CameraPosition
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
+import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
@@ -81,12 +86,19 @@ class LocationPickerActivityUnitTests {
     @Mock
     private lateinit var tvAttribution: AppCompatTextView
 
+    @Mock
+    private lateinit var coordinateEditHelper: CoordinateEditHelper
+
+    @Mock
+    private lateinit var mockMedia: Media
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.getApplication().applicationContext
         activity = Robolectric.buildActivity(LocationPickerActivity::class.java).get()
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
 
         Whitebox.setInternalState(activity, "mapView", mapView)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
@@ -101,6 +113,13 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "smallToolbarText", smallToolbarText)
         Whitebox.setInternalState(activity, "fabCenterOnLocation", fabCenterOnLocation)
         Whitebox.setInternalState(activity, "tvAttribution", tvAttribution)
+        Whitebox.setInternalState(activity, "coordinateEditHelper", coordinateEditHelper)
+    }
+
+    @After
+    fun tearDown() {
+        RxJavaPlugins.reset()
+        RxAndroidPlugins.reset()
     }
 
     @Test
@@ -151,6 +170,51 @@ class LocationPickerActivityUnitTests {
             )
         method.isAccessible = true
         method.invoke(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRemoveLocationFromImageWhenMediaIsNull() {
+        Whitebox.setInternalState(activity, "media", null as Media?)
+        val method: Method =
+            LocationPickerActivity::class.java.getDeclaredMethod("removeLocationFromImage")
+        method.isAccessible = true
+        method.invoke(activity)
+        Assert.assertTrue(activity.isFinishing)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRemoveLocationFromImageSuccess() {
+        Whitebox.setInternalState(activity, "media", mockMedia)
+        `when`(
+            coordinateEditHelper.makeCoordinatesEdit(
+                any(), any(), any(), any(), any()
+            )
+        ).thenReturn(Single.just(true))
+        val method: Method =
+            LocationPickerActivity::class.java.getDeclaredMethod("removeLocationFromImage")
+        method.isAccessible = true
+        method.invoke(activity)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Assert.assertTrue(activity.isFinishing)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRemoveLocationFromImageError() {
+        Whitebox.setInternalState(activity, "media", mockMedia)
+        `when`(
+            coordinateEditHelper.makeCoordinatesEdit(
+                any(), any(), any(), any(), any()
+            )
+        ).thenReturn(Single.error(RuntimeException("network error")))
+        val method: Method =
+            LocationPickerActivity::class.java.getDeclaredMethod("removeLocationFromImage")
+        method.isAccessible = true
+        method.invoke(activity)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Assert.assertTrue(activity.isFinishing)
     }
 
     @Test
