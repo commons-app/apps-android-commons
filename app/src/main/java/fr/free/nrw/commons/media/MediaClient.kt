@@ -207,13 +207,25 @@ class MediaClient
             if (pages.isEmpty()) {
                 Single.just(emptyList())
             } else {
+                // If any pageId is invalid (0 or negative), avoid fetching entities like M0
+                // and convert using a blank entity to prevent wbgetentities no-such-entity errors.
+                if (pages.any { it.pageId() <= 0 }) {
+                    Single.just(
+                        pages.mapNotNull { page ->
+                            page.imageInfo()?.let { imageInfo ->
+                                mediaConverter.convert(page, Entities.Entity(), imageInfo)
+                            }
+                        },
+                    )
+                } else {
                 getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                     .map {
                         pages
                             .zip(it.entities().values)
                             .mapNotNull { (page, entity) ->
-                                page.imageInfo()?.let {
-                                    mediaConverter.convert(page, entity, it)
+                                page.imageInfo()?.let { imageInfo ->
+                                    mediaConverter.convert(page, entity, imageInfo)
+                                    }
                                 }
                             }
                     }
