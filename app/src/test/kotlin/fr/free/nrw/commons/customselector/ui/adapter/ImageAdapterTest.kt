@@ -33,7 +33,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
-import java.util.TreeMap
 
 /**
  * Custom Selector image adapter test.
@@ -109,7 +108,7 @@ class ImageAdapterTest {
         whenever(mockContentResolver.getType(uri)).thenReturn("jpg")
         // Parameters.
         images.add(image)
-        imageAdapter.init(images, images, TreeMap())
+        imageAdapter.init(images, images)
 
         whenever(context.getSharedPreferences("custom_selector", 0))
             .thenReturn(sharedPreferences)
@@ -120,48 +119,11 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test processThumbnailForActionedImage
-     */
-    @Test
-    fun processThumbnailForActionedImage() =
-        runBlocking {
-            Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
-            whenever(
-                imageLoader.nextActionableImage(
-                    listOf(image),
-                    Dispatchers.IO,
-                    Dispatchers.Default,
-                    0,
-                    emptyList(),
-                ),
-            ).thenReturn(0)
-            imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
-        }
-
-    /**
-     * Test processThumbnailForActionedImage
-     */
-    @Test
-    fun `processThumbnailForActionedImage when reached end of the folder`() =
-        runBlocking {
-            whenever(
-                imageLoader.nextActionableImage(
-                    ArrayList(),
-                    Dispatchers.IO,
-                    Dispatchers.Default,
-                    0,
-                    emptyList(),
-                ),
-            ).thenReturn(-1)
-            imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
-        }
-
-    /**
      * Test init.
      */
     @Test
     fun init() {
-        imageAdapter.init(images, images, TreeMap())
+        imageAdapter.init(images, images)
     }
 
     /**
@@ -180,7 +142,7 @@ class ImageAdapterTest {
 
         // Parameters
         images.addAll(listOf(image, image))
-        imageAdapter.init(images, images, TreeMap())
+        imageAdapter.init(images, images)
 
         // Test conditions
         holder.itemUploaded()
@@ -260,7 +222,7 @@ class ImageAdapterTest {
      */
     @Test
     fun getImageIdAt() {
-        imageAdapter.init(listOf(image), listOf(image), TreeMap())
+        imageAdapter.init(listOf(image), listOf(image))
         Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
     }
 }
