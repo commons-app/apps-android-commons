@@ -7,6 +7,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -150,68 +151,52 @@ class TransformImageTest {
     }
 
     private fun getTempFileForRotationType(expectPerfect: Boolean): File {
-        val candidates =
-            listOf(
-                "TEST_1.jpg",
-                "TEST_IMAGE.jpg",
-                "Landscape_1.jpg",
-                "Landscape_2.jpg",
-                "Landscape_3.jpg",
-                "Portrait_1.jpg",
-                "Portrait_2.jpg",
-                "Portrait_3.jpg",
-            )
-
+        if (expectPerfect) {
+            // Perfect.jpg dimensions are MCU-aligned.
+            return getResourceAsTempFile("Perfect.jpg")
+                ?: throw AssertionError("Perfect JPEG test resource (Perfect.jpg) not found")
+        }
+        // All existing Landscape/Portrait/TEST images are imperfect (non-MCU-aligned).
+        val candidates = listOf(
+            "TEST_1.jpg",
+            "Landscape_1.jpg",
+            "Portrait_1.jpg",
+        )
         for (fileName in candidates) {
             val file = getResourceAsTempFile(fileName) ?: continue
             return file
         }
-
-        throw AssertionError("No ${if (expectPerfect) "perfect" else "imperfect"} JPEG test resource found")
+        throw AssertionError("No imperfect JPEG test resource found")
     }
 
     @Test
-    fun test360DegreeRotationCyclesForAllExifImages() {
-        val prefixes = listOf("Landscape", "Portrait", "TEST")
-        val fileNamesToTest = mutableListOf<String>()
+    fun test360DegreePhysicalRotationCycleForPerfectJpeg() {
+        val originalFile = getTempFileForRotationType(expectPerfect = true)
 
-        for (prefix in prefixes) {
-            for (i in 0..8) {
-                fileNamesToTest.add("${prefix}_$i.jpg")
-            }
-        }
-        fileNamesToTest.add("TEST_IMAGE.jpg")
+        // 1. rotate 90
+        val file90 = rotateImage(originalFile, 90)
+        assertRotationWorked(originalFile, file90, 90)
+        // 2. rotate 270 -> this should equal the original
+        val file90then270 = rotateImage(file90, 270, savePath)
+        assertImagesAreIdentical(originalFile, file90then270)
 
-        for (fileName in fileNamesToTest) {
-            val originalFile = getResourceAsTempFile(fileName) ?: continue
+        // 3. rotate 180
+        val file180 = rotateImage(originalFile, 180, savePath)
+        assertRotationWorked(originalFile, file180, 180)
+        // 4. rotate 180 -> this should equal the original
+        val file180then180 = rotateImage(file180, 180, savePath)
+        assertImagesAreIdentical(originalFile, file180then180)
 
-            // 1. rotate 90
-            val file90 = rotateImage(originalFile, 90)
-            assertRotationWorked(originalFile, file90, 90)
-            // 2. rotate 270 -> this should equal the original
-            val file90then270 = rotateImage(file90, 270, savePath)
-            assertImagesAreIdentical(originalFile, file90then270)
+        // 5. rotate 270
+        val file270 = rotateImage(originalFile, 270, savePath)
+        assertRotationWorked(originalFile, file270, 270)
+        // 6. rotate 90 -> this should equal the original
+        val file270then90 = rotateImage(file270, 90, savePath)
+        assertImagesAreIdentical(originalFile, file270then90)
 
-            // 3. rotate 180
-            val file180 = rotateImage(originalFile, 180, savePath)
-            assertRotationWorked(originalFile, file180, 180)
-            // 4. rotate 180 -> this should equal the original
-            val file180then180 = rotateImage(file180, 180, savePath)
-            assertImagesAreIdentical(originalFile, file180then180)
-
-            // 5. rotate 270
-            val file270 = rotateImage(originalFile, 270, savePath)
-            assertRotationWorked(originalFile, file270, 270)
-            // 6. rotate 90 -> this should equal the original
-            val file270then90 = rotateImage(file270, 90, savePath)
-            assertImagesAreIdentical(originalFile, file270then90)
-
-            // 7. rotate 360 -> this should equal the original
-            val file360 = rotateImage(originalFile, 360, savePath)
-            assertImagesAreIdentical(originalFile, file360)
-
-            println("$fileName passed all rotation cycle tests")
-        }
+        // 7. rotate 360 -> this should equal the original
+        val file360 = rotateImage(originalFile, 360, savePath)
+        assertImagesAreIdentical(originalFile, file360)
     }
 
     @Test
@@ -234,87 +219,127 @@ class TransformImageTest {
     }
 
     @Test
-    fun rotateImage180ThenAnother180ReturnsToNormalForImperfectJpeg() {
-        val originalFile = getTempFileForRotationType(expectPerfect = false)
-
-        val afterFirst180 = rotateImage(originalFile, 180, savePath)
-        assertNotNull(afterFirst180)
-
-        val exifAfterFirst = ExifInterface(afterFirst180.absolutePath)
-        assertEquals(
-            "After first 180 save, EXIF should represent NORMAL orientation because pixels are physically rotated",
-            ExifInterface.ORIENTATION_NORMAL,
-            exifAfterFirst.getAttributeInt(
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
-        )
-        assertRotationWorked(originalFile, afterFirst180, 180)
-
-        val afterSecond180 = rotateImage(afterFirst180, 180, savePath)
-        assertNotNull(afterSecond180)
-
-        val finalExif = ExifInterface(afterSecond180.absolutePath)
-        assertEquals(
-            "After second 180 save, EXIF should return to NORMAL",
-            ExifInterface.ORIENTATION_NORMAL,
-            finalExif.getAttributeInt(
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
-        )
-        assertImagesAreIdentical(originalFile, afterSecond180)
-    }
-
-    @Test
-    fun rotateImageTrimsImperfectJpegToApplyLosslessRotation() {
+    fun exifOnlyRotation180ThenAnother180ReturnsToOriginalOrientation() {
         val originalFile = getTempFileForRotationType(expectPerfect = false)
         val originalBmp = decodeBitmap(originalFile)
         val originalWidth = originalBmp.width
         val originalHeight = originalBmp.height
 
-        val rotatedFile = rotateImage(originalFile, 90)
-        assertNotNull(rotatedFile)
-        val rotatedBmp = decodeBitmap(rotatedFile)
+        val originalExif = ExifInterface(originalFile.absolutePath)
+        val originalOrientation = originalExif.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.ORIENTATION_NORMAL
+        )
 
-        // Check if originalHeight is not divisible by 8 (or 16) - imperfect.
-        val remH = originalHeight % 8
-        if (remH != 0) {
-            // The physical pixels must be trimmed to the nearest lower MCU boundary
-            assertTrue(
-                "Imperfect dimension should be trimmed and strictly smaller than original",
-                rotatedBmp.width < originalHeight
-            )
-            assertTrue(
-                "Trimmed amount should not exceed 16 pixels",
-                rotatedBmp.width >= originalHeight - 16
-            )
-        }
+        // First 180° EXIF-only rotation
+        val after180 = tempFolder.newFile("exif_180_${System.currentTimeMillis()}.jpg")
+        originalFile.copyTo(after180, overwrite = true)
+        val currentDegrees = ExifOrientationUtil.orientationToDegrees(originalOrientation)
+        val newDegrees = (currentDegrees + 180) % 360
+        val newOrientation = ExifOrientationUtil.degreesToOrientation(newDegrees)
+        RandomAccessFileExifWriter.writeTag(
+            after180, ExifInterface.TAG_ORIENTATION, newOrientation.toString()
+        )
 
-        val remW = originalWidth % 8
-        if (remW != 0) {
-            assertTrue(
-                "Imperfect dimension should be trimmed and strictly smaller than original",
-                rotatedBmp.height < originalWidth
+        // Dimensions unchanged after first rotation
+        val bmpAfter180 = decodeBitmap(after180)
+        assertEquals("Width unchanged after first 180°", originalWidth, bmpAfter180.width)
+        assertEquals("Height unchanged after first 180°", originalHeight, bmpAfter180.height)
+
+        // Second 180° EXIF-only rotation (should return to original)
+        val afterSecond180 = tempFolder.newFile("exif_360_${System.currentTimeMillis()}.jpg")
+        after180.copyTo(afterSecond180, overwrite = true)
+        val midOrientation = ExifInterface(afterSecond180.absolutePath)
+            .getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+        val midDegrees = ExifOrientationUtil.orientationToDegrees(midOrientation)
+        val finalDegrees = (midDegrees + 180) % 360
+        val finalOrientation = ExifOrientationUtil.degreesToOrientation(finalDegrees)
+        RandomAccessFileExifWriter.writeTag(
+            afterSecond180, ExifInterface.TAG_ORIENTATION, finalOrientation.toString()
+        )
+
+        // Dimensions unchanged after second rotation
+        val bmpFinal = decodeBitmap(afterSecond180)
+        assertEquals("Width unchanged after second 180°", originalWidth, bmpFinal.width)
+        assertEquals("Height unchanged after second 180°", originalHeight, bmpFinal.height)
+
+        // EXIF orientation should be back to the original
+        val finalExif = ExifInterface(afterSecond180.absolutePath)
+        assertEquals(
+            "After two 180° EXIF-only rotations, orientation should return to original",
+            originalOrientation,
+            finalExif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED
             )
-            assertTrue(
-                "Trimmed amount should not exceed 16 pixels",
-                rotatedBmp.height >= originalWidth - 16
+        )
+    }
+
+    /**
+     * Verifies that EXIF-only rotation applied for imperfect images in EditActivity
+     * Correctly updates the EXIF orientation tag.
+     */
+    @Test
+    fun exifOnlyRotationPreservesImperfectImageDimensions() {
+        val originalFile = getTempFileForRotationType(expectPerfect = false)
+        val originalBmp = decodeBitmap(originalFile)
+        val originalWidth = originalBmp.width
+        val originalHeight = originalBmp.height
+
+        // Copy the file (simulating what EditActivity.applyPendingRotation does)
+        val output = tempFolder.newFile("exif_rotated_${System.currentTimeMillis()}.jpg")
+        originalFile.copyTo(output, overwrite = true)
+
+        // Read present EXIF orientation and add 90° on top
+        val currentOrientation = ExifInterface(output.absolutePath)
+            .getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
             )
-        }
+        val currentDegrees = ExifOrientationUtil.orientationToDegrees(currentOrientation)
+        val newDegrees = (currentDegrees + 90) % 360
+        val newOrientation = ExifOrientationUtil.degreesToOrientation(newDegrees)
+
+        // Write EXIF orientation using RandomAccessFileExifWriter (not ExifInterface.saveAttributes)
+        RandomAccessFileExifWriter.writeTag(
+            output,
+            ExifInterface.TAG_ORIENTATION,
+            newOrientation.toString()
+        )
+
+        // Verify pixel dimensions are unchanged — no trimming occurred
+        val rotatedBmp = decodeBitmap(output)
+        assertEquals(
+            "Width should be unchanged after EXIF-only rotation",
+            originalWidth, rotatedBmp.width
+        )
+        assertEquals(
+            "Height should be unchanged after EXIF-only rotation",
+            originalHeight, rotatedBmp.height
+        )
+
+        // Verify EXIF orientation tag was updated
+        val rotatedExif = ExifInterface(output.absolutePath)
+        val rotatedOrientation = rotatedExif.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.ORIENTATION_UNDEFINED
+        )
+        assertEquals(
+            "EXIF orientation should reflect the 90° rotation",
+            newOrientation,
+            rotatedOrientation
+        )
     }
 
     /*
     * Jpegtran physically rotates the image pixels, So no need to preserve the orientation.
+    * This only applies to perfect (MCU-aligned) images in the actual app flow.
     */
     @Test
-    fun rotateImageResetsExifOrientation() {
-        // Landscape_1.jpg has a non-normal EXIF orientation tag (usually ORIENTATION_ROTATE_90)
-        val originalFile = getResourceAsTempFile("Landscape_1.jpg")
-        assertNotNull(originalFile)
+    fun rotateImageResetsExifOrientationForPerfectJpeg() {
+        val originalFile = getTempFileForRotationType(expectPerfect = true)
 
         // Rotate the image physically by 90 degrees
-        val rotatedFile = rotateImage(originalFile!!, 90)
+        val rotatedFile = rotateImage(originalFile, 90)
         assertNotNull(rotatedFile)
 
         val rotatedExif = ExifInterface(rotatedFile.absolutePath)

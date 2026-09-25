@@ -54,7 +54,7 @@ class EditViewModel : ViewModel() {
     }
 
     /**
-     * Rotates the specified image file by the given degree.
+     * Rotates the specified image file losslessly by the given degree using jpegtran
      *
      * @param imageFile The File representing the image to be rotated.
      * @param degree The degree by which to rotate the image.
