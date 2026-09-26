@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Kaszeba
+* Orbitminis
 * Terrus38
 -->
 <resources>
   <string name="commons_logo">Logò Commons</string>
+  <string name="nearby_all">Wszëtczé</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Wladënk %1$d lopka</item>
     <item quantity="other">Wladënk %1$d lopków</item>
@@ -83,6 +85,7 @@
   <string name="no_uploads_yet">Nie môsz jesz wladowónych òdjimków</string>
   <string name="menu_retry_upload">Próbùjë znowa</string>
   <string name="menu_cancel_upload">Anuluj</string>
+  <string name="language_search_all_languages">Wszëtczé jãzëczi</string>
   <string name="menu_download">Zladënk</string>
   <string name="preference_license" fuzzy="true">Licencëjô</string>
   <string name="use_previous" fuzzy="true">Ùżëjë slédnegò titla/òpisënka</string>

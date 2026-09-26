@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Adriendelucca
+* Ar choler
 * Dishual
 * Fohanno
 * Fulup
@@ -11,18 +12,25 @@
 -->
 <resources>
   <string name="commons_facebook">Pajenn Facebook Commons</string>
-  <string name="commons_github" fuzzy="true">Kod mammenn Github Commons</string>
+  <string name="commons_github">Kod Tarzh GitHub Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Lec\'hienn web Commons</string>
+  <string name="exit_location_picker">Kuitaat diuzer al lec\'hiadur</string>
   <string name="submit">Kas</string>
   <string name="add_another_description">Ouzhpennañ un deskrivadur all</string>
   <string name="add_new_contribution">Degasadenn nevez</string>
+  <string name="add_contribution_from_camera">Ouzhpennañ un degasadenn eus ar c\'hamera</string>
+  <string name="add_contribution_from_photos">Ouzhpennaén un degasadenn eus Luc\'hskeudennoù</string>
+  <string name="add_contribution_from_contributions_gallery">Ouzhpennañ un degasadenn eus palier an degasadennoù kent</string>
   <string name="show_captions">Istitloù</string>
   <string name="row_item_language_description">Deskrivadur ar yezh</string>
   <string name="row_item_caption">Alc\'hwez</string>
   <string name="show_captions_description">Deskrivadur</string>
   <string name="nearby_row_image">Skeudenn</string>
   <string name="nearby_all">An holl</string>
+  <string name="nearby_filter_toggle">Gwintañ d\'al laez</string>
+  <string name="nearby_filter_search">Skramm Klask</string>
+  <string name="nearby_filter_state">Stad al lec\'h</string>
   <string name="appwidget_img">Skeudenn an deiz</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d restr o vezañ karget</item>
@@ -31,12 +39,13 @@
     <item quantity="many">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d bellgargadenn loc\'het</item>
-    <item quantity="two">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="few">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="many">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="other">%1$d pellgargadennoù loc\'het</item>
+  <string name="starting_uploads">Loc\'hañ an ezkargañ</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d ezkargadenn loc\'het</item>
+    <item quantity="two">%1$d ezkargadenn loc\'het</item>
+    <item quantity="few">%1$d ezkargadenn loc\'het</item>
+    <item quantity="many">%1$d ezkargadenn loc\'het</item>
+    <item quantity="other">%1$d ezkargadenn loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d enporzhiadur</item>
@@ -45,12 +54,12 @@
     <item quantity="many">%1$d enporzhiadur</item>
     <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="two">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="few">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="many">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="other">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dindan an aotre %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="two">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="few">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="many">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="other">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d enporzhiadur</item>
@@ -58,6 +67,13 @@
     <item quantity="few">%1$d enporzhiadur</item>
     <item quantity="many">%1$d enporzhiadur</item>
     <item quantity="other">%1$d enporzhiadur</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudenn, hervez he ment hag ho ardivink</item>
+    <item quantity="two">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="few">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="many">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="other">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
   </plurals>
   <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
@@ -67,6 +83,7 @@
   <string name="app_name">Commons</string>
   <string name="menu_settings">Arventennoù</string>
   <string name="intent_share_upload_label">Enporzhiañ e Commons</string>
+  <string name="upload_in_progress">Ezkargañ war ober.</string>
   <string name="username">Anv implijer</string>
   <string name="password">Ger-tremen</string>
   <string name="login_credential">Kevreañ ouzh ho kont Commons Beta</string>
@@ -75,18 +92,24 @@
   <string name="signup">En em enskrivañ</string>
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij…</string>
+  <string name="updating_caption_title">Alc\'hwezioù ha deskrivadurioù war hizivaat</string>
   <string name="updating_caption_message">Gortozit mar plij…</string>
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">N\'haller ket kevreañ!</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
+  <string name="retry_limit_reached">Tizhet emañ bevenn uhelañ an adarnodiñ ! Nullit an ezkargañ ha klaskit en-dro mar plij</string>
+  <string name="unrestricted_battery_mode">Diweredekaat gwellekaat ar batiri ?</string>
+  <string name="suggest_unrestricted_mode">Efedusoc\'h eo ezkargañ muioc\'h eget 3 skeudenn pa vez diweredekaet gwellekaat ar batiri. Evit aesaat an ezkargañ, diweredekait gwellekaat ar batiri evit an arload Commons diwar an arventennoù. \n\nPazennoù bezus evit diweredekaat gwellekaat ar batiri :\n\nPazenn 1: Stokit ouzh ar bouton \"Dibarzhioù\" a-is.\n\nPazenn 2: Kemmit \'Nann gwellekaet\' e An holl arloadoù\'.\n\nPazenn 3: Klaskit \"Commons\" pe \"fr.free.nrw.commons\".\n\nPazenn 4: Stokit warnañ ha diuzit \'Na wellekaat\'.\n\nPazenn 5: Pouezit war \'Echu\'.</string>
   <string name="authentication_failed">Dilesadur c\'hwitet. Kevreit en-dro mar plij.</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
+  <string name="uploading_queued">Ezkargañ war c\'hortoz (gweredekaet emañ ar mod kennask bevennet)</string>
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
   <string name="upload_progress_notification_title_start">Oc\'h enporzhiañ ar restr: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
+  <string name="upload_paused_notification_title">Ehanet emañ ezkargañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
   <string name="upload_paused_notification_subtitle">Pouezit evit diskwel</string>
   <string name="title_activity_contributions">Ma enporzhiadennoù nevez</string>
@@ -98,9 +121,12 @@
   <string name="menu_from_camera">Tapout ul luc\'hskeudenn</string>
   <string name="menu_nearby">Tostik</string>
   <string name="provider_contributions">Ma enporzhiadennoù</string>
+  <string name="menu_copy_link">Eilañ al liamm</string>
+  <string name="menu_link_copied">Eilet eo bet al liamm er golver</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_view_file_page">Gwelet pajenn ar restr</string>
   <string name="share_title_hint">Alc\'hwez (ret)</string>
+  <string name="add_caption_toast">Roit un alc\'hwez d\'ar restr-mañ mar plij</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="share_caption_hint">Alc\'hwez</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>

@@ -1,5 +1,14 @@
 # Wikimedia Commons for Android
 
+## v6.8.0
+
+### What's changed
+- The app now detects sensitive content in images automatically and lets you blur it with one tap
+- Deleted categories no longer appear in category suggestions
+- Captions in multiple languages now work correctly
+- Improved handling of HTTP 429s from the server
+- Various bug fixes and improvements
+
 ## v6.7.0
 
 ### What's changed
