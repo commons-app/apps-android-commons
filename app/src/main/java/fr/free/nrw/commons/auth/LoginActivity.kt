@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
+import java.io.IOException
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NavUtils
@@ -43,6 +44,10 @@ import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
+import java.net.ConnectException
+import java.net.SocketException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -132,6 +137,14 @@ class LoginActivity : AccountAuthenticatorActivity() {
             intent.getStringExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY)?.let {
                 loginUsername.setText(it)
             }
+        }
+    }
+    private fun getFriendlyErrorMessage(caught: Throwable): String {
+        return if (caught is java.io.IOException) {
+            getString(R.string.no_internet_connection)
+            getString(R.string.no_internet_connection)
+        } else {
+            caught.localizedMessage ?: getString(R.string.login_failed_generic)
         }
     }
 
@@ -383,7 +396,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 override fun error(caught: Throwable) = runOnUiThread {
                     Timber.e(caught)
                     progressDialog!!.dismiss()
-                    showMessageAndCancelDialog(caught.localizedMessage ?: "")
+                    val friendlyMessage = getFriendlyErrorMessage(caught)
+                    showMessageAndCancelDialog(friendlyMessage)
                 }
             }
         )
