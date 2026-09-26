@@ -123,6 +123,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         selectedLanguages[uploadMediaDetails.size] = "en"
         uploadMediaDetails.add(uploadMediaDetail)
         notifyItemInserted(uploadMediaDetails.size)
+        eventListener?.onMediaDetailsChanged()
     }
 
     private fun startSpeechInput(locale: String) {
@@ -180,6 +181,9 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         notifyItemRemoved(position)
         notifyItemRangeChanged(position, uploadMediaDetails.size - position)
         updateAddButtonVisibility()
+        // Without this, a removed row stays in the persisted UploadItem and still gets
+        // uploaded, since only addDescription previously notified the fragment (#6938).
+        eventListener?.onMediaDetailsChanged()
     }
 
     inner class ViewHolder(val binding: RowItemDescriptionBinding) :
@@ -558,6 +562,8 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     interface EventListener {
         fun onPrimaryCaptionTextChange(isNotEmpty: Boolean)
         fun addLanguage()
+
+        fun onMediaDetailsChanged()
     }
 
     internal enum class SelectedVoiceIcon {

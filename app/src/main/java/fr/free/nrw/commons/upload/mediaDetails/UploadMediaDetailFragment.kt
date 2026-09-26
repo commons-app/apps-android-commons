@@ -184,18 +184,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             Timber.d("Restoring state: savedItems size = %s", savedItems?.size ?: "null")
             if (savedItems != null && savedItems.isNotEmpty()) {
                 uploadMediaDetailAdapter.items = savedItems
-                // only call setUploadMediaDetails if indexOfFragment is valid
-                if (fragmentCallback != null) {
-                    indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
-                    if (indexOfFragment >= 0) {
-                        presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
-                        Timber.d("Restored and set upload media details for index %d", indexOfFragment)
-                    } else {
-                        Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
-                    }
-                } else {
-                    Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
-                }
+                persistMediaDetails()
             } else {
                 // initialize with a default UploadMediaDetail if saved state is empty or null
                 uploadMediaDetailAdapter.items = mutableListOf(UploadMediaDetail())
@@ -485,6 +474,27 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
         fragmentCallback!!.onNextButtonClicked(indexOfFragment)
     }
+
+    /**
+     * Fixes issue #6938: without this, rows added via "+" only existed in the adapter
+     * and were lost once the fragment was repopulated, so only the primary caption uploaded.
+     */
+    private fun persistMediaDetails() {
+        // only call setUploadMediaDetails if indexOfFragment is valid
+        if (fragmentCallback != null) {
+            indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
+            if (indexOfFragment >= 0) {
+                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
+                Timber.d("Restored and set upload media details for index %d", indexOfFragment)
+            } else {
+                Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
+            }
+        } else {
+            Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
+        }
+    }
+
+    override fun onMediaDetailsChanged() = persistMediaDetails()
 
     /**
      * This method gets called whenever the next/previous button is pressed

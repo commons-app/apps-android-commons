@@ -147,6 +147,33 @@ class UploadMediaDetailAdapterUnitTest {
         adapter.addDescription(uploadMediaDetail)
         val map: HashMap<Int, String> = selectedLanguages.get(adapter) as HashMap<Int, String>
         Assert.assertEquals(map[list.size], null)
+        // Regression test for issue #6938: added rows must propagate to the UploadItem.
+        verify(eventListener).onMediaDetailsChanged()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAddDescriptionSyncsToBackingListAndFormatCaptions() {
+        // Regression test for issue #6938: a caption added via "+" must reach
+        // Contribution.formatCaptions, not just the adapter's own copy of the list.
+        val realAdapter =
+            UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
+        realAdapter.items = mutableListOf(UploadMediaDetail(languageCode = "en", captionText = "test"))
+        var uploadItemMediaDetails: List<UploadMediaDetail> = emptyList()
+        realAdapter.eventListener = object : UploadMediaDetailAdapter.EventListener {
+            override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) = Unit
+            override fun addLanguage() = Unit
+            override fun onMediaDetailsChanged() {
+                uploadItemMediaDetails = realAdapter.items
+            }
+        }
+
+        realAdapter.addDescription(UploadMediaDetail(languageCode = "ja", captionText = "テスト"))
+
+        val captions = fr.free.nrw.commons.contributions.Contribution.formatCaptions(uploadItemMediaDetails)
+        Assert.assertEquals(2, captions.size)
+        Assert.assertEquals("test", captions["en"])
+        Assert.assertEquals("テスト", captions["ja"])
     }
 
     @Test
@@ -164,6 +191,7 @@ class UploadMediaDetailAdapterUnitTest {
         adapter.removeDescription(uploadMediaDetail, list.size)
         val map: HashMap<Int, String> = selectedLanguages.get(adapter) as HashMap<Int, String>
         Assert.assertEquals(map[list.size], null)
+        verify(eventListener).onMediaDetailsChanged()
     }
 
     @Test
