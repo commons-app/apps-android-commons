@@ -148,6 +148,7 @@
 
     <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
         <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
