@@ -90,6 +90,11 @@
   <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <string name="upload_paused_notification_subtitle">Tap to view</string>
+  <string name="error_invalid_login_token">The server failed to retrieve the session token.</string>
+  <string name="error_unknown_host">Unable to reach the server. Please check your internet connection.</string>
+  <string name="error_socket_timeout">The socket operation timed out while uploading.</string>
+  <string name="error_connect_exception">The connection was interrupted while uploading.</string>
+  <string name="error_unexpected">An unexpected error occurred while uploading.</string>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
