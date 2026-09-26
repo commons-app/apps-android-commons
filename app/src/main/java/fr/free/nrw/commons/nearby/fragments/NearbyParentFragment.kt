@@ -39,6 +39,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
@@ -993,11 +994,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     fun initNearbyFilter() {
         binding!!.nearbyFilterList.root.visibility = View.GONE
         hideBottomSheet()
-        binding!!.nearbyFilter.searchViewLayout.searchView.apply {
-            setIconifiedByDefault(false)
-            isIconified = false
-            setQuery("", false)
-            clearFocus()
+        binding!!.nearbyFilter.searchViewLayout.searchView.doOnLayout {
+            binding!!.nearbyFilter.searchViewLayout.searchView.setIconifiedByDefault(false)
+            it.clearFocus()
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
