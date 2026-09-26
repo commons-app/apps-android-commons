@@ -390,7 +390,7 @@ class UploadWorker(
                                 Timber.d(
                                     "WikiDataEdit required, making wikidata edit",
                                 )
-                                makeWikiDataEdit(uploadResult, contribution)
+                                makeWikiDataEdit(uploadResult, contribution, uniqueFileName)
                             }
                             showSuccessNotification(contribution)
                             if (appContext.contentResolver.persistedUriPermissions.any {
@@ -473,6 +473,7 @@ class UploadWorker(
     private suspend fun makeWikiDataEdit(
         uploadResult: UploadResult,
         contribution: Contribution,
+        uniqueFileName: String,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
         if (wikiDataPlace != null) {
@@ -482,10 +483,19 @@ class UploadWorker(
                 try {
                     if (!p18WasSkipped) {
                     // Only set P18 if the place does not already have a picture
+                    // Use uniqueFileName (the space-separated title that was
+                    // actually uploaded, after findUniqueFileName's collision
+                    // check) rather than uploadResult.filename, which MediaWiki
+                    // returns in its underscored canonical form and triggers
+                    // Wikidata's "Commons link should be well-formed" warning.
+                    // contribution.media.filename must NOT be used here: it is
+                    // the pre-upload title, which can differ from the real
+                    // uploaded title when findUniqueFileName had to rename the
+                    // file to avoid a collision with an existing Commons page.
                     revisionID =
                         wikidataEditService.createClaim(
                             wikiDataPlace,
-                            uploadResult.filename,
+                            uniqueFileName,
                             contribution.media.captions,
                         )
                     if (null != revisionID) {
