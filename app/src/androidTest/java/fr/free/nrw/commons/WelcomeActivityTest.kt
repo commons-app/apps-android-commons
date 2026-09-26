@@ -39,6 +39,8 @@ class WelcomeActivityTest {
         if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.button_ok))
                 .perform(ViewActions.click())
+            // Wait for the tutorial pager to load
+            UITestHelper.sleep(1000)
             onView(withId(R.id.finishTutorialButton))
                 .check(matches(isDisplayed()))
         }
@@ -49,6 +51,8 @@ class WelcomeActivityTest {
         if (!ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.button_ok))
                 .perform(ViewActions.click())
+            // Wait for the tutorial pager to load
+            UITestHelper.sleep(1000)
             onView(withId(R.id.finishTutorialButton))
                 .check(matches(not(isDisplayed())))
         }
@@ -59,6 +63,8 @@ class WelcomeActivityTest {
         if (ConfigUtils.isBetaFlavour) {
             onView(withId(R.id.button_ok))
                 .perform(ViewActions.click())
+            // Wait for the tutorial pager to load
+            UITestHelper.sleep(1000)
             onView(withId(R.id.finishTutorialButton))
                 .perform(ViewActions.click())
             assertThat(activityRule.activity.isDestroyed, equalTo(true))
@@ -119,6 +125,8 @@ class WelcomeActivityTest {
             if (viewPager.currentItem == 3) {
                 onView(withId(R.id.button_ok))
                     .perform(ViewActions.click())
+                // Wait for the tutorial pager to load
+                UITestHelper.sleep(1000)
                 onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
                 assertThat(activityRule.activity.isDestroyed, equalTo(true))
