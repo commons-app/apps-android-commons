@@ -31,7 +31,7 @@ class UploadModel @Inject internal constructor(
     val fileProcessor: FileProcessor,
     val imageProcessingService: ImageProcessingService
 ) {
-    var license: String? = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3)
+    var license: String? = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_4)
     val items: MutableList<UploadItem> = mutableListOf()
     val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val selectedCategories: MutableList<String> = mutableListOf()
