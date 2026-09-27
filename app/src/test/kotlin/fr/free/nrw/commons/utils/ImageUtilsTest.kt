@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils
 
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
@@ -31,7 +31,7 @@ class ImageUtilsTest {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var progressDialogWallpaper: ProgressDialog
+    private lateinit var progressDialogWallpaper: AlertDialog
 
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.login
 
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.view.MenuItem
 import android.view.View
@@ -32,7 +32,7 @@ class LoginActivityUnitTests {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: AlertDialog
 
     @Mock
     private lateinit var view: View
