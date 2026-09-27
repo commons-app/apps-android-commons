@@ -370,6 +370,12 @@
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
   <string name="crop">Crop</string>
+  <string name="blur">Blur</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Auto-blurring faces and license plates.</string>
+  <string name="autodetect_description">You can discard false positives using the ❌ button of each blurring area.</string>
+  <string name="autoblur_failed_to_load">Failed to load image for AutoBlur</string>
+  <string name="autoblur_no_region_detected">No regions detected for AutoBlur</string>
 
   <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>
@@ -749,6 +755,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
   <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Dismiss</string>
+  <string name="custom_selector_duplicates_warning">Some selected images are duplicates and will be removed before upload.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
   <string name="place_state_wlm">WLM</string>
@@ -904,4 +911,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="license_cc0_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</string>
   <string name="license_cc_by_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator.</string>
   <string name="license_cc_by_sa_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator and the new work is licensed under identical terms.</string>
+
+  <string name="error_getting_image_properties">Error getting image properties:</string>
+  <string name="error_blur_no_rectangle">Please draw at least one rectangle on the photo</string>
+  <string name="error_applying_blur">Error applying blur</string>
+  <string name="failed_to_apply_crop">Failed to apply crop</string>
+  <string name="failed_to_save_image">Failed to save image</string>
 </resources>

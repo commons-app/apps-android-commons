@@ -576,7 +576,7 @@
   <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
-  <string name="upload_categories_dont_show_this_message_again">Не показывать это сообщение повторно</string>
+  <string name="upload_categories_dont_show_this_message_again">Не показывать это сообщение снова</string>
   <string name="no_categories_found">Категории не найдены.</string>
   <string name="no_depiction_found">Описания не найдены</string>
   <string name="upload_cancelled">Загрузка отменена</string>
@@ -762,6 +762,7 @@
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
   <string name="custom_selector_over_limit_warning">По техническим причинам приложение не может одновременно загрузить более %1$d изображений. Предел загрузки в %1$d шт. был превышен на %2$d шт.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Отменить</string>
+  <string name="custom_selector_duplicates_warning">Некоторые выбранные изображения дублируются и будут удалены перед загрузкой.</string>
   <string name="custom_selector_button_limit_text">Максимально: %1$d</string>
   <string name="custom_selector_limit_error_desc">Ошибка: превышен лимит загрузки</string>
   <string name="place_state_wlm">ВЛП</string>
