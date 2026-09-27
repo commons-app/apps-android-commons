@@ -56,12 +56,21 @@ class NetworkingModule {
     @Singleton
     fun provideOkHttpClient(
         context: Context,
-        httpLoggingInterceptor: HttpLoggingInterceptor
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        sessionManager: SessionManager
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(120, TimeUnit.SECONDS)
         .writeTimeout(120, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(CommonHeaderRequestInterceptor())
+        .addInterceptor { chain ->
+            val requestBuilder = chain.request().newBuilder()
+            val accessToken = sessionManager.getAccessToken()
+            if (!accessToken.isNullOrEmpty()) {
+                requestBuilder.header("Authorization", "Bearer $accessToken")
+            }
+            chain.proceed(requestBuilder.build())
+        }
         .readTimeout(120, TimeUnit.SECONDS)
         .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
         .build()
