@@ -35,6 +35,15 @@ class LabelTest {
     }
 
     /**
+     * test if fromQidInt returns the same result as fromText
+     */
+    @Test
+    fun testLabelIconFromQidInt() {
+        label = Label.fromQidInt(16970)
+        assertThat(label.icon, equalTo(R.drawable.round_icon_church))
+    }
+
+    /**
      * test if label is not found in label set, unknown icon is used
      */
     @Test
