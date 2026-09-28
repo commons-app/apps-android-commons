@@ -327,7 +327,7 @@
   <string name="edit_categories">सम्पादन श्रेणीहरू</string>
   <string name="advanced_options">उन्नत विकल्प</string>
   <string name="advanced_query_info_text">तपाईँले निकटता क्वेरी अनुकूलन गर्न सक्नुहुन्छ। त्रुटी भएमा पूर्ववत् गर्नुभएर लागू गर्नुहोस्।</string>
-  <string name="apply">लागू गर्नुहोस्</string>
+  <string name="apply">लागु गर्नुहोस्</string>
   <string name="reset">पूर्वस्थितिमा फर्काउनुहोस्</string>
   <string name="location_message"/>
   <string name="no_location_found_title">कुनै पनि स्थान फेला परेन ।</string>
