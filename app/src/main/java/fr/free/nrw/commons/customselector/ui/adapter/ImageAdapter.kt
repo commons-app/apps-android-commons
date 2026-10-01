@@ -28,8 +28,9 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import java.util.TreeMap
 import kotlin.collections.ArrayList
 
 /**
@@ -89,26 +90,17 @@ class ImageAdapter(
     private var allImages: List<Image> = ArrayList()
 
     /**
-     * Map to store actionable images
+     * Actionable images in display order when "Show already actioned pictures" is off.
+     * Adapter position always maps to the same [Image] for bind and selection.
      */
-    private var actionableImagesMap: TreeMap<Int, Image> = TreeMap()
+    private val actionableImages = ArrayList<Image>()
 
     private var uploadingContributionList: List<Contribution> = ArrayList()
-
-    /**
-     * Stores already added positions of actionable images
-     */
-    private var alreadyAddedPositions: ArrayList<Int> = ArrayList()
 
     /**
      * Next starting index to initiate query to find next actionable image
      */
     private var nextImagePosition = 0
-
-    /**
-     * Helps to maintain the increasing sequence of the position. eg- 0, 1, 2, 3
-     */
-    private var imagePositionAsPerIncreasingOrder = 0
 
     /**
      * Stores the number of images currently visible on the screen
@@ -128,6 +120,9 @@ class ImageAdapter(
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+    private val loadMutex = Mutex()
+    private var isLoadingActionables = false
+    private var loadGeneration = 0
 
     //maximum number of images that can be selected.
     private var maxUploadLimit: Int = MAX_IMAGE_COUNT
@@ -137,6 +132,19 @@ class ImageAdapter(
     fun setMaxUploadLimit(limit: Int) {
         maxUploadLimit = limit
     }
+
+    private fun showAlreadyActionedImages(): Boolean {
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        return sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+    }
+
+    private fun resolveImageAt(position: Int, showAlreadyActionedImages: Boolean): Image? =
+        if (showAlreadyActionedImages) {
+            images.getOrNull(position)
+        } else {
+            actionableImages.getOrNull(position)
+        }
 
     /**
      * Create View holder.
@@ -156,37 +164,45 @@ class ImageAdapter(
         holder: ImageViewHolder,
         position: Int,
     ) {
-        if (images.size == 0) {
+        val showAlreadyActionedImages = showAlreadyActionedImages()
+        if (showAlreadyActionedImages && images.isEmpty()) {
             return
         }
-        var image = images[position]
+
+        val image = resolveImageAt(position, showAlreadyActionedImages)
+        if (image == null) {
+            holder.image.setImageDrawable(null)
+            holder.itemUnselected()
+            holder.itemView.setOnClickListener(null)
+            holder.itemView.setOnLongClickListener(null)
+            return
+        }
+
         holder.image.setImageDrawable(null)
         if (context.contentResolver.getType(image.uri) == null) {
             // Image does not exist anymore, update adapter.
             holder.itemView.post {
-                val updatedPosition = images.indexOf(image)
-                images.remove(image)
-                notifyItemRemoved(updatedPosition)
-                notifyItemRangeChanged(updatedPosition, images.size)
+                if (showAlreadyActionedImages) {
+                    val updatedPosition = images.indexOf(image)
+                    images.remove(image)
+                    notifyItemRemoved(updatedPosition)
+                    notifyItemRangeChanged(updatedPosition, images.size)
+                } else {
+                    val updatedPosition = actionableImages.indexOf(image)
+                    if (updatedPosition != -1) {
+                        actionableImages.removeAt(updatedPosition)
+                        _currentImagesCount.value = actionableImages.size
+                        notifyItemRemoved(updatedPosition)
+                        notifyItemRangeChanged(updatedPosition, itemCount)
+                    }
+                }
             }
         } else {
-            val sharedPreferences: SharedPreferences =
-                context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-            val showAlreadyActionedImages =
-                sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-            // Getting selected index when switch is on
             val selectedIndex: Int =
                 if (showAlreadyActionedImages) {
                     ImageHelper.getIndex(selectedImages, image)
-
-                    // Getting selected index when switch is off
-                } else if (actionableImagesMap.size > position) {
-                    ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-
-                    // For any other case return -1
                 } else {
-                    -1
+                    ImageHelper.getIndex(selectedImages, actionableImages[position])
                 }
 
             val isSelected = selectedIndex != -1
@@ -202,45 +218,11 @@ class ImageAdapter(
                 defaultDispatcher,
                 uploadingContributionList,
             )
-            scope.launch {
-                val sharedPreferences: SharedPreferences =
-                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-                val showAlreadyActionedImages =
-                    sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-                if (!showAlreadyActionedImages) {
-                    // If the position is not already visited, that means the position is new then
-                    // finds the next actionable image position from all images
-                    if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(
-                            holder,
-                            position,
-                            uploadingContributionList
-                        )
-                        _isLoadingImages.value = false
-                        // If the position is already visited, that means the image is already present
-                        // inside map, so it will fetch the image from the map and load in the holder
-                    } else {
-                        val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
-                        if (actionableImages.size > position) {
-                            image = actionableImages[position]
-                            Glide
-                                .with(holder.image)
-                                .load(image.uri)
-                                .thumbnail(0.3f)
-                                .into(holder.image)
-                        }
-                    }
-
-                    // If switch is turned off, it just fetches the image from all images without any
-                    // further operations
-                } else {
-                    Glide
-                        .with(holder.image)
-                        .load(image.uri)
-                        .thumbnail(0.3f)
-                        .into(holder.image)
-                }
-            }
+            Glide
+                .with(holder.image)
+                .load(image.uri)
+                .thumbnail(0.3f)
+                .into(holder.image)
 
             holder.itemView.setOnClickListener {
                 onThumbnailClicked(position, holder)
@@ -248,59 +230,63 @@ class ImageAdapter(
 
             // launch media preview on long click.
             holder.itemView.setOnLongClickListener {
-                imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
+                imageSelectListener.onLongPress(
+                    allImages.indexOf(image),
+                    ArrayList(allImages),
+                    selectedImages,
+                )
                 true
             }
         }
     }
 
-    /**
-     * Process thumbnail for actioned image
-     */
-    suspend fun processThumbnailForActionedImage(
-        holder: ImageViewHolder,
-        position: Int,
-        uploadingContributionList: List<Contribution>,
-    ) {
-        _isLoadingImages.value = true
-        val next =
-            imageLoader.nextActionableImage(
-                allImages,
-                ioDispatcher,
-                defaultDispatcher,
-                nextImagePosition,
-                uploadingContributionList,
-            )
-
-        // If next actionable image is found, saves it, as the the search for
-        // finding next actionable image will start from this position
-        if (next > -1) {
-            nextImagePosition = next + 1
-
-            // If map doesn't contains the next actionable image, that means it's a
-            // new actionable image, it will put it to the map as actionable images
-            // and it will load the new image in the view holder
-            if (!actionableImagesMap.containsKey(next)) {
-                actionableImagesMap[next] = allImages[next]
-                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
-                imagePositionAsPerIncreasingOrder++
-                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
-                Glide
-                    .with(holder.image)
-                    .load(allImages[next].uri)
-                    .thumbnail(0.3f)
-                    .into(holder.image)
-                notifyItemInserted(position)
-                notifyItemRangeChanged(position, itemCount + 1)
-            }
-
-            // If next actionable image is not found, that means searching is
-            // complete till end, and it will stop searching.
-        } else {
-            reachedEndOfFolder = true
-            notifyItemRemoved(position)
+    private fun startLoadingActionables(generation: Int) {
+        if (isLoadingActionables) {
+            return
         }
-        _isLoadingImages.value = false
+        isLoadingActionables = true
+        _isLoadingImages.value = true
+
+        scope.launch {
+            loadMutex.withLock {
+                while (generation == loadGeneration) {
+                    val next =
+                        imageLoader.nextActionableImage(
+                            allImages,
+                            ioDispatcher,
+                            defaultDispatcher,
+                            nextImagePosition,
+                            uploadingContributionList,
+                        )
+                    if (next == -1) {
+                        reachedEndOfFolder = true
+                        break
+                    }
+                    if (generation != loadGeneration) {
+                        return@launch
+                    }
+                    nextImagePosition = next + 1
+                    val loadedImage = allImages[next]
+                    val insertIndex = actionableImages.size
+                    actionableImages.add(loadedImage)
+                    _currentImagesCount.value = actionableImages.size
+                    withContext(Dispatchers.Main) {
+                        if (generation == loadGeneration) {
+                            notifyItemInserted(insertIndex)
+                        }
+                    }
+                }
+            }
+            if (generation == loadGeneration) {
+                withContext(Dispatchers.Main) {
+                    if (reachedEndOfFolder && !showAlreadyActionedImages()) {
+                        notifyItemRemoved(actionableImages.size)
+                    }
+                }
+                _isLoadingImages.value = false
+                isLoadingActionables = false
+            }
+        }
     }
 
     /**
@@ -310,15 +296,10 @@ class ImageAdapter(
         position: Int,
         holder: ImageViewHolder,
     ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        val switchState = showAlreadyActionedImages()
 
-        // While switch is turned off, lets user click on image only if the position is
-        // added inside map
         if (!switchState) {
-            if (actionableImagesMap.size > position) {
+            if (position < actionableImages.size) {
                 selectOrRemoveImage(holder, position)
             }
         } else {
@@ -333,26 +314,41 @@ class ImageAdapter(
         holder: ImageViewHolder,
         position: Int,
     ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val showAlreadyActionedImages =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        val showAlreadyActionedImages = showAlreadyActionedImages()
 
-        // Getting clicked index from all images index when show_already_actioned_images
-        // switch is on
         if (singleSelection) {
             // If single selection mode, clear previous selection and select only the new one
-            if (selectedImages.isNotEmpty() && (selectedImages[0] != images[position])) {
-                val prevIndex = images.indexOf(selectedImages[0])
-                selectedImages.clear()
-                notifyItemChanged(prevIndex, ImageUnselected())
+            if (selectedImages.isNotEmpty()) {
+                val currentImage =
+                    if (showAlreadyActionedImages) {
+                        images.getOrNull(position)
+                    } else {
+                        actionableImages.getOrNull(position)
+                    }
+                if (currentImage != null && selectedImages[0] != currentImage) {
+                    val prevIndex =
+                        if (showAlreadyActionedImages) {
+                            images.indexOf(selectedImages[0])
+                        } else {
+                            actionableImages.indexOf(selectedImages[0])
+                        }
+                    selectedImages.clear()
+                    if (prevIndex != -1) {
+                        notifyItemChanged(prevIndex, ImageUnselected())
+                    }
+                }
             }
         }
+
+        if (!showAlreadyActionedImages && position >= actionableImages.size) {
+            return
+        }
+
         val clickedIndex: Int =
             if (showAlreadyActionedImages) {
                 ImageHelper.getIndex(selectedImages, images[position])
             } else {
-                ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
+                ImageHelper.getIndex(selectedImages, actionableImages[position])
             }
 
         if (clickedIndex != -1) {
@@ -379,7 +375,12 @@ class ImageAdapter(
             }
 
             // Prevent adding the same image multiple times
-            val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
+            val image =
+                if (showAlreadyActionedImages) {
+                    images[position]
+                } else {
+                    actionableImages[position]
+                }
             if (selectedImages.contains(image)) {
                 return // Image already selected, ignore additional clicks
             }
@@ -418,27 +419,33 @@ class ImageAdapter(
     fun init(
         newImages: List<Image>,
         fixedImages: List<Image>,
-        emptyMap: TreeMap<Int, Image>,
         uploadedImages: List<Contribution> = ArrayList(),
     ) {
         _isLoadingImages.value = true
         allImages = fixedImages
         val oldImageList: ArrayList<Image> = images
         val newImageList: ArrayList<Image> = ArrayList(newImages)
-        actionableImagesMap = emptyMap
-        alreadyAddedPositions = ArrayList()
+        loadGeneration++
+        val currentGeneration = loadGeneration
+        actionableImages.clear()
         uploadingContributionList = uploadedImages
         nextImagePosition = 0
         reachedEndOfFolder = false
+        isLoadingActionables = false
         selectedImages = ArrayList()
-        imagePositionAsPerIncreasingOrder = 0
-        _currentImagesCount.value = imagePositionAsPerIncreasingOrder
+        _currentImagesCount.value = 0
         val diffResult =
             DiffUtil.calculateDiff(
                 ImagesDiffCallback(oldImageList, newImageList),
             )
         images = newImageList
         diffResult.dispatchUpdatesTo(this)
+
+        if (!showAlreadyActionedImages()) {
+            startLoadingActionables(currentGeneration)
+        } else {
+            _isLoadingImages.value = false
+        }
     }
 
     /**
@@ -460,7 +467,7 @@ class ImageAdapter(
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages, fixedImages, TreeMap(), uploadingImages)
+        init(newImages, fixedImages, uploadingImages)
         notifyDataSetChanged()
     }
 
@@ -474,32 +481,20 @@ class ImageAdapter(
     }
 
     /**
-     * Remove image from actionable images map.
+     * Remove image from actionable images list.
      */
     fun removeImageFromActionableImageMap(image: Image) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val showAlreadyActionedImages =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        val showAlreadyActionedImages = showAlreadyActionedImages()
 
         if (showAlreadyActionedImages) {
             refresh(allImages, allImages, uploadingContributionList)
         } else {
-            val iterator = actionableImagesMap.entries.iterator()
-            var index = 0
-
-            while (iterator.hasNext()) {
-                val entry = iterator.next()
-                if (entry.value == image) {
-                    imagePositionAsPerIncreasingOrder -= 1
-                    _currentImagesCount.value = imagePositionAsPerIncreasingOrder
-                    iterator.remove()
-                    alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
-                    notifyItemRemoved(index)
-                    notifyItemRangeChanged(index, itemCount)
-                    break
-                }
-                index++
+            val index = actionableImages.indexOf(image)
+            if (index != -1) {
+                actionableImages.removeAt(index)
+                _currentImagesCount.value = actionableImages.size
+                notifyItemRemoved(index)
+                notifyItemRangeChanged(index, itemCount)
             }
         }
     }
@@ -510,28 +505,21 @@ class ImageAdapter(
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val showAlreadyActionedImages =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        val showAlreadyActionedImages = showAlreadyActionedImages()
 
-        // While switch is on initializes the holder with all images size
         return if (showAlreadyActionedImages) {
             allImages.size
-
-            // While switch is off and searching for next actionable has ended, initializes the holder
-            // with size of all actionable images
-        } else if (actionableImagesMap.size == allImages.size || reachedEndOfFolder) {
-            actionableImagesMap.size
-
-            // While switch is off, initializes the holder with and extra view holder so that finding
-            // and addition of the next actionable image in the adapter can be continued
+        } else if (reachedEndOfFolder) {
+            actionableImages.size
         } else {
-            actionableImagesMap.size + 1
+            actionableImages.size + 1
         }
     }
 
-    fun getImageIdAt(position: Int): Long = images.get(position).id
+    fun getImageIdAt(position: Int): Long {
+        val showAlreadyActionedImages = showAlreadyActionedImages()
+        return resolveImageAt(position, showAlreadyActionedImages)?.id ?: 0L
+    }
 
     /**
      * CleanUp function.
@@ -654,7 +642,10 @@ class ImageAdapter(
     /**
      * Returns the text for showing inside the bubble during bubble scroll.
      */
-    override fun getSectionName(position: Int): String = images[position].date
+    override fun getSectionName(position: Int): String {
+        val showAlreadyActionedImages = showAlreadyActionedImages()
+        return resolveImageAt(position, showAlreadyActionedImages)?.date ?: ""
+    }
 
     private var singleSelection: Boolean = false
 
