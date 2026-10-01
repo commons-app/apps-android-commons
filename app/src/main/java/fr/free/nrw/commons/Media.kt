@@ -11,6 +11,16 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
+/**
+ * Media file types recognized by Commons for display and playback.
+ */
+enum class MediaType {
+    IMAGE,
+    VIDEO,
+    AUDIO,
+    OTHER,
+}
+
 @Parcelize
 class Media constructor(
     /**
@@ -79,6 +89,11 @@ class Media constructor(
      * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
      */
     var categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
+    var mimeType: String? = null,
+    /**
+     * Whether the file is an image, video, audio, or something else.
+     */
+    val mediaType: MediaType = mediaTypeFrom(mimeType, filename),
 ) : Parcelable {
     constructor(
         captions: Map<String, String>,
@@ -204,3 +219,45 @@ class Media constructor(
             field = value
         } // setter
 }
+
+/**
+ * Maps the media type reported by the API to a [MediaType].
+ *
+ * Falls back to guessing based on the mime type when the API doesn't report one.
+ */
+fun mediaTypeFrom(
+    apiMediaType: String?,
+    mimeType: String?,
+    filename: String?,
+): MediaType =
+    when (apiMediaType?.uppercase()) {
+        "VIDEO" -> MediaType.VIDEO
+        "AUDIO" -> MediaType.AUDIO
+        "BITMAP", "DRAWING" -> MediaType.IMAGE
+        null -> mediaTypeFrom(mimeType, filename)
+        else -> MediaType.OTHER
+    }
+
+/**
+ * Guesses the media type of a file from its mime type.
+ *
+ * Note: '.ogg' files are a container that can hold either video or audio, so their extension is
+ * used instead. However, this is not reliable as '.ogg' can be used for video files even though
+ * it's conventionally used for audio.
+ */
+fun mediaTypeFrom(
+    mimeType: String?,
+    filename: String?,
+): MediaType =
+    when {
+        mimeType?.startsWith("video/", ignoreCase = true) == true -> MediaType.VIDEO
+        mimeType.equals("application/ogg", ignoreCase = true) ->
+            when (filename?.substringAfterLast('.', "")?.lowercase()) {
+                "ogv" -> MediaType.VIDEO
+                "ogg", "oga", "opus" -> MediaType.AUDIO
+                else -> MediaType.OTHER
+            }
+        mimeType?.startsWith("image/", ignoreCase = true) == true -> MediaType.IMAGE
+        mimeType?.startsWith("audio/", ignoreCase = true) == true -> MediaType.AUDIO
+        else -> MediaType.OTHER
+    }

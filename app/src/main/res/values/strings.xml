@@ -220,6 +220,8 @@
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
   <string name="media_detail_coordinates_empty">None provided</string>
+  <string name="playback_quality">Playback quality</string>
+  <string name="original">Original</string>
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
@@ -884,6 +886,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="grey_pin">Now checking whether this place has a picture.</string>
 
   <string name="error_while_loading">Error while loading</string>
+  <string name="play_video">Play video</string>
+  <string name="play_audio">Play audio</string>
+  <string name="video_unavailable">Video unavailable. Tap to try again.</string>
+  <string name="audio_unavailable">Audio unavailable. Tap to try again.</string>
   <string name="no_usages_found">No usages found</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>

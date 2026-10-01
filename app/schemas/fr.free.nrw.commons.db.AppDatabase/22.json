@@ -1,0 +1,738 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 22,
+    "identityHash": "6a62d55820d2b0a5e15b32f4c9b35527",
+    "entities": [
+      {
+        "tableName": "contribution",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
+        "fields": [
+          {
+            "fieldPath": "pageId",
+            "columnName": "pageId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transferred",
+            "columnName": "transferred",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "decimalCoords",
+            "columnName": "decimalCoords",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dateCreatedSource",
+            "columnName": "dateCreatedSource",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "wikidataPlace",
+            "columnName": "wikidataPlace",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "chunkInfo",
+            "columnName": "chunkInfo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "errorInfo",
+            "columnName": "errorInfo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "depictedItems",
+            "columnName": "depictedItems",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mimeType",
+            "columnName": "mimeType",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "localUri",
+            "columnName": "localUri",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dataLength",
+            "columnName": "dataLength",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateCreated",
+            "columnName": "dateCreated",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "dateCreatedString",
+            "columnName": "dateCreatedString",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dateModified",
+            "columnName": "dateModified",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "dateUploadStarted",
+            "columnName": "dateUploadStarted",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "hasInvalidLocation",
+            "columnName": "hasInvalidLocation",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contentUri",
+            "columnName": "contentUri",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "countryCode",
+            "columnName": "countryCode",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "retries",
+            "columnName": "retries",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.pageId",
+            "columnName": "media_pageId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.thumbUrl",
+            "columnName": "media_thumbUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.imageUrl",
+            "columnName": "media_imageUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.filename",
+            "columnName": "media_filename",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.fallbackDescription",
+            "columnName": "media_fallbackDescription",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.dateUploaded",
+            "columnName": "media_dateUploaded",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "media.license",
+            "columnName": "media_license",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.licenseUrl",
+            "columnName": "media_licenseUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.author",
+            "columnName": "media_author",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.user",
+            "columnName": "media_user",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.creatorName",
+            "columnName": "media_creatorName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.categories",
+            "columnName": "media_categories",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.coordinates",
+            "columnName": "media_coordinates",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "media.captions",
+            "columnName": "media_captions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.descriptions",
+            "columnName": "media_descriptions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.depictionIds",
+            "columnName": "media_depictionIds",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.creatorIds",
+            "columnName": "media_creatorIds",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.categoriesHiddenStatus",
+            "columnName": "media_categoriesHiddenStatus",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "media.addedCategories",
+            "columnName": "media_addedCategories",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "pageId"
+          ]
+        }
+      },
+      {
+        "tableName": "depicts_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`item` TEXT NOT NULL, `lastUsed` INTEGER NOT NULL, PRIMARY KEY(`item`))",
+        "fields": [
+          {
+            "fieldPath": "item",
+            "columnName": "item",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUsed",
+            "columnName": "lastUsed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "item"
+          ]
+        }
+      },
+      {
+        "tableName": "uploaded_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageSHA1` TEXT NOT NULL, `modifiedImageSHA1` TEXT NOT NULL, `imageResult` INTEGER NOT NULL, `modifiedImageResult` INTEGER NOT NULL, `lastUpdated` INTEGER, PRIMARY KEY(`imageSHA1`))",
+        "fields": [
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modifiedImageSHA1",
+            "columnName": "modifiedImageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageResult",
+            "columnName": "imageResult",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "modifiedImageResult",
+            "columnName": "modifiedImageResult",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "lastUpdated",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageSHA1"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_uploaded_table_modifiedImageSHA1",
+            "unique": true,
+            "columnNames": [
+              "modifiedImageSHA1"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_uploaded_table_modifiedImageSHA1` ON `${TABLE_NAME}` (`modifiedImageSHA1`)"
+          }
+        ]
+      },
+      {
+        "tableName": "images_not_for_upload_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageSHA1` TEXT NOT NULL, PRIMARY KEY(`imageSHA1`))",
+        "fields": [
+          {
+            "fieldPath": "imageSHA1",
+            "columnName": "imageSHA1",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageSHA1"
+          ]
+        }
+      },
+      {
+        "tableName": "reviewed-images",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`imageId` TEXT NOT NULL, PRIMARY KEY(`imageId`))",
+        "fields": [
+          {
+            "fieldPath": "imageId",
+            "columnName": "imageId",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "imageId"
+          ]
+        }
+      },
+      {
+        "tableName": "place",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`language` TEXT, `name` TEXT, `label` TEXT, `longDescription` TEXT, `entityID` TEXT NOT NULL, `category` TEXT, `pic` TEXT, `exists` INTEGER, `distance` TEXT, `siteLinks` TEXT, `isMonument` INTEGER NOT NULL, `thumb` TEXT, `latitude` REAL, `longitude` REAL, `accuracy` REAL, PRIMARY KEY(`entityID`))",
+        "fields": [
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "longDescription",
+            "columnName": "longDescription",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "entityID",
+            "columnName": "entityID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "pic",
+            "columnName": "pic",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "exists",
+            "columnName": "exists",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "distance",
+            "columnName": "distance",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "siteLinks",
+            "columnName": "siteLinks",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isMonument",
+            "columnName": "isMonument",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumb",
+            "columnName": "thumb",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "location.latitude",
+            "columnName": "latitude",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "location.longitude",
+            "columnName": "longitude",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "location.accuracy",
+            "columnName": "accuracy",
+            "affinity": "REAL"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "entityID"
+          ]
+        }
+      },
+      {
+        "tableName": "bookmarks_categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`categoryName` TEXT NOT NULL, PRIMARY KEY(`categoryName`))",
+        "fields": [
+          {
+            "fieldPath": "categoryName",
+            "columnName": "categoryName",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "categoryName"
+          ]
+        }
+      },
+      {
+        "tableName": "bookmarks_locations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location_name` TEXT NOT NULL, `location_language` TEXT NOT NULL, `location_description` TEXT NOT NULL, `location_lat` REAL NOT NULL, `location_long` REAL NOT NULL, `location_category` TEXT NOT NULL, `location_label_text` TEXT NOT NULL, `location_label_icon` INTEGER, `location_image_url` TEXT NOT NULL, `location_wikipedia_link` TEXT NOT NULL, `location_wikidata_link` TEXT NOT NULL, `location_commons_link` TEXT NOT NULL, `location_pic` TEXT NOT NULL, `location_exists` INTEGER NOT NULL, PRIMARY KEY(`location_name`))",
+        "fields": [
+          {
+            "fieldPath": "locationName",
+            "columnName": "location_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLanguage",
+            "columnName": "location_language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationDescription",
+            "columnName": "location_description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLat",
+            "columnName": "location_lat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLong",
+            "columnName": "location_long",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationCategory",
+            "columnName": "location_category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLabelText",
+            "columnName": "location_label_text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLabelIcon",
+            "columnName": "location_label_icon",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "locationImageUrl",
+            "columnName": "location_image_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationWikipediaLink",
+            "columnName": "location_wikipedia_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationWikidataLink",
+            "columnName": "location_wikidata_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationCommonsLink",
+            "columnName": "location_commons_link",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationPic",
+            "columnName": "location_pic",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationExists",
+            "columnName": "location_exists",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "location_name"
+          ]
+        }
+      },
+      {
+        "tableName": "bookmarks",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`media_name` TEXT NOT NULL, `media_creator` TEXT, PRIMARY KEY(`media_name`))",
+        "fields": [
+          {
+            "fieldPath": "mediaName",
+            "columnName": "media_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mediaCreator",
+            "columnName": "media_creator",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "media_name"
+          ]
+        }
+      },
+      {
+        "tableName": "bookmarksItems",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`item_name` TEXT NOT NULL, `item_description` TEXT, `item_image_url` TEXT, `item_instance_of` TEXT NOT NULL, `item_name_categories` TEXT NOT NULL, `item_description_categories` TEXT NOT NULL, `item_thumbnail_categories` TEXT NOT NULL, `item_is_selected` INTEGER NOT NULL, `item_id` TEXT NOT NULL, PRIMARY KEY(`item_id`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "item_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "item_description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "item_image_url",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "instanceOfs",
+            "columnName": "item_instance_of",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryNames",
+            "columnName": "item_name_categories",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryDescriptions",
+            "columnName": "item_description_categories",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryThumbnails",
+            "columnName": "item_thumbnail_categories",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSelected",
+            "columnName": "item_is_selected",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "item_id",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "item_id"
+          ]
+        }
+      },
+      {
+        "tableName": "categories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT, `thumbnail` TEXT, `last_used` INTEGER, `times_used` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "thumbnail",
+            "columnName": "thumbnail",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "lastUsed",
+            "columnName": "last_used",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "timesUsed",
+            "columnName": "times_used",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "_id"
+          ]
+        }
+      },
+      {
+        "tableName": "recent_languages",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`language_name` TEXT NOT NULL, `language_code` TEXT NOT NULL, PRIMARY KEY(`language_code`))",
+        "fields": [
+          {
+            "fieldPath": "languageName",
+            "columnName": "language_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "language_code",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "language_code"
+          ]
+        }
+      },
+      {
+        "tableName": "recent_searches",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `last_used` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "query",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastSearched",
+            "columnName": "last_used",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "_id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6a62d55820d2b0a5e15b32f4c9b35527')"
+    ]
+  }
+}
