@@ -1,9 +1,14 @@
 package fr.free.nrw.commons.upload
 
+
+import android.content.Context
+import androidx.core.content.ContextCompat.getString
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -22,7 +27,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import java.net.URLEncoder
+import java.net.UnknownHostException
 import java.util.Date
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
@@ -33,8 +41,9 @@ import javax.inject.Singleton
 
 @Singleton
 class UploadClient
-    @Inject
-    constructor(
+@Inject
+constructor(
+        private val context: Context,
         private val uploadInterface: UploadInterface,
         @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient,
         private val pageContentsCreator: PageContentsCreator,
@@ -78,7 +87,7 @@ class UploadClient
                     "Chunk: Next Chunk: %s, Total Chunks: %s",
                     contribution.chunkInfo!!.indexOfNextChunkToUpload,
                     contribution.chunkInfo!!.totalChunks,
-                )
+               )
             }
 
             val index = AtomicInteger()
@@ -111,33 +120,50 @@ class UploadClient
 
             return when {
                 contributionDao.getContribution(contribution.pageId) == null -> {
-                    return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
-                }
-                contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED ||
-                    CommonsApplication.isPaused -> {
-                    Timber.d("Upload stash paused %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
-                }
-                failures.get() -> {
-                    Timber.d("Upload stash contains failures %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, errorMessage.get()))
-                }
-                chunkInfo.get() != null -> {
-                    Timber.d("Upload stash success %s", contribution.pageId)
-                    Observable.just(
+                    return Observable.just(
                         StashUploadResult(
-                            StashUploadState.SUCCESS,
-                            chunkInfo.get()!!.uploadResult!!.filekey,
-                            "success",
+                            StashUploadState.CANCELLED,
+                            null,
+                            "Upload cancelled"
                         ),
                     )
                 }
-                else -> {
-                    Timber.d("Upload stash failed %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, null))
-                }
+
+            contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED ||
+                    CommonsApplication.isPaused -> {
+                Timber.d("Upload stash paused %s", contribution.pageId)
+                Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
+            }
+
+            failures.get() -> {
+                Timber.d("Upload stash contains failures %s", contribution.pageId)
+                Observable.just(
+                    StashUploadResult(
+                        StashUploadState.FAILED,
+                        null,
+                        errorMessage.get()
+                    )
+                )
+            }
+
+            chunkInfo.get() != null -> {
+                Timber.d("Upload stash success %s", contribution.pageId)
+                Observable.just(
+                    StashUploadResult(
+                        StashUploadState.SUCCESS,
+                        chunkInfo.get()!!.uploadResult!!.filekey,
+                        "success",
+                    ),
+                )
+            }
+
+            else -> {
+                Timber.d("Upload stash failed %s", contribution.pageId)
+                val message = errorMessage.get() ?: "Upload failed"
+                Observable.just(StashUploadResult(StashUploadState.FAILED, null, message))
             }
         }
+    }
 
         private fun processChunk(
             filename: String,
@@ -168,7 +194,8 @@ class UploadClient
             val listener = { transferred: Long, total: Long ->
                 notificationUpdater.onProgress(transferred, total)
             }
-            val countingRequestBody = CountingRequestBody(requestBody, listener, offset.toLong(), file.length())
+            val countingRequestBody =
+                CountingRequestBody(requestBody, listener, offset.toLong(), file.length())
 
             compositeDisposable.add(
                 uploadChunkToStash(
@@ -178,18 +205,18 @@ class UploadClient
                     filekey,
                     countingRequestBody,
                 ).subscribe(
-                    { uploadResult: UploadResult ->
+                    { uploadResult: UploadResult? ->
                         Timber.d(
                             "Chunk: Received Chunk number: %s, offset: %s",
                             index.get(),
-                            uploadResult.offset,
+                            uploadResult?.offset,
                         )
                         chunkInfo.set(ChunkInfo(uploadResult, index.get(), totalChunks))
                         notificationUpdater.onChunkUploaded(contribution, chunkInfo.get())
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-                        errorMessage.set(throwable?.message)
+                        errorMessage.set(handleNetworkErrorMessage(throwable,context))
                         failures.set(true)
                     },
                 ),
@@ -197,11 +224,11 @@ class UploadClient
         }
 
         /**
-         * Stash is valid for 6 hours. This function checks the validity of stash
-         *
-         * @param contribution
-         * @return
-         */
+        * Stash is valid for 6 hours. This function checks the validity of stash
+        *
+        * @param contribution
+        * @return
+        */
         private fun isStashValid(contribution: Contribution): Boolean =
             contribution.chunkInfo != null &&
                 contribution.dateModified!!.after(
@@ -221,33 +248,40 @@ class UploadClient
          * @return
          */
         fun uploadChunkToStash(
-            filename: String?,
+            filename: String,
             fileSize: Long,
             offset: Long,
             fileKey: String?,
             countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> {
-            val filePart: MultipartBody.Part
-            return try {
-                filePart =
-                    MultipartBody.Part.createFormData(
-                        "chunk",
-                        URLEncoder.encode(filename, "utf-8"),
-                        countingRequestBody,
-                    )
-                uploadInterface
-                    .uploadFileToStash(
-                        toRequestBody(filename),
-                        toRequestBody(fileSize.toString()),
-                        toRequestBody(offset.toString()),
-                        toRequestBody(fileKey),
-                        toRequestBody(csrfTokenClient.getTokenBlocking()),
-                        filePart,
-                    ).map(UploadResponse::upload)
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Failed to upload chunk to stash")
-                Observable.error(throwable)
-            }
+        ): Observable<UploadResult> =
+        Observable.defer {
+            val filePart = MultipartBody.Part.createFormData(
+                "chunk",
+                URLEncoder.encode(filename, "utf-8"),
+                countingRequestBody,
+            )
+            uploadInterface
+                .uploadFileToStash(
+                    toRequestBody(filename),
+                    toRequestBody(fileSize.toString()),
+                    toRequestBody(offset.toString()),
+                    toRequestBody(fileKey),
+                    toRequestBody(csrfTokenClient.getTokenBlocking()),
+                    filePart,
+                ).map { response: UploadResponse ->
+                    val upload = response.upload
+                    if (upload == null) {
+                        val exception =
+                            IOException("Chunk upload failed: server returned a null upload result.")
+                        Timber.e(exception, "Error in uploading file chunk to stash")
+                        throw exception
+                    }
+                    upload
+                }.onErrorResumeNext { e: Throwable ->
+                    Timber.e(e, handleNetworkErrorMessage(e,context))
+                    Observable.error(e)
+                }
+
         }
 
         /**
@@ -259,27 +293,25 @@ class UploadClient
             contribution: Contribution?,
             uniqueFileName: String?,
             fileKey: String?,
-        ): Observable<UploadResult?> =
-            try {
-                uploadInterface
-                    .uploadFileFromStash(
-                        csrfTokenClient.getTokenBlocking(),
-                        pageContentsCreator.createFrom(contribution),
-                        CommonsApplication.DEFAULT_EDIT_SUMMARY,
-                        uniqueFileName!!,
-                        fileKey!!,
-                    ).map { uploadResponse: JsonObject? ->
-                        val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
-                        if (uploadResult.upload == null) {
-                            val exception = gson.fromJson(uploadResponse, MwException::class.java)
-                            Timber.e(exception, "Error in uploading file from stash")
-                            throw Exception(exception.errorCode)
-                        }
-                        uploadResult.upload
+        ): Observable<UploadResult> =
+            uploadInterface
+                .uploadFileFromStash(
+                    csrfTokenClient.getTokenBlocking(),
+                    pageContentsCreator.createFrom(contribution),
+                    CommonsApplication.DEFAULT_EDIT_SUMMARY,
+                    uniqueFileName!!,
+                    fileKey!!,
+                ).map { uploadResponse: JsonObject? ->
+                    val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
+                    if (uploadResult.upload == null) {
+                        val exception = gson.fromJson(uploadResponse, MwException::class.java)
+                        Timber.e(exception, "Error in uploading file from stash")
+                        throw Exception(exception.errorCode)
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Exception occurred in uploading file from stash")
-                Observable.error(throwable)
+                    uploadResult.upload
+                }.onErrorResumeNext { e: Throwable ->
+                Timber.e(e, handleNetworkErrorMessage(e,context))
+                Observable.error(e)
             }
 }
 
@@ -301,3 +333,15 @@ private fun shouldSkip(
     chunkInfo: AtomicReference<ChunkInfo?>,
     index: AtomicInteger,
 ): Boolean = chunkInfo.get() != null && index.get() < chunkInfo.get()!!.indexOfNextChunkToUpload
+
+/**
+ * @param e - A network error to be handled by the program should the need arise
+ * @return A string - the message that is returned based on the received network error
+ */
+private fun handleNetworkErrorMessage(e: Throwable?, context:Context): String = when (e) {
+    is InvalidLoginTokenException -> getString(context,R.string.error_invalid_login_token)
+    is UnknownHostException -> getString(context,R.string.error_unknown_host)
+    is SocketTimeoutException -> getString(context,R.string.error_socket_timeout)
+    is ConnectException -> getString(context,R.string.error_connect_exception)
+    else -> getString(context,R.string.error_unexpected)
+}
