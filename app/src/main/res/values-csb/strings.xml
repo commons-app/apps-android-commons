@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Iketsi
 * Kaszeba
 * Orbitminis
 * Terrus38
@@ -125,7 +126,7 @@
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulpa</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Witôj na Wikipediji</string>
+  <string name="welcome_image_welcome_wikipedia">Witómë na Wikipedie</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Witôj w prawnych zastrzégach</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Anuluj</string>
