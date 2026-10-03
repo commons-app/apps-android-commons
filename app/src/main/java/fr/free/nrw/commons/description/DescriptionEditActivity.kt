@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.description
 
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.RecognizerIntent
@@ -24,6 +24,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -67,7 +68,7 @@ class DescriptionEditActivity :
     /**
      * For showing progress dialog
      */
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
 
     @Inject
     lateinit var recentLanguagesDao: RecentLanguagesDao
@@ -301,11 +302,11 @@ class DescriptionEditActivity :
     }
 
     private fun showLoggingProgressBar() {
-        progressDialog = ProgressDialog(this)
-        progressDialog!!.isIndeterminate = true
-        progressDialog!!.setTitle(getString(R.string.updating_caption_title))
-        progressDialog!!.setMessage(getString(R.string.updating_caption_message))
-        progressDialog!!.setCancelable(false)
+        progressDialog = DialogUtil.createProgressDialog(
+            context = this,
+            title = getString(R.string.updating_caption_title),
+            message = getString(R.string.updating_caption_message),
+        )
         progressDialog!!.show()
     }
 

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload.categories
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
@@ -28,6 +27,7 @@ import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import io.reactivex.Notification
@@ -56,7 +56,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     /**
      * Progress Dialog for showing background process
      */
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
 
     /**
      * WikiText from the server
@@ -297,11 +297,11 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
      * Shows the progress dialog
      */
     override fun showProgressDialog() {
-        progressDialog = ProgressDialog(requireContext()).apply {
-            setMessage(getString(R.string.please_wait))
-        }.also {
-            it.show()
-        }
+        progressDialog = DialogUtil.createProgressDialog(
+            context = requireContext(),
+            message = getString(R.string.please_wait),
+        )
+        progressDialog!!.show()
     }
 
     /**
