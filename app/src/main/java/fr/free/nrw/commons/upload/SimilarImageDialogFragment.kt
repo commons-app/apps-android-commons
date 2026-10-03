@@ -2,15 +2,15 @@ package fr.free.nrw.commons.upload
 
 import android.app.Dialog
 import android.content.DialogInterface
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentSimilarImageDialogBinding
 import java.io.File
@@ -38,35 +38,15 @@ class SimilarImageDialogFragment : DialogFragment() {
     ): View {
         _binding = FragmentSimilarImageDialogBinding.inflate(inflater, container, false)
 
-        binding.orginalImage.hierarchy =
-            GenericDraweeHierarchyBuilder.newInstance(resources).setPlaceholderImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_image_black_24dp, requireContext().theme
-                )
-            ).setFailureImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_error_outline_black_24dp, requireContext().theme
-                )
-            ).build()
-
-        binding.possibleImage.hierarchy =
-            GenericDraweeHierarchyBuilder.newInstance(resources).setPlaceholderImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_image_black_24dp, requireContext().theme
-                )
-            ).setFailureImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_error_outline_black_24dp, requireContext().theme
-                )
-            ).build()
-
         arguments?.let {
-            binding.orginalImage.setImageURI(
-                Uri.fromFile(File(it.getString("originalImagePath")!!))
-            )
-            binding.possibleImage.setImageURI(
-                Uri.fromFile(File(it.getString("possibleImagePath")!!))
-            )
+            binding.orginalImage.load(File(it.getString("originalImagePath")!!)) {
+                placeholder(R.drawable.ic_image_black_24dp)
+                error(R.drawable.ic_error_outline_black_24dp)
+            }
+            binding.possibleImage.load(File(it.getString("possibleImagePath")!!)) {
+                placeholder(R.drawable.ic_image_black_24dp)
+                error(R.drawable.ic_error_outline_black_24dp)
+            }
         }
 
         binding.postiveButton.setOnClickListener {

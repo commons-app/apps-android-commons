@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -49,10 +48,6 @@ class GridViewAdapterUnitTest {
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
-
-        SoLoader.setInTestMode()
-
-        Fresco.initialize(context)
 
         activity = Robolectric.buildActivity(CategoryDetailsActivity::class.java).get()
 

@@ -5,22 +5,17 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.Nullable
-import com.facebook.common.executors.CallerThreadExecutor
-import com.facebook.common.references.CloseableReference
-import com.facebook.datasource.DataSource
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipeline
-import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
-import com.facebook.imagepipeline.image.CloseableImage
-import com.facebook.imagepipeline.request.ImageRequest
-import com.facebook.imagepipeline.request.ImageRequestBuilder
+import coil3.SingletonImageLoader
+import coil3.request.ImageRequest
+import coil3.request.SuccessResult
+import coil3.request.allowHardware
+import coil3.toBitmap
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import fr.free.nrw.commons.media.MediaClient
 import javax.inject.Inject
 import fr.free.nrw.commons.R
@@ -117,7 +112,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
     }
 
     /**
-     * Uses Fresco to load an image from Url
+     * Uses Coil to load an image from Url
      * @param imageUrl The URL of the image to load.
      * @param context The application context.
      * @param views The RemoteViews object used to update the App Widget UI.
@@ -131,25 +126,25 @@ class PicOfDayAppWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
     ) {
-        val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build()
-        val imagePipeline = Fresco.getImagePipeline()
-        val dataSource = imagePipeline.fetchDecodedImage(request, context)
+        if (imageUrl == null) return
 
-        dataSource.subscribe(object : BaseBitmapDataSubscriber() {
-            override fun onNewResultImpl(tempBitmap: Bitmap?) {
-                val bitmap = tempBitmap?.let {
-                    Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888).apply {
-                        Canvas(this).drawBitmap(it, 0f, 0f, Paint())
-                    }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val imageLoader = SingletonImageLoader.get(context)
+                val request = ImageRequest.Builder(context)
+                    .data(imageUrl)
+                    .allowHardware(false)
+                    .build()
+                val result = imageLoader.execute(request)
+                if (result is SuccessResult) {
+                    val bitmap = result.image.toBitmap()
+                    views.setImageViewBitmap(R.id.appwidget_image, bitmap)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
-                views.setImageViewBitmap(R.id.appwidget_image, bitmap)
-                appWidgetManager.updateAppWidget(appWidgetId, views)
+            } catch (e: Exception) {
+                Timber.e(e, "Error loading image for widget")
             }
-
-            override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>) {
-                // Ignore failure for now.
-            }
-        }, CallerThreadExecutor.getInstance())
+        }
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {

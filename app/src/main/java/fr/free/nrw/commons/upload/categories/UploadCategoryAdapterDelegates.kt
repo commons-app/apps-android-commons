@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.view.View
+import coil3.load
+import coil3.request.placeholder
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
@@ -38,9 +40,11 @@ fun uploadCategoryDelegate(
         }
         binding.categoryLabel.text = item.name
         if (item.thumbnail != "null") {
-            binding.categoryImage.setImageURI(item.thumbnail)
+            binding.categoryImage.load(item.thumbnail) {
+                placeholder(R.drawable.commons)
+            }
         } else {
-            binding.categoryImage.setActualImageResource(R.drawable.commons)
+            binding.categoryImage.setImageResource(R.drawable.commons)
         }
 
         if (item.description != "null") {

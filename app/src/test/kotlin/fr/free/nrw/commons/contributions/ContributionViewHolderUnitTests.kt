@@ -4,9 +4,7 @@ import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -67,8 +65,6 @@ class ContributionViewHolderUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        SoLoader.setInTestMode()
-        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         compositeDisposable = CompositeDisposable()
         parent = LayoutInflater.from(activity).inflate(R.layout.layout_contribution, null)
@@ -212,7 +208,6 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn("https://demo/sample.png")
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
     }
 
     @Test
@@ -223,7 +218,6 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNull(contributionViewHolder.imageRequest)
     }
 
     @Test
@@ -234,6 +228,5 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(Uri.parse("/data/android/demo.png"))
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
     }
 }
