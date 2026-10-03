@@ -35,7 +35,7 @@ class TransformImageTest {
 
     private var context: Context? = null
 
-    private val transformImage: TransformImage = TransformImageImpl()
+    private val editViewModel = EditViewModel()
     private lateinit var savePath: File
 
     @Before
@@ -46,14 +46,14 @@ class TransformImageTest {
 
     @After
     fun tearDown() {
-        transformImage.cleanup()
+        editViewModel.cleanup()
     }
 
     private fun rotateImage(imageFile: File, degree: Int, savePath: File = this.savePath): File {
         val normalizedDegree = ((degree % 360) + 360) % 360
-        transformImage.initJpegtran(context!!, imageFile.absolutePath)
-        val outPutFile = transformImage.rotateImage(imageFile, normalizedDegree, savePath)
-        transformImage.cleanup()
+        editViewModel.initJpegtran(context!!, imageFile.absolutePath)
+        val outPutFile = editViewModel.rotateImage(imageFile, normalizedDegree, savePath)
+        editViewModel.cleanup()
         return outPutFile
     }
 
@@ -65,10 +65,10 @@ class TransformImageTest {
         height: Int,
         savePath: File = this.savePath
     ): File {
-        transformImage.cleanup()
-        transformImage.initJpegtran(context!!, imageFile.absolutePath)
-        val outPutFile = transformImage.cropImage(left, top, width, height, savePath)
-        transformImage.cleanup()
+        editViewModel.cleanup()
+        editViewModel.initJpegtran(context!!, imageFile.absolutePath)
+        val outPutFile = editViewModel.cropImage(left, top, width, height, savePath)
+        editViewModel.cleanup()
         return outPutFile
     }
 
@@ -77,10 +77,10 @@ class TransformImageTest {
         regions: List<BlurRegion>,
         savePath: File = this.savePath
     ): File {
-        transformImage.cleanup()
-        transformImage.initJpegtran(context!!, imageFile.absolutePath)
-        val outputFile = transformImage.blurImage(regions, savePath)
-        transformImage.cleanup()
+        editViewModel.cleanup()
+        editViewModel.initJpegtran(context!!, imageFile.absolutePath)
+        val outputFile = editViewModel.blurImage(regions, savePath)
+        editViewModel.cleanup()
         return outputFile
     }
 

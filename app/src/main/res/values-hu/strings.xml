@@ -7,6 +7,7 @@
 * Einstein2
 * Envlh
 * Hanna Tardos
+* Koko1998
 * Luckylukee81
 * MeskoBalazs
 * Misibacsi
@@ -555,6 +556,8 @@
   <string name="you_must_reset_your_passsword">A belépés nem sikerült. Kérj új jelszót!</string>
   <string name="title_app_shortcut_bookmark">Könyvjelzők</string>
   <string name="title_app_shortcut_setting">Beállítások</string>
+  <string name="remove_bookmark">Eltávolítva a könyvjelzők közül</string>
+  <string name="add_bookmark">Hozzáadva a könyvjelzőkhöz</string>
   <string name="setting_wallpaper_dialog_title">Beállítás háttérképnek</string>
   <string name="setting_wallpaper_dialog_message">Beállítás háttérképnek. Kérem várjon...</string>
   <string name="theme_default_name">Rendszerbeállítás követése</string>
@@ -565,6 +568,7 @@
   <string name="ask_to_turn_location_on">Bekapcsolod a helymeghatározást?</string>
   <string name="ask_to_turn_location_on_text">Kapcsold be a helyszolgáltatásokat, hogy az alkalmazás megjeleníthesse a jelenlegi helyedet</string>
   <string name="nearby_needs_location">A Közeli funkció megfelelő működéséhez be kell kapcsolni a helymeghatározást</string>
+  <string name="load_more">Továbbiak betöltése</string>
   <string name="todo_improve">Javasolt javítások:</string>
   <string name="missing_category">- Adj kategóriákat ehhez a képhez a használhatóság javítása érdekében.</string>
   <string name="missing_article">- Add hozzá ezt a képet a kapcsolódó, képek nélküli Wikipédia-szócikkhez.</string>
@@ -630,6 +634,7 @@
   <string name="media_detail_in_all_languages">Minden nyelven</string>
   <string name="choose_a_location">Hely kiválasztása</string>
   <string name="pan_and_zoom_to_adjust">Igazítsd mozgatással és nagyítással</string>
+  <string name="modify_location">Hely szerkesztése</string>
   <string name="label">Címke</string>
   <string name="description">Leírás</string>
   <string name="title_page_bookmarks_items">Elemek</string>
@@ -640,8 +645,11 @@
   <string name="custom_selector_info_text1">Itt ellenőrizheted a már Commonsba feltöltött képeket.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
+  <string name="edit_categories">Kategória szerkesztése</string>
   <string name="apply">Alkalmaz</string>
   <string name="reset">Visszaállítás</string>
+  <string name="no_location_found_title">Nem található helyszín</string>
+  <string name="add_location">Hely hozzáadása</string>
   <string name="explore_map_details">Részletek</string>
   <string name="api_level">API szint</string>
   <string name="android_version">Android verzió</string>

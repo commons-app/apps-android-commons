@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Andreyyshore
+* Blaséd
 * C1pr1an
 * GabiBil
 * Kyouko
@@ -291,7 +292,7 @@
   <string name="about_translate_title">Limbi</string>
   <string name="about_translate_message">Selectați limba în care doriți să trimiteți traduceri pentru</string>
   <string name="about_translate_proceed">Continuă</string>
-  <string name="about_translate_cancel">Anulare</string>
+  <string name="about_translate_cancel">Anulează</string>
   <string name="retry">Reîncercare</string>
   <string name="showcase_view_whole_nearby_activity">Acestea sunt locurile din apropierea dvs. care au nevoie de imagini pentru a ilustra articolele lor Wikipedia.\n\nFăcând click pe „CAUTĂ ACEASTĂ ZONĂ”, se blochează harta și se lansează o căutare în apropiere în jurul locației respective.</string>
   <string name="showcase_view_needs_photo">Acest loc are nevoie de o fotografie.</string>

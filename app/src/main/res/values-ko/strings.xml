@@ -373,6 +373,7 @@
   <string name="share_app_title">앱 공유</string>
   <string name="rotate">회전</string>
   <string name="crop">자르기</string>
+  <string name="blur">흐림 처리</string>
   <string name="error_fetching_nearby_places">주변 장소를 불러오지 못했습니다</string>
   <string name="no_pictures_in_this_area">이 지역에는 사진이 없습니다</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>

@@ -382,6 +382,11 @@
   <string name="rotate">Otočiť</string>
   <string name="crop">Orezať</string>
   <string name="blur">Rozmazanie</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Automatické rozmazávanie tvárí a evidenčných čísel.</string>
+  <string name="autodetect_description">Nesprávne zistené oblasti môžete zahodiť tlačidlom ❌ pri každej rozmazávanej oblasti.</string>
+  <string name="autoblur_failed_to_load">Nepodarilo sa načítať obrázok pre AutoBlur</string>
+  <string name="autoblur_no_region_detected">Pre AutoBlur sa nezistili žiadne oblasti</string>
   <string name="error_fetching_nearby_places">Nepodarilo sa načítať miesta v okolí</string>
   <string name="no_pictures_in_this_area">V tejto oblasti nie sú žiadne obrázky</string>
   <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>
@@ -884,4 +889,9 @@
   <string name="license_cc0_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, bez akýchkoľvek podmienok.</string>
   <string name="license_cc_by_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, dokonca aj na komerčné účely, pokiaľ je uvedený autor diela.</string>
   <string name="license_cc_by_sa_long_description">Táto licencia umožňuje ďalším používateľom dielo distribuovať, remixovať, upravovať a stavať na ňom v akomkoľvek médiu alebo formáte, dokonca aj na komerčné účely, pokiaľ je uvedený autor diela a nové dielo je licencované za rovnakých podmienok.</string>
+  <string name="error_getting_image_properties">Chyba pri získavaní vlastností obrázka:</string>
+  <string name="error_blur_no_rectangle">Nakreslite na fotografiu aspoň jeden obdĺžnik</string>
+  <string name="error_applying_blur">Chyba pri použití rozmazania</string>
+  <string name="failed_to_apply_crop">Nepodarilo sa použiť orezanie</string>
+  <string name="failed_to_save_image">Nepodarilo sa uložiť obrázok</string>
 </resources>
