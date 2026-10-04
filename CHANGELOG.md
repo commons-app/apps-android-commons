@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## 6.9.0
+
+### What's changed
+- Improvised dex score by removing obfuscation from proguard rules
+
 ## v6.8.0
 
 ### What's changed
