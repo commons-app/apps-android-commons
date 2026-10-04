@@ -3,7 +3,7 @@
 ## 6.9.0
 
 ### What's changed
-- Improvised dex score by removing obfuscation from proguard rules
+- Improved DEX score by removing `dontobfuscate` from ProGuard rules.
 
 ## v6.8.0
 
