@@ -145,10 +145,14 @@ public enum Label {
         if ("BOOKMARK".equals(text)) {
             return BOOKMARKS;
         }
-        if (!(text.charAt(0) == 'Q')) {
+        if (text == null || !text.startsWith("Q")) {
             return UNKNOWN;
         }
-        return fromQidInt(Integer.parseInt(text.substring(1)));
+        try {
+            return fromQidInt(Integer.parseInt(text.substring(1)));
+        } catch (final NumberFormatException e) {
+            return UNKNOWN;
+        }
     }
 
     public static List<Label> valuesAsList() {
