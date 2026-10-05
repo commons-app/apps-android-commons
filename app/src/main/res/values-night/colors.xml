@@ -5,4 +5,5 @@
   <color name="background">#000000</color>
   <color name="onBackground">#ffffff</color>
   <color name="scrim">#50000000</color>
+  <color name="overflow_custom_picker_menu">#fff</color>
 </resources>
