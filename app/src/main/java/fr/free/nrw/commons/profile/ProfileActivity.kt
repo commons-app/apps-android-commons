@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -79,10 +80,23 @@ class ProfileActivity : BaseActivity() {
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         setTabs()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (contributionsFragment?.mediaDetailPagerFragment?.isVisible == true) {
+                    contributionsFragment?.backButtonClicked()
+                    binding.tabLayout.visibility = View.VISIBLE
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -185,15 +199,6 @@ class ProfileActivity : BaseActivity() {
         super.onSaveInstanceState(outState)
         outState.putString(KEY_USERNAME, userName)
         outState.putBoolean(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
-    }
-
-    override fun onBackPressed() {
-        if (contributionsFragment?.mediaDetailPagerFragment?.isVisible == true) {
-            contributionsFragment?.backButtonClicked()
-            binding.tabLayout.visibility = View.VISIBLE
-        } else {
-            super.onBackPressed()
-        }
     }
 
     fun setTabLayoutVisibility(isVisible: Boolean) {

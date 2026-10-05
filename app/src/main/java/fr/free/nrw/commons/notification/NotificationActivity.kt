@@ -73,7 +73,7 @@ class NotificationActivity : BaseActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -193,7 +193,7 @@ class NotificationActivity : BaseActivity() {
                 if (item.title == getString(R.string.menu_option_read)) {
                     startYourself(this, "read")
                 } else if (item.title == getString(R.string.menu_option_unread)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
                 true
             }

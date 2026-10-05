@@ -13,7 +13,8 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 
 
 class DBOpenHelper(
-    context: Context
+    context: Context,
+    testDelegate: SupportSQLiteOpenHelper? = null
 ) {
 
     companion object {
@@ -40,7 +41,8 @@ class DBOpenHelper(
      *  Delegate to handle database lifecycle
      *  Used to expose writableDatabase , readableDatabase properties
      */
-    private val delegate: SupportSQLiteOpenHelper = FrameworkSQLiteOpenHelperFactory().create(
+    private val delegate: SupportSQLiteOpenHelper =
+        testDelegate ?: FrameworkSQLiteOpenHelperFactory().create(
         SupportSQLiteOpenHelper.Configuration.builder(context)
             .name(DATABASE_NAME)
             .callback(object : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
@@ -83,6 +84,17 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
                     ?.let { presenter.onPlaceSelectedFromMap(it) }
             }
         }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            if (media != null) {
+                binding.depictsSearch.clearFocus()
+                presenter.clearPreviousSelection()
+                updateDepicts()
+                goBackToPreviousScreen()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -446,28 +458,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         super.onResume()
 
         if (media != null) {
-            binding.depictsSearch.setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent? ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    binding.depictsSearch.clearFocus()
-                    presenter.clearPreviousSelection()
-                    updateDepicts()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-
-            requireView().isFocusableInTouchMode = true
-            requireView().requestFocus()
-            requireView().setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent ->
-                if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    presenter.clearPreviousSelection()
-                    updateDepicts()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
+            onBackPressedCallback.isEnabled = true
 
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
@@ -475,6 +466,11 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
                 ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment?)?.binding?.cardViewNearby?.setVisibility(View.GONE)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
     }
 
     /**

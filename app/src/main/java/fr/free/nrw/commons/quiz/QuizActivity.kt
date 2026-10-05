@@ -3,6 +3,7 @@ package fr.free.nrw.commons.quiz
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 
 import androidx.appcompat.app.AlertDialog
@@ -51,6 +52,24 @@ class QuizActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         binding.nextButton.setOnClickListener { notKnowAnswer() }
         displayQuestion()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(this@QuizActivity)
+                    .setTitle(getString(R.string.warning))
+                    .setMessage(getString(R.string.quiz_back_button))
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.continue_message) { dialog, _ ->
+                        val intent = Intent(this@QuizActivity, QuizResultActivity::class.java)
+                        dialog.dismiss()
+                        intent.putExtra("QuizResult", score)
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
+                    .create()
+                    .show()
+            }
+        })
     }
 
     /**
@@ -64,25 +83,6 @@ class QuizActivity : AppCompatActivity() {
 
     private fun notKnowAnswer() {
         customAlert("Information", quiz[questionIndex].answerMessage)
-    }
-
-    /**
-     * To give warning before ending quiz
-     */
-    override fun onBackPressed() {
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.warning))
-            .setMessage(getString(R.string.quiz_back_button))
-            .setCancelable(false)
-            .setPositiveButton(R.string.continue_message) { dialog, _ ->
-                val intent = Intent(this, QuizResultActivity::class.java)
-                dialog.dismiss()
-                intent.putExtra("QuizResult", score)
-                startActivity(intent)
-            }
-            .setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
-            .create()
-            .show()
     }
 
     /**

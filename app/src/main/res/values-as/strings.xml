@@ -127,6 +127,7 @@
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">এটা ছেল্ফি</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">ধোঁৱা-ধোঁৱা</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">অৰ্থহীন</string>
+  <string name="delete_helper_ask_spam_other">অনান্য</string>
   <string name="delete_helper_ask_reason_copyright_logo">ল\'গ\'</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">কাৰণ এয়া</string>
 </resources>

@@ -2,11 +2,16 @@ package fr.free.nrw.commons.filepicker
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.webkit.MimeTypeMap
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.filepicker.Constants.Companion.DEFAULT_FOLDER_NAME
 import timber.log.Timber
 import java.io.File
@@ -143,8 +148,19 @@ object PickedFiles : Constants {
     @JvmStatic
     fun pickedExistingPicture(context: Context, photoUri: Uri): UploadableFile {
         val directory = tempImageDirectory(context)
-        val mimeType = getMimeType(context, photoUri)
-        val photoFile = File(directory, "${UUID.randomUUID()}.$mimeType")
+        val ext = getMimeType(context, photoUri)
+        val isHeic = ext.equals("heic", true) || ext.equals("heif", true)
+        val photoFile = File(directory, "${UUID.randomUUID()}.${if (isHeic) "jpg" else ext}")
+
+        if (isHeic) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) throw IOException("HEIC not supported on this Android version")
+            val srcExif = context.contentResolver.openInputStream(photoUri)?.use { ExifInterface(it) }
+            HeicApi28.transcodeToJpeg(context.contentResolver, photoUri, photoFile)
+            srcExif?.let { copyExif(it, photoFile) }
+            return UploadableFile(photoUri, photoFile).apply {
+                hasUnsupportedFormat = true
+            }
+        }
 
         if (photoFile.createNewFile()) {
             context.contentResolver.openInputStream(photoUri)?.use { inputStream ->
@@ -154,6 +170,19 @@ object PickedFiles : Constants {
             throw IOException("Could not create photoFile to write upon")
         }
         return UploadableFile(photoUri, photoFile)
+    }
+
+    private fun copyExif(src: ExifInterface, dstFile: File) {
+        RandomAccessFileExifWriter.copyExif(src, dstFile)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private object HeicApi28 {
+        fun transcodeToJpeg(cr: ContentResolver, uri: Uri, outFile: File) {
+            val src = android.graphics.ImageDecoder.createSource(cr, uri)
+            val bmp = android.graphics.ImageDecoder.decodeBitmap(src)
+            FileOutputStream(outFile).use { bmp.compress(Bitmap.CompressFormat.JPEG, 95, it) }
+        }
     }
 
     /**

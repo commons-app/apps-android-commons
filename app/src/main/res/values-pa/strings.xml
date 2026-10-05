@@ -274,6 +274,9 @@
   <string name="title_page_bookmarks_locations">ਟਿਕਾਣਾ</string>
   <string name="title_page_bookmarks_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="deletion_reason_bad_for_my_privacy">ਮੈਨੂੰ ਅਹਿਸਾਸ ਹੋਇਆ ਕਿ ਇਹ ਮੇਰੀ ਨਿੱਜਤਾ ਲਈ ਬੁਰਾ ਹੈ।</string>
+  <string name="depictions_choose_from_map">ਨਕਸ਼ੇ ਵਿੱਚੋਂ ਚੁਣੋ</string>
+  <string name="depictions_map_confirm">ਤਸਦੀਕ ਕਰੋ</string>
+  <string name="depictions_map_no_photo_location">ਫੋਟੋ ਵਿੱਚ ਕੋਈ ਟਿਕਾਣਾ ਨਹੀਂ ਏ, ਤੁਹਾਡਾ ਹਾਲੀਆ ਟਿਕਾਣਾ ਵਿਖਾਇਆ ਜਾ ਰਿਹਾ ਏ।</string>
   <string name="search_this_area">ਇਸ ਖੇਤਰ ਵਿੱਚ ਖੋਜ ਕਰੋ</string>
   <string name="nearby_card_permission_title">ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ</string>
   <string name="never_ask_again">ਇਹ ਮੁੜ ਕਦੇ ਨਾ ਪੁੱਛੋ</string>
@@ -298,4 +301,5 @@
   <string name="usages_on_commons_heading">ਕਾਮਨਜ਼</string>
   <string name="usages_on_other_wikis_heading">ਹੋਰ ਵਿਕੀਆਂ</string>
   <string name="file_usages_container_heading">ਫ਼ਾਈਲ ਦੀ ਵਰਤੋਂ</string>
+  <string name="license_cc0_description">ਇਸ ਲਿਖਤ \'ਤੇ ਕਿਸੇ ਦਾ ਕੋਈ ਹੱਕ ਨਹੀਂ। ਤੁਸੀਂ ਸਾਰੇ ਹੱਕ ਛੱਡ ਦਿੱਤੇ ਹਨ ਤਾਂ ਜੋ ਕੋਈ ਵੀ ਇਸ ਨੁੰ ਜਿਵੇਂ ਮਰਜ਼ੀ ਵਰਤ ਸਕੇ।</string>
 </resources>

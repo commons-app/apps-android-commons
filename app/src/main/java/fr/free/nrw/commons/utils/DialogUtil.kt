@@ -60,6 +60,7 @@ object DialogUtil {
         negativeButtonText: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
+        cancelable: Boolean = false,
     ): AlertDialog? =
         createAndShowDialogSafely(
             activity = activity,
@@ -69,6 +70,7 @@ object DialogUtil {
             negativeButtonText = negativeButtonText,
             onPositiveBtnClick = onPositiveBtnClick,
             onNegativeBtnClick = onNegativeBtnClick,
+            cancelable = cancelable,
         )
 
     @JvmStatic

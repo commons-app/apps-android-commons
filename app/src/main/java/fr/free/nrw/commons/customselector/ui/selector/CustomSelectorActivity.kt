@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -232,6 +234,23 @@ class CustomSelectorActivity :
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+                val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+                if (fragment != null && fragment is FolderFragment) {
+                    isImageFragmentOpen = false
+                    changeTitle(getString(R.string.custom_selector_title), 0)
+                }
+
+                //hide overflow menu when not in folder
+                showOverflowMenu = false
+                setUpToolbar()
+            }
+        })
     }
 
     override fun onRequestPermissionsResult(
@@ -450,7 +469,7 @@ class CustomSelectorActivity :
      */
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
-        back.setOnClickListener { onBackPressed() }
+        back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val limitError: ImageButton = findViewById(R.id.image_limit_error)
         limitError.visibility = View.INVISIBLE
@@ -652,19 +671,38 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
-                CustomSelectorUtils.getImageSHA1(
-                    image.uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver
-                )
-            }
+            val uniqueImages =
+                    selectedImages.distinctBy { image ->
+                        CustomSelectorUtils.getImageSHA1(
+                            image.uri,
+                            ioDispatcher,
+                            fileUtilsWrapper,
+                            contentResolver,
+                        )
+                    }
 
             withContext(Dispatchers.Main) {
-                finishPickImages(ArrayList(uniqueImages))
+                if (uniqueImages.size != selectedImages.size) {
+                    showDuplicateSelectionWarning {
+                        finishPickImages(ArrayList(uniqueImages))
+                    }
+                } else {
+                    finishPickImages(ArrayList(uniqueImages))
+                }
             }
         }
+    }
+
+    /**
+     * Warns users when duplicate-content images are selected before finishing selection.
+     */
+    private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.warning)
+            .setMessage(R.string.custom_selector_duplicates_warning)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
+            .show()
     }
 
     /**
@@ -676,23 +714,6 @@ class CustomSelectorActivity :
         data.putParcelableArrayListExtra("Images", images)
         setResult(Activity.RESULT_OK, data)
         finish()
-    }
-
-    /**
-     * Back pressed.
-     * Change toolbar title.
-     */
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment != null && fragment is FolderFragment) {
-            isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title), 0)
-        }
-
-        //hide overflow menu when not in folder
-        showOverflowMenu = false
-        setUpToolbar()
     }
 
     /**

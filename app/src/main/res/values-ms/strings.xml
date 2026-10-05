@@ -188,6 +188,7 @@
   <string name="upload_problem_image_duplicate">Imej sudah ada di Commons.</string>
   <string name="upload_problem_different_geolocation">Gambar ini diambil di lokasi yang berbeza.</string>
   <string name="upload_problem_image">Masalah yang dijumpai dalam imej</string>
+  <string name="login_to_your_account">Log masuk ke dalam akaun anda</string>
   <string name="send_log_file">Hantar fail log</string>
   <string name="null_url">Ralat! URL tidak dijumpai</string>
   <string name="nominate_deletion">Calonkan untuk Penghapusan</string>

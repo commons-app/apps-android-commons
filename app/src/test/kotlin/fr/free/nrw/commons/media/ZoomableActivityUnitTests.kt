@@ -133,9 +133,7 @@ class ZoomableActivityUnitTests {
      */
     @Test
     fun testOnBackPressed() {
-        val func = activity.javaClass.getDeclaredMethod("onBackPressed")
-        func.isAccessible = true
-        func.invoke(activity)
+        activity.onBackPressedDispatcher.onBackPressed()
     }
 
     /**

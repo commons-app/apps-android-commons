@@ -70,6 +70,7 @@ class ImageProcessingServiceTest {
         `when`(uploadItem.contentUri).thenReturn(contentUri)
         `when`(appContext.contentResolver).thenReturn(contentResolver)
         `when`(uploadItem.imageQuality).thenReturn(ImageUtils.IMAGE_WAIT)
+        `when`(uploadItem.hasUnsupportedFormat).thenReturn(false)
 
         `when`(uploadItem.uploadMediaDetails).thenReturn(mockTitle as MutableList<UploadMediaDetail>?)
 
@@ -141,6 +142,13 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateImageForUnsupportedFormat() {
+        `when`(uploadItem.hasUnsupportedFormat).thenReturn(true)
+        val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
+        assertEquals(ImageUtils.IMAGE_FORMAT_UNSUPPORTED, validateImage.blockingGet())
     }
 
     @Test

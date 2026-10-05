@@ -427,6 +427,7 @@
   <string name="no_categories_selected_warning_desc">Kuvat, jotka eivät ole luokissa, ovat harvoin käyttökelpoisia. Haluatko varmasti jatkaa valitsematta luokkia?</string>
   <string name="no_depictions_selected">Esittää-tunnisteita ei valittu</string>
   <string name="no_depictions_selected_warning_desc">Kuvat, joissa on esittää-tunnisteita, löytyvät helpommin ja niitä käytetään todennäköisemmin. Haluatko varmasti jatkaa valitsematta esittää-tunnisteita?</string>
+  <string name="depictions_map_confirm">Vahvista</string>
   <string name="back_button_warning">Peruuta tallennus</string>
   <string name="back_button_warning_desc">Takaisin-napin painaminen peruuttaa tämän tallennuksen ja poistaa tallentamasi tiedot</string>
   <string name="back_button_continue">Jatka tallennusta</string>
@@ -522,6 +523,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, jota ei käytetä missään artikkelissa</string>
   <string name="delete_helper_ask_spam_blurry">täysin sumea</string>
   <string name="delete_helper_ask_spam_nonsense">hölynpölyä, täysin hyödytön kaikissa artikkelissa</string>
+  <string name="delete_helper_ask_spam_other">Muu</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

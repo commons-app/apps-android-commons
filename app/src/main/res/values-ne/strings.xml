@@ -255,7 +255,7 @@
   <string name="wrong">गलत उत्तर</string>
   <string name="share_app_title">अनुप्रयाेग साझेदारी गर्नुहाेस्</string>
   <string name="nominate_delete">मेटाउनका लागि नामाङ्कित</string>
-  <string name="delete">मेट्नुहोस्</string>
+  <string name="delete">मेटाउनुहोस्</string>
   <string name="Achievements">उपलब्धिहरू</string>
   <string name="statistics_thanks">धन्यवाद प्राप्त भयाे</string>
   <string name="statistics_featured">विशेष तस्वीरहरू</string>
@@ -293,6 +293,7 @@
   <string name="delete_helper_show_deletion_title_failed">असफल</string>
   <string name="delete_helper_ask_spam_selfie">एउटा सेल्फी जुन कुनै पनि लेखहरूमा प्रयोग गरिएको छैन्</string>
   <string name="delete_helper_ask_spam_blurry">पुरै धमिलो</string>
+  <string name="delete_helper_ask_spam_other">अन्य</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="coordinates_edit_helper_show_edit_title_success">सफल</string>
@@ -326,7 +327,7 @@
   <string name="edit_categories">सम्पादन श्रेणीहरू</string>
   <string name="advanced_options">उन्नत विकल्प</string>
   <string name="advanced_query_info_text">तपाईँले निकटता क्वेरी अनुकूलन गर्न सक्नुहुन्छ। त्रुटी भएमा पूर्ववत् गर्नुभएर लागू गर्नुहोस्।</string>
-  <string name="apply">लागू गर्नुहोस्</string>
+  <string name="apply">लागु गर्नुहोस्</string>
   <string name="reset">पूर्वस्थितिमा फर्काउनुहोस्</string>
   <string name="location_message"/>
   <string name="no_location_found_title">कुनै पनि स्थान फेला परेन ।</string>

@@ -41,6 +41,7 @@
   <string name="app_name">ကွန်မွန်းစ်</string>
   <string name="menu_settings">အပြင်အဆင်များ</string>
   <string name="intent_share_upload_label">ကွန်မွန့်စ်တွင် တင်ရန်</string>
+  <string name="upload_in_progress">အက်ပလုဒ်တင်ခြင်း ဆောင်ရွက်နေဆဲ</string>
   <string name="username">အသုံးပြုသူအမည်</string>
   <string name="password">စကားဝှက်</string>
   <string name="login_credential">ကွန်မွန့်စ် ဘီတာအေကာင့်သို့ ဝင်မည်</string>
@@ -49,9 +50,10 @@
   <string name="signup">မှတ်ပုံတင်ရန်</string>
   <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်...</string>
   <string name="logging_in_message">ခေတ္တစောင့်ပါ...</string>
+  <string name="updating_caption_title">စာတန်းများနှင့် ဖော်ပြချက်များကို အပ်ဒိတ်လုပ်နေသည်</string>
   <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
-  <string name="login_success" fuzzy="true">လော့အင် အောင်မြင်သည်</string>
-  <string name="login_failed" fuzzy="true">လော့အင် မအောင်မြင်ပါ</string>
+  <string name="login_success">လော့အင် အောင်မြင်သည်</string>
+  <string name="login_failed">လော့အင် မအောင်မြင်ပါ</string>
   <string name="upload_failed">ဖိုင်မတွေ့ပါ၊ အခြးဖိုင်တစ်ခု စမ်းကြည့်ပါ။</string>
   <string name="authentication_failed" fuzzy="true">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
@@ -77,10 +79,10 @@
   <string name="add_caption_toast">ဤဖိုင်အတွက် ပုံစာသတ်မှတ်ပေးပါ</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="share_caption_hint">ပုံစာ</string>
-  <string name="login_failed_network" fuzzy="true">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
+  <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
   <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
-  <string name="login_failed_generic" fuzzy="true">လော့ဂ်အင် မအောင်မြင်ပါ</string>
+  <string name="login_failed_generic">လော့ဂ်အင် မအောင်မြင်ပါ</string>
   <string name="share_upload_button">တင်ရန်</string>
   <string name="provider_modifications">ပြုပြင်မှုများ</string>
   <string name="menu_upload_single">တင်ရန်</string>
@@ -103,6 +105,9 @@
   <string name="no_uploads_yet">သင် မည်သည့်ဓာတ်ပုံကိုမှ မတင်ရသေးပါ။</string>
   <string name="menu_retry_upload">ပြန်လုပ်</string>
   <string name="menu_cancel_upload">မလုပ်တော့</string>
+  <string name="language_search_type_language_name">ဘာသာစကားအမည်ကို ရိုက်ထည့်ပါ</string>
+  <string name="language_search_recent_searches">လတ်တလော ရှာဖွေမှုများ</string>
+  <string name="language_search_all_languages">ဘာသာစကားအားလုံး</string>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous">ယခင် ခေါင်းစဉ်နှင့်ဖော်ပြချက် သုံးမည်</string>
@@ -154,6 +159,7 @@
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
+  <string name="email_auth_code">အီးမေးလ် အတည်ပြုကုဒ်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
@@ -241,6 +247,7 @@
   <string name="result">ရလဒ်</string>
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
   <string name="congratulatory_message_quiz">အဖြေများ၏ %1$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
+  <string name="quiz_continue">ဆက်လက်</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
   <string name="user_not_logged_in" fuzzy="true">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
@@ -278,6 +285,7 @@
   <string name="previous">နောက်</string>
   <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
   <string name="title_page_bookmarks_locations">တည်နေရာများ</string>
+  <string name="title_page_bookmarks_categories">ကဏ္ဍများ</string>
   <string name="provider_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="provider_bookmarks_location">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="deletion_reason_uploaded_by_mistake">ယင်းအား မှားယွင်းပြီး အက်ပလုဒ်တင်ခဲ့မိသည်</string>
@@ -323,6 +331,7 @@
   <string name="exif_tag_name_serialNumbers">အစဉ်လိုက် နံပါတ်များ</string>
   <string name="exif_tag_name_software">ဆော့ဝဲလ်</string>
   <string name="image_info">ရုပ်ပုံ အချက်အလက်</string>
+  <string name="upload_categories_dont_show_this_message_again">ဤမက်ဆေ့ကို နောက်တခါ မပြပါနှင့်</string>
   <string name="no_categories_found">ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="dialog_box_text_nomination">%1$s ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="default_description_language">နဂို ဖော်ပြချက်ဘာသာစကား</string>
@@ -333,6 +342,7 @@
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">အဓိပ္ပါယ်မရှိ</string>
+  <string name="delete_helper_ask_spam_other">အခြား</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
   <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
   <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>
@@ -412,4 +422,15 @@
   <string name="report_user">ဤအသုံးပြုသူကို တိုင်ကြားရန်</string>
   <string name="report_content">ဤအကြောင်းအရာကို တိုင်ကြားရန်</string>
   <string name="similar_coordinate_description_auto_set">သြဒိနိတ်များသည် အတိအကျ သြဒိနိတ်များမဟုတ်သော်လည်း ဤပုံကို အပ်လုဒ်လုပ်သူသည် နီးစပ်သည်ဟု ယူဆသည်။</string>
+  <string name="learn_how_to_write_a_useful_description">အသုံးဝင်သော ဖော်ပြချက်တစ်ခု ရေးသားနည်းကို လေ့လာပါ</string>
+  <string name="learn_how_to_write_a_useful_caption">အသုံးဝင်တဲ့ စာတန်းထိုးရေးသားနည်းကို လေ့လာပါ</string>
+  <string name="see_your_achievements">သင်၏ အောင်မြင်မှုတွေများကို ကြည့်ရန်</string>
+  <string name="edit_image">ပုံကို တည်းဖြတ်ပါ</string>
+  <string name="edit_location">တည်နေရာကို တည်းဖြတ်ပါ</string>
+  <string name="location_updated">တည်နေရာကို အပ်ဒိတ်လုပ်လိုက်ပါပြီ။</string>
+  <string name="remove_location">တည်နေရာကို ဖယ်ရှားရန်</string>
+  <string name="usages_on_commons_heading">ကွန်မွန်းစ်</string>
+  <string name="usages_on_other_wikis_heading">အခြားဝီကီများ</string>
+  <string name="nominated_for_deletion_btn">ဖျက်ပစ်ရန် အဆိုပြုထားသည်</string>
+  <string name="license_cc0_description">မူပိုင်ခွင့်မရှိပါ။ ဤအလုပ်ကို မည်သူမဆို မည်သည့်နည်းဖြင့်မဆို အသုံးပြုနိုင်ရန် သင်သည် မူပိုင်ခွင့်အားလုံးကို ဖြန့်ချိပါသည်။</string>
 </resources>

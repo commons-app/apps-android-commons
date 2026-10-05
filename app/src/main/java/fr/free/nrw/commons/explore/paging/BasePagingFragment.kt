@@ -15,6 +15,7 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.utils.ViewUtil
@@ -96,8 +97,10 @@ abstract class BasePagingFragment<T> :
     }
 
     override fun showSnackbar() {
-        ViewUtil.showShortSnackbar(binding.paginatedSearchResultsList, errorTextId)
+        val anchorView= activity?.findViewById<View>(R.id.fragment_main_nav_tab_layout)
+        ViewUtil.showShortSnackbar(binding.paginatedSearchResultsList, errorTextId,anchorView)
     }
+
 
     fun onQueryUpdated(query: String) {
         injectedPresenter.onQueryUpdated(query)
