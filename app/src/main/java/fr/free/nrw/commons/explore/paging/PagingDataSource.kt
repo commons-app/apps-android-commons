@@ -61,7 +61,7 @@ abstract class PagingDataSource<T>(
         Completable
             .fromAction { lastExecutedRequest?.invoke() }
             .subscribeOn(Schedulers.io())
-            .subscribe()
+            .subscribe({ }, { Timber.e(it) })
     }
 }
 
