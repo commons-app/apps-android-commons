@@ -12,8 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
@@ -78,8 +77,6 @@ class ImageFragmentTest {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
-        SoLoader.setInTestMode()
-        Fresco.initialize(context)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
 
         fragment = ImageFragment.newInstance(1, 0)

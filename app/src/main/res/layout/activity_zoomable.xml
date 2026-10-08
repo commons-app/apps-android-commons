@@ -7,11 +7,11 @@
     android:background="@color/black"
     tools:context="fr.free.nrw.commons.media.ZoomableActivity">
 
-    <fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/zoomable"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:actualImageScaleType="fitCenter"
+        android:scaleType="fitCenter"
         android:background="@color/background"
         />
     <ProgressBar
