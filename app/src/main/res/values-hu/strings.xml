@@ -362,6 +362,7 @@
   <string name="share_app_title">Alkalmazás megosztása</string>
   <string name="rotate">Elforgatás</string>
   <string name="crop">Kivágás</string>
+  <string name="blur">Elhomályosít</string>
   <string name="error_fetching_nearby_places">Nem sikerült közeli helyek betöltése.</string>
   <string name="no_pictures_in_this_area">Nincsenek képek ezen a környéken</string>
   <string name="no_nearby_places_around">Nincsenek közeli helyek a környéken</string>

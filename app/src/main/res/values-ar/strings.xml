@@ -164,10 +164,10 @@
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
   <string name="login_failed_email_auth_needed">تم إرسال رمز التحقق إلى بريدك الإلكتروني. يُرجى إدخال الرمز لتسجيل الدخول.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
-  <string name="share_upload_button">ارفع</string>
+  <string name="share_upload_button">رفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
   <string name="provider_modifications">تعديلات</string>
-  <string name="menu_upload_single">ارفع</string>
+  <string name="menu_upload_single">رفع</string>
   <string name="categories_search_text_hint">تصنيفات البحث</string>
   <string name="depicts_search_text_hint">(.البحث عن العناصر التي تصورها وسائطك (جبل ،تاج محل، إلخ</string>
   <string name="menu_save_categories">حفظ</string>
