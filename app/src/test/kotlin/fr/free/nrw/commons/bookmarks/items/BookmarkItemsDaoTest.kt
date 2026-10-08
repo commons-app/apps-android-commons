@@ -1,74 +1,39 @@
 package fr.free.nrw.commons.bookmarks.items
 
-import android.content.ContentProviderClient
-import android.content.ContentValues
-import android.database.Cursor
-import android.database.MatrixCursor
-import android.net.Uri
-import android.os.RemoteException
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.inOrder
-import com.nhaarman.mockitokotlin2.isA
-import com.nhaarman.mockitokotlin2.isNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import androidx.room.Room.inMemoryDatabaseBuilder
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_DESCRIPTION_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_NAME_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_THUMBNAIL_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_DESCRIPTION
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IMAGE
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_INSTANCE_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IS_SELECTED
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_NAME
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onCreate
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onDelete
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onUpdate
 import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import org.junit.Assert
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.verifyNoInteractions
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkItemsDaoTest {
-    private val columns =
-        arrayOf(
-            COLUMN_NAME,
-            COLUMN_DESCRIPTION,
-            COLUMN_IMAGE,
-            COLUMN_INSTANCE_LIST,
-            COLUMN_CATEGORIES_NAME_LIST,
-            COLUMN_CATEGORIES_DESCRIPTION_LIST,
-            COLUMN_CATEGORIES_THUMBNAIL_LIST,
-            COLUMN_IS_SELECTED,
-            COLUMN_ID,
-        )
-    private val client: ContentProviderClient = mock()
-    private val database: SupportSQLiteDatabase = mock()
-    private val captor = argumentCaptor<ContentValues>()
-
-    private lateinit var testObject: BookmarkItemsDao
+    private lateinit var bookmarkItemsRoomDao: BookmarkItemsRoomDao
+    private lateinit var database: AppDatabase
     private lateinit var exampleItemBookmark: DepictedItem
 
-    /**
-     * Set up Test DepictedItem and BookmarkItemsDao
-     */
     @Before
-    fun setUp() {
+    fun createDb() {
+        database =
+            inMemoryDatabaseBuilder(
+                context = ApplicationProvider.getApplicationContext(),
+                klass = AppDatabase::class.java,
+            ).allowMainThreadQueries().build()
+        bookmarkItemsRoomDao = database.bookmarkItemsRoomDao()
+
         exampleItemBookmark =
             DepictedItem(
                 "itemName",
@@ -86,330 +51,49 @@ class BookmarkItemsDaoTest {
                 false,
                 "itemID",
             )
-        testObject = BookmarkItemsDao { client }
     }
 
-    @Test
-    fun createTable() {
-        onCreate(database)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
-    }
-
-    @Test
-    fun deleteTable() {
-        onDelete(database)
-        inOrder(database) {
-            verify(database).execSQL(DROP_TABLE_STATEMENT)
-            verify(database).execSQL(CREATE_TABLE_STATEMENT)
-        }
-    }
-
-    @Test
-    fun createFromCursor() {
-        createCursor(1).let { cursor ->
-            cursor.moveToFirst()
-            testObject.fromCursor(cursor).let {
-                Assert.assertEquals("itemName", it.name)
-                Assert.assertEquals("itemDescription", it.description)
-                Assert.assertEquals("itemImageUrl", it.imageUrl)
-                Assert.assertEquals(listOf("instance"), it.instanceOfs)
-                Assert.assertEquals(
-                    listOf(
-                        CategoryItem(
-                            "category name",
-                            "category description",
-                            "category thumbnail",
-                            false,
-                        ),
-                    ),
-                    it.commonsCategories,
-                )
-                Assert.assertEquals(false, it.isSelected)
-                Assert.assertEquals("itemID", it.id)
-            }
-        }
+    @After
+    fun closeDb() {
+        database.close()
     }
 
     @Test
     fun getAllItemsBookmarks() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
-            .thenReturn(createCursor(14))
+        for (i in 1..5) {
+            val item = exampleItemBookmark.copy(id = "item$i")
+            bookmarkItemsRoomDao.updateBookmarkItem(item).blockingGet()
+        }
 
-        val result = testObject.getAllBookmarksItems()
-
-        Assert.assertEquals(14, (result.size))
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun getAllItemsBookmarksTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException(""),
-        )
-        testObject.getAllBookmarksItems()
-    }
-
-    @Test
-    fun getAllItemsBookmarksReturnsEmptyList_emptyCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
-            .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
-    }
-
-    @Test
-    fun getAllItemsBookmarksReturnsEmptyList_nullCursor() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
-    }
-
-    @Test
-    fun cursorsAreClosedAfterGetAllItemsBookmarksQuery() {
-        val mockCursor: Cursor = mock()
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
-        whenever(mockCursor.moveToFirst()).thenReturn(false)
-
-        testObject.getAllBookmarksItems()
-
-        verify(mockCursor).close()
+        val result = bookmarkItemsRoomDao.getAllBookmarksItems().blockingGet()
+        assertEquals(5, result.size)
     }
 
     @Test
     fun updateNewItemBookmark() {
-        whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-
-        Assert.assertTrue(testObject.updateBookmarkItem(exampleItemBookmark))
-        verify(client).insert(eq(BookmarkItemsContentProvider.BASE_URI), captor.capture())
-        captor.firstValue.let { cv ->
-            Assert.assertEquals(9, cv.size())
-            Assert.assertEquals(
-                exampleItemBookmark.name,
-                cv.getAsString(COLUMN_NAME),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.description,
-                cv.getAsString(COLUMN_DESCRIPTION),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.imageUrl,
-                cv.getAsString(COLUMN_IMAGE),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.instanceOfs[0],
-                cv.getAsString(COLUMN_INSTANCE_LIST),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.commonsCategories[0].name,
-                cv.getAsString(COLUMN_CATEGORIES_NAME_LIST),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.commonsCategories[0].description,
-                cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.commonsCategories[0].thumbnail,
-                cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.isSelected,
-                cv.getAsBoolean(COLUMN_IS_SELECTED),
-            )
-            Assert.assertEquals(
-                exampleItemBookmark.id,
-                cv.getAsString(COLUMN_ID),
-            )
-        }
+        assertTrue(bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet())
+        assertTrue(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
     }
 
     @Test
     fun updateExistingItemBookmark() {
-        whenever(client.delete(isA(), isNull(), isNull())).thenReturn(1)
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
+        // First insert
+        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet()
+        assertTrue(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
 
-        Assert.assertFalse(testObject.updateBookmarkItem(exampleItemBookmark))
-        verify(client).delete(
-            eq(BookmarkItemsContentProvider.uriForName(exampleItemBookmark.id)),
-            isNull(),
-            isNull(),
-        )
+        // Second update should remove it (toggle behavior)
+        assertFalse(bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet())
+        assertFalse(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
     }
 
     @Test
     fun findExistingItemBookmark() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        Assert.assertTrue(testObject.findBookmarkItem(exampleItemBookmark.id))
-    }
-
-    @Test(expected = RuntimeException::class)
-    fun findItemBookmarkTranslatesExceptions() {
-        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
-            RemoteException(""),
-        )
-        testObject.findBookmarkItem(exampleItemBookmark.id)
+        bookmarkItemsRoomDao.updateBookmarkItem(exampleItemBookmark).blockingGet()
+        assertTrue(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
     }
 
     @Test
-    fun findNotExistingItemBookmarkReturnsNull_emptyCursor() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        Assert.assertFalse(testObject.findBookmarkItem(exampleItemBookmark.id))
+    fun findNotExistingItemBookmark() {
+        assertFalse(bookmarkItemsRoomDao.findBookmarkItem(exampleItemBookmark.id).blockingGet())
     }
-
-    @Test
-    fun findNotExistingItemBookmarkReturnsNull_nullCursor() {
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertFalse(testObject.findBookmarkItem(exampleItemBookmark.id))
-    }
-
-    @Test
-    fun cursorsAreClosedAfterFindItemBookmarkQuery() {
-        val mockCursor: Cursor = mock()
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(mockCursor)
-        whenever(mockCursor.moveToFirst()).thenReturn(false)
-
-        testObject.findBookmarkItem(exampleItemBookmark.id)
-
-        verify(mockCursor).close()
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v1_to_v2() {
-        onUpdate(database, 1, 2)
-        // Table didn't exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v2_to_v3() {
-        onUpdate(database, 2, 3)
-        // Table didn't exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v3_to_v4() {
-        onUpdate(database, 3, 4)
-        // Table didn't exist before v5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v4_to_v5() {
-        onUpdate(database, 4, 5)
-        // Table didn't change in version 5
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v5_to_v6() {
-        onUpdate(database, 5, 6)
-        // Table didn't change in version 6
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v6_to_v7() {
-        onUpdate(database, 6, 7)
-        // Table didn't change in version 7
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v7_to_v8() {
-        onUpdate(database, 7, 8)
-        // Table didn't change in version 8
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v8_to_v9() {
-        onUpdate(database, 8, 9)
-        // Table didn't change in version 9
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v9_to_v10() {
-        onUpdate(database, 9, 10)
-        // Table didn't change in version 10
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v10_to_v11() {
-        onUpdate(database, 10, 11)
-        // Table didn't change in version 11
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v11_to_v12() {
-        onUpdate(database, 11, 12)
-        // Table didn't change in version 12
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v12_to_v13() {
-        onUpdate(database, 12, 13)
-        // Table didn't change in version 13
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v13_to_v14() {
-        onUpdate(database, 13, 14)
-        // Table didn't change in version 14
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v14_to_v15() {
-        onUpdate(database, 14, 15)
-        // Table didn't change in version 15
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v15_to_v16() {
-        onUpdate(database, 15, 16)
-        // Table didn't change in version 16
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v16_to_v17() {
-        onUpdate(database, 16, 17)
-        // Table didn't change in version 17
-        verifyNoInteractions(database)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v18_to_v19() {
-        onUpdate(database, 18, 19)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
-    }
-
-    @Test
-    fun migrateTableVersionFrom_v19_to_v19() {
-        onUpdate(database, 19, 19)
-        verifyNoInteractions(database)
-    }
-
-    private fun createCursor(rowCount: Int) =
-        MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
-                addRow(
-                    listOf(
-                        "itemName",
-                        "itemDescription",
-                        "itemImageUrl",
-                        "instance",
-                        "category name",
-                        "category description",
-                        "category thumbnail",
-                        false,
-                        "itemID",
-                    ),
-                )
-            }
-        }
 }
