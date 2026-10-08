@@ -367,6 +367,12 @@
   <string name="share_app_title">Comhroinn an Aip</string>
   <string name="rotate">Rothlaigh</string>
   <string name="crop">Bearr</string>
+  <string name="blur">Doiléiriú</string>
+  <string name="autoblur">Uath-Dhoiléiriú</string>
+  <string name="autodetect_title">Aghaidheanna agus plátaí ceadúnais ag doiléiriú go huathoibríoch.</string>
+  <string name="autodetect_description">Is féidir leat rudaí bréagacha dearfacha a chaitheamh ar shiúl trí úsáid a bhaint as an gcnaipe ❌ i ngach limistéar doilithe.</string>
+  <string name="autoblur_failed_to_load">Theip ar an íomhá a lódáil le haghaidh Uath-Dhoiléiriú</string>
+  <string name="autoblur_no_region_detected">Níor braitheadh ​​aon réigiúin le haghaidh Uath-Dhoiléiriú</string>
   <string name="error_fetching_nearby_places">Níorbh fhéidir áiteanna in aice láimhe a lódáil</string>
   <string name="no_pictures_in_this_area">Níl aon phictiúir sa cheantar seo</string>
   <string name="no_nearby_places_around">Gan aon áiteanna in aice láimhe</string>
@@ -717,6 +723,7 @@
   <string name="custom_selector_already_uploaded_image_text">Tá an íomhá seo uaslódáilte chuig Commons cheana féin.</string>
   <string name="custom_selector_over_limit_warning">Ar chúiseanna teicniúla, ní féidir leis an aip níos mó ná %1$d pictiúr a uaslódáil ag an am céanna go hiontaofa. Tá an teorainn uaslódála de %1$d sáraithe faoi %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Díbhe</string>
+  <string name="custom_selector_duplicates_warning">Is dúblaigh iad cuid de na híomhánna roghnaithe agus bainfear iad sula n-uaslódálfar iad.</string>
   <string name="custom_selector_button_limit_text">Uasmhéid: %1$d</string>
   <string name="custom_selector_limit_error_desc">Earráid: Sáraíodh an Teorainn Uaslódála</string>
   <string name="wlm_upload_info">Cuirfear an íomhá seo isteach sa chomórtas Wiki Loves Monuments</string>
@@ -866,4 +873,9 @@
   <string name="license_cc0_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, gan aon choinníollacha.</string>
   <string name="license_cc_by_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, fiú chun críocha tráchtála, fad is a thugtar aitheantas don chruthaitheoir.</string>
   <string name="license_cc_by_sa_long_description">Leis an gceadúnas seo, is féidir le hathúsáideoirí an t-ábhar a dháileadh, a athmheascadh, a oiriúnú agus a fhorbairt in aon mheán nó formáid, fiú chun críocha tráchtála, fad is a thugtar aitheantas don chruthaitheoir agus go bhfuil an saothar nua ceadúnaithe faoi théarmaí comhionanna.</string>
+  <string name="error_getting_image_properties">Earráid ag fáil airíonna íomhá:</string>
+  <string name="error_blur_no_rectangle">Tarraing dronuilleog amháin ar a laghad ar an ngrianghraf le do thoil</string>
+  <string name="error_applying_blur">Earráid i bhfeidhmiú doiléirithe</string>
+  <string name="failed_to_apply_crop">Theip ar an mbarr a chur i bhfeidhm</string>
+  <string name="failed_to_save_image">Theip ar an íomhá a shábháil</string>
 </resources>

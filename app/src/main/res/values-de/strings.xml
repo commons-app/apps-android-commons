@@ -12,6 +12,7 @@
 * FF11
 * Ferdinand0101
 * GPSLeo
+* Guardian of Arcadia
 * Icke
 * Ignatgg
 * Inkowik
@@ -888,4 +889,6 @@
   <string name="license_cc_by_description">Namensnennung. Andere können das Werk frei teilen und bearbeiten, solange sie dich nennen.</string>
   <string name="license_cc_by_sa_description">Namensnennung – Weitergabe unter gleichen Bedingungen. Andere dürfen das Werk teilen und bearbeiten, müssen aber dieselbe Lizenz verwenden und dich nennen.</string>
   <string name="license_cc0_long_description">Diese Lizenz erlaubt Nachnutzenden ohne Bedingungen, das Werk zu teilen, zu remixen und neue Werke daraus bilden.</string>
+  <string name="error_getting_image_properties">Fehler beim Abrufen der Bildeigenschaften:</string>
+  <string name="error_blur_no_rectangle">Bitte zeichne mindestens ein Rechteck auf das Foto</string>
 </resources>

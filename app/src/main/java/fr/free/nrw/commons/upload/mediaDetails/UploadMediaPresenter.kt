@@ -72,7 +72,7 @@ class UploadMediaPresenter @Inject constructor(
         val uploadItems = repository.getUploads()
         if (uploadItemIndex >= 0 && uploadItemIndex < uploadItems.size) {
             if (uploadMediaDetails.isNotEmpty()) {
-                uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails.toMutableList()
+                uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails as? MutableList<UploadMediaDetail> ?: uploadMediaDetails.toMutableList()
                 Timber.d("Set uploadMediaDetails for index %d, size %d", uploadItemIndex, uploadMediaDetails.size)
             } else {
                 uploadItems[uploadItemIndex].uploadMediaDetails = mutableListOf(UploadMediaDetail())

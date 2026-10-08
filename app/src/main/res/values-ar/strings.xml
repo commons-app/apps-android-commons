@@ -410,6 +410,11 @@
   <string name="rotate">تدوير</string>
   <string name="crop">قص</string>
   <string name="blur">ضبابية</string>
+  <string name="autoblur">التمويه التلقائي</string>
+  <string name="autodetect_title">خاصية التمويه التلقائي للوجوه ولوحات السيارات.</string>
+  <string name="autodetect_description">يمكنك استبعاد النتائج الإيجابية الخاطئة باستخدام زر ❌ الموجود في كل منطقة ضبابية.</string>
+  <string name="autoblur_failed_to_load">فشل تحميل الصورة لخاصية التمويه التلقائي</string>
+  <string name="autoblur_no_region_detected">لم يتم الكشف عن أي مناطق لخاصية التمويه التلقائي</string>
   <string name="error_fetching_nearby_places">تعذر تحميل الأماكن القريبة</string>
   <string name="no_pictures_in_this_area">لا توجد صور في هذه المنطقة</string>
   <string name="no_nearby_places_around">لا توجد أماكن قريبة بالجوار</string>
@@ -916,4 +921,9 @@
   <string name="license_cc0_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتعديلها والبناء عليها بأي وسيلة أو شكل، دون أي شروط.</string>
   <string name="license_cc_by_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتكييفها والبناء عليها بأي وسيلة أو شكل، حتى للأغراض التجارية، طالما يتم إسناد الفضل إلى المبدع.</string>
   <string name="license_cc_by_sa_long_description">تسمح هذه الرخصة للمستخدمين بإعادة توزيع المادة وإعادة مزجها وتكييفها والبناء عليها بأي وسيلة أو شكل، حتى لأغراض تجارية، طالما يتم إسناد العمل إلى المبدع ويتم ترخيص العمل الجديد بموجب شروط مماثلة.</string>
+  <string name="error_getting_image_properties">خطأ في الحصول على خصائص الصورة:</string>
+  <string name="error_blur_no_rectangle">يرجى رسم مستطيل واحد على الأقل على الصورة</string>
+  <string name="error_applying_blur">حدث خطأ أثناء تطبيق التمويه</string>
+  <string name="failed_to_apply_crop">فشل في تطبيق المحصول</string>
+  <string name="failed_to_save_image">فشل حفظ الصورة</string>
 </resources>
