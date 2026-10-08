@@ -18,8 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:tint="@color/white"
+        android:textColorHint="@color/white"
         android:queryHint="@string/nearby_search_hint"
         android:searchIcon="@drawable/ic_search_white_24dp"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        app:searchIcon="@drawable/ic_search_white_24dp"
         app:theme="@style/WhiteSearchBarTheme"/>
 
 </LinearLayout>
