@@ -129,9 +129,32 @@ class ImageProcessingService @Inject constructor(
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
     fun checkIfFileAlreadyExists(originalFilePath: Uri, modifiedFilePath: Uri): Single<Int> {
+        val originalStreamResult = Single.fromCallable {
+            appContext.contentResolver.openInputStream(originalFilePath)!!
+        }.flatMap { inputStream ->
+            checkDuplicateImage(inputStream)
+        }.onErrorReturn { throwable ->
+            Timber.e(throwable, "Error checking duplicate for original file")
+            IMAGE_OK
+        }
+
+        val modifiedStreamResult = Single.fromCallable {
+            val path = modifiedFilePath.path
+            if (path != null && java.io.File(path).exists()) {
+                fileUtilsWrapper.getFileInputStream(path)
+            } else {
+                throw java.io.FileNotFoundException("Modified file not found at $path")
+            }
+        }.flatMap { inputStream ->
+            checkDuplicateImage(inputStream)
+        }.onErrorReturn { throwable ->
+            Timber.e(throwable, "Error checking duplicate for modified file")
+            IMAGE_OK
+        }
+
         return Single.zip(
-            checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
-            checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path))
+            originalStreamResult,
+            modifiedStreamResult
         ) { resultForOriginal, resultForDuplicate ->
             return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE)
                 IMAGE_DUPLICATE else IMAGE_OK
