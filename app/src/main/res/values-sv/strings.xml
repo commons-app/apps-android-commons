@@ -364,6 +364,12 @@
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
   <string name="crop">Beskär</string>
+  <string name="blur">Oskärpa</string>
+  <string name="autoblur">Automatisk oskärpa</string>
+  <string name="autodetect_title">Sudda automatiskt ut ansikten och registreringsskyltar.</string>
+  <string name="autodetect_description">Du kan ignorera falska positiva resultat med knappen ❌ för varje suddigt område.</string>
+  <string name="autoblur_failed_to_load">Misslyckades att läsa in bilden för automatisk oskärpa</string>
+  <string name="autoblur_no_region_detected">Inga områden hittades för automatiskt oskärpa</string>
   <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
@@ -708,6 +714,7 @@
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
   <string name="custom_selector_over_limit_warning">Av tekniska skäl kan appen inte ladda upp fler än %1$d bilder samtidigt. Uppladdningsgränsen för %1$d har överskridits med %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Stäng</string>
+  <string name="custom_selector_duplicates_warning">Vissa markerade bilder är dubbletter och kommer att tas bort innan uppladdning.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fel: Uppladdningsgränsen har överskridits</string>
   <string name="wlm_upload_info">Denna bild kommer att skickas in till tävlingen Wiki Loves Monuments</string>
@@ -854,4 +861,9 @@
   <string name="license_cc0_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, utan villkor.</string>
   <string name="license_cc_by_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, även för kommersiella ändamål, så länge erkännande ges till skaparen.</string>
   <string name="license_cc_by_sa_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, även för kommersiella ändamål, så länge erkännande ges till skaparen och det nya arbetet är licensierat under identiska villkor.</string>
+  <string name="error_getting_image_properties">Fel när bildegenskaper hämtades:</string>
+  <string name="error_blur_no_rectangle">Rita minst en rektangel på fotot</string>
+  <string name="error_applying_blur">Fel när oskärpa tillämpades</string>
+  <string name="failed_to_apply_crop">Misslyckades när beskärning tillämpades</string>
+  <string name="failed_to_save_image">Misslyckades att spara bilden</string>
 </resources>

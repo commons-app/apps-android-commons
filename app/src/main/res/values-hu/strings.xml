@@ -7,6 +7,7 @@
 * Einstein2
 * Envlh
 * Hanna Tardos
+* Koko1998
 * Luckylukee81
 * MeskoBalazs
 * Misibacsi
@@ -555,6 +556,8 @@
   <string name="you_must_reset_your_passsword">A belépés nem sikerült. Kérj új jelszót!</string>
   <string name="title_app_shortcut_bookmark">Könyvjelzők</string>
   <string name="title_app_shortcut_setting">Beállítások</string>
+  <string name="remove_bookmark">Eltávolítva a könyvjelzők közül</string>
+  <string name="add_bookmark">Hozzáadva a könyvjelzőkhöz</string>
   <string name="setting_wallpaper_dialog_title">Beállítás háttérképnek</string>
   <string name="setting_wallpaper_dialog_message">Beállítás háttérképnek. Kérem várjon...</string>
   <string name="theme_default_name">Rendszerbeállítás követése</string>
@@ -565,6 +568,7 @@
   <string name="ask_to_turn_location_on">Bekapcsolod a helymeghatározást?</string>
   <string name="ask_to_turn_location_on_text">Kapcsold be a helyszolgáltatásokat, hogy az alkalmazás megjeleníthesse a jelenlegi helyedet</string>
   <string name="nearby_needs_location">A Közeli funkció megfelelő működéséhez be kell kapcsolni a helymeghatározást</string>
+  <string name="load_more">Továbbiak betöltése</string>
   <string name="todo_improve">Javasolt javítások:</string>
   <string name="missing_category">- Adj kategóriákat ehhez a képhez a használhatóság javítása érdekében.</string>
   <string name="missing_article">- Add hozzá ezt a képet a kapcsolódó, képek nélküli Wikipédia-szócikkhez.</string>
@@ -630,6 +634,7 @@
   <string name="media_detail_in_all_languages">Minden nyelven</string>
   <string name="choose_a_location">Hely kiválasztása</string>
   <string name="pan_and_zoom_to_adjust">Igazítsd mozgatással és nagyítással</string>
+  <string name="modify_location">Hely szerkesztése</string>
   <string name="label">Címke</string>
   <string name="description">Leírás</string>
   <string name="title_page_bookmarks_items">Elemek</string>
@@ -640,12 +645,22 @@
   <string name="custom_selector_info_text1">Itt ellenőrizheted a már Commonsba feltöltött képeket.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
+  <string name="edit_categories">Kategória szerkesztése</string>
   <string name="apply">Alkalmaz</string>
   <string name="reset">Visszaállítás</string>
+  <string name="no_location_found_title">Nem található helyszín</string>
+  <string name="add_location">Hely hozzáadása</string>
   <string name="explore_map_details">Részletek</string>
   <string name="api_level">API szint</string>
   <string name="android_version">Android verzió</string>
   <string name="device_manufacturer">A készülék gyártója</string>
+  <string name="device_model">Eszközmodell</string>
+  <string name="device_name">Eszköz neve</string>
+  <string name="network_type">Hálózati típus</string>
+  <string name="thanks_feedback">Köszönöm a visszajelzést</string>
+  <string name="error_feedback">Hiba a visszajelzés küldésekor</string>
+  <string name="enter_description">Mi a visszajelzésed?</string>
+  <string name="your_feedback">Visszajelzésed</string>
   <string name="marking_as_not_for_upload">Megjelölés, mint nem feltöltendő</string>
   <string name="unmarking_as_not_for_upload">Nem feltöltendő megjelölés visszavonása</string>
   <string name="menu_view_report">Jelentés</string>
@@ -680,13 +695,18 @@
   <string name="uploads">Feltöltések</string>
   <string name="pending">Függőben</string>
   <string name="failed">Sikertelen</string>
+  <string name="custom_selector_confirm_deletion_title">Törlés megerősítése</string>
   <string name="custom_selector_delete">Törlés</string>
   <string name="custom_selector_cancel">Mégse</string>
+  <string name="error_while_loading">Hiba a betöltés során</string>
+  <string name="usages_on_other_wikis_heading">Más wikik</string>
+  <string name="file_usages_container_heading">Fájlhasználatok</string>
   <string name="account">Fiók</string>
   <string name="vanish_account">Fiók eltüntetése</string>
   <string name="account_vanish_request_confirm_title">Figyelmeztetés a fiók eltüntetéséről</string>
   <string name="account_vanish_request_confirm">Az eltüntetés &lt;b&gt;végső megoldás&lt;/b&gt;, és &lt;b&gt;csak akkor használd, ha végleg abba szeretnéd hagyni a szerkesztést&lt;/b&gt;, valamint a lehető legtöbb korábbi kapcsolódásodat el szeretnéd rejteni.&lt;br/&gt;&lt;br/&gt;A Wikimédia Commonsban a fiók törlése úgy történik, hogy a fióknevedet megváltoztatják, hogy mások ne ismerhessék fel a közreműködéseidet; ezt a folyamatot fiókeltüntetésnek nevezik. &lt;b&gt;A fiók eltüntetése nem garantál teljes névtelenséget, és nem távolítja el a projektekhez tett közreműködéseidet&lt;/b&gt;.</string>
   <string name="caption">Képaláírás</string>
+  <string name="caption_copied_to_clipboard">A felirat a vágólapra másolva</string>
   <string name="nominated_for_deletion_btn">Törlésre jelölve</string>
   <string name="custom_selector_max_image_limit_reached">Legfeljebb %d képet tudsz kijelölni.</string>
   <string name="edit_unsupported_format_explanation">Az alkalmazáson belüli szerkesztés csak JPEG-fájloknál érhető el. Más formátumok szerkesztéséhez használj külső eszközt.</string>

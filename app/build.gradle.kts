@@ -25,8 +25,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1066
-        versionName = "6.7.0"
+        versionCode = 1067
+        versionName = "6.8.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -355,6 +355,9 @@ dependencies {
 
     // Jpegtran
     implementation(libs.ajpegtran)
+
+    // AutoDetect
+    implementation(libs.commons.ml)
 
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")

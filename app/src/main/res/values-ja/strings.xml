@@ -164,6 +164,7 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
+  <string name="language_search_type_language_name">言語名を入力</string>
   <string name="language_search_recent_searches">最近の検索</string>
   <string name="language_search_all_languages">すべての言語</string>
   <string name="media_upload_policy">この画像の投稿に当たり、私はこれが自分自身の作品であり、著作権のあるコンテンツや自撮りは含まれず&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons の方針&lt;/a&gt;に従っていると宣言します。</string>
@@ -467,7 +468,7 @@
   <string name="send_thank_success_message">%1$sさんに感謝を送信しました</string>
   <string name="send_thank_failure_message">%1$sさんへ感謝を送信できませんでした</string>
   <string name="send_thank_failure_title">感謝の送信：失敗</string>
-  <string name="send_thank_toast">%1$sさんに感謝を送信中</string>
+  <string name="send_thank_toast">%1$sへの感謝を送信中</string>
   <string name="review_copyright">著作権のルールを守っていますか？</string>
   <string name="review_category">カテゴリは正しいですか？</string>
   <string name="review_spam">プロジェクト基準に合致していますか？</string>
