@@ -66,6 +66,7 @@
   <string name="password">Password</string>
   <string name="login_credential">Log in to your Commons Beta account</string>
   <string name="login">Log in</string>
+  <string name="login_with_oauth">Log in with OAuth</string>
   <string name="forgot_password">Forgot Password?</string>
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>

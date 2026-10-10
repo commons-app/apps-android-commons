@@ -85,11 +85,21 @@
     <activity
       android:name=".auth.LoginActivity"
       android:windowSoftInputMode="adjustPan"
+      android:launchMode="singleTask"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
 
         <action android:name="android.intent.action.MAIN" />
+      </intent-filter>
+
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data
+          android:scheme="fr.free.nrw.commons"
+          android:host="oauth-callback" />
       </intent-filter>
 
       <meta-data
