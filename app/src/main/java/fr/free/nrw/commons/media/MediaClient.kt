@@ -6,6 +6,7 @@ import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.gallery.MediaInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
@@ -138,6 +139,17 @@ class MediaClient
         fun getMediaSuppressingErrors(titles: String?): Single<Media> =
             responseMapper(mediaInterface.getMediaSuppressingErrors(titles))
                 .map { it.first() }
+
+        /**
+         * Fetches playback sources and subtitle tracks from the videoInfo API.
+         *
+         * @param title the title of the media file whose info is to be fetched
+         * @return a single that emits the media info for the requested file
+         */
+        fun getMediaInfo(title: String): Single<MediaInfo> =
+            mediaInterface
+                .getMediaInfo(title)
+                .map { it.query()!!.firstPage()!!.mediaInfo()!! }
 
         /**
          * The method returns the picture of the day
