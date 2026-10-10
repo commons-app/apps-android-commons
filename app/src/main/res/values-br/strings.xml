@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Adriendelucca
+* Ar choler
 * Dishual
 * Fohanno
 * Fulup
@@ -11,18 +12,25 @@
 -->
 <resources>
   <string name="commons_facebook">Pajenn Facebook Commons</string>
-  <string name="commons_github" fuzzy="true">Kod mammenn Github Commons</string>
+  <string name="commons_github">Kod Tarzh GitHub Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Lec\'hienn web Commons</string>
+  <string name="exit_location_picker">Kuitaat diuzer al lec\'hiadur</string>
   <string name="submit">Kas</string>
   <string name="add_another_description">Ouzhpennañ un deskrivadur all</string>
   <string name="add_new_contribution">Degasadenn nevez</string>
+  <string name="add_contribution_from_camera">Ouzhpennañ un degasadenn eus ar c\'hamera</string>
+  <string name="add_contribution_from_photos">Ouzhpennaén un degasadenn eus Luc\'hskeudennoù</string>
+  <string name="add_contribution_from_contributions_gallery">Ouzhpennañ un degasadenn eus palier an degasadennoù kent</string>
   <string name="show_captions">Istitloù</string>
   <string name="row_item_language_description">Deskrivadur ar yezh</string>
   <string name="row_item_caption">Alc\'hwez</string>
   <string name="show_captions_description">Deskrivadur</string>
   <string name="nearby_row_image">Skeudenn</string>
   <string name="nearby_all">An holl</string>
+  <string name="nearby_filter_toggle">Gwintañ d\'al laez</string>
+  <string name="nearby_filter_search">Skramm Klask</string>
+  <string name="nearby_filter_state">Stad al lec\'h</string>
   <string name="appwidget_img">Skeudenn an deiz</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d restr o vezañ karget</item>
@@ -31,12 +39,13 @@
     <item quantity="many">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d bellgargadenn loc\'het</item>
-    <item quantity="two">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="few">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="many">%1$d pellgargadennoù loc\'het</item>
-    <item quantity="other">%1$d pellgargadennoù loc\'het</item>
+  <string name="starting_uploads">Loc\'hañ an ezkargañ</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%1$d ezkargadenn loc\'het</item>
+    <item quantity="two">%1$d ezkargadenn loc\'het</item>
+    <item quantity="few">%1$d ezkargadenn loc\'het</item>
+    <item quantity="many">%1$d ezkargadenn loc\'het</item>
+    <item quantity="other">%1$d ezkargadenn loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d enporzhiadur</item>
@@ -45,12 +54,12 @@
     <item quantity="many">%1$d enporzhiadur</item>
     <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="two">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="few">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="many">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="other">Gant an aotreoù-implijout %1$s e vo ar skeudenn-mañ</item>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dindan an aotre %1$s e vo ar skeudenn-mañ</item>
+    <item quantity="two">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="few">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="many">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
+    <item quantity="other">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d enporzhiadur</item>
@@ -59,14 +68,22 @@
     <item quantity="many">%1$d enporzhiadur</item>
     <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudenn, hervez he ment hag ho ardivink</item>
+    <item quantity="two">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="few">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="many">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+    <item quantity="other">O tegemer an endalc\'had lodet. Amzer a vo rekis evit plediñ gant ar skeudennoù, hervez o ment hag ho ardivink</item>
+  </plurals>
   <string name="navigation_item_explore">Ergerzhout</string>
   <string name="preference_category_appearance">Neuz</string>
   <string name="preference_category_general">Hollek</string>
-  <string name="preference_category_feedback">Sonjoù</string>
+  <string name="preference_category_feedback">Evezhiadennoù</string>
   <string name="preference_category_privacy">Prevezded</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Arventennoù</string>
   <string name="intent_share_upload_label">Enporzhiañ e Commons</string>
+  <string name="upload_in_progress">Ezkargañ war ober.</string>
   <string name="username">Anv implijer</string>
   <string name="password">Ger-tremen</string>
   <string name="login_credential">Kevreañ ouzh ho kont Commons Beta</string>
@@ -75,18 +92,24 @@
   <string name="signup">En em enskrivañ</string>
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij…</string>
+  <string name="updating_caption_title">Alc\'hwezioù ha deskrivadurioù war hizivaat</string>
   <string name="updating_caption_message">Gortozit mar plij…</string>
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">N\'haller ket kevreañ!</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
+  <string name="retry_limit_reached">Tizhet emañ bevenn uhelañ an adarnodiñ ! Nullit an ezkargañ ha klaskit en-dro mar plij</string>
+  <string name="unrestricted_battery_mode">Diweredekaat gwellekaat ar batiri ?</string>
+  <string name="suggest_unrestricted_mode">Efedusoc\'h eo ezkargañ muioc\'h eget 3 skeudenn pa vez diweredekaet gwellekaat ar batiri. Evit aesaat an ezkargañ, diweredekait gwellekaat ar batiri evit an arload Commons diwar an arventennoù. \n\nPazennoù bezus evit diweredekaat gwellekaat ar batiri :\n\nPazenn 1: Stokit ouzh ar bouton \"Dibarzhioù\" a-is.\n\nPazenn 2: Kemmit \'Nann gwellekaet\' e An holl arloadoù\'.\n\nPazenn 3: Klaskit \"Commons\" pe \"fr.free.nrw.commons\".\n\nPazenn 4: Stokit warnañ ha diuzit \'Na wellekaat\'.\n\nPazenn 5: Pouezit war \'Echu\'.</string>
   <string name="authentication_failed">Dilesadur c\'hwitet. Kevreit en-dro mar plij.</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
+  <string name="uploading_queued">Ezkargañ war c\'hortoz (gweredekaet emañ ar mod kennask bevennet)</string>
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
   <string name="upload_progress_notification_title_start">Oc\'h enporzhiañ ar restr: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
+  <string name="upload_paused_notification_title">Ehanet emañ ezkargañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
   <string name="upload_paused_notification_subtitle">Pouezit evit diskwel</string>
   <string name="title_activity_contributions">Ma enporzhiadennoù nevez</string>
@@ -98,22 +121,28 @@
   <string name="menu_from_camera">Tapout ul luc\'hskeudenn</string>
   <string name="menu_nearby">Tostik</string>
   <string name="provider_contributions">Ma enporzhiadennoù</string>
+  <string name="menu_copy_link">Eilañ al liamm</string>
+  <string name="menu_link_copied">Eilet eo bet al liamm er golver</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_view_file_page">Gwelet pajenn ar restr</string>
   <string name="share_title_hint">Alc\'hwez (ret)</string>
+  <string name="add_caption_toast">Roit un alc\'hwez d\'ar restr-mañ mar plij</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="share_caption_hint">Alc\'hwez</string>
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
+  <string name="login_failed_email_auth_needed">Ur c\'hod gwiriañ ar c\'hevreañ zo bet kaset d\'ho chomlec\'h postel. Roit ar c\'hod evit kevreañ mar plij.</string>
   <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
   <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
   <string name="provider_modifications">Kemmoù</string>
   <string name="menu_upload_single">Enporzhiañ</string>
   <string name="categories_search_text_hint">Klask rummadoù</string>
+  <string name="depicts_search_text_hint">Klask elfennoù a zo taolennet gant ho mediom (menez, Taj Mahal, hag all).</string>
   <string name="menu_save_categories">Enrollañ</string>
+  <string name="menu_overflow_desc">Lañser an dic\'hlann</string>
   <string name="refresh_button">Freskaat</string>
   <string name="display_list_button">Roll</string>
   <string name="contributions_subtitle_zero">(Enporzhiadenn ebet c\'hoazh)</string>
@@ -126,7 +155,10 @@
   <string name="title_activity_settings">Arventennoù</string>
   <string name="title_activity_signup">En em enskrivañ</string>
   <string name="title_activity_featured_images">Skeudennoù lakaet a-wel</string>
+  <string name="images_featured_explanation">Gant luc\'hskeudennerien ha skeudennaouerien barrek-tre e vez graet ar skeudennoù heverk, a zo bet lakaet gant kumuniezh Wikimedia Commons e-touez ar re gaerañ el lec\'hienn.</string>
+  <string name="title_activity_custom_selector">Diuzer personelaet</string>
   <string name="title_activity_category_details">Rummad</string>
+  <string name="title_activity_review">Amweladenn gant pirien</string>
   <string name="menu_about">Diwar-benn</string>
   <string name="about_license">An arload Wikimedia Commons zo un arload open source krouet ha hizivaet gant gounideien ha tud a-youl vat ar gumuniezh Wikimedia. Ne gemer ket perzh an diazezadur Wikimedia el labourioù evit krouiñ, diorren pe trezalc\'h an arload.</string>
   <string name="about_improve">Krouiñ ur &lt;a href=\"%1$s\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
@@ -140,15 +172,18 @@
   <string name="no_uploads_yet">N\'ho peus pellgaset luc’hskeudenn ebet c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
+  <string name="language_search_type_language_name">Skrivit anv ar yezh</string>
+  <string name="language_search_recent_searches">Klaskoù Nevesañ</string>
+  <string name="language_search_all_languages">An holl yezhoù</string>
   <string name="media_upload_policy">Dre gas ar skeudenn-mañ e tisklêrian eo bet graet ganin, n\'eus elfenn ebet gwarezet gant ar gwirioù oberour nag emboltredoù enni, hag emañ diouzh &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;reolennoù Wikimedia Commons&lt;/a&gt; a-hend-all.</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout dre ziouer</string>
   <string name="use_previous">Ober gant an titl hag an deskrivadur kent</string>
   <string name="preference_theme">Tem</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true">Deroadur-RannañHeñvel 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Deroadur 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Deroadur-RannañHeñvel 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Deroadur 3.0</string>
+  <string name="license_name_cc_by_sa_four">Dereiñ-LodañHeñvel 4.0</string>
+  <string name="license_name_cc_by_four">Dereiñ 4.0</string>
+  <string name="license_name_cc_by_sa"> Dereiñ-LodañHeñvel 3.0</string>
+  <string name="license_name_cc_by">Dereiñ 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -163,9 +198,11 @@
   <string name="tutorial_3_text">ARABAT enporzhiañ :</string>
   <string name="tutorial_3_subtext_1">Emboltred pe luc\'hskeudennoù eus ho mignoned</string>
   <string name="tutorial_3_subtext_2">Luc\'hskeudennoù ho peus pellgarget dre ar Genrouedad</string>
+  <string name="tutorial_3_subtext_3">Tapadennoù-skramm eus arloadoù perc\'hennet</string>
   <string name="tutorial_4_text">Skouer un enporzhiadenn :</string>
   <string name="tutorial_4_subtext_1">Titl : Opera Sidney</string>
   <string name="tutorial_4_subtext_2">Deskrivadur : Opera Sidney gwelet eus ar bae</string>
+  <string name="tutorial_4_subtext_3">Rummadoù:Opera Sydney gwelet eus ar c\'hornôg, Opera Sydney gwelet a-bell</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
@@ -181,8 +218,12 @@
   <string name="detail_discussion_empty">Kaozeadenn ebet</string>
   <string name="detail_license_empty">Aotre-implijout dianav</string>
   <string name="menu_refresh">Freskaat</string>
+  <string name="storage_permission_title">Goulenn aotre da stokañ</string>
   <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. N\'hall ket an arload tizhout ho palier hep an dra-se.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Aotre ret ; skrivañ war al lec\'h stokañ diavaez. Ne c\'hall ket an arload tizhout ho kamera hep an dra-se.</string>
+  <string name="write_storage_permission_rationale">Aotre rekis : skrivañ er stokañ diavaez. N\'hall ket an arload tizhout ho kamera/palier hep an dra-se.</string>
+  <string name="location_permission_title">Goulenn aotre da zelec\'hiañ</string>
+  <string name="in_app_camera_location_permission_title">Enrollañ lec\'hiadur ar skeudennoù kemeret dre an arload</string>
+  <string name="in_app_camera_location_switch_pref_summary">Gweredekait kement-mañ evit enrollañ lec\'hiadur ar skeudennoù kemeret dre an arload, e ken degouezh ma ne vefe ket enrollet gant kamera an ardivink.</string>
   <string name="ok">Mat eo</string>
   <string name="warning">Diwallit</string>
   <string name="duplicate_file_name">Anv ar restr doubl kavet</string>
@@ -195,6 +236,7 @@
   <string name="media_detail_description">Deskrivadur</string>
   <string name="media_detail_discussion">Kaozeadenn</string>
   <string name="media_detail_author">Aozer</string>
+  <string name="media_detail_uploader">Ezkarger</string>
   <string name="media_detail_uploaded_date">Deiziad enporzhiañ</string>
   <string name="media_detail_license">Aotre-implijout</string>
   <string name="media_detail_coordinates">Daveennoù</string>
@@ -202,6 +244,7 @@
   <string name="become_a_tester_title">Deuit da vezañ un amprouer beta</string>
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="_2fa_code">Kod 2FA</string>
+  <string name="email_auth_code">Kod gwiriañ ar postel</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
   <string name="no_subcategory_found">Isrummad ebet kavet</string>
   <string name="no_parentcategory_found">Rummad tad ebet kavet</string>
@@ -209,7 +252,7 @@
   <string name="welcome_image_llamas">Lamaed</string>
   <string name="welcome_image_rainbow_bridge">Pont Gwareg-ar-glav</string>
   <string name="welcome_image_tulip">Tulipez</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Donemat e Wikipedia</string>
+  <string name="welcome_image_welcome_wikipedia">Ur brastres eus ur pennad e Wikipedia</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Gwirioù oberour donemat</string>
   <string name="welcome_image_sydney_opera_house">Ti Opera Sydney</string>
   <string name="cancel">Nullañ</string>
