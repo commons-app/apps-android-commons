@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## 6.9.0
+
+### What's changed
+- Improved DEX score by removing `dontobfuscate` from ProGuard rules.
+
 ## v6.8.0
 
 ### What's changed
