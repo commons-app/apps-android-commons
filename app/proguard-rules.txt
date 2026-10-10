@@ -68,6 +68,11 @@
 # Prevent R8 from obfuscating project classes used by Gson for parsing
 -keep class fr.free.nrw.commons.fileusages.** { *; }
 
+# Upload responses are deserialized reflectively by Gson. Keep their fields and
+# constructors when release builds use the optimized Android shrinker config.
+-keep class fr.free.nrw.commons.upload.UploadResponse { *; }
+-keep class fr.free.nrw.commons.upload.UploadResult { *; }
+
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * implements com.google.gson.TypeAdapterFactory
