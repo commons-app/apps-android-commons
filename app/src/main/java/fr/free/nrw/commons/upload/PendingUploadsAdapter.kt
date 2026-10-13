@@ -3,23 +3,18 @@ package fr.free.nrw.commons.upload
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.net.Uri
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.imagepipeline.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
-import java.io.File
 
 /**
  * Adapter for displaying pending uploads in a paginated list in PendingUploadsFragment. This adapter
@@ -94,7 +89,7 @@ class PendingUploadsAdapter(
     class ViewHolder(
         itemView: View,
     ) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: com.facebook.drawee.view.SimpleDraweeView =
+        var itemImage: ImageView =
             itemView.findViewById(R.id.itemImage)
         var titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         var itemProgress: ProgressBar = itemView.findViewById(R.id.itemProgress)
@@ -120,21 +115,10 @@ class PendingUploadsAdapter(
                 true
             }
 
-            val imageSource: String = contribution.localUri.toString()
-            var imageRequest: ImageRequest? = null
-
-            if (!TextUtils.isEmpty(imageSource)) {
-                if (URLUtil.isFileUrl(imageSource)) {
-                    imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))
-                } else {
-                    val file = File(imageSource)
-                    imageRequest = ImageRequest.fromFile(file)
-                }
-            }
-
-            if (imageRequest != null) {
-                itemImage.setImageRequest(imageRequest)
-            }
+            itemImage.loadUploadItemImage(
+                contribution.localUri?.toString(),
+                R.drawable.ic_image_black_24dp
+            )
 
             bindState(contribution.state)
             bindProgress(contribution.transferred, contribution.dataLength, contribution.state)

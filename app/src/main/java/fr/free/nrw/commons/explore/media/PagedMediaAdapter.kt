@@ -2,6 +2,9 @@ package fr.free.nrw.commons.explore.media
 
 import android.view.View
 import android.view.ViewGroup
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media
@@ -78,7 +81,10 @@ class SearchImagesViewHolder(
         val media = item.first
         binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
         binding.categoryImageTitle.text = media.mostRelevantCaption
-        binding.categoryImageView.setImageURI(media.thumbUrl)
+        binding.categoryImageView.load(media.thumbUrl) {
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
+        }
         setAuthorText(media)
     }
 

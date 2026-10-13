@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
-import com.facebook.drawee.view.SimpleDraweeView
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 
@@ -71,14 +74,17 @@ class GridViewAdapter(
         )
 
         val item = data?.get(position)
-        val imageView = view.findViewById<SimpleDraweeView>(R.id.categoryImageView)
+        val imageView = view.findViewById<ImageView>(R.id.categoryImageView)
         val fileName = view.findViewById<TextView>(R.id.categoryImageTitle)
         val uploader = view.findViewById<TextView>(R.id.categoryImageAuthor)
 
         item?.let {
             fileName.text = it.mostRelevantCaption
             setUploaderView(it, uploader)
-            imageView.setImageURI(it.thumbUrl)
+            imageView.load(it.thumbUrl) {
+                placeholder(R.drawable.image_placeholder)
+                error(R.drawable.image_placeholder)
+            }
         }
 
         return view

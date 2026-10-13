@@ -77,10 +77,10 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
+    /** Position requested by the list before the pager's view has been created. */
+    private var requestedPosition: Int = 0
 
-    /**
-     * ProgressBar used to indicate the loading status of media items.
-     */
+    /** ProgressBar used while waiting for a media page to be created. */
     var imageProgressBar: ProgressBar? = null
 
     var removedItems: ArrayList<Int> = ArrayList()
@@ -94,7 +94,6 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     ): View? {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false)
         binding!!.mediaDetailsPager.addOnPageChangeListener(this)
-        // Initialize the ProgressBar by finding it in the layout
         imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
         adapter = MediaDetailAdapter(this, childFragmentManager)
 
@@ -111,14 +110,18 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
             (activity as ProfileActivity).setTabLayoutVisibility(false)
         }
 
+        // ViewPager otherwise populates page zero as soon as the adapter is set.
+        // That page can start an image request before showImage() selects the
+        // item opened from the recycler view, causing the first image to flash.
+        val initialPosition = savedInstanceState?.getInt("current-page") ?: requestedPosition
+        binding!!.mediaDetailsPager.visibility = View.INVISIBLE
         binding!!.mediaDetailsPager.adapter = adapter
 
         if (savedInstanceState != null) {
-            val pageNumber = savedInstanceState.getInt("current-page")
-            binding!!.mediaDetailsPager.setCurrentItem(pageNumber, false)
             requireActivity().invalidateOptionsMenu()
         }
         adapter!!.notifyDataSetChanged()
+        setViewPagerCurrentItem(initialPosition)
 
         return binding!!.root
     }
@@ -532,10 +535,12 @@ ${m.pageTitle.canonicalUri}"""
 
     fun showImage(i: Int, isWikipediaButtonDisplayed: Boolean) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed
+        requestedPosition = i
         setViewPagerCurrentItem(i)
     }
 
     fun showImage(i: Int) {
+        requestedPosition = i
         setViewPagerCurrentItem(i)
     }
 
@@ -544,25 +549,13 @@ ${m.pageTitle.canonicalUri}"""
      * @param position current item that to be shown
      */
     private fun setViewPagerCurrentItem(position: Int) {
-        val handler = Handler(Looper.getMainLooper())
-        val runnable: Runnable = object : Runnable {
-            override fun run() {
-                // Show the ProgressBar while waiting for the item to load
-                imageProgressBar!!.visibility = View.VISIBLE
-                // Check if the adapter has enough items loaded
-                if (adapter!!.count > position) {
-                    // Set the current item in the ViewPager
-                    binding!!.mediaDetailsPager.setCurrentItem(position, false)
-                    // Hide the ProgressBar once the item is loaded
-                    imageProgressBar!!.visibility = View.GONE
-                } else {
-                    // If the item is not ready yet, post the Runnable again
-                    handler.post(this)
-                }
-            }
+        if (binding == null || adapter == null || adapter!!.count <= position) {
+            return
         }
-        // Start the Runnable
-        handler.post(runnable)
+
+        binding!!.mediaDetailsPager.setCurrentItem(position, false)
+        imageProgressBar!!.visibility = View.GONE
+        binding!!.mediaDetailsPager.visibility = View.VISIBLE
     }
 
     /**
