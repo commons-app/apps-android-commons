@@ -205,7 +205,7 @@
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordenadas</string>
   <string name="media_detail_coordinates_empty">Non proporcionado</string>
-  <string name="become_a_tester_title">Converterse en beta-tester</string>
+  <string name="become_a_tester_title">Converterse en probador da beta</string>
   <string name="become_a_tester_description">Siga a nosa canle beta en Google Play e obteña acceso a novas funcionalidades e correccións de erros</string>
   <string name="_2fa_code">Código de autenticación de dous pasos</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
