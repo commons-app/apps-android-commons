@@ -36,7 +36,6 @@ import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.functions.Functions
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.acra.ACRA.init
@@ -134,7 +133,9 @@ class CommonsApplication : MultiDexApplication() {
 
         // This handler will catch exceptions thrown from Observables after they are disposed,
         // or from Observables that are (deliberately or not) missing an onError handler.
-        RxJavaPlugins.setErrorHandler(Functions.emptyConsumer())
+        // Log rather than silently discard - these are real bugs (crashes that would
+        // otherwise have surfaced) and silently swallowing them hides that fact entirely.
+        RxJavaPlugins.setErrorHandler { Timber.e(it, "Undeliverable RxJava exception") }
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0")
