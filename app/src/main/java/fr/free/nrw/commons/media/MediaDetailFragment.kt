@@ -361,7 +361,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         binding.nominateDeletion.setOnClickListener { onDeleteButtonClicked() }
         binding.descriptionEdit.setOnClickListener { onDescriptionEditClicked() }
         binding.coordinateEdit.setOnClickListener { onUpdateCoordinatesClicked() }
-        binding.copyWikicode.setOnClickListener { onCopyWikicodeClicked() }
 
         binding.fileUsagesComposeView.apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
@@ -950,16 +949,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         if (media!!.coordinates != null && activity != null) {
             handleGeoCoordinates(requireContext(), media!!.coordinates!!)
         }
-    }
-
-    private fun onCopyWikicodeClicked() {
-        val data: String =
-            "[[" + media!!.filename + "|thumb|" + media!!.fallbackDescription + "]]"
-        requireContext().copyToClipboard("wikiCode", data)
-        Timber.d("Generated wikidata copy code: %s", data)
-
-        Toast.makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
-            .show()
     }
 
     /**
