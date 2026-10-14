@@ -143,6 +143,14 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
             arrayOf(permission.ACCESS_FINE_LOCATION)
         )
     }
+    
+    /**
+    cleanup callback and helpers to avoid leaks
+     */
+    fun cleanup() {
+        locationPermissionCallback = null
+        locationPermissionsHelper = null
+    }
 
     /**
      * Shows a dialog alerting the user about location services being off and asking them to turn it
