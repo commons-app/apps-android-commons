@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -48,6 +47,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
@@ -93,7 +93,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
     private var isTitleExpanded = true
 
-    private var progressDialog: ProgressDialog? = null
+    private var progressDialog: AlertDialog? = null
     private var uploadImagesAdapter: UploadImageAdapter? = null
     private var fragments: MutableList<UploadBaseFragment>? = null
     private var uploadCategoriesFragment: UploadCategoriesFragment? = null
@@ -241,9 +241,10 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
     }
 
     private fun initProgressDialog() {
-        progressDialog = ProgressDialog(this)
-        progressDialog!!.setMessage(getString(R.string.please_wait))
-        progressDialog!!.setCancelable(false)
+        progressDialog = DialogUtil.createProgressDialog(
+            context = this,
+            message = getString(R.string.please_wait),
+        )
     }
 
     private fun initThumbnailsRecyclerView() {

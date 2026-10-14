@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.auth
 
 import android.accounts.Account
-import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
@@ -41,7 +41,7 @@ class LoginActivityUnitTests {
     private lateinit var activity: LoginActivity
 
     @Mock
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var progressDialog: AlertDialog
 
     @Mock
     private lateinit var view: View
