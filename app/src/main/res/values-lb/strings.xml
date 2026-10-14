@@ -124,8 +124,8 @@
   <string name="title_activity_custom_selector">Personaliséiert Auswiel</string>
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
-  <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet wgl. e &lt;a href=\"%1$s\"&gt;GitHub-Antrag&lt;/a&gt; u fir Feeler ze mellen a Proposen ze maachen.</string>
+  <string name="about_license">D\'Wikimedia-Commons-App ass eng Open-Source-App, déi vu Stipendiaten a Fräiwëllege vun der Wikimedia-Communautéit entwéckelt an ënnerhale gëtt. D\'Wikimedia Foundation ass net an d\'Kreatioun, d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
+  <string name="about_improve">Maacht wgl. e &lt;a href=\"%1$s\"&gt;GitHub-Ticket&lt;/a&gt; op, fir Feeler ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">Dateschutzrichtlinnen</string>
   <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
@@ -301,7 +301,7 @@
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
   <string name="explore_tab_title_map">Kaart</string>
   <string name="successful_wikidata_edit">Bild bei %1$s op Wikidata derbäigesat!</string>
-  <string name="wikidata_edit_failure">Den entspriechende Wikidata-Objet konnt net aktualiséiert ginn!</string>
+  <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
   <string name="quiz">Quiz</string>
@@ -640,6 +640,7 @@
   <string name="unmarking_as_not_for_upload">D\'Markéierung fir net eropzeluede gëtt opgehuewen</string>
   <string name="show_already_actioned_pictures">Schonn traitéiert Biller weisen</string>
   <string name="no_more_images_found">Keng weider Biller fonnt</string>
+  <string name="this_image_is_already_uploaded">Dat Bild gouf schonn eropgelueden</string>
   <string name="can_not_select_this_image_for_upload">Dat hei Bild kann net fir eropzelueden ausgewielt ginn</string>
   <string name="image_selected">Bild ausgewielt</string>
   <string name="image_marked_as_not_for_upload">Bild als net fir eropzeluede markéiert</string>
@@ -666,6 +667,7 @@
   <string name="send_thanks_to_author">Dem Auteur Merci soen</string>
   <string name="error_sending_thanks">Feeler beim Schécke vun engem Merci un den Auteur.</string>
   <string name="invalid_login_message">Är Sessioun ass ofgelaf. Loggt Iech wgl. nei an.</string>
+  <string name="no_application_available_to_open_gpx_files">Keng Applikatioun disponibel, fir GPX-Fichieren opzemaachen</string>
   <string name="file_saved_successfully">Fichier erfollegräich gespäichert</string>
   <string name="do_you_want_to_open_gpx_file">Wëllt Dir de GPX-Fichier opmaachen?</string>
   <string name="do_you_want_to_open_kml_file">Wëllt Dir de KML-Fichier opmaachen?</string>
@@ -680,8 +682,12 @@
   <string name="multiple_files_depiction">Denkt wgl. drun, datt all d\'Biller beim gläichzäitegen Eroplueden déi selwecht Kategorien a Motiver kréien. Wann d\'Biller net déi selwecht Motiver a Kategorien hunn, luet se wgl. eenzel erop.</string>
   <string name="multiple_files_depiction_header">Hiweis zum gläichzäitegen Eroplueden</string>
   <string name="nearby_wikitalk">E Problem fir dëst Element u Wikidata mellen</string>
+  <string name="please_enter_some_comments">Gitt wgl. Kommentaren an</string>
   <string name="talk">Diskussioun</string>
-  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
+  <string name="write_something_about_the_item">Schreift eppes iwwer d\'Element „%1$s“. Är Kommentare wäerten ëffentlech siichtbar sinn.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ gëtt et net méi, et ka keng Foto méi dovunner gemaach ginn.</string>
+  <string name="is_at_a_different_place_wikidata">„%1$s“ ass op enger anerer Plaz.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ ass op enger anerer Plaz. Gitt wgl. déi richteg Plaz hei ënnendrënner an a falls méiglech gitt och de richtege Breeden- a Längegrad an.</string>
   <string name="other_problem_or_information_please_explain_below">Anere Problem oder Informatioun (wgl. ënnen erklären).</string>
   <string name="feedback_destination_note">Äre Feedback kënnt op déi follgend Wikisäit stoen: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Sidd Dir sécher, datt Dir d\'Eropluede vun all Fichier ofbrieche wëllt?</string>

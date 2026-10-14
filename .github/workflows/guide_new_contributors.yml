@@ -1,0 +1,86 @@
+name: Guide New Contributors
+
+# Carved out of auto_assign.yml (disabled in 1526d0e) so that it runs on its own,
+# see https://github.com/commons-app/apps-android-commons/issues/6958
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+jobs:
+  guide:
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.issue.pull_request && github.event.comment.user.type != 'Bot' }}
+    steps:
+      - name: Point new contributors to suitable issues
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const commenter = context.payload.comment.user.login;
+            if (['OWNER', 'MEMBER'].includes(context.payload.comment.author_association)) return;
+
+            // Only react to requests to work on this issue, ignoring quoted text and code
+            const text = context.payload.comment.body
+              .replace(/```[\s\S]*?```/g, '')
+              .split('\n').filter(line => !line.trim().startsWith('>')).join('\n')
+              .replace(/’/g, "'");
+            const requestPatterns = [
+              // "please assign me", "assign this issue to me"
+              /(?<!-)\bassign (this |it |the issue |this issue |#\d+ )?(to )?me\b/i,
+              // "can I be assigned?", "could this be assigned to me?", "can I get this issue assigned?"
+              /\b(can|could|may) (i|this|it) (please )?(be|get|get this|get it|get this issue) assigned\b/i,
+              // "I'd like to be assigned", "happy to be assigned"
+              /\b(like|love|want|happy|glad) to be assigned\b/i,
+              // "I'd like to work on this", "can I fix this?", "I'm interested in working on this"
+              /\b(i'?d like|i would like|i'?d love|i would love|i want|i'?m interested in|i am interested in|can i|could i|may i|is it okay for me|is it ok for me)( please)? (to )?(try (and |to )?)?(work on|working on|take up|taking up|take on|pick up|fix|fixing|solve|take|try) (this|it|the issue)\b/i,
+              // "can I take this up?", "I can pick it up"
+              /\b(i'?d like|i would like|i want|can i|could i|may i|i can|i'?ll|let me) (to )?(take|pick) (this|it) up\b/i,
+              // "I'd like to give this a try", "I'll take a shot at this"
+              /\b(i'?d like|i would like|i'?d love|can i|could i|may i|i'?ll|let me) (to )?(give (this|it) a (try|shot|go)|take a (shot|stab) at (this|it))\b/i,
+            ];
+            if (!requestPatterns.some(pattern => pattern.test(text))) return;
+
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+
+            // New contributors should start with bugs or good first issues
+            const isNewcomerFriendly = issue.data.type?.name === 'Bug'
+              || issue.data.labels.some(label => (label.name || label) === 'good first issue');
+            if (isNewcomerFriendly) return;
+
+            // A maintainer may have assigned them anyway
+            if (issue.data.assignees.some(assignee => assignee.login === commenter)) return;
+
+            const mergedPullRequests = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:merged author:${commenter}`,
+              per_page: 1
+            });
+            if (mergedPullRequests.data.total_count >= 6) return;
+
+            // Tell each contributor only once per issue
+            const marker = `<!-- guide-new-contributors: ${commenter} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100
+            });
+            if (comments.some(comment => comment.user.type === 'Bot' && comment.body?.includes(marker))) return;
+
+            let body = `Hi @${commenter}! Thank you for your enthusiasm!`;
+            body += `\n\nWhile we appreciate your interest in fixing this issue, we found out that contributors who are not veterans learn better from fixing bugs (issues with Type=Bug) or working on good first issues (issues with Label=good first issue). [Our documentation](https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md#developers) contains the details and a link to an issue search that gives you the best issues to work on.`;
+            body += `\n\nWould you mind trying that? Once you have found a suitable issue you want to solve, you can ask to be assigned there.`;
+            body += `\n\nThanks a lot!`;
+            body += `\n${marker}`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });

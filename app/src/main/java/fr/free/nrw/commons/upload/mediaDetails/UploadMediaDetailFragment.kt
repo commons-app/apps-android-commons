@@ -830,11 +830,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      * @return boolean whether the details are empty or not
      */
     private fun listContainsEmptyDetails(uploadMediaDetails: List<UploadMediaDetail>): Boolean {
-        for ((_, descriptionText, captionText) in uploadMediaDetails) {
-            if (!TextUtils.isEmpty(captionText) && !TextUtils.isEmpty(
-                    descriptionText
-                )
-            ) {
+        for ((_, _, captionText) in uploadMediaDetails) {
+            if (!TextUtils.isEmpty(captionText)) {
                 return false
             }
         }
