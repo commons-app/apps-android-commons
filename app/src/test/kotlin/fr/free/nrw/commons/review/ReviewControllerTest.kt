@@ -140,6 +140,7 @@ class ReviewControllerTest {
     fun testSendThanks() {
         shadowOf(Looper.getMainLooper()).idle()
         whenever(firstRevision.revisionId()).thenReturn(1)
+        whenever(firstRevision.user()).thenReturn("test_user")
         Whitebox.setInternalState(controller, "firstRevision", firstRevision)
         controller.sendThanks(activity)
         assertEquals(
@@ -147,6 +148,7 @@ class ReviewControllerTest {
             context.getString(
                 R.string.send_thank_toast,
                 media.displayTitle,
+                "test_user"
             ),
         )
 
@@ -165,6 +167,7 @@ class ReviewControllerTest {
             context.getString(
                 R.string.send_thank_success_message,
                 media.displayTitle,
+                "test_user"
             ),
         )
     }
@@ -176,7 +179,7 @@ class ReviewControllerTest {
         assertEquals(
             ShadowToast.getTextOfLatestToast().toString(),
             context.getString(
-                R.string.send_thank_toast,
+                R.string.send_thank_toast_no_author,
                 media.displayTitle,
             ),
         )
