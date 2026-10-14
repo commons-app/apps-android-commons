@@ -105,11 +105,8 @@ class LocationPermissionsHelper(
             activity.getString(R.string.cancel),
             { openLocationSettings(activity) },
             {
-                Toast.makeText(
-                    activity,
-                    activity.getString(dialogTextResource),
-                    Toast.LENGTH_LONG
-                ).show()
+                //notify the controller that the service is unavailable
+                callback?.onLocationServiceUnAvailable()
             }
         )
     }
@@ -195,5 +192,6 @@ class LocationPermissionsHelper(
     interface LocationPermissionCallback {
         fun onLocationPermissionDenied(toastMessage: String)
         fun onLocationPermissionGranted()
+        fun onLocationServiceUnAvailable()
     }
 }
