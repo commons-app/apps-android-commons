@@ -244,7 +244,7 @@ class DescriptionEditActivity :
                     updatedWikiText,
                 ).subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
+                ?.subscribe({ s: Boolean? -> Timber.d("Descriptions are added.") }, { Timber.e(it) })
                 ?.let {
                     compositeDisposable.add(
                         it,
@@ -277,11 +277,11 @@ class DescriptionEditActivity :
                             mediaDetail.captionText,
                         ).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { s: Boolean? ->
+                        .subscribe({ s: Boolean? ->
                             updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
                             media.captions = updatedCaptions
                             Timber.d("Caption is added.")
-                        },
+                        }, { Timber.e(it) }),
                 )
             } catch (e: InvalidLoginTokenException) {
                 val username = sessionManager.userName

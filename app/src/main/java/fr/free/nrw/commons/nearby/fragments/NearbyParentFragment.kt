@@ -1055,10 +1055,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 .takeUntil(RxView.detaches(binding!!.nearbyFilter.searchViewLayout.searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { query: CharSequence ->
+                .subscribe({ query: CharSequence ->
                     (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter).filter
                         .filter(query.toString())
-                })
+                }, { timber.log.Timber.e(it) }))
     }
 
     private fun restoreStoredFilterSelection() {
@@ -1821,7 +1821,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     fun savePlaceToDatabase(place: Place?) {
-        placesRepository?.save(place)?.subscribeOn(Schedulers.io())?.subscribe()?.let {
+        placesRepository?.save(place)?.subscribeOn(Schedulers.io())?.subscribe({ }, { Timber.e(it) })?.let {
             compositeDisposable.add(
                 it
             )

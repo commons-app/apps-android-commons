@@ -92,7 +92,7 @@ import javax.inject.Named
             contributionsRepository
                 .deleteContributionFromDB(it)
                 .subscribeOn(ioThreadScheduler)
-                .subscribe()
+                .subscribe({ }, { Timber.e(it) })
         }?.let {
             compositeDisposable.add(
                 it
@@ -113,7 +113,7 @@ import javax.inject.Named
                     STATE_PAUSED
                 )
                 .subscribeOn(ioThreadScheduler)
-                .subscribe()
+                .subscribe({ }, { Timber.e(it) })
         )
     }
 
@@ -127,7 +127,7 @@ import javax.inject.Named
             contributionsRepository
                 .deleteContributionsFromDBWithStates(states)
                 .subscribeOn(ioThreadScheduler)
-                .subscribe()
+                .subscribe({ }, { Timber.e(it) })
         )
     }
 
@@ -167,11 +167,11 @@ import javax.inject.Named
                                     .doOnComplete {
                                         restartUploads(contributionList, index + 1, context)
                                     }
-                                    .subscribe {
+                                    .subscribe({
                                         makeOneTimeWorkRequest(
                                             context, ExistingWorkPolicy.KEEP
                                         )
-                                    })
+                                    }, { Timber.e(it) }))
                         } else {
                             Timber.e("Contribution already exists")
                             compositeDisposable.add(
@@ -180,7 +180,7 @@ import javax.inject.Named
                                     .subscribeOn(ioThreadScheduler).doOnComplete {
                                         restartUploads(contributionList, index + 1, context)
                                     }
-                                    .subscribe())
+                                    .subscribe({ }, { Timber.e(it) }))
                         }
                     }, { throwable: Throwable? ->
                         Timber.e(throwable)
@@ -196,9 +196,9 @@ import javax.inject.Named
                     .doOnComplete {
                         restartUploads(contributionList, index + 1, context)
                     }
-                    .subscribe {
+                    .subscribe({
                         makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
-                    }
+                    }, { Timber.e(it) })
             )
         }
     }
@@ -229,16 +229,16 @@ import javax.inject.Named
                         modifiedFilePath = contribution.localUri!!
                     )
                     .subscribeOn(ioThreadScheduler)
-                    .subscribe { imageCheckResult: Int ->
+                    .subscribe({ imageCheckResult: Int ->
                         if (imageCheckResult == IMAGE_OK) {
                             contribution.state = STATE_QUEUED
                             compositeDisposable.add(
                                 contributionsRepository
                                     .save(contribution)
                                     .subscribeOn(ioThreadScheduler)
-                                    .subscribe {
+                                    .subscribe({
                                         makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
-                                    }
+                                    }, { Timber.e(it) })
                             )
                         } else {
                             Timber.e("Contribution already exists")
@@ -246,19 +246,19 @@ import javax.inject.Named
                                 contributionsRepository
                                     .deleteContributionFromDB(contribution)
                                     .subscribeOn(ioThreadScheduler)
-                                    .subscribe()
+                                    .subscribe({ }, { Timber.e(it) })
                             )
                         }
-                    })
+                    }, { Timber.e(it) }))
         } else {
             contribution.state = STATE_QUEUED
             compositeDisposable.add(
                 contributionsRepository
                     .save(contribution)
                     .subscribeOn(ioThreadScheduler)
-                    .subscribe {
+                    .subscribe({
                         makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
-                    }
+                    }, { Timber.e(it) })
             )
         }
     }
