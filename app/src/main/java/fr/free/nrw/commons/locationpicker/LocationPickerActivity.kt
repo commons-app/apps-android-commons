@@ -399,22 +399,31 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Removes location metadata from the image
      */
     private fun removeLocationFromImage() {
-        media?.let {
+        val disposable = media?.let {
             coordinateEditHelper.makeCoordinatesEdit(
                 applicationContext, it, "0.0", "0.0", "0.0f"
             )
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe { _ ->
-                    Timber.d("Coordinates removed from the image")
-                }?.let { it1 ->
-                    compositeDisposable.add(
-                        it1
-                    )
-                }
+                ?.subscribe(
+                    { _ ->
+                        Timber.d("Coordinates removed from the image")
+                        setResult(RESULT_OK, Intent())
+                        finish()
+                    },
+                    { throwable ->
+                        Timber.e(throwable, "Failed to remove coordinates from image")
+                        setResult(RESULT_OK, Intent())
+                        finish()
+                    }
+                )
         }
-        setResult(RESULT_OK, Intent())
-        finish()
+        if (disposable != null) {
+            compositeDisposable.add(disposable)
+        } else {
+            setResult(RESULT_OK, Intent())
+            finish()
+        }
     }
 
     /**
