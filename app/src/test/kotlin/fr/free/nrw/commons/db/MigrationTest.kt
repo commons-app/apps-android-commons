@@ -7,6 +7,7 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
+import fr.free.nrw.commons.di.MIGRATION_22_23
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,7 +47,7 @@ class MigrationTest {
             AppDatabase::class.java,
             "commons_room.db"
         )
-            .addMigrations(MIGRATION_21_22)
+            .addMigrations(MIGRATION_21_22, MIGRATION_22_23)
             .allowMainThreadQueries()
             .build()
 
@@ -82,10 +83,46 @@ class MigrationTest {
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
 
+            // bookmarks_categories table must exist after 21→22 migration
+            cursor = migratingRoomDatabase.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
+            Assert.assertNotNull("bookmarks_categories table exists", cursor)
+            cursor.close()
+
         } finally {
             migratingRoomDatabase.close()
             context.deleteDatabase("commons.db")
             context.deleteDatabase("commons_room.db")
+        }
+    }
+
+    @Test
+    fun testMigration22To23() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val db22 = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "commons_room_22.db"
+        ).allowMainThreadQueries().build()
+        db22.openHelper.writableDatabase.version = 22
+        db22.close()
+
+        val db23 = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "commons_room_22.db"
+        )
+            .addMigrations(MIGRATION_22_23)
+            .allowMainThreadQueries()
+            .build()
+
+        try {
+            val cursor = db23.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
+            Assert.assertNotNull("bookmarks_categories table exists after 22→23 migration", cursor)
+            cursor.close()
+        } finally {
+            db23.close()
+            context.deleteDatabase("commons_room_22.db")
         }
     }
 }
