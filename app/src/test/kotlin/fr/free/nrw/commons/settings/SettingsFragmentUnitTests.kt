@@ -18,7 +18,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.settings.SettingsFragment.Companion.createLocale
 import org.junit.Assert
 import org.junit.Assert.assertEquals
@@ -47,7 +47,7 @@ class SettingsFragmentUnitTests {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var recentLanguagesDao: RecentLanguagesDao
+    private lateinit var recentLanguagesDao: RecentLanguagesRoomDao
 
     @Mock
     private lateinit var recentLanguagesTextView: TextView
@@ -87,6 +87,16 @@ class SettingsFragmentUnitTests {
             "languageHistoryListView",
             languageHistoryListView,
         )
+
+        // Default mock returns for Room DAO reactive methods
+        whenever(recentLanguagesDao.getRecentLanguages())
+            .thenReturn(io.reactivex.Single.just(emptyList()))
+        whenever(recentLanguagesDao.findRecentLanguage(any()))
+            .thenReturn(io.reactivex.Single.just(false))
+        whenever(recentLanguagesDao.deleteRecentLanguage(any()))
+            .thenReturn(io.reactivex.Completable.complete())
+        whenever(recentLanguagesDao.addRecentLanguage(any()))
+            .thenReturn(io.reactivex.Completable.complete())
     }
 
     @Test
@@ -165,13 +175,15 @@ class SettingsFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         whenever(recentLanguagesDao.getRecentLanguages())
             .thenReturn(
-                mutableListOf(
-                    Language("English", "en"),
-                    Language("English", "en"),
-                    Language("English", "en"),
-                    Language("English", "en"),
-                    Language("English", "en"),
-                    Language("English", "en"),
+                io.reactivex.Single.just(
+                    mutableListOf(
+                        Language("English", "en"),
+                        Language("English", "en"),
+                        Language("English", "en"),
+                        Language("English", "en"),
+                        Language("English", "en"),
+                        Language("English", "en"),
+                    )
                 ),
             )
         val method: Method =
@@ -217,7 +229,7 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnRecentLanguageClicked() {
         whenever(recentLanguagesDao.findRecentLanguage(any()))
-            .thenReturn(true)
+            .thenReturn(io.reactivex.Single.just(true))
         whenever(adapterView.adapter)
             .thenReturn(
                 RecentLanguagesAdapter(

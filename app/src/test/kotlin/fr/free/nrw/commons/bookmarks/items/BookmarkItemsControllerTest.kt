@@ -9,11 +9,12 @@ import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import io.reactivex.Single
 import java.util.ArrayList
 
 class BookmarkItemsControllerTest {
     @Mock
-    var bookmarkDao: BookmarkItemsDao? = null
+    var bookmarkDao: BookmarkItemsRoomDao? = null
 
     @InjectMocks
     lateinit var bookmarkItemsController: BookmarkItemsController
@@ -22,7 +23,7 @@ class BookmarkItemsControllerTest {
     fun setup() {
         MockitoAnnotations.openMocks(this)
         whenever(bookmarkDao!!.getAllBookmarksItems())
-            .thenReturn(mockBookmarkList)
+            .thenReturn(Single.just(mockBookmarkList))
     }
 
     /**

@@ -1,23 +1,7 @@
 package fr.free.nrw.commons.bookmarks.locations
 
-import android.content.ContentProviderClient
-import android.content.ContentValues
-import android.database.Cursor
-import android.database.MatrixCursor
-import android.net.Uri
-import android.os.RemoteException
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.argumentCaptor
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.inOrder
-import com.nhaarman.mockitokotlin2.isA
-import com.nhaarman.mockitokotlin2.isNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.location.LatLng
@@ -32,8 +16,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
@@ -47,14 +29,12 @@ class BookMarkLocationDaoTest {
 
     private lateinit var examplePlaceBookmark: Place
     private lateinit var exampleLabel: Label
-    private lateinit var exampleUri: Uri
     private lateinit var exampleLocation: LatLng
     private lateinit var builder: Sitelinks.Builder
 
     @Before
     fun setUp() {
         exampleLabel = Label.FOREST
-        exampleUri = Uri.parse("wikimedia/uri")
         exampleLocation = LatLng(40.0, 51.4, 1f)
 
         database = Room.inMemoryDatabaseBuilder(
@@ -91,7 +71,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testForAddAndGetAllBookmarkLocations() = runBlocking {
-        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocationsDao.toEntity(examplePlaceBookmark))
 
         val bookmarks = bookmarkLocationsDao.getAllBookmarksLocations()
 
@@ -103,7 +83,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testFindBookmarkByNameForTrue() = runBlocking {
-        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocationsDao.toEntity(examplePlaceBookmark))
 
         val exists = bookmarkLocationsDao.findBookmarkLocation(examplePlaceBookmark.name)
         assertTrue(exists)
@@ -111,7 +91,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testFindBookmarkByNameForFalse() = runBlocking {
-        bookmarkLocationsDao.addBookmarkLocation(examplePlaceBookmark.toBookmarksLocations())
+        bookmarkLocationsDao.addBookmarkLocation(bookmarkLocationsDao.toEntity(examplePlaceBookmark))
 
         val exists = bookmarkLocationsDao.findBookmarkLocation("xyz")
         assertFalse(exists)
@@ -119,7 +99,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testDeleteBookmark() = runBlocking {
-        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        val bookmarkLocation = bookmarkLocationsDao.toEntity(examplePlaceBookmark)
         bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
 
         bookmarkLocationsDao.deleteBookmarkLocation(bookmarkLocation)
@@ -137,7 +117,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testUpdateBookmarkForFalse() = runBlocking {
-        val newBookmark = examplePlaceBookmark.toBookmarksLocations()
+        val newBookmark = bookmarkLocationsDao.toEntity(examplePlaceBookmark)
         bookmarkLocationsDao.addBookmarkLocation(newBookmark)
 
         val exists = bookmarkLocationsDao.updateBookmarkLocation(examplePlaceBookmark)
@@ -146,7 +126,7 @@ class BookMarkLocationDaoTest {
 
     @Test
     fun testGetAllBookmarksLocationsPlace() = runBlocking {
-        val bookmarkLocation = examplePlaceBookmark.toBookmarksLocations()
+        val bookmarkLocation = bookmarkLocationsDao.toEntity(examplePlaceBookmark)
         bookmarkLocationsDao.addBookmarkLocation(bookmarkLocation)
 
         val bookmarks = bookmarkLocationsDao.getAllBookmarksLocationsPlace()
