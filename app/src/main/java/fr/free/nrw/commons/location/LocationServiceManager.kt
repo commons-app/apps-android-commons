@@ -78,7 +78,7 @@ class LocationServiceManager(private val context: Context) : LocationListener {
     fun registerLocationManager() {
         if (!isLocationManagerRegistered) {
             isLocationManagerRegistered =
-                requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER) &&
+                requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER) ||
                     requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
         }
     }
