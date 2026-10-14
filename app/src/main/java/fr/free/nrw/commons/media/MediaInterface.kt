@@ -117,6 +117,20 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
+     * Fetches file revisions with uploader information.
+     * WARNING: Due to MediaWiki API pagination, this returns up to ~50 revisions per request.
+     * For files with extensive history, implement continuation support using iicontin parameter
+     * to fetch remaining revisions. For most files, this endpoint is sufficient.
+     *
+     * @param title the file name to get revisions for
+     * @return MwQueryResponse with imageinfo array (may be paginated)
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=user|timestamp&iilimit=max")
+    fun getAllFileRevisions(
+        @Query("titles") title: String?,
+    ): Single<MwQueryResponse>
+
+    /**
      * Fetches Media object from the imageInfo API but suppress (known) errors
      *
      * @param title       the tiles to be searched for. Can be filename or template name
