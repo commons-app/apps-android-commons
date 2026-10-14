@@ -122,7 +122,6 @@ an upload might take a dozen seconds. */
     private fun setAuthorText(media: Media) {
         binding.authorView.text = MediaAttributionUtil.getTagLine(media, itemView.context)
     }
-
     /**
      * Checks if a media exists on the corresponding Wikipedia article Currently the check is made
      * for the device's current language Wikipedia
