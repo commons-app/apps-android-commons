@@ -228,7 +228,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             else {
                 binding.progressBar.visibility = View.GONE
                 showDismissibleSnackBar(
-                    requireView().findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry
                 ) { setAchievements() }
             }
@@ -239,7 +239,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             }
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
-                requireView().findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed, R.string.retry
             ) { setAchievements() }
         }
