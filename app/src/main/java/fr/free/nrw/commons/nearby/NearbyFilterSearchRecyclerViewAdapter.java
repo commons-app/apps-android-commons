@@ -78,7 +78,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Label label = displayedLabels.get(position);
         holder.placeTypeIcon.setImageResource(label.getIcon());
-        holder.placeTypeLabel.setText(label.toString());
+        holder.placeTypeLabel.setText(label.getDisplayName(context));
         holder.placeTypeLayout.setSelected(label.isSelected());
         holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
@@ -127,11 +127,12 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     results.count = labels.size();
                     results.values = labels;
                 } else {
-                    String query = constraint.toString().toLowerCase(Locale.ROOT).trim();
+                    String query = constraint.toString().toLowerCase(Locale.getDefault()).trim();
 
                     for (Label label : labels) {
-                        String name = label.toString().replace('_', ' ').toLowerCase(Locale.ROOT);
-                        if (name.contains(query)) {
+                        String name = label.getDisplayName(context).toLowerCase(Locale.getDefault());
+                        String englishName = label.toString().replace('_', ' ').toLowerCase(Locale.ROOT);
+                        if (name.contains(query) || englishName.contains(query)) {
                             filteredArrayList.add(label);
                         }
                     }
