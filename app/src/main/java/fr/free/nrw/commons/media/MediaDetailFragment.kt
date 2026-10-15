@@ -734,7 +734,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
             override fun onFailure(id: String, throwable: Throwable?) {
                 if (_binding == null) return
-                // Failure image stays in the default-sized image area; details remain visible
                 binding.mediaDetailImageProgressBar.visibility = View.GONE
                 Timber.e(throwable, "Failed to load media detail image")
             }
