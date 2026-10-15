@@ -1,12 +1,14 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import okhttp3.Cache
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -48,9 +50,38 @@ object OkHttpConnectionFactory {
                 redactHeader("Authorization")
                 redactHeader("Cookie")
             })
+            .addInterceptor(OAuthTokenInterceptor())
             .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
+    }
+}
+
+class OAuthTokenInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val requestBuilder = request.newBuilder()
+
+        val sessionManager: SessionManager? = CommonsApplication.instance?.sessionManager
+        val accessToken = sessionManager?.getAccessToken()
+
+        val allowedHosts = setOfNotNull(
+            BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
+            BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
+            "meta.wikimedia.org",
+            "meta.wikimedia.beta.wmflabs.org"
+        )
+
+        if (!accessToken.isNullOrEmpty() &&
+            request.header("Authorization") == null &&
+            request.url.isHttps &&
+            request.url.host in allowedHosts
+        ) {
+            requestBuilder.header("Authorization", "Bearer $accessToken")
+        }
+
+        return chain.proceed(requestBuilder.build())
     }
 }
 
