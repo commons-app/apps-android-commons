@@ -104,11 +104,11 @@ class NotificationClientTest {
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito
-            .`when`(service.markRead(anyString(), anyString(), anyString()))
+            .`when`(service.markRead(anyString(), anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
-        notificationClient.markNotificationAsRead("test")
-        verify(service).markRead(anyString(), anyString(), anyString())
+        notificationClient.markNotificationAsRead("1234", "enwiki")
+        verify(service).markRead("test", "1234", "", "enwiki")
     }
 
     @Suppress("SameParameterValue")

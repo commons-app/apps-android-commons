@@ -69,7 +69,7 @@ class NotificationClient
                     link = contents?.links?.getPrimary()?.url ?: "",
                     iconUrl = "",
                     notificationId = id().toString(),
-                    wiki = wiki(),
+                    wiki = wiki().ifEmpty { "commonswiki" },
                 )
         }
     }
