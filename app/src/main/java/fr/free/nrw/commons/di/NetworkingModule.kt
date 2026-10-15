@@ -64,9 +64,22 @@ class NetworkingModule {
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(CommonHeaderRequestInterceptor())
         .addInterceptor { chain ->
-            val requestBuilder = chain.request().newBuilder()
+            val request = chain.request()
+            val requestBuilder = request.newBuilder()
             val accessToken = sessionManager.getAccessToken()
-            if (!accessToken.isNullOrEmpty()) {
+
+            val allowedHosts = setOfNotNull(
+                BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
+                BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
+                "meta.wikimedia.org",
+                "meta.wikimedia.beta.wmflabs.org"
+            )
+
+            if (!accessToken.isNullOrEmpty() &&
+                request.header("Authorization") == null &&
+                request.url.isHttps &&
+                request.url.host in allowedHosts
+            ) {
                 requestBuilder.header("Authorization", "Bearer $accessToken")
             }
             chain.proceed(requestBuilder.build())

@@ -53,6 +53,12 @@ class SessionManager @Inject constructor(
         }
     }
 
+    fun invalidateOAuthToken() {
+        currentAccount?.let { account ->
+            accountManager.invalidateAuthToken(ACCOUNT_TYPE, accountManager.peekAuthToken(account, KEY_OAUTH2))
+        }
+    }
+
     fun updateOAuthAccount(username: String, accessToken: String, refreshToken: String) {
         var account = currentAccount
         if (account == null || TextUtils.isEmpty(account.name) || account.name != username) {
@@ -87,6 +93,7 @@ class SessionManager @Inject constructor(
         Observable.empty<Any>()
             .doOnComplete {
                 removeAccount()
+                invalidateOAuthToken()
                 _currentAccount = null
             }
     )

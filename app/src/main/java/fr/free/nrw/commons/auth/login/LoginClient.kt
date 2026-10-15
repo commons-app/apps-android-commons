@@ -22,6 +22,7 @@ class LoginClient(
 ) {
     private var tokenCall: Call<MwQueryResponse?>? = null
     private var loginCall: Call<LoginResponse?>? = null
+    private var profileCall: Call<OAuthProfileResponse>? = null
     private var oauthCall: Call<OAuthTokenResponse>? = null
 
     /**
@@ -198,23 +199,26 @@ class LoginClient(
         accessToken: String,
         callback: (String?, Throwable?) -> Unit
     ) {
-        loginInterface.getOAuthProfile("Bearer $accessToken")
-            .enqueue(object : Callback<OAuthProfileResponse> {
-                override fun onResponse(
-                    call: Call<OAuthProfileResponse>,
-                    response: Response<OAuthProfileResponse>
-                ) {
-                    if (response.isSuccessful && response.body() != null) {
-                        callback(response.body()?.username, null)
-                    } else {
-                        callback(null, IOException("Failed to fetch user profile"))
-                    }
+        profileCall?.cancel()
+        profileCall = loginInterface.getOAuthProfile("Bearer $accessToken")
+        profileCall?.enqueue(object : Callback<OAuthProfileResponse> {
+            override fun onResponse(
+                call: Call<OAuthProfileResponse>,
+                response: Response<OAuthProfileResponse>
+            ) {
+                if (call.isCanceled) return
+                if (response.isSuccessful && response.body() != null) {
+                    callback(response.body()?.username, null)
+                } else {
+                    callback(null, IOException("Failed to fetch user profile"))
                 }
+            }
 
-                override fun onFailure(call: Call<OAuthProfileResponse>, t: Throwable) {
-                    callback(null, t)
-                }
-            })
+            override fun onFailure(call: Call<OAuthProfileResponse>, t: Throwable) {
+                if (call.isCanceled) return
+                callback(null, t)
+            }
+        })
     }
 
     @Throws(Throwable::class)
@@ -271,7 +275,6 @@ class LoginClient(
     fun exchangeOAuthCode(
         code: String,
         clientId: String,
-        clientSecret: String,
         codeVerifier: String,
         redirectUri: String,
         callback: (OAuthTokenResponse?, Throwable?) -> Unit
@@ -283,7 +286,6 @@ class LoginClient(
             grantType = "authorization_code",
             code = code,
             clientId = clientId,
-            clientSecret = clientSecret,
             codeVerifier = codeVerifier,
             redirectUri = redirectUri
         )
@@ -343,6 +345,11 @@ class LoginClient(
         oauthCall?.let {
             it.cancel()
             oauthCall = null
+        }
+
+        profileCall?.let {
+            it.cancel()
+            profileCall = null
         }
     }
 }

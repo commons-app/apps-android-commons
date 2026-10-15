@@ -105,10 +105,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
             forgotPassword.setOnClickListener { forgotPassword() }
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
             signUpButton.setOnClickListener { signUp() }
-            loginButton.setOnClickListener { performLogin() }
+            loginButton?.setOnClickListener { performLogin() }
             oauthLoginButton?.setOnClickListener { startOAuthLogin() }
             loginPassword.setOnEditorActionListener { textView, actionId, keyEvent ->
-                if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
+                if (binding!!.loginButton?.isEnabled == true && isTriggerAction(actionId, keyEvent)) {
                     if (actionId == EditorInfo.IME_ACTION_NEXT && lastLoginResult != null) {
                         askUserForTwoFactorAuthWithKeyboard()
                         true
@@ -157,18 +157,25 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 return
             }
 
+            if (pkceCodeVerifier.isNullOrEmpty()) {
+                showMessageAndCancelDialog("OAuth verification session expired. Please try logging in again.")
+                return
+            }
+
             showLoggingProgressBar()
             loginClient.exchangeOAuthCode(
                 code = code,
                 clientId = BuildConfig.OAUTH_CLIENT_ID,
-                clientSecret = BuildConfig.OAUTH_CLIENT_SECRET,
                 codeVerifier = pkceCodeVerifier ?: "",
                 redirectUri = OAUTH_REDIRECT_URI
             ) { tokenResponse, throwable ->
+                if (isFinishing || isDestroyed) return@exchangeOAuthCode
+
                 if (tokenResponse != null && !tokenResponse.accessToken.isNullOrEmpty()) {
                     fetchProfileAndLogin(tokenResponse.accessToken, tokenResponse.refreshToken ?: "")
                 } else {
                     runOnUiThread {
+                        if (isFinishing || isDestroyed) return@runOnUiThread
                         progressDialog?.dismiss()
                         val errorMsg = throwable?.localizedMessage ?: "OAuth Token Exchange Failed"
                         showMessageAndCancelDialog(errorMsg)
@@ -179,11 +186,21 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun fetchProfileAndLogin(accessToken: String, refreshToken: String) {
-        loginClient.fetchOAuthUserProfile(accessToken) { username, _ ->
+        loginClient.fetchOAuthUserProfile(accessToken) { username, throwable ->
             runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
                 progressDialog?.dismiss()
+
+                // fail safely: never create a fabricated OAuthUser
+                if (throwable != null || username.isNullOrBlank()) {
+                    showMessageAndCancelDialog(
+                        throwable?.localizedMessage ?: getString(R.string.login_failed)
+                    )
+                    return@runOnUiThread
+                }
+
                 sessionManager.updateOAuthAccount(
-                    username = username ?: "OAuthUser",
+                    username = username,
                     accessToken = accessToken,
                     refreshToken = refreshToken
                 )
@@ -212,7 +229,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
         pkceCodeVerifier = generateCodeVerifier()
         val codeChallenge = generateCodeChallenge(pkceCodeVerifier!!)
 
-        val authUrl = Uri.parse("https://meta.wikimedia.org/w/rest.php/oauth2/authorize")
+        val authBaseUrl = "${BuildConfig.MOBILE_META_URL.removeSuffix("/wiki/")}/w/rest.php/oauth2/authorize"
+            .replace("meta.m.", "meta.")
+
+        val authUrl = Uri.parse(authBaseUrl)
             .buildUpon()
             .appendQueryParameter("response_type", "code")
             .appendQueryParameter("client_id", BuildConfig.OAUTH_CLIENT_ID)
@@ -400,7 +420,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?) =
-        if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
+        if (binding?.loginButton?.isEnabled == true && isTriggerAction(actionId, keyEvent)) {
             performLogin()
             true
         } else false
@@ -575,9 +595,9 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     private fun onTextChanged(text: String) {
         val enabled =
-            binding!!.loginUsername.text!!.length != 0 && binding!!.loginPassword.text!!.length != 0 &&
-                    (BuildConfig.DEBUG || binding!!.loginTwoFactor.text!!.length != 0 || binding!!.loginTwoFactor.visibility != View.VISIBLE)
-        binding!!.loginButton.isEnabled = enabled
+            binding?.loginUsername?.text?.isNotEmpty() == true && binding?.loginPassword?.text?.isNotEmpty() == true &&
+                    (BuildConfig.DEBUG || binding?.loginTwoFactor?.text?.isNotEmpty() == true || binding?.loginTwoFactor?.visibility != View.VISIBLE)
+        binding?.loginButton?.isEnabled = enabled
     }
 
     companion object {

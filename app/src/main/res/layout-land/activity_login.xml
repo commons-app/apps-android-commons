@@ -179,15 +179,19 @@
                         android:text="@string/signup" />
 
                     <Button
-                        android:id="@+id/login_button"
-                        style="@style/Widget.AppCompat.Button.Colored"
-                        android:layout_width="@dimen/dimen_0"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/small_gap"
-                        android:layout_marginStart="@dimen/small_gap"
-                        android:layout_weight="1"
-                        android:enabled="false"
-                        android:text="@string/login" />
+                      android:id="@+id/oauth_login_button"
+                      style="@style/Widget.AppCompat.Button.Colored"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/buttonFrame"
+                      android:layout_marginStart="@dimen/standard_gap"
+                      android:layout_marginLeft="@dimen/standard_gap"
+                      android:layout_marginEnd="@dimen/standard_gap"
+                      android:layout_marginRight="@dimen/standard_gap"
+                      android:layout_marginBottom="@dimen/standard_gap"
+                      android:text="@string/login_with_oauth"
+                      android:textColor="@android:color/white"
+                      android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -197,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/buttonFrame"
+                    android:layout_below="@id/oauth_login_button"
                     android:layout_marginBottom="@dimen/standard_gap"
                     android:text="@string/forgot_password"
                     android:textColor="@color/status_bar_blue"/>

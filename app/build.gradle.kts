@@ -34,7 +34,6 @@ android {
 
         // dynamically loads keys from local  properties
         buildConfigField("String", "OAUTH_CLIENT_ID", "\"${getOAuthClientId()}\"")
-        buildConfigField("String", "OAUTH_CLIENT_SECRET", "\"${getOAuthClientSecret()}\"")
 
         multiDexEnabled = true
 
@@ -410,7 +409,6 @@ fun getTestUserName(): String? = getLocalProperty("TEST_USER_NAME").takeIf { it.
 
 fun getOAuthClientId(): String = getLocalProperty("OAUTH_CLIENT_ID", "YOUR_OAUTH_CLIENT_ID")
 
-fun getOAuthClientSecret(): String = getLocalProperty("OAUTH_CLIENT_SECRET", "YOUR_OAUTH_CLIENT_SECRET")
 
 fun getTestPassword(): String? = getLocalProperty("TEST_USER_PASSWORD").takeIf { it.isNotEmpty() }
 
