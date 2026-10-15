@@ -710,14 +710,13 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
-            if(finalHeight>0)
-                binding.mediaDetailScrollView.visibility = View.VISIBLE
         }
     }
 
     private val aspectRatioListener: ControllerListener<ImageInfo?> =
         object : BaseControllerListener<ImageInfo?>() {
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
+                if (_binding == null) return
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
             }
@@ -727,8 +726,17 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 imageInfo: ImageInfo?,
                 animatable: Animatable?
             ) {
+                if (_binding == null) return
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+            }
+
+            override fun onFailure(id: String, throwable: Throwable?) {
+                if (_binding == null) return
+                // Failure image stays in the default-sized image area; details remain visible
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+                Timber.e(throwable, "Failed to load media detail image")
             }
         }
 
@@ -745,6 +753,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
             .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
