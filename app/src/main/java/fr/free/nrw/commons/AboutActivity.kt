@@ -42,6 +42,10 @@ class AboutActivity : BaseActivity() {
     @SuppressLint("StringFormatInvalid")  //TODO:
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        /*
+          Instead of just setting the view with the xml file. We need to use View Binding class.
+         */
 
         binding = ActivityAboutBinding.inflate(layoutInflater)
         val view: View = binding!!.root
