@@ -33,6 +33,19 @@ The body should provide a meaningful commit message.
 
 3. Make sure the Wiki pages don't become stale by updating them (if needed)
 
+### Kotlin style and static analysis
+
+Kotlin formatting and static analysis are checked in CI with ktlint and Detekt.
+Existing findings are recorded in baseline files; new findings fail the checks.
+Run the checks locally with:
+
+```sh
+./gradlew :app:ktlintCheck :app:detekt
+```
+
+Use `./gradlew :app:ktlintFormat` to apply ktlint's formatting fixes before
+committing. Android Lint is also run in CI for the beta debug variant.
+
 ### Further reading
 
 * [Importance of good commit messages](https://blog.oozou.com/commit-messages-matter-60309983c227?gi=c550a10d0f67)
