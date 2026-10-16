@@ -50,7 +50,6 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
         viewHolder.placeTypeIcon = imageView
         viewHolder.placeTypeLabel = textView
         viewHolder.placeTypeLayout = linearLayout
-        viewHolder.placeSelected = imageView
     }
 
     @Test
