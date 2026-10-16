@@ -36,7 +36,7 @@ jobs:
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
 
       - name: Check Kotlin formatting and static analysis
-        run: ./gradlew :app:ktlintCheck :app:detekt --stacktrace
+        run: ./gradlew :app:ktlintCheck :app:detekt --continue --stacktrace
 
       - name: Run Android Lint
         run: ./gradlew :app:lintBetaDebug --stacktrace
