@@ -202,10 +202,14 @@ class CommonsApplication : MultiDexApplication() {
     fun clearApplicationData(context: Context, logoutListener: LogoutListener) {
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
+        // lib/ holds the app native libraries, databases/ and no_backup/ hold
+        // databases that are still open (Room, WorkManager). Deleting them breaks
+        // later queries, so their contents are cleared in code instead.
+        val foldersKept = setOf("lib", "databases", "no_backup")
         if (applicationDirectory.exists()) {
             val fileNames = applicationDirectory.list()
             for (fileName in fileNames) {
-                if (fileName != "lib") {
+                if (fileName !in foldersKept) {
                     FileUtils.deleteFile(File(applicationDirectory, fileName))
                 }
             }
