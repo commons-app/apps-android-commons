@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.wikidata.cookies
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
@@ -12,6 +13,7 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 private const val COOKIE_STORE = "cookie_store"
+private const val TAG = "CommonsCookieStorage"
 
 class CommonsCookieStorage(
     private val preferences: JsonKvStore? = null,
@@ -42,17 +44,49 @@ class CommonsCookieStorage(
         cookieMap.clear()
         val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
         val json = CryptoUtils.decrypt(encryptedJson)
-        
-        if (!json.isNullOrEmpty()) {
-            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
-            cookieMap.putAll(serializedData.cookieMap)
-            
-            // If the loaded json wasn't encrypted (e.g. migrating from older version)
-            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
-            if (encryptedJson == json) {
-               save()
+
+        if (json.isNullOrBlank()) {
+            if (encryptedJson != null) {
+                discardUnreadableStore("Discarding empty cookie store")
             }
+            return
         }
+
+        try {
+            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
+            if (serializedData == null) {
+                discardUnreadableStore("Discarding null cookie store")
+                return
+            }
+            cookieMap.putAll(serializedData.cookieMap)
+        } catch (exception: Exception) {
+            // A future cookie format can fail with something other than JsonSyntaxException.
+            // That still has to leave the app able to start.
+            discardUnreadableStore("Discarding unreadable cookie store", exception)
+            return
+        }
+
+        // If the loaded json wasn't encrypted (e.g. migrating from older version)
+        // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
+        if (encryptedJson == json) {
+            save()
+        }
+    }
+
+    /**
+     * Forgets the saved cookie store and continues with no session.
+     *
+     * Uses [Log] because [load] runs during Dagger injection in application startup,
+     * before Timber is planted.
+     */
+    private fun discardUnreadableStore(reason: String, exception: Exception? = null) {
+        cookieMap.clear()
+        if (exception == null) {
+            Log.w(TAG, reason)
+        } else {
+            Log.w(TAG, reason, exception)
+        }
+        preferences!!.remove(COOKIE_STORE)
     }
 
     fun save() {
