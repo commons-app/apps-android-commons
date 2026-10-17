@@ -1872,6 +1872,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         return bottomSheetDetailsBehavior!!.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
+    override fun isNearbyFilterListVisible(): Boolean {
+        return binding?.nearbyFilterList?.root?.visibility == View.VISIBLE
+    }
+
+    override fun hideNearbyFilterList() {
+        binding?.nearbyFilterList?.root?.visibility = View.GONE
+        binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
+    }
+
     override fun setBottomSheetDetailsSmaller() {
         if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
