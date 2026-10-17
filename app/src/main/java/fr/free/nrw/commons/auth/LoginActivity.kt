@@ -338,7 +338,20 @@ class LoginActivity : AccountAuthenticatorActivity() {
         handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
 
     private fun signUp() =
-        startActivity(Intent(this, SignupActivity::class.java))
+        startActivityForResult(Intent(this, SignupActivity::class.java), SIGNUP_REQUEST_CODE)
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != SIGNUP_REQUEST_CODE || resultCode != RESULT_OK) return
+        val username = data?.getStringExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY)
+        binding?.run {
+            if (!username.isNullOrEmpty()) {
+                loginUsername.setText(username)
+            }
+            loginPassword.requestFocus()
+        }
+    }
 
     @VisibleForTesting
     fun performLogin() {
@@ -501,5 +514,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
         const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
         const val RESULT_TYPE_2FA = "2FA"
         const val RESULT_TYPE_NONE = "NONE"
+        const val SIGNUP_REQUEST_CODE = 1001
     }
 }
