@@ -716,7 +716,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private val aspectRatioListener: ControllerListener<ImageInfo?> =
         object : BaseControllerListener<ImageInfo?>() {
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
-                if (_binding == null) return
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
             }
@@ -726,14 +725,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 imageInfo: ImageInfo?,
                 animatable: Animatable?
             ) {
-                if (_binding == null) return
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
                 binding.mediaDetailImageProgressBar.visibility = View.GONE
             }
 
             override fun onFailure(id: String, throwable: Throwable?) {
-                if (_binding == null) return
                 binding.mediaDetailImageProgressBar.visibility = View.GONE
                 Timber.e(throwable, "Failed to load media detail image")
             }
