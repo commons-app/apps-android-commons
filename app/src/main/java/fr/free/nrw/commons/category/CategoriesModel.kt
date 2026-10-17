@@ -153,7 +153,8 @@ class CategoriesModel
                                             category.isSelected,
                                         )
                                     }
-                                }.blockingGet()
+                                }.onErrorReturnItem(emptyList())
+                                .blockingGet()
                         }.flatMapIterable { it }.toList()
                         .toObservable()
                 } else {
@@ -173,7 +174,11 @@ class CategoriesModel
                                         it[0].thumbnail,
                                         it[0].isSelected,
                                     )
-                                }.blockingGet()
+                                }.onErrorReturnItem(
+                                    CategoryItem(
+                                        "Hidden", "Hidden", "hidden", false,
+                                    )
+                                ).blockingGet()
                         }.toList()
                         .toObservable()
                 }
@@ -255,7 +260,13 @@ class CategoriesModel
          * @return
          */
         private fun getTitleCategories(title: String): Observable<List<CategoryItem>> =
-            categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
+            categoryClient
+                .searchCategories(title, SEARCH_CATS_LIMIT)
+                .toObservable()
+                .onErrorResumeNext { t: Throwable ->
+                    Timber.e(t, "Error fetching title categories for: %s", title)
+                    Observable.just(emptyList())
+                }
 
         /**
          * Handles category item selection

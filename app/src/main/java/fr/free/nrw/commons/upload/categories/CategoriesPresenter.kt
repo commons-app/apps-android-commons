@@ -103,6 +103,9 @@ class CategoriesPresenter
                             !repository.isSpammyCategory(categoryItem.name) ||
                                 categoryItem.name == term
                         }
+                    }.onErrorResumeNext { t: Throwable ->
+                        Timber.e(t, "Error searching categories for term: %s", term)
+                        Observable.just(emptyList())
                     }
             } else {
                 return Observable
@@ -113,8 +116,16 @@ class CategoriesPresenter
                                 list.map {
                                     CategoryItem(it.name, it.description, it.thumbnail, true)
                                 }
+                            }.onErrorResumeNext { t: Throwable ->
+                                Timber.e(t, "Error fetching existing categories")
+                                Observable.just(emptyList())
                             },
-                        repository.searchAll(term, getImageTitleList(), repository.getSelectedDepictions()),
+                        repository
+                            .searchAll(term, getImageTitleList(), repository.getSelectedDepictions())
+                            .onErrorResumeNext { t: Throwable ->
+                                Timber.e(t, "Error searching categories for term: %s", term)
+                                Observable.just(emptyList())
+                            },
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)

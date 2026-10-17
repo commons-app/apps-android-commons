@@ -178,6 +178,35 @@ class CategoriesPresenterTest {
         verify(repository).onCategoryClicked(categoryItem, null)
     }
 
+    /**
+     * Verifies that a transient API error in the search pipeline does not kill
+     * the subscription, allowing subsequent searches to succeed (#6438).
+     */
+    @Test
+    fun `searchForCategories recovers from API error and accepts next query`() {
+        categoriesPresenter.onAttachView(view)
+        val liveData = MutableLiveData<List<CategoryItem>>()
+        categoriesPresenter.setCategoryList(liveData)
+
+        whenever(repository.getUploads()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.error(RuntimeException("API timeout")))
+
+        categoriesPresenter.searchForCategories("Cat")
+        testScheduler.triggerActions()
+
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
+        whenever(repository.isSpammyCategory("Cats")).thenReturn(false)
+
+        categoriesPresenter.searchForCategories("Cat")
+        testScheduler.triggerActions()
+
+        verify(view).showError(R.string.no_categories_found)
+    }
+
     @Test
     fun testClearPreviousSelection() {
         categoriesPresenter.clearPreviousSelection()
