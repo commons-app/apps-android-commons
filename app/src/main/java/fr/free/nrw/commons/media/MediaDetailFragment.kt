@@ -710,8 +710,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
-            if(finalHeight>0)
-                binding.mediaDetailScrollView.visibility = View.VISIBLE
         }
     }
 
@@ -729,6 +727,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             ) {
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+            }
+
+            override fun onFailure(id: String, throwable: Throwable?) {
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+                Timber.e(throwable, "Failed to load media detail image")
             }
         }
 
@@ -745,6 +749,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
         val controller: DraweeController = Fresco.newDraweeControllerBuilder()
             .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
