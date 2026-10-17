@@ -4,7 +4,6 @@ import fr.free.nrw.commons.notification.models.Notification
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -43,7 +42,8 @@ class NotificationControllerTest {
     @Test
     fun testMarkNotificationsAsRead() {
         `when`(notification.notificationId).thenReturn("test")
+        `when`(notification.wiki).thenReturn("enwiki")
         notificationController.markAsRead(notification)
-        verify(notificationClient).markNotificationAsRead(eq("test"))
+        verify(notificationClient).markNotificationAsRead("test", "enwiki")
     }
 }
