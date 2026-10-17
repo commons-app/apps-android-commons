@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi
 
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
@@ -52,6 +53,10 @@ class OkHttpJsonApiClient @Inject constructor(
     private val gson: Gson
 ) {
     companion object {
+        // Each 50 uploads costs extra Commons API requests, so heavy uploaders keep the error.
+        private const val MAX_FALLBACK_UPLOADS = 1000
+        private const val FEATURED_PICTURES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons"
+        private const val QUALITY_IMAGES_CATEGORY = "Quality_images"
         private const val FALLBACK_LANGUAGES =
             "en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb,ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq,uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war,zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar,an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am,roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk,lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls,yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky,ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na,got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn,kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd,ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh,sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr"
     }
@@ -276,8 +281,13 @@ class OkHttpJsonApiClient @Inject constructor(
             val response: Response = okHttpClient.newCall(request).execute()
             if (response.body != null && response.isSuccessful) {
                 var json: String = response.body!!.string()
+                val jsonStart = json.indexOf('{')
+                if (jsonStart < 0 && userName != null) {
+                    Timber.w("feedback.py returned no JSON, computing achievements from the Commons API")
+                    return@fromCallable getAchievementsFromCommonsApi(userName)
+                }
                 // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
+                json = json.substring(jsonStart)
                 Timber.d("Response for achievements is %s", json)
                 try {
                     return@fromCallable gson.fromJson<FeedbackResponse>(
@@ -291,6 +301,103 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             null
         })
+    }
+
+    /**
+     * Computes the same statistics as feedback.py from the public Commons API. Throws when the
+     * user has more uploads than [MAX_FALLBACK_UPLOADS], so the caller shows the fetch error.
+     */
+    private fun getAchievementsFromCommonsApi(userName: String): FeedbackResponse {
+        val uploadedTitles = mutableSetOf<String>()
+        queryCommonsApi(
+            mapOf(
+                "list" to "logevents", "letype" to "upload", "leuser" to userName,
+                "leprop" to "title", "lelimit" to "500"
+            )
+        ) { query ->
+            query.getAsJsonArray("logevents")?.forEach {
+                uploadedTitles.add(it.asJsonObject.get("title").asString)
+            }
+            if (uploadedTitles.size > MAX_FALLBACK_UPLOADS) {
+                throw IOException("Too many uploads to compute achievements locally")
+            }
+        }
+
+        var deletedUploads = 0
+        uploadedTitles.chunked(50).forEach { titles ->
+            queryCommonsApi(mapOf("titles" to titles.joinToString("|"))) { query ->
+                deletedUploads += query.getAsJsonArray("pages")
+                    ?.count { it.asJsonObject.get("missing")?.asBoolean == true } ?: 0
+            }
+        }
+
+        val usagesByPage = mutableMapOf<Int, Int>()
+        val featuredPages = mutableSetOf<Int>()
+        val qualityPages = mutableSetOf<Int>()
+        queryCommonsApi(
+            mapOf(
+                "generator" to "allimages", "gaiuser" to userName, "gaisort" to "timestamp",
+                "gailimit" to "50", "prop" to "globalusage|categories", "gulimit" to "500",
+                "cllimit" to "500",
+                "clcategories" to "Category:$FEATURED_PICTURES_CATEGORY|Category:$QUALITY_IMAGES_CATEGORY"
+            )
+        ) { query ->
+            query.getAsJsonArray("pages")?.forEach { element ->
+                val page = element.asJsonObject
+                val pageId = page.get("pageid").asInt
+                val usages = page.getAsJsonArray("globalusage")?.size() ?: 0
+                usagesByPage[pageId] = (usagesByPage[pageId] ?: 0) + usages
+                page.getAsJsonArray("categories")?.forEach {
+                    when (it.asJsonObject.get("title").asString.removePrefix("Category:")) {
+                        FEATURED_PICTURES_CATEGORY -> featuredPages.add(pageId)
+                        QUALITY_IMAGES_CATEGORY -> qualityPages.add(pageId)
+                    }
+                }
+            }
+        }
+
+        var thanksReceived = 0
+        queryCommonsApi(
+            mapOf(
+                "list" to "logevents", "letype" to "thanks", "letitle" to "User:$userName",
+                "leprop" to "ids", "lelimit" to "500"
+            )
+        ) { query ->
+            thanksReceived += query.getAsJsonArray("logevents")?.size() ?: 0
+        }
+
+        return FeedbackResponse(
+            uniqueUsedImages = usagesByPage.values.count { it > 0 },
+            articlesUsingImages = usagesByPage.values.sum(),
+            deletedUploads = deletedUploads,
+            featuredImages = FeaturedImages(qualityPages.size, featuredPages.size),
+            thanksReceived = thanksReceived,
+            user = userName
+        )
+    }
+
+    /**
+     * Runs an action=query request against Commons, following continuation, and passes each
+     * "query" object to [onBatch].
+     */
+    private fun queryCommonsApi(params: Map<String, String>, onBatch: (JsonObject) -> Unit) {
+        var continuation = emptyMap<String, String>()
+        do {
+            val urlBuilder = "${BuildConfig.COMMONS_URL}/w/api.php".toHttpUrlOrNull()!!.newBuilder()
+                .addQueryParameter("action", "query")
+                .addQueryParameter("format", "json")
+                .addQueryParameter("formatversion", "2")
+            (params + continuation).forEach { (key, value) -> urlBuilder.addQueryParameter(key, value) }
+            val response = okHttpClient.newCall(Request.Builder().url(urlBuilder.build()).build()).execute()
+            val body = response.body
+            if (!response.isSuccessful || body == null) {
+                throw IOException("Commons API request failed: ${response.message}")
+            }
+            val json = JsonParser.parseString(body.string()).asJsonObject
+            json.getAsJsonObject("query")?.let(onBatch)
+            continuation = json.getAsJsonObject("continue")?.entrySet()
+                ?.associate { it.key to it.value.asString } ?: emptyMap()
+        } while (continuation.isNotEmpty())
     }
 
     @JvmOverloads
