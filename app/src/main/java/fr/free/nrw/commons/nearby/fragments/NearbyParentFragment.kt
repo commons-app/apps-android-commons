@@ -1036,6 +1036,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     b: Boolean, b1: Boolean
                 ) {
                     presenter!!.filterByMarkerType(selectedLabels, i, b, b1)
+                    updateFilterBadge()
                 }
 
                 override fun isDarkTheme(): Boolean {
@@ -1075,6 +1076,17 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         }
         NearbyFilterState.setSelectedLabels(ArrayList(adapter.selectedLabels))
         adapter.notifyDataSetChanged()
+        updateFilterBadge()
+    }
+
+    private fun updateFilterBadge() {
+        val count = nearbyFilterSearchRecyclerViewAdapter?.selectedLabels?.size ?: 0
+        val total = Label.values().size
+        binding?.nearbyFilter?.searchViewLayout?.filterCount?.apply {
+            // all or none selected = effectively no filter
+            visibility = if (count in 1 until total) View.VISIBLE else View.GONE
+            text = count.toString()
+        }
     }
 
     override fun setCheckBoxAction() {
@@ -1860,6 +1872,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         return bottomSheetDetailsBehavior!!.state != BottomSheetBehavior.STATE_HIDDEN
     }
 
+    override fun isNearbyFilterListVisible(): Boolean {
+        return binding?.nearbyFilterList?.root?.visibility == View.VISIBLE
+    }
+
+    override fun hideNearbyFilterList() {
+        binding?.nearbyFilterList?.root?.visibility = View.GONE
+        binding?.nearbyFilter?.searchViewLayout?.searchView?.clearFocus()
+    }
+
     override fun setBottomSheetDetailsSmaller() {
         if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
@@ -1873,6 +1894,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             && NearbyController.currentLocation != null
         ) {
             nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterAllSelected()
+            updateFilterBadge()
         }
     }
 
@@ -1881,6 +1903,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             && NearbyController.currentLocation != null
         ) {
             nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterItemsGreyedOut()
+            updateFilterBadge()
         }
     }
 
