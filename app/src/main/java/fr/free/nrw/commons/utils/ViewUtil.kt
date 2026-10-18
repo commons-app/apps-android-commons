@@ -22,14 +22,16 @@ object ViewUtil {
      * @param messageResourceId
      */
     @JvmStatic
-    fun showShortSnackbar(view: View, messageResourceId: Int) {
+    fun showShortSnackbar(view: View, messageResourceId: Int,anchorView: View?=null) {
         if (view.context == null) {
             return
         }
 
         ExecutorUtils.uiExecutor().execute {
             try {
-                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT)
+                    .apply { anchorView?.let { setAnchorView(it) } }
+                    .show()
             } catch (e: IllegalStateException) {
                 Timber.e(e.message)
             }

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks.items
 
-import android.database.sqlite.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * Table of bookmarksItems data
@@ -47,18 +47,18 @@ object BookmarkItemsTable {
     /**
      * Creates table
      *
-     * @param db SQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
-    fun onCreate(db: SQLiteDatabase) {
+    fun onCreate(db: SupportSQLiteDatabase) {
         db.execSQL(CREATE_TABLE_STATEMENT)
     }
 
     /**
      * Deletes database
      *
-     * @param db SQLiteDatabase
+     * @param db SupportSQLiteDatabase
      */
-    fun onDelete(db: SQLiteDatabase) {
+    fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
@@ -66,11 +66,11 @@ object BookmarkItemsTable {
     /**
      * Updates database
      *
-     * @param db   SQLiteDatabase
+     * @param db   SupportSQLiteDatabase
      * @param from starting
      * @param to   end
      */
-    fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
         if (from == to) {
             return
         }

@@ -45,7 +45,8 @@ class BookmarkItemsFragment : DaggerFragment() {
      */
     private fun initList(context: Context) {
         val depictItems = controller!!.loadFavoritesItems()
-        binding!!.listView.adapter = BookmarkItemsAdapter(depictItems, context)
+        binding!!.recyclerView.apply { layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            adapter = BookmarkItemsAdapter(depictItems, context) }
         binding!!.loadingImagesProgressBar.visibility = View.GONE
         if (depictItems.isEmpty()) {
             binding!!.statusMessage.setText(R.string.bookmark_empty)

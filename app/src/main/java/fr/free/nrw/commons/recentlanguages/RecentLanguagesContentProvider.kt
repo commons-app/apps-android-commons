@@ -3,13 +3,14 @@ package fr.free.nrw.commons.recentlanguages
 
 import android.content.ContentValues
 import android.database.Cursor
-import android.database.sqlite.SQLiteQueryBuilder
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.TABLE_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_NAME
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.TABLE_NAME
 import androidx.core.net.toUri
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 
 
 /**
@@ -46,18 +47,13 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?
     ): Cursor? {
-        val queryBuilder = SQLiteQueryBuilder().apply {
-            tables = TABLE_NAME
-        }
+        val queryBuilder = SupportSQLiteQueryBuilder.builder(TABLE_NAME)
 
-        val cursor = queryBuilder.query(
-            requireDb(),
-            projection,
-            selection,
-            selectionArgs,
-            null,
-            null,
-            sortOrder
+        val cursor = requireDb().query(
+            queryBuilder.columns(projection)
+                .selection(selection, selectionArgs)
+                .orderBy(sortOrder)
+                .create()
         )
         cursor.setNotificationUri(context?.contentResolver, uri)
         return cursor
@@ -76,16 +72,19 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-        val rowsUpdated: Int
+        var rowsUpdated: Int = 0
         if (selection.isNullOrEmpty()) {
             val id = uri.lastPathSegment?.toInt()
                 ?: throw IllegalArgumentException("Invalid URI: $uri")
-            rowsUpdated = requireDb().update(
-                TABLE_NAME,
-                contentValues,
-                "$COLUMN_NAME = ?",
-                arrayOf(id.toString())
-            )
+            contentValues?.let {
+                rowsUpdated = requireDb().update(
+                    TABLE_NAME,
+                    SQLiteDatabase.CONFLICT_NONE,
+                    it,
+                    "$COLUMN_NAME = ?",
+                    arrayOf(id.toString())
+                )
+            }
         } else {
             throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")
         }
@@ -100,11 +99,13 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
      * @param contentValues : new values to be entered to the database
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
-        val id = requireDb().insert(
-            TABLE_NAME,
-            null,
-            contentValues
-        )
+        val id = contentValues?.let {
+            requireDb().insert(
+                TABLE_NAME,
+                SQLiteDatabase.CONFLICT_NONE,
+                it
+            )
+        }
         context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }

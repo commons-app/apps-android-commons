@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesContentProvider.Companion.BASE_URI
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.ALL_FIELDS
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_CODE
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_NAME
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Provider
@@ -30,8 +33,8 @@ class RecentLanguagesDao @Inject constructor(
         val db = clientProvider.get()
         try {
             db.query(
-                RecentLanguagesContentProvider.BASE_URI,
-                Table.ALL_FIELDS,
+                BASE_URI,
+                ALL_FIELDS,
                 null,
                 arrayOf(),
                 null
@@ -58,7 +61,7 @@ class RecentLanguagesDao @Inject constructor(
         val db = clientProvider.get()
         try {
             db.insert(
-                RecentLanguagesContentProvider.BASE_URI,
+                BASE_URI,
                 toContentValues(language)
             )
         } catch (e: RemoteException) {
@@ -99,9 +102,9 @@ class RecentLanguagesDao @Inject constructor(
         val db = clientProvider.get()
         try {
             db.query(
-                RecentLanguagesContentProvider.BASE_URI,
-                Table.ALL_FIELDS,
-                "${Table.COLUMN_CODE}=?",
+                BASE_URI,
+                ALL_FIELDS,
+                "${COLUMN_CODE}=?",
                 arrayOf(languageCode),
                 null
             )?.use { cursor ->
@@ -126,10 +129,10 @@ class RecentLanguagesDao @Inject constructor(
     fun fromCursor(cursor: Cursor): Language {
         // Hardcoding column positions!
         val languageName = cursor.getString(
-            cursor.getColumnIndex(Table.COLUMN_NAME)
+            cursor.getColumnIndex(COLUMN_NAME)
         )
         val languageCode = cursor.getString(
-            cursor.getColumnIndex(Table.COLUMN_CODE)
+            cursor.getColumnIndex(COLUMN_CODE)
         )
         return Language(languageName, languageCode)
     }
@@ -141,75 +144,8 @@ class RecentLanguagesDao @Inject constructor(
      */
     private fun toContentValues(recentLanguage: Language): ContentValues {
         return ContentValues().apply {
-            put(Table.COLUMN_NAME, recentLanguage.languageName)
-            put(Table.COLUMN_CODE, recentLanguage.languageCode)
-        }
-    }
-
-    /**
-     * This class contains the database table architecture for recently used languages,
-     * It also contains queries and logic necessary to the create, update, delete this table.
-     */
-    object Table {
-        const val TABLE_NAME = "recent_languages"
-        const val COLUMN_NAME = "language_name"
-        const val COLUMN_CODE = "language_code"
-
-        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        @JvmStatic
-        val ALL_FIELDS = arrayOf(
-            COLUMN_NAME,
-            COLUMN_CODE
-        )
-
-        const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
-
-        const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
-                "$COLUMN_NAME STRING," +
-                "$COLUMN_CODE STRING PRIMARY KEY" +
-                ");"
-
-        /**
-         * This method creates a LanguagesTable in SQLiteDatabase
-         * @param db SQLiteDatabase
-         */
-        @SuppressLint("SQLiteString")
-        @JvmStatic
-        fun onCreate(db: SQLiteDatabase) {
-            db.execSQL(CREATE_TABLE_STATEMENT)
-        }
-
-        /**
-         * This method deletes LanguagesTable from SQLiteDatabase
-         * @param db SQLiteDatabase
-         */
-        @JvmStatic
-        fun onDelete(db: SQLiteDatabase) {
-            db.execSQL(DROP_TABLE_STATEMENT)
-            onCreate(db)
-        }
-
-        /**
-         * This method is called on migrating from a older version to a newer version
-         * @param db SQLiteDatabase
-         * @param from Version from which we are migrating
-         * @param to Version to which we are migrating
-         */
-        @JvmStatic
-        fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
-            if (from == to) {
-                return
-            }
-            if (from < 19) {
-                // doesn't exist yet
-                onUpdate(db, from + 1, to)
-                return
-            }
-            if (from == 19) {
-                // table added in version 20
-                onCreate(db)
-                onUpdate(db, from + 1, to)
-            }
+            put(COLUMN_NAME, recentLanguage.languageName)
+            put(COLUMN_CODE, recentLanguage.languageCode)
         }
     }
 }

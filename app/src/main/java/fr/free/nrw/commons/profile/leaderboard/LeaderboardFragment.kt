@@ -232,6 +232,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(
             LeaderboardListViewModel::class.java
         )
+        viewModel!!.setUserName(userName)
         viewModel!!.setParams(duration, category, limit, offset)
         val leaderboardListAdapter = LeaderboardListAdapter()
         val userDetailAdapter = UserDetailAdapter(response)
@@ -287,13 +288,22 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     /**
      * check to ensure that user is logged in
      */
-    private fun checkAccount() = if (sessionManager.currentAccount == null) {
-        Timber.d("Current account is null")
-        showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))
-        sessionManager.forceLogin(requireActivity())
-        false
-    } else {
-        true
+    private fun checkAccount(): Boolean {
+
+        // Allow viewing another user's public profile without requiring login
+        if (!userName.isNullOrBlank() &&
+            userName != sessionManager.userName
+        ) {
+            return true
+        }
+
+        if (sessionManager.currentAccount == null) {
+            Timber.d("Current account is null")
+            showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))
+            sessionManager.forceLogin(requireActivity())
+            return false
+        }
+        return true
     }
 
     /**

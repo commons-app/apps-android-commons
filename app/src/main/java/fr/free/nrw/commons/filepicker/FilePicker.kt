@@ -15,6 +15,12 @@ import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import java.io.FileOutputStream
 
 
 object FilePicker : Constants {
@@ -52,7 +58,7 @@ object FilePicker : Constants {
     ): Intent {
         // storing picked image type to shared preferences
         storeType(context, type)
-        // Supported types are SVG, PNG and JPEG, GIF, TIFF, WebP, XCF
+        // Supported types are SVG, PNG and JPEG, GIF, TIFF, WebP, XCF and HEIC (for future conversion)
         val mimeTypes = arrayOf(
             "image/jpg",
             "image/png",
@@ -62,7 +68,8 @@ object FilePicker : Constants {
             "image/webp",
             "image/xcf",
             "image/svg+xml",
-            "image/webp"
+            "image/heic",
+            "image/heif"
         )
         return plainGalleryPickerIntent(openDocumentIntentPreferred)
             .putExtra(
@@ -349,7 +356,8 @@ object FilePicker : Constants {
         val images = data?.getParcelableArrayListExtra<Image>("Images")
         images?.forEach { image ->
             val uri = image.uri
-            val file = PickedFiles.pickedExistingPicture(activity, uri)
+            var file = PickedFiles.pickedExistingPicture(activity, uri)
+            file = handleHeicFile(file, activity)
             files.add(file)
         }
 
@@ -379,6 +387,33 @@ object FilePicker : Constants {
             callbacks.onCanceled(ImageSource.GALLERY, restoreType(activity))
         }
     }
+    @JvmStatic
+    fun convertHeicToJpg(file: File, context: Context): File {
+        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
+            ImageDecoder.decodeBitmap(source)
+        } else {
+            throw IllegalStateException("HEIC conversion requires Android P+")
+        }
+
+        val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
+        FileOutputStream(jpgFile).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        }
+        return jpgFile
+    }
+    @JvmStatic
+    private fun handleHeicFile(file: UploadableFile, activity: Activity): UploadableFile {
+        val extension = file.file.extension.lowercase()
+        return if (extension == "heic" || extension == "heif") {
+            val jpgFile = convertHeicToJpg(file.file, activity)
+            val uploadableFile = UploadableFile(jpgFile)
+            uploadableFile.hasUnsupportedFormat = true
+            uploadableFile
+        } else {
+            file
+        }
+    }
 
     @Throws(IOException::class, SecurityException::class)
     @JvmStatic
@@ -390,12 +425,14 @@ object FilePicker : Constants {
         val clipData = data?.clipData
         if (clipData == null) {
             val uri = data?.data
-            val file = PickedFiles.pickedExistingPicture(activity, uri!!)
+            var file = PickedFiles.pickedExistingPicture(activity, uri!!)
+            file = handleHeicFile(file, activity)
             files.add(file)
         } else {
             for (i in 0 until clipData.itemCount) {
                 val uri = clipData.getItemAt(i).uri
-                val file = PickedFiles.pickedExistingPicture(activity, uri)
+                var file = PickedFiles.pickedExistingPicture(activity, uri)
+                file = handleHeicFile(file, activity)
                 files.add(file)
             }
         }

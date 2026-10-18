@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,6 +65,18 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     private var nearbyPlaceCategory: String? = null
 
     private var binding: UploadCategoriesFragmentBinding? = null
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            if (media != null) {
+                binding?.etSearch?.clearFocus()
+                presenter?.clearPreviousSelection()
+                val mediaDetailFragment = checkNotNull(parentFragment as MediaDetailFragment?)
+                mediaDetailFragment.onResume()
+                goBackToPreviousScreen()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -132,6 +145,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
         initRecyclerView()
         addTextChangeListenerToEtSearch()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
     }
 
     private fun addTextChangeListenerToEtSearch() {
@@ -359,40 +373,18 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         super.onResume()
 
         if (media != null) {
-            binding?.etSearch?.setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent? ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    binding!!.etSearch.clearFocus()
-                    presenter!!.clearPreviousSelection()
-                    val mediaDetailFragment =
-                        checkNotNull(parentFragment as MediaDetailFragment?)
-                    mediaDetailFragment.onResume()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-
-            requireView().isFocusableInTouchMode = true
-            requireView().requestFocus()
-            requireView().setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent ->
-                if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    presenter!!.clearPreviousSelection()
-                    val mediaDetailFragment =
-                        checkNotNull(parentFragment as MediaDetailFragment?)
-                    mediaDetailFragment.onResume()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-
+            onBackPressedCallback.isEnabled = true
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-
 
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
                 ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
     }
 
     /**

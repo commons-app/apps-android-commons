@@ -35,6 +35,11 @@ class UploadPresenter @Inject internal constructor(
     private val compositeDisposable = CompositeDisposable()
 
     private var basicKvStoreFactory: ((String) -> BasicKvStore)? = null
+    override fun cleanup() {
+        compositeDisposable.clear()
+        repository.cleanup()
+        view.showProgress(false)
+    }
     /**
      * Called by the submit button in [UploadActivity]
      */
@@ -203,7 +208,6 @@ class UploadPresenter @Inject internal constructor(
     override fun onDetachView() {
         view = DUMMY
         compositeDisposable.clear()
-        repository.cleanup()
     }
 
     companion object {

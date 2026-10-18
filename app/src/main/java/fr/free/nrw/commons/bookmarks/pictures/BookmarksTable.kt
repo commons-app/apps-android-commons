@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks.pictures
 
-import android.database.sqlite.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 object BookmarksTable {
     const val TABLE_NAME: String = "bookmarks"
@@ -20,15 +20,15 @@ object BookmarksTable {
             "$COLUMN_CREATOR STRING" +
             ");")
 
-    fun onCreate(db: SQLiteDatabase) =
+    fun onCreate(db: SupportSQLiteDatabase) =
         db.execSQL(CREATE_TABLE_STATEMENT)
 
-    fun onDelete(db: SQLiteDatabase) {
+    fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
 
-    fun onUpdate(db: SQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
         if (from == to) {
             return
         }

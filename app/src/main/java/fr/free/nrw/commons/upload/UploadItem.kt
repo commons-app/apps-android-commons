@@ -19,7 +19,8 @@ class UploadItem(
      */
     var contentUri: Uri?,
     //according to EXIF data
-    val fileCreatedDateString: String?
+    val fileCreatedDateString: String?,
+    val hasUnsupportedFormat: Boolean = false
 ) {
     var imageQuality: Int = ImageUtils.IMAGE_WAIT
     var uploadMediaDetails: MutableList<UploadMediaDetail> = mutableListOf(UploadMediaDetail())

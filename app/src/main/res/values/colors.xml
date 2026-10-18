@@ -48,6 +48,7 @@
     <color name="button_background_light">#B0000000</color>
     <color name="upload_overlay_background_dark">#77000000</color>
     <color name="upload_overlay_background_light">#44000000</color>
+    <color name="overflow_custom_picker_menu">#000</color>
 
     <color name="pressed_button_light">#64999999</color>
     <color name="focused_button_light">#32999999</color>

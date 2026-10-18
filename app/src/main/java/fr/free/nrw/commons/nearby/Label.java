@@ -26,8 +26,10 @@ public enum Label {
     BANK(R.array.bank_QIDs, R.drawable.round_icon_bank),
     HOSPITAL(R.array.hospital_QIDs, R.drawable.round_icon_hospital),
     HOUSE(R.array.house_QIDs, R.drawable.round_icon_house),
-    COTTAGE(R.array.cottage_Ids, R.drawable.round_icon_house),
+    COTTAGE(R.array.cottage_QIDs, R.drawable.round_icon_house),
     FARMHOUSE(R.array.farmhouse_QIDs, R.drawable.round_icon_house),
+    TEMPLE(R.array.temple_QIDs, R.drawable.round_icon_church),
+
     CHURCH(R.array.church_QIDs, R.drawable.round_icon_church),
     GAS_STATION(R.array.gas_station_QIDs, R.drawable.round_icon_gas_station),
     RAILWAY_STATION(R.array.railway_station_QIDs, R.drawable.round_icon_railway_station),
@@ -48,7 +50,6 @@ public enum Label {
     PARK(R.array.park_QIDs, R.drawable.round_icon_park),
     RIVER(R.array.river_QIDs, R.drawable.round_icon_river),
     WATERFALL(R.array.waterfall_QIDs, R.drawable.round_icon_waterfall),
-    TEMPLE(R.array.temple_QIDs, R.drawable.round_icon_church),
     UNKNOWN(0, R.drawable.round_icon_unknown);
 
     /**

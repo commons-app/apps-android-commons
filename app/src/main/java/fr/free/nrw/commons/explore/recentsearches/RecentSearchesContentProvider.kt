@@ -3,9 +3,10 @@ package fr.free.nrw.commons.explore.recentsearches
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
-import android.database.sqlite.SQLiteQueryBuilder
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import androidx.core.net.toUri
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.ALL_FIELDS
@@ -25,26 +26,25 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor {
-        val queryBuilder = SQLiteQueryBuilder().apply {
-            tables = TABLE_NAME
-        }
+        val queryBuilder = SupportSQLiteQueryBuilder.builder(TABLE_NAME)
 
         val uriType = uriMatcher.match(uri)
 
         val cursor = when (uriType) {
-            RECENT_SEARCHES -> queryBuilder.query(
-                requireDb(), projection, selection, selectionArgs,
-                null, null, sortOrder
+            RECENT_SEARCHES -> requireDb().query(
+                queryBuilder.columns(projection)
+                    .selection(selection, selectionArgs)
+                    .orderBy(sortOrder)
+                    .create()
             )
 
-            RECENT_SEARCHES_ID -> queryBuilder.query(
-                requireDb(),
-                ALL_FIELDS,
-                "$COLUMN_ID = ?",
-                arrayOf(uri.lastPathSegment),
-                null,
-                null,
-                sortOrder
+            RECENT_SEARCHES_ID -> requireDb().query(
+                queryBuilder.columns(ALL_FIELDS)
+                    .selection(
+                        "$COLUMN_ID = ?", arrayOf(uri.lastPathSegment)
+                    )
+                    .orderBy(sortOrder)
+                    .create()
             )
 
             else -> throw IllegalArgumentException("Unknown URI$uri")
@@ -62,8 +62,10 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
      */
     override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
         val uriType = uriMatcher.match(uri)
-        val id: Long = when (uriType) {
-            RECENT_SEARCHES -> requireDb().insert(TABLE_NAME, null, contentValues)
+        val id: Long? = when (uriType) {
+            RECENT_SEARCHES -> contentValues?.let {
+                requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it)
+            }
 
             else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
@@ -101,7 +103,7 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         sqlDB.beginTransaction()
         when (uriType) {
             RECENT_SEARCHES -> for (value in values) {
-                sqlDB.insert(TABLE_NAME, null, value)
+                sqlDB.insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, value)
             }
 
             else -> throw IllegalArgumentException("Unknown URI: $uri")
@@ -129,16 +131,19 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         and will error out otherwise.
          */
         val uriType = uriMatcher.match(uri)
-        val rowsUpdated: Int
+        var rowsUpdated: Int = 0
         when (uriType) {
             RECENT_SEARCHES_ID -> if (selection.isNullOrEmpty()) {
                 val id = uri.lastPathSegment!!.toInt()
-                rowsUpdated = requireDb().update(
-                    TABLE_NAME,
-                    contentValues,
-                    "$COLUMN_ID = ?",
-                    arrayOf(id.toString())
-                )
+                contentValues?.let {
+                    rowsUpdated = requireDb().update(
+                        TABLE_NAME,
+                        SQLiteDatabase.CONFLICT_NONE,
+                        it,
+                        "$COLUMN_ID = ?",
+                        arrayOf(id.toString())
+                    )
+                }
             } else {
                 throw IllegalArgumentException(
                     "Parameter `selection` should be empty when updating an ID"

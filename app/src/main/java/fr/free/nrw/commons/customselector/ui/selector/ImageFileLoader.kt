@@ -39,6 +39,7 @@ class ImageFileLoader(
             MediaStore.Images.Media.BUCKET_ID,
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
             MediaStore.Images.Media.DATE_ADDED,
+            MediaStore.Images.Media.DATE_TAKEN,
         )
 
     /**
@@ -62,7 +63,7 @@ class ImageFileLoader(
                 projection,
                 null,
                 null,
-                MediaStore.Images.Media.DATE_ADDED + " DESC",
+                MediaStore.Images.Media.DATE_TAKEN + " DESC",
             )
         if (cursor == null) {
             listener.onFailed(NullPointerException())

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -144,8 +145,27 @@ class ZoomableActivity : BaseActivity() {
 
         binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
         binding.btnBack.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!images.isNullOrEmpty()) {
+                    val returnIntent = Intent()
+                    returnIntent.putParcelableArrayListExtra(
+                        CustomSelectorConstants.NEW_SELECTED_IMAGES,
+                        selectedImages,
+                    )
+                    returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
+                    setResult(Activity.RESULT_OK, returnIntent)
+                    finish()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
         prefs =
             applicationContext.getSharedPreferences(
                 ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
@@ -720,22 +740,6 @@ class ZoomableActivity : BaseActivity() {
         )
     }
 
-    /**
-     * Send selected images in fragment
-     */
-    override fun onBackPressed() {
-        if (!images.isNullOrEmpty()) {
-            val returnIntent = Intent()
-            returnIntent.putParcelableArrayListExtra(
-                CustomSelectorConstants.NEW_SELECTED_IMAGES,
-                selectedImages,
-            )
-            returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
-        }
-        super.onBackPressed()
-    }
 
     override fun onDestroy() {
         scope.cancel()

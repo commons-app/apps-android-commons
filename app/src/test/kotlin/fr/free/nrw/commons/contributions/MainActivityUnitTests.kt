@@ -159,7 +159,7 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnBackPressedCaseDefault() {
-        activity.onBackPressed()
+        activity.onBackPressedDispatcher.onBackPressed()
     }
 
     @Test
