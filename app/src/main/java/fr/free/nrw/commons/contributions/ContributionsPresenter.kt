@@ -53,7 +53,7 @@ class ContributionsPresenter @Inject internal constructor(
                     contribution.contentUri,
                     contribution.localUri)
                 .subscribeOn(ioThreadScheduler)
-                .subscribe { imageCheckResult: Int ->
+                .subscribe({ imageCheckResult: Int ->
                     if (imageCheckResult == ImageUtils.IMAGE_OK) {
                         contribution.state = Contribution.STATE_QUEUED
                         saveContribution(contribution)
@@ -63,10 +63,10 @@ class ContributionsPresenter @Inject internal constructor(
                             contributionsRepository
                                 .deleteContributionFromDB(contribution)
                                 .subscribeOn(ioThreadScheduler)
-                                .subscribe()
+                                .subscribe({ }, { Timber.e(it) })
                         )
                     }
-                })
+                }, { Timber.e(it) }))
     }
 
     /**
@@ -79,12 +79,12 @@ class ContributionsPresenter @Inject internal constructor(
         compositeDisposable!!.add(contributionsRepository
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe {
+            .subscribe({
                 view!!.getContext()?.applicationContext?.let {
                     makeOneTimeWorkRequest(
                         it, ExistingWorkPolicy.KEEP
                     )
                 }
-            })
+            }, { Timber.e(it) }))
     }
 }

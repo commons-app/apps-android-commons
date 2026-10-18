@@ -507,7 +507,7 @@ class NearbyParentFragmentPresenter
             placesRepository
                 .save(finalPlaceGroup.place)
                 .subscribeOn(Schedulers.io())
-                .subscribe()
+                .subscribe({ }, { Timber.e(it) })
         }
     }
 

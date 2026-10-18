@@ -106,10 +106,10 @@ class ContributionBoundaryCallback
                 repository
                     .save(contributions)
                     .subscribeOn(ioThreadScheduler)
-                    .subscribe { longs: List<Long?>? ->
+                    .subscribe({ longs: List<Long?>? ->
                         onRefreshFinish()
                         repository["last_fetch_timestamp"] = System.currentTimeMillis()
-                    },
+                    }, { Timber.e(it) }),
             )
         }
 
