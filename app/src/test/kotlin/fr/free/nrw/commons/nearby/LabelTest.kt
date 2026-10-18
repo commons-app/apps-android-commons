@@ -39,7 +39,7 @@ class LabelTest {
      */
     @Test
     fun testNullLabelIcon() {
-        var nullLabel: Label = Label.fromText("a random text not exist in label texts")
+        val nullLabel: Label = Label.fromText("a random text not exist in label texts")
         assertThat(nullLabel.icon, equalTo(R.drawable.round_icon_unknown))
     }
 }
