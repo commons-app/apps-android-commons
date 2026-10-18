@@ -50,6 +50,10 @@ public interface NearbyParentFragmentContract {
 
         boolean isDetailsBottomSheetVisible();
 
+        boolean isNearbyFilterListVisible();
+
+        void hideNearbyFilterList();
+
         void setBottomSheetDetailsSmaller();
 
         void setRecyclerViewAdapterAllSelected();
