@@ -551,7 +551,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments = mutableListOf()
             }
 
-            for (uploadableFile in uploadableFiles) {
+            uploadableFiles.forEachIndexed { index, uploadableFile ->
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
                 // set fragment properties but defer initialization
@@ -617,8 +617,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     }
 
                 if (isFragmentsSaved) {
-                    val fragment = fragments!![0] as UploadMediaDetailFragment?
-                    fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
+                    val fragment = fragments!!.getOrNull(index) as? UploadMediaDetailFragment
+                        ?: return@forEachIndexed
+                    fragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragment.initializeFragment()
                 } else {
                     uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
