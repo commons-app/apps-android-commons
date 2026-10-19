@@ -157,7 +157,7 @@ object FileUtils {
         return true
     }
     // list of supported MIME types
-    private val imageAllowList = listOf(
+    private val uploadableFileFormats = listOf(
         "image/jpeg",
         "image/jpg",
         "image/png",
@@ -170,7 +170,7 @@ object FileUtils {
         return if (mimeType == null) {
             false
         } else {
-            imageAllowList.contains(mimeType.lowercase(Locale.getDefault()))
+            uploadableFileFormats.contains(mimeType.lowercase(Locale.getDefault()))
         }
     }
 }
