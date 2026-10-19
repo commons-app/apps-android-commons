@@ -22,14 +22,16 @@ import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
-import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.worker.UploadWorker
@@ -92,7 +94,7 @@ class CommonsApplication : MultiDexApplication() {
         private set
 
     @Inject
-    lateinit var contributionDao: ContributionDao
+    lateinit var appDatabase: AppDatabase
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -265,12 +267,14 @@ class CommonsApplication : MultiDexApplication() {
         )
 
         try {
-            contributionDao.deleteAll()
+            appDatabase.clearAllTables()
         } catch (e: SQLiteException) {
             Timber.e(e)
         }
         BookmarksTable.onDelete(db)
         BookmarkItemsTable.onDelete(db)
+        RecentSearchesTable.onDelete(db)
+        RecentLanguagesTable.onDelete(db)
     }
 
 
