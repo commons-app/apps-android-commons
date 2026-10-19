@@ -22,8 +22,8 @@ import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
-import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -205,9 +205,9 @@ class CommonsApplication : MultiDexApplication() {
      */
     @SuppressLint("CheckResult")
     fun clearApplicationData(context: Context, logoutListener: LogoutListener) {
-        //Cancel pending uploads when the user logs out
+        // Cancel pending uploads when the user logs out
         WorkManager.getInstance(context).cancelUniqueWork(UploadWorker::class.java.simpleName)
-        //Reset the flag in case the worker never started and its finally block wasn't called.
+        // Reset the flag in case the worker never started and its finally block wasn't called.
         WorkRequestHelper.markUploadWorkerAsStopped()
 
         val cacheDirectory = context.cacheDir
