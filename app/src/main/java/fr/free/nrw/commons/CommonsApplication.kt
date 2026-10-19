@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import androidx.work.WorkManager
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import fr.free.nrw.commons.auth.LoginActivity
@@ -31,6 +32,8 @@ import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.upload.worker.UploadWorker
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
@@ -200,6 +203,11 @@ class CommonsApplication : MultiDexApplication() {
      */
     @SuppressLint("CheckResult")
     fun clearApplicationData(context: Context, logoutListener: LogoutListener) {
+        //Cancel pending uploads when the user logs out
+        WorkManager.getInstance(context).cancelUniqueWork(UploadWorker::class.java.simpleName)
+        //Reset the flag in case the worker never started and its finally block wasn't called.
+        WorkRequestHelper.markUploadWorkerAsStopped()
+
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
         // lib/ holds the app native libraries, databases/ and no_backup/ hold
