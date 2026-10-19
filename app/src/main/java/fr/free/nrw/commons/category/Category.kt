@@ -4,7 +4,8 @@ import android.net.Uri
 import java.util.Date
 
 data class Category(
-    var contentUri: Uri? = null,
+//    @Deprecated("Required for legacy ContentProvider DAO compatibility only")
+//    var contentUri: Uri? = null,
     val name: String? = null,
     val description: String? = null,
     val thumbnail: String? = null,

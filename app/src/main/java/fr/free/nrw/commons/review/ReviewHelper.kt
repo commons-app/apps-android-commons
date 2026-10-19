@@ -132,7 +132,7 @@ class ReviewHelper
          */
         fun addViewedImagesToDB(imageId: String?) {
             Completable
-                .fromAction { imageId?.let { ReviewEntity(it) }?.let { dao!!.insert(it) } }
+                .fromAction { imageId?.let { ReviewImage(it) }?.let { dao!!.insert(it) } }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
