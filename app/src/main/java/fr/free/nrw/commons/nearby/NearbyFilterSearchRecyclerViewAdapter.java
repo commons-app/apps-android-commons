@@ -55,12 +55,14 @@ public class NearbyFilterSearchRecyclerViewAdapter
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         public TextView placeTypeLabel;
         public ImageView placeTypeIcon;
+        public ImageView placeSelected;
         public LinearLayout placeTypeLayout;
 
         public RecyclerViewHolder(View view) {
             super(view);
             placeTypeLabel = view.findViewById(R.id.place_text);
             placeTypeIcon = view.findViewById(R.id.place_icon);
+            placeSelected = view.findViewById(R.id.place_selected);
             placeTypeLayout = view.findViewById(R.id.search_list_item);
         }
     }
@@ -78,6 +80,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
         holder.placeTypeLayout.setSelected(label.isSelected());
+        holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
         holder.placeTypeLayout.setOnClickListener(view -> {
             callback.setCheckboxUnknown();
@@ -90,6 +93,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setSelected(label.isSelected());
+            holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
             NearbyFilterState.setSelectedLabels(new ArrayList<>(selectedLabels));
             callback.filterByMarkerType(selectedLabels, 0, false, false);
@@ -123,12 +127,12 @@ public class NearbyFilterSearchRecyclerViewAdapter
                     results.count = labels.size();
                     results.values = labels;
                 } else {
-                    constraint = constraint.toString().toLowerCase(Locale.ROOT);
+                    String query = constraint.toString().toLowerCase(Locale.ROOT).trim();
 
                     for (Label label : labels) {
-                        String data = label.toString();
-                        if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
-                            filteredArrayList.add(Label.fromText(label.getText()));
+                        String name = label.toString().replace('_', ' ').toLowerCase(Locale.ROOT);
+                        if (name.contains(query)) {
+                            filteredArrayList.add(label);
                         }
                     }
 
