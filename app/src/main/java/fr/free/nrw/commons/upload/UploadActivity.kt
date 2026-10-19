@@ -504,6 +504,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun getSupportedFormatsList(): String {
+        val formats = listOf(
+            getString(R.string.format_jpeg),
+            getString(R.string.format_png),
+            getString(R.string.format_svg),
+            getString(R.string.format_ogg_audio)
+        )
+        return formats.joinToString(separator = "\n") { "• $it" }
+    }
+
     private fun receiveSharedItems() {
         val intent = intent
         val action = intent.action
@@ -726,12 +736,12 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
      */
 
 
-    val supportedFormatsList = "\n• JPEG\n• PNG\n• SVG\n• OGG (Audio)"
+    val supportedFormats = getSupportedFormatsList()
         if (uploadableFiles.isEmpty() && originalSize > 0) {
             showAlertDialog(
                 this,
                 getString(R.string.unsupported_format_title),
-                getString(R.string.unsupported_format_desc) + supportedFormatsList,
+                getString(R.string.unsupported_format_desc, supportedFormats),
                 getString(R.string.ok)
             ) {
                 finish()
@@ -743,7 +753,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             showAlertDialog(
                 this,
                 getString(R.string.unsupported_files_skipped_title),
-                getString(R.string.unsupported_files_skipped_desc) + supportedFormatsList,
+                getString(R.string.unsupported_files_skipped_desc, supportedFormats),
                 getString(R.string.ok)
             ) {
                 proceedWithSetup()
