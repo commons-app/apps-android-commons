@@ -918,8 +918,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="failed_to_apply_crop">Failed to apply crop</string>
   <string name="failed_to_save_image">Failed to save image</string>
 
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
+
   <string name="unsupported_format_title">Unsupported Format</string>
-  <string name="unsupported_format_desc">The selected files could not be opened. Wikimedia Commons strictly requires the following formats:\n</string>
+  <string name="unsupported_format_desc">The selected files could not be opened. Wikimedia Commons strictly requires the following formats:\n\n%s</string>
+
   <string name="unsupported_files_skipped_title">Unsupported Files Skipped</string>
-  <string name="unsupported_files_skipped_desc">Some files were skipped due to an unsupported format. The app will continue uploading remaining files that match the following supported formats:\n</string>
+  <string name="unsupported_files_skipped_desc">Some files were skipped due to an unsupported format. The app will continue uploading remaining files that match the following supported formats:\n\n%s</string>
 </resources>
