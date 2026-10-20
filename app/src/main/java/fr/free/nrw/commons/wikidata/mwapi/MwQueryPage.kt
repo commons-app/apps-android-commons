@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.model.BaseModel
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.model.gallery.MediaInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.GlobalUsage
 
 /**
@@ -28,6 +29,9 @@ class MwQueryPage : BaseModel() {
 
     @SerializedName("imageinfo")
     private val imageInfo: List<ImageInfo>? = null
+
+    @SerializedName("videoinfo")
+    private val videoInfo: List<MediaInfo>? = null
     private var redirectFrom: String? = null
     private var convertedFrom: String? = null
     private var convertedTo: String? = null
@@ -53,6 +57,8 @@ class MwQueryPage : BaseModel() {
     fun description(): String? = description
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
+
+    fun mediaInfo(): MediaInfo? = videoInfo?.get(0)
 
     fun redirectFrom(from: String?) {
         redirectFrom = from
