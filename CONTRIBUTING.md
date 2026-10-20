@@ -35,16 +35,21 @@ The body should provide a meaningful commit message.
 
 ### Kotlin style and static analysis
 
-Kotlin formatting and static analysis are checked in CI with ktlint and Detekt.
-Existing findings are recorded in baseline files; new findings fail the checks.
-Run the checks locally with:
+Kotlin formatting is checked in CI with ktlint and Detekt. Files listed in
+`app/ktlint-legacy-files.txt` are temporarily excluded; remove a path after
+fixing the file so ktlint checks it again. Eligible Kotlin files not on the
+list, including new files, are checked automatically. Follow the repository's
+`.editorconfig` and fix new ktlint violations rather than adding broad
+exclusions.
+
+Run the ktlint check locally before submitting a pull request:
 
 ```sh
 ./gradlew :app:ktlintCheck :app:detekt
 ```
 
 Use `./gradlew :app:ktlintFormat` to apply ktlint's formatting fixes before
-committing. Android Lint is also run in CI for the beta debug variant.
+committing. Detekt and Android Lint are also run in CI.
 
 ### Further reading
 

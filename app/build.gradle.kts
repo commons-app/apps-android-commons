@@ -13,11 +13,23 @@ plugins {
 
 apply(from = "$rootDir/jacoco.gradle")
 
+val ktlintLegacyFiles: Set<String> =
+    file("ktlint-legacy-files.txt")
+        .readLines()
+        .map { it.trim() }
+        .filter { it.isNotBlank() && !it.startsWith("#") }
+        .toSet()
+
 ktlint {
     version.set(libs.versions.ktlint.get())
     android.set(true)
     outputToConsole.set(true)
-    baseline.set(file("$projectDir/ktlint-baseline.xml"))
+    filter {
+        exclude { element ->
+            val filePath = element.file.relativeTo(rootDir).invariantSeparatorsPath
+            filePath in ktlintLegacyFiles
+        }
+    }
 }
 
 detekt {
