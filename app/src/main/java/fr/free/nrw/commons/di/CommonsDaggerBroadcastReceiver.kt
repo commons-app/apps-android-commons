@@ -10,14 +10,18 @@ import fr.free.nrw.commons.di.ApplicationlessInjection.Companion.getInstance
  * ApplicationlessInjection class
  */
 abstract class CommonsDaggerBroadcastReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         inject(context)
     }
 
     private fun inject(context: Context) {
         val injection = getInstance(context.applicationContext)
 
-        val serviceInjector = injection.broadcastReceiverInjector()
+        val serviceInjector =
+            injection.broadcastReceiverInjector()
                 ?: throw NullPointerException("ApplicationlessInjection.broadcastReceiverInjector() returned null")
 
         serviceInjector.inject(this)
