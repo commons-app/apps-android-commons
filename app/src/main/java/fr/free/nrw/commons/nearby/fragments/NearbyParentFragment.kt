@@ -2667,7 +2667,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     controller!!.initiateGalleryPick(
                         it,
                         galleryPickLauncherForResult,
-                        false
+                        true
                     )
                 }
             }
