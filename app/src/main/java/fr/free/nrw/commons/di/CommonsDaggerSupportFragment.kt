@@ -10,8 +10,9 @@ import fr.free.nrw.commons.di.ApplicationlessInjection.Companion.getInstance
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-abstract class CommonsDaggerSupportFragment : Fragment(), HasSupportFragmentInjector {
-
+abstract class CommonsDaggerSupportFragment :
+    Fragment(),
+    HasSupportFragmentInjector {
     @Inject @JvmField
     var childFragmentInjector: DispatchingAndroidInjector<Fragment>? = null
 
@@ -28,20 +29,19 @@ abstract class CommonsDaggerSupportFragment : Fragment(), HasSupportFragmentInje
         compositeDisposable.clear()
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> =
-        childFragmentInjector!!
-
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = childFragmentInjector!!
 
     fun inject() {
         val hasSupportFragmentInjector = findHasFragmentInjector()
 
-        val fragmentInjector = hasSupportFragmentInjector.supportFragmentInjector()
-            ?: throw NullPointerException(
-                String.format(
-                    "%s.supportFragmentInjector() returned null",
-                    hasSupportFragmentInjector.javaClass.canonicalName
+        val fragmentInjector =
+            hasSupportFragmentInjector.supportFragmentInjector()
+                ?: throw NullPointerException(
+                    String.format(
+                        "%s.supportFragmentInjector() returned null",
+                        hasSupportFragmentInjector.javaClass.canonicalName,
+                    ),
                 )
-            )
 
         fragmentInjector.inject(this)
     }

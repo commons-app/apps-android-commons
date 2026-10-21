@@ -36,6 +36,9 @@ junit = "4.13.2"
 junitJupiter = "5.10.0"
 kotlin = "2.1.0"
 kotlinStdlib = "1.8.0"
+ktlint = "1.5.0"
+ktlintGradle = "13.1.0"
+detekt = "1.23.8"
 coroutines = "1.7.3"
 leakcanary = "2.10"
 livedataTesting = "1.2.0"
@@ -215,3 +218,5 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 github-triplet-play = { id = "com.github.triplet.play", version.ref = "githubTripletPlay" }
 getkeepsafe-dexcount = { id = "com.getkeepsafe.dexcount", version.ref = "dexcount" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlintGradle" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

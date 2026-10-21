@@ -156,4 +156,21 @@ object FileUtils {
         }
         return true
     }
+    // list of supported MIME types
+    private val uploadableFileFormats = listOf(
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/svg+xml",
+        "audio/ogg"
+    )
+
+    fun isSupportedFileType(context: Context, uri: Uri): Boolean {
+        val mimeType = getMimeType(context, uri)
+        return if (mimeType == null) {
+            false
+        } else {
+            uploadableFileFormats.contains(mimeType.lowercase(Locale.getDefault()))
+        }
+    }
 }
