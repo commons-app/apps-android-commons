@@ -504,6 +504,16 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    private fun getSupportedFormatsList(): String {
+        val formats = listOf(
+            getString(R.string.format_jpeg),
+            getString(R.string.format_png),
+            getString(R.string.format_svg),
+            getString(R.string.format_ogg_audio)
+        )
+        return formats.joinToString(separator = "\n") { "• $it" }
+    }
+
     private fun receiveSharedItems() {
         val intent = intent
         val action = intent.action
@@ -511,10 +521,21 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
             receiveInternalSharedItems()
         }
 
-        if (uploadableFiles.isEmpty()) {
-            handleNullMedia()
-        } else {
-            //Show thumbnails
+        // Filter out unsupported image types (like HEIC, WebP, GIF) to ensure we strictly accept
+        // only JPEG, PNG, and SVG formats, while allowing valid audio files to pass through
+        val originalSize = uploadableFiles.size
+        uploadableFiles = uploadableFiles.filter { file ->
+            file.contentUri?.let { uri ->
+                FileUtils.isSupportedFileType(this, uri)
+            } ?: false
+        }.toMutableList()
+
+        fun proceedWithSetup() {
+            if (uploadableFiles.isEmpty()) {
+                handleNullMedia()
+                return
+            }
+
             if (uploadableFiles.size > 1) {
                 if (!defaultKvStore.getBoolean("hasAlreadyLaunchedCategoriesDialog")) {
                     // If there is only file, no need to show the image thumbnails
@@ -541,7 +562,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                 fragments = mutableListOf()
             }
 
-            for (uploadableFile in uploadableFiles) {
+            uploadableFiles.forEachIndexed { index, uploadableFile ->
                 val uploadMediaDetailFragment = UploadMediaDetailFragment()
 
                 // set fragment properties but defer initialization
@@ -607,8 +628,9 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
                     }
 
                 if (isFragmentsSaved) {
-                    val fragment = fragments!![0] as UploadMediaDetailFragment?
-                    fragment!!.fragmentCallback = uploadMediaDetailFragmentCallback
+                    val fragment = fragments!!.getOrNull(index) as? UploadMediaDetailFragment
+                        ?: return@forEachIndexed
+                    fragment.fragmentCallback = uploadMediaDetailFragmentCallback
                     fragment.initializeFragment()
                 } else {
                     uploadMediaDetailFragment.fragmentCallback = uploadMediaDetailFragmentCallback
@@ -700,7 +722,7 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
 
             uploadImagesAdapter!!.fragments = fragments!!
             binding.vpUpload.offscreenPageLimit = fragments!!.size
-        }
+
         // Saving size of uploadableFiles
         store!!.putInt(KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE, uploadableFiles.size)
     }
@@ -713,6 +735,36 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
      * @param index Index of image to be removed
      * @param maxSize Max size of the `uploadableFiles`
      */
+
+
+    val supportedFormats = getSupportedFormatsList()
+        if (uploadableFiles.isEmpty() && originalSize > 0) {
+            showAlertDialog(
+                this,
+                getString(R.string.unsupported_format_title),
+                getString(R.string.unsupported_format_desc, supportedFormats),
+                getString(R.string.ok)
+            ) {
+                finish()
+            }
+            return
+        }
+
+        if (uploadableFiles.size < originalSize) {
+            showAlertDialog(
+                this,
+                getString(R.string.unsupported_files_skipped_title),
+                getString(R.string.unsupported_files_skipped_desc, supportedFormats),
+                getString(R.string.ok)
+            ) {
+                proceedWithSetup()
+            }
+            return
+        }
+
+        proceedWithSetup()
+    }
+
     override fun highlightNextImageOnCancelledImage(index: Int, maxSize: Int) {
         if (index < maxSize) {
             binding.vpUpload.setCurrentItem(index + 1, false)
