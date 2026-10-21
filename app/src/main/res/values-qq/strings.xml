@@ -393,6 +393,7 @@
   <string name="images_used_explanation">Profile statistics explanation.</string>
   <string name="error_occurred">Error message.</string>
   <string name="notifications_channel_name_all">Notifications title.</string>
+  <string name="notifications_channel_name_uploads">Name of the notification channel for upload progress, shown in the Android notification settings of the app. Notifications in this channel make no sound.</string>
   <string name="preference_author_name_toggle">Settings item.</string>
   <string name="preference_author_name_toggle_summary">Settings item explanation.</string>
   <string name="preference_author_name">Settings item.</string>
