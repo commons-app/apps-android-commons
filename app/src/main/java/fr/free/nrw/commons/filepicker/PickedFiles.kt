@@ -11,6 +11,7 @@ import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.filepicker.Constants.Companion.DEFAULT_FOLDER_NAME
 import timber.log.Timber
 import java.io.File
@@ -172,21 +173,7 @@ object PickedFiles : Constants {
     }
 
     private fun copyExif(src: ExifInterface, dstFile: File) {
-        val dst = ExifInterface(dstFile.absolutePath)
-        arrayOf(
-            ExifInterface.TAG_DATETIME_ORIGINAL, ExifInterface.TAG_DATETIME,
-            ExifInterface.TAG_GPS_LATITUDE, ExifInterface.TAG_GPS_LATITUDE_REF,
-            ExifInterface.TAG_GPS_LONGITUDE, ExifInterface.TAG_GPS_LONGITUDE_REF,
-            ExifInterface.TAG_GPS_ALTITUDE, ExifInterface.TAG_GPS_ALTITUDE_REF,
-            ExifInterface.TAG_GPS_DATESTAMP, ExifInterface.TAG_GPS_TIMESTAMP,
-            ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL,
-            ExifInterface.TAG_F_NUMBER, ExifInterface.TAG_EXPOSURE_TIME,
-            ExifInterface.TAG_FLASH, ExifInterface.TAG_FOCAL_LENGTH,
-            ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY, ExifInterface.TAG_WHITE_BALANCE,
-            ExifInterface.TAG_IMAGE_WIDTH, ExifInterface.TAG_IMAGE_LENGTH,
-        ).forEach { tag -> src.getAttribute(tag)?.let { dst.setAttribute(tag, it) } }
-        dst.setAttribute(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL.toString())
-        dst.saveAttributes()
+        RandomAccessFileExifWriter.copyExif(src, dstFile)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)

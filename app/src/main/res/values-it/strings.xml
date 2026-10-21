@@ -19,6 +19,7 @@
 * Luca.favorido
 * Nemo bis
 * Noretta93
+* Ontsed
 * S4b1nuz E.656
 * Sarah Bernabei
 * Senpremì
@@ -278,6 +279,7 @@
   <string name="upload_problem_image_dark">L\'immagine è troppo scura.</string>
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
   <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
+  <string name="upload_problem_image_format_unsupported">La tua immagine è in un formato non supportato dal server di Commons, quindi l\'applicazione l\'ha convertita in JPG.</string>
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
@@ -379,6 +381,11 @@
   <string name="rotate">Ruota</string>
   <string name="crop">Ritaglia</string>
   <string name="blur">Sfocatura</string>
+  <string name="autoblur">Sfocatura automatica</string>
+  <string name="autodetect_title">Sfocatura automatica di volti e targhe auto.</string>
+  <string name="autodetect_description">È possibile scartare i falsi positivi utilizzando il pulsante ❌ di ciascuna area sfocata.</string>
+  <string name="autoblur_failed_to_load">Impossibile caricare l\'immagine per la sfocatura automatica</string>
+  <string name="autoblur_no_region_detected">Nessuna regione rilevata per la sfocatura automatica</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
@@ -448,6 +455,7 @@
   <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
   <string name="depictions_choose_from_map">Scegli dalla mappa</string>
   <string name="depictions_map_confirm">Conferma</string>
+  <string name="depictions_map_no_photo_location">La foto non riporta la posizione, viene mostrata la tua posizione attuale.</string>
   <string name="back_button_warning">Annulla caricamento</string>
   <string name="back_button_warning_desc">Usare il tasto \'indietro\' cancellerà questo caricamento e perderai i tuoi progressi</string>
   <string name="back_button_continue">Continua caricamento</string>
@@ -722,6 +730,7 @@
   <string name="custom_selector_already_uploaded_image_text">Questa immagine è già stata caricata su Commons.</string>
   <string name="custom_selector_over_limit_warning">Per motivi tecnici, l\'app non può caricare in modo affidabile più di %1$d immagini contemporaneamente. Il limite di caricamento di %1$d è stato superato da %2$d .</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Nascondi</string>
+  <string name="custom_selector_duplicates_warning">Alcune delle immagini selezionate sono duplicate e verranno rimosse prima del caricamento.</string>
   <string name="custom_selector_button_limit_text">Massimo: %1$d</string>
   <string name="custom_selector_limit_error_desc">Errore: limite di caricamento superato</string>
   <string name="place_state_wlm">WLM</string>
@@ -864,4 +873,16 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
   <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
   <string name="custom_selector_max_image_limit_reached">Puoi selezionare solo un massimo di %d immagini.</string>
+  <string name="edit_unsupported_format_explanation">La modifica diretta nell\'app è disponibile solo per i file JPEG. Per modificare gli altri formati, si prega di utilizzare un programma di terze parti.</string>
+  <string name="license_cc0_description">Nessun copyright. Cedi tutti i diritti in modo che chiunque possa utilizzare quest\'opera in qualsiasi modo.</string>
+  <string name="license_cc_by_description">Attribuzione. Chiunque è libero di condividere e adattare il materiale, purché ne citi la fonte.</string>
+  <string name="license_cc_by_sa_description">Attribuzione-Condividi allo stesso modo. Altri possono condividere e adattare, ma devono utilizzare la stessa licenza e citare la fonte.</string>
+  <string name="license_cc0_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, senza alcuna condizione.</string>
+  <string name="license_cc_by_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, anche a fini commerciali, purché venga citata la paternità dell\'opera.</string>
+  <string name="license_cc_by_sa_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, anche a fini commerciali, a condizione che ne venga citata la paternità e che la nuova opera sia concessa in licenza con termini identici.</string>
+  <string name="error_getting_image_properties">Errore durante il recupero delle proprietà dell\'immagine:</string>
+  <string name="error_blur_no_rectangle">Disegna almeno un rettangolo sulla foto</string>
+  <string name="error_applying_blur">Errore durante l\'applicazione della sfocatura</string>
+  <string name="failed_to_apply_crop">Impossibile applicare il ritaglio</string>
+  <string name="failed_to_save_image">Impossibile salvare l\'immagine</string>
 </resources>

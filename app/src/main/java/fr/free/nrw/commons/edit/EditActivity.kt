@@ -9,24 +9,38 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.RectF
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.rotationMatrix
 import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.commons.ml.common.DetectionResult
+import org.commons.ml.vision.CommonsVision
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * An activity class for editing and rotating images using Jpegtran.
@@ -49,6 +63,7 @@ class EditActivity : BaseActivity() {
     private var originalBitmapWidth = 0
     private var originalBitmapHeight = 0
     private var maxAvailableHeight = 0f
+    private var properties: Properties? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +74,7 @@ class EditActivity : BaseActivity() {
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         vm.initJpegtran(applicationContext, imageUri)
-
+        fetchAndUpdateImageProperties()
         val sourceExif = try {
             ExifInterface(imageUri)
         } catch (e: Exception) {
@@ -139,6 +154,122 @@ class EditActivity : BaseActivity() {
             }
 
         }
+        binding.autoblurBtn.setOnClickListener {
+            lifecycleScope.launch {
+                // Build and show the progress dialog
+                val dialogView = LayoutInflater.from(this@EditActivity)
+                    .inflate(R.layout.dialog_autodetect_progress, null)
+                val progressBar = dialogView.findViewById<ProgressBar>(R.id.autodetect_progress)
+                val percentView = dialogView.findViewById<TextView>(R.id.autodetect_percent)
+                val progressDialog = AlertDialog.Builder(this@EditActivity)
+                    .setView(dialogView)
+                    .setCancelable(false)
+                    .create()
+                progressDialog.show()
+                val decodedBitmap = loadBitmapForDetection(imageUri)
+                if (decodedBitmap == null) {
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        this@EditActivity,
+                        getString(R.string.autoblur_failed_to_load),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Timber.e("AutoBlur: decodedBitmap is null for $imageUri")
+                    return@launch
+                }
+
+                val detector = CommonsVision(applicationContext)
+                val detectionResult = withContext(Dispatchers.Default) {
+                    detector.detect(decodedBitmap) { progress ->
+                        val percent = (progress * 100).toInt()
+                        runOnUiThread {
+                            progressBar?.progress = percent
+                            percentView?.text = "$percent%"
+                        }
+                    }
+                }
+                val rawDetections = when (detectionResult) {
+                    is DetectionResult.Success -> detectionResult.detections
+                    is DetectionResult.Partial -> {
+                        Timber.w("Partial detection result: unavailable capabilities = ${detectionResult.detections}")
+                        detectionResult.detections
+                    }
+                    else -> emptyList()
+                }
+                delay(700.milliseconds)
+                progressDialog.dismiss()
+
+                if (!isBlurMode) {
+                    enterBlurMode()
+                    toggleApplyEditMode(true)
+                }
+
+                val drawable = binding.iv.drawable
+                if (drawable != null && rawDetections.isNotEmpty() && decodedBitmap.width > 0 && decodedBitmap.height > 0) {
+                    val scaleX = drawable.intrinsicWidth.toFloat() / decodedBitmap.width
+                    val scaleY = drawable.intrinsicHeight.toFloat() / decodedBitmap.height
+
+                    val scaledRects = rawDetections.map { detection ->
+                        val b = detection.bounds
+                        RectF(
+                            b.left * scaleX,
+                            b.top * scaleY,
+                            b.right * scaleX,
+                            b.bottom * scaleY
+                        )
+                    }
+                    binding.blurOverlay.addRegions(scaledRects)
+                } else if (rawDetections.isEmpty()) {
+                    Toast.makeText(
+                        this@EditActivity,
+                        getString(R.string.autoblur_no_region_detected),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                // Dismiss dialog after a short delay for visual feedback.
+                progressBar.postDelayed({
+                    progressDialog.dismiss()
+                }, 300)
+            }
+        }
+    }
+
+    /**
+     * Safely decodes a bitmap from a content URI or file path off the main thread.
+     */
+    private suspend fun loadBitmapForDetection(pathOrUri: String): Bitmap? =
+        withContext(Dispatchers.IO) {
+            runCatching {
+                val uri = pathOrUri.toUri()
+                if (uri.scheme == "content") {
+                    contentResolver.openInputStream(uri)?.use { stream ->
+                        BitmapFactory.decodeStream(stream)
+                    }
+                } else {
+                    val filePath = if (uri.scheme == "file") uri.path ?: pathOrUri else pathOrUri
+                    BitmapFactory.decodeFile(filePath)
+                }
+            }.onFailure { e ->
+                Timber.e(e, "Failed to load bitmap for detection from pathOrUri: $pathOrUri")
+            }.getOrNull()
+    }
+
+    /**
+     * Gets the current image properties and update those properties in [BlurOverlayView].
+     * */
+    private fun fetchAndUpdateImageProperties() {
+        try {
+            properties = vm.getProperties(File(imageUri).toUri())
+            binding.blurOverlay.setImageProperties(properties!!)
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting image properties: ${e.localizedMessage}")
+            Toast.makeText(
+                this@EditActivity,
+                getString(R.string.error_getting_image_properties),
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     /**
@@ -152,6 +283,7 @@ class EditActivity : BaseActivity() {
         binding.rotateBtn.visibility = mainVisibility
         binding.cropBtn.visibility = mainVisibility
         binding.blurBtn.visibility = mainVisibility
+        binding.autoblurBtn.visibility = mainVisibility
         // Keep the save button in the view, so there is no layout shift.
         binding.btnSave.visibility = if (!activate) View.VISIBLE else View.INVISIBLE
         binding.editOptionsLayout.visibility = editVisibility
@@ -270,8 +402,8 @@ class EditActivity : BaseActivity() {
 
         if (regions.isEmpty()) {
             Toast.makeText(
-                this,
-                "Please draw at least one rectangle on the photo",
+                this@EditActivity,
+                getString(R.string.error_blur_no_rectangle),
                 Toast.LENGTH_SHORT
             ).show()
             return
@@ -283,14 +415,18 @@ class EditActivity : BaseActivity() {
 
         try {
             val blurredFile = vm.blurImage(regions, applicationContext.cacheDir)
+            // Update imageUri to point to latest blurred file.
             imageUri = blurredFile.absolutePath
+            // Apply pending rotation.
+            applyPendingRotation()
             // Reload the image displaying the applied blur.
             updateImagePreview()
+            fetchAndUpdateImageProperties()
         } catch (e: Exception) {
-            Timber.e(e, "Failed to apply blur")
+            Timber.e(e, "Failed to apply blur ${e.localizedMessage}")
             Toast.makeText(
                 this@EditActivity,
-                "Error applying blur: ${e.localizedMessage}",
+                getString(R.string.error_applying_blur),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -301,15 +437,12 @@ class EditActivity : BaseActivity() {
      * in the ImageView, and returns to the main toolbar.
      */
     private fun applyCrop() {
-        val filePath = imageUri.toUri().path
         try {
-            var file = File(filePath.toString())
-            // Apply rotation if pending so crop coordinates match.
-            file = applyPendingRotation(file)
+            // Apply pending rotation if any.
+            applyPendingRotation()
 
-            val properties = vm.getProperties(file.toUri())
-            val actualWidth = properties.width
-            val actualHeight = properties.height
+            val actualWidth = properties!!.width
+            val actualHeight = properties!!.height
             val cropRect = binding.cropOverlay.getCropRect()
             val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
 
@@ -324,12 +457,13 @@ class EditActivity : BaseActivity() {
                 imageUri = croppedFile.absolutePath
                 // Update the image preview.
                 updateImagePreview()
+                fetchAndUpdateImageProperties()
             }
         } catch (e: Exception) {
-            Timber.e(e, "applyCrop: Failed to apply crop")
+            Timber.e(e, "applyCrop: Failed to apply crop ${e.localizedMessage}")
             Toast.makeText(
-                this,
-                "Failed to apply crop: ${e.localizedMessage}",
+                this@EditActivity,
+                getString(R.string.failed_to_apply_crop),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -401,16 +535,18 @@ class EditActivity : BaseActivity() {
 
     /**
      * Applies any pending rotation to the given file via JNI and resets the rotation baseline.
-     * Returns the rotated file, or the original file if no rotation was pending.
      */
-    private fun applyPendingRotation(file: File): File {
+    private fun applyPendingRotation() {
+        val filePath = imageUri.toUri().path
+        val file = File(filePath.toString())
         val relativeRotation = ((imageRotation - startOrientation) % 360 + 360) % 360
-        if (relativeRotation == 0) return file
+        if (relativeRotation == 0) return
         val rotated = vm.rotateImage(file, relativeRotation, applicationContext.cacheDir)
         // Reset rotation baseline since the file is now oriented correctly.
         startOrientation = 0
         imageRotation = 0
-        return rotated
+        // Update imageUri
+        imageUri = rotated.absolutePath
     }
 
     /**
@@ -418,23 +554,22 @@ class EditActivity : BaseActivity() {
      * Saves the edited image.
      */
     private fun saveEditedImage() {
-        val filePath = imageUri.toUri().path
-
         try {
-            var file = File(filePath.toString())
-            file = applyPendingRotation(file)
-
-            val finalPath = file.absolutePath
+            applyPendingRotation()
+            val finalPath = imageUri.toUri().path
             val resultIntent = Intent().apply {
                 putExtra("editedImageFilePath", finalPath)
             }
             setResult(RESULT_OK, resultIntent)
             finish()
         } catch (e: Exception) {
-            Timber.e(e, "saveEditedImage: Exception occurred during save process")
+            Timber.e(
+                e,
+                "saveEditedImage: Exception occurred during save process ${e.localizedMessage}"
+            )
             Toast.makeText(
                 this@EditActivity,
-                "Failed to save image: ${e.localizedMessage}",
+                getString(R.string.failed_to_save_image),
                 Toast.LENGTH_LONG
             ).show()
         }
