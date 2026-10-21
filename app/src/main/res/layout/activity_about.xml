@@ -6,24 +6,25 @@
     android:layout_height="match_parent"
     android:background="?attr/mainBackground"
     android:orientation="vertical">
+    
     <LinearLayout
-        android:id="@+id/toolbarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="?attr/actionBarSize">
-        <include
-          android:id="@+id/toolbarBinding"
-          layout="@layout/toolbar"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_below="@id/toolbarLayout">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <LinearLayout
+            android:id="@+id/toolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+            <include
+                android:id="@+id/toolbarBinding"
+                layout="@layout/toolbar"/>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
