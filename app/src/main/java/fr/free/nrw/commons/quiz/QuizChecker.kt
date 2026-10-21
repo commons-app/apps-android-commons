@@ -133,9 +133,9 @@ class QuizChecker @Inject constructor(
             return
         }
 
-        if (isRevertCountFetched && isUploadCountFetched &&
-            totalUploadCount >= uploadCountThreshold &&
-            (revertCount * 100) / totalUploadCount >= 50
+        val areCountsFetched = isRevertCountFetched && isUploadCountFetched
+        if (areCountsFetched &&
+            isRevertRateHigh(revertCount, totalUploadCount, uploadCountThreshold)
         ) {
             callQuiz(activity)
         }
@@ -171,5 +171,21 @@ class QuizChecker @Inject constructor(
             putExtra("isQuiz", true)
         }
         activity.startActivity(intent)
+    }
+
+    companion object {
+        private const val PERCENT = 100
+        private const val QUIZ_REVERT_PERCENTAGE_THRESHOLD = 50
+
+        /**
+         * Returns true if the user has uploaded at least [uploadCountThreshold] images
+         * and 50% or more of them have been reverted
+         */
+        internal fun isRevertRateHigh(
+            revertCount: Int,
+            totalUploadCount: Int,
+            uploadCountThreshold: Int
+        ): Boolean = totalUploadCount >= uploadCountThreshold &&
+            (revertCount * PERCENT) / totalUploadCount >= QUIZ_REVERT_PERCENTAGE_THRESHOLD
     }
 }

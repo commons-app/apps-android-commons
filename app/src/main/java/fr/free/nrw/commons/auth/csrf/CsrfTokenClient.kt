@@ -44,20 +44,13 @@ class CsrfTokenClient(
                             },
                         ).get()
 
-                if (response
-                        .body()
-                        ?.query()
-                        ?.csrfToken()
-                        .isNullOrEmpty()
-                ) {
-                    continue
-                }
-
-                token = response.body()!!.query()!!.csrfToken()!!
+                token = response.body()?.query()?.csrfToken().orEmpty()
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
                 }
-                break
+                if (token.isNotEmpty()) {
+                    break
+                }
             } catch (e: LoginFailedException) {
                 throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
             } catch (t: Throwable) {

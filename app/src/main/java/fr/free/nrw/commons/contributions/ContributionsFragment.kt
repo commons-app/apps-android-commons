@@ -159,14 +159,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                     if (areAllGranted) {
                         onLocationPermissionGranted()
                     } else {
-                        if (shouldShowRequestPermissionRationale(
-                                permission.ACCESS_FINE_LOCATION
-                            )
-                            && store!!.getBoolean("displayLocationPermissionForCardView", true)
-                            && !store!!.getBoolean("doNotAskForLocationPermission", false)
-                            && ((activity as MainActivity).activeFragment
-                                    == ActiveFragment.CONTRIBUTIONS)
-                        ) {
+                        if (shouldShowLocationPermissionRationaleCard()) {
                             binding!!.cardViewNearby.permissionType =
                                 NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION
                         } else {
@@ -228,9 +221,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             showContributionsListFragment()
         }
 
-        if (!isBetaFlavour && sessionManager!!.isUserLoggedIn
-            && sessionManager!!.currentAccount != null && !isUserProfile
-        ) {
+        if (!isBetaFlavour && hasLoggedInAccount() && !isUserProfile) {
             setUploadCount()
         }
         setHasOptionsMenu(true)
@@ -586,16 +577,30 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             )
         ) {
             onLocationPermissionGranted()
-        } else if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
-            && store!!.getBoolean("displayLocationPermissionForCardView", true)
-            && !store!!.getBoolean("doNotAskForLocationPermission", false)
-            && ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)
-        ) {
+        } else if (shouldShowLocationPermissionRationaleCard()) {
             binding!!.cardViewNearby.permissionType =
                 NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION
             showNearbyCardPermissionRationale()
         }
     }
+
+    /**
+     * Returns true if the nearby card should ask the user to enable the location permission
+     */
+    private fun shouldShowLocationPermissionRationaleCard(): Boolean =
+        shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
+            && isLocationPermissionCardEnabled()
+            && isContributionsTabActive()
+
+    private fun isLocationPermissionCardEnabled(): Boolean =
+        store!!.getBoolean("displayLocationPermissionForCardView", true)
+            && !store!!.getBoolean("doNotAskForLocationPermission", false)
+
+    private fun isContributionsTabActive(): Boolean =
+        (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS
+
+    private fun hasLoggedInAccount(): Boolean =
+        sessionManager!!.isUserLoggedIn && sessionManager!!.currentAccount != null
 
     private fun requestLocationPermission() {
         nearbyLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))

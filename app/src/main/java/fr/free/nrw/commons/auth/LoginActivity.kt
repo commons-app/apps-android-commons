@@ -281,9 +281,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             )
             binding!!.loginTwoFactor.visibility = View.VISIBLE
             binding!!.loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
-                if (actionId == EditorInfo.IME_ACTION_DONE ||
-                    (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
-                ) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || isEnterKeyDown(event)) {
                     performLogin()
                     true
                 } else {
@@ -296,6 +294,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
             binding!!.loginTwoFactor.setText("")
         }
     }
+
+    private fun isEnterKeyDown(event: KeyEvent?): Boolean =
+        event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN
+
     /**
      * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
      * @param view The keyboard

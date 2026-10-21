@@ -205,7 +205,8 @@ class EditActivity : BaseActivity() {
                 }
 
                 val drawable = binding.iv.drawable
-                if (drawable != null && rawDetections.isNotEmpty() && decodedBitmap.width > 0 && decodedBitmap.height > 0) {
+                val hasBitmapSize = decodedBitmap.width > 0 && decodedBitmap.height > 0
+                if (drawable != null && rawDetections.isNotEmpty() && hasBitmapSize) {
                     val scaleX = drawable.intrinsicWidth.toFloat() / decodedBitmap.width
                     val scaleY = drawable.intrinsicHeight.toFloat() / decodedBitmap.height
 

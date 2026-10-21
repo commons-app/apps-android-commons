@@ -30,9 +30,11 @@ class RadioGroupHelper {
      * @param activity
      * @param radiosIDs
      */
-    constructor(activity: Activity, vararg radiosIDs: Int) : this(
-        *radiosIDs.map { id -> activity.findViewById<RadioButton>(id) }.toTypedArray()
-    )
+    constructor(activity: Activity, vararg radiosIDs: Int) {
+        for (radioButtonID in radiosIDs) {
+            add(activity.findViewById<RadioButton>(radioButtonID))
+        }
+    }
 
     /**
      * Constructor to group radio buttons

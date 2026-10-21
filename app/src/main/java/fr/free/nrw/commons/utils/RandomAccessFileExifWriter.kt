@@ -184,34 +184,47 @@ object RandomAccessFileExifWriter {
                     val len = raf.readUnsignedShort()
                     val next = raf.filePointer + len - 2
 
-                    if (marker == 0xFFE1 && len >= 8) {
-                        val app1Start = raf.filePointer
-                        val hdr = ByteArray(6)
-                        raf.readFully(hdr)
-                        if (String(hdr, 0, 4) == "Exif") {
-                            val tiffBase = app1Start + 6
-                            val bo = ByteArray(2)
-                            raf.readFully(bo)
-                            val order = if (bo[0] == 'I'.code.toByte())
-                                ByteOrder.LITTLE_ENDIAN else ByteOrder.BIG_ENDIAN
-
-                            readU16(raf, order) // skip magic 42
-                            val ifd0Off = readU32(raf, order)
-                            scanAndUpdateIfd(
-                                raf, tiffBase, tiffBase + ifd0Off,
-                                order, updates,
-                            )
-                            break
-                        } else {
-                            raf.seek(next)
-                        }
-                    } else if (marker == 0xFFDA) break
-                    else raf.seek(next)
+                    // Stop once the Exif APP1 segments been updated, or at the start of
+                    // the image data, of which after no more metadata segments follow
+                    val isExifUpdated = marker == 0xFFE1 && len >= 8 &&
+                        updateExifApp1Segment(raf, updates)
+                    if (isExifUpdated || marker == 0xFFDA) break
+                    raf.seek(next)
                 }
             }
         } catch (e: IOException) {
             Timber.e(e, "Failed to update EXIF tags via RandomAccessFile")
         }
+    }
+
+    /**
+     * Reads the APP1 segment the file pointer is at and if it holds Exif data, applies
+     * [updates] to its IFDs.
+     *
+     * @return true if the segment was an Exif segment and was updated
+     */
+    private fun updateExifApp1Segment(
+        raf: RandomAccessFile,
+        updates: Map<Int, String?>,
+    ): Boolean {
+        val app1Start = raf.filePointer
+        val hdr = ByteArray(6)
+        raf.readFully(hdr)
+        if (String(hdr, 0, 4) != "Exif") return false
+
+        val tiffBase = app1Start + 6
+        val bo = ByteArray(2)
+        raf.readFully(bo)
+        val order = if (bo[0] == 'I'.code.toByte())
+            ByteOrder.LITTLE_ENDIAN else ByteOrder.BIG_ENDIAN
+
+        readU16(raf, order) // skip magic 42
+        val ifd0Off = readU32(raf, order)
+        scanAndUpdateIfd(
+            raf, tiffBase, tiffBase + ifd0Off,
+            order, updates,
+        )
+        return true
     }
 
     /**
@@ -257,27 +270,25 @@ object RandomAccessFileExifWriter {
                 raf.write(ByteArray(12))
                 raf.seek(afterEntry)
             } else {
-                val encoded = encodeValue(type, updates[tagId]!!, order) ?: continue
-                val unitSize = typeUnitSize(type)
-                val existingBytes = unitSize * cnt
+                val encoded = encodeValue(type, updates[tagId]!!, order)
+                val existingBytes = typeUnitSize(type) * cnt
 
-                if (existingBytes <= 4) {
-                    if (encoded.size <= 4) {
+                when {
+                    encoded == null -> Unit
+                    existingBytes <= 4 -> if (encoded.size <= 4) {
                         raf.seek(valFieldPos)
                         raf.write(encoded)
                         repeat(4 - encoded.size) { raf.writeByte(0) }
                     }
-                } else {
-                    if (encoded.size <= existingBytes) {
+                    encoded.size <= existingBytes -> {
                         raf.seek(tiffBase + valOrOff)
                         raf.write(encoded)
                         repeat(existingBytes - encoded.size) { raf.writeByte(0) }
-                    } else {
-                        Timber.w(
-                            "Tag 0x%04X: new value (%d B) exceeds existing space (%d B), skipped",
-                            tagId, encoded.size, existingBytes,
-                        )
                     }
+                    else -> Timber.w(
+                        "Tag 0x%04X: new value (%d B) exceeds existing space (%d B), skipped",
+                        tagId, encoded.size, existingBytes,
+                    )
                 }
                 raf.seek(afterEntry)
             }

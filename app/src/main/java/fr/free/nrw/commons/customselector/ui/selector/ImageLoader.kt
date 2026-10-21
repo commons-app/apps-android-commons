@@ -248,66 +248,41 @@ class ImageLoader
             nextImagePosition: Int,
             currentlyUploadingImages: List<Contribution>,
         ): Int {
-            var next: Int
             // Traversing from given position to the end
             for (i in nextImagePosition until allImages.size) {
                 val currentImage = allImages[i]
-
-                if (currentlyUploadingImages.any { it.contentUri == currentImage.uri }) {
-                    continue // Skip this image as it's currently being uploaded
-                }
-
-                val imageSHA1: String =
-                    when (mapImageSHA1[currentImage.uri] != null) {
-                        true -> mapImageSHA1[currentImage.uri]!!
-                        else ->
-                            CustomSelectorUtils.getImageSHA1(
-                                currentImage.uri,
-                                ioDispatcher,
-                                fileUtilsWrapper,
-                                context.contentResolver,
-                            )
-                    }
-                next = notForUploadStatusDao.find(imageSHA1)
-
-                // After checking the image in the not for upload table, if the image is present then
-                // skips the image and moves to next image for checking
-                if (next > 0) {
-                    continue
-
-                    // Otherwise checks in already uploaded table
-                } else {
-                    next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-
-                    // If the image is not present in the already uploaded table, checks for its
-                    // modified SHA1 in already uploaded table
-                    if (next <= 0) {
-                        val modifiedImageSha1 = getSHA1(currentImage, defaultDispatcher)
-                        next =
-                            uploadedStatusDao.findByModifiedImageSHA1(
-                                modifiedImageSha1,
-                                true,
-                            )
-
-                        // If the modified image SHA1 is not present in the already uploaded table,
-                        // returns the position as next actionable image position
-                        if (next <= 0) {
-                            return i
-
-                            // If present in the db then skips iteration for the image and moves to the next
-                            // for checking
-                        } else {
-                            continue
-                        }
-
-                        // If present in the db then skips iteration for the image and moves to the next
-                        // for checking
-                    } else {
-                        continue
-                    }
+                // Skip images that are currently being uploaded
+                val isUploading = currentlyUploadingImages.any { it.contentUri == currentImage.uri }
+                if (!isUploading && isActionableImage(currentImage, ioDispatcher, defaultDispatcher)) {
+                    return i
                 }
             }
             return -1
+        }
+
+        /**
+         * Checks whether the image is neither in the not for upload table nor in the already
+         * uploaded table, looking up both its SHA1 and its modified SHA1
+         */
+        private suspend fun isActionableImage(
+            image: Image,
+            ioDispatcher: CoroutineDispatcher,
+            defaultDispatcher: CoroutineDispatcher,
+        ): Boolean {
+            val imageSHA1: String =
+                mapImageSHA1[image.uri]
+                    ?: CustomSelectorUtils.getImageSHA1(
+                        image.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        context.contentResolver,
+                    )
+            return notForUploadStatusDao.find(imageSHA1) <= 0 &&
+                uploadedStatusDao.findByImageSHA1(imageSHA1, true) <= 0 &&
+                uploadedStatusDao.findByModifiedImageSHA1(
+                    getSHA1(image, defaultDispatcher),
+                    true,
+                ) <= 0
         }
 
         /**

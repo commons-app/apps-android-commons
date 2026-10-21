@@ -118,11 +118,12 @@ class QuizActivity : AppCompatActivity() {
      * To evaluate score and check whether answer is correct or wrong
      */
     fun evaluateScore() {
-        if (
-            (quiz[questionIndex].isAnswer && isPositiveAnswerChecked)
-                ||
-            (!quiz[questionIndex].isAnswer && isNegativeAnswerChecked)
-            ) {
+        if (isAnswerCorrect(
+                quiz[questionIndex].isAnswer,
+                isPositiveAnswerChecked,
+                isNegativeAnswerChecked
+            )
+        ) {
             customAlert(
                 getString(R.string.correct),
                 quiz[questionIndex].answerMessage
@@ -160,5 +161,17 @@ class QuizActivity : AppCompatActivity() {
             }
             .create()
             .show()
+    }
+
+    companion object {
+        /**
+         * Returns true if the user picked a positive answer for a question whose answer is
+         * positive, or a negative answer for a question whose answer is negative
+         */
+        internal fun isAnswerCorrect(
+            isAnswer: Boolean,
+            isPositiveAnswerChecked: Boolean,
+            isNegativeAnswerChecked: Boolean
+        ): Boolean = if (isAnswer) isPositiveAnswerChecked else isNegativeAnswerChecked
     }
 }

@@ -130,14 +130,14 @@ object PermissionUtils {
         onPermissionGranted: Runnable,
         rationaleTitle: Int,
         rationaleMessage: Int,
-        vararg permissions: String
+        permissions: Array<String>
     ) {
         if (hasPartialAccess(activity)) {
             CoroutineScope(Dispatchers.Main).launch { onPermissionGranted.run() }
             return
         }
         checkPermissionsAndPerformAction(
-            activity, onPermissionGranted, null, rationaleTitle, rationaleMessage, *permissions
+            activity, onPermissionGranted, null, rationaleTitle, rationaleMessage, permissions
         )
     }
 
@@ -167,12 +167,12 @@ object PermissionUtils {
         onPermissionDenied: Runnable? = null,
         rationaleTitle: Int,
         rationaleMessage: Int,
-        vararg permissions: String
+        permissions: Array<String>
     ) {
         val scope = CoroutineScope(Dispatchers.Main)
 
         Dexter.withActivity(activity)
-            .withPermissions(*permissions)
+            .withPermissions(permissions.asList())
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     when {

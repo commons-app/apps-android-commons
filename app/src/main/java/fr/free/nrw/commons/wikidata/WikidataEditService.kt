@@ -246,11 +246,10 @@ class WikidataEditService @Inject constructor(
     private fun depictionEdits(
         contribution: Contribution,
         fileEntityId: Long
-    ): Observable<Boolean> = addDepictsProperty(fileEntityId.toString(), buildList {
-        for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
-            add(id)
-        }
-    })
+    ): Observable<Boolean> = addDepictsProperty(
+        fileEntityId.toString(),
+        contribution.depictedItems.map { it.id }
+    )
 
     companion object {
         const val COMMONS_APP_TAG: String = "wikimedia-commons-app"

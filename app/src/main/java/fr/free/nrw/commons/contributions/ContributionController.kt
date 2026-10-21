@@ -100,7 +100,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
             },
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
-            *PERMISSIONS_STORAGE
+            PERMISSIONS_STORAGE
         )
     }
 
@@ -266,7 +266,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
             { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) },
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale,
-            *PERMISSIONS_STORAGE
+            PERMISSIONS_STORAGE
         )
     }
 
