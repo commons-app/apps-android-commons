@@ -44,6 +44,16 @@ import javax.inject.Singleton
  * Test methods in ok http api client
  */
 @Singleton
+/**
+ * Usage and award counts for the files a user currently has.
+ */
+private data class CommonsFileUsage(
+    val uniqueUsedImages: Int,
+    val articlesUsingImages: Int,
+    val featuredImages: Int,
+    val qualityImages: Int,
+)
+
 class OkHttpJsonApiClient @Inject constructor(
     private val okHttpClient: OkHttpClient,
     private val depictsClient: DepictsClient,
@@ -53,8 +63,9 @@ class OkHttpJsonApiClient @Inject constructor(
     private val gson: Gson
 ) {
     companion object {
-        // Each 50 uploads costs extra Commons API requests, so heavy uploaders keep the error.
+        // Each batch of titles costs another Commons API request, so heavy uploaders keep the error.
         private const val MAX_FALLBACK_UPLOADS = 1000
+        private const val TITLES_PER_QUERY = 50
         private const val FEATURED_PICTURES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons"
         private const val QUALITY_IMAGES_CATEGORY = "Quality_images"
         private const val FALLBACK_LANGUAGES =
@@ -308,6 +319,23 @@ class OkHttpJsonApiClient @Inject constructor(
      * user has more uploads than [MAX_FALLBACK_UPLOADS], so the caller shows the fetch error.
      */
     private fun getAchievementsFromCommonsApi(userName: String): FeedbackResponse {
+        val uploadedTitles = collectUploadedTitles(userName)
+        val deletedUploads = countMissingUploads(uploadedTitles)
+        val fileUsage = collectFileUsage(userName)
+        return FeedbackResponse(
+            uniqueUsedImages = fileUsage.uniqueUsedImages,
+            articlesUsingImages = fileUsage.articlesUsingImages,
+            deletedUploads = deletedUploads,
+            featuredImages = FeaturedImages(fileUsage.qualityImages, fileUsage.featuredImages),
+            thanksReceived = countThanks(userName),
+            user = userName
+        )
+    }
+
+    /**
+     * Titles from the user's upload log. Stops once [MAX_FALLBACK_UPLOADS] is passed.
+     */
+    private fun collectUploadedTitles(userName: String): Set<String> {
         val uploadedTitles = mutableSetOf<String>()
         queryCommonsApi(
             mapOf(
@@ -322,22 +350,34 @@ class OkHttpJsonApiClient @Inject constructor(
                 throw IOException("Too many uploads to compute achievements locally")
             }
         }
+        return uploadedTitles
+    }
 
+    /**
+     * How many of [titles] no longer exist. MediaWiki accepts [TITLES_PER_QUERY] titles per request.
+     */
+    private fun countMissingUploads(titles: Set<String>): Int {
         var deletedUploads = 0
-        uploadedTitles.chunked(50).forEach { titles ->
-            queryCommonsApi(mapOf("titles" to titles.joinToString("|"))) { query ->
+        titles.chunked(TITLES_PER_QUERY).forEach { batch ->
+            queryCommonsApi(mapOf("titles" to batch.joinToString("|"))) { query ->
                 deletedUploads += query.getAsJsonArray("pages")
                     ?.count { it.asJsonObject.get("missing")?.asBoolean == true } ?: 0
             }
         }
+        return deletedUploads
+    }
 
+    /**
+     * How often the user's current files are used, and how many are Featured or Quality images.
+     */
+    private fun collectFileUsage(userName: String): CommonsFileUsage {
         val usagesByPage = mutableMapOf<Int, Int>()
         val featuredPages = mutableSetOf<Int>()
         val qualityPages = mutableSetOf<Int>()
         queryCommonsApi(
             mapOf(
                 "generator" to "allimages", "gaiuser" to userName, "gaisort" to "timestamp",
-                "gailimit" to "50", "prop" to "globalusage|categories", "gulimit" to "500",
+                "gailimit" to TITLES_PER_QUERY.toString(), "prop" to "globalusage|categories", "gulimit" to "500",
                 "cllimit" to "500",
                 "clcategories" to "Category:$FEATURED_PICTURES_CATEGORY|Category:$QUALITY_IMAGES_CATEGORY"
             )
@@ -355,7 +395,18 @@ class OkHttpJsonApiClient @Inject constructor(
                 }
             }
         }
+        return CommonsFileUsage(
+            uniqueUsedImages = usagesByPage.values.count { it > 0 },
+            articlesUsingImages = usagesByPage.values.sum(),
+            featuredImages = featuredPages.size,
+            qualityImages = qualityPages.size
+        )
+    }
 
+    /**
+     * Thanks logged against the user's user page.
+     */
+    private fun countThanks(userName: String): Int {
         var thanksReceived = 0
         queryCommonsApi(
             mapOf(
@@ -365,15 +416,7 @@ class OkHttpJsonApiClient @Inject constructor(
         ) { query ->
             thanksReceived += query.getAsJsonArray("logevents")?.size() ?: 0
         }
-
-        return FeedbackResponse(
-            uniqueUsedImages = usagesByPage.values.count { it > 0 },
-            articlesUsingImages = usagesByPage.values.sum(),
-            deletedUploads = deletedUploads,
-            featuredImages = FeaturedImages(qualityPages.size, featuredPages.size),
-            thanksReceived = thanksReceived,
-            user = userName
-        )
+        return thanksReceived
     }
 
     /**

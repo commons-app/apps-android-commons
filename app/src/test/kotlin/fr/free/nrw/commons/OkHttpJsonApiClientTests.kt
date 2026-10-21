@@ -251,7 +251,8 @@ class OkHttpJsonApiClientTests {
             """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
                 """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
                 """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
-            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
             """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
         )
 
