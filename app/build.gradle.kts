@@ -7,9 +7,36 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
+
+val ktlintLegacyFiles: Set<String> =
+    file("ktlint-legacy-files.txt")
+        .readLines()
+        .map { it.trim() }
+        .filter { it.isNotBlank() && !it.startsWith("#") }
+        .toSet()
+
+ktlint {
+    version.set(libs.versions.ktlint.get())
+    android.set(true)
+    outputToConsole.set(true)
+    filter {
+        exclude { element ->
+            val filePath = element.file.relativeTo(rootDir).invariantSeparatorsPath
+            filePath in ktlintLegacyFiles
+        }
+    }
+}
+
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    buildUponDefaultConfig = true
+    baseline = file("$projectDir/detekt-baseline.xml")
+}
 
 val isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file("../play.p12").exists()
 
@@ -25,8 +52,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1066
-        versionName = "6.7.0"
+        versionCode = 1067
+        versionName = "6.8.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -355,6 +382,9 @@ dependencies {
 
     // Jpegtran
     implementation(libs.ajpegtran)
+
+    // AutoDetect
+    implementation(libs.commons.ml)
 
     implementation(libs.coordinates2country.android) {
         exclude(group = "com.google.android", module = "android")
