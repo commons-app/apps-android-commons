@@ -6,8 +6,8 @@
 * 咽頭べさ
 -->
 <resources>
-  <string name="commons_facebook">Commons Facebook Page</string>
-  <string name="commons_logo">သၚ်္ကေတ Commons</string>
+  <string name="commons_facebook">မုက်လိက်ဝဳကဳမဳဒဳယာခမ်မောန်ဖှေတ်ဗေါ်</string>
+  <string name="commons_logo">လဝ်ဂဝ်ခမ်မောန်ဂမၠိုၚ်</string>
   <string name="appwidget_img">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d ဝှာင် ဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
@@ -187,6 +187,7 @@
   <string name="navigation_item_feedback">မကဵုကသပ်</string>
   <string name="navigation_item_logout">တိတ်ဇၟိက်</string>
   <string name="navigation_item_notification">တင်မကဵုသမ္တီဂမၠိုင်</string>
+  <string name="navigation_item_review">ကလေၚ်ဂၠိုက်ဂၠာဲ</string>
   <string name="nearby_info_menu_wikipedia_article">လိက်ပရေင် ဝဳကဳပဳဒဳယာ</string>
   <string name="description_info">ပဂုန်တုဲ ချူဗၟံက်ထ္ၜးကဵု မဳဒဳယာ ၜိုတ်မာန်ကဵုမာန်ညိ: ဍေဟ်ဂှ် ကေတ်လဝ် နူလဵုရော? မု ဍေဟ်ထ္ၜးကဵုရော? ပရူမုရော? ပဂုန်တုဲ ဗၟံက်ထ္ၜး အရာ ဟွံသေင်မ္ဂး ပူဂိုလ်တအ်ညိ။ အရာတအ်ဂှ် ဆိင်ခယျကေတ် ဟွံလောဲသွာ၊ ဗီုကဵု အခိင်ကာလ ကေုာံ အရေဝ်ဘာသာတအ်ဂှ်။ ယဝ်ရ မဳဒဳယာ ထ္ၜးကဵု ဟွံကၠးမ္ဂး လဴထ္ၜး မုဟိုတ် ဍေဟ်ဟွံကၠး။</string>
   <string name="caption_info">ပဂုန်တုဲ ချူဗၟံက်ထ္ၜးကဵု ပရူဗီုဂှ် ဗွဲခမၞန်ညိ။ အရာကိုပ်ကၠာအိုတ် မဒးဒုင်စကာ နဒဒှ် က္ဍိုပ်လိက် ဗီုဂှ်။ ပိုင်ခြာလဝ် လၟိဟ်အက္ခရ ၂၅၅။</string>
@@ -266,6 +267,7 @@
   <string name="level" fuzzy="true">ကဆံၚ် %1$d</string>
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
   <string name="contributions_fragment">ကမၠောန်ဂမၠိုင်</string>
+  <string name="list_sheet">စရၚ်</string>
   <string name="title_page_bookmarks_items">ပိုတ်ဂမၠိုၚ်</string>
   <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>
   <string name="done">တုဲဒှ်</string>

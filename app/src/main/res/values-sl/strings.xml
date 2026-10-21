@@ -287,7 +287,7 @@
   <string name="use_external_storage">Shrani posnetke v aplikaciji</string>
   <string name="use_external_storage_summary">Shranjujte slike, posnete v aplikaciji, v pomnilnik svoje naprave</string>
   <string name="login_to_your_account">Prijavite se v svoj račun</string>
-  <string name="send_log_file">Pošlji dnevniško datoteko</string>
+  <string name="send_log_file">Pošljite dnevniško datoteko</string>
   <string name="send_log_file_description">Po e-pošti pošljite dnevniško datoteko razvijalcem, da bodo lažje odpravili hrošče v aplikaciji. Opomba: dnevniški zapisi lahko vsebujejo identifikacijske informacije.</string>
   <string name="no_web_browser">Ni mogoče najti brskalnika za odprtje URL-ja</string>
   <string name="null_url">Napaka! URL ni najden</string>
@@ -376,6 +376,12 @@
   <string name="share_app_title">Delite aplikacijo</string>
   <string name="rotate">Zasukaj</string>
   <string name="crop">Obreži</string>
+  <string name="blur">Zameglitev</string>
+  <string name="autoblur">Samodejna zameglitev</string>
+  <string name="autodetect_title">Samodejna zameglitev obrazov in registrskih tablic.</string>
+  <string name="autodetect_description">Lažno pozitivne rezultate lahko zavržete z gumbom ❌ vsakega območja zameglitve.</string>
+  <string name="autoblur_failed_to_load">Nalaganje slike za samodejno zameglitev ni uspelo</string>
+  <string name="autoblur_no_region_detected">Za samodejno zameglitev ni zaznanih območij</string>
   <string name="error_fetching_nearby_places">Ni bilo mogoče naložiti bližnjih krajev.</string>
   <string name="no_pictures_in_this_area">Na tem območju ni slik</string>
   <string name="no_nearby_places_around">Tu okoli ni bližnjih krajev</string>
@@ -401,7 +407,7 @@
   <string name="images_used_by_wiki">Uporabljene slike</string>
   <string name="achievements_share_message">Delite svoje dosežke s prijatelji!</string>
   <string name="achievements_info_message">Ko boste izpolnili te zahteve, se bo vaša raven zvišala. Predmeti v razdelku »Statistika« ne štejejo.</string>
-  <string name="achievements_revert_limit_message">Potrebno najmanj:&amp;nbsp;</string>
+  <string name="achievements_revert_limit_message">Potrebno najmanj:</string>
   <string name="images_uploaded_explanation">Število slik, ki ste jih naložili v Zbirko, ne glede na program za nalaganje</string>
   <string name="images_reverted_explanation">Delež slik v Zbirki, ki niso bile izbrisane</string>
   <string name="images_used_explanation">Število slik, ki ste jih naložili v Zbirko in se uporabljajo v člankih Wikipedije</string>
@@ -545,7 +551,7 @@
   <string name="upload_cancelled">Nalaganje preklicano</string>
   <string name="previous_image_title_description_not_found">Ni podatkov o naslovu ali opisu predhodne slike</string>
   <string name="dialog_box_text_nomination">Zakaj bi bilo treba datoteko »%1$s« izbrisati?</string>
-  <string name="review_is_uploaded_by">Datoteko »%1$s« nalaga: %2$s</string>
+  <string name="review_is_uploaded_by">Datoteko »%1$s« je naložil: %2$s</string>
   <string name="default_description_language">Privzeti jezik opisov</string>
   <string name="delete_helper_show_deletion_title">Predlaganje za izbris</string>
   <string name="delete_helper_show_deletion_title_success">Uspešno</string>
@@ -726,6 +732,7 @@
   <string name="custom_selector_already_uploaded_image_text">Ta slika je že naložena v Zbirko.</string>
   <string name="custom_selector_over_limit_warning">Zaradi tehničnih razlogov aplikacija ne more zanesljivo naložiti več kot %1$d slik hkrati. Omejitev nalaganja %1$d je bila presežena za %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Opusti</string>
+  <string name="custom_selector_duplicates_warning">Nekatere izbrane slike so podvojene in bodo pred nalaganjem odstranjene.</string>
   <string name="custom_selector_button_limit_text">Največ: %1$d</string>
   <string name="custom_selector_limit_error_desc">Napaka: presežena omejitev nalaganja</string>
   <string name="place_state_wlm">WLM</string>
@@ -877,4 +884,9 @@
   <string name="license_cc0_long_description">Ta licenca dovoljuje ponovnim uporabnikom, da distribuirajo, predelajo, prilagajajo in nadgrajujejo gradivo v katerem koli mediju ali obliki brez kakršnih koli pogojev.</string>
   <string name="license_cc_by_long_description">Ta licenca dovoljuje ponovnim uporabnikom distribucijo, predelavo, prilagajanje in nadgradnjo gradiva v katerem koli mediju ali formatu, tudi v komercialne namene, pod pogojem navedbe avtorja.</string>
   <string name="license_cc_by_sa_long_description">Ta licenca dovoljuje ponovnim uporabnikom distribucijo, predelavo, prilagajanje in nadgradnjo gradiva v katerem koli mediju ali formatu, tudi v komercialne namene, pod pogojema, da je navedeno avtorstvo in da je novo delo licencirano pod enakimi pogoji.</string>
+  <string name="error_getting_image_properties">Napaka pri pridobivanju lastnosti slike:</string>
+  <string name="error_blur_no_rectangle">Narišite na fotografijo vsaj en pravokotnik</string>
+  <string name="error_applying_blur">Napaka pri uporabi zameglitve</string>
+  <string name="failed_to_apply_crop">Obrezovanja ni bilo mogoče uporabiti</string>
+  <string name="failed_to_save_image">Shranjevanje slike ni uspelo</string>
 </resources>
