@@ -146,7 +146,7 @@
     <ID>LongMethod:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getNearbyPlaces( queryParams: NearbyQueryParams, language: String, shouldQueryForMonuments: Boolean, customQuery: String? ): List&lt;Place&gt;?</ID>
     <ID>LongMethod:PendingUploadsPresenter.kt$PendingUploadsPresenter$fun restartUploads(contributionList: List&lt;Contribution&gt;, index: Int, context: Context)</ID>
     <ID>LongMethod:PlaceAdapterDelegate.kt$fun placeAdapterDelegate( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
-    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?</ID>
+    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View?</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
@@ -852,7 +852,7 @@
     <ID>MaxLineLength:ReviewActivityTest.kt$ReviewActivityTest$doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())</ID>
     <ID>MaxLineLength:ReviewHelperTest.kt$ReviewHelperTest$whenever(mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg")).thenReturn(Single.just(true))</ID>
     <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=file&amp;gcmsort=timestamp&amp;gcmdir=desc&amp;gcmtitle=Category:Uploaded_with_Mobile/Android&amp;gcmlimit=50"</ID>
-    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1")</ID>
+    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$*</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.&lt;no name provided&gt;$"cannot deserialize $baseType subtype named $label; did you forget to register a subtype? $jsonElement"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.Companion$*</ID>
