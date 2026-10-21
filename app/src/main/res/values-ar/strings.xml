@@ -520,9 +520,9 @@
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
   <string name="check_category_notification_title">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_edit_summary">جارٍ طلب التحقق من التصنيف</string>
-  <string name="check_category_success_title">تم طلب التحقق من التصنيف</string>
+  <string name="check_category_success_title">طُلب التحقق من التصنيف</string>
   <string name="check_category_failure_title">طلب التحقق من التصنيف لم ينجح</string>
-  <string name="check_category_success_message">تم طلب التحقق من التصنيف %1$s</string>
+  <string name="check_category_success_message">طُلب التحقق من التصنيف %1$s</string>
   <string name="check_category_failure_message">لا يمكن طلب التحقق من التصنيف %1$s</string>
   <string name="check_category_toast">جارٍ طلب التحقق من التصنيف %1$s</string>
   <string name="nominate_for_deletion_done">تم</string>
