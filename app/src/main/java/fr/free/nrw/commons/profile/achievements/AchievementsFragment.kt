@@ -534,6 +534,12 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      */
     private fun checkAccount(): Boolean {
         val currentAccount = sessionManager.currentAccount
+        // Allow viewing another user's public profile without requiring login
+        if (!userName.isNullOrBlank() &&
+            userName != sessionManager.userName
+        ) {
+            return true
+        }
         if (currentAccount == null) {
             Timber.d("Current account is null")
             showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))

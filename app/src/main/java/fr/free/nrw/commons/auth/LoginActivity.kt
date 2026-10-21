@@ -474,9 +474,11 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun showMessage(message: String?, @ColorRes colorResId: Int) = with(binding!!) {
-        errorMessage.text = message
-        errorMessage.setTextColor(ContextCompat.getColor(this@LoginActivity, colorResId))
-        errorMessageContainer.visibility = View.VISIBLE
+        if(!message.isNullOrBlank()){
+            errorMessage.text = message
+            errorMessage.setTextColor(ContextCompat.getColor(this@LoginActivity, colorResId))
+            errorMessageContainer.visibility = View.VISIBLE
+        }
     }
 
     private fun onTextChanged(text: String) {

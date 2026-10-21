@@ -210,6 +210,10 @@ class NearbyParentFragmentPresenter
             nearbyParentFragmentView.setBottomSheetDetailsSmaller()
             return true
         }
+        else if(nearbyParentFragmentView.isNearbyFilterListVisible()){
+            nearbyParentFragmentView.hideNearbyFilterList()
+            return true
+        }
         return false
     }
 

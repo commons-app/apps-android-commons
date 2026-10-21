@@ -1,5 +1,32 @@
 # Wikimedia Commons for Android
 
+## v6.8.0
+
+### What's changed
+- The app now detects sensitive content in images automatically and lets you blur it with one tap
+- Deleted categories no longer appear in category suggestions
+- Captions in multiple languages now work correctly
+- Improved handling of HTTP 429s from the server
+- Various bug fixes and improvements
+
+## v6.7.0
+
+### What's changed
+- Users can now blur sensitive parts of images from within the app before uploading them to Commons
+- Minor bug fixes
+
+## v6.6.0
+
+### What's changed
+- Bookmarks display correctly and are no longer empty
+- Rotated photos now display without border artifacts
+- Support for Android API level 36
+- Upload activity no longer shows stale edited images
+- Nearby map pins render correctly, with red pins appearing above green pins for better visibility
+- Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.5.0...v6.6.0
+
 ## v6.5.0
 
 ### What's changed
