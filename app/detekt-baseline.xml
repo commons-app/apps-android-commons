@@ -23,7 +23,7 @@
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
     <ID>CyclomaticComplexMethod:ImageLoader.kt$ImageLoader$fun queryAndSetView( holder: ImageViewHolder, image: Image, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, uploadedContributionsList: List&lt;Contribution&gt;, )</ID>
-    <ID>CyclomaticComplexMethod:MediaDetailFragment.kt$@Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
+    <ID>CyclomaticComplexMethod:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
     <ID>CyclomaticComplexMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>CyclomaticComplexMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun filterMarkersByLabels( selectedLabels: List&lt;Label&gt;?, filterForPlaceState: Boolean, filterForAllNoneType: Boolean )</ID>
     <ID>CyclomaticComplexMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onBottomSheetItemClick(view: View?, position: Int)</ID>
@@ -91,7 +91,7 @@
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$//TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
-    <ID>FunctionNaming:MediaDetailFragment.kt$@Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
+    <ID>FunctionNaming:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
     <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
@@ -136,11 +136,11 @@
     <ID>LongMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
     <ID>LongMethod:ImageLoader.kt$ImageLoader$fun queryAndSetView( holder: ImageViewHolder, image: Image, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, uploadedContributionsList: List&lt;Contribution&gt;, )</ID>
     <ID>LongMethod:LocationPickerActivity.kt$LocationPickerActivity$@SuppressLint("ClickableViewAccessibility") override fun onCreate(savedInstanceState: Bundle?)</ID>
-    <ID>LongMethod:MediaDetailFragment.kt$@Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
-    <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View</ID>
+    <ID>LongMethod:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
+    <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View</ID>
     <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$private fun extractCaptionDescription(s: String)</ID>
     <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
-    <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)</ID>
+    <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onViewCreated(view: View, savedInstanceState: Bundle?)</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$private fun passInfoToSheet(place: Place)</ID>
@@ -162,7 +162,7 @@
     <ID>LongMethod:WikidataFeedback.kt$WikidataFeedback$@SuppressLint("CheckResult") override fun onCreate(savedInstanceState: Bundle?)</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onDownSwiped()</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onUpSwiped()</ID>
-    <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable? )</ID>
+    <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable?, )</ID>
     <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray )</ID>
     <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean )</ID>
     <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int )</ID>
@@ -759,7 +759,6 @@
     <ID>MaxLineLength:ContributionViewHolderUnitTests.kt$ContributionViewHolderUnitTests$contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)</ID>
     <ID>MaxLineLength:CsrfTokenClient.kt$CsrfTokenClient.&lt;no name provided&gt;$override</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled</ID>
-    <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$if</ID>
     <ID>MaxLineLength:CustomSelectorActivity.kt$CustomSelectorActivity$private</ID>
     <ID>MaxLineLength:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact(), uploadableFile.getFilePath())</ID>
     <ID>MaxLineLength:CustomSelectorViewModelFactory.kt$CustomSelectorViewModelFactory$override</ID>
@@ -812,19 +811,11 @@
     <ID>MaxLineLength:LoginClient.kt$LoginClient$val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")</ID>
     <ID>MaxLineLength:Media.kt$Media$@Deprecated("Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author.")</ID>
     <ID>MaxLineLength:MediaClient.kt$MediaClient$*</ID>
-    <ID>MaxLineLength:MediaClientTest.kt$MediaClientTest$private</ID>
     <ID>MaxLineLength:MediaConverterTest.kt$MediaConverterTest$`when`(metadata.artist()).thenReturn("&lt;a href=\"//commons.wikimedia.org/wiki/User:Foo_Bar\" title=\"Foo Bar\"&gt;Foo Bar&lt;/a&gt;")</ID>
     <ID>MaxLineLength:MediaConverterTest.kt$MediaConverterTest$`when`(metadata.artist()).thenReturn("&lt;a href=\"/w/index.php?title=User:Foo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\"&gt;Foo&lt;/a&gt;")</ID>
     <ID>MaxLineLength:MediaDataExtractor.kt$MediaDataExtractor$fun checkDeletionRequestExists(media: Media)</ID>
-    <ID>MaxLineLength:MediaDetailFragment.kt$MediaDetailFragment$labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none))</ID>
-    <ID>MaxLineLength:MediaDetailFragment.kt$MediaDetailFragment$requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener)</ID>
-    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated)."</ID>
-    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.)."</ID>
-    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n"</ID>
-    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling&lt;br/&gt;\n{{On Wikidata|Q17549757}}")</ID>
-    <ID>MaxLineLength:MediaDetailInterface.kt$MediaDetailInterface$@GET(WikidataConstants.MW_API_PREFIX + "action=query&amp;prop=revisions&amp;rvprop=content|timestamp&amp;rvlimit=1&amp;converttitles=")</ID>
     <ID>MaxLineLength:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$// Enable default set of actions, then re-enable different set of actions only if it is a failed contrib</ID>
-    <ID>MaxLineLength:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$// Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 </ID>
+    <ID>MaxLineLength:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$// Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567</ID>
     <ID>MaxLineLength:MediaInterface.kt$MediaInterface$*</ID>
     <ID>MaxLineLength:MigrationTest.kt$MigrationTest$legacyDb.execSQL("INSERT INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES ('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')")</ID>
     <ID>MaxLineLength:MigrationTest.kt$MigrationTest$legacyDb.execSQL("INSERT INTO categories (name, description, thumbnail, last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)")</ID>
@@ -910,7 +901,7 @@
     <ID>NestedBlockDepth:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
     <ID>NestedBlockDepth:LogsSender.kt$LogsSender$@Throws(IOException::class) private fun writeLogToZipFile(metaData: ByteArray, zipFile: File)</ID>
     <ID>NestedBlockDepth:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
-    <ID>NestedBlockDepth:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)</ID>
+    <ID>NestedBlockDepth:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>NestedBlockDepth:MwQueryResult.kt$MwQueryResult$private fun resolveRedirectedTitles()</ID>
     <ID>NestedBlockDepth:NearbyParentFragment.kt$NearbyParentFragment$override fun recenterMap(currentLatLng: LatLng?)</ID>
     <ID>NestedBlockDepth:OkHttpConnectionFactory.kt$UnsuccessfulResponseInterceptor$@Throws(IOException::class) override fun intercept(chain: Interceptor.Chain): Response</ID>
@@ -983,7 +974,7 @@
     <ID>ReturnCount:MainActivity.kt$MainActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:MainActivity.kt$MainActivity$private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun chooseDescription(media: Media): String?</ID>
-    <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption(idAndCaption: IdAndLabels, locale: String): String?</ID>
+    <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption( idAndCaption: IdAndLabels, locale: String, ): String?</ID>
     <ID>ReturnCount:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:MwQueryPage.kt$@VisibleForTesting fun checkWhetherFileIsUsedInWikis( globalUsages: List&lt;GlobalUsage&gt;?, fileUsages: List&lt;MwQueryPage.FileUsage&gt;? ): Boolean</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$@DrawableRes private fun getIconFor(place: Place, isBookmarked: Boolean): Int</ID>
@@ -1010,7 +1001,7 @@
     <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
     <ID>SpreadOperator:DatabaseUtils.kt$(*elements)</ID>
     <ID>SpreadOperator:DownloadUtils.kt$DownloadUtils$( activity, { enqueueRequest(activity, req) }, { Toast .makeText( activity, R.string.download_failed_we_cannot_download_the_file_without_storage_permission, Toast.LENGTH_SHORT, ).show() }, R.string.storage_permission, R.string.write_storage_permission_rationale, *PermissionUtils.PERMISSIONS_STORAGE, )</ID>
-    <ID>SpreadOperator:MediaDetailFragment.kt$MediaDetailFragment$( requireActivity(), { launchZoomActivityAfterPermissionCheck(view) }, R.string.storage_permission_title, R.string.read_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
+    <ID>SpreadOperator:MediaDetailFragment.kt$MediaDetailFragment$( requireActivity(), { launchZoomActivityAfterPermissionCheck(view) }, R.string.storage_permission_title, R.string.read_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:PageTitle.kt$PageTitle$(*Locale.getISOLanguages())</ID>
     <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray() )</ID>
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
@@ -1104,7 +1095,7 @@
     <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException("tried to delete item with no content URI")</ID>
     <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException(e)</ID>
     <ID>TooGenericExceptionThrown:UploadClient.kt$UploadClient$throw Exception(exception.errorCode)</ID>
-    <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=${callerContext}", e)</ID>
+    <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:AchievementsFragment.kt$AchievementsFragment : CommonsDaggerSupportFragment</ID>
@@ -1222,7 +1213,7 @@
     <ID>UnusedPrivateMember:ImageInfo.kt$ImageInfo$private fun updateThumbUrl()</ID>
     <ID>UnusedPrivateMember:ImageUtils.kt$ImageUtils$@JvmStatic private fun showSettingWallpaperProgressBar(context: Context)</ID>
     <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?)</ID>
-    <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateCaptions( mediaDetail: UploadMediaDetail, updatedCaptions: MutableMap&lt;String, String&gt; )</ID>
+    <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateCaptions( mediaDetail: UploadMediaDetail, updatedCaptions: MutableMap&lt;String, String&gt;, )</ID>
     <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateToDoWarning()</ID>
     <ID>UnusedPrivateMember:MediaLicenseFragment.kt$MediaLicenseFragment$private fun setTextViewHTML(textView: TextView, text: String)</ID>
     <ID>UnusedPrivateMember:MoreBottomSheetFragment.kt$MoreBottomSheetFragment$private fun showAlertDialog()</ID>
