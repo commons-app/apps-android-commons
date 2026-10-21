@@ -79,8 +79,11 @@ class CategoriesPresenter
                             view.showError(R.string.error_loading_categories)
                             val mwException = t as? MwIOException
                             view.showErrorDialog(
-                                if (mwException == null) ""
-                                else "\n${mwException.error.title} / ${mwException.error.details}"
+                                if (mwException == null) {
+                                    ""
+                                } else {
+                                    "\n${mwException.error.title} / ${mwException.error.details}"
+                                },
                             )
                             Timber.e(t)
                         },
@@ -145,7 +148,8 @@ class CategoriesPresenter
          * @return
          */
         private fun getImageTitleList(): List<String> =
-            repository.getUploads()
+            repository
+                .getUploads()
                 .map { it.uploadMediaDetails[0].captionText }
                 .filterNot { TextUtils.isEmpty(it) }
 
@@ -203,8 +207,11 @@ class CategoriesPresenter
                             view.showError(R.string.error_loading_categories)
                             val mwException = t as? MwIOException
                             view.showErrorDialog(
-                                if (mwException == null) ""
-                                else "\n${mwException.error.title} / ${mwException.error.details}"
+                                if (mwException == null) {
+                                    ""
+                                } else {
+                                    "\n${mwException.error.title} / ${mwException.error.details}"
+                                },
                             )
                             Timber.e(t)
                         },
@@ -231,14 +238,12 @@ class CategoriesPresenter
         ) {
             // check if view.existingCategories is null
             if (
-                repository.getSelectedCategories().isNotEmpty()
-                        ||
+                repository.getSelectedCategories().isNotEmpty() ||
                 (
-                view.getExistingCategories() != null
-                        &&
-                repository.getSelectedExistingCategories().size
+                    view.getExistingCategories() != null &&
+                        repository.getSelectedExistingCategories().size
                         !=
-                view.getExistingCategories()?.size
+                        view.getExistingCategories()?.size
                 )
             ) {
                 val selectedCategories: MutableList<String> =
@@ -325,7 +330,8 @@ class CategoriesPresenter
 
         override fun selectCategories() {
             compositeDisposable.add(
-                repository.getPlaceCategories()
+                repository
+                    .getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewCategories),
