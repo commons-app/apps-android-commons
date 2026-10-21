@@ -56,12 +56,12 @@ class SignupActivityTest {
         Assert.assertEquals(
             "New User",
             SignupActivity.extractUsername(
-                "GeoIP=XX; commonswikiUserName=New_User; commonswikiSession=abc"
-            )
+                "GeoIP=XX; commonswikiUserName=New_User; commonswikiSession=abc",
+            ),
         )
         Assert.assertEquals(
             "Ünïcode User",
-            SignupActivity.extractUsername("commonswikiUserName=%C3%9Cn%C3%AFcode+User")
+            SignupActivity.extractUsername("commonswikiUserName=%C3%9Cn%C3%AFcode+User"),
         )
     }
 
@@ -75,8 +75,8 @@ class SignupActivityTest {
     fun testOtherPagesDoNotFinishSignup() {
         Assert.assertFalse(
             activity.handleSignupSuccessIfNeeded(
-                "https://commons.m.wikimedia.org/wiki/Special:CreateAccount"
-            )
+                "https://commons.m.wikimedia.org/wiki/Special:CreateAccount",
+            ),
         )
         Assert.assertFalse(activity.isFinishing)
     }
@@ -84,7 +84,7 @@ class SignupActivityTest {
     @Test
     fun testSuccessRedirectFinishesSignup() {
         Assert.assertTrue(
-            activity.handleSignupSuccessIfNeeded(BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL)
+            activity.handleSignupSuccessIfNeeded(BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL),
         )
         Assert.assertTrue(activity.isFinishing)
         Assert.assertEquals(Activity.RESULT_OK, shadowOf(activity).resultCode)
@@ -94,19 +94,20 @@ class SignupActivityTest {
     fun testSignupSuccessUrlDetection() {
         Assert.assertTrue(
             SignupActivity.isSignupSuccessUrl(
-                "https://commons.wikimedia.org/w/index.php?title=Main_Page&welcome=yes&accountJustCreated=1"
-            )
+                "https://commons.wikimedia.org/w/index.php?title=Main_Page&welcome=yes&accountJustCreated=1",
+            ),
         )
         Assert.assertTrue(
-            SignupActivity.isSignupSuccessUrl(BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL)
+            SignupActivity.isSignupSuccessUrl(BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL),
         )
         Assert.assertFalse(
             SignupActivity.isSignupSuccessUrl(
-                "https://auth.wikimedia.org/commonswiki/wiki/Special:CreateAccount?returnto=Main+Page&returntoquery=welcome%3Dyes"
-            )
+                "https://auth.wikimedia.org/commonswiki/wiki/Special:CreateAccount" +
+                    "?returnto=Main+Page&returntoquery=welcome%3Dyes",
+            ),
         )
         Assert.assertFalse(
-            SignupActivity.isSignupSuccessUrl("https://example.org/?accountJustCreated=1")
+            SignupActivity.isSignupSuccessUrl("https://example.org/?accountJustCreated=1"),
         )
     }
 }

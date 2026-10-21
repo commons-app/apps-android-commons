@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.AndroidRuntimeException
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -71,8 +72,8 @@ class SignupActivity : BaseActivity() {
     private fun sessionUsername(url: String): String? =
         try {
             extractUsername(CookieManager.getInstance().getCookie(url))
-        } catch (e: Exception) {
-            // CookieManager can throw if the WebView provider is unavailable
+        } catch (e: AndroidRuntimeException) {
+            // CookieManager throws this if the WebView provider is unavailable
             Timber.e(e, "Unable to read WebView cookies")
             null
         }
@@ -85,9 +86,13 @@ class SignupActivity : BaseActivity() {
      */
     @VisibleForTesting
     fun handleSignupSuccessIfNeeded(url: String?): Boolean {
-        if (signupCompleted) return true
-        if (url == null || !isSignupSuccessUrl(url)) return false
+        if (!signupCompleted && url != null && isSignupSuccessUrl(url)) {
+            completeSignup(url)
+        }
+        return signupCompleted
+    }
 
+    private fun completeSignup(url: String) {
         Timber.d("Signup completed, URL is: %s", url)
         signupCompleted = true
         webView?.stopLoading()
@@ -99,7 +104,6 @@ class SignupActivity : BaseActivity() {
             }
         })
         finish()
-        return true
     }
 
     private inner class MyWebViewClient : WebViewClient() {
@@ -137,11 +141,16 @@ class SignupActivity : BaseActivity() {
         fun isSignupSuccessUrl(url: String): Boolean {
             if (url == BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL) return true
             val uri = Uri.parse(url)
-            val host = uri.host ?: return false
-            if (!WIKIMEDIA_HOST_REGEX.containsMatchIn(host)) return false
-            return uri.getQueryParameter("accountJustCreated") == "1" ||
-                uri.getQueryParameter("welcome") == "yes"
+            // Check the host first, as getQueryParameter throws for opaque URLs like about:blank
+            return isWikimediaHost(uri) && hasSignupSuccessParameter(uri)
         }
+
+        private fun isWikimediaHost(uri: Uri): Boolean =
+            uri.host?.let { WIKIMEDIA_HOST_REGEX.containsMatchIn(it) } == true
+
+        private fun hasSignupSuccessParameter(uri: Uri): Boolean =
+            uri.getQueryParameter("accountJustCreated") == "1" ||
+                uri.getQueryParameter("welcome") == "yes"
 
         /**
          * Extracts the logged in username from a WebView cookie string, using the
@@ -154,6 +163,8 @@ class SignupActivity : BaseActivity() {
             val username = try {
                 URLDecoder.decode(rawValue, "UTF-8")
             } catch (e: IllegalArgumentException) {
+                // Not valid percent-encoding, so use the cookie value as it is
+                Timber.w(e, "Unable to decode username cookie")
                 rawValue
             }.replace('_', ' ').trim()
             return username.ifEmpty { null }
