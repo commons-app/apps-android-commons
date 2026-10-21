@@ -794,9 +794,11 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      * @param longitude new longitude
      */
     fun editLocation(latitude: String, longitude: String, zoom: Double) {
-        editableUploadItem!!.gpsCoords!!.decLatitude = latitude.toDouble()
-        editableUploadItem!!.gpsCoords!!.decLongitude = longitude.toDouble()
-        editableUploadItem!!.gpsCoords!!.decimalCoords = "$latitude|$longitude"
+        val roundedLat = roundCoordinate(latitude.toDouble())
+        val roundedLon = roundCoordinate(longitude.toDouble())
+        editableUploadItem!!.gpsCoords!!.decLatitude = roundedLat.toDouble()
+        editableUploadItem!!.gpsCoords!!.decLongitude = roundedLon.toDouble()
+        editableUploadItem!!.gpsCoords!!.decimalCoords = "$roundedLat|$roundedLon"
         editableUploadItem!!.gpsCoords!!.imageCoordsExists = true
         editableUploadItem!!.gpsCoords!!.zoomLevel = zoom
 
@@ -947,6 +949,17 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         fun deletePictureAtIndex(index: Int)
 
         fun changeThumbnail(index: Int, uri: String)
+    }
+
+    /**
+     * Rounds a coordinate to 6 decimal places (precision of ~0.11 meters).
+     * This avoids false precision from GPS/map-picker which aren't that accurate.
+     *
+     * @param coordinate the coordinate value to round
+     * @return coordinate string rounded to 6 decimal places
+     */
+    private fun roundCoordinate(coordinate: Double): String {
+        return String.format(Locale.US, "%.6f", coordinate)
     }
 
     companion object {
