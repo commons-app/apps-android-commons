@@ -44,8 +44,8 @@ import javax.inject.Singleton
         ContributionsProvidesModule::class,
         SearchModule::class,
         DepictionModule::class,
-        CategoriesModule::class
-    ]
+        CategoriesModule::class,
+    ],
 )
 interface CommonsApplicationComponent : AndroidInjector<ApplicationlessInjection> {
     fun inject(application: CommonsApplication)
