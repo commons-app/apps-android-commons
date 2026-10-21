@@ -56,12 +56,34 @@ class NetworkingModule {
     @Singleton
     fun provideOkHttpClient(
         context: Context,
-        httpLoggingInterceptor: HttpLoggingInterceptor
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        sessionManager: SessionManager
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(120, TimeUnit.SECONDS)
         .writeTimeout(120, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(CommonHeaderRequestInterceptor())
+        .addInterceptor { chain ->
+            val request = chain.request()
+            val requestBuilder = request.newBuilder()
+            val accessToken = sessionManager.getAccessToken()
+
+            val allowedHosts = setOfNotNull(
+                BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
+                BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
+                "meta.wikimedia.org",
+                "meta.wikimedia.beta.wmflabs.org"
+            )
+
+            if (!accessToken.isNullOrEmpty() &&
+                request.header("Authorization") == null &&
+                request.url.isHttps &&
+                request.url.host in allowedHosts
+            ) {
+                requestBuilder.header("Authorization", "Bearer $accessToken")
+            }
+            chain.proceed(requestBuilder.build())
+        }
         .readTimeout(120, TimeUnit.SECONDS)
         .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
         .build()

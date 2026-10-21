@@ -53,6 +53,30 @@ class SessionManager @Inject constructor(
         }
     }
 
+    fun invalidateOAuthToken() {
+        currentAccount?.let { account ->
+            accountManager.invalidateAuthToken(ACCOUNT_TYPE, accountManager.peekAuthToken(account, KEY_OAUTH2))
+        }
+    }
+
+    fun updateOAuthAccount(username: String, accessToken: String, refreshToken: String) {
+        var account = currentAccount
+        if (account == null || TextUtils.isEmpty(account.name) || account.name != username) {
+            removeAccount()
+            account = Account(username, ACCOUNT_TYPE)
+            accountManager.addAccountExplicitly(account, null, null)
+            _currentAccount = account
+        }
+
+        accountManager.setAuthToken(account, KEY_OAUTH2, accessToken)
+        accountManager.setUserData(account, KEY_REFRESH_TOKEN, refreshToken)
+        setUserLoggedIn(true)
+    }
+
+    fun getAccessToken(): String? {
+        return currentAccount?.let { accountManager.peekAuthToken(it, KEY_OAUTH2) }
+    }
+
     fun doesAccountExist(): Boolean =
         currentAccount != null
 
@@ -69,6 +93,7 @@ class SessionManager @Inject constructor(
         Observable.empty<Any>()
             .doOnComplete {
                 removeAccount()
+                invalidateOAuthToken()
                 _currentAccount = null
             }
     )
@@ -91,5 +116,10 @@ class SessionManager @Inject constructor(
                 accountManager.removeAccount(it, null, null)
             }
         }
+    }
+
+    companion object {
+        const val KEY_OAUTH2 = "OAuth2"
+        const val KEY_REFRESH_TOKEN = "refresh_token"
     }
 }
