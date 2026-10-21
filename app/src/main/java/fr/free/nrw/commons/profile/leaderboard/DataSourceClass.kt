@@ -18,6 +18,7 @@ import java.util.Objects
 class DataSourceClass(
     private val okHttpJsonApiClient: OkHttpJsonApiClient,
     private val sessionManager: SessionManager,
+    private val userName: String?,
     private val duration: String?,
     private val category: String?,
     private val limit: Int,
@@ -31,7 +32,7 @@ class DataSourceClass(
         params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, LeaderboardList?>
     ) {
         compositeDisposable.add(okHttpJsonApiClient.getLeaderboard(
-            sessionManager.currentAccount?.name,
+            userName ?: sessionManager.currentAccount?.name,
             duration,
             category,
             limit.toString(),
@@ -58,7 +59,7 @@ class DataSourceClass(
         params: LoadParams<Int>, callback: LoadCallback<Int, LeaderboardList?>
     ) {
         compositeDisposable.add(okHttpJsonApiClient.getLeaderboard(
-            Objects.requireNonNull<Account?>(sessionManager.currentAccount).name,
+            userName ?: sessionManager.currentAccount?.name,
             duration,
             category,
             limit.toString(),

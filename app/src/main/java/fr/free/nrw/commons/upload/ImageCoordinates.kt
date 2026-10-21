@@ -5,6 +5,7 @@ import fr.free.nrw.commons.location.LatLng
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
+import java.util.Locale
 
 /**
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
@@ -71,7 +72,7 @@ class ImageCoordinates internal constructor(
                 }
             }
             if (!(decLatitude == 0.0 && decLongitude == 0.0)) {
-                decimalCoords = "$decLatitude|$decLongitude"
+                decimalCoords = "${roundCoordinate(decLatitude)}|${roundCoordinate(decLongitude)}"
                 // If image has EXIF data, extract image coords
                 imageCoordsExists = true
                 Timber.d("EXIF data has location info")
@@ -79,7 +80,7 @@ class ImageCoordinates internal constructor(
                 decLatitude = inAppPictureLocation.latitude
                 decLongitude = inAppPictureLocation.longitude
                 if (!(decLatitude == 0.0 && decLongitude == 0.0)) {
-                    decimalCoords = "$decLatitude|$decLongitude"
+                    decimalCoords = "${roundCoordinate(decLatitude)}|${roundCoordinate(decLongitude)}"
                     imageCoordsExists = true
                     Timber.d("Image coordinates recorded while using in-app camera")
                 }
@@ -104,4 +105,15 @@ class ImageCoordinates internal constructor(
         }
 
     private fun evaluateExpression(dm: String) = dm.split("/").let { it[0].toDouble() / it[1].toDouble() }
+
+    /**
+     * Rounds a coordinate to 6 decimal places (precision of ~0.11 meters).
+     * This avoids false precision from GPS/map-picker which aren't that accurate.
+     *
+     * @param coordinate the coordinate value to round
+     * @return coordinate rounded to 6 decimal places
+     */
+    private fun roundCoordinate(coordinate: Double): String {
+        return String.format(Locale.US, "%.6f", coordinate)
+    }
 }
