@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.auth.login
 
 import com.google.gson.annotations.SerializedName
-import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.EmailAuthResult
+import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
