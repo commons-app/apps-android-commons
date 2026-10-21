@@ -118,6 +118,7 @@
     <ID>LargeClass:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests</ID>
     <ID>LargeClass:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>LargeClass:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
+    <ID>LargeClass:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>LargeClass:UploadMediaDetailFragment.kt$UploadMediaDetailFragment : UploadBaseFragmentViewEventListener</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
@@ -149,6 +150,7 @@
     <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
+    <ID>LongMethod:UploadActivity.kt$UploadActivity$fun proceedWithSetup()</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>LongMethod:UploadClient.kt$UploadClient$@Throws(IOException::class) fun uploadFileToStash( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, ): Observable&lt;StashUploadResult&gt;</ID>
     <ID>LongMethod:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$fun bind(position: Int)</ID>
