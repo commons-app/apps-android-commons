@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
+import fr.free.nrw.commons.upload.FileUtils
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
@@ -212,16 +213,28 @@ object FilePicker : Constants {
         }
     }
 
+    /**
+     * Copies the files shared from another app so that they can be uploaded. Files in a format
+     * that Commons does not accept, such as RAW photos shared along with their JPEG versions, are
+     * skipped before they are copied.
+     *
+     * @param data The share intent
+     * @param activity The activity that received the share
+     * @return The uploadable files and the number of skipped files
+     */
     @JvmStatic
-    fun handleExternalImagesPicked(data: Intent?, activity: Activity): List<UploadableFile> {
+    fun handleExternalImagesPicked(data: Intent?, activity: Activity): ExternalImagesResult {
         return try {
-            getFilesFromGalleryPictures(data, activity)
+            val (supportedUris, unsupportedUris) = getUrisFromIntent(data).partition { uri ->
+                FileUtils.isSupportedFileType(activity, uri)
+            }
+            ExternalImagesResult(getFilesFromUris(supportedUris, activity), unsupportedUris.size)
         } catch (e: IOException) {
             e.printStackTrace()
-            emptyList()
+            ExternalImagesResult(emptyList(), 0)
         } catch (e: SecurityException) {
             e.printStackTrace()
-            emptyList()
+            ExternalImagesResult(emptyList(), 0)
         }
     }
 
@@ -421,20 +434,29 @@ object FilePicker : Constants {
         data: Intent?,
         activity: Activity
     ): List<UploadableFile> {
-        val files = mutableListOf<UploadableFile>()
-        val clipData = data?.clipData
-        if (clipData == null) {
-            val uri = data?.data
-            var file = PickedFiles.pickedExistingPicture(activity, uri!!)
-            file = handleHeicFile(file, activity)
-            files.add(file)
-        } else {
-            for (i in 0 until clipData.itemCount) {
-                val uri = clipData.getItemAt(i).uri
-                var file = PickedFiles.pickedExistingPicture(activity, uri)
-                file = handleHeicFile(file, activity)
-                files.add(file)
-            }
+        return getFilesFromUris(getUrisFromIntent(data), activity)
+    }
+
+    /**
+     * Returns the uris of the files in the intent, from its clip data if present
+     */
+    @JvmStatic
+    private fun getUrisFromIntent(data: Intent?): List<Uri> {
+        val clipData = data?.clipData ?: return listOf(data?.data!!)
+        return (0 until clipData.itemCount).map { clipData.getItemAt(it).uri }
+    }
+
+    /**
+     * Copies the files behind the given uris so that they can be uploaded
+     */
+    @Throws(IOException::class, SecurityException::class)
+    @JvmStatic
+    private fun getFilesFromUris(
+        uris: List<Uri>,
+        activity: Activity
+    ): List<UploadableFile> {
+        val files = uris.map { uri ->
+            handleHeicFile(PickedFiles.pickedExistingPicture(activity, uri), activity)
         }
 
         if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {

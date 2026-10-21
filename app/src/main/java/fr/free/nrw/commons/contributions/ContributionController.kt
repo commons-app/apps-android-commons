@@ -12,6 +12,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.filepicker.DefaultCallback
+import fr.free.nrw.commons.filepicker.ExternalImagesResult
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.FilePicker.HandleActivityResult
 import fr.free.nrw.commons.filepicker.FilePicker.configuration
@@ -377,7 +378,7 @@ class ContributionController @Inject constructor(@param:Named("default_preferenc
     fun handleExternalImagesPicked(
         activity: Activity,
         data: Intent?
-    ): List<UploadableFile> {
+    ): ExternalImagesResult {
         return handleExternalImagesPicked(data, activity)
     }
 
