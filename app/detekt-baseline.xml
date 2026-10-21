@@ -101,7 +101,7 @@
     <ID>FunctionParameterNaming:UpdateAvatarApiTest.kt$UpdateAvatarApiTest.Companion$`is`: InputStream</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate )</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!! ), getExtraShortDateString(endDate!!) )</ID>
-    <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName )</ID>
+    <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
     <ID>ImplicitDefaultLocale:Description.kt$Description.Companion$String.format( "{{%s|1=%s}}", description.languageCode, description.descriptionText, )</ID>
     <ID>ImplicitDefaultLocale:FileUtils.kt$FileUtils$String.format("%40s", output)</ID>
     <ID>ImplicitDefaultLocale:Media.kt$Media$String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)</ID>
@@ -118,6 +118,7 @@
     <ID>LargeClass:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests</ID>
     <ID>LargeClass:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>LargeClass:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
+    <ID>LargeClass:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>LargeClass:UploadMediaDetailFragment.kt$UploadMediaDetailFragment : UploadBaseFragmentViewEventListener</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
@@ -149,6 +150,7 @@
     <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View?</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
+    <ID>LongMethod:UploadActivity.kt$UploadActivity$fun proceedWithSetup()</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>LongMethod:UploadClient.kt$UploadClient$@Throws(IOException::class) fun uploadFileToStash( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, ): Observable&lt;StashUploadResult&gt;</ID>
     <ID>LongMethod:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$fun bind(position: Int)</ID>
@@ -934,100 +936,6 @@
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>
-    <ID>NewLineAtEndOfFile:Achievements.kt$fr.free.nrw.commons.profile.achievements.Achievements.kt</ID>
-    <ID>NewLineAtEndOfFile:AchievementsFragment.kt$fr.free.nrw.commons.profile.achievements.AchievementsFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ActivityUtils.kt$fr.free.nrw.commons.utils.ActivityUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:BasicKvStore.kt$fr.free.nrw.commons.kvstore.BasicKvStore.kt</ID>
-    <ID>NewLineAtEndOfFile:BasicKvStoreTest.kt$fr.free.nrw.commons.kvstore.BasicKvStoreTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsRoomEntity.kt$fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomEntity.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsTable.kt$fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsTableTest.kt$fr.free.nrw.commons.db.BookmarkItemsTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkLocationsViewModel.kt$fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkPages.kt$fr.free.nrw.commons.bookmarks.BookmarkPages.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkPictureTableTest.kt$fr.free.nrw.commons.db.BookmarkPictureTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarksLocations.kt$fr.free.nrw.commons.bookmarks.locations.BookmarksLocations.kt</ID>
-    <ID>NewLineAtEndOfFile:CampaignConfig.kt$fr.free.nrw.commons.campaigns.CampaignConfig.kt</ID>
-    <ID>NewLineAtEndOfFile:CampaignResponseDTO.kt$fr.free.nrw.commons.campaigns.CampaignResponseDTO.kt</ID>
-    <ID>NewLineAtEndOfFile:Category.kt$fr.free.nrw.commons.category.Category.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryClickedListener.kt$fr.free.nrw.commons.category.CategoryClickedListener.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryImagesCallback.kt$fr.free.nrw.commons.category.CategoryImagesCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryTableTest.kt$fr.free.nrw.commons.db.CategoryTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ClipboardUtils.kt$fr.free.nrw.commons.utils.ClipboardUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:CommonsLogSender.kt$fr.free.nrw.commons.logging.CommonsLogSender.kt</ID>
-    <ID>NewLineAtEndOfFile:ContributionsModule.kt$fr.free.nrw.commons.contributions.ContributionsModule.kt</ID>
-    <ID>NewLineAtEndOfFile:ContributionsProvidesModule.kt$fr.free.nrw.commons.contributions.ContributionsProvidesModule.kt</ID>
-    <ID>NewLineAtEndOfFile:DefaultCallback.kt$fr.free.nrw.commons.filepicker.DefaultCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:DeleteHelper.kt$fr.free.nrw.commons.delete.DeleteHelper.kt</ID>
-    <ID>NewLineAtEndOfFile:DownloadReceiver.kt$fr.free.nrw.commons.utils.DownloadReceiver.kt</ID>
-    <ID>NewLineAtEndOfFile:EdgeToEdgeUtils.kt$fr.free.nrw.commons.utils.EdgeToEdgeUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:ExceptionAwareThreadPoolExecutor.kt$fr.free.nrw.commons.concurrency.ExceptionAwareThreadPoolExecutor.kt</ID>
-    <ID>NewLineAtEndOfFile:ExceptionHandler.kt$fr.free.nrw.commons.concurrency.ExceptionHandler.kt</ID>
-    <ID>NewLineAtEndOfFile:ExploreFragment.kt$fr.free.nrw.commons.explore.ExploreFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ExploreMapRootFragment.kt$fr.free.nrw.commons.explore.ExploreMapRootFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ExtendedFileProvider.kt$fr.free.nrw.commons.filepicker.ExtendedFileProvider.kt</ID>
-    <ID>NewLineAtEndOfFile:Feedback.kt$fr.free.nrw.commons.feedback.model.Feedback.kt</ID>
-    <ID>NewLineAtEndOfFile:FeedbackContentCreator.kt$fr.free.nrw.commons.feedback.FeedbackContentCreator.kt</ID>
-    <ID>NewLineAtEndOfFile:FeedbackDialog.kt$fr.free.nrw.commons.feedback.FeedbackDialog.kt</ID>
-    <ID>NewLineAtEndOfFile:FilePicker.kt$fr.free.nrw.commons.filepicker.FilePicker.kt</ID>
-    <ID>NewLineAtEndOfFile:FilePickerConfiguration.kt$fr.free.nrw.commons.filepicker.FilePickerConfiguration.kt</ID>
-    <ID>NewLineAtEndOfFile:FileUsagesUiModel.kt$fr.free.nrw.commons.fileusages.FileUsagesUiModel.kt</ID>
-    <ID>NewLineAtEndOfFile:FolderDeletionHelper.kt$fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.kt</ID>
-    <ID>NewLineAtEndOfFile:IdAndLabels.kt$fr.free.nrw.commons.media.IdAndLabels.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageAdapter.kt$fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageFragment.kt$fr.free.nrw.commons.customselector.ui.selector.ImageFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageUtils.kt$fr.free.nrw.commons.utils.ImageUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageUtilsWrapper.kt$fr.free.nrw.commons.utils.ImageUtilsWrapper.kt</ID>
-    <ID>NewLineAtEndOfFile:InMemoryDatabaseTest.kt$fr.free.nrw.commons.db.InMemoryDatabaseTest.kt</ID>
-    <ID>NewLineAtEndOfFile:JsonKvStore.kt$fr.free.nrw.commons.kvstore.JsonKvStore.kt</ID>
-    <ID>NewLineAtEndOfFile:JsonKvStoreTest.kt$fr.free.nrw.commons.kvstore.JsonKvStoreTest.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyValueStore.kt$fr.free.nrw.commons.kvstore.KeyValueStore.kt</ID>
-    <ID>NewLineAtEndOfFile:LatLng.kt$fr.free.nrw.commons.location.LatLng.kt</ID>
-    <ID>NewLineAtEndOfFile:LayoutUtils.kt$fr.free.nrw.commons.utils.LayoutUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:LeaderboardList.kt$fr.free.nrw.commons.profile.leaderboard.LeaderboardList.kt</ID>
-    <ID>NewLineAtEndOfFile:LeaderboardResponse.kt$fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:LengthUtils.kt$fr.free.nrw.commons.utils.LengthUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:LicenseAdapter.kt$fr.free.nrw.commons.upload.license.LicenseAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPicker.kt$fr.free.nrw.commons.locationpicker.LocationPicker.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPickerConstants.kt$fr.free.nrw.commons.locationpicker.LocationPickerConstants.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPickerViewModel.kt$fr.free.nrw.commons.locationpicker.LocationPickerViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationUpdateListener.kt$fr.free.nrw.commons.location.LocationUpdateListener.kt</ID>
-    <ID>NewLineAtEndOfFile:LogLevelSettableTree.kt$fr.free.nrw.commons.logging.LogLevelSettableTree.kt</ID>
-    <ID>NewLineAtEndOfFile:LogUtils.kt$fr.free.nrw.commons.logging.LogUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaAttributionUtil.kt$fr.free.nrw.commons.utils.MediaAttributionUtil.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaAttributionUtilTest.kt$fr.free.nrw.commons.utils.MediaAttributionUtilTest.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaDetailFragment.kt$fr.free.nrw.commons.media.MediaDetailFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MigrationTest.kt$fr.free.nrw.commons.db.MigrationTest.kt</ID>
-    <ID>NewLineAtEndOfFile:MimeTypeMapWrapper.kt$fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.kt</ID>
-    <ID>NewLineAtEndOfFile:MoreBottomSheetFragment.kt$fr.free.nrw.commons.navtab.MoreBottomSheetFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MoreBottomSheetLoggedOutFragment.kt$fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MultiGestureListener.kt$fr.free.nrw.commons.media.zoomControllers.zoomable.MultiGestureListener.kt</ID>
-    <ID>NewLineAtEndOfFile:MwErrorResponse.kt$fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:MwLegacyServiceError.kt$fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError.kt</ID>
-    <ID>NewLineAtEndOfFile:MwQueryPageTest.kt$fr.free.nrw.commons.wikidata.mwapi.MwQueryPageTest.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTab.kt$fr.free.nrw.commons.navtab.NavTab.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabFragmentPagerAdapter.kt$fr.free.nrw.commons.navtab.NavTabFragmentPagerAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabLayout.kt$fr.free.nrw.commons.navtab.NavTabLayout.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabLoggedOut.kt$fr.free.nrw.commons.navtab.NavTabLoggedOut.kt</ID>
-    <ID>NewLineAtEndOfFile:NearbyQueryParams.kt$fr.free.nrw.commons.nearby.model.NearbyQueryParams.kt</ID>
-    <ID>NewLineAtEndOfFile:NearbyUtil.kt$fr.free.nrw.commons.nearby.NearbyUtil.kt</ID>
-    <ID>NewLineAtEndOfFile:OkHttpJsonApiClientTests.kt$fr.free.nrw.commons.OkHttpJsonApiClientTests.kt</ID>
-    <ID>NewLineAtEndOfFile:OnCategoriesSaveHandler.kt$fr.free.nrw.commons.category.OnCategoriesSaveHandler.kt</ID>
-    <ID>NewLineAtEndOfFile:OnFeedbackSubmitCallback.kt$fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:PageProperties.kt$fr.free.nrw.commons.wikidata.model.page.PageProperties.kt</ID>
-    <ID>NewLineAtEndOfFile:ProfileActivity.kt$fr.free.nrw.commons.profile.ProfileActivity.kt</ID>
-    <ID>NewLineAtEndOfFile:RandomAccessFileExifWriter.kt$fr.free.nrw.commons.utils.RandomAccessFileExifWriter.kt</ID>
-    <ID>NewLineAtEndOfFile:RandomAccessFileExifWriterTest.kt$fr.free.nrw.commons.utils.RandomAccessFileExifWriterTest.kt</ID>
-    <ID>NewLineAtEndOfFile:RecentLanguagesTableTest.kt$fr.free.nrw.commons.db.RecentLanguagesTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:RecentSearchesTableTest.kt$fr.free.nrw.commons.db.RecentSearchesTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ThreadPoolService.kt$fr.free.nrw.commons.concurrency.ThreadPoolService.kt</ID>
-    <ID>NewLineAtEndOfFile:TimeProvider.kt$fr.free.nrw.commons.utils.TimeProvider.kt</ID>
-    <ID>NewLineAtEndOfFile:UpdateAvatarResponse.kt$fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadMediaDetailFragmentUnitTest.kt$fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragmentUnitTest.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadMediaDetailInputFilter.kt$fr.free.nrw.commons.upload.UploadMediaDetailInputFilter.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadWorkerTest.kt$.UploadWorkerTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ViewHolder.kt$fr.free.nrw.commons.widget.ViewHolder.kt</ID>
-    <ID>NewLineAtEndOfFile:WikidataFeedback.kt$fr.free.nrw.commons.nearby.WikidataFeedback.kt</ID>
-    <ID>NewLineAtEndOfFile:ZoomableDraweeView.kt$fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView.kt</ID>
     <ID>PrintStackTrace:CountingRequestBody.kt$CountingRequestBody$e</ID>
     <ID>PrintStackTrace:DBOpenHelper.kt$DBOpenHelper$e</ID>
     <ID>PrintStackTrace:FilePicker.kt$FilePicker$e</ID>

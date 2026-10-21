@@ -104,17 +104,6 @@ app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt
 app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
-app/src/main/java/fr/free/nrw/commons/di/ActivityBuilderModule.kt
-app/src/main/java/fr/free/nrw/commons/di/ApplicationlessInjection.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationComponent.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerAppCompatActivity.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerBroadcastReceiver.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerContentProvider.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerIntentService.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerService.kt
-app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerSupportFragment.kt
-app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt
 app/src/main/java/fr/free/nrw/commons/edit/BlurOverlayView.kt
 app/src/main/java/fr/free/nrw/commons/edit/CropOverlayView.kt
 app/src/main/java/fr/free/nrw/commons/edit/EditActivity.kt
