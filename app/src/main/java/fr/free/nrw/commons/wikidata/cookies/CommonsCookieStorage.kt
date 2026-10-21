@@ -2,6 +2,7 @@ package fr.free.nrw.commons.wikidata.cookies
 
 import android.util.Log
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
@@ -49,29 +50,35 @@ class CommonsCookieStorage(
             if (encryptedJson != null) {
                 discardUnreadableStore("Discarding empty cookie store")
             }
-            return
+        } else {
+            val failure = readStoredCookies(json)
+            if (failure != null) {
+                discardUnreadableStore("Discarding unreadable cookie store", failure)
+            } else if (encryptedJson == json) {
+                // Plaintext from an older app version. Re-save it encrypted.
+                save()
+            }
         }
+    }
 
+    /**
+     * Loads [json] into [cookieMap].
+     *
+     * Returns the [JsonSyntaxException] when the saved value is not a cookie-store object.
+     */
+    private fun readStoredCookies(json: String): JsonSyntaxException? =
         try {
             val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
             if (serializedData == null) {
-                discardUnreadableStore("Discarding null cookie store")
-                return
+                JsonSyntaxException("Cookie store must be a JSON object")
+            } else {
+                cookieMap.putAll(serializedData.cookieMap)
+                null
             }
-            cookieMap.putAll(serializedData.cookieMap)
-        } catch (exception: Exception) {
-            // A future cookie format can fail with something other than JsonSyntaxException.
-            // That still has to leave the app able to start.
-            discardUnreadableStore("Discarding unreadable cookie store", exception)
-            return
+        } catch (exception: JsonSyntaxException) {
+            cookieMap.clear()
+            exception
         }
-
-        // If the loaded json wasn't encrypted (e.g. migrating from older version)
-        // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
-        if (encryptedJson == json) {
-            save()
-        }
-    }
 
     /**
      * Forgets the saved cookie store and continues with no session.
