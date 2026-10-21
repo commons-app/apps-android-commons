@@ -42,10 +42,11 @@ class AboutActivity : BaseActivity() {
     @SuppressLint("StringFormatInvalid")  //TODO:
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        
         /*
           Instead of just setting the view with the xml file. We need to use View Binding class.
          */
+
         binding = ActivityAboutBinding.inflate(layoutInflater)
         val view: View = binding!!.root
         applyEdgeToEdgeTopInsets(binding!!.toolbarLayout)
@@ -154,7 +155,12 @@ class AboutActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            
             R.id.share_app_icon -> {
                 val shareText = String.format(
                     getString(R.string.share_text),
@@ -165,10 +171,10 @@ class AboutActivity : BaseActivity() {
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText)
                 sendIntent.setType("text/plain")
                 startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)))
-                return true
+                true
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
