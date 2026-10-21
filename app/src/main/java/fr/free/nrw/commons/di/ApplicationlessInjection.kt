@@ -22,9 +22,15 @@ import androidx.fragment.app.Fragment as AndroidXFragmen
  * Provides injectors for all sorts of components
  * Ex: Activities, Fragments, Services, ContentProviders
  */
-class ApplicationlessInjection(applicationContext: Context) : HasAndroidInjector,
-    HasActivityInjector, HasFragmentInjector, HasSupportFragmentInjector, HasServiceInjector,
-    HasBroadcastReceiverInjector, HasContentProviderInjector {
+class ApplicationlessInjection(
+    applicationContext: Context,
+) : HasAndroidInjector,
+    HasActivityInjector,
+    HasFragmentInjector,
+    HasSupportFragmentInjector,
+    HasServiceInjector,
+    HasBroadcastReceiverInjector,
+    HasContentProviderInjector {
     @Inject @JvmField
     var androidInjector: DispatchingAndroidInjector<Any>? = null
 
@@ -58,26 +64,19 @@ class ApplicationlessInjection(applicationContext: Context) : HasAndroidInjector
         commonsApplicationComponent.inject(this)
     }
 
-    override fun androidInjector(): AndroidInjector<Any>? =
-        androidInjector
+    override fun androidInjector(): AndroidInjector<Any>? = androidInjector
 
-    override fun activityInjector(): DispatchingAndroidInjector<Activity>? =
-        activityInjector
+    override fun activityInjector(): DispatchingAndroidInjector<Activity>? = activityInjector
 
-    override fun fragmentInjector(): DispatchingAndroidInjector<Fragment>? =
-        fragmentInjector
+    override fun fragmentInjector(): DispatchingAndroidInjector<Fragment>? = fragmentInjector
 
-    override fun supportFragmentInjector(): DispatchingAndroidInjector<AndroidXFragmen>? =
-        supportFragmentInjector
+    override fun supportFragmentInjector(): DispatchingAndroidInjector<AndroidXFragmen>? = supportFragmentInjector
 
-    override fun broadcastReceiverInjector(): DispatchingAndroidInjector<BroadcastReceiver>? =
-        broadcastReceiverInjector
+    override fun broadcastReceiverInjector(): DispatchingAndroidInjector<BroadcastReceiver>? = broadcastReceiverInjector
 
-    override fun serviceInjector(): DispatchingAndroidInjector<Service>? =
-        serviceInjector
+    override fun serviceInjector(): DispatchingAndroidInjector<Service>? = serviceInjector
 
-    override fun contentProviderInjector(): AndroidInjector<ContentProvider>? =
-        contentProviderInjector
+    override fun contentProviderInjector(): AndroidInjector<ContentProvider>? = contentProviderInjector
 
     companion object {
         private var _instance: ApplicationlessInjection? = null
