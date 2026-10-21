@@ -25,7 +25,8 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled
+// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is
+// enabled
 // https://github.com/facebook/fresco/blob/master/imagepipeline-backends/imagepipeline-okhttp3/src/main/java/com/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher.java
 @Singleton
 class CustomOkHttpNetworkFetcher
@@ -142,7 +143,8 @@ class CustomOkHttpNetworkFetcher
                 }
                 val responseRange =
                     BytesRange.fromContentRangeHeader(response.header("Content-Range"))
-                if (responseRange != null && !(responseRange.from == 0 && responseRange.to == BytesRange.TO_END_OF_CONTENT)) {
+                if (responseRange != null && !(responseRange.from == 0 && responseRange.to == BytesRange
+                    .TO_END_OF_CONTENT)) {
                     // Only treat as a partial image if the range is not all of the content
                     fetchState.responseBytesRange = responseRange
                     fetchState.onNewResultStatusFlags = Consumer.IS_PARTIAL_RESULT

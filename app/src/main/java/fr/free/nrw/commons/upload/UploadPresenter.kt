@@ -155,7 +155,9 @@ class UploadPresenter @Inject internal constructor(
         field.isAccessible = true
         val value = field.get(this)
         if (value == null) {
-            throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")
+            throw IllegalStateException(("basicKvStoreFactory must be initialized before use. Pl" +
+                "ease call setupBasicKvStoreFactory() before using pres" +
+                "enter methods that require it."))
         }
     }
     

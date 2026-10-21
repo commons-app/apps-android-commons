@@ -63,7 +63,8 @@ class PageTitle : Parcelable {
         properties = null
     }
 
-    constructor(text: String?, wiki: WikiSite, thumbUrl: String?, description: String?, properties: PageProperties?) : this(text, wiki, thumbUrl, properties) {
+    constructor(text: String?, wiki: WikiSite, thumbUrl: String?, description: String?,
+        properties: PageProperties?) : this(text, wiki, thumbUrl, properties) {
         this.description = description
     }
 
@@ -74,7 +75,8 @@ class PageTitle : Parcelable {
     constructor(namespace: String?, text: String, wiki: WikiSite) : this(namespace, text, null, null, wiki)
 
     @JvmOverloads
-    constructor(text: String?, wiki: WikiSite, thumbUrl: String? = null) : this(text, wiki, thumbUrl, null as PageProperties?)
+    constructor(text: String?, wiki: WikiSite, thumbUrl: String? = null) : this(text, wiki, thumbUrl, null as
+        PageProperties?)
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""

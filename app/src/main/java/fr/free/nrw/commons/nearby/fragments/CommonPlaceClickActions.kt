@@ -34,7 +34,9 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+                    Timber
+                        .d(("Camera button tapped. Image title: ${place.getName()}I" +
+                        "mage desc: ${place.longDescription}"))
                     storeSharedPrefs(place)
                     contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
@@ -78,7 +80,9 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    Timber
+                        .d(("Gallery button tapped. Image title: ${place.getName()}" +
+                        "Image desc: ${place.getLongDescription()}"))
                     storeSharedPrefs(place)
                     contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }

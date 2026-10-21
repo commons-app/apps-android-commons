@@ -63,7 +63,8 @@ class CategoryEditHelper @Inject constructor(
         val summary = "Adding categories"
         val buffer = StringBuilder()
 
-        // If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"
+        // If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of
+        // "[[Category"
         val wikiTextWithoutCategory: String = when {
             wikiText.contains("Uncategorized") -> wikiText.substring(0, wikiText.indexOf("Uncategorized"))
             wikiText.contains("[[Category") -> wikiText.substring(0, wikiText.indexOf("[[Category"))
@@ -72,7 +73,8 @@ class CategoryEditHelper @Inject constructor(
 
         if (!categories.isNullOrEmpty()) {
             // If the categories list is empty, when reading the categories of a picture,
-            // the code will add "None selected" to categories list in order to see in picture's categories with "None selected".
+            // the code will add "None selected" to categories list in order to see in picture's categories with "None
+            // selected".
             // So that after selecting some category, "None selected" should be removed from list
             for (category in categories) {
                 if (category != "None selected" || !wikiText.contains("Uncategorized")) {

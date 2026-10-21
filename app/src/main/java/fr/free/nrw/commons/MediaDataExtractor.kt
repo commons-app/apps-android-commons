@@ -42,7 +42,8 @@ class MediaDataExtractor
                 }.map { it.map { (key, value) -> IdAndLabels(key, value) } }
                 .onErrorReturn { emptyList() }
 
-        fun checkDeletionRequestExists(media: Media) = mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + media.filename)
+        fun checkDeletionRequestExists(media: Media) = mediaClient
+            .checkPageExistsUsingTitle("Commons:Deletion_requests/" + media.filename)
 
         fun fetchDiscussion(media: Media) =
             mediaClient

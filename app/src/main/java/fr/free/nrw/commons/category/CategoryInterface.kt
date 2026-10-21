@@ -18,7 +18,9 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+        ("w/api.php?action=query&format=json&formatversion=2&gen" +
+            "erator=search&prop=description|pageimages&piprop=thumb" +
+            "nail&pithumbsize=70&gsrnamespace=14"),
     )
     fun searchCategories(
         @Query("gsrsearch") filter: String?,
@@ -34,7 +36,9 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        ("w/api.php?action=query&format=json&formatversion=2&gen" +
+            "erator=allpages&gapnamespace=14&prop=categoryinfo|desc" +
+            "ription|pageimages&piprop=thumbnail&pithumbsize=70"),
     )
     fun searchCategoriesForPrefix(
         @Query("gapprefix") prefix: String?,
@@ -52,7 +56,9 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        ("w/api.php?action=query&format=json&formatversion=2&gen" +
+            "erator=allpages&gapnamespace=14&prop=categoryinfo|desc" +
+            "ription|pageimages&piprop=thumbnail&pithumbsize=70"),
     )
     fun getCategoriesByName(
         @Query("gapfrom") startingCategory: String?,
@@ -69,14 +75,18 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=categories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
+        ("w/api.php?action=query&format=json&formatversion=2&gen" +
+            "erator=categories&prop=categoryinfo|description|pageim" +
+            "ages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden"),
     )
     fun getCategoriesByTitles(
         @Query("titles") titles: String?,
         @Query("gcllimit") itemLimit: Int,
     ): Single<MwQueryResponse>
 
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50")
+    @GET(("w/api.php?action=query&format=json&formatversion=2&gen" +
+        "erator=categorymembers&gcmtype=subcat&prop=info&gcmlim" +
+        "it=50"))
     fun getSubCategoryList(
         @Query("gcmtitle") categoryName: String,
         @QueryMap(encoded = true) continuation: Map<String, String>,

@@ -748,7 +748,10 @@ class NearbyParentFragmentPresenter
                 val mapTopRight = nearbyParentFragmentView.screenTopRight
 
                 if (mapBottomLeft == null || mapTopRight == null) {
-                    Timber.d("Map boundaries (screenBottomLeft or screenTopRight) are null, skipping local place search as map state is not ready.")
+                    Timber
+                        .d(("Map boundaries (screenBottomLeft or screenTopRight) ar" +
+                        "e null, skipping local place search as map state is no" +
+                        "t ready."))
                     return@launch // exits the coroutine gracefully, preventing the crash.
                 }
 

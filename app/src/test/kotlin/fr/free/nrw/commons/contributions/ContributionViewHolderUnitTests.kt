@@ -72,7 +72,8 @@ class ContributionViewHolderUnitTests {
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         compositeDisposable = CompositeDisposable()
         parent = LayoutInflater.from(activity).inflate(R.layout.layout_contribution, null)
-        contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)
+        contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient,
+            mediaDataExtractor)
 
         bindind = LayoutContributionBinding.bind(parent)
 

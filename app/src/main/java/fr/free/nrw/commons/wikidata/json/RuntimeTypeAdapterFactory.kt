@@ -105,7 +105,8 @@ import java.io.IOException
  * .registerTypeAdapterFactory(shapeAdapterFactory)
  * .create();
 `</pre> *
- * Like `GsonBuilder`, this API supports chaining: <pre>   `RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory = RuntimeTypeAdapterFactory.of(Shape.class)
+ * Like `GsonBuilder`, this API supports chaining: <pre> `RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory =
+ * RuntimeTypeAdapterFactory.of(Shape.class)
  * .registerSubtype(Rectangle.class)
  * .registerSubtype(Circle.class)
  * .registerSubtype(Diamond.class);
@@ -208,7 +209,8 @@ class RuntimeTypeAdapterFactory<T>(
                 val delegate = labelToDelegate[label] as TypeAdapter<R>?
                 if (delegate == null) {
                     Timber.tag("RuntimeTypeAdapter").e(
-                        "cannot deserialize $baseType subtype named $label; did you forget to register a subtype? $jsonElement"
+                        ("cannot deserialize $baseType subtype named $label; did" +
+                            " you forget to register a subtype? $jsonElement")
                     )
                     return null
                 }
@@ -247,7 +249,8 @@ class RuntimeTypeAdapterFactory<T>(
 
     companion object {
         /**
-         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type field names are case sensitive.
+         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type
+         * field names are case sensitive.
          * `maintainType` flag decide if the type will be stored in pojo or not.
          */
         fun <T> of(
@@ -258,7 +261,8 @@ class RuntimeTypeAdapterFactory<T>(
             RuntimeTypeAdapterFactory(baseType, typeFieldName, maintainType)
 
         /**
-         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type field names are case sensitive.
+         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type
+         * field names are case sensitive.
          */
         fun <T> of(baseType: Class<T>, typeFieldName: String): RuntimeTypeAdapterFactory<T> =
             RuntimeTypeAdapterFactory(baseType, typeFieldName, false)

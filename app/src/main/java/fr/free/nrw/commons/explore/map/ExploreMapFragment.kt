@@ -91,7 +91,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var isDarkTheme = false
     private var isPermissionDenied = false
     private var lastKnownLocation: LatLng? = null // last location of user
-    private var recenterToUserLocation = false // true is recenter is needed (ie. when current location is in visible map boundaries)
+    private var recenterToUserLocation = false
+    // true is recenter is needed (ie. when current location is in visible map boundaries)
     private var clickedMarker: BaseMarker? = null
     private var mapCenter: GeoPoint? = null
     private var lastMapFocus: GeoPoint? = null
@@ -125,7 +126,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     lateinit var applicationKvStore: JsonKvStore
 
     @Inject
-    lateinit var bookmarkLocationDao: BookmarkLocationsDao // May be needed in future if we want to integrate bookmarking explore places
+    lateinit var bookmarkLocationDao: BookmarkLocationsDao
+    // May be needed in future if we want to integrate bookmarking explore places
 
     @Inject
     lateinit var systemThemeUtils: SystemThemeUtils
@@ -652,7 +654,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             handleGeoCoordinates(requireActivity(), place.getLocation(), binding!!.mapView.zoomLevelDouble)
         }
 
-        binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE
+        binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View
+            .VISIBLE else View.GONE
         binding!!.bottomSheetDetailsBinding.commonsButton.setOnClickListener {
             handleWebUrl(requireContext(), place.siteLinks.commonsLink)
         }

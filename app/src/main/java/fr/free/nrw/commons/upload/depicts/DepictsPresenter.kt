@@ -96,7 +96,8 @@ class DepictsPresenter
                 return repository
                     .searchAllEntities(querystring)
                     .subscribeOn(ioScheduler)
-                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList +
+                        controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             } else {
@@ -121,7 +122,8 @@ class DepictsPresenter
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
-                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
+                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList +
+                        controller.loadFavoritesItems() }
                     .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                     .map { it.distinctBy(DepictedItem::id) }
             }
@@ -315,7 +317,8 @@ class DepictsPresenter
  * This creates a dynamic proxy instance of the class,
  * proxy is to control access to the target object
  * here our target object is the view.
- * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy instance
+ * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy
+ * instance
  */
 inline fun <reified T> proxy() =
     Proxy

@@ -164,7 +164,8 @@ class CustomSelectorActivity :
     /**
      * Waits for confirmation of delete folder
      */
-    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
+    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts
+        .StartIntentSenderForResult()){
             result -> onDeleteFolderResultReceived(result)
     }
 

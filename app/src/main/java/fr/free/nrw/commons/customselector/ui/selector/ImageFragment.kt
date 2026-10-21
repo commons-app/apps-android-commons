@@ -219,7 +219,9 @@ class ImageFragment :
             Timber.d("Initialized imageAdapter in onCreateView")
         }
         // Set single selection mode if needed
-        val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
+        val singleSelection =
+            (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity
+            .EXTRA_SINGLE_SELECTION, false) == true
         imageAdapter.setSingleSelection(singleSelection)
         gridLayoutManager = GridLayoutManager(context, getSpanCount())
         with(binding?.selectorRv) {
@@ -507,7 +509,8 @@ class ImageFragment :
     private fun getUploadingContributions(): List<Contribution> =
         contributionDao
             .getContribution(
-                listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED),
+                listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution
+                    .STATE_QUEUED, Contribution.STATE_PAUSED),
             )?.subscribeOn(Schedulers.io())
             ?.blockingGet() ?: emptyList()
 }

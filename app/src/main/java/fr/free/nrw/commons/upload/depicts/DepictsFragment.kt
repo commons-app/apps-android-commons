@@ -463,7 +463,8 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
-                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment?)?.binding?.cardViewNearby?.setVisibility(View.GONE)
+                ((parentFragment?.parentFragment?.parentFragment) as
+                    ContributionsFragment?)?.binding?.cardViewNearby?.setVisibility(View.GONE)
             }
         }
     }

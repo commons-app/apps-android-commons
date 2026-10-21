@@ -40,7 +40,12 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class ContributionController @Inject constructor(@param:Named("default_preferences") private val defaultKvStore: JsonKvStore) {
+class ContributionController
+    @Inject
+    constructor(
+        @param:Named("default_preferences")
+        private val defaultKvStore: JsonKvStore,
+    ) {
     private var locationBeforeImageCapture: LatLng? = null
     private var isInAppCameraUpload = false
     // Flag to track if an internal upload is in progress.

@@ -97,7 +97,8 @@ open class ImageInfo : Serializable {
     private fun updateThumbUrl() {
         // If thumbHeight retrieved from API is less than THRESHOLD_HEIGHT
         if (getThumbHeight() < THRESHOLD_HEIGHT) {
-            // If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger dimensions. )
+            // If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger
+            // dimensions. )
             if (getThumbWidth() == QUERY_WIDTH) {
                 // Calculate new width depending on the aspect ratio.
                 val finalWidth = (THRESHOLD_HEIGHT * getThumbWidth() * 1.0

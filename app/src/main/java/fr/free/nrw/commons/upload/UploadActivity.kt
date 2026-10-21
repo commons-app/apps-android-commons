@@ -436,7 +436,8 @@ class UploadActivity : BaseActivity(), UploadContract.View, UploadBaseFragment.C
         super.onNewIntent(intent)
         setIntent(intent)
         val action = intent.action
-        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action || ContributionController.ACTION_INTERNAL_UPLOADS == action) {
+        if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action || ContributionController
+            .ACTION_INTERNAL_UPLOADS == action) {
             // clear the old fragments
             val fm = supportFragmentManager
             if (fm.fragments.isNotEmpty()) {

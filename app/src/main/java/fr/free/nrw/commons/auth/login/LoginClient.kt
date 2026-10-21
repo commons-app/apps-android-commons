@@ -229,7 +229,8 @@ class LoginClient(
 
         val response = tempLoginCall.execute()
         val loginResponse = response.body() ?: throw IOException("Unexpected response when logging in.")
-        val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
+        val loginResult = loginResponse.toLoginResult(password) ?:
+            throw IOException("Unexpected response when logging in.")
 
         if ("UI" == loginResult.status) {
             if (loginResult is OAuthResult || loginResult is EmailAuthResult) {

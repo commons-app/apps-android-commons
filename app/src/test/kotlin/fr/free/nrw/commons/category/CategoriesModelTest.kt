@@ -293,7 +293,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is selected and media does not contains category`() {
+    fun `selected item without category does not add category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",
@@ -321,7 +321,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is not selected and media does not contains category`() {
+    fun `unselected item without category adds category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",

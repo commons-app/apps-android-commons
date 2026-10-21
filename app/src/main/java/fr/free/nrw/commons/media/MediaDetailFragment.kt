@@ -793,7 +793,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     override fun onDestroyView() {
         if (layoutListener != null && view != null) {
-            requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener) // old Android was on crack. CRACK IS WHACK
+            requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener)
+            // old Android was on crack. CRACK IS WHACK
             layoutListener = null
         }
 
@@ -907,7 +908,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             mutableIdAndCaptions.add(
                 IdAndLabels(
                     id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
-                    labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
+                    labels = mapOf(Locale.getDefault().language to getString(R.string
+                        .detail_panel_cats_none))
+                    // Create a Map with the language as the key and the message as the value
                 )
             )
         }

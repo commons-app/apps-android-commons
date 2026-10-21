@@ -222,7 +222,8 @@ class MediaClientTest {
             whenever(mwQueryPage.pageId()).thenReturn(expectedId)
         }
 
-    private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse, Media> {
+    private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse,
+        Media> {
         val media = media()
         val mwQueryPage = mock<MwQueryPage>()
         val mwQueryResponse =

@@ -49,7 +49,9 @@ class CategoriesModel
             // for `yy` it is assumed that 20XX is implicit.
             // with separators [., /, -]
             val isIrrelevantCategory =
-                item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())
+                item
+                    .contains(("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/""" +
+                    """.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""").toRegex())
 
 
             if (spammyCategory) {
@@ -131,7 +133,9 @@ class CategoriesModel
          * @param selectedDepictions selected DepictItems
          * @return List of CategoryItem associated with selected depictions
          */
-        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? {
+        private fun categoriesFromDepiction(
+            selectedDepictions: List<DepictedItem>,
+        ): Observable<MutableList<CategoryItem>>? {
             val observables =  selectedDepictions.map { depictedItem ->
                 if (depictedItem.commonsCategories.isEmpty()) {
                     if (depictedItem.primaryImage == null) {

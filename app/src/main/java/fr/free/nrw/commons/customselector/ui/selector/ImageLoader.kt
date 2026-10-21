@@ -338,7 +338,8 @@ class ImageLoader
         /**
          * Get the uploaded status entry from the database.
          */
-        suspend fun getFromUploaded(imageSha1: String): UploadedStatus? = uploadedStatusDao.getUploadedFromImageSHA1(imageSha1)
+        suspend fun getFromUploaded(imageSha1: String): UploadedStatus? = uploadedStatusDao
+            .getUploadedFromImageSHA1(imageSha1)
 
         /**
          * Insert into uploaded status table.
