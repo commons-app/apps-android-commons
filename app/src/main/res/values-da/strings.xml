@@ -9,6 +9,7 @@
 * Overlaet
 * Peterleth
 * Saederup92
+* Steenth
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook-side</string>
@@ -60,7 +61,7 @@
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
-  <string name="preference_category_feedback">Feedback</string>
+  <string name="preference_category_feedback">Tilbagemelding</string>
   <string name="preference_category_privacy">Privatliv</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Indstillinger</string>
@@ -245,7 +246,7 @@
   <string name="navigation_item_nearby">I nærheden</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Indstillinger</string>
-  <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback">Tilbagemelding</string>
   <string name="navigation_item_feedback_github">Feedback via GitHub</string>
   <string name="navigation_item_logout">Log af</string>
   <string name="navigation_item_info">Vejledning</string>
@@ -330,7 +331,7 @@
   <string name="error_loading_depictions">Der opstod en fejl under indlæsning af afbildninger.</string>
   <string name="search_tab_title_media">Medier</string>
   <string name="search_tab_title_categories">Kategorier</string>
-  <string name="search_tab_title_depictions">Elementer</string>
+  <string name="search_tab_title_depictions">Emner</string>
   <string name="explore_tab_title_featured">Fremhævet</string>
   <string name="explore_tab_title_mobile">Uploadet via mobil</string>
   <string name="explore_tab_title_map">Kort</string>
@@ -362,6 +363,12 @@
   <string name="share_app_title">Del appen</string>
   <string name="rotate">Rotér</string>
   <string name="crop">Beskær</string>
+  <string name="blur">Slør</string>
+  <string name="autoblur">AutoSlør</string>
+  <string name="autodetect_title">Automatisk sløring af ansigter og nummerplader.</string>
+  <string name="autodetect_description">Du kan kassere falske positiver ved hjælp af knappen ❌ for hvert sløringsområde.</string>
+  <string name="autoblur_failed_to_load">Kunne ikke indlæse billede til AutoSlør</string>
+  <string name="autoblur_no_region_detected">Ingen regioner fundet til AutoSlør</string>
   <string name="error_fetching_nearby_places">Kunne ikke indlæse steder i nærheden</string>
   <string name="no_pictures_in_this_area">Ingen billeder i dette område</string>
   <string name="no_nearby_places_around">Ingen steder i nærheden</string>
@@ -694,7 +701,7 @@
   <string name="check_whether_location_is_correct">Tjek, om placeringen er korrekt</string>
   <string name="label">Etiket</string>
   <string name="description">Beskrivelse</string>
-  <string name="title_page_bookmarks_items">Elementer</string>
+  <string name="title_page_bookmarks_items">Emner</string>
   <string name="custom_selector_title">Brugerdefineret vælger</string>
   <string name="custom_selector_empty_text">Ingen billeder</string>
   <string name="done">Færdig</string>
@@ -706,6 +713,7 @@
   <string name="custom_selector_already_uploaded_image_text">Dette billede er allerede blevet uploadet til Commons.</string>
   <string name="custom_selector_over_limit_warning">Af tekniske årsager kan appen ikke pålideligt uploade mere end %1$d billeder på én gang. Uploadgrænsen på %1$d er blevet overskredet med %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Afvis</string>
+  <string name="custom_selector_duplicates_warning">Nogle valgte billeder er dubletter og vil blive fjernet inden upload.</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fejl: Upload-grænse overskredet</string>
   <string name="wlm_upload_info">Dette billede deltager i Wiki Loves Monuments-konkurrencen</string>
@@ -853,4 +861,9 @@
   <string name="license_cc0_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format uden nogen betingelser.</string>
   <string name="license_cc_by_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres.</string>
   <string name="license_cc_by_sa_long_description">Denne licens giver brugere ret til at distribuere, omarbejde, tilpasse og videreudvikle materialet i ethvert medie eller format, også til kommercielle formål, så længe ophavspersonen krediteres, og det nye værk er licenseret på identiske vilkår.</string>
+  <string name="error_getting_image_properties">Fejl ved hentning af billedegenskaber:</string>
+  <string name="error_blur_no_rectangle">Tegn mindst ét rektangel på fotoet</string>
+  <string name="error_applying_blur">Fejl ved anvendelse af sløring</string>
+  <string name="failed_to_apply_crop">Kunne ikke anvende beskæring</string>
+  <string name="failed_to_save_image">Kunne ikke gemme billede.</string>
 </resources>

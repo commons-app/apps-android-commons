@@ -416,6 +416,12 @@
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
   <string name="crop">裁剪</string>
+  <string name="blur">模糊</string>
+  <string name="autoblur">自动模糊</string>
+  <string name="autodetect_title">自动模糊人脸和车牌。</string>
+  <string name="autodetect_description">您可以使用每个模糊区域的❌按钮来取消处理。</string>
+  <string name="autoblur_failed_to_load">自动模糊加载图像失败</string>
+  <string name="autoblur_no_region_detected">自动模糊未检测到区域</string>
   <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
@@ -761,6 +767,7 @@
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
   <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">关闭</string>
+  <string name="custom_selector_duplicates_warning">部分所选图像为重复图像，上传前会将其移除。</string>
   <string name="custom_selector_button_limit_text">最大：%1$d</string>
   <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
   <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
@@ -908,4 +915,9 @@
   <string name="license_cc0_long_description">此许可协议允许再使用者无条件地以任何媒介或格式，分发、改编、演绎和构建材料。</string>
   <string name="license_cc_by_long_description">此许可协议允许再使用者只要注明创作者，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
   <string name="license_cc_by_sa_long_description">此许可协议允许再使用者只要注明创作者，并将新作品依据相同条款获得许可，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
+  <string name="error_getting_image_properties">获取图像属性时出错：</string>
+  <string name="error_blur_no_rectangle">请在照片上至少绘制一个矩形</string>
+  <string name="error_applying_blur">应用模糊时出错</string>
+  <string name="failed_to_apply_crop">无法应用裁剪</string>
+  <string name="failed_to_save_image">图像保存失败</string>
 </resources>
