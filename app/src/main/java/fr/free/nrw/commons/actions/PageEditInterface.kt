@@ -129,6 +129,21 @@ interface PageEditInterface {
     ): Observable<Entities>
 
     /**
+     * Sets a caption on the file's MediaInfo entity. Upload uses this id form;
+     * site and title lookups from the edit screen were not stored.
+     */
+    @FormUrlEncoded
+    @Headers("Cache-Control: no-cache")
+    @POST(MW_API_PREFIX + "action=wbsetlabel&format=json&formatversion=2")
+    fun postCaptionsByEntityId(
+        @Field("summary") summary: String,
+        @Field("id") entityId: String,
+        @Field("language") language: String,
+        @Field("value") value: String,
+        @Field("token") token: String,
+    ): Observable<Entities>
+
+    /**
      * Gets the wiki text for the provided file name.
      *
      * @param title The title (name) of the file to fetch wiki text for.

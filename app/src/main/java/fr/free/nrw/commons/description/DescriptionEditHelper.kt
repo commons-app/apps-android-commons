@@ -8,6 +8,7 @@ import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.notification.NotificationHelper.Companion.NOTIFICATION_EDIT_DESCRIPTION
 import io.reactivex.Single
@@ -70,11 +71,13 @@ class DescriptionEditHelper @Inject constructor(
         Timber.d("thread is caption adding %s", Thread.currentThread().name)
         val summary = "Updating Caption"
 
+        val entityId = media.pageId.toLongOrNull()?.let { PAGE_ID_PREFIX + it }
         return pageEditClient.setCaptions(
             summary,
             requireNotNull(media.filename),
             language,
-            value
+            value,
+            entityId,
         ).flatMapSingle { result ->
             Single.just(showCaptionEditNotification(context, media, result))
         }.firstOrError()
