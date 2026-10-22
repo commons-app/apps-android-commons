@@ -153,7 +153,7 @@ class CategoryDaoTest {
                 eq(category.contentUri)!!,
                 captor.capture(),
                 isNull(),
-                isNull()
+                isNull(),
             )
             captor.firstValue.let { cv ->
                 assertEquals(5, cv.size())
