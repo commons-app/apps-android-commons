@@ -13,9 +13,9 @@ import timber.log.Timber
  * Observes live camera position data
  */
 class LocationPickerViewModel(
-    application: Application
-): AndroidViewModel(application), Callback<CameraPosition> {
-
+    application: Application,
+) : AndroidViewModel(application),
+    Callback<CameraPosition> {
     /**
      * Wrapping CameraPosition with MutableLiveData
      */
@@ -29,16 +29,19 @@ class LocationPickerViewModel(
      */
     override fun onResponse(
         call: Call<CameraPosition>,
-        response: Response<CameraPosition>
+        response: Response<CameraPosition>,
     ) {
-        if(response.body() == null) {
+        if (response.body() == null) {
             result.value = null
             return
         }
         result.value = response.body()
     }
 
-    override fun onFailure(call: Call<CameraPosition>, t: Throwable) {
+    override fun onFailure(
+        call: Call<CameraPosition>,
+        t: Throwable,
+    ) {
         Timber.e(t)
     }
 }

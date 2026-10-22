@@ -18,7 +18,7 @@
     <ID>ComplexCondition:UploadActivity.kt$UploadActivity$isLocationTagUnchecked || locationDifference &gt; 100 || !defaultKvStore.getBoolean("inAppCameraLocationPref") || !isInAppCameraUpload</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
-    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle(handle: Handle, dx: Float, dy: Float)</ID>
+    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
     <ID>CyclomaticComplexMethod:EditActivity.kt$EditActivity$private fun init()</ID>
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
@@ -37,7 +37,6 @@
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
     <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
-    <ID>EmptyDefaultConstructor:LocationPicker.kt$LocationPicker.IntentBuilder$()</ID>
     <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
     <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
     <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
@@ -122,6 +121,7 @@
     <ID>LargeClass:UploadMediaDetailFragment.kt$UploadMediaDetailFragment : UploadBaseFragmentViewEventListener</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
+    <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$private fun initView(context: Context)</ID>
     <ID>LongMethod:CategoriesModelTest.kt$CategoriesModelTest$@Test fun `searchAll with empty search terms creates results from gps, title search &amp; recents`()</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$CommonsApplicationModule.Companion.&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
@@ -163,8 +163,8 @@
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onDownSwiped()</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onUpSwiped()</ID>
     <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable?, )</ID>
-    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray )</ID>
-    <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean )</ID>
+    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
+    <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean, )</ID>
     <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String? = null, negativeButtonText: String? = null, onPositiveBtnClick: Runnable? = null, onNegativeBtnClick: Runnable? = null, customView: View? = null, cancelable: Boolean = false, )</ID>
@@ -735,9 +735,7 @@
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
     <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$//check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$private</ID>
-    <ID>MaxLineLength:CategoriesModelTest.kt$CategoriesModelTest$fun</ID>
+    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$"""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""</ID>
     <ID>MaxLineLength:CategoryApi.kt$CategoryApi$*</ID>
     <ID>MaxLineLength:CategoryClient.kt$CategoryClient$*</ID>
     <ID>MaxLineLength:CategoryEditHelper.kt$CategoryEditHelper$// If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"</ID>
@@ -745,7 +743,7 @@
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=allpages&amp;gapnamespace=14&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categories&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gclshow=!hidden"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=search&amp;prop=description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gsrnamespace=14"</ID>
-    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50")</ID>
+    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50"</ID>
     <ID>MaxLineLength:ChildDepictionsFragment.kt$ChildDepictionsFragment$override fun getEmptyText(query: String)</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")</ID>
@@ -774,7 +772,6 @@
     <ID>MaxLineLength:DescriptionEditActivity.kt$DescriptionEditActivity$outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList&lt;out Parcelable?&gt;)</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")</ID>
-    <ID>MaxLineLength:EditActivity.kt$EditActivity$if</ID>
     <ID>MaxLineLength:ExploreMapController.kt$ExploreMapController$// Our radius searched around us, will be used to understand when user search their own location, we will follow them</ID>
     <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE</ID>
     <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$lateinit</ID>
@@ -897,7 +894,7 @@
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$private fun handleResult(result: Result)</ID>
     <ID>NestedBlockDepth:ImageLoader.kt$ImageLoader$suspend fun nextActionableImage( allImages: List&lt;Image&gt;, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, nextImagePosition: Int, currentlyUploadingImages: List&lt;Contribution&gt;, ): Int</ID>
     <ID>NestedBlockDepth:ImageUtils.kt$ImageUtils$@JvmStatic private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean</ID>
-    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates(latitude: String, longitude: String, accuracy: String)</ID>
+    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates( latitude: String, longitude: String, accuracy: String, )</ID>
     <ID>NestedBlockDepth:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
     <ID>NestedBlockDepth:LogsSender.kt$LogsSender$@Throws(IOException::class) private fun writeLogToZipFile(metaData: ByteArray, zipFile: File)</ID>
     <ID>NestedBlockDepth:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
@@ -943,7 +940,7 @@
     <ID>ProtectedMemberInFinalClass:WikiSite.kt$WikiSite$protected constructor(`in`: Parcel) { uri = `in`.readParcelable(Uri::class.java.classLoader)!! languageCode = `in`.readString() }</ID>
     <ID>ReturnCount:AchievementsFragment.kt$AchievementsFragment$private fun checkAccount(): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix ): Pair&lt;Int, Handle&gt;?</ID>
+    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix, ): Pair&lt;Int, Handle&gt;?</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun snapRectToMCU(rect: RectF)</ID>
     <ID>ReturnCount:BookmarkItemsDao.kt$BookmarkItemsDao$fun findBookmarkItem(depictedItemID: String?): Boolean</ID>
     <ID>ReturnCount:BookmarkPicturesDao.kt$BookmarkPicturesDao$fun findBookmark(bookmark: Bookmark?): Boolean</ID>
@@ -951,12 +948,12 @@
     <ID>ReturnCount:BookmarksTable.kt$BookmarksTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
     <ID>ReturnCount:CategoriesModel.kt$CategoriesModel$fun isSpammyCategory(item: String): Boolean</ID>
     <ID>ReturnCount:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$private fun findHasFragmentInjector(): HasSupportFragmentInjector</ID>
-    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText(wikiText: String, editedLocation: String): String</ID>
+    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText( wikiText: String, editedLocation: String, ): String</ID>
     <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle(x: Float, y: Float): Handle?</ID>
+    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle( x: Float, y: Float, ): Handle?</ID>
     <ID>ReturnCount:CryptoUtils.kt$CryptoUtils$fun decrypt(encryptedBase64: String?): String?</ID>
     <ID>ReturnCount:DialogUtil.kt$DialogUtil$private fun showSafely( activity: Activity?, dialog: AlertDialog?, ): AlertDialog?</ID>
-    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int ): CropCoordinates?</ID>
+    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int, ): CropCoordinates?</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$fun onBackPressed(): Boolean</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getMediaFromImageURL(url: String?): Media?</ID>
@@ -1295,7 +1292,7 @@
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")</ID>
     <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
     <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID")</ID>
+    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>
     <ID>UseRequire:RecentLanguagesContentProvider.kt$RecentLanguagesContentProvider$throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")</ID>
