@@ -125,7 +125,7 @@ class LoginClient(
                                     cb.emailAuthPrompt(
                                         loginResult,
                                         LoginFailedException(loginResult.message),
-                                        loginToken
+                                        loginToken,
                                     )
 
                                 is ResetPasswordResult -> cb.passwordResetPrompt(loginToken)
@@ -172,10 +172,16 @@ class LoginClient(
                 ) = if (response.isSuccessful) {
                     val loginToken = response.body()?.query()?.loginToken()
                     loginToken?.let {
-                        login(username, password, null,
+                        login(
+                            username,
+                            password,
+                            null,
                             if (lastLoginResult is OAuthResult) twoFactorCode else null,
                             if (lastLoginResult is EmailAuthResult) twoFactorCode else null,
-                            it, userLanguage, loginCallback)
+                            it,
+                            userLanguage,
+                            loginCallback,
+                        )
                     } ?: run {
                         loginCallback.error(IOException("Failed to retrieve login token"))
                     }
@@ -198,7 +204,7 @@ class LoginClient(
         userName: String,
         password: String,
         twoFactorCode: String? = null,
-        emailAuthCode: String? = null
+        emailAuthCode: String? = null,
     ) {
         val tokenResponse = getLoginToken().execute()
         if (tokenResponse
@@ -229,7 +235,8 @@ class LoginClient(
 
         val response = tempLoginCall.execute()
         val loginResponse = response.body() ?: throw IOException("Unexpected response when logging in.")
-        val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
+        val loginResult =
+            loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
 
         if ("UI" == loginResult.status) {
             if (loginResult is OAuthResult || loginResult is EmailAuthResult) {
