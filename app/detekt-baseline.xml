@@ -165,7 +165,7 @@
     <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable? )</ID>
     <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
     <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean, )</ID>
-    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int )</ID>
+    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String? = null, negativeButtonText: String? = null, onPositiveBtnClick: Runnable? = null, onNegativeBtnClick: Runnable? = null, customView: View? = null, cancelable: Boolean = false, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String?, negativeButtonText: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, cancelable: Boolean = false, )</ID>
@@ -732,7 +732,7 @@
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
     <ID>MatchingDeclarationName:Costants.kt$Constants</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment$*</ID>
-    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"</ID>
+    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
     <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$//check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
     <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$"""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""</ID>
