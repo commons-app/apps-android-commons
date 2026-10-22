@@ -1,7 +1,6 @@
 app/build.gradle.kts
 app/src/androidTest/java/fr/free/nrw/commons/UploadCancelledTest.kt
 app/src/androidTest/java/fr/free/nrw/commons/WelcomeActivityTest.kt
-app/src/androidTest/java/fr/free/nrw/commons/edit/TransformImageTest.kt
 app/src/main/java/fr/free/nrw/commons/AboutActivity.kt
 app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt
 app/src/main/java/fr/free/nrw/commons/Media.kt
@@ -78,7 +77,6 @@ app/src/main/java/fr/free/nrw/commons/contributions/ContributionsProvidesModule.
 app/src/main/java/fr/free/nrw/commons/contributions/ContributionsRepository.kt
 app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt
 app/src/main/java/fr/free/nrw/commons/contributions/SetWallpaperWorker.kt
-app/src/main/java/fr/free/nrw/commons/coordinates/CoordinateEditHelper.kt
 app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
 app/src/main/java/fr/free/nrw/commons/customselector/helper/FolderDeletionHelper.kt
 app/src/main/java/fr/free/nrw/commons/customselector/ui/adapter/ImageAdapter.kt
@@ -95,10 +93,6 @@ app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt
 app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
-app/src/main/java/fr/free/nrw/commons/edit/BlurOverlayView.kt
-app/src/main/java/fr/free/nrw/commons/edit/CropOverlayView.kt
-app/src/main/java/fr/free/nrw/commons/edit/EditActivity.kt
-app/src/main/java/fr/free/nrw/commons/edit/EditViewModel.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreFragment.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreListRootFragment.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreMapRootFragment.kt
@@ -141,14 +135,6 @@ app/src/main/java/fr/free/nrw/commons/kvstore/BasicKvStore.kt
 app/src/main/java/fr/free/nrw/commons/kvstore/JsonKvStore.kt
 app/src/main/java/fr/free/nrw/commons/kvstore/KeyValueStore.kt
 app/src/main/java/fr/free/nrw/commons/language/AppLanguageLookUpTable.kt
-app/src/main/java/fr/free/nrw/commons/location/LatLng.kt
-app/src/main/java/fr/free/nrw/commons/location/LocationPermissionsHelper.kt
-app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt
-app/src/main/java/fr/free/nrw/commons/location/LocationUpdateListener.kt
-app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPicker.kt
-app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerActivity.kt
-app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerConstants.kt
-app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerViewModel.kt
 app/src/main/java/fr/free/nrw/commons/logging/CommonsLogSender.kt
 app/src/main/java/fr/free/nrw/commons/logging/FileLoggingTree.kt
 app/src/main/java/fr/free/nrw/commons/logging/LogLevelSettableTree.kt
@@ -394,7 +380,6 @@ app/src/test/kotlin/fr/free/nrw/commons/kvstore/BasicKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/kvstore/JsonKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/location/LatLngTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaDetailFragmentUnitTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/navtab/MoreBottomSheetFragmentUnitTests.kt
