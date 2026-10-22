@@ -9,16 +9,14 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.round
 
-
 /**
  * A latitude and longitude point with accuracy information, often of a picture.
  */
 data class LatLng(
     var latitude: Double,
     var longitude: Double,
-    val accuracy: Float
+    val accuracy: Float,
 ) : Parcelable {
-
     /**
      * Accepts latitude and longitude.
      * North and South values are cut off at 90°
@@ -29,10 +27,11 @@ data class LatLng(
      * where positive signifies north, east and negative signifies south, west.
      */
     init {
-        val adjustedLongitude = when {
-            longitude in -180.0..180.0 -> longitude
-            else -> ((longitude - 180.0) % 360.0 + 360.0) % 360.0 - 180.0
-        }
+        val adjustedLongitude =
+            when {
+                longitude in -180.0..180.0 -> longitude
+                else -> ((longitude - 180.0) % 360.0 + 360.0) % 360.0 - 180.0
+            }
         latitude = max(-90.0, min(90.0, latitude))
         longitude = adjustedLongitude
     }
@@ -41,7 +40,10 @@ data class LatLng(
      * Accepts a non-null [Location] and converts it to a [LatLng].
      */
     companion object {
-        fun latLongOrNull(latitude: String?, longitude: String?): LatLng? =
+        fun latLongOrNull(
+            latitude: String?,
+            longitude: String?,
+        ): LatLng? =
             if (!latitude.isNullOrBlank() && !longitude.isNullOrBlank()) {
                 LatLng(latitude.toDouble(), longitude.toDouble(), 0.0f)
             } else {
@@ -54,20 +56,15 @@ data class LatLng(
          * @return LatLng the Latitude and Longitude of a given location
          */
         @JvmStatic
-        fun from(location: Location): LatLng {
-            return LatLng(location.latitude, location.longitude, location.accuracy)
-        }
+        fun from(location: Location): LatLng = LatLng(location.latitude, location.longitude, location.accuracy)
 
         @JvmField
-        val CREATOR: Parcelable.Creator<LatLng> = object : Parcelable.Creator<LatLng> {
-            override fun createFromParcel(parcel: Parcel): LatLng {
-                return LatLng(parcel)
-            }
+        val CREATOR: Parcelable.Creator<LatLng> =
+            object : Parcelable.Creator<LatLng> {
+                override fun createFromParcel(parcel: Parcel): LatLng = LatLng(parcel)
 
-            override fun newArray(size: Int): Array<LatLng?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<LatLng?> = arrayOfNulls(size)
             }
-        }
     }
 
     /**
@@ -77,7 +74,7 @@ data class LatLng(
     private constructor(parcel: Parcel) : this(
         latitude = parcel.readDouble(),
         longitude = parcel.readDouble(),
-        accuracy = parcel.readFloat()
+        accuracy = parcel.readFloat(),
     )
 
     /**
@@ -100,15 +97,13 @@ data class LatLng(
         if (this === other) return true
         if (other !is LatLng) return false
         return latitude.toBits() == other.latitude.toBits() &&
-                longitude.toBits() == other.longitude.toBits()
+            longitude.toBits() == other.longitude.toBits()
     }
 
     /**
      * Returns a string representation of the latitude and longitude.
      */
-    override fun toString(): String {
-        return "lat/lng: ($latitude,$longitude)"
-    }
+    override fun toString(): String = "lat/lng: ($latitude,$longitude)"
 
     /**
      * Returns a nicely formatted coordinate string. Used e.g. in
@@ -116,10 +111,9 @@ data class LatLng(
      *
      * @return The formatted string.
      */
-    fun getPrettyCoordinateString(): String {
-        return "${formatCoordinate(latitude)} ${getNorthSouth()}, " +
-                "${formatCoordinate(longitude)} ${getEastWest()}"
-    }
+    fun getPrettyCoordinateString(): String =
+        "${formatCoordinate(latitude)} ${getNorthSouth()}, " +
+            "${formatCoordinate(longitude)} ${getEastWest()}"
 
     /**
      * Gets a URI for a Google Maps intent at the location.
@@ -127,11 +121,15 @@ data class LatLng(
      * @paraam zoom The zoom level
      * @return URI for the intent
      */
-    fun getGmmIntentUri(zoom: Double): Uri = Uri.parse(
-        "geo:$latitude,$longitude?q=$latitude,$longitude&z=${zoom}"
-    )
+    fun getGmmIntentUri(zoom: Double): Uri =
+        Uri.parse(
+            "geo:$latitude,$longitude?q=$latitude,$longitude&z=$zoom",
+        )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeDouble(latitude)
         parcel.writeDouble(longitude)
         parcel.writeFloat(accuracy)
