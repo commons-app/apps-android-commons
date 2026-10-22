@@ -46,14 +46,6 @@ app/src/main/java/fr/free/nrw/commons/concurrency/ExceptionAwareThreadPoolExecut
 app/src/main/java/fr/free/nrw/commons/concurrency/ExceptionHandler.kt
 app/src/main/java/fr/free/nrw/commons/concurrency/ThreadPoolService.kt
 app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
-app/src/main/java/fr/free/nrw/commons/customselector/helper/FolderDeletionHelper.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/adapter/ImageAdapter.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/CustomSelectorActivity.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/CustomSelectorViewModelFactory.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/FolderFragment.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/ImageFileLoader.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/ImageFragment.kt
-app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/ImageLoader.kt
 app/src/main/java/fr/free/nrw/commons/data/DBOpenHelper.kt
 app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt
 app/src/main/java/fr/free/nrw/commons/db/Converters.kt
@@ -300,9 +292,6 @@ app/src/test/kotlin/fr/free/nrw/commons/actions/ThanksClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookMarkLocationDaoTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationControllerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationFragmentUnitTests.kt
-app/src/test/kotlin/fr/free/nrw/commons/customselector/helper/ImageHelperTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/customselector/helper/OnSwipeTouchListenerTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/customselector/ui/selector/ImageLoaderTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/db/BookmarkItemsTableTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/db/BookmarkPictureTableTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/db/CategoryTableTest.kt
