@@ -1,14 +1,28 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
 SELECT
   ?item
-  (SAMPLE(COALESCE(?en_label, ?fr_label, ?id_label, ?item_label)) as ?label)
-  (SAMPLE(?location) as ?location)
-  (GROUP_CONCAT(DISTINCT ?class_label ; separator=",") as ?class)
+  (SAMPLE(COALESCE(?en_label, ?fr_label, ?id_label, ?item_label)) AS ?label)
+  (SAMPLE(?locationValue) AS ?location)
+  (GROUP_CONCAT(DISTINCT ?class_label ; separator=",") AS ?class)
 WHERE {
-  SERVICE wikibase:box {
-    ?item wdt:P625 ?location .
-    bd:serviceParam wikibase:cornerSouthWest "Point(${LONGITUDE} ${LATITUDE})"^^geo:wktLiteral .
-    bd:serviceParam wikibase:cornerNorthEast "Point(${NEXT_LONGITUDE} ${NEXT_LATITUDE})"^^geo:wktLiteral .
-  }
+  # One geof:sfWithin keeps QLever's spatial index. A box across ±180° is a multipolygon.
+  BIND(${LONGITUDE} AS ?west)
+  BIND(${NEXT_LONGITUDE} AS ?east)
+  BIND(IF(${LATITUDE} < ${NEXT_LATITUDE}, ${LATITUDE}, ${NEXT_LATITUDE}) AS ?south)
+  BIND(IF(${LATITUDE} < ${NEXT_LATITUDE}, ${NEXT_LATITUDE}, ${LATITUDE}) AS ?north)
+  BIND(IF(?west <= ?east,
+    CONCAT("POLYGON((", STR(?west), " ", STR(?south), ", ", STR(?east), " ", STR(?south), ", ", STR(?east), " ", STR(?north), ", ", STR(?west), " ", STR(?north), ", ", STR(?west), " ", STR(?south), "))"),
+    CONCAT("MULTIPOLYGON(((", STR(?west), " ", STR(?south), ", 180 ", STR(?south), ", 180 ", STR(?north), ", ", STR(?west), " ", STR(?north), ", ", STR(?west), " ", STR(?south), ")), ((-180 ", STR(?south), ", ", STR(?east), " ", STR(?south), ", ", STR(?east), " ", STR(?north), ", -180 ", STR(?north), ", -180 ", STR(?south), ")))")
+  ) AS ?boxWkt)
+  BIND(STRDT(?boxWkt, geo:wktLiteral) AS ?box)
+  ?item wdt:P625 ?locationValue .
+  FILTER(geof:sfWithin(?locationValue, ?box))
   MINUS {?item wdt:P18 ?image}
   MINUS {?item wdt:P582 ?endtime.}
   MINUS {?item wdt:P582 ?dissolvedOrAbolished.}
@@ -17,6 +31,6 @@ WHERE {
   OPTIONAL {?item rdfs:label ?fr_label . FILTER(LANG(?fr_label) = "fr")}
   OPTIONAL {?item rdfs:label ?vn_label . FILTER(LANG(?id_label) = "id")}
   OPTIONAL {?item rdfs:label ?item_label}
-  OPTIONAL {?item wdt:P31 ?class. ?class rdfs:label ?class_label. FILTER(LANG(?class_label) = "en")}
+  OPTIONAL {?item wdt:P31 ?classItem. ?classItem rdfs:label ?class_label. FILTER(LANG(?class_label) = "en")}
 }
 GROUP BY ?item

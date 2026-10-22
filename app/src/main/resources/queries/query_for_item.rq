@@ -1,3 +1,10 @@
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
 SELECT
   ?item
   ?itemLabel
@@ -13,15 +20,25 @@ SELECT
   ?dateOfOfficialClosure
   ?pointInTime
 WHERE {
-  SERVICE <https://query.wikidata.org/sparql> {
-    VALUES ?item {${ENTITY}}
-  }
+  VALUES ?item {${ENTITY}}
 
-  # Get item label/class label/description in the preferred language of the user, or fallback.
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "${LANG},${FALLBACK_LANGUAGES}".}
+  # User language, then English, then mul. One OPTIONAL per fallback language exhausts QLever.
+  OPTIONAL {?item rdfs:label ?itemLabelUser . FILTER(LANG(?itemLabelUser) = "${LANG}")}
+  OPTIONAL {?item rdfs:label ?itemLabelEn . FILTER(LANG(?itemLabelEn) = "en")}
+  OPTIONAL {?item rdfs:label ?itemLabelMul . FILTER(LANG(?itemLabelMul) = "mul")}
+  BIND(COALESCE(?itemLabelUser, ?itemLabelEn, ?itemLabelMul) AS ?itemLabel)
+
+  OPTIONAL {?item schema:description ?itemDescriptionUser . FILTER(LANG(?itemDescriptionUser) = "${LANG}")}
+  OPTIONAL {?item schema:description ?itemDescriptionEn . FILTER(LANG(?itemDescriptionEn) = "en")}
+  OPTIONAL {?item schema:description ?itemDescriptionMul . FILTER(LANG(?itemDescriptionMul) = "mul")}
+  BIND(COALESCE(?itemDescriptionUser, ?itemDescriptionEn, ?itemDescriptionMul) AS ?itemDescription)
 
   # Get class (such as forest or bridge)
   OPTIONAL {?item p:P31/ps:P31 ?class}
+  OPTIONAL {?class rdfs:label ?classLabelUser . FILTER(LANG(?classLabelUser) = "${LANG}")}
+  OPTIONAL {?class rdfs:label ?classLabelEn . FILTER(LANG(?classLabelEn) = "en")}
+  OPTIONAL {?class rdfs:label ?classLabelMul . FILTER(LANG(?classLabelMul) = "mul")}
+  BIND(COALESCE(?classLabelUser, ?classLabelEn, ?classLabelMul) AS ?classLabel)
 
   # Get picture (items without a picture will be shown in red on the Nearby map)
   OPTIONAL {?item wdt:P18 ?pic}
