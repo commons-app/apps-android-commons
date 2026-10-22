@@ -34,7 +34,7 @@ import timber.log.Timber
 import java.util.Objects
 import javax.inject.Inject
 
-class AchievementsFragment : CommonsDaggerSupportFragment(){
+class AchievementsFragment : CommonsDaggerSupportFragment() {
     private lateinit var levelInfo: LevelController.LevelInfo
 
     @Inject
@@ -43,8 +43,11 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     @Inject
     lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
+    // The nullable binding is cleared in onDestroyView; `binding` is the non-null accessor for this class only.
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentAchievementsBinding? = null
     private val binding get() = _binding!!
+
     // To keep track of the number of wiki edits made by a user
     private var numberOfEdits: Int = 0
 
@@ -60,7 +63,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAchievementsBinding.inflate(inflater, container, false)
 
@@ -100,19 +103,15 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             return binding.root
         }
 
-
         setWikidataEditCount()
         setAchievements()
         return binding.root
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
     override fun setMenuVisibility(visible: Boolean) {
         super.setMenuVisibility(visible)
@@ -133,12 +132,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     fun showInfoDialog() {
         launchAlert(
             resources.getString(R.string.Achievements),
-            resources.getString(R.string.achievements_info_message)
+            resources.getString(R.string.achievements_info_message),
         )
     }
-
-
-
 
     /**
      * To call the API to get results in form Single<JSONObject>
@@ -181,8 +177,8 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
                                 } else {
                                     showSnackBarWithRetry(true)
                                 }
-                            }
-                        )
+                            },
+                        ),
                 )
             } catch (e: Exception) {
                 Timber.d("Exception: ${e.message}")
@@ -193,7 +189,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     /**
      * To call the API to fetch the count of wiki data edits
      * in the form of JavaRx Single object<JSONobject>
-    </JSONobject> */
+     </JSONobject> */
 
     private fun setWikidataEditCount() {
         if (StringUtils.isBlank(userName)) {
@@ -209,7 +205,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
                     showBadgesWithCount(view = binding.wikidataEditsIcon, count = edits)
                 }, { e: Throwable ->
                     Timber.e("Error:$e")
-                })
+                }),
         )
     }
 
@@ -224,15 +220,14 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         if (tooManyAchievements) {
             if (view == null) {
                 return
-            }
-            else {
+            } else {
                 binding.progressBar.visibility = View.GONE
                 showDismissibleSnackBar(
                     requireView().findViewById(android.R.id.content),
-                    R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry
+                    R.string.achievements_fetch_failed_ultimate_achievement,
+                    R.string.retry,
                 ) { setAchievements() }
             }
-
         } else {
             if (view == null) {
                 return
@@ -240,7 +235,8 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
                 requireView().findViewById(android.R.id.content),
-                R.string.achievements_fetch_failed, R.string.retry
+                R.string.achievements_fetch_failed,
+                R.string.retry,
             ) { setAchievements() }
         }
     }
@@ -259,22 +255,24 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
 
     private fun setUploadCount(achievements: Achievements) {
         if (checkAccount()) {
-            compositeDisposable.add(okHttpJsonApiClient
-                .getUploadCount(Objects.requireNonNull<String>(userName))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { uploadCount: Int? ->
-                        setAchievementsUploadCount(
-                            achievements,
-                            uploadCount ?:0
-                        )
-                    },
-                    { t: Throwable? ->
-                        Timber.e(t, "Fetching upload count failed")
-                        onError()
-                    }
-                ))
+            compositeDisposable.add(
+                okHttpJsonApiClient
+                    .getUploadCount(Objects.requireNonNull<String>(userName))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { uploadCount: Int? ->
+                            setAchievementsUploadCount(
+                                achievements,
+                                uploadCount ?: 0,
+                            )
+                        },
+                        { t: Throwable? ->
+                            Timber.e(t, "Fetching upload count failed")
+                            onError()
+                        },
+                    ),
+            )
         }
     }
 
@@ -282,17 +280,21 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * used to set achievements upload count and call hideProgressbar
      * @param uploadCount
      */
-    private fun setAchievementsUploadCount(achievements: Achievements, uploadCount: Int) {
+    private fun setAchievementsUploadCount(
+        achievements: Achievements,
+        uploadCount: Int,
+    ) {
         // Create a new instance of Achievements with updated imagesUploaded
-        val updatedAchievements = Achievements(
-            achievements.uniqueUsedImages,
-            achievements.articlesUsingImages,
-            achievements.thanksReceived,
-            achievements.featuredImages,
-            achievements.qualityImages,
-            uploadCount,  // Update imagesUploaded with new value
-            achievements.revertCount
-        )
+        val updatedAchievements =
+            Achievements(
+                achievements.uniqueUsedImages,
+                achievements.articlesUsingImages,
+                achievements.thanksReceived,
+                achievements.featuredImages,
+                achievements.qualityImages,
+                uploadCount, // Update imagesUploaded with new value
+                achievements.revertCount,
+            )
 
         hideProgressBar(updatedAchievements)
     }
@@ -313,23 +315,24 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
     }
 
     private fun setZeroAchievements() {
-        val message = if (sessionManager.userName != userName) {
-            getString(R.string.no_achievements_yet, userName )
-        } else {
-            getString(R.string.you_have_no_achievements_yet)
-        }
+        val message =
+            if (sessionManager.userName != userName) {
+                getString(R.string.no_achievements_yet, userName)
+            } else {
+                getString(R.string.you_have_no_achievements_yet)
+            }
         showAlertDialog(
             requireActivity(),
             null,
             message,
             getString(R.string.ok),
-            {}
+            {},
         )
 
 //        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
 //        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
-        //binding.achievementBadgeImage.visibility = View.INVISIBLE // TODO
+        // binding.achievementBadgeImage.visibility = View.INVISIBLE // TODO
         binding.imagesUsedCount.setText(R.string.no_image)
         binding.imagesRevertedText.setText(R.string.no_image_reverted)
         binding.imagesUploadTextParam.setText(R.string.no_image_uploaded)
@@ -354,27 +357,29 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * @param achievements
      */
     private fun inflateAchievements(achievements: Achievements) {
-
         // Thanks Received Badge
-        showBadgesWithCount(view = binding.thanksImageIcon, count =  achievements.thanksReceived)
+        showBadgesWithCount(view = binding.thanksImageIcon, count = achievements.thanksReceived)
 
         // Featured Images Badge
-        showBadgesWithCount(view = binding.featuredImageIcon, count =  achievements.featuredImages)
+        showBadgesWithCount(view = binding.featuredImageIcon, count = achievements.featuredImages)
 
         // Quality Images Badge
-        showBadgesWithCount(view = binding.qualityImageIcon, count =  achievements.qualityImages)
+        showBadgesWithCount(view = binding.qualityImageIcon, count = achievements.qualityImages)
 
         binding.imagesUsedByWikiProgressBar.progress =
             100 * achievements.uniqueUsedImages / levelInfo.maxUniqueImages
-        binding.imagesUsedCount.text = (achievements.uniqueUsedImages.toString() + "/"
-                + levelInfo.maxUniqueImages)
+        binding.imagesUsedCount.text = (
+            achievements.uniqueUsedImages.toString() + "/" +
+                levelInfo.maxUniqueImages
+        )
 
-        binding.achievementLevel.text = getString(R.string.level,levelInfo.levelNumber)
+        binding.achievementLevel.text = getString(R.string.level, levelInfo.levelNumber)
         binding.achievementBadgeImage.setImageDrawable(
             VectorDrawableCompat.create(
-                resources, R.drawable.badge,
-                ContextThemeWrapper(activity, levelInfo.levelStyle).theme
-            )
+                resources,
+                R.drawable.badge,
+                ContextThemeWrapper(activity, levelInfo.levelStyle).theme,
+            ),
         )
         binding.achievementBadgeText.text = levelInfo.levelNumber.toString()
         val store = BasicKvStore(requireContext(), userName)
@@ -397,32 +402,34 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         count: Int,
         backgroundColor: Int = R.attr.colorPrimary,
         badgeTextColor: Int = R.attr.textEnabled,
-        badgeGravity: Int = BadgeDrawable.TOP_END
+        badgeGravity: Int = BadgeDrawable.TOP_END,
     ) {
-        //https://stackoverflow.com/a/67742035
+        // https://stackoverflow.com/a/67742035
         if (count == 0) {
             view.visibility = View.GONE
             return
         }
 
-        view.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            /**
-             * Callback method to be invoked when the global layout state or the visibility of views
-             * within the view tree changes
-             */
-            @ExperimentalBadgeUtils
-            override fun onGlobalLayout() {
-                view.visibility = View.VISIBLE
-                val badgeDrawable = BadgeDrawable.create(requireActivity())
-                badgeDrawable.number = count
-                badgeDrawable.badgeGravity = badgeGravity
-                badgeDrawable.badgeTextColor = badgeTextColor
-                badgeDrawable.backgroundColor = backgroundColor
-                BadgeUtils.attachBadgeDrawable(badgeDrawable, view)
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-            }
-        })
+        view.viewTreeObserver.addOnGlobalLayoutListener(
+            object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                /**
+                 * Callback method to be invoked when the global layout state or the visibility of views
+                 * within the view tree changes
+                 */
+                @ExperimentalBadgeUtils
+                override fun onGlobalLayout() {
+                    view.visibility = View.VISIBLE
+                    val badgeDrawable = BadgeDrawable.create(requireActivity())
+                    badgeDrawable.number = count
+                    badgeDrawable.badgeGravity = badgeGravity
+                    badgeDrawable.badgeTextColor = badgeTextColor
+                    badgeDrawable.backgroundColor = backgroundColor
+                    BadgeUtils.attachBadgeDrawable(badgeDrawable, view)
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                }
+            },
+        )
     }
 
     /**
@@ -430,11 +437,12 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      */
     private fun hideProgressBar(achievements: Achievements) {
         if (binding.progressBar != null) {
-            levelInfo = from(
-                achievements.imagesUploaded,
-                achievements.uniqueUsedImages,
-                achievements.notRevertPercentage
-            )
+            levelInfo =
+                from(
+                    achievements.imagesUploaded,
+                    achievements.uniqueUsedImages,
+                    achievements.notRevertPercentage,
+                )
             inflateAchievements(achievements)
             setUploadProgress(achievements.imagesUploaded)
             setImageRevertPercentage(achievements.notRevertPercentage)
@@ -446,7 +454,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.images_uploaded),
             resources.getString(R.string.images_uploaded_explanation),
-            IMAGES_UPLOADED_URL
+            IMAGES_UPLOADED_URL,
         )
     }
 
@@ -454,7 +462,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.image_reverts),
             resources.getString(R.string.images_reverted_explanation),
-            IMAGES_REVERT_URL
+            IMAGES_REVERT_URL,
         )
     }
 
@@ -462,7 +470,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.images_used_by_wiki),
             resources.getString(R.string.images_used_explanation),
-            IMAGES_USED_URL
+            IMAGES_USED_URL,
         )
     }
 
@@ -470,7 +478,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_wikidata_edits),
             resources.getString(R.string.images_via_nearby_explanation),
-            IMAGES_NEARBY_PLACES_URL
+            IMAGES_NEARBY_PLACES_URL,
         )
     }
 
@@ -478,7 +486,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_featured),
             resources.getString(R.string.images_featured_explanation),
-            IMAGES_FEATURED_URL
+            IMAGES_FEATURED_URL,
         )
     }
 
@@ -486,7 +494,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_thanks),
             resources.getString(R.string.thanks_received_explanation),
-            THANKS_URL
+            THANKS_URL,
         )
     }
 
@@ -494,7 +502,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         launchAlertWithHelpLink(
             resources.getString(R.string.statistics_quality),
             resources.getString(R.string.quality_images_info),
-            QUALITY_IMAGE_URL
+            QUALITY_IMAGE_URL,
         )
     }
 
@@ -503,20 +511,27 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
      * @param title
      * @param message
      */
-    private fun launchAlert(title: String, message: String) {
+    private fun launchAlert(
+        title: String,
+        message: String,
+    ) {
         showAlertDialog(
             requireActivity(),
             title,
             message,
             getString(R.string.ok),
-            {}
+            {},
         )
     }
 
     /**
      * Launch Alert with a READ MORE button and clicking it open a custom webpage
      */
-    private fun launchAlertWithHelpLink(title: String, message: String, helpLinkUrl: String) {
+    private fun launchAlertWithHelpLink(
+        title: String,
+        message: String,
+        helpLinkUrl: String,
+    ) {
         showAlertDialog(
             requireActivity(),
             title,
@@ -525,9 +540,10 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
             getString(R.string.read_help_link),
             {},
             { handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)) },
-            null
+            null,
         )
     }
+
     /**
      * check to ensure that user is logged in
      * @return
@@ -549,9 +565,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
         return true
     }
 
-
-
-    companion object{
+    companion object {
         private const val BADGE_IMAGE_WIDTH_RATIO = 0.4
         private const val BADGE_IMAGE_HEIGHT_RATIO = 0.3
 
@@ -559,6 +573,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment(){
          * Help link URLs
          */
         private const val IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope"
+
+        // Kept on one line so the URL stays searchable.
+        @Suppress("ktlint:standard:max-line-length")
         private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"
         private const val IMAGES_USED_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images"
         private const val IMAGES_NEARBY_PLACES_URL = "https://www.wikidata.org/wiki/Property:P18"
