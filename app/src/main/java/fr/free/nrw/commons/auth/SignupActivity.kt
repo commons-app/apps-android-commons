@@ -33,17 +33,20 @@ class SignupActivity : BaseActivity() {
             loadUrl(BuildConfig.SIGNUP_LANDING_URL)
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (webView!!.canGoBack()) {
-                    webView!!.goBack()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                    isEnabled = true
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (webView!!.canGoBack()) {
+                        webView!!.goBack()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
                 }
-            }
-        })
+            },
+        )
     }
 
     /**
@@ -55,26 +58,34 @@ class SignupActivity : BaseActivity() {
     override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
         if (Build.VERSION.SDK_INT <= 25 &&
             (resources.configuration.uiMode == applicationContext.resources.configuration.uiMode)
-        ) return
+        ) {
+            return
+        }
         super.applyOverrideConfiguration(overrideConfiguration)
     }
 
     private inner class MyWebViewClient : WebViewClient() {
         @Deprecated("Deprecated in Java")
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean =
+        override fun shouldOverrideUrlLoading(
+            view: WebView,
+            url: String,
+        ): Boolean =
             if (url == BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL) {
-                //Signup success, so clear cookies, notify user, and load LoginActivity again
+                // Signup success, so clear cookies, notify user, and load LoginActivity again
                 Timber.d("Overriding URL %s", url)
 
-                Toast.makeText(
-                    this@SignupActivity, R.string.account_created, Toast.LENGTH_LONG
-                ).show()
+                Toast
+                    .makeText(
+                        this@SignupActivity,
+                        R.string.account_created,
+                        Toast.LENGTH_LONG,
+                    ).show()
 
                 // terminate on task completion.
                 finish()
                 true
             } else {
-                //If user clicks any other links in the webview
+                // If user clicks any other links in the webview
                 Timber.d("Not overriding URL, URL is: %s", url)
                 false
             }
