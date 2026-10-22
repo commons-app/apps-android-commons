@@ -158,4 +158,15 @@ class ImageProcessingServiceTest {
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
     }
+
+    @Test
+    fun validateImageForAudioFileSkipsImageChecks() {
+        `when`(uploadItem.mimeType).thenReturn("audio/ogg")
+        `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
+        `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.FILE_NO_EXIF))
+        val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+    }
 }

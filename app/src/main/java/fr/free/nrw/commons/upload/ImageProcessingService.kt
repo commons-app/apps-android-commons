@@ -48,16 +48,23 @@ class ImageProcessingService @Inject constructor(
 
         Timber.d("Checking the validity of image")
         val filePath = uploadItem.mediaUri?.path
+        // Geolocation, darkness, FBMD, and EXIF are image-specific checks,
+        // so they do not apply to other media types, such as audio.
+        val isImage = uploadItem.mimeType?.startsWith("image/") ?: true
 
         return Single.zip(
             checkIfFileAlreadyExists(
                 originalFilePath = uploadItem.contentUri!!,
                 modifiedFilePath = uploadItem.mediaUri!!
             ),
-            checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
-            checkDarkImage(filePath!!),
-            checkFBMD(filePath),
-            checkEXIF(filePath)
+            if (isImage) {
+                checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation)
+            } else {
+                Single.just(IMAGE_OK)
+            },
+            if (isImage) checkDarkImage(filePath!!) else Single.just(IMAGE_OK),
+            if (isImage) checkFBMD(filePath) else Single.just(IMAGE_OK),
+            if (isImage) checkEXIF(filePath!!) else Single.just(IMAGE_OK)
         ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
             val unsupportedFormatResult = if (uploadItem.hasUnsupportedFormat) fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED else 0
             Timber.d(
