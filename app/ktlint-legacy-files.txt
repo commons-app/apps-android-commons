@@ -12,15 +12,6 @@ app/src/main/java/fr/free/nrw/commons/ViewPagerAdapter.kt
 app/src/main/java/fr/free/nrw/commons/WelcomeActivity.kt
 app/src/main/java/fr/free/nrw/commons/WelcomePagerAdapter.kt
 app/src/main/java/fr/free/nrw/commons/activity/SingleWebViewActivity.kt
-app/src/main/java/fr/free/nrw/commons/auth/AccountUtil.kt
-app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt
-app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt
-app/src/main/java/fr/free/nrw/commons/auth/SignupActivity.kt
-app/src/main/java/fr/free/nrw/commons/auth/WikiAccountAuthenticator.kt
-app/src/main/java/fr/free/nrw/commons/auth/WikiAccountAuthenticatorService.kt
-app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt
-app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt
-app/src/main/java/fr/free/nrw/commons/auth/login/LoginResponse.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkFragment.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkListRootFragment.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkPages.kt
@@ -352,7 +343,6 @@ app/src/test/kotlin/fr/free/nrw/commons/MockWebServerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/OkHttpJsonApiClientTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/TestCommonsApplication.kt
 app/src/test/kotlin/fr/free/nrw/commons/actions/ThanksClientTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/auth/WikiAccountAuthenticatorServiceUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookMarkLocationDaoTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationControllerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationFragmentUnitTests.kt

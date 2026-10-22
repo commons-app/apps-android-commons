@@ -18,78 +18,81 @@ import javax.inject.Singleton
  * Manage the current logged in user session.
  */
 @Singleton
-class SessionManager @Inject constructor(
-    private val context: Context,
-    @param:Named("default_preferences") private val defaultKvStore: JsonKvStore
-) {
-    private val accountManager: AccountManager get() = AccountManager.get(context)
+class SessionManager
+    @Inject
+    constructor(
+        private val context: Context,
+        @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
+    ) {
+        private val accountManager: AccountManager get() = AccountManager.get(context)
 
-    private var _currentAccount: Account? = null // Unlike a savings account...  ;-)
-    val currentAccount: Account? get() {
-        if (_currentAccount == null) {
-            val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
-            if (allAccounts.isNotEmpty()) {
-                _currentAccount = allAccounts[0]
+        private var _currentAccount: Account? = null // Unlike a savings account...  ;-)
+        val currentAccount: Account? get() {
+            if (_currentAccount == null) {
+                val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
+                if (allAccounts.isNotEmpty()) {
+                    _currentAccount = allAccounts[0]
+                }
+            }
+            return _currentAccount
+        }
+
+        val userName: String?
+            get() = currentAccount?.name
+
+        var password: String?
+            get() = currentAccount?.let { accountManager.getPassword(it) }
+            private set(value) {
+                currentAccount?.let { accountManager.setPassword(it, value) }
+            }
+
+        val isUserLoggedIn: Boolean
+            get() = defaultKvStore.getBoolean("isUserLoggedIn", false)
+
+        fun updateAccount(result: LoginResult) {
+            if (createAccount(result.userName!!, result.password!!)) {
+                password = result.password
             }
         }
-        return _currentAccount
-    }
 
-    val userName: String?
-        get() = currentAccount?.name
+        fun doesAccountExist(): Boolean = currentAccount != null
 
-    var password: String?
-        get() = currentAccount?.let { accountManager.getPassword(it) }
-        private set(value) {
-            currentAccount?.let { accountManager.setPassword(it, value) }
-        }
+        fun setUserLoggedIn(isLoggedIn: Boolean) = defaultKvStore.putBoolean("isUserLoggedIn", isLoggedIn)
 
-    val isUserLoggedIn: Boolean
-        get() = defaultKvStore.getBoolean("isUserLoggedIn", false)
+        fun forceLogin(context: Context?) = context?.let { LoginActivity.startYourself(it) }
 
-    fun updateAccount(result: LoginResult) {
-        if (createAccount(result.userName!!, result.password!!)) {
-            password = result.password
-        }
-    }
+        fun getPreference(key: String): Boolean = defaultKvStore.getBoolean(key)
 
-    fun doesAccountExist(): Boolean =
-        currentAccount != null
+        fun logout(): Completable =
+            Completable.fromObservable(
+                Observable
+                    .empty<Any>()
+                    .doOnComplete {
+                        removeAccount()
+                        _currentAccount = null
+                    },
+            )
 
-    fun setUserLoggedIn(isLoggedIn: Boolean) =
-        defaultKvStore.putBoolean("isUserLoggedIn", isLoggedIn)
-
-    fun forceLogin(context: Context?) =
-        context?.let { LoginActivity.startYourself(it) }
-
-    fun getPreference(key: String): Boolean =
-        defaultKvStore.getBoolean(key)
-
-    fun logout(): Completable = Completable.fromObservable(
-        Observable.empty<Any>()
-            .doOnComplete {
+        private fun createAccount(
+            userName: String,
+            password: String,
+        ): Boolean {
+            var account = currentAccount
+            if (account == null || TextUtils.isEmpty(account.name) || account.name != userName) {
                 removeAccount()
-                _currentAccount = null
+                account = Account(userName, ACCOUNT_TYPE)
+                return accountManager.addAccountExplicitly(account, password, null)
             }
-    )
-
-    private fun createAccount(userName: String, password: String): Boolean {
-        var account = currentAccount
-        if (account == null || TextUtils.isEmpty(account.name) || account.name != userName) {
-            removeAccount()
-            account = Account(userName, ACCOUNT_TYPE)
-            return accountManager.addAccountExplicitly(account, password, null)
+            return true
         }
-        return true
-    }
 
-    private fun removeAccount() {
-        currentAccount?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                accountManager.removeAccountExplicitly(it)
-            } else {
-                accountManager.removeAccount(it, null, null)
+        private fun removeAccount() {
+            currentAccount?.let {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                    accountManager.removeAccountExplicitly(it)
+                } else {
+                    accountManager.removeAccount(it, null, null)
+                }
             }
         }
     }
-}
