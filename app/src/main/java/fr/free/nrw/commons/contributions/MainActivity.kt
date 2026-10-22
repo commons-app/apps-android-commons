@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.work.ExistingWorkPolicy
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.activity.OnBackPressedCallback
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
@@ -35,10 +35,10 @@ import fr.free.nrw.commons.quiz.QuizChecker
 import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -46,8 +46,9 @@ import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
-
-class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener {
+class MainActivity :
+    BaseActivity(),
+    FragmentManager.OnBackStackChangedListener {
     @JvmField
     @Inject
     var sessionManager: SessionManager? = null
@@ -64,6 +65,7 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
     private var nearbyParentFragment: NearbyParentFragment? = null
     private var exploreFragment: ExploreFragment? = null
     private var bookmarkFragment: BookmarkFragment? = null
+
     @JvmField
     var activeFragment: ActiveFragment? = null
     private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null
@@ -98,7 +100,6 @@ class MainActivity : BaseActivity(), FragmentManager.OnBackStackChangedListener 
 
     var tabLayout: NavTabLayout? = null
 
-
     override fun onSupportNavigateUp(): Boolean {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
             if (!contributionsFragment!!.backButtonClicked()) {
@@ -131,7 +132,7 @@ Getting true by the key means the depiction editor screen is opened for the firs
 after opening the app.
 Getting false by the key means the depiction editor screen is not opened for the first time
 after opening the app.
- */
+         */
         applicationKvStore!!.putBoolean("first_edit_depict", true)
         if (applicationKvStore!!.getBoolean("login_skipped") == true) {
             title = getString(R.string.navigation_item_explore)
@@ -142,7 +143,7 @@ after opening the app.
                 applicationKvStore!!.putBoolean("hasAlreadyLaunchedCategoriesDialog", false)
             }
             if (savedInstanceState == null) {
-                //starting a fresh fragment.
+                // starting a fresh fragment.
                 // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
                 if (applicationKvStore!!.getBoolean("last_opened_nearby")) {
                     title = getString(R.string.nearby_fragment)
@@ -158,51 +159,54 @@ after opening the app.
             checkAndResumeStuckUploads()
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                when (activeFragment) {
-                    ActiveFragment.CONTRIBUTIONS -> {
-                        // Means that contribution fragment is visible
-                        if (contributionsFragment?.backButtonClicked() != true) {
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    when (activeFragment) {
+                        ActiveFragment.CONTRIBUTIONS -> {
+                            // Means that contribution fragment is visible
+                            if (contributionsFragment?.backButtonClicked() != true) {
+                                isEnabled = false
+                                onBackPressedDispatcher.onBackPressed()
+                                isEnabled = true
+                            }
+                        }
+                        ActiveFragment.NEARBY -> {
+                            // Means that nearby fragment is visible
+                            if (nearbyParentFragment?.backButtonClicked() != true) {
+                                nearbyParentFragment?.let {
+                                    supportFragmentManager.beginTransaction().remove(it).commit()
+                                }
+                                setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                            }
+                        }
+                        ActiveFragment.EXPLORE -> {
+                            // Explore Fragment is visible
+                            if (exploreFragment?.onBackPressed() != true) {
+                                if (applicationKvStore?.getBoolean("login_skipped") == true) {
+                                    isEnabled = false
+                                    onBackPressedDispatcher.onBackPressed()
+                                    isEnabled = true
+                                } else {
+                                    setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                                }
+                            }
+                        }
+                        ActiveFragment.BOOKMARK -> {
+                            // Means that bookmark fragment is visible
+                            bookmarkFragment?.onBackPressed()
+                            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
+                        }
+                        else -> {
                             isEnabled = false
                             onBackPressedDispatcher.onBackPressed()
                             isEnabled = true
                         }
                     }
-                    ActiveFragment.NEARBY -> {
-                        // Means that nearby fragment is visible
-                        if (nearbyParentFragment?.backButtonClicked() != true) {
-                            nearbyParentFragment?.let {
-                                supportFragmentManager.beginTransaction().remove(it).commit()
-                            }
-                            setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                        }
-                    }
-                    ActiveFragment.EXPLORE -> {
-                        // Explore Fragment is visible
-                        if(exploreFragment?.onBackPressed() != true) {
-                            if (applicationKvStore?.getBoolean("login_skipped") == true) {
-                                isEnabled = false
-                                onBackPressedDispatcher.onBackPressed()
-                                isEnabled = true
-                            } else {
-                                setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                            }
-                        }
-                    }
-                    ActiveFragment.BOOKMARK -> {
-                        // Means that bookmark fragment is visible
-                        bookmarkFragment?.onBackPressed()
-                        setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-                    }
-                    else -> {
-                        isEnabled = false
-                        onBackPressedDispatcher.onBackPressed()
-                        isEnabled = true
-                    }
                 }
-            }
-        })
+            },
+        )
     }
 
     fun setSelectedItemId(id: Int) {
@@ -211,19 +215,21 @@ after opening the app.
 
     private fun setUpPager() {
         binding!!.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(
-            BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
-                if (item.title != getString(R.string.more)) {
-                    // do not change title for more fragment
-                    title = item.title
-                }
-                // set last_opened_nearby true if item is nearby screen else set false
-                applicationKvStore!!.putBoolean(
-                    "last_opened_nearby",
-                    item.title == getString(R.string.nearby_fragment)
-                )
-                val fragment = NavTab.of(item.order).newInstance()
-                loadFragment(fragment, true)
-            }.also { navListener = it })
+            BottomNavigationView
+                .OnNavigationItemSelectedListener { item: MenuItem ->
+                    if (item.title != getString(R.string.more)) {
+                        // do not change title for more fragment
+                        title = item.title
+                    }
+                    // set last_opened_nearby true if item is nearby screen else set false
+                    applicationKvStore!!.putBoolean(
+                        "last_opened_nearby",
+                        item.title == getString(R.string.nearby_fragment),
+                    )
+                    val fragment = NavTab.of(item.order).newInstance()
+                    loadFragment(fragment, true)
+                }.also { navListener = it },
+        )
     }
 
     private fun setUpLoggedOutPager() {
@@ -239,11 +245,14 @@ after opening the app.
         }
     }
 
-    private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean {
-        //showBottom so that we do not show the bottom tray again when constructing
-        //from the saved instance state.
+    private fun loadFragment(
+        fragment: Fragment?,
+        showBottom: Boolean,
+    ): Boolean {
+        // showBottom so that we do not show the bottom tray again when constructing
+        // from the saved instance state.
 
-        freeUpFragments();
+        freeUpFragments()
 
         if (fragment is ContributionsFragment) {
             if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
@@ -278,13 +287,13 @@ after opening the app.
                 val bottomSheet = MoreBottomSheetLoggedOutFragment()
                 bottomSheet.show(
                     supportFragmentManager,
-                    "MoreBottomSheetLoggedOut"
+                    "MoreBottomSheetLoggedOut",
                 )
             } else {
                 val bottomSheet = MoreBottomSheetFragment()
                 bottomSheet.show(
                     supportFragmentManager,
-                    "MoreBottomSheet"
+                    "MoreBottomSheet",
                 )
             }
         }
@@ -302,7 +311,11 @@ after opening the app.
     /**
      * loadFragment() overload that supports passing extras to fragments
      */
-    private fun loadFragment(fragment: Fragment?, showBottom: Boolean, args: Bundle?): Boolean {
+    private fun loadFragment(
+        fragment: Fragment?,
+        showBottom: Boolean,
+        args: Bundle?,
+    ): Boolean {
         if (fragment != null && args != null) {
             fragment.arguments = args
         }
@@ -325,7 +338,6 @@ after opening the app.
         bookmarkFragment = null
     }
 
-
     fun hideTabs() {
         binding!!.fragmentMainNavTabLayout.visibility = View.GONE
     }
@@ -343,14 +355,18 @@ after opening the app.
     fun setNumOfUploads(uploadCount: Int) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
             title =
-                resources.getString(R.string.contributions_fragment) + " " + (if (uploadCount != 0)
-                    resources
-                        .getQuantityString(
-                            R.plurals.contributions_subtitle,
-                            uploadCount, uploadCount
-                        )
-                else
-                    getString(R.string.contributions_subtitle_zero))
+                resources.getString(R.string.contributions_fragment) + " " + (
+                    if (uploadCount != 0) {
+                        resources
+                            .getQuantityString(
+                                R.plurals.contributions_subtitle,
+                                uploadCount,
+                                uploadCount,
+                            )
+                    } else {
+                        getString(R.string.contributions_subtitle_zero)
+                    }
+                )
         }
     }
 
@@ -366,29 +382,32 @@ after opening the app.
      */
     @SuppressLint("CheckResult")
     private fun checkAndResumeStuckUploads() {
-        val stuckUploads = contributionDao!!.getContribution(
-            listOf(Contribution.STATE_IN_PROGRESS)
-        )
-            .subscribeOn(Schedulers.io())
-            .blockingGet()
+        val stuckUploads =
+            contributionDao!!
+                .getContribution(
+                    listOf(Contribution.STATE_IN_PROGRESS),
+                ).subscribeOn(Schedulers.io())
+                .blockingGet()
         Timber.d("Resuming %d uploads...", stuckUploads.size)
         if (!stuckUploads.isEmpty()) {
             for (contribution in stuckUploads) {
                 contribution.state = Contribution.STATE_QUEUED
                 contribution.dateUploadStarted = Calendar.getInstance().time
-                Completable.fromAction { contributionDao!!.saveSynchronous(contribution) }
+                Completable
+                    .fromAction { contributionDao!!.saveSynchronous(contribution) }
                     .subscribeOn(Schedulers.io())
                     .subscribe()
             }
             makeOneTimeWorkRequest(
-                this, ExistingWorkPolicy.APPEND_OR_REPLACE
+                this,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
             )
         }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        //quizChecker.initQuizCheck(this);
+        // quizChecker.initQuizCheck(this);
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -422,7 +441,7 @@ after opening the app.
     }
 
     override fun onBackStackChanged() {
-        //initBackButton();
+        // initBackButton();
     }
 
     /**
@@ -468,7 +487,8 @@ after opening the app.
                 override fun onReady() {
                     nearbyParentFragment!!.centerMapToPlace(place)
                 }
-            })
+            },
+        )
     }
 
     /**
@@ -479,7 +499,11 @@ after opening the app.
      * @param latitude  current latitude of Nearby map
      * @param longitude current longitude of Nearby map
      */
-    fun loadExploreMapFromNearby(zoom: Double, latitude: Double, longitude: Double) {
+    fun loadExploreMapFromNearby(
+        zoom: Double,
+        latitude: Double,
+        longitude: Double,
+    ) {
         val bundle = Bundle()
         bundle.putDouble("prev_zoom", zoom)
         bundle.putDouble("prev_latitude", latitude)
@@ -497,7 +521,11 @@ after opening the app.
      * @param latitude  current latitude of Explore map
      * @param longitude current longitude of Explore map
      */
-    fun loadNearbyMapFromExplore(zoom: Double, latitude: Double, longitude: Double) {
+    fun loadNearbyMapFromExplore(
+        zoom: Double,
+        latitude: Double,
+        longitude: Double,
+    ) {
         val bundle = Bundle()
         bundle.putDouble("prev_zoom", zoom)
         bundle.putDouble("prev_latitude", latitude)
@@ -540,17 +568,18 @@ after opening the app.
         NEARBY,
         EXPLORE,
         BOOKMARK,
-        MORE
+        MORE,
     }
 
     /**
      * Load default language in onCreate from SharedPreferences
      */
     private fun loadLocale() {
-        val preferences = getSharedPreferences(
-            "Settings",
-            MODE_PRIVATE
-        )
+        val preferences =
+            getSharedPreferences(
+                "Settings",
+                MODE_PRIVATE,
+            )
         val language = preferences.getString("language", "")!!
         val settingsFragment = SettingsFragment()
         settingsFragment.setLocale(this, language)
