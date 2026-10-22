@@ -39,7 +39,8 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
         )
 
         // if we came from 'Show in Explore' in Nearby, pass on zoom and center
-        if (bundle.containsKey("prev_zoom") || bundle.containsKey("prev_latitude") || bundle.containsKey("prev_longitude")) {
+        if (bundle.containsKey("prev_zoom") || bundle.containsKey("prev_latitude") || bundle
+            .containsKey("prev_longitude")) {
             featuredArguments.putDouble("prev_zoom", zoom)
             featuredArguments.putDouble("prev_latitude", latitude)
             featuredArguments.putDouble("prev_longitude", longitude)

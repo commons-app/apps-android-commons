@@ -345,7 +345,8 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                     override fun afterTextChanged(editable: Editable) = Unit
                 })
 
-                languageHistoryListView?.setOnItemClickListener { adapterView: AdapterView<*>, view1: View?, position: Int, id: Long ->
+                languageHistoryListView?.setOnItemClickListener { adapterView: AdapterView<*>,
+                    view1: View?, position: Int, id: Long ->
                     onRecentLanguageClicked(dialog, adapterView, position, description)
                 }
 
@@ -518,14 +519,16 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         for (i in 0 until itemCount) {
             if (fragment != null) {
                 if (fragment!!.view != null) {
-                    val holder = (fragment!!.requireView().findViewById<View>(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
+                    val holder = (fragment!!.requireView().findViewById<View>(R.id
+                        .rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
                     if (holder != null) {
                         holder.addButton!!.visibility = View.GONE
                     }
                 }
             } else {
                 if (activity != null) {
-                    val holder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
+                    val holder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as
+                        RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
                     if (holder != null) {
                         holder.addButton!!.visibility = View.GONE
                     }
@@ -536,14 +539,16 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         // Show Add Button for the last item
         if (fragment != null) {
             if (fragment!!.view != null) {
-                val lastItemHolder = (fragment!!.requireView().findViewById<View>(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
+                val lastItemHolder = (fragment!!.requireView().findViewById<View>(R.id
+                    .rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
                 if (lastItemHolder != null) {
                     lastItemHolder.addButton!!.visibility = View.VISIBLE
                 }
             }
         } else {
             if (activity != null) {
-                val lastItemHolder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
+                val lastItemHolder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as
+                    RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
                 if (lastItemHolder != null) {
                     lastItemHolder.addButton!!.visibility = View.VISIBLE
                 }

@@ -387,18 +387,22 @@ class ImageAdapter(
                 val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
                 withContext(Dispatchers.Main) {
                     if (holder.isItemUploaded()) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string
+                            .custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
                         return@withContext
                     }
 
                     if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
                         holder.itemUploaded()
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string
+                            .custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
                         return@withContext
                     }
 
-                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader
+                        .getFromUploaded(imageSHA1) != null) {
+                        Toast.makeText(context, R.string
+                            .custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
                     }
 
                     if (holder.isItemNotForUpload()) {
@@ -406,7 +410,8 @@ class ImageAdapter(
                     }
                     selectedImages.add(image)
                     notifyItemChanged(position, ImageSelectedOrUpdated())
-                    imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+                    imageSelectListener.onSelectedImagesChanged(selectedImages,
+                        numberOfSelectedImagesMarkedAsNotForUpload)
                 }
             }
         }

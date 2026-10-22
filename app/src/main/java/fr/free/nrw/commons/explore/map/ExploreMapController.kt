@@ -113,7 +113,8 @@ class ExploreMapController @Inject constructor(
                 }
             }
 
-            // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+            // Our radius searched around us, will be used to understand when user search their own location, we will
+            // follow them
             if (checkingAroundCurrentLocation) {
                 currentLocationSearchRadius = latestSearchRadius
                 currentLocation = currentLatLng

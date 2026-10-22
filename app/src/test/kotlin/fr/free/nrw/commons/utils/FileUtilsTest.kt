@@ -40,7 +40,8 @@ class FileUtilsTest {
         assertEquals(
             "96e733a3e59261c0621ba99be5bd10bb21abe53e",
             fileUtilsWrapper.getSHA1(
-                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream(),
+                ("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQV" +
+                    "R42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=").byteInputStream(),
             ),
         )
     }

@@ -58,7 +58,8 @@ fun placeAdapterDelegate(
                 }
             }
         }
-        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
+        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item,
+            inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item, galleryPickLauncherForResult) }

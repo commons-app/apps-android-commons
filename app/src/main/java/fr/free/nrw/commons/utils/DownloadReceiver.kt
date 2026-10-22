@@ -50,9 +50,13 @@ class DownloadReceiver : BroadcastReceiver() {
                             DownloadManager.ERROR_UNHANDLED_HTTP_CODE ->
                                 Timber.e("CAUSE: Server rejected request (Likely 403 Forbidden / Missing User-Agent)")
                             DownloadManager.ERROR_HTTP_DATA_ERROR ->
-                                Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")
+                                Timber
+                                    .e(("CAUSE: Network connection dropped mid-download (Beta c" +
+                                    "luster flakiness or VPN)"))
                             DownloadManager.ERROR_FILE_ERROR ->
-                                Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")
+                                Timber
+                                    .e(("CAUSE: File system rejected the file (Storage issue or" +
+                                    " invalid filename characters)"))
                             DownloadManager.ERROR_INSUFFICIENT_SPACE ->
                                 Timber.e("CAUSE: Device is out of storage space")
                             DownloadManager.ERROR_CANNOT_RESUME ->

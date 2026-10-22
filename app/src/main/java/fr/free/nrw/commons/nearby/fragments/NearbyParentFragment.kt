@@ -525,7 +525,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties()
             .put("Referer", "http://maps.wikimedia.org/")
 
-        if (lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) { // Checking for last searched location
+        if (lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) {
+        // Checking for last searched location
             val locationLatLng = applicationKvStore!!.getString("LastLocation")!!.split(",")
             lastMapFocus = GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble())
         } else if (lastMapFocus == null) {
@@ -742,7 +743,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     }
 
     private fun performMapReadyActions() {
-        if (!isDepictsPickerMode && activity is MainActivity && (activity as MainActivity).activeFragment == ActiveFragment.NEARBY) {
+        if (!isDepictsPickerMode && activity is MainActivity && (activity as MainActivity).activeFragment ==
+            ActiveFragment.NEARBY) {
             if (applicationKvStore!!.getBoolean("doNotAskForLocationPermission", false) &&
                 !locationPermissionsHelper!!.checkLocationPermission(requireActivity())
             ) {
@@ -828,7 +830,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
             setProgressBarVisibility(true)
         } else {
-            activity?.let { locationPermissionsHelper?.showLocationOffDialog(it, R.string.ask_to_turn_location_on_text) }
+            activity?.let { locationPermissionsHelper?.showLocationOffDialog(it, R.string
+                .ask_to_turn_location_on_text) }
         }
 
         presenter?.onMapReady()
@@ -923,7 +926,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             }
         } catch (e: Exception) {
             Timber.e(e)
-            //Broadcast receivers should always be unregistered inside catch, you never know if they were already registered or not
+            // Broadcast receivers should always be unregistered inside catch, you never know if they were already
+            // registered or not
         }
     }
 
@@ -1395,7 +1399,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng?.latitude == 0.0 && screenTopRightLatLng?.longitude == 0.0 && screenBottomLeftLatLng?.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
+        if (screenTopRightLatLng?.latitude == 0.0 && screenTopRightLatLng?.longitude == 0.0 &&
+            screenBottomLeftLatLng?.latitude == 0.0 && screenBottomLeftLatLng.longitude == 0.0) {
             val delta = 0.009
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta
@@ -1458,7 +1463,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         val screenTopRightLatLng = screenBottomLeft
         val screenBottomLeftLatLng = screenTopRight
 
-        if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
+        if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) {
+        // Means we are checking around current location
             populatePlacesForCurrentLocation(
                 lastKnownLocation, screenTopRightLatLng,
                 screenBottomLeftLatLng, currentLatLng, customQuery
@@ -2243,7 +2249,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (nearestPlace != null && place.name == nearestPlace!!.name) {
             // Highlight nearest place only when user clicks on the home nearby banner
 //            highlightNearestPlace(place);
-            return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple
+            return (if (isBookmarked) fr.free.nrw.commons.R.drawable
+                .ic_custom_map_marker_purple_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple
                 )
         }
 
@@ -2251,17 +2258,22 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
             return fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments
         }
         if (!place.pic.trim { it <= ' ' }.isEmpty()) {
-            return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green
+            return (if (isBookmarked) fr.free.nrw.commons.R.drawable
+                .ic_custom_map_marker_green_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green
                 )
         }
-        if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+        if (!place.exists) {
+        // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a
+        // past event, or a place that was destroyed
             return (fr.free.nrw.commons.R.drawable.ic_clear_black_24dp)
         }
         if (place.name.isEmpty()) {
-            return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey
+            return (if (isBookmarked) fr.free.nrw.commons.R.drawable
+                .ic_custom_map_marker_grey_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey
                 )
         }
-        return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked else fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red
+        return (if (isBookmarked) fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked else fr
+            .free.nrw.commons.R.drawable.ic_custom_map_marker_red
             )
     }
 
@@ -2620,7 +2632,8 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 })
                 .into(binding!!.bottomSheetDetails.icon)
 
-            if (binding!!.bottomSheetDetails.icon.drawable != null && binding!!.bottomSheetDetails.icon.drawable.constantState == loadingDrawable?.constantState) {
+            if (binding!!.bottomSheetDetails.icon.drawable != null && binding!!.bottomSheetDetails.icon
+                .drawable.constantState == loadingDrawable?.constantState) {
                 binding!!.bottomSheetDetails.icon.startAnimation(animation)
             } else {
                 binding!!.bottomSheetDetails.icon.clearAnimation()

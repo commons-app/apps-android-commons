@@ -377,7 +377,8 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
-                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE
+                ((parentFragment?.parentFragment?.parentFragment) as
+                    ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE
             }
         }
     }

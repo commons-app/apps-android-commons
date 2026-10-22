@@ -173,7 +173,8 @@ class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     }
 
     fun backPressed(): Boolean {
-        //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
+        // check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid
+        // NullPointerException
         if (mediaDetails != null) {
             if (mediaDetails!!.isVisible()) {
                 // todo add get list fragment

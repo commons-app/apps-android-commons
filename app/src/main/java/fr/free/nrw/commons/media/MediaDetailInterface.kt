@@ -48,7 +48,9 @@ interface MediaDetailInterface {
      * @param title file name
      * @return Single<MwQueryResponse>
      </MwQueryResponse> */
-    @GET(WikidataConstants.MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
+    @GET(WikidataConstants.MW_API_PREFIX +
+        ("action=query&prop=revisions&rvprop=content|timestamp&r" +
+        "vlimit=1&converttitles="))
     fun getWikiText(
         @Query("titles") title: String?,
     ): Single<MwQueryResponse>

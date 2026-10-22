@@ -55,7 +55,8 @@ import javax.inject.Named
     buildConfigClass = BuildConfig::class,
     resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
     reportFormat = StringFormat.KEY_VALUE_LIST,
-    reportContent = [ReportField.USER_COMMENT, ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE]
+    reportContent = [ReportField.USER_COMMENT, ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME,
+        ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE]
 )
 
 @AcraMailSender(mailTo = "commons-app-android-private@googlegroups.com", reportAsFile = false)
@@ -290,7 +291,8 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for BaseLogoutListener
          *
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page
          * @param loginUsername Username to be pre-filled on the login page
          */
@@ -322,7 +324,8 @@ class CommonsApplication : MultiDexApplication() {
 
     /**
      * This class is an extension of BaseLogoutListener, providing additional functionality or customization
-     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to the login screen.
+     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to
+     * the login screen.
      */
     class ActivityLogoutListener : BaseLogoutListener {
         var activity: Activity
@@ -331,8 +334,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener.
          *
-         * @param activity The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          */
         constructor(activity: Activity, ctx: Context) : super(ctx) {
             this.activity = activity
@@ -341,8 +346,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener with additional parameters for the login screen.
          *
-         * @param activity      The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page after logout.
          * @param loginUsername Username to be pre-filled on the login page after logout.
          */

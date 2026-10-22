@@ -6,6 +6,7 @@ import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.Toast
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.R.string as S
 import fr.free.nrw.commons.databinding.ActivityWikidataFeedbackBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import io.reactivex.Single
@@ -55,7 +56,7 @@ class WikidataFeedback : BaseActivity() {
         )
         binding.radioButton2.setText(
             getString(
-                R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
+    S.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
                 place,
             ),
         )
@@ -83,7 +84,8 @@ class WikidataFeedback : BaseActivity() {
                 else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
             }
             var det = binding.detailsEditText.text.toString()
-            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
+            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text
+                .isNullOrEmpty()) {
                 Toast
                     .makeText(
                         this,

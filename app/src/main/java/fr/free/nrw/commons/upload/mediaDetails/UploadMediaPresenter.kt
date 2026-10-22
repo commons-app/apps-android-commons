@@ -72,14 +72,18 @@ class UploadMediaPresenter @Inject constructor(
         val uploadItems = repository.getUploads()
         if (uploadItemIndex >= 0 && uploadItemIndex < uploadItems.size) {
             if (uploadMediaDetails.isNotEmpty()) {
-                uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails as? MutableList<UploadMediaDetail> ?: uploadMediaDetails.toMutableList()
+                uploadItems[uploadItemIndex].uploadMediaDetails =
+                    uploadMediaDetails as? MutableList<UploadMediaDetail> ?: uploadMediaDetails.toMutableList()
                 Timber.d("Set uploadMediaDetails for index %d, size %d", uploadItemIndex, uploadMediaDetails.size)
             } else {
                 uploadItems[uploadItemIndex].uploadMediaDetails = mutableListOf(UploadMediaDetail())
                 Timber.w("Received empty uploadMediaDetails for index %d, initialized default", uploadItemIndex)
             }
         } else {
-            Timber.e("Invalid index %d for uploadItems size %d, skipping setUploadMediaDetails", uploadItemIndex, uploadItems.size)
+            Timber
+                .e(("Invalid index %d for uploadItems size %d, skipping set" +
+                "UploadMediaDetails"),
+                uploadItemIndex, uploadItems.size)
         }
     }
 
@@ -290,7 +294,8 @@ class UploadMediaPresenter @Inject constructor(
             view.showProgress(false)
             // No internationalization required for this error message because it's an internal error.
             view.showMessage(
-                "Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",
+                ("Internal error: Zero upload items received by the Uplo" +
+                    "ad Media Detail Fragment. Sorry, please upload again."),
                 R.color.color_error
             )
             return false

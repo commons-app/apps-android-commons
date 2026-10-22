@@ -148,8 +148,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             onCameraPosition(result)
         }
-        startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
-        voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
+        startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+            ::onEditActivityResult)
+        voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+            ::onVoiceInput)
     }
 
     override fun onCreateView(
@@ -218,7 +220,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
 
         try {
-            if (indexOfFragment >= 0 && !presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())) {
+            if (indexOfFragment >= 0 && !presenter.getImageQuality(indexOfFragment, inAppPictureLocation,
+                requireActivity())) {
                 Timber.d("Image quality check failed, redirecting to MainActivity")
                 startActivityWithFlags(
                     requireActivity(),
@@ -311,7 +314,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 }
             }
 
-            btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }
+            btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation,
+                hasUserRemovedLocation) }
             btnPrevious.setOnClickListener { fragmentCallback?.onPreviousButtonClicked(indexOfFragment) }
             llContainerTitle.setOnClickListener { expandCollapseLlMediaDetail(!isExpanded) }
             llLocationStatus.setOnClickListener { presenter.onMapIconClicked(indexOfFragment) }
@@ -425,7 +429,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    @SuppressLint("StringFormatInvalid")
+    // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
     private fun showNearbyPlaceFound(place: Place) {
         val customLayout = layoutInflater.inflate(R.layout.custom_nearby_found, null)
         val nearbyFoundImage = customLayout.findViewById<ImageView>(R.id.nearbyItemImage)

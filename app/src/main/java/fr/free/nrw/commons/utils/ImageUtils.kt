@@ -186,7 +186,8 @@ object ImageUtils {
                     numberOfBrightPixels++
                 }
 
-                if (numberOfBrightPixels >= brightPixelThreshold || numberOfMediumBrightnessPixels >= mediumBrightPixelThreshold) {
+                if (numberOfBrightPixels >= brightPixelThreshold || numberOfMediumBrightnessPixels >=
+                    mediumBrightPixelThreshold) {
                     return false
                 }
             }

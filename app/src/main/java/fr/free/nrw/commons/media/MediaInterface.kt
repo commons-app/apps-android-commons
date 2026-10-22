@@ -89,7 +89,12 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
-     * This method retrieves a list of Media objects filtered using list geosearch query. Example: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
+     * This method retrieves a list of Media objects filtered using list geosearch query. Example:
+     * https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&
+     * ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&
+     * iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|
+     * DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&
+     * ggslimit=30&ggsradius=10000
      *
      * @param location     the search location
      * @param itemLimit    how many images are returned

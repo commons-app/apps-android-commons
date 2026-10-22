@@ -108,7 +108,8 @@ class DeleteHelperTest {
         )?.blockingGet()
         assertNotNull(makeDeletion)
         assertTrue(makeDeletion!!)
-        verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+        verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString())
     }
 
     /**
@@ -143,11 +144,14 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(false))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
@@ -158,11 +162,14 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForAppendEditFailure() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(false))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
         whenever(media.displayTitle).thenReturn("Test file")
         whenever(media.filename).thenReturn("Test file.jpg")
@@ -180,7 +187,8 @@ class DeleteHelperTest {
     @Test
     fun askReasonAndExecuteCopyrightViolationTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
-        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)
+        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason
+            .COPYRIGHT_VIOLATION, callback)
     }
 
     @Test
@@ -225,11 +233,14 @@ class DeleteHelperTest {
 
     @Test(expected = RuntimeException::class)
     fun makeDeletionForEmptyCreatorName() {
-        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
-        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()))
             .thenReturn(Observable.just(true))
 
         whenever(media.displayTitle).thenReturn("Test file")

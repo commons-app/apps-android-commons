@@ -34,7 +34,8 @@ class ImageCoordinates internal constructor(
     /**
      * Construct from a stream.
      */
-    internal constructor(stream: InputStream, inAppPictureLocation: LatLng?) : this(ExifInterface(stream), inAppPictureLocation)
+    internal constructor(stream: InputStream, inAppPictureLocation: LatLng?) : this(ExifInterface(stream),
+        inAppPictureLocation)
 
     /**
      * Construct from the file path of the image.

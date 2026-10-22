@@ -120,7 +120,8 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
+        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(),
+            anyString(), anyString())
         fragment.uploadFeedback(feedback)
     }
 

@@ -90,7 +90,8 @@ class ImageProcessingServiceTest {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(),
+            any(LatLng::class.java)))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
@@ -138,7 +139,8 @@ class ImageProcessingServiceTest {
 
     @Test
     fun validateImageForWrongGeoLocation() {
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
+        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(),
+            any(LatLng::class.java)))
             .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())

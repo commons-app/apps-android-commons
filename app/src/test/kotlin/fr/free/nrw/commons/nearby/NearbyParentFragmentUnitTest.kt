@@ -83,7 +83,8 @@ class NearbyParentFragmentUnitTest {
     private lateinit var rlBottomSheetLayoutParams: ViewGroup.LayoutParams
 
     @Mock
-    private lateinit var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
+    private lateinit var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragment
+        .NearbyParentFragmentInstanceReadyCallback
 
     @Mock
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
@@ -421,13 +422,17 @@ class NearbyParentFragmentUnitTest {
 
         // Red (needs photo) should be drawn on top of Green (has photo), so Red > Green priority
         Assert.assertTrue(
-            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Has Photo (Green) priority ($priorityHasPhoto)",
+            ("Needs Photo (Red) priority ($priorityNeedsPhoto) shoul" +
+                "d be greater than Has Photo (Green) priority (" +
+                "$priorityHasPhoto)"),
             priorityNeedsPhoto > priorityHasPhoto
         )
         
         // Red should also be drawn on top of Monuments
         Assert.assertTrue(
-            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Monument priority ($priorityMonument)",
+            ("Needs Photo (Red) priority ($priorityNeedsPhoto) shoul" +
+                "d be greater than Monument priority ($priorityMonument" +
+                ")"),
             priorityNeedsPhoto > priorityMonument
         )
     }

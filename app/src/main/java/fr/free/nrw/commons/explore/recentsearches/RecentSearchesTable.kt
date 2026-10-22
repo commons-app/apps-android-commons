@@ -22,7 +22,9 @@ object RecentSearchesTable {
 
     const val DROP_TABLE_STATEMENT: String = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-    const val CREATE_TABLE_STATEMENT: String = ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);")
+    const val CREATE_TABLE_STATEMENT: String =
+        (("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY K" +
+        "EY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);"))
 
     /**
      * This method creates a RecentSearchesTable in SupportSQLiteDatabase
