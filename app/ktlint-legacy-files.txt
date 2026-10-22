@@ -181,14 +181,6 @@ app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesDao.kt
 app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesRoomDao.kt
 app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesTable.kt
 app/src/main/java/fr/free/nrw/commons/repository/UploadRepository.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewController.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewDao.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewEntity.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewImageFragment.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewInterface.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewPagerAdapter.kt
-app/src/main/java/fr/free/nrw/commons/review/ReviewViewPager.kt
 app/src/main/java/fr/free/nrw/commons/settings/SettingsActivity.kt
 app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt
 app/src/main/java/fr/free/nrw/commons/theme/BaseActivity.kt
@@ -349,8 +341,6 @@ app/src/test/kotlin/fr/free/nrw/commons/navtab/MoreBottomSheetFragmentUnitTests.
 app/src/test/kotlin/fr/free/nrw/commons/nearby/LabelTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/notification/NotificationClientTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/review/ReviewActivityTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/review/ReviewHelperTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/upload/ImageProcessingServiceTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/upload/MediaLicensePresenterTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/upload/UploadMediaPresenterTest.kt
