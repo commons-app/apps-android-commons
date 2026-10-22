@@ -93,7 +93,7 @@ class CategoryClient
         ): Single<List<CategoryItem>> =
             responseMapper(
                 categoryInterface.getCategoriesByTitles(
-                    "File:${image}",
+                    "File:$image",
                     itemLimit,
                 ),
             )
