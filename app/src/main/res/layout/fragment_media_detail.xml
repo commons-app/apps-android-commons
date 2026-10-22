@@ -26,10 +26,17 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="@dimen/dimen_250"
       android:layout_gravity="center_horizontal"
       app:actualImageScaleType="none" />
+
+    <ProgressBar
+      android:id="@+id/mediaDetailImageProgressBar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/dimen_250"
+      android:layout_gravity="center_horizontal" />
 
     <ScrollView
       android:id="@+id/mediaDetailScrollView"
@@ -37,9 +44,7 @@
       android:layout_height="wrap_content"
       android:background="@android:color/transparent"
       android:cacheColorHint="@android:color/transparent"
-      android:fillViewport="true"
-      android:visibility="invisible"
-      tools:visibility="visible">
+      android:fillViewport="true">
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -55,7 +60,7 @@
 
                 <LinearLayout
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="@dimen/dimen_250"
                   android:orientation="vertical"
                   android:id="@+id/mediaDetailImageViewSpacer"
                   >
