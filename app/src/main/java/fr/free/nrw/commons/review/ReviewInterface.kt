@@ -19,16 +19,16 @@ interface ReviewInterface {
      *
      */
     @GET(
-        ("w/api.php?action=query&format=json&formatversion=2&gen" +
+        "w/api.php?action=query&format=json&formatversion=2&gen" +
             "erator=categorymembers&gcmtype=file&gcmsort=timestamp&" +
             "gcmdir=desc&gcmtitle=Category:Uploaded_with_Mobile/And" +
-            "roid&gcmlimit=50"),
+            "roid&gcmlimit=50",
     )
     fun getRecentChanges(): Observable<MwQueryResponse>
 
-    @GET(("w/api.php?action=query&format=json&formatversion=2&pro" +
-        "p=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvli" +
-        "mit=1"))
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1",
+    )
     fun getFirstRevisionOfFile(
         @Query("titles") titles: String?,
     ): Observable<MwQueryResponse>
