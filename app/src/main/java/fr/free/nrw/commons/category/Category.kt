@@ -9,7 +9,7 @@ data class Category(
     val description: String? = null,
     val thumbnail: String? = null,
     val lastUsed: Date? = null,
-    var timesUsed: Int = 0
+    var timesUsed: Int = 0,
 ) {
     fun incTimesUsed() {
         timesUsed++
