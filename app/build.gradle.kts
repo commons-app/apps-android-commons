@@ -348,6 +348,7 @@ dependencies {
 
     // Support libraries
     implementation(libs.androidx.browser)
+    implementation(libs.androidx.webkit)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.exifinterface)

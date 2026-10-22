@@ -68,6 +68,8 @@
   <string name="login">Log in</string>
   <string name="forgot_password">Forgot Password?</string>
   <string name="signup">Sign up</string>
+  <string name="signup_webview_error_title">Webpage not available</string>
+  <string name="signup_webview_error_unknown">Unknown error</string>
   <string name="logging_in_title">Logging in</string>
   <string name="logging_in_message">Please wait…</string>
   <string name="updating_caption_title">Updating captions and descriptions</string>
