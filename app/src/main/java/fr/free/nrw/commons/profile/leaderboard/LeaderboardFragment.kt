@@ -191,7 +191,11 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
 
         if (Math.abs(currentPosition - targetPosition) > SMART_SCROLL_JUMP_THRESHOLD) {
             // jump instantly close to the target to skip processing thousands of layouts
-            val offsetPosition = if (targetPosition > currentPosition) targetPosition - SCROLL_TO_TOP_THRESHOLD else targetPosition + SCROLL_TO_TOP_THRESHOLD
+            val offsetPosition = if (targetPosition > currentPosition) {
+                targetPosition - SCROLL_TO_TOP_THRESHOLD
+            } else {
+                targetPosition + SCROLL_TO_TOP_THRESHOLD
+            }
             layoutManager.scrollToPositionWithOffset(offsetPosition, SCROLL_OFFSET)
 
             binding.leaderboardList.post {
