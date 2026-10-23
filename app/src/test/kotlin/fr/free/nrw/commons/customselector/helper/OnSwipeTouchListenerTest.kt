@@ -59,7 +59,12 @@ internal class OnSwipeTouchListenerTest {
     @Test
     fun onTouch() {
         val motionEvent = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0)
-        val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)
+        val func =
+            onSwipeTouchListener.javaClass.getDeclaredMethod(
+                "onTouch",
+                View::class.java,
+                MotionEvent::class.java,
+            )
         func.isAccessible = true
         func.invoke(onSwipeTouchListener, view, motionEvent)
     }
