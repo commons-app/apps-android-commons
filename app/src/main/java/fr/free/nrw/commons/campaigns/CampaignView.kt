@@ -37,7 +37,10 @@ class CampaignView : SwipableCardView {
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context, attrs, defStyleAttr) {
+        context,
+        attrs,
+        defStyleAttr,
+    ) {
         init()
     }
 
@@ -59,15 +62,18 @@ class CampaignView : SwipableCardView {
         (context as BaseActivity).defaultKvStore.putBoolean(CAMPAIGNS_DEFAULT_PREFERENCE, false)
         showLongToast(
             context,
-            resources.getString(R.string.nearby_campaign_dismiss_message)
+            resources.getString(R.string.nearby_campaign_dismiss_message),
         )
         return true
     }
 
     private fun init() {
-        binding = LayoutCampaginBinding.inflate(
-            LayoutInflater.from(context), this, true
-        )
+        binding =
+            LayoutCampaginBinding.inflate(
+                LayoutInflater.from(context),
+                this,
+                true,
+            )
         viewHolder = ViewHolder()
         setOnClickListener {
             campaign?.let {
@@ -84,28 +90,35 @@ class CampaignView : SwipableCardView {
         fun init() {
             if (campaign != null) {
                 binding!!.ivCampaign.setImageDrawable(
-                    ContextCompat.getDrawable(binding!!.root.context, R.drawable.ic_campaign)
+                    ContextCompat.getDrawable(binding!!.root.context, R.drawable.ic_campaign),
                 )
                 binding!!.tvTitle.text = campaign!!.title
                 binding!!.tvDescription.text = campaign!!.description
                 try {
                     if (campaign!!.isWLMCampaign) {
-                        binding!!.tvDates.text = String.format(
-                            "%1s - %2s", campaign!!.startDate,
-                            campaign!!.endDate
-                        )
+                        binding!!.tvDates.text =
+                            String.format(
+                                "%1s - %2s",
+                                campaign!!.startDate,
+                                campaign!!.endDate,
+                            )
                     } else {
-                        val startDate = getIso8601DateFormatShort().parse(
-                            campaign?.startDate
-                        )
-                        val endDate = getIso8601DateFormatShort().parse(
-                            campaign?.endDate
-                        )
-                        binding!!.tvDates.text = String.format(
-                            "%1s - %2s", getExtraShortDateString(
-                                startDate!!
-                            ), getExtraShortDateString(endDate!!)
-                        )
+                        val startDate =
+                            getIso8601DateFormatShort().parse(
+                                campaign?.startDate,
+                            )
+                        val endDate =
+                            getIso8601DateFormatShort().parse(
+                                campaign?.endDate,
+                            )
+                        binding!!.tvDates.text =
+                            String.format(
+                                "%1s - %2s",
+                                getExtraShortDateString(
+                                    startDate!!,
+                                ),
+                                getExtraShortDateString(endDate!!),
+                            )
                     }
                 } catch (e: ParseException) {
                     Timber.e(e)
