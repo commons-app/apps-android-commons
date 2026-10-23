@@ -176,10 +176,14 @@ class DescriptionEditActivity :
         rvDescriptions!!.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     private fun onBackButtonClicked(view: View) {
         onBackPressedDispatcher.onBackPressed()
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     private fun onSubmitButtonClicked(view: View) {
         showLoggingProgressBar()
         val uploadMediaDetails = uploadMediaDetailAdapter.items

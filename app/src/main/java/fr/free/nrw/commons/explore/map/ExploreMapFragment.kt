@@ -366,16 +366,6 @@ class ExploreMapFragment :
      */
     private fun unregisterNetworkReceiver() = activity?.unregisterReceiver(broadcastReceiver)
 
-    private fun startMapWithoutPermission() {
-        lastKnownLocation = defaultLatLng
-        moveCameraToPosition(
-            GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
-        )
-        presenter!!.onMapReady(exploreMapController)
-    }
-
-    private fun registerNetworkReceiver() = activity?.registerReceiver(broadcastReceiver, intentFilter)
-
     private fun performMapReadyActions() {
         if (isDarkTheme) {
             binding!!
@@ -1213,13 +1203,10 @@ class ExploreMapFragment :
         } else {
             locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
         }
-        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
+        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED)
     }
 
-    fun onLocationChanged(
-        locationChangeType: LocationChangeType,
-        location: Location?,
-    ) {
+    fun onLocationChanged(locationChangeType: LocationChangeType) {
         if (locationChangeType == LocationChangeType.PERMISSION_JUST_GRANTED) {
             val curLatLng = locationManager.getLastLocation() ?: getMapCenter()
             populatePlaces(curLatLng)

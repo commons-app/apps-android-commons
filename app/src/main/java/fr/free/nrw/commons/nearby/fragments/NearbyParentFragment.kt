@@ -1830,13 +1830,11 @@ class NearbyParentFragment :
     /**
      * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
      *
-     * @param entity       The entity ID of the place.
      * @param place        The Place object containing the initial place data.
      * @param marker       The Marker object on the map representing the place.
      * @param isBookMarked A boolean indicating if the place is bookmarked.
      */
     private fun getPlaceData(
-        entity: String?,
         place: Place,
         marker: Marker,
         isBookMarked: Boolean,
@@ -1924,7 +1922,7 @@ class NearbyParentFragment :
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
                         } else {
-                            updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, true)
+                            updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng)
                             lastFocusLocation = searchLatLng
                             lastMapFocus =
                                 GeoPoint(
@@ -1988,7 +1986,7 @@ class NearbyParentFragment :
 
                             // curLatLng is used to calculate distance from the current location to the place
                             // and distance is later on populated to the place
-                            updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng, false)
+                            updateMapMarkers(nearbyPlacesInfo.placeList, searchLatLng)
                             lastMapFocus =
                                 GeoPoint(
                                     searchLatLng.latitude,
@@ -2038,7 +2036,6 @@ class NearbyParentFragment :
     private fun updateMapMarkers(
         nearbyPlaces: List<Place>,
         curLatLng: LatLng,
-        shouldUpdateSelectedMarker: Boolean,
     ) {
         presenter!!.updateMapMarkers(nearbyPlaces, curLatLng, scope)
     }
@@ -2537,7 +2534,7 @@ class NearbyParentFragment :
                 binding!!.bottomSheetDetails.icon.visibility = View.GONE
                 binding!!.bottomSheetDetails.wikiDataLl.visibility = View.GONE
                 if (place.name == "") {
-                    getPlaceData(place.wikiDataEntityId, place, marker1, isBookMarked)
+                    getPlaceData(place, marker1, isBookMarked)
                 } else {
                     marker.showInfoWindow()
                     binding!!.bottomSheetDetails.dataCircularProgress.visibility =
