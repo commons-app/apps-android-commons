@@ -194,12 +194,12 @@ class ExploreMapPresenter(
             latitude = exploreMapFragmentView!!.getLastMapFocus()!!.latitude
             longitude = exploreMapFragmentView!!.getLastMapFocus()!!.longitude
         }
-        val dest_location = Location("").apply {
+        val destLocation = Location("").apply {
             latitude = exploreMapFragmentView!!.getMapFocus()!!.latitude
             longitude = exploreMapFragmentView!!.getMapFocus()!!.longitude
         }
 
-        val distance = mylocation.distanceTo(dest_location)
+        val distance = mylocation.distanceTo(destLocation)
 
         return !(distance > 2000.0 * 3 / 4)
     }

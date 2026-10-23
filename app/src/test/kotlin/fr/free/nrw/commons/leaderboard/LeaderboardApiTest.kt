@@ -107,8 +107,8 @@ class LeaderboardApiTest {
          * @throws Exception
          */
         @Throws(Exception::class)
-        private fun convertStreamToString(`is`: InputStream): String {
-            val reader = BufferedReader(InputStreamReader(`is`))
+        private fun convertStreamToString(inputStream: InputStream): String {
+            val reader = BufferedReader(InputStreamReader(inputStream))
             val sb = StringBuilder()
             var line: String?
             while ((reader.readLine().also { line = it }) != null) {

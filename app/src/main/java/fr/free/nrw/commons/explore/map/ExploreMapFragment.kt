@@ -249,12 +249,12 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             override fun onScroll(event: ScrollEvent): Boolean {
                 if (getLastMapFocus() != null) {
                     val mylocation = Location("")
-                    val dest_location = Location("")
-                    dest_location.latitude = binding!!.mapView.mapCenter.latitude
-                    dest_location.longitude = binding!!.mapView.mapCenter.longitude
+                    val destLocation = Location("")
+                    destLocation.latitude = binding!!.mapView.mapCenter.latitude
+                    destLocation.longitude = binding!!.mapView.mapCenter.longitude
                     mylocation.latitude = getLastMapFocus()!!.latitude
                     mylocation.longitude = getLastMapFocus()!!.longitude
-                    val distance = mylocation.distanceTo(dest_location) //in meters
+                    val distance = mylocation.distanceTo(destLocation) //in meters
                     if (getLastMapFocus() != null) {
                         if (isNetworkConnectionEstablished() && (event.getX() > 0
                                     || event.getY() > 0)
@@ -621,12 +621,12 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         )
         if (lastMapFocus != null) {
             val mylocation = Location("")
-            val dest_location = Location("")
-            dest_location.latitude = binding!!.mapView.mapCenter.latitude
-            dest_location.longitude = binding!!.mapView.mapCenter.longitude
+            val destLocation = Location("")
+            destLocation.latitude = binding!!.mapView.mapCenter.latitude
+            destLocation.longitude = binding!!.mapView.mapCenter.longitude
             mylocation.latitude = lastMapFocus!!.latitude
             mylocation.longitude = lastMapFocus!!.longitude
-            val distance = mylocation.distanceTo(dest_location) //in meters
+            val distance = mylocation.distanceTo(destLocation) //in meters
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished()) {
                     setSearchThisAreaButtonVisibility(distance > 2000.0)

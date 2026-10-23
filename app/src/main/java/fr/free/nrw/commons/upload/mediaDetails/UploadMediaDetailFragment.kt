@@ -573,10 +573,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     override fun showConnectionErrorPopup() {
         try {
-            val FLAG_ALERT_DIALOG_SHOWING = basicKvStore!!.getBoolean(
+            val isAlertDialogShowing = basicKvStore!!.getBoolean(
                 keyForShowingAlertDialog, false
             )
-            if (!FLAG_ALERT_DIALOG_SHOWING) {
+            if (!isAlertDialogShowing) {
                 basicKvStore!!.putBoolean(keyForShowingAlertDialog, true)
                 showAlertDialog(
                     requireActivity(),

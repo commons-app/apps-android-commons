@@ -96,7 +96,7 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
-import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
+import fr.free.nrw.commons.utils.MapUtils
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToBigFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToSmallFABs
 import fr.free.nrw.commons.utils.NearbyFABUtils.removeAnchorFromFAB
@@ -217,11 +217,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
     private var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
     private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
-    private var rotate_backward: Animation? = null
-    private var fab_close: Animation? = null
-    private var fab_open: Animation? = null
-    private var rotate_forward: Animation? = null
-    private val NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
+    private var rotateBackward: Animation? = null
+    private var fabClose: Animation? = null
+    private var fabOpen: Animation? = null
+    private var rotateForward: Animation? = null
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
     private var snackbar: Snackbar? = null
@@ -233,12 +232,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private var selectedPlace: Place? = null
     private var clickedMarker: Marker? = null
     private var progressDialog: ProgressDialog? = null
-    private val CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005
-    private val CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004
     private var isPermissionDenied = false
     private var recenterToUserLocation = false
     private var mapCenter: GeoPoint? = null
-    var intentFilter: IntentFilter = IntentFilter(NETWORK_INTENT_ACTION)
+    var intentFilter: IntentFilter = IntentFilter(MapUtils.NETWORK_INTENT_ACTION)
     private var lastPlaceToCenter: Place? = null
     private var lastKnownLocation: LatLng? = null
     private var isVisibleToUser = false
@@ -363,13 +360,6 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
         }
-
-    /**
-     * WLM URL
-     */
-    val WLM_URL =
-        "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -890,7 +880,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 locationLatLng[1].toDouble(), 1f
             )
         } else {
-            lastKnownLocation = defaultLatLng
+            lastKnownLocation = MapUtils.defaultLatLng
         }
         if (binding!!.map != null && !isCameFromExploreMap()) {
             moveCameraToPosition(
@@ -1155,11 +1145,11 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      * Loads animations will be used for FABs
      */
     private fun loadAnimations() {
-        fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotate_forward =
-            AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotate_backward =
+        fabOpen = AnimationUtils.loadAnimation(activity, R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(activity, R.anim.fab_close)
+        rotateForward =
+            AnimationUtils.loadAnimation(activity, R.anim.rotate_forward)
+        rotateBackward =
             AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
     }
 
@@ -1202,9 +1192,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         if (null != lastPlaceToCenter) {
             val configuration = requireActivity().resources.configuration
             cameraShift = if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT
+                MapUtils.CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT
             } else {
-                CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE
+                MapUtils.CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE
             }
             recenterMap(
                 LatLng(
@@ -1961,10 +1951,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
     private fun expandFABs(isFABsExpanded: Boolean) {
         if (!isFABsExpanded) {
             showFABs()
-            binding!!.fabPlus.startAnimation(rotate_forward)
-            binding!!.fabCamera.startAnimation(fab_open)
-            binding!!.fabGallery.startAnimation(fab_open)
-            binding!!.fabCustomGallery.startAnimation(fab_open)
+            binding!!.fabPlus.startAnimation(rotateForward)
+            binding!!.fabCamera.startAnimation(fabOpen)
+            binding!!.fabGallery.startAnimation(fabOpen)
+            binding!!.fabCustomGallery.startAnimation(fabOpen)
             binding!!.fabCustomGallery.show()
             binding!!.fabCamera.show()
             binding!!.fabGallery.show()
@@ -1993,10 +1983,10 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
      */
     private fun collapseFABs(isFABsExpanded: Boolean) {
         if (isFABsExpanded) {
-            binding!!.fabPlus.startAnimation(rotate_backward)
-            binding!!.fabCamera.startAnimation(fab_close)
-            binding!!.fabGallery.startAnimation(fab_close)
-            binding!!.fabCustomGallery.startAnimation(fab_close)
+            binding!!.fabPlus.startAnimation(rotateBackward)
+            binding!!.fabCamera.startAnimation(fabClose)
+            binding!!.fabGallery.startAnimation(fabClose)
+            binding!!.fabCustomGallery.startAnimation(fabClose)
             binding!!.fabCustomGallery.hide()
             binding!!.fabCamera.hide()
             binding!!.fabGallery.hide()
@@ -2422,12 +2412,12 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
          */
         if (lastMapFocus != null) {
             val mylocation = Location("")
-            val dest_location = Location("")
-            dest_location.latitude = binding!!.map.mapCenter.latitude
-            dest_location.longitude = binding!!.map.mapCenter.longitude
+            val destLocation = Location("")
+            destLocation.latitude = binding!!.map.mapCenter.latitude
+            destLocation.longitude = binding!!.map.mapCenter.longitude
             mylocation.latitude = lastMapFocus!!.latitude
             mylocation.longitude = lastMapFocus!!.longitude
-            val distance = mylocation.distanceTo(dest_location) //in meters
+            val distance = mylocation.distanceTo(destLocation) //in meters
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished) {
                     searchable = if (distance > 2000.0) {
