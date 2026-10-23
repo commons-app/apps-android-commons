@@ -36,6 +36,7 @@ detekt {
     toolVersion = libs.versions.detekt.get()
     buildUponDefaultConfig = true
     baseline = file("$projectDir/detekt-baseline.xml")
+    config.setFrom(files("$projectDir/config/detekt/detekt.yml"))
 }
 
 val isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file("../play.p12").exists()

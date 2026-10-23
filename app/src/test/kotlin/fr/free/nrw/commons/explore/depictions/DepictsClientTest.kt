@@ -41,7 +41,7 @@ class DepictsClientTest {
         whenever(depictSearchResponse.search).thenReturn(listOf(depictSearchItem("1"), depictSearchItem("2")))
         val entities = mock<Entities>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
-        whenever(entities.entities()).thenReturn(emptyMap())
+        whenever(entities.getEntityMap()).thenReturn(emptyMap())
         depictsClient
             .searchForDepictions("query", 1, 0)
             .test()
@@ -69,7 +69,7 @@ class DepictsClientTest {
         val entity = mock<Entities.Entity>()
         val statementPartial = mock<StatementPartial>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
-        whenever(entities.entities()).thenReturn(mapOf("en" to entity))
+        whenever(entities.getEntityMap()).thenReturn(mapOf("en" to entity))
         whenever(entity.statements).thenReturn(mapOf("P31" to listOf(statementPartial)))
         whenever(statementPartial.mainSnak).thenReturn(
             SnakPartial(
@@ -113,7 +113,7 @@ class DepictsClientTest {
         val entities = mock<Entities>()
         val entity = mock<Entities.Entity>()
         whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
-        whenever(entities.entities()).thenReturn(mapOf("en" to entity))
+        whenever(entities.getEntityMap()).thenReturn(mapOf("en" to entity))
         whenever(entity.descriptions()).thenReturn(
             mapOf(
                 "en" to
@@ -177,7 +177,7 @@ class DepictsClientTest {
             ),
         )
         whenever(depictsInterface.getEntities("Q10")).thenReturn(Single.just(entities))
-        whenever(entities.entities())
+        whenever(entities.getEntityMap())
             .thenReturn(mapOf("test" to entity))
         whenever(entity.id()).thenReturn("Q10")
         val method: Method =

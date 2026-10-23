@@ -88,16 +88,8 @@
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$//TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
-    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
-    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
-    <ID>FunctionNaming:MediaDetailFragment.kt$@Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
-    <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-    <ID>FunctionParameterNaming:Converters.kt$Converters$`object`: Any?</ID>
-    <ID>FunctionParameterNaming:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$SHA1: String</ID>
-    <ID>FunctionParameterNaming:LeaderboardApiTest.kt$LeaderboardApiTest.Companion$`is`: InputStream</ID>
-    <ID>FunctionParameterNaming:UpdateAvatarApiTest.kt$UpdateAvatarApiTest.Companion$`is`: InputStream</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate, )</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!!, ), getExtraShortDateString(endDate!!), )</ID>
     <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
@@ -1262,15 +1254,6 @@
     <ID>UtilityClassWithPublicConstructor:CustomSelectorUtils.kt$CustomSelectorUtils</ID>
     <ID>UtilityClassWithPublicConstructor:MimeTypeMapWrapper.kt$MimeTypeMapWrapper</ID>
     <ID>UtilityClassWithPublicConstructor:WorkRequestHelper.kt$WorkRequestHelper</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$/** * WLM URL */ val WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var fab_close: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var fab_open: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var rotate_backward: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var rotate_forward: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$val dest_location = Location("")</ID>
     <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
     <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
   </CurrentIssues>

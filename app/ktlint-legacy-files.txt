@@ -33,7 +33,7 @@ app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt
 app/src/main/java/fr/free/nrw/commons/db/Converters.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/Costants.kt
+app/src/main/java/fr/free/nrw/commons/filepicker/Constants.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/DefaultCallback.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/ExtendedFileProvider.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/FilePicker.kt
