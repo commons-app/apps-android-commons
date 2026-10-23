@@ -759,9 +759,7 @@
     <ID>MaxLineLength:CsrfTokenClient.kt$CsrfTokenClient.&lt;no name provided&gt;$override</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$if</ID>
-    <ID>MaxLineLength:CustomSelectorActivity.kt$CustomSelectorActivity$private</ID>
     <ID>MaxLineLength:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact(), uploadableFile.getFilePath())</ID>
-    <ID>MaxLineLength:CustomSelectorViewModelFactory.kt$CustomSelectorViewModelFactory$override</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))</ID>
@@ -776,17 +774,9 @@
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")</ID>
     <ID>MaxLineLength:ExploreMapController.kt$ExploreMapController$// Our radius searched around us, will be used to understand when user search their own location, we will follow them</ID>
     <ID>MaxLineLength:FileUtilsTest.kt$FileUtilsTest$"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream()</ID>
-    <ID>MaxLineLength:FolderFragment.kt$FolderFragment$viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)</ID>
     <ID>MaxLineLength:Image.kt$Image$uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$if</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)</ID>
     <ID>MaxLineLength:ImageCoordinates.kt$ImageCoordinates$internal</ID>
-    <ID>MaxLineLength:ImageFragment.kt$ImageFragment$listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)</ID>
-    <ID>MaxLineLength:ImageFragment.kt$ImageFragment$val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true</ID>
-    <ID>MaxLineLength:ImageHelperTest.kt$ImageHelperTest$val folderList = ArrayList&lt;Folder&gt;(listOf(Folder(1, "bucket1", folderImageList1), Folder(2, "bucket2", folderImageList2)))</ID>
     <ID>MaxLineLength:ImageInfo.kt$ImageInfo$// If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger dimensions. )</ID>
-    <ID>MaxLineLength:ImageLoader.kt$ImageLoader$suspend</ID>
     <ID>MaxLineLength:ImageProcessingService.kt$ImageProcessingService$val unsupportedFormatResult = if (uploadItem.hasUnsupportedFormat) fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED else 0</ID>
     <ID>MaxLineLength:ImageProcessingServiceTest.kt$ImageProcessingServiceTest$`when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))</ID>
     <ID>MaxLineLength:ImageUtils.kt$ImageUtils$if</ID>
@@ -834,7 +824,6 @@
     <ID>MaxLineLength:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$&lt;bounds minlat=</ID>
     <ID>MaxLineLength:OkHttpJsonApiClient.kt$OkHttpJsonApiClient.Companion$"en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb,ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq,uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war,zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar,an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am,roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk,lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls,yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky,ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na,got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn,kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd,ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh,sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr"</ID>
     <ID>MaxLineLength:OkHttpJsonApiClientTests.kt$OkHttpJsonApiClientTests$throw IllegalArgumentException("Resource $fileName not found. Please ensure the file is located in app/src/test/resources/raw/")</ID>
-    <ID>MaxLineLength:OnSwipeTouchListenerTest.kt$OnSwipeTouchListenerTest$val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)</ID>
     <ID>MaxLineLength:PageTitle.kt$PageTitle$constructor</ID>
     <ID>MaxLineLength:PickedFiles.kt$PickedFiles$if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.P) throw IOException("HEIC not supported on this Android version")</ID>
     <ID>MaxLineLength:PlaceAdapterDelegate.kt$nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }</ID>
@@ -961,7 +950,7 @@
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getOverlay(item: OverlayItem?): Overlay?</ID>
     <ID>ReturnCount:ExploreMapRootFragment.kt$ExploreMapRootFragment$fun backPressed(): Boolean</ID>
     <ID>ReturnCount:FileUtils.kt$FileUtils$fun getSHA1(stream: InputStream): String</ID>
-    <ID>ReturnCount:FolderDeletionHelper.kt$FolderDeletionHelper$private fun trashImagesInFolder( context: Context, folder: File, trashFolderLauncher: ActivityResultLauncher&lt;IntentSenderRequest&gt;): Boolean</ID>
+    <ID>ReturnCount:FolderDeletionHelper.kt$FolderDeletionHelper$private fun trashImagesInFolder( context: Context, folder: File, trashFolderLauncher: ActivityResultLauncher&lt;IntentSenderRequest&gt;, ): Boolean</ID>
     <ID>ReturnCount:GridViewAdapter.kt$GridViewAdapter$fun containsAll(images: List&lt;Media&gt;?): Boolean</ID>
     <ID>ReturnCount:IdAndLabels.kt$IdAndLabels$fun getLocalizedLabel(locale: String): String?</ID>
     <ID>ReturnCount:ImageLoader.kt$ImageLoader$fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result</ID>
