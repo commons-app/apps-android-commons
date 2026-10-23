@@ -27,7 +27,7 @@ class MediaDataExtractor
                 .getEntities(media.depictionIds)
                 .map {
                     it
-                        .entities()
+                        .getEntityMap()
                         .mapValues { entry -> entry.value.labels().mapValues { it.value.value() } }
                 }.map { it.map { (key, value) -> IdAndLabels(key, value) } }
                 .onErrorReturn { emptyList() }
@@ -37,7 +37,7 @@ class MediaDataExtractor
                 .getEntities(media.creatorIds)
                 .map {
                     it
-                        .entities()
+                        .getEntityMap()
                         .mapValues { entry -> entry.value.labels().mapValues { it.value.value() } }
                 }.map { it.map { (key, value) -> IdAndLabels(key, value) } }
                 .onErrorReturn { emptyList() }
