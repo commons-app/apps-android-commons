@@ -129,7 +129,7 @@ class CommonsApplication : MultiDexApplication() {
             Fresco.initialize(this, config)
         } catch (e: Exception) {
             Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
+            // Fresco cannot be initialized in test builds, so the exception is only logged here.
         }
 
         createNotificationChannel(this)
@@ -233,7 +233,8 @@ class CommonsApplication : MultiDexApplication() {
                 Completable.fromAction {
                     Timber.d("All accounts have been removed")
                     clearImageCache()
-                    // TODO: fix preference manager
+                    // Known limitation: this clears all preferences directly instead of going
+                    // through a dedicated preference manager.
                     defaultPrefs.clearAll()
                     defaultPrefs.putBoolean("firstrun", false)
                     updateAllDatabases()

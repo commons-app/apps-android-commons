@@ -40,7 +40,7 @@ internal class ClientLogin {
                 }
             }
         } else if ("PASS" != status && "FAIL" != status) {
-            // TODO: String resource -- Looks like needed for others in this class too
+            // Hardcoded message, like the others in this class, because no Context is available here
             userMessage = "An unknown error occurred."
         }
         return Result(status ?: "", userName, password, userMessage)

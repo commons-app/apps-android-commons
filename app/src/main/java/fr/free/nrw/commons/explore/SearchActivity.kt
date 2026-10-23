@@ -234,8 +234,9 @@ class SearchActivity :
      */
     override fun onResume() {
         if (supportFragmentManager!!.backStackEntryCount == 1) {
-            // FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            // FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
+            // Workaround for screen rotation inside media details. If we don't call onBackPressed
+            // then fragment stack is increasing every time.
+            // Similar to https://github.com/commons-app/apps-android-commons/issues/894
             // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
             onBackPressedDispatcher.onBackPressed()
         }

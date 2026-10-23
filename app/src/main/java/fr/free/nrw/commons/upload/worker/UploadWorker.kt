@@ -288,7 +288,7 @@ class UploadWorker(
     override suspend fun getForegroundInfo(): ForegroundInfo = createForegroundInfo()
 
     private fun createNotificationForForegroundService(): Notification {
-        // TODO: Improve notification for foreground service
+        // Minimal notification for the foreground service, showing only the title
         return getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
         )!!

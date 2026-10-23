@@ -42,7 +42,7 @@ class MwQueryPage : BaseModel() {
 
     fun categories(): List<Category>? = categories
 
-    // TODO: Handle null values in lists during deserialization, perhaps with a new
+    // Null values are filtered out here. They could instead be handled during deserialization, perhaps with a new
     // @RequiredElements annotation and corresponding TypeAdapter
     fun coordinates(): List<Coordinates?>? = coordinates?.filterNotNull()
 
