@@ -90,7 +90,7 @@ class PageTitle : Parcelable {
         val parts = text.split(":".toRegex()).toTypedArray()
         if (parts.size > 1) {
             val namespaceOrLanguage = parts[0]
-            if (Arrays.asList(*Locale.getISOLanguages()).contains(namespaceOrLanguage)) {
+            if (Locale.getISOLanguages().contains(namespaceOrLanguage)) {
                 namespace = null
                 wikiSite = WikiSite(wiki.authority(), namespaceOrLanguage)
             } else {

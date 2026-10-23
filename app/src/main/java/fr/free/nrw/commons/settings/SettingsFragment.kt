@@ -588,7 +588,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      */
     private fun requestExternalStoragePermissions() {
         Dexter.withActivity(requireActivity())
-            .withPermissions(*PermissionUtils.PERMISSIONS_STORAGE)
+            .withPermissions(PermissionUtils.PERMISSIONS_STORAGE.asList())
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     ViewUtil.showLongToast(requireActivity(), getString(R.string.log_collection_started))

@@ -59,7 +59,9 @@ class ImageCoordinates internal constructor(
                 val latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF)
                 val longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE)
                 val longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF)
-                if (latitude != null && longitude != null && latitudeRef != null && longitudeRef != null) {
+                val hasLatitude = latitude != null && latitudeRef != null
+                val hasLongitude = longitude != null && longitudeRef != null
+                if (hasLatitude && hasLongitude) {
                     decLatitude =
                         if (ExifInterface.LATITUDE_NORTH == latitudeRef) {
                             convertToDegree(latitude)

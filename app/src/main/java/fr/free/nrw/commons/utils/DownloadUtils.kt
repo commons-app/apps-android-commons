@@ -55,7 +55,7 @@ object DownloadUtils {
             },
             R.string.storage_permission,
             R.string.write_storage_permission_rationale,
-            *PermissionUtils.PERMISSIONS_STORAGE,
+            PermissionUtils.PERMISSIONS_STORAGE,
         )
     }
 

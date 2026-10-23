@@ -36,8 +36,7 @@ fun Cursor.getLong(name: String): Long =
  */
 fun stringToArray(listString: String?): List<String> {
     if (listString.isNullOrEmpty()) return emptyList();
-    val elements = listString.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-    return listOf(*elements)
+    return listString.split(",".toRegex()).dropLastWhile { it.isEmpty() }
 }
 
 /**

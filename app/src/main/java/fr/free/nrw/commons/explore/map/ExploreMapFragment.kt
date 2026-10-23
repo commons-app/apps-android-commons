@@ -914,11 +914,10 @@ class ExploreMapFragment :
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be removed.
      */
     private fun removeMarker(nearbyBaseMarker: BaseMarker?) {
-        if (nearbyBaseMarker == null ||
-            nearbyBaseMarker.place.getName() == null ||
-            baseMarkerOverlayMap == null ||
-            !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)
-        ) {
+        if (nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null) {
+            return
+        }
+        if (baseMarkerOverlayMap?.containsKey(nearbyBaseMarker) != true) {
             return
         }
 
