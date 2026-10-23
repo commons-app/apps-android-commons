@@ -51,7 +51,6 @@ class ImageAdapter(
     private var imageLoader: ImageLoader,
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
-
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     /**
@@ -130,11 +129,10 @@ class ImageAdapter(
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
 
-    //maximum number of images that can be selected.
+    // maximum number of images that can be selected.
     private var maxUploadLimit: Int = MAX_IMAGE_COUNT
 
-
-    //set maximum number of images allowed for upload.
+    // set maximum number of images allowed for upload.
     fun setMaxUploadLimit(limit: Int) {
         maxUploadLimit = limit
     }
@@ -215,7 +213,7 @@ class ImageAdapter(
                         processThumbnailForActionedImage(
                             holder,
                             position,
-                            uploadingContributionList
+                            uploadingContributionList,
                         )
                         _isLoadingImages.value = false
                         // If the position is already visited, that means the image is already present
@@ -362,22 +360,30 @@ class ImageAdapter(
             // Notify listener of deselection to update UI
             imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
         } else {
-            //check the maximum limit before allowing the selection
+            // check the maximum limit before allowing the selection
             if (!singleSelection && selectedImages.size >= maxUploadLimit) {
                 // limit reached, show a toast and prevent selection
-                Toast.makeText(
-                    context,
-                    context.getString(
-                        R.string.custom_selector_max_image_limit_reached,
-                        maxUploadLimit
-                    ),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return //exit the function, preventing selection
+                Toast
+                    .makeText(
+                        context,
+                        context.getString(
+                            R.string.custom_selector_max_image_limit_reached,
+                            maxUploadLimit,
+                        ),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                return // exit the function, preventing selection
             }
 
             // Prevent adding the same image multiple times
-            val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
+            val image =
+                if (showAlreadyActionedImages) {
+                    images[position]
+                } else {
+                    ArrayList(
+                        actionableImagesMap.values,
+                    )[position]
+                }
             if (selectedImages.contains(image)) {
                 return // Image already selected, ignore additional clicks
             }
@@ -385,18 +391,36 @@ class ImageAdapter(
                 val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
                 withContext(Dispatchers.Main) {
                     if (holder.isItemUploaded()) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         return@withContext
                     }
 
                     if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
                         holder.itemUploaded()
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         return@withContext
                     }
 
-                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                    if (!holder.isItemUploaded() &&
+                        imageSHA1.isNotEmpty() &&
+                        imageLoader.getFromUploaded(imageSHA1) != null
+                    ) {
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
 
                     if (holder.isItemNotForUpload()) {
@@ -404,7 +428,10 @@ class ImageAdapter(
                     }
                     selectedImages.add(image)
                     notifyItemChanged(position, ImageSelectedOrUpdated())
-                    imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+                    imageSelectListener.onSelectedImagesChanged(
+                        selectedImages,
+                        numberOfSelectedImagesMarkedAsNotForUpload,
+                    )
                 }
             }
         }

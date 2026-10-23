@@ -12,9 +12,9 @@ import androidx.core.app.ActivityCompat
 import timber.log.Timber
 import java.util.concurrent.CopyOnWriteArrayList
 
-
-class LocationServiceManager(private val context: Context) : LocationListener {
-
+class LocationServiceManager(
+    private val context: Context,
+) : LocationListener {
     companion object {
         // Maybe these values can be improved for efficiency
         private const val MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100L
@@ -44,26 +44,28 @@ class LocationServiceManager(private val context: Context) : LocationListener {
         val providers = locationManager.getProviders(true)
         var bestLocation: Location? = null
         for (provider in providers) {
-            val location: Location? = if (
-                ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                ==
-                PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION)
-                ==
-                PackageManager.PERMISSION_GRANTED
-            ) {
-                locationManager.getLastKnownLocation(provider)
-            } else {
-                null
-            }
+            val location: Location? =
+                if (
+                    ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                    )
+                    ==
+                    PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                    )
+                    ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+                    locationManager.getLastKnownLocation(provider)
+                } else {
+                    null
+                }
 
             if (
-                location != null
-                &&
+                location != null &&
                 (bestLocation == null || location.accuracy < bestLocation.accuracy)
             ) {
                 bestLocation = location
@@ -79,7 +81,7 @@ class LocationServiceManager(private val context: Context) : LocationListener {
         if (!isLocationManagerRegistered) {
             isLocationManagerRegistered =
                 requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER) &&
-                    requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
+                requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
         }
     }
 
@@ -89,14 +91,14 @@ class LocationServiceManager(private val context: Context) : LocationListener {
      * @param locationProvider the location provider
      * @return true if successful
      */
-    fun requestLocationUpdatesFromProvider(locationProvider: String): Boolean {
-        return try {
+    fun requestLocationUpdatesFromProvider(locationProvider: String): Boolean =
+        try {
             if (locationManager.allProviders.contains(locationProvider)) {
                 locationManager.requestLocationUpdates(
                     locationProvider,
                     MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS,
                     MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS,
-                    this
+                    this,
                 )
                 true
             } else {
@@ -109,7 +111,6 @@ class LocationServiceManager(private val context: Context) : LocationListener {
             Timber.e(e, "Security exception")
             false
         }
-    }
 
     /**
      * Returns whether a given location is better than the current best location.
@@ -119,7 +120,10 @@ class LocationServiceManager(private val context: Context) : LocationListener {
      * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
      * LOCATION_SLIGHTLY_CHANGED if location changed slightly
      */
-    private fun isBetterLocation(location: Location, currentBestLocation: Location?): LocationChangeType {
+    private fun isBetterLocation(
+        location: Location,
+        currentBestLocation: Location?,
+    ): LocationChangeType {
         if (currentBestLocation == null) {
             return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
         }
@@ -134,19 +138,22 @@ class LocationServiceManager(private val context: Context) : LocationListener {
 
         val results = FloatArray(5)
         Location.distanceBetween(
-            currentBestLocation.latitude, currentBestLocation.longitude,
-            location.latitude, location.longitude,
-            results
+            currentBestLocation.latitude,
+            currentBestLocation.longitude,
+            location.latitude,
+            location.longitude,
+            results,
         )
 
         return when {
-            isSignificantlyNewer
-                    ||
-                    isMoreAccurate
-                    ||
-                    (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) -> {
-                if (results[0] < 1000) LocationChangeType.LOCATION_SLIGHTLY_CHANGED
-                else LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
+            isSignificantlyNewer ||
+                isMoreAccurate ||
+                (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) -> {
+                if (results[0] < 1000) {
+                    LocationChangeType.LOCATION_SLIGHTLY_CHANGED
+                } else {
+                    LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
+                }
             }
             else -> LocationChangeType.LOCATION_NOT_CHANGED
         }
@@ -155,9 +162,10 @@ class LocationServiceManager(private val context: Context) : LocationListener {
     /**
      * Checks whether two providers are the same
      */
-    private fun isSameProvider(provider1: String?, provider2: String?): Boolean {
-        return provider1 == provider2
-    }
+    private fun isSameProvider(
+        provider1: String?,
+        provider2: String?,
+    ): Boolean = provider1 == provider2
 
     /**
      * Unregisters location manager.
@@ -207,16 +215,20 @@ class LocationServiceManager(private val context: Context) : LocationListener {
         }
     }
 
-    @Deprecated("Deprecated in Java", ReplaceWith(
-        "Timber.d(\"%s's status changed to %d\", provider, status)",
-        "timber.log.Timber"
+    @Deprecated(
+        "Deprecated in Java",
+        ReplaceWith(
+            "Timber.d(\"%s's status changed to %d\", provider, status)",
+            "timber.log.Timber",
+        ),
     )
-    )
-    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+    override fun onStatusChanged(
+        provider: String?,
+        status: Int,
+        extras: Bundle?,
+    ) {
         Timber.d("%s's status changed to %d", provider, status)
     }
-
-
 
     override fun onProviderEnabled(provider: String) {
         Timber.d("Provider %s enabled", provider)
@@ -226,13 +238,9 @@ class LocationServiceManager(private val context: Context) : LocationListener {
         Timber.d("Provider %s disabled", provider)
     }
 
-    fun isNetworkProviderEnabled(): Boolean {
-        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
+    fun isNetworkProviderEnabled(): Boolean = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-    fun isGPSProviderEnabled(): Boolean {
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-    }
+    fun isGPSProviderEnabled(): Boolean = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
     enum class LocationChangeType {
         LOCATION_SIGNIFICANTLY_CHANGED,
@@ -242,15 +250,6 @@ class LocationServiceManager(private val context: Context) : LocationListener {
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
         SEARCH_CUSTOM_AREA,
-        CUSTOM_QUERY
+        CUSTOM_QUERY,
     }
 }
-
-
-
-
-
-
-
-
-

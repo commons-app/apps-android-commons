@@ -19,9 +19,10 @@ import java.io.File
  * Created by harisanker on 14/2/18.
  */
 class SimilarImageDialogFragment : DialogFragment() {
-    var callback: Callback? = null //Implemented interface from shareActivity
+    var callback: Callback? = null // Implemented interface from shareActivity
     var gotResponse: Boolean = false
 
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentSimilarImageDialogBinding? = null
     private val binding: FragmentSimilarImageDialogBinding get() = _binding!!
 
@@ -34,7 +35,7 @@ class SimilarImageDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSimilarImageDialogBinding.inflate(inflater, container, false)
 

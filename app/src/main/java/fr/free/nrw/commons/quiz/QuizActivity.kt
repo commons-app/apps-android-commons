@@ -5,22 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
-
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import coil3.load
 import coil3.request.error
-
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityQuizBinding
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import java.util.ArrayList
 
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
-
-
 class QuizActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityQuizBinding
     private val quizController = QuizController()
     private var quiz = ArrayList<QuizQuestion>()
@@ -42,7 +37,8 @@ class QuizActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityQuizBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding.root)
-        WindowCompat.getInsetsController(window, window.decorView)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = true
         setContentView(binding.root)
 
@@ -51,23 +47,26 @@ class QuizActivity : AppCompatActivity() {
         binding.nextButton.setOnClickListener { notKnowAnswer() }
         displayQuestion()
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                AlertDialog.Builder(this@QuizActivity)
-                    .setTitle(getString(R.string.warning))
-                    .setMessage(getString(R.string.quiz_back_button))
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.continue_message) { dialog, _ ->
-                        val intent = Intent(this@QuizActivity, QuizResultActivity::class.java)
-                        dialog.dismiss()
-                        intent.putExtra("QuizResult", score)
-                        startActivity(intent)
-                    }
-                    .setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
-                    .create()
-                    .show()
-            }
-        })
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog
+                        .Builder(this@QuizActivity)
+                        .setTitle(getString(R.string.warning))
+                        .setMessage(getString(R.string.quiz_back_button))
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.continue_message) { dialog, _ ->
+                            val intent = Intent(this@QuizActivity, QuizResultActivity::class.java)
+                            dialog.dismiss()
+                            intent.putExtra("QuizResult", score)
+                            startActivity(intent)
+                        }.setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
+                        .create()
+                        .show()
+                }
+            },
+        )
     }
 
     /**
@@ -113,19 +112,18 @@ class QuizActivity : AppCompatActivity() {
      */
     fun evaluateScore() {
         if (
-            (quiz[questionIndex].isAnswer && isPositiveAnswerChecked)
-                ||
+            (quiz[questionIndex].isAnswer && isPositiveAnswerChecked) ||
             (!quiz[questionIndex].isAnswer && isNegativeAnswerChecked)
-            ) {
+        ) {
             customAlert(
                 getString(R.string.correct),
-                quiz[questionIndex].answerMessage
+                quiz[questionIndex].answerMessage,
             )
             score++
         } else {
             customAlert(
                 getString(R.string.wrong),
-                quiz[questionIndex].answerMessage
+                quiz[questionIndex].answerMessage,
             )
         }
     }
@@ -135,12 +133,16 @@ class QuizActivity : AppCompatActivity() {
      * @param title The alert title
      * @param message The alert message
      */
-    fun customAlert(title: String, message: String) {
-        AlertDialog.Builder(this)
+    fun customAlert(
+        title: String,
+        message: String,
+    ) {
+        AlertDialog
+            .Builder(this)
             .setTitle(title)
             .setMessage(message)
             .setCancelable(false)
-            .setNegativeButton(R.string.cancel){_,_ -> }
+            .setNegativeButton(R.string.cancel) { _, _ -> }
             .setPositiveButton(R.string.continue_message) { dialog, _ ->
                 questionIndex++
                 if (questionIndex == quiz.size) {
@@ -151,8 +153,7 @@ class QuizActivity : AppCompatActivity() {
                 } else {
                     displayQuestion()
                 }
-            }
-            .create()
+            }.create()
             .show()
     }
 }

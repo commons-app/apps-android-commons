@@ -9,12 +9,11 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
-import fr.free.nrw.commons.utils.MediaAttributionUtil
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutCategoryImagesBinding
 import fr.free.nrw.commons.explore.paging.BaseViewHolder
 import fr.free.nrw.commons.explore.paging.inflate
-import fr.free.nrw.commons.media.IdAndLabels
+import fr.free.nrw.commons.utils.MediaAttributionUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +22,7 @@ import timber.log.Timber
 class PagedMediaAdapter(
     private val onImageClicked: (Int) -> Unit,
     private val mediaDataExtractor: MediaDataExtractor,
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable(),
 ) : PagedListAdapter<Media, SearchImagesViewHolder>(
         object : DiffUtil.ItemCallback<Media>() {
             override fun areItemsTheSame(
@@ -37,7 +36,6 @@ class PagedMediaAdapter(
             ) = oldItem.pageId == newItem.pageId
         },
     ) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -58,15 +56,17 @@ class PagedMediaAdapter(
         }
 
         compositeDisposable.addAll(
-            mediaDataExtractor.fetchCreatorIdsAndLabels(media)
+            mediaDataExtractor
+                .fetchCreatorIdsAndLabels(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    {  idAndLabels ->
-                        media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels);
+                    { idAndLabels ->
+                        media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels)
                         holder.setAuthorText(media)
                     },
-                    { t: Throwable? -> Timber.e(t) })
+                    { t: Throwable? -> Timber.e(t) },
+                ),
         )
     }
 }

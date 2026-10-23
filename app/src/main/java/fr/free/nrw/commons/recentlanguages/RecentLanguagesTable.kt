@@ -10,14 +10,16 @@ object RecentLanguagesTable {
 
     // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
     @JvmStatic
-    val ALL_FIELDS = arrayOf(
-        COLUMN_NAME,
-        COLUMN_CODE
-    )
+    val ALL_FIELDS =
+        arrayOf(
+            COLUMN_NAME,
+            COLUMN_CODE,
+        )
 
     const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-    const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
+    const val CREATE_TABLE_STATEMENT =
+        "CREATE TABLE $TABLE_NAME (" +
             "$COLUMN_NAME STRING," +
             "$COLUMN_CODE STRING PRIMARY KEY" +
             ");"
@@ -49,7 +51,11 @@ object RecentLanguagesTable {
      * @param to Version to which we are migrating
      */
     @JvmStatic
-    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(
+        db: SupportSQLiteDatabase,
+        from: Int,
+        to: Int,
+    ) {
         if (from == to) {
             return
         }

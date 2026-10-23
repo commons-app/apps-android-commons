@@ -35,6 +35,12 @@ jobs:
           echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
           echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
 
+      - name: Check Kotlin formatting and static analysis
+        run: ./gradlew :app:ktlintCheck :app:detekt --continue --stacktrace
+
+      - name: Run Android Lint
+        run: ./gradlew :app:lintBetaDebug --stacktrace
+
       # - name: AVD cache
       #   if: github.event_name != 'pull_request'
       #   uses: actions/cache@v4

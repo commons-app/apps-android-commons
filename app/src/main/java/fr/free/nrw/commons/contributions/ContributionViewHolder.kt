@@ -10,11 +10,11 @@ import coil3.load
 import coil3.request.placeholder
 import coil3.request.error
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.utils.MediaAttributionUtil
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutContributionBinding
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.utils.MediaAttributionUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,7 @@ class ContributionViewHolder internal constructor(
     private val callback: ContributionsListAdapter.Callback,
     private val compositeDisposable: CompositeDisposable,
     private val mediaClient: MediaClient,
-    private val mediaDataExtractor: MediaDataExtractor
+    private val mediaDataExtractor: MediaDataExtractor,
 ) : RecyclerView.ViewHolder(parent) {
     var binding: LayoutContributionBinding = LayoutContributionBinding.bind(parent)
 
@@ -41,16 +41,20 @@ class ContributionViewHolder internal constructor(
 
         /* Set a dialog indicating that the upload is being paused. This is needed because pausing
 an upload might take a dozen seconds. */
-        val builder = AlertDialog.Builder(
-            parent.context
-        )
+        val builder =
+            AlertDialog.Builder(
+                parent.context,
+            )
         builder.setCancelable(false)
         builder.setView(R.layout.progress_dialog)
         pausingPopUp = builder.create()
     }
 
-    fun init(position: Int, contribution: Contribution?) {
-        //handling crashes when the contribution is null.
+    fun init(
+        position: Int,
+        contribution: Contribution?,
+    ) {
+        // handling crashes when the contribution is null.
 
         if (null == contribution) {
             return
@@ -85,6 +89,10 @@ an upload might take a dozen seconds. */
         binding.contributionProgress.visibility = View.GONE
         binding.imageOptions.visibility = View.GONE
         binding.contributionState.text = ""
+        if (contribution.state == Contribution.STATE_DELETED) {
+            binding.contributionState.visibility = View.VISIBLE
+            binding.contributionState.text = itemView.context.getString(R.string.contribution_deleted)
+        }
         checkIfMediaExistsOnWikipediaPage(contribution)
     }
 
@@ -95,7 +103,8 @@ an upload might take a dozen seconds. */
                 return
             }
             compositeDisposable.addAll(
-                mediaDataExtractor.fetchCreatorIdsAndLabels(media)
+                mediaDataExtractor
+                    .fetchCreatorIdsAndLabels(media)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -103,7 +112,8 @@ an upload might take a dozen seconds. */
                             media.creatorName = MediaAttributionUtil.getCreatorName(idAndLabels)
                             setAuthorText(media)
                         },
-                        { t: Throwable? -> Timber.e(t) })
+                        { t: Throwable? -> Timber.e(t) },
+                    ),
             )
         }
     }
@@ -119,19 +129,21 @@ an upload might take a dozen seconds. */
      * @param contribution
      */
     private fun checkIfMediaExistsOnWikipediaPage(contribution: Contribution) {
-        if (contribution.wikidataPlace == null
-            || contribution.wikidataPlace!!.wikipediaArticle == null
+        if (contribution.wikidataPlace == null ||
+            contribution.wikidataPlace!!.wikipediaArticle == null
         ) {
             return
         }
         val wikipediaArticle = contribution.wikidataPlace!!.getWikipediaPageTitle()
         compositeDisposable.add(
-            mediaClient.doesPageContainMedia(wikipediaArticle)
+            mediaClient
+                .doesPageContainMedia(wikipediaArticle)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { mediaExists: Boolean ->
                     displayWikipediaButton(mediaExists)
-                })
+                },
+        )
     }
 
     /**
@@ -157,9 +169,10 @@ an upload might take a dozen seconds. */
      * @param localUri
      * @return
      */
-    private fun chooseImageSource(thumbUrl: String?, localUri: Uri?): String? {
-        return if (!TextUtils.isEmpty(thumbUrl)) thumbUrl else localUri?.toString()
-    }
+    private fun chooseImageSource(
+        thumbUrl: String?,
+        localUri: Uri?,
+    ): String? = if (!TextUtils.isEmpty(thumbUrl)) thumbUrl else localUri?.toString()
 
     fun imageClicked() {
         callback.openMediaDetail(position, isWikipediaButtonDisplayed)
