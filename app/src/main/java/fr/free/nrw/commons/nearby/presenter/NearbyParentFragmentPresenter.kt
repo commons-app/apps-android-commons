@@ -51,8 +51,6 @@ class NearbyParentFragmentPresenter
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
 
-    private var placesLoadedOnce = false
-
     private var customQuery: String? = null
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
@@ -651,17 +649,6 @@ class NearbyParentFragmentPresenter
                 collectCount += resultList.size
             }
             collectResults.close()
-        }
-    }
-
-    /**
-     * Some centering task may need to wait for map to be ready, if they are requested before map is
-     * ready. So we will remember it when the map is ready
-     */
-    private fun handleCenteringTaskIfAny() {
-        if (!placesLoadedOnce) {
-            placesLoadedOnce = true
-            nearbyParentFragmentView.centerMapToPlace(null)
         }
     }
 

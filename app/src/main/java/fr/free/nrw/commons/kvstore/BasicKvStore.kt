@@ -43,7 +43,7 @@ open class BasicKvStore : KeyValueStore {
                 version,
                 clearAllOnUpgrade
             )
-            onVersionUpdate(oldVersion, version, clearAllOnUpgrade)
+            onVersionUpdate(clearAllOnUpgrade)
         }
 
         //Keep this statement at the end so that clearing of store does not cause version also to get removed.
@@ -129,7 +129,7 @@ open class BasicKvStore : KeyValueStore {
         }
     }
 
-    private fun onVersionUpdate(oldVersion: Int, version: Int, clearAllFlag: Boolean) {
+    private fun onVersionUpdate(clearAllFlag: Boolean) {
         if (clearAllFlag) {
             clearAll()
         }

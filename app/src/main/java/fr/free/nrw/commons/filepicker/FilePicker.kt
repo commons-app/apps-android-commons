@@ -28,7 +28,6 @@ object FilePicker : Constants {
     private const val KEY_PHOTO_URI = "photo_uri"
     private const val KEY_VIDEO_URI = "video_uri"
     private const val KEY_LAST_CAMERA_PHOTO = "last_photo"
-    private const val KEY_LAST_CAMERA_VIDEO = "last_video"
     private const val KEY_TYPE = "type"
 
     // Add extra for single selection
@@ -195,18 +194,6 @@ object FilePicker : Constants {
             .getString(KEY_LAST_CAMERA_PHOTO, null)
         return if (lastCameraPhoto != null) {
             UploadableFile(File(lastCameraPhoto))
-        } else {
-            null
-        }
-    }
-
-    @Throws(URISyntaxException::class)
-    @JvmStatic
-    private fun takenCameraVideo(context: Context): UploadableFile? {
-        val lastCameraVideo = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(KEY_LAST_CAMERA_VIDEO, null)
-        return if (lastCameraVideo != null) {
-            UploadableFile(File(lastCameraVideo))
         } else {
             null
         }

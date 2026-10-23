@@ -21,7 +21,6 @@ import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.settings.SettingsActivity
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -139,17 +138,5 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
                 addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }
         requireActivity().startActivity(intent)
-    }
-
-    private inner class BaseLogoutListener : CommonsApplication.LogoutListener {
-        override fun onLogoutComplete() {
-            Timber.d("Logout complete callback received.")
-            val nearbyIntent =
-                Intent(context, LoginActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-            startActivity(nearbyIntent)
-            requireActivity().finish()
-        }
     }
 }

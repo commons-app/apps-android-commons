@@ -347,9 +347,6 @@ class CropOverlayView
             return dx * dx + dy * dy <= slop * slop
         }
 
-        private fun isCornerHandle(handle: Handle): Boolean =
-            handle in listOf(Handle.TOP_LEFT, Handle.TOP_RIGHT, Handle.BOTTOM_LEFT, Handle.BOTTOM_RIGHT)
-
         private fun moveHandle(
             handle: Handle,
             dx: Float,

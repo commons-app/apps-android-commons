@@ -75,8 +75,6 @@ object ImageUtils {
     const val NO_CATEGORY_SELECTED = -5
     const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
 
-    private var progressDialogWallpaper: ProgressDialog? = null
-
     private var progressDialogAvatar: ProgressDialog? = null
 
     @IntDef(
@@ -278,17 +276,6 @@ object ImageUtils {
             .build()
 
         WorkManager.getInstance(context).enqueue(setWallpaperWork)
-    }
-
-    @JvmStatic
-    private fun showSettingWallpaperProgressBar(context: Context) {
-        progressDialogWallpaper = ProgressDialog.show(
-            context,
-            context.getString(R.string.setting_wallpaper_dialog_title),
-            context.getString(R.string.setting_wallpaper_dialog_message),
-            true,
-            false
-        )
     }
 
     @JvmStatic
