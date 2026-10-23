@@ -7,8 +7,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
-import timber.log.Timber
-import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
@@ -36,10 +34,10 @@ class CategoriesModel
          * @return
          */
         fun isSpammyCategory(item: String): Boolean {
-
             // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-            val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
-                    || item.matches("(.*)taken on(.*)".toRegex())
+            val spammyCategory =
+                item.matches("(.*)needing(.*)".toRegex()) ||
+                    item.matches("(.*)taken on(.*)".toRegex())
 
             // checks for
             // dd/mm/yyyy or yy
@@ -49,14 +47,16 @@ class CategoriesModel
             // for `yy` it is assumed that 20XX is implicit.
             // with separators [., /, -]
             val isIrrelevantCategory =
-                item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())
-
+                item.contains(
+                    """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
+                        .toRegex(),
+                )
 
             if (spammyCategory) {
                 return true
             }
 
-            if(isIrrelevantCategory){
+            if (isIrrelevantCategory) {
                 return true
             }
 
@@ -64,7 +64,7 @@ class CategoriesModel
             val validYearsRange = item.matches(".*(20[0-9]{2}).*".toRegex())
 
             // finally if there's 4 digits year exists in XXXX it should only be in 20XX range.
-            return  hasYear && !validYearsRange
+            return hasYear && !validYearsRange
         }
 
         /**
@@ -76,13 +76,15 @@ class CategoriesModel
 
             // Newly used category...
             if (category == null) {
-                category = Category(
-                    null, item.name,
-                    item.description,
-                    item.thumbnail,
-                    Date(),
-                    0
-                )
+                category =
+                    Category(
+                        null,
+                        item.name,
+                        item.description,
+                        item.thumbnail,
+                        Date(),
+                        0,
+                    )
             }
             category.incTimesUsed()
             categoryDao.save(category)
@@ -131,54 +133,60 @@ class CategoriesModel
          * @param selectedDepictions selected DepictItems
          * @return List of CategoryItem associated with selected depictions
          */
-        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? {
-            val observables =  selectedDepictions.map { depictedItem ->
-                if (depictedItem.commonsCategories.isEmpty()) {
-                    if (depictedItem.primaryImage == null) {
-                        return@map Observable.just(emptyList<CategoryItem>())
-                    }
-                    Observable.just(
-                            depictedItem.primaryImage
-                        ).map { image ->
-                            categoryClient
-                                .getCategoriesOfImage(
-                                    image,
-                                    SEARCH_CATS_LIMIT,
-                                ).map {
-                                    it.map { category ->
+        private fun categoriesFromDepiction(
+            selectedDepictions: List<DepictedItem>,
+        ): Observable<MutableList<CategoryItem>>? {
+            val observables =
+                selectedDepictions.map { depictedItem ->
+                    if (depictedItem.commonsCategories.isEmpty()) {
+                        if (depictedItem.primaryImage == null) {
+                            return@map Observable.just(emptyList<CategoryItem>())
+                        }
+                        Observable
+                            .just(
+                                depictedItem.primaryImage,
+                            ).map { image ->
+                                categoryClient
+                                    .getCategoriesOfImage(
+                                        image,
+                                        SEARCH_CATS_LIMIT,
+                                    ).map {
+                                        it.map { category ->
+                                            CategoryItem(
+                                                category.name,
+                                                category.description,
+                                                category.thumbnail,
+                                                category.isSelected,
+                                            )
+                                        }
+                                    }.blockingGet()
+                            }.flatMapIterable { it }
+                            .toList()
+                            .toObservable()
+                    } else {
+                        Observable
+                            .fromIterable(
+                                depictedItem.commonsCategories,
+                            ).map { categoryItem ->
+                                categoryClient
+                                    .getCategoriesByName(
+                                        categoryItem.name,
+                                        categoryItem.name,
+                                        SEARCH_CATS_LIMIT,
+                                    ).map {
                                         CategoryItem(
-                                            category.name,
-                                            category.description,
-                                            category.thumbnail,
-                                            category.isSelected,
+                                            it[0].name,
+                                            it[0].description,
+                                            it[0].thumbnail,
+                                            it[0].isSelected,
                                         )
-                                    }
-                                }.blockingGet()
-                        }.flatMapIterable { it }.toList()
-                        .toObservable()
-                } else {
-                    Observable
-                        .fromIterable(
-                            depictedItem.commonsCategories,
-                        ).map { categoryItem ->
-                            categoryClient
-                                .getCategoriesByName(
-                                    categoryItem.name,
-                                    categoryItem.name,
-                                    SEARCH_CATS_LIMIT,
-                                ).map {
-                                    CategoryItem(
-                                        it[0].name,
-                                        it[0].description,
-                                        it[0].thumbnail,
-                                        it[0].isSelected,
-                                    )
-                                }.blockingGet()
-                        }.toList()
-                        .toObservable()
+                                    }.blockingGet()
+                            }.toList()
+                            .toObservable()
+                    }
                 }
-            }
-            return Observable.concat(observables)
+            return Observable
+                .concat(observables)
                 .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
                     accumulator.apply { addAll(currentList) }
                 }

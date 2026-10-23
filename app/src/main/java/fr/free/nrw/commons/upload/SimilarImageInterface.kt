@@ -4,6 +4,6 @@ interface SimilarImageInterface {
     fun showSimilarImageFragment(
         originalFilePath: String?,
         possibleFilePath: String?,
-        similarImageCoordinates: ImageCoordinates?
+        similarImageCoordinates: ImageCoordinates?,
     )
 }

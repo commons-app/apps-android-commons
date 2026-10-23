@@ -9,7 +9,6 @@ import io.reactivex.Single
 
 @Dao
 interface CategoryRoomDao {
-
     @Query("SELECT * FROM categories ORDER BY last_used DESC LIMIT :limit")
     fun getAll(limit: Int): Single<List<CategoryRoomEntity>>
 
