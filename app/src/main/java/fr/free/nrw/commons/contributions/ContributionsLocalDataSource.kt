@@ -49,6 +49,21 @@ class ContributionsLocalDataSource
         fun deleteContribution(contribution: Contribution): Completable = contributionDao.delete(contribution)
 
         /**
+         * Marks a completed contribution deleted after a normal request reports the file page is gone.
+         * Rows that are still uploading are left in place.
+         */
+        fun markCompletedContributionDeleted(fileName: String): Completable =
+            Completable.fromAction {
+                contributionDao
+                    .getContributionWithTitle(fileName)
+                    .filter { it.state == Contribution.STATE_COMPLETED }
+                    .forEach {
+                        it.state = Contribution.STATE_DELETED
+                        contributionDao.updateSynchronous(it)
+                    }
+            }
+
+        /**
          * Deletes contributions with specific states.
          *
          * @param states The states of the contributions to delete.

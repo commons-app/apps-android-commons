@@ -88,6 +88,7 @@ import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
+import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
@@ -146,6 +147,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private var detailProvider: MediaDetailProvider? = null
     private var index: Int = 0
     private var isDeleted: Boolean = false
+    private var fileWasDeletedFromCommons: Boolean = false
     private var isWikipediaButtonDisplayed: Boolean = false
     private val callback: Callback? = null
 
@@ -161,6 +163,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     @Inject
     lateinit var mediaDataExtractor: MediaDataExtractor
+
+    @Inject
+    lateinit var contributionsRepository: ContributionsRepository
 
     @Inject
     lateinit var reasonBuilder: ReasonBuilder
@@ -249,6 +254,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         outState.putBoolean("editable", editable)
         outState.putBoolean("isCategoryImage", isCategoryImage)
         outState.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed)
+        outState.putBoolean("fileWasDeletedFromCommons", fileWasDeletedFromCommons)
 
         scrollPosition
         outState.putInt("listTop", initialListTop)
@@ -274,6 +280,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             editable = savedInstanceState.getBoolean("editable")
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage")
             isWikipediaButtonDisplayed = savedInstanceState.getBoolean("isWikipediaButtonDisplayed")
+            fileWasDeletedFromCommons = savedInstanceState.getBoolean("fileWasDeletedFromCommons")
             index = savedInstanceState.getInt("index")
             initialListTop = savedInstanceState.getInt("listTop")
         } else {
@@ -593,7 +600,13 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { media: Media -> onMediaRefreshed(media) },
-                    { t: Throwable? -> Timber.e(t) }),
+                    { t: Throwable? ->
+                        if (t.isFileDeletedOnCommons()) {
+                            onFileDeletedFromCommons()
+                        } else {
+                            Timber.e(t)
+                        }
+                    }),
             mediaDataExtractor.getCurrentWikiText(
                 Objects.requireNonNull(media?.filename!!)
             )
@@ -636,6 +649,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
+        if (fileWasDeletedFromCommons) {
+            binding.nominateDeletion.visibility = View.GONE
+            binding.nominatedDeletionBanner.visibility = View.GONE
+            return
+        }
         if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
             binding.nominateDeletion.visibility = View.GONE
             binding.nominatedDeletionBanner.visibility = View.GONE
@@ -730,6 +748,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
             }
+
+            override fun onFailure(id: String, throwable: Throwable) {
+                revealMediaDetailWithoutImage()
+            }
         }
 
     /**
@@ -800,6 +822,61 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         compositeDisposable.clear()
 
         super.onDestroyView()
+    }
+
+    /**
+     * Shows the stored caption when the image never loads.
+     * The scroll view stays invisible until an image reports its size, so a 404 would otherwise
+     * leave this screen blank.
+     */
+    private fun revealMediaDetailWithoutImage(allowRetry: Boolean = true) {
+        val currentBinding = _binding
+        val scrollView = currentBinding?.mediaDetailScrollView
+        if (currentBinding != null && scrollView != null && scrollView.isAttachedToWindow) {
+            val scrollWidth = scrollView.width
+            if (scrollWidth <= 0 && allowRetry) {
+                scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
+            } else if (scrollWidth > 0) {
+                val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
+                val params = currentBinding.mediaDetailImageView.layoutParams
+                val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
+                params.width = scrollWidth
+                params.height = height
+                spacerParams.height = height
+                currentBinding.mediaDetailImageView.layoutParams = params
+                currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
+                scrollView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    /**
+     * The media load this screen already makes reported the file page as missing.
+     * Explain the deletion once, and keep the row so the gallery can show it as deleted.
+     */
+    private fun onFileDeletedFromCommons() {
+        val currentMedia = media
+        if (_binding != null && currentMedia != null) {
+            val alreadyShown = fileWasDeletedFromCommons
+            fileWasDeletedFromCommons = true
+            revealMediaDetailWithoutImage()
+            binding.deletedFileBanner.visibility = View.VISIBLE
+            binding.nominateDeletion.visibility = View.GONE
+            binding.nominatedDeletionBanner.visibility = View.GONE
+            val filename = currentMedia.filename
+            if (!alreadyShown && !filename.isNullOrEmpty()) {
+                contributionsRepository
+                    .markCompletedContributionDeleted(filename)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(
+                        { },
+                        { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
+                    )
+                if (isAdded) {
+                    DeletedFileActivity.start(requireContext(), filename)
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
