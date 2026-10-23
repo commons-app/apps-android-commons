@@ -53,6 +53,12 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
 
+    companion object {
+        private const val SCROLL_TO_TOP_THRESHOLD = 20
+        private const val SMART_SCROLL_JUMP_THRESHOLD = 100
+        private const val SCROLL_OFFSET = 0
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { userName = it.getString(ProfileActivity.KEY_USERNAME) }
@@ -110,7 +116,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 val layoutManager = leaderboardList.layoutManager as? LinearLayoutManager
                 val firstVisible = layoutManager?.findFirstVisibleItemPosition() ?: 0
 
-                if (firstVisible > 20) {
+                if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
                     smartScrollTo(0)
                 } else {
                     scrollToUserRank()
@@ -130,7 +136,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
         val firstVisible = layoutManager.findFirstVisibleItemPosition()
 
-        if (firstVisible > 20) {
+        if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
             binding.scroll.text = getString(R.string.leaderboard_go_to_top_button_text)
             binding.scroll.setIconResource(android.R.drawable.arrow_up_float)
             binding.scroll.visibility = View.VISIBLE
@@ -183,10 +189,10 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
         val currentPosition = layoutManager.findFirstVisibleItemPosition()
 
-        if (Math.abs(currentPosition - targetPosition) > 100) {
+        if (Math.abs(currentPosition - targetPosition) > SMART_SCROLL_JUMP_THRESHOLD) {
             // jump instantly close to the target to skip processing thousands of layouts
-            val offsetPosition = if (targetPosition > currentPosition) targetPosition - 20 else targetPosition + 20
-            layoutManager.scrollToPositionWithOffset(offsetPosition, 0)
+            val offsetPosition = if (targetPosition > currentPosition) targetPosition - SCROLL_TO_TOP_THRESHOLD else targetPosition + SCROLL_TO_TOP_THRESHOLD
+            layoutManager.scrollToPositionWithOffset(offsetPosition, SCROLL_OFFSET)
 
             binding.leaderboardList.post {
                 binding.leaderboardList.smoothScrollToPosition(targetPosition)
