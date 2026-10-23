@@ -135,7 +135,7 @@ app/src/main/java/fr/free/nrw/commons/feedback/FeedbackContentCreator.kt
 app/src/main/java/fr/free/nrw/commons/feedback/FeedbackDialog.kt
 app/src/main/java/fr/free/nrw/commons/feedback/OnFeedbackSubmitCallback.kt
 app/src/main/java/fr/free/nrw/commons/feedback/model/Feedback.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/Costants.kt
+app/src/main/java/fr/free/nrw/commons/filepicker/Constants.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/DefaultCallback.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/ExtendedFileProvider.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/FilePicker.kt
