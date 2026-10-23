@@ -160,7 +160,7 @@ class ContributionController
         /**
          * Shows a dialog alerting the user about location services being off and asking them to turn it
          * on
-         * TODO: Add a seperate callback in LocationPermissionsHelper for this.
+         * Possible improvement: add a separate callback in LocationPermissionsHelper for this.
          * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
          *
          * @param activity           Activity reference

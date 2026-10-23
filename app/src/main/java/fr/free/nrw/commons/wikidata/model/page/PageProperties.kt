@@ -32,7 +32,7 @@ class PageProperties private constructor(parcel: Parcel) : Parcelable {
 
     /**
      * True if the user who first requested this page can edit this page
-     * FIXME: This is not a true page property, since it depends on current user.
+     * Note: This is not a true page property, since it depends on current user.
      */
     private val canEdit = parcel.readInt() == 1
 

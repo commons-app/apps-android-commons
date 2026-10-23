@@ -10,7 +10,7 @@ import java.util.TimeZone
 
 /**
  * Utility class for date formatting and parsing.
- * TODO: Switch to DateTimeFormatter when minSdk = 26.
+ * Uses SimpleDateFormat because DateTimeFormatter requires minSdk 26.
  */
 object DateUtil {
 

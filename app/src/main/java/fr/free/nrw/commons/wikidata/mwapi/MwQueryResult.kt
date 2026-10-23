@@ -58,7 +58,7 @@ class MwQueryResult : BaseModel(), PostProcessable {
 
         pages.forEach { page ->
             redirects.forEach { redirect ->
-                // TODO: Looks like result pages and redirects can also be matched on the "index"
+                // Note: Looks like result pages and redirects can also be matched on the "index"
                 // property.  Confirm in the API docs and consider updating.
                 if (page.title() == redirect.to()) {
                     page.redirectFrom(redirect.from())
