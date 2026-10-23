@@ -23,7 +23,8 @@ internal class ImageHelperTest {
      */
     @Test
     fun folderListFromImages() {
-        val folderList = ArrayList<Folder>(listOf(Folder(1, "bucket1", folderImageList1), Folder(2, "bucket2", folderImageList2)))
+        val folderList =
+            ArrayList<Folder>(listOf(Folder(1, "bucket1", folderImageList1), Folder(2, "bucket2", folderImageList2)))
         assertEquals(folderList, ImageHelper.folderListFromImages(mockImageList))
     }
 
