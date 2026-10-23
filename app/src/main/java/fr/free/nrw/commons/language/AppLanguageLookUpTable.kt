@@ -2,19 +2,16 @@ package fr.free.nrw.commons.language
 
 import android.content.Context
 import android.content.res.Resources
-import android.text.TextUtils
-
 import androidx.annotation.ArrayRes
 import fr.free.nrw.commons.R
 import java.lang.ref.SoftReference
-import java.util.Arrays
 import java.util.Locale
-
 
 /** Immutable look up table for all app supported languages. All article languages may not be
  * present in this table as it is statically bundled with the app. */
-class AppLanguageLookUpTable(context: Context) {
-
+class AppLanguageLookUpTable(
+    context: Context,
+) {
     companion object {
         const val SIMPLIFIED_CHINESE_LANGUAGE_CODE = "zh-hans"
         const val TRADITIONAL_CHINESE_LANGUAGE_CODE = "zh-hant"
@@ -59,12 +56,13 @@ class AppLanguageLookUpTable(context: Context) {
     fun getCanonicalName(code: String?): String? {
         var name = defaultIndex(getCanonicalNames(), indexOfCode(code), null)
         if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
-            name = when (code) {
-                Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.ENGLISH)
-                NORWEGIAN_LEGACY_LANGUAGE_CODE ->
-                    defaultIndex(getCanonicalNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
-                else -> null
-            }
+            name =
+                when (code) {
+                    Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.ENGLISH)
+                    NORWEGIAN_LEGACY_LANGUAGE_CODE ->
+                        defaultIndex(getCanonicalNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                    else -> null
+                }
         }
         return name
     }
@@ -72,12 +70,13 @@ class AppLanguageLookUpTable(context: Context) {
     fun getLocalizedName(code: String?): String? {
         var name = defaultIndex(getLocalizedNames(), indexOfCode(code), null)
         if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
-            name = when (code) {
-                Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.CHINESE)
-                NORWEGIAN_LEGACY_LANGUAGE_CODE ->
-                    defaultIndex(getLocalizedNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
-                else -> null
-            }
+            name =
+                when (code) {
+                    Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.CHINESE)
+                    NORWEGIAN_LEGACY_LANGUAGE_CODE ->
+                        defaultIndex(getLocalizedNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                    else -> null
+                }
         }
         return name
     }
@@ -100,13 +99,13 @@ class AppLanguageLookUpTable(context: Context) {
         return names
     }
 
-    fun isSupportedCode(code: String?): Boolean {
-        return getCodes().contains(code)
-    }
+    fun isSupportedCode(code: String?): Boolean = getCodes().contains(code)
 
-    private fun <T> defaultIndex(list: List<T>, index: Int, defaultValue: T?): T? {
-        return if (inBounds(list, index)) list[index] else defaultValue
-    }
+    private fun <T> defaultIndex(
+        list: List<T>,
+        index: Int,
+        defaultValue: T?,
+    ): T? = if (inBounds(list, index)) list[index] else defaultValue
 
     /**
      * Searches #codes for the specified language code and returns the index for use in
@@ -116,20 +115,17 @@ class AppLanguageLookUpTable(context: Context) {
      *             language is null.
      * @return The index of the language code or -1 if the code is not supported.
      */
-    private fun indexOfCode(code: String?): Int {
-        return getCodes().indexOf(code)
-    }
+    private fun indexOfCode(code: String?): Int = getCodes().indexOf(code)
 
     /** @return Nonnull immutable list. */
-    private fun getStringList(id: Int): List<String> {
-        return getStringArray(id).toList()
-    }
+    private fun getStringList(id: Int): List<String> = getStringArray(id).toList()
 
-    private fun inBounds(list: List<*>, index: Int): Boolean {
-        return index in list.indices
-    }
+    private fun inBounds(
+        list: List<*>,
+        index: Int,
+    ): Boolean = index in list.indices
 
-    fun getStringArray(@ArrayRes id: Int): Array<String> {
-        return resources.getStringArray(id)
-    }
+    fun getStringArray(
+        @ArrayRes id: Int,
+    ): Array<String> = resources.getStringArray(id)
 }

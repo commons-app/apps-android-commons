@@ -2,6 +2,7 @@ package fr.free.nrw.commons.description
 
 import android.content.Context
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.notification.NotificationHelper
 import io.reactivex.Observable
@@ -10,7 +11,6 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import fr.free.nrw.commons.R
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`

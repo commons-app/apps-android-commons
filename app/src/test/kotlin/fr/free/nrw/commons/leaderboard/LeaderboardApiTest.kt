@@ -37,9 +37,10 @@ class LeaderboardApiTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        val testResponseBody = convertStreamToString(
-            javaClass.classLoader!!.getResourceAsStream(FILE_NAME)
-        )
+        val testResponseBody =
+            convertStreamToString(
+                javaClass.classLoader!!.getResourceAsStream(FILE_NAME),
+            )
 
         server.enqueue(MockResponse().setBody(testResponseBody))
         server.start()
@@ -71,7 +72,10 @@ class LeaderboardApiTest {
      * @throws IOException
      */
     @Throws(IOException::class)
-    private fun sendRequest(okHttpClient: OkHttpClient, httpUrl: HttpUrl): LeaderboardResponse? {
+    private fun sendRequest(
+        okHttpClient: OkHttpClient,
+        httpUrl: HttpUrl,
+    ): LeaderboardResponse? {
         val request: Request = Request.Builder().url(httpUrl).build()
         val response = okHttpClient.newCall(request).execute()
         if (response.isSuccessful) {

@@ -8,7 +8,7 @@ import timber.log.Timber
  */
 data class FileUsagesUiModel(
     val title: String,
-    val link: String?
+    val link: String?,
 )
 
 /**
@@ -20,7 +20,7 @@ fun FileUsage.toUiModel(): FileUsagesUiModel {
     val encodedTitle = Uri.encode(title.replace(" ", "_"))
     return FileUsagesUiModel(
         title = title,
-        link = "https://commons.wikimedia.org/wiki/$encodedTitle"
+        link = "https://commons.wikimedia.org/wiki/$encodedTitle",
     )
 }
 
@@ -39,23 +39,25 @@ fun GlobalFileUsage.toUiModel(): FileUsagesUiModel {
     }
 
     // Extract wiki code for prefix (e.g., "en" from "en.wikipedia.org" or "enwiki")
-    val wikiCode = when {
-        wiki.contains(".") -> wiki.substringBefore(".") // e.g., "en" from "en.wikipedia.org"
-        wiki == "commonswiki" -> "commons"
-        wiki.endsWith("wiki") -> wiki.removeSuffix("wiki")
-        else -> wiki
-    }
+    val wikiCode =
+        when {
+            wiki.contains(".") -> wiki.substringBefore(".") // e.g., "en" from "en.wikipedia.org"
+            wiki == "commonswiki" -> "commons"
+            wiki.endsWith("wiki") -> wiki.removeSuffix("wiki")
+            else -> wiki
+        }
 
     // Create prefixed title, e.g., "(en) Changi East Depot"
     val prefixedTitle = "($wikiCode) $title"
 
     // Determine the domain for the URL
-    val domain = when {
-        wiki.contains(".") -> wiki // Already a full domain, e.g., "en.wikipedia.org"
-        wiki == "commonswiki" -> "commons.wikimedia.org"
-        wiki.endsWith("wiki") -> wiki.removeSuffix("wiki") + ".wikipedia.org"
-        else -> "$wiki.wikipedia.org" // Fallback for simple codes like "en"
-    }
+    val domain =
+        when {
+            wiki.contains(".") -> wiki // Already a full domain, e.g., "en.wikipedia.org"
+            wiki == "commonswiki" -> "commons.wikimedia.org"
+            wiki.endsWith("wiki") -> wiki.removeSuffix("wiki") + ".wikipedia.org"
+            else -> "$wiki.wikipedia.org" // Fallback for simple codes like "en"
+        }
 
     // Normalize title: replace spaces with underscores and URL-encode
     val encodedTitle = Uri.encode(title.replace(" ", "_"))

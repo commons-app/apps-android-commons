@@ -2,20 +2,17 @@ package fr.free.nrw.commons.theme
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
-import javax.inject.Inject
-import javax.inject.Named
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import io.reactivex.disposables.CompositeDisposable
-
+import javax.inject.Inject
+import javax.inject.Named
 
 abstract class BaseActivity : CommonsDaggerAppCompatActivity() {
-
     @Inject
     @field:Named("default_preferences")
     lateinit var defaultKvStore: JsonKvStore
@@ -31,11 +28,12 @@ abstract class BaseActivity : CommonsDaggerAppCompatActivity() {
         wasPreviouslyDarkTheme = systemThemeUtils.isDeviceInNightMode()
         setTheme(if (wasPreviouslyDarkTheme) R.style.DarkAppTheme else R.style.LightAppTheme)
 
-        val fontScale = android.provider.Settings.System.getFloat(
-            baseContext.contentResolver,
-            android.provider.Settings.System.FONT_SCALE,
-            1f
-        )
+        val fontScale =
+            android.provider.Settings.System.getFloat(
+                baseContext.contentResolver,
+                android.provider.Settings.System.FONT_SCALE,
+                1f,
+            )
         adjustFontScale(resources.configuration, fontScale)
         enableEdgeToEdge()
     }
@@ -56,7 +54,10 @@ abstract class BaseActivity : CommonsDaggerAppCompatActivity() {
     /**
      * Apply fontScale on device
      */
-    fun adjustFontScale(configuration: Configuration, scale: Float) {
+    fun adjustFontScale(
+        configuration: Configuration,
+        scale: Float,
+    ) {
         configuration.fontScale = scale
         val metrics = resources.displayMetrics
         val wm = getSystemService(WINDOW_SERVICE) as WindowManager

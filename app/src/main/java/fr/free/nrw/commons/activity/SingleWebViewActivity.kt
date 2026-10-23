@@ -75,10 +75,10 @@ class SingleWebViewActivity : ComponentActivity() {
                             ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = getString(R.string.back)
+                                    contentDescription = getString(R.string.back),
                                 )
                             }
-                        }
+                        },
                     )
                 },
                 content = {
@@ -86,23 +86,23 @@ class SingleWebViewActivity : ComponentActivity() {
                         url = url,
                         successUrl = successUrl,
                         onSuccess = {
-                            //Redirect the user to login screen like we do when the user logout's
+                            // Redirect the user to login screen like we do when the user logout's
                             val app = applicationContext as CommonsApplication
                             app.clearApplicationData(
                                 applicationContext,
-                                ActivityLogoutListener(activity = this, ctx = applicationContext)
+                                ActivityLogoutListener(activity = this, ctx = applicationContext),
                             )
                             finish()
                         },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(it)
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(it),
                     )
-                }
+                },
             )
         }
     }
-
 
     /**
      * @param url The initial URL which we are loading in the WebView.
@@ -113,11 +113,12 @@ class SingleWebViewActivity : ComponentActivity() {
      */
     @SuppressLint("SetJavaScriptEnabled")
     @Composable
+    @Suppress("ktlint:standard:function-naming")
     private fun WebViewComponent(
         url: String,
         successUrl: String,
         onSuccess: () -> Unit,
-        modifier: Modifier = Modifier
+        modifier: Modifier = Modifier,
     ) {
         val webView = remember { mutableStateOf<WebView?>(null) }
         AndroidView(
@@ -128,50 +129,53 @@ class SingleWebViewActivity : ComponentActivity() {
                         javaScriptEnabled = true
                         domStorageEnabled = true
                         javaScriptCanOpenWindowsAutomatically = true
-
                     }
-                    webViewClient = object : WebViewClient() {
-                        override fun shouldOverrideUrlLoading(
-                            view: WebView?,
-                            request: WebResourceRequest?
-                        ): Boolean {
-
-                            request?.url?.let { url ->
-                                Timber.d("URL Loading: $url")
-                                if (url.toString() == successUrl) {
-                                    Timber.d("Success URL detected. Closing WebView.")
-                                    onSuccess() // Close the activity
-                                    return true
+                    webViewClient =
+                        object : WebViewClient() {
+                            override fun shouldOverrideUrlLoading(
+                                view: WebView?,
+                                request: WebResourceRequest?,
+                            ): Boolean {
+                                request?.url?.let { url ->
+                                    Timber.d("URL Loading: $url")
+                                    if (url.toString() == successUrl) {
+                                        Timber.d("Success URL detected. Closing WebView.")
+                                        onSuccess() // Close the activity
+                                        return true
+                                    }
+                                    return false
                                 }
                                 return false
                             }
-                            return false
+
+                            override fun onPageFinished(
+                                view: WebView?,
+                                url: String?,
+                            ) {
+                                super.onPageFinished(view, url)
+                                setCookies(url.orEmpty())
+                            }
                         }
 
-                        override fun onPageFinished(view: WebView?, url: String?) {
-                            super.onPageFinished(view, url)
-                            setCookies(url.orEmpty())
+                    webChromeClient =
+                        object : WebChromeClient() {
+                            override fun onConsoleMessage(message: ConsoleMessage): Boolean {
+                                Timber.d(
+                                    "%s%s",
+                                    "Console: ${message.message()} -- From line ",
+                                    "${message.lineNumber()} of ${message.sourceId()}",
+                                )
+                                return true
+                            }
                         }
-
-                    }
-
-                    webChromeClient = object : WebChromeClient() {
-                        override fun onConsoleMessage(message: ConsoleMessage): Boolean {
-                            Timber.d("%s%s",
-                                "Console: ${message.message()} -- From line ",
-                                "${message.lineNumber()} of ${message.sourceId()}")
-                            return true
-                        }
-                    }
 
                     loadUrl(url)
                 }
             },
             update = {
                 webView.value = it
-            }
+            },
         )
-
     }
 
     /**
@@ -201,17 +205,17 @@ class SingleWebViewActivity : ComponentActivity() {
         fun showWebView(
             context: Context,
             url: String,
-            successUrl: String
+            successUrl: String,
         ) {
-            val intent = Intent(
-                context,
-                SingleWebViewActivity::class.java
-            ).apply {
-                putExtra(VANISH_ACCOUNT_URL, url)
-                putExtra(VANISH_ACCOUNT_SUCCESS_URL, successUrl)
-            }
+            val intent =
+                Intent(
+                    context,
+                    SingleWebViewActivity::class.java,
+                ).apply {
+                    putExtra(VANISH_ACCOUNT_URL, url)
+                    putExtra(VANISH_ACCOUNT_SUCCESS_URL, successUrl)
+                }
             context.startActivity(intent)
         }
     }
 }
-

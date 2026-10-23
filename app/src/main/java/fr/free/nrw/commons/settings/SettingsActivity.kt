@@ -6,12 +6,10 @@ import fr.free.nrw.commons.databinding.ActivitySettingsBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
-
 /**
  * allows the user to change the settings
  */
 class SettingsActivity : BaseActivity() {
-
     private lateinit var binding: ActivitySettingsBinding
 
     /**
@@ -30,6 +28,7 @@ class SettingsActivity : BaseActivity() {
     }
 
     // Get an action bar
+
     /**
      * takes care of actions taken after the creation has happened
      * @param savedInstanceState the saved state
@@ -52,13 +51,12 @@ class SettingsActivity : BaseActivity() {
      * @param item the selected item
      * @return true on success, false on failure
      */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
 }

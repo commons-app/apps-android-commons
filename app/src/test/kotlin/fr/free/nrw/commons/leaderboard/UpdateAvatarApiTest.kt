@@ -35,9 +35,10 @@ class UpdateAvatarApiTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        val testResponseBody = convertStreamToString(
-            javaClass.classLoader!!.getResourceAsStream(FILE_NAME)
-        )
+        val testResponseBody =
+            convertStreamToString(
+                javaClass.classLoader!!.getResourceAsStream(FILE_NAME),
+            )
 
         server.enqueue(MockResponse().setBody(testResponseBody))
         server.start()
@@ -73,14 +74,17 @@ class UpdateAvatarApiTest {
      * @throws IOException
      */
     @Throws(IOException::class)
-    private fun sendRequest(okHttpClient: OkHttpClient, httpUrl: HttpUrl): UpdateAvatarResponse? {
+    private fun sendRequest(
+        okHttpClient: OkHttpClient,
+        httpUrl: HttpUrl,
+    ): UpdateAvatarResponse? {
         val request: Request = Request.Builder().url(httpUrl).build()
         val response = okHttpClient.newCall(request).execute()
         if (response.isSuccessful) {
             val gson = Gson()
             return gson.fromJson(
                 response.body!!.string(),
-                UpdateAvatarResponse::class.java
+                UpdateAvatarResponse::class.java,
             )
         }
         return null
@@ -124,4 +128,3 @@ class UpdateAvatarApiTest {
         }
     }
 }
-

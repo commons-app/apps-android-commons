@@ -11,31 +11,27 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.Nullable
 import com.facebook.common.executors.CallerThreadExecutor
 import com.facebook.common.references.CloseableReference
 import com.facebook.datasource.DataSource
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipeline
 import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber
 import com.facebook.imagepipeline.image.CloseableImage
-import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.imagepipeline.request.ImageRequestBuilder
-import fr.free.nrw.commons.media.MediaClient
-import javax.inject.Inject
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Implementation of App Widget functionality.
  */
 class PicOfDayAppWidget : AppWidgetProvider() {
-
     private val compositeDisposable = CompositeDisposable()
 
     @Inject
@@ -44,7 +40,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
     private fun updateAppWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
     ) {
         val views = RemoteViews(context.packageName, R.layout.pic_of_day_app_widget)
 
@@ -73,10 +69,11 @@ class PicOfDayAppWidget : AppWidgetProvider() {
         context: Context,
         views: RemoteViews,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
     ) {
         compositeDisposable.add(
-            mediaClient.getPictureOfTheDay()
+            mediaClient
+                .getPictureOfTheDay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -85,21 +82,23 @@ class PicOfDayAppWidget : AppWidgetProvider() {
                             views.setTextViewText(R.id.appwidget_title, response.displayTitle)
 
                             // View in browser
-                            val viewIntent = Intent().apply {
-                                action = Intent.ACTION_VIEW
-                                data = Uri.parse(response.pageTitle.mobileUri)
-                            }
+                            val viewIntent =
+                                Intent().apply {
+                                    action = Intent.ACTION_VIEW
+                                    data = Uri.parse(response.pageTitle.mobileUri)
+                                }
 
                             var flags = PendingIntent.FLAG_UPDATE_CURRENT
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 flags = flags or PendingIntent.FLAG_IMMUTABLE
                             }
-                            val pendingIntent = PendingIntent.getActivity(
-                                context,
-                                0,
-                                viewIntent,
-                                flags
-                            )
+                            val pendingIntent =
+                                PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    viewIntent,
+                                    flags,
+                                )
 
                             views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent)
                             loadImageFromUrl(
@@ -107,12 +106,12 @@ class PicOfDayAppWidget : AppWidgetProvider() {
                                 context,
                                 views,
                                 appWidgetManager,
-                                appWidgetId
+                                appWidgetId,
                             )
                         }
                     },
-                    { t -> Timber.e(t, "Fetching picture of the day failed") }
-                )
+                    { t -> Timber.e(t, "Fetching picture of the day failed") },
+                ),
         )
     }
 
@@ -129,30 +128,38 @@ class PicOfDayAppWidget : AppWidgetProvider() {
         context: Context,
         views: RemoteViews,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
     ) {
         val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build()
         val imagePipeline = Fresco.getImagePipeline()
         val dataSource = imagePipeline.fetchDecodedImage(request, context)
 
-        dataSource.subscribe(object : BaseBitmapDataSubscriber() {
-            override fun onNewResultImpl(tempBitmap: Bitmap?) {
-                val bitmap = tempBitmap?.let {
-                    Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888).apply {
-                        Canvas(this).drawBitmap(it, 0f, 0f, Paint())
-                    }
+        dataSource.subscribe(
+            object : BaseBitmapDataSubscriber() {
+                override fun onNewResultImpl(tempBitmap: Bitmap?) {
+                    val bitmap =
+                        tempBitmap?.let {
+                            Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888).apply {
+                                Canvas(this).drawBitmap(it, 0f, 0f, Paint())
+                            }
+                        }
+                    views.setImageViewBitmap(R.id.appwidget_image, bitmap)
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
-                views.setImageViewBitmap(R.id.appwidget_image, bitmap)
-                appWidgetManager.updateAppWidget(appWidgetId, views)
-            }
 
-            override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>) {
-                // Ignore failure for now.
-            }
-        }, CallerThreadExecutor.getInstance())
+                override fun onFailureImpl(dataSource: DataSource<CloseableReference<CloseableImage>>) {
+                    // Ignore failure for now.
+                }
+            },
+            CallerThreadExecutor.getInstance(),
+        )
     }
 
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+    ) {
         ApplicationlessInjection
             .getInstance(context.applicationContext)
             .commonsApplicationComponent

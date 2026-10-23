@@ -21,10 +21,10 @@ import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -76,11 +76,12 @@ class DescriptionEditActivity :
 
     private var descriptionAndCaptions: MutableList<UploadMediaDetail>? = null
 
-    private val voiceInputResultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result: ActivityResult ->
-        onVoiceInput(result)
-    }
+    private val voiceInputResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) { result: ActivityResult ->
+            onVoiceInput(result)
+        }
 
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
 
@@ -91,7 +92,8 @@ class DescriptionEditActivity :
 
         binding = ActivityDescriptionEditBinding.inflate(layoutInflater)
         applyEdgeToEdgeBottomInsets(binding.btnEditSubmit)
-        WindowCompat.getInsetsController(window, window.decorView)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = false
         binding.toolbar.applyEdgeToEdgeTopPaddingInsets()
         setContentView(binding.root)
@@ -127,7 +129,7 @@ class DescriptionEditActivity :
                 savedLanguageValue,
                 descriptionAndCaptions ?: mutableListOf(),
                 recentLanguagesDao,
-                voiceInputResultLauncher
+                voiceInputResultLauncher,
             )
 
         uploadMediaDetailAdapter.callback = UploadMediaDetailAdapter.Callback(::showInfoAlert)
@@ -151,7 +153,7 @@ class DescriptionEditActivity :
             getString(titleStringID),
             getString(messageStringId),
             getString(R.string.ok),
-            null
+            null,
         )
     }
 
@@ -312,7 +314,10 @@ class DescriptionEditActivity :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putParcelableArrayList(
+            LIST_OF_DESCRIPTION_AND_CAPTION,
+            uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>,
+        )
         outState.putString(WIKITEXT, wikiText)
         outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
         // save Media
