@@ -16,71 +16,80 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FileUtilsWrapper @Inject constructor(private val context: Context) {
-    fun getSHA1(stream: InputStream?): String =
-        stream?.let { FileUtils.getSHA1(it) } ?: ""
+class FileUtilsWrapper
+    @Inject
+    constructor(
+        private val context: Context,
+    ) {
+        fun getSHA1(stream: InputStream?): String = stream?.let { FileUtils.getSHA1(it) } ?: ""
 
-    @Throws(FileNotFoundException::class)
-    fun getFileInputStream(filePath: String?): FileInputStream =
-        FileUtils.getFileInputStream(filePath)
+        @Throws(FileNotFoundException::class)
+        fun getFileInputStream(filePath: String?): FileInputStream = FileUtils.getFileInputStream(filePath)
 
-    fun getGeolocationOfFile(filePath: String, inAppPictureLocation: LatLng?): String? =
-        FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation)
+        fun getGeolocationOfFile(
+            filePath: String,
+            inAppPictureLocation: LatLng?,
+        ): String? = FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation)
 
-    fun getMimeType(file: File?): String? =
-        getMimeType(Uri.parse(file?.path))
+        fun getMimeType(file: File?): String? = getMimeType(Uri.parse(file?.path))
 
-    fun getMimeType(uri: Uri): String? =
-        getMimeType(context, uri)
+        fun getMimeType(uri: Uri): String? = getMimeType(context, uri)
 
-    /**
-     * Takes a file as input and returns an Observable of files with the specified chunk size
-     */
-    @Throws(IOException::class)
-    fun getFileChunks(file: File?, chunkSize: Int): List<File> {
-        if (file == null) return emptyList()
+        /**
+         * Takes a file as input and returns an Observable of files with the specified chunk size
+         */
+        @Throws(IOException::class)
+        fun getFileChunks(
+            file: File?,
+            chunkSize: Int,
+        ): List<File> {
+            if (file == null) return emptyList()
 
-        val buffer = ByteArray(chunkSize)
+            val buffer = ByteArray(chunkSize)
 
-        FileInputStream(file).use { fis ->
-            BufferedInputStream(fis).use { bis ->
-                val buffers: MutableList<File> = ArrayList()
-                var size: Int
-                while ((bis.read(buffer).also { size = it }) > 0) {
-                    buffers.add(
-                        writeToFile(
-                            buffer,
-                            file.name ?: "",
-                            getFileExt(file.name),
-                            size
+            FileInputStream(file).use { fis ->
+                BufferedInputStream(fis).use { bis ->
+                    val buffers: MutableList<File> = ArrayList()
+                    var size: Int
+                    while ((bis.read(buffer).also { size = it }) > 0) {
+                        buffers.add(
+                            writeToFile(
+                                buffer,
+                                file.name ?: "",
+                                getFileExt(file.name),
+                                size,
+                            ),
                         )
-                    )
+                    }
+                    return buffers
                 }
-                return buffers
             }
         }
-    }
 
-    private fun getFileExt(fileName: String): String =
-        FileUtils.getFileExt(fileName)
+        private fun getFileExt(fileName: String): String = FileUtils.getFileExt(fileName)
 
-    /**
-     * Create a temp file containing the passed byte data.
-     */
-    @Throws(IOException::class)
-    private fun writeToFile(data: ByteArray, fileName: String, fileExtension: String, size: Int): File {
-        val file = File.createTempFile(fileName, fileExtension, context.cacheDir)
-        try {
-            if (!file.exists()) {
-                file.createNewFile()
+        /**
+         * Create a temp file containing the passed byte data.
+         */
+        @Throws(IOException::class)
+        private fun writeToFile(
+            data: ByteArray,
+            fileName: String,
+            fileExtension: String,
+            size: Int,
+        ): File {
+            val file = File.createTempFile(fileName, fileExtension, context.cacheDir)
+            try {
+                if (!file.exists()) {
+                    file.createNewFile()
+                }
+
+                FileOutputStream(file).use { fos ->
+                    fos.write(data, 0, size)
+                }
+            } catch (throwable: Exception) {
+                Timber.e(throwable, "Failed to create file")
             }
-
-            FileOutputStream(file).use { fos ->
-                fos.write(data, 0, size)
-            }
-        } catch (throwable: Exception) {
-            Timber.e(throwable, "Failed to create file")
+            return file
         }
-        return file
     }
-}

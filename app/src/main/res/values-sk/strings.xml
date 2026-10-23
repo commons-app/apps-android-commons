@@ -894,4 +894,12 @@
   <string name="error_applying_blur">Chyba pri použití rozmazania</string>
   <string name="failed_to_apply_crop">Nepodarilo sa použiť orezanie</string>
   <string name="failed_to_save_image">Nepodarilo sa uložiť obrázok</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (zvuk)</string>
+  <string name="unsupported_format_title">Nepodporovaný formát</string>
+  <string name="unsupported_format_desc">Vybrané súbory sa nepodarilo otvoriť. Wikimedia Commons vyžaduje výhradne tieto formáty:\\n\\n%s</string>
+  <string name="unsupported_files_skipped_title">Nepodporované súbory boli preskočené</string>
+  <string name="unsupported_files_skipped_desc">Niektoré súbory boli preskočené pre nepodporovaný formát. Aplikácia bude pokračovať v nahrávaní ostatných súborov v týchto podporovaných formátoch:\\n\\n%s</string>
 </resources>

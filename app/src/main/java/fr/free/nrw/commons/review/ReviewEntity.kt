@@ -9,5 +9,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "reviewed-images")
 data class ReviewEntity(
     @PrimaryKey
-    val imageId: String
+    val imageId: String,
 )

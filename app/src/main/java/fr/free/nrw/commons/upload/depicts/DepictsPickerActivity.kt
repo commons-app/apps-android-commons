@@ -9,7 +9,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 class DepictsPickerActivity : BaseActivity() {
-
     @JvmField
     var binding: ActivityDepictsPickerBinding? = null
 
@@ -21,16 +20,16 @@ class DepictsPickerActivity : BaseActivity() {
         if (savedInstanceState == null) {
             val photoLatLngs =
                 intent.getParcelableArrayListExtra<LatLng>(
-                    NearbyParentFragment.ARG_PHOTO_LATLNGS
+                    NearbyParentFragment.ARG_PHOTO_LATLNGS,
                 )
             val pickerFragment = NearbyParentFragment.newPickerInstance(photoLatLngs)
 
-            supportFragmentManager.beginTransaction()
+            supportFragmentManager
+                .beginTransaction()
                 .replace(R.id.picker_fragment_container, pickerFragment)
                 .commit()
         }
     }
-
 
     override fun onDestroy() {
         binding = null

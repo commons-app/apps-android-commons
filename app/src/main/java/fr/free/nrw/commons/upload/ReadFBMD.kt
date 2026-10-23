@@ -15,31 +15,38 @@ import javax.inject.Singleton
  * metadata that is specific to images that come from Facebook.
  */
 @Singleton
-class ReadFBMD @Inject constructor() {
-    fun processMetadata(path: String?): Single<Int> = Single.fromCallable {
-        var result = IMAGE_OK
-        try {
-            var psBlockOffset: Int
-            var fbmdOffset: Int
+class ReadFBMD
+    @Inject
+    constructor() {
+        fun processMetadata(path: String?): Single<Int> =
+            Single.fromCallable {
+                var result = IMAGE_OK
+                try {
+                    var psBlockOffset: Int
+                    var fbmdOffset: Int
 
-            FileInputStream(path).use { fs ->
-                val bytes = ByteArray(4096)
-                fs.read(bytes)
-                with(String(bytes)) {
-                    psBlockOffset = indexOf("8BIM")
-                    fbmdOffset = indexOf("FBMD")
+                    FileInputStream(path).use { fs ->
+                        val bytes = ByteArray(4096)
+                        fs.read(bytes)
+                        with(String(bytes)) {
+                            psBlockOffset = indexOf("8BIM")
+                            fbmdOffset = indexOf("FBMD")
+                        }
+                    }
+
+                    result =
+                        if (psBlockOffset > 0 &&
+                            fbmdOffset > 0 &&
+                            fbmdOffset > psBlockOffset &&
+                            fbmdOffset - psBlockOffset < 0x80
+                        ) {
+                            FILE_FBMD
+                        } else {
+                            IMAGE_OK
+                        }
+                } catch (e: IOException) {
+                    Timber.e(e)
                 }
+                return@fromCallable result
             }
-
-            result = if (psBlockOffset > 0 && fbmdOffset > 0 &&
-                fbmdOffset > psBlockOffset &&
-                fbmdOffset - psBlockOffset < 0x80
-            ) FILE_FBMD else IMAGE_OK
-
-        } catch (e: IOException) {
-            Timber.e(e)
-        }
-        return@fromCallable result
     }
-}
-

@@ -3,12 +3,13 @@ package fr.free.nrw.commons.logging
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-
 import androidx.core.content.FileProvider
-
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
+import org.acra.ACRA.errorReporter
 import org.acra.data.CrashReportData
 import org.acra.sender.ReportSender
-
+import timber.log.Timber
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -18,19 +19,12 @@ import java.io.IOException
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.auth.SessionManager
-import org.acra.ACRA.errorReporter
-import timber.log.Timber
-
-
 /**
  * Abstract class that implements Acra's log sender.
  */
 abstract class LogsSender(
-    private val sessionManager: SessionManager
-): ReportSender {
-
+    private val sessionManager: SessionManager,
+) : ReportSender {
     var mailTo: String? = null
     var logFileName: String? = null
     var emailSubject: String? = null
@@ -42,7 +36,10 @@ abstract class LogsSender(
      * @param context The context in which to send the logs.
      * @param report The crash report data, if any.
      */
-    fun sendWithNullable(context: Context, report: CrashReportData?) {
+    fun sendWithNullable(
+        context: Context,
+        report: CrashReportData?,
+    ) {
         if (report == null) {
             errorReporter.handleSilentException(null)
             return
@@ -50,7 +47,10 @@ abstract class LogsSender(
         send(context, report)
     }
 
-    override fun send(context: Context, report: CrashReportData) {
+    override fun send(
+        context: Context,
+        report: CrashReportData,
+    ) {
         sendLogs(context, report)
     }
 
@@ -61,13 +61,15 @@ abstract class LogsSender(
      * @param context The context in which to send the logs.
      * @param report The crash report data, if any.
      */
-    private fun sendLogs(context: Context, report: CrashReportData?) {
+    private fun sendLogs(
+        context: Context,
+        report: CrashReportData?,
+    ) {
         val logFileUri = getZippedLogFileUri(context, report)
         if (logFileUri != null) {
             sendEmail(context, logFileUri)
         } else {
             errorReporter.handleSilentException(null)
-
         }
     }
 
@@ -85,16 +87,20 @@ abstract class LogsSender(
      * @param context The context in which to send the email.
      * @param logFileUri The URI of the zipped log file.
      */
-    private fun sendEmail(context: Context, logFileUri: Uri) {
-        val emailIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "message/rfc822"
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(mailTo))
-            putExtra(Intent.EXTRA_SUBJECT, emailSubject)
-            putExtra(Intent.EXTRA_TEXT, emailBody)
-            putExtra(Intent.EXTRA_STREAM, logFileUri)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
+    private fun sendEmail(
+        context: Context,
+        logFileUri: Uri,
+    ) {
+        val emailIntent =
+            Intent(Intent.ACTION_SEND).apply {
+                type = "message/rfc822"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(mailTo))
+                putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+                putExtra(Intent.EXTRA_TEXT, emailBody)
+                putExtra(Intent.EXTRA_STREAM, logFileUri)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
         context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.share_logs_using)))
     }
 
@@ -105,26 +111,29 @@ abstract class LogsSender(
      * @param report The crash report data, if any.
      * @return The URI of the zipped log file or null if an error occurs.
      */
-    private fun getZippedLogFileUri(context: Context, report: CrashReportData?): Uri? {
-        return try {
-            val builder = StringBuilder().apply {
-                report?.let { attachCrashInfo(it, this) }
-                attachUserInfo(this)
-                attachExtraInfo(this)
-            }
+    private fun getZippedLogFileUri(
+        context: Context,
+        report: CrashReportData?,
+    ): Uri? =
+        try {
+            val builder =
+                StringBuilder().apply {
+                    report?.let { attachCrashInfo(it, this) }
+                    attachUserInfo(this)
+                    attachExtraInfo(this)
+                }
             val metaData = builder.toString().toByteArray(Charsets.UTF_8)
             val zipFile = File(LogUtils.getLogZipDirectory(), logFileName ?: "logs.zip")
             writeLogToZipFile(metaData, zipFile)
             FileProvider.getUriForFile(
                 context,
                 "${context.applicationContext.packageName}.provider",
-                zipFile
+                zipFile,
             )
         } catch (e: IOException) {
             Timber.w(e, "Error in generating log file")
             null
         }
-    }
 
     /**
      * Checks if there are any pending crash reports and attaches them to the logs.
@@ -132,8 +141,11 @@ abstract class LogsSender(
      * @param report The crash report data, if any.
      * @param builder The string builder to append crash info.
      */
-    private fun attachCrashInfo(report: CrashReportData?, builder: StringBuilder) {
-        if(report != null) {
+    private fun attachCrashInfo(
+        report: CrashReportData?,
+        builder: StringBuilder,
+    ) {
+        if (report != null) {
             builder.append(report)
         }
     }
@@ -164,7 +176,10 @@ abstract class LogsSender(
      * @throws IOException If an I/O error occurs.
      */
     @Throws(IOException::class)
-    private fun writeLogToZipFile(metaData: ByteArray, zipFile: File) {
+    private fun writeLogToZipFile(
+        metaData: ByteArray,
+        zipFile: File,
+    ) {
         val logDir = File(LogUtils.getLogDirectory())
         if (!logDir.exists() || logDir.listFiles().isNullOrEmpty()) return
 

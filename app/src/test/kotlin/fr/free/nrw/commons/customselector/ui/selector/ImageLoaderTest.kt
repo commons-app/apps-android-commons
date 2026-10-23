@@ -212,7 +212,7 @@ class ImageLoaderTest {
                 testDispacher,
                 testDispacher,
                 0,
-                emptyList()
+                emptyList(),
             )
 
             whenever(notForUploadStatusDao.find(any())).thenReturn(1)
@@ -221,7 +221,7 @@ class ImageLoaderTest {
                 testDispacher,
                 testDispacher,
                 0,
-                emptyList()
+                emptyList(),
             )
 
             whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
@@ -230,7 +230,7 @@ class ImageLoaderTest {
                 testDispacher,
                 testDispacher,
                 0,
-                emptyList()
+                emptyList(),
             )
 
             whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
@@ -239,7 +239,7 @@ class ImageLoaderTest {
                 testDispacher,
                 testDispacher,
                 0,
-                emptyList()
+                emptyList(),
             )
         }
 

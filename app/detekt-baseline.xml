@@ -4,7 +4,7 @@
   <CurrentIssues>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$!isBetaFlavour &amp;&amp; sessionManager!!.isUserLoggedIn &amp;&amp; sessionManager!!.currentAccount != null &amp;&amp; !isUserProfile</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
-    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
+    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION, ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ( (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS )</ID>
     <ID>ComplexCondition:EditActivity.kt$EditActivity$drawable != null &amp;&amp; rawDetections.isNotEmpty() &amp;&amp; decodedBitmap.width &gt; 0 &amp;&amp; decodedBitmap.height &gt; 0</ID>
     <ID>ComplexCondition:ExploreMapFragment.kt$ExploreMapFragment$nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null || baseMarkerOverlayMap == null || !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)</ID>
     <ID>ComplexCondition:ImageCoordinates.kt$ImageCoordinates$latitude != null &amp;&amp; longitude != null &amp;&amp; latitudeRef != null &amp;&amp; longitudeRef != null</ID>
@@ -18,7 +18,7 @@
     <ID>ComplexCondition:UploadActivity.kt$UploadActivity$isLocationTagUnchecked || locationDifference &gt; 100 || !defaultKvStore.getBoolean("inAppCameraLocationPref") || !isInAppCameraUpload</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
-    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle(handle: Handle, dx: Float, dy: Float)</ID>
+    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
     <ID>CyclomaticComplexMethod:EditActivity.kt$EditActivity$private fun init()</ID>
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
@@ -37,7 +37,6 @@
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
     <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
-    <ID>EmptyDefaultConstructor:LocationPicker.kt$LocationPicker.IntentBuilder$()</ID>
     <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
     <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
     <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
@@ -65,7 +64,7 @@
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$//TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
-    <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$//TODO: fix preference manager</ID>
+    <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
     <ID>ForbiddenComment:ContributionController.kt$ContributionController$* Shows a dialog alerting the user about location services being off and asking them to turn it * on * TODO: Add a seperate callback in LocationPermissionsHelper for this. * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114 * * @param activity Activity reference * @param dialogTextResource Resource id of text to be shown in dialog * @param toastTextResource Resource id of text to be shown in toast * @param resultLauncher</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Show the exact reason for failure</ID>
@@ -85,15 +84,14 @@
     <ID>ForbiddenComment:PageTitle.kt$PageTitle.Companion$// TODO: this class needs some refactoring to allow passing in a fragment</ID>
     <ID>ForbiddenComment:RequiredFieldsCheckOnReadTypeAdapterFactory.kt$RequiredFieldsCheckOnReadTypeAdapterFactory$* TypeAdapterFactory that provides TypeAdapters that return null values for objects that are * missing fields annotated with @Required. * * BEWARE: This means that a List or other Collection of objects that have @Required fields can * contain null elements after deserialization! * * TODO: Handle null values in lists during deserialization, perhaps with a new @RequiredElements * annotation and another corresponding TypeAdapter(Factory).</ID>
     <ID>ForbiddenComment:ReviewController.kt$ReviewController$// TODO: maybe we can expand this class to include fileName</ID>
-    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$//FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894</ID>
-    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$//FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
+    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894</ID>
+    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$//TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-
-    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate )</ID>
-    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!! ), getExtraShortDateString(endDate!!) )</ID>
+    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate, )</ID>
+    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!!, ), getExtraShortDateString(endDate!!), )</ID>
     <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
     <ID>ImplicitDefaultLocale:Description.kt$Description.Companion$String.format( "{{%s|1=%s}}", description.languageCode, description.descriptionText, )</ID>
     <ID>ImplicitDefaultLocale:FileUtils.kt$FileUtils$String.format("%40s", output)</ID>
@@ -115,15 +113,19 @@
     <ID>LargeClass:UploadMediaDetailFragment.kt$UploadMediaDetailFragment : UploadBaseFragmentViewEventListener</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
+    <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$private fun initView(context: Context)</ID>
     <ID>LongMethod:CategoriesModelTest.kt$CategoriesModelTest$@Test fun `searchAll with empty search terms creates results from gps, title search &amp; recents`()</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$CommonsApplicationModule.Companion.&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
-    <ID>LongMethod:DeleteHelper.kt$DeleteHelper$@SuppressLint("CheckResult") fun askReasonAndExecute( media: Media?, context: Context, question: String, problem: ReviewController.DeleteReason, reviewCallback: ReviewController.ReviewCallback )</ID>
-    <ID>LongMethod:DeleteHelper.kt$DeleteHelper$private fun delete(media: Media, reason: String): Observable&lt;Boolean&gt;</ID>
+    <ID>LongMethod:ContributionsFragment.kt$ContributionsFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
+    <ID>LongMethod:DeleteHelper.kt$DeleteHelper$@SuppressLint("CheckResult") fun askReasonAndExecute( media: Media?, context: Context, question: String, problem: ReviewController.DeleteReason, reviewCallback: ReviewController.ReviewCallback, )</ID>
+    <ID>LongMethod:DeleteHelper.kt$DeleteHelper$private fun delete( media: Media, reason: String, ): Observable&lt;Boolean&gt;</ID>
     <ID>LongMethod:DescriptionEditActivity.kt$DescriptionEditActivity$private fun editDescription( media: Media, updatedWikiText: String, uploadMediaDetails: ArrayList&lt;UploadMediaDetail&gt;, )</ID>
     <ID>LongMethod:EditActivity.kt$EditActivity$private fun animateImageHeight()</ID>
     <ID>LongMethod:EditActivity.kt$EditActivity$private fun init()</ID>
-    <ID>LongMethod:ExploreMapController.kt$ExploreMapController$fun loadAttractionsFromLocation( currentLatLng: LatLng?, searchLatLng: LatLng?, checkingAroundCurrentLocation: Boolean ): ExplorePlacesInfo?</ID>
+    <ID>LongMethod:ExploreMapController.kt$ExploreMapController$fun loadAttractionsFromLocation( currentLatLng: LatLng?, searchLatLng: LatLng?, checkingAroundCurrentLocation: Boolean, ): ExplorePlacesInfo?</ID>
+    <ID>LongMethod:ExploreMapFragment.kt$ExploreMapFragment$override fun clearAllMarkers()</ID>
+    <ID>LongMethod:ExploreMapFragment.kt$ExploreMapFragment$override fun onViewCreated( view: View, savedInstanceState: Bundle?, )</ID>
     <ID>LongMethod:ImageAdapter.kt$ImageAdapter$override fun onBindViewHolder( holder: ImageViewHolder, position: Int, )</ID>
     <ID>LongMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>LongMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
@@ -138,27 +140,26 @@
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onViewCreated(view: View, savedInstanceState: Bundle?)</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$private fun passInfoToSheet(place: Place)</ID>
     <ID>LongMethod:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getNearbyPlaces( queryParams: NearbyQueryParams, language: String, shouldQueryForMonuments: Boolean, customQuery: String? ): List&lt;Place&gt;?</ID>
-    <ID>LongMethod:PendingUploadsPresenter.kt$PendingUploadsPresenter$fun restartUploads(contributionList: List&lt;Contribution&gt;, index: Int, context: Context)</ID>
+    <ID>LongMethod:PendingUploadsPresenter.kt$PendingUploadsPresenter$fun restartUploads( contributionList: List&lt;Contribution&gt;, index: Int, context: Context, )</ID>
     <ID>LongMethod:PlaceAdapterDelegate.kt$fun placeAdapterDelegate( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
-    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?</ID>
+    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View?</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$fun proceedWithSetup()</ID>
-    <ID>LongMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>LongMethod:UploadClient.kt$UploadClient$@Throws(IOException::class) fun uploadFileToStash( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, ): Observable&lt;StashUploadResult&gt;</ID>
     <ID>LongMethod:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$fun bind(position: Int)</ID>
-    <ID>LongMethod:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$private fun initLanguage(position: Int, description: UploadMediaDetail)</ID>
+    <ID>LongMethod:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$private fun initLanguage( position: Int, description: UploadMediaDetail, )</ID>
     <ID>LongMethod:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$internal fun initializeFragment()</ID>
     <ID>LongMethod:UploadProgressActivity.kt$UploadProgressActivity$fun updateMenuItems(currentPosition: Int)</ID>
     <ID>LongMethod:UploadWorker.kt$UploadWorker$@SuppressLint("MissingPermission") override suspend fun doWork(): Result</ID>
     <ID>LongMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>LongMethod:WikidataFeedback.kt$WikidataFeedback$@SuppressLint("CheckResult") override fun onCreate(savedInstanceState: Bundle?)</ID>
+    <ID>LongMethod:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onDownSwiped()</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onUpSwiped()</ID>
     <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable? )</ID>
-    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray )</ID>
-    <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean )</ID>
-    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int )</ID>
+    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
+    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String? = null, negativeButtonText: String? = null, onPositiveBtnClick: Runnable? = null, onNegativeBtnClick: Runnable? = null, customView: View? = null, cancelable: Boolean = false, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String?, negativeButtonText: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, cancelable: Boolean = false, )</ID>
@@ -166,23 +167,20 @@
     <ID>LongParameterList:FileProcessor.kt$FileProcessor$( private val context: Context, private val contentResolver: ContentResolver, private val gpsCategoryModel: GpsCategoryModel, private val depictsModel: DepictModel, @param:Named("default_preferences") private val defaultKvStore: JsonKvStore, private val apiCall: CategoryApi, private val okHttpJsonApiClient: OkHttpJsonApiClient, )</ID>
     <ID>LongParameterList:LoginClient.kt$LoginClient$( userName: String, password: String, retypedPassword: String?, twoFactorCode: String?, emailAuthCode: String?, loginToken: String?, userLanguage: String, cb: LoginCallback, )</ID>
     <ID>LongParameterList:LoginClient.kt$LoginClient$( username: String, password: String, lastLoginResult: LoginResult?, twoFactorCode: String, userLanguage: String, loginCallback: LoginCallback, )</ID>
-    <ID>LongParameterList:LoginInterface.kt$LoginInterface$( @Field("username") user: String?, @Field("password") pass: String?, @Field("retype") retypedPass: String?, @Field("OATHToken") twoFactorCode: String?, @Field("token") emailAuthToken: String?, @Field("logintoken") loginToken: String?, @Field("uselang") userLanguage: String?, @Field("logincontinue") loginContinue: Boolean, )</ID>
     <ID>LongParameterList:Media.kt$Media$( /** * @return pageId for the current media object * Wikibase Identifier associated with media files */ var pageId: String = UUID.randomUUID().toString(), var thumbUrl: String? = null, /** * Gets image URL * @return Image URL */ var imageUrl: String? = null, /** * Gets the name of the file. * @return file name as a string */ var filename: String? = null, /** * The fallback description of the file, used if no other description is provided. */ var fallbackDescription: String? = null, /** * Gets the upload date of the file. * Can be null. * @return upload date as a Date */ var dateUploaded: Date? = null, /** * The license name of the file. */ var license: String? = null, /** * The URL corresponding to the license. */ var licenseUrl: String? = null, /** * The name of the creator of the file. */ var author: String? = null, /** * The username of the uploader. */ var user: String? = null, /** * The full name of the file's creator, if different from username. */ var creatorName: String? = null, /** * Gets the categories the file falls under. * @return file categories as an ArrayList of Strings */ var categories: List&lt;String&gt;? = null, /** * Gets the coordinates of where the file was created. * @return file coordinates as a LatLng */ var coordinates: LatLng? = null, var captions: Map&lt;String, String&gt; = emptyMap(), var descriptions: Map&lt;String, String&gt; = emptyMap(), var depictionIds: List&lt;String&gt; = emptyList(), var creatorIds: List&lt;String&gt; = emptyList(), /** * This field was added to find non-hidden categories * Stores the mapping of category title to hidden attribute * Example: "Mountains" =&gt; false, "CC-BY-SA-2.0" =&gt; true */ var categoriesHiddenStatus: Map&lt;String, Boolean&gt; = emptyMap(), )</ID>
-    <ID>LongParameterList:Media.kt$Media$( captions: Map&lt;String, String&gt;, categories: List&lt;String&gt;?, filename: String?, fallbackDescription: String?, author: String?, user: String?, dateUploaded: Date? = Date(), license: String? = null, licenseUrl: String? = null, imageUrl: String? = null, thumbUrl: String? = null, coordinates: LatLng? = null, descriptions: Map&lt;String, String&gt; = emptyMap(), depictionIds: List&lt;String&gt; = emptyList(), categoriesHiddenStatus: Map&lt;String, Boolean&gt; = emptyMap() )</ID>
+    <ID>LongParameterList:Media.kt$Media$( captions: Map&lt;String, String&gt;, categories: List&lt;String&gt;?, filename: String?, fallbackDescription: String?, author: String?, user: String?, dateUploaded: Date? = Date(), license: String? = null, licenseUrl: String? = null, imageUrl: String? = null, thumbUrl: String? = null, coordinates: LatLng? = null, descriptions: Map&lt;String, String&gt; = emptyMap(), depictionIds: List&lt;String&gt; = emptyList(), categoriesHiddenStatus: Map&lt;String, Boolean&gt; = emptyMap(), )</ID>
     <ID>LongParameterList:ModelFunctions.kt$( name: String = "label", description: String = "desc", imageUrl: String = "", instanceOfs: List&lt;String&gt; = listOf(), commonsCategories: List&lt;CategoryItem&gt; = listOf(), isSelected: Boolean = false, id: String = "entityId", )</ID>
     <ID>LongParameterList:ModelFunctions.kt$( name: String = "name", lang: String = "en", label: Label? = null, longDescription: String = "longDescription", latLng: LatLng? = null, category: String = "category", siteLinks: Sitelinks? = null, pic: String = "pic", exists: Boolean = false, entityID: String = "entityID", )</ID>
     <ID>LongParameterList:ModelFunctions.kt$( thumbUrl: String? = "thumbUrl", imageUrl: String? = "imageUrl", filename: String? = "filename", fallbackDescription: String? = "fallbackDescription", dateUploaded: Date? = Date(), license: String? = "license", licenseUrl: String? = "licenseUrl", author: String? = "creator", user: String? = "user", creatorName: String? = null, pageId: String = "pageId", categories: List&lt;String&gt;? = listOf("categories"), coordinates: LatLng? = LatLng(0.0, 0.0, 0.0f), captions: Map&lt;String, String&gt; = mapOf("en" to "caption"), descriptions: Map&lt;String, String&gt; = mapOf("en" to "description"), depictionIds: List&lt;String&gt; = listOf("depictionId"), )</ID>
     <ID>LongParameterList:NearbyResultItem.kt$NearbyResultItem$( private val item: ResultTuple?, private val wikipediaArticle: ResultTuple?, private val commonsArticle: ResultTuple?, private val location: ResultTuple?, @field:SerializedName("label") private val label: ResultTuple?, @field:SerializedName("itemLabel") private val itemLabel: ResultTuple?, @field:SerializedName("streetAddress") private val address: ResultTuple?, private val icon: ResultTuple?, @field:SerializedName("class") private val className: ResultTuple?, @field:SerializedName("classLabel") private val classLabel: ResultTuple?, @field:SerializedName("commonsCategory") private val commonsCategory: ResultTuple?, @field:SerializedName("pic") private val pic: ResultTuple?, @field:SerializedName("destroyed") private val destroyed: ResultTuple?, @field:SerializedName("description") private val description: ResultTuple?, @field:SerializedName("endTime") private val endTime: ResultTuple?, @field:SerializedName("monument") private val monument: ResultTuple?, @field:SerializedName("dateOfOfficialClosure") private val dateOfOfficialClosure: ResultTuple?, @field:SerializedName("pointInTime") private val pointInTime: ResultTuple?, )</ID>
-    <ID>LongParameterList:PageEditInterface.kt$PageEditInterface$( @Field("title") title: String, @Field("summary") summary: String, @Field("text") text: String, @Field("contentformat") contentformat: String, @Field("contentmodel") contentmodel: String, @Field("minor") minor: Boolean, @Field("recreate") recreate: Boolean, // NOTE: This csrf shold always be sent as the last field of form data @Field("token") token: String, )</ID>
     <ID>LongParameterList:PermissionUtils.kt$PermissionUtils$( activity: Activity, onPermissionGranted: Runnable, onPermissionDenied: Runnable? = null, rationaleTitle: Int, rationaleMessage: Int, vararg permissions: String )</ID>
     <ID>LongParameterList:PlaceAdapter.kt$PlaceAdapter$( bookmarkLocationsDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope? = null, onPlaceClicked: ((Place) -&gt; Unit)? = null, onBookmarkClicked: (Place, Boolean) -&gt; Unit, commonPlaceClickActions: CommonPlaceClickActions, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
     <ID>LongParameterList:PlaceAdapterDelegate.kt$( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
     <ID>LongParameterList:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, errorMessage: AtomicReference&lt;String&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( private val uploadInterface: UploadInterface, @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient, private val pageContentsCreator: PageContentsCreator, private val fileUtilsWrapper: FileUtilsWrapper, private val gson: Gson, private val timeProvider: TimeProvider, private val contributionDao: ContributionDao, )</ID>
-    <ID>LongParameterList:UploadInterface.kt$UploadInterface$( @Part("filename") filename: RequestBody?, @Part("filesize") totalFileSize: RequestBody?, @Part("offset") offset: RequestBody?, @Part("filekey") fileKey: RequestBody?, @Part("token") token: RequestBody?, @Part filePart: MultipartBodyPart, )</ID>
-    <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, //according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false )</ID>
-    <ID>LongParameterList:UploadModel.kt$UploadModel$( @param:Named("licenses") val licenses: List&lt;String&gt;, @param:Named("default_preferences") val store: JsonKvStore, @param:Named("licenses_by_name") val licensesByName: Map&lt;String, String&gt;, val context: Context, val sessionManager: SessionManager, val fileProcessor: FileProcessor, val imageProcessingService: ImageProcessingService )</ID>
+    <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, // according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false, )</ID>
+    <ID>LongParameterList:UploadModel.kt$UploadModel$( @param:Named("licenses") val licenses: List&lt;String&gt;, @param:Named("default_preferences") val store: JsonKvStore, @param:Named("licenses_by_name") val licensesByName: Map&lt;String, String&gt;, val context: Context, val sessionManager: SessionManager, val fileProcessor: FileProcessor, val imageProcessingService: ImageProcessingService, )</ID>
     <ID>LoopWithTooManyJumpStatements:CsrfTokenClient.kt$CsrfTokenClient$for</ID>
     <ID>LoopWithTooManyJumpStatements:ImageLoader.kt$ImageLoader$for</ID>
     <ID>LoopWithTooManyJumpStatements:NearbyParentFragment.kt$NearbyParentFragment$for</ID>
@@ -725,12 +723,10 @@
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
     <ID>MatchingDeclarationName:Costants.kt$Constants</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment$*</ID>
-    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"</ID>
+    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
     <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$//check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$private</ID>
-    <ID>MaxLineLength:CategoriesModelTest.kt$CategoriesModelTest$fun</ID>
+    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$"""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""</ID>
     <ID>MaxLineLength:CategoryApi.kt$CategoryApi$*</ID>
     <ID>MaxLineLength:CategoryClient.kt$CategoryClient$*</ID>
     <ID>MaxLineLength:CategoryEditHelper.kt$CategoryEditHelper$// If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"</ID>
@@ -738,8 +734,7 @@
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=allpages&amp;gapnamespace=14&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categories&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gclshow=!hidden"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=search&amp;prop=description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gsrnamespace=14"</ID>
-    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50")</ID>
-    <ID>MaxLineLength:ChildDepictionsFragment.kt$ChildDepictionsFragment$override fun getEmptyText(query: String)</ID>
+    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50"</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")</ID>
     <ID>MaxLineLength:CommonsApplication.kt$CommonsApplication$reportContent = [ReportField.USER_COMMENT, ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE]</ID>
@@ -748,46 +743,24 @@
     <ID>MaxLineLength:CommonsApplicationModule.kt$&lt;no name provided&gt;$"INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"</ID>
     <ID>MaxLineLength:CommonsApplicationModule.kt$&lt;no name provided&gt;$"INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)"</ID>
     <ID>MaxLineLength:CommonsCookieStorage.kt$CommonsCookieStorage$operator fun get(domainSpec: String): MutableList&lt;Cookie&gt;</ID>
-    <ID>MaxLineLength:ContributionController.kt$ContributionController$class</ID>
-    <ID>MaxLineLength:ContributionViewHolderUnitTests.kt$ContributionViewHolderUnitTests$contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)</ID>
     <ID>MaxLineLength:CsrfTokenClient.kt$CsrfTokenClient.&lt;no name provided&gt;$override</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$if</ID>
-    <ID>MaxLineLength:CustomSelectorActivity.kt$CustomSelectorActivity$private</ID>
     <ID>MaxLineLength:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact(), uploadableFile.getFilePath())</ID>
-    <ID>MaxLineLength:CustomSelectorViewModelFactory.kt$CustomSelectorViewModelFactory$override</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback)</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$whenever(pageEditClient.appendEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$whenever(pageEditClient.edit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))</ID>
     <ID>MaxLineLength:DeleteHelperTest.kt$DeleteHelperTest$whenever(pageEditClient.prependEdit(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))</ID>
     <ID>MaxLineLength:DepictedItem.kt$"https://upload.wikimedia.org/wikipedia/commons/thumb/${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"</ID>
-    <ID>MaxLineLength:DepictsFragment.kt$DepictsFragment$((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment?)?.binding?.cardViewNearby?.setVisibility(View.GONE)</ID>
     <ID>MaxLineLength:DepictsPresenter.kt$*</ID>
-    <ID>MaxLineLength:DepictsPresenter.kt$DepictsPresenter$.</ID>
     <ID>MaxLineLength:DescriptionEditActivity.kt$DescriptionEditActivity$outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList&lt;out Parcelable?&gt;)</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")</ID>
-    <ID>MaxLineLength:EditActivity.kt$EditActivity$if</ID>
     <ID>MaxLineLength:ExploreMapController.kt$ExploreMapController$// Our radius searched around us, will be used to understand when user search their own location, we will follow them</ID>
-    <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE</ID>
-    <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$lateinit</ID>
-    <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$private var recenterToUserLocation = false // true is recenter is needed (ie. when current location is in visible map boundaries)</ID>
-    <ID>MaxLineLength:ExploreMapRootFragment.kt$ExploreMapRootFragment$if</ID>
     <ID>MaxLineLength:FileUtilsTest.kt$FileUtilsTest$"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream()</ID>
-    <ID>MaxLineLength:FolderFragment.kt$FolderFragment$viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)</ID>
     <ID>MaxLineLength:Image.kt$Image$uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$if</ID>
-    <ID>MaxLineLength:ImageAdapter.kt$ImageAdapter$imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)</ID>
-    <ID>MaxLineLength:ImageCoordinates.kt$ImageCoordinates$internal</ID>
-    <ID>MaxLineLength:ImageFragment.kt$ImageFragment$listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)</ID>
-    <ID>MaxLineLength:ImageFragment.kt$ImageFragment$val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true</ID>
-    <ID>MaxLineLength:ImageHelperTest.kt$ImageHelperTest$val folderList = ArrayList&lt;Folder&gt;(listOf(Folder(1, "bucket1", folderImageList1), Folder(2, "bucket2", folderImageList2)))</ID>
     <ID>MaxLineLength:ImageInfo.kt$ImageInfo$// If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger dimensions. )</ID>
-    <ID>MaxLineLength:ImageLoader.kt$ImageLoader$suspend</ID>
-    <ID>MaxLineLength:ImageProcessingService.kt$ImageProcessingService$val unsupportedFormatResult = if (uploadItem.hasUnsupportedFormat) fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED else 0</ID>
-    <ID>MaxLineLength:ImageProcessingServiceTest.kt$ImageProcessingServiceTest$`when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))</ID>
     <ID>MaxLineLength:ImageUtils.kt$ImageUtils$if</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark1.jpg"), ImageUtils.IMAGE_DARK)</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark2.jpg"), ImageUtils.IMAGE_DARK)</ID>
@@ -795,19 +768,15 @@
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok2.jpg"), ImageUtils.IMAGE_OK)</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok3.jpg"), ImageUtils.IMAGE_OK)</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok4.jpg"), ImageUtils.IMAGE_OK)</ID>
-    <ID>MaxLineLength:LicenseAdapter.kt$LicenseAdapter$Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -&gt; context.getString(R.string.license_cc_by_sa_description)</ID>
-    <ID>MaxLineLength:LicenseAdapter.kt$LicenseAdapter$Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -&gt; context.getString(R.string.license_cc_by_sa_long_description)</ID>
-    <ID>MaxLineLength:LicenseAdapter.kt$LicenseAdapter$else -&gt; "This is an older version of the license. It is recommended to use the 4.0 versions for better international legal compatibility."</ID>
     <ID>MaxLineLength:LoginActivity.kt$LoginActivity$(BuildConfig.DEBUG || binding!!.loginTwoFactor.text!!.length != 0 || binding!!.loginTwoFactor.visibility != View.VISIBLE)</ID>
     <ID>MaxLineLength:LoginActivity.kt$LoginActivity$actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER</ID>
     <ID>MaxLineLength:LoginActivity.kt$LoginActivity$showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))</ID>
     <ID>MaxLineLength:LoginActivity.kt$LoginActivity.&lt;no name provided&gt;$override</ID>
     <ID>MaxLineLength:LoginClient.kt$LoginClient$val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")</ID>
-    <ID>MaxLineLength:Media.kt$Media$@Deprecated("Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author.")</ID>
+    <ID>MaxLineLength:Media.kt$Media$"Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author."</ID>
     <ID>MaxLineLength:MediaClient.kt$MediaClient$*</ID>
     <ID>MaxLineLength:MediaClientTest.kt$MediaClientTest$private</ID>
-    <ID>MaxLineLength:MediaConverterTest.kt$MediaConverterTest$`when`(metadata.artist()).thenReturn("&lt;a href=\"//commons.wikimedia.org/wiki/User:Foo_Bar\" title=\"Foo Bar\"&gt;Foo Bar&lt;/a&gt;")</ID>
-    <ID>MaxLineLength:MediaConverterTest.kt$MediaConverterTest$`when`(metadata.artist()).thenReturn("&lt;a href=\"/w/index.php?title=User:Foo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\"&gt;Foo&lt;/a&gt;")</ID>
+    <ID>MaxLineLength:MediaConverterTest.kt$MediaConverterTest$"&lt;a href=\"/w/index.php?title=User:Foo&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\"&gt;Foo&lt;/a&gt;"</ID>
     <ID>MaxLineLength:MediaDataExtractor.kt$MediaDataExtractor$fun checkDeletionRequestExists(media: Media)</ID>
     <ID>MaxLineLength:MediaDetailFragment.kt$MediaDetailFragment$labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none))</ID>
     <ID>MaxLineLength:MediaDetailFragment.kt$MediaDetailFragment$requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener)</ID>
@@ -821,7 +790,6 @@
     <ID>MaxLineLength:MediaInterface.kt$MediaInterface$*</ID>
     <ID>MaxLineLength:MigrationTest.kt$MigrationTest$legacyDb.execSQL("INSERT INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES ('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')")</ID>
     <ID>MaxLineLength:MigrationTest.kt$MigrationTest$legacyDb.execSQL("INSERT INTO categories (name, description, thumbnail, last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)")</ID>
-    <ID>MaxLineLength:MoreBottomSheetFragmentUnitTests.kt$MoreBottomSheetFragmentUnitTests$doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())</ID>
     <ID>MaxLineLength:NearbyParentFragment.kt$NearbyParentFragment$//Broadcast receivers should always be unregistered inside catch, you never know if they were already registered or not</ID>
     <ID>MaxLineLength:NearbyParentFragment.kt$NearbyParentFragment$activity?.let { locationPermissionsHelper?.showLocationOffDialog(it, R.string.ask_to_turn_location_on_text) }</ID>
     <ID>MaxLineLength:NearbyParentFragment.kt$NearbyParentFragment$if</ID>
@@ -835,48 +803,27 @@
     <ID>MaxLineLength:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$&lt;bounds minlat=</ID>
     <ID>MaxLineLength:OkHttpJsonApiClient.kt$OkHttpJsonApiClient.Companion$"en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb,ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq,uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war,zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar,an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am,roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk,lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls,yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky,ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na,got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn,kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd,ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh,sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr"</ID>
     <ID>MaxLineLength:OkHttpJsonApiClientTests.kt$OkHttpJsonApiClientTests$throw IllegalArgumentException("Resource $fileName not found. Please ensure the file is located in app/src/test/resources/raw/")</ID>
-    <ID>MaxLineLength:OnSwipeTouchListenerTest.kt$OnSwipeTouchListenerTest$val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)</ID>
     <ID>MaxLineLength:PageTitle.kt$PageTitle$constructor</ID>
-    <ID>MaxLineLength:ParentDepictionsFragment.kt$ParentDepictionsFragment$override fun getEmptyText(query: String)</ID>
     <ID>MaxLineLength:PickedFiles.kt$PickedFiles$if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.P) throw IOException("HEIC not supported on this Android version")</ID>
     <ID>MaxLineLength:PlaceAdapterDelegate.kt$nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }</ID>
-    <ID>MaxLineLength:QuizController.kt$QuizController.Companion$const val URL_FOR_EVENT = "https://upload.wikimedia.org/wikipedia/commons/5/51/HouseBuildingInNorthernVietnam.jpg"</ID>
-    <ID>MaxLineLength:QuizController.kt$QuizController.Companion$const val URL_FOR_SCREENSHOT = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Social_media_app_mockup_screenshot.svg/500px-Social_media_app_mockup_screenshot.svg.png"</ID>
-    <ID>MaxLineLength:RecentSearchesTable.kt$RecentSearchesTable$const val CREATE_TABLE_STATEMENT: String = ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);")</ID>
+    <ID>MaxLineLength:QuizController.kt$QuizController.Companion$const</ID>
     <ID>MaxLineLength:ReviewActivity.kt$ReviewActivity$// The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.</ID>
     <ID>MaxLineLength:ReviewActivityTest.kt$ReviewActivityTest$doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())</ID>
     <ID>MaxLineLength:ReviewHelperTest.kt$ReviewHelperTest$whenever(mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg")).thenReturn(Single.just(true))</ID>
     <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=file&amp;gcmsort=timestamp&amp;gcmdir=desc&amp;gcmtitle=Category:Uploaded_with_Mobile/Android&amp;gcmlimit=50"</ID>
-    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1")</ID>
+    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$*</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.&lt;no name provided&gt;$"cannot deserialize $baseType subtype named $label; did you forget to register a subtype? $jsonElement"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.Companion$*</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.Companion$* Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type field names are case sensitive.</ID>
     <ID>MaxLineLength:SearchActivity.kt$SearchActivity$// Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.</ID>
     <ID>MaxLineLength:SearchActivity.kt$SearchActivity$// This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.</ID>
-    <ID>MaxLineLength:SearchActivity.kt$SearchActivity$//FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
-    <ID>MaxLineLength:SearchModule.kt$SearchModule$abstract</ID>
+    <ID>MaxLineLength:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>MaxLineLength:SettingsFragment.kt$SettingsFragment.Companion$private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"</ID>
-    <ID>MaxLineLength:UploadActivity.kt$UploadActivity$if</ID>
-    <ID>MaxLineLength:UploadCategoriesFragment.kt$UploadCategoriesFragment$((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE</ID>
-    <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$val holder = (activity!!.findViewById&lt;View&gt;(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?</ID>
-    <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$val holder = (fragment!!.requireView().findViewById&lt;View&gt;(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?</ID>
-    <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$val lastItemHolder = (activity!!.findViewById&lt;View&gt;(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?</ID>
-    <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$val lastItemHolder = (fragment!!.requireView().findViewById&lt;View&gt;(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?</ID>
-    <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$languageHistoryListView</ID>
-    <ID>MaxLineLength:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$@SuppressLint("StringFormatInvalid")</ID>
-    <ID>MaxLineLength:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }</ID>
-    <ID>MaxLineLength:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$if</ID>
-    <ID>MaxLineLength:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)</ID>
-    <ID>MaxLineLength:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)</ID>
     <ID>MaxLineLength:UploadMediaPresenter.kt$UploadMediaPresenter$"Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again."</ID>
-    <ID>MaxLineLength:UploadMediaPresenter.kt$UploadMediaPresenter$Timber.e("Invalid index %d for uploadItems size %d, skipping setUploadMediaDetails", uploadItemIndex, uploadItems.size)</ID>
-    <ID>MaxLineLength:UploadMediaPresenter.kt$UploadMediaPresenter$uploadItems[uploadItemIndex].uploadMediaDetails = uploadMediaDetails as? MutableList&lt;UploadMediaDetail&gt; ?: uploadMediaDetails.toMutableList()</ID>
-    <ID>MaxLineLength:UploadModule.kt$UploadModule$abstract</ID>
-    <ID>MaxLineLength:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")</ID>
+    <ID>MaxLineLength:UploadPresenter.kt$UploadPresenter$"basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it."</ID>
     <ID>MaxLineLength:UploadPresenterTest.kt$UploadPresenterTest$* Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card</ID>
     <ID>MaxLineLength:UploadPresenterTest.kt$UploadPresenterTest$// As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered</ID>
-    <ID>MaxLineLength:UploadWorker.kt$UploadWorker$val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))</ID>
     <ID>MaxLineLength:UploadedStatusDao.kt$UploadedStatusDao$"SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) "</ID>
     <ID>MaxLineLength:Urls.kt$Urls$const val FAQ_URL = "https://github.com/commons-app/commons-app-documentation/blob/master/android/Frequently-Asked-Questions.md"</ID>
     <ID>MaxLineLength:UserInterface.kt$UserInterface$@GET(WikidataConstants.MW_API_PREFIX + "action=query&amp;list=logevents&amp;letype=upload&amp;leprop=title|timestamp|ids&amp;lelimit=500")</ID>
@@ -899,9 +846,9 @@
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$private fun handleResult(result: Result)</ID>
     <ID>NestedBlockDepth:ImageLoader.kt$ImageLoader$suspend fun nextActionableImage( allImages: List&lt;Image&gt;, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, nextImagePosition: Int, currentlyUploadingImages: List&lt;Contribution&gt;, ): Int</ID>
     <ID>NestedBlockDepth:ImageUtils.kt$ImageUtils$@JvmStatic private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean</ID>
-    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates(latitude: String, longitude: String, accuracy: String)</ID>
+    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates( latitude: String, longitude: String, accuracy: String, )</ID>
     <ID>NestedBlockDepth:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
-    <ID>NestedBlockDepth:LogsSender.kt$LogsSender$@Throws(IOException::class) private fun writeLogToZipFile(metaData: ByteArray, zipFile: File)</ID>
+    <ID>NestedBlockDepth:LogsSender.kt$LogsSender$@Throws(IOException::class) private fun writeLogToZipFile( metaData: ByteArray, zipFile: File, )</ID>
     <ID>NestedBlockDepth:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
     <ID>NestedBlockDepth:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)</ID>
     <ID>NestedBlockDepth:MwQueryResult.kt$MwQueryResult$private fun resolveRedirectedTitles()</ID>
@@ -915,14 +862,14 @@
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun writeTagsInternal( file: File, updates: Map&lt;Int, String?&gt;, )</ID>
     <ID>NestedBlockDepth:RecentLanguagesDao.kt$RecentLanguagesDao$fun getRecentLanguages(): List&lt;Language&gt;</ID>
     <ID>NestedBlockDepth:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
-    <ID>NestedBlockDepth:UploadActivity.kt$UploadActivity$override fun onRequestPermissionsResult( requestCode: Int, permissions: Array&lt;String&gt;, grantResults: IntArray )</ID>
+    <ID>NestedBlockDepth:UploadActivity.kt$UploadActivity$override fun onRequestPermissionsResult( requestCode: Int, permissions: Array&lt;String&gt;, grantResults: IntArray, )</ID>
     <ID>NestedBlockDepth:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
-    <ID>NestedBlockDepth:UploadController.kt$UploadController$private fun resolveDataLength( contentResolver: ContentResolver, contribution: Contribution ): Long</ID>
+    <ID>NestedBlockDepth:UploadController.kt$UploadController$private fun resolveDataLength( contentResolver: ContentResolver, contribution: Contribution, ): Long</ID>
     <ID>NestedBlockDepth:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$private fun updateAddButtonVisibility()</ID>
-    <ID>NestedBlockDepth:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$private fun initLanguage(position: Int, description: UploadMediaDetail)</ID>
-    <ID>NestedBlockDepth:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$override fun onNearbyPlaceFound( uploadItem: UploadItem, place: Place? )</ID>
-    <ID>NestedBlockDepth:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$override fun onViewCreated(view: View, savedInstanceState: Bundle?)</ID>
-    <ID>NestedBlockDepth:UploadModel.kt$UploadModel$fun onDepictItemClicked(depictedItem: DepictedItem, media: Media?)</ID>
+    <ID>NestedBlockDepth:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$private fun initLanguage( position: Int, description: UploadMediaDetail, )</ID>
+    <ID>NestedBlockDepth:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$override fun onNearbyPlaceFound( uploadItem: UploadItem, place: Place?, )</ID>
+    <ID>NestedBlockDepth:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$override fun onViewCreated( view: View, savedInstanceState: Bundle?, )</ID>
+    <ID>NestedBlockDepth:UploadModel.kt$UploadModel$fun onDepictItemClicked( depictedItem: DepictedItem, media: Media?, )</ID>
     <ID>NestedBlockDepth:UploadProgressActivity.kt$UploadProgressActivity$fun updateMenuItems(currentPosition: Int)</ID>
     <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$private suspend fun makeWikiDataEdit( uploadResult: UploadResult, contribution: Contribution, uniqueFileName: String, )</ID>
@@ -945,7 +892,7 @@
     <ID>ProtectedMemberInFinalClass:WikiSite.kt$WikiSite$protected constructor(`in`: Parcel) { uri = `in`.readParcelable(Uri::class.java.classLoader)!! languageCode = `in`.readString() }</ID>
     <ID>ReturnCount:AchievementsFragment.kt$AchievementsFragment$private fun checkAccount(): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix ): Pair&lt;Int, Handle&gt;?</ID>
+    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix, ): Pair&lt;Int, Handle&gt;?</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun snapRectToMCU(rect: RectF)</ID>
     <ID>ReturnCount:BookmarkItemsDao.kt$BookmarkItemsDao$fun findBookmarkItem(depictedItemID: String?): Boolean</ID>
     <ID>ReturnCount:BookmarkPicturesDao.kt$BookmarkPicturesDao$fun findBookmark(bookmark: Bookmark?): Boolean</ID>
@@ -953,19 +900,19 @@
     <ID>ReturnCount:BookmarksTable.kt$BookmarksTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
     <ID>ReturnCount:CategoriesModel.kt$CategoriesModel$fun isSpammyCategory(item: String): Boolean</ID>
     <ID>ReturnCount:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$private fun findHasFragmentInjector(): HasSupportFragmentInjector</ID>
-    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText(wikiText: String, editedLocation: String): String</ID>
+    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText( wikiText: String, editedLocation: String, ): String</ID>
     <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle(x: Float, y: Float): Handle?</ID>
+    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle( x: Float, y: Float, ): Handle?</ID>
     <ID>ReturnCount:CryptoUtils.kt$CryptoUtils$fun decrypt(encryptedBase64: String?): String?</ID>
     <ID>ReturnCount:DialogUtil.kt$DialogUtil$private fun showSafely( activity: Activity?, dialog: AlertDialog?, ): AlertDialog?</ID>
-    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int ): CropCoordinates?</ID>
+    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int, ): CropCoordinates?</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$fun onBackPressed(): Boolean</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getMediaFromImageURL(url: String?): Media?</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getOverlay(item: OverlayItem?): Overlay?</ID>
     <ID>ReturnCount:ExploreMapRootFragment.kt$ExploreMapRootFragment$fun backPressed(): Boolean</ID>
     <ID>ReturnCount:FileUtils.kt$FileUtils$fun getSHA1(stream: InputStream): String</ID>
-    <ID>ReturnCount:FolderDeletionHelper.kt$FolderDeletionHelper$private fun trashImagesInFolder( context: Context, folder: File, trashFolderLauncher: ActivityResultLauncher&lt;IntentSenderRequest&gt;): Boolean</ID>
+    <ID>ReturnCount:FolderDeletionHelper.kt$FolderDeletionHelper$private fun trashImagesInFolder( context: Context, folder: File, trashFolderLauncher: ActivityResultLauncher&lt;IntentSenderRequest&gt;, ): Boolean</ID>
     <ID>ReturnCount:GridViewAdapter.kt$GridViewAdapter$fun containsAll(images: List&lt;Media&gt;?): Boolean</ID>
     <ID>ReturnCount:IdAndLabels.kt$IdAndLabels$fun getLocalizedLabel(locale: String): String?</ID>
     <ID>ReturnCount:ImageLoader.kt$ImageLoader$fun getResultFromUploadedStatus(uploadedStatus: UploadedStatus): Result</ID>
@@ -974,7 +921,7 @@
     <ID>ReturnCount:LocationUtils.kt$LocationUtils$@JvmStatic fun deriveUpdatedLocationFromSearchQuery(customQuery: String): LatLng?</ID>
     <ID>ReturnCount:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
     <ID>ReturnCount:MainActivity.kt$MainActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
-    <ID>ReturnCount:MainActivity.kt$MainActivity$private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean</ID>
+    <ID>ReturnCount:MainActivity.kt$MainActivity$private fun loadFragment( fragment: Fragment?, showBottom: Boolean, ): Boolean</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun chooseDescription(media: Media): String?</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption(idAndCaption: IdAndLabels, locale: String): String?</ID>
     <ID>ReturnCount:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
@@ -988,26 +935,26 @@
     <ID>ReturnCount:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$override fun updateMapAndList(locationChangeType: LocationChangeType?)</ID>
     <ID>ReturnCount:NetworkUtils.kt$NetworkUtils$@JvmStatic fun getNetworkType(context: Context): NetworkConnectionType</ID>
     <ID>ReturnCount:RecentLanguagesDao.kt$RecentLanguagesDao$fun findRecentLanguage(languageCode: String?): Boolean</ID>
-    <ID>ReturnCount:RecentSearchesTable.kt$RecentSearchesTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
+    <ID>ReturnCount:RecentSearchesTable.kt$RecentSearchesTable$fun onUpdate( db: SupportSQLiteDatabase, from: Int, to: Int, )</ID>
     <ID>ReturnCount:SingleWebViewActivity.kt$SingleWebViewActivity.&lt;no name provided&gt;$override fun shouldOverrideUrlLoading( view: WebView?, request: WebResourceRequest? ): Boolean</ID>
     <ID>ReturnCount:StringSortingUtils.kt$StringSortingUtils$private fun levenshteinDistance(str1: String, str2: String): Int</ID>
     <ID>ReturnCount:StringUtil.kt$StringUtil$@JvmStatic fun fromHtml(source: String?): Spanned</ID>
     <ID>ReturnCount:UploadClient.kt$UploadClient$@Throws(IOException::class) fun uploadFileToStash( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, ): Observable&lt;StashUploadResult&gt;</ID>
-    <ID>ReturnCount:UploadMediaDetailInputFilter.kt$UploadMediaDetailInputFilter$override fun filter( source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int ): CharSequence?</ID>
+    <ID>ReturnCount:UploadMediaDetailInputFilter.kt$UploadMediaDetailInputFilter$override fun filter( source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int, ): CharSequence?</ID>
     <ID>ReturnCount:UploadWorker.kt$UploadWorker$@SuppressLint("MissingPermission") override suspend fun doWork(): Result</ID>
     <ID>ReturnCount:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ZoomableDraweeView.kt$ZoomableDraweeView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>SerialVersionUIDInSerializableClass:ImageInfo.kt$ImageInfo : Serializable</ID>
-    <ID>SpreadOperator:BaseDelegateAdapter.kt$BaseDelegateAdapter$( object : DiffUtil.ItemCallback&lt;T&gt;() { override fun areItemsTheSame(oldItem: T &amp; Any, newItem: T &amp; Any): Boolean { return areItemsTheSame(oldItem, newItem) } override fun areContentsTheSame(oldItem: T &amp; Any, newItem: T &amp; Any): Boolean { return areContentsTheSame(oldItem, newItem) } }, *delegates, )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
+    <ID>SpreadOperator:BaseDelegateAdapter.kt$BaseDelegateAdapter$( object : DiffUtil.ItemCallback&lt;T&gt;() { override fun areItemsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areItemsTheSame(oldItem, newItem) override fun areContentsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areContentsTheSame(oldItem, newItem) }, *delegates, )</ID>
+    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
+    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:DatabaseUtils.kt$(*elements)</ID>
     <ID>SpreadOperator:DownloadUtils.kt$DownloadUtils$( activity, { enqueueRequest(activity, req) }, { Toast .makeText( activity, R.string.download_failed_we_cannot_download_the_file_without_storage_permission, Toast.LENGTH_SHORT, ).show() }, R.string.storage_permission, R.string.write_storage_permission_rationale, *PermissionUtils.PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:MediaDetailFragment.kt$MediaDetailFragment$( requireActivity(), { launchZoomActivityAfterPermissionCheck(view) }, R.string.storage_permission_title, R.string.read_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
     <ID>SpreadOperator:PageTitle.kt$PageTitle$(*Locale.getISOLanguages())</ID>
-    <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray() )</ID>
+    <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray(), )</ID>
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
-    <ID>SpreadOperator:UploadActivity.kt$UploadActivity$( this, Runnable { binding.cvContainerTopCard.visibility = View.VISIBLE receiveSharedItems() }, Runnable { isShowPermissionsDialog = true checkStoragePermissions() }, R.string.storage_permission_title, R.string.write_storage_permission_rationale_for_image_share, *PERMISSIONS_STORAGE )</ID>
+    <ID>SpreadOperator:UploadActivity.kt$UploadActivity$( this, Runnable { binding.cvContainerTopCard.visibility = View.VISIBLE receiveSharedItems() }, Runnable { isShowPermissionsDialog = true checkStoragePermissions() }, R.string.storage_permission_title, R.string.write_storage_permission_rationale_for_image_share, *PERMISSIONS_STORAGE, )</ID>
     <ID>SwallowedException:AboutActivity.kt$AboutActivity$e: Exception</ID>
     <ID>SwallowedException:CategoriesPresenter.kt$CategoriesPresenter$e: InvalidLoginTokenException</ID>
     <ID>SwallowedException:ConfigUtils.kt$ConfigUtils$e: PackageManager.NameNotFoundException</ID>
@@ -1026,7 +973,7 @@
     <ID>ThrowingExceptionsWithoutMessageOrCause:ImageFileLoader.kt$ImageFileLoader$NullPointerException()</ID>
     <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
-    <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null )</ID>
+    <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
     <ID>ThrowsCount:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
     <ID>TooGenericExceptionCaught:AboutActivity.kt$AboutActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:AchievementsFragment.kt$AchievementsFragment$e: Exception</ID>
@@ -1214,10 +1161,10 @@
     <ID>UnusedPrivateMember:FilePicker.kt$FilePicker$@Throws(URISyntaxException::class) @JvmStatic private fun takenCameraVideo(context: Context): UploadableFile?</ID>
     <ID>UnusedPrivateMember:ImageInfo.kt$ImageInfo$private fun updateThumbUrl()</ID>
     <ID>UnusedPrivateMember:ImageUtils.kt$ImageUtils$@JvmStatic private fun showSettingWallpaperProgressBar(context: Context)</ID>
-    <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?)</ID>
+    <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction( textView: TextView, actionId: Int, keyEvent: KeyEvent?, )</ID>
     <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateCaptions( mediaDetail: UploadMediaDetail, updatedCaptions: MutableMap&lt;String, String&gt; )</ID>
     <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateToDoWarning()</ID>
-    <ID>UnusedPrivateMember:MediaLicenseFragment.kt$MediaLicenseFragment$private fun setTextViewHTML(textView: TextView, text: String)</ID>
+    <ID>UnusedPrivateMember:MediaLicenseFragment.kt$MediaLicenseFragment$private fun setTextViewHTML( textView: TextView, text: String, )</ID>
     <ID>UnusedPrivateMember:MoreBottomSheetFragment.kt$MoreBottomSheetFragment$private fun showAlertDialog()</ID>
     <ID>UnusedPrivateMember:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$private fun handleCenteringTaskIfAny()</ID>
     <ID>UnusedPrivateProperty:BookmarkItemsDaoTest.kt$BookmarkItemsDaoTest$i</ID>
@@ -1293,34 +1240,21 @@
     <ID>UseCheckOrError:EditViewModel.kt$EditViewModel$throw IllegalStateException("Jpegtran not initialized")</ID>
     <ID>UseCheckOrError:FilePicker.kt$FilePicker$throw IllegalStateException("HEIC conversion requires Android P+")</ID>
     <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
+    <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException( "basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.", )</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
-    <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")</ID>
     <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
     <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID")</ID>
+    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>
     <ID>UseRequire:RecentLanguagesContentProvider.kt$RecentLanguagesContentProvider$throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")</ID>
-    <ID>UseRequire:RecentSearchesContentProvider.kt$RecentSearchesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
+    <ID>UseRequire:RecentSearchesContentProvider.kt$RecentSearchesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:ThreadPoolService.kt$ThreadPoolService.Builder$throw IllegalArgumentException("Pool size must be greater than 0")</ID>
     <ID>UseRequire:ViewModelFactory.kt$ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UtilityClassWithPublicConstructor:CustomSelectorUtils.kt$CustomSelectorUtils</ID>
     <ID>UtilityClassWithPublicConstructor:MimeTypeMapWrapper.kt$MimeTypeMapWrapper</ID>
     <ID>UtilityClassWithPublicConstructor:WorkRequestHelper.kt$WorkRequestHelper</ID>
-    <ID>VariableNaming:ExploreMapFragment.kt$ExploreMapFragment$val dest_location = Location("")</ID>
-    <ID>VariableNaming:ExploreMapPresenter.kt$ExploreMapPresenter$val dest_location = Location("").apply { latitude = exploreMapFragmentView!!.getMapFocus()!!.latitude longitude = exploreMapFragmentView!!.getMapFocus()!!.longitude }</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$/** * WLM URL */ val WLM_URL = "https://commons.wikimedia.org/wiki/Commons:Mobile_app/Contributing_to_WLM_using_the_app"</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private val NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var fab_close: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var fab_open: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var rotate_backward: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$private var rotate_forward: Animation? = null</ID>
-    <ID>VariableNaming:NearbyParentFragment.kt$NearbyParentFragment$val dest_location = Location("")</ID>
-    <ID>VariableNaming:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$val FLAG_ALERT_DIALOG_SHOWING = basicKvStore!!.getBoolean( keyForShowingAlertDialog, false )</ID>
     <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
     <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
-    <ID>WildcardImport:UploadWorkerTest.kt$import com.nhaarman.mockitokotlin2.*</ID>
   </CurrentIssues>
 </SmellBaseline>
