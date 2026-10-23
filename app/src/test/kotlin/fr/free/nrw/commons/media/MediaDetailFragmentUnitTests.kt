@@ -389,6 +389,25 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testGetDescriptionsWithNearbyWikidataTemplate() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s =
+            "== {{int:filedesc}} ==\n" +
+                "{{Information\n" +
+                "|description={{en|1=A nearby place}}\n" +
+                "{{ on Wikidata|Q42}}|source={{own}}\n" +
+                "|author=[[User:Example|Example]]\n" +
+                "|date=2020-01-01\n" +
+                "}}\n" +
+                "{{Location|1.2|3.4}}\n"
+        val map = linkedMapOf("en" to "A nearby place")
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testGetDescriptionsWithInvalidLanguageCode() {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)

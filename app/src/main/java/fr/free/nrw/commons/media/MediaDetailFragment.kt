@@ -1596,11 +1596,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 count--
                 if (count == 0) {
                     endDescription = i
-                    val languageCode: String = description.substring(startCode + 2, endCode)
-                    val languageDescription: String =
-                        description.substring(startDescription, endDescription)
-                    if (allLanguageCodes.contains(languageCode)) {
-                        descriptionList[languageCode] = languageDescription
+                    // Nearby uploads append {{ on Wikidata|Qid}} before |source, so this match
+                    // includes {{own}}. That template's pipe belongs to the next field, and
+                    // slicing it throws before the edit screen can open.
+                    if (endCode >= startCode + 2 && endDescription >= startDescription) {
+                        val languageCode: String = description.substring(startCode + 2, endCode)
+                        val languageDescription: String =
+                            description.substring(startDescription, endDescription)
+                        if (allLanguageCodes.contains(languageCode)) {
+                            descriptionList[languageCode] = languageDescription
+                        }
                     }
                 }
                 i++
