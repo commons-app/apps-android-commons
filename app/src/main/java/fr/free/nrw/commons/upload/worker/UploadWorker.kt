@@ -634,7 +634,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, UploadProgressActivity.TAB_FAILED))
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -676,7 +681,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java, UploadProgressActivity.TAB_FAILED))
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
