@@ -857,4 +857,12 @@
   <string name="error_applying_blur">Eror an aplicand la turbolensa</string>
   <string name="failed_to_apply_crop">Falì a apliché l\'artaj</string>
   <string name="failed_to_save_image">Falì a argistré la plancia</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (sonor)</string>
+  <string name="unsupported_format_title">Formà nen mantnù</string>
+  <string name="unsupported_format_desc">J\'archivi selessionà a son nen podusse duverté. Wikimedia Commons a ciama për fòrsa ij formà sì-dapress:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Archivi nen mantnù sautà</string>
+  <string name="unsupported_files_skipped_desc">Chèich archivi a son ëstàit sautà për via dël formà nen mantnù. L\'aplicassion a andrà anans a carié j\'archivi ch\'a-i resto che a van d\'acòrd con ij formà mantnù sì-dapress:\n\n%s</string>
 </resources>

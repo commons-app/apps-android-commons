@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
@@ -79,7 +78,7 @@ class UploadProgressActivity : BaseActivity() {
 
         viewPagerAdapter!!.setTabs(
             R.string.pending to pendingUploadsFragment!!,
-            R.string.failed to failedUploadsFragment!!
+            R.string.failed to failedUploadsFragment!!,
         )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
