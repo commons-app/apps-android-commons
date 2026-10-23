@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.wikidata.cookies
 
+import android.util.Log
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
@@ -12,6 +14,7 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 private const val COOKIE_STORE = "cookie_store"
+private const val TAG = "CommonsCookieStorage"
 
 class CommonsCookieStorage(
     private val preferences: JsonKvStore? = null,
@@ -42,17 +45,55 @@ class CommonsCookieStorage(
         cookieMap.clear()
         val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
         val json = CryptoUtils.decrypt(encryptedJson)
-        
-        if (!json.isNullOrEmpty()) {
-            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
-            cookieMap.putAll(serializedData.cookieMap)
-            
-            // If the loaded json wasn't encrypted (e.g. migrating from older version)
-            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
-            if (encryptedJson == json) {
-               save()
+
+        if (json.isNullOrBlank()) {
+            if (encryptedJson != null) {
+                discardUnreadableStore("Discarding empty cookie store")
+            }
+        } else {
+            val failure = readStoredCookies(json)
+            if (failure != null) {
+                discardUnreadableStore("Discarding unreadable cookie store", failure)
+            } else if (encryptedJson == json) {
+                // Plaintext from an older app version. Re-save it encrypted.
+                save()
             }
         }
+    }
+
+    /**
+     * Loads [json] into [cookieMap].
+     *
+     * Returns the [JsonSyntaxException] when the saved value is not a cookie-store object.
+     */
+    private fun readStoredCookies(json: String): JsonSyntaxException? =
+        try {
+            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
+            if (serializedData == null) {
+                JsonSyntaxException("Cookie store must be a JSON object")
+            } else {
+                cookieMap.putAll(serializedData.cookieMap)
+                null
+            }
+        } catch (exception: JsonSyntaxException) {
+            cookieMap.clear()
+            exception
+        }
+
+    /**
+     * Forgets the saved cookie store and continues with no session.
+     *
+     * Uses [Log] because [load] runs during Dagger injection in application startup,
+     * before Timber is planted.
+     */
+    private fun discardUnreadableStore(reason: String, exception: Exception? = null) {
+        cookieMap.clear()
+        if (exception == null) {
+            Log.w(TAG, reason)
+        } else {
+            Log.w(TAG, reason, exception)
+        }
+        preferences!!.remove(COOKIE_STORE)
     }
 
     fun save() {
