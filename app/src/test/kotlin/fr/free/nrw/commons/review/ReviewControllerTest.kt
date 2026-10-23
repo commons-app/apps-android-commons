@@ -4,8 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
+
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
@@ -58,8 +57,6 @@ class ReviewControllerTest {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
-        SoLoader.setInTestMode()
-        Fresco.initialize(context)
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
         controller = ReviewController(deleteHelper, context)
         media = media(filename = "test_file", dateUploaded = Date())

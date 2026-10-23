@@ -348,6 +348,8 @@ dependencies {
     // Utils
     implementation(libs.gson)
     implementation(libs.okhttp)
+    implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.adapter.rxjava)
@@ -355,8 +357,6 @@ dependencies {
     implementation(libs.rxjava)
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
-    implementation(libs.facebook.fresco)
-    implementation(libs.facebook.fresco.middleware)
     implementation(libs.apache.commons.lang3)
 
     // UI
@@ -431,7 +431,6 @@ dependencies {
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.soloader)
     testImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.fragment.testing)
     testImplementation(libs.commons.io)
@@ -479,9 +478,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.rx2)
     testImplementation(libs.androidx.work.testing)
 
-    // Glide
-    implementation(libs.glide)
-    annotationProcessor(libs.glide.compiler)
     kaptTest(libs.androidx.databinding.compiler)
     kaptAndroidTest(libs.androidx.databinding.compiler)
 

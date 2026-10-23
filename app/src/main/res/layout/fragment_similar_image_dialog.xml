@@ -8,18 +8,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
             android:id="@+id/orginalImage"
             android:layout_width="@dimen/giant_height"
             android:layout_height="@dimen/very_large_height"
             android:layout_margin="@dimen/progressbar_stroke"
-            app:actualImageScaleType="fitCenter" />
-        <com.facebook.drawee.view.SimpleDraweeView
+            android:scaleType="fitCenter" />
+        <ImageView
             android:id="@+id/possibleImage"
             android:layout_width="@dimen/giant_height"
             android:layout_height="@dimen/very_large_height"
             android:layout_margin="@dimen/progressbar_stroke"
-            app:actualImageScaleType="fitCenter" />
+            android:scaleType="fitCenter" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
