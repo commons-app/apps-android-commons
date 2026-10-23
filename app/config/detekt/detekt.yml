@@ -1,0 +1,3 @@
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
