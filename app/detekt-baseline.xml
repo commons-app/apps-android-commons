@@ -4,7 +4,7 @@
   <CurrentIssues>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$!isBetaFlavour &amp;&amp; sessionManager!!.isUserLoggedIn &amp;&amp; sessionManager!!.currentAccount != null &amp;&amp; !isUserProfile</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
-    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
+    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION, ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ( (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS )</ID>
     <ID>ComplexCondition:EditActivity.kt$EditActivity$drawable != null &amp;&amp; rawDetections.isNotEmpty() &amp;&amp; decodedBitmap.width &gt; 0 &amp;&amp; decodedBitmap.height &gt; 0</ID>
     <ID>ComplexCondition:ExploreMapFragment.kt$ExploreMapFragment$nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null || baseMarkerOverlayMap == null || !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)</ID>
     <ID>ComplexCondition:ImageCoordinates.kt$ImageCoordinates$latitude != null &amp;&amp; longitude != null &amp;&amp; latitudeRef != null &amp;&amp; longitudeRef != null</ID>
@@ -18,7 +18,7 @@
     <ID>ComplexCondition:UploadActivity.kt$UploadActivity$isLocationTagUnchecked || locationDifference &gt; 100 || !defaultKvStore.getBoolean("inAppCameraLocationPref") || !isInAppCameraUpload</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
-    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle(handle: Handle, dx: Float, dy: Float)</ID>
+    <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
     <ID>CyclomaticComplexMethod:EditActivity.kt$EditActivity$private fun init()</ID>
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
@@ -37,7 +37,6 @@
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
     <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
-    <ID>EmptyDefaultConstructor:LocationPicker.kt$LocationPicker.IntentBuilder$()</ID>
     <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
     <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
     <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
@@ -122,9 +121,11 @@
     <ID>LargeClass:UploadMediaDetailFragment.kt$UploadMediaDetailFragment : UploadBaseFragmentViewEventListener</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
+    <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$private fun initView(context: Context)</ID>
     <ID>LongMethod:CategoriesModelTest.kt$CategoriesModelTest$@Test fun `searchAll with empty search terms creates results from gps, title search &amp; recents`()</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$CommonsApplicationModule.Companion.&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
+    <ID>LongMethod:ContributionsFragment.kt$ContributionsFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>LongMethod:DeleteHelper.kt$DeleteHelper$@SuppressLint("CheckResult") fun askReasonAndExecute( media: Media?, context: Context, question: String, problem: ReviewController.DeleteReason, reviewCallback: ReviewController.ReviewCallback )</ID>
     <ID>LongMethod:DeleteHelper.kt$DeleteHelper$private fun delete(media: Media, reason: String): Observable&lt;Boolean&gt;</ID>
     <ID>LongMethod:DescriptionEditActivity.kt$DescriptionEditActivity$private fun editDescription( media: Media, updatedWikiText: String, uploadMediaDetails: ArrayList&lt;UploadMediaDetail&gt;, )</ID>
@@ -147,7 +148,7 @@
     <ID>LongMethod:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getNearbyPlaces( queryParams: NearbyQueryParams, language: String, shouldQueryForMonuments: Boolean, customQuery: String? ): List&lt;Place&gt;?</ID>
     <ID>LongMethod:PendingUploadsPresenter.kt$PendingUploadsPresenter$fun restartUploads(contributionList: List&lt;Contribution&gt;, index: Int, context: Context)</ID>
     <ID>LongMethod:PlaceAdapterDelegate.kt$fun placeAdapterDelegate( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
-    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View?</ID>
+    <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View?</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$fun proceedWithSetup()</ID>
@@ -163,9 +164,9 @@
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onDownSwiped()</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onUpSwiped()</ID>
     <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable? )</ID>
-    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray )</ID>
-    <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean )</ID>
-    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int )</ID>
+    <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
+    <ID>LongParameterList:CoordinateEditHelper.kt$CoordinateEditHelper$( context: Context, media: Media, latitude: String, longitude: String, accuracy: String, result: Boolean, )</ID>
+    <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String? = null, negativeButtonText: String? = null, onPositiveBtnClick: Runnable? = null, onNegativeBtnClick: Runnable? = null, customView: View? = null, cancelable: Boolean = false, )</ID>
     <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String?, negativeButtonText: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, cancelable: Boolean = false, )</ID>
@@ -732,12 +733,10 @@
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
     <ID>MatchingDeclarationName:Costants.kt$Constants</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment$*</ID>
-    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"</ID>
+    <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
     <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$//check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())</ID>
-    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$private</ID>
-    <ID>MaxLineLength:CategoriesModelTest.kt$CategoriesModelTest$fun</ID>
+    <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$"""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""</ID>
     <ID>MaxLineLength:CategoryApi.kt$CategoryApi$*</ID>
     <ID>MaxLineLength:CategoryClient.kt$CategoryClient$*</ID>
     <ID>MaxLineLength:CategoryEditHelper.kt$CategoryEditHelper$// If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"</ID>
@@ -745,7 +744,7 @@
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=allpages&amp;gapnamespace=14&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categories&amp;prop=categoryinfo|description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gclshow=!hidden"</ID>
     <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=search&amp;prop=description|pageimages&amp;piprop=thumbnail&amp;pithumbsize=70&amp;gsrnamespace=14"</ID>
-    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50")</ID>
+    <ID>MaxLineLength:CategoryInterface.kt$CategoryInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=subcat&amp;prop=info&amp;gcmlimit=50"</ID>
     <ID>MaxLineLength:ChildDepictionsFragment.kt$ChildDepictionsFragment$override fun getEmptyText(query: String)</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")</ID>
     <ID>MaxLineLength:CommonPlaceClickActions.kt$CommonPlaceClickActions$Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")</ID>
@@ -755,8 +754,6 @@
     <ID>MaxLineLength:CommonsApplicationModule.kt$&lt;no name provided&gt;$"INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"</ID>
     <ID>MaxLineLength:CommonsApplicationModule.kt$&lt;no name provided&gt;$"INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)"</ID>
     <ID>MaxLineLength:CommonsCookieStorage.kt$CommonsCookieStorage$operator fun get(domainSpec: String): MutableList&lt;Cookie&gt;</ID>
-    <ID>MaxLineLength:ContributionController.kt$ContributionController$class</ID>
-    <ID>MaxLineLength:ContributionViewHolderUnitTests.kt$ContributionViewHolderUnitTests$contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)</ID>
     <ID>MaxLineLength:CsrfTokenClient.kt$CsrfTokenClient.&lt;no name provided&gt;$override</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled</ID>
     <ID>MaxLineLength:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$if</ID>
@@ -775,7 +772,6 @@
     <ID>MaxLineLength:DescriptionEditActivity.kt$DescriptionEditActivity$outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList&lt;out Parcelable?&gt;)</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: File system rejected the file (Storage issue or invalid filename characters)")</ID>
     <ID>MaxLineLength:DownloadReceiver.kt$DownloadReceiver$Timber.e("CAUSE: Network connection dropped mid-download (Beta cluster flakiness or VPN)")</ID>
-    <ID>MaxLineLength:EditActivity.kt$EditActivity$if</ID>
     <ID>MaxLineLength:ExploreMapController.kt$ExploreMapController$// Our radius searched around us, will be used to understand when user search their own location, we will follow them</ID>
     <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE</ID>
     <ID>MaxLineLength:ExploreMapFragment.kt$ExploreMapFragment$lateinit</ID>
@@ -854,7 +850,7 @@
     <ID>MaxLineLength:ReviewActivityTest.kt$ReviewActivityTest$doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())</ID>
     <ID>MaxLineLength:ReviewHelperTest.kt$ReviewHelperTest$whenever(mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg")).thenReturn(Single.just(true))</ID>
     <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;generator=categorymembers&amp;gcmtype=file&amp;gcmsort=timestamp&amp;gcmdir=desc&amp;gcmtitle=Category:Uploaded_with_Mobile/Android&amp;gcmlimit=50"</ID>
-    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$@GET("w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1")</ID>
+    <ID>MaxLineLength:ReviewInterface.kt$ReviewInterface$"w/api.php?action=query&amp;format=json&amp;formatversion=2&amp;prop=revisions&amp;rvprop=timestamp|ids|user&amp;rvdir=newer&amp;rvlimit=1"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$*</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.&lt;no name provided&gt;$"cannot deserialize $baseType subtype named $label; did you forget to register a subtype? $jsonElement"</ID>
     <ID>MaxLineLength:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory.Companion$*</ID>
@@ -906,7 +902,7 @@
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$private fun handleResult(result: Result)</ID>
     <ID>NestedBlockDepth:ImageLoader.kt$ImageLoader$suspend fun nextActionableImage( allImages: List&lt;Image&gt;, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, nextImagePosition: Int, currentlyUploadingImages: List&lt;Contribution&gt;, ): Int</ID>
     <ID>NestedBlockDepth:ImageUtils.kt$ImageUtils$@JvmStatic private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean</ID>
-    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates(latitude: String, longitude: String, accuracy: String)</ID>
+    <ID>NestedBlockDepth:LocationPickerActivity.kt$LocationPickerActivity$fun updateCoordinates( latitude: String, longitude: String, accuracy: String, )</ID>
     <ID>NestedBlockDepth:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
     <ID>NestedBlockDepth:LogsSender.kt$LogsSender$@Throws(IOException::class) private fun writeLogToZipFile(metaData: ByteArray, zipFile: File)</ID>
     <ID>NestedBlockDepth:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
@@ -936,100 +932,6 @@
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>
-    <ID>NewLineAtEndOfFile:Achievements.kt$fr.free.nrw.commons.profile.achievements.Achievements.kt</ID>
-    <ID>NewLineAtEndOfFile:AchievementsFragment.kt$fr.free.nrw.commons.profile.achievements.AchievementsFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ActivityUtils.kt$fr.free.nrw.commons.utils.ActivityUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:BasicKvStore.kt$fr.free.nrw.commons.kvstore.BasicKvStore.kt</ID>
-    <ID>NewLineAtEndOfFile:BasicKvStoreTest.kt$fr.free.nrw.commons.kvstore.BasicKvStoreTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsRoomEntity.kt$fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomEntity.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsTable.kt$fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkItemsTableTest.kt$fr.free.nrw.commons.db.BookmarkItemsTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkLocationsViewModel.kt$fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkPages.kt$fr.free.nrw.commons.bookmarks.BookmarkPages.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarkPictureTableTest.kt$fr.free.nrw.commons.db.BookmarkPictureTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:BookmarksLocations.kt$fr.free.nrw.commons.bookmarks.locations.BookmarksLocations.kt</ID>
-    <ID>NewLineAtEndOfFile:CampaignConfig.kt$fr.free.nrw.commons.campaigns.CampaignConfig.kt</ID>
-    <ID>NewLineAtEndOfFile:CampaignResponseDTO.kt$fr.free.nrw.commons.campaigns.CampaignResponseDTO.kt</ID>
-    <ID>NewLineAtEndOfFile:Category.kt$fr.free.nrw.commons.category.Category.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryClickedListener.kt$fr.free.nrw.commons.category.CategoryClickedListener.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryImagesCallback.kt$fr.free.nrw.commons.category.CategoryImagesCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:CategoryTableTest.kt$fr.free.nrw.commons.db.CategoryTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ClipboardUtils.kt$fr.free.nrw.commons.utils.ClipboardUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:CommonsLogSender.kt$fr.free.nrw.commons.logging.CommonsLogSender.kt</ID>
-    <ID>NewLineAtEndOfFile:ContributionsModule.kt$fr.free.nrw.commons.contributions.ContributionsModule.kt</ID>
-    <ID>NewLineAtEndOfFile:ContributionsProvidesModule.kt$fr.free.nrw.commons.contributions.ContributionsProvidesModule.kt</ID>
-    <ID>NewLineAtEndOfFile:DefaultCallback.kt$fr.free.nrw.commons.filepicker.DefaultCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:DeleteHelper.kt$fr.free.nrw.commons.delete.DeleteHelper.kt</ID>
-    <ID>NewLineAtEndOfFile:DownloadReceiver.kt$fr.free.nrw.commons.utils.DownloadReceiver.kt</ID>
-    <ID>NewLineAtEndOfFile:EdgeToEdgeUtils.kt$fr.free.nrw.commons.utils.EdgeToEdgeUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:ExceptionAwareThreadPoolExecutor.kt$fr.free.nrw.commons.concurrency.ExceptionAwareThreadPoolExecutor.kt</ID>
-    <ID>NewLineAtEndOfFile:ExceptionHandler.kt$fr.free.nrw.commons.concurrency.ExceptionHandler.kt</ID>
-    <ID>NewLineAtEndOfFile:ExploreFragment.kt$fr.free.nrw.commons.explore.ExploreFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ExploreMapRootFragment.kt$fr.free.nrw.commons.explore.ExploreMapRootFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ExtendedFileProvider.kt$fr.free.nrw.commons.filepicker.ExtendedFileProvider.kt</ID>
-    <ID>NewLineAtEndOfFile:Feedback.kt$fr.free.nrw.commons.feedback.model.Feedback.kt</ID>
-    <ID>NewLineAtEndOfFile:FeedbackContentCreator.kt$fr.free.nrw.commons.feedback.FeedbackContentCreator.kt</ID>
-    <ID>NewLineAtEndOfFile:FeedbackDialog.kt$fr.free.nrw.commons.feedback.FeedbackDialog.kt</ID>
-    <ID>NewLineAtEndOfFile:FilePicker.kt$fr.free.nrw.commons.filepicker.FilePicker.kt</ID>
-    <ID>NewLineAtEndOfFile:FilePickerConfiguration.kt$fr.free.nrw.commons.filepicker.FilePickerConfiguration.kt</ID>
-    <ID>NewLineAtEndOfFile:FileUsagesUiModel.kt$fr.free.nrw.commons.fileusages.FileUsagesUiModel.kt</ID>
-    <ID>NewLineAtEndOfFile:FolderDeletionHelper.kt$fr.free.nrw.commons.customselector.helper.FolderDeletionHelper.kt</ID>
-    <ID>NewLineAtEndOfFile:IdAndLabels.kt$fr.free.nrw.commons.media.IdAndLabels.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageAdapter.kt$fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageFragment.kt$fr.free.nrw.commons.customselector.ui.selector.ImageFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageUtils.kt$fr.free.nrw.commons.utils.ImageUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:ImageUtilsWrapper.kt$fr.free.nrw.commons.utils.ImageUtilsWrapper.kt</ID>
-    <ID>NewLineAtEndOfFile:InMemoryDatabaseTest.kt$fr.free.nrw.commons.db.InMemoryDatabaseTest.kt</ID>
-    <ID>NewLineAtEndOfFile:JsonKvStore.kt$fr.free.nrw.commons.kvstore.JsonKvStore.kt</ID>
-    <ID>NewLineAtEndOfFile:JsonKvStoreTest.kt$fr.free.nrw.commons.kvstore.JsonKvStoreTest.kt</ID>
-    <ID>NewLineAtEndOfFile:KeyValueStore.kt$fr.free.nrw.commons.kvstore.KeyValueStore.kt</ID>
-    <ID>NewLineAtEndOfFile:LatLng.kt$fr.free.nrw.commons.location.LatLng.kt</ID>
-    <ID>NewLineAtEndOfFile:LayoutUtils.kt$fr.free.nrw.commons.utils.LayoutUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:LeaderboardList.kt$fr.free.nrw.commons.profile.leaderboard.LeaderboardList.kt</ID>
-    <ID>NewLineAtEndOfFile:LeaderboardResponse.kt$fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:LengthUtils.kt$fr.free.nrw.commons.utils.LengthUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:LicenseAdapter.kt$fr.free.nrw.commons.upload.license.LicenseAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPicker.kt$fr.free.nrw.commons.locationpicker.LocationPicker.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPickerConstants.kt$fr.free.nrw.commons.locationpicker.LocationPickerConstants.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationPickerViewModel.kt$fr.free.nrw.commons.locationpicker.LocationPickerViewModel.kt</ID>
-    <ID>NewLineAtEndOfFile:LocationUpdateListener.kt$fr.free.nrw.commons.location.LocationUpdateListener.kt</ID>
-    <ID>NewLineAtEndOfFile:LogLevelSettableTree.kt$fr.free.nrw.commons.logging.LogLevelSettableTree.kt</ID>
-    <ID>NewLineAtEndOfFile:LogUtils.kt$fr.free.nrw.commons.logging.LogUtils.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaAttributionUtil.kt$fr.free.nrw.commons.utils.MediaAttributionUtil.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaAttributionUtilTest.kt$fr.free.nrw.commons.utils.MediaAttributionUtilTest.kt</ID>
-    <ID>NewLineAtEndOfFile:MediaDetailFragment.kt$fr.free.nrw.commons.media.MediaDetailFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MigrationTest.kt$fr.free.nrw.commons.db.MigrationTest.kt</ID>
-    <ID>NewLineAtEndOfFile:MimeTypeMapWrapper.kt$fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.kt</ID>
-    <ID>NewLineAtEndOfFile:MoreBottomSheetFragment.kt$fr.free.nrw.commons.navtab.MoreBottomSheetFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MoreBottomSheetLoggedOutFragment.kt$fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment.kt</ID>
-    <ID>NewLineAtEndOfFile:MultiGestureListener.kt$fr.free.nrw.commons.media.zoomControllers.zoomable.MultiGestureListener.kt</ID>
-    <ID>NewLineAtEndOfFile:MwErrorResponse.kt$fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:MwLegacyServiceError.kt$fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError.kt</ID>
-    <ID>NewLineAtEndOfFile:MwQueryPageTest.kt$fr.free.nrw.commons.wikidata.mwapi.MwQueryPageTest.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTab.kt$fr.free.nrw.commons.navtab.NavTab.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabFragmentPagerAdapter.kt$fr.free.nrw.commons.navtab.NavTabFragmentPagerAdapter.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabLayout.kt$fr.free.nrw.commons.navtab.NavTabLayout.kt</ID>
-    <ID>NewLineAtEndOfFile:NavTabLoggedOut.kt$fr.free.nrw.commons.navtab.NavTabLoggedOut.kt</ID>
-    <ID>NewLineAtEndOfFile:NearbyQueryParams.kt$fr.free.nrw.commons.nearby.model.NearbyQueryParams.kt</ID>
-    <ID>NewLineAtEndOfFile:NearbyUtil.kt$fr.free.nrw.commons.nearby.NearbyUtil.kt</ID>
-    <ID>NewLineAtEndOfFile:OkHttpJsonApiClientTests.kt$fr.free.nrw.commons.OkHttpJsonApiClientTests.kt</ID>
-    <ID>NewLineAtEndOfFile:OnCategoriesSaveHandler.kt$fr.free.nrw.commons.category.OnCategoriesSaveHandler.kt</ID>
-    <ID>NewLineAtEndOfFile:OnFeedbackSubmitCallback.kt$fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback.kt</ID>
-    <ID>NewLineAtEndOfFile:PageProperties.kt$fr.free.nrw.commons.wikidata.model.page.PageProperties.kt</ID>
-    <ID>NewLineAtEndOfFile:ProfileActivity.kt$fr.free.nrw.commons.profile.ProfileActivity.kt</ID>
-    <ID>NewLineAtEndOfFile:RandomAccessFileExifWriter.kt$fr.free.nrw.commons.utils.RandomAccessFileExifWriter.kt</ID>
-    <ID>NewLineAtEndOfFile:RandomAccessFileExifWriterTest.kt$fr.free.nrw.commons.utils.RandomAccessFileExifWriterTest.kt</ID>
-    <ID>NewLineAtEndOfFile:RecentLanguagesTableTest.kt$fr.free.nrw.commons.db.RecentLanguagesTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:RecentSearchesTableTest.kt$fr.free.nrw.commons.db.RecentSearchesTableTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ThreadPoolService.kt$fr.free.nrw.commons.concurrency.ThreadPoolService.kt</ID>
-    <ID>NewLineAtEndOfFile:TimeProvider.kt$fr.free.nrw.commons.utils.TimeProvider.kt</ID>
-    <ID>NewLineAtEndOfFile:UpdateAvatarResponse.kt$fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadMediaDetailFragmentUnitTest.kt$fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragmentUnitTest.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadMediaDetailInputFilter.kt$fr.free.nrw.commons.upload.UploadMediaDetailInputFilter.kt</ID>
-    <ID>NewLineAtEndOfFile:UploadWorkerTest.kt$.UploadWorkerTest.kt</ID>
-    <ID>NewLineAtEndOfFile:ViewHolder.kt$fr.free.nrw.commons.widget.ViewHolder.kt</ID>
-    <ID>NewLineAtEndOfFile:WikidataFeedback.kt$fr.free.nrw.commons.nearby.WikidataFeedback.kt</ID>
-    <ID>NewLineAtEndOfFile:ZoomableDraweeView.kt$fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView.kt</ID>
     <ID>PrintStackTrace:CountingRequestBody.kt$CountingRequestBody$e</ID>
     <ID>PrintStackTrace:DBOpenHelper.kt$DBOpenHelper$e</ID>
     <ID>PrintStackTrace:FilePicker.kt$FilePicker$e</ID>
@@ -1046,7 +948,7 @@
     <ID>ProtectedMemberInFinalClass:WikiSite.kt$WikiSite$protected constructor(`in`: Parcel) { uri = `in`.readParcelable(Uri::class.java.classLoader)!! languageCode = `in`.readString() }</ID>
     <ID>ReturnCount:AchievementsFragment.kt$AchievementsFragment$private fun checkAccount(): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix ): Pair&lt;Int, Handle&gt;?</ID>
+    <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix, ): Pair&lt;Int, Handle&gt;?</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun snapRectToMCU(rect: RectF)</ID>
     <ID>ReturnCount:BookmarkItemsDao.kt$BookmarkItemsDao$fun findBookmarkItem(depictedItemID: String?): Boolean</ID>
     <ID>ReturnCount:BookmarkPicturesDao.kt$BookmarkPicturesDao$fun findBookmark(bookmark: Bookmark?): Boolean</ID>
@@ -1054,12 +956,12 @@
     <ID>ReturnCount:BookmarksTable.kt$BookmarksTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
     <ID>ReturnCount:CategoriesModel.kt$CategoriesModel$fun isSpammyCategory(item: String): Boolean</ID>
     <ID>ReturnCount:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$private fun findHasFragmentInjector(): HasSupportFragmentInjector</ID>
-    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText(wikiText: String, editedLocation: String): String</ID>
+    <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText( wikiText: String, editedLocation: String, ): String</ID>
     <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle(x: Float, y: Float): Handle?</ID>
+    <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle( x: Float, y: Float, ): Handle?</ID>
     <ID>ReturnCount:CryptoUtils.kt$CryptoUtils$fun decrypt(encryptedBase64: String?): String?</ID>
     <ID>ReturnCount:DialogUtil.kt$DialogUtil$private fun showSafely( activity: Activity?, dialog: AlertDialog?, ): AlertDialog?</ID>
-    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int ): CropCoordinates?</ID>
+    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int, ): CropCoordinates?</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$fun onBackPressed(): Boolean</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getMediaFromImageURL(url: String?): Media?</ID>
@@ -1075,7 +977,7 @@
     <ID>ReturnCount:LocationUtils.kt$LocationUtils$@JvmStatic fun deriveUpdatedLocationFromSearchQuery(customQuery: String): LatLng?</ID>
     <ID>ReturnCount:LoginResponse.kt$ClientLogin$fun toLoginResult(password: String): LoginResult</ID>
     <ID>ReturnCount:MainActivity.kt$MainActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
-    <ID>ReturnCount:MainActivity.kt$MainActivity$private fun loadFragment(fragment: Fragment?, showBottom: Boolean): Boolean</ID>
+    <ID>ReturnCount:MainActivity.kt$MainActivity$private fun loadFragment( fragment: Fragment?, showBottom: Boolean, ): Boolean</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun chooseDescription(media: Media): String?</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption(idAndCaption: IdAndLabels, locale: String): String?</ID>
     <ID>ReturnCount:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
@@ -1100,8 +1002,8 @@
     <ID>ReturnCount:ZoomableDraweeView.kt$ZoomableDraweeView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>SerialVersionUIDInSerializableClass:ImageInfo.kt$ImageInfo : Serializable</ID>
     <ID>SpreadOperator:BaseDelegateAdapter.kt$BaseDelegateAdapter$( object : DiffUtil.ItemCallback&lt;T&gt;() { override fun areItemsTheSame(oldItem: T &amp; Any, newItem: T &amp; Any): Boolean { return areItemsTheSame(oldItem, newItem) } override fun areContentsTheSame(oldItem: T &amp; Any, newItem: T &amp; Any): Boolean { return areContentsTheSame(oldItem, newItem) } }, *delegates, )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
+    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
+    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:DatabaseUtils.kt$(*elements)</ID>
     <ID>SpreadOperator:DownloadUtils.kt$DownloadUtils$( activity, { enqueueRequest(activity, req) }, { Toast .makeText( activity, R.string.download_failed_we_cannot_download_the_file_without_storage_permission, Toast.LENGTH_SHORT, ).show() }, R.string.storage_permission, R.string.write_storage_permission_rationale, *PermissionUtils.PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:MediaDetailFragment.kt$MediaDetailFragment$( requireActivity(), { launchZoomActivityAfterPermissionCheck(view) }, R.string.storage_permission_title, R.string.read_storage_permission_rationale, *PERMISSIONS_STORAGE )</ID>
@@ -1127,7 +1029,7 @@
     <ID>ThrowingExceptionsWithoutMessageOrCause:ImageFileLoader.kt$ImageFileLoader$NullPointerException()</ID>
     <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
-    <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null )</ID>
+    <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
     <ID>ThrowsCount:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
     <ID>TooGenericExceptionCaught:AboutActivity.kt$AboutActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:AchievementsFragment.kt$AchievementsFragment$e: Exception</ID>
@@ -1315,7 +1217,7 @@
     <ID>UnusedPrivateMember:FilePicker.kt$FilePicker$@Throws(URISyntaxException::class) @JvmStatic private fun takenCameraVideo(context: Context): UploadableFile?</ID>
     <ID>UnusedPrivateMember:ImageInfo.kt$ImageInfo$private fun updateThumbUrl()</ID>
     <ID>UnusedPrivateMember:ImageUtils.kt$ImageUtils$@JvmStatic private fun showSettingWallpaperProgressBar(context: Context)</ID>
-    <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?)</ID>
+    <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction( textView: TextView, actionId: Int, keyEvent: KeyEvent?, )</ID>
     <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateCaptions( mediaDetail: UploadMediaDetail, updatedCaptions: MutableMap&lt;String, String&gt; )</ID>
     <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateToDoWarning()</ID>
     <ID>UnusedPrivateMember:MediaLicenseFragment.kt$MediaLicenseFragment$private fun setTextViewHTML(textView: TextView, text: String)</ID>
@@ -1398,7 +1300,7 @@
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")</ID>
     <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
     <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID")</ID>
+    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>
     <ID>UseRequire:RecentLanguagesContentProvider.kt$RecentLanguagesContentProvider$throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")</ID>

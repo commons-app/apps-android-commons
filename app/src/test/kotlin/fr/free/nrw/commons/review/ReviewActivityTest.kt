@@ -130,7 +130,9 @@ class ReviewActivityTest {
         shadowOf(getMainLooper()).idle()
         val media = mock(Media::class.java)
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
-        doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())
+        doReturn(
+            mock(ReviewImageFragment::class.java),
+        ).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())
         doReturn("").`when`(media).filename
         doNothing().`when`(reviewImageFragment).disableButtons()
 

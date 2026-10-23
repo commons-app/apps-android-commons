@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.location.LocationManager
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
 import android.view.View
@@ -26,6 +25,7 @@ import androidx.core.content.IntentCompat
 import androidx.core.os.BundleCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.WindowCompat
+import androidx.preference.PreferenceManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.CommonsApplication
@@ -63,11 +63,12 @@ import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 
-
 /**
  * Helps to pick location and return the result with an intent
  */
-class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
+class LocationPickerActivity :
+    BaseActivity(),
+    LocationPermissionCallback {
     /**
      * coordinateEditHelper: helps to edit coordinates
      */
@@ -148,7 +149,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * applicationKvStore : for storing values
      */
     @Inject
-    @field: Named("default_preferences")
+    @field:Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
     private lateinit var store: BasicKvStore
 
@@ -187,23 +188,26 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         setContentView(R.layout.activity_location_picker)
 
         if (savedInstanceState == null) {
-            cameraPosition = IntentCompat.getParcelableExtra(
-                intent,
-                LocationPickerConstants.MAP_CAMERA_POSITION,
-                CameraPosition::class.java
-            )
+            cameraPosition =
+                IntentCompat.getParcelableExtra(
+                    intent,
+                    LocationPickerConstants.MAP_CAMERA_POSITION,
+                    CameraPosition::class.java,
+                )
             activity = intent.getStringExtra(LocationPickerConstants.ACTIVITY_KEY)
-            media = IntentCompat.getParcelableExtra(
-                intent,
-                LocationPickerConstants.MEDIA,
-                Media::class.java
-            )
+            media =
+                IntentCompat.getParcelableExtra(
+                    intent,
+                    LocationPickerConstants.MEDIA,
+                    Media::class.java,
+                )
         } else {
-            cameraPosition = BundleCompat.getParcelable(
-                savedInstanceState,
-                CAMERA_POS,
-                CameraPosition::class.java
-            )
+            cameraPosition =
+                BundleCompat.getParcelable(
+                    savedInstanceState,
+                    CAMERA_POS,
+                    CameraPosition::class.java,
+                )
             activity = savedInstanceState.getString(ACTIVITY)
             media = BundleCompat.getParcelable(savedInstanceState, "sMedia", Media::class.java)
         }
@@ -215,18 +219,22 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         getToolbarUI()
         addCenterOnGPSButton()
 
-        org.osmdroid.config.Configuration.getInstance()
+        org.osmdroid.config.Configuration
+            .getInstance()
             .load(
-                applicationContext, PreferenceManager.getDefaultSharedPreferences(
-                applicationContext
-                )
+                applicationContext,
+                PreferenceManager.getDefaultSharedPreferences(
+                    applicationContext,
+                ),
             )
 
         mapView?.setTileSource(TileSourceFactory.WIKIMEDIA)
         mapView?.setTilesScaledToDpi(true)
         mapView?.setMultiTouchControls(true)
 
-        org.osmdroid.config.Configuration.getInstance().additionalHttpRequestProperties["Referer"] =
+        org.osmdroid.config.Configuration
+            .getInstance()
+            .additionalHttpRequestProperties["Referer"] =
             "http://maps.wikimedia.org/"
         mapView?.zoomController?.setVisibility(CustomZoomButtonsController.Visibility.NEVER)
         mapView?.controller?.setZoom(ZOOM_LEVEL.toDouble())
@@ -234,13 +242,19 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             when (event.action) {
                 MotionEvent.ACTION_MOVE -> {
                     if (markerImage.translationY == 0f) {
-                        markerImage.animate().translationY(-75f)
-                            .setInterpolator(OvershootInterpolator()).duration = 250
+                        markerImage
+                            .animate()
+                            .translationY(-75f)
+                            .setInterpolator(OvershootInterpolator())
+                            .duration = 250
                     }
                 }
                 MotionEvent.ACTION_UP -> {
-                    markerImage.animate().translationY(0f)
-                        .setInterpolator(OvershootInterpolator()).duration = 250
+                    markerImage
+                        .animate()
+                        .translationY(0f)
+                        .setInterpolator(OvershootInterpolator())
+                        .duration = 250
                 }
             }
             false
@@ -266,7 +280,10 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     /**
      * Moves the center of the map to the specified coordinates
      */
-    private fun moveMapTo(latitude: Double, longitude: Double) {
+    private fun moveMapTo(
+        latitude: Double,
+        longitude: Double,
+    ) {
         mapView?.controller?.let {
             val point = GeoPoint(latitude, longitude)
             it.setCenter(point)
@@ -288,10 +305,11 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * For showing credits
      */
     private fun addCredits() {
-        tvAttribution.text = HtmlCompat.fromHtml(
-            getString(R.string.map_attribution),
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
+        tvAttribution.text =
+            HtmlCompat.fromHtml(
+                getString(R.string.map_attribution),
+                HtmlCompat.FROM_HTML_MODE_LEGACY,
+            )
         tvAttribution.movementMethod = LinkMovementMethod.getInstance()
     }
 
@@ -334,7 +352,8 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun getToolbarUI() {
         val toolbar: ConstraintLayout = findViewById(R.id.location_picker_toolbar)
-        WindowCompat.getInsetsController(window, window.decorView)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = false
         toolbar.applyEdgeToEdgeTopPaddingInsets()
         largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view)
@@ -343,17 +362,16 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     }
 
     private fun setupMapView() {
-
         val mapBottomLayout: ConstraintLayout = findViewById(R.id.map_bottom_layout)
         mapBottomLayout.applyEdgeToEdgeBottomPaddingInsets()
 
         requestLocationPermissions()
 
-        //If location metadata is available, move map to that location.
+        // If location metadata is available, move map to that location.
         if (activity == "UploadActivity" || activity == "MediaActivity") {
             moveMapToMediaLocation()
         } else {
-            //If location metadata is not available, move map to device GPS location.
+            // If location metadata is not available, move map to device GPS location.
             moveMapToGPSLocation()
         }
 
@@ -391,7 +409,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             getString(R.string.continue_message),
             getString(R.string.cancel),
             { removeLocationFromImage() },
-            null
+            null,
         )
     }
 
@@ -400,16 +418,20 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun removeLocationFromImage() {
         media?.let {
-            coordinateEditHelper.makeCoordinatesEdit(
-                applicationContext, it, "0.0", "0.0", "0.0f"
-            )
-                ?.subscribeOn(Schedulers.io())
+            coordinateEditHelper
+                .makeCoordinatesEdit(
+                    applicationContext,
+                    it,
+                    "0.0",
+                    "0.0",
+                    "0.0f",
+                )?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { _ ->
                     Timber.d("Coordinates removed from the image")
                 }?.let { it1 ->
                     compositeDisposable.add(
-                        it1
+                        it1,
                     )
                 }
         }
@@ -421,25 +443,26 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      * Show location in map app
      */
     private fun showInMapApp() {
-        val position = when {
-            //location metadata is available
-            activity == "UploadActivity" && cameraPosition != null -> {
-                fr.free.nrw.commons.location.LatLng(
-                    cameraPosition!!.latitude,
-                    cameraPosition!!.longitude,
-                    0.0f
-                )
+        val position =
+            when {
+                // location metadata is available
+                activity == "UploadActivity" && cameraPosition != null -> {
+                    fr.free.nrw.commons.location.LatLng(
+                        cameraPosition!!.latitude,
+                        cameraPosition!!.longitude,
+                        0.0f,
+                    )
+                }
+                // location metadata is not available
+                mapView != null -> {
+                    fr.free.nrw.commons.location.LatLng(
+                        mapView?.mapCenter?.latitude!!,
+                        mapView?.mapCenter?.longitude!!,
+                        0.0f,
+                    )
+                }
+                else -> null
             }
-            //location metadata is not available
-            mapView != null -> {
-                fr.free.nrw.commons.location.LatLng(
-                    mapView?.mapCenter?.latitude!!,
-                    mapView?.mapCenter?.longitude!!,
-                    0.0f
-                )
-            }
-            else -> null
-        }
 
         position?.let {
             mapView?.zoomLevelDouble?.let { zoomLevel ->
@@ -482,28 +505,29 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         if (activity == "NoLocationUploadActivity") {
             applicationKvStore.putString(
                 LAST_LOCATION,
-                "${mapView?.mapCenter?.latitude},${mapView?.mapCenter?.longitude}"
+                "${mapView?.mapCenter?.latitude},${mapView?.mapCenter?.longitude}",
             )
             applicationKvStore.putString(LAST_ZOOM, mapView?.zoomLevelDouble?.toString()!!)
         }
 
         if (media == null) {
-            val intent = Intent().apply {
-                putExtra(
-                    LocationPickerConstants.MAP_CAMERA_POSITION,
-                    CameraPosition(
-                        mapView?.mapCenter?.latitude!!,
-                        mapView?.mapCenter?.longitude!!,
-                        14.0
+            val intent =
+                Intent().apply {
+                    putExtra(
+                        LocationPickerConstants.MAP_CAMERA_POSITION,
+                        CameraPosition(
+                            mapView?.mapCenter?.latitude!!,
+                            mapView?.mapCenter?.longitude!!,
+                            14.0,
+                        ),
                     )
-                )
-            }
+                }
             setResult(RESULT_OK, intent)
         } else {
             updateCoordinates(
                 mapView?.mapCenter?.latitude.toString(),
                 mapView?.mapCenter?.longitude.toString(),
-                "0.0f"
+                "0.0f",
             )
         }
 
@@ -513,35 +537,42 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
     /**
      * Updates image with new coordinates
      */
-    fun updateCoordinates(latitude: String, longitude: String, accuracy: String) {
+    fun updateCoordinates(
+        latitude: String,
+        longitude: String,
+        accuracy: String,
+    ) {
         media?.let {
             try {
-                coordinateEditHelper.makeCoordinatesEdit(
-                    applicationContext,
-                    it,
-                    latitude,
-                    longitude,
-                    accuracy
-                )?.subscribeOn(Schedulers.io())
+                coordinateEditHelper
+                    .makeCoordinatesEdit(
+                        applicationContext,
+                        it,
+                        latitude,
+                        longitude,
+                        accuracy,
+                    )?.subscribeOn(Schedulers.io())
                     ?.observeOn(AndroidSchedulers.mainThread())
                     ?.subscribe { _ ->
                         Timber.d("Coordinates updated")
                     }?.let { it1 ->
                         compositeDisposable.add(
-                            it1
+                            it1,
                         )
                     }
             } catch (e: Exception) {
                 if (e.localizedMessage == CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE) {
                     val username = sessionManager.userName
-                    CommonsApplication.BaseLogoutListener(
-                        this,
-                        getString(R.string.invalid_login_message)
-                        , username
-                    ).let {
-                        CommonsApplication.instance.clearApplicationData(this, it)
-                    }
-                } else { }
+                    CommonsApplication
+                        .BaseLogoutListener(
+                            this,
+                            getString(R.string.invalid_login_message),
+                            username,
+                        ).let {
+                            CommonsApplication.instance.clearApplicationData(this, it)
+                        }
+                } else {
+                }
             }
         }
     }
@@ -577,13 +608,16 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
      */
     private fun removeSelectedLocationMarker() {
         val overlays = mapView?.overlays
-        overlays?.filterIsInstance<Marker>()?.firstOrNull {
-            it.position.latitude ==
-                    cameraPosition?.latitude && it.position.longitude == cameraPosition?.longitude
-        }?.let {
-            overlays.remove(it)
-            mapView?.invalidate()
-        }
+        overlays
+            ?.filterIsInstance<Marker>()
+            ?.firstOrNull {
+                it.position.latitude ==
+                    cameraPosition?.latitude &&
+                    it.position.longitude == cameraPosition?.longitude
+            }?.let {
+                overlays.remove(it)
+                mapView?.invalidate()
+            }
     }
 
     /**
@@ -593,14 +627,14 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
         locationPermissionsHelper = LocationPermissionsHelper(this, locationManager, this)
         locationPermissionsHelper.requestForLocationAccess(
             R.string.location_permission_title,
-            R.string.upload_map_location_access
+            R.string.upload_map_location_access,
         )
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         if (requestCode == Constants.RequestCodes.LOCATION &&
             grantResults.isNotEmpty() &&
@@ -625,17 +659,18 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
     override fun onLocationPermissionDenied(toastMessage: String) {
         val isDeniedBefore = store.getBoolean("isPermissionDenied", false)
-        val showRationale = ActivityCompat.shouldShowRequestPermissionRationale(
-            this,
-            permission.ACCESS_FINE_LOCATION
-        )
+        val showRationale =
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                permission.ACCESS_FINE_LOCATION,
+            )
 
         if (!showRationale) {
             if (!locationPermissionsHelper.checkLocationPermission(this)) {
                 if (isDeniedBefore) {
                     locationPermissionsHelper.showAppSettingsDialog(
                         this,
-                        R.string.upload_map_location_access
+                        R.string.upload_map_location_access,
                     )
                 } else {
                     Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
@@ -657,7 +692,7 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                 addMarkerAtGPSLocation()
                 locationPermissionsHelper.showLocationOffDialog(
                     this,
-                    R.string.ask_to_turn_location_on_text
+                    R.string.ask_to_turn_location_on_text,
                 )
             }
         }
@@ -678,24 +713,27 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
             mapView?.overlays?.clear()
         }
 
-        val diskOverlay = ScaleDiskOverlay(
-            this,
-            geoPoint,
-            2000,
-            GeoConstants.UnitOfMeasure.foot
-        )
+        val diskOverlay =
+            ScaleDiskOverlay(
+                this,
+                geoPoint,
+                2000,
+                GeoConstants.UnitOfMeasure.foot,
+            )
 
-        val circlePaint = Paint().apply {
-            color = Color.rgb(128, 128, 128)
-            style = Paint.Style.STROKE
-            strokeWidth = 2f
-        }
+        val circlePaint =
+            Paint().apply {
+                color = Color.rgb(128, 128, 128)
+                style = Paint.Style.STROKE
+                strokeWidth = 2f
+            }
         diskOverlay.setCirclePaint2(circlePaint)
 
-        val diskPaint = Paint().apply {
-            color = Color.argb(40, 128, 128, 128)
-            style = Paint.Style.FILL_AND_STROKE
-        }
+        val diskPaint =
+            Paint().apply {
+                color = Color.argb(40, 128, 128, 128)
+                style = Paint.Style.FILL_AND_STROKE
+            }
         diskOverlay.setCirclePaint1(diskPaint)
 
         diskOverlay.setDisplaySizeMin(900)
@@ -703,19 +741,21 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
 
         mapView?.overlays?.add(diskOverlay)
 
-        val startMarker = Marker(mapView).apply {
-            position = geoPoint
-            setAnchor(
-                Marker.ANCHOR_CENTER,
-                Marker.ANCHOR_BOTTOM
-            )
-            icon = ContextCompat.getDrawable(
-                this@LocationPickerActivity,
-                R.drawable.current_location_marker
-            )
-            title = "Your Location"
-            textLabelFontSize = 24
-        }
+        val startMarker =
+            Marker(mapView).apply {
+                position = geoPoint
+                setAnchor(
+                    Marker.ANCHOR_CENTER,
+                    Marker.ANCHOR_BOTTOM,
+                )
+                icon =
+                    ContextCompat.getDrawable(
+                        this@LocationPickerActivity,
+                        R.drawable.current_location_marker,
+                    )
+                title = "Your Location"
+                textLabelFontSize = 24
+            }
 
         mapView?.overlays?.add(startMarker)
     }

@@ -21,13 +21,17 @@ class EditViewModel : ViewModel() {
      * Initialize the single Jpegtran instance for this editing session.
      * Must be called with Application Context from EditActivity.
      */
-    fun initJpegtran(context: Context, imagePath: String) {
+    fun initJpegtran(
+        context: Context,
+        imagePath: String,
+    ) {
         if (jpegtran == null) {
-            val imageUri = if (imagePath.startsWith("content://") || imagePath.startsWith("file://")) {
-                imagePath.toUri()
-            } else {
-                File(imagePath).toUri()
-            }
+            val imageUri =
+                if (imagePath.startsWith("content://") || imagePath.startsWith("file://")) {
+                    imagePath.toUri()
+                } else {
+                    File(imagePath).toUri()
+                }
             jpegtran = Jpegtran(context, imageUri)
         }
     }
@@ -35,10 +39,9 @@ class EditViewModel : ViewModel() {
     /**
      * Returns properties of the JPEG image.
      */
-    fun getProperties(uri: Uri): Properties {
-        return jpegtran?.getProperties(uri)
+    fun getProperties(uri: Uri): Properties =
+        jpegtran?.getProperties(uri)
             ?: throw IllegalStateException("Jpegtran not initialized")
-    }
 
     /**
      * Clear and cleanup temporary files in Jpegtran.
@@ -64,7 +67,7 @@ class EditViewModel : ViewModel() {
     fun rotateImage(
         imageFile: File,
         degree: Int,
-        savePath: File
+        savePath: File,
     ): File {
         Timber.tag("Trying to rotate image").d("Starting")
         val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
@@ -74,12 +77,13 @@ class EditViewModel : ViewModel() {
             imageFile.copyTo(output, overwrite = true)
             return output
         }
-        val rotationDegree = when (normalizedDegree) {
-            90 -> RotationDegree.ROTATE_90
-            180 -> RotationDegree.ROTATE_180
-            270 -> RotationDegree.ROTATE_270
-            else -> throw IllegalArgumentException("Unsupported degree: $degree")
-        }
+        val rotationDegree =
+            when (normalizedDegree) {
+                90 -> RotationDegree.ROTATE_90
+                180 -> RotationDegree.ROTATE_180
+                270 -> RotationDegree.ROTATE_270
+                else -> throw IllegalArgumentException("Unsupported degree: $degree")
+            }
         try {
             jpegtran!!.rotate(rotationDegree)
             jpegtran!!.save(output.toUri())
@@ -107,7 +111,7 @@ class EditViewModel : ViewModel() {
         savePath: File,
     ): File {
         Timber.tag("Trying to crop image").d(
-            "Starting crop: left=$left, top=$top, width=$width, height=$height"
+            "Starting crop: left=$left, top=$top, width=$width, height=$height",
         )
         val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
         val output = File(savePath, imagePath)
@@ -116,7 +120,7 @@ class EditViewModel : ViewModel() {
                 width,
                 height,
                 left,
-                top
+                top,
             )
             jpegtran!!.save(output.toUri())
             return output
@@ -135,7 +139,7 @@ class EditViewModel : ViewModel() {
      */
     fun blurImage(
         regions: List<BlurRegion>,
-        savePath: File
+        savePath: File,
     ): File {
         Timber.tag("Trying to blur image").d("Starting blur of ${regions.size} regions")
         val imagePath = "blurred_${System.currentTimeMillis()}.jpg"
