@@ -9,13 +9,12 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 class FileDeletedOnCommonsException : Exception()
 
 /**
- * True when the query pages are present, none of them have image info, and at least one is
- * marked missing. An empty list is a different failure and is not a deletion.
+ * True when every page in the response is marked missing. An empty list is a different
+ * failure and is not a deletion. This only reads the missing flag, which the query already
+ * returned.
  */
 internal fun pagesIndicateDeletedFile(pages: List<MwQueryPage>): Boolean =
-    pages.isNotEmpty() &&
-        pages.none { it.imageInfo() != null } &&
-        pages.any { it.missing() }
+    pages.isNotEmpty() && pages.all { it.missing() }
 
 /**
  * True for the deleted-file signal from a request the app already made.
@@ -23,14 +22,12 @@ internal fun pagesIndicateDeletedFile(pages: List<MwQueryPage>): Boolean =
  */
 fun Throwable?.isFileDeletedOnCommons(): Boolean {
     var current = this
-    while (current != null) {
-        if (current is FileDeletedOnCommonsException) {
-            return true
-        }
-        if ((current as? MwIOException)?.error?.code == "missingtitle") {
-            return true
-        }
+    var deleted = false
+    while (current != null && !deleted) {
+        deleted =
+            current is FileDeletedOnCommonsException ||
+            (current as? MwIOException)?.error?.code == "missingtitle"
         current = current.cause
     }
-    return false
+    return deleted
 }

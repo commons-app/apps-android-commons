@@ -830,27 +830,24 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * leave this screen blank.
      */
     private fun revealMediaDetailWithoutImage(allowRetry: Boolean = true) {
-        val currentBinding = _binding ?: return
-        val scrollView = currentBinding.mediaDetailScrollView
-        if (!scrollView.isAttachedToWindow) {
-            return
-        }
-        val scrollWidth = scrollView.width
-        if (scrollWidth <= 0) {
-            if (allowRetry) {
+        val currentBinding = _binding
+        val scrollView = currentBinding?.mediaDetailScrollView
+        if (currentBinding != null && scrollView != null && scrollView.isAttachedToWindow) {
+            val scrollWidth = scrollView.width
+            if (scrollWidth <= 0 && allowRetry) {
                 scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
+            } else if (scrollWidth > 0) {
+                val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
+                val params = currentBinding.mediaDetailImageView.layoutParams
+                val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
+                params.width = scrollWidth
+                params.height = height
+                spacerParams.height = height
+                currentBinding.mediaDetailImageView.layoutParams = params
+                currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
+                scrollView.visibility = View.VISIBLE
             }
-            return
         }
-        val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
-        val params = currentBinding.mediaDetailImageView.layoutParams
-        val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
-        params.width = scrollWidth
-        params.height = height
-        spacerParams.height = height
-        currentBinding.mediaDetailImageView.layoutParams = params
-        currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
-        scrollView.visibility = View.VISIBLE
     }
 
     /**
@@ -858,28 +855,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * Explain the deletion once, and keep the row so the gallery can show it as deleted.
      */
     private fun onFileDeletedFromCommons() {
-        if (_binding == null || media == null) {
-            return
-        }
-        val alreadyShown = fileWasDeletedFromCommons
-        fileWasDeletedFromCommons = true
-        revealMediaDetailWithoutImage()
-        binding.deletedFileBanner.visibility = View.VISIBLE
-        binding.nominateDeletion.visibility = View.GONE
-        binding.nominatedDeletionBanner.visibility = View.GONE
-        if (alreadyShown) {
-            return
-        }
-        val filename = media?.filename ?: return
-        contributionsRepository
-            .markCompletedContributionDeleted(filename)
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                { },
-                { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
-            )
-        if (isAdded) {
-            DeletedFileActivity.start(requireContext(), filename)
+        val currentMedia = media
+        if (_binding != null && currentMedia != null) {
+            val alreadyShown = fileWasDeletedFromCommons
+            fileWasDeletedFromCommons = true
+            revealMediaDetailWithoutImage()
+            binding.deletedFileBanner.visibility = View.VISIBLE
+            binding.nominateDeletion.visibility = View.GONE
+            binding.nominatedDeletionBanner.visibility = View.GONE
+            val filename = currentMedia.filename
+            if (!alreadyShown && !filename.isNullOrEmpty()) {
+                contributionsRepository
+                    .markCompletedContributionDeleted(filename)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(
+                        { },
+                        { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
+                    )
+                if (isAdded) {
+                    DeletedFileActivity.start(requireContext(), filename)
+                }
+            }
         }
     }
 

@@ -13,7 +13,7 @@ class FileDeletedOnCommonsTest {
     private val gson = Gson()
 
     @Test
-    fun missingPageWithoutImageInfoIsADeletedFile() {
+    fun missingPageIsADeletedFile() {
         val page =
             gson.fromJson(
                 """{"title":"File:Gone.jpg","missing":true}""",
@@ -24,17 +24,17 @@ class FileDeletedOnCommonsTest {
     }
 
     @Test
-    fun emptyOrIncompletePagesAreNotADeletedFile() {
-        val untitled = gson.fromJson("""{"title":"File:Here.jpg"}""", MwQueryPage::class.java)
-        val withImage =
+    fun emptyOrPresentPagesAreNotADeletedFile() {
+        val present = gson.fromJson("""{"title":"File:Here.jpg"}""", MwQueryPage::class.java)
+        val missing =
             gson.fromJson(
-                """{"title":"File:Here.jpg","missing":true,"imageinfo":[{"size":1}]}""",
+                """{"title":"File:Gone.jpg","missing":true}""",
                 MwQueryPage::class.java,
             )
 
         assertFalse(pagesIndicateDeletedFile(emptyList()))
-        assertFalse(pagesIndicateDeletedFile(listOf(untitled)))
-        assertFalse(pagesIndicateDeletedFile(listOf(withImage)))
+        assertFalse(pagesIndicateDeletedFile(listOf(present)))
+        assertFalse(pagesIndicateDeletedFile(listOf(missing, present)))
     }
 
     @Test
