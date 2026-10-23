@@ -14,6 +14,7 @@ import fr.free.nrw.commons.edit.EditActivity
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
+import fr.free.nrw.commons.media.DeletedFileActivity
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.nearby.WikidataFeedback
 import fr.free.nrw.commons.notification.NotificationActivity
@@ -94,4 +95,7 @@ abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun bindEditActivity(): EditActivity
+
+    @ContributesAndroidInjector
+    abstract fun bindDeletedFileActivity(): DeletedFileActivity
 }

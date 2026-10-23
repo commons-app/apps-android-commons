@@ -76,7 +76,9 @@ interface CategoryInterface {
         @Query("gcllimit") itemLimit: Int,
     ): Single<MwQueryResponse>
 
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50",
+    )
     fun getSubCategoryList(
         @Query("gcmtitle") categoryName: String,
         @QueryMap(encoded = true) continuation: Map<String, String>,

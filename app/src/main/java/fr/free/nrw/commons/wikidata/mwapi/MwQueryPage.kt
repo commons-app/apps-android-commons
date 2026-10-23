@@ -11,6 +11,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.GlobalUsage
  */
 class MwQueryPage : BaseModel() {
     private val pageid = 0
+    private val missing = false
     private val index = 0
     private var title: String? = null
     private val categoryinfo: CategoryInfo? = null
@@ -47,6 +48,8 @@ class MwQueryPage : BaseModel() {
     fun coordinates(): List<Coordinates?>? = coordinates?.filterNotNull()
 
     fun pageId(): Int = pageid
+
+    fun missing(): Boolean = missing
 
     fun thumbUrl(): String? = thumbnail?.source()
 

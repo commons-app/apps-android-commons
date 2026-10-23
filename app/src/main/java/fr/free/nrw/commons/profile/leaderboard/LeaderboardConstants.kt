@@ -24,12 +24,13 @@ object LeaderboardConstants {
          * This is the state loading, when the pages are getting loaded we can
          * use this constant to identify if we need to show the progress bar or not
          */
-        data object LOADING: LoadingStatus()
+        data object LOADING : LoadingStatus()
+
         /**
          * This is the state loaded, when the pages are loaded we can
          * use this constant to identify if we need to show the progress bar or not
          */
-        data object LOADED: LoadingStatus()
+        data object LOADED : LoadingStatus()
     }
 
     /**
