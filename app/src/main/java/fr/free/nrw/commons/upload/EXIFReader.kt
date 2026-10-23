@@ -16,16 +16,18 @@ import javax.inject.Singleton
  * for the presence of some basic Exif metadata.
  */
 @Singleton
-class EXIFReader @Inject constructor() {
-    fun processMetadata(path: String): Single<Int> = Single.just(
-        try {
-            if (ExifInterface(path).hasMakeOrDate) IMAGE_OK else FILE_NO_EXIF
-        } catch (e: Exception) {
-            FILE_NO_EXIF
-        }
-    )
+class EXIFReader
+    @Inject
+    constructor() {
+        fun processMetadata(path: String): Single<Int> =
+            Single.just(
+                try {
+                    if (ExifInterface(path).hasMakeOrDate) IMAGE_OK else FILE_NO_EXIF
+                } catch (e: Exception) {
+                    FILE_NO_EXIF
+                },
+            )
 
-    private val ExifInterface.hasMakeOrDate get() =
-        getAttribute(TAG_MAKE) != null || getAttribute(TAG_DATETIME) != null
-}
-
+        private val ExifInterface.hasMakeOrDate get() =
+            getAttribute(TAG_MAKE) != null || getAttribute(TAG_DATETIME) != null
+    }

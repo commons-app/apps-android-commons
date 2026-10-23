@@ -21,14 +21,14 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
@@ -314,10 +314,11 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
-            "onCameraPosition",
-            ActivityResult::class.java
-        )
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -347,10 +348,11 @@ class UploadMediaDetailFragmentUnitTest {
 
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
-            "onCameraPosition",
-            ActivityResult::class.java
-        )
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -394,7 +396,7 @@ class UploadMediaDetailFragmentUnitTest {
         fragment.onBecameVisible()
         Mockito.verify(presenter, Mockito.never()).onUserConfirmedUploadIsOfPlace(
             ArgumentMatchers.any(),
-            ArgumentMatchers.anyInt()
+            ArgumentMatchers.anyInt(),
         )
     }
 
