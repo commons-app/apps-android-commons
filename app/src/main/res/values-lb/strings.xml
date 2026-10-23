@@ -721,4 +721,5 @@
   <string name="license_cc_by_description">Attribution. Anerer kënnen d\'Wierk fräi deelen an upassen, soulaang se Iech als Auteur uginn.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Anerer kënnen d\'Wierk deelen an adaptéieren, mee se mussen Iech als Auteur nennen an déi selwecht Lizenz benotzen.</string>
   <string name="failed_to_save_image">D\'Bild konnt net gespäichert ginn</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
 </resources>

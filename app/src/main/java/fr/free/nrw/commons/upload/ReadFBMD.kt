@@ -15,41 +15,45 @@ import javax.inject.Singleton
  * metadata that is specific to images that come from Facebook.
  */
 @Singleton
-class ReadFBMD @Inject constructor() {
-    fun processMetadata(path: String?): Single<Int> = Single.fromCallable {
-        var result = IMAGE_OK
-        try {
-            var psBlockOffset: Int
-            var fbmdOffset: Int
+class ReadFBMD
+    @Inject
+    constructor() {
+        fun processMetadata(path: String?): Single<Int> =
+            Single.fromCallable {
+                var result = IMAGE_OK
+                try {
+                    var psBlockOffset: Int
+                    var fbmdOffset: Int
 
-            FileInputStream(path).use { fs ->
-                val bytes = ByteArray(4096)
-                fs.read(bytes)
-                with(String(bytes)) {
-                    psBlockOffset = indexOf("8BIM")
-                    fbmdOffset = indexOf("FBMD")
+                    FileInputStream(path).use { fs ->
+                        val bytes = ByteArray(4096)
+                        fs.read(bytes)
+                        with(String(bytes)) {
+                            psBlockOffset = indexOf("8BIM")
+                            fbmdOffset = indexOf("FBMD")
+                        }
+                    }
+
+                    result = if (isFacebookMetadata(psBlockOffset, fbmdOffset)) FILE_FBMD else IMAGE_OK
+                } catch (e: IOException) {
+                    Timber.e(e)
                 }
+                return@fromCallable result
             }
 
-            result = if (isFacebookMetadata(psBlockOffset, fbmdOffset)) FILE_FBMD else IMAGE_OK
+        companion object {
+            private const val MAX_FBMD_DISTANCE_FROM_PS_BLOCK = 0x80
 
-        } catch (e: IOException) {
-            Timber.e(e)
-        }
-        return@fromCallable result
-    }
-
-    companion object {
-        private const val MAX_FBMD_DISTANCE_FROM_PS_BLOCK = 0x80
-
-        /**
-         * Returns true if an FBMD marker was found shortly (less than 0x80 bytes) after
-         * the Photoshop 8BIM block, which is how Facebook embeds its metadata
-         */
-        internal fun isFacebookMetadata(psBlockOffset: Int, fbmdOffset: Int): Boolean {
-            val areMarkersFound = psBlockOffset > 0 && fbmdOffset > 0
-            return areMarkersFound && fbmdOffset - psBlockOffset in 1 until MAX_FBMD_DISTANCE_FROM_PS_BLOCK
+            /**
+             * Returns true if an FBMD marker was found shortly (less than 0x80 bytes) after
+             * the Photoshop 8BIM block, which is how Facebook embeds its metadata
+             */
+            internal fun isFacebookMetadata(
+                psBlockOffset: Int,
+                fbmdOffset: Int,
+            ): Boolean {
+                val areMarkersFound = psBlockOffset > 0 && fbmdOffset > 0
+                return areMarkersFound && fbmdOffset - psBlockOffset in 1 until MAX_FBMD_DISTANCE_FROM_PS_BLOCK
+            }
         }
     }
-}
-

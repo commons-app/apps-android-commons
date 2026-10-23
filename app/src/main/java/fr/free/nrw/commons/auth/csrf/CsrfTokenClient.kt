@@ -44,7 +44,12 @@ class CsrfTokenClient(
                             },
                         ).get()
 
-                token = response.body()?.query()?.csrfToken().orEmpty()
+                token =
+                    response
+                        .body()
+                        ?.query()
+                        ?.csrfToken()
+                        .orEmpty()
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
                 }
@@ -172,7 +177,8 @@ class CsrfTokenClient(
             ) = callback.emailAuthPrompt()
 
             // Should not happen here, but call the callback just in case.
-            override fun passwordResetPrompt(token: String?) = callback.failure(LoginFailedException("Logged in with temporary password."))
+            override fun passwordResetPrompt(token: String?) =
+                callback.failure(LoginFailedException("Logged in with temporary password."))
 
             override fun error(caught: Throwable) = callback.failure(caught)
         },

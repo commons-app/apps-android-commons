@@ -107,8 +107,18 @@ class ImageFileLoader(
                 if (isExistingFile && path != null && hasNameAndBucket) {
                     val extension = path.substringAfterLast(".", "")
                     // Check if the extension is one of the allowed types
-                    if (extension.lowercase(Locale.ROOT) !in arrayOf("jpg", "jpeg", "png", "svg",
-                            "gif", "tiff", "webp", "xcf")) {
+                    if (extension.lowercase(Locale.ROOT) !in
+                        arrayOf(
+                            "jpg",
+                            "jpeg",
+                            "png",
+                            "svg",
+                            "gif",
+                            "tiff",
+                            "webp",
+                            "xcf",
+                        )
+                    ) {
                         continue
                     }
 
