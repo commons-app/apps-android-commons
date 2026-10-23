@@ -4,6 +4,7 @@ import androidx.core.text.HtmlCompat
 import fr.free.nrw.commons.media.IdAndLabels
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
+import fr.free.nrw.commons.media.isFileDeletedOnCommons
 import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject
@@ -57,16 +58,24 @@ class MediaDataExtractor
             Single.ambArray(
                 mediaClient
                     .getMediaById(PAGE_ID_PREFIX + media.pageId)
-                    .onErrorResumeNext { Single.never() },
+                    .onErrorResumeNext(::keepGoingUnlessFileDeleted),
                 mediaClient
                     .getMediaSuppressingErrors(media.filename)
-                    .onErrorResumeNext { Single.never() },
+                    .onErrorResumeNext(::keepGoingUnlessFileDeleted),
             )
+
+        /**
+         * The two lookups race. Anything other than a deleted file stays silent so the other
+         * lookup can still win, and a network failure is not treated as a deletion.
+         */
+        private fun keepGoingUnlessFileDeleted(error: Throwable): Single<Media> =
+            if (error.isFileDeletedOnCommons()) Single.error(error) else Single.never()
 
         fun getHtmlOfPage(title: String) = mediaClient.getPageHtml(title)
 
         /**
          * Fetches wikitext from mediaClient
          */
-        fun getCurrentWikiText(title: String) = mediaClient.getCurrentWikiText(title)
+        fun getCurrentWikiText(title: String) =
+            mediaClient.getCurrentWikiText(title).map { it.orEmpty() }
     }
