@@ -76,6 +76,5 @@ class MediaDataExtractor
         /**
          * Fetches wikitext from mediaClient
          */
-        fun getCurrentWikiText(title: String) =
-            mediaClient.getCurrentWikiText(title).map { it.orEmpty() }
+        fun getCurrentWikiText(title: String) = mediaClient.getCurrentWikiText(title).map { it.orEmpty() }
     }
