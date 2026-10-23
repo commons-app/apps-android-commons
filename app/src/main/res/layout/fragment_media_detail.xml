@@ -93,6 +93,19 @@
                       tools:text="Title of the media" />
                 </LinearLayout>
 
+                <TextView
+                  android:id="@+id/deletedFileBanner"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="?attr/mediaDetailNominationBackground"
+                  android:gravity="center"
+                  android:padding="@dimen/quarter_standard_height"
+                  android:text="@string/file_deleted_from_commons"
+                  android:textColor="@color/primaryTextColor"
+                  android:textSize="@dimen/normal_text"
+                  android:textStyle="bold"
+                  android:visibility="gone" />
+
                 <LinearLayout
                   android:id="@+id/toDoLayout"
                   android:layout_width="match_parent"
