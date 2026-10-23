@@ -608,9 +608,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                     }
 
                     override fun reset() {
-                        presenter?.setAdvancedQuery(null.toString())
-                        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                        showHideAdvancedQueryFragment(false)
+                        resetAdvancedQuery()
                     }
 
                     override fun apply(query: String) {
@@ -1274,6 +1272,15 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
 
     override fun isAdvancedQueryFragmentVisible(): Boolean {
         return isAdvancedQueryFragmentVisible
+    }
+
+    /**
+     * Drops a custom Nearby query and loads places for the current map center again.
+     * The advanced query editor stays open so the restored query text remains visible.
+     */
+    fun resetAdvancedQuery() {
+        presenter?.setAdvancedQuery("")
+        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
     override fun showHideAdvancedQueryFragment(shouldShow: Boolean) {

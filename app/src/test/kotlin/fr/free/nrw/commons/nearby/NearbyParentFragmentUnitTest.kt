@@ -150,6 +150,13 @@ class NearbyParentFragmentUnitTest {
         )
     }
 
+    @Test
+    fun `reset advanced query reloads the default search and keeps the editor open`() {
+        fragment.resetAdvancedQuery()
+        verify(presenter).setAdvancedQuery("")
+        verify(presenter).updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
+
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without gps test when last location known`() {
