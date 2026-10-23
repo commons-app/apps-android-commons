@@ -148,7 +148,7 @@ class ReviewControllerTest {
             context.getString(
                 R.string.send_thank_toast,
                 media.displayTitle,
-                "test_user"
+                "test_user",
             ),
         )
 
