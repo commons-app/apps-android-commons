@@ -1,15 +1,5 @@
-app/build.gradle.kts
 app/src/androidTest/java/fr/free/nrw/commons/UploadCancelledTest.kt
 app/src/androidTest/java/fr/free/nrw/commons/WelcomeActivityTest.kt
-app/src/main/java/fr/free/nrw/commons/AboutActivity.kt
-app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt
-app/src/main/java/fr/free/nrw/commons/Media.kt
-app/src/main/java/fr/free/nrw/commons/MediaDataExtractor.kt
-app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt
-app/src/main/java/fr/free/nrw/commons/Urls.kt
-app/src/main/java/fr/free/nrw/commons/ViewPagerAdapter.kt
-app/src/main/java/fr/free/nrw/commons/WelcomeActivity.kt
-app/src/main/java/fr/free/nrw/commons/WelcomePagerAdapter.kt
 app/src/main/java/fr/free/nrw/commons/activity/SingleWebViewActivity.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkFragment.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkListRootFragment.kt
