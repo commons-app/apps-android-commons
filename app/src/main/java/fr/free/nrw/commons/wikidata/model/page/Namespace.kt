@@ -12,17 +12,21 @@ import fr.free.nrw.commons.wikidata.model.EnumCodeMap
  * @see [Manual:Namespace](https://www.mediawiki.org/wiki/Manual:Namespace.Built-in_namespaces)
  * @see [Namespaces reported by API](https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces|namespacealiases)](https://github.com/wikimedia/wikipedia-ios/blob/master/Wikipedia/Code/NSNumber+MWKTitleNamespace.h)
  */
-enum class Namespace(private val code: Int) : EnumCode {
+enum class Namespace(
+    private val code: Int,
+) : EnumCode {
     MEDIA(-2),
-    SPECIAL(-1) { override fun talk(): Boolean = false },
-    MAIN(0),  // Main or Article
+    SPECIAL(-1) {
+        override fun talk(): Boolean = false
+    },
+    MAIN(0), // Main or Article
     TALK(1),
     USER(2),
     USER_TALK(3),
-    PROJECT(4),  // WP alias
-    PROJECT_TALK(5),  // WT alias
-    FILE(6),  // Image alias
-    FILE_TALK(7),  // Image talk alias
+    PROJECT(4), // WP alias
+    PROJECT_TALK(5), // WT alias
+    FILE(6), // Image alias
+    FILE_TALK(7), // Image talk alias
     MEDIAWIKI(8),
     MEDIAWIKI_TALK(9),
     TEMPLATE(10),
@@ -129,7 +133,8 @@ enum class Namespace(private val code: Int) : EnumCode {
     GADGET_TALK(2301),
     GADGET_DEFINITION(2302),
     GADGET_DEFINITION_TALK(2303),
-    TOPIC(2600);
+    TOPIC(2600),
+    ;
 
     override fun code(): Int = code
 
