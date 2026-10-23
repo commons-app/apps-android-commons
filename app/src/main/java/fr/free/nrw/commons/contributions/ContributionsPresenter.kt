@@ -15,76 +15,81 @@ import javax.inject.Named
 /**
  * The presenter class for Contributions
  */
-class ContributionsPresenter @Inject internal constructor(
-    private val contributionsRepository: ContributionsRepository,
-    private val uploadRepository: UploadRepository,
-    @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
-) : ContributionsContract.UserActionListener {
-    private var compositeDisposable: CompositeDisposable? = null
-    private var view: ContributionsContract.View? = null
-
-    @JvmField
+class ContributionsPresenter
     @Inject
-    var mediaDataExtractor: MediaDataExtractor? = null
+    internal constructor(
+        private val contributionsRepository: ContributionsRepository,
+        private val uploadRepository: UploadRepository,
+        @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
+    ) : ContributionsContract.UserActionListener {
+        private var compositeDisposable: CompositeDisposable? = null
+        private var view: ContributionsContract.View? = null
 
-    override fun onAttachView(view: ContributionsContract.View) {
-        this.view = view
-        compositeDisposable = CompositeDisposable()
-    }
+        @JvmField
+        @Inject
+        var mediaDataExtractor: MediaDataExtractor? = null
 
-    override fun onDetachView() {
-        this.view = null
-        compositeDisposable!!.clear()
-    }
+        override fun onAttachView(view: ContributionsContract.View) {
+            this.view = view
+            compositeDisposable = CompositeDisposable()
+        }
 
-    override fun getContributionsWithTitle(title: String): Contribution {
-        return contributionsRepository.getContributionWithFileName(title)
-    }
+        override fun onDetachView() {
+            this.view = null
+            compositeDisposable!!.clear()
+        }
 
-    /**
-     * Checks if a contribution is a duplicate and restarts the contribution process if it is not.
-     *
-     * @param contribution The contribution to check and potentially restart.
-     */
-    fun checkDuplicateImageAndRestartContribution(contribution: Contribution) {
-        compositeDisposable!!.add(
-            uploadRepository
-                .checkDuplicateImage(
-                    contribution.contentUri,
-                    contribution.localUri)
-                .subscribeOn(ioThreadScheduler)
-                .subscribe { imageCheckResult: Int ->
-                    if (imageCheckResult == ImageUtils.IMAGE_OK) {
-                        contribution.state = Contribution.STATE_QUEUED
-                        saveContribution(contribution)
-                    } else {
-                        Timber.e("Contribution already exists")
-                        compositeDisposable!!.add(
-                            contributionsRepository
-                                .deleteContributionFromDB(contribution)
-                                .subscribeOn(ioThreadScheduler)
-                                .subscribe()
-                        )
-                    }
-                })
-    }
+        override fun getContributionsWithTitle(title: String): Contribution =
+            contributionsRepository.getContributionWithFileName(title)
 
-    /**
-     * Update the contribution's state in the databse, upon completion, trigger the workmanager to
-     * process this contribution
-     *
-     * @param contribution
-     */
-    fun saveContribution(contribution: Contribution) {
-        compositeDisposable!!.add(contributionsRepository
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe {
-                view!!.getContext()?.applicationContext?.let {
-                    makeOneTimeWorkRequest(
-                        it, ExistingWorkPolicy.KEEP
-                    )
-                }
-            })
+        /**
+         * Checks if a contribution is a duplicate and restarts the contribution process if it is not.
+         *
+         * @param contribution The contribution to check and potentially restart.
+         */
+        fun checkDuplicateImageAndRestartContribution(contribution: Contribution) {
+            compositeDisposable!!.add(
+                uploadRepository
+                    .checkDuplicateImage(
+                        contribution.contentUri,
+                        contribution.localUri,
+                    ).subscribeOn(ioThreadScheduler)
+                    .subscribe { imageCheckResult: Int ->
+                        if (imageCheckResult == ImageUtils.IMAGE_OK) {
+                            contribution.state = Contribution.STATE_QUEUED
+                            saveContribution(contribution)
+                        } else {
+                            Timber.e("Contribution already exists")
+                            compositeDisposable!!.add(
+                                contributionsRepository
+                                    .deleteContributionFromDB(contribution)
+                                    .subscribeOn(ioThreadScheduler)
+                                    .subscribe(),
+                            )
+                        }
+                    },
+            )
+        }
+
+        /**
+         * Update the contribution's state in the databse, upon completion, trigger the workmanager to
+         * process this contribution
+         *
+         * @param contribution
+         */
+        fun saveContribution(contribution: Contribution) {
+            compositeDisposable!!.add(
+                contributionsRepository
+                    .save(contribution)
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe {
+                        view!!.getContext()?.applicationContext?.let {
+                            makeOneTimeWorkRequest(
+                                it,
+                                ExistingWorkPolicy.KEEP,
+                            )
+                        }
+                    },
+            )
+        }
     }
-}

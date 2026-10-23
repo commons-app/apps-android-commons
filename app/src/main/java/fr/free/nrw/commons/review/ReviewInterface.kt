@@ -23,7 +23,9 @@ interface ReviewInterface {
     )
     fun getRecentChanges(): Observable<MwQueryResponse>
 
-    @GET("w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1",
+    )
     fun getFirstRevisionOfFile(
         @Query("titles") titles: String?,
     ): Observable<MwQueryResponse>

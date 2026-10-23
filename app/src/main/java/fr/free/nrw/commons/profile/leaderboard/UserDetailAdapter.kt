@@ -17,14 +17,17 @@ import java.util.Locale
 /**
  * This class extends RecyclerView.Adapter and creates the UserDetail section of the leaderboard
  */
-class UserDetailAdapter(private val leaderboardResponse: LeaderboardResponse) :
-    RecyclerView.Adapter<DataViewHolder>() {
+class UserDetailAdapter(
+    private val leaderboardResponse: LeaderboardResponse,
+) : RecyclerView.Adapter<DataViewHolder>() {
     /**
      * Stores the username of currently logged in user.
      */
     private var currentlyLoggedInUserName: String? = null
 
-    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class DataViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById(R.id.rank)
         val avatar: SimpleDraweeView = itemView.findViewById(R.id.avatar)
         val username: TextView = itemView.findViewById(R.id.username)
@@ -39,34 +42,41 @@ class UserDetailAdapter(private val leaderboardResponse: LeaderboardResponse) :
      */
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
-    ): DataViewHolder = DataViewHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.leaderboard_user_element, parent, false)
-    )
+        viewType: Int,
+    ): DataViewHolder =
+        DataViewHolder(
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.leaderboard_user_element, parent, false),
+        )
 
     /**
      * Overrides the onBindViewHolder Set the view at the specific position with the specific value
      * @param holder
      * @param position
      */
-    override fun onBindViewHolder(holder: DataViewHolder, position: Int) = with(holder) {
+    override fun onBindViewHolder(
+        holder: DataViewHolder,
+        position: Int,
+    ) = with(holder) {
         val resources = itemView.context.resources
 
         avatar.setImageURI(Uri.parse(leaderboardResponse.avatar))
         username.text = leaderboardResponse.username
-        rank.text = String.format(
-            Locale.getDefault(),
-            "%s %d",
-            resources.getString(R.string.rank_prefix),
-            leaderboardResponse.rank
-        )
-        count.text = String.format(
-            Locale.getDefault(),
-            "%s %d",
-            resources.getString(R.string.count_prefix),
-            leaderboardResponse.categoryCount
-        )
+        rank.text =
+            String.format(
+                Locale.getDefault(),
+                "%s %d",
+                resources.getString(R.string.rank_prefix),
+                leaderboardResponse.rank,
+            )
+        count.text =
+            String.format(
+                Locale.getDefault(),
+                "%s %d",
+                resources.getString(R.string.count_prefix),
+                leaderboardResponse.categoryCount,
+            )
 
         // When user tap on avatar shows the toast on how to change avatar
         // fixing: https://github.com/commons-app/apps-android-commons/issues/47747
@@ -80,9 +90,12 @@ class UserDetailAdapter(private val leaderboardResponse: LeaderboardResponse) :
         }
         if (currentlyLoggedInUserName != null && currentlyLoggedInUserName == leaderboardResponse.username) {
             avatar.setOnClickListener { v: View ->
-                Toast.makeText(
-                    v.context, R.string.set_up_avatar_toast_string, Toast.LENGTH_LONG
-                ).show()
+                Toast
+                    .makeText(
+                        v.context,
+                        R.string.set_up_avatar_toast_string,
+                        Toast.LENGTH_LONG,
+                    ).show()
             }
         }
     }

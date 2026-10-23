@@ -37,7 +37,6 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
@@ -156,13 +155,13 @@ class ExploreFragmentUnitTest {
         val menu: Menu = RoboMenu(context)
         fragment.onCreateOptionsMenu(menu, inflater)
 
-        val captor = ArgumentCaptor.forClass(
-            Int::class.java
-        )
+        val captor =
+            ArgumentCaptor.forClass(
+                Int::class.java,
+            )
         verify(inflater).inflate(captor.capture(), eq(menu))
 
         val capturedLayout = captor.value
         assertTrue(capturedLayout == R.menu.menu_search || capturedLayout == R.menu.explore_fragment_menu)
-
     }
 }

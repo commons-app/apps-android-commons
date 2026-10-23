@@ -17,7 +17,6 @@ import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.checkWhetherFileExistsOnCommonsUsingSHA1
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -338,7 +337,8 @@ class ImageLoader
         /**
          * Get the uploaded status entry from the database.
          */
-        suspend fun getFromUploaded(imageSha1: String): UploadedStatus? = uploadedStatusDao.getUploadedFromImageSHA1(imageSha1)
+        suspend fun getFromUploaded(imageSha1: String): UploadedStatus? =
+            uploadedStatusDao.getUploadedFromImageSHA1(imageSha1)
 
         /**
          * Insert into uploaded status table.
