@@ -4,10 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-
-import androidx.annotation.Nullable
 import androidx.recyclerview.widget.RecyclerView
-
 
 /**
  * Created by Ilgaz Er on 8/7/2018.
@@ -33,11 +30,15 @@ class HeightLimitedRecyclerView : RecyclerView {
         height = displayMetrics.heightPixels
     }
 
-    override fun onMeasure(widthSpec: Int, heightSpec: Int) {
-        val limitedHeightSpec = MeasureSpec.makeMeasureSpec(
-            (height * 0.3).toInt(),
-            MeasureSpec.AT_MOST
-        )
+    override fun onMeasure(
+        widthSpec: Int,
+        heightSpec: Int,
+    ) {
+        val limitedHeightSpec =
+            MeasureSpec.makeMeasureSpec(
+                (height * 0.3).toInt(),
+                MeasureSpec.AT_MOST,
+            )
         super.onMeasure(widthSpec, limitedHeightSpec)
     }
 }

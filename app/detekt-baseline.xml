@@ -31,7 +31,7 @@
     <ID>CyclomaticComplexMethod:NearbyParentFragment.kt$NearbyParentFragment$private fun passInfoToSheet(place: Place)</ID>
     <ID>CyclomaticComplexMethod:PageProperties.kt$PageProperties$override fun equals(o: Any?): Boolean</ID>
     <ID>CyclomaticComplexMethod:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun scanAndUpdateIfd( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
-    <ID>CyclomaticComplexMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
+    <ID>CyclomaticComplexMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences( savedInstanceState: Bundle?, rootKey: String?, )</ID>
     <ID>CyclomaticComplexMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
@@ -91,7 +91,7 @@
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
     <ID>FunctionNaming:MediaDetailFragment.kt$@Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
-    <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
+    <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable @Suppress("ktlint:standard:function-naming") private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
     <ID>FunctionParameterNaming:Converters.kt$Converters$`object`: Any?</ID>
@@ -145,11 +145,11 @@
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onViewCreated(view: View, savedInstanceState: Bundle?)</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$private fun passInfoToSheet(place: Place)</ID>
-    <ID>LongMethod:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getNearbyPlaces( queryParams: NearbyQueryParams, language: String, shouldQueryForMonuments: Boolean, customQuery: String? ): List&lt;Place&gt;?</ID>
+    <ID>LongMethod:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getNearbyPlaces( queryParams: NearbyQueryParams, language: String, shouldQueryForMonuments: Boolean, customQuery: String?, ): List&lt;Place&gt;?</ID>
     <ID>LongMethod:PendingUploadsPresenter.kt$PendingUploadsPresenter$fun restartUploads(contributionList: List&lt;Contribution&gt;, index: Int, context: Context)</ID>
     <ID>LongMethod:PlaceAdapterDelegate.kt$fun placeAdapterDelegate( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt; )</ID>
     <ID>LongMethod:ReviewImageFragment.kt$ReviewImageFragment$override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View?</ID>
-    <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
+    <ID>LongMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences( savedInstanceState: Bundle?, rootKey: String?, )</ID>
     <ID>LongMethod:SettingsFragment.kt$SettingsFragment$private fun prepareAppLanguages(keyListPreference: String)</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$fun proceedWithSetup()</ID>
     <ID>LongMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
@@ -859,7 +859,7 @@
     <ID>MaxLineLength:SearchActivity.kt$SearchActivity$// This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.</ID>
     <ID>MaxLineLength:SearchActivity.kt$SearchActivity$//FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>MaxLineLength:SearchModule.kt$SearchModule$abstract</ID>
-    <ID>MaxLineLength:SettingsFragment.kt$SettingsFragment.Companion$private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"</ID>
+    <ID>MaxLineLength:SettingsFragment.kt$SettingsFragment.Companion$private</ID>
     <ID>MaxLineLength:UploadActivity.kt$UploadActivity$if</ID>
     <ID>MaxLineLength:UploadCategoriesFragment.kt$UploadCategoriesFragment$((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE</ID>
     <ID>MaxLineLength:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$val holder = (activity!!.findViewById&lt;View&gt;(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?</ID>
@@ -910,8 +910,8 @@
     <ID>NestedBlockDepth:MwQueryResult.kt$MwQueryResult$private fun resolveRedirectedTitles()</ID>
     <ID>NestedBlockDepth:NearbyParentFragment.kt$NearbyParentFragment$override fun recenterMap(currentLatLng: LatLng?)</ID>
     <ID>NestedBlockDepth:OkHttpConnectionFactory.kt$UnsuccessfulResponseInterceptor$@Throws(IOException::class) override fun intercept(chain: Interceptor.Chain): Response</ID>
-    <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsGPX(leftLatLng: LatLng, rightLatLng: LatLng): String?</ID>
-    <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsKML(leftLatLng: LatLng, rightLatLng: LatLng): String?</ID>
+    <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsGPX( leftLatLng: LatLng, rightLatLng: LatLng, ): String?</ID>
+    <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsKML( leftLatLng: LatLng, rightLatLng: LatLng, ): String?</ID>
     <ID>NestedBlockDepth:OnSwipeTouchListener.kt$OnSwipeTouchListener.GestureListener$override fun onFling( event1: MotionEvent?, event2: MotionEvent, velocityX: Float, velocityY: Float, ): Boolean</ID>
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun encodeValue(type: Int, value: String, order: ByteOrder): ByteArray?</ID>
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun scanAndUpdateIfd( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
@@ -992,7 +992,7 @@
     <ID>ReturnCount:NetworkUtils.kt$NetworkUtils$@JvmStatic fun getNetworkType(context: Context): NetworkConnectionType</ID>
     <ID>ReturnCount:RecentLanguagesDao.kt$RecentLanguagesDao$fun findRecentLanguage(languageCode: String?): Boolean</ID>
     <ID>ReturnCount:RecentSearchesTable.kt$RecentSearchesTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
-    <ID>ReturnCount:SingleWebViewActivity.kt$SingleWebViewActivity.&lt;no name provided&gt;$override fun shouldOverrideUrlLoading( view: WebView?, request: WebResourceRequest? ): Boolean</ID>
+    <ID>ReturnCount:SingleWebViewActivity.kt$SingleWebViewActivity.&lt;no name provided&gt;$override fun shouldOverrideUrlLoading( view: WebView?, request: WebResourceRequest?, ): Boolean</ID>
     <ID>ReturnCount:StringSortingUtils.kt$StringSortingUtils$private fun levenshteinDistance(str1: String, str2: String): Int</ID>
     <ID>ReturnCount:StringUtil.kt$StringUtil$@JvmStatic fun fromHtml(source: String?): Spanned</ID>
     <ID>ReturnCount:UploadClient.kt$UploadClient$@Throws(IOException::class) fun uploadFileToStash( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, ): Observable&lt;StashUploadResult&gt;</ID>

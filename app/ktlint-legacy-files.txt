@@ -10,7 +10,6 @@ app/src/main/java/fr/free/nrw/commons/Urls.kt
 app/src/main/java/fr/free/nrw/commons/ViewPagerAdapter.kt
 app/src/main/java/fr/free/nrw/commons/WelcomeActivity.kt
 app/src/main/java/fr/free/nrw/commons/WelcomePagerAdapter.kt
-app/src/main/java/fr/free/nrw/commons/activity/SingleWebViewActivity.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkFragment.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkListRootFragment.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarkPages.kt
@@ -45,7 +44,6 @@ app/src/main/java/fr/free/nrw/commons/concurrency/BackgroundPoolExceptionHandler
 app/src/main/java/fr/free/nrw/commons/concurrency/ExceptionAwareThreadPoolExecutor.kt
 app/src/main/java/fr/free/nrw/commons/concurrency/ExceptionHandler.kt
 app/src/main/java/fr/free/nrw/commons/concurrency/ThreadPoolService.kt
-app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
 app/src/main/java/fr/free/nrw/commons/customselector/helper/FolderDeletionHelper.kt
 app/src/main/java/fr/free/nrw/commons/customselector/ui/adapter/ImageAdapter.kt
 app/src/main/java/fr/free/nrw/commons/customselector/ui/selector/CustomSelectorActivity.kt
@@ -59,8 +57,6 @@ app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt
 app/src/main/java/fr/free/nrw/commons/db/Converters.kt
 app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt
 app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt
-app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
-app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreFragment.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreListRootFragment.kt
 app/src/main/java/fr/free/nrw/commons/explore/ExploreMapRootFragment.kt
@@ -96,13 +92,9 @@ app/src/main/java/fr/free/nrw/commons/filepicker/FilePickerConfiguration.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/MimeTypeMapWrapper.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/PickedFiles.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/UploadableFile.kt
-app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesResponse.kt
-app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesUiModel.kt
-app/src/main/java/fr/free/nrw/commons/fileusages/GlobalFileUsagesResponse.kt
 app/src/main/java/fr/free/nrw/commons/kvstore/BasicKvStore.kt
 app/src/main/java/fr/free/nrw/commons/kvstore/JsonKvStore.kt
 app/src/main/java/fr/free/nrw/commons/kvstore/KeyValueStore.kt
-app/src/main/java/fr/free/nrw/commons/language/AppLanguageLookUpTable.kt
 app/src/main/java/fr/free/nrw/commons/logging/CommonsLogSender.kt
 app/src/main/java/fr/free/nrw/commons/logging/FileLoggingTree.kt
 app/src/main/java/fr/free/nrw/commons/logging/LogLevelSettableTree.kt
@@ -130,9 +122,6 @@ app/src/main/java/fr/free/nrw/commons/media/zoomControllers/zoomable/MultiGestur
 app/src/main/java/fr/free/nrw/commons/media/zoomControllers/zoomable/MultiZoomableControllerListener.kt
 app/src/main/java/fr/free/nrw/commons/media/zoomControllers/zoomable/ZoomableController.kt
 app/src/main/java/fr/free/nrw/commons/media/zoomControllers/zoomable/ZoomableDraweeView.kt
-app/src/main/java/fr/free/nrw/commons/mwapi/CategoryApi.kt
-app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt
-app/src/main/java/fr/free/nrw/commons/mwapi/UserInterface.kt
 app/src/main/java/fr/free/nrw/commons/navtab/MoreBottomSheetFragment.kt
 app/src/main/java/fr/free/nrw/commons/navtab/MoreBottomSheetLoggedOutFragment.kt
 app/src/main/java/fr/free/nrw/commons/navtab/NavTab.kt
@@ -167,11 +156,6 @@ app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesDao.kt
 app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesRoomDao.kt
 app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguagesTable.kt
 app/src/main/java/fr/free/nrw/commons/repository/UploadRepository.kt
-app/src/main/java/fr/free/nrw/commons/settings/SettingsActivity.kt
-app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt
-app/src/main/java/fr/free/nrw/commons/theme/BaseActivity.kt
-app/src/main/java/fr/free/nrw/commons/ui/PasteSensitiveTextInputEditText.kt
-app/src/main/java/fr/free/nrw/commons/ui/widget/HtmlTextView.kt
 app/src/main/java/fr/free/nrw/commons/upload/Description.kt
 app/src/main/java/fr/free/nrw/commons/upload/EXIFReader.kt
 app/src/main/java/fr/free/nrw/commons/upload/FailedUploadsAdapter.kt
@@ -258,9 +242,6 @@ app/src/main/java/fr/free/nrw/commons/utils/UnderlineUtils.kt
 app/src/main/java/fr/free/nrw/commons/utils/UrlUtils.kt
 app/src/main/java/fr/free/nrw/commons/utils/ViewUtil.kt
 app/src/main/java/fr/free/nrw/commons/utils/ViewUtilWrapper.kt
-app/src/main/java/fr/free/nrw/commons/widget/HeightLimitedRecyclerView.kt
-app/src/main/java/fr/free/nrw/commons/widget/PicOfDayAppWidget.kt
-app/src/main/java/fr/free/nrw/commons/widget/ViewHolder.kt
 app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt
 app/src/main/java/fr/free/nrw/commons/wikidata/GsonUtil.kt
 app/src/main/java/fr/free/nrw/commons/wikidata/WikidataEditService.kt
@@ -296,7 +277,6 @@ app/src/main/java/fr/free/nrw/commons/wikidata/mwapi/UserInfo.kt
 app/src/test/kotlin/fr/free/nrw/commons/MockWebServerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/OkHttpJsonApiClientTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/TestCommonsApplication.kt
-app/src/test/kotlin/fr/free/nrw/commons/actions/ThanksClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookMarkLocationDaoTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationControllerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationFragmentUnitTests.kt
@@ -312,15 +292,12 @@ app/src/test/kotlin/fr/free/nrw/commons/db/RecentLanguagesTableTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/db/RecentSearchesTableTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/delete/ReasonBuilderTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/description/DescriptionEditHelperUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/explore/ExploreFragmentUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/explore/media/MediaConverterTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/filepicker/FilePickerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/filepicker/ShadowFileProvider.kt
 app/src/test/kotlin/fr/free/nrw/commons/kvstore/BasicKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/kvstore/JsonKvStoreTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaDetailFragmentUnitTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/navtab/MoreBottomSheetFragmentUnitTests.kt

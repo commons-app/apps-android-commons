@@ -58,9 +58,8 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class SettingsFragment : PreferenceFragmentCompat() {
-
     @Inject
-    @field: Named("default_preferences")
+    @field:Named("default_preferences")
     lateinit var defaultKvStore: JsonKvStore
 
     @Inject
@@ -89,25 +88,29 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
-        contributionController.handleActivityResultWithCallback(
-            requireActivity(),
-            object: FilePicker.HandleActivityResult {
-                override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                    contributionController.onPictureReturnedFromCamera(
-                        result,
-                        requireActivity(),
-                        callbacks
-                    )
-                }
-        })
-    }
+            contributionController.handleActivityResultWithCallback(
+                requireActivity(),
+                object : FilePicker.HandleActivityResult {
+                    override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
+                        contributionController.onPictureReturnedFromCamera(
+                            result,
+                            requireActivity(),
+                            callbacks,
+                        )
+                    }
+                },
+            )
+        }
 
     /**
      * to be called when the fragment creates preferences
      * @param savedInstanceState the previously saved state
      * @param rootKey the root key for preferences
      */
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         ApplicationlessInjection
             .getInstance(requireActivity().applicationContext)
             .commonsApplicationComponent
@@ -121,30 +124,29 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         vanishAccountPreference = findPreference(Prefs.VANISHED_ACCOUNT)
         vanishAccountPreference?.setOnPreferenceClickListener {
-            AlertDialog.Builder(requireContext())
+            AlertDialog
+                .Builder(requireContext())
                 .setTitle(R.string.account_vanish_request_confirm_title)
                 .setMessage(StringUtil.fromHtml(getString(R.string.account_vanish_request_confirm)))
-                .setNegativeButton(R.string.cancel){ dialog,_ ->
+                .setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog.dismiss()
-                }
-                .setPositiveButton(R.string.vanish_account) { dialog, _ ->
+                }.setPositiveButton(R.string.vanish_account) { dialog, _ ->
                     SingleWebViewActivity.showWebView(
                         context = requireActivity(),
                         url = VANISH_ACCOUNT_URL,
-                        successUrl = VANISH_ACCOUNT_SUCCESS_URL
+                        successUrl = VANISH_ACCOUNT_SUCCESS_URL,
                     )
                     dialog.dismiss()
-                }
-                .show()
+                }.show()
             true
         }
 
-        val multiSelectListPref: MultiSelectListPreference? = findPreference(
-            Prefs.MANAGED_EXIF_TAGS
-        )
+        val multiSelectListPref: MultiSelectListPreference? =
+            findPreference(
+                Prefs.MANAGED_EXIF_TAGS,
+            )
         multiSelectListPref?.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue is HashSet<*> && !newValue.contains(getString(R.string.exif_tag_location)))
-            {
+            if (newValue is HashSet<*> && !newValue.contains(getString(R.string.exif_tag_location))) {
                 defaultKvStore.putBoolean("has_user_manually_removed_location", true)
             }
             true
@@ -159,25 +161,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        inAppCameraLocationPermissionLauncher = registerForActivityResult(
-            RequestMultiplePermissions()
-        ) { result ->
-            var areAllGranted = true
-            for (b in result.values) {
-                areAllGranted = areAllGranted && b
+        inAppCameraLocationPermissionLauncher =
+            registerForActivityResult(
+                RequestMultiplePermissions(),
+            ) { result ->
+                var areAllGranted = true
+                for (b in result.values) {
+                    areAllGranted = areAllGranted && b
+                }
+                if (
+                    !areAllGranted &&
+                    shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
+                ) {
+                    contributionController.handleShowRationaleFlowCameraLocation(
+                        requireActivity(),
+                        inAppCameraLocationPermissionLauncher,
+                        cameraPickLauncherForResult,
+                    )
+                }
             }
-            if (
-                !areAllGranted
-                    &&
-                shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
-            ) {
-                contributionController.handleShowRationaleFlowCameraLocation(
-                    requireActivity(),
-                    inAppCameraLocationPermissionLauncher,
-                    cameraPickLauncherForResult
-                )
-            }
-        }
 
         // Gets current language code from shared preferences
         var languageCode: String?
@@ -217,9 +219,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 } else {
                     // If any language is selected by user previously, use it
                     val defLocale = createLocale(code)
-                    descriptionLanguageListPreference.summary = defLocale.getDisplayLanguage(
-                        defLocale
-                    )
+                    descriptionLanguageListPreference.summary =
+                        defLocale.getDisplayLanguage(
+                            defLocale,
+                        )
                 }
             }
 
@@ -241,7 +244,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         betaTesterPreference?.setOnPreferenceClickListener {
             handleWebUrl(
                 requireActivity(),
-                Uri.parse(getString(R.string.beta_opt_in_link))
+                Uri.parse(getString(R.string.beta_opt_in_link)),
             )
             true
         }
@@ -252,9 +255,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        val documentBasedPickerPreference: Preference? = findPreference(
-            "openDocumentPhotoPickerPref"
-        )
+        val documentBasedPickerPreference: Preference? =
+            findPreference(
+                "openDocumentPhotoPickerPref",
+            )
         documentBasedPickerPreference?.setOnPreferenceChangeListener { _, newValue ->
             val isGetContentPickerTurnedOn = newValue as Boolean
             if (!isGetContentPickerTurnedOn) {
@@ -300,7 +304,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.read_help_link),
             { },
             { handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
-            null
+            null,
         )
     }
 
@@ -309,16 +313,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
     // but it appears to be the most robust way to do this at the moment,
     // disable the warning.
     @SuppressLint("RestrictedApi")
-    override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
-    {
-        return object : PreferenceGroupAdapter(preferenceScreen) {
-            override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
+    override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder> =
+        object : PreferenceGroupAdapter(preferenceScreen) {
+            override fun onBindViewHolder(
+                holder: PreferenceViewHolder,
+                position: Int,
+            ) {
                 super.onBindViewHolder(holder, position)
                 val iconFrame: View? = holder.itemView.findViewById(R.id.icon_frame)
                 iconFrame?.visibility = View.GONE
             }
         }
-    }
 
     /**
      * Sets the theme pref
@@ -366,7 +371,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         dialog.setCancelable(false)
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
-            (resources.displayMetrics.heightPixels * 0.90).toInt()
+            (resources.displayMetrics.heightPixels * 0.90).toInt(),
         )
         dialog.show()
 
@@ -383,17 +388,29 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         cancelButton.setOnClickListener { dialog.dismiss() }
 
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
-                hideRecentLanguagesSection()
-            }
+        editText.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    charSequence: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    hideRecentLanguagesSection()
+                }
 
-            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
-                languagesAdapter.filter.filter(charSequence)
-            }
+                override fun onTextChanged(
+                    charSequence: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    languagesAdapter.filter.filter(charSequence)
+                }
 
-            override fun afterTextChanged(editable: Editable?) {}
-        })
+                override fun afterTextChanged(editable: Editable?) {}
+            },
+        )
 
         languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
             onRecentLanguageClicked(keyListPreference, dialog, adapterView, position)
@@ -416,8 +433,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 requireActivity().finish()
                 startActivity(intent)
-            }
-                else {
+            } else {
                 descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
             }
             dialog.dismiss()
@@ -434,7 +450,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
      */
     private fun setUpRecentLanguagesSection(
         recentLanguages: List<Language>,
-        selectedLanguages: HashMap<Int, String>
+        selectedLanguages: HashMap<Int, String>,
     ) {
         if (recentLanguages.isEmpty()) {
             languageHistoryListView?.visibility = View.GONE
@@ -449,11 +465,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             languageHistoryListView?.visibility = View.VISIBLE
             recentLanguagesTextView?.visibility = View.VISIBLE
             separator?.visibility = View.VISIBLE
-            val recentLanguagesAdapter = RecentLanguagesAdapter(
-                requireActivity(),
-                recentLanguagesDao.getRecentLanguages(),
-                selectedLanguages
-            )
+            val recentLanguagesAdapter =
+                RecentLanguagesAdapter(
+                    requireActivity(),
+                    recentLanguagesDao.getRecentLanguages(),
+                    selectedLanguages,
+                )
             languageHistoryListView?.adapter = recentLanguagesAdapter
         }
     }
@@ -465,7 +482,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         keyListPreference: String,
         dialog: Dialog,
         adapterView: AdapterView<*>,
-        position: Int
+        position: Int,
     ) {
         val recentLanguageCode = (adapterView.adapter as RecentLanguagesAdapter).getLanguageCode(position)
         val recentLanguageName = (adapterView.adapter as RecentLanguagesAdapter).getLanguageName(position)
@@ -500,7 +517,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
-    fun setLocale(activity: Activity, userSelectedValue: String) {
+    fun setLocale(
+        activity: Activity,
+        userSelectedValue: String,
+    ) {
         var selectedLanguage = userSelectedValue
         if (selectedLanguage == "") {
             selectedLanguage = Locale.getDefault().language
@@ -509,7 +529,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         Locale.setDefault(locale)
         val configuration = Configuration()
         configuration.locale = locale
-        activity.baseContext.resources.updateConfiguration(configuration, activity.baseContext.resources.displayMetrics)
+        activity.baseContext.resources.updateConfiguration(
+            configuration,
+            activity.baseContext.resources.displayMetrics,
+        )
 
         val editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit()
         editor.putString("language", selectedLanguage)
@@ -520,7 +543,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     companion object {
         const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
+
+        // Kept on one line so the URL stays searchable.
+        @Suppress("ktlint:standard:max-line-length")
         private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
+
         /**
          * Create Locale based on different types of language codes
          * @param languageCode
@@ -542,7 +569,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
      * @param userSelectedValue
      * @param preferenceKey
      */
-    private fun saveLanguageValue(userSelectedValue: String, preferenceKey: String) {
+    private fun saveLanguageValue(
+        userSelectedValue: String,
+        preferenceKey: String,
+    ) {
         when (preferenceKey) {
             "appUiDefaultLanguagePref" -> defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue)
             "descriptionDefaultLanguagePref" -> defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue)
@@ -554,17 +584,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
      * @param preferenceKey
      * @return
      */
-    private fun getCurrentLanguageCode(preferenceKey: String): String? {
-        return when (preferenceKey) {
-            "appUiDefaultLanguagePref" -> defaultKvStore.getString(
-                Prefs.APP_UI_LANGUAGE, ""
-            )
-            "descriptionDefaultLanguagePref" -> defaultKvStore.getString(
-                Prefs.DESCRIPTION_LANGUAGE, ""
-            )
+    private fun getCurrentLanguageCode(preferenceKey: String): String? =
+        when (preferenceKey) {
+            "appUiDefaultLanguagePref" ->
+                defaultKvStore.getString(
+                    Prefs.APP_UI_LANGUAGE,
+                    "",
+                )
+            "descriptionDefaultLanguagePref" ->
+                defaultKvStore.getString(
+                    Prefs.DESCRIPTION_LANGUAGE,
+                    "",
+                )
             else -> null
         }
-    }
 
     /**
      * First checks for external storage permissions and then sends logs via email
@@ -573,7 +606,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         if (
             PermissionUtils.hasPermission(
                 requireActivity(),
-                PermissionUtils.PERMISSIONS_STORAGE
+                PermissionUtils.PERMISSIONS_STORAGE,
             )
         ) {
             commonsLogSender.sendWithNullable(requireActivity(), null)
@@ -587,21 +620,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
      * started
      */
     private fun requestExternalStoragePermissions() {
-        Dexter.withActivity(requireActivity())
+        Dexter
+            .withActivity(requireActivity())
             .withPermissions(*PermissionUtils.PERMISSIONS_STORAGE)
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    ViewUtil.showLongToast(requireActivity(), getString(R.string.log_collection_started))
-                }
+            .withListener(
+                object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                        ViewUtil.showLongToast(requireActivity(), getString(R.string.log_collection_started))
+                    }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest>, token: PermissionToken
-                ) {
-                    // No action needed
-                }
-            })
-            .onSameThread()
+                    override fun onPermissionRationaleShouldBeShown(
+                        permissions: List<PermissionRequest>,
+                        token: PermissionToken,
+                    ) {
+                        // No action needed
+                    }
+                },
+            ).onSameThread()
             .check()
     }
-
 }
