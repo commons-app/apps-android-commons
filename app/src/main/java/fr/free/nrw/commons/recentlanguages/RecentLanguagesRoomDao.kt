@@ -8,7 +8,6 @@ import io.reactivex.Single
 
 @Dao
 interface RecentLanguagesRoomDao {
-
     @Query("SELECT * FROM recent_languages ORDER BY rowid DESC")
     fun getAll(): Single<List<RecentLanguageRoomEntity>>
 

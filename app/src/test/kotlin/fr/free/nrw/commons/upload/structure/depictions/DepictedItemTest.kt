@@ -187,11 +187,13 @@ class DepictedItemTest {
         Assert.assertEquals(
             DepictedItem(
                 entity(
-                    statements = mapOf(
-                        WikidataProperties.IMAGE.propertyName to listOf(
-                            statement(snak(dataValue = valueString("prefix: example_image name"))),
+                    statements =
+                        mapOf(
+                            WikidataProperties.IMAGE.propertyName to
+                                listOf(
+                                    statement(snak(dataValue = valueString("prefix: example_image name"))),
+                                ),
                         ),
-                    ),
                 ),
             ).primaryImage,
             "_example_image_name",
