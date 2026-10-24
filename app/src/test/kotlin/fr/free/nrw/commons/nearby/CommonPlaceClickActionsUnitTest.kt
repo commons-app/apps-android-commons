@@ -36,6 +36,9 @@ class CommonPlaceClickActionsUnitTest {
     @Mock
     private lateinit var uri: Uri
 
+    @Mock
+    private lateinit var launcher: androidx.activity.result.ActivityResultLauncher<android.content.Intent>
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -59,6 +62,17 @@ class CommonPlaceClickActionsUnitTest {
         Assert.assertNotNull(commonPlaceClickActions.onBookmarkLongPressed())
         Assert.assertNotNull(commonPlaceClickActions.onDirectionsLongPressed())
         Assert.assertNotNull(commonPlaceClickActions.onOverflowLongPressed())
+    }
+
+    @Test
+    fun testOnGalleryClicked() {
+        val onGalleryClicked = commonPlaceClickActions.onGalleryClicked()
+        onGalleryClicked(place, launcher)
+        com.nhaarman.mockitokotlin2.verify(contributionController).initiateGalleryPick(
+            com.nhaarman.mockitokotlin2.any(),
+            com.nhaarman.mockitokotlin2.eq(launcher),
+            com.nhaarman.mockitokotlin2.eq(true)
+        )
     }
 
     @Test
