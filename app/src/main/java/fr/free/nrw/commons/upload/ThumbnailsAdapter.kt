@@ -78,7 +78,10 @@ internal class ThumbnailsAdapter(
             }
 
             ivCross.setOnClickListener {
-                onThumbnailDeletedListener?.onThumbnailDeleted(position)
+                val currentPosition = bindingAdapterPosition
+                if (currentPosition != RecyclerView.NO_POSITION) {
+                    onThumbnailDeletedListener?.onThumbnailDeleted(currentPosition)
+                }
             }
         }
     }
