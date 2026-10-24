@@ -9,7 +9,9 @@ object PlaceUtils {
 
     @JvmStatic
     fun latLngFromPointString(pointString: String): LatLng? {
-        val matcher = Regex("Point\\(([^ ]+) ([^ ]+)\\)").find(pointString) ?: return null
+        // QLever returns "POINT(...)"; Blazegraph returns "Point(...)".
+        val matcher = Regex("Point\\(([^ ]+) ([^ ]+)\\)", RegexOption.IGNORE_CASE).find(pointString)
+            ?: return null
         return try {
             val longitude = matcher.groupValues[1].toDouble()
             val latitude = matcher.groupValues[2].toDouble()

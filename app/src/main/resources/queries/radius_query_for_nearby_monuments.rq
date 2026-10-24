@@ -1,25 +1,27 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
 SELECT
   ?item
-  (SAMPLE(?location) as ?location)
-  (SAMPLE(?monument) AS ?monument)
+  (SAMPLE(?locationValue) AS ?location)
+  (SAMPLE(?monumentValue) AS ?monument)
 WHERE {
-  # Around given location.
-  SERVICE wikibase:around {
-    ?item wdt:P625 ?location.
-    bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral.
-    bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
-  }
+  # Kilometers from the center. QLever uses its spatial index for this comparison.
+  ?item wdt:P625 ?locationValue .
+  BIND(geof:distance("Point(${LONG} ${LAT})"^^geo:wktLiteral, ?locationValue) AS ?dist)
+  FILTER(?dist <= ${RAD})
 
   # Wiki Loves Monuments
-  OPTIONAL {?item p:P1435 ?monument}
-  OPTIONAL {?item p:P2186 ?monument}
-  OPTIONAL {?item p:P1459 ?monument}
-  OPTIONAL {?item p:P1460 ?monument}
-  OPTIONAL {?item p:P1216 ?monument}
-  OPTIONAL {?item p:P709 ?monument}
-  OPTIONAL {?item p:P718 ?monument}
-  OPTIONAL {?item p:P5694 ?monument}
-  OPTIONAL {?item p:P3426 ?monument}
-
+  OPTIONAL {?item p:P1435 ?monumentValue}
+  OPTIONAL {?item p:P2186 ?monumentValue}
+  OPTIONAL {?item p:P1459 ?monumentValue}
+  OPTIONAL {?item p:P1460 ?monumentValue}
+  OPTIONAL {?item p:P1216 ?monumentValue}
+  OPTIONAL {?item p:P709 ?monumentValue}
+  OPTIONAL {?item p:P718 ?monumentValue}
+  OPTIONAL {?item p:P5694 ?monumentValue}
+  OPTIONAL {?item p:P3426 ?monumentValue}
 }
 GROUP BY ?item

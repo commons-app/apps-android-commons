@@ -1,56 +1,70 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
 SELECT
   ?item
-  (SAMPLE(?location) as ?location)
-  (SAMPLE(?label) AS ?label)
-  (SAMPLE(?description) AS ?description)
-  (SAMPLE(?class) AS ?class)
-  (SAMPLE(?classLabel) AS ?classLabel)
-  (SAMPLE(?pic) AS ?pic)
-  (SAMPLE(?destroyed) AS ?destroyed)
-  (SAMPLE(?endTime) AS ?endTime)
-  (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
-  (SAMPLE(?commonsArticle) AS ?commonsArticle)
-  (SAMPLE(?commonsCategory) AS ?commonsCategory)
+  (SAMPLE(?locationValue) AS ?location)
+  (SAMPLE(?labelValue) AS ?label)
+  (SAMPLE(?descriptionValue) AS ?description)
+  (SAMPLE(?classValue) AS ?class)
+  (SAMPLE(?classLabelValue) AS ?classLabel)
+  (SAMPLE(?picValue) AS ?pic)
+  (SAMPLE(?destroyedValue) AS ?destroyed)
+  (SAMPLE(?endTimeValue) AS ?endTime)
+  (SAMPLE(?wikipediaArticleValue) AS ?wikipediaArticle)
+  (SAMPLE(?commonsArticleValue) AS ?commonsArticle)
+  (SAMPLE(?commonsCategoryValue) AS ?commonsCategory)
 WHERE {
-  # Around given location
-  SERVICE wikibase:around {
-    ?item wdt:P625 ?location.
-    bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral. # Longitude latitude
-    bd:serviceParam wikibase:radius "${RAD}". # Radius in kilometers.
-  }
+  # Kilometers from the center. QLever uses its spatial index for this comparison.
+  ?item wdt:P625 ?locationValue .
+  BIND(geof:distance("Point(${LONG} ${LAT})"^^geo:wktLiteral, ?locationValue) AS ?dist)
+  FILTER(?dist <= ${RAD})
 
   OPTIONAL {
-  ?item p:P31/ps:P31 ?class.
+  ?item p:P31/ps:P31 ?classValue.
   }
 
   # Get picture
-  OPTIONAL {?item wdt:P18 ?pic}
+  OPTIONAL {?item wdt:P18 ?picValue}
 
   # Get existence
-  OPTIONAL {?item wdt:P576 ?destroyed}
-  OPTIONAL {?item wdt:P582 ?endTime}
+  OPTIONAL {?item wdt:P576 ?destroyedValue}
+  OPTIONAL {?item wdt:P582 ?endTimeValue}
 
   # Get Commons category
-  OPTIONAL {?item wdt:P373 ?commonsCategory}
+  OPTIONAL {?item wdt:P373 ?commonsCategoryValue}
 
   # Get Wikipedia article
   OPTIONAL {
-    ?wikipediaArticle schema:about ?item.
-    ?wikipediaArticle schema:isPartOf <https://${LANG}.wikipedia.org/>.
+    ?wikipediaArticleValue schema:about ?item.
+    ?wikipediaArticleValue schema:isPartOf <https://${LANG}.wikipedia.org/>.
   }
 
   # Get Commons article
   OPTIONAL {
-    ?commonsArticle schema:about ?item.
-    ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
+    ?commonsArticleValue schema:about ?item.
+    ?commonsArticleValue schema:isPartOf <https://commons.wikimedia.org/>.
   }
 
-  # Labels and descriptions
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "${LANG},${FALLBACK_LANGUAGES}".
-    ?item rdfs:label ?label.
-    ?item schema:description ?description.
-    ?class rdfs:label ?classLabel.
-  }
+  # User language, then English, then mul. One OPTIONAL per fallback language exhausts QLever.
+  OPTIONAL {?item rdfs:label ?labelUser . FILTER(LANG(?labelUser) = "${LANG}")}
+  OPTIONAL {?item rdfs:label ?labelEn . FILTER(LANG(?labelEn) = "en")}
+  OPTIONAL {?item rdfs:label ?labelMul . FILTER(LANG(?labelMul) = "mul")}
+  BIND(COALESCE(?labelUser, ?labelEn, ?labelMul) AS ?labelValue)
+
+  OPTIONAL {?item schema:description ?descriptionUser . FILTER(LANG(?descriptionUser) = "${LANG}")}
+  OPTIONAL {?item schema:description ?descriptionEn . FILTER(LANG(?descriptionEn) = "en")}
+  OPTIONAL {?item schema:description ?descriptionMul . FILTER(LANG(?descriptionMul) = "mul")}
+  BIND(COALESCE(?descriptionUser, ?descriptionEn, ?descriptionMul) AS ?descriptionValue)
+
+  OPTIONAL {?classValue rdfs:label ?classLabelUser . FILTER(LANG(?classLabelUser) = "${LANG}")}
+  OPTIONAL {?classValue rdfs:label ?classLabelEn . FILTER(LANG(?classLabelEn) = "en")}
+  OPTIONAL {?classValue rdfs:label ?classLabelMul . FILTER(LANG(?classLabelMul) = "mul")}
+  BIND(COALESCE(?classLabelUser, ?classLabelEn, ?classLabelMul) AS ?classLabelValue)
 }
 GROUP BY ?item
