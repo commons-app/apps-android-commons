@@ -2,17 +2,10 @@ package fr.free.nrw.commons.upload.license
 
 import android.app.Activity
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.SpannableStringBuilder
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.URLSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding
@@ -127,49 +120,6 @@ class MediaLicenseFragment :
         selectedLicense: String?,
         numberOfItems: Int,
     ) {}
-
-    private fun setTextViewHTML(
-        textView: TextView,
-        text: String,
-    ) {
-        val sequence: CharSequence =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
-            } else {
-                Html.fromHtml(text)
-            }
-        val strBuilder = SpannableStringBuilder(sequence)
-        val urls =
-            strBuilder.getSpans(
-                0,
-                sequence.length,
-                URLSpan::class.java,
-            )
-        for (span in urls) {
-            makeLinkClickable(strBuilder, span)
-        }
-        textView.text = strBuilder
-        textView.movementMethod = LinkMovementMethod.getInstance()
-    }
-
-    private fun makeLinkClickable(
-        strBuilder: SpannableStringBuilder,
-        span: URLSpan,
-    ) {
-        val start = strBuilder.getSpanStart(span)
-        val end = strBuilder.getSpanEnd(span)
-        val flags = strBuilder.getSpanFlags(span)
-        val clickable: ClickableSpan =
-            object : ClickableSpan() {
-                override fun onClick(view: View) {
-                    // Handle hyperlink click
-                    val hyperLink = span.url
-                    launchBrowser(hyperLink)
-                }
-            }
-        strBuilder.setSpan(clickable, start, end, flags)
-        strBuilder.removeSpan(span)
-    }
 
     private fun launchBrowser(hyperLink: String) = handleWebUrl(requireContext(), Uri.parse(hyperLink))
 

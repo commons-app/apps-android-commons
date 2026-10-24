@@ -89,7 +89,7 @@
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
-    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
+    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Suppress("UnusedPrivateMember") @Preview @Composable private fun CategoryItemPreview()</ID>
     <ID>FunctionNaming:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
     <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
@@ -767,7 +767,6 @@
     <ID>MaxLineLength:ExploreMapController.kt$ExploreMapController$// Our radius searched around us, will be used to understand when user search their own location, we will follow them</ID>
     <ID>MaxLineLength:FileUtilsTest.kt$FileUtilsTest$"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream()</ID>
     <ID>MaxLineLength:Image.kt$Image$uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)</ID>
-    <ID>MaxLineLength:ImageInfo.kt$ImageInfo$// If thumbWidthRetrieved is same as queried width ( If not tells us that the image has no larger dimensions. )</ID>
     <ID>MaxLineLength:ImageUtils.kt$ImageUtils$if</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark1.jpg"), ImageUtils.IMAGE_DARK)</ID>
     <ID>MaxLineLength:ImageUtilsTest.kt$ImageUtilsTest$Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark2.jpg"), ImageUtils.IMAGE_DARK)</ID>
@@ -963,7 +962,6 @@
     <ID>SwallowedException:ExploreMapController.kt$ExploreMapController.Companion$e: Resources.NotFoundException</ID>
     <ID>SwallowedException:JsonKvStore.kt$JsonKvStore$e: JsonSyntaxException</ID>
     <ID>SwallowedException:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:MoreBottomSheetFragment.kt$MoreBottomSheetFragment$e: ActivityNotFoundException</ID>
     <ID>SwallowedException:MoreBottomSheetLoggedOutFragment.kt$MoreBottomSheetLoggedOutFragment$e: ActivityNotFoundException</ID>
     <ID>SwallowedException:NearbyParentFragment.kt$NearbyParentFragment$e: ActivityNotFoundException</ID>
     <ID>SwallowedException:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
@@ -1089,7 +1087,6 @@
     <ID>TooManyFunctions:ImageAdapter.kt$ImageAdapter : AdapterSectionedAdapter</ID>
     <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
     <ID>TooManyFunctions:ImageInfo.kt$ImageInfo : Serializable</ID>
-    <ID>TooManyFunctions:ImageUtils.kt$ImageUtils</ID>
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
@@ -1100,7 +1097,6 @@
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentOnPageChangeListenerCallback</ID>
     <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
-    <ID>TooManyFunctions:MediaLicenseFragment.kt$MediaLicenseFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:MoreBottomSheetFragment.kt$MoreBottomSheetFragment : BottomSheetDialogFragment</ID>
     <ID>TooManyFunctions:MultiGestureListener.kt$MultiGestureListener : SimpleOnGestureListener</ID>
     <ID>TooManyFunctions:MultiPointerGestureDetector.kt$MultiPointerGestureDetector</ID>
@@ -1138,34 +1134,6 @@
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
     <ID>TopLevelPropertyNaming:Monuments.kt$/** * Get the start date of wlm monument * For this release we are hardcoding it to be 1st September * @return */ const val wLMStartDate: String = "1 Sep"</ID>
     <ID>TopLevelPropertyNaming:Monuments.kt$/*** * Get the end date of wlm monument * For this release we are hardcoding it to be 31st October * @return */ const val wLMEndDate: String = "30 Sep"</ID>
-    <ID>UnusedParameter:AboutActivity.kt$AboutActivity$view: View?</ID>
-    <ID>UnusedParameter:BasicKvStore.kt$BasicKvStore$oldVersion: Int</ID>
-    <ID>UnusedParameter:BasicKvStore.kt$BasicKvStore$version: Int</ID>
-    <ID>UnusedParameter:DescriptionEditActivity.kt$DescriptionEditActivity$view: View</ID>
-    <ID>UnusedParameter:ExploreMapFragment.kt$ExploreMapFragment$location: Location?</ID>
-    <ID>UnusedParameter:LoginActivity.kt$LoginActivity$textView: TextView</ID>
-    <ID>UnusedParameter:NearbyParentFragment.kt$NearbyParentFragment$entity: String?</ID>
-    <ID>UnusedParameter:NearbyParentFragment.kt$NearbyParentFragment$shouldUpdateSelectedMarker: Boolean</ID>
-    <ID>UnusedParameter:ReviewActivity.kt$ReviewActivity.Companion$title: String</ID>
-    <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$projection: Array&lt;String&gt;?</ID>
-    <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$selection: String?</ID>
-    <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$selectionArgs: Array&lt;String&gt;?</ID>
-    <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$sortOrder: String?</ID>
-    <ID>UnusedPrivateClass:MoreBottomSheetLoggedOutFragment.kt$MoreBottomSheetLoggedOutFragment$BaseLogoutListener : LogoutListener</ID>
-    <ID>UnusedPrivateMember:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
-    <ID>UnusedPrivateMember:CropOverlayView.kt$CropOverlayView$private fun isCornerHandle(handle: Handle): Boolean</ID>
-    <ID>UnusedPrivateMember:DefaultZoomableController.kt$DefaultZoomableController$private fun getTransformedImageBounds(): RectF</ID>
-    <ID>UnusedPrivateMember:ExploreMapFragment.kt$ExploreMapFragment$private fun registerNetworkReceiver()</ID>
-    <ID>UnusedPrivateMember:ExploreMapFragment.kt$ExploreMapFragment$private fun startMapWithoutPermission()</ID>
-    <ID>UnusedPrivateMember:FilePicker.kt$FilePicker$@Throws(URISyntaxException::class) @JvmStatic private fun takenCameraVideo(context: Context): UploadableFile?</ID>
-    <ID>UnusedPrivateMember:ImageInfo.kt$ImageInfo$private fun updateThumbUrl()</ID>
-    <ID>UnusedPrivateMember:ImageUtils.kt$ImageUtils$@JvmStatic private fun showSettingWallpaperProgressBar(context: Context)</ID>
-    <ID>UnusedPrivateMember:LoginActivity.kt$LoginActivity$private fun onEditorAction( textView: TextView, actionId: Int, keyEvent: KeyEvent?, )</ID>
-    <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateCaptions( mediaDetail: UploadMediaDetail, updatedCaptions: MutableMap&lt;String, String&gt;, )</ID>
-    <ID>UnusedPrivateMember:MediaDetailFragment.kt$MediaDetailFragment$private fun updateToDoWarning()</ID>
-    <ID>UnusedPrivateMember:MediaLicenseFragment.kt$MediaLicenseFragment$private fun setTextViewHTML( textView: TextView, text: String, )</ID>
-    <ID>UnusedPrivateMember:MoreBottomSheetFragment.kt$MoreBottomSheetFragment$private fun showAlertDialog()</ID>
-    <ID>UnusedPrivateMember:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$private fun handleCenteringTaskIfAny()</ID>
     <ID>UnusedPrivateProperty:BookmarkItemsDaoTest.kt$BookmarkItemsDaoTest$i</ID>
     <ID>UnusedPrivateProperty:BookmarkListRootFragment.kt$BookmarkListRootFragment$private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null</ID>
     <ID>UnusedPrivateProperty:BookmarkLocationsViewModel.kt$BookmarkLocationsViewModel$private val bookmarkLocationsDao: BookmarkLocationsDao</ID>

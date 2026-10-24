@@ -132,6 +132,8 @@ class BookmarkCategoriesFragment : DaggerFragment() {
         }
     }
 
+    // Used by the Android Studio Compose preview
+    @Suppress("UnusedPrivateMember")
     @Preview
     @Composable
     private fun CategoryItemPreview() {
