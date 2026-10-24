@@ -36,6 +36,8 @@ private const val TIME_WINDOW_SECONDS = 120L
 
 private const val MILLISECONDS_IN_SECOND = 1000L
 
+private const val METERS_PER_KILOMETER = 1000.0
+
 class FileProcessor
     @Inject
     constructor(
@@ -211,7 +213,7 @@ class FileProcessor
 
         private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable =
             Observable
-                .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
+                .fromIterable(radiiProgressionInMetres.map { it / METERS_PER_KILOMETER })
                 .concatMap {
                     Observable.fromCallable {
                         okHttpJsonApiClient.getNearbyPlaces(

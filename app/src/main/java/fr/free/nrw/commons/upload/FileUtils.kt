@@ -19,6 +19,10 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
+private const val BUFFER_SIZE_BYTES = 8192
+
+private const val HEXADECIMAL_RADIX = 16
+
 object FileUtils {
     /**
      * Get SHA1 of filePath from input stream
@@ -32,7 +36,7 @@ object FileUtils {
             return ""
         }
 
-        val buffer = ByteArray(8192)
+        val buffer = ByteArray(BUFFER_SIZE_BYTES)
         var read: Int
         try {
             while ((stream.read(buffer).also { read = it }) > 0) {
@@ -40,7 +44,7 @@ object FileUtils {
             }
             val md5sum = digest.digest()
             val bigInt = BigInteger(1, md5sum)
-            var output = bigInt.toString(16)
+            var output = bigInt.toString(HEXADECIMAL_RADIX)
             // Fill to 40 chars
             output = String.format("%40s", output).replace(' ', '0')
             Timber.i("File SHA1: %s", output)

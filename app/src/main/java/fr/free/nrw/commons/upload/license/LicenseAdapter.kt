@@ -11,6 +11,8 @@ import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.utils.toLicenseName
 import fr.free.nrw.commons.utils.toLicenseUrl
 
+private const val ROTATION_COLLAPSED = 0f
+private const val ROTATION_EXPANDED = 180f
 class LicenseAdapter(
     private val licenseList: List<String>,
     private var selectedLicense: String?,
@@ -61,7 +63,7 @@ class LicenseAdapter(
                 }
 
             longDescriptionContainer.visibility = if (isExpanded) View.VISIBLE else View.GONE
-            expansionIcon.rotation = if (isExpanded) 180f else 0f
+            expansionIcon.rotation = if (isExpanded) ROTATION_EXPANDED else ROTATION_COLLAPSED
 
             root.setOnClickListener {
                 selectedLicense = licenseKey
