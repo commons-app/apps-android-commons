@@ -13,12 +13,18 @@ class PostProcessingTypeAdapter : TypeAdapterFactory {
         fun postProcess()
     }
 
-    override fun <T> create(gson: Gson, type: TypeToken<T>): TypeAdapter<T> {
+    override fun <T> create(
+        gson: Gson,
+        type: TypeToken<T>,
+    ): TypeAdapter<T> {
         val delegate = gson.getDelegateAdapter(this, type)
 
         return object : TypeAdapter<T>() {
             @Throws(IOException::class)
-            override fun write(out: JsonWriter, value: T) {
+            override fun write(
+                out: JsonWriter,
+                value: T,
+            ) {
                 delegate.write(out, value)
             }
 

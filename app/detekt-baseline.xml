@@ -87,7 +87,7 @@
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894</ID>
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
-    <ID>ForbiddenComment:WikiSite.kt$WikiSite$//TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
+    <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
     <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
     <ID>FunctionNaming:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
@@ -104,8 +104,8 @@
     <ID>ImplicitDefaultLocale:Description.kt$Description.Companion$String.format( "{{%s|1=%s}}", description.languageCode, description.descriptionText, )</ID>
     <ID>ImplicitDefaultLocale:FileUtils.kt$FileUtils$String.format("%40s", output)</ID>
     <ID>ImplicitDefaultLocale:Media.kt$Media$String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)</ID>
-    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/w/index.php?title=%3\$s&amp;action=%4\$s", wikiSite.scheme(), wikiSite.authority(), URLEncoder.encode(prefixedText, "utf-8"), action )</ID>
-    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/wiki/%3\$s%4\$s", wikiSite.scheme(), domain, URLEncoder.encode(prefixedText, "utf-8"), if ((fragment != null &amp;&amp; fragment.length &gt; 0)) ("#$fragment") else "" )</ID>
+    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/w/index.php?title=%3\$s&amp;action=%4\$s", wikiSite.scheme(), wikiSite.authority(), URLEncoder.encode(prefixedText, "utf-8"), action, )</ID>
+    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/wiki/%3\$s%4\$s", wikiSite.scheme(), domain, URLEncoder.encode(prefixedText, "utf-8"), if ((fragment != null &amp;&amp; fragment.length &gt; 0)) ("#$fragment") else "", )</ID>
     <ID>ImplicitDefaultLocale:WikiSite.kt$WikiSite$String.format("%1\$s://%2\$s", scheme(), mobileAuthority())</ID>
     <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e is UnknownHostException</ID>
     <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
@@ -924,7 +924,7 @@
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun chooseDescription(media: Media): String?</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption( idAndCaption: IdAndLabels, locale: String, ): String?</ID>
     <ID>ReturnCount:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
-    <ID>ReturnCount:MwQueryPage.kt$@VisibleForTesting fun checkWhetherFileIsUsedInWikis( globalUsages: List&lt;GlobalUsage&gt;?, fileUsages: List&lt;MwQueryPage.FileUsage&gt;? ): Boolean</ID>
+    <ID>ReturnCount:MwQueryPage.kt$@VisibleForTesting fun checkWhetherFileIsUsedInWikis( globalUsages: List&lt;GlobalUsage&gt;?, fileUsages: List&lt;MwQueryPage.FileUsage&gt;?, ): Boolean</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$@DrawableRes private fun getIconFor(place: Place, isBookmarked: Boolean): Int</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$fun saveFile(string: String, fileName: String?): Boolean</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$override fun getScreenBottomLeft(): LatLng?</ID>
