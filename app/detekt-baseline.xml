@@ -65,7 +65,6 @@
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$//TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
-    <ID>ForbiddenComment:ContributionController.kt$ContributionController$* Shows a dialog alerting the user about location services being off and asking them to turn it * on * TODO: Add a seperate callback in LocationPermissionsHelper for this. * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114 * * @param activity Activity reference * @param dialogTextResource Resource id of text to be shown in dialog * @param toastTextResource Resource id of text to be shown in toast * @param resultLauncher</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Show the exact reason for failure</ID>
     <ID>ForbiddenComment:DateUtil.kt$DateUtil$* Utility class for date formatting and parsing. * TODO: Switch to DateTimeFormatter when minSdk = 26.</ID>
