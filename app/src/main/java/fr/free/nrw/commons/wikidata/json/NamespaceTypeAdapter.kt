@@ -9,7 +9,10 @@ import java.io.IOException
 
 class NamespaceTypeAdapter : TypeAdapter<Namespace>() {
     @Throws(IOException::class)
-    override fun write(out: JsonWriter, namespace: Namespace) {
+    override fun write(
+        out: JsonWriter,
+        namespace: Namespace,
+    ) {
         out.value(namespace.code().toLong())
     }
 

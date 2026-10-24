@@ -11,7 +11,9 @@ import java.util.Date
 /**
  * Immutable class that contains metadata associated with a PageTitle.
  */
-class PageProperties private constructor(parcel: Parcel) : Parcelable {
+class PageProperties private constructor(
+    parcel: Parcel,
+) : Parcelable {
     val pageId: Int = parcel.readInt()
     private val namespace = Namespace.of(parcel.readInt())
     private val revisionId = parcel.readLong()
@@ -36,11 +38,12 @@ class PageProperties private constructor(parcel: Parcel) : Parcelable {
      */
     private val canEdit = parcel.readInt() == 1
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents(): Int = 0
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeInt(pageId)
         parcel.writeInt(namespace.code())
         parcel.writeLong(revisionId)
@@ -70,20 +73,20 @@ class PageProperties private constructor(parcel: Parcel) : Parcelable {
         val that = o as PageProperties
 
         return pageId == that.pageId &&
-                namespace === that.namespace &&
-                revisionId == that.revisionId &&
-                lastModified == that.lastModified &&
-                displayTitleText == that.displayTitleText &&
-                TextUtils.equals(titlePronunciationUrl, that.titlePronunciationUrl) &&
-                (geo === that.geo || geo != null && geo == that.geo) &&
-                languageCount == that.languageCount &&
-                canEdit == that.canEdit &&
-                isMainPage == that.isMainPage &&
-                isDisambiguationPage == that.isDisambiguationPage &&
-                TextUtils.equals(editProtectionStatus, that.editProtectionStatus) &&
-                TextUtils.equals(leadImageUrl, that.leadImageUrl) &&
-                TextUtils.equals(leadImageName, that.leadImageName) &&
-                TextUtils.equals(wikiBaseItem, that.wikiBaseItem)
+            namespace === that.namespace &&
+            revisionId == that.revisionId &&
+            lastModified == that.lastModified &&
+            displayTitleText == that.displayTitleText &&
+            TextUtils.equals(titlePronunciationUrl, that.titlePronunciationUrl) &&
+            (geo === that.geo || geo != null && geo == that.geo) &&
+            languageCount == that.languageCount &&
+            canEdit == that.canEdit &&
+            isMainPage == that.isMainPage &&
+            isDisambiguationPage == that.isDisambiguationPage &&
+            TextUtils.equals(editProtectionStatus, that.editProtectionStatus) &&
+            TextUtils.equals(leadImageUrl, that.leadImageUrl) &&
+            TextUtils.equals(leadImageName, that.leadImageName) &&
+            TextUtils.equals(wikiBaseItem, that.wikiBaseItem)
     }
 
     override fun hashCode(): Int {
@@ -107,14 +110,11 @@ class PageProperties private constructor(parcel: Parcel) : Parcelable {
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<PageProperties> = object : Parcelable.Creator<PageProperties> {
-                override fun createFromParcel(parcel: Parcel): PageProperties {
-                    return PageProperties(parcel)
-                }
+        val CREATOR: Parcelable.Creator<PageProperties> =
+            object : Parcelable.Creator<PageProperties> {
+                override fun createFromParcel(parcel: Parcel): PageProperties = PageProperties(parcel)
 
-                override fun newArray(size: Int): Array<PageProperties?> {
-                    return arrayOfNulls(size)
-                }
+                override fun newArray(size: Int): Array<PageProperties?> = arrayOfNulls(size)
             }
     }
 }
@@ -127,14 +127,15 @@ private fun marshal(location: Location?): String? {
         return null
     }
 
-    val jsonObj = JSONObject().apply {
-        try {
-            put(LATITUDE, location.latitude)
-            put(LONGITUDE, location.longitude)
-        } catch (e: JSONException) {
-            throw RuntimeException(e)
+    val jsonObj =
+        JSONObject().apply {
+            try {
+                put(LATITUDE, location.latitude)
+                put(LONGITUDE, location.longitude)
+            } catch (e: JSONException) {
+                throw RuntimeException(e)
+            }
         }
-    }
 
     return jsonObj.toString()
 }

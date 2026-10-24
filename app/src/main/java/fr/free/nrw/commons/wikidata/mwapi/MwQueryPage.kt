@@ -11,6 +11,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.GlobalUsage
  */
 class MwQueryPage : BaseModel() {
     private val pageid = 0
+    private val missing = false
     private val index = 0
     private var title: String? = null
     private val categoryinfo: CategoryInfo? = null
@@ -48,6 +49,8 @@ class MwQueryPage : BaseModel() {
 
     fun pageId(): Int = pageid
 
+    fun missing(): Boolean = missing
+
     fun thumbUrl(): String? = thumbnail?.source()
 
     fun description(): String? = description
@@ -70,18 +73,19 @@ class MwQueryPage : BaseModel() {
         title += "#$fragment"
     }
 
-    fun checkWhetherFileIsUsedInWikis(): Boolean {
-        return checkWhetherFileIsUsedInWikis(globalUsages, fileUsages)
-    }
+    fun checkWhetherFileIsUsedInWikis(): Boolean = checkWhetherFileIsUsedInWikis(globalUsages, fileUsages)
 
     class Revision {
         @SerializedName("revid")
         private val revisionId: Long = 0
         private val user: String? = null
+
         @SerializedName("contentformat")
         private val contentFormat: String? = null
+
         @SerializedName("contentmodel")
         private val contentModel: String? = null
+
         @SerializedName("timestamp")
         private val timeStamp: String? = null
         private val content: String? = null
@@ -168,7 +172,7 @@ class MwQueryPage : BaseModel() {
 @VisibleForTesting
 fun checkWhetherFileIsUsedInWikis(
     globalUsages: List<GlobalUsage>?,
-    fileUsages: List<MwQueryPage.FileUsage>?
+    fileUsages: List<MwQueryPage.FileUsage>?,
 ): Boolean {
     if (!globalUsages.isNullOrEmpty()) {
         return true
@@ -180,7 +184,8 @@ fun checkWhetherFileIsUsedInWikis(
 
     /* Ignore usage under https://commons.wikimedia.org/wiki/User:Didym/Mobile_upload/
        which has been a gallery of all of our uploads since 2014 */
-    return fileUsages.filterNot {
-        it.title().contains("User:Didym/Mobile upload")
-    }.isNotEmpty()
+    return fileUsages
+        .filterNot {
+            it.title().contains("User:Didym/Mobile upload")
+        }.isNotEmpty()
 }

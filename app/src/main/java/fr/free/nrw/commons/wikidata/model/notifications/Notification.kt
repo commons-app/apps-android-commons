@@ -5,7 +5,6 @@ import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.utils.DateUtil.iso8601DateParse
 import fr.free.nrw.commons.wikidata.GsonUtil.defaultGson
-import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.text.ParseException
 import java.util.Date
@@ -30,16 +29,13 @@ class Notification {
         this.id = id
     }
 
-    fun key(): Long =
-        id + wiki().hashCode()
+    fun key(): Long = id + wiki().hashCode()
 
-    fun type(): String =
-        type ?: ""
+    fun type(): String = type ?: ""
 
     fun title(): Title? = title
 
-    fun getTimestamp(): Date =
-        timestamp?.date() ?: Date()
+    fun getTimestamp(): Date = timestamp?.date() ?: Date()
 
     fun setTimestamp(timestamp: Timestamp?) {
         this.timestamp = timestamp
@@ -51,8 +47,7 @@ class Notification {
     val isFromWikidata: Boolean
         get() = wiki() == "wikidatawiki"
 
-    override fun toString(): String =
-        id.toString()
+    override fun toString(): String = id.toString()
 
     class Title {
         private val full: String? = null
