@@ -240,7 +240,7 @@ class LoginClient(
 
         if ("UI" == loginResult.status) {
             if (loginResult is OAuthResult || loginResult is EmailAuthResult) {
-                // TODO: Find a better way to boil up the warning about 2FA
+                // The 2FA warning is passed up as the exception message
                 throw LoginFailedException(loginResult.message)
             }
             throw LoginFailedException(loginResult.message)

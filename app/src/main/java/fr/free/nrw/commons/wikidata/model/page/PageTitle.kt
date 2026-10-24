@@ -23,10 +23,6 @@ import java.util.Locale
  * of a PageTitle to remain constant for the lifetime of the object.
  */
 class PageTitle : Parcelable {
-    // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
-    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
-    //       are broken.
-
     /**
      * The localised namespace of the page as a string, or null if the page is in mainspace.
      *
@@ -42,6 +38,9 @@ class PageTitle : Parcelable {
      * * [[Utilisateur:Deskana]] on frwiki will have a namespace of "Utilisateur", even if you got
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.
      */
+    // Legacy: This is the localized namespace name (File, Special, Talk, etc) but
+    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
+    //       are broken.
     private val namespace: String?
     private val text: String
     val fragment: String?
@@ -52,7 +51,7 @@ class PageTitle : Parcelable {
     var description: String? = null
     private val properties: PageProperties?
 
-    // TODO: remove after the restbase endpoint supports ZH variants.
+    // Needed until the restbase endpoint supports ZH variants.
     private var convertedText: String? = null
 
     constructor(namespace: String?, text: String, fragment: String?, thumbUrl: String?, wiki: WikiSite) {
@@ -94,7 +93,7 @@ class PageTitle : Parcelable {
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""
-        // FIXME: Does not handle mainspace articles with a colon in the title well at all
+        // Known limitation: Does not handle mainspace articles with a colon in the title well at all
         val fragParts = text.split("#".toRegex()).toTypedArray()
         text = fragParts[0]
         fragment =
@@ -186,7 +185,7 @@ class PageTitle : Parcelable {
         }
     }
 
-    // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
+    // Possible improvement: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
         get() =
             namespace?.let { addUnderscores(it) + ":" + getTextWithoutSpaces() }
@@ -295,7 +294,7 @@ class PageTitle : Parcelable {
             if (TextUtils.isEmpty(fragment)) {
                 PageTitle(prefixedText, wiki, null, null as PageProperties?)
             } else {
-                // TODO: this class needs some refactoring to allow passing in a fragment
+                // This class would need some refactoring to allow passing in a fragment
                 // without having to do string manipulations.
                 PageTitle("$prefixedText#$fragment", wiki, null, null as PageProperties?)
             }
