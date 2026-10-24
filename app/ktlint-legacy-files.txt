@@ -92,16 +92,6 @@ app/src/main/java/fr/free/nrw/commons/media/zoomControllers/zoomable/ZoomableDra
 app/src/main/java/fr/free/nrw/commons/mwapi/CategoryApi.kt
 app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt
 app/src/main/java/fr/free/nrw/commons/mwapi/UserInterface.kt
-app/src/main/java/fr/free/nrw/commons/nearby/BottomSheetAdapter.kt
-app/src/main/java/fr/free/nrw/commons/nearby/NearbyUtil.kt
-app/src/main/java/fr/free/nrw/commons/nearby/PlaceAdapterDelegate.kt
-app/src/main/java/fr/free/nrw/commons/nearby/WikidataFeedback.kt
-app/src/main/java/fr/free/nrw/commons/nearby/fragments/CommonPlaceClickActions.kt
-app/src/main/java/fr/free/nrw/commons/nearby/fragments/NearbyParentFragment.kt
-app/src/main/java/fr/free/nrw/commons/nearby/fragments/PlaceAdapter.kt
-app/src/main/java/fr/free/nrw/commons/nearby/model/NearbyQueryParams.kt
-app/src/main/java/fr/free/nrw/commons/nearby/model/NearbyResultItem.kt
-app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt
 app/src/main/java/fr/free/nrw/commons/quiz/QuizActivity.kt
 app/src/main/java/fr/free/nrw/commons/quiz/QuizChecker.kt
 app/src/main/java/fr/free/nrw/commons/quiz/QuizController.kt
@@ -213,8 +203,6 @@ app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaDetailFragmentUnitTests.kt
-app/src/test/kotlin/fr/free/nrw/commons/nearby/LabelTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/FileUtilsTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/ImageUtilsTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/MediaAttributionUtilTest.kt
