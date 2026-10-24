@@ -88,8 +88,8 @@
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
-    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String )</ID>
-    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
+    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Suppress("ktlint:standard:function-naming") @Composable fun CategoryItem( modifier: Modifier = Modifier, onClick: (String) -&gt; Unit, categoryName: String, )</ID>
+    <ID>FunctionNaming:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Suppress("ktlint:standard:function-naming") @Preview @Composable private fun CategoryItemPreview()</ID>
     <ID>FunctionNaming:MediaDetailFragment.kt$@Suppress("ktlint:standard:function-naming") @Composable fun FileUsagesContainer( modifier: Modifier = Modifier, commonsContainerState: MediaDetailViewModel.FileUsagesContainerState, globalContainerState: MediaDetailViewModel.FileUsagesContainerState, )</ID>
     <ID>FunctionNaming:SingleWebViewActivity.kt$SingleWebViewActivity$@SuppressLint("SetJavaScriptEnabled") @Composable private fun WebViewComponent( url: String, successUrl: String, onSuccess: () -&gt; Unit, modifier: Modifier = Modifier )</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
@@ -733,7 +733,7 @@
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment$*</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
-    <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$//check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
+    <ID>MaxLineLength:BookmarkListRootFragment.kt$BookmarkListRootFragment$// check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException</ID>
     <ID>MaxLineLength:CategoriesModel.kt$CategoriesModel$"""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""</ID>
     <ID>MaxLineLength:CategoryApi.kt$CategoryApi$*</ID>
     <ID>MaxLineLength:CategoryClient.kt$CategoryClient$*</ID>
@@ -896,7 +896,7 @@
     <ID>ReturnCount:BookmarkItemsDao.kt$BookmarkItemsDao$fun findBookmarkItem(depictedItemID: String?): Boolean</ID>
     <ID>ReturnCount:BookmarkPicturesDao.kt$BookmarkPicturesDao$fun findBookmark(bookmark: Bookmark?): Boolean</ID>
     <ID>ReturnCount:BookmarkPicturesFragment.kt$BookmarkPicturesFragment$private fun handleSuccess(collection: List&lt;Media&gt;?)</ID>
-    <ID>ReturnCount:BookmarksTable.kt$BookmarksTable$fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int)</ID>
+    <ID>ReturnCount:BookmarksTable.kt$BookmarksTable$fun onUpdate( db: SupportSQLiteDatabase, from: Int, to: Int, )</ID>
     <ID>ReturnCount:CategoriesModel.kt$CategoriesModel$fun isSpammyCategory(item: String): Boolean</ID>
     <ID>ReturnCount:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$private fun findHasFragmentInjector(): HasSupportFragmentInjector</ID>
     <ID>ReturnCount:CoordinateEditHelper.kt$CoordinateEditHelper$private fun getFormattedWikiText( wikiText: String, editedLocation: String, ): String</ID>
@@ -1152,7 +1152,7 @@
     <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$selectionArgs: Array&lt;String&gt;?</ID>
     <ID>UnusedParameter:ShadowFileProvider.kt$ShadowFileProvider$sortOrder: String?</ID>
     <ID>UnusedPrivateClass:MoreBottomSheetLoggedOutFragment.kt$MoreBottomSheetLoggedOutFragment$BaseLogoutListener : LogoutListener</ID>
-    <ID>UnusedPrivateMember:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Preview @Composable private fun CategoryItemPreview()</ID>
+    <ID>UnusedPrivateMember:BookmarkCategoriesFragment.kt$BookmarkCategoriesFragment$@Suppress("ktlint:standard:function-naming") @Preview @Composable private fun CategoryItemPreview()</ID>
     <ID>UnusedPrivateMember:CropOverlayView.kt$CropOverlayView$private fun isCornerHandle(handle: Handle): Boolean</ID>
     <ID>UnusedPrivateMember:DefaultZoomableController.kt$DefaultZoomableController$private fun getTransformedImageBounds(): RectF</ID>
     <ID>UnusedPrivateMember:ExploreMapFragment.kt$ExploreMapFragment$private fun registerNetworkReceiver()</ID>
@@ -1241,8 +1241,8 @@
     <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException( "basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.", )</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
-    <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
+    <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
+    <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
     <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>

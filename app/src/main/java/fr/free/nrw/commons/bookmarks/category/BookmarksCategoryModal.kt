@@ -11,5 +11,5 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "bookmarks_categories")
 data class BookmarksCategoryModal(
-    @PrimaryKey val categoryName: String
+    @PrimaryKey val categoryName: String,
 )
