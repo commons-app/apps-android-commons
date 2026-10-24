@@ -15,7 +15,6 @@ import java.util.Collections.synchronizedList
  * subsequent listeners will not be notified about the event anymore since it has been consumed.
  */
 class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
-
     private val listeners: MutableList<GestureDetector.SimpleOnGestureListener> =
         synchronizedList(mutableListOf())
 
@@ -65,7 +64,7 @@ class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
         e1: MotionEvent?,
         e2: MotionEvent,
         distanceX: Float,
-        distanceY: Float
+        distanceY: Float,
     ): Boolean {
         for (listener in listeners) {
             if (listener.onScroll(e1, e2, distanceX, distanceY)) {
@@ -80,7 +79,7 @@ class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
         e1: MotionEvent?,
         e2: MotionEvent,
         velocityX: Float,
-        velocityY: Float
+        velocityY: Float,
     ): Boolean {
         for (listener in listeners) {
             if (listener.onFling(e1, e2, velocityX, velocityY)) {

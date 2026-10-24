@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
@@ -10,6 +11,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.filepicker.ExternalImagesResult
+import fr.free.nrw.commons.filepicker.FakeSharedFilesProvider
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
@@ -19,12 +22,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowAlertDialog
+import java.io.File
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -180,12 +187,53 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testReceiveExternalSharedItems() {
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 0))
         val method: Method =
             UploadActivity::class.java.getDeclaredMethod(
                 "receiveExternalSharedItems",
             )
         method.isAccessible = true
         method.invoke(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUnsupportedFormatDialogShownWhenAllSharedFilesWereSkipped() {
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 2))
+
+        receiveExternalAndSharedItems()
+
+        Assert.assertEquals(
+            activity.getString(R.string.unsupported_format_title),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSkippedFilesDialogShownWhenSomeSharedFilesWereSkipped() {
+        Robolectric.setupContentProvider(FakeSharedFilesProvider::class.java, FakeSharedFilesProvider.AUTHORITY)
+        val jpeg = UploadableFile(FakeSharedFilesProvider.uriFor("PXL_1.jpg"), File("PXL_1.jpg"))
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(listOf(jpeg), 1))
+
+        receiveExternalAndSharedItems()
+
+        Assert.assertEquals(
+            activity.getString(R.string.unsupported_files_skipped_title),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
+    }
+
+    private fun receiveExternalAndSharedItems() {
+        listOf("receiveExternalSharedItems", "receiveSharedItems").forEach { name ->
+            val method: Method = UploadActivity::class.java.getDeclaredMethod(name)
+            method.isAccessible = true
+            method.invoke(activity)
+        }
+        shadowOf(Looper.getMainLooper()).idle()
     }
 
     @Test

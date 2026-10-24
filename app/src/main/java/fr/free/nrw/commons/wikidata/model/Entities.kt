@@ -10,7 +10,7 @@ class Entities : MwResponse() {
 
     fun entities(): Map<String, Entity> = entities ?: emptyMap()
 
-    private val first : Entity?
+    private val first: Entity?
         get() = entities?.values?.iterator()?.next()
 
     override fun postProcess() {
@@ -30,28 +30,24 @@ class Entities : MwResponse() {
         val statements: Map<String, List<StatementPartial>>? = null
         private val missing: String? = null
 
-        fun id(): String =
-            StringUtils.defaultString(id)
+        fun id(): String = StringUtils.defaultString(id)
 
-        fun labels(): Map<String, Label> =
-            labels ?: emptyMap()
+        fun labels(): Map<String, Label> = labels ?: emptyMap()
 
-        fun descriptions(): Map<String, Label> =
-            descriptions ?: emptyMap()
+        fun descriptions(): Map<String, Label> = descriptions ?: emptyMap()
 
-        fun sitelinks(): Map<String, SiteLink> =
-            sitelinks ?: emptyMap()
+        fun sitelinks(): Map<String, SiteLink> = sitelinks ?: emptyMap()
 
-        fun isMissing(): Boolean =
-            "-1" == id && missing != null
+        fun isMissing(): Boolean = "-1" == id && missing != null
     }
 
-    class Label(private val language: String?, private val value: String?) {
-        fun language(): String =
-            StringUtils.defaultString(language)
+    class Label(
+        private val language: String?,
+        private val value: String?,
+    ) {
+        fun language(): String = StringUtils.defaultString(language)
 
-        fun value(): String =
-            StringUtils.defaultString(value)
+        fun value(): String = StringUtils.defaultString(value)
     }
 
     class SiteLink {

@@ -13,8 +13,7 @@ class Edit : MwPostResponse() {
         private val info: String? = null
         private val warning: String? = null
 
-        fun editSucceeded(): Boolean =
-            "Success" == result
+        fun editSucceeded(): Boolean = "Success" == result
 
         fun code(): String? = code
 

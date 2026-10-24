@@ -16,7 +16,8 @@ object GsonUtil {
     private const val DATE_FORMAT = "MMM dd, yyyy HH:mm:ss"
 
     private val DEFAULT_GSON_BUILDER: GsonBuilder by lazy {
-        GsonBuilder().setDateFormat(DATE_FORMAT)
+        GsonBuilder()
+            .setDateFormat(DATE_FORMAT)
             .registerTypeAdapterFactory(polymorphicTypeAdapter)
             .registerTypeHierarchyAdapter(Uri::class.java, UriTypeAdapter().nullSafe())
             .registerTypeHierarchyAdapter(Namespace::class.java, NamespaceTypeAdapter().nullSafe())
