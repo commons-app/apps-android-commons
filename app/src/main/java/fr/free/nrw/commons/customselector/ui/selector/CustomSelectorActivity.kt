@@ -192,7 +192,7 @@ class CustomSelectorActivity :
         toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
         bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
         binding.partialAccessIndicator.setContent {
-            partialStorageAccessIndicator(
+            PartialStorageAccessIndicator(
                 isVisible = showPartialAccessIndicator,
                 onManage = {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -765,7 +765,7 @@ class CustomSelectorActivity :
 }
 
 @Composable
-fun partialStorageAccessIndicator(
+fun PartialStorageAccessIndicator(
     isVisible: Boolean,
     onManage: () -> Unit,
     modifier: Modifier = Modifier,
@@ -807,9 +807,9 @@ fun partialStorageAccessIndicator(
 
 @Preview
 @Composable
-fun partialStorageAccessIndicatorPreview() {
+private fun PartialStorageAccessIndicatorPreview() {
     Surface {
-        partialStorageAccessIndicator(
+        PartialStorageAccessIndicator(
             isVisible = true,
             onManage = {},
             modifier =

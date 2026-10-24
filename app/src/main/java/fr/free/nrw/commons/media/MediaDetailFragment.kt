@@ -2291,12 +2291,11 @@ class MediaDetailFragment :
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun FileUsagesContainer(
-    modifier: Modifier = Modifier,
     commonsContainerState: MediaDetailViewModel.FileUsagesContainerState,
     globalContainerState: MediaDetailViewModel.FileUsagesContainerState,
+    modifier: Modifier = Modifier,
 ) {
     var isCommonsListExpanded by rememberSaveable { mutableStateOf(true) }
     var isOtherWikisListExpanded by rememberSaveable { mutableStateOf(true) }

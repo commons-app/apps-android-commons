@@ -39,6 +39,7 @@ kotlinStdlib = "1.8.0"
 ktlint = "1.5.0"
 ktlintGradle = "13.1.0"
 detekt = "1.23.8"
+composeRulesDetekt = "0.4.23"
 coroutines = "1.7.3"
 leakcanary = "2.10"
 livedataTesting = "1.2.0"
@@ -209,6 +210,7 @@ coordinates2country-android = { module = "io.github.coordinates2country:coordina
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlinStdlib" }
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinStdlib" }
+compose-rules-detekt = { module = "io.nlopez.compose.rules:detekt", version.ref = "composeRulesDetekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
