@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.wikidata.mwapi
 
 import fr.free.nrw.commons.wikidata.model.BaseModel
-import org.apache.commons.lang3.StringUtils
 
 /**
  * Gson POJO for a MediaWiki API error.

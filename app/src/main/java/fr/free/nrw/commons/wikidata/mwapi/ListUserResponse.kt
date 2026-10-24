@@ -7,6 +7,5 @@ class ListUserResponse {
 
     fun name(): String? = name
 
-    fun getGroups(): Set<String> =
-        groups?.toSet() ?: emptySet()
+    fun getGroups(): Set<String> = groups?.toSet() ?: emptySet()
 }
