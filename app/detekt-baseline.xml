@@ -859,8 +859,6 @@
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun encodeValue(type: Int, value: String, order: ByteOrder): ByteArray?</ID>
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun scanAndUpdateIfd( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
     <ID>NestedBlockDepth:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$private fun writeTagsInternal( file: File, updates: Map&lt;Int, String?&gt;, )</ID>
-    <ID>NestedBlockDepth:RecentLanguagesDao.kt$RecentLanguagesDao$fun getRecentLanguages(): List&lt;Language&gt;</ID>
-    <ID>NestedBlockDepth:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
     <ID>NestedBlockDepth:UploadActivity.kt$UploadActivity$override fun onRequestPermissionsResult( requestCode: Int, permissions: Array&lt;String&gt;, grantResults: IntArray, )</ID>
     <ID>NestedBlockDepth:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>NestedBlockDepth:UploadController.kt$UploadController$private fun resolveDataLength( contentResolver: ContentResolver, contribution: Contribution, ): Long</ID>
