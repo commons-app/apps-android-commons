@@ -754,7 +754,10 @@ class UploadWorker(
      * @param toClass
      * @param targetTab
      */
-    private fun getPendingIntent(toClass: Class<out BaseActivity>, targetTab: Int = 0): PendingIntent {
+    private fun getPendingIntent(
+        toClass: Class<out BaseActivity>,
+        targetTab: Int = 0,
+    ): PendingIntent {
         val intent = Intent(appContext, toClass)
         intent.putExtra(UploadProgressActivity.EXTRA_TARGET_TAB, targetTab)
         return TaskStackBuilder.create(appContext).run {
