@@ -82,7 +82,11 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory!!).get(CustomSelectorViewModel::class.java)
+        viewModel =
+            ViewModelProvider(
+                requireActivity(),
+                customSelectorViewModelFactory!!,
+            ).get(CustomSelectorViewModel::class.java)
     }
 
     /**

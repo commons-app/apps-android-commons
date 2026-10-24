@@ -15,12 +15,10 @@ import javax.inject.Inject
  * ViewModal for [CategoryDetailsActivity]
  */
 class CategoryDetailsViewModel(
-    private val bookmarkCategoriesDao: BookmarkCategoriesDao
+    private val bookmarkCategoriesDao: BookmarkCategoriesDao,
 ) : ViewModel() {
-
     private val _bookmarkState = MutableStateFlow(false)
     val bookmarkState = _bookmarkState.asStateFlow()
-
 
     /**
      * Used to check if bookmark exists for the given category in DB
@@ -56,7 +54,6 @@ class CategoryDetailsViewModel(
         }
     }
 
-
     /**
      * Add bookmark into DB
      *
@@ -64,14 +61,14 @@ class CategoryDetailsViewModel(
      */
     private fun addBookmark(categoryName: String) {
         viewModelScope.launch {
-            val categoryItem = BookmarksCategoryModal(
-                categoryName = categoryName
-            )
+            val categoryItem =
+                BookmarksCategoryModal(
+                    categoryName = categoryName,
+                )
 
             bookmarkCategoriesDao.insert(categoryItem)
         }
     }
-
 
     /**
      * Delete bookmark from DB
@@ -82,8 +79,8 @@ class CategoryDetailsViewModel(
         viewModelScope.launch {
             bookmarkCategoriesDao.delete(
                 BookmarksCategoryModal(
-                    categoryName = categoryName
-                )
+                    categoryName = categoryName,
+                ),
             )
         }
     }
@@ -94,16 +91,17 @@ class CategoryDetailsViewModel(
      * @property bookmarkCategoriesDao
      * @constructor Create empty View model factory
      */
-    class ViewModelFactory @Inject constructor(
-        private val bookmarkCategoriesDao: BookmarkCategoriesDao
-    ) : ViewModelProvider.Factory {
-
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T =
-            if (modelClass.isAssignableFrom(CategoryDetailsViewModel::class.java)) {
-                CategoryDetailsViewModel(bookmarkCategoriesDao) as T
-            } else {
-                throw IllegalArgumentException("Unknown class name")
-            }
-    }
+    class ViewModelFactory
+        @Inject
+        constructor(
+            private val bookmarkCategoriesDao: BookmarkCategoriesDao,
+        ) : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T =
+                if (modelClass.isAssignableFrom(CategoryDetailsViewModel::class.java)) {
+                    CategoryDetailsViewModel(bookmarkCategoriesDao) as T
+                } else {
+                    throw IllegalArgumentException("Unknown class name")
+                }
+        }
 }

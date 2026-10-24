@@ -60,7 +60,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
 
@@ -80,30 +80,36 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
          * This array is for the duration filter, we have three filters weekly, yearly and all-time
          * each filter have a key and value pair, the value represents the param of the API
          */
-        val durationValues = requireContext().resources
-            .getStringArray(R.array.leaderboard_duration_values)
+        val durationValues =
+            requireContext()
+                .resources
+                .getStringArray(R.array.leaderboard_duration_values)
         duration = durationValues[0]
 
         /*
          * This array is for the category filter, we have three filters upload, used and nearby
          * each filter have a key and value pair, the value represents the param of the API
          */
-        val categoryValues = requireContext().resources
-            .getStringArray(R.array.leaderboard_category_values)
+        val categoryValues =
+            requireContext()
+                .resources
+                .getStringArray(R.array.leaderboard_category_values)
         category = categoryValues[0]
 
         setLeaderboard(duration, category, limit, offset)
 
         with(binding!!) {
-            durationSpinner.onItemSelectedListener = SelectionListener {
-                duration = durationValues[durationSpinner.selectedItemPosition]
-                refreshLeaderboard()
-            }
+            durationSpinner.onItemSelectedListener =
+                SelectionListener {
+                    duration = durationValues[durationSpinner.selectedItemPosition]
+                    refreshLeaderboard()
+                }
 
-            categorySpinner.onItemSelectedListener = SelectionListener {
-                category = categoryValues[categorySpinner.selectedItemPosition]
-                refreshLeaderboard()
-            }
+            categorySpinner.onItemSelectedListener =
+                SelectionListener {
+                    category = categoryValues[categorySpinner.selectedItemPosition]
+                    refreshLeaderboard()
+                }
 
             scroll.setOnClickListener { scrollToUserRank() }
 
@@ -117,13 +123,14 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         // Whenever this fragment is revealed in a menu,
         // notify Beta users the page data is unavailable
         if (isBetaFlavour && visible) {
-            val ctx: Context? = if (context != null) {
-                context
-            } else if (view != null && requireView().context != null) {
-                requireView().context
-            } else {
-                null
-            }
+            val ctx: Context? =
+                if (context != null) {
+                    context
+                } else if (view != null && requireView().context != null) {
+                    requireView().context
+                } else {
+                    null
+                }
 
             ctx?.let {
                 Toast.makeText(it, R.string.leaderboard_unavailable_beta, Toast.LENGTH_LONG).show()
@@ -171,17 +178,21 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      * Set the spinners for the leaderboard filters
      */
     private fun setSpinners() {
-        val categoryAdapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.leaderboard_categories, android.R.layout.simple_spinner_item
-        )
+        val categoryAdapter =
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.leaderboard_categories,
+                android.R.layout.simple_spinner_item,
+            )
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.categorySpinner.adapter = categoryAdapter
 
-        val durationAdapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.leaderboard_durations, android.R.layout.simple_spinner_item
-        )
+        val durationAdapter =
+            ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.leaderboard_durations,
+                android.R.layout.simple_spinner_item,
+            )
         durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.durationSpinner.adapter = durationAdapter
     }
@@ -190,28 +201,37 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
      */
-    private fun setLeaderboard(duration: String?, category: String?, limit: Int, offset: Int) {
+    private fun setLeaderboard(
+        duration: String?,
+        category: String?,
+        limit: Int,
+        offset: Int,
+    ) {
         if (checkAccount()) {
             try {
                 compositeDisposable.add(
-                    okHttpJsonApiClient.getLeaderboard(
-                        Objects.requireNonNull(userName),
-                        duration, category, null, null
-                    )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        { response: LeaderboardResponse? ->
-                            if (response != null && response.status == 200) {
-                                userRank = response.rank!!
-                                setViews(response, duration, category, limit, offset)
-                            }
-                        },
-                        { t: Throwable? ->
-                            Timber.e(t, "Fetching leaderboard statistics failed")
-                            onError()
-                        }
-                    ))
+                    okHttpJsonApiClient
+                        .getLeaderboard(
+                            Objects.requireNonNull(userName),
+                            duration,
+                            category,
+                            null,
+                            null,
+                        ).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                            { response: LeaderboardResponse? ->
+                                if (response != null && response.status == 200) {
+                                    userRank = response.rank!!
+                                    setViews(response, duration, category, limit, offset)
+                                }
+                            },
+                            { t: Throwable? ->
+                                Timber.e(t, "Fetching leaderboard statistics failed")
+                                onError()
+                            },
+                        ),
+                )
             } catch (e: Exception) {
                 Timber.d(e, "success")
             }
@@ -227,11 +247,12 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         duration: String?,
         category: String?,
         limit: Int,
-        offset: Int
+        offset: Int,
     ) {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(
-            LeaderboardListViewModel::class.java
-        )
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(
+                LeaderboardListViewModel::class.java,
+            )
         viewModel!!.setUserName(userName)
         viewModel!!.setParams(duration, category, limit, offset)
         val leaderboardListAdapter = LeaderboardListAdapter()
@@ -260,36 +281,38 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     /**
      * to hide progressbar
      */
-    private fun hideProgressBar() = binding?.let {
-        it.progressBar.visibility = View.GONE
-        it.categorySpinner.visibility = View.VISIBLE
-        it.durationSpinner.visibility = View.VISIBLE
-        it.scroll.visibility = View.VISIBLE
-        it.leaderboardList.visibility = View.VISIBLE
-    }
+    private fun hideProgressBar() =
+        binding?.let {
+            it.progressBar.visibility = View.GONE
+            it.categorySpinner.visibility = View.VISIBLE
+            it.durationSpinner.visibility = View.VISIBLE
+            it.scroll.visibility = View.VISIBLE
+            it.leaderboardList.visibility = View.VISIBLE
+        }
 
     /**
      * to show progressbar
      */
-    private fun showProgressBar() = binding?.let {
-        it.progressBar.visibility = View.VISIBLE
-        it.scroll.visibility = View.INVISIBLE
-    }
+    private fun showProgressBar() =
+        binding?.let {
+            it.progressBar.visibility = View.VISIBLE
+            it.scroll.visibility = View.INVISIBLE
+        }
 
     /**
      * used to hide the layouts while fetching results from api
      */
-    private fun hideLayouts()  = binding?.let {
-        it.categorySpinner.visibility = View.INVISIBLE
-        it.durationSpinner.visibility = View.INVISIBLE
-        it.leaderboardList.visibility = View.INVISIBLE
-    }
+    private fun hideLayouts() =
+        binding?.let {
+            it.categorySpinner.visibility = View.INVISIBLE
+            it.durationSpinner.visibility = View.INVISIBLE
+            it.leaderboardList.visibility = View.INVISIBLE
+        }
 
     /**
      * check to ensure that user is logged in
      */
     private fun checkAccount(): Boolean {
-
         // Allow viewing another user's public profile without requiring login
         if (!userName.isNullOrBlank() &&
             userName != sessionManager.userName
@@ -320,9 +343,15 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         binding = null
     }
 
-    private class SelectionListener(private val handler: () -> Unit): AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, i: Int, l: Long) =
-            handler()
+    private class SelectionListener(
+        private val handler: () -> Unit,
+    ) : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            adapterView: AdapterView<*>?,
+            view: View?,
+            i: Int,
+            l: Long,
+        ) = handler()
 
         override fun onNothingSelected(p0: AdapterView<*>?) = Unit
     }

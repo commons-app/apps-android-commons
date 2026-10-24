@@ -281,7 +281,7 @@ class UploadClient
                 Timber.e(throwable, "Exception occurred in uploading file from stash")
                 Observable.error(throwable)
             }
-}
+    }
 
 private fun canProcess(
     contributionDao: ContributionDao,

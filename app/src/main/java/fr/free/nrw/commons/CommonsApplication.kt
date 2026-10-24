@@ -17,7 +17,6 @@ import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
 import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
-import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
@@ -55,20 +54,23 @@ import javax.inject.Named
     buildConfigClass = BuildConfig::class,
     resReportSendSuccessToast = R.string.crash_dialog_ok_toast,
     reportFormat = StringFormat.KEY_VALUE_LIST,
-    reportContent = [ReportField.USER_COMMENT, ReportField.APP_VERSION_CODE, ReportField.APP_VERSION_NAME, ReportField.ANDROID_VERSION, ReportField.PHONE_MODEL, ReportField.STACK_TRACE]
+    reportContent = [
+        ReportField.USER_COMMENT,
+        ReportField.APP_VERSION_CODE,
+        ReportField.APP_VERSION_NAME,
+        ReportField.ANDROID_VERSION,
+        ReportField.PHONE_MODEL,
+        ReportField.STACK_TRACE,
+    ],
 )
-
 @AcraMailSender(mailTo = "commons-app-android-private@googlegroups.com", reportAsFile = false)
-
 @AcraDialog(
     resTheme = R.style.Theme_AppCompat_Dialog,
     resText = R.string.crash_dialog_text,
     resTitle = R.string.crash_dialog_title,
-    resCommentPrompt = R.string.crash_dialog_comment_prompt
+    resCommentPrompt = R.string.crash_dialog_comment_prompt,
 )
-
 class CommonsApplication : MultiDexApplication() {
-
     @Inject
     lateinit var sessionManager: SessionManager
 
@@ -117,10 +119,12 @@ class CommonsApplication : MultiDexApplication() {
         }
 
         //        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        val config = ImagePipelineConfig.newBuilder(this)
-            .setNetworkFetcher(customOkHttpNetworkFetcher)
-            .setDownsampleEnabled(true)
-            .build()
+        val config =
+            ImagePipelineConfig
+                .newBuilder(this)
+                .setNetworkFetcher(customOkHttpNetworkFetcher)
+                .setDownsampleEnabled(true)
+                .build()
         try {
             Fresco.initialize(this, config)
         } catch (e: Exception) {
@@ -148,16 +152,17 @@ class CommonsApplication : MultiDexApplication() {
         val logFileName =
             if (isBeta) "CommonsBetaAppLogs" else "CommonsAppLogs"
         val logDirectory = LogUtils.getLogDirectory()
-        //Delete stale logs if they have exceeded the specified size
+        // Delete stale logs if they have exceeded the specified size
         deleteStaleLogs(logFileName, logDirectory)
 
-        val tree = FileLoggingTree(
-            Log.VERBOSE,
-            logFileName,
-            logDirectory,
-            1000,
-            fileLoggingThreadPool
-        )
+        val tree =
+            FileLoggingTree(
+                Log.VERBOSE,
+                logFileName,
+                logDirectory,
+                1000,
+                fileLoggingThreadPool,
+            )
 
         Timber.plant(tree)
         Timber.plant(DebugTree())
@@ -170,7 +175,10 @@ class CommonsApplication : MultiDexApplication() {
      * @param logFileName
      * @param logDirectory
      */
-    private fun deleteStaleLogs(logFileName: String, logDirectory: String) {
+    private fun deleteStaleLogs(
+        logFileName: String,
+        logDirectory: String,
+    ) {
         try {
             val file = File("$logDirectory/zip/$logFileName.zip")
             if (file.exists() && file.totalSpace > 1000000) { // In Kbs
@@ -182,15 +190,19 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     private val fileLoggingThreadPool: ThreadPoolService
-        get() = ThreadPoolService.Builder("file-logging-thread")
-            .setPriority(Process.THREAD_PRIORITY_LOWEST)
-            .setPoolSize(1)
-            .setExceptionHandler(BackgroundPoolExceptionHandler())
-            .build()
+        get() =
+            ThreadPoolService
+                .Builder("file-logging-thread")
+                .setPriority(Process.THREAD_PRIORITY_LOWEST)
+                .setPoolSize(1)
+                .setExceptionHandler(BackgroundPoolExceptionHandler())
+                .build()
 
     val userAgent: String
-        get() = ("Commons/" + this.getVersionNameWithSha()
-                + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE)
+        get() = (
+            "Commons/" + this.getVersionNameWithSha() +
+                " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE
+        )
 
     /**
      * clears data of current application
@@ -199,7 +211,10 @@ class CommonsApplication : MultiDexApplication() {
      * @param logoutListener Implementation of interface LogoutListener
      */
     @SuppressLint("CheckResult")
-    fun clearApplicationData(context: Context, logoutListener: LogoutListener) {
+    fun clearApplicationData(
+        context: Context,
+        logoutListener: LogoutListener,
+    ) {
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
         if (applicationDirectory.exists()) {
@@ -211,17 +226,19 @@ class CommonsApplication : MultiDexApplication() {
             }
         }
 
-        sessionManager.logout()
+        sessionManager
+            .logout()
             .andThen(Completable.fromAction { cookieJar.clear() })
-            .andThen(Completable.fromAction {
-                Timber.d("All accounts have been removed")
-                clearImageCache()
-                //TODO: fix preference manager
-                defaultPrefs.clearAll()
-                defaultPrefs.putBoolean("firstrun", false)
-                updateAllDatabases()
-            })
-            .subscribeOn(Schedulers.io())
+            .andThen(
+                Completable.fromAction {
+                    Timber.d("All accounts have been removed")
+                    clearImageCache()
+                    // TODO: fix preference manager
+                    defaultPrefs.clearAll()
+                    defaultPrefs.putBoolean("firstrun", false)
+                    updateAllDatabases()
+                },
+            ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ logoutListener.onLogoutComplete() }, { t: Throwable? -> Timber.e(t) })
     }
@@ -244,12 +261,12 @@ class CommonsApplication : MultiDexApplication() {
         CategoryTable.onDelete(db)
         dbOpenHelper.deleteTable(
             db,
-            DBOpenHelper.CONTRIBUTIONS_TABLE
-        ) //Delete the contributions table in the existing db on older versions
+            DBOpenHelper.CONTRIBUTIONS_TABLE,
+        ) // Delete the contributions table in the existing db on older versions
 
         dbOpenHelper.deleteTable(
             db,
-            DBOpenHelper.BOOKMARKS_LOCATIONS
+            DBOpenHelper.BOOKMARKS_LOCATIONS,
         )
 
         try {
@@ -260,7 +277,6 @@ class CommonsApplication : MultiDexApplication() {
         BookmarksTable.onDelete(db)
         BookmarkItemsTable.onDelete(db)
     }
-
 
     /**
      * Interface used to get log-out events
@@ -295,8 +311,9 @@ class CommonsApplication : MultiDexApplication() {
          * @param loginUsername Username to be pre-filled on the login page
          */
         constructor(
-            ctx: Context, loginMessage: String?,
-            loginUsername: String?
+            ctx: Context,
+            loginMessage: String?,
+            loginUsername: String?,
         ) {
             this.ctx = ctx
             this.loginMessage = loginMessage
@@ -306,7 +323,8 @@ class CommonsApplication : MultiDexApplication() {
         override fun onLogoutComplete() {
             Timber.d("Logout complete callback received.")
             val loginIntent = Intent(ctx, LoginActivity::class.java)
-            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            loginIntent
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
             if (loginMessage != null) {
@@ -327,7 +345,6 @@ class CommonsApplication : MultiDexApplication() {
     class ActivityLogoutListener : BaseLogoutListener {
         var activity: Activity
 
-
         /**
          * Constructor for ActivityLogoutListener.
          *
@@ -347,8 +364,10 @@ class CommonsApplication : MultiDexApplication() {
          * @param loginUsername Username to be pre-filled on the login page after logout.
          */
         constructor(
-            activity: Activity, ctx: Context?,
-            loginMessage: String?, loginUsername: String?
+            activity: Activity,
+            ctx: Context?,
+            loginMessage: String?,
+            loginUsername: String?,
         ) : super(activity, loginMessage, loginUsername) {
             this.activity = activity
         }
@@ -360,7 +379,6 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     companion object {
-
         const val LOGIN_MESSAGE_INTENT_KEY: String = "loginMessage"
         const val LOGIN_USERNAME_INTENT_KEY: String = "loginUsername"
 
@@ -399,20 +417,22 @@ class CommonsApplication : MultiDexApplication() {
         @JvmStatic
         fun createNotificationChannel(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val manager = context
-                    .getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                var channel = manager
-                    .getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL)
+                val manager =
+                    context
+                        .getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                var channel =
+                    manager
+                        .getNotificationChannel(NOTIFICATION_CHANNEL_ID_ALL)
                 if (channel == null) {
-                    channel = NotificationChannel(
-                        NOTIFICATION_CHANNEL_ID_ALL,
-                        context.getString(R.string.notifications_channel_name_all),
-                        NotificationManager.IMPORTANCE_DEFAULT
-                    )
+                    channel =
+                        NotificationChannel(
+                            NOTIFICATION_CHANNEL_ID_ALL,
+                            context.getString(R.string.notifications_channel_name_all),
+                            NotificationManager.IMPORTANCE_DEFAULT,
+                        )
                     manager.createNotificationChannel(channel)
                 }
             }
         }
     }
 }
-

@@ -54,6 +54,7 @@ class EditActivity : BaseActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
     private lateinit var binding: ActivityEditBinding
+
     // variable to store the initial exif orientation
     private var startOrientation = 0
 
@@ -75,27 +76,29 @@ class EditActivity : BaseActivity() {
         vm = ViewModelProvider(this)[EditViewModel::class.java]
         vm.initJpegtran(applicationContext, imageUri)
         fetchAndUpdateImageProperties()
-        val sourceExif = try {
-            ExifInterface(imageUri)
-        } catch (e: Exception) {
+        val sourceExif =
             try {
-                contentResolver.openInputStream(imageUri.toUri())?.use {
-                    ExifInterface(it)
+                ExifInterface(imageUri)
+            } catch (e: Exception) {
+                try {
+                    contentResolver.openInputStream(imageUri.toUri())?.use {
+                        ExifInterface(it)
+                    }
+                } catch (e2: Exception) {
+                    Timber.e(e2, "Failed to read EXIF from URI")
+                    null
                 }
-            } catch (e2: Exception) {
-                Timber.e(e2, "Failed to read EXIF from URI")
-                null
             }
-        }
 
         // extracts the initial orientation
         val orientation = sourceExif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-        startOrientation = when (orientation) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> 90
-            ExifInterface.ORIENTATION_ROTATE_180 -> 180
-            ExifInterface.ORIENTATION_ROTATE_270 -> 270
-            else -> 0
-        }
+        startOrientation =
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> 90
+                ExifInterface.ORIENTATION_ROTATE_180 -> 180
+                ExifInterface.ORIENTATION_ROTATE_270 -> 270
+                else -> 0
+            }
 
         applyEdgeToEdgeBottomInsets(binding.root, false)
         binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
@@ -152,50 +155,59 @@ class EditActivity : BaseActivity() {
                 enterBlurMode()
                 toggleApplyEditMode(true)
             }
-
         }
         binding.autoblurBtn.setOnClickListener {
             lifecycleScope.launch {
                 // Build and show the progress dialog
-                val dialogView = LayoutInflater.from(this@EditActivity)
-                    .inflate(R.layout.dialog_autodetect_progress, null)
+                val dialogView =
+                    LayoutInflater
+                        .from(this@EditActivity)
+                        .inflate(R.layout.dialog_autodetect_progress, null)
                 val progressBar = dialogView.findViewById<ProgressBar>(R.id.autodetect_progress)
                 val percentView = dialogView.findViewById<TextView>(R.id.autodetect_percent)
-                val progressDialog = AlertDialog.Builder(this@EditActivity)
-                    .setView(dialogView)
-                    .setCancelable(false)
-                    .create()
+                val progressDialog =
+                    AlertDialog
+                        .Builder(this@EditActivity)
+                        .setView(dialogView)
+                        .setCancelable(false)
+                        .create()
                 progressDialog.show()
                 val decodedBitmap = loadBitmapForDetection(imageUri)
                 if (decodedBitmap == null) {
                     progressDialog.dismiss()
-                    Toast.makeText(
-                        this@EditActivity,
-                        getString(R.string.autoblur_failed_to_load),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@EditActivity,
+                            getString(R.string.autoblur_failed_to_load),
+                            Toast.LENGTH_SHORT,
+                        ).show()
                     Timber.e("AutoBlur: decodedBitmap is null for $imageUri")
                     return@launch
                 }
 
                 val detector = CommonsVision(applicationContext)
-                val detectionResult = withContext(Dispatchers.Default) {
-                    detector.detect(decodedBitmap) { progress ->
-                        val percent = (progress * 100).toInt()
-                        runOnUiThread {
-                            progressBar?.progress = percent
-                            percentView?.text = "$percent%"
+                val detectionResult =
+                    withContext(Dispatchers.Default) {
+                        detector.detect(decodedBitmap) { progress ->
+                            val percent = (progress * 100).toInt()
+                            runOnUiThread {
+                                progressBar?.progress = percent
+                                percentView?.text = "$percent%"
+                            }
                         }
                     }
-                }
-                val rawDetections = when (detectionResult) {
-                    is DetectionResult.Success -> detectionResult.detections
-                    is DetectionResult.Partial -> {
-                        Timber.w("Partial detection result: unavailable capabilities = ${detectionResult.detections}")
-                        detectionResult.detections
+                val rawDetections =
+                    when (detectionResult) {
+                        is DetectionResult.Success -> detectionResult.detections
+                        is DetectionResult.Partial -> {
+                            Timber.w(
+                                "Partial detection result: unavailable capabilities = " +
+                                    "${detectionResult.detections}",
+                            )
+                            detectionResult.detections
+                        }
+                        else -> emptyList()
                     }
-                    else -> emptyList()
-                }
                 delay(700.milliseconds)
                 progressDialog.dismiss()
 
@@ -205,26 +217,32 @@ class EditActivity : BaseActivity() {
                 }
 
                 val drawable = binding.iv.drawable
-                if (drawable != null && rawDetections.isNotEmpty() && decodedBitmap.width > 0 && decodedBitmap.height > 0) {
+                if (drawable != null &&
+                    rawDetections.isNotEmpty() &&
+                    decodedBitmap.width > 0 &&
+                    decodedBitmap.height > 0
+                ) {
                     val scaleX = drawable.intrinsicWidth.toFloat() / decodedBitmap.width
                     val scaleY = drawable.intrinsicHeight.toFloat() / decodedBitmap.height
 
-                    val scaledRects = rawDetections.map { detection ->
-                        val b = detection.bounds
-                        RectF(
-                            b.left * scaleX,
-                            b.top * scaleY,
-                            b.right * scaleX,
-                            b.bottom * scaleY
-                        )
-                    }
+                    val scaledRects =
+                        rawDetections.map { detection ->
+                            val b = detection.bounds
+                            RectF(
+                                b.left * scaleX,
+                                b.top * scaleY,
+                                b.right * scaleX,
+                                b.bottom * scaleY,
+                            )
+                        }
                     binding.blurOverlay.addRegions(scaledRects)
                 } else if (rawDetections.isEmpty()) {
-                    Toast.makeText(
-                        this@EditActivity,
-                        getString(R.string.autoblur_no_region_detected),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@EditActivity,
+                            getString(R.string.autoblur_no_region_detected),
+                            Toast.LENGTH_SHORT,
+                        ).show()
                 }
 
                 // Dismiss dialog after a short delay for visual feedback.
@@ -253,7 +271,7 @@ class EditActivity : BaseActivity() {
             }.onFailure { e ->
                 Timber.e(e, "Failed to load bitmap for detection from pathOrUri: $pathOrUri")
             }.getOrNull()
-    }
+        }
 
     /**
      * Gets the current image properties and update those properties in [BlurOverlayView].
@@ -264,11 +282,12 @@ class EditActivity : BaseActivity() {
             binding.blurOverlay.setImageProperties(properties!!)
         } catch (e: Exception) {
             Timber.e(e, "Error getting image properties: ${e.localizedMessage}")
-            Toast.makeText(
-                this@EditActivity,
-                getString(R.string.error_getting_image_properties),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_getting_image_properties),
+                    Toast.LENGTH_LONG,
+                ).show()
         }
     }
 
@@ -313,7 +332,6 @@ class EditActivity : BaseActivity() {
         binding.blurOverlay.setBaseMatrix(baseImageMatrix!!)
     }
 
-
     /**
      * Enters crop mode, showing the crop overlay.
      */
@@ -352,7 +370,7 @@ class EditActivity : BaseActivity() {
             offsetX + drawableRect.left,
             offsetY + drawableRect.top,
             offsetX + drawableRect.right,
-            offsetY + drawableRect.bottom
+            offsetY + drawableRect.bottom,
         )
     }
 
@@ -391,21 +409,23 @@ class EditActivity : BaseActivity() {
         Timber.d(
             "%s%s",
             "applyBlur: originalBitmapWidth=$originalBitmapWidth,",
-            " originalBitmapHeight=$originalBitmapHeight"
+            " originalBitmapHeight=$originalBitmapHeight",
         )
-        val regions = binding.blurOverlay.getMappedBlurRegions(
-            binding.iv,
-            originalBitmapWidth,
-            originalBitmapHeight
-        )
+        val regions =
+            binding.blurOverlay.getMappedBlurRegions(
+                binding.iv,
+                originalBitmapWidth,
+                originalBitmapHeight,
+            )
         Timber.d("applyBlur: mappedRegionsCount=${regions.size}")
 
         if (regions.isEmpty()) {
-            Toast.makeText(
-                this@EditActivity,
-                getString(R.string.error_blur_no_rectangle),
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_blur_no_rectangle),
+                    Toast.LENGTH_SHORT,
+                ).show()
             return
         }
         // Exit blur mode before updating the preview
@@ -424,11 +444,12 @@ class EditActivity : BaseActivity() {
             fetchAndUpdateImageProperties()
         } catch (e: Exception) {
             Timber.e(e, "Failed to apply blur ${e.localizedMessage}")
-            Toast.makeText(
-                this@EditActivity,
-                getString(R.string.error_applying_blur),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_applying_blur),
+                    Toast.LENGTH_LONG,
+                ).show()
         }
     }
 
@@ -447,13 +468,14 @@ class EditActivity : BaseActivity() {
             val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
 
             if (cropCoords != null) {
-                val croppedFile = vm.cropImage(
-                    cropCoords.left,
-                    cropCoords.top,
-                    cropCoords.width,
-                    cropCoords.height,
-                    applicationContext.cacheDir
-                )
+                val croppedFile =
+                    vm.cropImage(
+                        cropCoords.left,
+                        cropCoords.top,
+                        cropCoords.width,
+                        cropCoords.height,
+                        applicationContext.cacheDir,
+                    )
                 imageUri = croppedFile.absolutePath
                 // Update the image preview.
                 updateImagePreview()
@@ -461,11 +483,12 @@ class EditActivity : BaseActivity() {
             }
         } catch (e: Exception) {
             Timber.e(e, "applyCrop: Failed to apply crop ${e.localizedMessage}")
-            Toast.makeText(
-                this@EditActivity,
-                getString(R.string.failed_to_apply_crop),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.failed_to_apply_crop),
+                    Toast.LENGTH_LONG,
+                ).show()
         }
         exitCropMode()
         toggleApplyEditMode(false)
@@ -509,24 +532,26 @@ class EditActivity : BaseActivity() {
             val matrix = Matrix()
             val isRotated90 = (startOrientation == 90 || startOrientation == 270)
 
-            val scale = if (isRotated90) {
-                min(viewWidth / bmpHeight, maxAvailableHeight / bmpWidth)
-            } else {
-                min(viewWidth / bmpWidth, maxAvailableHeight / bmpHeight)
-            }
+            val scale =
+                if (isRotated90) {
+                    min(viewWidth / bmpHeight, maxAvailableHeight / bmpWidth)
+                } else {
+                    min(viewWidth / bmpWidth, maxAvailableHeight / bmpHeight)
+                }
 
-            val viewHeight = if (isRotated90) {
-                min((scale * bmpWidth).toInt(), maxAvailableHeight.toInt())
-            } else {
-                min((scale * bmpHeight).toInt(), maxAvailableHeight.toInt())
-            }
+            val viewHeight =
+                if (isRotated90) {
+                    min((scale * bmpWidth).toInt(), maxAvailableHeight.toInt())
+                } else {
+                    min((scale * bmpHeight).toInt(), maxAvailableHeight.toInt())
+                }
 
             binding.iv.layoutParams.height = viewHeight
             matrix.postRotate(startOrientation.toFloat(), bmpWidth / 2, bmpHeight / 2)
             matrix.postScale(scale, scale, bmpWidth / 2, bmpHeight / 2)
             matrix.postTranslate(
                 viewWidth / 2 - bmpWidth / 2,
-                viewHeight.toFloat() / 2 - bmpHeight / 2
+                viewHeight.toFloat() / 2 - bmpHeight / 2,
             )
             binding.iv.imageMatrix = matrix
             binding.iv.requestLayout()
@@ -557,21 +582,23 @@ class EditActivity : BaseActivity() {
         try {
             applyPendingRotation()
             val finalPath = imageUri.toUri().path
-            val resultIntent = Intent().apply {
-                putExtra("editedImageFilePath", finalPath)
-            }
+            val resultIntent =
+                Intent().apply {
+                    putExtra("editedImageFilePath", finalPath)
+                }
             setResult(RESULT_OK, resultIntent)
             finish()
         } catch (e: Exception) {
             Timber.e(
                 e,
-                "saveEditedImage: Exception occurred during save process ${e.localizedMessage}"
+                "saveEditedImage: Exception occurred during save process ${e.localizedMessage}",
             )
-            Toast.makeText(
-                this@EditActivity,
-                getString(R.string.failed_to_save_image),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.failed_to_save_image),
+                    Toast.LENGTH_LONG,
+                ).show()
         }
     }
 
@@ -586,7 +613,7 @@ class EditActivity : BaseActivity() {
     private fun convertViewCropToImageCrop(
         viewCropRect: RectF,
         actualFileWidth: Int,
-        actualFileHeight: Int
+        actualFileHeight: Int,
     ): CropCoordinates? {
         val drawable = binding.iv.drawable ?: return null
         val drawableWidth = drawable.intrinsicWidth.toFloat()
@@ -612,14 +639,18 @@ class EditActivity : BaseActivity() {
         if (displayedRect.width() <= 0 || displayedRect.height() <= 0) return null
 
         // Calculate crop as percentage of displayed bounds
-        val leftPercent = ((viewCropRect.left - displayedRect.left) / displayedRect.width())
-            .coerceIn(0f, 1f)
-        val topPercent = ((viewCropRect.top - displayedRect.top) / displayedRect.height())
-            .coerceIn(0f, 1f)
-        val rightPercent = ((viewCropRect.right - displayedRect.left) / displayedRect.width())
-            .coerceIn(0f, 1f)
-        val bottomPercent = ((viewCropRect.bottom - displayedRect.top) / displayedRect.height())
-            .coerceIn(0f, 1f)
+        val leftPercent =
+            ((viewCropRect.left - displayedRect.left) / displayedRect.width())
+                .coerceIn(0f, 1f)
+        val topPercent =
+            ((viewCropRect.top - displayedRect.top) / displayedRect.height())
+                .coerceIn(0f, 1f)
+        val rightPercent =
+            ((viewCropRect.right - displayedRect.left) / displayedRect.width())
+                .coerceIn(0f, 1f)
+        val bottomPercent =
+            ((viewCropRect.bottom - displayedRect.top) / displayedRect.height())
+                .coerceIn(0f, 1f)
 
         // Apply percentages to ACTUAL file dimensions
         val cropLeft = (leftPercent * actualFileWidth).roundToInt().coerceIn(0, actualFileWidth - 1)
@@ -636,8 +667,8 @@ class EditActivity : BaseActivity() {
 
         Timber.d(
             "%s%s",
-            "Crop conversion: file=${actualFileWidth}x${actualFileHeight}, ",
-            "crop=($validLeft, $validTop, $width, $height)"
+            "Crop conversion: file=${actualFileWidth}x$actualFileHeight, ",
+            "crop=($validLeft, $validTop, $width, $height)",
         )
 
         return CropCoordinates(validLeft, validTop, width, height)
@@ -697,7 +728,7 @@ class EditActivity : BaseActivity() {
             else -> {
                 throw
                 UnsupportedOperationException(
-                    "rotation can 0, 90, 180 or 270. \${rotation} is unsupported"
+                    "rotation can 0, 90, 180 or 270. \${rotation} is unsupported",
                 )
             }
         }
@@ -762,7 +793,6 @@ class EditActivity : BaseActivity() {
         animator.start()
     }
 
-
     /**
      * Calculates the scale factor to be used for scaling down a bitmap based on its original
      *  dimensions and the maximum allowed size.
@@ -805,5 +835,5 @@ private data class CropCoordinates(
     val left: Int,
     val top: Int,
     val width: Int,
-    val height: Int
+    val height: Int,
 )

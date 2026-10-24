@@ -31,7 +31,8 @@ class CommonsCookieStorage(
         cookies: MutableList<Cookie>,
     ) = cookieMap.put(domainSpec, cookies.toList())
 
-    operator fun get(domainSpec: String): MutableList<Cookie> = cookieMap[domainSpec]?.toMutableList() ?: mutableListOf()
+    operator fun get(domainSpec: String): MutableList<Cookie> =
+        cookieMap[domainSpec]?.toMutableList() ?: mutableListOf()
 
     fun clear() {
         cookieMap.clear()
@@ -42,15 +43,15 @@ class CommonsCookieStorage(
         cookieMap.clear()
         val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
         val json = CryptoUtils.decrypt(encryptedJson)
-        
+
         if (!json.isNullOrEmpty()) {
             val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
             cookieMap.putAll(serializedData.cookieMap)
-            
+
             // If the loaded json wasn't encrypted (e.g. migrating from older version)
             // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
             if (encryptedJson == json) {
-               save()
+                save()
             }
         }
     }

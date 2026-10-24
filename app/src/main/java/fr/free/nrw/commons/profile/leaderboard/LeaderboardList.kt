@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
  * The leaderboard list will contain the ranking of the users from 1 to n,
  * avatars, username and count in the selected category.
  */
-data class LeaderboardList (
+data class LeaderboardList(
     @SerializedName("username")
     var username: String? = null,
     @SerializedName("category_count")
@@ -16,9 +16,8 @@ data class LeaderboardList (
     @SerializedName("avatar")
     var avatar: String? = null,
     @SerializedName("rank")
-    var rank: Int? = null
+    var rank: Int? = null,
 ) {
-
     /**
      * Returns true if two objects are equal, false otherwise
      * @param other
@@ -44,17 +43,20 @@ data class LeaderboardList (
     companion object {
         /**
          * This method checks for the diff in the callbacks for paged lists
+         *
+         * Keeps its name: renaming it would change the public API that LeaderboardListAdapter imports.
          */
+        @Suppress("ktlint:standard:property-naming")
         var DIFF_CALLBACK: DiffUtil.ItemCallback<LeaderboardList> =
             object : DiffUtil.ItemCallback<LeaderboardList>() {
                 override fun areItemsTheSame(
                     oldItem: LeaderboardList,
-                    newItem: LeaderboardList
+                    newItem: LeaderboardList,
                 ): Boolean = newItem === oldItem
 
                 override fun areContentsTheSame(
                     oldItem: LeaderboardList,
-                    newItem: LeaderboardList
+                    newItem: LeaderboardList,
                 ): Boolean = newItem.rank == oldItem.rank
             }
     }

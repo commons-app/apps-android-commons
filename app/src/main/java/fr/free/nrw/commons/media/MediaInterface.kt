@@ -194,17 +194,17 @@ interface MediaInterface {
 
         const val MEDIA_PARAMS =
             "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlheight=" +
-                    THUMB_HEIGHT_PX +
-                    "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|" +
-                    "ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
+                THUMB_HEIGHT_PX +
+                "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|" +
+                "ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
 
         /**
          * fetches category detail(title, hidden) for each category along with File information
          */
         const val MEDIA_PARAMS_WITH_CATEGORY_DETAILS =
             "&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlheight=" +
-                    THUMB_HEIGHT_PX +
-                    "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|" +
-                    "DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
+                THUMB_HEIGHT_PX +
+                "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|" +
+                "DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
     }
 }
