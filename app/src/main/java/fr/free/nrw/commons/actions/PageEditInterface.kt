@@ -20,6 +20,7 @@ import retrofit2.http.Query
  * This interface posts a form encoded request to the wikimedia API
  * with editing action as argument to edit a particular page
  */
+@Suppress("LongParameterList")
 interface PageEditInterface {
     /**
      * This method posts such that the Content which the page

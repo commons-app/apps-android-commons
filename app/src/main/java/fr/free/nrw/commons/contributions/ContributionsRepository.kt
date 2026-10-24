@@ -28,6 +28,12 @@ class ContributionsRepository
             localDataSource.deleteContribution(contribution)
 
         /**
+         * Marks one completed contribution after a normal request reports that its file page is gone.
+         */
+        fun markCompletedContributionDeleted(fileName: String): Completable =
+            localDataSource.markCompletedContributionDeleted(fileName)
+
+        /**
          * Deletes contributions from the database with specific states.
          *
          * @param states The states of the contributions to delete.

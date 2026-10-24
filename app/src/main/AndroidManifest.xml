@@ -135,6 +135,10 @@
       android:label="@string/title_activity_about"
       android:parentActivityName=".contributions.MainActivity" />
     <activity
+      android:name=".media.DeletedFileActivity"
+      android:label="@string/deleted_file_activity_title"
+      android:parentActivityName=".contributions.MainActivity" />
+    <activity
       android:name=".auth.SignupActivity"
       android:configChanges="orientation|screenLayout|screenSize"
       android:label="@string/title_activity_signup" />

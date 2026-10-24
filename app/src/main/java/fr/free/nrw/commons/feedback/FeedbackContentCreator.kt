@@ -10,15 +10,19 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
-class FeedbackContentCreator(context: Context, feedback: Feedback) {
+class FeedbackContentCreator(
+    context: Context,
+    feedback: Feedback,
+) {
     private var sectionTitleBuilder = StringBuilder()
     private var sectionTextBuilder = StringBuilder()
+
     init {
         // Localization is not needed here
         // because this ends up on a page where developers read the feedback,
         // so English is the most convenient.
 
-        //Get the UTC Date and Time and add it to the Title
+        // Get the UTC Date and Time and add it to the Title
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH)
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val utcFormattedDate = dateFormat.format(Date())
@@ -30,7 +34,7 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
         sectionTitleBuilder.append(feedback.version)
         sectionTitleBuilder.append(" on ")
         sectionTitleBuilder.append(utcFormattedDate)
-        
+
         // Construct the feedback section text
         sectionTextBuilder = StringBuilder()
         sectionTextBuilder.append("\n")
@@ -42,8 +46,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.api_level)
+                    Locale.ENGLISH,
+                ).getString(R.string.api_level),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.apiLevel)
@@ -54,8 +58,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.android_version)
+                    Locale.ENGLISH,
+                ).getString(R.string.android_version),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.androidVersion)
@@ -66,8 +70,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.device_manufacturer)
+                    Locale.ENGLISH,
+                ).getString(R.string.device_manufacturer),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.deviceManufacturer)
@@ -78,8 +82,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.device_model)
+                    Locale.ENGLISH,
+                ).getString(R.string.device_model),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.deviceModel)
@@ -90,8 +94,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.device_name)
+                    Locale.ENGLISH,
+                ).getString(R.string.device_name),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.device)
@@ -102,8 +106,8 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
             sectionTextBuilder.append(
                 getLocalizedResources(
                     context,
-                    Locale.ENGLISH
-                ).getString(R.string.network_type)
+                    Locale.ENGLISH,
+                ).getString(R.string.network_type),
             )
             sectionTextBuilder.append(": ")
             sectionTextBuilder.append(feedback.networkType)
@@ -113,11 +117,7 @@ class FeedbackContentCreator(context: Context, feedback: Feedback) {
         sectionTextBuilder.append("\n")
     }
 
-    fun getSectionText(): String {
-        return sectionTextBuilder.toString()
-    }
+    fun getSectionText(): String = sectionTextBuilder.toString()
 
-    fun getSectionTitle(): String {
-        return sectionTitleBuilder.toString()
-    }
+    fun getSectionTitle(): String = sectionTitleBuilder.toString()
 }

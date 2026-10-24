@@ -189,13 +189,12 @@ class CoordinateEditHelperUnitTest {
                 "showCoordinatesEditNotification",
                 Context::class.java,
                 Media::class.java,
-                String::class.java,
-                String::class.java,
-                String::class.java,
+                CoordinatesInfo::class.java,
                 Boolean::class.java,
             )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", true), true)
+        val info = CoordinatesInfo("0.0", "0.0", "0.0F")
+        assertEquals(method.invoke(helper, context, media, info, true), true)
     }
 
     @Test
@@ -206,12 +205,11 @@ class CoordinateEditHelperUnitTest {
                 "showCoordinatesEditNotification",
                 Context::class.java,
                 Media::class.java,
-                String::class.java,
-                String::class.java,
-                String::class.java,
+                CoordinatesInfo::class.java,
                 Boolean::class.java,
             )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", false), false)
+        val info = CoordinatesInfo("0.0", "0.0", "0.0F")
+        assertEquals(method.invoke(helper, context, media, info, false), false)
     }
 }
