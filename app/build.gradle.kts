@@ -52,8 +52,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1067
-        versionName = "6.8.0"
+        versionCode = 1068
+        versionName = "6.9.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -92,7 +92,8 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.txt")
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.txt")
             testProguardFile("test-proguard-rules.txt")
 
             signingConfig = signingConfigs.getByName("debug")
@@ -102,7 +103,7 @@ android {
         }
         debug {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.txt")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.txt")
             testProguardFile("test-proguard-rules.txt")
 
             versionNameSuffix = "-debug-" + getBranchName()
