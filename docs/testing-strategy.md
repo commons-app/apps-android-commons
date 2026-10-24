@@ -6,12 +6,12 @@ Tests are also an architecture check: domain rules should be runnable on the JVM
 
 ## Test layers
 
-| Layer | Scope | Dependencies | Expected trigger |
+| Layer | Scope | Dependencies | Status |
 | --- | --- | --- | --- |
-| JVM tests | Models, presenters, clients, persistence, upload logic | Fakes, fixtures, MockWebServer | Every pull request |
-| Emulator smoke tests | Login screen, navigation, permissions, orientation, critical screen behavior | Deterministic test session and local fixtures | Every pull request once stable |
-| Beta integration tests | Real authentication, Wikimedia API compatibility, upload behavior | Dedicated Beta credentials and remote state | Manual or scheduled workflow |
-| Release validation | Production-like build and critical user journeys | Release candidate environment | Release candidate |
+| JVM tests | Models, presenters, clients, persistence, upload logic | Fakes, fixtures, MockWebServer | Runs on every pull request (`testBetaDebugUnitTestCoverage` in `.github/workflows/android.yml`) |
+| Emulator smoke tests | Login screen, navigation, permissions, orientation, critical screen behavior | Deterministic test session and local fixtures | Planned. The `connectedBetaDebugAndroidTest` step is commented out in CI, so it does not gate pull requests today |
+| Beta integration tests | Real authentication, Wikimedia API compatibility, upload behavior | Dedicated Beta credentials and remote state | Manual only. No scheduled workflow exists |
+| Release validation | Production-like build and critical user journeys | Release candidate environment | Manual |
 
 ## Rules for reliable tests
 
@@ -19,10 +19,10 @@ Tests are also an architecture check: domain rules should be runnable on the JVM
 - Prefer realistic fake repositories and test implementations over verifying mock call sequences.
 - Use MockWebServer for HTTP behavior and reset preferences/database state between tests.
 - Replace fixed sleeps with Espresso synchronization, explicit polling with timeouts, or testable worker/network state.
-- Do not catch and ignore `NoMatchingViewException` or other setup/assertion failures.
+- Do not catch and ignore `NoMatchingViewException` or other setup/assertion failures. Note: `app/src/androidTest/java/fr/free/nrw/commons/UITestHelper.kt` currently does this in several helpers; fix it when touching those helpers.
 - Do not add `@Ignore`, weaken assertions, or suppress a test to make CI pass.
 
-Prefer `UploadUseCaseTest → FakeUploadGateway`. Avoid `UploadActivityTest → real Wikimedia API → real account → remote upload` for pull-request validation.
+Prefer `UploadClientTest`, which mocks the Retrofit `UploadInterface` (`app/src/test/kotlin/fr/free/nrw/commons/upload/UploadClientTest.kt`), over tests that call the real Wikimedia API with a real account. Existing UI tests that depend on live login, such as `UITestHelper.loginUser()`, are outside the PR gate.
 
 ## Commands
 

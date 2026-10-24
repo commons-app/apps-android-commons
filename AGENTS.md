@@ -11,9 +11,11 @@ Use the checked-in Gradle wrapper and Java 17.
 - `./gradlew assembleProdDebug` — build the production debug APK.
 - `./gradlew assembleBetaDebug` — build the beta debug APK.
 - `./gradlew testProdDebugUnitTest` — run production-flavor JVM unit tests.
-- `./gradlew connectedProdDebugAndroidTest` — run instrumented tests on a connected device or emulator.
+- `./gradlew connectedBetaDebugAndroidTest` — run instrumented tests on a connected device or emulator. CI does not run this yet; the step is commented out in `.github/workflows/android.yml`.
 - `./gradlew lintProdDebug` — run Android Lint for the production debug variant.
 - `./gradlew jacocoTestReport` — generate the configured JaCoCo test coverage report, when the task is available.
+
+CI on pull requests runs `./gradlew -Pcoverage testBetaDebugUnitTestCoverage`, `./gradlew assembleBetaDebug`, and `./gradlew assembleProdDebug` (`.github/workflows/android.yml`).
 
 ## Coding Style & Naming Conventions
 
@@ -53,19 +55,10 @@ Agents must never make a test pass by adding `@Ignore`, weakening assertions, sw
 - Prefer realistic fakes, test repositories, fixtures, and MockWebServer over tests that only verify mock call sequences.
 - Apply SOLID where it reduces coupling; do not add interfaces, wrappers, use cases, or domain events solely for ceremony.
 
-Example boundary:
+Existing examples to follow:
 
-```kotlin
-// Prefer: domain-facing interface
-interface UploadGateway {
-    suspend fun upload(request: UploadRequest): UploadResult
-}
-
-// Avoid: domain code depending directly on a Retrofit API
-class UploadUseCase(private val uploadApi: UploadApi)
-```
-
-Example test seam: `UploadUseCaseTest → FakeUploadGateway`. Avoid `UploadActivityTest → real Wikimedia API → real account → remote upload`.
+- `UploadClient` (`app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt`) wraps the Retrofit `UploadInterface` and is tested in `UploadClientTest` (`app/src/test/kotlin/fr/free/nrw/commons/upload/UploadClientTest.kt`) with that interface mocked, not a live account.
+- Avoid: UI tests that log in with a live account and upload to Wikimedia. `UITestHelper.loginUser()` in `app/src/androidTest/java/fr/free/nrw/commons/UITestHelper.kt` is a legacy live-account helper; do not copy its pattern into new tests.
 
 ## Android Documentation Policy
 
