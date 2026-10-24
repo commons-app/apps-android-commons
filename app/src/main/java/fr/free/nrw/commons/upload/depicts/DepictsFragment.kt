@@ -47,6 +47,9 @@ import javax.inject.Named
 /**
  * Fragment for showing depicted items list in Upload activity after media details
  */
+
+private const val SEARCH_DEBOUNCE_DELAY_MS = 500L
+
 class DepictsFragment :
     UploadBaseFragment(),
     DepictsContract.View {
@@ -445,7 +448,7 @@ class DepictsFragment :
                     binding.depictsSearchContainer.error =
                         null
                 }.takeUntil(RxView.detaches(binding.depictsSearch))
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(SEARCH_DEBOUNCE_DELAY_MS, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { filter: CharSequence -> searchForDepictions(filter.toString()) },
