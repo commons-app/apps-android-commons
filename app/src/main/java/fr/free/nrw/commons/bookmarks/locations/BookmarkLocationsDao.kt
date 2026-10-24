@@ -13,7 +13,6 @@ import fr.free.nrw.commons.nearby.Place
  */
 @Dao
 abstract class BookmarkLocationsDao {
-
     /**
      * Adds or updates a bookmark location in the database.
      */
@@ -59,7 +58,5 @@ abstract class BookmarkLocationsDao {
     /**
      * Fetches all bookmark locations as `Place` objects.
      */
-    suspend fun getAllBookmarksLocationsPlace(): List<Place> {
-        return getAllBookmarksLocations().map { it.toPlace() }
-    }
+    suspend fun getAllBookmarksLocationsPlace(): List<Place> = getAllBookmarksLocations().map { it.toPlace() }
 }
