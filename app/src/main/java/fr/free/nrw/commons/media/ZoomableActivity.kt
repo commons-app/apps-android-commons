@@ -527,43 +527,40 @@ class ZoomableActivity : BaseActivity() {
         var nextPosition = position
         for (i in index until images!!.size) {
             nextPosition = i
-            val imageSHA1 =
-                CustomSelectorUtils.getImageSHA1(
-                    images!![i].uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver,
-                )
-            var isNonActionable = notForUploadStatusDao.find(imageSHA1)
-            if (isNonActionable <= 0) {
-                isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                if (isNonActionable <= 0) {
-                    val imageModifiedSHA1 =
-                        CustomSelectorUtils.generateModifiedSHA1(
-                            images!![i],
-                            defaultDispatcher,
-                            this@ZoomableActivity,
-                            fileProcessor,
-                            fileUtilsWrapper,
-                        )
-                    isNonActionable =
-                        uploadedStatusDao.findByModifiedImageSHA1(
-                            imageModifiedSHA1,
-                            true,
-                        )
-                    if (isNonActionable <= 0) {
-                        return i
-                    } else {
-                        continue
-                    }
-                } else {
-                    continue
-                }
-            } else {
-                continue
+            if (isActionableImage(images!![i])) {
+                return i
             }
         }
         return nextPosition
+    }
+
+    /**
+     * Checks whether the image is neither marked as not for upload or already uploaded,
+     * looking up both its SHA1 and its modified SHA1.
+     */
+    private suspend fun isActionableImage(image: Image): Boolean {
+        val imageSHA1 =
+            CustomSelectorUtils.getImageSHA1(
+                image.uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                contentResolver,
+            )
+        return notForUploadStatusDao.find(imageSHA1) <= 0 &&
+            uploadedStatusDao.findByImageSHA1(imageSHA1, true) <= 0 &&
+            !isModifiedImageUploaded(image)
+    }
+
+    private suspend fun isModifiedImageUploaded(image: Image): Boolean {
+        val imageModifiedSHA1 =
+            CustomSelectorUtils.generateModifiedSHA1(
+                image,
+                defaultDispatcher,
+                this@ZoomableActivity,
+                fileProcessor,
+                fileUtilsWrapper,
+            )
+        return uploadedStatusDao.findByModifiedImageSHA1(imageModifiedSHA1, true) > 0
     }
 
     /**
@@ -576,40 +573,8 @@ class ZoomableActivity : BaseActivity() {
         var previousPosition = position
         for (i in index downTo 0) {
             previousPosition = i
-            val imageSHA1 =
-                CustomSelectorUtils.getImageSHA1(
-                    images!![i].uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver,
-                )
-            var isNonActionable = notForUploadStatusDao.find(imageSHA1)
-            if (isNonActionable <= 0) {
-                isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                if (isNonActionable <= 0) {
-                    val imageModifiedSHA1 =
-                        CustomSelectorUtils.generateModifiedSHA1(
-                            images!![i],
-                            defaultDispatcher,
-                            this@ZoomableActivity,
-                            fileProcessor,
-                            fileUtilsWrapper,
-                        )
-                    isNonActionable =
-                        uploadedStatusDao.findByModifiedImageSHA1(
-                            imageModifiedSHA1,
-                            true,
-                        )
-                    if (isNonActionable <= 0) {
-                        return i
-                    } else {
-                        continue
-                    }
-                } else {
-                    continue
-                }
-            } else {
-                continue
+            if (isActionableImage(images!![i])) {
+                return i
             }
         }
         return previousPosition

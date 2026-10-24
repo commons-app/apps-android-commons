@@ -444,7 +444,7 @@ class MediaDetailFragment :
                 },
                 R.string.storage_permission_title,
                 R.string.read_storage_permission_rationale,
-                *PERMISSIONS_STORAGE,
+                PERMISSIONS_STORAGE,
             )
         }
     }

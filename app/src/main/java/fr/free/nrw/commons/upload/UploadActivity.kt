@@ -357,7 +357,7 @@ class UploadActivity :
                     },
                     R.string.storage_permission_title,
                     R.string.write_storage_permission_rationale_for_image_share,
-                    *PERMISSIONS_STORAGE,
+                    PERMISSIONS_STORAGE,
                 )
             }
         }
@@ -1125,13 +1125,19 @@ class UploadActivity :
                        is greater than 100 meters */
             if (isLocationTagUnchecked ||
                 locationDifference > 100 ||
-                !defaultKvStore.getBoolean("inAppCameraLocationPref") ||
-                !isInAppCameraUpload
+                !isInAppCameraLocationRecorded()
             ) {
                 currLocation = null
             }
         }
     }
+
+    /**
+     * Returns true if the image is an in app camera shot and the user has turned on
+     * "Record location for in app shots"
+     */
+    private fun isInAppCameraLocationRecorded(): Boolean =
+        defaultKvStore.getBoolean("inAppCameraLocationPref") && isInAppCameraUpload
 
     companion object {
         private var uploadIsOfAPlace = false

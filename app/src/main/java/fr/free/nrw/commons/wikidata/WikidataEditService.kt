@@ -273,11 +273,7 @@ class WikidataEditService
         ): Observable<Boolean> =
             addDepictsProperty(
                 fileEntityId.toString(),
-                buildList {
-                    for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
-                        add(id)
-                    }
-                },
+                contribution.depictedItems.map { it.id },
             )
 
         companion object {

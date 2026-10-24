@@ -138,4 +138,19 @@ class QuizCheckerUnitTest {
         method.isAccessible = true
         method.invoke(quizChecker, activity)
     }
+
+    @Test
+    fun testIsRevertRateHighBelowUploadThreshold() {
+        Assert.assertFalse(QuizChecker.isRevertRateHigh(4, 4, 5))
+    }
+
+    @Test
+    fun testIsRevertRateHighAtFiftyPercent() {
+        Assert.assertTrue(QuizChecker.isRevertRateHigh(5, 10, 5))
+    }
+
+    @Test
+    fun testIsRevertRateHighBelowFiftyPercent() {
+        Assert.assertFalse(QuizChecker.isRevertRateHigh(4, 10, 5))
+    }
 }
