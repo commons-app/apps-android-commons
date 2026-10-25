@@ -260,7 +260,6 @@
     <ID>MagicNumber:DepictsFragment.kt$DepictsFragment$500</ID>
     <ID>MagicNumber:DescriptionEditActivity.kt$DescriptionEditActivity$12</ID>
     <ID>MagicNumber:DoubleTapGestureListener.kt$DoubleTapGestureListener$0.001f</ID>
-    <ID>MagicNumber:DownloadReceiver.kt$DownloadReceiver$429</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$100</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$180</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$2000</ID>
@@ -274,7 +273,6 @@
     <ID>MagicNumber:EditViewModel.kt$EditViewModel$270</ID>
     <ID>MagicNumber:EditViewModel.kt$EditViewModel$360</ID>
     <ID>MagicNumber:EditViewModel.kt$EditViewModel$90</ID>
-    <ID>MagicNumber:ExecutorUtils.kt$ExecutorUtils$3</ID>
     <ID>MagicNumber:ExploreMapController.kt$ExploreMapController$3</ID>
     <ID>MagicNumber:ExploreMapController.kt$ExploreMapController.Companion$5</ID>
     <ID>MagicNumber:ExploreMapController.kt$ExploreMapController.Companion$96</ID>
@@ -314,24 +312,12 @@
     <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$3600</ID>
     <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$60</ID>
     <ID>MagicNumber:ImageFileLoader.kt$ImageFileLoader$1000L</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.025</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.3</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$100</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$1000</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$255.0</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$26</ID>
-    <ID>MagicNumber:ImageUtils.kt$ImageUtils$40</ID>
     <ID>MagicNumber:LatLng.kt$LatLng$10000</ID>
     <ID>MagicNumber:LatLng.kt$LatLng$179.999</ID>
     <ID>MagicNumber:LatLng.kt$LatLng$180.0</ID>
     <ID>MagicNumber:LatLng.kt$LatLng$360.0</ID>
     <ID>MagicNumber:LatLng.kt$LatLng$90.0</ID>
     <ID>MagicNumber:LeaderboardFragment.kt$LeaderboardFragment$200</ID>
-    <ID>MagicNumber:LengthUtils.kt$LengthUtils$0.5</ID>
-    <ID>MagicNumber:LengthUtils.kt$LengthUtils$1000</ID>
-    <ID>MagicNumber:LengthUtils.kt$LengthUtils$1000.0</ID>
-    <ID>MagicNumber:LengthUtils.kt$LengthUtils$360</ID>
-    <ID>MagicNumber:LengthUtils.kt$LengthUtils$6371009.0</ID>
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_1$20</ID>
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_1$5</ID>
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_1$85</ID>
@@ -453,8 +439,6 @@
     <ID>MagicNumber:LocationServiceManager.kt$LocationServiceManager$5</ID>
     <ID>MagicNumber:LocationServiceManager.kt$LocationServiceManager$500</ID>
     <ID>MagicNumber:LogsSender.kt$LogsSender$1024</ID>
-    <ID>MagicNumber:MapUtils.kt$MapUtils$0.07520</ID>
-    <ID>MagicNumber:MapUtils.kt$MapUtils$51.50550</ID>
     <ID>MagicNumber:MediaClient.kt$MediaClient$10</ID>
     <ID>MagicNumber:MediaDetailAdapter.kt$MediaDetailAdapter$5</ID>
     <ID>MagicNumber:MediaDetailFragment.kt$0xFF5A6AEC</ID>
@@ -465,7 +449,6 @@
     <ID>MagicNumber:MediaDetailFragment.kt$MediaDetailFragment$200</ID>
     <ID>MagicNumber:MediaDetailFragment.kt$MediaDetailFragment$37.773972</ID>
     <ID>MagicNumber:MediaDetailViewModel.kt$MediaDetailViewModel$10</ID>
-    <ID>MagicNumber:Monuments.kt$8</ID>
     <ID>MagicNumber:Namespace.kt$Namespace.ACL$162</ID>
     <ID>MagicNumber:Namespace.kt$Namespace.ANNOTATION$248</ID>
     <ID>MagicNumber:Namespace.kt$Namespace.ANNOTATION_TALK$249</ID>
@@ -633,46 +616,6 @@
     <ID>MagicNumber:QuizResultActivity.kt$QuizResultActivity$100</ID>
     <ID>MagicNumber:QuizResultActivity.kt$QuizResultActivity$20</ID>
     <ID>MagicNumber:QuizResultActivity.kt$QuizResultActivity$5</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0003</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0004</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0005</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0006</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0007</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x010E</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x010F</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0110</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0112</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0131</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x0132</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x013B</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x8298</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x829A</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x829D</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x8769</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x8825</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x8827</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x9003</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x9004</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x9209</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0x920A</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA002</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA003</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA405</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA430</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA431</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA432</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA433</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA434</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xA435</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xFFD8</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xFFDA</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$0xFFE1</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$12</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$16</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$24</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$4</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$6</ID>
-    <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$8</ID>
     <ID>MagicNumber:ReadFBMD.kt$ReadFBMD$0x80</ID>
     <ID>MagicNumber:ReadFBMD.kt$ReadFBMD$4096</ID>
     <ID>MagicNumber:ReasonBuilder.kt$ReasonBuilder$10</ID>
