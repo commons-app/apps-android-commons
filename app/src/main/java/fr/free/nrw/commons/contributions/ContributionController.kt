@@ -12,6 +12,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.filepicker.DefaultCallback
+import fr.free.nrw.commons.filepicker.ExternalImagesResult
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.FilePicker.HandleActivityResult
 import fr.free.nrw.commons.filepicker.FilePicker.configuration
@@ -407,7 +408,7 @@ class ContributionController
         fun handleExternalImagesPicked(
             activity: Activity,
             data: Intent?,
-        ): List<UploadableFile> = handleExternalImagesPicked(data, activity)
+        ): ExternalImagesResult = handleExternalImagesPicked(data, activity)
 
         /**
          * Returns intent to be passed to upload activity Attaches place object for nearby uploads and

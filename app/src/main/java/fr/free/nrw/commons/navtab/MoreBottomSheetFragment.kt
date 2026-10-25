@@ -2,7 +2,6 @@ package fr.free.nrw.commons.navtab
 
 import android.accounts.AccountManager
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -206,42 +205,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
             })
     }
 
-    /**
-     * This method shows the alert dialog when a user wants to send feedback about the app.
-     */
-    private fun showAlertDialog() {
-        AlertDialog
-            .Builder(requireActivity())
-            .setMessage(R.string.feedback_sharing_data_alert)
-            .setCancelable(false)
-            .setPositiveButton(R.string.ok) { _, _ -> sendFeedback() }
-            .show()
-    }
-
-    /**
-     * This method collects the feedback message and starts the activity with implicit intent
-     * to the available email client.
-     */
-    @SuppressLint("IntentReset")
-    private fun sendFeedback() {
-        val technicalInfo = commonsLogSender.getExtraInfo()
-
-        val feedbackIntent =
-            Intent(Intent.ACTION_SENDTO).apply {
-                type = "message/rfc822"
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(CommonsApplication.FEEDBACK_EMAIL))
-                putExtra(Intent.EXTRA_SUBJECT, CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
-                putExtra(Intent.EXTRA_TEXT, "\n\n${CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER}\n$technicalInfo")
-            }
-
-        try {
-            startActivity(feedbackIntent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
-        }
-    }
-
     fun onAboutClicked() {
         val intent =
             Intent(activity, AboutActivity::class.java).apply {
@@ -267,6 +230,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun onPeerReviewClicked() {
-        ReviewActivity.startYourself(requireActivity(), getString(R.string.title_activity_review))
+        ReviewActivity.startYourself(requireActivity())
     }
 }

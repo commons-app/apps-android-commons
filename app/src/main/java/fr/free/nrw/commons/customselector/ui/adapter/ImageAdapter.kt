@@ -689,4 +689,8 @@ class ImageAdapter(
     fun setSingleSelection(single: Boolean) {
         singleSelection = single
     }
+
+    companion object {
+        private const val THUMBNAIL_SIZE_MULTIPLIER = 0.3f
+    }
 }
