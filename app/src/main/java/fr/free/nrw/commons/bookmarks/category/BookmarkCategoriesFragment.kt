@@ -104,9 +104,9 @@ class BookmarkCategoriesFragment : DaggerFragment() {
 
     @Composable
     fun CategoryItem(
-        modifier: Modifier = Modifier,
         onClick: (String) -> Unit,
-        categoryName: String
+        categoryName: String,
+        modifier: Modifier = Modifier
     ) {
         Row(modifier = modifier.clickable {
             onClick(categoryName)

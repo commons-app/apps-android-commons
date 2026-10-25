@@ -171,9 +171,6 @@ open class DefaultZoomableController(
     /** Gets the non-transformed image bounds, in view-absolute coordinates. */
     fun getImageBounds(): RectF = mImageBounds
 
-    /** Gets the transformed image bounds, in view-absolute coordinates */
-    private fun getTransformedImageBounds(): RectF = mTransformedImageBounds
-
     /** Sets the view bounds. */
     override fun setViewBounds(viewBounds: RectF) {
         mViewBounds.set(viewBounds)

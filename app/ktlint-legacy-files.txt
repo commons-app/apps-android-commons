@@ -131,8 +131,8 @@ app/src/test/kotlin/fr/free/nrw/commons/kvstore/BasicKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/kvstore/JsonKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/nearby/LabelTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentUnitTest.kt
+app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt
+app/src/test/kotlin/fr/free/nrw/commons/media/MediaDetailFragmentUnitTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/FileUtilsTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/ImageUtilsTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/utils/MediaAttributionUtilTest.kt
