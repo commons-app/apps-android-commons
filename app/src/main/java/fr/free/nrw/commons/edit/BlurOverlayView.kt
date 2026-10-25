@@ -515,6 +515,11 @@ class BlurOverlayView @JvmOverloads constructor(
         }
         return super.onTouchEvent(event)
     }
+    
+    fun addRegions(newRegions: List<RectF>) {
+        regions.addAll(newRegions)
+        invalidate()
+    }
 
     /**
      * Returns the (regionIndex, Handle) pair for the first handle that is

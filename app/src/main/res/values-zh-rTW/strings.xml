@@ -380,6 +380,11 @@
   <string name="rotate">旋轉</string>
   <string name="crop">裁剪</string>
   <string name="blur">模糊</string>
+  <string name="autoblur">自動模糊</string>
+  <string name="autodetect_title">自動模糊人臉與車牌。</string>
+  <string name="autodetect_description">您可以使用每個模糊區域的 ❌ 按鈕來排除誤報。</string>
+  <string name="autoblur_failed_to_load">自動模糊圖片載入失敗</string>
+  <string name="autoblur_no_region_detected">未偵測到自動模糊區域</string>
   <string name="error_fetching_nearby_places">無法載入附近地點</string>
   <string name="no_pictures_in_this_area">此區域沒有圖片</string>
   <string name="no_nearby_places_around">找不到附近地點</string>
@@ -874,4 +879,9 @@
   <string name="license_cc0_long_description">此授權條款允許再次利用者以任何媒介或格式分發、重編、改編和基於該素材進行創作，並且沒有任何附加條件。</string>
   <string name="license_cc_by_long_description">此授權條款允許再次利用者以任何媒介或格式分發、重編、改編和基於該素材進行創作，只要註明原創者也能使用於商業目的。</string>
   <string name="license_cc_by_sa_long_description">此授權條款允許再次利用者以任何媒介或格式分發、重編、改編和基於該素材進行創作，只要註明原創者且對新作品依據相同的授權條款，也能使用於商業目的。</string>
+  <string name="error_getting_image_properties">取得圖片屬性時發生錯誤：</string>
+  <string name="error_blur_no_rectangle">請在照片上至少描出一個矩形。</string>
+  <string name="error_applying_blur">套用模糊出錯</string>
+  <string name="failed_to_apply_crop">套用裁剪失敗</string>
+  <string name="failed_to_save_image">儲存圖片失敗</string>
 </resources>

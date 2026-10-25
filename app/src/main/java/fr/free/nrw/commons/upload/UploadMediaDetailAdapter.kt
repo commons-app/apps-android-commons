@@ -56,7 +56,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     var items: List<UploadMediaDetail>
         get() = uploadMediaDetails
         set(value) {
-            uploadMediaDetails = value.toMutableList()
+            uploadMediaDetails = value as? MutableList<UploadMediaDetail> ?: value.toMutableList()
             selectedLanguages = mutableMapOf()
             notifyDataSetChanged()
         }
