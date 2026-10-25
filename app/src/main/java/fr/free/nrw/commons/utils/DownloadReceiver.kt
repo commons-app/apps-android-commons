@@ -15,6 +15,11 @@ import timber.log.Timber
  * of "Download Unsuccessful" errors.
  */
 class DownloadReceiver : BroadcastReceiver() {
+
+    companion object {
+        private const val HTTP_TOO_MANY_REQUESTS = 429
+    }
+
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
 
@@ -38,7 +43,7 @@ class DownloadReceiver : BroadcastReceiver() {
 
                     Timber.e("DOWNLOAD FAILED! Title: $title | Reason Code: $reason")
 
-                    if (reason == 429) {
+                    if (reason == HTTP_TOO_MANY_REQUESTS) {
                         Timber.e("CAUSE: Rate limited (HTTP 429 Too Many Requests)")
                         Toast.makeText(
                             context,

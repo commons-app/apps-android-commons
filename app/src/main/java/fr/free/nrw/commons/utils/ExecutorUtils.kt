@@ -9,6 +9,8 @@ import java.util.concurrent.Executors
 
 object ExecutorUtils {
 
+    private const val THREAD_POOL_SIZE = 3
+
     @JvmStatic
     private val uiExecutor: Executor = Executor { command ->
         if (Looper.myLooper() == Looper.getMainLooper()) {
@@ -24,7 +26,7 @@ object ExecutorUtils {
     }
 
     @JvmStatic
-    private val executor: ExecutorService = Executors.newFixedThreadPool(3)
+    private val executor: ExecutorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE)
 
     @JvmStatic
     fun get(): ExecutorService {

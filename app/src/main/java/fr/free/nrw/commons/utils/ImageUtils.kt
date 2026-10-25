@@ -74,6 +74,13 @@ object ImageUtils {
     const val FILE_NAME_EXISTS = 1 shl 6 // 64
     const val NO_CATEGORY_SELECTED = -5
     const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
+    private const val MAX_GEOLOCATION_DIFFERENCE_METERS = 1000
+    private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
+    private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3
+    private const val MAX_RGB_VALUE = 255.0
+    private const val PERCENTAGE_SCALE = 100
+    private const val HIGH_BRIGHTNESS_LUMINANCE = 40
+    private const val MEDIUM_BRIGHTNESS_LUMINANCE = 26
 
     private var progressDialogWallpaper: ProgressDialog? = null
 
@@ -144,7 +151,7 @@ object ImageUtils {
             latLng
         )
         // Distance is more than 1 km, means that geolocation is wrong
-        return distance >= 1000
+        return distance >= MAX_GEOLOCATION_DIFFERENCE_METERS
     }
 
     @JvmStatic
@@ -160,8 +167,8 @@ object ImageUtils {
         val allPixelsCount = bitmapWidth * bitmapHeight
         var numberOfBrightPixels = 0
         var numberOfMediumBrightnessPixels = 0
-        val brightPixelThreshold = 0.025 * allPixelsCount
-        val mediumBrightPixelThreshold = 0.3 * allPixelsCount
+        val brightPixelThreshold = BRIGHT_PIXEL_RATIO_THRESHOLD * allPixelsCount
+        val mediumBrightPixelThreshold = MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD * allPixelsCount
 
         for (x in 0 until bitmapWidth) {
             for (y in 0 until bitmapHeight) {
@@ -170,13 +177,13 @@ object ImageUtils {
                 val g = Color.green(pixel)
                 val b = Color.blue(pixel)
 
-                val max = maxOf(r, g, b) / 255.0
-                val min = minOf(r, g, b) / 255.0
+                val max = maxOf(r, g, b) / MAX_RGB_VALUE
+                val min = minOf(r, g, b) / MAX_RGB_VALUE
 
-                val luminance = ((max + min) / 2.0) * 100
+                val luminance = ((max + min) / 2.0) * PERCENTAGE_SCALE
 
-                val highBrightnessLuminance = 40
-                val mediumBrightnessLuminance = 26
+                val highBrightnessLuminance = HIGH_BRIGHTNESS_LUMINANCE
+                val mediumBrightnessLuminance = MEDIUM_BRIGHTNESS_LUMINANCE
 
                 if (luminance < highBrightnessLuminance) {
                     if (luminance > mediumBrightnessLuminance) {
