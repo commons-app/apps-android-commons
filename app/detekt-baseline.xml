@@ -813,11 +813,6 @@
     <ID>MaxLineLength:UploadedStatusDao.kt$UploadedStatusDao$"SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) "</ID>
     <ID>MaxLineLength:UserInterface.kt$UserInterface$@GET(WikidataConstants.MW_API_PREFIX + "action=query&amp;list=logevents&amp;letype=upload&amp;leprop=title|timestamp|ids&amp;lelimit=500")</ID>
     <ID>MaxLineLength:WikidataFeedback.kt$WikidataFeedback$R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude</ID>
-    <ID>MemberNameEqualsClassName:Edit.kt$Edit$fun edit(): Result?</ID>
-    <ID>MemberNameEqualsClassName:Edit.kt$Edit$private val edit: Result? = null</ID>
-    <ID>MemberNameEqualsClassName:Edit.kt$Edit.Result$private val result: String? = null</ID>
-    <ID>MemberNameEqualsClassName:Entities.kt$Entities$fun entities(): Map&lt;String, Entity&gt;</ID>
-    <ID>MemberNameEqualsClassName:Entities.kt$Entities$private val entities: Map&lt;String, Entity&gt;? = null</ID>
     <ID>NestedBlockDepth:BookmarkListRootFragment.kt$BookmarkListRootFragment$fun backPressed(): Boolean</ID>
     <ID>NestedBlockDepth:CategoriesModel.kt$CategoriesModel$fun onCategoryItemClicked( item: CategoryItem, media: Media?, )</ID>
     <ID>NestedBlockDepth:CommonsCookieJar.kt$CommonsCookieJar$override fun saveFromResponse( url: HttpUrl, cookies: List&lt;Cookie&gt;, )</ID>

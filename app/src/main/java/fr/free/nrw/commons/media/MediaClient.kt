@@ -212,7 +212,7 @@ class MediaClient
                     getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                         .map {
                             pages
-                                .zip(it.entities().values)
+                                .zip(it.getEntityMap().values)
                                 .mapNotNull { (page, entity) ->
                                     page.imageInfo()?.let {
                                         mediaConverter.convert(page, entity, it)
