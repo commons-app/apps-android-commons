@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.wikidata.cookies
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
@@ -11,9 +12,9 @@ import fr.free.nrw.commons.wikidata.model.WikiSite
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import timber.log.Timber
 
 private const val COOKIE_STORE = "cookie_store"
+private const val TAG = "CommonsCookieStorage"
 
 class CommonsCookieStorage(
     private val preferences: JsonKvStore? = null,
@@ -42,11 +43,11 @@ class CommonsCookieStorage(
 
     fun load() {
         cookieMap.clear()
-        val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
-        val json = CryptoUtils.decrypt(encryptedJson)
+        try {
+            val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
+            val json = CryptoUtils.decrypt(encryptedJson)
 
-        if (!json.isNullOrBlank()) {
-            try {
+            if (!json.isNullOrBlank()) {
                 val serializedData =
                     gson.fromJson(json, CommonsCookieStorage::class.java)
                         ?: throw JsonSyntaxException("Cookie store must be a JSON object")
@@ -57,13 +58,17 @@ class CommonsCookieStorage(
                 if (encryptedJson == json) {
                     save()
                 }
-            } catch (exception: JsonSyntaxException) {
-                Timber.w(exception, "Discarding malformed cookie store")
+            } else if (encryptedJson != null) {
+                Log.w(TAG, "Discarding empty cookie store")
                 preferences.remove(COOKIE_STORE)
             }
-        } else if (encryptedJson != null) {
-            Timber.w("Discarding empty cookie store")
-            preferences.remove(COOKIE_STORE)
+        } catch (exception: Exception) {
+            // Covers malformed JSON (JsonSyntaxException) as well as any other unreadable
+            // value under this key (e.g. a type mismatch on the underlying preference) so a
+            // corrupted cookie store of any shape can't take startup down with it.
+            Log.w(TAG, "Discarding unreadable cookie store", exception)
+            cookieMap.clear()
+            preferences?.remove(COOKIE_STORE)
         }
     }
 

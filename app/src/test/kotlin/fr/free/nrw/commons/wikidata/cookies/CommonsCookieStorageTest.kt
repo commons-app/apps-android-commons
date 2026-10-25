@@ -132,6 +132,18 @@ class CommonsCookieStorageTest {
         verify(editor).remove("cookie_store")
     }
 
+    @Test
+    fun loadRecoversFromUnreadablePreferenceValue() {
+        whenever(sharedPreferences.getString("cookie_store", null))
+            .thenThrow(ClassCastException("cookie_store is not a String"))
+
+        storage.load()
+
+        assertTrue(storage.domains.isEmpty())
+        verify(editor).remove("cookie_store")
+        verify(editor).apply()
+    }
+
     private fun assertInvalidStore(value: String) {
         whenever(sharedPreferences.getString("cookie_store", null)).thenReturn(value)
 
