@@ -10,7 +10,6 @@ import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThum
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
-import fr.free.nrw.commons.nearby.Place
 import io.reactivex.Observable
 import timber.log.Timber
 import java.lang.reflect.Method
@@ -18,9 +17,9 @@ import java.lang.reflect.Proxy
 import java.util.concurrent.Callable
 
 class ExploreMapPresenter(
-    var bookmarkLocationDao: BookmarkLocationsDao
-) : ExploreMapContract.UserActions, NearbyBaseMarkerThumbCallback {
-
+    var bookmarkLocationDao: BookmarkLocationsDao,
+) : ExploreMapContract.UserActions,
+    NearbyBaseMarkerThumbCallback {
     private var isNearbyLocked = false
     private val currentLatLng: LatLng? = null
     private var exploreMapController: ExploreMapController? = null
@@ -46,11 +45,11 @@ class ExploreMapPresenter(
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED")
             var populateLatLng = exploreMapFragmentView!!.getMapCenter()
 
-            //If "Show in Explore" was selected in Nearby, use the previous LatLng
+            // If "Show in Explore" was selected in Nearby, use the previous LatLng
             if (exploreMapFragmentView is ExploreMapFragment) {
                 val exploreMapFragment = exploreMapFragmentView as ExploreMapFragment
                 if (exploreMapFragment.recentlyCameFromNearbyMap()) {
-                    //Ensure this LatLng will not be used again if user searches their GPS location
+                    // Ensure this LatLng will not be used again if user searches their GPS location
                     exploreMapFragment.setRecentlyCameFromNearbyMap(false)
 
                     populateLatLng = exploreMapFragment.previousLatLng
@@ -102,8 +101,7 @@ class ExploreMapPresenter(
         }
     }
 
-    override fun backButtonClicked(): Boolean =
-        exploreMapFragmentView!!.backButtonClicked()
+    override fun backButtonClicked(): Boolean = exploreMapFragmentView!!.backButtonClicked()
 
     fun onMapReady(exploreMapController: ExploreMapController?) {
         this.exploreMapController = exploreMapController
@@ -120,14 +118,18 @@ class ExploreMapPresenter(
 
     fun loadAttractionsFromLocation(
         currentLatLng: LatLng?,
-        searchLatLng: LatLng?, checkingAroundCurrent: Boolean
-    ): Observable<ExplorePlacesInfo?> = Observable.fromCallable(Callable {
-        exploreMapController!!.loadAttractionsFromLocation(
-            currentLatLng,
-            searchLatLng,
-            checkingAroundCurrent
+        searchLatLng: LatLng?,
+        checkingAroundCurrent: Boolean,
+    ): Observable<ExplorePlacesInfo?> =
+        Observable.fromCallable(
+            Callable {
+                exploreMapController!!.loadAttractionsFromLocation(
+                    currentLatLng,
+                    searchLatLng,
+                    checkingAroundCurrent,
+                )
+            },
         )
-    })
 
     /**
      * Populates places for custom location, should be used for finding nearby places around a
@@ -135,9 +137,7 @@ class ExploreMapPresenter(
      *
      * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
-    fun updateMapMarkers(
-        explorePlacesInfo: ExplorePlacesInfo
-    ) {
+    fun updateMapMarkers(explorePlacesInfo: ExplorePlacesInfo) {
         if (explorePlacesInfo.mediaList != null) {
             prepareNearbyBaseMarkers(explorePlacesInfo)
         } else {
@@ -148,17 +148,17 @@ class ExploreMapPresenter(
 
     private fun prepareNearbyBaseMarkers(explorePlacesInfo: ExplorePlacesInfo) {
         loadAttractionsFromLocationToBaseMarkerOptions(
-            explorePlacesInfo.currentLatLng,  // Curlatlang will be used to calculate distances
+            explorePlacesInfo.currentLatLng, // Curlatlang will be used to calculate distances
             explorePlacesInfo.explorePlaceList,
             exploreMapFragmentView!!.getContext()!!,
             this,
-            explorePlacesInfo
+            explorePlacesInfo,
         )
     }
 
     override fun onNearbyBaseMarkerThumbsReady(
         baseMarkers: List<BaseMarker>?,
-        explorePlacesInfo: ExplorePlacesInfo?
+        explorePlacesInfo: ExplorePlacesInfo?,
     ) {
         if (null != exploreMapFragmentView) {
             exploreMapFragmentView!!.addMarkersToMap(baseMarkers)
@@ -167,17 +167,18 @@ class ExploreMapPresenter(
         }
     }
 
-    fun onSearchThisAreaClicked(): View.OnClickListener {
-        return View.OnClickListener {
+    fun onSearchThisAreaClicked(): View.OnClickListener =
+        View.OnClickListener {
             // Lock map operations during search this area operation
             exploreMapFragmentView!!.setSearchThisAreaButtonVisibility(false)
-            updateMap(if (searchCloseToCurrentLocation()) {
-                LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
-            } else {
-                LocationChangeType.SEARCH_CUSTOM_AREA
-            })
+            updateMap(
+                if (searchCloseToCurrentLocation()) {
+                    LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
+                } else {
+                    LocationChangeType.SEARCH_CUSTOM_AREA
+                },
+            )
         }
-    }
 
     /**
      * Returns true if search this area button is used around our current location, so that we can
@@ -190,34 +191,37 @@ class ExploreMapPresenter(
             return true
         }
 
-        val mylocation = Location("").apply {
-            latitude = exploreMapFragmentView!!.getLastMapFocus()!!.latitude
-            longitude = exploreMapFragmentView!!.getLastMapFocus()!!.longitude
-        }
-        val dest_location = Location("").apply {
-            latitude = exploreMapFragmentView!!.getMapFocus()!!.latitude
-            longitude = exploreMapFragmentView!!.getMapFocus()!!.longitude
-        }
+        val mylocation =
+            Location("").apply {
+                latitude = exploreMapFragmentView!!.getLastMapFocus()!!.latitude
+                longitude = exploreMapFragmentView!!.getLastMapFocus()!!.longitude
+            }
+        val destLocation =
+            Location("").apply {
+                latitude = exploreMapFragmentView!!.getMapFocus()!!.latitude
+                longitude = exploreMapFragmentView!!.getMapFocus()!!.longitude
+            }
 
-        val distance = mylocation.distanceTo(dest_location)
+        val distance = mylocation.distanceTo(destLocation)
 
         return !(distance > 2000.0 * 3 / 4)
     }
 
     companion object {
-        private val DUMMY = Proxy.newProxyInstance(
-            ExploreMapContract.View::class.java.classLoader,
-            arrayOf<Class<*>>(ExploreMapContract.View::class.java)
-        ) { _: Any?, method: Method, _: Array<Any?>? ->
-            when {
-                method.name == "onMyEvent" -> null
-                String::class.java == method.returnType -> ""
-                Int::class.java == method.returnType -> 0
-                Int::class.javaPrimitiveType == method.returnType -> 0
-                Boolean::class.java == method.returnType -> java.lang.Boolean.FALSE
-                Boolean::class.javaPrimitiveType == method.returnType -> false
-                else -> null
-            }
-        } as ExploreMapContract.View
+        private val DUMMY =
+            Proxy.newProxyInstance(
+                ExploreMapContract.View::class.java.classLoader,
+                arrayOf<Class<*>>(ExploreMapContract.View::class.java),
+            ) { _: Any?, method: Method, _: Array<Any?>? ->
+                when {
+                    method.name == "onMyEvent" -> null
+                    String::class.java == method.returnType -> ""
+                    Int::class.java == method.returnType -> 0
+                    Int::class.javaPrimitiveType == method.returnType -> 0
+                    Boolean::class.java == method.returnType -> java.lang.Boolean.FALSE
+                    Boolean::class.javaPrimitiveType == method.returnType -> false
+                    else -> null
+                }
+            } as ExploreMapContract.View
     }
 }

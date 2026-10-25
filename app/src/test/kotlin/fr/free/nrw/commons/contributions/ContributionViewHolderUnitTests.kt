@@ -72,7 +72,8 @@ class ContributionViewHolderUnitTests {
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         compositeDisposable = CompositeDisposable()
         parent = LayoutInflater.from(activity).inflate(R.layout.layout_contribution, null)
-        contributionViewHolder = ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)
+        contributionViewHolder =
+            ContributionViewHolder(parent, callback, compositeDisposable, mediaClient, mediaDataExtractor)
 
         bindind = LayoutContributionBinding.bind(parent)
 
@@ -120,10 +121,11 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testDisplayWikipediaButton() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "displayWikipediaButton",
-            Boolean::class.javaPrimitiveType
-        )
+        val method: Method =
+            ContributionViewHolder::class.java.getDeclaredMethod(
+                "displayWikipediaButton",
+                Boolean::class.javaPrimitiveType,
+            )
         method.isAccessible = true
         method.invoke(contributionViewHolder, false)
     }

@@ -34,7 +34,8 @@ class CommonsCookieStorage(
         cookies: MutableList<Cookie>,
     ) = cookieMap.put(domainSpec, cookies.toList())
 
-    operator fun get(domainSpec: String): MutableList<Cookie> = cookieMap[domainSpec]?.toMutableList() ?: mutableListOf()
+    operator fun get(domainSpec: String): MutableList<Cookie> =
+        cookieMap[domainSpec]?.toMutableList() ?: mutableListOf()
 
     fun clear() {
         cookieMap.clear()

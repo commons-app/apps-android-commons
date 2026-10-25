@@ -10,9 +10,8 @@ import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetect
  * DefaultZoomableController.
  */
 abstract class AbstractAnimatedZoomableController(
-    transformGestureDetector: TransformGestureDetector
+    transformGestureDetector: TransformGestureDetector,
 ) : DefaultZoomableController(transformGestureDetector) {
-
     private var isAnimating: Boolean = false
     private val startValues = FloatArray(9)
     private val stopValues = FloatArray(9)
@@ -29,9 +28,7 @@ abstract class AbstractAnimatedZoomableController(
     }
 
     /** Returns true if the zoomable transform is identity matrix, and the controller is idle. */
-    override fun isIdentity(): Boolean {
-        return !isAnimating && super.isIdentity()
-    }
+    override fun isIdentity(): Boolean = !isAnimating && super.isIdentity()
 
     /**
      * Zooms to the desired scale and positions the image so that the given image point corresponds
@@ -44,7 +41,11 @@ abstract class AbstractAnimatedZoomableController(
      * @param imagePoint 2D point in image's relative coordinate system (i.e. 0 <= x, y <= 1)
      * @param viewPoint 2D point in view's absolute coordinate system
      */
-    override fun zoomToPoint(scale: Float, imagePoint: PointF, viewPoint: PointF) {
+    override fun zoomToPoint(
+        scale: Float,
+        imagePoint: PointF,
+        viewPoint: PointF,
+    ) {
         zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null)
     }
 
@@ -68,7 +69,7 @@ abstract class AbstractAnimatedZoomableController(
         viewPoint: PointF,
         @LimitFlag limitFlags: Int,
         durationMs: Long,
-        onAnimationComplete: Runnable?
+        onAnimationComplete: Runnable?,
     ) {
         FLog.v(logTag, "zoomToPoint: duration $durationMs ms")
         calculateZoomToPointTransform(newTransform, scale, imagePoint, viewPoint, limitFlags)
@@ -88,7 +89,7 @@ abstract class AbstractAnimatedZoomableController(
     private fun setTransform(
         newTransform: Matrix,
         durationMs: Long,
-        onAnimationComplete: Runnable?
+        onAnimationComplete: Runnable?,
     ) {
         FLog.v(logTag, "setTransform: duration $durationMs ms")
         if (durationMs <= 0) {
@@ -130,7 +131,10 @@ abstract class AbstractAnimatedZoomableController(
         super.onGestureUpdate(detector)
     }
 
-    protected fun calculateInterpolation(outMatrix: Matrix, fraction: Float) {
+    protected fun calculateInterpolation(
+        outMatrix: Matrix,
+        fraction: Float,
+    ) {
         for (i in 0..8) {
             currentValues[i] = (1 - fraction) * startValues[i] + fraction * stopValues[i]
         }
@@ -138,7 +142,9 @@ abstract class AbstractAnimatedZoomableController(
     }
 
     abstract fun setTransformAnimated(
-        newTransform: Matrix, durationMs: Long, onAnimationComplete: Runnable?
+        newTransform: Matrix,
+        durationMs: Long,
+        onAnimationComplete: Runnable?,
     )
 
     protected abstract fun stopAnimation()

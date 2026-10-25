@@ -191,6 +191,7 @@ class MediaClient
                     ?.revisions()
                     ?.get(0)
                     ?.content()
+                    .orEmpty()
             }
 
         override fun responseMapper(
@@ -204,18 +205,19 @@ class MediaClient
                 }.flatMap(::mediaFromPageAndEntity)
 
         private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> =
-            if (pages.isEmpty()) {
-                Single.just(emptyList())
-            } else {
-                getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
-                    .map {
-                        pages
-                            .zip(it.entities().values)
-                            .mapNotNull { (page, entity) ->
-                                page.imageInfo()?.let {
-                                    mediaConverter.convert(page, entity, it)
+            when {
+                pages.isEmpty() -> Single.just(emptyList())
+                pagesIndicateDeletedFile(pages) -> Single.error(FileDeletedOnCommonsException())
+                else ->
+                    getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
+                        .map {
+                            pages
+                                .zip(it.getEntityMap().values)
+                                .mapNotNull { (page, entity) ->
+                                    page.imageInfo()?.let {
+                                        mediaConverter.convert(page, entity, it)
+                                    }
                                 }
-                            }
-                    }
+                        }
             }
     }

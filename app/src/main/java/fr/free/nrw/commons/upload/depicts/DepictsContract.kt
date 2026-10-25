@@ -116,7 +116,7 @@ interface DepictsContract {
          * Handle selected place from the map picker
          */
         fun onPlaceSelectedFromMap(place: Place)
-        
+
         /**
          * Gets all upload items
          */
@@ -135,6 +135,9 @@ interface DepictsContract {
         /**
          * Attaches view and media
          */
-        fun onAttachViewWithMedia(view: View, media: Media)
+        fun onAttachViewWithMedia(
+            view: View,
+            media: Media,
+        )
     }
 }

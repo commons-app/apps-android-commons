@@ -8,12 +8,13 @@ import java.io.IOException
 
 class UriTypeAdapter : TypeAdapter<Uri>() {
     @Throws(IOException::class)
-    override fun write(out: JsonWriter, value: Uri) {
+    override fun write(
+        out: JsonWriter,
+        value: Uri,
+    ) {
         out.value(value.toString())
     }
 
     @Throws(IOException::class)
-    override fun read(reader: JsonReader): Uri {
-        return Uri.parse(reader.nextString())
-    }
+    override fun read(reader: JsonReader): Uri = Uri.parse(reader.nextString())
 }

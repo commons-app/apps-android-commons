@@ -109,22 +109,20 @@ class BookmarkPicturesDao @Inject constructor(
             return false
         }
 
-        var cursor: Cursor? = null
         val db = clientProvider.get()
+        var exists = false
         try {
-            cursor = db.query(
+            db.query(
                 BASE_URI, ALL_FIELDS, "$COLUMN_MEDIA_NAME=?", arrayOf(bookmark.mediaName), null
-            )
-            if (cursor != null && cursor.moveToFirst()) {
-                return true
+            )?.use { cursor ->
+                exists = cursor.moveToFirst()
             }
         } catch (e: RemoteException) {
             throw RuntimeException(e)
         } finally {
-            cursor?.close()
             db.release()
         }
-        return false
+        return exists
     }
 
     fun fromCursor(cursor: Cursor): Bookmark {

@@ -14,6 +14,7 @@ import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.isA
 import com.nhaarman.mockitokotlin2.isNull
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
@@ -311,6 +312,47 @@ class RecentSearchesDaoTest {
         val result = testObject.recentSearches(5)
 
         assertEquals(5, result.size)
+    }
+
+    /**
+     * Unit Test for deleting all entries from recent searches database
+     */
+    @Test
+    fun testDeleteAll() {
+        val cursor = createCursor(2)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), isNull(), any(), eq("$COLUMN_LAST_USED DESC")))
+            .thenReturn(cursor)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), eq("$COLUMN_NAME=?"), any(), isNull()))
+            .thenReturn(createCursor(1))
+
+        testObject.deleteAll()
+
+        verify(client, times(2)).delete(eq(uriForId(1)), isNull(), isNull())
+    }
+
+    /**
+     * Unit Test for translating exceptions in deleteAll
+     */
+    @Test(expected = RuntimeException::class)
+    fun deleteAllTranslatesExceptions() {
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
+            .thenThrow(RemoteException(""))
+
+        testObject.deleteAll()
+    }
+
+    /**
+     * Unit Test for checking exception when contentUri is null in deleteAll
+     */
+    @Test(expected = RuntimeException::class)
+    fun deleteAllThrowsExceptionWhenContentUriIsNull() {
+        val cursor = createCursor(1)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), isNull(), any(), eq("$COLUMN_LAST_USED DESC")))
+            .thenReturn(cursor)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), eq("$COLUMN_NAME=?"), any(), isNull()))
+            .thenReturn(null)
+
+        testObject.deleteAll()
     }
 
     /**
