@@ -89,10 +89,6 @@
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-    <ID>FunctionParameterNaming:Converters.kt$Converters$`object`: Any?</ID>
-    <ID>FunctionParameterNaming:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$SHA1: String</ID>
-    <ID>FunctionParameterNaming:LeaderboardApiTest.kt$LeaderboardApiTest.Companion$`is`: InputStream</ID>
-    <ID>FunctionParameterNaming:UpdateAvatarApiTest.kt$UpdateAvatarApiTest.Companion$`is`: InputStream</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate, )</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!!, ), getExtraShortDateString(endDate!!), )</ID>
     <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
