@@ -1099,8 +1099,6 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>TopLevelPropertyNaming:Monuments.kt$/** * Get the start date of wlm monument * For this release we are hardcoding it to be 1st September * @return */ const val wLMStartDate: String = "1 Sep"</ID>
-    <ID>TopLevelPropertyNaming:Monuments.kt$/*** * Get the end date of wlm monument * For this release we are hardcoding it to be 31st October * @return */ const val wLMEndDate: String = "30 Sep"</ID>
     <ID>UnusedPrivateProperty:BookmarkItemsDaoTest.kt$BookmarkItemsDaoTest$i</ID>
     <ID>UnusedPrivateProperty:BookmarkListRootFragment.kt$BookmarkListRootFragment$private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null</ID>
     <ID>UnusedPrivateProperty:BookmarkLocationsViewModel.kt$BookmarkLocationsViewModel$private val bookmarkLocationsDao: BookmarkLocationsDao</ID>

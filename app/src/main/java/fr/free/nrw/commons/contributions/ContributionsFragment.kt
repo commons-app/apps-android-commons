@@ -63,9 +63,9 @@ import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.WLM_END_DATE
+import fr.free.nrw.commons.utils.WLM_START_DATE
 import fr.free.nrw.commons.utils.isMonumentsEnabled
-import fr.free.nrw.commons.utils.wLMEndDate
-import fr.free.nrw.commons.utils.wLMStartDate
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -259,8 +259,8 @@ class ContributionsFragment :
             Campaign(
                 getString(R.string.wlm_campaign_title),
                 getString(R.string.wlm_campaign_description),
-                wLMStartDate,
-                wLMEndDate,
+                WLM_START_DATE,
+                WLM_END_DATE,
                 NearbyParentFragment.WLM_URL,
                 true,
             )
