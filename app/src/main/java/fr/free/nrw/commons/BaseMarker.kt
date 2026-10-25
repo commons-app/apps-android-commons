@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
+import androidx.core.graphics.createBitmap
 
 class BaseMarker {
     private var _position: LatLng = LatLng(0.0, 0.0, 0f)
@@ -52,11 +53,7 @@ class BaseMarker {
                 drawable.bitmap
             } else {
                 val bitmap =
-                    Bitmap.createBitmap(
-                        drawable.intrinsicWidth,
-                        drawable.intrinsicHeight,
-                        Bitmap.Config.ARGB_8888,
-                    )
+                    createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
                 val canvas = Canvas(bitmap)
                 drawable.setBounds(0, 0, canvas.width, canvas.height)
                 drawable.draw(canvas)
