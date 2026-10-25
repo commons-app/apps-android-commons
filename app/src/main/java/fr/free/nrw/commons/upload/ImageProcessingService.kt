@@ -144,9 +144,37 @@ class ImageProcessingService
             originalFilePath: Uri,
             modifiedFilePath: Uri,
         ): Single<Int> {
+            val originalStreamResult =
+                Single
+                    .fromCallable {
+                        appContext.contentResolver.openInputStream(originalFilePath)!!
+                    }.flatMap { inputStream ->
+                        checkDuplicateImage(inputStream)
+                    }
+
+            val modifiedStreamResult =
+                Single
+                    .fromCallable {
+                        val path = modifiedFilePath.path
+                        if (path != null && java.io.File(path).exists()) {
+                            fileUtilsWrapper.getFileInputStream(path)
+                        } else {
+                            throw java.io.FileNotFoundException("Modified file not found at $path")
+                        }
+                    }.flatMap { inputStream ->
+                        checkDuplicateImage(inputStream)
+                    }.onErrorResumeNext { throwable ->
+                        if (throwable is java.io.FileNotFoundException) {
+                            Timber.d("Modified file not found, treating as non-duplicate")
+                            Single.just(IMAGE_OK)
+                        } else {
+                            Single.error(throwable)
+                        }
+                    }
+
             return Single.zip(
-                checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
-                checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path)),
+                originalStreamResult,
+                modifiedStreamResult,
             ) { resultForOriginal, resultForDuplicate ->
                 return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE) {
                     IMAGE_DUPLICATE
