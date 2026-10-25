@@ -83,7 +83,8 @@ class NearbyParentFragmentUnitTest {
     private lateinit var rlBottomSheetLayoutParams: ViewGroup.LayoutParams
 
     @Mock
-    private lateinit var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
+    private lateinit var nearbyParentFragmentInstanceReadyCallback:
+        NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
 
     @Mock
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
@@ -364,21 +365,22 @@ class NearbyParentFragmentUnitTest {
         val pickerLng = 56.78
         allPhotoCoordinates.add(
             LatLng(
-                pickerLat, pickerLng,
-                accuracy = 0f
-            )
+                pickerLat,
+                pickerLng,
+                accuracy = 0f,
+            ),
         )
         val pickerFragment =
             NearbyParentFragment.newPickerInstance(allPhotoCoordinates)
         Assert.assertNotNull(pickerFragment.arguments)
         Assert.assertTrue(
-            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE)
+            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE),
         )
         Assert.assertEquals(
             allPhotoCoordinates,
             pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
-                NearbyParentFragment.ARG_PHOTO_LATLNGS
-            )
+                NearbyParentFragment.ARG_PHOTO_LATLNGS,
+            ),
         )
     }
 
@@ -386,11 +388,12 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testMarkerPriorityOrder() {
         // Use reflection to access the private getMarkerPriority method
-        val getMarkerPriorityMethod = NearbyParentFragment::class.java.getDeclaredMethod(
-            "getMarkerPriority",
-            Place::class.java,
-            Boolean::class.java
-        )
+        val getMarkerPriorityMethod =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "getMarkerPriority",
+                Place::class.java,
+                Boolean::class.java,
+            )
         getMarkerPriorityMethod.isAccessible = true
 
         // Mock a place that needs a photo (Red pin)
@@ -422,13 +425,13 @@ class NearbyParentFragmentUnitTest {
         // Red (needs photo) should be drawn on top of Green (has photo), so Red > Green priority
         Assert.assertTrue(
             "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Has Photo (Green) priority ($priorityHasPhoto)",
-            priorityNeedsPhoto > priorityHasPhoto
+            priorityNeedsPhoto > priorityHasPhoto,
         )
-        
+
         // Red should also be drawn on top of Monuments
         Assert.assertTrue(
             "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Monument priority ($priorityMonument)",
-            priorityNeedsPhoto > priorityMonument
+            priorityNeedsPhoto > priorityMonument,
         )
     }
 }

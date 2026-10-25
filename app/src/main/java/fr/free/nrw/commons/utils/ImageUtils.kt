@@ -82,8 +82,6 @@ object ImageUtils {
     private const val HIGH_BRIGHTNESS_LUMINANCE = 40
     private const val MEDIUM_BRIGHTNESS_LUMINANCE = 26
 
-    private var progressDialogWallpaper: ProgressDialog? = null
-
     private var progressDialogAvatar: ProgressDialog? = null
 
     @IntDef(
@@ -285,17 +283,6 @@ object ImageUtils {
             .build()
 
         WorkManager.getInstance(context).enqueue(setWallpaperWork)
-    }
-
-    @JvmStatic
-    private fun showSettingWallpaperProgressBar(context: Context) {
-        progressDialogWallpaper = ProgressDialog.show(
-            context,
-            context.getString(R.string.setting_wallpaper_dialog_title),
-            context.getString(R.string.setting_wallpaper_dialog_message),
-            true,
-            false
-        )
     }
 
     @JvmStatic

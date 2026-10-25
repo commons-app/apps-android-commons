@@ -3,10 +3,10 @@ package fr.free.nrw.commons.nearby
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.CoreMatchers.equalTo
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
