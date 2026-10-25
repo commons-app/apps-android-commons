@@ -1,9 +1,11 @@
-SELECT (COUNT(?item) AS ?itemCount)
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
+SELECT (COUNT(DISTINCT ?item) AS ?itemCount)
 WHERE {
-  # Around given location.
-  SERVICE wikibase:around {
-    ?item wdt:P625 ?location.
-    bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral.
-    bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
-  }
+  # Kilometers from the center. QLever uses its spatial index for this comparison.
+  ?item wdt:P625 ?locationValue .
+  BIND(geof:distance("Point(${LONG} ${LAT})"^^geo:wktLiteral, ?locationValue) AS ?dist)
+  FILTER(?dist <= ${RAD})
 }

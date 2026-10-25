@@ -1,25 +1,35 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+
 SELECT
   ?item
-  (SAMPLE(?location) as ?location)
-  (SAMPLE(?monument) AS ?monument)
+  (SAMPLE(?locationValue) AS ?location)
+  (SAMPLE(?monumentValue) AS ?monument)
 WHERE {
-  # Around given location
-  SERVICE wikibase:box {
-      ?item wdt:P625 ?location.
-       bd:serviceParam wikibase:cornerWest "Point(${LONG_WEST} ${LAT_WEST})"^^geo:wktLiteral.
-       bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
-  }
+  # One geof:sfWithin keeps QLever's spatial index. A box across ±180° is a multipolygon.
+  BIND(${LONG_WEST} AS ?west)
+  BIND(${LONG_EAST} AS ?east)
+  BIND(IF(${LAT_WEST} < ${LAT_EAST}, ${LAT_WEST}, ${LAT_EAST}) AS ?south)
+  BIND(IF(${LAT_WEST} < ${LAT_EAST}, ${LAT_EAST}, ${LAT_WEST}) AS ?north)
+  BIND(IF(?west <= ?east,
+    CONCAT("POLYGON((", STR(?west), " ", STR(?south), ", ", STR(?east), " ", STR(?south), ", ", STR(?east), " ", STR(?north), ", ", STR(?west), " ", STR(?north), ", ", STR(?west), " ", STR(?south), "))"),
+    CONCAT("MULTIPOLYGON(((", STR(?west), " ", STR(?south), ", 180 ", STR(?south), ", 180 ", STR(?north), ", ", STR(?west), " ", STR(?north), ", ", STR(?west), " ", STR(?south), ")), ((-180 ", STR(?south), ", ", STR(?east), " ", STR(?south), ", ", STR(?east), " ", STR(?north), ", -180 ", STR(?north), ", -180 ", STR(?south), ")))")
+  ) AS ?boxWkt)
+  BIND(STRDT(?boxWkt, geo:wktLiteral) AS ?box)
+  ?item wdt:P625 ?locationValue .
+  FILTER(geof:sfWithin(?locationValue, ?box))
 
   # Wiki Loves Monuments
-  OPTIONAL {?item p:P1435 ?monument}
-  OPTIONAL {?item p:P2186 ?monument}
-  OPTIONAL {?item p:P1459 ?monument}
-  OPTIONAL {?item p:P1460 ?monument}
-  OPTIONAL {?item p:P1216 ?monument}
-  OPTIONAL {?item p:P709 ?monument}
-  OPTIONAL {?item p:P718 ?monument}
-  OPTIONAL {?item p:P5694 ?monument}
-  OPTIONAL {?item p:P3426 ?monument}
-
+  OPTIONAL {?item p:P1435 ?monumentValue}
+  OPTIONAL {?item p:P2186 ?monumentValue}
+  OPTIONAL {?item p:P1459 ?monumentValue}
+  OPTIONAL {?item p:P1460 ?monumentValue}
+  OPTIONAL {?item p:P1216 ?monumentValue}
+  OPTIONAL {?item p:P709 ?monumentValue}
+  OPTIONAL {?item p:P718 ?monumentValue}
+  OPTIONAL {?item p:P5694 ?monumentValue}
+  OPTIONAL {?item p:P3426 ?monumentValue}
 }
 GROUP BY ?item
