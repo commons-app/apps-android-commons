@@ -248,7 +248,6 @@
     <ID>MagicNumber:CropOverlayView.kt$CropOverlayView$80f</ID>
     <ID>MagicNumber:CryptoUtils.kt$CryptoUtils$128</ID>
     <ID>MagicNumber:CryptoUtils.kt$CryptoUtils$256</ID>
-    <ID>MagicNumber:CustomSelectorActivity.kt$CustomSelectorActivity$0.5f</ID>
     <ID>MagicNumber:DataSourceClass.kt$DataSourceClass$200</ID>
     <ID>MagicNumber:DefaultZoomableController.kt$DefaultZoomableController$180</ID>
     <ID>MagicNumber:DefaultZoomableController.kt$DefaultZoomableController$1e-3f</ID>
@@ -310,11 +309,9 @@
     <ID>MagicNumber:FileUtils.kt$FileUtils$16</ID>
     <ID>MagicNumber:FileUtils.kt$FileUtils$8192</ID>
     <ID>MagicNumber:HeightLimitedRecyclerView.kt$HeightLimitedRecyclerView$0.3</ID>
-    <ID>MagicNumber:ImageAdapter.kt$ImageAdapter$0.3f</ID>
     <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$16.0</ID>
     <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$3600</ID>
     <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$60</ID>
-    <ID>MagicNumber:ImageFileLoader.kt$ImageFileLoader$1000L</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.025</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.3</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$100</ID>
@@ -614,8 +611,6 @@
     <ID>MagicNumber:NotificationAdapterDelegates.kt$279</ID>
     <ID>MagicNumber:NotificationAdapterDelegates.kt$280</ID>
     <ID>MagicNumber:OkHttpConnectionFactory.kt$OkHttpConnectionFactory$120</ID>
-    <ID>MagicNumber:OnSwipeTouchListener.kt$OnSwipeTouchListener$1000</ID>
-    <ID>MagicNumber:OnSwipeTouchListener.kt$OnSwipeTouchListener$3</ID>
     <ID>MagicNumber:PasteSensitiveTextInputEditText.kt$PasteSensitiveTextInputEditText$23</ID>
     <ID>MagicNumber:PendingUploadsAdapter.kt$PendingUploadsAdapter.ViewHolder$100</ID>
     <ID>MagicNumber:PendingUploadsPresenter.kt$PendingUploadsPresenter$10</ID>
