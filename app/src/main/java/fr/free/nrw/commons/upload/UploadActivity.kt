@@ -64,6 +64,10 @@ import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
 
+private const val OVERLAPPING_THRESHOLD_DP = 321f
+
+private const val MULTI_UPLOAD_THRESHOLD = 3
+
 class UploadActivity :
     BaseActivity(),
     UploadContract.View,
@@ -222,7 +226,7 @@ class UploadActivity :
         // threshold, thumbnails automatically minimizes
         val metrics = resources.displayMetrics
         val dpi = (metrics.widthPixels) / (metrics.density)
-        if (dpi <= 321) {
+        if (dpi <= OVERLAPPING_THRESHOLD_DP) {
             onRlContainerTitleClicked()
         }
         if (hasPermission(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))) {
@@ -557,7 +561,7 @@ class UploadActivity :
                     // If there is only file, no need to show the image thumbnails
                     showAlertDialogForCategories()
                 }
-                if (uploadableFiles.size > 3 &&
+                if (uploadableFiles.size > MULTI_UPLOAD_THRESHOLD &&
                     !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")
                 ) {
                     showAlertForBattery()

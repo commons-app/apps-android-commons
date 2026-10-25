@@ -14,6 +14,8 @@ import javax.inject.Singleton
  * attempts to detect whether an image was downloaded from Facebook by heuristically searching for
  * metadata that is specific to images that come from Facebook.
  */
+
+private const val BYTE_ARRAY_SIZE = 4096
 @Singleton
 class ReadFBMD
     @Inject
@@ -26,7 +28,7 @@ class ReadFBMD
                     var fbmdOffset: Int
 
                     FileInputStream(path).use { fs ->
-                        val bytes = ByteArray(4096)
+                        val bytes = ByteArray(BYTE_ARRAY_SIZE)
                         fs.read(bytes)
                         with(String(bytes)) {
                             psBlockOffset = indexOf("8BIM")
