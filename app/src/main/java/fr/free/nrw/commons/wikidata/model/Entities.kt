@@ -5,13 +5,14 @@ import fr.free.nrw.commons.wikidata.mwapi.MwResponse
 import org.apache.commons.lang3.StringUtils
 
 class Entities : MwResponse() {
-    private val entities: Map<String, Entity>? = null
+    @SerializedName("entities")
+    private val entityMap: Map<String, Entity>? = null
     val success: Int = 0
 
-    fun entities(): Map<String, Entity> = entities ?: emptyMap()
+    fun getEntityMap(): Map<String, Entity> = entityMap ?: emptyMap()
 
     private val first: Entity?
-        get() = entities?.values?.iterator()?.next()
+        get() = entityMap?.values?.iterator()?.next()
 
     override fun postProcess() {
         first?.let {
