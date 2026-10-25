@@ -168,8 +168,8 @@ object Converters {
         return Gson().toJson(sitelinks)
     }
 
-    private fun writeObjectToString(`object`: Any?): String? {
-        return `object`?.let { getGson().toJson(it) }
+    private fun writeObjectToString(obj: Any?): String? {
+        return obj?.let { getGson().toJson(it) }
     }
 
     private fun <T> readObjectFromString(objectAsString: String?, clazz: Class<T>): T? {
