@@ -52,8 +52,7 @@ class BaseMarker {
             if (drawable is BitmapDrawable) {
                 drawable.bitmap
             } else {
-                val bitmap =
-                    createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
+                val bitmap = createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight)
                 val canvas = Canvas(bitmap)
                 drawable.setBounds(0, 0, canvas.width, canvas.height)
                 drawable.draw(canvas)
