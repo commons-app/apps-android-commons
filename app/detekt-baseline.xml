@@ -913,7 +913,7 @@
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun chooseDescription(media: Media): String?</ID>
     <ID>ReturnCount:MediaDetailFragment.kt$MediaDetailFragment$private fun getDepictionCaption( idAndCaption: IdAndLabels, locale: String, ): String?</ID>
     <ID>ReturnCount:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
-    <ID>ReturnCount:MwQueryPage.kt$@VisibleForTesting fun checkWhetherFileIsUsedInWikis( globalUsages: List&lt;GlobalUsage&gt;?, fileUsages: List&lt;MwQueryPage.FileUsage&gt;? ): Boolean</ID>
+    <ID>ReturnCount:MwQueryPage.kt$@VisibleForTesting fun checkWhetherFileIsUsedInWikis( globalUsages: List&lt;GlobalUsage&gt;?, fileUsages: List&lt;MwQueryPage.FileUsage&gt;?, ): Boolean</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$@DrawableRes private fun getIconFor( place: Place, isBookmarked: Boolean, ): Int</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$fun saveFile( string: String, fileName: String?, ): Boolean</ID>
     <ID>ReturnCount:NearbyParentFragment.kt$NearbyParentFragment$override fun getScreenBottomLeft(): LatLng?</ID>
