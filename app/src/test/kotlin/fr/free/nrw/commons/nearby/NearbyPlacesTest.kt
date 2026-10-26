@@ -2,10 +2,12 @@ package fr.free.nrw.commons.nearby
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -35,5 +37,33 @@ class NearbyPlacesTest {
             any(),
             eq("test"),
         )
+    }
+
+    @Test
+    fun testFixedRadiusSkipsItemCount() {
+        val options =
+            NearbySearchOptions(
+                10.0,
+                emptyList(),
+                emptyList(),
+                false,
+                true,
+                false,
+            )
+        nearbyPlaces.getFromWikidataQuery(
+            currentLatLong,
+            currentLatLong,
+            currentLatLong,
+            "en",
+            false,
+            options,
+        )
+        verify(okHttpJsonApiClient).getNearbyPlaces(
+            any<NearbyQueryParams.Radial>(),
+            eq("en"),
+            eq(false),
+            eq(options.toSparql()),
+        )
+        verify(okHttpJsonApiClient, never()).getNearbyItemCount(any(), any())
     }
 }

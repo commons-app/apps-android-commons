@@ -10,6 +10,8 @@ WHERE {
        bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
   }
 
+  ${FILTERS}
+
   # Wiki Loves Monuments
   OPTIONAL {?item p:P1435 ?monument}
   OPTIONAL {?item p:P2186 ?monument}

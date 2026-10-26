@@ -342,11 +342,13 @@ class OkHttpJsonApiClient @Inject constructor(
      * Returns the count of items in the specified area by querying Wikidata.
      *
      * @param queryParams: a `NearbyQueryParam` specifying the geographical area.
+     * @param filters SPARQL fragment substituted for `${FILTERS}`, or an empty string.
      * @return The count of items in the specified area.
      */
     @Throws(Exception::class)
     fun getNearbyItemCount(
-        queryParams: NearbyQueryParams
+        queryParams: NearbyQueryParams,
+        filters: String,
     ): Int {
         val wikidataQuery: String = when (queryParams) {
             is NearbyQueryParams.Rectangular -> {
@@ -373,7 +375,7 @@ class OkHttpJsonApiClient @Inject constructor(
                     )
                     .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radiusInKm))
             }
-        }
+        }.replace("\${FILTERS}", filters)
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
@@ -394,38 +396,19 @@ class OkHttpJsonApiClient @Inject constructor(
         throw Exception(response.message)
     }
 
+    /**
+     * Fetches nearby places for the map.
+     *
+     * @param filters SPARQL fragment substituted for `${FILTERS}`, or an empty string.
+     * The map templates stay in charge of the selected columns and the coordinates.
+     */
     @Throws(Exception::class)
     fun getNearbyPlaces(
         queryParams: NearbyQueryParams, language: String,
-        shouldQueryForMonuments: Boolean, customQuery: String?
+        shouldQueryForMonuments: Boolean, filters: String
     ): List<Place>? {
-        Timber.d("CUSTOM_SPARQL: %s", (customQuery != null).toString())
-
-        val locale = Locale.ROOT;
-        val wikidataQuery: String = if (customQuery != null) {
-                when (queryParams) {
-                    is NearbyQueryParams.Rectangular -> {
-                        val westCornerLat = queryParams.screenTopRight.latitude
-                        val westCornerLong = queryParams.screenTopRight.longitude
-                        val eastCornerLat = queryParams.screenBottomLeft.latitude
-                        val eastCornerLong = queryParams.screenBottomLeft.longitude
-                        customQuery
-                            .replace("\${LAT_WEST}", String.format(locale, "%.4f", westCornerLat))
-                            .replace("\${LONG_WEST}", String.format(locale, "%.4f", westCornerLong))
-                            .replace("\${LAT_EAST}", String.format(locale, "%.4f", eastCornerLat))
-                            .replace("\${LONG_EAST}", String.format(locale, "%.4f", eastCornerLong))
-                            .replace("\${LANG}", language)
-                    }
-                    is NearbyQueryParams.Radial -> {
-                        Timber.e(
-                            "%s%s",
-                            "okHttpJsonApiClient.getNearbyPlaces invoked with custom query",
-                            "and radial coordinates. This is currently not supported."
-                        )
-                        ""
-                    }
-                }
-        } else when (queryParams) {
+        val locale = Locale.ROOT
+        val wikidataQuery: String = when (queryParams) {
             is NearbyQueryParams.Radial -> {
                 val placeHolderQuery: String = if (!shouldQueryForMonuments) {
                     FileUtils.readFromResource("/queries/radius_query_for_nearby.rq")
@@ -457,7 +440,7 @@ class OkHttpJsonApiClient @Inject constructor(
                     .replace("\${LONG_EAST}", String.format(locale, "%.4f", eastCornerLong))
                     .replace("\${LANG}", language)
             }
-        }
+        }.replace("\${FILTERS}", filters)
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()

@@ -78,7 +78,7 @@ class NearbyControllerTest {
             false,
             true,
             false,
-            customQuery,
+            NearbySearchOptions(),
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
             eq(searchLatLong),
@@ -173,7 +173,7 @@ class NearbyControllerTest {
             false,
             true,
             false,
-            customQuery,
+            NearbySearchOptions(),
         )
         assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)

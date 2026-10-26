@@ -113,8 +113,8 @@ public class NearbyPlaces {
      * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
      * @param lang                    The language for the query.
      * @param shouldQueryForMonuments Flag indicating whether to include monuments in the query.
-     * @param customQuery             Optional custom SPARQL query to use instead of default
-     *                                queries.
+     * @param searchOptions          Place-type, photo, and radius choices. A fixed radius skips
+     *                               the item-count search and queries that radius directly.
      * @return A list of places obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
@@ -124,12 +124,12 @@ public class NearbyPlaces {
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
-        @Nullable final String customQuery) throws Exception {
-        if (customQuery != null) {
+        @NonNull final NearbySearchOptions searchOptions) throws Exception {
+        final String filters = searchOptions.toSparql();
+        if (searchOptions.getRadiusKm() != null) {
             final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
-                    new Rectangular(screenTopRight, screenBottomLeft), lang,
-                    shouldQueryForMonuments,
-                    customQuery);
+                new Radial(centerPoint, searchOptions.getRadiusKm().floatValue()), lang,
+                shouldQueryForMonuments, filters);
             return nearbyPlaces != null ? nearbyPlaces : emptyList();
         }
 
@@ -145,11 +145,11 @@ public class NearbyPlaces {
 
         if (Math.max(longGap, latGap) < 100f) {
             final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
-                new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
+                new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), filters);
             if (itemCount < upperLimit) {
                 final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
                     new Rectangular(screenTopRight, screenBottomLeft), lang,
-                    shouldQueryForMonuments, null);
+                    shouldQueryForMonuments, filters);
                 return nearbyPlaces != null ? nearbyPlaces : emptyList();
             }
         }
@@ -162,7 +162,7 @@ public class NearbyPlaces {
         while (minRadius < maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
             final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
-                new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
+                new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f), filters);
             if (itemCount >= lowerLimit && itemCount < upperLimit) {
                 break;
             }
@@ -184,7 +184,7 @@ public class NearbyPlaces {
         }
         final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
             new Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
-            null);
+            filters);
         return nearbyPlaces != null ? nearbyPlaces : emptyList();
     }
 

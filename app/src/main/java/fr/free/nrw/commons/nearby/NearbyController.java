@@ -4,6 +4,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
@@ -178,8 +179,7 @@ public class NearbyController extends MapController {
      *                                      location.
      * @param shouldQueryForMonuments       Flag indicating whether to include monuments in the
      *                                      query.
-     * @param customQuery                   Optional custom SPARQL query to use instead of default
-     *                                      queries.
+     * @param searchOptions                 Place-type, photo, and radius choices for this search.
      * @return An object containing information about nearby places.
      * @throws Exception If an error occurs during the retrieval process.
      */
@@ -187,7 +187,8 @@ public class NearbyController extends MapController {
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments, @Nullable final String customQuery)
+        final boolean shouldQueryForMonuments,
+        @NonNull final NearbySearchOptions searchOptions)
         throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
@@ -200,7 +201,7 @@ public class NearbyController extends MapController {
 
         List<Place> places = nearbyPlaces.getFromWikidataQuery(currentLatLng, screenTopRight,
             screenBottomLeft, Locale.getDefault().getLanguage(), shouldQueryForMonuments,
-            customQuery);
+            searchOptions);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {
