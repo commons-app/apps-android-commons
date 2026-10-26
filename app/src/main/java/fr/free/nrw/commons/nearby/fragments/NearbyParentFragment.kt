@@ -45,10 +45,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import coil3.load
+import coil3.request.placeholder
+import coil3.request.error
+import coil3.dispose
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
@@ -2803,9 +2803,7 @@ class NearbyParentFragment :
         }
 
         selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
-            Glide
-                .with(binding!!.bottomSheetDetails.icon.context)
-                .clear(binding!!.bottomSheetDetails.icon)
+            binding!!.bottomSheetDetails.icon.dispose()
 
             val loadingDrawable =
                 ContextCompat.getDrawable(
@@ -2818,35 +2816,18 @@ class NearbyParentFragment :
                     R.anim.rotate,
                 )
 
-            Glide
-                .with(binding!!.bottomSheetDetails.icon.context)
-                .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=25")
-                .placeholder(loadingDrawable)
-                .error(selectedPlace!!.label.icon)
-                .listener(
-                    object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>,
-                            isFirstResource: Boolean,
-                        ): Boolean {
-                            binding!!.bottomSheetDetails.icon.clearAnimation()
-                            return false
-                        }
-
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            model: Any,
-                            target: Target<Drawable>?,
-                            dataSource: com.bumptech.glide.load.DataSource,
-                            isFirstResource: Boolean,
-                        ): Boolean {
-                            binding!!.bottomSheetDetails.icon.clearAnimation()
-                            return false
-                        }
+            binding!!.bottomSheetDetails.icon.load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=25") {
+                placeholder(loadingDrawable)
+                error(selectedPlace!!.label.icon)
+                listener(
+                    onSuccess = { _, _ ->
+                        binding!!.bottomSheetDetails.icon.clearAnimation()
                     },
-                ).into(binding!!.bottomSheetDetails.icon)
+                    onError = { _, _ ->
+                        binding!!.bottomSheetDetails.icon.clearAnimation()
+                    }
+                )
+            }
 
             if (binding!!.bottomSheetDetails.icon.drawable != null &&
                 binding!!

@@ -79,10 +79,10 @@ class MediaDetailPagerFragment :
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
+    /** Position requested by the list before the pager's view has been created. */
+    private var requestedPosition: Int = 0
 
-    /**
-     * ProgressBar used to indicate the loading status of media items.
-     */
+    /** ProgressBar used while waiting for a media page to be created. */
     var imageProgressBar: ProgressBar? = null
 
     var removedItems: ArrayList<Int> = ArrayList()
@@ -96,7 +96,6 @@ class MediaDetailPagerFragment :
     ): View? {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false)
         binding!!.mediaDetailsPager.addOnPageChangeListener(this)
-        // Initialize the ProgressBar by finding it in the layout
         imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
         adapter = MediaDetailAdapter(this, childFragmentManager)
 
@@ -113,14 +112,18 @@ class MediaDetailPagerFragment :
             (activity as ProfileActivity).setTabLayoutVisibility(false)
         }
 
+        // ViewPager otherwise populates page zero as soon as the adapter is set.
+        // That page can start an image request before showImage() selects the
+        // item opened from the recycler view, causing the first image to flash.
+        val initialPosition = savedInstanceState?.getInt("current-page") ?: requestedPosition
+        binding!!.mediaDetailsPager.visibility = View.INVISIBLE
         binding!!.mediaDetailsPager.adapter = adapter
 
         if (savedInstanceState != null) {
-            val pageNumber = savedInstanceState.getInt("current-page")
-            binding!!.mediaDetailsPager.setCurrentItem(pageNumber, false)
             requireActivity().invalidateOptionsMenu()
         }
         adapter!!.notifyDataSetChanged()
+        setViewPagerCurrentItem(initialPosition)
 
         return binding!!.root
     }
@@ -214,7 +217,7 @@ class MediaDetailPagerFragment :
                 shareIntent.setType("text/plain")
                 shareIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    """${m!!.displayTitle} 
+                    """${m!!.displayTitle}
 ${m.pageTitle.canonicalUri}""",
                 )
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."))
@@ -609,10 +612,12 @@ ${m.pageTitle.canonicalUri}""",
         isWikipediaButtonDisplayed: Boolean,
     ) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed
+        requestedPosition = i
         setViewPagerCurrentItem(i)
     }
 
     fun showImage(i: Int) {
+        requestedPosition = i
         setViewPagerCurrentItem(i)
     }
 
