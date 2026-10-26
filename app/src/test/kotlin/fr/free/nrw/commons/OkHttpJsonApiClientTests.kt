@@ -13,6 +13,7 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import okhttp3.Call
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -22,6 +23,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -29,6 +31,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.eq
 import org.mockito.MockitoAnnotations
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.Exception
 
@@ -237,6 +240,60 @@ class OkHttpJsonApiClientTests {
         assertFalse(result.campaignConfig!!.showOnlyLiveCampaigns)
         assertEquals("startDate", result.campaignConfig!!.sortBy)
     }
+
+    @Test
+    fun testGetAchievementsFallsBackToCommonsApiWhenFeedbackHasNoJson() {
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "Content-type: application/json\n",
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.uniqueUsedImages)
+        assertEquals(2, result.articlesUsingImages)
+        assertEquals(1, result.deletedUploads)
+        assertEquals(1, result.featuredImages.qualityImages)
+        assertEquals(0, result.featuredImages.featuredPicturesOnWikimediaCommons)
+        assertEquals(3, result.thanksReceived)
+        assertEquals("Test", result.user)
+        verify(okhttpClient, times(6)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallbackFailsForTooManyUploads() {
+        val uploads = (1..1001).joinToString(",") { """{"title":"File:$it.jpg"}""" }
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "Content-type: application/json\n",
+            """{"query":{"logevents":[$uploads]}}"""
+        )
+
+        try {
+            clientWithToolforgeUrl().getAchievements("Test").blockingGet()
+            fail("Expected the fallback to give up")
+        } catch (e: RuntimeException) {
+            assertTrue(e.cause is IOException)
+        }
+        verify(okhttpClient, times(2)).newCall(any())
+    }
+
+    private fun clientWithToolforgeUrl() = OkHttpJsonApiClient(
+        okhttpClient,
+        depictsClient,
+        "https://tools.example.org/tool-commons-android-app".toHttpUrl(),
+        sparqlQueryUrl,
+        campaignsUrl,
+        gson
+    )
 
     fun loadJsonFromResource(fileName: String): String {
         val resourcePath = "raw/$fileName"
