@@ -147,7 +147,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.lang.String.format
@@ -188,7 +187,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     lateinit var mediaClient: MediaClient
 
     @Inject
-    lateinit var okHttpClient: OkHttpClient
+    @field:Named("media_playback")
+    lateinit var playbackHttpClient: OkHttpClient
 
     @Inject
     lateinit var reasonBuilder: ReasonBuilder
@@ -259,18 +259,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     //Had to make this class variable, to implement various onClicks, which access the media,
     // also I fell why make separate variables when one can serve the purpose
     private var media: Media? = null
-
-    /**
-     * Client used for media playback.
-     *
-     * Derived from the shared client so headers such as UserAgent are kept, but without body
-     * logging or the shared response cache, neither of which suits large media streams.
-     */
-    private val playbackHttpClient: OkHttpClient by lazy {
-        val builder = okHttpClient.newBuilder().cache(null)
-        builder.interceptors().removeAll { it is HttpLoggingInterceptor }
-        builder.build()
-    }
 
     private var mediaPlayer: ExoPlayer? = null
     private var mediaPlaybackSources: List<MediaDerivative> = emptyList()

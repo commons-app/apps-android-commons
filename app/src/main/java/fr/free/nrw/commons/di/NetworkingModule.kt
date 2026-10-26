@@ -24,6 +24,7 @@ import fr.free.nrw.commons.media.MediaDetailInterface
 import fr.free.nrw.commons.media.MediaInterface
 import fr.free.nrw.commons.media.PageMediaInterface
 import fr.free.nrw.commons.media.WikidataMediaInterface
+import fr.free.nrw.commons.media.mediaPlaybackHttpClient
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.mwapi.UserInterface
 import fr.free.nrw.commons.notification.NotificationInterface
@@ -65,6 +66,14 @@ class NetworkingModule {
         .readTimeout(120, TimeUnit.SECONDS)
         .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
         .build()
+
+    @Provides
+    @Singleton
+    @Named("media_playback")
+    fun provideMediaPlaybackHttpClient(
+        okHttpClient: OkHttpClient,
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient = mediaPlaybackHttpClient(okHttpClient, httpLoggingInterceptor)
 
     @Provides
     @Singleton
