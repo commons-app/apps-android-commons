@@ -202,7 +202,10 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         AppDatabase::class.java,
         "commons_room.db"
     ).addMigrations(
-        *ALL_MIGRATIONS
+        MIGRATION_1_2,
+        MIGRATION_19_TO_20,
+        MIGRATION_21_22,
+        MIGRATION_22_23
     ).fallbackToDestructiveMigration().build()
 
     @Provides
@@ -356,13 +359,6 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                 oldDb.close()
             }
         }
-
-        val ALL_MIGRATIONS = arrayOf(
-            MIGRATION_1_2,
-            MIGRATION_19_TO_20,
-            MIGRATION_21_22,
-            MIGRATION_22_23
-        )
     }
 }
 

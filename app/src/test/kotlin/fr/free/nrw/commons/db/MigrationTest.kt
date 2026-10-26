@@ -8,7 +8,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
-import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.ALL_MIGRATIONS
+import fr.free.nrw.commons.di.MIGRATION_21_22
+import fr.free.nrw.commons.di.MIGRATION_22_23
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -59,7 +60,7 @@ class MigrationTest {
         // build "commons_room.db" as it was at version 21, then migrate it.
         helper.createDatabase(ROOM_DB, 21).close()
         val migratedDb = helper.runMigrationsAndValidate(
-            ROOM_DB, latestVersion(context), true, *ALL_MIGRATIONS
+            ROOM_DB, latestVersion(context), true, MIGRATION_21_22, MIGRATION_22_23
         )
 
         // tests
@@ -128,7 +129,7 @@ class MigrationTest {
         oldDb.close()
 
         val migratedDb = helper.runMigrationsAndValidate(
-            ROOM_DB, latestVersion(context), true, *ALL_MIGRATIONS
+            ROOM_DB, latestVersion(context), true, MIGRATION_21_22, MIGRATION_22_23
         )
 
         try {
