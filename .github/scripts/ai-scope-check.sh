@@ -27,9 +27,11 @@ run_rules() {
     reason="unchecked-checklist"
   fi
 
+  # The rule-based fallback cannot judge whether changes are related, so it
+  # never answers "yes" (which would post an "unrelated changes" comment).
   local response="no"
   if [[ -n "$reason" ]]; then
-    response="yes"
+    echo "::notice::Rule-based fallback noticed '${reason}' but cannot judge relevance; no comment will be posted."
   fi
   write_output response "$response"
   write_output mode rules
