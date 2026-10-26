@@ -340,7 +340,8 @@ class NearbyParentFragmentPresenter(
     /**
      * Iterates through MarkerPlaceGroups and attempts to load the places from the local
      * Place cache/repository. If a Place is in the cache, data from the Place is set into the
-     * associated MarkerPlaceGroup. Else, the index is added to the indicesToUpdate list.
+     * associated MarkerPlaceGroup. Every index is added to the indicesToUpdate list, so the
+     * details are fetched again from Wikidata and outdated cached details are replaced.
      *
      * @param updatedGroups The MarkerPlaceGroups that contain Place entity IDs used to search the
      * local cache for more information about the Place.
@@ -368,9 +369,10 @@ class NearbyParentFragmentPresenter(
                     language = repoPlace.language
                     siteLinks = repoPlace.siteLinks
                 }
-            } else {
-                indicesToUpdate.add(i)
             }
+            // Fetch the details again even when data is cached, so that changes
+            // on Wikidata are shown
+            indicesToUpdate.add(i)
         }
     }
 
