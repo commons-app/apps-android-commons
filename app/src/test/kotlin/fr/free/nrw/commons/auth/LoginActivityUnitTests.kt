@@ -14,7 +14,6 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -63,7 +62,7 @@ class LoginActivityUnitTests {
 
     @Before
     fun setUp() {
-        loginResult = mockk()
+        loginResult = LoginResult.Result("PASS", "user", "pass", null)
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
@@ -83,45 +82,25 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSkipLogin() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "skipLogin",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.skipLogin()
     }
 
     @Test
     @Throws(Exception::class)
     fun testForgotPassword() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "forgotPassword",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.forgotPassword()
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnPrivacyPolicyClicked() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onPrivacyPolicyClicked",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.onPrivacyPolicyClicked()
     }
 
     @Test
     @Throws(Exception::class)
     fun testSignUp() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "signUp",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.signUp()
     }
 
     @Test
@@ -163,37 +142,20 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnLoginSuccessCaseDefault() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onLoginSuccess",
-                LoginResult::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
+        activity.onLoginSuccess(loginResult)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnLoginSuccess() {
         `when`(progressDialog.isShowing).thenReturn(true)
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onLoginSuccess",
-                LoginResult::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
+        activity.onLoginSuccess(loginResult)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowPasswordResetPrompt() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "showPasswordResetPrompt",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.showPasswordResetPrompt()
     }
 
     @Test
@@ -235,17 +197,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnPostResume() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onPostResume",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowMessageAndCancelDialog() {
         activity.showMessageAndCancelDialog("")
     }
@@ -266,6 +217,12 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testAskUserForTwoFactorAuth() {
         activity.askUserForTwoFactorAuth()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAskUserForTwoFactorAuthWithKeyboard() {
+        activity.askUserForTwoFactorAuthWithKeyboard()
     }
 
     @Test

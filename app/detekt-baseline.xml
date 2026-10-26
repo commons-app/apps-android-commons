@@ -968,7 +968,6 @@
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
-    <ID>TooManyFunctions:LoginActivity.kt$LoginActivity : AccountAuthenticatorActivity</ID>
     <ID>TooManyFunctions:MainActivity.kt$MainActivity : BaseActivityOnBackStackChangedListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient : ContinuationClient</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
