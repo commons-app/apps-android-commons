@@ -273,6 +273,13 @@
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
   <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
+  <string name="file_deleted_from_commons">Оваа податотека е избришана од Ризницата.</string>
+  <string name="contribution_deleted">Избришано</string>
+  <string name="deleted_file_activity_title">Податотеката е избришана</string>
+  <string name="deleted_file_explanation">Ризницата ги брише податотеките кои не се од образовен карактер или ги кршат нејзините правила, меѓу кои и нарушување на авторски права. Подигајте фотографии што сте ги направиле самите. Сликите прекопирани од семрежјето, екрански снимки, логоа и плакати обично се бришат.</string>
+  <string name="deleted_file_view_page">Погл. податотечната страница</string>
+  <string name="deleted_file_view_discussion">Прочитајте го разговорот за бришење</string>
+  <string name="deleted_file_policies">Правила и напатствија на Ризницата</string>
   <string name="nominated_see_more">Поподробно ќе најдете на мрежното место</string>
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
@@ -861,4 +868,12 @@
   <string name="error_applying_blur">Не успеав да заматам</string>
   <string name="failed_to_apply_crop">Не успеав да поткастрам</string>
   <string name="failed_to_save_image">Не успеав да ја зачувам сликата</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (аудио)</string>
+  <string name="unsupported_format_title">Неподдржан формат</string>
+  <string name="unsupported_format_desc">Избраните податотеки не можеа да се отворат. Ризницата ги бара строго овие формати:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Неподдржаните податотеки се прескокнати</string>
+  <string name="unsupported_files_skipped_desc">Некои податотеки беа прескокнати поради неподдржан формат. Прилогот ќе продолжи да ги подига останатите податотеки што одговараат на следниве поддржани формати:\n\n%s</string>
 </resources>

@@ -138,7 +138,8 @@ class Media constructor(
      * @return Author or User
      */
     @Deprecated(
-        "Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author.",
+        "Use user for uploader username. Use attributedAuthor() for attribution. " +
+            "Note that the uploader may not be the creator/author.",
     )
     fun getAuthorOrUser(): String? =
         if (!author.isNullOrEmpty()) {

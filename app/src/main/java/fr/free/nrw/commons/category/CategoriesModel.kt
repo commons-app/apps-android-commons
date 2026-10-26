@@ -48,8 +48,10 @@ class CategoriesModel
             // with separators [., /, -]
             val isIrrelevantCategory =
                 item.contains(
-                    """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
-                        .toRegex(),
+                    (
+                        """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}""" +
+                            """|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
+                    ).toRegex(),
                 )
 
             if (spammyCategory) {
