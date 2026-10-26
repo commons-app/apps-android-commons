@@ -36,8 +36,7 @@ class ContributionBoundaryCallback
         /**
          * It is triggered when the user scrolls to the top of the list
          * */
-        override fun onItemAtFrontLoaded(itemAtFront: Contribution) {
-        }
+        override fun onItemAtFrontLoaded(itemAtFront: Contribution) = Unit
 
         /**
          * It is triggered when the user scrolls to the end of the list. User's Contributions are then

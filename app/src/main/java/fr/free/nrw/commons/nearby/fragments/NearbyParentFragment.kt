@@ -1116,8 +1116,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 prepareViewsForSheetPosition(newState)
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
         })
 
         binding!!.bottomSheetDetails.root.setOnClickListener { v ->
@@ -1143,8 +1142,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
         })
         if (isDepictsPickerMode) {
             bottomSheetListBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
@@ -2085,11 +2083,9 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
         return presenter?.backButtonClicked() ?: false
     }
 
-    override fun onLocationPermissionDenied(toastMessage: String) {
-    }
+    override fun onLocationPermissionDenied(toastMessage: String) = Unit
 
-    override fun onLocationPermissionGranted() {
-    }
+    override fun onLocationPermissionGranted() = Unit
 
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
@@ -3105,7 +3101,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
 
-            else -> {}
+            else -> = Unit
         }
     }
 

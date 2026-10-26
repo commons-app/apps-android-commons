@@ -118,7 +118,7 @@ class MediaLicenseFragment : UploadBaseFragment(), MediaLicenseContract.View {
         licenseAdapter?.setSelectedLicense(license)
     }
 
-    override fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int) {}
+    override fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int) = Unit
 
     private fun setTextViewHTML(textView: TextView, text: String) {
         val sequence: CharSequence = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

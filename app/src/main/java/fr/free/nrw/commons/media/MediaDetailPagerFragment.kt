@@ -583,11 +583,9 @@ ${m.pageTitle.canonicalUri}"""
         requireActivity().invalidateOptionsMenu()
     }
 
-    override fun onPageSelected(i: Int) {
-    }
+    override fun onPageSelected(i: Int) = Unit
 
-    override fun onPageScrollStateChanged(i: Int) {
-    }
+    override fun onPageScrollStateChanged(i: Int) = Unit
 
     fun onDataSetChanged() {
         if (null != adapter) {

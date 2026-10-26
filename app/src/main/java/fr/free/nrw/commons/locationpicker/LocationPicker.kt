@@ -22,10 +22,10 @@ object LocationPicker {
         return data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
     }
 
-    class IntentBuilder
     /**
      * Creates a new builder that creates an intent to launch the place picker activity.
-     */() {
+     */
+    class IntentBuilder {
 
         private val intent: Intent = Intent()
 

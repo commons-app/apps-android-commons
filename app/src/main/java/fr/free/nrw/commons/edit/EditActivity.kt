@@ -723,11 +723,9 @@ class EditActivity : BaseActivity() {
                     }
                 }
 
-                override fun onAnimationCancel(animation: Animator) {
-                }
+                override fun onAnimationCancel(animation: Animator) = Unit
 
-                override fun onAnimationRepeat(animation: Animator) {
-                }
+                override fun onAnimationRepeat(animation: Animator) = Unit
             },
         )
 

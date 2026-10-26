@@ -47,7 +47,7 @@ class FooterAdapter(
     override fun onBindViewHolder(
         holder: FooterViewHolder,
         position: Int,
-    ) {}
+    ) = Unit
 }
 
 open class FooterViewHolder(

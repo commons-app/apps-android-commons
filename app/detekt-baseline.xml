@@ -36,32 +36,6 @@
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
-    <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
-    <ID>EmptyDefaultConstructor:LocationPicker.kt$LocationPicker.IntentBuilder$()</ID>
-    <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
-    <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionsListPresenter.kt$ContributionsListPresenter${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionsRemoteDataSource.kt$ContributionsRemoteDataSource${ }</ID>
-    <ID>EmptyFunctionBlock:DefaultCallback.kt$DefaultCallback${}</ID>
-    <ID>EmptyFunctionBlock:DeleteHelper.kt$DeleteHelper.&lt;no name provided&gt;${}</ID>
-    <ID>EmptyFunctionBlock:DescriptionEditActivity.kt$DescriptionEditActivity${}</ID>
-    <ID>EmptyFunctionBlock:EditActivity.kt$EditActivity.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:FooterAdapter.kt$FooterAdapter${}</ID>
-    <ID>EmptyFunctionBlock:LatLngTest.kt$LatLngTest${ }</ID>
-    <ID>EmptyFunctionBlock:MediaDetailFragment.kt$MediaDetailFragment.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:MediaDetailPagerFragment.kt$MediaDetailPagerFragment${ }</ID>
-    <ID>EmptyFunctionBlock:MediaLicenseFragment.kt$MediaLicenseFragment${}</ID>
-    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment${ }</ID>
-    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:PagedListMock.kt$MockLimitDataSource${ }</ID>
-    <ID>EmptyFunctionBlock:PendingUploadsPresenter.kt$PendingUploadsPresenter${ }</ID>
-    <ID>EmptyFunctionBlock:SettingsFragment.kt$SettingsFragment.&lt;no name provided&gt;${}</ID>
-    <ID>EmptyFunctionBlock:UploadProgressActivity.kt$UploadProgressActivity.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:ZoomableDraweeView.kt$ZoomableDraweeView.&lt;no name provided&gt;${}</ID>
-    <ID>EmptySecondaryConstructor:BaseMarker.kt$BaseMarker${ }</ID>
-    <ID>EmptySecondaryConstructor:ChunkInfo.kt$ChunkInfo${ }</ID>
-    <ID>EmptySecondaryConstructor:UploadResult.kt$UploadResult${ }</ID>
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$//TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>

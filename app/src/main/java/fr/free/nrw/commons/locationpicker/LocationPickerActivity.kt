@@ -536,12 +536,14 @@ class LocationPickerActivity : BaseActivity(), LocationPermissionCallback {
                     val username = sessionManager.userName
                     CommonsApplication.BaseLogoutListener(
                         this,
-                        getString(R.string.invalid_login_message)
-                        , username
+                        getString(R.string.invalid_login_message),
+                        username
                     ).let {
                         CommonsApplication.instance.clearApplicationData(this, it)
                     }
-                } else { }
+                } else {
+                    Timber.e(e, "Failed to update image coordinates")
+                }
             }
         }
     }

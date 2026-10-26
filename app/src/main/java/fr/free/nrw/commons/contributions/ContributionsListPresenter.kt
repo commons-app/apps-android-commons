@@ -24,8 +24,7 @@ class ContributionsListPresenter @Inject internal constructor(
 
     var contributionList: LiveData<PagedList<Contribution>>? = null
 
-    override fun onAttachView(view: ContributionsListContract.View) {
-    }
+    override fun onAttachView(view: ContributionsListContract.View) = Unit
 
     /**
      * Setup the paged list. This method sets the configuration for paged list and ties it up with

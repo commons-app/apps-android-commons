@@ -72,8 +72,7 @@ import javax.inject.Named
         failedContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
     }
 
-    override fun onAttachView(view: PendingUploadsContract.View) {
-    }
+    override fun onAttachView(view: PendingUploadsContract.View) = Unit
 
     override fun onDetachView() {
         compositeDisposable.clear()
