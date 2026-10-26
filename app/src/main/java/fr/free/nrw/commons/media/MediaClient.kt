@@ -149,7 +149,10 @@ class MediaClient
         fun getMediaInfo(title: String): Single<MediaInfo> =
             mediaInterface
                 .getMediaInfo(title)
-                .map { it.query()!!.firstPage()!!.mediaInfo()!! }
+                .map {
+                    it.query()?.firstPage()?.mediaInfo()
+                        ?: throw Exception("No videoinfo returned for $title")
+                }
 
         /**
          * The method returns the picture of the day

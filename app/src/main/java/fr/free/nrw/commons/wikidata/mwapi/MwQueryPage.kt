@@ -58,7 +58,7 @@ class MwQueryPage : BaseModel() {
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
 
-    fun mediaInfo(): MediaInfo? = videoInfo?.get(0)
+    fun mediaInfo(): MediaInfo? = videoInfo?.firstOrNull()
 
     fun redirectFrom(from: String?) {
         redirectFrom = from

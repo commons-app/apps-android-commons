@@ -882,7 +882,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         preferredMediaPlaybackSource(playbackSources)?.let(::playMedia)
                             ?: handleMediaUnavailable()
                     },
-                    { handleMediaUnavailable() },
+                    { Timber.e(it); handleMediaUnavailable() },
                 ),
         )
     }
