@@ -394,7 +394,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
      * @param badgeTextColor The badge text color. Default is R.attr.colorPrimary
      * @param badgeGravity The position of the badge [TOP_END,TOP_START,BOTTOM_END,BOTTOM_START]. Default is TOP_END
      * @return if the number is 0, then it will not create badge for it and hide the view
-     * @see <a href="https://developer.android.com/reference/com/google/android/material/badge/BadgeDrawable">BadgeDrawable (Android Developer)</a>
+     * @see <a
+     * href="https://developer.android.com/reference/com/google/android/material/badge/BadgeDrawable">BadgeDrawable
+     * (Android Developer)</a>
      */
 
     private fun showBadgesWithCount(
@@ -575,7 +577,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
         private const val IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope"
 
         // Kept on one line so the URL stays searchable.
-        @Suppress("ktlint:standard:max-line-length")
+        @Suppress("ktlint:standard:max-line-length", "MaxLineLength")
         private const val IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion"
         private const val IMAGES_USED_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images"
         private const val IMAGES_NEARBY_PLACES_URL = "https://www.wikidata.org/wiki/Property:P18"
