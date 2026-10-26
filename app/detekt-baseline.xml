@@ -193,7 +193,6 @@
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$8</ID>
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$9</ID>
     <ID>MagicNumber:Achievements.kt$Achievements$100</ID>
-    <ID>MagicNumber:AchievementsFragment.kt$AchievementsFragment$100</ID>
     <ID>MagicNumber:AchievementsFragment.kt$AchievementsFragment$150_000</ID>
     <ID>MagicNumber:BlurOverlayView.kt$BlurOverlayView$0.01f</ID>
     <ID>MagicNumber:BlurOverlayView.kt$BlurOverlayView$1.5f</ID>
@@ -923,7 +922,6 @@
     <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
-    <ID>TooManyFunctions:AchievementsFragment.kt$AchievementsFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
     <ID>TooManyFunctions:AppLanguageLookUpTable.kt$AppLanguageLookUpTable</ID>
