@@ -85,7 +85,6 @@ class UploadWorker(
 
     private val processingUploadsNotificationId = 101
 
-    // The foreground service notification; it also shows the progress of the current upload
     private val foregroundNotificationId = 1
 
     // Attributes of the current-upload notification
@@ -323,8 +322,6 @@ class UploadWorker(
             ),
         )
 
-        // Show the progress in the foreground service notification instead of a second
-        // notification, the result of the upload is shown in its own notification below
         notificationManager?.notify(
             foregroundNotificationId,
             currentNotification.build(),
