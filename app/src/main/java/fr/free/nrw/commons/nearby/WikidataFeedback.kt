@@ -55,6 +55,8 @@ class WikidataFeedback : BaseActivity() {
         )
         binding.radioButton2.setText(
             getString(
+                // Generated resource identifiers are indivisible.
+                @Suppress("MaxLineLength")
                 R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
                 place,
             ),

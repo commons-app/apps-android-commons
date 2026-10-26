@@ -278,6 +278,9 @@
   <string name="null_url">Xəta! URL tapılmadı</string>
   <string name="nominate_deletion">Silinməyə namizəd göstər</string>
   <string name="nominated_for_deletion">Bu şəkil silinməyə namizəddir.</string>
+  <string name="file_deleted_from_commons">Bu fayl Vikianbardan silinib.</string>
+  <string name="contribution_deleted">Silinib</string>
+  <string name="deleted_file_activity_title">Fayl silinib</string>
   <string name="nominated_see_more">Ətraflı məlumat üçün veb səhifəsinə bax</string>
   <string name="skip_login">Ötür</string>
   <string name="navigation_item_login">Daxil ol</string>
@@ -864,4 +867,8 @@
   <string name="error_applying_blur">Bulanıqlaşdırma tətbiq edərkən xəta</string>
   <string name="failed_to_apply_crop">Kəsmə tətbiq edilə bilmədi</string>
   <string name="failed_to_save_image">Şəkli yadda saxlamaq alınmadı</string>
+  <string name="unsupported_format_title">Dəstəklənməyən format</string>
+  <string name="unsupported_format_desc">Seçilmiş fayllar açıla bilmədi. Vikianbar aşağıdakı formatları ciddi şəkildə tələb edir:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Dəstəklənməyən fayllar ötürüldü</string>
+  <string name="unsupported_files_skipped_desc">Dəstəklənməyən formata görə bəzi fayllar ötürüldü. Tətbiq aşağıdakı dəstəklənən formatlara uyğun qalan faylları yükləməyə davam edəcək:\n\n%s</string>
 </resources>
