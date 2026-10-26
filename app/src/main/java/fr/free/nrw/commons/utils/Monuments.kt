@@ -8,14 +8,14 @@ import java.util.Date
  * For this release we are hardcoding it to be 1st September
  * @return
  */
-const val wLMStartDate: String = "1 Sep"
+const val WLM_START_DATE: String = "1 Sep"
 
 /***
  * Get the end date of wlm monument
  * For this release we are hardcoding it to be 31st October
  * @return
  */
-const val wLMEndDate: String = "30 Sep"
+const val WLM_END_DATE: String = "30 Sep"
 
 /**
  * For now we are enabling the monuments only when the date lies between 1 Sept & 31 OCt

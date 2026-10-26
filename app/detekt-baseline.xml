@@ -89,10 +89,6 @@
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-    <ID>FunctionParameterNaming:Converters.kt$Converters$`object`: Any?</ID>
-    <ID>FunctionParameterNaming:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$SHA1: String</ID>
-    <ID>FunctionParameterNaming:LeaderboardApiTest.kt$LeaderboardApiTest.Companion$`is`: InputStream</ID>
-    <ID>FunctionParameterNaming:UpdateAvatarApiTest.kt$UpdateAvatarApiTest.Companion$`is`: InputStream</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate, )</ID>
     <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!!, ), getExtraShortDateString(endDate!!), )</ID>
     <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
@@ -662,7 +658,6 @@
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$8</ID>
     <ID>MagicNumber:WikiSite.kt$WikiSite.Companion$3</ID>
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
-    <ID>MatchingDeclarationName:Costants.kt$Constants</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment$*</ID>
     <ID>MaxLineLength:AchievementsFragment.kt$AchievementsFragment.Companion$private</ID>
     <ID>MaxLineLength:BasicKvStore.kt$BasicKvStore$* If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.</ID>
@@ -1046,8 +1041,6 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>TopLevelPropertyNaming:Monuments.kt$/** * Get the start date of wlm monument * For this release we are hardcoding it to be 1st September * @return */ const val wLMStartDate: String = "1 Sep"</ID>
-    <ID>TopLevelPropertyNaming:Monuments.kt$/*** * Get the end date of wlm monument * For this release we are hardcoding it to be 31st October * @return */ const val wLMEndDate: String = "30 Sep"</ID>
     <ID>UnusedPrivateProperty:BookmarkItemsDaoTest.kt$BookmarkItemsDaoTest$i</ID>
     <ID>UnusedPrivateProperty:BookmarkListRootFragment.kt$BookmarkListRootFragment$private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null</ID>
     <ID>UnusedPrivateProperty:BookmarkLocationsViewModel.kt$BookmarkLocationsViewModel$private val bookmarkLocationsDao: BookmarkLocationsDao</ID>
