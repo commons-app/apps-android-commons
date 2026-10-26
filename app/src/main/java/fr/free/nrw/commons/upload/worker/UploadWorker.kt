@@ -177,6 +177,7 @@ class UploadWorker(
             .setOnlyAlertOnce(true)
             .setProgress(100, 0, true)
             .setOngoing(true)
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
 
     @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
