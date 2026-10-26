@@ -27,6 +27,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     private Context context;
     private ArrayList<Label> labels;
     private ArrayList<Label> displayedLabels;
+    private ArrayList<Label> displayedLabelsFull;
     public ArrayList<Label> selectedLabels = new ArrayList<>();
 
     private int state;
@@ -43,6 +44,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         this.context = context;
         this.labels = labels;
         this.displayedLabels = labels;
+        displayedLabelsFull = new ArrayList<>(displayedLabels);
         smoothScroller = new
                 LinearSmoothScroller(context) {
                     @Override protected int getVerticalSnapPreference() {
@@ -115,38 +117,29 @@ public class NearbyFilterSearchRecyclerViewAdapter
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();
                 ArrayList<Label> filteredArrayList = new ArrayList<>();
 
-                if (labels == null) {
-                    labels = new ArrayList<>(displayedLabels);
-                }
-
-                if (constraint == null || constraint.length() == 0) {
-                    // set the Original result to return
-                    results.count = labels.size();
-                    results.values = labels;
+                if (constraint == null) {
+                    filteredArrayList.addAll(displayedLabelsFull);
                 } else {
-                    String query = constraint.toString().toLowerCase(Locale.ROOT).trim();
-
-                    for (Label label : labels) {
-                        String name = label.toString().replace('_', ' ').toLowerCase(Locale.ROOT);
-                        if (name.contains(query)) {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (Label label : displayedLabelsFull) {
+                        if (label.getText().toLowerCase().contains(filterPattern)) {
                             filteredArrayList.add(label);
                         }
                     }
 
-                    // set the Filtered result to return
-                    results.count = filteredArrayList.size();
-                    results.values = filteredArrayList;
                 }
+                FilterResults results = new FilterResults();
+                results.values = filteredArrayList;
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                displayedLabels = (ArrayList<Label>) results.values; // has the filtered values
-                notifyDataSetChanged();  // notifies the data with new filtered values
+                displayedLabels.clear();
+                displayedLabels.addAll((ArrayList) results.values);
+                notifyDataSetChanged();
             }
         };
     }
@@ -173,7 +166,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         notifyDataSetChanged();
     }
 
-    public interface  Callback {
+    public interface Callback {
 
         void setCheckboxUnknown();
 
