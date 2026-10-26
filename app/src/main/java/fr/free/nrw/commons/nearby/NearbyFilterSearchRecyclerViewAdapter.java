@@ -166,7 +166,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         notifyDataSetChanged();
     }
 
-    public interface Callback {
+    public interface  Callback {
 
         void setCheckboxUnknown();
 
