@@ -78,7 +78,6 @@ object ImageUtils {
     private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
     private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3
     private const val MAX_RGB_VALUE = 255.0
-    private const val PERCENTAGE_SCALE = 100
     private const val HIGH_BRIGHTNESS_LUMINANCE = 40
     private const val MEDIUM_BRIGHTNESS_LUMINANCE = 26
 
@@ -178,7 +177,7 @@ object ImageUtils {
                 val max = maxOf(r, g, b) / MAX_RGB_VALUE
                 val min = minOf(r, g, b) / MAX_RGB_VALUE
 
-                val luminance = ((max + min) / 2.0) * PERCENTAGE_SCALE
+                val luminance = ((max + min) / 2.0) * 100
 
                 val highBrightnessLuminance = HIGH_BRIGHTNESS_LUMINANCE
                 val mediumBrightnessLuminance = MEDIUM_BRIGHTNESS_LUMINANCE
