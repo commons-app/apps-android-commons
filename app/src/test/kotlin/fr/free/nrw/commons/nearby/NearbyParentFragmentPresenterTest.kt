@@ -22,6 +22,7 @@ import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.util.Collections
+import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
@@ -473,13 +474,14 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test that cached places are shown from the cache and also fetched again,
-     * so that changes on Wikidata replace the cached details
+     * Test that a place cached more than 5 days ago is shown from the cache and also
+     * fetched again, so that changes on Wikidata replace the outdated details.
      */
     @Test
-    fun testLoadCachedPlacesFetchesCachedPlacesAgain() =
+    fun testLoadCachedPlacesFetchesOutdatedCachedPlacesAgain() =
         runBlocking {
             val cachedPlace = Place("en", "Cached place", null, "", null, "", null, "", true, "Q1")
+            cachedPlace.cachedAt = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(6)
             whenever(placesRepository.fetchPlace("Q1")).thenReturn(cachedPlace)
             whenever(bookmarkLocationsDao.findBookmarkLocation("Cached place")).thenReturn(false)
             val updatedGroups =
@@ -493,5 +495,28 @@ class NearbyParentFragmentPresenterTest {
 
             assertEquals("Cached place", updatedGroups[0].place.name)
             assertEquals(listOf(0, 1), indicesToUpdate)
+        }
+
+    /**
+     * Test that a place cached recently is shown from the cache without being fetched again
+     */
+    @Test
+    fun testLoadCachedPlacesDoesNotFetchRecentlyCachedPlaces() =
+        runBlocking {
+            val cachedPlace = Place("en", "Cached place", null, "", null, "", null, "", true, "Q1")
+            cachedPlace.cachedAt = System.currentTimeMillis()
+            whenever(placesRepository.fetchPlace("Q1")).thenReturn(cachedPlace)
+            whenever(bookmarkLocationsDao.findBookmarkLocation("Cached place")).thenReturn(false)
+            val updatedGroups =
+                mutableListOf(
+                    MarkerPlaceGroup(false, Place().apply { entityID = "Q1" }),
+                    MarkerPlaceGroup(false, Place().apply { entityID = "Q2" }),
+                )
+            val indicesToUpdate = mutableListOf<Int>()
+
+            nearbyPresenter.loadCachedPlaces(updatedGroups, indicesToUpdate)
+
+            assertEquals("Cached place", updatedGroups[0].place.name)
+            assertEquals(listOf(1), indicesToUpdate)
         }
 }

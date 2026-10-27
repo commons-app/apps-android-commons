@@ -200,6 +200,7 @@ open class CommonsApplicationModule(
             MIGRATION_1_2,
             MIGRATION_19_TO_20,
             MIGRATION_21_22,
+            MIGRATION_22_23,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -526,5 +527,14 @@ val MIGRATION_21_22 =
                 Timber.e(e, "Exception during legacy database migration")
                 throw e
             }
+        }
+    }
+
+@Suppress("MagicNumber") // Room migrations are identified by their version number
+val MIGRATION_22_23 =
+    object : Migration(22, 23) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            // Places cached before this version get 0, so they are treated as outdated and fetched again
+            db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
         }
     }

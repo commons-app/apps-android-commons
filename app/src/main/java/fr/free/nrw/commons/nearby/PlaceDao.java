@@ -48,11 +48,15 @@ public abstract class PlaceDao {
         double latEnd, double lngEnd);
 
     /**
-     * Saves a Place object asynchronously into the database.
+     * Saves a Place object asynchronously into the database, with the current time as the time
+     * it was cached
      */
     public Completable save(final Place place) {
         return Completable
-            .fromAction(() -> saveSynchronous(place));
+            .fromAction(() -> {
+                place.cachedAt = System.currentTimeMillis();
+                saveSynchronous(place);
+            });
     }
 
     /**

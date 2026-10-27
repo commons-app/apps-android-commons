@@ -34,6 +34,7 @@ import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.TimeUnit
 
 class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
@@ -340,14 +341,14 @@ class NearbyParentFragmentPresenter(
     /**
      * Iterates through MarkerPlaceGroups and attempts to load the places from the local
      * Place cache/repository. If a Place is in the cache, data from the Place is set into the
-     * associated MarkerPlaceGroup. Every index is added to the indicesToUpdate list, so the
-     * details are fetched again from Wikidata and outdated cached details are replaced.
+     * associated MarkerPlaceGroup. If a place is not in the cache, or was cached more than
+     * 5 days ago, its index is added to the indicesToUpdate list so it is fetched from Wikidata.
      *
      * @param updatedGroups The MarkerPlaceGroups that contain Place entity IDs used to search the
      * local cache for more information about the Place.
      *
      * @param indicesToUpdate The list of indices in updatedGroups where the associated Place
-     * was not stored in the local cache and will need to be retrieved in some other way.
+     * was not stored in the local cache, or is outdated, and will need to be retrieved again.
      */
     suspend fun loadCachedPlaces(
         updatedGroups: MutableList<MarkerPlaceGroup>,
@@ -369,10 +370,14 @@ class NearbyParentFragmentPresenter(
                     language = repoPlace.language
                     siteLinks = repoPlace.siteLinks
                 }
+                // Fetch the details again when they were cached long ago, so that
+                // changes on Wikidata are shown
+                if (System.currentTimeMillis() - repoPlace.cachedAt > CACHED_PLACE_MAX_AGE_MS) {
+                    indicesToUpdate.add(i)
+                }
+            } else {
+                indicesToUpdate.add(i)
             }
-            // Fetch the details again even when data is cached, so that changes
-            // on Wikidata are shown
-            indicesToUpdate.add(i)
         }
     }
 
@@ -880,6 +885,9 @@ class NearbyParentFragmentPresenter(
     companion object {
         private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
         private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
+
+        // Cached place details older than this are fetched again
+        private val CACHED_PLACE_MAX_AGE_MS = TimeUnit.DAYS.toMillis(5)
         private val DUMMY =
             Proxy.newProxyInstance(
                 NearbyParentFragmentContract.View::class.java.getClassLoader(),
