@@ -80,7 +80,7 @@
               android:id="@+id/mediaDetailMediaQualityButton"
               style="@style/ExoStyledControls.Button.Bottom"
               android:contentDescription="@string/playback_quality"
-              android:src="@drawable/baseline_high_quality_24"
+              android:src="@drawable/baseline_hd_24"
               android:tint="@android:color/white" />
 
             <ImageButton
