@@ -83,3 +83,15 @@ jobs:
               issue_number: context.issue.number,
               body: "This pull request appears to contain unrelated changes. A pull request should modify only the code that really needs to be modified to solve the issue at hand. Please review [CONTRIBUTING.md](https://github.com/commons-app/apps-android-commons/blob/master/CONTRIBUTING.md) and consider splitting this into separate pull requests."
             });
+
+      - name: Comment if fallback detected an objective issue
+        if: (steps.analyze.outputs.mode == 'rules' && steps.analyze.outputs.response == 'yes') || steps.fallback.outputs.response == 'yes'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "The AI scope check was unavailable, so the rule-based fallback ran. It found a missing pull request title or description, or an unchecked task-list item. This fallback cannot assess whether code changes are semantically related; please review the pull request scope."
+            });
