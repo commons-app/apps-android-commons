@@ -3101,7 +3101,7 @@ class NearbyParentFragment : CommonsDaggerSupportFragment(),
                 }
             }
 
-            else -> = Unit
+            else -> Unit
         }
     }
 
