@@ -10,13 +10,14 @@ import fr.free.nrw.commons.utils.model.NetworkConnectionType
  * Ensure that any sensitive information like IMEI is not fetched/shared without user's consent
  */
 object DeviceInfoUtil {
-    private val TYPE_MAPPING = mapOf(
-        NetworkConnectionType.TWO_G to ConnectionType.CELLULAR,
-        NetworkConnectionType.THREE_G to ConnectionType.CELLULAR_3G,
-        NetworkConnectionType.FOUR_G to ConnectionType.CELLULAR_4G,
-        NetworkConnectionType.WIFI to ConnectionType.WIFI_NETWORK,
-        NetworkConnectionType.UNKNOWN to ConnectionType.CELLULAR
-    )
+    private val TYPE_MAPPING =
+        mapOf(
+            NetworkConnectionType.TWO_G to ConnectionType.CELLULAR,
+            NetworkConnectionType.THREE_G to ConnectionType.CELLULAR_3G,
+            NetworkConnectionType.FOUR_G to ConnectionType.CELLULAR_4G,
+            NetworkConnectionType.WIFI to ConnectionType.WIFI_NETWORK,
+            NetworkConnectionType.UNKNOWN to ConnectionType.CELLULAR,
+        )
 
     /**
      * Get network connection type
@@ -24,57 +25,46 @@ object DeviceInfoUtil {
      * @return wifi/cellular-4g/cellular-3g/cellular-2g/no-internet
      */
     @JvmStatic
-    fun getConnectionType(context: Context): ConnectionType {
-        return if (!NetworkUtils.isInternetConnectionEstablished(context)) {
+    fun getConnectionType(context: Context): ConnectionType =
+        if (!NetworkUtils.isInternetConnectionEstablished(context)) {
             ConnectionType.NO_INTERNET
         } else {
             val networkType = NetworkUtils.getNetworkType(context)
             TYPE_MAPPING[networkType] ?: ConnectionType.CELLULAR
         }
-    }
 
     /**
      * Get Device manufacturer
      * @return
      */
     @JvmStatic
-    fun getDeviceManufacturer(): String {
-        return Build.MANUFACTURER
-    }
+    fun getDeviceManufacturer(): String = Build.MANUFACTURER
 
     /**
      * Get Device model name
      * @return
      */
     @JvmStatic
-    fun getDeviceModel(): String {
-        return Build.MODEL
-    }
+    fun getDeviceModel(): String = Build.MODEL
 
     /**
      * Get Android version. Eg. 4.4.2
      * @return
      */
     @JvmStatic
-    fun getAndroidVersion(): String {
-        return Build.VERSION.RELEASE
-    }
+    fun getAndroidVersion(): String = Build.VERSION.RELEASE
 
     /**
      * Get API Level. Eg. 26
      * @return
      */
     @JvmStatic
-    fun getAPILevel(): String {
-        return Build.VERSION.SDK
-    }
+    fun getAPILevel(): String = Build.VERSION.SDK
 
     /**
      * Get Device.
      * @return
      */
     @JvmStatic
-    fun getDevice(): String {
-        return Build.DEVICE
-    }
+    fun getDevice(): String = Build.DEVICE
 }
