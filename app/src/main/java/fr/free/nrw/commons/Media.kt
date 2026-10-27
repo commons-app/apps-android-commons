@@ -112,7 +112,7 @@ class Media constructor(
         coordinates: LatLng? = null,
         descriptions: Map<String, String> = emptyMap(),
         depictionIds: List<String> = emptyList(),
-        categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
+        categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
     ) : this(
         pageId = UUID.randomUUID().toString(),
         filename = filename,
@@ -129,7 +129,7 @@ class Media constructor(
         coordinates = coordinates,
         descriptions = descriptions,
         depictionIds = depictionIds,
-        categoriesHiddenStatus = categoriesHiddenStatus
+        categoriesHiddenStatus = categoriesHiddenStatus,
     )
 
     /**
@@ -137,27 +137,28 @@ class Media constructor(
      * returns user
      * @return Author or User
      */
-    @Deprecated("Use user for uploader username. Use attributedAuthor() for attribution. Note that the uploader may not be the creator/author.")
-    fun getAuthorOrUser(): String? {
-        return if (!author.isNullOrEmpty()) {
+    @Deprecated(
+        "Use user for uploader username. Use attributedAuthor() for attribution. " +
+            "Note that the uploader may not be the creator/author.",
+    )
+    fun getAuthorOrUser(): String? =
+        if (!author.isNullOrEmpty()) {
             author
-        } else{
+        } else {
             user
         }
-    }
 
     /**
      * Returns author if it's not null or empty, otherwise
      * returns creator name
      * @return name of author or creator
      */
-    fun getAttributedAuthor(): String? {
-        return if (!author.isNullOrEmpty()) {
+    fun getAttributedAuthor(): String? =
+        if (!author.isNullOrEmpty()) {
             author
-        } else{
+        } else {
             creatorName
         }
-    }
 
     /**
      * Gets media display title

@@ -10,7 +10,6 @@ import android.graphics.drawable.Animatable
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
-
 import androidx.core.view.ScrollingView
 import com.facebook.common.internal.Preconditions
 import com.facebook.common.logging.FLog
@@ -28,8 +27,9 @@ import com.facebook.drawee.view.DraweeView
  *
  * <p>Once the image loads, pinch-to-zoom and translation gestures are enabled.
  */
-open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingView {
-
+open class ZoomableDraweeView :
+    DraweeView<GenericDraweeHierarchy>,
+    ScrollingView {
     companion object {
         private val TAG = ZoomableDraweeView::class.java
         private const val HUGE_IMAGE_SCALE_FACTOR_THRESHOLD = 1.1f
@@ -46,27 +46,33 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
     private var zoomingEnabled = true
     private var transformationListener: TransformationListener? = null
 
-    private val controllerListener = object : BaseControllerListener<Any>() {
-        override fun onFinalImageSet(id: String, imageInfo: Any?, animatable: Animatable?) {
-            this@ZoomableDraweeView.onFinalImageSet()
+    private val controllerListener =
+        object : BaseControllerListener<Any>() {
+            override fun onFinalImageSet(
+                id: String,
+                imageInfo: Any?,
+                animatable: Animatable?,
+            ) {
+                this@ZoomableDraweeView.onFinalImageSet()
+            }
+
+            override fun onRelease(id: String) {
+                this@ZoomableDraweeView.onRelease()
+            }
         }
 
-        override fun onRelease(id: String) {
-            this@ZoomableDraweeView.onRelease()
-        }
-    }
+    private val zoomableListener =
+        object : ZoomableController.Listener {
+            override fun onTransformBegin(transform: Matrix) {}
 
-    private val zoomableListener = object : ZoomableController.Listener {
-        override fun onTransformBegin(transform: Matrix) {}
+            override fun onTransformChanged(transform: Matrix) {
+                this@ZoomableDraweeView.onTransformChanged(transform)
+            }
 
-        override fun onTransformChanged(transform: Matrix) {
-            this@ZoomableDraweeView.onTransformChanged(transform)
+            override fun onTransformEnd(transform: Matrix) {
+                transformationListener?.onTransformationEnd()
+            }
         }
-
-        override fun onTransformEnd(transform: Matrix) {
-            transformationListener?.onTransformationEnd()
-        }
-    }
 
     private val tapListenerWrapper = GestureListenerWrapper()
 
@@ -85,8 +91,8 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         init()
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int)
-            : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) :
+        super(context, attrs, defStyle) {
         inflateHierarchy(context, attrs)
         init()
     }
@@ -95,10 +101,14 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         this.transformationListener = transformationListener
     }
 
-    protected fun inflateHierarchy(context: Context, attrs: AttributeSet?) {
+    protected fun inflateHierarchy(
+        context: Context,
+        attrs: AttributeSet?,
+    ) {
         val resources: Resources = context.resources
-        val builder = GenericDraweeHierarchyBuilder(resources)
-            .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
+        val builder =
+            GenericDraweeHierarchyBuilder(resources)
+                .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
         GenericDraweeHierarchyInflater.updateBuilder(builder, context, attrs)
         aspectRatio = builder.desiredAspectRatio
         setHierarchy(builder.build())
@@ -153,7 +163,10 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         setControllers(controller, null)
     }
 
-    fun setControllers(controller: DraweeController?, hugeImageController: DraweeController?) {
+    fun setControllers(
+        controller: DraweeController?,
+        hugeImageController: DraweeController?,
+    ) {
         setControllersInternal(null, null)
         zoomableController.setEnabled(false)
         setControllersInternal(controller, hugeImageController)
@@ -161,7 +174,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
 
     private fun setControllersInternal(
         controller: DraweeController?,
-        hugeImageController: DraweeController?
+        hugeImageController: DraweeController?,
     ) {
         removeControllerListener(getController())
         addControllerListener(controller)
@@ -171,8 +184,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
 
     private fun maybeSetHugeImageController() {
         if (
-            hugeImageController != null
-            &&
+            hugeImageController != null &&
             zoomableController.getScaleFactor() > HUGE_IMAGE_SCALE_FACTOR_THRESHOLD
         ) {
             setControllersInternal(hugeImageController, null)
@@ -201,7 +213,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
             if (controller is AbstractDraweeController<*, *>) {
                 val callerContext = controller.callerContext
                 if (callerContext != null) {
-                    throw RuntimeException("Exception in onDraw, callerContext=${callerContext}", e)
+                    throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)
                 }
             }
             throw e
@@ -217,7 +229,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         if (!isDialToneEnabled && tapGestureDetector?.onTouchEvent(event) == true) {
             FLog.v(
                 getLogTag(),
-                "onTouchEvent: $action, view ${hashCode()}, handled by tap gesture detector"
+                "onTouchEvent: $action, view ${hashCode()}, handled by tap gesture detector",
             )
             return true
         }
@@ -225,7 +237,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         if (!isDialToneEnabled && zoomableController.onTouchEvent(event)) {
             FLog.v(
                 getLogTag(),
-                "onTouchEvent: $action, view ${hashCode()}, handled by zoomable controller"
+                "onTouchEvent: $action, view ${hashCode()}, handled by zoomable controller",
             )
             if (!allowTouchInterceptionWhileZoomed && !zoomableController.isIdentity()) {
                 parent.requestDisallowInterceptTouchEvent(true)
@@ -236,7 +248,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         if (super.onTouchEvent(event)) {
             FLog.v(
                 getLogTag(),
-                "onTouchEvent: $action, view ${hashCode()}, handled by the super"
+                "onTouchEvent: $action, view ${hashCode()}, handled by the super",
             )
             return true
         }
@@ -250,26 +262,25 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         return false
     }
 
-    override fun computeHorizontalScrollRange(): Int =
-        zoomableController.computeHorizontalScrollRange()
+    override fun computeHorizontalScrollRange(): Int = zoomableController.computeHorizontalScrollRange()
 
-    override fun computeHorizontalScrollOffset(): Int =
-        zoomableController.computeHorizontalScrollOffset()
+    override fun computeHorizontalScrollOffset(): Int = zoomableController.computeHorizontalScrollOffset()
 
-    override fun computeHorizontalScrollExtent(): Int =
-        zoomableController.computeHorizontalScrollExtent()
+    override fun computeHorizontalScrollExtent(): Int = zoomableController.computeHorizontalScrollExtent()
 
-    override fun computeVerticalScrollRange(): Int =
-        zoomableController.computeVerticalScrollRange()
+    override fun computeVerticalScrollRange(): Int = zoomableController.computeVerticalScrollRange()
 
-    override fun computeVerticalScrollOffset(): Int =
-        zoomableController.computeVerticalScrollOffset()
+    override fun computeVerticalScrollOffset(): Int = zoomableController.computeVerticalScrollOffset()
 
-    override fun computeVerticalScrollExtent(): Int =
-        zoomableController.computeVerticalScrollExtent()
+    override fun computeVerticalScrollExtent(): Int = zoomableController.computeVerticalScrollExtent()
 
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    override fun onLayout(
+        changed: Boolean,
+        left: Int,
+        top: Int,
+        right: Int,
+        bottom: Int,
+    ) {
         FLog.v(getLogTag(), "onLayout: view ${hashCode()}")
         super.onLayout(changed, left, top, right, bottom)
         updateZoomableControllerBounds()
@@ -303,7 +314,7 @@ open class ZoomableDraweeView : DraweeView<GenericDraweeHierarchy>, ScrollingVie
         FLog.v(
             getLogTag(),
             "updateZoomableControllerBounds: view ${hashCode()}, " +
-                    "view bounds: $viewBounds, image bounds: $imageBounds"
+                "view bounds: $viewBounds, image bounds: $imageBounds",
         )
     }
 

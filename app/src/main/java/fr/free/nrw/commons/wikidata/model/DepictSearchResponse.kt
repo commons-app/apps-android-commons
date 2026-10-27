@@ -6,7 +6,7 @@ package fr.free.nrw.commons.wikidata.model
 class DepictSearchResponse(
     /**
      * @return List<DepictSearchItem> for the DepictSearchResponse
-    </DepictSearchItem>
+     </DepictSearchItem>
      */
-    val search: List<DepictSearchItem>
+    val search: List<DepictSearchItem>,
 )

@@ -7,19 +7,21 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ExploreMapCalls @Inject constructor() {
+class ExploreMapCalls
     @Inject
-    @JvmField
-    var mediaClient: MediaClient? = null
+    constructor() {
+        @Inject
+        @JvmField
+        var mediaClient: MediaClient? = null
 
-    /**
-     * Calls method to query Commons for uploads around a location
-     *
-     * @param currentLatLng coordinates of search location
-     * @return list of places obtained
-     */
-    fun callCommonsQuery(currentLatLng: LatLng): List<Media> {
-        val coordinates = currentLatLng.latitude.toString() + "|" + currentLatLng.longitude
-        return mediaClient!!.getMediaListFromGeoSearch(coordinates).blockingGet()
+        /**
+         * Calls method to query Commons for uploads around a location
+         *
+         * @param currentLatLng coordinates of search location
+         * @return list of places obtained
+         */
+        fun callCommonsQuery(currentLatLng: LatLng): List<Media> {
+            val coordinates = currentLatLng.latitude.toString() + "|" + currentLatLng.longitude
+            return mediaClient!!.getMediaListFromGeoSearch(coordinates).blockingGet()
+        }
     }
-}

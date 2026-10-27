@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.CompoundButton
 import android.widget.RadioButton
 import android.widget.Toast
 import fr.free.nrw.commons.R
@@ -35,6 +34,7 @@ class WikidataFeedback : BaseActivity() {
     lateinit var nearbyController: NearbyController
 
     @SuppressLint("CheckResult")
+    @Suppress("ktlint:standard:max-line-length")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWikidataFeedbackBinding.inflate(layoutInflater)
@@ -55,6 +55,8 @@ class WikidataFeedback : BaseActivity() {
         )
         binding.radioButton2.setText(
             getString(
+                // Generated resource identifiers are indivisible.
+                @Suppress("MaxLineLength")
                 R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
                 place,
             ),
@@ -78,12 +80,15 @@ class WikidataFeedback : BaseActivity() {
                     ).show()
                 return@setOnClickListener
             }
-            var desc = when (binding.radioGroup.checkedRadioButtonId) {
-                R.id.radioButton2 -> getString(R.string.is_at_a_different_place_wikidata, place)
-                else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
-            }
+            var desc =
+                when (binding.radioGroup.checkedRadioButtonId) {
+                    R.id.radioButton2 -> getString(R.string.is_at_a_different_place_wikidata, place)
+                    else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
+                }
             var det = binding.detailsEditText.text.toString()
-            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
+            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 &&
+                binding.detailsEditText.text.isNullOrEmpty()
+            ) {
                 Toast
                     .makeText(
                         this,

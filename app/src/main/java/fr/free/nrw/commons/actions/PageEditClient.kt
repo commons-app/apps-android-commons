@@ -32,7 +32,7 @@ class PageEditClient(
             pageEditInterface
                 .postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse ->
-                    editResponse.edit()!!.editSucceeded()
+                    editResponse.getEditResult()!!.editSucceeded()
                 }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
@@ -68,7 +68,7 @@ class PageEditClient(
                     true,
                     csrfTokenClient.getTokenBlocking(),
                 ).map { editResponse ->
-                    editResponse.edit()!!.editSucceeded()
+                    editResponse.getEditResult()!!.editSucceeded()
                 }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
@@ -93,7 +93,7 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
@@ -117,7 +117,7 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
+                .map { editResponse -> editResponse.getEditResult()?.editSucceeded() ?: false }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
@@ -143,7 +143,7 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
                 throw throwable

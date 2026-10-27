@@ -18,7 +18,8 @@ data class Image(
      */
     var name: String,
     /**
-     uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     uri : Uri of the image, points to image location or name,
+     eg content://media/external/images/camera/10495 (Android 10)
      */
     var uri: Uri,
     /**

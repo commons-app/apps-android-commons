@@ -59,7 +59,7 @@ class ContributionsListPresenter
                 shouldSetBoundaryCallback = true
                 factory =
                     repository.fetchContributionsWithStates(
-                        listOf(Contribution.STATE_COMPLETED),
+                        listOf(Contribution.STATE_COMPLETED, Contribution.STATE_DELETED),
                     )
             }
 
