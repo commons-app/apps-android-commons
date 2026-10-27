@@ -19,7 +19,8 @@ open class BasicKvStore : KeyValueStore {
     }
 
     /**
-     * If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore should be set to 0.
+     * If you don't want onVersionUpdate to be called on a fresh creation, the first version supplied for the kvstore
+     * should be set to 0.
      */
     @JvmOverloads
     constructor(

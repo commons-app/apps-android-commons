@@ -311,6 +311,12 @@
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
   <string name="nominate_deletion">Zgłoszone do usunięcia</string>
   <string name="nominated_for_deletion">Ta grafika została zgłoszona do usunięcia.</string>
+  <string name="file_deleted_from_commons">Ten plik został usunięty z Commons.</string>
+  <string name="contribution_deleted">Usunięto</string>
+  <string name="deleted_file_activity_title">Usunięto plik</string>
+  <string name="deleted_file_view_page">Zobacz stronę pliku</string>
+  <string name="deleted_file_view_discussion">Przeczytaj dyskusję o usunięciu</string>
+  <string name="deleted_file_policies">Polityka i wytyczne Wikimedia Commons</string>
   <string name="nominated_see_more">Szczegółowe informacje można znaleźć na stronie internetowej</string>
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
@@ -898,4 +904,17 @@
   <string name="license_cc0_long_description">Niniejsza licencja pozwala na dystrybucję, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, bez żadnych warunków.</string>
   <string name="license_cc_by_long_description">Niniejsza licencja pozwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa.</string>
   <string name="license_cc_by_sa_long_description">Niniejsza licencja zezwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa oraz udostępnienia nowego dzieła na tej samej licencji.</string>
+  <string name="error_getting_image_properties">Wystąpił błąd podczas pobierania właściwości obrazu:</string>
+  <string name="error_blur_no_rectangle">Narysuj co najmniej jeden prostokąt na zdjęciu</string>
+  <string name="error_applying_blur">Wystąpił błąd podczas stosowania efektu rozmycia</string>
+  <string name="failed_to_apply_crop">Nie udało się przyciąć obrazu</string>
+  <string name="failed_to_save_image">Nie udało się pobrać obrazu</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (dźwięk)</string>
+  <string name="unsupported_format_title">Nieobsługiwany format</string>
+  <string name="unsupported_format_desc">Nie udało się otworzyć wybranych plików. Wikimedia Commons obsługuje wyłącznie następujące formaty:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Pominięto nieobsługiwane pliki</string>
+  <string name="unsupported_files_skipped_desc">Niektóre pliki zostały pominięte z powodu nieobsługiwanego formatu. Aplikacja będzie kontynuować przesyłanie pozostałych plików, które są zgodne z następującymi obsługiwanymi formatami:\n\n%s</string>
 </resources>

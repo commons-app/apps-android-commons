@@ -164,9 +164,7 @@ object PickedFiles : Constants {
         val photoFile = File(directory, "${UUID.randomUUID()}.${if (isHeic) "jpg" else ext}")
 
         if (isHeic) {
-            if (Build.VERSION.SDK_INT <
-                Build.VERSION_CODES.P
-            ) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
                 throw IOException("HEIC not supported on this Android version")
             }
             val srcExif = context.contentResolver.openInputStream(photoUri)?.use { ExifInterface(it) }
