@@ -165,16 +165,28 @@ class PageEditClient(
         title: String,
         language: String,
         value: String,
+    ): Observable<Int> = setCaptions(summary, title, language, value, null)
+
+    /**
+     * @param entityId MediaInfo id (M + page id) when the file has already been uploaded.
+     * Falls back to site and title when the local media object still has a temporary page id.
+     */
+    fun setCaptions(
+        summary: String,
+        title: String,
+        language: String,
+        value: String,
+        entityId: String?,
     ): Observable<Int> =
         try {
-            pageEditInterface
-                .postCaptions(
-                    summary,
-                    title,
-                    language,
-                    value,
-                    csrfTokenClient.getTokenBlocking(),
-                ).map { it.success }
+            val token = csrfTokenClient.getTokenBlocking()
+            val response =
+                if (entityId != null) {
+                    pageEditInterface.postCaptionsByEntityId(summary, entityId, language, value, token)
+                } else {
+                    pageEditInterface.postCaptions(summary, title, language, value, token)
+                }
+            response.map { it.success }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
                 throw throwable

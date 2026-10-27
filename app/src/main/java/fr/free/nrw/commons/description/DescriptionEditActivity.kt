@@ -27,7 +27,6 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -196,36 +195,9 @@ class DescriptionEditActivity :
      * @param uploadMediaDetails descriptions and captions
      */
     private fun updateDescription(uploadMediaDetails: List<UploadMediaDetail?>) {
-        var descriptionIndex = wikiText!!.indexOf("description=")
-        if (descriptionIndex == -1) {
-            descriptionIndex = wikiText!!.indexOf("Description=")
-        }
-        val buffer = StringBuilder()
-        if (descriptionIndex != -1) {
-            val descriptionStart = wikiText!!.substring(0, descriptionIndex + 12)
-            val descriptionToEnd = wikiText!!.substring(descriptionIndex + 12)
-            val descriptionEndIndex = descriptionToEnd.indexOf("\n")
-            val descriptionEnd =
-                wikiText!!.substring(
-                    descriptionStart.length +
-                        descriptionEndIndex,
-                )
-            buffer.append(descriptionStart)
-            for (i in uploadMediaDetails.indices) {
-                val uploadDetails = uploadMediaDetails[i]
-                if (uploadDetails!!.descriptionText != "") {
-                    buffer.append("{{")
-                    buffer.append(uploadDetails.languageCode)
-                    buffer.append("|1=")
-                    buffer.append(uploadDetails.descriptionText)
-                    buffer.append("}}")
-                }
-            }
-            buffer.replace(", $".toRegex(), "")
-            buffer.append(descriptionEnd)
-        }
-        editDescription(media!!, buffer.toString(), uploadMediaDetails as ArrayList<UploadMediaDetail>)
-
+        val details = uploadMediaDetails.filterNotNull()
+        val updatedWikiText = replaceDescriptionParameter(wikiText!!, details)
+        editDescription(media!!, updatedWikiText, ArrayList(details))
         finish()
     }
 
@@ -241,19 +213,19 @@ class DescriptionEditActivity :
         uploadMediaDetails: ArrayList<UploadMediaDetail>,
     ) {
         try {
+            // The screen closes immediately. Keeping this subscription on the activity
+            // disposable cancels the edit in onDestroy, before Commons has stored it.
             descriptionEditHelper
                 .addDescription(
                     applicationContext,
                     media,
                     updatedWikiText,
                 ).subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })
-                ?.let {
-                    compositeDisposable.add(
-                        it,
-                    )
-                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { Timber.d("Descriptions are added.") },
+                    { error -> Timber.e(error, "Description edit failed") },
+                )
         } catch (e: InvalidLoginTokenException) {
             val username: String? = sessionManager.userName
             val logoutListener =
@@ -269,24 +241,21 @@ class DescriptionEditActivity :
             }
         }
 
-        val updatedCaptions = LinkedHashMap<String, String>()
         for (mediaDetail in uploadMediaDetails) {
+            val language = mediaDetail.languageCode ?: continue
             try {
-                compositeDisposable.add(
-                    descriptionEditHelper
-                        .addCaption(
-                            applicationContext,
-                            media,
-                            mediaDetail.languageCode!!,
-                            mediaDetail.captionText,
-                        ).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { s: Boolean? ->
-                            updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
-                            media.captions = updatedCaptions
-                            Timber.d("Caption is added.")
-                        },
-                )
+                descriptionEditHelper
+                    .addCaption(
+                        applicationContext,
+                        media,
+                        language,
+                        mediaDetail.captionText,
+                    ).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { Timber.d("Caption is added.") },
+                        { error -> Timber.e(error, "Caption edit failed") },
+                    )
             } catch (e: InvalidLoginTokenException) {
                 val username = sessionManager.userName
                 val logoutListener =
