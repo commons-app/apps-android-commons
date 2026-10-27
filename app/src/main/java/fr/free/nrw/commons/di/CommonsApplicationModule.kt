@@ -530,11 +530,20 @@ val MIGRATION_21_22 =
         }
     }
 
-@Suppress("MagicNumber") // Room migrations are identified by their version number
+@Suppress("MagicNumber") // Version numbers of the migration
 val MIGRATION_22_23 =
     object : Migration(22, 23) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            // Places cached before this version get 0, so they are treated as outdated and fetched again
-            db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
+            // Add column if it is not there yet, so running this twice does not crash
+            val hasCachedAt =
+                db.query("PRAGMA table_info(place)").use { cursor ->
+                    generateSequence {
+                        if (cursor.moveToNext()) cursor.getString(cursor.getColumnIndexOrThrow("name")) else null
+                    }.any { it == "cachedAt" }
+                }
+            if (!hasCachedAt) {
+                // Old cached places get 0, so they are fetched again once
+                db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
+            }
         }
     }
