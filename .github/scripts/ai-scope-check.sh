@@ -66,8 +66,6 @@ fi
 
 base_url="${base_url%/}"
 case "$provider:$base_url" in
-  gemini:https://generativelanguage.googleapis.com/v1beta/openai)
-    ;;
   openrouter:https://openrouter.ai/api/v1)
     if [[ "$model" != *:free ]]; then
       echo "::error::OpenRouter model ID must end in :free."
