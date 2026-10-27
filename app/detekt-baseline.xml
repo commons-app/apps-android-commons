@@ -69,7 +69,6 @@
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Show the exact reason for failure</ID>
     <ID>ForbiddenComment:DateUtil.kt$DateUtil$* Utility class for date formatting and parsing. * TODO: Switch to DateTimeFormatter when minSdk = 26.</ID>
     <ID>ForbiddenComment:LoginClient.kt$LoginClient$// TODO: Find a better way to boil up the warning about 2FA</ID>
-    <ID>ForbiddenComment:LoginResponse.kt$ClientLogin$// TODO: String resource -- Looks like needed for others in this class too</ID>
     <ID>ForbiddenComment:MwQueryPage.kt$MwQueryPage$// TODO: Handle null values in lists during deserialization, perhaps with a new</ID>
     <ID>ForbiddenComment:MwQueryResult.kt$MwQueryResult$// TODO: Looks like result pages and redirects can also be matched on the "index"</ID>
     <ID>ForbiddenComment:NamespaceTypeAdapter.kt$NamespaceTypeAdapter$// TODO: remove after April 2017, when all older namespaces have been deserialized.</ID>
