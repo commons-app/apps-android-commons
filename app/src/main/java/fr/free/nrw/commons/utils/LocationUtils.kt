@@ -34,8 +34,12 @@ object LocationUtils {
         }
 
         try {
-            latLng = LatLng(latLngArray[1].trim().toDouble(),
-                latLngArray[0].trim().toDouble(), 1f)
+            latLng =
+                LatLng(
+                    latLngArray[1].trim().toDouble(),
+                    latLngArray[0].trim().toDouble(),
+                    1f,
+                )
         } catch (e: Exception) {
             Timber.e(e, "Error while parsing user entered lat long")
         }
@@ -44,7 +48,12 @@ object LocationUtils {
     }
 
     @JvmStatic
-    fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+    fun calculateDistance(
+        lat1: Double,
+        lon1: Double,
+        lat2: Double,
+        lon2: Double,
+    ): Double {
         val lat1Rad = Math.toRadians(lat1)
         val lon1Rad = Math.toRadians(lon1)
         val lat2Rad = Math.toRadians(lat2)
@@ -53,9 +62,15 @@ object LocationUtils {
         // Haversine formula
         val dlon = lon2Rad - lon1Rad
         val dlat = lat2Rad - lat1Rad
-        val a = Math.pow(
-                sin(dlat / 2), 2.0) + cos(lat1Rad) * cos(lat2Rad) * Math.pow(sin(dlon / 2), 2.0
-            )
+        val a =
+            Math.pow(
+                sin(dlat / 2),
+                2.0,
+            ) + cos(lat1Rad) * cos(lat2Rad) *
+                Math.pow(
+                    sin(dlon / 2),
+                    2.0,
+                )
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
         return RADIUS_OF_EARTH_KM * c

@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.annotation.IntDef
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
 import androidx.exifinterface.media.ExifInterface
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -24,15 +25,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import androidx.core.graphics.createBitmap
 
 /**
  * Created by blueSir9 on 3/10/17.
  */
 
-
 object ImageUtils {
-
     /**
      * Set 0th bit as 1 for dark image ie. 0001
      */
@@ -90,8 +88,8 @@ object ImageUtils {
             FILE_NAME_EXISTS,
             NO_CATEGORY_SELECTED,
             IMAGE_GEOLOCATION_DIFFERENT,
-            IMAGE_FORMAT_UNSUPPORTED
-        ]
+            IMAGE_FORMAT_UNSUPPORTED,
+        ],
     )
     @Retention
     annotation class Result
@@ -130,17 +128,21 @@ object ImageUtils {
      * d is null true if geolocation of the image and wikidata item are different
      */
     @JvmStatic
-    fun checkImageGeolocationIsDifferent(geolocationOfFileString: String, latLng: LatLng?): Boolean {
+    fun checkImageGeolocationIsDifferent(
+        geolocationOfFileString: String,
+        latLng: LatLng?,
+    ): Boolean {
         Timber.d("Comparing geolocation of file with nearby place location")
         if (latLng == null) { // Means that geolocation for this image is not given
             return false // Since we don't know geolocation of file, we choose letting upload
         }
 
         val geolocationOfFile = geolocationOfFileString.split("|")
-        val distance = LengthUtils.computeDistanceBetween(
-            LatLng(geolocationOfFile[0].toDouble(), geolocationOfFile[1].toDouble(), 0.0F),
-            latLng
-        )
+        val distance =
+            LengthUtils.computeDistanceBetween(
+                LatLng(geolocationOfFile[0].toDouble(), geolocationOfFile[1].toDouble(), 0.0F),
+                latLng,
+            )
         // Distance is more than 1 km, means that geolocation is wrong
         return distance >= 1000
     }
@@ -203,7 +205,10 @@ object ImageUtils {
      * @param imageUrl Url of the image
      */
     @JvmStatic
-    fun setWallpaperFromImageUrl(context: Context, imageUrl: Uri) {
+    fun setWallpaperFromImageUrl(
+        context: Context,
+        imageUrl: Uri,
+    ) {
         enqueueSetWallpaperWork(context, imageUrl)
     }
 
@@ -213,9 +218,10 @@ object ImageUtils {
             val name = "Wallpaper Setting"
             val description = "Notifications for wallpaper setting progress"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("set_wallpaper_channel", name, importance).apply {
-                this.description = description
-            }
+            val channel =
+                NotificationChannel("set_wallpaper_channel", name, importance).apply {
+                    this.description = description
+                }
             val notificationManager = context.getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
@@ -235,7 +241,7 @@ object ImageUtils {
         url: String,
         username: String,
         okHttpJsonApiClient: OkHttpJsonApiClient,
-        compositeDisposable: CompositeDisposable
+        compositeDisposable: CompositeDisposable,
     ) {
         showSettingAvatarProgressBar(context)
 
@@ -256,8 +262,8 @@ object ImageUtils {
                             Timber.e(t, "Setting Avatar Failed")
                             ViewUtil.showLongToast(context, context.getString(R.string.avatar_set_unsuccessfully))
                             progressDialogAvatar?.cancel()
-                        }
-                    )
+                        },
+                    ),
             )
         } catch (e: Exception) {
             Timber.d("$e success")
@@ -267,29 +273,37 @@ object ImageUtils {
     }
 
     @JvmStatic
-    fun enqueueSetWallpaperWork(context: Context, imageUrl: Uri) {
+    fun enqueueSetWallpaperWork(
+        context: Context,
+        imageUrl: Uri,
+    ) {
         createNotificationChannel(context) // Ensure the notification channel is created
 
-        val inputData = Data.Builder()
-            .putString("imageUrl", imageUrl.toString())
-            .build()
+        val inputData =
+            Data
+                .Builder()
+                .putString("imageUrl", imageUrl.toString())
+                .build()
 
-        val setWallpaperWork = OneTimeWorkRequest.Builder(SetWallpaperWorker::class.java)
-            .setInputData(inputData)
-            .build()
+        val setWallpaperWork =
+            OneTimeWorkRequest
+                .Builder(SetWallpaperWorker::class.java)
+                .setInputData(inputData)
+                .build()
 
         WorkManager.getInstance(context).enqueue(setWallpaperWork)
     }
 
     @JvmStatic
     private fun showSettingAvatarProgressBar(context: Context) {
-        progressDialogAvatar = ProgressDialog.show(
-            context,
-            context.getString(R.string.setting_avatar_dialog_title),
-            context.getString(R.string.setting_avatar_dialog_message),
-            true,
-            false
-        )
+        progressDialogAvatar =
+            ProgressDialog.show(
+                context,
+                context.getString(R.string.setting_avatar_dialog_title),
+                context.getString(R.string.setting_avatar_dialog_message),
+                true,
+                false,
+            )
     }
 
     /**
@@ -300,13 +314,17 @@ object ImageUtils {
      * * @return
      */
     @JvmStatic
-    fun addRedBorder(bitmap: Bitmap, borderSize: Int, context: Context): Bitmap? {
+    fun addRedBorder(
+        bitmap: Bitmap,
+        borderSize: Int,
+        context: Context,
+    ): Bitmap? {
         return bitmap.config?.let { config ->
             val bmpWithBorder =
                 createBitmap(
                     width = bitmap.width + borderSize * 2,
                     height = bitmap.height + borderSize * 2,
-                    config = config
+                    config = config,
                 )
             val canvas = Canvas(bmpWithBorder)
             canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed))
@@ -321,7 +339,10 @@ object ImageUtils {
      * if result is 1100 IMAGE_DUPLICATE and IMAGE_GEOLOCATION_DIFFERENT
      */
     @JvmStatic
-    fun getErrorMessageForResult(context: Context, @Result result: Int): String {
+    fun getErrorMessageForResult(
+        context: Context,
+        @Result result: Int,
+    ): String {
         val errorMessage = StringBuilder()
         if (result <= 0) {
             Timber.d("No issues to warn user are found")
@@ -330,34 +351,42 @@ object ImageUtils {
             errorMessage.append(context.getString(R.string.upload_problem_exist))
 
             if (result and IMAGE_DARK != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.upload_problem_image_dark))
             }
             if (result and IMAGE_BLURRY != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.upload_problem_image_blurry))
             }
             if (result and IMAGE_DUPLICATE != 0) {
-                errorMessage.append("\n - ").
-                append(context.getString(R.string.upload_problem_image_duplicate))
+                errorMessage
+                    .append("\n - ")
+                    .append(context.getString(R.string.upload_problem_image_duplicate))
             }
             if (result and IMAGE_FORMAT_UNSUPPORTED != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.upload_problem_image_format_unsupported))
             }
             if (result and IMAGE_GEOLOCATION_DIFFERENT != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.upload_problem_different_geolocation))
             }
             if (result and FILE_FBMD != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.upload_problem_fbmd))
             }
             if (result and FILE_NO_EXIF != 0) {
-                errorMessage.append("\n - ")
+                errorMessage
+                    .append("\n - ")
                     .append(context.getString(R.string.internet_downloaded))
             }
-            errorMessage.append("\n\n")
+            errorMessage
+                .append("\n\n")
                 .append(context.getString(R.string.upload_problem_do_you_continue))
         }
         return errorMessage.toString()

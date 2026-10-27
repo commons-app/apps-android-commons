@@ -67,46 +67,17 @@ app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt
 app/src/main/java/fr/free/nrw/commons/theme/BaseActivity.kt
 app/src/main/java/fr/free/nrw/commons/ui/PasteSensitiveTextInputEditText.kt
 app/src/main/java/fr/free/nrw/commons/ui/widget/HtmlTextView.kt
-app/src/main/java/fr/free/nrw/commons/utils/AbstractTextWatcher.kt
-app/src/main/java/fr/free/nrw/commons/utils/ActivityUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/ClipboardUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/CommonsDateUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/CustomSelectorUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/DatabaseUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/DateUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/DeviceInfoUtil.kt
 app/src/main/java/fr/free/nrw/commons/utils/DownloadReceiver.kt
-app/src/main/java/fr/free/nrw/commons/utils/EdgeToEdgeUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/ExecutorUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/FixExtension.kt
-app/src/main/java/fr/free/nrw/commons/utils/FragmentUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/GeoCoordinates.kt
-app/src/main/java/fr/free/nrw/commons/utils/ImageUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/ImageUtilsWrapper.kt
-app/src/main/java/fr/free/nrw/commons/utils/LangCodeUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/LayoutUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/LengthUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/Licenses.kt
-app/src/main/java/fr/free/nrw/commons/utils/LocationUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/MapUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/MediaAttributionUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/MediaDataExtractorUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/Monuments.kt
-app/src/main/java/fr/free/nrw/commons/utils/NearbyFABUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/NetworkUtils.kt
 app/src/main/java/fr/free/nrw/commons/utils/PermissionUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/PlaceUtils.kt
 app/src/main/java/fr/free/nrw/commons/utils/RandomAccessFileExifWriter.kt
 app/src/main/java/fr/free/nrw/commons/utils/StringSortingUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/StringUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/SwipableCardView.kt
-app/src/main/java/fr/free/nrw/commons/utils/SystemThemeUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/TimeProvider.kt
-app/src/main/java/fr/free/nrw/commons/utils/UiUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/UnderlineUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/UrlUtils.kt
-app/src/main/java/fr/free/nrw/commons/utils/ViewUtil.kt
-app/src/main/java/fr/free/nrw/commons/utils/ViewUtilWrapper.kt
+
+# Utils files excluded from formatting - legacy code with complex formatting issues:
+# DownloadReceiver.kt - Has uncorrectable comment style issue 
+# PermissionUtils.kt - Long parameter list (7 params), refactoring this would break public API compatibility
+# RandomAccessFileExifWriter.kt - Has complex EXIF parsing logic, refactoring risk too high for formatting cleanup
+# StringSortingUtils.kt refactoring reduces readability coz Levenshtein algorithm with multiple early return.
+
 app/src/main/java/fr/free/nrw/commons/widget/HeightLimitedRecyclerView.kt
 app/src/main/java/fr/free/nrw/commons/widget/PicOfDayAppWidget.kt
 app/src/main/java/fr/free/nrw/commons/widget/ViewHolder.kt
