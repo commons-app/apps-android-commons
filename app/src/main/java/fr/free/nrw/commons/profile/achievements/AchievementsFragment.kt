@@ -109,7 +109,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     }
 
     override fun onDestroyView() {
-        compositeDisposable.clear()
         super.onDestroyView()
         _binding = null
     }
