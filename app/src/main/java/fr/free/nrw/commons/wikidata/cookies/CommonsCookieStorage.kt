@@ -42,6 +42,11 @@ class CommonsCookieStorage(
         save()
     }
 
+    // The cookie store is read once at startup, before any UI exists to react to a failure, so
+    // any exception here must be treated as "this persisted value is unreadable" rather than
+    // left to crash the app. Catching the specific types seen so far (JsonSyntaxException,
+    // ClassCastException) would silently drop that guarantee for any other unreadable shape.
+    @Suppress("TooGenericExceptionCaught")
     fun load() {
         cookieMap.clear()
         try {
