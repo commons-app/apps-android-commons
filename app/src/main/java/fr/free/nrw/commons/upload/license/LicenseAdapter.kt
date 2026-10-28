@@ -13,6 +13,7 @@ import fr.free.nrw.commons.utils.toLicenseUrl
 
 private const val ROTATION_COLLAPSED = 0f
 private const val ROTATION_EXPANDED = 180f
+
 class LicenseAdapter(
     private val licenseList: List<String>,
     private var selectedLicense: String?,

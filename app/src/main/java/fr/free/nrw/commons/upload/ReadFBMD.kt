@@ -16,7 +16,9 @@ import javax.inject.Singleton
  */
 
 private const val BYTE_ARRAY_SIZE = 4096
+
 @Singleton
+@Suppress("MagicNumber")
 class ReadFBMD
     @Inject
     constructor() {

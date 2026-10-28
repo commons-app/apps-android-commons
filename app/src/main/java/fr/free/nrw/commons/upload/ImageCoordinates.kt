@@ -34,7 +34,7 @@ class ImageCoordinates internal constructor(
     /**
      *  @return double value of zoom or 16.0 by default
      */
-    val zoomLevel: Double = DEFAULT_MAP_ZOOM_LEVEL
+    var zoomLevel: Double = DEFAULT_MAP_ZOOM_LEVEL
 
     /**
      * Construct from a stream.
@@ -109,7 +109,8 @@ class ImageCoordinates internal constructor(
             val degrees = evaluateExpression(it[0])
             val minutes = evaluateExpression(it[1])
             val seconds = evaluateExpression(it[2])
-            degrees + minutes / MINUTES_PER_DEGREE + seconds / SECONDS_PER_DEGREE        }
+            degrees + minutes / MINUTES_PER_DEGREE + seconds / SECONDS_PER_DEGREE
+        }
 
     private fun evaluateExpression(dm: String) = dm.split("/").let { it[0].toDouble() / it[1].toDouble() }
 

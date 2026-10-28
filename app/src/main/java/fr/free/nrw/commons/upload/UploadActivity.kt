@@ -65,8 +65,10 @@ import javax.inject.Inject
 import javax.inject.Named
 
 private const val OVERLAPPING_THRESHOLD_DP = 321f
-
 private const val MULTI_UPLOAD_THRESHOLD = 3
+private const val TOGGLE_ROTATION_DEGREES = 180f
+private const val THUMBNAIL_SCROLL_THRESHOLD = 3
+private const val REMAINING_FRAGMENTS_QUALITY_CHECK_THRESHOLD = 4
 
 class UploadActivity :
     BaseActivity(),
@@ -714,7 +716,7 @@ class UploadActivity :
                                     fragments!![index - 1].onBecameVisible()
                                     (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                                         .scrollToPositionWithOffset(
-                                            if ((index > 3)) index - 2 else 0,
+                                            if ((index > THUMBNAIL_SCROLL_THRESHOLD)) index - 2 else 0,
                                             0,
                                         )
                                 }
@@ -949,7 +951,7 @@ class UploadActivity :
             fragments!![index + 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
                 .scrollToPositionWithOffset(if ((index > 0)) index - 1 else 0, 0)
-            if (index < fragments!!.size - 4) {
+            if (index < fragments!!.size - REMAINING_FRAGMENTS_QUALITY_CHECK_THRESHOLD) {
                 // check image quality if next image exists
                 presenter!!.checkImageQuality(index + 1)
             }
@@ -963,7 +965,7 @@ class UploadActivity :
             binding.vpUpload.setCurrentItem(index - 1, true)
             fragments!![index - 1].onBecameVisible()
             (binding.rvThumbnails.layoutManager as LinearLayoutManager)
-                .scrollToPositionWithOffset(if ((index > 3)) index - 2 else 0, 0)
+                .scrollToPositionWithOffset(if (index > THUMBNAIL_SCROLL_THRESHOLD) index - 2 else 0, 0)
             if ((index != 1) && ((index - 1) < uploadableFiles.size)) {
                 // Shows the top card if it was hidden because of the last image being deleted and
                 // now the user has hit previous button to go back to the media details
@@ -1000,7 +1002,7 @@ class UploadActivity :
         binding.rvThumbnails.visibility =
             if (isTitleExpanded) View.GONE else View.VISIBLE
         isTitleExpanded = !isTitleExpanded
-        binding.ibToggleTopCard.rotation += 180
+        binding.ibToggleTopCard.rotation += TOGGLE_ROTATION_DEGREES
     }
 
     override fun onDestroy() {
@@ -1114,6 +1116,7 @@ class UploadActivity :
             currLocation = locationManager!!.getLastLocation()
         }
 
+        @Suppress("MagicNumber")
         if (currLocation != null) {
             val locationDifference = getLocationDifference(currLocation!!, prevLocation)
             val isLocationTagUnchecked = isLocationTagUncheckedInTheSettings

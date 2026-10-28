@@ -30,6 +30,7 @@ import javax.inject.Named
  */
 private const val PREFETCH_DISTANCE = 50
 private const val PAGE_SIZE = 10
+
 class PendingUploadsPresenter
     @Inject
     internal constructor(

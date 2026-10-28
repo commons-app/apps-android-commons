@@ -22,6 +22,7 @@ private const val ELEVATION_SELECTED_DP = 10f
 private const val ELEVATION_UNSELECTED_DP = 0f
 private const val ALPHA_SELECTED = 1.0f
 private const val ALPHA_UNSELECTED = 0.7f
+
 internal class ThumbnailsAdapter(
     private val callback: Callback,
 ) : RecyclerView.Adapter<ThumbnailsAdapter.ViewHolder>() {

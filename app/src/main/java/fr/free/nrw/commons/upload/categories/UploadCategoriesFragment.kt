@@ -35,6 +35,7 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 private const val SEARCH_DEBOUNCE_DELAY_MS = 500L
 
 class UploadCategoriesFragment :
@@ -49,8 +50,6 @@ class UploadCategoriesFragment :
     var sessionManager: SessionManager? = null
     private var adapter: UploadCategoryAdapter? = null
     private var subscribe: Disposable? = null
-
-
 
     /**
      * Current media

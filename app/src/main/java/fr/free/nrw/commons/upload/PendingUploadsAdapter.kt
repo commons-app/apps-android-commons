@@ -29,6 +29,7 @@ import java.io.File
  * @param callback The callback to handle user actions such as Delete Uploads on pending uploads.
  */
 private const val PERCENTAGE_MULTIPLIER = 100
+
 class PendingUploadsAdapter(
     private val callback: Callback,
 ) : PagedListAdapter<Contribution, PendingUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
