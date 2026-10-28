@@ -323,7 +323,8 @@ class UploadMediaPresenter
                 view.showProgress(false)
                 // No internationalization required for this error message because it's an internal error.
                 view.showMessage(
-                    "Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",
+                    "Internal error: Zero upload items received by the Upload Media Detail Fragment. " +
+                        "Sorry, please upload again.",
                     R.color.color_error,
                 )
                 return false
