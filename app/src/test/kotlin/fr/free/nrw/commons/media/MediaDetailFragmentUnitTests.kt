@@ -47,6 +47,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import okhttp3.OkHttpClient
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -79,6 +80,10 @@ private const val ORIGINAL_SRC =
 private const val TRANSCODE_SRC_240 =
     "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
         "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.240p.vp9.webm"
+
+private const val TRANSCODE_SRC_480 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
+        "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.480p.vp9.webm"
 
 private const val AUDIO_ORIGINAL_SRC =
     "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg"
@@ -907,26 +912,6 @@ class MediaDetailFragmentUnitTests {
         return playbackSource
     }
 
-    private fun mediaQualityLabel(playbackSource: MediaDerivative): String {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "mediaQualityLabel",
-                MediaDerivative::class.java,
-            )
-        method.isAccessible = true
-        return method.invoke(fragment, playbackSource) as String
-    }
-
-    private fun preferredMediaPlaybackSource(playbackSources: List<MediaDerivative>): MediaDerivative? {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "preferredMediaPlaybackSource",
-                List::class.java,
-            )
-        method.isAccessible = true
-        return method.invoke(fragment, playbackSources) as MediaDerivative?
-    }
-
     @Test
     @Throws(Exception::class)
     fun testTranscodeIsPreferredOverTheOriginal() {
@@ -943,65 +928,57 @@ class MediaDetailFragmentUnitTests {
     fun testResumedSourceIsPreferredOverTheTranscode() {
         val original = playbackSource(ORIGINAL_SRC, null)
         val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
-        Whitebox.setInternalState(fragment, "resumeMediaDerivative", original)
 
-        val preferred = preferredMediaPlaybackSource(listOf(original, transcode))
+        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), resume = original)
 
         Assert.assertEquals(original.src(), preferred?.src())
     }
 
     @Test
     @Throws(Exception::class)
-    fun testHandleMediaUnavailableSavesTheSourceBeingPlayed() {
-        whenever(media.mediaType).thenReturn(MediaType.VIDEO)
-        val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
-        Whitebox.setInternalState(fragment, "selectedMediaDerivative", transcode)
+    fun testSaveResumeStateKeepsTheSourceBeingPlayed() {
+        val player = MediaDetailPlayer(context, OkHttpClient()) {}
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        Whitebox.setInternalState(player, "selected", transcode480)
 
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "handleMediaUnavailable",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        player.saveResumeState()
+        player.release()
+        player.setSources(listOf(transcode240, transcode480), emptyList())
 
-        val resumed: MediaDerivative? = Whitebox.getInternalState(fragment, "resumeMediaDerivative")
-        Assert.assertEquals(TRANSCODE_SRC_240, resumed?.src())
-        Assert.assertNull(Whitebox.getInternalState(fragment, "selectedMediaDerivative"))
+        Assert.assertNull(player.selected)
+        Assert.assertEquals(TRANSCODE_SRC_480, player.preferredSource()?.src())
     }
 
     @Test
     @Throws(Exception::class)
     fun testVideoQualityLabelUsesTheTranscodeResolution() {
-        whenever(media.mediaType).thenReturn(MediaType.VIDEO)
         val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
 
-        Assert.assertEquals("240p", mediaQualityLabel(transcode))
+        Assert.assertEquals("240p", transcode.qualityLabel(context, MediaType.VIDEO))
     }
 
     @Test
     @Throws(Exception::class)
     fun testVideoQualityLabelNamesTheOriginal() {
-        whenever(media.mediaType).thenReturn(MediaType.VIDEO)
         val original = playbackSource(ORIGINAL_SRC, null)
 
-        Assert.assertEquals("Original", mediaQualityLabel(original))
+        Assert.assertEquals("Original", original.qualityLabel(context, MediaType.VIDEO))
     }
 
     @Test
     @Throws(Exception::class)
     fun testAudioQualityLabelIsRoundedToKbps() {
-        whenever(media.mediaType).thenReturn(MediaType.AUDIO)
         val transcode = playbackSource(AUDIO_TRANSCODE_SRC_MP3, "mp3", bandwidth = 199728)
 
-        Assert.assertEquals("200 kbps", mediaQualityLabel(transcode))
+        Assert.assertEquals("200 kbps", transcode.qualityLabel(context, MediaType.AUDIO))
     }
 
     @Test
     @Throws(Exception::class)
     fun testAudioQualityLabelNamesTheOriginal() {
-        whenever(media.mediaType).thenReturn(MediaType.AUDIO)
         val original = playbackSource(AUDIO_ORIGINAL_SRC, null, bandwidth = 106695)
 
-        Assert.assertEquals("107 kbps (Original)", mediaQualityLabel(original))
+        Assert.assertEquals("107 kbps (Original)", original.qualityLabel(context, MediaType.AUDIO))
     }
 }

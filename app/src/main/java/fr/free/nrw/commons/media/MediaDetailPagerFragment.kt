@@ -55,9 +55,7 @@ import java.net.URL
 import java.util.concurrent.Callable
 import javax.inject.Inject
 import androidx.core.net.toUri
-import androidx.media3.common.util.UnstableApi
 
-@UnstableApi
 class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeListener,
     MediaDetailFragment.Callback {
     @JvmField

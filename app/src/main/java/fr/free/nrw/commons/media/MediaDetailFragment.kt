@@ -68,17 +68,7 @@ import androidx.fragment.app.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.media3.common.Format
-import androidx.media3.common.MediaItem
-import androidx.media3.common.MimeTypes
-import androidx.media3.common.PlaybackException
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.DefaultLoadControl
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.mediacodec.MediaCodecUtil
-import androidx.media3.datasource.okhttp.OkHttpDataSource
-import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.ui.PlayerView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
@@ -140,7 +130,6 @@ import fr.free.nrw.commons.utils.handleGeoCoordinates
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
 import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
-import fr.free.nrw.commons.wikidata.model.gallery.TimedTextTrack
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -158,9 +147,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
 import androidx.core.view.isVisible
-import androidx.core.net.toUri
 
-@UnstableApi
 class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
     private var editable: Boolean = false
     private var isCategoryImage: Boolean = false
@@ -260,12 +247,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     // also I fell why make separate variables when one can serve the purpose
     private var media: Media? = null
 
-    private var mediaPlayer: ExoPlayer? = null
-    private var mediaPlaybackSources: List<MediaDerivative> = emptyList()
-    private var mediaTimedTextTracks: List<TimedTextTrack> = emptyList()
-    private var selectedMediaDerivative: MediaDerivative? = null
-    private var resumeMediaDerivative: MediaDerivative? = null
-    private var resumePosition: Long = 0
+    private val mediaDetailPlayer by lazy {
+        MediaDetailPlayer(requireContext(), playbackHttpClient, ::handleMediaUnavailable)
+    }
     private var mediaRequestInProgress: Boolean = false
     private var mediaFullscreen: Boolean = false
 
@@ -626,7 +610,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun displayMediaDetails() {
-        if (mediaPlayer == null) {
+        if (mediaDetailPlayer.player == null) {
             setupMediaView(media!!)
         }
         setTextFields(media!!)
@@ -664,7 +648,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         media.categories = this.media!!.categories
         this.media = media
         setTextFields(media)
-        if (mediaPlayer == null) {
+        if (mediaDetailPlayer.player == null) {
             setupMediaView(media)
         }
         compositeDisposable.addAll(
@@ -739,8 +723,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * @param scrollWidth the current width of the scrollView
      */
     private fun updateAspectRatio(scrollWidth: Int) {
-        val width = selectedMediaDerivative?.width() ?: imageInfoCache?.width ?: 0
-        val height = selectedMediaDerivative?.height() ?: imageInfoCache?.height ?: 0
+        val width = mediaDetailPlayer.selected?.width() ?: imageInfoCache?.width ?: 0
+        val height = mediaDetailPlayer.selected?.height() ?: imageInfoCache?.height ?: 0
         if (width > 0 && height > 0) {
             var finalHeight: Int = (scrollWidth * height) / width
             val params: ViewGroup.LayoutParams = binding.mediaDetailMediaContainer.layoutParams
@@ -845,9 +829,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         // Play the media if the player is initialized.
-        mediaPlayer?.let {
+        if (mediaDetailPlayer.player != null) {
             showMediaPlayer()
-            it.play()
+            mediaDetailPlayer.resume()
             return
         }
 
@@ -864,10 +848,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 .doFinally { mediaRequestInProgress = false }
                 .subscribe(
                     { (playbackSources, timedTextTracks) ->
-                        mediaPlaybackSources = playbackSources
-                        mediaTimedTextTracks = timedTextTracks
+                        mediaDetailPlayer.setSources(playbackSources, timedTextTracks)
                         updateSubtitleButtonVisibility()
-                        preferredMediaPlaybackSource(playbackSources)?.let(::playMedia)
+                        mediaDetailPlayer.preferredSource()?.let(::playMedia)
                             ?: handleMediaUnavailable()
                     },
                     { Timber.e(it); handleMediaUnavailable() },
@@ -875,109 +858,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         )
     }
 
-    /**
-     * Returns the preferred source in the list of media derivatives.
-     *
-     * TODO: This should be based on the screen resolution or user
-     * preference instead.
-     */
-    private fun preferredMediaPlaybackSource(
-        playbackSources: List<MediaDerivative>,
-    ): MediaDerivative? =
-        resumeMediaDerivative?.let { resume ->
-            playbackSources.firstOrNull { it.src() == resume.src() }
-        }
-            ?: playbackSources.firstOrNull { it.transcodeKey().isNullOrBlank().not() }
-            ?: playbackSources.firstOrNull()
-
-    /**
-     * Returns supported playback sources with transcodes before originals.
-     *
-     * Sources without a decoder on the device are omitted.
-     */
-    private fun playableMediaPlaybackSources(
-        playbackSources: List<MediaDerivative>,
-    ): List<MediaDerivative> {
-        val (originalSources, transcodeSources) = playbackSources
-            .filter(::isMediaPlaybackSupported)
-            .partition { it.transcodeKey().isNullOrBlank() }
-        return transcodeSources + originalSources
-    }
-
-    /**
-     * Returns whether the device has a decoder that supports the playback source's format.
-     */
-    private fun isMediaPlaybackSupported(playbackSource: MediaDerivative): Boolean {
-        val type = playbackSource.type()
-        val codecs = type.substringAfter("codecs=\"", "").substringBefore('"').ifEmpty { null }
-
-        val mediaMimeType =
-            when (playbackSource.mediaType()) {
-                MediaType.VIDEO -> MimeTypes.getVideoMediaMimeType(codecs)
-                else -> MimeTypes.getAudioMediaMimeType(codecs)
-            } ?: MimeTypes.normalizeMimeType(type.substringBefore(';').trim())
-
-        val format = Format.Builder()
-            .setSampleMimeType(mediaMimeType)
-            .setCodecs(codecs)
-            .setWidth(playbackSource.width())
-            .setHeight(playbackSource.height())
-            .build()
-
-        return MediaCodecUtil.getDecoderInfos(mediaMimeType, false, false)
-            .any { it.isFormatSupported(format) }
-    }
-
     private fun playMedia(playbackSource: MediaDerivative) {
-        val previousPlaybackSource = selectedMediaDerivative
-        val playbackPosition = mediaPlayer?.currentPosition ?: resumePosition
-        selectedMediaDerivative = playbackSource
-        resumeMediaDerivative = null
-        resumePosition = 0
+        val playerView =
+            if (mediaFullscreen) binding.mediaDetailFullscreenPlayerView else binding.mediaDetailPlayerView
+        mediaDetailPlayer.play(playbackSource, playerView)
 
         if (media?.mediaType == MediaType.VIDEO) {
             updateAspectRatio(binding.mediaDetailScrollView.width)
         }
-
-        // Initialize the player if it is not set up, or the source URL changed.
-        val player = mediaPlayer ?: ExoPlayer.Builder(requireContext())
-            .setLoadControl(
-                DefaultLoadControl.Builder()
-                    .setBufferDurationsMs(
-                        10_000,
-                        30_000,
-                        DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
-                        DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS,
-                    )
-                    .build(),
-            )
-            .build()
-            .also {
-                mediaPlayer = it
-                it.addListener(
-                    object : Player.Listener {
-                        override fun onPlayerError(error: PlaybackException) {
-                            handleMediaUnavailable()
-                        }
-                    },
-                )
-            }
-
-        val url = playbackSource.src()
-        if (previousPlaybackSource?.src() != url) {
-            player.setMediaSource(
-                DefaultMediaSourceFactory(OkHttpDataSource.Factory(playbackHttpClient))
-                    .createMediaSource(mediaMediaItem(url)),
-            )
-            player.prepare()
-            player.seekTo(playbackPosition)
-        }
-
-        val playerView =
-            if (mediaFullscreen) binding.mediaDetailFullscreenPlayerView else binding.mediaDetailPlayerView
-        playerView.player = player
         showMediaPlayer()
-        player.play()
     }
 
     private fun configureMediaPlayerView(playerView: PlayerView) {
@@ -992,26 +881,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
     }
 
+    @OptIn(UnstableApi::class)
     private fun updateSubtitleButtonVisibility() {
-        val showSubtitleButton = mediaTimedTextTracks.isNotEmpty()
+        val showSubtitleButton = mediaDetailPlayer.timedTextTracks.isNotEmpty()
         binding.mediaDetailPlayerView.setShowSubtitleButton(showSubtitleButton)
         binding.mediaDetailFullscreenPlayerView.setShowSubtitleButton(showSubtitleButton)
     }
 
-    private fun mediaMediaItem(mediaUrl: String): MediaItem =
-        MediaItem.Builder()
-            .setUri(mediaUrl)
-            .setSubtitleConfigurations(
-                mediaTimedTextTracks.map { timedTextTrack ->
-                    MediaItem.SubtitleConfiguration.Builder(timedTextTrack.src().toUri())
-                        .setMimeType(MimeTypes.TEXT_VTT)
-                        .setLanguage(timedTextTrack.language())
-                        .setLabel(timedTextTrack.label())
-                        .build()
-                },
-            )
-            .build()
-
+    @OptIn(UnstableApi::class)
     private fun setMediaFullscreen(shouldBeFullscreen: Boolean) {
         if (mediaFullscreen == shouldBeFullscreen) {
             return
@@ -1029,7 +906,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailScrollView.visibility = View.GONE
             binding.mediaDetailFullscreenPlayerView.visibility = View.VISIBLE
             PlayerView.switchTargetView(
-                mediaPlayer!!,
+                mediaDetailPlayer.player!!,
                 binding.mediaDetailPlayerView,
                 binding.mediaDetailFullscreenPlayerView,
             )
@@ -1040,7 +917,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         } else {
             binding.mediaDetailScrollView.visibility = View.VISIBLE
             PlayerView.switchTargetView(
-                mediaPlayer!!,
+                mediaDetailPlayer.player!!,
                 binding.mediaDetailFullscreenPlayerView,
                 binding.mediaDetailPlayerView,
             )
@@ -1052,43 +929,28 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun showMediaQualitySelector() {
-        AlertDialog.Builder(requireContext())
+        val context = requireContext()
+        AlertDialog.Builder(context)
             .setTitle(R.string.playback_quality)
             .setSingleChoiceItems(
-                mediaPlaybackSources.map(::mediaQualityLabel).toTypedArray(),
-                mediaPlaybackSources.indexOf(selectedMediaDerivative),
+                mediaDetailPlayer.sources.map { it.qualityLabel(context, media?.mediaType) }.toTypedArray(),
+                mediaDetailPlayer.sources.indexOf(mediaDetailPlayer.selected),
             ) { dialog, selectedIndex ->
-                playMedia(mediaPlaybackSources[selectedIndex])
+                playMedia(mediaDetailPlayer.sources[selectedIndex])
                 dialog.dismiss()
             }
             .show()
     }
 
-    private fun mediaQualityLabel(playbackSource: MediaDerivative): String =
-        if (media?.mediaType == MediaType.AUDIO) {
-            val bitrate = "${(playbackSource.bandwidth() + 500) / 1_000} kbps"
-            if (playbackSource.transcodeKey() == null) "$bitrate (${getString(R.string.original)})" else bitrate
-        } else {
-            playbackSource.transcodeKey()?.substringBefore('.') ?: getString(R.string.original)
-        }
-
     private fun handleMediaUnavailable() {
-        if (selectedMediaDerivative != null) {
-            resumeMediaDerivative = selectedMediaDerivative
-            resumePosition = mediaPlayer?.currentPosition ?: 0
-        }
-
+        mediaDetailPlayer.saveResumeState()
         setMediaFullscreen(false)
         cleanupMediaPlayer()
         showMediaUnavailable()
     }
 
     private fun cleanupMediaPlayer() {
-        mediaPlayer?.release()
-        mediaPlayer = null
-        mediaPlaybackSources = emptyList()
-        mediaTimedTextTracks = emptyList()
-        selectedMediaDerivative = null
+        mediaDetailPlayer.release()
         binding.mediaDetailPlayerView.player = null
     }
 
@@ -1098,7 +960,12 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * Called when the user navigates away from this media.
      */
     fun pauseMedia() {
-        mediaPlayer?.pause()
+        // The pager can call this method on a fragment that has already been
+        // detached, and creating the player (lazy) needs an attached fragment,
+        // so skip the pause as there's nothing to pause anyway.
+        if (isAdded) {
+            mediaDetailPlayer.pause()
+        }
     }
 
     private fun showMediaPoster(playButton: Boolean = false) {
@@ -1169,7 +1036,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     override fun onStop() {
-        mediaPlayer?.pause()
+        mediaDetailPlayer.pause()
         super.onStop()
     }
 
