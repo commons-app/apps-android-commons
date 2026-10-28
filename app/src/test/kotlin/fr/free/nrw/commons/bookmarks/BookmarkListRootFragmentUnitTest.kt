@@ -340,9 +340,10 @@ class BookmarkListRootFragmentUnitTest {
         Assert.assertEquals(fragment.backPressed(), false)
         Assert.assertEquals(
             NavTab.CONTRIBUTIONS.code(),
-            activity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
-                R.id.fragment_main_nav_tab_layout,
-            ).selectedItemId,
+            activity
+                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.fragment_main_nav_tab_layout,
+                ).selectedItemId,
         )
         Assert.assertEquals(
             View.VISIBLE,
@@ -359,9 +360,10 @@ class BookmarkListRootFragmentUnitTest {
         Assert.assertEquals(fragment.backPressed(), false)
         Assert.assertEquals(
             NavTab.CONTRIBUTIONS.code(),
-            activity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
-                R.id.fragment_main_nav_tab_layout,
-            ).selectedItemId,
+            activity
+                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.fragment_main_nav_tab_layout,
+                ).selectedItemId,
         )
     }
 }

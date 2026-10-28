@@ -160,7 +160,8 @@ class CommonsCookieJarTest {
         domain: String,
         expiresAt: Long = Long.MAX_VALUE,
     ): Cookie =
-        Cookie.Builder()
+        Cookie
+            .Builder()
             .name(name)
             .value(value)
             .domain(domain)
