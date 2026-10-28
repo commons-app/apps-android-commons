@@ -931,7 +931,6 @@
     <ID>TooManyFunctions:BookmarkListRootFragment.kt$BookmarkListRootFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerMediaDetailProviderOnItemClickListenerCategoryImagesCallback</ID>
     <ID>TooManyFunctions:BookmarkPicturesFragment.kt$BookmarkPicturesFragment : DaggerFragment</ID>
     <ID>TooManyFunctions:CategoriesContract.kt$CategoriesContract$View</ID>
-    <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CategoriesPresenter.kt$CategoriesPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:CategoryDetailsActivity.kt$CategoryDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
