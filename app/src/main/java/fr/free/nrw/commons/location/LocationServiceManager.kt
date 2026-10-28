@@ -250,6 +250,5 @@ class LocationServiceManager(
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
         SEARCH_CUSTOM_AREA,
-        CUSTOM_QUERY,
     }
 }

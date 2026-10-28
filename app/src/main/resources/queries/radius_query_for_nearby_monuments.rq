@@ -10,6 +10,8 @@ WHERE {
     bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
   }
 
+  ${FILTERS}
+
   # Wiki Loves Monuments
   OPTIONAL {?item p:P1435 ?monument}
   OPTIONAL {?item p:P2186 ?monument}
