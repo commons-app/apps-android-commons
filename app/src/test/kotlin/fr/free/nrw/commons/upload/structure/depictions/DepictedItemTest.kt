@@ -75,7 +75,7 @@ class DepictedItemTest {
                         ),
                 ),
             ).imageUrl,
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/70px-_example_",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/120px-_example_",
         )
     }
 
