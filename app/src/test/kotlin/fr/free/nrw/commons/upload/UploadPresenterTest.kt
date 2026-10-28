@@ -155,7 +155,8 @@ class UploadPresenterTest {
     }
 
     /**
-     * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
+     * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top
+     * card
      */
     @Ignore
     @Test
@@ -176,7 +177,8 @@ class UploadPresenterTest {
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
         verify(repository).deletePicture(ArgumentMatchers.anyString())
-        // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
+        // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should
+        // be triggered
         verify(view).showMessage(ArgumentMatchers.anyInt())
         verify(view).finish()
     }
