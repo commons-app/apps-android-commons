@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import androidx.work.WorkManager
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import fr.free.nrw.commons.auth.LoginActivity
@@ -20,16 +21,20 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler
 import fr.free.nrw.commons.concurrency.ThreadPoolService
-import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.data.DBOpenHelper
+import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
+import fr.free.nrw.commons.upload.worker.UploadWorker
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
@@ -91,7 +96,7 @@ class CommonsApplication : MultiDexApplication() {
         private set
 
     @Inject
-    lateinit var contributionDao: ContributionDao
+    lateinit var appDatabase: AppDatabase
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -215,12 +220,21 @@ class CommonsApplication : MultiDexApplication() {
         context: Context,
         logoutListener: LogoutListener,
     ) {
+        // Cancel pending uploads when the user logs out
+        WorkManager.getInstance(context).cancelUniqueWork(UploadWorker::class.java.simpleName)
+        // Reset the flag in case the worker never started and its finally block wasn't called.
+        WorkRequestHelper.markUploadWorkerAsStopped()
+
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
+        // lib/ holds the app native libraries, databases/ and no_backup/ hold
+        // databases that are still open (Room, WorkManager). Deleting them breaks
+        // later queries, so their contents are cleared in code instead.
+        val foldersKept = setOf("lib", "databases", "no_backup")
         if (applicationDirectory.exists()) {
             val fileNames = applicationDirectory.list()
             for (fileName in fileNames) {
-                if (fileName != "lib") {
+                if (fileName !in foldersKept) {
                     FileUtils.deleteFile(File(applicationDirectory, fileName))
                 }
             }
@@ -270,12 +284,14 @@ class CommonsApplication : MultiDexApplication() {
         )
 
         try {
-            contributionDao.deleteAll()
+            appDatabase.clearAllTables()
         } catch (e: SQLiteException) {
             Timber.e(e)
         }
         BookmarksTable.onDelete(db)
         BookmarkItemsTable.onDelete(db)
+        RecentSearchesTable.onDelete(db)
+        RecentLanguagesTable.onDelete(db)
     }
 
     /**
@@ -306,7 +322,8 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for BaseLogoutListener
          *
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page
          * @param loginUsername Username to be pre-filled on the login page
          */
@@ -340,7 +357,8 @@ class CommonsApplication : MultiDexApplication() {
 
     /**
      * This class is an extension of BaseLogoutListener, providing additional functionality or customization
-     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to the login screen.
+     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to
+     * the login screen.
      */
     class ActivityLogoutListener : BaseLogoutListener {
         var activity: Activity
@@ -348,8 +366,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener.
          *
-         * @param activity The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          */
         constructor(activity: Activity, ctx: Context) : super(ctx) {
             this.activity = activity
@@ -358,8 +378,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener with additional parameters for the login screen.
          *
-         * @param activity      The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page after logout.
          * @param loginUsername Username to be pre-filled on the login page after logout.
          */

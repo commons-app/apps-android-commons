@@ -175,6 +175,9 @@ object FileUtils {
             "image/jpg",
             "image/png",
             "image/svg+xml",
+            // HEIC/HEIF formats are not accepted by Commons, but the app converts them to JPEG before upload
+            "image/heic",
+            "image/heif",
             "audio/ogg",
         )
 

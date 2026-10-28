@@ -115,6 +115,7 @@ class UploadActivity :
     private var currLocation: LatLng? = null
     private var isInAppCameraUpload = false
     private var uploadableFiles: MutableList<UploadableFile> = mutableListOf()
+    private var skippedSharedFilesCount = 0
     private var currentSelectedPosition = 0
 
     /**
@@ -542,8 +543,10 @@ class UploadActivity :
         }
 
         // Filter out unsupported image types (like HEIC, WebP, GIF) to ensure we strictly accept
-        // only JPEG, PNG, and SVG formats, while allowing valid audio files to pass through
-        val originalSize = uploadableFiles.size
+        // only JPEG, PNG, and SVG formats, while allowing valid audio files to pass through.
+        // Files shared from other apps in such formats were already skipped before being copied.
+        val originalSize = uploadableFiles.size + skippedSharedFilesCount
+        skippedSharedFilesCount = 0
         uploadableFiles =
             uploadableFiles
                 .filter { file ->
@@ -836,7 +839,9 @@ class UploadActivity :
     }
 
     private fun receiveExternalSharedItems() {
-        uploadableFiles = contributionController!!.handleExternalImagesPicked(this, intent).toMutableList()
+        val result = contributionController!!.handleExternalImagesPicked(this, intent)
+        uploadableFiles = result.files.toMutableList()
+        skippedSharedFilesCount = result.skippedCount
     }
 
     private fun receiveInternalSharedItems() {

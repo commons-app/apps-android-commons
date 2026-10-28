@@ -33,7 +33,10 @@ object NetworkUtils {
      */
     @JvmStatic
     fun getNetworkType(context: Context): NetworkConnectionType {
-        val telephonyManager = context.applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        val telephonyManager =
+            context.applicationContext.getSystemService(
+                Context.TELEPHONY_SERVICE,
+            ) as? TelephonyManager
             ?: return NetworkConnectionType.UNKNOWN
 
         val networkInfo = getNetworkInfo(context)
