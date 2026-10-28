@@ -148,24 +148,27 @@ class ZoomableActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!images.isNullOrEmpty()) {
-                    val returnIntent = Intent()
-                    returnIntent.putParcelableArrayListExtra(
-                        CustomSelectorConstants.NEW_SELECTED_IMAGES,
-                        selectedImages,
-                    )
-                    returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
-                    setResult(Activity.RESULT_OK, returnIntent)
-                    finish()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                    isEnabled = true
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (!images.isNullOrEmpty()) {
+                        val returnIntent = Intent()
+                        returnIntent.putParcelableArrayListExtra(
+                            CustomSelectorConstants.NEW_SELECTED_IMAGES,
+                            selectedImages,
+                        )
+                        returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
+                        setResult(Activity.RESULT_OK, returnIntent)
+                        finish()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
                 }
-            }
-        })
+            },
+        )
         prefs =
             applicationContext.getSharedPreferences(
                 ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
@@ -680,9 +683,11 @@ class ZoomableActivity : BaseActivity() {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
-                setTapListener(DoubleTapGestureListener(this) {
-                    toggleSystemBars()
-                })
+                setTapListener(
+                    DoubleTapGestureListener(this) {
+                        toggleSystemBars()
+                    },
+                )
             }
             val controller: DraweeController =
                 Fresco
@@ -739,7 +744,6 @@ class ZoomableActivity : BaseActivity() {
             ),
         )
     }
-
 
     override fun onDestroy() {
         scope.cancel()

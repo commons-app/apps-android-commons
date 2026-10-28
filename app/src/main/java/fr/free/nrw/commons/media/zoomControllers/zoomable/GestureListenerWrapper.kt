@@ -5,7 +5,6 @@ import android.view.MotionEvent
 
 /** Wrapper for SimpleOnGestureListener as GestureDetector does not allow changing its listener. */
 class GestureListenerWrapper : GestureDetector.SimpleOnGestureListener() {
-
     private var delegate: GestureDetector.SimpleOnGestureListener =
         GestureDetector.SimpleOnGestureListener()
 
@@ -21,41 +20,27 @@ class GestureListenerWrapper : GestureDetector.SimpleOnGestureListener() {
         e1: MotionEvent?,
         e2: MotionEvent,
         distanceX: Float,
-        distanceY: Float
-    ): Boolean {
-        return delegate.onScroll(e1, e2, distanceX, distanceY)
-    }
+        distanceY: Float,
+    ): Boolean = delegate.onScroll(e1, e2, distanceX, distanceY)
 
     override fun onFling(
         e1: MotionEvent?,
         e2: MotionEvent,
         velocityX: Float,
-        velocityY: Float
-    ): Boolean {
-        return delegate.onFling(e1, e2, velocityX, velocityY)
-    }
+        velocityY: Float,
+    ): Boolean = delegate.onFling(e1, e2, velocityX, velocityY)
 
     override fun onShowPress(e: MotionEvent) {
         delegate.onShowPress(e)
     }
 
-    override fun onDown(e: MotionEvent): Boolean {
-        return delegate.onDown(e)
-    }
+    override fun onDown(e: MotionEvent): Boolean = delegate.onDown(e)
 
-    override fun onDoubleTap(e: MotionEvent): Boolean {
-        return delegate.onDoubleTap(e)
-    }
+    override fun onDoubleTap(e: MotionEvent): Boolean = delegate.onDoubleTap(e)
 
-    override fun onDoubleTapEvent(e: MotionEvent): Boolean {
-        return delegate.onDoubleTapEvent(e)
-    }
+    override fun onDoubleTapEvent(e: MotionEvent): Boolean = delegate.onDoubleTapEvent(e)
 
-    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-        return delegate.onSingleTapConfirmed(e)
-    }
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean = delegate.onSingleTapConfirmed(e)
 
-    override fun onSingleTapUp(e: MotionEvent): Boolean {
-        return delegate.onSingleTapUp(e)
-    }
+    override fun onSingleTapUp(e: MotionEvent): Boolean = delegate.onSingleTapUp(e)
 }

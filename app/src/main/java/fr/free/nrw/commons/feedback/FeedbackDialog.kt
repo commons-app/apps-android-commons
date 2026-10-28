@@ -24,17 +24,21 @@ import java.net.UnknownHostException
 
 class FeedbackDialog(
     context: Context,
-    private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback) : Dialog(context) {
+    private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback,
+) : Dialog(context) {
+    // The nullable binding is cleared in dismiss; `binding` is the non-null accessor for this class only.
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: DialogFeedbackBinding? = null
     private val binding get() = _binding!!
-    // Refactored to handle deprecation for Html.fromHtml()
-    private var feedbackDestinationHtml: Spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(context.getString(R.string.feedback_destination_note), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        @Suppress("DEPRECATION")
-        Html.fromHtml(context.getString(R.string.feedback_destination_note))
-    }
 
+    // Refactored to handle deprecation for Html.fromHtml()
+    private var feedbackDestinationHtml: Spanned =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(context.getString(R.string.feedback_destination_note), Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            @Suppress("DEPRECATION")
+            Html.fromHtml(context.getString(R.string.feedback_destination_note))
+        }
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,25 +57,33 @@ class FeedbackDialog(
             } catch (e: Exception) {
                 when (e) {
                     is UnknownHostException -> {
-                        Snackbar.make(findViewById(android.R.id.content),
-                            R.string.error_feedback,
-                            Snackbar.LENGTH_SHORT).show()
+                        Snackbar
+                            .make(
+                                findViewById(android.R.id.content),
+                                R.string.error_feedback,
+                                Snackbar.LENGTH_SHORT,
+                            ).show()
                     }
 
                     is ConnectException -> {
-                        Snackbar.make(findViewById(android.R.id.content),
-                            R.string.error_feedback,
-                            Snackbar.LENGTH_SHORT).show()
+                        Snackbar
+                            .make(
+                                findViewById(android.R.id.content),
+                                R.string.error_feedback,
+                                Snackbar.LENGTH_SHORT,
+                            ).show()
                     }
 
                     else -> {
-                        Snackbar.make(findViewById(android.R.id.content),
-                             R.string.error_feedback,
-                            Snackbar.LENGTH_SHORT).show()
+                        Snackbar
+                            .make(
+                                findViewById(android.R.id.content),
+                                R.string.error_feedback,
+                                Snackbar.LENGTH_SHORT,
+                            ).show()
                     }
                 }
             }
-
         }
     }
 
@@ -92,14 +104,24 @@ class FeedbackDialog(
         val deviceName =
             if (binding.deviceNameCheckbox.isChecked) getDevice() else null
         val networkType =
-            if (binding.networkTypeCheckbox.isChecked) getConnectionType(
-                context
-            ).toString() else null
-        val feedback = Feedback(
-            appVersion, apiLevel,
-            binding.feedbackItemEditText.getText().toString(),
-            androidVersion, deviceModel, deviceManufacturer, deviceName, networkType
-        )
+            if (binding.networkTypeCheckbox.isChecked) {
+                getConnectionType(
+                    context,
+                ).toString()
+            } else {
+                null
+            }
+        val feedback =
+            Feedback(
+                appVersion,
+                apiLevel,
+                binding.feedbackItemEditText.getText().toString(),
+                androidVersion,
+                deviceModel,
+                deviceManufacturer,
+                deviceName,
+                networkType,
+            )
         onFeedbackSubmitCallback.onFeedbackSubmit(feedback)
         dismiss()
     }

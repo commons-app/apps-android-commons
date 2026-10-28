@@ -7,9 +7,7 @@ class MwParseResult {
     private val index = 0
     private val text: MwParseText? = null
 
-    fun text(): String? {
-        return text?.text
-    }
+    fun text(): String? = text?.text
 
     inner class MwParseText {
         @SerializedName("*")

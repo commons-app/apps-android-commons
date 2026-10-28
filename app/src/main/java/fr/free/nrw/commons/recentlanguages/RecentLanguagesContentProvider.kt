@@ -1,23 +1,20 @@
 package fr.free.nrw.commons.recentlanguages
 
-
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import androidx.core.net.toUri
+import androidx.sqlite.db.SupportSQLiteQueryBuilder
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.COLUMN_NAME
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable.TABLE_NAME
-import androidx.core.net.toUri
-import androidx.sqlite.db.SupportSQLiteQueryBuilder
-
 
 /**
  * Content provider of recently used languages
  */
 class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
-
     companion object {
         private const val BASE_PATH = "recent_languages"
         val BASE_URI: Uri = "content://${BuildConfig.RECENT_LANGUAGE_AUTHORITY}/$BASE_PATH".toUri()
@@ -45,16 +42,18 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         projection: Array<String>?,
         selection: String?,
         selectionArgs: Array<String>?,
-        sortOrder: String?
+        sortOrder: String?,
     ): Cursor? {
         val queryBuilder = SupportSQLiteQueryBuilder.builder(TABLE_NAME)
 
-        val cursor = requireDb().query(
-            queryBuilder.columns(projection)
-                .selection(selection, selectionArgs)
-                .orderBy(sortOrder)
-                .create()
-        )
+        val cursor =
+            requireDb().query(
+                queryBuilder
+                    .columns(projection)
+                    .selection(selection, selectionArgs)
+                    .orderBy(sortOrder)
+                    .create(),
+            )
         cursor.setNotificationUri(context?.contentResolver, uri)
         return cursor
     }
@@ -70,20 +69,22 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         uri: Uri,
         contentValues: ContentValues?,
         selection: String?,
-        selectionArgs: Array<String>?
+        selectionArgs: Array<String>?,
     ): Int {
         var rowsUpdated: Int = 0
         if (selection.isNullOrEmpty()) {
-            val id = uri.lastPathSegment?.toInt()
-                ?: throw IllegalArgumentException("Invalid URI: $uri")
+            val id =
+                uri.lastPathSegment?.toInt()
+                    ?: throw IllegalArgumentException("Invalid URI: $uri")
             contentValues?.let {
-                rowsUpdated = requireDb().update(
-                    TABLE_NAME,
-                    SQLiteDatabase.CONFLICT_NONE,
-                    it,
-                    "$COLUMN_NAME = ?",
-                    arrayOf(id.toString())
-                )
+                rowsUpdated =
+                    requireDb().update(
+                        TABLE_NAME,
+                        SQLiteDatabase.CONFLICT_NONE,
+                        it,
+                        "$COLUMN_NAME = ?",
+                        arrayOf(id.toString()),
+                    )
             }
         } else {
             throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")
@@ -98,14 +99,18 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
      * @param uri : contains the URI for recently used languages
      * @param contentValues : new values to be entered to the database
      */
-    override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
-        val id = contentValues?.let {
-            requireDb().insert(
-                TABLE_NAME,
-                SQLiteDatabase.CONFLICT_NONE,
-                it
-            )
-        }
+    override fun insert(
+        uri: Uri,
+        contentValues: ContentValues?,
+    ): Uri? {
+        val id =
+            contentValues?.let {
+                requireDb().insert(
+                    TABLE_NAME,
+                    SQLiteDatabase.CONFLICT_NONE,
+                    it,
+                )
+            }
         context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
@@ -114,12 +119,17 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
      * Handles the deletion of a recently used languages record from local SQLite Database
      * @param uri : contains the URI for recently used languages
      */
-    override fun delete(uri: Uri, s: String?, strings: Array<String>?): Int {
-        val rows = requireDb().delete(
-            TABLE_NAME,
-            "language_code = ?",
-            arrayOf(uri.lastPathSegment)
-        )
+    override fun delete(
+        uri: Uri,
+        s: String?,
+        strings: Array<String>?,
+    ): Int {
+        val rows =
+            requireDb().delete(
+                TABLE_NAME,
+                "language_code = ?",
+                arrayOf(uri.lastPathSegment),
+            )
         context?.contentResolver?.notifyChange(uri, null)
         return rows
     }

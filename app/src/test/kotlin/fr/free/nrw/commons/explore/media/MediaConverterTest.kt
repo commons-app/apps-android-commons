@@ -9,7 +9,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.lang.IllegalArgumentException
@@ -72,7 +71,9 @@ class MediaConverterTest {
         `when`(imageInfo.getOriginalUrl()).thenReturn("originalUrl")
         `when`(metadata.licenseUrl()).thenReturn("licenseUrl")
         `when`(metadata.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
-        `when`(metadata.artist()).thenReturn("<a href=\"//commons.wikimedia.org/wiki/User:Foo_Bar\" title=\"Foo Bar\">Foo Bar</a>")
+        `when`(
+            metadata.artist(),
+        ).thenReturn("<a href=\"//commons.wikimedia.org/wiki/User:Foo_Bar\" title=\"Foo Bar\">Foo Bar</a>")
         // Artist values like above is very common, found in file pages created via UploadWizard
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals("Foo Bar", media.author)
@@ -89,6 +90,7 @@ class MediaConverterTest {
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals("Foo Bar", media.author)
     }
+
     @Test
     fun `test convert artist value (author) containing red link`() {
         `when`(imageInfo.getMetadata()).thenReturn(metadata)
@@ -96,7 +98,12 @@ class MediaConverterTest {
         `when`(imageInfo.getOriginalUrl()).thenReturn("originalUrl")
         `when`(metadata.licenseUrl()).thenReturn("licenseUrl")
         `when`(metadata.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
-        `when`(metadata.artist()).thenReturn("<a href=\"/w/index.php?title=User:Foo&action=edit&redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\">Foo</a>")
+        `when`(
+            metadata.artist(),
+        ).thenReturn(
+            "<a href=\"/w/index.php?title=User:Foo&action=edit&redlink=1\" " +
+                "class=\"new\" title=\"User:Foo (page does not exist)\">Foo</a>",
+        )
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals("Foo", media.author)
     }

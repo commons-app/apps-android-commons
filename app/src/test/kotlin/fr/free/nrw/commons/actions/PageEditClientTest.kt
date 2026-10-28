@@ -64,12 +64,12 @@ class PageEditClientTest {
             ).thenReturn(
                 Observable.just(edit),
             )
-        Mockito.`when`(edit.edit()).thenReturn(editResult)
+        Mockito.`when`(edit.getEditResult()).thenReturn(editResult)
         Mockito.`when`(editResult.editSucceeded()).thenReturn(true)
         pageEditClient.appendEdit("test", "test", "test").test()
         verify(csrfTokenClient).getTokenBlocking()
         verify(pageEditInterface).postAppendEdit(eq("test"), eq("test"), eq("test"), eq("test"))
-        verify(edit).edit()
+        verify(edit).getEditResult()
         verify(editResult).editSucceeded()
     }
 

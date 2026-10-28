@@ -22,7 +22,10 @@ import java.lang.reflect.Field
  * annotation and another corresponding TypeAdapter(Factory).
  */
 class RequiredFieldsCheckOnReadTypeAdapterFactory : TypeAdapterFactory {
-    override fun <T> create(gson: Gson, typeToken: TypeToken<T>): TypeAdapter<T>? {
+    override fun <T> create(
+        gson: Gson,
+        typeToken: TypeToken<T>,
+    ): TypeAdapter<T>? {
         val rawType: Class<*> = typeToken.rawType
         val requiredFields = collectRequiredFields(rawType)
 
@@ -37,29 +40,35 @@ class RequiredFieldsCheckOnReadTypeAdapterFactory : TypeAdapterFactory {
         return Adapter(gson.getDelegateAdapter(this, typeToken), requiredFields)
     }
 
-    private fun collectRequiredFields(clazz: Class<*>): Set<Field> = buildSet {
-        for (field in clazz.declaredFields) {
-            if (field.isAnnotationPresent(Required::class.java)) add(field)
+    private fun collectRequiredFields(clazz: Class<*>): Set<Field> =
+        buildSet {
+            for (field in clazz.declaredFields) {
+                if (field.isAnnotationPresent(Required::class.java)) add(field)
+            }
         }
-    }
 
     private class Adapter<T>(
         private val delegate: TypeAdapter<T>,
-        private val requiredFields: Set<Field>
+        private val requiredFields: Set<Field>,
     ) : TypeAdapter<T>() {
-
         @Throws(IOException::class)
-        override fun write(out: JsonWriter, value: T?) =
-            delegate.write(out, value)
+        override fun write(
+            out: JsonWriter,
+            value: T?,
+        ) = delegate.write(out, value)
 
         @Throws(IOException::class)
         override fun read(reader: JsonReader): T? =
-            if (allRequiredFieldsPresent(delegate.read(reader), requiredFields))
+            if (allRequiredFieldsPresent(delegate.read(reader), requiredFields)) {
                 delegate.read(reader)
-            else
+            } else {
                 null
+            }
 
-        fun allRequiredFieldsPresent(deserialized: T, required: Set<Field>): Boolean {
+        fun allRequiredFieldsPresent(
+            deserialized: T,
+            required: Set<Field>,
+        ): Boolean {
             for (field in required) {
                 try {
                     if (field[deserialized] == null) return false
