@@ -16,7 +16,7 @@ class PlaceAdapter(
     commonPlaceClickActions: CommonPlaceClickActions,
     inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
     galleryPickLauncherForResult: ActivityResultLauncher<Intent>,
-    cameraPickLauncherForResult: ActivityResultLauncher<Intent>
+    cameraPickLauncherForResult: ActivityResultLauncher<Intent>,
 ) : BaseDelegateAdapter<Place>(
         placeAdapterDelegate(
             bookmarkLocationsDao,
@@ -34,7 +34,7 @@ class PlaceAdapter(
             commonPlaceClickActions.onDirectionsLongPressed(),
             inAppCameraLocationPermissionLauncher,
             cameraPickLauncherForResult,
-            galleryPickLauncherForResult
+            galleryPickLauncherForResult,
         ),
         areItemsTheSame = { oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId },
     )

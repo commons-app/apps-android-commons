@@ -647,7 +647,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -689,6 +694,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -754,18 +765,23 @@ class UploadWorker(
     /**
      * Method used to get Pending intent for opening different screen after clicking on notification
      * @param toClass
+     * @param targetTab
      */
-    private fun getPendingIntent(toClass: Class<out BaseActivity>): PendingIntent {
+    private fun getPendingIntent(
+        toClass: Class<out BaseActivity>,
+        targetTab: Int = 0,
+    ): PendingIntent {
         val intent = Intent(appContext, toClass)
+        intent.putExtra(UploadProgressActivity.EXTRA_TARGET_TAB, targetTab)
         return TaskStackBuilder.create(appContext).run {
             addNextIntentWithParentStack(intent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getPendingIntent(
-                    0,
+                    targetTab,
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
                 )
             } else {
-                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+                getPendingIntent(targetTab, PendingIntent.FLAG_UPDATE_CURRENT)
             }
         }
     }

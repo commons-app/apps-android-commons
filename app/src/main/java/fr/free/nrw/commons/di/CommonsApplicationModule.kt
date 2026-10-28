@@ -443,7 +443,8 @@ val MIGRATION_21_22 =
                 var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
                 while (cursor.moveToNext()) {
                     db.execSQL(
-                        "INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
+                        "INSERT OR IGNORE INTO categories (_id, name, description, " +
+                            "thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
                         arrayOf(
                             cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
                             cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
@@ -473,7 +474,10 @@ val MIGRATION_21_22 =
                 cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
                 while (cursor.moveToNext()) {
                     db.execSQL(
-                        "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, " +
+                            "item_image_url, item_instance_of, item_name_categories, " +
+                            "item_description_categories, item_thumbnail_categories, " +
+                            "item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         arrayOf(
                             cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
                             cursor.getString(cursor.getColumnIndexOrThrow("item_description")),

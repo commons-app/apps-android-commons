@@ -81,8 +81,6 @@ import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.auth.getUserName
-import fr.free.nrw.commons.category.CATEGORY_NEEDING_CATEGORIES
-import fr.free.nrw.commons.category.CATEGORY_UNCATEGORISED
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.category.CategoryEditHelper
@@ -805,41 +803,6 @@ class MediaDetailFragment :
                 .setOldController(binding.mediaDetailImageView.controller)
                 .build()
         binding.mediaDetailImageView.controller = controller
-    }
-
-    private fun updateToDoWarning() {
-        var toDoMessage = ""
-        var toDoNeeded = false
-        var categoriesPresent: Boolean =
-            if (media!!.categories == null) false else (media!!.categories!!.isNotEmpty())
-
-        // Check if the presented category is about need of category
-        if (categoriesPresent) {
-            for (category: String in media!!.categories!!) {
-                if (category.lowercase().contains(CATEGORY_NEEDING_CATEGORIES) ||
-                    category.lowercase().contains(CATEGORY_UNCATEGORISED)
-                ) {
-                    categoriesPresent = false
-                }
-                break
-            }
-        }
-        if (!categoriesPresent) {
-            toDoNeeded = true
-            toDoMessage += getString(R.string.missing_category)
-        }
-        if (isWikipediaButtonDisplayed) {
-            toDoNeeded = true
-            toDoMessage += if ((toDoMessage.isEmpty())) "" else "\n" + getString(R.string.missing_article)
-        }
-
-        if (toDoNeeded) {
-            toDoMessage = getString(R.string.todo_improve) + "\n" + toDoMessage
-            binding.toDoLayout.visibility = View.VISIBLE
-            binding.toDoReason.text = toDoMessage
-        } else {
-            binding.toDoLayout.visibility = View.GONE
-        }
     }
 
     override fun onDestroyView() {
@@ -1768,19 +1731,6 @@ class MediaDetailFragment :
             return captionList
         }
 
-    /**
-     * Adds caption to the map and updates captions
-     * @param mediaDetail UploadMediaDetail
-     * @param updatedCaptions updated captionds
-     */
-    private fun updateCaptions(
-        mediaDetail: UploadMediaDetail,
-        updatedCaptions: MutableMap<String, String>,
-    ) {
-        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
-        media!!.captions = updatedCaptions
-    }
-
     @SuppressLint("StringFormatInvalid")
     fun onDeleteButtonClicked() {
         if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
@@ -2291,12 +2241,11 @@ class MediaDetailFragment :
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun FileUsagesContainer(
-    modifier: Modifier = Modifier,
     commonsContainerState: MediaDetailViewModel.FileUsagesContainerState,
     globalContainerState: MediaDetailViewModel.FileUsagesContainerState,
+    modifier: Modifier = Modifier,
 ) {
     var isCommonsListExpanded by rememberSaveable { mutableStateOf(true) }
     var isOtherWikisListExpanded by rememberSaveable { mutableStateOf(true) }

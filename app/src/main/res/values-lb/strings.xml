@@ -252,6 +252,8 @@
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Virschloe fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
+  <string name="contribution_deleted">Geläscht</string>
+  <string name="deleted_file_activity_title">Fichier geläscht</string>
   <string name="nominated_see_more">Kuckt d\'Internetsäit fir Detailer</string>
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>

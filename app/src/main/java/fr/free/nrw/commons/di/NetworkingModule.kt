@@ -177,7 +177,8 @@ class NetworkingModule {
     fun provideWikidataWikiSite(): WikiSite = WikiSite(BuildConfig.WIKIDATA_URL)
 
     /**
-     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
+     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new
+     * instances everywhere.
      * @return returns a singleton Gson instance
      */
     @Provides

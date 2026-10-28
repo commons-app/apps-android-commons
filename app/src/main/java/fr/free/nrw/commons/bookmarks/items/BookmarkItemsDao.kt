@@ -113,10 +113,11 @@ class BookmarkItemsDao @Inject constructor(
      * @return boolean : is bookmark in database ?
      */
     fun findBookmarkItem(depictedItemID: String?): Boolean {
-        if (depictedItemID == null) { //Avoiding NPE's
+        if (depictedItemID == null) { // Avoiding NPE's
             return false
         }
         val db = clientProvider.get()
+        var exists = false
         try {
             db.query(
                 BASE_URI,
@@ -124,17 +125,15 @@ class BookmarkItemsDao @Inject constructor(
                 COLUMN_ID + "=?",
                 arrayOf(depictedItemID),
                 null
-            ).use { cursor ->
-                if (cursor != null && cursor.moveToFirst()) {
-                    return true
-                }
+            )?.use { cursor ->
+                exists = cursor.moveToFirst()
             }
         } catch (e: RemoteException) {
             throw RuntimeException(e)
         } finally {
             db.release()
         }
-        return false
+        return exists
     }
 
     /**
