@@ -921,7 +921,6 @@
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
-    <ID>TooManyFunctions:AppLanguageLookUpTable.kt$AppLanguageLookUpTable</ID>
     <ID>TooManyFunctions:BasePagingFragment.kt$BasePagingFragment&lt;T&gt; : CommonsDaggerSupportFragmentView</ID>
     <ID>TooManyFunctions:BasicKvStore.kt$BasicKvStore : KeyValueStore</ID>
     <ID>TooManyFunctions:BlurOverlayView.kt$BlurOverlayView : View</ID>
