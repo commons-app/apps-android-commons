@@ -22,7 +22,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
-const val THUMB_IMAGE_SIZE = "70"
+const val THUMB_IMAGE_SIZE = "70px"
 
 /**
  * Model class for Depicted Item in Upload and Explore
