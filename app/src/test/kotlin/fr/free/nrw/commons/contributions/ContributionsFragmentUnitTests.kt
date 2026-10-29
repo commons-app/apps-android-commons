@@ -24,8 +24,6 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.models.Notification
-import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
@@ -86,7 +84,7 @@ class ContributionsFragmentUnitTests {
     private lateinit var notificationCount: TextView
 
     @Mock
-    private lateinit var singleNotification: Single<List<Notification>>
+    private lateinit var singleUnreadCount: Single<Int>
 
     @Mock
     private lateinit var compositeDisposable: CompositeDisposable
@@ -161,18 +159,18 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetNotificationCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(notificationController.getNotifications(anyBoolean())).thenReturn(singleNotification)
-        `when`(notificationController.getNotifications(anyBoolean()).subscribeOn(any())).thenReturn(
-            singleNotification,
+        `when`(notificationController.getUnreadCount()).thenReturn(singleUnreadCount)
+        `when`(notificationController.getUnreadCount().subscribeOn(any())).thenReturn(
+            singleUnreadCount,
         )
         `when`(
-            notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
+            notificationController.getUnreadCount().subscribeOn(any()).observeOn(
                 any(),
             ),
-        ).thenReturn(singleNotification)
+        ).thenReturn(singleUnreadCount)
         `when`(
             notificationController
-                .getNotifications(anyBoolean())
+                .getUnreadCount()
                 .subscribeOn(any())
                 .observeOn(
                     any(),
@@ -188,25 +186,23 @@ class ContributionsFragmentUnitTests {
         val method: Method =
             ContributionsFragment::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, listOf<Notification>())
+        method.invoke(fragment, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitNotificationViewsCaseNonEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val list: List<Notification> =
-            listOf(Notification(NotificationType.UNKNOWN, "", "", "", "", ""))
         val method: Method =
             ContributionsFragment::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, list)
+        method.invoke(fragment, 2)
     }
 
     @Test

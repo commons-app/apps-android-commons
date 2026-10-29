@@ -16,6 +16,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.ArgumentMatchers.eq
+import org.mockito.ArgumentMatchers.isNull
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
@@ -109,6 +110,35 @@ class NotificationClientTest {
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
         notificationClient.markNotificationAsRead("test")
         verify(service).markRead(anyString(), anyString(), anyString())
+    }
+
+    @Test
+    fun getUnreadCountFollowsContinueToken() {
+        val firstPage = Mockito.mock(MwQueryResponse::class.java)
+        val firstResult = Mockito.mock(MwQueryResult::class.java)
+        val firstNotifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
+        val secondPage = Mockito.mock(MwQueryResponse::class.java)
+        val secondResult = Mockito.mock(MwQueryResult::class.java)
+        val secondNotifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
+
+        Mockito.`when`(firstPage.query()).thenReturn(firstResult)
+        Mockito.`when`(firstResult.notifications()).thenReturn(firstNotifications)
+        Mockito.`when`(firstNotifications.list()).thenReturn(List(50) { Notification() })
+        Mockito.`when`(firstNotifications.continueToken()).thenReturn("page-2")
+
+        Mockito.`when`(secondPage.query()).thenReturn(secondResult)
+        Mockito.`when`(secondResult.notifications()).thenReturn(secondNotifications)
+        Mockito.`when`(secondNotifications.list()).thenReturn(List(7) { Notification() })
+        Mockito.`when`(secondNotifications.continueToken()).thenReturn(null)
+
+        Mockito
+            .`when`(service.getAllNotifications(anyString(), eq("!read"), isNull()))
+            .thenReturn(Observable.just(firstPage))
+        Mockito
+            .`when`(service.getAllNotifications(anyString(), eq("!read"), eq("page-2")))
+            .thenReturn(Observable.just(secondPage))
+
+        assertEquals(57, notificationClient.getUnreadCount().blockingGet())
     }
 
     @Suppress("SameParameterValue")

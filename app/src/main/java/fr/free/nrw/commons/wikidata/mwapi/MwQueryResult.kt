@@ -131,6 +131,11 @@ class MwQueryResult :
     class NotificationList {
         private val list: List<Notification>? = null
 
+        @SerializedName("continue")
+        private val next: String? = null
+
         fun list(): List<Notification>? = list
+
+        fun continueToken(): String? = next
     }
 }

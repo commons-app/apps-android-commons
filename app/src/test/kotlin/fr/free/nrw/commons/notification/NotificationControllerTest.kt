@@ -37,6 +37,12 @@ class NotificationControllerTest {
         verify(notificationClient).getNotifications(ArgumentMatchers.anyBoolean())
     }
 
+    @Test
+    fun testGetUnreadCount() {
+        notificationController.getUnreadCount()
+        verify(notificationClient).getUnreadCount()
+    }
+
     /**
      * Test mark notifications as read
      */

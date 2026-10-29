@@ -51,7 +51,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYourself
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
@@ -339,14 +338,12 @@ class ContributionsFragment :
     fun setNotificationCount() {
         compositeDisposable.add(
             notificationController!!
-                .getNotifications(false)
+                .getUnreadCount()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { notificationList: List<Notification> ->
-                        this.initNotificationViews(
-                            notificationList,
-                        )
+                    { unreadCount: Int ->
+                        this.initNotificationViews(unreadCount)
                     },
                     { throwable: Throwable? ->
                         Timber.e(
@@ -396,13 +393,13 @@ class ContributionsFragment :
         }
     }
 
-    private fun initNotificationViews(notificationList: List<Notification>) {
-        Timber.d("Number of notifications is %d", notificationList.size)
-        if (notificationList.isEmpty()) {
+    private fun initNotificationViews(unreadCount: Int) {
+        Timber.d("Number of notifications is %d", unreadCount)
+        if (unreadCount <= 0) {
             notificationCount!!.visibility = View.GONE
         } else {
             notificationCount!!.visibility = View.VISIBLE
-            notificationCount!!.text = notificationList.size.toString()
+            notificationCount!!.text = unreadCount.toString()
         }
     }
 

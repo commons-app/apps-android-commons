@@ -18,6 +18,11 @@ class NotificationController
         fun getNotifications(archived: Boolean): Single<List<Notification>> =
             notificationClient.getNotifications(archived)
 
+        /**
+         * Returns the unread count for the contributions badge.
+         */
+        fun getUnreadCount(): Single<Int> = notificationClient.getUnreadCount()
+
         fun markAsRead(notification: Notification): Observable<Boolean> =
             notificationClient.markNotificationAsRead(notification.notificationId)
     }

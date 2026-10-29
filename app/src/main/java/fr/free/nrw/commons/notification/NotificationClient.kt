@@ -14,6 +14,12 @@ import javax.inject.Named
 import javax.inject.Singleton
 import fr.free.nrw.commons.wikidata.model.notifications.Notification as WikimediaNotification
 
+private const val NOTIFICATION_WIKIS = "wikidatawiki|commonswiki|enwiki"
+
+// Echo returns at most 50 notifications per response, and its rawcount stops at 100.
+// The badge follows notcontinue so an inbox larger than that still drops after a mark-as-read.
+private const val MAX_UNREAD_PAGES = 20
+
 @Singleton
 class NotificationClient
     @Inject
@@ -24,7 +30,7 @@ class NotificationClient
         fun getNotifications(archived: Boolean): Single<List<Notification>> =
             service
                 .getAllNotifications(
-                    wikiList = "wikidatawiki|commonswiki|enwiki",
+                    wikiList = NOTIFICATION_WIKIS,
                     filter = if (archived) "read" else "!read",
                     continueStr = null,
                 ).map {
@@ -34,6 +40,36 @@ class NotificationClient
                 }.map {
                     it.toCommonsNotification()
                 }.toList()
+
+        /**
+         * Counts unread notifications on Commons, Wikidata, and English Wikipedia.
+         * One response is not enough: Echo pages them, and the badge has to include every page.
+         */
+        fun getUnreadCount(): Single<Int> =
+            Single.defer {
+                var total = 0
+                var continueToken: String? = null
+                val seenContinueTokens = mutableSetOf<String>()
+                var page = 0
+                while (page < MAX_UNREAD_PAGES) {
+                    val response =
+                        service
+                            .getAllNotifications(
+                                wikiList = NOTIFICATION_WIKIS,
+                                filter = "!read",
+                                continueStr = continueToken,
+                            ).blockingFirst()
+                    val notifications = response?.query()?.notifications()
+                    total += notifications?.list()?.size ?: 0
+                    val next = notifications?.continueToken()
+                    page++
+                    if (next.isNullOrEmpty() || !seenContinueTokens.add(next)) {
+                        break
+                    }
+                    continueToken = next
+                }
+                Single.just(total)
+            }
 
         fun markNotificationAsRead(notificationId: String?): Observable<Boolean> =
             try {
