@@ -842,7 +842,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             mediaClient.getMediaInfo(title)
                 .subscribeOn(Schedulers.io())
                 .map { mediaInfo ->
-                    playableMediaPlaybackSources(mediaInfo.derivatives()) to mediaInfo.timedTextTracks()
+                    playableMediaPlaybackSources(mediaInfo.playbackSources()) to mediaInfo.timedTextTracks()
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { mediaRequestInProgress = false }

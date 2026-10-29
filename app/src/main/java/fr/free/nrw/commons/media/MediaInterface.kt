@@ -143,12 +143,15 @@ interface MediaInterface {
     /**
      * Retrieves playback sources and timed text tracks for a media file.
      *
+     * The original file's URL, MIME type, size, and stream metadata are
+     * included so it can be offered as a playback source too.
+     *
      * @param title the title of the requested media file
      * @return a single that emits the MediaWiki query response
      */
     @GET(
         "w/api.php?action=query&format=json&formatversion=2" +
-            "&prop=videoinfo&viprop=derivatives|timedtext",
+            "&prop=videoinfo&viprop=derivatives|timedtext|url|mime|size|metadata",
     )
     fun getMediaInfo(
         @Query("titles") title: String,
