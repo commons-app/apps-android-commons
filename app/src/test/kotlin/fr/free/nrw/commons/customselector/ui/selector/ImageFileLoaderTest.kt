@@ -41,8 +41,6 @@ class ImageFileLoaderTest {
     @Mock
     private lateinit var imageLoaderListener: ImageLoaderListener
 
-    @Mock
-    private lateinit var coroutineScope: CoroutineScope
 
     private lateinit var imageCursor: RoboCursor
     private lateinit var coroutineContext: CoroutineContext

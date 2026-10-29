@@ -79,8 +79,6 @@ class BookmarkPicturesFragmentUnitTests {
     @Mock
     private lateinit var throwable: Throwable
 
-    @Mock
-    private lateinit var mediaList: List<Media>
 
     @Before
     fun setUp() {

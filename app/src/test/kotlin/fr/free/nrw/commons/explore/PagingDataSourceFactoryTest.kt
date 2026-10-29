@@ -18,8 +18,6 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceFactoryTest {
-    @Mock
-    private lateinit var depictsClient: DepictsClient
 
     @Mock
     private lateinit var loadingStates: PublishProcessor<LoadingState>

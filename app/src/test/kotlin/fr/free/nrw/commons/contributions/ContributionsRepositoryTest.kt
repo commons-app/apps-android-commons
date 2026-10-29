@@ -40,7 +40,7 @@ class ContributionsRepositoryTest {
         val contribution = mock(Contribution::class.java)
         whenever(localDataSource.getContributions())
             .thenReturn(createMockDataSourceFactory(listOf(contribution)))
-        val contributionsFactory = contributionsRepository.fetchContributions()
+        contributionsRepository.fetchContributions()
         verify(localDataSource, times(1)).getContributions()
     }
 

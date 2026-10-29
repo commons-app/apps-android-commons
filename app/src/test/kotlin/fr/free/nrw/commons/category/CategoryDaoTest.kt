@@ -312,7 +312,7 @@ class CategoryDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            for (_ in 0 until rowCount) {
                 addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
             }
         }

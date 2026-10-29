@@ -79,8 +79,6 @@ class ContributionsFragmentUnitTests {
     @Mock
     private lateinit var notificationController: NotificationController
 
-    @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
 
     @Mock
     private lateinit var notificationCount: TextView

@@ -72,8 +72,6 @@ class MainActivityUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-    @Mock
-    private lateinit var defaultKvStore: JsonKvStore
 
     @Mock
     private lateinit var bundle: Bundle

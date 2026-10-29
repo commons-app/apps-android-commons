@@ -22,11 +22,7 @@ class RadioGroupHelperUnitTest {
     @Mock
     private lateinit var activity: Activity
 
-    @Mock
-    private lateinit var view: View
 
-    @Mock
-    private lateinit var compoundButton: CompoundButton
 
     @Before
     fun setUp() {

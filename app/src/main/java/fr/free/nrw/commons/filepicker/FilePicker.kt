@@ -27,7 +27,6 @@ import java.io.FileOutputStream
 object FilePicker : Constants {
 
     private const val KEY_PHOTO_URI = "photo_uri"
-    private const val KEY_VIDEO_URI = "video_uri"
     private const val KEY_LAST_CAMERA_PHOTO = "last_photo"
     private const val KEY_TYPE = "type"
 

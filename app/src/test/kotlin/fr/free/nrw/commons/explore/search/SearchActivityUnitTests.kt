@@ -58,8 +58,6 @@ class SearchActivityUnitTests {
     @Mock
     private lateinit var recentSearchesFragment: RecentSearchesFragment
 
-    @Mock
-    private lateinit var supportFragmentManager: FragmentManager
 
     @Mock
     private lateinit var searchDepictionsFragment: SearchDepictionsFragment

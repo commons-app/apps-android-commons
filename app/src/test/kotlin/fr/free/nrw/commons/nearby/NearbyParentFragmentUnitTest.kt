@@ -70,8 +70,6 @@ class NearbyParentFragmentUnitTest {
     @Mock
     private lateinit var view: View
 
-    @Mock
-    private lateinit var ivToggleChips: AppCompatImageView
 
     @Mock
     private lateinit var configuration: Configuration
@@ -98,17 +96,9 @@ class NearbyParentFragmentUnitTest {
     @Mock
     private lateinit var fab: FloatingActionButton
 
-    @Mock
-    private lateinit var bottomSheetDetails: View
 
-    @Mock
-    private lateinit var linearLayout: LinearLayout
 
-    @Mock
-    private lateinit var textView: TextView
 
-    @Mock
-    private lateinit var imageView: ImageView
 
     @Mock
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao

@@ -61,8 +61,6 @@ class ImageLoaderTest {
     @Mock
     private lateinit var mediaClient: MediaClient
 
-    @Mock
-    private lateinit var single: Single<Boolean>
 
     @Mock
     private lateinit var fileProcessor: FileProcessor
