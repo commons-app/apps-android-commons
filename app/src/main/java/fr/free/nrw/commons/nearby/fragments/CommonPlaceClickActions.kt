@@ -34,7 +34,9 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+                    Timber.d(
+                        "Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}",
+                    )
                     storeSharedPrefs(place)
                     contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
@@ -74,11 +76,14 @@ class CommonPlaceClickActions
             }
 
         fun onGalleryClicked(): (Place, ActivityResultLauncher<Intent>) -> Unit =
-            {place, galleryPickLauncherForResult ->
+            { place, galleryPickLauncherForResult ->
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    Timber.d(
+                        "Gallery button tapped. Image title: ${place.getName()}" +
+                            "Image desc: ${place.getLongDescription()}",
+                    )
                     storeSharedPrefs(place)
                     contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
@@ -130,7 +135,7 @@ class CommonPlaceClickActions
                 .Builder(activity)
                 .setMessage(R.string.login_alert_message)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel){_,_ -> }
+                .setNegativeButton(R.string.cancel) { _, _ -> }
                 .setPositiveButton(R.string.login) { dialog, which ->
                     setPositiveButton()
                 }.show()

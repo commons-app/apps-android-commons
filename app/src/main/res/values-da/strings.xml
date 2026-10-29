@@ -280,6 +280,11 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nominer til sletning</string>
   <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
+  <string name="file_deleted_from_commons">Denne fil blev slettet fra Commons.</string>
+  <string name="contribution_deleted">Slettet</string>
+  <string name="deleted_file_activity_title">Fil slettet</string>
+  <string name="deleted_file_view_page">Se filsiden</string>
+  <string name="deleted_file_view_discussion">Læs diskussionen om sletning</string>
   <string name="nominated_see_more">Se webstedet for information</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log ind</string>
@@ -866,4 +871,12 @@
   <string name="error_applying_blur">Fejl ved anvendelse af sløring</string>
   <string name="failed_to_apply_crop">Kunne ikke anvende beskæring</string>
   <string name="failed_to_save_image">Kunne ikke gemme billede.</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (lyd)</string>
+  <string name="unsupported_format_title">Ikke-understøttet format</string>
+  <string name="unsupported_format_desc">De valgte filer kunne ikke åbnes. Wikimedia Commons kræver følgende formater:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Ikke-understøttede filer sprunget over</string>
+  <string name="unsupported_files_skipped_desc">Nogle filer blev sprunget over på grund af et ikke-understøttet format. Appen vil fortsætte med at uploade resterende filer, der matcher følgende understøttede formater:\n\n %s</string>
 </resources>

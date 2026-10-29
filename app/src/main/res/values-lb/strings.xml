@@ -252,6 +252,8 @@
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Virschloe fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
+  <string name="contribution_deleted">Geläscht</string>
+  <string name="deleted_file_activity_title">Fichier geläscht</string>
   <string name="nominated_see_more">Kuckt d\'Internetsäit fir Detailer</string>
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
@@ -721,4 +723,5 @@
   <string name="license_cc_by_description">Attribution. Anerer kënnen d\'Wierk fräi deelen an upassen, soulaang se Iech als Auteur uginn.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Anerer kënnen d\'Wierk deelen an adaptéieren, mee se mussen Iech als Auteur nennen an déi selwecht Lizenz benotzen.</string>
   <string name="failed_to_save_image">D\'Bild konnt net gespäichert ginn</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
 </resources>

@@ -52,7 +52,7 @@ class ContributionBoundaryCallback
          * @param onRefreshFinish callback to invoke when operations finishes
          * with either error or success.
          */
-        fun refreshList(onRefreshFinish: () -> Unit = {}){
+        fun refreshList(onRefreshFinish: () -> Unit = {}) {
             if (sessionManager.userName != null) {
                 mediaClient.resetUserNameContinuation(sessionManager.userName!!)
             }
@@ -78,7 +78,7 @@ class ContributionBoundaryCallback
                             }.subscribeOn(ioThreadScheduler)
                             .subscribe({ list ->
                                 saveContributionsToDB(list, onRefreshFinish)
-                            },{ error ->
+                            }, { error ->
                                 onRefreshFinish()
                                 Timber.e(
                                     "Failed to fetch contributions: %s",
@@ -100,7 +100,10 @@ class ContributionBoundaryCallback
          *
          * @param onRefreshFinish callback to invoke when successfully saved to DB.
          */
-        private fun saveContributionsToDB(contributions: List<Contribution>, onRefreshFinish: () -> Unit) {
+        private fun saveContributionsToDB(
+            contributions: List<Contribution>,
+            onRefreshFinish: () -> Unit,
+        ) {
             compositeDisposable.add(
                 repository
                     .save(contributions)

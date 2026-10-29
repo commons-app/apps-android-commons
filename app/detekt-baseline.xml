@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
@@ -794,7 +794,7 @@
     <ID>MaxLineLength:MediaDetailFragment.kt$MediaDetailFragment$requireView().viewTreeObserver.removeGlobalOnLayoutListener(layoutListener)</ID>
     <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated)."</ID>
     <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.)."</ID>
-    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n"</ID>
+    <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$"|Other fields = {{Credit line |Author = ┬⌐ [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n"</ID>
     <ID>MaxLineLength:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling&lt;br/&gt;\n{{On Wikidata|Q17549757}}")</ID>
     <ID>MaxLineLength:MediaDetailInterface.kt$MediaDetailInterface$@GET(WikidataConstants.MW_API_PREFIX + "action=query&amp;prop=revisions&amp;rvprop=content|timestamp&amp;rvlimit=1&amp;converttitles=")</ID>
     <ID>MaxLineLength:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$// Enable default set of actions, then re-enable different set of actions only if it is a failed contrib</ID>

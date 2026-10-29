@@ -1,18 +1,17 @@
 package fr.free.nrw.commons.location
 
-import org.junit.Before
-import org.junit.Test
-import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.not
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Before
+import org.junit.Test
 
 class LatLngTest {
     private lateinit var latLng1: LatLng
     private lateinit var latLng2: LatLng
 
     @Before
-    fun setup()= Unit
-
+    fun setup() = Unit
 
     @Test
     fun testConstructorSmallLongitude() {

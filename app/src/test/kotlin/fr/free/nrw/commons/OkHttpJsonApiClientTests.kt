@@ -248,6 +248,9 @@ class OkHttpJsonApiClientTests {
             return BufferedReader(InputStreamReader(inputStream)).use { it.readText() }
         }
         //throws an exception with the correct expected path
-        throw IllegalArgumentException("Resource $fileName not found. Please ensure the file is located in app/src/test/resources/raw/")
+        throw IllegalArgumentException(
+            "Resource $fileName not found. Please ensure the file is located " +
+                "in app/src/test/resources/raw/",
+        )
     }
 }

@@ -14,12 +14,13 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardList.Companion.DIFF_CALLBACK
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter.ListViewHolder
 
-
 /**
  * This class extends RecyclerView.Adapter and creates the List section of the leaderboard
  */
 class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>(DIFF_CALLBACK) {
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ListViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         var rank: TextView? = itemView.findViewById(R.id.user_rank)
         var avatar: SimpleDraweeView? = itemView.findViewById(R.id.user_avatar)
         var username: TextView? = itemView.findViewById(R.id.user_name)
@@ -32,10 +33,14 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
      * @param viewType
      * @return
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder =
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ListViewHolder =
         ListViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.leaderboard_list_element, parent, false)
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.leaderboard_list_element, parent, false),
         )
 
     /**
@@ -43,7 +48,10 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
      * @param holder
      * @param position
      */
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) = with (holder) {
+    override fun onBindViewHolder(
+        holder: ListViewHolder,
+        position: Int,
+    ) = with(holder) {
         val item = getItem(position)!!
 
         rank?.text = item.rank.toString()
@@ -58,7 +66,7 @@ class LeaderboardListAdapter : PagedListAdapter<LeaderboardList, ListViewHolder>
             if (view.context is ProfileActivity) {
                 ((view.context) as Activity).finish()
             }
-            ProfileActivity.startYourself(view.context, item.username?:"", true)
+            ProfileActivity.startYourself(view.context, item.username ?: "", true)
         }
     }
 }

@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
@@ -55,17 +54,20 @@ class UploadProgressActivity : BaseActivity() {
                     positionOffsetPixels: Int,
                 ) = Unit
 
-
                 override fun onPageSelected(position: Int) {
                     updateMenuItems(position)
                     binding.uploadProgressViewPager.canScroll = (position != 2)
                 }
 
                 override fun onPageScrollStateChanged(state: Int) = Unit
-
             },
         )
         setTabs()
+
+        val targetTab = intent.getIntExtra(EXTRA_TARGET_TAB, 0)
+        if (targetTab != 0) {
+            binding.uploadProgressViewPager.currentItem = targetTab
+        }
     }
 
     /**
@@ -79,7 +81,7 @@ class UploadProgressActivity : BaseActivity() {
 
         viewPagerAdapter!!.setTabs(
             R.string.pending to pendingUploadsFragment!!,
-            R.string.failed to failedUploadsFragment!!
+            R.string.failed to failedUploadsFragment!!,
         )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
@@ -87,7 +89,7 @@ class UploadProgressActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_uploads, menu)
         this.menu = menu
-        updateMenuItems(0)
+        updateMenuItems(binding.uploadProgressViewPager.currentItem)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -207,5 +209,10 @@ class UploadProgressActivity : BaseActivity() {
     fun setErrorIconsVisibility(visible: Boolean) {
         isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
+    }
+
+    companion object {
+        const val EXTRA_TARGET_TAB = "upload_target_tab"
+        const val TAB_FAILED = 1
     }
 }

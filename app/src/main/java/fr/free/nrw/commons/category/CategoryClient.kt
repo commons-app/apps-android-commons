@@ -25,7 +25,8 @@ class CategoryClient
          *
          * @param filter    The string to be searched
          * @param itemLimit How many results are returned
-         * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
+         * @param offset Starts returning items from the nth result. If offset is 9, the response starts with the 9th
+         * item of the search result
          * @return
          */
         @JvmOverloads
@@ -40,7 +41,8 @@ class CategoryClient
          *
          * @param prefix    The prefix to be searched
          * @param itemLimit How many results are returned
-         * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
+         * @param offset Starts returning items from the nth result. If offset is 9, the response starts with the 9th
+         * item of the search result
          * @return
          */
         @JvmOverloads
@@ -91,7 +93,7 @@ class CategoryClient
         ): Single<List<CategoryItem>> =
             responseMapper(
                 categoryInterface.getCategoriesByTitles(
-                    "File:${image}",
+                    "File:$image",
                     itemLimit,
                 ),
             )
@@ -101,7 +103,8 @@ class CategoryClient
          * It uses the generator query API to get the subcategories in a category, 500 at a time.
          *
          * @param categoryName Category name as defined on commons
-         * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
+         * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is
+         * emitted.
          */
         fun getSubCategoryList(categoryName: String): Single<List<CategoryItem>> =
             continuationRequest(SUB_CATEGORY_CONTINUATION_PREFIX, categoryName) {

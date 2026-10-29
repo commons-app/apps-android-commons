@@ -1,6 +1,10 @@
 package fr.free.nrw.commons.utils
 
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
@@ -40,8 +44,36 @@ class FileUtilsTest {
         assertEquals(
             "96e733a3e59261c0621ba99be5bd10bb21abe53e",
             fileUtilsWrapper.getSHA1(
-                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=".byteInputStream(),
+                (
+                    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQV" +
+                        "R42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+                ).byteInputStream(),
             ),
         )
+    }
+
+    @Test
+    fun isSupportedFileTypeAcceptsHeic() {
+        assertEquals(true, isSupportedFileType("image/heic"))
+    }
+
+    @Test
+    fun isSupportedFileTypeAcceptsHeif() {
+        assertEquals(true, isSupportedFileType("image/heif"))
+    }
+
+    @Test
+    fun isSupportedFileTypeRejectsRaw() {
+        assertEquals(false, isSupportedFileType("image/x-adobe-dng"))
+    }
+
+    private fun isSupportedFileType(mimeType: String): Boolean {
+        val uri = mock<Uri>()
+        whenever(uri.scheme).thenReturn(ContentResolver.SCHEME_CONTENT)
+        val contentResolver = mock<ContentResolver>()
+        whenever(contentResolver.getType(uri)).thenReturn(mimeType)
+        val context = mock<Context>()
+        whenever(context.contentResolver).thenReturn(contentResolver)
+        return FileUtils.isSupportedFileType(context, uri)
     }
 }
