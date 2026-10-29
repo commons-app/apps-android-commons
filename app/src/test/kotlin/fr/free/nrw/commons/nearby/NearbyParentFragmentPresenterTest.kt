@@ -4,12 +4,13 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import io.reactivex.Completable
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -19,9 +20,14 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
+import org.mockito.Mockito.anyLong
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.util.Collections
+import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
 /**
@@ -474,49 +480,34 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test that a place cached more than 5 days ago is shown from the cache and also
-     * fetched again, so that changes on Wikidata replace the outdated details.
+     * Test that places cached more than 5 days ago are removed when it was not done today yet
      */
     @Test
-    fun testLoadCachedPlacesFetchesOutdatedCachedPlacesAgain() =
-        runBlocking {
-            val cachedPlace = Place("en", "Cached place", null, "", null, "", null, "", true, "Q1")
-            cachedPlace.cachedAt = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(6)
-            whenever(placesRepository.fetchPlace("Q1")).thenReturn(cachedPlace)
-            whenever(bookmarkLocationsDao.findBookmarkLocation("Cached place")).thenReturn(false)
-            val updatedGroups =
-                mutableListOf(
-                    MarkerPlaceGroup(false, Place().apply { entityID = "Q1" }),
-                    MarkerPlaceGroup(false, Place().apply { entityID = "Q2" }),
-                )
-            val indicesToUpdate = mutableListOf<Int>()
+    fun testRemoveOldCachedPlacesWhenNotDoneToday() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong())).thenReturn(Completable.complete())
 
-            nearbyPresenter.loadCachedPlaces(updatedGroups, indicesToUpdate)
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
 
-            assertEquals("Cached place", updatedGroups[0].place.name)
-            assertEquals(listOf(0, 1), indicesToUpdate)
-        }
+        verify(placesRepository).removePlacesCachedBefore(anyLong())
+        verify(applicationKvStore).putLong(anyString(), anyLong())
+    }
 
     /**
-     * Test that a place cached recently is shown from the cache without being fetched again
+     * Test that old cached places are not removed again on the same day
      */
     @Test
-    fun testLoadCachedPlacesDoesNotFetchRecentlyCachedPlaces() =
-        runBlocking {
-            val cachedPlace = Place("en", "Cached place", null, "", null, "", null, "", true, "Q1")
-            cachedPlace.cachedAt = System.currentTimeMillis()
-            whenever(placesRepository.fetchPlace("Q1")).thenReturn(cachedPlace)
-            whenever(bookmarkLocationsDao.findBookmarkLocation("Cached place")).thenReturn(false)
-            val updatedGroups =
-                mutableListOf(
-                    MarkerPlaceGroup(false, Place().apply { entityID = "Q1" }),
-                    MarkerPlaceGroup(false, Place().apply { entityID = "Q2" }),
-                )
-            val indicesToUpdate = mutableListOf<Int>()
+    fun testRemoveOldCachedPlacesOnlyOnceADay() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(today)
 
-            nearbyPresenter.loadCachedPlaces(updatedGroups, indicesToUpdate)
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
 
-            assertEquals("Cached place", updatedGroups[0].place.name)
-            assertEquals(listOf(1), indicesToUpdate)
-        }
+        verify(placesRepository, never()).removePlacesCachedBefore(anyLong())
+    }
 }

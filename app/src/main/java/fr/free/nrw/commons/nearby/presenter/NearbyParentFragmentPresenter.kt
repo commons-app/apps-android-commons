@@ -33,6 +33,7 @@ import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.util.TimeZone
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
 
@@ -339,16 +340,34 @@ class NearbyParentFragmentPresenter(
     }
 
     /**
+     * Removes the places cached more than 5 days ago, at most once a day, so that the cache
+     * does not keep growing with places that are not shown anymore.
+     *
+     * @param applicationKvStore Stores the day of the last removal.
+     */
+    fun removeOldCachedPlaces(applicationKvStore: JsonKvStore) {
+        val now = System.currentTimeMillis()
+        // Count days in the phone's time zone, so that a new day starts at local midnight
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        if (applicationKvStore.getLong(LAST_CACHED_PLACES_REMOVAL_DAY, -1L) == today) {
+            return
+        }
+        applicationKvStore.putLong(LAST_CACHED_PLACES_REMOVAL_DAY, today)
+        placesRepository
+            .removePlacesCachedBefore(now - CACHED_PLACE_MAX_AGE_MS)
+            .subscribe({}, { throwable -> Timber.e(throwable) })
+    }
+
+    /**
      * Iterates through MarkerPlaceGroups and attempts to load the places from the local
      * Place cache/repository. If a Place is in the cache, data from the Place is set into the
-     * associated MarkerPlaceGroup. If a place is not in the cache, or was cached more than
-     * 5 days ago, its index is added to the indicesToUpdate list so it is fetched from Wikidata.
+     * associated MarkerPlaceGroup. Else, the index is added to the indicesToUpdate list.
      *
      * @param updatedGroups The MarkerPlaceGroups that contain Place entity IDs used to search the
      * local cache for more information about the Place.
      *
      * @param indicesToUpdate The list of indices in updatedGroups where the associated Place
-     * was not stored in the local cache, or is outdated, and will need to be retrieved again.
+     * was not stored in the local cache and will need to be retrieved in some other way.
      */
     suspend fun loadCachedPlaces(
         updatedGroups: MutableList<MarkerPlaceGroup>,
@@ -369,11 +388,6 @@ class NearbyParentFragmentPresenter(
                     longDescription = repoPlace.longDescription ?: ""
                     language = repoPlace.language
                     siteLinks = repoPlace.siteLinks
-                }
-                // Fetch the details again when they were cached long ago, so that
-                // changes on Wikidata are shown
-                if (System.currentTimeMillis() - repoPlace.cachedAt > CACHED_PLACE_MAX_AGE_MS) {
-                    indicesToUpdate.add(i)
                 }
             } else {
                 indicesToUpdate.add(i)
@@ -886,8 +900,11 @@ class NearbyParentFragmentPresenter(
         private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
         private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
 
-        // Cached place details older than this are fetched again
+        // Cached places older than this are removed from the cache once a day
         private val CACHED_PLACE_MAX_AGE_MS = TimeUnit.DAYS.toMillis(5)
+
+        // Key of the day when old cached places were last removed
+        private const val LAST_CACHED_PLACES_REMOVAL_DAY = "last_cached_places_removal_day"
         private val DUMMY =
             Proxy.newProxyInstance(
                 NearbyParentFragmentContract.View::class.java.getClassLoader(),

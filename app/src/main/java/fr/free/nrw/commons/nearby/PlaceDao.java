@@ -73,4 +73,12 @@ public abstract class PlaceDao {
     public Completable deleteAll() {
         return Completable.fromAction(this::deleteAllSynchronous);
     }
+
+    /**
+     * Deletes the places that were cached before the given time.
+     *
+     * @param cachedBefore Places with an older cachedAt time are deleted.
+     */
+    @Query("DELETE FROM place WHERE cachedAt < :cachedBefore")
+    public abstract void deleteCachedBefore(long cachedBefore);
 }
