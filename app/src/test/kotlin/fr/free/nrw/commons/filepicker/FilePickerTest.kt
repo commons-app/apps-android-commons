@@ -94,7 +94,7 @@ class FilePickerTest {
         verify(mockResultLauncher).launch(intentCaptor.capture())
 
         val capturedIntent = intentCaptor.firstValue
-        
+
         assertEquals(MediaStore.ACTION_IMAGE_CAPTURE, capturedIntent.action)
     }
 
@@ -202,7 +202,7 @@ class FilePickerTest {
 
         assertEquals(
             CustomSelectorActivity.Companion::class.java.declaringClass.name,
-            capturedIntent.component?.className
+            capturedIntent.component?.className,
         )
     }
 }
