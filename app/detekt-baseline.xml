@@ -714,9 +714,6 @@
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$8</ID>
     <ID>MagicNumber:WikiSite.kt$WikiSite.Companion$3</ID>
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
-<!--    <ID>NestedBlockDepth:DepictsFragment.kt$DepictsFragment$private fun launchDepictsPicker()</ID>-->
-<!--    <ID>NestedBlockDepth:DownloadReceiver.kt$DownloadReceiver$override fun onReceive(context: Context, intent: Intent)</ID>-->
-<!--    <ID>NestedBlockDepth:ExploreMapFragment.kt$ExploreMapFragment$private fun getOverlay(item: OverlayItem?): Overlay?</ID>-->
     <ID>NestedBlockDepth:FilePicker.kt$FilePicker$@JvmStatic fun onPictureReturnedFromCamera( activityResult: ActivityResult, activity: Activity, callbacks: Callbacks )</ID>
     <ID>NestedBlockDepth:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$override fun onDestroy()</ID>
