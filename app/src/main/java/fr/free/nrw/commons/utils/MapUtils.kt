@@ -11,9 +11,11 @@ object MapUtils {
     const val CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004
     const val NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE"
     const val ZOOM_OUT = 0f
+    private const val DEFAULT_LATITUDE = 51.50550
+    private const val DEFAULT_LONGITUDE = -0.07520
 
     @JvmStatic
-    val defaultLatLng = LatLng(51.50550, -0.07520, 1f)
+    val defaultLatLng = LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE, 1f)
 
     @JvmStatic
     fun registerUnregisterLocationListener(
