@@ -17,23 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
-import java.util.Locale;
 
 public class NearbyFilterSearchRecyclerViewAdapter
-        extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
-        implements Filterable {
+    extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
+    implements Filterable {
 
     private final LayoutInflater inflater;
     private Context context;
-    private ArrayList<Label> labels;
+
+    private final ArrayList<Label> labels;
+
     private ArrayList<Label> displayedLabels;
-    private ArrayList<Label> displayedLabelsFull;
+
     public ArrayList<Label> selectedLabels = new ArrayList<>();
 
     private int state;
-
     private Callback callback;
-
     RecyclerView.SmoothScroller smoothScroller;
 
     public void setCallback(Callback callback) {
@@ -42,15 +41,15 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels, RecyclerView recyclerView) {
         this.context = context;
-        this.labels = labels;
-        this.displayedLabels = labels;
-        displayedLabelsFull = new ArrayList<>(displayedLabels);
-        smoothScroller = new
-                LinearSmoothScroller(context) {
-                    @Override protected int getVerticalSnapPreference() {
-                        return LinearSmoothScroller.SNAP_TO_START;
-                    }
-                };
+        this.labels = new ArrayList<>(labels);
+        displayedLabels = new ArrayList<>(this.labels);
+
+        smoothScroller = new LinearSmoothScroller(context) {
+            @Override
+            protected int getVerticalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+        };
         inflater = LayoutInflater.from(context);
     }
 
@@ -119,17 +118,19 @@ public class NearbyFilterSearchRecyclerViewAdapter
             protected FilterResults performFiltering(CharSequence constraint) {
                 ArrayList<Label> filteredArrayList = new ArrayList<>();
 
-                if (constraint == null) {
-                    filteredArrayList.addAll(displayedLabelsFull);
+                // Handle null or empty search queries by returning the full master list
+                if (constraint == null || constraint.length() == 0) {
+                    filteredArrayList.addAll(labels);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
-                    for (Label label : displayedLabelsFull) {
-                        if (label.getText().toLowerCase().contains(filterPattern)) {
+                    for (Label label : labels) { // Iterate over the master list
+                        // Added null-safety check for label.getText() to prevent potential NPEs
+                        if (label.getText() != null && label.getText().toLowerCase().contains(filterPattern)) {
                             filteredArrayList.add(label);
                         }
                     }
-
                 }
+
                 FilterResults results = new FilterResults();
                 results.values = filteredArrayList;
                 return results;
@@ -137,8 +138,10 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                displayedLabels.clear();
-                displayedLabels.addAll((ArrayList) results.values);
+                displayedLabels.clear(); // Safe to clear, this no longer destroys the master list
+                @SuppressWarnings("unchecked")
+                ArrayList<Label> filteredList = (ArrayList<Label>) results.values;
+                displayedLabels.addAll(filteredList);
                 notifyDataSetChanged();
             }
         };
@@ -146,6 +149,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     public void setRecyclerViewAdapterItemsGreyedOut() {
         state = CheckBoxTriStates.UNCHECKED;
+        // Now correctly iterates over ALL labels, even if a search filter is currently active
         for (Label label : labels) {
             label.setSelected(false);
             selectedLabels.remove(label);
@@ -166,13 +170,9 @@ public class NearbyFilterSearchRecyclerViewAdapter
         notifyDataSetChanged();
     }
 
-    public interface  Callback {
-
+    public interface Callback {
         void setCheckboxUnknown();
-
         void filterByMarkerType(ArrayList<Label> selectedLabels, int i, boolean b, boolean b1);
-
         boolean isDarkTheme();
     }
-
 }
