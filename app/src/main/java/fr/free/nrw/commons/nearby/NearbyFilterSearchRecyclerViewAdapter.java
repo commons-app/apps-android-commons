@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import fr.free.nrw.commons.R;
 
 public class NearbyFilterSearchRecyclerViewAdapter
-    extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
-    implements Filterable {
+        extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
+        implements Filterable {
 
     private final LayoutInflater inflater;
     private Context context;
@@ -32,7 +32,9 @@ public class NearbyFilterSearchRecyclerViewAdapter
     public ArrayList<Label> selectedLabels = new ArrayList<>();
 
     private int state;
+
     private Callback callback;
+
     RecyclerView.SmoothScroller smoothScroller;
 
     public void setCallback(Callback callback) {
@@ -118,13 +120,11 @@ public class NearbyFilterSearchRecyclerViewAdapter
             protected FilterResults performFiltering(CharSequence constraint) {
                 ArrayList<Label> filteredArrayList = new ArrayList<>();
 
-                // Handle null or empty search queries by returning the full master list
                 if (constraint == null || constraint.length() == 0) {
                     filteredArrayList.addAll(labels);
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
                     for (Label label : labels) { // Iterate over the master list
-                        // Added null-safety check for label.getText() to prevent potential NPEs
                         if (label.getText() != null && label.getText().toLowerCase().contains(filterPattern)) {
                             filteredArrayList.add(label);
                         }
@@ -149,7 +149,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     public void setRecyclerViewAdapterItemsGreyedOut() {
         state = CheckBoxTriStates.UNCHECKED;
-        // Now correctly iterates over ALL labels, even if a search filter is currently active
+
         for (Label label : labels) {
             label.setSelected(false);
             selectedLabels.remove(label);
