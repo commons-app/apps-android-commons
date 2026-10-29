@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -84,6 +85,10 @@ private const val TRANSCODE_SRC_240 =
 private const val TRANSCODE_SRC_480 =
     "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
         "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.480p.vp9.webm"
+
+private const val TRANSCODE_SRC_720 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
+        "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.720p.vp9.webm"
 
 private const val AUDIO_ORIGINAL_SRC =
     "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg"
@@ -900,15 +905,51 @@ class MediaDetailFragmentUnitTests {
         verify(mockSharedPreferencesEditor, never()).putInt(anyString(), anyInt())
     }
 
+    private fun displayMetrics(widthPixels: Int, heightPixels: Int): DisplayMetrics =
+        DisplayMetrics().apply {
+            this.widthPixels = widthPixels
+            this.heightPixels = heightPixels
+        }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAutoVideoQualityCapsAtTheShorterScreenSide() {
+        Assert.assertEquals(1080, maxPlaybackResolution("auto", displayMetrics(1080, 2400)))
+        Assert.assertEquals(1080, maxPlaybackResolution("auto", displayMetrics(2400, 1080)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHigherVideoQualityHasNoCap() {
+        Assert.assertEquals(Int.MAX_VALUE, maxPlaybackResolution("higher", displayMetrics(1080, 2400)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDataSaverVideoQualityCapsAtZero() {
+        Assert.assertEquals(0, maxPlaybackResolution("data_saver", displayMetrics(1080, 2400)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUnknownVideoQualityBehavesLikeAuto() {
+        Assert.assertEquals(1080, maxPlaybackResolution("bogus", displayMetrics(1080, 2400)))
+        Assert.assertEquals(1080, maxPlaybackResolution(null, displayMetrics(1080, 2400)))
+    }
+
     private fun playbackSource(
         src: String,
         transcodeKey: String?,
         bandwidth: Int = 0,
+        height: Int = 0,
+        mediaType: MediaType = MediaType.VIDEO,
     ): MediaDerivative {
         val playbackSource = mock(MediaDerivative::class.java)
         whenever(playbackSource.src()).thenReturn(src)
         whenever(playbackSource.transcodeKey()).thenReturn(transcodeKey)
         whenever(playbackSource.bandwidth()).thenReturn(bandwidth)
+        whenever(playbackSource.height()).thenReturn(height)
+        whenever(playbackSource.mediaType()).thenReturn(mediaType)
         return playbackSource
     }
 
@@ -918,7 +959,7 @@ class MediaDetailFragmentUnitTests {
         val original = playbackSource(ORIGINAL_SRC, null)
         val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
 
-        val preferred = preferredMediaPlaybackSource(listOf(original, transcode))
+        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 1080)
 
         Assert.assertEquals(transcode.src(), preferred?.src())
     }
@@ -929,9 +970,69 @@ class MediaDetailFragmentUnitTests {
         val original = playbackSource(ORIGINAL_SRC, null)
         val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
 
-        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), resume = original)
+        val preferred =
+            preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 1080, resume = original)
 
         Assert.assertEquals(original.src(), preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testLargestTranscodeWithinTheCapIsPreferred() {
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        val transcode720 = playbackSource(TRANSCODE_SRC_720, "720p.vp9.webm")
+
+        val preferred =
+            preferredMediaPlaybackSource(listOf(transcode240, transcode480, transcode720), maxResolution = 480)
+
+        Assert.assertEquals(TRANSCODE_SRC_480, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSmallestTranscodeIsPreferredWhenNoneFitsTheCap() {
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+
+        val preferred = preferredMediaPlaybackSource(listOf(transcode480, transcode240), maxResolution = 0)
+
+        Assert.assertEquals(TRANSCODE_SRC_240, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHighestTranscodeIsPreferredWithoutACap() {
+        val original = playbackSource(ORIGINAL_SRC, null)
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode720 = playbackSource(TRANSCODE_SRC_720, "720p.vp9.webm")
+
+        val preferred =
+            preferredMediaPlaybackSource(listOf(original, transcode240, transcode720), maxResolution = Int.MAX_VALUE)
+
+        Assert.assertEquals(TRANSCODE_SRC_720, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAudioTranscodeIsPreferredRegardlessOfTheCap() {
+        val original = playbackSource(AUDIO_ORIGINAL_SRC, null, mediaType = MediaType.AUDIO)
+        val transcode = playbackSource(AUDIO_TRANSCODE_SRC_MP3, "mp3", mediaType = MediaType.AUDIO)
+
+        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 0)
+
+        Assert.assertEquals(AUDIO_TRANSCODE_SRC_MP3, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testTranscodeHeightIsUsedWhenTheKeyHasNoResolution() {
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "vp9.webm", height = 480)
+
+        val preferred = preferredMediaPlaybackSource(listOf(transcode240, transcode480), maxResolution = 480)
+
+        Assert.assertEquals(TRANSCODE_SRC_480, preferred?.src())
     }
 
     @Test
@@ -947,7 +1048,7 @@ class MediaDetailFragmentUnitTests {
         player.setSources(listOf(transcode240, transcode480), emptyList())
 
         Assert.assertNull(player.selected)
-        Assert.assertEquals(TRANSCODE_SRC_480, player.preferredSource()?.src())
+        Assert.assertEquals(TRANSCODE_SRC_480, player.preferredSource(1080)?.src())
     }
 
     @Test

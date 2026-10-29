@@ -164,6 +164,10 @@
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>
   <string name="preference_theme">Settings menu item.</string>
+  <string name="video_quality">Settings menu item for choosing which video transcode to play.</string>
+  <string name="video_quality_auto">Video quality option that picks a transcode matching the screen size.</string>
+  <string name="video_quality_higher">Video quality option that picks the highest-resolution transcode.</string>
+  <string name="video_quality_data_saver">Video quality option that picks the lowest-resolution transcode.</string>
   <string name="license_name_cc_by_sa_four">A license name.</string>
   <string name="license_name_cc_by_four">A license name.</string>
   <string name="license_name_cc_by_sa"> Attribution-Sharelike License display name.</string>

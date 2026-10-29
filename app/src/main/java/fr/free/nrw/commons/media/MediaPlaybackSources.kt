@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.media
 
 import android.content.Context
+import android.util.DisplayMetrics
 import androidx.media3.common.Format
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
@@ -8,25 +9,59 @@ import androidx.media3.exoplayer.mediacodec.MediaCodecUtil
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
+import kotlin.math.min
+
+/**
+ * Returns the transcode resolution cap for a video quality preference.
+ *
+ * 'higher' has no cap and 'data_saver' allows nothing, so the lowest
+ * transcode is used. Any other value caps at the shorter screen side.
+ */
+fun maxPlaybackResolution(videoQuality: String?, displayMetrics: DisplayMetrics): Int =
+    when (videoQuality) {
+        "higher" -> Int.MAX_VALUE
+        "data_saver" -> 0
+        else -> min(displayMetrics.widthPixels, displayMetrics.heightPixels)
+    }
 
 /**
  * Returns the preferred source in the list of media derivatives.
  *
- * A source matching 'resume' wins, then the first transcode, then the
- * first source.
- *
- * TODO: This should be based on the screen resolution or user
- * preference instead.
+ * A source matching 'resume' wins. Video then takes the transcode with
+ * the largest resolution at or below 'maxResolution', or the smallest
+ * transcode when none fits. Audio takes the first transcode. Without
+ * any transcode the first source is used.
  */
 fun preferredMediaPlaybackSource(
     playbackSources: List<MediaDerivative>,
+    maxResolution: Int,
     resume: MediaDerivative? = null,
-): MediaDerivative? =
-    resume?.let { resumed ->
-        playbackSources.firstOrNull { it.src() == resumed.src() }
+): MediaDerivative? {
+    if (resume != null) {
+        val resumed = playbackSources.firstOrNull { it.src() == resume.src() }
+        if (resumed != null) {
+            return resumed
+        }
     }
-        ?: playbackSources.firstOrNull { it.transcodeKey().isNullOrBlank().not() }
-        ?: playbackSources.firstOrNull()
+
+    val transcodes = playbackSources.filter { !it.transcodeKey().isNullOrBlank() }
+    val firstTranscode = transcodes.firstOrNull() ?: return playbackSources.firstOrNull()
+    if (firstTranscode.mediaType() != MediaType.VIDEO) {
+        return firstTranscode
+    }
+
+    return transcodes
+        .filter { it.transcodeResolution() <= maxResolution }
+        .maxByOrNull { it.transcodeResolution() }
+        ?: transcodes.minByOrNull { it.transcodeResolution() }
+}
+
+/**
+ * Returns the resolution named by the transcode key, such as 480 for
+ * '480p.vp9.webm', falling back to the height.
+ */
+private fun MediaDerivative.transcodeResolution(): Int =
+    transcodeKey()?.substringBefore('p')?.toIntOrNull() ?: height()
 
 /**
  * Returns supported playback sources with transcodes before originals.

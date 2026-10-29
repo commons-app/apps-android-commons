@@ -850,7 +850,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                     { (playbackSources, timedTextTracks) ->
                         mediaDetailPlayer.setSources(playbackSources, timedTextTracks)
                         updateSubtitleButtonVisibility()
-                        mediaDetailPlayer.preferredSource()?.let(::playMedia)
+                        val maxResolution = maxPlaybackResolution(
+                            applicationKvStore.getString(Prefs.VIDEO_QUALITY, "auto"),
+                            resources.displayMetrics,
+                        )
+                        mediaDetailPlayer.preferredSource(maxResolution)?.let(::playMedia)
                             ?: handleMediaUnavailable()
                     },
                     { Timber.e(it); handleMediaUnavailable() },

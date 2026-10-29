@@ -51,7 +51,8 @@ class MediaDetailPlayer(
     /**
      * Returns the source to play, preferring the one interrupted by an error.
      */
-    fun preferredSource(): MediaDerivative? = preferredMediaPlaybackSource(sources, resumeSource)
+    fun preferredSource(maxResolution: Int): MediaDerivative? =
+        preferredMediaPlaybackSource(sources, maxResolution, resumeSource)
 
     /**
      * Plays the source in the given view, creating the player if needed.
