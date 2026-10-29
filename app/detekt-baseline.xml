@@ -84,7 +84,7 @@
     <ID>ForbiddenComment:RequiredFieldsCheckOnReadTypeAdapterFactory.kt$RequiredFieldsCheckOnReadTypeAdapterFactory$* TypeAdapterFactory that provides TypeAdapters that return null values for objects that are * missing fields annotated with @Required. * * BEWARE: This means that a List or other Collection of objects that have @Required fields can * contain null elements after deserialization! * * TODO: Handle null values in lists during deserialization, perhaps with a new @RequiredElements * annotation and another corresponding TypeAdapter(Factory).</ID>
     <ID>ForbiddenComment:ReviewController.kt$ReviewController$// TODO: maybe we can expand this class to include fileName</ID>
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894</ID>
-    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then</ID>
+    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>

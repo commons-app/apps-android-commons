@@ -85,6 +85,8 @@ class UploadWorker(
 
     private val processingUploadsNotificationId = 101
 
+    private val foregroundNotificationId = 1
+
     // Attributes of the current-upload notification
     private var currentNotificationID: Int = -1 // lateinit is not allowed with primitives
     private lateinit var currentNotificationTag: String
@@ -144,8 +146,7 @@ class UploadWorker(
                 processingUploadsNotificationId,
             )
             notificationManager?.notify(
-                currentNotificationTag,
-                currentNotificationID,
+                foregroundNotificationId,
                 currentNotification.build(),
             )
             contribution!!.transferred = transferred
@@ -175,6 +176,7 @@ class UploadWorker(
             .setOnlyAlertOnce(true)
             .setProgress(100, 0, true)
             .setOngoing(true)
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
 
     @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
@@ -274,27 +276,25 @@ class UploadWorker(
     private fun createForegroundInfo(): ForegroundInfo =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ForegroundInfo(
-                1,
+                foregroundNotificationId,
                 createNotificationForForegroundService(),
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
             )
         } else {
             ForegroundInfo(
-                1,
+                foregroundNotificationId,
                 createNotificationForForegroundService(),
             )
         }
 
     override suspend fun getForegroundInfo(): ForegroundInfo = createForegroundInfo()
 
-    private fun createNotificationForForegroundService(): Notification {
-        // TODO: Improve notification for foreground service
-        return getNotificationBuilder(
+    private fun createNotificationForForegroundService(): Notification =
+        getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
         )!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
 
     /**
      * Upload the contribution
@@ -313,8 +313,8 @@ class UploadWorker(
         currentNotificationID =
             (contribution.localUri.toString() + contribution.media.filename).hashCode()
 
-        currentNotification
-        getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
+        currentNotification =
+            getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
         currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_progress_notification_title_start,
@@ -323,8 +323,7 @@ class UploadWorker(
         )
 
         notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
+            foregroundNotificationId,
             currentNotification.build(),
         )
 
