@@ -80,11 +80,48 @@ class CategoriesModelTest {
             categoryTerm,
             CategoriesModel.SEARCH_CATS_LIMIT,
         )
+        verify(categoryClient).searchCategoriesForPrefix(
+            "Tests",
+            CategoriesModel.SEARCH_CATS_LIMIT,
+        )
 
         categoriesModel
             .searchAll(categoryTerm, emptyList(), emptyList())
             .test()
             .assertValues(expectedItems)
+    }
+
+    @Test
+    fun `typed search includes the plural category missing from the singular prefix page`() {
+        whenever(
+            categoryClient.searchCategoriesForPrefix(
+                ArgumentMatchers.eq("Cat"),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt(),
+            ),
+        ).thenReturn(
+            Single.just(
+                listOf(
+                    categoryItem("Cat"),
+                    categoryItem("Cat's Eye Nebula"),
+                ),
+            ),
+        )
+        whenever(
+            categoryClient.searchCategoriesForPrefix(
+                ArgumentMatchers.eq("Cats"),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt(),
+            ),
+        ).thenReturn(Single.just(listOf(categoryItem("Cats"))))
+
+        val names =
+            categoriesModel
+                .searchAll("Cat", emptyList(), emptyList())
+                .blockingFirst()
+                .map { it.name }
+
+        Assert.assertEquals(listOf("Cat", "Cats", "Cat's Eye Nebula"), names)
     }
 
     @Test
