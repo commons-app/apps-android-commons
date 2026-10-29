@@ -937,7 +937,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         AlertDialog.Builder(context)
             .setTitle(R.string.playback_quality)
             .setSingleChoiceItems(
-                mediaDetailPlayer.sources.map { it.qualityLabel(context, media?.mediaType) }.toTypedArray(),
+                mediaDetailPlayer.sources.map { it.qualityLabel(context) }.toTypedArray(),
                 mediaDetailPlayer.sources.indexOf(mediaDetailPlayer.selected),
             ) { dialog, selectedIndex ->
                 playMedia(mediaDetailPlayer.sources[selectedIndex])

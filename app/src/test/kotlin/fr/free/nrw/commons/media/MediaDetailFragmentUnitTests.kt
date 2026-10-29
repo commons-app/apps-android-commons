@@ -1054,32 +1054,33 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testVideoQualityLabelUsesTheTranscodeResolution() {
-        val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode =
+            MediaDerivative(TRANSCODE_SRC_240, "video/webm; codecs=\"vp9, opus\"", transcodeKey = "240p.vp9.webm")
 
-        Assert.assertEquals("240p", transcode.qualityLabel(context, MediaType.VIDEO))
+        Assert.assertEquals("240p", transcode.qualityLabel(context))
     }
 
     @Test
     @Throws(Exception::class)
     fun testVideoQualityLabelNamesTheOriginal() {
-        val original = playbackSource(ORIGINAL_SRC, null)
+        val original = MediaDerivative(ORIGINAL_SRC, "video/webm; codecs=\"vp8, vorbis\"")
 
-        Assert.assertEquals("Original", original.qualityLabel(context, MediaType.VIDEO))
+        Assert.assertEquals("Original", original.qualityLabel(context))
     }
 
     @Test
     @Throws(Exception::class)
     fun testAudioQualityLabelIsRoundedToKbps() {
-        val transcode = playbackSource(AUDIO_TRANSCODE_SRC_MP3, "mp3", bandwidth = 199728)
+        val transcode = MediaDerivative(AUDIO_TRANSCODE_SRC_MP3, "audio/mpeg", bandwidth = 199728, transcodeKey = "mp3")
 
-        Assert.assertEquals("200 kbps", transcode.qualityLabel(context, MediaType.AUDIO))
+        Assert.assertEquals("200 kbps", transcode.qualityLabel(context))
     }
 
     @Test
     @Throws(Exception::class)
     fun testAudioQualityLabelNamesTheOriginal() {
-        val original = playbackSource(AUDIO_ORIGINAL_SRC, null, bandwidth = 106695)
+        val original = MediaDerivative(AUDIO_ORIGINAL_SRC, "audio/ogg; codecs=\"vorbis\"", bandwidth = 106695)
 
-        Assert.assertEquals("107 kbps (Original)", original.qualityLabel(context, MediaType.AUDIO))
+        Assert.assertEquals("107 kbps (Original)", original.qualityLabel(context))
     }
 }

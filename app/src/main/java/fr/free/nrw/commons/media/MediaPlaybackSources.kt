@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.media
 
-import android.content.Context
 import android.util.DisplayMetrics
 import androidx.media3.common.Format
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.mediacodec.MediaCodecUtil
 import fr.free.nrw.commons.MediaType
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
 import kotlin.math.min
 
@@ -100,24 +98,4 @@ fun isMediaPlaybackSupported(playbackSource: MediaDerivative): Boolean {
 
     return MediaCodecUtil.getDecoderInfos(mediaMimeType, false, false)
         .any { it.isFormatSupported(format) }
-}
-
-/**
- * Returns the label shown for this source in the quality selector.
- *
- * Audio sources are labeled by bitrate, video sources by transcode
- * resolution.
- */
-fun MediaDerivative.qualityLabel(context: Context, mediaType: MediaType?): String {
-    val originalLabel = context.getString(R.string.original)
-
-    if (mediaType == MediaType.AUDIO) {
-        val bitrate = "${(bandwidth() + 500) / 1_000} kbps"
-        if (transcodeKey() == null) {
-            return "$bitrate ($originalLabel)"
-        }
-        return bitrate
-    }
-
-    return transcodeKey()?.substringBefore('.') ?: originalLabel
 }

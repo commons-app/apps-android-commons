@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.wikidata.model.gallery
 
+import android.content.Context
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.MediaType
+import fr.free.nrw.commons.R
 
 /**
  * Describes an original or transcoded media playback source returned by MediaWiki.
@@ -39,6 +41,26 @@ class MediaDerivative(
             mediaMimeType().startsWith("audio/", ignoreCase = true) -> MediaType.AUDIO
             else -> MediaType.OTHER
         }
+
+    /**
+     * Returns the label shown for this source in the quality selector.
+     *
+     * Audio sources are labeled by bitrate, video sources by transcode
+     * resolution.
+     */
+    fun qualityLabel(context: Context): String {
+        val originalLabel = context.getString(R.string.original)
+
+        if (mediaType() == MediaType.AUDIO) {
+            val bitrate = "${(bandwidth() + 500) / 1_000} kbps"
+            if (transcodeKey() == null) {
+                return "$bitrate ($originalLabel)"
+            }
+            return bitrate
+        }
+
+        return transcodeKey()?.substringBefore('.') ?: originalLabel
+    }
 
     /**
      * Returns the MIME type without parameters such as codec information.
