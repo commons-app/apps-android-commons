@@ -15,11 +15,14 @@ import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.StatementPartial
 import kotlinx.parcelize.Parcelize
 import java.math.BigInteger
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
-const val THUMB_IMAGE_SIZE = "120px"
+const val THUMB_IMAGE_SIZE = "70"
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -69,7 +72,19 @@ data class DepictedItem constructor(
     )
 
     val primaryImage: String?
-        get() = imageUrl?.split('-')?.lastOrNull()
+        get() =
+            imageUrl
+                ?.substringBefore("?")
+                ?.let { url ->
+                    if ("/Special:FilePath/" in url) {
+                        URLDecoder.decode(
+                            url.substringAfter("/Special:FilePath/"),
+                            StandardCharsets.UTF_8.name(),
+                        )
+                    } else {
+                        url.substringAfterLast('/').substringAfter('-')
+                    }
+                }
 
     override fun equals(other: Any?) =
         when {
@@ -104,9 +119,8 @@ private fun getImageUrl(
         .substringAfter(":")
         .replace(" ", "_")
         .let {
-            val md5Hash = getMd5(it)
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
-                "${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"
+            val encodedFileName = URLEncoder.encode(it, StandardCharsets.UTF_8.name()).replace("+", "%20")
+            "https://commons.wikimedia.org/wiki/Special:FilePath/$encodedFileName?width=$size"
         }
 
 /**
