@@ -1103,12 +1103,12 @@ class MediaDetailFragment :
                 scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
             } else if (scrollWidth > 0) {
                 val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
-                val params = currentBinding.mediaDetailImageView.layoutParams
+                val params = currentBinding.mediaDetailMediaContainer.layoutParams
                 val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
                 params.width = scrollWidth
                 params.height = height
                 spacerParams.height = height
-                currentBinding.mediaDetailImageView.layoutParams = params
+                currentBinding.mediaDetailMediaContainer.layoutParams = params
                 currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
                 scrollView.visibility = View.VISIBLE
             }
