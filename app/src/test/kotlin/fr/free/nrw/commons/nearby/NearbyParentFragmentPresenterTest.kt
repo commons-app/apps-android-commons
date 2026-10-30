@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby
 
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
@@ -492,7 +493,11 @@ class NearbyParentFragmentPresenterTest {
 
         nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
 
-        verify(placesRepository).removePlacesCachedBefore(anyLong())
+        val after = System.currentTimeMillis()
+        val fiveDays = TimeUnit.DAYS.toMillis(5)
+        val cutoff = argumentCaptor<Long>()
+        verify(placesRepository).removePlacesCachedBefore(cutoff.capture())
+        assertTrue(cutoff.firstValue in (now - fiveDays)..(after - fiveDays))
         verify(applicationKvStore).putLong(anyString(), anyLong())
     }
 
