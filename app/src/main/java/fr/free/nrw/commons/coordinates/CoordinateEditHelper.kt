@@ -15,7 +15,6 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
-import java.util.Objects
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -57,9 +56,9 @@ class CoordinateEditHelper
                 context.getString(R.string.coordinates_edit_helper_make_edit_toast),
             )
             return addCoordinates(media, latitude, longitude, accuracy)
-                ?.flatMapSingle { result ->
+                .flatMapSingle { result ->
                     Single.just(showCoordinatesEditNotification(context, media, coordinatesInfo, result))
-                }?.firstOrError()
+                }.firstOrError()
         }
 
         /**
@@ -75,7 +74,7 @@ class CoordinateEditHelper
             latitude: String,
             longitude: String,
             accuracy: String,
-        ): Observable<Boolean>? {
+        ): Observable<Boolean> {
             Timber.d("thread is coordinates adding %s", Thread.currentThread().name)
             val summary = "Adding Coordinates"
 
@@ -101,9 +100,7 @@ class CoordinateEditHelper
             val editedLocation = buffer.toString()
             val appendText = wikiText?.let { getFormattedWikiText(it, editedLocation) }
 
-            return Objects
-                .requireNonNull(media.filename)
-                ?.let { pageEditClient.edit(it, appendText!!, summary) }
+            return pageEditClient.edit(media.filename!!, appendText!!, summary)
         }
 
         /**
