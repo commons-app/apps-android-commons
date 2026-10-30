@@ -38,23 +38,23 @@ fun preferredMediaPlaybackSource(
     maxResolution: Int,
     resume: MediaDerivative? = null,
 ): MediaDerivative? {
-    if (resume != null) {
-        val resumed = playbackSources.firstOrNull { it.src() == resume.src() }
-        if (resumed != null) {
-            return resumed
-        }
+    val resumed = resume?.let { source -> playbackSources.firstOrNull { it.src() == source.src() } }
+    if (resumed != null) {
+        return resumed
     }
 
     val transcodes = playbackSources.filter { !it.transcodeKey().isNullOrBlank() }
-    val firstTranscode = transcodes.firstOrNull() ?: return playbackSources.firstOrNull()
-    if (firstTranscode.mediaType() != MediaType.VIDEO) {
-        return firstTranscode
-    }
+    val firstTranscode = transcodes.firstOrNull()
 
-    return transcodes
-        .filter { it.transcodeResolution() <= maxResolution }
-        .maxByOrNull { it.transcodeResolution() }
-        ?: transcodes.minByOrNull { it.transcodeResolution() }
+    return when {
+        firstTranscode == null -> playbackSources.firstOrNull()
+        firstTranscode.mediaType() != MediaType.VIDEO -> firstTranscode
+        else ->
+            transcodes
+                .filter { it.transcodeResolution() <= maxResolution }
+                .maxByOrNull { it.transcodeResolution() }
+                ?: transcodes.minByOrNull { it.transcodeResolution() }
+    }
 }
 
 /**

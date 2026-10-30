@@ -3,6 +3,8 @@ package fr.free.nrw.commons.wikidata.model.gallery
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 
+private const val BITS_PER_BYTE = 8
+
 /**
  * Contains the playback sources and subtitle tracks available for a media file.
  */
@@ -41,8 +43,11 @@ class MediaInfo {
      * or MIME type.
      */
     fun originalSource(): MediaDerivative? {
-        val url = url ?: return null
-        val mime = mime ?: return null
+        val url = url
+        val mime = mime
+        if (url == null || mime == null) {
+            return null
+        }
 
         val codecs = originalCodecs()
         val mediaMimeType =
@@ -53,7 +58,7 @@ class MediaInfo {
             }
         val type =
             if (codecs.isEmpty()) mediaMimeType else "$mediaMimeType; codecs=\"${codecs.joinToString(", ")}\""
-        val bandwidth = if (duration > 0) (size * 8 / duration).toInt() else 0
+        val bandwidth = if (duration > 0) (size * BITS_PER_BYTE / duration).toInt() else 0
 
         return MediaDerivative(url, type, width, height, bandwidth)
     }
@@ -68,18 +73,14 @@ class MediaInfo {
         val metadata = metadata ?: return emptyList()
 
         val oggStreams = metadata.entry("streams")?.entries()
-        if (oggStreams != null) {
-            return oggStreams.mapNotNull { stream ->
-                stream
-                    .value()
-                    ?.entries()
-                    ?.entry("type")
-                    ?.string()
-                    ?.let { codecName(it) }
-            }
-        }
-
-        return listOf("video", "audio").mapNotNull { section ->
+        return oggStreams?.mapNotNull { stream ->
+            stream
+                .value()
+                ?.entries()
+                ?.entry("type")
+                ?.string()
+                ?.let { codecName(it) }
+        } ?: listOf("video", "audio").mapNotNull { section ->
             metadata
                 .entry(section)
                 ?.entries()

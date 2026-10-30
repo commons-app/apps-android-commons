@@ -881,9 +881,7 @@ class MediaDetailFragment :
     }
 
     private fun prepareMedia() {
-        val media = media ?: return
-        val title = media.filename ?: return
-
+        val title = media?.filename ?: return
         if (mediaRequestInProgress) {
             return
         }
@@ -892,9 +890,12 @@ class MediaDetailFragment :
         if (mediaDetailPlayer.player != null) {
             showMediaPlayer()
             mediaDetailPlayer.resume()
-            return
+        } else {
+            requestMedia(title)
         }
+    }
 
+    private fun requestMedia(title: String) {
         mediaRequestInProgress = true
         showMediaPoster()
 

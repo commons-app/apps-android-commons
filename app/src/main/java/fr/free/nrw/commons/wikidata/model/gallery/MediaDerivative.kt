@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 
+private const val BITS_PER_KILOBIT = 1_000
+
 /**
  * Describes an original or transcoded media playback source returned by MediaWiki.
  */
@@ -50,16 +52,12 @@ class MediaDerivative(
      */
     fun qualityLabel(context: Context): String {
         val originalLabel = context.getString(R.string.original)
-
-        if (mediaType() == MediaType.AUDIO) {
-            val bitrate = "${(bandwidth() + 500) / 1_000} kbps"
-            if (transcodeKey() == null) {
-                return "$bitrate ($originalLabel)"
-            }
-            return bitrate
+        if (mediaType() != MediaType.AUDIO) {
+            return transcodeKey()?.substringBefore('.') ?: originalLabel
         }
 
-        return transcodeKey()?.substringBefore('.') ?: originalLabel
+        val bitrate = "${(bandwidth() + BITS_PER_KILOBIT / 2) / BITS_PER_KILOBIT} kbps"
+        return if (transcodeKey() == null) "$bitrate ($originalLabel)" else bitrate
     }
 
     /**

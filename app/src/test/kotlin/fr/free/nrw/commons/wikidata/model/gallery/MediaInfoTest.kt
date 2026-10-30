@@ -144,7 +144,8 @@ class MediaInfoTest {
         val original = mediaInfoFromResource(MP3_RESPONSE_FILE).originalSource()!!
 
         assertEquals(
-            "https://upload.wikimedia.org/wikipedia/commons/b/b3/%22Anchors_Aweigh%22%2C_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3",
+            "https://upload.wikimedia.org/wikipedia/commons/b/b3/" +
+                "%22Anchors_Aweigh%22%2C_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3",
             original.src(),
         )
         assertEquals("audio/mpeg; codecs=\"mp3\"", original.type())

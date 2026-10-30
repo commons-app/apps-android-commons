@@ -153,7 +153,7 @@ class MediaClient
                 .getMediaInfo(title)
                 .map {
                     it.query()?.firstPage()?.mediaInfo()
-                        ?: throw Exception("No videoinfo returned for $title")
+                        ?: error("No videoinfo returned for $title")
                 }
 
         /**

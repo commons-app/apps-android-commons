@@ -16,6 +16,9 @@ import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
 import fr.free.nrw.commons.wikidata.model.gallery.TimedTextTrack
 import okhttp3.OkHttpClient
 
+private const val MIN_BUFFER_MS = 10_000
+private const val MAX_BUFFER_MS = 30_000
+
 /**
  * Owns the ExoPlayer used on the media detail screen.
  *
@@ -124,8 +127,8 @@ class MediaDetailPlayer(
                 DefaultLoadControl
                     .Builder()
                     .setBufferDurationsMs(
-                        10_000,
-                        30_000,
+                        MIN_BUFFER_MS,
+                        MAX_BUFFER_MS,
                         DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                         DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS,
                     ).build(),
