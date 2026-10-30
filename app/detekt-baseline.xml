@@ -193,7 +193,6 @@
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$8</ID>
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$9</ID>
     <ID>MagicNumber:Achievements.kt$Achievements$100</ID>
-    <ID>MagicNumber:AchievementsFragment.kt$AchievementsFragment$100</ID>
     <ID>MagicNumber:AchievementsFragment.kt$AchievementsFragment$150_000</ID>
     <ID>MagicNumber:BlurOverlayView.kt$BlurOverlayView$0.01f</ID>
     <ID>MagicNumber:BlurOverlayView.kt$BlurOverlayView$1.5f</ID>
@@ -715,9 +714,6 @@
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$8</ID>
     <ID>MagicNumber:WikiSite.kt$WikiSite.Companion$3</ID>
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
-    <ID>NestedBlockDepth:BookmarkListRootFragment.kt$BookmarkListRootFragment$fun backPressed(): Boolean</ID>
-    <ID>NestedBlockDepth:CategoriesModel.kt$CategoriesModel$fun onCategoryItemClicked( item: CategoryItem, media: Media?, )</ID>
-    <ID>NestedBlockDepth:CommonsCookieJar.kt$CommonsCookieJar$override fun saveFromResponse( url: HttpUrl, cookies: List&lt;Cookie&gt;, )</ID>
     <ID>NestedBlockDepth:DepictsFragment.kt$DepictsFragment$private fun launchDepictsPicker()</ID>
     <ID>NestedBlockDepth:DownloadReceiver.kt$DownloadReceiver$override fun onReceive(context: Context, intent: Intent)</ID>
     <ID>NestedBlockDepth:ExploreMapFragment.kt$ExploreMapFragment$private fun getOverlay(item: OverlayItem?): Overlay?</ID>
@@ -923,7 +919,6 @@
     <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
-    <ID>TooManyFunctions:AchievementsFragment.kt$AchievementsFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
     <ID>TooManyFunctions:AppLanguageLookUpTable.kt$AppLanguageLookUpTable</ID>
