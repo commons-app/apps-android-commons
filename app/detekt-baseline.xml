@@ -136,6 +136,7 @@
     <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
+    <ID>LongMethod:MigrationTest.kt$MigrationTest$@Test fun testMigration()</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$fun initNearbyFilter()</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onViewCreated( view: View, savedInstanceState: Bundle?, )</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun populatePlaces(currentLatLng: LatLng)</ID>
@@ -846,7 +847,6 @@
     <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
     <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
-    <ID>ThrowsCount:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
     <ID>TooGenericExceptionCaught:AboutActivity.kt$AboutActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:AchievementsFragment.kt$AchievementsFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:BookmarkPicturesFragment.kt$BookmarkPicturesFragment$e: Exception</ID>
@@ -1079,7 +1079,6 @@
     <ID>UseCheckOrError:EditViewModel.kt$EditViewModel$throw IllegalStateException("Jpegtran not initialized")</ID>
     <ID>UseCheckOrError:FilePicker.kt$FilePicker$throw IllegalStateException("HEIC conversion requires Android P+")</ID>
     <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
-    <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException( "basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.", )</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
     <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
     <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
