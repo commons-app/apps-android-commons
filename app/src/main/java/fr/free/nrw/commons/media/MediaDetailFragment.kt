@@ -62,13 +62,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.viewModels
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -828,7 +828,13 @@ class MediaDetailFragment :
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
 
         val fullImageUrl =
-            if (media.mediaType == MediaType.VIDEO || media.mediaType == MediaType.AUDIO) media.thumbUrl else media.imageUrl
+            if (media.mediaType == MediaType.VIDEO ||
+                media.mediaType == MediaType.AUDIO
+            ) {
+                media.thumbUrl
+            } else {
+                media.imageUrl
+            }
         val controller: DraweeController =
             Fresco
                 .newDraweeControllerBuilder()
@@ -854,9 +860,11 @@ class MediaDetailFragment :
 
         when (media.mediaType) {
             MediaType.VIDEO,
-            MediaType.AUDIO -> showMediaPoster(playButton = true)
+            MediaType.AUDIO,
+            -> showMediaPoster(playButton = true)
             MediaType.IMAGE,
-            MediaType.OTHER -> Unit
+            MediaType.OTHER,
+            -> Unit
         }
     }
 
@@ -865,7 +873,8 @@ class MediaDetailFragment :
 
         when (media.mediaType) {
             MediaType.VIDEO,
-            MediaType.AUDIO -> prepareMedia()
+            MediaType.AUDIO,
+            -> prepareMedia()
             MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
             MediaType.OTHER -> Unit
         }
@@ -890,25 +899,29 @@ class MediaDetailFragment :
         showMediaPoster()
 
         compositeDisposable.add(
-            mediaClient.getMediaInfo(title)
+            mediaClient
+                .getMediaInfo(title)
                 .subscribeOn(Schedulers.io())
                 .map { mediaInfo ->
                     playableMediaPlaybackSources(mediaInfo.playbackSources()) to mediaInfo.timedTextTracks()
-                }
-                .observeOn(AndroidSchedulers.mainThread())
+                }.observeOn(AndroidSchedulers.mainThread())
                 .doFinally { mediaRequestInProgress = false }
                 .subscribe(
                     { (playbackSources, timedTextTracks) ->
                         mediaDetailPlayer.setSources(playbackSources, timedTextTracks)
                         updateSubtitleButtonVisibility()
-                        val maxResolution = maxPlaybackResolution(
-                            applicationKvStore.getString(Prefs.VIDEO_QUALITY, "auto"),
-                            resources.displayMetrics,
-                        )
+                        val maxResolution =
+                            maxPlaybackResolution(
+                                applicationKvStore.getString(Prefs.VIDEO_QUALITY, "auto"),
+                                resources.displayMetrics,
+                            )
                         mediaDetailPlayer.preferredSource(maxResolution)?.let(::playMedia)
                             ?: handleMediaUnavailable()
                     },
-                    { Timber.e(it); handleMediaUnavailable() },
+                    {
+                        Timber.e(it)
+                        handleMediaUnavailable()
+                    },
                 ),
         )
     }
@@ -925,7 +938,8 @@ class MediaDetailFragment :
     }
 
     private fun configureMediaPlayerView(playerView: PlayerView) {
-        playerView.findViewById<View>(R.id.mediaDetailMediaQualityButton)
+        playerView
+            .findViewById<View>(R.id.mediaDetailMediaQualityButton)
             .setOnClickListener { showMediaQualitySelector() }
     }
 
@@ -967,7 +981,8 @@ class MediaDetailFragment :
             )
             (activity as? AppCompatActivity)?.supportActionBar?.hide()
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-            windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             onBackPressedCallback.isEnabled = true
         } else {
             binding.mediaDetailScrollView.visibility = View.VISIBLE
@@ -985,7 +1000,8 @@ class MediaDetailFragment :
 
     private fun showMediaQualitySelector() {
         val context = requireContext()
-        AlertDialog.Builder(context)
+        AlertDialog
+            .Builder(context)
             .setTitle(R.string.playback_quality)
             .setSingleChoiceItems(
                 mediaDetailPlayer.sources.map { it.qualityLabel(context) }.toTypedArray(),
@@ -993,8 +1009,7 @@ class MediaDetailFragment :
             ) { dialog, selectedIndex ->
                 playMedia(mediaDetailPlayer.sources[selectedIndex])
                 dialog.dismiss()
-            }
-            .show()
+            }.show()
     }
 
     private fun handleMediaUnavailable() {

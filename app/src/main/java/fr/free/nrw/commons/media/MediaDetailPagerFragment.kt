@@ -469,7 +469,9 @@ ${m.pageTitle.canonicalUri}""",
                         .setEnabled(true)
                         .setVisible(true)
                     val isImage = m.mediaType == MediaType.IMAGE
-                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(isImage)
+                    menu
+                        .findItem(R.id.menu_set_as_wallpaper)
+                        .setEnabled(isImage)
                         .setVisible(isImage)
                     if (m.user != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true)
@@ -679,7 +681,10 @@ ${m.pageTitle.canonicalUri}""",
     override fun onPageSelected(i: Int) {
     }
 
-    fun onPrimaryMediaChanging(position: Int, fragment: MediaDetailFragment) {
+    fun onPrimaryMediaChanging(
+        position: Int,
+        fragment: MediaDetailFragment,
+    ) {
         if (mediaFragmentBeforeScroll == null) {
             pageBeforeScroll = position
             mediaFragmentBeforeScroll = fragment

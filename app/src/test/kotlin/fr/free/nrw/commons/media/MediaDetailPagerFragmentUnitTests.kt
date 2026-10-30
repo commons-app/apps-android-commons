@@ -23,11 +23,11 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaType
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
 import fr.free.nrw.commons.explore.SearchActivity

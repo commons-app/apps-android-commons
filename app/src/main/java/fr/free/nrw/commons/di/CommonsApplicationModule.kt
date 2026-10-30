@@ -531,13 +531,14 @@ val MIGRATION_21_22 =
         }
     }
 
-val MIGRATION_22_23 = object : Migration(22, 23) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL("ALTER TABLE contribution ADD COLUMN media_mimeType TEXT")
-        db.execSQL("ALTER TABLE contribution ADD COLUMN media_mediaType TEXT NOT NULL DEFAULT 'OTHER'")
-        backfillMediaTypes(db)
+val MIGRATION_22_23 =
+    object : Migration(22, 23) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mimeType TEXT")
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mediaType TEXT NOT NULL DEFAULT 'OTHER'")
+            backfillMediaTypes(db)
+        }
     }
-}
 
 /**
  * Fills in media_mediaType for rows that predate the column.
@@ -560,7 +561,7 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
     mediaTypesByPageId.forEach { (pageId, mediaType) ->
         db.execSQL(
             "UPDATE contribution SET media_mediaType = ? WHERE pageId = ?",
-            arrayOf(mediaType, pageId)
+            arrayOf(mediaType, pageId),
         )
     }
 }

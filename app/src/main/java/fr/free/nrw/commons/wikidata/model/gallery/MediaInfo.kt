@@ -70,12 +70,22 @@ class MediaInfo {
         val oggStreams = metadata.entry("streams")?.entries()
         if (oggStreams != null) {
             return oggStreams.mapNotNull { stream ->
-                stream.value()?.entries()?.entry("type")?.string()?.let { codecName(it) }
+                stream
+                    .value()
+                    ?.entries()
+                    ?.entry("type")
+                    ?.string()
+                    ?.let { codecName(it) }
             }
         }
 
         return listOf("video", "audio").mapNotNull { section ->
-            metadata.entry(section)?.entries()?.entry("dataformat")?.string()?.let { codecName(it) }
+            metadata
+                .entry(section)
+                ?.entries()
+                ?.entry("dataformat")
+                ?.string()
+                ?.let { codecName(it) }
         }
     }
 

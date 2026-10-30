@@ -14,7 +14,8 @@ fun mediaPlaybackHttpClient(
     sharedClient: OkHttpClient,
     loggingInterceptor: HttpLoggingInterceptor,
 ): OkHttpClient =
-    sharedClient.newBuilder()
+    sharedClient
+        .newBuilder()
         .cache(null)
         .apply { interceptors().remove(loggingInterceptor) }
         .build()

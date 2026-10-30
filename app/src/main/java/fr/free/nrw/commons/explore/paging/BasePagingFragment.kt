@@ -13,8 +13,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment

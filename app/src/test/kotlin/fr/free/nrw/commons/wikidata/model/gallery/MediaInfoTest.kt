@@ -77,7 +77,12 @@ class MediaInfoTest {
         GsonUtil.defaultGson.fromJson(json, MwQueryPage::class.java).mediaInfo()!!
 
     private fun mediaInfoFromResource(fileName: String): MediaInfo =
-        mediaInfo(javaClass.classLoader!!.getResourceAsStream(fileName)!!.bufferedReader().readText())
+        mediaInfo(
+            javaClass.classLoader!!
+                .getResourceAsStream(fileName)!!
+                .bufferedReader()
+                .readText(),
+        )
 
     @Test
     fun webmOriginalShouldUseTheStreamCodecs() {
@@ -155,7 +160,10 @@ class MediaInfoTest {
 
         // The original file has no transcode key, which is why it's null.
         assertEquals(listOf("240p.vp9.webm", "360p.mpeg4.mov", null), sources.map { it.transcodeKey() })
-        assertEquals("https://upload.wikimedia.org/wikipedia/commons/0/02/Elephants_Dream%28HQ%29.webm", sources.last().src())
+        assertEquals(
+            "https://upload.wikimedia.org/wikipedia/commons/0/02/Elephants_Dream%28HQ%29.webm",
+            sources.last().src(),
+        )
     }
 
     @Test

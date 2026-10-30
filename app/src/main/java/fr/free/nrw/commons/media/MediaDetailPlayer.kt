@@ -43,7 +43,10 @@ class MediaDetailPlayer(
     private var resumeSource: MediaDerivative? = null
     private var resumePosition: Long = 0
 
-    fun setSources(sources: List<MediaDerivative>, timedTextTracks: List<TimedTextTrack>) {
+    fun setSources(
+        sources: List<MediaDerivative>,
+        timedTextTracks: List<TimedTextTrack>,
+    ) {
         this.sources = sources
         this.timedTextTracks = timedTextTracks
     }
@@ -59,7 +62,10 @@ class MediaDetailPlayer(
      *
      * The current position is kept when switching between sources.
      */
-    fun play(source: MediaDerivative, playerView: PlayerView) {
+    fun play(
+        source: MediaDerivative,
+        playerView: PlayerView,
+    ) {
         val previousSource = selected
         val position = player?.currentPosition ?: resumePosition
         selected = source
@@ -111,19 +117,19 @@ class MediaDetailPlayer(
 
     @OptIn(UnstableApi::class)
     private fun createPlayer(): ExoPlayer =
-        ExoPlayer.Builder(context)
+        ExoPlayer
+            .Builder(context)
             .setMediaSourceFactory(DefaultMediaSourceFactory(OkHttpDataSource.Factory(httpClient)))
             .setLoadControl(
-                DefaultLoadControl.Builder()
+                DefaultLoadControl
+                    .Builder()
                     .setBufferDurationsMs(
                         10_000,
                         30_000,
                         DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS,
                         DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS,
-                    )
-                    .build(),
-            )
-            .build()
+                    ).build(),
+            ).build()
             .also {
                 it.addListener(
                     object : Player.Listener {
@@ -135,16 +141,17 @@ class MediaDetailPlayer(
             }
 
     private fun mediaItem(mediaUrl: String): MediaItem =
-        MediaItem.Builder()
+        MediaItem
+            .Builder()
             .setUri(mediaUrl)
             .setSubtitleConfigurations(
                 timedTextTracks.map { timedTextTrack ->
-                    MediaItem.SubtitleConfiguration.Builder(timedTextTrack.src().toUri())
+                    MediaItem.SubtitleConfiguration
+                        .Builder(timedTextTrack.src().toUri())
                         .setMimeType(MimeTypes.TEXT_VTT)
                         .setLanguage(timedTextTrack.language())
                         .setLabel(timedTextTrack.label())
                         .build()
                 },
-            )
-            .build()
+            ).build()
 }

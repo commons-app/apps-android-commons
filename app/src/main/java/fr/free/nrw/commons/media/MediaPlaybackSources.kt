@@ -15,7 +15,10 @@ import kotlin.math.min
  * 'higher' has no cap and 'data_saver' allows nothing, so the lowest
  * transcode is used. Any other value caps at the shorter screen side.
  */
-fun maxPlaybackResolution(videoQuality: String?, displayMetrics: DisplayMetrics): Int =
+fun maxPlaybackResolution(
+    videoQuality: String?,
+    displayMetrics: DisplayMetrics,
+): Int =
     when (videoQuality) {
         "higher" -> Int.MAX_VALUE
         "data_saver" -> 0
@@ -58,20 +61,18 @@ fun preferredMediaPlaybackSource(
  * Returns the resolution named by the transcode key, such as 480 for
  * '480p.vp9.webm', falling back to the height.
  */
-private fun MediaDerivative.transcodeResolution(): Int =
-    transcodeKey()?.substringBefore('p')?.toIntOrNull() ?: height()
+private fun MediaDerivative.transcodeResolution(): Int = transcodeKey()?.substringBefore('p')?.toIntOrNull() ?: height()
 
 /**
  * Returns supported playback sources with transcodes before originals.
  *
  * Sources without a decoder on the device are omitted.
  */
-fun playableMediaPlaybackSources(
-    playbackSources: List<MediaDerivative>,
-): List<MediaDerivative> {
-    val (originalSources, transcodeSources) = playbackSources
-        .filter(::isMediaPlaybackSupported)
-        .partition { it.transcodeKey().isNullOrBlank() }
+fun playableMediaPlaybackSources(playbackSources: List<MediaDerivative>): List<MediaDerivative> {
+    val (originalSources, transcodeSources) =
+        playbackSources
+            .filter(::isMediaPlaybackSupported)
+            .partition { it.transcodeKey().isNullOrBlank() }
     return transcodeSources + originalSources
 }
 
@@ -89,13 +90,16 @@ fun isMediaPlaybackSupported(playbackSource: MediaDerivative): Boolean {
             else -> MimeTypes.getAudioMediaMimeType(codecs)
         } ?: MimeTypes.normalizeMimeType(type.substringBefore(';').trim())
 
-    val format = Format.Builder()
-        .setSampleMimeType(mediaMimeType)
-        .setCodecs(codecs)
-        .setWidth(playbackSource.width())
-        .setHeight(playbackSource.height())
-        .build()
+    val format =
+        Format
+            .Builder()
+            .setSampleMimeType(mediaMimeType)
+            .setCodecs(codecs)
+            .setWidth(playbackSource.width())
+            .setHeight(playbackSource.height())
+            .build()
 
-    return MediaCodecUtil.getDecoderInfos(mediaMimeType, false, false)
+    return MediaCodecUtil
+        .getDecoderInfos(mediaMimeType, false, false)
         .any { it.isFormatSupported(format) }
 }
