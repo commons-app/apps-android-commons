@@ -9,10 +9,8 @@ import android.view.MotionEvent
  * zoom.
  */
 interface ZoomableController {
-
     /** Listener interface. */
     interface Listener {
-
         /**
          * Notifies the view that the transform began.
          *

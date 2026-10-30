@@ -176,10 +176,14 @@ class DescriptionEditActivity :
         rvDescriptions!!.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     private fun onBackButtonClicked(view: View) {
         onBackPressedDispatcher.onBackPressed()
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     private fun onSubmitButtonClicked(view: View) {
         showLoggingProgressBar()
         val uploadMediaDetails = uploadMediaDetailAdapter.items
@@ -312,7 +316,10 @@ class DescriptionEditActivity :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putParcelableArrayList(
+            LIST_OF_DESCRIPTION_AND_CAPTION,
+            uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>,
+        )
         outState.putString(WIKITEXT, wikiText)
         outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
         // save Media

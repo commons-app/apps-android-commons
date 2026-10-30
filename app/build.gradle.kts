@@ -1,5 +1,5 @@
-import java.util.Properties
 import java.io.ByteArrayOutputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 apply(from = "$rootDir/jacoco.gradle")
@@ -15,6 +17,32 @@ kapt {
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
+}
+
+val ktlintLegacyFiles: Set<String> =
+    file("ktlint-legacy-files.txt")
+        .readLines()
+        .map { it.trim() }
+        .filter { it.isNotBlank() && !it.startsWith("#") }
+        .toSet()
+
+ktlint {
+    version.set(libs.versions.ktlint.get())
+    android.set(true)
+    outputToConsole.set(true)
+    filter {
+        exclude { element ->
+            val filePath = element.file.relativeTo(rootDir).invariantSeparatorsPath
+            filePath in ktlintLegacyFiles
+        }
+    }
+}
+
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    buildUponDefaultConfig = true
+    config.setFrom(file("$projectDir/detekt.yml"))
+    baseline = file("$projectDir/detekt-baseline.xml")
 }
 
 val isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file("../play.p12").exists()
@@ -64,7 +92,7 @@ android {
     signingConfigs {
         create("release") {
             // Configure keystore based on env vars in Travis for automated alpha builds
-            if(isRunningOnTravisAndIsNotPRBuild) {
+            if (isRunningOnTravisAndIsNotPRBuild) {
                 storeFile = file("../nr-commons.keystore")
                 storePassword = System.getenv("keystore_password")
                 keyAlias = System.getenv("key_alias")
@@ -110,32 +138,84 @@ android {
             dimension = "tier"
             applicationId = "fr.free.nrw.commons"
 
-            buildConfigField("String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\"")
+            buildConfigField(
+                "String",
+                "WIKIMEDIA_API_POTD",
+                "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\"",
+            )
             buildConfigField("String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\"")
             buildConfigField("String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\"")
             buildConfigField("String", "WIKIDATA_URL", "\"https://www.wikidata.org\"")
             buildConfigField("String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\"")
-            buildConfigField("String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json\"")
+            buildConfigField(
+                "String",
+                "WIKIMEDIA_CAMPAIGNS_URL",
+                "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json\"",
+            )
             buildConfigField("String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\"")
             buildConfigField("String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\"")
             buildConfigField("String", "COMMONS_URL", "\"https://commons.wikimedia.org\"")
             buildConfigField("String", "WIKIDATA_URL", "\"https://www.wikidata.org\"")
             buildConfigField("String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.org/wiki/\"")
             buildConfigField("String", "MOBILE_META_URL", "\"https://meta.m.wikimedia.org/wiki/\"")
-            buildConfigField("String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\"")
-            buildConfigField("String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\"")
-            buildConfigField("String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\"")
-            buildConfigField("String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\"")
-            buildConfigField("String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\"")
+            buildConfigField(
+                "String",
+                "SIGNUP_LANDING_URL",
+                "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\"",
+            )
+            buildConfigField(
+                "String",
+                "SIGNUP_SUCCESS_REDIRECTION_URL",
+                "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\"",
+            )
+            buildConfigField(
+                "String",
+                "FORGOT_PASSWORD_URL",
+                "\"https://commons.wikimedia.org/wiki/Special:PasswordReset\"",
+            )
+            buildConfigField(
+                "String",
+                "PRIVACY_POLICY_URL",
+                "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\"",
+            )
+            buildConfigField(
+                "String",
+                "FILE_USAGES_BASE_URL",
+                "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\"",
+            )
             buildConfigField("String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons\"")
-            buildConfigField("String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.contributions.contentprovider\"")
-            buildConfigField("String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.modifications.contentprovider\"")
+            buildConfigField(
+                "String",
+                "CONTRIBUTION_AUTHORITY",
+                "\"fr.free.nrw.commons.contributions.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "MODIFICATION_AUTHORITY",
+                "\"fr.free.nrw.commons.modifications.contentprovider\"",
+            )
             buildConfigField("String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.categories.contentprovider\"")
-            buildConfigField("String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\"")
-            buildConfigField("String", "RECENT_LANGUAGE_AUTHORITY", "\"fr.free.nrw.commons.recentlanguages.contentprovider\"")
+            buildConfigField(
+                "String",
+                "RECENT_SEARCH_AUTHORITY",
+                "\"fr.free.nrw.commons.explore.recentsearches.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "RECENT_LANGUAGE_AUTHORITY",
+                "\"fr.free.nrw.commons.recentlanguages.contentprovider\"",
+            )
             buildConfigField("String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.contentprovider\"")
-            buildConfigField("String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\"")
-            buildConfigField("String", "BOOKMARK_ITEMS_AUTHORITY", "\"fr.free.nrw.commons.bookmarks.items.contentprovider\"")
+            buildConfigField(
+                "String",
+                "BOOKMARK_LOCATIONS_AUTHORITY",
+                "\"fr.free.nrw.commons.bookmarks.locations.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "BOOKMARK_ITEMS_AUTHORITY",
+                "\"fr.free.nrw.commons.bookmarks.items.contentprovider\"",
+            )
             buildConfigField("String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\"")
             buildConfigField("String", "TEST_USERNAME", "\"" + getTestUserName() + "\"")
             buildConfigField("String", "TEST_PASSWORD", "\"" + getTestPassword() + "\"")
@@ -148,32 +228,84 @@ android {
             applicationId = "fr.free.nrw.commons.beta"
 
             // What values do we need to hit the BETA versions of the site / api ?
-            buildConfigField("String", "WIKIMEDIA_API_POTD", "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\"")
+            buildConfigField(
+                "String",
+                "WIKIMEDIA_API_POTD",
+                "\"https://commons.wikimedia.org/w/api.php?action=featuredfeed&feed=potd&feedformat=rss&language=en\"",
+            )
             buildConfigField("String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\"")
             buildConfigField("String", "WIKIDATA_API_HOST", "\"https://www.wikidata.org/w/api.php\"")
             buildConfigField("String", "WIKIDATA_URL", "\"https://www.wikidata.org\"")
             buildConfigField("String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\"")
-            buildConfigField("String", "WIKIMEDIA_CAMPAIGNS_URL", "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns_beta_active.json\"")
+            buildConfigField(
+                "String",
+                "WIKIMEDIA_CAMPAIGNS_URL",
+                "\"https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns_beta_active.json\"",
+            )
             buildConfigField("String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\"")
             buildConfigField("String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\"")
             buildConfigField("String", "COMMONS_URL", "\"https://commons.wikimedia.beta.wmflabs.org\"")
             buildConfigField("String", "WIKIDATA_URL", "\"https://www.wikidata.org\"")
             buildConfigField("String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\"")
             buildConfigField("String", "MOBILE_META_URL", "\"https://meta.m.wikimedia.beta.wmflabs.org/wiki/\"")
-            buildConfigField("String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\"")
-            buildConfigField("String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\"")
-            buildConfigField("String", "FORGOT_PASSWORD_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\"")
-            buildConfigField("String", "PRIVACY_POLICY_URL", "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\"")
-            buildConfigField("String", "FILE_USAGES_BASE_URL", "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\"")
+            buildConfigField(
+                "String",
+                "SIGNUP_LANDING_URL",
+                "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\"",
+            )
+            buildConfigField(
+                "String",
+                "SIGNUP_SUCCESS_REDIRECTION_URL",
+                "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\"",
+            )
+            buildConfigField(
+                "String",
+                "FORGOT_PASSWORD_URL",
+                "\"https://commons.wikimedia.beta.wmflabs.org/wiki/Special:PasswordReset\"",
+            )
+            buildConfigField(
+                "String",
+                "PRIVACY_POLICY_URL",
+                "\"https://github.com/commons-app/commons-app-documentation/blob/master/android/Privacy-policy.md\"",
+            )
+            buildConfigField(
+                "String",
+                "FILE_USAGES_BASE_URL",
+                "\"https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2\"",
+            )
             buildConfigField("String", "ACCOUNT_TYPE", "\"fr.free.nrw.commons.beta\"")
-            buildConfigField("String", "CONTRIBUTION_AUTHORITY", "\"fr.free.nrw.commons.beta.contributions.contentprovider\"")
-            buildConfigField("String", "MODIFICATION_AUTHORITY", "\"fr.free.nrw.commons.beta.modifications.contentprovider\"")
+            buildConfigField(
+                "String",
+                "CONTRIBUTION_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.contributions.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "MODIFICATION_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.modifications.contentprovider\"",
+            )
             buildConfigField("String", "CATEGORY_AUTHORITY", "\"fr.free.nrw.commons.beta.categories.contentprovider\"")
-            buildConfigField("String", "RECENT_SEARCH_AUTHORITY", "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\"")
-            buildConfigField("String", "RECENT_LANGUAGE_AUTHORITY", "\"fr.free.nrw.commons.beta.recentlanguages.contentprovider\"")
+            buildConfigField(
+                "String",
+                "RECENT_SEARCH_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.explore.recentsearches.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "RECENT_LANGUAGE_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.recentlanguages.contentprovider\"",
+            )
             buildConfigField("String", "BOOKMARK_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.contentprovider\"")
-            buildConfigField("String", "BOOKMARK_LOCATIONS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\"")
-            buildConfigField("String", "BOOKMARK_ITEMS_AUTHORITY", "\"fr.free.nrw.commons.beta.bookmarks.items.contentprovider\"")
+            buildConfigField(
+                "String",
+                "BOOKMARK_LOCATIONS_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.bookmarks.locations.contentprovider\"",
+            )
+            buildConfigField(
+                "String",
+                "BOOKMARK_ITEMS_AUTHORITY",
+                "\"fr.free.nrw.commons.beta.bookmarks.items.contentprovider\"",
+            )
             buildConfigField("String", "COMMIT_SHA", "\"" + getBuildVersion().toString() + "\"")
             buildConfigField("String", "TEST_USERNAME", "\"" + getTestUserName() + "\"")
             buildConfigField("String", "TEST_PASSWORD", "\"" + getTestPassword() + "\"")
@@ -199,12 +331,13 @@ android {
             excludes += listOf("META-INF/androidx.*")
         }
         resources {
-            excludes += listOf(
-                "META-INF/androidx.*",
-                "META-INF/proguard/androidx-annotations.pro",
-                "/META-INF/LICENSE.md",
-                "/META-INF/LICENSE-notice.md"
-            )
+            excludes +=
+                listOf(
+                    "META-INF/androidx.*",
+                    "META-INF/proguard/androidx-annotations.pro",
+                    "/META-INF/LICENSE.md",
+                    "/META-INF/LICENSE-notice.md",
+                )
         }
     }
     testOptions {
@@ -224,6 +357,9 @@ android {
 }
 
 dependencies {
+    // Static analysis
+    detektPlugins(libs.compose.rules.detekt)
+
     // Utils
     implementation(libs.gson)
     implementation(libs.okhttp)
@@ -294,7 +430,7 @@ dependencies {
 
     implementation(libs.kotlin.reflect)
 
-    //Mocking
+    // Mocking
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.mockito.core)
     testImplementation(libs.powermock.module.junit)
@@ -340,10 +476,10 @@ dependencies {
     implementation(libs.androidx.exifinterface)
     implementation(libs.recyclerview.fastscroll)
 
-    //swipe_layout
+    // swipe_layout
     implementation(libs.swipelayout.library)
 
-    //Room
+    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava)
@@ -362,7 +498,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.rx2)
     testImplementation(libs.androidx.work.testing)
 
-    //Glide
+    // Glide
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
     kaptTest(libs.androidx.databinding.compiler)
@@ -378,7 +514,7 @@ dependencies {
         exclude(group = "com.google.android", module = "android")
     }
 
-    //OSMDroid
+    // OSMDroid
     implementation(libs.osmdroid.android)
     constraints {
         implementation(libs.kotlin.stdlib.jdk7) {
@@ -431,14 +567,15 @@ if (isRunningOnTravisAndIsNotPRBuild) {
         serviceAccountCredentials = file("../play.p12")
 
         resolutionStrategy = "auto"
-        outputProcessor { // this: ApkVariantOutput
+        outputProcessor {
+            // this: ApkVariantOutput
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
 }
 
-fun getBuildVersion(): String? {
-    return try {
+fun getBuildVersion(): String? =
+    try {
         val stdout = ByteArrayOutputStream()
         exec {
             commandLine("git", "rev-parse", "--short", "HEAD")
@@ -448,10 +585,9 @@ fun getBuildVersion(): String? {
     } catch (e: Exception) {
         null
     }
-}
 
-fun getBranchName(): String? {
-    return try {
+fun getBranchName(): String? =
+    try {
         val stdout = ByteArrayOutputStream()
         exec {
             commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")
@@ -461,4 +597,3 @@ fun getBranchName(): String? {
     } catch (e: Exception) {
         null
     }
-}

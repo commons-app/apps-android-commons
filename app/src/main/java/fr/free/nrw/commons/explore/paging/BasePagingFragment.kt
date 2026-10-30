@@ -97,10 +97,9 @@ abstract class BasePagingFragment<T> :
     }
 
     override fun showSnackbar() {
-        val anchorView= activity?.findViewById<View>(R.id.fragment_main_nav_tab_layout)
-        ViewUtil.showShortSnackbar(binding.paginatedSearchResultsList, errorTextId,anchorView)
+        val anchorView = activity?.findViewById<View>(R.id.fragment_main_nav_tab_layout)
+        ViewUtil.showShortSnackbar(binding.paginatedSearchResultsList, errorTextId, anchorView)
     }
-
 
     fun onQueryUpdated(query: String) {
         injectedPresenter.onQueryUpdated(query)

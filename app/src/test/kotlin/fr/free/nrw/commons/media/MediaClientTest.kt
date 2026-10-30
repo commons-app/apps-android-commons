@@ -222,7 +222,9 @@ class MediaClientTest {
             whenever(mwQueryPage.pageId()).thenReturn(expectedId)
         }
 
-    private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse, Media> {
+    private fun expectSuccessfulMapping(
+        continuationMap: Map<String, String>? = emptyMap(),
+    ): Pair<MwQueryResponse, Media> {
         val media = media()
         val mwQueryPage = mock<MwQueryPage>()
         val mwQueryResponse =
@@ -234,7 +236,7 @@ class MediaClientTest {
         val entities = mock<Entities>()
         whenever(mediaDetailInterface.getEntity("M1|M2")).thenReturn(Single.just(entities))
         val entity = mock<Entities.Entity>()
-        whenever(entities.entities()).thenReturn(mapOf("a" to entity, "b" to entity))
+        whenever(entities.getEntityMap()).thenReturn(mapOf("a" to entity, "b" to entity))
         val imageInfo = mock<ImageInfo>()
         whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo, null)
         whenever(mediaConverter.convert(mwQueryPage, entity, imageInfo)).thenReturn(media)
