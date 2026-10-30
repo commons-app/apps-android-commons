@@ -2953,6 +2953,8 @@ class NearbyParentFragment :
                             descriptions = mediaResponse.descriptions ?: emptyMap(),
                             depictionIds = mediaResponse.depictionIds ?: emptyList(),
                             categoriesHiddenStatus = mediaResponse.categoriesHiddenStatus ?: emptyMap(),
+                            mimeType = mediaResponse.mimeType,
+                            mediaType = mediaResponse.mediaType,
                         )
                     // Remove existing fragment before showing new details
                     if (::mediaDetails.isInitialized && mediaDetails.isAdded) {

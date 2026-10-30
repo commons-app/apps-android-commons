@@ -24,6 +24,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -61,9 +62,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.ui.PlayerView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.controller.ControllerListener
@@ -76,6 +83,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
@@ -121,11 +129,13 @@ import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleGeoCoordinates
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
+import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.Revision
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.lang.String.format
@@ -165,6 +175,13 @@ class MediaDetailFragment :
     lateinit var contributionsRepository: ContributionsRepository
 
     @Inject
+    lateinit var mediaClient: MediaClient
+
+    @Inject
+    @field:Named("media_playback")
+    lateinit var playbackHttpClient: OkHttpClient
+
+    @Inject
     lateinit var reasonBuilder: ReasonBuilder
 
     @Inject
@@ -200,7 +217,12 @@ class MediaDetailFragment :
     private val onBackPressedCallback =
         object : OnBackPressedCallback(false) {
             override fun handleOnBackPressed() {
-                binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+                if (mediaFullscreen) {
+                    setMediaFullscreen(false)
+                } else {
+                    binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+                    isEnabled = false
+                }
             }
         }
 
@@ -229,6 +251,13 @@ class MediaDetailFragment :
     // Had to make this class variable, to implement various onClicks, which access the media,
     // also I fell why make separate variables when one can serve the purpose
     private var media: Media? = null
+
+    private val mediaDetailPlayer by lazy {
+        MediaDetailPlayer(requireContext(), playbackHttpClient, ::handleMediaUnavailable)
+    }
+    private var mediaRequestInProgress: Boolean = false
+    private var mediaFullscreen: Boolean = false
+
     private lateinit var reasonList: ArrayList<String>
     private lateinit var reasonListEnglishMappings: ArrayList<String>
 
@@ -354,11 +383,8 @@ class MediaDetailFragment :
         binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
         binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
         binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        binding.mediaDetailImageView.setOnClickListener {
-            launchZoomActivity(
-                binding.mediaDetailImageView,
-            )
-        }
+        binding.mediaDetailMediaContainer.setOnClickListener { onMediaClicked() }
+        binding.mediaDetailImageViewSpacer.setOnClickListener { onMediaClicked() }
         binding.categoryEditButton.setOnClickListener { onCategoryEditButtonClicked() }
         binding.depictionsEditButton.setOnClickListener { onDepictionsEditButtonClicked() }
         binding.seeMore.setOnClickListener { onSeeMoreClicked() }
@@ -601,6 +627,9 @@ class MediaDetailFragment :
     }
 
     private fun displayMediaDetails() {
+        if (mediaDetailPlayer.player == null) {
+            setupMediaView(media!!)
+        }
         setTextFields(media!!)
         compositeDisposable.addAll(
             mediaDataExtractor
@@ -649,6 +678,9 @@ class MediaDetailFragment :
         media.categories = this.media!!.categories
         this.media = media
         setTextFields(media)
+        if (mediaDetailPlayer.player == null) {
+            setupMediaView(media)
+        }
         compositeDisposable.addAll(
             mediaDataExtractor
                 .fetchDepictionIdsAndLabels(media)
@@ -729,9 +761,11 @@ class MediaDetailFragment :
      * @param scrollWidth the current width of the scrollView
      */
     private fun updateAspectRatio(scrollWidth: Int) {
-        if (imageInfoCache != null) {
-            var finalHeight: Int = (scrollWidth * imageInfoCache!!.height) / imageInfoCache!!.width
-            val params: ViewGroup.LayoutParams = binding.mediaDetailImageView.layoutParams
+        val width = mediaDetailPlayer.selected?.width() ?: imageInfoCache?.width ?: 0
+        val height = mediaDetailPlayer.selected?.height() ?: imageInfoCache?.height ?: 0
+        if (width > 0 && height > 0) {
+            var finalHeight: Int = (scrollWidth * height) / width
+            val params: ViewGroup.LayoutParams = binding.mediaDetailMediaContainer.layoutParams
             val spacerParams: ViewGroup.LayoutParams =
                 binding.mediaDetailImageViewSpacer.layoutParams
             params.width = scrollWidth
@@ -744,7 +778,7 @@ class MediaDetailFragment :
             }
             params.height = finalHeight
             spacerParams.height = finalHeight
-            binding.mediaDetailImageView.layoutParams = params
+            binding.mediaDetailMediaContainer.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
             if (finalHeight > 0) {
                 binding.mediaDetailScrollView.visibility = View.VISIBLE
@@ -784,7 +818,7 @@ class MediaDetailFragment :
      * - low resolution thumbnail is shown initially
      * - when the high resolution image is available, it replaces the low resolution image
      */
-    private fun setupImageView() {
+    private fun setupImageView(media: Media) {
         val imageBackgroundColor: Int = imageBackgroundColor
         if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
             binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
@@ -793,16 +827,253 @@ class MediaDetailFragment :
         binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
 
+        val fullImageUrl =
+            if (media.mediaType == MediaType.VIDEO ||
+                media.mediaType == MediaType.AUDIO
+            ) {
+                media.thumbUrl
+            } else {
+                media.imageUrl
+            }
         val controller: DraweeController =
             Fresco
                 .newDraweeControllerBuilder()
-                .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
+                .setLowResImageRequest(ImageRequest.fromUri(media.thumbUrl))
                 .setRetainImageOnFailure(true)
-                .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
+                .setImageRequest(ImageRequest.fromUri(fullImageUrl))
                 .setControllerListener(aspectRatioListener)
                 .setOldController(binding.mediaDetailImageView.controller)
                 .build()
         binding.mediaDetailImageView.controller = controller
+    }
+
+    /**
+     * Sets up the media view based on the media type.
+     *
+     * For audio and video, a play button and thumbnail are shown until playback starts. Images
+     * render without an overlay.
+     */
+    private fun setupMediaView(media: Media) {
+        // A thumbnail is always shown initially because audio and video have thumbnails.
+        setupImageView(media)
+        configureFullscreenButton(media.mediaType)
+
+        when (media.mediaType) {
+            MediaType.VIDEO,
+            MediaType.AUDIO,
+            -> showMediaPoster(playButton = true)
+            MediaType.IMAGE,
+            MediaType.OTHER,
+            -> Unit
+        }
+    }
+
+    private fun onMediaClicked() {
+        val media = media ?: return
+
+        when (media.mediaType) {
+            MediaType.VIDEO,
+            MediaType.AUDIO,
+            -> prepareMedia()
+            MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
+            MediaType.OTHER -> Unit
+        }
+    }
+
+    private fun prepareMedia() {
+        val title = media?.filename ?: return
+        if (mediaRequestInProgress) {
+            return
+        }
+
+        // Play the media if the player is initialized.
+        if (mediaDetailPlayer.player != null) {
+            showMediaPlayer()
+            mediaDetailPlayer.resume()
+        } else {
+            requestMedia(title)
+        }
+    }
+
+    private fun requestMedia(title: String) {
+        mediaRequestInProgress = true
+        showMediaPoster()
+
+        compositeDisposable.add(
+            mediaClient
+                .getMediaInfo(title)
+                .subscribeOn(Schedulers.io())
+                .map { mediaInfo ->
+                    playableMediaPlaybackSources(mediaInfo.playbackSources()) to mediaInfo.timedTextTracks()
+                }.observeOn(AndroidSchedulers.mainThread())
+                .doFinally { mediaRequestInProgress = false }
+                .subscribe(
+                    { (playbackSources, timedTextTracks) ->
+                        mediaDetailPlayer.setSources(playbackSources, timedTextTracks)
+                        updateSubtitleButtonVisibility()
+                        val maxResolution =
+                            maxPlaybackResolution(
+                                applicationKvStore.getString(Prefs.VIDEO_QUALITY, "auto"),
+                                resources.displayMetrics,
+                            )
+                        mediaDetailPlayer.preferredSource(maxResolution)?.let(::playMedia)
+                            ?: handleMediaUnavailable()
+                    },
+                    {
+                        Timber.e(it)
+                        handleMediaUnavailable()
+                    },
+                ),
+        )
+    }
+
+    private fun playMedia(playbackSource: MediaDerivative) {
+        val playerView =
+            if (mediaFullscreen) binding.mediaDetailFullscreenPlayerView else binding.mediaDetailPlayerView
+        mediaDetailPlayer.play(playbackSource, playerView)
+
+        if (media?.mediaType == MediaType.VIDEO) {
+            updateAspectRatio(binding.mediaDetailScrollView.width)
+        }
+        showMediaPlayer()
+    }
+
+    private fun configureMediaPlayerView(playerView: PlayerView) {
+        playerView
+            .findViewById<View>(R.id.mediaDetailMediaQualityButton)
+            .setOnClickListener { showMediaQualitySelector() }
+    }
+
+    private fun configureFullscreenButton(mediaType: MediaType) {
+        if (mediaType == MediaType.VIDEO) {
+            binding.mediaDetailPlayerView.setFullscreenButtonClickListener(::setMediaFullscreen)
+            binding.mediaDetailFullscreenPlayerView.setFullscreenButtonClickListener(::setMediaFullscreen)
+        }
+    }
+
+    @OptIn(UnstableApi::class)
+    private fun updateSubtitleButtonVisibility() {
+        val showSubtitleButton = mediaDetailPlayer.timedTextTracks.isNotEmpty()
+        binding.mediaDetailPlayerView.setShowSubtitleButton(showSubtitleButton)
+        binding.mediaDetailFullscreenPlayerView.setShowSubtitleButton(showSubtitleButton)
+    }
+
+    @OptIn(UnstableApi::class)
+    private fun setMediaFullscreen(shouldBeFullscreen: Boolean) {
+        if (mediaFullscreen == shouldBeFullscreen) {
+            return
+        }
+
+        mediaFullscreen = shouldBeFullscreen
+        (parentFragment as? MediaDetailPagerFragment)?.setPagerSwipeEnabled(!shouldBeFullscreen)
+        binding.mediaDetailPlayerView.setFullscreenButtonState(shouldBeFullscreen)
+        binding.mediaDetailFullscreenPlayerView.setFullscreenButtonState(shouldBeFullscreen)
+
+        val activity = requireActivity()
+        val windowInsetsController = WindowCompat.getInsetsController(activity.window, activity.window.decorView)
+
+        if (shouldBeFullscreen) {
+            binding.mediaDetailScrollView.visibility = View.GONE
+            binding.mediaDetailFullscreenPlayerView.visibility = View.VISIBLE
+            PlayerView.switchTargetView(
+                mediaDetailPlayer.player!!,
+                binding.mediaDetailPlayerView,
+                binding.mediaDetailFullscreenPlayerView,
+            )
+            (activity as? AppCompatActivity)?.supportActionBar?.hide()
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            onBackPressedCallback.isEnabled = true
+        } else {
+            binding.mediaDetailScrollView.visibility = View.VISIBLE
+            PlayerView.switchTargetView(
+                mediaDetailPlayer.player!!,
+                binding.mediaDetailFullscreenPlayerView,
+                binding.mediaDetailPlayerView,
+            )
+            binding.mediaDetailFullscreenPlayerView.visibility = View.GONE
+            (activity as? AppCompatActivity)?.supportActionBar?.show()
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+            onBackPressedCallback.isEnabled = binding.dummyCaptionDescriptionContainer.isVisible
+        }
+    }
+
+    private fun showMediaQualitySelector() {
+        val context = requireContext()
+        AlertDialog
+            .Builder(context)
+            .setTitle(R.string.playback_quality)
+            .setSingleChoiceItems(
+                mediaDetailPlayer.sources.map { it.qualityLabel(context) }.toTypedArray(),
+                mediaDetailPlayer.sources.indexOf(mediaDetailPlayer.selected),
+            ) { dialog, selectedIndex ->
+                playMedia(mediaDetailPlayer.sources[selectedIndex])
+                dialog.dismiss()
+            }.show()
+    }
+
+    private fun handleMediaUnavailable() {
+        mediaDetailPlayer.saveResumeState()
+        setMediaFullscreen(false)
+        cleanupMediaPlayer()
+        showMediaUnavailable()
+    }
+
+    private fun cleanupMediaPlayer() {
+        mediaDetailPlayer.release()
+        binding.mediaDetailPlayerView.player = null
+    }
+
+    /**
+     * Pauses media playback.
+     *
+     * Called when the user navigates away from this media.
+     */
+    fun pauseMedia() {
+        // The pager can call this method on a fragment that has already been
+        // detached, and creating the player (lazy) needs an attached fragment,
+        // so skip the pause as there's nothing to pause anyway.
+        if (isAdded) {
+            mediaDetailPlayer.pause()
+        }
+    }
+
+    private fun showMediaPoster(playButton: Boolean = false) {
+        val isAudio = media?.mediaType == MediaType.AUDIO
+        val playLabel = if (isAudio) R.string.play_audio else R.string.play_video
+
+        binding.mediaDetailMediaContainer.contentDescription =
+            if (playButton) getString(playLabel) else null
+        binding.mediaDetailPlayerView.visibility = View.GONE
+        binding.mediaDetailPlayButton.visibility = if (playButton) View.VISIBLE else View.GONE
+        binding.mediaDetailMediaUnavailable.visibility = View.GONE
+        binding.mediaDetailImageView.visibility = View.VISIBLE
+    }
+
+    private fun showMediaPlayer() {
+        binding.mediaDetailMediaContainer.contentDescription = null
+        binding.mediaDetailImageView.visibility = View.GONE
+        binding.mediaDetailPlayButton.visibility = View.GONE
+        binding.mediaDetailMediaUnavailable.visibility = View.GONE
+        binding.mediaDetailPlayerView.visibility = View.VISIBLE
+    }
+
+    private fun showMediaUnavailable() {
+        val isAudio = media?.mediaType == MediaType.AUDIO
+        val unavailableLabel =
+            if (isAudio) R.string.audio_unavailable else R.string.video_unavailable
+        binding.mediaDetailMediaUnavailable.setText(unavailableLabel)
+        binding.mediaDetailMediaContainer.contentDescription = getString(unavailableLabel)
+        binding.mediaDetailPlayerView.visibility = View.GONE
+        binding.mediaDetailPlayButton.visibility = View.GONE
+        binding.mediaDetailMediaUnavailable.visibility = View.VISIBLE
+        binding.mediaDetailImageView.visibility = View.VISIBLE
+    }
+
+    override fun onStop() {
+        mediaDetailPlayer.pause()
+        super.onStop()
     }
 
     override fun onDestroyView() {
@@ -812,7 +1083,9 @@ class MediaDetailFragment :
             layoutListener = null
         }
 
+        setMediaFullscreen(false)
         compositeDisposable.clear()
+        cleanupMediaPlayer()
 
         super.onDestroyView()
     }
@@ -831,12 +1104,12 @@ class MediaDetailFragment :
                 scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
             } else if (scrollWidth > 0) {
                 val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
-                val params = currentBinding.mediaDetailImageView.layoutParams
+                val params = currentBinding.mediaDetailMediaContainer.layoutParams
                 val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
                 params.width = scrollWidth
                 params.height = height
                 spacerParams.height = height
-                currentBinding.mediaDetailImageView.layoutParams = params
+                currentBinding.mediaDetailMediaContainer.layoutParams = params
                 currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
                 scrollView.visibility = View.VISIBLE
             }
@@ -878,6 +1151,8 @@ class MediaDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+        configureMediaPlayerView(binding.mediaDetailPlayerView)
+        configureMediaPlayerView(binding.mediaDetailFullscreenPlayerView)
         if (activity is MainActivity) {
             // explicitly hides the tabs when the media details screen is opened.
             (activity as MainActivity).hideTabs()
@@ -885,7 +1160,6 @@ class MediaDetailFragment :
     }
 
     private fun setTextFields(media: Media) {
-        setupImageView()
         binding.mediaDetailTitle.text = media.displayTitle
         binding.mediaDetailDesc.setHtmlText(prettyDescription(media))
         binding.mediaDetailLicense.text = prettyLicense(media)

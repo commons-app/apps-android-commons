@@ -33,6 +33,9 @@ open class ImageInfo : Serializable {
     @SerializedName("mime")
     private val mimeType: String? = null
 
+    @SerializedName("mediatype")
+    private val mediaType: String? = null
+
     @SerializedName("extmetadata")
     private val metadata: ExtMetadata? = null
     private val user: String? = null
@@ -55,6 +58,8 @@ open class ImageInfo : Serializable {
     fun getThumbHeight(): Int = thumbHeight
 
     fun getMimeType(): String = mimeType ?: "*/*"
+
+    fun getMediaType(): String? = mediaType
 
     fun getThumbUrl(): String = thumbUrl ?: ""
 

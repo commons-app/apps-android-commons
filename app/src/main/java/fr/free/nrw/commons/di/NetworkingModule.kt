@@ -24,9 +24,11 @@ import fr.free.nrw.commons.media.MediaDetailInterface
 import fr.free.nrw.commons.media.MediaInterface
 import fr.free.nrw.commons.media.PageMediaInterface
 import fr.free.nrw.commons.media.WikidataMediaInterface
+import fr.free.nrw.commons.media.mediaPlaybackHttpClient
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.mwapi.UserInterface
 import fr.free.nrw.commons.notification.NotificationInterface
+import fr.free.nrw.commons.redactSensitiveHeaders
 import fr.free.nrw.commons.review.ReviewInterface
 import fr.free.nrw.commons.upload.UploadInterface
 import fr.free.nrw.commons.upload.WikiBaseInterface
@@ -70,17 +72,33 @@ class NetworkingModule {
 
     @Provides
     @Singleton
+    @Named("media_playback")
+    fun provideMediaPlaybackHttpClient(
+        okHttpClient: OkHttpClient,
+        @Named("media_playback") playbackLoggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient = mediaPlaybackHttpClient(okHttpClient, playbackLoggingInterceptor)
+
+    @Provides
+    @Singleton
     fun serviceFactory(cookieJar: CommonsCookieJar): CommonsServiceFactory =
         CommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar))
 
     @Provides
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        timberHttpLoggingInterceptor(if (BuildConfig.DEBUG) Level.BODY else Level.BASIC)
+
+    @Provides
+    @Singleton
+    @Named("media_playback")
+    fun provideMediaPlaybackHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        timberHttpLoggingInterceptor(if (BuildConfig.DEBUG) Level.HEADERS else Level.BASIC)
+
+    private fun timberHttpLoggingInterceptor(logLevel: Level): HttpLoggingInterceptor =
         HttpLoggingInterceptor { message: String? ->
             Timber.tag("OkHttp").v(message)
-        }.apply {
-            level = if (BuildConfig.DEBUG) Level.BODY else Level.BASIC
-        }
+        }.apply { level = logLevel }
+            .redactSensitiveHeaders()
 
     @Provides
     @Singleton

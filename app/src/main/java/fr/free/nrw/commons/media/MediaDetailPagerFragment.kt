@@ -21,10 +21,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.models.Bookmark
@@ -79,6 +81,9 @@ class MediaDetailPagerFragment :
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
+    private var pageBeforeScroll: Int? = null
+    private var mediaFragmentBeforeScroll: MediaDetailFragment? = null
+    private var pagerScrollState: Int = ViewPager.SCROLL_STATE_IDLE
 
     /**
      * ProgressBar used to indicate the loading status of media items.
@@ -215,7 +220,7 @@ class MediaDetailPagerFragment :
                 shareIntent.setType("text/plain")
                 shareIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    """${m!!.displayTitle} 
+                    """${m!!.displayTitle}
 ${m.pageTitle.canonicalUri}""",
                 )
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."))
@@ -463,20 +468,26 @@ ${m.pageTitle.canonicalUri}""",
                         .findItem(R.id.menu_bookmark_current_image)
                         .setEnabled(true)
                         .setVisible(true)
-                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true)
+                    val isImage = m.mediaType == MediaType.IMAGE
+                    menu
+                        .findItem(R.id.menu_set_as_wallpaper)
+                        .setEnabled(isImage)
+                        .setVisible(isImage)
                     if (m.user != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true)
                     }
 
-                    try {
-                        val mediaUrl = URL(m.imageUrl)
-                        handleBackgroundColorMenuItems({
-                            BitmapFactory.decodeStream(
-                                mediaUrl.openConnection().getInputStream(),
-                            )
-                        }, menu)
-                    } catch (e: Exception) {
-                        Timber.e("Cant detect media transparency")
+                    if (isImage) {
+                        try {
+                            val mediaUrl = URL(m.imageUrl)
+                            handleBackgroundColorMenuItems({
+                                BitmapFactory.decodeStream(
+                                    mediaUrl.openConnection().getInputStream(),
+                                )
+                            }, menu)
+                        } catch (e: Exception) {
+                            Timber.e("Cant detect media transparency")
+                        }
                     }
 
                     // Initialize bookmark object
@@ -547,7 +558,7 @@ ${m.pageTitle.canonicalUri}""",
                         .setVisible(false)
                 }
 
-                if (!sessionManager!!.isUserLoggedIn) {
+                if (m?.mediaType != MediaType.IMAGE || !sessionManager!!.isUserLoggedIn) {
                     menu.findItem(R.id.menu_set_as_avatar).setVisible(false)
                 }
             }
@@ -670,7 +681,55 @@ ${m.pageTitle.canonicalUri}""",
     override fun onPageSelected(i: Int) {
     }
 
+    fun onPrimaryMediaChanging(
+        position: Int,
+        fragment: MediaDetailFragment,
+    ) {
+        if (mediaFragmentBeforeScroll == null) {
+            pageBeforeScroll = position
+            mediaFragmentBeforeScroll = fragment
+        }
+
+        val pager = binding!!.mediaDetailsPager
+        pager.post {
+            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                pauseOutgoingMedia()
+            }
+        }
+    }
+
+    private fun pauseOutgoingMedia() {
+        if (pageBeforeScroll != binding!!.mediaDetailsPager.currentItem) {
+            mediaFragmentBeforeScroll?.pauseMedia()
+        }
+
+        pageBeforeScroll = null
+        mediaFragmentBeforeScroll = null
+    }
+
     override fun onPageScrollStateChanged(i: Int) {
+        pagerScrollState = i
+
+        when (i) {
+            ViewPager.SCROLL_STATE_DRAGGING -> {
+                // Dragging can start again mid-settle, when the current page is
+                // already the one being scrolled to.
+                if (mediaFragmentBeforeScroll == null) {
+                    pageBeforeScroll = binding!!.mediaDetailsPager.currentItem
+                    mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
+                }
+            }
+            ViewPager.SCROLL_STATE_IDLE -> {
+                pauseOutgoingMedia()
+            }
+        }
+    }
+
+    /**
+     * Enables or disables swiping between media detail pages.
+     */
+    fun setPagerSwipeEnabled(enabled: Boolean) {
+        binding!!.mediaDetailsPager.setPagerSwipeEnabled(enabled)
     }
 
     fun onDataSetChanged() {

@@ -91,7 +91,7 @@ interface MediaInterface {
     /**
      * This method retrieves a list of Media objects filtered using list geosearch query. Example:
      * Keep the example API URL intact for copy/paste.
-     * https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
+     * https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user|mime|mediatype&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
      *
      * @param location     the search location
      * @param itemLimit    how many images are returned
@@ -141,6 +141,23 @@ interface MediaInterface {
     @Headers(SUPPRESS_ERROR_LOG_HEADER)
     fun getMediaById(
         @Query("pageids") pageIds: String?,
+    ): Single<MwQueryResponse>
+
+    /**
+     * Retrieves playback sources and timed text tracks for a media file.
+     *
+     * The original file's URL, MIME type, size, and stream metadata are
+     * included so it can be offered as a playback source too.
+     *
+     * @param title the title of the requested media file
+     * @return a single that emits the MediaWiki query response
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2" +
+            "&prop=videoinfo&viprop=derivatives|timedtext|url|mime|size|metadata",
+    )
+    fun getMediaInfo(
+        @Query("titles") title: String,
     ): Single<MwQueryResponse>
 
     /**
@@ -196,7 +213,7 @@ interface MediaInterface {
         const val THUMB_HEIGHT_PX = 450
 
         const val MEDIA_PARAMS =
-            "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlheight=" +
+            "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user|mime|mediatype&&iiurlheight=" +
                 THUMB_HEIGHT_PX +
                 "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|" +
                 "ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
@@ -205,7 +222,7 @@ interface MediaInterface {
          * fetches category detail(title, hidden) for each category along with File information
          */
         const val MEDIA_PARAMS_WITH_CATEGORY_DETAILS =
-            "&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlheight=" +
+            "&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user|mime|mediatype&&iiurlheight=" +
                 THUMB_HEIGHT_PX +
                 "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|" +
                 "DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
