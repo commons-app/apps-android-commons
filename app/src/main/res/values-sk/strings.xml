@@ -298,6 +298,13 @@
   <string name="null_url">Chyba! URL nenájdené</string>
   <string name="nominate_deletion">Navrhnúť na zmazanie</string>
   <string name="nominated_for_deletion">Tento obrázok bol nominovaný na zmazanie.</string>
+  <string name="file_deleted_from_commons">Tento súbor bol z Commons zmazaný.</string>
+  <string name="contribution_deleted">Zmazané</string>
+  <string name="deleted_file_activity_title">Súbor bol zmazaný</string>
+  <string name="deleted_file_explanation">Wikimedia Commons maže súbory, ktoré nemajú vzdelávaciu hodnotu alebo porušujú jej pravidlá, vrátane porušení autorských práv. Nahrávajte fotografie, ktoré ste sami nafotili. Obrázky skopírované z internetu, snímky obrazovky, logá a plagáty sú častými dôvodmi, prečo býva súbor odstránený.</string>
+  <string name="deleted_file_view_page">Zobraziť stránku súboru</string>
+  <string name="deleted_file_view_discussion">Prečítať diskusiu o zmazaní</string>
+  <string name="deleted_file_policies">Zásady a smernice Commons</string>
   <string name="nominated_see_more">Zobraziť webovú stránku pre viac informácií</string>
   <string name="skip_login">Preskočiť</string>
   <string name="navigation_item_login">Prihlásiť sa</string>

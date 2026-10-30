@@ -171,7 +171,8 @@ class UploadPresenter
             val value = field.get(this)
             if (value == null) {
                 throw IllegalStateException(
-                    "basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.",
+                    "basicKvStoreFactory must be initialized before use. " +
+                        "Please call setupBasicKvStoreFactory() before using presenter methods that require it.",
                 )
             }
         }
