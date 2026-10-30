@@ -41,7 +41,7 @@ public class Place implements Parcelable {
     private boolean isMonument;
     private String thumb;
 
-    // When this place was saved in the local cache, used to refetch outdated details
+    // When this place was saved in the local cache, used to remove outdated details
     @ColumnInfo(defaultValue = "0")
     public long cachedAt;
 
