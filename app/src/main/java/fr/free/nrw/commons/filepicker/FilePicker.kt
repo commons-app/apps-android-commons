@@ -459,39 +459,58 @@ object FilePicker : Constants {
         activity: Activity,
         callbacks: Callbacks
     ) {
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            try {
-                val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
-                    .getString(KEY_PHOTO_URI, null)
-                if (!lastImageUri.isNullOrEmpty()) {
-                    revokeWritePermission(activity, Uri.parse(lastImageUri))
-                }
-
-                val photoFile = takenCameraPicture(activity)
-                val files = mutableListOf<UploadableFile>()
-                photoFile?.let { files.add(it) }
-
-                if (photoFile == null) {
-                    val e = IllegalStateException("Unable to get the picture returned from camera")
-                    callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
-                } else {
-                    if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                        PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
-                    }
-                    callbacks.onImagesPicked(files, ImageSource.CAMERA_IMAGE, restoreType(activity))
-                }
-
-                PreferenceManager.getDefaultSharedPreferences(activity).edit()
-                    .remove(KEY_LAST_CAMERA_PHOTO)
-                    .remove(KEY_PHOTO_URI)
-                    .apply()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
-            }
-        } else {
+        if (activityResult.resultCode != Activity.RESULT_OK) {
             callbacks.onCanceled(ImageSource.CAMERA_IMAGE, restoreType(activity))
+            return
         }
+
+        try {
+            processSuccessfulCameraResult(activity, callbacks)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
+        }
+    }
+
+    private fun processSuccessfulCameraResult(activity: Activity, callbacks: Callbacks) {
+        revokeLastCameraPermission(activity)
+
+        val photoFile = takenCameraPicture(activity)
+        if (photoFile == null) {
+            val e = IllegalStateException("Unable to get the picture returned from camera")
+            callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
+        } else {
+            handleValidCameraPhoto(activity, callbacks, photoFile)
+        }
+
+        clearCameraPreferences(activity)
+    }
+
+    private fun revokeLastCameraPermission(activity: Activity) {
+        val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
+            .getString(KEY_PHOTO_URI, null)
+        if (!lastImageUri.isNullOrEmpty()) {
+            revokeWritePermission(activity, Uri.parse(lastImageUri))
+        }
+    }
+
+    private fun handleValidCameraPhoto(
+        activity: Activity,
+        callbacks: Callbacks,
+        photoFile: UploadableFile
+    ) {
+        if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
+            PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
+        }
+        val files = listOf(photoFile)
+        callbacks.onImagesPicked(files, ImageSource.CAMERA_IMAGE, restoreType(activity))
+    }
+
+    private fun clearCameraPreferences(activity: Activity) {
+        PreferenceManager.getDefaultSharedPreferences(activity).edit()
+            .remove(KEY_LAST_CAMERA_PHOTO)
+            .remove(KEY_PHOTO_URI)
+            .apply()
     }
 
     @JvmStatic
