@@ -20,7 +20,6 @@ class RadioGroupHelperUnitTest {
     @Mock
     private lateinit var activity: Activity
 
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)

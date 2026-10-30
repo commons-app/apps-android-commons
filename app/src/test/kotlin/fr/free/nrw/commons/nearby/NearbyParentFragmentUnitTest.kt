@@ -91,9 +91,6 @@ class NearbyParentFragmentUnitTest {
     @Mock
     private lateinit var fab: FloatingActionButton
 
-
-
-
     @Mock
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao
 
