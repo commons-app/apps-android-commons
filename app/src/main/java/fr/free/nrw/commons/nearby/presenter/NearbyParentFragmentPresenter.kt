@@ -352,10 +352,12 @@ class NearbyParentFragmentPresenter(
         if (applicationKvStore.getLong(LAST_CACHED_PLACES_REMOVAL_DAY, -1L) == today) {
             return
         }
-        applicationKvStore.putLong(LAST_CACHED_PLACES_REMOVAL_DAY, today)
         placesRepository
             .removePlacesCachedBefore(now - CACHED_PLACE_MAX_AGE_MS)
-            .subscribe({}, { throwable -> Timber.e(throwable) })
+            .subscribe(
+                { applicationKvStore.putLong(LAST_CACHED_PLACES_REMOVAL_DAY, today) },
+                { throwable -> Timber.e(throwable) },
+            )
     }
 
     /**

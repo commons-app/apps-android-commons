@@ -510,4 +510,21 @@ class NearbyParentFragmentPresenterTest {
 
         verify(placesRepository, never()).removePlacesCachedBefore(anyLong())
     }
+
+    /**
+     * Test that the day is not saved when removing old cached places fails, so it is tried again
+     */
+    @Test
+    fun testRemoveOldCachedPlacesRetriesWhenRemovalFails() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong()))
+            .thenReturn(Completable.error(RuntimeException("Database error")))
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        verify(applicationKvStore, never()).putLong(anyString(), anyLong())
+    }
 }
