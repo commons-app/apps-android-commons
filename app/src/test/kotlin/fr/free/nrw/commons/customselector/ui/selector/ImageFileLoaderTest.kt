@@ -10,7 +10,6 @@ import com.nhaarman.mockitokotlin2.same
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.junit.Before
 import org.junit.Test
@@ -40,7 +39,6 @@ class ImageFileLoaderTest {
 
     @Mock
     private lateinit var imageLoaderListener: ImageLoaderListener
-
 
     private lateinit var imageCursor: RoboCursor
     private lateinit var coroutineContext: CoroutineContext

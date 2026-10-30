@@ -6,11 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -70,7 +66,6 @@ class NearbyParentFragmentUnitTest {
     @Mock
     private lateinit var view: View
 
-
     @Mock
     private lateinit var configuration: Configuration
 
@@ -95,7 +90,6 @@ class NearbyParentFragmentUnitTest {
 
     @Mock
     private lateinit var fab: FloatingActionButton
-
 
 
 

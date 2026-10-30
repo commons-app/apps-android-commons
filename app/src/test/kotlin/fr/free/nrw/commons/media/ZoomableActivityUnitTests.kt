@@ -37,7 +37,6 @@ class ZoomableActivityUnitTests {
     @Mock
     private lateinit var uri: Uri
 
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)

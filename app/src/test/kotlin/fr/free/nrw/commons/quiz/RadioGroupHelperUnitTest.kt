@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.quiz
 
 import android.app.Activity
-import android.view.View
-import android.widget.CompoundButton
 import android.widget.RadioButton
 import org.junit.Assert
 import org.junit.Before
@@ -21,7 +19,6 @@ class RadioGroupHelperUnitTest {
 
     @Mock
     private lateinit var activity: Activity
-
 
 
     @Before

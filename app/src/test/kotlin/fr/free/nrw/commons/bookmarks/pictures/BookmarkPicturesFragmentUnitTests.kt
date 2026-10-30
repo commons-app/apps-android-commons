@@ -79,7 +79,6 @@ class BookmarkPicturesFragmentUnitTests {
     @Mock
     private lateinit var throwable: Throwable
 
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
