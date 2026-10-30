@@ -16,7 +16,7 @@ class Entities : MwResponse() {
 
     override fun postProcess() {
         first?.let {
-            if (it.isMissing()) throw RuntimeException("The requested entity was not found.")
+            if (it.isMissing()) throw NoSuchElementException("The requested entity was not found.")
         }
     }
 

@@ -414,7 +414,7 @@ class NearbyParentFragment :
             try {
                 emptyCache()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -438,7 +438,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsGPX()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -448,7 +448,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsKML()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }

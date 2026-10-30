@@ -41,7 +41,7 @@ class CategoryDao
                     )
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -69,7 +69,7 @@ class CategoryDao
                     return fromCursor(cursor)
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 cursor?.close()
                 db.release()
@@ -109,7 +109,7 @@ class CategoryDao
                     }
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 cursor?.close()
                 db.release()

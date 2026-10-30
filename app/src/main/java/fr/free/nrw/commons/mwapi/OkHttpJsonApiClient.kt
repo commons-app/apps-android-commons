@@ -347,7 +347,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     /**
@@ -403,7 +403,7 @@ class OkHttpJsonApiClient @Inject constructor(
                 .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
                 .get("value").asInt
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     @Throws(Exception::class)
@@ -497,7 +497,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     @Throws(IOException::class)

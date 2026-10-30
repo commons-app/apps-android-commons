@@ -133,7 +133,7 @@ private fun marshal(location: Location?): String? {
                 put(LATITUDE, location.latitude)
                 put(LONGITUDE, location.longitude)
             } catch (e: JSONException) {
-                throw RuntimeException(e)
+                throw IllegalArgumentException(e)
             }
         }
 

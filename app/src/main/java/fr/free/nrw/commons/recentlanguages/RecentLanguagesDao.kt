@@ -43,7 +43,7 @@ class RecentLanguagesDao
                         languages.addAll(cursorToLanguages(cursor))
                     }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -72,7 +72,7 @@ class RecentLanguagesDao
                     toContentValues(language),
                 )
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -91,7 +91,7 @@ class RecentLanguagesDao
                     null,
                 )
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -121,7 +121,7 @@ class RecentLanguagesDao
                         }
                     }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }

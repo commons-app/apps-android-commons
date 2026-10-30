@@ -889,24 +889,6 @@
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
-    <ID>TooGenericExceptionThrown:BackgroundPoolExceptionHandler.kt$BackgroundPoolExceptionHandler$throw RuntimeException(t)</ID>
-    <ID>TooGenericExceptionThrown:BookmarkItemsDao.kt$BookmarkItemsDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:BookmarkPicturesDao.kt$BookmarkPicturesDao$throw RuntimeException("tried to delete item with no content URI")</ID>
-    <ID>TooGenericExceptionThrown:BookmarkPicturesDao.kt$BookmarkPicturesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:CategoryDao.kt$CategoryDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:DeleteHelper.kt$DeleteHelper$throw RuntimeException("Failed to nominate for deletion")</ID>
-    <ID>TooGenericExceptionThrown:DepictedItem.kt$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:Entities.kt$Entities$throw RuntimeException("The requested entity was not found.")</ID>
-    <ID>TooGenericExceptionThrown:NearbyParentFragment.kt$NearbyParentFragment$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$throw Exception(response.message)</ID>
-    <ID>TooGenericExceptionThrown:PageContentsCreator.kt$PageContentsCreator$throw RuntimeException("Unrecognized license value: $license")</ID>
-    <ID>TooGenericExceptionThrown:PageProperties.kt$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:PageTitle.kt$PageTitle$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:RecentLanguagesDao.kt$RecentLanguagesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException("tried to delete item with no content URI")</ID>
-    <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:UploadClient.kt$UploadClient$throw Exception(exception.errorCode)</ID>
-    <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>

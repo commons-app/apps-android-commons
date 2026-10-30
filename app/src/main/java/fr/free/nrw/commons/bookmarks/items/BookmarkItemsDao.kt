@@ -54,7 +54,7 @@ class BookmarkItemsDao @Inject constructor(
                 }
             }
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
@@ -86,7 +86,7 @@ class BookmarkItemsDao @Inject constructor(
         try {
             db.insert(BASE_URI, toContentValues(depictedItem))
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
@@ -101,7 +101,7 @@ class BookmarkItemsDao @Inject constructor(
         try {
             db.delete(uriForName(depictedItem.id), null, null)
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
@@ -129,7 +129,7 @@ class BookmarkItemsDao @Inject constructor(
                 exists = cursor.moveToFirst()
             }
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }

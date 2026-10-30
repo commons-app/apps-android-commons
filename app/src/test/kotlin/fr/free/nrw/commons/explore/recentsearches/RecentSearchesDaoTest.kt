@@ -204,7 +204,7 @@ class RecentSearchesDaoTest {
     /**
      * Unit Test for checking translation exceptions in searching a row from DB using recent search query
      */
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findRecentSearchTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("butterfly")
@@ -333,7 +333,7 @@ class RecentSearchesDaoTest {
     /**
      * Unit Test for translating exceptions in deleteAll
      */
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun deleteAllTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenThrow(RemoteException(""))
@@ -344,7 +344,7 @@ class RecentSearchesDaoTest {
     /**
      * Unit Test for checking exception when contentUri is null in deleteAll
      */
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun deleteAllThrowsExceptionWhenContentUriIsNull() {
         val cursor = createCursor(1)
         whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), isNull(), any(), eq("$COLUMN_LAST_USED DESC")))

@@ -13,7 +13,7 @@ class BackgroundPoolExceptionHandler : ExceptionHandler {
         if (BuildConfig.DEBUG) {
             val thread =
                 Thread {
-                    throw RuntimeException(t)
+                    throw IllegalStateException(t)
                 }
             thread.start()
         }
