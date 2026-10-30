@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import androidx.annotation.IntDef
 import com.facebook.common.logging.FLog
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
-import kotlin.math.abs
 
 /** Zoomable controller that calculates transformation based on touch events. */
 open class DefaultZoomableController(
@@ -27,13 +26,11 @@ open class DefaultZoomableController(
     annotation class LimitFlag
 
     companion object {
-        const val LIMIT_NONE = 0
-        const val LIMIT_TRANSLATION_X = 1
-        const val LIMIT_TRANSLATION_Y = 2
-        const val LIMIT_SCALE = 4
-        const val LIMIT_ALL = LIMIT_TRANSLATION_X or LIMIT_TRANSLATION_Y or LIMIT_SCALE
-
-        private const val EPS = 1e-3f
+        const val LIMIT_NONE = TransformLimiter.LIMIT_NONE
+        const val LIMIT_TRANSLATION_X = TransformLimiter.LIMIT_TRANSLATION_X
+        const val LIMIT_TRANSLATION_Y = TransformLimiter.LIMIT_TRANSLATION_Y
+        const val LIMIT_SCALE = TransformLimiter.LIMIT_SCALE
+        const val LIMIT_ALL = TransformLimiter.LIMIT_ALL
 
         private val TAG: Class<*> = DefaultZoomableController::class.java
 
@@ -68,7 +65,7 @@ open class DefaultZoomableController(
     private val mActiveTransform = Matrix()
     private val mActiveTransformInverse = Matrix()
     private val mTempValues = FloatArray(9)
-    private val mTempRect = RectF()
+    private val mTransformLimiter = TransformLimiter(mMinScaleFactor, mMaxScaleFactor)
     private var mWasTransformCorrected = false
 
     init {
@@ -131,6 +128,7 @@ open class DefaultZoomableController(
      */
     fun setMinScaleFactor(minScaleFactor: Float) {
         mMinScaleFactor = minScaleFactor
+        mTransformLimiter.minScale = minScaleFactor
     }
 
     /** Gets the minimum scale factor allowed. */
@@ -143,6 +141,7 @@ open class DefaultZoomableController(
      */
     fun setMaxScaleFactor(maxScaleFactor: Float) {
         mMaxScaleFactor = maxScaleFactor
+        mTransformLimiter.maxScale = maxScaleFactor
     }
 
     /** Gets the maximum scale factor allowed. */
@@ -157,7 +156,7 @@ open class DefaultZoomableController(
     fun isGestureZoomEnabled(): Boolean = mIsGestureZoomEnabled
 
     /** Gets the current scale factor. */
-    override fun getScaleFactor(): Float = getMatrixScaleFactor(mActiveTransform)
+    override fun getScaleFactor(): Float = mTransformLimiter.getMatrixScaleFactor(mActiveTransform)
 
     /** Sets the image bounds, in view-absolute coordinates. */
     override fun setImageBounds(imageBounds: RectF) {
@@ -188,7 +187,7 @@ open class DefaultZoomableController(
     fun getImageBoundsListener(): ImageBoundsListener? = mImageBoundsListener
 
     /** Returns true if the zoomable transform is identity matrix. */
-    override fun isIdentity(): Boolean = isMatrixIdentity(mActiveTransform, 1e-3f)
+    override fun isIdentity(): Boolean = mTransformLimiter.isMatrixIdentity(mActiveTransform)
 
     /**
      * Returns true if the transform was corrected during the last update.
@@ -328,9 +327,10 @@ open class DefaultZoomableController(
         var transformCorrected = false
         outTransform.setScale(scale, scale, viewAbsolute[0], viewAbsolute[1])
         transformCorrected = transformCorrected or
-            limitScale(outTransform, viewAbsolute[0], viewAbsolute[1], limitFlags)
+            mTransformLimiter.limitScale(outTransform, viewAbsolute[0], viewAbsolute[1], limitFlags)
         outTransform.postTranslate(distanceX, distanceY)
-        transformCorrected = transformCorrected or limitTranslation(outTransform, limitFlags)
+        transformCorrected = transformCorrected or
+            mTransformLimiter.limitTranslation(outTransform, limitFlags, mImageBounds, mViewBounds)
         return transformCorrected
     }
 
@@ -360,7 +360,8 @@ open class DefaultZoomableController(
         FLog.v(TAG, "onGestureBegin")
         mPreviousTransform.set(mActiveTransform)
         onTransformBegin()
-        mWasTransformCorrected = !canScrollInAllDirection()
+        mWasTransformCorrected =
+            !mTransformLimiter.canScrollInAllDirection(mTransformedImageBounds, mViewBounds)
     }
 
     override fun onGestureUpdate(detector: TransformGestureDetector) {
@@ -401,7 +402,7 @@ open class DefaultZoomableController(
             outTransform.postScale(scale, scale, detector.getPivotX(), detector.getPivotY())
         }
         transformCorrected = transformCorrected or
-            limitScale(
+            mTransformLimiter.limitScale(
                 outTransform,
                 detector.getPivotX(),
                 detector.getPivotY(),
@@ -410,7 +411,8 @@ open class DefaultZoomableController(
         if (mIsTranslationEnabled) {
             outTransform.postTranslate(detector.getTranslationX(), detector.getTranslationY())
         }
-        transformCorrected = transformCorrected or limitTranslation(outTransform, limitTypes)
+        transformCorrected = transformCorrected or
+            mTransformLimiter.limitTranslation(outTransform, limitTypes, mImageBounds, mViewBounds)
         return transformCorrected
     }
 
@@ -432,152 +434,6 @@ open class DefaultZoomableController(
             mListener?.onTransformEnd(mActiveTransform)
         }
     }
-
-    /**
-     * Keeps the scaling factor within the specified limits.
-     *
-     * @param pivotX x coordinate of the pivot point
-     * @param pivotY y coordinate of the pivot point
-     * @param limitTypes whether to limit scale.
-     * @return whether limiting has been applied or not
-     */
-    private fun limitScale(
-        transform: Matrix,
-        pivotX: Float,
-        pivotY: Float,
-        @LimitFlag limitTypes: Int,
-    ): Boolean {
-        if (!shouldLimit(limitTypes, LIMIT_SCALE)) {
-            return false
-        }
-        val currentScale = getMatrixScaleFactor(transform)
-        val targetScale = limit(currentScale, mMinScaleFactor, mMaxScaleFactor)
-        return if (targetScale != currentScale) {
-            val scale = targetScale / currentScale
-            transform.postScale(scale, scale, pivotX, pivotY)
-            true
-        } else {
-            false
-        }
-    }
-
-    /**
-     * Limits the translation so that there are no empty spaces on the sides if possible.
-     */
-    private fun limitTranslation(
-        transform: Matrix,
-        @LimitFlag limitTypes: Int,
-    ): Boolean {
-        if (!shouldLimit(limitTypes, LIMIT_TRANSLATION_X or LIMIT_TRANSLATION_Y)) {
-            return false
-        }
-        val b = mTempRect
-        b.set(mImageBounds)
-        transform.mapRect(b)
-        val offsetLeft =
-            if (shouldLimit(limitTypes, LIMIT_TRANSLATION_X)) {
-                getOffset(
-                    b.left,
-                    b.right,
-                    mViewBounds.left,
-                    mViewBounds.right,
-                    mImageBounds.centerX(),
-                )
-            } else {
-                0f
-            }
-        val offsetTop =
-            if (shouldLimit(limitTypes, LIMIT_TRANSLATION_Y)) {
-                getOffset(
-                    b.top,
-                    b.bottom,
-                    mViewBounds.top,
-                    mViewBounds.bottom,
-                    mImageBounds.centerY(),
-                )
-            } else {
-                0f
-            }
-
-        return if (offsetLeft != 0f || offsetTop != 0f) {
-            transform.postTranslate(offsetLeft, offsetTop)
-            true
-        } else {
-            false
-        }
-    }
-
-    /**
-     * Checks whether the specified limit flag is present in the limits provided.
-     */
-    private fun shouldLimit(
-        @LimitFlag limits: Int,
-        @LimitFlag flag: Int,
-    ): Boolean = (limits and flag) != LIMIT_NONE
-
-    /**
-     * Returns the offset necessary to make sure that:
-     * - The image is centered if it's smaller than the limit
-     * - There is no empty space if the image is bigger than the limit
-     */
-    private fun getOffset(
-        imageStart: Float,
-        imageEnd: Float,
-        limitStart: Float,
-        limitEnd: Float,
-        limitCenter: Float,
-    ): Float {
-        val imageWidth = imageEnd - imageStart
-        val limitWidth = limitEnd - limitStart
-        val limitInnerWidth = minOf(limitCenter - limitStart, limitEnd - limitCenter) * 2
-
-        return when {
-            imageWidth < limitInnerWidth -> limitCenter - (imageEnd + imageStart) / 2
-            imageWidth < limitWidth ->
-                if (limitCenter < (limitStart + limitEnd) / 2) {
-                    limitStart - imageStart
-                } else {
-                    limitEnd - imageEnd
-                }
-            imageStart > limitStart -> limitStart - imageStart
-            imageEnd < limitEnd -> limitEnd - imageEnd
-            else -> 0f
-        }
-    }
-
-    /** Limits the value to the given min and max range. */
-    private fun limit(
-        value: Float,
-        min: Float,
-        max: Float,
-    ): Float = min.coerceAtLeast(value).coerceAtMost(max)
-
-    /**
-     * Gets the scale factor for the given matrix. Assumes equal scaling for X and Y axis.
-     */
-    private fun getMatrixScaleFactor(transform: Matrix): Float {
-        transform.getValues(mTempValues)
-        return mTempValues[Matrix.MSCALE_X]
-    }
-
-    /** Checks if the matrix is an identity matrix within a given tolerance `eps`. */
-    private fun isMatrixIdentity(
-        transform: Matrix,
-        eps: Float,
-    ): Boolean {
-        transform.getValues(mTempValues)
-        mTempValues[0] -= 1.0f // m00
-        mTempValues[4] -= 1.0f // m11
-        mTempValues[8] -= 1.0f // m22
-        return mTempValues.all { abs(it) <= eps }
-    }
-
-    /** Returns whether the scroll can happen in all directions. */
-    private fun canScrollInAllDirection(): Boolean =
-        mTransformedImageBounds.left < mViewBounds.left - EPS &&
-            mTransformedImageBounds.top < mViewBounds.top - EPS &&
-            mTransformedImageBounds.right > mViewBounds.right + EPS &&
-            mTransformedImageBounds.bottom > mViewBounds.bottom + EPS
 
     override fun computeHorizontalScrollRange(): Int = mTransformedImageBounds.width().toInt()
 
