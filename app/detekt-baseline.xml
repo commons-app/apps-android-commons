@@ -961,8 +961,6 @@
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentOnPageChangeListenerCallback</ID>
     <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
     <ID>TooManyFunctions:MoreBottomSheetFragment.kt$MoreBottomSheetFragment : BottomSheetDialogFragment</ID>
-    <ID>TooManyFunctions:MultiGestureListener.kt$MultiGestureListener : SimpleOnGestureListener</ID>
-    <ID>TooManyFunctions:MultiPointerGestureDetector.kt$MultiPointerGestureDetector</ID>
     <ID>TooManyFunctions:MwQueryPage.kt$MwQueryPage : BaseModel</ID>
     <ID>TooManyFunctions:MwQueryResult.kt$MwQueryResult : BaseModelPostProcessable</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
@@ -978,7 +976,6 @@
     <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
     <ID>TooManyFunctions:SearchActivity.kt$SearchActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
-    <ID>TooManyFunctions:TransformGestureDetector.kt$TransformGestureDetector : Listener</ID>
     <ID>TooManyFunctions:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>TooManyFunctions:UploadCategoriesFragment.kt$UploadCategoriesFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:UploadContract.kt$UploadContract$View</ID>
