@@ -195,7 +195,7 @@ class ProfileActivity : BaseActivity() {
                 }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not share screenshot")
         }
     }
 

@@ -10,6 +10,7 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
+import timber.log.Timber
 
 class DBOpenHelper(
     context: Context,
@@ -86,7 +87,7 @@ class DBOpenHelper(
             db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName))
             createAllTables(db)
         } catch (e: SQLiteException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not recreate table %s", tableName)
         }
     }
 }

@@ -733,15 +733,6 @@
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>
-    <ID>PrintStackTrace:CountingRequestBody.kt$CountingRequestBody$e</ID>
-    <ID>PrintStackTrace:DBOpenHelper.kt$DBOpenHelper$e</ID>
-    <ID>PrintStackTrace:FilePicker.kt$FilePicker$e</ID>
-    <ID>PrintStackTrace:ImageFragment.kt$ImageFragment$ex</ID>
-    <ID>PrintStackTrace:LoginActivity.kt$LoginActivity$e</ID>
-    <ID>PrintStackTrace:NearbyParentFragment.kt$NearbyParentFragment$e</ID>
-    <ID>PrintStackTrace:OnSwipeTouchListener.kt$OnSwipeTouchListener.GestureListener$exception</ID>
-    <ID>PrintStackTrace:ProfileActivity.kt$ProfileActivity$e</ID>
-    <ID>PrintStackTrace:QuizResultActivity.kt$QuizResultActivity$e</ID>
     <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$CountingSink : ForwardingSink</ID>
     <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$protected var countingSink: CountingSink? = null</ID>
     <ID>ProtectedMemberInFinalClass:MwParseResponse.kt$MwParseResponse$@VisibleForTesting protected fun setParse(parse: MwParseResult?)</ID>

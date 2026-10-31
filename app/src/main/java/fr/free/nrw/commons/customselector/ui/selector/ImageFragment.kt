@@ -323,7 +323,7 @@ class ImageFragment :
         try {
             (getActivity() as CustomSelectorActivity).setOnDataListener(this)
         } catch (ex: Exception) {
-            ex.printStackTrace()
+            Timber.e(ex, "Could not set data listener on CustomSelectorActivity")
         }
     }
 
