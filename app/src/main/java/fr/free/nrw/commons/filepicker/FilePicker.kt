@@ -393,7 +393,7 @@ object FilePicker : Constants {
             val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
             ImageDecoder.decodeBitmap(source)
         } else {
-            throw IllegalStateException("HEIC conversion requires Android P+")
+            error("HEIC conversion requires Android P+")
         }
 
         val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
