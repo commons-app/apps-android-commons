@@ -101,7 +101,7 @@ class ImageFileLoader(
         if (cursor.moveToFirst()) {
             do {
                 if (Thread.interrupted()) {
-                    listener.onFailed(NullPointerException("Thread was interrupted during image loading"))
+                    listener.onFailed(InterruptedException("Loading device images was interrupted"))
                     return false
                 }
                 parseAndAddImage(cursor, indices, images)
