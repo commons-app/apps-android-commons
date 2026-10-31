@@ -73,6 +73,9 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Companion newInstance.
      */
     companion object {
+        // todo change column count depending on the orientation of the device.
+        private const val COLUMN_COUNT = 2
+
         fun newInstance(): FolderFragment = FolderFragment()
     }
 
@@ -100,7 +103,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
         folderAdapter = FolderAdapter(requireActivity(), activity as FolderClickListener)
-        gridLayoutManager = GridLayoutManager(context, columnCount())
+        gridLayoutManager = GridLayoutManager(context, COLUMN_COUNT)
         selectorRV = binding?.selectorRv
         loader = binding?.loader
         with(binding?.selectorRv) {
@@ -160,13 +163,5 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    /**
-     * Return Column count ie span count for grid view adapter.
-     */
-    private fun columnCount(): Int {
-        return 2
-        // todo change column count depending on the orientation of the device.
     }
 }

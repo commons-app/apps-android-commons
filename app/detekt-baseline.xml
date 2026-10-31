@@ -87,8 +87,6 @@
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
-    <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
-    <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
     <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils$e is UnknownHostException</ID>
     <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
     <ID>InstanceOfCheckForException:PageEditClient.kt$PageEditClient$throwable is InvalidLoginTokenException</ID>
