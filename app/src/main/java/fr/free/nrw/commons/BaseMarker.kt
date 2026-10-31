@@ -7,9 +7,9 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.createBitmap
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
-import androidx.core.graphics.createBitmap
 
 class BaseMarker {
     private var _position: LatLng = LatLng(0.0, 0.0, 0f)
@@ -46,8 +46,9 @@ class BaseMarker {
         context: Context,
         drawableResId: Int,
     ) {
-        val drawable: Drawable = ContextCompat.getDrawable(context, drawableResId)
-            ?: throw Resources.NotFoundException("Resource ID $drawableResId not found")
+        val drawable: Drawable =
+            ContextCompat.getDrawable(context, drawableResId)
+                ?: throw Resources.NotFoundException("Resource ID $drawableResId not found")
         icon =
             if (drawable is BitmapDrawable) {
                 drawable.bitmap
