@@ -158,6 +158,9 @@ class ImageFragment :
     lateinit var contributionDao: ContributionDao
 
     companion object {
+        // todo change span count depending on the device orientation and other factos.
+        private const val SPAN_COUNT = 3
+
         /**
          * Switch state
          */
@@ -224,7 +227,7 @@ class ImageFragment :
             ) ==
                 true
         imageAdapter.setSingleSelection(singleSelection)
-        gridLayoutManager = GridLayoutManager(context, getSpanCount())
+        gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
         with(binding?.selectorRv) {
             this?.applyEdgeToEdgeBottomPaddingInsets()
             this?.layoutManager = gridLayoutManager
@@ -367,16 +370,6 @@ class ImageFragment :
             it.visibility =
                 if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
         }
-    }
-
-    /**
-     * getSpanCount for GridViewManager.
-     *
-     * @return spanCount.
-     */
-    private fun getSpanCount(): Int {
-        return 3
-        // todo change span count depending on the device orientation and other factos.
     }
 
     /**
