@@ -89,7 +89,7 @@
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
     <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e is UnknownHostException</ID>
+    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils$e is UnknownHostException</ID>
     <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
     <ID>InstanceOfCheckForException:PageEditClient.kt$PageEditClient$throwable is InvalidLoginTokenException</ID>
     <ID>InstanceOfCheckForException:ThanksClient.kt$ThanksClient$throwable is InvalidLoginTokenException</ID>
@@ -823,7 +823,7 @@
     <ID>TooGenericExceptionCaught:CryptoUtils.kt$CryptoUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CsrfTokenClient.kt$CsrfTokenClient$t: Throwable</ID>
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e2: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
@@ -972,9 +972,6 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>UtilityClassWithPublicConstructor:CustomSelectorUtils.kt$CustomSelectorUtils</ID>
-    <ID>UtilityClassWithPublicConstructor:MimeTypeMapWrapper.kt$MimeTypeMapWrapper</ID>
-    <ID>UtilityClassWithPublicConstructor:WorkRequestHelper.kt$WorkRequestHelper</ID>
     <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
     <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
   </CurrentIssues>
