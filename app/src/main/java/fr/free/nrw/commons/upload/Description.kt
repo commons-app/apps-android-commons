@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload
 
+import java.util.Locale
+
 /**
  * Holds a description of an item being uploaded by [UploadActivity]
  */
@@ -47,6 +49,7 @@ class Description {
                 if (!description.isEmpty) {
                     val individualDescription =
                         String.format(
+                            Locale.ROOT,
                             "{{%s|1=%s}}",
                             description.languageCode,
                             description.descriptionText,

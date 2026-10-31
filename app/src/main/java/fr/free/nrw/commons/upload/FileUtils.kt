@@ -42,7 +42,7 @@ object FileUtils {
             val bigInt = BigInteger(1, md5sum)
             var output = bigInt.toString(16)
             // Fill to 40 chars
-            output = String.format("%40s", output).replace(' ', '0')
+            output = String.format(Locale.ROOT, "%40s", output).replace(' ', '0')
             Timber.i("File SHA1: %s", output)
 
             return output
