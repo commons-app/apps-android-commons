@@ -819,20 +819,6 @@
     <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray(), )</ID>
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
     <ID>SpreadOperator:UploadActivity.kt$UploadActivity$( this, Runnable { binding.cvContainerTopCard.visibility = View.VISIBLE receiveSharedItems() }, Runnable { isShowPermissionsDialog = true checkStoragePermissions() }, R.string.storage_permission_title, R.string.write_storage_permission_rationale_for_image_share, *PERMISSIONS_STORAGE, )</ID>
-    <ID>SwallowedException:AboutActivity.kt$AboutActivity$e: Exception</ID>
-    <ID>SwallowedException:CategoriesPresenter.kt$CategoriesPresenter$e: InvalidLoginTokenException</ID>
-    <ID>SwallowedException:ConfigUtils.kt$ConfigUtils$e: PackageManager.NameNotFoundException</ID>
-    <ID>SwallowedException:CsrfTokenClient.kt$CsrfTokenClient$e: LoginFailedException</ID>
-    <ID>SwallowedException:DescriptionEditActivity.kt$DescriptionEditActivity$e: InvalidLoginTokenException</ID>
-    <ID>SwallowedException:EXIFReader.kt$EXIFReader$e: Exception</ID>
-    <ID>SwallowedException:ExploreMapController.kt$ExploreMapController.Companion$e: Resources.NotFoundException</ID>
-    <ID>SwallowedException:JsonKvStore.kt$JsonKvStore$e: JsonSyntaxException</ID>
-    <ID>SwallowedException:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:MoreBottomSheetLoggedOutFragment.kt$MoreBottomSheetLoggedOutFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:NearbyParentFragment.kt$NearbyParentFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
-    <ID>SwallowedException:PageProperties.kt$e: JSONException</ID>
-    <ID>SwallowedException:PageTitle.kt$PageTitle$e: IllegalArgumentException</ID>
     <ID>ThrowingExceptionsWithoutMessageOrCause:ImageFileLoader.kt$ImageFileLoader$NullPointerException()</ID>
     <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>

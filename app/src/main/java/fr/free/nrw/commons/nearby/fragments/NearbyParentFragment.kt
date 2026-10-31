@@ -1814,6 +1814,7 @@ class NearbyParentFragment :
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No application available to open the GPX/KML file")
             Toast
                 .makeText(
                     context,

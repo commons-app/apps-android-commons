@@ -98,6 +98,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         LeaderboardResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the leaderboard response")
                     return@fromCallable LeaderboardResponse()
                 }
             }
@@ -200,6 +201,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         UpdateAvatarResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the avatar update response")
                     return@fromCallable UpdateAvatarResponse()
                 }
             }
