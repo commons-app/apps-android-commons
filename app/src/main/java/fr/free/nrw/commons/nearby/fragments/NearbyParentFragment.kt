@@ -415,7 +415,7 @@ class NearbyParentFragment :
             try {
                 emptyCache()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -439,7 +439,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsGPX()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -449,7 +449,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsKML()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -1814,6 +1814,7 @@ class NearbyParentFragment :
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No application available to open the GPX/KML file")
             Toast
                 .makeText(
                     context,

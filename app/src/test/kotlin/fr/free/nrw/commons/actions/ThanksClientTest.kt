@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.mockk.every
 import io.mockk.mockkObject
 import org.junit.Before
@@ -53,5 +54,26 @@ class ThanksClientTest {
         `when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))
+    }
+
+    /**
+     * Test that an invalid login token is reported to the subscriber
+     */
+    @Test
+    fun testThanksPropagatesInvalidLoginToken() {
+        val invalidLoginToken = InvalidLoginTokenException("invalid")
+        `when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
+
+        thanksClient.thank(1L).test().assertError(invalidLoginToken)
+    }
+
+    /**
+     * Test that any other failure is reported as an unsuccessful thanks
+     */
+    @Test
+    fun testThanksReturnsFalseOnOtherFailure() {
+        `when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+
+        thanksClient.thank(1L).test().assertValue(false)
     }
 }

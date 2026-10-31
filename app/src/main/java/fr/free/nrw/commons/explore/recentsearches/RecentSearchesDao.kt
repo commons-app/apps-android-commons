@@ -43,7 +43,7 @@ class RecentSearchesDao
                     db.update(recentSearch.contentUri!!, contentValues, null, null)
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -69,7 +69,7 @@ class RecentSearchesDao
                     deleteSearchItem(db, cursor)
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 cursor?.close()
                 db.release()
@@ -82,12 +82,12 @@ class RecentSearchesDao
         ) {
             val recentSearch = find(fromCursor(cursor).query)
             if (recentSearch?.contentUri == null) {
-                throw RuntimeException("tried to delete item with no content URI")
+                error("tried to delete item with no content URI")
             }
             try {
                 db.delete(recentSearch.contentUri!!, null, null)
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
         }
 
@@ -98,12 +98,12 @@ class RecentSearchesDao
             val db = clientProvider.get()
             try {
                 if (recentSearch.contentUri == null) {
-                    throw RuntimeException("tried to delete item with no content URI")
+                    error("tried to delete item with no content URI")
                 } else {
                     db.delete(recentSearch.contentUri!!, null, null)
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -131,7 +131,7 @@ class RecentSearchesDao
                 }
             } catch (e: RemoteException) {
                 // This feels lazy, but to hell with checked exceptions. :)
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 cursor?.close()
                 db.release()
@@ -161,7 +161,7 @@ class RecentSearchesDao
                     items.add(fromCursor(cursor).query)
                 }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 cursor?.close()
                 db.release()

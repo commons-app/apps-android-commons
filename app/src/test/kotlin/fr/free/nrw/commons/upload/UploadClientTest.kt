@@ -20,6 +20,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
+import junit.framework.TestCase.assertTrue
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -28,6 +29,7 @@ import okio.Buffer
 import org.junit.Before
 import org.junit.Test
 import java.io.File
+import java.io.IOException
 import java.util.Date
 
 class UploadClientTest {
@@ -109,7 +111,10 @@ class UploadClientTest {
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
 
         result.assertNoValues()
-        assertEquals(errorCode, result.errors()[0].message)
+        val thrown = result.errors()[0]
+        assertEquals(errorCode, thrown.message)
+        assertTrue(thrown is IOException)
+        assertSame(uploadException, thrown.cause)
     }
 
     @Test

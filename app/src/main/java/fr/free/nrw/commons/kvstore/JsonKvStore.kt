@@ -3,6 +3,7 @@ package fr.free.nrw.commons.kvstore
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import timber.log.Timber
 
 class JsonKvStore : BasicKvStore {
     val gson: Gson
@@ -47,6 +48,7 @@ class JsonKvStore : BasicKvStore {
         try {
             gson.fromJson(getString(key), clazz)
         } catch (e: JsonSyntaxException) {
+            Timber.e(e, "Failed to parse JSON stored for key %s", key)
             null
         }
 
@@ -57,6 +59,7 @@ class JsonKvStore : BasicKvStore {
         try {
             gson.fromJson(getString(key), T::class.java)
         } catch (e: JsonSyntaxException) {
+            Timber.e(e, "Failed to parse JSON stored for key %s", key)
             null
         }
 }

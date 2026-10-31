@@ -194,7 +194,7 @@ class CategoryDaoTest {
         }
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun testSaveTranslatesRemoteExceptions() {
         whenever(client.insert(isA(), isA())).thenThrow(RemoteException(""))
         testObject.save(Category())
@@ -247,13 +247,13 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findCategoryTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("showImageWithItem")
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun recentCategoriesTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenThrow(RemoteException(""))
         testObject.recentCategories(1)

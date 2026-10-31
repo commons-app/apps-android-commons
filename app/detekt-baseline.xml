@@ -98,10 +98,6 @@
     <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/w/index.php?title=%3\$s&amp;action=%4\$s", wikiSite.scheme(), wikiSite.authority(), URLEncoder.encode(prefixedText, "utf-8"), action, )</ID>
     <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/wiki/%3\$s%4\$s", wikiSite.scheme(), domain, URLEncoder.encode(prefixedText, "utf-8"), if ((fragment != null &amp;&amp; fragment.length &gt; 0)) ("#$fragment") else "", )</ID>
     <ID>ImplicitDefaultLocale:WikiSite.kt$WikiSite$String.format("%1\$s://%2\$s", scheme(), mobileAuthority())</ID>
-    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e is UnknownHostException</ID>
-    <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
-    <ID>InstanceOfCheckForException:PageEditClient.kt$PageEditClient$throwable is InvalidLoginTokenException</ID>
-    <ID>InstanceOfCheckForException:ThanksClient.kt$ThanksClient$throwable is InvalidLoginTokenException</ID>
     <ID>LargeClass:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
     <ID>LargeClass:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
     <ID>LargeClass:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
@@ -819,22 +815,6 @@
     <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray(), )</ID>
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
     <ID>SpreadOperator:UploadActivity.kt$UploadActivity$( this, Runnable { binding.cvContainerTopCard.visibility = View.VISIBLE receiveSharedItems() }, Runnable { isShowPermissionsDialog = true checkStoragePermissions() }, R.string.storage_permission_title, R.string.write_storage_permission_rationale_for_image_share, *PERMISSIONS_STORAGE, )</ID>
-    <ID>SwallowedException:AboutActivity.kt$AboutActivity$e: Exception</ID>
-    <ID>SwallowedException:CategoriesPresenter.kt$CategoriesPresenter$e: InvalidLoginTokenException</ID>
-    <ID>SwallowedException:ConfigUtils.kt$ConfigUtils$e: PackageManager.NameNotFoundException</ID>
-    <ID>SwallowedException:CsrfTokenClient.kt$CsrfTokenClient$e: LoginFailedException</ID>
-    <ID>SwallowedException:DescriptionEditActivity.kt$DescriptionEditActivity$e: InvalidLoginTokenException</ID>
-    <ID>SwallowedException:EXIFReader.kt$EXIFReader$e: Exception</ID>
-    <ID>SwallowedException:ExploreMapController.kt$ExploreMapController.Companion$e: Resources.NotFoundException</ID>
-    <ID>SwallowedException:JsonKvStore.kt$JsonKvStore$e: JsonSyntaxException</ID>
-    <ID>SwallowedException:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:MoreBottomSheetLoggedOutFragment.kt$MoreBottomSheetLoggedOutFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:NearbyParentFragment.kt$NearbyParentFragment$e: ActivityNotFoundException</ID>
-    <ID>SwallowedException:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
-    <ID>SwallowedException:PageProperties.kt$e: JSONException</ID>
-    <ID>SwallowedException:PageTitle.kt$PageTitle$e: IllegalArgumentException</ID>
-    <ID>ThrowingExceptionsWithoutMessageOrCause:ImageFileLoader.kt$ImageFileLoader$NullPointerException()</ID>
-    <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
     <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
     <ID>TooGenericExceptionCaught:AboutActivity.kt$AboutActivity$e: Exception</ID>
@@ -889,24 +869,6 @@
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
-    <ID>TooGenericExceptionThrown:BackgroundPoolExceptionHandler.kt$BackgroundPoolExceptionHandler$throw RuntimeException(t)</ID>
-    <ID>TooGenericExceptionThrown:BookmarkItemsDao.kt$BookmarkItemsDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:BookmarkPicturesDao.kt$BookmarkPicturesDao$throw RuntimeException("tried to delete item with no content URI")</ID>
-    <ID>TooGenericExceptionThrown:BookmarkPicturesDao.kt$BookmarkPicturesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:CategoryDao.kt$CategoryDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:DeleteHelper.kt$DeleteHelper$throw RuntimeException("Failed to nominate for deletion")</ID>
-    <ID>TooGenericExceptionThrown:DepictedItem.kt$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:Entities.kt$Entities$throw RuntimeException("The requested entity was not found.")</ID>
-    <ID>TooGenericExceptionThrown:NearbyParentFragment.kt$NearbyParentFragment$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$throw Exception(response.message)</ID>
-    <ID>TooGenericExceptionThrown:PageContentsCreator.kt$PageContentsCreator$throw RuntimeException("Unrecognized license value: $license")</ID>
-    <ID>TooGenericExceptionThrown:PageProperties.kt$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:PageTitle.kt$PageTitle$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:RecentLanguagesDao.kt$RecentLanguagesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException("tried to delete item with no content URI")</ID>
-    <ID>TooGenericExceptionThrown:RecentSearchesDao.kt$RecentSearchesDao$throw RuntimeException(e)</ID>
-    <ID>TooGenericExceptionThrown:UploadClient.kt$UploadClient$throw Exception(exception.errorCode)</ID>
-    <ID>TooGenericExceptionThrown:ZoomableDraweeView.kt$ZoomableDraweeView$throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>

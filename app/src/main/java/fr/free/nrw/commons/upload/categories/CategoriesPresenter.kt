@@ -279,6 +279,7 @@ class CategoriesPresenter
                                 }),
                         )
                     } catch (e: InvalidLoginTokenException) {
+                        Timber.e(e, "Invalid login token while updating categories")
                         view.navigateToLoginScreen()
                     }
                 }

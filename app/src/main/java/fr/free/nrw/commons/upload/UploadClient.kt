@@ -273,7 +273,7 @@ class UploadClient
                         if (uploadResult.upload == null) {
                             val exception = gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
-                            throw Exception(exception.errorCode)
+                            throw IOException(exception.errorCode, exception)
                         }
                         uploadResult.upload
                     }

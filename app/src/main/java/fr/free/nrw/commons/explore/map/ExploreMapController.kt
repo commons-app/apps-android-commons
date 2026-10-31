@@ -167,7 +167,7 @@ class ExploreMapController
                             R.drawable.ic_custom_map_marker_dark,
                             context.theme,
                         )
-                } catch (e: Resources.NotFoundException) {
+                } catch (_: Resources.NotFoundException) {
                     // ignore when running tests.
                 }
                 if (vectorDrawable != null) {
