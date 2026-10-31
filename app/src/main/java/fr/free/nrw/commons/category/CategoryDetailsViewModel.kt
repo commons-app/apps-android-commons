@@ -97,11 +97,11 @@ class CategoryDetailsViewModel(
             private val bookmarkCategoriesDao: BookmarkCategoriesDao,
         ) : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T =
-                if (modelClass.isAssignableFrom(CategoryDetailsViewModel::class.java)) {
-                    CategoryDetailsViewModel(bookmarkCategoriesDao) as T
-                } else {
-                    throw IllegalArgumentException("Unknown class name")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                require(modelClass.isAssignableFrom(CategoryDetailsViewModel::class.java)) {
+                    "Unknown class name"
                 }
+                return CategoryDetailsViewModel(bookmarkCategoriesDao) as T
+            }
         }
 }

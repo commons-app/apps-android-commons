@@ -46,7 +46,7 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
@@ -304,7 +304,7 @@ class UploadActivity :
      * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar
      * is created to notify the user
      */
-    protected fun checkBlockStatus() {
+    private fun checkBlockStatus() {
         compositeDisposable.add(
             userClient!!
                 .isUserBlockedFromCommons()

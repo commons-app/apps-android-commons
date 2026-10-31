@@ -20,84 +20,82 @@ import java.net.UnknownHostException
 /**
  * Util Class for Custom Selector
  */
-class CustomSelectorUtils {
-    companion object {
-        /**
-         * Get image sha1 from uri, used to retrieve the original image sha1.
-         */
-        suspend fun getImageSHA1(
-            uri: Uri,
-            ioDispatcher: CoroutineDispatcher,
-            fileUtilsWrapper: FileUtilsWrapper,
-            contentResolver: ContentResolver,
-        ): String =
-            withContext(ioDispatcher) {
-                try {
-                    val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
-                    result
-                } catch (e: FileNotFoundException) {
-                    e.printStackTrace()
-                    ""
-                }
-            }
-
-        /**
-         * Generates modified SHA1 of an image
-         */
-        suspend fun generateModifiedSHA1(
-            image: Image,
-            defaultDispatcher: CoroutineDispatcher,
-            context: Context,
-            fileProcessor: FileProcessor,
-            fileUtilsWrapper: FileUtilsWrapper,
-        ): String =
-            withContext(defaultDispatcher) {
-                val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
-                val exifInterface: ExifInterface? =
-                    try {
-                        ExifInterface(uploadableFile.file)
-                    } catch (e: IOException) {
-                        Timber.e(e)
-                        null
-                    }
-                fileProcessor.redactExifTags(
-                    exifInterface,
-                    fileProcessor.getExifTagsToRedact(),
-                    uploadableFile.getFilePath(),
-                )
-                val sha1 =
-                    fileUtilsWrapper.getSHA1(
-                        fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
-                    )
-                uploadableFile.file.delete()
-                sha1
-            }
-
-        /**
-         * Query SHA1, return result if previously queried, otherwise start a new query.
-         *
-         * @return true if the image exists on Commons, false otherwise.
-         */
-        suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(
-            sha1: String,
-            ioDispatcher: CoroutineDispatcher,
-            mediaClient: MediaClient,
-        ): ImageLoader.Result =
-            withContext(ioDispatcher) {
-                var result: ImageLoader.Result = ImageLoader.Result.FALSE
-                try {
-                    if (mediaClient.checkFileExistsUsingSha(sha1).blockingGet()) {
-                        result = ImageLoader.Result.TRUE
-                    }
-                } catch (e: Exception) {
-                    if (e is UnknownHostException) {
-                        // Handle no network connection.
-                        Timber.e(e, "Network Connection Error")
-                    }
-                    result = ImageLoader.Result.ERROR
-                    e.printStackTrace()
-                }
+object CustomSelectorUtils {
+    /**
+     * Get image sha1 from uri, used to retrieve the original image sha1.
+     */
+    suspend fun getImageSHA1(
+        uri: Uri,
+        ioDispatcher: CoroutineDispatcher,
+        fileUtilsWrapper: FileUtilsWrapper,
+        contentResolver: ContentResolver,
+    ): String =
+        withContext(ioDispatcher) {
+            try {
+                val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
                 result
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+                ""
             }
-    }
+        }
+
+    /**
+     * Generates modified SHA1 of an image
+     */
+    suspend fun generateModifiedSHA1(
+        image: Image,
+        defaultDispatcher: CoroutineDispatcher,
+        context: Context,
+        fileProcessor: FileProcessor,
+        fileUtilsWrapper: FileUtilsWrapper,
+    ): String =
+        withContext(defaultDispatcher) {
+            val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
+            val exifInterface: ExifInterface? =
+                try {
+                    ExifInterface(uploadableFile.file)
+                } catch (e: IOException) {
+                    Timber.e(e)
+                    null
+                }
+            fileProcessor.redactExifTags(
+                exifInterface,
+                fileProcessor.getExifTagsToRedact(),
+                uploadableFile.getFilePath(),
+            )
+            val sha1 =
+                fileUtilsWrapper.getSHA1(
+                    fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
+                )
+            uploadableFile.file.delete()
+            sha1
+        }
+
+    /**
+     * Query SHA1, return result if previously queried, otherwise start a new query.
+     *
+     * @return true if the image exists on Commons, false otherwise.
+     */
+    suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(
+        sha1: String,
+        ioDispatcher: CoroutineDispatcher,
+        mediaClient: MediaClient,
+    ): ImageLoader.Result =
+        withContext(ioDispatcher) {
+            var result: ImageLoader.Result = ImageLoader.Result.FALSE
+            try {
+                if (mediaClient.checkFileExistsUsingSha(sha1).blockingGet()) {
+                    result = ImageLoader.Result.TRUE
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    // Handle no network connection.
+                    Timber.e(e, "Network Connection Error")
+                }
+                result = ImageLoader.Result.ERROR
+                e.printStackTrace()
+            }
+            result
+        }
 }

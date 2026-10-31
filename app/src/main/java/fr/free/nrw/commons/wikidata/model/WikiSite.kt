@@ -133,7 +133,7 @@ class WikiSite : Parcelable {
      * Eg. https://en.m.wikipedia.org
      * @return
      */
-    fun mobileUrl(): String = String.format("%1\$s://%2\$s", scheme(), mobileAuthority())
+    fun mobileUrl(): String = String.format(Locale.ROOT, "%1\$s://%2\$s", scheme(), mobileAuthority())
 
     fun subdomain(): String = languageCodeToSubdomain(languageCode!!)
 
@@ -205,7 +205,7 @@ class WikiSite : Parcelable {
         dest.writeString(languageCode)
     }
 
-    protected constructor(`in`: Parcel) {
+    private constructor(`in`: Parcel) {
         uri = `in`.readParcelable(Uri::class.java.classLoader)!!
         languageCode = `in`.readString()
     }

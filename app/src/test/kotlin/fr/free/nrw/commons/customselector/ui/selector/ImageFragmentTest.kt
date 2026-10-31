@@ -26,7 +26,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -133,16 +132,6 @@ class ImageFragmentTest {
         func.isAccessible = true
         func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf()))
         func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf(image, image)))
-    }
-
-    /**
-     * Test getSpanCount.
-     */
-    @Test
-    fun testGetSpanCount() {
-        val func = fragment.javaClass.getDeclaredMethod("getSpanCount")
-        func.isAccessible = true
-        assertEquals(3, func.invoke(fragment))
     }
 
     /**

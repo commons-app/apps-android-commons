@@ -87,18 +87,7 @@
     <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then</ID>
     <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
     <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
-    <ID>FunctionOnlyReturningConstant:FolderFragment.kt$FolderFragment$private fun columnCount(): Int</ID>
-    <ID>FunctionOnlyReturningConstant:ImageFragment.kt$ImageFragment$private fun getSpanCount(): Int</ID>
-    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", campaign!!.startDate, campaign!!.endDate, )</ID>
-    <ID>ImplicitDefaultLocale:CampaignView.kt$CampaignView.ViewHolder$String.format( "%1s - %2s", getExtraShortDateString( startDate!!, ), getExtraShortDateString(endDate!!), )</ID>
-    <ID>ImplicitDefaultLocale:CommonsDaggerSupportFragment.kt$CommonsDaggerSupportFragment$String.format( "%s.supportFragmentInjector() returned null", hasSupportFragmentInjector.javaClass.canonicalName, )</ID>
-    <ID>ImplicitDefaultLocale:Description.kt$Description.Companion$String.format( "{{%s|1=%s}}", description.languageCode, description.descriptionText, )</ID>
-    <ID>ImplicitDefaultLocale:FileUtils.kt$FileUtils$String.format("%40s", output)</ID>
-    <ID>ImplicitDefaultLocale:Media.kt$Media$String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)</ID>
-    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/w/index.php?title=%3\$s&amp;action=%4\$s", wikiSite.scheme(), wikiSite.authority(), URLEncoder.encode(prefixedText, "utf-8"), action, )</ID>
-    <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/wiki/%3\$s%4\$s", wikiSite.scheme(), domain, URLEncoder.encode(prefixedText, "utf-8"), if ((fragment != null &amp;&amp; fragment.length &gt; 0)) ("#$fragment") else "", )</ID>
-    <ID>ImplicitDefaultLocale:WikiSite.kt$WikiSite$String.format("%1\$s://%2\$s", scheme(), mobileAuthority())</ID>
-    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e is UnknownHostException</ID>
+    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils$e is UnknownHostException</ID>
     <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
     <ID>InstanceOfCheckForException:PageEditClient.kt$PageEditClient$throwable is InvalidLoginTokenException</ID>
     <ID>InstanceOfCheckForException:ThanksClient.kt$ThanksClient$throwable is InvalidLoginTokenException</ID>
@@ -742,20 +731,6 @@
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>
-    <ID>PrintStackTrace:CountingRequestBody.kt$CountingRequestBody$e</ID>
-    <ID>PrintStackTrace:DBOpenHelper.kt$DBOpenHelper$e</ID>
-    <ID>PrintStackTrace:FilePicker.kt$FilePicker$e</ID>
-    <ID>PrintStackTrace:ImageFragment.kt$ImageFragment$ex</ID>
-    <ID>PrintStackTrace:LoginActivity.kt$LoginActivity$e</ID>
-    <ID>PrintStackTrace:NearbyParentFragment.kt$NearbyParentFragment$e</ID>
-    <ID>PrintStackTrace:OnSwipeTouchListener.kt$OnSwipeTouchListener.GestureListener$exception</ID>
-    <ID>PrintStackTrace:ProfileActivity.kt$ProfileActivity$e</ID>
-    <ID>PrintStackTrace:QuizResultActivity.kt$QuizResultActivity$e</ID>
-    <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$CountingSink : ForwardingSink</ID>
-    <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$protected var countingSink: CountingSink? = null</ID>
-    <ID>ProtectedMemberInFinalClass:MwParseResponse.kt$MwParseResponse$@VisibleForTesting protected fun setParse(parse: MwParseResult?)</ID>
-    <ID>ProtectedMemberInFinalClass:UploadActivity.kt$UploadActivity$protected fun checkBlockStatus()</ID>
-    <ID>ProtectedMemberInFinalClass:WikiSite.kt$WikiSite$protected constructor(`in`: Parcel) { uri = `in`.readParcelable(Uri::class.java.classLoader)!! languageCode = `in`.readString() }</ID>
     <ID>ReturnCount:AchievementsFragment.kt$AchievementsFragment$private fun checkAccount(): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix, ): Pair&lt;Int, Handle&gt;?</ID>
@@ -808,7 +783,6 @@
     <ID>ReturnCount:UploadWorker.kt$UploadWorker$@SuppressLint("MissingPermission") override suspend fun doWork(): Result</ID>
     <ID>ReturnCount:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ZoomableDraweeView.kt$ZoomableDraweeView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>SerialVersionUIDInSerializableClass:ImageInfo.kt$ImageInfo : Serializable</ID>
     <ID>SpreadOperator:BaseDelegateAdapter.kt$BaseDelegateAdapter$( object : DiffUtil.ItemCallback&lt;T&gt;() { override fun areItemsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areItemsTheSame(oldItem, newItem) override fun areContentsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areContentsTheSame(oldItem, newItem) }, *delegates, )</ID>
     <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
     <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
@@ -846,7 +820,7 @@
     <ID>TooGenericExceptionCaught:CryptoUtils.kt$CryptoUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CsrfTokenClient.kt$CsrfTokenClient$t: Throwable</ID>
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e2: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
@@ -949,7 +923,7 @@
     <ID>TooManyFunctions:FragmentBuilderModule.kt$FragmentBuilderModule</ID>
     <ID>TooManyFunctions:ImageAdapter.kt$ImageAdapter : AdapterSectionedAdapter</ID>
     <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
-    <ID>TooManyFunctions:ImageInfo.kt$ImageInfo : Serializable</ID>
+    <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
@@ -995,22 +969,6 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>UseCheckOrError:EditViewModel.kt$EditViewModel$throw IllegalStateException("Jpegtran not initialized")</ID>
-    <ID>UseCheckOrError:FilePicker.kt$FilePicker$throw IllegalStateException("HEIC conversion requires Android P+")</ID>
-    <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
-    <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
-    <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
-    <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
-    <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>
-    <ID>UseRequire:RecentLanguagesContentProvider.kt$RecentLanguagesContentProvider$throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")</ID>
-    <ID>UseRequire:RecentSearchesContentProvider.kt$RecentSearchesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
-    <ID>UseRequire:ThreadPoolService.kt$ThreadPoolService.Builder$throw IllegalArgumentException("Pool size must be greater than 0")</ID>
-    <ID>UseRequire:ViewModelFactory.kt$ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
-    <ID>UtilityClassWithPublicConstructor:CustomSelectorUtils.kt$CustomSelectorUtils</ID>
-    <ID>UtilityClassWithPublicConstructor:MimeTypeMapWrapper.kt$MimeTypeMapWrapper</ID>
-    <ID>UtilityClassWithPublicConstructor:WorkRequestHelper.kt$WorkRequestHelper</ID>
     <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
     <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
   </CurrentIssues>

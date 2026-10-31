@@ -13,6 +13,7 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
 import fr.free.nrw.commons.upload.FileUtils
+import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
@@ -106,7 +107,7 @@ object FilePicker : Constants {
             grantWritePermission(context, intent, capturedImageUri)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not prepare camera intent")
         }
 
         return intent
@@ -216,10 +217,10 @@ object FilePicker : Constants {
             }
             ExternalImagesResult(getFilesFromUris(supportedUris, activity), unsupportedUris.size)
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not read externally shared images")
             ExternalImagesResult(emptyList(), 0)
         } catch (e: SecurityException) {
-            e.printStackTrace()
+            Timber.e(e, "No permission to read externally shared images")
             ExternalImagesResult(emptyList(), 0)
         }
     }
@@ -284,7 +285,7 @@ object FilePicker : Constants {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.DOCUMENTS, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from documents")
                 callbacks.onImagePickerError(e, ImageSource.DOCUMENTS, restoreType(activity))
             }
         } else {
@@ -333,7 +334,7 @@ object FilePicker : Constants {
                 val files = getFilesFromCustomSelector(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from the custom selector")
                 callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
             }
         } else {
@@ -379,7 +380,7 @@ object FilePicker : Constants {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.GALLERY, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from the gallery")
                 callbacks.onImagePickerError(e, ImageSource.GALLERY, restoreType(activity))
             }
         } else {
@@ -392,7 +393,7 @@ object FilePicker : Constants {
             val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
             ImageDecoder.decodeBitmap(source)
         } else {
-            throw IllegalStateException("HEIC conversion requires Android P+")
+            error("HEIC conversion requires Android P+")
         }
 
         val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
@@ -466,7 +467,7 @@ object FilePicker : Constants {
         try {
             processSuccessfulCameraResult(activity, callbacks)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not handle image taken with the camera")
             callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
         }
     }
