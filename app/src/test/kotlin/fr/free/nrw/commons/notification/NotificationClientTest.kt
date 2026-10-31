@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
@@ -109,6 +110,27 @@ class NotificationClientTest {
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
         notificationClient.markNotificationAsRead("test")
         verify(service).markRead(anyString(), anyString(), anyString())
+    }
+
+    /**
+     * Test that an invalid login token is reported to the subscriber
+     */
+    @Test
+    fun markNotificationAsReadPropagatesInvalidLoginToken() {
+        val invalidLoginToken = InvalidLoginTokenException("invalid")
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
+
+        notificationClient.markNotificationAsRead("test").test().assertError(invalidLoginToken)
+    }
+
+    /**
+     * Test that any other failure is reported as unsuccessful
+     */
+    @Test
+    fun markNotificationAsReadReturnsFalseOnOtherFailure() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+
+        notificationClient.markNotificationAsRead("test").test().assertValue(false)
     }
 
     @Suppress("SameParameterValue")

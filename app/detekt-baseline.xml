@@ -98,10 +98,6 @@
     <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/w/index.php?title=%3\$s&amp;action=%4\$s", wikiSite.scheme(), wikiSite.authority(), URLEncoder.encode(prefixedText, "utf-8"), action, )</ID>
     <ID>ImplicitDefaultLocale:PageTitle.kt$PageTitle$String.format( "%1\$s://%2\$s/wiki/%3\$s%4\$s", wikiSite.scheme(), domain, URLEncoder.encode(prefixedText, "utf-8"), if ((fragment != null &amp;&amp; fragment.length &gt; 0)) ("#$fragment") else "", )</ID>
     <ID>ImplicitDefaultLocale:WikiSite.kt$WikiSite$String.format("%1\$s://%2\$s", scheme(), mobileAuthority())</ID>
-    <ID>InstanceOfCheckForException:CustomSelectorUtils.kt$CustomSelectorUtils.Companion$e is UnknownHostException</ID>
-    <ID>InstanceOfCheckForException:NotificationClient.kt$NotificationClient$throwable is InvalidLoginTokenException</ID>
-    <ID>InstanceOfCheckForException:PageEditClient.kt$PageEditClient$throwable is InvalidLoginTokenException</ID>
-    <ID>InstanceOfCheckForException:ThanksClient.kt$ThanksClient$throwable is InvalidLoginTokenException</ID>
     <ID>LargeClass:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
     <ID>LargeClass:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
     <ID>LargeClass:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
