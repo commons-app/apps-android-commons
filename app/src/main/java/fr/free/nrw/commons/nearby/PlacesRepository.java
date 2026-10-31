@@ -60,4 +60,15 @@ public class PlacesRepository {
         return localDataSource.clearCache()
             .subscribeOn(Schedulers.io()); // Ensure it runs on IO thread
     }
+
+    /**
+     * Removes the places that were cached before the given time, on an IO thread.
+     *
+     * @param cachedBefore Places with an older cachedAt time are removed.
+     * @return A Completable that completes once the old places have been removed.
+     */
+    public Completable removePlacesCachedBefore(final long cachedBefore) {
+        return localDataSource.removePlacesCachedBefore(cachedBefore)
+            .subscribeOn(Schedulers.io());
+    }
 }
