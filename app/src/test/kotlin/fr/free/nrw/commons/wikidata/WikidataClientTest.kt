@@ -51,10 +51,9 @@ class WikidataClientTest {
         whenever(gson!!.toJson(any(StatementPartial::class.java))).thenReturn("claim")
         val request = mock(StatementPartial::class.java)
 
-        val claim =
-            wikidataClient!!
-                .setClaim(request, "test")
-                .test()
-                .assertValue(1L)
+        wikidataClient!!
+            .setClaim(request, "test")
+            .test()
+            .assertValue(1L)
     }
 }

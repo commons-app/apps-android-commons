@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource
 import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
@@ -18,9 +17,6 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceFactoryTest {
-    @Mock
-    private lateinit var depictsClient: DepictsClient
-
     @Mock
     private lateinit var loadingStates: PublishProcessor<LoadingState>
     private lateinit var factory: PagingDataSourceFactory<String>

@@ -136,6 +136,7 @@
     <ID>LongMethod:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>LongMethod:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
+    <ID>LongMethod:MigrationTest.kt$MigrationTest$@Test fun testMigration()</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$fun initNearbyFilter()</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun onViewCreated( view: View, savedInstanceState: Bundle?, )</ID>
     <ID>LongMethod:NearbyParentFragment.kt$NearbyParentFragment$override fun populatePlaces(currentLatLng: LatLng)</ID>
@@ -161,10 +162,6 @@
     <ID>LongParameterList:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$( scale: Float, imagePoint: PointF, viewPoint: PointF, @LimitFlag limitFlags: Int, durationMs: Long, onAnimationComplete: Runnable?, )</ID>
     <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
     <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int, )</ID>
-    <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
-    <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String? = null, negativeButtonText: String? = null, onPositiveBtnClick: Runnable? = null, onNegativeBtnClick: Runnable? = null, customView: View? = null, cancelable: Boolean = false, )</ID>
-    <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String?, negativeButtonText: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, cancelable: Boolean = false, )</ID>
-    <ID>LongParameterList:DialogUtil.kt$DialogUtil$( activity: Activity, title: String?, message: String?, positiveButtonText: String?, negativeButtonText: String?, onPositiveBtnClick: Runnable?, onNegativeBtnClick: Runnable?, customView: View?, )</ID>
     <ID>LongParameterList:FileProcessor.kt$FileProcessor$( private val context: Context, private val contentResolver: ContentResolver, private val gpsCategoryModel: GpsCategoryModel, private val depictsModel: DepictModel, @param:Named("default_preferences") private val defaultKvStore: JsonKvStore, private val apiCall: CategoryApi, private val okHttpJsonApiClient: OkHttpJsonApiClient, )</ID>
     <ID>LongParameterList:LoginClient.kt$LoginClient$( userName: String, password: String, retypedPassword: String?, twoFactorCode: String?, emailAuthCode: String?, loginToken: String?, userLanguage: String, cb: LoginCallback, )</ID>
     <ID>LongParameterList:LoginClient.kt$LoginClient$( username: String, password: String, lastLoginResult: LoginResult?, twoFactorCode: String, userLanguage: String, loginCallback: LoginCallback, )</ID>
@@ -714,15 +711,6 @@
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$8</ID>
     <ID>MagicNumber:WikiSite.kt$WikiSite.Companion$3</ID>
     <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
-    <ID>NestedBlockDepth:BookmarkListRootFragment.kt$BookmarkListRootFragment$fun backPressed(): Boolean</ID>
-    <ID>NestedBlockDepth:CategoriesModel.kt$CategoriesModel$fun onCategoryItemClicked( item: CategoryItem, media: Media?, )</ID>
-    <ID>NestedBlockDepth:CommonsCookieJar.kt$CommonsCookieJar$override fun saveFromResponse( url: HttpUrl, cookies: List&lt;Cookie&gt;, )</ID>
-    <ID>NestedBlockDepth:DepictsFragment.kt$DepictsFragment$private fun launchDepictsPicker()</ID>
-    <ID>NestedBlockDepth:DownloadReceiver.kt$DownloadReceiver$override fun onReceive(context: Context, intent: Intent)</ID>
-    <ID>NestedBlockDepth:ExploreMapFragment.kt$ExploreMapFragment$private fun getOverlay(item: OverlayItem?): Overlay?</ID>
-    <ID>NestedBlockDepth:FilePicker.kt$FilePicker$@JvmStatic fun onPictureReturnedFromCamera( activityResult: ActivityResult, activity: Activity, callbacks: Callbacks )</ID>
-    <ID>NestedBlockDepth:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
-    <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$override fun onDestroy()</ID>
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$private fun handleResult(result: Result)</ID>
     <ID>NestedBlockDepth:ImageLoader.kt$ImageLoader$suspend fun nextActionableImage( allImages: List&lt;Image&gt;, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, nextImagePosition: Int, currentlyUploadingImages: List&lt;Contribution&gt;, ): Int</ID>
     <ID>NestedBlockDepth:ImageUtils.kt$ImageUtils$@JvmStatic private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean</ID>
@@ -849,7 +837,6 @@
     <ID>ThrowingExceptionsWithoutMessageOrCause:RuntimeTypeAdapterFactory.kt$RuntimeTypeAdapterFactory$NullPointerException()</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
     <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
-    <ID>ThrowsCount:RecentSearchesDao.kt$RecentSearchesDao$fun deleteAll()</ID>
     <ID>TooGenericExceptionCaught:AboutActivity.kt$AboutActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:AchievementsFragment.kt$AchievementsFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:BookmarkPicturesFragment.kt$BookmarkPicturesFragment$e: Exception</ID>
@@ -924,7 +911,6 @@
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
-    <ID>TooManyFunctions:AppLanguageLookUpTable.kt$AppLanguageLookUpTable</ID>
     <ID>TooManyFunctions:BasePagingFragment.kt$BasePagingFragment&lt;T&gt; : CommonsDaggerSupportFragmentView</ID>
     <ID>TooManyFunctions:BasicKvStore.kt$BasicKvStore : KeyValueStore</ID>
     <ID>TooManyFunctions:BlurOverlayView.kt$BlurOverlayView : View</ID>
@@ -1008,80 +994,9 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>UnusedPrivateProperty:BookmarkItemsDaoTest.kt$BookmarkItemsDaoTest$i</ID>
-    <ID>UnusedPrivateProperty:BookmarkListRootFragment.kt$BookmarkListRootFragment$private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null</ID>
-    <ID>UnusedPrivateProperty:BookmarkLocationsViewModel.kt$BookmarkLocationsViewModel$private val bookmarkLocationsDao: BookmarkLocationsDao</ID>
-    <ID>UnusedPrivateProperty:BookmarkPictureDaoTest.kt$BookmarkPictureDaoTest$i</ID>
-    <ID>UnusedPrivateProperty:BookmarkPicturesFragmentUnitTests.kt$BookmarkPicturesFragmentUnitTests$@Mock private lateinit var mediaList: List&lt;Media&gt;</ID>
-    <ID>UnusedPrivateProperty:CategoryDaoTest.kt$CategoryDaoTest$i</ID>
-    <ID>UnusedPrivateProperty:CategoryEditHelper.kt$CategoryEditHelper$@Named("username") private val username: String</ID>
-    <ID>UnusedPrivateProperty:ContributionsFragmentUnitTests.kt$ContributionsFragmentUnitTests$@Mock private lateinit var limitedConnectionEnabledLayout: LinearLayout</ID>
-    <ID>UnusedPrivateProperty:ContributionsListPresenter.kt$ContributionsListPresenter$@param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler</ID>
-    <ID>UnusedPrivateProperty:ContributionsRepositoryTest.kt$ContributionsRepositoryTest$val contributionsFactory = contributionsRepository.fetchContributions()</ID>
-    <ID>UnusedPrivateProperty:DeleteHelper.kt$DeleteHelper$@Named("username") private val username: String</ID>
-    <ID>UnusedPrivateProperty:Entities.kt$Entities.Entity$private val type: String? = null</ID>
-    <ID>UnusedPrivateProperty:Entities.kt$Entities.SiteLink$private val title: String? = null get() = StringUtils.defaultString(field)</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("Assessments") private val assessments: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("AttributionRequired") private val attributionRequired: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("AuthorCount") private val authorCount: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("CommonsMetadataExtension") private val commonsMetadataExtension: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("Copyrighted") private val copyrighted: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("Permission") private val permission: Values? = null</ID>
-    <ID>UnusedPrivateProperty:ExtMetadata.kt$ExtMetadata$@SerializedName("Restrictions") private val restrictions: Values? = null</ID>
-    <ID>UnusedPrivateProperty:FilePicker.kt$FilePicker$private const val KEY_VIDEO_URI = "video_uri"</ID>
-    <ID>UnusedPrivateProperty:ImageFileLoaderTest.kt$ImageFileLoaderTest$@Mock private lateinit var coroutineScope: CoroutineScope</ID>
-    <ID>UnusedPrivateProperty:ImageInfo.kt$ImageInfo$@SerializedName("descriptionshorturl") private val descriptionShortUrl: String? = null</ID>
-    <ID>UnusedPrivateProperty:ImageInfo.kt$ImageInfo$@SerializedName("descriptionurl") private val descriptionUrl: String? = null</ID>
-    <ID>UnusedPrivateProperty:ImageLoaderTest.kt$ImageLoaderTest$@Mock private lateinit var single: Single&lt;Boolean&gt;</ID>
-    <ID>UnusedPrivateProperty:ImageUtilsTest.kt$ImageUtilsTest$@Mock private lateinit var progressDialogWallpaper: ProgressDialog</ID>
-    <ID>UnusedPrivateProperty:ListUserResponse.kt$ListUserResponse$private val userid: Long = 0</ID>
-    <ID>UnusedPrivateProperty:LoginResponse.kt$Request$private val account: String? = null</ID>
-    <ID>UnusedPrivateProperty:LoginResponse.kt$Request$private val provider: String? = null</ID>
-    <ID>UnusedPrivateProperty:LoginResponse.kt$Request$private val required: String? = null</ID>
-    <ID>UnusedPrivateProperty:LoginResponse.kt$RequestField$private val label: String? = null</ID>
-    <ID>UnusedPrivateProperty:LoginResponse.kt$RequestField$private val type: String? = null</ID>
-    <ID>UnusedPrivateProperty:MainActivity.kt$MainActivity$private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null</ID>
-    <ID>UnusedPrivateProperty:MainActivityUnitTests.kt$MainActivityUnitTests$@Mock private lateinit var defaultKvStore: JsonKvStore</ID>
-    <ID>UnusedPrivateProperty:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$@Mock private lateinit var htmlTextView: HtmlTextView</ID>
-    <ID>UnusedPrivateProperty:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$@Mock private lateinit var intent: Intent</ID>
-    <ID>UnusedPrivateProperty:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$@Mock private lateinit var listView: ListView</ID>
-    <ID>UnusedPrivateProperty:MediaDetailFragmentUnitTests.kt$MediaDetailFragmentUnitTests$@Mock private lateinit var webView: WebView</ID>
-    <ID>UnusedPrivateProperty:MwParseResult.kt$MwParseResult$private val index = 0</ID>
-    <ID>UnusedPrivateProperty:MwParseResult.kt$MwParseResult$private val pageid = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.CategoryInfo$private val files = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.CategoryInfo$private val pages = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.CategoryInfo$private val size = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.CategoryInfo$private val subcats = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.Revision$@SerializedName("contentformat") private val contentFormat: String? = null</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.Revision$@SerializedName("contentmodel") private val contentModel: String? = null</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.Thumbnail$private val height = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryPage.kt$MwQueryPage.Thumbnail$private val width = 0</ID>
-    <ID>UnusedPrivateProperty:MwQueryResult.kt$MwQueryResult.Redirect$private val index = 0</ID>
-    <ID>UnusedPrivateProperty:MwResponse.kt$MwResponse$@SerializedName("servedby") private val servedBy: String? = null</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragment.kt$NearbyParentFragment$private val nearbyLegend: ConstraintLayout? = null</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragment.kt$NearbyParentFragment$private val updatedLatLng: LatLng? = null</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragmentUnitTest.kt$NearbyParentFragmentUnitTest$@Mock private lateinit var bottomSheetDetails: View</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragmentUnitTest.kt$NearbyParentFragmentUnitTest$@Mock private lateinit var imageView: ImageView</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragmentUnitTest.kt$NearbyParentFragmentUnitTest$@Mock private lateinit var ivToggleChips: AppCompatImageView</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragmentUnitTest.kt$NearbyParentFragmentUnitTest$@Mock private lateinit var linearLayout: LinearLayout</ID>
-    <ID>UnusedPrivateProperty:NearbyParentFragmentUnitTest.kt$NearbyParentFragmentUnitTest$@Mock private lateinit var textView: TextView</ID>
-    <ID>UnusedPrivateProperty:NetworkUtils.kt$NetworkUtils$val telephonyManager = context.applicationContext.getSystemService( Context.TELEPHONY_SERVICE, ) as? TelephonyManager ?: return NetworkConnectionType.UNKNOWN</ID>
-    <ID>UnusedPrivateProperty:Notification.kt$Notification$private val category: String? = null</ID>
-    <ID>UnusedPrivateProperty:Notification.kt$Notification.Contents$private val icon: String? = null</ID>
-    <ID>UnusedPrivateProperty:Notification.kt$Notification.Link$private val description: String? = null</ID>
-    <ID>UnusedPrivateProperty:PagingDataSourceFactoryTest.kt$PagingDataSourceFactoryTest$@Mock private lateinit var depictsClient: DepictsClient</ID>
-    <ID>UnusedPrivateProperty:RadioGroupHelperUnitTest.kt$RadioGroupHelperUnitTest$@Mock private lateinit var compoundButton: CompoundButton</ID>
-    <ID>UnusedPrivateProperty:RadioGroupHelperUnitTest.kt$RadioGroupHelperUnitTest$@Mock private lateinit var view: View</ID>
-    <ID>UnusedPrivateProperty:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$i</ID>
-    <ID>UnusedPrivateProperty:RecentLanguagesDaoUnitTest.kt$RecentLanguagesDaoUnitTest$i</ID>
-    <ID>UnusedPrivateProperty:RecentSearchesDaoTest.kt$RecentSearchesDaoTest$i</ID>
-    <ID>UnusedPrivateProperty:SearchActivityUnitTests.kt$SearchActivityUnitTests$@Mock private lateinit var supportFragmentManager: FragmentManager</ID>
-    <ID>UnusedPrivateProperty:WikidataClientTest.kt$WikidataClientTest$val claim = wikidataClient!! .setClaim(request, "test") .test() .assertValue(1L)</ID>
-    <ID>UnusedPrivateProperty:ZoomableActivityUnitTests.kt$ZoomableActivityUnitTests$@Mock private lateinit var images: ArrayList&lt;Image&gt;</ID>
     <ID>UseCheckOrError:EditViewModel.kt$EditViewModel$throw IllegalStateException("Jpegtran not initialized")</ID>
     <ID>UseCheckOrError:FilePicker.kt$FilePicker$throw IllegalStateException("HEIC conversion requires Android P+")</ID>
     <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
-    <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException( "basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.", )</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
     <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
     <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>

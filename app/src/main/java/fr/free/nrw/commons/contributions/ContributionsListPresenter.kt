@@ -20,6 +20,7 @@ class ContributionsListPresenter
         private val contributionBoundaryCallback: ContributionBoundaryCallback,
         private val contributionsRemoteDataSource: ContributionsRemoteDataSource,
         private val repository: ContributionsRepository,
+        @Suppress("UnusedPrivateProperty") // Injected by Dagger, may be used in future
         @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : ContributionsListContract.UserActionListener {
         private val compositeDisposable = CompositeDisposable()
