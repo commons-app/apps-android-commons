@@ -75,7 +75,25 @@ class DepictedItemTest {
                         ),
                 ),
             ).imageUrl,
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/70px-_example_",
+            "https://commons.wikimedia.org/wiki/Special:FilePath/_example_?width=70",
+        )
+    }
+
+    @Test
+    fun `image URL encodes reserved filename characters`() {
+        Assert.assertEquals(
+            DepictedItem(
+                entity(
+                    statements =
+                        mapOf(
+                            WikidataProperties.IMAGE.propertyName to
+                                listOf(
+                                    statement(snak(dataValue = valueString("File:Portrait #1?.jpg"))),
+                                ),
+                        ),
+                ),
+            ).imageUrl,
+            "https://commons.wikimedia.org/wiki/Special:FilePath/Portrait_%231%3F.jpg?width=70",
         )
     }
 
@@ -197,6 +215,24 @@ class DepictedItemTest {
                 ),
             ).primaryImage,
             "_example_image_name",
+        )
+    }
+
+    @Test
+    fun `primaryImage keeps hyphens in filename`() {
+        Assert.assertEquals(
+            DepictedItem(
+                entity(
+                    statements =
+                        mapOf(
+                            WikidataProperties.IMAGE.propertyName to
+                                listOf(
+                                    statement(snak(dataValue = valueString("File:rabbit-image.jpg"))),
+                                ),
+                        ),
+                ),
+            ).primaryImage,
+            "rabbit-image.jpg",
         )
     }
 }
