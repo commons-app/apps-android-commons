@@ -31,6 +31,12 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+private const val KILOBYTE_IN_BYTES = 1024
+private const val CHUNK_SIZE_IN_KB = 512
+private const val MILLIS_PER_SECOND = 1000
+private const val SECONDS_PER_HOUR = 3600
+private const val MAX_CHUNK_AGE_HOURS = 6
+
 @Singleton
 class UploadClient
     @Inject
@@ -43,11 +49,11 @@ class UploadClient
         private val timeProvider: TimeProvider,
         private val contributionDao: ContributionDao,
     ) {
-        private val chunkSize = 512 * 1024 // 512 KB
+        private val chunkSize = CHUNK_SIZE_IN_KB * KILOBYTE_IN_BYTES // 512 KB
 
         // This is maximum duration for which a stash is persisted on MediaWiki
         // https://www.mediawiki.org/wiki/Manual:$wgUploadStashMaxAge
-        private val maxChunkAge = 6 * 3600 * 1000 // 6 hours
+        private val maxChunkAge = MAX_CHUNK_AGE_HOURS * SECONDS_PER_HOUR * MILLIS_PER_SECOND // 6 hours
         private val compositeDisposable = CompositeDisposable()
 
         /**

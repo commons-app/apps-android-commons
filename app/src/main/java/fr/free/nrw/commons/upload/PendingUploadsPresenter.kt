@@ -28,6 +28,9 @@ import javax.inject.Named
 /**
  * The presenter class for PendingUploadsFragment and FailedUploadsFragment
  */
+private const val PREFETCH_DISTANCE = 50
+private const val PAGE_SIZE = 10
+
 class PendingUploadsPresenter
     @Inject
     internal constructor(
@@ -51,8 +54,8 @@ class PendingUploadsPresenter
             val pagedListConfig =
                 PagedList.Config
                     .Builder()
-                    .setPrefetchDistance(50)
-                    .setPageSize(10)
+                    .setPrefetchDistance(PREFETCH_DISTANCE)
+                    .setPageSize(PAGE_SIZE)
                     .build()
 
             val factory =
@@ -71,8 +74,8 @@ class PendingUploadsPresenter
             val pagedListConfig =
                 PagedList.Config
                     .Builder()
-                    .setPrefetchDistance(50)
-                    .setPageSize(10)
+                    .setPrefetchDistance(PREFETCH_DISTANCE)
+                    .setPageSize(PAGE_SIZE)
                     .build()
 
             val factory =

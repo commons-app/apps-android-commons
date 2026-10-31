@@ -250,10 +250,6 @@
     <ID>MagicNumber:DefaultZoomableController.kt$DefaultZoomableController$4</ID>
     <ID>MagicNumber:DefaultZoomableController.kt$DefaultZoomableController$8</ID>
     <ID>MagicNumber:DefaultZoomableController.kt$DefaultZoomableController$9</ID>
-    <ID>MagicNumber:DepictedItem.kt$16</ID>
-    <ID>MagicNumber:DepictedItem.kt$32</ID>
-    <ID>MagicNumber:DepictsDao.kt$DepictsDao$10</ID>
-    <ID>MagicNumber:DepictsFragment.kt$DepictsFragment$500</ID>
     <ID>MagicNumber:DescriptionEditActivity.kt$DescriptionEditActivity$12</ID>
     <ID>MagicNumber:DoubleTapGestureListener.kt$DoubleTapGestureListener$0.001f</ID>
     <ID>MagicNumber:DownloadReceiver.kt$DownloadReceiver$429</ID>
@@ -299,15 +295,9 @@
     <ID>MagicNumber:ExploreMapPresenter.kt$ExploreMapPresenter$4</ID>
     <ID>MagicNumber:FileLoggingTree.kt$FileLoggingTree$4</ID>
     <ID>MagicNumber:FilePicker.kt$FilePicker$100</ID>
-    <ID>MagicNumber:FileProcessor.kt$FileProcessor$1000.0</ID>
-    <ID>MagicNumber:FileProcessor.kt$FileProcessor$1000L</ID>
-    <ID>MagicNumber:FileProcessor.kt$FileProcessor$120</ID>
-    <ID>MagicNumber:FileUtils.kt$FileUtils$16</ID>
-    <ID>MagicNumber:FileUtils.kt$FileUtils$8192</ID>
     <ID>MagicNumber:HeightLimitedRecyclerView.kt$HeightLimitedRecyclerView$0.3</ID>
-    <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$16.0</ID>
-    <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$3600</ID>
-    <ID>MagicNumber:ImageCoordinates.kt$ImageCoordinates$60</ID>
+    <ID>MagicNumber:ImageAdapter.kt$ImageAdapter$0.3f</ID>
+    <ID>MagicNumber:ImageFileLoader.kt$ImageFileLoader$1000L</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.025</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$0.3</ID>
     <ID>MagicNumber:ImageUtils.kt$ImageUtils$100</ID>
@@ -431,7 +421,6 @@
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_9$50</ID>
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_9$9</ID>
     <ID>MagicNumber:LevelController.kt$LevelController.LevelInfo.LEVEL_9$90</ID>
-    <ID>MagicNumber:LicenseAdapter.kt$LicenseAdapter$180f</ID>
     <ID>MagicNumber:LocationPickerActivity.kt$LocationPickerActivity$128</ID>
     <ID>MagicNumber:LocationPickerActivity.kt$LocationPickerActivity$14.0</ID>
     <ID>MagicNumber:LocationPickerActivity.kt$LocationPickerActivity$1700</ID>
@@ -608,9 +597,6 @@
     <ID>MagicNumber:NotificationAdapterDelegates.kt$280</ID>
     <ID>MagicNumber:OkHttpConnectionFactory.kt$OkHttpConnectionFactory$120</ID>
     <ID>MagicNumber:PasteSensitiveTextInputEditText.kt$PasteSensitiveTextInputEditText$23</ID>
-    <ID>MagicNumber:PendingUploadsAdapter.kt$PendingUploadsAdapter.ViewHolder$100</ID>
-    <ID>MagicNumber:PendingUploadsPresenter.kt$PendingUploadsPresenter$10</ID>
-    <ID>MagicNumber:PendingUploadsPresenter.kt$PendingUploadsPresenter$50</ID>
     <ID>MagicNumber:PickedFiles.kt$PickedFiles$1024</ID>
     <ID>MagicNumber:PickedFiles.kt$PickedFiles.HeicApi28$95</ID>
     <ID>MagicNumber:ProfileActivity.kt$ProfileActivity$100</ID>
@@ -663,8 +649,6 @@
     <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$4</ID>
     <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$6</ID>
     <ID>MagicNumber:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$8</ID>
-    <ID>MagicNumber:ReadFBMD.kt$ReadFBMD$0x80</ID>
-    <ID>MagicNumber:ReadFBMD.kt$ReadFBMD$4096</ID>
     <ID>MagicNumber:ReasonBuilder.kt$ReasonBuilder$10</ID>
     <ID>MagicNumber:RecentLanguagesTable.kt$RecentLanguagesTable$19</ID>
     <ID>MagicNumber:RecentSearchesFragment.kt$RecentSearchesFragment$10</ID>
@@ -678,21 +662,6 @@
     <ID>MagicNumber:SettingsFragment.kt$SettingsFragment$5</ID>
     <ID>MagicNumber:SettingsFragment.kt$SettingsFragment.Companion$3</ID>
     <ID>MagicNumber:SignupActivity.kt$SignupActivity$25</ID>
-    <ID>MagicNumber:ThumbnailsAdapter.kt$ThumbnailsAdapter.ViewHolder$0.7f</ID>
-    <ID>MagicNumber:ThumbnailsAdapter.kt$ThumbnailsAdapter.ViewHolder$10f</ID>
-    <ID>MagicNumber:ThumbnailsAdapter.kt$ThumbnailsAdapter.ViewHolder$8</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity$100</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity$180</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity$3</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity$321</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity$4</ID>
-    <ID>MagicNumber:UploadActivity.kt$UploadActivity.&lt;no name provided&gt;$3</ID>
-    <ID>MagicNumber:UploadCategoriesFragment.kt$UploadCategoriesFragment$500</ID>
-    <ID>MagicNumber:UploadClient.kt$UploadClient$1000</ID>
-    <ID>MagicNumber:UploadClient.kt$UploadClient$1024</ID>
-    <ID>MagicNumber:UploadClient.kt$UploadClient$3600</ID>
-    <ID>MagicNumber:UploadClient.kt$UploadClient$512</ID>
-    <ID>MagicNumber:UploadClient.kt$UploadClient$6</ID>
     <ID>MagicNumber:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$0.90</ID>
     <ID>MagicNumber:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$5</ID>
     <ID>MagicNumber:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$0.5f</ID>
@@ -703,11 +672,6 @@
     <ID>MagicNumber:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$37.773972</ID>
     <ID>MagicNumber:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$4</ID>
     <ID>MagicNumber:UploadMediaPresenter.kt$UploadMediaPresenter$8</ID>
-    <ID>MagicNumber:UploadWorker.kt$UploadWorker$100</ID>
-    <ID>MagicNumber:UploadWorker.kt$UploadWorker$10000</ID>
-    <ID>MagicNumber:UploadWorker.kt$UploadWorker$101</ID>
-    <ID>MagicNumber:UploadWorker.kt$UploadWorker$90000</ID>
-    <ID>MagicNumber:UploadWorker.kt$UploadWorker.NotificationUpdateProgressListener$100</ID>
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$10</ID>
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$4</ID>
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$5</ID>

@@ -20,6 +20,8 @@ import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
 const val THUMB_IMAGE_SIZE = "70px"
+private const val HEX_RADIX = 16
+private const val MD5_HEX_LENGTH = 32
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -125,8 +127,8 @@ private fun getMd5(input: String): String =
         val no = BigInteger(1, messageDigest)
 
         // Convert message digest into hex value
-        var hashtext = no.toString(16)
-        while (hashtext.length < 32) {
+        var hashtext = no.toString(HEX_RADIX)
+        while (hashtext.length < MD5_HEX_LENGTH) {
             hashtext = "0$hashtext"
         }
         hashtext
