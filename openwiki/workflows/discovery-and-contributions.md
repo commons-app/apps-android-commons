@@ -3,9 +3,6 @@ type: discovery-workflow
 title: Discovery and contribution browsing
 description: Explains primary navigation, paged Commons browsing, server-backed user contribution history, and Nearby Wikidata discovery with a local place cache.
 tags: [discovery, contributions, explore, wikidata, paging]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
 sources:
   - id: openwiki-source-8124198b272528b78cb50b9f
     resource: repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionBoundaryCallback.kt
@@ -21,13 +18,10 @@ sources:
     resource: repo://app/src/main/java/fr/free/nrw/commons/explore/ExploreListRootFragment.kt
   - id: openwiki-source-0b2a3cd0c7cefe4676e8d614
     resource: repo://app/src/main/java/fr/free/nrw/commons/explore/media/PageableMediaDataSource.kt
-  - id: openwiki-source-c952974a69d2ac93da96918b
-    resource: repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyPlaces.java
-  - id: openwiki-source-d36862fa87d671e383bf5190
-    resource: repo://app/src/main/java/fr/free/nrw/commons/nearby/PlacesRepository.java
-  - id: openwiki-source-16bc43d1a20e1deedce55284
-    resource: repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt
-generated: { by: "copilot", at: "2026-10-31T14:35:25.887Z" }
+generated: { by: "copilot", at: "2026-10-31T14:59:24.742Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Discovery and contribution browsing
@@ -52,9 +46,7 @@ The general search and paging components are reused across categories and depict
 
 ## Nearby places
 
-Nearby discovery is driven by `NearbyParentFragmentPresenter` and `NearbyController`. The presenter skips a map refresh when the feature is locked, there is no network, or a search location is unavailable; map-center, location, and custom-query changes select different update paths. The fragment performs place queries off the main thread and reports empty/error results to the UI.
-
-`NearbyPlaces` obtains nearby results from Wikidata queries through `OkHttpJsonApiClient`, expanding its search radius until it has enough results or reaches its configured maximum. Results are ordered for map display and enriched using a local place repository and bookmark DAO. The local place cache can also supply markers when searching an already-viewed map area offline. Nearby place bookmarks and cached place details are distinct from the server query results.
+Nearby is a signed-in-only destination. It queries Wikidata for places without a Commons image, enriches and caches them in parallel batches, and locks itself while a refresh is in flight; the full flow, including location-change classification and the location picker, is in [Nearby places and location](nearby-and-location.md). Explore's map tab can receive the Nearby map's zoom and centre through "Show in Explore" arguments.
 
 ## Tests and source verification
 

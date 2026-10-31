@@ -3,12 +3,11 @@ type: data-architecture
 title: Networking and local storage
 description: Describes the distinct HTTP client paths for MediaWiki services, JSON APIs, and images, plus Room, legacy SQLite migration, cookies, and preference-backed state.
 tags: [networking, storage, room, mediawiki, wikidata]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
 sources:
   - id: openwiki-source-22a66d808a78dbebadf03f93
     resource: repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt
+  - id: openwiki-source-77377549d68595ad3e297d5e
+    resource: repo://app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
   - id: openwiki-source-f478693d758e0577d97e1820
     resource: repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt
   - id: openwiki-source-2221150639eac6824815089a
@@ -23,7 +22,10 @@ sources:
     resource: repo://app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt
   - id: openwiki-source-9e02cfb851078a9532d60a6a
     resource: repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieStorage.kt
-generated: { by: "copilot", at: "2026-10-31T14:35:25.887Z" }
+generated: { by: "copilot", at: "2026-10-31T14:59:24.742Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Networking and local storage
@@ -36,7 +38,7 @@ Retrofit MediaWiki and Wikidata interfaces use a separate path: the module creat
 
 The `prod` and `beta` product flavors define their own Commons API, Commons web, image, campaign, and Wikidata endpoint values in `app/build.gradle.kts`. Retrofit service providers use those `BuildConfig` URLs to create endpoint-specific services.
 
-Cookies are stored through `CommonsCookieStorage` in the default preference store. On load, the serialized value is decrypted; legacy plaintext or successfully decrypted content is saved again through the encrypted storage path. Logout clears the cookie jar.
+Cookies are stored through `CommonsCookieStorage` in the default preference store. On load, the stored value is passed through `CryptoUtils.decrypt`, an AES-GCM helper backed by an Android Keystore key. Decryption failure returns the input unchanged, so legacy plaintext is parsed as-is and then re-saved (the re-save happens only when decrypt returned the input unchanged). On save, the JSON is encrypted, but if encryption fails the plaintext JSON is stored instead, so encryption is best-effort rather than guaranteed. Logout clears the cookie jar.
 
 ## Local state and migrations
 

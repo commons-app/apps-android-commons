@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9e45dc4f7b5fd7a41e4275a158fb618543be00024d32a03fb77e8b4f15315b3d",
+  "pageVersion": "sha256:f468bde6ab54b4719779f17399a1748be2b973e56d72d65581817e57c06857c8",
   "claims": [
     {
       "id": "claim_aaf84a37e91c4f4eb979fefd885d5a0a",
       "statement": "Retrofit service interfaces are created with the cookie-enabled OkHttp client from OkHttpConnectionFactory, while the separately provided DI OkHttpClient is injected into JSON API and image-fetcher consumers.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt#L34-L59",
-          "version": "repo-lines-v1:sha256:6c25dcc595402f3866c1ea815c080018a0d675e4a85ee4fabdd66e55e53b41fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjZTI3MjY1ZjRiZjE5MTBhNmIzM2ExOGNmYjI4ODJjY2U0NTY4ZTM2NmRkODg5MzIwODM0Y2I1MThhZWRiNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwY2U5ZWI3Zjg1YWIxYWJmOTgwNTVmZWViNDNmNWU4MGEwYjVlZWJjYTg3Y2ZjZWE1MGM2MDNkNzlkNDVmZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1NzhkMDQyZTEyZDkyZGI4MzIzOGE3YTUyYzdkOTIyZGU4YWJkNDJiMTNjYjBiYjhmMzFkOWU4MTk5NjM2OTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzY2U0Mzg2ZGE2MjRlZmFhMzc2Yzk0OTk5MmRlMTU1YjVjOGZjYWZmY2Q0ZjdjNzE5YzYzODIyYjNmZmJhMWMifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt#L28-L60",
+          "version": "repo-lines-v1:sha256:a901e28e9ce3d2f9308fe3d660b612b5b0f48020eb06df69a9525bd5441bba34:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMjgxYzEwYmUyYjUyNDJmYjJkOTc3ZGJkOWY2NzkyN2FkNjhjN2E5NmRhNjU3YjQ5MjI2MDU3ZTc1ZGY3YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NjBhYzJiMDU1YTNiZTUyNzhlYjhhZWVmOTVhYmE2ZTBlNmM5YzljZDIzOGQ4ZWQ4M2Q1ZWQ1ZDI4ZjM4YzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxNmNlZDNhMDk4MTkyNjMzMDFlODhmNjY1NTllMjA5MjgyYTVjMDY0YTc0OGZjNzYwZThmODYzNjcwZjk2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkY2RlYzU4N2NlYTZkMGVmMmU2OTZmNTViMjE4NzljODA0NzUxNzAzMmUwMGVmZjExNjcwZWQ5OGFkNTA3NmUifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L57-L86",
-          "version": "repo-lines-v1:sha256:2d3c2bb5be584fed23cd4d769750b4491c94ba58d834798291c30718cebc369e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0Njg1MjExYzJiNjE3Yjg0MTRkN2RmNDQxNzc5OTZkMTljOGY3MmY2NjJmZjQyOTA4ZjY5MGM0MWQ4MGZkMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzZDFhZGM3NWEwMDc4ZmNiZTFlNDBlNWY2ODc5ZWU3YzgwZGE0NDc3Y2M0OWFkNDgyMGRiZTllYjUwYTE3MGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNjI3ZTU5ZDJlMDQ3N2RhYTlmNzFlYjRiZWE2NGNhMGFkZmIzYWE2ODQ5NTI3ODU0ZTQyNDliYTRmZWExMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkNmIzYzZkZWY2MTBjYTM5OTAzNzU0Y2RhNGQzOTkzOTFiMDRmM2UxMTU4ZWQ3Y2ZiNjExM2U5ODEyNDljNzgifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L57-L90",
+          "version": "repo-lines-v1:sha256:d05d213bebcb1c50c9dc30f7c3e1f6f456277ecc98bcf3190f517f38059166b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0Njg1MjExYzJiNjE3Yjg0MTRkN2RmNDQxNzc5OTZkMTljOGY3MmY2NjJmZjQyOTA4ZjY5MGM0MWQ4MGZkMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ZWJjZGU1MzMyOGIyOWEyZDAyN2Y3OGI4NGRkNjlhM2YxNGY4YjRhMzRiOWExZDU4YWEwNzljZTU1ODcwNjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNjI3ZTU5ZDJlMDQ3N2RhYTlmNzFlYjRiZWE2NGNhMGFkZmIzYWE2ODQ5NTI3ODU0ZTQyNDliYTRmZWExMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmZmIzY2U1ZmY1YzJmY2YwZTBjNTQ3N2M1YjI5NzM2ZDI1NWQ1Zjg2OTJlMGRjOGJkOTBkY2VlZDUxODAzYTgifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/CustomOkHttpNetworkFetcher.kt#L34-L51",
-          "version": "repo-lines-v1:sha256:eef68e7aed0e85d5230fabec36f1773ffb0cf3d974d5eb4a3e1803a0f8fd4432:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyZjdjYzUzYmNiMzU5YjBkNTY1MDM2M2FlMGQ0NTNjMzM3YmNhZWZjNWM3YWE0ZDY2NWMyY2VkNTM0OGExNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZTU0NzkxNmVjZDM3YzdiZTRjODBkNjk2OTcxMjgxNzI4M2U0YmNkMTYzM2M1NzA4MGE5NDUyNDFmMTU5YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2YjZjMjA5NzI2NDlmNDlhYTgxNTYwODQxZGI5Y2ZjNTFiNzExYWM5YjdiNzFiNjUzNjIxYzIwNjFkNjM4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyMTc5YzEwZTFjMzhhMzBkNmYxODQyMDBiNmI3NzIzZDg4ZTQ5OGYyMjcyNTZiNzNjZDI0M2E4YmYxZmYyNzUifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/CustomOkHttpNetworkFetcher.kt#L34-L55",
+          "version": "repo-lines-v1:sha256:b679a24933bb82583b7ecdec34744632e99726dbcfd940b49104d78ef7f21473:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZDNlY2FkYThhYjc3YTZhMTNjYmZiNTc4NjA2MWYyY2Q0MjdkNzVlNzg4MWEzMGZkYjNjZDgzZjBlNGQyMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmOGNjZjAzOWEwYThlMWI4ZjFjYmMxMmI5MTYwOWU1ZDNmNTQ0YWJiM2E3ZWNjMDFkYTBkOWVhOTkxM2Q4ZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzMWU1Y2EzYzNmZjk0N2U1ZTYzYmFmMjFhMTNlNTZlY2I3NjNlMDg5ZmYzOGNjZjdlODExYmNhNTIyYjgzMDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxYTIwYjk1ZGNhYzY4MWQ0YmI4NTJiODMwMzNiZTM2MmIzZDdkOGUxZDE4NTIzNjFjMjkxNDU2NjI2ZGYxY2IifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt#L6-L24",
-          "version": "repo-lines-v1:sha256:bb7cb14674f8eaadcaddbfd894ceac3b876018726c46a78bc938aca85fc84fac:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2I5N2IyNmE2M2YzZDZiMDg2NzA3NmY0ZmQ1ZThiMDM2MDljYTFjYTQyNjU3NzQ3MDQwMDU4NTg3NTY0N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhZmYzNTliOWNlYjlmZGNjMzA2ZjA4MGViNzZiNjQ0NDQ3ZTllM2MyMGI3NzA0MjE3Y2U2MDljNmViNTY1ZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4MjA1YmVjNDVkNWQyNjdiNzdiODg1YWM0MTE2ZjdjMmJmZGZjYWU1MTgzNDdjNTg1M2VkYjBmNjUyMDNiNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwNGZkYTU1MzExM2JlYzIzY2M0OTE4OGY4M2MzMDc4NWU3NzE5NzFkYjAyMzU2ZTI5YTdhNjcwNmJlYTk1NDgifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt#L6-L28",
+          "version": "repo-lines-v1:sha256:c06dc3453feff168c788dbfc1b6e48d4dae17bfda69ad78ca2def6635f24c508:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2I5N2IyNmE2M2YzZDZiMDg2NzA3NmY0ZmQ1ZThiMDM2MDljYTFjYTQyNjU3NzQ3MDQwMDU4NTg3NTY0N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4MjA1YmVjNDVkNWQyNjdiNzdiODg1YWM0MTE2ZjdjMmJmZGZjYWU1MTgzNDdjNTg1M2VkYjBmNjUyMDNiNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -29,12 +29,12 @@
       "statement": "AppDatabase is a version-22 Room schema, and CommonsApplicationModule registers explicit migrations while configuring destructive fallback for migration paths without a registered migration.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt#L37-L65",
-          "version": "repo-lines-v1:sha256:175e9bd8a6dd0f5f81bee73751b3315e0d7b163157240e865634eea40468981f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwNmYxZGI1MWFhM2I3OWY5OWM4ZjlhMTc5ZjQxYTcxNmY3YzU4Y2Y4M2ZlYjY1MjcwOGIwOWYxMzZmNGU2M2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NjZlYTM2YjAxNzYzYzBlZDgxZjFiOTcyNWY4MjNkMGIxNTliNzRkZDc2ZTJmYWZiNTU3ZTAyMTZkZTVmNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzODgxNzlkNjg3MTljNmU0MGI1ZGFlZjI4NzA1MDc2N2Q0MWI3OGZmY2UwMzdlN2RjMDZkNzQ1ZDQzZWEwYWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxZDM0MzdmMzkwZDU4YTBiMzBlZGEyMWZiODZiMTc4YjdjZjkwYjdkNGU5ZGY1ODc4NWY1MTI1NTEyMjNjNzEifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt#L40-L76",
+          "version": "repo-lines-v1:sha256:c1399dec3f95d1457fd3eae6378c79c93b306b72a6968851fcace9be09891db4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2YjkzNjQwZjk0MWNhYjU2Y2RlZThmMWQxN2UwNTA0NjQyNzlhMGIyMDgxOTI3MDFlYjgxYTg0MDhjMTEzODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkNWQzMDFkNGMzMzVlOWQ1MDU0NjEzYjY5OTIyM2M1MTMxYTljZGY4MmI4ODIyMDJiMGYxOGY2OWFkOGQ5MzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L199-L208",
-          "version": "repo-lines-v1:sha256:e875fc94b9ca1a674b3b5c5250e2d16928a4f37aeac2e6710bd46a47a007fb9a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4MjYzYTM1NmNjYjhmM2FmOGJmMjI5MGM2Y2E1ZDM4NTBiYmJkYTlmNjhlZTZhOTJjOGUxOTU2ZjA2N2Y3NjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVhOTQ3OWNmOTJiYzk1MDAyNWZiNzI4ZDY4YzViZmUzYWY3ODk2MjkyMGMyMDZmNDgzNjBiOTc2NDZkZWI3NmYifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L195-L206",
+          "version": "repo-lines-v1:sha256:b8add3098f563a7ff9eed83a58381143e48b498ef16572e7d055e188ad989844:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmNTgzNTU4ZjAyN2ZhZTQzMTdlZWVjMzE2MjY5MDA1YTEwZjVhODAzZGY3NDg0NTY4ZjczNDhkOTAzYzZjMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyZDM0MzM1OTczN2Y1NzI4YWYyZmZlNWFkOTk4NjExZTcxODA0MGIwM2QyMmVkNjJkZDE5YTU0YmYyNGRkYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZjODA0ZTM0NTQ1NThmZjIyYjllYTE4MmZjYzljNjU3MzQzNThlNTJjYThmYzQ2MmU3OGRjODY5ZDRmODE2MDMifQ"
         }
       ]
     },
@@ -43,22 +43,26 @@
       "statement": "The Room 21-to-22 migration creates replacement Room tables and copies categories, bookmarks, bookmark items, recent searches, and recent languages from the legacy commons.db when present.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L363-L424",
-          "version": "repo-lines-v1:sha256:8dd462f2694637bdbbcf27a3a6a2ada7c7ef9b53bae978fca34a72345abe2b54:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1NTJlNmQ0NWM3NWE3NzliOWY5MTZmMzRjYzliYWE0ZTcyZWVjODFmODk0NWQyYTc0OWIwNDk5YTk5OTkzYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEwYzJlYjk3ZGJhZTY3NTgzZGYyOTUzYjAyOGFiY2ZiNzRiZjhmY2VmZjAyZDgwYzBhMGRlNmQ0MTVkMjVkZWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc2MDhiMTM2NWNlNTAxYWM5Mjg0YzQwYTU5MzM4NGE0YzM1MDIyYzZiNmQyMDc5NWE1NDA5MTdlOTY4NjkwNTUifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L365-L430",
+          "version": "repo-lines-v1:sha256:4a116cc4c5741d18338b7b93bfa427a53e3b80293af3a6397d53b7a90e02d9e8:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmZjdkY2E0MDQyM2M4MTcwMWNhODJlMjI2NzYwMjQxZGNjOTk5OTUyNGYyNTRkYzVjZjkwZGFmMGRiMjNhNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ODljYWJiZWNiYjc5MjMzMjZjNzZhMDM2YzliMGVkMTMxNGM2ZTQ4MDZjNDcwNDU2ZmNhZWQwMjljZmNiZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2YzhmZjhjNDU1NzJjZjhiY2QyNTc3NTUzMmU4NTAwODY1YzRjYjg1N2M0OTRiMjQzYmJlNjk0MTcyNTYyNzgifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L425-L512",
-          "version": "repo-lines-v1:sha256:be14b74aff54ecc6eda24c69e7ecb404ccdd842777f2a00dd8ad4e0cd1b4984f:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NzhhMDdmNWU3MGFhMjU1NTZlYTAwYWVkZmVhNGRmOWVmOTllZTg2ZDI3NDI3NWUwM2I3ZTk3YjRmY2FkNDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmMTk5YmZkZTNkMzI4Y2ExMzYwMzBkMDM4YTdlZTk2ZTFjZjM5MWQ3NmEzZGJmMGQyNmJkY2NjMTZmOTA1YmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2OGQwN2Y1YWVjNzdiNmI1YTBjYWM2ODY3MTI5YjQ2NWI2ZDA5ODE1OTI1YmU0YTgyZGY3MGQyZmM0YzM2Y2UifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L430-L525",
+          "version": "repo-lines-v1:sha256:cf304517a95b064c7c7a57e841e490a4d8d882e3d1c36b5a145aad2b0b3af47e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ODljYWJiZWNiYjc5MjMzMjZjNzZhMDM2YzliMGVkMTMxNGM2ZTQ4MDZjNDcwNDU2ZmNhZWQwMjljZmNiZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MzUyOGQxNTMwODFhOTBkYzQxMTQ4ZWJhNTQ3ZTgzNTNlYTA1MzFkMTRiZDYwYWNlNDY2NTY1MDY2OWE5YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkOTFkNzM4Njg0OThmZjI2YTkwZjlkZDBiZGViOWEyOWQzYzllOWFiMThmZGU4NmYyN2Y3Y2RlZDJjNDg2NzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5YWE0N2NkYzFhMzQ0NmIxNzU4OTFkMjFiNTgyYjViYmM1MzdlZTExODZjY2Q0NWIzYTFhZTllMmVkZWI1NTkifQ"
         }
       ]
     },
     {
       "id": "claim_0ff0aa1356d84868a41701cc425bbb24",
-      "statement": "CommonsCookieStorage loads serialized cookie data through CryptoUtils.decrypt and writes it through CryptoUtils.encrypt into the default preference store, re-saving successfully decrypted or legacy plaintext data.",
+      "statement": "CommonsCookieStorage loads serialized cookie data through CryptoUtils.decrypt, which returns its input on failure so legacy plaintext is accepted and re-saved, and saves through CryptoUtils.encrypt, falling back to plaintext JSON if encryption fails.",
       "evidence": [
         {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt#L33-L80",
+          "version": "repo-lines-v1:sha256:21be4a58984684d7bfbaa2f5bb6dfa5bf6febd5773c67838c0f5a341ed1dc10f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxMjljNmNmZTRlOWZhMTg3YzMwOGY1Njg4OWI2Y2ZhYmRkNTM1MWVkYmY2MGZmMDI5MzMxZGRmMzA0OTU0MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2MWYxM2QwYzlhMzU0MjkxMGQ5MmFlOGFkZjMyMWM5Yjg2ZjZhYWU2Njg5YTBhOGU2ZTNmODhiNTNkOGVjYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
           "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieStorage.kt#L41-L63",
-          "version": "repo-lines-v1:sha256:437b16f5e1d5aaecc8dea9b124b6f8e54468af1a4ac8a14b8faab8365d534923:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MzQ0MDRhMTJlMjlhMTQxMWM0ZWU2YTc1MDY0NWI3YzNhNDA4YWE0ODUwZTk3NTU2N2U5ODM0YzI0ZDZiMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlZjUyMGY4MzU3NTQxN2EwMDZjZTAzNzQwNzNhOTQ2YzFiMmE2YjJkZjUyNmUzNTgxMjlhNzkzNDgyNDI2YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiNDIyNzE1MmQ1ZDNmMTVhYjUyNGQ5OTNmNWFmYWY0ZjdmYzVlNjRkZjU3ZjdjODdlYjM3M2ZjZmE3Njk4NzUifQ"
+          "version": "repo-lines-v1:sha256:875557f1d1b8613bd92c420c244aba24a6bca29ae4c38734880ff46b3c05d442:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwZjliMmJhMjg3ZDMzMDIzOGRkNDhiMWU4NTM5NjE4ZThlMWFlMmNmM2E5YTQ4NjQxZGFiZTEwMWE0ZTk5NDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjNGY5ZDczNjE0OTIxY2Q5ZmNkOGVjMzEwMzFhOGM5MmJkZGM2YjA3OWU2OTQ5MDE5ZTY0MGE5YmRjMDQ2MTgifQ"
         }
       ]
     },
@@ -67,18 +71,18 @@
       "statement": "ContributionDao persists upload state and refreshes dateModified on saves and updates, initializing dateUploadStarted on first save.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L126-L131",
-          "version": "repo-lines-v1:sha256:56cbc0983ee2b75a8ae57f2f7b4ddfe1d16d7630b2e77066cf6abfe67a622f5b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODFhYjA0OTMyZmZkMDcyNTI2Y2ZhYWYzNjc1ZDhiZWM2OTc1ZTliZDlmZDYwMWIwYjdlMDcwNzAzZWVhY2NiMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmJkYWQ1ZTZjOTE1MzI0NjlhNTdhNWU1Y2QwZjNmMzhkMGMxZDcyMDY5YzYxYjBjMTdjNjU1ZWViZDZjNmZlNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmEzY2Y1MTkyMzU0ZjcxNjE1YWM1MTAzNGIzZTk3YzIwZWRhOTk2NDNmY2FmNWJiZTZkNDFhZDU5YmQxMjE2NyJ9"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L122-L127",
+          "version": "repo-lines-v1:sha256:bb26f18025979d2decd668be1d47869a343e1e3c4069ffbac167dc667ec894c0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2E3OWM1M2M2MzRkNzljODFlNDU5NDEwYTljODI2NmNhN2EyZDdkODRhYjdiNzA0YzQ1YWMzMjcwMTYxOTk3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzVhYzhiM2VlN2E3ODQ0MGMxOTNlNWU5NGM1MzVlYmU3OTAxMzA0ODVkZDk2NWJkNTkxNDNkN2IwZDk1NTEzNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTBlNjhhNjE3OTQ2MDJiOTExNTQwNWMzZmFkODMzZWYyMjdkYjRjZTU2MDA0ODk0NjM4ODg4MjNjZjc5YmZmMSJ9"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L17-L38",
-          "version": "repo-lines-v1:sha256:94d221075dae91a749a506927263fda817a37d9df0da8267d08911c046f46a1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkOGVkOGYwOGE1NDM5MzA0ZDVkNGNhNzljNWRhNmIxZDdmZTY0MTBlZmRjOWQ3OTI5Y2M5YjQzNjM4MGY5MDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxNzMwOThkNzRhZGEzMGE1MmI0MTExODlkM2Q5NzA0NmU0MWU3NjYzZTQ0ZWJhMWI2YTA3MjY1ZmNhMGVkZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNDk2NWFkZDZjNDA0NzNiMWQ2NzlmM2Q1MDcwNmYyOGI3ZjVlN2I2OTkxYjVjMjVkM2Y0YWUwZTJlZTA2MTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwNDVlMzE4NGZkNDYxOWYzM2RiYjkxMTVhZTA2YWVjNWQ5MWViOTdhM2ExMWE2NDkwNWMyZmE4Yjk1YTA3OTcifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L24-L32",
+          "version": "repo-lines-v1:sha256:7bae863e91074057138dcba55146fd8d0a0018b70aa82f29c2c849b5b74fc799:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDdjMzFkYWFiMTAxZjI0Yzk2MGJjMDAzNGQzYWI2ZTlkNzk5YjhlMTVjMjRiYTQyYWMzNmU1ODZhN2IwNjY1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODgwMGIyYjJmOWU4ZDBjNGUzNmRlYTcyMmNjNTJlNmYwNmM3NTdmNjRmNjc1M2ZkZDAxYjYzNGNlZTFkNzk1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWZjMmE1OGE4ZjNmNDU3ZDczM2U2N2QwYWRhOTc3MDlmOGY3NGI3YTJkMGYxMTEyMzQxODk5NDFlZTNkZTA3ZiJ9"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:35:25.887Z"
+    "at": "2026-10-31T14:59:24.742Z"
   }
 }

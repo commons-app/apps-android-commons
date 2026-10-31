@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:05a199a8686cdfd2350dbbc4d073f7bba78924f04cb5f34333555d8172f8c6ba",
+  "pageVersion": "sha256:28c10651dc8561a942b8efd018ee0da0b08b1b3a9a9928c71c189f0800e49fb4",
   "claims": [
     {
       "id": "claim_d7725e9e60a14cf39d6e52ff03e04c41",
@@ -21,8 +21,8 @@
       "statement": "CommonsApplication initializes the application-scoped Dagger component and injects itself before setting up shared logging, image loading, notifications, and language services.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L97-L134",
-          "version": "repo-lines-v1:sha256:757a9a062ac286e05440c7e7a0dead36d393126d05110b0d4b40819ebea6400c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NzM0OTcxNTRjMDUyZGZiMWE0NDA0YjdmZmRlNDllZTNkMTRkMDFlMzVhNDUwODRhYjM3M2JjNzYzNmVlODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3OGFmNWI2NTFhZTJiYTRmODU0NmZiYTliMmVkNmQ0NDhkNzYxMTUwMjlmYWY2YzdkNmVhZmFhZDdkNTdiZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2ZGZkYjQ1YzM1ZjdkMjQxNzZlYTcwZjMwOTA3YTNlMDdjNGNmMGRkMDkzMjE1ZTBjNWIwZDM3MTBiYzhmMjYifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L104-L146",
+          "version": "repo-lines-v1:sha256:96884fb81b78e922a87d12a7cbb12bcee37a5ca97f6df96191596d31799c2a91:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NzM0OTcxNTRjMDUyZGZiMWE0NDA0YjdmZmRlNDllZTNkMTRkMDFlMzVhNDUwODRhYjM3M2JjNzYzNmVlODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxNDM0NDI4ZTIxMTQ1MDFlMTMzZTA0Mjk0YTI5ODUzNzhhZThlMGY2MTNlMDg2MDAzNjdjNGU1MDdkZjI0YzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3OGFmNWI2NTFhZTJiYTRmODU0NmZiYTliMmVkNmQ0NDhkNzYxMTUwMjlmYWY2YzdkNmVhZmFhZDdkNTdiZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0NjkyOGVlNzg2MjU2NzI0MTVkOGU1ZDdmNDI4YWZiYzg1MDFkMWQ1ZWY0MGRhZTZiZGE1OTkzYmI1YTZlOTEifQ"
         }
       ]
     },
@@ -31,12 +31,12 @@
       "statement": "The singleton Dagger graph composes application, networking, Android component, upload, contribution, search, depiction, and category modules; ActivityBuilderModule declares activity injectors.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/ActivityBuilderModule.kt#L34-L88",
-          "version": "repo-lines-v1:sha256:e2caf650a452aef377d7a853f10be51852f87128f4c2dcc48b4cc51f8ee21ef9:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyNzgyZjIyYzliMDhkY2NkYjEwMjcwMmQ0YTJhMGMxODc2ZGIwMTQ0MTE2ZjE4NjQ2ODI3YjIyOGFkZDdiNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwODlmMGRmN2JiZmQ5NGYwYTFlYmU1YWQ4NTc1ZTJlMmM2NjBmMTBhZjI4YTFhMGUwMTgwYWQ0YjUxNjg0ZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0MTIyNmI2MGI5MmYxMTg5YzVhOGRlYzcyZDBhYjMyNGMwZjYxMDU0MTJiYzA0NDc2YWIyYjA2OTQ5MWJhY2YifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/ActivityBuilderModule.kt",
+          "version": "repo-file-v1:sha256:f46466ea51c7ae666cf894fd7f29f724356f32cef618affa7b4bb08c2c35c931"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationComponent.kt#L31-L64",
-          "version": "repo-lines-v1:sha256:a60a428c5dde279399e67d4fe7a0de38d95aacd2b1ce36a90172f8c6950e2b5e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyMTNjODc0ZTEzNTU3ZGRjZGZiZTFlNWExOWFmM2EzNTcwMWU0MWVlM2UyMTAxNzAzZjUyODEzY2IxZjEwYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyNTIzMmZlZDE2MDJkNzg2YWRiNzcxNzMzN2JmOTI2OTZhNjZkMjE3OWRlNjdiNTkxMmU5ODUyMWNmNmI4ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzZGFiNjM2YTk5NmMxYTY4NTBjOWNkMTMzNzZhM2E5ZTg3NmRmY2UxNDQxZGJkZDlhMzY5YjNkMGUyNjdiYmYifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationComponent.kt#L31-L52",
+          "version": "repo-lines-v1:sha256:8e7de252ad02a5d37a9af2e44107d7b14f726c4644fe1e3e19bf2dec29a22c0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyMTNjODc0ZTEzNTU3ZGRjZGZiZTFlNWExOWFmM2EzNTcwMWU0MWVlM2UyMTAxNzAzZjUyODEzY2IxZjEwYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyNTIzMmZlZDE2MDJkNzg2YWRiNzcxNzMzN2JmOTI2OTZhNjZkMjE3OWRlNjdiNTkxMmU5ODUyMWNmNmI4ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3MmM0YTUzMTBmZTMyMGNlMTAwMTFiNTk2NjdhZjJhNjQ5ODBmNTE4MjllNzQ3YTExNzJlYmU4MTllYzk5NjkifQ"
         }
       ]
     },
@@ -45,18 +45,18 @@
       "statement": "MainActivity chooses different navigation sets according to the persisted login_skipped preference and uses the signed-in route to resume stuck uploads.",
       "evidence": [
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L114-L159",
-          "version": "repo-lines-v1:sha256:be303fcc640d47a9a606c8a5c014e4736a3e833fbc50bbad2cd1d69f39623241:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlODRjYTVmZjU1OGQ2NjMzMjlhYmQ0OWFkODhlZjgzZDZiZWEyMjVlZDc1YmIzZTkxMmYzNzU0ZDBiNDg3MzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4MDU1NTIyN2IxNGM1ZmEwYTQ0NTA1NjhmM2U0N2RmNzAxMDg1NjFlZDU4NjM3ZTZiODlkZDc5ZmVhOGE3NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3YjYzNmEzZWJkODQ3MjY0MGFkOTA2YjFiM2U2YmQ3ZmE3YTQ2N2FlNDBiNzBmMTc2MWIxZDdiYTMzOTllN2MifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L113-L160",
+          "version": "repo-lines-v1:sha256:eca95fd39fb83a1eb76880c32e3af541e5009292a399168d86dd6541899dcd27:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlODRjYTVmZjU1OGQ2NjMzMjlhYmQ0OWFkODhlZjgzZDZiZWEyMjVlZDc1YmIzZTkxMmYzNzU0ZDBiNDg3MzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjN2IwMGMyY2MwZGI3MTEzNjdhNDA1YWY0NTAwYWQyNjk0NDg4YTIzN2QwMWIzMWM4YWUwMDc4YTVmYTEyYzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4MDU1NTIyN2IxNGM1ZmEwYTQ0NTA1NjhmM2U0N2RmNzAxMDg1NjFlZDU4NjM3ZTZiODlkZDc5ZmVhOGE3NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxMmIwNWQyMjFhYTk2MjFhMjYyODdkNGY1MDcwYzlmMDUyODBiYmFiMGEyZTBhYTZmNTdlNjI2OTZkM2QwNzYifQ"
         },
         {
-          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L212-L241",
-          "version": "repo-lines-v1:sha256:192d0a9cf517cfa6018d9c36dd9fb8fe7e0744f1b47a1462004dec68d3c3e4c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmODJkMzRlMzdhYTMxYmFlMTE4YzJjZGY5MjU4NjUwYzllZDljODQwZDdlYmNiYmVlYjhmNjkyMjg1NzI5MjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNTJlMzkxNmJiNzZlZTQ4NWU5Yzk5ZTg0YTNlYjVjMjE4YjZhNTY5NjdlOGNjNTMzYTRmZmViMTM2ZmE1MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxMzQyZTEzMzc4YjkxZDFkOTIwYjE1YjQyOTczMjFjMGNlYWYwMzhlMzI2MzJkNTdmMjVlMDg5ZDIyMTk5NTIifQ"
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L382-L400",
+          "version": "repo-lines-v1:sha256:42f9418af847ba5382a2800152814d17ba4ccdba48972344f38e08707aea4688:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmYjMyZDkyNzMxNDVlMDM5MDYyYzI1NjA3MTMzNWQ1ODBmYWIzNDYzZWNhMTJhNDA5NjQ0ZmJiMTEyNGI2NDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0ZjQwOTBjYTJiMGUxZmZmZmQ1NGI0ZjZhMzhlNzMyYmJjNzJiMWE0ZmI1YjA2MmI3NjQzN2U2ZGMwMGMwZDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1NGJlYjVjYWRmYTI1MjlmNDExZThmNjBmMGY5M2Y0YzcwMzhjNTg0Nzg1YjdlMGQ0OGUzMzk2MjliNWNkNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2YjNkOWM4NDNhODc3YmQxYzBiMTBhZWZkNzVmZTg4YzZkMDkyODA5NGZmYzgwMzBhNDIwMzcxZDdlNDJkMDEifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:35:25.887Z"
+    "at": "2026-10-31T14:59:24.742Z"
   }
 }

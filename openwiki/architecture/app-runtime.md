@@ -5,7 +5,7 @@ description: Explains how Android launches Commons, initializes application-wide
 tags: [android, application, dependency-injection, navigation]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
+    at: 2026-10-31T14:59:24.742Z
 sources:
   - id: openwiki-source-186e96b8d6739f3745947903
     resource: repo://app/src/main/AndroidManifest.xml

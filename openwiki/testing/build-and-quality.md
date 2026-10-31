@@ -3,9 +3,6 @@ type: testing-guide
 title: Build and test workflow
 description: Documents the app's Gradle variants, the unit-test and APK-build tasks used by CI, how instrumented tests are configured, and the limits of existing test evidence.
 tags: [testing, gradle, ci, android]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:46:52.854Z
 sources:
   - id: openwiki-source-4e3e538728489e7a1208c697
     resource: repo://.github/workflows/android.yml
@@ -20,6 +17,9 @@ sources:
   - id: openwiki-source-0cc61a5b9aac2ce8d008e973
     resource: repo://app/src/test/kotlin/fr/free/nrw/commons/upload/UploadPresenterTest.kt
 generated: { by: "copilot", at: "2026-10-31T14:46:52.854Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Build and test workflow

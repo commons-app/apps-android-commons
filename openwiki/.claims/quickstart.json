@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e47416a9c21fdd955d52390fe189ffd5a629ef53dbbc9d402b5db91fcbd1c112",
+  "pageVersion": "sha256:b97b93b2f0eca2e4fe24829db6586b13dfac9140575a6050b7f473ab19e63776",
   "claims": [
     {
       "id": "claim_cbd251f2ed7242b8a0fca6ca43df9e2b",
@@ -41,7 +41,7 @@
       "statement": "The checked-in Android CI workflow comments out the connected instrumented-test step while retaining a beta debug unit-test step for pull requests.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/android.yml#L61-L80",
+          "resource": "repo://.github/workflows/android.yml#L67-L86",
           "version": "repo-lines-v1:sha256:05a22ed3c8b73a294b569a599262a81c46dba06a308ed951f1117cd02b1d1cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3ZmY2YmJmZTY5YWY3ZDZiNjdlNWEzNzhmZGI0MTI1YThkYmY0Mjk5ZjYwNjAwNmI0MjEyYTY3NjliNzdlZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3YTk0NGYwNDE0ZDI5MDdlNmY4ZGVjNjE0YzM1NzUyOTQwOGQwNWNkMzc4YThlMWJhNmNmMjY5ODM4MWYxYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNzEyZDRiZTgxNTExY2RhMTFjNTM3YWJiZWQxYWIwODk1MDVlN2ZmMjYwZmMxZmFiYjdjYThhYjczYjY0MGIifQ"
         }
       ]
@@ -49,6 +49,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:35:25.887Z"
+    "at": "2026-10-31T14:59:24.742Z"
   }
 }

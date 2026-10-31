@@ -3,9 +3,6 @@ type: repository-guide
 title: Repository quickstart
 description: Routes contributors to the Android app's runtime, networking and persistence, authentication, upload and discovery workflows, and validation guidance.
 tags: [quickstart, android, navigation, development]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
 sources:
   - id: openwiki-source-4e3e538728489e7a1208c697
     resource: repo://.github/workflows/android.yml
@@ -15,7 +12,10 @@ sources:
     resource: repo://README.md
   - id: openwiki-source-e620d7484b72a53c7fa812cd
     resource: repo://settings.gradle.kts
-generated: { by: "copilot", at: "2026-10-31T14:35:25.887Z" }
+generated: { by: "copilot", at: "2026-10-31T14:59:24.742Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Repository quickstart
@@ -30,8 +30,13 @@ This repository builds the Wikimedia Commons Android app. The Gradle settings cu
 | MediaWiki/Wikidata API calls, HTTP clients, Room, or migrations | [Networking and local storage](architecture/networking-and-storage.md) |
 | Login, account state, challenge codes, or CSRF tokens | [Account and authentication flow](workflows/account-and-authentication.md) |
 | Selecting, describing, queuing, or uploading media | [Media upload lifecycle](workflows/media-upload.md) |
-| Explore lists, contribution history, categories, or Nearby places | [Discovery and contribution browsing](workflows/discovery-and-contributions.md) |
+| Explore lists or contribution history | [Discovery and contribution browsing](workflows/discovery-and-contributions.md) |
+| Nearby map, location updates, or the location picker | [Nearby places and location](workflows/nearby-and-location.md) |
+| Categories, depictions, or Wikidata edits | [Wikidata, categories and depictions](architecture/wikidata-categories-and-depictions.md) |
+| Peer review, deletion nominations, or the image editor | [Review, deletion and image editing](workflows/review-delete-and-edit.md) |
+| Profile, settings, bookmarks, notifications, campaigns, or quiz | [Profile, settings, bookmarks and notifications](workflows/profile-settings-and-notifications.md) |
 | Gradle variants, CI, or deciding which tests to trust | [Build and test workflow](testing/build-and-quality.md) |
+| Product flavors, signing, or app configuration | [Build flavors and configuration](testing/build-flavors-and-configuration.md) |
 
 Use the manifest for Android component entrypoints, the Dagger component and builder modules for injectable Android components, and the feature flow page for the state owner and data source behind a screen. When tests disagree with production code, verify the current source path: several repository tests are ignored or stale, and the CI workflow does not currently run its instrumented-test step.
 

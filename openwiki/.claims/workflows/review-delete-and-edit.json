@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:ced9281cd759a30301b9ccff05b5836e1e2bf290405c816e8fc912c92297ade3",
+  "claims": [
+    {
+      "id": "claim_923ab7dc772840a68ae348dd6b1cdb42",
+      "statement": "ReviewHelper selects random recent-change image files, rejects those with a deletion-request page, and skips files recorded as already reviewed in the local ReviewDao.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewHelper.kt#L100-L149",
+          "version": "repo-lines-v1:sha256:fd8bbe7c91b0bb435ff5ec26f1f974b6074648ed78e0f6cd2f688171e8607977:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhM2ZlOGFmYWEwMzMyMzhmZDYzOGY1Nzc0N2M1YTg1NzhiNTZmNTUyMDQ5MmIzZTI4ZmQyZDIwMWM3NDE4ZDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MGZlNDA2MzJjYWI0NGQ2M2RiNjBhOTdhNGI2NWQxMzIxNTNlZTllNjk4ZmM4MzExNmQ1MGI5MjZhYTRlMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewHelper.kt#L27-L70",
+          "version": "repo-lines-v1:sha256:f80c7703acef4ec267d1f4ef0243fe7bdfff7faca776e30bacebbd6320df6733:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzMjg3NjEwZmNiMWNkM2I2YzU1MDY0NTAxZjhjMmUxMzg5YzliYmM3N2NhYzg5OTI4Yjk4M2ZjOGY3YzZmN2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNzUxZThlNzA2NjBmOTZlMjc1ZGQyY2UwOTdmNjMyMzU4NDUwZmJkNjEwNjIxZDg3NDY3NWVkOTBkMjE5NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkMjVhMzdhMTlkOWVjYjRkOTMwMWIyNmM1YWUzNzk3MjRiNDMxMGJjYjdmYzk5N2M3MDZlNDA5YWJiYjQzNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ZjQ4MDJlY2Y3NmMxMDNhYjYyZmVjMjEzOTkzM2Q1OTZmYzE0ODlhOWRlN2NlZmViMzY0ZTlhZjFmYWUxNjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e79fc5c914474cb0985219bc27ee7645",
+      "statement": "DeleteHelper nominates a file for deletion via four chained page edits (file template, request subpage, daily log, creator talk page), aborting later steps when an earlier one returns false, so a nomination can be partially applied.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L67-L130",
+          "version": "repo-lines-v1:sha256:3c1c04952c4800ea12a8e710ce686e51b622c3bd306a065fafe4a8fb1181866a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmNzA4M2IxNTJjNzEzMDNkNTVjMzYyYmViOTIyNGZiMTNmZjAwOGMzNjA0MzA1YzI4YTExMGNiMWY4MTFmNGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1N2U1NzA4NWY1N2U0NzU5NzIyOTlkMGRkOGQxOGFkMDA2MDlmMTQ1YjEzOGJhNGZmNTU0OGEwNTBmYTQxNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5Y2E5NTlkZWJhMjFiMTViMjc3YzM1NzdlZDkxZDhjNGFjNTA1ZTcyYjJjOWUzYWJiYTIwNzM4Yzc3YzljZTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6c8a05299bc04be39eae3e2471418928",
+      "statement": "EditViewModel rotates images losslessly via Jpegtran into a new timestamped file and rethrows failures.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditViewModel.kt#L60-L96",
+          "version": "repo-lines-v1:sha256:4842bf3a2d35f2bf1336196158e6c22591269b138a713f77e6ddf305e0338b41:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmYzI3NGRiNjkzMDMzYjM1ZGZlM2FlNzJkMGEwZDI3ODJhNDdhMjAxM2FhMjI2MmU1NmQzMzhiZjBiNGI1YTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzMTBlYjc1MWUzNGE4YWYyZDgwNjhhMzk4YzNlYTc1ODRhOTBkZTUzNmZmMGNiNGE5M2Q4Y2IwNjE4YTAwOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_baf5a25a3b47484384d861aa6a70a881",
+      "statement": "EditActivity applies pending rotation and returns the edited file path as an activity result, showing a toast on failure.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditActivity.kt#L581-L600",
+          "version": "repo-lines-v1:sha256:5ab8a9ed267d06c2f72e8b167fd7182e06f9ed56940342f7c09ccbc867af36f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzMWQyNDQwZmJiNjkwMWU4NWJlOGJhYmIxNTEyMDkxMTQ2YjBiYjJkZDJjMGNmYTY1YmU2NTYyMGI2NjNjZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzZWEwYmU2MGE2NzE3NjA1NmM3MDdmMWE5NjI2ZDE1MmIyN2U3YWNlMjBkZmMwNjIxMmZjZjU5ZWExZDUxZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYWIxZDY3ZmI4OGE1N2Y3ZGEyM2Y4OWRhYjEzMzFiNDk1YzFmN2Q0YmVmM2UxNDU2YzY4ZmZmYWY3MDUxNjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhZGZmY2I2YjgyZmJkNjYyNGVmNDFkNDg5NTMwYTk4NzhhNWU5MjAwZGJjOTYzMzE2MmNiMGMzZGQzZTZhN2UifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T14:59:24.742Z"
+  }
+}

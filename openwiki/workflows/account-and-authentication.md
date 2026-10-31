@@ -3,9 +3,6 @@ type: authentication-workflow
 title: Account and authentication flow
 description: Follows MediaWiki login-token exchange, two-factor and email challenges, account persistence, session flags, cookie-backed API state, and logged-out browsing.
 tags: [authentication, account-manager, mediawiki, csrf]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
 sources:
   - id: openwiki-source-0550682b2f9d9cae7e79cdfa
     resource: repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt
@@ -20,6 +17,9 @@ sources:
   - id: openwiki-source-b99f07c7f59c0fcd00129c17
     resource: repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt
 generated: { by: "copilot", at: "2026-10-31T14:35:25.887Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Account and authentication flow

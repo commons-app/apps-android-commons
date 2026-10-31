@@ -3,9 +3,6 @@ type: upload-workflow
 title: Media upload lifecycle
 description: Traces selected media through the upload editor, durable queued contributions, WorkManager processing, resumable MediaWiki stash chunks, and completion or failure.
 tags: [upload, workmanager, mediawiki, wikidata, persistence]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-31T14:35:25.887Z
 sources:
   - id: openwiki-source-186e96b8d6739f3745947903
     resource: repo://app/src/main/AndroidManifest.xml
@@ -22,6 +19,9 @@ sources:
   - id: openwiki-source-a48bb1f5dc611574f6623c22
     resource: repo://app/src/main/java/fr/free/nrw/commons/upload/worker/WorkRequestHelper.kt
 generated: { by: "copilot", at: "2026-10-31T14:35:25.887Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-10-31T14:59:24.742Z
 ---
 
 # Media upload lifecycle
