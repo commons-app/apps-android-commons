@@ -304,7 +304,7 @@ class UploadActivity :
      * Makes API call to check if user is blocked from Commons. If the user is blocked, a snackbar
      * is created to notify the user
      */
-    protected fun checkBlockStatus() {
+    private fun checkBlockStatus() {
         compositeDisposable.add(
             userClient!!
                 .isUserBlockedFromCommons()
