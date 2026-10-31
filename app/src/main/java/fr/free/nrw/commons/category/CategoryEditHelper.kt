@@ -21,6 +21,7 @@ class CategoryEditHelper
         private val notificationHelper: NotificationHelper,
         @Named("commons-page-edit") val pageEditClient: PageEditClient,
         private val viewUtil: ViewUtilWrapper,
+        @Suppress("UnusedPrivateProperty") // Injected by Dagger, may be used in future
         @Named("username") private val username: String,
     ) {
         /**

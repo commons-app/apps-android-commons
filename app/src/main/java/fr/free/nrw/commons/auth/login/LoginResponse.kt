@@ -47,6 +47,7 @@ internal class ClientLogin {
     }
 }
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 internal class Request {
     private val id: String? = null
     private val required: String? = null
@@ -57,6 +58,7 @@ internal class Request {
     fun id(): String? = id
 }
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 internal class RequestField {
     private val type: String? = null
     private val label: String? = null

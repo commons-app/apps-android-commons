@@ -87,6 +87,7 @@ class MwQueryResult :
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     private class Redirect {
         private val index = 0
         private val from: String? = null
