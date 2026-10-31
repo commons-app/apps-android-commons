@@ -87,6 +87,7 @@ import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.hideTabs
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
