@@ -4,9 +4,9 @@ import android.graphics.Matrix
 import android.graphics.PointF
 import android.graphics.RectF
 import android.view.MotionEvent
-import androidx.annotation.IntDef
 import com.facebook.common.logging.FLog
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
+import fr.free.nrw.commons.media.zoomControllers.zoomable.TransformLimiter.LimitFlag
 
 /** Zoomable controller that calculates transformation based on touch events. */
 open class DefaultZoomableController(
@@ -18,20 +18,7 @@ open class DefaultZoomableController(
         fun onImageBoundsSet(imageBounds: RectF)
     }
 
-    @IntDef(
-        flag = true,
-        value = [LIMIT_NONE, LIMIT_TRANSLATION_X, LIMIT_TRANSLATION_Y, LIMIT_SCALE, LIMIT_ALL],
-    )
-    @Retention
-    annotation class LimitFlag
-
     companion object {
-        const val LIMIT_NONE = TransformLimiter.LIMIT_NONE
-        const val LIMIT_TRANSLATION_X = TransformLimiter.LIMIT_TRANSLATION_X
-        const val LIMIT_TRANSLATION_Y = TransformLimiter.LIMIT_TRANSLATION_Y
-        const val LIMIT_SCALE = TransformLimiter.LIMIT_SCALE
-        const val LIMIT_ALL = TransformLimiter.LIMIT_ALL
-
         private val TAG: Class<*> = DefaultZoomableController::class.java
 
         private val IDENTITY_RECT = RectF(0f, 0f, 1f, 1f)
@@ -296,7 +283,13 @@ open class DefaultZoomableController(
         viewPoint: PointF,
     ) {
         FLog.v(TAG, "zoomToPoint")
-        calculateZoomToPointTransform(mActiveTransform, scale, imagePoint, viewPoint, LIMIT_ALL)
+        calculateZoomToPointTransform(
+            mActiveTransform,
+            scale,
+            imagePoint,
+            viewPoint,
+            TransformLimiter.LIMIT_ALL,
+        )
         onTransformChanged()
     }
 
@@ -366,7 +359,7 @@ open class DefaultZoomableController(
 
     override fun onGestureUpdate(detector: TransformGestureDetector) {
         FLog.v(TAG, "onGestureUpdate")
-        val transformCorrected = calculateGestureTransform(mActiveTransform, LIMIT_ALL)
+        val transformCorrected = calculateGestureTransform(mActiveTransform, TransformLimiter.LIMIT_ALL)
         onTransformChanged()
         if (transformCorrected) {
             mGestureDetector.restartGesture()
