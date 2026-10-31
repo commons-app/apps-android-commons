@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f75e6ab98cab6e54addfdfceb6fa4dbb9e66f17de0faf627b996c51370104cbd",
+  "claims": [
+    {
+      "id": "claim_aaf84a37e91c4f4eb979fefd885d5a0a",
+      "statement": "Retrofit service interfaces are created with the cookie-enabled OkHttp client from OkHttpConnectionFactory, while the separately provided DI OkHttpClient is injected into JSON API and image-fetcher consumers.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt#L28-L60",
+          "version": "repo-lines-v1:sha256:a901e28e9ce3d2f9308fe3d660b612b5b0f48020eb06df69a9525bd5441bba34:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMjgxYzEwYmUyYjUyNDJmYjJkOTc3ZGJkOWY2NzkyN2FkNjhjN2E5NmRhNjU3YjQ5MjI2MDU3ZTc1ZGY3YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NjBhYzJiMDU1YTNiZTUyNzhlYjhhZWVmOTVhYmE2ZTBlNmM5YzljZDIzOGQ4ZWQ4M2Q1ZWQ1ZDI4ZjM4YzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxNmNlZDNhMDk4MTkyNjMzMDFlODhmNjY1NTllMjA5MjgyYTVjMDY0YTc0OGZjNzYwZThmODYzNjcwZjk2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkY2RlYzU4N2NlYTZkMGVmMmU2OTZmNTViMjE4NzljODA0NzUxNzAzMmUwMGVmZjExNjcwZWQ5OGFkNTA3NmUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L57-L90",
+          "version": "repo-lines-v1:sha256:d05d213bebcb1c50c9dc30f7c3e1f6f456277ecc98bcf3190f517f38059166b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0Njg1MjExYzJiNjE3Yjg0MTRkN2RmNDQxNzc5OTZkMTljOGY3MmY2NjJmZjQyOTA4ZjY5MGM0MWQ4MGZkMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ZWJjZGU1MzMyOGIyOWEyZDAyN2Y3OGI4NGRkNjlhM2YxNGY4YjRhMzRiOWExZDU4YWEwNzljZTU1ODcwNjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNjI3ZTU5ZDJlMDQ3N2RhYTlmNzFlYjRiZWE2NGNhMGFkZmIzYWE2ODQ5NTI3ODU0ZTQyNDliYTRmZWExMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmZmIzY2U1ZmY1YzJmY2YwZTBjNTQ3N2M1YjI5NzM2ZDI1NWQ1Zjg2OTJlMGRjOGJkOTBkY2VlZDUxODAzYTgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/CustomOkHttpNetworkFetcher.kt#L34-L55",
+          "version": "repo-lines-v1:sha256:b679a24933bb82583b7ecdec34744632e99726dbcfd940b49104d78ef7f21473:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxZDNlY2FkYThhYjc3YTZhMTNjYmZiNTc4NjA2MWYyY2Q0MjdkNzVlNzg4MWEzMGZkYjNjZDgzZjBlNGQyMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmOGNjZjAzOWEwYThlMWI4ZjFjYmMxMmI5MTYwOWU1ZDNmNTQ0YWJiM2E3ZWNjMDFkYTBkOWVhOTkxM2Q4ZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzMWU1Y2EzYzNmZjk0N2U1ZTYzYmFmMjFhMTNlNTZlY2I3NjNlMDg5ZmYzOGNjZjdlODExYmNhNTIyYjgzMDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxYTIwYjk1ZGNhYzY4MWQ0YmI4NTJiODMwMzNiZTM2MmIzZDdkOGUxZDE4NTIzNjFjMjkxNDU2NjI2ZGYxY2IifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt#L6-L28",
+          "version": "repo-lines-v1:sha256:c06dc3453feff168c788dbfc1b6e48d4dae17bfda69ad78ca2def6635f24c508:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2I5N2IyNmE2M2YzZDZiMDg2NzA3NmY0ZmQ1ZThiMDM2MDljYTFjYTQyNjU3NzQ3MDQwMDU4NTg3NTY0N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4MjA1YmVjNDVkNWQyNjdiNzdiODg1YWM0MTE2ZjdjMmJmZGZjYWU1MTgzNDdjNTg1M2VkYjBmNjUyMDNiNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac7d566517554b4283005e353b154706",
+      "statement": "AppDatabase is a version-22 Room schema, and CommonsApplicationModule registers explicit migrations while configuring destructive fallback for migration paths without a registered migration.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt#L40-L76",
+          "version": "repo-lines-v1:sha256:c1399dec3f95d1457fd3eae6378c79c93b306b72a6968851fcace9be09891db4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2YjkzNjQwZjk0MWNhYjU2Y2RlZThmMWQxN2UwNTA0NjQyNzlhMGIyMDgxOTI3MDFlYjgxYTg0MDhjMTEzODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkNWQzMDFkNGMzMzVlOWQ1MDU0NjEzYjY5OTIyM2M1MTMxYTljZGY4MmI4ODIyMDJiMGYxOGY2OWFkOGQ5MzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L195-L206",
+          "version": "repo-lines-v1:sha256:b8add3098f563a7ff9eed83a58381143e48b498ef16572e7d055e188ad989844:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmNTgzNTU4ZjAyN2ZhZTQzMTdlZWVjMzE2MjY5MDA1YTEwZjVhODAzZGY3NDg0NTY4ZjczNDhkOTAzYzZjMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyZDM0MzM1OTczN2Y1NzI4YWYyZmZlNWFkOTk4NjExZTcxODA0MGIwM2QyMmVkNjJkZDE5YTU0YmYyNGRkYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZjODA0ZTM0NTQ1NThmZjIyYjllYTE4MmZjYzljNjU3MzQzNThlNTJjYThmYzQ2MmU3OGRjODY5ZDRmODE2MDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fdc3471199a44576880a74cc0d5320e6",
+      "statement": "The Room 21-to-22 migration creates replacement Room tables and copies categories, bookmarks, bookmark items, recent searches, and recent languages from the legacy commons.db when present.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L365-L430",
+          "version": "repo-lines-v1:sha256:4a116cc4c5741d18338b7b93bfa427a53e3b80293af3a6397d53b7a90e02d9e8:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmZjdkY2E0MDQyM2M4MTcwMWNhODJlMjI2NzYwMjQxZGNjOTk5OTUyNGYyNTRkYzVjZjkwZGFmMGRiMjNhNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ODljYWJiZWNiYjc5MjMzMjZjNzZhMDM2YzliMGVkMTMxNGM2ZTQ4MDZjNDcwNDU2ZmNhZWQwMjljZmNiZjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2YzhmZjhjNDU1NzJjZjhiY2QyNTc3NTUzMmU4NTAwODY1YzRjYjg1N2M0OTRiMjQzYmJlNjk0MTcyNTYyNzgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L430-L525",
+          "version": "repo-lines-v1:sha256:cf304517a95b064c7c7a57e841e490a4d8d882e3d1c36b5a145aad2b0b3af47e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ODljYWJiZWNiYjc5MjMzMjZjNzZhMDM2YzliMGVkMTMxNGM2ZTQ4MDZjNDcwNDU2ZmNhZWQwMjljZmNiZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MzUyOGQxNTMwODFhOTBkYzQxMTQ4ZWJhNTQ3ZTgzNTNlYTA1MzFkMTRiZDYwYWNlNDY2NTY1MDY2OWE5YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkOTFkNzM4Njg0OThmZjI2YTkwZjlkZDBiZGViOWEyOWQzYzllOWFiMThmZGU4NmYyN2Y3Y2RlZDJjNDg2NzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5YWE0N2NkYzFhMzQ0NmIxNzU4OTFkMjFiNTgyYjViYmM1MzdlZTExODZjY2Q0NWIzYTFhZTllMmVkZWI1NTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ff0aa1356d84868a41701cc425bbb24",
+      "statement": "CommonsCookieStorage loads serialized cookie data through CryptoUtils.decrypt, which returns its input on failure so legacy plaintext is accepted and re-saved, and saves through CryptoUtils.encrypt, falling back to plaintext JSON if encryption fails.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt#L33-L80",
+          "version": "repo-lines-v1:sha256:21be4a58984684d7bfbaa2f5bb6dfa5bf6febd5773c67838c0f5a341ed1dc10f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxMjljNmNmZTRlOWZhMTg3YzMwOGY1Njg4OWI2Y2ZhYmRkNTM1MWVkYmY2MGZmMDI5MzMxZGRmMzA0OTU0MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2MWYxM2QwYzlhMzU0MjkxMGQ5MmFlOGFkZjMyMWM5Yjg2ZjZhYWU2Njg5YTBhOGU2ZTNmODhiNTNkOGVjYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieStorage.kt#L41-L63",
+          "version": "repo-lines-v1:sha256:875557f1d1b8613bd92c420c244aba24a6bca29ae4c38734880ff46b3c05d442:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwZjliMmJhMjg3ZDMzMDIzOGRkNDhiMWU4NTM5NjE4ZThlMWFlMmNmM2E5YTQ4NjQxZGFiZTEwMWE0ZTk5NDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjNGY5ZDczNjE0OTIxY2Q5ZmNkOGVjMzEwMzFhOGM5MmJkZGM2YjA3OWU2OTQ5MDE5ZTY0MGE5YmRjMDQ2MTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffb0754c900643e3b173dfc1b591e67e",
+      "statement": "ContributionDao persists upload state and refreshes dateModified on saves and updates, initializing dateUploadStarted on first save.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L122-L127",
+          "version": "repo-lines-v1:sha256:bb26f18025979d2decd668be1d47869a343e1e3c4069ffbac167dc667ec894c0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2E3OWM1M2M2MzRkNzljODFlNDU5NDEwYTljODI2NmNhN2EyZDdkODRhYjdiNzA0YzQ1YWMzMjcwMTYxOTk3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzVhYzhiM2VlN2E3ODQ0MGMxOTNlNWU5NGM1MzVlYmU3OTAxMzA0ODVkZDk2NWJkNTkxNDNkN2IwZDk1NTEzNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTBlNjhhNjE3OTQ2MDJiOTExNTQwNWMzZmFkODMzZWYyMjdkYjRjZTU2MDA0ODk0NjM4ODg4MjNjZjc5YmZmMSJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt#L24-L32",
+          "version": "repo-lines-v1:sha256:7bae863e91074057138dcba55146fd8d0a0018b70aa82f29c2c849b5b74fc799:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDdjMzFkYWFiMTAxZjI0Yzk2MGJjMDAzNGQzYWI2ZTlkNzk5YjhlMTVjMjRiYTQyYWMzNmU1ODZhN2IwNjY1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODgwMGIyYjJmOWU4ZDBjNGUzNmRlYTcyMmNjNTJlNmYwNmM3NTdmNjRmNjc1M2ZkZDAxYjYzNGNlZTFkNzk1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWZjMmE1OGE4ZjNmNDU3ZDczM2U2N2QwYWRhOTc3MDlmOGY3NGI3YTJkMGYxMTEyMzQxODk5NDFlZTNkZTA3ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6907d29d701745f2b5c6ea0494fcf360",
+      "statement": "The shared Retrofit transport is built from a singleton OkHttp client with 120-second connect, write, and read timeouts, a 64 MiB application cache when an application context exists, BASIC logging with Authorization and Cookie redaction, a common User-Agent header, and response interception that maps unsuccessful HTTP responses and MediaWiki JSON errors to IOExceptions or MwIOException; the upload API URL is excluded from JSON-error interception.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt#L19-L61",
+          "version": "repo-lines-v1:sha256:f5cacceb1446fdbc4733434d139b11a21fd08dc79b17962687affbbc7edfc735:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2ZDczZWRmMjFlMmQ2MGRiN2U5NjEyOTlhZjJiNTdjNDNhMjU5ZDVmNjM4NDE5OTZhZjk0OWNhY2I4ZTJhYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1Y2JkMjI0ZDNkNTA0Mzg0NmJlNjYyZDkzOTAyOWY0Y2JjNzYzNWQxYzcwOWRjMmRmNGUxMWZkMmIzYWVkMWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MzMyN2YwZDdiOGNlNTc4MjQ3NzFhMGVmMTFjNzVjMmMyOWExNjEzMTFkZTMzMjM2NWRkNjEwNDE3NmQ0OTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNDJjZmU5ZmYzNjEwY2ExYjE4ZWM4ZjE1MmQ2N2I2YWZhOWQ3MWM2MzkxNDRlNzZhOGI4NmY3OGQ0YTVjYTYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/OkHttpConnectionFactory.kt#L80-L150",
+          "version": "repo-lines-v1:sha256:5a126da94d3b21b2a437dff9209c7aa25964216b5e2700a88099903a1bde7b70:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3YTY3YjQ4YThhZTEyMzk4ZjkxOTU2NTRlODc4OTdlOTU0Nzc4YzM4NzgxZThmNTA4NDVhYmMwODg3ZDVhMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4M2UwNjQ1NGZkMDE0ODFkZmU1YTFiOGNkYjE1Yjg0ZmU1YTM3ZjFiYWIzZjJkNWVlOTUxMjU0ZDFiM2U5ZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjZWU5ZTY4ZmNlNDk5ZmVhOTNjNTZmNGM4ZGQ3YjJlZDQxMGViNjg3MWIyMGZlZGYwODM1YjRiYmUxMmNiMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTRkMDJhODEyMTk0NGQxNzZkMjY1ZTliYjljYzU5ZjZhYjg5MGJjYWRmOGFlZmRlYmRiYmI0ZjJlYTg0NDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_156541be056344fc9e05ae8dca246e78",
+      "statement": "NetworkingModule separately provides a singleton direct OkHttp client with the same 120-second timeout policy, an okHttpCache disk cache, and BODY logging in debug builds versus BASIC logging otherwise; it also provides the singleton CommonsServiceFactory and singleton encrypted cookie storage and jar.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L102-L113",
+          "version": "repo-lines-v1:sha256:393e1f7d6dd182ae10798a1af2aeebba71df1e9ec3d5493a45865f803395f791:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhMzU1OTE4ZGNmNDY4ZWQyMzQxZjI1NWIzZDU5MTcyMzQ1YWFiN2JiY2M0NmE2MGIwZWU3YzkwNGE4MWYzY2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmZjZhMDU2ZmE1Y2I5ZTFmNmNjYzQ5MTdlYzFmNzAzNTAwODM3YTg4NDQyMmE2MTMzMWVmNzhkYjAxMjZkM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjZTZkYzc3ZmQ5ZWVhNmE0OTUwMzc5NTliMjc1YzRkYTE5MWMxZDYzNWI5OWFkNmJiZjkwNzFkNGE0YjI1MDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L55-L83",
+          "version": "repo-lines-v1:sha256:e5cd3af3c7dd43aa83aad0f309070bb8a80523415f3018bd8d0da31b5ccacfc1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1NzU3NjMwNjNjODYxZjQ2MjdjODcwODFmODhmODQ0MzM2NGNiNDRiMzFkZWUxMTAxNTg3NmY0YjFiYmI0YTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4eaef773af7645b88a5cb2cc11fec822",
+      "statement": "CommonsServiceFactory lazily configures Retrofit with the shared OkHttp client, RxJava2 and Gson converters, and caches Retrofit instances by API base URL; Dagger creates named Commons and Wikidata service and CSRF bindings from that factory.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L150-L218",
+          "version": "repo-lines-v1:sha256:cefcf65e2021afec9abc36e86feeb860dee5509a4a439a79abb85b0ef6f736f0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlMTYxM2FiNzE2ZmM1NWM3ZmJhOTIwZWJlMDhkODgzYjNjZjUwZDljZmQ3MzEyODc3ZDI0ZDVhZmNmZGRjY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3ZWVmMWI1MWM0Y2UwNDAzMDQ3NmNjNmY0N2U4MTIyYjlhNmIwZGU1NTcyOWQyNjc4MDM3YTliYjRlMWM1MWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3YzcyMDYzZjlkYjEyZTBmMzhkMmNiZjNmNTkwZWRkYzgzYjVkYzYzYjFjMGRkNzg1MzVlMjViYTUwOTFjMGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3NmY0OTQwYzRjNzEzZGJlODFjNDQzM2ZlMmFiMGVmNGMzZGNjNjM0YjU1MTZjNzc1YTBiMWRmNzgyOTI0MjgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/CommonsServiceFactory.kt#L8-L28",
+          "version": "repo-lines-v1:sha256:565994921b049c90e5f02368e27c24fefdf62a626327617d593c9c1e5949513d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmOTZmMTNkMmRiOWFlZjg0MjhiZjA1OThmOGQyZWI2Y2U2ZjFmZTBhMmJiM2YzNjdkZmEwM2FhN2MwYmYyNWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3YTA5Y2FjMTZlY2UxOTllOWUyNDU0N2NlMWMzNDQyODBmOGJmZTE1ZWUwYzVjMWVlNzI3OTg1YzE0Nzc4Y2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_35030aaf81704764bccaee326ddb8923",
+      "statement": "Cookie state is persisted by domain in default preferences under cookie_store, encrypted on save, migrated back to encrypted form when an older unencrypted value is loaded, and updated only when cookies change; CommonsCookieJar forwards matching domain cookies and only centralauth_ cookies from Commons to non-Wikipedia hosts.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieJar.kt#L10-L43",
+          "version": "repo-lines-v1:sha256:0d0b1bbb04f377d7478af1e6be5061882c3665158e54fdb936518c350c76af06:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1NWM5MWViZjY4OTk4YWFkNjNhZmFhYzFiYmU2MTI3MGZiNjUwOGU3NDE2ZjdlYmI2MTExOGI2NDM3ODI0YTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyOTAwNGZkMDQ5NzRiZmRkMjU4NTRhNTNkYTZjOGNmOGVhN2M5YzIxZjJjZDA5Y2EyNjdiYTQzNDI4NDM0M2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwODhkNmY0NjlkMmQ0NmQ4ODViNjJiMjYwZTJjYjMwNWFmMTRmNjFiNDlhNjQzODU4YmExZWNjNTdmZjNiZjMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieJar.kt#L73-L107",
+          "version": "repo-lines-v1:sha256:58bd7875a1aed00d2e3b1a54639712f3eee911212982eb7387cded38f5e0598e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0ZDU4YzU5ZTViZDVjMzc2MGYzMWY0NDE5NmM1NWIwNWMzNjQ2ZjI4OTExMDVkZTMxZGRmMThiNzgyMDk3ZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/cookies/CommonsCookieStorage.kt#L14-L63",
+          "version": "repo-lines-v1:sha256:0bb40c7451359b3f131d6799b772e60cffb4dd04bcd9e86025125f171de51aeb:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYzE1Y2Y5Y2Q1NmI0NWMyMTllMWU3ODNhMDlhNmFlZGY2ZmM2ODBjMjYyNjJhZWMzMzBhM2FjMzA3YTNhNGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViM2U2M2NhY2E2YjM4YWEyOTlmZGI4ZWI3YjUwMzUxN2UwOTdlOWQ3ZDFhOThhZmNiNDdlODljYTA2NmU1OTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjNGY5ZDczNjE0OTIxY2Q5ZmNkOGVjMzEwMzFhOGM5MmJkZGM2YjA3OWU2OTQ5MDE5ZTY0MGE5YmRjMDQ2MTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d938cfefec614aea8427cd28d49ea12a",
+      "statement": "CSRF clients are separately named for Commons and Wikidata; token acquisition uses the service interface and session state, rejects empty or anonymous tokens for a logged-in session, and can perform bounded login recovery rather than providing a general retry guarantee.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L132-L149",
+          "version": "repo-lines-v1:sha256:c83a173030f779a5ad7d871631d53a958807901232506723d85ae32cb3b26fcf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4ZGI2NTQxYTc0MWZmYWY2NTJhMGFiYWZjZDEzNmNjYzlkNGMzMGY4NzMzMWNiMTA4OWQyNzA4ZGQyZDI5ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmN2E3ZWU5YThjOTkzMDJjMGQ5ZWM1N2RhMmZiZjVmMzk1ZjkwM2I5ZTQ1NDBhZWRlZWNmYzc5NjllNzRkY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhNGQ1NTMwNDc3ZTJiMGE2MTVlNWIyNDYwMTc3NzVjZDI4M2U2NjJjMjZmNmU0MDc2ODQwZjEwMjdjOGU2ZjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L207-L212",
+          "version": "repo-lines-v1:sha256:46f4084f1f33f5286103baeebbb09181a205c056ef2b752c4583744417c7d0db:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmYzMzAyN2JjMjBiNWJjYzRiMTM5MGI2MzZiMmFjYThiMDg1M2JmNTAyMDRiMDIwOWExN2I4ZjQ4NDA3Yzc4YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzcyMDNiN2Y3NjAxOWM2MmJkZWM2YTNmZmYxZGNiNmY2OGQzMjMwMWZkMDZhNzc4ZWExOGI4NGMxZmFjNWM3MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDY0N2U5YzEzNGQ2NjIzMTFkYzliOGM2NzIzZjk5YTNjOTdhM2VjMDIwNWRhYzcxY2QxZGFiNzAyN2FjZDU1ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTllNzYzNTVjZjExOTk0ODBjM2Y5OTgzNmIxNDg2Yzg0MWQ4OTFmYWFkOTA0YzYwOGUwOTMwMjJkMzc1N2FlZSJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L25-L71",
+          "version": "repo-lines-v1:sha256:9db2aa1339c9b8ec5c81041e64223e28acf32f27bfb7f94a9aad963a99d28d0a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhMTY5OGQwNjhkY2RiOGI4MzEyZmRmMmRhODBmOTFlOWYxYjIxNDBlZTllMTdkYTBjMzRlMjZkZDRiMGJhMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NDk5MjFmYzFhYjcwZjI2ZGVkYjkyNjM3MjUwNTc3NWM1ZDM3MWU4OGQ0ODI2OTRjNmU3MWJhOTlhZjQ3YjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OThlZGM1ODJjMjQxMDQ2YTFlNmY4MGM0OWFmYWRlNWRhZTM5YjczYTg0YzhlNzJmNDQzNDc4ZDNiNzllNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmYzU1MmMxYTYwMWNhZGYwYWYzYWM4YjUzOGUxYzRiZjU2MzYxNjE0MWZlNWQ0MjIxMWQ1NTExZTcwZDQ0NTYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L115-L160",
+          "version": "repo-lines-v1:sha256:6b150cb5185f024df12039803f6db10dd0b1ad865eed54c07234c678c48fb84c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5ZjFlYmE5Y2UwYmQ0MGJiMmFhNWViMzg4Zjc4ZjFkODc2OWMwODk3MzU5OWFjNDU4OWFjZDA2MzM2NGQ5NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiOWY2ZTYzZTMwMWFhYzE1MmMzYTljMjZjZTcxMWQ3Y2FhYjUwOTY5MzRmNjZlOWQyMmJlMTE3ZDU3OWZjOTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwZGEzY2MxOGI4ZGY3YWJmNzk1N2IwMzgzYzgyMWI4OWU4M2M2YmIzMDYxZjUxNmY3NDljNzU3OWIzYTU2NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bac0a09f22094a3ab91a35560cba45cd",
+      "statement": "PageEditClient obtains a CSRF token before MediaWiki edits and converts ordinary edit exceptions into false Observable results while rethrowing InvalidLoginTokenException, so error propagation is client-specific rather than uniform.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L15-L43",
+          "version": "repo-lines-v1:sha256:c0dd07f4e4ee89363b6d6cbbeb323051bac86658d8eeb253f490e079e89aa879:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0NGJlZjQ4MjM1ZDgyMzcwODdmODUyZWQ2NGVmNTY2ODY2MzQwOGVmZTQ4ZTg2NWU5NWY0NWI4Nzk5MDc5YzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhOTdiNDUyZTI1YmFkNGMzNGIxZjc3OGI2YTc3ODRlZGQ0ODRjNzc5MTE1ZGQyMTBmMzMyOGZmMTNiN2JiYWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyYjc0ODVlZTBjNzEyN2RjYzZjYmI1N2U5ZGZjZjVlZTM4ZjUyODIyOTcwYjA3YmZiYTI4NmY1MDA3NWQ3NGUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L54-L79",
+          "version": "repo-lines-v1:sha256:3c0c7a09de7b210b988e4166e1744b549eb8cd5dd19f20a14d97c8f203b48a99:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjMjBkMzE5NGM3NDE2ZGNkYTU4MDllMGFjMzZkZThmZGRkOWEzMGRjNWMxMDY3N2JhNGUwNTljMjYwZGRhNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjYmYzNDU2NzJjNzJiMzUyYTRkZmRlMGYxZmMyNDhmNmFkZWM2ODhmMDZiYzZmYzA4MzBhMjU2NWM4ZDIyNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyOThhNGIyYzI5M2I3MDBkNzA2OWFmOGVkMjJmMDM3MWMzMmQ3ZTdhMDZlMjFmOTZiMTgyNzc2OTM4MTg1ZGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2ad8ee7106984e9594ae342c064a121d",
+      "statement": "Room AppDatabase is version 22 and exposes DAOs for contributions, depicts and upload status, reviews, places, bookmarks, categories, and recent data; CommonsApplicationModule builds it as commons_room.db with explicit migrations 1→2, 19→20, and 21→22 and destructive fallback for unrecognised migrations.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt#L33-L75",
+          "version": "repo-lines-v1:sha256:df31c5dd359907213484f406433de23f983e2ff2b930ad170fe20db05c51cb7e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmQxZDMwZTNjZGZmZDk0ZjQ2YjI0MDhkYzI5ZWNkMGYxZjI4YjIyNDljM2E3YWMzNGM4NDhjMDRkYzBlODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MWFmZjcxZWI0MTM5ZTc3ZWM5MmIyYzNjZGMwNzZhMmZmMGM5NDc4ZGRjYjIwZDVhZWEwNGM1OTRhYmRhMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L192-L204",
+          "version": "repo-lines-v1:sha256:4e963ebaca22e771a18e8c9e81aa023b8fe8b5e1e28326fd9458c12fd8a615ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM1Y2JkMjI0ZDNkNTA0Mzg0NmJlNjYyZDkzOTAyOWY0Y2JjNzYzNWQxYzcwOWRjMmRmNGUxMWZkMmIzYWVkMWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiNTljNGUyMGY0NzE4NjUxMWMyZGYyNjBlODBiMDdhMzM5ZDAwMDdhYjljYTBlNTc5OWY1ZDI0MTVhYTgxMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4N2IxYWJkZjJjN2M0YWVmYTVlMzlmNTI3NjEyYjc1NjJiOTY1NDllZmQ3ODhlNzEwNTg0MDNhMmMzN2MzMzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce09c0c92025406491ddfeb2321336e1",
+      "statement": "The legacy DBOpenHelper owns a separate commons.db SQLite boundary for legacy content providers, and Room migration 19→20 creates the Room bookmark-location table, reads bookmarksLocations from the old database read-only, and inserts those rows into Room; legacy upgrades also drop and recreate contributions and bookmarksLocations.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/data/DBOpenHelper.kt#L14-L68",
+          "version": "repo-lines-v1:sha256:2edc0d1969c13a3bca70c5e7c4acf923135eb9e0d61f3a7389fc03fa9f29adc8:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZTIyZTkwNzVlMjlkY2Y2NGFhYzVhM2NlM2Q5ODk4MmEzYzQ2MzQ3Yzc4NTdiMGE0YWM4ZTI0NzViY2U2MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyZGY5YjM3MTIxYTNkMWU2YjFjYzgzMDAxYWQ4ZTEwY2FjYWUyYjk2YjdkOTExNmMxMzNlNjJlZTI2YTkyMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1NDc1NjEwZTMzNGQ2Nzk5YWNmODFkOWMyYjEyYmVkMDU5MDc4MjFjOTViMWUyYjEyODljNjRhYWYwN2M2ZWIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L255-L360",
+          "version": "repo-lines-v1:sha256:46fe5caabf6e151fca73b4fbd3a89e8af3ad75d702e5d8c3709748c61a5f87c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI4YTkxY2FlYTA1ZjgwMzJjNzE2NzI3YjlkOGY4NGYyNDUyYjNlMWFmOWQ2NGIzMWU5YjgyZTU1ZGI0OWZiYTI3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwYzY0NzljYzIzMDQ0MGZkNDFlODIyNDIxODY3OTY5ODU1OWQyODkzYmQ2N2I0MzgwYWZhYjgxMWIzOGE1NWFhIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIxNzYxYmY0YmUxYjFmYzkzOTQxMmQ3YjY4YWNlZGZlMjYzYzFjYmMyMjIzMTIxMmRmMzkwOWM3MjI5Y2QxNmVjIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0MTVlNmE2MzAyN2RkNDQ3ZTA5NmI5NDUxNTIxNThkOTE1MjAzNzZhZTQwMjY2MWViZGU5N2IzODU1MGI5N2I0In0"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerContentProvider.kt#L9-L31",
+          "version": "repo-lines-v1:sha256:614d534b0f238d360e0f892d3014a51be4ac2ab62e9ce669e0f5546e72dab3dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzYmE0OTI2NGQwZTgwYTc0ZTJlMDJiNGY0ZGIyMmQwMmQ5NWE4YWZhZThlNGQyODZmYWYyMTE3OTVjMDdjNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjNWE2MjBjZGFmZWI0MGVlN2FkMTk4ZmNiYWM0ZmQ5NTU0MDdkYjQzNDdkY2ZmMjUwOGM4NmNiZmEwYzI0YmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8462d6deed4843b699abe3f93af4f661",
+      "statement": "The dependency graph provides an IO scheduler and Android main-thread scheduler, while tests can replace OkHttpConnectionFactory.CLIENT and use MockWebServer with an immediate dispatcher; Room database tests use an in-memory database.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L180-L186",
+          "version": "repo-lines-v1:sha256:572f0003ff7637d805dbb6051f24e5c4c096d94ce6dc61666d06c59a221ad0bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJhOWEzZGQ1YWIxNzIwZGFjYjRmZTY4M2ZjNzNhZWFkYTFiMTI1ZTVhZTI3MmRhZGI3ZDc3NjEwMmVmNmMxZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFhNTQ2NjliZGUxMTkzNzllYTQ5NGJlYjlmOGU2MTIzMDEzN2EyNmMwODU1MjllYzQzNGYwZmFmNTdiMmM0NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ3YWVlMDhmZDM4ZWVlOTM1YzBjMWUzZjZkMzc0NGFlYWQ0NmM4YzAxYWYxY2Q1NzE3ZDRlZjUyNGJkZGJmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNjOGQ4MmM2NTY4NDdmZTRhNWRmZTFkMTI2NWI1YTNmMDhhYTE5ZTIyNGMzYjgzZDE1MDFmMzM2MmI2NThjMyJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/MockWebServerTest.kt#L17-L29",
+          "version": "repo-lines-v1:sha256:62bd45edef11fbca6ee11f03bc628336033132118fd315228fded01ef9c54da1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmMDhiZTBjMWIyOWFjM2MxMjM2NTFmMDVjNTRjMWFmNzI4OTVmZDE1ODUxNTJkZjBlOGNiNGU0YjFhNGZjZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzMTE3NTdkYmRjYjNhOTJiYWJhYWJkODE1YjMwNGI2ZDQxNjZiYjEyOTkwODQ1MjMwMDA3ZDI4ODc2YWE2Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwOWM1ZjEzZTI4OWY2ZjBkYmUzNzFkZGU3ZWY3OWMwNzk1MDE1MTFmYzIzZTk1NWIyNGJhM2E2ZGYxMmZlY2YifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/db/InMemoryDatabaseTest.kt#L1-L80",
+          "version": "repo-lines-v1:sha256:14b48da7dbf6d7252d2cf4e751f81354b47ba6f2a63588abd25bcb1ef52d1176:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDNiODU1NjU5YmZjMzY2NWY3YThlNjBhZTQ5NDFkOGZmZWJlNTMwYzBlMmEzYjllODNlOTEwNzAyMDMzNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MzMwNWIzOWFiMWY5MDQyZTlhZmYwNWMyYjcxYjIzMjk3NjAzNzU0Nzg0OWI5Mjk3Yzg3NGE1YzE5MmYzNjIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}

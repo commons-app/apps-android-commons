@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a6c513a43fde892d0f0d0aac97296a5351bb5975f33c3d381e4e45b9a804d1ca",
+  "claims": [
+    {
+      "id": "claim_c983ffec65e24cf7b41f5c1b87815ba0",
+      "statement": "The Android app defines prod and beta product flavors in one tier dimension, with distinct application IDs and flavor-specific Commons endpoints, upload image bases, campaigns, authorities, and Wikidata property IDs; both flavors use production Wikidata endpoints.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L124-L148",
+          "version": "repo-lines-v1:sha256:15f2142d20a20cf4409f7255d7b0db2d49156b427fb610117a0100dfe9020ddc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzNzI5MjkwMWUxZjI2YmNmNGU0MTA2ZGExMGMxYTgzNDc5YTdmMDVhNjJjOTM5Y2JhMjExODdmY2U1ZWQ4NzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiOWZmZGFhOTcwYzY2OGM0ZmE5NTljMzE3NzMwMzc3NTVlMzk2MjY3OWViZWM3MGIzZGU5NzRkYTgyYTI1Y2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwYTEyOWE2M2VjZWRkMTZmODRkNDUxODc0YmUzNDdkODJmNjQ1ODRlMWVmYjY0NDc3MTdlZDg3Njk2YzczNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjYmI0ODYxM2Q0Y2FmNzhkNTU2OTc1YjhiMzE1NzhlNDVmYzQyM2NjOGQ0M2RiOWE0MjFmN2ZkMTEwOThmZmIifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L215-L238",
+          "version": "repo-lines-v1:sha256:25f3227f6c54c44b3d9a17101f73fa032ec5c213a263a73b40ef3e76a33fe431:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZmQwYjg5NDdlYjEzOTZiNzk1NDU5NWRkMTM3MDg5Zjk4MDBlNmYzNzU0ZjhhMjBlNjJkNmRkNTZkNGJkNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZmVjNjhjZjAxMjUxZDBmYjNjNjQwODUyMDgzMDE1YWMxNDZkNTY1NTMyYjk1MmM5MzQ1N2QyN2JlY2NjMWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YWY1ODBlZWNiMTI1Y2QzN2E4M2RkMzM3ZWNkMjU4NjUwZGIxNWQ1MWFlYmIwNThlZWVkOWQwYTE5NzBiZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwZThhOWEwMGZhYjQxOTMwMTI3ZmFjZDM4MzBiMDU1YWEwZDgzYjJlYjdjNDI2MzZjN2JjYjY5YWY2Y2ExNTkifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L265-L302",
+          "version": "repo-lines-v1:sha256:9075e302ea6884c48bd1973dbdd2fe133957be7bfa25f97993c2ca90d38e441b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NDhmYWIwNmM5YmQ5MmRjZDM1MjEyMGU2NGE2MjYwMDEwYmEzMTgyOWQzNjgwODExMmM4ZGVlODYwZGJmZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2M2VkYzA1Y2Q3OTdlNjJmOWQzZjJlYjVlMTA3NzBjZTU3OTMxZDI3NDM0MzJhYjJjNWEzZDk2MmFhYmM1ODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwMTU2Zjc4MDc2NjI0MzVlNmJjMTc4NjUxOWI2YmU1MGE0OGZhNTgyMDU0NDc1MDY4MzNkN2JhM2M3MTkxM2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNDZjZmFlODJmZWQzMGU2MDdiOTQxMzYxYjM0NjEwNzQzNWQwM2Y5NmUzNDVkNTIzN2RjZjQ3NTQ2YmFhZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac927f74e67d4752a5b0e44797d3d580",
+      "statement": "Debug builds are unminified, append the Git branch to the version name, and enable unit-test and Android-test coverage; release builds enable minification, use ProGuard rules, and locally default to debug signing while non-PR CI with the expected keystore switches to the release signing configuration.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L81-L112",
+          "version": "repo-lines-v1:sha256:3a5f4c2ad08d9ae1cc10efbe9407c25ef3f35b50bf46948f8e91662a25b91670:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMDQ3NGJmZGJkYzQ5YTNhMzhiMzUzNDNlNGU0MzlkMmVlMDg0OGI1MWNkNDkzNDNjNWEzM2UxY2JlOTlhY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjNDY1ZWEzYzkxOWUyZGQ3NDAyNTRiZWJiOGMyNGY0NTZmYzkwOTIzNzhkNWM2NDI2ZmJjZDI4MmNhNWUxOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_93a850ceda294025a6fba28a37aa681a",
+      "statement": "Test credentials are read from root local.properties and injected into both flavor BuildConfig values, while CI writes TEST_USER_NAME and TEST_USER_PASSWORD from GitHub Actions secrets into local.properties before checks and assembly.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L33-L39",
+          "version": "repo-lines-v1:sha256:ed801f65955853e341892a31d47a803e3f58548f3ac68c35fb8ffe4ef8baf765:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWEzNDc4MWFkNjJlMWNiYzFhMmFjNTEzYjUxMGYxNjlkYjdmY2VjNTg2YjE5YjhjOWUxOGQ2ODU4ZDJlMjEwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWZkYzA1YzY2MDMyMzJlZThmZmI3OGY1ZDA1OTZlYjY0NzYzMTA1YjkyNDM4OTE5ZGZlNzdhYzgzMzMxZWUxMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmYyNGNkYWZjYzdlYzAxYmI2M2JkMGE4NWZlMzBjOWI4N2I2Nzg3ODE3YTRlMGNjNGI3M2E4NzA5ZDgwZmQyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTVjNmUxZTNiYjc2MDU3MGNjMTExNDE4MDI5ODNmMTQyZjQxNzE4NDMwYTMwNzc0NWIwMDZjY2I4NDI3YTkxYiJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/build-beta.yml#L19-L22",
+          "version": "repo-lines-v1:sha256:ebff4d167968fce772d3c84d7ac078e3152df2222fafa2a26c211d4dc603edeb:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTRkZjhlMjBkNzY1N2ZlMWRlZTY1ODliODFmMTE3YTlhNGFmNGExOGZiZGRlZTA1ZWEzYTc3ZjQyYzVlMjg1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWRkZmVjOTYwMzJlMmMyNmUxOTBkMDM4M2U2NGE2MjMwN2JhNzkyNDAzM2ExZTI2NWMyMzg4OGFjMmU4NTEyMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2UyZTQ4ZDdjMjJlODg2ZmUzNjZlMjMxNTZiOWEyNDU5ZTIxZWYxMDVhNjIzOGE2MWE0YmYzNzk4ZmRhMmExZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGZhNWRjMWYwNDQ2MDRhZjBkMzIxYzkwMDY3MzdiZDE3Njg4NmM5ODk0MWJmNGNhYTBhYWRjZWIxYWEzZDY2YSJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L208-L210",
+          "version": "repo-lines-v1:sha256:a46bd331b001d6ca8b8374521fdf13dd84534d8c836ef15f0897e51d710fcccb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZlM2IyNjQ3ZTg5MmViMTAxY2Y0OWRlYjU2NDRjOWYxNzBiM2ViZjA5MzA1NTk4OTlmMzk3NjdlMTIxN2UwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGZkN2JjMTMwOWI2ZDQ5ZGI5MjI2MTdlMDcyNDkxNWNmYTcxY2EzMGI5OWQyYTAzNWYwODljZmE3N2NhODA3YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTRjOTc2ZDAzZDEwMzRlODc3NjhmMTE5NGFiYzEwNzkyNjI1ZWFjNTkzZjM3M2NhNDU4OTY4MjFiOTIzMmU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjNlZTJlNmI0MmIwNjU3ZGZlNWQ2ODI3MTk3Y2UyMTkxZmViZTNiNjRhNWRjYjc4Mjg1Y2RhNDA2ZTI5ZmZiNSJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L298-L300",
+          "version": "repo-lines-v1:sha256:a46bd331b001d6ca8b8374521fdf13dd84534d8c836ef15f0897e51d710fcccb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZlM2IyNjQ3ZTg5MmViMTAxY2Y0OWRlYjU2NDRjOWYxNzBiM2ViZjA5MzA1NTk4OTlmMzk3NjdlMTIxN2UwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGZkN2JjMTMwOWI2ZDQ5ZGI5MjI2MTdlMDcyNDkxNWNmYTcxY2EzMGI5OWQyYTAzNWYwODljZmE3N2NhODA3YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTcwMWExZDUwMGI0YjJkOWZhY2E0NDZmMWVhOTg5YmQwZjhjMGNiMTQwMjFmYjhhMGEyNGM1MTdmMDcwZmUzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTRlMGNlNWJmMzM0NzhhM2U3YTFlNzVmMWJjZTVhMTgwMWUyNzFjMGRjYzlmNjk4ZDUxNTVlNDE3OGI5YTQzYiJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L533-L545",
+          "version": "repo-lines-v1:sha256:ab99538e4abb77ce7de941db2a9aff048374a785c3a81ec47455466018d4b7de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMGEzMzBjODc2YmE2YmY4OGVjMzY4YmZjMzIwYmM4MDAyZjQ2MTFlMTNkZmQxZmY2MDNmZjY5ZjYxZTYwMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiZGY1ZmY5MTBjYTk0NjIzNWRiNmFmN2NhZGE5YjRhNzhiNmVkNjc4NGJhNDYyODZmNTUzZGY1YTcwZmI2OGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_00695860e779446bbf9894e843c31333",
+      "statement": "The main Android CI workflow runs formatting, Detekt, beta lint, pull-request beta unit-test coverage, and assembles/uploads betaDebug and prodDebug APKs at the variant-specific app/build/outputs/apk paths; instrumentation and unified coverage steps in that workflow are commented out.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L38-L42",
+          "version": "repo-lines-v1:sha256:1f93cf6bd73febee4e9de2b0f6b4399dfdf8ef9afa06f3828921b6e57fb367c8:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTM4YTE1OWFkODRiOWUwYjY5NWUxYmRhZjIxMmNkZDUyYjVmMjhjNWM4N2Y2YTk3YzE2NDE0ZGNiYzU5OTk2YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQ2MTAzZGM5YTBmMDI1NGQ3MGM2NTNiODBiMTU2NTYyMTRmM2M2ZjY5OTQxZjU1OWNlMDU1ZGIzOGFiZmYyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZlYWMyZjAzNGYwYmQxNzcxNjJkOWI5NWVmMmM4Yzk4Zjg0ODQ3ZTRkNmZjMWVhNjZkZTBhNGU0M2NhYmFiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2JkNTZmNGYxZjdhYWFjYjE2YmI3NWU1MTQyNjUxMThlMmZkYjEzYjJjY2Y0MDFiNDIyYzlkNjlmOTMwNjJlMyJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/android.yml#L64-L85",
+          "version": "repo-lines-v1:sha256:f9028b867021b85c8c40498ee89ff1920b61b53f7032c27c5013726ac57fb035:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzYTcxZmQzNjVlNzQzMTk3NjEzYjE3MmRlMjY4MmFkZDBjOWRiOTNjNDlhMzY2Njg1MzE2ODMyMjdmMGVmMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczM2ExNGM1MmEzMmVmMDUyNzc0NGQxODM3ZDE5YjIyOWYzYzE3M2FmZDIwYjIwMzM3ZmExYTQ4MzZkZGVjMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjYmM4MDM5NGQ3NWFjZDMwYTk5MmMyYTk4NDQ5NTYyYzVjMzdkNmM5NzA3NmRiZDRiNDMzOGFjOTFkYTkwYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1YWUzNWQ2ZDY5M2Y1MTlkZTg4MGFiYTU3YWNhOWM5MzRmNWVmYjI1ZWVjZDI3NjU2MzU0ZGVlNTVlY2EwYjIifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/android.yml#L94-L110",
+          "version": "repo-lines-v1:sha256:22b47d36e7a30e4070c055041e379487f2b7d40e7ca4d95e8fa8df94d903575e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3OWE3YzQzZDM3YmZlMGRhZWYxYjkzNGJhZDM4ZDU3OWI4ZDQ2M2Q0NTEyMzNhMWJjNzJlNGIzM2FlY2NlNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxNmQyZmY4N2YwNjA1OTczNmNlMTNmYjg2OGQzYTg1NGQ2NDQxNzc2ZGIzOGFkMzc5NzZlOTkyODY2MThjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2MTdlYjhjZjUxZjJjYTBlZGRkZWEzMzIyMTFkMzRiMmE4MWVkOGM5NGZkNGE3NGZjZjZkYzUyZTEwNzg3NzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmZmU1NjgxNzU5MTE5N2NhNzllN2YzODMxNTVmNGMxZTY3YzY1MjFhOWY3YWE0Y2EyNWEwYzllMmVjMjI3NDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b061db03d1440a99f72c158c522d8e1",
+      "statement": "The manually dispatched beta workflow renames the beta debug APK with the short commit SHA, uploads it as a SHA-bearing artifact, and retains the artifact for 30 days.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/build-beta.yml#L27-L40",
+          "version": "repo-lines-v1:sha256:7b488d5a2b6ca11613fa69056cafd7e9d550ff4426ea2e9cf7074b2459fb113b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MWE0ZTMzOTYxYjBmMDI4ZTJjYTk5YWNiNzMxMmVhNmRkY2Y1MzIzZmMwZWNlOTQzMmE3YzBiMWEzNmRiZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhYmRkMTBhYmNlOGZjMzg4YTQ5YzQ3NGE5NThlM2M0MTJkMGY5ODMwMzdhMDM2NzFkOTUyMTExZWFhY2EwYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiOWJlNTdlYjBiZDE0ZGNjZGJkMDA4OTMyNTU4YmU4YmFlNmJlM2NiMDkxMmRkZDU2Y2ZlMzM3YWY2OGI0MjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5OWZlYjI1OWY0MjBlN2UyY2Q1YTdlMzIyMGZhMzU1YjgzMDViNDA3N2FhY2I3MTI1NDI1NmYzZjQ0YTdiYmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_942b3f1fb2b5417ea8a0e390646a2e18",
+      "statement": "The release checklist requires validating production endpoints, testing database migrations on the final signed APK, increasing versionCode, coordinating version and changelog changes, tagging and distributing the release, and updating release communications and history.",
+      "evidence": [
+        {
+          "resource": "repo://RELEASE-CHECKLIST.md#L1-L27",
+          "version": "repo-lines-v1:sha256:600bfb0565a61f2e76bca07caab48a3ffe2aca4e84fc41c2935643f2f35fdd35:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNTFjNjQxYWU0YjA4YzM1NTI2ZmFjNGY0NTZmNzJjNDNlNTI2NTllMzMyYTM3MDljZDZkMjc1MTc5NThjOTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NDQzYzQ0NjJiNTQyNTViMmNmYzMxZGYzZjI4MmYyZTYxZTEwMDY1NzgyM2IzYThkOWQ5YWU2NjEyMmVkMmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NzY2ZGQ0NDA3OThkMGZmNDI0Yjc2MjMzZWMwODc5MWE3OGNmMGRiN2MzM2MwZDQwYjM3NWZlNzZkMWUzNGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6bf602dca912406ab5e5bd64974698fa",
+      "statement": "Application startup initializes ACRA, then plants an asynchronous file logging tree and Timber debug tree; the flavor selects CommonsAppLogs versus CommonsBetaAppLogs, stale zip cleanup checks the zip file against a 1,000,000-byte total-space threshold, and file logging uses a single lowest-priority worker.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L104-L115",
+          "version": "repo-lines-v1:sha256:13419c9b18fce1328fcf68e7d7bbd9918ec58423ea5236da64c11426c6ac17e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NzM0OTcxNTRjMDUyZGZiMWE0NDA0YjdmZmRlNDllZTNkMTRkMDFlMzVhNDUwODRhYjM3M2JjNzYzNmVlODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NmVhN2Q3NzkzNmFjZTc2NWFmYzk2MDJhYjYxMTM4ODA2M2NmYjY5MmMxMTkxOWM1ZTIxZmQ2ZmYzZGMwNTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3OGFmNWI2NTFhZTJiYTRmODU0NmZiYTliMmVkNmQ0NDhkNzYxMTUwMjlmYWY2YzdkNmVhZmFhZDdkNTdiZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1NTkyMjU0ZGY5OWI0Mzk4N2EyMzQ0YTQyZmEzNzQ2MTBmY2Q0ZWNjODY5OGNkMWM5YTUzOWY5YmNkNjhlN2MifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L152-L204",
+          "version": "repo-lines-v1:sha256:56183b7f12586b747416ac7138c6c78fc5b5e826702f1e236db3e1e2bb6e32ab:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhM2VhYzI0MmY0ZmJiZTg2NGU4YjY4ODlhNmI0NzE0YmVlNGI5Njc1OWM4MjNmMDIyNmQzZDJmMzY2NWNmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5ZDVkNTVhZGY5OTcwNzYyNDI1ZmIyMmYyNjc2MjNiMDJhN2M0ZTM1YTliZGJlNTk0YWVmY2QwMmMwM2MzZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNlMGYzYjc4NmI5YTIzNTYzMzdhM2QxMTQ0NmEwYjMxYTU1Yjk0MjU0MzNlYjAzMDRlYjNmZmJkOTZmMDNkNDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4fd76435016c4177a1f5735f3ec9a1f2",
+      "statement": "FileLoggingTree writes Logcat priorities to Logback files asynchronously, rotates at a configured 1000-KB size across indexes 1 through 4, and writes the active log as <logDirectory>/<logFileName>.0.log.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/FileLoggingTree.kt#L18-L31",
+          "version": "repo-lines-v1:sha256:04cfca73d201ff1a71306e5f807fddce9183a4db2944685daa3bdd61a37c4d4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlODFiOGMwYWY2ZjNmNmJjYjhkZjNiMzFhMGUwMzViYjNkYjFjYzVlMjQ3N2I5MzRkZDFkYWJkMTYwYjdhYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkZjc5NzQ4OGNjNDIwNzYwMTg2YTMyMzFhNzcxZTkzM2YzMzFlZDBhZTRiOTE0NzY4NDc3N2I0Y2M5ZjAwMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmOWVjZDU5ZmVkNWY3OGEyMTZiYTI0MTBiZDFmNmI3MjJlYzZiNDA5ZTRjOTk4ZWY1ZDE5YTNjN2Q2YTA3ZjQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/FileLoggingTree.kt#L48-L86",
+          "version": "repo-lines-v1:sha256:82af1228ec4394eb1a0a62ea87ab1e0b7c50152377df7c87f984ed55f5a93b81:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxNmU3ZDFlMTYzOWExNzMyZGQ4MmIzMzFkZjUzNjU2YzhiMjIyZjI0MWRiZjhjZTYxNDZiYzkxYzA4NTZiMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjNmMyYjBmNmQ1MDcxYTczZjUzODMzMGFkNWIwYTAwYzgxN2E4ZTljZGFjNGE3MWJiYzQxZTliN2JlZWM3ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNDI5M2NlYzUzM2Y1MzBhY2IwMjg4M2FkMTZlNTFiN2NjMzE0NDRhOWIwOTlkNThjMmQyZjgzNGNjOWYyOGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2YjFiOTMyZWQ1OWI5N2UyNDQ2MTUzNDYzYjg1OWFiNDM2ZGEwNTU4ZTU5ZDNiODFmMjU1NzJlZGNhZDI5YTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/FileLoggingTree.kt#L93-L139",
+          "version": "repo-lines-v1:sha256:87d457a46ce79af7111389e27b19599167e36307dc916f579efd871b57bd0fa8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5ZjE2OTIyYTQ1MWY4MTk3NjRmMzgzNDYyNjNlYWY0NGFmYzRjN2NiMDk3YmRjZmI4ZWQyN2ViZDQyYzg3ZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiMjlhYjZkOGY1NWIyOTU5NzQxN2M0ODFmOTI5NTg2MjY0YjA3MzdiNzQ2NGZlYmEzNTgyNzAxOTRmM2ZhMDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3448939c7664feeb2d84426ddd491b2",
+      "statement": "Production logs are stored under Downloads/logs/prod and beta logs under Downloads/logs/beta, with matching zip directories; LogsSender combines crash, username, extra metadata, and log files into a zip and shares it through a FileProvider email intent, while absent logs or I/O failure produce no attachment URI.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/LogUtils.kt#L16-L55",
+          "version": "repo-lines-v1:sha256:37eac917a6ffb14b1a8a83f5f33ad0a7f56f98b063165001bfc82da98d9e26cb:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2M2EyYjdmMWMyNGEzZWUwY2EzNDc5NDExN2U1ZmE4Yjg0MTA3Zjg0NDU5MGUyMDU1NzZmM2ZiMjVmNjg4YjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU5MWE2ZjlkNGVlZjRjYjUzMWNhODc3OWNmZmUyOTUzN2ViMDYxMWNiMDdjZjYzMWUyMDdjMWIwNzZmNzllMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/LogsSender.kt#L114-L136",
+          "version": "repo-lines-v1:sha256:d3d23695e94883ec3dfd34b6d6908d0d02d7ce5c3829c1454dcda7b4c9f72572:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4Y2Q0YWY0ZWM3NzI3MzkxYjVmOWZkMmUwYmJjYTM4ZTEzOTQwYTk2NzQ2NmFmOWM3NTFlYjc5MWE2Y2UyNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM3M2VhNDA2NTFkZGQ3Njg5ZGEzMDliOWE3YjE5OWJjMmY4YTdmNzAyNmUxNzI4YjRiNjdhMzcwMzlmNDRiMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjYzIwZTAyZTQ2YmIwNGI1ZGUzYzFiYTYwMDBhNTExNmZkOWY1ZGE0MGJmNTg4YjM0ODZlYzcyZTg0OWQ5NjAifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/LogsSender.kt#L178-L207",
+          "version": "repo-lines-v1:sha256:333da5bd90472a12998fbb626113a9c5da3747d905d9299b56aefb3587e0097c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NjI3NTA1MTJjYjJmNDhmMmEzZmJlMDc2YjYxOTIyYWI3ODlkOTc3Y2FiYTY1YzY2OWQ2MDBkNmQ5YTVlZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAyZTQyMjU4MzY1NDUyZTE0ZTViYmE5NDg0MWE0NTE4ODE5NDA3MjQ1OTNhNGRlODJiYTVkMDhjNzk1OWY4NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/LogsSender.kt#L64-L74",
+          "version": "repo-lines-v1:sha256:ef3c21376a10d8950133ffcf3527f67f305df97982da632d9e6687182339e364:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NDBmMjdiOTg2ODgzMDRjNmJhNjI3ZGFlNzE4ODYwMDBhZDA3NDUyMTQ4NWUwMTE0MTU2OGJmZDhmMWI5NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyZGUwZmU2MWZkNDFiMzJjNWQzNTFjODEzYjc3OGM2MjU4OTZhZjQ2MmM0NDU4YTRhZjdkMzY0NzdmMjA4YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhNzc5NDk0ZWRkNDQyMmY1NmRlYzkwNWI3NTM5NGM4MjRhNzljZDUxMjljZWFjYmQwMzMxZmI4MTliNGZjYzYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/logging/LogsSender.kt#L90-L105",
+          "version": "repo-lines-v1:sha256:153c32b84a43782507242b4b558897e30b3704e83ffb0043639e19ec87cbba58:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhN2ZlZjgzZmY3NmVjOGE2ZGE2ZDAyZTNlYTUyODNjMmZkZGJmNWU2ZjlkNWM1NmFhZDc2NTA0YWM1NTc5MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3Y2M4MzU3NjdkMWU5MDQ4NTI3MDI0NzVjN2NjNjQzNTFjYmUyYWIxMDY2NDVmMDE3NDQ5ODgyODEzNjFhODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkYTM3NzRmMjMyMTI2MGUxYjQyNmM4NTE1OTM2YTY1ZjFiMDI1YTcyODc4NmQwNzIwMjMyZTI4ZDk3YWU4NzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_60bcd6a6e62641caa44244132d9a9cc0",
+      "statement": "ACRA is configured as an interactive crash-report boundary with user comment, app version, Android version, phone model, and stack trace fields, and sends through the configured private Commons Android mail destination; the security policy supports only the latest release and directs vulnerability reports to named contacts.",
+      "evidence": [
+        {
+          "resource": "repo://SECURITY.md#L3-L10",
+          "version": "repo-lines-v1:sha256:69ae5021acb04478c12c43bd0a2004b13c26873d21f8a0e3ba5984026c179a48:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjZkODE5ZjA2MzM1OWViMThjOWI1NjljNDU5ZWIyNjgwYjg4MzMyNjA2OTU3ZDVmZjVjMjhmMjIzZDE1NDlmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTc1YWU2ZjZiOWI2NjZhZTc0YTYzNDQ5YjY1ZGY4ZmE1N2JjODEyM2M0MmI1MzkxZmI5N2MzODBjM2Q0ZDIwNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDUwNmQ4MzdlNGRjZTgwNWI5YmZmMTVmZjJmM2M5ZGM2YTFjOTBhOTJmZTg5MGZkMzYxMjdjYTNlYWE2ZmJiZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L58-L77",
+          "version": "repo-lines-v1:sha256:bc2639340ea0ee45a5e8fada088a20d7b27c1a3ddaf702468681972eddfcc36b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4MGM5NTczYTcxNzU0ZGU3MmZjOTYxMWJjMWRiNzJlYTlkNTBlZmI1MWFmNTNlNWFkNDhhODUxYWRjZTA4ZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmZTZhYzE3ODBmYjk2YzZkN2I0MDgwOTc3NDFmYWVjMDhhNGY3NjgzMGRkYmRiOTM1MzJjY2I4ZTA3NWExY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiNDA3ZWI1ODc3YTcxZTc3OThiNTQ5ZjAzZDY1YTNjNWJjMjI2ZDhjNDExYmU5YTFhNmIyZjlhZGY2YzMwNDYifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}
