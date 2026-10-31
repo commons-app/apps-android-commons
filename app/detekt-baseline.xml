@@ -733,11 +733,6 @@
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>
-    <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$CountingSink : ForwardingSink</ID>
-    <ID>ProtectedMemberInFinalClass:CountingRequestBody.kt$CountingRequestBody$protected var countingSink: CountingSink? = null</ID>
-    <ID>ProtectedMemberInFinalClass:MwParseResponse.kt$MwParseResponse$@VisibleForTesting protected fun setParse(parse: MwParseResult?)</ID>
-    <ID>ProtectedMemberInFinalClass:UploadActivity.kt$UploadActivity$protected fun checkBlockStatus()</ID>
-    <ID>ProtectedMemberInFinalClass:WikiSite.kt$WikiSite$protected constructor(`in`: Parcel) { uri = `in`.readParcelable(Uri::class.java.classLoader)!! languageCode = `in`.readString() }</ID>
     <ID>ReturnCount:AchievementsFragment.kt$AchievementsFragment$private fun checkAccount(): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>ReturnCount:BlurOverlayView.kt$BlurOverlayView$private fun findResizeHandle( screenX: Float, screenY: Float, ivMatrix: Matrix, ): Pair&lt;Int, Handle&gt;?</ID>

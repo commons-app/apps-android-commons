@@ -23,8 +23,6 @@ class CountingRequestBody(
     var offset: Long,
     var totalContentLength: Long,
 ) : RequestBody() {
-    protected var countingSink: CountingSink? = null
-
     override fun contentType(): MediaType? = delegate.contentType()
 
     override fun contentLength(): Long {
@@ -38,13 +36,12 @@ class CountingRequestBody(
 
     @Throws(IOException::class)
     override fun writeTo(sink: BufferedSink) {
-        countingSink = CountingSink(sink)
-        val bufferedSink = countingSink!!.buffer()
+        val bufferedSink = CountingSink(sink).buffer()
         delegate.writeTo(bufferedSink)
         bufferedSink.flush()
     }
 
-    protected inner class CountingSink(
+    private inner class CountingSink(
         delegate: Sink?,
     ) : ForwardingSink(delegate!!) {
         private var bytesWritten: Long = 0

@@ -205,7 +205,7 @@ class WikiSite : Parcelable {
         dest.writeString(languageCode)
     }
 
-    protected constructor(`in`: Parcel) {
+    private constructor(`in`: Parcel) {
         uri = `in`.readParcelable(Uri::class.java.classLoader)!!
         languageCode = `in`.readString()
     }
