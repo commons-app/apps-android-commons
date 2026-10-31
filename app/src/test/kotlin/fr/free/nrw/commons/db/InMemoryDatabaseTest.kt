@@ -23,23 +23,24 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 abstract class InMemoryDatabaseTest {
     val roomDatabase: AppDatabase by lazy {
-        Room.inMemoryDatabaseBuilder(
-            context = ApplicationProvider.getApplicationContext(),
-            klass = AppDatabase::class.java,
-        )
-            .allowMainThreadQueries()
-            .addCallback(object : RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    // legacy table creation
-                    CategoryTable.onDelete(db)
-                    BookmarksTable.onDelete(db)
-                    BookmarkItemsTable.onDelete(db)
-                    RecentSearchesTable.onDelete(db)
-                    RecentLanguagesTable.onDelete(db)
-                }
-            })
-            .build()
+        Room
+            .inMemoryDatabaseBuilder(
+                context = ApplicationProvider.getApplicationContext(),
+                klass = AppDatabase::class.java,
+            ).allowMainThreadQueries()
+            .addCallback(
+                object : RoomDatabase.Callback() {
+                    override fun onCreate(db: SupportSQLiteDatabase) {
+                        super.onCreate(db)
+                        // legacy table creation
+                        CategoryTable.onDelete(db)
+                        BookmarksTable.onDelete(db)
+                        BookmarkItemsTable.onDelete(db)
+                        RecentSearchesTable.onDelete(db)
+                        RecentLanguagesTable.onDelete(db)
+                    }
+                },
+            ).build()
     }
 
     val openHelper: DBOpenHelper by lazy {
@@ -60,23 +61,28 @@ abstract class InMemoryDatabaseTest {
 
     // Test that the given table exists, and if you give field names, verify they exist in
     // that table.
-    fun assertTableExists(tableName: String, expectedFields: Array<String> = emptyArray()) {
+    fun assertTableExists(
+        tableName: String,
+        expectedFields: Array<String> = emptyArray(),
+    ) {
         var cursor: Cursor? = null
         try {
-            cursor = openHelper.writableDatabase.query(
-                "select * from $tableName where 0=1"
-            )
+            cursor =
+                openHelper.writableDatabase.query(
+                    "select * from $tableName where 0=1",
+                )
 
             if (expectedFields.isNotEmpty()) {
                 Assert.assertEquals(
                     "Wrong column count for \"$tableName\"",
-                    expectedFields.size, cursor.columnCount
+                    expectedFields.size,
+                    cursor.columnCount,
                 )
                 expectedFields.forEach {
                     // Unknown fields have a negative index
                     TestCase.assertTrue(
                         "Field \"$it\" not found in \"$tableName\"",
-                        cursor.getColumnIndex(it) >= 0
+                        cursor.getColumnIndex(it) >= 0,
                     )
                 }
             }
@@ -85,12 +91,16 @@ abstract class InMemoryDatabaseTest {
         }
     }
 
-    fun assertRowCount(tableName: String, expectedCount: Int) {
+    fun assertRowCount(
+        tableName: String,
+        expectedCount: Int,
+    ) {
         var cursor: Cursor? = null
         try {
-            cursor = openHelper.writableDatabase.query(
-                "select count(*) from $tableName"
-            )
+            cursor =
+                openHelper.writableDatabase.query(
+                    "select count(*) from $tableName",
+                )
             TestCase.assertTrue(cursor.moveToFirst())
             val actualCount = cursor.getInt(0)
             Assert.assertEquals("Wrong row count for \"$tableName\"", expectedCount, actualCount)

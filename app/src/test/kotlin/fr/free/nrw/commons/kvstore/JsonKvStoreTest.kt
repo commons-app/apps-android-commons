@@ -3,7 +3,6 @@ package fr.free.nrw.commons.kvstore
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.atLeast
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.BasicKvStore.Companion.KEY_VERSION
@@ -76,10 +75,14 @@ class JsonKvStoreTest {
     }
 
     data class Person(
-        val age: Int, val name: String, val hasPets: Boolean, val pet: Pet?
+        val age: Int,
+        val name: String,
+        val hasPets: Boolean,
+        val pet: Pet?,
     )
 
     data class Pet(
-        val breed: String, val age: Int
+        val breed: String,
+        val age: Int,
     )
 }
