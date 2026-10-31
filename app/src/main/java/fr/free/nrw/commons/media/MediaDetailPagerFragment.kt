@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media
+﻿package fr.free.nrw.commons.media
 
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
@@ -215,7 +215,7 @@ class MediaDetailPagerFragment :
                 shareIntent.setType("text/plain")
                 shareIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    """${m!!.displayTitle} 
+                    """${m!!.displayTitle}
 ${m.pageTitle.canonicalUri}""",
                 )
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."))
@@ -667,11 +667,9 @@ ${m.pageTitle.canonicalUri}""",
         requireActivity().invalidateOptionsMenu()
     }
 
-    override fun onPageSelected(i: Int) {
-    }
+    override fun onPageSelected(i: Int) = Unit
 
-    override fun onPageScrollStateChanged(i: Int) {
-    }
+    override fun onPageScrollStateChanged(i: Int) = Unit
 
     fun onDataSetChanged() {
         if (null != adapter) {

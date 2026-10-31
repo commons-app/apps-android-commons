@@ -52,16 +52,14 @@ class UploadProgressActivity : BaseActivity() {
                     position: Int,
                     positionOffset: Float,
                     positionOffsetPixels: Int,
-                ) {
-                }
+                ) = Unit
 
                 override fun onPageSelected(position: Int) {
                     updateMenuItems(position)
                     binding.uploadProgressViewPager.canScroll = (position != 2)
                 }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                }
+                override fun onPageScrollStateChanged(state: Int) = Unit
             },
         )
         setTabs()

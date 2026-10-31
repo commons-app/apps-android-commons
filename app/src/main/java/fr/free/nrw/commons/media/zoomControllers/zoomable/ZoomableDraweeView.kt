@@ -63,7 +63,7 @@ open class ZoomableDraweeView :
 
     private val zoomableListener =
         object : ZoomableController.Listener {
-            override fun onTransformBegin(transform: Matrix) {}
+            override fun onTransformBegin(transform: Matrix) = Unit
 
             override fun onTransformChanged(transform: Matrix) {
                 this@ZoomableDraweeView.onTransformChanged(transform)

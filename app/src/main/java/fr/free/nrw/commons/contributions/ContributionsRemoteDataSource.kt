@@ -38,8 +38,7 @@ class ContributionsRemoteDataSource
         override fun loadBefore(
             params: LoadParams<Int>,
             callback: LoadCallback<Contribution>,
-        ) {
-        }
+        ) = Unit
 
         override fun getKey(item: Contribution): Int = item.pageId.hashCode()
 

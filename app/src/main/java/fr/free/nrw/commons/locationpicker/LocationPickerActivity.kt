@@ -572,6 +572,7 @@ class LocationPickerActivity :
                             CommonsApplication.instance.clearApplicationData(this, it)
                         }
                 } else {
+                    Timber.e(e, "Failed to update image coordinates")
                 }
             }
         }

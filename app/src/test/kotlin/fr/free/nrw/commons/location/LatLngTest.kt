@@ -11,8 +11,7 @@ class LatLngTest {
     private lateinit var latLng2: LatLng
 
     @Before
-    fun setup() {
-    }
+    fun setup() = Unit
 
     @Test
     fun testConstructorSmallLongitude() {

@@ -16,8 +16,7 @@ data class UploadResult(
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readString() ?: "",
-    ) {
-    }
+    )
 
     fun isSuccessful(): Boolean = result == RESULT_SUCCESS
 
