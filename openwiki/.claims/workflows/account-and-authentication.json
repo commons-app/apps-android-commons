@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c11ca761b3644e6d6c02eb2bb758893412023e56535ffd08c6f473d6cd4a0eb0",
+  "pageVersion": "sha256:90d51e780877e720f884e9f15add4c6080121f04f30b8a0e73edbd85c7852792",
   "claims": [
     {
       "id": "claim_39b60a94972d4b6f9377795fa23637c2",
@@ -79,10 +79,206 @@
           "version": "repo-lines-v1:sha256:77d56d0c62ecdddcc536363b4f6b07be23a7be6b989816eabbba536f139730c5:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRkNTE4MjI5ZmY5YTc4ODQ2ZmRmYzRjNjA0ZTUyNTFlNjViYTdkNTYwMDc3YTQ1ZDI1MjRlMTEzMGJhZWM3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWUzN2MzMTJiMmE1YzI5OGFmNTY3OGFiYTRkZjNjYWM2YzI3ZjkwZTZhMjk1OWY2MGI0YTYxMzJkOTc1MTQ1NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzEwYWFlYzQ5MWJlY2IwNTBjZDY5MWU5NDk5YmQwMWY4YjUxZWMwOTUwMGQ3YzU5MzdmNzMyN2JmYWU2NGVjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyJ9"
         }
       ]
+    },
+    {
+      "id": "claim_a58957d9cca2494f906b590909c6fc85",
+      "statement": "The app separates Android account credentials, application login flags, and HTTP cookie session state: SessionManager reads and writes the Android AccountManager account and password, isUserLoggedIn is stored in JsonKvStore, and LoginActivity only resumes authenticated navigation when both an account and the flag exist.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L171-L182",
+          "version": "repo-lines-v1:sha256:770ff35cd7d04810da4dd7e506d93f22e3155c3fc6de9fd3060a48c8b1d8ca8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViMjI1NmY4ZGFkNTJmODNmYTJhMjc1ZjQ4ZjkzMmI3YjRiNTQ0MGVkODFmOGM2NGUyOTJlNmY4MTRkMmRkYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4M2NkNTViYjY3OWM3OGJlZDQxY2ZkZDgyOWU1ZjJlMTljMWJiOTUyYTQwNjExNTk3YTQ4Mjc4ZmQ0MmVmYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFiM2U1ZjQ4ZjczOWRiYmNjMDg1ZjdjMTZjYWM4MjZjN2JjOGIyZTlkZmEwNzgwOWMzYTRkYTFkMTM1ZDA0MjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt#L27-L60",
+          "version": "repo-lines-v1:sha256:197f2c7454994ea58a9b2631f9b9c8316dde86051d25faa8efc52c0facb1953d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyYWY0N2FiYTk4MDMwMGFkYWNkOGU5OWZjMDYyNjJiYjRiNGUwMzM5NDk0MzI1MWYyMjUxYTAxYmNjNTYxOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTA1YzRjODE0ZmY4MmU4M2Q5OGFlYzE3ZTQ3MjNiN2ZmNGI2YmViYzg1ZWU5NGViMzRkODZkOTNjNjQwMDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhYjY3YmZkZDE4MGU1ODBkMzYwZjVhZWQ0MGJiYTRkMDczMzAzOGExOTEzYmQ5MDI0YjgyYmU1Nzk2ZTBkMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5OGVlMmYxN2FkMGE5ZmNiZjU0NDk5NjBhMDk4NzIxNzkzZTNiNGVmYmUyYzk0ODk4YWYyNWI0ODUxNjhlODAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c226359afa014106ac9cc4f34b6450af",
+      "statement": "Interactive login obtains a MediaWiki login token, posts credentials, routes UI results to two-factor, email-authentication, or password-reset handling, and fetches user ID and groups after a successful login before LoginActivity persists the account and enters MainActivity.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L361-L419",
+          "version": "repo-lines-v1:sha256:8e5201a74a47fe29e7eb15c8c53c1def4f3f9703d0dc02155a435e14ddf82901:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YzcwNWIxZjc3ZWZmZTUyZmUzODAyN2E2Mjk5YWY1YzVkMzEyMGMwYjdmZjNkYjFiYjAzYjlhZjU5ZWQ3M2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyMTJjMWE1M2U5YzQyYmQ5ZjM4ZjE0ZGY0MDQxM2UxZWVjZjk4NzgxZTU2NzdkZTEwZGQ2NzI4ZDE4NmRjODUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxOWJjNWM0ODRiNzgwMGIyNDE3MmIwZDRiZGQyMGU5MTQ3MDA0YjlkZWJmZTNlYjkwMmZhODUyMTI1M2IzMmMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L446-L453",
+          "version": "repo-lines-v1:sha256:c7da0102b9c0ff60598eb2458d895e9b0f868856bf5a3dc5b06106b2848fc6da:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGFkNzA3YzI4ZWM3MzU2YjcyZTYwYjE3ZDRiZTI0NTY3NDBhMTlmYTg0M2Y5NDllZjU5NTEwMzRkMzJiNDVjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjViZTVmMDVjMGQ3NzhmNTc1OGM1MDFlZDgxMDI2NzU5YTQyNzMxODQ0MTFmYmZlMWVlODQzNGQxZDAzZjNiNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDliYjY1ZDdiMjNjMTc3MzJiNWY1YjdkZTY3YTBiYTAwODNmODU5NmE2NGNhZWI2MzdkZTg2ZWQ4ZDMwOGIzOCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L103-L143",
+          "version": "repo-lines-v1:sha256:c1e3cee9e38da1f35bc47785580f74ffef9540df7c6708acc55fdecbe0582f81:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5MmU2ODRlYmFlNmVmNTk3NDJlMmNlODJmZjY0ZDNhOWJiNzgyZTY4NjNmY2U5NWNiMjMxZWQzMjc2ZTI2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwYWYyODI1MjRiNTg2ODQ5MTU5MDkxZTQ4ZDgxZGE0M2VkMTEyMTQyZTllZWI5M2UwZGYwYzUyMWI3ODk4ZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhNjM5ZTJkY2YzYTgwN2EyZTU5MGU3OGE5YTM5YjkzYTAyMWU2ZDY2YTA2MmRiYzdmNjU5NjM0ODQ1MGY3ZWEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L254-L270",
+          "version": "repo-lines-v1:sha256:2121a6a20c95cb7f1d6ca4c6bf8efb63f307a01b58ef89ceb71075da4dd6e28a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwYzYwZGRiM2NkMDM3ZGE3ZDU4MThkMWIwNGYxZDU2MWE0YTJkMzRkZTYyYzVjOTFiZDU2MzdhNmU1NmU5MDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjE5ODJlOGRkNzQ4MTE4MTQ2YjM5YTJkMDA2MmY0MDgxZTM0Nzc5Yjg2NzVjMjM0YzRmYjEyNGRjMzkzOTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhYjk4YzljM2YzZmUxNmQxNDRjYWRkYzEzMmFkMzFkNTNkNWM3YTM0ZDI1YWExNTE3NmZlZTg4NDBkZTA5ODUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L36-L73",
+          "version": "repo-lines-v1:sha256:0f49c950b4343931354407f453e81f984993ab65f6e05859667c928f3186a189:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MjgyMzU3NGQ0YmI2ZTk5MjU4OWI4ODY1ZTMxYjM2MmQxOGNhN2E2OGE3MzcyZWM2M2ZlYTJjZTdkODMzNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiMzVlZjdjZTFjZDRmMzFkYTlmODljMGQ0NzRmZmYzODE0YjE5ZjMyNTc2ZDg3NTk3ZTEyYjM5ZTRmMjQxMzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmYzI2NDA3N2U1YTViN2QxMGMwOGZmZDY5NjE5YzUyM2UzNjhmZDljNzFhNGQwZDNjZjhkZDIxNjBlZWQzMzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_615a97c691a24c2d89741c29c3e41e1b",
+      "statement": "LoginActivity preserves challenge and progress state across configuration changes and cancels outstanding login work when destroyed; LoginClient cancels its token and login Retrofit calls and suppresses callbacks from canceled calls.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L184-L203",
+          "version": "repo-lines-v1:sha256:348abfb5d8c4c2c5e314b28a7a6752baeeacfe589d96fa7ade9e07f2021295f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZDEzMWJhM2E4MTQ3YjczZTZiZTVmNDVhMjgwODM0OWM5NTI1NzZjYmMyYzcxMTQ5ODAzNmQ1NzNkYjMxMGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiNmYxY2Q2MWQwOWY2ZmZmZDExMTA2MWQ3M2NkYmU3NDQzMWNlMDViYWQxOWU2ZjljOGY1YTVhZTMxNjNjZjYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L237-L287",
+          "version": "repo-lines-v1:sha256:a399f04aa53c6b60e4d9042a37cf6000abde6ac175a51a3f43c3ba503eb2ed71:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjNDUzYTI3N2UxMThjNDM5NzQ5OWM5ODU5OWVlY2Y0MmEyMTdmYTZjOGY2NmMzZDI2OWFhZmYxZmFiNjJiYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOTM5ZmI0ZmNkOWMwZmYyYmNiMDY5NzJjZGI4NTgyMjRjZDYyYzUwYTY4NGRjNzNhMzUwM2VkMGUzNDg3MGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0MGI1ZmU4NzFlYWRjM2EyOTljYzNjYTc5NWE1YmJlZDlmN2RmZGVmMTEwYzQ0MzBmMGI3NWJiNzQ4NmQ4ZTcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L146-L153",
+          "version": "repo-lines-v1:sha256:7d7720bd66718bcd5dbd31856e829a5635cf8ab3d3fe14cb227324487a9b973a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM2YjZlMWQ0NzY1ZDgyYmExZWJlZjgwZTlmMDlkZjU3ZTJhZWQ1Nzk1ODgzN2QwZTg3Mjk1ODQ2NjE5MjQ5YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQ5OTMwNWEyMTNmYmFmNDkwMzAyOWEzMmU2NjczYmIzMDk3YWExZjFiYzVjZjJlMmFkN2FhOWVjZjZiOGM1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNThmNDgwMmVjZjc2YzEwM2FiNjJmZWMyMTM5OTMzZDU5NmZjMTQ4OWE5ZGU3Y2VmZWIzNjRlOWFmMWZhZTE2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWEwN2Q2ZDk0NDE0ZmM4ZDlmYWI1NzIzOTNmZmFmMmE0YjAzYjBmN2QwMjBhNWVhNTljYjk5Y2QxNGI0ZDFiNCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L272-L282",
+          "version": "repo-lines-v1:sha256:a92d3f49f178da361741d6d0efb88afe9640d5e4925202cf434ae6b385d376e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmQwYWRmY2NkYjk0MDQ1MjAyYzAxMzliZTBiNGE2N2YxNjVhMTNlOWE3NTE2OWYwOWJmNjM5ZDE2OWNiYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5NWEyMTZmZDcwOGJlNGE1MGEyNGUzZDA3OGRmYzRiNzZkNTBlM2NjYTA1OGM2OGU3NzQyOWMzMmNmZDdmNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/login/LoginClient.kt#L62-L70",
+          "version": "repo-lines-v1:sha256:ea432f84a8d7b2f1d16044a9edf955ecbc2fd366cb6447dfc0cc9ffee63ce94a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM2YjZlMWQ0NzY1ZDgyYmExZWJlZjgwZTlmMDlkZjU3ZTJhZWQ1Nzk1ODgzN2QwZTg3Mjk1ODQ2NjE5MjQ5YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM2NDc5Y2MyMzA0NDBmZDQxZTgyMjQyMTg2Nzk2OTg1NTlkMjg5M2JkNjdiNDM4MGFmYWI4MTFiMzhhNTVhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWUwMTc3MTExYzRmZmIxYjQ0ZWNlMTRmNzI1ZDNjNzYzMGU4ZGE3ZWYzNjk4ZDA2ZTBkOGZiYTcyZDM0YjY2MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2IzZWIzYjU4Mjc0NmJhMWE1MGM2YjUxYjRlZTY2MThiYmI4MmMyNDJiNzQ3NzI1ZjIxZTM3OTVkMjE4NDlmYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_500f75e8acf0426f9c7e055fdcdeda2c",
+      "statement": "SessionManager lazily selects the first account of the flavor-specific ACCOUNT_TYPE, stores the password with AccountManager, replaces an account when the username changes, and removes the account on logout.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt#L27-L47",
+          "version": "repo-lines-v1:sha256:8d6ccd22903098512671274a6ee16f88d813d8aa64dbcd0fe5d1f3df28fd5fe8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyYWY0N2FiYTk4MDMwMGFkYWNkOGU5OWZjMDYyNjJiYjRiNGUwMzM5NDk0MzI1MWYyMjUxYTAxYmNjNTYxOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhYjY3YmZkZDE4MGU1ODBkMzYwZjVhZWQ0MGJiYTRkMDczMzAzOGExOTEzYmQ5MDI0YjgyYmU1Nzk2ZTBkMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyOGNmZGZlY2FiMDI1MTIzYjJkY2UyNzk2OTI3YTk4NTFhODU0YjEzYThmNzVhZTY1NGYzNjAzMWMyMWVmNDIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt#L52-L60",
+          "version": "repo-lines-v1:sha256:0e7f78a91a1b64095bf34171f4c8335bc727b3e3a2d6724ec01b05a638bfd2b2:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWNiMzFjMzhkNDZjNjhiZmIyOTNhNjZkMDdkZjNjNWFlMGEzMDZjOTUzMTM3OGRmYTgxYjhlZDQ4ZjQzOGRmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDk5MDVjNGM4MTRmZjgyZTgzZDk4YWVjMTdlNDcyM2I3ZmY0YjZiZWJjODVlZTk0ZWIzNGQ4NmQ5M2M2NDAwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDNhYjExY2RjMDE0ZDMzOWMwZGNjNjZjOWQ5NGJlNWM2YjMzMDNkMGZmYmY2NTYxMjYwM2MwYmZkOGVmODY5ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDk4ZWUyZjE3YWQwYTlmY2JmNTQ0OTk2MGEwOTg3MjE3OTNlM2I0ZWZiZTJjOTQ4OThhZjI1YjQ4NTE2OGU4MCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt#L66-L97",
+          "version": "repo-lines-v1:sha256:a6adb3d4f23653579e27b9a3bee13f88b44fd2d5a2c3d28a53721ff279773bc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2ODkwMjYzZDhhYjUxYTUzNWFjNDA5ZmIwMDVkMzk3ODdhN2NhMDRjOTM0YzI3MDcwYWYyMTQ0OTZlMGYwNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjQ4MmQ3N2IxZWM0MGNiNGNmZjJlZTlmNzYxNmU5YWY0NDAyNWE0YjAwYjBjYWNiNTY4MDc3MGEyNjdlODQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e15a522fff7e4f2ea0d53f86cc5f6048",
+      "statement": "The Android authenticator launches LoginActivity only for the configured account type and returns placeholder bundles for token, confirmation, and credential-update operations, so it is not a general Android token broker.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/WikiAccountAuthenticator.kt#L35-L73",
+          "version": "repo-lines-v1:sha256:b57035763b0c9a6b53d8daa72ea69fb728f1bd48b318a393f8424979a1ecbc90:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5MmQzZTNlZjkyMmVlNmM4ZDMxOGIxN2FkYzY5NmI0ZDg5NjgyN2Y3NjYzZTJiMzM1MDcwNjMwMTY1MjgzNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzYjRmNzg1NmExMjBlYWU0M2JlMDllOWY1NDE4NTY3ODE5MTU0MmQ2YmMzM2ExMWVmYmRjOGFkMjhlODkwZmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxODg2MzFlNDg3ZDliNDE5M2ZmNWE3OWMxNjBjMTUwNDk3MDBkZjdlODM4MGIyNjg5OWYxYTQ0OTFlNjZlYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3NmE5YmFjNWNiYWY2ZGYwMDA2ZjRlMmI5MjBlNDhmM2M1NjY0ZTM2Nzk5YTJlYzNlMzJiYWFjMGM1N2RkNTcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/WikiAccountAuthenticator.kt#L82-L90",
+          "version": "repo-lines-v1:sha256:dd742a4ddd81ab72cfe182ce355dacd5cac5e3886ddb8c5705fb356edf4fb0cd:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzljYmJjNjU0NjlkYjFjYTI4NDJlZmQ5N2RmN2VlMmNlNmNjMTU3MTQ4MmQwMWExOGI3OTBhMTBjN2M1MTBmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzE1NGVkNzBiNmJjM2U2ZGU1NzhjMDA5ZDU4MmE1MTI3OTdlNjA1MWZlMjExNmQ4NjczMmU5OTE0NGRmNjkzOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzM2NjgzZTY4Y2VlNjc3M2RlZjQ0MDk4ZDg2NTFmMTkxMDY0OGUwYjBiNjg4YmI5ODhmOTllOTdkZDE1NmMyZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjkyNmZkYjAyODBmODE3ZjM4ZjgwODcwYjdhODFiN2RmNDRkZGJmOThkMTg2Y2RiNzEyNjQ4MWQ2MzA0NTc0ZiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/WikiAccountAuthenticatorService.kt#L12-L20",
+          "version": "repo-lines-v1:sha256:4f2d2e0c1cb8a87fbd0af09910300484874a40a6f0b9ba7af8538934f400e4c9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzZlYzBlMzE5MTcyMWQwNDc4MWE0MGEwZTdkMDM5MTYzOTZkMzNjYTNiMGRmZjUyYmMxNzk1MzEwMjI2ZjU2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNiMzk4ZjkyZjAxYjU0OTdhMWJiMmMzZjBkZDZhZGZiNGM0MzNhOTEyMjkzMTYwOWYyNjcxODc5MTU5MGNmZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGRjMjliMTAzMDRjNTdkOGQ4ZmI3M2YzZTI1Y2UzNDBmYzVlYjE0ZjY1NDY5MGQ5ZjRkZjU4NWJiZTRjOGNhYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_212fbf899d9b4216a58c8cd46ac1d85c",
+      "statement": "CsrfTokenClient rejects an anonymous or empty CSRF token when the app believes it is logged in, clears cookies and reauthenticates with stored credentials for a bounded asynchronous retry, and the blocking path throws InvalidLoginTokenException rather than returning an invalid token.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L132-L149",
+          "version": "repo-lines-v1:sha256:c83a173030f779a5ad7d871631d53a958807901232506723d85ae32cb3b26fcf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4ZGI2NTQxYTc0MWZmYWY2NTJhMGFiYWZjZDEzNmNjYzlkNGMzMGY4NzMzMWNiMTA4OWQyNzA4ZGQyZDI5ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmN2E3ZWU5YThjOTkzMDJjMGQ5ZWM1N2RhMmZiZjVmMzk1ZjkwM2I5ZTQ1NDBhZWRlZWNmYzc5NjllNzRkY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhNGQ1NTMwNDc3ZTJiMGE2MTVlNWIyNDYwMTc3NzVjZDI4M2U2NjJjMjZmNmU0MDc2ODQwZjEwMjdjOGU2ZjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L25-L71",
+          "version": "repo-lines-v1:sha256:9db2aa1339c9b8ec5c81041e64223e28acf32f27bfb7f94a9aad963a99d28d0a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhMTY5OGQwNjhkY2RiOGI4MzEyZmRmMmRhODBmOTFlOWYxYjIxNDBlZTllMTdkYTBjMzRlMjZkZDRiMGJhMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NDk5MjFmYzFhYjcwZjI2ZGVkYjkyNjM3MjUwNTc3NWM1ZDM3MWU4OGQ0ODI2OTRjNmU3MWJhOTlhZjQ3YjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OThlZGM1ODJjMjQxMDQ2YTFlNmY4MGM0OWFmYWRlNWRhZTM5YjczYTg0YzhlNzJmNDQzNDc4ZDNiNzllNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmYzU1MmMxYTYwMWNhZGYwYWYzYWM4YjUzOGUxYzRiZjU2MzYxNjE0MWZlNWQ0MjIxMWQ1NTExZTcwZDQ0NTYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L74-L98",
+          "version": "repo-lines-v1:sha256:dfac8160432e43aec0b5486dd582c90282bf4cb47f03e0a53a5834df1da483ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YzcwNWIxZjc3ZWZmZTUyZmUzODAyN2E2Mjk5YWY1YzVkMzEyMGMwYjdmZjNkYjFiYjAzYjlhZjU5ZWQ3M2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVkNTJmNDE1NjNjZjYyNjdiNmIwM2QwYjhkYTE1Mzc1OWQzYTVmMzUzYjA3NWJmOTI4N2U5NmJlODFiOTk2ZWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzZTZlM2VmYjU0NDg4MGQwN2RjYTJjN2NiMWZjMTY3ZWZkYTRjMDljMDc2YWVjNmUxYWNhY2E4NDA4YzM5MDQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/LogoutClient.kt#L6-L12",
+          "version": "repo-lines-v1:sha256:3b6d418759a9172f416ae55028e8821f2e68d5bc061dffe7023550748a654c32:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRkNTE4MjI5ZmY5YTc4ODQ2ZmRmYzRjNjA0ZTUyNTFlNjViYTdkNTYwMDc3YTQ1ZDI1MjRlMTEzMGJhZWM3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzEwYWFlYzQ5MWJlY2IwNTBjZDY5MWU5NDk5YmQwMWY4YjUxZWMwOTUwMGQ3YzU5MzdmNzMyN2JmYWU2NGVjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b10851f09f648958d4806d53f952487",
+      "statement": "Full application logout and CSRF recovery are different operations: CommonsApplication.clearApplicationData cancels uploads, removes the Android account, clears cookies and preferences, and resets application data, while LogoutClient only clears cookie storage.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L218-L257",
+          "version": "repo-lines-v1:sha256:17428efcd58f6038295b4fcab2a122592906a4210b2d10944c0ac66d944f5ddd:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWExNGZjZTAyZmU5YmQ4MmRhNGJjNGRhMjJhYjhlYTQwMDQwYTQwNmUyMDRmYWE4MjE5YWVlZmFiZDdlNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxOTlmN2RmMzYwNWFlYTM2ZWE2YjhlYmM0MzUzMTdhNmZjODdhMGE0NWVhYjhiMmM3MWRjN2IxOWNhODJkOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/LogoutClient.kt#L6-L12",
+          "version": "repo-lines-v1:sha256:3b6d418759a9172f416ae55028e8821f2e68d5bc061dffe7023550748a654c32:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRkNTE4MjI5ZmY5YTc4ODQ2ZmRmYzRjNjA0ZTUyNTFlNjViYTdkNTYwMDc3YTQ1ZDI1MjRlMTEzMGJhZWM3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzEwYWFlYzQ5MWJlY2IwNTBjZDY5MWU5NDk5YmQwMWY4YjUxZWMwOTUwMGQ3YzU5MzdmNzMyN2JmYWU2NGVjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_65e89dfdc0d34c3e83f190500bcb9f21",
+      "statement": "Skipping login sets the separate login_skipped preference and enters MainActivity's anonymous path; a valid account plus isUserLoggedIn clears that preference, so the skip flag is not an authentication grant.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L171-L182",
+          "version": "repo-lines-v1:sha256:770ff35cd7d04810da4dd7e506d93f22e3155c3fc6de9fd3060a48c8b1d8ca8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViMjI1NmY4ZGFkNTJmODNmYTJhMjc1ZjQ4ZjkzMmI3YjRiNTQ0MGVkODFmOGM2NGUyOTJlNmY4MTRkMmRkYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4M2NkNTViYjY3OWM3OGJlZDQxY2ZkZDgyOWU1ZjJlMTljMWJiOTUyYTQwNjExNTk3YTQ4Mjc4ZmQ0MmVmYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFiM2U1ZjQ4ZjczOWRiYmNjMDg1ZjdjMTZjYWM4MjZjN2JjOGIyZTlkZmEwNzgwOWMzYTRkYTFkMTM1ZDA0MjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L341-L352",
+          "version": "repo-lines-v1:sha256:2619a18f235a5d102ef17af49072b5192899fd1f56798d8ea6c8370e3ce0e83f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NDMwMGIzNGRhZDgxNmE5YTUyZDdjNzg3ZjQ4YWY0YmE2YmJlOGNjNzBlM2E3YmExNmM4YTQ1MDZmZDcyNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5OWM0YjE3NWUyZGEzMzBhNTJkNTZkZDViYzZlYWIxODRmMTg5MmFkMTk0YWRmOGIwOWViYmUwZTU3ZmY1NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE0NDE4NWY0NTM2ZDMxZDAwZTgxNDQ2NTZjZTVlYTQ5N2U2ZWM2MGQxOThmZDBmOTI4NDAzYWZhODljYzBlNzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMjYxY2FiM2MxN2UwMjQxMzFjMDFmZDc2MDcxZGE4NjAxMWI5OWU3ODY4NzM3YWYwYWJjZTJhODRjMzFhMDYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L425-L433",
+          "version": "repo-lines-v1:sha256:129d2bbb93cb6306e00d60601e95323367d2e7340e13414c6ed77becd9de5fd0:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzljYmJjNjU0NjlkYjFjYTI4NDJlZmQ5N2RmN2VlMmNlNmNjMTU3MTQ4MmQwMWExOGI3OTBhMTBjN2M1MTBmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTFiYTg4ZmY2ZmQzNTBiZTlhNmMwYjUzNDQ5YzE2MDcxMGI5OTMzZWM0YzE1YjAyY2NhM2FmZWZiZjZkMTM0OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDQ2YTNiMWQzODRlNTRjZTM3ZDE3OTBlYzA1OTkzYmJmYmMxMTE2YjhiZDMzMWU4ZGJkMzk2NzQ0NzFiYjdkMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_07cfd899dd244c46bc297912af41f18c",
+      "statement": "Flavor build configuration controls account type and login-related endpoints, and the beta login screen displays a beta credential/help label while the production screen hides it.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L140-L170",
+          "version": "repo-lines-v1:sha256:7e14413c429db48c82c67901a67b750d3679a0d4411397b9971ff249cbeb3bde:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZTkyZDBkZTFkNDY0ODYyNDJlMGEyYjVlYjczMjZjYTU2YzM4MGFiMzZkYTIyM2NiYmM2ZGNiNmVmOWEyYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWRhOWU0NjM5OTRkYzFlYTljMGZmZjUxZjViNmQ1MDkzMjE5NjBiZmE3ZTFiZTdhNzYxOWE1NmE1ZWVkNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5ZDU2NWI5M2MyYmYxYWFjZGRjM2ZkYmVhYzA5NmI4MTdjMDA5YTlhZTYxMmRjODk0OTgwMTNjMjhkM2RiYWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzMWMyNmQ2ZTA0MGNhNjgyMzU1YmQxNDYzNzkzYWNhZWZiZGVkN2ZmNGZkYTM4NTU5ZWI3NmExNTk2MTQ0NTMifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L230-L260",
+          "version": "repo-lines-v1:sha256:2e88dc27d94da7636ccc2472a5e4dd7ec3a8e4b16d54a2c3fdea5169279e8132:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZTkyZDBkZTFkNDY0ODYyNDJlMGEyYjVlYjczMjZjYTU2YzM4MGFiMzZkYTIyM2NiYmM2ZGNiNmVmOWEyYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWRhOWU0NjM5OTRkYzFlYTljMGZmZjUxZjViNmQ1MDkzMjE5NjBiZmE3ZTFiZTdhNzYxOWE1NmE1ZWVkNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM5ZDU2NWI5M2MyYmYxYWFjZGRjM2ZkYmVhYzA5NmI4MTdjMDA5YTlhZTYxMmRjODk0OTgwMTNjMjhkM2RiYWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzMWMyNmQ2ZTA0MGNhNjgyMzU1YmQxNDYzNzkzYWNhZWZiZGVkN2ZmNGZkYTM4NTU5ZWI3NmExNTk2MTQ0NTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/LoginActivity.kt#L122-L126",
+          "version": "repo-lines-v1:sha256:c186d0f2071c9d50167fbb4da4528efefe88400e0a703d3f5be56d63f74ea4b3:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTExNDY3NjU2MGY4Y2I3MWIwYWM2MDdiODNlODA5MzZjYzYyNmZlMzZiNGViZWRiMzk3NDI5OTM2ZGY0NDEwMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyMmM0MmNkMTljNmQwM2Q4MDhjNDUyNzIwNTUyODI1YjdlYTFjNWI0OTFiMjE4NTExY2FjNzQxNWNmOWQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzJmN2Y4MWNlYzZkMTBjZjAzNWE5YTVmOGE3NTBiZjVjNTg0OTg1NzJlM2ZiNDY5YWIxNzg1NDdhYjUxNjgxNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGM3OTZiZjkzZmM2ZmJhNTIzOTQ1YTNmMjI3ZTdmOWQzNjBmZTNmZjg1MjI0NjY1NThmYTBkZWQxYTUyY2ViNSJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/SessionManager.kt#L8-L9",
+          "version": "repo-lines-v1:sha256:7653be8b61dd52cb8e6fdb4929f06088c8de38783b0fa135d71e40c15050658b:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk2NWUxNzZmNTIxM2M5ZGUzZTlmZDcyMTAxMmQyMzM3YTU3OGVmOGNjYzEwNDU4MjYxOWJiNjI4MGExNWRjNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDJiODM3NTFkN2E0MGQzMGMzNDE2Zjc3ZWRhNGQ0Mjc4MzU2YmNhN2I5MGJjZGY4ZDVhNWE0MDMxNjVlZWI0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjYwZWYzMGNmNGIxNzkyODFkYjkyZGFlZDY4NTQ4YWYwZTBhZTFkYWQ5MzExZDcwMWIyY2IyMTg0Y2E0ODBiNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MzNTRkM2EwMDg1NGJhNmQ5ZjE5OGY5NzMxYTU0ZDgyOWEyZDhkMzE1MGJiZjJmODMwZDI0ODEyNzUwYzA2NiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e1079cb4d54345f695ec00269d9b0186",
+      "statement": "Focused tests cover SessionManager account and preference behavior with Robolectric and CsrfTokenClient success, API, HTTP, and malformed-response handling using the mock web server fixture.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/auth/SessionManagerUnitTests.kt#L24-L27",
+          "version": "repo-lines-v1:sha256:4ee7a8e6515d63a385f8bd7b30f4b2a22e1f73495c02308bc1b07508acf6fe73:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYwOGJlMGMxYjI5YWMzYzEyMzY1MWYwNWM1NGMxYWY3Mjg5NWZkMTU4NTE1MmRmMGU4Y2I0ZTRiMWE0ZmNkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA5MTUzZjBiMjRhYWJmMGNjZTBlMGQzNTRiNjU4MmRiMjY2OGQyMTNhYjcyMTc1MmRjMjYzYzg0ZGViNjc5MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjNhZjZmMWQyMzk1MGZiZTczMDQxYWUwZTM5YWM3NDllMDQ5ODA0MTdhOTkzMmRlOTI5MjMzNmQ1YTU2ZDZhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzgyY2I3OTM4MThjZTFmMzk5NWM5NGVmZGMzNTU4ZjgyMDQ0Yzk3YzhhN2Q0M2EyODgwY2QwY2I2Y2VlZDJkYiJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/auth/SessionManagerUnitTests.kt#L69-L145",
+          "version": "repo-lines-v1:sha256:abb51ec8823ab95d160e7f422d24d08e20444b8f9fd40feda309bbece424c504:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1Y2ZjYTE0Njg5ZjJjNjllMTY0NjRkZWVlODdhMDM4ZjBhN2JhNjhkMGVhNzBkZTQ1ODZjNTkwYzgzMmFmZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhYjhhOTAyMDc4MjYzYTY1ODJkNjEyNGU3MjM0ZDg5OTA1NDFhMzBhZjk1NjczNjFjOWJhYzhiODgzNDk1NjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2Y2E5YTAzNjY3NWU3ZDI2MGI3YTgwYmRiOTQxNzcyYjViZDE4MDQ1YjQyODM1MmQ2NWZkN2I0YTQyNmYxMzAifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/auth/csrf/CsrfTokenClientTest.kt#L17-L68",
+          "version": "repo-lines-v1:sha256:4be0c827675fe334ec40c941355cacc5057b09f290f1b244641905e42716a3e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0YjBjMzVjYmQwOTFjMzdmYTYzYTM0MWJjY2E4YmJhODNkYTJiN2YzOWI2ODg3OTY0ZGU5YjI3NmVhZTRmMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNWFjY2JjMjMxNDhlNDg3NTA3NTFlNzc4NDAxZDJkMWRmZjQ1ZWFkNmMyNWI1Y2EwNGM0MDZjNjFmZWM4ZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZDYxYzM3ZjRlZDcyNWFhOWE3Yjc1NTkxYTAzN2IxZjNhYTVkYWZlMGEzNzRmMzM3ZjQwODI1YWQwNDA3MDIifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }

@@ -1,4 +1,4 @@
 # Files
 
-- [Build and test workflow](build-and-quality.md) - Documents the app's Gradle variants, the unit-test and APK-build tasks used by CI, how instrumented tests are configured, and the limits of existing test evidence.
-- [Build flavors and configuration](build-flavors-and-configuration.md) - Describes the app module's prod and beta product flavors, the BuildConfig fields and content-provider authorities that differ between them, release and debug build types, static analysis, and CI-only signing.
+- [Build, test, and quality workflow](build-and-quality.md) - Maps the Android project's Gradle variants, test layers, static checks, coverage tasks, and CI gates. Distinguishes tasks configured and runnable locally from checks that the checked-in workflow actually executes, including the current instrumentation and unified-coverage gaps.
+- [Build flavors and configuration](build-flavors-and-configuration.md) - Reference for the Android app's prod and beta flavor matrix, build-type behavior, generated configuration, signing gates, test credentials, artifact naming, and configuration precedence. Use it when changing an endpoint, variant, release build, or flavor-sensitive test.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b4c6798e17af5efed82373e01055e6f4aa3c0652c5d52c750ba0b401d1819a76",
+  "pageVersion": "sha256:37ae6966ba82d39682de686f31002d62c728d595602151f85f85e69ea1ee4c7a",
   "claims": [
     {
       "id": "claim_b75cda0c8f9842f6b6692508d84ca87b",
@@ -69,10 +69,148 @@
           "version": "repo-lines-v1:sha256:4d9f7b3742b978ceabe14bbf5a33fc52a20e571053f39767c17493c29ad03664:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGIzNzhjYjAwNWNmZDgwZWYwZjMzZjk3OTYwYzY0M2JmZDljNWNlNDc3NTA3ODc2ZDlhMmY2MmEzOWUzMzg5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODIzNjY0NTJjYjljNTVjM2NmMGI2ZDVkYjM5YTI2NTI2ODg3NDcxYmM3NjAxMDA0YmEyNGU5MmRlNGUxYWNmOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTI0NzUyNzBkNzMyZDVlM2I2ZWU2NjcwOGIwZjAxMzZlNzUzYjM2ZWVkYzFmMGU0M2MxMDU5ZmMzMmQ3YzI5ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTJiNjI4OGI1OTU5ZjQxZjc2YTkxNmFkYTI2MDkwYTRmM2EzZDg1ZTAyZjAzNGI1MDkyZjg0ZDQzNTgyOTE1NSJ9"
         }
       ]
+    },
+    {
+      "id": "claim_338d0b3459304e16ad962c3dec15cd98",
+      "statement": "The app's debug build types enable both unit-test and Android-test coverage, while unit tests include Android resources, return default values for unmocked Android methods, and disable animations.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L104-L112",
+          "version": "repo-lines-v1:sha256:e890b7cd7751406e793092a860c84690152f19e37d1fa13c791ada32f6a0dcf3:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODRiZDVhNjVkOTA1ZGY2MjhkYjMwYzc2NThhM2E2M2Y3MDU5NTExYTdiZDU4YWQ1MTg4ZmVhNTYzYzdiZGY4NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjNlNzNjOTY0ZDQ4OThmYjk0OTU1MmYyZDk5NjdkNTNjNzAxNjBmMzYwZWExMzg4NzAwNTBlODdjOWQzMjZhNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGM0NjVlYTNjOTE5ZTJkZDc0MDI1NGJlYmI4YzI0ZjQ1NmZjOTA5MjM3OGQ1YzY0MjZmYmNkMjgyY2E1ZTE5ZiJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L332-L340",
+          "version": "repo-lines-v1:sha256:5be103acc4595a3a1f59ff9260760a62ffbf7e61471b6596b1006f11f9ad6d06:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDRlYmJhYTg0Njg4MmFmMWY5MjM0MDA1NDI0OTg4OWVmNGE3YzJmNDU3MTg3NWY1ZTU2ZmQ5NDNlM2RjMzI4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzNiNDJlOWQ3YjlkZDk5ZjE3NTJjYmYyYzc3NTllN2QzYTI5YzhmZDMxMTBmMjc5M2I5YzYzNDEzZDcxNzgyMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTVkNGNmMWRlZDRjMDdmZThmNzdlN2JkZmQ1YzI5MThhZjY3YTBiMDZjZjU0YzhhMGNhZDQ2ODBlNzFiYzA0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1a9b2613fd584e2ba689f32a7d3f1581",
+      "statement": "The Android CI workflow runs ktlint, detekt, and beta-debug Android lint on every workflow invocation, but its pull-request unit-test coverage task is conditional on the pull-request event.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L38-L42",
+          "version": "repo-lines-v1:sha256:1f93cf6bd73febee4e9de2b0f6b4399dfdf8ef9afa06f3828921b6e57fb367c8:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTM4YTE1OWFkODRiOWUwYjY5NWUxYmRhZjIxMmNkZDUyYjVmMjhjNWM4N2Y2YTk3YzE2NDE0ZGNiYzU5OTk2YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQ2MTAzZGM5YTBmMDI1NGQ3MGM2NTNiODBiMTU2NTYyMTRmM2M2ZjY5OTQxZjU1OWNlMDU1ZGIzOGFiZmYyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZlYWMyZjAzNGYwYmQxNzcxNjJkOWI5NWVmMmM4Yzk4Zjg0ODQ3ZTRkNmZjMWVhNjZkZTBhNGU0M2NhYmFiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2JkNTZmNGYxZjdhYWFjYjE2YmI3NWU1MTQyNjUxMThlMmZkYjEzYjJjY2Y0MDFiNDIyYzlkNjlmOTMwNjJlMyJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/android.yml#L83-L85",
+          "version": "repo-lines-v1:sha256:00eb7cdb1483d1020967096f8b7cef4c29d51e2963a2eb9dd06dc34caf12bbd0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQ5MmZkODcxYTdmNDRiMGI1YzM0ODM3NzA3ODA2NmZlOGUwNDY5NTYyNDkzZGIxZTQzYTM4MTAwN2MxNWFkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMzYTE0YzUyYTMyZWYwNTI3NzQ0ZDE4MzdkMTliMjI5ZjNjMTczYWZkMjBiMjAzMzdmYTFhNDgzNmRkZWMxZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjgyODIwNmVkYTJlZThmNzhhNDJiNGM5OTY5YWY0NGE5MWJkMzE2MjkxNjY5MmFiMWFkZjQ4ZTVkZjcyZmRmZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTVhZTM1ZDZkNjkzZjUxOWRlODgwYWJhNTdhY2E5YzkzNGY1ZWZiMjVlZWNkMjc2NTYzNTRkZWU1NWVjYTBiMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_68db80f8d8f24ab78ddeb68e5899a180",
+      "statement": "The app configures ktlint to exclude non-comment entries from app/ktlint-legacy-files.txt and configures Detekt to build upon its default configuration using app/detekt.yml and app/detekt-baseline.xml.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L16-L40",
+          "version": "repo-lines-v1:sha256:4e1ea9dba03d5edca06ce117a55562cfd3ef2a38e5f63543f575b76e79bf33fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyZGQ2Y2FhNDkzYzVmNzlkNmE0YzYxZjdiMDJiMDc0YWI2ZmNkNjc5ZWJiNTcxN2VhYTA3ZGY4ZjRiZmNhOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MzUzZTYyYWM5MGViYjI3ZjFkNThmZWY1MmExNzFhMzAwNDE4MmRjYmQ3NTc5ZDM4NmQ5MmU0MDI2YmE0MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNDE4NjU2OWY5ZmRkMWIyYjQ1YzVjZTM5NDhkYTNmMTI0YjlmMjk2NDhkYjI2NTM3MWRhMDhhZWE1NWQwOGMifQ"
+        },
+        {
+          "resource": "repo://app/detekt.yml#L1-L14",
+          "version": "repo-lines-v1:sha256:c793a1c85d1b753937c00e33c16dbf48d2bbebdc8d2841e0fedf82aa92589f17:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZGY0OTRiM2YwMjNjMWQ2NzU0MzIwMDhhYWZhN2YzZDAyNTI3MTVmYmU4NWU0ZDhmM2UwNTg5ZjJhYjhmMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkOWZlZjYyMTYxYTcwMjIzNDlkM2U4ZjdhZDE4Y2I5ODI2OWQwYjZmNjI3ZDlkYTkzOWU4Y2FhNzhjY2UzZDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/ktlint-legacy-files.txt#L1-L8",
+          "version": "repo-lines-v1:sha256:cb25580a7204fd2412bd81afbc9cde721060ca12d2d1d457b95a47cf15a6d493:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjhkMjM2ODlmMWUyZTQxNDNjOGRjMjVlMjk3NDJjYmQ5ZmM5ODFhNDllZjU5YmMxMWYwNzhkMDllY2M3NGY1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2NjYzk3ZGQ5NWNiZGZkMzQ4NzI0MzI1M2E0MDMxZWZlZjEwNGExYjE5ZjQ2NTllYTFkOGM1NjM2MjU5ODQxYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODVjZDVhMjYzNWM3ODNhMjkyMTQyMmYwMTgwZmI1OGFlY2U0NDAxNDFmZjZkNjM1MDIyYjk3MDRiMDc4YjM0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a2ce6e49570400c807379e5fe95a826",
+      "statement": "jacoco.gradle creates per-variant unit-test coverage and unified coverage report tasks; unified coverage depends on both the unit-test task and create*CoverageReport and combines JVM .exec data with connected Android-test .ec data, while the ordinary coverage task depends only on the unit-test task.",
+      "evidence": [
+        {
+          "resource": "repo://jacoco.gradle#L127-L157",
+          "version": "repo-lines-v1:sha256:737eda48f23dae98258f95e271033d7123f984c5db53c2a21cc72fe597b2ed56:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZTM1YmRmN2ZkMjdiZmNlNjJlODJiMTFmZDFmN2VkZmY4ZWJkNTI1ZjVlZTlhOGI1Yzk1MTdjNTJlNTU2MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0ZTM4NTdmOTE1ZTkyZDYyNWE4ZDJhNTQ2MTc3YTMyOTJlZWFjZDllNjI3ZGNlMWE2MTg1OWM3NDQyYmNhODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZlYmRmNDA1M2ZiNGQ5M2RkZTQ5OGRlODA3YTJhODg3NTUxZWFmYzBjZTAxZWI2MjRkYmUyZTQ2OGE3NDRhNDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2NGQ1OWQxZTljY2FjZmZjZDUzZWYzNzNiNWNhZDU0YWNmYTg4OTJmMTJiNGRlMzVlZmE1ZDFkMzQzZmRiNWMifQ"
+        },
+        {
+          "resource": "repo://jacoco.gradle#L19-L22",
+          "version": "repo-lines-v1:sha256:63b139cf549d5ece83f3d07f002a0a2fb4bb591c347d5fd5bbfcbee1f411ae06:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2UyMjE1MjVhZjgzYTExMGE5ZDZhMjkwMWJjNjRjOGIyZTY0Y2I4ZmM3NWUwZTQzYmMxODI1YzdiNDRjZTg1NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDI0ZDJmMDRmZDY4YzVkMTY1NWRjZDhlMzliMzI1OWUwZDFlZDBjOTA1MGU2NmMyNmRmYzYwOTc0NjI4YTdjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDhjYTcxNmJjYTVhZTBkMzM1ZGFmNDBlZWFiMTk5Y2Y0NmViZGJkYmFkYzcxMGFlMDM1YmYyNmIwZTMwNGJlZiJ9"
+        },
+        {
+          "resource": "repo://jacoco.gradle#L88-L124",
+          "version": "repo-lines-v1:sha256:a99c36fe06576483cabf9c457102ec48203344512336f7303ca15887c89083f6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwZmQxNDI2YjIzMGE0ZWVhMjZkYzA0MTZjOGZkNThhODNjZGRmMzc1MjkyYmJlYzJkZDYzMTJjODQxYTQzMGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0ZTM4NTdmOTE1ZTkyZDYyNWE4ZDJhNTQ2MTc3YTMyOTJlZWFjZDllNjI3ZGNlMWE2MTg1OWM3NDQyYmNhODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwNDVlOGJlZGIzNTgyNTFlNTNhNzhjM2FlMTVlNjkxN2JmZThhNjAzYzYxNWE4ZDkyNGIwY2Y5MWRhMmRmMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxOTRlYzUwZTYyYjcwNDg3ZmYzZTQ0ZmVhOTk4NGMxMjhhNGE2YjRhNWIxZjc2Yjg0OTZiZmQ0MmFmNDVjOGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_be217675bf814d6191bf6ba963178766",
+      "statement": "Connected beta and prod instrumentation tasks are configured to depend on disableAnimations, which uses adb to set the window, transition, and animator animation scales to zero.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L514-L529",
+          "version": "repo-lines-v1:sha256:de99eb45dacce06a32509c82f051dac8a1d92c17ceb9bad16183321cea7adaff:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExOTI0NzI2OTM4YTY0NTU1ZGQyOTRhY2JhODdiYzU4Yzk3Y2VhMjVjYmNhYjEyN2NhZWVjNWY2MWNhMzc2YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxNDcxMGQxNTkyZjJhZjRhNjEwNDIwNWJkYWQ4YWI5ODZjNTRhZmFmODYwZGYyNjk3OTA5ZDUzMDcyMmUzZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_20b7a832e5564b30aeb36e41ef2641b8",
+      "statement": "The unit-test layer includes Robolectric and Android test dependencies, while the instrumentation layer uses AndroidJUnitRunner, Espresso, UiAutomator, and AndroidX test libraries.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L426-L452",
+          "version": "repo-lines-v1:sha256:5341906f2214131527de56ed18c5b2ecd994d24855e69ea95352ed387510ed0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYWU4OWQ1MzcwYjJlNDM3YjAwMzQyOGM1OTE1YjBmYzNkYWZmMmQyNmQ0YjNmYWQzNzI3ZGRhYTBmNzNlYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1YTQzNmE3NzI2NmQyYTNiNWIwMWVjYTA2NTRiOTg0ZDRmZjJmZWU5ZjJjYWE5YTgyOWQ0ZGQwMDM1ODQ0YjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjNzdkNGVkMWExZjc5YTdmYzg2MzdmYjgzNmRjZjA2Mjc2ODc5ZTFiODRhMmY1MzU5NDA2NjJjMGRhYzM3YTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWM2Y2E5NmIxYjFkMTdkY2JhMDNhMjIyODgxZWRhZmMxZTlkZjU2YzQ3YjNmY2YzNWQzNGNkNTA1OGQ0OWEifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L52-L62",
+          "version": "repo-lines-v1:sha256:ac87434da6ee79829aa92e70d242c887304358d6606a455f0d04306929016b69:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NTQyMjk1MGE3NjJjOTE3ZDcwMDc3NTJkY2MzMzRiOTM2NTNkNmVjNTViNzFkYzQ3MGZhODZkMGRhNzQ5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3MWRkMzBjZGYyNmM3YTRlMWY3YTQ2MGZjMDI2MWRiMGY3YTcwNGNhYjQ3OGE1YTI5MDdkNDBkMjY4OTE3MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyMjk5ZDA5YzI1YzBjNjM2NjdhODc2NzllY2RlMGM2MDY0Y2MyZmNkMGFkMmI3YTRhYzgzOGE1Y2YwNWU3YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe4f76f43716443ca8d6cdd69dd080bd",
+      "statement": "MigrationTest is a Robolectric SDK-21 test that seeds legacy database data, applies MIGRATION_21_22 to Room, and verifies representative categories, bookmarks, bookmark items, recent searches, and recent languages.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/db/MigrationTest.kt#L16-L18",
+          "version": "repo-lines-v1:sha256:cace66e68c5d19caf77e2342deebc63fd3ae275503e8c445fbb0d32c3da42d2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYwOGJlMGMxYjI5YWMzYzEyMzY1MWYwNWM1NGMxYWY3Mjg5NWZkMTU4NTE1MmRmMGU4Y2I0ZTRiMWE0ZmNkZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmJjMmFjODY3Mjg4YWExNzk1N2I4ZWE1ZmRkN2E4OWQyNzRlMmY1NDA2ODI5M2E5YTQzMmUwZDNkZjg5MmE5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGFjOGMzNzc5OWE3ZGNkZGYxNjZjNTY5OGFhYThlYTNmMDg3MWNhNWEwOWU3MWE0NTQ2MTE3ZmIxNWIzNGVjOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2JkOTlhNDE5ZjQ4OWRjOWI2NTRhZTlhNWM2ZmExN2RlNGYwOTY4MWNjMDY1MTUwYzU1NWEyYmQwZjZlNzI1MyJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/db/MigrationTest.kt#L23-L61",
+          "version": "repo-lines-v1:sha256:d42ca6227741726a0e56b07744bb026946572ab81bcd91b4e506e75085f5b93a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2NWVhZTQwMWRjNGRhZDI5MjU3MDBhY2RmYzdmYzgzNjQ2MDI1YmI4MjlhNDRkZWY2YTZlMDA2Y2NhMWQxMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhM2VhYzI0MmY0ZmJiZTg2NGU4YjY4ODlhNmI0NzE0YmVlNGI5Njc1OWM4MjNmMDIyNmQzZDJmMzY2NWNmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMTU4ZDk1ZmI5ZTAzZTZkNmIwZTg5ZmE5MDc0ZTZlMDU5ZmE1Y2M2NWM5NTkxZWVhZmQzZmExYTAxNTAxMDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3OGQyZTM3MzI0N2YzZWJjOTRkM2MzYjUyNzFlYWMxMDE5OTYwNDFjYWU0NDMwYjEzNTUzZjM3ZTk2N2IzZTMifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/db/MigrationTest.kt#L63-L98",
+          "version": "repo-lines-v1:sha256:728a628efe611710ab5dcc3c5b01a3f1beb02b7aad88cd7b62e9acbd1ee974ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiODJiNmNjMzA2OTZlZjczMzYxMzFkMjVhZDY5OWVhZDc0NGY0YTNkNTVkMTQ2ODIxNTBmZmMxYzgwOGRmNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4YWQwNzE2Y2JkYjNjZGI5OTdjYjkxYWU3MmI0OTZmY2NhMDVlMGVhODU3NDU1OWIzOGM1NDYxM2ZkY2JiYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTRkMDJhODEyMTk0NGQxNzZkMjY1ZTliYjljYzU5ZjZhYjg5MGJjYWRmOGFlZmRlYmRiYmI0ZjJlYTg0NDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_548eccb0c71b477a9148da1e0eb251fc",
+      "statement": "LoginActivityTest actively checks forgot-password intent data, signup navigation, and orientation change, whereas the upload end-to-end cases in UploadTest are marked @Ignore(\"Fix Failing Test\") and UploadPresenterTest contains ignored presenter cases.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/LoginActivityTest.kt#L27-L30",
+          "version": "repo-lines-v1:sha256:a29a5b71608089f3ef2ffafe991af9663fc5352298383dc032cd89fe7b40694d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjA0NjdiY2RlZDY4YzgzY2E4MTlkMDU2NjFjODNmZWIxOGQ5Y2Q2MDQ4OTYxYmNhMDIxN2E0MDEzYTQzNDJhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2M1ZGU5NDA1ODA1YWY4MTEwMWE5ZDAxNDg1MDk5NjQ1MmM4ZjEwMjIzNmJhNzIyMjdmMTFiMWE4MzQ3MGU4ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDM2M2EyZTVmOTI0ZmM0M2M0ZDZmMTFjYTZjOWFmZDhiMzcyZTdhODY1NGJiYmViYmZlMjBiYTE5ZTk4MTVlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjBkNjMxYzUyN2E3M2QzNDllMTE2NWMyY2M4MzIzNWVjYzYyY2EwOWM3M2RkZjg4YjU1Nzk0YzM2ZmEwODNkMSJ9"
+        },
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/LoginActivityTest.kt#L48-L68",
+          "version": "repo-lines-v1:sha256:7134b36afe6e2b9946562c07c29ce6f1748cf89de2ee5cf96c5a13438d4205f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlNDk5MTliMDc2M2VhODg2YTg0MWE3YjY3MzI3MGIyZmNhODBhMzQyZTYzZTQzZGRkYTE3NWNjYWUzOWU4MWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/UploadTest.kt#L85-L88",
+          "version": "repo-lines-v1:sha256:af00e87618e3345a0e1c82489a0efdabe3432605719e930dfcf28ab234524493:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGNmMDllYjBjNTc0NGZiOTczMzFiOThmZjNmYmYwNWE2MDJiYTNmN2Y2N2U1ZGE1YmU5MDk1MDMzZjYyNTgyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIwZDE0YjA1MzM2YTcyYjIyNzZjMTgxYjg0YjhhNzI2YTE2OWUzYzBhODkxZWJiYmRjNmQ0OWNkYjk4MWMyNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGU0OTkxOWIwNzYzZWE4ODZhODQxYTdiNjczMjcwYjJmY2E4MGEzNDJlNjNlNDNkZGRhMTc1Y2NhZTM5ZTgxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjU3MDQyZjFjODJkMGIzOTdjMGYxNDIzZGY2ZmNkN2U4YWZhNzFiMmIxNTQ0MmMwNzFjZTVmODY5ZjEwMmU1MCJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/upload/UploadPresenterTest.kt#L68-L84",
+          "version": "repo-lines-v1:sha256:d43da7307eeb0f6225da6e545e1ea0a08229e5c97817ef4178a3cdb18850be40:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3M2VlZDFkNzA1OGQ1N2YzYjM2MzBkNDNhM2VlODBlNTk2MGNmMGFhMDEyYmIyNjUwMjgxZTkzNTFlYmVjMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmMWY3OTZiNmUyNmVhZmVlNjFmNWQ3OGZhNjViMjhlYzc4MzJlYTE5OWVjNTZmY2E5OTkxNzA4YWI1MTAxNzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImViYmVmOGViMjM3ZDg1ZmMzNDVlZWIwMjdiOTZjYmJiNmFlZDBiYWI2MTZiZWZlNTNiOGYyMGZkNTA4MTk3NTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2043fce390dc4ba48f4ea2b7d674b9e4",
+      "statement": "The configured JaCoCo report excludes generated Android/Dagger/Hilt artifacts and broad model, database, data, concurrency, and related implementation paths, so reported coverage is for a deliberately narrowed class set.",
+      "evidence": [
+        {
+          "resource": "repo://jacoco.gradle#L23-L86",
+          "version": "repo-lines-v1:sha256:de321175914cdcc9259f05a8bec98760fc8aaa64748f717b2cf7c74addac1a48:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZDU0NjRiMzdlN2Q5M2JmZTEyMDI5OTczOWJiZmM1YTQ5YmIyN2M3MjZhNGY1NzQ5M2YyMjQzMWY4YTY0NTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0ZmMwM2RmODViMTU3MjdkODRkZDRiYWY2OTViYzYxNjllODE5MTQ3Y2Y5NDc3YzRiNGFlNjM2YjZmZmY3YjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3YTViYmFjMzZiOTI4NzZjZjU0NzljZjNkMDY2OTFhMTM1MDU1YTc5OTdjNTJhOTY4ODM0Yzk1MjVhY2M0YTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYxNjFjMTBhNmRmMjY1MzBhYzhmYjQyZmQ4ZjkyZDYxMWI1ZTIzOGRlMmRmMDA0YjZiNjEwOTk5ODc2YzFlMDkifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }

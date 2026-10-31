@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:683d3b4d2bc29b841382a29d0271ffcb95014779c0367a5c0aa83fc4d3a8330c",
+  "pageVersion": "sha256:ab11dd462dc3990b20d55566da9796dd4eccebf794fab146bc7fbb7ed2712457",
   "claims": [
     {
       "id": "claim_21a2733386d44c988ad0ea80cd543b4d",
@@ -93,10 +93,198 @@
           "version": "repo-lines-v1:sha256:1f676b67678359bc546ca8521cd54fa31afedf93b600bffa577965a4f65be0de:eyJzZWxlY3RlZExpbmVDb3VudCI6ODUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiNzI5NGJjY2NlMGJiZDkwNGIyNzk2ZTY3MTViNzhmZDg1NDU3M2U5MTQ5Nzc5M2FjYTk0N2Q4OGYwZmZkOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMWUxZTI2MGJkYTc3MmZhYTk4MTU1ZDM4MDhmMDk1YzhiZDJhN2U5YTUzNmNiNzdiOWE0N2M3MTQ0NjE2NzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwOGFlNTBiYzJlYzk5NjIxODljNmM5ZDNmMTBhYzgxMTQwNGM5ODFkMWFkM2M5NmY3MjE3Mjk0YzYzZWI3NTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBlYWJlZjBmYTc0ZmY2OGU0OWY0MDU0ZTlmYzc0NmI0ZWQ5OWViMTZlZDVmODIxNmNlMTRkMjgyZjk2YjIzMjMifQ"
         }
       ]
+    },
+    {
+      "id": "claim_26a8539f6c1c435f82fb6af872e7b344",
+      "statement": "UploadActivity accepts image and OGG audio ACTION_SEND and ACTION_SEND_MULTIPLE intents, while in-app camera, gallery, and selector flows pass an internalImageUploads intent containing UploadableFile values and optional Place or pre-capture location context.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L100-L123",
+          "version": "repo-lines-v1:sha256:3d8fdee858f3cc41501116e5208eba6c068120f97c02a20c9393e4846e1fa9d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2MWJhNzI3ODY5MDVjZTczM2IxMTJhYjc0MmUxYmIyODA3YWQ2ODRhNjljMTcyM2IyZTUzZWFiZGRjNThkYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmMTQ5NTY2NjhmOTMxYjQ4MzExODY5ZDZiOTQ0ZjExNTFhZmY1Y2ZjZDcyZjUyMjkyM2VkZTNlYTA4NDc0YmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0ZThhMDY0ZDEwZjUxMjg2MmE1ODA3YjZmNTY1MjI3ZjkyNDUxM2FlZmJlMWIzZDdhZjM2MzVjZGIxMTU4MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhZDM4NmUxZWMxMWQ3NzZhY2RmZGNjMmVlY2EwOTA0ZDI5ZGRhMjI4OWI2NjAxMWQzZDBlMjNjNzUzNWM2MGUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionController.kt#L417-L443",
+          "version": "repo-lines-v1:sha256:1aaaa0a8e38d3e02f57283cf5355312b492be2bb8f9657eb2a988f20775997b7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjQ1NmNmMzMxNjRhZjUzMzYzNGI0MWM0ZDg0OTZmMDc5YmMwOGQyOTZjNGU4ZWJkM2U5NDVhMTkzYTA3YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0ODFmNTk4OGNkMDIxMjU4ZjU4ZDU2OTI0YjE2Zjk2YjQ0YjEwMzU4YThiZmI4YjcxNjc4NzQ4MjhmMzc2ZmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmMzM3ZDdkODIyODRlZTQzMTEzYmI2ZWUzOTM5MzIyOGQ2NmMyMDE3ZTkyNjJiOTY2NjZmNjAzZjEyY2NiNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzN2YyYmEwNjY5ZmM2NDk0YjMxMDJmZGI2MDQ4YmRjNjIxZWU2NGRjZjY3OGFjMDc0YjhlMDg5YjFkMzI2NzEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadActivity.kt#L835-L907",
+          "version": "repo-lines-v1:sha256:72c8f0ca2af915992e98d25ffeb98b658607cab2596ed5a4ffeaab41ebcad442:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmNzZiYmFhMzUwOGZiMGJlMzE3ZTg1YmEyZWJiYzFjMzk1YmFkODkxYWE4NjJiY2ZlNjkxM2ExZTYzODQ0NjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzNWZkOTk2ODU3YjFmOWQzZTZmNzY0NzgzOWVjNmIwMGNhNzgxYjgyNGFjOGI5MWM3MzUyZDg1ODdjYmQ5ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjMDkxMjhhZTI5MGE4YWRlMDQwOGFlNWY3ZDlhYzk3MDdlZDJmMjg2MWNiZGJhMGVmMjY5OGU2N2ExY2EzMWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0e280e3a92b74cf39de7e2c9c659048a",
+      "statement": "FileProcessor resolves image coordinates from EXIF or supplied in-app location, redacts configured EXIF tags in memory and on disk, and progressively requests nearby place suggestions from 100 m through 1,000 m until at least five results are available.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/FileProcessor.kt#L205-L225",
+          "version": "repo-lines-v1:sha256:84f048351ed5ed62caf51cedd6ee36e0c5907580e708dab9e8b909a976dd8917:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkNzFhNzVjMTViZGM1YTIxN2Q1NGJmNjNhMjI1ZTFiMzRhMTRjMGU5ZmIwODdmYjFmNTU3YzVjYWQ4YmVhZTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiY2IyOGEwNGY2MDA1YTBjNDMyNzA1Mzg4ZjRlYjJkYjkwOTY3MzQ3YTI2NWY4YmY5YTA4ZDA4OTg5MTQ2ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/FileProcessor.kt#L52-L80",
+          "version": "repo-lines-v1:sha256:a79e04ea99ff64526916534e4cfe1f28cba347c5ec03eaa85af8de50b16f03ec:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2NDdiNTlhM2JlYzFkNTljY2Y5ZjIwNGZmNDU3NGNmZTRlYTlhZDUwNGZhMmMyY2YwMmQ4Yzg4YzFmODM2MDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4NjRkZGFjZWUyODQ4MDM1MDZkMDg1YWNiNTZlODMzNTRmYmQ5Mjc3MDU0MjhiMGNjZjJiMzNiMWIzZGZkYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/FileProcessor.kt#L88-L129",
+          "version": "repo-lines-v1:sha256:eb496efcae5293032951f8090f555ae154b3a97f763975abe3616e7453340f14:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0ZTJkMzBlNGI2YzI5NWU1MTRkMmQ3NDMzYTg5ZWI0YjNjN2M1YmNjNTQwMTI4NzkxNzQxN2Q4MDQyNmJmOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImExYTExNjNkYzM2MmJjMTI0ZTdhNDU4NjFhOTBkMmY3ZDFjNzM4MDZlMGE0NmQ4YzJkMWQ2MGEzNTRmM2M5YTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0f840cd7ed54c51bdce87dbc1c6d52b",
+      "statement": "UploadController prepares a contribution by selecting the configured or logged-in author, applying the default license and fallback description, resolving MIME type and data length, and deriving an image creation date from MediaStore or the current time.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadController.kt#L38-L84",
+          "version": "repo-lines-v1:sha256:ae6eda9da21fd446ef3bc07245855c18487269062ddab2b5180541c719cb8b52:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2E3Yjg5ODYxMGRjYTQ4MDZhNjQzZTZkODRjYjVkZDYwZWZiYTg1ZDIwMGY3M2UxNjM1NGYyMmM0YmI1ZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhYTA5NzBlMmY4MzBlZTIzMGNjNGJjMTFkNGE3YTk2YzBiZTAwMGYzMTk4MTljOWU5MDRmODE3ZTY0NmE2NDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0MDVhMGM1ZWQxYzQ5ZDM2ZDFiMDQzZDlkYjQ0YTk1YzEzMDkzYzgyOTQzYTUzZDc1OWZhNDI3MTRiNTVlOTcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadController.kt#L86-L145",
+          "version": "repo-lines-v1:sha256:b215b97d16b0994010ebc0e67d172143467ce3ee01dcdbbcbde73195e11d1c6e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzMmRhY2RjNTY3ZTM3OTI0ZjA2NWI3NWUxODNhNDA0OThlYTNjMmQyNzY2ZGVkZjUzMjkxNzU0ZjQwM2NkMTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5NWQzMjJkOTk0MmZkZDZmOTQ0NDNmZGI5YTIwNThjOGJjMjExMDZiNjIxNzc1ZGRhZjg1ZGNhOTZhM2I5ZTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_af0fb224851043f899e7818a3f9edb20",
+      "statement": "ContributionDao is the durable queue boundary: the presenter saves each prepared contribution as STATE_QUEUED before requesting WorkManager, and the worker claims rows by setting STATE_IN_PROGRESS and persists transferred bytes and ChunkInfo through DAO updates.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadPresenter.kt#L81-L141",
+          "version": "repo-lines-v1:sha256:1f6d75df5b9525e496bc03d03ef77dc99c8f91ee48d0a2008fce4d20d3ae6ffb:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5MDQ5YWUxMGUzMDQ0ZWE3N2M0NTlkODc3ZGQ1OTlhNGJiZGEyY2Q3MjBiMTNhZThjNWEyYWZiMjhmYTlkYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3YjRlMWYxY2FjOWJmZDZmZDBiMzUwODY0ZjY1Yjc5ZTcxZmQ5M2YwZWEyMWUwOTFkNDdkNjNhMTg5MGU1NjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE2MzIyMGZjZTU3OTBiNDZkNDk4YmU1YTI1OTk5ZTFkMGM4MjgzZGQ3Y2U2ZGQyZWYzMTIxMGIxODU5ZWM2YmYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L120-L161",
+          "version": "repo-lines-v1:sha256:909298d1498c126119ca2165ca7cc5b5fbddf0472ca74ba59b6344d30074953e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwMjE5MTg3MGE1MzdiOTBjYTkyZjc3Mjc0ZWM4YTMyNjNlMzcyYzc3YmJkOWM2ODdjOTNkY2M3NTQyNzM5MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmMmM3NTA2ZTE1OGU2ZTExNjIxNjQyY2I1MTJlYjEzNjJkOWEzMDljNmFjYTFiN2E3MmQ2Zjc4MmJiNGFiMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlMDFjMGY3MjU0NzUyZjE4N2YzMWExMjcwZjg4MmFmNzg1Y2NmMTAxMjMwYmNkMDYxNjk4MGU2YzEzNmZmNzQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L180-L245",
+          "version": "repo-lines-v1:sha256:ce49e3bc7972145513f52fe10dcd08b25032b2127ede1430a28072851494c9e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YmU0ZWJiZjE0ZjVlZWZlMTBhZDg3NzkyM2M3ZTRiZTlmZDc3ZjQ2YzUzODM4MmI1NTAyZTIwYzJjZjg3OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM1MGJiOTY3MDE5ZGRjNzgyMDhjNjM3MTYzNTc0MDI4OTQxOGU5N2U1MjNiNTQxYWMxNWJhZDk1MTA0NzZiMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ3NTEwNWNhZDhlNGZjYWQ4MmRjMTY3YzRhNWFmMzc0MTcxNTkwNWZkODJkZDNmNDY0ZmI1ZDZiMTcwNDFlNzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_31987b7193624f788929c30b408a260e",
+      "statement": "WorkRequestHelper prevents concurrent in-process enqueue attempts and creates unique one-time UploadWorker work requiring a connected network with linear minimum backoff; the worker returns retry when queued rows appear after its processing loop and failure when an uncaught exception escapes.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L247-L268",
+          "version": "repo-lines-v1:sha256:1fe48e0f55a86d1f61e9ee924908d33ab255bac75bc74f8cc8589c7877177801:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwODYzMzY0YzBjOTJjY2FjYzI2ZDFlYjBkN2JjOGYyZjNkYTQ3NGU4Y2Q1YjU1YjRhNzQyMjllMTU3Yjk0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1OTZjOGUxNmU0ZDg4MDkzMzRkMDRlZjAxZDU5ZDM0YjUxYzgzMDNmZTMxNWIwMjEzY2JhZmM3MDRjZDYyNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/WorkRequestHelper.kt#L19-L70",
+          "version": "repo-lines-v1:sha256:dc38c4341387be3adc1494881cd29b78740aacfdc9c453a91f24ab19187914d1:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyY2E5ZThkOTk5ODJiZjI5ZDFlY2MxMGVjOTRjZWQ1MGI2OGZmOWNmZDUyMDA5OGRhNTg0YjQ0MDc3OTIyM2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNjEwMjAwN2Q4YWMxZGI4NzUyZWU2MzUzZGJmNGY5MGY0YmEyNzhmMDk4YTlhM2JlY2FjNDYxMTAxY2I5OWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhMTMwNjY1YWExNTA1ZTk4OTlmZmMzOTVlODU4MjYzMzQ4OGZhMjZjNTAwZGE5MDliOGRmZTY2NTFlM2FmMjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmM2UzN2Y2NzljZDY2NzAyYjcxZjNmOThkN2IyYjYyZTAwMGEzM2FkYjQ4OTE1NDdjNjZhOTJkNDEyNGIxNzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd05c4d1d3ee4b3fa578d9a186fd4c0a",
+      "statement": "UploadWorker runs as foreground data-sync work and maintains global and per-contribution notifications; byte-progress callbacks update the notification and synchronously persist Contribution.transferred, while chunk callbacks persist ChunkInfo.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L207-L209",
+          "version": "repo-lines-v1:sha256:4a6b83a73bc861a554a2999f423b5cd1218c9afde424689ed0267b9f35b7afeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjM1NjVlZDEwN2EyMzdkZjYzNDBhOGYwMDc3Y2YwZTEzODViOWEwYWM2YTZlNTAyYjAyMmVjOGQ5NDFmMTgxYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVjNzhkY2ZmZjMzOTk2NzYyYWFjM2U2YWQ2NjNkNjllOGFjY2VmMGNiYzcwNDQ4YmY2OWJkYjgxMmE1MTkyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDBmNTljMDhjNGY2NTUxMjA0YzFmODZiOGNhMDdhZGQ0N2Y5NTNjYWNkMjg2ODQ5ZWY3YWEzYjdhMDE3ZGVlZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmUwOGEyY2Q3NWM0OGE5NGVlOWE2NTkwYTkxODlmMGYwMjU3NmQ5MzkzZjNlMDQ5Y2IxNDU4NWJkNTQ4NmNiZCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L26-L30",
+          "version": "repo-lines-v1:sha256:7f71032dfce079a034ceab4116f36dfbea4eac31827ea219785dcf6550ae207e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTg0NjYzMDZiOTgwMWJiYWU3MmVkYzhmMTQzNmY0YzlkNDliNWU1OWFiYmRhODgxYzJkZTVjNTg1OWJmYTI4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2E0OWQxNjEwNDVlYjJjYWZhODc4NGUwMDE5OGEwMjg4NzRiMWVjMWVhMzYzNTU0ZWI5YjE3OTY0MmU2MWZjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGQzMTBlM2Q5MTRhOTU4ZTkyYWRhODYzYzE4ODY5Y2JiZDVhM2Y0NGQ4ZTZhMjMwMDdiM2FiYzliNWYyOGZhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjA1ZTYyYzZmNGM3NTI1M2E1MjNiZDViZWM5ZTI2ODk0NTdmY2FlNTZjYmNmOTRlNzNiN2Y4MzZlODA1MzI2YiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L120-L161",
+          "version": "repo-lines-v1:sha256:909298d1498c126119ca2165ca7cc5b5fbddf0472ca74ba59b6344d30074953e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwMjE5MTg3MGE1MzdiOTBjYTkyZjc3Mjc0ZWM4YTMyNjNlMzcyYzc3YmJkOWM2ODdjOTNkY2M3NTQyNzM5MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmMmM3NTA2ZTE1OGU2ZTExNjIxNjQyY2I1MTJlYjEzNjJkOWEzMDljNmFjYTFiN2E3MmQ2Zjc4MmJiNGFiMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlMDFjMGY3MjU0NzUyZjE4N2YzMWExMjcwZjg4MmFmNzg1Y2NmMTAxMjMwYmNkMDYxNjk4MGU2YzEzNmZmNzQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L179-L189",
+          "version": "repo-lines-v1:sha256:dad75f97aef4b046430ab04d38cf757e2310c4c183e3dc3fa9c879d9ba864814:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOGNiODczYzJhODhiZThjZjM0YTQzYzg1OGI0N2UyMGE3ZDE0ZTY1MjI1OGNkZmMyYjU0OWYzZTE3YzE2ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZDQzOTE2MWM1NTU0YzU4ZDcyN2M0OGRlMTY4MTM1NmJkZjBhMDhmNTNiNjg0NTcyMDA4MzFjYTU0MWY2MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlYzQxMGMzYTkxNDVhY2RjYmMxZThhZTg4MzY4Y2E3MGIyNjY0OGYzNDIyZjY5ZGViNTVjMDc1MGMwZGQ1YzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNlNzFlZGM4MDAxZTMxYTZlY2U1ZTViMzRmMGU3YjliNzJlOTcxMThiYTQ1N2Q2NmUwNDBlYWYyZjQ1Y2FlMWIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L274-L297",
+          "version": "repo-lines-v1:sha256:120c64f5e9606c7a58fac539907c32caabb6fba00a1589fb8ccae9a4d45986bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjN2MzNmZhNmQ5MDVkZDI0OTEwN2Q3NmViNGNkN2ZiM2FhZGJmMzY1NTA0NjgyN2FkNDNkZmNiYTlkMjIzM2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlODBiNmYxYmIyMDQ1YmE2NmUxMzg5NzQxODVhNGEyYzM0ZDhkM2FmNDY5MThhYzU5Yjg1ZWU2YmEzY2U2NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3NDk5NGI1ZGYwMGQwNDQwMTA3MDU1ZjFjN2NmMzA0YTMzOTgzYjY4N2Q1M2M5YzVkMWQ5NGFkYmI3M2Y2YzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7af325b27bc8411b81a8d8597c40dd86",
+      "statement": "The stash client uses 512 KiB chunks and resumes only from ChunkInfo whose contribution modification time is within six hours; it reports cancellation when the contribution row is deleted and pause when the row or global pause flag prevents further chunk processing.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L199-L211",
+          "version": "repo-lines-v1:sha256:60e69dd4b6e6b567cd87f4939a196bf81500c28e55ba48ecd0f329abbffeb557:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiY2IyOGEwNGY2MDA1YTBjNDMyNzA1Mzg4ZjRlYjJkYjkwOTY3MzQ3YTI2NWY4YmY5YTA4ZDA4OTg5MTQ2ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFmMmQxYzc2NGVmMTg5ZGExYjJhZGIzN2Q4YWQ3M2ViNmYyYmNhNzYyZmRhNjk5MDk0OGNiYzk5ZmVjNzUxODYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L286-L303",
+          "version": "repo-lines-v1:sha256:cc3b7336d70bd6b84235da13d3371c66ca7c2e15edb6f02d85e56a4a528ab4e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYjE5MGM1MjdlNjJkNTI0MWQzMGM3NGI4YjI0YmVhNGJlY2MwNzUyYjczNTVmNjUxMzVlZTJjYjUxNDRkNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4ODEyOTA4MzhlNzhmMTliMGQyMzVlMGVkMzhlN2RlNjRiODAwMWM2MmNlMjc1NjhmNmEyOWRlNzg0YmJjNTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzZTZlMjQ4MzhhNTIxMzQxNzA1OTIxOGEwN2UzNWUyZjFjNmNkZTk0Mjg3NDZhZGNlOWVhNmI4ZTFmN2Y2M2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L46-L50",
+          "version": "repo-lines-v1:sha256:b5cac260b7e3d6bbad4d9e64cab93efd08c715e3179bd520dd489d2acb87c526:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmViY2JhYTE5ZDA2ODAwM2ExY2JlZWNiZjBmMDU0MjEyYWRlOWNmMmQ1NzFiYzA0NDVmNDU1NGJiYWI1N2JiYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDdjOGY2NjhkNjM0YmIwMmE0MWQwYWEyOGEyYWRmNWVmMDE5ODE4ZTUwMWZhMTZkNTI4NWZhNTEwNzE3ZDJkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTMxNTBmZjUzOTA2MjMwMTdhNDFjNWQ1Nzk5NGE3OTBkYzRlMDEwYjU4ZTZkZjQ5YTdmOGQxZGNiNzYzZGM0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTUzZjU1Mzg1YjA2YjViOTVjYWI5MWE1M2Q1OWFjNDJlYjExZjUyNjA2OTFiNDAwMWE1YzE3NzQwN2ZiOGRkMiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L59-L139",
+          "version": "repo-lines-v1:sha256:e098df2f854aef55cef961524a66cb5713ddbc17df63e8b754ce55d369e121c0:eyJzZWxlY3RlZExpbmVDb3VudCI6ODEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliZjEzN2E0YzgwMWQyN2ZiZmIwMWI2MjEzMjU3M2MxZDg2YzAwOWU1MzQyODNiNjg0OGQ3YmI3YWVjZTM4NGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjMGRiNDZiYTZmNGMzYzQ3MzY0ZWQ2ZWY0MzYxNTQwMGE2YzRlMDFmZGZjZmQ2NDcwZTVkYjk0NWY2YmI0OTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjMmRmMWY3NWM0Y2ZkNmMyZDgzODA5YzlkZjM4NjBmODQ2NjU5NTY4NTRjMTQ2MDEzZTc0ZjdlNTcyMzQ5MzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_17f60fca0d8648ebb236de87aae34cbc",
+      "statement": "PendingUploadsPresenter pauses queued and in-progress rows by changing them to STATE_PAUSED and later requeues them; retrying a failed contribution resets its upload timestamp, performs a duplicate check, and only saves it as STATE_QUEUED when the duplicate check reports IMAGE_OK.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/PendingUploadsPresenter.kt#L117-L131",
+          "version": "repo-lines-v1:sha256:9adb98a4af0f2166d72646e1b7d8c8a42f1c11fb16c472c35e826af46683407a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2MjhlNmE3NGZjZjI4ZDU4N2JkZDdjOGU0N2YyOTNmYjAyOTNmOWFmYmI1YTUzNTQwMDk4ZTI4NjljZWM2N2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhNDVmNjY1YmYyMTI5NTY4YzViODg5NTc5YzU5NzYyYTU4MTBiNTUzOWFiMzQ0MDFjZjY0NmFiY2RlMWRmN2MifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/PendingUploadsPresenter.kt#L154-L206",
+          "version": "repo-lines-v1:sha256:ae4b7a91739265ebc80a515bae93adeeb6555a5ddc9c8f3a65f9f0abbbc1f181:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhNjg2MGI5NGQ0MWI0MzhmNmUxMjZhYTgyYzc5ZTNkMDJlZGU5ZjQ5MzdjZGZjNjZmZjkzNzMxZGJjZjQ4ZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzOTMxZDg3YzRkOTcxNDZjMjdlYTE3YTc0OTQxMzM2ZjI0YWExNzQxNzQ3ODNjNjRkN2E4NTY2ZjkzNDQ2NzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjYTQ1YjJlMzNjMTU0YjcxNmE1Zjk0NzMzNDYzZDkzYTkyYmM5MDY1ZWRjM2RjZmZiYmZhMTc3MGJlZTM1NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmN2NkN2M3OGQ2YWZiYTBhODVkYjIyY2U5ZWQ5MTJiNmE5OTBiYjNlYTIyYTI3NzZkMmU0MzNlYmI3NmU5MzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c1d3240e28784d2f9be923c8b89aca39",
+      "statement": "After final upload success, UploadWorker checks for a unique Commons filename, performs optional Wikidata place work, fetches the uploaded Media record, replaces the queue row with a completed contribution, and writes uploaded fingerprint status separately; exceptions in optional Wikidata work are caught before completion is saved.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L359-L421",
+          "version": "repo-lines-v1:sha256:48e0cfc85084a7e419ea80d2ab6796ee50f90faf138a3210dc2d4fc3f681274a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyNjQzOTdlYTAxYjUyNzZhOGNjYmFkODJjZjQzODM4OTYyMmU4MWU5OThiZWVjOGQ1MDQ5MzBiY2FmMDg2ZTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmNGY3NzQ5MWQwNzUxNGY2OTE4MWFkMmQ3ZGU5MTZkMTI4ZTY5M2YwOTk4MmU3ZWQ1ZGFmYjM3NWYwOGNjY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzYjkyNzlmZTg5YzVkN2QyMGQxODk0NDA1YjhkMjdlNTM0NjE2NjVkNGJhYjk1NThhZmQ3MmI3ZWE5OTAwMjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L476-L555",
+          "version": "repo-lines-v1:sha256:9f3b970b94bd12041cc8bc1a96c33cec64bbaabbb14c9696bf9b2a6bcdda8c42:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiNzI5NGJjY2NlMGJiZDkwNGIyNzk2ZTY3MTViNzhmZDg1NDU3M2U5MTQ5Nzc5M2FjYTk0N2Q4OGYwZmZkOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkODViOTk2YzIwODE4ZDE2MjY5OWUzMzc1NWJhMmNlNzBiZDdjNTUzMWZmOWNiNGI2MTMwZjA0ZGUxNjY2NmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwOGFlNTBiYzJlYzk5NjIxODljNmM5ZDNmMTBhYzgxMTQwNGM5ODFkMWFkM2M5NmY3MjE3Mjk0YzYzZWI3NTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt#L581-L610",
+          "version": "repo-lines-v1:sha256:7455622b3f661053dda8ba0cdec2a7a042fbd81f4d3609f6609c0756e14c03d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1NDZlNTdlMGFmOTc5YmI1MzQwNjAwYzU2ZmVhZmJlMmMxMTM2YzBmZWE1OGExNDAyOTI2YTU0MDk4MWRkMzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkMzViYTlmNDUxMWJmNzVhMDg3MzU0M2E0Y2VlNjRlYjEyZWNlMzE4YmVjZWI1NDYzMzdkZTg2NzVkOTdjODMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6218c0bfb02b49a0b49f9a19b968e79a",
+      "statement": "UploadClient and worker tests cover stash finalization success and error propagation, request fields, chunk-size and chunk failure behavior, resume success, and unique filename collision suffixes; the end-to-end UploadTest scenarios are currently ignored.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/UploadTest.kt#L158-L165",
+          "version": "repo-lines-v1:sha256:d81ae6972e80ebc18d284983e04cc86b46e20f670f10407c3660e36d86a45b6a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGNmMDllYjBjNTc0NGZiOTczMzFiOThmZjNmYmYwNWE2MDJiYTNmN2Y2N2U1ZGE1YmU5MDk1MDMzZjYyNTgyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRhMTdjMWY3MWNiNjQyYjkzZTIyMTllYjhiYWM4NGU0ZDg3OTllNjUyM2Y5YzhjY2EwODNhZjZlNzQ2MjlmMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk5YmRlZmVlYWNhNjM0MGUwMjkwZGM4NmU4ODljODlkNWUxODlhYTViYTQ0YjU4NWIzYjcwNzM0ZjRhNjJkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjdmOTNlMzcyMzUwOTNlODc3YWEzNWIzMTg0MjFiNTliMjY1Nzc0ZThjNTlkYWU5MjIyNjJhNGZkOWNjNGI0YiJ9"
+        },
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/UploadTest.kt#L85-L92",
+          "version": "repo-lines-v1:sha256:bce91a1ed0982e89d602fa8190c12af49f2dfc88f58628dfbda7f573138d8a6b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGNmMDllYjBjNTc0NGZiOTczMzFiOThmZjNmYmYwNWE2MDJiYTNmN2Y2N2U1ZGE1YmU5MDk1MDMzZjYyNTgyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRhMTdjMWY3MWNiNjQyYjkzZTIyMTllYjhiYWM4NGU0ZDg3OTllNjUyM2Y5YzhjY2EwODNhZjZlNzQ2MjlmMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGU0OTkxOWIwNzYzZWE4ODZhODQxYTdiNjczMjcwYjJmY2E4MGEzNDJlNjNlNDNkZGRhMTc1Y2NhZTM5ZTgxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjdmOTNlMzcyMzUwOTNlODc3YWEzNWIzMTg0MjFiNTliMjY1Nzc0ZThjNTlkYWU5MjIyNjJhNGZkOWNjNGI0YiJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/upload/UploadClientTest.kt#L134-L289",
+          "version": "repo-lines-v1:sha256:ca63d9f8be22b7546f45ff936abad847bf8e52716a13c0ab456e49493b840f9e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTU2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0Y2YwOWViMGM1NzQ0ZmI5NzMzMWI5OGZmM2ZiZjA1YTYwMmJhM2Y3ZjY3ZTVkYTViZTkwOTUwMzNmNjI1ODI1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJhNjcxYTZjMWE2Nzk5MTdhNWM3ODBjN2ZhNjU5M2Y1YWU2MWZmNDJiMmIxY2Y3OTNiOGZjYzc0MDVmNzliYzc3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiNGFkY2JjMDNmNTMxYjcxYmM5OTBhOTMwNDAxOTI2Y2YxZGE2MGRmNTAzNzI0ZWY5M2Q3OTU3NzU0YWMzMTgwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyM2FmMzgxZWY5YWQwODgzOTg1MTg1ZTI3OGViMWI3ODQ2ZTMxOTQ3ODRiOTVhY2MzNWVkYTQxMmM4ODQ0N2M1In0"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/upload/UploadClientTest.kt#L72-L132",
+          "version": "repo-lines-v1:sha256:288ac2d617d29cd3b8b12766218cae8a7c3b76226278cb4b417dc93c62d451b6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2YzM4MzZjZWUwNjc3Nzc3NTQzNTc5NGIxM2Y2MzgzNTE0ZjNkYWNlM2QwYTE3YTM2YzA4ODRjMTAzZDgzNTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjOWExNDA2MDgyNzdiM2U2ZDgyOWZjNmRhZGUwOGY4ZDRhMzhlNDQ3Y2VhNjY1N2E2MDZhZDg4NzJlOGUzYjkifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/upload/worker/UploadWorkerTest.kt#L31-L68",
+          "version": "repo-lines-v1:sha256:c36cf2d8abd05bd6153d61ff9a0ba9187748890d2fb8a889089c1a03658b8f80:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2YmIyYWY2YTY5ZjU4ODJlYWM0ZmQzNTZhM2MzMzNiNjgxYmI4NmNjOWRlN2FiYmI1OTc1ZTUyMjA1YmRhMGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }

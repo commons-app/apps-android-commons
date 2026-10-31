@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:8b5235e488073ff0fe5d07d1ee7ac9a6d2c33f9280544b373b6bd04fc10d7c18",
+  "pageVersion": "sha256:35eeb04f5bf0fac93d660159e7b27c47d81b0846d9bf79193f7a4bcdcb7daec6",
   "claims": [
     {
       "id": "claim_f0e46e26cb1547c19db320a55c7d6058",
@@ -61,10 +61,162 @@
           "version": "repo-lines-v1:sha256:7fd94d4e03245eb8d5b4ccd81d6dc2a8f11d9821fef009837ca9e1250604f6e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4MzFjNTRhMGYwZDJkODU1MjdiZWUwNzNkMWU3Njc4NjFhYWMzYjU5NjA0YjRkYjZmMDJkNDAxNjhjMjY4OGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzY2ZmYWVhMmQxZjMzZmE3ZjUzM2U4NjJjMzMwY2IxODVhZTVjYTIyZGEzYjg0ODYzNzE4Y2QzNzg4MzVhNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZTkxYWFkNTQyNTE0MzMyMjNmY2UyMjY1NDU2ZTAzM2YwZmY0NWUxYmQ2ODliNzU1ZGY4ZDkxMzEzMjdiYzAifQ"
         }
       ]
+    },
+    {
+      "id": "claim_5335411695e540c0aa4915f249dd9b67",
+      "statement": "Profile tabs use the requested username for remote achievements and leaderboard data, while achievements show retry or unavailable UI on failed or missing responses and beta builds suppress the data view.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/profile/achievements/AchievementsFragment.kt#L127-L168",
+          "version": "repo-lines-v1:sha256:4b408c6eff4095fb9d5f1b3ab8eae75a04ec2e8e6d5f3697eaa0937cd59b2434:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiMWE5Nzg5MTI1YTk5YTAwYjA4NTBhMGFhZTIxODVjZDQ0YjRkYjIyMzM5OTY0M2JiMWQ1Y2Q1MjRkOGE4ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkNmMyMzViYjNhZjI1YmVhN2EzZGMwMmI5ZjkxODUxZGYzZmI5NWZmMGZjOGM1YmJkMDM5MmZkMTQ0NTRkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/profile/achievements/AchievementsFragment.kt#L49-L54",
+          "version": "repo-lines-v1:sha256:da4b319b3be25b49de110dff2ec2cb2d2518797e752e8fbcd75b4f2a862fce7c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjhiNTAzMmI3MjJmMzg3YjRmOTA3Zjg3OWUzMjQ3YWUyN2ZmMWI2YjYzYmU2ZTJjNmY5NWRlMDlhZGY2NjFmYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQ4MjI4MTQ5NmQ2YTA1OTkzZjE2MDdhMmFkYmM4NDI3MGEzNzE5YTg3M2UzMmU1OGJmZmNjMWQ3MWY4ZDFmYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzdjNzE2Mjg2ZjI5NjU3NjQwMWQ5NzE1MDNhOWI4NGVkNjBkOGRkOGE3YTg1NTJhZTgzMDgxNzI4NWU1MmU3NCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/profile/achievements/AchievementsFragment.kt#L87-L101",
+          "version": "repo-lines-v1:sha256:87aeae4562018f7602727df68e2c909c1896693e4fd4fa840dcec46a62d1d59f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMzM5YTlkNWIxMjBiZjliZDAxMzkzNGQ2ZDE5OTYwZWY0YTFlM2NkYjkzY2NmNzI2MzIxNjBmODgyNzUxNWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwNWIzMWFlM2U0NGMxODlmNTcwMjFlZjQ0YzMyN2I0M2I2MTQ1MDZhMzIxZDBmZWNkYWU5MTE0ZjMyMjAzMDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlMDkwM2MzZjg5NWIzNGVkOTg2NjE2YmU1NTE5N2E5Y2Q1MWNhNGI1NzFjNzk0NGViN2Q1ZGMzMDAwYTQ3M2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZmQyNGRiODI2M2ZmMmM1Y2M4OTM5YzdkZDgwOWM4NTY5NjFkMTMyZmMyNWNhZDA2MTMzODc0MGM5Nzk1OGUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/profile/leaderboard/LeaderboardFragment.kt#L55-L100",
+          "version": "repo-lines-v1:sha256:0e5570f9e36dc0a6c381fa2ef6ea0a97c50f9efb3c1cfed4a30192e5b31e43bb:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YjUwMzJiNzIyZjM4N2I0ZjkwN2Y4NzllMzI0N2FlMjdmZjFiNmI2M2JlNmUyYzZmOTVkZTA5YWRmNjYxZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4MTg1YTZjMmQyZGQ1MjMzN2Q5OGY3ZjljZmM4NGMyN2E2MzczOGEwYTAxYWU4YmQyMDEyYjhjMDRjNTUyMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1OWU2NzEwYWZjMzlmMTVmNTcyNTU5MjliZDk2NGNkMjFhMDAyM2Q3ODhkMjcxNTkxYjk1OTkwOGZlMzIzOGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e027321745e24aa282e76dc607b4ef72",
+      "statement": "SettingsFragment loads XML preferences and uses the injected default_preferences JsonKvStore for local preference state, including recording when a user manually removes the EXIF location tag.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/settings/Prefs.kt#L3-L10",
+          "version": "repo-lines-v1:sha256:47b6a86cd11e7a1bf2aad0aa6710f9e8a42be45708d0b2698cfd6f11e9b6de84:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk2NzI4M2FjNjA1NjBmMjgxZmM1MjFlZWY0YjYyZjllZjExZDFkNGFjZjgwY2Q2OTYyMDVjOWIxNTM5ODNkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjBkNzQxNzcxODc3YTUzNjJiM2VkNGE4MjhkNWNkMGI4MmVhMjVmNzQ4ZTdiNWJlOTJmNjBjOTFlNDhmMTE3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWIwMzE3Y2U5NmE0MjU5YjU1YWFiOGFhYmIwNmIwNWQ2Yjc1YzI5YjlhYjQ4YmI2YmY4ZGNjNTlhMjBmN2Q4NCJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt#L110-L120",
+          "version": "repo-lines-v1:sha256:ec68f360539a54500be334938be9578006515ea2d17ffa2abb352321a8f87e88:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0NjY1M2MzZWMxMDFkZWI3NzM0MDc5OTZkZDAzOTk3Njc4MjE0NTFhYWRiNTU2MTQwMzI3Yzk5NDdhZjc3YjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwYjg1YmRiOGQ0ZWFlNzZkMzE2YjFjYjZmNjljNmM4YzIyNTA1YjVlYjZjNGM3MjdiNTNmMTY0NzM2NzBmZDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3NzUyMGE2ZDc3OGZkNTIzMGQ5OWRkY2NiY2NhZTViMWJhNWMzZTcwM2U0ZTRiZjEzNmE0NzU1Nzc4ODA1OWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyMjk2ZjQ0MTY4NjNlZWQ3NTAzMGJjOTJlZDIxM2JiY2U3NGNlYzZmOWFmNGNlNGQyZDI2YTlkMTc4OWQ5ZjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt#L142-L151",
+          "version": "repo-lines-v1:sha256:f70b19a7b5b74b8633a863fc0ee0dcaed8d880cde8209d54417fb6e30668b0b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjMjlkYmI2YTMxMDE4YmYyNzYxOGI2OTRjYjI4ZDQzMzBiNDY0MjA2YTg3YTk0ZDFiNzU4YTg3YjU4NDkyMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMTM5OGVkOWY4ZTNjMGU1MjZhYTE0NzlhZTdlNzVhMzdiYmMyZDQ5ZDJlMzU2MDMzNDZiNDRhZmQwMzNmNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImExOGZkMGE3MzMwOWE1ZGQyYzkxNjgzNTI5ZThiNzZhZWRiMmI0N2RjYTQ3ZDI3ZjdlNDRhMTUyNGIwYzAzYmMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt#L60-L74",
+          "version": "repo-lines-v1:sha256:cfedd0d3f856849edba3d283ee96ecdec7a249c7989421a04ba2760885e9b3c9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1MDM0MGUzNmRiNGJkNmM4MDQ4MGM0NGRhOWU3YmQ5NDM2ZGZjNDZjNjYxMTEwMWQzZTc0MWMyZjA5MWUyMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmZTZhYzE3ODBmYjk2YzZkN2I0MDgwOTc3NDFmYWVjMDhhNGY3NjgzMGRkYmRiOTM1MzJjY2I4ZTA3NWExY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhNDY2ZDU2MTFiMWU2MDlhYmQyMzdmNjNlN2QyZmExZmI1ZjE0OGMzMDI2ODUxOGFjNWMxNzI2MzY0ODYxOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b67925c3c4f408882e2f318c6e060a1",
+      "statement": "BookmarksPagerAdapter always adds Pictures and Categories pages and adds Locations and Items pages when onlyPictures is false.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/bookmarks/BookmarksPagerAdapter.kt#L12-L60",
+          "version": "repo-lines-v1:sha256:a5be1c723acb52650afa081e4121042fdce4e63e1729fcb20ca995231a4dd494:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3ZjgzOWNmNmRhNjFhZDlhNjIxYTlkMjQ1Y2MzZjc5OGNhNmVmYzVlNDg1OGYzNjY2NDQ3YzRkYjAxNWVlYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjOWVkODU1YjljMmUyNDAwZGUzODdiMTBlZWJkYWE1OTY4MTgxZWNjOTdmY2VlOWEzN2UyMDc5ZjRiY2JlZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3OGQ5M2NiZDA4ODRmNTQ1MWI5ZDJiZmJmNWI5NjNkNzQ1NzEzMjBlYzY0Y2U3NGM0YjM4MThjYjI3NmJlZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2ZTE5MDA1OTk3MTg0YmQ4Y2QyODEwODAyNTIzZWJhN2Y2YzRmN2IzYmI0MzRiNTljNTU1MjQ5MTAzZjIxNjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a89a9066f4f1435ebde7621ca6282566",
+      "statement": "BookmarkItemsController reads bookmarked DepictedItem records through BookmarkItemsDao, whose content-provider query returns an empty list only when the DAO reference is absent and wraps provider RemoteException failures as RuntimeException.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/bookmarks/items/BookmarkItemsController.kt#L7-L22",
+          "version": "repo-lines-v1:sha256:b599910ae7ab7700f2ef0e0c40aa9de3e3d889c209821887159a787c570057b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjNDE3MzI3ZTM5MTA5MjVmZDE1ODZkNzc2OTBjODdjNjNmODU2ZDA1Y2ViNGIwYmU3YjdmMjE2MTk0NzM1MmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/bookmarks/items/BookmarkItemsDao.kt#L30-L61",
+          "version": "repo-lines-v1:sha256:fd4a07e7b83b4d00edc4a6a117e7d3e10b8355dcac3476fb068e5b8eb787fbbc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MTgxMzdiYTU1NDdiYTI2NDU4NjIzNTM0Mzk5ZTI1ZTNjNGVjMzlmYTU0OTQ5ZDc3MjJhMTE4NGM5YWE1MzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1ZDg5NjJmYjM2ZGZiYTU2Y2YxNTQ5OWZkMGI0YmEzOGY2YjM1ZWIyM2UzMTkxMzZkZGJlMDA0MGYzYWVlZjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7bd29682973849628a0c489b6cf81019",
+      "statement": "NotificationClient maps Wikimedia notifications to the app model, defaulting missing text and links to empty strings and classifying headers containing Sent you an email as EMAIL and other headers as UNKNOWN.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/notification/NotificationClient.kt#L24-L36",
+          "version": "repo-lines-v1:sha256:00c080da5605e9780fc0ea38da60d6eafab2a4954fdb1459285ba8367df61693:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyZTYwYmYxMTEzMDEyYzVhMGJhZTYxNzA3Yzk1YjE3NzAyOTQ5NjFjNzdkMzBkZTBmY2Q5NTg3YWEzMmY0NmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZDJlOTY5ODI4ZmZhOWQxZDQwYmNlOWU1N2ViMmIzMGY4NWRiNDQxYTMyNWViOTUyMjkxMGJhYjFmNTMyM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YmMyZGM0Mjc0MzhlMGEzMmQ5MGFmYjQzOTc0MmMzZjhjNDQ2YmY4NWEwNmE1N2NiZGFhYWEzZDM5MmJmNzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM1NjU5ZDc5YTMwZThmNjhjODQ3ODZlOTlmMzdjODZkN2QxMzRlZjVhNzM3MjI5YTg5NmVjYzdiZTA1Y2VjMDEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/notification/NotificationClient.kt#L54-L70",
+          "version": "repo-lines-v1:sha256:d36949e24e933a3ef9aaed230bbf8cf5b6cfa32dcca178c3c678aa9321fd31e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZjQ2MzIzMzg2YTZiYTg3MjMwZDYzNDExZTBmYzA1NzMyODlmNjVjOGYzNDliZDdlYzgyNTkyZDZiZWRiZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3NjFiZjRiZTFiMWZjOTM5NDEyZDdiNjhhY2VkZmUyNjNjMWNiYzIyMjMxMjEyZGYzOTA5YzcyMjljZDE2ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyMDZlMTdkNjQ4YWNjNDk5OTE3N2UzOWIzM2RlMDI2ODI3YjcxNGQ2NjJiMTU5ZGZkOTJmOWFiYjBjMzk0ZWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_854d56d6ec564c249e5316f8cb7ffb45",
+      "statement": "NotificationWorkerFragment retains its notification list across configuration changes and does not persist it to a database.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/notification/NotificationWorkerFragment.kt#L10-L16",
+          "version": "repo-lines-v1:sha256:a7c54c426be8de8ed402664cf0444b6d278d332e56d4c9907ec4a21a4b1ff667:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTljN2FlZGNkOTBmMGYzMTcxNjE0YjA2M2MyN2RjZDFkY2Q3NWNiNmQ5M2IyNmQwNWQ3MzQ4NTZkNGE1YWNlYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNjN2NhYjdjMzUzMjYxMzJmZjJmNWNmNzllYmIxMjc2YzgzNjVjYWNhNzg1NDIyM2FjYjYyNjBmNzA1ZTdiYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_391497b335a7484594381ff408b4ba0f",
+      "statement": "CampaignsPresenter performs campaign retrieval on an injected I/O scheduler, observes on the main scheduler, reports an empty response as null, logs request failures, and disposes the request when its view detaches.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/campaigns/CampaignsPresenter.kt#L36-L75",
+          "version": "repo-lines-v1:sha256:93df088841747e31b88e7786d8b2e1532fe6711463ba8b1ae9f17c214e6e9880:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxNTZkNDQzZjNmYzZiNmIyNzRjZWNhMDhmMTg1NGJjNDEyNWMyZTE2MjRjNzFmNGRiYTQxYTc4ZDhiZGVjZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1Y2M2NjkyNTBmMzJmMDZmYmM0YjJhN2U3NzBlYjU1MjA2Y2MwNjNkYmU2ODQzZGQwZGE4OGMzMDdiNWU3MDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlMDQyZmU3NDUzMTI0ZDc4NjlhODMyNzA4ZGI4NTYwM2RjNjY1NDdkMGFkZjYyNDllNjNlMDhhYzZkNTg2NjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e7f1905d300447598b52a3a281ab14d3",
+      "statement": "QuizChecker computes activity since the previous prompt by subtracting upload and revert checkpoints stored in default_preferences, uses an upload threshold of 5 and a 50 percent reverted condition, and records updated checkpoints only when the user accepts the quiz prompt.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/quiz/QuizChecker.kt#L125-L176",
+          "version": "repo-lines-v1:sha256:a8e914e28c9485b227dcf09a0ee1f065f1520f968340e30fbf385497b95006e3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4MzFjNTRhMGYwZDJkODU1MjdiZWUwNzNkMWU3Njc4NjFhYWMzYjU5NjA0YjRkYjZmMDJkNDAxNjhjMjY4OGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiMjQwNDYxMDAwM2QxZjY0MDRkYzcwMGEzYWI4MDYzMjhkN2U2MDY1NGE0NTdiN2Y2NWRjMjJmYTU0ZmJkZDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyMDZlMTdkNjQ4YWNjNDk5OTE3N2UzOWIzM2RlMDI2ODI3YjcxNGQ2NjJiMTU5ZGZkOTJmOWFiYjBjMzk0ZWUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/quiz/QuizChecker.kt#L27-L44",
+          "version": "repo-lines-v1:sha256:28da2b494d603878916a2a0ff3db14ffe426340c7a4a61ccc6f28a689bf86bc3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyODMwODJjMDliYjBhMGNjNWI3MzY5ZjBmYzg5ZDVhMGYwNWZjNzQ4NWIzMTRlN2Q1MWRjMzUzOWEwNTMxNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0OTkxMjhlMmNkOTIwMDVlNzJkOGRmMzU1YmIzODEwMjIwMzQ0OGVjZWUxMWJjOTVhZWViNmQ1NTcwZmE5MTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMWRkYmIzY2QxMzdiOTAxNjY0MDU5NGNiZTk5ZmU4MmI3YjE5ZGQ4MWFhMjMyOWZkNWNkMDY1NjVmMDgzZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiY2RlZWQ3ZmFhNDg4YTcwMTY3MmNjYmNjOGU3MzlhM2IxYWFjMTk3MWJhYzI3M2Y0YzYzOTUyYjI3ZTE1MWIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/quiz/QuizChecker.kt#L76-L121",
+          "version": "repo-lines-v1:sha256:dd5e85c36a61d18ddebab844e87fa67123a02e16998819c7a7099a49baa94f42:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkYWI0MjIzYzU0N2JhZDBiMzEyYWM3YmYzYTU5NmUwOTRkZmE2OTA5ZTBlOWQzZjdiY2M4ZmZlMzEzMDNmZTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiY2IyOGEwNGY2MDA1YTBjNDMyNzA1Mzg4ZjRlYjJkYjkwOTY3MzQ3YTI2NWY4YmY5YTA4ZDA4OTg5MTQ2ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_92dc2d3f125a4326b0f6e921d8ee8925",
+      "statement": "QuizController initializes five static quiz questions with fixed image URLs and answer metadata for the quiz flow.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/quiz/QuizController.kt#L10-L25",
+          "version": "repo-lines-v1:sha256:071d2ac6fd1afc2eb3046f4f58b9b887bb23c2113a50305ae55717799cc673a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmODNhZWI3MGM5Njg3M2RiYzBiODk0NDA2MzFhYzAxMzk2OWJkMzBkNjZlM2M5OTYyMzI0ZjYyZWZkOGU4OGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhkMDg2YzlhNzJkODI4ZDFlMzdlYTViYjYwYTg2ZDEwMTc5ZmI0OWFhOWMxZjNiNDk0ODk4N2QyMmVmMzQ1OTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzY2Q5Mzk0MTUxNjBlNTFmOTdiMjU3Y2Q1OWRjOTYxMmQzNjhkZDkyMGVmYjJiZTBlNWJlM2RhNWY1ZjExYjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/quiz/QuizController.kt#L27-L79",
+          "version": "repo-lines-v1:sha256:18d37188886434b3a22adfc6418cce2e4c622df5c748a978a2fd79c7c7fcb4b3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMjA5ZDBlNDBjNTM1Y2MyMTNjZDljODk3OGRhNDI4NDMyYzQzZWI2NDRkZThiYjI0ODhiNjQ5MDRhZWZkNDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0MGFhNmE5MjJjZjc2MWI4NWRmYWU3OTAzYjdlNzc0MDE2ZDk5NWI2OTA3MDc4OWI3MTc1NjU0NDNlMTZkYzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3YmFhYWJhZThjYjRjODAwZTYzMzQ3M2RjOTJjYjcyMDkzMDNiYWQwNDFlMTEwMTljNzFmMzIyZGQ3YTgxODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b68e36de57eb4fac910343516a75acd2",
+      "statement": "Focused tests cover notification filtering and mapping, campaign empty and active-window selection plus presenter lifecycle, and quiz negative-count and threshold behavior.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/campaigns/CampaignsPresenterTest.kt#L55-L108",
+          "version": "repo-lines-v1:sha256:d57347abb2094da2f2473c965ccf6c6d254a7747c76f6b142b99f3affbf7ee9b:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxNzgyMjdmMjVhMTFjNzljMDIwNTdlOTIyZWVkYzMyNjE2OGJiYjE4Mzc0MjAyN2YxNjQzNGI2Yzk1NWI5YzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/notification/NotificationClientTest.kt#L57-L112",
+          "version": "repo-lines-v1:sha256:17de6ce78d2bb7ff3bde9be043b4da864ebc9b6b40d523e675040414840dc0c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyYjkwMTIxYzEwMWIwMmNiNGJhMWEzY2Q5YjUwYTQxYzFiYWVlMWNiNzRkZjRjZDMwNzA3YWM5ZWQ2MjFiNmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNTQ1MWNkN2QyMTNjNjhmMWI5MTdjMzBlZDRlODdhZTEwYmYyOTUwNGRkNDBhOTU1ZTQwMzgzMTViNGU5M2QifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/quiz/QuizCheckerUnitTest.kt#L59-L140",
+          "version": "repo-lines-v1:sha256:49493fcbe18d57a57663423fc6d3ed67154bca915ed438081f5d191f5962cce6:eyJzZWxlY3RlZExpbmVDb3VudCI6ODIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNDk0MGZmNTUxZWFkYWVkNzFkMTA1ZTNjMmQyMjI4NWM4MWQwNGQzNzMxYjJiYWZlMGJiOWRlNTkxNzkyYzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }

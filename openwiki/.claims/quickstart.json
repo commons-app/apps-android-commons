@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b97b93b2f0eca2e4fe24829db6586b13dfac9140575a6050b7f473ab19e63776",
+  "pageVersion": "sha256:bd9d75fa6fa4f48588e7210cadeaf1c6e1fa6d6c6998b8d02a0f694126f5742b",
   "claims": [
     {
       "id": "claim_cbd251f2ed7242b8a0fca6ca43df9e2b",
@@ -45,10 +45,148 @@
           "version": "repo-lines-v1:sha256:05a22ed3c8b73a294b569a599262a81c46dba06a308ed951f1117cd02b1d1cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3ZmY2YmJmZTY5YWY3ZDZiNjdlNWEzNzhmZGI0MTI1YThkYmY0Mjk5ZjYwNjAwNmI0MjEyYTY3NjliNzdlZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3YTk0NGYwNDE0ZDI5MDdlNmY4ZGVjNjE0YzM1NzUyOTQwOGQwNWNkMzc4YThlMWJhNmNmMjY5ODM4MWYxYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNzEyZDRiZTgxNTExY2RhMTFjNTM3YWJiZWQxYWIwODk1MDVlN2ZmMjYwZmMxZmFiYjdjYThhYjczYjY0MGIifQ"
         }
       ]
+    },
+    {
+      "id": "claim_c78f5d26d98c4c29b400b642287e1699",
+      "statement": "The repository is a single-module Android application: Gradle includes only :app, while the root build configures shared plugins and test JVM arguments and settings enforce dependency repositories.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle.kts#L1-L16",
+          "version": "repo-lines-v1:sha256:3654be6ec34d4cda3ed1550e2359996caba3a356ed16bc9dd51bbc245bc09975:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzY2QxY2MyNDkwNGMwNDZiMGZhODg2ZTcwM2RkMWRkN2IxY2QwYzIxZmFiNGQzMWQ1NjBkMzM2NTMwOWZkNjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxMGIzNmFhNzRhNTliY2Y0YTg4MTg1ODM3ZjY1OGFmYWYzNjQ2ZWZmMmJiMTZjMzkyOGQwZTkzMzVlOTQ1ZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://settings.gradle.kts#L8-L17",
+          "version": "repo-lines-v1:sha256:f3501d8ed4d72ea030435e65d751ec1eaed3dd6eb8d5377564ab5ecdd7577ce2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmNDlmMmJhZDY3MGQ0M2VkN2Y0MjQ2MGE5OWM3NjA1NDZiODM3ZjFiYWU2NGEzZTUzNWE4M2E1NzM3MDUzMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiYWEzN2E5MDAyZWVlODhhMzkzMWIzMTQ4MDI4ZjM1ODkzYmZmMzVkMWM3NTk5ODYwMmM0ZWE2NDUwMWYzZjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3Yjg0MmYyMjM2Yjk2Nzc3MWUzM2ZiMWQwNWU1OTM0ZGFiOGY0MDY4ZDg3ZDQ0ZjZkY2VkZTA4Mjk3ZWE3NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_51b550c9a5b04737b8d6e93be1b6258a",
+      "statement": "Android entrypoints are declared in the manifest: LoginActivity is the exported MAIN/LAUNCHER activity, UploadActivity is an exported singleTask target for SEND and SEND_MULTIPLE image or audio/ogg intents, and the manifest also declares account, WorkManager foreground, provider, receiver, and feature components.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L190-L269",
+          "version": "repo-lines-v1:sha256:9a8b441352675afc6b7731627328f62c5a74365aff3326a56fe81cc5a2ce98b3:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzNTY1ZWQxMDdhMjM3ZGY2MzQwYThmMDA3N2NmMGUxMzg1YjlhMGFjNmE2ZTUwMmIwMjJlYzhkOTQxZjE4MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhY2M1OWJkY2M2NTRiODM0YjlhNWMxNTE1MDE2YjIxYWM0NzlkNGFjYWUyNTRlMDhmOWY2MWZkYzRiZWNmYzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzMDA0MzliZjEzNDk1NmRkMjZhYmJjZWRkMDkxNzE2OWUzYmVlOTZjZGM3NjYxNWRhYWEwYTcxNWYzZjhkMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyNzRhMTZhMGYxYzY1YjAyMDg3NDY4ZGE3ZjQyOTY4YjQ4YTAxYTJkYTMzMDg1NmMzYWIzNTk4MTMzZGY5NjYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L47-L124",
+          "version": "repo-lines-v1:sha256:10e77e11ddf90d15c055454b752388ec1a460f7c12b15152a274400ec457ec32:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2MDU1OTAxMDRlNzYwNjQ3YWMwNDBiYzYwZTliN2YyYjA2ZDcxOTAxYzU4ODRmOGQxMDA1NGVhNjNmN2NiMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NzIyNTU0NzI5NTU1NTE1OTM5ZjllZjVjZTI0YWZhY2YyZmNkMTI3ZjU4OTg0YmQyMzJjODQ1MjU2ODdkYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjNjAwM2IzZDBiMjAxMzY1ZTAyMWE3MjkxYzIyNGFhNTkyOGRiM2JhNTI4YmNkNWU4ZTMyNjAxYzhkZDgxZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzM2JmM2MyYjNmMjY5NDZkMGUxZjZiOTU1ZDU1OTQ4YTkwNDJiYTJjNmMyMGZiZTk5MDM1NThjYTgxNGNkNTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2118e58e6afd4423afe03ff63acde872",
+      "statement": "CommonsApplication initializes application-wide services during onCreate, including ACRA, the Dagger graph, Timber logging, Fresco with the custom HTTP fetcher, notification infrastructure, language data, RxJava handling, and upload progress configuration.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L78-L150",
+          "version": "repo-lines-v1:sha256:58b0b38721cdd10a3dfcf5a349c4c7cc67bc9ae4b1dc811ba4e493a2981359eb:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzYTg3MDQzYzFlMzlhNTU1MzdlMjk3OWQzYzBmYzY5ZTYwZTQzYzgzODliYzRiNjZlODdiZWI1NzdjYmViNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJmNTA5ZGQ2NGY0Y2VmYWZiMTc3YjUzYWVhYmFhOWQzNTAwZTA0MzA0ZTVhY2NhYzZkZTU4NmJlYmQyNTMzYjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyMDg2NDkyYTE0MWU3M2UyODRiODM1YmIzNzI1Y2Q0ZjZiZjY4N2Y2ZmJiYThkYzI0YjRjMmQyZjI2NjdiODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_63d0330cec66486c92782a17ac9fb22b",
+      "statement": "ApplicationlessInjection builds the singleton Dagger application component and exposes dispatching injectors for activities, platform and support fragments, services, broadcast receivers, and content providers; the Dagger activity base injects before calling super.onCreate.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/ApplicationlessInjection.kt#L21-L65",
+          "version": "repo-lines-v1:sha256:fabc7940724a73fe666f95ad15b1481e5efe33f4bf76e18a74fc2f3fc44cb7cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1ZWIyY2RiMTg5MGRhYjgwNTI4NGI0ZTNhNzI2MmVjMDI2NTdiOWZjY2Q0MjY2ODJkMDI5ZDE4NTVkNDRmNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwMTJmZmI4ODc3ZWMwZWI2ZmM1ZjkyM2Y3OGNkNGE4NjVkYjNmZWMzN2JhODI0Y2NiNzRjMDJiNTQ3YjU2MGEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsDaggerAppCompatActivity.kt#L12-L37",
+          "version": "repo-lines-v1:sha256:77a9776aaf376add10581626a4f8e7a50b86bf019419f461b70e1887268ab0d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhOWZkZjI5MzQxN2Y3YzljOGM2YzVhNjg2MWYyYzg3NTc4OGNlOWJjZGZhNTA5YzgzYjY1MWFkMzc0MmNjMTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjNWE2MjBjZGFmZWI0MGVlN2FkMTk4ZmNiYWM0ZmQ5NTU0MDdkYjQzNDdkY2ZmMjUwOGM4NmNiZmEwYzI0YmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e3059b1e69f461fa50879ee0e594bf9",
+      "statement": "The application dependency module owns construction of application context, content-provider clients, preferences, repositories and schedulers, and the app consequently crosses both Room and legacy SQLite/content-provider persistence boundaries.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L300-L354",
+          "version": "repo-lines-v1:sha256:886d8d9064872c375ad7e41961ba44d071e9c8919f024015127be3987f825f79:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMTlkYjY5ZmZhNzkwNzVmMzM3NzY1NjYyODk4MWFiMmMzZjZkNGE5MjNkMzUyYjM2YjUwYWI4ZmIxNDVlZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwOGY5YzU0MmYzY2JlODUwMjgyZDAyNjY4OGNlYTZhMTg5ZmFmYWM4ODgyZjMwZjc1NTYxMzA2MGE4NDlmMGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiN2YyNGUzYTNlZjUxZDJlM2UyYmI0ZTYyNGJjNDJlMjk3NjMxYjRmODNhN2I1NTE3ZmQ5MmIxMGM1NzU2MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVjMWVjYzgxZTBmYTFjMTQ3YTY5OGFjNzAzNDYxZTU5M2E0ODIzOWFiN2Y4MTU5YWIzZDI1MjQyZDgxMDYzMGYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L47-L66",
+          "version": "repo-lines-v1:sha256:9400f705aaf863e6ba4d1f057224fca95a5493881df504e017b2c8c611252d17:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1NDNjYzgyZGE5MzJmNDNiMzM2NDU1YWZiMzYzYTQ3MjE3MTY5NWVkMDFiYzI1NmYzOTk4Zjc3OGMxZjFmZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIyMDE0NjY3Mjg0NmM3OTBjOGFmNGNhNzFiZjJiZjhiM2Y4NjNiMjY4MWI4Y2Q4MTAxMzVmZWJmNmE1ZGQxY2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiMDgwMmE2ODk5MTMyODI3NjE0MTAxYjRiYWE0YTk3NmQ3ZDRiMWRkY2IzNWViZTBlYjFiZGM3YWUwMzYzMDUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationModule.kt#L94-L149",
+          "version": "repo-lines-v1:sha256:1fc0458e42c9651fc831882bf52d1ab9f7fc599b0d8092b109c15cc68af5653f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxYjYwMTk0MWU2Zjc5YTRjOWQzMzA4N2NiMTA0NzYwYTVmOWM5NGM0ZjU4ZTJjNGRhZTYzZTE1Y2Q3Mjk2YWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiMzE1YjE3NmIwMTVlZmE0MTg0NDQ2OWEyMzQxNDBjYjVkOGMxZTg1OGU5NjlhZTNlOTMzMjQ5NTU3ODZhZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkN2M2MzI5YmY4YWY0NDIwZTZlNGQ1NWQyZWJhNjhmNzJkYzlhZmIwZTgwY2ZhNTY5NmU5NTljYzQ0NDFiMjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cfe58f099a934cf18a6dae9334ebec5e",
+      "statement": "Upload scheduling uses unique WorkManager work requiring a connected network and linear backoff, with an in-process guard preventing concurrent UploadWorker scheduling; logout cancels the unique upload work before clearing session data and application stores.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L219-L257",
+          "version": "repo-lines-v1:sha256:9891fce620841da235314da72bd77c5e5f49c3f4cf056adbd6c400c8025a0537:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MmZiYjY1OGRhNzZmMTg1M2IzYTVjNjEwZTY0NWQ0NjBmNjc0ZWQ5YmI2NzRkOTA1ODllMzM1MjgxMGFlY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWExNGZjZTAyZmU5YmQ4MmRhNGJjNGRhMjJhYjhlYTQwMDQwYTQwNmUyMDRmYWE4MjE5YWVlZmFiZDdlNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwNTA0MjYxZmIzOGMxYjA1YjRjMmEwMzc3MzVjZjQ1MmExZTUyMmNkMjhhN2JmNDJiNTA2MjQwZjNkNDJmYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/WorkRequestHelper.kt#L17-L72",
+          "version": "repo-lines-v1:sha256:3177b7b1ca676f49a67a3f782747ab7843e5373305b6f45999584a93f8cbf3d7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMDM5MjE3MTAwZjExNjkwYjUzMzdmMDE1MTc5YWNmMjZkNWM3Zjc2NjU5MGM3Yzg3MTE4YWJjZmRjOWIwNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4M2ZhN2IxOGFjODFlMDk3N2FjZWY3NmNiN2NhNzA5ZjAyZDM5MzE0NmVjZGRlOWNkZDViNDU0NDliZDExNzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3OTRkMDJhODEyMTk0NGQxNzZkMjY1ZTliYjljYzU5ZjZhYjg5MGJjYWRmOGFlZmRlYmRiYmI0ZjJlYTg0NDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d04684199d954f3dac2ce081e740f804",
+      "statement": "The app defines prod and beta product flavors plus debug and release build types; prod targets Commons while beta targets the Commons beta host, debug is unminified with coverage enabled, release is minified, and CI conditionally applies release signing configuration.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L124-L148",
+          "version": "repo-lines-v1:sha256:15f2142d20a20cf4409f7255d7b0db2d49156b427fb610117a0100dfe9020ddc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzNzI5MjkwMWUxZjI2YmNmNGU0MTA2ZGExMGMxYTgzNDc5YTdmMDVhNjJjOTM5Y2JhMjExODdmY2U1ZWQ4NzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiOWZmZGFhOTcwYzY2OGM0ZmE5NTljMzE3NzMwMzc3NTVlMzk2MjY3OWViZWM3MGIzZGU5NzRkYTgyYTI1Y2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwYTEyOWE2M2VjZWRkMTZmODRkNDUxODc0YmUzNDdkODJmNjQ1ODRlMWVmYjY0NDc3MTdlZDg3Njk2YzczNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjYmI0ODYxM2Q0Y2FmNzhkNTU2OTc1YjhiMzE1NzhlNDVmYzQyM2NjOGQ0M2RiOWE0MjFmN2ZkMTEwOThmZmIifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L215-L238",
+          "version": "repo-lines-v1:sha256:25f3227f6c54c44b3d9a17101f73fa032ec5c213a263a73b40ef3e76a33fe431:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZmQwYjg5NDdlYjEzOTZiNzk1NDU5NWRkMTM3MDg5Zjk4MDBlNmYzNzU0ZjhhMjBlNjJkNmRkNTZkNGJkNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxZmVjNjhjZjAxMjUxZDBmYjNjNjQwODUyMDgzMDE1YWMxNDZkNTY1NTMyYjk1MmM5MzQ1N2QyN2JlY2NjMWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YWY1ODBlZWNiMTI1Y2QzN2E4M2RkMzM3ZWNkMjU4NjUwZGIxNWQ1MWFlYmIwNThlZWVkOWQwYTE5NzBiZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwZThhOWEwMGZhYjQxOTMwMTI3ZmFjZDM4MzBiMDU1YWEwZDgzYjJlYjdjNDI2MzZjN2JjYjY5YWY2Y2ExNTkifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L42-L112",
+          "version": "repo-lines-v1:sha256:c2e076f4814f997f91de4cd2a2cd0c675b989b4ca4d2c486e573f44262a51da7:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDVkYjA0OGQwZTY0YTZhNjQ0NzhlMTM0NTYxMjU3NGRkODY3ZWFhMWU3ZWJmOTE4OWFlODkxZDMyMmZiNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwZjc1NWZmMWViOWQ4ODljYjQwOWZmYmFkMjFjZThjNDQxMmEzYjNmYzE2NzUwYWJlZjE3NzA3ZmQyYTBiYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjNDY1ZWEzYzkxOWUyZGQ3NDAyNTRiZWJiOGMyNGY0NTZmYzkwOTIzNzhkNWM2NDI2ZmJjZDI4MmNhNWUxOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a606146224b4fcc8fc7509d1ee873f9",
+      "statement": "The current Android CI runs on JDK 17, injects test credentials into local.properties, runs ktlint, detekt, beta debug lint, PR unit coverage, and beta/prod debug APK assembly, while instrumentation and non-PR unified coverage steps are commented out.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L17-L42",
+          "version": "repo-lines-v1:sha256:b514a35fb621c6c5394beecede1019fa4c85872c37bffdcb752cd1bceacb0fb4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NjVmNzMwNTI1ZjdlOTc4MzZhNzBjNjk4MjE4Y2ZlOTJlMzNmZTc1OGU0ZDVmNWU0ZTM3OGE2Mjk0ZTZmNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0NjEwM2RjOWEwZjAyNTRkNzBjNjUzYjgwYjE1NjU2MjE0ZjNjNmY2OTk0MWY1NTljZTA1NWRiMzhhYmZmMmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3M2ZhZWJjMTM3NWUzNTg3M2E0OGVmOTQ5MTdmYmIyZGEyYjQ4MWY0NzRkNTkxYzcwZDgzZmU2OGU0OTBjNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiZDU2ZjRmMWY3YWFhY2IxNmJiNzVlNTE0MjY1MTE4ZTJmZGIxM2IyY2NmNDAxYjQyMmM5ZDY5ZjkzMDYyZTMifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/android.yml#L64-L95",
+          "version": "repo-lines-v1:sha256:6e25668bae4b428c24353475688942223d72e566d348b65d74d8f7f75cb85076:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzYTcxZmQzNjVlNzQzMTk3NjEzYjE3MmRlMjY4MmFkZDBjOWRiOTNjNDlhMzY2Njg1MzE2ODMyMjdmMGVmMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ODI4ZmVlNDg4N2ZhYzhkZDMwMWNiOWRhN2Q5NGYyZjA1YTQ1OTY0NTlhZmFlZmVjYjQ1MDU5M2QyZjljOTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjYmM4MDM5NGQ3NWFjZDMwYTk5MmMyYTk4NDQ5NTYyYzVjMzdkNmM5NzA3NmRiZDRiNDMzOGFjOTFkYTkwYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmMjkyMGRkZjczMDUxYTNjOGEyNmUzZGFmZTJjNWZlNTJjMjdhMjZlMTRmZmY1ZTA0MjQ4NDQ2ZTYwMjg2YzgifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/android.yml#L97-L120",
+          "version": "repo-lines-v1:sha256:a2ede20ce5ce11dbb585d4476f6da5a8ed5c0500b51a800b175edbcc66c39f63:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4MDg0MTUxMmMzYzgyMWFjOGMxYjQxMjFjZTc1NThiYTM2YmQxZmJjYzEwYThmM2VhNWE2MDZlNjZjYjhkYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkNjRjYjljODIwZWU1YWU5MGU3YzYxNzA3NjBlNjViMzcyZDVmYzE2ODcxMzIxN2NmZjI3MjNkNzZiODMzYWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmZjA3NjJiNDhmNjBlZjlhYjQ0OGYwOTQ4YzA2OWM5YWU2ZjhiYWZkYmEwM2VjNmIyNzY3ZGEzZGRjYWQ2YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc15f535ff2a4344bffdc3fcdbda4ba6",
+      "statement": "A safe repository change workflow starts from the manifest and owning production source, follows UI-to-repository-to-storage or API boundaries and asynchronous worker paths, reads focused tests as authoritative, and validates with the narrowest relevant tests followed by matching analysis and variant build tasks.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L38-L95",
+          "version": "repo-lines-v1:sha256:66538ddbb0ae7632db00903b4f9a88a15f7af4fefda433ba3fccf7b594d04c00:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzOGExNTlhZDg0YjllMGI2OTVlMWJkYWYyMTJjZGQ1MmI1ZjI4YzVjODdmNmE5N2MxNjQxNGRjYmM1OTk5NmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ODI4ZmVlNDg4N2ZhYzhkZDMwMWNiOWRhN2Q5NGYyZjA1YTQ1OTY0NTlhZmFlZmVjYjQ1MDU5M2QyZjljOTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2ZWFjMmYwMzRmMGJkMTc3MTYyZDliOTVlZjJjOGM5OGY4NDg0N2U0ZDZmYzFlYTY2ZGUwYTRlNDNjYWJhYjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmMjkyMGRkZjczMDUxYTNjOGEyNmUzZGFmZTJjNWZlNTJjMjdhMjZlMTRmZmY1ZTA0MjQ4NDQ2ZTYwMjg2YzgifQ"
+        },
+        {
+          "resource": "repo://AGENTS.md#L5-L14",
+          "version": "repo-lines-v1:sha256:965b11a851738f08a591fcd7200331a525a9902e67b614ce6d86c6a4283402a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkYjQ2MDY2MGY0ZDUwYTI1YWNhNzc5NjEwMDJkMzk3MDVjNjQ2ZGMyNmE4YmZhNjZhZTZmNjkwOTU5YzY5NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiNTM5NTNiZmI3MmMxMjYyYmJhZTJlYWNhNzJjYWJmMWFmNDk5MjdhMGJiYTExNTdiMmQ1YmRiMjg1YzRiZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhZmI5NjA2ZjViMGQ4ZjYzNGIyNjAzNzhkNmVjZTI1M2I1YzE0NDdhOWJmMWQwNDkzNDk0NDBhOGI1ZWJmMDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwODlkZjkzZjhiYTU3YTRkZGJmZDhmMDEzOTYyYzM5NzhjZTRkYjY4MTk5YzRkYTY2NjY0OWIwOTk2Y2VkYTkifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L52-L79",
+          "version": "repo-lines-v1:sha256:f3eb63a0a0350e88770f6065c2bd894f101a1822d0298b9a3f5d7edef3985894:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NTQyMjk1MGE3NjJjOTE3ZDcwMDc3NTJkY2MzMzRiOTM2NTNkNmVjNTViNzFkYzQ3MGZhODZkMGRhNzQ5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3MWRkMzBjZGYyNmM3YTRlMWY3YTQ2MGZjMDI2MWRiMGY3YTcwNGNhYjQ3OGE1YTI5MDdkNDBkMjY4OTE3MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZjRkYWY2ZjQ4ZGIwODE1ZDBmNmNhYzg3YzFjZTRjNGE5Zjc5ZGVjNThmZmE0M2JkYmUwNjRiYjRkYWNhMzMifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:ced9281cd759a30301b9ccff05b5836e1e2bf290405c816e8fc912c92297ade3",
+  "pageVersion": "sha256:9ece1bf83d5d78dd3c240c97aa258ae43c5c51c44c8439f2d684c238a64f062f",
   "claims": [
     {
       "id": "claim_923ab7dc772840a68ae348dd6b1cdb42",
@@ -45,10 +45,240 @@
           "version": "repo-lines-v1:sha256:5ab8a9ed267d06c2f72e8b167fd7182e06f9ed56940342f7c09ccbc867af36f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzMWQyNDQwZmJiNjkwMWU4NWJlOGJhYmIxNTEyMDkxMTQ2YjBiYjJkZDJjMGNmYTY1YmU2NTYyMGI2NjNjZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUzZWEwYmU2MGE2NzE3NjA1NmM3MDdmMWE5NjI2ZDE1MmIyN2U3YWNlMjBkZmMwNjIxMmZjZjU5ZWExZDUxZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhYWIxZDY3ZmI4OGE1N2Y3ZGEyM2Y4OWRhYjEzMzFiNDk1YzFmN2Q0YmVmM2UxNDU2YzY4ZmZmYWY3MDUxNjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhZGZmY2I2YjgyZmJkNjYyNGVmNDFkNDg5NTMwYTk4NzhhNWU5MjAwZGJjOTYzMzE2MmNiMGMzZGQzZTZhN2UifQ"
         }
       ]
+    },
+    {
+      "id": "claim_27a55f16d4b048b2a5ea6618d6ce56a7",
+      "statement": "Review candidate selection is remote-first but review completion is local: ReviewHelper shuffles recent MediaWiki changes, keeps supported image extensions, rejects files with existing deletion-request pages, and filters page IDs found in the Room reviewed-images table; ReviewActivity records a candidate as viewed, including skipped items, before presenting it.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L142-L153",
+          "version": "repo-lines-v1:sha256:855a382de49e52b152c236ca0f2c4da7943d0a2f00a9571b8ba21c7091ab0981:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwOGVhNWMwOTMyN2M4NTAzODVhZGRkMzY4ZWRjMzY1ZTc5MmUwMzc4NmM0MjcwMDc2NzZhMjI4MjhmMGQ2OTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4MDU1NTIyN2IxNGM1ZmEwYTQ0NTA1NjhmM2U0N2RmNzAxMDg1NjFlZDU4NjM3ZTZiODlkZDc5ZmVhOGE3NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5Njc2MzdmYzQ0NjUzYzUyYWU2NmM1NDM3ODNiNmEyMGNjOTYzMzdhNzUzZWM1Y2UzOGI5NzYzNjRjNmEwYTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L191-L205",
+          "version": "repo-lines-v1:sha256:bc36fbd357924e35517232f88013d44f77300d15a11c366b482bcd75423325b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlN2JjZDM2ZWY1M2I0NDUyM2U2NWU5OGQxOTQ0OTkzZTBmZjE3NDZmNTUzNmMxYTUxMTc0NmYzZTAxZTc1NmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZjljZDdhZGM3MDZhNmFiYmNlY2M4ZWI2MmNmYWM5NTFlZjFmNmQ5MmYwZjEzOWU3MDYyMzY2ZTk3MjliY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhYWIyYmZhYmM2ODA3ZmYzYzAwZTViMGI0NzY5ZTE3NmU4ZmZiMmI1ZDhiYTRlYmQ4Yjc2YWZkY2EwM2E5MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewDao.kt#L11-L29",
+          "version": "repo-lines-v1:sha256:e67cdd8736cad1266e2404b6d867f8fae61b48ebcc24fa2b01d5ace5d27be5df:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NGY1MTNkNWJkYTI2NTM4YjAyNmMyYzVjYjdmYjFiM2VlN2E1ODJjYTQxNzk5ODY3ZWEyZTgxMjdmODQ3MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzZjMxN2NlMTkwNjNhYjdmYzI5ZTY2NDU0ZTcyOGRhZDdjMjBkZWRhNmFiYjk2ZGE3ZWU2MWEwYzFhMjkxNWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliYWMxMmM4ZDkxNmVmODlhYTk4YTY0NjgwYjQyYTgxZGNkNzU2M2FmNzRhNzQ3Zjk0YzJlMjEwNDljNWM3OWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewHelper.kt#L119-L148",
+          "version": "repo-lines-v1:sha256:64dc49359b8a29341798fc02885799ff3093250fc051677e3ac0def1f2d4b96c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwZGM1NmY0ZTNhZGM1ZDNiYmMyNTM0NDUxYTI0ODlmNTdmNTk3NTA0OGY0MTQ2OGUzZGMyNjA1MTBiYjg3ZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkM2U5Y2UwZmM5YTJjNjQ3MjE4NWNkYTYyZjIzNmJkOTFhMDc0ZDA2YTlmOWUwN2E2YTBlMTA0NzRlMmQ5N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewHelper.kt#L26-L80",
+          "version": "repo-lines-v1:sha256:5cc478e1eccd2aa31749c0ce33d162a37a1ff98db8307479f110e65b472858b8:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlNTMyYTUyYWZmYTVhYTgzY2ZiY2UzNGQ5NjkxNWRlMGViMjBmZGY5ODkxZmNlNzk1ZWNjNWE2YmE0Y2QwMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhN2JjNTgwZDBmZDI4ZDk3MDdkZWE2OGFiZTFiMDVlODhiNzhkMzA0M2I2MWM4Y2VlZWM1MDkzMWI0YmY2YTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExMjQwMmFmYjZjN2E4MDg2MTY5YzMxOWZhZjRkODJhNWFjY2U4ZDAzOWY3NjYyZTQ4YzNkMjVmNDA5ZmUyYjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f7158de53b234c1da70e80debdca471c",
+      "statement": "ReviewActivity skips files used on wikis, files uploaded by the current user, and files whose categories are all hidden; it loads first-revision information for a displayed file and preserves the current Media across activity recreation.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L161-L188",
+          "version": "repo-lines-v1:sha256:b765661a6b1ba41c32cea0dfe6b9450b64fc9b82dff28cc826206a7f15f7afae:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMDZlYTg3YTYyNTk3MjgxOTQ2NTBjM2Y5M2RkOWUyZDVkZjBkNzYwYTVmNWE4MTgzOTE1MTVmNDU4MjBhZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0OGNlY2QwYzc5MWMxOTY0ZThkNGNhMjllMDA5ZWVhNzcyYWM5ZmYyZGZiN2YwMjA1NGE0MjA0ZDM0YmRmMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhMWEzYmRmZmQ0YmYwMGRmMzdjYmI3MzE3ZjM3YjI2MWJhNTU2ZDM0MzhhZmYyOTIzNGVkODRkMGZlMTQyYjAifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L191-L229",
+          "version": "repo-lines-v1:sha256:f8383f8cf34eee75f8527762b27654b07587b0df0b16b4ebb75baf803727be94:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxY2E3YWJiNzg3Mzc2NTY1ODQxNzRlNjcyMGIwYjk1MGU3NmU0ZDlkNjJlMjdhODJiYWNkY2I4NGViNTZkYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2ZjljZDdhZGM3MDZhNmFiYmNlY2M4ZWI2MmNmYWM5NTFlZjFmNmQ5MmYwZjEzOWU3MDYyMzY2ZTk3MjliY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2Yjc1ZjJkY2UxNmJiOTgwMTI0Njc1NWYyNWE0ZTYzZWI2ZTM3MmZiZmIyOTlmOGY4YTQ3YmQwNTRiZTg2M2QifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L234-L247",
+          "version": "repo-lines-v1:sha256:31b6c4be7380cfbb6daa13521d3051c88f333615eba34e886bda15263c9394b5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzZmQ1YTBkZDVjNjdhMzNkOWYxYmI2MTNkOTg0YmM5NGE3NGNiMGFlZDk5ZjE5ZWZjY2FjMTZmZDg4YjRjMTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1MzJjMzNhMWYxZDA3ZWU1NzY5MDE4MTAyNDU3NmEzYzVmMWE0NGM5YmIyOTAwMzliYzBlMThjOWJjMDIwNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3NDk5ZmY0M2NmMzY3NjY4ODZjMjljMDdiNzkyMGJjY2NhOWM3NzEzMDliNzk1NDlkNWIyYjQxYWUyMzhhZTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewActivity.kt#L52-L57",
+          "version": "repo-lines-v1:sha256:c3ab767884450cd9214c76ed5f2d4f15d038147c01aaf7b1bf06184ab9f17ca5:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWM0NTNhMjc3ZTExOGM0Mzk3NDk5Yzk4NTk5ZWVjZjQyYTIxN2ZhNmM4ZjY2YzNkMjY5YWFmZjFmYWI2MmJiOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTU5YTNiNmI5ZmYyNGRhYjY3NGM0MzRkYWZiODNmZDUzNTUwNzY2ZGI4NzcxMmFkMjU0ZWNlN2U3NjlmZjBlZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDE1ZDdiZTY5NTI1ZDc0YzcwZjU4NzQ4ZGMzZWIxYTE0MDRiMWFjNTUyNzQ0MWFhODUzMmUyNjI0YzNhNWYyYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_df79e1f59b534bc19f7aea0183b22f62",
+      "statement": "ReviewController separates review actions: spam and copyright reports delegate to DeleteHelper reason dialogs, wrong-category review appends the subst:chc template through PageEditClient with progress notifications, and Thanks targets the first revision; invalid login tokens on Thanks trigger application-data clearing while ordinary failures are logged or represented as false results.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/ThanksClient.kt#L17-L45",
+          "version": "repo-lines-v1:sha256:8b557ed92549c8bbfebc441ab7a5211db60bc60dd3e8fc11f9cf9e1f828719e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwMzBlODVlNjU1NjkxYWQxYjc2MWZmODcwYTdjODZiNDQzYjcyYjQwZDUzYzg3MjlhNTBiZmUzMDQyYWRhZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwZjE0MjA4MmViOWJhZmRlOTA0ZTM0NWNlZmY2NjhhZjBjN2QzMTg0ZWU2YjAzNWI4NjBhOGIwNGRhYzg1Y2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewController.kt#L172-L208",
+          "version": "repo-lines-v1:sha256:12d333b7928573836850c0d14bd03eb1012da393b3e28bef0dccc5b6e118f017:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5OGU1ODNhNWFlZDQ4ZmMzZTJiN2E4ZTJiODQzMWUxNThhZjJlZTZjMDM5OGY3YTI0ZWMyMDZhNGUyNmIxNjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiZGQyYTRlZTI3ZDRlZWVkMjdhOTNhNTMwZjdiYjI0ZWVkOTJlZmQxMmNmYjFmODU0OGEwZWJlMTQ1MGI2YjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiMGI0MjlmNjViNWM1NDU4YjIxYjU0ZTU1NDBjOWQ3OWRiMDQxMTI5YmQyZTZjMDZlOTY1ODYwZGM3M2E3OGEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewController.kt#L64-L138",
+          "version": "repo-lines-v1:sha256:2e6511daf8c4bb8cc3a1bcc67a56e6af9ded77fca7bc657d852375e989b4c069:eyJzZWxlY3RlZExpbmVDb3VudCI6NzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwYzNiZGIwOTNlNDU2ZDc5OWJjZmI0NDRkY2MxNGU4YzhlMzlkY2NmOWY5MGU5NTA4NDhjNzMzMDVlZWMyYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5Mjc5MmYyMjc5MjZmNDUxYmYwYjM1MjYxNzUzYjVhMGVlODlhY2VlNjAyNmE2YTMzZjc1MzhhODQ0MDU1MjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3MTUwN2ExZjAzMzQwYTQ3ZmU5NTNmYjIwNTRiZDcyNzVkNTAzYzNhZjI5NjY5Y2VlOWExN2I1YTQxMGFlZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2N2MyOGM4ZWY0YTM2NWZkYmI2NDRiODI4YTM0NzM5NjUwYjFiY2E4Yjc3MDExYmYyMjZkOGUzZmZjNDZiZGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7af2d536b27c4fadae0fb07a0f00668b",
+      "statement": "Deletion reason dialogs require both a selected predefined reason and nonblank notes, serialize selected labels from English resources, disable review controls while submitting, and distinguish cancellation, ordinary failure, and InvalidLoginTokenException.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L209-L245",
+          "version": "repo-lines-v1:sha256:bde4454c12d13612aba6ba927757a3a621951cb60684fddb2886ed3142fd8dc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5OGU1ODNhNWFlZDQ4ZmMzZTJiN2E4ZTJiODQzMWUxNThhZjJlZTZjMDM5OGY3YTI0ZWMyMDZhNGUyNmIxNjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDZjOGVhYTg1M2RmYjcwNzIwNTFhNWY1OTYyOWJiNzZmMDJkMTMzMDQyZjY0MTQzNDNmYTAxOWFiOGU2ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4YmMzNDk3NDMwMDlmZDgyMThjMjkzODE5OGE4YmQwMDVlZjNiZjMxY2ZjM2RlMWNhNTI5MzM5YzQ0ZGM0YzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwN2IwZDc3ZDA2NmVhMjk4NWJlMWJjMGE1OGQwMzk1MzQ4ZjM2NmRiZmQ5YzJmYzA2ZDE4N2FiNDJiZGY4NDQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L283-L359",
+          "version": "repo-lines-v1:sha256:8d3ae7e2d51f568726b485741943b8733799335c292cc9636d521f44cefa0e6b:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2NGRiODgwN2Y1NmE1MDY5MzA2NDE1NDQzNzg5YmZiMTM5ZTZkOWMzMTM4MGRjYWFlMTczYTc4ZTM4ZmExNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkYjMzOWMxN2Q0Y2M1NGU3MGM0ZmNmZWNiNjExYmI5ZTdkMzYzZjI1YjE4ZTA5MjNhMWQzMDZjYzk1OTI0ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyMTcxNDEyN2M5ZDk1NjIwZDg5YTlhMjBiNjA0YmIxMmJiMDA2M2VmMzU0ZDZiZmY2MzI2MTA4OWJhMjBkNTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhYWUzZTVhMGIzY2UwODhiZTFmY2UxOWZhMGM1OTM0YmVlZDkyYWUwNDhhNjZlNDc0MjE0MzUyYzIyMGNiNDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L363-L387",
+          "version": "repo-lines-v1:sha256:012ea7004cc8524deacc9b6454546f07c6b4e6a8315fdea1260ac81968bce952:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhNmY3ZTIyYmRlZTdlYmQyN2I0OGQ3YjVmY2E1MjNiNzBiMjU2YWUwZTdjNjcwMTQ2MDZlZDBlN2JlZGVlNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2NzYzNWM3NzcwYWE0ZGQwYjhhZjFlZGU1OTlkOWZhNWE5ZmFmNWY5NmY0N2FhNzcxMjg5MTQxZDc4NGUxOGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhYWUzZTVhMGIzY2UwODhiZTFmY2UxOWZhMGM1OTM0YmVlZDkyYWUwNDhhNjZlNDc0MjE0MzUyYzIyMGNiNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_78676a501ce4482aa885a98d195759a9",
+      "statement": "ReasonBuilder can enrich a deletion reason with upload date and global file-usage count and redirects to login when no account exists, but MediaDetailFragment currently discards the enriched value and passes the original reason to DeleteHelper.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt#L104-L116",
+          "version": "repo-lines-v1:sha256:5b7b8be06d11183d29e923fc9781efd0b046d9cdd50bbabd282918680b670ca6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0NTAxNzRjYTQ1OTdlNDEzOThjZTNkNDczYzZkNWVkZGM2MjkxMjM2ZGE0MmZiYjhmOTliMTQ4NTk1OTQwMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt#L39-L47",
+          "version": "repo-lines-v1:sha256:81cf5f73badf4158ea3fbe02f1340e212dd46494178fdb08ecb2031f1260a207:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDFlNzc1ZGI5ZWUwOWE2OTRhYTYzOTg1NjExMGZlNDI3Yjk2MmZiYjliOThhODQ2NmFkMzA3NTQ4YTFkMTcxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTM2YWM5YjY4ZGIxY2RhNDlmYWJhMmJmZDA3YTdmOWIxYWI5ODVkYTAwY2E5MTJmNWU5MDA2ZTEyMjcwY2Y1ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzQ3MTg5ZjU4MTY3YTAwNDA4NDhmZjAyZWQ0ZmU4MTE5YmJmN2FjZDRlOWZmNTA4ZWI1ZTNjNWU3MTVlYjA4YyJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/ReasonBuilder.kt#L61-L81",
+          "version": "repo-lines-v1:sha256:7bc50a404bd4515bfa35742fc989e74e6263e36956d611359e4a8499fc38560f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YmIxYTZiZDg4OWZiNzA2Njg1NGQ2ZDhhNzAzYzc4ZTBmYjJiYWY4YmQ3NjE3ZmQ1OGFiOGVhNGIxZDAxNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/MediaDetailFragment.kt#L1819-L1845",
+          "version": "repo-lines-v1:sha256:24f91313c288f5bfb7d2c479b1fd5abfa8f112843145d82115c76a90b9e6b506:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODAwMTJlOGRiMTllM2UyMDhlYTZlZmE2NmZlZjcwMGRhMTJkMjFiZDFkNGE5MjFhMWJmYzFjYWVmZmFlNDEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/MediaDetailFragment.kt#L1886-L1909",
+          "version": "repo-lines-v1:sha256:dc9b6d526c3066c03012d283f6a7de7d47c1cdf886a2284bfacbc4a3e886aecb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkYzkxNWZjZTVjYjg0MTM3NmQ0ZDhhZGJkODdmNTAyZDk5MzJiMDdmYTgwNDAzMjQ3NjNlNzZjNDhmZGYwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNzcxNThiMTRhNDMwNjAyOGZmNjZiMTJjOTM1ZmJkYjMxYjVmOWU3NGNiYTQ1MGZkOTQ4OGQ2MDk5ZGY0OTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhN2U2ZTJhM2ZhZDlkNmFkMjkwOGZmMjk5NWU1NDlhZjUwZWRlNTdiYjhjNTk0OWM1YmQxZDU5NGY5NGU5M2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_699ddb03c52947a0938b8f754cb20ee2",
+      "statement": "DeleteHelper performs deletion nomination as an ordered four-edit chain covering the file page, deletion-request subpage, daily log, and creator talk page; a false result raises Failed to nominate for deletion and stops later edits, so earlier successful edits can remain applied.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L169-L199",
+          "version": "repo-lines-v1:sha256:07671af03b8bcc15f22fb316e8946c6fb6727c65fdd12690480f3fecaa580d5c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5ODQ2NjFlOWJhNGQzZjE3MGNkZDMxYjQwYzQ4YmUxMzRiZjAzNGNiOTJmMzlhNTUzYmNjZjE5YWFkNTJlODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzYmE5OWQ0ODc1ZDA1NDE0MWE2NjYxYjE5MmM4YTBiZTYxYjEwMjNkMWU1ODE1MDEyMDgyY2QwMTRjYzk1YmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2MjhlNmE3NGZjZjI4ZDU4N2JkZDdjOGU0N2YyOTNmYjAyOTNmOWFmYmI1YTUzNTQwMDk4ZTI4NjljZWM2N2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlZGJmNWU3YWY5Y2YyMGQwZmYxNmZjMTJhN2ZhN2YzYTg1ZTJkYzE3Njg1NmIzYWU2MTcyNjkwOGVkMDQ5ZGYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/delete/DeleteHelper.kt#L95-L167",
+          "version": "repo-lines-v1:sha256:ae1d6b806cbb47e25334cef9c5e049247fd00d10f6fdf6df602cfa9931802190:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjOTIzOTNlODQ0NTQ0MmVkMzI5N2E4MGJkOGU1YjJkYjYwZDE3MjNmMjNiYjg2MjExZTU3NDQxZDI4ZmI1MWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzNmFjOWI2OGRiMWNkYTQ5ZmFiYTJiZmQwN2E3ZjliMWFiOTg1ZGEwMGNhOTEyZjVlOTAwNmUxMjI3MGNmNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0ZDFmNmRiYzI5OTgwZTFjYmJmNWI1YzU2MzU4NzlmNzg4ODU5NjdjMzAwZjBlMDEwMDBmYjRjYzA4NGVmMmQifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt#L126-L220",
+          "version": "repo-lines-v1:sha256:8b8fc8f648b8c2e73b572762ef4f6579f9d709d5ba79d5ef4f310d576ad9332d:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkMzNiYTg1OGYzMmViMDQ2YjExMzU1NDg5NzU4YzllZWQxNWExY2I1MWQ4NTFhZjFlNDQzNjAzMDRiODIwOWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwNDU1MTlmMzcxNGY1ZWEzZTU4NzUyZTdlNGNjZWNkNTZlN2EwZmU1M2QwYTJhNjEyYjgzNDg2Y2Q1MDQ5MWQifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt#L63-L124",
+          "version": "repo-lines-v1:sha256:bc94c0226d4440cfccac55c74a28d81b1e16fd5410c5ab074e0578ebf928e2e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiMGRlYmY2M2UyZDQwMWI1MTdmYmEzMWIwYWZlM2ZhZWQ5OTE4YTAzMjViNzQ1MjdiZTRjMzczNGJlMTA4YzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YTFkOTM3ZGJlMDUzNzVjYzJkYWFmYWUyZDRlMWJiM2E2NTI0MDg2MTg4YzY2Yjg0MGUzZjQ0ZThmYjZhOGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3d10f9419c2646769c710d6528df9102",
+      "statement": "PageEditClient obtains a blocking CSRF token for authenticated edit, create, append, prepend, section, and caption operations; it maps successful API responses to Boolean or integer status, converts non-token exceptions to failure values, and rethrows InvalidLoginTokenException.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L137-L184",
+          "version": "repo-lines-v1:sha256:dddfc95253705b3c059613b604b6fb8e5ea16e66747301aca02d3275fbd26dce:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0OTdmODRjNDdmYzg4N2Q1ZTg5NTc3MzI0YjMzMTcwNDRmYWMwYzA1ODg0NDgxYTdiNGNiODMzODEyOWU5MzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1OGFiN2VhMWQ4MzcwMGM0OGQxMzNhNDgyYWVjMjVhOTQ2YjBjMjgzNGFiNTM0ZTZkZWIzOWMwZDExYWFlODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkNWVkNTdlNTdiNTdhMWYyM2RhNjBjMTJmMjRkY2IxYzIzZWFmN2RkMTYzMmIzMWU3OTc3MTAzN2U3M2JiMzcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L15-L43",
+          "version": "repo-lines-v1:sha256:c0dd07f4e4ee89363b6d6cbbeb323051bac86658d8eeb253f490e079e89aa879:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0NGJlZjQ4MjM1ZDgyMzcwODdmODUyZWQ2NGVmNTY2ODY2MzQwOGVmZTQ4ZTg2NWU5NWY0NWI4Nzk5MDc5YzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhOTdiNDUyZTI1YmFkNGMzNGIxZjc3OGI2YTc3ODRlZGQ0ODRjNzc5MTE1ZGQyMTBmMzMyOGZmMTNiN2JiYWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUyYjc0ODVlZTBjNzEyN2RjYzZjYmI1N2U5ZGZjZjVlZTM4ZjUyODIyOTcwYjA3YmZiYTI4NmY1MDA3NWQ3NGUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L45-L79",
+          "version": "repo-lines-v1:sha256:635735a992a4933b3878c15adc7e682b955f91f22a73e79b054bb9c6f6c65ef3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyOThhNGIyYzI5M2I3MDBkNzA2OWFmOGVkMjJmMDM3MWMzMmQ3ZTdhMDZlMjFmOTZiMTgyNzc2OTM4MTg1ZGMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditClient.kt#L81-L127",
+          "version": "repo-lines-v1:sha256:3c12436e6c1c485596d1803f88dd9d2c059e0b8bc9d1543aac78670f5dd86c30:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmMTE4N2ViOGRjYzRlOTM1MTM3OTBlZGFhYjgyYmZiMzQ4OWNhMTZiMDkzMzc2OTNmZWVmNjE3MDRjMDM4ZjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5884a5991d445c1949a9e82389191af",
+      "statement": "DescriptionEditHelper uses PageEditClient to update file descriptions and Wikibase captions, then emits file notifications and returns success based on the edit result; MediaDetailFragment hides these authenticated edit controls for anonymous or login-skipped users.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt#L34-L80",
+          "version": "repo-lines-v1:sha256:62b7746684e88fcdfa5a5e546077ae03ea16b11799344894e3de3405cd41505c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMzAzN2I0NzM4MzZkOWQ2YTIxYWE4NTA5Zjg3NzQzZWY4NzMxZTI0MzBhNmMwNzlkMmYzNzFiMjg4NTU0YzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3Yjg1MjZmYzJkMDM5YmFjODc0MzM3ZWQ5NGM4N2EzZTU5NGIyZTg1OWZjOWU3ZWM0ZWFkNDUzMmM1ODRjMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt#L90-L113",
+          "version": "repo-lines-v1:sha256:53d380e53bbfb0f58b5516558adeed4de6de05527961b9dc06492cd6d5cb1324:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YWMyOThkMTMwOGMxM2VjYzk0MDI1NGNlY2RjN2U3Y2ZlODFiYTI1YWM0ZDgwYzAyYjE5ZGU2MjFmMTBjYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYTc5OGRhNTUyYTA0Y2Y3MjhjOGMwYzViZTNiNTg3OGYxNDNjMjI1Y2FiMDVmMjc1NjZhNGU3ZmRlYTUwMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1NDZlY2U1MTNlYzVkOGU0ZjM3NGI5NjYyYWFjYjA5ZDNjYmE3ZDY3YWUzOGNiNTI3MzhjMTg5YTUzMzI5YmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/media/MediaDetailFragment.kt#L337-L350",
+          "version": "repo-lines-v1:sha256:d219e9748f345d52d70024dc5f70054ec82d06a2fd858084e5e524dcb591ac2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlYmY5ZjkzM2E4OTNlNTBhOTdjMzg5MjQ4YjRiZTBhYTc2YTQ3NzdlNzA3ZDVjNTU1NjZhN2FlNGY5YmI4MmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlNmQwNTA3NjQ2MzJkNThjNWIxN2EwOWNlY2NkNzNiYWY1NzAzMjIyYTgxYjJlM2ZkYjIyM2RiYTc0NDg0NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxOGQ5MWEwMTM5MGE4ZDQxMGMyYjMzMjBlNjcwN2EwZjhlNWUxZDhkYzY4MjJhZGE3NzYyNWU1ZDg2OTU2YjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_11d4614375aa4b3ea5f6bb50a5e2285f",
+      "statement": "EditViewModel owns a session Jpegtran instance and implements rotation, lossless crop, and blur by saving new timestamped files rather than modifying the source; Jpegtran failures are logged and rethrown, and the ViewModel cleans up on clearing.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditViewModel.kt#L14-L57",
+          "version": "repo-lines-v1:sha256:a2cb7dade01563661b2737d783e05564daa1fbc40d8c009409f186cc3b8a9b4d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzYTUyMGVlMDBiZTU3MWVmNzRmODEyMDk5MjM0MzE5Y2EyZjA0OGNjZGVjNDNlMjg4YjVmODAwZWQ3MjNiYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1ZjI2OGQzMTA2ODhmZGUyMzQ4MDE1NWMzMjQ4ZmNlOWUzMDQwZTk0NzM2NTk4ZjRhOGE0ZWNkZWY4ZDhkOTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditViewModel.kt#L59-L95",
+          "version": "repo-lines-v1:sha256:9d07a944498ef0b700eae6bde83ff342366509cdccd7f0b098fb6c9c20ad95d3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlODEzNjEwMTQ2YjM5NjQzNDIzZDY3OTQ3YjhkMGJhZDI1ZDE2NDEzOGU4MzQ2NDhiMjE1NGM1MTgyNGI5ZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjN2I0MWY5YmM2NDg4YjgwZGMxOWU1YjA5YzUxMDdhNWY1Mzk4MDhjYWIyNDkzMWMwYjFlYzBjYzUyMzE4MTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditViewModel.kt#L97-L155",
+          "version": "repo-lines-v1:sha256:de7054a2917ad0744dc6be40a6826a86129818ecbd9f303de9688f651e7612a0:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cd174131529f480e93ca02befef354ed",
+      "statement": "EditActivity commits pending rotation on save, returns the edited path as editedImageFilePath with RESULT_OK on success, and catches save or operation failures to show a toast without finishing; crop and blur operations update the current output path and reload the preview.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditActivity.kt#L405-L495",
+          "version": "repo-lines-v1:sha256:1a7864e1d16071d28170789c069468ff2a8f1cd2d59b091ae8660fbaceb97b63:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxYzY4OWI3NmQzYzA1ODg4OTU1MTUzNTI2OGVlNDUzODFmNmViZjMyNDczMTIwODBlYjFhM2ZlMDJjZmFlZmIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/edit/EditActivity.kt#L561-L603",
+          "version": "repo-lines-v1:sha256:78138953f0c812b014a87f187153b8dad605e9e92b95af6f72ee988e5ced8496:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkOGQ0NTUxNjU0NmE0N2QxNjE1ZDkwYWUwMWExMDdjODI0NjZhOTc1OGU3OTUzYTVjMmRmOTY3N2YzOTUwYWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4001295d42634fc2ad645a81945b5aec",
+      "statement": "Focused tests cover deletion-chain success and stop conditions, missing creator failure, reason-dialog validation, review action delegation, notification publication, and the no-first-revision Thanks guard.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt#L126-L160",
+          "version": "repo-lines-v1:sha256:0d7326c2b3387d7df6c27f435354a4876f5e6e4bdcd4f86f206c80c925b70ed2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkMzNiYTg1OGYzMmViMDQ2YjExMzU1NDg5NzU4YzllZWQxNWExY2I1MWQ4NTFhZjFlNDQzNjAzMDRiODIwOWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjZjM1ZmJlMzlhNDNlYTUyOGZhN2UyNmIyYTU0ZDIwOGJlZDY1MTI4MDZkOGIwMmU0MzUzYTQzYWJkYzFjNDUifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt#L222-L311",
+          "version": "repo-lines-v1:sha256:5a35ec8ecca3871b996c4c7a28282bf9d91b6cf6d17479aefc1dc5fdf3ecc0f3:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiOWYxYzYwOWJhZTUwMTdjMmJlYjQ0ZTYyYmZlMDhkZTljM2U1NGExM2M3NDgwN2ViZGZlZDE5M2U5MmRiYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/delete/DeleteHelperTest.kt#L63-L124",
+          "version": "repo-lines-v1:sha256:bc94c0226d4440cfccac55c74a28d81b1e16fd5410c5ab074e0578ebf928e2e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiMGRlYmY2M2UyZDQwMWI1MTdmYmEzMWIwYWZlM2ZhZWQ5OTE4YTAzMjViNzQ1MjdiZTRjMzczNGJlMTA4YzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YTFkOTM3ZGJlMDUzNzVjYzJkYWFmYWUyZDRlMWJiM2E2NTI0MDg2MTg4YzY2Yjg0MGUzZjQ0ZThmYjZhOGUifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/review/ReviewControllerTest.kt#L139-L183",
+          "version": "repo-lines-v1:sha256:17e7c84af7705e14c05d761c7902e9f4f01b433c6957ef6540f39dd3763be8c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYmEwNTg2NmRhMzU0ZmZjZDM5ZDM0ZjQ3NTgzMjU4N2UxMmU2N2FjMmU5Mzk3MWRkYTBlMGE0MTg1NzU3MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/review/ReviewControllerTest.kt#L69-L123",
+          "version": "repo-lines-v1:sha256:1e5119a5ee3a3f6a02ac7b8f3f60327e9d838b25f2c972ebddaa49adb3267d8d:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjZjA5ZWIwYzU3NDRmYjk3MzMxYjk4ZmYzZmJmMDVhNjAyYmEzZjdmNjdlNWRhNWJlOTA5NTAzM2Y2MjU4MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0MDhiNjk1ODMzYjc5MDIyNGIzODVkY2MzNDlmMDcwZDFlNmM0MmE0YjY4Y2Y1NDc3YTg5YWVjYjkzNTU3MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlY2ViOTFmZTIyZWZiMjBlNjk4NzE0ZmI0N2IwNjljMzhkNzdhZDJmOWJmMjkzNWEzY2QzZDU2Zjk0YjQwNzIifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-31T14:59:24.742Z"
+    "at": "2026-10-31T15:07:16.361Z"
   }
 }
