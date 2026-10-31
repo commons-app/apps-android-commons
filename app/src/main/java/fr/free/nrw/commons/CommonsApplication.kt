@@ -423,6 +423,8 @@ class CommonsApplication : MultiDexApplication() {
 
         const val NOTIFICATION_CHANNEL_ID_ALL: String = "CommonsNotificationAll"
 
+        const val NOTIFICATION_CHANNEL_ID_UPLOADS: String = "CommonsNotificationUploads"
+
         const val FEEDBACK_EMAIL_TEMPLATE_HEADER: String = "-- Technical information --"
 
         /**
@@ -453,6 +455,16 @@ class CommonsApplication : MultiDexApplication() {
                             NotificationManager.IMPORTANCE_DEFAULT,
                         )
                     manager.createNotificationChannel(channel)
+                }
+                // Upload progress is shown silently, so that it does not make a sound on every update
+                if (manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_UPLOADS) == null) {
+                    manager.createNotificationChannel(
+                        NotificationChannel(
+                            NOTIFICATION_CHANNEL_ID_UPLOADS,
+                            context.getString(R.string.notifications_channel_name_uploads),
+                            NotificationManager.IMPORTANCE_LOW
+                        )
+                    )
                 }
             }
         }
