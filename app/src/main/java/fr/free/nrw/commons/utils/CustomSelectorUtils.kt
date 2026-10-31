@@ -60,7 +60,11 @@ class CustomSelectorUtils {
                         Timber.e(e)
                         null
                     }
-                fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact(), uploadableFile.getFilePath())
+                fileProcessor.redactExifTags(
+                    exifInterface,
+                    fileProcessor.getExifTagsToRedact(),
+                    uploadableFile.getFilePath(),
+                )
                 val sha1 =
                     fileUtilsWrapper.getSHA1(
                         fileUtilsWrapper.getFileInputStream(uploadableFile.getFilePath()),
@@ -75,14 +79,14 @@ class CustomSelectorUtils {
          * @return true if the image exists on Commons, false otherwise.
          */
         suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(
-            SHA1: String,
+            sha1: String,
             ioDispatcher: CoroutineDispatcher,
             mediaClient: MediaClient,
         ): ImageLoader.Result =
             withContext(ioDispatcher) {
                 var result: ImageLoader.Result = ImageLoader.Result.FALSE
                 try {
-                    if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
+                    if (mediaClient.checkFileExistsUsingSha(sha1).blockingGet()) {
                         result = ImageLoader.Result.TRUE
                     }
                 } catch (e: Exception) {

@@ -316,7 +316,10 @@ class DescriptionEditActivity :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putParcelableArrayList(
+            LIST_OF_DESCRIPTION_AND_CAPTION,
+            uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>,
+        )
         outState.putString(WIKITEXT, wikiText)
         outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
         // save Media

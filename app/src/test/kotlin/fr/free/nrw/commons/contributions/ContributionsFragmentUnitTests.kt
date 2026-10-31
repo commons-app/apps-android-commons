@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -78,9 +77,6 @@ class ContributionsFragmentUnitTests {
 
     @Mock
     private lateinit var notificationController: NotificationController
-
-    @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
 
     @Mock
     private lateinit var notificationCount: TextView

@@ -30,8 +30,6 @@ import java.lang.reflect.Method
 class ImageUtilsTest {
     private lateinit var context: Context
 
-    @Mock
-    private lateinit var progressDialogWallpaper: ProgressDialog
 
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
@@ -61,17 +59,35 @@ class ImageUtilsTest {
     // Refer: testCheckIfImageIsTooDarkCaseException()
     @Test
     fun testCheckIfProperImageIsTooDark() {
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok1.jpg"), ImageUtils.IMAGE_OK)
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok2.jpg"), ImageUtils.IMAGE_OK)
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok3.jpg"), ImageUtils.IMAGE_OK)
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok4.jpg"), ImageUtils.IMAGE_OK)
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok1.jpg"),
+            ImageUtils.IMAGE_OK,
+        )
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok2.jpg"),
+            ImageUtils.IMAGE_OK,
+        )
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok3.jpg"),
+            ImageUtils.IMAGE_OK,
+        )
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok4.jpg"),
+            ImageUtils.IMAGE_OK,
+        )
     }
 
     // Refer: testCheckIfImageIsTooDarkCaseException()
     @Test
     fun testCheckIfDarkImageIsTooDark() {
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark1.jpg"), ImageUtils.IMAGE_DARK)
-        Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark2.jpg"), ImageUtils.IMAGE_DARK)
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark1.jpg"),
+            ImageUtils.IMAGE_DARK,
+        )
+        Assert.assertEquals(
+            ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark2.jpg"),
+            ImageUtils.IMAGE_DARK,
+        )
     }
 
     @Test
