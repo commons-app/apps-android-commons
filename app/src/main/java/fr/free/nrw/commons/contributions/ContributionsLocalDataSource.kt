@@ -84,6 +84,15 @@ class ContributionsLocalDataSource
             contributionDao.getContributions(states)
 
         /**
+         * Fetches all contributions with specific states at once, not page by page.
+         *
+         * @param states The states of the contributions to fetch.
+         * @return A Single with the list of all contributions with the specified states.
+         */
+        fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
+            contributionDao.getContribution(states)
+
+        /**
          * Fetches contributions with specific states sorted by the date the upload started.
          *
          * @param states The states of the contributions to fetch.

@@ -145,6 +145,24 @@ class PendingUploadsPresenter
         }
 
         /**
+         * Restarts all the failed uploads. They are read from the database, because the list
+         * shown on the screen only contains the ones that have been loaded so far.
+         *
+         * @param context The context in which the operation is being performed.
+         */
+        fun restartFailedUploads(context: Context) {
+            compositeDisposable.add(
+                contributionsRepository
+                    .getAllContributionsWithStates(listOf(STATE_FAILED))
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe(
+                        { failedContributions -> restartUploads(failedContributions, 0, context) },
+                        { throwable -> Timber.e(throwable) },
+                    ),
+            )
+        }
+
+        /**
          * Restarts the uploads for the specified list of contributions starting from the given index.
          *
          * @param contributionList The list of contributions to be restarted.
@@ -221,22 +239,16 @@ class PendingUploadsPresenter
         }
 
         /**
-         * Restarts the upload for the specified list of contributions for the given index.
+         * Restarts the upload for the specified contribution.
          *
-         * @param contributionList The list of contributions.
-         * @param index            The index in the list which to be restarted.
-         * @param context          The context in which the operation is being performed.
+         * @param contribution The contribution to be restarted.
+         * @param context      The context in which the operation is being performed.
          */
         fun restartUpload(
-            contributionList: List<Contribution>,
-            index: Int,
+            contribution: Contribution,
             context: Context,
         ) {
             CommonsApplication.isPaused = false
-            if (index >= contributionList.size) {
-                return
-            }
-            val contribution = contributionList[index]
             if (contribution.state == STATE_FAILED) {
                 contribution.dateUploadStarted = Calendar.getInstance().time
                 if (contribution.errorInfo == null) {
