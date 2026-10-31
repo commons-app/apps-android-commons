@@ -38,9 +38,7 @@ object LengthUtils {
      */
     @JvmStatic
     fun formatDistance(distance: Int): String {
-        if (distance < 0) {
-            throw IllegalArgumentException("Distance must be non-negative")
-        }
+        require(distance >= 0) { "Distance must be non-negative" }
 
         val numberFormat = NumberFormat.getNumberInstance()
 

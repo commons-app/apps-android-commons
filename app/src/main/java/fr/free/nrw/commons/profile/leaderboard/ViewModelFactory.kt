@@ -17,10 +17,10 @@ class ViewModelFactory
         private val sessionManager: SessionManager,
     ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T =
-            if (modelClass.isAssignableFrom(LeaderboardListViewModel::class.java)) {
-                LeaderboardListViewModel(okHttpJsonApiClient, sessionManager) as T
-            } else {
-                throw IllegalArgumentException("Unknown class name")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass.isAssignableFrom(LeaderboardListViewModel::class.java)) {
+                "Unknown class name"
             }
+            return LeaderboardListViewModel(okHttpJsonApiClient, sessionManager) as T
+        }
     }

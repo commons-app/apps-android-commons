@@ -981,15 +981,6 @@
     <ID>UseCheckOrError:FilePicker.kt$FilePicker$throw IllegalStateException("HEIC conversion requires Android P+")</ID>
     <ID>UseCheckOrError:Licenses.kt$throw IllegalStateException("Unrecognized license value: $this")</ID>
     <ID>UseCheckOrError:UploadPresenter.kt$UploadPresenter$throw IllegalStateException("basicKvStoreFactory has not been initialized")</ID>
-    <ID>UseRequire:BookmarkItemsContentProvider.kt$BookmarkItemsContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:BookmarkPicturesContentProvider.kt$BookmarkPicturesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID" )</ID>
-    <ID>UseRequire:CategoryContentProvider.kt$CategoryContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
-    <ID>UseRequire:CategoryDetailsViewModel.kt$CategoryDetailsViewModel.ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
-    <ID>UseRequire:LengthUtils.kt$LengthUtils$throw IllegalArgumentException("Distance must be non-negative")</ID>
-    <ID>UseRequire:RecentLanguagesContentProvider.kt$RecentLanguagesContentProvider$throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")</ID>
-    <ID>UseRequire:RecentSearchesContentProvider.kt$RecentSearchesContentProvider$throw IllegalArgumentException( "Parameter `selection` should be empty when updating an ID", )</ID>
-    <ID>UseRequire:ThreadPoolService.kt$ThreadPoolService.Builder$throw IllegalArgumentException("Pool size must be greater than 0")</ID>
-    <ID>UseRequire:ViewModelFactory.kt$ViewModelFactory$throw IllegalArgumentException("Unknown class name")</ID>
     <ID>UtilityClassWithPublicConstructor:CustomSelectorUtils.kt$CustomSelectorUtils</ID>
     <ID>UtilityClassWithPublicConstructor:MimeTypeMapWrapper.kt$MimeTypeMapWrapper</ID>
     <ID>UtilityClassWithPublicConstructor:WorkRequestHelper.kt$WorkRequestHelper</ID>
