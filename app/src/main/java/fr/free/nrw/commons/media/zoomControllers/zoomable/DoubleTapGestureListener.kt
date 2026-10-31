@@ -68,7 +68,7 @@ class DoubleTapGestureListener(
                         targetScale,
                         ip,
                         vp,
-                        DefaultZoomableController.LIMIT_ALL,
+                        TransformLimiter.LIMIT_ALL,
                         DURATION_MS,
                         null,
                     )

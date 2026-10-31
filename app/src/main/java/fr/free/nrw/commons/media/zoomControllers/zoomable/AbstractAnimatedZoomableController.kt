@@ -4,6 +4,7 @@ import android.graphics.Matrix
 import android.graphics.PointF
 import com.facebook.common.logging.FLog
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
+import fr.free.nrw.commons.media.zoomControllers.zoomable.TransformLimiter.LimitFlag
 
 /**
  * Abstract class for ZoomableController that adds animation capabilities to
@@ -46,7 +47,7 @@ abstract class AbstractAnimatedZoomableController(
         imagePoint: PointF,
         viewPoint: PointF,
     ) {
-        zoomToPoint(scale, imagePoint, viewPoint, LIMIT_ALL, 0, null)
+        zoomToPoint(scale, imagePoint, viewPoint, TransformLimiter.LIMIT_ALL, 0, null)
     }
 
     /**
