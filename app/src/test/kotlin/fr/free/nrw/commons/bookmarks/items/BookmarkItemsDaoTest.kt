@@ -396,7 +396,7 @@ class BookmarkItemsDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            for (_ in 0 until rowCount) {
                 addRow(
                     listOf(
                         "itemName",

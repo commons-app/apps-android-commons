@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.ContentUris
 import android.content.Context
+import android.database.Cursor
 import android.provider.MediaStore
 import android.text.format.DateFormat
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
@@ -12,7 +13,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
@@ -59,92 +59,136 @@ class ImageFileLoader(
      */
     private fun getImages(listener: ImageLoaderListener) {
         val cursor =
-            context.contentResolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                projection,
-                null,
-                null,
-                MediaStore.Images.Media.DATE_TAKEN + " DESC",
-            )
-        if (cursor == null) {
-            listener.onFailed(NullPointerException())
-            return
-        }
+            queryImageCursor() ?: run {
+                listener.onFailed(NullPointerException("Cursor query returned null"))
+                return
+            }
 
-        val idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-        val nameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME)
-        val dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
-        val bucketIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID)
-        val bucketNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
-        val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED)
+        val indices = ImageColumnIndices(cursor)
+        val images = extractImagesFromCursor(cursor, indices, listener) ?: return
 
+        listener.onImageLoaded(images)
+    }
+
+    private fun queryImageCursor(): Cursor? =
+        context.contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            projection,
+            null,
+            null,
+            MediaStore.Images.Media.DATE_TAKEN + " DESC",
+        )
+
+    private fun extractImagesFromCursor(
+        cursor: Cursor,
+        indices: ImageColumnIndices,
+        listener: ImageLoaderListener,
+    ): ArrayList<Image>? {
         val images = arrayListOf<Image>()
+        val completed =
+            cursor.use {
+                readImagesFromCursor(it, indices, images, listener)
+            }
+        return if (completed) images else null
+    }
+
+    private fun readImagesFromCursor(
+        cursor: Cursor,
+        indices: ImageColumnIndices,
+        images: ArrayList<Image>,
+        listener: ImageLoaderListener,
+    ): Boolean {
         if (cursor.moveToFirst()) {
             do {
                 if (Thread.interrupted()) {
-                    listener.onFailed(NullPointerException())
-                    return
+                    listener.onFailed(NullPointerException("Thread was interrupted during image loading"))
+                    return false
                 }
-                val id = cursor.getLong(idColumn)
-                val name = cursor.getString(nameColumn)
-                val path = cursor.getString(dataColumn)
-                val bucketId = cursor.getLong(bucketIdColumn)
-                val bucketName = cursor.getString(bucketNameColumn)
-                val date = cursor.getLong(dateColumn)
-
-                val file =
-                    if (path == null || path.isEmpty()) {
-                        null
-                    } else {
-                        try {
-                            File(path)
-                        } catch (ignored: Exception) {
-                            null
-                        }
-                    }
-
-                if (file != null && file.exists() && name != null && path != null && bucketName != null) {
-                    val extension = path.substringAfterLast(".", "")
-                    // Check if the extension is one of the allowed types
-                    if (extension.lowercase(Locale.ROOT) !in
-                        arrayOf(
-                            "jpg",
-                            "jpeg",
-                            "png",
-                            "svg",
-                            "gif",
-                            "tiff",
-                            "webp",
-                            "xcf",
-                        )
-                    ) {
-                        continue
-                    }
-
-                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
-                    val calendar = Calendar.getInstance()
-                    calendar.timeInMillis = TimeUnit.SECONDS.toMillis(date)
-                    val date: Date = calendar.time
-                    val dateFormat = DateFormat.getMediumDateFormat(context)
-                    val formattedDate = dateFormat.format(date)
-
-                    val image =
-                        Image(
-                            id,
-                            name,
-                            uri,
-                            path,
-                            bucketId,
-                            bucketName,
-                            date = (formattedDate),
-                        )
-                    images.add(image)
-                }
+                parseAndAddImage(cursor, indices, images)
             } while (cursor.moveToNext())
         }
-        cursor.close()
-        listener.onImageLoaded(images)
+        return true
+    }
+
+    private data class ImageColumnIndices(
+        val id: Int,
+        val name: Int,
+        val data: Int,
+        val bucketId: Int,
+        val bucketName: Int,
+        val date: Int,
+    ) {
+        constructor(cursor: Cursor) : this(
+            id = cursor.getColumnIndex(MediaStore.Images.Media._ID),
+            name = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME),
+            data = cursor.getColumnIndex(MediaStore.Images.Media.DATA),
+            bucketId = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID),
+            bucketName = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME),
+            date = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED),
+        )
+    }
+
+    private fun parseAndAddImage(
+        cursor: Cursor,
+        indices: ImageColumnIndices,
+        images: ArrayList<Image>,
+    ) {
+        val path = cursor.getString(indices.data)
+        val name = cursor.getString(indices.name)
+        val bucketName = cursor.getString(indices.bucketName)
+
+        if (path == null || name == null || bucketName == null) return
+        if (!isValidImageFile(path)) return
+
+        val id = cursor.getLong(indices.id)
+        val bucketId = cursor.getLong(indices.bucketId)
+        val dateVal = cursor.getLong(indices.date)
+
+        val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+        val formattedDate = formatImageDate(dateVal)
+
+        images.add(
+            Image(
+                id = id,
+                name = name,
+                uri = uri,
+                path = path,
+                bucketId = bucketId,
+                bucketName = bucketName,
+                date = formattedDate,
+            ),
+        )
+    }
+
+    private fun isValidImageFile(path: String): Boolean {
+        val file =
+            try {
+                File(path)
+            } catch (ignored: Exception) {
+                null
+            }
+        if (file == null || !file.exists()) return false
+
+        val extension = path.substringAfterLast(".", "").lowercase(Locale.ROOT)
+        val allowedExtensions =
+            arrayOf(
+                "jpg",
+                "jpeg",
+                "png",
+                "svg",
+                "gif",
+                "tiff",
+                "webp",
+                "xcf",
+            )
+        return extension in allowedExtensions
+    }
+
+    private fun formatImageDate(dateMillis: Long): String {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = TimeUnit.SECONDS.toMillis(dateMillis)
+        val dateFormat = DateFormat.getMediumDateFormat(context)
+        return dateFormat.format(calendar.time)
     }
 
     /**

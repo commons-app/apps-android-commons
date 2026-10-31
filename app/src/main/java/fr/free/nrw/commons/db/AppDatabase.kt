@@ -35,12 +35,13 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
  *
  */
 @Database(
-    entities = [Contribution::class, Depicts::class,
+    entities = [
+        Contribution::class, Depicts::class,
         UploadedStatus::class, NotForUploadStatus::class,
         ReviewEntity::class, Place::class,
         BookmarksCategoryModal::class, BookmarksLocations::class,
         BookmarkPictureRoomEntity::class, BookmarkItemsRoomEntity::class,
-        CategoryRoomEntity::class, RecentLanguageRoomEntity::class, RecentSearchRoomEntity::class
+        CategoryRoomEntity::class, RecentLanguageRoomEntity::class, RecentSearchRoomEntity::class,
     ],
     version = 22,
     exportSchema = false,
@@ -62,9 +63,14 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun bookmarkCategoriesDao(): BookmarkCategoriesDao
 
     abstract fun bookmarkLocationsDao(): BookmarkLocationsDao
+
     abstract fun categoryRoomDao(): CategoryRoomDao
+
     abstract fun bookmarkPicturesRoomDao(): BookmarkPicturesRoomDao
+
     abstract fun bookmarkItemsRoomDao(): BookmarkItemsRoomDao
+
     abstract fun recentLanguagesRoomDao(): RecentLanguagesRoomDao
+
     abstract fun recentSearchesRoomDao(): RecentSearchesRoomDao
 }

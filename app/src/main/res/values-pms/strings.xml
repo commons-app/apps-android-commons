@@ -274,7 +274,10 @@
   <string name="file_deleted_from_commons">Cost\'archivi a l\'é stàit dëscancelà da Commons.</string>
   <string name="contribution_deleted">Dëscancelà.</string>
   <string name="deleted_file_activity_title">Archivi dëscancelà</string>
+  <string name="deleted_file_explanation">Wikimedia Commons a dëscancela j\'archivi ch\'a l\'han nen ëd but educativ o ch\'a trasgredisso soe régole, comprèise le violassion ëd drit d\'autor. Ch\'a caria dle fòto ch\'a l\'ha fàit cheil midem. Fòto ciapà su da l\'aragnà, fòto dë scren, marche e tilèt a son dle rason comun-e për che n\'archivi a sia gavà via.</string>
   <string name="deleted_file_view_page">Vëdde la pàgina dl\'archivi</string>
+  <string name="deleted_file_view_discussion">Lese la discussion dë scancelament</string>
+  <string name="deleted_file_policies">Régole e linie guida ëd Commons</string>
   <string name="nominated_see_more">Vëdde la pàgina an sl\'aragnà për ij detaj</string>
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>

@@ -36,7 +36,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -268,10 +267,7 @@ class NearbyParentFragment :
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
 
-    private val updatedLatLng: LatLng? = null
     private var searchable = false
-
-    private val nearbyLegend: ConstraintLayout? = null
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
