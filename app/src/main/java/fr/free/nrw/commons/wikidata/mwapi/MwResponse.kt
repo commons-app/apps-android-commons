@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter.PostProcessable
 import fr.free.nrw.commons.wikidata.model.BaseModel
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 abstract class MwResponse :
     BaseModel(),
     PostProcessable {

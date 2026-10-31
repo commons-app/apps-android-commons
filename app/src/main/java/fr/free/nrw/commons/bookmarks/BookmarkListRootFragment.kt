@@ -29,7 +29,6 @@ class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     FragmentManager.OnBackStackChangedListener, MediaDetailProvider, OnItemClickListener,
     CategoryImagesCallback {
     private var mediaDetails: MediaDetailPagerFragment? = null
-    private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null
     var listFragment: Fragment? = null
     private var bookmarksPagerAdapter: BookmarksPagerAdapter? = null
 

@@ -231,7 +231,7 @@ object RandomAccessFileExifWriter {
         raf.seek(ifdPos)
         val count = readU16(raf, order)
 
-        for (i in 0 until count) {
+        for (_ in 0 until count) {
             val entryPos = raf.filePointer
             val tagId = readU16(raf, order)
             val type = readU16(raf, order)
