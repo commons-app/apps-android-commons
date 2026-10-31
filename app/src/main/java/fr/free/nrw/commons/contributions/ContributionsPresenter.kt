@@ -4,7 +4,7 @@ import androidx.work.ExistingWorkPolicy
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable

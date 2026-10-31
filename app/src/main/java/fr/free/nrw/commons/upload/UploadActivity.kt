@@ -46,7 +46,7 @@ import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
 import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
