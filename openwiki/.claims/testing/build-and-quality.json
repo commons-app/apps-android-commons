@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:272dca147486a7794960d81ac258a40e533f298e845da8b4679bc73badf71362",
+  "claims": [
+    {
+      "id": "claim_b75cda0c8f9842f6b6692508d84ca87b",
+      "statement": "The Gradle app module defines prod and beta product flavors, configures src/test/kotlin as the Kotlin unit-test source set, and enables Android resources in local unit tests.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L199-L206",
+          "version": "repo-lines-v1:sha256:f5593b2837668bf17d7df020f5bd7fb9ea51ebe5dd1fb425d26911b4d4782dc3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDRlYmJhYTg0Njg4MmFmMWY5MjM0MDA1NDI0OTg4OWVmNGE3YzJmNDU3MTg3NWY1ZTU2ZmQ5NDNlM2RjMzI4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2U0ZjFhZGY2NWQ2YjA0MzAwMzE5ZGQ3OWY0MGZjZjIxNDQxN2YzNzU4MDg3MTMyNTEzOGM3NTQ5YzFjMTZmYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDIyNzk2NGQ2ZDg4YjA1ZWIwZmJkNmMzNjcxNjNhN2Y3NjkyOWM2ZWU3YTljZTFkNGRmNGY3ZjQxYjM0ZTE0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjUwYTA4ZTRlYWI4YTNhZmFiNThiZDMzOWRiNWU2M2VkYTI2ZDQ3MDBjOTQwZWU3MDkwMjE2Yzg3MTA1NzcwMyJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L22-L52",
+          "version": "repo-lines-v1:sha256:d6878dc94ce9ed544f03ce9c1e093433bbf50c5e2f3a55289fafd4eefb4f3ec8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzOTgzMTIyMTAyMWZiZGU1MDY4OTZmN2NlN2RjNjc4MTBhMWEzN2QxNDUyNDczYjFjN2UwZTQ0NTRiOGIzNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhMGMyZDFlZTk4OGY5MjdlOTg5ODRjMTE2ODg3MTk5NGI0ODBjZDJjODQwNTUxOTQxZWRlZjkyYTExYTM1OTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhZmJlNGM5MmE2NGEwZDZkMWUxMTcwZDVlMDA4MjA3NGMyNTQ1MzQ4MzFiYzlkZjhlMzg2ZTE0MjE0MzU1OTIifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L98-L145",
+          "version": "repo-lines-v1:sha256:4b6617ca7214776e7d00942d81e68d15cd9aa152443bdb537d80859625486dae:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMDc4YWRmMTRjYmY0ZGNiZjM0NDUzNGY1NzUxZDdhOTg2ZmYxYmQ5NTI0YTc2YTI5ZDllYmEzY2RhOGE2OGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmOGE5OGEwNGU3ZTljNDk5ZWFlY2U0YmY5NzRmNjJkZTdlMTRmMDQ2MDQwODIwOTQ5ZTllNWNlZDA2MTU3ODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiYzlkYTYwOTVhOGZhMDgxMzI4YjBkMTY5YjExNGJjOWRjMThlMThhYzQyMjdhMGMwMjIxYTczNDMwYWE5YmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwYzUwNTk2Yjc5Yjc0MWE1OGNjYWVhYTJjYWYxZTU4OTkyMjhkMTA2NDkxNzkwNTE4NDc1NzRhY2NkMjQzZGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9e10f47ebb44478be8b0ac510f57536",
+      "statement": "The Android CI workflow runs the beta debug unit-test coverage task on pull requests and builds both betaDebug and prodDebug APKs.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L77-L100",
+          "version": "repo-lines-v1:sha256:046ea2fca44bb9d9cd089f3710b1291654aa8f17c13fcae2fe9400a598450a8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkOTJmZDg3MWE3ZjQ0YjBiNWMzNDgzNzcwNzgwNjZmZThlMDQ2OTU2MjQ5M2RiMWU0M2EzODEwMDdjMTVhZGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiMDhkMTUzNzNkMmY3NGFhMWVmYzhjMTY1MzMzMzhmMmM4MDEzZWI5ZjgzMDYwZDQxNmZjMThkODk3ZjdhMjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4MjgyMDZlZGEyZWU4Zjc4YTQyYjRjOTk2OWFmNDRhOTFiZDMxNjI5MTY2OTJhYjFhZGY0OGU1ZGY3MmZkZmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc0Y2Q4NTlhZDcyNTA3NDk1ODQyODc4ZmY1MmE2YzE3NzIzZTgyMWMxYmFmOTk4MTUyYWNlZmEzNDU3NTIzZjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d6dc5264af18461b8bcfc99de354a626",
+      "statement": "The workflow's connectedBetaDebugAndroidTest emulator invocation is commented out, so the checked-in CI workflow does not currently run instrumented tests.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L61-L72",
+          "version": "repo-lines-v1:sha256:13eaf1af49f0b9f256720f287c7313ef1635f0b724d2064f2975fc93c6ef7434:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3ZmY2YmJmZTY5YWY3ZDZiNjdlNWEzNzhmZGI0MTI1YThkYmY0Mjk5ZjYwNjAwNmI0MjEyYTY3NjliNzdlZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3YTk0NGYwNDE0ZDI5MDdlNmY4ZGVjNjE0YzM1NzUyOTQwOGQwNWNkMzc4YThlMWJhNmNmMjY5ODM4MWYxYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg2YmFiYjBhZmI3MjUxM2Y0MGI1NTYwMzEwYWIxZjliNzk2ZDFkMTdmN2ZlOWI4ZmNiYzc0MzNmNDg1NDgwMDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_29df8b4ed8b54c3dbcf03fe01598954b",
+      "statement": "UploadPresenterTest and UploadTest contain explicitly ignored cases, while the active LoginActivityTest and MigrationTest exercise narrow UI and data-migration behavior; test presence alone does not establish current coverage.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/LoginActivityTest.kt#L48-L68",
+          "version": "repo-lines-v1:sha256:b7142942771aacb76bed71e9c8c92956a55f168b81e59b5b6f4f77794c0f4060:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NzhhMDdmNWU3MGFhMjU1NTZlYTAwYWVkZmVhNGRmOWVmOTllZTg2ZDI3NDI3NWUwM2I3ZTk3YjRmY2FkNDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4ZGIzYTAxMGIxNTExN2VlZTU2ZDJlM2JiM2NhYzkwZGNmMTEzOWQzNmQyMjFhNWM4NGRkNTAzYmQ0YzdjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjMDdlYzZmZmM5OTk4YTk3ZWFmNGU2ZjczODFiOTk2YmI2YWNjN2ExYTU2MjUyNGFlYTU2YTJjYzA2ZjllNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5MDg1N2NkODM3ZDJhYmRkNjdhMjkzZmY1OGRlYmNmNDcxM2ZhYzlkN2E3NWFlMWU5YzE3YzEwNDVkYjViYWIifQ"
+        },
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/UploadTest.kt#L80-L225",
+          "version": "repo-lines-v1:sha256:bd6f6110b63b0ebdc8de0ad999d14c6938348380b4d89171caae8966be9bdf33:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQ2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhZjQ4NGViM2QwOTZjZWY5MWYzZWNjMWJkMGRlOWY3OTcyMmZhOGMzNzJlMDE3NWE2MTIzMzU1ZDEyMjNlZjI0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlMjMyN2NlM2VkMzRmNTJkZGVmMDkyMDNiZjMwMTA4MTg3MmQ4YjNkMDQwOTI4YmVlNDFhODhjOTA2ZTg0OTQ1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MzRmYTVhMDE0MzdlOWY4ODI5YTllMTUzZTIyNjk4MTRmOTlmZGVlOGFiYzgyYzdjMDAzY2UxY2IxY2NkNDU1In0"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/db/MigrationTest.kt#L18-L25",
+          "version": "repo-lines-v1:sha256:6362d62a3b80b2c91e676182af31013662547a2e84976f38b19912e5ba47d32b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmJjMmFjODY3Mjg4YWExNzk1N2I4ZWE1ZmRkN2E4OWQyNzRlMmY1NDA2ODI5M2E5YTQzMmUwZDNkZjg5MmE5YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODY1ZWFlNDAxZGM0ZGFkMjkyNTcwMGFjZGZjN2ZjODM2NDYwMjViYjgyOWE0NGRlZjZhNmUwMDZjY2ExZDExZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTYxYmMwOTY0ZDAyMTU5MDkyZTI5NTNkODQxNTIzNTVkNDA5ZTk3YmJkMjUxNWM1ZmVjOWMyYjEwMTg0NTgzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTE1ZWYxYTVmOWE4MGRhODM2Y2IxM2RlZmE5M2E3NTA5NTJlYWZjOGE5Zjk2MGU2NzE2MDAzNTY5OWQ0ZmU3MiJ9"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/upload/UploadPresenterTest.kt#L160-L188",
+          "version": "repo-lines-v1:sha256:60e06e8f5136295a64dcdf9a9ce600d4058f51c01777a0f6acd558e2d1e60950:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMWUxZTI2MGJkYTc3MmZhYTk4MTU1ZDM4MDhmMDk1YzhiZDJhN2U5YTUzNmNiNzdiOWE0N2M3MTQ0NjE2NzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMzc4Y2IwMDVjZmQ4MGVmMGYzM2Y5Nzk2MGM2NDNiZmQ5YzVjZTQ3NzUwNzg3NmQ5YTJmNjJhMzllMzM4OTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0Y2Y2MjI1ZDgzNGFlMDg1M2Q3MWFiODgzYzViMTk3YzdlZmM3YzQxMGEyNjFhMGM5MDg4MTdlNzE2Mzg5ZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0YjUzZGVkYzgzODYzNDc0ZWI5NTY3MmMwYWU0YzQ4MDYyM2M5ZDc3OTYwNjNmYzQxNTNiMDZmYjVkOTQ3NzYifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T14:46:52.854Z"
+  }
+}

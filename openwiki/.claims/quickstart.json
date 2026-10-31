@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e47416a9c21fdd955d52390fe189ffd5a629ef53dbbc9d402b5db91fcbd1c112",
+  "claims": [
+    {
+      "id": "claim_cbd251f2ed7242b8a0fca6ca43df9e2b",
+      "statement": "The repository README describes this Android app as a client for uploading pictures from Android devices to Wikimedia Commons.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L14",
+          "version": "repo-lines-v1:sha256:2825c9d6eb7d0451ddc8ff4f4a8460ce6bfc38fc9ca3422c41ba01cc4748a649:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkODkwYzMyMmEzNjIxZmU0N2ZlNmNjYTBiMzBkODA1OWFiMGI1MjNlNGVhZjZlOGIxMzhlZjNjNDg4OThhMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNzZjN2IyMzY1ZjQ2Zjc5MDVlMTA2ZWRkYTFhZWJkN2EzNzQxN2Y0MDYyYzYyOWRkYzZkMzE2ZDQ2Y2JiYjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5NDZiNTFiODZhN2U4OGQwNmQ5ZGNmMDgwODlhY2I2YWE4NDQ2MDUwOGUyODg5YjM1N2JmMDQ2NTg3YjExYzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_343ebd356c5145c0b54d4c32b890f1ae",
+      "statement": "The Gradle settings currently include only the :app module.",
+      "evidence": [
+        {
+          "resource": "repo://settings.gradle.kts#L1-L15",
+          "version": "repo-lines-v1:sha256:73c2a26e856b3a3ddc7cd49abd74faba871a3380daf96a5a42e5a297491ce364:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxOTU3YjIzMTA3YWE5ZDE0NDJlMzk0ZWUyNTAxMTI1NDhhNGEyZThiOGM4NTMzNmQ5YjQ0ZTg0MWI1ZWYxNjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMDk0N2FmMWEzMTg3Y2EzMGM2M2QzNDJkOWJiNDY5NjEyMjk4NWU5ZTlmZDI2NGVkMDQ0OTM2ZjliMDVmNDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_39dbf6147ba64911b606c74d04482916",
+      "statement": "The Android manifest uses CommonsApplication, exposes LoginActivity as the launcher, and declares UploadActivity for image/audio share intents.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L48-L49",
+          "version": "repo-lines-v1:sha256:c4c03a9894a55d1963db10a603710476cf8722e7fff0697ba1ebab454f8c1fff:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGU1MjIwYTkxNGE4MWM5YjMxYmE1NTE5NzAzM2UzOTZmMDIxNDY4ZTVmNjViYzcwM2VkM2UzZmQ5NDU3Mjc1ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGNlNTQ2OTJiZjMyMmM0M2RlMTM5M2YxMzM4NGMwYTg4MGJlMDY3MzM4ZDRjMTg4ODcwNjA2NmJkN2U0ZmFiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUwY2Q4NWY3NGIxMjljOWVjMzJkNTlkZWE2NDJjZDQ5MWY5MmE0NjAzNzViY2YxNTM3M2ZlODVmZTg2ZjVjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcyOWQzM2Y3MGMzY2ZjYWRlNWNhODgwYzg4ZWZmYmNjOWNhMzliNGYwM2M2NTNlY2I5ZmM4ZjgxMTYwOWI3YiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L86-L123",
+          "version": "repo-lines-v1:sha256:dd054e26290897ec6d1813788542dec8a05e36587123faad941633c5faba710e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDBlNGM0YTMyNDczZDczZTRhMjJmMTNhYWY0Zjk0NGIyNzhkYjI2MThiODcyMmRlYzI0MDBjNDA4MGQwYjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmMTQ5NTY2NjhmOTMxYjQ4MzExODY5ZDZiOTQ0ZjExNTFhZmY1Y2ZjZDcyZjUyMjkyM2VkZTNlYTA4NDc0YmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNjllOGI3ZmRjYWNhODIyZjc5NDA1ZWY3ZTJlM2Q1ZDQwM2MyZWU4Y2Q1YmE3MTBkM2I1MzVmOWIxYzljMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhZDM4NmUxZWMxMWQ3NzZhY2RmZGNjMmVlY2EwOTA0ZDI5ZGRhMjI4OWI2NjAxMWQzZDBlMjNjNzUzNWM2MGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_52efb10924a742a482a122db4740f4a9",
+      "statement": "The checked-in Android CI workflow comments out the connected instrumented-test step while retaining a beta debug unit-test step for pull requests.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/android.yml#L61-L80",
+          "version": "repo-lines-v1:sha256:05a22ed3c8b73a294b569a599262a81c46dba06a308ed951f1117cd02b1d1cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3ZmY2YmJmZTY5YWY3ZDZiNjdlNWEzNzhmZGI0MTI1YThkYmY0Mjk5ZjYwNjAwNmI0MjEyYTY3NjliNzdlZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3YTk0NGYwNDE0ZDI5MDdlNmY4ZGVjNjE0YzM1NzUyOTQwOGQwNWNkMzc4YThlMWJhNmNmMjY5ODM4MWYxYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNzEyZDRiZTgxNTExY2RhMTFjNTM3YWJiZWQxYWIwODk1MDVlN2ZmMjYwZmMxZmFiYjdjYThhYjczYjY0MGIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T14:35:25.887Z"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:05a199a8686cdfd2350dbbc4d073f7bba78924f04cb5f34333555d8172f8c6ba",
+  "claims": [
+    {
+      "id": "claim_d7725e9e60a14cf39d6e52ff03e04c41",
+      "statement": "The Android manifest uses CommonsApplication as the process application class, exposes LoginActivity as the launcher, and declares UploadActivity for external image/audio share intents.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L48-L49",
+          "version": "repo-lines-v1:sha256:c4c03a9894a55d1963db10a603710476cf8722e7fff0697ba1ebab454f8c1fff:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGU1MjIwYTkxNGE4MWM5YjMxYmE1NTE5NzAzM2UzOTZmMDIxNDY4ZTVmNjViYzcwM2VkM2UzZmQ5NDU3Mjc1ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGNlNTQ2OTJiZjMyMmM0M2RlMTM5M2YxMzM4NGMwYTg4MGJlMDY3MzM4ZDRjMTg4ODcwNjA2NmJkN2U0ZmFiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUwY2Q4NWY3NGIxMjljOWVjMzJkNTlkZWE2NDJjZDQ5MWY5MmE0NjAzNzViY2YxNTM3M2ZlODVmZTg2ZjVjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcyOWQzM2Y3MGMzY2ZjYWRlNWNhODgwYzg4ZWZmYmNjOWNhMzliNGYwM2M2NTNlY2I5ZmM4ZjgxMTYwOWI3YiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/AndroidManifest.xml#L86-L126",
+          "version": "repo-lines-v1:sha256:9ccbf19239bb66cfb06939add3210cd397ab3c9def0104ac509c796e80f29900:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDBlNGM0YTMyNDczZDczZTRhMjJmMTNhYWY0Zjk0NGIyNzhkYjI2MThiODcyMmRlYzI0MDBjNDA4MGQwYjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MThiMGEzY2ZlZDQ5NDliZDIxOGEwZjEzYjMyNGY2MTQ5ZDdlN2NkZTlkN2ZjODZjN2U0OTgzODQxYWExYmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzNjllOGI3ZmRjYWNhODIyZjc5NDA1ZWY3ZTJlM2Q1ZDQwM2MyZWU4Y2Q1YmE3MTBkM2I1MzVmOWIxYzljMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzNTQ2NmQyODZmODI1NGE2MTVjMzdjZDI3MGFkZjQ2MGNjZWRiMDI4NTlkNjgwM2U4NGU3YWI1YjE4NjcyMTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_874d975d870f4527b1c7854cfd4ae6fc",
+      "statement": "CommonsApplication initializes the application-scoped Dagger component and injects itself before setting up shared logging, image loading, notifications, and language services.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/CommonsApplication.kt#L97-L134",
+          "version": "repo-lines-v1:sha256:757a9a062ac286e05440c7e7a0dead36d393126d05110b0d4b40819ebea6400c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2NzM0OTcxNTRjMDUyZGZiMWE0NDA0YjdmZmRlNDllZTNkMTRkMDFlMzVhNDUwODRhYjM3M2JjNzYzNmVlODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3OGFmNWI2NTFhZTJiYTRmODU0NmZiYTliMmVkNmQ0NDhkNzYxMTUwMjlmYWY2YzdkNmVhZmFhZDdkNTdiZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2ZGZkYjQ1YzM1ZjdkMjQxNzZlYTcwZjMwOTA3YTNlMDdjNGNmMGRkMDkzMjE1ZTBjNWIwZDM3MTBiYzhmMjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6144f240b004788bdbdc04c946a113e",
+      "statement": "The singleton Dagger graph composes application, networking, Android component, upload, contribution, search, depiction, and category modules; ActivityBuilderModule declares activity injectors.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/ActivityBuilderModule.kt#L34-L88",
+          "version": "repo-lines-v1:sha256:e2caf650a452aef377d7a853f10be51852f87128f4c2dcc48b4cc51f8ee21ef9:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyNzgyZjIyYzliMDhkY2NkYjEwMjcwMmQ0YTJhMGMxODc2ZGIwMTQ0MTE2ZjE4NjQ2ODI3YjIyOGFkZDdiNWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwODlmMGRmN2JiZmQ5NGYwYTFlYmU1YWQ4NTc1ZTJlMmM2NjBmMTBhZjI4YTFhMGUwMTgwYWQ0YjUxNjg0ZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0MTIyNmI2MGI5MmYxMTg5YzVhOGRlYzcyZDBhYjMyNGMwZjYxMDU0MTJiYzA0NDc2YWIyYjA2OTQ5MWJhY2YifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/CommonsApplicationComponent.kt#L31-L64",
+          "version": "repo-lines-v1:sha256:a60a428c5dde279399e67d4fe7a0de38d95aacd2b1ce36a90172f8c6950e2b5e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyMTNjODc0ZTEzNTU3ZGRjZGZiZTFlNWExOWFmM2EzNTcwMWU0MWVlM2UyMTAxNzAzZjUyODEzY2IxZjEwYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyNTIzMmZlZDE2MDJkNzg2YWRiNzcxNzMzN2JmOTI2OTZhNjZkMjE3OWRlNjdiNTkxMmU5ODUyMWNmNmI4ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzZGFiNjM2YTk5NmMxYTY4NTBjOWNkMTMzNzZhM2E5ZTg3NmRmY2UxNDQxZGJkZDlhMzY5YjNkMGUyNjdiYmYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_55da9b2bf4ad45f99ee2d42909ef6667",
+      "statement": "MainActivity chooses different navigation sets according to the persisted login_skipped preference and uses the signed-in route to resume stuck uploads.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L114-L159",
+          "version": "repo-lines-v1:sha256:be303fcc640d47a9a606c8a5c014e4736a3e833fbc50bbad2cd1d69f39623241:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlODRjYTVmZjU1OGQ2NjMzMjlhYmQ0OWFkODhlZjgzZDZiZWEyMjVlZDc1YmIzZTkxMmYzNzU0ZDBiNDg3MzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4MDU1NTIyN2IxNGM1ZmEwYTQ0NTA1NjhmM2U0N2RmNzAxMDg1NjFlZDU4NjM3ZTZiODlkZDc5ZmVhOGE3NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3YjYzNmEzZWJkODQ3MjY0MGFkOTA2YjFiM2U2YmQ3ZmE3YTQ2N2FlNDBiNzBmMTc2MWIxZDdiYTMzOTllN2MifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/MainActivity.kt#L212-L241",
+          "version": "repo-lines-v1:sha256:192d0a9cf517cfa6018d9c36dd9fb8fe7e0744f1b47a1462004dec68d3c3e4c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmODJkMzRlMzdhYTMxYmFlMTE4YzJjZGY5MjU4NjUwYzllZDljODQwZDdlYmNiYmVlYjhmNjkyMjg1NzI5MjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNTJlMzkxNmJiNzZlZTQ4NWU5Yzk5ZTg0YTNlYjVjMjE4YjZhNTY5NjdlOGNjNTMzYTRmZmViMTM2ZmE1MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxMzQyZTEzMzc4YjkxZDFkOTIwYjE1YjQyOTczMjFjMGNlYWYwMzhlMzI2MzJkNTdmMjVlMDg5ZDIyMTk5NTIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T14:35:25.887Z"
+  }
+}
