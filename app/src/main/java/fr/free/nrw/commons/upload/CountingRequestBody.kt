@@ -7,6 +7,7 @@ import okio.BufferedSink
 import okio.ForwardingSink
 import okio.Sink
 import okio.buffer
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -30,7 +31,7 @@ class CountingRequestBody(
         try {
             return delegate.contentLength()
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not read content length")
         }
         return -1
     }

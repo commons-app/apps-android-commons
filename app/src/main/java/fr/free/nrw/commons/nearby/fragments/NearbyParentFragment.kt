@@ -1765,7 +1765,7 @@ class NearbyParentFragment :
             fos.close()
             return true
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not save KML file")
             return false
         }
     }
