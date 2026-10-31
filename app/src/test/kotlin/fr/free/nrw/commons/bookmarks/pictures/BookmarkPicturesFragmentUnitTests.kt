@@ -150,6 +150,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetAdapter() {
         shadowOf(getMainLooper()).idle()
+        fragment.onViewCreated(binding.root, savedInstanceState)
         val method: Method =
             BookmarkPicturesFragment::class.java.getDeclaredMethod("setAdapter", List::class.java)
         method.isAccessible = true
