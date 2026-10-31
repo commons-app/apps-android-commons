@@ -36,7 +36,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -52,7 +51,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
@@ -116,6 +114,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.events.MapListener
@@ -218,6 +217,7 @@ class NearbyParentFragment :
 
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
+    private var searchQueryDisposable: Disposable? = null
     private var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
     private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
     private var rotateBackward: Animation? = null
@@ -268,10 +268,7 @@ class NearbyParentFragment :
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
 
-    private val updatedLatLng: LatLng? = null
     private var searchable = false
-
-    private val nearbyLegend: ConstraintLayout? = null
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
@@ -976,6 +973,8 @@ class NearbyParentFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
+        searchQueryDisposable?.dispose()
+        searchQueryDisposable = null
         searchRunnable?.let {
             searchHandler.removeCallbacks(it)
         } ?: run {
@@ -1104,19 +1103,16 @@ class NearbyParentFragment :
             ).toInt()
         binding!!.nearbyFilterList.searchListView.adapter = nearbyFilterSearchRecyclerViewAdapter
         setLayoutHeightAlignedToWidth(1.25, binding!!.nearbyFilterList.root)
-        compositeDisposable.add(
+        searchQueryDisposable?.dispose()
+        searchQueryDisposable =
             binding!!
                 .nearbyFilter.searchViewLayout.searchView
                 .queryTextChanges()
-                .takeUntil(RxView.detaches(binding!!.nearbyFilter.searchViewLayout.searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { query: CharSequence ->
-                    (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter)
-                        .filter
-                        .filter(query.toString())
-                },
-        )
+                    nearbyFilterSearchRecyclerViewAdapter?.filter?.filter(query.toString())
+                }
     }
 
     private fun restoreStoredFilterSelection() {

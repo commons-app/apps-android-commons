@@ -6,6 +6,7 @@ import java.io.Serializable
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module
  */
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 open class ImageInfo : Serializable {
     private val size = 0
     private val width = 0
