@@ -208,7 +208,7 @@ class FilePickerTest {
 
         assertEquals(
             CustomSelectorActivity.Companion::class.java.declaringClass.name,
-            capturedIntent.component?.className
+            capturedIntent.component?.className,
         )
     }
 

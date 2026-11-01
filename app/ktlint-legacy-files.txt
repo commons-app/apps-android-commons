@@ -30,14 +30,6 @@ app/src/main/java/fr/free/nrw/commons/bookmarks/pictures/BookmarksTable.kt
 app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/Constants.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/DefaultCallback.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/ExtendedFileProvider.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/FilePicker.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/FilePickerConfiguration.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/MimeTypeMapWrapper.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/PickedFiles.kt
-app/src/main/java/fr/free/nrw/commons/filepicker/UploadableFile.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesResponse.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesUiModel.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/GlobalFileUsagesResponse.kt
@@ -111,8 +103,6 @@ app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookMarkLocationDaoT
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationControllerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationFragmentUnitTests.kt
 app/src/test/kotlin/fr/free/nrw/commons/description/DescriptionEditHelperUnitTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/filepicker/FilePickerTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/filepicker/ShadowFileProvider.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt
