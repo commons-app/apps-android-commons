@@ -37,7 +37,7 @@ class PendingUploadsPresenterTest {
     @Before
     fun setUp() {
         // Starting the upload worker needs a real WorkManager, which is not available here
-        mockkObject(WorkRequestHelper.Companion)
+        mockkObject(WorkRequestHelper)
         every { WorkRequestHelper.makeOneTimeWorkRequest(any(), any()) } just Runs
         every { uploadRepository.checkDuplicateImage(any(), any()) } returns Single.just(IMAGE_OK)
         every { contributionsRepository.save(any<Contribution>()) } returns Completable.complete()
