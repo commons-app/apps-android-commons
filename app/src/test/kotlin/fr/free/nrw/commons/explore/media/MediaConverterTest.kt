@@ -101,7 +101,8 @@ class MediaConverterTest {
         `when`(
             metadata.artist(),
         ).thenReturn(
-            "<a href=\"/w/index.php?title=User:Foo&action=edit&redlink=1\" class=\"new\" title=\"User:Foo (page does not exist)\">Foo</a>",
+            "<a href=\"/w/index.php?title=User:Foo&action=edit&redlink=1\" " +
+                "class=\"new\" title=\"User:Foo (page does not exist)\">Foo</a>",
         )
         media = mediaConverter.convert(page, entity, imageInfo)
         assertEquals("Foo", media.author)

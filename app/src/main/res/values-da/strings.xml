@@ -280,6 +280,11 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nominer til sletning</string>
   <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
+  <string name="file_deleted_from_commons">Denne fil blev slettet fra Commons.</string>
+  <string name="contribution_deleted">Slettet</string>
+  <string name="deleted_file_activity_title">Fil slettet</string>
+  <string name="deleted_file_view_page">Se filsiden</string>
+  <string name="deleted_file_view_discussion">Læs diskussionen om sletning</string>
   <string name="nominated_see_more">Se webstedet for information</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log ind</string>

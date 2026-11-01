@@ -366,16 +366,6 @@ class ExploreMapFragment :
      */
     private fun unregisterNetworkReceiver() = activity?.unregisterReceiver(broadcastReceiver)
 
-    private fun startMapWithoutPermission() {
-        lastKnownLocation = defaultLatLng
-        moveCameraToPosition(
-            GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
-        )
-        presenter!!.onMapReady(exploreMapController)
-    }
-
-    private fun registerNetworkReceiver() = activity?.registerReceiver(broadcastReceiver, intentFilter)
-
     private fun performMapReadyActions() {
         if (isDarkTheme) {
             binding!!
@@ -870,23 +860,14 @@ class ExploreMapFragment :
      * could not be found.
      */
     private fun getOverlay(item: OverlayItem?): Overlay? {
-        if (item == null || binding == null || binding!!.mapView.overlays == null) {
-            return null
-        }
+        if (item == null) return null
+        val overlays = binding?.mapView?.overlays ?: return null
 
-        for (i in binding!!.mapView.overlays.indices) {
-            if (binding!!.mapView.overlays[i] is ItemizedOverlayWithFocus<*>) {
-                val overlay = binding!!.mapView.overlays[i] as ItemizedOverlayWithFocus<*>
-
-                for (j in 0..<overlay.size()) {
-                    if (overlay.getItem(j) === item) {
-                        return overlay
-                    }
-                }
+        return overlays
+            .filterIsInstance<ItemizedOverlayWithFocus<*>>()
+            .firstOrNull { overlay ->
+                (0 until overlay.size()).any { j -> overlay.getItem(j) === item }
             }
-        }
-
-        return null
     }
 
     /**
@@ -1212,13 +1193,10 @@ class ExploreMapFragment :
         } else {
             locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
         }
-        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
+        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED)
     }
 
-    fun onLocationChanged(
-        locationChangeType: LocationChangeType,
-        location: Location?,
-    ) {
+    fun onLocationChanged(locationChangeType: LocationChangeType) {
         if (locationChangeType == LocationChangeType.PERMISSION_JUST_GRANTED) {
             val curLatLng = locationManager.getLastLocation() ?: getMapCenter()
             populatePlaces(curLatLng)

@@ -175,6 +175,7 @@ class PageTitle : Parcelable {
     fun getUriForAction(action: String?): String {
         try {
             return String.format(
+                Locale.ROOT,
                 "%1\$s://%2\$s/w/index.php?title=%3\$s&action=%4\$s",
                 wikiSite.scheme(),
                 wikiSite.authority(),
@@ -248,6 +249,7 @@ class PageTitle : Parcelable {
     private fun getUriForDomain(domain: String): String =
         try {
             String.format(
+                Locale.ROOT,
                 "%1\$s://%2\$s/wiki/%3\$s%4\$s",
                 wikiSite.scheme(),
                 domain,

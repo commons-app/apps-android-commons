@@ -244,7 +244,7 @@ object RandomAccessFileExifWriter {
         raf.seek(ifdPos)
         val count = readU16(raf, order)
 
-        for (i in 0 until count) {
+        repeat(count) {
             val entryPos = raf.filePointer
             val tagId = readU16(raf, order)
             val type = readU16(raf, order)
@@ -262,7 +262,7 @@ object RandomAccessFileExifWriter {
             }
 
             // Remove or overwrite matching tags.
-            if (!updates.containsKey(tagId)) continue
+            if (!updates.containsKey(tagId)) return@repeat
 
             if (updates[tagId] == null) {
                 // Zero out the entire 12-byte IFD entry to remove the tag
@@ -270,8 +270,9 @@ object RandomAccessFileExifWriter {
                 raf.write(ByteArray(12))
                 raf.seek(afterEntry)
             } else {
-                val encoded = encodeValue(type, updates[tagId]!!, order)
-                val existingBytes = typeUnitSize(type) * cnt
+                val encoded = encodeValue(type, updates[tagId]!!, order) ?: return@repeat
+                val unitSize = typeUnitSize(type)
+                val existingBytes = unitSize * cnt
 
                 when {
                     encoded == null -> Unit

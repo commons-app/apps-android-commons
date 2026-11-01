@@ -54,7 +54,8 @@ class MediaClient
                 .map { it.query()!!.allImages().size > 0 }
 
         /**
-         * This method takes the category as input and returns a list of  Media objects filtered using image generator query
+         * This method takes the category as input and returns a list of Media objects filtered using image generator
+         * query
          * It uses the generator query API to get the images searched using a query, 10 at a time.
          *
          * @param category the search category. Must start with "Category:"
@@ -79,7 +80,8 @@ class MediaClient
             }
 
         /**
-         * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
+         * This method takes a keyword as input and returns a list of Media objects filtered using image generator
+         * query
          * It uses the generator query API to get the images searched using a query, 10 at a time.
          *
          * @param keyword the search keyword
@@ -212,7 +214,7 @@ class MediaClient
                     getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                         .map {
                             pages
-                                .zip(it.entities().values)
+                                .zip(it.getEntityMap().values)
                                 .mapNotNull { (page, entity) ->
                                     page.imageInfo()?.let {
                                         mediaConverter.convert(page, entity, it)
