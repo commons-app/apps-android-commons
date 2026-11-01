@@ -226,7 +226,7 @@ class BookmarkPictureDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("mediaName", "creatorName"))
             }
         }

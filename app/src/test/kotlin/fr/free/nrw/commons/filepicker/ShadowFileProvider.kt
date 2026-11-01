@@ -11,6 +11,8 @@ import org.robolectric.annotation.Implements
 @Implements(FileProvider::class)
 class ShadowFileProvider {
 
+    // Robolectric shadow must match FileProvider.query
+    @Suppress("UnusedParameter")
     @Implementation
     fun query(
         uri: Uri?,

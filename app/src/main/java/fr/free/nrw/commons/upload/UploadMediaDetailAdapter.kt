@@ -61,12 +61,11 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             notifyDataSetChanged()
         }
 
-
     constructor(
         fragment: Fragment?,
         savedLanguageValue: String,
         recentLanguagesDao: RecentLanguagesDao,
-        voiceInputResultLauncher: ActivityResultLauncher<Intent>
+        voiceInputResultLauncher: ActivityResultLauncher<Intent>,
     ) {
         uploadMediaDetails = ArrayList()
         selectedLanguages = mutableMapOf()
@@ -81,7 +80,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         savedLanguageValue: String,
         uploadMediaDetails: MutableList<UploadMediaDetail>,
         recentLanguagesDao: RecentLanguagesDao,
-        voiceInputResultLauncher: ActivityResultLauncher<Intent>
+        voiceInputResultLauncher: ActivityResultLauncher<Intent>,
     ) {
         this.uploadMediaDetails = uploadMediaDetails
         selectedLanguages = HashMap()
@@ -91,7 +90,10 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         this.voiceInputResultLauncher = voiceInputResultLauncher
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(RowItemDescriptionBinding.inflate(inflater, parent, false))
     }
@@ -111,13 +113,14 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         holder.binding.descriptionItemEditText.isEnabled = true
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int {
-        return uploadMediaDetails.size
-    }
+    override fun getItemCount(): Int = uploadMediaDetails.size
 
     fun addDescription(uploadMediaDetail: UploadMediaDetail) {
         selectedLanguages[uploadMediaDetails.size] = "en"
@@ -127,10 +130,12 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
 
     private fun startSpeechInput(locale: String) {
         try {
-            voiceInputResultLauncher.launch(Intent(ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(EXTRA_LANGUAGE_MODEL, LANGUAGE_MODEL_FREE_FORM)
-                putExtra(EXTRA_LANGUAGE, locale)
-            })
+            voiceInputResultLauncher.launch(
+                Intent(ACTION_RECOGNIZE_SPEECH).apply {
+                    putExtra(EXTRA_LANGUAGE_MODEL, LANGUAGE_MODEL_FREE_FORM)
+                    putExtra(EXTRA_LANGUAGE, locale)
+                },
+            )
         } catch (e: Exception) {
             Timber.e(e)
         }
@@ -152,11 +157,13 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             if (currentPosition < uploadMediaDetails.size) {
                 val uploadMediaDetail = uploadMediaDetails[currentPosition]
                 when (selectedVoiceIcon) {
-                    SelectedVoiceIcon.CAPTION -> uploadMediaDetail.captionText =
-                        spokenTextCapitalized
+                    SelectedVoiceIcon.CAPTION ->
+                        uploadMediaDetail.captionText =
+                            spokenTextCapitalized
 
-                    SelectedVoiceIcon.DESCRIPTION -> uploadMediaDetail.descriptionText =
-                        spokenTextCapitalized
+                    SelectedVoiceIcon.DESCRIPTION ->
+                        uploadMediaDetail.descriptionText =
+                            spokenTextCapitalized
 
                     null -> {}
                 }
@@ -169,7 +176,10 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
      * Remove description based on position from the list and notifies the RecyclerView Adapter that
      * data in adapter has been removed at that particular position.
      */
-    fun removeDescription(uploadMediaDetail: UploadMediaDetail, position: Int) {
+    fun removeDescription(
+        uploadMediaDetail: UploadMediaDetail,
+        position: Int,
+    ) {
         selectedLanguages.remove(position)
         uploadMediaDetails.remove(uploadMediaDetail)
         var i = position + 1
@@ -182,9 +192,9 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         updateAddButtonVisibility()
     }
 
-    inner class ViewHolder(val binding: RowItemDescriptionBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
+    inner class ViewHolder(
+        val binding: RowItemDescriptionBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         var addButton: ImageView? = null
 
         var clParent: ConstraintLayout? = null
@@ -206,13 +216,14 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             betterCaptionLinearLayout = binding.llWriteBetterCaption
             betterDescriptionLinearLayout = binding.llWriteBetterDescription
 
-
             binding.descriptionLanguages.isFocusable = false
-            binding.captionItemEditText.addTextChangedListener(AbstractTextWatcher { value: String ->
-                if (position == 0) {
-                    eventListener!!.onPrimaryCaptionTextChange(value.length != 0)
-                }
-            })
+            binding.captionItemEditText.addTextChangedListener(
+                AbstractTextWatcher { value: String ->
+                    if (position == 0) {
+                        eventListener!!.onPrimaryCaptionTextChange(value.length != 0)
+                    }
+                },
+            )
             binding.captionItemEditText.removeTextChangedListener(captionListener)
             binding.descriptionItemEditText.removeTextChangedListener(descriptionListener)
             binding.captionItemEditText.setText(uploadMediaDetail.captionText)
@@ -238,14 +249,14 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                 betterCaptionLinearLayout!!.setOnClickListener { v: View? ->
                     callback!!.showAlert(
                         R.string.media_detail_caption,
-                        R.string.caption_info
+                        R.string.caption_info,
                     )
                 }
                 betterDescriptionLinearLayout!!.visibility = View.VISIBLE
                 betterDescriptionLinearLayout!!.setOnClickListener { v: View? ->
                     callback!!.showAlert(
                         R.string.media_detail_description,
-                        R.string.description_info
+                        R.string.description_info,
                     )
                 }
 
@@ -261,16 +272,18 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             binding.btnRemove.setOnClickListener { v: View? ->
                 removeDescription(
                     uploadMediaDetail,
-                    position
+                    position,
                 )
             }
-            captionListener = AbstractTextWatcher { captionText: String ->
-                uploadMediaDetail.captionText =
-                    convertIdeographicSpaceToLatinSpace(captionText.trim())
-            }
-            descriptionListener = AbstractTextWatcher { value: String? ->
-                uploadMediaDetail.descriptionText = value
-            }
+            captionListener =
+                AbstractTextWatcher { captionText: String ->
+                    uploadMediaDetail.captionText =
+                        convertIdeographicSpaceToLatinSpace(captionText.trim())
+                }
+            descriptionListener =
+                AbstractTextWatcher { value: String? ->
+                    uploadMediaDetail.descriptionText = value
+                }
             binding.captionItemEditText.addTextChangedListener(captionListener)
             initLanguage(position, uploadMediaDetail)
 
@@ -288,7 +301,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             updateAddButtonVisibility()
             addButton!!.setOnClickListener { v: View? -> eventListener!!.addLanguage() }
 
-            //If the description was manually added by the user, it deserves focus, if not, let the user decide
+            // If the description was manually added by the user, it deserves focus, if not, let the user decide
             if (uploadMediaDetail.isManuallyAdded) {
                 binding.captionItemEditText.requestFocus()
             } else {
@@ -296,24 +309,31 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             }
         }
 
-
-        private fun initLanguage(position: Int, description: UploadMediaDetail) {
+        private fun initLanguage(
+            position: Int,
+            description: UploadMediaDetail,
+        ) {
             val recentLanguages = recentLanguagesDao.getRecentLanguages()
 
-            val languagesAdapter = LanguagesAdapter(
-                binding.descriptionLanguages.context,
-                selectedLanguages
-            )
+            val languagesAdapter =
+                LanguagesAdapter(
+                    binding.descriptionLanguages.context,
+                    selectedLanguages,
+                )
 
             binding.descriptionLanguages.setOnClickListener { view ->
                 val dialog = Dialog(view.context)
                 dialog.setContentView(R.layout.dialog_select_language)
                 dialog.setCancelable(false)
                 dialog.window!!.setLayout(
-                    (view.context.resources.displayMetrics.widthPixels
-                            * 0.90).toInt(),
-                    (view.context.resources.displayMetrics.heightPixels
-                            * 0.90).toInt()
+                    (
+                        view.context.resources.displayMetrics.widthPixels
+                            * 0.90
+                    ).toInt(),
+                    (
+                        view.context.resources.displayMetrics.heightPixels
+                            * 0.90
+                    ).toInt(),
                 )
                 dialog.show()
 
@@ -331,25 +351,43 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
 
                 listView.adapter = languagesAdapter
 
-                dialog.findViewById<Button>(R.id.cancel_button)
+                dialog
+                    .findViewById<Button>(R.id.cancel_button)
                     .setOnClickListener { v: View? -> dialog.dismiss() }
 
-                editText.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) =
-                        hideRecentLanguagesSection()
+                editText.addTextChangedListener(
+                    object : TextWatcher {
+                        override fun beforeTextChanged(
+                            charSequence: CharSequence,
+                            i: Int,
+                            i1: Int,
+                            i2: Int,
+                        ) = hideRecentLanguagesSection()
 
-                    override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                        languagesAdapter.filter.filter(charSequence)
-                    }
+                        override fun onTextChanged(
+                            charSequence: CharSequence,
+                            i: Int,
+                            i1: Int,
+                            i2: Int,
+                        ) {
+                            languagesAdapter.filter.filter(charSequence)
+                        }
 
-                    override fun afterTextChanged(editable: Editable) = Unit
-                })
+                        override fun afterTextChanged(editable: Editable) = Unit
+                    },
+                )
 
-                languageHistoryListView?.setOnItemClickListener { adapterView: AdapterView<*>, view1: View?, position: Int, id: Long ->
+                languageHistoryListView?.setOnItemClickListener {
+                    adapterView: AdapterView<*>,
+                    view1: View?,
+                    position: Int,
+                    id: Long,
+                    ->
                     onRecentLanguageClicked(dialog, adapterView, position, description)
                 }
 
-                listView.onItemClickListener = OnItemClickListener { adapterView, _, i, l ->
+                listView.onItemClickListener =
+                    OnItemClickListener { adapterView, _, i, l ->
                         description.selectedLanguageIndex = i
                         val languageCode = (adapterView.adapter as LanguagesAdapter).getLanguageCode(i)
                         description.languageCode = languageCode
@@ -364,7 +402,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                         selectedLanguages[position] = languageCode
                         (adapterView.adapter as LanguagesAdapter).selectedLangCode = languageCode
                         Timber.d("Description language code is: %s", languageCode)
-                    binding.descriptionLanguages.text = languageCode
+                        binding.descriptionLanguages.text = languageCode
                         dialog.dismiss()
                     }
 
@@ -392,19 +430,22 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                     selectedLanguages.remove(position)
                     selectedLanguages[position] = description.languageCode!!
                 } else {
-                    //Checking whether Language Code attribute is null or not.
+                    // Checking whether Language Code attribute is null or not.
                     if (uploadMediaDetails[position].languageCode != null) {
-                        //If it is not null that means it is fetching details from the previous
+                        // If it is not null that means it is fetching details from the previous
                         // upload (i.e. when user has pressed copy previous caption & description)
-                        //hence providing same language code for the current upload.
-                        binding.descriptionLanguages.text = uploadMediaDetails[position]
-                            .languageCode
+                        // hence providing same language code for the current upload.
+                        binding.descriptionLanguages.text =
+                            uploadMediaDetails[position]
+                                .languageCode
                         selectedLanguages.remove(position)
                         selectedLanguages[position] = uploadMediaDetails[position].languageCode!!
                     } else {
                         if (position == 0) {
-                            val defaultLocaleIndex = languagesAdapter.getIndexOfUserDefaultLocale(
-                                binding.descriptionLanguages.getContext())
+                            val defaultLocaleIndex =
+                                languagesAdapter.getIndexOfUserDefaultLocale(
+                                    binding.descriptionLanguages.getContext(),
+                                )
                             binding.descriptionLanguages.setText(languagesAdapter.getLanguageCode(defaultLocaleIndex))
                             description.languageCode = languagesAdapter.getLanguageCode(defaultLocaleIndex)
                             selectedLanguages.remove(position)
@@ -431,15 +472,19 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
          * Handles click event for recent language section
          */
         private fun onRecentLanguageClicked(
-            dialog: Dialog, adapterView: AdapterView<*>,
-            position: Int, description: UploadMediaDetail
+            dialog: Dialog,
+            adapterView: AdapterView<*>,
+            position: Int,
+            description: UploadMediaDetail,
         ) {
             description.selectedLanguageIndex = position
-            val languageCode = (adapterView.adapter as RecentLanguagesAdapter)
-                .getLanguageCode(position)
+            val languageCode =
+                (adapterView.adapter as RecentLanguagesAdapter)
+                    .getLanguageCode(position)
             description.languageCode = languageCode
-            val languageName = (adapterView.adapter as RecentLanguagesAdapter)
-                .getLanguageName(position)
+            val languageName =
+                (adapterView.adapter as RecentLanguagesAdapter)
+                    .getLanguageName(position)
             val isExists = recentLanguagesDao.findRecentLanguage(languageCode)
             if (isExists) {
                 recentLanguagesDao.deleteRecentLanguage(languageCode)
@@ -448,8 +493,10 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
 
             selectedLanguages.clear()
             selectedLanguages[position] = languageCode
-            (adapterView
-                .adapter as RecentLanguagesAdapter).selectedLangCode = languageCode
+            (
+                adapterView
+                    .adapter as RecentLanguagesAdapter
+            ).selectedLangCode = languageCode
             Timber.d("Description language code is: %s", languageCode)
             binding.descriptionLanguages.text = languageCode
             dialog.dismiss()
@@ -479,7 +526,7 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                     for (i in recentLanguages.size - 1 downTo 5) {
                         recentLanguagesDao.deleteRecentLanguage(
                             recentLanguages[i]
-                                .languageCode
+                                .languageCode,
                         )
                     }
                 }
@@ -487,11 +534,12 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                 recentLanguagesTextView!!.visibility = View.VISIBLE
                 separator!!.visibility = View.VISIBLE
 
-                val recentLanguagesAdapter = RecentLanguagesAdapter(
-                    binding.descriptionLanguages.context,
-                    recentLanguagesDao.getRecentLanguages(),
-                    selectedLanguages
-                )
+                val recentLanguagesAdapter =
+                    RecentLanguagesAdapter(
+                        binding.descriptionLanguages.context,
+                        recentLanguagesDao.getRecentLanguages(),
+                        selectedLanguages,
+                    )
                 languageHistoryListView!!.adapter = recentLanguagesAdapter
             }
         }
@@ -518,14 +566,24 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         for (i in 0 until itemCount) {
             if (fragment != null) {
                 if (fragment!!.view != null) {
-                    val holder = (fragment!!.requireView().findViewById<View>(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
+                    val holder =
+                        (
+                            fragment!!.requireView().findViewById<View>(
+                                R.id.rv_descriptions,
+                            ) as RecyclerView
+                        ).findViewHolderForAdapterPosition(i) as ViewHolder?
                     if (holder != null) {
                         holder.addButton!!.visibility = View.GONE
                     }
                 }
             } else {
                 if (activity != null) {
-                    val holder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(i) as ViewHolder?
+                    val holder =
+                        (
+                            activity!!.findViewById<View>(
+                                R.id.rv_descriptions_captions,
+                            ) as RecyclerView
+                        ).findViewHolderForAdapterPosition(i) as ViewHolder?
                     if (holder != null) {
                         holder.addButton!!.visibility = View.GONE
                     }
@@ -536,14 +594,24 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
         // Show Add Button for the last item
         if (fragment != null) {
             if (fragment!!.view != null) {
-                val lastItemHolder = (fragment!!.requireView().findViewById<View>(R.id.rv_descriptions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
+                val lastItemHolder =
+                    (
+                        fragment!!.requireView().findViewById<View>(
+                            R.id.rv_descriptions,
+                        ) as RecyclerView
+                    ).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
                 if (lastItemHolder != null) {
                     lastItemHolder.addButton!!.visibility = View.VISIBLE
                 }
             }
         } else {
             if (activity != null) {
-                val lastItemHolder = (activity!!.findViewById<View>(R.id.rv_descriptions_captions) as RecyclerView).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
+                val lastItemHolder =
+                    (
+                        activity!!.findViewById<View>(
+                            R.id.rv_descriptions_captions,
+                        ) as RecyclerView
+                    ).findViewHolderForAdapterPosition(lastItemPosition) as ViewHolder?
                 if (lastItemHolder != null) {
                     lastItemHolder.addButton!!.visibility = View.VISIBLE
                 }
@@ -552,16 +620,20 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
     }
 
     fun interface Callback {
-        fun showAlert(mediaDetailDescription: Int, descriptionInfo: Int)
+        fun showAlert(
+            mediaDetailDescription: Int,
+            descriptionInfo: Int,
+        )
     }
 
     interface EventListener {
         fun onPrimaryCaptionTextChange(isNotEmpty: Boolean)
+
         fun addLanguage()
     }
 
     internal enum class SelectedVoiceIcon {
         CAPTION,
-        DESCRIPTION
+        DESCRIPTION,
     }
 }

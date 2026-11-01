@@ -394,9 +394,12 @@ class UploadWorker(
                             }
                             showSuccessNotification(contribution)
                             if (appContext.contentResolver.persistedUriPermissions.any {
-                                it.uri == contribution.contentUri }) {
+                                    it.uri == contribution.contentUri
+                                }
+                            ) {
                                 appContext.contentResolver.releasePersistableUriPermission(
-                                    contribution.contentUri!!, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    contribution.contentUri!!,
+                                    Intent.FLAG_GRANT_READ_URI_PERMISSION,
                                 )
                             }
                         } else {
@@ -482,32 +485,32 @@ class UploadWorker(
                 val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
                 try {
                     if (!p18WasSkipped) {
-                    // Only set P18 if the place does not already have a picture
-                    // Use uniqueFileName (the space-separated title that was
-                    // actually uploaded, after findUniqueFileName's collision
-                    // check) rather than uploadResult.filename, which MediaWiki
-                    // returns in its underscored canonical form and triggers
-                    // Wikidata's "Commons link should be well-formed" warning.
-                    // contribution.media.filename must NOT be used here: it is
-                    // the pre-upload title, which can differ from the real
-                    // uploaded title when findUniqueFileName had to rename the
-                    // file to avoid a collision with an existing Commons page.
-                    revisionID =
-                        wikidataEditService.createClaim(
-                            wikiDataPlace,
-                            uniqueFileName,
-                            contribution.media.captions,
-                        )
-                    if (null != revisionID) {
-                        withContext(Dispatchers.IO) {
-                            val place = placesRepository.fetchPlace(wikiDataPlace.id)
-                            place.name = wikiDataPlace.name
-                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
-                            placesRepository
-                                .save(place)
-                                .subscribeOn(Schedulers.io())
-                                .blockingAwait()
-                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                        // Only set P18 if the place does not already have a picture
+                        // Use uniqueFileName (the space-separated title that was
+                        // actually uploaded, after findUniqueFileName's collision
+                        // check) rather than uploadResult.filename, which MediaWiki
+                        // returns in its underscored canonical form and triggers
+                        // Wikidata's "Commons link should be well-formed" warning.
+                        // contribution.media.filename must NOT be used here: it is
+                        // the pre-upload title, which can differ from the real
+                        // uploaded title when findUniqueFileName had to rename the
+                        // file to avoid a collision with an existing Commons page.
+                        revisionID =
+                            wikidataEditService.createClaim(
+                                wikiDataPlace,
+                                uniqueFileName,
+                                contribution.media.captions,
+                            )
+                        if (null != revisionID) {
+                            withContext(Dispatchers.IO) {
+                                val place = placesRepository.fetchPlace(wikiDataPlace.id)
+                                place.name = wikiDataPlace.name
+                                place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                                placesRepository
+                                    .save(place)
+                                    .subscribeOn(Schedulers.io())
+                                    .blockingAwait()
+                                Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
                             }
                         }
                     }
@@ -521,7 +524,7 @@ class UploadWorker(
                     wikidataEditService.handleImageClaimResult(
                         contribution.wikidataPlace!!,
                         revisionID,
-                        p18WasSkipped = p18WasSkipped
+                        p18WasSkipped = p18WasSkipped,
                     )
                 }
             } else {
@@ -558,7 +561,10 @@ class UploadWorker(
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
-            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            val modifiedSha1 =
+                fileUtilsWrapper.getSHA1(
+                    fileUtilsWrapper.getFileInputStream(contribution.localUri?.path),
+                )
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
@@ -579,8 +585,9 @@ class UploadWorker(
         // Loops until sequenceFileName does not match any existing file names
         while (mediaClient
                 .checkPageExistsUsingTitle(
-                "File:$sequenceFileName")
-                .blockingGet()) {
+                    "File:$sequenceFileName",
+                ).blockingGet()
+        ) {
             val randomHash = (random.nextInt(90000) + 10000).toString()
 
             sequenceFileName =
@@ -634,7 +641,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -676,6 +688,12 @@ class UploadWorker(
     @SuppressLint("StringFormatInvalid", "MissingPermission")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
+        currentNotification.setContentIntent(
+            getPendingIntent(
+                UploadProgressActivity::class.java,
+                UploadProgressActivity.TAB_FAILED,
+            ),
+        )
         currentNotification
             .setContentTitle(
                 appContext.getString(
@@ -741,18 +759,23 @@ class UploadWorker(
     /**
      * Method used to get Pending intent for opening different screen after clicking on notification
      * @param toClass
+     * @param targetTab
      */
-    private fun getPendingIntent(toClass: Class<out BaseActivity>): PendingIntent {
+    private fun getPendingIntent(
+        toClass: Class<out BaseActivity>,
+        targetTab: Int = 0,
+    ): PendingIntent {
         val intent = Intent(appContext, toClass)
+        intent.putExtra(UploadProgressActivity.EXTRA_TARGET_TAB, targetTab)
         return TaskStackBuilder.create(appContext).run {
             addNextIntentWithParentStack(intent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 getPendingIntent(
-                    0,
+                    targetTab,
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
                 )
             } else {
-                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+                getPendingIntent(targetTab, PendingIntent.FLAG_UPDATE_CURRENT)
             }
         }
     }

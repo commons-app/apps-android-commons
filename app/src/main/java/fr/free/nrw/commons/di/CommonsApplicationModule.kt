@@ -52,19 +52,18 @@ import javax.inject.Singleton
  */
 @Module
 @Suppress("unused")
-open class CommonsApplicationModule(private val applicationContext: Context) {
-
+open class CommonsApplicationModule(
+    private val applicationContext: Context,
+) {
     init {
         appContext = applicationContext
     }
 
     @Provides
-    fun providesImageFileLoader(context: Context): ImageFileLoader =
-        ImageFileLoader(context)
+    fun providesImageFileLoader(context: Context): ImageFileLoader = ImageFileLoader(context)
 
     @Provides
-    fun providesApplicationContext(): Context =
-        applicationContext
+    fun providesApplicationContext(): Context = applicationContext
 
     @Provides
     fun provideInputMethodManager(): InputMethodManager =
@@ -72,23 +71,25 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
 
     @Provides
     @Named("licenses")
-    fun provideLicenses(context: Context): List<String> = listOf(
-        context.getString(R.string.license_name_cc0),
-        context.getString(R.string.license_name_cc_by),
-        context.getString(R.string.license_name_cc_by_sa),
-        context.getString(R.string.license_name_cc_by_four),
-        context.getString(R.string.license_name_cc_by_sa_four)
-    )
+    fun provideLicenses(context: Context): List<String> =
+        listOf(
+            context.getString(R.string.license_name_cc0),
+            context.getString(R.string.license_name_cc_by),
+            context.getString(R.string.license_name_cc_by_sa),
+            context.getString(R.string.license_name_cc_by_four),
+            context.getString(R.string.license_name_cc_by_sa_four),
+        )
 
     @Provides
     @Named("licenses_by_name")
-    fun provideLicensesByName(context: Context): Map<String, String> = mapOf(
-        context.getString(R.string.license_name_cc0) to Prefs.Licenses.CC0,
-        context.getString(R.string.license_name_cc_by) to Prefs.Licenses.CC_BY_3,
-        context.getString(R.string.license_name_cc_by_sa) to Prefs.Licenses.CC_BY_SA_3,
-        context.getString(R.string.license_name_cc_by_four) to Prefs.Licenses.CC_BY_4,
-        context.getString(R.string.license_name_cc_by_sa_four) to Prefs.Licenses.CC_BY_SA_4
-    )
+    fun provideLicensesByName(context: Context): Map<String, String> =
+        mapOf(
+            context.getString(R.string.license_name_cc0) to Prefs.Licenses.CC0,
+            context.getString(R.string.license_name_cc_by) to Prefs.Licenses.CC_BY_3,
+            context.getString(R.string.license_name_cc_by_sa) to Prefs.Licenses.CC_BY_SA_3,
+            context.getString(R.string.license_name_cc_by_four) to Prefs.Licenses.CC_BY_4,
+            context.getString(R.string.license_name_cc_by_sa_four) to Prefs.Licenses.CC_BY_SA_4,
+        )
 
     /**
      * Provides an instance of CategoryContentProviderClient i.e. the categories
@@ -142,110 +143,98 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
      */
     @Provides
     @Named("default_preferences")
-    open fun providesDefaultKvStore(context: Context, gson: Gson): JsonKvStore =
-        JsonKvStore(context, "${context.packageName}_preferences", gson)
+    open fun providesDefaultKvStore(
+        context: Context,
+        gson: Gson,
+    ): JsonKvStore = JsonKvStore(context, "${context.packageName}_preferences", gson)
 
     @Provides
     fun providesUploadController(
         sessionManager: SessionManager,
         @Named("default_preferences") kvStore: JsonKvStore,
-        context: Context
+        context: Context,
     ): UploadController = UploadController(sessionManager, context, kvStore)
 
     @Provides
     @Singleton
-    open fun provideLocationServiceManager(context: Context): LocationServiceManager =
-        LocationServiceManager(context)
+    open fun provideLocationServiceManager(context: Context): LocationServiceManager = LocationServiceManager(context)
 
     @Provides
     @Singleton
-    open fun provideDBOpenHelper(context: Context): DBOpenHelper =
-        DBOpenHelper(context)
+    open fun provideDBOpenHelper(context: Context): DBOpenHelper = DBOpenHelper(context)
 
     @Provides
     @Singleton
     @Named("thumbnail-cache")
-    open fun provideLruCache(): LruCache<String, String> =
-        LruCache(1024)
+    open fun provideLruCache(): LruCache<String, String> = LruCache(1024)
 
     @Provides
     @Singleton
-    fun provideWikidataEditListener(): WikidataEditListener =
-        WikidataEditListenerImpl()
+    fun provideWikidataEditListener(): WikidataEditListener = WikidataEditListenerImpl()
 
     @Named("isBeta")
     @Provides
     @Singleton
-    fun provideIsBetaVariant(): Boolean =
-        isBetaFlavour
+    fun provideIsBetaVariant(): Boolean = isBetaFlavour
 
     @Named(IO_THREAD)
     @Provides
-    fun providesIoThread(): Scheduler =
-        Schedulers.io()
+    fun providesIoThread(): Scheduler = Schedulers.io()
 
     @Named(MAIN_THREAD)
     @Provides
-    fun providesMainThread(): Scheduler =
-        AndroidSchedulers.mainThread()
+    fun providesMainThread(): Scheduler = AndroidSchedulers.mainThread()
 
     @Named("username")
     @Provides
-    fun provideLoggedInUsername(sessionManager: SessionManager): String =
-        Objects.toString(sessionManager.userName, "")
+    fun provideLoggedInUsername(sessionManager: SessionManager): String = Objects.toString(sessionManager.userName, "")
 
     @Provides
     @Singleton
-    fun provideAppDataBase(): AppDatabase = databaseBuilder(
-        applicationContext,
-        AppDatabase::class.java,
-        "commons_room.db"
-    ).addMigrations(
-        MIGRATION_1_2,
-        MIGRATION_19_TO_20,
-        MIGRATION_21_22
-    ).fallbackToDestructiveMigration().build()
+    fun provideAppDataBase(): AppDatabase =
+        databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "commons_room.db",
+        ).addMigrations(
+            MIGRATION_1_2,
+            MIGRATION_19_TO_20,
+            MIGRATION_21_22,
+        ).fallbackToDestructiveMigration()
+            .build()
 
     @Provides
-    fun providesContributionsDao(appDatabase: AppDatabase): ContributionDao =
-        appDatabase.contributionDao()
+    fun providesContributionsDao(appDatabase: AppDatabase): ContributionDao = appDatabase.contributionDao()
 
     @Provides
-    fun providesPlaceDao(appDatabase: AppDatabase): PlaceDao =
-        appDatabase.PlaceDao()
+    fun providesPlaceDao(appDatabase: AppDatabase): PlaceDao = appDatabase.PlaceDao()
 
     @Provides
     fun providesBookmarkLocationsDao(appDatabase: AppDatabase): BookmarkLocationsDao =
         appDatabase.bookmarkLocationsDao()
 
     @Provides
-    fun providesDepictDao(appDatabase: AppDatabase): DepictsDao =
-        appDatabase.DepictsDao()
+    fun providesDepictDao(appDatabase: AppDatabase): DepictsDao = appDatabase.DepictsDao()
 
     @Provides
-    fun providesUploadedStatusDao(appDatabase: AppDatabase): UploadedStatusDao =
-        appDatabase.UploadedStatusDao()
+    fun providesUploadedStatusDao(appDatabase: AppDatabase): UploadedStatusDao = appDatabase.UploadedStatusDao()
 
     @Provides
     fun providesNotForUploadStatusDao(appDatabase: AppDatabase): NotForUploadStatusDao =
         appDatabase.NotForUploadStatusDao()
 
     @Provides
-    fun providesReviewDao(appDatabase: AppDatabase): ReviewDao =
-        appDatabase.ReviewDao()
+    fun providesReviewDao(appDatabase: AppDatabase): ReviewDao = appDatabase.ReviewDao()
 
     @Provides
-    fun providesBookmarkCategoriesDao (appDatabase: AppDatabase): BookmarkCategoriesDao =
+    fun providesBookmarkCategoriesDao(appDatabase: AppDatabase): BookmarkCategoriesDao =
         appDatabase.bookmarkCategoriesDao()
 
     @Provides
-    fun providesContentResolver(context: Context): ContentResolver =
-        context.contentResolver
+    fun providesContentResolver(context: Context): ContentResolver = context.contentResolver
 
     @Provides
-    fun provideTimeProvider(): TimeProvider {
-        return TimeProvider(System::currentTimeMillis)
-    }
+    fun provideTimeProvider(): TimeProvider = TimeProvider(System::currentTimeMillis)
 
     companion object {
         const val IO_THREAD: String = "io_thread"
@@ -254,18 +243,20 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
         lateinit var appContext: Context
             private set
 
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    "ALTER TABLE contribution " + " ADD COLUMN hasInvalidLocation INTEGER NOT NULL DEFAULT 0"
-                )
+        val MIGRATION_1_2: Migration =
+            object : Migration(1, 2) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL(
+                        "ALTER TABLE contribution " + " ADD COLUMN hasInvalidLocation INTEGER NOT NULL DEFAULT 0",
+                    )
+                }
             }
-        }
 
-        private val MIGRATION_19_TO_20 = object : Migration(19, 20) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    """
+        private val MIGRATION_19_TO_20 =
+            object : Migration(19, 20) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL(
+                        """
                 CREATE TABLE IF NOT EXISTS bookmarks_locations (
                     location_name TEXT NOT NULL PRIMARY KEY,
                     location_language TEXT NOT NULL,
@@ -282,61 +273,62 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                     location_pic TEXT NOT NULL,
                     location_exists INTEGER NOT NULL CHECK(location_exists IN (0, 1))
                 )
-            """
-                )
+            """,
+                    )
 
-                val oldDbPath = appContext.getDatabasePath("commons.db").path
-                val oldDb = SQLiteDatabase
-                    .openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
+                    val oldDbPath = appContext.getDatabasePath("commons.db").path
+                    val oldDb =
+                        SQLiteDatabase
+                            .openDatabase(oldDbPath, null, SQLiteDatabase.OPEN_READONLY)
 
-                val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
+                    val cursor = oldDb.rawQuery("SELECT * FROM bookmarksLocations", null)
 
-                while (cursor.moveToNext()) {
-                    val locationName =
-                        cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
-                    val locationLanguage =
-                        cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
-                    val locationDescription =
-                        cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
-                    val locationCategory =
-                        cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
-                    val locationLabelText =
-                        cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
-                    val locationLabelIcon =
-                        cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
-                    val locationLat =
-                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
-                    val locationLong =
-                        cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
+                    while (cursor.moveToNext()) {
+                        val locationName =
+                            cursor.getString(cursor.getColumnIndexOrThrow("location_name"))
+                        val locationLanguage =
+                            cursor.getString(cursor.getColumnIndexOrThrow("location_language"))
+                        val locationDescription =
+                            cursor.getString(cursor.getColumnIndexOrThrow("location_description"))
+                        val locationCategory =
+                            cursor.getString(cursor.getColumnIndexOrThrow("location_category"))
+                        val locationLabelText =
+                            cursor.getString(cursor.getColumnIndexOrThrow("location_label_text"))
+                        val locationLabelIcon =
+                            cursor.getInt(cursor.getColumnIndexOrThrow("location_label_icon"))
+                        val locationLat =
+                            cursor.getDouble(cursor.getColumnIndexOrThrow("location_lat"))
+                        val locationLong =
+                            cursor.getDouble(cursor.getColumnIndexOrThrow("location_long"))
 
-                    // Handle NULL values safely
-                    val locationImageUrl =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow("location_image_url")
-                        ) ?: ""
-                    val locationWikipediaLink =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow("location_wikipedia_link")
-                        ) ?: ""
-                    val locationWikidataLink =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow("location_wikidata_link")
-                        ) ?: ""
-                    val locationCommonsLink =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow("location_commons_link")
-                        ) ?: ""
-                    val locationPic =
-                        cursor.getString(
-                            cursor.getColumnIndexOrThrow("location_pic")
-                        ) ?: ""
-                    val locationExists =
-                        cursor.getInt(
-                            cursor.getColumnIndexOrThrow("location_exists")
-                        )
+                        // Handle NULL values safely
+                        val locationImageUrl =
+                            cursor.getString(
+                                cursor.getColumnIndexOrThrow("location_image_url"),
+                            ) ?: ""
+                        val locationWikipediaLink =
+                            cursor.getString(
+                                cursor.getColumnIndexOrThrow("location_wikipedia_link"),
+                            ) ?: ""
+                        val locationWikidataLink =
+                            cursor.getString(
+                                cursor.getColumnIndexOrThrow("location_wikidata_link"),
+                            ) ?: ""
+                        val locationCommonsLink =
+                            cursor.getString(
+                                cursor.getColumnIndexOrThrow("location_commons_link"),
+                            ) ?: ""
+                        val locationPic =
+                            cursor.getString(
+                                cursor.getColumnIndexOrThrow("location_pic"),
+                            ) ?: ""
+                        val locationExists =
+                            cursor.getInt(
+                                cursor.getColumnIndexOrThrow("location_exists"),
+                            )
 
-                    db.execSQL(
-                        """
+                        db.execSQL(
+                            """
                     INSERT OR REPLACE INTO bookmarks_locations (
                         location_name, location_language, location_description, location_category,
                         location_label_text, location_label_icon, location_lat, location_long,
@@ -344,178 +336,195 @@ open class CommonsApplicationModule(private val applicationContext: Context) {
                         location_commons_link, location_pic, location_exists
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
-                        arrayOf(
-                            locationName, locationLanguage, locationDescription, locationCategory,
-                            locationLabelText, locationLabelIcon, locationLat, locationLong,
-                            locationImageUrl, locationWikipediaLink, locationWikidataLink,
-                            locationCommonsLink, locationPic, locationExists
+                            arrayOf(
+                                locationName,
+                                locationLanguage,
+                                locationDescription,
+                                locationCategory,
+                                locationLabelText,
+                                locationLabelIcon,
+                                locationLat,
+                                locationLong,
+                                locationImageUrl,
+                                locationWikipediaLink,
+                                locationWikidataLink,
+                                locationCommonsLink,
+                                locationPic,
+                                locationExists,
+                            ),
                         )
-                    )
-                }
+                    }
 
-                cursor.close()
-                oldDb.close()
+                    cursor.close()
+                    oldDb.close()
+                }
             }
-        }
     }
 }
 
-val MIGRATION_21_22 = object : Migration(21, 22) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.execSQL(
-            """
-                    CREATE TABLE IF NOT EXISTS `categories` (
-                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                        `name` TEXT NOT NULL,
-                        `description` TEXT,
-                        `thumbnail` TEXT,
-                        `last_used` INTEGER,
-                        `times_used` INTEGER NOT NULL DEFAULT 0
-                    )
-                    """.trimIndent()
-        )
-
-        db.execSQL(
-            """
-                    CREATE TABLE IF NOT EXISTS `bookmarks` (
-                        `media_name` TEXT NOT NULL,
-                        `media_creator` TEXT,
-                        PRIMARY KEY(`media_name`)
-                    )
-                    """.trimIndent()
-        )
-
-        db.execSQL(
-            """
-                    CREATE TABLE IF NOT EXISTS `bookmarksItems` (
-                        `item_name` TEXT NOT NULL,
-                        `item_description` TEXT,
-                        `item_image_url` TEXT,
-                        `item_instance_of` TEXT NOT NULL,
-                        `item_name_categories` TEXT NOT NULL,
-                        `item_description_categories` TEXT NOT NULL,
-                        `item_thumbnail_categories` TEXT NOT NULL,
-                        `item_is_selected` INTEGER NOT NULL,
-                        `item_id` TEXT NOT NULL,
-                        PRIMARY KEY(`item_id`)
-                    )
-                    """.trimIndent()
-        )
-
-        db.execSQL(
-            """
-                    CREATE TABLE IF NOT EXISTS `recent_searches` (
-                        `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                        `name` TEXT NOT NULL,
-                        `last_used` INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-        )
-
-        db.execSQL(
-            """
-                    CREATE TABLE IF NOT EXISTS `recent_languages` (
-                        `language_name` TEXT NOT NULL,
-                        `language_code` TEXT NOT NULL,
-                        PRIMARY KEY(`language_code`)
-                    )
-                    """.trimIndent()
-        )
-        // copying data from old "commons.db"  to new "commons_room.db".
-        try {
-            val legacyDbFile = appContext.getDatabasePath("commons.db")
-            if (!legacyDbFile.exists()) {
-                return
-            }
-            val legacyDbPath = legacyDbFile.path
-
-            val oldDb = SQLiteDatabase.openDatabase(
-                legacyDbPath, null, SQLiteDatabase.OPEN_READONLY
+val MIGRATION_21_22 =
+    object : Migration(21, 22) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `categories` (
+                    `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `name` TEXT NOT NULL,
+                    `description` TEXT,
+                    `thumbnail` TEXT,
+                    `last_used` INTEGER,
+                    `times_used` INTEGER NOT NULL DEFAULT 0
+                )
+                """.trimIndent(),
             )
 
-            // categories
-            var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
-            while (cursor.moveToNext()) {
-                db.execSQL(
-                    "INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
-                    arrayOf(
-                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("description")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("thumbnail")),
-                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("times_used"))
-                    )
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `bookmarks` (
+                    `media_name` TEXT NOT NULL,
+                    `media_creator` TEXT,
+                    PRIMARY KEY(`media_name`)
                 )
-            }
-            cursor.close()
+                """.trimIndent(),
+            )
 
-            // bookmarks
-            cursor = oldDb.rawQuery("SELECT * FROM bookmarks", null)
-            while (cursor.moveToNext()) {
-                db.execSQL(
-                    "INSERT OR IGNORE INTO bookmarks (media_name, media_creator) VALUES (?, ?)",
-                    arrayOf(
-                        cursor.getString(cursor.getColumnIndexOrThrow("media_name")) ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("media_creator"))
-                    )
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `bookmarksItems` (
+                    `item_name` TEXT NOT NULL,
+                    `item_description` TEXT,
+                    `item_image_url` TEXT,
+                    `item_instance_of` TEXT NOT NULL,
+                    `item_name_categories` TEXT NOT NULL,
+                    `item_description_categories` TEXT NOT NULL,
+                    `item_thumbnail_categories` TEXT NOT NULL,
+                    `item_is_selected` INTEGER NOT NULL,
+                    `item_id` TEXT NOT NULL,
+                    PRIMARY KEY(`item_id`)
                 )
-            }
-            cursor.close()
+                """.trimIndent(),
+            )
 
-            // bookmarksItems
-            cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
-            while (cursor.moveToNext()) {
-                db.execSQL(
-                    "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    arrayOf(
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_description")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_image_url")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_instance_of")) ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_name_categories"))
-                            ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_description_categories"))
-                            ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_thumbnail_categories"))
-                            ?: "",
-                        cursor.getInt(cursor.getColumnIndexOrThrow("item_is_selected")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("item_id")) ?: ""
-                    )
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `recent_searches` (
+                    `_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    `name` TEXT NOT NULL,
+                    `last_used` INTEGER NOT NULL
                 )
-            }
-            cursor.close()
+                """.trimIndent(),
+            )
 
-            // recent_searches
-            cursor = oldDb.rawQuery("SELECT * FROM recent_searches", null)
-            while (cursor.moveToNext()) {
-                db.execSQL(
-                    "INSERT OR IGNORE INTO recent_searches (_id, name, last_used) VALUES (?, ?, ?)",
-                    arrayOf(
-                        cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
-                        cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
-                        cursor.getLong(cursor.getColumnIndexOrThrow("last_used"))
-                    )
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `recent_languages` (
+                    `language_name` TEXT NOT NULL,
+                    `language_code` TEXT NOT NULL,
+                    PRIMARY KEY(`language_code`)
                 )
-            }
-            cursor.close()
-            // recent_languages
-            cursor = oldDb.rawQuery("SELECT * FROM recent_languages", null)
-            while (cursor.moveToNext()) {
-                db.execSQL(
-                    "INSERT OR IGNORE INTO recent_languages (language_name, language_code) VALUES (?, ?)",
-                    arrayOf(
-                        cursor.getString(cursor.getColumnIndexOrThrow("language_name")) ?: "",
-                        cursor.getString(cursor.getColumnIndexOrThrow("language_code")) ?: ""
+                """.trimIndent(),
+            )
+            // copying data from old "commons.db"  to new "commons_room.db".
+            try {
+                val legacyDbFile = appContext.getDatabasePath("commons.db")
+                if (!legacyDbFile.exists()) {
+                    return
+                }
+                val legacyDbPath = legacyDbFile.path
+
+                val oldDb =
+                    SQLiteDatabase.openDatabase(
+                        legacyDbPath,
+                        null,
+                        SQLiteDatabase.OPEN_READONLY,
                     )
-                )
+
+                // categories
+                var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
+                while (cursor.moveToNext()) {
+                    db.execSQL(
+                        "INSERT OR IGNORE INTO categories (_id, name, description, " +
+                            "thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
+                        arrayOf(
+                            cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("thumbnail")),
+                            cursor.getLong(cursor.getColumnIndexOrThrow("last_used")),
+                            cursor.getInt(cursor.getColumnIndexOrThrow("times_used")),
+                        ),
+                    )
+                }
+                cursor.close()
+
+                // bookmarks
+                cursor = oldDb.rawQuery("SELECT * FROM bookmarks", null)
+                while (cursor.moveToNext()) {
+                    db.execSQL(
+                        "INSERT OR IGNORE INTO bookmarks (media_name, media_creator) VALUES (?, ?)",
+                        arrayOf(
+                            cursor.getString(cursor.getColumnIndexOrThrow("media_name")) ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("media_creator")),
+                        ),
+                    )
+                }
+                cursor.close()
+
+                // bookmarksItems
+                cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
+                while (cursor.moveToNext()) {
+                    db.execSQL(
+                        "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, " +
+                            "item_image_url, item_instance_of, item_name_categories, " +
+                            "item_description_categories, item_thumbnail_categories, " +
+                            "item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        arrayOf(
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_description")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_image_url")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_instance_of")) ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_name_categories"))
+                                ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_description_categories"))
+                                ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_thumbnail_categories"))
+                                ?: "",
+                            cursor.getInt(cursor.getColumnIndexOrThrow("item_is_selected")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("item_id")) ?: "",
+                        ),
+                    )
+                }
+                cursor.close()
+
+                // recent_searches
+                cursor = oldDb.rawQuery("SELECT * FROM recent_searches", null)
+                while (cursor.moveToNext()) {
+                    db.execSQL(
+                        "INSERT OR IGNORE INTO recent_searches (_id, name, last_used) VALUES (?, ?, ?)",
+                        arrayOf(
+                            cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
+                            cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
+                            cursor.getLong(cursor.getColumnIndexOrThrow("last_used")),
+                        ),
+                    )
+                }
+                cursor.close()
+                // recent_languages
+                cursor = oldDb.rawQuery("SELECT * FROM recent_languages", null)
+                while (cursor.moveToNext()) {
+                    db.execSQL(
+                        "INSERT OR IGNORE INTO recent_languages (language_name, language_code) VALUES (?, ?)",
+                        arrayOf(
+                            cursor.getString(cursor.getColumnIndexOrThrow("language_name")) ?: "",
+                            cursor.getString(cursor.getColumnIndexOrThrow("language_code")) ?: "",
+                        ),
+                    )
+                }
+                cursor.close()
+                oldDb.close()
+            } catch (e: Exception) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
             }
-            cursor.close()
-            oldDb.close()
-        } catch (e: Exception) {
-            Timber.e(e, "Exception during legacy database migration")
-            throw e
         }
     }
-}
-

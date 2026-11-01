@@ -179,7 +179,8 @@ class CsrfTokenClient(
             ) = callback.emailAuthPrompt()
 
             // Should not happen here, but call the callback just in case.
-            override fun passwordResetPrompt(token: String?) = callback.failure(LoginFailedException("Logged in with temporary password."))
+            override fun passwordResetPrompt(token: String?) =
+                callback.failure(LoginFailedException("Logged in with temporary password."))
 
             override fun error(caught: Throwable) = callback.failure(caught)
         },
