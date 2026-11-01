@@ -399,40 +399,40 @@ class ImageFragment :
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
+        cleanupAdapter()
+        saveLastVisibleItemId()
+        super.onDestroy()
+    }
+
+    private fun cleanupAdapter() {
         if (::imageAdapter.isInitialized) {
             imageAdapter.cleanUp()
             Timber.d("Cleaned up imageAdapter in onDestroy")
         } else {
             Timber.w("imageAdapter not initialized in onDestroy, skipping cleanup")
         }
+    }
 
+    private fun saveLastVisibleItemId() {
         val position =
             (selectorRV?.layoutManager as? GridLayoutManager)
                 ?.findFirstVisibleItemPosition() ?: -1
 
-        // check for valid position and non-empty image list
-        if (position != -1 && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
-            context?.let { context ->
-                context
-                    .getSharedPreferences(
-                        "CustomSelector",
-                        MODE_PRIVATE,
-                    )?.let { prefs ->
-                        prefs.edit()?.let { editor ->
-                            editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
-                            Timber.d("Saved last visible item ID: %d", imageAdapter.getImageIdAt(position))
-                        }
-                    }
-            }
-        } else {
+        if (position == -1 || filteredImages.isEmpty() || !::imageAdapter.isInitialized) {
             Timber.d(
                 "Skipped saving item ID: position=%d, filteredImages.size=%d, imageAdapter initialized=%b",
                 position,
                 filteredImages.size,
                 ::imageAdapter.isInitialized,
             )
+            return
         }
-        super.onDestroy()
+
+        val context = context
+        val prefs = context?.getSharedPreferences("CustomSelector", MODE_PRIVATE) ?: return
+        val imageId = imageAdapter.getImageIdAt(position)
+        prefs.edit().putLong("ItemId", imageId).apply()
+        Timber.d("Saved last visible item ID: %d", imageId)
     }
 
     override fun onDestroyView() {

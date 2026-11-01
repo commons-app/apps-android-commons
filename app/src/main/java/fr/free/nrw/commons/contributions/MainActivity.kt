@@ -20,7 +20,6 @@ import fr.free.nrw.commons.databinding.MainBinding
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment
 import fr.free.nrw.commons.navtab.NavTab
@@ -68,7 +67,6 @@ class MainActivity :
 
     @JvmField
     var activeFragment: ActiveFragment? = null
-    private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null
     var navListener: BottomNavigationView.OnNavigationItemSelectedListener? = null
         private set
 
