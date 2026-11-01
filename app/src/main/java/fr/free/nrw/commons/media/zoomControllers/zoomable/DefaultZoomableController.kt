@@ -389,26 +389,26 @@ open class DefaultZoomableController(
         outTransform: Matrix,
         @LimitFlag limitTypes: Int,
     ): Boolean {
-        val detector = mGestureDetector
+        val gesture = mGestureDetector.transform
         var transformCorrected = false
         outTransform.set(mPreviousTransform)
         if (mIsRotationEnabled) {
-            val angle = detector.getRotation() * (180 / Math.PI).toFloat()
-            outTransform.postRotate(angle, detector.getPivotX(), detector.getPivotY())
+            val angle = gesture.getRotation() * (180 / Math.PI).toFloat()
+            outTransform.postRotate(angle, gesture.getPivotX(), gesture.getPivotY())
         }
         if (mIsScaleEnabled) {
-            val scale = detector.getScale()
-            outTransform.postScale(scale, scale, detector.getPivotX(), detector.getPivotY())
+            val scale = gesture.getScale()
+            outTransform.postScale(scale, scale, gesture.getPivotX(), gesture.getPivotY())
         }
         transformCorrected = transformCorrected or
             limitScale(
                 outTransform,
-                detector.getPivotX(),
-                detector.getPivotY(),
+                gesture.getPivotX(),
+                gesture.getPivotY(),
                 limitTypes,
             )
         if (mIsTranslationEnabled) {
-            outTransform.postTranslate(detector.getTranslationX(), detector.getTranslationY())
+            outTransform.postTranslate(gesture.getTranslationX(), gesture.getTranslationY())
         }
         transformCorrected = transformCorrected or limitTranslation(outTransform, limitTypes)
         return transformCorrected
