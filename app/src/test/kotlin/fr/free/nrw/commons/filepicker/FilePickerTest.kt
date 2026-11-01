@@ -7,14 +7,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.KArgumentCaptor
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
+import javassist.tools.Callback.callbacks
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -51,6 +54,9 @@ class FilePickerTest {
 
     @Mock
     private lateinit var mockResultLauncher: ActivityResultLauncher<Intent>
+
+    @Mock
+    private lateinit var callbacks: FilePicker.Callbacks
 
     private val intentCaptor: KArgumentCaptor<Intent> = argumentCaptor()
 
@@ -94,7 +100,7 @@ class FilePickerTest {
         verify(mockResultLauncher).launch(intentCaptor.capture())
 
         val capturedIntent = intentCaptor.firstValue
-        
+
         assertEquals(MediaStore.ACTION_IMAGE_CAPTURE, capturedIntent.action)
     }
 
@@ -204,5 +210,31 @@ class FilePickerTest {
             CustomSelectorActivity.Companion::class.java.declaringClass.name,
             capturedIntent.component?.className
         )
+    }
+
+    @Test
+    fun testOnPictureReturnedFromCameraCanceled() {
+        val activityResult = ActivityResult(Activity.RESULT_CANCELED, null)
+        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
+        `when`(sharedPref.getInt("type", 0)).thenReturn(0)
+
+        FilePicker.onPictureReturnedFromCamera(activityResult, activity, callbacks)
+
+        verify(callbacks).onCanceled(FilePicker.ImageSource.CAMERA_IMAGE, 0)
+    }
+
+    @Test
+    fun testOnPictureReturnedFromCameraNullPhoto() {
+        val activityResult = ActivityResult(Activity.RESULT_OK, null)
+        `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
+        `when`(sharedPref.getString("photo_uri", null)).thenReturn(null)
+        `when`(sharedPref.getString("last_photo", null)).thenReturn(null)
+        `when`(sharedPref.getInt("type", 0)).thenReturn(0)
+        `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
+        `when`(sharedPreferencesEditor?.remove(anyOrNull())).thenReturn(sharedPreferencesEditor)
+
+        FilePicker.onPictureReturnedFromCamera(activityResult, activity, callbacks)
+
+        verify(callbacks).onImagePickerError(anyOrNull(), anyOrNull(), anyOrNull())
     }
 }

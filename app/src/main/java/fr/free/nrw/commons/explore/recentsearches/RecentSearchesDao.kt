@@ -66,23 +66,28 @@ class RecentSearchesDao
                         "$COLUMN_LAST_USED DESC",
                     )
                 while (cursor != null && cursor.moveToNext()) {
-                    try {
-                        val recentSearch = find(fromCursor(cursor).query)
-                        if (recentSearch!!.contentUri == null) {
-                            throw RuntimeException("tried to delete item with no content URI")
-                        } else {
-                            db.delete(recentSearch.contentUri!!, null, null)
-                        }
-                    } catch (e: RemoteException) {
-                        throw RuntimeException(e)
-                    } finally {
-                        db.release()
-                    }
+                    deleteSearchItem(db, cursor)
                 }
             } catch (e: RemoteException) {
                 throw RuntimeException(e)
             } finally {
                 cursor?.close()
+                db.release()
+            }
+        }
+
+        private fun deleteSearchItem(
+            db: ContentProviderClient,
+            cursor: Cursor,
+        ) {
+            val recentSearch = find(fromCursor(cursor).query)
+            if (recentSearch?.contentUri == null) {
+                throw RuntimeException("tried to delete item with no content URI")
+            }
+            try {
+                db.delete(recentSearch.contentUri!!, null, null)
+            } catch (e: RemoteException) {
+                throw RuntimeException(e)
             }
         }
 

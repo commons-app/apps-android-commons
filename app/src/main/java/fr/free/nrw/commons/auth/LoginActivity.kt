@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
@@ -28,6 +27,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.login.LoginCallback
 import fr.free.nrw.commons.auth.login.LoginClient
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityLoginBinding
@@ -190,7 +190,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 progressDialog!!.dismiss()
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not dismiss login progress dialog")
         }
         with(binding!!) {
             loginUsername.removeTextChangedListener(textWatcher)
@@ -332,17 +332,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
     }
 
-    private fun onEditorAction(
-        textView: TextView,
-        actionId: Int,
-        keyEvent: KeyEvent?,
-    ) = if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
-        performLogin()
-        true
-    } else {
-        false
-    }
-
     private fun isTriggerAction(
         actionId: Int,
         keyEvent: KeyEvent?,
@@ -425,7 +414,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
                     runOnUiThread {
                         Timber.e(caught)
                         progressDialog!!.dismiss()
-                        showMessageAndCancelDialog(caught.localizedMessage ?: "")
+                        showLoginError(caught)
                     }
             },
         )
@@ -505,6 +494,19 @@ class LoginActivity : AccountAuthenticatorActivity() {
     fun showMessageAndCancelDialog(error: String) {
         showMessage(error, R.color.secondaryDarkColor)
         progressDialog?.cancel()
+    }
+
+    @VisibleForTesting
+    fun showLoginError(caught: Throwable) {
+        val message = caught.localizedMessage
+        if (caught is LoginFailedException && !message.isNullOrBlank()) {
+            // Server message, already localized via the uselang parameter
+            showMessageAndCancelDialog(message)
+        } else {
+            // Other errors (network, unexpected response) carry untranslated
+            // technical messages, so fall back to a localized generic message
+            showMessageAndCancelDialog(R.string.login_failed_generic)
+        }
     }
 
     @VisibleForTesting

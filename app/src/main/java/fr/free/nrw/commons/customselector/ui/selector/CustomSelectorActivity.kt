@@ -192,7 +192,7 @@ class CustomSelectorActivity :
         toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
         bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
         binding.partialAccessIndicator.setContent {
-            partialStorageAccessIndicator(
+            PartialStorageAccessIndicator(
                 isVisible = showPartialAccessIndicator,
                 onManage = {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -616,7 +616,7 @@ class CustomSelectorActivity :
 
         if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
-            bottomSheetBinding.upload.alpha = 0.5f
+            bottomSheetBinding.upload.alpha = DISABLED_BUTTON_ALPHA
         } else {
             bottomSheetBinding.upload.isEnabled = true
             bottomSheetBinding.upload.alpha = 1f
@@ -761,11 +761,12 @@ class CustomSelectorActivity :
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
         const val EXTRA_SINGLE_SELECTION: String = "EXTRA_SINGLE_SELECTION"
+        private const val DISABLED_BUTTON_ALPHA = 0.5f
     }
 }
 
 @Composable
-fun partialStorageAccessIndicator(
+fun PartialStorageAccessIndicator(
     isVisible: Boolean,
     onManage: () -> Unit,
     modifier: Modifier = Modifier,
@@ -807,9 +808,9 @@ fun partialStorageAccessIndicator(
 
 @Preview
 @Composable
-fun partialStorageAccessIndicatorPreview() {
+private fun PartialStorageAccessIndicatorPreview() {
     Surface {
-        partialStorageAccessIndicator(
+        PartialStorageAccessIndicator(
             isVisible = true,
             onManage = {},
             modifier =

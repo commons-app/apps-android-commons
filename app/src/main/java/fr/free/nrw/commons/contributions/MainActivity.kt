@@ -20,7 +20,6 @@ import fr.free.nrw.commons.databinding.MainBinding
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment
 import fr.free.nrw.commons.navtab.NavTab
@@ -36,7 +35,7 @@ import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import io.reactivex.Completable
@@ -68,7 +67,6 @@ class MainActivity :
 
     @JvmField
     var activeFragment: ActiveFragment? = null
-    private val mediaDetailPagerFragment: MediaDetailPagerFragment? = null
     var navListener: BottomNavigationView.OnNavigationItemSelectedListener? = null
         private set
 
