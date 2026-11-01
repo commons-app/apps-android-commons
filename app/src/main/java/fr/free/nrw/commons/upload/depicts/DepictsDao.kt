@@ -17,12 +17,11 @@ import java.util.Date
  *  Dao class for DepictsRoomDataBase
  */
 
+/** The maximum number of depicts allowed in the database. */
 private const val MAX_ITEMS_ALLOWED = 10
 
 @Dao
 abstract class DepictsDao {
-    /** The maximum number of depicts allowed in the database. */
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(depictedItem: Depicts)
 
