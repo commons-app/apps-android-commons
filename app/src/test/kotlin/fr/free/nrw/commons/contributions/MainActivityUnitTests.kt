@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.view.MenuItem
@@ -72,9 +71,6 @@ class MainActivityUnitTests {
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
-
-    @Mock
-    private lateinit var defaultKvStore: JsonKvStore
 
     @Mock
     private lateinit var bundle: Bundle

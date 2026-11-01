@@ -105,7 +105,8 @@ import java.io.IOException
  * .registerTypeAdapterFactory(shapeAdapterFactory)
  * .create();
 `</pre> *
- * Like `GsonBuilder`, this API supports chaining: <pre>   `RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory = RuntimeTypeAdapterFactory.of(Shape.class)
+ * Like `GsonBuilder`, this API supports chaining: <pre> `RuntimeTypeAdapterFactory<Shape> shapeAdapterFactory =
+ * RuntimeTypeAdapterFactory.of(Shape.class)
  * .registerSubtype(Rectangle.class)
  * .registerSubtype(Circle.class)
  * .registerSubtype(Diamond.class);
@@ -124,9 +125,8 @@ import java.io.IOException
 class RuntimeTypeAdapterFactory<T>(
     baseType: Class<*>?,
     typeFieldName: String?,
-    maintainType: Boolean
+    maintainType: Boolean,
 ) : TypeAdapterFactory {
-
     private val baseType: Class<*>
     private val typeFieldName: String
     private val labelToSubtype = mutableMapOf<String, Class<*>>()
@@ -149,7 +149,10 @@ class RuntimeTypeAdapterFactory<T>(
      * @throws IllegalArgumentException if either `type` or `label`
      * have already been registered on this type adapter.
      */
-    fun registerSubtype(type: Class<out T>?, label: String?): RuntimeTypeAdapterFactory<T> {
+    fun registerSubtype(
+        type: Class<out T>?,
+        label: String?,
+    ): RuntimeTypeAdapterFactory<T> {
         if (type == null || label == null) {
             throw NullPointerException()
         }
@@ -168,11 +171,12 @@ class RuntimeTypeAdapterFactory<T>(
      * @throws IllegalArgumentException if either `type` or its simple name
      * have already been registered on this type adapter.
      */
-    fun registerSubtype(type: Class<out T>): RuntimeTypeAdapterFactory<T> {
-        return registerSubtype(type, type.simpleName)
-    }
+    fun registerSubtype(type: Class<out T>): RuntimeTypeAdapterFactory<T> = registerSubtype(type, type.simpleName)
 
-    override fun <R : Any> create(gson: Gson, type: TypeToken<R>): TypeAdapter<R>? {
+    override fun <R : Any> create(
+        gson: Gson,
+        type: TypeToken<R>,
+    ): TypeAdapter<R>? {
         if (type.rawType != baseType) {
             return null
         }
@@ -180,11 +184,13 @@ class RuntimeTypeAdapterFactory<T>(
         val labelToDelegate = mutableMapOf<String, TypeAdapter<*>>()
         val subtypeToDelegate = mutableMapOf<Class<*>, TypeAdapter<*>>()
         for ((key, value) in labelToSubtype) {
-            val delegate = gson.getDelegateAdapter(
-                this, TypeToken.get(
-                    value
+            val delegate =
+                gson.getDelegateAdapter(
+                    this,
+                    TypeToken.get(
+                        value,
+                    ),
                 )
-            )
             labelToDelegate[key] = delegate
             subtypeToDelegate[value] = delegate
         }
@@ -193,22 +199,24 @@ class RuntimeTypeAdapterFactory<T>(
             @Throws(IOException::class)
             override fun read(reader: JsonReader): R? {
                 val jsonElement = Streams.parse(reader)
-                val labelJsonElement = if (maintainType) {
-                    jsonElement.asJsonObject[typeFieldName]
-                } else {
-                    jsonElement.asJsonObject.remove(typeFieldName)
-                }
+                val labelJsonElement =
+                    if (maintainType) {
+                        jsonElement.asJsonObject[typeFieldName]
+                    } else {
+                        jsonElement.asJsonObject.remove(typeFieldName)
+                    }
 
                 if (labelJsonElement == null) {
                     throw JsonParseException(
-                        "cannot deserialize $baseType because it does not define a field named $typeFieldName"
+                        "cannot deserialize $baseType because it does not define a field named $typeFieldName",
                     )
                 }
                 val label = labelJsonElement.asString
                 val delegate = labelToDelegate[label] as TypeAdapter<R>?
                 if (delegate == null) {
                     Timber.tag("RuntimeTypeAdapter").e(
-                        "cannot deserialize $baseType subtype named $label; did you forget to register a subtype? $jsonElement"
+                        "cannot deserialize $baseType subtype named $label; did" +
+                            " you forget to register a subtype? $jsonElement",
                     )
                     return null
                 }
@@ -216,11 +224,14 @@ class RuntimeTypeAdapterFactory<T>(
             }
 
             @Throws(IOException::class)
-            override fun write(out: JsonWriter, value: R) {
+            override fun write(
+                out: JsonWriter,
+                value: R,
+            ) {
                 val srcType: Class<*> = value::class.java.javaClass
                 val delegate =
                     subtypeToDelegate[srcType] as TypeAdapter<R?>? ?: throw JsonParseException(
-                        "cannot serialize ${srcType.name}; did you forget to register a subtype?"
+                        "cannot serialize ${srcType.name}; did you forget to register a subtype?",
                     )
 
                 val jsonObject = delegate.toJsonTree(value).asJsonObject
@@ -231,7 +242,7 @@ class RuntimeTypeAdapterFactory<T>(
 
                 if (jsonObject.has(typeFieldName)) {
                     throw JsonParseException(
-                        "cannot serialize ${srcType.name} because it already defines a field named $typeFieldName"
+                        "cannot serialize ${srcType.name} because it already defines a field named $typeFieldName",
                     )
                 }
                 val clone = JsonObject()
@@ -247,21 +258,24 @@ class RuntimeTypeAdapterFactory<T>(
 
     companion object {
         /**
-         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type field names are case sensitive.
+         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type
+         * field names are case sensitive.
          * `maintainType` flag decide if the type will be stored in pojo or not.
          */
         fun <T> of(
             baseType: Class<T>,
             typeFieldName: String,
-            maintainType: Boolean
-        ): RuntimeTypeAdapterFactory<T> =
-            RuntimeTypeAdapterFactory(baseType, typeFieldName, maintainType)
+            maintainType: Boolean,
+        ): RuntimeTypeAdapterFactory<T> = RuntimeTypeAdapterFactory(baseType, typeFieldName, maintainType)
 
         /**
-         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type field names are case sensitive.
+         * Creates a new runtime type adapter using for `baseType` using `typeFieldName` as the type field name. Type
+         * field names are case sensitive.
          */
-        fun <T> of(baseType: Class<T>, typeFieldName: String): RuntimeTypeAdapterFactory<T> =
-            RuntimeTypeAdapterFactory(baseType, typeFieldName, false)
+        fun <T> of(
+            baseType: Class<T>,
+            typeFieldName: String,
+        ): RuntimeTypeAdapterFactory<T> = RuntimeTypeAdapterFactory(baseType, typeFieldName, false)
 
         /**
          * Creates a new runtime type adapter for `baseType` using `"type"` as

@@ -43,17 +43,20 @@ class SignupActivity : BaseActivity() {
             loadUrl(BuildConfig.SIGNUP_LANDING_URL)
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (webView!!.canGoBack()) {
-                    webView!!.goBack()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                    isEnabled = true
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (webView!!.canGoBack()) {
+                        webView!!.goBack()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
                 }
-            }
-        })
+            },
+        )
     }
 
     /**
@@ -65,7 +68,9 @@ class SignupActivity : BaseActivity() {
     override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
         if (Build.VERSION.SDK_INT <= 25 &&
             (resources.configuration.uiMode == applicationContext.resources.configuration.uiMode)
-        ) return
+        ) {
+            return
+        }
         super.applyOverrideConfiguration(overrideConfiguration)
     }
 
@@ -113,7 +118,7 @@ class SignupActivity : BaseActivity() {
                 Timber.d("Overriding URL %s", url)
                 true
             } else {
-                //If user clicks any other links in the webview
+                // If user clicks any other links in the webview
                 Timber.d("Not overriding URL, URL is: %s", url)
                 false
             }

@@ -38,9 +38,8 @@ import fr.free.nrw.commons.utils.PermissionUtils
 class LocationPermissionsHelper(
     private val activity: Activity,
     private val locationManager: LocationServiceManager,
-    private val callback: LocationPermissionCallback?
+    private val callback: LocationPermissionCallback?,
 ) {
-
     /**
      * Ask for location permission if the user agrees on attaching location with pictures and the
      * app does not have the access to location
@@ -50,14 +49,14 @@ class LocationPermissionsHelper(
      */
     fun requestForLocationAccess(
         dialogTitleResource: Int,
-        dialogTextResource: Int
+        dialogTextResource: Int,
     ) {
         if (checkLocationPermission(activity)) {
             callback?.onLocationPermissionGranted()
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     activity,
-                    permission.ACCESS_FINE_LOCATION
+                    permission.ACCESS_FINE_LOCATION,
                 )
             ) {
                 DialogUtil.showAlertDialog(
@@ -70,21 +69,21 @@ class LocationPermissionsHelper(
                         ActivityCompat.requestPermissions(
                             activity,
                             arrayOf(permission.ACCESS_FINE_LOCATION),
-                            1
+                            1,
                         )
                     },
                     {
                         callback?.onLocationPermissionDenied(
-                            activity.getString(R.string.upload_map_location_access)
+                            activity.getString(R.string.upload_map_location_access),
                         )
                     },
-                    null
+                    null,
                 )
             } else {
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(permission.ACCESS_FINE_LOCATION),
-                    RequestCodes.LOCATION
+                    RequestCodes.LOCATION,
                 )
             }
         }
@@ -96,7 +95,10 @@ class LocationPermissionsHelper(
      * @param activity Activity object
      * @param dialogTextResource int id of the required string resource
      */
-    fun showLocationOffDialog(activity: Activity, dialogTextResource: Int) {
+    fun showLocationOffDialog(
+        activity: Activity,
+        dialogTextResource: Int,
+    ) {
         DialogUtil.showAlertDialog(
             activity,
             activity.getString(R.string.ask_to_turn_location_on),
@@ -105,12 +107,13 @@ class LocationPermissionsHelper(
             activity.getString(R.string.cancel),
             { openLocationSettings(activity) },
             {
-                Toast.makeText(
-                    activity,
-                    activity.getString(dialogTextResource),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                Toast
+                    .makeText(
+                        activity,
+                        activity.getString(dialogTextResource),
+                        Toast.LENGTH_LONG,
+                    ).show()
+            },
         )
     }
 
@@ -126,7 +129,8 @@ class LocationPermissionsHelper(
         if (intent.resolveActivity(packageManager) != null) {
             activity.startActivity(intent)
         } else {
-            Toast.makeText(activity, R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
+            Toast
+                .makeText(activity, R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
                 .show()
         }
     }
@@ -137,7 +141,10 @@ class LocationPermissionsHelper(
      * @param activity Activity object
      * @param dialogTextResource int id of the required string resource
      */
-    fun showAppSettingsDialog(activity: Activity, dialogTextResource: Int) {
+    fun showAppSettingsDialog(
+        activity: Activity,
+        dialogTextResource: Int,
+    ) {
         DialogUtil.showAlertDialog(
             activity,
             activity.getString(R.string.location_permission_title),
@@ -146,12 +153,13 @@ class LocationPermissionsHelper(
             activity.getString(R.string.cancel),
             { openAppSettings(activity) },
             {
-                Toast.makeText(
-                    activity,
-                    activity.getString(dialogTextResource),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                Toast
+                    .makeText(
+                        activity,
+                        activity.getString(dialogTextResource),
+                        Toast.LENGTH_LONG,
+                    ).show()
+            },
         )
     }
 
@@ -172,9 +180,8 @@ class LocationPermissionsHelper(
      *
      * @return Returns true if location services are on and false otherwise
      */
-    fun isLocationAccessToAppsTurnedOn(): Boolean {
-        return locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled()
-    }
+    fun isLocationAccessToAppsTurnedOn(): Boolean =
+        locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled()
 
     /**
      * Checks if location permission is already granted or not
@@ -182,18 +189,18 @@ class LocationPermissionsHelper(
      * @param activity Activity object
      * @return Returns true if location permission is granted and false otherwise
      */
-    fun checkLocationPermission(activity: Activity): Boolean {
-        return PermissionUtils.hasPermission(
+    fun checkLocationPermission(activity: Activity): Boolean =
+        PermissionUtils.hasPermission(
             activity,
-            arrayOf(permission.ACCESS_FINE_LOCATION)
+            arrayOf(permission.ACCESS_FINE_LOCATION),
         )
-    }
 
     /**
      * Handle onPermissionDenied within individual classes based on the requirements
      */
     interface LocationPermissionCallback {
         fun onLocationPermissionDenied(toastMessage: String)
+
         fun onLocationPermissionGranted()
     }
 }

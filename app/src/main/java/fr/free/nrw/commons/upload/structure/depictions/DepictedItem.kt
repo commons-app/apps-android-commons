@@ -105,7 +105,8 @@ private fun getImageUrl(
         .replace(" ", "_")
         .let {
             val md5Hash = getMd5(it)
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
+                "${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"
         }
 
 /**

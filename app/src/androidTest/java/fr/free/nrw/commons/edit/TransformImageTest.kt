@@ -29,7 +29,6 @@ import kotlin.math.abs
  */
 @RunWith(AndroidJUnit4::class)
 class TransformImageTest {
-
     @get:Rule
     val tempFolder = TemporaryFolder()
 
@@ -49,7 +48,11 @@ class TransformImageTest {
         editViewModel.cleanup()
     }
 
-    private fun rotateImage(imageFile: File, degree: Int, savePath: File = this.savePath): File {
+    private fun rotateImage(
+        imageFile: File,
+        degree: Int,
+        savePath: File = this.savePath,
+    ): File {
         val normalizedDegree = ((degree % 360) + 360) % 360
         editViewModel.initJpegtran(context!!, imageFile.absolutePath)
         val outPutFile = editViewModel.rotateImage(imageFile, normalizedDegree, savePath)
@@ -63,7 +66,7 @@ class TransformImageTest {
         top: Int,
         width: Int,
         height: Int,
-        savePath: File = this.savePath
+        savePath: File = this.savePath,
     ): File {
         editViewModel.cleanup()
         editViewModel.initJpegtran(context!!, imageFile.absolutePath)
@@ -75,7 +78,7 @@ class TransformImageTest {
     private fun blurImage(
         imageFile: File,
         regions: List<BlurRegion>,
-        savePath: File = this.savePath
+        savePath: File = this.savePath,
     ): File {
         editViewModel.cleanup()
         editViewModel.initJpegtran(context!!, imageFile.absolutePath)
@@ -92,16 +95,15 @@ class TransformImageTest {
         return tempFile
     }
 
-    private fun decodeBitmap(file: File): Bitmap {
-        return BitmapFactory.decodeFile(file.absolutePath)
+    private fun decodeBitmap(file: File): Bitmap =
+        BitmapFactory.decodeFile(file.absolutePath)
             ?: throw AssertionError("Failed to decode bitmap from ${file.name}")
-    }
 
     private fun assertColorsAreSimilar(
         message: String,
         expected: Int,
         actual: Int,
-        tolerance: Int = 25
+        tolerance: Int = 25,
     ) {
         val r1 = (expected shr 16) and 0xFF
         val g1 = (expected shr 8) and 0xFF
@@ -117,12 +119,16 @@ class TransformImageTest {
 
         if (diffR > tolerance || diffG > tolerance || diffB > tolerance) {
             throw AssertionError(
-                "$message - Color mismatch: expected R=$r1 G=$g1 B=$b1, but got R=$r2 G=$g2 B=$b2 (tolerance=$tolerance)"
+                "$message - Color mismatch: expected R=$r1 G=$g1 B=$b1, but got R=$r2 G=$g2 B=$b2 (tolerance=$tolerance)",
             )
         }
     }
 
-    private fun assertRotationWorked(originalFile: File, rotatedFile: File, rotationDegrees: Int) {
+    private fun assertRotationWorked(
+        originalFile: File,
+        rotatedFile: File,
+        rotationDegrees: Int,
+    ) {
         val origBmp = decodeBitmap(originalFile)
         val rotBmp = decodeBitmap(rotatedFile)
 
@@ -136,12 +142,15 @@ class TransformImageTest {
             assertTrue("Width should be close to original width", abs(w - rotBmp.width) < 16)
             assertTrue(
                 "Height should be close to original height",
-                abs(h - rotBmp.height) < 16
+                abs(h - rotBmp.height) < 16,
             )
         }
     }
 
-    private fun assertImagesAreIdentical(originalFile: File, finalFile: File) {
+    private fun assertImagesAreIdentical(
+        originalFile: File,
+        finalFile: File,
+    ) {
         val origBmp = decodeBitmap(originalFile)
         val finalBmp = decodeBitmap(finalFile)
 
@@ -228,8 +237,8 @@ class TransformImageTest {
             ExifInterface.ORIENTATION_NORMAL,
             rotatedExif.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
+                ExifInterface.ORIENTATION_UNDEFINED,
+            ),
         )
     }
 
@@ -246,8 +255,8 @@ class TransformImageTest {
             ExifInterface.ORIENTATION_NORMAL,
             exifAfterFirst.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
+                ExifInterface.ORIENTATION_UNDEFINED,
+            ),
         )
         assertRotationWorked(originalFile, afterFirst180, 180)
 
@@ -260,8 +269,8 @@ class TransformImageTest {
             ExifInterface.ORIENTATION_NORMAL,
             finalExif.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
+                ExifInterface.ORIENTATION_UNDEFINED,
+            ),
         )
         assertImagesAreIdentical(originalFile, afterSecond180)
     }
@@ -283,11 +292,11 @@ class TransformImageTest {
             // The physical pixels must be trimmed to the nearest lower MCU boundary
             assertTrue(
                 "Imperfect dimension should be trimmed and strictly smaller than original",
-                rotatedBmp.width < originalHeight
+                rotatedBmp.width < originalHeight,
             )
             assertTrue(
                 "Trimmed amount should not exceed 16 pixels",
-                rotatedBmp.width >= originalHeight - 16
+                rotatedBmp.width >= originalHeight - 16,
             )
         }
 
@@ -295,18 +304,18 @@ class TransformImageTest {
         if (remW != 0) {
             assertTrue(
                 "Imperfect dimension should be trimmed and strictly smaller than original",
-                rotatedBmp.height < originalWidth
+                rotatedBmp.height < originalWidth,
             )
             assertTrue(
                 "Trimmed amount should not exceed 16 pixels",
-                rotatedBmp.height >= originalWidth - 16
+                rotatedBmp.height >= originalWidth - 16,
             )
         }
     }
 
     /*
-    * Jpegtran physically rotates the image pixels, So no need to preserve the orientation.
-    */
+     * Jpegtran physically rotates the image pixels, So no need to preserve the orientation.
+     */
     @Test
     fun rotateImageResetsExifOrientation() {
         // Landscape_1.jpg has a non-normal EXIF orientation tag (usually ORIENTATION_ROTATE_90)
@@ -323,8 +332,8 @@ class TransformImageTest {
             ExifInterface.ORIENTATION_NORMAL,
             rotatedExif.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
+                ExifInterface.ORIENTATION_UNDEFINED,
+            ),
         )
     }
 
@@ -336,10 +345,11 @@ class TransformImageTest {
         val originalHeight = originalBmp.height
 
         val originalExif = ExifInterface(originalFile.absolutePath)
-        val originalOrientation = originalExif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_UNDEFINED
-        )
+        val originalOrientation =
+            originalExif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED,
+            )
 
         val cropLeft = 16
         val cropTop = 16
@@ -357,36 +367,37 @@ class TransformImageTest {
         // Verify file size is smaller than the original
         assertTrue(
             "Cropped file size should be smaller than original",
-            croppedFile.length() < originalFile.length()
+            croppedFile.length() < originalFile.length(),
         )
 
         // Verify EXIF orientation is preserved
         val croppedExif = ExifInterface(croppedFile.absolutePath)
-        val croppedOrientation = croppedExif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_UNDEFINED
-        )
+        val croppedOrientation =
+            croppedExif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED,
+            )
         assertEquals(
             "EXIF orientation should be preserved after crop",
             originalOrientation,
-            croppedOrientation
+            croppedOrientation,
         )
 
         // Verify visual pixel content matches the original region (with tolerance)
         assertColorsAreSimilar(
             "Top-left corner pixel of crop should match original",
             originalBmp.getPixel(cropLeft, cropTop),
-            croppedBmp.getPixel(0, 0)
+            croppedBmp.getPixel(0, 0),
         )
         assertColorsAreSimilar(
             "Center pixel of crop should match original",
             originalBmp.getPixel(cropLeft + cropWidth / 2, cropTop + cropHeight / 2),
-            croppedBmp.getPixel(cropWidth / 2, cropHeight / 2)
+            croppedBmp.getPixel(cropWidth / 2, cropHeight / 2),
         )
         assertColorsAreSimilar(
             "Bottom-right corner pixel of crop should match original",
             originalBmp.getPixel(cropLeft + cropWidth - 1, cropTop + cropHeight - 1),
-            croppedBmp.getPixel(cropWidth - 1, cropHeight - 1)
+            croppedBmp.getPixel(cropWidth - 1, cropHeight - 1),
         )
     }
 
@@ -410,13 +421,14 @@ class TransformImageTest {
         val croppedExif = ExifInterface(croppedFile.absolutePath)
 
         // Verify that standard EXIF tags are preserved if they are present in the original
-        val tagsToCheck = listOf(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.TAG_MAKE,
-            ExifInterface.TAG_MODEL,
-            ExifInterface.TAG_DATETIME,
-            ExifInterface.TAG_IMAGE_DESCRIPTION
-        )
+        val tagsToCheck =
+            listOf(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.TAG_MAKE,
+                ExifInterface.TAG_MODEL,
+                ExifInterface.TAG_DATETIME,
+                ExifInterface.TAG_IMAGE_DESCRIPTION,
+            )
 
         for (tag in tagsToCheck) {
             val originalValue = originalExif.getAttribute(tag)
@@ -425,7 +437,7 @@ class TransformImageTest {
                 assertEquals(
                     "EXIF tag $tag should be preserved after crop",
                     originalValue,
-                    croppedValue
+                    croppedValue,
                 )
             }
         }
@@ -439,10 +451,11 @@ class TransformImageTest {
         val originalHeight = originalBmp.height
 
         val originalExif = ExifInterface(originalFile.absolutePath)
-        val originalOrientation = originalExif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_UNDEFINED
-        )
+        val originalOrientation =
+            originalExif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED,
+            )
 
         val cropLeft = 32
         val cropTop = 48
@@ -458,29 +471,30 @@ class TransformImageTest {
 
         assertTrue(
             "Cropped file size should be smaller than original",
-            croppedFile.length() < originalFile.length()
+            croppedFile.length() < originalFile.length(),
         )
 
         val croppedExif = ExifInterface(croppedFile.absolutePath)
-        val croppedOrientation = croppedExif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_UNDEFINED
-        )
+        val croppedOrientation =
+            croppedExif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED,
+            )
         assertEquals(
             "EXIF orientation should be preserved after crop",
             originalOrientation,
-            croppedOrientation
+            croppedOrientation,
         )
 
         assertColorsAreSimilar(
             "Top-left corner pixel of crop should match original",
             originalBmp.getPixel(cropLeft, cropTop),
-            croppedBmp.getPixel(0, 0)
+            croppedBmp.getPixel(0, 0),
         )
         assertColorsAreSimilar(
             "Center pixel of crop should match original",
             originalBmp.getPixel(cropLeft + cropWidth / 2, cropTop + cropHeight / 2),
-            croppedBmp.getPixel(cropWidth / 2, cropHeight / 2)
+            croppedBmp.getPixel(cropWidth / 2, cropHeight / 2),
         )
     }
 
@@ -489,10 +503,16 @@ class TransformImageTest {
         val originalFile = getTempFileForRotationType(expectPerfect = true)
         val originalBmp = decodeBitmap(originalFile)
 
-        val blurRegion = BlurRegion(
-            80, 80, 16, 16,
-            100, 100, true
-        )
+        val blurRegion =
+            BlurRegion(
+                80,
+                80,
+                16,
+                16,
+                100,
+                100,
+                true,
+            )
 
         val blurredFile = blurImage(originalFile, listOf(blurRegion))
         assertNotNull(blurredFile)
@@ -500,11 +520,13 @@ class TransformImageTest {
         val blurredBmp = decodeBitmap(blurredFile)
         assertEquals(
             "Width should be unchanged after blur",
-            originalBmp.width, blurredBmp.width
+            originalBmp.width,
+            blurredBmp.width,
         )
         assertEquals(
             "Height should be unchanged after blur",
-            originalBmp.height, blurredBmp.height
+            originalBmp.height,
+            blurredBmp.height,
         )
     }
 
@@ -518,23 +540,30 @@ class TransformImageTest {
         val regionW = 80
         val regionH = 80
 
-        val blurRegion = BlurRegion(
-            regionW, regionH, regionLeft, regionTop,
-            100, 100, true
-        )
+        val blurRegion =
+            BlurRegion(
+                regionW,
+                regionH,
+                regionLeft,
+                regionTop,
+                100,
+                100,
+                true,
+            )
 
         val blurredFile = blurImage(originalFile, listOf(blurRegion))
         assertNotNull(blurredFile)
         val blurredBmp = decodeBitmap(blurredFile)
 
         // Sample several pixels inside the blur region and count how many have changed.
-        val samplePoints = listOf(
-            Pair(regionLeft + regionW / 4, regionTop + regionH / 4),
-            Pair(regionLeft + regionW / 2, regionTop + regionH / 2),
-            Pair(regionLeft + 3 * regionW / 4, regionTop + 3 * regionH / 4),
-            Pair(regionLeft + regionW / 4, regionTop + 3 * regionH / 4),
-            Pair(regionLeft + 3 * regionW / 4, regionTop + regionH / 4)
-        )
+        val samplePoints =
+            listOf(
+                Pair(regionLeft + regionW / 4, regionTop + regionH / 4),
+                Pair(regionLeft + regionW / 2, regionTop + regionH / 2),
+                Pair(regionLeft + 3 * regionW / 4, regionTop + 3 * regionH / 4),
+                Pair(regionLeft + regionW / 4, regionTop + 3 * regionH / 4),
+                Pair(regionLeft + 3 * regionW / 4, regionTop + regionH / 4),
+            )
 
         var changedCount = 0
         for ((px, py) in samplePoints) {
@@ -551,7 +580,7 @@ class TransformImageTest {
         }
         assertTrue(
             "At least one sampled pixel inside the blur region should have changed, but none did",
-            changedCount > 0
+            changedCount > 0,
         )
     }
 
@@ -568,28 +597,35 @@ class TransformImageTest {
         val regionW = w / 2
         val regionH = h / 2
 
-        val blurRegion = BlurRegion(
-            regionW, regionH, regionLeft, regionTop,
-            100, 100, true
-        )
+        val blurRegion =
+            BlurRegion(
+                regionW,
+                regionH,
+                regionLeft,
+                regionTop,
+                100,
+                100,
+                true,
+            )
 
         val blurredFile = blurImage(originalFile, listOf(blurRegion))
         assertNotNull(blurredFile)
         val blurredBmp = decodeBitmap(blurredFile)
 
         // Sample pixels well outside the blur region.
-        val outsidePoints = listOf(
-            Pair(2, 2),
-            Pair(w - 3, 2),
-            Pair(2, h - 3),
-            Pair(w - 3, h - 3)
-        )
+        val outsidePoints =
+            listOf(
+                Pair(2, 2),
+                Pair(w - 3, 2),
+                Pair(2, h - 3),
+                Pair(w - 3, h - 3),
+            )
 
         for ((px, py) in outsidePoints) {
             assertColorsAreSimilar(
                 "Pixel at ($px,$py) outside blur region should be unchanged",
                 originalBmp.getPixel(px, py),
-                blurredBmp.getPixel(px, py)
+                blurredBmp.getPixel(px, py),
             )
         }
     }
@@ -600,23 +636,30 @@ class TransformImageTest {
 
         val originalExif = ExifInterface(originalFile.absolutePath)
 
-        val blurRegion = BlurRegion(
-            80, 80, 16, 16,
-            100, 100, true
-        )
+        val blurRegion =
+            BlurRegion(
+                80,
+                80,
+                16,
+                16,
+                100,
+                100,
+                true,
+            )
 
         val blurredFile = blurImage(originalFile, listOf(blurRegion))
         assertNotNull(blurredFile)
 
         val blurredExif = ExifInterface(blurredFile.absolutePath)
 
-        val tagsToCheck = listOf(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.TAG_MAKE,
-            ExifInterface.TAG_MODEL,
-            ExifInterface.TAG_DATETIME,
-            ExifInterface.TAG_IMAGE_DESCRIPTION
-        )
+        val tagsToCheck =
+            listOf(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.TAG_MAKE,
+                ExifInterface.TAG_MODEL,
+                ExifInterface.TAG_DATETIME,
+                ExifInterface.TAG_IMAGE_DESCRIPTION,
+            )
 
         for (tag in tagsToCheck) {
             val originalValue = originalExif.getAttribute(tag)
@@ -625,7 +668,7 @@ class TransformImageTest {
                 assertEquals(
                     "EXIF tag $tag should be preserved after blur",
                     originalValue,
-                    blurredValue
+                    blurredValue,
                 )
             }
         }

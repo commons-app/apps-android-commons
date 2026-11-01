@@ -11,6 +11,8 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
 
+// Retrofit API interface methods require distinct @Field parameters mapped to MediaWiki API endpoints.
+@Suppress("LongParameterList")
 interface LoginInterface {
     @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=tokens&type=login")

@@ -5,13 +5,14 @@ import fr.free.nrw.commons.wikidata.mwapi.MwResponse
 import org.apache.commons.lang3.StringUtils
 
 class Entities : MwResponse() {
-    private val entities: Map<String, Entity>? = null
+    @SerializedName("entities")
+    private val entityMap: Map<String, Entity>? = null
     val success: Int = 0
 
-    fun entities(): Map<String, Entity> = entities ?: emptyMap()
+    fun getEntityMap(): Map<String, Entity> = entityMap ?: emptyMap()
 
-    private val first : Entity?
-        get() = entities?.values?.iterator()?.next()
+    private val first: Entity?
+        get() = entityMap?.values?.iterator()?.next()
 
     override fun postProcess() {
         first?.let {
@@ -19,6 +20,7 @@ class Entities : MwResponse() {
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Entity {
         private val type: String? = null
         private val id: String? = null
@@ -30,30 +32,27 @@ class Entities : MwResponse() {
         val statements: Map<String, List<StatementPartial>>? = null
         private val missing: String? = null
 
-        fun id(): String =
-            StringUtils.defaultString(id)
+        fun id(): String = StringUtils.defaultString(id)
 
-        fun labels(): Map<String, Label> =
-            labels ?: emptyMap()
+        fun labels(): Map<String, Label> = labels ?: emptyMap()
 
-        fun descriptions(): Map<String, Label> =
-            descriptions ?: emptyMap()
+        fun descriptions(): Map<String, Label> = descriptions ?: emptyMap()
 
-        fun sitelinks(): Map<String, SiteLink> =
-            sitelinks ?: emptyMap()
+        fun sitelinks(): Map<String, SiteLink> = sitelinks ?: emptyMap()
 
-        fun isMissing(): Boolean =
-            "-1" == id && missing != null
+        fun isMissing(): Boolean = "-1" == id && missing != null
     }
 
-    class Label(private val language: String?, private val value: String?) {
-        fun language(): String =
-            StringUtils.defaultString(language)
+    class Label(
+        private val language: String?,
+        private val value: String?,
+    ) {
+        fun language(): String = StringUtils.defaultString(language)
 
-        fun value(): String =
-            StringUtils.defaultString(value)
+        fun value(): String = StringUtils.defaultString(value)
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class SiteLink {
         val site: String? = null
             get() = StringUtils.defaultString(field)

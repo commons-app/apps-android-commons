@@ -12,6 +12,8 @@ import androidx.preference.PreferenceManager
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
+import fr.free.nrw.commons.upload.FileUtils
+import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
@@ -26,9 +28,7 @@ import java.io.FileOutputStream
 object FilePicker : Constants {
 
     private const val KEY_PHOTO_URI = "photo_uri"
-    private const val KEY_VIDEO_URI = "video_uri"
     private const val KEY_LAST_CAMERA_PHOTO = "last_photo"
-    private const val KEY_LAST_CAMERA_VIDEO = "last_video"
     private const val KEY_TYPE = "type"
 
     // Add extra for single selection
@@ -107,7 +107,7 @@ object FilePicker : Constants {
             grantWritePermission(context, intent, capturedImageUri)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not prepare camera intent")
         }
 
         return intent
@@ -200,28 +200,28 @@ object FilePicker : Constants {
         }
     }
 
-    @Throws(URISyntaxException::class)
+    /**
+     * Copies the files shared from another app so that they can be uploaded. Files in a format
+     * that Commons does not accept, such as RAW photos shared along with their JPEG versions, are
+     * skipped before they are copied.
+     *
+     * @param data The share intent
+     * @param activity The activity that received the share
+     * @return The uploadable files and the number of skipped files
+     */
     @JvmStatic
-    private fun takenCameraVideo(context: Context): UploadableFile? {
-        val lastCameraVideo = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(KEY_LAST_CAMERA_VIDEO, null)
-        return if (lastCameraVideo != null) {
-            UploadableFile(File(lastCameraVideo))
-        } else {
-            null
-        }
-    }
-
-    @JvmStatic
-    fun handleExternalImagesPicked(data: Intent?, activity: Activity): List<UploadableFile> {
+    fun handleExternalImagesPicked(data: Intent?, activity: Activity): ExternalImagesResult {
         return try {
-            getFilesFromGalleryPictures(data, activity)
+            val (supportedUris, unsupportedUris) = getUrisFromIntent(data).partition { uri ->
+                FileUtils.isSupportedFileType(activity, uri)
+            }
+            ExternalImagesResult(getFilesFromUris(supportedUris, activity), unsupportedUris.size)
         } catch (e: IOException) {
-            e.printStackTrace()
-            emptyList()
+            Timber.e(e, "Could not read externally shared images")
+            ExternalImagesResult(emptyList(), 0)
         } catch (e: SecurityException) {
-            e.printStackTrace()
-            emptyList()
+            Timber.e(e, "No permission to read externally shared images")
+            ExternalImagesResult(emptyList(), 0)
         }
     }
 
@@ -285,7 +285,7 @@ object FilePicker : Constants {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.DOCUMENTS, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from documents")
                 callbacks.onImagePickerError(e, ImageSource.DOCUMENTS, restoreType(activity))
             }
         } else {
@@ -334,7 +334,7 @@ object FilePicker : Constants {
                 val files = getFilesFromCustomSelector(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from the custom selector")
                 callbacks.onImagePickerError(e, ImageSource.CUSTOM_SELECTOR, restoreType(activity))
             }
         } else {
@@ -380,7 +380,7 @@ object FilePicker : Constants {
                 val files = getFilesFromGalleryPictures(result.data, activity)
                 callbacks.onImagesPicked(files, ImageSource.GALLERY, restoreType(activity))
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.e(e, "Could not handle images picked from the gallery")
                 callbacks.onImagePickerError(e, ImageSource.GALLERY, restoreType(activity))
             }
         } else {
@@ -393,7 +393,7 @@ object FilePicker : Constants {
             val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
             ImageDecoder.decodeBitmap(source)
         } else {
-            throw IllegalStateException("HEIC conversion requires Android P+")
+            error("HEIC conversion requires Android P+")
         }
 
         val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
@@ -421,20 +421,29 @@ object FilePicker : Constants {
         data: Intent?,
         activity: Activity
     ): List<UploadableFile> {
-        val files = mutableListOf<UploadableFile>()
-        val clipData = data?.clipData
-        if (clipData == null) {
-            val uri = data?.data
-            var file = PickedFiles.pickedExistingPicture(activity, uri!!)
-            file = handleHeicFile(file, activity)
-            files.add(file)
-        } else {
-            for (i in 0 until clipData.itemCount) {
-                val uri = clipData.getItemAt(i).uri
-                var file = PickedFiles.pickedExistingPicture(activity, uri)
-                file = handleHeicFile(file, activity)
-                files.add(file)
-            }
+        return getFilesFromUris(getUrisFromIntent(data), activity)
+    }
+
+    /**
+     * Returns the uris of the files in the intent, from its clip data if present
+     */
+    @JvmStatic
+    private fun getUrisFromIntent(data: Intent?): List<Uri> {
+        val clipData = data?.clipData ?: return listOf(data?.data!!)
+        return (0 until clipData.itemCount).map { clipData.getItemAt(it).uri }
+    }
+
+    /**
+     * Copies the files behind the given uris so that they can be uploaded
+     */
+    @Throws(IOException::class, SecurityException::class)
+    @JvmStatic
+    private fun getFilesFromUris(
+        uris: List<Uri>,
+        activity: Activity
+    ): List<UploadableFile> {
+        val files = uris.map { uri ->
+            handleHeicFile(PickedFiles.pickedExistingPicture(activity, uri), activity)
         }
 
         if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
@@ -450,39 +459,58 @@ object FilePicker : Constants {
         activity: Activity,
         callbacks: Callbacks
     ) {
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            try {
-                val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
-                    .getString(KEY_PHOTO_URI, null)
-                if (!lastImageUri.isNullOrEmpty()) {
-                    revokeWritePermission(activity, Uri.parse(lastImageUri))
-                }
-
-                val photoFile = takenCameraPicture(activity)
-                val files = mutableListOf<UploadableFile>()
-                photoFile?.let { files.add(it) }
-
-                if (photoFile == null) {
-                    val e = IllegalStateException("Unable to get the picture returned from camera")
-                    callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
-                } else {
-                    if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
-                        PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
-                    }
-                    callbacks.onImagesPicked(files, ImageSource.CAMERA_IMAGE, restoreType(activity))
-                }
-
-                PreferenceManager.getDefaultSharedPreferences(activity).edit()
-                    .remove(KEY_LAST_CAMERA_PHOTO)
-                    .remove(KEY_PHOTO_URI)
-                    .apply()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
-            }
-        } else {
+        if (activityResult.resultCode != Activity.RESULT_OK) {
             callbacks.onCanceled(ImageSource.CAMERA_IMAGE, restoreType(activity))
+            return
         }
+
+        try {
+            processSuccessfulCameraResult(activity, callbacks)
+        } catch (e: Exception) {
+            Timber.e(e, "Could not handle image taken with the camera")
+            callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
+        }
+    }
+
+    private fun processSuccessfulCameraResult(activity: Activity, callbacks: Callbacks) {
+        revokeLastCameraPermission(activity)
+
+        val photoFile = takenCameraPicture(activity)
+        if (photoFile == null) {
+            val e = IllegalStateException("Unable to get the picture returned from camera")
+            callbacks.onImagePickerError(e, ImageSource.CAMERA_IMAGE, restoreType(activity))
+        } else {
+            handleValidCameraPhoto(activity, callbacks, photoFile)
+        }
+
+        clearCameraPreferences(activity)
+    }
+
+    private fun revokeLastCameraPermission(activity: Activity) {
+        val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
+            .getString(KEY_PHOTO_URI, null)
+        if (!lastImageUri.isNullOrEmpty()) {
+            revokeWritePermission(activity, Uri.parse(lastImageUri))
+        }
+    }
+
+    private fun handleValidCameraPhoto(
+        activity: Activity,
+        callbacks: Callbacks,
+        photoFile: UploadableFile
+    ) {
+        if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
+            PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
+        }
+        val files = listOf(photoFile)
+        callbacks.onImagesPicked(files, ImageSource.CAMERA_IMAGE, restoreType(activity))
+    }
+
+    private fun clearCameraPreferences(activity: Activity) {
+        PreferenceManager.getDefaultSharedPreferences(activity).edit()
+            .remove(KEY_LAST_CAMERA_PHOTO)
+            .remove(KEY_PHOTO_URI)
+            .apply()
     }
 
     @JvmStatic
