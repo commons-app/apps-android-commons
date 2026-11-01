@@ -22,7 +22,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
-const val THUMB_IMAGE_SIZE = "70"
+const val THUMB_IMAGE_SIZE = "120"
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -85,6 +85,14 @@ data class DepictedItem constructor(
                         url.substringAfterLast('/').substringAfter('-')
                     }
                 }
+
+    val thumbnailUrl: String?
+        get() =
+            primaryImage?.let { filename ->
+                val encodedFileName = URLEncoder.encode(filename, StandardCharsets.UTF_8.name()).replace("+", "%20")
+                val extension = if (filename.endsWith(".svg", ignoreCase = true)) ".png" else ""
+                "https://commons.wikimedia.org/wiki/Special:FilePath/$encodedFileName?width=$THUMB_IMAGE_SIZE$extension"
+            }
 
     override fun equals(other: Any?) =
         when {
