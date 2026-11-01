@@ -31,6 +31,7 @@ object NetworkUtils {
      */
     @JvmStatic
     fun getNetworkType(context: Context): NetworkConnectionType {
+        @Suppress("UnusedPrivateProperty") // Used when Android 12+ permission is implemented
         val telephonyManager =
             context.applicationContext.getSystemService(
                 Context.TELEPHONY_SERVICE,

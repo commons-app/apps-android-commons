@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.explore.search
 
 import android.content.Context
-import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
@@ -57,9 +56,6 @@ class SearchActivityUnitTests {
 
     @Mock
     private lateinit var recentSearchesFragment: RecentSearchesFragment
-
-    @Mock
-    private lateinit var supportFragmentManager: FragmentManager
 
     @Mock
     private lateinit var searchDepictionsFragment: SearchDepictionsFragment

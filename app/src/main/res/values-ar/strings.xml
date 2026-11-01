@@ -326,6 +326,13 @@
   <string name="null_url">خطأ! المسار غير موجود</string>
   <string name="nominate_deletion">ترشيح للحذف</string>
   <string name="nominated_for_deletion">الصورة تم ترشيحها للحذف.</string>
+  <string name="file_deleted_from_commons">تم حذف هذا الملف من كومنز.</string>
+  <string name="contribution_deleted">تم حذفها</string>
+  <string name="deleted_file_activity_title">تم حذف الملف</string>
+  <string name="deleted_file_explanation">يحذف موقع ويكيميديا كومنز الملفات غير التعليمية أو التي تخالف قواعده، بما في ذلك انتهاكات حقوق النشر. حمّل صورًا التقطتها بنفسك. تُعدّ الصور المنسوخة من الإنترنت، ولقطات الشاشة، والشعارات، والملصقات من الأسباب الشائعة لحذف الملفات.</string>
+  <string name="deleted_file_view_page">عرض صفحة الملف</string>
+  <string name="deleted_file_view_discussion">اقرأ مناقشة الحذف</string>
+  <string name="deleted_file_policies">سياسات وإرشادات مجلس العموم</string>
   <string name="nominated_see_more">انظر صفحة الويب للتفاصيل</string>
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
@@ -926,4 +933,10 @@
   <string name="error_applying_blur">حدث خطأ أثناء تطبيق التمويه</string>
   <string name="failed_to_apply_crop">فشل في تطبيق المحصول</string>
   <string name="failed_to_save_image">فشل حفظ الصورة</string>
+  <string name="format_jpeg">جيه بي إي جي</string>
+  <string name="format_ogg_audio">OGG (صوتي)</string>
+  <string name="unsupported_format_title">تنسيق غير مدعوم</string>
+  <string name="unsupported_format_desc">تعذر فتح الملفات المحددة. يتطلب ويكيميديا كومنز التنسيقات التالية بشكل صارم: \n\n%s</string>
+  <string name="unsupported_files_skipped_title">تم تخطي الملفات غير المدعومة</string>
+  <string name="unsupported_files_skipped_desc">تم تخطي بعض الملفات بسبب عدم توافق تنسيقها. سيستمر التطبيق في تحميل الملفات المتبقية التي تتوافق مع التنسيقات المدعومة التالية: \n\n%s</string>
 </resources>

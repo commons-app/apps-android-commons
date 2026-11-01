@@ -15,6 +15,8 @@ import timber.log.Timber
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
+private const val DISABLED_DETAILS_ALPHA = 0.3f
+
 /**
  * Activity for providing feedback about Wikidata items.
  */
@@ -65,10 +67,10 @@ class WikidataFeedback : BaseActivity() {
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding.detailsEditText.isEnabled = false
-        binding.detailsEditText.alpha = 0.3f
+        binding.detailsEditText.alpha = DISABLED_DETAILS_ALPHA
         binding.radioButton3.setOnCheckedChangeListener { _, isChecked ->
             binding.detailsEditText.isEnabled = isChecked
-            binding.detailsEditText.alpha = if (isChecked) 1f else 0.3f
+            binding.detailsEditText.alpha = if (isChecked) 1f else DISABLED_DETAILS_ALPHA
         }
         binding.appCompatButton.setOnClickListener {
             if (binding.radioGroup.checkedRadioButtonId == -1) {
