@@ -11,6 +11,4 @@ abstract class PageableCategoryFragment : BasePagingFragment<String>() {
             CategoryDetailsActivity.startYourself(context, it)
         }
     }
-
-
 }

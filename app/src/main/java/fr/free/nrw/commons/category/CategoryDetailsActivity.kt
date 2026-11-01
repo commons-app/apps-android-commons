@@ -18,7 +18,6 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding
-import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.explore.categories.media.CategoryDetailsMediaFragment
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment

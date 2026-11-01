@@ -3,7 +3,6 @@ package fr.free.nrw.commons.explore.categories.media
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Intent
-import fr.free.nrw.commons.auth.SessionManager
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MotionEvent
@@ -19,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestMultiple
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
@@ -130,20 +130,28 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
-        ) {
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initializeAnimations()
         setListeners()
 
         binding.paginatedSearchResultsList.addOnItemTouchListener(
             object : RecyclerView.OnItemTouchListener {
-                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                override fun onInterceptTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ): Boolean {
                     if (e.action == MotionEvent.ACTION_DOWN && isFabOpen) {
                         animateFAB(true)
                     }
                     return false
                 }
-                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+                override fun onTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ) {}
+
                 override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
             },
         )
@@ -159,7 +167,6 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
                 LinearLayout.VERTICAL
             }
     }
-
 
     private fun initializeAnimations() {
         fabOpen = AnimationUtils.loadAnimation(activity, R.anim.fab_open)
@@ -179,7 +186,7 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
             )
             animateFAB(isFabOpen)
         }
-        binding.fabCamera.setOnLongClickListener {  view: View? ->
+        binding.fabCamera.setOnLongClickListener { view: View? ->
             showShortToast(
                 context,
                 R.string.add_contribution_from_camera,
@@ -241,17 +248,16 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
     /**
      * Hides the upload FAB, closing its expanded menu first if it is open.
      */
-    private fun hideContributionFab(){
+    private fun hideContributionFab() {
         if (isFabOpen) animateFAB(true)
         binding.fabLayout.visibility = GONE
-
     }
 
     /**
      * Shows the upload FAB once the category's media has loaded.
      * Does nothing if the user is not logged in.
      */
-    private fun showContributionFab(){
+    private fun showContributionFab() {
         if (!sessionManager.isUserLoggedIn) return
         binding.fabLayout.orientation =
             if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {

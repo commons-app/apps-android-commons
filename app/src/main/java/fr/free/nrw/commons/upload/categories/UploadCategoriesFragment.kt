@@ -106,7 +106,7 @@ class UploadCategoriesFragment :
         init()
         preselectedCategory?.let {
             presenter?.preselectCategory(it)
-            arguments?.remove(SELECTED_CATEGORY)   // only pre-select once
+            arguments?.remove(SELECTED_CATEGORY) // only pre-select once
         }
         init()
         presenter!!.getCategories().observe(

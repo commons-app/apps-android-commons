@@ -122,8 +122,6 @@ class ContributionController
             }
         }
 
-
-
         /**
          * Asks users to provide location access
          *
