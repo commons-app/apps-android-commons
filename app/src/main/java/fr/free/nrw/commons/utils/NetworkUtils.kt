@@ -5,11 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.telephony.TelephonyManager
-
 import fr.free.nrw.commons.utils.model.NetworkConnectionType
 
 object NetworkUtils {
-
     /**
      * https://developer.android.com/training/monitoring-device-state/connectivity-monitoring#java
      * Check if internet connection is established.
@@ -38,10 +36,11 @@ object NetworkUtils {
             context.applicationContext.getSystemService(
                 Context.TELEPHONY_SERVICE,
             ) as? TelephonyManager
-            ?: return NetworkConnectionType.UNKNOWN
+                ?: return NetworkConnectionType.UNKNOWN
 
-        val networkInfo = getNetworkInfo(context)
-            ?: return NetworkConnectionType.UNKNOWN
+        val networkInfo =
+            getNetworkInfo(context)
+                ?: return NetworkConnectionType.UNKNOWN
 
         val network = networkInfo.type
         if (network == ConnectivityManager.TYPE_WIFI) {
@@ -49,6 +48,7 @@ object NetworkUtils {
         }
 
         // TODO for Android 12+ request permission from user is mandatory
+
         /*
         val mobileNetwork = telephonyManager.networkType
         return when (mobileNetwork) {

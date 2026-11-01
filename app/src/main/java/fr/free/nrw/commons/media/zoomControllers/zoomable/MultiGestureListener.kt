@@ -4,7 +4,6 @@ import android.os.Build
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.annotation.RequiresApi
-import java.util.Collections.synchronizedList
 
 /**
  * Gesture listener that allows multiple child listeners to be added and notified about gesture
@@ -15,48 +14,15 @@ import java.util.Collections.synchronizedList
  * subsequent listeners will not be notified about the event anymore since it has been consumed.
  */
 class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
-    private val listeners: MutableList<GestureDetector.SimpleOnGestureListener> =
-        synchronizedList(mutableListOf())
-
-    /**
-     * Adds a listener to the multi-gesture listener.
-     *
-     * NOTE: The order of the listeners is important since gesture events can be consumed.
-     *
-     * @param listener the listener to be added
-     */
-    @Synchronized
-    fun addListener(listener: GestureDetector.SimpleOnGestureListener) {
-        listeners.add(listener)
-    }
-
-    /**
-     * Removes the given listener so that it will not be notified about future events.
-     *
-     * NOTE: The order of the listeners is important since gesture events can be consumed.
-     *
-     * @param listener the listener to remove
-     */
-    @Synchronized
-    fun removeListener(listener: GestureDetector.SimpleOnGestureListener) {
-        listeners.remove(listener)
-    }
+    /** Child listeners notified in the order they were added. */
+    val childListeners: GestureListenerList = GestureListenerList()
 
     @Synchronized
-    override fun onSingleTapUp(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onSingleTapUp(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onSingleTapUp(e: MotionEvent): Boolean = childListeners.firstConsuming { it.onSingleTapUp(e) }
 
     @Synchronized
     override fun onLongPress(e: MotionEvent) {
-        for (listener in listeners) {
-            listener.onLongPress(e)
-        }
+        childListeners.notifyEach { it.onLongPress(e) }
     }
 
     @Synchronized
@@ -65,14 +31,7 @@ class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
         e2: MotionEvent,
         distanceX: Float,
         distanceY: Float,
-    ): Boolean {
-        for (listener in listeners) {
-            if (listener.onScroll(e1, e2, distanceX, distanceY)) {
-                return true
-            }
-        }
-        return false
-    }
+    ): Boolean = childListeners.firstConsuming { it.onScroll(e1, e2, distanceX, distanceY) }
 
     @Synchronized
     override fun onFling(
@@ -80,70 +39,27 @@ class MultiGestureListener : GestureDetector.SimpleOnGestureListener() {
         e2: MotionEvent,
         velocityX: Float,
         velocityY: Float,
-    ): Boolean {
-        for (listener in listeners) {
-            if (listener.onFling(e1, e2, velocityX, velocityY)) {
-                return true
-            }
-        }
-        return false
-    }
+    ): Boolean = childListeners.firstConsuming { it.onFling(e1, e2, velocityX, velocityY) }
 
     @Synchronized
     override fun onShowPress(e: MotionEvent) {
-        for (listener in listeners) {
-            listener.onShowPress(e)
-        }
+        childListeners.notifyEach { it.onShowPress(e) }
     }
 
     @Synchronized
-    override fun onDown(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onDown(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onDown(e: MotionEvent): Boolean = childListeners.firstConsuming { it.onDown(e) }
 
     @Synchronized
-    override fun onDoubleTap(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onDoubleTap(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onDoubleTap(e: MotionEvent): Boolean = childListeners.firstConsuming { it.onDoubleTap(e) }
 
     @Synchronized
-    override fun onDoubleTapEvent(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onDoubleTapEvent(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onDoubleTapEvent(e: MotionEvent): Boolean = childListeners.firstConsuming { it.onDoubleTapEvent(e) }
 
     @Synchronized
-    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onSingleTapConfirmed(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean =
+        childListeners.firstConsuming { it.onSingleTapConfirmed(e) }
 
     @RequiresApi(Build.VERSION_CODES.M)
     @Synchronized
-    override fun onContextClick(e: MotionEvent): Boolean {
-        for (listener in listeners) {
-            if (listener.onContextClick(e)) {
-                return true
-            }
-        }
-        return false
-    }
+    override fun onContextClick(e: MotionEvent): Boolean = childListeners.firstConsuming { it.onContextClick(e) }
 }

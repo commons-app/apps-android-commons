@@ -124,7 +124,7 @@ class DeleteHelper
 
             val creator =
                 media.getAuthorOrUser()
-                    ?: throw RuntimeException("Failed to nominate for deletion")
+                    ?: error("Failed to nominate for deletion")
 
             return pageEditClient
                 .prependEdit(

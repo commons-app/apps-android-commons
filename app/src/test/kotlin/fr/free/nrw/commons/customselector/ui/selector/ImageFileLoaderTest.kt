@@ -4,9 +4,11 @@ import android.content.ContentResolver
 import android.content.Context
 import android.provider.MediaStore
 import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
@@ -121,5 +123,20 @@ class ImageFileLoaderTest {
             context.contentResolver,
         ).thenReturn(contentResolver)
         func.invoke(imageFileLoader, imageLoaderListener)
+    }
+
+    @Test
+    fun testGetImagesReportsNullCursorAsFailure() {
+        val func =
+            imageFileLoader.javaClass.getDeclaredMethod(
+                "getImages",
+                ImageLoaderListener::class.java,
+            )
+        func.isAccessible = true
+        `when`(context.contentResolver).thenReturn(mockContentResolver)
+
+        func.invoke(imageFileLoader, imageLoaderListener)
+
+        verify(imageLoaderListener).onFailed(argThat { this is NullPointerException && message != null })
     }
 }
