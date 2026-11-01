@@ -35,6 +35,9 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.CopyOnWriteArrayList
 
+private const val SEARCH_RADIUS_METERS = 2000.0
+private const val SEARCH_RADIUS_THRESHOLD_FRACTION = 0.75
+
 class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
@@ -868,7 +871,7 @@ class NearbyParentFragmentPresenter(
         myLocation.longitude = nearbyParentFragmentView.getLastMapFocus().longitude
         val distance = myLocation.distanceTo(destLocation)
 
-        return (distance <= 2000.0 * 3 / 4)
+        return (distance <= SEARCH_RADIUS_METERS * SEARCH_RADIUS_THRESHOLD_FRACTION)
     }
 
     fun onMapReady() {

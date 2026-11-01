@@ -158,7 +158,7 @@ class UploadPresenter
         private fun getBasicKvStoreFactory(): (
             String,
         ) -> BasicKvStore =
-            basicKvStoreFactory ?: throw IllegalStateException("basicKvStoreFactory has not been initialized")
+            basicKvStoreFactory ?: error("basicKvStoreFactory has not been initialized")
 
         /**
          * Ensures that the BasicKvStore factory has been initialized before use.
@@ -169,11 +169,9 @@ class UploadPresenter
             val field = this::class.java.getDeclaredField("basicKvStoreFactory")
             field.isAccessible = true
             val value = field.get(this)
-            if (value == null) {
-                throw IllegalStateException(
-                    "basicKvStoreFactory must be initialized before use. " +
-                        "Please call setupBasicKvStoreFactory() before using presenter methods that require it.",
-                )
+            check(value != null) {
+                "basicKvStoreFactory must be initialized before use. " +
+                    "Please call setupBasicKvStoreFactory() before using presenter methods that require it."
             }
         }
 

@@ -13,7 +13,7 @@ fun String.toLicenseName(): Int = when (this) {
     Prefs.Licenses.CC_BY_SA_3, "Attribution-ShareAlike 3.0" -> R.string.license_name_cc_by_sa
     Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> R.string.license_name_cc_by_sa_four
     Prefs.Licenses.CC0, "CC0" -> R.string.license_name_cc0
-    else -> throw IllegalStateException("Unrecognized license value: $this")
+    else -> error("Unrecognized license value: $this")
 }
 
 /**
@@ -26,6 +26,6 @@ fun String.toLicenseUrl(): String = when (this) {
     Prefs.Licenses.CC_BY_SA_3, "Attribution-ShareAlike 3.0" -> "https://creativecommons.org/licenses/by-sa/3.0/"
     Prefs.Licenses.CC_BY_SA_4, "Attribution-ShareAlike 4.0" -> "https://creativecommons.org/licenses/by-sa/4.0/"
     Prefs.Licenses.CC0, "CC0" -> "https://creativecommons.org/publicdomain/zero/1.0/"
-    else -> throw IllegalStateException("Unrecognized license value: $this")
+    else -> error("Unrecognized license value: $this")
 }
 

@@ -184,7 +184,7 @@ class Media constructor(
      * @return
      */
     val wikiCode: String
-        get() = String.format("[[%s|thumb|%s]]", filename, mostRelevantCaption)
+        get() = String.format(Locale.ROOT, "[[%s|thumb|%s]]", filename, mostRelevantCaption)
 
     val mostRelevantCaption: String
         get() =
