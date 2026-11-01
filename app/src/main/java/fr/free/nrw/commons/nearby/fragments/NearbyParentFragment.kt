@@ -3409,8 +3409,8 @@ class NearbyParentFragment :
         super.onConfigurationChanged(newConfig)
         val rlBottomSheetLayoutParams = binding!!.bottomSheetNearby.bottomSheet.layoutParams
         rlBottomSheetLayoutParams.height =
-            requireActivity().windowManager.defaultDisplay.height 
-            / BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
+            requireActivity().windowManager.defaultDisplay.height /
+                BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
         binding!!.bottomSheetNearby.bottomSheet.layoutParams = rlBottomSheetLayoutParams
         val spanCount = spanCount
         if (gridLayoutManager != null) {
