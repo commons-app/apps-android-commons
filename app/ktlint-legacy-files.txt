@@ -28,9 +28,6 @@ app/src/main/java/fr/free/nrw/commons/bookmarks/pictures/BookmarkPicturesFragmen
 app/src/main/java/fr/free/nrw/commons/bookmarks/pictures/BookmarkPicturesRoomDao.kt
 app/src/main/java/fr/free/nrw/commons/bookmarks/pictures/BookmarksTable.kt
 app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
-app/src/main/java/fr/free/nrw/commons/data/DBOpenHelper.kt
-app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt
-app/src/main/java/fr/free/nrw/commons/db/Converters.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
 app/src/main/java/fr/free/nrw/commons/filepicker/Constants.kt
@@ -44,9 +41,6 @@ app/src/main/java/fr/free/nrw/commons/filepicker/UploadableFile.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesResponse.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/FileUsagesUiModel.kt
 app/src/main/java/fr/free/nrw/commons/fileusages/GlobalFileUsagesResponse.kt
-app/src/main/java/fr/free/nrw/commons/kvstore/BasicKvStore.kt
-app/src/main/java/fr/free/nrw/commons/kvstore/JsonKvStore.kt
-app/src/main/java/fr/free/nrw/commons/kvstore/KeyValueStore.kt
 app/src/main/java/fr/free/nrw/commons/language/AppLanguageLookUpTable.kt
 app/src/main/java/fr/free/nrw/commons/mwapi/CategoryApi.kt
 app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt
@@ -61,7 +55,6 @@ app/src/main/java/fr/free/nrw/commons/nearby/fragments/PlaceAdapter.kt
 app/src/main/java/fr/free/nrw/commons/nearby/model/NearbyQueryParams.kt
 app/src/main/java/fr/free/nrw/commons/nearby/model/NearbyResultItem.kt
 app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt
-app/src/main/java/fr/free/nrw/commons/repository/UploadRepository.kt
 app/src/main/java/fr/free/nrw/commons/settings/SettingsActivity.kt
 app/src/main/java/fr/free/nrw/commons/settings/SettingsFragment.kt
 app/src/main/java/fr/free/nrw/commons/theme/BaseActivity.kt
@@ -117,18 +110,9 @@ app/src/test/kotlin/fr/free/nrw/commons/actions/ThanksClientTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookMarkLocationDaoTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationControllerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/bookmarks/locations/BookmarkLocationFragmentUnitTests.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/BookmarkItemsTableTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/BookmarkPictureTableTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/CategoryTableTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/InMemoryDatabaseTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/MigrationTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/RecentLanguagesTableTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/db/RecentSearchesTableTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/description/DescriptionEditHelperUnitTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/filepicker/FilePickerTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/filepicker/ShadowFileProvider.kt
-app/src/test/kotlin/fr/free/nrw/commons/kvstore/BasicKvStoreTest.kt
-app/src/test/kotlin/fr/free/nrw/commons/kvstore/JsonKvStoreTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/LeaderboardApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/leaderboard/UpdateAvatarApiTest.kt
 app/src/test/kotlin/fr/free/nrw/commons/media/MediaClientTest.kt

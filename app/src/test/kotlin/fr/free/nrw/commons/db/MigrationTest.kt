@@ -16,43 +16,49 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class MigrationTest {
-
     @Test
     fun testMigration() {
-
         val context = ApplicationProvider.getApplicationContext<Context>()
 
         // legacy "commons.db", mock old data.
         val legacyOpenHelper = DBOpenHelper(context, null)
         val legacyDb = legacyOpenHelper.writableDatabase
-        legacyDb.execSQL("INSERT INTO categories (name, description, thumbnail, " +
-            "last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)")
+        legacyDb.execSQL(
+            "INSERT INTO categories (name, description, thumbnail, " +
+                "last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)",
+        )
         legacyDb.execSQL("INSERT INTO bookmarks (media_name, media_creator) VALUES ('media1', 'creator1')")
-        legacyDb.execSQL("INSERT INTO bookmarksItems (item_name, item_description, item_image_url, " +
-            "item_instance_of, item_name_categories, item_description_categories, " +
-            "item_thumbnail_categories, item_is_selected, item_id) VALUES " +
-            "('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')")
+        legacyDb.execSQL(
+            "INSERT INTO bookmarksItems (item_name, item_description, item_image_url, " +
+                "item_instance_of, item_name_categories, item_description_categories, " +
+                "item_thumbnail_categories, item_is_selected, item_id) VALUES " +
+                "('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')",
+        )
         legacyDb.execSQL("INSERT INTO recent_searches (name, last_used) VALUES ('search1', 123)")
         legacyDb.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('English', 'en')")
         legacyDb.close()
 
         // mock old version to trigger migration.
-        val presentRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
-        ).allowMainThreadQueries().build()
+        val presentRoomDatabase =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room.db",
+                ).allowMainThreadQueries()
+                .build()
         presentRoomDatabase.openHelper.writableDatabase.version = 21
         presentRoomDatabase.close()
 
-        val migratingRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
-        )
-            .addMigrations(MIGRATION_21_22)
-            .allowMainThreadQueries()
-            .build()
+        val migratingRoomDatabase =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room.db",
+                ).addMigrations(MIGRATION_21_22)
+                .allowMainThreadQueries()
+                .build()
 
         // tests
         try {
@@ -85,7 +91,6 @@ class MigrationTest {
             Assert.assertTrue("recent_languages migrated", cursor.moveToFirst())
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
-
         } finally {
             migratingRoomDatabase.close()
             context.deleteDatabase("commons.db")

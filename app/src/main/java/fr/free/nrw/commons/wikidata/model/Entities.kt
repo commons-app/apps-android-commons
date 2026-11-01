@@ -20,6 +20,7 @@ class Entities : MwResponse() {
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Entity {
         private val type: String? = null
         private val id: String? = null
@@ -51,6 +52,7 @@ class Entities : MwResponse() {
         fun value(): String = StringUtils.defaultString(value)
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class SiteLink {
         val site: String? = null
             get() = StringUtils.defaultString(field)

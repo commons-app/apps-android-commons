@@ -860,23 +860,14 @@ class ExploreMapFragment :
      * could not be found.
      */
     private fun getOverlay(item: OverlayItem?): Overlay? {
-        if (item == null || binding == null || binding!!.mapView.overlays == null) {
-            return null
-        }
+        if (item == null) return null
+        val overlays = binding?.mapView?.overlays ?: return null
 
-        for (i in binding!!.mapView.overlays.indices) {
-            if (binding!!.mapView.overlays[i] is ItemizedOverlayWithFocus<*>) {
-                val overlay = binding!!.mapView.overlays[i] as ItemizedOverlayWithFocus<*>
-
-                for (j in 0..<overlay.size()) {
-                    if (overlay.getItem(j) === item) {
-                        return overlay
-                    }
-                }
+        return overlays
+            .filterIsInstance<ItemizedOverlayWithFocus<*>>()
+            .firstOrNull { overlay ->
+                (0 until overlay.size()).any { j -> overlay.getItem(j) === item }
             }
-        }
-
-        return null
     }
 
     /**

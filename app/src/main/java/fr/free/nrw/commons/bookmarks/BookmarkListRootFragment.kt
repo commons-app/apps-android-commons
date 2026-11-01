@@ -29,7 +29,6 @@ class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     FragmentManager.OnBackStackChangedListener, MediaDetailProvider, OnItemClickListener,
     CategoryImagesCallback {
     private var mediaDetails: MediaDetailPagerFragment? = null
-    private val bookmarkLocationsFragment: BookmarkLocationsFragment? = null
     var listFragment: Fragment? = null
     private var bookmarksPagerAdapter: BookmarksPagerAdapter? = null
 
@@ -173,33 +172,26 @@ class BookmarkListRootFragment : CommonsDaggerSupportFragment,
     }
 
     fun backPressed(): Boolean {
-        // check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid
-        // NullPointerException
-        if (mediaDetails != null) {
-            if (mediaDetails!!.isVisible()) {
-                // todo add get list fragment
-                (parentFragment as BookmarkFragment).setupTabLayout()
-                val removed: ArrayList<Int> = mediaDetails!!.removedItems
-                removeFragment(mediaDetails!!)
-                (parentFragment as BookmarkFragment).setScroll(true)
-                setFragment(listFragment!!, mediaDetails)
-                (requireActivity() as MainActivity).showTabs()
-                if (listFragment is BookmarkPicturesFragment) {
-                    val adapter = ((listFragment as BookmarkPicturesFragment)
-                        .getAdapter() as GridViewAdapter?)
-                    val i: MutableIterator<*> = removed.iterator()
-                    while (i.hasNext()) {
-                        adapter!!.remove(adapter.getItem(i.next() as Int))
-                    }
-                    mediaDetails!!.clearRemoved()
-                }
-            } else {
-                moveToContributionsFragment()
-            }
-        } else {
+        val details = mediaDetails
+        if (details == null || !details.isVisible) {
             moveToContributionsFragment()
+            return false
         }
-        // notify mediaDetails did not handled the backPressed further actions required.
+
+        (parentFragment as BookmarkFragment).setupTabLayout()
+        val removed = details.removedItems
+        removeFragment(details)
+        (parentFragment as BookmarkFragment).setScroll(true)
+        setFragment(listFragment!!, details)
+        (requireActivity() as MainActivity).showTabs()
+
+        if (listFragment is BookmarkPicturesFragment) {
+            val adapter = (listFragment as BookmarkPicturesFragment).getAdapter() as? GridViewAdapter
+            removed.forEach { index ->
+                adapter?.remove(adapter.getItem(index))
+            }
+            details.clearRemoved()
+        }
         return false
     }
 
