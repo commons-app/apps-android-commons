@@ -21,6 +21,7 @@ import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -29,6 +30,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.eq
 import org.mockito.MockitoAnnotations
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.Exception
 
@@ -248,6 +250,27 @@ class OkHttpJsonApiClientTests {
             return BufferedReader(InputStreamReader(inputStream)).use { it.readText() }
         }
         //throws an exception with the correct expected path
-        throw IllegalArgumentException("Resource $fileName not found. Please ensure the file is located in app/src/test/resources/raw/")
+        throw IllegalArgumentException(
+            "Resource $fileName not found. Please ensure the file is located " +
+                "in app/src/test/resources/raw/",
+        )
+    }
+
+    /**
+     * Test that an unsuccessful response is reported as an IOException
+     */
+    @Test
+    fun testNearbyQueriesThrowIOExceptionOnUnsuccessfulResponse() {
+        val queries =
+            listOf<() -> Any?>(
+                { okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, "test") },
+                { okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, null) },
+                { okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Radial(latLng, 10f)) },
+            )
+
+        queries.forEach { query ->
+            val exception = assertThrows(IOException::class.java) { query() }
+            assertEquals("test", exception.message)
+        }
     }
 }

@@ -22,21 +22,15 @@ open class MultiPointerGestureDetector {
         fun onGestureEnd(detector: MultiPointerGestureDetector)
     }
 
+    /** Factory method that creates a new instance of MultiPointerGestureDetector */
     companion object {
-        private const val MAX_POINTERS = 2
-
-        /** Factory method that creates a new instance of MultiPointerGestureDetector */
         fun newInstance(): MultiPointerGestureDetector = MultiPointerGestureDetector()
     }
 
+    /** Pointer ids and coordinates for the fingers currently down. */
+    val pointerSlots: PointerSlots = PointerSlots()
+
     private var mGestureInProgress = false
-    private var mPointerCount = 0
-    private var mNewPointerCount = 0
-    private val mId = IntArray(MAX_POINTERS) { MotionEvent.INVALID_POINTER_ID }
-    private val mStartX = FloatArray(MAX_POINTERS)
-    private val mStartY = FloatArray(MAX_POINTERS)
-    private val mCurrentX = FloatArray(MAX_POINTERS)
-    private val mCurrentY = FloatArray(MAX_POINTERS)
 
     private var mListener: Listener? = null
 
@@ -56,10 +50,7 @@ open class MultiPointerGestureDetector {
     /** Resets the component to the initial state. */
     fun reset() {
         mGestureInProgress = false
-        mPointerCount = 0
-        for (i in 0 until MAX_POINTERS) {
-            mId[i] = MotionEvent.INVALID_POINTER_ID
-        }
+        pointerSlots.reset()
     }
 
     /**
@@ -86,66 +77,6 @@ open class MultiPointerGestureDetector {
     }
 
     /**
-     * Gets the index of the i-th pressed pointer. Normally, the index will be equal to i, except in
-     * the case when the pointer is released.
-     *
-     * @return index of the specified pointer or -1 if not found (i.e. not enough pointers are down)
-     */
-    private fun getPressedPointerIndex(
-        event: MotionEvent,
-        i: Int,
-    ): Int {
-        val count = event.pointerCount
-        val action = event.actionMasked
-        val index = event.actionIndex
-        var adjustedIndex = i
-
-        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
-            if (adjustedIndex >= index) {
-                adjustedIndex++
-            }
-        }
-        return if (adjustedIndex < count) adjustedIndex else -1
-    }
-
-    /** Gets the number of pressed pointers (fingers down). */
-    private fun getPressedPointerCount(event: MotionEvent): Int {
-        var count = event.pointerCount
-        val action = event.actionMasked
-        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
-            count--
-        }
-        return count
-    }
-
-    private fun updatePointersOnTap(event: MotionEvent) {
-        mPointerCount = 0
-        for (i in 0 until MAX_POINTERS) {
-            val index = getPressedPointerIndex(event, i)
-            if (index == -1) {
-                mId[i] = MotionEvent.INVALID_POINTER_ID
-            } else {
-                mId[i] = event.getPointerId(index)
-                mCurrentX[i] = event.getX(index)
-                mStartX[i] = mCurrentX[i]
-                mCurrentY[i] = event.getY(index)
-                mStartY[i] = mCurrentY[i]
-                mPointerCount++
-            }
-        }
-    }
-
-    private fun updatePointersOnMove(event: MotionEvent) {
-        for (i in 0 until MAX_POINTERS) {
-            val index = event.findPointerIndex(mId[i])
-            if (index != -1) {
-                mCurrentX[i] = event.getX(index)
-                mCurrentY[i] = event.getY(index)
-            }
-        }
-    }
-
-    /**
      * Handles the given motion event.
      *
      * @param event event to handle
@@ -155,9 +86,9 @@ open class MultiPointerGestureDetector {
         when (event.actionMasked) {
             MotionEvent.ACTION_MOVE -> {
                 // update pointers
-                updatePointersOnMove(event)
+                pointerSlots.updatePointersOnMove(event)
                 // start a new gesture if not already started
-                if (!mGestureInProgress && mPointerCount > 0 && shouldStartGesture()) {
+                if (!mGestureInProgress && pointerSlots.pointerCount > 0 && shouldStartGesture()) {
                     startGesture()
                 }
                 // notify listener
@@ -172,16 +103,16 @@ open class MultiPointerGestureDetector {
             MotionEvent.ACTION_UP,
             -> {
                 // restart gesture whenever the number of pointers changes
-                mNewPointerCount = getPressedPointerCount(event)
+                pointerSlots.newPointerCount = pointerSlots.getPressedPointerCount(event)
                 stopGesture()
-                updatePointersOnTap(event)
-                if (mPointerCount > 0 && shouldStartGesture()) {
+                pointerSlots.updatePointersOnTap(event)
+                if (pointerSlots.pointerCount > 0 && shouldStartGesture()) {
                     startGesture()
                 }
             }
 
             MotionEvent.ACTION_CANCEL -> {
-                mNewPointerCount = 0
+                pointerSlots.newPointerCount = 0
                 stopGesture()
                 reset()
             }
@@ -195,43 +126,10 @@ open class MultiPointerGestureDetector {
             return
         }
         stopGesture()
-        for (i in 0 until MAX_POINTERS) {
-            mStartX[i] = mCurrentX[i]
-            mStartY[i] = mCurrentY[i]
-        }
+        pointerSlots.copyCurrentToStart()
         startGesture()
     }
 
     /** Gets whether there is a gesture in progress */
     fun isGestureInProgress(): Boolean = mGestureInProgress
-
-    /** Gets the number of pointers after the current gesture */
-    fun getNewPointerCount(): Int = mNewPointerCount
-
-    /** Gets the number of pointers in the current gesture */
-    fun getPointerCount(): Int = mPointerCount
-
-    /**
-     * Gets the start X coordinates for all pointers Mutable array is exposed for performance
-     * reasons and is not to be modified by the callers.
-     */
-    fun getStartX(): FloatArray = mStartX
-
-    /**
-     * Gets the start Y coordinates for all pointers Mutable array is exposed for performance
-     * reasons and is not to be modified by the callers.
-     */
-    fun getStartY(): FloatArray = mStartY
-
-    /**
-     * Gets the current X coordinates for all pointers Mutable array is exposed for performance
-     * reasons and is not to be modified by the callers.
-     */
-    fun getCurrentX(): FloatArray = mCurrentX
-
-    /**
-     * Gets the current Y coordinates for all pointers Mutable array is exposed for performance
-     * reasons and is not to be modified by the callers.
-     */
-    fun getCurrentY(): FloatArray = mCurrentY
 }

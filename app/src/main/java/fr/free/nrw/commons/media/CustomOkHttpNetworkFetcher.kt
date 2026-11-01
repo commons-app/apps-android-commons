@@ -25,8 +25,11 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is enabled
+// Custom implementation of Fresco's Network fetcher to skip downloading of images when limited connection mode is
+// enabled
 // https://github.com/facebook/fresco/blob/master/imagepipeline-backends/imagepipeline-okhttp3/src/main/java/com/facebook/imagepipeline/backends/okhttp3/OkHttpNetworkFetcher.java
+// Keep the source URL intact for copy/paste.
+@Suppress("MaxLineLength")
 @Singleton
 class CustomOkHttpNetworkFetcher
     @JvmOverloads

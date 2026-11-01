@@ -21,7 +21,7 @@ object MapUtils {
     fun registerUnregisterLocationListener(
         removeLocationListener: Boolean,
         locationManager: LocationServiceManager,
-        locationUpdateListener: LocationUpdateListener
+        locationUpdateListener: LocationUpdateListener,
     ) {
         try {
             if (removeLocationListener) {

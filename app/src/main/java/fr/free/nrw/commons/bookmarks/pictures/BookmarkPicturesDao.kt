@@ -38,7 +38,7 @@ class BookmarkPicturesDao @Inject constructor(
                 items.add(fromCursor(cursor))
             }
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             cursor?.close()
             db.release()
@@ -72,7 +72,7 @@ class BookmarkPicturesDao @Inject constructor(
         try {
             db.insert(BASE_URI, toContentValues(bookmark))
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
@@ -87,12 +87,12 @@ class BookmarkPicturesDao @Inject constructor(
         val db = clientProvider.get()
         try {
             if (bookmark.contentUri == null) {
-                throw RuntimeException("tried to delete item with no content URI")
+                error("tried to delete item with no content URI")
             } else {
                 db.delete(bookmark.contentUri!!, null, null)
             }
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
@@ -118,7 +118,7 @@ class BookmarkPicturesDao @Inject constructor(
                 exists = cursor.moveToFirst()
             }
         } catch (e: RemoteException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         } finally {
             db.release()
         }
