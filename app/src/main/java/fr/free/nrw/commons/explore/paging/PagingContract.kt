@@ -14,10 +14,6 @@ interface PagingContract {
 
         fun hideInitialLoadProgress()
 
-        fun hideContributionFab()
-
-        fun showContributionFab()
-
         fun showEmptyText(query: String)
 
         fun hideEmptyText()
