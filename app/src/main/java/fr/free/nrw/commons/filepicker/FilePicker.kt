@@ -411,13 +411,17 @@ object FilePicker : Constants {
     }
 
     @JvmStatic
-    fun convertHeicToJpg(file: File, context: Context): File {
-        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
-            ImageDecoder.decodeBitmap(source)
-        } else {
-            error("HEIC conversion requires Android P+")
-        }
+    fun convertHeicToJpg(
+        file: File,
+        context: Context,
+    ): File {
+        val bitmap =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                error("HEIC conversion requires Android P+")
+            }
 
         val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
         FileOutputStream(jpgFile).use { out ->

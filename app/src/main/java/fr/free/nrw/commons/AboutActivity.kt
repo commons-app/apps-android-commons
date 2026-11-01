@@ -20,6 +20,7 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
+import timber.log.Timber
 import java.util.Collections
 
 /**
@@ -101,6 +102,7 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
+            Timber.e(e, "Could not open the Facebook app, falling back to the web page")
             handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
         }
     }
@@ -114,6 +116,7 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
+            Timber.e(e, "Could not open the GitHub app, falling back to the web page")
             handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
         }
     }
