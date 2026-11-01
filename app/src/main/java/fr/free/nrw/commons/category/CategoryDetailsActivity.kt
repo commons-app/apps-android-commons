@@ -19,6 +19,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
+import fr.free.nrw.commons.explore.categories.media.CategoryDetailsMediaFragment
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
@@ -41,7 +42,7 @@ class CategoryDetailsActivity :
     MediaDetailProvider,
     CategoryImagesCallback {
     private lateinit var supportFragmentManager: FragmentManager
-    private lateinit var categoriesMediaFragment: CategoriesMediaFragment
+    private lateinit var categoryDetailsMediaFragment: CategoryDetailsMediaFragment
     private var mediaDetails: MediaDetailPagerFragment? = null
     private var categoryName: String? = null
     private lateinit var viewPagerAdapter: ViewPagerAdapter
@@ -100,7 +101,7 @@ class CategoryDetailsActivity :
      * Set the fragments according to the tab selected in the viewPager.
      */
     private fun setTabs() {
-        categoriesMediaFragment = CategoriesMediaFragment()
+        categoryDetailsMediaFragment = CategoryDetailsMediaFragment()
         val subCategoryListFragment = SubCategoriesFragment()
         val parentCategoriesFragment = ParentCategoriesFragment()
         categoryName = intent?.getStringExtra("categoryName")
@@ -109,7 +110,7 @@ class CategoryDetailsActivity :
                 Bundle().apply {
                     putString("categoryName", categoryName)
                 }
-            categoriesMediaFragment.arguments = arguments
+            categoryDetailsMediaFragment.arguments = arguments
             subCategoryListFragment.arguments = arguments
             parentCategoriesFragment.arguments = arguments
 
@@ -117,7 +118,7 @@ class CategoryDetailsActivity :
         }
 
         viewPagerAdapter.setTabs(
-            R.string.title_for_media to categoriesMediaFragment,
+            R.string.title_for_media to categoryDetailsMediaFragment,
             R.string.title_for_subcategories to subCategoryListFragment,
             R.string.title_for_parent_categories to parentCategoriesFragment,
         )
@@ -177,14 +178,14 @@ class CategoryDetailsActivity :
      *          current index of viewPager.
      * @return Media Object
      */
-    override fun getMediaAtPosition(i: Int): Media? = categoriesMediaFragment.getMediaAtPosition(i)
+    override fun getMediaAtPosition(i: Int): Media? = categoryDetailsMediaFragment.getMediaAtPosition(i)
 
     /**
      * This method is called on from getCount of MediaDetailPagerFragment
      * The viewpager will contain same number of media items as that of media elements in adapter.
      * @return Total Media count in the adapter
      */
-    override fun getTotalMediaCount(): Int = categoriesMediaFragment.getTotalMediaCount()
+    override fun getTotalMediaCount(): Int = categoryDetailsMediaFragment.getTotalMediaCount()
 
     override fun getContributionStateAt(position: Int): Int? = null
 

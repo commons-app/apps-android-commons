@@ -12,13 +12,5 @@ abstract class PageableCategoryFragment : BasePagingFragment<String>() {
         }
     }
 
-    override fun hideInitialLoadProgress() {
-        super.hideInitialLoadProgress()
-        showContributionFab();
-    }
 
-    override fun showInitialLoadInProgress() {
-        super.showInitialLoadInProgress()
-        hideContributionFab();
-    }
 }
