@@ -90,9 +90,7 @@ class ThreadPoolService private constructor(
          * @throws IllegalArgumentException if size of pool <= 0
          */
         fun setPoolSize(poolSize: Int): Builder {
-            if (poolSize <= 0) {
-                throw IllegalArgumentException("Pool size must be greater than 0")
-            }
+            require(poolSize > 0) { "Pool size must be greater than 0" }
             this.poolSize = poolSize
             return this
         }

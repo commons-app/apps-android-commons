@@ -361,7 +361,7 @@ class RecentSearchesDaoTest {
      */
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (_ in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("1", "butterfly", "123"))
             }
         }

@@ -185,10 +185,6 @@ class ZoomableActivity : BaseActivity() {
             ViewModelProvider(this, customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
-        viewModel.fetchImages()
-        viewModel.result.observe(this) {
-            handleResult(it)
-        }
 
         val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN)
 
@@ -218,6 +214,16 @@ class ZoomableActivity : BaseActivity() {
 
         if (backgroundColor != MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR) {
             photoBackgroundColor = backgroundColor
+        }
+
+        // Media details already pass the file URL. Scanning the device gallery would delay the image.
+        if (origin == "MediaDetails") {
+            intent.data?.let { init(it) }
+        } else {
+            viewModel.fetchImages()
+            viewModel.result.observe(this) {
+                handleResult(it)
+            }
         }
     }
 
