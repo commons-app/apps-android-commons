@@ -35,7 +35,7 @@ import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.startWelcome
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import io.reactivex.Completable
