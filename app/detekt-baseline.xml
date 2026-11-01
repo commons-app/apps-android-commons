@@ -569,36 +569,6 @@
     <ID>MagicNumber:Namespace.kt$Namespace.USER_WIKI_TALK$201</ID>
     <ID>MagicNumber:Namespace.kt$Namespace.WIDGET$274</ID>
     <ID>MagicNumber:Namespace.kt$Namespace.WIDGET_TALK$275</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$0.009</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$0.07520</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$0.5f</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$0.75</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$0.77525f</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$1.25</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$100</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$100f</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$128</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$15</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$16</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$200</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$2000.0</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$24</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$25</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$250</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$255</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$256.0</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$3</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$360.0</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$4</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$40</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$5</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$500</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$51.50550</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$6</ID>
-    <ID>MagicNumber:NearbyParentFragment.kt$NearbyParentFragment$9</ID>
-    <ID>MagicNumber:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$2000.0</ID>
-    <ID>MagicNumber:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$3</ID>
-    <ID>MagicNumber:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter$4</ID>
     <ID>MagicNumber:NetworkingModule.kt$NetworkingModule$120</ID>
     <ID>MagicNumber:NotificationAdapterDelegates.kt$279</ID>
     <ID>MagicNumber:NotificationAdapterDelegates.kt$280</ID>
@@ -710,7 +680,6 @@
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$7</ID>
     <ID>MagicNumber:UploadableFile.kt$UploadableFile$8</ID>
     <ID>MagicNumber:WikiSite.kt$WikiSite.Companion$3</ID>
-    <ID>MagicNumber:WikidataFeedback.kt$WikidataFeedback$0.3f</ID>
     <ID>NestedBlockDepth:ImageFragment.kt$ImageFragment$private fun handleResult(result: Result)</ID>
     <ID>NestedBlockDepth:ImageLoader.kt$ImageLoader$suspend fun nextActionableImage( allImages: List&lt;Image&gt;, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, nextImagePosition: Int, currentlyUploadingImages: List&lt;Contribution&gt;, ): Int</ID>
     <ID>NestedBlockDepth:ImageUtils.kt$ImageUtils$@JvmStatic private fun checkIfImageIsDark(bitmap: Bitmap?): Boolean</ID>
