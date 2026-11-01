@@ -171,6 +171,7 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
     private fun setListeners() {
         binding.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
         binding.fabCamera.setOnClickListener { view: View? ->
+            controller!!.setUploadCategory(requireArguments().getString("categoryName"))
             controller!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
@@ -178,7 +179,7 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
             )
             animateFAB(isFabOpen)
         }
-        binding.fabCamera.setOnLongClickListener { view: View? ->
+        binding.fabCamera.setOnLongClickListener {  view: View? ->
             showShortToast(
                 context,
                 R.string.add_contribution_from_camera,
@@ -186,6 +187,7 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
             true
         }
         binding.fabGallery.setOnClickListener { view: View? ->
+            controller!!.setUploadCategory(requireArguments().getString("categoryName"))
             controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
             animateFAB(isFabOpen)
         }
@@ -204,6 +206,7 @@ class CategoryDetailsMediaFragment : CategoriesMediaFragment() {
      * Launch Custom Selector.
      */
     private fun launchCustomSelector() {
+        controller!!.setUploadCategory(requireArguments().getString("categoryName"))
         controller!!.initiateCustomGalleryPickWithPermission(
             requireActivity(),
             customSelectorLauncherForResult,

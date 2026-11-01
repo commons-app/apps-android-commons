@@ -64,6 +64,7 @@ class UploadCategoriesFragment :
      */
     private var wikiText: String? = null
     private var nearbyPlaceCategory: String? = null
+    private var preselectedCategory: String? = null
 
     private var binding: UploadCategoriesFragmentBinding? = null
 
@@ -100,6 +101,12 @@ class UploadCategoriesFragment :
             media = bundle.getParcelable("Existing_Categories")
             wikiText = bundle.getString("WikiText")
             nearbyPlaceCategory = bundle.getString(SELECTED_NEARBY_PLACE_CATEGORY)
+            preselectedCategory = bundle.getString(SELECTED_CATEGORY)
+        }
+        init()
+        preselectedCategory?.let {
+            presenter?.preselectCategory(it)
+            arguments?.remove(SELECTED_CATEGORY)   // only pre-select once
         }
         init()
         presenter!!.getCategories().observe(
@@ -419,5 +426,9 @@ class UploadCategoriesFragment :
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    companion object {
+        const val SELECTED_CATEGORY = "selected_category"
     }
 }

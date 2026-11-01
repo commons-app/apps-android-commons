@@ -337,4 +337,9 @@ class CategoriesPresenter
                     .subscribe(::selectNewCategories),
             )
         }
+
+        override fun preselectCategory(categoryName: String) {
+            if (repository.getSelectedCategories().any { it.name == categoryName }) return
+            selectNewCategories(listOf(CategoryItem(categoryName, "", "null", true)))
+        }
     }
