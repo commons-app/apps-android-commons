@@ -403,57 +403,6 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
-    fun testOnLocationChangeTypeCustomQuery() {
-        nearbyPresenter.setAdvancedQuery("Point(17.865 82.343)\"")
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        verify(nearbyParentFragmentView).getLastMapFocus()
-        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(any(), any())
-    }
-
-    @Test
-    fun testOnLocationChangeTypeCustomQueryInvalidQuery() {
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("")
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
-        nearbyPresenter.setAdvancedQuery("Point(")
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
-    }
-
-    @Test
-    fun testOnLocationChangeTypeCustomQueryUnParsableQuery() {
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point()\"")
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
-
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point(ab)\"")
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
-
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
-        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
-        nearbyPresenter.setAdvancedQuery("Point(ab ab)\"")
-        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
-    }
-
-    @Test
-    fun testSetAdvancedQuery() {
-        nearbyPresenter.setAdvancedQuery("test")
-    }
-
-    @Test
     fun testUpdateMapMarkers() {
         whenever(latestLocation.latitude).thenReturn(2.0)
         whenever(latestLocation.longitude).thenReturn(1.0)

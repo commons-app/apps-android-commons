@@ -6,30 +6,134 @@
   android:background="@color/white"
   android:padding="10dp">
 
-  <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/tv_title"
+  <ScrollView
+    android:id="@+id/search_options_scroll"
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="@string/advanced_query_info_text"
-    android:textColor="@color/secondaryTextColor"
-    android:textStyle="bold"
-    app:layout_constrainedHeight="true"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-  <androidx.appcompat.widget.AppCompatEditText
-    android:id="@+id/et_query"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:background="@drawable/advanced_query_border"
-    android:padding="5dp"
-    android:textColor="@color/secondaryTextColor"
-    app:layout_constrainedHeight="true"
+    android:layout_height="0dp"
+    android:fillViewport="true"
     app:layout_constraintBottom_toTopOf="@id/btn_apply"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/advanced_query_info_text"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/nearby_search_area"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_radius_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/nearby_search_map_area"
+        android:textColor="@color/secondaryTextColor"
+        android:textStyle="bold" />
+
+      <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seek_radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/nearby_search_area"
+        android:max="500"
+        android:progress="0" />
+
+      <LinearLayout
+        android:id="@+id/radius_ticks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+      <LinearLayout
+        android:id="@+id/place_types_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:contentDescription="@string/nearby_place_types"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="@string/nearby_place_types"
+          android:textColor="@color/secondaryTextColor"
+          android:textSize="18sp"
+          android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/place_types_arrow"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:contentDescription="@string/nearby_place_types"
+          android:rotation="180"
+          android:src="@drawable/ic_baseline_arrow_drop_down_24"
+          app:tint="@color/secondaryTextColor" />
+      </LinearLayout>
+
+      <ScrollView
+        android:id="@+id/place_types_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+          android:id="@+id/place_types_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical" />
+      </ScrollView>
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_include_subclasses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/nearby_include_subclasses"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+      <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_missing_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nearby_missing_image_only"
+        android:textColor="@color/secondaryTextColor"
+        app:buttonTint="@color/nearby_search_checkbox" />
+
+      <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_hide_destroyed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nearby_hide_destroyed"
+        android:textColor="@color/secondaryTextColor"
+        app:buttonTint="@color/nearby_search_checkbox" />
+    </LinearLayout>
+  </ScrollView>
 
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/btn_apply"
@@ -37,7 +141,6 @@
     android:layout_height="wrap_content"
     android:text="@string/apply"
     android:textColor="@color/white"
-    app:layout_constrainedHeight="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintRight_toRightOf="parent" />
 

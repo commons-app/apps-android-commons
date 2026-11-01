@@ -82,6 +82,7 @@ import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
 import fr.free.nrw.commons.nearby.NearbyFilterState
+import fr.free.nrw.commons.nearby.NearbySearchOptions
 import fr.free.nrw.commons.nearby.NearbyUtil
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
@@ -89,7 +90,6 @@ import fr.free.nrw.commons.nearby.WikidataFeedback
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.model.BottomSheetItem
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
-import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
@@ -189,6 +189,8 @@ class NearbyParentFragment :
     @Inject
     @Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
+
+    private var searchOptions: NearbySearchOptions = NearbySearchOptions()
 
     @Inject
     lateinit var mediaClient: MediaClient
@@ -513,6 +515,8 @@ class NearbyParentFragment :
         }
 
         presenter?.attachView(this)
+        searchOptions = applicationKvStore.getJson(NearbySearchOptions.PREF_KEY)
+            ?: NearbySearchOptions()
         isPermissionDenied = false
         recenterToUserLocation = false
         initThemePreferences()
@@ -608,31 +612,23 @@ class NearbyParentFragment :
                     ?.clearFocus()
                 showHideAdvancedQueryFragment(true)
                 val fragment = AdvanceQueryFragment()
-                val bundle = Bundle()
-                try {
-                    bundle.putString(
-                        "query",
-                        FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"),
-                    )
-                } catch (e: IOException) {
-                    Timber.e(e)
-                }
-                fragment.arguments = bundle
+                fragment.arguments =
+                    Bundle().apply {
+                        putSerializable(NearbySearchOptions.ARG_KEY, searchOptions)
+                    }
                 fragment.callback =
                     object : AdvanceQueryFragment.Callback {
-                        override fun close() {
-                            showHideAdvancedQueryFragment(false)
-                        }
-
                         override fun reset() {
-                            presenter?.setAdvancedQuery(null.toString())
+                            // Leave the form open so the cleared choices can be changed again.
+                            searchOptions = NearbySearchOptions()
+                            applicationKvStore.remove(NearbySearchOptions.PREF_KEY)
                             presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                            showHideAdvancedQueryFragment(false)
                         }
 
-                        override fun apply(query: String) {
-                            presenter?.setAdvancedQuery(query)
-                            presenter?.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+                        override fun apply(options: NearbySearchOptions) {
+                            searchOptions = options
+                            applicationKvStore.putJson(NearbySearchOptions.PREF_KEY, options)
+                            presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
                             showHideAdvancedQueryFragment(false)
                         }
                     }
@@ -1523,7 +1519,6 @@ class NearbyParentFragment :
                     screenTopRightLatLng,
                     screenBottomLeftLatLng,
                     currentLatLng,
-                    null,
                 )
             } else {
                 populatePlacesForAnotherLocation(
@@ -1531,7 +1526,6 @@ class NearbyParentFragment :
                     screenTopRightLatLng,
                     screenBottomLeftLatLng,
                     currentLatLng,
-                    null,
                 )
             }
         } else {
@@ -1544,7 +1538,6 @@ class NearbyParentFragment :
                     screenTopRightLatLng,
                     screenBottomLeftLatLng,
                     currentLatLng,
-                    null,
                 )
             } else {
                 populatePlacesForAnotherLocation(
@@ -1552,47 +1545,10 @@ class NearbyParentFragment :
                     screenTopRightLatLng,
                     screenBottomLeftLatLng,
                     currentLatLng,
-                    null,
                 )
             }
         }
 
-        if (recenterToUserLocation) {
-            recenterToUserLocation = false
-        }
-    }
-
-    override fun populatePlaces(
-        currentLatLng: LatLng,
-        customQuery: String?,
-    ) {
-        if (customQuery == null || customQuery.isEmpty()) {
-            populatePlaces(currentLatLng)
-            return
-        }
-        // these two variables have historically been assigned values the opposite of what their
-        // names imply, and quite some existing code depends on this fact
-        val screenTopRightLatLng = screenBottomLeft
-        val screenBottomLeftLatLng = screenTopRight
-
-        if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) {
-            // Means we are checking around current location
-            populatePlacesForCurrentLocation(
-                lastKnownLocation,
-                screenTopRightLatLng,
-                screenBottomLeftLatLng,
-                currentLatLng,
-                customQuery,
-            )
-        } else {
-            populatePlacesForAnotherLocation(
-                lastKnownLocation,
-                screenTopRightLatLng,
-                screenBottomLeftLatLng,
-                currentLatLng,
-                customQuery,
-            )
-        }
         if (recenterToUserLocation) {
             recenterToUserLocation = false
         }
@@ -1890,7 +1846,6 @@ class NearbyParentFragment :
         screenTopRight: LatLng?,
         screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
-        customQuery: String?,
     ) {
         val nearbyPlacesInfoObservable =
             Observable
@@ -1903,7 +1858,7 @@ class NearbyParentFragment :
                         false,
                         true,
                         isMonumentsEnabled,
-                        customQuery,
+                        searchOptions,
                     )
                 }
 
@@ -1946,7 +1901,6 @@ class NearbyParentFragment :
         screenTopRight: LatLng?,
         screenBottomLeft: LatLng?,
         searchLatLng: LatLng,
-        customQuery: String?,
     ) {
         val nearbyPlacesInfoObservable =
             Observable
@@ -1959,7 +1913,7 @@ class NearbyParentFragment :
                         false,
                         true,
                         isMonumentsEnabled,
-                        customQuery,
+                        searchOptions,
                     )
                 }
 

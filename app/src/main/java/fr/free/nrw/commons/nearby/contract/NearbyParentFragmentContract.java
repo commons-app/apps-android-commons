@@ -24,8 +24,6 @@ public interface NearbyParentFragmentContract {
 
         void populatePlaces(LatLng currentLatLng);
 
-        void populatePlaces(LatLng currentLatLng, String customQuery);
-
         boolean isListBottomSheetExpanded();
 
         void askForLocationPermission();
@@ -135,8 +133,6 @@ public interface NearbyParentFragmentContract {
         void searchViewGainedFocus();
 
         void setCheckboxUnknown();
-
-        void setAdvancedQuery(String query);
 
         void toggleBookmarkedStatus(Place place, LifecycleCoroutineScope scope);
 

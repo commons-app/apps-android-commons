@@ -16,7 +16,6 @@ import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
-import fr.free.nrw.commons.utils.LocationUtils
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
 import io.reactivex.schedulers.Schedulers
@@ -44,8 +43,6 @@ class NearbyParentFragmentPresenter(
     LocationUpdateListener {
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
-
-    private var customQuery: String? = null
 
     private var nearbyParentFragmentView: NearbyParentFragmentContract.View = DUMMY
 
@@ -280,19 +277,7 @@ class NearbyParentFragmentPresenter(
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
-        if (locationChangeType == LocationChangeType.CUSTOM_QUERY) {
-            Timber.d("ADVANCED_QUERY_SEARCH")
-            lockUnlockNearby(true)
-            nearbyParentFragmentView.setProgressBarVisibility(true)
-            var updatedLocationByUser =
-                LocationUtils.deriveUpdatedLocationFromSearchQuery(
-                    customQuery!!,
-                )
-            if (updatedLocationByUser == null) {
-                updatedLocationByUser = lastLocation
-            }
-            nearbyParentFragmentView.populatePlaces(updatedLocationByUser, customQuery)
-        } else if (locationChangeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED ||
+        if (locationChangeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED ||
             locationChangeType == LocationChangeType.MAP_UPDATED
         ) {
             lockUnlockNearby(true)
@@ -821,10 +806,6 @@ class NearbyParentFragmentPresenter(
 
     override fun setCheckboxUnknown() {
         nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN)
-    }
-
-    override fun setAdvancedQuery(query: String) {
-        this.customQuery = query
     }
 
     override fun searchViewGainedFocus() {

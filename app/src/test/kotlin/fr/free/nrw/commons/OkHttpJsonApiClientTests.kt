@@ -112,7 +112,7 @@ class OkHttpJsonApiClientTests {
                 NearbyQueryParams.Rectangular(latLng, latLng),
                 "test",
                 true,
-                null
+                ""
             )
         } catch (e: Exception) {
             assertEquals("test", e.message)
@@ -122,7 +122,7 @@ class OkHttpJsonApiClientTests {
                 NearbyQueryParams.Radial(latLng, 10f),
                 "test",
                 true,
-                null
+                ""
             )
         } catch (e: Exception) {
             assertEquals("test", e.message)
@@ -134,12 +134,12 @@ class OkHttpJsonApiClientTests {
     @Test
     fun testGetNearbyItemCount() {
         try {
-            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Radial(latLng, 10f))
+            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Radial(latLng, 10f), "")
         } catch (e: Exception) {
             assertEquals("test", e.message)
         }
         try {
-            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Rectangular(latLng, latLng))
+            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Rectangular(latLng, latLng), "")
         } catch (e: Exception) {
             assertEquals("test", e.message)
         }

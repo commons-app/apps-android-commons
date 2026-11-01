@@ -783,7 +783,16 @@ Upload your first media by tapping on the add button.</string>
   <string name="edit_depictions">Edit depictions</string>
   <string name="edit_categories">Edit categories</string>
   <string name="advanced_options">Advanced Options</string>
-  <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
+  <string name="advanced_query_info_text">Choose what Nearby should search for. Reset clears these choices.</string>
+  <string name="nearby_search_area">Search area</string>
+  <string name="nearby_search_map_area">Current map view</string>
+  <string name="nearby_search_radius_km">%1$d km</string>
+  <string name="nearby_search_radius_km_precise">%1$.1f km</string>
+  <string name="nearby_search_slider_map">Map</string>
+  <string name="nearby_place_types">Place types</string>
+  <string name="nearby_include_subclasses">Include more specific types</string>
+  <string name="nearby_missing_image_only">Only places that need a photo</string>
+  <string name="nearby_hide_destroyed">Hide places that no longer exist</string>
   <string name="apply">Apply</string>
   <string name="reset">Reset</string>
   <string name="location_message">Location data helps Wiki editors find your picture, making it much more useful.\nYour recent uploads have no location.\nWe suggest you turn on location in your camera app\'s settings.\nThank you for uploading!</string>

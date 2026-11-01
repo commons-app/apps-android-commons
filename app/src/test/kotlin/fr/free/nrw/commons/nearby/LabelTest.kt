@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,5 +42,13 @@ class LabelTest {
     fun testNullLabelIcon() {
         var nullLabel: Label = Label.fromText("a random text not exist in label texts")
         assertThat(nullLabel.icon, equalTo(R.drawable.round_icon_unknown))
+    }
+
+    @Test
+    fun testGetQidsReadsConfiguredIds() {
+        assertTrue(Label.CHURCH.getQids(context.resources).contains("Q16970"))
+        assertTrue(Label.BUILDING.getQids(context.resources).contains("Q41176"))
+        assertTrue(Label.BOOKMARKS.getQids(context.resources).isEmpty())
+        assertTrue(Label.UNKNOWN.getQids(context.resources).isEmpty())
     }
 }

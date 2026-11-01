@@ -5,8 +5,11 @@ import android.content.res.Resources;
 import android.os.Parcel;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +113,28 @@ public enum Label {
     @DrawableRes
     public int getIcon() {
         return icon;
+    }
+
+    /**
+     * Returns the Wikidata Q-ids configured for this place type.
+     *
+     * Bookmarks and the unknown type have no ids. The ids come from the integer
+     * arrays already used to map a place back to a marker icon.
+     *
+     * @param resources application resources that hold the Q-id arrays
+     * @return Q-ids such as {@code Q16970}, or an empty list when this type has none
+     */
+    @NonNull
+    public List<String> getQids(final Resources resources) {
+        if (arrayResId == 0) {
+            return Collections.emptyList();
+        }
+        final int[] ids = resources.getIntArray(arrayResId);
+        final List<String> qids = new ArrayList<>(ids.length);
+        for (final int id : ids) {
+            qids.add("Q" + id);
+        }
+        return qids;
     }
 
     public static Label fromText(final String text) {
