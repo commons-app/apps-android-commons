@@ -200,6 +200,7 @@ open class CommonsApplicationModule(
             MIGRATION_1_2,
             MIGRATION_19_TO_20,
             MIGRATION_21_22,
+            MIGRATION_22_23,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -525,6 +526,24 @@ val MIGRATION_21_22 =
             } catch (e: Exception) {
                 Timber.e(e, "Exception during legacy database migration")
                 throw e
+            }
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_22_23 =
+    object : Migration(22, 23) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            // Add column if it is not there yet, so running this twice does not crash
+            val hasCachedAt =
+                db.query("PRAGMA table_info(place)").use { cursor ->
+                    generateSequence {
+                        if (cursor.moveToNext()) cursor.getString(cursor.getColumnIndexOrThrow("name")) else null
+                    }.any { it == "cachedAt" }
+                }
+            if (!hasCachedAt) {
+                // Old cached places get 0, so they are fetched again once
+                db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
             }
         }
     }

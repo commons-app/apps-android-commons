@@ -83,6 +83,25 @@ object PermissionUtils {
         }
     }
 
+    private fun showRationaleDialog(
+        activity: Activity,
+        rationaleTitle: Int,
+        rationaleMessage: Int,
+        onPositive: Runnable?,
+        onNegative: Runnable? = null,
+    ) {
+        DialogUtil.showAlertDialog(
+            activity = activity,
+            title = activity.getString(rationaleTitle),
+            message = activity.getString(rationaleMessage),
+            positiveButtonText = activity.getString(R.string.ok),
+            negativeButtonText = onNegative?.let { activity.getString(R.string.cancel) },
+            onPositiveBtnClick = onPositive,
+            onNegativeBtnClick = onNegative,
+            cancelable = true,
+        )
+    }
+
     /**
      * Check if the app has partial access permissions.
      */
@@ -161,6 +180,7 @@ object PermissionUtils {
      * @param rationaleMessage    rationale message to be displayed when permission was denied
      */
     @JvmStatic
+    @Suppress("LongParameterList")
     fun checkPermissionsAndPerformAction(
         activity: Activity,
         onPermissionGranted: Runnable,
@@ -179,19 +199,17 @@ object PermissionUtils {
                         report.areAllPermissionsGranted() || hasPartialAccess(activity) ->
                             scope.launch { onPermissionGranted.run() }
                         report.isAnyPermissionPermanentlyDenied -> {
-                            DialogUtil.showAlertDialog(
-                                activity,
-                                activity.getString(rationaleTitle),
-                                activity.getString(rationaleMessage),
-                                activity.getString(R.string.navigation_item_settings),
-                                null,
-                                {
+                            showRationaleDialog(
+                                activity = activity,
+                                rationaleTitle = rationaleTitle,
+                                rationaleMessage = rationaleMessage,
+                                onPositive = Runnable {
                                     askUserToManuallyEnablePermissionFromSettings(activity)
                                     if (activity is UploadActivity) {
                                         activity.isShowPermissionsDialog = true
                                     }
                                 },
-                                null, true
+                                onNegative = null,
                             )
                         }
                         else -> scope.launch { onPermissionDenied?.run() }
@@ -205,30 +223,27 @@ object PermissionUtils {
                         token.continuePermissionRequest()
                         return
                     }
-                    DialogUtil.showAlertDialog(
-                        activity,
-                        activity.getString(rationaleTitle),
-                        activity.getString(rationaleMessage),
-                        activity.getString(R.string.ok),
-                        activity.getString(R.string.cancel),
-                        {
+                    showRationaleDialog(
+                        activity = activity,
+                        rationaleTitle = rationaleTitle,
+                        rationaleMessage = rationaleMessage,
+                        onPositive = Runnable {
                             if (activity is UploadActivity) {
                                 activity.isShowPermissionsDialog = true
                             }
                             token.continuePermissionRequest()
                         },
-                        {
+                        onNegative = Runnable {
                             Toast.makeText(
                                 activity.applicationContext,
                                 R.string.permissions_are_required_for_functionality,
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_LONG,
                             ).show()
                             token.cancelPermissionRequest()
                             if (activity is UploadActivity) {
                                 activity.finish()
                             }
                         },
-                        true
                     )
                 }
             }).onSameThread().check()

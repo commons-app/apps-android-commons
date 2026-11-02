@@ -57,7 +57,7 @@ class CsrfTokenClient(
                     break
                 }
             } catch (e: LoginFailedException) {
-                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, e)
             } catch (t: Throwable) {
                 Timber.w(t)
             }
@@ -213,4 +213,5 @@ class CsrfTokenClient(
 
 class InvalidLoginTokenException(
     message: String,
-) : Exception(message)
+    cause: Throwable? = null,
+) : Exception(message, cause)

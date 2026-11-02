@@ -88,11 +88,12 @@ object CustomSelectorUtils {
                 if (mediaClient.checkFileExistsUsingSha(sha1).blockingGet()) {
                     result = ImageLoader.Result.TRUE
                 }
+            } catch (e: UnknownHostException) {
+                // Handle no network connection.
+                Timber.e(e, "Network Connection Error")
+                result = ImageLoader.Result.ERROR
+                e.printStackTrace()
             } catch (e: Exception) {
-                if (e is UnknownHostException) {
-                    // Handle no network connection.
-                    Timber.e(e, "Network Connection Error")
-                }
                 result = ImageLoader.Result.ERROR
                 e.printStackTrace()
             }

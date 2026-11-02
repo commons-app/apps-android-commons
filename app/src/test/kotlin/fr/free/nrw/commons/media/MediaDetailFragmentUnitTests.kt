@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.media
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -10,13 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewTreeObserver
-import android.webkit.WebView
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.ScrollView
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -119,7 +115,6 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var textView: TextView
 
-
     @Mock
     private lateinit var linearLayout: LinearLayout
 
@@ -135,11 +130,8 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-
     @Mock
     private lateinit var progressBar: ProgressBar
-
-
 
     private lateinit var activity: SearchActivity
 
