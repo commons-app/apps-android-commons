@@ -159,45 +159,6 @@ class ContributionController
             )
         }
 
-<<<<<<< HEAD
-        /**
-         * Shows a dialog alerting the user about location services being off and asking them to turn it
-         * on
-         * Possible improvement: add a separate callback in LocationPermissionsHelper for this.
-         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
-         *
-         * @param activity           Activity reference
-         * @param dialogTextResource Resource id of text to be shown in dialog
-         * @param toastTextResource  Resource id of text to be shown in toast
-         * @param resultLauncher
-         */
-        private fun showLocationOffDialog(
-            activity: Activity,
-            dialogTextResource: Int,
-            toastTextResource: Int,
-            resultLauncher: ActivityResultLauncher<Intent>,
-        ) {
-            showAlertDialog(
-                activity,
-                activity.getString(R.string.ask_to_turn_location_on),
-                activity.getString(dialogTextResource),
-                activity.getString(R.string.title_app_shortcut_setting),
-                activity.getString(R.string.cancel),
-                { locationPermissionsHelper!!.openLocationSettings(activity) },
-                {
-                    Toast
-                        .makeText(
-                            activity,
-                            activity.getString(toastTextResource),
-                            Toast.LENGTH_LONG,
-                        ).show()
-                    initiateCameraUpload(activity, resultLauncher)
-                },
-            )
-        }
-
-=======
->>>>>>> 86cd80c7b (Reuse LocationPermissionsHelper for the location-off dialog in ContributionController (#7160))
         fun handleShowRationaleFlowCameraLocation(
             activity: Activity,
             inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>?,
