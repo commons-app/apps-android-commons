@@ -23,13 +23,16 @@ class BookmarkItemsFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentBookmarksItemsBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initList(requireContext())
     }
@@ -45,8 +48,10 @@ class BookmarkItemsFragment : DaggerFragment() {
      */
     private fun initList(context: Context) {
         val depictItems = controller!!.loadFavoritesItems()
-        binding!!.recyclerView.apply { layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-            adapter = BookmarkItemsAdapter(depictItems, context) }
+        binding!!.recyclerView.apply {
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            adapter = BookmarkItemsAdapter(depictItems, context)
+        }
         binding!!.loadingImagesProgressBar.visibility = View.GONE
         if (depictItems.isEmpty()) {
             binding!!.statusMessage.setText(R.string.bookmark_empty)

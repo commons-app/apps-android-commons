@@ -119,8 +119,6 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var textView: TextView
 
-    @Mock
-    private lateinit var htmlTextView: HtmlTextView
 
     @Mock
     private lateinit var linearLayout: LinearLayout
@@ -137,17 +135,11 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-    @Mock
-    private lateinit var webView: WebView
 
     @Mock
     private lateinit var progressBar: ProgressBar
 
-    @Mock
-    private lateinit var listView: ListView
 
-    @Mock
-    private lateinit var intent: Intent
 
     private lateinit var activity: SearchActivity
 

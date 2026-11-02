@@ -213,7 +213,7 @@ open class ZoomableDraweeView :
             if (controller is AbstractDraweeController<*, *>) {
                 val callerContext = controller.callerContext
                 if (callerContext != null) {
-                    throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)
+                    throw IllegalStateException("Exception in onDraw, callerContext=$callerContext", e)
                 }
             }
             throw e

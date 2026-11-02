@@ -41,7 +41,7 @@ class EditViewModel : ViewModel() {
      */
     fun getProperties(uri: Uri): Properties =
         jpegtran?.getProperties(uri)
-            ?: throw IllegalStateException("Jpegtran not initialized")
+            ?: error("Jpegtran not initialized")
 
     /**
      * Clear and cleanup temporary files in Jpegtran.
