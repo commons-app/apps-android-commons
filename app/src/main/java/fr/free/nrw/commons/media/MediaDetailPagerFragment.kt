@@ -148,7 +148,8 @@ class MediaDetailPagerFragment :
             (activity as MainActivity).showTabs()
         }
 
-        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567
+        // Temporarily disable it.
+        // Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567
         // binding = null
     }
 
@@ -350,6 +351,7 @@ ${m.pageTitle.canonicalUri}""",
         try {
             startActivity(feedbackIntent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No email client available to send feedback")
             Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }
@@ -449,7 +451,8 @@ ${m.pageTitle.canonicalUri}""",
 
                 val m = provider.getMediaAtPosition(position)
                 if (m != null) {
-                    // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
+                    // Enable default set of actions, then re-enable different set of actions only if it is a failed
+                    // contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_copy_link).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true)

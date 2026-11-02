@@ -255,6 +255,7 @@ class DescriptionEditActivity :
                     )
                 }
         } catch (e: InvalidLoginTokenException) {
+            Timber.e(e, "Invalid login token while editing the description, logging out")
             val username: String? = sessionManager.userName
             val logoutListener =
                 CommonsApplication.BaseLogoutListener(
@@ -288,6 +289,7 @@ class DescriptionEditActivity :
                         },
                 )
             } catch (e: InvalidLoginTokenException) {
+                Timber.e(e, "Invalid login token while editing a caption, logging out")
                 val username = sessionManager.userName
                 val logoutListener =
                     CommonsApplication.BaseLogoutListener(
@@ -316,7 +318,10 @@ class DescriptionEditActivity :
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putParcelableArrayList(
+            LIST_OF_DESCRIPTION_AND_CAPTION,
+            uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>,
+        )
         outState.putString(WIKITEXT, wikiText)
         outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
         // save Media

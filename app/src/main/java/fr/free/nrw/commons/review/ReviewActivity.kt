@@ -238,7 +238,8 @@ class ReviewActivity : BaseActivity() {
         if (nextPos <= 3) {
             binding.viewPagerReview.currentItem = nextPos
             if (nextPos == 2 && !hasNonHiddenCategories) {
-                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
+                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need
+                // to review manually.
                 swipeToNext()
             }
         } else {
