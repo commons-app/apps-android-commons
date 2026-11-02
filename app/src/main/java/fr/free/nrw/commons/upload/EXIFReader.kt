@@ -6,6 +6,7 @@ import androidx.exifinterface.media.ExifInterface.TAG_MAKE
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,6 +25,7 @@ class EXIFReader
                 try {
                     if (ExifInterface(path).hasMakeOrDate) IMAGE_OK else FILE_NO_EXIF
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to read EXIF metadata")
                     FILE_NO_EXIF
                 },
             )

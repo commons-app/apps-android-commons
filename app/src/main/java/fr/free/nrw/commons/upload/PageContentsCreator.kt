@@ -101,7 +101,7 @@ class PageContentsCreator
                 Licenses.CC_BY_SA_3 -> "{{self|cc-by-sa-3.0}}"
                 Licenses.CC_BY_SA_4 -> "{{self|cc-by-sa-4.0}}"
                 Licenses.CC0 -> "{{self|cc-zero}}"
-                else -> throw RuntimeException("Unrecognized license value: $license")
+                else -> throw IllegalArgumentException("Unrecognized license value: $license")
             }
 
         companion object {
