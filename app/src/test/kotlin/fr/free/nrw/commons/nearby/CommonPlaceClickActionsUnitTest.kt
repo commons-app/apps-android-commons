@@ -71,7 +71,7 @@ class CommonPlaceClickActionsUnitTest {
         com.nhaarman.mockitokotlin2.verify(contributionController).initiateGalleryPick(
             com.nhaarman.mockitokotlin2.any(),
             com.nhaarman.mockitokotlin2.eq(launcher),
-            com.nhaarman.mockitokotlin2.eq(true)
+            com.nhaarman.mockitokotlin2.eq(true),
         )
     }
 
