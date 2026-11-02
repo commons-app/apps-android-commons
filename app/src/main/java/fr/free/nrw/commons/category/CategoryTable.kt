@@ -13,18 +13,20 @@ object CategoryTable {
     const val COLUMN_TIMES_USED = "times_used"
 
     // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-    val ALL_FIELDS = arrayOf(
-        COLUMN_ID,
-        COLUMN_NAME,
-        COLUMN_DESCRIPTION,
-        COLUMN_THUMBNAIL,
-        COLUMN_LAST_USED,
-        COLUMN_TIMES_USED
-    )
+    val ALL_FIELDS =
+        arrayOf(
+            COLUMN_ID,
+            COLUMN_NAME,
+            COLUMN_DESCRIPTION,
+            COLUMN_THUMBNAIL,
+            COLUMN_LAST_USED,
+            COLUMN_TIMES_USED,
+        )
 
     const val DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-    const val CREATE_TABLE_STATEMENT = "CREATE TABLE $TABLE_NAME (" +
+    const val CREATE_TABLE_STATEMENT =
+        "CREATE TABLE $TABLE_NAME (" +
             "$COLUMN_ID INTEGER PRIMARY KEY," +
             "$COLUMN_NAME TEXT," +
             "$COLUMN_DESCRIPTION TEXT," +
@@ -40,7 +42,11 @@ object CategoryTable {
         onCreate(db)
     }
 
-    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(
+        db: SupportSQLiteDatabase,
+        from: Int,
+        to: Int,
+    ) {
         if (from == to) return
         if (from < 4) {
             // doesn't exist yet

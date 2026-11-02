@@ -81,14 +81,18 @@ class SignupActivity : BaseActivity() {
     private inner class MyWebViewClient : WebViewClient() {
         @Suppress("DEPRECATION")
         @Deprecated("Deprecated in Java")
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean =
+        override fun shouldOverrideUrlLoading(
+            view: WebView,
+            url: String,
+        ): Boolean =
             if (url == BuildConfig.SIGNUP_SUCCESS_REDIRECTION_URL) {
                 Timber.d("Overriding URL %s", url)
-                Toast.makeText(
-                    this@SignupActivity,
-                    R.string.account_created,
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast
+                    .makeText(
+                        this@SignupActivity,
+                        R.string.account_created,
+                        Toast.LENGTH_LONG,
+                    ).show()
                 finish()
                 true
             } else {
@@ -98,14 +102,14 @@ class SignupActivity : BaseActivity() {
 
         override fun shouldOverrideUrlLoading(
             view: WebView,
-            request: WebResourceRequest
+            request: WebResourceRequest,
         ): Boolean = shouldOverrideUrlLoading(view, request.url.toString())
 
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onReceivedError(
             view: WebView,
             request: WebResourceRequest,
-            error: WebResourceError
+            error: WebResourceError,
         ) {
             if (!request.isForMainFrame) return
 
@@ -120,7 +124,7 @@ class SignupActivity : BaseActivity() {
             view: WebView,
             errorCode: Int,
             description: String,
-            failingUrl: String
+            failingUrl: String,
         ) {
             Timber.e("WebView error: $description ($errorCode)")
             this@SignupActivity.loadCustomErrorPage(description)
@@ -134,7 +138,8 @@ class SignupActivity : BaseActivity() {
         val secondaryTextColor = if (isDark) "#CCCCCC" else "#666666"
         val buttonColor = if (isDark) "#1e8cab" else "#0c609c"
 
-        val html = """
+        val html =
+            """
             <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -169,7 +174,7 @@ class SignupActivity : BaseActivity() {
                 <button class="retry-button" onclick="window.location.reload()">Retry</button>
             </body>
             </html>
-        """.trimIndent()
+            """.trimIndent()
 
         webView?.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         isInErrorState = true
