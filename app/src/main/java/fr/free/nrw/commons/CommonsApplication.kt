@@ -463,8 +463,8 @@ class CommonsApplication : MultiDexApplication() {
                         NotificationChannel(
                             NOTIFICATION_CHANNEL_ID_UPLOADS,
                             context.getString(R.string.notifications_channel_name_uploads),
-                            NotificationManager.IMPORTANCE_LOW
-                        )
+                            NotificationManager.IMPORTANCE_LOW,
+                        ),
                     )
                 }
             }
