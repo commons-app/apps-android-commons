@@ -38,6 +38,7 @@ class PageTitle : Parcelable {
      * * [[Utilisateur:Deskana]] on frwiki will have a namespace of "Utilisateur", even if you got
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.
      */
+
     // Legacy: This is the localized namespace name (File, Special, Talk, etc) but
     //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
     //       are broken.
