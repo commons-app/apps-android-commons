@@ -59,30 +59,6 @@
     <ID>EmptySecondaryConstructor:BaseMarker.kt$BaseMarker${ }</ID>
     <ID>EmptySecondaryConstructor:ChunkInfo.kt$ChunkInfo${ }</ID>
     <ID>EmptySecondaryConstructor:UploadResult.kt$UploadResult${ }</ID>
-    <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
-    <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
-    <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
-    <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562</ID>
-    <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Show the exact reason for failure</ID>
-    <ID>ForbiddenComment:DateUtil.kt$DateUtil$* Utility class for date formatting and parsing. * TODO: Switch to DateTimeFormatter when minSdk = 26.</ID>
-    <ID>ForbiddenComment:LoginClient.kt$LoginClient$// TODO: Find a better way to boil up the warning about 2FA</ID>
-    <ID>ForbiddenComment:MwQueryPage.kt$MwQueryPage$// TODO: Handle null values in lists during deserialization, perhaps with a new</ID>
-    <ID>ForbiddenComment:MwQueryResult.kt$MwQueryResult$// TODO: Looks like result pages and redirects can also be matched on the "index"</ID>
-    <ID>ForbiddenComment:NamespaceTypeAdapter.kt$NamespaceTypeAdapter$// TODO: remove after April 2017, when all older namespaces have been deserialized.</ID>
-    <ID>ForbiddenComment:NearbyParentFragment.kt$NearbyParentFragment$/* * FIXME: With the revamp of the location permission helper in the MR * #5494[1], there is a doubt that the following code is redundant. * If we could confirm the same, the following code can be removed. If it * turns out to be necessary, we could replace this with a comment * clarifying why it is necessary. * * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794 */</ID>
-    <ID>ForbiddenComment:NearbyParentFragment.kt$NearbyParentFragment$// TODO: Decide button text for fitting in the screen</ID>
-    <ID>ForbiddenComment:PageProperties.kt$PageProperties$* True if the user who first requested this page can edit this page * FIXME: This is not a true page property, since it depends on current user.</ID>
-    <ID>ForbiddenComment:PageTitle.kt$PageTitle$// FIXME: Does not handle mainspace articles with a colon in the title well at all</ID>
-    <ID>ForbiddenComment:PageTitle.kt$PageTitle$// TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)</ID>
-    <ID>ForbiddenComment:PageTitle.kt$PageTitle$// TODO: remove after the restbase endpoint supports ZH variants.</ID>
-    <ID>ForbiddenComment:PageTitle.kt$PageTitle$// TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but</ID>
-    <ID>ForbiddenComment:PageTitle.kt$PageTitle.Companion$// TODO: this class needs some refactoring to allow passing in a fragment</ID>
-    <ID>ForbiddenComment:RequiredFieldsCheckOnReadTypeAdapterFactory.kt$RequiredFieldsCheckOnReadTypeAdapterFactory$* TypeAdapterFactory that provides TypeAdapters that return null values for objects that are * missing fields annotated with @Required. * * BEWARE: This means that a List or other Collection of objects that have @Required fields can * contain null elements after deserialization! * * TODO: Handle null values in lists during deserialization, perhaps with a new @RequiredElements * annotation and another corresponding TypeAdapter(Factory).</ID>
-    <ID>ForbiddenComment:ReviewController.kt$ReviewController$// TODO: maybe we can expand this class to include fileName</ID>
-    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894</ID>
-    <ID>ForbiddenComment:SearchActivity.kt$SearchActivity$// FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then</ID>
-    <ID>ForbiddenComment:UploadWorker.kt$UploadWorker$// TODO: Improve notification for foreground service</ID>
-    <ID>ForbiddenComment:WikiSite.kt$WikiSite$// TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added</ID>
     <ID>LargeClass:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
     <ID>LargeClass:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
     <ID>LargeClass:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
@@ -827,7 +803,5 @@
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
-    <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
-    <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
   </CurrentIssues>
 </SmellBaseline>
