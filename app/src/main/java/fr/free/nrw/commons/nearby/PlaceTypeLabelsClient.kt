@@ -46,7 +46,7 @@ class PlaceTypeLabelsClient
                     // Keep empty names too, so a type without any label is not refetched forever
                     qids.associateWith { qid ->
                         response
-                            .entities()[qid]
+                            .getEntityMap()[qid]
                             ?.labels()
                             ?.get(language)
                             ?.value()
