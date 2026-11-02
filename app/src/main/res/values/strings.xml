@@ -418,6 +418,7 @@
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
+  <string name="notifications_channel_name_uploads">Upload progress</string>
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>

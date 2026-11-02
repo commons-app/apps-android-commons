@@ -9,6 +9,7 @@ import fr.free.nrw.commons.utils.DateUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -43,12 +44,11 @@ class NotificationClient
                         readList = notificationId,
                         unreadList = "",
                     ).map(MwQueryResponse::success)
+            } catch (throwable: InvalidLoginTokenException) {
+                Observable.error(throwable)
             } catch (throwable: Throwable) {
-                if (throwable is InvalidLoginTokenException) {
-                    Observable.error(throwable)
-                } else {
-                    Observable.just(false)
-                }
+                Timber.e(throwable, "Failed to mark the notification as read")
+                Observable.just(false)
             }
 
         private fun WikimediaNotification.toCommonsNotification(): Notification {

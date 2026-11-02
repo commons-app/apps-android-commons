@@ -76,7 +76,11 @@ class CoordinateEditHelperUnitTest {
             context.getString(R.string.coordinates_edit_helper_make_edit_toast),
         )
         verify(pageEditClient, times(1)).getCurrentWikiText(anyString())
-        verify(pageEditClient, times(1)).edit(anyString(), anyString(), anyString())
+        verify(pageEditClient, times(1)).edit(
+            "",
+            "== {{int:filedesc}} ==\n{{Location|0.0|0.0|0.0F}}",
+            "Adding Coordinates",
+        )
     }
 
     @Test
