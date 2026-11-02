@@ -5,7 +5,6 @@
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$!isBetaFlavour &amp;&amp; sessionManager!!.isUserLoggedIn &amp;&amp; sessionManager!!.currentAccount != null &amp;&amp; !isUserProfile</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION, ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ( (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS )</ID>
-    <ID>ComplexCondition:EditActivity.kt$EditActivity$drawable != null &amp;&amp; rawDetections.isNotEmpty() &amp;&amp; decodedBitmap.width &gt; 0 &amp;&amp; decodedBitmap.height &gt; 0</ID>
     <ID>ComplexCondition:ExploreMapFragment.kt$ExploreMapFragment$nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null || baseMarkerOverlayMap == null || !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)</ID>
     <ID>ComplexCondition:ImageCoordinates.kt$ImageCoordinates$latitude != null &amp;&amp; longitude != null &amp;&amp; latitudeRef != null &amp;&amp; longitudeRef != null</ID>
     <ID>ComplexCondition:ImageFileLoader.kt$ImageFileLoader$file != null &amp;&amp; file.exists() &amp;&amp; name != null &amp;&amp; path != null &amp;&amp; bucketName != null</ID>
@@ -19,7 +18,6 @@
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
     <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
-    <ID>CyclomaticComplexMethod:EditActivity.kt$EditActivity$private fun init()</ID>
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
     <ID>CyclomaticComplexMethod:ImageLoader.kt$ImageLoader$fun queryAndSetView( holder: ImageViewHolder, image: Image, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, uploadedContributionsList: List&lt;Contribution&gt;, )</ID>
@@ -64,7 +62,6 @@
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
-    <ID>ForbiddenComment:ContributionController.kt$ContributionController$* Shows a dialog alerting the user about location services being off and asking them to turn it * on * TODO: Add a seperate callback in LocationPermissionsHelper for this. * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114 * * @param activity Activity reference * @param dialogTextResource Resource id of text to be shown in dialog * @param toastTextResource Resource id of text to be shown in toast * @param resultLauncher</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Show the exact reason for failure</ID>
     <ID>ForbiddenComment:DateUtil.kt$DateUtil$* Utility class for date formatting and parsing. * TODO: Switch to DateTimeFormatter when minSdk = 26.</ID>
@@ -236,9 +233,7 @@
     <ID>MagicNumber:DepictsFragment.kt$DepictsFragment$500</ID>
     <ID>MagicNumber:DescriptionEditActivity.kt$DescriptionEditActivity$12</ID>
     <ID>MagicNumber:DoubleTapGestureListener.kt$DoubleTapGestureListener$0.001f</ID>
-    <ID>MagicNumber:EditActivity.kt$EditActivity$100</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$180</ID>
-    <ID>MagicNumber:EditActivity.kt$EditActivity$2000</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$270</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$300</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$360</ID>
@@ -651,7 +646,6 @@
     <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle( x: Float, y: Float, ): Handle?</ID>
     <ID>ReturnCount:CryptoUtils.kt$CryptoUtils$fun decrypt(encryptedBase64: String?): String?</ID>
     <ID>ReturnCount:DialogUtil.kt$DialogUtil$private fun showSafely( activity: Activity?, dialog: AlertDialog?, ): AlertDialog?</ID>
-    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int, ): CropCoordinates?</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$fun onBackPressed(): Boolean</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getMediaFromImageURL(url: String?): Media?</ID>
@@ -713,7 +707,6 @@
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e2: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
@@ -785,7 +778,6 @@
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
-    <ID>TooManyFunctions:EditActivity.kt$EditActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ExploreListRootFragment.kt$ExploreListRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
@@ -801,7 +793,6 @@
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
-    <ID>TooManyFunctions:LoginActivity.kt$LoginActivity : AccountAuthenticatorActivity</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient : ContinuationClient</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentOnPageChangeListenerCallback</ID>
