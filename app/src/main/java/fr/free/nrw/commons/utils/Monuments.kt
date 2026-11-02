@@ -20,8 +20,9 @@ const val WLM_END_DATE: String = "30 Sep"
 /**
  * For now we are enabling the monuments only when the date lies between 1 Sept & 31 OCt
  */
+private const val WLM_MONTH = 8 // September is month 8 in Calendar (0-based index)
 val isMonumentsEnabled: Boolean
-    get() = Date().month == 8
+    get() = Date().month == WLM_MONTH
 
 /***
  * Function to get the current WLM year

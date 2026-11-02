@@ -4,7 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -15,18 +18,11 @@ import fr.free.nrw.commons.filepicker.PickedFiles.singleFileList
 import fr.free.nrw.commons.upload.FileUtils
 import timber.log.Timber
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.net.URISyntaxException
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.os.Build
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import java.io.FileOutputStream
-
 
 object FilePicker : Constants {
-
     private const val KEY_PHOTO_URI = "photo_uri"
     private const val KEY_LAST_CAMERA_PHOTO = "last_photo"
     private const val KEY_TYPE = "type"
@@ -49,34 +45,33 @@ object FilePicker : Constants {
         return uri
     }
 
-
     @JvmStatic
     private fun createGalleryIntent(
         context: Context,
         type: Int,
-        openDocumentIntentPreferred: Boolean
+        openDocumentIntentPreferred: Boolean,
     ): Intent {
         // storing picked image type to shared preferences
         storeType(context, type)
         // Supported types are SVG, PNG and JPEG, GIF, TIFF, WebP, XCF and HEIC (for future conversion)
-        val mimeTypes = arrayOf(
-            "image/jpg",
-            "image/png",
-            "image/jpeg",
-            "image/gif",
-            "image/tiff",
-            "image/webp",
-            "image/xcf",
-            "image/svg+xml",
-            "image/heic",
-            "image/heif"
-        )
+        val mimeTypes =
+            arrayOf(
+                "image/jpg",
+                "image/png",
+                "image/jpeg",
+                "image/gif",
+                "image/tiff",
+                "image/webp",
+                "image/xcf",
+                "image/svg+xml",
+                "image/heic",
+                "image/heif",
+            )
         return plainGalleryPickerIntent(openDocumentIntentPreferred)
             .putExtra(
                 Intent.EXTRA_ALLOW_MULTIPLE,
-                configuration(context).allowsMultiplePickingInGallery()
-            )
-            .putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                configuration(context).allowsMultiplePickingInGallery(),
+            ).putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
     }
 
     /**
@@ -87,7 +82,11 @@ object FilePicker : Constants {
      * @return Custom selector intent
      */
     @JvmStatic
-    private fun createCustomSelectorIntent(context: Context, type: Int, singleSelection: Boolean = false): Intent {
+    private fun createCustomSelectorIntent(
+        context: Context,
+        type: Int,
+        singleSelection: Boolean = false,
+    ): Intent {
         storeType(context, type)
         val intent = Intent(context, CustomSelectorActivity::class.java)
         if (singleSelection) {
@@ -97,7 +96,10 @@ object FilePicker : Constants {
     }
 
     @JvmStatic
-    private fun createCameraForImageIntent(context: Context, type: Int): Intent {
+    private fun createCameraForImageIntent(
+        context: Context,
+        type: Int,
+    ): Intent {
         storeType(context, type)
 
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -114,15 +116,22 @@ object FilePicker : Constants {
     }
 
     @JvmStatic
-    private fun revokeWritePermission(context: Context, uri: Uri) {
+    private fun revokeWritePermission(
+        context: Context,
+        uri: Uri,
+    ) {
         context.revokeUriPermission(
             uri,
-            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
+            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION,
         )
     }
 
     @JvmStatic
-    private fun grantWritePermission(context: Context, intent: Intent, uri: Uri) {
+    private fun grantWritePermission(
+        context: Context,
+        intent: Intent,
+        uri: Uri,
+    ) {
         val resInfoList =
             context.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
         for (resolveInfo in resInfoList) {
@@ -130,20 +139,26 @@ object FilePicker : Constants {
             context.grantUriPermission(
                 packageName,
                 uri,
-                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
+                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION,
             )
         }
     }
 
     @JvmStatic
-    private fun storeType(context: Context, type: Int) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(KEY_TYPE, type).apply()
+    private fun storeType(
+        context: Context,
+        type: Int,
+    ) {
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
+            .edit()
+            .putInt(KEY_TYPE, type)
+            .apply()
     }
 
     @JvmStatic
-    private fun restoreType(context: Context): Int {
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(KEY_TYPE, 0)
-    }
+    private fun restoreType(context: Context): Int =
+        PreferenceManager.getDefaultSharedPreferences(context).getInt(KEY_TYPE, 0)
 
     /**
      * Opens default gallery or available galleries picker if there is no default
@@ -155,7 +170,7 @@ object FilePicker : Constants {
         activity: Activity,
         resultLauncher: ActivityResultLauncher<Intent>,
         type: Int,
-        openDocumentIntentPreferred: Boolean
+        openDocumentIntentPreferred: Boolean,
     ) {
         val intent = createGalleryIntent(activity, type, openDocumentIntentPreferred)
         resultLauncher.launch(intent)
@@ -169,7 +184,7 @@ object FilePicker : Constants {
         activity: Activity,
         resultLauncher: ActivityResultLauncher<Intent>,
         type: Int,
-        singleSelection: Boolean = false
+        singleSelection: Boolean = false,
     ) {
         val intent = createCustomSelectorIntent(activity, type, singleSelection)
         resultLauncher.launch(intent)
@@ -182,7 +197,7 @@ object FilePicker : Constants {
     fun openCameraForImage(
         activity: Activity,
         resultLauncher: ActivityResultLauncher<Intent>,
-        type: Int
+        type: Int,
     ) {
         val intent = createCameraForImageIntent(activity, type)
         resultLauncher.launch(intent)
@@ -191,8 +206,10 @@ object FilePicker : Constants {
     @Throws(URISyntaxException::class)
     @JvmStatic
     private fun takenCameraPicture(context: Context): UploadableFile? {
-        val lastCameraPhoto = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(KEY_LAST_CAMERA_PHOTO, null)
+        val lastCameraPhoto =
+            PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getString(KEY_LAST_CAMERA_PHOTO, null)
         return if (lastCameraPhoto != null) {
             UploadableFile(File(lastCameraPhoto))
         } else {
@@ -210,11 +227,15 @@ object FilePicker : Constants {
      * @return The uploadable files and the number of skipped files
      */
     @JvmStatic
-    fun handleExternalImagesPicked(data: Intent?, activity: Activity): ExternalImagesResult {
-        return try {
-            val (supportedUris, unsupportedUris) = getUrisFromIntent(data).partition { uri ->
-                FileUtils.isSupportedFileType(activity, uri)
-            }
+    fun handleExternalImagesPicked(
+        data: Intent?,
+        activity: Activity,
+    ): ExternalImagesResult =
+        try {
+            val (supportedUris, unsupportedUris) =
+                getUrisFromIntent(data).partition { uri ->
+                    FileUtils.isSupportedFileType(activity, uri)
+                }
             ExternalImagesResult(getFilesFromUris(supportedUris, activity), unsupportedUris.size)
         } catch (e: IOException) {
             Timber.e(e, "Could not read externally shared images")
@@ -223,17 +244,12 @@ object FilePicker : Constants {
             Timber.e(e, "No permission to read externally shared images")
             ExternalImagesResult(emptyList(), 0)
         }
-    }
 
     @JvmStatic
-    private fun isPhoto(data: Intent?): Boolean {
-        return data == null || (data.data == null && data.clipData == null)
-    }
+    private fun isPhoto(data: Intent?): Boolean = data == null || (data.data == null && data.clipData == null)
 
     @JvmStatic
-    private fun plainGalleryPickerIntent(
-        openDocumentIntentPreferred: Boolean
-    ): Intent {
+    private fun plainGalleryPickerIntent(openDocumentIntentPreferred: Boolean): Intent {
         /*
          * Asking for ACCESS_MEDIA_LOCATION at runtime solved the location-loss issue
          * in the custom selector in Contributions fragment.
@@ -262,13 +278,14 @@ object FilePicker : Constants {
          * from EXIF.
          *
          */
-        val intent = if (openDocumentIntentPreferred) {
-            Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
+        val intent =
+            if (openDocumentIntentPreferred) {
+                Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                }
+            } else {
+                Intent(Intent.ACTION_GET_CONTENT)
             }
-        } else {
-            Intent(Intent.ACTION_GET_CONTENT)
-        }
         intent.type = "image/*"
         return intent
     }
@@ -277,7 +294,7 @@ object FilePicker : Constants {
     fun onPictureReturnedFromDocuments(
         result: ActivityResult,
         activity: Activity,
-        callbacks: Callbacks
+        callbacks: Callbacks,
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
             takePersistableUriPermissions(activity, result)
@@ -302,7 +319,10 @@ object FilePicker : Constants {
      * This helps fix the SecurityException reported in this issue:
      * https://github.com/commons-app/apps-android-commons/issues/6357
      */
-    private fun takePersistableUriPermissions(context: Context, result: ActivityResult) {
+    private fun takePersistableUriPermissions(
+        context: Context,
+        result: ActivityResult,
+    ) {
         result.data?.let { intentData ->
             val takeFlags: Int = (Intent.FLAG_GRANT_READ_URI_PERMISSION)
             // Persist the URI permission for all URIs in the clip data
@@ -311,7 +331,9 @@ object FilePicker : Constants {
             intentData.clipData?.let { clipData ->
                 for (i in 0 until clipData.itemCount) {
                     context.contentResolver.takePersistableUriPermission(
-                        clipData.getItemAt(i).uri, takeFlags)
+                        clipData.getItemAt(i).uri,
+                        takeFlags,
+                    )
                 }
             } ?: intentData.data?.let { uri ->
                 context.contentResolver.takePersistableUriPermission(uri, takeFlags)
@@ -327,7 +349,7 @@ object FilePicker : Constants {
     fun onPictureReturnedFromCustomSelector(
         result: ActivityResult,
         activity: Activity,
-        callbacks: Callbacks
+        callbacks: Callbacks,
     ) {
         if (result.resultCode == Activity.RESULT_OK) {
             try {
@@ -350,7 +372,7 @@ object FilePicker : Constants {
     @JvmStatic
     private fun getFilesFromCustomSelector(
         data: Intent?,
-        activity: Activity
+        activity: Activity,
     ): List<UploadableFile> {
         val files = mutableListOf<UploadableFile>()
         val images = data?.getParcelableArrayListExtra<Image>("Images")
@@ -372,7 +394,7 @@ object FilePicker : Constants {
     fun onPictureReturnedFromGallery(
         result: ActivityResult,
         activity: Activity,
-        callbacks: Callbacks
+        callbacks: Callbacks,
     ) {
         if (result.resultCode == Activity.RESULT_OK && !isPhoto(result.data)) {
             takePersistableUriPermissions(activity, result)
@@ -387,14 +409,19 @@ object FilePicker : Constants {
             callbacks.onCanceled(ImageSource.GALLERY, restoreType(activity))
         }
     }
+
     @JvmStatic
-    fun convertHeicToJpg(file: File, context: Context): File {
-        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
-            ImageDecoder.decodeBitmap(source)
-        } else {
-            error("HEIC conversion requires Android P+")
-        }
+    fun convertHeicToJpg(
+        file: File,
+        context: Context,
+    ): File {
+        val bitmap =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                val source = ImageDecoder.createSource(context.contentResolver, Uri.fromFile(file))
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                error("HEIC conversion requires Android P+")
+            }
 
         val jpgFile = File(file.parent, file.nameWithoutExtension + ".jpg")
         FileOutputStream(jpgFile).use { out ->
@@ -402,8 +429,12 @@ object FilePicker : Constants {
         }
         return jpgFile
     }
+
     @JvmStatic
-    private fun handleHeicFile(file: UploadableFile, activity: Activity): UploadableFile {
+    private fun handleHeicFile(
+        file: UploadableFile,
+        activity: Activity,
+    ): UploadableFile {
         val extension = file.file.extension.lowercase()
         return if (extension == "heic" || extension == "heif") {
             val jpgFile = convertHeicToJpg(file.file, activity)
@@ -419,10 +450,8 @@ object FilePicker : Constants {
     @JvmStatic
     private fun getFilesFromGalleryPictures(
         data: Intent?,
-        activity: Activity
-    ): List<UploadableFile> {
-        return getFilesFromUris(getUrisFromIntent(data), activity)
-    }
+        activity: Activity,
+    ): List<UploadableFile> = getFilesFromUris(getUrisFromIntent(data), activity)
 
     /**
      * Returns the uris of the files in the intent, from its clip data if present
@@ -440,11 +469,12 @@ object FilePicker : Constants {
     @JvmStatic
     private fun getFilesFromUris(
         uris: List<Uri>,
-        activity: Activity
+        activity: Activity,
     ): List<UploadableFile> {
-        val files = uris.map { uri ->
-            handleHeicFile(PickedFiles.pickedExistingPicture(activity, uri), activity)
-        }
+        val files =
+            uris.map { uri ->
+                handleHeicFile(PickedFiles.pickedExistingPicture(activity, uri), activity)
+            }
 
         if (configuration(activity).shouldCopyPickedImagesToPublicGalleryAppFolder()) {
             PickedFiles.copyFilesInSeparateThread(activity, files)
@@ -457,7 +487,7 @@ object FilePicker : Constants {
     fun onPictureReturnedFromCamera(
         activityResult: ActivityResult,
         activity: Activity,
-        callbacks: Callbacks
+        callbacks: Callbacks,
     ) {
         if (activityResult.resultCode != Activity.RESULT_OK) {
             callbacks.onCanceled(ImageSource.CAMERA_IMAGE, restoreType(activity))
@@ -472,7 +502,10 @@ object FilePicker : Constants {
         }
     }
 
-    private fun processSuccessfulCameraResult(activity: Activity, callbacks: Callbacks) {
+    private fun processSuccessfulCameraResult(
+        activity: Activity,
+        callbacks: Callbacks,
+    ) {
         revokeLastCameraPermission(activity)
 
         val photoFile = takenCameraPicture(activity)
@@ -487,8 +520,10 @@ object FilePicker : Constants {
     }
 
     private fun revokeLastCameraPermission(activity: Activity) {
-        val lastImageUri = PreferenceManager.getDefaultSharedPreferences(activity)
-            .getString(KEY_PHOTO_URI, null)
+        val lastImageUri =
+            PreferenceManager
+                .getDefaultSharedPreferences(activity)
+                .getString(KEY_PHOTO_URI, null)
         if (!lastImageUri.isNullOrEmpty()) {
             revokeWritePermission(activity, Uri.parse(lastImageUri))
         }
@@ -497,7 +532,7 @@ object FilePicker : Constants {
     private fun handleValidCameraPhoto(
         activity: Activity,
         callbacks: Callbacks,
-        photoFile: UploadableFile
+        photoFile: UploadableFile,
     ) {
         if (configuration(activity).shouldCopyTakenPhotosToPublicGalleryAppFolder()) {
             PickedFiles.copyFilesInSeparateThread(activity, singleFileList(photoFile))
@@ -507,27 +542,42 @@ object FilePicker : Constants {
     }
 
     private fun clearCameraPreferences(activity: Activity) {
-        PreferenceManager.getDefaultSharedPreferences(activity).edit()
+        PreferenceManager
+            .getDefaultSharedPreferences(activity)
+            .edit()
             .remove(KEY_LAST_CAMERA_PHOTO)
             .remove(KEY_PHOTO_URI)
             .apply()
     }
 
     @JvmStatic
-    fun configuration(context: Context): FilePickerConfiguration {
-        return FilePickerConfiguration(context)
-    }
+    fun configuration(context: Context): FilePickerConfiguration = FilePickerConfiguration(context)
 
     enum class ImageSource {
-        GALLERY, DOCUMENTS, CAMERA_IMAGE, CAMERA_VIDEO, CUSTOM_SELECTOR
+        GALLERY,
+        DOCUMENTS,
+        CAMERA_IMAGE,
+        CAMERA_VIDEO,
+        CUSTOM_SELECTOR,
     }
 
     interface Callbacks {
-        fun onImagePickerError(e: Exception, source: ImageSource, type: Int)
+        fun onImagePickerError(
+            e: Exception,
+            source: ImageSource,
+            type: Int,
+        )
 
-        fun onImagesPicked(imageFiles: List<UploadableFile>, source: ImageSource, type: Int)
+        fun onImagesPicked(
+            imageFiles: List<UploadableFile>,
+            source: ImageSource,
+            type: Int,
+        )
 
-        fun onCanceled(source: ImageSource, type: Int)
+        fun onCanceled(
+            source: ImageSource,
+            type: Int,
+        )
     }
 
     fun interface HandleActivityResult {

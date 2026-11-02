@@ -18,125 +18,140 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 @Singleton
-class BookmarkPicturesDao @Inject constructor(
-    @param:Named("bookmarks") private val clientProvider: Provider<ContentProviderClient>
-) {
-    /**
-     * Find all persisted pictures bookmarks on database
-     *
-     * @return list of bookmarks
-     */
-    fun getAllBookmarks(): List<Bookmark> {
-        val items: MutableList<Bookmark> = mutableListOf()
-        var cursor: Cursor? = null
-        val db = clientProvider.get()
-        try {
-            cursor = db.query(
-                BASE_URI, ALL_FIELDS, null, arrayOf(), null
-            )
-            while (cursor != null && cursor.moveToNext()) {
-                items.add(fromCursor(cursor))
+class BookmarkPicturesDao
+    @Inject
+    constructor(
+        @param:Named("bookmarks") private val clientProvider: Provider<ContentProviderClient>,
+    ) {
+        /**
+         * Find all persisted pictures bookmarks on database
+         *
+         * @return list of bookmarks
+         */
+        fun getAllBookmarks(): List<Bookmark> {
+            val items: MutableList<Bookmark> = mutableListOf()
+            var cursor: Cursor? = null
+            val db = clientProvider.get()
+            try {
+                cursor =
+                    db.query(
+                        BASE_URI,
+                        ALL_FIELDS,
+                        null,
+                        arrayOf(),
+                        null,
+                    )
+                while (cursor != null && cursor.moveToNext()) {
+                    items.add(fromCursor(cursor))
+                }
+            } catch (e: RemoteException) {
+                throw IllegalStateException(e)
+            } finally {
+                cursor?.close()
+                db.release()
             }
-        } catch (e: RemoteException) {
-            throw IllegalStateException(e)
-        } finally {
-            cursor?.close()
-            db.release()
+            return items
         }
-        return items
-    }
 
-    /**
-     * Look for a bookmark in database and in order to insert or delete it
-     *
-     * @param bookmark : Bookmark object
-     * @return boolean : is bookmark now fav ?
-     */
-    fun updateBookmark(bookmark: Bookmark): Boolean {
-        val bookmarkExists = findBookmark(bookmark)
-        if (bookmarkExists) {
-            deleteBookmark(bookmark)
-        } else {
-            addBookmark(bookmark)
-        }
-        return !bookmarkExists
-    }
-
-    /**
-     * Add a Bookmark to database
-     *
-     * @param bookmark : Bookmark to add
-     */
-    private fun addBookmark(bookmark: Bookmark) {
-        val db = clientProvider.get()
-        try {
-            db.insert(BASE_URI, toContentValues(bookmark))
-        } catch (e: RemoteException) {
-            throw IllegalStateException(e)
-        } finally {
-            db.release()
-        }
-    }
-
-    /**
-     * Delete a bookmark from database
-     *
-     * @param bookmark : Bookmark to delete
-     */
-    private fun deleteBookmark(bookmark: Bookmark) {
-        val db = clientProvider.get()
-        try {
-            if (bookmark.contentUri == null) {
-                error("tried to delete item with no content URI")
+        /**
+         * Look for a bookmark in database and in order to insert or delete it
+         *
+         * @param bookmark : Bookmark object
+         * @return boolean : is bookmark now fav ?
+         */
+        fun updateBookmark(bookmark: Bookmark): Boolean {
+            val bookmarkExists = findBookmark(bookmark)
+            if (bookmarkExists) {
+                deleteBookmark(bookmark)
             } else {
-                db.delete(bookmark.contentUri!!, null, null)
+                addBookmark(bookmark)
             }
-        } catch (e: RemoteException) {
-            throw IllegalStateException(e)
-        } finally {
-            db.release()
-        }
-    }
-
-    /**
-     * Find a bookmark from database based on its name
-     *
-     * @param bookmark : Bookmark to find
-     * @return boolean : is bookmark in database ?
-     */
-    fun findBookmark(bookmark: Bookmark?): Boolean {
-        if (bookmark == null) {
-            return false
+            return !bookmarkExists
         }
 
-        val db = clientProvider.get()
-        var exists = false
-        try {
-            db.query(
-                BASE_URI, ALL_FIELDS, "$COLUMN_MEDIA_NAME=?", arrayOf(bookmark.mediaName), null
-            )?.use { cursor ->
-                exists = cursor.moveToFirst()
+        /**
+         * Add a Bookmark to database
+         *
+         * @param bookmark : Bookmark to add
+         */
+        private fun addBookmark(bookmark: Bookmark) {
+            val db = clientProvider.get()
+            try {
+                db.insert(BASE_URI, toContentValues(bookmark))
+            } catch (e: RemoteException) {
+                throw IllegalStateException(e)
+            } finally {
+                db.release()
             }
-        } catch (e: RemoteException) {
-            throw IllegalStateException(e)
-        } finally {
-            db.release()
         }
-        return exists
-    }
 
-    fun fromCursor(cursor: Cursor): Bookmark {
-        var fileName = cursor.getString(COLUMN_MEDIA_NAME)
-        if (fileName == null) {
-            fileName = ""
+        /**
+         * Delete a bookmark from database
+         *
+         * @param bookmark : Bookmark to delete
+         */
+        private fun deleteBookmark(bookmark: Bookmark) {
+            val db = clientProvider.get()
+            try {
+                if (bookmark.contentUri == null) {
+                    error("tried to delete item with no content URI")
+                } else {
+                    db.delete(bookmark.contentUri!!, null, null)
+                }
+            } catch (e: RemoteException) {
+                throw IllegalStateException(e)
+            } finally {
+                db.release()
+            }
         }
-        return Bookmark(
-            fileName, cursor.getString(COLUMN_CREATOR), uriForName(fileName)
-        )
-    }
 
-    private fun toContentValues(bookmark: Bookmark): ContentValues = contentValuesOf(
-        COLUMN_MEDIA_NAME to bookmark.mediaName,
-        COLUMN_CREATOR to bookmark.mediaCreator
-    )
-}
+        /**
+         * Find a bookmark from database based on its name
+         *
+         * @param bookmark : Bookmark to find
+         * @return boolean : is bookmark in database ?
+         */
+        fun findBookmark(bookmark: Bookmark?): Boolean {
+            if (bookmark == null) {
+                return false
+            }
+
+            val db = clientProvider.get()
+            var exists = false
+            try {
+                db
+                    .query(
+                        BASE_URI,
+                        ALL_FIELDS,
+                        "$COLUMN_MEDIA_NAME=?",
+                        arrayOf(bookmark.mediaName),
+                        null,
+                    )?.use { cursor ->
+                        exists = cursor.moveToFirst()
+                    }
+            } catch (e: RemoteException) {
+                throw IllegalStateException(e)
+            } finally {
+                db.release()
+            }
+            return exists
+        }
+
+        fun fromCursor(cursor: Cursor): Bookmark {
+            var fileName = cursor.getString(COLUMN_MEDIA_NAME)
+            if (fileName == null) {
+                fileName = ""
+            }
+            return Bookmark(
+                fileName,
+                cursor.getString(COLUMN_CREATOR),
+                uriForName(fileName),
+            )
+        }
+
+        private fun toContentValues(bookmark: Bookmark): ContentValues =
+            contentValuesOf(
+                COLUMN_MEDIA_NAME to bookmark.mediaName,
+                COLUMN_CREATOR to bookmark.mediaCreator,
+            )
+    }
