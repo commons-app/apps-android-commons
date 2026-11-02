@@ -103,17 +103,23 @@ class SignupActivity : BaseActivity() {
         webView?.stopLoading()
 
         Toast.makeText(this, R.string.account_created, Toast.LENGTH_LONG).show()
-        setResult(RESULT_OK, Intent().apply {
-            sessionUsername(url)?.let {
-                putExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY, it)
-            }
-        })
+        setResult(
+            RESULT_OK,
+            Intent().apply {
+                sessionUsername(url)?.let {
+                    putExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY, it)
+                }
+            },
+        )
         finish()
     }
 
     private inner class MyWebViewClient : WebViewClient() {
         @Deprecated("Deprecated in Java")
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean =
+        override fun shouldOverrideUrlLoading(
+            view: WebView,
+            url: String,
+        ): Boolean =
             if (handleSignupSuccessIfNeeded(url)) {
                 Timber.d("Overriding URL %s", url)
                 true
@@ -125,7 +131,11 @@ class SignupActivity : BaseActivity() {
 
         // Redirects that happen after submitting the signup form do not always go through
         // shouldOverrideUrlLoading, so also check every page that starts loading.
-        override fun onPageStarted(view: WebView, url: String?, favicon: Bitmap?) {
+        override fun onPageStarted(
+            view: WebView,
+            url: String?,
+            favicon: Bitmap?,
+        ) {
             super.onPageStarted(view, url, favicon)
             handleSignupSuccessIfNeeded(url)
         }
@@ -163,15 +173,20 @@ class SignupActivity : BaseActivity() {
          */
         @VisibleForTesting
         fun extractUsername(cookies: String?): String? {
-            val rawValue = cookies?.let { USERNAME_COOKIE_REGEX.find(it) }
-                ?.groupValues?.get(1)?.trim() ?: return null
-            val username = try {
-                URLDecoder.decode(rawValue, "UTF-8")
-            } catch (e: IllegalArgumentException) {
-                // Not valid percent-encoding, so use the cookie value as it is
-                Timber.w(e, "Unable to decode username cookie")
-                rawValue
-            }.replace('_', ' ').trim()
+            val rawValue =
+                cookies
+                    ?.let { USERNAME_COOKIE_REGEX.find(it) }
+                    ?.groupValues
+                    ?.get(1)
+                    ?.trim() ?: return null
+            val username =
+                try {
+                    URLDecoder.decode(rawValue, "UTF-8")
+                } catch (e: IllegalArgumentException) {
+                    // Not valid percent-encoding, so use the cookie value as it is
+                    Timber.w(e, "Unable to decode username cookie")
+                    rawValue
+                }.replace('_', ' ').trim()
             return username.ifEmpty { null }
         }
     }
