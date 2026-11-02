@@ -62,30 +62,55 @@ class CategoriesPresenter
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
-                    }.switchMap(::searchResults)
-                    .map { repository.getSelectedCategories() + it }
-                    .map { it.distinctBy { categoryItem -> categoryItem.name } }
-                    .observeOn(mainThreadScheduler)
+                    }.switchMap { term ->
+                        // A failed search is turned into a value here, inside the
+                        // switchMap, so it reaches the user as an error without ending
+                        // the subscription; one dropped request used to leave the search
+                        // box dead until the screen was reopened (#6438).
+                        searchResults(term)
+                            .map { Result.success(it) }
+                            .onErrorReturn { Result.failure(it) }
+                    }.map { result ->
+                        result.map { found ->
+                            (repository.getSelectedCategories() + found)
+                                .distinctBy { categoryItem -> categoryItem.name }
+                        }
+                    }.observeOn(mainThreadScheduler)
                     .subscribe(
-                        {
-                            setCategoryListValue(it)
+                        { result ->
                             view.showProgress(false)
-                            if (it.isEmpty()) {
-                                view.showError(R.string.no_categories_found)
-                            }
-                        },
-                        { t: Throwable? ->
-                            view.showProgress(false)
-                            view.showError(R.string.error_loading_categories)
-                            val mwException = t as? MwIOException
-                            view.showErrorDialog(
-                                if (mwException == null) ""
-                                else "\n${mwException.error.title} / ${mwException.error.details}"
+                            result.fold(
+                                onSuccess = {
+                                    setCategoryListValue(it)
+                                    if (it.isEmpty()) {
+                                        view.showError(R.string.no_categories_found)
+                                    }
+                                },
+                                onFailure = ::showLoadError,
                             )
-                            Timber.e(t)
                         },
+                        ::showLoadError,
                     ),
             )
+        }
+
+        /**
+         * Tells the user the category search failed, with the server's reason when there is
+         * one, so they can tell a failed request (worth retrying) from a query that simply
+         * matches nothing.
+         */
+        private fun showLoadError(t: Throwable?) {
+            view.showProgress(false)
+            view.showError(R.string.error_loading_categories)
+            val mwException = t as? MwIOException
+            view.showErrorDialog(
+                if (mwException == null) {
+                    ""
+                } else {
+                    "\n${mwException.error.title} / ${mwException.error.details}"
+                },
+            )
+            Timber.e(t)
         }
 
         /**
@@ -93,7 +118,7 @@ class CategoriesPresenter
          * Else : Fetches existing categories by their name, fetches categories from server according
          * to the term and combines both in a list
          */
-        private fun searchResults(term: String): Observable<List<CategoryItem>>? {
+        private fun searchResults(term: String): Observable<List<CategoryItem>> {
             if (media == null) {
                 return repository
                     .searchAll(term, getImageTitleList(), repository.getSelectedDepictions())
@@ -103,9 +128,6 @@ class CategoriesPresenter
                             !repository.isSpammyCategory(categoryItem.name) ||
                                 categoryItem.name == term
                         }
-                    }.onErrorResumeNext { t: Throwable ->
-                        Timber.e(t, "Error searching categories for term: %s", term)
-                        Observable.just(emptyList())
                     }
             } else {
                 return Observable
@@ -116,16 +138,8 @@ class CategoriesPresenter
                                 list.map {
                                     CategoryItem(it.name, it.description, it.thumbnail, true)
                                 }
-                            }.onErrorResumeNext { t: Throwable ->
-                                Timber.e(t, "Error fetching existing categories")
-                                Observable.just(emptyList())
                             },
-                        repository
-                            .searchAll(term, getImageTitleList(), repository.getSelectedDepictions())
-                            .onErrorResumeNext { t: Throwable ->
-                                Timber.e(t, "Error searching categories for term: %s", term)
-                                Observable.just(emptyList())
-                            },
+                        repository.searchAll(term, getImageTitleList(), repository.getSelectedDepictions()),
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
@@ -156,7 +170,8 @@ class CategoriesPresenter
          * @return
          */
         private fun getImageTitleList(): List<String> =
-            repository.getUploads()
+            repository
+                .getUploads()
                 .map { it.uploadMediaDetails[0].captionText }
                 .filterNot { TextUtils.isEmpty(it) }
 
@@ -214,8 +229,11 @@ class CategoriesPresenter
                             view.showError(R.string.error_loading_categories)
                             val mwException = t as? MwIOException
                             view.showErrorDialog(
-                                if (mwException == null) ""
-                                else "\n${mwException.error.title} / ${mwException.error.details}"
+                                if (mwException == null) {
+                                    ""
+                                } else {
+                                    "\n${mwException.error.title} / ${mwException.error.details}"
+                                },
                             )
                             Timber.e(t)
                         },
@@ -242,14 +260,12 @@ class CategoriesPresenter
         ) {
             // check if view.existingCategories is null
             if (
-                repository.getSelectedCategories().isNotEmpty()
-                        ||
+                repository.getSelectedCategories().isNotEmpty() ||
                 (
-                view.getExistingCategories() != null
-                        &&
-                repository.getSelectedExistingCategories().size
+                    view.getExistingCategories() != null &&
+                        repository.getSelectedExistingCategories().size
                         !=
-                view.getExistingCategories()?.size
+                        view.getExistingCategories()?.size
                 )
             ) {
                 val selectedCategories: MutableList<String> =
@@ -285,6 +301,7 @@ class CategoriesPresenter
                                 }),
                         )
                     } catch (e: InvalidLoginTokenException) {
+                        Timber.e(e, "Invalid login token while updating categories")
                         view.navigateToLoginScreen()
                     }
                 }
@@ -336,7 +353,8 @@ class CategoriesPresenter
 
         override fun selectCategories() {
             compositeDisposable.add(
-                repository.getPlaceCategories()
+                repository
+                    .getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewCategories),

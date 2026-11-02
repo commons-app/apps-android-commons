@@ -280,6 +280,13 @@
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="file_deleted_from_commons">This file was deleted from Commons.</string>
+  <string name="contribution_deleted">Deleted</string>
+  <string name="deleted_file_activity_title">File deleted</string>
+  <string name="deleted_file_explanation">Wikimedia Commons deletes files that are not educational or that break its rules, including copyright violations. Upload photos you took yourself. Pictures copied from the internet, screenshots, logos, and posters are common reasons a file is removed.</string>
+  <string name="deleted_file_view_page">View the file page</string>
+  <string name="deleted_file_view_discussion">Read the deletion discussion</string>
+  <string name="deleted_file_policies">Commons policies and guidelines</string>
   <string name="nominated_see_more">See webpage for details</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
@@ -917,4 +924,15 @@ Upload your first media by tapping on the add button.</string>
   <string name="error_applying_blur">Error applying blur</string>
   <string name="failed_to_apply_crop">Failed to apply crop</string>
   <string name="failed_to_save_image">Failed to save image</string>
+
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
+
+  <string name="unsupported_format_title">Unsupported Format</string>
+  <string name="unsupported_format_desc">The selected files could not be opened. Wikimedia Commons strictly requires the following formats:\n\n%s</string>
+
+  <string name="unsupported_files_skipped_title">Unsupported Files Skipped</string>
+  <string name="unsupported_files_skipped_desc">Some files were skipped due to an unsupported format. The app will continue uploading remaining files that match the following supported formats:\n\n%s</string>
 </resources>

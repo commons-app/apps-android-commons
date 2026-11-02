@@ -3,7 +3,9 @@ package fr.free.nrw.commons.upload
 import androidx.lifecycle.MutableLiveData
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
@@ -179,23 +181,27 @@ class CategoriesPresenterTest {
     }
 
     /**
-     * Verifies that a transient API error in the search pipeline does not kill
-     * the subscription, allowing subsequent searches to succeed (#6438).
+     * A failed search is reported to the user and does not end the subscription, so the next
+     * query still returns results (#6438).
      */
     @Test
-    fun `searchForCategories recovers from API error and accepts next query`() {
+    fun `searchForCategories reports an API error and accepts the next query`() {
         categoriesPresenter.onAttachView(view)
-        val liveData = MutableLiveData<List<CategoryItem>>()
+        // postValue is asynchronous, so watch the list through a mock.
+        val liveData = mock<MutableLiveData<List<CategoryItem>>>()
         categoriesPresenter.setCategoryList(liveData)
 
         whenever(repository.getUploads()).thenReturn(emptyList())
         whenever(repository.getSelectedCategories()).thenReturn(emptyList())
-
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(Observable.error(RuntimeException("API timeout")))
 
         categoriesPresenter.searchForCategories("Cat")
         testScheduler.triggerActions()
+
+        verify(view).showError(R.string.error_loading_categories)
+        verify(view, never()).showError(R.string.no_categories_found)
+        verify(liveData, never()).postValue(any())
 
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
@@ -204,7 +210,7 @@ class CategoriesPresenterTest {
         categoriesPresenter.searchForCategories("Cat")
         testScheduler.triggerActions()
 
-        verify(view).showError(R.string.no_categories_found)
+        verify(liveData).postValue(argThat { map { it.name } == listOf("Cats") })
     }
 
     @Test

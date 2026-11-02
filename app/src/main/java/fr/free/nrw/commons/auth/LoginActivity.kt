@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
@@ -28,17 +27,18 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.login.LoginCallback
 import fr.free.nrw.commons.auth.login.LoginClient
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityLoginBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.AbstractTextWatcher
 import fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.disposables.CompositeDisposable
@@ -82,7 +82,8 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.installViewFactory()
         delegate.onCreate(savedInstanceState)
 
-        WindowCompat.getInsetsController(window, window.decorView)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = !isDarkTheme
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -144,16 +145,25 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
         progressDialog!!.dismiss()
         if (binding != null) {
-                show2FAUI()
-                binding!!.loginTwoFactor.requestFocus()
+            show2FAUI()
+            binding!!.loginTwoFactor.requestFocus()
 
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(binding!!.loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding!!.loginTwoFactor, InputMethodManager.SHOW_IMPLICIT)
         } else {
             Timber.e("Binding is null in askUserForTwoFactorAuthWithKeyboard after reinitialization attempt")
         }
-        showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))
+        showMessageAndCancelDialog(
+            getString(
+                if (lastLoginResult is LoginResult.EmailAuthResult) {
+                    R.string.login_failed_email_auth_needed
+                } else {
+                    R.string.login_failed_2fa_needed
+                },
+            ),
+        )
     }
+
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         delegate.onPostCreate(savedInstanceState)
@@ -180,7 +190,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
                 progressDialog!!.dismiss()
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not dismiss login progress dialog")
         }
         with(binding!!) {
             loginUsername.removeTextChangedListener(textWatcher)
@@ -208,7 +218,10 @@ class LoginActivity : AccountAuthenticatorActivity() {
         delegate.onPostResume()
     }
 
-    override fun setContentView(view: View, params: ViewGroup.LayoutParams) {
+    override fun setContentView(
+        view: View,
+        params: ViewGroup.LayoutParams,
+    ) {
         delegate.setContentView(view, params)
     }
 
@@ -235,11 +248,12 @@ class LoginActivity : AccountAuthenticatorActivity() {
         outState.putString(SAVE_USERNAME, binding!!.loginUsername.text.toString())
         outState.putString(SAVE_PASSWORD, binding!!.loginPassword.text.toString())
         outState.putBoolean(SAVE_TWO_FACTOR_VISIBILITY, binding!!.twoFactorContainer.visibility == View.VISIBLE)
-        val loginResultType = when (lastLoginResult) {
-            is LoginResult.EmailAuthResult -> RESULT_TYPE_EMAIL_AUTH
-            is LoginResult.OAuthResult -> RESULT_TYPE_2FA
-            else -> RESULT_TYPE_NONE
-        }
+        val loginResultType =
+            when (lastLoginResult) {
+                is LoginResult.EmailAuthResult -> RESULT_TYPE_EMAIL_AUTH
+                is LoginResult.OAuthResult -> RESULT_TYPE_2FA
+                else -> RESULT_TYPE_NONE
+            }
         outState.putString(SAVE_LAST_LOGIN_RESULT_TYPE, loginResultType)
     }
 
@@ -250,11 +264,12 @@ class LoginActivity : AccountAuthenticatorActivity() {
         val isTwoFactorVisible = savedInstanceState.getBoolean(SAVE_TWO_FACTOR_VISIBILITY, false)
         if (isTwoFactorVisible) {
             val loginResultType = savedInstanceState.getString(SAVE_LAST_LOGIN_RESULT_TYPE) ?: RESULT_TYPE_NONE
-            lastLoginResult = when (loginResultType) {
-                RESULT_TYPE_EMAIL_AUTH -> LoginResult.EmailAuthResult("", null, null, null)
-                RESULT_TYPE_2FA -> LoginResult.OAuthResult("", null, null, null)
-                else -> null
-            }
+            lastLoginResult =
+                when (loginResultType) {
+                    RESULT_TYPE_EMAIL_AUTH -> LoginResult.EmailAuthResult("", null, null, null)
+                    RESULT_TYPE_2FA -> LoginResult.OAuthResult("", null, null, null)
+                    else -> null
+                }
             show2FAUI()
         } else {
             binding!!.twoFactorContainer.visibility = View.GONE
@@ -272,13 +287,19 @@ class LoginActivity : AccountAuthenticatorActivity() {
             showMessage(errorMessage, R.color.secondaryDarkColor)
         }
     }
+
     private fun show2FAUI() {
         if (binding == null) return
         if (lastLoginResult != null) {
             binding!!.twoFactorContainer.visibility = View.VISIBLE
-            binding!!.twoFactorContainer.hint = getString(
-                if (lastLoginResult is LoginResult.EmailAuthResult) R.string.email_auth_code else R.string._2fa_code
-            )
+            binding!!.twoFactorContainer.hint =
+                getString(
+                    if (lastLoginResult is LoginResult.EmailAuthResult) {
+                        R.string.email_auth_code
+                    } else {
+                        R.string._2fa_code
+                    },
+                )
             binding!!.loginTwoFactor.visibility = View.VISIBLE
             binding!!.loginTwoFactor.setOnEditorActionListener { _, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_DONE ||
@@ -296,49 +317,47 @@ class LoginActivity : AccountAuthenticatorActivity() {
             binding!!.loginTwoFactor.setText("")
         }
     }
+
     /**
      * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
      * @param view The keyboard
      * @param hasFocus Set to true if the keyboard has focus
      */
-    private fun onPasswordFocusChanged(view: View, hasFocus: Boolean) {
+    private fun onPasswordFocusChanged(
+        view: View,
+        hasFocus: Boolean,
+    ) {
         if (!hasFocus) {
             hideKeyboard(view)
         }
     }
 
-    private fun onEditorAction(textView: TextView, actionId: Int, keyEvent: KeyEvent?) =
-        if (binding!!.loginButton.isEnabled && isTriggerAction(actionId, keyEvent)) {
-            performLogin()
-            true
-        } else false
-
-    private fun isTriggerAction(actionId: Int, keyEvent: KeyEvent?) =
-        actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
+    private fun isTriggerAction(
+        actionId: Int,
+        keyEvent: KeyEvent?,
+    ) = actionId == EditorInfo.IME_ACTION_NEXT ||
+        actionId == EditorInfo.IME_ACTION_DONE ||
+        keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER
 
     private fun skipLogin() {
-        AlertDialog.Builder(this)
+        AlertDialog
+            .Builder(this)
             .setTitle(R.string.skip_login_title)
             .setMessage(R.string.skip_login_message)
             .setCancelable(false)
             .setPositiveButton(R.string.yes) { dialog: DialogInterface, which: Int ->
                 dialog.cancel()
                 performSkipLogin()
-            }
-            .setNegativeButton(R.string.no) { dialog: DialogInterface, which: Int ->
+            }.setNegativeButton(R.string.no) { dialog: DialogInterface, which: Int ->
                 dialog.cancel()
-            }
-            .show()
+            }.show()
     }
 
-    private fun forgotPassword() =
-        handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL))
+    private fun forgotPassword() = handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL))
 
-    private fun onPrivacyPolicyClicked() =
-        handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
+    private fun onPrivacyPolicyClicked() = handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL))
 
-    private fun signUp() =
-        startActivity(Intent(this, SignupActivity::class.java))
+    private fun signUp() = startActivity(Intent(this, SignupActivity::class.java))
 
     @VisibleForTesting
     fun performLogin() {
@@ -348,44 +367,56 @@ class LoginActivity : AccountAuthenticatorActivity() {
         val twoFactorCode = binding!!.loginTwoFactor.text.toString()
 
         showLoggingProgressBar()
-        loginClient.doLogin(username,
+        loginClient.doLogin(
+            username,
             password,
             lastLoginResult,
             twoFactorCode,
             Locale.getDefault().language,
             object : LoginCallback {
-                override fun success(loginResult: LoginResult) = runOnUiThread {
-                    Timber.d("Login Success")
-                    progressDialog!!.dismiss()
-                    onLoginSuccess(loginResult)
-                }
+                override fun success(loginResult: LoginResult) =
+                    runOnUiThread {
+                        Timber.d("Login Success")
+                        progressDialog!!.dismiss()
+                        onLoginSuccess(loginResult)
+                    }
 
-                override fun twoFactorPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
+                override fun twoFactorPrompt(
+                    loginResult: LoginResult,
+                    caught: Throwable,
+                    token: String?,
+                ) = runOnUiThread {
                     Timber.d("Requesting 2FA prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
                     askUserForTwoFactorAuthWithKeyboard()
                 }
 
-                override fun emailAuthPrompt(loginResult: LoginResult, caught: Throwable, token: String?) = runOnUiThread {
+                override fun emailAuthPrompt(
+                    loginResult: LoginResult,
+                    caught: Throwable,
+                    token: String?,
+                ) = runOnUiThread {
                     Timber.d("Requesting email auth prompt")
                     progressDialog!!.dismiss()
                     lastLoginResult = loginResult
                     askUserForTwoFactorAuthWithKeyboard()
                 }
 
-                override fun passwordResetPrompt(token: String?) = runOnUiThread {
-                    Timber.d("Showing password reset prompt")
-                    progressDialog!!.dismiss()
-                    showPasswordResetPrompt()
-                }
+                override fun passwordResetPrompt(token: String?) =
+                    runOnUiThread {
+                        Timber.d("Showing password reset prompt")
+                        progressDialog!!.dismiss()
+                        showPasswordResetPrompt()
+                    }
 
-                override fun error(caught: Throwable) = runOnUiThread {
-                    Timber.e(caught)
-                    progressDialog!!.dismiss()
-                    showMessageAndCancelDialog(caught.localizedMessage ?: "")
-                }
-            }
+                override fun error(caught: Throwable) =
+                    runOnUiThread {
+                        Timber.e(caught)
+                        progressDialog!!.dismiss()
+                        showLoginError(caught)
+                    }
+            },
         )
     }
 
@@ -403,12 +434,13 @@ class LoginActivity : AccountAuthenticatorActivity() {
     }
 
     private fun showLoggingProgressBar() {
-        progressDialog = ProgressDialog(this).apply {
-            isIndeterminate = true
-            setTitle(getString(R.string.logging_in_title))
-            setMessage(getString(R.string.logging_in_message))
-            setCancelable(false)
-        }
+        progressDialog =
+            ProgressDialog(this).apply {
+                isIndeterminate = true
+                setTitle(getString(R.string.logging_in_title))
+                setMessage(getString(R.string.logging_in_message))
+                setCancelable(false)
+            }
         progressDialog!!.show()
     }
 
@@ -421,8 +453,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
         startMainActivity()
     }
 
-    override fun getMenuInflater(): MenuInflater =
-        delegate.menuInflater
+    override fun getMenuInflater(): MenuInflater = delegate.menuInflater
 
     @VisibleForTesting
     fun askUserForTwoFactorAuth() {
@@ -440,11 +471,21 @@ class LoginActivity : AccountAuthenticatorActivity() {
         }
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        showMessageAndCancelDialog(getString(if (lastLoginResult is LoginResult.EmailAuthResult) R.string.login_failed_email_auth_needed else R.string.login_failed_2fa_needed))
+        showMessageAndCancelDialog(
+            getString(
+                if (lastLoginResult is LoginResult.EmailAuthResult) {
+                    R.string.login_failed_email_auth_needed
+                } else {
+                    R.string.login_failed_2fa_needed
+                },
+            ),
+        )
     }
 
     @VisibleForTesting
-    fun showMessageAndCancelDialog(@StringRes resId: Int) {
+    fun showMessageAndCancelDialog(
+        @StringRes resId: Int,
+    ) {
         showMessage(resId, R.color.secondaryDarkColor)
         progressDialog?.cancel()
     }
@@ -453,6 +494,19 @@ class LoginActivity : AccountAuthenticatorActivity() {
     fun showMessageAndCancelDialog(error: String) {
         showMessage(error, R.color.secondaryDarkColor)
         progressDialog?.cancel()
+    }
+
+    @VisibleForTesting
+    fun showLoginError(caught: Throwable) {
+        val message = caught.localizedMessage
+        if (caught is LoginFailedException && !message.isNullOrBlank()) {
+            // Server message, already localized via the uselang parameter
+            showMessageAndCancelDialog(message)
+        } else {
+            // Other errors (network, unexpected response) carry untranslated
+            // technical messages, so fall back to a localized generic message
+            showMessageAndCancelDialog(R.string.login_failed_generic)
+        }
     }
 
     @VisibleForTesting
@@ -467,14 +521,20 @@ class LoginActivity : AccountAuthenticatorActivity() {
         finish()
     }
 
-    private fun showMessage(@StringRes resId: Int, @ColorRes colorResId: Int) = with(binding!!) {
+    private fun showMessage(
+        @StringRes resId: Int,
+        @ColorRes colorResId: Int,
+    ) = with(binding!!) {
         errorMessage.text = getString(resId)
         errorMessage.setTextColor(ContextCompat.getColor(this@LoginActivity, colorResId))
         errorMessageContainer.visibility = View.VISIBLE
     }
 
-    private fun showMessage(message: String?, @ColorRes colorResId: Int) = with(binding!!) {
-        if(!message.isNullOrBlank()){
+    private fun showMessage(
+        message: String?,
+        @ColorRes colorResId: Int,
+    ) = with(binding!!) {
+        if (!message.isNullOrBlank()) {
             errorMessage.text = message
             errorMessage.setTextColor(ContextCompat.getColor(this@LoginActivity, colorResId))
             errorMessageContainer.visibility = View.VISIBLE
@@ -483,14 +543,18 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     private fun onTextChanged(text: String) {
         val enabled =
-            binding!!.loginUsername.text!!.length != 0 && binding!!.loginPassword.text!!.length != 0 &&
-                    (BuildConfig.DEBUG || binding!!.loginTwoFactor.text!!.length != 0 || binding!!.loginTwoFactor.visibility != View.VISIBLE)
+            binding!!.loginUsername.text!!.length != 0 &&
+                binding!!.loginPassword.text!!.length != 0 &&
+                (
+                    BuildConfig.DEBUG ||
+                        binding!!.loginTwoFactor.text!!.length != 0 ||
+                        binding!!.loginTwoFactor.visibility != View.VISIBLE
+                )
         binding!!.loginButton.isEnabled = enabled
     }
 
     companion object {
-        fun startYourself(context: Context) =
-            context.startActivity(Intent(context, LoginActivity::class.java))
+        fun startYourself(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java))
 
         const val SAVE_PROGRESS_DIALOG: String = "ProgressDialog_state"
         const val SAVE_ERROR_MESSAGE: String = "errorMessage"

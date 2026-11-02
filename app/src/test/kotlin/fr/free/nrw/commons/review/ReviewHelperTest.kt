@@ -79,7 +79,9 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMediaWithWithOneMediaNominatedForDeletion() {
-        whenever(mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg")).thenReturn(Single.just(true))
+        whenever(
+            mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg"),
+        ).thenReturn(Single.just(true))
 
         val page1 = setupMedia("one.jpg")
         whenever(mwQueryResult.pages()).thenReturn(listOf(page1))

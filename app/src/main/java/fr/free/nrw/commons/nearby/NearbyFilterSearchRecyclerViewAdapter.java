@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
-import java.util.Locale;
 
 public class NearbyFilterSearchRecyclerViewAdapter
         extends RecyclerView.Adapter<NearbyFilterSearchRecyclerViewAdapter.RecyclerViewHolder>
@@ -25,8 +24,11 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     private final LayoutInflater inflater;
     private Context context;
-    private ArrayList<Label> labels;
+
+    private final ArrayList<Label> labels;
+
     private ArrayList<Label> displayedLabels;
+
     public ArrayList<Label> selectedLabels = new ArrayList<>();
 
     private int state;
@@ -41,26 +43,29 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
     public NearbyFilterSearchRecyclerViewAdapter(Context context, ArrayList<Label> labels, RecyclerView recyclerView) {
         this.context = context;
-        this.labels = labels;
-        this.displayedLabels = labels;
-        smoothScroller = new
-                LinearSmoothScroller(context) {
-                    @Override protected int getVerticalSnapPreference() {
-                        return LinearSmoothScroller.SNAP_TO_START;
-                    }
-                };
+        this.labels = new ArrayList<>(labels);
+        displayedLabels = new ArrayList<>(this.labels);
+
+        smoothScroller = new LinearSmoothScroller(context) {
+            @Override
+            protected int getVerticalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+        };
         inflater = LayoutInflater.from(context);
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         public TextView placeTypeLabel;
         public ImageView placeTypeIcon;
+        public ImageView placeSelected;
         public LinearLayout placeTypeLayout;
 
         public RecyclerViewHolder(View view) {
             super(view);
             placeTypeLabel = view.findViewById(R.id.place_text);
             placeTypeIcon = view.findViewById(R.id.place_icon);
+            placeSelected = view.findViewById(R.id.place_selected);
             placeTypeLayout = view.findViewById(R.id.search_list_item);
         }
     }
@@ -78,6 +83,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
         holder.placeTypeIcon.setImageResource(label.getIcon());
         holder.placeTypeLabel.setText(label.toString());
         holder.placeTypeLayout.setSelected(label.isSelected());
+        holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
         holder.placeTypeLayout.setOnClickListener(view -> {
             callback.setCheckboxUnknown();
@@ -90,6 +96,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
 
             label.setSelected(!label.isSelected());
             holder.placeTypeLayout.setSelected(label.isSelected());
+            holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
             NearbyFilterState.setSelectedLabels(new ArrayList<>(selectedLabels));
             callback.filterByMarkerType(selectedLabels, 0, false, false);
@@ -111,44 +118,38 @@ public class NearbyFilterSearchRecyclerViewAdapter
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();
                 ArrayList<Label> filteredArrayList = new ArrayList<>();
 
-                if (labels == null) {
-                    labels = new ArrayList<>(displayedLabels);
-                }
-
                 if (constraint == null || constraint.length() == 0) {
-                    // set the Original result to return
-                    results.count = labels.size();
-                    results.values = labels;
+                    filteredArrayList.addAll(labels);
                 } else {
-                    constraint = constraint.toString().toLowerCase(Locale.ROOT);
-
-                    for (Label label : labels) {
-                        String data = label.toString();
-                        if (data.toLowerCase(Locale.ROOT).startsWith(constraint.toString())) {
-                            filteredArrayList.add(Label.fromText(label.getText()));
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (Label label : labels) { // Iterate over the master list
+                        if (label.getText() != null && label.getText().toLowerCase().contains(filterPattern)) {
+                            filteredArrayList.add(label);
                         }
                     }
-
-                    // set the Filtered result to return
-                    results.count = filteredArrayList.size();
-                    results.values = filteredArrayList;
                 }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredArrayList;
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                displayedLabels = (ArrayList<Label>) results.values; // has the filtered values
-                notifyDataSetChanged();  // notifies the data with new filtered values
+                displayedLabels.clear(); // Safe to clear, this no longer destroys the master list
+                @SuppressWarnings("unchecked")
+                ArrayList<Label> filteredList = (ArrayList<Label>) results.values;
+                displayedLabels.addAll(filteredList);
+                notifyDataSetChanged();
             }
         };
     }
 
     public void setRecyclerViewAdapterItemsGreyedOut() {
         state = CheckBoxTriStates.UNCHECKED;
+
         for (Label label : labels) {
             label.setSelected(false);
             selectedLabels.remove(label);
@@ -169,13 +170,9 @@ public class NearbyFilterSearchRecyclerViewAdapter
         notifyDataSetChanged();
     }
 
-    public interface  Callback {
-
+    public interface Callback {
         void setCheckboxUnknown();
-
         void filterByMarkerType(ArrayList<Label> selectedLabels, int i, boolean b, boolean b1);
-
         boolean isDarkTheme();
     }
-
 }

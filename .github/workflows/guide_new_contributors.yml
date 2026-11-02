@@ -8,6 +8,8 @@ on:
 
 permissions:
   issues: write
+  # Without it, the search for merged pull requests below finds none
+  pull-requests: read
 
 jobs:
   guide:
