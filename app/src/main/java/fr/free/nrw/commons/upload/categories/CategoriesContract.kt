@@ -74,7 +74,10 @@ interface CategoriesContract {
         /**
          * Attaches view and media
          */
-        fun onAttachViewWithMedia(view: View, media: Media)
+        fun onAttachViewWithMedia(
+            view: View,
+            media: Media,
+        )
 
         /**
          * Clears previous selections
@@ -84,7 +87,10 @@ interface CategoriesContract {
         /**
          * Update the categories
          */
-        fun updateCategories(media: Media, wikiText: String)
+        fun updateCategories(
+            media: Media,
+            wikiText: String,
+        )
 
         fun getCategories(): LiveData<List<CategoryItem>>
 

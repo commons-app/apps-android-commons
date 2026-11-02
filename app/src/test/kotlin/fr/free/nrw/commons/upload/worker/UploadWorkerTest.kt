@@ -1,15 +1,16 @@
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.upload.worker.UploadWorker
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.upload.worker.UploadWorker
 
 class UploadWorkerTest {
-
     @Mock
     lateinit var mediaClient: MediaClient
 
@@ -41,14 +42,14 @@ class UploadWorkerTest {
     @Test
     fun `findUniqueFileName appends hash when file exists`() {
         val fileName = "test_image.jpg"
-        //mockking: first check exists, second check unique
+        // mockking: first check exists, second check unique
         whenever(mediaClient.checkPageExistsUsingTitle(any()))
             .thenReturn(Single.just(true))
             .thenReturn(Single.just(false))
 
         val result = uploadWorker.findUniqueFileName(fileName)
 
-        //herre, updated to match the exactly 5 digits inside parentheses
+        // herre, updated to match the exactly 5 digits inside parentheses
         val regex = Regex("test_image \\(\\d{5}\\)\\.jpg")
         assert(result.matches(regex))
     }

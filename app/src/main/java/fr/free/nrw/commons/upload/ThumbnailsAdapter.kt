@@ -17,9 +17,9 @@ import java.io.File
 /**
  * The adapter class for image thumbnails to be shown while uploading.
  */
-internal class ThumbnailsAdapter(private val callback: Callback) :
-    RecyclerView.Adapter<ThumbnailsAdapter.ViewHolder>() {
-
+internal class ThumbnailsAdapter(
+    private val callback: Callback,
+) : RecyclerView.Adapter<ThumbnailsAdapter.ViewHolder>() {
     var onThumbnailDeletedListener: OnThumbnailDeletedListener? = null
     var uploadableFiles: List<UploadableFile> = emptyList()
         set(value) {
@@ -27,18 +27,27 @@ internal class ThumbnailsAdapter(private val callback: Callback) :
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int) = ViewHolder(
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        i: Int,
+    ) = ViewHolder(
         ItemUploadThumbnailBinding.inflate(
-            LayoutInflater.from(viewGroup.context), viewGroup, false
-        )
+            LayoutInflater.from(viewGroup.context),
+            viewGroup,
+            false,
+        ),
     )
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) = viewHolder.bind(position)
+    override fun onBindViewHolder(
+        viewHolder: ViewHolder,
+        position: Int,
+    ) = viewHolder.bind(position)
 
     override fun getItemCount(): Int = uploadableFiles.size
 
-    inner class ViewHolder(val binding: ItemUploadThumbnailBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(
+        val binding: ItemUploadThumbnailBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         private val rlContainer: RelativeLayout = binding.rlContainer
         private val background: SimpleDraweeView = binding.ivThumbnail
         private val ivError: ImageView = binding.ivError
