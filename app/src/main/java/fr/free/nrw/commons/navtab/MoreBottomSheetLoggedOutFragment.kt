@@ -21,6 +21,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.settings.SettingsActivity
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -120,6 +121,7 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
         try {
             startActivity(feedbackIntent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No email client available to send feedback")
             Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }

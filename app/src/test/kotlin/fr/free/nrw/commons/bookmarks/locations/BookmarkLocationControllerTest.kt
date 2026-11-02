@@ -69,9 +69,10 @@ class BookmarkLocationControllerTest {
      * Test case where all bookmark locations are fetched and media is found against it
      */
     @Test
-    fun loadBookmarkedLocations()  = runBlocking {
-        val bookmarkedLocations =
-            bookmarkLocationsController.loadFavoritesLocations()
-        Assert.assertEquals(2, bookmarkedLocations.size.toLong())
-    }
+    fun loadBookmarkedLocations() =
+        runBlocking {
+            val bookmarkedLocations =
+                bookmarkLocationsController.loadFavoritesLocations()
+            Assert.assertEquals(2, bookmarkedLocations.size.toLong())
+        }
 }
