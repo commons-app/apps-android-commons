@@ -1,7 +1,7 @@
 name: Check Pull Request Scope
 # Uses pull_request_target so fork PRs get the API secret and a token that can
 # comment. Safe only because no step checks out or runs code from the PR head;
-# PR title/body are passed through env vars only. Do not add such steps.
+# PR title/body are passed through env vars only.
 on:
   pull_request_target:
     types: [opened, synchronize]
