@@ -255,6 +255,7 @@ class DescriptionEditActivity :
                     )
                 }
         } catch (e: InvalidLoginTokenException) {
+            Timber.e(e, "Invalid login token while editing the description, logging out")
             val username: String? = sessionManager.userName
             val logoutListener =
                 CommonsApplication.BaseLogoutListener(
@@ -288,6 +289,7 @@ class DescriptionEditActivity :
                         },
                 )
             } catch (e: InvalidLoginTokenException) {
+                Timber.e(e, "Invalid login token while editing a caption, logging out")
                 val username = sessionManager.userName
                 val logoutListener =
                     CommonsApplication.BaseLogoutListener(
