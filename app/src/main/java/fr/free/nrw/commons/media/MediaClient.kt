@@ -54,7 +54,8 @@ class MediaClient
                 .map { it.query()!!.allImages().size > 0 }
 
         /**
-         * This method takes the category as input and returns a list of  Media objects filtered using image generator query
+         * This method takes the category as input and returns a list of Media objects filtered using image generator
+         * query
          * It uses the generator query API to get the images searched using a query, 10 at a time.
          *
          * @param category the search category. Must start with "Category:"
@@ -79,7 +80,8 @@ class MediaClient
             }
 
         /**
-         * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
+         * This method takes a keyword as input and returns a list of Media objects filtered using image generator
+         * query
          * It uses the generator query API to get the images searched using a query, 10 at a time.
          *
          * @param keyword the search keyword
@@ -191,6 +193,7 @@ class MediaClient
                     ?.revisions()
                     ?.get(0)
                     ?.content()
+                    .orEmpty()
             }
 
         override fun responseMapper(
@@ -204,18 +207,19 @@ class MediaClient
                 }.flatMap(::mediaFromPageAndEntity)
 
         private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> =
-            if (pages.isEmpty()) {
-                Single.just(emptyList())
-            } else {
-                getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
-                    .map {
-                        pages
-                            .zip(it.entities().values)
-                            .mapNotNull { (page, entity) ->
-                                page.imageInfo()?.let {
-                                    mediaConverter.convert(page, entity, it)
+            when {
+                pages.isEmpty() -> Single.just(emptyList())
+                pagesIndicateDeletedFile(pages) -> Single.error(FileDeletedOnCommonsException())
+                else ->
+                    getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
+                        .map {
+                            pages
+                                .zip(it.getEntityMap().values)
+                                .mapNotNull { (page, entity) ->
+                                    page.imageInfo()?.let {
+                                        mediaConverter.convert(page, entity, it)
+                                    }
                                 }
-                            }
-                    }
+                        }
             }
     }

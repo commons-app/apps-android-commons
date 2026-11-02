@@ -7,7 +7,6 @@ import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class RecentLanguagesTableTest : InMemoryDatabaseTest() {
-
     @Test
     fun testTableExists() {
         assertTablesExist(RecentLanguagesTable.TABLE_NAME)
@@ -17,10 +16,11 @@ class RecentLanguagesTableTest : InMemoryDatabaseTest() {
     @Test
     fun testInsertAndRetrieve() {
         val dao = roomDatabase.recentLanguagesRoomDao()
-        val language = RecentLanguageRoomEntity(
-            languageName = "English",
-            languageCode = "en"
-        )
+        val language =
+            RecentLanguageRoomEntity(
+                languageName = "English",
+                languageCode = "en",
+            )
         dao.insert(language)
 
         val allLanguages = dao.getAll().blockingGet()
