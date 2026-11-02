@@ -29,12 +29,8 @@ import fr.free.nrw.commons.databinding.ActivityEditBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.commons.ml.common.DetectionResult
-import org.commons.ml.vision.CommonsVision
 import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
@@ -171,8 +167,14 @@ class EditActivity : BaseActivity() {
                         .setCancelable(false)
                         .create()
                 progressDialog.show()
-                val decodedBitmap = loadBitmapForDetection(imageUri)
-                if (decodedBitmap == null) {
+                val detections =
+                    AutoBlurDetector(applicationContext).detect(imageUri) { percent ->
+                        runOnUiThread {
+                            progressBar?.progress = percent
+                            percentView?.text = "$percent%"
+                        }
+                    }
+                if (detections == null) {
                     progressDialog.dismiss()
                     Toast
                         .makeText(
@@ -183,30 +185,6 @@ class EditActivity : BaseActivity() {
                     Timber.e("AutoBlur: decodedBitmap is null for $imageUri")
                     return@launch
                 }
-
-                val detector = CommonsVision(applicationContext)
-                val detectionResult =
-                    withContext(Dispatchers.Default) {
-                        detector.detect(decodedBitmap) { progress ->
-                            val percent = (progress * 100).toInt()
-                            runOnUiThread {
-                                progressBar?.progress = percent
-                                percentView?.text = "$percent%"
-                            }
-                        }
-                    }
-                val rawDetections =
-                    when (detectionResult) {
-                        is DetectionResult.Success -> detectionResult.detections
-                        is DetectionResult.Partial -> {
-                            Timber.w(
-                                "Partial detection result: unavailable capabilities = " +
-                                    "${detectionResult.detections}",
-                            )
-                            detectionResult.detections
-                        }
-                        else -> emptyList()
-                    }
                 delay(700.milliseconds)
                 progressDialog.dismiss()
 
@@ -216,32 +194,17 @@ class EditActivity : BaseActivity() {
                 }
 
                 val drawable = binding.iv.drawable
-                if (drawable != null &&
-                    rawDetections.isNotEmpty() &&
-                    decodedBitmap.width > 0 &&
-                    decodedBitmap.height > 0
-                ) {
-                    val scaleX = drawable.intrinsicWidth.toFloat() / decodedBitmap.width
-                    val scaleY = drawable.intrinsicHeight.toFloat() / decodedBitmap.height
-
-                    val scaledRects =
-                        rawDetections.map { detection ->
-                            val b = detection.bounds
-                            RectF(
-                                b.left * scaleX,
-                                b.top * scaleY,
-                                b.right * scaleX,
-                                b.bottom * scaleY,
-                            )
-                        }
-                    binding.blurOverlay.addRegions(scaledRects)
-                } else if (rawDetections.isEmpty()) {
+                if (detections.bounds.isEmpty()) {
                     Toast
                         .makeText(
                             this@EditActivity,
                             getString(R.string.autoblur_no_region_detected),
                             Toast.LENGTH_SHORT,
                         ).show()
+                } else if (drawable != null) {
+                    binding.blurOverlay.addRegions(
+                        detections.scaledTo(drawable.intrinsicWidth, drawable.intrinsicHeight),
+                    )
                 }
 
                 // Dismiss dialog after a short delay for visual feedback.
@@ -251,26 +214,6 @@ class EditActivity : BaseActivity() {
             }
         }
     }
-
-    /**
-     * Safely decodes a bitmap from a content URI or file path off the main thread.
-     */
-    private suspend fun loadBitmapForDetection(pathOrUri: String): Bitmap? =
-        withContext(Dispatchers.IO) {
-            runCatching {
-                val uri = pathOrUri.toUri()
-                if (uri.scheme == "content") {
-                    contentResolver.openInputStream(uri)?.use { stream ->
-                        BitmapFactory.decodeStream(stream)
-                    }
-                } else {
-                    val filePath = if (uri.scheme == "file") uri.path ?: pathOrUri else pathOrUri
-                    BitmapFactory.decodeFile(filePath)
-                }
-            }.onFailure { e ->
-                Timber.e(e, "Failed to load bitmap for detection from pathOrUri: $pathOrUri")
-            }.getOrNull()
-        }
 
     /**
      * Gets the current image properties and update those properties in [BlurOverlayView].
