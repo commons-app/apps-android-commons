@@ -112,14 +112,6 @@ class LocationServiceManager(
         }
 
     /**
-     * Returns whether a given location is better than the current best location.
-     *
-     * @param location the location to be tested
-     * @param currentBestLocation the current best location
-     * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
-     * LOCATION_SLIGHTLY_CHANGED if location changed slightly
-     */
-    /**
      * Unregisters location manager.
      */
     fun unregisterLocationManager() {

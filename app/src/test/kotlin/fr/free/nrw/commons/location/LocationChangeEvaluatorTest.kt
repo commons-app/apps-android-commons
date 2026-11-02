@@ -29,12 +29,13 @@ class LocationChangeEvaluatorTest {
      */
     @Test
     fun evaluateUnchangedLocationReturnsNoChange() {
-        val currentLocation = Location("gps").apply {
-            latitude = 52.0
-            longitude = 13.0
-            accuracy = 10f
-            time = 1000L
-        }
+        val currentLocation =
+            Location("gps").apply {
+                latitude = 52.0
+                longitude = 13.0
+                accuracy = 10f
+                time = 1000L
+            }
         val newLocation = Location(currentLocation)
 
         assertEquals(
