@@ -5,7 +5,6 @@ package fr.free.nrw.commons.filepicker
  * inside the ContributionsController
  */
 abstract class DefaultCallback : FilePicker.Callbacks {
-
     override fun onImagePickerError(
         e: Exception,
         source: FilePicker.ImageSource,
