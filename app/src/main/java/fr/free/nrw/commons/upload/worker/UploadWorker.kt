@@ -106,7 +106,7 @@ class UploadWorker(
             .commonsApplicationComponent
             .inject(this)
         currentNotification =
-            getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
+            getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS)!!
 
         statesToProcess.add(Contribution.STATE_QUEUED)
     }
@@ -185,7 +185,7 @@ class UploadWorker(
             notificationManager = NotificationManagerCompat.from(appContext)
             val processingUploads =
                 getNotificationBuilder(
-                    CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
+                    CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
                 )!!
             withContext(Dispatchers.IO) {
                 while (contributionDao
@@ -290,7 +290,7 @@ class UploadWorker(
     private fun createNotificationForForegroundService(): Notification {
         // TODO: Improve notification for foreground service
         return getNotificationBuilder(
-            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
+            CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
         )!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
@@ -313,8 +313,8 @@ class UploadWorker(
         currentNotificationID =
             (contribution.localUri.toString() + contribution.media.filename).hashCode()
 
-        currentNotification
-        getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
+        // The previous upload may have left the notification on the result channel
+        currentNotification.useUploadProgressChannel()
         currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_progress_notification_title_start,
@@ -627,6 +627,7 @@ class UploadWorker(
             ).setContentText(appContext.getString(R.string.upload_completed_notification_text))
             .setProgress(0, 0, false)
             .setOngoing(false)
+            .useUploadResultChannel()
         notificationManager?.notify(
             currentNotificationTag,
             currentNotificationID,
@@ -656,6 +657,7 @@ class UploadWorker(
             ).setContentText(appContext.getString(R.string.upload_failed_notification_subtitle))
             .setProgress(0, 0, false)
             .setOngoing(false)
+            .useUploadResultChannel()
         notificationManager?.notify(
             currentNotificationTag,
             currentNotificationID,
@@ -675,6 +677,7 @@ class UploadWorker(
             ).setContentText(appContext.getString(R.string.invalid_login_message))
             .setProgress(0, 0, false)
             .setOngoing(false)
+            .useUploadResultChannel()
         notificationManager?.notify(
             currentNotificationTag,
             currentNotificationID,
@@ -703,6 +706,7 @@ class UploadWorker(
             ).setContentText(contribution.errorInfo)
             .setProgress(0, 0, false)
             .setOngoing(false)
+            .useUploadResultChannel()
         notificationManager?.notify(
             currentNotificationTag,
             currentNotificationID,
