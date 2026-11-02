@@ -39,6 +39,8 @@ object RandomAccessFileExifWriter {
     private data class TagSpec(val id: Int, val type: Int, val ifd: IfdGroup)
 
     // Map ExifInterface tag-name constants (ID, data-type, IFD group).
+    // Tag IDs are defined by the standard EXIF 2.32 / TIFF specifications
+    @Suppress("MagicNumber") // tag IDs are defined by the EXIF standard
     private val TAG_REGISTRY: Map<String, TagSpec> = mapOf(
 
         // IFD0 tags 3.
@@ -80,8 +82,25 @@ object RandomAccessFileExifWriter {
         ExifInterface.TAG_GPS_DATESTAMP to TagSpec(0x001D, TYPE_ASCII, IfdGroup.GPS),
     )
 
-    /** GPS IFD pointer tag – lives in IFD0, points to the GPS sub-IFD. */
+    /** Special IFD pointer tags. */
+    private const val TAG_ID_EXIF_IFD_POINTER = 0x8769
     private const val TAG_ID_GPS_IFD_POINTER = 0x8825
+
+    /** JPEG segment markers. */
+    private const val JPEG_MARKER_SOI = 0xFFD8 // Start of Image
+    private const val JPEG_MARKER_APP1 = 0xFFE1 // APP1 metadata segment
+    private const val JPEG_MARKER_SOS = 0xFFDA // Start of Scan (raw compressed image data starts)
+
+    /** EXIF / TIFF binary format specifications. */
+    private const val MIN_FILE_SIZE = 4L
+    private const val APP1_MIN_LENGTH = 8
+    private const val EXIF_HEADER_LENGTH = 6 // Length of "Exif\0\0" header
+    private const val EXIF_SIGNATURE_LENGTH = 4 // Length of "Exif" prefix
+    private const val IFD_ENTRY_SIZE_BYTES = 12 // Each TIFF IFD directory entry is 12 bytes
+    private const val IFD_VALUE_OR_OFFSET_SIZE_BYTES = 4 // Values > 4 bytes are stored as offsets
+    private const val SHORT_SIZE_BYTES = 2
+    private const val LONG_SIZE_BYTES = 4
+    private const val RATIONAL_SIZE_BYTES = 8 // 4-byte numerator + 4-byte denominator
 
     /**
      * Update a single EXIF tag in a JPEG file.
@@ -101,7 +120,7 @@ object RandomAccessFileExifWriter {
      * @param tags map of tag-name → value (null = remove)
      */
     fun writeTags(file: File, tags: Map<String, String?>) {
-        if (!file.exists() || file.length() < 4 || tags.isEmpty()) return
+        if (!file.exists() || file.length() < MIN_FILE_SIZE || tags.isEmpty()) return
 
         val updates = mutableMapOf<Int, String?>()
         for ((name, value) in tags) {
@@ -121,7 +140,7 @@ object RandomAccessFileExifWriter {
      * Strips all GPS location metadata from a JPEG file.
      */
     fun removeLocation(file: File) {
-        if (!file.exists() || file.length() < 4) return
+        if (!file.exists() || file.length() < MIN_FILE_SIZE) return
 
         val updates = TAG_REGISTRY
             .filter { it.value.ifd == IfdGroup.GPS }
@@ -137,7 +156,7 @@ object RandomAccessFileExifWriter {
      * constants (e.g. `ExifInterface.TAG_MAKE`).
      */
     fun redactTags(file: File, redactTags: Set<String>) {
-        if (!file.exists() || file.length() < 4 || redactTags.isEmpty()) return
+        if (!file.exists() || file.length() < MIN_FILE_SIZE || redactTags.isEmpty()) return
 
         val updates = mutableMapOf<Int, String?>()
         for (name in redactTags) {
@@ -177,19 +196,19 @@ object RandomAccessFileExifWriter {
         try {
             RandomAccessFile(file, "rw").use { raf ->
                 raf.seek(0)
-                if (raf.readUnsignedShort() != 0xFFD8) return
+                if (raf.readUnsignedShort() != JPEG_MARKER_SOI) return
 
-                while (raf.filePointer < raf.length() - 4) {
+                while (raf.filePointer < raf.length() - MIN_FILE_SIZE) {
                     val marker = raf.readUnsignedShort()
                     val len = raf.readUnsignedShort()
                     val next = raf.filePointer + len - 2
 
-                    if (marker == 0xFFE1 && len >= 8) {
+                    if (marker == JPEG_MARKER_APP1 && len >= APP1_MIN_LENGTH) {
                         val app1Start = raf.filePointer
-                        val hdr = ByteArray(6)
+                        val hdr = ByteArray(EXIF_HEADER_LENGTH)
                         raf.readFully(hdr)
-                        if (String(hdr, 0, 4) == "Exif") {
-                            val tiffBase = app1Start + 6
+                        if (String(hdr, 0, EXIF_SIGNATURE_LENGTH) == "Exif") {
+                            val tiffBase = app1Start + EXIF_HEADER_LENGTH
                             val bo = ByteArray(2)
                             raf.readFully(bo)
                             val order = if (bo[0] == 'I'.code.toByte())
@@ -205,7 +224,7 @@ object RandomAccessFileExifWriter {
                         } else {
                             raf.seek(next)
                         }
-                    } else if (marker == 0xFFDA) break
+                    } else if (marker == JPEG_MARKER_SOS) break
                     else raf.seek(next)
                 }
             }
@@ -241,7 +260,7 @@ object RandomAccessFileExifWriter {
             val afterEntry = raf.filePointer
 
             // Recurse sub-IFDs.
-            if ((tagId == 0x8769 || tagId == 0x8825) && valOrOff > 0) {
+            if ((tagId == TAG_ID_EXIF_IFD_POINTER || tagId == TAG_ID_GPS_IFD_POINTER) && valOrOff > 0) {
                 scanAndUpdateIfd(
                     raf, tiffBase, tiffBase + valOrOff, order, updates, isMainIfd = false,
                 )
@@ -254,18 +273,18 @@ object RandomAccessFileExifWriter {
             if (updates[tagId] == null) {
                 // Zero out the entire 12-byte IFD entry to remove the tag
                 raf.seek(entryPos)
-                raf.write(ByteArray(12))
+                raf.write(ByteArray(IFD_ENTRY_SIZE_BYTES))
                 raf.seek(afterEntry)
             } else {
                 val encoded = encodeValue(type, updates[tagId]!!, order) ?: return@repeat
                 val unitSize = typeUnitSize(type)
                 val existingBytes = unitSize * cnt
 
-                if (existingBytes <= 4) {
-                    if (encoded.size <= 4) {
+                if (existingBytes <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
+                    if (encoded.size <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
                         raf.seek(valFieldPos)
                         raf.write(encoded)
-                        repeat(4 - encoded.size) { raf.writeByte(0) }
+                        repeat(IFD_VALUE_OR_OFFSET_SIZE_BYTES - encoded.size) { raf.writeByte(0) }
                     }
                 } else {
                     if (encoded.size <= existingBytes) {
@@ -284,7 +303,7 @@ object RandomAccessFileExifWriter {
         }
 
         // Only main IFDs (e.g. IFD0 -> IFD1 thumbnail IFD) have a next-IFD offset pointer.
-        if (isMainIfd && raf.filePointer <= raf.length() - 4) {
+        if (isMainIfd && raf.filePointer <= raf.length() - LONG_SIZE_BYTES) {
             val nextIfdOff = readU32(raf, order)
             if (nextIfdOff > 0) {
                 scanAndUpdateIfd(
@@ -308,16 +327,16 @@ object RandomAccessFileExifWriter {
                     "$value\u0000".toByteArray(Charsets.US_ASCII)
 
                 TYPE_SHORT ->
-                    ByteBuffer.allocate(2).order(order)
+                    ByteBuffer.allocate(SHORT_SIZE_BYTES).order(order)
                         .putShort(value.toInt().toShort()).array()
 
                 TYPE_LONG ->
-                    ByteBuffer.allocate(4).order(order)
+                    ByteBuffer.allocate(LONG_SIZE_BYTES).order(order)
                         .putInt(value.toLong().toInt()).array()
 
                 TYPE_RATIONAL, TYPE_SRATIONAL -> {
                     val parts = value.split(",")
-                    val buf = ByteBuffer.allocate(parts.size * 8).order(order)
+                    val buf = ByteBuffer.allocate(parts.size * RATIONAL_SIZE_BYTES).order(order)
                     for (part in parts) {
                         val nd = part.trim().split("/")
                         if (nd.size != 2) return null
@@ -328,7 +347,7 @@ object RandomAccessFileExifWriter {
                 }
 
                 TYPE_SLONG ->
-                    ByteBuffer.allocate(4).order(order)
+                    ByteBuffer.allocate(LONG_SIZE_BYTES).order(order)
                         .putInt(value.toInt()).array()
 
                 TYPE_UNDEFINED ->
@@ -345,12 +364,13 @@ object RandomAccessFileExifWriter {
     /** Size in bytes of one unit of the given EXIF [type]. */
     private fun typeUnitSize(type: Int): Int = when (type) {
         TYPE_BYTE, TYPE_ASCII, TYPE_UNDEFINED -> 1
-        TYPE_SHORT -> 2
-        TYPE_LONG, TYPE_SLONG -> 4
-        TYPE_RATIONAL, TYPE_SRATIONAL -> 8
+        TYPE_SHORT -> SHORT_SIZE_BYTES
+        TYPE_LONG, TYPE_SLONG -> LONG_SIZE_BYTES
+        TYPE_RATIONAL, TYPE_SRATIONAL -> RATIONAL_SIZE_BYTES
         else -> 1
     }
 
+    @Suppress("MagicNumber") // Standard bit manipulation
     private fun readU16(raf: RandomAccessFile, order: ByteOrder): Int {
         val b1 = raf.readUnsignedByte()
         val b2 = raf.readUnsignedByte()
@@ -358,6 +378,7 @@ object RandomAccessFileExifWriter {
         else (b1 shl 8) or b2
     }
 
+    @Suppress("MagicNumber") // Standard bit manipulation
     private fun readU32(raf: RandomAccessFile, order: ByteOrder): Int {
         val b1 = raf.readUnsignedByte()
         val b2 = raf.readUnsignedByte()

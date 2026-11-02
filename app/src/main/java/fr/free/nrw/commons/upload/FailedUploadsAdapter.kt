@@ -109,7 +109,7 @@ class FailedUploadsAdapter(
             callback.deleteUpload(item)
         }
         holder.retryButton.setOnClickListener {
-            callback.restartUpload(position)
+            callback.restartUpload(item)
         }
         holder.itemImage.setImageRequest(imageRequest)
     }
@@ -163,10 +163,10 @@ class FailedUploadsAdapter(
         fun deleteUpload(contribution: Contribution?)
 
         /**
-         * Restarts the upload for the item at the specified index.
+         * Restarts the failed upload.
          *
-         * @param index The position of the item in the list.
+         * @param contribution to be restarted.
          */
-        fun restartUpload(index: Int)
+        fun restartUpload(contribution: Contribution?)
     }
 }

@@ -7,6 +7,7 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
+import fr.free.nrw.commons.di.MIGRATION_22_23
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,7 +57,7 @@ class MigrationTest {
                     context,
                     AppDatabase::class.java,
                     "commons_room.db",
-                ).addMigrations(MIGRATION_21_22)
+                ).addMigrations(MIGRATION_21_22, MIGRATION_22_23)
                 .allowMainThreadQueries()
                 .build()
 
