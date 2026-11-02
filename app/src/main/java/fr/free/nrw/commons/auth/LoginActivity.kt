@@ -437,7 +437,8 @@ class LoginActivity : BaseActivity() {
             it.loginPassword.removeTextChangedListener(textWatcher)
             it.loginTwoFactor.removeTextChangedListener(textWatcher)
         }
-        viewModel.cancel()
+        // Do not cancel ViewModel work here: onDestroy also runs on rotation, and the
+        // ViewModel must keep the in-flight login so LiveData can deliver the result.
         binding = null
         super.onDestroy()
     }
@@ -526,8 +527,11 @@ class LoginActivity : BaseActivity() {
                 lastLoginResult = null
             }
         }
-        if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
-            performLogin()
+        // ViewModel survives rotation and keeps the in-flight login; only restore the dialog UI.
+        if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG) ||
+            viewModel.loginState.value is LoginState.Loading
+        ) {
+            showLoggingProgressBar()
         }
         val errorMessage = savedInstanceState.getString(SAVE_ERROR_MESSAGE)
         if (sessionManager.isUserLoggedIn) {
