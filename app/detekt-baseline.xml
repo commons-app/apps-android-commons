@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" ?>
+<?xml version="1.0" ?>
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$!isBetaFlavour &amp;&amp; sessionManager!!.isUserLoggedIn &amp;&amp; sessionManager!!.currentAccount != null &amp;&amp; !isUserProfile</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
     <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION, ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ( (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS )</ID>
-    <ID>ComplexCondition:EditActivity.kt$EditActivity$drawable != null &amp;&amp; rawDetections.isNotEmpty() &amp;&amp; decodedBitmap.width &gt; 0 &amp;&amp; decodedBitmap.height &gt; 0</ID>
     <ID>ComplexCondition:ExploreMapFragment.kt$ExploreMapFragment$nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null || baseMarkerOverlayMap == null || !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)</ID>
     <ID>ComplexCondition:ImageCoordinates.kt$ImageCoordinates$latitude != null &amp;&amp; longitude != null &amp;&amp; latitudeRef != null &amp;&amp; longitudeRef != null</ID>
     <ID>ComplexCondition:ImageFileLoader.kt$ImageFileLoader$file != null &amp;&amp; file.exists() &amp;&amp; name != null &amp;&amp; path != null &amp;&amp; bucketName != null</ID>
@@ -19,7 +18,6 @@
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
     <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
-    <ID>CyclomaticComplexMethod:EditActivity.kt$EditActivity$private fun init()</ID>
     <ID>CyclomaticComplexMethod:ImageAdapter.kt$ImageAdapter$private fun selectOrRemoveImage( holder: ImageViewHolder, position: Int, )</ID>
     <ID>CyclomaticComplexMethod:ImageFileLoader.kt$ImageFileLoader$private fun getImages(listener: ImageLoaderListener)</ID>
     <ID>CyclomaticComplexMethod:ImageLoader.kt$ImageLoader$fun queryAndSetView( holder: ImageViewHolder, image: Image, ioDispatcher: CoroutineDispatcher, defaultDispatcher: CoroutineDispatcher, uploadedContributionsList: List&lt;Contribution&gt;, )</ID>
@@ -36,6 +34,31 @@
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
+    <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
+    <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
+    <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
+    <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
+    <ID>EmptyFunctionBlock:ContributionsListPresenter.kt$ContributionsListPresenter${ }</ID>
+    <ID>EmptyFunctionBlock:ContributionsRemoteDataSource.kt$ContributionsRemoteDataSource${ }</ID>
+    <ID>EmptyFunctionBlock:DefaultCallback.kt$DefaultCallback${}</ID>
+    <ID>EmptyFunctionBlock:DeleteHelper.kt$DeleteHelper.&lt;no name provided&gt;${}</ID>
+    <ID>EmptyFunctionBlock:DescriptionEditActivity.kt$DescriptionEditActivity${}</ID>
+    <ID>EmptyFunctionBlock:EditActivity.kt$EditActivity.&lt;no name provided&gt;${ }</ID>
+    <ID>EmptyFunctionBlock:FooterAdapter.kt$FooterAdapter${}</ID>
+    <ID>EmptyFunctionBlock:LatLngTest.kt$LatLngTest${ }</ID>
+    <ID>EmptyFunctionBlock:MediaDetailFragment.kt$MediaDetailFragment.&lt;no name provided&gt;${ }</ID>
+    <ID>EmptyFunctionBlock:MediaDetailPagerFragment.kt$MediaDetailPagerFragment${ }</ID>
+    <ID>EmptyFunctionBlock:MediaLicenseFragment.kt$MediaLicenseFragment${}</ID>
+    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment${ }</ID>
+    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment.&lt;no name provided&gt;${ }</ID>
+    <ID>EmptyFunctionBlock:PagedListMock.kt$MockLimitDataSource${ }</ID>
+    <ID>EmptyFunctionBlock:PendingUploadsPresenter.kt$PendingUploadsPresenter${ }</ID>
+    <ID>EmptyFunctionBlock:SettingsFragment.kt$SettingsFragment.&lt;no name provided&gt;${}</ID>
+    <ID>EmptyFunctionBlock:UploadProgressActivity.kt$UploadProgressActivity.&lt;no name provided&gt;${ }</ID>
+    <ID>EmptyFunctionBlock:ZoomableDraweeView.kt$ZoomableDraweeView.&lt;no name provided&gt;${}</ID>
+    <ID>EmptySecondaryConstructor:BaseMarker.kt$BaseMarker${ }</ID>
+    <ID>EmptySecondaryConstructor:ChunkInfo.kt$ChunkInfo${ }</ID>
+    <ID>EmptySecondaryConstructor:UploadResult.kt$UploadResult${ }</ID>
     <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
@@ -121,8 +144,6 @@
     <ID>LongParameterList:BlurOverlayView.kt$BlurOverlayView$( canvas: Canvas, ivMatrix: Matrix, imgX: Float, imgY: Float, radius: Float, isActive: Boolean, scratch: FloatArray, )</ID>
     <ID>LongParameterList:DataSourceClass.kt$DataSourceClass$( private val okHttpJsonApiClient: OkHttpJsonApiClient, private val sessionManager: SessionManager, private val userName: String?, private val duration: String?, private val category: String?, private val limit: Int, private val offset: Int, )</ID>
     <ID>LongParameterList:FileProcessor.kt$FileProcessor$( private val context: Context, private val contentResolver: ContentResolver, private val gpsCategoryModel: GpsCategoryModel, private val depictsModel: DepictModel, @param:Named("default_preferences") private val defaultKvStore: JsonKvStore, private val apiCall: CategoryApi, private val okHttpJsonApiClient: OkHttpJsonApiClient, )</ID>
-    <ID>LongParameterList:LoginClient.kt$LoginClient$( userName: String, password: String, retypedPassword: String?, twoFactorCode: String?, emailAuthCode: String?, loginToken: String?, userLanguage: String, cb: LoginCallback, )</ID>
-    <ID>LongParameterList:LoginClient.kt$LoginClient$( username: String, password: String, lastLoginResult: LoginResult?, twoFactorCode: String, userLanguage: String, loginCallback: LoginCallback, )</ID>
     <ID>LongParameterList:Media.kt$Media$( /** * @return pageId for the current media object * Wikibase Identifier associated with media files */ var pageId: String = UUID.randomUUID().toString(), var thumbUrl: String? = null, /** * Gets image URL * @return Image URL */ var imageUrl: String? = null, /** * Gets the name of the file. * @return file name as a string */ var filename: String? = null, /** * The fallback description of the file, used if no other description is provided. */ var fallbackDescription: String? = null, /** * Gets the upload date of the file. * Can be null. * @return upload date as a Date */ var dateUploaded: Date? = null, /** * The license name of the file. */ var license: String? = null, /** * The URL corresponding to the license. */ var licenseUrl: String? = null, /** * The name of the creator of the file. */ var author: String? = null, /** * The username of the uploader. */ var user: String? = null, /** * The full name of the file's creator, if different from username. */ var creatorName: String? = null, /** * Gets the categories the file falls under. * @return file categories as an ArrayList of Strings */ var categories: List&lt;String&gt;? = null, /** * Gets the coordinates of where the file was created. * @return file coordinates as a LatLng */ var coordinates: LatLng? = null, var captions: Map&lt;String, String&gt; = emptyMap(), var descriptions: Map&lt;String, String&gt; = emptyMap(), var depictionIds: List&lt;String&gt; = emptyList(), var creatorIds: List&lt;String&gt; = emptyList(), /** * This field was added to find non-hidden categories * Stores the mapping of category title to hidden attribute * Example: "Mountains" =&gt; false, "CC-BY-SA-2.0" =&gt; true */ var categoriesHiddenStatus: Map&lt;String, Boolean&gt; = emptyMap(), )</ID>
     <ID>LongParameterList:Media.kt$Media$( captions: Map&lt;String, String&gt;, categories: List&lt;String&gt;?, filename: String?, fallbackDescription: String?, author: String?, user: String?, dateUploaded: Date? = Date(), license: String? = null, licenseUrl: String? = null, imageUrl: String? = null, thumbUrl: String? = null, coordinates: LatLng? = null, descriptions: Map&lt;String, String&gt; = emptyMap(), depictionIds: List&lt;String&gt; = emptyList(), categoriesHiddenStatus: Map&lt;String, Boolean&gt; = emptyMap(), )</ID>
     <ID>LongParameterList:ModelFunctions.kt$( name: String = "label", description: String = "desc", imageUrl: String = "", instanceOfs: List&lt;String&gt; = listOf(), commonsCategories: List&lt;CategoryItem&gt; = listOf(), isSelected: Boolean = false, id: String = "entityId", )</ID>
@@ -210,9 +231,7 @@
     <ID>MagicNumber:DepictsFragment.kt$DepictsFragment$500</ID>
     <ID>MagicNumber:DescriptionEditActivity.kt$DescriptionEditActivity$12</ID>
     <ID>MagicNumber:DoubleTapGestureListener.kt$DoubleTapGestureListener$0.001f</ID>
-    <ID>MagicNumber:EditActivity.kt$EditActivity$100</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$180</ID>
-    <ID>MagicNumber:EditActivity.kt$EditActivity$2000</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$270</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$300</ID>
     <ID>MagicNumber:EditActivity.kt$EditActivity$360</ID>
@@ -625,7 +644,6 @@
     <ID>ReturnCount:CropOverlayView.kt$CropOverlayView$private fun findHandle( x: Float, y: Float, ): Handle?</ID>
     <ID>ReturnCount:CryptoUtils.kt$CryptoUtils$fun decrypt(encryptedBase64: String?): String?</ID>
     <ID>ReturnCount:DialogUtil.kt$DialogUtil$private fun showSafely( activity: Activity?, dialog: AlertDialog?, ): AlertDialog?</ID>
-    <ID>ReturnCount:EditActivity.kt$EditActivity$private fun convertViewCropToImageCrop( viewCropRect: RectF, actualFileWidth: Int, actualFileHeight: Int, ): CropCoordinates?</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$fun onBackPressed(): Boolean</ID>
     <ID>ReturnCount:ExploreFragment.kt$ExploreFragment$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ExploreMapFragment.kt$ExploreMapFragment$private fun getMediaFromImageURL(url: String?): Media?</ID>
@@ -687,7 +705,6 @@
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e2: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
@@ -759,7 +776,6 @@
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
-    <ID>TooManyFunctions:EditActivity.kt$EditActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ExploreListRootFragment.kt$ExploreListRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>

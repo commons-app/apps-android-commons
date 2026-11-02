@@ -333,17 +333,13 @@ class MediaDetailFragmentUnitTests {
         method.invoke(fragment)
     }
 
-   @Test
-@Throws(Exception::class)
-fun testGetDescriptionsWithComma() {
-    `when`(media.filename).thenReturn("")
-    val method: Method =
-        MediaDetailFragment::class.java.getDeclaredMethod(
-            "getDescriptions",
-            String::class.java,
-        )
-    method.isAccessible = true
-    val s =
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithComma() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|description={{en|1=Antique cash register in a cafe, Darjeeling}}\n" +
@@ -383,22 +379,17 @@ fun testGetDescriptionsWithComma() {
         val map =
             linkedMapOf(
                 "en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}",
-
             )
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
 
-   @Test
-@Throws(Exception::class)
-fun testGetDescriptionsWithInvalidLanguageCode() {
-    `when`(media.filename).thenReturn("")
-    val method: Method =
-        MediaDetailFragment::class.java.getDeclaredMethod(
-            "getDescriptions",
-            String::class.java,
-        )
-    method.isAccessible = true
-    val s =
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithInvalidLanguageCode() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
                 "|description={{en|1=[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n" +
@@ -410,12 +401,10 @@ fun testGetDescriptionsWithInvalidLanguageCode() {
                 "|other versions=\n" +
                 "|Other fields = {{Credit line |Author = © [[User:Colin]] | " +
                 "Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
-
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}\n"
-    val map = linkedMapOf(
-            "en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
+        val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
 

@@ -1,4 +1,3 @@
-
 package fr.free.nrw.commons.upload.mediaDetails
 
 import android.app.Activity
