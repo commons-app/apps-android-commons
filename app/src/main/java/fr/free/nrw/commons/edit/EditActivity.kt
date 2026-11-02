@@ -53,8 +53,7 @@ class EditActivity : BaseActivity() {
     // variable to store the initial exif orientation
     private var startOrientation = 0
 
-    private var isCropMode = false
-    private var isBlurMode = false
+    private var editMode = EditMode.NONE
     private var baseImageMatrix: Matrix? = null
     private var originalBitmapWidth = 0
     private var originalBitmapHeight = 0
@@ -119,9 +118,8 @@ class EditActivity : BaseActivity() {
             animateImageHeight()
         }
         binding.cropBtn.setOnClickListener {
-            if (!isCropMode) {
-                enterCropMode()
-                toggleApplyEditMode(true)
+            if (editMode != EditMode.CROP) {
+                setEditMode(EditMode.CROP)
             }
         }
         binding.btnSave.setOnClickListener {
@@ -129,26 +127,18 @@ class EditActivity : BaseActivity() {
         }
         binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.editApplyBtn.setOnClickListener {
-            if (isCropMode) {
-                applyCrop()
-            }
-            if (isBlurMode) {
-                applyBlur()
+            when (editMode) {
+                EditMode.CROP -> applyCrop()
+                EditMode.BLUR -> applyBlur()
+                EditMode.NONE -> Unit
             }
         }
         binding.editCancelBtn.setOnClickListener {
-            if (isCropMode) {
-                exitCropMode()
-            }
-            if (isBlurMode) {
-                exitBlurMode()
-            }
-            toggleApplyEditMode(false)
+            setEditMode(EditMode.NONE)
         }
         binding.blurBtn.setOnClickListener {
-            if (!isBlurMode) {
-                enterBlurMode()
-                toggleApplyEditMode(true)
+            if (editMode != EditMode.BLUR) {
+                setEditMode(EditMode.BLUR)
             }
         }
         binding.autoblurBtn.setOnClickListener {
@@ -188,9 +178,8 @@ class EditActivity : BaseActivity() {
                 delay(700.milliseconds)
                 progressDialog.dismiss()
 
-                if (!isBlurMode) {
-                    enterBlurMode()
-                    toggleApplyEditMode(true)
+                if (editMode != EditMode.BLUR) {
+                    setEditMode(EditMode.BLUR)
                 }
 
                 val drawable = binding.iv.drawable
@@ -234,11 +223,68 @@ class EditActivity : BaseActivity() {
     }
 
     /**
-     * Toggles between the main toolbar (Rotate/Crop/Save) and the edit toolbar (Apply/Cancel).
-     *
-     * @param activate true to show Apply/Cancel and hide main buttons, false to restore main buttons.
+     * Switches the editor to [mode]: leaves the current crop or blur mode, enters the new one
+     * and toggles between the main toolbar (Rotate/Crop/Save) and the edit toolbar (Apply/Cancel).
      */
-    private fun toggleApplyEditMode(activate: Boolean) {
+    private fun setEditMode(mode: EditMode) {
+        when (editMode) {
+            EditMode.CROP -> {
+                // Exit crop mode, hiding the crop overlay.
+                binding.cropOverlay.visibility = View.GONE
+            }
+            EditMode.BLUR -> {
+                // Exit blur mode, restoring the original layout and image view state.
+                binding.blurOverlay.visibility = View.GONE
+                binding.blurOverlay.clearRegions()
+                binding.blurOverlay.resetZoom()
+
+                // Restore overlay height back to match_parent.
+                binding.blurOverlay.layoutParams.height =
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                binding.blurOverlay.requestLayout()
+
+                // Restore image view matrix.
+                baseImageMatrix?.let {
+                    binding.iv.imageMatrix = it
+                }
+            }
+            EditMode.NONE -> Unit
+        }
+        editMode = mode
+        when (mode) {
+            EditMode.CROP -> {
+                // Enter crop mode, showing the crop overlay.
+                binding.cropOverlay.visibility = View.VISIBLE
+
+                binding.iv.post {
+                    updateCropOverlayBounds()
+                }
+            }
+            EditMode.BLUR -> {
+                // Enter blur mode, showing the blur overlay and isolating its controls.
+                // Hide crop overlay (if visible) to avoid conflict
+                binding.cropOverlay.visibility = View.GONE
+                binding.blurOverlay.visibility = View.VISIBLE
+
+                // Match the blur overlay size to the ImageView so they share identical bounds.
+                binding.blurOverlay.layoutParams.height = binding.iv.layoutParams.height
+                binding.blurOverlay.requestLayout()
+
+                // Save current matrix, BlurOverlayView will modify it directly for zoom/pan.
+                baseImageMatrix = Matrix(binding.iv.imageMatrix)
+                binding.iv.scaleType = ImageView.ScaleType.MATRIX
+
+                // Explicitly re-apply the matrix after switching scaleType to MATRIX,
+                // because ImageView resets to its user-set matrix.
+                binding.iv.imageMatrix = Matrix(baseImageMatrix!!)
+                binding.blurOverlay.setImageView(binding.iv)
+                binding.blurOverlay.setBaseMatrix(baseImageMatrix!!)
+            }
+            EditMode.NONE -> Unit
+        }
+
+        // Show Apply/Cancel and hide main buttons while a tool is open, or restore main buttons.
+        val activate = mode != EditMode.NONE
         val mainVisibility = if (activate) View.GONE else View.VISIBLE
         val editVisibility = if (activate) View.VISIBLE else View.GONE
         binding.rotateBtn.visibility = mainVisibility
@@ -248,42 +294,6 @@ class EditActivity : BaseActivity() {
         // Keep the save button in the view, so there is no layout shift.
         binding.btnSave.visibility = if (!activate) View.VISIBLE else View.INVISIBLE
         binding.editOptionsLayout.visibility = editVisibility
-    }
-
-    /**
-     * Enters blur mode, showing the blur overlay and isolating its controls.
-     */
-    private fun enterBlurMode() {
-        isBlurMode = true
-        // Hide crop overlay (if visible) to avoid conflict
-        binding.cropOverlay.visibility = View.GONE
-        binding.blurOverlay.visibility = View.VISIBLE
-
-        // Match the blur overlay size to the ImageView so they share identical bounds.
-        binding.blurOverlay.layoutParams.height = binding.iv.layoutParams.height
-        binding.blurOverlay.requestLayout()
-
-        // Save current matrix, BlurOverlayView will modify it directly for zoom/pan.
-        baseImageMatrix = Matrix(binding.iv.imageMatrix)
-        binding.iv.scaleType = ImageView.ScaleType.MATRIX
-
-        // Explicitly re-apply the matrix after switching scaleType to MATRIX,
-        // because ImageView resets to its user-set matrix.
-        binding.iv.imageMatrix = Matrix(baseImageMatrix!!)
-        binding.blurOverlay.setImageView(binding.iv)
-        binding.blurOverlay.setBaseMatrix(baseImageMatrix!!)
-    }
-
-    /**
-     * Enters crop mode, showing the crop overlay.
-     */
-    private fun enterCropMode() {
-        isCropMode = true
-        binding.cropOverlay.visibility = View.VISIBLE
-
-        binding.iv.post {
-            updateCropOverlayBounds()
-        }
     }
 
     /**
@@ -327,34 +337,6 @@ class EditActivity : BaseActivity() {
     }
 
     /**
-     * Exits crop mode, hiding the crop overlay.
-     */
-    private fun exitCropMode() {
-        isCropMode = false
-        binding.cropOverlay.visibility = View.GONE
-    }
-
-    /**
-     * Exits blur mode, restoring the original layout and image view state.
-     */
-    private fun exitBlurMode() {
-        isBlurMode = false
-        binding.blurOverlay.visibility = View.GONE
-        binding.blurOverlay.clearRegions()
-        binding.blurOverlay.resetZoom()
-
-        // Restore overlay height back to match_parent.
-        binding.blurOverlay.layoutParams.height =
-            android.view.ViewGroup.LayoutParams.MATCH_PARENT
-        binding.blurOverlay.requestLayout()
-
-        // Restore image view matrix.
-        baseImageMatrix?.let {
-            binding.iv.imageMatrix = it
-        }
-    }
-
-    /**
      * Applies the blur to the selected regions of the image using Jpegtran.
      */
     private fun applyBlur() {
@@ -381,9 +363,8 @@ class EditActivity : BaseActivity() {
             return
         }
         // Exit blur mode before updating the preview
-        // because exitBlurMode() restores the pre-blur matrix.
-        exitBlurMode()
-        toggleApplyEditMode(false)
+        // because exiting blur mode restores the pre-blur matrix.
+        setEditMode(EditMode.NONE)
 
         try {
             val blurredFile = vm.blurImage(regions, applicationContext.cacheDir)
@@ -445,8 +426,7 @@ class EditActivity : BaseActivity() {
                     Toast.LENGTH_LONG,
                 ).show()
         }
-        exitCropMode()
-        toggleApplyEditMode(false)
+        setEditMode(EditMode.NONE)
     }
 
     /**
@@ -632,7 +612,7 @@ class EditActivity : BaseActivity() {
 
                     // If crop mode is active, update the overlay bounds for new rotation
                     // Use post{} to wait for the layout pass triggered by requestLayout()
-                    if (isCropMode) {
+                    if (editMode == EditMode.CROP) {
                         binding.iv.post { updateCropOverlayBounds() }
                     }
                 }
@@ -709,4 +689,13 @@ class EditActivity : BaseActivity() {
 
         return scaleFactor
     }
+}
+
+/**
+ * Edit tool that is currently open in [EditActivity], if any.
+ */
+private enum class EditMode {
+    NONE,
+    CROP,
+    BLUR,
 }
