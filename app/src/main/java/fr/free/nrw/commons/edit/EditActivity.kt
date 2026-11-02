@@ -39,7 +39,6 @@ import timber.log.Timber
 import java.io.File
 import kotlin.math.ceil
 import kotlin.math.min
-import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.milliseconds
 
 /**
@@ -348,7 +347,21 @@ class EditActivity : BaseActivity() {
      * Updates crop overlay bounds based on current image display (works with any rotation).
      */
     private fun updateCropOverlayBounds() {
-        val drawable = binding.iv.drawable ?: return
+        val drawableRect = displayedImageRectInOverlay() ?: return
+        binding.cropOverlay.setImageBounds(
+            drawableRect.left,
+            drawableRect.top,
+            drawableRect.right,
+            drawableRect.bottom,
+        )
+    }
+
+    /**
+     * Returns the bounds of the displayed image in [CropOverlayView] coordinates
+     * (works with any rotation), or null if no image is loaded.
+     */
+    private fun displayedImageRectInOverlay(): RectF? {
+        val drawable = binding.iv.drawable ?: return null
         val drawableWidth = drawable.intrinsicWidth.toFloat()
         val drawableHeight = drawable.intrinsicHeight.toFloat()
 
@@ -365,13 +378,9 @@ class EditActivity : BaseActivity() {
 
         val offsetX = (ivLoc[0] - overlayLoc[0]).toFloat()
         val offsetY = (ivLoc[1] - overlayLoc[1]).toFloat()
+        drawableRect.offset(offsetX, offsetY)
 
-        binding.cropOverlay.setImageBounds(
-            offsetX + drawableRect.left,
-            offsetY + drawableRect.top,
-            offsetX + drawableRect.right,
-            offsetY + drawableRect.bottom,
-        )
+        return drawableRect
     }
 
     /**
@@ -465,7 +474,10 @@ class EditActivity : BaseActivity() {
             val actualWidth = properties!!.width
             val actualHeight = properties!!.height
             val cropRect = binding.cropOverlay.getCropRect()
-            val cropCoords = convertViewCropToImageCrop(cropRect, actualWidth, actualHeight)
+            val cropCoords =
+                displayedImageRectInOverlay()?.let { displayedRect ->
+                    CropCoordinates.fromViewCrop(cropRect, displayedRect, actualWidth, actualHeight)
+                }
 
             if (cropCoords != null) {
                 val croppedFile =
@@ -600,78 +612,6 @@ class EditActivity : BaseActivity() {
                     Toast.LENGTH_LONG,
                 ).show()
         }
-    }
-
-    /**
-     * Converts crop rectangle from view coordinates to rotated image coordinates.
-     * Uses percentage-based mapping with actual file dimensions.
-     *
-     * @param viewCropRect The crop rectangle in view coordinates
-     * @param actualFileWidth The actual width of the (possibly rotated) file
-     * @param actualFileHeight The actual height of the (possibly rotated) file
-     */
-    private fun convertViewCropToImageCrop(
-        viewCropRect: RectF,
-        actualFileWidth: Int,
-        actualFileHeight: Int,
-    ): CropCoordinates? {
-        val drawable = binding.iv.drawable ?: return null
-        val drawableWidth = drawable.intrinsicWidth.toFloat()
-        val drawableHeight = drawable.intrinsicHeight.toFloat()
-
-        val matrix = binding.iv.imageMatrix
-
-        // Get the displayed bounds (after matrix transformation)
-        val displayedRect = RectF(0f, 0f, drawableWidth, drawableHeight)
-        matrix.mapRect(displayedRect)
-
-        // Use getLocationInWindow to correctly compute offset between views
-        val ivLoc = IntArray(2)
-        val overlayLoc = IntArray(2)
-        binding.iv.getLocationInWindow(ivLoc)
-        binding.cropOverlay.getLocationInWindow(overlayLoc)
-
-        val offsetX = (ivLoc[0] - overlayLoc[0]).toFloat()
-        val offsetY = (ivLoc[1] - overlayLoc[1]).toFloat()
-        displayedRect.offset(offsetX, offsetY)
-
-        // Guard against zero-size displayed rect
-        if (displayedRect.width() <= 0 || displayedRect.height() <= 0) return null
-
-        // Calculate crop as percentage of displayed bounds
-        val leftPercent =
-            ((viewCropRect.left - displayedRect.left) / displayedRect.width())
-                .coerceIn(0f, 1f)
-        val topPercent =
-            ((viewCropRect.top - displayedRect.top) / displayedRect.height())
-                .coerceIn(0f, 1f)
-        val rightPercent =
-            ((viewCropRect.right - displayedRect.left) / displayedRect.width())
-                .coerceIn(0f, 1f)
-        val bottomPercent =
-            ((viewCropRect.bottom - displayedRect.top) / displayedRect.height())
-                .coerceIn(0f, 1f)
-
-        // Apply percentages to ACTUAL file dimensions
-        val cropLeft = (leftPercent * actualFileWidth).roundToInt().coerceIn(0, actualFileWidth - 1)
-        val cropTop = (topPercent * actualFileHeight).roundToInt().coerceIn(0, actualFileHeight - 1)
-        val cropRight = (rightPercent * actualFileWidth).roundToInt().coerceIn(1, actualFileWidth)
-        val cropBottom = (bottomPercent * actualFileHeight).roundToInt().coerceIn(1, actualFileHeight)
-
-        val width = (cropRight - cropLeft).coerceAtLeast(1)
-        val height = (cropBottom - cropTop).coerceAtLeast(1)
-
-        // Final validation: ensure crop doesn't exceed file bounds
-        val validLeft = cropLeft.coerceIn(0, actualFileWidth - width)
-        val validTop = cropTop.coerceIn(0, actualFileHeight - height)
-
-        Timber.d(
-            "%s%s",
-            "Crop conversion: file=${actualFileWidth}x$actualFileHeight, ",
-            "crop=($validLeft, $validTop, $width, $height)",
-        )
-
-        return CropCoordinates(validLeft, validTop, width, height)
     }
 
     var imageRotation = 0
@@ -827,13 +767,3 @@ class EditActivity : BaseActivity() {
         return scaleFactor
     }
 }
-
-/**
- * Data class to hold crop coordinates.
- */
-private data class CropCoordinates(
-    val left: Int,
-    val top: Int,
-    val width: Int,
-    val height: Int,
-)
