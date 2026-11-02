@@ -135,12 +135,13 @@ class ContributionController
 
                     override fun onLocationPermissionGranted() {
                         if (!locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
-                            showLocationOffDialog(
+                            locationPermissionsHelper!!.showLocationOffDialog(
                                 activity,
                                 R.string.in_app_camera_needs_location,
                                 R.string.in_app_camera_location_unavailable,
-                                resultLauncher,
-                            )
+                            ) {
+                                initiateCameraUpload(activity, resultLauncher)
+                            }
                         } else {
                             initiateCameraUpload(activity, resultLauncher)
                         }
@@ -158,6 +159,7 @@ class ContributionController
             )
         }
 
+<<<<<<< HEAD
         /**
          * Shows a dialog alerting the user about location services being off and asking them to turn it
          * on
@@ -194,6 +196,8 @@ class ContributionController
             )
         }
 
+=======
+>>>>>>> 86cd80c7b (Reuse LocationPermissionsHelper for the location-off dialog in ContributionController (#7160))
         fun handleShowRationaleFlowCameraLocation(
             activity: Activity,
             inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>?,
