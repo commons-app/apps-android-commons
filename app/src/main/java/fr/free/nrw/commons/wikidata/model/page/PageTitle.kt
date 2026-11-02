@@ -137,10 +137,10 @@ class PageTitle : Parcelable {
         } catch (e: IllegalArgumentException) {
             // Swallow IllegalArgumentException (can happen with malformed encoding), and just
             // return the original string.
-            Timber.d("URL decoding failed. String was: %s", url)
+            Timber.d(e, "URL decoding failed. String was: %s", url)
             return url
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
@@ -183,7 +183,7 @@ class PageTitle : Parcelable {
                 action,
             )
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
@@ -257,7 +257,7 @@ class PageTitle : Parcelable {
                 if ((fragment != null && fragment.length > 0)) ("#$fragment") else "",
             )
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
 
     private constructor(parcel: Parcel) {

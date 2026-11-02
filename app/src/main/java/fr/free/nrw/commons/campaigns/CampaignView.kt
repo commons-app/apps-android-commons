@@ -9,6 +9,7 @@ import androidx.core.net.toUri
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.showNearby
 import fr.free.nrw.commons.databinding.LayoutCampaginBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.CommonsDateUtil.getIso8601DateFormatShort

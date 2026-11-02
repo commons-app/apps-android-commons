@@ -33,6 +33,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.loadNearbyMapFromExplore
 import fr.free.nrw.commons.databinding.FragmentExploreMapBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.ExploreMapRootFragment

@@ -60,6 +60,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
+import fr.free.nrw.commons.contributions.loadExploreMapFromNearby
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -415,7 +416,7 @@ class NearbyParentFragment :
             try {
                 emptyCache()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -439,7 +440,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsGPX()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -449,7 +450,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsKML()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -518,6 +519,7 @@ class NearbyParentFragment :
         initThemePreferences()
         initViews()
         presenter?.setActionListeners(applicationKvStore)
+        presenter?.removeOldCachedPlaces(applicationKvStore)
         org.osmdroid.config.Configuration
             .getInstance()
             .load(requireContext(), PreferenceManager.getDefaultSharedPreferences(requireContext()))
@@ -1819,6 +1821,7 @@ class NearbyParentFragment :
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No application available to open the GPX/KML file")
             Toast
                 .makeText(
                     context,

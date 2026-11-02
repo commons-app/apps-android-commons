@@ -33,7 +33,9 @@ import timber.log.Timber
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.util.TimeZone
 import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.TimeUnit
 
 private const val SEARCH_RADIUS_METERS = 2000.0
 private const val SEARCH_RADIUS_THRESHOLD_FRACTION = 0.75
@@ -338,6 +340,27 @@ class NearbyParentFragmentPresenter(
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
         loadPlacesDataAsync(nearbyPlaceGroups, scope)
+    }
+
+    /**
+     * Removes the places cached more than 5 days ago, at most once a day, so that the cache
+     * does not keep growing with places that are not shown anymore.
+     *
+     * @param applicationKvStore Stores the day of the last removal.
+     */
+    fun removeOldCachedPlaces(applicationKvStore: JsonKvStore) {
+        val now = System.currentTimeMillis()
+        // Count days in the phone's time zone, so that a new day starts at local midnight
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        if (applicationKvStore.getLong(LAST_CACHED_PLACES_REMOVAL_DAY, -1L) == today) {
+            return
+        }
+        placesRepository
+            .removePlacesCachedBefore(now - CACHED_PLACE_MAX_AGE_MS)
+            .subscribe(
+                { applicationKvStore.putLong(LAST_CACHED_PLACES_REMOVAL_DAY, today) },
+                { throwable -> Timber.e(throwable) },
+            )
     }
 
     /**
@@ -881,6 +904,12 @@ class NearbyParentFragmentPresenter(
     companion object {
         private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
         private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
+
+        // Cached places older than this are removed from the cache once a day
+        private val CACHED_PLACE_MAX_AGE_MS = TimeUnit.DAYS.toMillis(5)
+
+        // Key of the day when old cached places were last removed
+        private const val LAST_CACHED_PLACES_REMOVAL_DAY = "last_cached_places_removal_day"
         private val DUMMY =
             Proxy.newProxyInstance(
                 NearbyParentFragmentContract.View::class.java.getClassLoader(),
