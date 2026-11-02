@@ -135,7 +135,7 @@ class RuntimeTypeAdapterFactory<T>(
 
     init {
         if (typeFieldName == null || baseType == null) {
-            throw NullPointerException()
+            throw NullPointerException("baseType and typeFieldName must not be null")
         }
         this.baseType = baseType
         this.typeFieldName = typeFieldName
@@ -154,7 +154,7 @@ class RuntimeTypeAdapterFactory<T>(
         label: String?,
     ): RuntimeTypeAdapterFactory<T> {
         if (type == null || label == null) {
-            throw NullPointerException()
+            throw NullPointerException("type and label must not be null")
         }
         require(!(subtypeToLabel.containsKey(type) || labelToSubtype.containsKey(label))) {
             "types and labels must be unique"

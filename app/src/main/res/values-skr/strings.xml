@@ -271,6 +271,7 @@
   <string name="null_url">خرابی! URL نئیں لبا</string>
   <string name="nominate_deletion">حذف کرݨ سانگے نامزد کرو</string>
   <string name="nominated_for_deletion">ایہ تصویر حذف کرݨ سانگے نامزد تھی چکی ہے۔</string>
+  <string name="contribution_deleted">مٹا ݙتے</string>
   <string name="deleted_file_view_page">فائل دا ورقہ ݙیکھو</string>
   <string name="nominated_see_more">تفصیل سانگے ویب صفحہ ݙیکھو</string>
   <string name="skip_login">چھوڑو</string>

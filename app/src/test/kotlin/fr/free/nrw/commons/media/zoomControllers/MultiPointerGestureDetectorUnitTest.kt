@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.zoomControllers.gestures.MultiPointerGestureDetector
+import fr.free.nrw.commons.media.zoomControllers.gestures.PointerSlots
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -80,12 +81,12 @@ class MultiPointerGestureDetectorUnitTest {
         whenever(event.pointerCount).thenReturn(3)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_UP)
         val method: Method =
-            MultiPointerGestureDetector::class.java.getDeclaredMethod(
+            PointerSlots::class.java.getDeclaredMethod(
                 "updatePointersOnTap",
                 MotionEvent::class.java,
             )
         method.isAccessible = true
-        method.invoke(detector, event)
+        method.invoke(detector.pointerSlots, event)
         verify(event, times(2)).actionIndex
     }
 
@@ -113,37 +114,37 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.getNewPointerCount(), 0)
+        Assert.assertEquals(detector.pointerSlots.newPointerCount, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.getPointerCount(), 0)
+        Assert.assertEquals(detector.pointerSlots.pointerCount, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartX() {
-        Assert.assertEquals(detector.getStartX()[0], 0.0f)
+        Assert.assertEquals(detector.pointerSlots.getStartX()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartY() {
-        Assert.assertEquals(detector.getStartY()[0], 0.0f)
+        Assert.assertEquals(detector.pointerSlots.getStartY()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentX() {
-        Assert.assertEquals(detector.getCurrentX()[0], 0.0f)
+        Assert.assertEquals(detector.pointerSlots.getCurrentX()[0], 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentY() {
-        Assert.assertEquals(detector.getCurrentY()[0], 0.0f)
+        Assert.assertEquals(detector.pointerSlots.getCurrentY()[0], 0.0f)
     }
 
     @Test
@@ -155,7 +156,7 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun `testOnTouchEventCase ACTION_MOVE`() {
-        Whitebox.setInternalState(detector, "mPointerCount", 1)
+        Whitebox.setInternalState(detector.pointerSlots, "pointerCount", 1)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_MOVE)
         Assert.assertEquals(detector.onTouchEvent(event), true)
     }
@@ -164,7 +165,7 @@ class MultiPointerGestureDetectorUnitTest {
     @Throws(Exception::class)
     fun `testOnTouchEventCase ACTION_UP`() {
         whenever(event.pointerCount).thenReturn(3)
-        Whitebox.setInternalState(detector, "mPointerCount", 1)
+        Whitebox.setInternalState(detector.pointerSlots, "pointerCount", 1)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_UP)
         whenever(event.pointerCount).thenReturn(-2)
         Assert.assertEquals(detector.onTouchEvent(event), true)

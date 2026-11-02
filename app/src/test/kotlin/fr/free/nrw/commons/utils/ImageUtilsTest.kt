@@ -30,8 +30,6 @@ import java.lang.reflect.Method
 class ImageUtilsTest {
     private lateinit var context: Context
 
-    @Mock
-    private lateinit var progressDialogWallpaper: ProgressDialog
 
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient

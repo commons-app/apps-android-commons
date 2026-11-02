@@ -153,5 +153,5 @@ private fun getMd5(input: String): String =
         }
         hashtext
     } catch (e: NoSuchAlgorithmException) {
-        throw RuntimeException(e)
+        throw IllegalStateException(e)
     }
