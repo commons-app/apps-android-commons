@@ -216,8 +216,18 @@ class LoginClient(
                                 LoginRequest(
                                     username = request.username,
                                     password = request.password,
-                                    twoFactorCode = if (lastLoginResult is OAuthResult) request.twoFactorCode else null,
-                                    emailAuthCode = if (lastLoginResult is EmailAuthResult) request.twoFactorCode else null,
+                                    twoFactorCode =
+                                        if (lastLoginResult is OAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
+                                    emailAuthCode =
+                                        if (lastLoginResult is EmailAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
                                     loginToken = it,
                                     userLanguage = request.userLanguage,
                                 ),
