@@ -39,7 +39,7 @@ open class ZoomableDraweeView :
     private val viewBounds = RectF()
 
     private var hugeImageController: DraweeController? = null
-    private var zoomableController: ZoomableController = createZoomableController()
+    private var zoomableController: DefaultZoomableController = createZoomableController()
     private var tapGestureDetector: GestureDetector? = null
     private var allowTouchInterceptionWhileZoomed = true
     private var isDialToneEnabled = false
@@ -131,7 +131,7 @@ open class ZoomableDraweeView :
         outBounds.set(0f, 0f, width.toFloat(), height.toFloat())
     }
 
-    fun setZoomableController(zoomableController: ZoomableController) {
+    fun setZoomableController(zoomableController: DefaultZoomableController) {
         Preconditions.checkNotNull(zoomableController)
         this.zoomableController.setListener(null)
         this.zoomableController = zoomableController
@@ -320,7 +320,7 @@ open class ZoomableDraweeView :
 
     protected fun getLogTag(): Class<*> = TAG
 
-    protected fun createZoomableController(): ZoomableController = AnimatedZoomableController.newInstance()
+    protected fun createZoomableController(): DefaultZoomableController = AnimatedZoomableController.newInstance()
 
     /**
      * Interface to listen for scale change events.

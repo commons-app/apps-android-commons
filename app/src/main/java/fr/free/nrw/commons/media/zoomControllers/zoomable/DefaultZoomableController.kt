@@ -428,17 +428,17 @@ open class DefaultZoomableController(
         }
     }
 
-    override fun computeHorizontalScrollRange(): Int = mTransformedImageBounds.width().toInt()
+    fun computeHorizontalScrollRange(): Int = mTransformedImageBounds.width().toInt()
 
-    override fun computeHorizontalScrollOffset(): Int = (mViewBounds.left - mTransformedImageBounds.left).toInt()
+    fun computeHorizontalScrollOffset(): Int = (mViewBounds.left - mTransformedImageBounds.left).toInt()
 
-    override fun computeHorizontalScrollExtent(): Int = mViewBounds.width().toInt()
+    fun computeHorizontalScrollExtent(): Int = mViewBounds.width().toInt()
 
-    override fun computeVerticalScrollRange(): Int = mTransformedImageBounds.height().toInt()
+    fun computeVerticalScrollRange(): Int = mTransformedImageBounds.height().toInt()
 
-    override fun computeVerticalScrollOffset(): Int = (mViewBounds.top - mTransformedImageBounds.top).toInt()
+    fun computeVerticalScrollOffset(): Int = (mViewBounds.top - mTransformedImageBounds.top).toInt()
 
-    override fun computeVerticalScrollExtent(): Int = mViewBounds.height().toInt()
+    fun computeVerticalScrollExtent(): Int = mViewBounds.height().toInt()
 
     fun getListener(): ZoomableController.Listener? = mListener
 }

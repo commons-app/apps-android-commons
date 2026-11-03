@@ -73,19 +73,6 @@ interface ZoomableController {
      */
     fun wasTransformCorrected(): Boolean
 
-    /** See [androidx.core.view.ScrollingView]. */
-    fun computeHorizontalScrollRange(): Int
-
-    fun computeHorizontalScrollOffset(): Int
-
-    fun computeHorizontalScrollExtent(): Int
-
-    fun computeVerticalScrollRange(): Int
-
-    fun computeVerticalScrollOffset(): Int
-
-    fun computeVerticalScrollExtent(): Int
-
     /**
      * Gets the current transform.
      *

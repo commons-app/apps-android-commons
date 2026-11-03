@@ -33,14 +33,14 @@ class AnimatedZoomableController private constructor() :
             FLog.v(logTag, "setTransformAnimated: duration $durationMs ms")
             stopAnimation()
             require(durationMs > 0) { "Duration must be greater than zero" }
-            check(!getIsAnimating()) { "Animation is already in progress" }
-            setAnimating(true)
+            check(!animation.getIsAnimating()) { "Animation is already in progress" }
+            animation.setAnimating(true)
             valueAnimator.duration = durationMs
-            getTransform().getValues(getStartValues())
-            newTransform.getValues(getStopValues())
+            getTransform().getValues(animation.getStartValues())
+            animation.getNewTransform().getValues(animation.getStopValues())
             valueAnimator.addUpdateListener { animator ->
-                calculateInterpolation(getWorkingTransform(), animator.animatedValue as Float)
-                super.setTransform(getWorkingTransform())
+                animation.calculateInterpolation(animation.getWorkingTransform(), animator.animatedValue as Float)
+                super.setTransform(animation.getWorkingTransform())
             }
             valueAnimator.addListener(
                 object : AnimatorListenerAdapter() {
@@ -56,7 +56,7 @@ class AnimatedZoomableController private constructor() :
 
                     private fun onAnimationStopped() {
                         onAnimationComplete?.run()
-                        setAnimating(false)
+                        animation.setAnimating(false)
                         getDetector().restartGesture()
                     }
                 },
@@ -66,7 +66,7 @@ class AnimatedZoomableController private constructor() :
 
         @SuppressLint("NewApi")
         override fun stopAnimation() {
-            if (!getIsAnimating()) return
+            if (!animation.getIsAnimating()) return
             FLog.v(logTag, "stopAnimation")
             valueAnimator.cancel()
             valueAnimator.removeAllUpdateListeners()
