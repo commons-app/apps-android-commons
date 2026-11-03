@@ -252,6 +252,8 @@ class LoginActivity : BaseActivity() {
     internal fun signUp() = startActivity(Intent(this, SignupActivity::class.java))
 
     private fun showLoggingProgressBar() {
+        // Dismiss any existing dialog first so rotation cannot leave a second spinner up.
+        progressDialog?.dismiss()
         progressDialog =
             ProgressDialog(this).apply {
                 isIndeterminate = true
@@ -527,12 +529,9 @@ class LoginActivity : BaseActivity() {
                 lastLoginResult = null
             }
         }
-        // ViewModel survives rotation and keeps the in-flight login; only restore the dialog UI.
-        if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG) ||
-            viewModel.loginState.value is LoginState.Loading
-        ) {
-            showLoggingProgressBar()
-        }
+        // Progress UI is driven by LoginViewModel.loginState (observed in onStart). Do not
+        // re-show the dialog from SAVE_PROGRESS_DIALOG here: that flag can be stale after the
+        // request already failed during rotation, which left the spinner up forever.
         val errorMessage = savedInstanceState.getString(SAVE_ERROR_MESSAGE)
         if (sessionManager.isUserLoggedIn) {
             showMessage(R.string.login_success, R.color.primaryDarkColor)
