@@ -63,5 +63,4 @@ class NearbyResultItem(
     fun getMonument(): ResultTuple? = monument
 
     fun getPointInTime(): ResultTuple = pointInTime ?: ResultTuple()
-
 }

@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.CommonsApplication
@@ -52,9 +53,10 @@ import timber.log.Timber
 import java.net.URL
 import java.util.concurrent.Callable
 import javax.inject.Inject
-import androidx.core.net.toUri
 
-class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeListener,
+class MediaDetailPagerFragment :
+    CommonsDaggerSupportFragment(),
+    OnPageChangeListener,
     MediaDetailFragment.Callback {
     @JvmField
     @Inject
@@ -90,7 +92,7 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false)
         binding!!.mediaDetailsPager.addOnPageChangeListener(this)
@@ -146,7 +148,8 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
             (activity as MainActivity).showTabs()
         }
 
-        // Temporarily disable it. Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567 
+        // Temporarily disable it.
+        // Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567
         // binding = null
     }
 
@@ -175,13 +178,20 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
         when (item.itemId) {
             R.id.menu_bookmark_current_image -> {
                 val bookmarkExists = bookmarkDao!!.updateBookmark(bookmark!!)
-                val snackbar = if (bookmarkExists) Snackbar.make(
-                    requireView(),
-                    R.string.add_bookmark,
-                    Snackbar.LENGTH_LONG
-                ) else Snackbar.make(
-                    requireView(), R.string.remove_bookmark, Snackbar.LENGTH_LONG
-                )
+                val snackbar =
+                    if (bookmarkExists) {
+                        Snackbar.make(
+                            requireView(),
+                            R.string.add_bookmark,
+                            Snackbar.LENGTH_LONG,
+                        )
+                    } else {
+                        Snackbar.make(
+                            requireView(),
+                            R.string.remove_bookmark,
+                            Snackbar.LENGTH_LONG,
+                        )
+                    }
                 snackbar.show()
                 updateBookmarkState(item)
                 return true
@@ -191,10 +201,12 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
                 val uri = m!!.pageTitle.canonicalUri
                 copy("shareLink", uri, requireContext())
                 Timber.d("Copied share link to clipboard: %s", uri)
-                Toast.makeText(
-                    requireContext(), getString(R.string.menu_link_copied),
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        requireContext(),
+                        getString(R.string.menu_link_copied),
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 return true
             }
 
@@ -202,13 +214,14 @@ class MediaDetailPagerFragment : CommonsDaggerSupportFragment(), OnPageChangeLis
                 val shareIntent = Intent(Intent.ACTION_SEND)
                 shareIntent.setType("text/plain")
                 shareIntent.putExtra(
-                    Intent.EXTRA_TEXT, """${m!!.displayTitle} 
-${m.pageTitle.canonicalUri}"""
+                    Intent.EXTRA_TEXT,
+                    """${m!!.displayTitle} 
+${m.pageTitle.canonicalUri}""",
                 )
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."))
 
-                //Add media detail to backstack when the share button is clicked
-                //So that when the share is cancelled or completed the media detail page is on top
+                // Add media detail to backstack when the share button is clicked
+                // So that when the share is cancelled or completed the media detail page is on top
                 // of back stack fixing:https://github.com/commons-app/apps-android-commons/issues/2296
                 val supportFragmentManager = requireActivity().supportFragmentManager
                 if (supportFragmentManager.backStackEntryCount < 2) {
@@ -252,8 +265,9 @@ ${m.pageTitle.canonicalUri}"""
             R.id.menu_view_user_page -> {
                 if (m?.user != null) {
                     startYourself(
-                        requireActivity(), m.user!!,
-                        sessionManager!!.userName != m.user
+                        requireActivity(),
+                        m.user!!,
+                        sessionManager!!.userName != m.user,
                     )
                 }
                 return true
@@ -264,8 +278,8 @@ ${m.pageTitle.canonicalUri}"""
                 mediaDetailFragment?.onImageBackgroundChanged(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.white
-                    )
+                        R.color.white,
+                    ),
                 )
                 return true
             }
@@ -274,8 +288,8 @@ ${m.pageTitle.canonicalUri}"""
                 mediaDetailFragment?.onImageBackgroundChanged(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.white
-                    )
+                        R.color.white,
+                    ),
                 )
                 return true
             }
@@ -284,8 +298,8 @@ ${m.pageTitle.canonicalUri}"""
                 mediaDetailFragment?.onImageBackgroundChanged(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.black
-                    )
+                        R.color.black,
+                    ),
                 )
                 return true
             }
@@ -299,22 +313,27 @@ ${m.pageTitle.canonicalUri}"""
             return
         }
         val builder = AlertDialog.Builder(requireActivity())
-        val values = requireContext().resources
-            .getStringArray(R.array.report_violation_options)
+        val values =
+            requireContext()
+                .resources
+                .getStringArray(R.array.report_violation_options)
         builder.setTitle(R.string.report_violation)
         builder.setItems(
-            R.array.report_violation_options
+            R.array.report_violation_options,
         ) { dialog: DialogInterface?, which: Int ->
             sendReportEmail(media, values[which])
         }
         builder.setNegativeButton(
-            R.string.cancel
+            R.string.cancel,
         ) { dialog: DialogInterface?, which: Int -> }
         builder.setCancelable(false)
         builder.show()
     }
 
-    private fun sendReportEmail(media: Media, type: String) {
+    private fun sendReportEmail(
+        media: Media,
+        type: String,
+    ) {
         val technicalInfo = getTechInfo(media, type)
 
         val feedbackIntent = Intent(Intent.ACTION_SENDTO)
@@ -322,45 +341,55 @@ ${m.pageTitle.canonicalUri}"""
         feedbackIntent.setData(Uri.parse("mailto:"))
         feedbackIntent.putExtra(
             Intent.EXTRA_EMAIL,
-            arrayOf(CommonsApplication.REPORT_EMAIL)
+            arrayOf(CommonsApplication.REPORT_EMAIL),
         )
         feedbackIntent.putExtra(
             Intent.EXTRA_SUBJECT,
-            CommonsApplication.REPORT_EMAIL_SUBJECT
+            CommonsApplication.REPORT_EMAIL_SUBJECT,
         )
         feedbackIntent.putExtra(Intent.EXTRA_TEXT, technicalInfo)
         try {
             startActivity(feedbackIntent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No email client available to send feedback")
             Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getTechInfo(media: Media, type: String): String {
+    private fun getTechInfo(
+        media: Media,
+        type: String,
+    ): String {
         val builder = StringBuilder()
 
-        builder.append("Report type: ")
+        builder
+            .append("Report type: ")
             .append(type)
             .append("\n\n")
 
-        builder.append("Image that you want to report: ")
+        builder
+            .append("Image that you want to report: ")
             .append(media.imageUrl)
             .append("\n\n")
 
-        builder.append("User that you want to report: ")
+        builder
+            .append("User that you want to report: ")
             .append(media.user)
             .append("\n\n")
 
         if (sessionManager!!.userName != null) {
-            builder.append("Your username: ")
+            builder
+                .append("Your username: ")
                 .append(sessionManager!!.userName)
                 .append("\n\n")
         }
 
-        builder.append("Violation reason: ")
+        builder
+            .append("Violation reason: ")
             .append("\n")
 
-        builder.append("----------------------------------------------")
+        builder
+            .append("----------------------------------------------")
             .append("\n")
             .append("(please write reason here)")
             .append("\n")
@@ -396,33 +425,44 @@ ${m.pageTitle.canonicalUri}"""
             return
         }
         setAvatarFromImageUrl(
-            requireActivity(), media.imageUrl!!,
+            requireActivity(),
+            media.imageUrl!!,
             sessionManager!!.currentAccount!!.name,
-            okHttpJsonApiClient!!, Companion.compositeDisposable
+            okHttpJsonApiClient!!,
+            Companion.compositeDisposable,
         )
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(
+        menu: Menu,
+        inflater: MenuInflater,
+    ) {
         if (!editable) { // Disable menu options for editable views
             menu.clear() // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu)
             if (binding!!.mediaDetailsPager != null) {
                 val provider = mediaDetailProvider ?: return
-                val position = if (isFromFeaturedRootFragment) {
-                    position
-                } else {
-                    binding!!.mediaDetailsPager.currentItem
-                }
+                val position =
+                    if (isFromFeaturedRootFragment) {
+                        position
+                    } else {
+                        binding!!.mediaDetailsPager.currentItem
+                    }
 
                 val m = provider.getMediaAtPosition(position)
                 if (m != null) {
-                    // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
+                    // Enable default set of actions, then re-enable different set of actions only if it is a failed
+                    // contrib
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_copy_link).setEnabled(true).setVisible(true)
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true)
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(true)
+                    menu
+                        .findItem(R.id.menu_download_current_image)
+                        .setEnabled(true)
                         .setVisible(true)
-                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(true)
+                    menu
+                        .findItem(R.id.menu_bookmark_current_image)
+                        .setEnabled(true)
                         .setVisible(true)
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true)
                     if (m.user != null) {
@@ -433,7 +473,7 @@ ${m.pageTitle.canonicalUri}"""
                         val mediaUrl = URL(m.imageUrl)
                         handleBackgroundColorMenuItems({
                             BitmapFactory.decodeStream(
-                                mediaUrl.openConnection().getInputStream()
+                                mediaUrl.openConnection().getInputStream(),
                             )
                         }, menu)
                     } catch (e: Exception) {
@@ -441,27 +481,40 @@ ${m.pageTitle.canonicalUri}"""
                     }
 
                     // Initialize bookmark object
-                    bookmark = Bookmark(
-                        m.filename,
-                        m.getAuthorOrUser(),
-                        BookmarkPicturesContentProvider.uriForName(m.filename!!)
-                    )
+                    bookmark =
+                        Bookmark(
+                            m.filename,
+                            m.getAuthorOrUser(),
+                            BookmarkPicturesContentProvider.uriForName(m.filename!!),
+                        )
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image))
                     val contributionState = provider.getContributionStateAt(position)
                     if (contributionState != null) {
                         when (contributionState) {
                             Contribution.STATE_FAILED, Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED -> {
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_browser_current_image)
+                                    .setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_copy_link).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_copy_link)
+                                    .setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_share_current_image)
+                                    .setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_download_current_image)
+                                    .setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_bookmark_current_image)
+                                    .setEnabled(false)
                                     .setVisible(false)
-                                menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                                menu
+                                    .findItem(R.id.menu_set_as_wallpaper)
+                                    .setEnabled(false)
                                     .setVisible(false)
                             }
 
@@ -469,17 +522,29 @@ ${m.pageTitle.canonicalUri}"""
                         }
                     }
                 } else {
-                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_browser_current_image)
+                        .setEnabled(false)
                         .setVisible(false)
-                    menu.findItem(R.id.menu_copy_link).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_copy_link)
+                        .setEnabled(false)
                         .setVisible(false)
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_share_current_image)
+                        .setEnabled(false)
                         .setVisible(false)
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_download_current_image)
+                        .setEnabled(false)
                         .setVisible(false)
-                    menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_bookmark_current_image)
+                        .setEnabled(false)
                         .setVisible(false)
-                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
+                    menu
+                        .findItem(R.id.menu_set_as_wallpaper)
+                        .setEnabled(false)
                         .setVisible(false)
                 }
 
@@ -496,19 +561,29 @@ ${m.pageTitle.canonicalUri}"""
      * @param getBitmap
      * @param menu
      */
-    private fun handleBackgroundColorMenuItems(getBitmap: Callable<Bitmap>, menu: Menu) {
-        Observable.fromCallable(
-            getBitmap
-        ).subscribeOn(Schedulers.newThread())
+    private fun handleBackgroundColorMenuItems(
+        getBitmap: Callable<Bitmap>,
+        menu: Menu,
+    ) {
+        Observable
+            .fromCallable(
+                getBitmap,
+            ).subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(Consumer { image: Bitmap ->
-                if (image.hasAlpha()) {
-                    menu.findItem(R.id.menu_view_set_white_background).setVisible(true)
-                        .setEnabled(true)
-                    menu.findItem(R.id.menu_view_set_black_background).setVisible(true)
-                        .setEnabled(true)
-                }
-            })
+            .subscribe(
+                Consumer { image: Bitmap ->
+                    if (image.hasAlpha()) {
+                        menu
+                            .findItem(R.id.menu_view_set_white_background)
+                            .setVisible(true)
+                            .setEnabled(true)
+                        menu
+                            .findItem(R.id.menu_view_set_black_background)
+                            .setVisible(true)
+                            .setEnabled(true)
+                    }
+                },
+            )
     }
 
     private fun updateBookmarkState(item: MenuItem) {
@@ -523,14 +598,19 @@ ${m.pageTitle.canonicalUri}"""
             }
         }
 
-        item.setIcon(if (isBookmarked) {
-            R.drawable.menu_ic_round_star_filled_24px
-        } else {
-            R.drawable.menu_ic_round_star_border_24px
-        })
+        item.setIcon(
+            if (isBookmarked) {
+                R.drawable.menu_ic_round_star_filled_24px
+            } else {
+                R.drawable.menu_ic_round_star_border_24px
+            },
+        )
     }
 
-    fun showImage(i: Int, isWikipediaButtonDisplayed: Boolean) {
+    fun showImage(
+        i: Int,
+        isWikipediaButtonDisplayed: Boolean,
+    ) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed
         setViewPagerCurrentItem(i)
     }
@@ -545,22 +625,23 @@ ${m.pageTitle.canonicalUri}"""
      */
     private fun setViewPagerCurrentItem(position: Int) {
         val handler = Handler(Looper.getMainLooper())
-        val runnable: Runnable = object : Runnable {
-            override fun run() {
-                // Show the ProgressBar while waiting for the item to load
-                imageProgressBar!!.visibility = View.VISIBLE
-                // Check if the adapter has enough items loaded
-                if (adapter!!.count > position) {
-                    // Set the current item in the ViewPager
-                    binding!!.mediaDetailsPager.setCurrentItem(position, false)
-                    // Hide the ProgressBar once the item is loaded
-                    imageProgressBar!!.visibility = View.GONE
-                } else {
-                    // If the item is not ready yet, post the Runnable again
-                    handler.post(this)
+        val runnable: Runnable =
+            object : Runnable {
+                override fun run() {
+                    // Show the ProgressBar while waiting for the item to load
+                    imageProgressBar!!.visibility = View.VISIBLE
+                    // Check if the adapter has enough items loaded
+                    if (adapter!!.count > position) {
+                        // Set the current item in the ViewPager
+                        binding!!.mediaDetailsPager.setCurrentItem(position, false)
+                        // Hide the ProgressBar once the item is loaded
+                        imageProgressBar!!.visibility = View.GONE
+                    } else {
+                        // If the item is not ready yet, post the Runnable again
+                        handler.post(this)
+                    }
                 }
             }
-        }
         // Start the Runnable
         handler.post(runnable)
     }
@@ -574,7 +655,11 @@ ${m.pageTitle.canonicalUri}"""
         }
     }
 
-    override fun onPageScrolled(i: Int, v: Float, i2: Int) {
+    override fun onPageScrolled(
+        i: Int,
+        v: Float,
+        i2: Int,
+    ) {
         if (activity == null) {
             Timber.d("Returning as activity is destroyed!")
             return
@@ -618,7 +703,10 @@ ${m.pageTitle.canonicalUri}"""
          * @return
          */
         @JvmStatic
-        fun newInstance(editable: Boolean, isFeaturedImage: Boolean): MediaDetailPagerFragment {
+        fun newInstance(
+            editable: Boolean,
+            isFeaturedImage: Boolean,
+        ): MediaDetailPagerFragment {
             val mediaDetailPagerFragment = MediaDetailPagerFragment()
             val args = Bundle()
             args.putBoolean("is_editable", editable)
