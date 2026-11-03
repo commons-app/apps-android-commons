@@ -11,6 +11,8 @@ indent_style = space
 indent_size = 4
 max_line_length = 120
 ktlint_code_style = ktlint_official
+# Composable functions are named in PascalCase
+ktlint_function_naming_ignore_when_annotated_with = Composable
 
 [*.xml]
 indent_style = space

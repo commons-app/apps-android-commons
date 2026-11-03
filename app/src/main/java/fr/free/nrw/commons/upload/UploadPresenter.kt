@@ -23,202 +23,219 @@ import javax.inject.Singleton
  * The MVP pattern presenter of Upload GUI
  */
 @Singleton
-class UploadPresenter @Inject internal constructor(
-    private val repository: UploadRepository,
-    @param:Named("default_preferences") private val defaultKvStore: JsonKvStore
-) : UploadContract.UserActionListener {
-    private var view = DUMMY
-
+class UploadPresenter
     @Inject
-    lateinit var presenter: UploadMediaDetailsContract.UserActionListener
+    internal constructor(
+        private val repository: UploadRepository,
+        @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
+    ) : UploadContract.UserActionListener {
+        private var view = DUMMY
 
-    private val compositeDisposable = CompositeDisposable()
+        @Inject
+        lateinit var presenter: UploadMediaDetailsContract.UserActionListener
 
-    private var basicKvStoreFactory: ((String) -> BasicKvStore)? = null
-    override fun cleanup() {
-        compositeDisposable.clear()
-        repository.cleanup()
-        view.showProgress(false)
-    }
-    /**
-     * Called by the submit button in [UploadActivity]
-     */
-    @SuppressLint("CheckResult")
-    override fun handleSubmit() {
-        var hasLocationProvidedForNewUploads = false
-        for (item in repository.getUploads()) {
-            if (item.gpsCoords?.imageCoordsExists == true) {
-                hasLocationProvidedForNewUploads = true
-            }
+        private val compositeDisposable = CompositeDisposable()
+
+        private var basicKvStoreFactory: ((String) -> BasicKvStore)? = null
+
+        override fun cleanup() {
+            compositeDisposable.clear()
+            repository.cleanup()
+            view.showProgress(false)
         }
-        val hasManyConsecutiveUploadsWithoutLocation = defaultKvStore.getInt(
-            COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0
-        ) >=
-                CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD
 
-        if (hasManyConsecutiveUploadsWithoutLocation && !hasLocationProvidedForNewUploads) {
-            defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0)
-            view.showAlertDialog(
-                R.string.location_message
-            ) {
-                defaultKvStore.putInt(
-                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
-                    0
-                )
-                processContributionsForSubmission()
-            }
-        } else {
-            processContributionsForSubmission()
-        }
-    }
-
-    private fun processContributionsForSubmission() {
-        if (view.isLoggedIn()) {
-            view.showProgress(true)
-            repository.buildContributions().observeOn(Schedulers.io())
-                ?.subscribe(object : Observer<Contribution> {
-                    override fun onSubscribe(d: Disposable) {
-                        view.showProgress(false)
-                        if (defaultKvStore.getBoolean(IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
-                            view.showMessage(R.string.uploading_queued)
-                        } else {
-                            view.showMessage(R.string.uploading_started)
-                        }
-                        compositeDisposable.add(d)
-                    }
-
-                    override fun onNext(contribution: Contribution) {
-                        if (contribution.decimalCoords == null) {
-                            val recentCount = defaultKvStore.getInt(
-                                COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0
-                            )
-                            defaultKvStore.putInt(
-                                COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, recentCount + 1
-                            )
-                        } else {
-                            defaultKvStore.putInt(
-                                COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0
-                            )
-                        }
-                        repository.prepareMedia(contribution)
-                        contribution.state = Contribution.STATE_QUEUED
-                        repository.saveContribution(contribution)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        view.showMessage(R.string.upload_failed)
-                        repository.cleanup()
-                        view.returnToMainActivity()
-                        compositeDisposable.clear()
-                        Timber.e(e, "failed to upload")
-
-                        //is submission error, not need to go to the uploadActivity
-                        //not start the uploading progress
-                    }
-
-                    override fun onComplete() {
-                        view.makeUploadRequest()
-                        repository.cleanup()
-                        view.returnToMainActivity()
-                        compositeDisposable.clear()
-
-                        //after finish the uploadActivity, if successful,
-                        //directly go to the upload progress activity
-                        view.goToUploadProgressActivity()
-                    }
-                })
-        } else {
-            view.askUserToLogIn()
-        }
-    }
-
-    override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {
-        basicKvStoreFactory = factory
-    }
-
-    /**
-     * Returns the current BasicKvStore factory or throws if not initialized.
-     *
-     * @throws IllegalStateException if basicKvStoreFactory has not been initialized.
-     */
-    private fun getBasicKvStoreFactory(): (String) -> BasicKvStore {
-        return basicKvStoreFactory ?: throw IllegalStateException("basicKvStoreFactory has not been initialized")
-    }
-
-    /**
-     * Ensures that the BasicKvStore factory has been initialized before use.
-     *
-     * @throws IllegalStateException if the factory is null.
-     */
-    private fun requireFactoryInitialized() {
-        val field = this::class.java.getDeclaredField("basicKvStoreFactory")
-        field.isAccessible = true
-        val value = field.get(this)
-        if (value == null) {
-            throw IllegalStateException("basicKvStoreFactory must be initialized before use. Please call setupBasicKvStoreFactory() before using presenter methods that require it.")
-        }
-    }
-    
-    /**
-     * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
-     *
-     * @param uploadItemIndex Index of next image, whose quality is to be checked
-     */
-    override fun checkImageQuality(uploadItemIndex: Int) {
-        requireFactoryInitialized()
-        repository.getUploadItem(uploadItemIndex)?.let {
-            presenter.setupBasicKvStoreFactory(getBasicKvStoreFactory())
-            presenter.checkImageQuality(it, uploadItemIndex)
-        }
-    }
-
-    override fun deletePictureAtIndex(index: Int) {
-        val uploadableFiles = view.getUploadableFiles()
-        uploadableFiles?.let {
-            view.setImageCancelled(true)
-            repository.deletePicture(uploadableFiles[index].getFilePath())
-            if (uploadableFiles.size == 1) {
-                view.showMessage(R.string.upload_cancelled)
-                view.finish()
-                return
-            }
-
-            presenter.updateImageQualitiesJSON(uploadableFiles.size, index)
-            view.onUploadMediaDeleted(index)
-            if (index != uploadableFiles.size && index != 0) {
-                // if the deleted image was not the last item to be uploaded, check quality of next
-                repository.getUploadItem(index)?.let {
-                    presenter.checkImageQuality(it, index)
+        /**
+         * Called by the submit button in [UploadActivity]
+         */
+        @SuppressLint("CheckResult")
+        override fun handleSubmit() {
+            var hasLocationProvidedForNewUploads = false
+            for (item in repository.getUploads()) {
+                if (item.gpsCoords?.imageCoordsExists == true) {
+                    hasLocationProvidedForNewUploads = true
                 }
             }
+            val hasManyConsecutiveUploadsWithoutLocation =
+                defaultKvStore.getInt(
+                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                    0,
+                ) >=
+                    CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD
 
-            if (uploadableFiles.size < 2) {
-                view.showHideTopCard(false)
+            if (hasManyConsecutiveUploadsWithoutLocation && !hasLocationProvidedForNewUploads) {
+                defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0)
+                view.showAlertDialog(
+                    R.string.location_message,
+                ) {
+                    defaultKvStore.putInt(
+                        COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                        0,
+                    )
+                    processContributionsForSubmission()
+                }
+            } else {
+                processContributionsForSubmission()
             }
+        }
 
-            //In case lets update the number of uploadable media
-            view.updateTopCardTitle()
+        private fun processContributionsForSubmission() {
+            if (view.isLoggedIn()) {
+                view.showProgress(true)
+                repository
+                    .buildContributions()
+                    .observeOn(Schedulers.io())
+                    ?.subscribe(
+                        object : Observer<Contribution> {
+                            override fun onSubscribe(d: Disposable) {
+                                view.showProgress(false)
+                                if (defaultKvStore.getBoolean(IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
+                                    view.showMessage(R.string.uploading_queued)
+                                } else {
+                                    view.showMessage(R.string.uploading_started)
+                                }
+                                compositeDisposable.add(d)
+                            }
+
+                            override fun onNext(contribution: Contribution) {
+                                if (contribution.decimalCoords == null) {
+                                    val recentCount =
+                                        defaultKvStore.getInt(
+                                            COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                                            0,
+                                        )
+                                    defaultKvStore.putInt(
+                                        COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                                        recentCount + 1,
+                                    )
+                                } else {
+                                    defaultKvStore.putInt(
+                                        COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                                        0,
+                                    )
+                                }
+                                repository.prepareMedia(contribution)
+                                contribution.state = Contribution.STATE_QUEUED
+                                repository.saveContribution(contribution)
+                            }
+
+                            override fun onError(e: Throwable) {
+                                view.showMessage(R.string.upload_failed)
+                                repository.cleanup()
+                                view.returnToMainActivity()
+                                compositeDisposable.clear()
+                                Timber.e(e, "failed to upload")
+
+                                // is submission error, not need to go to the uploadActivity
+                                // not start the uploading progress
+                            }
+
+                            override fun onComplete() {
+                                view.makeUploadRequest()
+                                repository.cleanup()
+                                view.returnToMainActivity()
+                                compositeDisposable.clear()
+
+                                // after finish the uploadActivity, if successful,
+                                // directly go to the upload progress activity
+                                view.goToUploadProgressActivity()
+                            }
+                        },
+                    )
+            } else {
+                view.askUserToLogIn()
+            }
+        }
+
+        override fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore) {
+            basicKvStoreFactory = factory
+        }
+
+        /**
+         * Returns the current BasicKvStore factory or throws if not initialized.
+         *
+         * @throws IllegalStateException if basicKvStoreFactory has not been initialized.
+         */
+        private fun getBasicKvStoreFactory(): (
+            String,
+        ) -> BasicKvStore =
+            basicKvStoreFactory ?: error("basicKvStoreFactory has not been initialized")
+
+        /**
+         * Ensures that the BasicKvStore factory has been initialized before use.
+         *
+         * @throws IllegalStateException if the factory is null.
+         */
+        private fun requireFactoryInitialized() {
+            val field = this::class.java.getDeclaredField("basicKvStoreFactory")
+            field.isAccessible = true
+            val value = field.get(this)
+            check(value != null) {
+                "basicKvStoreFactory must be initialized before use. " +
+                    "Please call setupBasicKvStoreFactory() before using presenter methods that require it."
+            }
+        }
+
+        /**
+         * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
+         *
+         * @param uploadItemIndex Index of next image, whose quality is to be checked
+         */
+        override fun checkImageQuality(uploadItemIndex: Int) {
+            requireFactoryInitialized()
+            repository.getUploadItem(uploadItemIndex)?.let {
+                presenter.setupBasicKvStoreFactory(getBasicKvStoreFactory())
+                presenter.checkImageQuality(it, uploadItemIndex)
+            }
+        }
+
+        override fun deletePictureAtIndex(index: Int) {
+            val uploadableFiles = view.getUploadableFiles()
+            uploadableFiles?.let {
+                view.setImageCancelled(true)
+                repository.deletePicture(uploadableFiles[index].getFilePath())
+                if (uploadableFiles.size == 1) {
+                    view.showMessage(R.string.upload_cancelled)
+                    view.finish()
+                    return
+                }
+
+                presenter.updateImageQualitiesJSON(uploadableFiles.size, index)
+                view.onUploadMediaDeleted(index)
+                if (index != uploadableFiles.size && index != 0) {
+                    // if the deleted image was not the last item to be uploaded, check quality of next
+                    repository.getUploadItem(index)?.let {
+                        presenter.checkImageQuality(it, index)
+                    }
+                }
+
+                if (uploadableFiles.size < 2) {
+                    view.showHideTopCard(false)
+                }
+
+                // In case lets update the number of uploadable media
+                view.updateTopCardTitle()
+            }
+        }
+
+        override fun onAttachView(view: UploadContract.View) {
+            this.view = view
+        }
+
+        override fun onDetachView() {
+            view = DUMMY
+            compositeDisposable.clear()
+        }
+
+        companion object {
+            private val DUMMY =
+                Proxy.newProxyInstance(
+                    UploadContract.View::class.java.classLoader,
+                    arrayOf<Class<*>>(UploadContract.View::class.java),
+                ) { _: Any?, _: Method?, _: Array<Any?>? -> null } as UploadContract.View
+
+            const val COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES: String =
+                "number_of_consecutive_uploads_without_coordinates"
+
+            const val CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD: Int = 10
         }
     }
-
-    override fun onAttachView(view: UploadContract.View) {
-        this.view = view
-    }
-
-    override fun onDetachView() {
-        view = DUMMY
-        compositeDisposable.clear()
-    }
-
-    companion object {
-        private val DUMMY = Proxy.newProxyInstance(
-            UploadContract.View::class.java.classLoader,
-            arrayOf<Class<*>>(UploadContract.View::class.java)
-        ) { _: Any?, _: Method?, _: Array<Any?>? -> null } as UploadContract.View
-
-        const val COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES: String =
-            "number_of_consecutive_uploads_without_coordinates"
-
-        const val CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD: Int = 10
-    }
-}
