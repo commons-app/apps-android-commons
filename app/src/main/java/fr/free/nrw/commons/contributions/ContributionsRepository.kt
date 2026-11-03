@@ -14,11 +14,6 @@ class ContributionsRepository
         private val localDataSource: ContributionsLocalDataSource,
     ) {
         /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getString(key: String): String? = localDataSource.getString(key)
-
-        /**
          * Deletes a failed upload from DB
          *
          * @param contribution
@@ -50,8 +45,6 @@ class ContributionsRepository
          */
         fun getContributionWithFileName(fileName: String): Contribution =
             localDataSource.getContributionWithFileName(fileName)
-
-        fun fetchContributions(): DataSource.Factory<Int, Contribution> = localDataSource.getContributions()
 
         /**
          * Fetches contributions with specific states.
@@ -94,9 +87,6 @@ class ContributionsRepository
         ) {
             localDataSource.set(key, value)
         }
-
-        fun updateContribution(contribution: Contribution): Completable =
-            localDataSource.updateContribution(contribution)
 
         /**
          * Updates the state of contributions with specific states.

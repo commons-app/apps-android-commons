@@ -17,16 +17,6 @@ class ContributionsLocalDataSource
         private val contributionDao: ContributionDao,
     ) {
         /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getString(key: String): String? = defaultKVStore.getString(key)
-
-        /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getLong(key: String): Long = defaultKVStore.getLong(key)
-
-        /**
          * Get contribution object from cursor
          *
          * @param uri
@@ -71,8 +61,6 @@ class ContributionsLocalDataSource
          */
         fun deleteContributionsWithStates(states: List<Int>): Completable =
             contributionDao.deleteContributionsWithStates(states)
-
-        fun getContributions(): DataSource.Factory<Int, Contribution> = contributionDao.fetchContributions()
 
         /**
          * Fetches contributions with specific states.
@@ -126,8 +114,6 @@ class ContributionsLocalDataSource
         ) {
             defaultKVStore.putLong(key, value)
         }
-
-        fun updateContribution(contribution: Contribution): Completable = contributionDao.update(contribution)
 
         fun updateContributionsWithStates(
             states: List<Int>,
