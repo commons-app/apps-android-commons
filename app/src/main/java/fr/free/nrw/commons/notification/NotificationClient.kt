@@ -9,6 +9,7 @@ import fr.free.nrw.commons.utils.DateUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -35,7 +36,10 @@ class NotificationClient
                     it.toCommonsNotification()
                 }.toList()
 
-        fun markNotificationAsRead(notificationId: String?, wiki: String): Observable<Boolean> =
+        fun markNotificationAsRead(
+            notificationId: String?,
+            wiki: String,
+        ): Observable<Boolean> =
             try {
                 service
                     .markRead(
@@ -44,16 +48,14 @@ class NotificationClient
                         unreadList = "",
                         wikis = wiki,
                     ).map(MwQueryResponse::success)
+            } catch (throwable: InvalidLoginTokenException) {
+                Observable.error(throwable)
             } catch (throwable: Throwable) {
-                if (throwable is InvalidLoginTokenException) {
-                    Observable.error(throwable)
-                } else {
-                    Observable.just(false)
-                }
+                Timber.e(throwable, "Failed to mark the notification as read")
+                Observable.just(false)
             }
 
-        private fun WikimediaNotification.toCommonsNotification() :
-            Notification {
+        private fun WikimediaNotification.toCommonsNotification(): Notification {
             val notificationText = contents?.compactHeader ?: ""
             val notificationType =
                 if (notificationText.contains("Sent you an email", ignoreCase = true)) {
@@ -62,14 +64,14 @@ class NotificationClient
                     NotificationType.UNKNOWN
                 }
 
-                return Notification(
-                    notificationType = notificationType,
-                    notificationText = notificationText,
-                    date = DateUtil.getMonthOnlyDateString(getTimestamp()),
-                    link = contents?.links?.getPrimary()?.url ?: "",
-                    iconUrl = "",
-                    notificationId = id().toString(),
-                    wiki = wiki().ifEmpty { "commonswiki" },
-                )
+            return Notification(
+                notificationType = notificationType,
+                notificationText = notificationText,
+                date = DateUtil.getMonthOnlyDateString(getTimestamp()),
+                link = contents?.links?.getPrimary()?.url ?: "",
+                iconUrl = "",
+                notificationId = id().toString(),
+                wiki = wiki().ifEmpty { "commonswiki" },
+            )
         }
     }

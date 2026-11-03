@@ -11,8 +11,8 @@ import android.webkit.MimeTypeMap
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
-import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.filepicker.Constants.Companion.DEFAULT_FOLDER_NAME
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
@@ -24,21 +24,17 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-
 /**
  * PickedFiles.
  * Process the upload items.
  */
 object PickedFiles : Constants {
-
     /**
      * Get Folder Name
      * @return default application folder name.
      */
     @JvmStatic
-    private fun getFolderName(context: Context): String {
-        return FilePicker.configuration(context).getFolderName()
-    }
+    private fun getFolderName(context: Context): String = FilePicker.configuration(context).getFolderName()
 
     /**
      * tempImageDirectory
@@ -57,7 +53,10 @@ object PickedFiles : Constants {
      */
     @JvmStatic
     @Throws(IOException::class)
-    private fun writeToFile(inputStream: InputStream, file: File) {
+    private fun writeToFile(
+        inputStream: InputStream,
+        file: File,
+    ) {
         inputStream.use { input ->
             FileOutputStream(file).use { output ->
                 val buffer = ByteArray(1024)
@@ -75,7 +74,10 @@ object PickedFiles : Constants {
      */
     @Throws(IOException::class)
     @JvmStatic
-    private fun copyFile(src: File, dst: File) {
+    private fun copyFile(
+        src: File,
+        dst: File,
+    ) {
         FileInputStream(src).use { inputStream ->
             writeToFile(inputStream, dst)
         }
@@ -86,23 +88,28 @@ object PickedFiles : Constants {
      * Copies all the uploadable files to the temp image folder on background thread.
      */
     @JvmStatic
-    fun copyFilesInSeparateThread(context: Context, filesToCopy: List<UploadableFile>) {
+    fun copyFilesInSeparateThread(
+        context: Context,
+        filesToCopy: List<UploadableFile>,
+    ) {
         Thread {
             val copiedFiles = mutableListOf<File>()
             var index = 1
             filesToCopy.forEach { uploadableFile ->
                 val fileToCopy = uploadableFile.file
-                val dstDir = File(
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                    getFolderName(context)
-                )
+                val dstDir =
+                    File(
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                        getFolderName(context),
+                    )
                 if (!dstDir.exists()) dstDir.mkdirs()
 
                 val filenameSplit = fileToCopy.name.split(".")
                 val extension = ".${filenameSplit.last()}"
                 val filename = "IMG_${SimpleDateFormat(
                     "yyyyMMdd_HHmmss",
-                    Locale.getDefault()).format(Date())}_$index$extension"
+                    Locale.getDefault(),
+                ).format(Date())}_$index$extension"
                 val dstFile = File(dstDir, filename)
 
                 try {
@@ -123,16 +130,17 @@ object PickedFiles : Constants {
      * Converts a single uploadableFile to list of uploadableFile.
      */
     @JvmStatic
-    fun singleFileList(file: UploadableFile): List<UploadableFile> {
-        return listOf(file)
-    }
+    fun singleFileList(file: UploadableFile): List<UploadableFile> = listOf(file)
 
     /**
      * ScanCopiedImages
      * Scans copied images metadata using media scanner.
      */
     @JvmStatic
-    fun scanCopiedImages(context: Context, copiedImages: List<File>) {
+    fun scanCopiedImages(
+        context: Context,
+        copiedImages: List<File>,
+    ) {
         val paths = copiedImages.map { it.toString() }.toTypedArray()
         MediaScannerConnection.scanFile(context, paths, null) { path, uri ->
             Timber.d("Scanned $path:")
@@ -146,14 +154,19 @@ object PickedFiles : Constants {
      */
     @Throws(IOException::class, SecurityException::class)
     @JvmStatic
-    fun pickedExistingPicture(context: Context, photoUri: Uri): UploadableFile {
+    fun pickedExistingPicture(
+        context: Context,
+        photoUri: Uri,
+    ): UploadableFile {
         val directory = tempImageDirectory(context)
         val ext = getMimeType(context, photoUri)
         val isHeic = ext.equals("heic", true) || ext.equals("heif", true)
         val photoFile = File(directory, "${UUID.randomUUID()}.${if (isHeic) "jpg" else ext}")
 
         if (isHeic) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) throw IOException("HEIC not supported on this Android version")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+                throw IOException("HEIC not supported on this Android version")
+            }
             val srcExif = context.contentResolver.openInputStream(photoUri)?.use { ExifInterface(it) }
             HeicApi28.transcodeToJpeg(context.contentResolver, photoUri, photoFile)
             srcExif?.let { copyExif(it, photoFile) }
@@ -172,13 +185,20 @@ object PickedFiles : Constants {
         return UploadableFile(photoUri, photoFile)
     }
 
-    private fun copyExif(src: ExifInterface, dstFile: File) {
+    private fun copyExif(
+        src: ExifInterface,
+        dstFile: File,
+    ) {
         RandomAccessFileExifWriter.copyExif(src, dstFile)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     private object HeicApi28 {
-        fun transcodeToJpeg(cr: ContentResolver, uri: Uri, outFile: File) {
+        fun transcodeToJpeg(
+            cr: ContentResolver,
+            uri: Uri,
+            outFile: File,
+        ) {
             val src = android.graphics.ImageDecoder.createSource(cr, uri)
             val bmp = android.graphics.ImageDecoder.decodeBitmap(src)
             FileOutputStream(outFile).use { bmp.compress(Bitmap.CompressFormat.JPEG, 95, it) }
@@ -199,13 +219,17 @@ object PickedFiles : Constants {
      * To find out the extension of the required object in a given uri
      */
     @JvmStatic
-    private fun getMimeType(context: Context, uri: Uri): String {
+    private fun getMimeType(
+        context: Context,
+        uri: Uri,
+    ): String {
         return if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
-            context.contentResolver.getType(uri)
+            context.contentResolver
+                .getType(uri)
                 ?.let { MimeTypeMapWrapper.getExtensionFromMimeType(it) }
         } else {
             MimeTypeMap.getFileExtensionFromUrl(
-                Uri.fromFile(uri.path?.let { File(it) }).toString()
+                Uri.fromFile(uri.path?.let { File(it) }).toString(),
             )
         } ?: "jpg" // Default to jpg if unable to determine type
     }
@@ -216,7 +240,10 @@ object PickedFiles : Constants {
      * @return uri of requested file.
      */
     @JvmStatic
-    fun getUriToFile(context: Context, file: File): Uri {
+    fun getUriToFile(
+        context: Context,
+        file: File,
+    ): Uri {
         val packageName = context.applicationContext.packageName
         val authority = "$packageName.provider"
         return FileProvider.getUriForFile(context, authority, file)

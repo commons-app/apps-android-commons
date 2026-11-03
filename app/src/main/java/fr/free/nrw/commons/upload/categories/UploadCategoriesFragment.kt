@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,9 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
+class UploadCategoriesFragment :
+    UploadBaseFragment(),
+    CategoriesContract.View {
     @JvmField
     @Inject
     var presenter: CategoriesContract.UserActionListener? = null
@@ -66,28 +67,33 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
 
     private var binding: UploadCategoriesFragmentBinding? = null
 
-    private val onBackPressedCallback = object : OnBackPressedCallback(false) {
-        override fun handleOnBackPressed() {
-            if (media != null) {
-                binding?.etSearch?.clearFocus()
-                presenter?.clearPreviousSelection()
-                val mediaDetailFragment = checkNotNull(parentFragment as MediaDetailFragment?)
-                mediaDetailFragment.onResume()
-                goBackToPreviousScreen()
+    private val onBackPressedCallback =
+        object : OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                if (media != null) {
+                    binding?.etSearch?.clearFocus()
+                    presenter?.clearPreviousSelection()
+                    val mediaDetailFragment = checkNotNull(parentFragment as MediaDetailFragment?)
+                    mediaDetailFragment.onResume()
+                    goBackToPreviousScreen()
+                }
             }
         }
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false)
         binding!!.llContainerButtons.handleKeyboardInsets()
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments
         if (bundle != null) {
@@ -97,10 +103,10 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         init()
         presenter!!.getCategories().observe(
-            viewLifecycleOwner
+            viewLifecycleOwner,
         ) { categories: List<CategoryItem>? ->
             this.setCategories(
-                categories
+                categories,
             )
         }
     }
@@ -112,10 +118,13 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
         if (media == null) {
             if (callback != null) {
-                binding?.tvTitle?.text = getString(R.string.step_count,
-                    callback?.getIndexInViewFlipper(this)?.plus(1) ?: 1,
-                    callback?.totalNumberOfSteps ?: 1,
-                    getString(R.string.categories_activity_title))
+                binding?.tvTitle?.text =
+                    getString(
+                        R.string.step_count,
+                        callback?.getIndexInViewFlipper(this)?.plus(1) ?: 1,
+                        callback?.totalNumberOfSteps ?: 1,
+                        getString(R.string.categories_activity_title),
+                    )
             }
         } else {
             binding!!.tvTitle.setText(R.string.edit_categories)
@@ -125,15 +134,16 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         }
 
         setTvSubTitle()
-        binding?.let { it.tooltip.setOnClickListener {
-            showAlertDialog(
-                requireActivity(),
-                getString(R.string.categories_activity_title),
-                getString(R.string.categories_tooltip),
-                getString(R.string.ok),
-                null
-            )
-        }
+        binding?.let {
+            it.tooltip.setOnClickListener {
+                showAlertDialog(
+                    requireActivity(),
+                    getString(R.string.categories_activity_title),
+                    getString(R.string.categories_tooltip),
+                    getString(R.string.ok),
+                    null,
+                )
+            }
         }
         if (media == null) {
             presenter?.onAttachView(this)
@@ -152,17 +162,19 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         if (binding == null) {
             return
         }
-        subscribe = RxTextView.textChanges(binding!!.etSearch)
-            .doOnEach { v: Notification<CharSequence?>? ->
-                binding?.tilContainerSearch?.error =
-                    null
-            }
-            .takeUntil(RxView.detaches(binding!!.etSearch))
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { filter: CharSequence -> searchForCategory(filter.toString()) },
-                { t: Throwable? -> Timber.e(t) })
+        subscribe =
+            RxTextView
+                .textChanges(binding!!.etSearch)
+                .doOnEach { v: Notification<CharSequence?>? ->
+                    binding?.tilContainerSearch?.error =
+                        null
+                }.takeUntil(RxView.detaches(binding!!.etSearch))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { filter: CharSequence -> searchForCategory(filter.toString()) },
+                    { t: Throwable? -> Timber.e(t) },
+                )
     }
 
     /**
@@ -184,10 +196,12 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     }
 
     private fun initRecyclerView() {
-    if (adapter == null) { adapter = UploadCategoryAdapter({ categoryItem: CategoryItem? ->
-            presenter?.onCategoryItemClicked(categoryItem!!)
-            Unit
-        }, nearbyPlaceCategory)
+        if (adapter == null) {
+            adapter =
+                UploadCategoryAdapter({ categoryItem: CategoryItem? ->
+                    presenter?.onCategoryItemClicked(categoryItem!!)
+                    Unit
+                }, nearbyPlaceCategory)
         }
         binding?.rvCategories?.apply {
             layoutManager = LinearLayoutManager(context)
@@ -218,7 +232,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
             .Builder(requireContext())
             .setMessage(getString(R.string.error_loading_categories) + "\n" + message)
             .setCancelable(false)
-            .setNegativeButton(R.string.ok){_,_ -> }
+            .setNegativeButton(R.string.ok) { _, _ -> }
             .show()
     }
 
@@ -240,8 +254,8 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
                 it.rvCategories.smoothScrollToPosition(0)
                 it.rvCategories.post {
                     it.rvCategories.smoothScrollToPosition(
-                    0
-                )
+                        0,
+                    )
                 }
             }
         } ?: Timber.e("Binding is null in setCategories")
@@ -260,13 +274,15 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
                 getString(R.string.continue_message),
                 getString(R.string.cancel),
                 { this.goToNextScreen() },
-                null
+                null,
             )
         } else {
-            Toast.makeText(
-                requireContext(), getString(R.string.no_categories_selected),
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    requireContext(),
+                    getString(R.string.no_categories_selected),
+                    Toast.LENGTH_SHORT,
+                ).show()
             presenter!!.clearPreviousSelection()
             goBackToPreviousScreen()
         }
@@ -275,16 +291,12 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
     /**
      * Gets existing categories from media
      */
-    override fun getExistingCategories(): List<String>? {
-        return media?.categories
-    }
+    override fun getExistingCategories(): List<String>? = media?.categories
 
     /**
      * Returns required context
      */
-    override fun getFragmentContext(): Context {
-        return requireContext()
-    }
+    override fun getFragmentContext(): Context = requireContext()
 
     /**
      * Returns to previous fragment
@@ -297,11 +309,13 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
      * Shows the progress dialog
      */
     override fun showProgressDialog() {
-        progressDialog = ProgressDialog(requireContext()).apply {
-            setMessage(getString(R.string.please_wait))
-        }.also {
-            it.show()
-        }
+        progressDialog =
+            ProgressDialog(requireContext())
+                .apply {
+                    setMessage(getString(R.string.please_wait))
+                }.also {
+                    it.show()
+                }
     }
 
     /**
@@ -323,14 +337,16 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
      */
     override fun navigateToLoginScreen() {
         val username = sessionManager!!.userName
-        val logoutListener = CommonsApplication.BaseLogoutListener(
-            requireActivity(),
-            requireActivity().getString(R.string.invalid_login_message),
-            username
-        )
+        val logoutListener =
+            CommonsApplication.BaseLogoutListener(
+                requireActivity(),
+                requireActivity().getString(R.string.invalid_login_message),
+                username,
+            )
 
         instance.clearApplicationData(
-            requireActivity(), logoutListener
+            requireActivity(),
+            logoutListener,
         )
     }
 
@@ -346,7 +362,7 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
         if (media != null) {
             presenter!!.clearPreviousSelection()
             adapter!!.items = null
-            val mediaDetailFragment = parentFragment as? MediaDetailFragment?: return
+            val mediaDetailFragment = parentFragment as? MediaDetailFragment ?: return
             mediaDetailFragment.onResume()
             goBackToPreviousScreen()
         } else {
@@ -377,7 +393,10 @@ class UploadCategoriesFragment : UploadBaseFragment(), CategoriesContract.View {
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
-                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment).binding?.cardViewNearby?.visibility = View.GONE
+                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment)
+                    .binding
+                    ?.cardViewNearby
+                    ?.visibility = View.GONE
             }
         }
     }

@@ -333,6 +333,13 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
+  <string name="file_deleted_from_commons">此文件已从共享资源中删除。</string>
+  <string name="contribution_deleted">已删除</string>
+  <string name="deleted_file_activity_title">文件已删除</string>
+  <string name="deleted_file_explanation">维基共享资源会删除不具教育意义或违反其规则的文件，包括侵犯版权的文件。请上传您自己拍摄的照片。从互联网复制的图片、屏幕截图、徽标和海报都是文件被移除的常见原因。</string>
+  <string name="deleted_file_view_page">查看文件页面</string>
+  <string name="deleted_file_view_discussion">阅读删除讨论</string>
+  <string name="deleted_file_policies">共享资源政策和方针</string>
   <string name="nominated_see_more">查看网页获取详情</string>
   <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
@@ -920,4 +927,12 @@
   <string name="error_applying_blur">应用模糊时出错</string>
   <string name="failed_to_apply_crop">无法应用裁剪</string>
   <string name="failed_to_save_image">图像保存失败</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG（音频）</string>
+  <string name="unsupported_format_title">不支持的格式</string>
+  <string name="unsupported_format_desc">所选文件无法打开。维基共享资源严格要求以下格式：\n\n%s</string>
+  <string name="unsupported_files_skipped_title">已跳过不支持的文件</string>
+  <string name="unsupported_files_skipped_desc">由于格式不支持，已跳过部分文件。应用将继续上传符合以下受支持格式的剩余文件：\n\n%s</string>
 </resources>
