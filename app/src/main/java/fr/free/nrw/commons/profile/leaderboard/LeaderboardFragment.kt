@@ -50,6 +50,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var scrollToRank = false
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
+    private var viewController: LeaderboardViewController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +63,9 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+        viewController = LeaderboardViewController(binding!!)
 
-        binding?.let { LeaderboardViewController(it).hideLayouts() }
+        viewController?.hideLayouts()
 
         // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
         if (isBetaFlavour) {
@@ -73,7 +75,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         }
 
         binding!!.progressBar.visibility = View.VISIBLE
-        binding?.let { LeaderboardViewController(it).setSpinners() }
+        viewController?.setSpinners()
 
         /*
          * This array is for the duration filter, we have three filters weekly, yearly and all-time
@@ -242,10 +244,10 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
                 LOADING -> {
-                    binding?.let { LeaderboardViewController(it).showProgressBar() }
+                    viewController?.showProgressBar()
                 }
                 LOADED -> {
-                    binding?.let { LeaderboardViewController(it).hideProgressBar() }
+                    viewController?.hideProgressBar()
                     if (scrollToRank) {
                         binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
                     }
@@ -285,6 +287,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        viewController = null
         binding = null
     }
 

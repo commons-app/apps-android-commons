@@ -13,31 +13,31 @@ class LeaderboardViewController(
      * to hide progressbar
      */
     fun hideProgressBar() =
-        binding.let {
-            it.progressBar.visibility = View.GONE
-            it.categorySpinner.visibility = View.VISIBLE
-            it.durationSpinner.visibility = View.VISIBLE
-            it.scroll.visibility = View.VISIBLE
-            it.leaderboardList.visibility = View.VISIBLE
+        with(binding) {
+            progressBar.visibility = View.GONE
+            categorySpinner.visibility = View.VISIBLE
+            durationSpinner.visibility = View.VISIBLE
+            scroll.visibility = View.VISIBLE
+            leaderboardList.visibility = View.VISIBLE
         }
 
     /**
      * to show progressbar
      */
     fun showProgressBar() =
-        binding.let {
-            it.progressBar.visibility = View.VISIBLE
-            it.scroll.visibility = View.INVISIBLE
+        with(binding) {
+            progressBar.visibility = View.VISIBLE
+            scroll.visibility = View.INVISIBLE
         }
 
     /**
      * used to hide the layouts while fetching results from api
      */
     fun hideLayouts() =
-        binding.let {
-            it.categorySpinner.visibility = View.INVISIBLE
-            it.durationSpinner.visibility = View.INVISIBLE
-            it.leaderboardList.visibility = View.INVISIBLE
+        with(binding) {
+            categorySpinner.visibility = View.INVISIBLE
+            durationSpinner.visibility = View.INVISIBLE
+            leaderboardList.visibility = View.INVISIBLE
         }
 
     /**

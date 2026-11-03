@@ -13,8 +13,7 @@ import timber.log.Timber
 class AboutLinkHandler(
     private val activity: Activity,
 ) {
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens Facebook, falling back to its web page if the app cannot open. */
     @Suppress("UnusedParameter")
     fun launchFacebook(view: View?) {
@@ -31,8 +30,7 @@ class AboutLinkHandler(
         }
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the GitHub repository, falling back to the browser if the app cannot open. */
     @Suppress("UnusedParameter")
     fun launchGithub(view: View?) {
@@ -49,16 +47,14 @@ class AboutLinkHandler(
         }
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the project website. */
     @Suppress("UnusedParameter")
     fun launchWebsite(view: View?) {
         handleWebUrl(activity, Urls.WEBSITE_URL.toUri())
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the app rating page, falling back to the Play Store website. */
     @Suppress("UnusedParameter")
     fun launchRatings(view: View?) {
@@ -74,32 +70,28 @@ class AboutLinkHandler(
         }
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the contributor credits. */
     @Suppress("UnusedParameter")
     fun launchCredits(view: View?) {
         handleWebUrl(activity, Urls.CREDITS_URL.toUri())
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the user guide. */
     @Suppress("UnusedParameter")
     fun launchUserGuide(view: View?) {
         handleWebUrl(activity, Urls.USER_GUIDE_URL.toUri())
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the privacy policy for this build. */
     @Suppress("UnusedParameter")
     fun launchPrivacyPolicy(view: View?) {
         handleWebUrl(activity, BuildConfig.PRIVACY_POLICY_URL.toUri())
     }
 
-    // View.OnClickListener method reference, see onCreate
-
+    // View.OnClickListener method reference, see AboutActivity.onCreate
     /** Opens the frequently asked questions. */
     @Suppress("UnusedParameter")
     fun launchFrequentlyAskedQuesions(view: View?) {

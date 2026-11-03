@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.profile
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Looper
@@ -20,6 +21,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.robolectric.shadows.ShadowAlertDialog
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -92,7 +94,9 @@ class ProfileActivityTest {
     fun testShareScreen() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val screenshot = Bitmap.createBitmap(2, 2, Bitmap.Config.ARGB_8888)
-        ProfileScreenshotSharer(activity).shareScreen(screenshot)
+        ProfileScreenshotSharer(activity).showAlert(screenshot)
+        ShadowAlertDialog.getLatestAlertDialog().getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val chooser = Shadows.shadowOf(activity).nextStartedActivity
         Assert.assertEquals(android.content.Intent.ACTION_CHOOSER, chooser.action)
         val sendIntent = chooser.getParcelableExtra<android.content.Intent>(android.content.Intent.EXTRA_INTENT)

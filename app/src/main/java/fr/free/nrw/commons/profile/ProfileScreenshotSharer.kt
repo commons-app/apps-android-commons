@@ -39,7 +39,7 @@ class ProfileScreenshotSharer(
     }
 
     /** Writes and shares the screenshot through the Android chooser. */
-    fun shareScreen(bitmap: Bitmap) {
+    private fun shareScreen(bitmap: Bitmap) {
         runCatching {
             val file = File(activity.externalCacheDir, "screen.png")
             FileOutputStream(file).use { out ->
