@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,16 +11,17 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
+import androidx.core.net.toUri
 import fr.free.nrw.commons.CommonsApplication.Companion.instance
 import fr.free.nrw.commons.databinding.ActivityAboutBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import java.util.Collections
-import androidx.core.net.toUri
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.utils.setUnderlinedText
+import timber.log.Timber
+import java.util.Collections
 
 /**
  * Represents about screen of this app
@@ -31,7 +31,7 @@ class AboutActivity : BaseActivity() {
          This View Binding class is auto-generated for each xml file. The format is usually the name
          of the file with PascalCasing (The underscore characters will be ignored).
          More information is available at https://developer.android.com/topic/libraries/view-binding
-        */
+     */
     private var binding: ActivityAboutBinding? = null
 
     /**
@@ -39,13 +39,14 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
-    @SuppressLint("StringFormatInvalid")  //TODO:
+    @SuppressLint("StringFormatInvalid") // TODO:
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         /*
           Instead of just setting the view with the xml file. We need to use View Binding class.
          */
+
         binding = ActivityAboutBinding.inflate(layoutInflater)
         val view: View = binding!!.root
         applyEdgeToEdgeTopInsets(binding!!.toolbarLayout)
@@ -75,7 +76,7 @@ class AboutActivity : BaseActivity() {
 
         /*
           To set listeners, we can create a separate method and use lambda syntax.
-        */
+         */
         binding!!.facebookLaunchIcon.setOnClickListener(::launchFacebook)
         binding!!.githubLaunchIcon.setOnClickListener(::launchGithub)
         binding!!.websiteLaunchIcon.setOnClickListener(::launchWebsite)
@@ -92,6 +93,8 @@ class AboutActivity : BaseActivity() {
         return true
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchFacebook(view: View?) {
         val intent: Intent
         try {
@@ -99,10 +102,13 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
+            Timber.e(e, "Could not open the Facebook app, falling back to the web page")
             handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
         }
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchGithub(view: View?) {
         val intent: Intent
         try {
@@ -110,39 +116,52 @@ class AboutActivity : BaseActivity() {
             intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
             startActivity(intent)
         } catch (e: Exception) {
+            Timber.e(e, "Could not open the GitHub app, falling back to the web page")
             handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
         }
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchWebsite(view: View?) {
         handleWebUrl(this, Urls.WEBSITE_URL.toUri())
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchRatings(view: View?) {
         try {
             startActivity(
                 Intent(
                     ACTION_VIEW,
-                    (Urls.PLAY_STORE_PREFIX + packageName).toUri()
-                )
+                    (Urls.PLAY_STORE_PREFIX + packageName).toUri(),
+                ),
             )
         } catch (_: ActivityNotFoundException) {
             handleWebUrl(this, (Urls.PLAY_STORE_URL_PREFIX + packageName).toUri())
         }
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchCredits(view: View?) {
         handleWebUrl(this, Urls.CREDITS_URL.toUri())
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchUserGuide(view: View?) {
         handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchPrivacyPolicy(view: View?) {
         handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
     }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchFrequentlyAskedQuesions(view: View?) {
         handleWebUrl(this, Urls.FAQ_URL.toUri())
     }
@@ -153,46 +172,56 @@ class AboutActivity : BaseActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+
             R.id.share_app_icon -> {
-                val shareText = String.format(
-                    getString(R.string.share_text),
-                    Urls.PLAY_STORE_URL_PREFIX + this.packageName
-                )
+                val shareText =
+                    String.format(
+                        getString(R.string.share_text),
+                        Urls.PLAY_STORE_URL_PREFIX + this.packageName,
+                    )
                 val sendIntent = Intent()
                 sendIntent.setAction(Intent.ACTION_SEND)
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareText)
                 sendIntent.setType("text/plain")
                 startActivity(Intent.createChooser(sendIntent, getString(R.string.share_via)))
-                return true
+                true
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
-    }
 
+    // View.OnClickListener method reference, see onCreate
+    @Suppress("UnusedParameter")
     fun launchTranslate(view: View?) {
         val sortedLocalizedNamesRef = instance.languageLookUpTable!!.getCanonicalNames()
         Collections.sort(sortedLocalizedNamesRef)
-        val languageAdapter = ArrayAdapter(
-            this@AboutActivity,
-            android.R.layout.simple_spinner_dropdown_item, sortedLocalizedNamesRef
-        )
+        val languageAdapter =
+            ArrayAdapter(
+                this@AboutActivity,
+                android.R.layout.simple_spinner_dropdown_item,
+                sortedLocalizedNamesRef,
+            )
         val spinner = Spinner(this@AboutActivity)
         spinner.layoutParams =
             LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.WRAP_CONTENT,
             )
         spinner.adapter = languageAdapter
         spinner.gravity = 17
         spinner.setPadding(50, 0, 0, 0)
 
-        val positiveButtonRunnable = Runnable {
-            val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
-            handleWebUrl(this@AboutActivity, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
-        }
+        val positiveButtonRunnable =
+            Runnable {
+                val langCode = instance.languageLookUpTable!!.getCodes()[spinner.selectedItemPosition]
+                handleWebUrl(this@AboutActivity, (Urls.TRANSLATE_WIKI_URL + langCode).toUri())
+            }
         showAlertDialog(
             this,
             getString(R.string.about_translate_title),
@@ -201,7 +230,7 @@ class AboutActivity : BaseActivity() {
             getString(R.string.about_translate_cancel),
             positiveButtonRunnable,
             {},
-            spinner
+            spinner,
         )
     }
 }

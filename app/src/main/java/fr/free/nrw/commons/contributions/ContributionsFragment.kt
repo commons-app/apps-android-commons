@@ -63,9 +63,9 @@ import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.WLM_END_DATE
+import fr.free.nrw.commons.utils.WLM_START_DATE
 import fr.free.nrw.commons.utils.isMonumentsEnabled
-import fr.free.nrw.commons.utils.wLMEndDate
-import fr.free.nrw.commons.utils.wLMStartDate
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -75,9 +75,15 @@ import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
-class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.OnBackStackChangedListener,
-    LocationUpdateListener, MediaDetailProvider, SensorEventListener, ICampaignsView,
-    ContributionsContract.View, ContributionsListFragment.Callback {
+class ContributionsFragment :
+    CommonsDaggerSupportFragment(),
+    FragmentManager.OnBackStackChangedListener,
+    LocationUpdateListener,
+    MediaDetailProvider,
+    SensorEventListener,
+    ICampaignsView,
+    ContributionsContract.View,
+    ContributionsListFragment.Callback {
     @JvmField
     @Inject
     @Named("default_preferences")
@@ -160,12 +166,14 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                         onLocationPermissionGranted()
                     } else {
                         if (shouldShowRequestPermissionRationale(
-                                permission.ACCESS_FINE_LOCATION
+                                permission.ACCESS_FINE_LOCATION,
+                            ) &&
+                            store!!.getBoolean("displayLocationPermissionForCardView", true) &&
+                            !store!!.getBoolean("doNotAskForLocationPermission", false) &&
+                            (
+                                (activity as MainActivity).activeFragment
+                                    == ActiveFragment.CONTRIBUTIONS
                             )
-                            && store!!.getBoolean("displayLocationPermissionForCardView", true)
-                            && !store!!.getBoolean("doNotAskForLocationPermission", false)
-                            && ((activity as MainActivity).activeFragment
-                                    == ActiveFragment.CONTRIBUTIONS)
                         ) {
                             binding!!.cardViewNearby.permissionType =
                                 NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION
@@ -174,7 +182,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                         }
                     }
                 }
-            })
+            },
+        )
 
     private var shouldShowMediaDetailsFragment = false
 
@@ -189,8 +198,9 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentContributionsBinding.inflate(inflater, container, false)
 
@@ -208,10 +218,12 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         }
 
         if (savedInstanceState != null) {
-            mediaDetailPagerFragment = childFragmentManager
-                .findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) as MediaDetailPagerFragment?
-            contributionsListFragment = childFragmentManager
-                .findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG) as ContributionsListFragment?
+            mediaDetailPagerFragment =
+                childFragmentManager
+                    .findFragmentByTag(MEDIA_DETAIL_PAGER_FRAGMENT_TAG) as MediaDetailPagerFragment?
+            contributionsListFragment =
+                childFragmentManager
+                    .findFragmentByTag(CONTRIBUTION_LIST_FRAGMENT_TAG) as ContributionsListFragment?
             shouldShowMediaDetailsFragment = savedInstanceState.getBoolean("mediaDetailsVisible")
         }
 
@@ -228,8 +240,10 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             showContributionsListFragment()
         }
 
-        if (!isBetaFlavour && sessionManager!!.isUserLoggedIn
-            && sessionManager!!.currentAccount != null && !isUserProfile
+        if (!isBetaFlavour &&
+            sessionManager!!.isUserLoggedIn &&
+            sessionManager!!.currentAccount != null &&
+            !isUserProfile
         ) {
             setUploadCount()
         }
@@ -241,16 +255,20 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
      * Initialise the campaign object for WML
      */
     private fun initWLMCampaign() {
-        wlmCampaign = Campaign(
-            getString(R.string.wlm_campaign_title),
-            getString(R.string.wlm_campaign_description), wLMStartDate,
-            wLMEndDate, NearbyParentFragment.WLM_URL, true
-        )
+        wlmCampaign =
+            Campaign(
+                getString(R.string.wlm_campaign_title),
+                getString(R.string.wlm_campaign_description),
+                WLM_START_DATE,
+                WLM_END_DATE,
+                NearbyParentFragment.WLM_URL,
+                true,
+            )
     }
 
     override fun onCreateOptionsMenu(
         menu: Menu,
-        inflater: MenuInflater
+        inflater: MenuInflater,
     ) {
         // Removing contributions menu items for ProfileActivity
 
@@ -265,22 +283,25 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         notificationCount = notification!!.findViewById(R.id.notification_count_badge)
         val uploadMenuItem = menu.findItem(R.id.upload_tab)
         val uploadMenuItemActionView = uploadMenuItem.actionView
-        pendingUploadsCountTextView = uploadMenuItemActionView!!.findViewById(
-            R.id.pending_uploads_count_badge
-        )
-        uploadsErrorTextView = uploadMenuItemActionView.findViewById(
-            R.id.uploads_error_count_badge
-        )
-        pendingUploadsImageView = uploadMenuItemActionView.findViewById(
-            R.id.pending_uploads_image_view
-        )
+        pendingUploadsCountTextView =
+            uploadMenuItemActionView!!.findViewById(
+                R.id.pending_uploads_count_badge,
+            )
+        uploadsErrorTextView =
+            uploadMenuItemActionView.findViewById(
+                R.id.uploads_error_count_badge,
+            )
+        pendingUploadsImageView =
+            uploadMenuItemActionView.findViewById(
+                R.id.pending_uploads_image_view,
+            )
         if (pendingUploadsImageView != null) {
             pendingUploadsImageView!!.setOnClickListener { view: View? ->
                 startActivity(
                     Intent(
                         context,
-                        UploadProgressActivity::class.java
-                    )
+                        UploadProgressActivity::class.java,
+                    ),
                 )
             }
         }
@@ -289,8 +310,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 startActivity(
                     Intent(
                         context,
-                        UploadProgressActivity::class.java
-                    )
+                        UploadProgressActivity::class.java,
+                    ),
                 )
             }
         }
@@ -299,15 +320,16 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 startActivity(
                     Intent(
                         context,
-                        UploadProgressActivity::class.java
-                    )
+                        UploadProgressActivity::class.java,
+                    ),
                 )
             }
         }
         notification.setOnClickListener { view: View? ->
             context?.let {
                 startYourself(
-                    it, "unread"
+                    it,
+                    "unread",
                 )
             }
         }
@@ -316,29 +338,30 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     @SuppressLint("CheckResult")
     fun setNotificationCount() {
         compositeDisposable.add(
-            notificationController!!.getNotifications(false)
+            notificationController!!
+                .getNotifications(false)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { notificationList: List<Notification> ->
                         this.initNotificationViews(
-                            notificationList
+                            notificationList,
                         )
                     },
                     { throwable: Throwable? ->
                         Timber.e(
                             throwable,
-                            "Error occurred while loading notifications"
+                            "Error occurred while loading notifications",
                         )
-                    })
+                    },
+                ),
         )
     }
 
-    /**
-     * Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
-     * Sets the visibility of the upload icon based on the number of failed and pending
-     * contributions.
-     */
+    // Temporarily disabled, see issue [https://github.com/commons-app/apps-android-commons/issues/5847]
+    // Sets the visibility of the upload icon based on the number of failed and pending
+    // contributions.
+    //
     //    public void setUploadIconVisibility() {
     //        contributionController.getFailedAndPendingContributions();
     //        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
@@ -346,6 +369,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     //                updateUploadIcon(list.size());
     //            });
     //    }
+
     /**
      * Sets the count for the upload icon based on the number of pending and failed contributions.
      */
@@ -355,13 +379,15 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             viewLifecycleOwner,
             Observer<PagedList<Contribution>> { list: PagedList<Contribution> ->
                 updatePendingIcon(list.size)
-            })
+            },
+        )
         contributionController!!.failedContributions
         contributionController!!.failedContributionList!!.observe(
             viewLifecycleOwner,
             Observer<PagedList<Contribution>> { list: PagedList<Contribution> ->
                 updateErrorIcon(list.size)
-            })
+            },
+        )
     }
 
     fun scrollToTop() {
@@ -412,8 +438,9 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             }
         }
         showFragment(
-            contributionsListFragment!!, CONTRIBUTION_LIST_FRAGMENT_TAG,
-            mediaDetailPagerFragment
+            contributionsListFragment!!,
+            CONTRIBUTION_LIST_FRAGMENT_TAG,
+            mediaDetailPagerFragment,
         )
     }
 
@@ -421,8 +448,9 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         // hide nearby card view on media detail is visible
         setupViewForMediaDetails()
         showFragment(
-            mediaDetailPagerFragment!!, MEDIA_DETAIL_PAGER_FRAGMENT_TAG,
-            contributionsListFragment
+            mediaDetailPagerFragment!!,
+            MEDIA_DETAIL_PAGER_FRAGMENT_TAG,
+            contributionsListFragment,
         )
     }
 
@@ -451,8 +479,9 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         }
 
         showFragment(
-            contributionsListFragment!!, CONTRIBUTION_LIST_FRAGMENT_TAG,
-            mediaDetailPagerFragment
+            contributionsListFragment!!,
+            CONTRIBUTION_LIST_FRAGMENT_TAG,
+            mediaDetailPagerFragment,
         )
     }
 
@@ -463,7 +492,11 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
      * @param tag
      * @param otherFragment
      */
-    private fun showFragment(fragment: Fragment, tag: String, otherFragment: Fragment?) {
+    private fun showFragment(
+        fragment: Fragment,
+        tag: String,
+        otherFragment: Fragment?,
+    ) {
         val transaction = childFragmentManager.beginTransaction()
         if (fragment.isAdded && otherFragment != null) {
             transaction.hide(otherFragment)
@@ -502,19 +535,21 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         okHttpJsonApiClient
             ?.getUploadCount(sessionManager?.currentAccount!!.name)
             ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())?.let {
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.let {
                 compositeDisposable.add(
-                it
-                    .subscribe(
-                        { uploadCount: Int -> this.displayUploadCount(uploadCount) },
-                        { t: Throwable? -> Timber.e(t, "Fetching upload count failed") }
-                    ))
+                    it
+                        .subscribe(
+                            { uploadCount: Int -> this.displayUploadCount(uploadCount) },
+                            { t: Throwable? -> Timber.e(t, "Fetching upload count failed") },
+                        ),
+                )
             }
     }
 
     private fun displayUploadCount(uploadCount: Int) {
-        if (requireActivity().isFinishing
-            || resources == null
+        if (requireActivity().isFinishing ||
+            resources == null
         ) {
             return
         }
@@ -582,14 +617,14 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     private fun checkPermissionsAndShowNearbyCardView() {
         if (hasPermission(
                 requireActivity(),
-                arrayOf(permission.ACCESS_FINE_LOCATION)
+                arrayOf(permission.ACCESS_FINE_LOCATION),
             )
         ) {
             onLocationPermissionGranted()
-        } else if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
-            && store!!.getBoolean("displayLocationPermissionForCardView", true)
-            && !store!!.getBoolean("doNotAskForLocationPermission", false)
-            && ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)
+        } else if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &&
+            store!!.getBoolean("displayLocationPermissionForCardView", true) &&
+            !store!!.getBoolean("doNotAskForLocationPermission", false) &&
+            ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)
         ) {
             binding!!.cardViewNearby.permissionType =
                 NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION
@@ -614,46 +649,48 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             getString(R.string.nearby_card_permission_explanation),
             { this.requestLocationPermission() },
             { this.displayYouWontSeeNearbyMessage() },
-            checkBoxView
+            checkBoxView,
         )
     }
 
     private fun displayYouWontSeeNearbyMessage() {
         showLongToast(
             requireActivity(),
-            resources.getString(R.string.unable_to_display_nearest_place)
+            resources.getString(R.string.unable_to_display_nearest_place),
         )
         // Set to true as the user doesn't want the app to ask for location permission anymore
         store!!.putBoolean("doNotAskForLocationPermission", true)
     }
 
-
     private fun updateClosestNearbyCardViewInfo() {
         currentLatLng = locationManager!!.getLastLocation()
-        compositeDisposable.add(Observable.fromCallable {
-            nearbyController?.loadAttractionsFromLocation(
-                    currentLatLng, currentLatLng, true,
-                    false
-                )
-        } // thanks to boolean, it will only return closest result
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { nearbyPlacesInfo: NearbyPlacesInfo? ->
-                    this.updateNearbyNotification(
-                        nearbyPlacesInfo
+        compositeDisposable.add(
+            Observable
+                .fromCallable {
+                    nearbyController?.loadAttractionsFromLocation(
+                        currentLatLng,
+                        currentLatLng,
+                        true,
+                        false,
                     )
-                },
-                { throwable: Throwable? ->
-                    Timber.d(throwable)
-                    updateNearbyNotification(null)
-                })
+                } // thanks to boolean, it will only return closest result
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { nearbyPlacesInfo: NearbyPlacesInfo? ->
+                        this.updateNearbyNotification(
+                            nearbyPlacesInfo,
+                        )
+                    },
+                    { throwable: Throwable? ->
+                        Timber.d(throwable)
+                        updateNearbyNotification(null)
+                    },
+                ),
         )
     }
 
-    private fun updateNearbyNotification(
-        nearbyPlacesInfo: NearbyPlacesInfo?
-    ) {
+    private fun updateNearbyNotification(nearbyPlacesInfo: NearbyPlacesInfo?) {
         if (nearbyPlacesInfo?.placeList != null && nearbyPlacesInfo.placeList.size > 0) {
             var closestNearbyPlace: Place? = null
             // Find the first nearby place that has no image and exists
@@ -719,7 +756,7 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -819,12 +856,16 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
     //            }
     //        }
     //    }
+
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects
      * a contribution.
      */
-    override fun showDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
+    override fun showDetail(
+        position: Int,
+        isWikipediaButtonDisplayed: Boolean,
+    ) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment!!.isVisible) {
             mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true)
             if (isUserProfile) {
@@ -835,17 +876,12 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         mediaDetailPagerFragment!!.showImage(position, isWikipediaButtonDisplayed)
     }
 
-    override fun getMediaAtPosition(i: Int): Media? {
-        return contributionsListFragment!!.getMediaAtPosition(i)
-    }
+    override fun getMediaAtPosition(i: Int): Media? = contributionsListFragment!!.getMediaAtPosition(i)
 
-    override fun getTotalMediaCount(): Int {
-        return contributionsListFragment!!.totalMediaCount
-    }
+    override fun getTotalMediaCount(): Int = contributionsListFragment!!.totalMediaCount
 
-    override fun getContributionStateAt(position: Int): Int {
-        return contributionsListFragment!!.getContributionStateAt(position)
-    }
+    override fun getContributionStateAt(position: Int): Int =
+        contributionsListFragment!!.getContributionStateAt(position)
 
     fun backButtonClicked(): Boolean {
         if (mediaDetailPagerFragment != null && mediaDetailPagerFragment!!.isVisible) {
@@ -860,8 +896,9 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             }
             removeFragment(mediaDetailPagerFragment!!)
             showFragment(
-                contributionsListFragment!!, CONTRIBUTION_LIST_FRAGMENT_TAG,
-                mediaDetailPagerFragment
+                contributionsListFragment!!,
+                CONTRIBUTION_LIST_FRAGMENT_TAG,
+                mediaDetailPagerFragment,
             )
             if (isUserProfile) {
                 // Fragment is associated with ProfileActivity
@@ -872,7 +909,8 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             }
             if (activity is MainActivity) {
                 // Fragment is associated with MainActivity
-                (activity as BaseActivity).supportActionBar
+                (activity as BaseActivity)
+                    .supportActionBar
                     ?.setDisplayHomeAsUpEnabled(false)
                 (activity as MainActivity).showTabs()
             }
@@ -881,15 +919,16 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         return false
     }
 
-
     /**
      * this function updates the number of contributions
      */
     fun upDateUploadCount() {
         context?.let {
-            WorkManager.getInstance(it)
-                .getWorkInfosForUniqueWorkLiveData(UploadWorker::class.java.simpleName).observe(
-                    viewLifecycleOwner
+            WorkManager
+                .getInstance(it)
+                .getWorkInfosForUniqueWorkLiveData(UploadWorker::class.java.simpleName)
+                .observe(
+                    viewLifecycleOwner,
                 ) { workInfos: List<WorkInfo?> ->
                     if (workInfos.size > 0) {
                         setUploadCount()
@@ -897,7 +936,6 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
                 }
         }
     }
-
 
     /**
      * Restarts the upload process for a contribution
@@ -931,22 +969,25 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
             } else if (contribution.state == Contribution.STATE_FAILED) {
                 val retries = contribution.retries
                 // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
-                /* Limit the number of retries for a failed upload
-                   to handle cases like invalid filename as such uploads
-                   will never be successful */
+                // Limit the number of retries for a failed upload
+                // to handle cases like invalid filename as such uploads
+                // will never be successful
                 if (retries < MAX_RETRIES) {
                     contribution.retries = retries + 1
                     Timber.d(
-                        "Retried uploading %s %d times", contribution.media.filename,
-                        retries + 1
+                        "Retried uploading %s %d times",
+                        contribution.media.filename,
+                        retries + 1,
                     )
                     restartUpload(contribution)
                 } else {
                     // TODO: Show the exact reason for failure
-                    Toast.makeText(
-                        context,
-                        R.string.retry_limit_reached, Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            context,
+                            R.string.retry_limit_reached,
+                            Toast.LENGTH_SHORT,
+                        ).show()
                 }
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString())
@@ -978,7 +1019,10 @@ class ContributionsFragment : CommonsDaggerSupportFragment(), FragmentManager.On
         binding!!.cardViewNearby.rotateCompass(rotateDegree, direction)
     }
 
-    override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
+    override fun onAccuracyChanged(
+        sensor: Sensor,
+        accuracy: Int,
+    ) {
         // Nothing to do.
     }
 

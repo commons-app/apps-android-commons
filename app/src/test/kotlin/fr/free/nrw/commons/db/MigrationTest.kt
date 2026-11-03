@@ -8,6 +8,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
+import fr.free.nrw.commons.di.MIGRATION_23_24
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,39 +18,49 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class MigrationTest {
-
     @Test
     fun testMigration() {
-
         val context = ApplicationProvider.getApplicationContext<Context>()
 
         // legacy "commons.db", mock old data.
         val legacyOpenHelper = DBOpenHelper(context, null)
         val legacyDb = legacyOpenHelper.writableDatabase
-        legacyDb.execSQL("INSERT INTO categories (name, description, thumbnail, last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)")
+        legacyDb.execSQL(
+            "INSERT INTO categories (name, description, thumbnail, " +
+                "last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)",
+        )
         legacyDb.execSQL("INSERT INTO bookmarks (media_name, media_creator) VALUES ('media1', 'creator1')")
-        legacyDb.execSQL("INSERT INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES ('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')")
+        legacyDb.execSQL(
+            "INSERT INTO bookmarksItems (item_name, item_description, item_image_url, " +
+                "item_instance_of, item_name_categories, item_description_categories, " +
+                "item_thumbnail_categories, item_is_selected, item_id) VALUES " +
+                "('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')",
+        )
         legacyDb.execSQL("INSERT INTO recent_searches (name, last_used) VALUES ('search1', 123)")
         legacyDb.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('English', 'en')")
         legacyDb.close()
 
         // mock old version to trigger migration.
-        val presentRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
-        ).allowMainThreadQueries().build()
+        val presentRoomDatabase =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room.db",
+                ).allowMainThreadQueries()
+                .build()
         presentRoomDatabase.openHelper.writableDatabase.version = 21
         presentRoomDatabase.close()
 
-        val migratingRoomDatabase = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room.db"
-        )
-            .addMigrations(MIGRATION_21_22, MIGRATION_22_23)
-            .allowMainThreadQueries()
-            .build()
+        val migratingRoomDatabase =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room.db",
+                ).addMigrations(MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24)
+                .allowMainThreadQueries()
+                .build()
 
         // tests
         try {
@@ -83,11 +94,10 @@ class MigrationTest {
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
 
-            // bookmarks_categories table must exist after 21→22 migration
+            // bookmarks_categories table must exist after migrating to the latest version
             cursor = migratingRoomDatabase.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
             Assert.assertNotNull("bookmarks_categories table exists", cursor)
             cursor.close()
-
         } finally {
             migratingRoomDatabase.close()
             context.deleteDatabase("commons.db")
@@ -96,33 +106,38 @@ class MigrationTest {
     }
 
     @Test
-    fun testMigration22To23() {
+    fun testMigration23To24() {
         val context = ApplicationProvider.getApplicationContext<Context>()
 
-        val db22 = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room_22.db"
-        ).allowMainThreadQueries().build()
-        db22.openHelper.writableDatabase.version = 22
-        db22.close()
+        val db23 =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room_23.db",
+                ).allowMainThreadQueries()
+                .build()
+        db23.openHelper.writableDatabase.version = 23
+        db23.openHelper.writableDatabase.execSQL("DROP TABLE IF EXISTS bookmarks_categories")
+        db23.close()
 
-        val db23 = Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "commons_room_22.db"
-        )
-            .addMigrations(MIGRATION_22_23)
-            .allowMainThreadQueries()
-            .build()
+        val db24 =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room_23.db",
+                ).addMigrations(MIGRATION_23_24)
+                .allowMainThreadQueries()
+                .build()
 
         try {
-            val cursor = db23.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
-            Assert.assertNotNull("bookmarks_categories table exists after 22→23 migration", cursor)
+            val cursor = db24.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
+            Assert.assertNotNull("bookmarks_categories table exists after 23→24 migration", cursor)
             cursor.close()
         } finally {
-            db23.close()
-            context.deleteDatabase("commons_room_22.db")
+            db24.close()
+            context.deleteDatabase("commons_room_23.db")
         }
     }
 }

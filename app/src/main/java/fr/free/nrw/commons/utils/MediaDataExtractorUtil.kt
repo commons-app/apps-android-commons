@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.utils
 
 object MediaDataExtractorUtil {
-
     /**
      * Extracts a list of categories from | separated category string
      *

@@ -135,6 +135,10 @@
       android:label="@string/title_activity_about"
       android:parentActivityName=".contributions.MainActivity" />
     <activity
+      android:name=".media.DeletedFileActivity"
+      android:label="@string/deleted_file_activity_title"
+      android:parentActivityName=".contributions.MainActivity" />
+    <activity
       android:name=".auth.SignupActivity"
       android:configChanges="orientation|screenLayout|screenSize"
       android:label="@string/title_activity_signup" />
@@ -254,6 +258,14 @@
       <meta-data
         android:name="android.appwidget.provider"
         android:resource="@xml/pic_of_day_app_widget_info" />
+    </receiver>
+
+    <receiver
+      android:name=".utils.DownloadReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+      </intent-filter>
     </receiver>
 
     <uses-library
