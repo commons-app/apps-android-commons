@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.bookmarks.items
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +48,8 @@ class BookmarkItemsAdapter(
         holder.depictsLabel.text = depictedItem.name
         holder.description.text = depictedItem.description
 
-        if (depictedItem.imageUrl?.isNotBlank() == true) {
-            holder.depictsImage.setImageURI(depictedItem.imageUrl)
+        if (depictedItem.thumbnailUrl?.isNotBlank() == true) {
+            holder.depictsImage.setImageURI(Uri.parse(depictedItem.thumbnailUrl))
         } else {
             holder.depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
         }
