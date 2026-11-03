@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -57,7 +56,15 @@ class ContributionsListFragment :
     WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
+    var cameraCoordinator: ContributionCameraCoordinator? = null
+
+    @JvmField
+    @Inject
     var imagePicker: ContributionImagePicker? = null
+
+    @JvmField
+    @Inject
+    var uploadCoordinator: ContributionUploadCoordinator? = null
 
     @JvmField
     @Inject
@@ -109,7 +116,7 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            imagePicker!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
                 imagePicker!!.onPictureReturnedFromGallery(
@@ -124,7 +131,7 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            imagePicker!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
                 FilePicker.onPictureReturnedFromCustomSelector(
@@ -139,7 +146,7 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            imagePicker!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
                 FilePicker.onPictureReturnedFromCamera(
@@ -164,31 +171,24 @@ class ContributionsListFragment :
         }
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    imagePicker?.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    activity?.let { currentActivity ->
-                        if (currentActivity.shouldShowRequestPermissionRationale(
-                                permission.ACCESS_FINE_LOCATION,
-                            )
-                        ) {
-                            imagePicker?.handleShowRationaleFlowCameraLocation(
-                                currentActivity,
-                                inAppCameraLocationPermissionLauncher, // Pass launcher
-                                cameraPickLauncherForResult,
-                            )
-                        } else {
-                            imagePicker?.locationPermissionCallback?.onLocationPermissionDenied(
-                                currentActivity.getString(
-                                    R.string.in_app_camera_location_permission_denied,
-                                ),
-                            )
-                        }
-                    }
-                }
+                handleCameraLocationPermissionResult(result)
             }
+    }
+
+    /**
+     * Forwards camera location permission results while this fragment is attached.
+     *
+     * @param results outcomes from the location permission launcher
+     */
+    internal fun handleCameraLocationPermissionResult(results: Map<String, Boolean>) {
+        activity?.let { currentActivity ->
+            cameraCoordinator?.handleLocationPermissionResult(
+                currentActivity,
+                results,
+                inAppCameraLocationPermissionLauncher,
+                cameraPickLauncherForResult,
+            )
+        }
     }
 
     override fun onCreateView(
@@ -426,7 +426,7 @@ class ContributionsListFragment :
     private fun setListeners() {
         binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
         binding!!.fabCamera.setOnClickListener { view: View? ->
-            imagePicker!!.initiateCameraPick(
+            cameraCoordinator!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
                 cameraPickLauncherForResult,

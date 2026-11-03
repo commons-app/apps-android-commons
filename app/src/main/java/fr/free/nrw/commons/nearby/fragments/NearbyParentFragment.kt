@@ -57,7 +57,9 @@ import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
 import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.contributions.loadExploreMapFromNearby
@@ -206,7 +208,13 @@ class NearbyParentFragment :
     lateinit var placesRepository: PlacesRepository
 
     @Inject
+    lateinit var cameraCoordinator: ContributionCameraCoordinator
+
+    @Inject
     lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Inject
+    lateinit var uploadCoordinator: ContributionUploadCoordinator
 
     @Inject
     lateinit var wikidataEditListener: WikidataEditListener
@@ -284,7 +292,7 @@ class NearbyParentFragment :
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            contributionImagePicker.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
@@ -301,7 +309,7 @@ class NearbyParentFragment :
 
     private val customSelectorLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            contributionImagePicker.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
@@ -319,7 +327,7 @@ class NearbyParentFragment :
 
     private val cameraPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            contributionImagePicker.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
@@ -468,23 +476,12 @@ class NearbyParentFragment :
         // Initialize the launcher in the appropriate lifecycle method (e.g., onViewCreated)
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    contributionImagePicker.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        contributionImagePicker.handleShowRationaleFlowCameraLocation(
-                            requireActivity(),
-                            inAppCameraLocationPermissionLauncher, // Reference it directly
-                            cameraPickLauncherForResult,
-                        )
-                    } else {
-                        contributionImagePicker.locationPermissionCallback?.onLocationPermissionDenied(
-                            getString(fr.free.nrw.commons.R.string.in_app_camera_location_permission_denied),
-                        )
-                    }
-                }
+                cameraCoordinator.handleLocationPermissionResult(
+                    requireActivity(),
+                    result,
+                    inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult,
+                )
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
         if (isMonumentsEnabled) {
@@ -2909,7 +2906,7 @@ class NearbyParentFragment :
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString())
                 storeSharedPrefs(selectedPlace!!)
                 activity?.let {
-                    contributionImagePicker.initiateCameraPick(
+                    cameraCoordinator.initiateCameraPick(
                         it,
                         inAppCameraLocationPermissionLauncher,
                         cameraPickLauncherForResult,

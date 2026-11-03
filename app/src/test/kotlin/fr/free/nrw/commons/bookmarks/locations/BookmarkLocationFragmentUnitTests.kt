@@ -15,6 +15,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
 import fr.free.nrw.commons.contributions.ContributionImagePicker
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
@@ -65,6 +66,9 @@ class BookmarkLocationFragmentUnitTests {
 
     @Mock
     private lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Mock
+    private lateinit var cameraCoordinator: ContributionCameraCoordinator
 
     @Mock
     private lateinit var adapter: PlaceAdapter
@@ -118,7 +122,8 @@ class BookmarkLocationFragmentUnitTests {
         statusTextView = view.findViewById(R.id.statusMessage)
         progressBar = view.findViewById(R.id.loadingImagesProgressBar)
         recyclerView = view.findViewById(R.id.listView)
-        commonPlaceClickActions = CommonPlaceClickActions(store, activity, contributionImagePicker)
+        commonPlaceClickActions =
+            CommonPlaceClickActions(store, activity, cameraCoordinator, contributionImagePicker)
 
         fragment.bookmarkLocationDao = bookmarkLocationDao
         fragment.controller = controller
