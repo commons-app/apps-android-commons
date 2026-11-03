@@ -791,7 +791,6 @@
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
-    <ID>TooManyFunctions:MediaClient.kt$MediaClient : ContinuationClient</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentOnPageChangeListenerCallback</ID>
     <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
@@ -822,7 +821,6 @@
     <ID>TooManyFunctions:UploadRepository.kt$UploadRepository</ID>
     <ID>TooManyFunctions:UploadWorker.kt$UploadWorker : CoroutineWorker</ID>
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
-    <ID>TooManyFunctions:WikidataEditService.kt$WikidataEditService</ID>
     <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
