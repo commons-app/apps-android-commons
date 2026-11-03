@@ -271,6 +271,13 @@
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
   <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
+  <string name="file_deleted_from_commons">Cost\'archivi a l\'é stàit dëscancelà da Commons.</string>
+  <string name="contribution_deleted">Dëscancelà.</string>
+  <string name="deleted_file_activity_title">Archivi dëscancelà</string>
+  <string name="deleted_file_explanation">Wikimedia Commons a dëscancela j\'archivi ch\'a l\'han nen ëd but educativ o ch\'a trasgredisso soe régole, comprèise le violassion ëd drit d\'autor. Ch\'a caria dle fòto ch\'a l\'ha fàit cheil midem. Fòto ciapà su da l\'aragnà, fòto dë scren, marche e tilèt a son dle rason comun-e për che n\'archivi a sia gavà via.</string>
+  <string name="deleted_file_view_page">Vëdde la pàgina dl\'archivi</string>
+  <string name="deleted_file_view_discussion">Lese la discussion dë scancelament</string>
+  <string name="deleted_file_policies">Régole e linie guida ëd Commons</string>
   <string name="nominated_see_more">Vëdde la pàgina an sl\'aragnà për ij detaj</string>
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
@@ -857,4 +864,12 @@
   <string name="error_applying_blur">Eror an aplicand la turbolensa</string>
   <string name="failed_to_apply_crop">Falì a apliché l\'artaj</string>
   <string name="failed_to_save_image">Falì a argistré la plancia</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (sonor)</string>
+  <string name="unsupported_format_title">Formà nen mantnù</string>
+  <string name="unsupported_format_desc">J\'archivi selessionà a son nen podusse duverté. Wikimedia Commons a ciama për fòrsa ij formà sì-dapress:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Archivi nen mantnù sautà</string>
+  <string name="unsupported_files_skipped_desc">Chèich archivi a son ëstàit sautà për via dël formà nen mantnù. L\'aplicassion a andrà anans a carié j\'archivi ch\'a-i resto che a van d\'acòrd con ij formà mantnù sì-dapress:\n\n%s</string>
 </resources>

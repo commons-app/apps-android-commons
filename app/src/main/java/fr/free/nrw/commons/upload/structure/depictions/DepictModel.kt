@@ -65,7 +65,7 @@ class DepictModel
                         .getEntities(ids)
                         .map {
                             it
-                                .entities()
+                                .getEntityMap()
                                 .values
                                 .mapIndexed { index, entity -> DepictedItem(entity) }
                         }.onErrorResumeWithEmptyList()
@@ -80,7 +80,7 @@ class DepictModel
                     .getEntities(ids)
                     .map {
                         it
-                            .entities()
+                            .getEntityMap()
                             .values
                             .mapIndexed { _, entity -> DepictedItem(entity) }
                     }.onErrorResumeWithEmptyList()

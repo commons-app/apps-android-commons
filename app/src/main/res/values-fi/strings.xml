@@ -22,6 +22,7 @@
 * Stryn
 * Surjection
 * Veikk0.ma
+* Wikipeedikko
 -->
 <resources>
   <string name="commons_facebook">Commonsin Facebook-sivu</string>
@@ -277,6 +278,13 @@
   <string name="null_url">Virhe! URL-osoitetta ei löytynyt</string>
   <string name="nominate_deletion">Ehdota poistettavaksi</string>
   <string name="nominated_for_deletion">Tätä kuvaa on ehdotettu poistettavaksi.</string>
+  <string name="file_deleted_from_commons">Tämä tiedosto on poistettu Commonsista.</string>
+  <string name="contribution_deleted">Poistettu</string>
+  <string name="deleted_file_activity_title">Tiedosto poistettu</string>
+  <string name="deleted_file_explanation">Wikimedia Commons poistaa tiedostot, jotka eivät ole hyödyllisiä tai jotka rikkovat sen sääntöjä, tekijänoikeudet mukaan lukien. Lataa itse ottamiasi kuvia. Internetistä kopioidut kuvat, kuvakaappaukset, logot ja julisteet yleensä poistetaan.</string>
+  <string name="deleted_file_view_page">Näytä tiedostosivu</string>
+  <string name="deleted_file_view_discussion">Lue poistokeskustelu</string>
+  <string name="deleted_file_policies">Yhteiset käytännöt ja ohjeet</string>
   <string name="nominated_see_more">Katso lisätietoja verkkosivulta</string>
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
@@ -756,4 +764,11 @@
   <string name="image_tag_line_created_and_uploaded_by">Luonut ja tallentanut: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Luonut %1$s ja tallentanut %2$s</string>
   <string name="nominated_for_deletion_btn">Ehdotettu poistettavaksi</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (ääni)</string>
+  <string name="unsupported_format_title">Tukematon tiedostomuoto</string>
+  <string name="unsupported_format_desc">Valittuja tiedostoja ei voitu avata. Wikimedia Commons vaatii ehdottomasti nämä tiedostomuodot:\n\n%s</string>
+  <string name="unsupported_files_skipped_desc">Jotkin tiedostot ohitettiin, koska niiden tiedostomuotoa ei tueta. Sovellus jatkaa niiden jäljellä olevien tiedostojen lataamista, jotka käyttävät jotakin seuraavista tuetuista tiedostomuodoista:\n\n%s</string>
 </resources>
