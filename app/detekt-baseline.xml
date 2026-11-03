@@ -791,7 +791,6 @@
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
-    <ID>TooManyFunctions:LoginActivity.kt$LoginActivity : AccountAuthenticatorActivity</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient : ContinuationClient</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentOnPageChangeListenerCallback</ID>
