@@ -84,7 +84,6 @@ object PermissionUtils {
         }
     }
 
-     * @param activity The Activity context
     /**
      * Shows a rationale dialog explaining why permissions are needed.
      *

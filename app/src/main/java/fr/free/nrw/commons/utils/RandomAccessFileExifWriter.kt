@@ -103,21 +103,6 @@ object RandomAccessFileExifWriter {
     private const val RATIONAL_SIZE_BYTES = 8 // 4-byte numerator + 4-byte denominator
 
     /**
-     * Parameters for updating a single tag entry in the EXIF metadata.
-     */
-    private data class TagUpdateParams(
-        val tiffBase: Long,
-        val type: Int,
-        val cnt: Int,
-        val valFieldPos: Long,
-        val valOrOff: Int,
-        val afterEntry: Long,
-        val tagId: Int,
-        val value: String,
-        val order: ByteOrder,
-    )
-
-    /**
      * Encapsulates parameters for updating an EXIF tag entry.
      *
      * @param tiffBase Base offset of the TIFF structure in the file

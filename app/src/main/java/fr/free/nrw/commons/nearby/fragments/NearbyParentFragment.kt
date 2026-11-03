@@ -2338,8 +2338,8 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
-        // When selectedLabels is empty and filterForPlaceState is false, show all places
-        if (selectedLabels == null || (selectedLabels.size == 0 && !filterForPlaceState)) {
+        // When selectedLabels is empty, show all places
+        if (selectedLabels == null || selectedLabels.size == 0) {
             replaceMarkerOverlays(NearbyController.markerLabelList)
             return
         }
