@@ -13,7 +13,6 @@ import javax.inject.Inject
 /**
  * The model class for categories in upload
  */
-@Suppress("TooManyFunctions")
 class CategoriesModel
     @Inject
     constructor(

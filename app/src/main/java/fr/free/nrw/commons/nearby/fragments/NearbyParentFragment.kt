@@ -1499,11 +1499,7 @@ class NearbyParentFragment :
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng?.latitude == 0.0 &&
-            screenTopRightLatLng?.longitude == 0.0 &&
-            screenBottomLeftLatLng?.latitude == 0.0 &&
-            screenBottomLeftLatLng.longitude == 0.0
-        ) {
+        if (isZeroLatLng(screenTopRightLatLng) && isZeroLatLng(screenBottomLeftLatLng)) {
             val delta = FALLBACK_BOUNDS_DELTA_DEGREES
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta

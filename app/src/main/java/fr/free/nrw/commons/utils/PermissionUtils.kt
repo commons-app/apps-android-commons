@@ -89,12 +89,15 @@ object PermissionUtils {
         rationaleMessage: Int,
         onPositive: Runnable?,
         onNegative: Runnable? = null,
+        isForPermanentlyDenied: Boolean = false,
     ) {
         DialogUtil.showAlertDialog(
             activity = activity,
             title = activity.getString(rationaleTitle),
             message = activity.getString(rationaleMessage),
-            positiveButtonText = activity.getString(R.string.ok),
+            positiveButtonText = activity.getString(
+                if (isForPermanentlyDenied) R.string.navigation_item_settings else R.string.ok
+            ),
             negativeButtonText = onNegative?.let { activity.getString(R.string.cancel) },
             onPositiveBtnClick = onPositive,
             onNegativeBtnClick = onNegative,
@@ -180,7 +183,6 @@ object PermissionUtils {
      * @param rationaleMessage    rationale message to be displayed when permission was denied
      */
     @JvmStatic
-    @Suppress("LongParameterList")
     fun checkPermissionsAndPerformAction(
         activity: Activity,
         onPermissionGranted: Runnable,
@@ -210,6 +212,7 @@ object PermissionUtils {
                                     }
                                 },
                                 onNegative = null,
+                                isForPermanentlyDenied = true,
                             )
                         }
                         else -> scope.launch { onPermissionDenied?.run() }
