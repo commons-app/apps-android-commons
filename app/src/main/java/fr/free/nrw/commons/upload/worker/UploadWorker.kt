@@ -51,6 +51,10 @@ import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
 
+private const val MAX_PROGRESS = 100
+private const val MIN_RANDOM_HASH_VALUE = 10_000
+private const val RANDOM_HASH_RANGE = 90_000
+
 class UploadWorker(
     private var appContext: Context,
     workerParams: WorkerParameters,
@@ -83,6 +87,7 @@ class UploadWorker(
 
     private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
+    @Suppress("MagicNumber")
     private val processingUploadsNotificationId = 101
 
     // Attributes of the current-upload notification
@@ -122,6 +127,7 @@ class UploadWorker(
         var contribution: Contribution?,
     ) {
         @SuppressLint("MissingPermission")
+        @Suppress("MagicNumber")
         fun onProgress(
             transferred: Long,
             total: Long,
@@ -134,8 +140,8 @@ class UploadWorker(
             } else {
                 currentNotification
                     .setProgress(
-                        100,
-                        (transferred.toDouble() / total.toDouble() * 100).toInt(),
+                        MAX_PROGRESS,
+                        (transferred.toDouble() / total.toDouble() * MAX_PROGRESS).toInt(),
                         false,
                     )
             }
@@ -173,7 +179,7 @@ class UploadWorker(
                 ),
             ).setAutoCancel(true)
             .setOnlyAlertOnce(true)
-            .setProgress(100, 0, true)
+            .setProgress(MAX_PROGRESS, 0, true)
             .setOngoing(true)
 
     @SuppressLint("MissingPermission")
@@ -588,7 +594,7 @@ class UploadWorker(
                     "File:$sequenceFileName",
                 ).blockingGet()
         ) {
-            val randomHash = (random.nextInt(90000) + 10000).toString()
+            val randomHash = (random.nextInt(RANDOM_HASH_RANGE) + MIN_RANDOM_HASH_VALUE).toString()
 
             sequenceFileName =
                 if (fileName.indexOf('.') == -1) {

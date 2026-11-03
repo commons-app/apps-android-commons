@@ -36,6 +36,8 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+private const val SEARCH_DEBOUNCE_DELAY_MS = 500L
+
 class UploadCategoriesFragment :
     UploadBaseFragment(),
     CategoriesContract.View {
@@ -169,7 +171,7 @@ class UploadCategoriesFragment :
                     binding?.tilContainerSearch?.error =
                         null
                 }.takeUntil(RxView.detaches(binding!!.etSearch))
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(SEARCH_DEBOUNCE_DELAY_MS, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { filter: CharSequence -> searchForCategory(filter.toString()) },

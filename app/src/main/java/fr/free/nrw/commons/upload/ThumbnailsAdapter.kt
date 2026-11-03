@@ -17,6 +17,12 @@ import java.io.File
 /**
  * The adapter class for image thumbnails to be shown while uploading.
  */
+private const val BORDER_STROKE_WIDTH_PX = 8
+private const val ELEVATION_SELECTED_DP = 10f
+private const val ELEVATION_UNSELECTED_DP = 0f
+private const val ALPHA_SELECTED = 1.0f
+private const val ALPHA_UNSELECTED = 0.7f
+
 internal class ThumbnailsAdapter(
     private val callback: Callback,
 ) : RecyclerView.Adapter<ThumbnailsAdapter.ViewHolder>() {
@@ -63,18 +69,18 @@ internal class ThumbnailsAdapter(
             if (position == callback.getCurrentSelectedFilePosition()) {
                 val border = GradientDrawable()
                 border.shape = GradientDrawable.RECTANGLE
-                border.setStroke(8, ContextCompat.getColor(itemView.context, R.color.primaryColor))
+                border.setStroke(BORDER_STROKE_WIDTH_PX, ContextCompat.getColor(itemView.context, R.color.primaryColor))
                 rlContainer.isEnabled = true
                 rlContainer.isClickable = true
-                rlContainer.alpha = 1.0f
+                rlContainer.alpha = ALPHA_SELECTED
                 rlContainer.background = border
-                rlContainer.elevation = 10f
+                rlContainer.elevation = ELEVATION_SELECTED_DP
             } else {
                 rlContainer.isEnabled = false
                 rlContainer.isClickable = false
-                rlContainer.alpha = 0.7f
+                rlContainer.alpha = ALPHA_UNSELECTED
                 rlContainer.background = null
-                rlContainer.elevation = 0f
+                rlContainer.elevation = ELEVATION_UNSELECTED_DP
             }
 
             ivCross.setOnClickListener {

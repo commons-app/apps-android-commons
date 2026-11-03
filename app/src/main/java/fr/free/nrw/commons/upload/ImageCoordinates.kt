@@ -13,6 +13,11 @@ import java.util.Locale
  * Otherwise, if current user location is available while using the in-app camera,
  * use it to set image coordinates
  */
+private const val DEFAULT_MAP_ZOOM_LEVEL = 16.0
+
+private const val MINUTES_PER_DEGREE = 60.0
+private const val SECONDS_PER_DEGREE = 3600.0
+
 class ImageCoordinates internal constructor(
     exif: ExifInterface?,
     inAppPictureLocation: LatLng?,
@@ -29,7 +34,7 @@ class ImageCoordinates internal constructor(
     /**
      *  @return double value of zoom or 16.0 by default
      */
-    var zoomLevel: Double = 16.0
+    var zoomLevel: Double = DEFAULT_MAP_ZOOM_LEVEL
 
     /**
      * Construct from a stream.
@@ -104,7 +109,7 @@ class ImageCoordinates internal constructor(
             val degrees = evaluateExpression(it[0])
             val minutes = evaluateExpression(it[1])
             val seconds = evaluateExpression(it[2])
-            degrees + minutes / 60 + seconds / 3600
+            degrees + minutes / MINUTES_PER_DEGREE + seconds / SECONDS_PER_DEGREE
         }
 
     private fun evaluateExpression(dm: String) = dm.split("/").let { it[0].toDouble() / it[1].toDouble() }

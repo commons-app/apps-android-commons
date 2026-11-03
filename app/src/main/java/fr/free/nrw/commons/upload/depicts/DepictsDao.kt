@@ -15,12 +15,13 @@ import java.util.Date
 
 /**
  *  Dao class for DepictsRoomDataBase
- */
+ *
+ * The maximum number of depicts allowed in the database.
+ * */
+private const val MAX_ITEMS_ALLOWED = 10
+
 @Dao
 abstract class DepictsDao {
-    /** The maximum number of depicts allowed in the database. */
-    private val maxItemsAllowed = 10
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(depictedItem: Depicts)
 
@@ -90,7 +91,7 @@ abstract class DepictsDao {
     }
 
     private suspend fun deleteOldDepictions(depictsListSize: Int) {
-        if (depictsListSize > maxItemsAllowed) {
+        if (depictsListSize > MAX_ITEMS_ALLOWED) {
             val depictsForDeletion = depictsForDeletion(depictsListSize).await()
 
             for (depicts in depictsForDeletion) {

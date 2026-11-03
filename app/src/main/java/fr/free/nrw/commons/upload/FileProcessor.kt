@@ -32,6 +32,12 @@ private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
 private const val RADIUS_STEP_SIZE_IN_METRES = 100
 private const val MIN_NEARBY_RESULTS = 5
 
+private const val TIME_WINDOW_SECONDS = 120L
+
+private const val MILLISECONDS_IN_SECOND = 1000L
+
+private const val METERS_PER_KILOMETER = 1000.0
+
 class FileProcessor
     @Inject
     constructor(
@@ -139,12 +145,12 @@ class FileProcessor
             fileBeingProcessed: File,
             similarImageInterface: SimilarImageInterface?,
         ) {
-            val oneHundredAndTwentySeconds = 120 * 1000L
+            val timeWindowMillis = TIME_WINDOW_SECONDS * MILLISECONDS_IN_SECOND
             // Time when the original image was created
             val timeOfCreation = fileBeingProcessed.lastModified()
             LongRange
             val timeOfCreationRange =
-                timeOfCreation - oneHundredAndTwentySeconds..timeOfCreation + oneHundredAndTwentySeconds
+                timeOfCreation - timeWindowMillis..timeOfCreation + timeWindowMillis
             fileBeingProcessed.parentFile
                 .listFiles()
                 .asSequence()
@@ -207,7 +213,7 @@ class FileProcessor
 
         private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable =
             Observable
-                .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
+                .fromIterable(radiiProgressionInMetres.map { it / METERS_PER_KILOMETER })
                 .concatMap {
                     Observable.fromCallable {
                         okHttpJsonApiClient.getNearbyPlaces(
