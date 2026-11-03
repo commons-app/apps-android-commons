@@ -349,6 +349,4 @@ class DepictedItemTest {
             "rabbit-image.jpg",
         )
     }
-
-
 }

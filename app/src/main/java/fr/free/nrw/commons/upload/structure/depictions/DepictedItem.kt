@@ -14,12 +14,9 @@ import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.StatementPartial
 import kotlinx.parcelize.Parcelize
-import java.math.BigInteger
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
 const val THUMB_IMAGE_SIZE = "120"
@@ -130,28 +127,3 @@ private fun getImageUrl(
             val encodedFileName = URLEncoder.encode(it, StandardCharsets.UTF_8.name()).replace("+", "%20")
             "https://commons.wikimedia.org/wiki/Special:FilePath/$encodedFileName?width=$size"
         }
-
-/**
- * Generates MD5 hash for the filename
- */
-private fun getMd5(input: String): String =
-    try {
-        // Static getInstance method is called with hashing MD5
-        val md = MessageDigest.getInstance("MD5")
-
-        // digest() method is called to calculate message digest
-        //  of an input digest() return array of byte
-        val messageDigest = md.digest(input.toByteArray())
-
-        // Convert byte array into signum representation
-        val no = BigInteger(1, messageDigest)
-
-        // Convert message digest into hex value
-        var hashtext = no.toString(16)
-        while (hashtext.length < 32) {
-            hashtext = "0$hashtext"
-        }
-        hashtext
-    } catch (e: NoSuchAlgorithmException) {
-        throw IllegalStateException(e)
-    }
