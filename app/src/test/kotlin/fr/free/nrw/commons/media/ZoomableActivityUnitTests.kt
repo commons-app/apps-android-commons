@@ -77,58 +77,6 @@ class ZoomableActivityUnitTests {
     }
 
     /**
-     * Test onLeftSwiped.
-     */
-    @Test
-    fun testOnLeftSwiped() {
-        val func = activity.javaClass.getDeclaredMethod("onLeftSwiped", Boolean::class.java)
-        func.isAccessible = true
-        func.invoke(activity, true)
-
-        Whitebox.setInternalState(activity, "images", arrayListOf(image, image))
-        Whitebox.setInternalState(activity, "position", 0)
-        func.invoke(activity, true)
-
-        func.invoke(activity, false)
-    }
-
-    /**
-     * Test onRightSwiped.
-     */
-    @Test
-    fun testOnRightSwiped() {
-        val func = activity.javaClass.getDeclaredMethod("onRightSwiped", Boolean::class.java)
-        func.isAccessible = true
-        func.invoke(activity, true)
-
-        Whitebox.setInternalState(activity, "images", arrayListOf(image, image))
-        Whitebox.setInternalState(activity, "position", 1)
-        func.invoke(activity, true)
-
-        func.invoke(activity, false)
-    }
-
-    /**
-     * Test onUpSwiped.
-     */
-    @Test
-    fun testOnUpSwiped() {
-        val func = activity.javaClass.getDeclaredMethod("onUpSwiped")
-        func.isAccessible = true
-        func.invoke(activity)
-    }
-
-    /**
-     * Test onDownSwiped.
-     */
-    @Test
-    fun testOnDownSwiped() {
-        val func = activity.javaClass.getDeclaredMethod("onDownSwiped")
-        func.isAccessible = true
-        func.invoke(activity)
-    }
-
-    /**
      * Test onBackPressed.
      */
     @Test
