@@ -9,7 +9,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import java.util.HashMap
 
 /**
  * Array adapter for recent languages

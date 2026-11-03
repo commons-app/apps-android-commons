@@ -11,7 +11,10 @@ private val jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE)
  * @param ext Correct extension
  * @return File with correct extension
  */
-fun fixExtension(theTitle: String, ext: String?): String {
+fun fixExtension(
+    theTitle: String,
+    ext: String?,
+): String {
     var result = theTitle
     var extension = ext
 

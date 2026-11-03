@@ -27,7 +27,6 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
@@ -39,6 +38,7 @@ import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import io.reactivex.Single
 import org.junit.Assert
@@ -119,8 +119,6 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var textView: TextView
 
-    @Mock
-    private lateinit var htmlTextView: HtmlTextView
 
     @Mock
     private lateinit var linearLayout: LinearLayout
@@ -137,17 +135,11 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-    @Mock
-    private lateinit var webView: WebView
 
     @Mock
     private lateinit var progressBar: ProgressBar
 
-    @Mock
-    private lateinit var listView: ListView
 
-    @Mock
-    private lateinit var intent: Intent
 
     private lateinit var activity: SearchActivity
 
@@ -160,7 +152,7 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var mockSharedPreferencesEditor: SharedPreferences.Editor
 
-    private lateinit var _binding: FragmentMediaDetailBinding
+    private lateinit var binding: FragmentMediaDetailBinding
 
     @Before
     fun setUp() {
@@ -183,12 +175,12 @@ class MediaDetailFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        _binding = FragmentMediaDetailBinding.inflate(layoutInflater)
+        binding = FragmentMediaDetailBinding.inflate(layoutInflater)
 
-        scrollView = _binding.mediaDetailScrollView
+        scrollView = binding.mediaDetailScrollView
 
-        progressBarDeletion = _binding.progressBarDeletion
-        delete = _binding.nominateDeletion
+        progressBarDeletion = binding.progressBarDeletion
+        delete = binding.nominateDeletion
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -196,13 +188,13 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "reasonListEnglishMappings", reasonListEnglishMappings)
         Whitebox.setInternalState(fragment, "reasonBuilder", reasonBuilder)
         Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
-        Whitebox.setInternalState(fragment, "_binding", _binding)
+        Whitebox.setInternalState(fragment, "_binding", binding)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
-        Whitebox.setInternalState(_binding, "mediaDetailImageView", simpleDraweeView)
-        Whitebox.setInternalState(_binding, "mediaDetailTitle", textView)
-        Whitebox.setInternalState(_binding, "mediaDetailDepictionContainer", linearLayout)
-        Whitebox.setInternalState(_binding, "dummyCaptionDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(_binding, "depictionsEditButton", button)
+        Whitebox.setInternalState(binding, "mediaDetailImageView", simpleDraweeView)
+        Whitebox.setInternalState(binding, "mediaDetailTitle", textView)
+        Whitebox.setInternalState(binding, "mediaDetailDepictionContainer", linearLayout)
+        Whitebox.setInternalState(binding, "dummyCaptionDescriptionContainer", linearLayout)
+        Whitebox.setInternalState(binding, "depictionsEditButton", button)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
@@ -239,7 +231,7 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
-        fragment.launchZoomActivity(_binding.root)
+        fragment.launchZoomActivity(binding.root)
     }
 
     @Test
@@ -379,11 +371,15 @@ class MediaDetailFragmentUnitTests {
                 "|author=[[User:Colin|Colin]]\n" +
                 "|permission=\n" +
                 "|other versions=\n" +
-                "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
+                "|Other fields = {{Credit line |Author = © [[User:Colin]] | " +
+                "Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}"
-        val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}")
+        val map =
+            linkedMapOf(
+                "en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}",
+            )
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
 
@@ -403,7 +399,8 @@ class MediaDetailFragmentUnitTests {
                 "|author=[[User:Colin|Colin]]\n" +
                 "|permission=\n" +
                 "|other versions=\n" +
-                "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
+                "|Other fields = {{Credit line |Author = © [[User:Colin]] | " +
+                "Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}\n"
@@ -460,8 +457,12 @@ class MediaDetailFragmentUnitTests {
                 "}}"
         val map =
             linkedMapOf(
-                "en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).",
-                "it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).",
+                "en" to
+                    "''Ricchi giardini nel Palazzo di Monforte a Palermo'', " +
+                    "set design for ''I Vespri siciliani'' act 5 (undated).",
+                "it" to
+                    "''Ricchi giardini nel Palazzo di Monforte a Palermo'', " +
+                    "bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).",
             )
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -769,12 +770,12 @@ class MediaDetailFragmentUnitTests {
         ).`when`(deleteHelper).makeDeletion(
             ArgumentMatchers.any(),
             ArgumentMatchers.any(),
-            ArgumentMatchers.any()
+            ArgumentMatchers.any(),
         )
 
         doReturn(Single.just("")).`when`(reasonBuilder).getReason(
             ArgumentMatchers.any(),
-            ArgumentMatchers.any()
+            ArgumentMatchers.any(),
         )
 
         val method: Method =

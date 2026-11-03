@@ -13,7 +13,8 @@ class ParentDepictionsFragment : PageableDepictionsFragment() {
     override val injectedPresenter
         get() = presenter
 
-    override fun getEmptyText(query: String) = getString(R.string.no_parent_classes, requireArguments().getString("wikidataItemName")!!)
+    override fun getEmptyText(query: String) =
+        getString(R.string.no_parent_classes, requireArguments().getString("wikidataItemName")!!)
 
     override fun onViewCreated(
         view: View,
