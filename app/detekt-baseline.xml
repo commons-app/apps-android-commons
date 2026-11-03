@@ -2,16 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$!isBetaFlavour &amp;&amp; sessionManager!!.isUserLoggedIn &amp;&amp; sessionManager!!.currentAccount != null &amp;&amp; !isUserProfile</ID>
-    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment$shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ((activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS)</ID>
-    <ID>ComplexCondition:ContributionsFragment.kt$ContributionsFragment.&lt;no name provided&gt;$shouldShowRequestPermissionRationale( permission.ACCESS_FINE_LOCATION, ) &amp;&amp; store!!.getBoolean("displayLocationPermissionForCardView", true) &amp;&amp; !store!!.getBoolean("doNotAskForLocationPermission", false) &amp;&amp; ( (activity as MainActivity).activeFragment == ActiveFragment.CONTRIBUTIONS )</ID>
-    <ID>ComplexCondition:ExploreMapFragment.kt$ExploreMapFragment$nearbyBaseMarker == null || nearbyBaseMarker.place.getName() == null || baseMarkerOverlayMap == null || !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)</ID>
-    <ID>ComplexCondition:ImageCoordinates.kt$ImageCoordinates$latitude != null &amp;&amp; longitude != null &amp;&amp; latitudeRef != null &amp;&amp; longitudeRef != null</ID>
-    <ID>ComplexCondition:NearbyParentFragment.kt$NearbyParentFragment$selectedLabels != null &amp;&amp; (selectedLabels.size != 0 || !filterForPlaceState) &amp;&amp; ( !selectedLabels.contains(place.label) &amp;&amp; !( selectedLabels.contains(Label.BOOKMARKS) &amp;&amp; markerPlaceGroup.isBookmarked ) )</ID>
-    <ID>ComplexCondition:QuizActivity.kt$QuizActivity$(quiz[questionIndex].isAnswer &amp;&amp; isPositiveAnswerChecked) || (!quiz[questionIndex].isAnswer &amp;&amp; isNegativeAnswerChecked)</ID>
-    <ID>ComplexCondition:QuizChecker.kt$QuizChecker$isRevertCountFetched &amp;&amp; isUploadCountFetched &amp;&amp; totalUploadCount &gt;= uploadCountThreshold &amp;&amp; (revertCount * 100) / totalUploadCount &gt;= 50</ID>
-    <ID>ComplexCondition:ReadFBMD.kt$ReadFBMD$psBlockOffset &gt; 0 &amp;&amp; fbmdOffset &gt; 0 &amp;&amp; fbmdOffset &gt; psBlockOffset &amp;&amp; fbmdOffset - psBlockOffset &lt; 0x80</ID>
-    <ID>ComplexCondition:UploadActivity.kt$UploadActivity$isLocationTagUnchecked || locationDifference &gt; 100 || !defaultKvStore.getBoolean("inAppCameraLocationPref") || !isInAppCameraUpload</ID>
+
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>CyclomaticComplexMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
     <ID>CyclomaticComplexMethod:CropOverlayView.kt$CropOverlayView$private fun moveHandle( handle: Handle, dx: Float, dy: Float, )</ID>
@@ -29,8 +20,7 @@
     <ID>CyclomaticComplexMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>CyclomaticComplexMethod:UploadActivity.kt$UploadActivity$private fun receiveSharedItems()</ID>
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
-    <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
-    <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
+
     <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
     <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
     <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
@@ -152,15 +142,11 @@
     <ID>LongParameterList:PlaceAdapter.kt$PlaceAdapter$( bookmarkLocationsDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope? = null, onPlaceClicked: ((Place) -&gt; Unit)? = null, onBookmarkClicked: (Place, Boolean) -&gt; Unit, commonPlaceClickActions: CommonPlaceClickActions, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, )</ID>
     <ID>LongParameterList:PlaceAdapterDelegate.kt$( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, )</ID>
     <ID>LongParameterList:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
-    <ID>LongParameterList:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$( raf: RandomAccessFile, tiffBase: Long, type: Int, cnt: Int, valFieldPos: Long, valOrOff: Int, afterEntry: Long, tagId: Int, value: String, order: ByteOrder, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, errorMessage: AtomicReference&lt;String&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( private val uploadInterface: UploadInterface, @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient, private val pageContentsCreator: PageContentsCreator, private val fileUtilsWrapper: FileUtilsWrapper, private val gson: Gson, private val timeProvider: TimeProvider, private val contributionDao: ContributionDao, )</ID>
     <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, // according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false, )</ID>
     <ID>LongParameterList:UploadModel.kt$UploadModel$( @param:Named("licenses") val licenses: List&lt;String&gt;, @param:Named("default_preferences") val store: JsonKvStore, @param:Named("licenses_by_name") val licensesByName: Map&lt;String, String&gt;, val context: Context, val sessionManager: SessionManager, val fileProcessor: FileProcessor, val imageProcessingService: ImageProcessingService, )</ID>
-    <ID>LoopWithTooManyJumpStatements:CsrfTokenClient.kt$CsrfTokenClient$for</ID>
-    <ID>LoopWithTooManyJumpStatements:ImageLoader.kt$ImageLoader$for</ID>
-    <ID>LoopWithTooManyJumpStatements:NearbyParentFragment.kt$NearbyParentFragment$for</ID>
-    <ID>LoopWithTooManyJumpStatements:ZoomableActivity.kt$ZoomableActivity$for</ID>
+
     <ID>MagicNumber:AboutActivity.kt$AboutActivity$17</ID>
     <ID>MagicNumber:AboutActivity.kt$AboutActivity$50</ID>
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$8</ID>
@@ -679,12 +665,7 @@
     <ID>ReturnCount:UploadWorker.kt$UploadWorker$@SuppressLint("MissingPermission") override suspend fun doWork(): Result</ID>
     <ID>ReturnCount:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity$override fun onOptionsItemSelected(item: MenuItem): Boolean</ID>
     <ID>ReturnCount:ZoomableDraweeView.kt$ZoomableDraweeView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
-    <ID>SpreadOperator:BaseDelegateAdapter.kt$BaseDelegateAdapter$( object : DiffUtil.ItemCallback&lt;T&gt;() { override fun areItemsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areItemsTheSame(oldItem, newItem) override fun areContentsTheSame( oldItem: T &amp; Any, newItem: T &amp; Any, ): Boolean = areContentsTheSame(oldItem, newItem) }, *delegates, )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { FilePicker.openCustomSelector(activity, resultLauncher, 0, singleSelection) }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
-    <ID>SpreadOperator:ContributionController.kt$ContributionController$( activity, { if (defaultKvStore.getBoolean("inAppCameraFirstRun")) { defaultKvStore.putBoolean("inAppCameraFirstRun", false) askUserToAllowLocationAccess( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) { createDialogsAndHandleLocationPermissions( activity, inAppCameraLocationPermissionLauncher, resultLauncher, ) } else { initiateCameraUpload(activity, resultLauncher) } }, R.string.storage_permission_title, R.string.write_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
-    <ID>SpreadOperator:DownloadUtils.kt$DownloadUtils$( activity, { enqueueRequest(activity, req) }, { Toast .makeText( activity, R.string.download_failed_we_cannot_download_the_file_without_storage_permission, Toast.LENGTH_SHORT, ).show() }, R.string.storage_permission, R.string.write_storage_permission_rationale, *PermissionUtils.PERMISSIONS_STORAGE, )</ID>
-    <ID>SpreadOperator:MediaDetailFragment.kt$MediaDetailFragment$( requireActivity(), { launchZoomActivityAfterPermissionCheck(view) }, R.string.storage_permission_title, R.string.read_storage_permission_rationale, *PERMISSIONS_STORAGE, )</ID>
-    <ID>SpreadOperator:PageTitle.kt$PageTitle$(*Locale.getISOLanguages())</ID>
+
     <ID>SpreadOperator:RadioGroupHelper.kt$RadioGroupHelper$( *radiosIDs.map { id -&gt; activity.findViewById&lt;RadioButton&gt;(id) }.toTypedArray(), )</ID>
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
     <ID>SpreadOperator:UploadActivity.kt$UploadActivity$( this, Runnable { binding.cvContainerTopCard.visibility = View.VISIBLE receiveSharedItems() }, Runnable { isShowPermissionsDialog = true checkStoragePermissions() }, R.string.storage_permission_title, R.string.write_storage_permission_rationale_for_image_share, *PERMISSIONS_STORAGE, )</ID>

@@ -2338,13 +2338,16 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
-        if (selectedLabels == null || selectedLabels.size == 0) {
+        // When selectedLabels is empty and filterForPlaceState is false, show all places
+        if (selectedLabels == null || (selectedLabels.size == 0 && !filterForPlaceState)) {
             replaceMarkerOverlays(NearbyController.markerLabelList)
             return
         }
         val placeGroupsToShow = ArrayList<MarkerPlaceGroup>()
         for (markerPlaceGroup in NearbyController.markerLabelList) {
             val place = markerPlaceGroup.place
+            // When label filter is engaged
+            // then compare it against place's label
             val isHiddenMonument = !displayWlm && place.isMonument
             if (!matchesSelectedLabels(markerPlaceGroup, selectedLabels) || isHiddenMonument) {
                 continue

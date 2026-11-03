@@ -62,6 +62,7 @@ object PermissionUtils {
      * @param activity The Activity which requires a permission which has been blocked
      */
     @JvmStatic
+    @Suppress("UnusedPrivateMember")
     private fun askUserToManuallyEnablePermissionFromSettings(activity: Activity) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", activity.packageName, null)
@@ -83,6 +84,18 @@ object PermissionUtils {
         }
     }
 
+     * @param activity The Activity context
+    /**
+     * Shows a rationale dialog explaining why permissions are needed.
+     *
+     * @param activity The Activity context
+     * @param rationaleTitle String resource ID for the dialog title
+     * @param rationaleMessage String resource ID for the dialog message
+     * @param onPositive Callback when positive button is clicked
+     * @param onNegative Optional callback when negative button is clicked
+     * @param isForPermanentlyDenied True if showing dialog for permanently denied
+     *        permissions (shows "Settings" button instead of "OK")
+     */
     private fun showRationaleDialog(
         activity: Activity,
         rationaleTitle: Int,
