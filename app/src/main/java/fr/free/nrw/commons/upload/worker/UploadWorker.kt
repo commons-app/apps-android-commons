@@ -290,14 +290,12 @@ class UploadWorker(
 
     override suspend fun getForegroundInfo(): ForegroundInfo = createForegroundInfo()
 
-    private fun createNotificationForForegroundService(): Notification {
-        // TODO: Improve notification for foreground service
-        return getNotificationBuilder(
+    private fun createNotificationForForegroundService(): Notification =
+        getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
         )!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
 
     /**
      * Upload the contribution
