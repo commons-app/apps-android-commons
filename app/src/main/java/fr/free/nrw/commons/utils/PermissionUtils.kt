@@ -62,7 +62,6 @@ object PermissionUtils {
      * @param activity The Activity which requires a permission which has been blocked
      */
     @JvmStatic
-    @Suppress("UnusedPrivateMember")
     private fun askUserToManuallyEnablePermissionFromSettings(activity: Activity) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", activity.packageName, null)
@@ -101,8 +100,8 @@ object PermissionUtils {
         rationaleMessage: Int,
         onPositive: Runnable?,
         onNegative: Runnable? = null,
-        isForPermanentlyDenied: Boolean = false,
     ) {
+        val isForPermanentlyDenied = onNegative == null
         DialogUtil.showAlertDialog(
             activity = activity,
             title = activity.getString(rationaleTitle),
@@ -223,8 +222,6 @@ object PermissionUtils {
                                         activity.isShowPermissionsDialog = true
                                     }
                                 },
-                                onNegative = null,
-                                isForPermanentlyDenied = true,
                             )
                         }
                         else -> scope.launch { onPermissionDenied?.run() }
