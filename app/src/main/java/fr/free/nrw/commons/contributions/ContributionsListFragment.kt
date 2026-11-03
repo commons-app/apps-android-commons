@@ -57,7 +57,7 @@ class ContributionsListFragment :
     WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
-    var controller: ContributionController? = null
+    var imagePicker: ContributionImagePicker? = null
 
     @JvmField
     @Inject
@@ -109,10 +109,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            imagePicker!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromGallery(
+                imagePicker!!.onPictureReturnedFromGallery(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -124,10 +124,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            imagePicker!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCustomSelector(
+                FilePicker.onPictureReturnedFromCustomSelector(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -139,10 +139,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            imagePicker!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCamera(
+                FilePicker.onPictureReturnedFromCamera(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -167,20 +167,20 @@ class ContributionsListFragment :
                 val areAllGranted = result.values.all { it }
 
                 if (areAllGranted) {
-                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
+                    imagePicker?.locationPermissionCallback?.onLocationPermissionGranted()
                 } else {
                     activity?.let { currentActivity ->
                         if (currentActivity.shouldShowRequestPermissionRationale(
                                 permission.ACCESS_FINE_LOCATION,
                             )
                         ) {
-                            controller?.handleShowRationaleFlowCameraLocation(
+                            imagePicker?.handleShowRationaleFlowCameraLocation(
                                 currentActivity,
                                 inAppCameraLocationPermissionLauncher, // Pass launcher
                                 cameraPickLauncherForResult,
                             )
                         } else {
-                            controller?.locationPermissionCallback?.onLocationPermissionDenied(
+                            imagePicker?.locationPermissionCallback?.onLocationPermissionDenied(
                                 currentActivity.getString(
                                     R.string.in_app_camera_location_permission_denied,
                                 ),
@@ -426,7 +426,7 @@ class ContributionsListFragment :
     private fun setListeners() {
         binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
         binding!!.fabCamera.setOnClickListener { view: View? ->
-            controller!!.initiateCameraPick(
+            imagePicker!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
                 cameraPickLauncherForResult,
@@ -441,7 +441,7 @@ class ContributionsListFragment :
             true
         }
         binding!!.fabGallery.setOnClickListener { view: View? ->
-            controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
+            imagePicker!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
             animateFAB(isFabOpen)
         }
         binding!!.fabGallery.setOnLongClickListener { view: View? ->
@@ -454,7 +454,7 @@ class ContributionsListFragment :
      * Launch Custom Selector.
      */
     private fun launchCustomSelector() {
-        controller!!.initiateCustomGalleryPickWithPermission(
+        imagePicker!!.initiateCustomGalleryPickWithPermission(
             requireActivity(),
             customSelectorLauncherForResult,
         )

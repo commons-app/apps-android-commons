@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionImagePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
@@ -27,7 +27,7 @@ class CommonPlaceClickActions
     constructor(
         @Named("default_preferences") private val applicationKvStore: JsonKvStore,
         private val activity: Activity,
-        private val contributionController: ContributionController,
+        private val contributionImagePicker: ContributionImagePicker,
     ) {
         fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit =
             { place, launcher, resultLauncher ->
@@ -38,7 +38,7 @@ class CommonPlaceClickActions
                         "Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}",
                     )
                     storeSharedPrefs(place)
-                    contributionController.initiateCameraPick(activity, launcher, resultLauncher)
+                    contributionImagePicker.initiateCameraPick(activity, launcher, resultLauncher)
                 }
             }
 
@@ -85,7 +85,7 @@ class CommonPlaceClickActions
                             "Image desc: ${place.getLongDescription()}",
                     )
                     storeSharedPrefs(place)
-                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
+                    contributionImagePicker.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
             }
 

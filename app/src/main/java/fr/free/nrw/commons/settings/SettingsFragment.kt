@@ -37,7 +37,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionImagePicker
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -70,7 +70,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var recentLanguagesDao: RecentLanguagesDao
 
     @Inject
-    lateinit var contributionController: ContributionController
+    lateinit var contributionImagePicker: ContributionImagePicker
 
     @Inject
     lateinit var locationManager: LocationServiceManager
@@ -89,11 +89,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
-        contributionController.handleActivityResultWithCallback(
+        contributionImagePicker.handleActivityResultWithCallback(
             requireActivity(),
             object: FilePicker.HandleActivityResult {
                 override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
-                    contributionController.onPictureReturnedFromCamera(
+                    FilePicker.onPictureReturnedFromCamera(
                         result,
                         requireActivity(),
                         callbacks
@@ -171,7 +171,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     &&
                 shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)
             ) {
-                contributionController.handleShowRationaleFlowCameraLocation(
+                contributionImagePicker.handleShowRationaleFlowCameraLocation(
                     requireActivity(),
                     inAppCameraLocationPermissionLauncher,
                     cameraPickLauncherForResult
