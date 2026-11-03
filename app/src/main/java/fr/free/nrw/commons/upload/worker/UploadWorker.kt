@@ -32,6 +32,7 @@ import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
+import fr.free.nrw.commons.utils.getStringSafe
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
@@ -274,7 +275,7 @@ class UploadWorker(
 
         val notificationProgressUpdater =
             NotificationUpdateProgressListener(
-                appContext.getString(
+                appContext.getStringSafe(
                     R.string.upload_progress_notification_title_finishing,
                     displayTitle,
                 ),

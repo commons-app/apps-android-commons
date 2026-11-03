@@ -15,6 +15,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
+import fr.free.nrw.commons.utils.getStringSafe
 import javax.inject.Inject
 
 /**
@@ -75,7 +76,7 @@ class UploadNotificationHelper
             // The previous upload may have left the notification on the result channel
             currentNotification.useUploadProgressChannel()
             currentNotification.setContentTitle(
-                context.getString(
+                context.getStringSafe(
                     R.string.upload_progress_notification_title_start,
                     displayTitle,
                 ),
@@ -138,7 +139,7 @@ class UploadNotificationHelper
             currentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
             currentNotification
                 .setContentTitle(
-                    context.getString(
+                    context.getStringSafe(
                         R.string.upload_completed_notification_title,
                         displayTitle,
                     ),
@@ -168,7 +169,7 @@ class UploadNotificationHelper
             )
             currentNotification
                 .setContentTitle(
-                    context.getString(
+                    context.getStringSafe(
                         R.string.upload_failed_notification_title,
                         displayTitle,
                     ),
@@ -197,7 +198,7 @@ class UploadNotificationHelper
             )
             currentNotification
                 .setContentTitle(
-                    context.getString(
+                    context.getStringSafe(
                         R.string.upload_failed_notification_title,
                         displayTitle,
                     ),
@@ -221,7 +222,7 @@ class UploadNotificationHelper
             val displayTitle = contribution.media.displayTitle
             currentNotification
                 .setContentTitle(
-                    context.getString(
+                    context.getStringSafe(
                         R.string.upload_failed_notification_title,
                         displayTitle,
                     ),
@@ -246,7 +247,7 @@ class UploadNotificationHelper
             currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
             currentNotification
                 .setContentTitle(
-                    context.getString(
+                    context.getStringSafe(
                         R.string.upload_paused_notification_title,
                         displayTitle,
                     ),
