@@ -2636,7 +2636,7 @@ class NearbyParentFragment :
         }
 
         /*
-         * FIXME: With the revamp of the location permission helper in the MR
+         * Note: With the revamp of the location permission helper in the MR
          *  #5494[1], there is a doubt that the following code is redundant.
          *  If we could confirm the same, the following code can be removed. If it
          *  turns out to be necessary, we could replace this with a comment
@@ -2732,7 +2732,7 @@ class NearbyParentFragment :
     private fun passInfoToSheet(place: Place) {
         selectedPlace = place
         dataList = ArrayList()
-        // TODO: Decide button text for fitting in the screen
+        // The bookmark item has no label for now, a text that fits on the screen is still to be decided
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_round_star_border_24px,

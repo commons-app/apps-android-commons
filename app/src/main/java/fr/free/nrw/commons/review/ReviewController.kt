@@ -48,7 +48,7 @@ class ReviewController
         @field:Named("commons-page-edit")
         lateinit var pageEditClient: PageEditClient
 
-        var firstRevision: MwQueryPage.Revision? = null // TODO: maybe we can expand this class to include fileName
+        var firstRevision: MwQueryPage.Revision? = null // Could be expanded to include the fileName
 
         private val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

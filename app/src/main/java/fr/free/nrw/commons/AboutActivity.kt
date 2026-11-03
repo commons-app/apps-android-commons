@@ -39,7 +39,7 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
-    @SuppressLint("StringFormatInvalid") // TODO:
+    @SuppressLint("StringFormatInvalid")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -61,7 +61,7 @@ class AboutActivity : BaseActivity() {
          */
         binding!!.aboutLicense.setHtmlText(aboutText)
 
-        @SuppressLint("StringFormatMatches") // TODO:
+        @SuppressLint("StringFormatMatches")
         val improveText =
             String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL)
         binding!!.aboutImprove.setHtmlText(improveText)
