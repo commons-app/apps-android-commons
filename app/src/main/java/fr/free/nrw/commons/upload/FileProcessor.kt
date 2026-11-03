@@ -129,12 +129,12 @@ class FileProcessor
             }
         }
 
-    /**
-     * Finds other images around the same location that were taken within a ±120 sec window.
-     *
-     * @param fileBeingProcessed The file currently being checked.
-     * @param similarImageInterface Callback to display similar images if any are found.
-     */
+        /**
+         * Finds other images around the same location that were taken within a ±120 sec window.
+         *
+         * @param fileBeingProcessed The file currently being checked.
+         * @param similarImageInterface Callback to display similar images if any are found.
+         */
         private fun findOtherImages(
             fileBeingProcessed: File,
             similarImageInterface: SimilarImageInterface?,

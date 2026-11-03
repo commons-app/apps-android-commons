@@ -4,6 +4,7 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -32,14 +33,13 @@ class PageEditClient(
             pageEditInterface
                 .postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse ->
-                    editResponse.edit()!!.editSucceeded()
+                    editResponse.getEditResult()!!.editSucceeded()
                 }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to edit the page")
+            Observable.just(false)
         }
 
     /**
@@ -68,14 +68,13 @@ class PageEditClient(
                     true,
                     csrfTokenClient.getTokenBlocking(),
                 ).map { editResponse ->
-                    editResponse.edit()!!.editSucceeded()
+                    editResponse.getEditResult()!!.editSucceeded()
                 }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to create the page")
+            Observable.just(false)
         }
 
     /**
@@ -93,13 +92,12 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to append the page")
+            Observable.just(false)
         }
 
     /**
@@ -117,13 +115,12 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
+                .map { editResponse -> editResponse.getEditResult()?.editSucceeded() ?: false }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to prepend the page")
+            Observable.just(false)
         }
 
     /**
@@ -143,13 +140,12 @@ class PageEditClient(
         try {
             pageEditInterface
                 .postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to create the new section")
+            Observable.just(false)
         }
 
     /**
@@ -175,12 +171,11 @@ class PageEditClient(
                     value,
                     csrfTokenClient.getTokenBlocking(),
                 ).map { it.success }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(0)
-            }
+            Timber.e(throwable, "Failed to set the captions")
+            Observable.just(0)
         }
 
     /**

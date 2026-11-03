@@ -21,14 +21,14 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
@@ -40,6 +40,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -313,10 +314,11 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
-            "onCameraPosition",
-            ActivityResult::class.java
-        )
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -346,10 +348,11 @@ class UploadMediaDetailFragmentUnitTest {
 
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod(
-            "onCameraPosition",
-            ActivityResult::class.java
-        )
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -365,21 +368,57 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
+    fun testUpdateMediaDetailsWithCaptionOnlyClearsShowNearbyFound() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "showNearbyFound", true)
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        fragment.updateMediaDetails(details)
+        val showNearbyFound: Boolean = Whitebox.getInternalState(fragment, "showNearbyFound")
+        Assert.assertFalse(showNearbyFound)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnBecameVisibleWithCaptionOnlyDoesNotReapplyNearbyPlace() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        UploadActivity.nearbyPopupAnswers = mutableMapOf(place to true)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(fragment, "nearbyPlace", place)
+        Whitebox.setInternalState(fragment, "indexOfFragment", 1)
+        Whitebox.setInternalState(fragment, "showNearbyFound", true)
+
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        `when`(presenter.fetchTitleAndDescription(1)).thenAnswer {
+            fragment.updateMediaDetails(details)
+        }
+
+        fragment.onBecameVisible()
+        Mockito.verify(presenter, Mockito.never()).onUserConfirmedUploadIsOfPlace(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.anyInt(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testOnMediaDetailsChangedPersistsAdapterItemsToUploadItem() {
         // Regression test for #6938: a language row added via "+" must be written back into the
         // UploadItem backing this fragment to ensure it gets uploaded
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "fragmentCallback", callback)
         Whitebox.setInternalState(fragment, "presenter", presenter)
-        val itemsWithSecondLanguage = mutableListOf(
-            UploadMediaDetail(languageCode = "en", captionText = "test"),
-            UploadMediaDetail(languageCode = "ja", captionText = "テスト")
-        )
+        val itemsWithSecondLanguage =
+            mutableListOf(
+                UploadMediaDetail(languageCode = "en", captionText = "test"),
+                UploadMediaDetail(languageCode = "ja", captionText = "テスト"),
+            )
         `when`(uploadMediaDetailAdapter.items).thenReturn(itemsWithSecondLanguage)
 
         fragment.onMediaDetailsChanged()
 
-        Mockito.verify(presenter)
+        Mockito
+            .verify(presenter)
             .setUploadMediaDetails(itemsWithSecondLanguage, 0)
     }
 

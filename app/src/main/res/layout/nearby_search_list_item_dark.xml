@@ -14,11 +14,21 @@
 
     <TextView
         android:id="@+id/place_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_marginStart="@dimen/tiny_margin"
         android:layout_marginEnd="@dimen/tiny_margin"
         android:layout_marginTop="@dimen/tiny_height"
         android:paddingTop="@dimen/miniscule_margin"
         android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/place_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_done_white"
+        android:visibility="gone"
+        android:contentDescription="@string/selected"/>
 </LinearLayout>

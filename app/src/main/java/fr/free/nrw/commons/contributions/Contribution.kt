@@ -96,6 +96,12 @@ data class Contribution constructor(
         const val STATE_PAUSED = 4
 
         /**
+         * Commons deleted this file. The row stays in the contributions list so it can be shown
+         * differently from a normal upload.
+         */
+        const val STATE_DELETED = 5
+
+        /**
          * Formatting captions to the Wikibase format for sending labels
          * @param uploadMediaDetails list of media Details
          */

@@ -160,17 +160,22 @@ class UploadMediaDetailAdapterUnitTest {
             UploadMediaDetailAdapter(fragment, "", recentLanguagesDao, mockResultLauncher)
         realAdapter.items = mutableListOf(UploadMediaDetail(languageCode = "en", captionText = "test"))
         var uploadItemMediaDetails: List<UploadMediaDetail> = emptyList()
-        realAdapter.eventListener = object : UploadMediaDetailAdapter.EventListener {
-            override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) = Unit
-            override fun addLanguage() = Unit
-            override fun onMediaDetailsChanged() {
-                uploadItemMediaDetails = realAdapter.items
+        realAdapter.eventListener =
+            object : UploadMediaDetailAdapter.EventListener {
+                override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) = Unit
+
+                override fun addLanguage() = Unit
+
+                override fun onMediaDetailsChanged() {
+                    uploadItemMediaDetails = realAdapter.items
+                }
             }
-        }
 
         realAdapter.addDescription(UploadMediaDetail(languageCode = "ja", captionText = "テスト"))
 
-        val captions = fr.free.nrw.commons.contributions.Contribution.formatCaptions(uploadItemMediaDetails)
+        val captions =
+            fr.free.nrw.commons.contributions.Contribution
+                .formatCaptions(uploadItemMediaDetails)
         Assert.assertEquals(2, captions.size)
         Assert.assertEquals("test", captions["en"])
         Assert.assertEquals("テスト", captions["ja"])

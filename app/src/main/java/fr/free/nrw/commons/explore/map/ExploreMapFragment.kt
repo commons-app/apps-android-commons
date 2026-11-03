@@ -33,6 +33,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.loadNearbyMapFromExplore
 import fr.free.nrw.commons.databinding.FragmentExploreMapBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.ExploreMapRootFragment
@@ -82,8 +83,11 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.View,
-    LocationUpdateListener, LocationPermissionCallback {
+class ExploreMapFragment :
+    CommonsDaggerSupportFragment(),
+    ExploreMapContract.View,
+    LocationUpdateListener,
+    LocationPermissionCallback {
     private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
@@ -91,7 +95,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     private var isDarkTheme = false
     private var isPermissionDenied = false
     private var lastKnownLocation: LatLng? = null // last location of user
-    private var recenterToUserLocation = false // true is recenter is needed (ie. when current location is in visible map boundaries)
+
+    // true is recenter is needed (ie. when current location is in visible map boundaries)
+    private var recenterToUserLocation = false
     private var clickedMarker: BaseMarker? = null
     private var mapCenter: GeoPoint? = null
     private var lastMapFocus: GeoPoint? = null
@@ -124,66 +130,76 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     @Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
 
+    // May be needed in future if we want to integrate bookmarking explore places
     @Inject
-    lateinit var bookmarkLocationDao: BookmarkLocationsDao // May be needed in future if we want to integrate bookmarking explore places
+    lateinit var bookmarkLocationDao: BookmarkLocationsDao
 
     @Inject
     lateinit var systemThemeUtils: SystemThemeUtils
 
-    private val activityResultLauncher = registerForActivityResult<String?, Boolean?>(
-        RequestPermission()
-    ) { isGranted: Boolean? ->
-        if (isGranted == true) {
-            locationPermissionGranted()
-        } else {
-            if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                showAlertDialog(
-                    requireActivity(),
-                    requireActivity().getString(R.string.location_permission_title),
-                    requireActivity().getString(R.string.location_permission_rationale_explore),
-                    requireActivity().getString(R.string.ok),
-                    requireActivity().getString(R.string.cancel),
-                    { askForLocationPermission() },
-                    null,
-                    null
-                )
+    private val activityResultLauncher =
+        registerForActivityResult<String?, Boolean?>(
+            RequestPermission(),
+        ) { isGranted: Boolean? ->
+            if (isGranted == true) {
+                locationPermissionGranted()
             } else {
-                if (isPermissionDenied) {
-                    locationPermissionsHelper!!.showAppSettingsDialog(
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    showAlertDialog(
                         requireActivity(),
-                        R.string.explore_map_needs_location
+                        requireActivity().getString(R.string.location_permission_title),
+                        requireActivity().getString(R.string.location_permission_rationale_explore),
+                        requireActivity().getString(R.string.ok),
+                        requireActivity().getString(R.string.cancel),
+                        { askForLocationPermission() },
+                        null,
+                        null,
                     )
+                } else {
+                    if (isPermissionDenied) {
+                        locationPermissionsHelper!!.showAppSettingsDialog(
+                            requireActivity(),
+                            R.string.explore_map_needs_location,
+                        )
+                    }
+                    Timber.d("The user checked 'Don't ask again' or denied the permission twice")
+                    isPermissionDenied = true
                 }
-                Timber.d("The user checked 'Don't ask again' or denied the permission twice")
-                isPermissionDenied = true
             }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         loadNearbyMapData()
         binding = FragmentExploreMapBinding.inflate(getLayoutInflater())
         return binding!!.getRoot()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setSearchThisAreaButtonVisibility(false)
-        binding!!.tvAttribution.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-             Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            Html.fromHtml(getString(R.string.map_attribution))
-        }
-        binding!!.tvAttribution.movementMethod = android.text.method.LinkMovementMethod.getInstance()
+        binding!!.tvAttribution.text =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(getString(R.string.map_attribution), Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                Html.fromHtml(getString(R.string.map_attribution))
+            }
+        binding!!.tvAttribution.movementMethod =
+            android.text.method.LinkMovementMethod
+                .getInstance()
         initNetworkBroadCastReceiver()
-        locationPermissionsHelper = LocationPermissionsHelper(
-            requireActivity(), locationManager,
-            this
-        )
+        locationPermissionsHelper =
+            LocationPermissionsHelper(
+                requireActivity(),
+                locationManager,
+                this,
+            )
         if (presenter == null) {
             presenter = ExploreMapPresenter(bookmarkLocationDao)
         }
@@ -198,14 +214,15 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
         Configuration.getInstance().load(
             requireContext(),
-            PreferenceManager.getDefaultSharedPreferences(requireContext())
+            PreferenceManager.getDefaultSharedPreferences(requireContext()),
         )
 
         binding!!.mapView.setTileSource(TileSourceFactory.WIKIMEDIA)
         binding!!.mapView.setTilesScaledToDpi(true)
 
         Configuration.getInstance().additionalHttpRequestProperties.put(
-            "Referer", "http://maps.wikimedia.org/"
+            "Referer",
+            "http://maps.wikimedia.org/",
         )
 
         val scaleBarOverlay = ScaleBarOverlay(binding!!.mapView)
@@ -215,7 +232,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         scaleBarOverlay.setBackgroundPaint(barPaint)
         scaleBarOverlay.enableScaleBar()
         binding!!.mapView.overlays.add(scaleBarOverlay)
-        binding!!.mapView.zoomController
+        binding!!
+            .mapView.zoomController
             .setVisibility(CustomZoomButtonsController.Visibility.NEVER)
         binding!!.mapView.setMultiTouchControls(true)
 
@@ -223,54 +241,62 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             binding!!.mapView.controller.setZoom(ZOOM_LEVEL.toDouble())
         }
 
-
-        binding!!.mapView.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
-            override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
-                if (clickedMarker != null) {
-                    removeMarker(clickedMarker)
-                    addMarkerToMap(clickedMarker!!)
-                    binding!!.mapView.invalidate()
-                } else {
-                    Timber.e("CLICKED MARKER IS NULL")
-                }
-                if (bottomSheetDetailsBehavior!!.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    // Back should first hide the bottom sheet if it is expanded
-                    bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-                } else if (isDetailsBottomSheetVisible()) {
-                    hideBottomDetailsSheet()
-                }
-                return true
-            }
-
-            override fun longPressHelper(p: GeoPoint?): Boolean = false
-        }))
-
-        binding!!.mapView.addMapListener(object : MapListener {
-            override fun onScroll(event: ScrollEvent): Boolean {
-                if (getLastMapFocus() != null) {
-                    val mylocation = Location("")
-                    val dest_location = Location("")
-                    dest_location.latitude = binding!!.mapView.mapCenter.latitude
-                    dest_location.longitude = binding!!.mapView.mapCenter.longitude
-                    mylocation.latitude = getLastMapFocus()!!.latitude
-                    mylocation.longitude = getLastMapFocus()!!.longitude
-                    val distance = mylocation.distanceTo(dest_location) //in meters
-                    if (getLastMapFocus() != null) {
-                        if (isNetworkConnectionEstablished() && (event.getX() > 0
-                                    || event.getY() > 0)
-                        ) {
-                            setSearchThisAreaButtonVisibility(distance > 2000.0)
+        binding!!.mapView.overlays.add(
+            MapEventsOverlay(
+                object : MapEventsReceiver {
+                    override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+                        if (clickedMarker != null) {
+                            removeMarker(clickedMarker)
+                            addMarkerToMap(clickedMarker!!)
+                            binding!!.mapView.invalidate()
+                        } else {
+                            Timber.e("CLICKED MARKER IS NULL")
                         }
-                    } else {
-                        setSearchThisAreaButtonVisibility(false)
+                        if (bottomSheetDetailsBehavior!!.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                            // Back should first hide the bottom sheet if it is expanded
+                            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+                        } else if (isDetailsBottomSheetVisible()) {
+                            hideBottomDetailsSheet()
+                        }
+                        return true
                     }
+
+                    override fun longPressHelper(p: GeoPoint?): Boolean = false
+                },
+            ),
+        )
+
+        binding!!.mapView.addMapListener(
+            object : MapListener {
+                override fun onScroll(event: ScrollEvent): Boolean {
+                    if (getLastMapFocus() != null) {
+                        val mylocation = Location("")
+                        val destLocation = Location("")
+                        destLocation.latitude = binding!!.mapView.mapCenter.latitude
+                        destLocation.longitude = binding!!.mapView.mapCenter.longitude
+                        mylocation.latitude = getLastMapFocus()!!.latitude
+                        mylocation.longitude = getLastMapFocus()!!.longitude
+                        val distance = mylocation.distanceTo(destLocation) // in meters
+                        if (getLastMapFocus() != null) {
+                            if (isNetworkConnectionEstablished() &&
+                                (
+                                    event.getX() > 0 ||
+                                        event.getY() > 0
+                                )
+                            ) {
+                                setSearchThisAreaButtonVisibility(distance > 2000.0)
+                            }
+                        } else {
+                            setSearchThisAreaButtonVisibility(false)
+                        }
+                    }
+
+                    return true
                 }
 
-                return true
-            }
-
-            override fun onZoom(event: ZoomEvent?): Boolean = false
-        })
+                override fun onZoom(event: ZoomEvent?): Boolean = false
+            },
+        )
         // removed tha permission check here to prevent it from running on fragment creation
     }
 
@@ -303,7 +329,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         } else {
             shouldPerformMapReadyActionsOnResume = true
         }
-        if (!isVisible) return  //  skips if not visible to user
+        if (!isVisible) return //  skips if not visible to user
         if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
             if (locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
                 locationManager.registerLocationManager()
@@ -314,7 +340,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         } else {
             locationPermissionsHelper!!.requestForLocationAccess(
                 R.string.location_permission_title,
-                R.string.location_permission_rationale
+                R.string.location_permission_rationale,
             )
         }
     }
@@ -323,13 +349,14 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         val location = locationManager.getLastLocation()
         if (location != null) {
             val geoPoint = GeoPoint(location.latitude, location.longitude)
-            val startMarker = Marker(binding!!.mapView).apply {
-                setPosition(geoPoint)
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                icon = ContextCompat.getDrawable(requireContext(), R.drawable.current_location_marker)
-                title = "Your Location"
-                textLabelFontSize = 24
-            }
+            val startMarker =
+                Marker(binding!!.mapView).apply {
+                    setPosition(geoPoint)
+                    setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.current_location_marker)
+                    title = "Your Location"
+                    textLabelFontSize = 24
+                }
             binding!!.mapView.overlays.add(startMarker)
             binding!!.mapView.invalidate()
         }
@@ -338,27 +365,18 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     /**
      * Unregisters the networkReceiver
      */
-    private fun unregisterNetworkReceiver() =
-        activity?.unregisterReceiver(broadcastReceiver)
-
-    private fun startMapWithoutPermission() {
-        lastKnownLocation = defaultLatLng
-        moveCameraToPosition(
-            GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
-        )
-        presenter!!.onMapReady(exploreMapController)
-    }
-
-    private fun registerNetworkReceiver() =
-        activity?.registerReceiver(broadcastReceiver, intentFilter)
+    private fun unregisterNetworkReceiver() = activity?.unregisterReceiver(broadcastReceiver)
 
     private fun performMapReadyActions() {
         if (isDarkTheme) {
-            binding!!.mapView.overlayManager.tilesOverlay.setColorFilter(TilesOverlay.INVERT_COLORS)
+            binding!!
+                .mapView.overlayManager.tilesOverlay
+                .setColorFilter(TilesOverlay.INVERT_COLORS)
         }
 
         if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
-            !locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
+            !locationPermissionsHelper!!.checkLocationPermission(requireActivity())
+        ) {
             isPermissionDenied = true
         }
 
@@ -373,11 +391,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             moveCameraToPosition(
                 GeoPoint(prevLatitude, prevLongitude),
                 prevZoom.coerceIn(1.0, 22.0),
-                1L
+                1L,
             )
         } else {
             moveCameraToPosition(
-                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
             )
         }
         presenter!!.onMapReady(exploreMapController)
@@ -389,7 +407,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
     fun loadNearbyMapData() {
         // get fragment arguments
         if (arguments != null) {
-            with (requireArguments()) {
+            with(requireArguments()) {
                 if (containsKey("prev_zoom")) prevZoom = getDouble("prev_zoom")
                 if (containsKey("prev_latitude")) prevLatitude = getDouble("prev_latitude")
                 if (containsKey("prev_longitude")) prevLongitude = getDouble("prev_longitude")
@@ -418,8 +436,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * Gets the value that indicates if the user navigated from "Show in Explore" in Nearby and
      * that the LatLng from Nearby has yet to be searched for map markers.
      */
-    fun recentlyCameFromNearbyMap(): Boolean =
-        recentlyCameFromNearbyMap
+    fun recentlyCameFromNearbyMap(): Boolean = recentlyCameFromNearbyMap
 
     /**
      * Sets the value that indicates if the user navigated from "Show in Explore" in Nearby and
@@ -434,7 +451,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         (requireContext() as MainActivity).loadNearbyMapFromExplore(
             binding!!.mapView.zoomLevelDouble,
             binding!!.mapView.mapCenter.latitude,
-            binding!!.mapView.mapCenter.longitude
+            binding!!.mapView.mapCenter.longitude,
         )
     }
 
@@ -450,9 +467,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      */
     @SuppressLint("ClickableViewAccessibility")
     private fun initBottomSheets() {
-        bottomSheetDetailsBehavior = BottomSheetBehavior.from<LinearLayout?>(
-            binding!!.bottomSheetDetailsBinding.getRoot()
-        )
+        bottomSheetDetailsBehavior =
+            BottomSheetBehavior.from<LinearLayout?>(
+                binding!!.bottomSheetDetailsBinding.getRoot(),
+            )
         bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
         binding!!.bottomSheetDetailsBinding.getRoot().visibility = View.VISIBLE
     }
@@ -461,7 +479,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * Defines how bottom sheets will act on click
      */
     private fun setBottomSheetCallbacks() {
-        binding!!.bottomSheetDetailsBinding.getRoot()
+        binding!!
+            .bottomSheetDetailsBinding
+            .getRoot()
             .setOnClickListener { v: View? ->
                 if (bottomSheetDetailsBehavior!!.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
@@ -481,7 +501,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
     private fun handleLocationUpdate(
         latLng: LatLng?,
-        locationChangeType: LocationChangeType
+        locationChangeType: LocationChangeType,
     ) {
         lastKnownLocation = latLng
         exploreMapController.currentLocation = lastKnownLocation
@@ -490,8 +510,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
     override fun onLocationChangedMedium(latLng: LatLng) = Unit
 
-    override fun isNetworkConnectionEstablished(): Boolean =
-        isInternetConnectionEstablished(requireActivity())
+    override fun isNetworkConnectionEstablished(): Boolean = isInternetConnectionEstablished(requireActivity())
 
     override fun populatePlaces(curlatLng: LatLng?) {
         val nearbyPlacesInfoObservable: Observable<ExplorePlacesInfo?>
@@ -499,18 +518,22 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             return
         }
         if (curlatLng.equals(
-                getLastMapFocus()
+                getLastMapFocus(),
             )
         ) { // Means we are checking around current location
-            nearbyPlacesInfoObservable = presenter!!.loadAttractionsFromLocation(
-                curlatLng,
-                getLastMapFocus(), true
-            )
+            nearbyPlacesInfoObservable =
+                presenter!!.loadAttractionsFromLocation(
+                    curlatLng,
+                    getLastMapFocus(),
+                    true,
+                )
         } else {
-            nearbyPlacesInfoObservable = presenter!!.loadAttractionsFromLocation(
-                getLastMapFocus(),
-                curlatLng, false
-            )
+            nearbyPlacesInfoObservable =
+                presenter!!.loadAttractionsFromLocation(
+                    getLastMapFocus(),
+                    curlatLng,
+                    false,
+                )
         }
         compositeDisposable.add(
             nearbyPlacesInfoObservable
@@ -523,10 +546,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
                             showResponseMessage(getString(R.string.no_pictures_in_this_area))
                         }
                         updateMapMarkers(explorePlacesInfo)
-                        lastMapFocus = GeoPoint(
-                            curlatLng.latitude,
-                            curlatLng.longitude
-                        )
+                        lastMapFocus =
+                            GeoPoint(
+                                curlatLng.latitude,
+                                curlatLng.longitude,
+                            )
                     },
                     Consumer { throwable: Throwable? ->
                         Timber.d(throwable)
@@ -535,7 +559,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
 
                         setProgressBarVisibility(false)
                         presenter!!.lockUnlockNearby(false)
-                    })
+                    },
+                ),
         )
         if (recenterToUserLocation) {
             recenterToUserLocation = false
@@ -547,14 +572,11 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      *
      * @param explorePlacesInfo holds several information as current location, marker list etc.
      */
-    private fun updateMapMarkers(explorePlacesInfo: ExplorePlacesInfo) =
-        presenter!!.updateMapMarkers(explorePlacesInfo)
+    private fun updateMapMarkers(explorePlacesInfo: ExplorePlacesInfo) = presenter!!.updateMapMarkers(explorePlacesInfo)
 
-    private fun showErrorMessage(message: String) =
-        showLongToast(requireActivity(), message)
+    private fun showErrorMessage(message: String) = showLongToast(requireActivity(), message)
 
-    private fun showResponseMessage(message: String) =
-        showLongSnackbar(requireView(), message)
+    private fun showResponseMessage(message: String) = showLongSnackbar(requireView(), message)
 
     override fun askForLocationPermission() {
         Timber.d("Asking for location permission")
@@ -572,8 +594,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             binding!!.mapView.controller.setCenter(targetP)
             recenterMarkerToPosition(targetP)
             moveCameraToPosition(targetP)
-        } else if (locationManager.isGPSProviderEnabled()
-            || locationManager.isNetworkProviderEnabled()
+        } else if (locationManager.isGPSProviderEnabled() ||
+            locationManager.isNetworkProviderEnabled()
         ) {
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
@@ -581,7 +603,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         } else {
             locationPermissionsHelper!!.showLocationOffDialog(
                 requireActivity(),
-                R.string.ask_to_turn_location_on_text
+                R.string.ask_to_turn_location_on_text,
             )
         }
         presenter!!.onMapReady(exploreMapController)
@@ -614,19 +636,19 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             return
         }
         recenterMarkerToPosition(
-            GeoPoint(curLatLng.latitude, curLatLng.longitude)
+            GeoPoint(curLatLng.latitude, curLatLng.longitude),
         )
         binding!!.mapView.controller.animateTo(
-            GeoPoint(curLatLng.latitude, curLatLng.longitude)
+            GeoPoint(curLatLng.latitude, curLatLng.longitude),
         )
         if (lastMapFocus != null) {
             val mylocation = Location("")
-            val dest_location = Location("")
-            dest_location.latitude = binding!!.mapView.mapCenter.latitude
-            dest_location.longitude = binding!!.mapView.mapCenter.longitude
+            val destLocation = Location("")
+            destLocation.latitude = binding!!.mapView.mapCenter.latitude
+            destLocation.longitude = binding!!.mapView.mapCenter.longitude
             mylocation.latitude = lastMapFocus!!.latitude
             mylocation.longitude = lastMapFocus!!.longitude
-            val distance = mylocation.distanceTo(dest_location) //in meters
+            val distance = mylocation.distanceTo(destLocation) // in meters
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished()) {
                     setSearchThisAreaButtonVisibility(distance > 2000.0)
@@ -652,7 +674,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             handleGeoCoordinates(requireActivity(), place.getLocation(), binding!!.mapView.zoomLevelDouble)
         }
 
-        binding!!.bottomSheetDetailsBinding.commonsButton.visibility = if (place.hasCommonsLink()) View.VISIBLE else View.GONE
+        binding!!.bottomSheetDetailsBinding.commonsButton.visibility =
+            if (place.hasCommonsLink()) View.VISIBLE else View.GONE
         binding!!.bottomSheetDetailsBinding.commonsButton.setOnClickListener {
             handleWebUrl(requireContext(), place.siteLinks.commonsLink)
         }
@@ -670,12 +693,16 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         binding!!.bottomSheetDetailsBinding.title.text = place.name.substring(5, place.name.lastIndexOf("."))
         binding!!.bottomSheetDetailsBinding.category.text = place.distance
         // Remove label since it is double information
-        var descriptionText = place.longDescription
-            .replace(place.getName() + " (", "")
-        descriptionText = (if (descriptionText == place.longDescription)
-            descriptionText
-        else
-            descriptionText.replaceFirst(".$".toRegex(), ""))
+        var descriptionText =
+            place.longDescription
+                .replace(place.getName() + " (", "")
+        descriptionText = (
+            if (descriptionText == place.longDescription) {
+                descriptionText
+            } else {
+                descriptionText.replaceFirst(".$".toRegex(), "")
+            }
+        )
         // Set the short description after we remove place name from long description
         binding!!.bottomSheetDetailsBinding.description.text = descriptionText
     }
@@ -692,11 +719,9 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         binding!!.mapProgressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
-    override fun isDetailsBottomSheetVisible(): Boolean =
-        binding!!.bottomSheetDetailsBinding.getRoot().isVisible
+    override fun isDetailsBottomSheetVisible(): Boolean = binding!!.bottomSheetDetailsBinding.getRoot().isVisible
 
-    override fun isSearchThisAreaButtonVisible(): Boolean =
-        binding!!.bottomSheetDetailsBinding.getRoot().isVisible
+    override fun isSearchThisAreaButtonVisible(): Boolean = binding!!.bottomSheetDetailsBinding.getRoot().isVisible
 
     override fun getLastLocation(): LatLng? {
         if (lastKnownLocation == null) {
@@ -735,20 +760,22 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         if (isAttachedToActivity) {
             val items = mutableListOf<OverlayItem?>()
             val d: Drawable = nearbyBaseMarker.icon!!.toDrawable(resources)
-            val point = GeoPoint(
-                nearbyBaseMarker.place.location.latitude,
-                nearbyBaseMarker.place.location.longitude
-            )
+            val point =
+                GeoPoint(
+                    nearbyBaseMarker.place.location.latitude,
+                    nearbyBaseMarker.place.location.longitude,
+                )
 
             val markerMedia = getMediaFromImageURL(nearbyBaseMarker.place.pic)
             var authorUser: String? = null
             if (markerMedia != null) {
                 // HTML text is sometimes part of the author string and needs to be removed
-                authorUser = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Html.fromHtml(markerMedia.getAuthorOrUser(), Html.FROM_HTML_MODE_LEGACY)
-                } else {
-                    Html.fromHtml(markerMedia.getAuthorOrUser())
-                }.toString()
+                authorUser =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        Html.fromHtml(markerMedia.getAuthorOrUser(), Html.FROM_HTML_MODE_LEGACY)
+                    } else {
+                        Html.fromHtml(markerMedia.getAuthorOrUser())
+                    }.toString()
             }
 
             var title = nearbyBaseMarker.place.name
@@ -759,7 +786,7 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             // Remove extensions like .jpg, .jpeg, .png, .svg (case insensitive)
             title = title.replace("(?i)\\.(jpg|jpeg|png|svg)$".toRegex(), "")
             title = title.replace("_", " ")
-            //Truncate if too long because it doesn't fit the screen
+            // Truncate if too long because it doesn't fit the screen
             if (title.length > 43) {
                 title = title.substring(0, 40) + "…"
             }
@@ -767,28 +794,36 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             val item = OverlayItem(title, authorUser, point)
             item.setMarker(d)
             items.add(item)
-            val overlay = ItemizedOverlayWithFocus<OverlayItem?>(
-                items,
-                object : OnItemGestureListener<OverlayItem?> {
-                    override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
-                        val place = nearbyBaseMarker.place
-                        if (clickedMarker != null) {
-                            removeMarker(clickedMarker)
-                            addMarkerToMap(clickedMarker!!)
-                            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-                            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            val overlay =
+                ItemizedOverlayWithFocus<OverlayItem?>(
+                    items,
+                    object : OnItemGestureListener<OverlayItem?> {
+                        override fun onItemSingleTapUp(
+                            index: Int,
+                            item: OverlayItem?,
+                        ): Boolean {
+                            val place = nearbyBaseMarker.place
+                            if (clickedMarker != null) {
+                                removeMarker(clickedMarker)
+                                addMarkerToMap(clickedMarker!!)
+                                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+                                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                            }
+                            clickedMarker = nearbyBaseMarker
+                            passInfoToSheet(place)
+
+                            // Move the overlay to the top so it can be fully seen.
+                            moveOverlayToTop(getOverlay(item))
+                            return true
                         }
-                        clickedMarker = nearbyBaseMarker
-                        passInfoToSheet(place)
 
-                        //Move the overlay to the top so it can be fully seen.
-                        moveOverlayToTop(getOverlay(item))
-                        return true
-                    }
-
-                    override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean = false
-                }, requireContext()
-            )
+                        override fun onItemLongPress(
+                            index: Int,
+                            item: OverlayItem?,
+                        ): Boolean = false
+                    },
+                    requireContext(),
+                )
 
             if (baseMarkerOverlayMap == null) {
                 baseMarkerOverlayMap = HashMap<BaseMarker?, Overlay?>()
@@ -826,23 +861,14 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * could not be found.
      */
     private fun getOverlay(item: OverlayItem?): Overlay? {
-        if (item == null || binding == null || binding!!.mapView.overlays == null) {
-            return null
-        }
+        if (item == null) return null
+        val overlays = binding?.mapView?.overlays ?: return null
 
-        for (i in binding!!.mapView.overlays.indices) {
-            if (binding!!.mapView.overlays[i] is ItemizedOverlayWithFocus<*>) {
-                val overlay = binding!!.mapView.overlays[i] as ItemizedOverlayWithFocus<*>
-
-                for (j in 0..<overlay.size()) {
-                    if (overlay.getItem(j) === item) {
-                        return overlay
-                    }
-                }
+        return overlays
+            .filterIsInstance<ItemizedOverlayWithFocus<*>>()
+            .firstOrNull { overlay ->
+                (0 until overlay.size()).any { j -> overlay.getItem(j) === item }
             }
-        }
-
-        return null
     }
 
     /**
@@ -873,7 +899,8 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         if (nearbyBaseMarker == null ||
             nearbyBaseMarker.place.getName() == null ||
             baseMarkerOverlayMap == null ||
-            !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)) {
+            !baseMarkerOverlayMap!!.containsKey(nearbyBaseMarker)
+        ) {
             return
         }
 
@@ -901,66 +928,82 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             binding!!.mapView.overlayManager.clear()
 
             if (mapCenter != null) {
-                val diskOverlay = ScaleDiskOverlay(
-                    requireContext(),
-                    mapCenter,
-                    2000,
-                    GeoConstants.UnitOfMeasure.foot
-                ).apply {
-                    setCirclePaint2(Paint().apply {
-                        setColor(Color.rgb(128, 128, 128))
-                        style = Paint.Style.STROKE
-                        strokeWidth = 2f
-                    })
-                    setCirclePaint1(Paint().apply {
-                        setColor(Color.argb(40, 128, 128, 128))
-                        style = Paint.Style.FILL_AND_STROKE
-                    })
-                    setDisplaySizeMin(900)
-                    setDisplaySizeMax(1700)
-                }
+                val diskOverlay =
+                    ScaleDiskOverlay(
+                        requireContext(),
+                        mapCenter,
+                        2000,
+                        GeoConstants.UnitOfMeasure.foot,
+                    ).apply {
+                        setCirclePaint2(
+                            Paint().apply {
+                                setColor(Color.rgb(128, 128, 128))
+                                style = Paint.Style.STROKE
+                                strokeWidth = 2f
+                            },
+                        )
+                        setCirclePaint1(
+                            Paint().apply {
+                                setColor(Color.argb(40, 128, 128, 128))
+                                style = Paint.Style.FILL_AND_STROKE
+                            },
+                        )
+                        setDisplaySizeMin(900)
+                        setDisplaySizeMax(1700)
+                    }
                 binding!!.mapView.overlays.add(diskOverlay)
 
-                binding!!.mapView.overlays.add(Marker(binding!!.mapView).apply {
-                    setPosition(mapCenter)
-                    setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                    icon = ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.current_location_marker
-                    )
-                    title = "Your Location"
-                    textLabelFontSize = 24
-                })
+                binding!!.mapView.overlays.add(
+                    Marker(binding!!.mapView).apply {
+                        setPosition(mapCenter)
+                        setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                        icon =
+                            ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.current_location_marker,
+                            )
+                        title = "Your Location"
+                        textLabelFontSize = 24
+                    },
+                )
             }
 
-            binding!!.mapView.overlays.add(ScaleBarOverlay(binding!!.mapView).apply {
-                setScaleBarOffset(15, 25)
-                setBackgroundPaint(Paint().apply<Paint> {
-                    setARGB(200, 255, 250, 250)
-                })
-                enableScaleBar()
-            })
+            binding!!.mapView.overlays.add(
+                ScaleBarOverlay(binding!!.mapView).apply {
+                    setScaleBarOffset(15, 25)
+                    setBackgroundPaint(
+                        Paint().apply<Paint> {
+                            setARGB(200, 255, 250, 250)
+                        },
+                    )
+                    enableScaleBar()
+                },
+            )
 
-            binding!!.mapView.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
-                override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
-                    if (clickedMarker != null) {
-                        removeMarker(clickedMarker)
-                        addMarkerToMap(clickedMarker!!)
-                        binding!!.mapView.invalidate()
-                    } else {
-                        Timber.e("CLICKED MARKER IS NULL")
-                    }
-                    if (bottomSheetDetailsBehavior!!.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                        // Back should first hide the bottom sheet if it is expanded
-                        bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-                    } else if (isDetailsBottomSheetVisible()) {
-                        hideBottomDetailsSheet()
-                    }
-                    return true
-                }
+            binding!!.mapView.overlays.add(
+                MapEventsOverlay(
+                    object : MapEventsReceiver {
+                        override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+                            if (clickedMarker != null) {
+                                removeMarker(clickedMarker)
+                                addMarkerToMap(clickedMarker!!)
+                                binding!!.mapView.invalidate()
+                            } else {
+                                Timber.e("CLICKED MARKER IS NULL")
+                            }
+                            if (bottomSheetDetailsBehavior!!.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                                // Back should first hide the bottom sheet if it is expanded
+                                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+                            } else if (isDetailsBottomSheetVisible()) {
+                                hideBottomDetailsSheet()
+                            }
+                            return true
+                        }
 
-                override fun longPressHelper(p: GeoPoint?): Boolean = false
-            }))
+                        override fun longPressHelper(p: GeoPoint?): Boolean = false
+                    },
+                ),
+            )
             binding!!.mapView.setMultiTouchControls(true)
         }
     }
@@ -986,32 +1029,40 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
             indicesToRemove.sortedDescending().forEach { index ->
                 binding!!.mapView.overlays.removeAt(index)
             }
-            val diskOverlay = ScaleDiskOverlay(
-                requireContext(),
-                geoPoint, 2000, GeoConstants.UnitOfMeasure.foot
-            ).apply {
-                setCirclePaint2(Paint().apply {
-                    setColor(Color.rgb(128, 128, 128))
-                    this.style = Paint.Style.STROKE
-                    this.strokeWidth = 2f
-                })
-                setCirclePaint1(Paint().apply {
-                    setColor(Color.argb(40, 128, 128, 128))
-                    this.style = Paint.Style.FILL_AND_STROKE
-                })
-                setDisplaySizeMin(900)
-                setDisplaySizeMax(1700)
-            }
+            val diskOverlay =
+                ScaleDiskOverlay(
+                    requireContext(),
+                    geoPoint,
+                    2000,
+                    GeoConstants.UnitOfMeasure.foot,
+                ).apply {
+                    setCirclePaint2(
+                        Paint().apply {
+                            setColor(Color.rgb(128, 128, 128))
+                            this.style = Paint.Style.STROKE
+                            this.strokeWidth = 2f
+                        },
+                    )
+                    setCirclePaint1(
+                        Paint().apply {
+                            setColor(Color.argb(40, 128, 128, 128))
+                            this.style = Paint.Style.FILL_AND_STROKE
+                        },
+                    )
+                    setDisplaySizeMin(900)
+                    setDisplaySizeMax(1700)
+                }
             binding!!.mapView.overlays.add(diskOverlay)
-            val startMarker = Marker(
-                binding!!.mapView
-            ).apply {
-                setPosition(geoPoint)
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                icon = ContextCompat.getDrawable(requireContext(), R.drawable.current_location_marker)
-                title = "Your Location"
-                textLabelFontSize = 24
-            }
+            val startMarker =
+                Marker(
+                    binding!!.mapView,
+                ).apply {
+                    setPosition(geoPoint)
+                    setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    icon = ContextCompat.getDrawable(requireContext(), R.drawable.current_location_marker)
+                    title = "Your Location"
+                    textLabelFontSize = 24
+                }
             binding!!.mapView.overlays.add(startMarker)
         }
     }
@@ -1033,39 +1084,50 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * @param zoom     Zoom level of the map camera
      * @param speed    Speed of animation
      */
-    private fun moveCameraToPosition(geoPoint: GeoPoint?, zoom: Double, speed: Long) {
+    private fun moveCameraToPosition(
+        geoPoint: GeoPoint?,
+        zoom: Double,
+        speed: Long,
+    ) {
         binding!!.mapView.controller.animateTo(geoPoint, zoom, speed)
     }
 
-    override fun getLastMapFocus(): LatLng? = if (lastMapFocus == null) {
-        getMapCenter()
-    } else {
-        LatLng(lastMapFocus!!.latitude, lastMapFocus!!.longitude, 100f)
-    }
-
-    override fun getMapCenter(): LatLng? = if (mapCenter != null) {
-        LatLng(mapCenter!!.latitude, mapCenter!!.longitude, 100f)
-    } else {
-        if (applicationKvStore.getString("LastLocation") != null) {
-            val locationLatLng: Array<String?> =
-                applicationKvStore.getString("LastLocation")!!
-                    .split(",".toRegex())
-                    .dropLastWhile { it.isEmpty() }
-                    .toTypedArray<String?>()
-            lastKnownLocation = LatLng(
-                locationLatLng[0]!!.toDouble(),
-                locationLatLng[1]!!.toDouble(), 1f
-            )
-            lastKnownLocation
+    override fun getLastMapFocus(): LatLng? =
+        if (lastMapFocus == null) {
+            getMapCenter()
         } else {
-            LatLng(51.506255446947776, -0.07483536015053005, 1f)
+            LatLng(lastMapFocus!!.latitude, lastMapFocus!!.longitude, 100f)
         }
-    }
 
-    override fun getMapFocus(): LatLng? = LatLng(
-        binding!!.mapView.mapCenter.latitude,
-        binding!!.mapView.mapCenter.longitude, 100f
-    )
+    override fun getMapCenter(): LatLng? =
+        if (mapCenter != null) {
+            LatLng(mapCenter!!.latitude, mapCenter!!.longitude, 100f)
+        } else {
+            if (applicationKvStore.getString("LastLocation") != null) {
+                val locationLatLng: Array<String?> =
+                    applicationKvStore
+                        .getString("LastLocation")!!
+                        .split(",".toRegex())
+                        .dropLastWhile { it.isEmpty() }
+                        .toTypedArray<String?>()
+                lastKnownLocation =
+                    LatLng(
+                        locationLatLng[0]!!.toDouble(),
+                        locationLatLng[1]!!.toDouble(),
+                        1f,
+                    )
+                lastKnownLocation
+            } else {
+                LatLng(51.506255446947776, -0.07483536015053005, 1f)
+            }
+        }
+
+    override fun getMapFocus(): LatLng? =
+        LatLng(
+            binding!!.mapView.mapCenter.latitude,
+            binding!!.mapView.mapCenter.longitude,
+            100f,
+        )
 
     override fun setFABRecenterAction(onClickListener: View.OnClickListener?) {
         binding!!.fabRecenter.setOnClickListener(onClickListener)
@@ -1084,35 +1146,41 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
      * Adds network broadcast receiver to recognize connection established
      */
     private fun initNetworkBroadCastReceiver() {
-        broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                if (activity != null) {
-                    if (isInternetConnectionEstablished(requireActivity())) {
-                        if (isNetworkErrorOccurred) {
-                            presenter!!.updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                            isNetworkErrorOccurred = false
-                        }
+        broadcastReceiver =
+            object : BroadcastReceiver() {
+                override fun onReceive(
+                    context: Context?,
+                    intent: Intent?,
+                ) {
+                    if (activity != null) {
+                        if (isInternetConnectionEstablished(requireActivity())) {
+                            if (isNetworkErrorOccurred) {
+                                presenter!!.updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+                                isNetworkErrorOccurred = false
+                            }
 
-                        if (snackbar != null) {
-                            snackbar!!.dismiss()
-                            snackbar = null
-                        }
-                    } else {
-                        if (snackbar == null) {
-                            snackbar = Snackbar.make(
-                                requireView(), R.string.no_internet,
-                                Snackbar.LENGTH_INDEFINITE
-                            )
-                            setSearchThisAreaButtonVisibility(false)
-                            setProgressBarVisibility(false)
-                        }
+                            if (snackbar != null) {
+                                snackbar!!.dismiss()
+                                snackbar = null
+                            }
+                        } else {
+                            if (snackbar == null) {
+                                snackbar =
+                                    Snackbar.make(
+                                        requireView(),
+                                        R.string.no_internet,
+                                        Snackbar.LENGTH_INDEFINITE,
+                                    )
+                                setSearchThisAreaButtonVisibility(false)
+                                setProgressBarVisibility(false)
+                            }
 
-                        isNetworkErrorOccurred = true
-                        snackbar!!.show()
+                            isNetworkErrorOccurred = true
+                            snackbar!!.show()
+                        }
                     }
                 }
             }
-        }
     }
 
     val isAttachedToActivity: Boolean
@@ -1127,10 +1195,10 @@ class ExploreMapFragment : CommonsDaggerSupportFragment(), ExploreMapContract.Vi
         } else {
             locationPermissionsHelper!!.showLocationOffDialog(requireActivity(), R.string.location_off_dialog_text)
         }
-        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED, null)
+        onLocationChanged(LocationChangeType.PERMISSION_JUST_GRANTED)
     }
 
-    fun onLocationChanged(locationChangeType: LocationChangeType, location: Location?) {
+    fun onLocationChanged(locationChangeType: LocationChangeType) {
         if (locationChangeType == LocationChangeType.PERMISSION_JUST_GRANTED) {
             val curLatLng = locationManager.getLastLocation() ?: getMapCenter()
             populatePlaces(curLatLng)
