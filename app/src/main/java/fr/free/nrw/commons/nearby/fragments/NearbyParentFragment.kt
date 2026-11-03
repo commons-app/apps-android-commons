@@ -79,6 +79,7 @@ import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
 import fr.free.nrw.commons.nearby.CheckBoxTriStates
 import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
@@ -215,6 +216,9 @@ class NearbyParentFragment :
 
     @Inject
     lateinit var commonPlaceClickActions: CommonPlaceClickActions
+
+    @Inject
+    lateinit var placeTypeLabelsClient: PlaceTypeLabelsClient
 
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
@@ -1101,6 +1105,7 @@ class NearbyParentFragment :
             },
         )
         restoreStoredFilterSelection()
+        loadLocalizedPlaceTypeNames()
         binding!!
             .nearbyFilterList.root
             .layoutParams.width =
@@ -1120,6 +1125,20 @@ class NearbyParentFragment :
                 .subscribe { query: CharSequence ->
                     nearbyFilterSearchRecyclerViewAdapter?.filter?.filter(query.toString())
                 }
+    }
+
+    private fun loadLocalizedPlaceTypeNames() {
+        compositeDisposable.add(
+            placeTypeLabelsClient.getLabels(Locale.getDefault().language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ names ->
+                    Label.setLocalizedNames(names)
+                    nearbyFilterSearchRecyclerViewAdapter?.notifyDataSetChanged()
+                }, { throwable ->
+                    Timber.e(throwable, "Failed to load localized place type names")
+                })
+        )
     }
 
     private fun restoreStoredFilterSelection() {
