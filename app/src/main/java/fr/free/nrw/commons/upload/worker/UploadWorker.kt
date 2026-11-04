@@ -311,9 +311,7 @@ class UploadWorker(
                                     contribution,
                                     uniqueFileName,
                                     stashUploadResult.fileKey,
-                                ).onErrorReturn {
-                                    return@onErrorReturn null
-                                }.blockingSingle()
+                                ).blockingSingle()
 
                         if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
@@ -354,10 +352,12 @@ class UploadWorker(
                     } catch (exception: Exception) {
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
+                        val errorCode = exception.uploadErrorCode()
                         notificationHelper.showFailedNotification(contribution)
                         contribution.state = Contribution.STATE_FAILED
+                        contribution.errorInfo = errorCode
                         contributionDao.saveSynchronous(contribution)
-                        if (stashErrorCodes.contains(exception.message)) {
+                        if (stashErrorCodes.contains(errorCode)) {
                             clearChunks(contribution)
                         }
                     }
