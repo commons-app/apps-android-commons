@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload
 
-import androidx.lifecycle.MutableLiveData
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
@@ -12,6 +11,7 @@ import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
+import fr.free.nrw.commons.upload.categories.CategorySearchResults
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import media
@@ -19,7 +19,6 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import java.lang.reflect.Method
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -60,13 +59,7 @@ class CategoriesPresenterTest {
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
         whenever(repository.searchAll("mock", emptyList(), repository.getSelectedDepictions()))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
-        val method: Method =
-            CategoriesPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(categoriesPresenter, "mock")
+        CategorySearchResults(repository, testScheduler).searchResults("mock", media())
     }
 
     /**
@@ -75,9 +68,8 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategories combines selection and search results without years distinctly`() {
         categoriesPresenter.onAttachView(view)
-        val liveData = MutableLiveData<List<CategoryItem>>()
-        categoriesPresenter.setCategoryList(liveData)
-        categoriesPresenter.setCategoryListValue(
+        val liveData = categoriesPresenter.categoryList
+        liveData.postValue(
             listOf(
                 categoryItem("selected", "", "", true),
             ),
@@ -120,8 +112,7 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategoriesTest sets Error when list is empty`() {
         categoriesPresenter.onAttachView(view)
-        val liveData = MutableLiveData<List<CategoryItem>>()
-        categoriesPresenter.setCategoryList(liveData)
+        val liveData = categoriesPresenter.categoryList
         // Arrange
         val query = "testQuery"
         val emptyCategories = ArrayList<CategoryItem>()
@@ -133,13 +124,7 @@ class CategoriesPresenterTest {
         whenever(repository.getSelectedCategories()).thenReturn(listOf())
         categoriesPresenter.searchForCategories(query)
         testScheduler.triggerActions()
-        val method: Method =
-            CategoriesPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(categoriesPresenter, query)
+        CategorySearchResults(repository, testScheduler).searchResults(query, null)
 
         verify(view).showProgress(true)
         verify(view).showProgress(false)
