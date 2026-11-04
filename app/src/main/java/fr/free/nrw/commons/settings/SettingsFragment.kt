@@ -598,7 +598,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
                 override fun onPermissionRationaleShouldBeShown(
                     permissions: List<PermissionRequest>, token: PermissionToken
-                ) = Unit
+                ) {
+                    // No action needed
+                }
             })
             .onSameThread()
             .check()

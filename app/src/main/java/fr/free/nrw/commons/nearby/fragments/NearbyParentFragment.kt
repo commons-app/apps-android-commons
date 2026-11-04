@@ -1782,7 +1782,9 @@ class NearbyParentFragment :
                 getString(fr.free.nrw.commons.R.string.do_you_want_to_open_kml_file)
             }
         val runnable = Runnable { openFile(context, fileName, isGPX) }
-        showAlertDialog(requireActivity(), title, message, runnable) {}
+        showAlertDialog(requireActivity(), title, message, runnable) {
+            // No action needed when the dialog is dismissed
+        }
     }
 
     private fun openFile(

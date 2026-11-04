@@ -848,7 +848,9 @@ class MediaDetailFragment :
                     .markCompletedContributionDeleted(filename)
                     .subscribeOn(Schedulers.io())
                     .subscribe(
-                        { },
+                        {
+                            // No action needed after successful deletion
+                        },
                         { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
                     )
                 if (isAdded) {
@@ -1743,7 +1745,9 @@ class MediaDetailFragment :
                     getString(R.string.about_translate_proceed),
                     getString(R.string.about_translate_cancel),
                     { onDeleteClicked(spinner) },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     spinner,
                 )
             if (isDeleted) {
@@ -1763,7 +1767,9 @@ class MediaDetailFragment :
                         val reason: String = input.text.toString()
                         onDeleteClickedDialogText(reason)
                     },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     input,
                 )
             input.addTextChangedListener(
