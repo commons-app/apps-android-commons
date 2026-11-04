@@ -182,10 +182,13 @@ class UploadMediaPresenter
             hasUserRemovedLocation: Boolean,
         ) {
             val uploadItem = repository.getUploads()[uploadItemIndex]
-            if (uploadItem.gpsCoords!!.decimalCoords == null &&
-                inAppPictureLocation == null &&
-                !hasUserRemovedLocation
-            ) {
+            // The location prompt is only meant for images, not for other media types, such as audio.
+            val isImage = uploadItem.mimeType?.startsWith("image/") ?: true
+            val hasNoLocation =
+                uploadItem.gpsCoords!!.decimalCoords == null &&
+                    inAppPictureLocation == null &&
+                    !hasUserRemovedLocation
+            if (isImage && hasNoLocation) {
                 view.displayAddLocationDialog { verifyCaptionQuality(uploadItem) }
             } else {
                 verifyCaptionQuality(uploadItem)
