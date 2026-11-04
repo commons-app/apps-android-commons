@@ -41,10 +41,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Test methods in ok http api client
- */
-@Singleton
-/**
  * Usage and award counts for the files a user currently has.
  */
 private data class CommonsFileUsage(
@@ -54,6 +50,10 @@ private data class CommonsFileUsage(
     val qualityImages: Int,
 )
 
+/**
+ * Test methods in ok http api client
+ */
+@Singleton
 class OkHttpJsonApiClient @Inject constructor(
     private val okHttpClient: OkHttpClient,
     private val depictsClient: DepictsClient,
