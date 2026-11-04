@@ -16,7 +16,7 @@ internal fun Throwable.uploadErrorCode(): String? {
 
 /**
  * Server error codes that retrying the same file with the same name can never fix.
- * They come from UploadBase::convertVerifyErrorToStatus() in MediaWiki.
+ * Most of them come from UploadBase::convertVerifyErrorToStatus() in MediaWiki.
  * verification-error is left out, because a chunk damaged during the upload can cause it,
  * and uploading the file again can then succeed.
  */
@@ -30,6 +30,8 @@ private val permanentUploadErrors =
         "empty-file",
         "file-too-large",
         "filetype-banned",
+        // From the TitleBlacklist extension on Commons, for example a caption that is only "§".
+        "titleblacklist-forbidden",
     )
 
 /**

@@ -45,6 +45,7 @@ class UploadErrorsTest {
         assertTrue(isPermanentUploadError("filetype-banned"))
         assertTrue(isPermanentUploadError("illegal-filename"))
         assertTrue(isPermanentUploadError("file-too-large"))
+        assertTrue(isPermanentUploadError("titleblacklist-forbidden"))
     }
 
     @Test
