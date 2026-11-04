@@ -87,6 +87,7 @@ class MwQueryResult :
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     private class Redirect {
         private val index = 0
         private val from: String? = null
@@ -131,11 +132,11 @@ class MwQueryResult :
     class NotificationList {
         private val list: List<Notification>? = null
 
-        @SerializedName("continue")
-        private val next: String? = null
+        @SerializedName("rawcount")
+        private val rawCount: Int? = null
 
         fun list(): List<Notification>? = list
 
-        fun continueToken(): String? = next
+        fun rawCount(): Int? = rawCount
     }
 }

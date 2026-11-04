@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -76,9 +75,6 @@ class ContributionsFragmentUnitTests {
 
     @Mock
     private lateinit var notificationController: NotificationController
-
-    @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
 
     @Mock
     private lateinit var notificationCount: TextView
@@ -203,6 +199,21 @@ class ContributionsFragmentUnitTests {
             )
         method.isAccessible = true
         method.invoke(fragment, 2)
+        verify(notificationCount).setText("2")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitNotificationViewsAboveBadgeCap() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                Int::class.javaPrimitiveType,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, 100)
+        verify(notificationCount).setText("99+")
     }
 
     @Test

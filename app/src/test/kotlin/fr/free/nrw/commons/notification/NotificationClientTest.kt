@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
@@ -16,7 +17,6 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.ArgumentMatchers.eq
-import org.mockito.ArgumentMatchers.isNull
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
@@ -105,40 +105,48 @@ class NotificationClientTest {
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito
-            .`when`(service.markRead(anyString(), anyString(), anyString()))
+            .`when`(service.markRead(anyString(), anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
-        notificationClient.markNotificationAsRead("test")
-        verify(service).markRead(anyString(), anyString(), anyString())
+        notificationClient.markNotificationAsRead("1234", "enwiki")
+        verify(service).markRead("test", "1234", "", "enwiki")
+    }
+
+    /**
+     * Test that an invalid login token is reported to the subscriber
+     */
+    @Test
+    fun markNotificationAsReadPropagatesInvalidLoginToken() {
+        val invalidLoginToken = InvalidLoginTokenException("invalid")
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
+
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertError(invalidLoginToken)
+    }
+
+    /**
+     * Test that any other failure is reported as unsuccessful
+     */
+    @Test
+    fun markNotificationAsReadReturnsFalseOnOtherFailure() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertValue(false)
     }
 
     @Test
-    fun getUnreadCountFollowsContinueToken() {
-        val firstPage = Mockito.mock(MwQueryResponse::class.java)
-        val firstResult = Mockito.mock(MwQueryResult::class.java)
-        val firstNotifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
-        val secondPage = Mockito.mock(MwQueryResponse::class.java)
-        val secondResult = Mockito.mock(MwQueryResult::class.java)
-        val secondNotifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
+    fun getUnreadCountReadsRawCount() {
+        val response = Mockito.mock(MwQueryResponse::class.java)
+        val result = Mockito.mock(MwQueryResult::class.java)
+        val notifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
 
-        Mockito.`when`(firstPage.query()).thenReturn(firstResult)
-        Mockito.`when`(firstResult.notifications()).thenReturn(firstNotifications)
-        Mockito.`when`(firstNotifications.list()).thenReturn(List(50) { Notification() })
-        Mockito.`when`(firstNotifications.continueToken()).thenReturn("page-2")
-
-        Mockito.`when`(secondPage.query()).thenReturn(secondResult)
-        Mockito.`when`(secondResult.notifications()).thenReturn(secondNotifications)
-        Mockito.`when`(secondNotifications.list()).thenReturn(List(7) { Notification() })
-        Mockito.`when`(secondNotifications.continueToken()).thenReturn(null)
-
+        Mockito.`when`(response.query()).thenReturn(result)
+        Mockito.`when`(result.notifications()).thenReturn(notifications)
+        Mockito.`when`(notifications.rawCount()).thenReturn(100)
         Mockito
-            .`when`(service.getAllNotifications(anyString(), eq("!read"), isNull()))
-            .thenReturn(Observable.just(firstPage))
-        Mockito
-            .`when`(service.getAllNotifications(anyString(), eq("!read"), eq("page-2")))
-            .thenReturn(Observable.just(secondPage))
+            .`when`(service.getUnreadNotificationCount(anyString()))
+            .thenReturn(Observable.just(response))
 
-        assertEquals(57, notificationClient.getUnreadCount().blockingGet())
+        assertEquals(100, notificationClient.getUnreadCount().blockingGet())
     }
 
     @Suppress("SameParameterValue")

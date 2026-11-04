@@ -9,6 +9,7 @@ import timber.log.Timber
 import java.text.ParseException
 import java.util.Date
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 class Notification {
     private val wiki: String? = null
     private var id: Long = 0
@@ -75,6 +76,7 @@ class Notification {
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Link {
         var url: String? = null
             get() = field ?: ""
@@ -106,6 +108,7 @@ class Notification {
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Contents {
         val header: String? = null
             get() = field ?: ""

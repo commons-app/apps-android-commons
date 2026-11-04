@@ -1,15 +1,12 @@
 package fr.free.nrw.commons.media.zoomControllers.gestures
 
 import android.view.MotionEvent
-import kotlin.math.atan2
-import kotlin.math.hypot
 
 /**
  * Component that detects translation, scale and rotation based on touch events.
  *
- * This class notifies its listeners whenever a gesture begins, updates or ends. The instance of
- * this detector is passed to the listeners, so it can be queried for pivot, translation, scale or
- * rotation.
+ * This class notifies its listeners whenever a gesture begins, updates or ends. Listeners read
+ * pivot, translation, scale and rotation from [transform].
  */
 class TransformGestureDetector(
     private val mDetector: MultiPointerGestureDetector,
@@ -37,6 +34,10 @@ class TransformGestureDetector(
         fun newInstance(): TransformGestureDetector =
             TransformGestureDetector(MultiPointerGestureDetector.newInstance())
     }
+
+    /** Pivot, translation, scale and rotation for the current pointer positions. */
+    val transform: GestureTransform
+        get() = GestureTransform(mDetector.pointerSlots)
 
     /**
      * Sets the listener.
@@ -72,69 +73,8 @@ class TransformGestureDetector(
         mListener?.onGestureEnd(this)
     }
 
-    private fun calcAverage(
-        arr: FloatArray,
-        len: Int,
-    ): Float {
-        val sum = arr.take(len).sum()
-        return if (len > 0) sum / len else 0f
-    }
-
     /** Restarts the current gesture (if any). */
     fun restartGesture() {
         mDetector.restartGesture()
     }
-
-    /** Gets whether there is a gesture in progress */
-    fun isGestureInProgress(): Boolean = mDetector.isGestureInProgress()
-
-    /** Gets the number of pointers after the current gesture */
-    fun getNewPointerCount(): Int = mDetector.getNewPointerCount()
-
-    /** Gets the number of pointers in the current gesture */
-    fun getPointerCount(): Int = mDetector.getPointerCount()
-
-    /** Gets the X coordinate of the pivot point */
-    fun getPivotX(): Float = calcAverage(mDetector.getStartX(), mDetector.getPointerCount())
-
-    /** Gets the Y coordinate of the pivot point */
-    fun getPivotY(): Float = calcAverage(mDetector.getStartY(), mDetector.getPointerCount())
-
-    /** Gets the X component of the translation */
-    fun getTranslationX(): Float =
-        calcAverage(mDetector.getCurrentX(), mDetector.getPointerCount()) -
-            calcAverage(mDetector.getStartX(), mDetector.getPointerCount())
-
-    /** Gets the Y component of the translation */
-    fun getTranslationY(): Float =
-        calcAverage(mDetector.getCurrentY(), mDetector.getPointerCount()) -
-            calcAverage(mDetector.getStartY(), mDetector.getPointerCount())
-
-    /** Gets the scale */
-    fun getScale(): Float =
-        if (mDetector.getPointerCount() < 2) {
-            1f
-        } else {
-            val startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0]
-            val startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0]
-            val currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0]
-            val currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0]
-            val startDist = hypot(startDeltaX, startDeltaY)
-            val currentDist = hypot(currentDeltaX, currentDeltaY)
-            currentDist / startDist
-        }
-
-    /** Gets the rotation in radians */
-    fun getRotation(): Float =
-        if (mDetector.getPointerCount() < 2) {
-            0f
-        } else {
-            val startDeltaX = mDetector.getStartX()[1] - mDetector.getStartX()[0]
-            val startDeltaY = mDetector.getStartY()[1] - mDetector.getStartY()[0]
-            val currentDeltaX = mDetector.getCurrentX()[1] - mDetector.getCurrentX()[0]
-            val currentDeltaY = mDetector.getCurrentY()[1] - mDetector.getCurrentY()[0]
-            val startAngle = atan2(startDeltaY, startDeltaX)
-            val currentAngle = atan2(currentDeltaY, currentDeltaX)
-            currentAngle - startAngle
-        }
 }

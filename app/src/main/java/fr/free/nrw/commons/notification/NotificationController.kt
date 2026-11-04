@@ -19,10 +19,10 @@ class NotificationController
             notificationClient.getNotifications(archived)
 
         /**
-         * Returns the unread count for the contributions badge.
+         * Unread count for the contributions badge. Echo caps the value at 100.
          */
         fun getUnreadCount(): Single<Int> = notificationClient.getUnreadCount()
 
         fun markAsRead(notification: Notification): Observable<Boolean> =
-            notificationClient.markNotificationAsRead(notification.notificationId)
+            notificationClient.markNotificationAsRead(notification.notificationId, notification.wiki)
     }

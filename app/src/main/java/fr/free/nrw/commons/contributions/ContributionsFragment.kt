@@ -74,6 +74,9 @@ import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
+// Echo's formatted badge stops at 99. A raw count above that is "99+".
+private const val NOTIFICATION_BADGE_CAP = 99
+
 class ContributionsFragment :
     CommonsDaggerSupportFragment(),
     FragmentManager.OnBackStackChangedListener,
@@ -399,7 +402,13 @@ class ContributionsFragment :
             notificationCount!!.visibility = View.GONE
         } else {
             notificationCount!!.visibility = View.VISIBLE
-            notificationCount!!.text = unreadCount.toString()
+            // Echo stops counting at 100 and shows "99+" above 99.
+            notificationCount!!.text =
+                if (unreadCount > NOTIFICATION_BADGE_CAP) {
+                    getString(R.string.notification_count_cap)
+                } else {
+                    unreadCount.toString()
+                }
         }
     }
 

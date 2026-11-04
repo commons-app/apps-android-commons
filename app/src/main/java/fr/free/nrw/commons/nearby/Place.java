@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -39,6 +40,10 @@ public class Place implements Parcelable {
     public Sitelinks siteLinks;
     private boolean isMonument;
     private String thumb;
+
+    // When this place was saved in the local cache, used to remove outdated details
+    @ColumnInfo(defaultValue = "0")
+    public long cachedAt;
 
     public Place() {
         language = null;

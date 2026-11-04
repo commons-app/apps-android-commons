@@ -87,6 +87,7 @@ import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.hideTabs
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
@@ -111,9 +112,6 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.utils.DateUtil.getDateStringWithSkeletonPattern
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
-import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
-import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
-import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -354,7 +352,8 @@ class MediaDetailFragment :
         binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
         binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
         binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        binding.mediaDetailImageView.setOnClickListener {
+        // The spacer sits over the image so the details can scroll. Clicks on the image hit the spacer.
+        binding.mediaDetailImageViewSpacer.setOnClickListener {
             launchZoomActivity(
                 binding.mediaDetailImageView,
             )
@@ -431,20 +430,7 @@ class MediaDetailFragment :
     }
 
     fun launchZoomActivity(view: View) {
-        val hasPermission: Boolean = hasPermission(requireActivity(), PERMISSIONS_STORAGE)
-        if (hasPermission) {
-            launchZoomActivityAfterPermissionCheck(view)
-        } else {
-            checkPermissionsAndPerformAction(
-                requireActivity(),
-                {
-                    launchZoomActivityAfterPermissionCheck(view)
-                },
-                R.string.storage_permission_title,
-                R.string.read_storage_permission_rationale,
-                *PERMISSIONS_STORAGE,
-            )
-        }
+        launchZoomActivityAfterPermissionCheck(view)
     }
 
     private fun fetchFileUsages(fileName: String) {
@@ -1700,11 +1686,16 @@ class MediaDetailFragment :
                 count--
                 if (count == 0) {
                     endDescription = i
-                    val languageCode: String = description.substring(startCode + 2, endCode)
-                    val languageDescription: String =
-                        description.substring(startDescription, endDescription)
-                    if (allLanguageCodes.contains(languageCode)) {
-                        descriptionList[languageCode] = languageDescription
+                    // Nearby uploads append {{ on Wikidata|Qid}} before |source, so this match
+                    // includes {{own}}. That template's pipe belongs to the next field, and
+                    // slicing it throws before the edit screen can open.
+                    if (endCode >= startCode + 2 && endDescription >= startDescription) {
+                        val languageCode: String = description.substring(startCode + 2, endCode)
+                        val languageDescription: String =
+                            description.substring(startDescription, endDescription)
+                        if (allLanguageCodes.contains(languageCode)) {
+                            descriptionList[languageCode] = languageDescription
+                        }
                     }
                 }
                 i++

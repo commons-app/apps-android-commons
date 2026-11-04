@@ -6,6 +6,7 @@
 * Baloch Khan
 * Ibrahim khashrowdi
 * Saraiki
+* باران
 * شاه زمان پټان
 -->
 <resources>
@@ -274,7 +275,7 @@
   <string name="skip_login_title">آیا تاسو رښتیا غواړئ چې ننوتل پرېږدئ؟</string>
   <string name="skip_login_message">په راتلونکي کې تاسو بايد د انځورونو راپورته کولو لپاره غونډال ته ننوځئ.</string>
   <string name="login_alert_message">د دې ځانگړنې کارولو لپاره مهرباني وکړئ، غونډال ته ننوځئ</string>
-  <string name="copy_wikicode">ويکي‌ليک ټينگدړې ت ولمېسئ</string>
+  <string name="copy_wikicode">ويکي‌ليک ټينگدړې ته ولمېسئ</string>
   <string name="wikicode_copied">ويکي‌ليک ټينگدړې ته ولمېسل شو</string>
   <string name="nearby_location_not_available">څېرمه ځايونه شايد په سمه توگه کار ونکړي، ځکه ځای د لاسرسي وړ نه دي.</string>
   <string name="nearby_showing_pins_offline">اينټرنېټ د لاسرسي وړ نه دي. يوازې زېرمه شوي ځايونه ښيي.</string>
@@ -625,6 +626,7 @@
   <string name="failed_to_save_gpx_file">د جي‌اېف‌اېکس دوتنې خوندي کولو کې پاتې راغی.</string>
   <string name="saving_kml_file">د کی‌اېم‌اېل دوتنې په توگه خوندي کول...</string>
   <string name="saving_gpx_file">د جي‌اېف‌اېکس دوتنې په توگه خوندي کول...</string>
+  <string name="talk">خبرې اترې</string>
   <string name="uploads">راپورته‌کېدنې</string>
   <string name="pending">په تمه</string>
   <string name="failed">پاتې راغلی</string>
