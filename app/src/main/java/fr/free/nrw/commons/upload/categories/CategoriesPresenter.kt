@@ -76,17 +76,17 @@ class CategoriesPresenter
                         },
                         { t: Throwable? ->
                             view.showProgress(false)
-                            view.showError(R.string.error_loading_categories)
-                            val mwException = t as? MwIOException
-                            view.showErrorDialog(
-                                if (mwException == null) {
-                                    ""
-                                } else {
-                                    "\n${mwException.error.title} / ${mwException.error.details}"
+                            result.fold(
+                                onSuccess = {
+                                    setCategoryListValue(it)
+                                    if (it.isEmpty()) {
+                                        view.showError(R.string.no_categories_found)
+                                    }
                                 },
+                                onFailure = ::showLoadError,
                             )
-                            Timber.e(t)
                         },
+                        ::showLoadError,
                     ),
             )
         }
