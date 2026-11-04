@@ -36,13 +36,17 @@ class NotificationClient
                     it.toCommonsNotification()
                 }.toList()
 
-        fun markNotificationAsRead(notificationId: String?): Observable<Boolean> =
+        fun markNotificationAsRead(
+            notificationId: String?,
+            wiki: String,
+        ): Observable<Boolean> =
             try {
                 service
                     .markRead(
                         token = csrfTokenClient.getTokenBlocking(),
                         readList = notificationId,
                         unreadList = "",
+                        wikis = wiki,
                     ).map(MwQueryResponse::success)
             } catch (throwable: InvalidLoginTokenException) {
                 Observable.error(throwable)
@@ -67,6 +71,7 @@ class NotificationClient
                 link = contents?.links?.getPrimary()?.url ?: "",
                 iconUrl = "",
                 notificationId = id().toString(),
+                wiki = wiki().ifEmpty { "commonswiki" },
             )
         }
     }
