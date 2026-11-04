@@ -7,7 +7,6 @@ import fr.free.nrw.commons.repository.UploadRepository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 
-/** Loads category suggestions and combines existing categories when editing media. */
 class CategorySearchResults(
     private val repository: UploadRepository,
     private val ioScheduler: Scheduler,

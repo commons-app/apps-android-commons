@@ -10,7 +10,6 @@ import fr.free.nrw.commons.category.CategoryItem
  * The contract with with UploadCategoriesFragment and its presenter would talk to each other
  */
 interface CategoriesContract {
-    /** Upload category view, combining search rendering and existing-media editing. */
     interface View :
         SearchView,
         EditView {
@@ -19,15 +18,11 @@ interface CategoriesContract {
         fun showNoCategorySelected()
     }
 
-    /** Search results, loading state, and error rendering. */
     interface SearchView {
-        /** Shows or hides the category search loading indicator. */
         fun showProgress(shouldShow: Boolean)
 
-        /** Displays an error message alongside the category query. */
         fun showError(error: String?)
 
-        /** Displays a localized error alongside the category query. */
         fun showError(stringResourceId: Int)
 
         /**
@@ -35,11 +30,9 @@ interface CategoriesContract {
          */
         fun showErrorDialog(message: String)
 
-        /** Replaces the displayed category results. */
         fun setCategories(categories: List<CategoryItem>?)
     }
 
-    /** Existing-media category editing, progress, and navigation. */
     interface EditView {
         /**
          * Gets existing category names from media

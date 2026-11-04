@@ -5,7 +5,6 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 
-/** Applies suggested category selections and immediately updates the displayed list. */
 class CategorySelection(
     private val repository: UploadRepository,
 ) {

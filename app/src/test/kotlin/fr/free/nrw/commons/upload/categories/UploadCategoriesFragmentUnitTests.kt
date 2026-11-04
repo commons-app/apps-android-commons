@@ -350,7 +350,6 @@ class UploadCategoriesFragmentUnitTests {
         method.invoke(fragment)
     }
 
-    /** Edit lifecycle handling continues to enable and disable the fragment back callback. */
     @Test
     fun testEditLifecycleBackHandling() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
@@ -361,7 +360,6 @@ class UploadCategoriesFragmentUnitTests {
         Assert.assertFalse(fragment.onBackPressedCallback.isEnabled)
     }
 
-    /** Android can recreate the fragment through its default constructor and delegated view methods. */
     @Test
     fun testDefaultConstructorRestoration() {
         val restored =

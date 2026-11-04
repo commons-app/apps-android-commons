@@ -19,7 +19,6 @@ import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY
 import javax.inject.Inject
 
-/** Coordinates upload navigation while search and edit views own their UI behavior. */
 class UploadCategoriesFragment(
     private val searchView: CategorySearchView = CategorySearchView(),
     private val editView: CategoryEditView = CategoryEditView(),

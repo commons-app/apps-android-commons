@@ -14,12 +14,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
-/** Verifies immediate category selection updates independently of presenter attachment. */
 class CategorySelectionTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    /** New selections take precedence over duplicate search results while retaining other results. */
     @Test
     fun `selection updates displayed list distinctly and passes edited media to repository`() {
         val repository = mock<UploadRepository>()
@@ -36,7 +34,6 @@ class CategorySelectionTest {
         verify(repository).onCategoryClicked(selected, media)
     }
 
-    /** Selection still reaches the repository before any search result list has been initialized. */
     @Test
     fun `selection before search leaves uninitialized display unchanged`() {
         val repository = mock<UploadRepository>()

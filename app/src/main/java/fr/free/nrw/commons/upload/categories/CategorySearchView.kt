@@ -15,7 +15,6 @@ import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-/** Renders category searches and forwards search and selection input. */
 class CategorySearchView : CategoriesContract.SearchView {
     private companion object {
         const val SEARCH_DEBOUNCE_MILLIS = 500L
@@ -26,7 +25,6 @@ class CategorySearchView : CategoriesContract.SearchView {
 
     internal lateinit var fragment: UploadCategoriesFragment
 
-    /** Subscribes to debounced category queries for the current view. */
     fun addTextChangeListenerToEtSearch() {
         if (fragment.binding == null) {
             return
@@ -46,12 +44,10 @@ class CategorySearchView : CategoriesContract.SearchView {
                 )
     }
 
-    /** Passes the current query to the presenter. */
     private fun searchForCategory(query: String) {
         fragment.presenter?.searchForCategories(query)
     }
 
-    /** Connects category selection and the category list adapter. */
     fun initRecyclerView() {
         if (adapter == null) {
             adapter =
@@ -66,27 +62,22 @@ class CategorySearchView : CategoriesContract.SearchView {
         }
     }
 
-    /** Stops receiving search input when the fragment view is destroyed. */
     fun dispose() {
         subscribe?.dispose()
     }
 
-    /** Updates the search loading indicator. */
     override fun showProgress(shouldShow: Boolean) {
         fragment.binding?.pbCategories?.setVisibility(if (shouldShow) View.VISIBLE else View.GONE)
     }
 
-    /** Displays a category search error. */
     override fun showError(error: String?) {
         fragment.binding?.tilContainerSearch?.error = error
     }
 
-    /** Displays a category search error. */
     override fun showError(stringResourceId: Int) {
         fragment.binding?.tilContainerSearch?.error = fragment.getString(stringResourceId)
     }
 
-    /** Displays details of a category search failure. */
     override fun showErrorDialog(message: String) {
         AlertDialog
             .Builder(fragment.requireContext())
@@ -96,7 +87,6 @@ class CategorySearchView : CategoriesContract.SearchView {
             .show()
     }
 
-    /** Renders the current category search results. */
     override fun setCategories(categories: List<CategoryItem>?) {
         if (adapter == null) {
             Timber.e("Adapter is null in setCategories")

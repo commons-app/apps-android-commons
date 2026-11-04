@@ -17,11 +17,9 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-/** Verifies upload and existing-media search filtering after extraction from the presenter. */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategorySearchResultsTest {
-    /** Exact queries remain available even when the spam filter rejects other suggestions. */
     @Test
     fun `upload search filters spam but preserves exact matches and nonempty captions`() {
         val repository = mock<UploadRepository>()
@@ -48,7 +46,6 @@ class CategorySearchResultsTest {
         verify(repository).searchAll("2026", listOf("Title"), repository.getSelectedDepictions())
     }
 
-    /** Editing includes selected existing categories and removes hidden categories from both sources. */
     @Test
     fun `edit search marks existing categories selected and excludes hidden results`() {
         val repository = mock<UploadRepository>()
@@ -72,7 +69,6 @@ class CategorySearchResultsTest {
             .assertNoErrors()
     }
 
-    /** Repository errors reach the presenter so it can display its existing error UI. */
     @Test
     fun `search propagates repository errors`() {
         val repository = mock<UploadRepository>()

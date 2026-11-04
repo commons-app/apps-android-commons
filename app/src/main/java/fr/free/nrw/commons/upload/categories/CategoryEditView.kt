@@ -12,7 +12,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.media.MediaDetailFragment
 
-/** Handles the existing-media category edit screen and its lifecycle. */
 class CategoryEditView :
     CategoriesContract.EditView,
     DefaultLifecycleObserver {
@@ -102,7 +101,6 @@ class CategoryEditView :
         }
     }
 
-    /** Disables edit-screen back handling while paused. */
     override fun onPause(owner: LifecycleOwner) {
         fragment.onBackPressedCallback.isEnabled = false
     }
