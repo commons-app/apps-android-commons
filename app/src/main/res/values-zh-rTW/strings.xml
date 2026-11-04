@@ -16,6 +16,7 @@
 * S099001
 * Simon Shek
 * StephDC
+* SupaplexTW
 * Tranve
 * Wehwei
 * Winston Sung
@@ -296,6 +297,9 @@
   <string name="null_url">錯誤！查無 URL</string>
   <string name="nominate_deletion">提名刪除</string>
   <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
+  <string name="file_deleted_from_commons">該檔案已經從維基共享資源中刪除了。</string>
+  <string name="contribution_deleted">已刪除</string>
+  <string name="deleted_file_activity_title">檔案已刪除</string>
   <string name="nominated_see_more">詳情請參閱網頁</string>
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
@@ -884,4 +888,9 @@
   <string name="error_applying_blur">套用模糊出錯</string>
   <string name="failed_to_apply_crop">套用裁剪失敗</string>
   <string name="failed_to_save_image">儲存圖片失敗</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG（音訊）</string>
+  <string name="unsupported_format_title">不支援的格式</string>
 </resources>

@@ -56,7 +56,8 @@ class ReasonBuilderTest {
 
     @Test
     fun forceLoginWhenAccountIsNull() {
-        PowerMockito.`when`(context?.getString(R.string.user_not_logged_in))
+        PowerMockito
+            .`when`(context?.getString(R.string.user_not_logged_in))
             .thenReturn("Log-in expired. Please log in again.")
 
         reasonBuilder!!.getReason(mock(Media::class.java), "test").test().await()
@@ -64,20 +65,22 @@ class ReasonBuilderTest {
     }
 
     @Test
-    fun getReason()  = runTest {
-        `when`(sessionManager?.userName).thenReturn("Testuser")
-        `when`(sessionManager?.doesAccountExist()).thenReturn(true)
-        `when`(okHttpJsonApiClient!!.getGlobalFileUsages(anyString(), anyInt()))
-            .thenReturn(mock(GlobalFileUsagesResponse::class.java))
-        `when`(okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()))
-            .thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
-        `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
-            .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
+    fun getReason() =
+        runTest {
+            `when`(sessionManager?.userName).thenReturn("Testuser")
+            `when`(sessionManager?.doesAccountExist()).thenReturn(true)
+            `when`(okHttpJsonApiClient!!.getGlobalFileUsages(anyString(), anyInt()))
+                .thenReturn(mock(GlobalFileUsagesResponse::class.java))
+            `when`(
+                okHttpJsonApiClient!!.getLeaderboard(anyString(), anyString(), anyString(), anyString(), anyString()),
+            ).thenReturn(Observable.just(mock(LeaderboardResponse::class.java)))
+            `when`(okHttpJsonApiClient!!.setAvatar(anyString(), anyString()))
+                .thenReturn(Single.just(mock(UpdateAvatarResponse::class.java)))
 
-        val media = media(filename = "test_file", dateUploaded = Date())
+            val media = media(filename = "test_file", dateUploaded = Date())
 
-        reasonBuilder!!.getReason(media, "test").test().await()
-        verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
-        verify(okHttpJsonApiClient, times(1))!!.getGlobalFileUsages(anyString(), anyInt())
-    }
+            reasonBuilder!!.getReason(media, "test").test().await()
+            verify(sessionManager, times(0))!!.forceLogin(any(Context::class.java))
+            verify(okHttpJsonApiClient, times(1))!!.getGlobalFileUsages(anyString(), anyInt())
+        }
 }

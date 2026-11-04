@@ -48,11 +48,15 @@ public abstract class PlaceDao {
         double latEnd, double lngEnd);
 
     /**
-     * Saves a Place object asynchronously into the database.
+     * Saves a Place object asynchronously into the database, with the current time as the time
+     * it was cached
      */
     public Completable save(final Place place) {
         return Completable
-            .fromAction(() -> saveSynchronous(place));
+            .fromAction(() -> {
+                place.cachedAt = System.currentTimeMillis();
+                saveSynchronous(place);
+            });
     }
 
     /**
@@ -69,4 +73,12 @@ public abstract class PlaceDao {
     public Completable deleteAll() {
         return Completable.fromAction(this::deleteAllSynchronous);
     }
+
+    /**
+     * Deletes the places that were cached before the given time.
+     *
+     * @param cachedBefore Places with an older cachedAt time are deleted.
+     */
+    @Query("DELETE FROM place WHERE cachedAt < :cachedBefore")
+    public abstract void deleteCachedBefore(long cachedBefore);
 }
