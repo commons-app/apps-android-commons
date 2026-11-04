@@ -520,12 +520,7 @@ class MediaDetailFragment :
             enableProgressBar()
         }
 
-        if (getUserName(requireContext()) != null &&
-            media != null &&
-            getUserName(
-                requireContext(),
-            ) == media!!.author
-        ) {
+        if (isOwnUpload()) {
             binding.sendThanks.visibility = View.GONE
         } else {
             binding.sendThanks.visibility = View.VISIBLE
@@ -631,6 +626,19 @@ class MediaDetailFragment :
         )
     }
 
+    /**
+     * Checks whether the current user uploaded the media.
+     * Commons usernames are case-insensitive only for the first character.
+     */
+    private fun isOwnUpload(): Boolean {
+        val currentUser = getUserName(requireContext())?.trim()
+        val uploader = media?.user?.trim()
+        if (currentUser.isNullOrEmpty() || uploader.isNullOrEmpty()) {
+            return false
+        }
+        return currentUser.first().equals(uploader.first(), ignoreCase = true) &&
+                currentUser.drop(1) == uploader.drop(1)
+    }
     private fun onMediaRefreshed(media: Media) {
         media.categories = this.media!!.categories
         this.media = media
@@ -657,10 +665,7 @@ class MediaDetailFragment :
             binding.nominatedDeletionBanner.visibility = View.GONE
             return
         }
-        if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
-            binding.nominateDeletion.visibility = View.GONE
-            binding.nominatedDeletionBanner.visibility = View.GONE
-        } else if (deletionPageExists) {
+        if (deletionPageExists) {
             if (applicationKvStore.getBoolean(
                     String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
                     false,
@@ -1724,7 +1729,7 @@ class MediaDetailFragment :
 
     @SuppressLint("StringFormatInvalid")
     fun onDeleteButtonClicked() {
-        if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
+        if (isOwnUpload()) {
             val languageAdapter: ArrayAdapter<String> =
                 ArrayAdapter(
                     requireActivity(),
