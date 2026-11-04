@@ -22,7 +22,7 @@ fun Context.getStringSafe(
             LangCodeUtils.getLocalizedResources(this, Locale.ENGLISH).getString(id, *formatArgs)
         },
         raw = { getString(id) },
-        name = resourceName(id),
+        name = { resourceName(id) },
     )
 
 fun Context.getQuantityStringSafe(
@@ -38,31 +38,34 @@ fun Context.getQuantityStringSafe(
                 .getQuantityString(id, quantity, *formatArgs)
         },
         raw = { resources.getQuantityString(id, quantity) },
-        name = resourceName(id),
+        name = { resourceName(id) },
     )
 
 private fun formatOrEnglish(
     localized: () -> String,
     english: () -> String,
     raw: () -> String,
-    name: String,
+    name: () -> String,
 ): String =
     try {
         localized()
     } catch (error: IllegalFormatException) {
-        Timber.e(error, "Unparseable placeholder in %s", name)
+        val resourceName = name()
+        Timber.e(error, "Unparseable placeholder in %s", resourceName)
         try {
             english()
         } catch (englishError: IllegalFormatException) {
-            Timber.e(englishError, "English string %s is also unparseable", name)
+            Timber.e(englishError, "English string %s is also unparseable", resourceName)
             raw()
         }
     }
 
-private fun Context.resourceName(id: Int): String =
-    try {
-        resources.getResourceEntryName(id)
+private fun Context.resourceName(id: Int): String {
+    val currentResources = resources ?: return id.toString()
+    return try {
+        currentResources.getResourceEntryName(id)
     } catch (error: Resources.NotFoundException) {
         Timber.e(error, "Missing resource name for %s", id)
         id.toString()
     }
+}
