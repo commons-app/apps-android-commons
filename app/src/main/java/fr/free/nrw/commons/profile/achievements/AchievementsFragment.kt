@@ -1,12 +1,10 @@
 package fr.free.nrw.commons.profile.achievements
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
@@ -69,18 +67,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
         binding.thanksImageIcon.setOnClickListener { infoDialogs.showThanksReceivedInfo() }
         binding.qualityImageIcon.setOnClickListener { infoDialogs.showQualityImagesInfo() }
 
-        // DisplayMetrics used to fetch the size of the screen
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val height = displayMetrics.heightPixels
-        val width = displayMetrics.widthPixels
-
-        // Used for the setting the size of imageView at runtime
-        // TODO REMOVE
-        val params = binding.achievementBadgeImage.layoutParams as ConstraintLayout.LayoutParams
-        params.height = (height * BADGE_IMAGE_HEIGHT_RATIO).toInt()
-        params.width = (width * BADGE_IMAGE_WIDTH_RATIO).toInt()
-        binding.achievementBadgeImage.requestLayout()
         binding.progressBar.visibility = View.VISIBLE
 
         setHasOptionsMenu(true)
@@ -277,10 +263,5 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             return false
         }
         return true
-    }
-
-    companion object {
-        private const val BADGE_IMAGE_WIDTH_RATIO = 0.4
-        private const val BADGE_IMAGE_HEIGHT_RATIO = 0.3
     }
 }
