@@ -551,8 +551,8 @@ ${"wd:" + place.wikiDataEntityId}"""
             rightLatLng
         )
         if (placeBindings != null) {
-            for ((item1, label, location, clas) in placeBindings) {
-                val input = location.value
+            for (placeBinding in placeBindings) {
+                val input = placeBinding.location.value
                 val pattern = Pattern.compile(
                     "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)"
                 )
@@ -561,11 +561,11 @@ ${"wd:" + place.wikiDataEntityId}"""
                 if (matcher.find()) {
                     val longStr = matcher.group(1)
                     val latStr = matcher.group(2)
-                    val itemUrl = item1.value
-                    val itemName = label.value.replace("&", "&amp;")
+                    val itemUrl = placeBinding.item.value
+                    val itemName = placeBinding.label.value.replace("&", "&amp;")
                     val itemLatitude = latStr
                     val itemLongitude = longStr
-                    val itemClass = clas.value
+                    val itemClass = placeBinding.clas.value
 
                     val formattedItemName =
                         if (!itemClass.isEmpty())
@@ -608,8 +608,8 @@ ${"wd:" + place.wikiDataEntityId}"""
 
         val placeBindings = runQuery(leftLatLng, rightLatLng)
         if (placeBindings != null) {
-            for ((item1, label, location, clas) in placeBindings) {
-                val input = location.value
+            for (placeBinding in placeBindings) {
+                val input = placeBinding.location.value
                 val pattern = Pattern.compile(
                     "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)"
                 )
@@ -618,11 +618,11 @@ ${"wd:" + place.wikiDataEntityId}"""
                 if (matcher.find()) {
                     val longStr = matcher.group(1)
                     val latStr = matcher.group(2)
-                    val itemUrl = item1.value
-                    val itemName = label.value.replace("&", "&amp;")
+                    val itemUrl = placeBinding.item.value
+                    val itemName = placeBinding.label.value.replace("&", "&amp;")
                     val itemLatitude = latStr
                     val itemLongitude = longStr
-                    val itemClass = clas.value
+                    val itemClass = placeBinding.clas.value
 
                     val formattedItemName = if (!itemClass.isEmpty())
                         "$itemName ($itemClass)"

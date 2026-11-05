@@ -119,7 +119,6 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var textView: TextView
 
-
     @Mock
     private lateinit var linearLayout: LinearLayout
 
@@ -135,11 +134,8 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-
     @Mock
     private lateinit var progressBar: ProgressBar
-
-
 
     private lateinit var activity: SearchActivity
 

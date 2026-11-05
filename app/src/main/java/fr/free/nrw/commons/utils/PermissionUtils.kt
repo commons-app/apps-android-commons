@@ -84,6 +84,39 @@ object PermissionUtils {
     }
 
     /**
+     * Shows a rationale dialog explaining why permissions are needed.
+     *
+     * @param activity The Activity context
+     * @param rationaleTitle String resource ID for the dialog title
+     * @param rationaleMessage String resource ID for the dialog message
+     * @param onPositive Callback when positive button is clicked
+     * @param onNegative Optional callback when negative button is clicked
+     * @param isForPermanentlyDenied True if showing dialog for permanently denied
+     *        permissions (shows "Settings" button instead of "OK")
+     */
+    private fun showRationaleDialog(
+        activity: Activity,
+        rationaleTitle: Int,
+        rationaleMessage: Int,
+        onPositive: Runnable?,
+        onNegative: Runnable? = null,
+    ) {
+        val isForPermanentlyDenied = onNegative == null
+        DialogUtil.showAlertDialog(
+            activity = activity,
+            title = activity.getString(rationaleTitle),
+            message = activity.getString(rationaleMessage),
+            positiveButtonText = activity.getString(
+                if (isForPermanentlyDenied) R.string.navigation_item_settings else R.string.ok
+            ),
+            negativeButtonText = onNegative?.let { activity.getString(R.string.cancel) },
+            onPositiveBtnClick = onPositive,
+            onNegativeBtnClick = onNegative,
+            cancelable = true,
+        )
+    }
+
+    /**
      * Check if the app has partial access permissions.
      */
     @JvmStatic
@@ -130,14 +163,14 @@ object PermissionUtils {
         onPermissionGranted: Runnable,
         rationaleTitle: Int,
         rationaleMessage: Int,
-        vararg permissions: String
+        permissions: Array<String>
     ) {
         if (hasPartialAccess(activity)) {
             CoroutineScope(Dispatchers.Main).launch { onPermissionGranted.run() }
             return
         }
         checkPermissionsAndPerformAction(
-            activity, onPermissionGranted, null, rationaleTitle, rationaleMessage, *permissions
+            activity, onPermissionGranted, null, rationaleTitle, rationaleMessage, permissions
         )
     }
 
@@ -167,31 +200,28 @@ object PermissionUtils {
         onPermissionDenied: Runnable? = null,
         rationaleTitle: Int,
         rationaleMessage: Int,
-        vararg permissions: String
+        permissions: Array<String>
     ) {
         val scope = CoroutineScope(Dispatchers.Main)
 
         Dexter.withActivity(activity)
-            .withPermissions(*permissions)
+            .withPermissions(permissions.asList())
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     when {
                         report.areAllPermissionsGranted() || hasPartialAccess(activity) ->
                             scope.launch { onPermissionGranted.run() }
                         report.isAnyPermissionPermanentlyDenied -> {
-                            DialogUtil.showAlertDialog(
-                                activity,
-                                activity.getString(rationaleTitle),
-                                activity.getString(rationaleMessage),
-                                activity.getString(R.string.navigation_item_settings),
-                                null,
-                                {
+                            showRationaleDialog(
+                                activity = activity,
+                                rationaleTitle = rationaleTitle,
+                                rationaleMessage = rationaleMessage,
+                                onPositive = Runnable {
                                     askUserToManuallyEnablePermissionFromSettings(activity)
                                     if (activity is UploadActivity) {
                                         activity.isShowPermissionsDialog = true
                                     }
                                 },
-                                null, true
                             )
                         }
                         else -> scope.launch { onPermissionDenied?.run() }
@@ -205,30 +235,27 @@ object PermissionUtils {
                         token.continuePermissionRequest()
                         return
                     }
-                    DialogUtil.showAlertDialog(
-                        activity,
-                        activity.getString(rationaleTitle),
-                        activity.getString(rationaleMessage),
-                        activity.getString(R.string.ok),
-                        activity.getString(R.string.cancel),
-                        {
+                    showRationaleDialog(
+                        activity = activity,
+                        rationaleTitle = rationaleTitle,
+                        rationaleMessage = rationaleMessage,
+                        onPositive = Runnable {
                             if (activity is UploadActivity) {
                                 activity.isShowPermissionsDialog = true
                             }
                             token.continuePermissionRequest()
                         },
-                        {
+                        onNegative = Runnable {
                             Toast.makeText(
                                 activity.applicationContext,
                                 R.string.permissions_are_required_for_functionality,
-                                Toast.LENGTH_LONG
+                                Toast.LENGTH_LONG,
                             ).show()
                             token.cancelPermissionRequest()
                             if (activity is UploadActivity) {
                                 activity.finish()
                             }
                         },
-                        true
                     )
                 }
             }).onSameThread().check()

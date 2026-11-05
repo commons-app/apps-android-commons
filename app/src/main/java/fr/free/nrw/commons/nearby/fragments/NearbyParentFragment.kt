@@ -1525,11 +1525,7 @@ class NearbyParentFragment :
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
         // the east and west corner LatLng.
-        if (screenTopRightLatLng?.latitude == 0.0 &&
-            screenTopRightLatLng?.longitude == 0.0 &&
-            screenBottomLeftLatLng?.latitude == 0.0 &&
-            screenBottomLeftLatLng.longitude == 0.0
-        ) {
+        if (isZeroLatLng(screenTopRightLatLng) && isZeroLatLng(screenBottomLeftLatLng)) {
             val delta = FALLBACK_BOUNDS_DELTA_DEGREES
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta
@@ -2368,6 +2364,7 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
+        // When selectedLabels is empty, show all places
         if (selectedLabels == null || selectedLabels.size == 0) {
             replaceMarkerOverlays(NearbyController.markerLabelList)
             return
@@ -2377,20 +2374,8 @@ class NearbyParentFragment :
             val place = markerPlaceGroup.place
             // When label filter is engaged
             // then compare it against place's label
-            if (selectedLabels != null &&
-                (selectedLabels.size != 0 || !filterForPlaceState) &&
-                (
-                    !selectedLabels.contains(place.label) &&
-                        !(
-                            selectedLabels.contains(Label.BOOKMARKS) &&
-                                markerPlaceGroup.isBookmarked
-                        )
-                )
-            ) {
-                continue
-            }
-
-            if (!displayWlm && place.isMonument) {
+            val isHiddenMonument = !displayWlm && place.isMonument
+            if (!matchesSelectedLabels(markerPlaceGroup, selectedLabels) || isHiddenMonument) {
                 continue
             }
 
@@ -3513,6 +3498,23 @@ class NearbyParentFragment :
             fragment.arguments = args
             return fragment
         }
+
+        /**
+         * Returns true if the given location is exactly (0.0, 0.0), which is what the map
+         * returns for its corners when it has not been laid out yet
+         */
+        internal fun isZeroLatLng(latLng: LatLng?): Boolean =
+            latLng?.latitude == 0.0 && latLng.longitude == 0.0
+
+        /**
+         * Returns true if the place has one of the selected labels, or if bookmarks are
+         * selected and the place is bookmarked
+         */
+        internal fun matchesSelectedLabels(
+            markerPlaceGroup: MarkerPlaceGroup,
+            selectedLabels: List<Label>
+        ): Boolean = selectedLabels.contains(markerPlaceGroup.place.label) ||
+            (selectedLabels.contains(Label.BOOKMARKS) && markerPlaceGroup.isBookmarked)
 
         private val isExternalStorageWritable: Boolean
             get() {

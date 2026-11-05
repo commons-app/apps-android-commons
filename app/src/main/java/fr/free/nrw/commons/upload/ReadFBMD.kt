@@ -34,19 +34,26 @@ class ReadFBMD
                         }
                     }
 
-                    result =
-                        if (psBlockOffset > 0 &&
-                            fbmdOffset > 0 &&
-                            fbmdOffset > psBlockOffset &&
-                            fbmdOffset - psBlockOffset < 0x80
-                        ) {
-                            FILE_FBMD
-                        } else {
-                            IMAGE_OK
-                        }
+                    result = if (isFacebookMetadata(psBlockOffset, fbmdOffset)) FILE_FBMD else IMAGE_OK
                 } catch (e: IOException) {
                     Timber.e(e)
                 }
                 return@fromCallable result
             }
+
+        companion object {
+            private const val MAX_FBMD_DISTANCE_FROM_PS_BLOCK = 0x80
+
+            /**
+             * Returns true if an FBMD marker was found shortly (less than 0x80 bytes) after
+             * the Photoshop 8BIM block, which is how Facebook embeds its metadata
+             */
+            internal fun isFacebookMetadata(
+                psBlockOffset: Int,
+                fbmdOffset: Int,
+            ): Boolean {
+                val areMarkersFound = psBlockOffset > 0 && fbmdOffset > 0
+                return areMarkersFound && fbmdOffset - psBlockOffset in 1 until MAX_FBMD_DISTANCE_FROM_PS_BLOCK
+            }
+        }
     }

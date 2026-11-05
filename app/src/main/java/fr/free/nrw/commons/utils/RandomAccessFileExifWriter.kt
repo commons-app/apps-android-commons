@@ -103,6 +103,31 @@ object RandomAccessFileExifWriter {
     private const val RATIONAL_SIZE_BYTES = 8 // 4-byte numerator + 4-byte denominator
 
     /**
+     * Encapsulates parameters for updating an EXIF tag entry.
+     *
+     * @param tiffBase Base offset of the TIFF structure in the file
+     * @param type EXIF data type (e.g., TYPE_ASCII, TYPE_SHORT, TYPE_RATIONAL)
+     * @param cnt Count of values for this tag
+     * @param valFieldPos File position of the value/offset field in the IFD entry
+     * @param valOrOff Value or offset read from the IFD entry
+     * @param afterEntry File position immediately after this IFD entry
+     * @param tagId Numeric tag identifier
+     * @param value New string value to write
+     * @param order Byte order (little-endian or big-endian)
+     */
+    private data class TagUpdateParams(
+        val tiffBase: Long,
+        val type: Int,
+        val cnt: Int,
+        val valFieldPos: Long,
+        val valOrOff: Int,
+        val afterEntry: Long,
+        val tagId: Int,
+        val value: String,
+        val order: ByteOrder,
+    )
+
+    /**
      * Update a single EXIF tag in a JPEG file.
      *
      * @param file    target JPEG file.
@@ -198,39 +223,62 @@ object RandomAccessFileExifWriter {
                 raf.seek(0)
                 if (raf.readUnsignedShort() != JPEG_MARKER_SOI) return
 
-                while (raf.filePointer < raf.length() - MIN_FILE_SIZE) {
-                    val marker = raf.readUnsignedShort()
-                    val len = raf.readUnsignedShort()
-                    val next = raf.filePointer + len - 2
-
-                    if (marker == JPEG_MARKER_APP1 && len >= APP1_MIN_LENGTH) {
-                        val app1Start = raf.filePointer
-                        val hdr = ByteArray(EXIF_HEADER_LENGTH)
-                        raf.readFully(hdr)
-                        if (String(hdr, 0, EXIF_SIGNATURE_LENGTH) == "Exif") {
-                            val tiffBase = app1Start + EXIF_HEADER_LENGTH
-                            val bo = ByteArray(2)
-                            raf.readFully(bo)
-                            val order = if (bo[0] == 'I'.code.toByte())
-                                ByteOrder.LITTLE_ENDIAN else ByteOrder.BIG_ENDIAN
-
-                            readU16(raf, order) // skip magic 42
-                            val ifd0Off = readU32(raf, order)
-                            scanAndUpdateIfd(
-                                raf, tiffBase, tiffBase + ifd0Off,
-                                order, updates,
-                            )
-                            break
-                        } else {
-                            raf.seek(next)
-                        }
-                    } else if (marker == JPEG_MARKER_SOS) break
-                    else raf.seek(next)
-                }
+                processJpegSegments(raf, updates)
             }
         } catch (e: IOException) {
             Timber.e(e, "Failed to update EXIF tags via RandomAccessFile")
         }
+    }
+
+    /**
+     * Processes JPEG segments to find and update APP1/EXIF data.
+     */
+    private fun processJpegSegments(raf: RandomAccessFile, updates: Map<Int, String?>) {
+        while (raf.filePointer < raf.length() - MIN_FILE_SIZE) {
+            val marker = raf.readUnsignedShort()
+            val len = raf.readUnsignedShort()
+            val next = raf.filePointer + len - 2
+
+            when {
+                marker == JPEG_MARKER_APP1 && len >= APP1_MIN_LENGTH -> {
+                    if (processApp1Segment(raf, next, updates)) return
+                }
+                marker == JPEG_MARKER_SOS -> return
+                else -> raf.seek(next)
+            }
+        }
+    }
+
+    /**
+     * Processes an APP1 segment, returns true if EXIF data was found and processed.
+     */
+    private fun processApp1Segment(
+        raf: RandomAccessFile,
+        next: Long,
+        updates: Map<Int, String?>,
+    ): Boolean {
+        val app1Start = raf.filePointer
+        val hdr = ByteArray(EXIF_HEADER_LENGTH)
+        raf.readFully(hdr)
+
+        if (String(hdr, 0, EXIF_SIGNATURE_LENGTH) != "Exif") {
+            raf.seek(next)
+            return false
+        }
+
+        val tiffBase = app1Start + EXIF_HEADER_LENGTH
+        val bo = ByteArray(2)
+        raf.readFully(bo)
+        val order = if (bo[0] == 'I'.code.toByte())
+            ByteOrder.LITTLE_ENDIAN else ByteOrder.BIG_ENDIAN
+
+        readU16(raf, order) // skip magic 42
+        val ifd0Off = readU32(raf, order)
+        scanAndUpdateIfd(
+            raf, tiffBase, tiffBase + ifd0Off,
+            order, updates,
+        )
+        return true
     }
 
     /**
@@ -251,55 +299,7 @@ object RandomAccessFileExifWriter {
         val count = readU16(raf, order)
 
         repeat(count) {
-            val entryPos = raf.filePointer
-            val tagId = readU16(raf, order)
-            val type = readU16(raf, order)
-            val cnt = readU32(raf, order)
-            val valFieldPos = raf.filePointer
-            val valOrOff = readU32(raf, order)
-            val afterEntry = raf.filePointer
-
-            // Recurse sub-IFDs.
-            if ((tagId == TAG_ID_EXIF_IFD_POINTER || tagId == TAG_ID_GPS_IFD_POINTER) && valOrOff > 0) {
-                scanAndUpdateIfd(
-                    raf, tiffBase, tiffBase + valOrOff, order, updates, isMainIfd = false,
-                )
-                raf.seek(afterEntry)
-            }
-
-            // Remove or overwrite matching tags.
-            if (!updates.containsKey(tagId)) return@repeat
-
-            if (updates[tagId] == null) {
-                // Zero out the entire 12-byte IFD entry to remove the tag
-                raf.seek(entryPos)
-                raf.write(ByteArray(IFD_ENTRY_SIZE_BYTES))
-                raf.seek(afterEntry)
-            } else {
-                val encoded = encodeValue(type, updates[tagId]!!, order) ?: return@repeat
-                val unitSize = typeUnitSize(type)
-                val existingBytes = unitSize * cnt
-
-                if (existingBytes <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
-                    if (encoded.size <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
-                        raf.seek(valFieldPos)
-                        raf.write(encoded)
-                        repeat(IFD_VALUE_OR_OFFSET_SIZE_BYTES - encoded.size) { raf.writeByte(0) }
-                    }
-                } else {
-                    if (encoded.size <= existingBytes) {
-                        raf.seek(tiffBase + valOrOff)
-                        raf.write(encoded)
-                        repeat(existingBytes - encoded.size) { raf.writeByte(0) }
-                    } else {
-                        Timber.w(
-                            "Tag 0x%04X: new value (%d B) exceeds existing space (%d B), skipped",
-                            tagId, encoded.size, existingBytes,
-                        )
-                    }
-                }
-                raf.seek(afterEntry)
-            }
+            processIfdEntry(raf, tiffBase, order, updates)
         }
 
         // Only main IFDs (e.g. IFD0 -> IFD1 thumbnail IFD) have a next-IFD offset pointer.
@@ -311,6 +311,95 @@ object RandomAccessFileExifWriter {
                 )
             }
         }
+    }
+
+    /**
+     * Processes a single IFD entry, handling sub-IFD recursion and tag updates.
+     */
+    private fun processIfdEntry(
+        raf: RandomAccessFile,
+        tiffBase: Long,
+        order: ByteOrder,
+        updates: Map<Int, String?>,
+    ) {
+        val entryPos = raf.filePointer
+        val tagId = readU16(raf, order)
+        val type = readU16(raf, order)
+        val cnt = readU32(raf, order)
+        val valFieldPos = raf.filePointer
+        val valOrOff = readU32(raf, order)
+        val afterEntry = raf.filePointer
+
+        // Recurse sub-IFDs.
+        if ((tagId == TAG_ID_EXIF_IFD_POINTER || tagId == TAG_ID_GPS_IFD_POINTER) && valOrOff > 0) {
+            scanAndUpdateIfd(
+                raf, tiffBase, tiffBase + valOrOff, order, updates, isMainIfd = false,
+            )
+            raf.seek(afterEntry)
+        }
+
+        // Remove or overwrite matching tags.
+        if (!updates.containsKey(tagId)) return
+
+        if (updates[tagId] == null) {
+            removeTag(raf, entryPos, afterEntry)
+        } else {
+            updateTag(
+                raf,
+                TagUpdateParams(
+                    tiffBase = tiffBase,
+                    type = type,
+                    cnt = cnt,
+                    valFieldPos = valFieldPos,
+                    valOrOff = valOrOff,
+                    afterEntry = afterEntry,
+                    tagId = tagId,
+                    value = updates[tagId]!!,
+                    order = order,
+                ),
+            )
+        }
+    }
+
+    /**
+     * Removes a tag by zeroing out its IFD entry.
+     */
+    private fun removeTag(raf: RandomAccessFile, entryPos: Long, afterEntry: Long) {
+        raf.seek(entryPos)
+        raf.write(ByteArray(IFD_ENTRY_SIZE_BYTES))
+        raf.seek(afterEntry)
+    }
+
+    /**
+     * Updates a tag with a new encoded value.
+     */
+    private fun updateTag(
+        raf: RandomAccessFile,
+        params: TagUpdateParams,
+    ) {
+        val encoded = encodeValue(params.type, params.value, params.order) ?: return
+        val unitSize = typeUnitSize(params.type)
+        val existingBytes = unitSize * params.cnt
+
+        if (existingBytes <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
+            if (encoded.size <= IFD_VALUE_OR_OFFSET_SIZE_BYTES) {
+                raf.seek(params.valFieldPos)
+                raf.write(encoded)
+                repeat(IFD_VALUE_OR_OFFSET_SIZE_BYTES - encoded.size) { raf.writeByte(0) }
+            }
+        } else {
+            if (encoded.size <= existingBytes) {
+                raf.seek(params.tiffBase + params.valOrOff)
+                raf.write(encoded)
+                repeat(existingBytes - encoded.size) { raf.writeByte(0) }
+            } else {
+                Timber.w(
+                    "Tag 0x%04X: new value (%d B) exceeds existing space (%d B), skipped",
+                    params.tagId, encoded.size, existingBytes,
+                )
+            }
+        }
+        raf.seek(params.afterEntry)
     }
 
     /**
