@@ -32,7 +32,7 @@ app/src/main/java/fr/free/nrw/commons/utils/RandomAccessFileExifWriter.kt
 app/src/main/java/fr/free/nrw/commons/utils/StringSortingUtils.kt
 
 # Utils files excluded from formatting - legacy code with complex formatting issues:
-# DownloadReceiver.kt - Has uncorrectable comment style issue 
+# DownloadReceiver.kt - Has uncorrectable comment style issue
 # PermissionUtils.kt - Long parameter list (7 params), refactoring this would break public API compatibility
 # RandomAccessFileExifWriter.kt - Has complex EXIF parsing logic, refactoring risk too high for formatting cleanup
 # StringSortingUtils.kt refactoring reduces readability coz Levenshtein algorithm with multiple early return.
