@@ -56,8 +56,9 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
+                contributionsRepository.fetchContributionsWithStates(
                     listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED),
+                    sortedByDateUploadStarted = true,
                 )
             totalContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
@@ -76,8 +77,9 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
+                contributionsRepository.fetchContributionsWithStates(
                     listOf(STATE_FAILED),
+                    sortedByDateUploadStarted = true,
                 )
             failedContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
