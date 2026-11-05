@@ -5,5 +5,4 @@ import java.io.IOException
 /**
  * The Commons API fallback stopped because the account has more uploads than it will count.
  */
-class TooManyAchievementsException :
-    IOException("Too many uploads to compute achievements locally")
+class TooManyAchievementsException : IOException("Too many uploads to compute achievements locally")
