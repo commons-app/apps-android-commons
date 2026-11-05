@@ -719,7 +719,6 @@
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
     <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
-    <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
     <ID>TooManyFunctions:BasePagingFragment.kt$BasePagingFragment&lt;T&gt; : CommonsDaggerSupportFragmentView</ID>
@@ -790,7 +789,6 @@
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
     <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
-    <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
     <ID>WildcardImport:MediaAttributionUtilTest.kt$import org.junit.Assert.*</ID>
     <ID>WildcardImport:StringUtilTest.kt$import org.junit.Assert.*</ID>
