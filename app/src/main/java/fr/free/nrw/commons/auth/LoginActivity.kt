@@ -501,6 +501,11 @@ class LoginActivity : BaseActivity() {
                 else -> RESULT_TYPE_NONE
             }
         outState.putString(SAVE_LAST_LOGIN_RESULT_TYPE, loginResultType)
+        currentFocus?.id?.let {
+            if (it != View.NO_ID) {
+                outState.putInt(SAVE_FOCUSED_VIEW_ID, it)
+            }
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -535,6 +540,17 @@ class LoginActivity : BaseActivity() {
         } else {
             showMessage(errorMessage, R.color.secondaryDarkColor)
         }
+
+        val focusedViewId = savedInstanceState.getInt(SAVE_FOCUSED_VIEW_ID, View.NO_ID)
+        if (focusedViewId != View.NO_ID) {
+            binding?.root?.post {
+                binding?.root?.findViewById<View>(focusedViewId)?.let { view ->
+                    view.requestFocus()
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+                    imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+                }
+            }
+        }
     }
 
     companion object {
@@ -546,6 +562,7 @@ class LoginActivity : BaseActivity() {
         const val SAVE_PASSWORD: String = "password"
         const val SAVE_TWO_FACTOR_VISIBILITY: String = "twoFactorVisibility"
         const val SAVE_LAST_LOGIN_RESULT_TYPE: String = "lastLoginResultType"
+        const val SAVE_FOCUSED_VIEW_ID: String = "focusedViewId"
         const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
         const val RESULT_TYPE_2FA = "2FA"
         const val RESULT_TYPE_NONE = "NONE"
