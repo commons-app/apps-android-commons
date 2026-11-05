@@ -2,7 +2,7 @@ package fr.free.nrw.commons.contributions
 
 import androidx.paging.ItemKeyedDataSource
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Named
 class ContributionsRemoteDataSource
     @Inject
     constructor(
-        private val mediaClient: MediaClient,
+        private val mediaCollectionClient: MediaCollectionClient,
         @param:Named(IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : ItemKeyedDataSource<Int, Contribution>() {
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -48,7 +48,7 @@ class ContributionsRemoteDataSource
          */
         private fun fetchContributions(callback: LoadCallback<Contribution>) {
             compositeDisposable.add(
-                mediaClient
+                mediaCollectionClient
                     .getMediaListForUser(userName!!)
                     .map { mediaList ->
                         mediaList.map {
