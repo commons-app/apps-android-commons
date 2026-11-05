@@ -119,7 +119,7 @@ class MediaLicenseFragment :
     override fun updateLicenseSummary(
         selectedLicense: String?,
         numberOfItems: Int,
-    ) {}
+    ) = Unit
 
     private fun launchBrowser(hyperLink: String) = handleWebUrl(requireContext(), Uri.parse(hyperLink))
 
