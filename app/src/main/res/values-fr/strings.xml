@@ -449,6 +449,7 @@
   <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Commons qui sont utilisées dans des articles de Wikimédia</string>
   <string name="error_occurred">Une erreur est survenue !</string>
   <string name="notifications_channel_name_all">Notification de Commons</string>
+  <string name="notifications_channel_name_uploads">Avancement du téléversement</string>
   <string name="preference_author_name_toggle">Utiliser un nom d’auteur personnalisé</string>
   <string name="preference_author_name_toggle_summary">Utiliser un nom d’auteur personnalisé au lieu de votre nom d’utilisateur lorsque vous téléversez des photos</string>
   <string name="preference_author_name">Nom d’auteur personnalisé</string>

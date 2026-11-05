@@ -375,6 +375,7 @@
   <string name="achievements_revert_limit_message">নূন্যতম আবশ্যকতা:</string>
   <string name="error_occurred">ত্রুটি ঘটেছে!</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
+  <string name="notifications_channel_name_uploads">আপলোডের অগ্রগতি</string>
   <string name="preference_author_name_toggle">স্বনির্ধারিত লেখক নাম ব্যবহার করুন</string>
   <string name="preference_author_name_toggle_summary">চিত্র আপলোড করার সময় আপনার ব্যবহারকারীর নামের পরিবর্তে একটি স্বনির্ধারিত লেখক নাম ব্যবহার করুন</string>
   <string name="preference_author_name">স্বনির্ধারিত লেখক নাম</string>
