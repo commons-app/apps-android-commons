@@ -15,6 +15,8 @@ import javax.inject.Named
 import javax.inject.Singleton
 import fr.free.nrw.commons.wikidata.model.notifications.Notification as WikimediaNotification
 
+private const val NOTIFICATION_WIKIS = "wikidatawiki|commonswiki|enwiki"
+
 @Singleton
 class NotificationClient
     @Inject
@@ -25,7 +27,7 @@ class NotificationClient
         fun getNotifications(archived: Boolean): Single<List<Notification>> =
             service
                 .getAllNotifications(
-                    wikiList = "wikidatawiki|commonswiki|enwiki",
+                    wikiList = NOTIFICATION_WIKIS,
                     filter = if (archived) "read" else "!read",
                     continueStr = null,
                 ).map {
@@ -35,6 +37,17 @@ class NotificationClient
                 }.map {
                     it.toCommonsNotification()
                 }.toList()
+
+        /**
+         * Unread count across Commons, Wikidata, and English Wikipedia.
+         * Echo answers this with one request and reports at most 100, which means 100 or more.
+         */
+        fun getUnreadCount(): Single<Int> =
+            service
+                .getUnreadNotificationCount(wikiList = NOTIFICATION_WIKIS)
+                .map { response ->
+                    response?.query()?.notifications()?.rawCount() ?: 0
+                }.first(0)
 
         fun markNotificationAsRead(
             notificationId: String?,
