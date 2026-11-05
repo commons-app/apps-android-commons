@@ -10,4 +10,5 @@ data class Notification(
     var link: String,
     var iconUrl: String,
     var notificationId: String,
+    var wiki: String = "commonswiki",
 )
