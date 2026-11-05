@@ -20,6 +20,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
@@ -148,6 +149,7 @@ class AdvanceQueryFragmentUnitTests {
         // Verifying if text view is showing initial query and callback is notified
         assertEquals(defaultQuery, etQuery.text.toString())
         verify(callback).reset()
+        verify(callback, never()).close()
     }
 
     @Test

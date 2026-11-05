@@ -21,38 +21,37 @@ import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.settings.SettingsActivity
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
-import timber.log.Timber
-
 
 class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
-
     private var binding: FragmentMoreBottomSheetLoggedOutBinding? = null
 
     @Inject
     lateinit var commonsLogSender: CommonsLogSender
 
     @Inject
-    @field: Named("default_preferences")
+    @field:Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentMoreBottomSheetLoggedOutBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        binding =
+            FragmentMoreBottomSheetLoggedOutBinding.inflate(
+                inflater,
+                container,
+                false,
+            )
         return binding?.root
     }
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         binding?.apply {
             moreLogin.setOnClickListener { onLogoutClicked() }
@@ -90,11 +89,12 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
      * This method shows the alert dialog when a user wants to send feedback about the app.
      */
     private fun showAlertDialog() {
-        AlertDialog.Builder(requireActivity())
+        AlertDialog
+            .Builder(requireActivity())
             .setMessage(R.string.feedback_sharing_data_alert)
             .setCancelable(false)
             .setPositiveButton(R.string.ok) { _, _ -> sendFeedback() }
-            .setNegativeButton(R.string.cancel){_,_ -> }
+            .setNegativeButton(R.string.cancel) { _, _ -> }
             .show()
     }
 
@@ -106,47 +106,39 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
     private fun sendFeedback() {
         val technicalInfo = commonsLogSender.getExtraInfo()
 
-        val feedbackIntent = Intent(Intent.ACTION_SENDTO).apply {
-            type = "message/rfc822"
-            data = Uri.parse("mailto:")
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(CommonsApplication.FEEDBACK_EMAIL))
-            putExtra(Intent.EXTRA_SUBJECT, CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
-            putExtra(
-                Intent.EXTRA_TEXT,
-                "\n\n${CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER}\n$technicalInfo"
-            )
-        }
+        val feedbackIntent =
+            Intent(Intent.ACTION_SENDTO).apply {
+                type = "message/rfc822"
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(CommonsApplication.FEEDBACK_EMAIL))
+                putExtra(Intent.EXTRA_SUBJECT, CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "\n\n${CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER}\n$technicalInfo",
+                )
+            }
 
         try {
             startActivity(feedbackIntent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No email client available to send feedback")
             Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }
 
     fun onAboutClicked() {
-        val intent = Intent(activity, AboutActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
+        val intent =
+            Intent(activity, AboutActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
         requireActivity().startActivity(intent)
     }
 
     fun onSettingsClicked() {
-        val intent = Intent(activity, SettingsActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-        requireActivity().startActivity(intent)
-    }
-
-    private inner class BaseLogoutListener : CommonsApplication.LogoutListener {
-
-        override fun onLogoutComplete() {
-            Timber.d("Logout complete callback received.")
-            val nearbyIntent = Intent(context, LoginActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent =
+            Intent(activity, SettingsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }
-            startActivity(nearbyIntent)
-            requireActivity().finish()
-        }
+        requireActivity().startActivity(intent)
     }
 }

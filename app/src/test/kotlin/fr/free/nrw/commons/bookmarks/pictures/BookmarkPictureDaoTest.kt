@@ -89,7 +89,7 @@ class BookmarkPictureDaoTest {
         assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getAllBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.getAllBookmarks()
@@ -147,7 +147,7 @@ class BookmarkPictureDaoTest {
         assertTrue(testObject.findBookmark(exampleBookmark))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.findBookmark(exampleBookmark)
@@ -226,7 +226,7 @@ class BookmarkPictureDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("mediaName", "creatorName"))
             }
         }

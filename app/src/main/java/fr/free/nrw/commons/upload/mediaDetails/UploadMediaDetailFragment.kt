@@ -36,7 +36,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.ImageCoordinates
-import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
@@ -50,6 +49,7 @@ import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import timber.log.Timber
@@ -60,9 +60,10 @@ import java.util.Objects
 import javax.inject.Inject
 import javax.inject.Named
 
-class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContract.View,
+class UploadMediaDetailFragment :
+    UploadBaseFragment(),
+    UploadMediaDetailsContract.View,
     UploadMediaDetailAdapter.EventListener {
-
     private lateinit var startForResult: ActivityResultLauncher<Intent>
     private lateinit var startForEditActivityResult: ActivityResultLauncher<Intent>
     private lateinit var voiceInputResultLauncher: ActivityResultLauncher<Intent>
@@ -119,6 +120,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     private var editedImageUri: Uri? = null
 
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentUploadMediaDetailFragmentBinding? = null
     private val binding: FragmentUploadMediaDetailFragmentBinding get() = _binding!!
 
@@ -145,24 +147,31 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             editedImageUri = savedInstanceState.getParcelable(EDITED_IMAGE_URI)
         }
         // Register the ActivityResultLauncher for LocationPickerActivity
-        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            onCameraPosition(result)
-        }
-        startForEditActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
-        voiceInputResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                onCameraPosition(result)
+            }
+        startForEditActivityResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onEditActivityResult)
+        voiceInputResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::onVoiceInput)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false)
         _binding!!.mediaDetailCardView.handleKeyboardInsets()
         // intialise the adapter early to prevent uninitialized access
-        uploadMediaDetailAdapter = UploadMediaDetailAdapter(
-            this,
-            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")!!,
-            recentLanguagesDao, voiceInputResultLauncher
-        )
+        uploadMediaDetailAdapter =
+            UploadMediaDetailAdapter(
+                this,
+                defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")!!,
+                recentLanguagesDao,
+                voiceInputResultLauncher,
+            )
         uploadMediaDetailAdapter.callback =
             UploadMediaDetailAdapter.Callback { titleStringID: Int, messageStringId: Int ->
                 showInfoAlert(titleStringID, messageStringId)
@@ -173,7 +182,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         basicKvStore = BasicKvStore(requireActivity(), "CurrentUploadImageQualities")
@@ -218,13 +230,15 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
 
         try {
-            if (indexOfFragment >= 0 && !presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())) {
+            if (indexOfFragment >= 0 &&
+                !presenter.getImageQuality(indexOfFragment, inAppPictureLocation, requireActivity())
+            ) {
                 Timber.d("Image quality check failed, redirecting to MainActivity")
                 startActivityWithFlags(
                     requireActivity(),
                     MainActivity::class.java,
                     Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP,
                 )
             }
         } catch (e: Exception) {
@@ -236,14 +250,17 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         if (_binding == null) {
             return
         }
-        binding.tvTitle.text = getString(
-            R.string.step_count, (indexOfFragment + 1),
-            fragmentCallback!!.totalNumberOfSteps, getString(R.string.media_detail_step_title)
-        )
+        binding.tvTitle.text =
+            getString(
+                R.string.step_count,
+                (indexOfFragment + 1),
+                fragmentCallback!!.totalNumberOfSteps,
+                getString(R.string.media_detail_step_title),
+            )
         binding.tooltip.setOnClickListener {
             showInfoAlert(
                 R.string.media_detail_step_title,
-                R.string.media_details_tooltip
+                R.string.media_details_tooltip,
             )
         }
         presenter.onAttachView(this)
@@ -256,7 +273,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             Timber.d("PhotoView max scale set to 10.0f for deeper zoom.")
         }
 
-        with (binding){
+        with(binding) {
             if (indexOfFragment == 0) {
                 btnPrevious.isEnabled = false
                 btnPrevious.alpha = 0.5f
@@ -273,15 +290,16 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 locationTextView.setText(R.string.edit_location)
             } else {
                 // Otherwise, show the map icon with a red question mark
-                val mapQuestionMark = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_map_not_available_20dp
-                )
+                val mapQuestionMark =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_map_not_available_20dp,
+                    )
                 locationImageView.setImageDrawable(mapQuestionMark)
                 locationTextView.setText(R.string.add_location)
             }
 
-            //If this is the last media, we have nothing to copy, lets not show the button
+            // If this is the last media, we have nothing to copy, lets not show the button
             btnCopySubsequentMedia.visibility =
                 if (indexOfFragment == fragmentCallback!!.totalNumberOfSteps - 4) {
                     View.GONE
@@ -291,8 +309,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
             // Jpegtran only supports lossless JPEG rotation, so we disable editing for other formats
             val filePath = uploadableFile?.getFilePath()?.toString() ?: ""
-            val isJpeg = filePath.endsWith(".jpeg", ignoreCase = true)
-                    || filePath.endsWith(".jpg", ignoreCase = true)
+            val isJpeg =
+                filePath.endsWith(".jpeg", ignoreCase = true) ||
+                    filePath.endsWith(".jpg", ignoreCase = true)
             llEditImage.visibility = View.VISIBLE
             llEditImage.alpha = if (isJpeg) 1.0f else 0.5f
             // update the click listener to handle the both cases
@@ -304,14 +323,20 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     showAlertDialog(
                         requireActivity(),
                         getString(R.string.edit_image),
-                    getString(R.string.edit_unsupported_format_explanation),
-                    getString(R.string.ok),
-                    null
+                        getString(R.string.edit_unsupported_format_explanation),
+                        getString(R.string.ok),
+                        null,
                     )
                 }
             }
 
-            btnNext.setOnClickListener { presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation) }
+            btnNext.setOnClickListener {
+                presenter.displayLocDialog(
+                    indexOfFragment,
+                    inAppPictureLocation,
+                    hasUserRemovedLocation,
+                )
+            }
             btnPrevious.setOnClickListener { fragmentCallback?.onPreviousButtonClicked(indexOfFragment) }
             llContainerTitle.setOnClickListener { expandCollapseLlMediaDetail(!isExpanded) }
             llLocationStatus.setOnClickListener { presenter.onMapIconClicked(indexOfFragment) }
@@ -326,66 +351,73 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     private fun attachImageViewScaleChangeListener() {
         binding.backgroundImage.setOnScaleChangeListener { _: Float, _: Float, _: Float ->
-            //Whenever the uses plays with the image, lets collapse the media detail container
-            //only if it is not already collapsed, which resolves flickering of arrow
+            // Whenever the uses plays with the image, lets collapse the media detail container
+            // only if it is not already collapsed, which resolves flickering of arrow
             if (isExpanded) {
                 expandCollapseLlMediaDetail(false)
             }
         }
     }
 
-    private fun showInfoAlert(titleStringID: Int, messageStringId: Int) {
+    private fun showInfoAlert(
+        titleStringID: Int,
+        messageStringId: Int,
+    ) {
         showAlertDialog(
             requireActivity(),
             getString(titleStringID),
             getString(messageStringId),
             getString(R.string.ok),
-            null
+            null,
         )
     }
 
     override fun showSimilarImageFragment(
-        originalFilePath: String?, possibleFilePath: String?,
-        similarImageCoordinates: ImageCoordinates?
+        originalFilePath: String?,
+        possibleFilePath: String?,
+        similarImageCoordinates: ImageCoordinates?,
     ) {
         val basicKvStore = BasicKvStore(requireActivity(), "IsAnyImageCancelled")
         if (!basicKvStore.getBoolean("IsAnyImageCancelled", false)) {
             val newFragment = SimilarImageDialogFragment()
             newFragment.isCancelable = false
-            newFragment.callback = object : SimilarImageDialogFragment.Callback {
-                override fun onPositiveResponse() {
-                    Timber.d("positive response from similar image fragment")
-                    presenter.useSimilarPictureCoordinates(
-                        similarImageCoordinates!!,
-                        indexOfFragment
-                    )
+            newFragment.callback =
+                object : SimilarImageDialogFragment.Callback {
+                    override fun onPositiveResponse() {
+                        Timber.d("positive response from similar image fragment")
+                        presenter.useSimilarPictureCoordinates(
+                            similarImageCoordinates!!,
+                            indexOfFragment,
+                        )
 
-                    // set the description text when user selects to use coordinate from the other image
-                    // which was taken within 120s
-                    // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
-                    uploadMediaDetailAdapter.items[0].descriptionText =
-                        getString(R.string.similar_coordinate_description_auto_set)
-                    updateMediaDetails(uploadMediaDetailAdapter.items)
+                        // set the description text when user selects to use coordinate from the other image
+                        // which was taken within 120s
+                        // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
+                        uploadMediaDetailAdapter.items[0].descriptionText =
+                            getString(R.string.similar_coordinate_description_auto_set)
+                        updateMediaDetails(uploadMediaDetailAdapter.items)
 
-                    // Replace the 'Add location' button with 'Edit location' button when user clicks
-                    // yes in similar image dialog
-                    // fixing: https://github.com/commons-app/apps-android-commons/issues/5669
-                    val mapTick = ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_map_available_20dp
-                    )
-                    binding.locationImageView.setImageDrawable(mapTick)
-                    binding.locationTextView.setText(R.string.edit_location)
+                        // Replace the 'Add location' button with 'Edit location' button when user clicks
+                        // yes in similar image dialog
+                        // fixing: https://github.com/commons-app/apps-android-commons/issues/5669
+                        val mapTick =
+                            ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_map_available_20dp,
+                            )
+                        binding.locationImageView.setImageDrawable(mapTick)
+                        binding.locationTextView.setText(R.string.edit_location)
+                    }
+
+                    override fun onNegativeResponse() {
+                        Timber.d("negative response from similar image fragment")
+                    }
                 }
-
-                override fun onNegativeResponse() {
-                    Timber.d("negative response from similar image fragment")
-                }
-            }
-            newFragment.arguments = bundleOf(
-                "originalImagePath" to originalFilePath,
-                "possibleImagePath" to possibleFilePath
-            )
+            newFragment.arguments =
+                bundleOf(
+                    "originalImagePath" to originalFilePath,
+                    "possibleImagePath" to possibleFilePath,
+                )
             newFragment.show(childFragmentManager, "dialog")
         }
     }
@@ -402,7 +434,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     }
 
     override fun onNearbyPlaceFound(
-        uploadItem: UploadItem, place: Place?
+        uploadItem: UploadItem,
+        place: Place?,
     ) {
         nearbyPlace = place
         this.uploadItem = uploadItem
@@ -425,7 +458,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    @SuppressLint("StringFormatInvalid")
     private fun showNearbyPlaceFound(place: Place) {
         val customLayout = layoutInflater.inflate(R.layout.custom_nearby_found, null)
         val nearbyFoundImage = customLayout.findViewById<ImageView>(R.id.nearbyItemImage)
@@ -437,21 +471,22 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             val isMultipleFilesSelected = activity.isMultipleFilesSelected
 
             // Determine the message based on the selection status
-            val message = if (isMultipleFilesSelected) {
-                // Use plural message if multiple files are selected
-                String.format(
-                    Locale.getDefault(),
-                    getString(R.string.upload_nearby_place_found_description_plural),
-                    place.getName()
-                )
-            } else {
-                // Use singular message if only one file is selected
-                String.format(
-                    Locale.getDefault(),
-                    getString(R.string.upload_nearby_place_found_description_singular),
-                    place.getName()
-                )
-            }
+            val message =
+                if (isMultipleFilesSelected) {
+                    // Use plural message if multiple files are selected
+                    String.format(
+                        Locale.getDefault(),
+                        getString(R.string.upload_nearby_place_found_description_plural),
+                        place.getName(),
+                    )
+                } else {
+                    // Use singular message if only one file is selected
+                    String.format(
+                        Locale.getDefault(),
+                        getString(R.string.upload_nearby_place_found_description_singular),
+                        place.getName(),
+                    )
+                }
 
             // Show the AlertDialog with the determined message
             showAlertDialog(
@@ -467,7 +502,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     // Execute when user cancels the upload of the specified place
                     UploadActivity.nearbyPopupAnswers!![place] = false
                 },
-                customLayout
+                customLayout,
             )
         }
     }
@@ -508,17 +543,22 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    override fun showMessage(stringResourceId: Int, colorResourceId: Int) =
-        showLongToast(requireContext(), stringResourceId)
+    override fun showMessage(
+        stringResourceId: Int,
+        colorResourceId: Int,
+    ) = showLongToast(requireContext(), stringResourceId)
 
-    override fun showMessage(message: String, colorResourceId: Int) =
-        showLongToast(requireContext(), message)
+    override fun showMessage(
+        message: String,
+        colorResourceId: Int,
+    ) = showLongToast(requireContext(), message)
 
     override fun showDuplicatePicturePopup(uploadItem: UploadItem) {
         if (defaultKvStore.getBoolean("showDuplicatePicturePopup", true)) {
             val uploadTitleFormat = getString(R.string.upload_title_duplicate)
-            val checkBoxView = View
-                .inflate(activity, R.layout.nearby_permission_dialog, null)
+            val checkBoxView =
+                View
+                    .inflate(activity, R.layout.nearby_permission_dialog, null)
             val checkBox = checkBoxView.findViewById<View>(R.id.never_ask_again) as CheckBox
             checkBox.setOnCheckedChangeListener { buttonView: CompoundButton?, isChecked: Boolean ->
                 if (isChecked) {
@@ -531,15 +571,16 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 String.format(
                     Locale.getDefault(),
                     uploadTitleFormat,
-                    uploadItem.filename
+                    uploadItem.filename,
                 ),
                 getString(R.string.upload),
                 getString(R.string.cancel),
                 {
                     uploadItem.imageQuality = ImageUtils.IMAGE_KEEP
                     onImageValidationSuccess()
-                }, null,
-                checkBoxView
+                },
+                null,
+                checkBoxView,
             )
         } else {
             uploadItem.imageQuality = ImageUtils.IMAGE_KEEP
@@ -552,7 +593,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      * Does nothing if there is network connectivity and then the user presses okay
      */
     override fun showConnectionErrorPopupForCaptionCheck() {
-        showAlertDialog(requireActivity(),
+        showAlertDialog(
+            requireActivity(),
             getString(R.string.upload_connection_error_alert_title),
             getString(R.string.upload_connection_error_alert_detail),
             getString(R.string.ok),
@@ -563,7 +605,8 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             },
             {
                 requireActivity().finish()
-            })
+            },
+        )
     }
 
     /**
@@ -573,10 +616,12 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     override fun showConnectionErrorPopup() {
         try {
-            val FLAG_ALERT_DIALOG_SHOWING = basicKvStore!!.getBoolean(
-                keyForShowingAlertDialog, false
-            )
-            if (!FLAG_ALERT_DIALOG_SHOWING) {
+            val flagAlertDialogShowing =
+                basicKvStore!!.getBoolean(
+                    keyForShowingAlertDialog,
+                    false,
+                )
+            if (!flagAlertDialogShowing) {
                 basicKvStore!!.putBoolean(keyForShowingAlertDialog, true)
                 showAlertDialog(
                     requireActivity(),
@@ -587,14 +632,15 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     {
                         basicKvStore!!.putBoolean(keyForShowingAlertDialog, false)
                         if (isInternetConnectionEstablished(requireActivity())) {
-                            val sizeOfUploads = basicKvStore!!.getInt(
-                                UploadActivity.KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE
-                            )
+                            val sizeOfUploads =
+                                basicKvStore!!.getInt(
+                                    UploadActivity.KEY_FOR_CURRENT_UPLOAD_IMAGE_SIZE,
+                                )
                             for (i in indexOfFragment until sizeOfUploads) {
                                 presenter.getImageQuality(
                                     i,
                                     inAppPictureLocation,
-                                    requireActivity()
+                                    requireActivity(),
                                 )
                             }
                         }
@@ -603,7 +649,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                         basicKvStore!!.putBoolean(keyForShowingAlertDialog, false)
                         requireActivity().finish()
                     },
-                    null
+                    null,
                 )
             }
         } catch (e: Exception) {
@@ -611,8 +657,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
     }
 
-    override fun showExternalMap(uploadItem: UploadItem) =
-        goToLocationPickerActivity(uploadItem)
+    override fun showExternalMap(uploadItem: UploadItem) = goToLocationPickerActivity(uploadItem)
 
     /**
      * Launches the image editing activity to edit the specified UploadItem.
@@ -627,9 +672,9 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     override fun showEditActivity(uploadItem: UploadItem) {
         editableUploadItem = uploadItem
         val intent = Intent(context, EditActivity::class.java)
-        //used the mediaUri from the uploadItem.
-        //now, if the image is edited, uploadItem.mediaUri points to the new rotated file.
-        //if it is not edited, it points to the original.
+        // used the mediaUri from the uploadItem.
+        // now, if the image is edited, uploadItem.mediaUri points to the new rotated file.
+        // if it is not edited, it points to the original.
         val currentPath = uploadItem.mediaUri?.path ?: uploadableFile?.getFilePath().toString()
         intent.putExtra("image", currentPath)
         startForEditActivityResult.launch(intent)
@@ -650,21 +695,29 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
            check if user has provided location while using the in-app camera.
            Use location of last UploadItem if none of them is available */
         val locationPickerIntent: Intent
-        if (uploadItem.gpsCoords != null && uploadItem.gpsCoords!!
-                .decLatitude != 0.0 && uploadItem.gpsCoords!!.decLongitude != 0.0
+        if (uploadItem.gpsCoords != null &&
+            uploadItem.gpsCoords!!
+                .decLatitude != 0.0 &&
+            uploadItem.gpsCoords!!.decLongitude != 0.0
         ) {
             defaultLatitude = uploadItem.gpsCoords!!.decLatitude
             defaultLongitude = uploadItem.gpsCoords!!.decLongitude
             defaultZoom = uploadItem.gpsCoords!!.zoomLevel
 
-            locationPickerIntent = LocationPicker.IntentBuilder()
-                .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
-                .activityKey("UploadActivity")
-                .build(requireActivity())
+            locationPickerIntent =
+                LocationPicker
+                    .IntentBuilder()
+                    .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
+                    .activityKey("UploadActivity")
+                    .build(requireActivity())
         } else {
             if (defaultKvStore.getString(LAST_LOCATION) != null) {
-                val locationLatLng = defaultKvStore.getString(LAST_LOCATION)!!
-                    .split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val locationLatLng =
+                    defaultKvStore
+                        .getString(LAST_LOCATION)!!
+                        .split(",".toRegex())
+                        .dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
                 defaultLatitude = locationLatLng[0].toDouble()
                 defaultLongitude = locationLatLng[1].toDouble()
             }
@@ -672,10 +725,12 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 defaultZoom = defaultKvStore.getString(LAST_ZOOM)!!.toDouble()
             }
 
-            locationPickerIntent = LocationPicker.IntentBuilder()
-                .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
-                .activityKey("NoLocationUploadActivity")
-                .build(requireActivity())
+            locationPickerIntent =
+                LocationPicker
+                    .IntentBuilder()
+                    .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
+                    .activityKey("NoLocationUploadActivity")
+                    .build(requireActivity())
         }
         startForResult.launch(locationPickerIntent)
     }
@@ -683,9 +738,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     private fun onCameraPosition(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             checkNotNull(result.data)
-            val cameraPosition = getCameraPosition(
-                result.data!!
-            )
+            val cameraPosition =
+                getCameraPosition(
+                    result.data!!,
+                )
 
             if (cameraPosition != null) {
                 val latitude = cameraPosition.latitude.toString()
@@ -700,7 +756,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                     presenter.displayLocDialog(
                         indexOfFragment,
                         inAppPictureLocation,
-                        hasUserRemovedLocation
+                        hasUserRemovedLocation,
                     )
                 }
             } else {
@@ -712,9 +768,10 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
 
     private fun onVoiceInput(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            val resultData = result.data!!.getStringArrayListExtra(
-                RecognizerIntent.EXTRA_RESULTS
-            )
+            val resultData =
+                result.data!!.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS,
+                )
             uploadMediaDetailAdapter.handleSpeechResult(resultData!![0])
         } else {
             Timber.e("Error %s", result.resultCode)
@@ -747,7 +804,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 uploadableFile = UploadableFile(editedUri, editedFile)
                 fragmentCallback!!.changeThumbnail(
                     indexOfFragment,
-                    path
+                    path,
                 )
             } catch (e: Exception) {
                 Timber.e(e)
@@ -777,14 +834,17 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             editableUploadItem!!.gpsCoords!!.imageCoordsExists = false
             hasUserRemovedLocation = true
 
-            Toast.makeText(context, getString(R.string.location_removed), Toast.LENGTH_LONG)
+            Toast
+                .makeText(context, getString(R.string.location_removed), Toast.LENGTH_LONG)
                 .show()
         } catch (e: Exception) {
             Timber.d(e)
-            Toast.makeText(
-                context, "Location could not be removed due to internal error",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    context,
+                    "Location could not be removed due to internal error",
+                    Toast.LENGTH_LONG,
+                ).show()
         }
     }
 
@@ -793,10 +853,16 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      * @param latitude new latitude
      * @param longitude new longitude
      */
-    fun editLocation(latitude: String, longitude: String, zoom: Double) {
-        editableUploadItem!!.gpsCoords!!.decLatitude = latitude.toDouble()
-        editableUploadItem!!.gpsCoords!!.decLongitude = longitude.toDouble()
-        editableUploadItem!!.gpsCoords!!.decimalCoords = "$latitude|$longitude"
+    fun editLocation(
+        latitude: String,
+        longitude: String,
+        zoom: Double,
+    ) {
+        val roundedLat = roundCoordinate(latitude.toDouble())
+        val roundedLon = roundCoordinate(longitude.toDouble())
+        editableUploadItem!!.gpsCoords!!.decLatitude = roundedLat.toDouble()
+        editableUploadItem!!.gpsCoords!!.decLongitude = roundedLon.toDouble()
+        editableUploadItem!!.gpsCoords!!.decimalCoords = "$roundedLat|$roundedLon"
         editableUploadItem!!.gpsCoords!!.imageCoordsExists = true
         editableUploadItem!!.gpsCoords!!.zoomLevel = zoom
 
@@ -814,9 +880,13 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     override fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>) {
         uploadMediaDetailAdapter.items = uploadMediaDetails
         showNearbyFound =
-            showNearbyFound && (uploadMediaDetails.isEmpty() || listContainsEmptyDetails(
-                uploadMediaDetails
-            ))
+            showNearbyFound &&
+            (
+                uploadMediaDetails.isEmpty() ||
+                    listContainsEmptyDetails(
+                        uploadMediaDetails,
+                    )
+            )
     }
 
     /**
@@ -854,12 +924,16 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
             {
                 presenter.onMapIconClicked(indexOfFragment)
             },
-            runnable
+            runnable,
         )
     }
 
-    override fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem) {
-        //If the error message is null, we will probably not show anything
+    override fun showBadImagePopup(
+        errorCode: Int,
+        index: Int,
+        uploadItem: UploadItem,
+    ) {
+        // If the error message is null, we will probably not show anything
         val activity = requireActivity()
         val errorMessageForResult = getErrorMessageForResult(activity, errorCode)
         if (errorMessageForResult.isNotEmpty()) {
@@ -876,7 +950,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
                 },
                 {
                     presenterCallback!!.deletePictureAtIndex(index)
-                }
+                },
             )?.setCancelable(false)
         }
     }
@@ -913,7 +987,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
      */
     override fun addLanguage() {
         val uploadMediaDetail = UploadMediaDetail()
-        uploadMediaDetail.isManuallyAdded = true //This was manually added by the user
+        uploadMediaDetail.isManuallyAdded = true // This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail)
         binding.rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
     }
@@ -934,7 +1008,7 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
         }
         outState.putParcelableArrayList(
             UPLOAD_MEDIA_DETAILS,
-            ArrayList(uploadMediaDetailAdapter.items)
+            ArrayList(uploadMediaDetailAdapter.items),
         )
     }
 
@@ -946,8 +1020,20 @@ class UploadMediaDetailFragment : UploadBaseFragment(), UploadMediaDetailsContra
     interface UploadMediaDetailFragmentCallback : Callback {
         fun deletePictureAtIndex(index: Int)
 
-        fun changeThumbnail(index: Int, uri: String)
+        fun changeThumbnail(
+            index: Int,
+            uri: String,
+        )
     }
+
+    /**
+     * Rounds a coordinate to 6 decimal places (precision of ~0.11 meters).
+     * This avoids false precision from GPS/map-picker which aren't that accurate.
+     *
+     * @param coordinate the coordinate value to round
+     * @return coordinate string rounded to 6 decimal places
+     */
+    private fun roundCoordinate(coordinate: Double): String = String.format(Locale.US, "%.6f", coordinate)
 
     companion object {
         /**

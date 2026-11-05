@@ -19,9 +19,10 @@ import java.io.File
  * Created by harisanker on 14/2/18.
  */
 class SimilarImageDialogFragment : DialogFragment() {
-    var callback: Callback? = null //Implemented interface from shareActivity
+    var callback: Callback? = null // Implemented interface from shareActivity
     var gotResponse: Boolean = false
 
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentSimilarImageDialogBinding? = null
     private val binding: FragmentSimilarImageDialogBinding get() = _binding!!
 
@@ -34,38 +35,50 @@ class SimilarImageDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSimilarImageDialogBinding.inflate(inflater, container, false)
 
         binding.orginalImage.hierarchy =
-            GenericDraweeHierarchyBuilder.newInstance(resources).setPlaceholderImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_image_black_24dp, requireContext().theme
-                )
-            ).setFailureImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_error_outline_black_24dp, requireContext().theme
-                )
-            ).build()
+            GenericDraweeHierarchyBuilder
+                .newInstance(resources)
+                .setPlaceholderImage(
+                    VectorDrawableCompat.create(
+                        resources,
+                        R.drawable.ic_image_black_24dp,
+                        requireContext().theme,
+                    ),
+                ).setFailureImage(
+                    VectorDrawableCompat.create(
+                        resources,
+                        R.drawable.ic_error_outline_black_24dp,
+                        requireContext().theme,
+                    ),
+                ).build()
 
         binding.possibleImage.hierarchy =
-            GenericDraweeHierarchyBuilder.newInstance(resources).setPlaceholderImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_image_black_24dp, requireContext().theme
-                )
-            ).setFailureImage(
-                VectorDrawableCompat.create(
-                    resources, R.drawable.ic_error_outline_black_24dp, requireContext().theme
-                )
-            ).build()
+            GenericDraweeHierarchyBuilder
+                .newInstance(resources)
+                .setPlaceholderImage(
+                    VectorDrawableCompat.create(
+                        resources,
+                        R.drawable.ic_image_black_24dp,
+                        requireContext().theme,
+                    ),
+                ).setFailureImage(
+                    VectorDrawableCompat.create(
+                        resources,
+                        R.drawable.ic_error_outline_black_24dp,
+                        requireContext().theme,
+                    ),
+                ).build()
 
         arguments?.let {
             binding.orginalImage.setImageURI(
-                Uri.fromFile(File(it.getString("originalImagePath")!!))
+                Uri.fromFile(File(it.getString("originalImagePath")!!)),
             )
             binding.possibleImage.setImageURI(
-                Uri.fromFile(File(it.getString("possibleImagePath")!!))
+                Uri.fromFile(File(it.getString("possibleImagePath")!!)),
             )
         }
 
