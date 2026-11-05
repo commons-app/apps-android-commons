@@ -397,6 +397,7 @@
   <string name="images_used_explanation">Ël nùmer ëd plance che chiel a l\'ha carià su Comun e che a son ëstàite dovrà an dj\'artìcoj ëd Wikimedia</string>
   <string name="error_occurred">A-i é staje n\'eror!</string>
   <string name="notifications_channel_name_all">Notìfica ëd Commons</string>
+  <string name="notifications_channel_name_uploads">Progress ant ël cariament</string>
   <string name="preference_author_name_toggle">Ch\'a deuvra un nòm d\'autor përsonalisà</string>
   <string name="preference_author_name_toggle_summary">Ch\'a deuvra un nòm d\'autor përsonalisà al pòst ëd sò stranòm cand a caria dle fòto</string>
   <string name="preference_author_name">Nòm d\'autor përsonalisà</string>
