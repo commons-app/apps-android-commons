@@ -718,7 +718,6 @@
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
-    <ID>TooManyFunctions:AboutActivity.kt$AboutActivity : BaseActivity</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
@@ -759,7 +758,6 @@
     <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
     <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
-    <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
     <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
@@ -776,7 +774,6 @@
     <ID>TooManyFunctions:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
     <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
     <ID>TooManyFunctions:PickedFiles.kt$PickedFiles : Constants</ID>
-    <ID>TooManyFunctions:ProfileActivity.kt$ProfileActivity : BaseActivity</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
     <ID>TooManyFunctions:SearchActivity.kt$SearchActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
