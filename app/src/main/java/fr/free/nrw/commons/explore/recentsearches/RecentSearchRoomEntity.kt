@@ -9,5 +9,5 @@ import java.util.Date
 data class RecentSearchRoomEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val id: Long = 0,
     @ColumnInfo(name = "name") val query: String,
-    @ColumnInfo(name = "last_used") val lastSearched: Date
+    @ColumnInfo(name = "last_used") val lastSearched: Date,
 )

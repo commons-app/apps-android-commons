@@ -8,95 +8,105 @@ import javax.inject.Inject
 /**
  * The repository class for contributions
  */
-class ContributionsRepository @Inject constructor(private val localDataSource: ContributionsLocalDataSource) {
-    /**
-     * Fetch default number of contributions to be show, based on user preferences
-     */
-    fun getString(key: String): String? {
-        return localDataSource.getString(key)
-    }
+class ContributionsRepository
+    @Inject
+    constructor(
+        private val localDataSource: ContributionsLocalDataSource,
+    ) {
+        /**
+         * Fetch default number of contributions to be show, based on user preferences
+         */
+        fun getString(key: String): String? = localDataSource.getString(key)
 
-    /**
-     * Deletes a failed upload from DB
-     *
-     * @param contribution
-     * @return
-     */
-    fun deleteContributionFromDB(contribution: Contribution): Completable {
-        return localDataSource.deleteContribution(contribution)
-    }
+        /**
+         * Deletes a failed upload from DB
+         *
+         * @param contribution
+         * @return
+         */
+        fun deleteContributionFromDB(contribution: Contribution): Completable =
+            localDataSource.deleteContribution(contribution)
 
-    /**
-     * Deletes contributions from the database with specific states.
-     *
-     * @param states The states of the contributions to delete.
-     * @return A Completable indicating the result of the operation.
-     */
-    fun deleteContributionsFromDBWithStates(states: List<Int>): Completable {
-        return localDataSource.deleteContributionsWithStates(states)
-    }
+        /**
+         * Marks one completed contribution after a normal request reports that its file page is gone.
+         */
+        fun markCompletedContributionDeleted(fileName: String): Completable =
+            localDataSource.markCompletedContributionDeleted(fileName)
 
-    /**
-     * Get contribution object with title
-     *
-     * @param fileName
-     * @return
-     */
-    fun getContributionWithFileName(fileName: String): Contribution {
-        return localDataSource.getContributionWithFileName(fileName)
-    }
+        /**
+         * Deletes contributions from the database with specific states.
+         *
+         * @param states The states of the contributions to delete.
+         * @return A Completable indicating the result of the operation.
+         */
+        fun deleteContributionsFromDBWithStates(states: List<Int>): Completable =
+            localDataSource.deleteContributionsWithStates(states)
 
-    fun fetchContributions(): DataSource.Factory<Int, Contribution> {
-        return localDataSource.getContributions()
-    }
+        /**
+         * Get contribution object with title
+         *
+         * @param fileName
+         * @return
+         */
+        fun getContributionWithFileName(fileName: String): Contribution =
+            localDataSource.getContributionWithFileName(fileName)
 
-    /**
-     * Fetches contributions with specific states.
-     *
-     * @param states The states of the contributions to fetch.
-     * @return A DataSource factory for paginated contributions with the specified states.
-     */
-    fun fetchContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> {
-        return localDataSource.getContributionsWithStates(states)
-    }
+        fun fetchContributions(): DataSource.Factory<Int, Contribution> = localDataSource.getContributions()
 
-    /**
-     * Fetches contributions with specific states sorted by the date the upload started.
-     *
-     * @param states The states of the contributions to fetch.
-     * @return A DataSource factory for paginated contributions with the specified states sorted by
-     * date upload started.
-     */
-    fun fetchContributionsWithStatesSortedByDateUploadStarted(
-        states: List<Int>
-    ): DataSource.Factory<Int, Contribution> {
-        return localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states)
-    }
+        /**
+         * Fetches contributions with specific states.
+         *
+         * @param states The states of the contributions to fetch.
+         * @return A DataSource factory for paginated contributions with the specified states.
+         */
+        fun fetchContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> =
+            localDataSource.getContributionsWithStates(states)
 
-    fun save(contributions: List<Contribution>): Single<List<Long>> {
-        return localDataSource.saveContributions(contributions)
-    }
+        /**
+         * Fetches all contributions with specific states at once, not page by page.
+         *
+         * @param states The states of the contributions to fetch.
+         * @return A Single with the list of all contributions with the specified states.
+         */
+        fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
+            localDataSource.getAllContributionsWithStates(states)
 
-    fun save(contributions: Contribution): Completable {
-        return localDataSource.saveContributions(contributions)
-    }
+        /**
+         * Fetches contributions with specific states sorted by the date the upload started.
+         *
+         * @param states The states of the contributions to fetch.
+         * @return A DataSource factory for paginated contributions with the specified states sorted by
+         * date upload started.
+         */
+        fun fetchContributionsWithStatesSortedByDateUploadStarted(
+            states: List<Int>,
+        ): DataSource.Factory<Int, Contribution> =
+            localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states)
 
-    operator fun set(key: String, value: Long) {
-        localDataSource.set(key, value)
-    }
+        fun save(contributions: List<Contribution>): Single<List<Long>> =
+            localDataSource.saveContributions(contributions)
 
-    fun updateContribution(contribution: Contribution): Completable {
-        return localDataSource.updateContribution(contribution)
-    }
+        fun save(contributions: Contribution): Completable = localDataSource.saveContributions(contributions)
 
-    /**
-     * Updates the state of contributions with specific states.
-     *
-     * @param states   The current states of the contributions to update.
-     * @param newState The new state to set.
-     * @return A Completable indicating the result of the operation.
-     */
-    fun updateContributionsWithStates(states: List<Int>, newState: Int): Completable {
-        return localDataSource.updateContributionsWithStates(states, newState)
+        operator fun set(
+            key: String,
+            value: Long,
+        ) {
+            localDataSource.set(key, value)
+        }
+
+        fun updateContribution(contribution: Contribution): Completable =
+            localDataSource.updateContribution(contribution)
+
+        /**
+         * Updates the state of contributions with specific states.
+         *
+         * @param states   The current states of the contributions to update.
+         * @param newState The new state to set.
+         * @return A Completable indicating the result of the operation.
+         */
+        fun updateContributionsWithStates(
+            states: List<Int>,
+            newState: Int,
+        ): Completable = localDataSource.updateContributionsWithStates(states, newState)
     }
-}

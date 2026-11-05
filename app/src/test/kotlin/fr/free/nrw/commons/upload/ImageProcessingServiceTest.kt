@@ -90,8 +90,9 @@ class ImageProcessingServiceTest {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+        `when`(
+            imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)),
+        ).thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
             .thenReturn(mock(FileInputStream::class.java))
@@ -138,8 +139,9 @@ class ImageProcessingServiceTest {
 
     @Test
     fun validateImageForWrongGeoLocation() {
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-            .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+        `when`(
+            imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)),
+        ).thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())
     }
@@ -157,5 +159,16 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateImageForAudioFileSkipsImageChecks() {
+        `when`(uploadItem.mimeType).thenReturn("audio/ogg")
+        `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
+        `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.FILE_NO_EXIF))
+        val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
     }
 }
