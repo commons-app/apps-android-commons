@@ -65,8 +65,15 @@ class UploadNotificationHelperTest {
         notificationHelper.showUploadStarted(contribution)
 
         val captor = argumentCaptor<Notification>()
-        verify(notificationManager).notify(eq(expectedTag), eq(expectedId), captor.capture())
+        // Progress is shown in the foreground service notification
+        verify(notificationManager).notify(
+            eq(UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID),
+            captor.capture(),
+        )
         val notification = captor.firstValue
+        // The tag and id are still kept for the result notification of this upload
+        assertEquals(expectedTag, notificationHelper.currentNotificationTag)
+        assertEquals(expectedId, notificationHelper.currentNotificationID)
 
         assertEquals(CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS, notification.channelId)
         assertEquals(
@@ -85,8 +92,7 @@ class UploadNotificationHelperTest {
 
         verify(notificationManager).cancel("startingTag", 101)
         verify(notificationManager).notify(
-            eq("test-tag"),
-            eq(1001),
+            eq(UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID),
             captor.capture(),
         )
         val notification = captor.firstValue
@@ -100,8 +106,7 @@ class UploadNotificationHelperTest {
         notificationHelper.updateProgress(100L, 100L, "Finishing...")
 
         verify(notificationManager).notify(
-            eq("test-tag"),
-            eq(1001),
+            eq(UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID),
             captor.capture(),
         )
         val notification = captor.firstValue
