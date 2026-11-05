@@ -112,6 +112,17 @@ class ContributionController
         }
 
         /**
+         * Sets a category to be pre-selected in the next upload, or clears it if null.
+         */
+        fun setUploadCategory(category: String?) {
+            if (category == null) {
+                defaultKvStore.remove(UPLOAD_CATEGORY)
+            } else {
+                defaultKvStore.putString(UPLOAD_CATEGORY, category)
+            }
+        }
+
+        /**
          * Asks users to provide location access
          *
          * @param activity
@@ -393,6 +404,12 @@ class ContributionController
                 shareIntent.putExtra(PLACE_OBJECT, place)
             }
 
+            val category = defaultKvStore.getString(UPLOAD_CATEGORY)
+            if (!category.isNullOrEmpty()) {
+                shareIntent.putExtra(UPLOAD_CATEGORY, category)
+            }
+            defaultKvStore.remove(UPLOAD_CATEGORY)
+
             if (locationBeforeImageCapture != null) {
                 shareIntent.putExtra(
                     UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE,
@@ -473,5 +490,6 @@ class ContributionController
 
         companion object {
             const val ACTION_INTERNAL_UPLOADS: String = "internalImageUploads"
+            const val UPLOAD_CATEGORY: String = "uploadCategory"
         }
     }

@@ -65,6 +65,11 @@ interface CategoriesContract {
     }
 
     interface UserActionListener : BasePresenter<View> {
+        /**
+         * Selects the given category as if the user had clicked it
+         */
+        fun preselectCategory(categoryName: String)
+
         fun searchForCategories(query: String)
 
         fun verifyCategories()

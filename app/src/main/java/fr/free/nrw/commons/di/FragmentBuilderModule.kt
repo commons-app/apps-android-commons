@@ -16,6 +16,7 @@ import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.explore.ExploreListRootFragment
 import fr.free.nrw.commons.explore.ExploreMapRootFragment
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
+import fr.free.nrw.commons.explore.categories.media.CategoryDetailsMediaFragment
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
@@ -124,6 +125,9 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun bindCategoriesMediaFragment(): CategoriesMediaFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindCategoryDetailsMediaFragment(): CategoryDetailsMediaFragment
 
     @ContributesAndroidInjector
     abstract fun bindSubCategoriesFragment(): SubCategoriesFragment

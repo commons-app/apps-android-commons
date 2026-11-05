@@ -105,6 +105,8 @@ class UploadActivity :
     private var thumbnailsAdapter: ThumbnailsAdapter? = null
     var store: BasicKvStore? = null
     private var place: Place? = null
+
+    private var category: String? = null
     private var prevLocation: LatLng? = null
     private var currLocation: LatLng? = null
     private var isInAppCameraUpload = false
@@ -669,12 +671,15 @@ class UploadActivity :
             // If fragments are not created, create them and add them to the fragments ArrayList
             if (!isFragmentsSaved) {
                 uploadCategoriesFragment = UploadCategoriesFragment()
+                val categoryBundle = Bundle()
                 if (place != null) {
-                    val categoryBundle = Bundle()
                     categoryBundle.putString(SELECTED_NEARBY_PLACE_CATEGORY, place!!.category)
-                    uploadCategoriesFragment!!.arguments = categoryBundle
                 }
-
+                if (category != null) {
+                    // Category chosen by browsing to it before uploading; pre-selected but not locked
+                    categoryBundle.putString(UploadCategoriesFragment.SELECTED_CATEGORY, category)
+                }
+                uploadCategoriesFragment!!.arguments = categoryBundle
                 uploadCategoriesFragment!!.callback = this
 
                 depictsFragment = DepictsFragment()
@@ -888,6 +893,7 @@ class UploadActivity :
                 Timber.e(e, "Error reading place")
                 null
             }
+        category = intent.getStringExtra(ContributionController.UPLOAD_CATEGORY)
 
         prevLocation =
             try {
