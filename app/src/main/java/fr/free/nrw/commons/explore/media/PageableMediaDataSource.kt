@@ -4,16 +4,16 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import javax.inject.Inject
 
 class PageableMediaDataSource
     @Inject
     constructor(
         liveDataConverter: LiveDataConverter,
-        private val mediaClient: MediaClient,
+        private val mediaCollectionClient: MediaCollectionClient,
     ) : PageableBaseDataSource<Media>(liveDataConverter) {
         override val loadFunction: LoadFunction<Media> = { loadSize: Int, startPosition: Int ->
-            mediaClient.getMediaListFromSearch(query, loadSize, startPosition).blockingGet()
+            mediaCollectionClient.getMediaListFromSearch(query, loadSize, startPosition).blockingGet()
         }
     }
