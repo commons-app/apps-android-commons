@@ -9,10 +9,10 @@ abstract class DefaultCallback : FilePicker.Callbacks {
         e: Exception,
         source: FilePicker.ImageSource,
         type: Int,
-    ) {}
+    ) = Unit
 
     override fun onCanceled(
         source: FilePicker.ImageSource,
         type: Int,
-    ) {}
+    ) = Unit
 }
