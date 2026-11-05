@@ -19,5 +19,5 @@ class NotificationController
             notificationClient.getNotifications(archived)
 
         fun markAsRead(notification: Notification): Observable<Boolean> =
-            notificationClient.markNotificationAsRead(notification.notificationId)
+            notificationClient.markNotificationAsRead(notification.notificationId, notification.wiki)
     }
