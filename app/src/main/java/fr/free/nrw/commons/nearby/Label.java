@@ -6,9 +6,11 @@ import android.os.Parcel;
 
 import androidx.annotation.DrawableRes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import fr.free.nrw.commons.R;
@@ -57,10 +59,21 @@ public enum Label {
      */
     public static final Map<String, Label> TEXT_TO_DESCRIPTION = new HashMap<>();
 
+    /**
+     * Localized place type names, mapping Q-ID -> label in the user's language.
+     * Empty until loaded from Wikidata.
+     */
+    private static volatile Map<String, String> localizedNames = new HashMap<>();
+
     private final int arrayResId;
     @DrawableRes
     private final int icon;
     private boolean selected;
+    /**
+     * Q-ID of the Wikidata item for this place type (first entry of its Q-ID array),
+     * used to fetch its localized name.
+     */
+    private String qid;
 
     Label(final int arrayResId, @DrawableRes final int icon) {
         this.arrayResId = arrayResId;
@@ -82,6 +95,9 @@ public enum Label {
         for (final Label label : values()) {
             if (label.arrayResId != 0) {
                 final int[] resArray = res.getIntArray(label.arrayResId);
+                if (resArray.length > 0) {
+                    label.qid = "Q" + resArray[0];
+                }
                 for (final int id : resArray) {
                     final String qid = "Q" + id;
                     TEXT_TO_DESCRIPTION.put(qid, label);
@@ -110,6 +126,50 @@ public enum Label {
     @DrawableRes
     public int getIcon() {
         return icon;
+    }
+
+    /**
+     * @return Q-ID of the Wikidata item for this place type, or null if it has none
+     */
+    public String getQid() {
+        return qid;
+    }
+
+    /**
+     * @return Q-IDs of all place types that have a Wikidata item
+     */
+    public static List<String> getQids() {
+        final List<String> qids = new ArrayList<>();
+        for (final Label label : values()) {
+            if (label.qid != null) {
+                qids.add(label.qid);
+            }
+        }
+        return qids;
+    }
+
+    /**
+     * @param names map of Q-ID -> localized name
+     */
+    public static void setLocalizedNames(final Map<String, String> names) {
+        localizedNames = new HashMap<>(names);
+    }
+
+    /**
+     * @param context any Android context
+     * @return name to display for this place type
+     */
+    public String getDisplayName(final Context context) {
+        if (this == BOOKMARKS) {
+            return context.getString(R.string.bookmarks);
+        }
+        final String localized = qid == null ? null : localizedNames.get(qid);
+        if (localized != null && !localized.isEmpty()) {
+            return localized.substring(0, 1).toUpperCase(Locale.getDefault())
+                + localized.substring(1);
+        }
+        final String readable = name().replace('_', ' ').toLowerCase(Locale.ROOT);
+        return readable.substring(0, 1).toUpperCase(Locale.ROOT) + readable.substring(1);
     }
 
     public static Label fromText(final String text) {
