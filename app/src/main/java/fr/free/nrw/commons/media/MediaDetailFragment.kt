@@ -848,7 +848,9 @@ class MediaDetailFragment :
                     .markCompletedContributionDeleted(filename)
                     .subscribeOn(Schedulers.io())
                     .subscribe(
-                        { },
+                        {
+                            // No action needed after successful deletion
+                        },
                         { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
                     )
                 if (isAdded) {
@@ -1748,7 +1750,9 @@ class MediaDetailFragment :
                     getString(R.string.about_translate_proceed),
                     getString(R.string.about_translate_cancel),
                     { onDeleteClicked(spinner) },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     spinner,
                 )
             if (isDeleted) {
@@ -1768,7 +1772,9 @@ class MediaDetailFragment :
                         val reason: String = input.text.toString()
                         onDeleteClickedDialogText(reason)
                     },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     input,
                 )
             input.addTextChangedListener(
@@ -1791,16 +1797,14 @@ class MediaDetailFragment :
                         start: Int,
                         count: Int,
                         after: Int,
-                    ) {
-                    }
+                    ) = Unit
 
                     override fun onTextChanged(
                         s: CharSequence,
                         start: Int,
                         before: Int,
                         count: Int,
-                    ) {
-                    }
+                    ) = Unit
                 },
             )
             d!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
@@ -2317,7 +2321,7 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
 
@@ -2394,7 +2398,7 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
     }
