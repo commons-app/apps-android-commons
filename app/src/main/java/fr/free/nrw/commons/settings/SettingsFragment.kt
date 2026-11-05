@@ -396,7 +396,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 languagesAdapter.filter.filter(charSequence)
             }
 
-            override fun afterTextChanged(editable: Editable?) {}
+            override fun afterTextChanged(editable: Editable?) = Unit
         })
 
         languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
