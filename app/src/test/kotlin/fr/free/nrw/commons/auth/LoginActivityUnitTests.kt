@@ -4,7 +4,6 @@ import android.accounts.Account
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,10 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -29,6 +28,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
+import java.io.IOException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -50,12 +50,6 @@ class LoginActivityUnitTests {
     private lateinit var params: ViewGroup.LayoutParams
 
     @Mock
-    private lateinit var keyEvent: KeyEvent
-
-    @Mock
-    private lateinit var textView: TextView
-
-    @Mock
     private lateinit var bundle: Bundle
 
     @Mock
@@ -71,7 +65,7 @@ class LoginActivityUnitTests {
 
     @Before
     fun setUp() {
-        loginResult = mockk()
+        loginResult = LoginResult.Result("PASS", "user", "pass", null)
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
@@ -90,60 +84,26 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnEditorActionCaseDefault() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onEditorAction",
-                TextView::class.java,
-                Int::class.java,
-                KeyEvent::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, textView, 0, keyEvent)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testSkipLogin() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "skipLogin",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.skipLogin()
     }
 
     @Test
     @Throws(Exception::class)
     fun testForgotPassword() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "forgotPassword",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.forgotPassword()
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnPrivacyPolicyClicked() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onPrivacyPolicyClicked",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.onPrivacyPolicyClicked()
     }
 
     @Test
     @Throws(Exception::class)
     fun testSignUp() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "signUp",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.signUp()
     }
 
     @Test
@@ -185,37 +145,20 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnLoginSuccessCaseDefault() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onLoginSuccess",
-                LoginResult::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
+        activity.onLoginSuccess(loginResult)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnLoginSuccess() {
         `when`(progressDialog.isShowing).thenReturn(true)
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onLoginSuccess",
-                LoginResult::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
+        activity.onLoginSuccess(loginResult)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowPasswordResetPrompt() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "showPasswordResetPrompt",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        activity.showPasswordResetPrompt()
     }
 
     @Test
@@ -257,19 +200,48 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnPostResume() {
-        val method: Method =
-            LoginActivity::class.java.getDeclaredMethod(
-                "onPostResume",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+    fun testShowMessageAndCancelDialog() {
+        activity.showMessageAndCancelDialog("")
     }
 
     @Test
     @Throws(Exception::class)
-    fun testShowMessageAndCancelDialog() {
-        activity.showMessageAndCancelDialog("")
+    fun testShowLoginErrorWithNullMessageShowsGenericError() {
+        activity.showLoginError(LoginFailedException(null))
+        Assert.assertEquals(
+            context.getString(R.string.login_failed_generic),
+            activity.findViewById<TextView>(R.id.error_message).text.toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowLoginErrorWithBlankMessageShowsGenericError() {
+        activity.showLoginError(LoginFailedException(""))
+        Assert.assertEquals(
+            context.getString(R.string.login_failed_generic),
+            activity.findViewById<TextView>(R.id.error_message).text.toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowLoginErrorWithServerMessageShowsServerMessage() {
+        activity.showLoginError(LoginFailedException("server msg"))
+        Assert.assertEquals(
+            "server msg",
+            activity.findViewById<TextView>(R.id.error_message).text.toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowLoginErrorWithNonLoginFailureShowsGenericError() {
+        activity.showLoginError(IOException("Failed to retrieve login token"))
+        Assert.assertEquals(
+            context.getString(R.string.login_failed_generic),
+            activity.findViewById<TextView>(R.id.error_message).text.toString(),
+        )
     }
 
     @Test
@@ -288,6 +260,12 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testAskUserForTwoFactorAuth() {
         activity.askUserForTwoFactorAuth()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAskUserForTwoFactorAuthWithKeyboard() {
+        activity.askUserForTwoFactorAuthWithKeyboard()
     }
 
     @Test
