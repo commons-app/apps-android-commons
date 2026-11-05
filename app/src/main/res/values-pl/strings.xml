@@ -314,6 +314,7 @@
   <string name="file_deleted_from_commons">Ten plik został usunięty z Commons.</string>
   <string name="contribution_deleted">Usunięto</string>
   <string name="deleted_file_activity_title">Usunięto plik</string>
+  <string name="deleted_file_explanation">Wikimedia Commons usuwa pliki niemające charakteru edukacyjnego lub naruszające obowiązujące zasady, w tym przypadki naruszenia praw autorskich. Przesyłaj zdjęcia wykonane przez Ciebie. Zdjęcia skopiowane z Internetu, zrzuty ekranu, logo i plakaty to najczęstsze powody usunięcia pliku.</string>
   <string name="deleted_file_view_page">Zobacz stronę pliku</string>
   <string name="deleted_file_view_discussion">Przeczytaj dyskusję o usunięciu</string>
   <string name="deleted_file_policies">Polityka i wytyczne Wikimedia Commons</string>
@@ -436,6 +437,7 @@
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimediów</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="notifications_channel_name_uploads">Postęp przesyłania</string>
   <string name="preference_author_name_toggle">Użyj niestandardowej nazwy autora</string>
   <string name="preference_author_name_toggle_summary">Podczas przesyłania zdjęć użyj niestandardowej nazwy autora zamiast nazwy użytkownika</string>
   <string name="preference_author_name">Niestandardowa nazwa autora</string>
