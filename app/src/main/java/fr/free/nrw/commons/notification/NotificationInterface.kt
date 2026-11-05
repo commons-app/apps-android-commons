@@ -26,5 +26,6 @@ interface NotificationInterface {
         @Field("token") token: String,
         @Field("list") readList: String?,
         @Field("unreadlist") unreadList: String?,
+        @Field("wikis") wikis: String?,
     ): Observable<MwQueryResponse?>
 }
