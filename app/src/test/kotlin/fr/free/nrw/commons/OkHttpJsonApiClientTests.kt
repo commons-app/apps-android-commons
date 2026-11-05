@@ -9,7 +9,9 @@ import fr.free.nrw.commons.campaigns.CampaignConfig
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.location.LatLng
+import com.google.gson.JsonSyntaxException
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.TooManyAchievementsException
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import okhttp3.Call
 import okhttp3.HttpUrl
@@ -282,9 +284,95 @@ class OkHttpJsonApiClientTests {
             clientWithToolforgeUrl().getAchievements("Test").blockingGet()
             fail("Expected the fallback to give up")
         } catch (e: RuntimeException) {
-            assertTrue(e.cause is IOException)
+            assertTrue(e.cause is TooManyAchievementsException)
         }
         verify(okhttpClient, times(2)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackIsNotSuccessful() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        stubCommonsAchievementsResponses()
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.uniqueUsedImages)
+        assertEquals(3, result.thanksReceived)
+        verify(okhttpClient, times(6)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackThrows() {
+        Mockito.`when`(call.execute())
+            .thenThrow(IOException("no healthy upstream"))
+            .thenReturn(response)
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        stubCommonsAchievementsResponses()
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.deletedUploads)
+        assertEquals("Test", result.user)
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackJsonIsInvalid() {
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(
+            gson.fromJson(any<String>(), eq(fr.free.nrw.commons.profile.achievements.FeedbackResponse::class.java))
+        ).thenThrow(JsonSyntaxException("bad"))
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "{not json",
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(2, result.articlesUsingImages)
+    }
+
+    @Test
+    fun testGetUploadCountFallsBackWhenToolforgeFails() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"allimages":[{"name":"A.jpg"},{"name":"B.jpg"}]}}"""
+        )
+
+        val count = clientWithToolforgeUrl().getUploadCount("Test").blockingGet()
+
+        assertEquals(2, count)
+    }
+
+    @Test
+    fun testGetWikidataEditsFallsBackWhenToolforgeFails() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"users":[{"name":"Test","editcount":12}]}}"""
+        )
+
+        val edits = clientWithToolforgeUrl().getWikidataEdits("Test").blockingGet()
+
+        assertEquals(12, edits)
+    }
+
+    private fun stubCommonsAchievementsResponses() {
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
     }
 
     private fun clientWithToolforgeUrl() = OkHttpJsonApiClient(

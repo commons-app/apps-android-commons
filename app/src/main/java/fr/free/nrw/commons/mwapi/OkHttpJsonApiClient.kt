@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.mwapi
 
-import android.text.TextUtils
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -238,23 +237,54 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.build())
             .build()
 
-        return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful) {
-                val responseBody = response.body
-                if (null != responseBody) {
-                    val responseBodyString = responseBody.string().trim { it <= ' ' }
-                    if (!TextUtils.isEmpty(responseBodyString)) {
-                        try {
-                            return@fromCallable responseBodyString.toInt()
-                        } catch (e: NumberFormatException) {
-                            Timber.e(e)
-                        }
-                    }
-                }
+        return Single.fromCallable {
+            val counted = try {
+                uploadCountFromToolforge(request)
+            } catch (e: IOException) {
+                Timber.w(e, "uploadsbyuser.py failed, counting uploads from the Commons API")
+                null
             }
-            0
-        })
+            counted ?: userName?.let {
+                try {
+                    countUploadsFromCommonsApi(it)
+                } catch (e: IOException) {
+                    Timber.e(e, "Commons API upload count failed")
+                    0
+                }
+            } ?: 0
+        }
+    }
+
+    /**
+     * Returns the Toolforge count, or null when that response cannot be used.
+     */
+    private fun uploadCountFromToolforge(request: Request): Int? {
+        val response = okHttpClient.newCall(request).execute()
+        if (!response.isSuccessful) {
+            Timber.w("uploadsbyuser.py failed with HTTP ${response.code}")
+            return null
+        }
+        val count = response.body?.string()?.trim()?.toIntOrNull()
+        if (count == null) {
+            Timber.w("uploadsbyuser.py returned no upload count")
+        }
+        return count
+    }
+
+    /**
+     * Current files for [userName]. This is the public stand-in for uploadsbyuser.py.
+     */
+    private fun countUploadsFromCommonsApi(userName: String): Int {
+        var uploads = 0
+        queryCommonsApi(
+            mapOf(
+                "list" to "allimages", "aiuser" to userName, "aisort" to "timestamp",
+                "aiprop" to "timestamp", "ailimit" to "500"
+            )
+        ) { query ->
+            uploads += query.getAsJsonArray("allimages")?.size() ?: 0
+        }
+        return uploads
     }
 
     fun getWikidataEdits(userName: String?): Single<Int> {
@@ -270,67 +300,115 @@ class OkHttpJsonApiClient @Inject constructor(
             .url(urlBuilder.build())
             .build()
 
-        return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful && response.body != null) {
-                var json: String = response.body!!.string()
-                // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
-                val countResponse = gson
-                    .fromJson(
-                        json,
-                        GetWikidataEditCountResponse::class.java
-                    )
-                if (null != countResponse) {
-                    return@fromCallable countResponse.wikidataEditCount
-                }
+        return Single.fromCallable {
+            val counted = try {
+                wikidataEditsFromToolforge(request)
+            } catch (e: IOException) {
+                Timber.w(e, "wikidataedits.py failed, reading the edit count from Wikidata")
+                null
             }
-            0
-        })
+            counted ?: userName?.let { countWikidataEditsFromApi(it) } ?: 0
+        }
+    }
+
+    /**
+     * Returns the Toolforge edit count, or null when that response cannot be used.
+     */
+    private fun wikidataEditsFromToolforge(request: Request): Int? {
+        val response = okHttpClient.newCall(request).execute()
+        val json = response.body?.takeIf { response.isSuccessful }?.string()
+        val jsonStart = json?.indexOf('{') ?: -1
+        if (json == null) {
+            Timber.w("wikidataedits.py failed with HTTP ${response.code}")
+        }
+        return if (json == null || jsonStart < 0) {
+            null
+        } else {
+            try {
+                gson.fromJson(json.substring(jsonStart), GetWikidataEditCountResponse::class.java)
+                    ?.wikidataEditCount
+            } catch (e: Exception) {
+                Timber.w(e, "wikidataedits.py returned invalid JSON")
+                null
+            }
+        }
+    }
+
+    /**
+     * Edit count from Wikidata's public user list. This replaces wikidataedits.py.
+     */
+    private fun countWikidataEditsFromApi(userName: String): Int {
+        val url = "${BuildConfig.WIKIDATA_URL}/w/api.php".toHttpUrlOrNull()!!.newBuilder()
+            .addQueryParameter("action", "query")
+            .addQueryParameter("format", "json")
+            .addQueryParameter("formatversion", "2")
+            .addQueryParameter("list", "users")
+            .addQueryParameter("ususers", userName)
+            .addQueryParameter("usprop", "editcount")
+            .build()
+        val response = okHttpClient.newCall(Request.Builder().url(url).build()).execute()
+        val body = response.body
+        if (!response.isSuccessful || body == null) {
+            throw IOException("Wikidata edit count request failed: ${response.message}")
+        }
+        val users = JsonParser.parseString(body.string()).asJsonObject
+            .getAsJsonObject("query")
+            ?.getAsJsonArray("users")
+        return users?.firstOrNull()?.asJsonObject?.get("editcount")?.asInt ?: 0
     }
 
     fun getAchievements(userName: String?): Single<FeedbackResponse?> {
         val suffix = if (isBetaFlavour) "/feedback.py?labs=commonswiki" else "/feedback.py"
         val fetchAchievementUrlTemplate = wikiMediaToolforgeUrl.toString() + suffix
-        return Single.fromCallable<FeedbackResponse?>({
-            val url = String.format(
-                Locale.ENGLISH,
-                fetchAchievementUrlTemplate,
-                userName
-            )
-            val urlBuilder: HttpUrl.Builder = url.toHttpUrlOrNull()!!.newBuilder()
-                .addQueryParameter("user", userName)
-            val request: Request = Request.Builder()
-                .url(urlBuilder.toString())
-                .build()
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                var json: String = response.body!!.string()
-                val jsonStart = json.indexOf('{')
-                if (jsonStart < 0 && userName != null) {
-                    Timber.w("feedback.py returned no JSON, computing achievements from the Commons API")
-                    return@fromCallable getAchievementsFromCommonsApi(userName)
-                }
-                // Extract JSON from response
-                json = json.substring(jsonStart)
-                Timber.d("Response for achievements is %s", json)
-                try {
-                    return@fromCallable gson.fromJson<FeedbackResponse>(
-                        json,
-                        FeedbackResponse::class.java
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    return@fromCallable FeedbackResponse(0, 0, 0, FeaturedImages(0, 0), 0, "")
-                }
+        return Single.fromCallable {
+            val fromToolforge = try {
+                feedbackFromToolforge(userName, fetchAchievementUrlTemplate)
+            } catch (e: IOException) {
+                Timber.w(e, "feedback.py failed, computing achievements from the Commons API")
+                null
             }
-            null
-        })
+            when {
+                fromToolforge != null -> fromToolforge
+                userName != null -> getAchievementsFromCommonsApi(userName)
+                else -> null
+            }
+        }
     }
 
     /**
-     * Computes the same statistics as feedback.py from the public Commons API. Throws when the
-     * user has more uploads than [MAX_FALLBACK_UPLOADS], so the caller shows the fetch error.
+     * Parsed feedback.py body, or null when the caller should use the Commons API instead.
+     */
+    private fun feedbackFromToolforge(
+        userName: String?,
+        fetchAchievementUrlTemplate: String,
+    ): FeedbackResponse? {
+        val url = String.format(Locale.ENGLISH, fetchAchievementUrlTemplate, userName)
+        val request = Request.Builder()
+            .url(url.toHttpUrlOrNull()!!.newBuilder().addQueryParameter("user", userName).build())
+            .build()
+        val response = okHttpClient.newCall(request).execute()
+        val json = response.body?.takeIf { response.isSuccessful }?.string()
+        val jsonStart = json?.indexOf('{') ?: -1
+        if (json == null) {
+            Timber.w("feedback.py failed with HTTP ${response.code}")
+        } else if (jsonStart < 0) {
+            Timber.w("feedback.py returned no JSON, computing achievements from the Commons API")
+        }
+        return if (json == null || jsonStart < 0) {
+            null
+        } else {
+            try {
+                gson.fromJson(json.substring(jsonStart), FeedbackResponse::class.java)
+            } catch (e: Exception) {
+                Timber.w(e, "feedback.py returned invalid JSON, computing achievements from the Commons API")
+                null
+            }
+        }
+    }
+
+    /**
+     * Computes the same statistics as feedback.py from the public Commons API.
+     * Throws [TooManyAchievementsException] above [MAX_FALLBACK_UPLOADS].
      */
     private fun getAchievementsFromCommonsApi(userName: String): FeedbackResponse {
         val uploadedTitles = collectUploadedTitles(userName)
@@ -361,7 +439,7 @@ class OkHttpJsonApiClient @Inject constructor(
                 uploadedTitles.add(it.asJsonObject.get("title").asString)
             }
             if (uploadedTitles.size > MAX_FALLBACK_UPLOADS) {
-                throw IOException("Too many uploads to compute achievements locally")
+                throw TooManyAchievementsException()
             }
         }
         return uploadedTitles
