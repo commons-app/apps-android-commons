@@ -51,6 +51,22 @@ class OkHttpJsonApiClient @Inject constructor(
     private val campaignsUrl: String,
     private val gson: Gson
 ) {
+    companion object {
+        private const val FALLBACK_LANGUAGES =
+            "en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb," +
+                "ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq," +
+                "uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war," +
+                "zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar," +
+                "an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am," +
+                "roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk," +
+                "lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls," +
+                "yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky," +
+                "ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na," +
+                "got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn," +
+                "kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd," +
+                "ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh," +
+                "sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr"
+    }
     fun getLeaderboard(
         userName: String?, duration: String?,
         category: String?, limit: String?, offset: String?
@@ -82,6 +98,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         LeaderboardResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the leaderboard response")
                     return@fromCallable LeaderboardResponse()
                 }
             }
@@ -184,6 +201,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         UpdateAvatarResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the avatar update response")
                     return@fromCallable UpdateAvatarResponse()
                 }
             }
@@ -307,6 +325,7 @@ class OkHttpJsonApiClient @Inject constructor(
             .replace("\${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
             .replace("\${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
             .replace("\${LANG}", language)
+            .replace("\${FALLBACK_LANGUAGES}", FALLBACK_LANGUAGES)
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
@@ -330,7 +349,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     /**
@@ -386,7 +405,7 @@ class OkHttpJsonApiClient @Inject constructor(
                 .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
                 .get("value").asInt
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     @Throws(Exception::class)
@@ -480,7 +499,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     @Throws(IOException::class)
@@ -496,6 +515,7 @@ ${"wd:" + place.wikiDataEntityId}"""
         val query = wikidataQuery
             .replace("\${ENTITY}", qids)
             .replace("\${LANG}", language)
+            .replace("\${FALLBACK_LANGUAGES}", FALLBACK_LANGUAGES)
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
             .addQueryParameter("query", query)
@@ -583,7 +603,8 @@ ${"wd:" + place.wikiDataEntityId}"""
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://www.topografix.com/GPX/1/0"
  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
-<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
+<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" """ +
+                    """maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
 
         val placeBindings = runQuery(leftLatLng, rightLatLng)
         if (placeBindings != null) {

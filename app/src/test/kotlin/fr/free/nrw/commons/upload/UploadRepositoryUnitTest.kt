@@ -144,7 +144,6 @@ class UploadRepositoryUnitTest {
         val empty = Observable.empty<List<CategoryItem>>()
         whenever(categoriesModel.searchAll(any(), any(), any())).thenReturn(empty)
         assertSame(empty, repository.searchAll("", listOf(), listOf()))
-
     }
 
     @Test
@@ -204,7 +203,7 @@ class UploadRepositoryUnitTest {
     fun testGetCaptionQuality() {
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            uploadModel.getCaptionQuality(uploadItem)
+            uploadModel.getCaptionQuality(uploadItem),
         )
     }
 
@@ -384,7 +383,7 @@ class UploadRepositoryUnitTest {
         assertEquals(
             repository.getCategories(listOf("Test")),
             categoriesModel.getCategoriesByName(mutableListOf("Test"))
-                ?: Observable.empty<List<CategoryItem>>()
+                ?: Observable.empty<List<CategoryItem>>(),
         )
     }
 }

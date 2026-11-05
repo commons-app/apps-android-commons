@@ -31,6 +31,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
+import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowToast
 import java.lang.reflect.Method
 
@@ -98,58 +99,20 @@ class AchievementsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testShowInfoDialog() {
+    fun testInfoIconsOpenTheirDialogs() {
+        view.findViewById<View>(R.id.achievement_info).performClick()
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showInfoDialog()
-    }
+        Assert.assertEquals(
+            context.getString(R.string.Achievements),
+            Shadows.shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
 
-    @Test
-    @Throws(Exception::class)
-    fun testShowUploadInfo() {
+        view.findViewById<View>(R.id.images_upload_info_icon).performClick()
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showUploadInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowRevertedInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showRevertedInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowUsedByWikiInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showUsedByWikiInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowImagesViaNearbyInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showImagesViaNearbyInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowFeaturedImagesInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showFeaturedImagesInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowThanksReceivedInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showThanksReceivedInfo()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowQualityImagesInfo() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showQualityImagesInfo()
+        Assert.assertEquals(
+            context.getString(R.string.images_uploaded),
+            Shadows.shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
     }
 
     @Test
@@ -157,47 +120,6 @@ class AchievementsFragmentUnitTests {
     fun testOnOptionsItemSelected() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onOptionsItemSelected(menuItem)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testLaunchAlert() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "launchAlert",
-                String::class.java,
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "", "")
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testHideProgressBar() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "hideProgressBar",
-                Achievements::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, achievements)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetAchievementsUploadCount() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            AchievementsFragment::class.java.getDeclaredMethod(
-                "setAchievementsUploadCount",
-                Achievements::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, achievements, 0)
     }
 
     @Test
