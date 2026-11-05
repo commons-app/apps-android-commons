@@ -57,28 +57,43 @@ class CategoriesPresenter
 
         override fun onAttachView(view: CategoriesContract.View) {
             this.view = view
+
+            fun showLoadError(t: Throwable?) {
+                view.showProgress(false)
+                view.showError(R.string.error_loading_categories)
+                val mwException = t as? MwIOException
+                view.showErrorDialog(
+                    if (mwException == null) {
+                        ""
+                    } else {
+                        "\n${mwException.error.title} / ${mwException.error.details}"
+                    },
+                )
+                Timber.e(t)
+            }
+
             compositeDisposable.add(
                 searchTerms
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
-                    }.switchMap { searchResults.searchResults(it, media) }
-                    .map { repository.getSelectedCategories() + it }
-                    .map { it.distinctBy { categoryItem -> categoryItem.name } }
-                    .observeOn(mainThreadScheduler)
+                    }.switchMap { term ->
+                        searchResults
+                            .searchResults(term, media)
+                            .map { Result.success(it) }
+                            .onErrorReturn { Result.failure(it) }
+                    }.map { result ->
+                        result.map { found ->
+                            (repository.getSelectedCategories() + found)
+                                .distinctBy { categoryItem -> categoryItem.name }
+                        }
+                    }.observeOn(mainThreadScheduler)
                     .subscribe(
-                        {
-                            categoryList.postValue(it)
-                            view.showProgress(false)
-                            if (it.isEmpty()) {
-                                view.showError(R.string.no_categories_found)
-                            }
-                        },
-                        { t: Throwable? ->
+                        { result ->
                             view.showProgress(false)
                             result.fold(
                                 onSuccess = {
-                                    setCategoryListValue(it)
+                                    categoryList.postValue(it)
                                     if (it.isEmpty()) {
                                         view.showError(R.string.no_categories_found)
                                     }

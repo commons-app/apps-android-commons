@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
@@ -17,7 +17,10 @@ import fr.free.nrw.commons.upload.categories.CategorySearchResults
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import media
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -26,6 +29,9 @@ import org.mockito.MockitoAnnotations
  * The class contains unit test cases for CategoriesPresenter
  */
 class CategoriesPresenterTest {
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     @Mock
     internal lateinit var repository: UploadRepository
 
@@ -172,9 +178,7 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategories reports an API error and accepts the next query`() {
         categoriesPresenter.onAttachView(view)
-        // postValue is asynchronous, so watch the list through a mock.
-        val liveData = mock<MutableLiveData<List<CategoryItem>>>()
-        categoriesPresenter.setCategoryList(liveData)
+        val liveData = categoriesPresenter.categoryList
 
         whenever(repository.getUploads()).thenReturn(emptyList())
         whenever(repository.getSelectedCategories()).thenReturn(emptyList())
@@ -186,7 +190,7 @@ class CategoriesPresenterTest {
 
         verify(view).showError(R.string.error_loading_categories)
         verify(view, never()).showError(R.string.no_categories_found)
-        verify(liveData, never()).postValue(any())
+        assertNull(liveData.value)
 
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
@@ -195,7 +199,7 @@ class CategoriesPresenterTest {
         categoriesPresenter.searchForCategories("Cat")
         testScheduler.triggerActions()
 
-        verify(liveData).postValue(argThat { map { it.name } == listOf("Cats") })
+        assertEquals(listOf("Cats"), liveData.value?.map { it.name })
     }
 
     @Test
