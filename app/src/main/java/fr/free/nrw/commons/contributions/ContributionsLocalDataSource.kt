@@ -66,10 +66,19 @@ class ContributionsLocalDataSource
          * Fetches contributions with specific states.
          *
          * @param states The states of the contributions to fetch.
+         * @param sortedByDateUploadStarted Whether the contributions are sorted by the date the upload
+         * started.
          * @return A DataSource factory for paginated contributions with the specified states.
          */
-        fun getContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> =
-            contributionDao.getContributions(states)
+        fun getContributionsWithStates(
+            states: List<Int>,
+            sortedByDateUploadStarted: Boolean = false,
+        ): DataSource.Factory<Int, Contribution> =
+            if (sortedByDateUploadStarted) {
+                contributionDao.getContributionsSortedByDateUploadStarted(states)
+            } else {
+                contributionDao.getContributions(states)
+            }
 
         /**
          * Fetches all contributions with specific states at once, not page by page.
@@ -79,17 +88,6 @@ class ContributionsLocalDataSource
          */
         fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
             contributionDao.getContribution(states)
-
-        /**
-         * Fetches contributions with specific states sorted by the date the upload started.
-         *
-         * @param states The states of the contributions to fetch.
-         * @return A DataSource factory for paginated contributions with the specified states sorted by
-         * date upload started.
-         */
-        fun getContributionsWithStatesSortedByDateUploadStarted(
-            states: List<Int>,
-        ): DataSource.Factory<Int, Contribution> = contributionDao.getContributionsSortedByDateUploadStarted(states)
 
         fun saveContributions(contributions: List<Contribution>): Single<List<Long>> {
             val contributionList: MutableList<Contribution> = ArrayList()

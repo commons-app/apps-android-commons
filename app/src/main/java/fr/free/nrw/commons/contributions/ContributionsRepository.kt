@@ -50,10 +50,15 @@ class ContributionsRepository
          * Fetches contributions with specific states.
          *
          * @param states The states of the contributions to fetch.
+         * @param sortedByDateUploadStarted Whether the contributions are sorted by the date the upload
+         * started.
          * @return A DataSource factory for paginated contributions with the specified states.
          */
-        fun fetchContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> =
-            localDataSource.getContributionsWithStates(states)
+        fun fetchContributionsWithStates(
+            states: List<Int>,
+            sortedByDateUploadStarted: Boolean = false,
+        ): DataSource.Factory<Int, Contribution> =
+            localDataSource.getContributionsWithStates(states, sortedByDateUploadStarted)
 
         /**
          * Fetches all contributions with specific states at once, not page by page.
@@ -63,18 +68,6 @@ class ContributionsRepository
          */
         fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
             localDataSource.getAllContributionsWithStates(states)
-
-        /**
-         * Fetches contributions with specific states sorted by the date the upload started.
-         *
-         * @param states The states of the contributions to fetch.
-         * @return A DataSource factory for paginated contributions with the specified states sorted by
-         * date upload started.
-         */
-        fun fetchContributionsWithStatesSortedByDateUploadStarted(
-            states: List<Int>,
-        ): DataSource.Factory<Int, Contribution> =
-            localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states)
 
         fun save(contributions: List<Contribution>): Single<List<Long>> =
             localDataSource.saveContributions(contributions)
