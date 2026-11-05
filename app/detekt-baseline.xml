@@ -820,7 +820,6 @@
     <ID>TooManyFunctions:UploadMediaPresenter.kt$UploadMediaPresenter : UserActionListenerSimilarImageInterface</ID>
     <ID>TooManyFunctions:UploadModel.kt$UploadModel</ID>
     <ID>TooManyFunctions:UploadRepository.kt$UploadRepository</ID>
-    <ID>TooManyFunctions:UploadWorker.kt$UploadWorker : CoroutineWorker</ID>
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
     <ID>TooManyFunctions:WikidataEditService.kt$WikidataEditService</ID>
     <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
