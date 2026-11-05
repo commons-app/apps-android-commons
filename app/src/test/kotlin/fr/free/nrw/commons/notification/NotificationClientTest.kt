@@ -105,11 +105,11 @@ class NotificationClientTest {
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito
-            .`when`(service.markRead(anyString(), anyString(), anyString()))
+            .`when`(service.markRead(anyString(), anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
-        notificationClient.markNotificationAsRead("test")
-        verify(service).markRead(anyString(), anyString(), anyString())
+        notificationClient.markNotificationAsRead("1234", "enwiki")
+        verify(service).markRead("test", "1234", "", "enwiki")
     }
 
     /**
@@ -120,7 +120,7 @@ class NotificationClientTest {
         val invalidLoginToken = InvalidLoginTokenException("invalid")
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
 
-        notificationClient.markNotificationAsRead("test").test().assertError(invalidLoginToken)
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertError(invalidLoginToken)
     }
 
     /**
@@ -130,7 +130,7 @@ class NotificationClientTest {
     fun markNotificationAsReadReturnsFalseOnOtherFailure() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
 
-        notificationClient.markNotificationAsRead("test").test().assertValue(false)
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertValue(false)
     }
 
     @Suppress("SameParameterValue")
