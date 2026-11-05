@@ -69,8 +69,7 @@ class MockLimitDataSource<T>(
     override fun loadRange(
         params: LoadRangeParams,
         callback: LoadRangeCallback<T>,
-    ) {
-    }
+    ) = Unit
 
     override fun loadRange(
         startPosition: Int,
