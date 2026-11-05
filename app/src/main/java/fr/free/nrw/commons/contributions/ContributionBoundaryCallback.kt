@@ -3,7 +3,7 @@ package fr.free.nrw.commons.contributions
 import androidx.paging.PagedList.BoundaryCallback
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -19,7 +19,7 @@ class ContributionBoundaryCallback
     constructor(
         private val repository: ContributionsRepository,
         private val sessionManager: SessionManager,
-        private val mediaClient: MediaClient,
+        private val mediaCollectionClient: MediaCollectionClient,
         @param:Named(IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : BoundaryCallback<Contribution>() {
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -55,7 +55,7 @@ class ContributionBoundaryCallback
          */
         fun refreshList(onRefreshFinish: () -> Unit = {}) {
             if (sessionManager.userName != null) {
-                mediaClient.resetUserNameContinuation(sessionManager.userName!!)
+                mediaCollectionClient.resetUserNameContinuation(sessionManager.userName!!)
             }
             fetchContributions(onRefreshFinish)
         }
@@ -70,7 +70,7 @@ class ContributionBoundaryCallback
             if (sessionManager.userName != null) {
                 userName
                     ?.let { userName ->
-                        mediaClient
+                        mediaCollectionClient
                             .getMediaListForUser(userName)
                             .map { mediaList ->
                                 mediaList.map { media ->
