@@ -272,7 +272,8 @@ class OkHttpJsonApiClient @Inject constructor(
     }
 
     /**
-     * Current files for [userName]. This is the public stand-in for uploadsbyuser.py.
+     * Current files for [userName], at most [MAX_FALLBACK_UPLOADS].
+     * Contributions requests this on launch, so a prolific uploader must not page the whole list.
      */
     private fun countUploadsFromCommonsApi(userName: String): Int {
         var uploads = 0
@@ -280,11 +281,12 @@ class OkHttpJsonApiClient @Inject constructor(
             mapOf(
                 "list" to "allimages", "aiuser" to userName, "aisort" to "timestamp",
                 "aiprop" to "timestamp", "ailimit" to "500"
-            )
+            ),
+            stopAfterBatch = { uploads >= MAX_FALLBACK_UPLOADS },
         ) { query ->
             uploads += query.getAsJsonArray("allimages")?.size() ?: 0
         }
-        return uploads
+        return minOf(uploads, MAX_FALLBACK_UPLOADS)
     }
 
     fun getWikidataEdits(userName: String?): Single<Int> {
@@ -515,7 +517,11 @@ class OkHttpJsonApiClient @Inject constructor(
      * Runs an action=query request against Commons, following continuation, and passes each
      * "query" object to [onBatch].
      */
-    private fun queryCommonsApi(params: Map<String, String>, onBatch: (JsonObject) -> Unit) {
+    private fun queryCommonsApi(
+        params: Map<String, String>,
+        stopAfterBatch: () -> Boolean = { false },
+        onBatch: (JsonObject) -> Unit,
+    ) {
         var continuation = emptyMap<String, String>()
         do {
             val urlBuilder = "${BuildConfig.COMMONS_URL}/w/api.php".toHttpUrlOrNull()!!.newBuilder()
@@ -530,6 +536,9 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             val json = JsonParser.parseString(body.string()).asJsonObject
             json.getAsJsonObject("query")?.let(onBatch)
+            if (stopAfterBatch()) {
+                return
+            }
             continuation = json.getAsJsonObject("continue")?.entrySet()
                 ?.associate { it.key to it.value.asString } ?: emptyMap()
         } while (continuation.isNotEmpty())

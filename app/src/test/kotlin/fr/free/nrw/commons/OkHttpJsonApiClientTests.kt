@@ -351,6 +351,23 @@ class OkHttpJsonApiClientTests {
     }
 
     @Test
+    fun testGetUploadCountFallbackStopsAfterTheCap() {
+        val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
+        val continued = """{"continue":{"aicontinue":"x","continue":"-||"},"query":{"allimages":[$page]}}"""
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            continued,
+            continued,
+            """{"query":{"allimages":[$page]}}"""
+        )
+
+        val count = clientWithToolforgeUrl().getUploadCount("Test").blockingGet()
+
+        assertEquals(1000, count)
+        verify(okhttpClient, times(3)).newCall(any())
+    }
+
+    @Test
     fun testGetWikidataEditsFallsBackWhenToolforgeFails() {
         Mockito.`when`(response.isSuccessful).thenReturn(false, true)
         Mockito.`when`(responseBody.string()).thenReturn(
