@@ -14,12 +14,12 @@ import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.StatementPartial
 import kotlinx.parcelize.Parcelize
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.util.Locale
 
-const val THUMB_IMAGE_SIZE = "70px"
+const val THUMB_IMAGE_SIZE = "120"
 
 /**
  * Model class for Depicted Item in Upload and Explore
@@ -69,7 +69,27 @@ data class DepictedItem constructor(
     )
 
     val primaryImage: String?
-        get() = imageUrl?.split('-')?.lastOrNull()
+        get() =
+            imageUrl
+                ?.substringBefore("?")
+                ?.let { url ->
+                    if ("/Special:FilePath/" in url) {
+                        URLDecoder.decode(
+                            url.substringAfter("/Special:FilePath/"),
+                            StandardCharsets.UTF_8.name(),
+                        )
+                    } else {
+                        url.substringAfterLast('/').substringAfter('-')
+                    }
+                }
+
+    val thumbnailUrl: String?
+        get() =
+            primaryImage?.let { filename ->
+                val encodedFileName = URLEncoder.encode(filename, StandardCharsets.UTF_8.name()).replace("+", "%20")
+                val extension = if (filename.endsWith(".svg", ignoreCase = true)) ".png" else ""
+                "https://commons.wikimedia.org/wiki/Special:FilePath/$encodedFileName?width=$THUMB_IMAGE_SIZE$extension"
+            }
 
     override fun equals(other: Any?) =
         when {
@@ -104,31 +124,6 @@ private fun getImageUrl(
         .substringAfter(":")
         .replace(" ", "_")
         .let {
-            val md5Hash = getMd5(it)
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/${md5Hash[0]}/${md5Hash[0]}${md5Hash[1]}/$it/$size-$it"
+            val encodedFileName = URLEncoder.encode(it, StandardCharsets.UTF_8.name()).replace("+", "%20")
+            "https://commons.wikimedia.org/wiki/Special:FilePath/$encodedFileName?width=$size"
         }
-
-/**
- * Generates MD5 hash for the filename
- */
-private fun getMd5(input: String): String =
-    try {
-        // Static getInstance method is called with hashing MD5
-        val md = MessageDigest.getInstance("MD5")
-
-        // digest() method is called to calculate message digest
-        //  of an input digest() return array of byte
-        val messageDigest = md.digest(input.toByteArray())
-
-        // Convert byte array into signum representation
-        val no = BigInteger(1, messageDigest)
-
-        // Convert message digest into hex value
-        var hashtext = no.toString(16)
-        while (hashtext.length < 32) {
-            hashtext = "0$hashtext"
-        }
-        hashtext
-    } catch (e: NoSuchAlgorithmException) {
-        throw RuntimeException(e)
-    }

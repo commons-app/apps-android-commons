@@ -11,7 +11,10 @@ import java.io.IOException
 
 class WikiSiteTypeAdapter : TypeAdapter<WikiSite>() {
     @Throws(IOException::class)
-    override fun write(out: JsonWriter, value: WikiSite) {
+    override fun write(
+        out: JsonWriter,
+        value: WikiSite,
+    ) {
         out.beginObject()
         out.name(DOMAIN)
         out.value(value.url())
