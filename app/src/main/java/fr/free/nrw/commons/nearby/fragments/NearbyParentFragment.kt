@@ -79,6 +79,7 @@ import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
 import fr.free.nrw.commons.nearby.CheckBoxTriStates
 import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
@@ -215,6 +216,9 @@ class NearbyParentFragment :
 
     @Inject
     lateinit var commonPlaceClickActions: CommonPlaceClickActions
+
+    @Inject
+    lateinit var placeTypeLabelsClient: PlaceTypeLabelsClient
 
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
@@ -632,9 +636,7 @@ class NearbyParentFragment :
                         }
 
                         override fun reset() {
-                            presenter?.setAdvancedQuery(null.toString())
-                            presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                            showHideAdvancedQueryFragment(false)
+                            resetAdvancedQuery()
                         }
 
                         override fun apply(query: String) {
@@ -1101,6 +1103,7 @@ class NearbyParentFragment :
             },
         )
         restoreStoredFilterSelection()
+        loadLocalizedPlaceTypeNames()
         binding!!
             .nearbyFilterList.root
             .layoutParams.width =
@@ -1120,6 +1123,20 @@ class NearbyParentFragment :
                 .subscribe { query: CharSequence ->
                     nearbyFilterSearchRecyclerViewAdapter?.filter?.filter(query.toString())
                 }
+    }
+
+    private fun loadLocalizedPlaceTypeNames() {
+        compositeDisposable.add(
+            placeTypeLabelsClient.getLabels(Locale.getDefault().language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ names ->
+                    Label.setLocalizedNames(names)
+                    nearbyFilterSearchRecyclerViewAdapter?.notifyDataSetChanged()
+                }, { throwable ->
+                    Timber.e(throwable, "Failed to load localized place type names")
+                })
+        )
     }
 
     private fun restoreStoredFilterSelection() {
@@ -1182,11 +1199,7 @@ class NearbyParentFragment :
                     prepareViewsForSheetPosition(newState)
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
 
@@ -1219,11 +1232,7 @@ class NearbyParentFragment :
                     }
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
         if (isDepictsPickerMode) {
@@ -1371,6 +1380,15 @@ class NearbyParentFragment :
     }
 
     override fun isAdvancedQueryFragmentVisible(): Boolean = isAdvancedQueryFragmentVisible
+
+    /**
+     * Drops a custom Nearby query and loads places for the current map center again.
+     * The advanced query editor stays open so the restored query text remains visible.
+     */
+    fun resetAdvancedQuery() {
+        presenter?.setAdvancedQuery("")
+        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
 
     override fun showHideAdvancedQueryFragment(shouldShow: Boolean) {
         setHasOptionsMenu(!shouldShow)
@@ -1790,7 +1808,9 @@ class NearbyParentFragment :
                 getString(fr.free.nrw.commons.R.string.do_you_want_to_open_kml_file)
             }
         val runnable = Runnable { openFile(context, fileName, isGPX) }
-        showAlertDialog(requireActivity(), title, message, runnable) {}
+        showAlertDialog(requireActivity(), title, message, runnable) {
+            // No action needed when the dialog is dismissed
+        }
     }
 
     private fun openFile(
@@ -2265,11 +2285,9 @@ class NearbyParentFragment :
         return presenter?.backButtonClicked() ?: false
     }
 
-    override fun onLocationPermissionDenied(toastMessage: String) {
-    }
+    override fun onLocationPermissionDenied(toastMessage: String) = Unit
 
-    override fun onLocationPermissionGranted() {
-    }
+    override fun onLocationPermissionGranted() = Unit
 
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
@@ -3375,7 +3393,7 @@ class NearbyParentFragment :
                 }
             }
 
-            else -> {}
+            else -> Unit
         }
     }
 

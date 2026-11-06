@@ -1,17 +1,16 @@
 package fr.free.nrw.commons.profile.achievements
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.TooManyAchievementsException
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
@@ -22,6 +21,11 @@ import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.util.Objects
 import javax.inject.Inject
+
+private const val WIKIDATA_EDITS_THAT_BREAK_CALCULATOR = 150_000
+
+private fun Throwable?.isTooManyAchievements(): Boolean =
+    this is TooManyAchievementsException || this?.cause is TooManyAchievementsException
 
 class AchievementsFragment : CommonsDaggerSupportFragment() {
     @Inject
@@ -69,18 +73,6 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
         binding.thanksImageIcon.setOnClickListener { infoDialogs.showThanksReceivedInfo() }
         binding.qualityImageIcon.setOnClickListener { infoDialogs.showQualityImagesInfo() }
 
-        // DisplayMetrics used to fetch the size of the screen
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val height = displayMetrics.heightPixels
-        val width = displayMetrics.widthPixels
-
-        // Used for the setting the size of imageView at runtime
-        // TODO REMOVE
-        val params = binding.achievementBadgeImage.layoutParams as ConstraintLayout.LayoutParams
-        params.height = (height * BADGE_IMAGE_HEIGHT_RATIO).toInt()
-        params.width = (width * BADGE_IMAGE_WIDTH_RATIO).toInt()
-        binding.achievementBadgeImage.requestLayout()
         binding.progressBar.visibility = View.VISIBLE
 
         setHasOptionsMenu(true)
@@ -146,20 +138,17 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
                                     // in some cases such high number of wiki edit counts cause the
                                     // achievements calculator to fail in some cases, for more details
                                     // refer Issue: #3295
-                                    if (numberOfEdits <= 150_000) {
-                                        showSnackBarWithRetry(false)
-                                    } else {
-                                        showSnackBarWithRetry(true)
-                                    }
+                                    showSnackBarWithRetry(
+                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                    )
                                 }
                             },
                             { throwable ->
                                 Timber.e(throwable, "Fetching achievements statistics failed")
-                                if (numberOfEdits <= 150_000) {
-                                    showSnackBarWithRetry(false)
-                                } else {
-                                    showSnackBarWithRetry(true)
-                                }
+                                showSnackBarWithRetry(
+                                    throwable.isTooManyAchievements() ||
+                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                )
                             },
                         ),
                 )
@@ -206,7 +195,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             } else {
                 binding.progressBar.visibility = View.GONE
                 showDismissibleSnackBar(
-                    requireView().findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed_ultimate_achievement,
                     R.string.retry,
                 ) { setAchievements() }
@@ -217,7 +206,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             }
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
-                requireView().findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed,
                 R.string.retry,
             ) { setAchievements() }
@@ -277,10 +266,5 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             return false
         }
         return true
-    }
-
-    companion object {
-        private const val BADGE_IMAGE_WIDTH_RATIO = 0.4
-        private const val BADGE_IMAGE_HEIGHT_RATIO = 0.3
     }
 }
