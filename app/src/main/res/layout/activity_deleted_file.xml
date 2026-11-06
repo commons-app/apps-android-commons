@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/deletedFileRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/mainBackground"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbarBinding"
+        layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/standard_gap">
+
+            <TextView
+                android:id="@+id/deletedFileExplanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/deleted_file_explanation"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/normal_text" />
+
+            <Button
+                android:id="@+id/viewFilePage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_gap"
+                android:text="@string/deleted_file_view_page" />
+
+            <Button
+                android:id="@+id/viewDeletionDiscussion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin_vertical"
+                android:text="@string/deleted_file_view_discussion" />
+
+            <Button
+                android:id="@+id/viewPolicies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin_vertical"
+                android:text="@string/deleted_file_policies" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

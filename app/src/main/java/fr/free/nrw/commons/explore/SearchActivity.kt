@@ -3,6 +3,7 @@ package fr.free.nrw.commons.explore
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxSearchView
@@ -32,7 +33,10 @@ import javax.inject.Inject
 /**
  * Represents search screen of this app
  */
-class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallback {
+class SearchActivity :
+    BaseActivity(),
+    MediaDetailProvider,
+    CategoryImagesCallback {
     @JvmField
     @Inject
     var recentSearchesDao: RecentSearchesDao? = null
@@ -55,7 +59,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         title = getString(R.string.title_activity_search)
         setSupportActionBar(binding!!.toolbarSearch)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        binding!!.toolbarSearch.setNavigationOnClickListener { onBackPressed() }
+        binding!!.toolbarSearch.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         supportFragmentManager = getSupportFragmentManager()
         setSearchHistoryFragment()
         viewPagerAdapter = ViewPagerAdapter(this, getSupportFragmentManager())
@@ -66,6 +70,36 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         binding!!.searchBox.queryHint = getString(R.string.search_commons)
         binding!!.searchBox.onActionViewExpanded()
         binding!!.searchBox.clearFocus()
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Remove the backstack entry that gets added when share button is clicked
+                    // fixing:https://github.com/commons-app/apps-android-commons/issues/2296
+                    if (supportFragmentManager!!.backStackEntryCount == 2) {
+                        supportFragmentManager!!
+                            .beginTransaction()
+                            .remove(mediaDetails!!)
+                            .commit()
+                        supportFragmentManager!!.popBackStack()
+                        supportFragmentManager!!.executePendingTransactions()
+                    }
+                    if (supportFragmentManager!!.backStackEntryCount == 1) {
+                        // back to search so show search toolbar and hide navigation toolbar
+                        binding!!.searchBox.visibility = View.VISIBLE // set the searchview
+                        binding!!.tabLayout.visibility = View.VISIBLE
+                        binding!!.viewPager.visibility = View.VISIBLE
+                        binding!!.mediaContainer.visibility = View.GONE
+                    } else {
+                        binding!!.toolbarSearch.visibility = View.GONE
+                    }
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            },
+        )
     }
 
     /**
@@ -89,15 +123,16 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         viewPagerAdapter!!.setTabs(
             R.string.search_tab_title_media to searchMediaFragment!!,
             R.string.search_tab_title_categories to searchCategoryFragment!!,
-            R.string.search_tab_title_depictions to searchDepictionsFragment!!
+            R.string.search_tab_title_depictions to searchDepictionsFragment!!,
         )
         viewPagerAdapter!!.notifyDataSetChanged()
         compositeDisposable.add(
-            RxSearchView.queryTextChanges(binding!!.searchBox)
+            RxSearchView
+                .queryTextChanges(binding!!.searchBox)
                 .takeUntil(RxView.detaches(binding!!.searchBox))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::handleSearch, Timber::e)
+                .subscribe(::handleSearch, Timber::e),
         )
     }
 
@@ -120,7 +155,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
                 searchCategoryFragment!!.onQueryUpdated(query.toString())
             }
         } else {
-            //Open RecentSearchesFragment
+            // Open RecentSearchesFragment
             recentSearchesFragment!!.updateRecentSearches()
             binding!!.viewPager.visibility = View.GONE
             binding!!.tabLayout.visibility = View.GONE
@@ -153,7 +188,7 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
      */
     override fun refreshNominatedMedia(index: Int) {
         if (getSupportFragmentManager().backStackEntryCount == 1) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             onMediaClicked(index)
         }
     }
@@ -166,10 +201,13 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
         mediaDetails?.notifyDataSetChanged()
     }
 
+    // Keep the reference URL intact for copy/paste.
+
     /**
      * Open media detail pager fragment on click of image in search results
      * @param position item index that should be opened
      */
+    @Suppress("MaxLineLength")
     override fun onMediaClicked(position: Int) {
         hideKeyboard(findViewById(R.id.searchBox))
         binding!!.tabLayout.visibility = View.GONE
@@ -199,55 +237,35 @@ class SearchActivity : BaseActivity(), MediaDetailProvider, CategoryImagesCallba
      */
     override fun onResume() {
         if (supportFragmentManager!!.backStackEntryCount == 1) {
-            //FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
-            //FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
-            onBackPressed()
+            // FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then
+            // fragment stack is increasing every time.
+            // FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
+            // This is called on screen rotation when user is inside media details. Ideally it should show Media
+            // Details but since we are not saving the state now. We are throwing the user to search screen otherwise
+            // the app was crashing.
+            onBackPressedDispatcher.onBackPressed()
         }
         super.onResume()
     }
 
-    /**
-     * This method is called on backPressed of anyFragment in the activity.
-     * If condition is called when mediaDetailFragment is opened.
-     */
-    override fun onBackPressed() {
-        //Remove the backstack entry that gets added when share button is clicked
-        //fixing:https://github.com/commons-app/apps-android-commons/issues/2296
-        if (getSupportFragmentManager().backStackEntryCount == 2) {
-            supportFragmentManager!!
-                .beginTransaction()
-                .remove(mediaDetails!!)
-                .commit()
-            supportFragmentManager!!.popBackStack()
-            supportFragmentManager!!.executePendingTransactions()
-        }
-        if (getSupportFragmentManager().backStackEntryCount == 1) {
-            // back to search so show search toolbar and hide navigation toolbar
-            binding!!.searchBox.visibility = View.VISIBLE //set the searchview
-            binding!!.tabLayout.visibility = View.VISIBLE
-            binding!!.viewPager.visibility = View.VISIBLE
-            binding!!.mediaContainer.visibility = View.GONE
-        } else {
-            binding!!.toolbarSearch.visibility = View.GONE
-        }
-        super.onBackPressed()
-    }
+    // Keep the reference URL intact for copy/paste.
 
     /**
      * This method is called on click of a recent search to update query in SearchView.
      * @param query Recent Search Query
      */
+    @Suppress("MaxLineLength")
     fun updateText(query: String?) {
         binding!!.searchBox.setQuery(query, true)
-        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
+        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more
+        // details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         binding!!.viewPager.requestFocus()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        //Dispose the disposables when the activity is destroyed
+        // Dispose the disposables when the activity is destroyed
         compositeDisposable.dispose()
         binding = null
     }
