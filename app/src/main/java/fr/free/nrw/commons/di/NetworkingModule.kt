@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.CommonHeaderRequestInterceptor
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.PageEditInterface
 import fr.free.nrw.commons.actions.ThanksInterface
@@ -56,15 +56,17 @@ class NetworkingModule {
     @Singleton
     fun provideOkHttpClient(
         context: Context,
-        httpLoggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(120, TimeUnit.SECONDS)
-        .writeTimeout(120, TimeUnit.SECONDS)
-        .addInterceptor(httpLoggingInterceptor)
-        .addInterceptor(CommonHeaderRequestInterceptor())
-        .readTimeout(120, TimeUnit.SECONDS)
-        .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
-        .build()
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient =
+        OkHttpClient
+            .Builder()
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(CommonHeaderRequestInterceptor())
+            .readTimeout(120, TimeUnit.SECONDS)
+            .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
+            .build()
 
     @Provides
     @Singleton
@@ -86,24 +88,29 @@ class NetworkingModule {
         okHttpClient: OkHttpClient,
         depictsClient: DepictsClient,
         @Named("tools_forge") toolsForgeUrl: HttpUrl,
-        gson: Gson
-    ): OkHttpJsonApiClient = OkHttpJsonApiClient(
-        okHttpClient, depictsClient, toolsForgeUrl, WIKIDATA_SPARQL_QUERY_URL,
-        BuildConfig.WIKIMEDIA_CAMPAIGNS_URL, gson
-    )
+        gson: Gson,
+    ): OkHttpJsonApiClient =
+        OkHttpJsonApiClient(
+            okHttpClient,
+            depictsClient,
+            toolsForgeUrl,
+            WIKIDATA_SPARQL_QUERY_URL,
+            BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
+            gson,
+        )
 
     @Provides
     @Singleton
     fun provideCookieStorage(
-        @Named("default_preferences") preferences: JsonKvStore
-    ): CommonsCookieStorage = CommonsCookieStorage(preferences).also {
-        it.load()
-    }
+        @Named("default_preferences") preferences: JsonKvStore,
+    ): CommonsCookieStorage =
+        CommonsCookieStorage(preferences).also {
+            it.load()
+        }
 
     @Provides
     @Singleton
-    fun provideCookieJar(storage: CommonsCookieStorage): CommonsCookieJar =
-        CommonsCookieJar(storage)
+    fun provideCookieJar(storage: CommonsCookieStorage): CommonsCookieJar = CommonsCookieJar(storage)
 
     @Named(NAMED_COMMONS_CSRF)
     @Provides
@@ -112,7 +119,7 @@ class NetworkingModule {
         sessionManager: SessionManager,
         @Named("commons-csrf-interface") tokenInterface: CsrfTokenInterface,
         loginClient: LoginClient,
-        logoutClient: LogoutClient
+        logoutClient: LogoutClient,
     ): CsrfTokenClient = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
 
     /**
@@ -131,7 +138,7 @@ class NetworkingModule {
         sessionManager: SessionManager,
         @Named("wikidata-csrf-interface") tokenInterface: CsrfTokenInterface,
         loginClient: LoginClient,
-        logoutClient: LogoutClient
+        logoutClient: LogoutClient,
     ): CsrfTokenClient = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
 
     /**
@@ -154,13 +161,11 @@ class NetworkingModule {
 
     @Provides
     @Singleton
-    fun provideLoginInterface(factory: CommonsServiceFactory): LoginInterface =
-        factory.create(BuildConfig.COMMONS_URL)
+    fun provideLoginInterface(factory: CommonsServiceFactory): LoginInterface = factory.create(BuildConfig.COMMONS_URL)
 
     @Provides
     @Singleton
-    fun provideLoginClient(loginInterface: LoginInterface): LoginClient =
-        LoginClient(loginInterface)
+    fun provideLoginClient(loginInterface: LoginInterface): LoginClient = LoginClient(loginInterface)
 
     @Provides
     @Named("tools_forge")
@@ -172,7 +177,8 @@ class NetworkingModule {
     fun provideWikidataWikiSite(): WikiSite = WikiSite(BuildConfig.WIKIDATA_URL)
 
     /**
-     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
+     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new
+     * instances everywhere.
      * @return returns a singleton Gson instance
      */
     @Provides
@@ -216,7 +222,7 @@ class NetworkingModule {
     @Singleton
     fun provideCommonsPageEditClient(
         @Named(NAMED_COMMONS_CSRF) csrfTokenClient: CsrfTokenClient,
-        @Named("commons-page-edit-service") pageEditInterface: PageEditInterface
+        @Named("commons-page-edit-service") pageEditInterface: PageEditInterface,
     ): PageEditClient = PageEditClient(csrfTokenClient, pageEditInterface)
 
     /**
@@ -231,13 +237,12 @@ class NetworkingModule {
     @Singleton
     fun provideWikidataPageEditClient(
         @Named(NAMED_WIKI_CSRF) csrfTokenClient: CsrfTokenClient,
-        @Named("wikidata-page-edit-service") pageEditInterface: PageEditInterface
+        @Named("wikidata-page-edit-service") pageEditInterface: PageEditInterface,
     ): PageEditClient = PageEditClient(csrfTokenClient, pageEditInterface)
 
     @Provides
     @Singleton
-    fun provideMediaInterface(factory: CommonsServiceFactory): MediaInterface =
-        factory.create(BuildConfig.COMMONS_URL)
+    fun provideMediaInterface(factory: CommonsServiceFactory): MediaInterface = factory.create(BuildConfig.COMMONS_URL)
 
     /**
      * Provides a Retrofit service for accessing the commons wiki site via [WikidataMediaInterface].
@@ -272,8 +277,7 @@ class NetworkingModule {
 
     @Provides
     @Singleton
-    fun provideUserInterface(factory: CommonsServiceFactory): UserInterface =
-        factory.create(BuildConfig.COMMONS_URL)
+    fun provideUserInterface(factory: CommonsServiceFactory): UserInterface = factory.create(BuildConfig.COMMONS_URL)
 
     @Provides
     @Singleton
@@ -288,14 +292,13 @@ class NetworkingModule {
     @Singleton
     fun providePageMediaInterface(
         @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) wikiSite: WikiSite,
-        factory: CommonsServiceFactory
+        factory: CommonsServiceFactory,
     ): PageMediaInterface = factory.create(wikiSite.url())
 
     @Provides
     @Singleton
     @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
-    fun provideLanguageWikipediaSite(): WikiSite =
-        WikiSite.forDefaultLocaleLanguageCode()
+    fun provideLanguageWikipediaSite(): WikiSite = WikiSite.forDefaultLocaleLanguageCode()
 
     companion object {
         private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"

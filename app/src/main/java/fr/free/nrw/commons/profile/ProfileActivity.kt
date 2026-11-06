@@ -2,17 +2,12 @@ package fr.free.nrw.commons.profile
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.FileProvider
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.auth.SessionManager
@@ -22,10 +17,7 @@ import fr.free.nrw.commons.profile.achievements.AchievementsFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
-import fr.free.nrw.commons.utils.DialogUtil
-import java.io.File
-import java.io.FileOutputStream
-import java.util.Locale
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -33,7 +25,6 @@ import javax.inject.Inject
  * each tab will have their own fragments
  */
 class ProfileActivity : BaseActivity() {
-
     lateinit var binding: ActivityProfileBinding
 
     @Inject
@@ -78,30 +69,49 @@ class ProfileActivity : BaseActivity() {
         binding.viewPager.adapter = viewPagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         setTabs()
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (contributionsFragment?.mediaDetailPagerFragment?.isVisible == true) {
+                        contributionsFragment?.backButtonClicked()
+                        binding.tabLayout.visibility = View.VISIBLE
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
+                }
+            },
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
     private fun setTabs() {
-        achievementsFragment = AchievementsFragment().apply {
-            arguments = bundleOf(KEY_USERNAME to userName)
-        }
+        achievementsFragment =
+            AchievementsFragment().apply {
+                arguments = bundleOf(KEY_USERNAME to userName)
+            }
 
-        leaderboardFragment = LeaderboardFragment().apply {
-            arguments = bundleOf(KEY_USERNAME to userName)
-        }
+        leaderboardFragment =
+            LeaderboardFragment().apply {
+                arguments = bundleOf(KEY_USERNAME to userName)
+            }
 
-        contributionsFragment = ContributionsFragment().apply {
-            arguments = bundleOf(KEY_USERNAME to userName)
-        }
+        contributionsFragment =
+            ContributionsFragment().apply {
+                arguments = bundleOf(KEY_USERNAME to userName)
+            }
 
         viewPagerAdapter.setTabs(
             R.string.achievements_tab_title to achievementsFragment,
             R.string.leaderboard_tab_title to leaderboardFragment,
-            R.string.contributions_fragment to contributionsFragment!!
+            R.string.contributions_fragment to contributionsFragment!!,
         )
         viewPagerAdapter.notifyDataSetChanged()
     }
@@ -120,63 +130,16 @@ class ProfileActivity : BaseActivity() {
         return when (item.itemId) {
             R.id.share_app_icon -> {
                 val rootView = window.decorView.findViewById<View>(android.R.id.content)
-                val screenShot = getScreenShot(rootView)
+                val screenshotSharer = ProfileScreenshotSharer(this)
+                val screenShot = screenshotSharer.getScreenShot(rootView)
                 if (screenShot == null) {
-                    Log.e("ERROR", "ScreenShot is null")
+                    Timber.e("ScreenShot is null")
                     return false
                 }
-                showAlert(screenShot)
+                screenshotSharer.showAlert(screenShot)
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    fun showAlert(screenshot: Bitmap) {
-        val view = layoutInflater.inflate(R.layout.image_alert_layout, null)
-        val screenShotImage = view.findViewById<ImageView>(R.id.alert_image)
-        val shareMessage = view.findViewById<TextView>(R.id.alert_text)
-
-        screenShotImage.setImageBitmap(screenshot)
-        shareMessage.setText(R.string.achievements_share_message)
-
-        DialogUtil.showAlertDialog(
-            this,
-            null,
-            null,
-            getString(R.string.about_translate_proceed),
-            getString(R.string.cancel),
-            { shareScreen(screenshot) },
-            {},
-            view
-        )
-    }
-
-    private fun shareScreen(bitmap: Bitmap) {
-        try {
-            val file = File(externalCacheDir, "screen.png")
-            FileOutputStream(file).use { out ->
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-                out.flush()
-            }
-            file.setReadable(true, false)
-
-            val fileUri = FileProvider.getUriForFile(
-                applicationContext,
-                "$packageName.provider",
-                file
-            )
-
-            grantUriPermission(packageName, fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                putExtra(Intent.EXTRA_STREAM, fileUri)
-                type = "image/png"
-            }
-            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
@@ -186,35 +149,8 @@ class ProfileActivity : BaseActivity() {
         outState.putBoolean(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
     }
 
-    override fun onBackPressed() {
-        if (contributionsFragment?.mediaDetailPagerFragment?.isVisible == true) {
-            contributionsFragment?.backButtonClicked()
-            binding.tabLayout.visibility = View.VISIBLE
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     fun setTabLayoutVisibility(isVisible: Boolean) {
         binding.tabLayout.visibility = if (isVisible) View.VISIBLE else View.GONE
-    }
-
-    /**
-     * To take screenshot of the screen and return it in Bitmap format
-     *
-     * @param view
-     * @return
-     */
-    fun getScreenShot(view: View): Bitmap? {
-        val screenView = view.rootView
-        screenView.isDrawingCacheEnabled = true
-        val drawingCache = screenView.drawingCache
-        if (drawingCache != null) {
-            val bitmap = Bitmap.createBitmap(drawingCache)
-            screenView.isDrawingCacheEnabled = false
-            return bitmap
-        }
-        return null
     }
 
     companion object {
@@ -222,12 +158,17 @@ class ProfileActivity : BaseActivity() {
         const val KEY_SHOULD_SHOW_CONTRIBUTIONS = "shouldShowContributions"
 
         @JvmStatic
-        fun startYourself(context: Context, userName: String, shouldShowContributions: Boolean) {
-            val intent = Intent(context, ProfileActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                putExtra(KEY_USERNAME, userName)
-                putExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
-            }
+        fun startYourself(
+            context: Context,
+            userName: String,
+            shouldShowContributions: Boolean,
+        ) {
+            val intent =
+                Intent(context, ProfileActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    putExtra(KEY_USERNAME, userName)
+                    putExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions)
+                }
             context.startActivity(intent)
         }
     }

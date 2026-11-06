@@ -3,6 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/category_layout"
+  android:layoutDirection="locale"
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
 
@@ -10,26 +11,31 @@
     android:id="@+id/upload_category_checkbox"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:minWidth="48dp"
+    android:minHeight="48dp"
     android:checkMark="?android:attr/textCheckMark"
     android:checked="false"
     android:gravity="center_vertical"
     android:padding="@dimen/tiny_gap"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/category_image"
-    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <com.facebook.drawee.view.SimpleDraweeView
     android:id="@+id/category_image"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:paddingEnd="@dimen/tiny_gap"
+    android:layout_marginStart="@dimen/tiny_gap"
+    android:layout_marginEnd="@dimen/tiny_gap"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toRightOf="@+id/upload_category_checkbox"
+    app:layout_constraintStart_toEndOf="@+id/upload_category_checkbox"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/text_container"
     app:placeholderImage="@drawable/commons" />
 
   <LinearLayout
+    android:id="@+id/text_container"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"

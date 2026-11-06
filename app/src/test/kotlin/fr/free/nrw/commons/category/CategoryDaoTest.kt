@@ -4,8 +4,8 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
@@ -17,18 +17,18 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_DESCRIPTION
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_LAST_USED
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_THUMBNAIL
-import fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_TIMES_USED
-import fr.free.nrw.commons.category.CategoryDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.category.CategoryDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.category.CategoryDao.Table.onCreate
-import fr.free.nrw.commons.category.CategoryDao.Table.onDelete
-import fr.free.nrw.commons.category.CategoryDao.Table.onUpdate
+import fr.free.nrw.commons.category.CategoryTable.ALL_FIELDS
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_ID
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_LAST_USED
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_NAME
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_THUMBNAIL
+import fr.free.nrw.commons.category.CategoryTable.COLUMN_TIMES_USED
+import fr.free.nrw.commons.category.CategoryTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.category.CategoryTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.category.CategoryTable.onCreate
+import fr.free.nrw.commons.category.CategoryTable.onDelete
+import fr.free.nrw.commons.category.CategoryTable.onUpdate
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.uriForId
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -55,7 +55,7 @@ class CategoryDaoTest {
             COLUMN_TIMES_USED,
         )
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
     private val queryCaptor = argumentCaptor<Array<String>>()
 
@@ -153,7 +153,7 @@ class CategoryDaoTest {
                 eq(category.contentUri)!!,
                 captor.capture(),
                 isNull(),
-                isNull()
+                isNull(),
             )
             captor.firstValue.let { cv ->
                 assertEquals(5, cv.size())
@@ -194,7 +194,7 @@ class CategoryDaoTest {
         }
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun testSaveTranslatesRemoteExceptions() {
         whenever(client.insert(isA(), isA())).thenThrow(RemoteException(""))
         testObject.save(Category())
@@ -247,13 +247,13 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findCategoryTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("showImageWithItem")
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun recentCategoriesTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenThrow(RemoteException(""))
         testObject.recentCategories(1)
@@ -312,7 +312,7 @@ class CategoryDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
             }
         }

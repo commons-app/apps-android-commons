@@ -193,8 +193,8 @@ class DescriptionEditActivityUnitTest {
         method.isAccessible = true
         method.invoke(
             activity,
-            android.R.string.ok,
-            android.R.string.ok,
+            R.string.ok,
+            R.string.ok,
         )
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
         assertEquals(dialog.isShowing, true)

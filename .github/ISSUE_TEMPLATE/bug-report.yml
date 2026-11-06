@@ -70,7 +70,7 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Screen-shots
+      label: Screenshots
       description: Add screenshots related to the issue (if available). Can be created by pressing the Volume Down and Power Button at the same time on Android 4.0 and higher.
     validations:
       required: false

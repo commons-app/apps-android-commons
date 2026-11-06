@@ -12,7 +12,9 @@
 * Cyclicus
 * DavidL
 * Derugon
+* EmDashUser002
 * Eneelk
+* Feldo
 * Fitoschido
 * Friday83260
 * Gomoko
@@ -23,6 +25,7 @@
 * Iketsi
 * Jean-Frédéric
 * JenyxGym
+* Jérémy-Günther-Heinz Jähnick
 * KATRINE1992
 * Koreller
 * Mahabarata
@@ -47,6 +50,7 @@
 * Urhixidur
 * VIGNERON
 * Verdy p
+* WillyM
 * Wladek92
 * Y-M D
 -->
@@ -76,22 +80,18 @@
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Démarrage des téléversements</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d téléversement en cours</item>
-    <item quantity="other">%d téléversements en cours</item>
+    <item quantity="one">%1$d téléversement en cours</item>
+    <item quantity="other">%1$d téléversements en cours</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">Cette image sera sous licence %1$s.</item>
-    <item quantity="other">Ces images seront sous licence %1$s.</item>
+    <item quantity="one">Cette image sera sous licence %1$s</item>
+    <item quantity="other">Ces images seront sous licence %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d téléversement</item>
@@ -131,7 +131,7 @@
   <string name="uploading_queued">Téléversement mis en file d’attente (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
-  <string name="upload_progress_notification_title_start">Téléversement du fichier : %s</string>
+  <string name="upload_progress_notification_title_start">Téléversement du fichier : %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s en cours de téléversement</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
@@ -181,6 +181,7 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="title_activity_featured_images">Images remarquables</string>
+  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisi comme étant de la meilleure qualité pour le site.</string>
   <string name="title_activity_custom_selector">Sélecteur personnalisé</string>
   <string name="title_activity_category_details">Catégorie</string>
   <string name="title_activity_review">Relecture par les pairs</string>
@@ -197,14 +198,17 @@
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
+  <string name="language_search_type_language_name">Tapez le nom de la langue</string>
+  <string name="language_search_recent_searches">Recherches récentes</string>
+  <string name="language_search_all_languages">Toutes les langues</string>
   <string name="media_upload_policy">En soumettant cette image, je déclare qu’elle est l’oeuvre de mon propre travail, qu’elle ne contient pas d’élément protégé par les droits d’auteurs ni d’auto-portraits et qu’elle est par ailleurs conforme aux &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;règles de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence par défaut</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="preference_theme">Thème</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution – Partage des conditions à l\'identique 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa">Attribution – Partage des conditions 3.0</string>
+  <string name="license_name_cc_by_sa">Attribution – Partage des conditions à l\'identique 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -268,15 +272,14 @@
   <string name="_2fa_code">Code 2FA</string>
   <string name="email_auth_code">Code de vérification par email</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
   <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Pont Arc-en-ciel</string>
   <string name="welcome_image_tulip">Tulipe</string>
-  <string name="welcome_image_welcome_wikipedia">Bienvenue de Wikipédia</string>
-  <string name="welcome_image_welcome_copyright">Droit d’auteur de bienvenue</string>
+  <string name="welcome_image_welcome_wikipedia">Une image schématique d\'un article générique de Wikipédia.</string>
+  <string name="welcome_image_welcome_copyright">Un dessin d\'une pile de papiers avec le symbole du droit d\'auteur en croix.</string>
   <string name="welcome_image_sydney_opera_house">Maison de l’Opéra de Sydney</string>
   <string name="cancel">Annuler</string>
   <string name="navigation_drawer_open">Ouvrir</string>
@@ -302,6 +305,7 @@
   <string name="upload_problem_image_dark">L’image est trop sombre.</string>
   <string name="upload_problem_image_blurry">L’image est floue.</string>
   <string name="upload_problem_image_duplicate">L’image est déjà sur Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Votre image est dans un format non pris en charge par le serveur Commons, donc l\'application l\'a convertie en JPG.</string>
   <string name="upload_problem_different_geolocation">Cette image a été prise à un emplacement différent.</string>
   <string name="upload_problem_fbmd">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image prise sur les comptes Facebook d’autres personnes.</string>
   <string name="upload_problem_do_you_continue">Voulez-vous tout de même téléverser cette image ?</string>
@@ -309,6 +313,7 @@
   <string name="upload_connection_error_alert_detail">Le processus de téléchargement nécessite un accès internet actif. Veuillez vérifier votre connexion internet.</string>
   <string name="upload_problem_image">Problèmes trouvés dans l’image</string>
   <string name="internet_downloaded">Veuillez ne téléverser que des images que vous avez prises vous-même. Ne téléversez aucune image que vous avez téléchargée depuis Internet.</string>
+  <string name="preferences_uploads">Téléversements</string>
   <string name="use_external_storage">Enregistrer les prises de vue dans l’application</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’application photo dans le stockage de votre appareil</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
@@ -318,6 +323,13 @@
   <string name="null_url">Erreur ! URL non trouvée</string>
   <string name="nominate_deletion">Nommer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
+  <string name="file_deleted_from_commons">Ce fichier a été supprimé de Commons.</string>
+  <string name="contribution_deleted">Supprimé</string>
+  <string name="deleted_file_activity_title">Fichier supprimé</string>
+  <string name="deleted_file_explanation">Wikimedia Commons supprime les fichiers qui ne sont pas éducatifs ou qui enfreignent ses règles, y compris les violations du droit d\'auteur. Téléversez des photos que vous avez prises vous-même. Les images copiées d\'Internet, les captures d\'écran, les logos et les affiches sont des motifs courants de suppression.</string>
+  <string name="deleted_file_view_page">Voir la page du fichier</string>
+  <string name="deleted_file_view_discussion">Lire la discussion sur la suppression</string>
+  <string name="deleted_file_policies">Politiques et lignes directrices de Commons</string>
   <string name="nominated_see_more">Voir la page web pour les détails</string>
   <string name="skip_login">Passer</string>
   <string name="navigation_item_login">Se connecter</string>
@@ -380,6 +392,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Est-ce que cette photo est prête pour être téléversée ?</string>
   <string name="question">Question</string>
+  <string name="quiz_i_am_not_sure">Je ne suis pas sûr{{GENDER:||e}}</string>
   <string name="result">Résultat</string>
   <string name="quiz_back_button">Si vous continuez à téléverser des images qui nécessitent d’être supprimées, votre compte sera sans doute bloqué. Voulez-vous réellement terminer le questionnaire ?</string>
   <string name="quiz_alert_message">Plus de %1$s des images que vous avez téléversées ont été supprimées. Si vous continuez à téléverser des images qui nécessitent d’être supprimées, votre compte sera sans doute bloqué.\n\nVoulez-vous revoir le tutoriel puis répondre à un questionnaire pour vous aider à apprendre quel type d’images vous devriez ou ne devriez pas téléverser ?</string>
@@ -389,6 +402,7 @@
   <string name="blurry_image_answer">L’un des objectifs de Commons est de pouvoir rassembler les images de qualité. C\'est pourquoi, les images médiocres ne doivent pas y être téléversées. Essayez toujours de prendre de bonnes photos avec un bel éclairage.</string>
   <string name="construction_event_answer">Les images qui dépeignent la technologie ou la culture sont particulièrement bienvenues sur Commons.</string>
   <string name="congratulatory_message_quiz">Vous avez %1$s des réponses correctes. Félicitations !</string>
+  <string name="quiz_continue">Continuer</string>
   <string name="warning_for_no_answer">Sélectionnez l’une des deux options pour répondre à la question</string>
   <string name="user_not_logged_in">Session expirée. Veuillez vous reconnecter.</string>
   <string name="quiz_result_share_message">Partagez votre quizz avec vos amis !</string>
@@ -398,6 +412,13 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="rotate">Pivoter</string>
+  <string name="crop">Recadrer</string>
+  <string name="blur">Flou</string>
+  <string name="autoblur">Flou automatique</string>
+  <string name="autodetect_title">Floutage automatique des visages et des plaques d\'immatriculation.</string>
+  <string name="autodetect_description">Vous pouvez éliminer les faux positifs à l\'aide du bouton ❌ de chaque zone de floutage.</string>
+  <string name="autoblur_failed_to_load">Impossible de charger l\'image pour AutoBlur</string>
+  <string name="autoblur_no_region_detected">Aucune zone détectée pour AutoBlur</string>
   <string name="error_fetching_nearby_places">Impossible de charger les endroits proches</string>
   <string name="no_pictures_in_this_area">Aucune image dans cette zone</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
@@ -412,12 +433,11 @@
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
   <string name="badges">Badges</string>
-  <string name="statistics">Statistiques</string>
   <string name="statistics_thanks">Remerciements reçus</string>
   <string name="statistics_featured">Images remarquables</string>
   <string name="statistics_wikidata_edits">Images par « Lieux à proximité »</string>
-  <string name="level">Niveau %d</string>
-  <string name="profile_withLevel">%s (niveau %s)</string>
+  <string name="level">Niveau %1$d</string>
+  <string name="profile_withLevel">%1$s (niveau %2$s)</string>
   <string name="images_uploaded">Images téléversées</string>
   <string name="image_reverts">Images non annulées</string>
   <string name="images_used_by_wiki">Images utilisées</string>
@@ -429,6 +449,7 @@
   <string name="images_used_explanation">Le nombre d’images que vous avez téléchargé sur Commons qui sont utilisées dans des articles de Wikimédia</string>
   <string name="error_occurred">Une erreur est survenue !</string>
   <string name="notifications_channel_name_all">Notification de Commons</string>
+  <string name="notifications_channel_name_uploads">Avancement du téléversement</string>
   <string name="preference_author_name_toggle">Utiliser un nom d’auteur personnalisé</string>
   <string name="preference_author_name_toggle_summary">Utiliser un nom d’auteur personnalisé au lieu de votre nom d’utilisateur lorsque vous téléversez des photos</string>
   <string name="preference_author_name">Nom d’auteur personnalisé</string>
@@ -466,6 +487,9 @@
   <string name="no_categories_selected_warning_desc">Les images sans catégories sont rarement utilisables. Voulez-vous vraiment continuer sans sélectionner des catégories  appropriées ?</string>
   <string name="no_depictions_selected">Aucun élément représenté sélectionné</string>
   <string name="no_depictions_selected_warning_desc">Les images avec des éléments représentés sont plus faciles à trouver et plus susceptibles d’être utilisées. Voulez-vous vraiment continuer sans sélectionner des éléments représentés ?</string>
+  <string name="depictions_choose_from_map">Choisissez sur la carte</string>
+  <string name="depictions_map_confirm">Confirmer</string>
+  <string name="depictions_map_no_photo_location">La photo n\'a pas de localisation, montrer votre position actuelle.</string>
   <string name="back_button_warning">Annuler le téléversement</string>
   <string name="back_button_warning_desc">L’utilisation du bouton de retour annulera ce téléversement et vous perdrez votre progression</string>
   <string name="back_button_continue">Continuer le téléversement</string>
@@ -477,11 +501,13 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Demander l’autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire à la fonctionnalité de notifications de proximité.</string>
-  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos réussites</string>
+  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos réalisations</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Vous avez effectué tellement de contributions que notre système de calcul des accomplissements est débordé. Il s’agit là de l’accomplissement ultime.</string>
   <string name="ends_on">Se termine le :</string>
   <string name="display_campaigns">Campagnes d’affichage</string>
   <string name="display_campaigns_explanation">Voir les campagnes en cours</string>
+  <string name="show_deletion_button">Afficher le bouton de suppression</string>
+  <string name="show_deletion_button_explanation">Activer le bouton \" Supprimer le dossier \" dans le sélecteur personnalisé</string>
   <string name="in_app_camera_location_access_explanation">Permettre à l’application de récupérer l’emplacement si l’appareil photo ne l’enregistre pas. Certains appareils ne le font pas. Dans ces cas, laisser l’application récupérer et attacher l’emplacement rend votre contribution plus utile. Vous pouvez le modifier à tout moment dans les Paramètres.</string>
   <string name="option_allow">Autoriser</string>
   <string name="option_dismiss">Rejeter</string>
@@ -505,11 +531,11 @@
   <string name="check_category_failure_message">Impossible de demander un contrôle de catégorie pour %1$s</string>
   <string name="check_category_toast">Demande en cours du contrôle de la catégorie pour %1$s</string>
   <string name="nominate_for_deletion_done">Fait</string>
-  <string name="send_thank_success_title">Envoi des remerciements : succès</string>
+  <string name="send_thank_success_title">Envoyer des remerciements : succès</string>
   <string name="send_thank_success_message">Remerciements envoyés avec succès à %1$s</string>
   <string name="send_thank_failure_message">Échec de l’envoi des remerciements à %1$s</string>
   <string name="send_thank_failure_title">Envoi des remerciements : échec</string>
-  <string name="send_thank_toast">Envoi de remerciements pour %1$s</string>
+  <string name="send_thank_toast">Envoi des remerciements pour %1$s</string>
   <string name="review_copyright">Ceci est-il conforme aux règles des droits d’auteur ?</string>
   <string name="review_category">Est-ce la bonne catégorie ?</string>
   <string name="review_spam">Est-ce dans le champ du projet ?</string>
@@ -536,10 +562,9 @@
   <string name="menu_option_unread">Afficher les non lus</string>
   <string name="error_occurred_in_picking_images">Une erreur est survenue lors de la sélection des images</string>
   <string name="please_wait">Veuillez patienter...</string>
-  <string name="images_featured_explanation">Les images en vedette sont des images de photographes et d’illustrateurs très doués que la communauté de Wikimédia Commons a choisies comme étant de la meilleure qualité pour le site.</string>
   <string name="images_via_nearby_explanation">Les images téléversées par « Lieux à proximité » sont les images téléversées lors de la découverte de lieux sur la carte.</string>
   <string name="thanks_received_explanation">Cette fonctionnalité permet aux contributeurs d’envoyer une notification de remerciement aux utilisateurs qui font des modifications utiles ― en utilisant un petit lien de remerciement sur la page historique ou sur celle du diff.</string>
-  <string name="copy_image_caption_description">Copier vers les médias subséquents</string>
+  <string name="copy_image_caption_description">Copier vers les médias suivants</string>
   <string name="copied_successfully">Copié</string>
   <string name="welcome_do_upload_content_description">Exemples de bonnes images à téléverser sur Commons</string>
   <string name="welcome_dont_upload_content_description">Exemples d’images à ne pas téléverser</string>
@@ -554,11 +579,10 @@
   <string name="exif_tag_name_lensModel">Modèle de lentille</string>
   <string name="exif_tag_name_serialNumbers">Numéros de série</string>
   <string name="exif_tag_name_software">Logiciel</string>
-  <string name="media_location_permission_denied">Accès à l’emplacement du média refusé</string>
-  <string name="add_location_manually">Nous ne pourrons pas obtenir automatiquement les données de localisation des images que vous téléchargez. Veuillez ajouter l’emplacement approprié pour chaque image avant de la soumettre.</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
   <string name="image_info">Informations sur l’image</string>
+  <string name="upload_categories_dont_show_this_message_again">Ne plus afficher ce message</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
   <string name="no_depiction_found">Aucun élément représenté trouvé</string>
   <string name="upload_cancelled">Téléversement annulé</string>
@@ -574,6 +598,8 @@
   <string name="delete_helper_ask_spam_selfie">un selfie qui n’est utilisé dans aucun article</string>
   <string name="delete_helper_ask_spam_blurry">totalement flou</string>
   <string name="delete_helper_ask_spam_nonsense">non-sens, absolument inutilisable dans n’importe quel article</string>
+  <string name="delete_helper_ask_spam_other">Autre</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Photo de presse</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Photo aléatoire reprise d’Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -611,7 +637,7 @@
   <string name="description_activity_title">Modifier les descriptions et les légendes</string>
   <string name="share_image_via">Partager l’image via</string>
   <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
-  <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
+  <string name="no_achievements_yet">%1$s n’a encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
   <string name="text_copy">Texte copié dans le presse-papiers</string>
   <string name="notification_mark_read">Notification marquée comme lue</string>
@@ -664,7 +690,7 @@
   <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
   <string name="wikipedia_instructions_step_6">6. Modifier le wikicode pour un positionnement approprié, si nécessaire. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
-  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papiers</string>
+  <string name="copy_wikicode_to_clipboard">Copier le wikitexte dans le presse-papiers</string>
   <string name="pause">pause</string>
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
@@ -705,6 +731,8 @@
   <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des éléments représentés, les catégories ne sont qu’en anglais.</string>
   <string name="license_tooltip">Communs rend vos images réutilisables et adaptées à chacun. Voulez-vous renoncer à tous les droits ? Voulez-vous être crédité pour cela ? Voulez-vous que les adaptations utilisent la même licence ?</string>
   <string name="depicts_step_title">Éléments représentés</string>
+  <string name="depicts_label">Libellé</string>
+  <string name="depicts_description">Description</string>
   <string name="license_step_title">Licence du média</string>
   <string name="media_detail_step_title">Détails du média</string>
   <string name="menu_view_category_page">Voir la page de catégorie</string>
@@ -731,11 +759,12 @@
   <string name="back">Retour</string>
   <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’image personnalisé</string>
   <string name="custom_selector_info_text1">Ce sélecteur affiche quelles images vous avez déjà téléversées dans Commons.</string>
-  <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
+  <string name="custom_selector_info_text2">Contrairement à l’image de gauche, celle de droite a le logo Commons qui indique qu’elle a déjà été téléversée.\n\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
   <string name="custom_selector_over_limit_warning">Pour des raisons techniques, l’application ne peut pas charger de façon fiable plus de %1$d images à la fois. La limite de téléchargement de %1$d a été dépassée de %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Ignorer</string>
+  <string name="custom_selector_duplicates_warning">Certaines images sélectionnées sont des copies et seront supprimées avant de le téléversement.</string>
   <string name="custom_selector_button_limit_text">Max : %1$d</string>
   <string name="custom_selector_limit_error_desc">Erreur : Limite de téléchargement dépassée</string>
   <string name="place_state_wlm">WLM</string>
@@ -747,8 +776,10 @@
   <string name="wlm_campaign_description">« Wiki aime les monuments » est un concours international de photographie des monuments, organisé par Wikimédia.</string>
   <string name="need_permission">Nécessite une permission</string>
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
-  <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
-  <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
+  <string name="location_off_dialog_text">Veuillez activer les services de localisation pour afficher les lieux à proximité.</string>
+  <string name="location_permission_rationale">Autorisation facultative : obtenir l’emplacement actuel pour des suggestions de catégorie</string>
+  <string name="contributions_of_user">Contributions de l’utilisateur : %1$s</string>
+  <string name="achievements_of_user">Réussites de l’utilisateur : %1$s</string>
   <string name="menu_view_user_page">Afficher le profil de l\'utilisateur</string>
   <string name="edit_depictions">Modifier les descriptions</string>
   <string name="edit_categories">Modifier les catégories</string>
@@ -780,8 +811,8 @@
   <string name="unmark_as_not_for_upload">Démarquer comme à ne pas téléverser</string>
   <string name="marking_as_not_for_upload">Marquer comme non destiné au téléchargement</string>
   <string name="unmarking_as_not_for_upload">Ne plus marquer comme non destiné au téléchargement</string>
-  <string name="show_already_actioned_pictures">Afficher les images déjà actionnées</string>
-  <string name="hiding_already_actioned_pictures">Masquer les images déjà actionnées</string>
+  <string name="show_already_actioned_pictures">Afficher les images déjà traitées</string>
+  <string name="hiding_already_actioned_pictures">Masquer les images déjà traitées</string>
   <string name="no_more_images_found">Aucune autre image trouvée</string>
   <string name="this_image_is_already_uploaded">Cette image est déjà téléversée</string>
   <string name="can_not_select_this_image_for_upload">Impossible de sélectionner cette image pour le téléversement</string>
@@ -821,11 +852,11 @@
   <string name="do_you_want_to_open_kml_file">Voulez-vous ouvrir le fichier KML ?</string>
   <string name="failed_to_save_kml_file">Échec d’enregistrement du fichier KML.</string>
   <string name="failed_to_save_gpx_file">Échec d’enregistrement du fichier GPX.</string>
-  <string name="saving_kml_file">Fichier KML enregistré</string>
-  <string name="saving_gpx_file">Fichier GPX enregistré</string>
+  <string name="saving_kml_file">Enregistrer comme un fichier KML...</string>
+  <string name="saving_gpx_file">Enregistrer comme un fichier GPX...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d image sélectionnée</item>
-    <item quantity="other">%d images sélectionnées</item>
+    <item quantity="one">%1$d image sélectionnée</item>
+    <item quantity="other">%1$d images sélectionnées</item>
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
   <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
@@ -844,6 +875,7 @@
   <string name="pending">En attente</string>
   <string name="failed">Échec</string>
   <string name="could_not_load_place_data">Les données du lieu n\'ont pas pu être chargées</string>
+  <string name="warning_for_no_option_selected">Choisissez l\'une des options pour répondre à la question.</string>
   <string name="custom_selector_delete_folder">Supprimer le dossier</string>
   <string name="custom_selector_confirm_deletion_title">Confirmer la suppression</string>
   <string name="custom_selector_confirm_deletion_message">Êtes-vous sûr de vouloir supprimer le dossier %1$s contenant %2$d éléments ?</string>
@@ -862,7 +894,6 @@
   <string name="usages_on_other_wikis_heading">Autres wikis</string>
   <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilisations du fichier</string>
-  <string name="title_activity_single_web_view">SingleWebViewActivity</string>
   <string name="account">Compte</string>
   <string name="vanish_account">Faire disparaître le compte</string>
   <string name="account_vanish_request_confirm_title">Avertissement de disparition du compte</string>
@@ -875,4 +906,25 @@
   <string name="image_tag_line_created_and_uploaded_by">Crée et publiée par: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Créé par %1$s et publiée par %2$s</string>
   <string name="nominated_for_deletion_btn">Nommé pour suppression</string>
+  <string name="custom_selector_max_image_limit_reached">Vous ne pouvez sélectionner qu\'un maximum de %d images.</string>
+  <string name="edit_unsupported_format_explanation">L\'édition intégrée est disponible uniquement pour les fichiers JPEG. Pour modifier d\'autres formats, veuillez utiliser un logiciel ou une application tierce.</string>
+  <string name="license_cc0_description">Aucun droit d\'auteur. Vous cédez tous vos droits, permettant ainsi à quiconque d\'utiliser cette œuvre comme il l\'entend.</string>
+  <string name="license_cc_by_description">Attribution. Chacun est libre de partager et d\'adapter ce contenu à condition de vous en attribuer la paternité.</string>
+  <string name="license_cc_by_sa_description">Attribution - Partage à l\'identique. D\'autres peuvent partager et adapter ce contenu, mais doivent utiliser la même licence et vous mentionner en tant que source.</string>
+  <string name="license_cc0_long_description">Cette licence permet aux réutilisateurs de distribuer, de remixer, d\'adapter et de construire sur le matériel dans n\'importe quel support ou format, sans condition.</string>
+  <string name="license_cc_by_long_description">Cette licence permet aux réutilisateurs de distribuer, remixer, adapter et réutiliser le contenu sur tout support et dans tout format, même à des fins commerciales, à condition que l\'auteur soit mentionné.</string>
+  <string name="license_cc_by_sa_long_description">Cette licence permet aux réutilisateurs de distribuer, remixer, adapter et s\'appuyer sur le matériel dans n\'importe quel support ou format, même à des fins commerciales, à condition que l\'auteur soit mentionné et que la nouvelle œuvre soit diffusée sous licence aux mêmes conditions.</string>
+  <string name="error_getting_image_properties">Erreur lors de la récupération des propriétés de l\'image :</string>
+  <string name="error_blur_no_rectangle">Veuillez dessiner au moins un rectangle sur la photo</string>
+  <string name="error_applying_blur">Erreur lors de l\'application du flou</string>
+  <string name="failed_to_apply_crop">Échec de l\'application du recadrage</string>
+  <string name="failed_to_save_image">Impossible d\'enregistrer l\'image</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
+  <string name="unsupported_format_title">Format non pris en charge</string>
+  <string name="unsupported_format_desc">Impossible d\'ouvrir les fichiers sélectionnés. Wikimedia Commons exige impérativement les formats suivants : \n\n %s</string>
+  <string name="unsupported_files_skipped_title">Fichiers non pris en charge ignorés</string>
+  <string name="unsupported_files_skipped_desc">Certains fichiers ont été ignorés en raison d\'un format non pris en charge. L\'application continuera à télécharger les fichiers restants qui correspondent aux formats pris en charge suivants : \n\n %s</string>
 </resources>

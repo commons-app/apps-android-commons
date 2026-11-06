@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Switch
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -20,6 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
@@ -38,7 +37,6 @@ import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.databinding.ProgressDialogBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
@@ -47,6 +45,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -81,8 +80,8 @@ class ImageFragment :
      */
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
-    private var switch: Switch? = null
-    lateinit var filteredImages: ArrayList<Image>
+    private var switch: SwitchMaterial? = null
+    private var filteredImages: ArrayList<Image> = arrayListOf()
 
     /**
      * Stores all images
@@ -159,6 +158,9 @@ class ImageFragment :
     lateinit var contributionDao: ContributionDao
 
     companion object {
+        // todo change span count depending on the device orientation and other factos.
+        private const val SPAN_COUNT = 3
+
         /**
          * Switch state
          */
@@ -211,12 +213,21 @@ class ImageFragment :
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
-        imageAdapter =
-            ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+
+        // ensures imageAdapter is initialized
+        if (!::imageAdapter.isInitialized) {
+            imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+            Timber.d("Initialized imageAdapter in onCreateView")
+        }
         // Set single selection mode if needed
-        val singleSelection = (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
+        val singleSelection =
+            (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(
+                CustomSelectorActivity.EXTRA_SINGLE_SELECTION,
+                false,
+            ) ==
+                true
         imageAdapter.setSingleSelection(singleSelection)
-        gridLayoutManager = GridLayoutManager(context, getSpanCount())
+        gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
         with(binding?.selectorRv) {
             this?.applyEdgeToEdgeBottomPaddingInsets()
             this?.layoutManager = gridLayoutManager
@@ -261,19 +272,25 @@ class ImageFragment :
      * onViewCreated
      * Updates empty text view visibility based on image count, switch state, and loading status.
      */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 combine(
                     imageAdapter.currentImagesCount,
                     switchState,
-                    imageAdapter.isLoadingImages
+                    imageAdapter.isLoadingImages,
                 ) { imageCount, isChecked, isLoadingImages ->
                     Triple(imageCount, isChecked, isLoadingImages)
                 }.collect { (imageCount, isChecked, isLoadingImages) ->
                     binding?.allImagesUploadedOrMarked?.isVisible =
-                        !isLoadingImages && !isChecked && imageCount == 0 && (switch?.isVisible == true)
+                        !isLoadingImages &&
+                        !isChecked &&
+                        imageCount == 0 &&
+                        (switch?.isVisible == true)
                 }
             }
         }
@@ -309,7 +326,7 @@ class ImageFragment :
         try {
             (getActivity() as CustomSelectorActivity).setOnDataListener(this)
         } catch (ex: Exception) {
-            ex.printStackTrace()
+            Timber.e(ex, "Could not set data listener on CustomSelectorActivity")
         }
     }
 
@@ -356,21 +373,16 @@ class ImageFragment :
     }
 
     /**
-     * getSpanCount for GridViewManager.
-     *
-     * @return spanCount.
-     */
-    private fun getSpanCount(): Int {
-        return 3
-        // todo change span count depending on the device orientation and other factos.
-    }
-
-    /**
      * onResume
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
      */
     override fun onResume() {
-        imageAdapter.notifyDataSetChanged()
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.notifyDataSetChanged()
+            Timber.d("Notified imageAdapter in onResume")
+        } else {
+            Timber.w("imageAdapter not initialized in onResume")
+        }
         super.onResume()
     }
 
@@ -380,50 +392,82 @@ class ImageFragment :
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
-        imageAdapter.cleanUp()
-
-        val position =
-            (selectorRV?.layoutManager as GridLayoutManager)
-                .findFirstVisibleItemPosition()
-
-        // Check for empty RecyclerView.
-        if (position != -1 && filteredImages.size > 0) {
-            context?.let { context ->
-                context
-                    .getSharedPreferences(
-                        "CustomSelector",
-                        MODE_PRIVATE,
-                    )?.let { prefs ->
-                        prefs.edit()?.let { editor ->
-                            editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
-                        }
-                    }
-            }
-        }
+        cleanupAdapter()
+        saveLastVisibleItemId()
         super.onDestroy()
+    }
+
+    private fun cleanupAdapter() {
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.cleanUp()
+            Timber.d("Cleaned up imageAdapter in onDestroy")
+        } else {
+            Timber.w("imageAdapter not initialized in onDestroy, skipping cleanup")
+        }
+    }
+
+    private fun saveLastVisibleItemId() {
+        val position =
+            (selectorRV?.layoutManager as? GridLayoutManager)
+                ?.findFirstVisibleItemPosition() ?: -1
+
+        if (position == -1 || filteredImages.isEmpty() || !::imageAdapter.isInitialized) {
+            Timber.d(
+                "Skipped saving item ID: position=%d, filteredImages.size=%d, imageAdapter initialized=%b",
+                position,
+                filteredImages.size,
+                ::imageAdapter.isInitialized,
+            )
+            return
+        }
+
+        val context = context
+        val prefs = context?.getSharedPreferences("CustomSelector", MODE_PRIVATE) ?: return
+        val imageId = imageAdapter.getImageIdAt(position)
+        prefs.edit().putLong("ItemId", imageId).apply()
+        Timber.d("Saved last visible item ID: %d", imageId)
     }
 
     override fun onDestroyView() {
         _binding = null
+        selectorRV = null
+        loader = null
+        switch = null
+        progressLayout = null
         super.onDestroyView()
     }
 
     override fun refresh() {
-        imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+            Timber.d("Refreshed imageAdapter")
+        } else {
+            Timber.w("imageAdapter not initialized in refresh")
+        }
     }
 
     /**
      * Removes the image from the actionable image map
      */
     fun removeImage(image: Image) {
-        imageAdapter.removeImageFromActionableImageMap(image)
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.removeImageFromActionableImageMap(image)
+            Timber.d("Removed image from actionable image map")
+        } else {
+            Timber.w("imageAdapter not initialized in removeImage")
+        }
     }
 
     /**
      * Clears the selected images
      */
     fun clearSelectedImages() {
-        imageAdapter.clearSelectedImages()
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.clearSelectedImages()
+            Timber.d("Cleared selected images")
+        } else {
+            Timber.w("imageAdapter not initialized in clearSelectedImages")
+        }
     }
 
     /**
@@ -434,6 +478,15 @@ class ImageFragment :
         selectedImages: ArrayList<Image>,
         shouldRefresh: Boolean,
     ) {
+        if (::imageAdapter.isInitialized) {
+            imageAdapter.setSelectedImages(selectedImages)
+            if (shouldRefresh) {
+                imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+            }
+            Timber.d("Passed %d selected images to imageAdapter, shouldRefresh=%b", selectedImages.size, shouldRefresh)
+        } else {
+            Timber.w("imageAdapter not initialized in passSelectedImages")
+        }
     }
 
     /**
@@ -443,6 +496,7 @@ class ImageFragment :
         if (!progressDialog.isShowing) {
             progressDialogLayout.progressDialogText.text = text
             progressDialog.show()
+            Timber.d("Showing mark/unmark progress dialog: %s", text)
         }
     }
 
@@ -452,13 +506,19 @@ class ImageFragment :
     fun dismissMarkUnmarkProgressDialog() {
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
+            Timber.d("Dismissed mark/unmark progress dialog")
         }
     }
 
     private fun getUploadingContributions(): List<Contribution> =
         contributionDao
             .getContribution(
-                listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED),
+                listOf(
+                    Contribution.STATE_IN_PROGRESS,
+                    Contribution.STATE_FAILED,
+                    Contribution.STATE_QUEUED,
+                    Contribution.STATE_PAUSED,
+                ),
             )?.subscribeOn(Schedulers.io())
             ?.blockingGet() ?: emptyList()
 }

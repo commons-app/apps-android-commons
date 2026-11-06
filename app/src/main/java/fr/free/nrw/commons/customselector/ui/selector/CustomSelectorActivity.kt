@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -46,6 +48,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -107,7 +110,7 @@ class CustomSelectorActivity :
     /**
      * Maximum number of images that can be selected.
      */
-    private var uploadLimit: Int = 20
+    private var uploadLimit: Int = MAX_IMAGE_COUNT
 
     /**
      * Flag that is marked true when the amount
@@ -161,14 +164,15 @@ class CustomSelectorActivity :
     /**
      * Waits for confirmation of delete folder
      */
-    private val startForFolderDeletionResult = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()){
-        result -> onDeleteFolderResultReceived(result)
-    }
+    private val startForFolderDeletionResult =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+            onDeleteFolderResultReceived(result)
+        }
 
-    private val startForResult = registerForActivityResult(StartActivityForResult()){ result ->
-        onFullScreenDataReceived(result)
-    }
-
+    private val startForResult =
+        registerForActivityResult(StartActivityForResult()) { result ->
+            onFullScreenDataReceived(result)
+        }
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -188,7 +192,7 @@ class CustomSelectorActivity :
         toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
         bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
         binding.partialAccessIndicator.setContent {
-            partialStorageAccessIndicator(
+            PartialStorageAccessIndicator(
                 isVisible = showPartialAccessIndicator,
                 onManage = {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -214,7 +218,7 @@ class CustomSelectorActivity :
             )
 
         // Check for single selection extra
-        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else 20
+        uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else MAX_IMAGE_COUNT
 
         setupViews()
 
@@ -231,6 +235,26 @@ class CustomSelectorActivity :
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                    val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+                    if (fragment != null && fragment is FolderFragment) {
+                        isImageFragmentOpen = false
+                        changeTitle(getString(R.string.custom_selector_title), 0)
+                    }
+
+                    // hide overflow menu when not in folder
+                    showOverflowMenu = false
+                    setUpToolbar()
+                }
+            },
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -254,7 +278,7 @@ class CustomSelectorActivity :
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
-    private fun onFullScreenDataReceived(result: ActivityResult){
+    private fun onFullScreenDataReceived(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val selectedImages: ArrayList<Image> =
                 result.data!!
@@ -263,14 +287,12 @@ class CustomSelectorActivity :
         }
     }
 
-    private fun onDeleteFolderResultReceived(result: ActivityResult){
-        if (result.resultCode == Activity.RESULT_OK){
+    private fun onDeleteFolderResultReceived(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
             FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
             navigateToCustomSelector()
         }
     }
-
-
 
     /**
      * Show Custom Selector Welcome Dialog.
@@ -449,20 +471,19 @@ class CustomSelectorActivity :
      */
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
-        back.setOnClickListener { onBackPressed() }
+        back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val limitError: ImageButton = findViewById(R.id.image_limit_error)
         limitError.visibility = View.INVISIBLE
         limitError.setOnClickListener { displayUploadLimitWarning() }
 
         val overflowMenu: ImageButton = findViewById(R.id.menu_overflow)
-        if(defaultKvStore.getBoolean("displayDeletionButton")) {
+        if (defaultKvStore.getBoolean("displayDeletionButton")) {
             overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
             overflowMenu.setOnClickListener { showPopupMenu(overflowMenu) }
-        }else{
+        } else {
             overflowMenu.visibility = View.GONE
         }
-
     }
 
     private fun showPopupMenu(anchorView: View) {
@@ -485,20 +506,21 @@ class CustomSelectorActivity :
      * Deletes folder based on Android API version.
      */
     private fun deleteFolder() {
-        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId) ?: run {
-            FolderDeletionHelper.showError(this, "Failed to retrieve folder path", bucketName)
-            return
-        }
+        val folderPath =
+            FolderDeletionHelper.getFolderPath(this, bucketId) ?: run {
+                FolderDeletionHelper.showError(this, "Failed to retrieve folder path", bucketName)
+                return
+            }
 
         val folder = File(folderPath)
         if (!folder.exists() || !folder.isDirectory) {
-            FolderDeletionHelper.showError(this,"Folder not found or is not a directory", bucketName)
+            FolderDeletionHelper.showError(this, "Folder not found or is not a directory", bucketName)
             return
         }
 
         FolderDeletionHelper.confirmAndDeleteFolder(this, folder, startForFolderDeletionResult) { success ->
             if (success) {
-                //for API 30+, navigation is handled in 'onDeleteFolderResultReceived'
+                // for API 30+, navigation is handled in 'onDeleteFolderResultReceived'
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
                     FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
                     navigateToCustomSelector()
@@ -509,38 +531,37 @@ class CustomSelectorActivity :
         }
     }
 
-
-
     /**
      * Navigates back to the main `FolderFragment`, refreshes the MediaStore, resets UI states,
      * and reloads folder data.
      */
     private fun navigateToCustomSelector() {
-
         val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId) ?: ""
         val folder = File(folderPath)
 
-        supportFragmentManager.popBackStack(null,
-                                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        supportFragmentManager.popBackStack(
+            null,
+            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE,
+        )
 
-        //refresh MediaStore for the deleted folder path to ensure metadata updates
+        // refresh MediaStore for the deleted folder path to ensure metadata updates
         FolderDeletionHelper.refreshMediaStore(this, folder)
 
-        //replace the current fragment with FolderFragment to go back to the main screen
-        supportFragmentManager.beginTransaction()
+        // replace the current fragment with FolderFragment to go back to the main screen
+        supportFragmentManager
+            .beginTransaction()
             .replace(R.id.fragment_container, FolderFragment.newInstance())
             .commitAllowingStateLoss()
 
-        //reset toolbar and flags
+        // reset toolbar and flags
         isImageFragmentOpen = false
         showOverflowMenu = false
         setUpToolbar()
         changeTitle(getString(R.string.custom_selector_title), 0)
 
-        //fetch updated folder data
+        // fetch updated folder data
         fetchData()
     }
-
 
     /**
      * override on folder click,
@@ -563,10 +584,9 @@ class CustomSelectorActivity :
         bucketName = folderName
         isImageFragmentOpen = true
 
-        //show the overflow menu only when a folder is clicked
+        // show the overflow menu only when a folder is clicked
         showOverflowMenu = true
         setUpToolbar()
-
     }
 
     /**
@@ -596,7 +616,7 @@ class CustomSelectorActivity :
 
         if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
-            bottomSheetBinding.upload.alpha = 0.5f
+            bottomSheetBinding.upload.alpha = DISABLED_BUTTON_ALPHA
         } else {
             bottomSheetBinding.upload.isEnabled = true
             bottomSheetBinding.upload.alpha = 1f
@@ -651,19 +671,39 @@ class CustomSelectorActivity :
             return
         }
         scope.launch(ioDispatcher) {
-            val uniqueImages = selectedImages.distinctBy { image ->
-                CustomSelectorUtils.getImageSHA1(
-                    image.uri,
-                    ioDispatcher,
-                    fileUtilsWrapper,
-                    contentResolver
-                )
-            }
+            val uniqueImages =
+                selectedImages.distinctBy { image ->
+                    CustomSelectorUtils.getImageSHA1(
+                        image.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver,
+                    )
+                }
 
             withContext(Dispatchers.Main) {
-                finishPickImages(ArrayList(uniqueImages))
+                if (uniqueImages.size != selectedImages.size) {
+                    showDuplicateSelectionWarning {
+                        finishPickImages(ArrayList(uniqueImages))
+                    }
+                } else {
+                    finishPickImages(ArrayList(uniqueImages))
+                }
             }
         }
+    }
+
+    /**
+     * Warns users when duplicate-content images are selected before finishing selection.
+     */
+    private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
+        AlertDialog
+            .Builder(this)
+            .setTitle(R.string.warning)
+            .setMessage(R.string.custom_selector_duplicates_warning)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
+            .show()
     }
 
     /**
@@ -675,23 +715,6 @@ class CustomSelectorActivity :
         data.putParcelableArrayListExtra("Images", images)
         setResult(Activity.RESULT_OK, data)
         finish()
-    }
-
-    /**
-     * Back pressed.
-     * Change toolbar title.
-     */
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if (fragment != null && fragment is FolderFragment) {
-            isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title), 0)
-        }
-
-        //hide overflow menu when not in folder
-        showOverflowMenu = false
-        setUpToolbar()
     }
 
     /**
@@ -738,11 +761,12 @@ class CustomSelectorActivity :
         const val FOLDER_NAME: String = "FolderName"
         const val ITEM_ID: String = "ItemId"
         const val EXTRA_SINGLE_SELECTION: String = "EXTRA_SINGLE_SELECTION"
+        private const val DISABLED_BUTTON_ALPHA = 0.5f
     }
 }
 
 @Composable
-fun partialStorageAccessIndicator(
+fun PartialStorageAccessIndicator(
     isVisible: Boolean,
     onManage: () -> Unit,
     modifier: Modifier = Modifier,
@@ -784,9 +808,9 @@ fun partialStorageAccessIndicator(
 
 @Preview
 @Composable
-fun partialStorageAccessIndicatorPreview() {
+private fun PartialStorageAccessIndicatorPreview() {
     Surface {
-        partialStorageAccessIndicator(
+        PartialStorageAccessIndicator(
             isVisible = true,
             onManage = {},
             modifier =

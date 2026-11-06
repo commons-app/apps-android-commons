@@ -10,7 +10,6 @@ import java.util.TimeZone
  * Methods should be added here only if DateUtil class doesn't provide for it already.
  */
 object CommonsDateUtil {
-
     /**
      * Gets SimpleDateFormat for short date pattern.
      * @return simpleDateFormat

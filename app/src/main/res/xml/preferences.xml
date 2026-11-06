@@ -55,13 +55,13 @@
           android:defaultValue="false"
           android:key="displayDeletionButton"
           app:singleLineTitle="false"
-          android:summary="Enable the &quot;Delete folder&quot; button in the custom picker"
-          android:title="Show Deletion Button" />
+          android:summary="@string/show_deletion_button_explanation"
+          android:title="@string/show_deletion_button" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Uploads">
+        android:title="@string/preferences_uploads">
 
         <SwitchPreference
 

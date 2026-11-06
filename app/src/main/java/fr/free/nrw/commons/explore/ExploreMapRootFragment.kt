@@ -17,7 +17,9 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 
-class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider,
+class ExploreMapRootFragment :
+    CommonsDaggerSupportFragment,
+    MediaDetailProvider,
     CategoryImagesCallback {
     private var mediaDetails: MediaDetailPagerFragment? = null
     private var mapFragment: ExploreMapFragment? = null
@@ -28,17 +30,22 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
     constructor(bundle: Bundle) {
         // get fragment arguments
         val title = bundle.getString("categoryName")
-        val zoom = bundle.getDouble("prev_zoom")
-        val latitude = bundle.getDouble("prev_latitude")
-        val longitude = bundle.getDouble("prev_longitude")
+
+        val zoom = if (bundle.containsKey("prev_zoom")) bundle.getDouble("prev_zoom") else 0.0
+        val latitude = if (bundle.containsKey("prev_latitude")) bundle.getDouble("prev_latitude") else 0.0
+        val longitude = if (bundle.containsKey("prev_longitude")) bundle.getDouble("prev_longitude") else 0.0
 
         mapFragment = ExploreMapFragment()
-        val featuredArguments = bundleOf(
-            "categoryName" to title
-        )
+        val featuredArguments =
+            bundleOf(
+                "categoryName" to title,
+            )
 
         // if we came from 'Show in Explore' in Nearby, pass on zoom and center
-        if (zoom != 0.0 || latitude != 0.0 || longitude != 0.0) {
+        if (bundle.containsKey("prev_zoom") ||
+            bundle.containsKey("prev_latitude") ||
+            bundle.containsKey("prev_longitude")
+        ) {
             featuredArguments.putDouble("prev_zoom", zoom)
             featuredArguments.putDouble("prev_latitude", latitude)
             featuredArguments.putDouble("prev_longitude", longitude)
@@ -49,7 +56,7 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreate(savedInstanceState)
 
@@ -58,14 +65,20 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
             setFragment(mapFragment!!, mediaDetails)
         }
     }
 
-    fun setFragment(fragment: Fragment, otherFragment: Fragment?) {
+    fun setFragment(
+        fragment: Fragment,
+        otherFragment: Fragment?,
+    ) {
         if (fragment.isAdded && otherFragment != null) {
             childFragmentManager
                 .beginTransaction()
@@ -193,9 +206,21 @@ class ExploreMapRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider
         binding = null
     }
 
-    companion object {
-        fun newInstance(): ExploreMapRootFragment = ExploreMapRootFragment().apply {
-            retainInstance = true
+    fun requestLocationIfNeeded() {
+        mapFragment?.requestLocationIfNeeded()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            requestLocationIfNeeded()
         }
+    }
+
+    companion object {
+        fun newInstance(): ExploreMapRootFragment =
+            ExploreMapRootFragment().apply {
+                retainInstance = true
+            }
     }
 }

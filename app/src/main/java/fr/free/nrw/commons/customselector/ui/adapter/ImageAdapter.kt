@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
@@ -37,7 +39,7 @@ class ImageAdapter(
     /**
      * Application Context.
      */
-    context: Context,
+    private val context: Context,
     /**
      * Image select listener for click events on image.
      */
@@ -46,8 +48,10 @@ class ImageAdapter(
      * ImageLoader queries images.
      */
     private var imageLoader: ImageLoader,
-) : RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context),
+) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
+
     /**
      * ImageSelectedOrUpdated payload class.
      */
@@ -123,6 +127,14 @@ class ImageAdapter(
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+
+    // maximum number of images that can be selected.
+    private var maxUploadLimit: Int = MAX_IMAGE_COUNT
+
+    // set maximum number of images allowed for upload.
+    fun setMaxUploadLimit(limit: Int) {
+        maxUploadLimit = limit
+    }
 
     /**
      * Create View holder.
@@ -200,7 +212,7 @@ class ImageAdapter(
                         processThumbnailForActionedImage(
                             holder,
                             position,
-                            uploadingContributionList
+                            uploadingContributionList,
                         )
                         _isLoadingImages.value = false
                         // If the position is already visited, that means the image is already present
@@ -212,7 +224,7 @@ class ImageAdapter(
                             Glide
                                 .with(holder.image)
                                 .load(image.uri)
-                                .thumbnail(0.3f)
+                                .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                                 .into(holder.image)
                         }
                     }
@@ -223,7 +235,7 @@ class ImageAdapter(
                     Glide
                         .with(holder.image)
                         .load(image.uri)
-                        .thumbnail(0.3f)
+                        .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                         .into(holder.image)
                 }
             }
@@ -274,7 +286,7 @@ class ImageAdapter(
                 Glide
                     .with(holder.image)
                     .load(allImages[next].uri)
-                    .thumbnail(0.3f)
+                    .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                     .into(holder.image)
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)
@@ -350,8 +362,30 @@ class ImageAdapter(
             // Notify listener of deselection to update UI
             imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
         } else {
+            // check the maximum limit before allowing the selection
+            if (!singleSelection && selectedImages.size >= maxUploadLimit) {
+                // limit reached, show a toast and prevent selection
+                Toast
+                    .makeText(
+                        context,
+                        context.getString(
+                            R.string.custom_selector_max_image_limit_reached,
+                            maxUploadLimit,
+                        ),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                return // exit the function, preventing selection
+            }
+
             // Prevent adding the same image multiple times
-            val image = if (showAlreadyActionedImages) images[position] else ArrayList(actionableImagesMap.values)[position]
+            val image =
+                if (showAlreadyActionedImages) {
+                    images[position]
+                } else {
+                    ArrayList(
+                        actionableImagesMap.values,
+                    )[position]
+                }
             if (selectedImages.contains(image)) {
                 return // Image already selected, ignore additional clicks
             }
@@ -359,18 +393,36 @@ class ImageAdapter(
                 val imageSHA1 = imageLoader.getSHA1(image, defaultDispatcher)
                 withContext(Dispatchers.Main) {
                     if (holder.isItemUploaded()) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         return@withContext
                     }
 
                     if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
                         holder.itemUploaded()
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         return@withContext
                     }
 
-                    if (!holder.isItemUploaded() && imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
-                        Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+                    if (!holder.isItemUploaded() &&
+                        imageSHA1.isNotEmpty() &&
+                        imageLoader.getFromUploaded(imageSHA1) != null
+                    ) {
+                        Toast
+                            .makeText(
+                                context,
+                                R.string.custom_selector_already_uploaded_image_text,
+                                Toast.LENGTH_SHORT,
+                            ).show()
                     }
 
                     if (holder.isItemNotForUpload()) {
@@ -378,7 +430,10 @@ class ImageAdapter(
                     }
                     selectedImages.add(image)
                     notifyItemChanged(position, ImageSelectedOrUpdated())
-                    imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+                    imageSelectListener.onSelectedImagesChanged(
+                        selectedImages,
+                        numberOfSelectedImagesMarkedAsNotForUpload,
+                    )
                 }
             }
         }
@@ -635,5 +690,9 @@ class ImageAdapter(
      */
     fun setSingleSelection(single: Boolean) {
         singleSelection = single
+    }
+
+    companion object {
+        private const val THUMBNAIL_SIZE_MULTIPLIER = 0.3f
     }
 }

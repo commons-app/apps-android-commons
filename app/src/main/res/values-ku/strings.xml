@@ -10,7 +10,7 @@
 -->
 <resources>
   <string name="commons_facebook">Rûpela Facebookê ya Commonsê</string>
-  <string name="commons_github">Koda Çavkanî ya Githuba Commonsê</string>
+  <string name="commons_github" fuzzy="true">Koda Çavkanî ya Githuba Commonsê</string>
   <string name="commons_logo">Logoya Commonsê</string>
   <string name="commons_website">Malpera Commonsê</string>
   <string name="exit_location_picker">Ji bijêra lokasyonê derkeve</string>
@@ -34,18 +34,14 @@
     <item quantity="one">%1$d dosye tê barkirin</item>
     <item quantity="other">%1$d dosye tên barkirin</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <string name="starting_uploads">Barkirin ên destpêkirin</string>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">%1$d barkirinê dide xebitandin</item>
     <item quantity="other">%1$d barkirinan dide xebitandin</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d barkirin</item>
-    <item quantity="other">%d barkirin</item>
+    <item quantity="one">%1$d barkirin</item>
+    <item quantity="other">%1$d barkirin</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ev wêne wê li bin %1$s were lîsanskirin</item>
@@ -175,11 +171,10 @@
   <string name="delete">Jê bibe</string>
   <string name="Achievements">Serkeftin</string>
   <string name="Profile">Profîl</string>
-  <string name="statistics">Statîstîk</string>
   <string name="statistics_thanks">Spasî Hate Wergirtin</string>
   <string name="statistics_featured">Wêneyên Bijartî</string>
   <string name="statistics_wikidata_edits">Wêneyên bi riya \"Cihên Nêz\"</string>
-  <string name="level">Derece %d</string>
+  <string name="level">Derece %1$d</string>
   <string name="images_uploaded">Wêneyên Barkirî</string>
   <string name="review_thanks_yes_button_text">Wêneyê din</string>
   <string name="review_thanks_no_button_text">Belê, çima na</string>

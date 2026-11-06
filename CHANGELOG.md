@@ -1,5 +1,104 @@
 # Wikimedia Commons for Android
 
+## v6.9.0
+
+### What's changed
+- The app size has been reduced by 26% due to removal of unused models from commons-ml
+- Uploads are more reliable, with better handling of unsupported files, HEIC/HEIF images, and retries
+- Nearby place filters are easier to use and behave more consistently
+- Upload selections and navigation now work more reliably after returning to screens or recreating the activity
+- Coordinates are trimmed to six decimal places for greater consistency
+- Wikidata image claims now use the original file title
+- Contribution links and upload notifications now provide clearer, more useful destinations
+- Various bug fixes and stability improvements
+
+## v6.8.0
+
+### What's changed
+- The app now detects sensitive content in images automatically and lets you blur it with one tap
+- Deleted categories no longer appear in category suggestions
+- Captions in multiple languages now work correctly
+- Improved handling of HTTP 429s from the server
+- Various bug fixes and improvements
+
+## v6.7.0
+
+### What's changed
+- Users can now blur sensitive parts of images from within the app before uploading them to Commons
+- Minor bug fixes
+
+## v6.6.0
+
+### What's changed
+- Bookmarks display correctly and are no longer empty
+- Rotated photos now display without border artifacts
+- Support for Android API level 36
+- Upload activity no longer shows stale edited images
+- Nearby map pins render correctly, with red pins appearing above green pins for better visibility
+- Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.5.0...v6.6.0
+
+## v6.5.0
+
+### What's changed
+* Redesigned license selection for a simpler, more intuitive experience
+* Users can now depictions directly from an interactive map view during uploads
+* Upload HEIC images directly from supported devices without conversion
+* Deletion requests now require specific reasons, reducing vague or invalid nominations
+* Bug fixes and security improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.4.0...v6.5.0
+
+## v6.4.0
+
+### What's changed
+* Users can now crop their images during the upload process without leaving the app
+* Bug fixes and stability improvements
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.3.0...v6.4.0
+
+## v6.3.0
+
+### What's changed
+* Caption and description are now accessible on all screen sizes
+* Custom author name no longer results into invalid URLs on Commons and redirect to the actual user profile
+* Bug fixes and stability improvements
+
+## v6.2.1
+
+### What's changed
+* The app no longer crashes on navigating from the MainActivity to other activities
+* Support for larger zoom levels on the image upload preview screen
+
+## v6.2.0
+
+### What's changed
+* Explore map no longer shows incorrect coordinates while navigating from Nearby
+* The popup messages are now more user-friendly
+* Sending images from Gallery apps to Commons app no longer asks for storage permissions
+* Improved UX for the custom selector
+* Wikipedia links now appear correctly on the app
+* Double-tap or pinch to zoom support in the custom selector
+
+## v6.1.0
+
+### What's changed
+* Edit Description button now shows up correctly
+* Custom selector supports deselecting images
+* Adjusted spacing on the Edit Location screen for a cleaner layout
+* The location permission request no longer prompts the users on the "Uploaded via Mobile" tab
+* Several i18n improvements
+* Improved app performance and compatibility with newer Android devices due to 16 KB page size support
+* Bookmark categories and the target icon in Explore map no longer crash
+* Enhanced app theme change handling
+* Prevented memory leaks and invalid context access in map fragments
+* Improved support for right-to-left languages like Arabic or Hebrew
+* Nearby will now remember your chosen filters (like "building" or "cottage") when you switch tabs
+* Hardware acceleration and keyboard animation have temporarily been disabled to mitigate an upload issue
+
+**Full Changelog**: https://github.com/commons-app/apps-android-commons/compare/v6.0.2...v6.1.0
+
 ## v6.0.2
 
 ### What's changed
@@ -24,7 +123,7 @@
 * Enhanced location updates while using GPS
 * Author/uploader names are now available in Media Details for Commons licensing compliance
 * Improved usage of popups in Nearby
-* Bug fixes and stability improvements 
+* Bug fixes and stability improvements
 
 ## v5.5.0
 
@@ -34,7 +133,7 @@
 * Green labels in Explore map will no longer be hidden by other pins thumbnails
 * Upload wizard's language drop-down now reflects the language used in the pin label
 * Users can now pick only one image at a time while using the custom selector
-* Bug fixes and stability improvements 
+* Bug fixes and stability improvements
 
 ## v5.4.1
 
@@ -379,14 +478,14 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed issue with EXIF data, including coords, being removed from uploads
 
 ## v2.12.2
-- Fixed crash on startup 
+- Fixed crash on startup
 
 ## v2.12.1
 - Fixed issue with Nearby loading in wrong location
 - Various crash fixes
 
 ## v2.12.0
-- Completed codebase overhaul 
+- Completed codebase overhaul
 - Added filters for place type and place state to Nearby
 - Switched to using new data client library, aimed at fixing failed uploads
 - Fixed 2FA not working
@@ -499,7 +598,7 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed crashes caused by Fresco and Dagger
 
 ## v2.6.3 beta
-- Same as 2.6.2 except with localizations added for Google Code-In 
+- Same as 2.6.2 except with localizations added for Google Code-In
 
 ## v2.6.2 beta
 - Reverted temporarily to last stable version while working on crash fix
@@ -517,10 +616,10 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Improved login screen with new design and privacy policy link
 - Improved category display, if a category has an exact name entered, it will be shown first
 - New UI for Nearby list
-- Added product flavors for production and the beta-cluster Wikimedia servers 
+- Added product flavors for production and the beta-cluster Wikimedia servers
 - Various improvements to navigation flow and backstack
 
-## v2.5.0 beta 
+## v2.5.0 beta
 - Added one-time popup for beta users to provide feedback on IEG renewal proposal
 - Added link to Commons policies in ShareActivity
 - Various string fixes
@@ -550,7 +649,7 @@ for an exhaustive list of changes and the various contributors who contributed t
 
 ## v2.4
 - Fixed memory issue with loading contributions on main screen
-- Deleted images don't show up on contributions list 
+- Deleted images don't show up on contributions list
 - Added Fresco library for image loading and LeakCanary for memory profiling
 - Added navigation drawer and overhauled action bar
 - Added logout functionality
@@ -587,8 +686,8 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed lint issues
 - Fixed various crashes
 
-## v2.0.2 
-- Make "View in browser" direct to mobile website 
+## v2.0.2
+- Make "View in browser" direct to mobile website
 
 ## v2.0.1
 - Disabled minify again (reenabling test failed)

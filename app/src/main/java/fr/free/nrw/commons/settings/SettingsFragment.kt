@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -303,6 +304,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         )
     }
 
+    // Remove the space for icons in the settings menu.
+    // This uses an internal API that shouldn't be used in app code,
+    // but it appears to be the most robust way to do this at the moment,
+    // disable the warning.
+    @SuppressLint("RestrictedApi")
     override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
     {
         return object : PreferenceGroupAdapter(preferenceScreen) {
@@ -386,7 +392,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 languagesAdapter.filter.filter(charSequence)
             }
 
-            override fun afterTextChanged(editable: Editable?) {}
+            override fun afterTextChanged(editable: Editable?) = Unit
         })
 
         languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
@@ -514,7 +520,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     companion object {
         const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
-        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
+        private const val VANISH_ACCOUNT_SUCCESS_URL =
+            "https://meta.m.wikimedia.org/wiki/" +
+                "Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode

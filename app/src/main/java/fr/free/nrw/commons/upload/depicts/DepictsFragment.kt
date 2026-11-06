@@ -3,13 +3,17 @@ package fr.free.nrw.commons.upload.depicts
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -21,8 +25,11 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.databinding.UploadDepictsFragmentBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.media.MediaDetailFragment
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -40,7 +47,9 @@ import javax.inject.Named
 /**
  * Fragment for showing depicted items list in Upload activity after media details
  */
-class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
+class DepictsFragment :
+    UploadBaseFragment(),
+    DepictsContract.View {
     @Inject
     @field:Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
@@ -50,6 +59,9 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
 
     @Inject
     lateinit var sessionManager: SessionManager
+
+    @Inject
+    lateinit var locationManager: LocationServiceManager
 
     private var adapter: UploadDepictsAdapter? = null
     private var subscribe: Disposable? = null
@@ -62,19 +74,45 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     private var count = 0
     private var nearbyPlace: Place? = null
 
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: UploadDepictsFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private val mapPickerLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data
+                    ?.getParcelableExtra<Place>(NearbyParentFragment.PICKER_RESULT_PLACE)
+                    ?.let { presenter.onPlaceSelectedFromMap(it) }
+            }
+        }
+
+    private val onBackPressedCallback =
+        object : OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                if (media != null) {
+                    binding.depictsSearch.clearFocus()
+                    presenter.clearPreviousSelection()
+                    updateDepicts()
+                    goBackToPreviousScreen()
+                }
+            }
+        }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = UploadDepictsFragmentBinding.inflate(inflater, container, false)
         _binding!!.navigationButtonsContainer.handleKeyboardInsets()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
@@ -98,10 +136,11 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
 
         if (media == null) {
             binding.depictsTitle.text =
-                String.format(getString(R.string.step_count),
+                String.format(
+                    getString(R.string.step_count),
                     callback!!.getIndexInViewFlipper(this) + 1,
                     callback!!.totalNumberOfSteps,
-                    getString(R.string.depicts_step_title)
+                    getString(R.string.depicts_step_title),
                 )
         } else {
             binding.depictsTitle.setText(R.string.edit_depictions)
@@ -116,8 +155,8 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
                 requireActivity(),
                 getString(R.string.depicts_step_title),
                 getString(R.string.depicts_tooltip),
-                getString(android.R.string.ok),
-                null
+                getString(R.string.ok),
+                null,
             )
         }
         if (media == null) {
@@ -128,8 +167,61 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         initRecyclerView()
         addTextChangeListenerToSearchBox()
 
+        binding.chooseFromMap.setOnClickListener { v: View? -> launchDepictsPicker() }
         binding.depictsNext.setOnClickListener { v: View? -> onNextButtonClicked() }
         binding.depictsPrevious.setOnClickListener { v: View? -> onPreviousButtonClicked() }
+    }
+
+    /**
+     * Launches Depicts picker activity to select Depicts from map
+     * bundles the latitude and longitude (if present)
+     */
+    private fun launchDepictsPicker() {
+        hideKeyboard()
+
+        val allPhotoCoordinates = getPhotoCoordinates()
+
+        if (allPhotoCoordinates.isEmpty()) {
+            Toast
+                .makeText(
+                    requireContext(),
+                    R.string.depictions_map_no_photo_location,
+                    Toast.LENGTH_LONG,
+                ).show()
+        }
+
+        Intent(requireContext(), DepictsPickerActivity::class.java).apply {
+            putParcelableArrayListExtra(
+                NearbyParentFragment.ARG_PHOTO_LATLNGS,
+                allPhotoCoordinates,
+            )
+            mapPickerLauncher.launch(this)
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            view?.context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    InputMethodManager::class.java,
+                )
+            }
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun getPhotoCoordinates(): ArrayList<LatLng> {
+        val allPhotoCoordinates = ArrayList<LatLng>()
+        if (media == null && callback != null) {
+            val coords =
+                presenter.getUploads().mapNotNull { item ->
+                    item.gpsCoords?.takeIf { it.imageCoordsExists }?.latLng
+                }
+            allPhotoCoordinates.addAll(coords)
+        } else {
+            media?.coordinates?.let { allPhotoCoordinates.add(it) }
+        }
+        return allPhotoCoordinates
     }
 
     /**
@@ -150,15 +242,16 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
      * Initialise recyclerView and set adapter
      */
     private fun initRecyclerView() {
-        adapter = if (media == null) {
-            UploadDepictsAdapter({ categoryItem: DepictedItem? ->
-                presenter.onDepictItemClicked(categoryItem!!)
-            }, nearbyPlace)
-        } else {
-            UploadDepictsAdapter({ item: DepictedItem? ->
-                presenter.onDepictItemClicked(item!!)
-            }, nearbyPlace)
-        }
+        adapter =
+            if (media == null) {
+                UploadDepictsAdapter({ categoryItem: DepictedItem? ->
+                    presenter.onDepictItemClicked(categoryItem!!)
+                }, nearbyPlace)
+            } else {
+                UploadDepictsAdapter({ item: DepictedItem? ->
+                    presenter.onDepictItemClicked(item!!)
+                }, nearbyPlace)
+            }
         if (_binding == null) {
             return
         }
@@ -190,13 +283,15 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
                 getString(R.string.continue_message),
                 getString(R.string.cancel),
                 { goToNextScreen() },
-                null
+                null,
             )
         } else {
-            Toast.makeText(
-                requireContext(), getString(R.string.no_depictions_selected),
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    requireContext(),
+                    getString(R.string.no_depictions_selected),
+                    Toast.LENGTH_SHORT,
+                ).show()
             presenter.clearPreviousSelection()
             updateDepicts()
             goBackToPreviousScreen()
@@ -253,7 +348,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
             binding.depictsRecyclerView.smoothScrollToPosition(0)
             binding.depictsRecyclerView.post {
                 binding.depictsRecyclerView.smoothScrollToPosition(
-                    0
+                    0,
                 )
             }
         }
@@ -262,9 +357,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     /**
      * Returns required context
      */
-    override fun getFragmentContext(): Context {
-        return requireContext()
-    }
+    override fun getFragmentContext(): Context = requireContext()
 
     /**
      * Returns to previous fragment
@@ -276,9 +369,7 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
     /**
      * Gets existing depictions IDs from media
      */
-    override fun getExistingDepictions(): List<String>? {
-        return if ((media == null)) null else media!!.depictionIds
-    }
+    override fun getExistingDepictions(): List<String>? = if ((media == null)) null else media!!.depictionIds
 
     /**
      * Shows the progress dialog
@@ -309,14 +400,16 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
      */
     override fun navigateToLoginScreen() {
         val username = sessionManager.userName
-        val logoutListener = CommonsApplication.BaseLogoutListener(
-            requireActivity(),
-            requireActivity().getString(R.string.invalid_login_message),
-            username
-        )
+        val logoutListener =
+            CommonsApplication.BaseLogoutListener(
+                requireActivity(),
+                requireActivity().getString(R.string.invalid_login_message),
+                username,
+            )
 
         instance.clearApplicationData(
-            requireActivity(), logoutListener
+            requireActivity(),
+            logoutListener,
         )
     }
 
@@ -348,17 +441,19 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
      * Text change listener for the edit text view of depicts
      */
     private fun addTextChangeListenerToSearchBox() {
-        subscribe = RxTextView.textChanges(binding.depictsSearch)
-            .doOnEach { v: Notification<CharSequence?>? ->
-                binding.depictsSearchContainer.error =
-                    null
-            }
-            .takeUntil(RxView.detaches(binding.depictsSearch))
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { filter: CharSequence -> searchForDepictions(filter.toString()) },
-                { t: Throwable? -> Timber.e(t) })
+        subscribe =
+            RxTextView
+                .textChanges(binding.depictsSearch)
+                .doOnEach { v: Notification<CharSequence?>? ->
+                    binding.depictsSearchContainer.error =
+                        null
+                }.takeUntil(RxView.detaches(binding.depictsSearch))
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { filter: CharSequence -> searchForDepictions(filter.toString()) },
+                    { t: Throwable? -> Timber.e(t) },
+                )
     }
 
     /**
@@ -370,7 +465,6 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         presenter.searchForDepictions(query)
     }
 
-
     /**
      * Hides the action bar while opening editing fragment
      */
@@ -378,35 +472,24 @@ class DepictsFragment : UploadBaseFragment(), DepictsContract.View {
         super.onResume()
 
         if (media != null) {
-            binding.depictsSearch.setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent? ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    binding.depictsSearch.clearFocus()
-                    presenter.clearPreviousSelection()
-                    updateDepicts()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
-
-            requireView().isFocusableInTouchMode = true
-            requireView().requestFocus()
-            requireView().setOnKeyListener { v: View?, keyCode: Int, event: KeyEvent ->
-                if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    presenter.clearPreviousSelection()
-                    updateDepicts()
-                    goBackToPreviousScreen()
-                    return@setOnKeyListener true
-                }
-                false
-            }
+            onBackPressedCallback.isEnabled = true
 
             (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
             if (parentFragment?.parentFragment?.parentFragment is ContributionsFragment) {
-                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment?)?.binding?.cardViewNearby?.setVisibility(View.GONE)
+                ((parentFragment?.parentFragment?.parentFragment) as ContributionsFragment?)
+                    ?.binding
+                    ?.cardViewNearby
+                    ?.setVisibility(
+                        View.GONE,
+                    )
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onBackPressedCallback.isEnabled = false
     }
 
     /**

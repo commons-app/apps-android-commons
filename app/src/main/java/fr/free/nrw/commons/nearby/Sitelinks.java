@@ -105,9 +105,6 @@ public class Sitelinks implements Parcelable {
         private String commonsLink;
         private String wikipediaLink;
 
-        public Builder() {
-        }
-
         public Sitelinks.Builder setWikipediaLink(String link) {
             this.wikipediaLink = link;
             return this;

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -20,6 +19,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.annotation.VisibleForTesting
+import androidx.core.net.toUri
+import androidx.core.os.BundleCompat
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,28 +36,25 @@ import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.filepicker.FilePicker
+import fr.free.nrw.commons.media.DeletedFileActivity
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
-import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
 import javax.inject.Named
-
 
 /**
  * Created by root on 01.06.2018.
  */
-class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsListContract.View,
-    ContributionsListAdapter.Callback, WikipediaInstructionsDialogFragment.Callback {
-    @JvmField
-    @Inject
-    var systemThemeUtils: SystemThemeUtils? = null
-
+class ContributionsListFragment :
+    CommonsDaggerSupportFragment(),
+    ContributionsListContract.View,
+    ContributionsListAdapter.Callback,
+    WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
     var controller: ContributionController? = null
@@ -83,13 +81,14 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     var sessionManager: SessionManager? = null
 
     private var binding: FragmentContributionsListBinding? = null
-    private var fab_close: Animation? = null
-    private var fab_open: Animation? = null
-    private var rotate_forward: Animation? = null
-    private var rotate_backward: Animation? = null
+    private var fabClose: Animation? = null
+    private var fabOpen: Animation? = null
+    private var rotateForward: Animation? = null
+    private var rotateBackward: Animation? = null
     private var isFabOpen = false
 
-    private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var inAppCameraLocationPermissionLauncher:
+        ActivityResultLauncher<Array<String>>
 
     @VisibleForTesting
     var rvContributionsList: RecyclerView? = null
@@ -100,106 +99,132 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     @VisibleForTesting
     var callback: Callback? = null
 
-    private val SPAN_COUNT_LANDSCAPE = 3
-    private val SPAN_COUNT_PORTRAIT = 1
+    private val spanCountLandscape = 3
+    private val spanCountPortrait = 1
 
     private var contributionsSize = 0
     private var userName: String? = null
 
-    private val galleryPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromGallery(
-                result!!, requireActivity(), callbacks!!
-            )
+    private val galleryPickLauncherForResult =
+        registerForActivityResult<Intent, ActivityResult>(
+            StartActivityForResult(),
+        ) { result: ActivityResult? ->
+            controller!!.handleActivityResultWithCallback(
+                requireActivity(),
+            ) { callbacks: FilePicker.Callbacks? ->
+                controller!!.onPictureReturnedFromGallery(
+                    result!!,
+                    requireActivity(),
+                    callbacks!!,
+                )
+            }
         }
-    }
 
-    private val customSelectorLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromCustomSelector(
-                result!!, requireActivity(), callbacks!!
-            )
+    private val customSelectorLauncherForResult =
+        registerForActivityResult<Intent, ActivityResult>(
+            StartActivityForResult(),
+        ) { result: ActivityResult? ->
+            controller!!.handleActivityResultWithCallback(
+                requireActivity(),
+            ) { callbacks: FilePicker.Callbacks? ->
+                controller!!.onPictureReturnedFromCustomSelector(
+                    result!!,
+                    requireActivity(),
+                    callbacks!!,
+                )
+            }
         }
-    }
 
-    private val cameraPickLauncherForResult = registerForActivityResult<Intent, ActivityResult>(
-        StartActivityForResult()
-    ) { result: ActivityResult? ->
-        controller!!.handleActivityResultWithCallback(requireActivity()
-        ) { callbacks: FilePicker.Callbacks? ->
-            controller!!.onPictureReturnedFromCamera(
-                result!!, requireActivity(), callbacks!!
-            )
+    private val cameraPickLauncherForResult =
+        registerForActivityResult<Intent, ActivityResult>(
+            StartActivityForResult(),
+        ) { result: ActivityResult? ->
+            controller!!.handleActivityResultWithCallback(
+                requireActivity(),
+            ) { callbacks: FilePicker.Callbacks? ->
+                controller!!.onPictureReturnedFromCamera(
+                    result!!,
+                    requireActivity(),
+                    callbacks!!,
+                )
+            }
         }
-    }
 
     @SuppressLint("NewApi")
-    override fun onCreate(
-        savedInstanceState: Bundle?
-    ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Now that we are allowing this fragment to be started for
+        // Now that we are allowing this fragment to be started for
         // any userName- we expect it to be passed as an argument
         if (arguments != null) {
             userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
         }
 
-        if (StringUtils.isEmpty(userName)) {
+        if (userName.isNullOrEmpty()) {
             userName = sessionManager!!.userName
         }
         inAppCameraLocationPermissionLauncher =
-        registerForActivityResult(RequestMultiplePermissions()) { result ->
-            val areAllGranted = result.values.all { it }
+            registerForActivityResult(RequestMultiplePermissions()) { result ->
+                val areAllGranted = result.values.all { it }
 
-            if (areAllGranted) {
-                controller?.locationPermissionCallback?.onLocationPermissionGranted()
-            } else {
-                activity?.let { currentActivity ->
-                    if (currentActivity.shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        controller?.handleShowRationaleFlowCameraLocation(
-                            currentActivity,
-                            inAppCameraLocationPermissionLauncher, // Pass launcher
-                            cameraPickLauncherForResult
-                        )
-                    } else {
-                        controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                            currentActivity.getString(R.string.in_app_camera_location_permission_denied)
-                        )
+                if (areAllGranted) {
+                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
+                } else {
+                    activity?.let { currentActivity ->
+                        if (currentActivity.shouldShowRequestPermissionRationale(
+                                permission.ACCESS_FINE_LOCATION,
+                            )
+                        ) {
+                            controller?.handleShowRationaleFlowCameraLocation(
+                                currentActivity,
+                                inAppCameraLocationPermissionLauncher, // Pass launcher
+                                cameraPickLauncherForResult,
+                            )
+                        } else {
+                            controller?.locationPermissionCallback?.onLocationPermissionDenied(
+                                currentActivity.getString(
+                                    R.string.in_app_camera_location_permission_denied,
+                                ),
+                            )
+                        }
                     }
                 }
             }
-        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentContributionsListBinding.inflate(
-            inflater, container, false
-        )
+        binding =
+            FragmentContributionsListBinding.inflate(
+                inflater,
+                container,
+                false,
+            )
         rvContributionsList = binding!!.contributionsList
 
         contributionsListPresenter!!.onAttachView(this)
         binding!!.fabCustomGallery.setOnClickListener { v: View? -> launchCustomSelector() }
         binding!!.fabCustomGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.custom_selector_title)
+            showShortToast(context, R.string.custom_selector_title)
             true
         }
 
         if (sessionManager!!.userName == userName) {
             binding!!.tvContributionsOfUser.visibility = View.GONE
             binding!!.fabLayout.visibility = View.VISIBLE
+            // Set correct FAB orientation based on current orientation
+            binding?.fabLayout?.orientation =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    LinearLayout.HORIZONTAL
+                } else {
+                    LinearLayout.VERTICAL
+                }
         } else {
             binding!!.tvContributionsOfUser.visibility = View.VISIBLE
             binding!!.tvContributionsOfUser.text =
-                getString(fr.free.nrw.commons.R.string.contributions_of_user, userName)
+                getString(R.string.contributions_of_user, userName)
             binding!!.fabLayout.visibility = View.GONE
         }
 
@@ -209,7 +234,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         if (sessionManager!!.userName == userName) {
             binding!!.swipeRefreshLayout.setOnRefreshListener {
                 contributionsListPresenter!!.refreshList(
-                    binding!!.swipeRefreshLayout
+                    binding!!.swipeRefreshLayout,
                 )
             }
         } else {
@@ -233,14 +258,23 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
     override fun onDetach() {
         super.onDetach()
-        callback = null //To avoid possible memory leak
+        callback = null // To avoid possible memory leak
     }
 
     private fun initAdapter() {
-        adapter = ContributionsListAdapter(this, mediaClient!!, mediaDataExtractor!!, compositeDisposable)
+        adapter =
+            ContributionsListAdapter(
+                this,
+                mediaClient!!,
+                mediaDataExtractor!!,
+                compositeDisposable,
+            )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initializeAnimations()
@@ -248,13 +282,14 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     }
 
     private fun initRecyclerView() {
-        val layoutManager = GridLayoutManager(
-            context,
-            getSpanCount(resources.configuration.orientation)
-        )
+        val layoutManager =
+            GridLayoutManager(
+                context,
+                getSpanCount(resources.configuration.orientation),
+            )
         rvContributionsList!!.layoutManager = layoutManager
 
-        //Setting flicker animation of recycler view to false.
+        // Setting flicker animation of recycler view to false.
         val animator = rvContributionsList!!.itemAnimator
         if (animator is SimpleItemAnimator) {
             animator.supportsChangeAnimations = false
@@ -262,10 +297,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
         contributionsListPresenter!!.setup(
             userName,
-            sessionManager!!.userName == userName
+            sessionManager!!.userName == userName,
         )
         contributionsListPresenter!!.contributionList?.observe(
-            viewLifecycleOwner
+            viewLifecycleOwner,
         ) { list: PagedList<Contribution>? ->
             if (list != null) {
                 contributionsSize = list.size
@@ -276,93 +311,116 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             }
         }
         rvContributionsList!!.adapter = adapter
-        adapter!!.registerAdapterDataObserver(object : AdapterDataObserver() {
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                super.onItemRangeInserted(positionStart, itemCount)
-                contributionsSize = adapter!!.itemCount
-                if (callback != null) {
-                    callback!!.notifyDataSetChanged()
-                }
-                if (itemCount > 0 && positionStart == 0) {
-                    if (adapter!!.getContributionForPosition(positionStart) != null) {
-                        rvContributionsList!!
-                            .scrollToPosition(0) //Newly upload items are always added to the top
+        adapter!!.registerAdapterDataObserver(
+            object : AdapterDataObserver() {
+                override fun onItemRangeInserted(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    contributionsSize = adapter!!.itemCount
+                    if (callback != null) {
+                        callback!!.notifyDataSetChanged()
+                    }
+                    if (itemCount > 0 && positionStart == 0) {
+                        if (adapter!!.getContributionForPosition(positionStart) != null) {
+                            rvContributionsList!!
+                                .scrollToPosition(0) // Newly upload items are always added to the top
+                        }
                     }
                 }
-            }
 
-            /**
-             * Called whenever items in the list have changed
-             * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
-             */
-            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
-                super.onItemRangeChanged(positionStart, itemCount)
-                if (callback != null) {
-                    callback!!.viewPagerNotifyDataSetChanged()
-                }
-            }
-        })
-
-        //Fab close on touch outside (Scrolling or taping on item triggers this action).
-        rvContributionsList!!.addOnItemTouchListener(object : OnItemTouchListener {
-            /**
-             * Silently observe and/or take over touch events sent to the RecyclerView before
-             * they are handled by either the RecyclerView itself or its child views.
-             */
-            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                if (e.action == MotionEvent.ACTION_DOWN) {
-                    if (isFabOpen) {
-                        animateFAB(isFabOpen)
+                /**
+                 * Called whenever items in the list have changed
+                 * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+                 */
+                override fun onItemRangeChanged(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    super.onItemRangeChanged(positionStart, itemCount)
+                    if (callback != null) {
+                        callback!!.viewPagerNotifyDataSetChanged()
                     }
                 }
-                return false
-            }
+            },
+        )
 
-            /**
-             * Process a touch event as part of a gesture that was claimed by returning true
-             * from a previous call to [.onInterceptTouchEvent].
-             *
-             * @param rv
-             * @param e  MotionEvent describing the touch event. All coordinates are in the
-             * RecyclerView's coordinate system.
-             */
-            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-                //required abstract method DO NOT DELETE
-            }
+        // Fab close on touch outside (Scrolling or taping on item triggers this action).
+        rvContributionsList!!.addOnItemTouchListener(
+            object : OnItemTouchListener {
+                /**
+                 * Silently observe and/or take over touch events sent to the RecyclerView before
+                 * they are handled by either the RecyclerView itself or its child views.
+                 */
+                override fun onInterceptTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ): Boolean {
+                    if (e.action == MotionEvent.ACTION_DOWN) {
+                        if (isFabOpen) {
+                            animateFAB(true)
+                        }
+                    }
+                    return false
+                }
 
-            /**
-             * Called when a child of RecyclerView does not want RecyclerView and its ancestors
-             * to intercept touch events with [ViewGroup.onInterceptTouchEvent].
-             *
-             * @param disallowIntercept True if the child does not want the parent to intercept
-             * touch events.
-             */
-            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-                //required abstract method DO NOT DELETE
-            }
-        })
+                /**
+                 * Process a touch event as part of a gesture that was claimed by returning true
+                 * from a previous call to [.onInterceptTouchEvent].
+                 *
+                 * @param rv
+                 * @param e  MotionEvent describing the touch event. All coordinates are in the
+                 * RecyclerView's coordinate system.
+                 */
+                override fun onTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ) {
+                    // required abstract method DO NOT DELETE
+                }
+
+                /**
+                 * Called when a child of RecyclerView does not want RecyclerView and its ancestors
+                 * to intercept touch events with [ViewGroup.onInterceptTouchEvent].
+                 *
+                 * @param disallowIntercept True if the child does not want the parent to intercept
+                 * touch events.
+                 */
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                    // required abstract method DO NOT DELETE
+                }
+            },
+        )
     }
 
-    private fun getSpanCount(orientation: Int): Int {
-        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) SPAN_COUNT_LANDSCAPE else SPAN_COUNT_PORTRAIT
-    }
+    private fun getSpanCount(orientation: Int): Int =
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            spanCountLandscape
+        } else {
+            spanCountPortrait
+        }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         // check orientation
         binding!!.fabLayout.orientation =
-            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
+            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                LinearLayout.HORIZONTAL
+            } else {
+                LinearLayout.VERTICAL
+            }
         rvContributionsList
             ?.setLayoutManager(
-                GridLayoutManager(context, getSpanCount(newConfig.orientation))
+                GridLayoutManager(context, getSpanCount(newConfig.orientation)),
             )
     }
 
     private fun initializeAnimations() {
-        fab_open = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotate_forward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotate_backward = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
+        fabOpen = AnimationUtils.loadAnimation(activity, R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(activity, R.anim.fab_close)
+        rotateForward = AnimationUtils.loadAnimation(activity, R.anim.rotate_forward)
+        rotateBackward = AnimationUtils.loadAnimation(activity, R.anim.rotate_backward)
     }
 
     private fun setListeners() {
@@ -371,14 +429,14 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             controller!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
-                cameraPickLauncherForResult
+                cameraPickLauncherForResult,
             )
             animateFAB(isFabOpen)
         }
         binding!!.fabCamera.setOnLongClickListener { view: View? ->
             showShortToast(
                 context,
-                fr.free.nrw.commons.R.string.add_contribution_from_camera
+                R.string.add_contribution_from_camera,
             )
             true
         }
@@ -387,7 +445,7 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
             animateFAB(isFabOpen)
         }
         binding!!.fabGallery.setOnLongClickListener { view: View? ->
-            showShortToast(context, fr.free.nrw.commons.R.string.menu_from_gallery)
+            showShortToast(context, R.string.menu_from_gallery)
             true
         }
     }
@@ -395,10 +453,10 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     /**
      * Launch Custom Selector.
      */
-    protected fun launchCustomSelector() {
+    private fun launchCustomSelector() {
         controller!!.initiateCustomGalleryPickWithPermission(
             requireActivity(),
-            customSelectorLauncherForResult
+            customSelectorLauncherForResult,
         )
         animateFAB(isFabOpen)
     }
@@ -411,18 +469,18 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
         this.isFabOpen = !isFabOpen
         if (binding!!.fabPlus.isShown) {
             if (isFabOpen) {
-                binding!!.fabPlus.startAnimation(rotate_backward)
-                binding!!.fabCamera.startAnimation(fab_close)
-                binding!!.fabGallery.startAnimation(fab_close)
-                binding!!.fabCustomGallery.startAnimation(fab_close)
+                binding!!.fabPlus.startAnimation(rotateBackward)
+                binding!!.fabCamera.startAnimation(fabClose)
+                binding!!.fabGallery.startAnimation(fabClose)
+                binding!!.fabCustomGallery.startAnimation(fabClose)
                 binding!!.fabCamera.hide()
                 binding!!.fabGallery.hide()
                 binding!!.fabCustomGallery.hide()
             } else {
-                binding!!.fabPlus.startAnimation(rotate_forward)
-                binding!!.fabCamera.startAnimation(fab_open)
-                binding!!.fabGallery.startAnimation(fab_open)
-                binding!!.fabCustomGallery.startAnimation(fab_open)
+                binding!!.fabPlus.startAnimation(rotateForward)
+                binding!!.fabCamera.startAnimation(fabOpen)
+                binding!!.fabGallery.startAnimation(fabOpen)
+                binding!!.fabCustomGallery.startAnimation(fabOpen)
                 binding!!.fabCamera.show()
                 binding!!.fabGallery.show()
                 binding!!.fabCustomGallery.show()
@@ -434,9 +492,9 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     /**
      * Shows welcome message if user has no contributions yet i.e. new user.
      */
-    override fun showWelcomeTip(shouldShow: Boolean) {
+    override fun showWelcomeTip(numberOfUploads: Boolean) {
         binding!!.noContributionsYet.visibility =
-            if (shouldShow) View.VISIBLE else View.GONE
+            if (numberOfUploads) View.VISIBLE else View.GONE
     }
 
     /**
@@ -456,22 +514,31 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val layoutManager = rvContributionsList
-            ?.getLayoutManager() as GridLayoutManager?
+        val layoutManager = rvContributionsList?.layoutManager as GridLayoutManager?
         outState.putParcelable(RV_STATE, layoutManager!!.onSaveInstanceState())
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if (null != savedInstanceState) {
-            val savedRecyclerLayoutState = savedInstanceState.getParcelable<Parcelable>(RV_STATE)
+            val savedRecyclerLayoutState =
+                BundleCompat.getParcelable(savedInstanceState, RV_STATE, Parcelable::class.java)
             rvContributionsList!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
         }
     }
 
-    override fun openMediaDetail(position: Int, isWikipediaButtonDisplayed: Boolean) {
-        if (null != callback) { //Just being safe, ideally they won't be called when detached
-            callback!!.showDetail(position, isWikipediaButtonDisplayed)
+    override fun openMediaDetail(
+        contribution: Int,
+        isWikipediaPageExists: Boolean,
+    ) {
+        val item = adapter?.getContributionForPosition(contribution)
+        val filename = item?.media?.filename
+        if (item?.state == Contribution.STATE_DELETED && !filename.isNullOrEmpty()) {
+            DeletedFileActivity.start(requireContext(), filename)
+            return
+        }
+        if (null != callback) { // Just being safe, ideally they won't be called when detached
+            callback!!.showDetail(contribution, isWikipediaPageExists)
         }
     }
 
@@ -483,13 +550,15 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
     override fun addImageToWikipedia(contribution: Contribution?) {
         showAlertDialog(
             requireActivity(),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_title),
-            getString(fr.free.nrw.commons.R.string.add_picture_to_wikipedia_article_desc),
+            getString(R.string.add_picture_to_wikipedia_article_title),
+            getString(R.string.add_picture_to_wikipedia_article_desc),
             {
                 if (contribution != null) {
                     showAddImageToWikipediaInstructions(contribution)
                 }
-            }, {})
+            },
+            {},
+        )
     }
 
     /**
@@ -498,18 +567,20 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
      * @param contribution
      */
     private fun showAddImageToWikipediaInstructions(contribution: Contribution) {
-        val fragmentManager = fragmentManager
+        val fragmentManager = this.parentFragmentManager
         val fragment = newInstance(contribution)
         fragment.callback =
-            WikipediaInstructionsDialogFragment.Callback { contribution: Contribution?, copyWikicode: Boolean ->
-                this.onConfirmClicked(
+            WikipediaInstructionsDialogFragment.Callback {
+                contribution: Contribution?,
+                copyWikicode: Boolean,
+                ->
+                onConfirmClicked(
                     contribution,
-                    copyWikicode
+                    copyWikicode,
                 )
             }
-        fragment.show(fragmentManager!!, "WikimediaFragment")
+        fragment.show(fragmentManager, "WikimediaFragment")
     }
-
 
     fun getMediaAtPosition(i: Int): Media? {
         if (adapter!!.getContributionForPosition(i) != null) {
@@ -526,25 +597,32 @@ class ContributionsListFragment : CommonsDaggerSupportFragment(), ContributionsL
      *
      * @param contribution
      */
-    override fun onConfirmClicked(contribution: Contribution?, copyWikicode: Boolean) {
+    override fun onConfirmClicked(
+        contribution: Contribution?,
+        copyWikicode: Boolean,
+    ) {
         if (copyWikicode) {
             requireContext().copyToClipboard("wikicode", contribution!!.media.wikiCode)
         }
 
         val url =
-            languageWikipediaSite!!.mobileUrl() + "/wiki/" + (contribution!!.wikidataPlace
-                ?.getWikipediaPageTitle())
-        handleWebUrl(requireContext(), Uri.parse(url))
+            languageWikipediaSite!!.mobileUrl() + "/wiki/" + (
+                contribution!!
+                    .wikidataPlace
+                    ?.getWikipediaPageTitle()
+            )
+        handleWebUrl(requireContext(), url.toUri())
     }
 
-    fun getContributionStateAt(position: Int): Int {
-        return adapter!!.getContributionForPosition(position)!!.state
-    }
+    fun getContributionStateAt(position: Int): Int = adapter!!.getContributionForPosition(position)!!.state
 
-     interface Callback {
+    interface Callback {
         fun notifyDataSetChanged()
 
-        fun showDetail(position: Int, isWikipediaButtonDisplayed: Boolean)
+        fun showDetail(
+            position: Int,
+            isWikipediaButtonDisplayed: Boolean,
+        )
 
         // Notify the viewpager that number of items have changed.
         fun viewPagerNotifyDataSetChanged()

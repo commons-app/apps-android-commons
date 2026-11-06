@@ -9,51 +9,35 @@ import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.wikidata.model.EnumCode
 import fr.free.nrw.commons.wikidata.model.EnumCodeMap
 
-
 enum class NavTabLoggedOut(
     @StringRes private val text: Int,
-    @DrawableRes private val icon: Int
+    @DrawableRes private val icon: Int,
 ) : EnumCode {
-
     EXPLORE(R.string.navigation_item_explore, R.drawable.ic_globe) {
-        override fun newInstance(): Fragment {
-            return ExploreFragment.newInstance()
-        }
+        override fun newInstance(): Fragment = ExploreFragment.newInstance()
     },
     BOOKMARKS(R.string.bookmarks, R.drawable.ic_round_star_border_24px) {
-        override fun newInstance(): Fragment {
-            return BookmarkFragment.newInstance()
-        }
+        override fun newInstance(): Fragment = BookmarkFragment.newInstance()
     },
     MORE(R.string.more, R.drawable.ic_menu_black_24dp) {
-        override fun newInstance(): Fragment? {
-            return null
-        }
-    };
+        override fun newInstance(): Fragment? = null
+    }, ;
 
     companion object {
         private val MAP: EnumCodeMap<NavTabLoggedOut> = EnumCodeMap(NavTabLoggedOut::class.java)
 
         @JvmStatic
-        fun of(code: Int): NavTabLoggedOut {
-            return MAP[code]
-        }
+        fun of(code: Int): NavTabLoggedOut = MAP[code]
 
         @JvmStatic
-        fun size(): Int {
-            return MAP.size()
-        }
+        fun size(): Int = MAP.size()
     }
 
     @StringRes
-    fun text(): Int {
-        return text
-    }
+    fun text(): Int = text
 
     @DrawableRes
-    fun icon(): Int {
-        return icon
-    }
+    fun icon(): Int = icon
 
     abstract fun newInstance(): Fragment?
 

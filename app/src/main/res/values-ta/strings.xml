@@ -11,7 +11,7 @@
 -->
 <resources>
   <string name="commons_facebook">பொதுவக முகநூல் பக்கம்</string>
-  <string name="commons_github">பொதுவக கிட்டுகபு மூலக் குறி</string>
+  <string name="commons_github" fuzzy="true">பொதுவக கிட்டுகபு மூலக் குறி</string>
   <string name="commons_logo">பொதுவக இலச்சினை</string>
   <string name="commons_website">பொதுவக வலைத்தளம்</string>
   <string name="exit_location_picker">இருப்பிடத் தேர்வியிலிருந்து வெளியேற்</string>
@@ -49,7 +49,7 @@
   <string name="uploading_queued">பதிவேற்றம் வரிசைப்படுத்தப்பட்டது (வரையறுக்கப்பட்ட இணைப்பு முறை இயக்கப்பட்டது)</string>
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
   <string name="upload_completed_notification_text">உமது தரவேற்றத்தைக் காணத் தட்டுக</string>
-  <string name="upload_progress_notification_title_start">கோப்பு பதிவேறுகிறது: %s</string>
+  <string name="upload_progress_notification_title_start">கோப்பு பதிவேறுகிறது: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
   <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
   <string name="upload_failed_notification_title">%1$s பதிவேற்றம் தோற்றது</string>
@@ -163,10 +163,9 @@
   <string name="media_detail_coordinates">ஆயத்தொலைகள்</string>
   <string name="media_detail_coordinates_empty">வழங்கப்படவில்லை</string>
   <string name="logout_verification">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
-  <string name="mediaimage_failed">பட ஊடகம் தோல்வியடைந்தது</string>
   <string name="no_subcategory_found">துணைப்பிரிவுகள் இல்லை</string>
   <string name="no_parentcategory_found">முதன்மை வகைகள் இல்லை</string>
-  <string name="welcome_image_welcome_wikipedia">விக்கிப்பீடியாவிற்கு வருக</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">விக்கிப்பீடியாவிற்கு வருக</string>
   <string name="cancel">ரத்து செய்</string>
   <string name="navigation_drawer_open">திற</string>
   <string name="navigation_drawer_close">மூடு</string>
@@ -229,4 +228,13 @@
   <string name="retry">மீண்டும் முயல்க</string>
   <string name="title_activity_search">தேடு</string>
   <string name="search_recent_header">அண்மைய தேடல்கள்:</string>
+  <string name="quiz">புதிர்</string>
+  <string name="rotate">சுழற்று</string>
+  <string name="never_ask_again">இதை மீண்டும் கேட்க வேண்டாம்</string>
+  <string name="leaderboard_yearly">வருடாந்திர</string>
+  <string name="read_help_link">மேலும் படிக்க</string>
+  <string name="learn_more">மேலும் அறிந்து கொள்</string>
+  <string name="explore_map_details">விவரங்கள்</string>
+  <string name="usages_on_commons_heading">பொதுவகம்</string>
+  <string name="nominated_for_deletion_btn">நீக்குதலுக்கு பரிந்துரைக்கப்பட்டது</string>
 </resources>

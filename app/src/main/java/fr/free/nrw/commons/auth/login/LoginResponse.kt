@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.auth.login
 
 import com.google.gson.annotations.SerializedName
-import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.EmailAuthResult
+import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
@@ -26,7 +26,6 @@ internal class ClientLogin {
     private val userName: String? = null
 
     fun toLoginResult(password: String): LoginResult {
-        var userMessage = message
         if ("UI" == status) {
             requests?.forEach { request ->
                 request.id()?.let {
@@ -39,14 +38,12 @@ internal class ClientLogin {
                     }
                 }
             }
-        } else if ("PASS" != status && "FAIL" != status) {
-            // TODO: String resource -- Looks like needed for others in this class too
-            userMessage = "An unknown error occurred."
         }
-        return Result(status ?: "", userName, password, userMessage)
+        return Result(status ?: "", userName, password, message)
     }
 }
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 internal class Request {
     private val id: String? = null
     private val required: String? = null
@@ -57,6 +54,7 @@ internal class Request {
     fun id(): String? = id
 }
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 internal class RequestField {
     private val type: String? = null
     private val label: String? = null
