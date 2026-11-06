@@ -11,7 +11,10 @@ interface MediaLicenseContract {
 
         fun setSelectedLicense(license: String?)
 
-        fun updateLicenseSummary(selectedLicense: String?, numberOfItems: Int)
+        fun updateLicenseSummary(
+            selectedLicense: String?,
+            numberOfItems: Int,
+        )
     }
 
     interface UserActionListener : BasePresenter<View> {

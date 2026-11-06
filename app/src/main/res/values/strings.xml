@@ -260,6 +260,7 @@
   <string name="upload_problem_image_dark">Image is too dark.</string>
   <string name="upload_problem_image_blurry">Image is blurry.</string>
   <string name="upload_problem_image_duplicate">Image is already on Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Your image is in a format not supported by the Commons server, so the app converted it to JPG.</string>
   <string name="upload_problem_different_geolocation">This picture was taken at a different location.</string>
   <string name="upload_problem_fbmd">Please only upload pictures that you have taken by yourself. Don\'t upload pictures that you have found on other people\'s Facebook accounts.</string>
   <string name="upload_problem_do_you_continue">Do you still want to upload this picture?</string>
@@ -279,6 +280,13 @@
   <string name="null_url">Error! URL not found</string>
   <string name="nominate_deletion">Nominate for Deletion</string>
   <string name="nominated_for_deletion">This image has been nominated for deletion.</string>
+  <string name="file_deleted_from_commons">This file was deleted from Commons.</string>
+  <string name="contribution_deleted">Deleted</string>
+  <string name="deleted_file_activity_title">File deleted</string>
+  <string name="deleted_file_explanation">Wikimedia Commons deletes files that are not educational or that break its rules, including copyright violations. Upload photos you took yourself. Pictures copied from the internet, screenshots, logos, and posters are common reasons a file is removed.</string>
+  <string name="deleted_file_view_page">View the file page</string>
+  <string name="deleted_file_view_discussion">Read the deletion discussion</string>
+  <string name="deleted_file_policies">Commons policies and guidelines</string>
   <string name="nominated_see_more">See webpage for details</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
@@ -369,6 +377,12 @@
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
   <string name="crop">Crop</string>
+  <string name="blur">Blur</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Auto-blurring faces and license plates.</string>
+  <string name="autodetect_description">You can discard false positives using the ❌ button of each blurring area.</string>
+  <string name="autoblur_failed_to_load">Failed to load image for AutoBlur</string>
+  <string name="autoblur_no_region_detected">No regions detected for AutoBlur</string>
 
   <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>
@@ -404,12 +418,15 @@
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
+  <string name="notifications_channel_name_uploads">Upload progress</string>
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>
+  <!-- Echo formats an unread count above 99 this way. -->
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>
@@ -572,6 +589,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
   <string name="delete_helper_ask_spam_blurry">totally blurry</string>
   <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
+  <string name="delete_helper_ask_spam_other">Other: specify below</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -746,6 +765,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
   <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Dismiss</string>
+  <string name="custom_selector_duplicates_warning">Some selected images are duplicates and will be removed before upload.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
   <string name="place_state_wlm">WLM</string>
@@ -893,7 +913,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
   <string name="custom_selector_max_image_limit_reached">You can only select a maximum of %d images.</string>
-  <string name="edit_unsupported_format_explanation"><string name="edit_unsupported_format_explanation">In-app editing is only available for JPEG files. To edit other formats, please use a third-party tool.</string></string>
+  <string name="edit_unsupported_format_explanation">In-app editing is only available for JPEG files. To edit other formats, please use a third-party tool.</string>
   <string name="license_cc0_description">No copyright. You release all rights so anyone can use this work in any way.</string>
   <string name="license_cc_by_description">Attribution. Others are free to share and adapt as long as they give you credit.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Others can share and adapt, but must use the same license and give you credit.</string>
@@ -901,4 +921,21 @@ Upload your first media by tapping on the add button.</string>
   <string name="license_cc0_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</string>
   <string name="license_cc_by_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator.</string>
   <string name="license_cc_by_sa_long_description">This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, even for commercial purposes, as long as attribution is given to the creator and the new work is licensed under identical terms.</string>
+
+  <string name="error_getting_image_properties">Error getting image properties:</string>
+  <string name="error_blur_no_rectangle">Please draw at least one rectangle on the photo</string>
+  <string name="error_applying_blur">Error applying blur</string>
+  <string name="failed_to_apply_crop">Failed to apply crop</string>
+  <string name="failed_to_save_image">Failed to save image</string>
+
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (Audio)</string>
+
+  <string name="unsupported_format_title">Unsupported Format</string>
+  <string name="unsupported_format_desc">The selected files could not be opened. Wikimedia Commons strictly requires the following formats:\n\n%s</string>
+
+  <string name="unsupported_files_skipped_title">Unsupported Files Skipped</string>
+  <string name="unsupported_files_skipped_desc">Some files were skipped due to an unsupported format. The app will continue uploading remaining files that match the following supported formats:\n\n%s</string>
 </resources>
