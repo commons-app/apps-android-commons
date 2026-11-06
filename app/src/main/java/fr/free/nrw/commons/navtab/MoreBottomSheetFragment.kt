@@ -2,7 +2,6 @@ package fr.free.nrw.commons.navtab
 
 import android.accounts.AccountManager
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -39,18 +38,16 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 
-
 class MoreBottomSheetFragment : BottomSheetDialogFragment() {
-
     @Inject
     lateinit var commonsLogSender: CommonsLogSender
 
     @Inject
-    @field: Named("default_preferences")
+    @field:Named("default_preferences")
     lateinit var store: JsonKvStore
 
     @Inject
-    @field: Named("commons-page-edit")
+    @field:Named("commons-page-edit")
     lateinit var pageEditClient: PageEditClient
 
     companion object {
@@ -63,7 +60,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentMoreBottomSheetBinding.inflate(inflater, container, false)
 
@@ -87,9 +84,10 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun onFeedbackGithubClicked() {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(GITHUB_ISSUES_URL)
-        }
+        val intent =
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(GITHUB_ISSUES_URL)
+            }
         startActivity(intent)
     }
 
@@ -112,18 +110,20 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     private fun setUserName() {
         val store = BasicKvStore(requireContext(), getUserName())
         val level = store.getString("userAchievementsLevel", "0")
-        if (level == "0"){
-            binding?.moreProfile?.text = getString(
-                R.string.profile_withoutLevel,
-                getUserName(),
-                getString(R.string.see_your_achievements) // Second argument
-            )
+        if (level == "0") {
+            binding?.moreProfile?.text =
+                getString(
+                    R.string.profile_withoutLevel,
+                    getUserName(),
+                    getString(R.string.see_your_achievements), // Second argument
+                )
         } else {
-            binding?.moreProfile?.text = getString(
-                R.string.profile_withLevel,
-                getUserName(),
-                level
-            )
+            binding?.moreProfile?.text =
+                getString(
+                    R.string.profile_withLevel,
+                    getUserName(),
+                    level,
+                )
         }
     }
 
@@ -138,14 +138,14 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun onLogoutClicked() {
-        AlertDialog.Builder(requireActivity())
+        AlertDialog
+            .Builder(requireActivity())
             .setMessage(R.string.logout_verification)
             .setCancelable(false)
             .setPositiveButton(R.string.yes) { _, _ ->
                 val app = requireContext().applicationContext as CommonsApplication
                 app.clearApplicationData(requireContext(), ActivityLogoutListener(requireActivity(), requireContext()))
-            }
-            .setNegativeButton(R.string.no) { dialog, _ -> dialog.cancel() }
+            }.setNegativeButton(R.string.no) { dialog, _ -> dialog.cancel() }
             .show()
     }
 
@@ -157,11 +157,14 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
      * Creates and shows a dialog asking feedback from users
      */
     private fun showFeedbackDialog() {
-        FeedbackDialog(requireContext(), object : OnFeedbackSubmitCallback{
-            override fun onFeedbackSubmit(feedback: Feedback) {
-                uploadFeedback(feedback)
-            }
-        }).apply {
+        FeedbackDialog(
+            requireContext(),
+            object : OnFeedbackSubmitCallback {
+                override fun onFeedbackSubmit(feedback: Feedback) {
+                    uploadFeedback(feedback)
+                }
+            },
+        ).apply {
             setCancelable(false)
             show()
         }
@@ -174,24 +177,27 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     fun uploadFeedback(feedback: Feedback) {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
-        val single = pageEditClient.createNewSection(
-            "Commons:Mobile_app/Feedback",
-            feedbackContentCreator.getSectionTitle(),
-            feedbackContentCreator.getSectionText(),
-            "New feedback on version ${feedback.version} of the app"
-        )
-            .flatMapSingle { Single.just(it) }
-            .firstOrError()
+        val single =
+            pageEditClient
+                .createNewSection(
+                    "Commons:Mobile_app/Feedback",
+                    feedbackContentCreator.getSectionTitle(),
+                    feedbackContentCreator.getSectionText(),
+                    "New feedback on version ${feedback.version} of the app",
+                ).flatMapSingle { Single.just(it) }
+                .firstOrError()
 
-        Single.defer { single }
+        Single
+            .defer { single }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ success ->
-                val messageResId = if (success) {
-                    R.string.thanks_feedback
-                } else {
-                    R.string.error_feedback
-                }
+                val messageResId =
+                    if (success) {
+                        R.string.thanks_feedback
+                    } else {
+                        R.string.error_feedback
+                    }
                 Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
             }, { error ->
                 Timber.e(error)
@@ -199,44 +205,11 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
             })
     }
 
-    /**
-     * This method shows the alert dialog when a user wants to send feedback about the app.
-     */
-    private fun showAlertDialog() {
-        AlertDialog.Builder(requireActivity())
-            .setMessage(R.string.feedback_sharing_data_alert)
-            .setCancelable(false)
-            .setPositiveButton(R.string.ok) { _, _ -> sendFeedback() }
-            .show()
-    }
-
-    /**
-     * This method collects the feedback message and starts the activity with implicit intent
-     * to the available email client.
-     */
-    @SuppressLint("IntentReset")
-    private fun sendFeedback() {
-        val technicalInfo = commonsLogSender.getExtraInfo()
-
-        val feedbackIntent = Intent(Intent.ACTION_SENDTO).apply {
-            type = "message/rfc822"
-            data = Uri.parse("mailto:")
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(CommonsApplication.FEEDBACK_EMAIL))
-            putExtra(Intent.EXTRA_SUBJECT, CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
-            putExtra(Intent.EXTRA_TEXT, "\n\n${CommonsApplication.FEEDBACK_EMAIL_TEMPLATE_HEADER}\n$technicalInfo")
-        }
-
-        try {
-            startActivity(feedbackIntent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
-        }
-    }
-
     fun onAboutClicked() {
-        val intent = Intent(activity, AboutActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
+        val intent =
+            Intent(activity, AboutActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
         requireActivity().startActivity(intent)
     }
 
@@ -245,9 +218,10 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun onSettingsClicked() {
-        val intent = Intent(activity, SettingsActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
+        val intent =
+            Intent(activity, SettingsActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
         requireActivity().startActivity(intent)
     }
 
@@ -256,6 +230,6 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun onPeerReviewClicked() {
-        ReviewActivity.startYourself(requireActivity(), getString(R.string.title_activity_review))
+        ReviewActivity.startYourself(requireActivity())
     }
 }

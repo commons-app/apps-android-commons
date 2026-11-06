@@ -249,6 +249,7 @@
   <string name="upload_problem_image_dark">Le imagine es troppo obscur.</string>
   <string name="upload_problem_image_blurry">Le imagine es indistincte.</string>
   <string name="upload_problem_image_duplicate">Le imagine es ja sur Commons.</string>
+  <string name="upload_problem_image_format_unsupported">Tu imagine es in un formato non supportate per le servitor de Commons, dunque le application lo ha convertite a JPG.</string>
   <string name="upload_problem_different_geolocation">Iste imagine ha essite prendite in un altere loco.</string>
   <string name="upload_problem_fbmd">Per favor, solmente incarga imagines que tu ha prendite tu mesme. Non incarga imagines que tu ha trovate in le contos Facebook de altere personas.</string>
   <string name="upload_problem_do_you_continue">Vole tu totevia incargar iste imagine?</string>
@@ -416,6 +417,9 @@
   <string name="no_categories_selected_warning_desc">Imagines sin categorias es rarmente usabile. Es tu secur de voler continuar sin seliger categorias?</string>
   <string name="no_depictions_selected">Necun representation seligite</string>
   <string name="no_depictions_selected_warning_desc">Imagines con representationes es plus facilemente trovate e lor uso es plus probabile. Es tu secur de voler continuar sin seliger representationes?</string>
+  <string name="depictions_choose_from_map">Eliger desde le carta</string>
+  <string name="depictions_map_confirm">Confirmar</string>
+  <string name="depictions_map_no_photo_location">Le photo non ha position, se monstra tu position actual</string>
   <string name="back_button_warning">Cancellar incargamento</string>
   <string name="back_button_warning_desc">Le uso del button Retro cancellara iste incargamento e tu perdera tu progresso.</string>
   <string name="back_button_continue">Continuar incargamento</string>
@@ -524,6 +528,8 @@
   <string name="delete_helper_ask_spam_selfie">un ‘selfie’ que non es usate in alcun articulo</string>
   <string name="delete_helper_ask_spam_blurry">totalmente indistincte</string>
   <string name="delete_helper_ask_spam_nonsense">nonsenso, absolutemente non usabile in alcun articulo</string>
+  <string name="delete_helper_ask_spam_other">Altere: specifica infra</string>
+  <string name="delete_helper_other_notes_hint">Justification</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Photo de pressa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Un photo qualcunque prendite de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -827,4 +833,11 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Create per %1$s e incargate per %2$s</string>
   <string name="nominated_for_deletion_btn">Nominate pro deletion</string>
   <string name="custom_selector_max_image_limit_reached">Tu pote solmente seliger un maximo de %d imagines.</string>
+  <string name="edit_unsupported_format_explanation">Le modification in le application es solmente disponibile pro le files JPEG. Pro modificar altere formatos, per favor usa un utensile de tertio.</string>
+  <string name="license_cc0_description">Sin derecto de autor. Tu cede tote le derectos de maniera que omnes pote usar iste obra de omne maniera.</string>
+  <string name="license_cc_by_description">Attribution. Altere personas es libere de condivider e adaptar a condition que illes te da recognoscentia.</string>
+  <string name="license_cc_by_sa_description">Attribution-CompartiSimile. Altere personas pote condivider e adaptar, ma debe usar le mesme licentia e dar te recognoscentia.</string>
+  <string name="license_cc0_long_description">Iste licentia permitte que re-usatores distribue, remisce, adapta e disveloppa le material in omne medio o formato, sin conditiones.</string>
+  <string name="license_cc_by_long_description">Iste licentia permitte que re-usatores distribue, remisce, adapta e disveloppa le material in omne medio o formato, etiam pro fines de lucro, a condition que le creator es attribuite.</string>
+  <string name="license_cc_by_sa_long_description">Iste licentia permitte que re-usatores distribue, remisce, adapta e disveloppa le material in omne medio o formato, etiam pro fines de lucro, a condition que le creator es attribuite e le obra nove es publicate sub terminos identic.</string>
 </resources>

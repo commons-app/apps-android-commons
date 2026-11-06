@@ -83,9 +83,13 @@ class UploadRepositoryUnitTest {
     @Mock
     private lateinit var media: Media
 
+    @Mock
+    private lateinit var imageProcessingService: ImageProcessingService
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        whenever(uploadModel.imageProcessingService).thenReturn(imageProcessingService)
         repository =
             UploadRepository(
                 uploadModel,
@@ -144,7 +148,6 @@ class UploadRepositoryUnitTest {
         val empty = Observable.empty<List<CategoryItem>>()
         whenever(categoriesModel.searchAll(any(), any(), any())).thenReturn(empty)
         assertSame(empty, repository.searchAll("", listOf(), listOf()))
-
     }
 
     @Test
@@ -196,7 +199,7 @@ class UploadRepositoryUnitTest {
     fun testGetImageQuality() {
         assertEquals(
             repository.getImageQuality(uploadItem, location),
-            uploadModel.getImageQuality(uploadItem, location),
+            imageProcessingService.validateImage(uploadItem, location),
         )
     }
 
@@ -204,7 +207,7 @@ class UploadRepositoryUnitTest {
     fun testGetCaptionQuality() {
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            uploadModel.getCaptionQuality(uploadItem)
+            imageProcessingService.validateCaption(uploadItem),
         )
     }
 
@@ -384,7 +387,7 @@ class UploadRepositoryUnitTest {
         assertEquals(
             repository.getCategories(listOf("Test")),
             categoriesModel.getCategoriesByName(mutableListOf("Test"))
-                ?: Observable.empty<List<CategoryItem>>()
+                ?: Observable.empty<List<CategoryItem>>(),
         )
     }
 }
