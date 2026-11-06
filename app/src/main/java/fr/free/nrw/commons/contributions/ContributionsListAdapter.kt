@@ -16,19 +16,20 @@ class ContributionsListAdapter internal constructor(
     private val callback: Callback,
     private val mediaClient: MediaClient,
     private val mediaDataExtractor: MediaDataExtractor,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
 ) : PagedListAdapter<Contribution, ContributionViewHolder>(DIFF_CALLBACK) {
     /**
      * Initializes the view holder with contribution data
      */
-    override fun onBindViewHolder(holder: ContributionViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ContributionViewHolder,
+        position: Int,
+    ) {
         holder.init(position, getItem(position))
         holder.updateAttribution()
     }
 
-    fun getContributionForPosition(position: Int): Contribution? {
-        return getItem(position)
-    }
+    fun getContributionForPosition(position: Int): Contribution? = getItem(position)
 
     /**
      * Creates the new View Holder which will be used to display items(contributions) using the
@@ -36,18 +37,26 @@ class ContributionsListAdapter internal constructor(
      */
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ContributionViewHolder {
-        val viewHolder = ContributionViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_contribution, parent, false),
-            callback, compositeDisposable, mediaClient, mediaDataExtractor
-        )
+        val viewHolder =
+            ContributionViewHolder(
+                LayoutInflater
+                    .from(parent.context)
+                    .inflate(R.layout.layout_contribution, parent, false),
+                callback,
+                compositeDisposable,
+                mediaClient,
+                mediaDataExtractor,
+            )
         return viewHolder
     }
 
     interface Callback {
-        fun openMediaDetail(contribution: Int, isWikipediaPageExists: Boolean)
+        fun openMediaDetail(
+            contribution: Int,
+            isWikipediaPageExists: Boolean,
+        )
 
         fun addImageToWikipedia(contribution: Contribution?)
     }
@@ -61,17 +70,13 @@ class ContributionsListAdapter internal constructor(
             object : DiffUtil.ItemCallback<Contribution>() {
                 override fun areItemsTheSame(
                     oldContribution: Contribution,
-                    newContribution: Contribution
-                ): Boolean {
-                    return oldContribution.pageId == newContribution.pageId
-                }
+                    newContribution: Contribution,
+                ): Boolean = oldContribution.pageId == newContribution.pageId
 
                 override fun areContentsTheSame(
                     oldContribution: Contribution,
-                    newContribution: Contribution
-                ): Boolean {
-                    return oldContribution == newContribution
-                }
+                    newContribution: Contribution,
+                ): Boolean = oldContribution == newContribution
             }
     }
 }
