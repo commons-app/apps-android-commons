@@ -20,7 +20,6 @@ import java.security.NoSuchAlgorithmException
 import java.util.Locale
 
 object FileUtils {
-
     /**
      * Get SHA1 of filePath from input stream
      */
@@ -43,7 +42,7 @@ object FileUtils {
             val bigInt = BigInteger(1, md5sum)
             var output = bigInt.toString(16)
             // Fill to 40 chars
-            output = String.format("%40s", output).replace(' ', '0')
+            output = String.format(Locale.ROOT, "%40s", output).replace(' ', '0')
             Timber.i("File SHA1: %s", output)
 
             return output
@@ -62,19 +61,22 @@ object FileUtils {
     /**
      * Get Geolocation of filePath from input filePath path
      */
-    fun getGeolocationOfFile(filePath: String, inAppPictureLocation: LatLng?): String? = try {
-        val exifInterface = ExifInterface(filePath)
-        val imageObj = ImageCoordinates(exifInterface, inAppPictureLocation)
-        if (imageObj.decimalCoords != null) { // If image has geolocation information in its EXIF
-            imageObj.decimalCoords
-        } else {
+    fun getGeolocationOfFile(
+        filePath: String,
+        inAppPictureLocation: LatLng?,
+    ): String? =
+        try {
+            val exifInterface = ExifInterface(filePath)
+            val imageObj = ImageCoordinates(exifInterface, inAppPictureLocation)
+            if (imageObj.decimalCoords != null) { // If image has geolocation information in its EXIF
+                imageObj.decimalCoords
+            } else {
+                ""
+            }
+        } catch (e: IOException) {
+            Timber.e(e)
             ""
         }
-    } catch (e: IOException) {
-        Timber.e(e)
-        ""
-    }
-
 
     /**
      * Read and return the content of a resource filePath as string.
@@ -83,21 +85,23 @@ object FileUtils {
      * @return the content of the filePath
      */
     @Throws(IOException::class)
-    fun readFromResource(fileName: String) = buildString {
-        try {
-            val inputStream = FileUtils::class.java.getResourceAsStream(fileName) ?:
-                throw FileNotFoundException(fileName)
+    fun readFromResource(fileName: String) =
+        buildString {
+            try {
+                val inputStream =
+                    FileUtils::class.java.getResourceAsStream(fileName)
+                        ?: throw FileNotFoundException(fileName)
 
-            BufferedReader(InputStreamReader(inputStream, "UTF-8")).use { reader ->
-                var line: String?
-                while ((reader.readLine().also { line = it }) != null) {
-                    append(line).append("\n")
+                BufferedReader(InputStreamReader(inputStream, "UTF-8")).use { reader ->
+                    var line: String?
+                    while ((reader.readLine().also { line = it }) != null) {
+                        append(line).append("\n")
+                    }
                 }
+            } catch (e: Throwable) {
+                Timber.e(e)
             }
-        } catch (e: Throwable) {
-            Timber.e(e)
         }
-    }
 
     /**
      * Deletes files.
@@ -120,22 +124,26 @@ object FileUtils {
         return deletedAll
     }
 
-    fun getMimeType(context: Context, uri: Uri): String? {
+    fun getMimeType(
+        context: Context,
+        uri: Uri,
+    ): String? {
         val mimeType: String?
         if (uri.scheme != null && uri.scheme == ContentResolver.SCHEME_CONTENT) {
             val cr = context.contentResolver
             mimeType = cr.getType(uri)
         } else {
             val fileExtension = MimeTypeMap.getFileExtensionFromUrl(uri.toString())
-            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
-                fileExtension.lowercase(Locale.getDefault())
-            )
+            mimeType =
+                MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                    fileExtension.lowercase(Locale.getDefault()),
+                )
         }
         return mimeType
     }
 
     fun getFileExt(fileName: String): String {
-        //Default filePath extension
+        // Default filePath extension
         var extension = ".jpg"
 
         val i = fileName.lastIndexOf('.')
@@ -146,8 +154,7 @@ object FileUtils {
     }
 
     @Throws(FileNotFoundException::class)
-    fun getFileInputStream(filePath: String?): FileInputStream =
-        FileInputStream(filePath)
+    fun getFileInputStream(filePath: String?): FileInputStream = FileInputStream(filePath)
 
     fun recursivelyCreateDirs(dirPath: String): Boolean {
         val fileDir = File(dirPath)
@@ -155,5 +162,30 @@ object FileUtils {
             return fileDir.mkdirs()
         }
         return true
+    }
+
+    // list of supported MIME types
+    private val uploadableFileFormats =
+        listOf(
+            "image/jpeg",
+            "image/jpg",
+            "image/png",
+            "image/svg+xml",
+            // HEIC/HEIF formats are not accepted by Commons, but the app converts them to JPEG before upload
+            "image/heic",
+            "image/heif",
+            "audio/ogg",
+        )
+
+    fun isSupportedFileType(
+        context: Context,
+        uri: Uri,
+    ): Boolean {
+        val mimeType = getMimeType(context, uri)
+        return if (mimeType == null) {
+            false
+        } else {
+            uploadableFileFormats.contains(mimeType.lowercase(Locale.getDefault()))
+        }
     }
 }

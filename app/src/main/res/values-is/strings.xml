@@ -487,6 +487,7 @@
   <string name="delete_helper_ask_spam_selfie">sjálfsmynd sem er ekki notuð í neinni grein</string>
   <string name="delete_helper_ask_spam_blurry">algjörlega óskýr</string>
   <string name="delete_helper_ask_spam_nonsense">bull, algjörlega ónothæft í hvaða grein sem er</string>
+  <string name="delete_helper_ask_spam_other">Annað</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fréttaljósmynd</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Einhver mynd af internetinu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>
