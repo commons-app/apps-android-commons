@@ -52,9 +52,11 @@ abstract class BaseUploadMediaPresenter(
         for (i in indexInViewFlipper + 1 until repository.getCount()) {
             val subsequentUploadItem = repository.getUploads()[i]
             subsequentUploadItem.uploadMediaDetails =
-                deepCopy(
-                    repository.getUploads()[indexInViewFlipper].uploadMediaDetails,
-                ).toMutableList()
+                repository
+                    .getUploads()[indexInViewFlipper]
+                    .uploadMediaDetails
+                    .map(UploadMediaDetail::javaCopy)
+                    .toMutableList()
         }
     }
 
@@ -64,14 +66,13 @@ abstract class BaseUploadMediaPresenter(
     override fun fetchTitleAndDescription(indexInViewFlipper: Int) =
         view.updateMediaDetails(repository.getUploads()[indexInViewFlipper].uploadMediaDetails)
 
-    private fun deepCopy(uploadMediaDetails: List<UploadMediaDetail>) =
-        uploadMediaDetails.map(UploadMediaDetail::javaCopy)
-
     override fun onMapIconClicked(indexInViewFlipper: Int) =
         view.showExternalMap(repository.getUploads()[indexInViewFlipper])
 
     override fun onEditButtonClicked(indexInViewFlipper: Int) =
         view.showEditActivity(repository.getUploads()[indexInViewFlipper])
+
+    override fun getUploadItem(indexInViewFlipper: Int): UploadItem? = repository.getUploadItem(indexInViewFlipper)
 
     /**
      * notifies the user that a similar image exists
