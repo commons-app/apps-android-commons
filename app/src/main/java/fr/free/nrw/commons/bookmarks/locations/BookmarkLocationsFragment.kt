@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.bookmarks.locations
 
-import android.Manifest.permission
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
+import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
+import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
@@ -25,7 +27,11 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
     @Inject lateinit var controller: BookmarkLocationsController
 
-    @Inject lateinit var contributionController: ContributionController
+    @Inject lateinit var cameraCoordinator: ContributionCameraCoordinator
+
+    @Inject lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Inject lateinit var uploadCoordinator: ContributionUploadCoordinator
 
     @Inject lateinit var bookmarkLocationDao: BookmarkLocationsDao
 
@@ -37,10 +43,10 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
     private val cameraPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
-            contributionController.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks ->
-                contributionController.onPictureReturnedFromCamera(
+                FilePicker.onPictureReturnedFromCamera(
                     result,
                     requireActivity(),
                     callbacks,
@@ -50,10 +56,10 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
-            contributionController.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks ->
-                contributionController.onPictureReturnedFromGallery(
+                contributionImagePicker.onPictureReturnedFromGallery(
                     result,
                     requireActivity(),
                     callbacks,
@@ -84,24 +90,12 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    contributionController.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        contributionController.handleShowRationaleFlowCameraLocation(
-                            requireActivity(),
-                            inAppCameraLocationPermissionLauncher,
-                            cameraPickLauncherForResult,
-                        )
-                    } else {
-                        contributionController.locationPermissionCallback
-                            ?.onLocationPermissionDenied(
-                                getString(R.string.in_app_camera_location_permission_denied),
-                            )
-                    }
-                }
+                cameraCoordinator.handleLocationPermissionResult(
+                    requireActivity(),
+                    result,
+                    inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult,
+                )
             }
 
         adapter =

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -57,7 +56,15 @@ class ContributionsListFragment :
     WikipediaInstructionsDialogFragment.Callback {
     @JvmField
     @Inject
-    var controller: ContributionController? = null
+    var cameraCoordinator: ContributionCameraCoordinator? = null
+
+    @JvmField
+    @Inject
+    var imagePicker: ContributionImagePicker? = null
+
+    @JvmField
+    @Inject
+    var uploadCoordinator: ContributionUploadCoordinator? = null
 
     @JvmField
     @Inject
@@ -109,10 +116,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromGallery(
+                imagePicker!!.onPictureReturnedFromGallery(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -124,10 +131,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCustomSelector(
+                FilePicker.onPictureReturnedFromCustomSelector(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -139,10 +146,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCamera(
+                FilePicker.onPictureReturnedFromCamera(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -164,31 +171,24 @@ class ContributionsListFragment :
         }
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    activity?.let { currentActivity ->
-                        if (currentActivity.shouldShowRequestPermissionRationale(
-                                permission.ACCESS_FINE_LOCATION,
-                            )
-                        ) {
-                            controller?.handleShowRationaleFlowCameraLocation(
-                                currentActivity,
-                                inAppCameraLocationPermissionLauncher, // Pass launcher
-                                cameraPickLauncherForResult,
-                            )
-                        } else {
-                            controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                                currentActivity.getString(
-                                    R.string.in_app_camera_location_permission_denied,
-                                ),
-                            )
-                        }
-                    }
-                }
+                handleCameraLocationPermissionResult(result)
             }
+    }
+
+    /**
+     * Forwards camera location permission results while this fragment is attached.
+     *
+     * @param results outcomes from the location permission launcher
+     */
+    internal fun handleCameraLocationPermissionResult(results: Map<String, Boolean>) {
+        activity?.let { currentActivity ->
+            cameraCoordinator?.handleLocationPermissionResult(
+                currentActivity,
+                results,
+                inAppCameraLocationPermissionLauncher,
+                cameraPickLauncherForResult,
+            )
+        }
     }
 
     override fun onCreateView(
@@ -426,7 +426,7 @@ class ContributionsListFragment :
     private fun setListeners() {
         binding!!.fabPlus.setOnClickListener { view: View? -> animateFAB(isFabOpen) }
         binding!!.fabCamera.setOnClickListener { view: View? ->
-            controller!!.initiateCameraPick(
+            cameraCoordinator!!.initiateCameraPick(
                 requireActivity(),
                 inAppCameraLocationPermissionLauncher,
                 cameraPickLauncherForResult,
@@ -441,7 +441,7 @@ class ContributionsListFragment :
             true
         }
         binding!!.fabGallery.setOnClickListener { view: View? ->
-            controller!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
+            imagePicker!!.initiateGalleryPick(requireActivity(), galleryPickLauncherForResult, true)
             animateFAB(isFabOpen)
         }
         binding!!.fabGallery.setOnLongClickListener { view: View? ->
@@ -454,7 +454,7 @@ class ContributionsListFragment :
      * Launch Custom Selector.
      */
     private fun launchCustomSelector() {
-        controller!!.initiateCustomGalleryPickWithPermission(
+        imagePicker!!.initiateCustomGalleryPickWithPermission(
             requireActivity(),
             customSelectorLauncherForResult,
         )

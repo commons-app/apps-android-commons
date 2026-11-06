@@ -2,7 +2,8 @@ package fr.free.nrw.commons.nearby
 
 import android.net.Uri
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
+import fr.free.nrw.commons.contributions.ContributionImagePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -28,7 +29,10 @@ class CommonPlaceClickActionsUnitTest {
     private lateinit var store: JsonKvStore
 
     @Mock
-    private lateinit var contributionController: ContributionController
+    private lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Mock
+    private lateinit var cameraCoordinator: ContributionCameraCoordinator
 
     @Mock
     private lateinit var place: Place
@@ -40,7 +44,8 @@ class CommonPlaceClickActionsUnitTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        commonPlaceClickActions = CommonPlaceClickActions(store, activity, contributionController)
+        commonPlaceClickActions =
+            CommonPlaceClickActions(store, activity, cameraCoordinator, contributionImagePicker)
     }
 
     @Test
