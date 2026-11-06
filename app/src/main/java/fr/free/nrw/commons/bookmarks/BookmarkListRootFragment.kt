@@ -22,6 +22,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.Companion.newInstance
 import fr.free.nrw.commons.media.MediaDetailProvider
+import fr.free.nrw.commons.media.clearRemoved
 import fr.free.nrw.commons.navtab.NavTab
 import timber.log.Timber
 
