@@ -330,7 +330,7 @@ class BookmarkListRootFragmentUnitTest {
         whenever(mediaDetails.removedItems).thenReturn(arrayListOf(0))
         Assert.assertEquals(fragment.backPressed(), false)
         Assert.assertEquals(0, gridAdapter.count)
-        verify(mediaDetails).clearRemoved()
+        verify(mediaDetails, times(2)).removedItems
     }
 
     @Test

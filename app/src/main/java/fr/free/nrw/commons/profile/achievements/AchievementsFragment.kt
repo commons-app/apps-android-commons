@@ -10,6 +10,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.TooManyAchievementsException
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
@@ -20,6 +21,11 @@ import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.util.Objects
 import javax.inject.Inject
+
+private const val WIKIDATA_EDITS_THAT_BREAK_CALCULATOR = 150_000
+
+private fun Throwable?.isTooManyAchievements(): Boolean =
+    this is TooManyAchievementsException || this?.cause is TooManyAchievementsException
 
 class AchievementsFragment : CommonsDaggerSupportFragment() {
     @Inject
@@ -132,20 +138,17 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
                                     // in some cases such high number of wiki edit counts cause the
                                     // achievements calculator to fail in some cases, for more details
                                     // refer Issue: #3295
-                                    if (numberOfEdits <= 150_000) {
-                                        showSnackBarWithRetry(false)
-                                    } else {
-                                        showSnackBarWithRetry(true)
-                                    }
+                                    showSnackBarWithRetry(
+                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                    )
                                 }
                             },
                             { throwable ->
                                 Timber.e(throwable, "Fetching achievements statistics failed")
-                                if (numberOfEdits <= 150_000) {
-                                    showSnackBarWithRetry(false)
-                                } else {
-                                    showSnackBarWithRetry(true)
-                                }
+                                showSnackBarWithRetry(
+                                    throwable.isTooManyAchievements() ||
+                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                )
                             },
                         ),
                 )
@@ -192,7 +195,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             } else {
                 binding.progressBar.visibility = View.GONE
                 showDismissibleSnackBar(
-                    requireView().findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed_ultimate_achievement,
                     R.string.retry,
                 ) { setAchievements() }
@@ -203,7 +206,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             }
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
-                requireView().findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed,
                 R.string.retry,
             ) { setAchievements() }
