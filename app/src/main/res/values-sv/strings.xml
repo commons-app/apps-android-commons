@@ -407,6 +407,7 @@
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
   <string name="error_occurred">Ett fel uppstod!</string>
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
+  <string name="notifications_channel_name_uploads">Uppladdningsstatus</string>
   <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
   <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
   <string name="preference_author_name">Anpassat författarnamn</string>

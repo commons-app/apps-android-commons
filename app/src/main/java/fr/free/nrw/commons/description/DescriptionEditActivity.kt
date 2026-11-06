@@ -154,7 +154,9 @@ class DescriptionEditActivity :
         )
     }
 
-    override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
+    override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) = Unit
+
+    override fun onMediaDetailsChanged() = Unit
 
     private fun onVoiceInput(result: ActivityResult) {
         if (result.resultCode == RESULT_OK && result.data != null) {

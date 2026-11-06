@@ -399,6 +399,7 @@
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
   <string name="error_occurred">Се појави грешка!</string>
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
+  <string name="notifications_channel_name_uploads">Напредок на подигањето</string>
   <string name="preference_author_name_toggle">Употреби прилагодено авторско име</string>
   <string name="preference_author_name_toggle_summary">При подигањето користете прилагодено авторско име наместо вашето корисничко име</string>
   <string name="preference_author_name">Прилагодено авторско име</string>
