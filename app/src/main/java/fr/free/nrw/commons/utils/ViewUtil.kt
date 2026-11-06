@@ -14,6 +14,9 @@ import fr.free.nrw.commons.R
 import timber.log.Timber
 
 object ViewUtil {
+    // Portrait snackbars default to two lines, which cuts off the ultimate-achievement sentence.
+    private const val DISMISSIBLE_SNACKBAR_MAX_LINES = 5
+
     /**
      * Utility function to show short snack bar
      * @param view
@@ -156,6 +159,7 @@ object ViewUtil {
 
         ExecutorUtils.uiExecutor().execute {
             val snackbar = Snackbar.make(view, view.context.getString(messageResourceId), Snackbar.LENGTH_INDEFINITE)
+            snackbar.setTextMaxLines(DISMISSIBLE_SNACKBAR_MAX_LINES)
             snackbar.setAction(view.context.getString(actionButtonResourceId)) {
                 snackbar.dismiss()
                 onClickListener.onClick(it)
