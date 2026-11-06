@@ -637,7 +637,7 @@ class MediaDetailFragment :
             return false
         }
         return currentUser.first().equals(uploader.first(), ignoreCase = true) &&
-                currentUser.drop(1) == uploader.drop(1)
+            currentUser.drop(1) == uploader.drop(1)
     }
 
     private fun onMediaRefreshed(media: Media) {
