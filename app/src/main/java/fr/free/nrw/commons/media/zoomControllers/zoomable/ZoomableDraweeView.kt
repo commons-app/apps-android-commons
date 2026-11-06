@@ -63,7 +63,7 @@ open class ZoomableDraweeView :
 
     private val zoomableListener =
         object : ZoomableController.Listener {
-            override fun onTransformBegin(transform: Matrix) {}
+            override fun onTransformBegin(transform: Matrix) = Unit
 
             override fun onTransformChanged(transform: Matrix) {
                 this@ZoomableDraweeView.onTransformChanged(transform)
@@ -213,7 +213,7 @@ open class ZoomableDraweeView :
             if (controller is AbstractDraweeController<*, *>) {
                 val callerContext = controller.callerContext
                 if (callerContext != null) {
-                    throw RuntimeException("Exception in onDraw, callerContext=$callerContext", e)
+                    throw IllegalStateException("Exception in onDraw, callerContext=$callerContext", e)
                 }
             }
             throw e

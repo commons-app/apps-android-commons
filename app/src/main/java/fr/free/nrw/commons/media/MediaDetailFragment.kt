@@ -87,6 +87,7 @@ import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.hideTabs
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
@@ -111,9 +112,6 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.utils.DateUtil.getDateStringWithSkeletonPattern
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
-import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
-import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
-import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -354,7 +352,8 @@ class MediaDetailFragment :
         binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
         binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
         binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        binding.mediaDetailImageView.setOnClickListener {
+        // The spacer sits over the image so the details can scroll. Clicks on the image hit the spacer.
+        binding.mediaDetailImageViewSpacer.setOnClickListener {
             launchZoomActivity(
                 binding.mediaDetailImageView,
             )
@@ -431,20 +430,7 @@ class MediaDetailFragment :
     }
 
     fun launchZoomActivity(view: View) {
-        val hasPermission: Boolean = hasPermission(requireActivity(), PERMISSIONS_STORAGE)
-        if (hasPermission) {
-            launchZoomActivityAfterPermissionCheck(view)
-        } else {
-            checkPermissionsAndPerformAction(
-                requireActivity(),
-                {
-                    launchZoomActivityAfterPermissionCheck(view)
-                },
-                R.string.storage_permission_title,
-                R.string.read_storage_permission_rationale,
-                *PERMISSIONS_STORAGE,
-            )
-        }
+        launchZoomActivityAfterPermissionCheck(view)
     }
 
     private fun fetchFileUsages(fileName: String) {
@@ -746,9 +732,6 @@ class MediaDetailFragment :
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
-            if (finalHeight > 0) {
-                binding.mediaDetailScrollView.visibility = View.VISIBLE
-            }
         }
     }
 
@@ -769,12 +752,15 @@ class MediaDetailFragment :
             ) {
                 imageInfoCache = imageInfo
                 updateAspectRatio(binding.mediaDetailScrollView.width)
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
             }
 
             override fun onFailure(
                 id: String,
                 throwable: Throwable,
             ) {
+                _binding?.mediaDetailImageProgressBar?.visibility = View.GONE
+                Timber.e(throwable, "Failed to load media detail image")
                 revealMediaDetailWithoutImage()
             }
         }
@@ -792,6 +778,7 @@ class MediaDetailFragment :
 
         binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
         val controller: DraweeController =
             Fresco
@@ -862,7 +849,9 @@ class MediaDetailFragment :
                     .markCompletedContributionDeleted(filename)
                     .subscribeOn(Schedulers.io())
                     .subscribe(
-                        { },
+                        {
+                            // No action needed after successful deletion
+                        },
                         { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
                     )
                 if (isAdded) {
@@ -1700,11 +1689,16 @@ class MediaDetailFragment :
                 count--
                 if (count == 0) {
                     endDescription = i
-                    val languageCode: String = description.substring(startCode + 2, endCode)
-                    val languageDescription: String =
-                        description.substring(startDescription, endDescription)
-                    if (allLanguageCodes.contains(languageCode)) {
-                        descriptionList[languageCode] = languageDescription
+                    // Nearby uploads append {{ on Wikidata|Qid}} before |source, so this match
+                    // includes {{own}}. That template's pipe belongs to the next field, and
+                    // slicing it throws before the edit screen can open.
+                    if (endCode >= startCode + 2 && endDescription >= startDescription) {
+                        val languageCode: String = description.substring(startCode + 2, endCode)
+                        val languageDescription: String =
+                            description.substring(startDescription, endDescription)
+                        if (allLanguageCodes.contains(languageCode)) {
+                            descriptionList[languageCode] = languageDescription
+                        }
                     }
                 }
                 i++
@@ -1757,7 +1751,9 @@ class MediaDetailFragment :
                     getString(R.string.about_translate_proceed),
                     getString(R.string.about_translate_cancel),
                     { onDeleteClicked(spinner) },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     spinner,
                 )
             if (isDeleted) {
@@ -1777,7 +1773,9 @@ class MediaDetailFragment :
                         val reason: String = input.text.toString()
                         onDeleteClickedDialogText(reason)
                     },
-                    {},
+                    {
+                        // No action needed when the user cancels
+                    },
                     input,
                 )
             input.addTextChangedListener(
@@ -1800,16 +1798,14 @@ class MediaDetailFragment :
                         start: Int,
                         count: Int,
                         after: Int,
-                    ) {
-                    }
+                    ) = Unit
 
                     override fun onTextChanged(
                         s: CharSequence,
                         start: Int,
                         before: Int,
                         count: Int,
-                    ) {
-                    }
+                    ) = Unit
                 },
             )
             d!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
@@ -2326,7 +2322,7 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
 
@@ -2403,7 +2399,7 @@ fun FileUsagesContainer(
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
     }

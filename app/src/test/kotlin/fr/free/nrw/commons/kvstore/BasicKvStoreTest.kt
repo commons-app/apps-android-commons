@@ -120,8 +120,8 @@ class BasicKvStoreTest {
                 "one" to "fish",
                 "two" to "fish",
                 "red" to "fish",
-                "blue" to "fish"
-            )
+                "blue" to "fish",
+            ),
         )
 
         verify(prefs).edit()
@@ -137,14 +137,14 @@ class BasicKvStoreTest {
         store.putAllStrings(
             mapOf(
                 "this" to "that",
-                KEY_VERSION to "something"
-            )
+                KEY_VERSION to "something",
+            ),
         )
     }
 
     @Test
     fun putString() {
-        store.putString("this" , "that")
+        store.putString("this", "that")
 
         verify(prefs).edit()
         verify(editor).putString("this", "that")
@@ -153,7 +153,7 @@ class BasicKvStoreTest {
 
     @Test
     fun putBoolean() {
-        store.putBoolean("this" , true)
+        store.putBoolean("this", true)
 
         verify(prefs).edit()
         verify(editor).putBoolean("this", true)
@@ -162,7 +162,7 @@ class BasicKvStoreTest {
 
     @Test
     fun putLong() {
-        store.putLong("this" , 123L)
+        store.putLong("this", 123L)
 
         verify(prefs).edit()
         verify(editor).putLong("this", 123L)
@@ -171,7 +171,7 @@ class BasicKvStoreTest {
 
     @Test
     fun putInt() {
-        store.putInt("this" , 16)
+        store.putInt("this", 16)
 
         verify(prefs).edit()
         verify(editor).putInt("this", 16)

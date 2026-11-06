@@ -2,6 +2,7 @@ package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
 
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
 class ExtMetadata {
     @SerializedName("DateTime")
     private val dateTime: Values? = null
