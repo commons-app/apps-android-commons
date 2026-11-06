@@ -4,36 +4,48 @@ import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.RectF
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.rotationMatrix
-import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
-import androidx.exifinterface.media.ExifInterface
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityEditBinding
+import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.io.File
-import kotlin.math.ceil
+import kotlin.math.min
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
- * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
+ * An activity class for editing and rotating images using Jpegtran.
  *
  * This activity allows loads an image, allows users to rotate it by 90-degree increments, and
- * save the edited image while preserving its EXIF attributes. The class includes methods
- * for initializing the UI, animating image rotations, copying EXIF data, and handling
+ * save the edited image while preserving its EXIF attributes by default with jpegtran. The class includes methods
+ * for initializing the UI, animating image rotations and handling
  * the image-saving process.
  */
-class EditActivity : AppCompatActivity() {
-    private var imageUri = ""
+class EditActivity : BaseActivity() {
     private lateinit var vm: EditViewModel
-    private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
+
+    private var editMode = EditMode.NONE
+    private var baseImageMatrix: Matrix? = null
+    private var maxAvailableHeight = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,41 +53,12 @@ class EditActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = ""
         val intent = intent
-        imageUri = intent.getStringExtra("image") ?: ""
+        val imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this)[EditViewModel::class.java]
-        val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+        vm.initJpegtran(applicationContext, imageUri)
 
-        val exifTags =
-            arrayOf(
-                ExifInterface.TAG_F_NUMBER,
-                ExifInterface.TAG_DATETIME,
-                ExifInterface.TAG_EXPOSURE_TIME,
-                ExifInterface.TAG_FLASH,
-                ExifInterface.TAG_FOCAL_LENGTH,
-                ExifInterface.TAG_GPS_ALTITUDE,
-                ExifInterface.TAG_GPS_ALTITUDE_REF,
-                ExifInterface.TAG_GPS_DATESTAMP,
-                ExifInterface.TAG_GPS_LATITUDE,
-                ExifInterface.TAG_GPS_LATITUDE_REF,
-                ExifInterface.TAG_GPS_LONGITUDE,
-                ExifInterface.TAG_GPS_LONGITUDE_REF,
-                ExifInterface.TAG_GPS_PROCESSING_METHOD,
-                ExifInterface.TAG_GPS_TIMESTAMP,
-                ExifInterface.TAG_IMAGE_LENGTH,
-                ExifInterface.TAG_IMAGE_WIDTH,
-                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
-                ExifInterface.TAG_MAKE,
-                ExifInterface.TAG_MODEL,
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.TAG_WHITE_BALANCE,
-                ExifInterface.WHITE_BALANCE_AUTO,
-                ExifInterface.WHITE_BALANCE_MANUAL,
-            )
-        for (tag in exifTags) {
-            val attribute = sourceExif?.getAttribute(tag.toString())
-            sourceExifAttributeList.add(Pair(tag.toString(), attribute))
-        }
-
+        applyEdgeToEdgeBottomInsets(binding.root, false)
+        binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
         init()
     }
 
@@ -84,50 +67,392 @@ class EditActivity : AppCompatActivity() {
      *
      * This function sets up the ImageView for displaying an image, adjusts its view bounds,
      * and scales the initial image to fit within the ImageView. It also sets click listeners
-     * for the "Rotate" and "Save" buttons.
+     * for the "Rotate", "Crop" and "Save" buttons.
      */
     private fun init() {
         binding.iv.adjustViewBounds = true
         binding.iv.scaleType = ImageView.ScaleType.MATRIX
         binding.iv.post {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(imageUri, options)
-
-            val bitmapWidth = options.outWidth
-            val bitmapHeight = options.outHeight
-
-            // Check if the bitmap dimensions exceed a certain threshold
-            val maxBitmapSize = 2000 // Set your maximum size here
-            if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
-                val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
-                options.inSampleSize = scaleFactor
-                options.inJustDecodeBounds = false
-                val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(scaledBitmap)
-                // Update the ImageView with the scaled bitmap
-                val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
-                binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
-            } else {
-                options.inJustDecodeBounds = false
-                val bitmap = BitmapFactory.decodeFile(imageUri, options)
-                binding.iv.setImageBitmap(bitmap)
-
-                val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
-                binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
-                binding.iv.imageMatrix = scaleMatrix(scale, scale)
-            }
+            maxAvailableHeight = binding.iv.measuredHeight.toFloat()
+            updateImagePreview()
         }
         binding.rotateBtn.setOnClickListener {
+            // Allow rotation while in crop mode - overlay will update after animation
             animateImageHeight()
         }
+        binding.cropBtn.setOnClickListener {
+            if (editMode != EditMode.CROP) {
+                setEditMode(EditMode.CROP)
+            }
+        }
         binding.btnSave.setOnClickListener {
-            getRotatedImage()
+            saveEditedImage()
+        }
+        binding.btnBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.editApplyBtn.setOnClickListener {
+            when (editMode) {
+                EditMode.CROP -> applyCrop()
+                EditMode.BLUR -> applyBlur()
+                EditMode.NONE -> Unit
+            }
+        }
+        binding.editCancelBtn.setOnClickListener {
+            setEditMode(EditMode.NONE)
+        }
+        binding.blurBtn.setOnClickListener {
+            if (editMode != EditMode.BLUR) {
+                setEditMode(EditMode.BLUR)
+            }
+        }
+        binding.autoblurBtn.setOnClickListener {
+            lifecycleScope.launch {
+                // Build and show the progress dialog
+                val dialogView =
+                    LayoutInflater
+                        .from(this@EditActivity)
+                        .inflate(R.layout.dialog_autodetect_progress, null)
+                val progressBar = dialogView.findViewById<ProgressBar>(R.id.autodetect_progress)
+                val percentView = dialogView.findViewById<TextView>(R.id.autodetect_percent)
+                val progressDialog =
+                    AlertDialog
+                        .Builder(this@EditActivity)
+                        .setView(dialogView)
+                        .setCancelable(false)
+                        .create()
+                progressDialog.show()
+                val detections =
+                    AutoBlurDetector(applicationContext).detect(vm.imagePath) { percent ->
+                        runOnUiThread {
+                            progressBar?.progress = percent
+                            percentView?.text = "$percent%"
+                        }
+                    }
+                if (detections == null) {
+                    progressDialog.dismiss()
+                    Toast
+                        .makeText(
+                            this@EditActivity,
+                            getString(R.string.autoblur_failed_to_load),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    Timber.e("AutoBlur: decodedBitmap is null for ${vm.imagePath}")
+                    return@launch
+                }
+                delay(700.milliseconds)
+                progressDialog.dismiss()
+
+                if (editMode != EditMode.BLUR) {
+                    setEditMode(EditMode.BLUR)
+                }
+
+                val drawable = binding.iv.drawable
+                if (detections.bounds.isEmpty()) {
+                    Toast
+                        .makeText(
+                            this@EditActivity,
+                            getString(R.string.autoblur_no_region_detected),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                } else if (drawable != null) {
+                    binding.blurOverlay.addRegions(
+                        detections.scaledTo(drawable.intrinsicWidth, drawable.intrinsicHeight),
+                    )
+                }
+
+                // Dismiss dialog after a short delay for visual feedback.
+                progressBar.postDelayed({
+                    progressDialog.dismiss()
+                }, 300)
+            }
         }
     }
 
-    var imageRotation = 0
+    /**
+     * Switches the editor to [mode]: leaves the current crop or blur mode, enters the new one
+     * and toggles between the main toolbar (Rotate/Crop/Save) and the edit toolbar (Apply/Cancel).
+     */
+    private fun setEditMode(mode: EditMode) {
+        when (editMode) {
+            EditMode.CROP -> {
+                // Exit crop mode, hiding the crop overlay.
+                binding.cropOverlay.visibility = View.GONE
+            }
+            EditMode.BLUR -> {
+                // Exit blur mode, restoring the original layout and image view state.
+                binding.blurOverlay.visibility = View.GONE
+                binding.blurOverlay.clearRegions()
+                binding.blurOverlay.resetZoom()
+
+                // Restore overlay height back to match_parent.
+                binding.blurOverlay.layoutParams.height =
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                binding.blurOverlay.requestLayout()
+
+                // Restore image view matrix.
+                baseImageMatrix?.let {
+                    binding.iv.imageMatrix = it
+                }
+            }
+            EditMode.NONE -> Unit
+        }
+        editMode = mode
+        when (mode) {
+            EditMode.CROP -> {
+                // Enter crop mode, showing the crop overlay.
+                binding.cropOverlay.visibility = View.VISIBLE
+
+                binding.iv.post {
+                    updateCropOverlayBounds()
+                }
+            }
+            EditMode.BLUR -> {
+                // Enter blur mode, showing the blur overlay and isolating its controls.
+                // Hide crop overlay (if visible) to avoid conflict
+                binding.cropOverlay.visibility = View.GONE
+                binding.blurOverlay.visibility = View.VISIBLE
+
+                // Match the blur overlay size to the ImageView so they share identical bounds.
+                binding.blurOverlay.layoutParams.height = binding.iv.layoutParams.height
+                binding.blurOverlay.requestLayout()
+
+                // Save current matrix, BlurOverlayView will modify it directly for zoom/pan.
+                baseImageMatrix = Matrix(binding.iv.imageMatrix)
+                binding.iv.scaleType = ImageView.ScaleType.MATRIX
+
+                // Explicitly re-apply the matrix after switching scaleType to MATRIX,
+                // because ImageView resets to its user-set matrix.
+                binding.iv.imageMatrix = Matrix(baseImageMatrix!!)
+                binding.blurOverlay.setImageView(binding.iv)
+                binding.blurOverlay.setBaseMatrix(baseImageMatrix!!)
+            }
+            EditMode.NONE -> Unit
+        }
+
+        // Show Apply/Cancel and hide main buttons while a tool is open, or restore main buttons.
+        val activate = mode != EditMode.NONE
+        val mainVisibility = if (activate) View.GONE else View.VISIBLE
+        val editVisibility = if (activate) View.VISIBLE else View.GONE
+        binding.rotateBtn.visibility = mainVisibility
+        binding.cropBtn.visibility = mainVisibility
+        binding.blurBtn.visibility = mainVisibility
+        binding.autoblurBtn.visibility = mainVisibility
+        // Keep the save button in the view, so there is no layout shift.
+        binding.btnSave.visibility = if (!activate) View.VISIBLE else View.INVISIBLE
+        binding.editOptionsLayout.visibility = editVisibility
+    }
+
+    /**
+     * Updates crop overlay bounds based on current image display (works with any rotation).
+     */
+    private fun updateCropOverlayBounds() {
+        val drawableRect = displayedImageRectInOverlay() ?: return
+        binding.cropOverlay.setImageBounds(
+            drawableRect.left,
+            drawableRect.top,
+            drawableRect.right,
+            drawableRect.bottom,
+        )
+    }
+
+    /**
+     * Returns the bounds of the displayed image in [CropOverlayView] coordinates
+     * (works with any rotation), or null if no image is loaded.
+     */
+    private fun displayedImageRectInOverlay(): RectF? {
+        val drawable = binding.iv.drawable ?: return null
+        val drawableWidth = drawable.intrinsicWidth.toFloat()
+        val drawableHeight = drawable.intrinsicHeight.toFloat()
+
+        val matrix = binding.iv.imageMatrix
+
+        val drawableRect = RectF(0f, 0f, drawableWidth, drawableHeight)
+        matrix.mapRect(drawableRect)
+
+        // Use getLocationInWindow to correctly compute offset between views
+        val ivLoc = IntArray(2)
+        val overlayLoc = IntArray(2)
+        binding.iv.getLocationInWindow(ivLoc)
+        binding.cropOverlay.getLocationInWindow(overlayLoc)
+
+        val offsetX = (ivLoc[0] - overlayLoc[0]).toFloat()
+        val offsetY = (ivLoc[1] - overlayLoc[1]).toFloat()
+        drawableRect.offset(offsetX, offsetY)
+
+        return drawableRect
+    }
+
+    /**
+     * Applies the blur to the selected regions of the image using Jpegtran.
+     */
+    private fun applyBlur() {
+        Timber.d(
+            "%s%s",
+            "applyBlur: originalBitmapWidth=${vm.originalBitmapWidth},",
+            " originalBitmapHeight=${vm.originalBitmapHeight}",
+        )
+        val regions =
+            binding.blurOverlay.getMappedBlurRegions(
+                binding.iv,
+                vm.originalBitmapWidth,
+                vm.originalBitmapHeight,
+            )
+        Timber.d("applyBlur: mappedRegionsCount=${regions.size}")
+
+        if (regions.isEmpty()) {
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_blur_no_rectangle),
+                    Toast.LENGTH_SHORT,
+                ).show()
+            return
+        }
+        // Exit blur mode before updating the preview
+        // because exiting blur mode restores the pre-blur matrix.
+        setEditMode(EditMode.NONE)
+
+        try {
+            vm.blurImage(regions, applicationContext.cacheDir)
+            // Apply pending rotation.
+            vm.applyPendingRotation(applicationContext.cacheDir)
+            // Reload the image displaying the applied blur.
+            updateImagePreview()
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to apply blur ${e.localizedMessage}")
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_applying_blur),
+                    Toast.LENGTH_LONG,
+                ).show()
+        }
+    }
+
+    /**
+     * Applies the current crop selection immediately via JNI, reloads the cropped image
+     * in the ImageView, and returns to the main toolbar.
+     */
+    private fun applyCrop() {
+        try {
+            // Apply pending rotation if any.
+            vm.applyPendingRotation(applicationContext.cacheDir)
+
+            val actualWidth = vm.properties!!.width
+            val actualHeight = vm.properties!!.height
+            val cropRect = binding.cropOverlay.getCropRect()
+            val cropCoords =
+                displayedImageRectInOverlay()?.let { displayedRect ->
+                    CropCoordinates.fromViewCrop(cropRect, displayedRect, actualWidth, actualHeight)
+                }
+
+            if (cropCoords != null) {
+                vm.cropImage(
+                    cropCoords.left,
+                    cropCoords.top,
+                    cropCoords.width,
+                    cropCoords.height,
+                    applicationContext.cacheDir,
+                )
+                // Update the image preview.
+                updateImagePreview()
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "applyCrop: Failed to apply crop ${e.localizedMessage}")
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.failed_to_apply_crop),
+                    Toast.LENGTH_LONG,
+                ).show()
+        }
+        setEditMode(EditMode.NONE)
+    }
+
+    /**
+     * Loads the current [EditViewModel.imagePath] into the ImageView with downsampling, EXIF rotation
+     * handling, and proper matrix fitting, then updates the image properties in [BlurOverlayView].
+     */
+    private fun updateImagePreview() {
+        val finalBitmap = vm.loadPreviewBitmap()
+        val startOrientation = vm.startOrientation
+
+        if (finalBitmap != null) {
+            binding.iv.setImageBitmap(finalBitmap)
+            binding.iv.rotation = 0f
+            vm.imageRotation = startOrientation
+
+            val viewWidth = binding.iv.measuredWidth.toFloat()
+            val bmpWidth = finalBitmap.width.toFloat()
+            val bmpHeight = finalBitmap.height.toFloat()
+
+            val matrix = Matrix()
+            val isRotated90 = (startOrientation == 90 || startOrientation == 270)
+
+            val scale =
+                if (isRotated90) {
+                    min(viewWidth / bmpHeight, maxAvailableHeight / bmpWidth)
+                } else {
+                    min(viewWidth / bmpWidth, maxAvailableHeight / bmpHeight)
+                }
+
+            val viewHeight =
+                if (isRotated90) {
+                    min((scale * bmpWidth).toInt(), maxAvailableHeight.toInt())
+                } else {
+                    min((scale * bmpHeight).toInt(), maxAvailableHeight.toInt())
+                }
+
+            binding.iv.layoutParams.height = viewHeight
+            matrix.postRotate(startOrientation.toFloat(), bmpWidth / 2, bmpHeight / 2)
+            matrix.postScale(scale, scale, bmpWidth / 2, bmpHeight / 2)
+            matrix.postTranslate(
+                viewWidth / 2 - bmpWidth / 2,
+                viewHeight.toFloat() / 2 - bmpHeight / 2,
+            )
+            binding.iv.imageMatrix = matrix
+            binding.iv.requestLayout()
+        }
+
+        try {
+            binding.blurOverlay.setImageProperties(vm.refreshProperties())
+        } catch (e: Exception) {
+            Timber.e(e, "Error getting image properties: ${e.localizedMessage}")
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.error_getting_image_properties),
+                    Toast.LENGTH_LONG,
+                ).show()
+        }
+    }
+
+    /**
+     * Checks for any pending roation and applies rotation.
+     * Saves the edited image.
+     */
+    private fun saveEditedImage() {
+        try {
+            vm.applyPendingRotation(applicationContext.cacheDir)
+            val finalPath = vm.imagePath.toUri().path
+            val resultIntent =
+                Intent().apply {
+                    putExtra("editedImageFilePath", finalPath)
+                }
+            setResult(RESULT_OK, resultIntent)
+            finish()
+        } catch (e: Exception) {
+            Timber.e(
+                e,
+                "saveEditedImage: Exception occurred during save process ${e.localizedMessage}",
+            )
+            Toast
+                .makeText(
+                    this@EditActivity,
+                    getString(R.string.failed_to_save_image),
+                    Toast.LENGTH_LONG,
+                ).show()
+        }
+    }
 
     /**
      * Animates the height, rotation, and scale of an ImageView to provide a smooth
@@ -151,8 +476,10 @@ class EditActivity : AppCompatActivity() {
                 .toFloat()
         val viewWidth: Float = binding.iv.measuredWidth.toFloat()
         val viewHeight: Float = binding.iv.measuredHeight.toFloat()
-        val rotation = imageRotation % 360
+        val rotation = vm.imageRotation % 360
         val newRotation = rotation + 90
+        // if the the user taps "save" before the animation finishes, it will save the new rotation.
+        vm.imageRotation = newRotation % 360
 
         val newViewHeight: Int
         val imageScale: Float
@@ -163,43 +490,51 @@ class EditActivity : AppCompatActivity() {
 
         when (rotation) {
             0, 180 -> {
-                imageScale = viewWidth / drawableWidth
-                newImageScale = viewWidth / drawableHeight
-                newViewHeight = (drawableWidth * newImageScale).toInt()
+                imageScale = min(viewWidth / drawableWidth, maxAvailableHeight / drawableHeight)
+                val fitW = viewWidth / drawableHeight
+                val fitH = maxAvailableHeight / drawableWidth
+                newImageScale = min(fitW, fitH)
+                newViewHeight = min((drawableWidth * newImageScale).toInt(), maxAvailableHeight.toInt())
             }
             90, 270 -> {
-                imageScale = viewWidth / drawableHeight
-                newImageScale = viewWidth / drawableWidth
-                newViewHeight = (drawableHeight * newImageScale).toInt()
+                imageScale = min(viewWidth / drawableHeight, maxAvailableHeight / drawableWidth)
+                val fitW = viewWidth / drawableWidth
+                val fitH = maxAvailableHeight / drawableHeight
+                newImageScale = min(fitW, fitH)
+                newViewHeight = min((drawableHeight * newImageScale).toInt(), maxAvailableHeight.toInt())
             }
             else -> {
                 throw
                 UnsupportedOperationException(
-                    "rotation can 0, 90, 180 or 270. \${rotation} is unsupported"
+                    "rotation can 0, 90, 180 or 270. \${rotation} is unsupported",
                 )
             }
         }
 
-        val animator = ValueAnimator.ofFloat(0f, 1f).setDuration(1000L)
+        val animator = ValueAnimator.ofFloat(0f, 1f).setDuration(500L)
 
         animator.interpolator = AccelerateDecelerateInterpolator()
 
         animator.addListener(
             object : AnimatorListener {
                 override fun onAnimationStart(animation: Animator) {
-                    binding.rotateBtn.setEnabled(false)
+                    binding.rotateBtn.isEnabled = false
                 }
 
                 override fun onAnimationEnd(animation: Animator) {
-                    imageRotation = newRotation % 360
-                    binding.rotateBtn.setEnabled(true)
+                    vm.imageRotation = newRotation % 360
+                    binding.rotateBtn.isEnabled = true
+
+                    // If crop mode is active, update the overlay bounds for new rotation
+                    // Use post{} to wait for the layout pass triggered by requestLayout()
+                    if (editMode == EditMode.CROP) {
+                        binding.iv.post { updateCropOverlayBounds() }
+                    }
                 }
 
-                override fun onAnimationCancel(animation: Animator) {
-                }
+                override fun onAnimationCancel(animation: Animator) = Unit
 
-                override fun onAnimationRepeat(animation: Animator) {
-                }
+                override fun onAnimationRepeat(animation: Animator) = Unit
             },
         )
 
@@ -233,85 +568,13 @@ class EditActivity : AppCompatActivity() {
 
         animator.start()
     }
+}
 
-    /**
-     * Rotates and edits the current image, copies EXIF data, and returns the edited image path.
-     *
-     * This function retrieves the path of the current image specified by `imageUri`,
-     * rotates it based on the `imageRotation` angle using the `rotateImage` method
-     * from the `vm`, and updates the EXIF attributes of the
-     * rotated image based on the `sourceExifAttributeList`. It then copies the EXIF data
-     * using the `copyExifData` method, creates an Intent to return the edited image's file path
-     * as a result, and finishes the current activity.
-     */
-    fun getRotatedImage() {
-        val filePath = imageUri.toUri().path
-        val file = filePath?.let { File(it) }
-
-        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
-        if (rotatedImage == null) {
-            Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
-        }
-        val editedImageExif: ExifInterface?
-        if (rotatedImage?.path != null) {
-            editedImageExif = ExifInterface(rotatedImage.path)
-            copyExifData(editedImageExif)
-        }
-        val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error")
-        setResult(RESULT_OK, resultIntent)
-        finish()
-    }
-
-    /**
-     * Copies EXIF data from sourceExifAttributeList to the provided ExifInterface object.
-     *
-     * This function iterates over the `sourceExifAttributeList` and sets the EXIF attributes
-     * on the provided `editedImageExif` object.
-     *
-     * @param editedImageExif The ExifInterface object for the edited image.
-     */
-    private fun copyExifData(editedImageExif: ExifInterface?) {
-        for (attr in sourceExifAttributeList) {
-            Timber.d("Value is ${attr.second}")
-            editedImageExif!!.setAttribute(attr.first, attr.second)
-            Timber.d("Value is ${attr.second}")
-        }
-
-        editedImageExif?.saveAttributes()
-    }
-
-    /**
-     * Calculates the scale factor to be used for scaling down a bitmap based on its original
-     *  dimensions and the maximum allowed size.
-     * @param originalWidth  The original width of the bitmap.
-     * @param originalHeight The original height of the bitmap.
-     * @param maxSize        The maximum allowed size for either width or height.
-     * @return The scale factor to be used for scaling down the bitmap.
-     *         If the bitmap is smaller than or equal to the maximum size in both dimensions,
-     *         the scale factor is 1.
-     *         If the bitmap is larger than the maximum size in either dimension,
-     *         the scale factor is calculated as the largest power of 2 that is less than or equal
-     *         to the ratio of the original dimension to the maximum size.
-     *         The scale factor ensures that the scaled bitmap will fit within the maximum size
-     *         while maintaining aspect ratio.
-     */
-    private fun calculateScaleFactor(
-        originalWidth: Int,
-        originalHeight: Int,
-        maxSize: Int,
-    ): Int {
-        var scaleFactor = 1
-
-        if (originalWidth > maxSize || originalHeight > maxSize) {
-            // Calculate the largest power of 2 that is less than or equal to the desired
-            // width and height
-            val widthRatio = ceil((originalWidth.toDouble() / maxSize.toDouble())).toInt()
-            val heightRatio = ceil((originalHeight.toDouble() / maxSize.toDouble())).toInt()
-
-            scaleFactor = if (widthRatio > heightRatio) widthRatio else heightRatio
-        }
-
-        return scaleFactor
-    }
+/**
+ * Edit tool that is currently open in [EditActivity], if any.
+ */
+private enum class EditMode {
+    NONE,
+    CROP,
+    BLUR,
 }

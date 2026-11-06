@@ -11,9 +11,10 @@ import kotlin.math.hypot
  *
  * @see ZoomableDraweeView.setTapListener
  */
-class DoubleTapGestureListener(private val draweeView: ZoomableDraweeView) :
-    GestureDetector.SimpleOnGestureListener() {
-
+class DoubleTapGestureListener(
+    private val draweeView: ZoomableDraweeView,
+    private val onSingleTap: (() -> Unit)? = null,
+) : GestureDetector.SimpleOnGestureListener() {
     companion object {
         private const val DURATION_MS = 300L
         private const val DOUBLE_TAP_SCROLL_THRESHOLD = 20
@@ -23,6 +24,15 @@ class DoubleTapGestureListener(private val draweeView: ZoomableDraweeView) :
     private val doubleTapImagePoint = PointF()
     private var doubleTapScale = 1f
     private var doubleTapScroll = false
+
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+        if (onSingleTap != null) {
+            onSingleTap.invoke()
+            return true
+        } else {
+            return super.onSingleTapConfirmed(e)
+        }
+    }
 
     override fun onDoubleTapEvent(e: MotionEvent): Boolean {
         val zc = draweeView.getZoomableController() as AbstractAnimatedZoomableController
@@ -58,9 +68,9 @@ class DoubleTapGestureListener(private val draweeView: ZoomableDraweeView) :
                         targetScale,
                         ip,
                         vp,
-                        DefaultZoomableController.LIMIT_ALL,
+                        TransformLimiter.LIMIT_ALL,
                         DURATION_MS,
-                        null
+                        null,
                     )
                 }
                 doubleTapScroll = false
@@ -70,10 +80,11 @@ class DoubleTapGestureListener(private val draweeView: ZoomableDraweeView) :
     }
 
     private fun shouldStartDoubleTapScroll(viewPoint: PointF): Boolean {
-        val dist = hypot(
-            (viewPoint.x - doubleTapViewPoint.x).toDouble(),
-            (viewPoint.y - doubleTapViewPoint.y).toDouble()
-        )
+        val dist =
+            hypot(
+                (viewPoint.x - doubleTapViewPoint.x).toDouble(),
+                (viewPoint.y - doubleTapViewPoint.y).toDouble(),
+            )
         return dist > DOUBLE_TAP_SCROLL_THRESHOLD
     }
 

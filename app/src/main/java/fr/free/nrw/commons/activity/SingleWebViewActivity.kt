@@ -75,8 +75,7 @@ class SingleWebViewActivity : ComponentActivity() {
                             ) {
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    // TODO("Add contentDescription)
-                                    contentDescription = ""
+                                    contentDescription = getString(R.string.back)
                                 )
                             }
                         }

@@ -13,8 +13,9 @@ import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
-
 object ViewUtil {
+    // Portrait snackbars default to two lines, which cuts off the ultimate-achievement sentence.
+    private const val DISMISSIBLE_SNACKBAR_MAX_LINES = 5
 
     /**
      * Utility function to show short snack bar
@@ -22,14 +23,21 @@ object ViewUtil {
      * @param messageResourceId
      */
     @JvmStatic
-    fun showShortSnackbar(view: View, messageResourceId: Int) {
+    fun showShortSnackbar(
+        view: View,
+        messageResourceId: Int,
+        anchorView: View? = null,
+    ) {
         if (view.context == null) {
             return
         }
 
         ExecutorUtils.uiExecutor().execute {
             try {
-                Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show()
+                Snackbar
+                    .make(view, messageResourceId, Snackbar.LENGTH_SHORT)
+                    .apply { anchorView?.let { setAnchorView(it) } }
+                    .show()
             } catch (e: IllegalStateException) {
                 Timber.e(e.message)
             }
@@ -37,7 +45,10 @@ object ViewUtil {
     }
 
     @JvmStatic
-    fun showLongSnackbar(view: View, text: String) {
+    fun showLongSnackbar(
+        view: View,
+        text: String,
+    ) {
         if (view.context == null) {
             return
         }
@@ -54,7 +65,6 @@ object ViewUtil {
 
                 snackbar.setAction("Dismiss") { snackbar.dismiss() }
                 snackbar.show()
-
             } catch (e: IllegalStateException) {
                 Timber.e(e.message)
             }
@@ -62,7 +72,10 @@ object ViewUtil {
     }
 
     @JvmStatic
-    fun showLongToast(context: Context, text: String) {
+    fun showLongToast(
+        context: Context,
+        text: String,
+    ) {
         if (context == null) {
             return
         }
@@ -73,7 +86,10 @@ object ViewUtil {
     }
 
     @JvmStatic
-    fun showLongToast(context: Context, @StringRes stringResourceId: Int) {
+    fun showLongToast(
+        context: Context,
+        @StringRes stringResourceId: Int,
+    ) {
         if (context == null) {
             return
         }
@@ -84,7 +100,10 @@ object ViewUtil {
     }
 
     @JvmStatic
-    fun showShortToast(context: Context, text: String) {
+    fun showShortToast(
+        context: Context,
+        text: String,
+    ) {
         if (context == null) {
             return
         }
@@ -95,7 +114,10 @@ object ViewUtil {
     }
 
     @JvmStatic
-    fun showShortToast(context: Context?, @StringRes stringResourceId: Int) {
+    fun showShortToast(
+        context: Context?,
+        @StringRes stringResourceId: Int,
+    ) {
         if (context == null) {
             return
         }
@@ -129,7 +151,7 @@ object ViewUtil {
         view: View,
         messageResourceId: Int,
         actionButtonResourceId: Int,
-        onClickListener: View.OnClickListener
+        onClickListener: View.OnClickListener,
     ) {
         if (view.context == null) {
             return
@@ -137,6 +159,7 @@ object ViewUtil {
 
         ExecutorUtils.uiExecutor().execute {
             val snackbar = Snackbar.make(view, view.context.getString(messageResourceId), Snackbar.LENGTH_INDEFINITE)
+            snackbar.setTextMaxLines(DISMISSIBLE_SNACKBAR_MAX_LINES)
             snackbar.setAction(view.context.getString(actionButtonResourceId)) {
                 snackbar.dismiss()
                 onClickListener.onClick(it)
