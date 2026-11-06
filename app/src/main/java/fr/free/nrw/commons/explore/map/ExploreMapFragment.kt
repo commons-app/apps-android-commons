@@ -300,6 +300,12 @@ class ExploreMapFragment :
         // removed tha permission check here to prevent it from running on fragment creation
     }
 
+    override fun onDestroyView() {
+        presenter?.detachView()
+        binding = null
+        super.onDestroyView()
+    }
+
     override fun onResume() {
         super.onResume()
         binding!!.mapView.onResume()
