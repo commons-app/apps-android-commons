@@ -14,9 +14,7 @@ import fr.free.nrw.commons.databinding.FragmentReviewImageBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import javax.inject.Inject
 
-
 class ReviewImageFragment : CommonsDaggerSupportFragment() {
-
     companion object {
         const val CATEGORY = 2
         private const val SPAM = 0
@@ -44,28 +42,31 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
         val media = reviewActivity.media
         if (media?.categoriesHiddenStatus != null && isAdded) {
             // Filter category name attribute from all categories
-            val categories = media.categoriesHiddenStatus.keys.map { key ->
-                var value = key
-                // Each category returned has a format like "Category:<some-category-name>"
-                // so remove the prefix "Category:"
-                if (key.startsWith("Category:")) {
-                    value = key.substring(9)
+            val categories =
+                media.categoriesHiddenStatus.keys.map { key ->
+                    var value = key
+                    // Each category returned has a format like "Category:<some-category-name>"
+                    // so remove the prefix "Category:"
+                    if (key.startsWith("Category:")) {
+                        value = key.substring(9)
+                    }
+                    value
                 }
-                value
-            }
 
             val catString = categories.joinToString(", ")
             if (catString.isNotEmpty() && binding?.tvReviewQuestionContext != null) {
                 val formattedCatString = "<b>$catString</b>"
-                val stringToConvertHtml = getString(
-                    R.string.review_category_explanation,
-                    formattedCatString
-                )
-                val formattedString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    Html.fromHtml(stringToConvertHtml, Html.FROM_HTML_MODE_LEGACY).toString()
-                } else {
-                    Html.fromHtml(stringToConvertHtml).toString()
-                }
+                val stringToConvertHtml =
+                    getString(
+                        R.string.review_category_explanation,
+                        formattedCatString,
+                    )
+                val formattedString =
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        Html.fromHtml(stringToConvertHtml, Html.FROM_HTML_MODE_LEGACY).toString()
+                    } else {
+                        Html.fromHtml(stringToConvertHtml).toString()
+                    }
                 return formattedString
             }
         }
@@ -75,7 +76,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         position = requireArguments().getInt("position")
         binding = FragmentReviewImageBinding.inflate(inflater, container, false)
@@ -106,7 +107,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                 binding?.buttonNo?.setOnClickListener {
                     reviewActivity.reviewController.reportPossibleCopyRightViolation(
                         requireActivity(),
-                        reviewCallback
+                        reviewCallback,
                     )
                 }
             }
@@ -119,7 +120,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                 binding?.buttonNo?.setOnClickListener {
                     reviewActivity.reviewController.reportWrongCategory(
                         requireActivity(),
-                        reviewCallback
+                        reviewCallback,
                     )
                     reviewActivity.swipeToNext()
                 }
@@ -131,7 +132,7 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
                 user = reviewActivity.reviewController.firstRevision?.user()
                     ?: savedInstanceState?.getString(savedUser)
 
-                //if the user is null because of whatsoever reason, review will not be sent anyways
+                // if the user is null because of whatsoever reason, review will not be sent anyways
                 if (!user.isNullOrEmpty()) {
                     explanation = getString(R.string.review_thanks_explanation, user)
                 }
@@ -171,47 +172,50 @@ class ReviewImageFragment : CommonsDaggerSupportFragment() {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        //Save user name when configuration changes happen
+        // Save user name when configuration changes happen
         outState.putString(savedUser, user)
     }
 
     private val reviewCallback: ReviewController.ReviewCallback
-        get() = object : ReviewController.ReviewCallback {
-            override fun onSuccess() {
-                reviewActivity.runRandomizer()
-            }
+        get() =
+            object : ReviewController.ReviewCallback {
+                override fun onSuccess() {
+                    reviewActivity.runRandomizer()
+                }
 
-            override fun onFailure() {
-                //do nothing
-            }
+                override fun onFailure() {
+                    // do nothing
+                }
 
-            override fun onTokenException(e: Exception) {
-                if (e is InvalidLoginTokenException) {
-                    val username = sessionManager.userName
-                    val logoutListener = activity?.let {
-                        CommonsApplication.BaseLogoutListener(
-                            it,
-                            getString(R.string.invalid_login_message),
-                            username
-                        )
-                    }
+                override fun onTokenException(e: Exception) {
+                    if (e is InvalidLoginTokenException) {
+                        val username = sessionManager.userName
+                        val logoutListener =
+                            activity?.let {
+                                CommonsApplication.BaseLogoutListener(
+                                    it,
+                                    getString(R.string.invalid_login_message),
+                                    username,
+                                )
+                            }
 
-                    if (logoutListener != null) {
-                        CommonsApplication.instance.clearApplicationData(
-                            requireActivity(), logoutListener
-                        )
+                        if (logoutListener != null) {
+                            CommonsApplication.instance.clearApplicationData(
+                                requireActivity(),
+                                logoutListener,
+                            )
+                        }
                     }
                 }
-            }
 
-            override fun disableButtons() {
-                this@ReviewImageFragment.disableButtons()
-            }
+                override fun disableButtons() {
+                    this@ReviewImageFragment.disableButtons()
+                }
 
-            override fun enableButtons() {
-                this@ReviewImageFragment.enableButtons()
+                override fun enableButtons() {
+                    this@ReviewImageFragment.enableButtons()
+                }
             }
-        }
 
     /**
      * This function is called when an image has

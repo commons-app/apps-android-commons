@@ -4,9 +4,9 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
@@ -42,7 +42,7 @@ import org.robolectric.annotation.Config
 class BookmarkPictureDaoTest {
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
     private lateinit var testObject: BookmarkPicturesDao
@@ -89,7 +89,7 @@ class BookmarkPictureDaoTest {
         assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getAllBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.getAllBookmarks()
@@ -147,7 +147,7 @@ class BookmarkPictureDaoTest {
         assertTrue(testObject.findBookmark(exampleBookmark))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.findBookmark(exampleBookmark)
@@ -226,7 +226,7 @@ class BookmarkPictureDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("mediaName", "creatorName"))
             }
         }
