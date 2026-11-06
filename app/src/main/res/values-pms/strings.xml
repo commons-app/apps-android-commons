@@ -271,6 +271,13 @@
   <string name="null_url">Eror! Liura nen trovà</string>
   <string name="nominate_deletion">Propon-e për la scancelassion</string>
   <string name="nominated_for_deletion">Sa plancia a l\'é stàita nominà për ël dëscancelament.</string>
+  <string name="file_deleted_from_commons">Cost\'archivi a l\'é stàit dëscancelà da Commons.</string>
+  <string name="contribution_deleted">Dëscancelà.</string>
+  <string name="deleted_file_activity_title">Archivi dëscancelà</string>
+  <string name="deleted_file_explanation">Wikimedia Commons a dëscancela j\'archivi ch\'a l\'han nen ëd but educativ o ch\'a trasgredisso soe régole, comprèise le violassion ëd drit d\'autor. Ch\'a caria dle fòto ch\'a l\'ha fàit cheil midem. Fòto ciapà su da l\'aragnà, fòto dë scren, marche e tilèt a son dle rason comun-e për che n\'archivi a sia gavà via.</string>
+  <string name="deleted_file_view_page">Vëdde la pàgina dl\'archivi</string>
+  <string name="deleted_file_view_discussion">Lese la discussion dë scancelament</string>
+  <string name="deleted_file_policies">Régole e linie guida ëd Commons</string>
   <string name="nominated_see_more">Vëdde la pàgina an sl\'aragnà për ij detaj</string>
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
@@ -390,6 +397,7 @@
   <string name="images_used_explanation">Ël nùmer ëd plance che chiel a l\'ha carià su Comun e che a son ëstàite dovrà an dj\'artìcoj ëd Wikimedia</string>
   <string name="error_occurred">A-i é staje n\'eror!</string>
   <string name="notifications_channel_name_all">Notìfica ëd Commons</string>
+  <string name="notifications_channel_name_uploads">Progress ant ël cariament</string>
   <string name="preference_author_name_toggle">Ch\'a deuvra un nòm d\'autor përsonalisà</string>
   <string name="preference_author_name_toggle_summary">Ch\'a deuvra un nòm d\'autor përsonalisà al pòst ëd sò stranòm cand a caria dle fòto</string>
   <string name="preference_author_name">Nòm d\'autor përsonalisà</string>

@@ -201,10 +201,13 @@ class SearchActivity :
         mediaDetails?.notifyDataSetChanged()
     }
 
+    // Keep the reference URL intact for copy/paste.
+
     /**
      * Open media detail pager fragment on click of image in search results
      * @param position item index that should be opened
      */
+    @Suppress("MaxLineLength")
     override fun onMediaClicked(position: Int) {
         hideKeyboard(findViewById(R.id.searchBox))
         binding!!.tabLayout.visibility = View.GONE
@@ -234,21 +237,28 @@ class SearchActivity :
      */
     override fun onResume() {
         if (supportFragmentManager!!.backStackEntryCount == 1) {
-            // FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then fragment stack is increasing every time.
+            // FIXME: Temporary fix for screen rotation inside media details. If we don't call onBackPressed then
+            // fragment stack is increasing every time.
             // FIXME: Similar issue like this https://github.com/commons-app/apps-android-commons/issues/894
-            // This is called on screen rotation when user is inside media details. Ideally it should show Media Details but since we are not saving the state now. We are throwing the user to search screen otherwise the app was crashing.
+            // This is called on screen rotation when user is inside media details. Ideally it should show Media
+            // Details but since we are not saving the state now. We are throwing the user to search screen otherwise
+            // the app was crashing.
             onBackPressedDispatcher.onBackPressed()
         }
         super.onResume()
     }
 
+    // Keep the reference URL intact for copy/paste.
+
     /**
      * This method is called on click of a recent search to update query in SearchView.
      * @param query Recent Search Query
      */
+    @Suppress("MaxLineLength")
     fun updateText(query: String?) {
         binding!!.searchBox.setQuery(query, true)
-        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
+        // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more
+        // details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
         binding!!.viewPager.requestFocus()
     }

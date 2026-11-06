@@ -418,12 +418,15 @@
 
   <string name="error_occurred">Error occurred!</string>
   <string name="notifications_channel_name_all">Commons Notification</string>
+  <string name="notifications_channel_name_uploads">Upload progress</string>
   <string name="preference_author_name_toggle">Use custom author name</string>
   <string name="preference_author_name_toggle_summary">Use a custom author name instead of your username while uploading photos</string>
   <string name="preference_author_name">Custom author name</string>
   <string name="contributions_fragment">Contributions</string>
   <string name="nearby_fragment">Nearby</string>
   <string name="notifications">Notifications</string>
+  <!-- Echo formats an unread count above 99 this way. -->
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Notifications (read)</string>
   <string name="display_nearby_notification">Display nearby notification</string>
   <string name="display_nearby_notification_summary">Show in-app notification for the nearest place that needs pictures</string>

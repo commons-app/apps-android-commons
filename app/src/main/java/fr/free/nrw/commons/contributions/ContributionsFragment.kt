@@ -51,7 +51,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.notification.NotificationActivity.Companion.startYourself
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
@@ -63,9 +62,9 @@ import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.WLM_END_DATE
+import fr.free.nrw.commons.utils.WLM_START_DATE
 import fr.free.nrw.commons.utils.isMonumentsEnabled
-import fr.free.nrw.commons.utils.wLMEndDate
-import fr.free.nrw.commons.utils.wLMStartDate
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -74,6 +73,9 @@ import timber.log.Timber
 import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
+
+// Echo's formatted badge stops at 99. A raw count above that is "99+".
+private const val NOTIFICATION_BADGE_CAP = 99
 
 class ContributionsFragment :
     CommonsDaggerSupportFragment(),
@@ -259,8 +261,8 @@ class ContributionsFragment :
             Campaign(
                 getString(R.string.wlm_campaign_title),
                 getString(R.string.wlm_campaign_description),
-                wLMStartDate,
-                wLMEndDate,
+                WLM_START_DATE,
+                WLM_END_DATE,
                 NearbyParentFragment.WLM_URL,
                 true,
             )
@@ -339,14 +341,12 @@ class ContributionsFragment :
     fun setNotificationCount() {
         compositeDisposable.add(
             notificationController!!
-                .getNotifications(false)
+                .getUnreadCount()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    { notificationList: List<Notification> ->
-                        this.initNotificationViews(
-                            notificationList,
-                        )
+                    { unreadCount: Int ->
+                        this.initNotificationViews(unreadCount)
                     },
                     { throwable: Throwable? ->
                         Timber.e(
@@ -396,13 +396,19 @@ class ContributionsFragment :
         }
     }
 
-    private fun initNotificationViews(notificationList: List<Notification>) {
-        Timber.d("Number of notifications is %d", notificationList.size)
-        if (notificationList.isEmpty()) {
+    private fun initNotificationViews(unreadCount: Int) {
+        Timber.d("Number of notifications is %d", unreadCount)
+        if (unreadCount <= 0) {
             notificationCount!!.visibility = View.GONE
         } else {
             notificationCount!!.visibility = View.VISIBLE
-            notificationCount!!.text = notificationList.size.toString()
+            // Echo stops counting at 100 and shows "99+" above 99.
+            notificationCount!!.text =
+                if (unreadCount > NOTIFICATION_BADGE_CAP) {
+                    getString(R.string.notification_count_cap)
+                } else {
+                    unreadCount.toString()
+                }
         }
     }
 

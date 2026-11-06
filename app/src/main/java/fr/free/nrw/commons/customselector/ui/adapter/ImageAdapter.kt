@@ -224,7 +224,7 @@ class ImageAdapter(
                             Glide
                                 .with(holder.image)
                                 .load(image.uri)
-                                .thumbnail(0.3f)
+                                .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                                 .into(holder.image)
                         }
                     }
@@ -235,7 +235,7 @@ class ImageAdapter(
                     Glide
                         .with(holder.image)
                         .load(image.uri)
-                        .thumbnail(0.3f)
+                        .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                         .into(holder.image)
                 }
             }
@@ -286,7 +286,7 @@ class ImageAdapter(
                 Glide
                     .with(holder.image)
                     .load(allImages[next].uri)
-                    .thumbnail(0.3f)
+                    .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                     .into(holder.image)
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)
@@ -690,5 +690,9 @@ class ImageAdapter(
      */
     fun setSingleSelection(single: Boolean) {
         singleSelection = single
+    }
+
+    companion object {
+        private const val THUMBNAIL_SIZE_MULTIPLIER = 0.3f
     }
 }

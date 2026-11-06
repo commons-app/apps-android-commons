@@ -121,6 +121,7 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
         try {
             startActivity(feedbackIntent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No email client available to send feedback")
             Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
         }
     }
@@ -139,17 +140,5 @@ class MoreBottomSheetLoggedOutFragment : BottomSheetDialogFragment() {
                 addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }
         requireActivity().startActivity(intent)
-    }
-
-    private inner class BaseLogoutListener : CommonsApplication.LogoutListener {
-        override fun onLogoutComplete() {
-            Timber.d("Logout complete callback received.")
-            val nearbyIntent =
-                Intent(context, LoginActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-            startActivity(nearbyIntent)
-            requireActivity().finish()
-        }
     }
 }

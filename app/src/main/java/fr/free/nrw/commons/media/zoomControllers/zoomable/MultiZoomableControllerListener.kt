@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.media.zoomControllers.zoomable
 
 import android.graphics.Matrix
-import java.util.ArrayList
 
 /**
  * MultiZoomableControllerListener that allows multiple listeners to be added and notified about
@@ -10,7 +9,6 @@ import java.util.ArrayList
  * NOTE: The order of the listeners is important. Listeners can consume transform events.
  */
 class MultiZoomableControllerListener : ZoomableController.Listener {
-
     private val listeners: MutableList<ZoomableController.Listener> = mutableListOf()
 
     @Synchronized

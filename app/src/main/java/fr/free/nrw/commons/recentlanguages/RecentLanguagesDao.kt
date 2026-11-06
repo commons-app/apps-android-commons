@@ -40,16 +40,22 @@ class RecentLanguagesDao
                         arrayOf(),
                         null,
                     )?.use { cursor ->
-                        if (cursor.moveToLast()) {
-                            do {
-                                languages.add(fromCursor(cursor))
-                            } while (cursor.moveToPrevious())
-                        }
+                        languages.addAll(cursorToLanguages(cursor))
                     }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
+            }
+            return languages
+        }
+
+        private fun cursorToLanguages(cursor: Cursor): List<Language> {
+            val languages = mutableListOf<Language>()
+            if (cursor.moveToLast()) {
+                do {
+                    languages.add(fromCursor(cursor))
+                } while (cursor.moveToPrevious())
             }
             return languages
         }
@@ -66,7 +72,7 @@ class RecentLanguagesDao
                     toContentValues(language),
                 )
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -85,7 +91,7 @@ class RecentLanguagesDao
                     null,
                 )
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
@@ -115,7 +121,7 @@ class RecentLanguagesDao
                         }
                     }
             } catch (e: RemoteException) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             } finally {
                 db.release()
             }
