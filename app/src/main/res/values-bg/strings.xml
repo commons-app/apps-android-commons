@@ -17,12 +17,12 @@
   <string name="commons_website">Сайт на Общомедия</string>
   <string name="submit">Изпращане</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Обработване на %d качване</item>
-    <item quantity="other">Обработване на %d качвания</item>
+    <item quantity="one">Обработване на %1$d качване</item>
+    <item quantity="other">Обработване на %1$d качвания</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Изображението ще бъде лицензирано под условията на лиценза %1$s</item>
@@ -59,7 +59,7 @@
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
-  <string name="upload_progress_notification_title_start">Качване на файл: %s</string>
+  <string name="upload_progress_notification_title_start">Качване на файл: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
   <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
@@ -116,10 +116,10 @@
   <string name="preference_license">Лиценз по подразбиране</string>
   <string name="use_previous">Използване на предишното заглавие и описание</string>
   <string name="preference_theme">Облик</string>
-  <string name="license_name_cc_by_sa_four">Признание-Споделяне на споделеното 4.0</string>
-  <string name="license_name_cc_by_four">Признание 4.0</string>
-  <string name="license_name_cc_by_sa">Признание-Споделяне на споделеното 3.0</string>
-  <string name="license_name_cc_by"> Признание 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true">Признание-Споделяне на споделеното 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Признание 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Признание-Споделяне на споделеното 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Признание 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -177,7 +177,7 @@
   <string name="welcome_image_llamas">Лами</string>
   <string name="welcome_image_rainbow_bridge">Мостът Рейнбоу Бридж</string>
   <string name="welcome_image_tulip">Лале</string>
-  <string name="welcome_image_welcome_wikipedia">Добре дошли в Уикипедия</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Добре дошли в Уикипедия</string>
   <string name="welcome_image_sydney_opera_house">Операта в Сидни</string>
   <string name="cancel">Отказ</string>
   <string name="navigation_drawer_open">Отваряне</string>
@@ -261,7 +261,6 @@
   <string name="quiz_screenshot_question">Допустимо ли е качването на този екранен кадър?</string>
   <string name="no_recent_searches">Няма скорошни търсения</string>
   <string name="nominate_delete">Предлагане за изтриване</string>
-  <string name="statistics">Статистика</string>
   <string name="statistics_wikidata_edits">Изображения чрез „Близки места“</string>
   <string name="images_uploaded_explanation">Брой качени в Общомедия изображения, без значение от софтуера за качване</string>
   <string name="images_reverted_explanation">Процент от качените от Вас изображения в Общомедия, които не са били изтрити</string>
@@ -271,6 +270,7 @@
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
   <string name="nearby_fragment">Наблизо</string>
+  <string name="notifications">Известия</string>
   <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
@@ -308,4 +308,5 @@
   <string name="delete_helper_ask_spam_blurry">напълно размазано</string>
   <string name="leaderboard_nearby">Наблизо</string>
   <string name="read_help_link">Прочетете повече</string>
+  <string name="custom_selector_cancel">Отказ</string>
 </resources>

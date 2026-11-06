@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.net.Uri
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -13,6 +16,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.imagepipeline.request.ImageRequest
+import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import java.io.File
@@ -51,6 +55,26 @@ class FailedUploadsAdapter(
         position: Int,
     ) {
         val item: Contribution? = getItem(position)
+        val itemView = holder.itemView
+        val clipboardManager =
+            itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+
+        itemView.setOnLongClickListener {
+            val clip =
+                ClipData.newPlainText(
+                    itemView.context.getString(R.string.caption),
+                    item?.media?.displayTitle,
+                )
+            clipboardManager.setPrimaryClip(clip)
+            Snackbar
+                .make(
+                    itemView,
+                    itemView.context.getString(R.string.caption_copied_to_clipboard),
+                    Snackbar.LENGTH_SHORT,
+                ).show()
+            true
+        }
+
         if (item != null) {
             holder.titleTextView.setText(item.media.displayTitle)
         }
@@ -85,7 +109,7 @@ class FailedUploadsAdapter(
             callback.deleteUpload(item)
         }
         holder.retryButton.setOnClickListener {
-            callback.restartUpload(position)
+            callback.restartUpload(item)
         }
         holder.itemImage.setImageRequest(imageRequest)
     }
@@ -139,10 +163,10 @@ class FailedUploadsAdapter(
         fun deleteUpload(contribution: Contribution?)
 
         /**
-         * Restarts the upload for the item at the specified index.
+         * Restarts the failed upload.
          *
-         * @param index The position of the item in the list.
+         * @param contribution to be restarted.
          */
-        fun restartUpload(index: Int)
+        fun restartUpload(contribution: Contribution?)
     }
 }

@@ -7,8 +7,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
-import timber.log.Timber
-import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
@@ -36,37 +34,39 @@ class CategoriesModel
          * @return
          */
         fun isSpammyCategory(item: String): Boolean {
-            // Check for current and previous year to exclude these categories from removal
-            val now = Calendar.getInstance()
-            val curYear = now[Calendar.YEAR]
-            val curYearInString = curYear.toString()
-            val prevYear = curYear - 1
-            val prevYearInString = prevYear.toString()
-            Timber.d("Previous year: %s", prevYearInString)
-
-            val mentionsDecade = item.matches(".*0s.*".toRegex())
-            val recentDecade = item.matches(".*20[0-2]0s.*".toRegex())
+            // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
             val spammyCategory =
                 item.matches("(.*)needing(.*)".toRegex()) ||
                     item.matches("(.*)taken on(.*)".toRegex())
 
-            // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+            // checks for
+            // dd/mm/yyyy or yy
+            // yyyy or yy/mm/dd
+            // yyyy or yy/mm
+            // mm/yyyy or yy
+            // for `yy` it is assumed that 20XX is implicit.
+            // with separators [., /, -]
+            val isIrrelevantCategory =
+                item.contains(
+                    (
+                        """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}""" +
+                            """|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
+                    ).toRegex(),
+                )
+
             if (spammyCategory) {
                 return true
             }
 
-            if (mentionsDecade) {
-                // Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
-                // Example: "2020s" is OK, but "1920s" is not (and should be skipped)
-                return !recentDecade
-            } else {
-                // If it is not an year in decade form (e.g. 19xxs/20xxs), then check if item contains a 4-digit year
-                // anywhere within the string (.* is wildcard) (Issue #47)
-                // And that item does not equal the current year or previous year
-                return item.matches(".*(19|20)\\d{2}.*".toRegex()) &&
-                    !item.contains(curYearInString) &&
-                    !item.contains(prevYearInString)
+            if (isIrrelevantCategory) {
+                return true
             }
+
+            val hasYear = item.matches("(.*\\d{4}.*)".toRegex())
+            val validYearsRange = item.matches(".*(20[0-9]{2}).*".toRegex())
+
+            // finally if there's 4 digits year exists in XXXX it should only be in 20XX range.
+            return hasYear && !validYearsRange
         }
 
         /**
@@ -78,13 +78,15 @@ class CategoriesModel
 
             // Newly used category...
             if (category == null) {
-                category = Category(
-                    null, item.name,
-                    item.description,
-                    item.thumbnail,
-                    Date(),
-                    0
-                )
+                category =
+                    Category(
+                        null,
+                        item.name,
+                        item.description,
+                        item.thumbnail,
+                        Date(),
+                        0,
+                    )
             }
             category.incTimesUsed()
             categoryDao.save(category)
@@ -127,30 +129,70 @@ class CategoriesModel
         /**
          * Fetches details of every category associated with selected depictions, converts them into
          * CategoryItem and returns them in a list.
+         * If a selected depiction has no categories, the categories in which its P18 belongs are
+         * returned in the list.
          *
          * @param selectedDepictions selected DepictItems
          * @return List of CategoryItem associated with selected depictions
          */
-        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? =
-            Observable
-                .fromIterable(
-                    selectedDepictions.map { it.commonsCategories }.flatten(),
-                ).map { categoryItem ->
-                    categoryClient
-                        .getCategoriesByName(
-                            categoryItem.name,
-                            categoryItem.name,
-                            SEARCH_CATS_LIMIT,
-                        ).map {
-                            CategoryItem(
-                                it[0].name,
-                                it[0].description,
-                                it[0].thumbnail,
-                                it[0].isSelected,
-                            )
-                        }.blockingGet()
-                }.toList()
-                .toObservable()
+        private fun categoriesFromDepiction(
+            selectedDepictions: List<DepictedItem>,
+        ): Observable<MutableList<CategoryItem>>? {
+            val observables =
+                selectedDepictions.map { depictedItem ->
+                    if (depictedItem.commonsCategories.isEmpty()) {
+                        if (depictedItem.primaryImage == null) {
+                            return@map Observable.just(emptyList<CategoryItem>())
+                        }
+                        Observable
+                            .just(
+                                depictedItem.primaryImage,
+                            ).map { image ->
+                                categoryClient
+                                    .getCategoriesOfImage(
+                                        image,
+                                        SEARCH_CATS_LIMIT,
+                                    ).map {
+                                        it.map { category ->
+                                            CategoryItem(
+                                                category.name,
+                                                category.description,
+                                                category.thumbnail,
+                                                category.isSelected,
+                                            )
+                                        }
+                                    }.blockingGet()
+                            }.flatMapIterable { it }
+                            .toList()
+                            .toObservable()
+                    } else {
+                        Observable
+                            .fromIterable(
+                                depictedItem.commonsCategories,
+                            ).map { categoryItem ->
+                                categoryClient
+                                    .getCategoriesByName(
+                                        categoryItem.name,
+                                        categoryItem.name,
+                                        SEARCH_CATS_LIMIT,
+                                    ).map {
+                                        CategoryItem(
+                                            it[0].name,
+                                            it[0].description,
+                                            it[0].thumbnail,
+                                            it[0].isSelected,
+                                        )
+                                    }.blockingGet()
+                            }.toList()
+                            .toObservable()
+                    }
+                }
+            return Observable
+                .concat(observables)
+                .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
+                    accumulator.apply { addAll(currentList) }
+                }
+        }
 
         /**
          * Fetches details of every category by their name, converts them into
@@ -234,33 +276,38 @@ class CategoriesModel
             media: Media?,
         ) {
             if (media == null) {
-                if (item.isSelected) {
-                    selectedCategories.add(item)
-                    updateCategoryCount(item)
-                } else {
-                    selectedCategories.remove(item)
+                updateSelection(item)
+                return
+            }
+
+            val isExistingCategory = media.categories?.contains(item.name) == true
+            when {
+                item.isSelected && isExistingCategory -> selectedExistingCategories.add(item.name)
+                item.isSelected -> updateSelection(item)
+                isExistingCategory -> {
+                    selectedExistingCategories.remove(item.name)
+                    restoreCategoryIfMissing(item, media)
                 }
+                else -> selectedCategories.remove(item)
+            }
+        }
+
+        private fun restoreCategoryIfMissing(
+            item: CategoryItem,
+            media: Media,
+        ) {
+            val categories = media.categories ?: return
+            if (!categories.contains(item.name)) {
+                media.categories = listOf(item.name) + categories
+            }
+        }
+
+        private fun updateSelection(item: CategoryItem) {
+            if (item.isSelected) {
+                selectedCategories.add(item)
+                updateCategoryCount(item)
             } else {
-                if (item.isSelected) {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.add(item.name)
-                    } else {
-                        selectedCategories.add(item)
-                        updateCategoryCount(item)
-                    }
-                } else {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.remove(item.name)
-                        if (!media.categories?.contains(item.name)!!) {
-                            val categoriesList: MutableList<String> = ArrayList()
-                            categoriesList.add(item.name)
-                            categoriesList.addAll(media.categories!!)
-                            media.categories = categoriesList
-                        }
-                    } else {
-                        selectedCategories.remove(item)
-                    }
-                }
+                selectedCategories.remove(item)
             }
         }
 

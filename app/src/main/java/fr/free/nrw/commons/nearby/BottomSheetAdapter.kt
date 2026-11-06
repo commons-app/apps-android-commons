@@ -16,7 +16,7 @@ import fr.free.nrw.commons.nearby.model.BottomSheetItem
 /**
  * RecyclerView Adapter for displaying items in a bottom sheet.
  *
- * @property context The context used for inflating layout resources.
+ * @param context The context used for inflating layout resources.
  * @property itemList The list of BottomSheetItem objects to display.
  * @constructor Creates an instance of BottomSheetAdapter.
  */
@@ -68,7 +68,21 @@ class BottomSheetAdapter(
                 item.imageResourceId == R.drawable.ic_round_star_border_24px
             ) {
                 item.imageResourceId = icon
-                this.notifyItemChanged(index)
+                notifyItemChanged(index)
+                return
+            }
+        }
+    }
+
+    fun toggleBookmarkIcon() {
+        itemList.forEachIndexed { index, item ->
+            if (item.imageResourceId == R.drawable.ic_round_star_filled_24px) {
+                item.imageResourceId = R.drawable.ic_round_star_border_24px
+                notifyItemChanged(index)
+                return
+            } else if (item.imageResourceId == R.drawable.ic_round_star_border_24px) {
+                item.imageResourceId = R.drawable.ic_round_star_filled_24px
+                notifyItemChanged(index)
                 return
             }
         }

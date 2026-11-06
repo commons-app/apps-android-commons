@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload
 
+import android.content.ContentResolver
+import android.content.Context
 import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
@@ -18,6 +20,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.io.FileInputStream
+import java.io.InputStream
 
 class ImageProcessingServiceTest {
     @Mock
@@ -38,6 +41,9 @@ class ImageProcessingServiceTest {
     @Mock
     internal var location: LatLng? = null
 
+    @Mock
+    internal lateinit var appContext: Context
+
     @InjectMocks
     var imageProcessingService: ImageProcessingService? = null
 
@@ -49,8 +55,10 @@ class ImageProcessingServiceTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         val mediaUri = mock(Uri::class.java)
+        val contentUri = mock(Uri::class.java)
         val mockPlace = mock(Place::class.java)
         val mockTitle = mock(List::class.java)
+        val contentResolver = mock(ContentResolver::class.java)
 
         `when`(mockPlace.wikiDataEntityId).thenReturn("Q1")
         `when`(mockPlace.getLocation()).thenReturn(mock(LatLng::class.java))
@@ -59,16 +67,21 @@ class ImageProcessingServiceTest {
         `when`(mockTitle.isSet).thenReturn(true)*/
 
         `when`(uploadItem.mediaUri).thenReturn(mediaUri)
+        `when`(uploadItem.contentUri).thenReturn(contentUri)
+        `when`(appContext.contentResolver).thenReturn(contentResolver)
         `when`(uploadItem.imageQuality).thenReturn(ImageUtils.IMAGE_WAIT)
+        `when`(uploadItem.hasUnsupportedFormat).thenReturn(false)
 
         `when`(uploadItem.uploadMediaDetails).thenReturn(mockTitle as MutableList<UploadMediaDetail>?)
 
         `when`(uploadItem.place).thenReturn(mockPlace)
-        `when`(uploadItem.fileName).thenReturn("File:jpg")
+        `when`(uploadItem.filename).thenReturn("File:jpg")
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
             .thenReturn(mock(FileInputStream::class.java))
-        `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
+        `when`(appContext.contentResolver.openInputStream(ArgumentMatchers.any()))
+            .thenReturn(mock(InputStream::class.java))
+        `when`(fileUtilsWrapper!!.getSHA1(any(InputStream::class.java)))
             .thenReturn("fileSha")
 
         `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString(), any(LatLng::class.java)))
@@ -77,8 +90,9 @@ class ImageProcessingServiceTest {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-            .thenReturn(Single.just(ImageUtils.IMAGE_OK))
+        `when`(
+            imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)),
+        ).thenReturn(Single.just(ImageUtils.IMAGE_OK))
 
         `when`(fileUtilsWrapper!!.getFileInputStream(ArgumentMatchers.anyString()))
             .thenReturn(mock(FileInputStream::class.java))
@@ -125,10 +139,18 @@ class ImageProcessingServiceTest {
 
     @Test
     fun validateImageForWrongGeoLocation() {
-        `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
-            .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
+        `when`(
+            imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)),
+        ).thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateImageForUnsupportedFormat() {
+        `when`(uploadItem.hasUnsupportedFormat).thenReturn(true)
+        val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
+        assertEquals(ImageUtils.IMAGE_FORMAT_UNSUPPORTED, validateImage.blockingGet())
     }
 
     @Test
@@ -137,5 +159,16 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateImageForAudioFileSkipsImageChecks() {
+        `when`(uploadItem.mimeType).thenReturn("audio/ogg")
+        `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
+        `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(ImageUtils.FILE_NO_EXIF))
+        val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
     }
 }

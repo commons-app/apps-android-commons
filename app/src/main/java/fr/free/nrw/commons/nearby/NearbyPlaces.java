@@ -1,8 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
+import static java.util.Collections.emptyList;
+
+import android.location.Location;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Radial;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Rectangular;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,13 +50,14 @@ public class NearbyPlaces {
      * @param customQuery
      * @return list of places obtained
      */
+    @NonNull
     List<Place> radiusExpander(final LatLng currentLatLng, final String lang,
         final boolean returnClosestResult, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
         final double maxRadius;
 
-        List<Place> places = Collections.emptyList();
+        List<Place> places = emptyList();
 
         // If returnClosestResult is true, then this means that we are trying to get closest point
         // to use in cardView in Contributions fragment
@@ -101,6 +108,7 @@ public class NearbyPlaces {
      * Retrieves a list of places from a Wikidata query based on screen coordinates and optional
      * parameters.
      *
+     * @param centerPoint             The center of the map, used for radius queries if required.
      * @param screenTopRight          The top right corner of the screen (latitude, longitude).
      * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
      * @param lang                    The language for the query.
@@ -110,14 +118,74 @@ public class NearbyPlaces {
      * @return A list of places obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
+    @NonNull
     public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng centerPoint,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
-        return okHttpJsonApiClient
-            .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
-                customQuery);
+        if (customQuery != null) {
+            final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
+                    shouldQueryForMonuments,
+                    customQuery);
+            return nearbyPlaces != null ? nearbyPlaces : emptyList();
+        }
+
+        final int lowerLimit = 1000, upperLimit = 1500;
+
+        final float[] results = new float[1];
+        Location.distanceBetween(centerPoint.getLatitude(), screenTopRight.getLongitude(),
+            centerPoint.getLatitude(), screenBottomLeft.getLongitude(), results);
+        final float longGap = results[0] / 1000f;
+        Location.distanceBetween(screenTopRight.getLatitude(), centerPoint.getLongitude(),
+            screenBottomLeft.getLatitude(), centerPoint.getLongitude(), results);
+        final float latGap = results[0] / 1000f;
+
+        if (Math.max(longGap, latGap) < 100f) {
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
+            if (itemCount < upperLimit) {
+                final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
+                    shouldQueryForMonuments, null);
+                return nearbyPlaces != null ? nearbyPlaces : emptyList();
+            }
+        }
+
+        // minRadius, targetRadius and maxRadius are radii in decameters
+        // unlike other radii here, which are in kilometers, to avoid looping over
+        // floating point values
+        int minRadius = 0, maxRadius = Math.round(Math.min(300f, Math.min(longGap, latGap))) * 100;
+        int targetRadius = maxRadius / 2;
+        while (minRadius < maxRadius) {
+            targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+                new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
+            if (itemCount >= lowerLimit && itemCount < upperLimit) {
+                break;
+            }
+            if (targetRadius > maxRadius / 2 && itemCount < lowerLimit / 5) { // fast forward
+                minRadius = targetRadius;
+                targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                minRadius = targetRadius;
+                if (itemCount < lowerLimit / 10 && minRadius < maxRadius) { // fast forward again
+                    targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
+                    minRadius = targetRadius;
+                }
+                continue;
+            }
+            if (itemCount < upperLimit) {
+                minRadius = targetRadius;
+            } else {
+                maxRadius = targetRadius - 1;
+            }
+        }
+        final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+            new Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
+            null);
+        return nearbyPlaces != null ? nearbyPlaces : emptyList();
     }
 
     /**

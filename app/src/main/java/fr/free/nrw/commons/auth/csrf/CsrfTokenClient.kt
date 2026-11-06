@@ -32,7 +32,7 @@ class CsrfTokenClient(
             try {
                 if (retry > 0) {
                     // Log in explicitly
-                    loginClient.loginBlocking(userName, password, "")
+                    loginClient.loginBlocking(userName, password)
                 }
 
                 // Get CSRFToken response off the main thread.
@@ -59,7 +59,7 @@ class CsrfTokenClient(
                 }
                 break
             } catch (e: LoginFailedException) {
-                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, e)
             } catch (t: Throwable) {
                 Timber.w(t)
             }
@@ -92,6 +92,8 @@ class CsrfTokenClient(
                 override fun failure(caught: Throwable?) = retryWithLogin(cb) { caught }
 
                 override fun twoFactorPrompt() = cb.twoFactorPrompt()
+
+                override fun emailAuthPrompt() = cb.emailAuthPrompt()
             },
         )
 
@@ -165,12 +167,20 @@ class CsrfTokenClient(
             }
 
             override fun twoFactorPrompt(
+                loginResult: LoginResult,
                 caught: Throwable,
                 token: String?,
             ) = callback.twoFactorPrompt()
 
+            override fun emailAuthPrompt(
+                loginResult: LoginResult,
+                caught: Throwable,
+                token: String?,
+            ) = callback.emailAuthPrompt()
+
             // Should not happen here, but call the callback just in case.
-            override fun passwordResetPrompt(token: String?) = callback.failure(LoginFailedException("Logged in with temporary password."))
+            override fun passwordResetPrompt(token: String?) =
+                callback.failure(LoginFailedException("Logged in with temporary password."))
 
             override fun error(caught: Throwable) = callback.failure(caught)
         },
@@ -190,6 +200,8 @@ class CsrfTokenClient(
         fun failure(caught: Throwable?)
 
         fun twoFactorPrompt()
+
+        fun emailAuthPrompt()
     }
 
     companion object {
@@ -203,4 +215,5 @@ class CsrfTokenClient(
 
 class InvalidLoginTokenException(
     message: String,
-) : Exception(message)
+    cause: Throwable? = null,
+) : Exception(message, cause)

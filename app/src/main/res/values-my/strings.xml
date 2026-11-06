@@ -18,13 +18,11 @@
   <string name="nearby_row_image">ရုပ်ပုံ</string>
   <string name="nearby_all">အားလုံး</string>
   <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
   </plurals>
   <string name="starting_uploads">အပ်ပလုဒ်များ စတင်ခြင်း</string>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d ခု တင်ထားသည်</item>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
   </plurals>
   <plurals name="share_license_summary">
@@ -43,6 +41,7 @@
   <string name="app_name">ကွန်မွန်းစ်</string>
   <string name="menu_settings">အပြင်အဆင်များ</string>
   <string name="intent_share_upload_label">ကွန်မွန့်စ်တွင် တင်ရန်</string>
+  <string name="upload_in_progress">အက်ပလုဒ်တင်ခြင်း ဆောင်ရွက်နေဆဲ</string>
   <string name="username">အသုံးပြုသူအမည်</string>
   <string name="password">စကားဝှက်</string>
   <string name="login_credential">ကွန်မွန့်စ် ဘီတာအေကာင့်သို့ ဝင်မည်</string>
@@ -51,14 +50,15 @@
   <string name="signup">မှတ်ပုံတင်ရန်</string>
   <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်...</string>
   <string name="logging_in_message">ခေတ္တစောင့်ပါ...</string>
+  <string name="updating_caption_title">စာတန်းများနှင့် ဖော်ပြချက်များကို အပ်ဒိတ်လုပ်နေသည်</string>
   <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
-  <string name="login_success" fuzzy="true">လော့အင် အောင်မြင်သည်</string>
-  <string name="login_failed" fuzzy="true">လော့အင် မအောင်မြင်ပါ</string>
+  <string name="login_success">လော့အင် အောင်မြင်သည်</string>
+  <string name="login_failed">လော့အင် မအောင်မြင်ပါ</string>
   <string name="upload_failed">ဖိုင်မတွေ့ပါ၊ အခြးဖိုင်တစ်ခု စမ်းကြည့်ပါ။</string>
   <string name="authentication_failed" fuzzy="true">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
-  <string name="upload_progress_notification_title_start">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
@@ -79,10 +79,10 @@
   <string name="add_caption_toast">ဤဖိုင်အတွက် ပုံစာသတ်မှတ်ပေးပါ</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="share_caption_hint">ပုံစာ</string>
-  <string name="login_failed_network" fuzzy="true">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
+  <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
   <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
-  <string name="login_failed_generic" fuzzy="true">လော့ဂ်အင် မအောင်မြင်ပါ</string>
+  <string name="login_failed_generic">လော့ဂ်အင် မအောင်မြင်ပါ</string>
   <string name="share_upload_button">တင်ရန်</string>
   <string name="provider_modifications">ပြုပြင်မှုများ</string>
   <string name="menu_upload_single">တင်ရန်</string>
@@ -105,14 +105,17 @@
   <string name="no_uploads_yet">သင် မည်သည့်ဓာတ်ပုံကိုမှ မတင်ရသေးပါ။</string>
   <string name="menu_retry_upload">ပြန်လုပ်</string>
   <string name="menu_cancel_upload">မလုပ်တော့</string>
+  <string name="language_search_type_language_name">ဘာသာစကားအမည်ကို ရိုက်ထည့်ပါ</string>
+  <string name="language_search_recent_searches">လတ်တလော ရှာဖွေမှုများ</string>
+  <string name="language_search_all_languages">ဘာသာစကားအားလုံး</string>
   <string name="menu_download">ဒေါင်းလုပ်ယူရန်</string>
   <string name="preference_license">နဂို လိုင်စင်</string>
   <string name="use_previous">ယခင် ခေါင်းစဉ်နှင့်ဖော်ပြချက် သုံးမည်</string>
   <string name="preference_theme" fuzzy="true">ညကြည့်ပုံစံ</string>
-  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
-  <string name="license_name_cc_by_four"> Attribution 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -156,13 +159,13 @@
   <string name="media_detail_license">လိုင်စင်</string>
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
+  <string name="email_auth_code">အီးမေးလ် အတည်ပြုကုဒ်</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
-  <string name="mediaimage_failed">မီဒီယာရုပ်ပုံ မအောင်မြင်ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="welcome_image_tulip">ခတ္တာပန်း</string>
-  <string name="welcome_image_welcome_wikipedia">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
-  <string name="welcome_image_welcome_copyright">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">ဝီကီပီးဒီးယားမှ ကြိုဆိုပါသည်။</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">မူပိုင်ခွင့်မှ ကြိုဆိုပါသည်</string>
   <string name="cancel">မလုပ်တော့ပါ</string>
   <string name="navigation_drawer_open">ဖွင့်ရန်</string>
   <string name="navigation_drawer_close">ပိတ်ရန်</string>
@@ -244,6 +247,7 @@
   <string name="result">ရလဒ်</string>
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
   <string name="congratulatory_message_quiz">အဖြေများ၏ %1$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
+  <string name="quiz_continue">ဆက်လက်</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
   <string name="user_not_logged_in" fuzzy="true">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
@@ -258,11 +262,10 @@
   <string name="delete">ဖျက်ရန်</string>
   <string name="Achievements">အောင်မြင်မှုပန်းတိုင်များ</string>
   <string name="Profile">ပရိုဖိုင်</string>
-  <string name="statistics">စာရင်းအင်း</string>
   <string name="statistics_thanks">ကျေးဇူးစကား လက်ခံရရှိ</string>
   <string name="statistics_featured">အထူးဓာတ်ပုံများ</string>
   <string name="statistics_wikidata_edits">\"အနီးအနားနေရာများ\" မှတဆင့် ရုပ်ပုံများ</string>
-  <string name="level" fuzzy="true">အဆင့်</string>
+  <string name="level" fuzzy="true">အဆင့် %1$d</string>
   <string name="images_uploaded">ရုပ်ပုံများ အက်ပလုတ်တင်ပြီးပြီ</string>
   <string name="achievements_share_message">သင်၏အောင်မြင်မှုများကို မိတ်ဆွေများနှင့် မျှဝေလိုက်ပါ</string>
   <string name="achievements_revert_limit_message">အနည်းဆုံး လိုအပ်ချက်:</string>
@@ -282,6 +285,7 @@
   <string name="previous">နောက်</string>
   <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
   <string name="title_page_bookmarks_locations">တည်နေရာများ</string>
+  <string name="title_page_bookmarks_categories">ကဏ္ဍများ</string>
   <string name="provider_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="provider_bookmarks_location">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="deletion_reason_uploaded_by_mistake">ယင်းအား မှားယွင်းပြီး အက်ပလုဒ်တင်ခဲ့မိသည်</string>
@@ -302,9 +306,9 @@
   <string name="check_category_edit_summary">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုနေသည်</string>
   <string name="check_category_success_title">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုခဲ့သည်</string>
   <string name="nominate_for_deletion_done">ပြီးပြီ</string>
-  <string name="send_thank_success_title">ကျေးဇူးတင်စကားပို့ခြင်း- အောင်မြင်သည်</string>
-  <string name="send_thank_failure_title">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
-  <string name="send_thank_toast">%1$s အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
+  <string name="send_thank_success_title" fuzzy="true">ကျေးဇူးတင်စကားပို့ခြင်း- အောင်မြင်သည်</string>
+  <string name="send_thank_failure_title" fuzzy="true">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
+  <string name="send_thank_toast" fuzzy="true">%1$s အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
   <string name="review_thanks">ပံ့ပိုးသူအား ကျေးဇူးတင်လိုပါသလား</string>
   <string name="review_category_explanation">ဤရုပ်ပုံသည် %1$s ကဏ္ဍများအောက်တွင်ရှိသည်။</string>
@@ -318,7 +322,7 @@
   <string name="please_wait">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
   <string name="welcome_dont_upload_content_description">နမူနာရုပ်ပုံများ အက်ပလုပ်တင်ရန် မဟုတ်ပါ</string>
   <string name="skip_image">ဤရုပ်ပုံအား ကျော်သွားမည်</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">ဒေါင်းလုဒ် မအောင်မြင်ပါ။ ပြင်ပသိုလှောင်မှုခွင့်ပြုချက်မရှိဘဲ ဖိုင်ဒေါင်းလုဒ်မဆွဲနိုင်ပါ။</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission" fuzzy="true">ဒေါင်းလုဒ် မအောင်မြင်ပါ။ ပြင်ပသိုလှောင်မှုခွင့်ပြုချက်မရှိဘဲ ဖိုင်ဒေါင်းလုဒ်မဆွဲနိုင်ပါ။</string>
   <string name="exif_tag_name_author">ဖန်တီးသူ</string>
   <string name="exif_tag_name_copyright">မူပိုင်ခွင့်</string>
   <string name="exif_tag_name_location">တည်နေရာ</string>
@@ -327,6 +331,7 @@
   <string name="exif_tag_name_serialNumbers">အစဉ်လိုက် နံပါတ်များ</string>
   <string name="exif_tag_name_software">ဆော့ဝဲလ်</string>
   <string name="image_info">ရုပ်ပုံ အချက်အလက်</string>
+  <string name="upload_categories_dont_show_this_message_again">ဤမက်ဆေ့ကို နောက်တခါ မပြပါနှင့်</string>
   <string name="no_categories_found">ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="dialog_box_text_nomination">%1$s ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="default_description_language">နဂို ဖော်ပြချက်ဘာသာစကား</string>
@@ -337,6 +342,7 @@
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">မှုန်ဝါး</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">အဓိပ္ပါယ်မရှိ</string>
+  <string name="delete_helper_ask_spam_other">အခြား</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
   <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
   <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>
@@ -346,7 +352,7 @@
   <string name="coordinates_edit_helper_show_edit_title">ကိုဩဒိနိတ် မွမ်းမံ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">အောင်မြင်</string>
   <string name="description_edit_helper_show_edit_message">ဖော်ပြချက်များ ပေါင်းထည့်ခဲ့သည်။</string>
-  <string name="no_achievements_yet">%s သည် မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
+  <string name="no_achievements_yet">%1$s သည် မည့်သည့်ပံ့ပိုးမှုမျှ မရှိသေးပါ</string>
   <string name="account_created">အကောင့်ဖန်တီးပြီးပါပြီ</string>
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
@@ -395,8 +401,8 @@
   <string name="custom_selector_already_uploaded_image_text">ဤရုပ်ပုံအား ကွန်မွန်းစ်သို့ အက်ပလုဒ်တင်ပြီးသားဖြစ်ပါသည်။</string>
   <string name="learn_more">ပိုမိုလေ့လာရန်</string>
   <string name="need_permission">ခွင့်ပြုချက် လိုအပ်</string>
-  <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %s</string>
-  <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
+  <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %1$s</string>
+  <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %1$s</string>
   <string name="menu_view_user_page" fuzzy="true">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
   <string name="edit_categories">ကဏ္ဍများ တည်းဖြတ်ရန်</string>
   <string name="advanced_options">အဆင့်မြင့်ရွေးချယ်ရန်များ</string>
@@ -416,4 +422,15 @@
   <string name="report_user">ဤအသုံးပြုသူကို တိုင်ကြားရန်</string>
   <string name="report_content">ဤအကြောင်းအရာကို တိုင်ကြားရန်</string>
   <string name="similar_coordinate_description_auto_set">သြဒိနိတ်များသည် အတိအကျ သြဒိနိတ်များမဟုတ်သော်လည်း ဤပုံကို အပ်လုဒ်လုပ်သူသည် နီးစပ်သည်ဟု ယူဆသည်။</string>
+  <string name="learn_how_to_write_a_useful_description">အသုံးဝင်သော ဖော်ပြချက်တစ်ခု ရေးသားနည်းကို လေ့လာပါ</string>
+  <string name="learn_how_to_write_a_useful_caption">အသုံးဝင်တဲ့ စာတန်းထိုးရေးသားနည်းကို လေ့လာပါ</string>
+  <string name="see_your_achievements">သင်၏ အောင်မြင်မှုတွေများကို ကြည့်ရန်</string>
+  <string name="edit_image">ပုံကို တည်းဖြတ်ပါ</string>
+  <string name="edit_location">တည်နေရာကို တည်းဖြတ်ပါ</string>
+  <string name="location_updated">တည်နေရာကို အပ်ဒိတ်လုပ်လိုက်ပါပြီ။</string>
+  <string name="remove_location">တည်နေရာကို ဖယ်ရှားရန်</string>
+  <string name="usages_on_commons_heading">ကွန်မွန်းစ်</string>
+  <string name="usages_on_other_wikis_heading">အခြားဝီကီများ</string>
+  <string name="nominated_for_deletion_btn">ဖျက်ပစ်ရန် အဆိုပြုထားသည်</string>
+  <string name="license_cc0_description">မူပိုင်ခွင့်မရှိပါ။ ဤအလုပ်ကို မည်သူမဆို မည်သည့်နည်းဖြင့်မဆို အသုံးပြုနိုင်ရန် သင်သည် မူပိုင်ခွင့်အားလုံးကို ဖြန့်ချိပါသည်။</string>
 </resources>

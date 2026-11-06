@@ -56,6 +56,9 @@
     tools:ignore="GoogleAppIndexingWarning"
     tools:replace="android:appComponentFactory">
     <activity
+      android:name=".activity.SingleWebViewActivity"
+      android:exported="false" />
+    <activity
       android:name=".nearby.WikidataFeedback"
       android:exported="false" />
     <activity
@@ -63,7 +66,7 @@
       android:exported="false" />
     <activity
       android:name=".description.DescriptionEditActivity"
-      android:exported="true"
+      android:exported="false"
       android:theme="@style/EditActivityTheme" />
     <activity
       android:name=".edit.EditActivity"
@@ -81,6 +84,7 @@
       android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
     <activity
       android:name=".auth.LoginActivity"
+      android:windowSoftInputMode="adjustPan"
       android:exported="true">
       <intent-filter>
         <category android:name="android.intent.category.LAUNCHER" />
@@ -95,11 +99,12 @@
     <activity android:name=".WelcomeActivity" />
     <activity
       android:name=".upload.UploadActivity"
-      android:configChanges="orientation|screenSize|keyboard"
+      android:configChanges="orientation|screenSize|keyboard|smallestScreenSize|screenLayout"
       android:exported="true"
       android:hardwareAccelerated="false"
       android:icon="@mipmap/ic_launcher"
-      android:windowSoftInputMode="adjustResize">
+      android:launchMode="singleTask"
+      android:windowSoftInputMode="adjustPan">
       <intent-filter android:label="@string/intent_share_upload_label">
         <action android:name="android.intent.action.SEND" />
 
@@ -128,6 +133,10 @@
     <activity
       android:name=".AboutActivity"
       android:label="@string/title_activity_about"
+      android:parentActivityName=".contributions.MainActivity" />
+    <activity
+      android:name=".media.DeletedFileActivity"
+      android:label="@string/deleted_file_activity_title"
       android:parentActivityName=".contributions.MainActivity" />
     <activity
       android:name=".auth.SignupActivity"
@@ -173,6 +182,10 @@
     <activity
       android:name=".locationpicker.LocationPickerActivity"
       android:label="Location Picker" />
+
+    <activity
+      android:name=".upload.depicts.DepictsPickerActivity"
+      android:label="Depicts Map Picker" />
 
     <service
       android:name=".auth.WikiAccountAuthenticatorService"
@@ -229,12 +242,6 @@
       android:label="@string/provider_bookmarks"
       android:syncable="false" />
     <provider
-      android:name=".bookmarks.locations.BookmarkLocationsContentProvider"
-      android:authorities="${applicationId}.bookmarks.locations.contentprovider"
-      android:exported="false"
-      android:label="@string/provider_bookmarks_location"
-      android:syncable="false" />
-    <provider
       android:name=".bookmarks.items.BookmarkItemsContentProvider"
       android:authorities="${applicationId}.bookmarks.items.contentprovider"
       android:exported="false"
@@ -251,6 +258,14 @@
       <meta-data
         android:name="android.appwidget.provider"
         android:resource="@xml/pic_of_day_app_widget_info" />
+    </receiver>
+
+    <receiver
+      android:name=".utils.DownloadReceiver"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+      </intent-filter>
     </receiver>
 
     <uses-library

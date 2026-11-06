@@ -63,13 +63,13 @@ data class Contribution constructor(
         Media(
             formatCaptions(item.uploadMediaDetails),
             categories,
-            item.fileName,
+            item.filename,
             formatDescriptions(item.uploadMediaDetails),
             sessionManager.userName,
             sessionManager.userName,
         ),
         localUri = item.mediaUri,
-        decimalCoords = item.gpsCoords.decimalCoords,
+        decimalCoords = item.gpsCoords?.decimalCoords,
         dateCreatedSource = "",
         depictedItems = depictedItems,
         wikidataPlace = from(item.place),
@@ -96,6 +96,12 @@ data class Contribution constructor(
         const val STATE_PAUSED = 4
 
         /**
+         * Commons deleted this file. The row stays in the contributions list so it can be shown
+         * differently from a normal upload.
+         */
+        const val STATE_DELETED = 5
+
+        /**
          * Formatting captions to the Wikibase format for sending labels
          * @param uploadMediaDetails list of media Details
          */
@@ -112,7 +118,7 @@ data class Contribution constructor(
          */
         fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
             descriptions
-                .filter { it.descriptionText.isNotEmpty() }
+                .filter { !it.descriptionText.isNullOrEmpty() }
                 .joinToString(separator = "") { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 

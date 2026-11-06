@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.model
 
 import android.net.Uri
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -17,7 +18,8 @@ data class Image(
      */
     var name: String,
     /**
-     uri : Uri of the image, points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
+     uri : Uri of the image, points to image location or name,
+     eg content://media/external/images/camera/10495 (Android 10)
      */
     var uri: Uri,
     /**
@@ -48,7 +50,12 @@ data class Image(
         this(
             parcel.readLong(),
             parcel.readString()!!,
-            parcel.readParcelable(Uri::class.java.classLoader)!!,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                parcel.readParcelable(Uri::class.java.classLoader, Uri::class.java)!!
+            } else {
+                @Suppress("DEPRECATION")
+                parcel.readParcelable(Uri::class.java.classLoader)!!
+            },
             parcel.readString()!!,
             parcel.readLong(),
             parcel.readString()!!,
@@ -120,5 +127,17 @@ data class Image(
         override fun createFromParcel(parcel: Parcel): Image = Image(parcel)
 
         override fun newArray(size: Int): Array<Image?> = arrayOfNulls(size)
+    }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + bucketId.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + uri.hashCode()
+        result = 31 * result + path.hashCode()
+        result = 31 * result + bucketName.hashCode()
+        result = 31 * result + sha1.hashCode()
+        result = 31 * result + date.hashCode()
+        return result
     }
 }

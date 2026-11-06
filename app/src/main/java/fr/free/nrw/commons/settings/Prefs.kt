@@ -1,12 +1,9 @@
 package fr.free.nrw.commons.settings
 
 object Prefs {
-    const val GLOBAL_PREFS = "fr.free.nrw.commons.preferences"
-
-    const val TRACKING_ENABLED = "eventLogging"
     const val DEFAULT_LICENSE = "defaultLicense"
-    const val UPLOADS_SHOWING = "uploadsShowing"
     const val MANAGED_EXIF_TAGS = "managed_exif_tags"
+    const val VANISHED_ACCOUNT = "vanishAccount"
     const val DESCRIPTION_LANGUAGE = "languageDescription"
     const val APP_UI_LANGUAGE = "appUiLanguage"
     const val KEY_THEME_VALUE = "appThemePref"

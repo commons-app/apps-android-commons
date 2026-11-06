@@ -21,24 +21,26 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
+import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -100,7 +102,7 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var place: Place
 
     @Mock
-    private var location: fr.free.nrw.commons.location.LatLng? = null
+    private lateinit var location: LatLng
 
     @Mock
     private lateinit var defaultKvStore: JsonKvStore
@@ -145,18 +147,14 @@ class UploadMediaDetailFragmentUnitTest {
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(defaultKvStore.getString("description_language", "")).thenReturn("en")
     }
 
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
         Assert.assertNotNull(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetCallback() {
-        fragment.setCallback(null)
     }
 
     @Test
@@ -168,14 +166,8 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetImageToBeUploaded() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageToBeUploaded(null, null, location)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnCreateView() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreateView(layoutInflater, null, savedInstanceState)
     }
 
@@ -185,34 +177,6 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onViewCreated(view, savedInstanceState)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInit() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitCaseGetIndexInViewFlipperNonZero() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(1)
-        `when`(callback.totalNumberOfSteps).thenReturn(5)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
     }
 
     @Test
@@ -231,22 +195,6 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnNextButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onNextButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPreviousButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onPreviousButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowSimilarImageFragment() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val similar: ImageCoordinates = mock()
@@ -258,7 +206,7 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnImageProcessed() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.mediaUri).thenReturn(mediaUri)
-        fragment.onImageProcessed(uploadItem, place)
+        fragment.onImageProcessed(uploadItem)
     }
 
     @Test
@@ -339,7 +287,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowExternalMap() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(0.0)
         `when`(imageCoordinates.decLongitude).thenReturn(0.0)
@@ -350,7 +298,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackOnMapIconClicked() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -366,7 +314,11 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -376,13 +328,13 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackAddLocationDialog() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(fragment, "callback", callback)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
@@ -394,9 +346,13 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
 
-        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
         handleResultMethod.invoke(fragment, activityResult)
@@ -407,7 +363,41 @@ class UploadMediaDetailFragmentUnitTest {
     @Throws(Exception::class)
     fun testUpdateMediaDetails() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.updateMediaDetails(null)
+        fragment.updateMediaDetails(mock())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUpdateMediaDetailsWithCaptionOnlyClearsShowNearbyFound() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "showNearbyFound", true)
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        fragment.updateMediaDetails(details)
+        val showNearbyFound: Boolean = Whitebox.getInternalState(fragment, "showNearbyFound")
+        Assert.assertFalse(showNearbyFound)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnBecameVisibleWithCaptionOnlyDoesNotReapplyNearbyPlace() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        UploadActivity.nearbyPopupAnswers = mutableMapOf(place to true)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(fragment, "nearbyPlace", place)
+        Whitebox.setInternalState(fragment, "indexOfFragment", 1)
+        Whitebox.setInternalState(fragment, "showNearbyFound", true)
+
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        `when`(presenter.fetchTitleAndDescription(1)).thenAnswer {
+            fragment.updateMediaDetails(details)
+        }
+
+        fragment.onBecameVisible()
+        Mockito.verify(presenter, Mockito.never()).onUserConfirmedUploadIsOfPlace(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.anyInt(),
+        )
     }
 
     @Test
@@ -415,21 +405,6 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnDestroyView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onDestroyView()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnLlContainerTitleClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onLlContainerTitleClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnIbMapClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onIbMapClicked()
     }
 
     @Test
@@ -458,7 +433,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
         `when`(uploadItem.gpsCoords).thenReturn(null)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn("13.0")
@@ -474,14 +449,14 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNotNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(8.0)
         `when`(imageCoordinates.decLongitude).thenReturn(-8.0)
         `when`(imageCoordinates.zoomLevel).thenReturn(14.0)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn(null)
         fragment.showExternalMap(uploadItem)
-        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1)).zoomLevel
+        Mockito.verify(uploadItem.gpsCoords, Mockito.times(1))?.zoomLevel
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)

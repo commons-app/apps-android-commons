@@ -7,7 +7,8 @@ class NearbyResultItem(
     private val wikipediaArticle: ResultTuple?,
     private val commonsArticle: ResultTuple?,
     private val location: ResultTuple?,
-    private val label: ResultTuple?,
+    @field:SerializedName("label") private val label: ResultTuple?,
+    @field:SerializedName("itemLabel") private val itemLabel: ResultTuple?,
     @field:SerializedName("streetAddress") private val address: ResultTuple?,
     private val icon: ResultTuple?,
     @field:SerializedName("class") private val className: ResultTuple?,
@@ -18,6 +19,8 @@ class NearbyResultItem(
     @field:SerializedName("description") private val description: ResultTuple?,
     @field:SerializedName("endTime") private val endTime: ResultTuple?,
     @field:SerializedName("monument") private val monument: ResultTuple?,
+    @field:SerializedName("dateOfOfficialClosure") private val dateOfOfficialClosure: ResultTuple?,
+    @field:SerializedName("pointInTime") private val pointInTime: ResultTuple?,
 ) {
     fun getItem(): ResultTuple = item ?: ResultTuple()
 
@@ -27,7 +30,15 @@ class NearbyResultItem(
 
     fun getLocation(): ResultTuple = location ?: ResultTuple()
 
-    fun getLabel(): ResultTuple = label ?: ResultTuple()
+    /**
+     * Returns label for display (pins, popup), using fallback to itemLabel if needed.
+     */
+    fun getLabel(): ResultTuple = label ?: itemLabel ?: ResultTuple()
+
+    /**
+     * Returns only the original label field, for Wikidata edits.
+     */
+    fun getOriginalLabel(): ResultTuple = label ?: ResultTuple()
 
     fun getIcon(): ResultTuple = icon ?: ResultTuple()
 
@@ -41,6 +52,8 @@ class NearbyResultItem(
 
     fun getDestroyed(): ResultTuple = destroyed ?: ResultTuple()
 
+    fun getDateOfOfficialClosure(): ResultTuple = dateOfOfficialClosure ?: ResultTuple()
+
     fun getDescription(): ResultTuple = description ?: ResultTuple()
 
     fun getEndTime(): ResultTuple = endTime ?: ResultTuple()
@@ -48,4 +61,6 @@ class NearbyResultItem(
     fun getAddress(): String = address?.value ?: ""
 
     fun getMonument(): ResultTuple? = monument
+
+    fun getPointInTime(): ResultTuple = pointInTime ?: ResultTuple()
 }

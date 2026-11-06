@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.media
 
-import fr.free.nrw.commons.OkHttpConnectionFactory.UnsuccessfulResponseInterceptor.SUPPRESS_ERROR_LOG_HEADER
+import fr.free.nrw.commons.SUPPRESS_ERROR_LOG_HEADER
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -89,12 +89,15 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
-     * This method retrieves a list of Media objects filtered using list geosearch query. Example: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
+     * This method retrieves a list of Media objects filtered using list geosearch query. Example:
+     * Keep the example API URL intact for copy/paste.
+     * https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
      *
      * @param location     the search location
      * @param itemLimit    how many images are returned
      * @return
      */
+    @Suppress("MaxLineLength")
     @GET(
         "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
             "&generator=geosearch&ggsnamespace=6$MEDIA_PARAMS", // Search parameters
@@ -186,13 +189,25 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     companion object {
+        /**
+         * Retrieved thumbnail height will be about this tall, but must be at least this height.
+         * A larger number means higher thumbnail resolution but more network usage.
+         */
+        const val THUMB_HEIGHT_PX = 450
+
         const val MEDIA_PARAMS =
-            "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
+            "&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlheight=" +
+                THUMB_HEIGHT_PX +
+                "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|" +
+                "ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
 
         /**
          * fetches category detail(title, hidden) for each category along with File information
          */
         const val MEDIA_PARAMS_WITH_CATEGORY_DETAILS =
-            "&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
+            "&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlheight=" +
+                THUMB_HEIGHT_PX +
+                "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|" +
+                "DateTimeOriginal|Artist|LicenseShortName|LicenseUrl"
     }
 }

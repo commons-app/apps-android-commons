@@ -71,7 +71,7 @@ class UploadTest {
     fun setup() {
         try {
             Intents.init()
-        } catch (ex: IllegalStateException) {
+        } catch (_: IllegalStateException) {
         }
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()

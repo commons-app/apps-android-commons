@@ -24,22 +24,35 @@
       android:id="@+id/toolbarBinding"
       layout="@layout/toolbar" />
 
-
-    <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/skip_image"
-      style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:id="@+id/skip_image_layout"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:drawableEnd="@drawable/ic_info_outline_24dp"
-      android:drawablePadding="@dimen/medium_height"
-      android:drawableTint="@color/button_blue_dark"
-      android:paddingLeft="@dimen/medium_height"
-      android:paddingRight="@dimen/medium_height"
-      android:text="@string/skip_image"
-      android:textAllCaps="true"
-      android:textColor="@color/button_blue_dark"
-      android:textStyle="bold" />
+      android:orientation="horizontal"
+      android:gravity="center">
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/skip_image"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingHorizontal="@dimen/tiny_padding"
+        android:text="@string/skip_image"
+        android:textAllCaps="true"
+        android:textColor="@color/button_blue_dark"
+        android:textStyle="bold" />
+
+      <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/skip_image_info"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:tint="@color/button_blue_dark"
+        android:layout_width="@dimen/half_standard_height"
+        android:layout_height="@dimen/half_standard_height"
+        android:layout_marginStart="@dimen/small_gap"
+        android:src="@drawable/ic_info_outline_24dp" />
+
+    </LinearLayout>
 
     <RelativeLayout
       android:layout_width="match_parent"

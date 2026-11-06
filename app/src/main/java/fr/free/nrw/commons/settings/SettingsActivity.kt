@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import fr.free.nrw.commons.databinding.ActivitySettingsBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 
 /**
@@ -12,7 +13,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 class SettingsActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
-//    private var settingsDelegate: AppCompatDelegate? = null
 
     /**
      * to be called when the activity starts
@@ -22,6 +22,7 @@ class SettingsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         val view = binding.root
+        applyEdgeToEdgeAllInsets(view)
         setContentView(view)
 
         setSupportActionBar(binding.toolbarBinding.toolbar)
@@ -42,7 +43,7 @@ class SettingsActivity : BaseActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 

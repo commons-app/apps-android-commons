@@ -10,12 +10,13 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
+import fr.free.nrw.commons.utils.handleGeoCoordinates
+import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,7 +34,9 @@ class CommonPlaceClickActions
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+                    Timber.d(
+                        "Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}",
+                    )
                     storeSharedPrefs(place)
                     contributionController.initiateCameraPick(activity, launcher, resultLauncher)
                 }
@@ -73,11 +76,14 @@ class CommonPlaceClickActions
             }
 
         fun onGalleryClicked(): (Place, ActivityResultLauncher<Intent>) -> Unit =
-            {place, galleryPickLauncherForResult ->
+            { place, galleryPickLauncherForResult ->
                 if (applicationKvStore.getBoolean("login_skipped", false)) {
                     showLoginDialog()
                 } else {
-                    Timber.d("Gallery button tapped. Image title: ${place.getName()}Image desc: ${place.getLongDescription()}")
+                    Timber.d(
+                        "Gallery button tapped. Image title: ${place.getName()}" +
+                            "Image desc: ${place.getLongDescription()}",
+                    )
                     storeSharedPrefs(place)
                     contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
@@ -104,7 +110,7 @@ class CommonPlaceClickActions
 
         fun onDirectionsClicked(): (Place) -> Unit =
             {
-                Utils.handleGeoCoordinates(activity, it.getLocation())
+                handleGeoCoordinates(activity, it.getLocation())
             }
 
         private fun storeSharedPrefs(selectedPlace: Place) {
@@ -113,7 +119,7 @@ class CommonPlaceClickActions
         }
 
         private fun openWebView(link: Uri): Boolean {
-            Utils.handleWebUrl(activity, link)
+            handleWebUrl(activity, link)
             return true
         }
 
@@ -128,6 +134,8 @@ class CommonPlaceClickActions
             AlertDialog
                 .Builder(activity)
                 .setMessage(R.string.login_alert_message)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel) { _, _ -> }
                 .setPositiveButton(R.string.login) { dialog, which ->
                     setPositiveButton()
                 }.show()

@@ -4,9 +4,9 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
@@ -18,20 +18,20 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_DESCRIPTION_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_NAME_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_CATEGORIES_THUMBNAIL_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_DESCRIPTION
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_ID
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IMAGE
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_INSTANCE_LIST
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_IS_SELECTED
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_NAME
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.CREATE_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.DROP_TABLE_STATEMENT
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onCreate
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onDelete
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.onUpdate
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_DESCRIPTION_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_NAME_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_CATEGORIES_THUMBNAIL_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_DESCRIPTION
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IMAGE
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_INSTANCE_LIST
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_IS_SELECTED
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_NAME
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onCreate
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onDelete
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.onUpdate
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
@@ -58,7 +58,7 @@ class BookmarkItemsDaoTest {
             COLUMN_ID,
         )
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
     private lateinit var testObject: BookmarkItemsDao
@@ -135,30 +135,30 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(14))
 
-        val result = testObject.allBookmarksItems
+        val result = testObject.getAllBookmarksItems()
 
         Assert.assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getAllItemsBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
         )
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        Assert.assertTrue(testObject.getAllBookmarksItems().isEmpty())
     }
 
     @Test
@@ -167,7 +167,7 @@ class BookmarkItemsDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarksItems
+        testObject.getAllBookmarksItems()
 
         verify(mockCursor).close()
     }
@@ -239,7 +239,7 @@ class BookmarkItemsDaoTest {
         Assert.assertTrue(testObject.findBookmarkItem(exampleItemBookmark.id))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findItemBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
@@ -396,7 +396,7 @@ class BookmarkItemsDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(
                     listOf(
                         "itemName",

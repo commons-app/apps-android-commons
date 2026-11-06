@@ -83,7 +83,7 @@ class UploadPresenterTest {
     @Test
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
 
@@ -111,7 +111,7 @@ class UploadPresenterTest {
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0),
         ).thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
-        `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoords)
         `when`(repository.getUploads()).thenReturn(uploadableItems)
         uploadableItems.add(uploadItem)
         uploadPresenter.handleSubmit()
@@ -155,7 +155,8 @@ class UploadPresenterTest {
     }
 
     /**
-     * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
+     * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top
+     * card
      */
     @Ignore
     @Test
@@ -176,7 +177,8 @@ class UploadPresenterTest {
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
         verify(repository).deletePicture(ArgumentMatchers.anyString())
-        // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
+        // As there is only one while which we are asking for deletion, upload should be cancelled and this flow should
+        // be triggered
         verify(view).showMessage(ArgumentMatchers.anyInt())
         verify(view).finish()
     }

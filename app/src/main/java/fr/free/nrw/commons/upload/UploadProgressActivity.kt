@@ -3,13 +3,13 @@ package fr.free.nrw.commons.upload
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.databinding.ActivityUploadProgressBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import javax.inject.Inject
 
 /**
@@ -28,8 +28,6 @@ class UploadProgressActivity : BaseActivity() {
     @Inject
     lateinit var contributionDao: ContributionDao
 
-    val fragmentList: MutableList<Fragment> = ArrayList()
-    val titleList: MutableList<String> = ArrayList()
     var isPaused = true
     var isPendingIconsVisible = true
     var isErrorIconsVisisble = false
@@ -37,8 +35,9 @@ class UploadProgressActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadProgressBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding.root)
         setContentView(binding.root)
-        viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         binding.uploadProgressViewPager.setAdapter(viewPagerAdapter)
         binding.uploadProgressViewPager.setId(R.id.upload_progress_view_pager)
         binding.uploadProgressTabLayout.setupWithViewPager(binding.uploadProgressViewPager)
@@ -53,23 +52,22 @@ class UploadProgressActivity : BaseActivity() {
                     position: Int,
                     positionOffset: Float,
                     positionOffsetPixels: Int,
-                ) {
-                }
+                ) = Unit
 
                 override fun onPageSelected(position: Int) {
                     updateMenuItems(position)
-                    if (position == 2) {
-                        binding.uploadProgressViewPager.setCanScroll(false)
-                    } else {
-                        binding.uploadProgressViewPager.setCanScroll(true)
-                    }
+                    binding.uploadProgressViewPager.canScroll = (position != 2)
                 }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                }
+                override fun onPageScrollStateChanged(state: Int) = Unit
             },
         )
         setTabs()
+
+        val targetTab = intent.getIntExtra(EXTRA_TARGET_TAB, 0)
+        if (targetTab != 0) {
+            binding.uploadProgressViewPager.currentItem = targetTab
+        }
     }
 
     /**
@@ -81,23 +79,22 @@ class UploadProgressActivity : BaseActivity() {
         pendingUploadsFragment = PendingUploadsFragment()
         failedUploadsFragment = FailedUploadsFragment()
 
-        fragmentList.add(pendingUploadsFragment!!)
-        titleList.add(getString(R.string.pending))
-        fragmentList.add(failedUploadsFragment!!)
-        titleList.add(getString(R.string.failed))
-        viewPagerAdapter!!.setTabData(fragmentList, titleList)
+        viewPagerAdapter!!.setTabs(
+            R.string.pending to pendingUploadsFragment!!,
+            R.string.failed to failedUploadsFragment!!,
+        )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_uploads, menu)
         this.menu = menu
-        updateMenuItems(0)
+        updateMenuItems(binding.uploadProgressViewPager.currentItem)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -212,5 +209,10 @@ class UploadProgressActivity : BaseActivity() {
     fun setErrorIconsVisibility(visible: Boolean) {
         isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
+    }
+
+    companion object {
+        const val EXTRA_TARGET_TAB = "upload_target_tab"
+        const val TAB_FAILED = 1
     }
 }

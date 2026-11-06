@@ -32,7 +32,7 @@ class FooterAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ) = when (FooterItem.values()[viewType]) {
+    ) = when (FooterItem.entries[viewType]) {
         FooterItem.LoadingItem ->
             LoadingViewHolder(
                 parent.inflate(R.layout.list_item_progress),
@@ -47,7 +47,7 @@ class FooterAdapter(
     override fun onBindViewHolder(
         holder: FooterViewHolder,
         position: Int,
-    ) {}
+    ) = Unit
 }
 
 open class FooterViewHolder(

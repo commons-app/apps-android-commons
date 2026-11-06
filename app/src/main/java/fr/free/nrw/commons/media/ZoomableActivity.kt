@@ -11,6 +11,10 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
@@ -39,6 +43,7 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -131,12 +136,39 @@ class ZoomableActivity : BaseActivity() {
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+    private var isSystemBarsVisible = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityZoomableBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.topBar.applyEdgeToEdgeTopPaddingInsets(WindowInsetsCompat.Type.statusBars())
+        binding.btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (!images.isNullOrEmpty()) {
+                        val returnIntent = Intent()
+                        returnIntent.putParcelableArrayListExtra(
+                            CustomSelectorConstants.NEW_SELECTED_IMAGES,
+                            selectedImages,
+                        )
+                        returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
+                        setResult(Activity.RESULT_OK, returnIntent)
+                        finish()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
+                }
+            },
+        )
         prefs =
             applicationContext.getSharedPreferences(
                 ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
@@ -153,10 +185,6 @@ class ZoomableActivity : BaseActivity() {
             ViewModelProvider(this, customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
-        viewModel.fetchImages()
-        viewModel.result.observe(this) {
-            handleResult(it)
-        }
 
         val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN)
 
@@ -186,6 +214,16 @@ class ZoomableActivity : BaseActivity() {
 
         if (backgroundColor != MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR) {
             photoBackgroundColor = backgroundColor
+        }
+
+        // Media details already pass the file URL. Scanning the device gallery would delay the image.
+        if (origin == "MediaDetails") {
+            intent.data?.let { init(it) }
+        } else {
+            viewModel.fetchImages()
+            viewModel.result.observe(this) {
+                handleResult(it)
+            }
         }
     }
 
@@ -272,7 +310,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -342,7 +380,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -415,7 +453,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -452,7 +490,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (binding.zoomable.zoomableController?.isIdentity == false) {
+        if (!binding.zoomable.getZoomableController().isIdentity()) {
             return
         }
 
@@ -651,7 +689,11 @@ class ZoomableActivity : BaseActivity() {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
-                setTapListener(DoubleTapGestureListener(this))
+                setTapListener(
+                    DoubleTapGestureListener(this) {
+                        toggleSystemBars()
+                    },
+                )
             }
             val controller: DraweeController =
                 Fresco
@@ -677,6 +719,20 @@ class ZoomableActivity : BaseActivity() {
         }
     }
 
+    private fun toggleSystemBars() {
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        if (isSystemBarsVisible) {
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            binding.topBar.visibility = View.GONE
+        } else {
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+            binding.topBar.visibility = View.VISIBLE
+        }
+        isSystemBarsVisible = !isSystemBarsVisible
+    }
+
     /**
      * Inserts an image in Not For Upload table
      */
@@ -693,23 +749,6 @@ class ZoomableActivity : BaseActivity() {
                 imageSHA1,
             ),
         )
-    }
-
-    /**
-     * Send selected images in fragment
-     */
-    override fun onBackPressed() {
-        if (!images.isNullOrEmpty()) {
-            val returnIntent = Intent()
-            returnIntent.putParcelableArrayListExtra(
-                CustomSelectorConstants.NEW_SELECTED_IMAGES,
-                selectedImages,
-            )
-            returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
-        }
-        super.onBackPressed()
     }
 
     override fun onDestroy() {

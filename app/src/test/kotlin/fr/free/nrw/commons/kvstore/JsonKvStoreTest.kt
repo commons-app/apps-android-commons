@@ -3,7 +3,6 @@ package fr.free.nrw.commons.kvstore
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.nhaarman.mockitokotlin2.atLeast
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.BasicKvStore.Companion.KEY_VERSION
@@ -50,7 +49,7 @@ class JsonKvStoreTest {
     fun getJson() {
         whenever(prefs.getString("key", null)).thenReturn(expected)
 
-        val result = store.getJson("key", Person::class.java)
+        val result = store.getJson<Person>("key")
 
         Assert.assertEquals(testData, result)
     }
@@ -70,16 +69,20 @@ class JsonKvStoreTest {
     fun getJsonHandlesMalformedJson() {
         whenever(prefs.getString("key", null)).thenReturn("junk")
 
-        val result = store.getJson("key", Person::class.java)
+        val result = store.getJson<Person>("key")
 
         Assert.assertNull(result)
     }
 
     data class Person(
-        val age: Int, val name: String, val hasPets: Boolean, val pet: Pet?
+        val age: Int,
+        val name: String,
+        val hasPets: Boolean,
+        val pet: Pet?,
     )
 
     data class Pet(
-        val breed: String, val age: Int
+        val breed: String,
+        val age: Int,
     )
 }

@@ -2,14 +2,10 @@ package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
 import android.app.Notification
-import android.app.PendingIntent
-import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
-import android.graphics.BitmapFactory
 import android.os.Build
-import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
 import androidx.work.CoroutineWorker
@@ -26,18 +22,15 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
-import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.PlacesRepository
-import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
-import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
@@ -73,7 +66,7 @@ class UploadWorker(
     lateinit var uploadClient: UploadClient
 
     @Inject
-    lateinit var mediaClient: MediaClient
+    internal lateinit var mediaClient: MediaClient
 
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
@@ -81,14 +74,12 @@ class UploadWorker(
     @Inject
     lateinit var placesRepository: PlacesRepository
 
+    @Inject
+    lateinit var notificationHelper: UploadNotificationHelper
+
     private val processingUploadsNotificationTag = BuildConfig.APPLICATION_ID + " : upload_tag"
 
     private val processingUploadsNotificationId = 101
-
-    // Attributes of the current-upload notification
-    private var currentNotificationID: Int = -1 // lateinit is not allowed with primitives
-    private lateinit var currentNotificationTag: String
-    private var currentNotification: NotificationCompat.Builder
 
     private val statesToProcess = ArrayList<Int>()
 
@@ -105,8 +96,6 @@ class UploadWorker(
             .getInstance(appContext)
             .commonsApplicationComponent
             .inject(this)
-        currentNotification =
-            getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
 
         statesToProcess.add(Contribution.STATE_QUEUED)
     }
@@ -121,34 +110,20 @@ class UploadWorker(
         private var notificationFinishingTitle: String?,
         var contribution: Contribution?,
     ) {
+        @SuppressLint("MissingPermission")
         fun onProgress(
             transferred: Long,
             total: Long,
         ) {
-            if (transferred == total) {
-                // Completed!
-                currentNotification
-                    .setContentTitle(notificationFinishingTitle)
-                    .setProgress(0, 100, true)
-            } else {
-                currentNotification
-                    .setProgress(
-                        100,
-                        (transferred.toDouble() / total.toDouble() * 100).toInt(),
-                        false,
-                    )
-            }
-            notificationManager?.cancel(
+            notificationHelper.updateProgress(
+                transferred,
+                total,
+                notificationFinishingTitle,
                 processingUploadsNotificationTag,
                 processingUploadsNotificationId,
             )
-            notificationManager?.notify(
-                currentNotificationTag,
-                currentNotificationID,
-                currentNotification.build(),
-            )
             contribution!!.transferred = transferred
-            contributionDao.update(contribution).blockingAwait()
+            contributionDao.update(contribution!!).blockingAwait()
         }
 
         open fun onChunkUploaded(
@@ -160,21 +135,7 @@ class UploadWorker(
         }
     }
 
-    private fun getNotificationBuilder(channelId: String): NotificationCompat.Builder? =
-        NotificationCompat
-            .Builder(appContext, channelId)
-            .setAutoCancel(true)
-            .setSmallIcon(R.drawable.ic_launcher)
-            .setLargeIcon(
-                BitmapFactory.decodeResource(
-                    appContext.resources,
-                    R.drawable.ic_launcher,
-                ),
-            ).setAutoCancel(true)
-            .setOnlyAlertOnce(true)
-            .setProgress(100, 0, true)
-            .setOngoing(true)
-
+    @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
         try {
             var totalUploadsStarted = 0
@@ -182,9 +143,9 @@ class UploadWorker(
             setForeground(createForegroundInfo())
             notificationManager = NotificationManagerCompat.from(appContext)
             val processingUploads =
-                getNotificationBuilder(
-                    CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
-                )!!
+                notificationHelper.getNotificationBuilder(
+                    CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
+                )
             withContext(Dispatchers.IO) {
                 while (contributionDao
                         .getContribution(statesToProcess)
@@ -272,33 +233,31 @@ class UploadWorker(
     private fun createForegroundInfo(): ForegroundInfo =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ForegroundInfo(
-                1,
+                UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID,
                 createNotificationForForegroundService(),
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
             )
         } else {
             ForegroundInfo(
-                1,
+                UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID,
                 createNotificationForForegroundService(),
             )
         }
 
     override suspend fun getForegroundInfo(): ForegroundInfo = createForegroundInfo()
 
-    private fun createNotificationForForegroundService(): Notification {
-        // TODO: Improve notification for foreground service
-        return getNotificationBuilder(
-            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL,
-        )!!
-            .setContentTitle(appContext.getString(R.string.upload_in_progress))
+    private fun createNotificationForForegroundService(): Notification =
+        notificationHelper
+            .getNotificationBuilder(
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
+            ).setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
 
     /**
      * Upload the contribution
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid", "CheckResult")
+    @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
@@ -307,24 +266,7 @@ class UploadWorker(
         val media = contribution.media
         val displayTitle = contribution.media.displayTitle
 
-        currentNotificationTag = contribution.localUri.toString()
-        currentNotificationID =
-            (contribution.localUri.toString() + contribution.media.filename).hashCode()
-
-        currentNotification
-        getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
-        currentNotification.setContentTitle(
-            appContext.getString(
-                R.string.upload_progress_notification_title_start,
-                displayTitle,
-            ),
-        )
-
-        notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
+        notificationHelper.showUploadStarted(contribution)
 
         val filename = media.filename
 
@@ -388,12 +330,21 @@ class UploadWorker(
                                 Timber.d(
                                     "WikiDataEdit required, making wikidata edit",
                                 )
-                                makeWikiDataEdit(uploadResult, contribution)
+                                makeWikiDataEdit(uploadResult, contribution, uniqueFileName)
                             }
-                            showSuccessNotification(contribution)
+                            notificationHelper.showSuccessNotification(contribution)
+                            if (appContext.contentResolver.persistedUriPermissions.any {
+                                    it.uri == contribution.contentUri
+                                }
+                            ) {
+                                appContext.contentResolver.releasePersistableUriPermission(
+                                    contribution.contentUri!!,
+                                    Intent.FLAG_GRANT_READ_URI_PERMISSION,
+                                )
+                            }
                         } else {
                             Timber.e("Stash Upload failed")
-                            showFailedNotification(contribution)
+                            notificationHelper.showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
                             contributionDao.save(contribution).blockingAwait()
@@ -401,7 +352,7 @@ class UploadWorker(
                     } catch (exception: Exception) {
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
-                        showFailedNotification(contribution)
+                        notificationHelper.showFailedNotification(contribution)
                         contribution.state = Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
                         if (stashErrorCodes.contains(exception.message)) {
@@ -410,12 +361,12 @@ class UploadWorker(
                     }
                 }
                 StashUploadState.PAUSED -> {
-                    showPausedNotification(contribution)
+                    notificationHelper.showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
                     contributionDao.saveSynchronous(contribution)
                 }
                 StashUploadState.CANCELLED -> {
-                    showCancelledNotification(contribution)
+                    notificationHelper.showCancelledNotification(contribution)
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
@@ -423,14 +374,14 @@ class UploadWorker(
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contribution.errorInfo = stashUploadResult.errorMessage
-                    showErrorNotification(contribution)
+                    notificationHelper.showErrorNotification(contribution)
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(
                             CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE,
                         )
                     ) {
                         Timber.e("Invalid Login, logging out")
-                        showInvalidLoginNotification(contribution)
+                        notificationHelper.showInvalidLoginNotification(contribution)
                         val username = sessionManager.userName
                         var logoutListener =
                             CommonsApplication.BaseLogoutListener(
@@ -439,7 +390,7 @@ class UploadWorker(
                                 username,
                             )
                         CommonsApplication
-                            .instance!!
+                            .instance
                             .clearApplicationData(appContext, logoutListener)
                     }
                 }
@@ -447,7 +398,7 @@ class UploadWorker(
         } catch (exception: Exception) {
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
-            showFailedNotification(contribution)
+            notificationHelper.showFailedNotification(contribution)
             contribution.errorInfo = exception.message
             contribution.state = Contribution.STATE_FAILED
             clearChunks(contribution)
@@ -465,31 +416,46 @@ class UploadWorker(
     private suspend fun makeWikiDataEdit(
         uploadResult: UploadResult,
         contribution: Contribution,
+        uniqueFileName: String,
     ) {
         val wikiDataPlace = contribution.wikidataPlace
-        if (wikiDataPlace != null && wikiDataPlace.imageValue == null) {
+        if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
+                val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
                 try {
-                    revisionID =
-                        wikidataEditService.createClaim(
-                            wikiDataPlace,
-                            uploadResult.filename,
-                            contribution.media.captions,
-                        )
-                    if (null != revisionID) {
-                        withContext(Dispatchers.IO) {
-                            val place = placesRepository.fetchPlace(wikiDataPlace.id);
-                            place.name = wikiDataPlace.name;
-                            place.pic = HOME_URL + uploadResult.createCanonicalFileName()
-                            placesRepository
-                                .save(place)
-                                .subscribeOn(Schedulers.io())
-                                .blockingAwait()
-                            Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                    if (!p18WasSkipped) {
+                        // Only set P18 if the place does not already have a picture
+                        // Use uniqueFileName (the space-separated title that was
+                        // actually uploaded, after findUniqueFileName's collision
+                        // check) rather than uploadResult.filename, which MediaWiki
+                        // returns in its underscored canonical form and triggers
+                        // Wikidata's "Commons link should be well-formed" warning.
+                        // contribution.media.filename must NOT be used here: it is
+                        // the pre-upload title, which can differ from the real
+                        // uploaded title when findUniqueFileName had to rename the
+                        // file to avoid a collision with an existing Commons page.
+                        revisionID =
+                            wikidataEditService.createClaim(
+                                wikiDataPlace,
+                                uniqueFileName,
+                                contribution.media.captions,
+                            )
+                        if (null != revisionID) {
+                            withContext(Dispatchers.IO) {
+                                val place = placesRepository.fetchPlace(wikiDataPlace.id)
+                                place.name = wikiDataPlace.name
+                                place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                                placesRepository
+                                    .save(place)
+                                    .subscribeOn(Schedulers.io())
+                                    .blockingAwait()
+                                Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                            }
                         }
-                        showSuccessNotification(contribution)
                     }
+                    // Always show success notification, whether P18 was set or skipped
+                    notificationHelper.showSuccessNotification(contribution)
                 } catch (exception: Exception) {
                     Timber.e(exception)
                 }
@@ -498,6 +464,7 @@ class UploadWorker(
                     wikidataEditService.handleImageClaimResult(
                         contribution.wikidataPlace!!,
                         revisionID,
+                        p18WasSkipped = p18WasSkipped,
                     )
                 }
             } else {
@@ -534,7 +501,10 @@ class UploadWorker(
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
-            val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+            val modifiedSha1 =
+                fileUtilsWrapper.getSHA1(
+                    fileUtilsWrapper.getFileInputStream(contribution.localUri?.path),
+                )
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(
@@ -548,185 +518,34 @@ class UploadWorker(
         }
     }
 
-    private fun findUniqueFileName(fileName: String): String {
+    internal fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
         val random = Random()
 
         // Loops until sequenceFileName does not match any existing file names
         while (mediaClient
                 .checkPageExistsUsingTitle(
-                    String.format(
-                        "File:%s",
-                        sequenceFileName,
-                    ),
-                ).blockingGet()) {
-
-            // Generate a random 5-character alphanumeric string
+                    "File:$sequenceFileName",
+                ).blockingGet()
+        ) {
             val randomHash = (random.nextInt(90000) + 10000).toString()
 
             sequenceFileName =
                 if (fileName.indexOf('.') == -1) {
-                    "$fileName #$randomHash"
+                    // Append the random hash in parentheses if no file extension is present
+                    "$fileName ($randomHash)"
                 } else {
                     val regex =
                         Pattern.compile("^(.*)(\\..+?)$")
                     val regexMatcher = regex.matcher(fileName)
-                    regexMatcher.replaceAll("$1 #$randomHash")
+                    // Append the random hash in parentheses before the file extension
+                    if (regexMatcher.find()) {
+                        "${regexMatcher.group(1)} ($randomHash)${regexMatcher.group(2)}"
+                    } else {
+                        "$fileName ($randomHash)"
+                    }
                 }
         }
         return sequenceFileName!!
-    }
-
-    /**
-     * Notify that the current upload has succeeded
-     * @param contribution
-     */
-    @SuppressLint("StringFormatInvalid")
-    private fun showSuccessNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-        contribution.state = Contribution.STATE_COMPLETED
-        currentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
-        currentNotification
-            .setContentTitle(
-                appContext.getString(
-                    R.string.upload_completed_notification_title,
-                    displayTitle,
-                ),
-            ).setContentText(appContext.getString(R.string.upload_completed_notification_text))
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    /**
-     * Notify that the current upload has failed
-     * @param contribution
-     */
-    @SuppressLint("StringFormatInvalid")
-    private fun showFailedNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        currentNotification
-            .setContentTitle(
-                appContext.getString(
-                    R.string.upload_failed_notification_title,
-                    displayTitle,
-                ),
-            ).setContentText(appContext.getString(R.string.upload_failed_notification_subtitle))
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    @SuppressLint("StringFormatInvalid")
-    private fun showInvalidLoginNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-        currentNotification
-            .setContentTitle(
-                appContext.getString(
-                    R.string.upload_failed_notification_title,
-                    displayTitle,
-                ),
-            ).setContentText(appContext.getString(R.string.invalid_login_message))
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    /**
-     * Shows a notification for a failed contribution upload.
-     */
-    @SuppressLint("StringFormatInvalid")
-    private fun showErrorNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-        currentNotification
-            .setContentTitle(
-                appContext.getString(
-                    R.string.upload_failed_notification_title,
-                    displayTitle,
-                ),
-            ).setContentText(contribution.errorInfo)
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager?.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    /**
-     * Notify that the current upload is paused
-     * @param contribution
-     */
-    private fun showPausedNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        currentNotification
-            .setContentTitle(
-                appContext.getString(
-                    R.string.upload_paused_notification_title,
-                    displayTitle,
-                ),
-            ).setContentText(appContext.getString(R.string.upload_paused_notification_subtitle))
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager!!.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    /**
-     * Notify that the current upload is cancelled
-     * @param contribution
-     */
-    private fun showCancelledNotification(contribution: Contribution) {
-        val displayTitle = contribution.media.displayTitle
-        currentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
-        currentNotification
-            .setContentTitle(
-                displayTitle,
-            ).setContentText("Upload has been cancelled!")
-            .setProgress(0, 0, false)
-            .setOngoing(false)
-        notificationManager!!.notify(
-            currentNotificationTag,
-            currentNotificationID,
-            currentNotification.build(),
-        )
-    }
-
-    /**
-     * Method used to get Pending intent for opening different screen after clicking on notification
-     * @param toClass
-     */
-    private fun getPendingIntent(toClass: Class<out BaseActivity>): PendingIntent {
-        val intent = Intent(appContext, toClass)
-        return TaskStackBuilder.create(appContext).run {
-            addNextIntentWithParentStack(intent)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                getPendingIntent(
-                    0,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-                )
-            } else {
-                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
-        }
     }
 }

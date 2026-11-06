@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import fr.free.nrw.commons.BasePresenter
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.kvstore.BasicKvStore
 
 /**
  * The contract using which the UplaodActivity would communicate with its presenter
@@ -30,7 +31,10 @@ interface UploadContract {
          * @param index Index of image to be removed
          * @param maxSize Max size of the `uploadableFiles`
          */
-        fun highlightNextImageOnCancelledImage(index: Int, maxSize: Int)
+        fun highlightNextImageOnCancelledImage(
+            index: Int,
+            maxSize: Int,
+        )
 
         /**
          * Used to check if user has cancelled upload of any image in current upload
@@ -49,7 +53,10 @@ interface UploadContract {
          * Displays an alert with message given by `messageResourceId`.
          * `onPositiveClick` is run after acknowledgement.
          */
-        fun showAlertDialog(messageResourceId: Int, onPositiveClick: Runnable)
+        fun showAlertDialog(
+            messageResourceId: Int,
+            onPositiveClick: Runnable,
+        )
 
         fun getUploadableFiles(): List<UploadableFile>?
 
@@ -63,6 +70,8 @@ interface UploadContract {
     }
 
     interface UserActionListener : BasePresenter<View> {
+        fun cleanup()
+
         fun handleSubmit()
 
         fun deletePictureAtIndex(index: Int)
@@ -73,5 +82,7 @@ interface UploadContract {
          * @param uploadItemIndex Index of next image, whose quality is to be checked
          */
         fun checkImageQuality(uploadItemIndex: Int)
+
+        fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
     }
 }

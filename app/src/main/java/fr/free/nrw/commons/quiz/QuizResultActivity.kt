@@ -12,30 +12,35 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
-import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
-import java.io.File
-import java.io.FileOutputStream
-
+import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
-
+import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
 
 /**
  * Displays the final score of quiz and congratulates the user
  */
 class QuizResultActivity : AppCompatActivity() {
-
     private var binding: ActivityQuizResultBinding? = null
-    private val NUMBER_OF_QUESTIONS = 5
-    private val MULTIPLIER_TO_GET_PERCENTAGE = 20
+    private val numberOfQuestions = 5
+    private val multiplierToGetPercentage = 20
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
         setContentView(binding?.root)
 
         setSupportActionBar(binding?.toolbar?.toolbar)
@@ -49,11 +54,30 @@ class QuizResultActivity : AppCompatActivity() {
             setScore(score)
         } ?: run {
             startActivityWithFlags(
-                this, MainActivity::class.java,
-                Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
+                this,
+                MainActivity::class.java,
+                Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP,
             )
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    startActivityWithFlags(
+                        this@QuizResultActivity,
+                        MainActivity::class.java,
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP,
+                    )
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            },
+        )
     }
 
     override fun onDestroy() {
@@ -67,9 +91,9 @@ class QuizResultActivity : AppCompatActivity() {
      */
     @SuppressLint("StringFormatInvalid", "SetTextI18n")
     fun setScore(score: Int) {
-        val scorePercent = score * MULTIPLIER_TO_GET_PERCENTAGE
+        val scorePercent = score * multiplierToGetPercentage
         binding?.resultProgressBar?.progress = scorePercent
-        binding?.tvResultProgress?.text = "$score / $NUMBER_OF_QUESTIONS"
+        binding?.tvResultProgress?.text = "$score / $numberOfQuestions"
         val message = resources.getString(R.string.congratulatory_message_quiz, "$scorePercent%")
         binding?.congratulatoryMessage?.text = message
     }
@@ -79,27 +103,26 @@ class QuizResultActivity : AppCompatActivity() {
      */
     fun launchContributionActivity() {
         startActivityWithFlags(
-            this, MainActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
+            this,
+            MainActivity::class.java,
+            Intent.FLAG_ACTIVITY_CLEAR_TOP,
+            Intent.FLAG_ACTIVITY_SINGLE_TOP,
         )
-    }
-
-    override fun onBackPressed() {
-        startActivityWithFlags(
-            this, MainActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
-        )
-        super.onBackPressed()
     }
 
     /**
-     * Function to call intent to an activity
-     * @param context
-     * @param cls
-     * @param flags
+     * Starts an activity using the provided context, target class, and intent flags.
+     *
+     * @param context The context used to start the activity.
+     * @param cls The target activity class.
+     * @param flags A variable number of intent flags to apply to the Intent.
      */
     companion object {
-        fun <T> startActivityWithFlags(context: Context, cls: Class<T>, vararg flags: Int) {
+        fun <T> startActivityWithFlags(
+            context: Context,
+            cls: Class<T>,
+            vararg flags: Int,
+        ) {
             val intent = Intent(context, cls)
             flags.forEach { flag -> intent.addFlags(flag) }
             context.startActivity(intent)
@@ -157,14 +180,15 @@ class QuizResultActivity : AppCompatActivity() {
                 fOut.flush()
             }
             file.setReadable(true, false)
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
-                type = "image/png"
-            }
+            val intent =
+                Intent(Intent.ACTION_SEND).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+                    type = "image/png"
+                }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not share screenshot")
         }
     }
 
@@ -185,7 +209,7 @@ class QuizResultActivity : AppCompatActivity() {
         alertadd.setPositiveButton(R.string.about_translate_proceed) { dialog, _ ->
             shareScreen(screenshot)
         }
-        alertadd.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+        alertadd.setNegativeButton(R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
         alertadd.show()

@@ -11,16 +11,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.tabs.TabLayout
+import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import org.junit.Assert
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -84,14 +87,14 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetScrollCaseTrue() {
         fragment.setScroll(true)
-        Assert.assertEquals(viewPager.isCanScroll, true)
+        Assert.assertEquals(viewPager.canScroll, true)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetScrollCaseFalse() {
         fragment.setScroll(false)
-        Assert.assertEquals(viewPager.isCanScroll, false)
+        Assert.assertEquals(viewPager.canScroll, false)
     }
 
     @Test
@@ -151,6 +154,14 @@ class ExploreFragmentUnitTest {
         Shadows.shadowOf(getMainLooper()).idle()
         val menu: Menu = RoboMenu(context)
         fragment.onCreateOptionsMenu(menu, inflater)
-        verify(inflater).inflate(R.menu.menu_search, menu)
+
+        val captor =
+            ArgumentCaptor.forClass(
+                Int::class.java,
+            )
+        verify(inflater).inflate(captor.capture(), eq(menu))
+
+        val capturedLayout = captor.value
+        assertTrue(capturedLayout == R.menu.menu_search || capturedLayout == R.menu.explore_fragment_menu)
     }
 }

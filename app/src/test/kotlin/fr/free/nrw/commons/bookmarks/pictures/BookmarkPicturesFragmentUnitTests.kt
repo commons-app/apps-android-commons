@@ -79,16 +79,13 @@ class BookmarkPicturesFragmentUnitTests {
     @Mock
     private lateinit var throwable: Throwable
 
-    @Mock
-    private lateinit var mediaList: List<Media>
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        fragment = BookmarkPicturesFragment.newInstance()
+        fragment = BookmarkPicturesFragment()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -153,16 +150,17 @@ class BookmarkPicturesFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetAdapter() {
         shadowOf(getMainLooper()).idle()
+        fragment.onViewCreated(binding.root, savedInstanceState)
         val method: Method =
             BookmarkPicturesFragment::class.java.getDeclaredMethod("setAdapter", List::class.java)
         method.isAccessible = true
-        method.invoke(fragment, mediaList)
+        method.invoke(fragment, emptyList<Media>())
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetAdapter() {
-        fragment.adapter
+        fragment.getAdapter()
     }
 
     @Test

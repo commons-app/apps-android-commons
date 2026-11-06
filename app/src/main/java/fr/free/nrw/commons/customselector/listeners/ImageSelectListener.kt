@@ -17,8 +17,11 @@ interface ImageSelectListener {
     )
 
     /**
-     * onLongPress
-     * @param imageUri : uri of image
+     * Called when the user performs a long press on an image.
+     *
+     * @param position The index of the pressed image in the list.
+     * @param images The list of all available images.
+     * @param selectedImages The currently selected images.
      */
     fun onLongPress(
         position: Int,

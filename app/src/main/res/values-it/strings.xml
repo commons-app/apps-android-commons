@@ -4,27 +4,33 @@
 * Albe Albe 460
 * Albe Albe460
 * Ale.salmo
+* Antonino Faro
 * Beta16
 * Black Sky83
 * Champ0999
 * Davio
 * Dream Indigo
+* Emabarto01
 * Gianfranco
+* Giorgx12
+* GseSro
 * Lorelai87
 * Lorem Ipsum
 * Luca.favorido
 * Nemo bis
 * Noretta93
+* Ontsed
 * S4b1nuz E.656
 * Sarah Bernabei
 * Senpremì
 * Una giornata uggiosa '94
 * Valerio Bozzolan
+* Wheelygay
 * Wim b
 -->
 <resources>
   <string name="commons_facebook">Pagina Facebook di Commons</string>
-  <string name="commons_github">Codice sorgente Github di Commons</string>
+  <string name="commons_github">Codice sorgente GitHub di Commons</string>
   <string name="commons_logo">Logo di Commons</string>
   <string name="commons_website">Sito web di Commons</string>
   <string name="exit_location_picker">Esci dal selettore della posizione</string>
@@ -33,7 +39,7 @@
   <string name="add_new_contribution">Aggiungi nuovo contributo</string>
   <string name="add_contribution_from_camera">Aggiungi contributo dalla fotocamera</string>
   <string name="add_contribution_from_photos">Aggiungi contributo da Foto</string>
-  <string name="add_contribution_from_contributions_gallery">Aggiungi contributo dalla galleria dei contributi precedenti</string>
+  <string name="add_contribution_from_contributions_gallery">Aggiungi un contributo dalla galleria dei contributi precedenti</string>
   <string name="show_captions">Didascalie</string>
   <string name="row_item_language_description">Descrizione della lingua</string>
   <string name="row_item_caption">Didascalia</string>
@@ -48,18 +54,14 @@
     <item quantity="one">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
   </plurals>
-  <plurals name="contributions_subtitle">
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <string name="starting_uploads">Avvio del caricamento</string>
+  <string name="starting_uploads">Avvio caricamenti</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Elaborando %d caricamento</item>
-    <item quantity="other">Elaborando %d caricamenti</item>
+    <item quantity="one">Elaborando %1$d caricamento</item>
+    <item quantity="other">Elaborando %1$d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d caricamento</item>
-    <item quantity="other">%d caricamenti</item>
+    <item quantity="one">%1$d caricamento</item>
+    <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
@@ -85,7 +87,7 @@
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login_credential">Accedi alla tua utenza in Commons Beta</string>
-  <string name="login">Entra</string>
+  <string name="login">Accedi</string>
   <string name="forgot_password">Password dimenticata?</string>
   <string name="signup">Registrati</string>
   <string name="logging_in_title">Accesso in corso</string>
@@ -102,8 +104,8 @@
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="uploading_queued">Caricamento in coda (attivata modalità di connessione limitata)</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
-  <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
-  <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
+  <string name="upload_completed_notification_text">Tocca per visualizzare il tuo caricamento</string>
+  <string name="upload_progress_notification_title_start">Caricamento file: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
@@ -119,6 +121,8 @@
   <string name="menu_from_camera">Scatta foto</string>
   <string name="menu_nearby">Nelle vicinanze</string>
   <string name="provider_contributions">I miei caricamenti</string>
+  <string name="menu_copy_link">Copia collegamento</string>
+  <string name="menu_link_copied">Il collegamento è stato copiato negli appunti</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_view_file_page">Vedi la pagina del file</string>
   <string name="share_title_hint">Didascalia (obbligatoria)</string>
@@ -129,6 +133,7 @@
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, quest\'utente è stato/a bloccato/a su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
+  <string name="login_failed_email_auth_needed">Un codice di verifica per l\'accesso è stato inviato al tuo indirizzo email. Inserisci il codice per accedere.</string>
   <string name="login_failed_generic">Accesso non riuscito</string>
   <string name="share_upload_button">Carica</string>
   <string name="multiple_share_base_title">Nome di questo set</string>
@@ -137,6 +142,7 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="depicts_search_text_hint">Cerca elementi che il tuo file rappresenta (montagna, Taj Mahal, ecc.)</string>
   <string name="menu_save_categories">Salva</string>
+  <string name="menu_overflow_desc">Menu di overflow</string>
   <string name="refresh_button">Aggiorna</string>
   <string name="display_list_button">Elenco</string>
   <string name="contributions_subtitle_zero">(Non è stato ancora caricato niente)</string>
@@ -149,6 +155,7 @@
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
   <string name="title_activity_featured_images">Immagini in evidenza</string>
+  <string name="images_featured_explanation">Le immagini in vetrina sono contributi di fotografi e illustratori di talento che la comunità di Wikimedia Commons ha riconosciuto come quelle di migliore qualità del sito.</string>
   <string name="title_activity_custom_selector">Selettore personalizzato</string>
   <string name="title_activity_category_details">Categoria</string>
   <string name="title_activity_review">Revisione tra pari</string>
@@ -165,15 +172,18 @@
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
+  <string name="language_search_type_language_name">Inserisci il nome della lingua</string>
+  <string name="language_search_recent_searches">Ricerche recenti</string>
+  <string name="language_search_all_languages">Tutte le lingue</string>
   <string name="media_upload_policy">Caricando questa immagine, dichiaro che questa è una mia opera, che non contiene materiale protetto da copyright o ritratti, e che comunque è conforme alle &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Policy di Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza predefinita</string>
   <string name="use_previous">Utilizza titolo e descrizione precedenti</string>
   <string name="preference_theme">Tema</string>
-  <string name="license_name_cc_by_sa_four"> Attribuzione-Condividi allo stesso modo 4.0</string>
-  <string name="license_name_cc_by_four"> Attribuzione 4.0</string>
-  <string name="license_name_cc_by_sa"> Attribuzione-Condividi allo stesso modo 3.0</string>
-  <string name="license_name_cc_by"> Attribuzione 3.0</string>
+  <string name="license_name_cc_by_sa_four">Attribuzione-Condividi allo stesso modo 4.0</string>
+  <string name="license_name_cc_by_four">Attribuzione 4.0</string>
+  <string name="license_name_cc_by_sa">Attribuzione-Condividi allo stesso modo 3.0</string>
+  <string name="license_name_cc_by">Attribuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -226,6 +236,7 @@
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_discussion">Discussione</string>
   <string name="media_detail_author">Autore</string>
+  <string name="media_detail_uploader">Caricato da</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
@@ -233,16 +244,16 @@
   <string name="become_a_tester_title">Diventa un Beta Tester</string>
   <string name="become_a_tester_description">Accedi al nostro canale beta su Google Play per ottenere subito le nuove funzionalità e gli errori corretti</string>
   <string name="_2fa_code">Codice 2FA</string>
+  <string name="email_auth_code">Codice di verifica indirizzo email</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
-  <string name="mediaimage_failed">Immagine multimediale non riuscita</string>
   <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_rainbow_bridge">Ponte dell\'Arcobaleno</string>
   <string name="welcome_image_tulip">Tulipano</string>
-  <string name="welcome_image_welcome_wikipedia">Benvenuto Wikipedia</string>
-  <string name="welcome_image_welcome_copyright">Benvenuto Copyright</string>
+  <string name="welcome_image_welcome_wikipedia">Un\'immagine schematica di una voce generica di Wikipedia.</string>
+  <string name="welcome_image_welcome_copyright">Un disegno di una pila di fogli con il simbolo del copyright barrato.</string>
   <string name="welcome_image_sydney_opera_house">Teatro dell\'opera di Sydney</string>
   <string name="cancel">Annulla</string>
   <string name="navigation_drawer_open">Apri</string>
@@ -268,6 +279,7 @@
   <string name="upload_problem_image_dark">L\'immagine è troppo scura.</string>
   <string name="upload_problem_image_blurry">L\'immagine è sfocata.</string>
   <string name="upload_problem_image_duplicate">L\'immagine è già su Commons.</string>
+  <string name="upload_problem_image_format_unsupported">La tua immagine è in un formato non supportato dal server di Commons, quindi l\'applicazione l\'ha convertita in JPG.</string>
   <string name="upload_problem_different_geolocation">Questa foto è stata scattata in una posizione diversa.</string>
   <string name="upload_problem_fbmd">Carica solo le foto che hai scattato tu stesso. Non caricare immagini che hai trovato negli account Facebook di altre persone.</string>
   <string name="upload_problem_do_you_continue">Vuoi caricare lo stesso questa immagine?</string>
@@ -275,6 +287,7 @@
   <string name="upload_connection_error_alert_detail">Il processo di caricamento richiede un accesso a internet attivo. Per favore verifica la tua connessione alla rete.</string>
   <string name="upload_problem_image">Problemi trovati nell\'immagine</string>
   <string name="internet_downloaded">Carica solo le foto che hai scattato da solo. Non caricare immagini scaricate da Internet.</string>
+  <string name="preferences_uploads">Caricamenti</string>
   <string name="use_external_storage">Salva scatti in-app</string>
   <string name="use_external_storage_summary">Salva le foto scattate con la fotocamera in-app nella memoria del tuo dispositivo</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
@@ -282,7 +295,7 @@
   <string name="send_log_file_description">Invia il file di registro agli sviluppatori tramite email per aiutarli a risolvere i problemi con l\'applicazione. Nota: i log potrebbero contenere informazioni di identificazione</string>
   <string name="no_web_browser">Nessun browser web trovato per aprire l\'URL</string>
   <string name="null_url">Errore! URL non trovato</string>
-  <string name="nominate_deletion">Proponi per la Cancellazione</string>
+  <string name="nominate_deletion">Proponi per la cancellazione</string>
   <string name="nominated_for_deletion">Questa immagine è stata proposta per la cancellazione.</string>
   <string name="nominated_see_more">Vedi la pagina web per i dettagli</string>
   <string name="skip_login">Salta</string>
@@ -293,8 +306,10 @@
   <string name="copy_wikicode">Copia il wikitesto negli appunti</string>
   <string name="wikicode_copied">Il wikitesto è stato copiato negli appunti</string>
   <string name="nearby_location_not_available">Nelle vicinanze potrebbe non funzionare bene, posizione non disponibile.</string>
+  <string name="nearby_showing_pins_offline">Internet non disponibile. Vengono mostrati solo i luoghi memorizzati nella cache.</string>
   <string name="upload_location_access_denied">Accesso alla posizione negato. Impostala manualmente per utilizzare questa funzione.</string>
   <string name="location_permission_rationale_nearby">È richiesta l\'autorizzazione per visualizzare un elenco di luoghi nelle vicinanze</string>
+  <string name="location_permission_rationale_explore">È richiesta l\'autorizzazione per visualizzare un elenco di luoghi nelle vicinanze</string>
   <string name="nearby_directions">Indicazioni</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -344,6 +359,7 @@
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Questa immagine è OK per essere caricata?</string>
   <string name="question">Domanda</string>
+  <string name="quiz_i_am_not_sure">Non sono sicuro</string>
   <string name="result">Risultato</string>
   <string name="quiz_back_button">Se continui a caricare immagini che richiedono la cancellazione, la tua utenza sarà probabilmente bannata. Sei sicuro di voler terminare il quiz?</string>
   <string name="quiz_alert_message">Più di %1$s delle immagini che hai caricato sono state cancellate. Se continui a caricare immagini che richiedono la cancellazione, la tua utenza sarà probabilmente bannata.\n\nTi piacerebbe visualizzare di nuovo il tutorial e poi fare un quiz per aiutarti a capire che tipo di immagini dovresti o non dovresti caricare?</string>
@@ -353,6 +369,7 @@
   <string name="blurry_image_answer">Uno degli obiettivi di Commons è raccogliere immagini di qualità. Pertanto, le immagini sfocate non dovrebbero essere caricate. Cerca sempre di scattare belle foto con una buona illuminazione.</string>
   <string name="construction_event_answer">Le foto che mostrano tecnologia o cultura sono molto apprezzate su Commons.</string>
   <string name="congratulatory_message_quiz">Hai ottenuto %1$s delle risposte corrette. Congratulazioni!</string>
+  <string name="quiz_continue">Continua</string>
   <string name="warning_for_no_answer">Seleziona una delle due opzioni per rispondere alla domanda</string>
   <string name="user_not_logged_in">Sessione scaduta. Accedi nuovamente.</string>
   <string name="quiz_result_share_message">Condividi il tuo quiz con i tuoi amici!</string>
@@ -362,6 +379,13 @@
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
+  <string name="crop">Ritaglia</string>
+  <string name="blur">Sfocatura</string>
+  <string name="autoblur">Sfocatura automatica</string>
+  <string name="autodetect_title">Sfocatura automatica di volti e targhe auto.</string>
+  <string name="autodetect_description">È possibile scartare i falsi positivi utilizzando il pulsante ❌ di ciascuna area sfocata.</string>
+  <string name="autoblur_failed_to_load">Impossibile caricare l\'immagine per la sfocatura automatica</string>
+  <string name="autoblur_no_region_detected">Nessuna regione rilevata per la sfocatura automatica</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
@@ -376,12 +400,11 @@
   <string name="Achievements">Risultati</string>
   <string name="Profile">Profilo</string>
   <string name="badges">Distintivi</string>
-  <string name="statistics">Statistiche</string>
   <string name="statistics_thanks">Ringraziamenti ricevuti</string>
   <string name="statistics_featured">Immagini in evidenza</string>
   <string name="statistics_wikidata_edits">Immagini tramite \"Luoghi nelle vicinanze\"</string>
-  <string name="level">Livello %d</string>
-  <string name="profileLevel">%s (Livello %s)</string>
+  <string name="level">Livello %1$d</string>
+  <string name="profile_withLevel">%1$s (Livello %2$s)</string>
   <string name="images_uploaded">Immagini caricate</string>
   <string name="image_reverts">Immagini non ripristinate</string>
   <string name="images_used_by_wiki">Immagini utilizzate</string>
@@ -413,6 +436,7 @@
   <string name="map_application_missing">Nessuna applicazione di mappe compatibile è stata trovata sul tuo dispositivo. Installa un\'applicazione per le mappe per poter utilizzare questa funzionalità.</string>
   <string name="title_page_bookmarks_pictures">Immagini</string>
   <string name="title_page_bookmarks_locations">Località</string>
+  <string name="title_page_bookmarks_categories">Categorie</string>
   <string name="menu_bookmark">Aggiungi/Rimuovi ai segnalibri</string>
   <string name="provider_bookmarks">Segnalibri</string>
   <string name="bookmark_empty">Non hai aggiunto alcun segnalibro</string>
@@ -423,12 +447,15 @@
   <string name="deletion_reason_bad_for_my_privacy">Mi sono reso conto che viola la mia privacy</string>
   <string name="deletion_reason_no_longer_want_public">Ho cambiato idea, non voglio più che sia pubblicamente visibile</string>
   <string name="deletion_reason_not_interesting">Spiacente, questa immagine non è interessante per un\'enciclopedia</string>
-  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato in %2$d voce/i.</string>
+  <string name="uploaded_by_myself">Caricato da me stesso il %1$s, utilizzato almeno in %2$d voce/i.</string>
   <string name="no_uploads">Benvenuto su Commons!\n\nCarica il tuo primo file multimediale toccando il pulsante aggiungi.</string>
   <string name="no_categories_selected">Nessuna categoria selezionata</string>
   <string name="no_categories_selected_warning_desc">Le immagini senza categorie sono raramente utilizzabili. Sei sicuro di voler continuare senza selezionare le categorie?</string>
   <string name="no_depictions_selected">Non sono stati selezionati elementi</string>
   <string name="no_depictions_selected_warning_desc">Le immagini con descrizioni possono essere trovate più facilmente ed è più probabile il loro utilizzo. Davvero vuoi continuare senza selezionare elementi raffigurati?</string>
+  <string name="depictions_choose_from_map">Scegli dalla mappa</string>
+  <string name="depictions_map_confirm">Conferma</string>
+  <string name="depictions_map_no_photo_location">La foto non riporta la posizione, viene mostrata la tua posizione attuale.</string>
   <string name="back_button_warning">Annulla caricamento</string>
   <string name="back_button_warning_desc">Usare il tasto \'indietro\' cancellerà questo caricamento e perderai i tuoi progressi</string>
   <string name="back_button_continue">Continua caricamento</string>
@@ -440,16 +467,19 @@
   <string name="never_ask_again">Non chiedermelo mai più</string>
   <string name="display_location_permission_title">Chiedi autorizzazione alla posizione</string>
   <string name="display_location_permission_explanation">Chiedi il permesso di localizzazione quando necessario per la funzione di visualizzazione della scheda di notifica nelle vicinanze.</string>
-  <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i risultati</string>
+  <string name="achievements_fetch_failed">Qualcosa è andato storto e non siamo riusciti a recuperare i risultati</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Hai dato così tanti contributi che il nostro sistema di conteggio di risultati non può contarli. Questo è l\'ultimo risultato.</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
   <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
+  <string name="show_deletion_button">Mostra pulsante di cancellazione</string>
+  <string name="show_deletion_button_explanation">**Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato**</string>
   <string name="in_app_camera_location_access_explanation">Consenti all\'app di recuperare la posizione nel caso in cui la fotocamera non la registri. Alcune fotocamere del dispositivo non la registrano. In questi casi, consentire all\'app di recuperare e allegare la posizione rende il tuo contributo più utile. Potrai modificarlo in qualsiasi momento dalle Impostazioni</string>
   <string name="option_allow">Consenti</string>
   <string name="option_dismiss">Nascondi</string>
   <string name="in_app_camera_needs_location">Attiva l\'accesso alla posizione dalle Impostazioni e riprova. \n\nNota: il caricamento potrebbe non contenere la posizione se l\'app non è in grado di recuperarla dal dispositivo entro un breve intervallo.</string>
   <string name="in_app_camera_location_permission_rationale">La fotocamera in-app necessita dell\'autorizzazione alla posizione per allegarla alle tue immagini nel caso in cui la posizione non sia disponibile in EXIF. Consenti all\'app di accedere alla tua posizione e riprova.\n\nNota: il caricamento potrebbe non avere la posizione se l\'app non è in grado di recuperare la posizione dal dispositivo entro un breve intervallo.</string>
+  <string name="in_app_camera_location_permission_denied">L\'app non registra la posizione insieme alle riprese a causa della mancanza di autorizzazione alla posizione</string>
   <string name="in_app_camera_location_unavailable">L\'app non registra la posizione insieme alle foto in quanto il GPS è disattivato</string>
   <string name="open_document_photo_picker_title">Utilizza il selettore di foto basato sui documenti</string>
   <string name="open_document_photo_picker_explanation">Il nuovo selettore di foto di Android rischia di perdere le informazioni sulla posizione. Abilita se pensi di usarlo.</string>
@@ -467,10 +497,10 @@
   <string name="check_category_failure_message">Non è stato possibile richiedere la verifica di categoria per %1$s</string>
   <string name="check_category_toast">Richiesta di verifica della categoria per %1$s</string>
   <string name="nominate_for_deletion_done">Fatto</string>
-  <string name="send_thank_success_title">Invio Ringraziamenti: Successo</string>
-  <string name="send_thank_success_message">Ringraziamenti a %1$s inviati correttamente</string>
+  <string name="send_thank_success_title">Invio ringraziamenti: Successo</string>
+  <string name="send_thank_success_message">Invia ringraziamenti a %1$s</string>
   <string name="send_thank_failure_message">Errore nell\'invio di ringraziamenti a %1$s</string>
-  <string name="send_thank_failure_title">Invio Ringraziamenti: Errore</string>
+  <string name="send_thank_failure_title">Invio ringraziamenti: Errore</string>
   <string name="send_thank_toast">Inviando ringraziamento per %1$s</string>
   <string name="review_copyright">Ciò e compatibile con la normativa sul diritto d\'autore?</string>
   <string name="review_category">Questo è categorizzato correttamente?</string>
@@ -493,19 +523,19 @@
   <string name="no_notification">Non hai alcuna notifica non letta</string>
   <string name="no_read_notification">Non hai alcuna notifica letta</string>
   <string name="share_logs_using">Condividi i registri usando</string>
+  <string name="check_your_email_inbox">Controlla la tua casella di posta elettronica</string>
   <string name="menu_option_read">Vedi lette</string>
   <string name="menu_option_unread">Vedi non lette</string>
   <string name="error_occurred_in_picking_images">Si è verificato un errore durante la selezione delle immagini</string>
   <string name="please_wait">Attendi per favore…</string>
-  <string name="images_featured_explanation">Le foto in vetrina sono immagini opere di fotografi e ilustratori di talento che la comunità di Wikimedia Commons ha riconosciuto come quelle di migliore qualità del sito.</string>
   <string name="images_via_nearby_explanation">Le immagini caricate tramite Luoghi Vicini sono le immagini che sono state caricate scoprendo luoghi nella mappa.</string>
   <string name="thanks_received_explanation">Questa funzionalità permette di inviare una notifica di ringraziamento a quegli utenti che hanno condiviso contributi utili – mediante un piccolo link nella pagina di cronologia o delle differenze.</string>
-  <string name="copy_image_caption_description">Copia in altri media</string>
+  <string name="copy_image_caption_description">Copia negli elementi successivi</string>
   <string name="copied_successfully">Copiato</string>
   <string name="welcome_do_upload_content_description">Esempi di valide immagini caricabili in Commons</string>
   <string name="welcome_dont_upload_content_description">Esempi di immagini che non vanno caricate</string>
   <string name="skip_image">Salta questa immagine</string>
-  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fallito!!. Non possiamo scaricare il file senza l\'autorizzazione per lo stoccaggio esterno.</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download non riuscito. Non è possibile scaricare il file senza l\'autorizzazione di archiviazione esterna.</string>
   <string name="manage_exif_tags">Gestisci le etichette EXIF</string>
   <string name="manage_exif_tags_summary">Seleziona quali etichette EXIF vanno mantenute nel caricamento</string>
   <string name="exif_tag_name_author">Autore</string>
@@ -515,11 +545,10 @@
   <string name="exif_tag_name_lensModel">Modello di lente</string>
   <string name="exif_tag_name_serialNumbers">Numeri seriali</string>
   <string name="exif_tag_name_software">Software</string>
-  <string name="media_location_permission_denied">Accesso alla posizione multimediale negato</string>
-  <string name="add_location_manually">Potremmo non essere in grado di ottenere automaticamente i dati sulla posizione dalle immagini caricate. Si prega di aggiungere la posizione appropriata per ciascuna immagine prima di inviarla</string>
   <string name="share_text">Carica foto su Wikimedia Commons direttamente dal tuo telefono. Scarica subito l\'app Commons: %1$s</string>
   <string name="share_via">Condividi applicazione tramite...</string>
   <string name="image_info">Informazioni sull\'immagine</string>
+  <string name="upload_categories_dont_show_this_message_again">Non mostrare più questo messaggio</string>
   <string name="no_categories_found">Nessuna categoria trovata</string>
   <string name="no_depiction_found">Nessuna definizione trovata</string>
   <string name="upload_cancelled">Caricamento annullato</string>
@@ -535,6 +564,7 @@
   <string name="delete_helper_ask_spam_selfie">un selfie che non viene utilizzato in nessuna voce</string>
   <string name="delete_helper_ask_spam_blurry">totalmente sfocato</string>
   <string name="delete_helper_ask_spam_nonsense">senza senso, assolutamente inutilizzabili in qualsiasi voce</string>
+  <string name="delete_helper_ask_spam_other">Altro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Stampa foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto casuale presa da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -551,6 +581,10 @@
   <string name="category_edit_button_text">Aggiorna le categorie</string>
   <string name="depictions_edit_helper_make_edit_toast">Tentativo di aggiornare le rappresentazioni.</string>
   <string name="depictions_edit_helper_show_edit_title">Modifica le raffigurazioni</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Viene aggiunta la raffigurazione %1$s.</item>
+    <item quantity="other">Vengono aggiunte le raffigurazioni %1$s.</item>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Non è stato possibile aggiungere descrizioni.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentativo di aggiornare le coordinate.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
@@ -568,7 +602,7 @@
   <string name="description_activity_title">Modifica descrizioni e didascalie</string>
   <string name="share_image_via">Condividi immagine tramite</string>
   <string name="you_have_no_achievements_yet">Non hai ancora condiviso alcun contributo.</string>
-  <string name="no_achievements_yet">%s non ha fatto alcun contributo ancora</string>
+  <string name="no_achievements_yet">%1$s non ha fatto alcun contributo ancora</string>
   <string name="account_created">Utenza creata!</string>
   <string name="text_copy">Testo copiato negli appunti</string>
   <string name="notification_mark_read">Notifica segnata come letta</string>
@@ -582,7 +616,10 @@
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
+  <string name="title_for_subcategories">Sottocategorie</string>
+  <string name="title_for_parent_categories">CATEGORIE SUPERIORI</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
+  <string name="upload_nearby_place_found_description_plural">Queste sono immagini di %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>
   <string name="title_app_shortcut_bookmark">Segnalibri</string>
   <string name="title_app_shortcut_setting">Impostazioni</string>
@@ -597,7 +634,9 @@
   <string name="cannot_open_location_settings">Errore nell\'apertura delle impostazioni di localizzazione. Gentilmente, avvia la localizzazione manualmente.</string>
   <string name="recommend_high_accuracy_mode">Per migliori risultati, seleziona il modo Alta Precisione</string>
   <string name="ask_to_turn_location_on">Accendere la localizzazione?</string>
+  <string name="ask_to_turn_location_on_text">Si prega di attivare i servizi di localizzazione dell’app per mostrare la tua posizione attuale</string>
   <string name="nearby_needs_location">La funzione \'nelle vicinanze\' richiede l\'abilitazione della localizzazione per operare correttamente</string>
+  <string name="explore_map_needs_location">La mappa Esplora necessita dell\'autorizzazione di posizione per visualizzare le immagini vicine</string>
   <string name="upload_map_location_access">È necessario fornire l\'autorizzazione alla posizione per impostare automaticamente la posizione.</string>
   <string name="use_location_from_similar_image">Hai scattato queste immagini nello stesso posto? Vuoi usare la latitudine e la longitudine dell\'immagine indicate a destra?</string>
   <string name="load_more">Caricane ancora</string>
@@ -616,7 +655,7 @@
   <string name="wikipedia_instructions_step_5">5. Incolla il wikitesto nel posto appropriato.</string>
   <string name="wikipedia_instructions_step_6">6. Modifica il wikitesto per il posizionamento appropriato, se necessario. Per ulteriori informazioni vedi &lt;a href=\"https://it.wikipedia.org/wiki/Aiuto:Markup_immagini\"&gt;questa pagina&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Pubblica la voce</string>
-  <string name="copy_wikicode_to_clipboard">Copia il wikicodice negli appunti</string>
+  <string name="copy_wikicode_to_clipboard">Copia il wikitesto negli appunti</string>
   <string name="pause">pausa</string>
   <string name="resume">riprendi</string>
   <string name="paused">In pausa</string>
@@ -641,6 +680,7 @@
   <string name="leaderboard_nearby">Nelle vicinanze</string>
   <string name="leaderboard_used">Usa</string>
   <string name="leaderboard_my_rank_button_text">Il mio posizionamento</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Attivata modalità di connessione limitata!</string>
   <string name="limited_connection_disabled">Disattivata modalità di connessione limitata. I caricamenti in attesa riprenderanno adesso.</string>
   <string name="limited_connection_mode">Modalità di connessione limitata</string>
@@ -655,7 +695,10 @@
   <string name="media_details_tooltip">Per favore scrivi una breve descrizione su cosa è ritratto nella tua immagine. Nella descrizione, indica che cosa rende l\'immagine interessante, tipica o rara, e spiega il contesto, visibile o non. Impiega il più possibile una terminologia esatta.</string>
   <string name="depicts_tooltip">Trova e seleziona tutti i concetti rappresentati da questa immagine. Sii il più specifico possibile. Se l\'immagine ritrae più elementi, sceglili tutti entro limiti ragionevoli. Non scegliere etichette generali se sono disponibili etichette più specifiche.</string>
   <string name="categories_tooltip">Si prega di selezionare le categorie appropriate. A differenza delle raffigurazioni, le categorie sono solo in inglese.</string>
+  <string name="license_tooltip">Commons rende le tue immagini riutilizzabili e adattabili da chiunque. Vuoi rinunciare a tutti i diritti? Vuoi che ti venga attribuita la paternità? Vuoi che gli adattamenti utilizzino la stessa licenza?</string>
   <string name="depicts_step_title">Raffigura</string>
+  <string name="depicts_label">Etichetta</string>
+  <string name="depicts_description">Descrizione</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
   <string name="menu_view_category_page">Vedi la pagina della categoria</string>
@@ -682,22 +725,27 @@
   <string name="back">Indietro</string>
   <string name="welcome_custom_picture_selector_text">Benvenuto nel selettore di immagini personalizzato</string>
   <string name="custom_selector_info_text1">Questo selettore ti mostra quali immagini hai già caricato su Commons.</string>
-  <string name="custom_selector_info_text2">A differenza dell\'immagine a sinistra, quella a destra ha il logo Commons che indica che è già caricata. \nTocca e tieni premuto per l\'anteprima dell\'immagine.</string>
+  <string name="custom_selector_info_text2">A differenza dell\'immagine a sinistra, quella a destra ha il logo Commons che indica che è già caricata.\n\nTocca e tieni premuto per l\'anteprima dell\'immagine.</string>
   <string name="welcome_custom_selector_ok">Fantastico</string>
   <string name="custom_selector_already_uploaded_image_text">Questa immagine è già stata caricata su Commons.</string>
   <string name="custom_selector_over_limit_warning">Per motivi tecnici, l\'app non può caricare in modo affidabile più di %1$d immagini contemporaneamente. Il limite di caricamento di %1$d è stato superato da %2$d .</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Nascondi</string>
+  <string name="custom_selector_duplicates_warning">Alcune delle immagini selezionate sono duplicate e verranno rimosse prima del caricamento.</string>
   <string name="custom_selector_button_limit_text">Massimo: %1$d</string>
   <string name="custom_selector_limit_error_desc">Errore: limite di caricamento superato</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Questa immagine sarà ammessa al concorso Wiki Loves Monuments</string>
   <string name="display_monuments">Mostra monumenti</string>
   <string name="wlm_month_message">È il mese di Wiki Loves Monuments!</string>
   <string name="learn_more">ULTERIORI INFORMAZIONI</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments è un concorso internazionale di fotografia di monumenti organizzato da Wikimedia</string>
   <string name="need_permission">Autorizzazione/i richiesta/e</string>
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
-  <string name="contributions_of_user">Contributi dell\'utente: %s</string>
-  <string name="achievements_of_user">Traguardi dell\'utente: %s</string>
+  <string name="location_off_dialog_text">Abilita il pulsante \"Elimina cartella\" nel selettore personalizzato</string>
+  <string name="location_permission_rationale">Autorizzazione facoltativa: ottieni la posizione corrente per i suggerimenti di categoria</string>
+  <string name="contributions_of_user">Contributi dell\'utente: %1$s</string>
+  <string name="achievements_of_user">Traguardi dell\'utente: %1$s</string>
   <string name="menu_view_user_page">Vedi il profilo utente</string>
   <string name="edit_depictions">Modifica le descrizioni</string>
   <string name="edit_categories">Modifica le categorie</string>
@@ -711,6 +759,7 @@
   <string name="add_location">Aggiungi luogo</string>
   <string name="feedback_sharing_data_alert">Rimuovi da questa email tutte le informazioni che non sei disposto a condividere pubblicamente. Inoltre, tieni presente che il tuo indirizzo email con cui stai scrivendo, il nome e l\'immagine del profilo associati saranno visibili pubblicamente.</string>
   <string name="explore_map_details">Dettagli</string>
+  <string name="achievements_unavailable_beta">La classifica è disponibile solo nella versione prod. Consulta la documentazione per gli sviluppatori.</string>
   <string name="leaderboard_unavailable_beta">La classifica è disponibile solo nella versione prod. Consulta la documentazione per gli sviluppatori.</string>
   <string name="copyright_popup">Per favore carica solo le foto che hai scattato tu. Gli autori che caricano immagini protette da copyright verranno bloccati. Questo vale anche per la versione beta. Grazie per aver testato l\'app!</string>
   <string name="select_feedback_data_choice">Deseleziona tutte le informazioni che non ti senti a tuo agio nel condividere pubblicamente.</string>
@@ -728,8 +777,8 @@
   <string name="unmark_as_not_for_upload">Deseleziona come \"da non caricare\"</string>
   <string name="marking_as_not_for_upload">Selezionando come \"da non caricare\"</string>
   <string name="unmarking_as_not_for_upload">Deselezionando come \"da non caricare\"</string>
-  <string name="show_already_actioned_pictures">Mostra le immagini già attivate</string>
-  <string name="hiding_already_actioned_pictures">Nascondere le immagini già attivate</string>
+  <string name="show_already_actioned_pictures">Mostra le immagini già gestite</string>
+  <string name="hiding_already_actioned_pictures">Nascondere le immagini già gestite</string>
   <string name="no_more_images_found">Nessuna altra immagine trovata</string>
   <string name="this_image_is_already_uploaded">Questa immagine è già stata caricata</string>
   <string name="can_not_select_this_image_for_upload">Impossibile selezionare questa immagine per il caricamento</string>
@@ -745,6 +794,7 @@
   <string name="welcome_to_full_screen_mode_text">Benvenuto nella modalità di selezione a schermo intero</string>
   <string name="full_screen_mode_zoom_info">Usa due dita per ingrandire e rimpicciolire.</string>
   <string name="full_screen_mode_features_info">Scorri velocemente e a lungo per eseguire queste azioni: \n- Sinistra/destra: vai al precedente/successivo \n- Su: seleziona\n- Giù: contrassegna come da non caricare.</string>
+  <string name="set_up_avatar_toast_string">Per impostare il tuo avatar nella classifica, tocca \"Imposta come avatar\" nel menu a tre punti di qualsiasi immagine.</string>
   <string name="similar_coordinate_description_auto_set">Le coordinate non sono esatte, ma la persona che ha caricato questa immagine pensa che siano abbastanza vicine.</string>
   <string name="storage_permissions_denied">Autorizzazioni di archiviazione negate</string>
   <string name="unable_to_share_upload_item">Impossibile condividere questo elemento</string>
@@ -753,24 +803,86 @@
   <string name="learn_how_to_write_a_useful_caption">Impara come scrivere una didascalia utile</string>
   <string name="see_your_achievements">Vedi i tuoi risultati</string>
   <string name="edit_image">Modifica Immagine</string>
-  <string name="edit_location">Modifica Posizione</string>
+  <string name="edit_location">Modifica posizione</string>
   <string name="location_updated">Posizione aggiornata!</string>
+  <string name="remove_location">Rimuovi posizione</string>
+  <string name="remove_location_warning_title">Rimuovi avviso di posizione</string>
+  <string name="remove_location_warning_desc">La posizione rende le immagini più utili e facili da trovare. Vuoi davvero rimuovere la posizione da questa immagine?</string>
+  <string name="location_removed">Posizione rimossa!</string>
   <string name="send_thanks_to_author">Ringrazia l\'autore</string>
   <string name="error_sending_thanks">Errore nell\'invio di ringraziamenti all\'autore.</string>
   <string name="invalid_login_message">Sessione scaduta. Accedi nuovamente.</string>
+  <string name="no_application_available_to_open_gpx_files">Nessuna applicazione disponibile per aprire i file GPX</string>
+  <string name="file_saved_successfully">File salvato con successo</string>
+  <string name="do_you_want_to_open_gpx_file">Vuoi aprire il file GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Vuoi aprire il file KML?</string>
+  <string name="failed_to_save_kml_file">Errore durante il salvataggio del file KML.</string>
+  <string name="failed_to_save_gpx_file">Errore durante il salvataggio del file GPX.</string>
+  <string name="saving_kml_file">Salvataggio come file KML...</string>
+  <string name="saving_gpx_file">Salvataggio come file GPX...</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d immagine selezionata</item>
-    <item quantity="other">%d immagini selezionate</item>
+    <item quantity="one">%1$d immagine selezionata</item>
+    <item quantity="other">%1$d immagini selezionate</item>
   </plurals>
+  <string name="multiple_files_depiction">Ricorda che tutte le immagini in un caricamento multiplo hanno le stesse categorie e descrizioni. Se le immagini non condividono descrizioni e categorie, esegui caricamenti separati.</string>
+  <string name="multiple_files_depiction_header">Osservazione sui caricamenti multipli</string>
+  <string name="nearby_wikitalk">Segnala un problema su questo elemento su Wikidata</string>
+  <string name="please_enter_some_comments">Inserisci dei commenti</string>
+  <string name="talk">Discussione</string>
+  <string name="write_something_about_the_item">Scrivi qualcosa su \' %1$s \'. Sarà visibile pubblicamente.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' non esiste più, non potrà mai più essere fotografato.</string>
+  <string name="is_at_a_different_place_wikidata">\' %1$s \' si trova in un luogo diverso.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\' %1$s \' si trova in un luogo diverso. Specifica il luogo corretto qui sotto e, se possibile, scrivi latitudine e longitudine corrette.</string>
+  <string name="other_problem_or_information_please_explain_below">Altro problema o informazione (si prega di spiegare di seguito).</string>
+  <string name="feedback_destination_note">Il tuo feedback verrà pubblicato sulla seguente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:App mobile/Feedback&lt;/a&gt;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Sei sicuro di voler cancellare tutti i caricamenti?</string>
+  <string name="cancelling_all_the_uploads">Cancellando tutti i caricamenti...</string>
+  <string name="uploads">Caricamenti</string>
+  <string name="pending">In attesa</string>
+  <string name="failed">Non riuscito</string>
+  <string name="could_not_load_place_data">Impossibile caricare i dati del luogo</string>
+  <string name="warning_for_no_option_selected">Seleziona una qualsiasi delle opzioni per rispondere alla domanda</string>
   <string name="custom_selector_delete_folder">Cancella cartella</string>
   <string name="custom_selector_confirm_deletion_title">Conferma cancellazione</string>
+  <string name="custom_selector_confirm_deletion_message">Sei sicuro di voler eliminare la cartella %1$s contenente elementi %2$d?</string>
   <string name="custom_selector_delete">Cancella</string>
   <string name="custom_selector_cancel">Annulla</string>
   <string name="custom_selector_folder_deleted_success">Cartella %1$s cancellata correttamente</string>
+  <string name="custom_selector_folder_deleted_failure">Impossibile eliminare la cartella %1$s</string>
+  <string name="custom_selector_error_trashing_folder_contents">Impossibile eliminare i contenuti nella cartella: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">Impossibile recuperare il percorso della cartella per l\'ID bucket: %1$d</string>
   <string name="red_pin">Questo posto non ha ancora una foto, scattane una!</string>
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
+  <string name="error_while_loading">Errore durante il caricamento</string>
+  <string name="no_usages_found">Nessun uso trovato</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>
+  <string name="bullet_point">•</string>
   <string name="file_usages_container_heading">Utilizzi del file</string>
+  <string name="account">Utenza</string>
+  <string name="vanish_account">Elimina l\'utenza</string>
+  <string name="account_vanish_request_confirm_title">Avviso di eliminazione dell\'utenza</string>
+  <string name="account_vanish_request_confirm">Il diritto all\'oblio è una &lt;b&gt;soluzione estrema&lt;/b&gt; e dovrebbe essere utilizzata solo quando si desidera smettere di contribuire per sempre e anche per nascondere il più possibile le proprie associazioni passate. \n\nLa cancellazione di un utenza su Wikimedia commons avviene cambiando il nome dell\'utenza in modo che gli altri non possano riconoscere i contributi, attraverso un processo chiamato scomparsa dell\'utenza. &lt;b&gt;L\'oblio non garantisce un anonimato completo né la rimozione dei contributi ai progetti.&lt;/b&gt;</string>
+  <string name="caption">Didascalia</string>
+  <string name="caption_copied_to_clipboard">Didascalia copiata negli appunti</string>
+  <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulazioni, tutte le foto di questo album sono state caricate o contrassegnate come non adatte al caricamento.</string>
+  <string name="show_in_explore">Mostra in Esplora</string>
+  <string name="show_in_nearby">Mostra nelle vicinanze</string>
+  <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
+  <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>
+  <string name="nominated_for_deletion_btn">Proposto per la cancellazione</string>
+  <string name="custom_selector_max_image_limit_reached">Puoi selezionare solo un massimo di %d immagini.</string>
+  <string name="edit_unsupported_format_explanation">La modifica diretta nell\'app è disponibile solo per i file JPEG. Per modificare gli altri formati, si prega di utilizzare un programma di terze parti.</string>
+  <string name="license_cc0_description">Nessun copyright. Cedi tutti i diritti in modo che chiunque possa utilizzare quest\'opera in qualsiasi modo.</string>
+  <string name="license_cc_by_description">Attribuzione. Chiunque è libero di condividere e adattare il materiale, purché ne citi la fonte.</string>
+  <string name="license_cc_by_sa_description">Attribuzione-Condividi allo stesso modo. Altri possono condividere e adattare, ma devono utilizzare la stessa licenza e citare la fonte.</string>
+  <string name="license_cc0_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, senza alcuna condizione.</string>
+  <string name="license_cc_by_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, anche a fini commerciali, purché venga citata la paternità dell\'opera.</string>
+  <string name="license_cc_by_sa_long_description">Questa licenza consente a chi riutilizza il materiale di distribuirlo, remixarlo, adattarlo e svilupparlo ulteriormente in qualsiasi mezzo o formato, anche a fini commerciali, a condizione che ne venga citata la paternità e che la nuova opera sia concessa in licenza con termini identici.</string>
+  <string name="error_getting_image_properties">Errore durante il recupero delle proprietà dell\'immagine:</string>
+  <string name="error_blur_no_rectangle">Disegna almeno un rettangolo sulla foto</string>
+  <string name="error_applying_blur">Errore durante l\'applicazione della sfocatura</string>
+  <string name="failed_to_apply_crop">Impossibile applicare il ritaglio</string>
+  <string name="failed_to_save_image">Impossibile salvare l\'immagine</string>
 </resources>

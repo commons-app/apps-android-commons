@@ -5,6 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
@@ -24,6 +26,7 @@ public class Place implements Parcelable {
     public String name;
     private Label label;
     private String longDescription;
+    @Embedded
     public LatLng location;
     @PrimaryKey @NonNull
     public String entityID;
@@ -37,6 +40,10 @@ public class Place implements Parcelable {
     public Sitelinks siteLinks;
     private boolean isMonument;
     private String thumb;
+
+    // When this place was saved in the local cache, used to remove outdated details
+    @ColumnInfo(defaultValue = "0")
+    public long cachedAt;
 
     public Place() {
         language = null;
@@ -93,6 +100,15 @@ public class Place implements Parcelable {
         this.entityID = entityID;
     }
 
+    /**
+     * Reconstructs a Place object from a Parcel.
+     *
+     * IMPORTANT: The fields must be read in the exact same order in which they
+     * are written in writeToParcel(). Changing the order will lead to incorrect
+     * or failed deserialization of the object.
+     *
+     * @param in Parcel containing the serialized Place data
+     */
     public Place(Parcel in) {
         this.language = in.readString();
         this.name = in.readString();
@@ -103,10 +119,10 @@ public class Place implements Parcelable {
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         String picString = in.readString();
         this.pic = (picString == null) ? "" : picString;
+        this.entityID = in.readString();
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
-        this.entityID = in.readString();
     }
 
     public static Place from(NearbyResultItem item) {
@@ -151,7 +167,10 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""), entityId);
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == "")
+                && (item.getDateOfOfficialClosure().getValue() == "")
+                && (item.getPointInTime().getValue()==""),
+            entityId);
     }
 
     /**
@@ -230,13 +249,23 @@ public class Place implements Parcelable {
      */
     @Nullable
     public String getWikiDataEntityId() {
+        if (this.entityID != null && !this.entityID.equals("")) {
+            return this.entityID;
+        }
+
         if (!hasWikidataLink()) {
             Timber.d("Wikidata entity ID is null for place with sitelink %s", siteLinks.toString());
             return null;
         }
 
+        //Determine entityID from link
         String wikiDataLink = siteLinks.getWikidataLink().toString();
-        return wikiDataLink.replace("http://www.wikidata.org/entity/", "");
+
+        if (wikiDataLink.contains("http://www.wikidata.org/entity/")) {
+            this.entityID = wikiDataLink.substring("http://www.wikidata.org/entity/".length());
+            return this.entityID;
+        }
+        return null;
     }
 
     /**

@@ -40,11 +40,11 @@ class DepictModel
                         place.wikiDataEntityId?.let { qids.add(it) }
                     }
                     repository.getUploads().forEach { item ->
-                        if (item.gpsCoords != null && item.gpsCoords.imageCoordsExists) {
+                        if (item.gpsCoords != null && item.gpsCoords?.imageCoordsExists == true) {
                             Coordinates2Country
                                 .countryQID(
-                                    item.gpsCoords.decLatitude,
-                                    item.gpsCoords.decLongitude,
+                                    item.gpsCoords!!.decLatitude,
+                                    item.gpsCoords!!.decLongitude,
                                 )?.let { qids.add("Q$it") }
                         }
                     }
@@ -65,7 +65,7 @@ class DepictModel
                         .getEntities(ids)
                         .map {
                             it
-                                .entities()
+                                .getEntityMap()
                                 .values
                                 .mapIndexed { index, entity -> DepictedItem(entity) }
                         }.onErrorResumeWithEmptyList()
@@ -80,7 +80,7 @@ class DepictModel
                     .getEntities(ids)
                     .map {
                         it
-                            .entities()
+                            .getEntityMap()
                             .values
                             .mapIndexed { _, entity -> DepictedItem(entity) }
                     }.onErrorResumeWithEmptyList()

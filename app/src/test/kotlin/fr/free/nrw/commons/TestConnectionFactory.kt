@@ -1,6 +1,5 @@
 package fr.free.nrw.commons
 
-import fr.free.nrw.commons.OkHttpConnectionFactory.HttpStatusException
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -39,6 +38,6 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
         if (rsp.isSuccessful) {
             return rsp
         }
-        throw HttpStatusException(rsp)
+        throw IOException("Unsuccessful response")
     }
 }

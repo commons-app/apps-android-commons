@@ -9,7 +9,7 @@ public class NearbyFilterState {
     private int checkBoxTriState;
     private ArrayList<Label> selectedLabels;
 
-    private static NearbyFilterState nearbyFılterStateInstance;
+    private static NearbyFilterState nearbyFilterStateInstance;
 
     /**
      * Define initial filter values here
@@ -23,10 +23,10 @@ public class NearbyFilterState {
     }
 
     public static NearbyFilterState getInstance() {
-        if (nearbyFılterStateInstance == null) {
-            nearbyFılterStateInstance = new NearbyFilterState();
+        if (nearbyFilterStateInstance == null) {
+            nearbyFilterStateInstance = new NearbyFilterState();
         }
-        return nearbyFılterStateInstance;
+        return nearbyFilterStateInstance;
     }
 
     public static void setSelectedLabels(ArrayList<Label> selectedLabels) {

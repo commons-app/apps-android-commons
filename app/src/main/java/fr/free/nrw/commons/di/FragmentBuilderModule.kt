@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment
+import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
@@ -96,6 +97,9 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector(modules = [BookmarkItemsFragmentModule::class])
     abstract fun bindBookmarkItemListFragment(): BookmarkItemsFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindBookmarkCategoriesListFragment(): BookmarkCategoriesFragment
 
     @ContributesAndroidInjector
     abstract fun bindReviewOutOfContextFragment(): ReviewImageFragment

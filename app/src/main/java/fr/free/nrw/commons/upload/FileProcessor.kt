@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -21,6 +22,18 @@ import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
+
+/**
+ * Encapsulates dependencies required by FileProcessor for category and depiction retrieval.
+ */
+class FileProcessorDependencies
+    @Inject
+    constructor(
+        val gpsCategoryModel: GpsCategoryModel,
+        val depictsModel: DepictModel,
+        val apiCall: CategoryApi,
+        val okHttpJsonApiClient: OkHttpJsonApiClient,
+    )
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -36,11 +49,8 @@ class FileProcessor
     constructor(
         private val context: Context,
         private val contentResolver: ContentResolver,
-        private val gpsCategoryModel: GpsCategoryModel,
-        private val depictsModel: DepictModel,
         @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
-        private val apiCall: CategoryApi,
-        private val okHttpJsonApiClient: OkHttpJsonApiClient,
+        private val dependencies: FileProcessorDependencies,
     ) {
         private val compositeDisposable = CompositeDisposable()
 
@@ -52,7 +62,7 @@ class FileProcessor
          * Processes filePath coordinates, either from EXIF data or user location
          */
         fun processFileCoordinates(
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
             filePath: String?,
             inAppPictureLocation: LatLng?,
         ): ImageCoordinates {
@@ -64,7 +74,7 @@ class FileProcessor
                     null
                 }
             // Redact EXIF data as indicated in preferences.
-            redactExifTags(exifInterface, getExifTagsToRedact())
+            redactExifTags(exifInterface, getExifTagsToRedact(), filePath)
             Timber.d("Calling GPSExtractor")
             val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
             if (originalImageCoordinates.decimalCoords == null) {
@@ -86,7 +96,7 @@ class FileProcessor
          */
         fun getExifTagsToRedact(): Set<String> {
             val prefManageEXIFTags =
-                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
+                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS)
             val redactTags: Set<String> =
                 context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
             return redactTags - prefManageEXIFTags
@@ -97,56 +107,46 @@ class FileProcessor
          *
          * @param exifInterface ExifInterface object
          * @param redactTags    tags to be redacted
+         * @param filePath      path to the file for direct metadata redaction
          */
         fun redactExifTags(
             exifInterface: ExifInterface?,
             redactTags: Set<String>,
+            filePath: String? = null,
         ) {
-            compositeDisposable.add(
-                Observable
-                    .fromIterable(redactTags)
-                    .flatMap { Observable.fromArray(*FileMetadataUtils.getTagsFromPref(it)) }
-                    .subscribe(
-                        { redactTag(exifInterface, it) },
-                        { Timber.d(it) },
-                        { save(exifInterface) },
-                    ),
-            )
-        }
+            // Expand preference-level tags into actual EXIF tag names.
+            val expandedTags = mutableSetOf<String>()
+            for (pref in redactTags) {
+                expandedTags.addAll(FileMetadataUtils.getTagsFromPref(pref))
+            }
 
-        private fun save(exifInterface: ExifInterface?) {
-            try {
-                exifInterface?.saveAttributes()
-            } catch (e: IOException) {
-                Timber.w("EXIF redaction failed: %s", e.toString())
+            // Redact from in-memory ExifInterface so callers see updated state.
+            for (tag in expandedTags) {
+                exifInterface?.getAttribute(tag)?.takeIf { it.isNotEmpty() }?.let {
+                    exifInterface.setAttribute(tag, null)
+                    Timber.d("Exif tag $tag with value $it redacted.")
+                }
+            }
+
+            // Write redaction to file using RandomAccessFile.
+            if (filePath != null) {
+                try {
+                    RandomAccessFileExifWriter.redactTags(File(filePath), expandedTags)
+                } catch (e: IOException) {
+                    Timber.w("EXIF redaction failed: %s", e.toString())
+                }
             }
         }
 
-        private fun redactTag(
-            exifInterface: ExifInterface?,
-            tag: String,
-        ) {
-            Timber.d("Checking for tag: %s", tag)
-            exifInterface
-                ?.getAttribute(tag)
-                ?.takeIf { it.isNotEmpty() }
-                ?.let { attributeName ->
-                    exifInterface.setAttribute(tag, null).also {
-                        Timber.d("Exif tag $tag with value $attributeName redacted.")
-                    }
-                }
-        }
-
         /**
-         * Find other images around the same location that were taken within the last 20 sec
+         * Finds other images around the same location that were taken within a ±120 sec window.
          *
-         * @param originalImageCoordinates
-         * @param fileBeingProcessed
-         * @param similarImageInterface
+         * @param fileBeingProcessed The file currently being checked.
+         * @param similarImageInterface Callback to display similar images if any are found.
          */
         private fun findOtherImages(
             fileBeingProcessed: File,
-            similarImageInterface: SimilarImageInterface,
+            similarImageInterface: SimilarImageInterface?,
         ) {
             val oneHundredAndTwentySeconds = 120 * 1000L
             // Time when the original image was created
@@ -161,7 +161,7 @@ class FileProcessor
                 .map { Pair(it, readImageCoordinates(it)) }
                 .firstOrNull { it.second?.decimalCoords != null }
                 ?.let { fileCoordinatesPair ->
-                    similarImageInterface.showSimilarImageFragment(
+                    similarImageInterface?.showSimilarImageFragment(
                         fileBeingProcessed.path,
                         fileCoordinatesPair.first.absolutePath,
                         fileCoordinatesPair.second,
@@ -193,15 +193,15 @@ class FileProcessor
         fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
             requireNotNull(imageCoordinates.decimalCoords)
             compositeDisposable.add(
-                apiCall
+                dependencies.apiCall
                     .request(imageCoordinates.decimalCoords!!)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
                     .subscribe(
-                        gpsCategoryModel::setCategoriesFromLocation,
+                        dependencies.gpsCategoryModel::setCategoriesFromLocation,
                         {
                             Timber.e(it)
-                            gpsCategoryModel.clear()
+                            dependencies.gpsCategoryModel.clear()
                         },
                     ),
             )
@@ -219,7 +219,7 @@ class FileProcessor
                 .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
                 .concatMap {
                     Observable.fromCallable {
-                        okHttpJsonApiClient.getNearbyPlaces(
+                        dependencies.okHttpJsonApiClient.getNearbyPlaces(
                             imageCoordinates.latLng!!,
                             Locale.getDefault().language,
                             it,
@@ -229,7 +229,7 @@ class FileProcessor
                 .filter { it.size >= MIN_NEARBY_RESULTS }
                 .take(1)
                 .subscribe(
-                    { depictsModel.nearbyPlaces.offer(it) },
+                    { dependencies.depictsModel.nearbyPlaces.offer(it) },
                     { Timber.e(it) },
                 )
     }

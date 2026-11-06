@@ -5,7 +5,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/location_picker_toolbar"
   android:layout_width="match_parent"
-  android:layout_height="78dp"
+  android:layout_height="wrap_content"
+  android:paddingVertical="@dimen/small_gap"
   tools:background="@color/primaryColor">
 
   <TextView
