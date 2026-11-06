@@ -10,16 +10,16 @@ import org.robolectric.annotation.Implements
 
 @Implements(FileProvider::class)
 class ShadowFileProvider {
-
+    // Robolectric shadow must match FileProvider.query
+    @Suppress("UnusedParameter")
     @Implementation
     fun query(
         uri: Uri?,
         projection: Array<String>?,
         selection: String?,
         selectionArgs: Array<String>?,
-        sortOrder: String?
+        sortOrder: String?,
     ): Cursor? {
-
         if (uri == null) {
             return null
         }

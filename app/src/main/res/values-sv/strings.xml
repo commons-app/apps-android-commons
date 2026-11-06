@@ -281,6 +281,13 @@
   <string name="null_url">Fel! Webbadressen hittades inte</string>
   <string name="nominate_deletion">Nominera för radering</string>
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
+  <string name="file_deleted_from_commons">Den här filen har raderats från Commons.</string>
+  <string name="contribution_deleted">Raderad</string>
+  <string name="deleted_file_activity_title">Filen raderades</string>
+  <string name="deleted_file_explanation">Wikimedia Commons tar bort filer som inte är utbildande eller som bryter mot dess regler, inklusive upphovsrättsintrång. Ladda upp foton du tagit själv. Bilder kopierade från internet, skärmdumpar, logotyper och affischer är vanliga anledningar till att en fil tas bort.</string>
+  <string name="deleted_file_view_page">Visa filsidan</string>
+  <string name="deleted_file_view_discussion">Läs raderingsdiskussionen</string>
+  <string name="deleted_file_policies">Commons policyer och riktlinjer</string>
   <string name="nominated_see_more">Se webbplatsen för information</string>
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
@@ -364,6 +371,12 @@
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
   <string name="crop">Beskär</string>
+  <string name="blur">Oskärpa</string>
+  <string name="autoblur">Automatisk oskärpa</string>
+  <string name="autodetect_title">Sudda automatiskt ut ansikten och registreringsskyltar.</string>
+  <string name="autodetect_description">Du kan ignorera falska positiva resultat med knappen ❌ för varje suddigt område.</string>
+  <string name="autoblur_failed_to_load">Misslyckades att läsa in bilden för automatisk oskärpa</string>
+  <string name="autoblur_no_region_detected">Inga områden hittades för automatiskt oskärpa</string>
   <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
@@ -394,6 +407,7 @@
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
   <string name="error_occurred">Ett fel uppstod!</string>
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
+  <string name="notifications_channel_name_uploads">Uppladdningsstatus</string>
   <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
   <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
   <string name="preference_author_name">Anpassat författarnamn</string>
@@ -708,6 +722,7 @@
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
   <string name="custom_selector_over_limit_warning">Av tekniska skäl kan appen inte ladda upp fler än %1$d bilder samtidigt. Uppladdningsgränsen för %1$d har överskridits med %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Stäng</string>
+  <string name="custom_selector_duplicates_warning">Vissa markerade bilder är dubbletter och kommer att tas bort innan uppladdning.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fel: Uppladdningsgränsen har överskridits</string>
   <string name="wlm_upload_info">Denna bild kommer att skickas in till tävlingen Wiki Loves Monuments</string>
@@ -854,4 +869,17 @@
   <string name="license_cc0_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, utan villkor.</string>
   <string name="license_cc_by_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, även för kommersiella ändamål, så länge erkännande ges till skaparen.</string>
   <string name="license_cc_by_sa_long_description">Denna licens tillåter återanvändare att distribuera, remixa, anpassa och bygga vidare på materialet i vilket medium eller format som helst, även för kommersiella ändamål, så länge erkännande ges till skaparen och det nya arbetet är licensierat under identiska villkor.</string>
+  <string name="error_getting_image_properties">Fel när bildegenskaper hämtades:</string>
+  <string name="error_blur_no_rectangle">Rita minst en rektangel på fotot</string>
+  <string name="error_applying_blur">Fel när oskärpa tillämpades</string>
+  <string name="failed_to_apply_crop">Misslyckades när beskärning tillämpades</string>
+  <string name="failed_to_save_image">Misslyckades att spara bilden</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (ljud)</string>
+  <string name="unsupported_format_title">Format som inte stöds</string>
+  <string name="unsupported_format_desc">De valda filerna kunde inte öppnas. Wikimedia Commons kräver något av följande format:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Filer som inte stöds hoppades över</string>
+  <string name="unsupported_files_skipped_desc">Vissa filer hoppades över på grund av ett format som inte stöds. Appen kommer fortsätta ladda upp kvarvarande filer som överensstämmer med format som stöds:\n\n%s</string>
 </resources>

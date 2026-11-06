@@ -12,5 +12,5 @@ data class CategoryRoomEntity(
     @ColumnInfo(name = "description") val description: String? = null,
     @ColumnInfo(name = "thumbnail") val thumbnail: String? = null,
     @ColumnInfo(name = "last_used") val lastUsed: Date? = null,
-    @ColumnInfo(name = "times_used") var timesUsed: Int = 0
+    @ColumnInfo(name = "times_used") var timesUsed: Int = 0,
 )

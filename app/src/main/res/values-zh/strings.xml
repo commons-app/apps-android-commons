@@ -333,6 +333,13 @@
   <string name="null_url">错误！找不到URL</string>
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
+  <string name="file_deleted_from_commons">此文件已从共享资源中删除。</string>
+  <string name="contribution_deleted">已删除</string>
+  <string name="deleted_file_activity_title">文件已删除</string>
+  <string name="deleted_file_explanation">维基共享资源会删除不具教育意义或违反其规则的文件，包括侵犯版权的文件。请上传您自己拍摄的照片。从互联网复制的图片、屏幕截图、徽标和海报都是文件被移除的常见原因。</string>
+  <string name="deleted_file_view_page">查看文件页面</string>
+  <string name="deleted_file_view_discussion">阅读删除讨论</string>
+  <string name="deleted_file_policies">共享资源政策和方针</string>
   <string name="nominated_see_more">查看网页获取详情</string>
   <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
@@ -416,6 +423,12 @@
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
   <string name="crop">裁剪</string>
+  <string name="blur">模糊</string>
+  <string name="autoblur">自动模糊</string>
+  <string name="autodetect_title">自动模糊人脸和车牌。</string>
+  <string name="autodetect_description">您可以使用每个模糊区域的❌按钮来取消处理。</string>
+  <string name="autoblur_failed_to_load">自动模糊加载图像失败</string>
+  <string name="autoblur_no_region_detected">自动模糊未检测到区域</string>
   <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
@@ -447,12 +460,14 @@
   <string name="images_used_explanation">您上传至共享资源，并用于维基媒体条目的图片数量</string>
   <string name="error_occurred">发生错误！</string>
   <string name="notifications_channel_name_all">共享资源通知</string>
+  <string name="notifications_channel_name_uploads">上传进度</string>
   <string name="preference_author_name_toggle">使用自定义的作者姓名</string>
   <string name="preference_author_name_toggle_summary">在上传照片时使用自定义的作者姓名，而不是用户名</string>
   <string name="preference_author_name">自定义作者姓名</string>
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
   <string name="display_nearby_notification_summary">显示有关需要图片的最近地点的应用程序内通知</string>
@@ -761,6 +776,7 @@
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
   <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">关闭</string>
+  <string name="custom_selector_duplicates_warning">部分所选图像为重复图像，上传前会将其移除。</string>
   <string name="custom_selector_button_limit_text">最大：%1$d</string>
   <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
   <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
@@ -908,4 +924,17 @@
   <string name="license_cc0_long_description">此许可协议允许再使用者无条件地以任何媒介或格式，分发、改编、演绎和构建材料。</string>
   <string name="license_cc_by_long_description">此许可协议允许再使用者只要注明创作者，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
   <string name="license_cc_by_sa_long_description">此许可协议允许再使用者只要注明创作者，并将新作品依据相同条款获得许可，即可以任何媒介或格式，分发、改编、演绎和构建材料，甚至用于商业用途。</string>
+  <string name="error_getting_image_properties">获取图像属性时出错：</string>
+  <string name="error_blur_no_rectangle">请在照片上至少绘制一个矩形</string>
+  <string name="error_applying_blur">应用模糊时出错</string>
+  <string name="failed_to_apply_crop">无法应用裁剪</string>
+  <string name="failed_to_save_image">图像保存失败</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG（音频）</string>
+  <string name="unsupported_format_title">不支持的格式</string>
+  <string name="unsupported_format_desc">所选文件无法打开。维基共享资源严格要求以下格式：\n\n%s</string>
+  <string name="unsupported_files_skipped_title">已跳过不支持的文件</string>
+  <string name="unsupported_files_skipped_desc">由于格式不支持，已跳过部分文件。应用将继续上传符合以下受支持格式的剩余文件：\n\n%s</string>
 </resources>
