@@ -4,9 +4,11 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
+import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.PlacesRepository
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.utils.LocationUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -24,25 +26,52 @@ private const val LOCAL_SCROLL_DELAY = 200L // SCROLL_DELAY but for local db pla
  * changes, area searches, and map scrolling.
  */
 class NearbyParentFragmentPresenter(
-    bookmarkLocationDao: BookmarkLocationsDao,
-    placesRepository: PlacesRepository,
-    nearbyController: NearbyController,
-    placeDetailsLoader: NearbyPlaceDetailsLoader? = null,
-) : BaseNearbyParentFragmentPresenter(bookmarkLocationDao, placesRepository, nearbyController) {
-    override val placeDetailsLoader: NearbyPlaceDetailsLoader =
-        placeDetailsLoader ?: NearbyPlaceDetailsLoader(
+    val bookmarkLocationDao: BookmarkLocationsDao,
+    val placesRepository: PlacesRepository,
+    val nearbyController: NearbyController,
+    val uiInteractionHandler: NearbyUiInteractionHandler = NearbyUiInteractionHandler(),
+    val filterHandler: NearbyFilterHandler = NearbyFilterHandler { uiInteractionHandler.nearbyParentFragmentView },
+    val placeOperations: NearbyPlaceOperations =
+        NearbyBookmarkCacheHandler(
             bookmarkLocationDao,
             placesRepository,
-            nearbyController,
-        ) { nearbyParentFragmentView }
+            NearbyPlaceDetailsLoader(bookmarkLocationDao, placesRepository, nearbyController) {
+                uiInteractionHandler.nearbyParentFragmentView
+            },
+            { uiInteractionHandler.nearbyParentFragmentView },
+        ),
+) : NearbyParentFragmentContract.UserActions,
+    LocationUpdateListener,
+    NearbyUiOperations by uiInteractionHandler,
+    NearbyFilterOperations by filterHandler,
+    NearbyPlaceOperations by placeOperations {
+
+    val nearbyParentFragmentView: NearbyParentFragmentContract.View
+        get() = uiInteractionHandler.nearbyParentFragmentView
+
+    val placeDetailsLoader: NearbyPlaceDetailsLoader
+        get() = (placeOperations as? NearbyBookmarkCacheHandler)?.placeDetailsLoader
+            ?: NearbyPlaceDetailsLoader(
+                bookmarkLocationDao,
+                placesRepository,
+                nearbyController,
+            ) { uiInteractionHandler.nearbyParentFragmentView }
 
     private var isNearbyLocked = false
-
+    private var currentLatLng: LatLng? = null
     private var customQuery: String? = null
 
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
     private var localPlaceSearchJob: Job? = null
+
+    init {
+        uiInteractionHandler.currentLatLngProvider = { currentLatLng }
+        if (placeOperations is NearbyBookmarkCacheHandler) {
+            placeOperations.lockNearby = ::lockUnlockNearby
+            placeOperations.updateMapAndList = ::updateMapAndList
+        }
+    }
 
     fun initializeMapOperations() {
         lockUnlockNearby(false)
@@ -138,18 +167,25 @@ class NearbyParentFragmentPresenter(
         }
     }
 
-    override fun onLocationChangedSignificantly(latLng: LatLng) {
-        Timber.d("Location significantly changed")
-        updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    fun onMapReady() {
+        initializeMapOperations()
     }
 
-    override fun onLocationChangedSlightly(latLng: LatLng) {
-        Timber.d("Location significantly changed")
-        updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
+    override fun setAdvancedQuery(query: String) {
+        this.customQuery = query
     }
 
-    override fun onLocationChangedMedium(latLng: LatLng) {
-        Timber.d("Location changed medium")
+    /**
+     * Initiates a search for places within the area. Depending on whether the search
+     * is close to the current location, the map and list are updated
+     * accordingly.
+     */
+    fun searchInTheArea() {
+        if (searchCloseToCurrentLocation()) {
+            updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        } else {
+            updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
+        }
     }
 
     /**
@@ -158,7 +194,6 @@ class NearbyParentFragmentPresenter(
      * @param scope The lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
      * @param isNetworkAvailable Whether to load pins from the internet or from the cache.
      */
-    @Override
     override fun handleMapScrolled(
         scope: LifecycleCoroutineScope?,
         isNetworkAvailable: Boolean,
@@ -190,6 +225,7 @@ class NearbyParentFragmentPresenter(
                     // retrieve and check map boundaries for nullability
                     val mapBottomLeft = nearbyParentFragmentView.screenBottomLeft
                     val mapTopRight = nearbyParentFragmentView.screenTopRight
+
                     if (mapBottomLeft == null || mapTopRight == null) {
                         Timber.d(
                             "Map boundaries (screenBottomLeft or screenTopRight) are null, " +
@@ -222,24 +258,17 @@ class NearbyParentFragmentPresenter(
         }
     }
 
-    override fun setAdvancedQuery(query: String) {
-        this.customQuery = query
+    override fun onLocationChangedSignificantly(latLng: LatLng) {
+        Timber.d("Location significantly changed")
+        updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
-    /**
-     * Initiates a search for places within the area. Depending on whether the search
-     * is close to the current location, the map and list are updated
-     * accordingly.
-     */
-    fun searchInTheArea() {
-        if (searchCloseToCurrentLocation()) {
-            updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        } else {
-            updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
-        }
+    override fun onLocationChangedSlightly(latLng: LatLng) {
+        Timber.d("Location significantly changed")
+        updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
     }
 
-    fun onMapReady() {
-        initializeMapOperations()
+    override fun onLocationChangedMedium(latLng: LatLng) {
+        Timber.d("Location changed medium")
     }
 }

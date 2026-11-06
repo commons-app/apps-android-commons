@@ -9,6 +9,7 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -186,6 +187,7 @@ class NearbyPlaceDetailsLoader(
      * @param updatedGroups List containing incomplete Place data
      * @param collectResults Holds the Place data fetched from Wikidata.
      */
+    @Suppress("TooGenericExceptionCaught")
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
@@ -193,12 +195,9 @@ class NearbyPlaceDetailsLoader(
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
-            val fetchedPlacesResult =
-                runCatching {
+            try {
+                val fetchedPlaces =
                     nearbyController.getPlaces(indices.map { updatedGroups[it].place })
-                }
-            if (fetchedPlacesResult.isSuccess) {
-                val fetchedPlaces = fetchedPlacesResult.getOrThrow()
                 collectResults.send(
                     fetchedPlaces.mapIndexed { index, place ->
                         Pair(
@@ -210,20 +209,19 @@ class NearbyPlaceDetailsLoader(
                         )
                     },
                 )
-            } else {
-                Timber.tag("NearbyPinDetails").e(fetchedPlacesResult.exceptionOrNull())
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Timber.tag("NearbyPinDetails").e(e)
                 // HTTP request failed. Try individual places
                 for (i in indices) {
                     launch {
                         val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
-                        val onePlaceResult =
-                            runCatching {
+                        try {
+                            val fetchedPlace =
                                 nearbyController.getPlaces(
                                     mutableListOf(updatedGroups[i].place),
                                 )
-                            }
-                        if (onePlaceResult.isSuccess) {
-                            val fetchedPlace = onePlaceResult.getOrThrow()
                             onePlaceBatch.add(
                                 Pair(
                                     i,
@@ -235,8 +233,10 @@ class NearbyPlaceDetailsLoader(
                                     ),
                                 ),
                             )
-                        } else {
-                            Timber.tag("NearbyPinDetails").e(onePlaceResult.exceptionOrNull())
+                        } catch (e: CancellationException) {
+                            throw e
+                        } catch (e: Exception) {
+                            Timber.tag("NearbyPinDetails").e(e)
                             onePlaceBatch.add(Pair(i, updatedGroups[i]))
                         }
                         collectResults.send(onePlaceBatch)
@@ -436,8 +436,10 @@ class NearbyPlaceDetailsLoader(
 /**
  * Creates a HashMap mapping place locations (LatLng) to the associated places.
  *
- * @param startIndex Only Places with indices between startIndex and lastIndex
- * will be used to create the HashMap.
+ * @param startIndex Only Places with indices between startIndex and places.lastIndex
+ * (inclusive) will be used to create the HashMap. This can be useful for avoiding redundant
+ * computation when calling this method on the same places list multiple times.
+ *
  * @return The HashMap containing (Place's LatLng, Place) entries.
  */
 private fun List<Place>.toLocationMap(startIndex: Int): HashMap<LatLng, Place> {
