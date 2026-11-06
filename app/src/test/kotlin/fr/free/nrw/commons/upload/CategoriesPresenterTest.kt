@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.upload
 
-import androidx.lifecycle.MutableLiveData
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.argThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
@@ -14,19 +13,25 @@ import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
+import fr.free.nrw.commons.upload.categories.CategorySearchResults
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
 import media
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import java.lang.reflect.Method
 
 /**
  * The class contains unit test cases for CategoriesPresenter
  */
 class CategoriesPresenterTest {
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     @Mock
     internal lateinit var repository: UploadRepository
 
@@ -62,13 +67,7 @@ class CategoriesPresenterTest {
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
         whenever(repository.searchAll("mock", emptyList(), repository.getSelectedDepictions()))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
-        val method: Method =
-            CategoriesPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(categoriesPresenter, "mock")
+        CategorySearchResults(repository, testScheduler).searchResults("mock", media())
     }
 
     /**
@@ -77,9 +76,8 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategories combines selection and search results without years distinctly`() {
         categoriesPresenter.onAttachView(view)
-        val liveData = MutableLiveData<List<CategoryItem>>()
-        categoriesPresenter.setCategoryList(liveData)
-        categoriesPresenter.setCategoryListValue(
+        val liveData = categoriesPresenter.categoryList
+        liveData.postValue(
             listOf(
                 categoryItem("selected", "", "", true),
             ),
@@ -122,8 +120,7 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategoriesTest sets Error when list is empty`() {
         categoriesPresenter.onAttachView(view)
-        val liveData = MutableLiveData<List<CategoryItem>>()
-        categoriesPresenter.setCategoryList(liveData)
+        val liveData = categoriesPresenter.categoryList
         // Arrange
         val query = "testQuery"
         val emptyCategories = ArrayList<CategoryItem>()
@@ -135,13 +132,7 @@ class CategoriesPresenterTest {
         whenever(repository.getSelectedCategories()).thenReturn(listOf())
         categoriesPresenter.searchForCategories(query)
         testScheduler.triggerActions()
-        val method: Method =
-            CategoriesPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(categoriesPresenter, query)
+        CategorySearchResults(repository, testScheduler).searchResults(query, null)
 
         verify(view).showProgress(true)
         verify(view).showProgress(false)
@@ -187,9 +178,7 @@ class CategoriesPresenterTest {
     @Test
     fun `searchForCategories reports an API error and accepts the next query`() {
         categoriesPresenter.onAttachView(view)
-        // postValue is asynchronous, so watch the list through a mock.
-        val liveData = mock<MutableLiveData<List<CategoryItem>>>()
-        categoriesPresenter.setCategoryList(liveData)
+        val liveData = categoriesPresenter.categoryList
 
         whenever(repository.getUploads()).thenReturn(emptyList())
         whenever(repository.getSelectedCategories()).thenReturn(emptyList())
@@ -201,7 +190,7 @@ class CategoriesPresenterTest {
 
         verify(view).showError(R.string.error_loading_categories)
         verify(view, never()).showError(R.string.no_categories_found)
-        verify(liveData, never()).postValue(any())
+        assertNull(liveData.value)
 
         whenever(repository.searchAll(any(), any(), any()))
             .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
@@ -210,7 +199,7 @@ class CategoriesPresenterTest {
         categoriesPresenter.searchForCategories("Cat")
         testScheduler.triggerActions()
 
-        verify(liveData).postValue(argThat { map { it.name } == listOf("Cats") })
+        assertEquals(listOf("Cats"), liveData.value?.map { it.name })
     }
 
     @Test
