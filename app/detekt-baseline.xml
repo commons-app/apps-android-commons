@@ -762,7 +762,6 @@
     <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
     <ID>TooManyFunctions:PickedFiles.kt$PickedFiles : Constants</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
-    <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
     <ID>TooManyFunctions:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>TooManyFunctions:UploadContract.kt$UploadContract$View</ID>
@@ -770,7 +769,6 @@
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$UserActionListener : BasePresenter</ID>
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$View : SimilarImageInterface</ID>
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
-    <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>

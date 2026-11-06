@@ -110,7 +110,9 @@ class DescriptionEditActivity :
         initRecyclerView(descriptionAndCaptions)
 
         binding.btnEditSubmit.setOnClickListener(::onSubmitButtonClicked)
-        binding.toolbarBackButton.setOnClickListener(::onBackButtonClicked)
+        binding.toolbarBackButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     /**
@@ -134,7 +136,6 @@ class DescriptionEditActivity :
         rvDescriptions!!.adapter = uploadMediaDetailAdapter
     }
 
-
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) = Unit
 
     override fun onMediaDetailsChanged() = Unit
@@ -156,12 +157,6 @@ class DescriptionEditActivity :
         uploadMediaDetail.isManuallyAdded = true // This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail)
         rvDescriptions!!.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    private fun onBackButtonClicked(view: View) {
-        onBackPressedDispatcher.onBackPressed()
     }
 
     // View.OnClickListener method reference, see onCreate

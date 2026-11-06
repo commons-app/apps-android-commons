@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.CommonsApplication
@@ -92,8 +91,7 @@ class DescriptionEditActivityUnitTest {
         every { CommonsApplication.instance }.returns(commonsApplication)
         activity =
             Robolectric.buildActivity(DescriptionEditActivity::class.java, intent).create().get()
-        binding = ActivityDescriptionEditBinding.inflate(LayoutInflater.from(activity))
-        activity.setContentView(R.layout.activity_description_edit)
+        binding = Whitebox.getInternalState(activity, "binding")
 
         Whitebox.setInternalState(activity, "wikiText", "Description=")
         Whitebox.setInternalState(activity, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
@@ -152,13 +150,7 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testOnBackButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            DescriptionEditActivity::class.java.getDeclaredMethod(
-                "onBackButtonClicked",
-                View::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, null)
+        binding.toolbarBackButton.performClick()
         assertEquals(activity.isFinishing, true)
     }
 
