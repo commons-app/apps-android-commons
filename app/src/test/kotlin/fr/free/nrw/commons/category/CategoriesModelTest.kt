@@ -130,18 +130,18 @@ class CategoriesModelTest {
         val depictedItem =
             depictedItem(
                 commonsCategories =
-                listOf(
-                    CategoryItem(
-                        "depictionCategory",
-                        "",
-                        "",
-                        false,
+                    listOf(
+                        CategoryItem(
+                            "depictionCategory",
+                            "",
+                            "",
+                            false,
+                        ),
                     ),
-                ),
             )
         val depictedItemWithoutCategories =
             depictedItem(
-                imageUrl = "testUrl"
+                imageUrl = "testUrl",
             )
 
         whenever(gpsCategoryModel.categoriesFromLocation)
@@ -330,7 +330,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is selected and media does not contains category`() {
+    fun `Test onCategoryItemClicked when media is not null and item is selected and media lacks category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",
@@ -358,7 +358,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is not selected and media does not contains category`() {
+    fun `Test onCategoryItemClicked when media is not null and item is not selected and media lacks category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",
@@ -406,5 +406,4 @@ class CategoriesModelTest {
         val input = categoriesModel.isSpammyCategory("Japan in the 1400s")
         Assert.assertTrue(input)
     }
-
 }

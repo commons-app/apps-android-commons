@@ -11,18 +11,13 @@ import javax.inject.Named
  */
 @Module
 class ContributionsProvidesModule {
-
     @Provides
     fun providesApplicationKvStore(
-        @Named("default_preferences") kvStore: JsonKvStore
-    ): JsonKvStore {
-        return kvStore
-    }
+        @Named("default_preferences") kvStore: JsonKvStore,
+    ): JsonKvStore = kvStore
 
     @Provides
     fun providesLanguageWikipediaSite(
-        @Named("language-wikipedia-wikisite") languageWikipediaSite: WikiSite
-    ): WikiSite {
-        return languageWikipediaSite
-    }
+        @Named("language-wikipedia-wikisite") languageWikipediaSite: WikiSite,
+    ): WikiSite = languageWikipediaSite
 }
