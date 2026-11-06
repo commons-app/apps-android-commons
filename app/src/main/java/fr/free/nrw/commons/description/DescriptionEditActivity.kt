@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.description
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Parcelable
 import android.speech.RecognizerIntent
@@ -24,7 +23,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -67,7 +65,7 @@ class DescriptionEditActivity :
     /**
      * For showing progress dialog
      */
-    private var progressDialog: ProgressDialog? = null
+    private val dialogs = DescriptionEditDialogs(this)
 
     @Inject
     lateinit var recentLanguagesDao: RecentLanguagesDao
@@ -130,29 +128,11 @@ class DescriptionEditActivity :
                 voiceInputResultLauncher
             )
 
-        uploadMediaDetailAdapter.callback = UploadMediaDetailAdapter.Callback(::showInfoAlert)
+        uploadMediaDetailAdapter.callback = UploadMediaDetailAdapter.Callback(dialogs::showInfoAlert)
         uploadMediaDetailAdapter.eventListener = this
         rvDescriptions = binding.rvDescriptionsCaptions
         rvDescriptions!!.layoutManager = LinearLayoutManager(this)
         rvDescriptions!!.adapter = uploadMediaDetailAdapter
-    }
-
-    /**
-     * show dialog with info
-     * @param titleStringID Title ID
-     * @param messageStringId Message ID
-     */
-    private fun showInfoAlert(
-        titleStringID: Int,
-        messageStringId: Int,
-    ) {
-        showAlertDialog(
-            this,
-            getString(titleStringID),
-            getString(messageStringId),
-            getString(R.string.ok),
-            null
-        )
     }
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
@@ -185,7 +165,7 @@ class DescriptionEditActivity :
     // View.OnClickListener method reference, see onCreate
     @Suppress("UnusedParameter")
     private fun onSubmitButtonClicked(view: View) {
-        showLoggingProgressBar()
+        dialogs.showLoggingProgressBar()
         val uploadMediaDetails = uploadMediaDetailAdapter.items
         updateDescription(uploadMediaDetails)
         finish()
@@ -304,15 +284,6 @@ class DescriptionEditActivity :
                 }
             }
         }
-    }
-
-    private fun showLoggingProgressBar() {
-        progressDialog = ProgressDialog(this)
-        progressDialog!!.isIndeterminate = true
-        progressDialog!!.setTitle(getString(R.string.updating_caption_title))
-        progressDialog!!.setMessage(getString(R.string.updating_caption_message))
-        progressDialog!!.setCancelable(false)
-        progressDialog!!.show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

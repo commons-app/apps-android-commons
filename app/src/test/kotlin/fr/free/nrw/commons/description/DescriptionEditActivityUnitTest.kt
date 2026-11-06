@@ -115,12 +115,7 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testShowLoggingProgressBar() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            DescriptionEditActivity::class.java.getDeclaredMethod(
-                "showLoggingProgressBar",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
+        DescriptionEditDialogs(activity).showLoggingProgressBar()
         val dialog: ProgressDialog = ShadowProgressDialog.getLatestDialog() as ProgressDialog
         assertEquals(dialog.isShowing, true)
     }
@@ -184,18 +179,7 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun testShowInfoAlert() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            DescriptionEditActivity::class.java.getDeclaredMethod(
-                "showInfoAlert",
-                Int::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(
-            activity,
-            R.string.ok,
-            R.string.ok,
-        )
+        DescriptionEditDialogs(activity).showInfoAlert(R.string.ok, R.string.ok)
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
         assertEquals(dialog.isShowing, true)
     }
