@@ -402,6 +402,28 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
+    fun testOnMediaDetailsChangedPersistsAdapterItemsToUploadItem() {
+        // Regression test for #6938: a language row added via "+" must be written back into the
+        // UploadItem backing this fragment to ensure it gets uploaded
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        val itemsWithSecondLanguage =
+            mutableListOf(
+                UploadMediaDetail(languageCode = "en", captionText = "test"),
+                UploadMediaDetail(languageCode = "ja", captionText = "テスト"),
+            )
+        `when`(uploadMediaDetailAdapter.items).thenReturn(itemsWithSecondLanguage)
+
+        fragment.onMediaDetailsChanged()
+
+        Mockito
+            .verify(presenter)
+            .setUploadMediaDetails(itemsWithSecondLanguage, 0)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testOnDestroyView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onDestroyView()
