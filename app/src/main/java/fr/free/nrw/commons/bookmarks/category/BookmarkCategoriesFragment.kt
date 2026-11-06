@@ -43,29 +43,35 @@ import javax.inject.Inject
  * Tab fragment to show list of bookmarked Categories
  */
 class BookmarkCategoriesFragment : DaggerFragment() {
-
     @Inject
     lateinit var bookmarkCategoriesDao: BookmarkCategoriesDao
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View =
+        ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme(
-                    colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
-                        primary = colorResource(R.color.primaryDarkColor),
-                        surface = colorResource(R.color.main_background_dark),
-                        background = colorResource(R.color.main_background_dark)
-                    ) else lightColorScheme(
-                        primary = colorResource(R.color.primaryColor),
-                        surface = colorResource(R.color.main_background_light),
-                        background = colorResource(R.color.main_background_light)
-                    )
+                    colorScheme =
+                        if (isSystemInDarkTheme()) {
+                            darkColorScheme(
+                                primary = colorResource(R.color.primaryDarkColor),
+                                surface = colorResource(R.color.main_background_dark),
+                                background = colorResource(R.color.main_background_dark),
+                            )
+                        } else {
+                            lightColorScheme(
+                                primary = colorResource(R.color.primaryColor),
+                                surface = colorResource(R.color.main_background_light),
+                                background = colorResource(R.color.main_background_light),
+                            )
+                        },
                 ) {
-                    val listOfBookmarks by bookmarkCategoriesDao.getAllCategories()
+                    val listOfBookmarks by bookmarkCategoriesDao
+                        .getAllCategories()
                         .collectAsStateWithLifecycle(initialValue = emptyList())
                     Surface(modifier = Modifier.fillMaxSize()) {
                         Box(contentAlignment = Alignment.Center) {
@@ -73,10 +79,14 @@ class BookmarkCategoriesFragment : DaggerFragment() {
                                 Text(
                                     text = stringResource(R.string.bookmark_empty),
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = if (isSystemInDarkTheme()) Color(0xB3FFFFFF)
-                                    else Color(
-                                        0x8A000000
-                                    )
+                                    color =
+                                        if (isSystemInDarkTheme()) {
+                                            Color(0xB3FFFFFF)
+                                        } else {
+                                            Color(
+                                                0x8A000000,
+                                            )
+                                        },
                                 )
                             } else {
                                 LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -84,12 +94,13 @@ class BookmarkCategoriesFragment : DaggerFragment() {
                                         CategoryItem(
                                             categoryName = bookmarkItem.categoryName,
                                             onClick = {
-                                                val categoryDetailsIntent = Intent(
-                                                    requireContext(),
-                                                    CategoryDetailsActivity::class.java
-                                                ).putExtra("categoryName", it)
+                                                val categoryDetailsIntent =
+                                                    Intent(
+                                                        requireContext(),
+                                                        CategoryDetailsActivity::class.java,
+                                                    ).putExtra("categoryName", it)
                                                 startActivity(categoryDetailsIntent)
-                                            }
+                                            },
                                         )
                                     }
                                 }
@@ -99,24 +110,26 @@ class BookmarkCategoriesFragment : DaggerFragment() {
                 }
             }
         }
-    }
 
-
+    @Suppress("ktlint:standard:function-naming")
     @Composable
     fun CategoryItem(
-        modifier: Modifier = Modifier,
         onClick: (String) -> Unit,
-        categoryName: String
+        categoryName: String,
+        modifier: Modifier = Modifier,
     ) {
-        Row(modifier = modifier.clickable {
-            onClick(categoryName)
-        }) {
+        Row(
+            modifier =
+                modifier.clickable {
+                    onClick(categoryName)
+                },
+        ) {
             ListItem(
                 leadingContent = {
                     Image(
                         modifier = Modifier.size(48.dp),
                         painter = painterResource(R.drawable.commons),
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
                 headlineContent = {
@@ -125,19 +138,20 @@ class BookmarkCategoriesFragment : DaggerFragment() {
                         maxLines = 2,
                         color = if (isSystemInDarkTheme()) Color.White else Color.Black,
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
                     )
-                }
+                },
             )
         }
     }
 
+    @Suppress("ktlint:standard:function-naming")
     @Preview
     @Composable
     private fun CategoryItemPreview() {
         CategoryItem(
             onClick = {},
-            categoryName = "Test Category"
+            categoryName = "Test Category",
         )
     }
 }
