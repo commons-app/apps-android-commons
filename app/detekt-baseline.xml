@@ -784,8 +784,6 @@
     <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
     <ID>TooManyFunctions:FilePicker.kt$FilePicker : Constants</ID>
     <ID>TooManyFunctions:FragmentBuilderModule.kt$FragmentBuilderModule</ID>
-    <ID>TooManyFunctions:ImageAdapter.kt$ImageAdapter : AdapterSectionedAdapter</ID>
-    <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
     <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
     <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
