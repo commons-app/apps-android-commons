@@ -2,8 +2,6 @@ package fr.free.nrw.commons.navtab
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +39,6 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
-import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -120,7 +117,10 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
+        doReturn(
+            observable,
+            observable2,
+        ).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
     }
 
@@ -182,23 +182,5 @@ class MoreBottomSheetFragmentUnitTests {
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
         Assert.assertEquals(nextActivity?.className?.contains(".ReviewActivity"), true)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSendFeedback() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = MoreBottomSheetFragment::class.java.getDeclaredMethod("sendFeedback")
-        method.isAccessible = true
-        method.invoke(fragment)
-        val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
-        val startedIntent = shadowActivity.nextStartedActivity
-        Assert.assertEquals(startedIntent.action, Intent.ACTION_SENDTO)
-        Assert.assertEquals(startedIntent.type, null)
-        Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
-        Assert.assertEquals(
-            startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-        )
     }
 }

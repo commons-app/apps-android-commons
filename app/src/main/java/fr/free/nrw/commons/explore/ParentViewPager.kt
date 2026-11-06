@@ -15,11 +15,7 @@ class ParentViewPager : ViewPager {
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    override fun onTouchEvent(ev: MotionEvent): Boolean {
-        return canScroll && super.onTouchEvent(ev)
-    }
+    override fun onTouchEvent(ev: MotionEvent): Boolean = canScroll && super.onTouchEvent(ev)
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        return canScroll && super.onInterceptTouchEvent(ev)
-    }
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean = canScroll && super.onInterceptTouchEvent(ev)
 }
