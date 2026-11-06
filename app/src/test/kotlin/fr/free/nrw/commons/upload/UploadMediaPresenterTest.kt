@@ -225,6 +225,18 @@ class UploadMediaPresenterTest {
     }
 
     /**
+     * Test that the upload item is looked up in the repository by its index
+     */
+    @Test
+    fun getUploadItemTest() {
+        whenever(repository.getUploadItem(1)).thenReturn(uploadItem)
+        whenever(repository.getUploadItem(2)).thenReturn(null)
+
+        assertEquals(uploadItem, uploadMediaPresenter.getUploadItem(1))
+        assertEquals(null, uploadMediaPresenter.getUploadItem(2))
+    }
+
+    /**
      * Test show SimilarImageFragment
      */
     @Test
