@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +51,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var scrollToRank = false
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
+    private var viewController: LeaderboardViewController? = null
 
     companion object {
         private const val SCROLL_TO_TOP_THRESHOLD = 20
@@ -70,8 +70,9 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+        viewController = LeaderboardViewController(binding!!)
 
-        hideLayouts()
+        viewController?.hideLayouts()
 
         // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
         if (isBetaFlavour) {
@@ -81,7 +82,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         }
 
         binding!!.progressBar.visibility = View.VISIBLE
-        setSpinners()
+        viewController?.setSpinners()
 
         /*
          * This array is for the duration filter, we have three filters weekly, yearly and all-time
@@ -236,29 +237,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     }
 
     /**
-     * Set the spinners for the leaderboard filters
-     */
-    private fun setSpinners() {
-        val categoryAdapter =
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.leaderboard_categories,
-                android.R.layout.simple_spinner_item,
-            )
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.categorySpinner.adapter = categoryAdapter
-
-        val durationAdapter =
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.leaderboard_durations,
-                android.R.layout.simple_spinner_item,
-            )
-        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.durationSpinner.adapter = durationAdapter
-    }
-
-    /**
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
      */
@@ -327,10 +305,10 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
                 LOADING -> {
-                    showProgressBar()
+                    viewController?.showProgressBar()
                 }
                 LOADED -> {
-                    hideProgressBar()
+                    viewController?.hideProgressBar()
                     if (scrollToRank) {
                         smartScrollTo(userRank + 1)
                     } else {
@@ -340,37 +318,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
             }
         }
     }
-
-    /**
-     * to hide progressbar
-     */
-    private fun hideProgressBar() =
-        binding?.let {
-            it.progressBar.visibility = View.GONE
-            it.categorySpinner.visibility = View.VISIBLE
-            it.durationSpinner.visibility = View.VISIBLE
-            it.scroll.visibility = View.VISIBLE
-            it.leaderboardList.visibility = View.VISIBLE
-        }
-
-    /**
-     * to show progressbar
-     */
-    private fun showProgressBar() =
-        binding?.let {
-            it.progressBar.visibility = View.VISIBLE
-            it.scroll.visibility = View.INVISIBLE
-        }
-
-    /**
-     * used to hide the layouts while fetching results from api
-     */
-    private fun hideLayouts() =
-        binding?.let {
-            it.categorySpinner.visibility = View.INVISIBLE
-            it.durationSpinner.visibility = View.INVISIBLE
-            it.leaderboardList.visibility = View.INVISIBLE
-        }
 
     /**
      * check to ensure that user is logged in
@@ -403,6 +350,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        viewController = null
         binding = null
     }
 

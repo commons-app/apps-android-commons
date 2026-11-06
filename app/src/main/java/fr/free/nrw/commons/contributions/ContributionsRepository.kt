@@ -14,11 +14,6 @@ class ContributionsRepository
         private val localDataSource: ContributionsLocalDataSource,
     ) {
         /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getString(key: String): String? = localDataSource.getString(key)
-
-        /**
          * Deletes a failed upload from DB
          *
          * @param contribution
@@ -26,6 +21,12 @@ class ContributionsRepository
          */
         fun deleteContributionFromDB(contribution: Contribution): Completable =
             localDataSource.deleteContribution(contribution)
+
+        /**
+         * Marks one completed contribution after a normal request reports that its file page is gone.
+         */
+        fun markCompletedContributionDeleted(fileName: String): Completable =
+            localDataSource.markCompletedContributionDeleted(fileName)
 
         /**
          * Deletes contributions from the database with specific states.
@@ -45,28 +46,28 @@ class ContributionsRepository
         fun getContributionWithFileName(fileName: String): Contribution =
             localDataSource.getContributionWithFileName(fileName)
 
-        fun fetchContributions(): DataSource.Factory<Int, Contribution> = localDataSource.getContributions()
-
         /**
          * Fetches contributions with specific states.
          *
          * @param states The states of the contributions to fetch.
+         * @param sortedByDateUploadStarted Whether the contributions are sorted by the date the upload
+         * started.
          * @return A DataSource factory for paginated contributions with the specified states.
          */
-        fun fetchContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> =
-            localDataSource.getContributionsWithStates(states)
+        fun fetchContributionsWithStates(
+            states: List<Int>,
+            sortedByDateUploadStarted: Boolean = false,
+        ): DataSource.Factory<Int, Contribution> =
+            localDataSource.getContributionsWithStates(states, sortedByDateUploadStarted)
 
         /**
-         * Fetches contributions with specific states sorted by the date the upload started.
+         * Fetches all contributions with specific states at once, not page by page.
          *
          * @param states The states of the contributions to fetch.
-         * @return A DataSource factory for paginated contributions with the specified states sorted by
-         * date upload started.
+         * @return A Single with the list of all contributions with the specified states.
          */
-        fun fetchContributionsWithStatesSortedByDateUploadStarted(
-            states: List<Int>,
-        ): DataSource.Factory<Int, Contribution> =
-            localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states)
+        fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
+            localDataSource.getAllContributionsWithStates(states)
 
         fun save(contributions: List<Contribution>): Single<List<Long>> =
             localDataSource.saveContributions(contributions)
@@ -79,9 +80,6 @@ class ContributionsRepository
         ) {
             localDataSource.set(key, value)
         }
-
-        fun updateContribution(contribution: Contribution): Completable =
-            localDataSource.updateContribution(contribution)
 
         /**
          * Updates the state of contributions with specific states.

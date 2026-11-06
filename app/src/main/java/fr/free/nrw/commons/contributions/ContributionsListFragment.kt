@@ -36,6 +36,7 @@ import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.filepicker.FilePicker
+import fr.free.nrw.commons.media.DeletedFileActivity
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
@@ -530,6 +531,12 @@ class ContributionsListFragment :
         contribution: Int,
         isWikipediaPageExists: Boolean,
     ) {
+        val item = adapter?.getContributionForPosition(contribution)
+        val filename = item?.media?.filename
+        if (item?.state == Contribution.STATE_DELETED && !filename.isNullOrEmpty()) {
+            DeletedFileActivity.start(requireContext(), filename)
+            return
+        }
         if (null != callback) { // Just being safe, ideally they won't be called when detached
             callback!!.showDetail(contribution, isWikipediaPageExists)
         }

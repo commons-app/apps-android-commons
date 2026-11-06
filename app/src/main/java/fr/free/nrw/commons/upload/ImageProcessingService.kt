@@ -53,33 +53,44 @@ class ImageProcessingService
 
             Timber.d("Checking the validity of image")
             val filePath = uploadItem.mediaUri?.path
+            // Geolocation, darkness, FBMD, and EXIF are image-specific checks,
+            // so they do not apply to other media types, such as audio.
+            val isImage = uploadItem.mimeType?.startsWith("image/") ?: true
 
-            return Single.zip(
+            return if (isImage) {
+                Single.zip(
+                    checkIfFileAlreadyExists(
+                        originalFilePath = uploadItem.contentUri!!,
+                        modifiedFilePath = uploadItem.mediaUri!!,
+                    ),
+                    checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
+                    checkDarkImage(filePath!!),
+                    checkFBMD(filePath),
+                    checkEXIF(filePath),
+                ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
+                    val unsupportedFormatResult =
+                        if (uploadItem.hasUnsupportedFormat) {
+                            fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED
+                        } else {
+                            0
+                        }
+                    Timber.d(
+                        "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d, unsupported: %d",
+                        duplicateImage,
+                        wrongGeoLocation,
+                        darkImage,
+                        fbmd,
+                        exif,
+                        unsupportedFormatResult,
+                    )
+                    return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif or
+                        unsupportedFormatResult
+                }
+            } else {
                 checkIfFileAlreadyExists(
                     originalFilePath = uploadItem.contentUri!!,
                     modifiedFilePath = uploadItem.mediaUri!!,
-                ),
-                checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
-                checkDarkImage(filePath!!),
-                checkFBMD(filePath),
-                checkEXIF(filePath),
-            ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
-                val unsupportedFormatResult =
-                    if (uploadItem.hasUnsupportedFormat) {
-                        fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED
-                    } else {
-                        0
-                    }
-                Timber.d(
-                    "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d, unsupported: %d",
-                    duplicateImage,
-                    wrongGeoLocation,
-                    darkImage,
-                    fbmd,
-                    exif,
-                    unsupportedFormatResult,
                 )
-                return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif or unsupportedFormatResult
             }
         }
 
@@ -144,9 +155,37 @@ class ImageProcessingService
             originalFilePath: Uri,
             modifiedFilePath: Uri,
         ): Single<Int> {
+            val originalStreamResult =
+                Single
+                    .fromCallable {
+                        appContext.contentResolver.openInputStream(originalFilePath)!!
+                    }.flatMap { inputStream ->
+                        checkDuplicateImage(inputStream)
+                    }
+
+            val modifiedStreamResult =
+                Single
+                    .fromCallable {
+                        val path = modifiedFilePath.path
+                        if (path != null && java.io.File(path).exists()) {
+                            fileUtilsWrapper.getFileInputStream(path)
+                        } else {
+                            throw java.io.FileNotFoundException("Modified file not found at $path")
+                        }
+                    }.flatMap { inputStream ->
+                        checkDuplicateImage(inputStream)
+                    }.onErrorResumeNext { throwable ->
+                        if (throwable is java.io.FileNotFoundException) {
+                            Timber.d("Modified file not found, treating as non-duplicate")
+                            Single.just(IMAGE_OK)
+                        } else {
+                            Single.error(throwable)
+                        }
+                    }
+
             return Single.zip(
-                checkDuplicateImage(inputStream = appContext.contentResolver.openInputStream(originalFilePath)!!),
-                checkDuplicateImage(inputStream = fileUtilsWrapper.getFileInputStream(modifiedFilePath.path)),
+                originalStreamResult,
+                modifiedStreamResult,
             ) { resultForOriginal, resultForDuplicate ->
                 return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE) {
                     IMAGE_DUPLICATE

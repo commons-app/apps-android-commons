@@ -12,6 +12,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.filepicker.DefaultCallback
+import fr.free.nrw.commons.filepicker.ExternalImagesResult
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.FilePicker.HandleActivityResult
 import fr.free.nrw.commons.filepicker.FilePicker.configuration
@@ -134,12 +135,13 @@ class ContributionController
 
                     override fun onLocationPermissionGranted() {
                         if (!locationPermissionsHelper!!.isLocationAccessToAppsTurnedOn()) {
-                            showLocationOffDialog(
+                            locationPermissionsHelper!!.showLocationOffDialog(
                                 activity,
                                 R.string.in_app_camera_needs_location,
                                 R.string.in_app_camera_location_unavailable,
-                                resultLauncher,
-                            )
+                            ) {
+                                initiateCameraUpload(activity, resultLauncher)
+                            }
                         } else {
                             initiateCameraUpload(activity, resultLauncher)
                         }
@@ -154,42 +156,6 @@ class ContributionController
                 )
             inAppCameraLocationPermissionLauncher?.launch(
                 arrayOf(permission.ACCESS_FINE_LOCATION),
-            )
-        }
-
-        /**
-         * Shows a dialog alerting the user about location services being off and asking them to turn it
-         * on
-         * TODO: Add a seperate callback in LocationPermissionsHelper for this.
-         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
-         *
-         * @param activity           Activity reference
-         * @param dialogTextResource Resource id of text to be shown in dialog
-         * @param toastTextResource  Resource id of text to be shown in toast
-         * @param resultLauncher
-         */
-        private fun showLocationOffDialog(
-            activity: Activity,
-            dialogTextResource: Int,
-            toastTextResource: Int,
-            resultLauncher: ActivityResultLauncher<Intent>,
-        ) {
-            showAlertDialog(
-                activity,
-                activity.getString(R.string.ask_to_turn_location_on),
-                activity.getString(dialogTextResource),
-                activity.getString(R.string.title_app_shortcut_setting),
-                activity.getString(R.string.cancel),
-                { locationPermissionsHelper!!.openLocationSettings(activity) },
-                {
-                    Toast
-                        .makeText(
-                            activity,
-                            activity.getString(toastTextResource),
-                            Toast.LENGTH_LONG,
-                        ).show()
-                    initiateCameraUpload(activity, resultLauncher)
-                },
             )
         }
 
@@ -407,7 +373,7 @@ class ContributionController
         fun handleExternalImagesPicked(
             activity: Activity,
             data: Intent?,
-        ): List<UploadableFile> = handleExternalImagesPicked(data, activity)
+        ): ExternalImagesResult = handleExternalImagesPicked(data, activity)
 
         /**
          * Returns intent to be passed to upload activity Attaches place object for nearby uploads and

@@ -60,13 +60,9 @@ class ReviewActivity : BaseActivity() {
      * Starts the ReviewActivity.
      *
      * @param context The context used to start the activity.
-     * @param title The page title (currently unused).
      */
     companion object {
-        fun startYourself(
-            context: Context,
-            title: String,
-        ) {
+        fun startYourself(context: Context) {
             val reviewActivity = Intent(context, ReviewActivity::class.java)
             reviewActivity.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
             reviewActivity.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -242,7 +238,8 @@ class ReviewActivity : BaseActivity() {
         if (nextPos <= 3) {
             binding.viewPagerReview.currentItem = nextPos
             if (nextPos == 2 && !hasNonHiddenCategories) {
-                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
+                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need
+                // to review manually.
                 swipeToNext()
             }
         } else {

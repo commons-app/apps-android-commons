@@ -2,7 +2,7 @@ package fr.free.nrw.commons.coordinates
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -15,19 +15,23 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
-import java.util.Objects
 import javax.inject.Inject
 import javax.inject.Named
 
+data class CoordinatesInfo(
+    val latitude: String,
+    val longitude: String,
+    val accuracy: String,
+)
+
 /**
- * Helper class for edit and update given coordinates and showing notification about new coordinates
- * upgradation
+ * Updates media coordinates and displays a notification with the edit result.
  */
 class CoordinateEditHelper
     @Inject
     constructor(
         private val notificationHelper: NotificationHelper,
-        @Named("commons-page-edit") private val pageEditClient: PageEditClient,
+        @param:Named("commons-page-edit") private val pageEditClient: PageEditClient,
         private val viewUtil: ViewUtilWrapper,
     ) {
         /**
@@ -46,14 +50,15 @@ class CoordinateEditHelper
             longitude: String,
             accuracy: String,
         ): Single<Boolean>? {
+            val coordinatesInfo = CoordinatesInfo(latitude, longitude, accuracy)
             viewUtil.showShortToast(
                 context,
                 context.getString(R.string.coordinates_edit_helper_make_edit_toast),
             )
             return addCoordinates(media, latitude, longitude, accuracy)
-                ?.flatMapSingle { result ->
-                    Single.just(showCoordinatesEditNotification(context, media, latitude, longitude, accuracy, result))
-                }?.firstOrError()
+                .flatMapSingle { result ->
+                    Single.just(showCoordinatesEditNotification(context, media, coordinatesInfo, result))
+                }.firstOrError()
         }
 
         /**
@@ -69,8 +74,8 @@ class CoordinateEditHelper
             latitude: String,
             longitude: String,
             accuracy: String,
-        ): Observable<Boolean>? {
-            Timber.d("thread is coordinates adding %s", Thread.currentThread().getName())
+        ): Observable<Boolean> {
+            Timber.d("thread is coordinates adding %s", Thread.currentThread().name)
             val summary = "Adding Coordinates"
 
             val buffer = StringBuilder()
@@ -83,23 +88,19 @@ class CoordinateEditHelper
                         .blockingGet()
                 }
 
-            if (latitude != null) {
-                buffer
-                    .append("\n{{Location|")
-                    .append(latitude)
-                    .append("|")
-                    .append(longitude)
-                    .append("|")
-                    .append(accuracy)
-                    .append("}}")
-            }
+            buffer
+                .append("\n{{Location|")
+                .append(latitude)
+                .append("|")
+                .append(longitude)
+                .append("|")
+                .append(accuracy)
+                .append("}}")
 
             val editedLocation = buffer.toString()
             val appendText = wikiText?.let { getFormattedWikiText(it, editedLocation) }
 
-            return Objects
-                .requireNonNull(media.filename)
-                ?.let { pageEditClient.edit(it, appendText!!, summary) }
+            return pageEditClient.edit(media.filename!!, appendText!!, summary)
         }
 
         /**
@@ -149,18 +150,14 @@ class CoordinateEditHelper
          * Update coordinates and shows notification about coordinates update
          * @param context to be added
          * @param media to be added
-         * @param latitude to be added
-         * @param longitude to be added
-         * @param accuracy to be added
+         * @param coordinatesInfo object containing latitude, longitude, and accuracy
          * @param result to be added
          * @return boolean
          */
         private fun showCoordinatesEditNotification(
             context: Context,
             media: Media,
-            latitude: String,
-            longitude: String,
-            accuracy: String,
+            coordinatesInfo: CoordinatesInfo,
             result: Boolean,
         ): Boolean {
             val message: String
@@ -169,18 +166,15 @@ class CoordinateEditHelper
             if (result) {
                 media.coordinates =
                     fr.free.nrw.commons.location.LatLng(
-                        latitude.toDouble(),
-                        longitude.toDouble(),
-                        accuracy.toFloat(),
+                        coordinatesInfo.latitude.toDouble(),
+                        coordinatesInfo.longitude.toDouble(),
+                        coordinatesInfo.accuracy.toFloat(),
                     )
                 title += ": " + context.getString(R.string.coordinates_edit_helper_show_edit_title_success)
-                val coordinatesInMessage = StringBuilder()
-                val mediaCoordinate = media.coordinates.toString()
-                coordinatesInMessage.append(mediaCoordinate)
                 message =
                     context.getString(
                         R.string.coordinates_edit_helper_show_edit_message,
-                        coordinatesInMessage.toString(),
+                        media.coordinates.toString(),
                     )
             } else {
                 title += ": " + context.getString(R.string.coordinates_edit_helper_show_edit_title)
@@ -188,7 +182,7 @@ class CoordinateEditHelper
             }
 
             val urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.filename
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile))
+            val browserIntent = Intent(Intent.ACTION_VIEW, urlForFile.toUri())
             notificationHelper.showNotification(
                 context,
                 title,

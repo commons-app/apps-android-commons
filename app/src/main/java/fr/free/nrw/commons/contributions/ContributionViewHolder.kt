@@ -103,6 +103,10 @@ an upload might take a dozen seconds. */
         binding.contributionProgress.visibility = View.GONE
         binding.imageOptions.visibility = View.GONE
         binding.contributionState.text = ""
+        if (contribution.state == Contribution.STATE_DELETED) {
+            binding.contributionState.visibility = View.VISIBLE
+            binding.contributionState.text = itemView.context.getString(R.string.contribution_deleted)
+        }
         checkIfMediaExistsOnWikipediaPage(contribution)
     }
 
