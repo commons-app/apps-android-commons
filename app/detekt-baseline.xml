@@ -735,7 +735,6 @@
     <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
     <ID>TooManyFunctions:ContributionDao.kt$ContributionDao</ID>
     <ID>TooManyFunctions:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
-    <ID>TooManyFunctions:ContributionsListFragment.kt$ContributionsListFragment : CommonsDaggerSupportFragmentViewCallbackCallback</ID>
     <ID>TooManyFunctions:Converters.kt$Converters</ID>
     <ID>TooManyFunctions:CropOverlayView.kt$CropOverlayView : View</ID>
     <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
