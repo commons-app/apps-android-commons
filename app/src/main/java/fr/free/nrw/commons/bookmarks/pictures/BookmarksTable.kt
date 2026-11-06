@@ -8,46 +8,52 @@ object BookmarksTable {
     const val COLUMN_CREATOR: String = "media_creator"
 
     // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-    val ALL_FIELDS = arrayOf(
-        COLUMN_MEDIA_NAME,
-        COLUMN_CREATOR
-    )
+    val ALL_FIELDS =
+        arrayOf(
+            COLUMN_MEDIA_NAME,
+            COLUMN_CREATOR,
+        )
 
     const val DROP_TABLE_STATEMENT: String = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-    const val CREATE_TABLE_STATEMENT: String = ("CREATE TABLE $TABLE_NAME (" +
+    const val CREATE_TABLE_STATEMENT: String = (
+        "CREATE TABLE $TABLE_NAME (" +
             "$COLUMN_MEDIA_NAME STRING PRIMARY KEY, " +
             "$COLUMN_CREATOR STRING" +
-            ");")
+            ");"
+    )
 
-    fun onCreate(db: SupportSQLiteDatabase) =
-        db.execSQL(CREATE_TABLE_STATEMENT)
+    fun onCreate(db: SupportSQLiteDatabase) = db.execSQL(CREATE_TABLE_STATEMENT)
 
     fun onDelete(db: SupportSQLiteDatabase) {
         db.execSQL(DROP_TABLE_STATEMENT)
         onCreate(db)
     }
 
-    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(
+        db: SupportSQLiteDatabase,
+        from: Int,
+        to: Int,
+    ) {
         if (from == to) {
             return
         }
 
         if (from < 7) {
             // doesn't exist yet
-            onUpdate(db, from+1, to)
+            onUpdate(db, from + 1, to)
             return
         }
 
         if (from == 7) {
             // table added in version 8
             onCreate(db)
-            onUpdate(db, from+1, to)
+            onUpdate(db, from + 1, to)
             return
         }
 
         if (from == 8) {
-            onUpdate(db, from+1, to)
+            onUpdate(db, from + 1, to)
             return
         }
     }

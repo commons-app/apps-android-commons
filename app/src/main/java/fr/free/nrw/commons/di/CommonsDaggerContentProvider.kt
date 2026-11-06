@@ -23,8 +23,9 @@ abstract class CommonsDaggerContentProvider : ContentProvider() {
     private fun inject() {
         val injection = getInstance(context!!)
 
-        val serviceInjector = injection.contentProviderInjector()
-            ?: throw NullPointerException("ApplicationlessInjection.contentProviderInjector() returned null")
+        val serviceInjector =
+            injection.contentProviderInjector()
+                ?: throw NullPointerException("ApplicationlessInjection.contentProviderInjector() returned null")
 
         serviceInjector.inject(this)
     }

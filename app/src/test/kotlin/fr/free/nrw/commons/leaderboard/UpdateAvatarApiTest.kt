@@ -107,13 +107,13 @@ class UpdateAvatarApiTest {
         /**
          * This method converts a Input Stream to String
          *
-         * @param is takes Input Stream of JSON File as Parameter
+         * @param inputStream takes Input Stream of JSON File as Parameter
          * @return a String with JSON data
          * @throws Exception
          */
         @Throws(Exception::class)
-        private fun convertStreamToString(`is`: InputStream): String {
-            val reader = BufferedReader(InputStreamReader(`is`))
+        private fun convertStreamToString(inputStream: InputStream): String {
+            val reader = BufferedReader(InputStreamReader(inputStream))
             val sb = StringBuilder()
             var line: String?
             while ((reader.readLine().also { line = it }) != null) {

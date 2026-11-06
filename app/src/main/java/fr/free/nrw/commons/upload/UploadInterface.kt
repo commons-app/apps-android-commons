@@ -12,6 +12,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import okhttp3.MultipartBody.Part as MultipartBodyPart
 
+@Suppress("LongParameterList")
 interface UploadInterface {
     @Multipart
     @POST(WikidataConstants.MW_API_PREFIX + "action=upload&stash=1&ignorewarnings=1")

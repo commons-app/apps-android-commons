@@ -10,18 +10,26 @@ import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
  */
 class DataSourceFactory(
     private val okHttpJsonApiClient: OkHttpJsonApiClient,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
 ) : DataSource.Factory<Int, LeaderboardList>() {
     val mutableLiveData: MutableLiveData<DataSourceClass> = MutableLiveData()
     var duration: String? = null
     var category: String? = null
     var limit: Int = 0
     var offset: Int = 0
+    var userName: String? = null
 
     /**
      * Creates the new instance of data source class
      */
-    override fun create(): DataSource<Int, LeaderboardList> = DataSourceClass(
-        okHttpJsonApiClient, sessionManager, duration, category, limit, offset
-    ).also { mutableLiveData.postValue(it) }
+    override fun create(): DataSource<Int, LeaderboardList> =
+        DataSourceClass(
+            okHttpJsonApiClient,
+            sessionManager,
+            userName,
+            duration,
+            category,
+            limit,
+            offset,
+        ).also { mutableLiveData.postValue(it) }
 }

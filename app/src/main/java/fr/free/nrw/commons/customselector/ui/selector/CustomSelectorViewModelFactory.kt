@@ -14,6 +14,7 @@ class CustomSelectorViewModelFactory
         val context: Context,
         val imageFileLoader: ImageFileLoader,
     ) : ViewModelProvider.Factory {
-        override fun <CustomSelectorViewModel : ViewModel> create(modelClass: Class<CustomSelectorViewModel>): CustomSelectorViewModel =
-            CustomSelectorViewModel(context, imageFileLoader) as CustomSelectorViewModel
+        override fun <CustomSelectorViewModel : ViewModel> create(
+            modelClass: Class<CustomSelectorViewModel>,
+        ): CustomSelectorViewModel = CustomSelectorViewModel(context, imageFileLoader) as CustomSelectorViewModel
     }

@@ -27,31 +27,28 @@ import kotlinx.coroutines.channels.Channel.Factory
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import timber.log.Timber
-import java.io.IOException
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
+import java.util.TimeZone
 import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.TimeUnit
 
-class NearbyParentFragmentPresenter
-    (
+private const val SEARCH_RADIUS_METERS = 2000.0
+private const val SEARCH_RADIUS_THRESHOLD_FRACTION = 0.75
+
+class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
-    val nearbyController: NearbyController
-) :
-    NearbyParentFragmentContract.UserActions,
-    WikidataP18EditListener, LocationUpdateListener {
-
+    val nearbyController: NearbyController,
+) : NearbyParentFragmentContract.UserActions,
+    WikidataP18EditListener,
+    LocationUpdateListener {
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
-
-    private var placesLoadedOnce = false
 
     private var customQuery: String? = null
 
@@ -116,13 +113,14 @@ class NearbyParentFragmentPresenter
      */
     private suspend fun schedulePlacesUpdate(
         markerPlaceGroups: List<MarkerPlaceGroup>,
-        force: Boolean = false
-    ) =
-        withContext(Dispatchers.Main) {
-            if (markerPlaceGroups.isEmpty()) return@withContext
-            schedulePlacesUpdateJob?.cancel()
-            schedulePlacesUpdateJob = launch {
-                if (!force && SchedulePlacesUpdateOptions.skippedCount++
+        force: Boolean = false,
+    ) = withContext(Dispatchers.Main) {
+        if (markerPlaceGroups.isEmpty()) return@withContext
+        schedulePlacesUpdateJob?.cancel()
+        schedulePlacesUpdateJob =
+            launch {
+                if (!force &&
+                    SchedulePlacesUpdateOptions.skippedCount++
                     < SchedulePlacesUpdateOptions.SKIP_LIMIT
                 ) {
                     delay(SchedulePlacesUpdateOptions.SKIP_DELAY_MS)
@@ -130,7 +128,7 @@ class NearbyParentFragmentPresenter
                 SchedulePlacesUpdateOptions.skippedCount = 0
                 updatePlaceGroupsToControllerAndRender(markerPlaceGroups)
             }
-        }
+    }
 
     /**
      * Handles the user action of toggling the bookmarked status of a given place. Updates the
@@ -141,7 +139,7 @@ class NearbyParentFragmentPresenter
      */
     override fun toggleBookmarkedStatus(
         place: Place?,
-        scope: LifecycleCoroutineScope?
+        scope: LifecycleCoroutineScope?,
     ) {
         if (place == null) return
         var nowBookmarked: Boolean
@@ -150,10 +148,11 @@ class NearbyParentFragmentPresenter
             bookmarkChangedPlaces.add(place)
             val placeIndex =
                 NearbyController.markerLabelList.indexOfFirst { it.place.location == place.location }
-            NearbyController.markerLabelList[placeIndex] = MarkerPlaceGroup(
-                nowBookmarked,
-                NearbyController.markerLabelList[placeIndex].place
-            )
+            NearbyController.markerLabelList[placeIndex] =
+                MarkerPlaceGroup(
+                    nowBookmarked,
+                    NearbyController.markerLabelList[placeIndex].place,
+                )
             nearbyParentFragmentView.setFilterState()
         }
     }
@@ -181,21 +180,27 @@ class NearbyParentFragmentPresenter
      * Sets click listeners of FABs, and 2 bottom sheets
      */
     override fun setActionListeners(applicationKvStore: JsonKvStore?) {
-        nearbyParentFragmentView.setFABPlusAction(View.OnClickListener { v: View? ->
-            if (applicationKvStore != null && applicationKvStore.getBoolean(
-                    "login_skipped", false
-                )
-            ) {
-                // prompt the user to login
-                nearbyParentFragmentView.displayLoginSkippedWarning()
-            } else {
-                nearbyParentFragmentView.animateFABs()
-            }
-        })
+        nearbyParentFragmentView.setFABPlusAction(
+            View.OnClickListener { v: View? ->
+                if (applicationKvStore != null &&
+                    applicationKvStore.getBoolean(
+                        "login_skipped",
+                        false,
+                    )
+                ) {
+                    // prompt the user to login
+                    nearbyParentFragmentView.displayLoginSkippedWarning()
+                } else {
+                    nearbyParentFragmentView.animateFABs()
+                }
+            },
+        )
 
-        nearbyParentFragmentView.setFABRecenterAction(View.OnClickListener { v: View? ->
-            nearbyParentFragmentView.recenterMap(currentLatLng)
-        })
+        nearbyParentFragmentView.setFABRecenterAction(
+            View.OnClickListener { v: View? ->
+                nearbyParentFragmentView.recenterMap(currentLatLng)
+            },
+        )
     }
 
     override fun backButtonClicked(): Boolean {
@@ -208,6 +213,9 @@ class NearbyParentFragmentPresenter
             return true
         } else if (nearbyParentFragmentView.isDetailsBottomSheetVisible()) {
             nearbyParentFragmentView.setBottomSheetDetailsSmaller()
+            return true
+        } else if (nearbyParentFragmentView.isNearbyFilterListVisible()) {
+            nearbyParentFragmentView.hideNearbyFilterList()
             return true
         }
         return false
@@ -250,11 +258,12 @@ class NearbyParentFragmentPresenter
         }
 
         val lastLocation = nearbyParentFragmentView.getLastMapFocus()
-        currentLatLng = if (nearbyParentFragmentView.getMapCenter() != null) {
-            nearbyParentFragmentView.getMapCenter()
-        } else {
-            lastLocation
-        }
+        currentLatLng =
+            if (nearbyParentFragmentView.getMapCenter() != null) {
+                nearbyParentFragmentView.getMapCenter()
+            } else {
+                lastLocation
+            }
         if (currentLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable")
             return
@@ -280,15 +289,16 @@ class NearbyParentFragmentPresenter
             Timber.d("ADVANCED_QUERY_SEARCH")
             lockUnlockNearby(true)
             nearbyParentFragmentView.setProgressBarVisibility(true)
-            var updatedLocationByUser = LocationUtils.deriveUpdatedLocationFromSearchQuery(
-                customQuery!!
-            )
+            var updatedLocationByUser =
+                LocationUtils.deriveUpdatedLocationFromSearchQuery(
+                    customQuery!!,
+                )
             if (updatedLocationByUser == null) {
                 updatedLocationByUser = lastLocation
             }
             nearbyParentFragmentView.populatePlaces(updatedLocationByUser, customQuery)
-        } else if (locationChangeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
-            || locationChangeType == LocationChangeType.MAP_UPDATED
+        } else if (locationChangeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED ||
+            locationChangeType == LocationChangeType.MAP_UPDATED
         ) {
             lockUnlockNearby(true)
             nearbyParentFragmentView.setProgressBarVisibility(true)
@@ -310,16 +320,19 @@ class NearbyParentFragmentPresenter
      * @param scope the lifecycle scope of `nearbyParentFragment`'s `viewLifecycleOwner`
      */
     fun updateMapMarkers(
-        nearbyPlaces: List<Place>?, currentLatLng: LatLng,
-        scope: LifecycleCoroutineScope?
+        nearbyPlaces: List<Place>?,
+        currentLatLng: LatLng,
+        scope: LifecycleCoroutineScope?,
     ) {
-        val nearbyPlaceGroups = nearbyPlaces?.sortedBy { it.getDistanceInDouble(currentLatLng) }
+        val nearbyPlaceGroups =
+            nearbyPlaces
+                ?.sortedBy { it.getDistanceInDouble(currentLatLng) }
                 ?.take(NearbyController.MAX_RESULTS)
                 ?.map {
                     // currently only the place's location is known but bookmarks are stored by name
                     MarkerPlaceGroup(
                         false,
-                        it
+                        it,
                     )
                 }
                 ?: return
@@ -327,6 +340,27 @@ class NearbyParentFragmentPresenter
         lockUnlockNearby(false) // So that new location updates wont come
         nearbyParentFragmentView.setProgressBarVisibility(false)
         loadPlacesDataAsync(nearbyPlaceGroups, scope)
+    }
+
+    /**
+     * Removes the places cached more than 5 days ago, at most once a day, so that the cache
+     * does not keep growing with places that are not shown anymore.
+     *
+     * @param applicationKvStore Stores the day of the last removal.
+     */
+    fun removeOldCachedPlaces(applicationKvStore: JsonKvStore) {
+        val now = System.currentTimeMillis()
+        // Count days in the phone's time zone, so that a new day starts at local midnight
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        if (applicationKvStore.getLong(LAST_CACHED_PLACES_REMOVAL_DAY, -1L) == today) {
+            return
+        }
+        placesRepository
+            .removePlacesCachedBefore(now - CACHED_PLACE_MAX_AGE_MS)
+            .subscribe(
+                { applicationKvStore.putLong(LAST_CACHED_PLACES_REMOVAL_DAY, today) },
+                { throwable -> Timber.e(throwable) },
+            )
     }
 
     /**
@@ -342,12 +376,11 @@ class NearbyParentFragmentPresenter
      */
     suspend fun loadCachedPlaces(
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        indicesToUpdate: MutableList<Int>
+        indicesToUpdate: MutableList<Int>,
     ) {
-
         for (i in 0..updatedGroups.lastIndex) {
             val repoPlace = placesRepository.fetchPlace(updatedGroups[i].place.entityID)
-            if (repoPlace != null && repoPlace.name != null && repoPlace.name != ""){
+            if (repoPlace != null && repoPlace.name != null && repoPlace.name != "") {
                 updatedGroups[i].isBookmarked =
                     bookmarkLocationDao.findBookmarkLocation(repoPlace.name)
 
@@ -365,7 +398,6 @@ class NearbyParentFragmentPresenter
                 indicesToUpdate.add(i)
             }
         }
-
     }
 
     /**
@@ -377,17 +409,20 @@ class NearbyParentFragmentPresenter
      *
      * @return The Channel object which contains batches/lists of numbers.
      */
-    suspend fun createBatches(numbers: MutableList<Int>, batchSize: Int): Channel<List<Int>> {
-
+    suspend fun createBatches(
+        numbers: MutableList<Int>,
+        batchSize: Int,
+    ): Channel<List<Int>> {
         val batches = Channel<List<Int>>(Channel.UNLIMITED)
 
         for (i in numbers.indices step batchSize) {
             batches.send(
                 numbers.slice(
-                    i until (i + batchSize).coerceAtMost(
-                        numbers.size
-                    )
-                )
+                    i until
+                        (i + batchSize).coerceAtMost(
+                            numbers.size,
+                        ),
+                ),
             )
         }
 
@@ -411,7 +446,7 @@ class NearbyParentFragmentPresenter
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
@@ -420,29 +455,38 @@ class NearbyParentFragmentPresenter
                     nearbyController.getPlaces(indices.map { updatedGroups[it].place })
                 collectResults.send(
                     fetchedPlaces.mapIndexed { index, place ->
-                        Pair(indices[index], MarkerPlaceGroup(
-                            bookmarkLocationDao.findBookmarkLocation(place.name),
-                            place
-                        ))
-                    }
+                        Pair(
+                            indices[index],
+                            MarkerPlaceGroup(
+                                bookmarkLocationDao.findBookmarkLocation(place.name),
+                                place,
+                            ),
+                        )
+                    },
                 )
             } catch (e: Exception) {
                 Timber.tag("NearbyPinDetails").e(e)
-                //HTTP request failed. Try individual places
+                // HTTP request failed. Try individual places
                 for (i in indices) {
                     launch {
                         val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
                         try {
-                            val fetchedPlace = nearbyController.getPlaces(
-                                mutableListOf(updatedGroups[i].place)
-                            )
+                            val fetchedPlace =
+                                nearbyController.getPlaces(
+                                    mutableListOf(updatedGroups[i].place),
+                                )
 
-                            onePlaceBatch.add(Pair(i, MarkerPlaceGroup(
-                                bookmarkLocationDao.findBookmarkLocation(
-                                    fetchedPlace[0].name
+                            onePlaceBatch.add(
+                                Pair(
+                                    i,
+                                    MarkerPlaceGroup(
+                                        bookmarkLocationDao.findBookmarkLocation(
+                                            fetchedPlace[0].name,
+                                        ),
+                                        fetchedPlace[0],
+                                    ),
                                 ),
-                                fetchedPlace[0]
-                            )))
+                            )
                         } catch (e: Exception) {
                             Timber.tag("NearbyPinDetails").e(e)
                             onePlaceBatch.add(Pair(i, updatedGroups[i]))
@@ -468,7 +512,7 @@ class NearbyParentFragmentPresenter
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
     ) = coroutineScope {
         repeat(numThreads) {
             launch(Dispatchers.IO) {
@@ -486,19 +530,19 @@ class NearbyParentFragmentPresenter
      */
     private fun processResults(
         resultList: List<Pair<Int, MarkerPlaceGroup>>,
-        updatedGroups: MutableList<MarkerPlaceGroup>
+        updatedGroups: MutableList<MarkerPlaceGroup>,
     ) {
-
         for ((index, fetchedPlaceGroup) in resultList) {
             val existingPlace = updatedGroups[index].place
-            val finalPlaceGroup = MarkerPlaceGroup(
-                fetchedPlaceGroup.isBookmarked,
-                fetchedPlaceGroup.place.apply {
-                    location = existingPlace.location
-                    distance = existingPlace.distance
-                    isMonument = existingPlace.isMonument
-                }
-            )
+            val finalPlaceGroup =
+                MarkerPlaceGroup(
+                    fetchedPlaceGroup.isBookmarked,
+                    fetchedPlaceGroup.place.apply {
+                        location = existingPlace.location
+                        distance = existingPlace.distance
+                        isMonument = existingPlace.isMonument
+                    },
+                )
             updatedGroups[index] = finalPlaceGroup
             placesRepository
                 .save(finalPlaceGroup.place)
@@ -517,7 +561,10 @@ class NearbyParentFragmentPresenter
      *
      * @return The HashMap containing (Place's LatLng, Place) entries.
      */
-    private fun getLocationPlaceMap(places: List<Place>, startIndex: Int): HashMap<LatLng, Place> {
+    private fun getLocationPlaceMap(
+        places: List<Place>,
+        startIndex: Int,
+    ): HashMap<LatLng, Place> {
         val map = hashMapOf<LatLng, Place>()
 
         for (i in startIndex..places.lastIndex) {
@@ -540,7 +587,7 @@ class NearbyParentFragmentPresenter
      */
     private suspend fun handleBookmarksToggled(
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        bookmarkChangedPlacesIndex: Int
+        bookmarkChangedPlacesIndex: Int,
     ): Int {
         var i = bookmarkChangedPlacesIndex
         if (i < bookmarkChangedPlaces.size) {
@@ -549,11 +596,12 @@ class NearbyParentFragmentPresenter
             i += bookmarkChangedPlacesBacklog.size
             for ((index, group) in updatedGroups.withIndex()) {
                 if (bookmarkChangedPlacesBacklog.containsKey(group.place.location)) {
-                    updatedGroups[index] = MarkerPlaceGroup(
-                        bookmarkLocationDao
-                            .findBookmarkLocation(updatedGroups[index].place.name),
-                        updatedGroups[index].place
-                    )
+                    updatedGroups[index] =
+                        MarkerPlaceGroup(
+                            bookmarkLocationDao
+                                .findBookmarkLocation(updatedGroups[index].place.name),
+                            updatedGroups[index].place,
+                        )
                 }
             }
         }
@@ -574,7 +622,7 @@ class NearbyParentFragmentPresenter
      */
     private fun handlePlacesClicked(
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        clickedPlacesIndex: Int
+        clickedPlacesIndex: Int,
     ): Int {
         var i = clickedPlacesIndex
         if (i < clickedPlaces.size) {
@@ -583,10 +631,11 @@ class NearbyParentFragmentPresenter
             i += clickedPlacesBacklog.size
             for ((index, group) in updatedGroups.withIndex()) {
                 if (clickedPlacesBacklog.containsKey(group.place.location)) {
-                    updatedGroups[index] = MarkerPlaceGroup(
-                        updatedGroups[index].isBookmarked,
-                        clickedPlacesBacklog[group.place.location]
-                    )
+                    updatedGroups[index] =
+                        MarkerPlaceGroup(
+                            updatedGroups[index].isBookmarked,
+                            clickedPlacesBacklog[group.place.location],
+                        )
                 }
             }
         }
@@ -607,58 +656,55 @@ class NearbyParentFragmentPresenter
      */
     fun loadPlacesDataAsync(
         nearbyPlaceGroups: List<MarkerPlaceGroup>,
-        scope: LifecycleCoroutineScope?
+        scope: LifecycleCoroutineScope?,
     ) {
         loadPlacesDataAyncJob?.cancel()
-        loadPlacesDataAyncJob = scope?.launch(Dispatchers.IO) {
-            // clear past clicks and bookmarkChanged queues
-            clickedPlaces.clear()
-            bookmarkChangedPlaces.clear()
+        loadPlacesDataAyncJob =
+            scope?.launch(Dispatchers.IO) {
+                // clear past clicks and bookmarkChanged queues
+                clickedPlaces.clear()
+                bookmarkChangedPlaces.clear()
 
-            val updatedGroups = nearbyPlaceGroups.toMutableList()
-            // first load cached places:
-            val indicesToUpdate = mutableListOf<Int>()
+                val updatedGroups = nearbyPlaceGroups.toMutableList()
+                // first load cached places:
+                val indicesToUpdate = mutableListOf<Int>()
 
-            loadCachedPlaces(updatedGroups, indicesToUpdate)
+                loadCachedPlaces(updatedGroups, indicesToUpdate)
 
-            schedulePlacesUpdate(updatedGroups, force = true)
-            // channel for lists of indices of places, each list to be fetched in a single request
-            val batchedIndicesToFetch =
-                createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
+                schedulePlacesUpdate(updatedGroups, force = true)
+                // channel for lists of indices of places, each list to be fetched in a single request
+                val batchedIndicesToFetch =
+                    createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-            val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
+                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Factory.UNLIMITED)
 
-            launchFetchPlacesThreads(LoadPlacesAsyncOptions.CONNECTION_COUNT, batchedIndicesToFetch,
-                updatedGroups, collectResults)
+                launchFetchPlacesThreads(
+                    LoadPlacesAsyncOptions.CONNECTION_COUNT,
+                    batchedIndicesToFetch,
+                    updatedGroups,
+                    collectResults,
+                )
 
-            var collectCount = 0
-            var clickedPlacesIndex = 0
-            var bookmarkChangedPlacesIndex = 0
-            while (collectCount < indicesToUpdate.size) {
-                val resultList = collectResults.receive()
+                var collectCount = 0
+                var clickedPlacesIndex = 0
+                var bookmarkChangedPlacesIndex = 0
+                while (collectCount < indicesToUpdate.size) {
+                    val resultList = collectResults.receive()
 
-                processResults(resultList, updatedGroups)
-                
-                clickedPlacesIndex = handlePlacesClicked(updatedGroups, clickedPlacesIndex)
+                    processResults(resultList, updatedGroups)
 
-                bookmarkChangedPlacesIndex = handleBookmarksToggled(updatedGroups,
-                                                                    bookmarkChangedPlacesIndex)
-                schedulePlacesUpdate(updatedGroups)
-                collectCount += resultList.size
+                    clickedPlacesIndex = handlePlacesClicked(updatedGroups, clickedPlacesIndex)
+
+                    bookmarkChangedPlacesIndex =
+                        handleBookmarksToggled(
+                            updatedGroups,
+                            bookmarkChangedPlacesIndex,
+                        )
+                    schedulePlacesUpdate(updatedGroups)
+                    collectCount += resultList.size
+                }
+                collectResults.close()
             }
-            collectResults.close()
-        }
-    }
-
-    /**
-     * Some centering task may need to wait for map to be ready, if they are requested before map is
-     * ready. So we will remember it when the map is ready
-     */
-    private fun handleCenteringTaskIfAny() {
-        if (!placesLoadedOnce) {
-            placesLoadedOnce = true
-            nearbyParentFragmentView.centerMapToPlace(null)
-        }
     }
 
     override fun onWikidataEditSuccessful() {
@@ -680,14 +726,16 @@ class NearbyParentFragmentPresenter
     }
 
     override fun filterByMarkerType(
-        selectedLabels: List<Label?>?, state: Int,
-        filterForPlaceState: Boolean, filterForAllNoneType: Boolean
+        selectedLabels: List<Label?>?,
+        state: Int,
+        filterForPlaceState: Boolean,
+        filterForAllNoneType: Boolean,
     ) {
         if (filterForAllNoneType) { // Means we will set labels based on states
             when (state) {
                 CheckBoxTriStates.UNKNOWN -> {}
                 CheckBoxTriStates.UNCHECKED -> {
-                    //TODO
+                    // TODO
                     nearbyParentFragmentView.filterOutAllMarkers()
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut()
                 }
@@ -696,7 +744,8 @@ class NearbyParentFragmentPresenter
                     // Despite showing all labels NearbyFilterState still should be applied
                     nearbyParentFragmentView.filterMarkersByLabels(
                         selectedLabels,
-                        filterForPlaceState, false
+                        filterForPlaceState,
+                        false,
                     )
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected()
                 }
@@ -704,7 +753,8 @@ class NearbyParentFragmentPresenter
         } else {
             nearbyParentFragmentView.filterMarkersByLabels(
                 selectedLabels,
-                filterForPlaceState, false
+                filterForPlaceState,
+                false,
             )
         }
     }
@@ -716,55 +766,67 @@ class NearbyParentFragmentPresenter
      * @param isNetworkAvailable Whether to load pins from the internet or from the cache.
      */
     @Override
-    override fun handleMapScrolled(scope: LifecycleCoroutineScope?, isNetworkAvailable: Boolean) {
+    override fun handleMapScrolled(
+        scope: LifecycleCoroutineScope?,
+        isNetworkAvailable: Boolean,
+    ) {
         scope ?: return
 
         placeSearchJob?.cancel()
         localPlaceSearchJob?.cancel()
         if (isNetworkAvailable) {
-            placeSearchJob = scope.launch(Dispatchers.Main) {
-                delay(SCROLL_DELAY)
-                if (!isSearchInProgress) {
-                    isSearchInProgress = true; // search executing flag
-                    // Start Search
-                    try {
-                        searchInTheArea();
-                    } finally {
-                        isSearchInProgress = false;
+            placeSearchJob =
+                scope.launch(Dispatchers.Main) {
+                    delay(SCROLL_DELAY)
+                    if (!isSearchInProgress) {
+                        isSearchInProgress = true; // search executing flag
+                        // Start Search
+                        try {
+                            searchInTheArea()
+                        } finally {
+                            isSearchInProgress = false
+                        }
                     }
                 }
-            }
         } else {
             loadPlacesDataAyncJob?.cancel()
-            localPlaceSearchJob = scope.launch(Dispatchers.IO) {
-                delay(LOCAL_SCROLL_DELAY)
+            localPlaceSearchJob =
+                scope.launch(Dispatchers.IO) {
+                    delay(LOCAL_SCROLL_DELAY)
 
-                // retrieve and check map boundaries for nullability
-                val mapBottomLeft = nearbyParentFragmentView.screenBottomLeft
-                val mapTopRight = nearbyParentFragmentView.screenTopRight
+                    // retrieve and check map boundaries for nullability
+                    val mapBottomLeft = nearbyParentFragmentView.screenBottomLeft
+                    val mapTopRight = nearbyParentFragmentView.screenTopRight
 
-                if (mapBottomLeft == null || mapTopRight == null) {
-                    Timber.d("Map boundaries (screenBottomLeft or screenTopRight) are null, skipping local place search as map state is not ready.")
-                    return@launch // exits the coroutine gracefully, preventing the crash.
-                }
-
-                val mapFocus = nearbyParentFragmentView.mapFocus
-                val markerPlaceGroups = placesRepository.fetchPlaces(
-                    nearbyParentFragmentView.screenBottomLeft,
-                    nearbyParentFragmentView.screenTopRight
-                ).sortedBy { it.getDistanceInDouble(mapFocus) }.take(NearbyController.MAX_RESULTS)
-                    .map {
-                        MarkerPlaceGroup(
-                            bookmarkLocationDao.findBookmarkLocation(it.name), it
+                    if (mapBottomLeft == null || mapTopRight == null) {
+                        Timber.d(
+                            "Map boundaries (screenBottomLeft or screenTopRight) are null, " +
+                                "skipping local place search as map state is not ready.",
                         )
+                        return@launch // exits the coroutine gracefully, preventing the crash.
                     }
-                ensureActive()
-                NearbyController.currentLocation = mapFocus
-                schedulePlacesUpdate(markerPlaceGroups, force = true)
-                withContext(Dispatchers.Main) {
-                    nearbyParentFragmentView.updateSnackbar(!markerPlaceGroups.isEmpty())
+
+                    val mapFocus = nearbyParentFragmentView.mapFocus
+                    val markerPlaceGroups =
+                        placesRepository
+                            .fetchPlaces(
+                                nearbyParentFragmentView.screenBottomLeft,
+                                nearbyParentFragmentView.screenTopRight,
+                            ).sortedBy { it.getDistanceInDouble(mapFocus) }
+                            .take(NearbyController.MAX_RESULTS)
+                            .map {
+                                MarkerPlaceGroup(
+                                    bookmarkLocationDao.findBookmarkLocation(it.name),
+                                    it,
+                                )
+                            }
+                    ensureActive()
+                    NearbyController.currentLocation = mapFocus
+                    schedulePlacesUpdate(markerPlaceGroups, force = true)
+                    withContext(Dispatchers.Main) {
+                        nearbyParentFragmentView.updateSnackbar(!markerPlaceGroups.isEmpty())
+                    }
                 }
-            }
         }
     }
 
@@ -823,7 +885,7 @@ class NearbyParentFragmentPresenter
         if (null == nearbyParentFragmentView.getLastMapFocus()) {
             return true
         }
-        //TODO
+        // TODO
         val myLocation = Location("")
         val destLocation = Location("")
         destLocation.latitude = nearbyParentFragmentView.getMapFocus().latitude
@@ -832,7 +894,7 @@ class NearbyParentFragmentPresenter
         myLocation.longitude = nearbyParentFragmentView.getLastMapFocus().longitude
         val distance = myLocation.distanceTo(destLocation)
 
-        return (distance <= 2000.0 * 3 / 4)
+        return (distance <= SEARCH_RADIUS_METERS * SEARCH_RADIUS_THRESHOLD_FRACTION)
     }
 
     fun onMapReady() {
@@ -842,26 +904,33 @@ class NearbyParentFragmentPresenter
     companion object {
         private const val SCROLL_DELAY = 800L; // Delay for debounce of onscroll, in milliseconds.
         private const val LOCAL_SCROLL_DELAY = 200L; // SCROLL_DELAY but for local db place search
-        private val DUMMY = Proxy.newProxyInstance(
-            NearbyParentFragmentContract.View::class.java.getClassLoader(),
-            arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
-            InvocationHandler { proxy: Any?, method: Method?, args: Array<Any?>? ->
-                if (method!!.name == "onMyEvent") {
-                    return@InvocationHandler null
-                } else if (String::class.java == method.returnType) {
-                    return@InvocationHandler ""
-                } else if (Int::class.java == method.returnType) {
-                    return@InvocationHandler 0
-                } else if (Int::class.javaPrimitiveType == method.returnType) {
-                    return@InvocationHandler 0
-                } else if (Boolean::class.java == method.returnType) {
-                    return@InvocationHandler java.lang.Boolean.FALSE
-                } else if (Boolean::class.javaPrimitiveType == method.returnType) {
-                    return@InvocationHandler false
-                } else {
-                    return@InvocationHandler null
-                }
-            }
-        ) as NearbyParentFragmentContract.View
+
+        // Cached places older than this are removed from the cache once a day
+        private val CACHED_PLACE_MAX_AGE_MS = TimeUnit.DAYS.toMillis(5)
+
+        // Key of the day when old cached places were last removed
+        private const val LAST_CACHED_PLACES_REMOVAL_DAY = "last_cached_places_removal_day"
+        private val DUMMY =
+            Proxy.newProxyInstance(
+                NearbyParentFragmentContract.View::class.java.getClassLoader(),
+                arrayOf<Class<*>>(NearbyParentFragmentContract.View::class.java),
+                InvocationHandler { proxy: Any?, method: Method?, args: Array<Any?>? ->
+                    if (method!!.name == "onMyEvent") {
+                        return@InvocationHandler null
+                    } else if (String::class.java == method.returnType) {
+                        return@InvocationHandler ""
+                    } else if (Int::class.java == method.returnType) {
+                        return@InvocationHandler 0
+                    } else if (Int::class.javaPrimitiveType == method.returnType) {
+                        return@InvocationHandler 0
+                    } else if (Boolean::class.java == method.returnType) {
+                        return@InvocationHandler java.lang.Boolean.FALSE
+                    } else if (Boolean::class.javaPrimitiveType == method.returnType) {
+                        return@InvocationHandler false
+                    } else {
+                        return@InvocationHandler null
+                    }
+                },
+            ) as NearbyParentFragmentContract.View
     }
 }

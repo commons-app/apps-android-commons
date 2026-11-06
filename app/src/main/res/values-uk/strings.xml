@@ -12,6 +12,7 @@
 * Movses
 * Mykola Swarnyk
 * Piramidion
+* RLuts
 * Renvoy
 * Samflint
 * SimondR
@@ -284,6 +285,7 @@
   <string name="upload_problem_image_dark">Зображення надто темне.</string>
   <string name="upload_problem_image_blurry">Зображення розмите.</string>
   <string name="upload_problem_image_duplicate">Зображення вже існує на Вікісховищі.</string>
+  <string name="upload_problem_image_format_unsupported">Ваше зображення має формат, який не підтримується сервером Commons, тому програма конвертувала його у JPG.</string>
   <string name="upload_problem_different_geolocation">Зображення виконано в іншому місці.</string>
   <string name="upload_problem_fbmd">Будь ласка, завантажуйте тільки ті зображення, які були зроблені вами. Не завантажуйте зображень, які ви знайшли у Фейсбуці.</string>
   <string name="upload_problem_do_you_continue">Ви все одно хочете завантажити це зображення?</string>
@@ -301,6 +303,13 @@
   <string name="null_url">Помилка! Посилання не знайдено</string>
   <string name="nominate_deletion">Номінувати на вилучення</string>
   <string name="nominated_for_deletion">Цей файл номіновано на вилучення.</string>
+  <string name="file_deleted_from_commons">Цей файл було вилучено з Вікісховища.</string>
+  <string name="contribution_deleted">Вилучено</string>
+  <string name="deleted_file_activity_title">Файл вилучено</string>
+  <string name="deleted_file_explanation">Вікісховище вилучає файли, які не є освітніми або порушують його правила, зокрема порушення авторських прав. Завантажуйте фотографії, які ви зробили самі. Зображення, скопійовані з Інтернету, знімки екрана, логотипи та постери – поширені причини вилучення файлу.</string>
+  <string name="deleted_file_view_page">Переглянути сторінку файлу</string>
+  <string name="deleted_file_view_discussion">Читати обговорення про вилучення</string>
+  <string name="deleted_file_policies">Політики та рекомендації Вікісховища</string>
   <string name="nominated_see_more">Див. сторінку, щоб дізнатись більше</string>
   <string name="skip_login">Пропустити</string>
   <string name="navigation_item_login">Увійти</string>
@@ -384,6 +393,12 @@
   <string name="share_app_title">Поширити програму</string>
   <string name="rotate">Повернути</string>
   <string name="crop">Обрізати</string>
+  <string name="blur">Розмиття</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Автоматичне розмиття облич і номерних знаків.</string>
+  <string name="autodetect_description">Ви можете відхилити хибнопозитивні результати за допомогою кнопки ❌ кожної області розмиття.</string>
+  <string name="autoblur_failed_to_load">Не вдалося завантажити зображення для AutoBlur</string>
+  <string name="autoblur_no_region_detected">Не виявлено ділянок для AutoBlur</string>
   <string name="error_fetching_nearby_places">Не вдалося завантажити місця поблизу</string>
   <string name="no_pictures_in_this_area">Немає зображень з цієї місцевості</string>
   <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
@@ -563,6 +578,7 @@
   <string name="delete_helper_ask_spam_blurry">повністю розмито</string>
   <string name="delete_helper_ask_spam_nonsense">нісенітниця, абсолютно непридатна для будь-якої статті</string>
   <string name="delete_helper_ask_spam_other">Інше</string>
+  <string name="delete_helper_other_notes_hint">Обґрунтування</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
@@ -731,6 +747,7 @@
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
   <string name="custom_selector_over_limit_warning">З технічних причин програма не може надійно вивантажувати більше ніж %1$d зображення/ь одночасно. Обмеження завантаження %1$d перевищено на %2$d.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Відхилити</string>
+  <string name="custom_selector_duplicates_warning">Деякі вибрані зображення є дублікатами та будуть видалені перед завантаженням.</string>
   <string name="custom_selector_button_limit_text">Максимум: %1$d</string>
   <string name="custom_selector_limit_error_desc">Помилка: перевищено ліміт завантаження</string>
   <string name="place_state_wlm">ВЛП</string>
@@ -874,10 +891,24 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Створено %1$s та завантажено %2$s</string>
   <string name="nominated_for_deletion_btn">Номіновано на вилучення</string>
   <string name="custom_selector_max_image_limit_reached">Ви можете вибрати максимум %d зображень.</string>
+  <string name="edit_unsupported_format_explanation">Редагування в додатку доступне лише для файлів JPEG. Щоб редагувати інші формати, скористайтеся сторонніми інструментами.</string>
   <string name="license_cc0_description">Без авторських прав. Ви відмовляєтеся від усіх прав, щоб будь-хто міг використовувати цю роботу будь-яким способом.</string>
   <string name="license_cc_by_description">Attribution. Інші можуть вільно поширювати та адаптувати матеріали, якщо вони вкажуть ваше авторство.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Інші можуть поширювати та адаптувати, але повинні використовувати ту саму ліцензію та вказувати ваше авторство.</string>
   <string name="license_cc0_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі без жодних умов.</string>
   <string name="license_cc_by_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі, навіть у комерційних цілях, за умови зазначення авторства.</string>
   <string name="license_cc_by_sa_long_description">Ця ліцензія дозволяє повторним користувачам розповсюджувати, реміксувати, адаптувати та використовувати матеріал на будь-якому носії чи у будь-якому форматі, навіть у комерційних цілях, за умови зазначення авторства, а нова робота ліцензована на ідентичних умовах.</string>
+  <string name="error_getting_image_properties">Помилка отримання властивостей зображення:</string>
+  <string name="error_blur_no_rectangle">Будь ласка, намалюйте хоча б один прямокутник на фото</string>
+  <string name="error_applying_blur">Помилка під час застосування розмиття</string>
+  <string name="failed_to_apply_crop">Не вдалося застосувати обрізання</string>
+  <string name="failed_to_save_image">Не вдалося зберегти зображення</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (аудіо)</string>
+  <string name="unsupported_format_title">Непідтримуваний формат</string>
+  <string name="unsupported_format_desc">Не вдалося відкрити вибрані файли. Вікісховище суворо вимагає використання таких форматів: \n\n%s</string>
+  <string name="unsupported_files_skipped_title">Непідтримувані файли пропущено</string>
+  <string name="unsupported_files_skipped_desc">Деякі файли було пропущено через непідтримуваний формат. Застосунок продовжить завантаження файлів, що залишилися, які відповідають таким підтримуваним форматам: \n\n%s</string>
 </resources>
