@@ -420,6 +420,7 @@
   <string name="no_categories_selected_warning_desc">Слике без категорија ретко су употребљиве. Заиста желите да наставите без избора категорија?</string>
   <string name="no_depictions_selected">Опис није одабран</string>
   <string name="no_depictions_selected_warning_desc">Слике са приказима се лакше проналазе и вероватније ће се користити. Да ли сте сигурни да желите да наставите без избора приказа?</string>
+  <string name="depictions_map_confirm">Потврди</string>
   <string name="back_button_warning">Откажи отпремање</string>
   <string name="back_button_warning_desc">Коришћење дугмета за враћање уназад ће отказати ваше отпремање и изгубићете ваш напредак</string>
   <string name="back_button_continue">Настави отпремање</string>
@@ -520,6 +521,7 @@
   <string name="delete_helper_ask_spam_selfie">Селфи који се не користи ни у једном чланку</string>
   <string name="delete_helper_ask_spam_blurry">Тотално замагљено</string>
   <string name="delete_helper_ask_spam_nonsense">Бесмислено, апсолутно неупотребљиво ни у једном чланку</string>
+  <string name="delete_helper_ask_spam_other">Остало</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
@@ -770,4 +772,8 @@
   <string name="image_tag_line_created_and_uploaded_by">Направио и отпремио: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Направио %1$s а отпремио %2$s</string>
   <string name="nominated_for_deletion_btn">Номинуј за брисање</string>
+  <string name="license_cc0_description">Без ауторских права. Одричете се свих права и свако може користити овај рад како год.</string>
+  <string name="license_cc_by_description">Ауторство. Други могу делити и мењати докле год вас наводе као аутора.</string>
+  <string name="license_cc_by_sa_description">Ауторство-Делити под истим условима. Други могу делити и мењати али под истом лиценцом и наводити вас као аутора.</string>
+  <string name="license_cc0_long_description">Ова лиценца дозвољава безусловно дељење, мењање и коришћење у другим материјалима и било ком медију [CD, флеш] или формату.</string>
 </resources>

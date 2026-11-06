@@ -20,6 +20,7 @@ import retrofit2.http.Query
  * This interface posts a form encoded request to the wikimedia API
  * with editing action as argument to edit a particular page
  */
+@Suppress("LongParameterList")
 interface PageEditInterface {
     /**
      * This method posts such that the Content which the page
@@ -123,6 +124,21 @@ interface PageEditInterface {
     fun postCaptions(
         @Field("summary") summary: String,
         @Field("title") title: String,
+        @Field("language") language: String,
+        @Field("value") value: String,
+        @Field("token") token: String,
+    ): Observable<Entities>
+
+    /**
+     * Sets a caption on the file's MediaInfo entity. Upload uses this id form;
+     * site and title lookups from the edit screen were not stored.
+     */
+    @FormUrlEncoded
+    @Headers("Cache-Control: no-cache")
+    @POST(MW_API_PREFIX + "action=wbsetlabel&format=json&formatversion=2")
+    fun postCaptionsByEntityId(
+        @Field("summary") summary: String,
+        @Field("id") entityId: String,
         @Field("language") language: String,
         @Field("value") value: String,
         @Field("token") token: String,
