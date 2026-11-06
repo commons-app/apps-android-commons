@@ -2,6 +2,7 @@ package fr.free.nrw.commons.filepicker
 
 import android.app.Activity
 import android.app.Application
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -106,9 +107,9 @@ class FilePickerTest {
 
     @Test
     fun testCreateCameraPictureFile() {
-        val mockFilePicker = mock(FilePicker::class.java)
+        val mockFilePicker = mock(FilePickerIntents::class.java)
         val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
+            FilePickerIntents::class.java.getDeclaredMethod(
                 "createCameraPictureFile",
                 Context::class.java,
             )
@@ -118,49 +119,34 @@ class FilePickerTest {
 
     @Test
     fun testCreateCameraForImageIntent() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "createCameraForImageIntent",
-                Context::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, context, 0)
+        FilePickerIntents.createCameraForImageIntent(context, 0)
     }
 
     @Test
     fun testRevokeWritePermission() {
-        val mockFilePicker = mock(FilePicker::class.java)
+        val mockCameraResultHandler = mock(CameraResultHandler::class.java)
         val mockUri = mock(Uri::class.java)
         val mockContext = mock(Context::class.java)
         val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
+            CameraResultHandler::class.java.getDeclaredMethod(
                 "revokeWritePermission",
                 Context::class.java,
                 Uri::class.java,
             )
         method.isAccessible = true
-        method.invoke(mockFilePicker, mockContext, mockUri)
+        method.invoke(mockCameraResultHandler, mockContext, mockUri)
     }
 
     @Test
     fun testRestoreType() {
-        val mockFilePicker = mock(FilePicker::class.java)
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "restoreType",
-                Context::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, context)
+        PickedFilesResolver.restoreType(context)
     }
 
     @Test
     fun testTakenCameraPicture() {
-        val mockFilePicker = mock(FilePicker::class.java)
+        val mockFilePicker = mock(FilePickerIntents::class.java)
         val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
+            CameraResultHandler::class.java.getDeclaredMethod(
                 "takenCameraPicture",
                 Context::class.java,
             )
@@ -170,29 +156,41 @@ class FilePickerTest {
 
     @Test
     fun testTakenCameraPictureCaseTrue() {
-        val mockFilePicker = mock(FilePicker::class.java)
+        val mockCameraResultHandler = mock(CameraResultHandler::class.java)
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.getString("last_photo", null)).thenReturn("")
         val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
+            CameraResultHandler::class.java.getDeclaredMethod(
                 "takenCameraPicture",
                 Context::class.java,
             )
         method.isAccessible = true
-        method.invoke(mockFilePicker, activity)
+        method.invoke(mockCameraResultHandler, activity)
     }
 
     @Test
     fun testIsPhoto() {
-        val mockFilePicker = mock(FilePicker::class.java)
         val mockIntent = mock(Intent::class.java)
-        val method: Method =
-            FilePicker::class.java.getDeclaredMethod(
-                "isPhoto",
-                Intent::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(mockFilePicker, mockIntent)
+        PickedFilesResolver.isPhoto(mockIntent)
+    }
+
+    @Test
+    fun testIsPhotoReturnsTrueWhenIntentIsNull() {
+        assertEquals(true, PickedFilesResolver.isPhoto(null))
+    }
+
+    @Test
+    fun testIsPhotoReturnsTrueWhenIntentHasNoData() {
+        assertEquals(true, PickedFilesResolver.isPhoto(Intent()))
+    }
+
+    @Test
+    fun testIsPhotoReturnsFalseWhenIntentHasUriOrClipData() {
+        val uri = Uri.parse("content://media/external/images/media/1")
+        assertEquals(false, PickedFilesResolver.isPhoto(Intent().setData(uri)))
+
+        val withClip = Intent().apply { clipData = ClipData.newRawUri("image", uri) }
+        assertEquals(false, PickedFilesResolver.isPhoto(withClip))
     }
 
     @Test

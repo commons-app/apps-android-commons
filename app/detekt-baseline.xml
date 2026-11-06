@@ -684,6 +684,7 @@
     <ID>TooGenericExceptionCaught:ExploreMapController.kt$ExploreMapController$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FeedbackDialog.kt$FeedbackDialog$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:FilePickerIntents.kt$FilePickerIntents$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FileUtils.kt$FileUtils$e: Throwable</ID>
     <ID>TooGenericExceptionCaught:FileUtilsWrapper.kt$FileUtilsWrapper$throwable: Exception</ID>
     <ID>TooGenericExceptionCaught:ImageFragment.kt$ImageFragment$ex: Exception</ID>
@@ -751,7 +752,6 @@
     <ID>TooManyFunctions:ExploreMapPresenter.kt$ExploreMapPresenter : UserActionsNearbyBaseMarkerThumbCallback</ID>
     <ID>TooManyFunctions:ExploreMapRootFragment.kt$ExploreMapRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
-    <ID>TooManyFunctions:FilePicker.kt$FilePicker : Constants</ID>
     <ID>TooManyFunctions:FragmentBuilderModule.kt$FragmentBuilderModule</ID>
     <ID>TooManyFunctions:ImageAdapter.kt$ImageAdapter : AdapterSectionedAdapter</ID>
     <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
@@ -771,7 +771,6 @@
     <ID>TooManyFunctions:NotificationActivity.kt$NotificationActivity : BaseActivity</ID>
     <ID>TooManyFunctions:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
     <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
-    <ID>TooManyFunctions:PickedFiles.kt$PickedFiles : Constants</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
     <ID>TooManyFunctions:SearchActivity.kt$SearchActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
