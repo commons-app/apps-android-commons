@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
@@ -22,7 +21,6 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class ExploreFragment : CommonsDaggerSupportFragment() {
-
     @JvmField
     @Inject
     @Named("default_preferences")
@@ -44,34 +42,45 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreate(savedInstanceState)
         loadNearbyMapData()
         binding = FragmentExploreBinding.inflate(inflater, container, false)
 
-        viewPagerAdapter = ViewPagerAdapter(
-            requireContext(), childFragmentManager,
-            FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        )
+        viewPagerAdapter =
+            ViewPagerAdapter(
+                requireContext(),
+                childFragmentManager,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+            )
 
         binding!!.viewPager.adapter = viewPagerAdapter
         binding!!.viewPager.id = R.id.viewPager
         binding!!.tabLayout.setupWithViewPager(binding!!.viewPager)
-        binding!!.viewPager.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) = Unit
-            override fun onPageScrollStateChanged(state: Int) = Unit
-            override fun onPageSelected(position: Int) {
-                binding!!.viewPager.canScroll = position != 2
-                // based on which tab we are now recreate the options menu
-                activity?.invalidateOptionsMenu()
+        binding!!.viewPager.addOnPageChangeListener(
+            object : OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) = Unit
 
-                if (position == 2) {
-                    mapRootFragment?.requestLocationIfNeeded()
+                override fun onPageScrollStateChanged(state: Int) = Unit
+
+                override fun onPageSelected(position: Int) {
+                    binding!!.viewPager.canScroll = position != 2
+                    // based on which tab we are now recreate the options menu
+                    activity?.invalidateOptionsMenu()
+
+                    if (position == 2) {
+                        mapRootFragment?.requestLocationIfNeeded()
+                    }
                 }
-            }
-        })
+            },
+        )
         setTabs()
         setHasOptionsMenu(true)
 
@@ -112,7 +121,7 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         viewPagerAdapter!!.setTabs(
             R.string.explore_tab_title_featured to featuredRootFragment!!,
             R.string.explore_tab_title_mobile to mobileRootFragment!!,
-            R.string.explore_tab_title_map to mapRootFragment!!
+            R.string.explore_tab_title_map to mapRootFragment!!,
         )
         viewPagerAdapter!!.notifyDataSetChanged()
     }
@@ -123,7 +132,7 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
     private fun loadNearbyMapData() {
         // get fragment arguments
         if (arguments != null) {
-            with (requireArguments()) {
+            with(requireArguments()) {
                 if (containsKey("prev_zoom")) {
                     prevZoom = getDouble("prev_zoom")
                 }
@@ -144,9 +153,11 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
      * @return true if user navigated from Nearby map
      */
     private val isCameFromNearbyMap: Boolean
-        get() = (arguments?.containsKey("prev_zoom") == true
-                && arguments?.containsKey("prev_latitude") == true
-                && arguments?.containsKey("prev_longitude") == true)
+        get() = (
+            arguments?.containsKey("prev_zoom") == true &&
+                arguments?.containsKey("prev_latitude") == true &&
+                arguments?.containsKey("prev_longitude") == true
+        )
 
     fun onBackPressed(): Boolean {
         if (binding!!.tabLayout.selectedTabPosition == 0) {
@@ -154,12 +165,12 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
                 (activity as BaseActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
                 return true
             }
-        } else if (binding!!.tabLayout.selectedTabPosition == 1) { //Mobile root fragment
+        } else if (binding!!.tabLayout.selectedTabPosition == 1) { // Mobile root fragment
             if (mobileRootFragment!!.backPressed()) {
                 (activity as BaseActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
                 return true
             }
-        } else { //explore map fragment
+        } else { // explore map fragment
             if (mapRootFragment!!.backPressed()) {
                 (activity as BaseActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
                 return true
@@ -171,7 +182,10 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
     /**
      * This method inflates the menu in the toolbar
      */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(
+        menu: Menu,
+        inflater: MenuInflater,
+    ) {
         // if logged in 'Show in Nearby' menu item is visible
         if (applicationKvStore!!.getBoolean("login_skipped") == false) {
             inflater.inflate(R.menu.explore_fragment_menu, menu)
@@ -218,8 +232,9 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         private const val MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android"
         private const val EXPLORE_MAP = "Map"
 
-        fun newInstance(): ExploreFragment = ExploreFragment().apply {
-            retainInstance = true
-        }
+        fun newInstance(): ExploreFragment =
+            ExploreFragment().apply {
+                retainInstance = true
+            }
     }
 }

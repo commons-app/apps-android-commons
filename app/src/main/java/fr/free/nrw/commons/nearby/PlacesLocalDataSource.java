@@ -39,6 +39,12 @@ public class PlacesLocalDataSource {
      * @return The list of saved places within the map's view.
      */
     public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
+
+        if (mapBottomLeft == null || mapTopRight == null) {
+            Timber.e("Map boundaries are null, returning empty list.");
+            return new ArrayList<>(); // return empty list instead of crashing
+        }
+
         class Constraint {
 
             final double latBegin;
@@ -117,5 +123,15 @@ public class PlacesLocalDataSource {
 
     public Completable clearCache() {
         return placeDao.deleteAll();
+    }
+
+    /**
+     * Removes the places that were cached before the given time.
+     *
+     * @param cachedBefore Places with an older cachedAt time are removed.
+     * @return A Completable that completes once the old places have been removed.
+     */
+    public Completable removePlacesCachedBefore(final long cachedBefore) {
+        return Completable.fromAction(() -> placeDao.deleteCachedBefore(cachedBefore));
     }
 }

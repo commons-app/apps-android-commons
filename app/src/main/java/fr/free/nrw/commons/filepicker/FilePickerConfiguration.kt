@@ -4,43 +4,46 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 
 class FilePickerConfiguration(
-    private val context: Context
-): Constants {
-
+    private val context: Context,
+) : Constants {
     fun setAllowMultiplePickInGallery(allowMultiple: Boolean): FilePickerConfiguration {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
+            .edit()
             .putBoolean(Constants.BundleKeys.ALLOW_MULTIPLE, allowMultiple)
             .apply()
         return this
     }
 
     fun setCopyTakenPhotosToPublicGalleryAppFolder(copy: Boolean): FilePickerConfiguration {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
+            .edit()
             .putBoolean(Constants.BundleKeys.COPY_TAKEN_PHOTOS, copy)
             .apply()
         return this
     }
 
-    fun getFolderName(): String {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun getFolderName(): String =
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
             .getString(
                 Constants.BundleKeys.FOLDER_NAME,
-                Constants.DEFAULT_FOLDER_NAME
+                Constants.DEFAULT_FOLDER_NAME,
             ) ?: Constants.DEFAULT_FOLDER_NAME
-    }
 
-    fun allowsMultiplePickingInGallery(): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun allowsMultiplePickingInGallery(): Boolean =
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
             .getBoolean(Constants.BundleKeys.ALLOW_MULTIPLE, false)
-    }
 
-    fun shouldCopyTakenPhotosToPublicGalleryAppFolder(): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun shouldCopyTakenPhotosToPublicGalleryAppFolder(): Boolean =
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
             .getBoolean(Constants.BundleKeys.COPY_TAKEN_PHOTOS, false)
-    }
 
-    fun shouldCopyPickedImagesToPublicGalleryAppFolder(): Boolean {
-        return PreferenceManager.getDefaultSharedPreferences(context)
+    fun shouldCopyPickedImagesToPublicGalleryAppFolder(): Boolean =
+        PreferenceManager
+            .getDefaultSharedPreferences(context)
             .getBoolean(Constants.BundleKeys.COPY_PICKED_IMAGES, false)
-    }
 }

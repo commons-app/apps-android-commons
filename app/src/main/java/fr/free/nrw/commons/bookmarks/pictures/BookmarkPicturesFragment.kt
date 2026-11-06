@@ -17,7 +17,6 @@ import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.ViewUtil.showShortSnackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -35,13 +34,16 @@ class BookmarkPicturesFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding!!.bookmarkedPicturesList.onItemClickListener =
             parentFragment as OnItemClickListener?
@@ -86,10 +88,11 @@ class BookmarkPicturesFragment : DaggerFragment() {
         binding!!.statusMessage.visibility = View.GONE
 
         compositeDisposable.add(
-            controller!!.loadBookmarkedPictures()
+            controller!!
+                .loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::handleSuccess, ::handleError)
+                .subscribe(::handleSuccess, ::handleError),
         )
     }
 
@@ -184,18 +187,19 @@ class BookmarkPicturesFragment : DaggerFragment() {
      * @param mediaList List of new Media to be displayed
      */
     private fun setAdapter(mediaList: List<Media>) {
-        gridAdapter = GridViewAdapter(
-            requireContext(),
-            R.layout.layout_category_images,
-            mediaList.toMutableList()
-        )
-        binding?.let {  it.bookmarkedPicturesList.adapter = gridAdapter }
+        gridAdapter =
+            GridViewAdapter(
+                requireContext(),
+                R.layout.layout_category_images,
+                mediaList.toMutableList(),
+            )
+        binding?.let { it.bookmarkedPicturesList.adapter = gridAdapter }
     }
 
     /**
      * It return an instance of gridView adapter which helps in extracting media details
      * used by the gridView
-     * @return  GridView Adapter
+     * @return GridView Adapter
      */
     fun getAdapter(): ListAdapter? = binding?.bookmarkedPicturesList?.adapter
 }

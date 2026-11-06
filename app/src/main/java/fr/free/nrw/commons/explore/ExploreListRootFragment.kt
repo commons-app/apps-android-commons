@@ -17,7 +17,9 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 
-class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider,
+class ExploreListRootFragment :
+    CommonsDaggerSupportFragment,
+    MediaDetailProvider,
     CategoryImagesCallback {
     private var mediaDetails: MediaDetailPagerFragment? = null
     private var listFragment: CategoriesMediaFragment? = null
@@ -26,17 +28,19 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
     constructor()
 
     constructor(bundle: Bundle) {
-        listFragment = CategoriesMediaFragment().apply {
-            arguments = bundleOf(
-                "categoryName" to bundle.getString("categoryName")
-            )
-        }
+        listFragment =
+            CategoriesMediaFragment().apply {
+                arguments =
+                    bundleOf(
+                        "categoryName" to bundle.getString("categoryName"),
+                    )
+            }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreate(savedInstanceState)
 
@@ -44,14 +48,20 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
             setFragment(listFragment!!, mediaDetails)
         }
     }
 
-    fun setFragment(fragment: Fragment, otherFragment: Fragment?) {
+    fun setFragment(
+        fragment: Fragment,
+        otherFragment: Fragment?,
+    ) {
         if (fragment.isAdded && otherFragment != null) {
             childFragmentManager
                 .beginTransaction()
