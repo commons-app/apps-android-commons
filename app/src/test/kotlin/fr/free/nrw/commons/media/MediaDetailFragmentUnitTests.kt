@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.media
 
+import android.accounts.Account
+import android.accounts.AccountManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -27,6 +29,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
@@ -66,6 +69,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import junit.framework.TestCase.assertTrue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.Date
@@ -205,6 +209,43 @@ class MediaDetailFragmentUnitTests {
         doReturn(mockSharedPreferences).`when`(mockContext).getSharedPreferences(anyString(), anyInt())
         doReturn(mockSharedPreferencesEditor).`when`(mockSharedPreferences).edit()
         doReturn(mockSharedPreferencesEditor).`when`(mockSharedPreferencesEditor).putInt(anyString(), anyInt())
+    }
+
+    @Test
+    fun `isOwnUpload returns true when uploader matches current user even if author is different`() {
+        val accountManager = AccountManager.get(fragment.requireContext())
+        shadowOf(accountManager).addAccount(
+            Account("Uploader", BuildConfig.ACCOUNT_TYPE),
+        )
+
+        `when`(media.user).thenReturn("Uploader")
+        `when`(media.author).thenReturn("DifferentAuthor")
+
+        val method = MediaDetailFragment::class.java
+            .getDeclaredMethod("isOwnUpload")
+        method.isAccessible = true
+
+        val result = method.invoke(fragment) as Boolean
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun `isOwnUpload returns true when only first character differs in case`() {
+        val accountManager = AccountManager.get(fragment.requireContext())
+        shadowOf(accountManager).addAccount(
+            Account("TestUser", BuildConfig.ACCOUNT_TYPE),
+        )
+
+        `when`(media.user).thenReturn("testUser")
+
+        val method = MediaDetailFragment::class.java
+            .getDeclaredMethod("isOwnUpload")
+        method.isAccessible = true
+
+        val result = method.invoke(fragment) as Boolean
+
+        assertTrue(result)
     }
 
     @Test
