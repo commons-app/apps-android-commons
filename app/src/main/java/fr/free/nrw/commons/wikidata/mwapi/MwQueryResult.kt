@@ -132,6 +132,11 @@ class MwQueryResult :
     class NotificationList {
         private val list: List<Notification>? = null
 
+        @SerializedName("rawcount")
+        private val rawCount: Int? = null
+
         fun list(): List<Notification>? = list
+
+        fun rawCount(): Int? = rawCount
     }
 }
