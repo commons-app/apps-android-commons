@@ -15,6 +15,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
+import java.io.FileNotFoundException
 import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -158,9 +159,17 @@ class ImageProcessingService
             val originalStreamResult =
                 Single
                     .fromCallable {
-                        appContext.contentResolver.openInputStream(originalFilePath)!!
+                        appContext.contentResolver.openInputStream(originalFilePath)
+                            ?: throw FileNotFoundException("Original file not found at $originalFilePath")
                     }.flatMap { inputStream ->
                         checkDuplicateImage(inputStream)
+                    }.onErrorResumeNext { throwable ->
+                        if (throwable is FileNotFoundException) {
+                            Timber.d("Original file not found, treating as non-duplicate")
+                            Single.just(IMAGE_OK)
+                        } else {
+                            Single.error(throwable)
+                        }
                     }
 
             val modifiedStreamResult =
@@ -170,12 +179,12 @@ class ImageProcessingService
                         if (path != null && java.io.File(path).exists()) {
                             fileUtilsWrapper.getFileInputStream(path)
                         } else {
-                            throw java.io.FileNotFoundException("Modified file not found at $path")
+                            throw FileNotFoundException("Modified file not found at $path")
                         }
                     }.flatMap { inputStream ->
                         checkDuplicateImage(inputStream)
                     }.onErrorResumeNext { throwable ->
-                        if (throwable is java.io.FileNotFoundException) {
+                        if (throwable is FileNotFoundException) {
                             Timber.d("Modified file not found, treating as non-duplicate")
                             Single.just(IMAGE_OK)
                         } else {
