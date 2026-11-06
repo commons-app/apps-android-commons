@@ -12,8 +12,9 @@ abstract class CommonsDaggerService : Service() {
     private fun inject() {
         val injection = getInstance(applicationContext)
 
-        val serviceInjector = injection.serviceInjector()
-            ?: throw NullPointerException("ApplicationlessInjection.serviceInjector() returned null")
+        val serviceInjector =
+            injection.serviceInjector()
+                ?: throw NullPointerException("ApplicationlessInjection.serviceInjector() returned null")
 
         serviceInjector.inject(this)
     }

@@ -44,7 +44,7 @@ import java.util.Locale
  *
  */
 class WikiSite : Parcelable {
-    //TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added
+    // TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added
     @SerializedName("domain")
     private val uri: Uri
 
@@ -60,16 +60,19 @@ class WikiSite : Parcelable {
         }
 
         val langVariant = getLanguageVariantFromUri(tempUri)
-        languageCode = if (!TextUtils.isEmpty(langVariant)) {
-            langVariant
-        } else {
-            authorityToLanguageCode(authority!!)
-        }
+        languageCode =
+            if (!TextUtils.isEmpty(langVariant)) {
+                langVariant
+            } else {
+                authorityToLanguageCode(authority!!)
+            }
 
-        this.uri = Uri.Builder()
-            .scheme(tempUri.scheme)
-            .encodedAuthority(authority)
-            .build()
+        this.uri =
+            Uri
+                .Builder()
+                .scheme(tempUri.scheme)
+                .encodedAuthority(authority)
+                .build()
     }
 
     private val String?.isWikipedia: Boolean get() =
@@ -85,18 +88,20 @@ class WikiSite : Parcelable {
     }
 
     constructor(url: String) : this(
-        if (url.startsWith("http")) Uri.parse(url) else if (url.startsWith("//"))
+        if (url.startsWith("http")) {
+            Uri.parse(url)
+        } else if (url.startsWith("//")) {
             Uri.parse("$DEFAULT_SCHEME:$url")
-        else
+        } else {
             Uri.parse("$DEFAULT_SCHEME://$url")
+        },
     )
 
     constructor(authority: String, languageCode: String) : this(authority) {
         this.languageCode = languageCode
     }
 
-    fun scheme(): String =
-        if (TextUtils.isEmpty(uri.scheme)) DEFAULT_SCHEME else uri.scheme!!
+    fun scheme(): String = if (TextUtils.isEmpty(uri.scheme)) DEFAULT_SCHEME else uri.scheme!!
 
     /**
      * @return The complete wiki authority including language subdomain but not including scheme,
@@ -128,7 +133,7 @@ class WikiSite : Parcelable {
      * Eg. https://en.m.wikipedia.org
      * @return
      */
-    fun mobileUrl(): String = String.format("%1\$s://%2\$s", scheme(), mobileAuthority())
+    fun mobileUrl(): String = String.format(Locale.ROOT, "%1\$s://%2\$s", scheme(), mobileAuthority())
 
     fun subdomain(): String = languageCodeToSubdomain(languageCode!!)
 
@@ -136,7 +141,6 @@ class WikiSite : Parcelable {
      * @return A path without an authority for the segment including a leading "/".
      */
     fun path(segment: String): String = "/w/$segment"
-
 
     fun uri(): Uri = uri
 
@@ -183,21 +187,25 @@ class WikiSite : Parcelable {
     }
 
     // Auto-generated
-    override fun toString(): String {
-        return ("WikiSite{"
-                + "uri=" + uri
-                + ", languageCode='" + languageCode + '\''
-                + '}')
-    }
+    override fun toString(): String =
+        (
+            "WikiSite{" +
+                "uri=" + uri +
+                ", languageCode='" + languageCode + '\'' +
+                '}'
+        )
 
     override fun describeContents(): Int = 0
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
+    override fun writeToParcel(
+        dest: Parcel,
+        flags: Int,
+    ) {
         dest.writeParcelable(uri, 0)
         dest.writeString(languageCode)
     }
 
-    protected constructor(`in`: Parcel) {
+    private constructor(`in`: Parcel) {
         uri = `in`.readParcelable(Uri::class.java.classLoader)!!
         languageCode = `in`.readString()
     }
@@ -216,15 +224,12 @@ class WikiSite : Parcelable {
         const val DEFAULT_SCHEME: String = "https"
 
         @JvmField
-        val CREATOR: Parcelable.Creator<WikiSite> = object : Parcelable.Creator<WikiSite> {
-            override fun createFromParcel(parcel: Parcel): WikiSite {
-                return WikiSite(parcel)
-            }
+        val CREATOR: Parcelable.Creator<WikiSite> =
+            object : Parcelable.Creator<WikiSite> {
+                override fun createFromParcel(parcel: Parcel): WikiSite = WikiSite(parcel)
 
-            override fun newArray(size: Int): Array<WikiSite?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<WikiSite?> = arrayOfNulls(size)
             }
-        }
 
         fun forDefaultLocaleLanguageCode(): WikiSite {
             val languageCode: String = Locale.getDefault().language
@@ -233,19 +238,21 @@ class WikiSite : Parcelable {
             return WikiSite(subdomain + uri.authority, languageCode)
         }
 
-        private fun languageCodeToSubdomain(languageCode: String): String = when (languageCode) {
-            SIMPLIFIED_CHINESE_LANGUAGE_CODE,
-            TRADITIONAL_CHINESE_LANGUAGE_CODE,
-            CHINESE_CN_LANGUAGE_CODE,
-            CHINESE_HK_LANGUAGE_CODE,
-            CHINESE_MO_LANGUAGE_CODE,
-            CHINESE_SG_LANGUAGE_CODE,
-            CHINESE_TW_LANGUAGE_CODE -> CHINESE_LANGUAGE_CODE
+        private fun languageCodeToSubdomain(languageCode: String): String =
+            when (languageCode) {
+                SIMPLIFIED_CHINESE_LANGUAGE_CODE,
+                TRADITIONAL_CHINESE_LANGUAGE_CODE,
+                CHINESE_CN_LANGUAGE_CODE,
+                CHINESE_HK_LANGUAGE_CODE,
+                CHINESE_MO_LANGUAGE_CODE,
+                CHINESE_SG_LANGUAGE_CODE,
+                CHINESE_TW_LANGUAGE_CODE,
+                -> CHINESE_LANGUAGE_CODE
 
-            NORWEGIAN_BOKMAL_LANGUAGE_CODE -> NORWEGIAN_LEGACY_LANGUAGE_CODE // T114042
+                NORWEGIAN_BOKMAL_LANGUAGE_CODE -> NORWEGIAN_LEGACY_LANGUAGE_CODE // T114042
 
-            else -> languageCode
-        }
+                else -> languageCode
+            }
 
         private fun authorityToLanguageCode(authority: String): String {
             val parts = authority.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()

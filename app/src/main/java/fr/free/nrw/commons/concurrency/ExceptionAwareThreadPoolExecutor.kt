@@ -6,14 +6,15 @@ import java.util.concurrent.Future
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.ThreadFactory
 
-
 class ExceptionAwareThreadPoolExecutor(
     corePoolSize: Int,
     threadFactory: ThreadFactory,
-    private val exceptionHandler: ExceptionHandler?
+    private val exceptionHandler: ExceptionHandler?,
 ) : ScheduledThreadPoolExecutor(corePoolSize, threadFactory) {
-
-    override fun afterExecute(r: Runnable, t: Throwable?) {
+    override fun afterExecute(
+        r: Runnable,
+        t: Throwable?,
+    ) {
         super.afterExecute(r, t)
         var throwable = t
 

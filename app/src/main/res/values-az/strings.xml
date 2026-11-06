@@ -278,6 +278,13 @@
   <string name="null_url">Xəta! URL tapılmadı</string>
   <string name="nominate_deletion">Silinməyə namizəd göstər</string>
   <string name="nominated_for_deletion">Bu şəkil silinməyə namizəddir.</string>
+  <string name="file_deleted_from_commons">Bu fayl Vikianbardan silinib.</string>
+  <string name="contribution_deleted">Silinib</string>
+  <string name="deleted_file_activity_title">Fayl silinib</string>
+  <string name="deleted_file_explanation">Vikianbar tədris məqsədi daşımayan və ya qaydalarını pozan, o cümlədən müəllif hüquqlarını pozan faylları silir. Özünüz çəkdiyiniz fotoları yükləyin. İnternetdən yüklənmiş şəkillər, ekran görüntüləri, loqolar və afişalar faylların silinməsinin ən çox rast gəlinən səbəblərindəndir.</string>
+  <string name="deleted_file_view_page">Fayl səhifəsinə bax</string>
+  <string name="deleted_file_view_discussion">Silinmə müzakirəsini oxu</string>
+  <string name="deleted_file_policies">Vikianbar siyasətləri və təlimatları</string>
   <string name="nominated_see_more">Ətraflı məlumat üçün veb səhifəsinə bax</string>
   <string name="skip_login">Ötür</string>
   <string name="navigation_item_login">Daxil ol</string>
@@ -361,6 +368,12 @@
   <string name="share_app_title">Proqramı paylaş</string>
   <string name="rotate">Fırlat</string>
   <string name="crop">Kəs</string>
+  <string name="blur">Bulanıqlıq</string>
+  <string name="autoblur">AutoBlur</string>
+  <string name="autodetect_title">Üzlərin və nömrə nişanlarının avtomatik bulanıqlaşdırılması.</string>
+  <string name="autodetect_description">Hər bulanıqlaşdırma sahəsindəki ❌ düyməsini istifadə edərək səhv nəticələri ləğv edə bilərsiniz.</string>
+  <string name="autoblur_failed_to_load">AutoBlur üçün şəkil yüklənmədi</string>
+  <string name="autoblur_no_region_detected">AutoBlur üçün heç bir bölgə aşkarlanmadı</string>
   <string name="error_fetching_nearby_places">Yaxınlıqdakı yerləri yükləmək mümkün olmadı</string>
   <string name="no_pictures_in_this_area">Bu ərazidə şəkillər yoxdur</string>
   <string name="no_nearby_places_around">Yaxınlıqda yer tapılmadı</string>
@@ -391,6 +404,7 @@
   <string name="images_used_explanation">Vikianbara yüklədiyiniz və Vikimedia məqalələrində istifadə olunan şəkillərin sayı</string>
   <string name="error_occurred">Xəta baş verdi!</string>
   <string name="notifications_channel_name_all">Vikianbar bildirişi</string>
+  <string name="notifications_channel_name_uploads">Yükləmə prosesi</string>
   <string name="preference_author_name_toggle">Fərdi müəllif adından istifadə et</string>
   <string name="preference_author_name_toggle_summary">Fotoşəkilləri yükləyərkən istifadəçi adınız əvəzinə fərdi müəllif adından istifadə edin</string>
   <string name="preference_author_name">Fərdi müəllif adı</string>
@@ -853,4 +867,13 @@
   <string name="license_cc0_long_description">Bu lisenziya təkrar istifadəçilərə heç bir şərt qoymadan istənilən media və formatda materialı yaymaq, remiks etmək, uyğunlaşdırmaq və inkişaf etdirmək imkanı verir.</string>
   <string name="license_cc_by_long_description">Bu lisenziya, müəllifə istinad edildiyi təqdirdə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
   <string name="license_cc_by_sa_long_description">Bu lisenziya, müəllifə istinad edildiyi və yeni əsərin eyni şərtlər altında lisenziyalaşdırıldığı şərtilə, təkrar istifadəçilərə materialı istənilən vasitə və ya formatda, hətta kommersiya məqsədləri üçün də yaymağa, remiks etməyə, uyğunlaşdırmağa və inkişaf etdirməyə imkan verir.</string>
+  <string name="error_getting_image_properties">Şəkil xüsusiyyətlərini əldə etməkdə xəta:</string>
+  <string name="error_blur_no_rectangle">Zəhmət olmasa, fotoda ən azı bir düzbucaqlı çəkin</string>
+  <string name="error_applying_blur">Bulanıqlaşdırma tətbiq edərkən xəta</string>
+  <string name="failed_to_apply_crop">Kəsmə tətbiq edilə bilmədi</string>
+  <string name="failed_to_save_image">Şəkli yadda saxlamaq alınmadı</string>
+  <string name="unsupported_format_title">Dəstəklənməyən format</string>
+  <string name="unsupported_format_desc">Seçilmiş fayllar açıla bilmədi. Vikianbar aşağıdakı formatları ciddi şəkildə tələb edir:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Dəstəklənməyən fayllar ötürüldü</string>
+  <string name="unsupported_files_skipped_desc">Dəstəklənməyən formata görə bəzi fayllar ötürüldü. Tətbiq aşağıdakı dəstəklənən formatlara uyğun qalan faylları yükləməyə davam edəcək:\n\n%s</string>
 </resources>
