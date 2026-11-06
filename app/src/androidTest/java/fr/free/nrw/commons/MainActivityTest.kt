@@ -66,6 +66,8 @@ class MainActivityTest {
 
     @Test
     fun testNearby() {
+        // Wait for the main activity to fully initialize
+        UITestHelper.sleep(1000)
         Espresso
             .onView(
                 Matchers.allOf(
@@ -104,6 +106,8 @@ class MainActivityTest {
 
     @Test
     fun testExplore() {
+        // Wait for the main activity to fully initialize
+        UITestHelper.sleep(1000)
         Espresso
             .onView(
                 Matchers.allOf(
@@ -125,6 +129,8 @@ class MainActivityTest {
 
     @Test
     fun testContributions() {
+        // Wait for the main activity to fully initialize
+        UITestHelper.sleep(1000)
         Espresso
             .onView(
                 Matchers.allOf(
@@ -175,6 +181,8 @@ class MainActivityTest {
 
     @Test
     fun testBookmarks() {
+        // Wait for the main activity to fully initialize
+        UITestHelper.sleep(1000)
         Espresso
             .onView(
                 Matchers.allOf(
@@ -193,6 +201,8 @@ class MainActivityTest {
 
     @Test
     fun testNotifications() {
+        // Wait for the main activity to fully initialize
+        UITestHelper.sleep(1000)
         Espresso
             .onView(
                 Matchers.allOf(
