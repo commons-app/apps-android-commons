@@ -9,10 +9,13 @@ import fr.free.nrw.commons.campaigns.CampaignConfig
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.location.LatLng
+import com.google.gson.JsonSyntaxException
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.TooManyAchievementsException
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import okhttp3.Call
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -23,6 +26,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -239,6 +243,163 @@ class OkHttpJsonApiClientTests {
         assertFalse(result.campaignConfig!!.showOnlyLiveCampaigns)
         assertEquals("startDate", result.campaignConfig!!.sortBy)
     }
+
+    @Test
+    fun testGetAchievementsFallsBackToCommonsApiWhenFeedbackHasNoJson() {
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "Content-type: application/json\n",
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.uniqueUsedImages)
+        assertEquals(2, result.articlesUsingImages)
+        assertEquals(1, result.deletedUploads)
+        assertEquals(1, result.featuredImages.qualityImages)
+        assertEquals(0, result.featuredImages.featuredPicturesOnWikimediaCommons)
+        assertEquals(3, result.thanksReceived)
+        assertEquals("Test", result.user)
+        verify(okhttpClient, times(6)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallbackFailsForTooManyUploads() {
+        val uploads = (1..1001).joinToString(",") { """{"title":"File:$it.jpg"}""" }
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "Content-type: application/json\n",
+            """{"query":{"logevents":[$uploads]}}"""
+        )
+
+        try {
+            clientWithToolforgeUrl().getAchievements("Test").blockingGet()
+            fail("Expected the fallback to give up")
+        } catch (e: RuntimeException) {
+            assertTrue(e.cause is TooManyAchievementsException)
+        }
+        verify(okhttpClient, times(2)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackIsNotSuccessful() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        stubCommonsAchievementsResponses()
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.uniqueUsedImages)
+        assertEquals(3, result.thanksReceived)
+        verify(okhttpClient, times(6)).newCall(any())
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackThrows() {
+        Mockito.`when`(call.execute())
+            .thenThrow(IOException("no healthy upstream"))
+            .thenReturn(response)
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        stubCommonsAchievementsResponses()
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(1, result.deletedUploads)
+        assertEquals("Test", result.user)
+    }
+
+    @Test
+    fun testGetAchievementsFallsBackWhenFeedbackJsonIsInvalid() {
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(
+            gson.fromJson(any<String>(), eq(fr.free.nrw.commons.profile.achievements.FeedbackResponse::class.java))
+        ).thenThrow(JsonSyntaxException("bad"))
+        Mockito.`when`(responseBody.string()).thenReturn(
+            "{not json",
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
+
+        val result = clientWithToolforgeUrl().getAchievements("Test").blockingGet()!!
+
+        assertEquals(2, result.articlesUsingImages)
+    }
+
+    @Test
+    fun testGetUploadCountFallsBackWhenToolforgeFails() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"allimages":[{"name":"A.jpg"},{"name":"B.jpg"}]}}"""
+        )
+
+        val count = clientWithToolforgeUrl().getUploadCount("Test").blockingGet()
+
+        assertEquals(2, count)
+    }
+
+    @Test
+    fun testGetUploadCountFallbackStopsAfterTheCap() {
+        val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
+        val continued = """{"continue":{"aicontinue":"x","continue":"-||"},"query":{"allimages":[$page]}}"""
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            continued,
+            continued,
+            """{"query":{"allimages":[$page]}}"""
+        )
+
+        val count = clientWithToolforgeUrl().getUploadCount("Test").blockingGet()
+
+        assertEquals(1000, count)
+        verify(okhttpClient, times(3)).newCall(any())
+    }
+
+    @Test
+    fun testGetWikidataEditsFallsBackWhenToolforgeFails() {
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"users":[{"name":"Test","editcount":12}]}}"""
+        )
+
+        val edits = clientWithToolforgeUrl().getWikidataEdits("Test").blockingGet()
+
+        assertEquals(12, edits)
+    }
+
+    private fun stubCommonsAchievementsResponses() {
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"query":{"logevents":[{"title":"File:A.jpg"},{"title":"File:B.jpg"}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg"},{"title":"File:B.jpg","missing":true}]}}""",
+            """{"continue":{"gucontinue":"x","continue":"gaicontinue||"},"query":{"pages":[""" +
+                """{"pageid":1,"title":"File:A.jpg","globalusage":[{"title":"P1","wiki":"en.wikipedia.org"}],""" +
+                """"categories":[{"ns":14,"title":"Category:Quality_images"}]}]}}""",
+            """{"query":{"pages":[{"pageid":1,"title":"File:A.jpg",""" +
+                """"globalusage":[{"title":"P2","wiki":"fr.wikipedia.org"}]}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2},{"logid":3}]}}"""
+        )
+    }
+
+    private fun clientWithToolforgeUrl() = OkHttpJsonApiClient(
+        okhttpClient,
+        depictsClient,
+        "https://tools.example.org/tool-commons-android-app".toHttpUrl(),
+        sparqlQueryUrl,
+        campaignsUrl,
+        gson
+    )
 
     fun loadJsonFromResource(fileName: String): String {
         val resourcePath = "raw/$fileName"
