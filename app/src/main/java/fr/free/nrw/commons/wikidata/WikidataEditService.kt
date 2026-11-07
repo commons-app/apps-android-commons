@@ -11,6 +11,7 @@ import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
+import fr.free.nrw.commons.utils.getStringSafe
 import fr.free.nrw.commons.wikidata.WikidataProperties.IMAGE
 import fr.free.nrw.commons.wikidata.WikidataProperties.MEDIA_LEGENDS
 import fr.free.nrw.commons.wikidata.model.DataValue.MonoLingualText
@@ -23,7 +24,6 @@ import io.reactivex.Observable
 import timber.log.Timber
 import java.util.Arrays
 import java.util.Collections
-import java.util.Locale
 import java.util.Objects
 import java.util.UUID
 import javax.inject.Inject
@@ -52,8 +52,7 @@ class WikidataEditService
 
         @SuppressLint("StringFormatInvalid")
         private fun showSuccessToast(wikiItemName: String) {
-            val successStringTemplate = context.getString(R.string.successful_wikidata_edit)
-            val successMessage = String.format(Locale.getDefault(), successStringTemplate, wikiItemName)
+            val successMessage = context.getStringSafe(R.string.successful_wikidata_edit, wikiItemName)
             showLongToast(context, successMessage)
         }
 

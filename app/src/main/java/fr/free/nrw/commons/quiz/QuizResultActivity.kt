@@ -21,6 +21,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import fr.free.nrw.commons.utils.getStringSafe
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
@@ -94,7 +95,7 @@ class QuizResultActivity : AppCompatActivity() {
         val scorePercent = score * multiplierToGetPercentage
         binding?.resultProgressBar?.progress = scorePercent
         binding?.tvResultProgress?.text = "$score / $numberOfQuestions"
-        val message = resources.getString(R.string.congratulatory_message_quiz, "$scorePercent%")
+        val message = getStringSafe(R.string.congratulatory_message_quiz, "$scorePercent%")
         binding?.congratulatoryMessage?.text = message
     }
 

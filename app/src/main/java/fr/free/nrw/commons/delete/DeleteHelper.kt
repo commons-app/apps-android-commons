@@ -22,6 +22,7 @@ import fr.free.nrw.commons.notification.NotificationHelper.Companion.NOTIFICATIO
 import fr.free.nrw.commons.review.ReviewController
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.getStringSafe
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -183,7 +184,7 @@ class DeleteHelper
                 title = baseTitle
                 message =
                     context
-                        .getString(R.string.delete_helper_show_deletion_message_if, media.displayTitle)
+                        .getStringSafe(R.string.delete_helper_show_deletion_message_if, media.displayTitle)
             } else {
                 baseTitle += ": ${context.getString(R.string.delete_helper_show_deletion_title_failed)}"
                 title = baseTitle
