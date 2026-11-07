@@ -12,6 +12,7 @@ import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgress
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -281,6 +282,17 @@ class UploadClient
                 Timber.e(throwable, "Exception occurred in uploading file from stash")
                 Observable.error(throwable)
             }
+
+        /**
+         * Checks if Commons would refuse a title because of its title blacklist.
+         * Commons only checks it when publishing, after the whole file has been uploaded.
+         *
+         * @param title File:Photo.jpg
+         */
+        fun isTitleBlacklisted(title: String): Single<Boolean> =
+            uploadInterface
+                .checkTitleBlacklist(title)
+                .map { it.titleblacklist?.result == "blacklisted" }
     }
 
 private fun canProcess(

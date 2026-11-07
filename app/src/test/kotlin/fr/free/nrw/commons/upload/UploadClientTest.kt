@@ -18,6 +18,7 @@ import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
+import io.reactivex.Single
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import junit.framework.TestCase.assertTrue
@@ -292,6 +293,22 @@ class UploadClientTest {
         result.assertNoErrors()
         assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
         assertEquals(filekey, result.values()[0].fileKey)
+    }
+
+    @Test
+    fun testIsTitleBlacklisted_Blacklisted() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("blacklisted"))))
+
+        uploadClient.isTitleBlacklisted("File:Photo.jpg").test().assertValue(true)
+    }
+
+    @Test
+    fun testIsTitleBlacklisted_Ok() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Market in Lagos.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.isTitleBlacklisted("File:Market in Lagos.jpg").test().assertValue(false)
     }
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()
