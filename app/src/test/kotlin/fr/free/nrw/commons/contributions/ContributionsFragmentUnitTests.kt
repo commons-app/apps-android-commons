@@ -21,7 +21,7 @@ import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
 import io.reactivex.Single
@@ -88,7 +88,7 @@ class ContributionsFragmentUnitTests {
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
-    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    private lateinit var userStatsClient: UserStatsClient
 
     @Mock
     private lateinit var contributionsPresenter: ContributionsPresenter
@@ -129,7 +129,7 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
-        Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "userStatsClient", userStatsClient)
     }
 
     @Test
