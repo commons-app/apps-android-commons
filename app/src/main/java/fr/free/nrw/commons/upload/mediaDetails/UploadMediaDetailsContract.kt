@@ -145,6 +145,11 @@ interface UploadMediaDetailsContract {
 
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
+        /**
+         * Returns the upload item at the given index, or null if there is none
+         */
+        fun getUploadItem(indexInViewFlipper: Int): UploadItem?
+
         fun onUserConfirmedUploadIsOfPlace(
             place: Place?,
             uploadItemIndex: Int,
