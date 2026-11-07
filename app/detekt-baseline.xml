@@ -727,7 +727,6 @@
     <ID>TooManyFunctions:BookmarkPicturesFragment.kt$BookmarkPicturesFragment : DaggerFragment</ID>
     <ID>TooManyFunctions:CategoriesContract.kt$CategoriesContract$View</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
-    <ID>TooManyFunctions:CategoryDetailsActivity.kt$CategoryDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
     <ID>TooManyFunctions:CommonsApplicationComponent.kt$CommonsApplicationComponent : AndroidInjector</ID>
     <ID>TooManyFunctions:CommonsApplicationModule.kt$CommonsApplicationModule</ID>
@@ -742,7 +741,6 @@
     <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$View</ID>
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
-    <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
     <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
@@ -755,18 +753,15 @@
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
-    <ID>TooManyFunctions:MoreBottomSheetFragment.kt$MoreBottomSheetFragment : BottomSheetDialogFragment</ID>
     <ID>TooManyFunctions:MwQueryPage.kt$MwQueryPage : BaseModel</ID>
     <ID>TooManyFunctions:MwQueryResult.kt$MwQueryResult : BaseModelPostProcessable</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>TooManyFunctions:NearbyResultItem.kt$NearbyResultItem</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:NotificationActivity.kt$NotificationActivity : BaseActivity</ID>
     <ID>TooManyFunctions:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
     <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
     <ID>TooManyFunctions:PickedFiles.kt$PickedFiles : Constants</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
-    <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
     <ID>TooManyFunctions:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>TooManyFunctions:UploadContract.kt$UploadContract$View</ID>
@@ -774,7 +769,6 @@
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$UserActionListener : BasePresenter</ID>
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$View : SimilarImageInterface</ID>
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
-    <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
