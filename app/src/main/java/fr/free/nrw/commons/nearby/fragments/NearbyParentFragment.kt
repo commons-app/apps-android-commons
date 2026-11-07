@@ -234,6 +234,7 @@ class NearbyParentFragment :
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
     private var snackbar: Snackbar? = null
+    private var hasShownOfflinePinsMessage = false
     private var view: View? = null
     private var scope: LifecycleCoroutineScope? = null
     private var presenter: NearbyParentFragmentPresenter? = null
@@ -1422,6 +1423,7 @@ class NearbyParentFragment :
                                 snackbar!!.dismiss()
                                 snackbar = null
                             }
+                            hasShownOfflinePinsMessage = false
                         } else {
                             if (snackbar == null) {
                                 snackbar =
@@ -1430,6 +1432,7 @@ class NearbyParentFragment :
                                         fr.free.nrw.commons.R.string.no_internet,
                                         Snackbar.LENGTH_INDEFINITE,
                                     )
+                                hasShownOfflinePinsMessage = false
                                 searchable = false
                                 setProgressBarVisibility(false)
                             }
@@ -1451,10 +1454,10 @@ class NearbyParentFragment :
         if (!isNetworkErrorOccurred || snackbar == null) {
             return
         }
-        if (offlinePinsShown) {
+        // Avoid flickering between offline messages while panning; switch once per offline session.
+        if (offlinePinsShown && !hasShownOfflinePinsMessage) {
             snackbar!!.setText(fr.free.nrw.commons.R.string.nearby_showing_pins_offline)
-        } else {
-            snackbar!!.setText(fr.free.nrw.commons.R.string.no_internet)
+            hasShownOfflinePinsMessage = true
         }
     }
 
