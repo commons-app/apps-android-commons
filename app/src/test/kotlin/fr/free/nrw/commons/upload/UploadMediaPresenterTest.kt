@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.isA
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -150,6 +152,34 @@ class UploadMediaPresenterTest {
             .thenReturn(null)
         uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         testScheduler.triggerActions()
+    }
+
+    /**
+     * Unit test for an image without location that shows the "No location found" dialog
+     */
+    @Test
+    fun displayLocDialogForImageWithoutLocation() {
+        whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
+        whenever(uploadItem.mimeType).thenReturn("image/jpeg")
+        whenever(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        whenever(imageCoordinates.decimalCoords).thenReturn(null)
+        uploadMediaPresenter.displayLocDialog(0, null, false)
+        verify(view).displayAddLocationDialog(any())
+    }
+
+    /**
+     * Unit test that an audio file skips the "No location found" dialog and checks the caption
+     */
+    @Test
+    fun displayLocDialogForAudioSkipsDialog() {
+        whenever(repository.getUploads()).thenReturn(listOf(uploadItem))
+        whenever(uploadItem.mimeType).thenReturn("audio/ogg")
+        whenever(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        whenever(imageCoordinates.decimalCoords).thenReturn(null)
+        whenever(repository.getCaptionQuality(uploadItem)).thenReturn(Single.just(IMAGE_OK))
+        uploadMediaPresenter.displayLocDialog(0, null, false)
+        verify(view, never()).displayAddLocationDialog(any())
+        verify(view).showProgress(true)
     }
 
     /**
