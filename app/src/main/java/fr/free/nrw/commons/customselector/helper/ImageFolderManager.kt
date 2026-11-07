@@ -55,8 +55,10 @@ class ImageFolderManager
             editor.apply()
 
             val uploadingContributions = getUploadingContributions()
+            // init() internally uses DiffUtil and dispatches its own updates;
+            // a redundant notifyDataSetChanged() here would trigger a second full
+            // rebind of every visible ViewHolder, causing a scroll-performance regression.
             imageAdapter.init(allImages, allImages, TreeMap(), uploadingContributions)
-            imageAdapter.notifyDataSetChanged()
         }
 
         /**
@@ -79,11 +81,13 @@ class ImageFolderManager
             val uploadingContributions = getUploadingContributions()
             val filteredImages = filterImages(images, bucketId)
             val allImages = ArrayList(filteredImages)
+            // init() uses DiffUtil internally; the caller (ImageFragment's observer)
+            // issues its own notifyDataSetChanged() after this returns, so a second
+            // call here would cause a double full-rebind and hurt scroll performance.
             imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
             selectedImages?.let {
                 imageAdapter.selectionManager.setSelectedImages(it)
             }
-            imageAdapter.notifyDataSetChanged()
             return allImages
         }
 
