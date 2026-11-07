@@ -76,8 +76,8 @@ class UploadClient
                 chunkInfo.set(contribution.chunkInfo)
                 Timber.d(
                     "Chunk: Next Chunk: %s, Total Chunks: %s",
-                    contribution.chunkInfo!!.indexOfNextChunkToUpload,
-                    contribution.chunkInfo!!.totalChunks,
+                    contribution.chunkInfo?.indexOfNextChunkToUpload,
+                    contribution.chunkInfo?.totalChunks,
                 )
             }
 
@@ -127,7 +127,7 @@ class UploadClient
                     Observable.just(
                         StashUploadResult(
                             StashUploadState.SUCCESS,
-                            chunkInfo.get()!!.uploadResult!!.filekey,
+                            chunkInfo.get()?.uploadResult?.filekey,
                             "success",
                         ),
                     )
@@ -160,10 +160,10 @@ class UploadClient
 
             index.getAndIncrement()
 
-            val offset = if (chunkInfo.get() != null) chunkInfo.get()!!.uploadResult!!.offset else 0
+            val offset = chunkInfo.get()?.uploadResult?.offset ?: 0
             Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset)
 
-            val filekey = chunkInfo.get()?.let { it.uploadResult!!.filekey }
+            val filekey = chunkInfo.get()?.uploadResult?.filekey
             val requestBody = chunkFile.asRequestBody(mediaType)
             val listener = { transferred: Long, total: Long ->
                 notificationUpdater.onProgress(transferred, total)
@@ -300,4 +300,4 @@ private fun canProcess(
 private fun shouldSkip(
     chunkInfo: AtomicReference<ChunkInfo?>,
     index: AtomicInteger,
-): Boolean = chunkInfo.get() != null && index.get() < chunkInfo.get()!!.indexOfNextChunkToUpload
+): Boolean = chunkInfo.get()?.let { index.get() < it.indexOfNextChunkToUpload } ?: false

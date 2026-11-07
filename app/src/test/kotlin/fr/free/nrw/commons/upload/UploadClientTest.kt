@@ -294,6 +294,33 @@ class UploadClientTest {
         assertEquals(filekey, result.values()[0].fileKey)
     }
 
+    @Test
+    fun uploadFileToStash_handlesNullUploadResultInChunkInfoGracefully() {
+        val mockFile = mock<File>()
+        val chunkInfo = mock<ChunkInfo>()
+        whenever(mockFile.length()).thenReturn(10)
+        whenever(chunkInfo.uploadResult).thenReturn(null)
+        whenever(chunkInfo.indexOfNextChunkToUpload).thenReturn(0)
+
+        whenever(contribution.isCompleted()).thenReturn(false)
+        whenever(contribution.pageId).thenReturn(pageId)
+        whenever(contributionDao.getContribution(pageId)).thenReturn(contribution)
+        whenever(contribution.chunkInfo).thenReturn(chunkInfo)
+        whenever(contribution.dateModified).thenReturn(Date(System.currentTimeMillis()))
+        whenever(timeProvider.currentTimeMillis()).thenReturn(System.currentTimeMillis())
+
+        whenever(contribution.localUriPath).thenReturn(mockFile)
+        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize)))
+            .thenReturn(listOf(mockFile))
+
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(uploadResponse))
+
+        val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
+        result.assertNoErrors()
+    }
+
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()
 
     private fun RequestBody.asString(): String {
