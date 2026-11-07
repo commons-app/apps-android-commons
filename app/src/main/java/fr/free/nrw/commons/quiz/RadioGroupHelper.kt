@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.RadioButton
-
 import java.util.ArrayList
 
 /**
@@ -12,7 +11,6 @@ import java.util.ArrayList
  * that at a particular time only one of them is selected
  */
 class RadioGroupHelper {
-
     val radioButtons: MutableList<CompoundButton> = ArrayList()
 
     /**
@@ -31,7 +29,7 @@ class RadioGroupHelper {
      * @param radiosIDs
      */
     constructor(activity: Activity, vararg radiosIDs: Int) : this(
-        *radiosIDs.map { id -> activity.findViewById<RadioButton>(id) }.toTypedArray()
+        *radiosIDs.map { id -> activity.findViewById<RadioButton>(id) }.toTypedArray(),
     )
 
     /**
@@ -53,9 +51,10 @@ class RadioGroupHelper {
     /**
      * listener to ensure only one of the radio button is selected
      */
-    private val onClickListener = View.OnClickListener { v ->
-        for (rb in radioButtons) {
-            if (rb != v) rb.isChecked = false
+    private val onClickListener =
+        View.OnClickListener { v ->
+            for (rb in radioButtons) {
+                if (rb != v) rb.isChecked = false
+            }
         }
-    }
 }
