@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:0144bd19da06578c4c45118e5ee05307cd7bbc3a0b21757ddd57ded10ab80da2",
+  "claims": [
+    {
+      "id": "claim_62033fe7a28c4f5497f3afb0399a91af",
+      "statement": "The prod and beta flavors in one tier dimension differ through BuildConfig fields (API host, account type, content-provider authorities, depicts and creator properties) and application id, so both can be installed side by side.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L124-L135",
+          "version": "repo-lines-v1:sha256:ce1ee5c634ae4d559cc41916f151345e285eaebe1c5923018c07e69cf119979e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzNzI5MjkwMWUxZjI2YmNmNGU0MTA2ZGExMGMxYTgzNDc5YTdmMDVhNjJjOTM5Y2JhMjExODdmY2U1ZWQ4NzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlMjhiMWQwZmFjMWJiODBkNTdlNDE4NjYyMzgwMjgyZDk4ODUzNWE2MzU2NDMzZDM2ZmMwM2NmMGE3N2ZhMTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwYTEyOWE2M2VjZWRkMTZmODRkNDUxODc0YmUzNDdkODJmNjQ1ODRlMWVmYjY0NDc3MTdlZDg3Njk2YzczNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxZGMyMDY4MGJiOWM5OGU5YWNhZTNhYzNlYjRkZTczZjVkZDM1M2RiNzNiMTBlM2QyM2M3Yjg2MTZiMDNkNzUifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L205-L230",
+          "version": "repo-lines-v1:sha256:1ef5a807089cbbe3e853819698274b1ddc05fef4e4f85d45b0d580c892793d1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1MDBkNmZkOWQzNjg0NThiZWE1OGMyMmNiZGI0M2ViNDUyNmM4NDg3YTNkMWNmNDUzOGI5ODZkZjc0NzI4NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZTkyZDBkZTFkNDY0ODYyNDJlMGEyYjVlYjczMjZjYTU2YzM4MGFiMzZkYTIyM2NiYmM2ZGNiNmVmOWEyYjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmZmZmNzMzNzYyYzQyMzQxMzA2ZmE2ZDcyODJkY2ZjMzQ5YTliYzk1YTA0NDlkNTdlZWQ5ZDJmNzI2MmVkNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5M2E0NDczNmZlZGFjYWY1YzE5ZWYxZTVhZmQ2MzE0ODI5NGYzZGY3MWY2NmE0ODhlZmI4MzU3MmRlY2QyYWEifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L263-L302",
+          "version": "repo-lines-v1:sha256:af02b5bfd6d144b8ad884add816422aa4e73463f187fc7eab164f487589e46e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhMGMxYmEwOGZlZDU1ZWZmYzBlNThmODYyZjg4MDdmZThlMDRiZTBmODFiMjEyMTY3OTFlZDU0YTJmYzJhMjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2M2VkYzA1Y2Q3OTdlNjJmOWQzZjJlYjVlMTA3NzBjZTU3OTMxZDI3NDM0MzJhYjJjNWEzZDk2MmFhYmM1ODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmMzI0NDVhZTA5ZTIxMTgxMGRjMjIyZDY0YzVhMjI4M2QzMjg4NjE1ZTA0NTdkYzJjYTY4NDhkYTA5ZGMwODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlNDZjZmFlODJmZWQzMGU2MDdiOTQxMzYxYjM0NjEwNzQzNWQwM2Y5NmUzNDVkNTIzN2RjZjQ3NTQ2YmFhZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c186fa8321a545ae984f8612e3332073",
+      "statement": "The release signing config is populated from environment variables only when CI is true and play.p12 exists, which also gates the Play publishing plugin; otherwise release builds are signed with the debug key.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L44-L50",
+          "version": "repo-lines-v1:sha256:763b44469c5116f90094a67550f7dc9c9c83924058f416007743272a6c82bd7e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMThmYWIzZTMzNzI5Y2JhMzM4OGFmZDEwYTU1MDRlNzFmYjYxOTBhYTQ0Y2NiMDQyZGE5ODU2NTUwZDEwZWZjNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODM5ODMxMjIxMDIxZmJkZTUwNjg5NmY3Y2U3ZGM2NzgxMGExYTM3ZDE0NTI0NzNiMWM3ZTBlNDQ1NGI4YjM2NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzM0MTg2NTY5ZjlmZGQxYjJiNDVjNWNlMzk0OGRhM2YxMjRiOWYyOTY0OGRiMjY1MzcxZGEwOGFlYTU1ZDA4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNjY2NkYTAzYWYzMzVhNzQxZmY5NGUwY2RjMGY3ZmUwZTE5OGRjMTQ4N2EyYzM3OTEzMDk4YmVhYzUwOTI2MiJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L92-L122",
+          "version": "repo-lines-v1:sha256:bd9ab899de36548acabe79cf57ed02906f9841d0853d8074aeabf68c800a4e45:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmM2UzN2Y2NzljZDY2NzAyYjcxZjNmOThkN2IyYjYyZTAwMGEzM2FkYjQ4OTE1NDdjNjZhOTJkNDEyNGIxNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJiYzlkYTYwOTVhOGZhMDgxMzI4YjBkMTY5YjExNGJjOWRjMThlMThhYzQyMjdhMGMwMjIxYTczNDMwYWE5YmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a0f2d8b3cc6e4369b1fa85af70083cbc",
+      "statement": "ktlint skips files in ktlint-legacy-files.txt, detekt uses a baseline and detekt.yml, and lint does not abort the build.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L22-L40",
+          "version": "repo-lines-v1:sha256:a1a0401634b618a73205889c417db60874c41d9e6da719033bbadaf9879bdbca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkZDhhMGM4Y2E4ZThlMjY1ZTVkYmNjYTk0N2RjZGIwMGRkNzhlY2ViZGU1ZDViMjNjOTk0NDc0YzI5MDA3NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNDE4NjU2OWY5ZmRkMWIyYjQ1YzVjZTM5NDhkYTNmMTI0YjlmMjk2NDhkYjI2NTM3MWRhMDhhZWE1NWQwOGMifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L330-L333",
+          "version": "repo-lines-v1:sha256:e7c6dbd1d1a1576003d6e89457bd56a8fa72f2431d345c228dcb8ceb87fc17df:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDE2ZWI0NWExMmEwMTRkY2E2OWQ3NjY5ZGI3Zjk1YTIzNGUzMjI1YzZlNDY3NTlhZDUxYTA2OTg0ZDg4NjkyMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg0NzI1MTc5Mjc1OTUxZWQ3OGY3NjdiNmZjNDQ1YzIxZDhmMDc2ZDg0ZDYzNzY5YjJhMzY0MjAyZmJhYzhkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjAwOWQzMjFiMzE5Y2MyNzQyOTNkZDkyZjE3MWE4YzA4MDZjNjg0ZGMzODIyMWQ4ZDIzMjZlYTQ3OGNjMjk3MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5fc8310f3b17486f8c87284013fd22dd",
+      "statement": "The connected Beta and Prod debug Android-test tasks depend on a disableAnimations task.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L521-L531",
+          "version": "repo-lines-v1:sha256:510ad0fade655e135e65ce61076977e4c921ccb95bc0fae31114b127ac5496d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzZDU5OTlmYzFkNzMwNGU1YzZhNzUzZjI1NjI2NTJkMjYwZjlhMDJmNzNiZGNlYzVmM2QzNTg5ZGQ1ZjFmNmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5M2ExZWE3ZDcyNjlmNWQ2Y2M5OWE1OWU0ZWE5NjZlYmYzYmI0YTRmMGJhN2FkNzkyMGYzZjNkMzEwMTRlNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5ZjI1OTI0ODJiYTE0OWE3NDc1YmU5ZmIyYjI5ODM3MTEzZTcwMjFhOWZkZDEzOWU3MWQxYmEyYTdhYjRhNjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3332cfd9095a4df8bc7c32ccbad6df56",
+      "statement": "The app has one `tier` flavor dimension with `prod` and `beta`; the flavors select distinct application IDs, Commons endpoints, campaign feeds, account types, Wikidata property IDs, and content-provider authority prefixes, while both flavors define the same BuildConfig field set so they can be installed side by side without provider or authenticator collisions.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L124-L213",
+          "version": "repo-lines-v1:sha256:a7c34b4ccbc367cd60589f38c940c0131b68f4298950b679b3feea5d82a12bd8:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzNzI5MjkwMWUxZjI2YmNmNGU0MTA2ZGExMGMxYTgzNDc5YTdmMDVhNjJjOTM5Y2JhMjExODdmY2U1ZWQ4NzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwYTEyOWE2M2VjZWRkMTZmODRkNDUxODc0YmUzNDdkODJmNjQ1ODRlMWVmYjY0NDc3MTdlZDg3Njk2YzczNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjYmNlMDcyNDdjZmYzZmY1ZDcwNmU2YzIwNzA5NTVjNDUzZGZmNWJjYTNkMmZjOWRlMDJmNmIxODZiMzg5MTkifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L215-L303",
+          "version": "repo-lines-v1:sha256:fa35a095017c8124b8b101b37afcbd0605782d746eb98834637352b9ed2a3dc3:eyJzZWxlY3RlZExpbmVDb3VudCI6ODksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZmQwYjg5NDdlYjEzOTZiNzk1NDU5NWRkMTM3MDg5Zjk4MDBlNmYzNzU0ZjhhMjBlNjJkNmRkNTZkNGJkNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YWY1ODBlZWNiMTI1Y2QzN2E4M2RkMzM3ZWNkMjU4NjUwZGIxNWQ1MWFlYmIwNThlZWVkOWQwYTE5NzBiZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiYTUyZjg5MWE0NDM5OWU2M2RkNzYyZTU3YjljODJlYTJhZGU5ZWUxMmNhNmVhZWQ2YzFiYjc1MmM1NDBmMjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc2964389a0b4a16a8984208ba43f111",
+      "statement": "Runtime beta detection is based on `BuildConfig.FLAVOR == \"beta\"`, and flavor-sensitive application, networking, upload, and Wikidata behavior consumes that signal or the generated flavor constants.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L85-L100",
+          "version": "repo-lines-v1:sha256:50312990da363fd95e3f481b711e39daf7ca0b1feb2e5611e4bf1c4e1709bf92:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5NTg0YjM1Mjg2ZTY4M2VmNTE0OTNkNjE5MmYwNjAzZWU2NTFjZTI5ZmViZDMyMzE0YjgzMTU1MTk2OWIyYmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/utils/ConfigUtils.kt#L10-L23",
+          "version": "repo-lines-v1:sha256:46b8eec55e378825d55b167d7e29a3aca32fcfb2d6eec527a01d42e6c52948ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYzEyYWFjNWRiY2Y3M2ViYmYzODcyMjRiZmM3Y2ZlMDE1ZDljMjIzNWVhMTUyOGRjNDhkNzZhNmM0NDQ0MzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjYWJhNWI4NjIyOWU5MjlhZTM4ZGQ4ZjhkM2I2YjcyMmJjY2RjNDFjY2MzNjQ0MzdhYjFjZDllNzY4MzNmZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhMGZlMmEzMWNlMTk1YmU4Y2JhMDI0OTI1ZTA0YTg5MjU5NWRjM2Q2ZGZiMWIwNGIzMzYzN2JlMTI2N2UxYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/WikidataEditService.kt#L52-L92",
+          "version": "repo-lines-v1:sha256:aace5ac717bdd7d469a4f5781b3826b64078b9606868e5f88a455ed324690de9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3MGM3YmY3MDEwMTViNjc5ZTIwNGRjZDM1N2ZlYTM4ZWYwMTE3MGZlNWIxMGE2NTI5OTg0ZjljMjdhZWI4YzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxOGFlZTMzY2U2YzhkYjVhYzAyZTE3NGVmNmYxNDM1NjlkM2NjYWU3NGVhN2RjNDRhMGY1OTE0NjBiZTQ2MjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YzQzMThhOTIwNWNiY2Y0NDBmMjQyYmMzYTNiMjJjODY1MTY3NzI0ZjM3YWIyZDZkMWFlN2VlN2JkYWIzNWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkOTA4ZTQ0ZDk1MDE3OTYwMjI2YTJiMTg1ZmQyNWU2OTExMTc3YmNiMjU5YjBjMDgxN2Q5NmZlOWZhODM4ZmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1b77825599ce43a686c35699dd16cb5d",
+      "statement": "The debug build type disables minification, appends `-debug-<current git branch>` to the version name, and enables unit-test and Android-test coverage; release enables minification with the default Android rules plus `app/proguard-rules.txt`, and release signing defaults to the debug key.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L93-L112",
+          "version": "repo-lines-v1:sha256:3d6a3f829f78ed55f4a87fc7330a0ea41d23f8839e6256f5aba71c5943706f82:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzYWFlNDUwMDc1NWYyOTE0OGFjMzFhZmJlMDllNjQxYjgyNTljN2RlYmUzMWM3ZThhMDExOTgzNGI0YmM4ZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjNDY1ZWEzYzkxOWUyZGQ3NDAyNTRiZWJiOGMyNGY0NTZmYzkwOTIzNzhkNWM2NDI2ZmJjZDI4MmNhNWUxOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_655d67c6822044678887c35bb2fc7d17",
+      "statement": "Shared Android build defaults include SDK 36, minSdk 21, versionCode 1067, versionName 6.8.0, multidex, Java/Kotlin 17, generated BuildConfig, view binding, Compose, and archive names based on version name and the current git branch.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L305-L316",
+          "version": "repo-lines-v1:sha256:e70ef260cb9069a3d58ae0c942c25a232b3b77fc7423db8a2d49f3d80cce584f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiYWNjNTJmMWFjNTA0NmUxOGJhMzZiZDNiMDFiNDM4ZDVmYWIyOTczZGRiZTUzYzFjYTBlZTJkMTRiYzE1NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1MWY4MTc3ZGJjNzlkZjQ5ZjE4NGVlMzZhZDcyOTk3ODVlODNhYmUxZmIwNzk1MmJkYmZmOTU3MzkxYWY3M2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxZTBlNmJiNWZiNjMyYWRmYzk2NDBjZWJhODllMTUwNWQ0NjQyMjNlNDNiNzMzMjAyYzYwZmFiNmM5Zjc3YzgifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L48-L68",
+          "version": "repo-lines-v1:sha256:5ddc2b3e9ec32a9bef191af4dfbcd0685c692df5375ac98228e26f4ba95bdc85:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3MzM4MTNlNDAxMmQ3MmRlZmQxYTIwMmEzMDU3YWRjMjI2Mjc4ZDUwYzg5Njg2NjQxM2M5ZGVhNGVhNDQwOGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxODEyMmE1MTA1NTU5YmE5OTBmMDIyMWUyNjEyYTdlNDRlNzZlMGQ0NmQ3NDNhNmU5ZGViZjA0YjA5NGViNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjNTFmMzcyYjFjNTg0NDUyZDM0YzQzOWU2YzJiZjQ1MzJjNTQxN2FhOGFjOGJkZTRjMTE1ZmY4ZTQ0NTUxYmUifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L574-L584",
+          "version": "repo-lines-v1:sha256:c962814b187a39caa44df905b3a3b2b276eada0f77802e56a0fcdc40bc05cab2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5NTc4NjA1YTVhZWMwM2JmYzk2MWRmYTAxYmJhY2YyMDYzZGQ5MzU1ZDc1OGMzNzYzMWJlN2NlM2FlYTE5ZjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYTRmNzljZjFkZWQ5YzYwYjU1MDQ5NjA2YzUwYzE4OTI4M2VlNDg4NmE5MTVmMTE2ODc1NTU3YjQ1YTBmNjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f57bed32548d464a89cd157587f9e0f9",
+      "statement": "Release signing and Play publishing are enabled only when `CI` is `true` and the repository-root `play.p12` file exists; that gate loads the release keystore and sensitive signing/publishing values from files and environment variables, while other release builds remain debug-signed.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L42-L46",
+          "version": "repo-lines-v1:sha256:93a274fb67a76d4b3b81776360f16d54c78efbbaa83905627d3168acdfe2318e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQwNWRiMDQ4ZDBlNjRhNmE2NDQ3OGUxMzQ1NjEyNTc0ZGQ4NjdlYWExZTdlYmY5MTg5YWU4OTFkMzIyZmI0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDBmNzU1ZmYxZWI5ZDg4OWNiNDA5ZmZiYWQyMWNlOGM0NDEyYTNiM2ZjMTY3NTBhYmVmMTc3MDdmZDJhMGJiOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWEwYzJkMWVlOTg4ZjkyN2U5ODk4NGMxMTY4ODcxOTk0YjQ4MGNkMmM4NDA1NTE5NDFlZGVmOTJhMTFhMzU5MyJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L547-L559",
+          "version": "repo-lines-v1:sha256:6cfb1d962fee2985fe6ee3e00325ce03bf1f93e408f1a9b11a176ccb53f13f7e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZmFiM2UzMzcyOWNiYTMzODhhZmQxMGE1NTA0ZTcxZmI2MTkwYWE0NGNjYjA0MmRhOTg1NjU1MGQxMGVmYzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhN2NiNzE4NDA0M2RhN2NjNzlkYWNlYTMzYTY5OGZhMWU2NzExOGFlNjcxZTY3NDcyYWI2OTU3NjA0NDczYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3Y2QyNjI4ZGJhY2QyNjcyODQ4YzFjMWFhOGUzZjg4MjFkMWIxMzQyNGExMWMwZWVmMjRiMzYyYTZiMzVjNDkifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L81-L103",
+          "version": "repo-lines-v1:sha256:ca7c4a9e71f473fe0ddede578dbddca40af7f1c1a4e85f2fbc9d9832492f5d99:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMDQ3NGJmZGJkYzQ5YTNhMzhiMzUzNDNlNGU0MzlkMmVlMDg0OGI1MWNkNDkzNDNjNWEzM2UxY2JlOTlhY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0MzE5MGRjMGI1MGI3MGIzZjk0NDE5MTdmY2ZkOTZjOGYyMzlhODgxNGVhN2U1MWE5ZWJiZWFiMmQ1NWY1NmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae00aed6e6d648c0a45d062214486c68",
+      "statement": "Both product flavors read test credentials from root `local.properties` during Gradle configuration and embed them as `BuildConfig.TEST_USERNAME` and `BuildConfig.TEST_PASSWORD`; the properties file is opened unconditionally, and connected-test helpers reject empty or `\"null\"` generated credentials before login.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L208-L212",
+          "version": "repo-lines-v1:sha256:bbf890c9c0cd500e375f0858d2561723b94379cd8cf4eb3a95c83e5c3ddbaabb:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZlM2IyNjQ3ZTg5MmViMTAxY2Y0OWRlYjU2NDRjOWYxNzBiM2ViZjA5MzA1NTk4OTlmMzk3NjdlMTIxN2UwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjIxZTUwN2RjMGJkNTFmNDg5NDdhZGNiYzBhMjk1OGYzNDYzOTBlN2E4MmMxZjZhMmYwNmRmYWNlZDQxNzc5YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTRjOTc2ZDAzZDEwMzRlODc3NjhmMTE5NGFiYzEwNzkyNjI1ZWFjNTkzZjM3M2NhNDU4OTY4MjFiOTIzMmU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzQ1NjcxNjgyNmM4N2I3OTZiYWI4NGUwOTY0MmE2ZjBjYTU5ODRiN2RhNmUwZjk1MzE1M2U5MzlmNDU2MzllOSJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L298-L300",
+          "version": "repo-lines-v1:sha256:a46bd331b001d6ca8b8374521fdf13dd84534d8c836ef15f0897e51d710fcccb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZlM2IyNjQ3ZTg5MmViMTAxY2Y0OWRlYjU2NDRjOWYxNzBiM2ViZjA5MzA1NTk4OTlmMzk3NjdlMTIxN2UwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGZkN2JjMTMwOWI2ZDQ5ZGI5MjI2MTdlMDcyNDkxNWNmYTcxY2EzMGI5OWQyYTAzNWYwODljZmE3N2NhODA3YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTcwMWExZDUwMGI0YjJkOWZhY2E0NDZmMWVhOTg5YmQwZjhjMGNiMTQwMjFmYjhhMGEyNGM1MTdmMDcwZmUzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTRlMGNlNWJmMzM0NzhhM2U3YTFlNzVmMWJjZTVhMTgwMWUyNzFjMGRjYzlmNjk4ZDUxNTVlNDE3OGI5YTQzYiJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L533-L545",
+          "version": "repo-lines-v1:sha256:ab99538e4abb77ce7de941db2a9aff048374a785c3a81ec47455466018d4b7de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMGEzMzBjODc2YmE2YmY4OGVjMzY4YmZjMzIwYmM4MDAyZjQ2MTFlMTNkZmQxZmY2MDNmZjY5ZjYxZTYwMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiZGY1ZmY5MTBjYTk0NjIzNWRiNmFmN2NhZGE5YjRhNzhiNmVkNjc4NGJhNDYyODZmNTUzZGY1YTcwZmI2OGQifQ"
+        },
+        {
+          "resource": "repo://app/src/androidTest/java/fr/free/nrw/commons/UITestHelper.kt#L162-L178",
+          "version": "repo-lines-v1:sha256:41d9b56c6bb85f39032f16c4de4ff9f4a9facd6baf9342aab25391860a42c6c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5ZDY1OGE4MTc2YjliYWIwODdjOTViMTA2ZTY5Yzg4MGNkMWQ4ZDc0ZDg4N2VkODg4YjVjYjk3OTgyYTc3MjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyYTlhZTYzMjkwZGY5MzBmM2Y2YWM3MTI2NzhlMjEwMDdhZjJiNGJkMjY1YjAyZTBhNDY4ODA4NGVlMzNkZGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a01a1e000ef945fab76b928b5cfa29ad",
+      "statement": "Configuration precedence is split by owner: `defaultConfig` supplies shared Android defaults, product flavors override the application identity and generated endpoint/property/authority values, build types add debug or release behavior, local.properties supplies only test credentials, CI files and environment supply gated release signing/publishing, and Git metadata supplies commit and branch stamps.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L124-L303",
+          "version": "repo-lines-v1:sha256:c458e0fcdf8c4e70295c6956ea9b8ea121f91d095ce83ed87039ea98afe896f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2MzcyOTI5MDFlMWYyNmJjZjRlNDEwNmRhMTBjMWE4MzQ3OWE3ZjA1YTYyYzkzOWNiYTIxMTg3ZmNlNWVkODc3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJlNmIwNDQ5MTQ2OTcyMmU4MzYzYTk0ZTQwNDQ1MzhlMDEzYTJhMjE3ZTM2YjFlNTY4YmE2MGFjYjdiNGM4ZjJlIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4MGExMjlhNjNlY2VkZDE2Zjg0ZDQ1MTg3NGJlMzQ3ZDgyZjY0NTg0ZTFlZmI2NDQ3NzE3ZWQ4NzY5NmM3MzU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJiYmE1MmY4OTFhNDQzOTllNjNkZDc2MmU1N2I5YzgyZWEyYWRlOWVlMTJjYTZlYWVkNmMxYmI3NTJjNTQwZjIyIn0"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L48-L68",
+          "version": "repo-lines-v1:sha256:5ddc2b3e9ec32a9bef191af4dfbcd0685c692df5375ac98228e26f4ba95bdc85:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3MzM4MTNlNDAxMmQ3MmRlZmQxYTIwMmEzMDU3YWRjMjI2Mjc4ZDUwYzg5Njg2NjQxM2M5ZGVhNGVhNDQwOGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxODEyMmE1MTA1NTU5YmE5OTBmMDIyMWUyNjEyYTdlNDRlNzZlMGQ0NmQ3NDNhNmU5ZGViZjA0YjA5NGViNjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjNTFmMzcyYjFjNTg0NDUyZDM0YzQzOWU2YzJiZjQ1MzJjNTQxN2FhOGFjOGJkZTRjMTE1ZmY4ZTQ0NTUxYmUifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L533-L584",
+          "version": "repo-lines-v1:sha256:d00fe14b7d0e0f00771d31c888606105b3ca76e8460494e5a07b71b1aaf6a5c5:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMGEzMzBjODc2YmE2YmY4OGVjMzY4YmZjMzIwYmM4MDAyZjQ2MTFlMTNkZmQxZmY2MDNmZjY5ZjYxZTYwMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L93-L112",
+          "version": "repo-lines-v1:sha256:3d6a3f829f78ed55f4a87fc7330a0ea41d23f8839e6256f5aba71c5943706f82:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzYWFlNDUwMDc1NWYyOTE0OGFjMzFhZmJlMDllNjQxYjgyNTljN2RlYmUzMWM3ZThhMDExOTgzNGI0YmM4ZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjNDY1ZWEzYzkxOWUyZGQ3NDAyNTRiZWJiOGMyNGY0NTZmYzkwOTIzNzhkNWM2NDI2ZmJjZDI4MmNhNWUxOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae6fca1cbef844198f4d9646e9224999",
+      "statement": "Ktlint excludes paths listed in `app/ktlint-legacy-files.txt`, Detekt uses its project configuration and baseline, and Android lint is non-fatal with MissingTranslation and ExtraTranslation disabled.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L16-L40",
+          "version": "repo-lines-v1:sha256:4e1ea9dba03d5edca06ce117a55562cfd3ef2a38e5f63543f575b76e79bf33fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyZGQ2Y2FhNDkzYzVmNzlkNmE0YzYxZjdiMDJiMDc0YWI2ZmNkNjc5ZWJiNTcxN2VhYTA3ZGY4ZjRiZmNhOWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MzUzZTYyYWM5MGViYjI3ZjFkNThmZWY1MmExNzFhMzAwNDE4MmRjYmQ3NTc5ZDM4NmQ5MmU0MDI2YmE0MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNDE4NjU2OWY5ZmRkMWIyYjQ1YzVjZTM5NDhkYTNmMTI0YjlmMjk2NDhkYjI2NTM3MWRhMDhhZWE1NWQwOGMifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L342-L345",
+          "version": "repo-lines-v1:sha256:73f4cb624c75082d3bef1f4907204591a233ecc400700595a9c75eddea2097a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDVkNTk2ODgzZmZjZGIyZjQ3ZDk1NzllNmNmMGNhZmI3M2RkZjJjYTA1ZTFhZTRmMzNmZDY1ZGFjODVmMGE0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2VjYzM3ZTg1MmY0MjcwNGQ4NmFhYzFhOTJkMjFhYTJhMTJmZWRhZWVjMjViOWZlOTFiMTY4YWUyYWNhODhkZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWZhYzljNGViYjBmZTMyMzNkYWJiMjg1ZGRmYTNlNTY0YTJiMThiOGQ1MWVlN2RhOWQ0MTQ1OTRjMDk1YjA5MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_00bde3179b914960919f4773be4cfd04",
+      "statement": "The connected beta and prod debug Android-test tasks depend on `disableAnimations`, which uses adb to set window, transition, and animator scales to zero; test options also disable animations and pass `clearPackageData=true` to the instrumentation runner.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L332-L340",
+          "version": "repo-lines-v1:sha256:5be103acc4595a3a1f59ff9260760a62ffbf7e61471b6596b1006f11f9ad6d06:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDRlYmJhYTg0Njg4MmFmMWY5MjM0MDA1NDI0OTg4OWVmNGE3YzJmNDU3MTg3NWY1ZTU2ZmQ5NDNlM2RjMzI4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzNiNDJlOWQ3YjlkZDk5ZjE3NTJjYmYyYzc3NTllN2QzYTI5YzhmZDMxMTBmMjc5M2I5YzYzNDEzZDcxNzgyMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTVkNGNmMWRlZDRjMDdmZThmNzdlN2JkZmQ1YzI5MThhZjY3YTBiMDZjZjU0YzhhMGNhZDQ2ODBlNzFiYzA0MCJ9"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L514-L531",
+          "version": "repo-lines-v1:sha256:8bc6809b6370e79b1536826d7536e9e86e00154992fa7b42d2f9cd48f8a3d194:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExOTI0NzI2OTM4YTY0NTU1ZGQyOTRhY2JhODdiYzU4Yzk3Y2VhMjVjYmNhYjEyN2NhZWVjNWY2MWNhMzc2YmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5ZjI1OTI0ODJiYTE0OWE3NDc1YmU5ZmIyYjI5ODM3MTEzZTcwMjFhOWZkZDEzOWU3MWQxYmEyYTdhYjRhNjAifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L59-L61",
+          "version": "repo-lines-v1:sha256:5a61dab2acff3570575b22dc0f752f57eeab1cd996de29522712a2d979d708a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDc5MWQzZjkyNzhjNzI0ZTVjYWIwNmVhMTAwOTBkYmJlNzYwZTQxMzM1ODQ4MmUyMmMwNmI0NTRkYWM0MjE5MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzVkZTg1N2JmNTc1MzFjZjkxY2FlMWI5YjYxODYzOGJhYzA3MzNmNmExOGQwZmJlZGQwYzQ4ZmQwMzUyY2Q2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzM1ZDMyYTBjZDk2NmMxMDU0MmFkMDgzMzdkNDVlZWRjOGU1NmZmMjZkZDk4NzdlOWE2ZWI4MDdmZTllNjJhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzlhYjQzYmQxOTlmNWQ5MWY3ZWExMmRmZmQ0ZmMwZjc0ZGU5ZGY2NDYyYWY4NGZiMGQzYmNkNDJmOTc3ZTEzMSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}

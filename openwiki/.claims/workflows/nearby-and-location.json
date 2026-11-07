@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:01dbeee4cfc198d7f916c7a8edd813d7bc83026d47c4b142d0dab03de8cdb623",
+  "claims": [
+    {
+      "id": "claim_f2c4af0e803e410a93b95fed0e1c1aa0",
+      "statement": "LocationServiceManager classifies each new fix against the last one via isBetterLocation, producing a change type that drives how Nearby refreshes.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L123-L160",
+          "version": "repo-lines-v1:sha256:c491b1280dd21658a6cb57f26cae9a04b40a26951ecd55411e4384883e2e3388:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2OWEzOGFjYmE2NGVmMzZkYmI1NmY4YWY0NDY1MWQ0MzhlMGY3ZWE2NmZiNTFjZDFhMDZjYTUwYzI3NGQ2ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2ZDk5YjM2N2I3ZGNkZWJiN2MwYjhiODg3ZTEzN2E0ZDdmNDUzZjI4Y2RlMDNlOGYyMjZkNjhjZWZiNzI5NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5NDQ1MGQ3Njg4ODQ1ZGFjYTIwZDI1ZTA1YjllZjg2MDIxMmI3YzkyYzZhYzIxMGMyZTNkMjA5YjI5MDg4ODEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L195-L215",
+          "version": "repo-lines-v1:sha256:266acf6113218c433502b701375ec135347776b5de72412b83095259ff2ad8fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhOTIyYzRmODk2ODVkYmMzNjRlNTJiZTY5N2U2YWRiNDYyMDU3NjBmODY4Y2M0NTJmYTMxYjJiMWRjZTA2ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyYWIwOWFlMTdhZmQzYjQzMmE0OTAwOWM4MWJiMWYzZjAwYmVmYjIwODQ1MzIzYWY1ODVjOTEwOGYyMmRiOWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff42d79269d94f7a90cfd0023d2bea00",
+      "statement": "NearbyParentFragmentPresenter.updateMapAndList skips refreshes when Nearby is locked, offline, or lacks a current location, so lockUnlockNearby gates concurrent refreshes.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L229-L312",
+          "version": "repo-lines-v1:sha256:05db5f7cf1e0b69c367bcfbabb5e479d48a407cec7c8d3e1fe5c415b9e96b86e:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3NjZhNzkwNTc1YjUwOWY1MWM4ODQ4ODVlYjY1NjkzOTliMmEwNzUzZWM3ZGQ1NWE4YTI1NWM3YzI2MzZhMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5ZmNjYmJlMGExZDliZTY2YjdlODZjZWQ1ZTFlNTA0MjM4NTFjM2I1N2MyYzNjOTdmNTYwYWM5N2Q3NDJlMTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4NDY1MzFmNWE3ZjVjOTM1NDZjMjgyODkzYmEzOGZmZWRlYTkwODdiOWJhNzQ1MmZjN2M0OTU3MTljOTA2YzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5MjlkNDM1NzRkNjM2OTZmZWRhMDQ3NTBjMTZiZjgxOTVjMjUxNDBiYWMwNDExMDI1ZDliMzdlMzFiNTdjYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_148a6f7ba7004af48a2dffabcb3e09c2",
+      "statement": "NearbyPlaces.radiusExpander widens the Wikidata search radius until enough places are found or a maximum is reached.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyPlaces.java#L22-L95",
+          "version": "repo-lines-v1:sha256:25fcd2c79960ad4ed2d7b27ccc49a64041b6b20975cbd1933cfcb3477ccfa881:eyJzZWxlY3RlZExpbmVDb3VudCI6NzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZTNmNmQzOWQ0MWYxMDVmN2QxZDBlMzU0NGQxM2Y5YjU2NjhkOGZhYTYxZWQ3NzMyNDJkOTRjOWUyNjA1MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxNzA3MmYyMTdkYjFlYzJjN2I1YjBlYzY5NjRiYzUwZGNhODAwMzAyOTI4OWRhYTJhNDJhODZkYjVmYmY5MmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzZDQ2NDlkZGNhZjhkZjM0M2M2ODQwYWRkMGIxODEzY2Q1ODk1YmIyZTgzMjYwM2UyZjllMjA1ODU5MGQ3MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxMjE1NWY3Yjg5NmRhNmRjYjU0ODRmNjBjZmFhZjk2ZjU3OTg0M2VmNDM0ODk0NmM2MmRlNjgzOTI5YjhiOWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_37fc3e5f22874b3f8b5ac37c16703841",
+      "statement": "The presenter enriches places asynchronously in batches of 10 with up to 20 concurrent connections.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L631-L682",
+          "version": "repo-lines-v1:sha256:9ea4af5dd23b68c78d0e2fa5d269ff28727422fda6321713c57539bc74817569:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxYmMxNzdlNGNjNWM1ZWYyNmQ3NjMzMWRmYzRjMjVmZjQ1NmQ0MDVlZmY4OTgwNWYxZjExMTRmMzZiM2ZkODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjOTkzZTcwMDNkNTQ0MWQ1OGUwMDM3NDZkMjBmYjJlODJlOTNmMTgwY2JjNTNjODBhNjdjMjk2OTViMmU2NGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4YmQzZWE0Nzk2NWRmZTk4ZDkyOGNiYWRiYTk2ZTllMGIwMDkxMDY3MWJhNjcxYzM0NWI4ZTc3YmE2M2VjMWUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L74-L78",
+          "version": "repo-lines-v1:sha256:481a5c6e783d7b8f9a019518179a32b25563e11463dabc44d90cdf39a3dfe599:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2QxZTFlMjYwYmRhNzcyZmFhOTgxNTVkMzgwOGYwOTVjOGJkMmE3ZTlhNTM2Y2I3N2I5YTQ3YzcxNDQ2MTY3OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTZlYjQ2ZTRmYjkyZGIwMTUwODllNmFhYjQ0ZGM1MTJkOGI2YzVlMmExZGM3ZDg0YjQyZTRjOTQ2MTQ5YjZlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmNiMTNkMDZiOTUxNzAyYmIxM2IyMzMxN2JhOWE3YTk4YTI0YWZiMmQzZDUxNGZiZjczYzI3MWE2MGRiYzRkMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7876c963351d4316a097154cd61c147c",
+      "statement": "PlacesRepository provides the local place cache used for offline marker rendering.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/PlacesRepository.java#L14-L63",
+          "version": "repo-lines-v1:sha256:5561b2f71e90327f571a6a4e394cef34de5d45a8d7d21e0eac2d59adb71440a6:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ4ZTQ4OTIxNDkyYjc2YjIyZmYzY2E5N2QzNGY1ZWM5ZmMxNThjNTI4MDI5NGRjMzNkMDViOWRjMTJmNmU0MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlZjQ0YjZhYzk1MDQ4OWY0MjhjMTI3YzVjNGQ0ZjkzN2Q3YTNjNWI3NDhkNzk2MTk0ZTliZmRlNjNiNzA5MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_832ea5e769a749f4930ddcf6ce9f4050",
+      "statement": "LocationPermissionsHelper separates runtime permission from device provider availability: it requests ACCESS_FINE_LOCATION, shows a rationale after denial, escalates repeated denial to app settings, and offers system location settings when providers are disabled.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationPermissionsHelper.kt#L18-L35",
+          "version": "repo-lines-v1:sha256:12ef7c0aa9e5c4a726853f64cf2a42649737f4d018b07c1e103aa7e63aafeaa1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5Y2M1ZTcwMzIyYjA1MjdmMDE4Y2NjODc4YjIyMjhhYmVmMmRlMjgyOGIzYTRkYWUzYWM4OWQxNjlhNjA0N2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3N2Q3YzAxMDVjYTk2ODA4ZTRmNmE4OGMxY2IxYjg5NTI5MDcyNDg3M2ZhYzdkZWQzNWM0Nzc5NWNkZmRlYWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzNmQzNWFmNDIxOGVkN2FkZjc5NzViY2U1NjJlZGU2NGU5NmMyOTE0OGJhZTJhY2U1ZTQyODZhYmI3MDNhODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0YzBhZjkxZjE0NzhlMDJhNmFjMWUzM2M1MDI3ZTA1OGI4YTNmYmJmZDhkNmQ0YTZlM2JkODBlYTRlZDkzNjQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationPermissionsHelper.kt#L50-L88",
+          "version": "repo-lines-v1:sha256:e116ac272a811dc2821d8fee637b5aaf93887f2b0de86304a520fb98ec3921bb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1MzNiNzdjNDVhZmRiNTU5ZDNiZDJiMTQ3NTVmMGUwNzhkMDY2MDkxMzY1Mzc2N2Y2NjU2MDczNWU5N2Q1MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmZWNjYzE4ODU5NmY4MDlhOTMwYTI5MzY2YThlMmY3ZDU3M2JkODE2NTdiZWRhZDVlOTJkY2FiNzczMDQxNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationPermissionsHelper.kt#L98-L135",
+          "version": "repo-lines-v1:sha256:59e46d5a90bcf83897deb0b1559e98516dc031511f009dbd8bbd8b99cfd4a3bb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYTE3N2Y5MDljNDE4NTVjY2M4Yjk5NjBmNGRhOGJiNGY4MzFmNWVkNGFlODk3YmMwNzQ1NmIwMGVhOGE5MDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZjE5YWNhOWY0NjczNWQwZjk0OTMwNjg1MGQ2NWVhOWYxZGYwODAxYzU4Zjg2YmI4YWQ2ZjQ1YmMwNTNiNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4a6a44277c943139a8525bbbb56f663",
+      "statement": "LocationServiceManager owns network and GPS registration, selects the most accurate enabled-provider last-known fix, and classifies accepted updates into significant, slight, or no change using recency, accuracy, provider, and distance; Nearby uses these callbacks to distinguish place refreshes from user-marker movement.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L123-L160",
+          "version": "repo-lines-v1:sha256:c491b1280dd21658a6cb57f26cae9a04b40a26951ecd55411e4384883e2e3388:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2OWEzOGFjYmE2NGVmMzZkYmI1NmY4YWY0NDY1MWQ0MzhlMGY3ZWE2NmZiNTFjZDFhMDZjYTUwYzI3NGQ2ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2ZDk5YjM2N2I3ZGNkZWJiN2MwYjhiODg3ZTEzN2E0ZDdmNDUzZjI4Y2RlMDNlOGYyMjZkNjhjZWZiNzI5NzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5NDQ1MGQ3Njg4ODQ1ZGFjYTIwZDI1ZTA1YjllZjg2MDIxMmI3YzkyYzZhYzIxMGMyZTNkMjA5YjI5MDg4ODEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L203-L215",
+          "version": "repo-lines-v1:sha256:e0da21ae1d3d233a2172ef04c75c74a68d6d39edfc82603856654939e203c828:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM2YmIwODVjNWViNmM1YjAzMGMzNjk4NjVjMjc5OGJiMzQ4N2JhN2ZjZjJhODMwODQ0YTE3OTAzZGNhN2U3NTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxMDJlODE1MWRhYjZhZTA3YjJiNjY4NTQ4OTg1NzJiOWU1ZmFmMGZiZmRlODQ3YjQyNWQwMTE5OTg3YzAwZjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyYWIwOWFlMTdhZmQzYjQzMmE0OTAwOWM4MWJiMWYzZjAwYmVmYjIwODQ1MzIzYWY1ODVjOTEwOGYyMmRiOWMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L35-L74",
+          "version": "repo-lines-v1:sha256:d6b0b1d7015bafae3796c9763852379dd4f085a84733efaa13d69417c68b6299:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MjBkNDA0NzU3NGY3N2YzYzdiOGFkOGQxYzBjODkyZWFiMGU5ZmI3NDBjODU0NGEyNTdiOGJhYjIzMTJiY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MWRlNjhmNjdmYTk3Y2IxMDEyMWExY2EwOTViYmIyYWZmNDAxYmQ3OTNjODc0Nzc3YjQ2N2FlYWIwYjA3ZjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjNWYyY2E2YzA2YjE4YmRlYmI1ZDYxMWFlMzgxOTBmODAxODE5ZDFmYzRlZTNiY2IyNmNlZTZmZGU0ZDYxMjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LocationServiceManager.kt#L80-L113",
+          "version": "repo-lines-v1:sha256:454a44d5a8317f3069f20be44b8fdf03566643a58b597d6f715a5eee63a900da:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmYzk1YzIzY2Q0MzliNDM4MTBmYzViMzQ4NDZmZWRmODEzNGRhYWQ1MjliZWEwNTBkNDE4ZWMyYWNkMWU4NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZTU2MzNkMjEzMDAwMDU2ZjZhZmE1ZDhhYjZiZDI5ZTFhYTUzZGNlODRkZWJiMzBlMzE4YTU2MmE2N2UyMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkZDA2ZjQ0OWM1YTE4ZTY4ZWZiNmUzYmMwMmQ2YzgzZmMyZDc3ZjA0NDU4MWY4MWI5YTI4MGIyN2E2MjcyODgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L243-L308",
+          "version": "repo-lines-v1:sha256:3b05798ea7f10478dc7d6b25adefad58c25b8c57b0f3edc2a185bcb8f75da41b:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1NmViMWFlOWMyMjA4MzJjNDA5NTA2OTI0YTAzMjQ1OWJkMjE1MzZmMDFmNWJhN2UwN2NjZWYxMWIxOTUyOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1N2JjYTZhMTYzNWU0NjUzYTUzYzhmYTc4ZTg4YzUzYmQyZDNmNjY2YjY0NzQ2NjVmZTMxNDJmOTQxMmQwZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2b244f0437946f29e785ff7d2f21513",
+      "statement": "NearbyParentFragmentPresenter.updateMapAndList is the refresh gate: it suppresses work while locked, offline, without a map location, or immediately after an internal upload; significant/map-updated, custom-area, and custom-query events fetch places, while slight changes do not refetch them.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L229-L308",
+          "version": "repo-lines-v1:sha256:8550f924522831998baaecbf6460a0ce3610d750315b80259b68dcccb9b7709d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3NjZhNzkwNTc1YjUwOWY1MWM4ODQ4ODVlYjY1NjkzOTliMmEwNzUzZWM3ZGQ1NWE4YTI1NWM3YzI2MzZhMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4NDY1MzFmNWE3ZjVjOTM1NDZjMjgyODkzYmEzOGZmZWRlYTkwODdiOWJhNzQ1MmZjN2M0OTU3MTljOTA2YzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L317-L338",
+          "version": "repo-lines-v1:sha256:9abc89e7a3d6ae560e86203db8c5f349fb138076690c6c6166396d69de614f8e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyNTVjOTY3ZTZiMGQ2ZDZlY2Y5YWMyMjZiNjJkZDQzMjYzZmRmMWRkNmRhZDU1MTAyZTQ5ZGYzZWVjZmFkMzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0YmMwY2UyNTg3ZTE2NTE1Yjg5MGYzMjY2OTJlMDE0YjY1MjdjZmNkNTJmYTI3YTgyZDc0MjIzYWUwNzYwMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MTkxZjI3MzMwNzk2YzMyNDI5ZGU5ZmNmMTc1NzVmZjY1YjFjYzQyZjQ2MWFmMDU3ZTc1NjVhOGE3YjZhODEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3788a752da1f416787ba2d733a798f03",
+      "statement": "NearbyPlaces supports expanding radial searches from 0.3 km to a 300 km normal maximum or 5 km closest-result maximum, and its map query chooses rectangular retrieval for smaller areas or a counted radial target of 1,000–1,500 items for dense or large areas; custom queries use rectangular bounds.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyPlaces.java#L121-L188",
+          "version": "repo-lines-v1:sha256:3fb6fd4d5dde3c0c86f822c53d45ce9d349f4ddf559dc6a8ac405203d58c1bb0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmY2I4YjVmZGUxZTk0ZmMzZDM5NTk2YWQxNjUxZDM1ODUyMWY5MGMyYTdhMGRjOTdlY2ZjODJjYzJlYjAzNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3ZWRkYjI3MTFhYzJiMzdmNDUzMjg5ZDY3ZmJmZTUxNDJjMTBjOWQ3ZDdlMmI5ZTlmYTY1NGI0ZTJiNDYwZjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEyOTJlYWJiYmI5OTA0NTE3ZTExNzI1M2JiYjM5NjhkMzA5ZGQ1NjU1OWIwNmM3ZjM3OGMzNmQ2NTg4ZjhmMjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyPlaces.java#L27-L87",
+          "version": "repo-lines-v1:sha256:648b34225fac0bebf0e81bec5c0eeffcab74f3eeca673f70cf39779fccc21eb4:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5N2ZkZDIwMWMyYjRkZTM5M2ViZDA1NDQ5YzVjMzc4Njk2NDYzM2IwN2Y3OTlmZDU2ODhiMTJlYzZiMmE3MTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5NzY5ODI5YzlhYmE3MTMzMDY3ZjBkNGE5Y2Y2NWRmMWMzNTA5NjE5OGI4MGVkNzRkMmI0MzIyZWFiMDZlZTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4OGViMWU1MzdjZjNiYTk5NWEzMWFmZDg2OTI2MzIwZjkxYWEyNmYzNjAxNWIwMjVlNTEzNjhiYjJhYjdjZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6f1d1e0e4de24e23876374b3bf9c1ef9",
+      "statement": "The Nearby controller sorts returned places by distance from the current point, tracks search location and radius, and limits rendered marker groups to NearbyController.MAX_RESULTS, which is 1000.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyController.java#L21-L32",
+          "version": "repo-lines-v1:sha256:92a3c46ee06dcf319da5d701fa3c4f5197f8e023c4c28cb6f4d0b9c3227fe48f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllNTdkN2Q1ZjFiMWM0NTRhM2Y4MGFkM2MyMTk4MjM4ZDIwZGU2ZmJlMGUxOWQzZTcxOTQzZWI0MTA3ODlmNGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhY2IzMDQ5NTcyN2ZjMWYzMTM1NmJmZjM3MTg4ZjAxYzQ2NTcxMmRhNjIxMDk0MGI1NjM5ZDIzMWY1NWNmOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjNTBiZmVhZDQyNjQ2NzZhZWMwOTMyNDg5ZmQ3MTJkMWMxZjBmODY2NjFlNDVjOTgyMmU2MjBiZTZlNjliNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1YWVhOWM5ZjcwZTBiZTk4OTJmMGExNDdkOWM3YmMxMWYwM2NhNGFjYzNjNTk3ODc3Y2M0NTA1MjZlODg5ZjgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/NearbyController.java#L50-L115",
+          "version": "repo-lines-v1:sha256:2633f07e3c18d4e3c98f5db995b73538d92b3ee6ada3e23c1c47498683505703:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxMzE2MjJkNjUwZDRjMDJjMjY4ODQ5ZGI5NTFjMjI4MGEyZTM1ZDNkMmUzNzM5ZmFhMWNlMGVlMmM0MWRlZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiMWFkYWNmMGUyNzFmMDVlYzUyNWVlOWVkYjQ0ODNjNjJjZDYzMmRlOGNlZjA2YmVlNTVkNzk3ZGRhMDE2MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5ZTMwNjIzMGQxYzRhMzExZDY2NjI1ZjgzMjc1ZGE0OWViYjVhOTliNmIzY2E0ZWQxOTQ5NzE5ZTA3OTMzODMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L317-L337",
+          "version": "repo-lines-v1:sha256:d410bfcab9f2a305406853bbc4e6169ff16ca3421fe02e5fc96e2399ddade5f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyNTVjOTY3ZTZiMGQ2ZDZlY2Y5YWMyMjZiNjJkZDQzMjYzZmRmMWRkNmRhZDU1MTAyZTQ5ZGYzZWVjZmFkMzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1MTU4MDhmOTk1OTJiODk1NmUwZTQzNjA1M2RmMWJkOTY5MzJhNmZjNmI5MmZlZmI4OTFhNjJiZTgxMmIxMTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0YmMwY2UyNTg3ZTE2NTE1Yjg5MGYzMjY2OTJlMDE0YjY1MjdjZmNkNTJmYTI3YTgyZDc0MjIzYWUwNzYwMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_516bc77fd7bd42d1aadcdfa8da67f10d",
+      "statement": "Nearby enriches lightweight query candidates by reading cached Place data and bookmark state first, then fetching cache misses in batches of 10 with up to 20 concurrent workers and retrying failed batches item by item before merging and saving results.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/PlacesRepository.java#L23-L62",
+          "version": "repo-lines-v1:sha256:95ca739261ff99fbc80d1823d9f316d077a3e696ba7143bf0236bc3ddb70cc37:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3Njg4YjYxYjZhM2EzOTU5NjliNzQ4MTQ3OGFlMGYxYmEzMDhkYjUzYTBkYjRiMjE4MDMzNDBjMzIwOWJhMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L340-L359",
+          "version": "repo-lines-v1:sha256:427ef5c64fe4aa5366dbe2697ff0143c4c03854c730c912213cfa84993a47032:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkMjRkZmMzOGZlZTE4NTU0YTYwNzM3ZjY0MDM3ZjcwYTgwMWQyZDNhOTNmMDI5NWI3OTkxYmIyMmNlZGZiZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjZWJiZWJjM2MzNzhkMmMwMjczYjhlM2E5NGU5ODMxODk0OTgyMGI3NTc2ZTcxNWZmYTUyYjIxZjM0MmJhMTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwMmJmZjBkZjc5MjFlYTIxZThmN2IyYjhlZmNkYzQ2ODg2M2ZiZTBkM2UxYTk2ZjIyOWJhYjA2ZWM4OTNmMGIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L68-L78",
+          "version": "repo-lines-v1:sha256:8cecc1cd18e9f7d65c8d9140c97a62138a2bb28a64746fb71b77663db8ad2f4b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxMjhmMzM4MmY1NjE5MWFlZGQzNTU3NWFlNTFjN2NmYWZkMGYyMDJkMGM5NmVjMjg3Zjk0OGQwMzBiMDFiNWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxN2NlZWRlZjcwNThkMTlhNTUxNGU2ZWNmYTUxMWFlNjU3NzM0YjM3MjJhODljYjhmOTYzNzc2N2FiZmU5ZjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjYjEzZDA2Yjk1MTcwMmJiMTNiMjMzMTdiYTlhN2E5OGEyNGFmYjJkM2Q1MTRmYmY3M2MyNzFhNjBkYmM0ZDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e24b29e8f2574a8eb129ef63d5333645",
+      "statement": "Nearby failure and empty-result paths restore the unlocked UI state and hide progress, while successful Wikidata results update markers and asynchronous detail loading can render progressively; refresh requests made while locked are dropped rather than queued.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/fragments/NearbyParentFragment.kt#L1888-L1941",
+          "version": "repo-lines-v1:sha256:9e3c77554ba36c0a52f4e08c235e38e2082e8e9d8b8dab131b38f21fdc93d6bb:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5NTU2NmI2MzE3NDRjMWExMGY0YTlkODI4MGQ1YjQzNDlkODc5ZDNlMjAyMGU2OTYzZWZlYzFmMTU2NDU1YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMGQ3NTk1MGRmMGZmOWEzZWU5NjYzOWRjYzhmZjVlYWVkYjQwZDY4MmJlYTkyNjIyYjUyMGRkODg3ZDkzZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4Yzg5YjRiZDc0MDllODdhZDY3MjQ4MTJmYzU1YmE2YTc2NzkwMWJmOTk2YzE1MThlN2RkYzYzYWQwYzlkNzEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/fragments/NearbyParentFragment.kt#L1944-L2005",
+          "version": "repo-lines-v1:sha256:45fc3a0504b4585fd552a16732b2bf9f53a0aeb5042278844168bcba993ce867:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYjlhYzQzNmVhZjE1MzZjMDg4YWQ5NTQ1NDRiZGE5Y2JjOGI4OGEwODQzZjY3NDE0YzczNGJhYTkzMjM4ODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMGQ3NTk1MGRmMGZmOWEzZWU5NjYzOWRjYzhmZjVlYWVkYjQwZDY4MmJlYTkyNjIyYjUyMGRkODg3ZDkzZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmYmEyMTY1Y2EwMGEyMzM2MzJjM2NjNDNmYjZmMDUzM2ViMWY2NjljMDZhNDBkMjEwMjg5MDNkOGU0YzY4OTIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L109-L126",
+          "version": "repo-lines-v1:sha256:260613ef644aad45488dafe18186acc7c1a742d43c43595343c15265d6479094:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDRhNjgwN2RlZmE4NmQxZTc4MGM2MzUxZGQ3NGY1Yjc0N2FmZjg5MzEwNGNmYjQ0Y2IyYmQwNmJkZTVhNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjYmRjZWUwMTcxMDRmZWU1N2M4MGNjMjM2YzU1YmUwMzg5YjAyYTY2OTYxZmEyYTEzMGE3MGExZjNlYjgxM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUyMzhlM2RkYTg2NmNiYWNlMzYwMzQ4MWJiODY4NGZlYTA0OGQ4YjZlYzYzN2Q4YjBjMmVjM2U5MzE4YjM0YzYifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L243-L247",
+          "version": "repo-lines-v1:sha256:a3be508cfcb96e0e1c1f39ab79d1cf22405a801afd1bb1996ad139544b450f9d:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjU2ZWIxYWU5YzIyMDgzMmM0MDk1MDY5MjRhMDMyNDU5YmQyMTUzNmYwMWY1YmE3ZTA3Y2NlZjExYjE5NTI5MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWU3YmNkMzZlZjUzYjQ0NTIzZTY1ZTk4ZDE5NDQ5OTNlMGZmMTc0NmY1NTM2YzFhNTExNzQ2ZjNlMDFlNzU2ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTU3YmNhNmExNjM1ZTQ2NTNhNTNjOGZhNzhlODhjNTNiZDJkM2Y2NjZiNjQ3NDY2NWZlMzE0MmY5NDEyZDBkZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjFhMDg1MWZjNjE3YTliMDk4ZmUxOWRjN2ViYjM5NzgzZjY5ZTkxMjEzZTAxM2MyYjQxNzliZjBjMGY1MmEwYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7bb57db0a7147fb9c032b9b84e62ba7",
+      "statement": "LatLng is the shared coordinate representation: Android Location conversion preserves accuracy, latitude is clamped to [-90,90], and longitude is normalized to [-180,180]; the Nearby fragment converts map projection corners into LatLng and uses a small fallback box when startup corners are zero.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LatLng.kt#L15-L37",
+          "version": "repo-lines-v1:sha256:c52a8307ddb64f2573811a239a3769be488c35cbefc140cc3cc7b38cb1e59cd6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1NTFmZjg1NWQ5ZDA3YzZiZjYwZWU1YmE4YWE3ZWY1YzA1YjMyMGFmNTMwNjMwNjYwNjQ3ODgwM2VjYzcyY2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZjQ2ZDU3NTllODI3Y2NlMTJkMzNhNDE0MTBiMWY0OWJkYjdlMTExN2JhZjdiOTJkMGFiODdjYjEwMmI3NmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI5M2ZiMzExZTcxMTIzYzJlZDliNjY4ZmFjMDFiYTJhYmViZDIyYWRhMzY4ZmQyNWZiNzdmZmY0MjdkMzNiM2YifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/location/LatLng.kt#L53-L60",
+          "version": "repo-lines-v1:sha256:16eff5fa1aa7039f513c949a978cb6151c3bf739c74cffa621b81c8d5bfc8acb:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDA2OGU2OWQ2ZWY4NjhkZGZkZjlmZjg3YTk1NjZjN2IxNWMyYTQ4OGJjNDE0MzY2YThmNjAxMmNjYTI0NDZkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGExYzhkNjUxODEzZDZlOGRjYjMxZTBhODM4MTA3NDEyOGRmZDU2NGJlNDM0Mjg2ODEwMTkwMDM5YjJjYzI4OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjE2YjI3NzY2NjM4MWMzNzJiMjY3YTI1YWYxZWQzMjgxYzE3NDE2NzhkNWJmNjJjZDRmYzIzNmYwY2VjZTYwMyJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/fragments/NearbyParentFragment.kt#L1451-L1479",
+          "version": "repo-lines-v1:sha256:71d8cd47612a9cf882d1504d1824de4024a46b668d633d0720d8b9acf96613b0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMWUxZTI2MGJkYTc3MmZhYTk4MTU1ZDM4MDhmMDk1YzhiZDJhN2U5YTUzNmNiNzdiOWE0N2M3MTQ0NjE2NzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3YWI1MGEwMzQwYzFhODIxM2M2M2NhYWVjNDY5MjlmNjcxNGRjMTc1ZTE3YTc0YTc2YjVkNGNmNDliNmM2MDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlOTY0YTM2ZmFiY2JjNGZjMTBkZTY4ZWIyZmIzZWJkYjM0OTQzOTFlMmUwNTQ4MmJiNzgzNzRjYTdmNDk2MDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/fragments/NearbyParentFragment.kt#L1481-L1516",
+          "version": "repo-lines-v1:sha256:543c9ba06d23652932f52f5984dfb5fdf170f07dfe3e425f47f2d1d71380b22f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZDNhMzQ5Nzk1ODg2NTc3YjUyMzNmNmNlODkwOTZjOGE3YjkxYTE0Njc4M2RmOWZkN2YyNzQ0MTY2YTgxNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMDM0ODFjNTdkMGYwZGMwZjc2Y2QyY2M4YjM2MDRjNGU4Mjk2ZGE0MTIyYWRkMTllODE3NDVkYzdlMzMxYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVhMDgwMzcxM2UwYTEyNThjYjE0MTdiOTFkMDk4NzkxNWM0OTdiMzQ2OGRlMTdiZDEwODM4NDNhMzkwZmI3ZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_565a70771e874c939b14c7e56c839d2e",
+      "statement": "Nearby filtering distinguishes single-label filtering from the tri-state all/none control: unchecked hides all markers and greys list items, checked selects all and filters labels, and unknown leaves the view unchanged; bookmark changes are persisted through BookmarkLocationsDao and reflected in marker state.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L128-L153",
+          "version": "repo-lines-v1:sha256:d08fda21e152ef5a57656c844665ff02bba3cdf775f0cf660f797abfe73bf7e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzZTZlMjQ4MzhhNTIxMzQxNzA1OTIxOGEwN2UzNWUyZjFjNmNkZTk0Mjg3NDZhZGNlOWVhNmI4ZTFmN2Y2M2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiYzg0NmRiMmRkYjc4NzljM2FlZTFkZGQ2MzVlMjVhMGI4NDUwNDk4MGNhNTY0ZWVmNzYyZDgyZmEwYWIzMjgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/nearby/presenter/NearbyParentFragmentPresenter.kt#L702-L742",
+          "version": "repo-lines-v1:sha256:664eeb31ec673010e15164c198c0ee9fc8f33fe180ef1c5bfe02579113a9596f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyNDBmOGY5ZDY3ZmQzMGQxNGIyOWEyNjVmMDhhMTcwYTA4NDNkYjNmNmM5MmRkMjNjMTU3MGYwZjE1ZDBlNGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYzJiMzExYWJlODc1NzJlOGE3Y2MwZDk5NmE2NTg0NDA3NmU1MjMyZDIxYjdhODU0NzVmOWI0MDU1Yjc0OTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2YmU4N2I2OTRiNzNjZjc5MDg4ZTU4OGY2MGJjODJlZDgwNWRiZGJiOTg0YTM0NDFiZmRmYTAxZDU2MDMzZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNlZWU1YzMyNzczNTY0ZmU5Y2I4MjhkN2RjZWFjNzQ3ZmRkOTRmOGNlYjViMjMxZGQ4MmExNzQ5MWJjOTZmOGUifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentPresenterTest.kt#L216-L277",
+          "version": "repo-lines-v1:sha256:42f007bb6dae933dce7a4bfd1c232716781ad77808373de778dda7a542751747:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4MGU0MTNlNjAyNmE0YjNiM2Y1MGFmODIxZTNmYTQwOTljYmVmMmRjOWNhMjM4NTRjYWU3MDgwY2YyZTk2ZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxMTgwMjY1MmFiMTRjNWVlODE1NDBiNjlmOTkxOWY2ZjhjOGFmN2E1YjI1NGU5OTc3NzA5MDI2MDZhZTQxZGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9cb4735547443fbbcb3e071c92cce42",
+      "statement": "LocationPicker returns a CameraPosition when launched without Media, but when launched with Media it writes selected coordinates through CoordinateEditHelper.makeCoordinatesEdit; the no-location upload entry also persists the selected centre and zoom for reuse.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPicker.kt#L25-L65",
+          "version": "repo-lines-v1:sha256:e402e545e8ca34894fca2407de4147cb52aa7016fab242dc08ea66ae43707893:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlZDkyZDM0MWNiZjAxNjdjNDcyOGFjYTNjNjQzYjIzMDY3NmU0NmY1YTM3MTZmODEzMDk4ZDY3OGM0ZTA5M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmMjhkNzQzMzc3NjZlZDE4NzQyNDYwOGVhYjg2MGQ3ZDM3MDJiM2Q3NTU5ZWQ5MGViZDk5OTRmNjhmYjEzNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY2NDlkOTBhMGZiZjZiNmE0YTk4MTdlYzY2MTc0ZmJmYjYyZGRmZGYwMTkxODlhMzhlMTRkYzhhMTBkOTM3NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0YTM2NWE5MGVjMTFlOTA0MzI3NTJjZjkzNzZlYzVlZDM2YjgwYmE1ZThlNjg1NGZjZjk4OTcwZDMwNDQ0NjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerActivity.kt#L501-L535",
+          "version": "repo-lines-v1:sha256:782c73149aced8ab209d325e08751d89042df411d6a30e7560c0870192399568:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ4MzFjOTgyYjUyNDEwY2E2ZDlmZmU4MDA1NDI2ZmNmNGI4MWQ3MmY5NTlhMDYzZGM0YWVlNGU5NmE0ZTM2M2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJjMmQxMjU2MDNkODA0ZjgxN2Y3Njg3NzA1MTM5MGY3NjY3ZDZhM2EyZjk0Y2ZhZGM3NGUyZDNlZWQzYTFmN2YifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerActivity.kt#L540-L578",
+          "version": "repo-lines-v1:sha256:b968093b7c132715f6c0e33df62393a29b49a159aa69ed6b276eb3b1cbf3cad3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyY2EyMzU2MmU2N2IxM2E3YzZlMDIxM2IxOGY0MWM0OTBiZGVjZDVkYmY2ZDJiYjgyMDU0MWEzMjMxMzQ4YmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhMTc0YjBmNDc3NDNkMzBlNjc0OGMxNGViZWZlMGQwMzY2NWIwZWE5MTYwZWU1ZmQyMzkxMjRlZDg5OWM4ZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhMTIwM2UzYTBlZTA5MDNlMDhkMmRjYWM2NDg5NzExNDYyMTY4ZDljZTBlYjhlYWMyNDFiMjEwMTJlMmI5MzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_20e38922dc5c4448b5cc67574674b329",
+      "statement": "LocationPickerActivity uses the shared permission/provider flow for recentering and can still use the last known location when current providers are unavailable; LocationPickerViewModel exposes non-null CameraPosition responses through MutableLiveData and logs transport failures.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerActivity.kt#L623-L709",
+          "version": "repo-lines-v1:sha256:e87f40dfaea77e950ff716ea0aaaaf6fda9aabc4b6b4db0ac2b5c93039c40d2d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzZTZlMjQ4MzhhNTIxMzQxNzA1OTIxOGEwN2UzNWUyZjFjNmNkZTk0Mjg3NDZhZGNlOWVhNmI4ZTFmN2Y2M2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzYjk2YzU1YzQ3ZGE0MWJhZDgzZDY0OWI3YjJmYzQ4ZDMxOTllNTRjNTNkNTQ4N2I3MDE3MzM3OTljMjRjNjMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/locationpicker/LocationPickerViewModel.kt#L15-L47",
+          "version": "repo-lines-v1:sha256:a84ccfdbf7e56fc62700e9b3b85fa839fecd6c9d910e1dbfa0cf3feb3377a698:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwMmEwZDI2MmU5ZWYwYmU4N2M2M2ZlZTBjYjFiNGVjY2FlODhiZTMzYmFlY2JkYzI2NmY3MGJiNGRkNTM4MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU3MWFmNDQ1MWY0YjFmMGFiN2U2YzlmMzQxYjFlMjMxOTdkNTJiYWUwZGZiOTQwM2Y0NjQ4YmIzYjUzZDk2NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c76954f4e0b24d53af59cb89f522ec9f",
+      "statement": "NearbyParentFragmentPresenterTest verifies the refresh gate, no-network and no-location no-op behavior, significant/map-updated and custom-area routing, slight-change tracking, and tri-state filter semantics.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentPresenterTest.kt#L186-L277",
+          "version": "repo-lines-v1:sha256:e2ee96224e32ba5554f50c8f8aaae88635d75ee2669a7f548f019b3f0a1417ad:eyJzZWxlY3RlZExpbmVDb3VudCI6OTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4MTc4NzY3NWIwOWI3ZTQ5ZTgzZWU4Yzg1MmNmZTU2ODM3MDE4NGM2NTNjNGM1YjMxMGI3MjMwNDFmMzI2MGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxMTgwMjY1MmFiMTRjNWVlODE1NDBiNjlmOTkxOWY2ZjhjOGFmN2E1YjI1NGU5OTc3NzA5MDI2MDZhZTQxZGQifQ"
+        },
+        {
+          "resource": "repo://app/src/test/kotlin/fr/free/nrw/commons/nearby/NearbyParentFragmentPresenterTest.kt#L67-L184",
+          "version": "repo-lines-v1:sha256:4c2cfb2a7cacd8931156daed3cf518e4d774bd48ffc0027f9431d8b08fd13776:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzOWNiYmM2NTQ2OWRiMWNhMjg0MmVmZDk3ZGY3ZWUyY2U2Y2MxNTcxNDgyZDAxYTE4Yjc5MGExMGM3YzUxMGYzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwYmNlY2JiNmY3NTQ4ODA3NWMwNTg1MzMxMTMwMDg0NmVmMTIxMjYyYjI1MWU4Y2E0MjE1MDczOTkyNjliZjBlIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyOWYyMjRkOTUwODc4YTYzMGRkZjQ1NzY3NzA1MWQ5ODM2Mjc0ZmI4MWU5NzgxYTUyYmJlYjkwMjlkZTMxMTg4In0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}

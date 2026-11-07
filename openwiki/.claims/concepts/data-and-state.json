@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:dd10cf6b4dae795052a107f4a19f9693c8577ad4a2facee1bc4a7eac977534c8",
+  "claims": [
+    {
+      "id": "claim_b185ce23a5bd4d83883bc5273cca2646",
+      "statement": "AppDatabase is a Room database at schema version 22 that registers the contribution queue, upload-selection status, review history, places, bookmarks, categories, recent languages, and recent searches, and exposes a dedicated DAO for each family; Converters serialize dates, URIs, collections, places, depictions, and chunk information.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/AppDatabase.kt",
+          "version": "repo-file-v1:sha256:957bbe28403dd94c8077764b22e245343e01e0408c354d31c38aed26aedc9cf4"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/db/Converters.kt",
+          "version": "repo-file-v1:sha256:373108dbf0d6caa552b1a28b57a36cf78c37bdd79e235c7ce36f1191a5dd0260"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a4d895d06354761b5d53c9da7310862",
+      "statement": "Contribution is the durable upload-queue record keyed by pageId and contains embedded media plus queue state, transfer bytes, local/content URIs, fingerprints, retry/error metadata, location/Wikidata data, and resumable ChunkInfo.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/Contribution.kt",
+          "version": "repo-file-v1:sha256:d25b9b0a5607910be317a38fc5c47c1dd7a628040456c6b94813f2f6f7b0e60e"
+        }
+      ]
+    },
+    {
+      "id": "claim_191de826743f4ef282d926bd4ebf046f",
+      "statement": "ContributionDao provides replacement saves, updates with modified/upload-start timestamp maintenance, state-filtered and paged queries, pending counts, deletion, and bulk state transitions; queue consumers therefore use persisted DAO state as their coordination boundary.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt",
+          "version": "repo-file-v1:sha256:7581982cfe353db74083648c3d7d1a1da1e546515df555986663b444bfb2bc22"
+        }
+      ]
+    },
+    {
+      "id": "claim_f456615f68fd4b5cbb2101b2369ad446",
+      "statement": "Contribution states are completed=-1, failed=1, queued=2, in-progress=3, paused=4, and deleted=5; deleted rows are retained to distinguish a Commons-deleted file, while queued/in-progress/paused/failed states are used by upload and pending-upload flows.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/Contribution.kt",
+          "version": "repo-file-v1:sha256:d25b9b0a5607910be317a38fc5c47c1dd7a628040456c6b94813f2f6f7b0e60e"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/PendingUploadsPresenter.kt",
+          "version": "repo-file-v1:sha256:728aeacb21aede5c31213e7e908a8bd8e6fa86d5bddd0723336bb7c64084778a"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt",
+          "version": "repo-file-v1:sha256:b42038124564e332e176ed92d85d8643b42eb068c765cf886772c5239670c7ba"
+        }
+      ]
+    },
+    {
+      "id": "claim_c29cb6934e5846b48f7e37a6cc451b7b",
+      "statement": "Resumable upload progress is persisted in Contribution.chunkInfo as ChunkInfo containing the prior UploadResult, next-chunk index, and total chunk count; UploadWorker writes chunk and byte progress to Room, and Contribution.isCompleted() requires next-chunk index to equal total chunks.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ChunkInfo.kt",
+          "version": "repo-file-v1:sha256:66c945226b0ace9f3e04b426ad2adcd106a4b21974b5c61aaf659512824f4065"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/Contribution.kt",
+          "version": "repo-file-v1:sha256:d25b9b0a5607910be317a38fc5c47c1dd7a628040456c6b94813f2f6f7b0e60e"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt",
+          "version": "repo-file-v1:sha256:b42038124564e332e176ed92d85d8643b42eb068c765cf886772c5239670c7ba"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fcc89b5874f4dfd8e3f8bb0e519148e",
+      "statement": "UploadResult considers only the exact result string \"Success\" successful and carries the stash file key, server offset, and filename; successful completion replaces the queue row transactionally with fetched media and separately records original/modified SHA-1 upload status.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/contributions/ContributionDao.kt",
+          "version": "repo-file-v1:sha256:7581982cfe353db74083648c3d7d1a1da1e546515df555986663b444bfb2bc22"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadResult.kt",
+          "version": "repo-file-v1:sha256:a2380417a53266eaa9a8904c1f14d41036236904faa9fc6f173089777a76e0f1"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/worker/UploadWorker.kt",
+          "version": "repo-file-v1:sha256:b42038124564e332e176ed92d85d8643b42eb068c765cf886772c5239670c7ba"
+        }
+      ]
+    },
+    {
+      "id": "claim_341e708d97674bac89a4a160341e8e9c",
+      "statement": "UploadedStatus is a selector cache keyed by original imageSHA1 with a unique modifiedImageSHA1 index, stores both API result flags and lastUpdated, and supports lookups/counts by either fingerprint.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/customselector/database/UploadedStatus.kt",
+          "version": "repo-file-v1:sha256:31d8b3672956b918eab27f57506d7191bfac1289d0d862fca14c324dc35ca1d7"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/customselector/database/UploadedStatusDao.kt",
+          "version": "repo-file-v1:sha256:2cbbfa06276d22e06efe6d97a5a8b73ed1f1693340b32a00554154db25ec369d"
+        }
+      ]
+    },
+    {
+      "id": "claim_bde8f2c8f62643238cbe7cd58680ec6e",
+      "statement": "BasicKvStore uses named SharedPreferences with a reserved __version__ key; it rejects downgrades, can clear keys on version upgrade while preserving the version, and JsonKvStore stores Gson JSON while returning null for malformed JSON.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/kvstore/BasicKvStore.kt",
+          "version": "repo-file-v1:sha256:3cec2fbe6d8d114d742502cdeebd6889e4d5931febbf9f51350f015904ee1db1"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/kvstore/JsonKvStore.kt",
+          "version": "repo-file-v1:sha256:fd243590bda90da8b891aeefa36bc04a8f3ec55fc868c3c12661e11719cee007"
+        }
+      ]
+    },
+    {
+      "id": "claim_1528ac0a33a0402d81f54b9222113a3a",
+      "statement": "Review history is a set of reviewed/skipped image identifiers with ignore-on-conflict insertion and existence checks; bookmark, category, recent-search, and recent-language records are separate Room entities with their own keys and metadata rather than contribution queue records.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/bookmarks/items/BookmarkItemsRoomEntity.kt",
+          "version": "repo-file-v1:sha256:e8eaf156a9f68368cd2476a9951675278d7c6d3084a45dda3231aa628bdd84a6"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/category/CategoryRoomEntity.kt",
+          "version": "repo-file-v1:sha256:76fc2dd748cc0066f3ca124e9e4e03c3734b250fd844e03598ca2fcdfa141dc5"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/explore/recentsearches/RecentSearchRoomEntity.kt",
+          "version": "repo-file-v1:sha256:6fa48e2cfe1299f00b291898d04632b402f8959708762a2ac3a2bad998845f62"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/recentlanguages/RecentLanguageRoomEntity.kt",
+          "version": "repo-file-v1:sha256:7ef3609b7212b824dc596d0062857f6306e8059245c135a62c3b688782c9bf7f"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewDao.kt",
+          "version": "repo-file-v1:sha256:1db39da103db2da1094b0950f9b4562f839359db547019201ab1dffe5b6ffe13"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/review/ReviewEntity.kt",
+          "version": "repo-file-v1:sha256:8d50d956d294da0e8e44150ead382eed279087355054842f3f12b5dc70a1257e"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}
