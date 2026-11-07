@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.WikidataQueryClient
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -16,6 +17,9 @@ class NearbyPlacesTest {
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
     @Mock
+    private lateinit var wikidataQueryClient: WikidataQueryClient
+
+    @Mock
     private lateinit var currentLatLong: LatLng
 
     private lateinit var nearbyPlaces: NearbyPlaces
@@ -23,7 +27,7 @@ class NearbyPlacesTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        nearbyPlaces = NearbyPlaces(okHttpJsonApiClient)
+        nearbyPlaces = NearbyPlaces(okHttpJsonApiClient, wikidataQueryClient)
     }
 
     @Test

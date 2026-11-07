@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -20,7 +21,7 @@ import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
 import io.reactivex.Single
@@ -35,6 +36,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -86,7 +88,10 @@ class ContributionsFragmentUnitTests {
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
-    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    private lateinit var userStatsClient: UserStatsClient
+
+    @Mock
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
@@ -124,7 +129,7 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
-        Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "userStatsClient", userStatsClient)
     }
 
     @Test
@@ -358,5 +363,39 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
+    }
+
+    @Test
+    fun testRetryUploadSkipsPermanentFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "filetype-banned",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(0, contribution.retries)
+        verifyNoInteractions(contributionsPresenter)
+    }
+
+    @Test
+    fun testRetryUploadRetriesTemporaryFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "stashfailed",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(1, contribution.retries)
+        verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
     }
 }

@@ -19,8 +19,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
-import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment
-import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
@@ -67,8 +65,10 @@ class CategoryDetailsActivity :
         binding.tabLayout.setupWithViewPager(binding.viewPager)
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setTabs()
-        setPageTitle()
+        categoryName = intent?.getStringExtra("categoryName")
+        val tabs = CategoryDetailsTabs(this, viewPagerAdapter, viewModel)
+        categoriesMediaFragment = tabs.setTabs(categoryName)
+        tabs.setPageTitle()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -93,44 +93,6 @@ class CategoryDetailsActivity :
                 }
             },
         )
-    }
-
-    /**
-     * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
-     * Set the fragments according to the tab selected in the viewPager.
-     */
-    private fun setTabs() {
-        categoriesMediaFragment = CategoriesMediaFragment()
-        val subCategoryListFragment = SubCategoriesFragment()
-        val parentCategoriesFragment = ParentCategoriesFragment()
-        categoryName = intent?.getStringExtra("categoryName")
-        if (intent != null && categoryName != null) {
-            val arguments =
-                Bundle().apply {
-                    putString("categoryName", categoryName)
-                }
-            categoriesMediaFragment.arguments = arguments
-            subCategoryListFragment.arguments = arguments
-            parentCategoriesFragment.arguments = arguments
-
-            viewModel.onCheckIfBookmarked(categoryName!!)
-        }
-
-        viewPagerAdapter.setTabs(
-            R.string.title_for_media to categoriesMediaFragment,
-            R.string.title_for_subcategories to subCategoryListFragment,
-            R.string.title_for_parent_categories to parentCategoriesFragment,
-        )
-        viewPagerAdapter.notifyDataSetChanged()
-    }
-
-    /**
-     * Gets the passed categoryName from the intents and displays it as the page title
-     */
-    private fun setPageTitle() {
-        intent?.getStringExtra("categoryName")?.let {
-            title = it
-        }
     }
 
     /**
