@@ -16,11 +16,10 @@ import android.widget.ImageView
 import androidx.core.graphics.withMatrix
 import fr.free.nrw.commons.ajpegtran.Properties
 import fr.free.nrw.commons.ajpegtran.blur.BlurRegion
-import kotlin.math.ceil
-import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.round
+
+private typealias BlurHandle = BlurRegionEditor.Handle
 
 /**
  * Custom overlay view to allow users to draw and select multiple rectangular
@@ -62,7 +61,7 @@ class BlurOverlayView
         private lateinit var doubleTapDetector: GestureDetector
         private var imageView: ImageView? = null
         private var resizeRegionIndex = -1
-        private var resizeHandle: Handle? = null
+        private var resizeHandle: BlurHandle? = null
         private val cornerHandleRadiusDp = 4f
         private val edgeHandleRadiusDp = 2f
         private val cornerTouchSlopDp = 24f
@@ -76,17 +75,7 @@ class BlurOverlayView
         private var lastTouchX = 0f
         private var lastTouchY = 0f
         private var imageProperties: Properties? = null
-
-        private enum class Handle {
-            TOP_LEFT,
-            TOP_RIGHT,
-            BOTTOM_LEFT,
-            BOTTOM_RIGHT,
-            TOP,
-            BOTTOM,
-            LEFT,
-            RIGHT,
-        }
+        private lateinit var regionEditor: BlurRegionEditor
 
         fun setImageView(imageView: ImageView) {
             this.imageView = imageView
@@ -187,6 +176,16 @@ class BlurOverlayView
                         }
                     },
                 )
+
+            regionEditor =
+                BlurRegionEditor(
+                    regions = regions,
+                    cornerTouchSlop = cornerTouchSlopDp * density,
+                    edgeTouchSlop = edgeTouchSlopDp * density,
+                    minRegionSize = minRegionSizeDp,
+                    handlePaints = BlurHandlePaints(handlePaint, activeHandlePaint, handleBorderPaint),
+                    mcuImage = { BlurRegionEditor.sourceOf(imageProperties, imageView?.drawable) },
+                )
         }
 
         override fun onDraw(canvas: Canvas) {
@@ -208,7 +207,6 @@ class BlurOverlayView
             // Resize handles.
             val cornerRadius = cornerHandleRadiusDp * density
             val edgeRadius = edgeHandleRadiusDp * density
-            val pts = FloatArray(2)
 
             for (i in regions.indices) {
                 val rect = regions[i]
@@ -217,79 +215,63 @@ class BlurOverlayView
                 val isActiveRect = (i == resizeRegionIndex)
 
                 // Corner handles
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.left,
                     rect.top,
-                    cornerRadius,
-                    isActiveRect && resizeHandle == Handle.TOP_LEFT,
-                    pts,
+                    BlurHandleMark(cornerRadius, isActiveRect && resizeHandle == BlurHandle.TOP_LEFT),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.right,
                     rect.top,
-                    cornerRadius,
-                    isActiveRect && resizeHandle == Handle.TOP_RIGHT,
-                    pts,
+                    BlurHandleMark(cornerRadius, isActiveRect && resizeHandle == BlurHandle.TOP_RIGHT),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.left,
                     rect.bottom,
-                    cornerRadius,
-                    isActiveRect && resizeHandle == Handle.BOTTOM_LEFT,
-                    pts,
+                    BlurHandleMark(cornerRadius, isActiveRect && resizeHandle == BlurHandle.BOTTOM_LEFT),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.right,
                     rect.bottom,
-                    cornerRadius,
-                    isActiveRect && resizeHandle == Handle.BOTTOM_RIGHT,
-                    pts,
+                    BlurHandleMark(cornerRadius, isActiveRect && resizeHandle == BlurHandle.BOTTOM_RIGHT),
                 )
 
                 // Edge (midpoint) handles.
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.centerX(),
                     rect.top,
-                    edgeRadius,
-                    isActiveRect && resizeHandle == Handle.TOP,
-                    pts,
+                    BlurHandleMark(edgeRadius, isActiveRect && resizeHandle == BlurHandle.TOP),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.centerX(),
                     rect.bottom,
-                    edgeRadius,
-                    isActiveRect && resizeHandle == Handle.BOTTOM,
-                    pts,
+                    BlurHandleMark(edgeRadius, isActiveRect && resizeHandle == BlurHandle.BOTTOM),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.left,
                     rect.centerY(),
-                    edgeRadius,
-                    isActiveRect && resizeHandle == Handle.LEFT,
-                    pts,
+                    BlurHandleMark(edgeRadius, isActiveRect && resizeHandle == BlurHandle.LEFT),
                 )
-                drawHandleAt(
+                regionEditor.drawHandleAt(
                     canvas,
                     ivMatrix,
                     rect.right,
                     rect.centerY(),
-                    edgeRadius,
-                    isActiveRect && resizeHandle == Handle.RIGHT,
-                    pts,
+                    BlurHandleMark(edgeRadius, isActiveRect && resizeHandle == BlurHandle.RIGHT),
                 )
             }
 
@@ -323,27 +305,6 @@ class BlurOverlayView
                     )
                 }
             }
-        }
-
-        /**
-         * Maps an image-space point through [ivMatrix] to screen space and draws a
-         * circular handle there.
-         */
-        private fun drawHandleAt(
-            canvas: Canvas,
-            ivMatrix: Matrix,
-            imgX: Float,
-            imgY: Float,
-            radius: Float,
-            isActive: Boolean,
-            scratch: FloatArray,
-        ) {
-            scratch[0] = imgX
-            scratch[1] = imgY
-            ivMatrix.mapPoints(scratch)
-            val paint = if (isActive) activeHandlePaint else handlePaint
-            canvas.drawCircle(scratch[0], scratch[1], radius, paint)
-            canvas.drawCircle(scratch[0], scratch[1], radius, handleBorderPaint)
         }
 
         @SuppressLint("ClickableViewAccessibility")
@@ -430,7 +391,7 @@ class BlurOverlayView
                     if (deleteBoxIndex != -1) return true
 
                     // Check resize handles on existing rectangles.
-                    val found = findResizeHandle(event.x, event.y, ivMatrix)
+                    val found = regionEditor.findResizeHandle(event.x, event.y, ivMatrix)
                     if (found != null) {
                         resizeRegionIndex = found.first
                         resizeHandle = found.second
@@ -469,7 +430,7 @@ class BlurOverlayView
 
                     // Resize an existing rectangle.
                     if (resizeRegionIndex != -1 && resizeHandle != null) {
-                        moveResizeHandle(resizeRegionIndex, resizeHandle!!, x, y)
+                        regionEditor.moveResizeHandle(resizeRegionIndex, resizeHandle!!, x, y)
                         invalidate()
                         return true
                     }
@@ -491,7 +452,7 @@ class BlurOverlayView
                 MotionEvent.ACTION_UP -> {
                     // Rectangle movement.
                     if (moveRegionIndex != -1) {
-                        snapRectToMCU(regions[moveRegionIndex])
+                        regionEditor.snapRectToMCU(regions[moveRegionIndex])
                         moveRegionIndex = -1
                     }
                     // Delete marker tap.
@@ -506,7 +467,7 @@ class BlurOverlayView
 
                     // End resize.
                     if (resizeRegionIndex != -1) {
-                        snapRectToMCU(regions[resizeRegionIndex])
+                        regionEditor.snapRectToMCU(regions[resizeRegionIndex])
                         parent?.requestDisallowInterceptTouchEvent(false)
                         resizeRegionIndex = -1
                         resizeHandle = null
@@ -517,7 +478,7 @@ class BlurOverlayView
                     // End drawing.
                     currentActiveBox?.let { activeBox ->
                         if (activeBox.width() > 15 && activeBox.height() > 15) {
-                            snapRectToMCU(activeBox)
+                            regionEditor.snapRectToMCU(activeBox)
                             regions.add(activeBox)
                         }
                         currentActiveBox = null
@@ -546,192 +507,10 @@ class BlurOverlayView
         }
 
         /**
-         * Returns the (regionIndex, Handle) pair for the first handle that is
-         * close enough to the touch point [screenX], [screenY], or null.
-         *
-         * Corners are checked before edges so that they take priority when the
-         * rectangle is very small.
-         */
-        private fun findResizeHandle(
-            screenX: Float,
-            screenY: Float,
-            ivMatrix: Matrix,
-        ): Pair<Int, Handle>? {
-            val cornerSlop = cornerTouchSlopDp * density
-            val edgeSlop = edgeTouchSlopDp * density
-            val pts = FloatArray(2)
-
-            for (i in regions.indices) {
-                val r = regions[i]
-                if (r.width() <= 0 || r.height() <= 0) continue
-
-                // Corners.
-                val corners =
-                    listOf(
-                        Handle.TOP_LEFT to floatArrayOf(r.left, r.top),
-                        Handle.TOP_RIGHT to floatArrayOf(r.right, r.top),
-                        Handle.BOTTOM_LEFT to floatArrayOf(r.left, r.bottom),
-                        Handle.BOTTOM_RIGHT to floatArrayOf(r.right, r.bottom),
-                    )
-                for ((handle, imgPt) in corners) {
-                    pts[0] = imgPt[0]
-                    pts[1] = imgPt[1]
-                    ivMatrix.mapPoints(pts)
-                    if (isNearScreen(screenX, screenY, pts[0], pts[1], cornerSlop)) {
-                        return i to handle
-                    }
-                }
-
-                // Edges (midpoints).
-                val edges =
-                    listOf(
-                        Handle.TOP to floatArrayOf(r.centerX(), r.top),
-                        Handle.BOTTOM to floatArrayOf(r.centerX(), r.bottom),
-                        Handle.LEFT to floatArrayOf(r.left, r.centerY()),
-                        Handle.RIGHT to floatArrayOf(r.right, r.centerY()),
-                    )
-                for ((handle, imgPt) in edges) {
-                    pts[0] = imgPt[0]
-                    pts[1] = imgPt[1]
-                    ivMatrix.mapPoints(pts)
-                    if (isNearScreen(screenX, screenY, pts[0], pts[1], edgeSlop)) {
-                        return i to handle
-                    }
-                }
-            }
-            return null
-        }
-
-        private fun isNearScreen(
-            x: Float,
-            y: Float,
-            targetX: Float,
-            targetY: Float,
-            slop: Float,
-        ): Boolean {
-            val dx = x - targetX
-            val dy = y - targetY
-            return dx * dx + dy * dy <= slop * slop
-        }
-
-        /**
-         * Moves the specified [handle] of region at [index] so that the
-         * controlled edge/corner moves toward ([imgX], [imgY]) in image space.
-         * A minimum size is enforced.
-         */
-        private fun moveResizeHandle(
-            index: Int,
-            handle: Handle,
-            imgX: Float,
-            imgY: Float,
-        ) {
-            val r = regions[index]
-            val minSize = minRegionSizeDp
-
-            when (handle) {
-                Handle.TOP_LEFT -> {
-                    r.left = min(imgX, r.right - minSize)
-                    r.top = min(imgY, r.bottom - minSize)
-                }
-
-                Handle.TOP_RIGHT -> {
-                    r.right = max(imgX, r.left + minSize)
-                    r.top = min(imgY, r.bottom - minSize)
-                }
-
-                Handle.BOTTOM_LEFT -> {
-                    r.left = min(imgX, r.right - minSize)
-                    r.bottom = max(imgY, r.top + minSize)
-                }
-
-                Handle.BOTTOM_RIGHT -> {
-                    r.right = max(imgX, r.left + minSize)
-                    r.bottom = max(imgY, r.top + minSize)
-                }
-
-                Handle.TOP -> {
-                    r.top = min(imgY, r.bottom - minSize)
-                }
-
-                Handle.BOTTOM -> {
-                    r.bottom = max(imgY, r.top + minSize)
-                }
-
-                Handle.LEFT -> {
-                    r.left = min(imgX, r.right - minSize)
-                }
-
-                Handle.RIGHT -> {
-                    r.right = max(imgX, r.left + minSize)
-                }
-            }
-        }
-
-        /**
          * Initializes the [imageProperties] with current image properties.
          * */
         fun setImageProperties(properties: Properties) {
             imageProperties = properties
-        }
-
-        /**
-         * Snaps [rect] to MCU boundaries in drawable-pixel space.
-         * If the rect's dimensions are already MCU-aligned, snaps position to the nearest MCU grid line,
-         * While preserving size.
-         * Otherwise, expands outward to cover full MCU blocks.
-         */
-        private fun snapRectToMCU(rect: RectF) {
-            // Pre-check.
-            val props = imageProperties ?: return
-            val drawable = imageView?.drawable ?: return
-            if (props.MCU_Width <= 0 || props.MCU_Height <= 0) return
-
-            // MCU size in drawable-pixel space.
-            val mcuW = props.MCU_Width.toFloat() * drawable.intrinsicWidth / props.width
-            val mcuH = props.MCU_Height.toFloat() * drawable.intrinsicHeight / props.height
-            val maxW = drawable.intrinsicWidth.toFloat()
-            val maxH = drawable.intrinsicHeight.toFloat()
-
-            val widthRemainder = rect.width() % mcuW
-            val widthAligned = widthRemainder < 0.01f || widthRemainder > (mcuW - 0.01f)
-            val heightRemainder = rect.height() % mcuH
-            val heightAligned = heightRemainder < 0.01f || heightRemainder > (mcuH - 0.01f)
-
-            // Already MCU-sized, Snap to nearest border position only, preserve size.
-            if (widthAligned && heightAligned) {
-                val w = rect.width()
-                val h = rect.height()
-                rect.left = round(rect.left / mcuW) * mcuW
-                rect.top = round(rect.top / mcuH) * mcuH
-                rect.right = rect.left + w
-                rect.bottom = rect.top + h
-
-                // Shift back if pushed past total image size.
-                if (rect.right > maxW) {
-                    rect.offset(maxW - rect.right, 0f)
-                }
-                if (rect.bottom > maxH) {
-                    rect.offset(0f, maxH - rect.bottom)
-                }
-                if (rect.left < 0f) {
-                    rect.offset(-rect.left, 0f)
-                }
-                if (rect.top < 0f) {
-                    rect.offset(0f, -rect.top)
-                }
-            } else {
-                // Not aligned, Expand outward to full MCU blocks.
-                rect.left = floor(rect.left.toDouble() / mcuW).toFloat() * mcuW
-                rect.top = floor(rect.top.toDouble() / mcuH).toFloat() * mcuH
-                rect.right = ceil(rect.right.toDouble() / mcuW).toFloat() * mcuW
-                rect.bottom = ceil(rect.bottom.toDouble() / mcuH).toFloat() * mcuH
-
-                // Clamp to drawable bounds.
-                rect.left = max(0f, rect.left)
-                rect.top = max(0f, rect.top)
-                rect.right = min(maxW, rect.right)
-                rect.bottom = min(maxH, rect.bottom)
-            }
         }
 
         fun resetZoom() {

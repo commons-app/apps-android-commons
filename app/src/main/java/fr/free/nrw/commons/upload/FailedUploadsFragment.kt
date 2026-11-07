@@ -117,6 +117,7 @@ class FailedUploadsFragment :
      * Restarts all the failed uploads.
      */
     fun restartUploads() {
+        ViewUtil.showShortToast(context, R.string.retrying_failed_uploads)
         pendingUploadsPresenter.restartFailedUploads(
             requireContext().applicationContext,
         )
@@ -127,6 +128,7 @@ class FailedUploadsFragment :
      */
     override fun restartUpload(contribution: Contribution?) {
         contribution?.let {
+            ViewUtil.showShortToast(context, R.string.retrying_upload)
             pendingUploadsPresenter.restartUpload(
                 it,
                 requireContext().applicationContext,

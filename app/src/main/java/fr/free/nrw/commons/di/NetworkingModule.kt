@@ -26,6 +26,7 @@ import fr.free.nrw.commons.media.PageMediaInterface
 import fr.free.nrw.commons.media.WikidataMediaInterface
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.mwapi.UserInterface
+import fr.free.nrw.commons.mwapi.WikidataQueryClient
 import fr.free.nrw.commons.notification.NotificationInterface
 import fr.free.nrw.commons.review.ReviewInterface
 import fr.free.nrw.commons.upload.UploadInterface
@@ -86,18 +87,25 @@ class NetworkingModule {
     @Singleton
     fun provideOkHttpJsonApiClient(
         okHttpClient: OkHttpClient,
-        depictsClient: DepictsClient,
         @Named("tools_forge") toolsForgeUrl: HttpUrl,
         gson: Gson,
     ): OkHttpJsonApiClient =
         OkHttpJsonApiClient(
             okHttpClient,
-            depictsClient,
             toolsForgeUrl,
             WIKIDATA_SPARQL_QUERY_URL,
             BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
             gson,
         )
+
+    /** Shares the Wikidata query endpoint and HTTP configuration used by Explore. */
+    @Provides
+    @Singleton
+    fun provideWikidataQueryClient(
+        okHttpClient: OkHttpClient,
+        depictsClient: DepictsClient,
+        gson: Gson,
+    ): WikidataQueryClient = WikidataQueryClient(okHttpClient, depictsClient, WIKIDATA_SPARQL_QUERY_URL, gson)
 
     @Provides
     @Singleton
