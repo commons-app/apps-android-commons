@@ -44,6 +44,31 @@ class LabelTest {
         assertThat(nullLabel.icon, equalTo(R.drawable.round_icon_unknown))
     }
 
+    /**
+     * test Label.fromText with valid, unknown, empty, and null Q-IDs,
+     * including the length=0; index=0 case from earlier review
+     */
+    @Test
+    fun testFromText() {
+        // Valid Q-IDs
+        assertThat(Label.fromText("Q16970"), equalTo(Label.CHURCH))
+        assertThat(Label.fromText("BOOKMARK"), equalTo(Label.BOOKMARKS))
+
+        // Unknown Q-IDs
+        assertThat(Label.fromText("Q999999999"), equalTo(Label.UNKNOWN))
+        assertThat(Label.fromText("unknown_text"), equalTo(Label.UNKNOWN))
+
+        // Empty string - explicitly checks against length=0; index=0 crash
+        assertThat(Label.fromText(""), equalTo(Label.UNKNOWN))
+
+        // Null string
+        assertThat(Label.fromText(null), equalTo(Label.UNKNOWN))
+
+        // Malformed strings starting with Q
+        assertThat(Label.fromText("Q"), equalTo(Label.UNKNOWN))
+        assertThat(Label.fromText("Qabc"), equalTo(Label.UNKNOWN))
+    }
+
     @After
     fun tearDown() {
         Label.setLocalizedNames(emptyMap())
