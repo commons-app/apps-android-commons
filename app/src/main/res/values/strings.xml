@@ -105,6 +105,7 @@
   <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>
   <string name="add_caption_toast">Please provide a caption for this file</string>
+  <string name="file_name_blacklisted_toast">Commons does not accept this file name. Please use a more descriptive caption.</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
   <string name="login_failed_network">Unable to log in - network failure</string>

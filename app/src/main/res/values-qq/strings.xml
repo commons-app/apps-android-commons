@@ -110,6 +110,7 @@
   <string name="menu_view_file_page">Menu item.</string>
   <string name="share_title_hint">{{Identical|Title}}</string>
   <string name="add_caption_toast">A notice during the upload process.</string>
+  <string name="file_name_blacklisted_toast">A notice during the upload process, shown when the caption, which is used as the file name, is on the title blacklist of Commons (for example \"Photo\").</string>
   <string name="share_description_hint">{{Identical|Description}}</string>
   <string name="share_caption_hint">Label of the caption of the image.</string>
   <string name="login_failed_network">Error message shown to user when login can not be completed due to network issues.</string>

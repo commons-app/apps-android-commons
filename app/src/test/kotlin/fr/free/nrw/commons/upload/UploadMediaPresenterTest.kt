@@ -15,6 +15,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
@@ -224,6 +225,16 @@ class UploadMediaPresenterTest {
     fun duplicateFileNameTest() {
         uploadMediaPresenter.handleCaptionResult(FILE_NAME_EXISTS, uploadItem)
         verify(view).showDuplicatePicturePopup(uploadItem)
+    }
+
+    /**
+     * Test for a blacklisted file name when the user presses the NEXT button
+     */
+    @Test
+    fun handleCaptionResultForBlacklistedFileName() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_BLACKLISTED, uploadItem)
+        verify(view).showMessage(R.string.file_name_blacklisted_toast, R.color.color_error)
+        verify(view, never()).onImageValidationSuccess()
     }
 
     /**

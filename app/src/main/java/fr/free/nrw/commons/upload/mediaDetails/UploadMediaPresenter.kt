@@ -13,6 +13,7 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
@@ -224,6 +225,12 @@ class UploadMediaPresenter
             if (errorCode == EMPTY_CAPTION) {
                 Timber.d("Captions are empty. Showing toast")
                 view.showMessage(R.string.add_caption_toast, R.color.color_error)
+            }
+
+            // Commons would only reject a blacklisted file name after the whole file is uploaded
+            if (errorCode == FILE_NAME_BLACKLISTED) {
+                Timber.d("File name is blacklisted. Showing toast")
+                view.showMessage(R.string.file_name_blacklisted_toast, R.color.color_error)
             }
 
             // If image with same file name exists check the bit in errorCode is set or not
