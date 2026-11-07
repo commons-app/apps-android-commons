@@ -13,9 +13,7 @@ SELECT
   ?dateOfOfficialClosure
   ?pointInTime
 WHERE {
-  SERVICE <https://query.wikidata.org/sparql> {
-    VALUES ?item {${ENTITY}}
-  }
+  VALUES ?item {${ENTITY}}
 
   # Get item label/class label/description in the preferred language of the user, or fallback.
   SERVICE wikibase:label { bd:serviceParam wikibase:language "${LANG},${FALLBACK_LANGUAGES}".}
