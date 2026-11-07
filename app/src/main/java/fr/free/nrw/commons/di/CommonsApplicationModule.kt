@@ -201,6 +201,7 @@ open class CommonsApplicationModule(
             MIGRATION_19_TO_20,
             MIGRATION_21_22,
             MIGRATION_22_23,
+            MIGRATION_23_24,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -545,5 +546,24 @@ val MIGRATION_22_23 =
                 // Old cached places get 0, so they are fetched again once
                 db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
             }
+        }
+    }
+
+/**
+ * Creates the `bookmarks_categories` table, which was added to [AppDatabase] without a migration,
+ * so that upgraded installs do not crash when bookmarking a category.
+ */
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_23_24 =
+    object : Migration(23, 24) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `bookmarks_categories` (
+                    `categoryName` TEXT NOT NULL,
+                    PRIMARY KEY(`categoryName`)
+                )
+                """.trimIndent(),
+            )
         }
     }

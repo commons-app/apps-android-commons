@@ -43,7 +43,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
         BookmarkPictureRoomEntity::class, BookmarkItemsRoomEntity::class,
         CategoryRoomEntity::class, RecentLanguageRoomEntity::class, RecentSearchRoomEntity::class,
     ],
-    version = 23,
+    version = 24,
     exportSchema = false,
 )
 @TypeConverters(Converters::class)
