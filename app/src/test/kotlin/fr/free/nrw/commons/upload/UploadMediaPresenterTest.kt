@@ -183,6 +183,32 @@ class UploadMediaPresenterTest {
     }
 
     /**
+     * Regression test for #6938: with multiple images in one upload session, captions
+     * for one image must not be written onto another image's UploadItem.
+     */
+    @Test
+    fun setUploadMediaDetailsOnlyUpdatesTargetedItemInMultiImageUpload() {
+        val firstItem =
+            UploadItem(Uri.EMPTY, null, null, null, 0, null, null, null)
+        val firstItemDetails =
+            listOf(UploadMediaDetail(languageCode = "en", captionText = "first"))
+        firstItem.uploadMediaDetails = firstItemDetails.toMutableList()
+        val secondItem =
+            UploadItem(Uri.EMPTY, null, null, null, 0, null, null, null)
+        whenever(repository.getUploads()).thenReturn(listOf(firstItem, secondItem))
+
+        val secondItemDetails =
+            listOf(
+                UploadMediaDetail(languageCode = "en", captionText = "second"),
+                UploadMediaDetail(languageCode = "de", captionText = "zweite"),
+            )
+        uploadMediaPresenter.setUploadMediaDetails(secondItemDetails, 1)
+
+        assertEquals(secondItemDetails, secondItem.uploadMediaDetails)
+        assertEquals(firstItemDetails, firstItem.uploadMediaDetails)
+    }
+
+    /**
      * Test for empty file name when the user presses the NEXT button
      */
     @Test
@@ -252,6 +278,18 @@ class UploadMediaPresenterTest {
 
         uploadMediaPresenter.fetchTitleAndDescription(0)
         verify(view).updateMediaDetails(isA())
+    }
+
+    /**
+     * Test that the upload item is looked up in the repository by its index
+     */
+    @Test
+    fun getUploadItemTest() {
+        whenever(repository.getUploadItem(1)).thenReturn(uploadItem)
+        whenever(repository.getUploadItem(2)).thenReturn(null)
+
+        assertEquals(uploadItem, uploadMediaPresenter.getUploadItem(1))
+        assertEquals(null, uploadMediaPresenter.getUploadItem(2))
     }
 
     /**

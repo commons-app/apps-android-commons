@@ -460,12 +460,14 @@
   <string name="images_used_explanation">您上传至共享资源，并用于维基媒体条目的图片数量</string>
   <string name="error_occurred">发生错误！</string>
   <string name="notifications_channel_name_all">共享资源通知</string>
+  <string name="notifications_channel_name_uploads">上传进度</string>
   <string name="preference_author_name_toggle">使用自定义的作者姓名</string>
   <string name="preference_author_name_toggle_summary">在上传照片时使用自定义的作者姓名，而不是用户名</string>
   <string name="preference_author_name">自定义作者姓名</string>
   <string name="contributions_fragment">贡献</string>
   <string name="nearby_fragment">附近</string>
   <string name="notifications">通知</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">通知（已读）</string>
   <string name="display_nearby_notification">显示附近通知</string>
   <string name="display_nearby_notification_summary">显示有关需要图片的最近地点的应用程序内通知</string>

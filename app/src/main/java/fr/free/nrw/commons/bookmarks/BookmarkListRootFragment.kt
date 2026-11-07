@@ -7,35 +7,34 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesFragment
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.category.CategoryImagesCallback
-import fr.free.nrw.commons.category.GridViewAdapter
-import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment.Companion.newInstance
 import fr.free.nrw.commons.media.MediaDetailProvider
-import fr.free.nrw.commons.navtab.NavTab
 import timber.log.Timber
 
 class BookmarkListRootFragment :
     CommonsDaggerSupportFragment,
-    FragmentManager.OnBackStackChangedListener,
     MediaDetailProvider,
     OnItemClickListener,
     CategoryImagesCallback {
-    private var mediaDetails: MediaDetailPagerFragment? = null
+    internal var mediaDetails: MediaDetailPagerFragment? = null
     var listFragment: Fragment? = null
     private var bookmarksPagerAdapter: BookmarksPagerAdapter? = null
 
     var binding: FragmentFeaturedRootBinding? = null
+
+    /**
+     * Shows and removes the child fragments of this screen and handles the back button.
+     */
+    val navigator = BookmarkListNavigator(this)
 
     constructor()
 
@@ -75,53 +74,8 @@ class BookmarkListRootFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            setFragment(listFragment!!, mediaDetails)
+            navigator.setFragment(listFragment!!, mediaDetails)
         }
-    }
-
-    fun setFragment(
-        fragment: Fragment,
-        otherFragment: Fragment?,
-    ) {
-        if (fragment.isAdded() && otherFragment != null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .hide(otherFragment)
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            getChildFragmentManager().executePendingTransactions()
-        } else if (fragment.isAdded() && otherFragment == null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            getChildFragmentManager().executePendingTransactions()
-        } else if (!fragment.isAdded() && otherFragment != null) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .hide(otherFragment)
-                .add(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            getChildFragmentManager().executePendingTransactions()
-        } else if (!fragment.isAdded()) {
-            getChildFragmentManager()
-                .beginTransaction()
-                .replace(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            getChildFragmentManager().executePendingTransactions()
-        }
-    }
-
-    fun removeFragment(fragment: Fragment) {
-        getChildFragmentManager()
-            .beginTransaction()
-            .remove(fragment)
-            .commit()
-        getChildFragmentManager().executePendingTransactions()
     }
 
     override fun onMediaClicked(position: Int) {
@@ -158,10 +112,10 @@ class BookmarkListRootFragment :
      */
     override fun refreshNominatedMedia(index: Int) {
         if (mediaDetails != null && !listFragment!!.isVisible()) {
-            removeFragment(mediaDetails!!)
+            navigator.removeFragment(mediaDetails!!)
             mediaDetails = newInstance(false, true)
             (parentFragment as BookmarkFragment).setScroll(false)
-            setFragment(mediaDetails!!, listFragment)
+            navigator.setFragment(mediaDetails!!, listFragment)
             mediaDetails!!.showImage(index)
         }
     }
@@ -176,35 +130,6 @@ class BookmarkListRootFragment :
         }
     }
 
-    fun backPressed(): Boolean {
-        val details = mediaDetails
-        if (details == null || !details.isVisible) {
-            moveToContributionsFragment()
-            return false
-        }
-
-        (parentFragment as BookmarkFragment).setupTabLayout()
-        val removed = details.removedItems
-        removeFragment(details)
-        (parentFragment as BookmarkFragment).setScroll(true)
-        setFragment(listFragment!!, details)
-        (requireActivity() as MainActivity).showTabs()
-
-        if (listFragment is BookmarkPicturesFragment) {
-            val adapter = (listFragment as BookmarkPicturesFragment).getAdapter() as? GridViewAdapter
-            removed.forEach { index ->
-                adapter?.remove(adapter.getItem(index))
-            }
-            details.clearRemoved()
-        }
-        return false
-    }
-
-    fun moveToContributionsFragment() {
-        (requireActivity() as MainActivity).setSelectedItemId(NavTab.CONTRIBUTIONS.code())
-        (requireActivity() as MainActivity).showTabs()
-    }
-
     override fun onItemClick(
         parent: AdapterView<*>?,
         view: View?,
@@ -216,11 +141,9 @@ class BookmarkListRootFragment :
         (parentFragment as BookmarkFragment).binding!!.tabLayout.setVisibility(View.GONE)
         mediaDetails = newInstance(false, true)
         (parentFragment as BookmarkFragment).setScroll(false)
-        setFragment(mediaDetails!!, listFragment)
+        navigator.setFragment(mediaDetails!!, listFragment)
         mediaDetails!!.showImage(position)
     }
-
-    override fun onBackStackChanged() = Unit
 
     override fun onDestroy() {
         super.onDestroy()
