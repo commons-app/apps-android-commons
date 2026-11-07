@@ -72,6 +72,11 @@ object ImageUtils {
     const val FILE_NAME_EXISTS = 1 shl 6 // 64
     const val NO_CATEGORY_SELECTED = -5
     const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
+
+    /**
+     * The file name is on the title blacklist of Commons, so the upload would be rejected
+     */
+    const val FILE_NAME_BLACKLISTED = 1 shl 8 // 256
     private const val MAX_GEOLOCATION_DIFFERENCE_METERS = 1000
     private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
     private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3

@@ -39,6 +39,9 @@ class ImageProcessingServiceTest {
     internal var mediaClient: MediaClient? = null
 
     @Mock
+    internal lateinit var uploadClient: UploadClient
+
+    @Mock
     internal var location: LatLng? = null
 
     @Mock
@@ -102,6 +105,8 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(false))
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(false))
+        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(false))
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any()))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
         `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
@@ -159,6 +164,24 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForBlacklistedFileName() {
+        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_BLACKLISTED, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForBlacklistedFileNameThatAlsoExists() {
+        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_BLACKLISTED, validateImage.blockingGet())
     }
 
     @Test

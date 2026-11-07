@@ -6,6 +6,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
@@ -24,6 +25,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class ImageProcessingService
+    @Suppress("LongParameterList")
     @Inject
     constructor(
         private val fileUtilsWrapper: FileUtilsWrapper,
@@ -31,6 +33,7 @@ class ImageProcessingService
         private val readFBMD: ReadFBMD,
         private val exifReader: EXIFReader,
         private val mediaClient: MediaClient,
+        private val uploadClient: UploadClient,
         private val appContext: Context,
     ) {
         /**
@@ -127,7 +130,7 @@ class ImageProcessingService
         private fun checkEXIF(filepath: String): Single<Int> = exifReader.processMetadata(filepath)
 
         /**
-         * Checks item caption - empty caption - existing caption
+         * Checks item caption - empty caption - blacklisted caption - existing caption
          */
         private fun validateItemTitle(uploadItem: UploadItem): Single<Int> {
             Timber.d("Checking for image title %s", uploadItem.uploadMediaDetails)
@@ -136,11 +139,19 @@ class ImageProcessingService
                 return Single.just(EMPTY_CAPTION)
             }
 
-            return mediaClient
-                .checkPageExistsUsingTitle("File:" + uploadItem.filename)
-                .map { doesFileExist: Boolean ->
-                    Timber.d("Result for valid title is %s", doesFileExist)
-                    if (doesFileExist) FILE_NAME_EXISTS else IMAGE_OK
+            val title = "File:" + uploadItem.filename
+            return Single
+                .zip(
+                    uploadClient.isTitleBlacklisted(title),
+                    mediaClient.checkPageExistsUsingTitle(title),
+                ) { isBlacklisted: Boolean, doesFileExist: Boolean ->
+                    Timber.d("Result for valid title is %s, blacklisted %s", doesFileExist, isBlacklisted)
+                    // A blacklisted name can never be uploaded, so it is reported before an existing name
+                    when {
+                        isBlacklisted -> FILE_NAME_BLACKLISTED
+                        doesFileExist -> FILE_NAME_EXISTS
+                        else -> IMAGE_OK
+                    }
                 }.subscribeOn(Schedulers.io())
         }
 
