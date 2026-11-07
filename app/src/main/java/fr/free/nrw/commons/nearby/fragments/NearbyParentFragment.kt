@@ -2925,7 +2925,7 @@ class NearbyParentFragment :
                     controller!!.initiateGalleryPick(
                         it,
                         galleryPickLauncherForResult,
-                        false,
+                        true
                     )
                 }
             }
