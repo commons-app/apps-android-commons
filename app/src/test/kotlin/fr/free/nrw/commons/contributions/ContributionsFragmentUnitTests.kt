@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -35,6 +36,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -87,6 +89,9 @@ class ContributionsFragmentUnitTests {
 
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+
+    @Mock
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
@@ -358,5 +363,39 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
+    }
+
+    @Test
+    fun testRetryUploadSkipsPermanentFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "filetype-banned",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(0, contribution.retries)
+        verifyNoInteractions(contributionsPresenter)
+    }
+
+    @Test
+    fun testRetryUploadRetriesTemporaryFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "stashfailed",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(1, contribution.retries)
+        verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
     }
 }
