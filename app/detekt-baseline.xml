@@ -721,21 +721,18 @@
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
-    <ID>TooManyFunctions:BasePagingFragment.kt$BasePagingFragment&lt;T&gt; : CommonsDaggerSupportFragmentView</ID>
     <ID>TooManyFunctions:BasicKvStore.kt$BasicKvStore : KeyValueStore</ID>
     <ID>TooManyFunctions:BlurOverlayView.kt$BlurOverlayView : View</ID>
     <ID>TooManyFunctions:BookmarkListRootFragment.kt$BookmarkListRootFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerMediaDetailProviderOnItemClickListenerCategoryImagesCallback</ID>
     <ID>TooManyFunctions:BookmarkPicturesFragment.kt$BookmarkPicturesFragment : DaggerFragment</ID>
     <ID>TooManyFunctions:CategoriesContract.kt$CategoriesContract$View</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
-    <ID>TooManyFunctions:CategoryDetailsActivity.kt$CategoryDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
     <ID>TooManyFunctions:CommonsApplicationComponent.kt$CommonsApplicationComponent : AndroidInjector</ID>
     <ID>TooManyFunctions:CommonsApplicationModule.kt$CommonsApplicationModule</ID>
     <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
     <ID>TooManyFunctions:ContributionDao.kt$ContributionDao</ID>
     <ID>TooManyFunctions:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
-    <ID>TooManyFunctions:ContributionsListFragment.kt$ContributionsListFragment : CommonsDaggerSupportFragmentViewCallbackCallback</ID>
     <ID>TooManyFunctions:Converters.kt$Converters</ID>
     <ID>TooManyFunctions:CropOverlayView.kt$CropOverlayView : View</ID>
     <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
@@ -744,12 +741,8 @@
     <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$View</ID>
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
-    <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
-    <ID>TooManyFunctions:ExploreListRootFragment.kt$ExploreListRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
-    <ID>TooManyFunctions:ExploreMapPresenter.kt$ExploreMapPresenter : UserActionsNearbyBaseMarkerThumbCallback</ID>
-    <ID>TooManyFunctions:ExploreMapRootFragment.kt$ExploreMapRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
     <ID>TooManyFunctions:FilePicker.kt$FilePicker : Constants</ID>
     <ID>TooManyFunctions:FragmentBuilderModule.kt$FragmentBuilderModule</ID>
@@ -757,24 +750,18 @@
     <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
     <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
     <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
-    <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaDetailFragment.kt$MediaDetailFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
-    <ID>TooManyFunctions:MoreBottomSheetFragment.kt$MoreBottomSheetFragment : BottomSheetDialogFragment</ID>
     <ID>TooManyFunctions:MwQueryPage.kt$MwQueryPage : BaseModel</ID>
     <ID>TooManyFunctions:MwQueryResult.kt$MwQueryResult : BaseModelPostProcessable</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
-    <ID>TooManyFunctions:NearbyParentFragmentPresenter.kt$NearbyParentFragmentPresenter : UserActionsWikidataP18EditListenerLocationUpdateListener</ID>
     <ID>TooManyFunctions:NearbyResultItem.kt$NearbyResultItem</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:NotificationActivity.kt$NotificationActivity : BaseActivity</ID>
     <ID>TooManyFunctions:OkHttpJsonApiClient.kt$OkHttpJsonApiClient</ID>
     <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
     <ID>TooManyFunctions:PickedFiles.kt$PickedFiles : Constants</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
-    <ID>TooManyFunctions:ReviewActivity.kt$ReviewActivity : BaseActivity</ID>
-    <ID>TooManyFunctions:SearchActivity.kt$SearchActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
     <ID>TooManyFunctions:UploadActivity.kt$UploadActivity : BaseActivityViewCallbackOnThumbnailDeletedListener</ID>
     <ID>TooManyFunctions:UploadContract.kt$UploadContract$View</ID>
@@ -782,7 +769,6 @@
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$UserActionListener : BasePresenter</ID>
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$View : SimilarImageInterface</ID>
     <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
-    <ID>TooManyFunctions:WikidataItemDetailsActivity.kt$WikidataItemDetailsActivity : BaseActivityMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
