@@ -13,8 +13,7 @@ data class ChunkInfo(
         parcel.readParcelable(UploadResult::class.java.classLoader),
         parcel.readInt(),
         parcel.readInt(),
-    ) {
-    }
+    )
 
     override fun writeToParcel(
         parcel: Parcel,

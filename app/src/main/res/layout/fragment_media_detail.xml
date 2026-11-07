@@ -26,10 +26,17 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/mediaDetailImageView"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="@dimen/dimen_250"
       android:layout_gravity="center_horizontal"
       app:actualImageScaleType="none" />
+
+    <ProgressBar
+      android:id="@+id/mediaDetailImageProgressBar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/dimen_250"
+      android:layout_gravity="center_horizontal" />
 
     <ScrollView
       android:id="@+id/mediaDetailScrollView"
@@ -37,9 +44,7 @@
       android:layout_height="wrap_content"
       android:background="@android:color/transparent"
       android:cacheColorHint="@android:color/transparent"
-      android:fillViewport="true"
-      android:visibility="invisible"
-      tools:visibility="visible">
+      android:fillViewport="true">
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -55,9 +60,11 @@
 
                 <LinearLayout
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="@dimen/dimen_250"
                   android:orientation="vertical"
                   android:id="@+id/mediaDetailImageViewSpacer"
+                  android:clickable="true"
+                  android:focusable="true"
                   >
 
                 </LinearLayout>
@@ -92,6 +99,19 @@
                       android:layout_height="match_parent"
                       tools:text="Title of the media" />
                 </LinearLayout>
+
+                <TextView
+                  android:id="@+id/deletedFileBanner"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="?attr/mediaDetailNominationBackground"
+                  android:gravity="center"
+                  android:padding="@dimen/quarter_standard_height"
+                  android:text="@string/file_deleted_from_commons"
+                  android:textColor="@color/primaryTextColor"
+                  android:textSize="@dimen/normal_text"
+                  android:textStyle="bold"
+                  android:visibility="gone" />
 
                 <LinearLayout
                   android:id="@+id/toDoLayout"
