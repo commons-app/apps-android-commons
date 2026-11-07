@@ -800,6 +800,7 @@ class MediaDetailFragment :
         }
 
         compositeDisposable.clear()
+        _binding = null
 
         super.onDestroyView()
     }
