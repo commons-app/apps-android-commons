@@ -109,31 +109,34 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         with(binding!!) {
             durationSpinner.onItemSelectedListener =
                 SelectionListener {
-                    duration = durationValues[durationSpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    duration = durationValues[durationSpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
-
             categorySpinner.onItemSelectedListener =
                 SelectionListener {
-                    category = categoryValues[categorySpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    category = categoryValues[categorySpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
 
             scroll.setOnClickListener {
-                val layoutManager = leaderboardList.layoutManager as? LinearLayoutManager
-                val firstVisible = layoutManager?.findFirstVisibleItemPosition() ?: 0
-
-                if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
-                    smartScrollTo(0)
-                } else {
-                    scrollToUserRank()
+                val lm = leaderboardList.layoutManager as? LinearLayoutManager
+                val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
+                val targetPos = userRank + 1
+                when {
+                    firstVisible > SCROLL_TO_TOP_THRESHOLD -> smartScrollTo(0)
+                    userRank == 0 -> Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
+                    (leaderboardList.adapter?.itemCount ?: 0) > targetPos -> smartScrollTo(targetPos)
+                    else ->
+                        viewModel?.let {
+                            it.refresh(duration, category, targetPos, 0)
+                            setLeaderboard(duration, category, targetPos, 0)
+                            scrollToRank = true
+                        }
                 }
             }
 
             leaderboardList.addOnScrollListener(
                 object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(
-                        recyclerView: RecyclerView,
+                        rv: RecyclerView,
                         dx: Int,
                         dy: Int,
                     ) = updateScrollButtonState()
@@ -222,27 +225,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         }
     }
 
-    private fun scrollToUserRank() {
-        if (userRank == 0) {
-            Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
-        } else {
-            if (binding == null) {
-                return
-            }
-            val itemCount = binding?.leaderboardList?.adapter?.itemCount ?: 0
-            val targetPos = userRank + 1
-            if (itemCount > targetPos) {
-                smartScrollTo(targetPos)
-            } else {
-                viewModel?.let {
-                    it.refresh(duration, category, targetPos, 0)
-                    setLeaderboard(duration, category, targetPos, 0)
-                    scrollToRank = true
-                }
-            }
-        }
-    }
-
     /**
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
@@ -274,7 +256,12 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                             },
                             { t: Throwable? ->
                                 Timber.e(t, "Fetching leaderboard statistics failed")
-                                onError()
+                                // Shows a generic error toast when error occurs while loading leaderboard
+                                showLongToast(
+                                    requireActivity(),
+                                    resources.getString(R.string.error_occurred),
+                                )
+                                binding?.let { it.progressBar.visibility = View.GONE }
                             },
                         ),
                 )
@@ -344,14 +331,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
             return false
         }
         return true
-    }
-
-    /**
-     * Shows a generic error toast when error occurs while loading leaderboard
-     */
-    private fun onError() {
-        showLongToast(requireActivity(), resources.getString(R.string.error_occurred))
-        binding?.let { it.progressBar.visibility = View.GONE }
     }
 
     override fun onDestroy() {
