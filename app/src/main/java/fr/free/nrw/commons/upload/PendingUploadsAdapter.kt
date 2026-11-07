@@ -107,16 +107,18 @@ class PendingUploadsAdapter(
                 itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
             itemView.setOnLongClickListener {
-                val clip = ClipData.newPlainText(
-                    itemView.context.getString(R.string.caption),
-                    titleTextView.text
-                )
+                val clip =
+                    ClipData.newPlainText(
+                        itemView.context.getString(R.string.caption),
+                        titleTextView.text,
+                    )
                 clipboardManager.setPrimaryClip(clip)
-                Snackbar.make(
-                    itemView,
-                    itemView.context.getString(R.string.caption_copied_to_clipboard),
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                Snackbar
+                    .make(
+                        itemView,
+                        itemView.context.getString(R.string.caption_copied_to_clipboard),
+                        Snackbar.LENGTH_SHORT,
+                    ).show()
                 true
             }
 

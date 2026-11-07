@@ -14,7 +14,6 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +25,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -83,13 +83,13 @@ import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.auth.getUserName
-import fr.free.nrw.commons.category.CATEGORY_NEEDING_CATEGORIES
-import fr.free.nrw.commons.category.CATEGORY_UNCATEGORISED
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryDetailsActivity
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
+import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.contributions.hideTabs
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
@@ -114,9 +114,6 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import fr.free.nrw.commons.utils.DateUtil.getDateStringWithSkeletonPattern
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
-import fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE
-import fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction
-import fr.free.nrw.commons.utils.PermissionUtils.hasPermission
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.utils.ViewUtilWrapper
@@ -140,12 +137,15 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Named
 
-class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.Callback {
+class MediaDetailFragment :
+    CommonsDaggerSupportFragment(),
+    CategoryEditHelper.Callback {
     private var editable: Boolean = false
     private var isCategoryImage: Boolean = false
     private var detailProvider: MediaDetailProvider? = null
     private var index: Int = 0
     private var isDeleted: Boolean = false
+    private var fileWasDeletedFromCommons: Boolean = false
     private var isWikipediaButtonDisplayed: Boolean = false
     private val callback: Callback? = null
 
@@ -155,12 +155,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     @Inject
     lateinit var locationManager: LocationServiceManager
 
-
     @Inject
     lateinit var sessionManager: SessionManager
 
     @Inject
     lateinit var mediaDataExtractor: MediaDataExtractor
+
+    @Inject
+    lateinit var contributionsRepository: ContributionsRepository
 
     @Inject
     lateinit var reasonBuilder: ReasonBuilder
@@ -195,13 +197,20 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private val viewModel: MediaDetailViewModel by viewModels<MediaDetailViewModel> { mediaDetailViewModelFactory }
 
+    private val onBackPressedCallback =
+        object : OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+            }
+        }
+
     private var initialListTop: Int = 0
 
+    @Suppress("ktlint:standard:backing-property-naming")
     private var _binding: FragmentMediaDetailBinding? = null
     private val binding get() = _binding!!
 
     private var descriptionHtmlCode: String? = null
-
 
     private val categoryNames: ArrayList<String> = ArrayList()
     private val fragmentHandler = Handler(Looper.getMainLooper())
@@ -217,7 +226,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private var newWidthOfImageView: Int = 0
     private var heightVerifyingBoolean: Boolean = true // helps in maintaining aspect ratio
 
-    //Had to make this class variable, to implement various onClicks, which access the media,
+    // Had to make this class variable, to implement various onClicks, which access the media,
     // also I fell why make separate variables when one can serve the purpose
     private var media: Media? = null
     private lateinit var reasonList: ArrayList<String>
@@ -243,6 +252,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         outState.putBoolean("editable", editable)
         outState.putBoolean("isCategoryImage", isCategoryImage)
         outState.putBoolean("isWikipediaButtonDisplayed", isWikipediaButtonDisplayed)
+        outState.putBoolean("fileWasDeletedFromCommons", fileWasDeletedFromCommons)
 
         scrollPosition
         outState.putInt("listTop", initialListTop)
@@ -256,10 +266,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        if (parentFragment != null
-            && parentFragment is MediaDetailPagerFragment
+        if (parentFragment != null &&
+            parentFragment is MediaDetailPagerFragment
         ) {
             detailProvider =
                 (parentFragment as MediaDetailPagerFragment).mediaDetailProvider
@@ -268,6 +278,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             editable = savedInstanceState.getBoolean("editable")
             isCategoryImage = savedInstanceState.getBoolean("isCategoryImage")
             isWikipediaButtonDisplayed = savedInstanceState.getBoolean("isWikipediaButtonDisplayed")
+            fileWasDeletedFromCommons = savedInstanceState.getBoolean("fileWasDeletedFromCommons")
             index = savedInstanceState.getInt("index")
             initialListTop = savedInstanceState.getInt("listTop")
         } else {
@@ -290,32 +301,32 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         reasonListEnglishMappings.add(
             getLocalizedResources(
                 requireContext(),
-                Locale.ENGLISH
-            ).getString(R.string.deletion_reason_uploaded_by_mistake)
+                Locale.ENGLISH,
+            ).getString(R.string.deletion_reason_uploaded_by_mistake),
         )
         reasonListEnglishMappings.add(
             getLocalizedResources(
                 requireContext(),
-                Locale.ENGLISH
-            ).getString(R.string.deletion_reason_publicly_visible)
+                Locale.ENGLISH,
+            ).getString(R.string.deletion_reason_publicly_visible),
         )
         reasonListEnglishMappings.add(
             getLocalizedResources(
                 requireContext(),
-                Locale.ENGLISH
-            ).getString(R.string.deletion_reason_not_interesting)
+                Locale.ENGLISH,
+            ).getString(R.string.deletion_reason_not_interesting),
         )
         reasonListEnglishMappings.add(
             getLocalizedResources(
                 requireContext(),
-                Locale.ENGLISH
-            ).getString(R.string.deletion_reason_no_longer_want_public)
+                Locale.ENGLISH,
+            ).getString(R.string.deletion_reason_no_longer_want_public),
         )
         reasonListEnglishMappings.add(
             getLocalizedResources(
                 requireContext(),
-                Locale.ENGLISH
-            ).getString(R.string.deletion_reason_bad_for_my_privacy)
+                Locale.ENGLISH,
+            ).getString(R.string.deletion_reason_bad_for_my_privacy),
         )
 
         _binding = FragmentMediaDetailBinding.inflate(inflater, container, false)
@@ -337,16 +348,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.coordinateEdit.visibility = View.GONE
         }
 
-        handleBackEvent(_binding?.root!!)
-
-        //set onCLick listeners
+        // set onCLick listeners
         binding.mediaDetailLicense.setOnClickListener { onMediaDetailLicenceClicked() }
         binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
         binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
         binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        binding.mediaDetailImageView.setOnClickListener {
+        // The spacer sits over the image so the details can scroll. Clicks on the image hit the spacer.
+        binding.mediaDetailImageViewSpacer.setOnClickListener {
             launchZoomActivity(
-                binding.mediaDetailImageView
+                binding.mediaDetailImageView,
             )
         }
         binding.categoryEditButton.setOnClickListener { onCategoryEditButtonClicked() }
@@ -362,17 +372,21 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme(
-                    colorScheme = if (isSystemInDarkTheme()) darkColorScheme(
-                        primary = colorResource(R.color.primaryDarkColor),
-                        surface = colorResource(R.color.main_background_dark),
-                        background = colorResource(R.color.main_background_dark)
-                    ) else lightColorScheme(
-                        primary = colorResource(R.color.primaryColor),
-                        surface = colorResource(R.color.main_background_light),
-                        background = colorResource(R.color.main_background_light)
-                    )
+                    colorScheme =
+                        if (isSystemInDarkTheme()) {
+                            darkColorScheme(
+                                primary = colorResource(R.color.primaryDarkColor),
+                                surface = colorResource(R.color.main_background_dark),
+                                background = colorResource(R.color.main_background_dark),
+                            )
+                        } else {
+                            lightColorScheme(
+                                primary = colorResource(R.color.primaryColor),
+                                surface = colorResource(R.color.main_background_light),
+                                background = colorResource(R.color.main_background_light),
+                            )
+                        },
                 ) {
-
                     val commonsContainerState by viewModel.commonsContainerState.collectAsState()
                     val globalContainerState by viewModel.globalContainerState.collectAsState()
 
@@ -380,9 +394,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         Column {
                             Text(
                                 text = stringResource(R.string.file_usages_container_heading),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 6.dp),
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 6.dp),
                                 textAlign = TextAlign.Center,
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 16.sp,
@@ -390,12 +405,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                             FileUsagesContainer(
                                 modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                                 commonsContainerState = commonsContainerState,
-                                globalContainerState = globalContainerState
+                                globalContainerState = globalContainerState,
                             )
                         }
                     }
-
-
                 }
             }
         }
@@ -406,6 +419,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          */
         fragmentHandler.post {
             if (_binding == null) return@post
+
             val width = binding.mediaDetailScrollView.width
             if (width > 0) {
                 frameLayoutHeight = binding.mediaDetailFrameLayout.measuredHeight
@@ -422,20 +436,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     fun launchZoomActivity(view: View) {
-        val hasPermission: Boolean = hasPermission(requireActivity(), PERMISSIONS_STORAGE)
-        if (hasPermission) {
-            launchZoomActivityAfterPermissionCheck(view)
-        } else {
-            checkPermissionsAndPerformAction(
-                requireActivity(),
-                {
-                    launchZoomActivityAfterPermissionCheck(view)
-                },
-                R.string.storage_permission_title,
-                R.string.read_storage_permission_rationale,
-                *PERMISSIONS_STORAGE
-            )
-        }
+        launchZoomActivityAfterPermissionCheck(view)
     }
 
     private fun fetchFileUsages(fileName: String) {
@@ -458,19 +459,20 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             val zoomableIntent = Intent(ctx, ZoomableActivity::class.java)
             zoomableIntent.setData(Uri.parse(media!!.imageUrl))
             zoomableIntent.putExtra(
-                ZoomableActivity.ZoomableActivityConstants.ORIGIN, "MediaDetails"
+                ZoomableActivity.ZoomableActivityConstants.ORIGIN,
+                "MediaDetails",
             )
 
             val backgroundColor: Int = imageBackgroundColor
             if (backgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
                 zoomableIntent.putExtra(
                     ZoomableActivity.ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
-                    backgroundColor
+                    backgroundColor,
                 )
             }
 
             ctx.startActivity(
-                zoomableIntent
+                zoomableIntent,
             )
         }
     }
@@ -505,23 +507,29 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         }
 
         // detail provider is null when fragment is shown in review activity
-        media = if (detailProvider != null) {
-            detailProvider!!.getMediaAtPosition(index)
-        } else {
-            requireArguments().getParcelable("media")
-        }
+        media =
+            if (detailProvider != null) {
+                detailProvider!!.getMediaAtPosition(index)
+            } else {
+                requireArguments().getParcelable("media")
+            }
 
-        if (media != null && applicationKvStore.getBoolean(
+        if (media != null &&
+            applicationKvStore.getBoolean(
                 String.format(
-                    NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl
-                ), false
+                    NOMINATING_FOR_DELETION_MEDIA,
+                    media!!.imageUrl,
+                ),
+                false,
             )
         ) {
             enableProgressBar()
         }
 
-        if (getUserName(requireContext()) != null && media != null && getUserName(
-                requireContext()
+        if (getUserName(requireContext()) != null &&
+            media != null &&
+            getUserName(
+                requireContext(),
             ) == media!!.author
         ) {
             binding.sendThanks.visibility = View.GONE
@@ -537,6 +545,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 fetchFileUsages(media?.filename!!)
             }
         }
+
         binding.progressBarEdit.visibility = View.GONE
         binding.descriptionEdit.visibility = View.VISIBLE
     }
@@ -553,6 +562,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 updateAspectRatio(newWidthOfImageView)
             }
         }
+
         // Ensuring correct aspect ratio for landscape mode
         if (heightVerifyingBoolean) {
             updateAspectRatio(newWidthOfImageView)
@@ -566,32 +576,45 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun displayMediaDetails() {
         setTextFields(media!!)
         compositeDisposable.addAll(
-            mediaDataExtractor.refresh(media!!)
+            mediaDataExtractor
+                .refresh(media!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { media: Media -> onMediaRefreshed(media) },
-                    { t: Throwable? -> Timber.e(t) }),
-            mediaDataExtractor.getCurrentWikiText(
-                Objects.requireNonNull(media?.filename!!)
-            )
-                .subscribeOn(Schedulers.io())
+                    { t: Throwable? ->
+                        if (t.isFileDeletedOnCommons()) {
+                            onFileDeletedFromCommons()
+                        } else {
+                            Timber.e(t)
+                        }
+                    },
+                ),
+            mediaDataExtractor
+                .getCurrentWikiText(
+                    Objects.requireNonNull(media?.filename!!),
+                ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { s: String? -> updateCategoryList(s!!) },
-                    { t: Throwable? -> Timber.e(t) }),
-            mediaDataExtractor.checkDeletionRequestExists(media!!)
+                    { t: Throwable? -> Timber.e(t) },
+                ),
+            mediaDataExtractor
+                .checkDeletionRequestExists(media!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { deletionPageExists: Boolean -> onDeletionPageExists(deletionPageExists) },
-                    { t: Throwable? -> Timber.e(t) }),
-            mediaDataExtractor.fetchDiscussion(media!!)
+                    { t: Throwable? -> Timber.e(t) },
+                ),
+            mediaDataExtractor
+                .fetchDiscussion(media!!)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { discussion: String -> onDiscussionLoaded(discussion) },
-                    { t: Throwable? -> Timber.e(t) })
+                    { t: Throwable? -> Timber.e(t) },
+                ),
         )
     }
 
@@ -600,12 +623,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         this.media = media
         setTextFields(media)
         compositeDisposable.addAll(
-            mediaDataExtractor.fetchDepictionIdsAndLabels(media)
+            mediaDataExtractor
+                .fetchDepictionIdsAndLabels(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { idAndCaptions: List<IdAndLabels> -> onDepictionsLoaded(idAndCaptions) },
-                    { t: Throwable? -> Timber.e(t) })
+                    { t: Throwable? -> Timber.e(t) },
+                ),
         )
     }
 
@@ -614,16 +639,22 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private fun onDeletionPageExists(deletionPageExists: Boolean) {
+        if (fileWasDeletedFromCommons) {
+            binding.nominateDeletion.visibility = View.GONE
+            binding.nominatedDeletionBanner.visibility = View.GONE
+            return
+        }
         if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
             binding.nominateDeletion.visibility = View.GONE
             binding.nominatedDeletionBanner.visibility = View.GONE
         } else if (deletionPageExists) {
             if (applicationKvStore.getBoolean(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
+                    false,
                 )
             ) {
                 applicationKvStore.remove(
-                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl)
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
                 )
                 binding.progressBarDeletion.visibility = View.GONE
             }
@@ -688,14 +719,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             spacerParams.height = finalHeight
             binding.mediaDetailImageView.layoutParams = params
             binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
-            if(finalHeight>0)
-                binding.mediaDetailScrollView.visibility = View.VISIBLE
         }
     }
 
     private val aspectRatioListener: ControllerListener<ImageInfo?> =
         object : BaseControllerListener<ImageInfo?>() {
-            override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
+            override fun onIntermediateImageSet(
+                id: String,
+                imageInfo: ImageInfo?,
+            ) {
                 imageInfoCache = imageInfo
                 if (_binding == null) return
                 updateAspectRatio(binding.mediaDetailScrollView.width)
@@ -704,11 +736,21 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             override fun onFinalImageSet(
                 id: String,
                 imageInfo: ImageInfo?,
-                animatable: Animatable?
+                animatable: Animatable?,
             ) {
                 imageInfoCache = imageInfo
                 if (_binding == null) return
                 updateAspectRatio(binding.mediaDetailScrollView.width)
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+            }
+
+            override fun onFailure(
+                id: String,
+                throwable: Throwable,
+            ) {
+                _binding?.mediaDetailImageProgressBar?.visibility = View.GONE
+                Timber.e(throwable, "Failed to load media detail image")
+                revealMediaDetailWithoutImage()
             }
         }
 
@@ -725,54 +767,23 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
         binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
         binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+        binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
-        val controller: DraweeController = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
-            .setRetainImageOnFailure(true)
-            .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(binding.mediaDetailImageView.controller)
-            .build()
+        val controller: DraweeController =
+            Fresco
+                .newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
+                .setRetainImageOnFailure(true)
+                .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
+                .setControllerListener(aspectRatioListener)
+                .setOldController(binding.mediaDetailImageView.controller)
+                .build()
         binding.mediaDetailImageView.controller = controller
-    }
-
-    private fun updateToDoWarning() {
-        var toDoMessage = ""
-        var toDoNeeded = false
-        var categoriesPresent: Boolean =
-            if (media!!.categories == null) false else (media!!.categories!!.isNotEmpty())
-
-        // Check if the presented category is about need of category
-        if (categoriesPresent) {
-            for (category: String in media!!.categories!!) {
-                if (category.lowercase().contains(CATEGORY_NEEDING_CATEGORIES) ||
-                    category.lowercase().contains(CATEGORY_UNCATEGORISED)
-                ) {
-                    categoriesPresent = false
-                }
-                break
-            }
-        }
-        if (!categoriesPresent) {
-            toDoNeeded = true
-            toDoMessage += getString(R.string.missing_category)
-        }
-        if (isWikipediaButtonDisplayed) {
-            toDoNeeded = true
-            toDoMessage += if ((toDoMessage.isEmpty())) "" else "\n" + getString(R.string.missing_article)
-        }
-
-        if (toDoNeeded) {
-            toDoMessage = getString(R.string.todo_improve) + "\n" + toDoMessage
-            binding.toDoLayout.visibility = View.VISIBLE
-            binding.toDoReason.text = toDoMessage
-        } else {
-            binding.toDoLayout.visibility = View.GONE
-        }
     }
 
     override fun onDestroyView() {
         fragmentHandler.removeCallbacksAndMessages(null)
+
         compositeDisposable.clear()
         _binding?.root?.clearFocus()
         _binding?.root?.setOnKeyListener(null)
@@ -781,10 +792,71 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         super.onDestroyView()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /**
+     * Shows the stored caption when the image never loads.
+     * The scroll view stays invisible until an image reports its size, so a 404 would otherwise
+     * leave this screen blank.
+     */
+    private fun revealMediaDetailWithoutImage(allowRetry: Boolean = true) {
+        val currentBinding = _binding
+        val scrollView = currentBinding?.mediaDetailScrollView
+        if (currentBinding != null && scrollView != null && scrollView.isAttachedToWindow) {
+            val scrollWidth = scrollView.width
+            if (scrollWidth <= 0 && allowRetry) {
+                scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
+            } else if (scrollWidth > 0) {
+                val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
+                val params = currentBinding.mediaDetailImageView.layoutParams
+                val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
+                params.width = scrollWidth
+                params.height = height
+                spacerParams.height = height
+                currentBinding.mediaDetailImageView.layoutParams = params
+                currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
+                scrollView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    /**
+     * The media load this screen already makes reported the file page as missing.
+     * Explain the deletion once, and keep the row so the gallery can show it as deleted.
+     */
+    private fun onFileDeletedFromCommons() {
+        val currentMedia = media
+        if (_binding != null && currentMedia != null) {
+            val alreadyShown = fileWasDeletedFromCommons
+            fileWasDeletedFromCommons = true
+            revealMediaDetailWithoutImage()
+            binding.deletedFileBanner.visibility = View.VISIBLE
+            binding.nominateDeletion.visibility = View.GONE
+            binding.nominatedDeletionBanner.visibility = View.GONE
+            val filename = currentMedia.filename
+            if (!alreadyShown && !filename.isNullOrEmpty()) {
+                contributionsRepository
+                    .markCompletedContributionDeleted(filename)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(
+                        {
+                            // No action needed after successful deletion
+                        },
+                        { t: Throwable -> Timber.e(t, "Failed to mark contribution deleted") },
+                    )
+                if (isAdded) {
+                    DeletedFileActivity.start(requireContext(), filename)
+                }
+            }
+        }
+    }
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
         if (activity is MainActivity) {
-            //explicitly hides the tabs when the media details screen is opened.
+            // explicitly hides the tabs when the media details screen is opened.
             (activity as MainActivity).hideTabs()
         }
     }
@@ -808,7 +880,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         // Show author or uploader information for licensing compliance
         val authorName = media.getAttributedAuthor()
         val uploaderName = media.user
-        
+
         when {
             !authorName.isNullOrEmpty() -> {
                 // Show author if available
@@ -858,9 +930,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * Updates the categories
      */
     fun updateCategories() {
-        val allCategories: MutableList<String> = ArrayList(
-            media?.addedCategories!!
-        )
+        val allCategories: MutableList<String> =
+            ArrayList(
+                media?.addedCategories!!,
+            )
         media!!.categories = allCategories
         if (allCategories.isEmpty()) {
             // Stick in a filler element.
@@ -885,8 +958,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             mutableIdAndCaptions.add(
                 IdAndLabels(
                     id = media?.pageId ?: "", // Use an empty string if media?.pageId is null
-                    labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)) // Create a Map with the language as the key and the message as the value
-                )
+                    // Create a Map with the language as the key and the message as the value
+                    labels = mapOf(Locale.getDefault().language to getString(R.string.detail_panel_cats_none)),
+                ),
             )
         }
 
@@ -896,14 +970,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
                     idAndCaption.id,
-                    binding.mediaDetailDepictionContainer
-                )
+                    binding.mediaDetailDepictionContainer,
+                ),
             )
         }
     }
 
-
-    private fun getDepictionCaption(idAndCaption: IdAndLabels, locale: String): String? {
+    private fun getDepictionCaption(
+        idAndCaption: IdAndLabels,
+        locale: String,
+    ): String? {
         // Check if the Depiction Caption is available in user's locale
         // if not then check for english, else show any available.
         if (idAndCaption.labels[locale] != null) {
@@ -912,7 +988,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         if (idAndCaption.labels["en"] != null) {
             return idAndCaption.labels["en"]
         }
-        return idAndCaption.labels.values.iterator().next()
+        return idAndCaption.labels.values
+            .iterator()
+            .next()
     }
 
     private fun onMediaDetailLicenceClicked() {
@@ -936,7 +1014,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         requireContext().copyToClipboard("wikiCode", data)
         Timber.d("Generated wikidata copy code: %s", data)
 
-        Toast.makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
+        Toast
+            .makeText(requireContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
             .show()
     }
 
@@ -946,21 +1025,25 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun sendThanksToAuthor() {
         val fileName: String? = media!!.filename
         if (TextUtils.isEmpty(fileName)) {
-            Toast.makeText(
-                context, getString(R.string.error_sending_thanks),
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    context,
+                    getString(R.string.error_sending_thanks),
+                    Toast.LENGTH_SHORT,
+                ).show()
             return
         }
         compositeDisposable.add(
-            reviewHelper.getFirstRevisionOfFile(fileName)
+            reviewHelper
+                .getFirstRevisionOfFile(fileName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { revision: Revision? ->
                     sendThanks(
-                        requireContext(), revision
+                        requireContext(),
+                        revision,
                     )
-                }
+                },
         )
     }
 
@@ -971,27 +1054,31 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * @param firstRevision the revision id of the image
      */
     @SuppressLint("CheckResult", "StringFormatInvalid")
-    fun sendThanks(context: Context, firstRevision: Revision?) {
+    fun sendThanks(
+        context: Context,
+        firstRevision: Revision?,
+    ) {
         showShortToast(
             context,
-            context.getString(R.string.send_thank_toast, media!!.displayTitle)
+            context.getString(R.string.send_thank_toast, media!!.displayTitle),
         )
 
         if (firstRevision == null) {
             return
         }
 
-        Observable.defer {
-            thanksClient.thank(
-                firstRevision.revisionId()
-            )
-        }
-            .subscribeOn(Schedulers.io())
+        Observable
+            .defer {
+                thanksClient.thank(
+                    firstRevision.revisionId(),
+                )
+            }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result: Boolean ->
                     displayThanksToast(
-                        requireContext(), result
+                        requireContext(),
+                        result,
                     )
                 },
                 { throwable: Throwable? ->
@@ -1001,16 +1088,18 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                             CommonsApplication.BaseLogoutListener(
                                 requireActivity(),
                                 requireActivity().getString(R.string.invalid_login_message),
-                                username
+                                username,
                             )
 
                         instance.clearApplicationData(
-                            requireActivity(), logoutListener
+                            requireActivity(),
+                            logoutListener,
                         )
                     } else {
                         Timber.e(throwable)
                     }
-                })
+                },
+            )
     }
 
     /**
@@ -1019,18 +1108,22 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      * @param result true if success, false otherwise
      */
     @SuppressLint("StringFormatInvalid")
-    private fun displayThanksToast(context: Context, result: Boolean) {
-        val message: String = if (result) {
-            context.getString(
-                R.string.send_thank_success_message,
-                media!!.user
-            )
-        } else {
-            context.getString(
-                R.string.send_thank_failure_message,
-                media!!.user
-            )
-        }
+    private fun displayThanksToast(
+        context: Context,
+        result: Boolean,
+    ) {
+        val message: String =
+            if (result) {
+                context.getString(
+                    R.string.send_thank_success_message,
+                    media!!.user,
+                )
+            } else {
+                context.getString(
+                    R.string.send_thank_failure_message,
+                    media!!.user,
+                )
+            }
 
         showShortToast(context, message)
     }
@@ -1047,14 +1140,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          */
         get() {
             compositeDisposable.add(
-                mediaDataExtractor.getCurrentWikiText(
-                    Objects.requireNonNull(media?.filename!!)
-                )
-                    .subscribeOn(Schedulers.io())
+                mediaDataExtractor
+                    .getCurrentWikiText(
+                        Objects.requireNonNull(media?.filename!!),
+                    ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         { s: String? -> gotoCategoryEditor(s!!) },
-                        { t: Throwable? -> Timber.e(t) })
+                        { t: Throwable? -> Timber.e(t) },
+                    ),
             )
         }
 
@@ -1099,10 +1193,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 defaultLatitude = locationManager.getLastLocation()!!.latitude
                 defaultLongitude = locationManager.getLastLocation()!!.longitude
             } else {
-                val lastLocation: Array<String>? = applicationKvStore.getString(
-                    UploadMediaDetailFragment.LAST_LOCATION,
-                    ("$defaultLatitude,$defaultLongitude")
-                )?.split(",".toRegex())?.dropLastWhile { it.isEmpty() }?.toTypedArray()
+                val lastLocation: Array<String>? =
+                    applicationKvStore
+                        .getString(
+                            UploadMediaDetailFragment.LAST_LOCATION,
+                            ("$defaultLatitude,$defaultLongitude"),
+                        )?.split(",".toRegex())
+                        ?.dropLastWhile { it.isEmpty() }
+                        ?.toTypedArray()
 
                 if (lastLocation != null) {
                     defaultLatitude = lastLocation[0].toDouble()
@@ -1111,13 +1209,13 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             }
         }
 
-
         startActivity(
-            LocationPicker.IntentBuilder()
+            LocationPicker
+                .IntentBuilder()
                 .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, 16.0))
                 .activityKey("MediaActivity")
                 .media(media!!)
-                .build(requireActivity())
+                .build(requireActivity()),
         )
     }
 
@@ -1133,14 +1231,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
          */
         get() {
             compositeDisposable.add(
-                mediaDataExtractor.getCurrentWikiText(
-                    Objects.requireNonNull(media?.filename!!)
-                )
-                    .subscribeOn(Schedulers.io())
+                mediaDataExtractor
+                    .getCurrentWikiText(
+                        Objects.requireNonNull(media?.filename!!),
+                    ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         { s: String? -> extractCaptionDescription(s!!) },
-                        { t: Throwable? -> Timber.e(t) })
+                        { t: Throwable? -> Timber.e(t) },
+                    ),
             )
         }
 
@@ -1164,15 +1263,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         UploadMediaDetail(
                             language,
                             Objects.requireNonNull(descriptions[language]!!),
-                            (mapElement.value as String?)!!
-                        )
+                            (mapElement.value as String?)!!,
+                        ),
                     )
                 } else {
                     descriptionAndCaptions.add(
                         UploadMediaDetail(
-                            language, "",
-                            (mapElement.value as String?)!!
-                        )
+                            language,
+                            "",
+                            (mapElement.value as String?)!!,
+                        ),
                     )
                 }
             }
@@ -1183,8 +1283,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         UploadMediaDetail(
                             language,
                             Objects.requireNonNull(descriptions[language]!!),
-                            ""
-                        )
+                            "",
+                        ),
                     )
                 }
             }
@@ -1194,16 +1294,18 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 if (captions.containsKey(language)) {
                     descriptionAndCaptions.add(
                         UploadMediaDetail(
-                            language, (mapElement.value as String?)!!,
-                            Objects.requireNonNull(captions[language]!!)
-                        )
+                            language,
+                            (mapElement.value as String?)!!,
+                            Objects.requireNonNull(captions[language]!!),
+                        ),
                     )
                 } else {
                     descriptionAndCaptions.add(
                         UploadMediaDetail(
-                            language, (mapElement.value as String?)!!,
-                            ""
-                        )
+                            language,
+                            (mapElement.value as String?)!!,
+                            "",
+                        ),
                     )
                 }
             }
@@ -1214,8 +1316,8 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                         UploadMediaDetail(
                             language,
                             "",
-                            Objects.requireNonNull(descriptions[language]!!)
-                        )
+                            Objects.requireNonNull(descriptions[language]!!),
+                        ),
                     )
                 }
             }
@@ -1226,7 +1328,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         bundle.putString(WIKITEXT, s)
         bundle.putString(
             Prefs.DESCRIPTION_LANGUAGE,
-            applicationKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")
+            applicationKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""),
         )
         bundle.putParcelable("media", media)
         intent.putExtras(bundle)
@@ -1257,305 +1359,306 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         var endCode = 0
         var startDescription = 0
         var endDescription: Int
-        val allLanguageCodes: HashSet<String> = HashSet(
-            mutableListOf(
-                "en",
-                "es",
-                "de",
-                "ja",
-                "fr",
-                "ru",
-                "pt",
-                "it",
-                "zh-hans",
-                "zh-hant",
-                "ar",
-                "ko",
-                "id",
-                "pl",
-                "nl",
-                "fa",
-                "hi",
-                "th",
-                "vi",
-                "sv",
-                "uk",
-                "cs",
-                "simple",
-                "hu",
-                "ro",
-                "fi",
-                "el",
-                "he",
-                "nb",
-                "da",
-                "sr",
-                "hr",
-                "ms",
-                "bg",
-                "ca",
-                "tr",
-                "sk",
-                "sh",
-                "bn",
-                "tl",
-                "mr",
-                "ta",
-                "kk",
-                "lt",
-                "az",
-                "bs",
-                "sl",
-                "sq",
-                "arz",
-                "zh-yue",
-                "ka",
-                "te",
-                "et",
-                "lv",
-                "ml",
-                "hy",
-                "uz",
-                "kn",
-                "af",
-                "nn",
-                "mk",
-                "gl",
-                "sw",
-                "eu",
-                "ur",
-                "ky",
-                "gu",
-                "bh",
-                "sco",
-                "ast",
-                "is",
-                "mn",
-                "be",
-                "an",
-                "km",
-                "si",
-                "ceb",
-                "jv",
-                "eo",
-                "als",
-                "ig",
-                "su",
-                "be-x-old",
-                "la",
-                "my",
-                "cy",
-                "ne",
-                "bar",
-                "azb",
-                "mzn",
-                "as",
-                "am",
-                "so",
-                "pa",
-                "map-bms",
-                "scn",
-                "tg",
-                "ckb",
-                "ga",
-                "lb",
-                "war",
-                "zh-min-nan",
-                "nds",
-                "fy",
-                "vec",
-                "pnb",
-                "zh-classical",
-                "lmo",
-                "tt",
-                "io",
-                "ia",
-                "br",
-                "hif",
-                "mg",
-                "wuu",
-                "gan",
-                "ang",
-                "or",
-                "oc",
-                "yi",
-                "ps",
-                "tk",
-                "ba",
-                "sah",
-                "fo",
-                "nap",
-                "vls",
-                "sa",
-                "ce",
-                "qu",
-                "ku",
-                "min",
-                "bcl",
-                "ilo",
-                "ht",
-                "li",
-                "wa",
-                "vo",
-                "nds-nl",
-                "pam",
-                "new",
-                "mai",
-                "sn",
-                "pms",
-                "eml",
-                "yo",
-                "ha",
-                "gn",
-                "frr",
-                "gd",
-                "hsb",
-                "cv",
-                "lo",
-                "os",
-                "se",
-                "cdo",
-                "sd",
-                "ksh",
-                "bat-smg",
-                "bo",
-                "nah",
-                "xmf",
-                "ace",
-                "roa-tara",
-                "hak",
-                "bjn",
-                "gv",
-                "mt",
-                "pfl",
-                "szl",
-                "bpy",
-                "rue",
-                "co",
-                "diq",
-                "sc",
-                "rw",
-                "vep",
-                "lij",
-                "kw",
-                "fur",
-                "pcd",
-                "lad",
-                "tpi",
-                "ext",
-                "csb",
-                "rm",
-                "kab",
-                "gom",
-                "udm",
-                "mhr",
-                "glk",
-                "za",
-                "pdc",
-                "om",
-                "iu",
-                "nv",
-                "mi",
-                "nrm",
-                "tcy",
-                "frp",
-                "myv",
-                "kbp",
-                "dsb",
-                "zu",
-                "ln",
-                "mwl",
-                "fiu-vro",
-                "tum",
-                "tet",
-                "tn",
-                "pnt",
-                "stq",
-                "nov",
-                "ny",
-                "xh",
-                "crh",
-                "lfn",
-                "st",
-                "pap",
-                "ay",
-                "zea",
-                "bxr",
-                "kl",
-                "sm",
-                "ak",
-                "ve",
-                "pag",
-                "nso",
-                "kaa",
-                "lez",
-                "gag",
-                "kv",
-                "bm",
-                "to",
-                "lbe",
-                "krc",
-                "jam",
-                "ss",
-                "roa-rup",
-                "dv",
-                "ie",
-                "av",
-                "cbk-zam",
-                "chy",
-                "inh",
-                "ug",
-                "ch",
-                "arc",
-                "pih",
-                "mrj",
-                "kg",
-                "rmy",
-                "dty",
-                "na",
-                "ts",
-                "xal",
-                "wo",
-                "fj",
-                "tyv",
-                "olo",
-                "ltg",
-                "ff",
-                "jbo",
-                "haw",
-                "ki",
-                "chr",
-                "sg",
-                "atj",
-                "sat",
-                "ady",
-                "ty",
-                "lrc",
-                "ti",
-                "din",
-                "gor",
-                "lg",
-                "rn",
-                "bi",
-                "cu",
-                "kbd",
-                "pi",
-                "cr",
-                "koi",
-                "ik",
-                "mdf",
-                "bug",
-                "ee",
-                "shn",
-                "tw",
-                "dz",
-                "srn",
-                "ks",
-                "test",
-                "en-x-piglatin",
-                "ab"
+        val allLanguageCodes: HashSet<String> =
+            HashSet(
+                mutableListOf(
+                    "en",
+                    "es",
+                    "de",
+                    "ja",
+                    "fr",
+                    "ru",
+                    "pt",
+                    "it",
+                    "zh-hans",
+                    "zh-hant",
+                    "ar",
+                    "ko",
+                    "id",
+                    "pl",
+                    "nl",
+                    "fa",
+                    "hi",
+                    "th",
+                    "vi",
+                    "sv",
+                    "uk",
+                    "cs",
+                    "simple",
+                    "hu",
+                    "ro",
+                    "fi",
+                    "el",
+                    "he",
+                    "nb",
+                    "da",
+                    "sr",
+                    "hr",
+                    "ms",
+                    "bg",
+                    "ca",
+                    "tr",
+                    "sk",
+                    "sh",
+                    "bn",
+                    "tl",
+                    "mr",
+                    "ta",
+                    "kk",
+                    "lt",
+                    "az",
+                    "bs",
+                    "sl",
+                    "sq",
+                    "arz",
+                    "zh-yue",
+                    "ka",
+                    "te",
+                    "et",
+                    "lv",
+                    "ml",
+                    "hy",
+                    "uz",
+                    "kn",
+                    "af",
+                    "nn",
+                    "mk",
+                    "gl",
+                    "sw",
+                    "eu",
+                    "ur",
+                    "ky",
+                    "gu",
+                    "bh",
+                    "sco",
+                    "ast",
+                    "is",
+                    "mn",
+                    "be",
+                    "an",
+                    "km",
+                    "si",
+                    "ceb",
+                    "jv",
+                    "eo",
+                    "als",
+                    "ig",
+                    "su",
+                    "be-x-old",
+                    "la",
+                    "my",
+                    "cy",
+                    "ne",
+                    "bar",
+                    "azb",
+                    "mzn",
+                    "as",
+                    "am",
+                    "so",
+                    "pa",
+                    "map-bms",
+                    "scn",
+                    "tg",
+                    "ckb",
+                    "ga",
+                    "lb",
+                    "war",
+                    "zh-min-nan",
+                    "nds",
+                    "fy",
+                    "vec",
+                    "pnb",
+                    "zh-classical",
+                    "lmo",
+                    "tt",
+                    "io",
+                    "ia",
+                    "br",
+                    "hif",
+                    "mg",
+                    "wuu",
+                    "gan",
+                    "ang",
+                    "or",
+                    "oc",
+                    "yi",
+                    "ps",
+                    "tk",
+                    "ba",
+                    "sah",
+                    "fo",
+                    "nap",
+                    "vls",
+                    "sa",
+                    "ce",
+                    "qu",
+                    "ku",
+                    "min",
+                    "bcl",
+                    "ilo",
+                    "ht",
+                    "li",
+                    "wa",
+                    "vo",
+                    "nds-nl",
+                    "pam",
+                    "new",
+                    "mai",
+                    "sn",
+                    "pms",
+                    "eml",
+                    "yo",
+                    "ha",
+                    "gn",
+                    "frr",
+                    "gd",
+                    "hsb",
+                    "cv",
+                    "lo",
+                    "os",
+                    "se",
+                    "cdo",
+                    "sd",
+                    "ksh",
+                    "bat-smg",
+                    "bo",
+                    "nah",
+                    "xmf",
+                    "ace",
+                    "roa-tara",
+                    "hak",
+                    "bjn",
+                    "gv",
+                    "mt",
+                    "pfl",
+                    "szl",
+                    "bpy",
+                    "rue",
+                    "co",
+                    "diq",
+                    "sc",
+                    "rw",
+                    "vep",
+                    "lij",
+                    "kw",
+                    "fur",
+                    "pcd",
+                    "lad",
+                    "tpi",
+                    "ext",
+                    "csb",
+                    "rm",
+                    "kab",
+                    "gom",
+                    "udm",
+                    "mhr",
+                    "glk",
+                    "za",
+                    "pdc",
+                    "om",
+                    "iu",
+                    "nv",
+                    "mi",
+                    "nrm",
+                    "tcy",
+                    "frp",
+                    "myv",
+                    "kbp",
+                    "dsb",
+                    "zu",
+                    "ln",
+                    "mwl",
+                    "fiu-vro",
+                    "tum",
+                    "tet",
+                    "tn",
+                    "pnt",
+                    "stq",
+                    "nov",
+                    "ny",
+                    "xh",
+                    "crh",
+                    "lfn",
+                    "st",
+                    "pap",
+                    "ay",
+                    "zea",
+                    "bxr",
+                    "kl",
+                    "sm",
+                    "ak",
+                    "ve",
+                    "pag",
+                    "nso",
+                    "kaa",
+                    "lez",
+                    "gag",
+                    "kv",
+                    "bm",
+                    "to",
+                    "lbe",
+                    "krc",
+                    "jam",
+                    "ss",
+                    "roa-rup",
+                    "dv",
+                    "ie",
+                    "av",
+                    "cbk-zam",
+                    "chy",
+                    "inh",
+                    "ug",
+                    "ch",
+                    "arc",
+                    "pih",
+                    "mrj",
+                    "kg",
+                    "rmy",
+                    "dty",
+                    "na",
+                    "ts",
+                    "xal",
+                    "wo",
+                    "fj",
+                    "tyv",
+                    "olo",
+                    "ltg",
+                    "ff",
+                    "jbo",
+                    "haw",
+                    "ki",
+                    "chr",
+                    "sg",
+                    "atj",
+                    "sat",
+                    "ady",
+                    "ty",
+                    "lrc",
+                    "ti",
+                    "din",
+                    "gor",
+                    "lg",
+                    "rn",
+                    "bi",
+                    "cu",
+                    "kbd",
+                    "pi",
+                    "cr",
+                    "koi",
+                    "ik",
+                    "mdf",
+                    "bug",
+                    "ee",
+                    "shn",
+                    "tw",
+                    "dz",
+                    "srn",
+                    "ks",
+                    "test",
+                    "en-x-piglatin",
+                    "ab",
+                ),
             )
-        )
         var i = 0
         while (i < description.length - 1) {
             if (description.startsWith("{{", i)) {
@@ -1574,11 +1677,16 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 count--
                 if (count == 0) {
                     endDescription = i
-                    val languageCode: String = description.substring(startCode + 2, endCode)
-                    val languageDescription: String =
-                        description.substring(startDescription, endDescription)
-                    if (allLanguageCodes.contains(languageCode)) {
-                        descriptionList[languageCode] = languageDescription
+                    // Nearby uploads append {{ on Wikidata|Qid}} before |source, so this match
+                    // includes {{own}}. That template's pipe belongs to the next field, and
+                    // slicing it throws before the edit screen can open.
+                    if (endCode >= startCode + 2 && endDescription >= startDescription) {
+                        val languageCode: String = description.substring(startCode + 2, endCode)
+                        val languageDescription: String =
+                            description.substring(startDescription, endDescription)
+                        if (allLanguageCodes.contains(languageCode)) {
+                            descriptionList[languageCode] = languageDescription
+                        }
                     }
                 }
                 i++
@@ -1605,88 +1713,89 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             return captionList
         }
 
-    /**
-     * Adds caption to the map and updates captions
-     * @param mediaDetail UploadMediaDetail
-     * @param updatedCaptions updated captionds
-     */
-    private fun updateCaptions(
-        mediaDetail: UploadMediaDetail,
-        updatedCaptions: MutableMap<String, String>
-    ) {
-        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
-        media!!.captions = updatedCaptions
-    }
-
     @SuppressLint("StringFormatInvalid")
     fun onDeleteButtonClicked() {
         if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
-            val languageAdapter: ArrayAdapter<String> = ArrayAdapter(
-                requireActivity(),
-                R.layout.simple_spinner_dropdown_list, reasonList
-            )
+            val languageAdapter: ArrayAdapter<String> =
+                ArrayAdapter(
+                    requireActivity(),
+                    R.layout.simple_spinner_dropdown_list,
+                    reasonList,
+                )
             val spinner = Spinner(activity)
-            spinner.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
+            spinner.layoutParams =
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                )
             spinner.adapter = languageAdapter
             spinner.gravity = 17
 
-            val dialog: AlertDialog? = showAlertDialog(
-                requireActivity(),
-                getString(R.string.nominate_delete),
-                null,
-                getString(R.string.about_translate_proceed),
-                getString(R.string.about_translate_cancel),
-                { onDeleteClicked(spinner) },
-                {},
-                spinner
-            )
+            val dialog: AlertDialog? =
+                showAlertDialog(
+                    requireActivity(),
+                    getString(R.string.nominate_delete),
+                    null,
+                    getString(R.string.about_translate_proceed),
+                    getString(R.string.about_translate_cancel),
+                    { onDeleteClicked(spinner) },
+                    {
+                        // No action needed when the user cancels
+                    },
+                    spinner,
+                )
             if (isDeleted) {
                 dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
             }
         } else if (getUserName(requireContext()) != null) {
             val input = EditText(activity)
             input.requestFocus()
-            val d: AlertDialog? = showAlertDialog(
-                requireActivity(),
-                null,
-                getString(R.string.dialog_box_text_nomination, media!!.displayTitle),
-                getString(R.string.ok),
-                getString(R.string.cancel),
-                {
-                    val reason: String = input.text.toString()
-                    onDeleteClickedDialogText(reason)
-                },
-                {},
-                input
-            )
-            input.addTextChangedListener(object : TextWatcher {
-                fun handleText() {
-                    val okButton: Button = d!!.getButton(AlertDialog.BUTTON_POSITIVE)
-                    if (input.text.isEmpty() || isDeleted) {
-                        okButton.isEnabled = false
-                    } else {
-                        okButton.isEnabled = true
+            val d: AlertDialog? =
+                showAlertDialog(
+                    requireActivity(),
+                    null,
+                    getString(R.string.dialog_box_text_nomination, media!!.displayTitle),
+                    getString(R.string.ok),
+                    getString(R.string.cancel),
+                    {
+                        val reason: String = input.text.toString()
+                        onDeleteClickedDialogText(reason)
+                    },
+                    {
+                        // No action needed when the user cancels
+                    },
+                    input,
+                )
+            input.addTextChangedListener(
+                object : TextWatcher {
+                    fun handleText() {
+                        val okButton: Button = d!!.getButton(AlertDialog.BUTTON_POSITIVE)
+                        if (input.text.isEmpty() || isDeleted) {
+                            okButton.isEnabled = false
+                        } else {
+                            okButton.isEnabled = true
+                        }
                     }
-                }
 
-                override fun afterTextChanged(arg0: Editable) {
-                    handleText()
-                }
+                    override fun afterTextChanged(arg0: Editable) {
+                        handleText()
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
+                    override fun beforeTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) = Unit
 
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                }
-            })
+                    override fun onTextChanged(
+                        s: CharSequence,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) = Unit
+                },
+            )
             d!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
         }
     }
@@ -1696,22 +1805,27 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         applicationKvStore.putBoolean(
             String.format(
                 NOMINATING_FOR_DELETION_MEDIA,
-                media!!.imageUrl
-            ), true
+                media!!.imageUrl,
+            ),
+            true,
         )
         enableProgressBar()
         val reason: String = reasonListEnglishMappings[spinner.selectedItemPosition]
         val finalReason: String = reason
-        val resultSingle: Single<Boolean> = reasonBuilder.getReason(media, reason)
-            .flatMap {
-                deleteHelper.makeDeletion(
-                    context, media, finalReason
-                )
-            }
+        val resultSingle: Single<Boolean> =
+            reasonBuilder
+                .getReason(media, reason)
+                .flatMap {
+                    deleteHelper.makeDeletion(
+                        context,
+                        media,
+                        finalReason,
+                    )
+                }
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::handleDeletionResult, this::handleDeletionError);
+            .subscribe(this::handleDeletionResult, this::handleDeletionError)
     }
 
     /**
@@ -1719,9 +1833,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
      */
     private fun disableProgressBar() {
         activity?.run {
-            runOnUiThread(Runnable {
-                binding.progressBarDeletion.visibility = View.GONE
-            })
+            runOnUiThread(
+                Runnable {
+                    binding.progressBarDeletion.visibility = View.GONE
+                },
+            )
         } ?: return // Prevent NullPointerException when fragment is not attached to activity
     }
 
@@ -1744,7 +1860,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
     private fun checkAndClearDeletionFlag() {
         if (applicationKvStore
-            .getBoolean(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false)
+                .getBoolean(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl), false)
         ) {
             applicationKvStore.remove(format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl))
             callback!!.nominatingForDeletion(index)
@@ -1756,20 +1872,25 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         applicationKvStore.putBoolean(
             String.format(
                 NOMINATING_FOR_DELETION_MEDIA,
-                media!!.imageUrl
-            ), true
+                media!!.imageUrl,
+            ),
+            true,
         )
         enableProgressBar()
-        val resultSingletext: Single<Boolean> = reasonBuilder.getReason(media, reason)
-            .flatMap { _ ->
-                deleteHelper.makeDeletion(
-                    context, media, reason
-                )
-            }
+        val resultSingletext: Single<Boolean> =
+            reasonBuilder
+                .getReason(media, reason)
+                .flatMap { _ ->
+                    deleteHelper.makeDeletion(
+                        context,
+                        media,
+                        reason,
+                    )
+                }
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(this::handleDeletionResult, this::handleDeletionError);
+            .subscribe(this::handleDeletionResult, this::handleDeletionError)
     }
 
     private fun onSeeMoreClicked() {
@@ -1789,11 +1910,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             return
         }
         ProfileActivity.startYourself(
-            requireActivity(),  // Ensure this is a non-null Activity context
-            media?.user ?: "",  // Provide a fallback value if media?.user is null
-            sessionManager.userName != media?.user  // This can remain as is, null check will apply
+            requireActivity(), // Ensure this is a non-null Activity context
+            media?.user ?: "", // Provide a fallback value if media?.user is null
+            sessionManager.userName != media?.user, // This can remain as is, null check will apply
         )
-
     }
 
     /**
@@ -1811,19 +1931,19 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             binding.mediaDetailCategoryContainer.addView(
                 buildCatLabel(
                     sanitise(category),
-                    binding.mediaDetailCategoryContainer
-                )
+                    binding.mediaDetailCategoryContainer,
+                ),
             )
         }
     }
 
-    //As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826),
+    // As per issue #1826(see https://github.com/commons-app/apps-android-commons/issues/1826),
     // some categories come suffixed with strings prefixed with |. As per the discussion
-    //that was meant for alphabetical sorting of the categories and can be safely removed.
+    // that was meant for alphabetical sorting of the categories and can be safely removed.
     private fun sanitise(category: String): String {
         val indexOfPipe: Int = category.indexOf('|')
         if (indexOfPipe != -1) {
-            //Removed everything after '|'
+            // Removed everything after '|'
             return category.substring(0, indexOfPipe)
         }
         return category
@@ -1835,17 +1955,20 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private fun buildDepictLabel(
         depictionName: String?,
         entityId: String,
-        depictionContainer: LinearLayout
+        depictionContainer: LinearLayout,
     ): View {
-        val item: View = LayoutInflater.from(context)
-            .inflate(R.layout.detail_category_item, depictionContainer, false)
+        val item: View =
+            LayoutInflater
+                .from(context)
+                .inflate(R.layout.detail_category_item, depictionContainer, false)
         val textView: TextView = item.findViewById(R.id.mediaDetailCategoryItemText)
         textView.text = depictionName
         item.setOnClickListener {
-            val intent = Intent(
-                context,
-                WikidataItemDetailsActivity::class.java
-            )
+            val intent =
+                Intent(
+                    context,
+                    WikidataItemDetailsActivity::class.java,
+                )
             intent.putExtra("wikidataItemName", depictionName)
             intent.putExtra("entityId", entityId)
             intent.putExtra("fragment", "MediaDetailFragment")
@@ -1854,9 +1977,14 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         return item
     }
 
-    private fun buildCatLabel(catName: String, categoryContainer: ViewGroup): View {
-        val item: View = LayoutInflater.from(context)
-            .inflate(R.layout.detail_category_item, categoryContainer, false)
+    private fun buildCatLabel(
+        catName: String,
+        categoryContainer: ViewGroup,
+    ): View {
+        val item: View =
+            LayoutInflater
+                .from(context)
+                .inflate(R.layout.detail_category_item, categoryContainer, false)
         val textView: TextView = item.findViewById(R.id.mediaDetailCategoryItemText)
 
         textView.text = catName
@@ -1910,9 +2038,10 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
         return media.fallbackDescription
     }
 
-    private fun prettyDiscussion(discussion: String): String {
-        return discussion.ifEmpty { getString(R.string.detail_discussion_empty) }
-    }
+    private fun prettyDiscussion(discussion: String): String =
+        discussion.ifEmpty {
+            getString(R.string.detail_discussion_empty)
+        }
 
     private fun prettyLicense(media: Media): String {
         val licenseKey: String? = media.license
@@ -1955,9 +2084,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     fun showCaptionAndDescription() {
         if (binding.dummyCaptionDescriptionContainer.visibility == View.GONE) {
             binding.dummyCaptionDescriptionContainer.visibility = View.VISIBLE
+            onBackPressedCallback.isEnabled = true
             setUpCaptionAndDescriptionLayout()
         } else {
             binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+            onBackPressedCallback.isEnabled = false
         }
     }
 
@@ -2001,14 +2132,15 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     private val description: Unit
         get() {
             compositeDisposable.add(
-                mediaDataExtractor.getHtmlOfPage(
-                    Objects.requireNonNull(media?.filename!!)
-                )
-                    .subscribeOn(Schedulers.io())
+                mediaDataExtractor
+                    .getHtmlOfPage(
+                        Objects.requireNonNull(media?.filename!!),
+                    ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         { s: String -> extractDescription(s) },
-                        { t: Throwable? -> Timber.e(t) })
+                        { t: Throwable? -> Timber.e(t) },
+                    ),
             )
         }
 
@@ -2028,27 +2160,6 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             .loadDataWithBaseURL(null, descriptionHtmlCode!!, "text/html", "utf-8", null)
         binding.showCaptionsBinding.pbCircular.visibility = View.GONE
     }
-
-    /**
-     * Handle back event when fragment when showCaptionAndDescriptionContainer is visible
-     */
-    private fun handleBackEvent(view: View) {
-        view.isFocusableInTouchMode = true
-        view.requestFocus()
-        view.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(view: View, keycode: Int, keyEvent: KeyEvent): Boolean {
-                if (keycode == KeyEvent.KEYCODE_BACK) {
-                    if (binding.dummyCaptionDescriptionContainer.visibility == View.VISIBLE) {
-                        binding.dummyCaptionDescriptionContainer.visibility =
-                            View.GONE
-                        return true
-                    }
-                }
-                return false
-            }
-        })
-    }
-
 
     interface Callback {
         fun nominatingForDeletion(index: Int)
@@ -2070,10 +2181,11 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
     }
 
     private val imageBackgroundColorPref: SharedPreferences
-        get() = requireContext().getSharedPreferences(
-            IMAGE_BACKGROUND_COLOR + media!!.pageId,
-            Context.MODE_PRIVATE
-        )
+        get() =
+            requireContext().getSharedPreferences(
+                IMAGE_BACKGROUND_COLOR + media!!.pageId,
+                Context.MODE_PRIVATE,
+            )
 
     private val imageBackgroundColor: Int
         get() {
@@ -2081,7 +2193,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
                 imageBackgroundColorPref
             return imageBackgroundColorPref.getInt(
                 IMAGE_BACKGROUND_COLOR,
-                DEFAULT_IMAGE_BACKGROUND_COLOR
+                DEFAULT_IMAGE_BACKGROUND_COLOR,
             )
         }
 
@@ -2094,7 +2206,7 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
             index: Int,
             editable: Boolean,
             isCategoryImage: Boolean,
-            isWikipediaButtonDisplayed: Boolean
+            isWikipediaButtonDisplayed: Boolean,
         ): MediaDetailFragment {
             val mf = MediaDetailFragment()
             val state = Bundle()
@@ -2115,9 +2227,9 @@ class MediaDetailFragment : CommonsDaggerSupportFragment(), CategoryEditHelper.C
 
 @Composable
 fun FileUsagesContainer(
-    modifier: Modifier = Modifier,
     commonsContainerState: MediaDetailViewModel.FileUsagesContainerState,
     globalContainerState: MediaDetailViewModel.FileUsagesContainerState,
+    modifier: Modifier = Modifier,
 ) {
     var isCommonsListExpanded by rememberSaveable { mutableStateOf(true) }
     var isOtherWikisListExpanded by rememberSaveable { mutableStateOf(true) }
@@ -2128,18 +2240,22 @@ fun FileUsagesContainer(
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = stringResource(R.string.usages_on_commons_heading),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.titleSmall,
             )
             IconButton(onClick = { isCommonsListExpanded = !isCommonsListExpanded }) {
                 Icon(
-                    imageVector = if (isCommonsListExpanded) Icons.Default.KeyboardArrowUp
-                    else Icons.Default.KeyboardArrowDown,
-                    contentDescription = null
+                    imageVector =
+                        if (isCommonsListExpanded) {
+                            Icons.Default.KeyboardArrowUp
+                        } else {
+                            Icons.Default.KeyboardArrowDown
+                        },
+                    contentDescription = null,
                 )
             }
         }
@@ -2155,7 +2271,7 @@ fun FileUsagesContainer(
                         ListItem(headlineContent = {
                             Text(
                                 text = stringResource(R.string.no_usages_found),
-                                style = MaterialTheme.typography.titleSmall
+                                style = MaterialTheme.typography.titleSmall,
                             )
                         })
                     } else {
@@ -2164,21 +2280,23 @@ fun FileUsagesContainer(
                                 leadingContent = {
                                     Text(
                                         text = stringResource(R.string.bullet_point),
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
                                     )
                                 },
                                 headlineContent = {
                                     Text(
-                                        modifier = Modifier.clickable {
-                                            usage.link?.let { uriHandle.openUri(it) }
-                                        },
+                                        modifier =
+                                            Modifier.clickable {
+                                                usage.link?.let { uriHandle.openUri(it) }
+                                            },
                                         text = usage.title,
-                                        style = MaterialTheme.typography.titleSmall.copy(
-                                            color = Color(0xFF5A6AEC),
-                                            textDecoration = TextDecoration.Underline
-                                        )
+                                        style =
+                                            MaterialTheme.typography.titleSmall.copy(
+                                                color = Color(0xFF5A6AEC),
+                                                textDecoration = TextDecoration.Underline,
+                                            ),
                                     )
-                                }
+                                },
                             )
                         }
                     }
@@ -2188,29 +2306,33 @@ fun FileUsagesContainer(
                         Text(
                             text = commonsContainerState.errorMessage,
                             color = Color.Red,
-                            style = MaterialTheme.typography.titleSmall
+                            style = MaterialTheme.typography.titleSmall,
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = stringResource(R.string.usages_on_other_wikis_heading),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall
+                style = MaterialTheme.typography.titleSmall,
             )
             IconButton(onClick = { isOtherWikisListExpanded = !isOtherWikisListExpanded }) {
                 Icon(
-                    imageVector = if (isOtherWikisListExpanded) Icons.Default.KeyboardArrowUp
-                    else Icons.Default.KeyboardArrowDown,
-                    contentDescription = null
+                    imageVector =
+                        if (isOtherWikisListExpanded) {
+                            Icons.Default.KeyboardArrowUp
+                        } else {
+                            Icons.Default.KeyboardArrowDown
+                        },
+                    contentDescription = null,
                 )
             }
         }
@@ -2226,7 +2348,7 @@ fun FileUsagesContainer(
                         ListItem(headlineContent = {
                             Text(
                                 text = stringResource(R.string.no_usages_found),
-                                style = MaterialTheme.typography.titleSmall
+                                style = MaterialTheme.typography.titleSmall,
                             )
                         })
                     } else {
@@ -2235,21 +2357,23 @@ fun FileUsagesContainer(
                                 leadingContent = {
                                     Text(
                                         text = stringResource(R.string.bullet_point),
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
                                     )
                                 },
                                 headlineContent = {
                                     Text(
-                                        modifier = Modifier.clickable {
-                                            usage.link?.let { uriHandle.openUri(it) }
-                                        },
+                                        modifier =
+                                            Modifier.clickable {
+                                                usage.link?.let { uriHandle.openUri(it) }
+                                            },
                                         text = usage.title,
-                                        style = MaterialTheme.typography.titleSmall.copy(
-                                            color = Color(0xFF5A6AEC),
-                                            textDecoration = TextDecoration.Underline
-                                        )
+                                        style =
+                                            MaterialTheme.typography.titleSmall.copy(
+                                                color = Color(0xFF5A6AEC),
+                                                textDecoration = TextDecoration.Underline,
+                                            ),
                                     )
-                                }
+                                },
                             )
                         }
                     }
@@ -2259,11 +2383,11 @@ fun FileUsagesContainer(
                         Text(
                             text = globalContainerState.errorMessage,
                             color = Color.Red,
-                            style = MaterialTheme.typography.titleSmall
+                            style = MaterialTheme.typography.titleSmall,
                         )
                     })
                 }
-                MediaDetailViewModel.FileUsagesContainerState.Initial -> {}
+                MediaDetailViewModel.FileUsagesContainerState.Initial -> Unit
             }
         }
     }

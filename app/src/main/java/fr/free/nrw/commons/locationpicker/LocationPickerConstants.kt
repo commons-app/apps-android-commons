@@ -4,7 +4,6 @@ package fr.free.nrw.commons.locationpicker
  * Constants need for location picking
  */
 object LocationPickerConstants {
-
     const val ACTIVITY_KEY = "location.picker.activity"
 
     const val MAP_CAMERA_POSITION = "location.picker.cameraPosition"

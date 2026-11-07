@@ -21,6 +21,7 @@
 * Rodney Araujo
 * Shirayuki
 * Siebrand
+* Stjn
 * Verdy p
 * Whym
 * Woytecr
@@ -392,6 +393,7 @@
   <string name="images_used_explanation">Profile statistics explanation.</string>
   <string name="error_occurred">Error message.</string>
   <string name="notifications_channel_name_all">Notifications title.</string>
+  <string name="notifications_channel_name_uploads">Name of the notification channel for upload progress, shown in the Android notification settings of the app. Notifications in this channel make no sound.</string>
   <string name="preference_author_name_toggle">Settings item.</string>
   <string name="preference_author_name_toggle_summary">Settings item explanation.</string>
   <string name="preference_author_name">Settings item.</string>
@@ -544,14 +546,14 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">Deletion nomination reason prompt.</string>
   <string name="category_edit_helper_make_edit_toast">Notice (toast) when trying to update categories.</string>
   <string name="category_edit_helper_show_edit_title">Shown after trying to update categories.</string>
-  <string name="category_edit_helper_show_edit_title_success">Shown after {{Msg-wm|depictions_edit_helper_show_edit_title}} (Lego.)</string>
+  <string name="category_edit_helper_show_edit_title_success">Shown after {{Msg-wm|Commons-android-strings-depictions_edit_helper_show_edit_title}} (Lego.)</string>
   <string name="category_edit_helper_show_edit_message_if">Status message.</string>
-  <string name="category_edit_helper_edit_message_else">Shown after {{msg-mw|category_edit_helper_show_edit_title}}</string>
+  <string name="category_edit_helper_edit_message_else">Shown after {{msg-wm|Commons-android-strings-category_edit_helper_show_edit_title}}</string>
   <string name="category_edit_button_text">Seems to be unused.</string>
   <string name="depictions_edit_helper_make_edit_toast">{{Doc-commons-app-depicts}}</string>
   <string name="depictions_edit_helper_show_edit_title">{{Doc-commons-app-depicts}}</string>
   <string name="depictions_edit_helper_show_edit_message_if">{{Doc-commons-app-depicts}}</string>
-  <string name="depictions_edit_helper_edit_message_else">Shown after {{Msg-wm|depictions_edit_helper_show_edit_title}} (Lego.)\n\n{{Doc-commons-app-depicts}}</string>
+  <string name="depictions_edit_helper_edit_message_else">Shown after {{Msg-wm|Commons-android-strings-depictions_edit_helper_show_edit_title}} (Lego.)\n\n{{Doc-commons-app-depicts}}</string>
   <string name="coordinates_edit_helper_make_edit_toast">Notice (toast) when trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Shown after trying to update coordinates, with {{msg-wm|Commons-android-strings-coordinates_edit_helper_show_edit_title_success}} or {{msg-wm|Commons-android-strings-coordinates_edit_helper_edit_message_else}}. (Lego).</string>
   <string name="description_edit_helper_show_edit_title">Shown after trying to update description with {{msg-wm|Commons-android-strings-coordinates_edit_helper_show_edit_title_success}} or {{msg-wm|Commons-android-strings-description_edit_helper_edit_message_else}}. (Lego.)</string>
@@ -655,6 +657,8 @@
   <string name="resuming_upload">Seems to be unused.</string>
   <string name="pausing_upload">A notice after pausing the upload.</string>
   <string name="cancelling_upload">A notice after canceling the upload.</string>
+  <string name="retrying_upload">A notice after the user taps the retry button on a failed upload.</string>
+  <string name="retrying_failed_uploads">A notice after the user taps the button to retry all failed uploads.</string>
   <string name="cancel_upload">Button for canceling an upload</string>
   <string name="limited_connection_explanation">Seems to be unused.</string>
   <string name="limited_connection_is_on">Seems to be unused.</string>

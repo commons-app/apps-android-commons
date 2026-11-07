@@ -1,17 +1,15 @@
 package fr.free.nrw.commons.media
 
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.forMedia
 import timber.log.Timber
 
-// FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
 class MediaDetailAdapter(
-    val mediaDetailPagerFragment: MediaDetailPagerFragment,
-    fm: FragmentManager
-) : FragmentStatePagerAdapter(fm) {
+    fm: FragmentManager,
+    private val mediaDetailPagerFragment: MediaDetailPagerFragment,
+) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     /**
      * Keeps track of the current displayed fragment.
      */
@@ -26,54 +24,52 @@ class MediaDetailAdapter(
             }
             mediaDetailPagerFragment.binding?.mediaDetailsPager?.postDelayed(
                 {
-                    if (mediaDetailPagerFragment.activity != null)
+                    if (mediaDetailPagerFragment.activity != null) {
                         mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu()
-                }, 5
+                    }
+                },
+                5,
             )
         }
         return if (mediaDetailPagerFragment.isFromFeaturedRootFragment) {
             forMedia(
                 mediaDetailPagerFragment.position + i,
-                mediaDetailPagerFragment.editable, mediaDetailPagerFragment.isFeaturedImage,
-                mediaDetailPagerFragment.isWikipediaButtonDisplayed
+                mediaDetailPagerFragment.editable,
+                mediaDetailPagerFragment.isFeaturedImage,
+                mediaDetailPagerFragment.isWikipediaButtonDisplayed,
             )
         } else {
             forMedia(
-                i, mediaDetailPagerFragment.editable,
+                mediaDetailPagerFragment.position + i,
+                mediaDetailPagerFragment.editable,
                 mediaDetailPagerFragment.isFeaturedImage,
-                mediaDetailPagerFragment.isWikipediaButtonDisplayed
+                mediaDetailPagerFragment.isWikipediaButtonDisplayed,
             )
         }
     }
 
     override fun getCount(): Int {
-        if (mediaDetailPagerFragment.activity == null) {
-            Timber.d("Skipping getCount. Returning as activity is destroyed!")
-            return 0
+        return if (mediaDetailPagerFragment.isFromFeaturedRootFragment) {
+            mediaDetailPagerFragment.mediaDetailProvider.totalMediaCount
+        } else {
+            mediaDetailPagerFragment.totalMediaCount
         }
-        return mediaDetailPagerFragment.mediaDetailProvider!!.getTotalMediaCount()
     }
 
     /**
-     * If current fragment is of type MediaDetailFragment, return it, otherwise return null.
+     * Gives the reference to the current fragment
      *
-     * @return MediaDetailFragment
+     * @return Fragment
      */
-    val currentMediaDetailFragment: MediaDetailFragment?
-        get() = currentFragment as? MediaDetailFragment
+    val primaryItem: Fragment?
+        get() = currentFragment
 
-    /**
-     * Called to inform the adapter of which item is currently considered to be the "primary", that
-     * is the one show to the user as the current page.
-     */
     override fun setPrimaryItem(
-        container: ViewGroup, position: Int,
-        obj: Any
+        container: android.view.ViewGroup,
+        position: Int,
+        `object`: Any,
     ) {
-        // Update the current fragment if changed
-        if (currentFragment !== obj) {
-            currentFragment = (obj as Fragment)
-        }
-        super.setPrimaryItem(container, position, obj)
+        super.setPrimaryItem(container, position, `object`)
+        currentFragment = `object` as Fragment
     }
 }

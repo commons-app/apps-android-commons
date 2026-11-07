@@ -18,7 +18,8 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|" +
+            "pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
     )
     fun searchCategories(
         @Query("gsrsearch") filter: String?,
@@ -34,12 +35,13 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&" +
+            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun searchCategoriesForPrefix(
-        @Query("gacprefix") prefix: String?,
-        @Query("gaclimit") itemLimit: Int,
-        @Query("gacoffset") offset: Int,
+        @Query("gapprefix") prefix: String?,
+        @Query("gaplimit") itemLimit: Int,
+        @Query("gapoffset") offset: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -52,13 +54,14 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allcategories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&" +
+            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun getCategoriesByName(
-        @Query("gacfrom") startingCategory: String?,
-        @Query("gacto") endingCategory: String?,
-        @Query("gaclimit") itemLimit: Int,
-        @Query("gacoffset") offset: Int,
+        @Query("gapfrom") startingCategory: String?,
+        @Query("gapto") endingCategory: String?,
+        @Query("gaplimit") itemLimit: Int,
+        @Query("gapoffset") offset: Int,
     ): Single<MwQueryResponse>
 
     /**
@@ -69,14 +72,18 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=categories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
+        "w/api.php?action=query&format=json&formatversion=2&generator=categories&" +
+            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
     )
     fun getCategoriesByTitles(
         @Query("titles") titles: String?,
         @Query("gcllimit") itemLimit: Int,
     ): Single<MwQueryResponse>
 
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&" +
+            "gcmtype=subcat&prop=info&gcmlimit=50",
+    )
     fun getSubCategoryList(
         @Query("gcmtitle") categoryName: String,
         @QueryMap(encoded = true) continuation: Map<String, String>,
