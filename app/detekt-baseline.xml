@@ -723,7 +723,6 @@
     <ID>TooManyFunctions:ActivityBuilderModule.kt$ActivityBuilderModule</ID>
     <ID>TooManyFunctions:AppDatabase.kt$AppDatabase : RoomDatabase</ID>
     <ID>TooManyFunctions:BasicKvStore.kt$BasicKvStore : KeyValueStore</ID>
-    <ID>TooManyFunctions:BlurOverlayView.kt$BlurOverlayView : View</ID>
     <ID>TooManyFunctions:CategoriesContract.kt$CategoriesContract$View</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
@@ -733,7 +732,6 @@
     <ID>TooManyFunctions:ContributionDao.kt$ContributionDao</ID>
     <ID>TooManyFunctions:ContributionsFragment.kt$ContributionsFragment : CommonsDaggerSupportFragmentOnBackStackChangedListenerLocationUpdateListenerMediaDetailProviderSensorEventListenerICampaignsViewViewCallback</ID>
     <ID>TooManyFunctions:Converters.kt$Converters</ID>
-    <ID>TooManyFunctions:CropOverlayView.kt$CropOverlayView : View</ID>
     <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
     <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$UserActionListener : BasePresenter</ID>
