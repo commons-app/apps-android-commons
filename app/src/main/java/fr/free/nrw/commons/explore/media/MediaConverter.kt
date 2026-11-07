@@ -75,17 +75,17 @@ class MediaConverter
             val anchorStartTagTerminalString = "\">"
             val anchorCloseTag = "</a>"
 
-            return if (!authorHtml.contains("<") && !authorHtml.contains(">") ) {
+            return if (!authorHtml.contains("<") && !authorHtml.contains(">")) {
                 authorHtml.trim()
             } else if (!authorHtml.contains(anchorStartTagTerminalString) || !authorHtml.endsWith(anchorCloseTag)) {
                 null
             } else {
-
-                val authorText = authorHtml.substring(
-                    authorHtml.indexOf(anchorStartTagTerminalString) +
+                val authorText =
+                    authorHtml.substring(
+                        authorHtml.indexOf(anchorStartTagTerminalString) +
                             anchorStartTagTerminalString.length,
-                    authorHtml.indexOf(anchorCloseTag),
-                )
+                        authorHtml.indexOf(anchorCloseTag),
+                    )
                 if (authorText.contains("<") || authorText.contains(">")) {
                     null
                 } else {
@@ -115,4 +115,3 @@ private val ExtMetadata.prefixedLicenseUrl: String
 
 private val ExtMetadata.latLng: LatLng?
     get() = LatLng.latLongOrNull(gpsLatitude(), gpsLongitude())
-

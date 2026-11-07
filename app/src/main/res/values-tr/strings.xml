@@ -390,6 +390,12 @@
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="rotate">Döndür</string>
   <string name="crop">Kırp</string>
+  <string name="blur">Bulanıklık</string>
+  <string name="autoblur">OtoBulanıklaştırma</string>
+  <string name="autodetect_title">Yüzleri ve araç plakalarını otomatik olarak bulanıklaştırma.</string>
+  <string name="autodetect_description">Her bulanıklaştırma alanındaki ❌ düğmesini kullanarak yanlış algılamaları kaldırabilirsiniz.</string>
+  <string name="autoblur_failed_to_load">Otomatik bulanıklaştırma için görüntü yüklenemedi.</string>
+  <string name="autoblur_no_region_detected">Otomatik bulanıklaştırma için hiçbir bölge tespit edilmedi.</string>
   <string name="error_fetching_nearby_places">Yakındaki yerler yüklenemedi</string>
   <string name="no_pictures_in_this_area">Bu bölgede resim yok</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
@@ -736,6 +742,7 @@
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
   <string name="custom_selector_over_limit_warning">Teknik nedenlerden dolayı uygulama aynı anda %1$d fotoğraftan fazlasını güvenilir bir şekilde yükleyemiyor. %1$d olan yükleme sınırı %2$d ile aşıldı.</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">Reddet</string>
+  <string name="custom_selector_duplicates_warning">Seçilen görsellerden bazıları mükerrerdir ve yüklemeden önce kaldırılacaktır.</string>
   <string name="custom_selector_button_limit_text">Maks: %1$d</string>
   <string name="custom_selector_limit_error_desc">Hata: Yükleme Sınırı Aşıldı</string>
   <string name="place_state_wlm">WLM</string>
@@ -885,4 +892,9 @@
   <string name="license_cc0_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde hiçbir koşul olmaksızın dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir.</string>
   <string name="license_cc_by_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması gerekir.</string>
   <string name="license_cc_by_sa_long_description">Bu lisans, yeniden kullanıcıların materyali herhangi bir ortam veya biçimde, ticari amaçlar dahil, dağıtmasına, yeniden düzenlemesine, uyarlamasına ve üzerine inşa etmesine izin verir; ancak orijinal yazara atıfta bulunulması ve aynı lisansın kullanılması gerekir.</string>
+  <string name="error_getting_image_properties">Görüntü özellikleri alınırken hata oluştu:</string>
+  <string name="error_blur_no_rectangle">Lütfen fotoğrafın üzerine en az bir dikdörtgen çizin</string>
+  <string name="error_applying_blur">Bulanıklaştırma işleminde hata oluştu</string>
+  <string name="failed_to_apply_crop">Kırpma işlemi başarısız oldu</string>
+  <string name="failed_to_save_image">Görüntü kaydedilemedi</string>
 </resources>

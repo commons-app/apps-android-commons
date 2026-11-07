@@ -8,11 +8,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -24,8 +24,6 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.models.Notification
-import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
@@ -38,6 +36,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -80,19 +79,19 @@ class ContributionsFragmentUnitTests {
     private lateinit var notificationController: NotificationController
 
     @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
-
-    @Mock
     private lateinit var notificationCount: TextView
 
     @Mock
-    private lateinit var singleNotification: Single<List<Notification>>
+    private lateinit var singleUnreadCount: Single<Int>
 
     @Mock
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
     private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+
+    @Mock
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
@@ -161,18 +160,18 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSetNotificationCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(notificationController.getNotifications(anyBoolean())).thenReturn(singleNotification)
-        `when`(notificationController.getNotifications(anyBoolean()).subscribeOn(any())).thenReturn(
-            singleNotification,
+        `when`(notificationController.getUnreadCount()).thenReturn(singleUnreadCount)
+        `when`(notificationController.getUnreadCount().subscribeOn(any())).thenReturn(
+            singleUnreadCount,
         )
         `when`(
-            notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
+            notificationController.getUnreadCount().subscribeOn(any()).observeOn(
                 any(),
             ),
-        ).thenReturn(singleNotification)
+        ).thenReturn(singleUnreadCount)
         `when`(
             notificationController
-                .getNotifications(anyBoolean())
+                .getUnreadCount()
                 .subscribeOn(any())
                 .observeOn(
                     any(),
@@ -188,25 +187,38 @@ class ContributionsFragmentUnitTests {
         val method: Method =
             ContributionsFragment::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, listOf<Notification>())
+        method.invoke(fragment, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitNotificationViewsCaseNonEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val list: List<Notification> =
-            listOf(Notification(NotificationType.UNKNOWN, "", "", "", "", ""))
         val method: Method =
             ContributionsFragment::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, list)
+        method.invoke(fragment, 2)
+        verify(notificationCount).setText("2")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitNotificationViewsAboveBadgeCap() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val method: Method =
+            ContributionsFragment::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                Int::class.javaPrimitiveType,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, 100)
+        verify(notificationCount).setText("99+")
     }
 
     @Test
@@ -351,5 +363,39 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
+    }
+
+    @Test
+    fun testRetryUploadSkipsPermanentFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "filetype-banned",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(0, contribution.retries)
+        verifyNoInteractions(contributionsPresenter)
+    }
+
+    @Test
+    fun testRetryUploadRetriesTemporaryFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "stashfailed",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(1, contribution.retries)
+        verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
     }
 }

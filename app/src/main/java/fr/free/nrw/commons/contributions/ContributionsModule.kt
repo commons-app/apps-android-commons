@@ -8,9 +8,8 @@ import dagger.Module
  */
 @Module
 abstract class ContributionsModule {
-
     @Binds
     abstract fun bindsContributionsPresenter(
-        presenter: ContributionsPresenter?
+        presenter: ContributionsPresenter?,
     ): ContributionsContract.UserActionListener?
 }
