@@ -836,14 +836,19 @@ class UploadActivity :
     private fun receiveExternalSharedItems() {
         val result = contributionController!!.handleExternalImagesPicked(this, intent)
         // enforce the limit for the external sharing of the file
-        uploadableFiles =
-            if (result.files.size > MAX_IMAGE_COUNT) {
-                showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
-                result.files.take(MAX_IMAGE_COUNT).toMutableList()
-            } else {
-                result.files.toMutableList()
-            }
+        uploadableFiles = limitToMaxImageCount(result.files)
         skippedSharedFilesCount = result.skippedCount
+    }
+
+    /**
+     * Keeps only the first [MAX_IMAGE_COUNT] files and tells the user when some were dropped.
+     */
+    private fun limitToMaxImageCount(files: List<UploadableFile>): MutableList<UploadableFile> {
+        if (files.size <= MAX_IMAGE_COUNT) {
+            return files.toMutableList()
+        }
+        showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+        return files.take(MAX_IMAGE_COUNT).toMutableList()
     }
 
     private fun receiveInternalSharedItems() {
@@ -877,13 +882,7 @@ class UploadActivity :
             }
 
         // trim the list if it exceeds the MAX_IMAGE_COUNT
-        uploadableFiles =
-            if (parsedFiles.size > MAX_IMAGE_COUNT) {
-                showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
-                parsedFiles.take(MAX_IMAGE_COUNT).toMutableList()
-            } else {
-                parsedFiles
-            }
+        uploadableFiles = limitToMaxImageCount(parsedFiles)
         isMultipleFilesSelected = uploadableFiles.size > 1
         Timber.i("Received files count: ${uploadableFiles.size}")
         uploadableFiles.forEachIndexed { index, file ->
