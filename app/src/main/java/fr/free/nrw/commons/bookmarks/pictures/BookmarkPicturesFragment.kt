@@ -14,11 +14,9 @@ import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment
 import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
-import fr.free.nrw.commons.utils.ViewUtil.showShortSnackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 class BookmarkPicturesFragment : DaggerFragment() {
@@ -26,6 +24,7 @@ class BookmarkPicturesFragment : DaggerFragment() {
     private val compositeDisposable = CompositeDisposable()
 
     private var binding: FragmentBookmarksPicturesBinding? = null
+    private var statusView: BookmarkPicturesStatusView? = null
 
     @JvmField
     @Inject
@@ -37,6 +36,7 @@ class BookmarkPicturesFragment : DaggerFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false)
+        statusView = BookmarkPicturesStatusView(binding!!)
         return binding!!.root
     }
 
@@ -59,6 +59,7 @@ class BookmarkPicturesFragment : DaggerFragment() {
         super.onDestroy()
         compositeDisposable.clear()
         binding = null
+        statusView = null
     }
 
     override fun onResume() {
@@ -80,7 +81,7 @@ class BookmarkPicturesFragment : DaggerFragment() {
     @SuppressLint("CheckResult")
     private fun initList() {
         if (!isInternetConnectionEstablished(context)) {
-            handleNoInternet()
+            statusView!!.showNoInternet(gridAdapter?.isEmpty != false)
             return
         }
 
@@ -92,61 +93,11 @@ class BookmarkPicturesFragment : DaggerFragment() {
                 .loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::handleSuccess, ::handleError),
+                .subscribe(
+                    ::handleSuccess,
+                    { statusView?.showError(it, gridAdapter?.isEmpty != false) },
+                ),
         )
-    }
-
-    /**
-     * Handles the UI updates for no internet scenario
-     */
-    private fun handleNoInternet() {
-        binding!!.loadingImagesProgressBar.visibility = View.GONE
-        if (gridAdapter == null || gridAdapter!!.isEmpty) {
-            binding!!.statusMessage.visibility = View.VISIBLE
-            binding!!.statusMessage.text = getString(R.string.no_internet)
-        } else {
-            showShortSnackbar(binding!!.parentLayout, R.string.no_internet)
-        }
-    }
-
-    /**
-     * Logs and handles API error scenario
-     * @param throwable
-     */
-    private fun handleError(throwable: Throwable) {
-        Timber.e(throwable, "Error occurred while loading images inside a category")
-        try {
-            showShortSnackbar(binding!!.root, R.string.error_loading_images)
-            initErrorView()
-        } catch (e: Exception) {
-            Timber.e(e)
-        }
-    }
-
-    /**
-     * Handles the UI updates for a error scenario
-     */
-    private fun initErrorView() {
-        binding!!.loadingImagesProgressBar.visibility = View.GONE
-        if (gridAdapter == null || gridAdapter!!.isEmpty) {
-            binding!!.statusMessage.visibility = View.VISIBLE
-            binding!!.statusMessage.text = getString(R.string.no_images_found)
-        } else {
-            binding!!.statusMessage.visibility = View.GONE
-        }
-    }
-
-    /**
-     * Handles the UI updates when there is no bookmarks
-     */
-    private fun initEmptyBookmarkListView() {
-        binding!!.loadingImagesProgressBar.visibility = View.GONE
-        if (gridAdapter == null || gridAdapter!!.isEmpty) {
-            binding!!.statusMessage.visibility = View.VISIBLE
-            binding!!.statusMessage.text = getString(R.string.bookmark_empty)
-        } else {
-            binding!!.statusMessage.visibility = View.GONE
-        }
     }
 
     /**
@@ -156,11 +107,11 @@ class BookmarkPicturesFragment : DaggerFragment() {
      */
     private fun handleSuccess(collection: List<Media>?) {
         if (collection == null) {
-            initErrorView()
+            statusView!!.showErrorView(gridAdapter?.isEmpty != false)
             return
         }
         if (collection.isEmpty()) {
-            initEmptyBookmarkListView()
+            statusView!!.showEmptyBookmarks(gridAdapter?.isEmpty != false)
             return
         }
 

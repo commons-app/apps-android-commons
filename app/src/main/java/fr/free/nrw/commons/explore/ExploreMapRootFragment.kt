@@ -1,29 +1,18 @@
 package fr.free.nrw.commons.explore
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.map.ExploreMapFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 
-class ExploreMapRootFragment :
-    CommonsDaggerSupportFragment,
-    MediaDetailProvider,
-    CategoryImagesCallback {
-    private var mediaDetails: MediaDetailPagerFragment? = null
+class ExploreMapRootFragment : ExploreMediaRootFragment {
     private var mapFragment: ExploreMapFragment? = null
-    private var binding: FragmentFeaturedRootBinding? = null
+    override val contentFragment: Fragment?
+        get() = mapFragment
 
     constructor()
 
@@ -53,18 +42,6 @@ class ExploreMapRootFragment :
         mapFragment!!.arguments = featuredArguments
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        super.onCreate(savedInstanceState)
-
-        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false)
-
-        return binding!!.root
-    }
-
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
@@ -73,60 +50,6 @@ class ExploreMapRootFragment :
         if (savedInstanceState == null) {
             setFragment(mapFragment!!, mediaDetails)
         }
-    }
-
-    fun setFragment(
-        fragment: Fragment,
-        otherFragment: Fragment?,
-    ) {
-        if (fragment.isAdded && otherFragment != null) {
-            childFragmentManager
-                .beginTransaction()
-                .hide(otherFragment)
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (fragment.isAdded && otherFragment == null) {
-            childFragmentManager
-                .beginTransaction()
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (!fragment.isAdded && otherFragment != null) {
-            childFragmentManager
-                .beginTransaction()
-                .hide(otherFragment)
-                .add(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (!fragment.isAdded) {
-            childFragmentManager
-                .beginTransaction()
-                .replace(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        }
-    }
-
-    private fun removeFragment(fragment: Fragment) {
-        childFragmentManager
-            .beginTransaction()
-            .remove(fragment)
-            .commit()
-        childFragmentManager.executePendingTransactions()
-    }
-
-    override fun onMediaClicked(position: Int) {
-        binding!!.exploreContainer.visibility = View.VISIBLE
-        (parentFragment as ExploreFragment).binding!!.tabLayout.visibility = View.GONE
-        mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
-        (parentFragment as ExploreFragment).setScroll(false)
-        setFragment(mediaDetails!!, mapFragment)
-        mediaDetails!!.showImage(position)
     }
 
     /**
@@ -147,26 +70,6 @@ class ExploreMapRootFragment :
     override fun getTotalMediaCount(): Int = mapFragment?.mediaList?.size ?: 0
 
     override fun getContributionStateAt(position: Int): Int? = null
-
-    /**
-     * Reload media detail fragment once media is nominated
-     *
-     * @param index item position that has been nominated
-     */
-    override fun refreshNominatedMedia(index: Int) {
-        if (mediaDetails != null && !mapFragment!!.isVisible) {
-            removeFragment(mediaDetails!!)
-            onMediaClicked(index)
-        }
-    }
-
-    /**
-     * This method is called on success of API call for featured images or mobile uploads. The
-     * viewpager will notified that number of items have changed.
-     */
-    override fun viewPagerNotifyDataSetChanged() {
-        mediaDetails?.notifyDataSetChanged()
-    }
 
     /**
      * Performs back pressed action on the fragment. Return true if the event was handled by the
@@ -199,12 +102,6 @@ class ExploreMapRootFragment :
     }
 
     fun loadNearbyMapFromExplore() = mapFragment?.loadNearbyMapFromExplore()
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        binding = null
-    }
 
     fun requestLocationIfNeeded() {
         mapFragment?.requestLocationIfNeeded()

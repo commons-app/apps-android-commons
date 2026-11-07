@@ -398,6 +398,7 @@
   <string name="images_used_explanation">Wikimedia-artikkeleissa käytettyjen Commonsiin tallentamiesi kuvien määrä</string>
   <string name="error_occurred">Tapahtui virhe!</string>
   <string name="notifications_channel_name_all">Commons-ilmoitus</string>
+  <string name="notifications_channel_name_uploads">Latauksen edistyminen</string>
   <string name="preference_author_name_toggle">Käytä mukautettua tekijän nimeä</string>
   <string name="preference_author_name_toggle_summary">Käytä mukautettua tekijän nimeä käyttäjänimesi sijaan kuvia tallentaessa</string>
   <string name="preference_author_name">Mukautettu tekijän nimi</string>
