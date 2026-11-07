@@ -108,11 +108,6 @@ class UploadMediaDetailFragment :
     var inAppPictureLocation: LatLng? = null
 
     /**
-     * editableUploadItem : Storing the upload item before going to update the coordinates
-     */
-    private var editableUploadItem: UploadItem? = null
-
-    /**
      * Tracks the URI of an edited image (after rotation/crop in EditActivity).
      * When set, this takes priority over the original uploadItem.mediaUri so that
      * the async onImageProcessed callback doesn't overwrite the preview with the
@@ -196,18 +191,7 @@ class UploadMediaDetailFragment :
             Timber.d("Restoring state: savedItems size = %s", savedItems?.size ?: "null")
             if (savedItems != null && savedItems.isNotEmpty()) {
                 uploadMediaDetailAdapter.items = savedItems
-                // only call setUploadMediaDetails if indexOfFragment is valid
-                if (fragmentCallback != null) {
-                    indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
-                    if (indexOfFragment >= 0) {
-                        presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
-                        Timber.d("Restored and set upload media details for index %d", indexOfFragment)
-                    } else {
-                        Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
-                    }
-                } else {
-                    Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
-                }
+                persistMediaDetails()
             } else {
                 // initialize with a default UploadMediaDetail if saved state is empty or null
                 uploadMediaDetailAdapter.items = mutableListOf(UploadMediaDetail())
@@ -522,6 +506,27 @@ class UploadMediaDetailFragment :
     }
 
     /**
+     * Fixes issue #6938: without this, rows added via "+" only existed in the adapter
+     * and were lost once the fragment was repopulated, so only the primary caption uploaded.
+     */
+    private fun persistMediaDetails() {
+        // only call setUploadMediaDetails if indexOfFragment is valid
+        if (fragmentCallback != null) {
+            indexOfFragment = fragmentCallback!!.getIndexInViewFlipper(this)
+            if (indexOfFragment >= 0) {
+                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.items, indexOfFragment)
+                Timber.d("Restored and set upload media details for index %d", indexOfFragment)
+            } else {
+                Timber.w("Invalid indexOfFragment %d, skipping setUploadMediaDetails", indexOfFragment)
+            }
+        } else {
+            Timber.w("fragmentCallback is null, skipping setUploadMediaDetails")
+        }
+    }
+
+    override fun onMediaDetailsChanged() = persistMediaDetails()
+
+    /**
      * This method gets called whenever the next/previous button is pressed
      */
     override fun onBecameVisible() {
@@ -665,12 +670,11 @@ class UploadMediaDetailFragment :
      * @param uploadItem The UploadItem to be edited.
      *
      * This method is called to start the image editing activity for a specific UploadItem.
-     * It sets the UploadItem as the currently editable item, creates an intent to launch the
-     * EditActivity, and passes the image file path as an extra in the intent. The activity
-     * is started using resultLauncher that handles the result in respective callback.
+     * It creates an intent to launch the EditActivity, and passes the image file path as an
+     * extra in the intent. The activity is started using resultLauncher that handles the
+     * result in respective callback.
      */
     override fun showEditActivity(uploadItem: UploadItem) {
-        editableUploadItem = uploadItem
         val intent = Intent(context, EditActivity::class.java)
         // used the mediaUri from the uploadItem.
         // now, if the image is edited, uploadItem.mediaUri points to the new rotated file.
@@ -686,7 +690,6 @@ class UploadMediaDetailFragment :
      * @param uploadItem current upload item
      */
     private fun goToLocationPickerActivity(uploadItem: UploadItem) {
-        editableUploadItem = uploadItem
         var defaultLatitude = 37.773972
         var defaultLongitude = -122.431297
         var defaultZoom = 16.0
@@ -778,6 +781,14 @@ class UploadMediaDetailFragment :
         }
     }
 
+    /**
+     * Returns the upload item shown by this fragment. It is looked up each time instead of being
+     * kept in a field, because the fragment can be recreated while the editor or the location
+     * picker is open, and their result is then delivered to the new fragment.
+     */
+    private fun currentUploadItem(): UploadItem? =
+        fragmentCallback?.getIndexInViewFlipper(this)?.let { presenter.getUploadItem(it) }
+
     private fun onEditActivityResult(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val path = result.data!!.getStringExtra("editedImageFilePath")
@@ -786,9 +797,18 @@ class UploadMediaDetailFragment :
                 Timber.e("Error in editing image")
                 return
             }
+            val uploadItem = currentUploadItem()
+            if (uploadItem == null) {
+                Timber.e("No upload item for this fragment, the edited image was not applied")
+                return
+            }
             try {
                 val editedFile = File(path!!)
                 val editedUri = Uri.fromFile(editedFile)
+                uploadItem.setContentAndMediaUri(editedUri)
+                // Update uploadableFile so re-opening the edit screen loads
+                // the already-edited image instead of the original
+                uploadableFile = UploadableFile(editedUri, editedFile)
 
                 // Store the edited URI so that any future onImageProcessed callback
                 // (e.g. from an async receiveImage after activity recreation) won't
@@ -798,10 +818,6 @@ class UploadMediaDetailFragment :
                 if (_binding != null) {
                     binding.backgroundImage.setImageURI(editedUri)
                 }
-                editableUploadItem!!.setContentAndMediaUri(editedUri)
-                // Update uploadableFile so re-opening the edit screen loads
-                // the already-edited image instead of the original
-                uploadableFile = UploadableFile(editedUri, editedFile)
                 fragmentCallback!!.changeThumbnail(
                     indexOfFragment,
                     path,
@@ -816,7 +832,8 @@ class UploadMediaDetailFragment :
      * Removes the location data from the image, by setting them to null
      */
     private fun removeLocation() {
-        editableUploadItem!!.gpsCoords!!.decimalCoords = null
+        val gpsCoords = currentUploadItem()?.gpsCoords ?: return
+        gpsCoords.decimalCoords = null
         try {
             val filePath = uploadableFile!!.getFilePath()
             RandomAccessFileExifWriter.removeLocation(File(filePath))
@@ -829,9 +846,9 @@ class UploadMediaDetailFragment :
                 binding.locationTextView.setText(R.string.add_location)
             }
 
-            editableUploadItem!!.gpsCoords!!.decLatitude = 0.0
-            editableUploadItem!!.gpsCoords!!.decLongitude = 0.0
-            editableUploadItem!!.gpsCoords!!.imageCoordsExists = false
+            gpsCoords.decLatitude = 0.0
+            gpsCoords.decLongitude = 0.0
+            gpsCoords.imageCoordsExists = false
             hasUserRemovedLocation = true
 
             Toast
@@ -858,13 +875,14 @@ class UploadMediaDetailFragment :
         longitude: String,
         zoom: Double,
     ) {
+        val gpsCoords = currentUploadItem()?.gpsCoords ?: return
         val roundedLat = roundCoordinate(latitude.toDouble())
         val roundedLon = roundCoordinate(longitude.toDouble())
-        editableUploadItem!!.gpsCoords!!.decLatitude = roundedLat.toDouble()
-        editableUploadItem!!.gpsCoords!!.decLongitude = roundedLon.toDouble()
-        editableUploadItem!!.gpsCoords!!.decimalCoords = "$roundedLat|$roundedLon"
-        editableUploadItem!!.gpsCoords!!.imageCoordsExists = true
-        editableUploadItem!!.gpsCoords!!.zoomLevel = zoom
+        gpsCoords.decLatitude = roundedLat.toDouble()
+        gpsCoords.decLongitude = roundedLon.toDouble()
+        gpsCoords.decimalCoords = "$roundedLat|$roundedLon"
+        gpsCoords.imageCoordsExists = true
+        gpsCoords.zoomLevel = zoom
 
         // Replace the map icon using the one with a green tick
         val mapTick = ContextCompat.getDrawable(requireContext(), R.drawable.ic_map_available_20dp)

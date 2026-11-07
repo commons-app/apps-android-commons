@@ -234,27 +234,25 @@ class UploadWorker(
     private fun createForegroundInfo(): ForegroundInfo =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ForegroundInfo(
-                1,
+                UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID,
                 createNotificationForForegroundService(),
                 ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
             )
         } else {
             ForegroundInfo(
-                1,
+                UploadNotificationHelper.FOREGROUND_NOTIFICATION_ID,
                 createNotificationForForegroundService(),
             )
         }
 
     override suspend fun getForegroundInfo(): ForegroundInfo = createForegroundInfo()
 
-    private fun createNotificationForForegroundService(): Notification {
-        // TODO: Improve notification for foreground service
-        return notificationHelper
+    private fun createNotificationForForegroundService(): Notification =
+        notificationHelper
             .getNotificationBuilder(
                 CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS,
             ).setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
 
     /**
      * Upload the contribution

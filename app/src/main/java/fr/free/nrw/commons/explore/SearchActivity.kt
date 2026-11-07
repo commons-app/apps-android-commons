@@ -1,33 +1,20 @@
 package fr.free.nrw.commons.explore
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
-import com.jakewharton.rxbinding2.view.RxView
-import com.jakewharton.rxbinding2.widget.RxSearchView
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.databinding.ActivitySearchBinding
-import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
-import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
-import fr.free.nrw.commons.explore.media.SearchMediaFragment
-import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.FragmentUtils.isFragmentUIActive
 import fr.free.nrw.commons.utils.ViewUtil.hideKeyboard
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
-import io.reactivex.android.schedulers.AndroidSchedulers
-import timber.log.Timber
-import java.util.Date
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -41,14 +28,11 @@ class SearchActivity :
     @Inject
     var recentSearchesDao: RecentSearchesDao? = null
 
-    private var searchMediaFragment: SearchMediaFragment? = null
-    private var searchCategoryFragment: SearchCategoryFragment? = null
-    private var searchDepictionsFragment: SearchDepictionsFragment? = null
-    private var recentSearchesFragment: RecentSearchesFragment? = null
     private var supportFragmentManager: FragmentManager? = null
     private var mediaDetails: MediaDetailPagerFragment? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
     private var binding: ActivitySearchBinding? = null
+    private lateinit var searchQueryController: SearchQueryController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,12 +45,14 @@ class SearchActivity :
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         binding!!.toolbarSearch.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         supportFragmentManager = getSupportFragmentManager()
-        setSearchHistoryFragment()
+        searchQueryController =
+            SearchQueryController(binding!!, supportFragmentManager!!) { recentSearchesDao!! }
+        searchQueryController.setSearchHistoryFragment()
         viewPagerAdapter = ViewPagerAdapter(this, getSupportFragmentManager())
         binding!!.viewPager.adapter = viewPagerAdapter
         binding!!.viewPager.offscreenPageLimit = 2 // Because we want all the fragments to be alive
         binding!!.tabLayout.setupWithViewPager(binding!!.viewPager)
-        setTabs()
+        searchQueryController.setTabs(viewPagerAdapter!!, compositeDisposable)
         binding!!.searchBox.queryHint = getString(R.string.search_commons)
         binding!!.searchBox.onActionViewExpanded()
         binding!!.searchBox.clearFocus()
@@ -102,82 +88,9 @@ class SearchActivity :
         )
     }
 
-    /**
-     * This method sets the search history fragment.
-     * Search history fragment is displayed when query is empty.
-     */
-    private fun setSearchHistoryFragment() {
-        recentSearchesFragment = RecentSearchesFragment()
-        val transaction = supportFragmentManager!!.beginTransaction()
-        transaction.add(R.id.searchHistoryContainer, recentSearchesFragment!!).commit()
-    }
+    override fun getMediaAtPosition(i: Int): Media? = searchQueryController.searchMediaFragment!!.getMediaAtPosition(i)
 
-    /**
-     * Sets the titles in the tabLayout and fragments in the viewPager
-     */
-    fun setTabs() {
-        searchMediaFragment = SearchMediaFragment()
-        searchDepictionsFragment = SearchDepictionsFragment()
-        searchCategoryFragment = SearchCategoryFragment()
-
-        viewPagerAdapter!!.setTabs(
-            R.string.search_tab_title_media to searchMediaFragment!!,
-            R.string.search_tab_title_categories to searchCategoryFragment!!,
-            R.string.search_tab_title_depictions to searchDepictionsFragment!!,
-        )
-        viewPagerAdapter!!.notifyDataSetChanged()
-        compositeDisposable.add(
-            RxSearchView
-                .queryTextChanges(binding!!.searchBox)
-                .takeUntil(RxView.detaches(binding!!.searchBox))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(::handleSearch, Timber::e),
-        )
-    }
-
-    private fun handleSearch(query: CharSequence) {
-        if (!TextUtils.isEmpty(query)) {
-            saveRecentSearch(query.toString())
-            binding!!.viewPager.visibility = View.VISIBLE
-            binding!!.tabLayout.visibility = View.VISIBLE
-            binding!!.searchHistoryContainer.visibility = View.GONE
-
-            if (isFragmentUIActive(searchDepictionsFragment)) {
-                searchDepictionsFragment!!.onQueryUpdated(query.toString())
-            }
-
-            if (isFragmentUIActive(searchMediaFragment)) {
-                searchMediaFragment!!.onQueryUpdated(query.toString())
-            }
-
-            if (isFragmentUIActive(searchCategoryFragment)) {
-                searchCategoryFragment!!.onQueryUpdated(query.toString())
-            }
-        } else {
-            // Open RecentSearchesFragment
-            recentSearchesFragment!!.updateRecentSearches()
-            binding!!.viewPager.visibility = View.GONE
-            binding!!.tabLayout.visibility = View.GONE
-            setSearchHistoryFragment()
-            binding!!.searchHistoryContainer.visibility = View.VISIBLE
-        }
-    }
-
-    private fun saveRecentSearch(query: String) {
-        val recentSearch = recentSearchesDao!!.find(query)
-        // Newly searched query...
-        if (recentSearch == null) {
-            recentSearchesDao!!.save(RecentSearch(null, query, Date()))
-        } else {
-            recentSearch.lastSearched = Date()
-            recentSearchesDao!!.save(recentSearch)
-        }
-    }
-
-    override fun getMediaAtPosition(i: Int): Media? = searchMediaFragment!!.getMediaAtPosition(i)
-
-    override fun getTotalMediaCount(): Int = searchMediaFragment!!.getTotalMediaCount()
+    override fun getTotalMediaCount(): Int = searchQueryController.searchMediaFragment!!.getTotalMediaCount()
 
     override fun getContributionStateAt(position: Int): Int? = null
 

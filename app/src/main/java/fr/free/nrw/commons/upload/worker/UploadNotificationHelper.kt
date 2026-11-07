@@ -36,6 +36,8 @@ class UploadNotificationHelper
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS)
 
         companion object {
+            /** Id of the foreground service notification, which also shows the progress of the current upload */
+            const val FOREGROUND_NOTIFICATION_ID = 1
             private const val PROGRESS_MAX = 100
             private const val PROGRESS_ZERO = 0
         }
@@ -60,6 +62,7 @@ class UploadNotificationHelper
                 .setOnlyAlertOnce(true)
                 .setProgress(PROGRESS_MAX, PROGRESS_ZERO, true)
                 .setOngoing(true)
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
 
         /**
          * Initializes and posts the initial notification when an upload begins.
@@ -81,9 +84,10 @@ class UploadNotificationHelper
                     displayTitle,
                 ),
             )
+            // Show the progress in the foreground service notification instead of a second
+            // notification, the result of the upload is shown in its own notification
             notificationManager.notify(
-                currentNotificationTag,
-                currentNotificationID,
+                FOREGROUND_NOTIFICATION_ID,
                 currentNotification.build(),
             )
         }
@@ -122,8 +126,7 @@ class UploadNotificationHelper
                 notificationManager.cancel(startingTag, startingId)
             }
             notificationManager.notify(
-                currentNotificationTag,
-                currentNotificationID,
+                FOREGROUND_NOTIFICATION_ID,
                 currentNotification.build(),
             )
         }
