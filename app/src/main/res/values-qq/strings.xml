@@ -393,6 +393,7 @@
   <string name="images_used_explanation">Profile statistics explanation.</string>
   <string name="error_occurred">Error message.</string>
   <string name="notifications_channel_name_all">Notifications title.</string>
+  <string name="notifications_channel_name_uploads">Name of the notification channel for upload progress, shown in the Android notification settings of the app. Notifications in this channel make no sound.</string>
   <string name="preference_author_name_toggle">Settings item.</string>
   <string name="preference_author_name_toggle_summary">Settings item explanation.</string>
   <string name="preference_author_name">Settings item.</string>
@@ -656,6 +657,8 @@
   <string name="resuming_upload">Seems to be unused.</string>
   <string name="pausing_upload">A notice after pausing the upload.</string>
   <string name="cancelling_upload">A notice after canceling the upload.</string>
+  <string name="retrying_upload">A notice after the user taps the retry button on a failed upload.</string>
+  <string name="retrying_failed_uploads">A notice after the user taps the button to retry all failed uploads.</string>
   <string name="cancel_upload">Button for canceling an upload</string>
   <string name="limited_connection_explanation">Seems to be unused.</string>
   <string name="limited_connection_is_on">Seems to be unused.</string>

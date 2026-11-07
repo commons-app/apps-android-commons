@@ -26,7 +26,9 @@ abstract class UploadModule {
     abstract fun bindsMediaLicensePresenter(presenter: MediaLicensePresenter): MediaLicenseContract.UserActionListener
 
     @Binds
-    abstract fun bindsUploadMediaPresenter(presenter: UploadMediaPresenter): UploadMediaDetailsContract.UserActionListener
+    abstract fun bindsUploadMediaPresenter(
+        presenter: UploadMediaPresenter,
+    ): UploadMediaDetailsContract.UserActionListener
 
     @Binds
     abstract fun bindsDepictsPresenter(presenter: DepictsPresenter): DepictsContract.UserActionListener

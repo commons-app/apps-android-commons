@@ -284,6 +284,13 @@
   <string name="null_url">Earráid! Níor aimsíodh an URL</string>
   <string name="nominate_deletion">Ainmnigh le haghaidh Scriosadh</string>
   <string name="nominated_for_deletion">Tá an íomhá seo ainmnithe le scriosadh.</string>
+  <string name="file_deleted_from_commons">Scriosadh an comhad seo ó Commons.</string>
+  <string name="contribution_deleted">Scriosta</string>
+  <string name="deleted_file_activity_title">Comhad scriosta</string>
+  <string name="deleted_file_explanation">Scriosann Wikimedia Commons comhaid nach bhfuil oideachasúil nó a sháraíonn a rialacha, lena n-áirítear sáruithe ar chóipcheart. Uaslódáil grianghraif a thóg tú féin. Is cúiseanna coitianta iad íomhánna a cóipeáladh ón idirlíon, gabhálacha scáileáin, lógónna, agus póstaeir le comhad a bhaint.</string>
+  <string name="deleted_file_view_page">Féach ar leathanach an chomhaid</string>
+  <string name="deleted_file_view_discussion">Léigh an plé faoin scriosadh</string>
+  <string name="deleted_file_policies">Polasaithe agus treoirlínte an Chomhchoiste</string>
   <string name="nominated_see_more">Féach ar an leathanach gréasáin le haghaidh sonraí</string>
   <string name="skip_login">Scipeáil</string>
   <string name="navigation_item_login">Logáil isteach</string>
@@ -878,4 +885,12 @@
   <string name="error_applying_blur">Earráid i bhfeidhmiú doiléirithe</string>
   <string name="failed_to_apply_crop">Theip ar an mbarr a chur i bhfeidhm</string>
   <string name="failed_to_save_image">Theip ar an íomhá a shábháil</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (Fuaim)</string>
+  <string name="unsupported_format_title">Formáid Gan Tacaíocht</string>
+  <string name="unsupported_format_desc">Níorbh fhéidir na comhaid roghnaithe a oscailt. Éilíonn Wikimedia Commons na formáidí seo a leanas go docht:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Comhaid nach dtacaítear leo fágtha ar lár</string>
+  <string name="unsupported_files_skipped_desc">Rinneadh neamhaird de roinnt comhad toisc nach dtacaítear leis an bhformáid atá acu. Leanfaidh an aip ar aghaidh ag uaslódáil na gcomhad atá fágtha, ar choinníoll go bhfuil siad i gceann de na formáidí tacaithe seo a leanas:\n\n%s</string>
 </resources>

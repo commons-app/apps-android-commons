@@ -5,6 +5,7 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.di.NetworkingModule.Companion.NAMED_COMMONS_CSRF
 import io.reactivex.Observable
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -36,11 +37,10 @@ class ThanksClient
                     ).map { mwThankPostResponse ->
                         mwThankPostResponse.result?.success == 1
                     }
+            } catch (throwable: InvalidLoginTokenException) {
+                Observable.error(throwable)
             } catch (throwable: Throwable) {
-                if (throwable is InvalidLoginTokenException) {
-                    Observable.error(throwable)
-                } else {
-                    Observable.just(false)
-                }
+                Timber.e(throwable, "Failed to send thanks")
+                Observable.just(false)
             }
     }
