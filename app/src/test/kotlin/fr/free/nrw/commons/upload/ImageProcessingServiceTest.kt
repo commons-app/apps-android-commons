@@ -17,6 +17,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.any
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import java.io.FileInputStream
@@ -172,6 +174,41 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_BLACKLISTED, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForFileNameOfMaximumLength() {
+        `when`(uploadItem.filename).thenReturn("a".repeat(236) + ".jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForTooLongFileName() {
+        `when`(uploadItem.filename).thenReturn("a".repeat(237) + ".jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_TOO_LONG, validateImage.blockingGet())
+        // Such a long name is not a valid title, so Commons is not asked about it
+        verify(uploadClient, never()).isTitleBlacklisted(ArgumentMatchers.anyString())
+        verify(mediaClient, never())?.checkPageExistsUsingTitle(ArgumentMatchers.anyString())
+    }
+
+    @Test
+    fun validateCaptionForFileNameTooLongOnlyWithUniqueSuffix() {
+        // The name fits, but not with the " (12345)" that is added because it already exists
+        `when`(uploadItem.filename).thenReturn("a".repeat(230) + ".jpg")
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_TOO_LONG, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForTooLongFileNameWithMultiByteCharacters() {
+        // "é" is 2 bytes, so 121 of them are 242 bytes although they are only 121 characters
+        `when`(uploadItem.filename).thenReturn("é".repeat(121))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_TOO_LONG, validateImage.blockingGet())
     }
 
     @Test

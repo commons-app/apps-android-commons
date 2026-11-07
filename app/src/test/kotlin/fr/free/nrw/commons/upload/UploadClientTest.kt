@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.KArgumentCaptor
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -16,6 +17,8 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
+import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -300,7 +303,7 @@ class UploadClientTest {
         whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
             .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("blacklisted"))))
 
-        uploadClient.isTitleBlacklisted("File:Photo.jpg").test().assertValue(true)
+        uploadClient.isTitleBlacklisted("Photo.jpg").test().assertValue(true)
     }
 
     @Test
@@ -308,7 +311,34 @@ class UploadClientTest {
         whenever(uploadInterface.checkTitleBlacklist("File:Market in Lagos.jpg"))
             .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
 
-        uploadClient.isTitleBlacklisted("File:Market in Lagos.jpg").test().assertValue(false)
+        uploadClient.isTitleBlacklisted("Market in Lagos.jpg").test().assertValue(false)
+    }
+
+    @Test
+    fun testIsTitleBlacklisted_ChecksNameAsMediaWikiUploadsIt() {
+        // MediaWiki uploads "Market {Lagos}.jpg" as "Market -Lagos-.jpg"
+        whenever(uploadInterface.checkTitleBlacklist("File:Market -Lagos-.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.isTitleBlacklisted("Market {Lagos}.jpg").test().assertValue(false)
+    }
+
+    @Test
+    fun testIsTitleBlacklisted_InvalidTitleIsNotBlocked() {
+        val error = mock<MwLegacyServiceError> { on { code } doReturn "invalidtitle" }
+        whenever(uploadInterface.checkTitleBlacklist("File:A~~~b.jpg"))
+            .thenReturn(Single.error(MwIOException("MediaWiki API returned error", error)))
+
+        uploadClient.isTitleBlacklisted("A~~~b.jpg").test().assertValue(false)
+    }
+
+    @Test
+    fun testIsTitleBlacklisted_OtherErrorsArePassedOn() {
+        val exception = IOException("Unsuccessful response")
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.error(exception))
+
+        uploadClient.isTitleBlacklisted("Photo.jpg").test().assertError(exception)
     }
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()

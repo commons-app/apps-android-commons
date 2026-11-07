@@ -11,6 +11,7 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -284,16 +285,28 @@ class UploadClient
             }
 
         /**
-         * Checks if Commons would refuse a title because of its title blacklist.
+         * Checks if Commons would refuse a file name because of its title blacklist.
          * Commons only checks it when publishing, after the whole file has been uploaded.
          *
-         * @param title File:Photo.jpg
+         * @param fileName Photo.jpg
          */
-        fun isTitleBlacklisted(title: String): Single<Boolean> =
+        fun isTitleBlacklisted(fileName: String): Single<Boolean> =
             uploadInterface
-                .checkTitleBlacklist(title)
+                // MediaWiki replaces these characters with "-" when uploading, so the same name is checked
+                .checkTitleBlacklist("File:" + fileName.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"))
                 .map { it.titleblacklist?.result == "blacklisted" }
+                .onErrorResumeNext { throwable: Throwable ->
+                    // Commons decides about names it does not consider valid titles when uploading, as before
+                    if (throwable is MwIOException && throwable.error.code == "invalidtitle") {
+                        Single.just(false)
+                    } else {
+                        Single.error(throwable)
+                    }
+                }
     }
+
+// Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
+private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
 
 private fun canProcess(
     contributionDao: ContributionDao,

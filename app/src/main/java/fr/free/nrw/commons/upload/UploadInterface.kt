@@ -44,7 +44,7 @@ interface UploadInterface {
      *
      * @param title the title to be checked, e.g. File:Photo.jpg
      */
-    @GET(WikidataConstants.MW_API_PREFIX + "action=titleblacklist&tbaction=create&tbnooverride=1")
+    @GET("w/api.php?format=json&formatversion=2&action=titleblacklist&tbaction=create&tbnooverride=1")
     fun checkTitleBlacklist(
         @Query("tbtitle") title: String,
     ): Single<TitleBlacklistResponse>

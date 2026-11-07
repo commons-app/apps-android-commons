@@ -8,6 +8,7 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_TOO_LONG
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
@@ -19,6 +20,12 @@ import timber.log.Timber
 import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
+
+// MediaWiki rejects file names longer than 240 bytes (filename-toolong)
+private const val MAX_FILE_NAME_BYTES = 240
+
+// UploadWorker.findUniqueFileName adds " (12345)" when the file name already exists
+private const val UNIQUE_SUFFIX_BYTES = 8
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -130,29 +137,34 @@ class ImageProcessingService
         private fun checkEXIF(filepath: String): Single<Int> = exifReader.processMetadata(filepath)
 
         /**
-         * Checks item caption - empty caption - blacklisted caption - existing caption
+         * Checks item caption - empty caption - blacklisted caption - too long caption - existing caption
          */
         private fun validateItemTitle(uploadItem: UploadItem): Single<Int> {
             Timber.d("Checking for image title %s", uploadItem.uploadMediaDetails)
             val captions = uploadItem.uploadMediaDetails
-            if (captions.isEmpty()) {
-                return Single.just(EMPTY_CAPTION)
+            val fileNameBytes = uploadItem.filename.toByteArray().size
+            return when {
+                captions.isEmpty() -> Single.just(EMPTY_CAPTION)
+                // A name this long is not a valid title, so there is no need to ask Commons about it
+                fileNameBytes > MAX_FILE_NAME_BYTES -> Single.just(FILE_NAME_TOO_LONG)
+                else ->
+                    Single
+                        .zip(
+                            uploadClient.isTitleBlacklisted(uploadItem.filename),
+                            mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.filename),
+                        ) { isBlacklisted: Boolean, doesFileExist: Boolean ->
+                            Timber.d("Result for valid title is %s, blacklisted %s", doesFileExist, isBlacklisted)
+                            // A blacklisted or too long name can never be uploaded,
+                            // so it is reported before an existing name
+                            when {
+                                isBlacklisted -> FILE_NAME_BLACKLISTED
+                                doesFileExist && fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
+                                    FILE_NAME_TOO_LONG
+                                doesFileExist -> FILE_NAME_EXISTS
+                                else -> IMAGE_OK
+                            }
+                        }.subscribeOn(Schedulers.io())
             }
-
-            val title = "File:" + uploadItem.filename
-            return Single
-                .zip(
-                    uploadClient.isTitleBlacklisted(title),
-                    mediaClient.checkPageExistsUsingTitle(title),
-                ) { isBlacklisted: Boolean, doesFileExist: Boolean ->
-                    Timber.d("Result for valid title is %s, blacklisted %s", doesFileExist, isBlacklisted)
-                    // A blacklisted name can never be uploaded, so it is reported before an existing name
-                    when {
-                        isBlacklisted -> FILE_NAME_BLACKLISTED
-                        doesFileExist -> FILE_NAME_EXISTS
-                        else -> IMAGE_OK
-                    }
-                }.subscribeOn(Schedulers.io())
         }
 
         /**
