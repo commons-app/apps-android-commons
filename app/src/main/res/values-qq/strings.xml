@@ -657,6 +657,8 @@
   <string name="resuming_upload">Seems to be unused.</string>
   <string name="pausing_upload">A notice after pausing the upload.</string>
   <string name="cancelling_upload">A notice after canceling the upload.</string>
+  <string name="retrying_upload">A notice after the user taps the retry button on a failed upload.</string>
+  <string name="retrying_failed_uploads">A notice after the user taps the button to retry all failed uploads.</string>
   <string name="cancel_upload">Button for canceling an upload</string>
   <string name="limited_connection_explanation">Seems to be unused.</string>
   <string name="limited_connection_is_on">Seems to be unused.</string>
