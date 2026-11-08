@@ -67,7 +67,6 @@ class MediaDetailPagerFragment :
     var isWikipediaButtonDisplayed: Boolean = false
     var adapter: MediaDetailAdapter? = null
     var bookmark: Bookmark? = null
-    val compositeDisposables = CompositeDisposable()
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
@@ -93,8 +92,6 @@ class MediaDetailPagerFragment :
                 }
             },
         )
-        // Initialize the ProgressBar by finding it in the layout
-        imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
 
         adapter = MediaDetailAdapter(this, childFragmentManager)
 
@@ -148,7 +145,6 @@ class MediaDetailPagerFragment :
 
     override fun onDestroyView() {
         adapter = null
-        imageProgressBar = null
         super.onDestroyView()
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()

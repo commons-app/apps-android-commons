@@ -1,15 +1,17 @@
 package fr.free.nrw.commons.media
 
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.forMedia
 import timber.log.Timber
 
+// FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
 class MediaDetailAdapter(
+    val mediaDetailPagerFragment: MediaDetailPagerFragment,
     fm: FragmentManager,
-    private val mediaDetailPagerFragment: MediaDetailPagerFragment,
-) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+) : FragmentStatePagerAdapter(fm) {
     /**
      * Keeps track of the current displayed fragment.
      */
@@ -40,7 +42,7 @@ class MediaDetailAdapter(
             )
         } else {
             forMedia(
-                mediaDetailPagerFragment.position + i,
+                i,
                 mediaDetailPagerFragment.editable,
                 mediaDetailPagerFragment.isFeaturedImage,
                 mediaDetailPagerFragment.isWikipediaButtonDisplayed,
@@ -48,27 +50,35 @@ class MediaDetailAdapter(
         }
     }
 
-    override fun getCount(): Int =
-        if (mediaDetailPagerFragment.isFromFeaturedRootFragment) {
-            mediaDetailPagerFragment.mediaDetailProvider.totalMediaCount
-        } else {
-            mediaDetailPagerFragment.totalMediaCount
+    override fun getCount(): Int {
+        if (mediaDetailPagerFragment.activity == null) {
+            Timber.d("Skipping getCount. Returning as activity is destroyed!")
+            return 0
         }
+        return mediaDetailPagerFragment.mediaDetailProvider!!.getTotalMediaCount()
+    }
 
     /**
-     * Gives the reference to the current fragment
+     * If current fragment is of type MediaDetailFragment, return it, otherwise return null.
      *
-     * @return Fragment
+     * @return MediaDetailFragment
      */
-    val primaryItem: Fragment?
-        get() = currentFragment
+    val currentMediaDetailFragment: MediaDetailFragment?
+        get() = currentFragment as? MediaDetailFragment
 
+    /**
+     * Called to inform the adapter of which item is currently considered to be the "primary", that
+     * is the one show to the user as the current page.
+     */
     override fun setPrimaryItem(
-        container: android.view.ViewGroup,
+        container: ViewGroup,
         position: Int,
-        `object`: Any,
+        obj: Any,
     ) {
-        super.setPrimaryItem(container, position, `object`)
-        currentFragment = `object` as Fragment
+        // Update the current fragment if changed
+        if (currentFragment !== obj) {
+            currentFragment = (obj as Fragment)
+        }
+        super.setPrimaryItem(container, position, obj)
     }
 }
