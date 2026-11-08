@@ -17,11 +17,24 @@ jobs:
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
 
-      - name: Validate strings.xml syntax
+      - name: Validate strings.xml files
         run: |
-          find . -name "strings.xml" -not -path "*/build/*" | while read f; do
-            xmllint --noout "$f" || exit 1
-          done
+          status=0
+          while IFS= read -r -d '' f; do
+            # Fails on malformed XML
+            if ! xmllint --noout "$f"; then
+              status=1
+              continue
+            fi
+            # A <string>, <plurals> or <string-array> nested inside another one is
+            # well-formed XML, but translatewiki.net shows the message as empty (see #6822)
+            nested=$(xmllint --xpath '//*[self::string or self::plurals or self::string-array][ancestor::string or ancestor::plurals or ancestor::string-array]/@name' "$f" 2>/dev/null || true)
+            if [ -n "$nested" ]; then
+              echo "::error file=$f::Resource nested inside another resource:$nested"
+              status=1
+            fi
+          done < <(find . -name "strings.xml" -not -path "*/build/*" -print0)
+          exit $status
 
       - name: Set up JDK
         uses: actions/setup-java@v4
