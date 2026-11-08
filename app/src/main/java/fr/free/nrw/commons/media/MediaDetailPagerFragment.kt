@@ -455,21 +455,23 @@ val position =
      */
     private fun setViewPagerCurrentItem(position: Int) {
         val handler = Handler(Looper.getMainLooper())
-        val runnable: Runnable = object : Runnable {
-            override fun run() {
-                val b = binding ?: return
-                val a = adapter ?: return
-                // Show the ProgressBar while waiting for the item to load
-                b.itemProgressBar.visibility = View.VISIBLE
-                // Check if the adapter has enough items loaded
-                if (a.count > position) {
-                    // Set the current item in the ViewPager
-                    b.mediaDetailsPager.setCurrentItem(position, false)
-                    // Hide the ProgressBar once the item is loaded
-                    b.itemProgressBar.visibility = View.GONE
-                } else {
-                    // If the item is not ready yet, post the Runnable again
-                    handler.post(this)
+        val runnable: Runnable =
+            object : Runnable {
+                override fun run() {
+                    val b = binding ?: return
+                    val a = adapter ?: return
+                    // Show the ProgressBar while waiting for the item to load
+                    b.itemProgressBar.visibility = View.VISIBLE
+                    // Check if the adapter has enough items loaded
+                    if (a.count > position) {
+                        // Set the current item in the ViewPager
+                        b.mediaDetailsPager.setCurrentItem(position, false)
+                        // Hide the ProgressBar once the item is loaded
+                        b.itemProgressBar.visibility = View.GONE
+                    } else {
+                        // If the item is not ready yet, post the Runnable again
+                        handler.post(this)
+                    }
                 }
             }
         // Start the Runnable
