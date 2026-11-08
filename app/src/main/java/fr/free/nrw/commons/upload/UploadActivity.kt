@@ -27,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.databinding.ActivityUploadBinding
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -834,14 +835,26 @@ class UploadActivity :
 
     private fun receiveExternalSharedItems() {
         val result = contributionController!!.handleExternalImagesPicked(this, intent)
-        uploadableFiles = result.files.toMutableList()
+        // enforce the limit for the external sharing of the file
+        uploadableFiles = limitToMaxImageCount(result.files)
         skippedSharedFilesCount = result.skippedCount
+    }
+
+    /**
+     * Keeps only the first [MAX_IMAGE_COUNT] files and tells the user when some were dropped.
+     */
+    private fun limitToMaxImageCount(files: List<UploadableFile>): MutableList<UploadableFile> {
+        if (files.size <= MAX_IMAGE_COUNT) {
+            return files.toMutableList()
+        }
+        showLongToast(this, getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+        return files.take(MAX_IMAGE_COUNT).toMutableList()
     }
 
     private fun receiveInternalSharedItems() {
         val intent = intent
         Timber.d("Intent has EXTRA_FILES: ${EXTRA_FILES}")
-        uploadableFiles =
+        val parsedFiles =
             try {
                 // Check if intent has the extra before trying to read it
                 if (!intent.hasExtra(EXTRA_FILES)) {
@@ -868,7 +881,8 @@ class UploadActivity :
                 mutableListOf()
             }
 
-        // Log the result for debugging
+        // trim the list if it exceeds the MAX_IMAGE_COUNT
+        uploadableFiles = limitToMaxImageCount(parsedFiles)
         isMultipleFilesSelected = uploadableFiles.size > 1
         Timber.i("Received files count: ${uploadableFiles.size}")
         uploadableFiles.forEachIndexed { index, file ->

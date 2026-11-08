@@ -54,6 +54,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import java.io.File
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -306,7 +307,10 @@ class UploadMediaDetailFragmentUnitTest {
 
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
-        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
         `when`(latLng.latitude).thenReturn(0.0)
@@ -337,9 +341,10 @@ class UploadMediaDetailFragmentUnitTest {
         Whitebox.setInternalState(fragment, "fragmentCallback", callback)
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
-        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
         Whitebox.setInternalState(fragment, "isMissingLocationDialog", true)
         Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
         `when`(latLng.latitude).thenReturn(0.0)
@@ -357,6 +362,54 @@ class UploadMediaDetailFragmentUnitTest {
 
         handleResultMethod.invoke(fragment, activityResult)
         Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null, false)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnEditActivityResultAppliesEditAfterFragmentIsRecreated() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        // A recreated fragment only knows its position, not the item that was being edited
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(fragment, "indexOfFragment", 1)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(1)
+        `when`(presenter.getUploadItem(1)).thenReturn(uploadItem)
+        val editedPath = "/cache/blurred_1.jpg"
+
+        invokeOnEditActivityResult(editedPath)
+
+        val editedUri = Uri.fromFile(File(editedPath))
+        Mockito.verify(uploadItem).setContentAndMediaUri(editedUri)
+        Assert.assertEquals(editedUri, Whitebox.getInternalState<Uri?>(fragment, "editedImageUri"))
+        Mockito.verify(callback).changeThumbnail(1, editedPath)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnEditActivityResultWithoutUploadItemDoesNotShowEditedImage() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(-1)
+        `when`(presenter.getUploadItem(-1)).thenReturn(null)
+
+        invokeOnEditActivityResult("/cache/blurred_1.jpg")
+
+        Assert.assertNull(Whitebox.getInternalState<Uri?>(fragment, "editedImageUri"))
+        Mockito
+            .verify(callback, Mockito.never())
+            .changeThumbnail(ArgumentMatchers.anyInt(), ArgumentMatchers.anyString())
+    }
+
+    private fun invokeOnEditActivityResult(editedPath: String) {
+        val data = Intent().putExtra("editedImageFilePath", editedPath)
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onEditActivityResult",
+                ActivityResult::class.java,
+            )
+        handleResultMethod.isAccessible = true
+        handleResultMethod.invoke(fragment, ActivityResult(Activity.RESULT_OK, data))
     }
 
     @Test
@@ -398,6 +451,28 @@ class UploadMediaDetailFragmentUnitTest {
             ArgumentMatchers.any(),
             ArgumentMatchers.anyInt(),
         )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnMediaDetailsChangedPersistsAdapterItemsToUploadItem() {
+        // Regression test for #6938: a language row added via "+" must be written back into the
+        // UploadItem backing this fragment to ensure it gets uploaded
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        val itemsWithSecondLanguage =
+            mutableListOf(
+                UploadMediaDetail(languageCode = "en", captionText = "test"),
+                UploadMediaDetail(languageCode = "ja", captionText = "テスト"),
+            )
+        `when`(uploadMediaDetailAdapter.items).thenReturn(itemsWithSecondLanguage)
+
+        fragment.onMediaDetailsChanged()
+
+        Mockito
+            .verify(presenter)
+            .setUploadMediaDetails(itemsWithSecondLanguage, 0)
     }
 
     @Test

@@ -35,6 +35,7 @@ import javax.inject.Inject
  * Created by root on 18.12.2017.
  */
 class NotificationActivity : BaseActivity() {
+    private lateinit var labels: NotificationLabels
     private lateinit var binding: ActivityNotificationBinding
 
     @Inject
@@ -58,6 +59,7 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        labels = NotificationLabels(this, binding)
         ViewGroupCompat.installCompatInsetsDispatch(binding.root)
         applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
         binding.listView.applyEdgeToEdgeBottomPaddingInsets()
@@ -67,7 +69,7 @@ class NotificationActivity : BaseActivity() {
                 tagNotificationWorkerFragment,
             ) as? NotificationWorkerFragment
         initListView()
-        setPageTitle()
+        labels.setPageTitle(isRead)
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -93,7 +95,7 @@ class NotificationActivity : BaseActivity() {
                         adapter.notifyDataSetChanged()
                         ViewUtil.showLongSnackbar(binding.container, getString(R.string.notification_mark_read))
                         if (notificationList.isEmpty()) {
-                            setEmptyView()
+                            labels.setEmptyView(isRead)
                             binding.container.visibility = View.GONE
                             binding.noNotificationBackground.visibility = View.VISIBLE
                         }
@@ -169,7 +171,7 @@ class NotificationActivity : BaseActivity() {
                         Timber.d("Number of notifications is %d", notificationList.size)
                         this.notificationList = notificationList.toMutableList()
                         if (notificationList.isEmpty()) {
-                            setEmptyView()
+                            labels.setEmptyView(isRead)
                             binding.container.visibility = View.GONE
                             binding.noNotificationBackground.visibility = View.VISIBLE
                         } else {
@@ -191,7 +193,7 @@ class NotificationActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_notifications, menu)
         notificationMenuItem = menu.findItem(R.id.archived)
-        setMenuItemTitle()
+        labels.setMenuItemTitle(isRead, notificationMenuItem)
         return true
     }
 
@@ -217,40 +219,13 @@ class NotificationActivity : BaseActivity() {
         if (notificationList.isNullOrEmpty()) {
             ViewUtil.showShortSnackbar(binding.container, R.string.no_notifications)
             binding.container.visibility = View.GONE
-            setEmptyView()
+            labels.setEmptyView(isRead)
             binding.noNotificationBackground.visibility = View.VISIBLE
             return
         }
         binding.container.visibility = View.VISIBLE
         binding.noNotificationBackground.visibility = View.GONE
         adapter.items = notificationList
-    }
-
-    private fun setPageTitle() {
-        supportActionBar?.title =
-            if (isRead) {
-                getString(R.string.read_notifications)
-            } else {
-                getString(R.string.notifications)
-            }
-    }
-
-    private fun setEmptyView() {
-        binding.noNotificationText.text =
-            if (isRead) {
-                getString(R.string.no_read_notification)
-            } else {
-                getString(R.string.no_notification)
-            }
-    }
-
-    private fun setMenuItemTitle() {
-        notificationMenuItem?.title =
-            if (isRead) {
-                getString(R.string.menu_option_unread)
-            } else {
-                getString(R.string.menu_option_read)
-            }
     }
 
     companion object {
