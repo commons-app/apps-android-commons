@@ -87,6 +87,12 @@ object ImageUtils {
      * The file name is not a valid title on Commons, so the upload would be rejected
      */
     const val FILE_NAME_INVALID = 1 shl 10 // 1024
+
+    /**
+     * A part of the file name after a dot is an extension that Commons does not accept, for
+     * example "com" in "Visit konga.com.jpg", so the upload would be rejected
+     */
+    const val FILE_NAME_BANNED_EXTENSION = 1 shl 11 // 2048
     private const val MAX_GEOLOCATION_DIFFERENCE_METERS = 1000
     private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
     private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3

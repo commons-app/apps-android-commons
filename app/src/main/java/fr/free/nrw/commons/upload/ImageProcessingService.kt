@@ -6,6 +6,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BANNED_EXTENSION
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_INVALID
@@ -27,6 +28,47 @@ private const val MAX_FILE_NAME_BYTES = 240
 
 // UploadWorker.findUniqueFileName adds " (12345)" when the file name already exists
 private const val UNIQUE_SUFFIX_BYTES = 8
+
+// MediaWiki rejects a file name if any part after a dot is one of these (filetype-banned), for
+// example "Visit konga.com.jpg". No API returns this list. It is MediaWiki's default
+// $wgProhibitedFileExtensions (includes/MainConfigSchema.php) plus the Wikimedia additions
+// in $wmgProhibitedFileExtensions (operations/mediawiki-config, wmf-config/InitialiseSettings.php).
+private val BANNED_FILE_EXTENSIONS =
+    setOf(
+        "html",
+        "htm",
+        "js",
+        "jsb",
+        "mhtml",
+        "mht",
+        "xhtml",
+        "xht",
+        "php",
+        "phtml",
+        "php3",
+        "php4",
+        "php5",
+        "phps",
+        "phar",
+        "shtml",
+        "jhtml",
+        "pl",
+        "py",
+        "cgi",
+        "exe",
+        "scr",
+        "dll",
+        "msi",
+        "vbs",
+        "bat",
+        "com",
+        "pif",
+        "cmd",
+        "vxd",
+        "cpl",
+        "xml",
+        "txt",
+    )
 
 /**
  * Methods for pre-processing images to be uploaded
@@ -138,16 +180,23 @@ class ImageProcessingService
         private fun checkEXIF(filepath: String): Single<Int> = exifReader.processMetadata(filepath)
 
         /**
-         * Checks item caption - empty caption - too long, blacklisted or invalid caption - existing caption
+         * Checks item caption - empty caption - too long, banned extension, blacklisted or invalid caption -
+         * existing caption
          */
         private fun validateItemTitle(uploadItem: UploadItem): Single<Int> {
             Timber.d("Checking for image title %s", uploadItem.uploadMediaDetails)
             val captions = uploadItem.uploadMediaDetails
             val fileNameBytes = uploadItem.filename.toByteArray().size
+            val hasBannedExtension =
+                uploadItem.filename
+                    .split(".")
+                    .drop(1)
+                    .any { it.lowercase() in BANNED_FILE_EXTENSIONS }
             return when {
                 captions.isEmpty() -> Single.just(EMPTY_CAPTION)
-                // Commons rejects a name this long anyway, so there is no need to ask it about the name
+                // Commons rejects these names anyway, so there is no need to ask it about the name
                 fileNameBytes > MAX_FILE_NAME_BYTES -> Single.just(FILE_NAME_TOO_LONG)
+                hasBannedExtension -> Single.just(FILE_NAME_BANNED_EXTENSION)
                 else ->
                     Single
                         .zip(

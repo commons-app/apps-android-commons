@@ -185,6 +185,30 @@ class ImageProcessingServiceTest {
     }
 
     @Test
+    fun validateCaptionForFileNameWithBannedExtension() {
+        `when`(uploadItem.filename).thenReturn("Visit konga.com.jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_BANNED_EXTENSION, validateImage.blockingGet())
+        // The list is checked in the app, so Commons is not asked about the name
+        verify(uploadClient, never()).checkFileName(ArgumentMatchers.anyString())
+    }
+
+    @Test
+    fun validateCaptionForFileNameWithBannedExtensionInCapitals() {
+        `when`(uploadItem.filename).thenReturn("Notes.TXT.jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_BANNED_EXTENSION, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForFileNameWithDotThatIsNotABannedExtension() {
+        // "5 release" and "jpg" are the parts after a dot, and neither is banned
+        `when`(uploadItem.filename).thenReturn("Version 2.5 release.jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+    }
+
+    @Test
     fun validateCaptionForFileNameOfMaximumLength() {
         `when`(uploadItem.filename).thenReturn("a".repeat(236) + ".jpg")
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)

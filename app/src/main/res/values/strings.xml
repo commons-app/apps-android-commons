@@ -108,6 +108,7 @@
   <string name="file_name_blacklisted_toast">Commons does not accept this file name. Please use a more descriptive caption.</string>
   <string name="file_name_too_long_toast">This caption is too long to be used as a file name. Please shorten it.</string>
   <string name="file_name_invalid_toast">This caption cannot be used as a file name on Commons. Please change it.</string>
+  <string name="file_name_banned_extension_toast">This caption contains a file type like \".com\". Please change it.</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
   <string name="login_failed_network">Unable to log in - network failure</string>
