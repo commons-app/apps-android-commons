@@ -15,6 +15,7 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadM
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_INVALID
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_TOO_LONG
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
@@ -238,6 +239,12 @@ class UploadMediaPresenter
             if (errorCode == FILE_NAME_TOO_LONG) {
                 Timber.d("File name is too long. Showing toast")
                 view.showMessage(R.string.file_name_too_long_toast, R.color.color_error)
+            }
+
+            // Commons would reject a file name that is not a valid title when the upload starts
+            if (errorCode == FILE_NAME_INVALID) {
+                Timber.d("File name is not valid. Showing toast")
+                view.showMessage(R.string.file_name_invalid_toast, R.color.color_error)
             }
 
             // If image with same file name exists check the bit in errorCode is set or not

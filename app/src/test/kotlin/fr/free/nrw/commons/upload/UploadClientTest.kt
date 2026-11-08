@@ -299,46 +299,46 @@ class UploadClientTest {
     }
 
     @Test
-    fun testIsTitleBlacklisted_Blacklisted() {
+    fun testCheckFileName_Blacklisted() {
         whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
             .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("blacklisted"))))
 
-        uploadClient.isTitleBlacklisted("Photo.jpg").test().assertValue(true)
+        uploadClient.checkFileName("Photo.jpg").test().assertValue(FileNameCheck.BLACKLISTED)
     }
 
     @Test
-    fun testIsTitleBlacklisted_Ok() {
+    fun testCheckFileName_Ok() {
         whenever(uploadInterface.checkTitleBlacklist("File:Market in Lagos.jpg"))
             .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
 
-        uploadClient.isTitleBlacklisted("Market in Lagos.jpg").test().assertValue(false)
+        uploadClient.checkFileName("Market in Lagos.jpg").test().assertValue(FileNameCheck.OK)
     }
 
     @Test
-    fun testIsTitleBlacklisted_ChecksNameAsMediaWikiUploadsIt() {
+    fun testCheckFileName_ChecksNameAsMediaWikiUploadsIt() {
         // MediaWiki uploads "Market {Lagos}.jpg" as "Market -Lagos-.jpg"
         whenever(uploadInterface.checkTitleBlacklist("File:Market -Lagos-.jpg"))
             .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
 
-        uploadClient.isTitleBlacklisted("Market {Lagos}.jpg").test().assertValue(false)
+        uploadClient.checkFileName("Market {Lagos}.jpg").test().assertValue(FileNameCheck.OK)
     }
 
     @Test
-    fun testIsTitleBlacklisted_InvalidTitleIsNotBlocked() {
+    fun testCheckFileName_InvalidTitle() {
         val error = mock<MwLegacyServiceError> { on { code } doReturn "invalidtitle" }
         whenever(uploadInterface.checkTitleBlacklist("File:A~~~b.jpg"))
             .thenReturn(Single.error(MwIOException("MediaWiki API returned error", error)))
 
-        uploadClient.isTitleBlacklisted("A~~~b.jpg").test().assertValue(false)
+        uploadClient.checkFileName("A~~~b.jpg").test().assertValue(FileNameCheck.INVALID)
     }
 
     @Test
-    fun testIsTitleBlacklisted_OtherErrorsArePassedOn() {
+    fun testCheckFileName_OtherErrorsArePassedOn() {
         val exception = IOException("Unsuccessful response")
         whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
             .thenReturn(Single.error(exception))
 
-        uploadClient.isTitleBlacklisted("Photo.jpg").test().assertError(exception)
+        uploadClient.checkFileName("Photo.jpg").test().assertError(exception)
     }
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()

@@ -82,6 +82,11 @@ object ImageUtils {
      * The file name is longer than Commons allows, so the upload would be rejected
      */
     const val FILE_NAME_TOO_LONG = 1 shl 9 // 512
+
+    /**
+     * The file name is not a valid title on Commons, so the upload would be rejected
+     */
+    const val FILE_NAME_INVALID = 1 shl 10 // 1024
     private const val MAX_GEOLOCATION_DIFFERENCE_METERS = 1000
     private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
     private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3

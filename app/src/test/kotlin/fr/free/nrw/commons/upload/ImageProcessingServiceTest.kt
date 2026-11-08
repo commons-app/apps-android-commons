@@ -107,8 +107,8 @@ class ImageProcessingServiceTest {
             .thenReturn(Single.just(false))
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(false))
-        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(false))
+        `when`(uploadClient.checkFileName(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(FileNameCheck.OK))
         `when`(readFBMD?.processMetadata(ArgumentMatchers.any()))
             .thenReturn(Single.just(ImageUtils.IMAGE_OK))
         `when`(readEXIF?.processMetadata(ArgumentMatchers.anyString()))
@@ -170,10 +170,18 @@ class ImageProcessingServiceTest {
 
     @Test
     fun validateCaptionForBlacklistedFileName() {
-        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(true))
+        `when`(uploadClient.checkFileName(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(FileNameCheck.BLACKLISTED))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_BLACKLISTED, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForInvalidFileName() {
+        `when`(uploadClient.checkFileName(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(FileNameCheck.INVALID))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem)
+        assertEquals(ImageUtils.FILE_NAME_INVALID, validateImage.blockingGet())
     }
 
     @Test
@@ -189,7 +197,7 @@ class ImageProcessingServiceTest {
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)
         assertEquals(ImageUtils.FILE_NAME_TOO_LONG, validateImage.blockingGet())
         // Such a long name is not a valid title, so Commons is not asked about it
-        verify(uploadClient, never()).isTitleBlacklisted(ArgumentMatchers.anyString())
+        verify(uploadClient, never()).checkFileName(ArgumentMatchers.anyString())
         verify(mediaClient, never())?.checkPageExistsUsingTitle(ArgumentMatchers.anyString())
     }
 
@@ -213,8 +221,8 @@ class ImageProcessingServiceTest {
 
     @Test
     fun validateCaptionForBlacklistedFileNameThatAlsoExists() {
-        `when`(uploadClient.isTitleBlacklisted(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(true))
+        `when`(uploadClient.checkFileName(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(FileNameCheck.BLACKLISTED))
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateCaption(uploadItem)

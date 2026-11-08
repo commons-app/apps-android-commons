@@ -285,25 +285,36 @@ class UploadClient
             }
 
         /**
-         * Checks if Commons would refuse a file name because of its title blacklist.
-         * Commons only checks it when publishing, after the whole file has been uploaded.
+         * Checks if Commons would refuse a file name, because it is on the title blacklist or
+         * because it is not a valid title. Commons only checks the title blacklist when publishing,
+         * after the whole file has been uploaded.
          *
          * @param fileName Photo.jpg
          */
-        fun isTitleBlacklisted(fileName: String): Single<Boolean> =
+        fun checkFileName(fileName: String): Single<FileNameCheck> =
             uploadInterface
                 // MediaWiki replaces these characters with "-" when uploading, so the same name is checked
                 .checkTitleBlacklist("File:" + fileName.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"))
-                .map { it.titleblacklist?.result == "blacklisted" }
-                .onErrorResumeNext { throwable: Throwable ->
-                    // Commons decides about names it does not consider valid titles when uploading, as before
+                .map {
+                    if (it.titleblacklist?.result == "blacklisted") FileNameCheck.BLACKLISTED else FileNameCheck.OK
+                }.onErrorResumeNext { throwable: Throwable ->
+                    // After the characters above are replaced, the upload fails with illegal-filename too
                     if (throwable is MwIOException && throwable.error.code == "invalidtitle") {
-                        Single.just(false)
+                        Single.just(FileNameCheck.INVALID)
                     } else {
                         Single.error(throwable)
                     }
                 }
     }
+
+/**
+ * Result of [UploadClient.checkFileName]
+ */
+enum class FileNameCheck {
+    OK,
+    BLACKLISTED,
+    INVALID,
+}
 
 // Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
 private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
