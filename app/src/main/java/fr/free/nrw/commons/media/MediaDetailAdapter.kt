@@ -48,13 +48,12 @@ class MediaDetailAdapter(
         }
     }
 
-    override fun getCount(): Int {
-        return if (mediaDetailPagerFragment.isFromFeaturedRootFragment) {
+    override fun getCount(): Int =
+        if (mediaDetailPagerFragment.isFromFeaturedRootFragment) {
             mediaDetailPagerFragment.mediaDetailProvider.totalMediaCount
         } else {
             mediaDetailPagerFragment.totalMediaCount
         }
-    }
 
     /**
      * Gives the reference to the current fragment

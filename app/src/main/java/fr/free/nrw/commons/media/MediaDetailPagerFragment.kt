@@ -11,7 +11,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -72,11 +71,6 @@ class MediaDetailPagerFragment :
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
-
-    /**
-     * ProgressBar used to indicate the loading status of media items.
-     */
-
 
     var removedItems: ArrayList<Int> = ArrayList()
 
@@ -322,7 +316,7 @@ ${m.pageTitle.canonicalUri}""",
             val pager = binding?.mediaDetailsPager
             if (pager != null) {
                 val provider = mediaDetailProvider ?: return
-val position =
+                val position =
                     if (isFromFeaturedRootFragment) {
                         position
                     } else {
@@ -497,7 +491,6 @@ val position =
     }
 
     companion object {
-
         /**
          * Use this factory method to create a new instance of this fragment using the provided
          * parameters.
