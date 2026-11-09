@@ -6,7 +6,9 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -160,5 +162,39 @@ class WikidataItemDetailsActivityUnitTests {
     @Throws(Exception::class)
     fun testOnMediaClicked() {
         activity.onMediaClicked(0)
+    }
+
+    @Test
+    fun testItemTabsPassEntityToEveryFragment() {
+        activity.intent = Intent().putExtra("wikidataItemName", "Bird").putExtra("entityId", "Q5113")
+        val binding = ActivityWikidataItemDetailsBinding.inflate(activity.layoutInflater)
+        val adapter = ViewPagerAdapter(activity, activity.supportFragmentManager)
+        val tabs = WikidataItemDetailsTabs(activity, binding, adapter)
+
+        val mediaFragment = tabs.setTabs()
+        tabs.setPageTitle()
+
+        Assert.assertEquals(3, adapter.count)
+        Assert.assertSame(mediaFragment, adapter.getItem(0))
+        for (index in 0 until adapter.count) {
+            Assert.assertEquals("Bird", adapter.getItem(index).arguments?.getString("wikidataItemName"))
+            Assert.assertEquals("Q5113", adapter.getItem(index).arguments?.getString("entityId"))
+        }
+        Assert.assertEquals(2, binding.viewPager.offscreenPageLimit)
+        Assert.assertEquals("Bird", activity.title)
+    }
+
+    @Test
+    fun testItemTabsWithoutNameLeaveArgumentsUnset() {
+        activity.intent = Intent().putExtra("entityId", "Q5113")
+        val binding = ActivityWikidataItemDetailsBinding.inflate(activity.layoutInflater)
+        val adapter = ViewPagerAdapter(activity, activity.supportFragmentManager)
+
+        WikidataItemDetailsTabs(activity, binding, adapter).setTabs()
+
+        Assert.assertEquals(3, adapter.count)
+        for (index in 0 until adapter.count) {
+            Assert.assertNull(adapter.getItem(index).arguments)
+        }
     }
 }

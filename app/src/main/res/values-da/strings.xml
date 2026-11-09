@@ -283,8 +283,10 @@
   <string name="file_deleted_from_commons">Denne fil blev slettet fra Commons.</string>
   <string name="contribution_deleted">Slettet</string>
   <string name="deleted_file_activity_title">Fil slettet</string>
+  <string name="deleted_file_explanation">Wikimedia Commons sletter filer, der ikke har et uddannelsesmæssigt formål, eller som overtræder reglerne, herunder krænkelser af ophavsretten. Upload fotos, du selv har taget. Billeder kopieret fra internettet, skærmbilleder, logoer og plakater er almindelige årsager til, at en fil fjernes.</string>
   <string name="deleted_file_view_page">Se filsiden</string>
   <string name="deleted_file_view_discussion">Læs diskussionen om sletning</string>
+  <string name="deleted_file_policies">Commons politikker og retningslinjer</string>
   <string name="nominated_see_more">Se webstedet for information</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log ind</string>
@@ -404,12 +406,14 @@
   <string name="images_used_explanation">Antallet af billeder, du har uploadet til Commons, som blev brugt i Wikimedia-artikler</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="notifications_channel_name_all">Commons-notifikationer</string>
+  <string name="notifications_channel_name_uploads">Status for upload</string>
   <string name="preference_author_name_toggle">Brug brugerdefineret forfatternavn</string>
   <string name="preference_author_name_toggle_summary">Brug et brugerdefineret forfatternavn i stedet for dit brugernavn, når du uploader billeder</string>
   <string name="preference_author_name">Brugerdefineret forfatternavn</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheden</string>
   <string name="notifications">Notifikationer</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Notifikationer (læst)</string>
   <string name="display_nearby_notification">Vis notifikationer for steder i nærheden</string>
   <string name="display_nearby_notification_summary">Vis notifikation i appen for det nærmeste sted, der har brug for billeder</string>
@@ -677,6 +681,8 @@
   <string name="resuming_upload">Genoptager upload...</string>
   <string name="pausing_upload">Sætter upload på pause...</string>
   <string name="cancelling_upload">Annullerer upload...</string>
+  <string name="retrying_upload">Prøver at uploade igen…</string>
+  <string name="retrying_failed_uploads">Prøver alle mislykkede uploads igen…</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
@@ -859,6 +865,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
   <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
   <string name="custom_selector_max_image_limit_reached">Du kan højst vælge %d billeder.</string>
+  <string name="upload_limit_exceeded">Kun de første %1$d billeder vil blive uploadet.</string>
   <string name="edit_unsupported_format_explanation">Redigering i appen er kun tilgængelig for JPEG-filer. Brug et tredjepartsværktøj til at redigere andre formater.</string>
   <string name="license_cc0_description">Ingen ophavsret. Du frasiger dig alle rettigheder, så alle kan bruge dette værk på enhver måde.</string>
   <string name="license_cc_by_description">Kreditering. Andre må gerne dele og tilpasse, så længe de angiver dig som kilde.</string>
