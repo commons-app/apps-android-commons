@@ -16,6 +16,7 @@ import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.utils.TimeProvider
+import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
@@ -154,6 +155,7 @@ class UploadClientTest {
         val tokenCaptor = argumentCaptor<RequestBody>()
         val fileCaptor = argumentCaptor<MultipartBody.Part>()
 
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 filenameCaptor.capture(),
@@ -163,7 +165,7 @@ class UploadClientTest {
                 tokenCaptor.capture(),
                 fileCaptor.capture(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result =
             uploadClient.uploadChunkToStash(filename, 100, 10, filekey, countingRequestBody).test()
@@ -189,6 +191,36 @@ class UploadClientTest {
 
         result.assertNoValues()
         assertSame(exception, result.errors()[0])
+    }
+
+    @Test
+    fun testUploadChunkToStash_WithPlaintextErrors() {
+        // Uses the real Gson, to check the "errors" JSON Commons sends for a rejected chunk
+        val client =
+            UploadClient(
+                uploadInterface,
+                csrfTokenClient,
+                pageContentsCreator,
+                fileUtilsWrapper,
+                GsonUtil.defaultGson,
+                timeProvider,
+                contributionDao,
+            )
+        val errorsJson =
+            Gson().fromJson(
+                """{"errors":[{"code":"illegal-filename","text":"The filename is not allowed.","module":"upload"}]}""",
+                JsonObject::class.java,
+            )
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(errorsJson))
+
+        val result = client.uploadChunkToStash(filename, 100, 10, filekey, mock()).test()
+
+        result.assertNoValues()
+        val thrown = result.errors()[0]
+        assertTrue(thrown is IOException)
+        assertEquals("illegal-filename", thrown.message)
+        assertTrue(thrown.cause is MwException)
     }
 
     @Test
@@ -236,6 +268,7 @@ class UploadClientTest {
                 eq(expectedChunkSize),
             ),
         ).thenReturn(listOf(mockFile))
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 any(),
@@ -245,7 +278,7 @@ class UploadClientTest {
                 any(),
                 any(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -280,6 +313,7 @@ class UploadClientTest {
             ),
         ).thenReturn(listOf(mockFile))
 
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 anyOrNull(),
@@ -289,7 +323,7 @@ class UploadClientTest {
                 anyOrNull(),
                 anyOrNull(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
