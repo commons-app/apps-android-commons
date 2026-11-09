@@ -8,7 +8,7 @@ import java.io.IOException
 fun createTestClient(): OkHttpClient =
     OkHttpClient
         .Builder()
-        .addInterceptor(UnsuccessfulResponseInterceptor())
+        .addInterceptor(TestUnsuccessfulResponseInterceptor())
         .addInterceptor(TestStubInterceptor())
         .build()
 
@@ -31,7 +31,7 @@ private class TestStubInterceptor : Interceptor {
     }
 }
 
-private class UnsuccessfulResponseInterceptor : Interceptor {
+private class TestUnsuccessfulResponseInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val rsp = chain.proceed(chain.request())
