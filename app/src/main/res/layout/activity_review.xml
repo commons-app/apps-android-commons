@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <RelativeLayout
           android:layout_width="match_parent"
@@ -78,24 +78,120 @@
             android:layout_marginTop="@dimen/dimen_0"
             app:srcCompat="@drawable/commons_logo" />
 
-          <RelativeLayout
-            android:id="@+id/rl_container_upload_overlay"
+<!--          <RelativeLayout-->
+<!--            android:id="@+id/rl_container_upload_overlay"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_gravity="center|bottom"-->
+<!--            android:background="#77000000"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="@dimen/tiny_gap">-->
+
+<!--            <TextView-->
+<!--              android:id="@+id/tv_image_caption"-->
+<!--              style="?android:textAppearanceMedium"-->
+<!--              android:layout_width="wrap_content"-->
+<!--              android:layout_height="wrap_content"-->
+<!--              android:textColor="#FFFFFFFF" />-->
+
+<!--          </RelativeLayout>-->
+
+          <!-- New Information Section -->
+          <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center|bottom"
-            android:background="#77000000"
-            android:gravity="center"
-            android:padding="@dimen/tiny_gap">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
-              android:id="@+id/tv_image_caption"
-              style="?android:textAppearanceMedium"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:textColor="#FFFFFFFF" />
+              android:text="Uploader"
+              android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-          </RelativeLayout>
+            <!-- Vertical dividers -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:divider="?android:attr/dividerVertical"
+              android:showDividers="middle"
+              android:dividerPadding="8dp">
+
+              <TextView
+                android:id="@+id/tvUploaderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User:Filli99 (955 edits, age 959 days)"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="?android:attr/listDivider"/>
+
+              <TextView
+                android:id="@+id/tvSource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="https://owlmaps.github.io/units/#/ruUnknown"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="?android:attr/listDivider"/>
+
+              <TextView
+                android:id="@+id/tvLicenseLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="License"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="?android:attr/listDivider"/>
+
+              <TextView
+                android:id="@+id/tvChecksLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tineye . Google Lens . Bing . Yandex"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:background="?android:attr/listDivider"/>
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tvGlobalEdits"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Globally: 11,027 edits (Not blocked anywhere)"
+              android:paddingTop="8dp"/>
+
+            <!-- Link section -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingTop="8dp">
+
+              <TextView
+                android:id="@+id/tvTalk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="talk"
+                android:paddingEnd="8dp"/>
+
+              <TextView
+                android:id="@+id/tvUploads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="uploads"
+                android:paddingEnd="8dp"/>
+
+              <TextView
+                android:id="@+id/tvContributions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="contributions"
+                android:paddingEnd="8dp"/>
+            </LinearLayout>
+          </LinearLayout>
+
+
+
 
           <ProgressBar
             android:id="@+id/pb_review_image"
@@ -105,7 +201,95 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
+
         </RelativeLayout>
+
+        <!-- New Information Section -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:padding="16dp">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uploader"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+          <!-- Vertical dividers -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="?android:attr/dividerVertical"
+            android:showDividers="middle"
+            android:dividerPadding="8dp">
+
+            <TextView
+              android:id="@+id/tvUploader"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="955 edits, age 959 days"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:background="?android:attr/listDivider"/>
+
+            <TextView
+              android:id="@+id/tvSourceLink"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="https://owlmaps.github.io/units/#/ruUnknown"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:background="?android:attr/listDivider"/>
+
+            <TextView
+              android:id="@+id/tvLicense"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="License"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:background="?android:attr/listDivider"/>
+
+            <TextView
+              android:id="@+id/tvChecks"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Tineye . Google Lens . Bing . Yandex"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:background="?android:attr/listDivider"/>
+          </LinearLayout>
+
+          <!-- Link section -->
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <TextView
+              android:id="@+id/tvTalkPage"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="talk"
+              android:paddingEnd="8dp"/>
+
+            <TextView
+              android:id="@+id/tvUploadsPage"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="uploads"
+              android:paddingEnd="8dp"/>
+
+            <TextView
+              android:id="@+id/tvContributionsPage"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="contributions"
+              android:paddingEnd="8dp"/>
+          </LinearLayout>
+        </LinearLayout>
+
 
         <fr.free.nrw.commons.review.ReviewViewPager
           android:id="@+id/view_pager_review"
@@ -113,6 +297,7 @@
           android:layout_height="@dimen/dimen_0"
           android:layout_weight="1"
           android:fadingEdge="none" />
+
 
       </LinearLayout>
 
