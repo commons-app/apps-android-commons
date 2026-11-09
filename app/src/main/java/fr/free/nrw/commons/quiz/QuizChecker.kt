@@ -7,7 +7,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.WelcomeActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.utils.DialogUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,7 +28,7 @@ class QuizChecker
     @Inject
     constructor(
         private val sessionManager: SessionManager,
-        private val okHttpJsonApiClient: OkHttpJsonApiClient,
+        private val userStatsClient: UserStatsClient,
         @Named("default_preferences") private val revertKvStore: JsonKvStore,
     ) {
         private var revertCount = 0
@@ -62,7 +62,7 @@ class QuizChecker
          */
         private fun setUploadCount() {
             compositeDisposable.add(
-                okHttpJsonApiClient
+                userStatsClient
                     .getUploadCount(sessionManager.userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -95,7 +95,7 @@ class QuizChecker
          */
         private fun setRevertCount() {
             compositeDisposable.add(
-                okHttpJsonApiClient
+                userStatsClient
                     .getAchievements(sessionManager.userName)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

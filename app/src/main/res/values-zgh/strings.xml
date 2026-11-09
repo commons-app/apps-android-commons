@@ -2,22 +2,82 @@
 <!-- Authors:
 * AguzulH
 * Brahim-essaidi
+* Daoudsfouli
 * Hakim1bal
 -->
 <resources>
+  <string name="commons_facebook">ⵜⴰⵙⴰ ⵏ ⴼⴰⵢⵙⴱⵓⴽ ⴳ ⴽⵓⵎⵏⵣ</string>
+  <string name="commons_github">ⴰⵙⴰⴳⵎ ⵏ ⵉⵏⵉⴳⵍ GitHub ⵏ ⴽⵓⵎⵏⵣ</string>
+  <string name="commons_logo">ⵜⴰⵎⴰⵜⴰⵔⵜ ⵏ ⴽⵓⵎⵏⵣ</string>
+  <string name="commons_website">ⴰⵙⵉⵜ ⵏ ⴽⵓⵎⵏⵣ</string>
+  <string name="exit_location_picker">ⴼⴼⵖ ⴰⴷⵖⴰⵔ ⵏ ⵓⵎⴳⵍⴰⵢ</string>
+  <string name="submit">ⴰⵣⵏ</string>
+  <string name="add_another_description">ⵔⵏⵓ ⴰⴳⵍⴰⵎ ⵢⴰⴹⵏ</string>
+  <string name="add_new_contribution">ⵔⵏⵓ ⴰⵙⵙⵉⵡⵙ ⴰⵎⴰⵢⵏⵓ</string>
+  <string name="add_contribution_from_camera">ⵔⵏⵓ ⴰⵙⵙⵉⵡⵙ ⵙⴳ ⵍⴽⴰⵎⵉⵔⴰ</string>
+  <string name="add_contribution_from_photos">ⵔⵏⵓ ⴰⵙⵙⵉⵡⵙ ⵙⴳ ⵜⵡⵍⴰⴼⵉⵏ</string>
+  <string name="add_contribution_from_contributions_gallery">ⵔⵏⵓ ⴰⵙⵙⵉⵡⵙ ⵙⴳ ⵓⵙⴼⵙⵔ ⵏ ⵉⵙⵙⵡⵙⵏ ⵉⵣⵔⵉⵏ</string>
+  <string name="show_captions">ⵜⵉⴷⵖⵔⵉⵏ</string>
+  <string name="row_item_language_description">ⴰⴳⵍⴰⵎ ⵏ ⵜⵓⵜⵍⴰⵢⵜ</string>
+  <string name="row_item_caption">ⴰⵅⴼⴰⵡⵍ</string>
+  <string name="show_captions_description">ⴰⴳⵍⴰⵎ</string>
+  <string name="nearby_row_image">ⵜⴰⵡⵍⴰⴼⵜ</string>
+  <string name="nearby_all">ⵢⴰⵍ</string>
+  <string name="nearby_filter_toggle">ⵏⴳⵍⵓⵍⵓ ⵙ ⴰⴼⵍⵍⴰ</string>
+  <string name="nearby_filter_search">ⴰⵙⵎⴰⵍ ⵏ ⵓⵔⵣⵣⵓ</string>
+  <string name="nearby_filter_state">ⴰⴷⵖⴰⵕ ⴷ ⵡⴰⴷⴷⴰⴷ</string>
+  <string name="appwidget_img">ⵜⴰⵡⵍⴰⴼⵜ ⵏ ⵡⴰⵙⵙ</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d ⴰⴼⴰⵢⵍⵓ ⴰⵔ ⵉⵜⵜⵡⴰⴳⴰⵎ</item>
+    <item quantity="other">%1$d ⵉⴼⴰⵢⵍⵓⵜ ⴰⵔ ⵜⵜⵡⴰⴳⴰⵎⵏ</item>
+  </plurals>
+  <string name="starting_uploads">ⴰⵙⵙⵏⵜⵉ ⵏ ⵉⴳⴰⵎⵏ</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">ⴰⵙⵎⴽⵍ %1$d ⴰⴳⴰⵎ</item>
+    <item quantity="other">ⴰⵙⵎⴽⵍ %1$d ⵉⴳⴰⵎⵏ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d ⴰⴷⴽⴰⵍ</item>
+    <item quantity="other">%1$d ⵉⴷⴽⴰⵍⵏ</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">ⵜⴰⵡⵍⴰⴼⵜ ⴰⴷ ⵔⴰⴷ ⵜⵉⵍⵉ ⵜⵓⵔⴰⴳⵜ ⴷⴷⴰⵡ %1$s</item>
+    <item quantity="other">ⵜⵉⵡⴰⴼⵉⵏ ⴰⴷ ⵔⴰⴷ ⵉⵍⵉⵏⵜ ⵜⵓⵔⴰⴳⵜ ⴷⴷⴰⵡ %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d ⴰⴷⴽⴰⵍ</item>
+    <item quantity="other">%1$d ⵉⴷⴽⴰⵍⵏ</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">ⵉⵎⵥ ⵏ ⵜⵓⵎⴰⵢⵜ ⵉⵙⵙⴰⵔⵏ. ⵉⵖⵉ ⴰⴷ ⵉⴽⴽ ⵓⵙⵎⴰⵜⵜⵉ ⵏ ⵜⵡⵍⴰⴼⵜ ⴽⵉⴳⴰⵏ ⵏ ⵡⴰⴽⵓⴷ ⵖⴼ ⵓⵙⵙⵉⴹⵏ ⵏ ⵜⵖⵣⵉ ⵏ ⵜⵡⵍⴰⴼⵜ ⴷ ⵡⴰⵍⵍⴰⵍ ⵏⵏⴽ</item>
+    <item quantity="other">ⵉⵎⵥ ⵏ ⵜⵓⵎⴰⵢⵜ ⵉⵙⵙⴰⵔⵏ. ⵉⵖⵉ ⴰⴷ ⵉⴽⴽ ⵓⵙⵎⴰⵜⵜⵉ ⵏ ⵜⵡⵍⴰⴼⵉⵏ ⴽⵉⴳⴰⵏ ⵏ ⵡⴰⴽⵓⴷ ⵖⴼ ⵓⵙⵙⵉⴹⵏ ⵏ ⵜⵖⵣⵉ ⵏ ⵜⵡⵍⴰⴼⵉⵏ ⴷ ⴰⵍⵍⴰⵍ ⵏⵏⴽ</item>
+  </plurals>
+  <string name="navigation_item_explore">ⵉⵏⵉⴳ</string>
+  <string name="preference_category_appearance">ⵜⵉⴼⵔⵉⵙⵜ</string>
   <string name="preference_category_general">ⴰⵎⴰⵜⴰⵢ</string>
+  <string name="preference_category_feedback">ⴰⵖⴼⴰⵡⴰⵍ</string>
+  <string name="preference_category_privacy">ⵜⵉⵏⵏⵓⵜⵍⴰ</string>
   <string name="app_name">ⴽⵓⵎⵏⵣ</string>
   <string name="menu_settings">ⵜⵉⵙⵖⴰⵍ</string>
+  <string name="intent_share_upload_label">ⴰⴷⴽⴰⵍ ⵙ ⴽⵓⵎⵏⵣ</string>
+  <string name="upload_in_progress">ⴳ ⵓⴱⵔⵉⴷ ⵏ ⵓⴷⴽⴰⵍ</string>
   <string name="username">ⵉⵙⵎ ⵏ ⵓⵎⵙⵙⵎⵔⵙ</string>
   <string name="password">ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵔⴰⵢ</string>
+  <string name="login_credential">ⴽⵛⵎ ⵖⵔ ⵓⵎⵉⴹⴰⵏ ⵏⵏⴽ ⴳ ⴽⵓⵎⵏⵣ ⴱⵉⵜⴰ</string>
   <string name="login">ⴽⵛⵎ</string>
   <string name="forgot_password">ⵜⴻⵜⵜⵓⴷ ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵣⵔⴰⵢ?</string>
   <string name="signup">ⵣⵎⵎⴻⵎ</string>
   <string name="logging_in_title">ⴷⴰ ⵜⴽⵛⵛⵎⴷ</string>
   <string name="logging_in_message">ⴰⵎⵓⵔ ⵏⵏⴽ ⵇⵇⵍ...</string>
-  <string name="login_success" fuzzy="true">ⴰⴽⵛⴰⵎ !ⵉⵎⵓⵔⵙ</string>
-  <string name="login_failed" fuzzy="true">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ!</string>
+  <string name="updating_caption_title">ⴰⵙⴷⵖⵉ ⵏ ⵉⵡⵏⵏⵉⵜⵏ ⴷ ⵉⴳⵍⴰⵎⵏ</string>
+  <string name="updating_caption_message">ⵉⴳ ⴰⵙ ⵜⵓⴼⵉⴷ ⵇⵇⵍ...</string>
+  <string name="login_success">ⴰⴽⵛⴰⵎ !ⵉⵎⵓⵔⵙ</string>
+  <string name="login_failed">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ!</string>
   <string name="upload_failed">ⴰⴼⴰⵢⵍⵓ ⵓⵔ ⵉⵜⵜⵢⵓⴼⴰ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴰⴼⴰⵢⵍⵓ ⵢⴰⴹⵏ.</string>
+  <string name="retry_limit_reached">ⵜⵉⵡⴹⴷ ⴰⵡⵜⵜⵓ ⴰⵎⵓⵣⵣⵓⵔ ⵏ ⵢⵉⵔⵉⵎⵏ! ⵉⴳ ⴰⵙ ⵜⵓⴼⵉⴷ ⵙⵙⵔ ⴰⴷⴽⴰⵍ ⵜⴰⵔⵎⴷ ⵜⵉⴽⴽⵍⵜ ⵢⴰⴹⵏ</string>
+  <string name="unrestricted_battery_mode">ⵙⴱⴷⴷ ⴰⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ</string>
+  <string name="suggest_unrestricted_mode">ⴰⵙⵙⴽⵜⵔ ⵏ ⵡⵓⴳⴳⴰⵔ ⵏ ⴽⵕⴰⴹⵜ ⵜⵡⵍⴰⴼⵉⵏ ⴰⵔ ⵜⵜⵎⵔⴰⵙ ⵙ ⵜⵎⴰⵎⴽⵜ ⵉⵜⵜⴼⵍⴰⵙⵏ ⵓⴳⴳⴰⵔ ⵏⵏⴰ ⴳ ⵉⵜⵜⵡⴰⴽⴽⴰⵙ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ ⵉⴳ ⴰⵙ ⵜⵓⴼⵉⴷ ⴽⴽⵙ ⴰⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ ⵉⵜⵉⵏⵙⵉ ⵏ ⴽⵓⵎⵏⵣ ⵙⴳ ⵜⵉⵙⵖⴰⵍ ⵉ ⵢⴰⵏ ⵢⵉⵔⵉⵎ ⵏ ⵓⵙⵙⴽⵜⵔ ⵉⵔⵔⵉⵔⵉⵏ.\nⵜⵉⴼⵔⴽⵉⵏ ⵜⵓⵣⴹⵕⵉⵏ ⵏ ⵡⵓⴽⵓⵙ ⵏ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ:\nⵜⵉⴼⵔⴽⵜ 1: ⴰⴷⴷ ⴼ ⵓⴱⵔⴰ ⵏ ⵜⵉⵙⵖⴰⵍ ⴰⴷⴷⴰⵢ.\nⵜⵉⴼⵔⴽⵜ 2: ⵣⵔⵉ ⵙⴳ ⵓⵔ ⵉⵙⵖⵓⴷⵉ ⵙ \"ⵢⴰⵍ ⵜⵉⵏⵙⵉⵡⵉⵏ\".\nⵜⵉⴼⵔⴽⵜ 3: ⵙⵉⴳⴳⵍ ⵉ \"commns\" mid \"fr.free.nrw.commons\"\nⵜⵉⴼⵔⴽⵜ 4: ⴰⴽⵍ ⵜⵜ ⵜⴼⵔⵏⴷ \"ⴰⴷ ⵓⵔ ⵜⵙⵖⵓⴷⵓⴷ\"\nⵜⵉⴼⵔⴽⵜ 5: ⴰⴽⵍ ⴼ \"done\"</string>
+  <string name="authentication_failed">ⴰⵙⵖⵣⵏ ⵉⵣⴳⵍ. ⵉⴳ ⵜⵓⴼⵉⴷ ⴽⵛⵎ ⴷⵉⵖ</string>
   <string name="uploading_started">ⴰⵙⴽⵜⵔ ⵉⵙⵙⵏⵜⵉ!</string>
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
   <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
@@ -28,6 +88,7 @@
   <string name="title_activity_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ ⵉⵎⴳⴳⵓⵔⴰ</string>
   <string name="contribution_state_in_progress">ⵉⵙⵎⴷ %1$d%%</string>
   <string name="contribution_state_starting">ⴰⵙⵙⴽⵜⵔ</string>
+  <string name="menu_from_camera">ⴰⵎⵥ ⵜⴰⵡⵍⴰⴼⵜ</string>
   <string name="provider_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ</string>
   <string name="menu_share">ⴱⴹⵓ</string>
   <string name="share_title_hint">ⴰⴷⵓⵣⵡⵍ (ⵉⵇⵇⴰⵏ ⴷ)</string>
@@ -40,13 +101,18 @@
   <string name="menu_upload_single">ⵙⵙⴽⵜⵔ</string>
   <string name="categories_search_text_hint">ⵔⵣⵓ ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="menu_save_categories">ⵃⴹⵓ</string>
+  <string name="display_list_button">ⵜⴰⵍⴳⴰⵎⵜ</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
   <string name="categories_not_found">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="categories_activity_title">ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="title_activity_settings">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="title_activity_signup">ⵣⵎⵎⴻⵎ</string>
+  <string name="title_activity_category_details">ⴰⵙⵎⵉⵍ</string>
   <string name="menu_about">ⵖⴼ</string>
+  <string name="about_privacy_policy">ⵜⴰⵙⵔⵜⵉⵜ ⵏ ⵜⵉⵏⵏⵓⵜⵍⴰ</string>
+  <string name="about_credits">ⵉⵎⵔⵡⴰⵙⵏ</string>
   <string name="title_activity_about">ⵖⴼ</string>
+  <string name="menu_feedback">ⴰⵣⵏ ⴰⵖⴼⴰⵡⴰⵍ (ⴳ ⵉⵎⴰⵢⵍ)</string>
   <string name="provider_categories">ⵜⴰⴳⴳⴰⵢⵉⵏ ⵉⵜⵜⵓⵙⵙⵎⵔⵙⵏ ⴷⵔⵓⵙ ⴰⵢⴰ</string>
   <string name="no_uploads_yet">ⵓⵔ ⵜⴰ ⵜⵙⵙⴽⵜⵉⵔⴷ ⴰⵡⴷ ⴽⴰ ⵏ ⵜⵡⵍⴰⴼⵉⵏ.</string>
   <string name="menu_retry_upload">ⴰⵔⵎ ⴷⴰⵖ</string>
@@ -70,12 +136,16 @@
   <string name="navigation_item_about">ⵖⴼ</string>
   <string name="navigation_item_settings">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="navigation_item_notification">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
+  <string name="contribution_deleted">ⵉⵜⵜⵓⴽⴽⵙ</string>
   <string name="navigation_item_login">ⴽⵛⵎ</string>
   <string name="nearby_wikipedia">ⵡⵉⴽⵉⴱⵉⴷⵢⴰ</string>
+  <string name="nearby_commons">ⴽⵓⵎⵏⵣ</string>
   <string name="about_translate">ⵙⵙⵓⵖⵍ</string>
   <string name="about_translate_title">ⵜⵓⵜⵍⴰⵢⵉⵏ</string>
   <string name="menu_search_button">ⵔⵣⵓ</string>
   <string name="title_activity_search">ⵔⵣⵓ</string>
+  <string name="search_tab_title_categories">ⵉⵙⵎⵉⵍⵏ</string>
+  <string name="question">ⴰⵙⴻⵙⵜⴰⵏ</string>
   <string name="delete">ⴽⴽⵙ</string>
   <string name="Profile">ⵉⴼⵔⵙ</string>
   <string name="title_app_shortcut_setting">ⵜⵉⵙⵖⴰⵍ</string>

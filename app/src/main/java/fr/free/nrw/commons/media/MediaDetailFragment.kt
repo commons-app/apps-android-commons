@@ -1021,8 +1021,9 @@ class MediaDetailFragment :
     }
 
     private fun onCopyWikicodeClicked() {
-        val data: String =
-            "[[" + media!!.filename + "|thumb|" + media!!.fallbackDescription + "]]"
+        val item = media ?: return
+        val filename = item.filename ?: return
+        val data = formatMediaWikitext(filename, item.fallbackDescription)
         requireContext().copyToClipboard("wikiCode", data)
         Timber.d("Generated wikidata copy code: %s", data)
 

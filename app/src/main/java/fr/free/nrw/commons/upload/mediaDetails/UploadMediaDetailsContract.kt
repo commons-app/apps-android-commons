@@ -15,7 +15,44 @@ import fr.free.nrw.commons.upload.UploadMediaDetail
  * The contract with with UploadMediaDetails and its presenter would talk to each other
  */
 interface UploadMediaDetailsContract {
-    interface View : SimilarImageInterface {
+    /** Dialogs shown while validating an upload image. */
+    interface Dialogs : SimilarImageInterface {
+        /** Confirms whether an upload should keep a duplicate filename. */
+        fun showDuplicatePicturePopup(uploadItem: UploadItem)
+
+        /**
+         * Shows a dialog alerting the user that internet connection is required for upload process
+         * Recalls UploadMediaPresenter.getImageQuality for all the next upload items,
+         * if there is network connectivity and then the user presses okay
+         */
+        fun showConnectionErrorPopup()
+
+        /**
+         * Shows a dialog alerting the user that internet connection is required for upload process
+         * Does nothing if there is network connectivity and then the user presses okay
+         */
+        fun showConnectionErrorPopupForCaptionCheck()
+
+        /** Confirms whether an image with a quality warning should be uploaded. */
+        fun showBadImagePopup(
+            errorCode: Int,
+            index: Int,
+            uploadItem: UploadItem,
+        )
+    }
+
+    /** Location selection and missing-location prompts for an upload image. */
+    interface Location {
+        /** Opens the location picker for the current upload item. */
+        fun showExternalMap(uploadItem: UploadItem)
+
+        /** Offers to add coordinates before proceeding with the upload. */
+        fun displayAddLocationDialog(runnable: Runnable)
+    }
+
+    interface View :
+        Dialogs,
+        Location {
         fun onImageProcessed(uploadItem: UploadItem)
 
         fun onNearbyPlaceFound(
@@ -37,34 +74,9 @@ interface UploadMediaDetailsContract {
             colorResourceId: Int,
         )
 
-        fun showDuplicatePicturePopup(uploadItem: UploadItem)
-
-        /**
-         * Shows a dialog alerting the user that internet connection is required for upload process
-         * Recalls UploadMediaPresenter.getImageQuality for all the next upload items,
-         * if there is network connectivity and then the user presses okay
-         */
-        fun showConnectionErrorPopup()
-
-        /**
-         * Shows a dialog alerting the user that internet connection is required for upload process
-         * Does nothing if there is network connectivity and then the user presses okay
-         */
-        fun showConnectionErrorPopupForCaptionCheck()
-
-        fun showExternalMap(uploadItem: UploadItem)
-
         fun showEditActivity(uploadItem: UploadItem)
 
         fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>)
-
-        fun displayAddLocationDialog(runnable: Runnable)
-
-        fun showBadImagePopup(
-            errorCode: Int,
-            index: Int,
-            uploadItem: UploadItem,
-        )
     }
 
     interface UserActionListener : BasePresenter<View> {
@@ -144,6 +156,11 @@ interface UploadMediaDetailsContract {
         fun onMapIconClicked(indexInViewFlipper: Int)
 
         fun onEditButtonClicked(indexInViewFlipper: Int)
+
+        /**
+         * Returns the upload item at the given index, or null if there is none
+         */
+        fun getUploadItem(indexInViewFlipper: Int): UploadItem?
 
         fun onUserConfirmedUploadIsOfPlace(
             place: Place?,

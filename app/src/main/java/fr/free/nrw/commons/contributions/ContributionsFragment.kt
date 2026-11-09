@@ -44,7 +44,7 @@ import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.nearby.Place
@@ -55,6 +55,7 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.worker.UploadWorker
+import fr.free.nrw.commons.upload.worker.isPermanentUploadError
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.LengthUtils.computeBearing
@@ -97,7 +98,7 @@ class ContributionsFragment :
 
     @JvmField
     @Inject
-    var okHttpJsonApiClient: OkHttpJsonApiClient? = null
+    var userStatsClient: UserStatsClient? = null
 
     @JvmField
     @Inject
@@ -297,36 +298,7 @@ class ContributionsFragment :
             uploadMenuItemActionView.findViewById(
                 R.id.pending_uploads_image_view,
             )
-        if (pendingUploadsImageView != null) {
-            pendingUploadsImageView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
-        if (pendingUploadsCountTextView != null) {
-            pendingUploadsCountTextView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
-        if (uploadsErrorTextView != null) {
-            uploadsErrorTextView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
+        setupUploadClickListeners()
         notification.setOnClickListener { view: View? ->
             context?.let {
                 startYourself(
@@ -335,6 +307,16 @@ class ContributionsFragment :
                 )
             }
         }
+    }
+
+    private fun setupUploadClickListeners() {
+        val listener =
+            View.OnClickListener {
+                startActivity(Intent(context, UploadProgressActivity::class.java))
+            }
+        pendingUploadsImageView?.setOnClickListener(listener)
+        pendingUploadsCountTextView?.setOnClickListener(listener)
+        uploadsErrorTextView?.setOnClickListener(listener)
     }
 
     @SuppressLint("CheckResult")
@@ -538,7 +520,7 @@ class ContributionsFragment :
     }
 
     private fun setUploadCount() {
-        okHttpJsonApiClient
+        userStatsClient
             ?.getUploadCount(sessionManager?.currentAccount!!.name)
             ?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
@@ -972,6 +954,15 @@ class ContributionsFragment :
         if (isInternetConnectionEstablished(context)) {
             if (contribution.state == Contribution.STATE_PAUSED) {
                 restartUpload(contribution)
+            } else if (contribution.state == Contribution.STATE_FAILED &&
+                isPermanentUploadError(contribution.errorInfo)
+            ) {
+                // Retrying cannot fix this failure, so it is not retried automatically
+                Timber.d(
+                    "Skipping re-upload of %s, it failed with %s",
+                    contribution.media.filename,
+                    contribution.errorInfo,
+                )
             } else if (contribution.state == Contribution.STATE_FAILED) {
                 val retries = contribution.retries
                 // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562

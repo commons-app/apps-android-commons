@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.Media
@@ -17,9 +16,7 @@ import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
-import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
-import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
@@ -71,8 +68,9 @@ class WikidataItemDetailsActivity :
         wikidataItem = intent.getParcelableExtra(WikidataConstants.BOOKMARKS_ITEMS)
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        setTabs()
-        setPageTitle()
+        val tabs = WikidataItemDetailsTabs(this, binding!!, viewPagerAdapter!!)
+        depictionImagesListFragment = tabs.setTabs()
+        tabs.setPageTitle()
 
         onBackPressedDispatcher.addCallback(
             this,
@@ -92,15 +90,6 @@ class WikidataItemDetailsActivity :
     }
 
     /**
-     * Gets the passed wikidataItemName from the intents and displays it as the page title
-     */
-    private fun setPageTitle() {
-        if (intent != null && intent.getStringExtra("wikidataItemName") != null) {
-            title = intent.getStringExtra("wikidataItemName")
-        }
-    }
-
-    /**
      * This method is called on success of API call for featured Images.
      * The viewpager will notified that number of items have changed.
      */
@@ -108,36 +97,6 @@ class WikidataItemDetailsActivity :
         if (mediaDetailPagerFragment != null) {
             mediaDetailPagerFragment!!.notifyDataSetChanged()
         }
-    }
-
-    /**
-     * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
-     * Set the fragments according to the tab selected in the viewPager.
-     */
-    private fun setTabs() {
-        depictionImagesListFragment = DepictedImagesFragment()
-        val childDepictionsFragment = ChildDepictionsFragment()
-        val parentDepictionsFragment = ParentDepictionsFragment()
-        val wikidataItemName = intent.getStringExtra("wikidataItemName")
-        val entityId = intent.getStringExtra("entityId")
-        if (intent != null && wikidataItemName != null) {
-            val arguments =
-                bundleOf(
-                    "wikidataItemName" to wikidataItemName,
-                    "entityId" to entityId,
-                )
-            depictionImagesListFragment!!.arguments = arguments
-            parentDepictionsFragment.arguments = arguments
-            childDepictionsFragment.arguments = arguments
-        }
-
-        viewPagerAdapter!!.setTabs(
-            R.string.title_for_media to depictionImagesListFragment!!,
-            R.string.title_for_child_classes to childDepictionsFragment,
-            R.string.title_for_parent_classes to parentDepictionsFragment,
-        )
-        binding!!.viewPager.offscreenPageLimit = 2
-        viewPagerAdapter!!.notifyDataSetChanged()
     }
 
     /**

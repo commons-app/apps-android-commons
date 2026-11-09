@@ -4,6 +4,7 @@
 * HairyFotr
 * Kaartic
 * McDutchie
+* Nicolas Raoul
 * Upwinxp
 -->
 <resources>
@@ -293,6 +294,13 @@
   <string name="null_url">Napaka! URL ni najden</string>
   <string name="nominate_deletion">Predlagaj za izbris</string>
   <string name="nominated_for_deletion">Ta slika je predlagana za izbris.</string>
+  <string name="file_deleted_from_commons">Ta datoteka je bila izbrisana v Zbirki.</string>
+  <string name="contribution_deleted">Izbrisano</string>
+  <string name="deleted_file_activity_title">Datoteka izbrisana</string>
+  <string name="deleted_file_explanation">Wikimedijina zbirka briše datoteke, ki niso izobraževalne ali kršijo njena pravila, vključno s kršitvami avtorskih pravic. Nalagajte fotografije, ki ste jih posneli sami. Slike, kopirane z interneta, posnetki zaslona, logotipi in plakati so pogosti razlogi za odstranitev datoteke.</string>
+  <string name="deleted_file_view_page">Ogled strani datoteke</string>
+  <string name="deleted_file_view_discussion">Preberite razpravo o brisanju</string>
+  <string name="deleted_file_policies">Pravila in smernice Zbirke</string>
   <string name="nominated_see_more">Za podrobnosti glejte spletno stran</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijava</string>
@@ -413,12 +421,14 @@
   <string name="images_used_explanation">Število slik, ki ste jih naložili v Zbirko in se uporabljajo v člankih Wikipedije</string>
   <string name="error_occurred">Prišlo je do napake!</string>
   <string name="notifications_channel_name_all">Obvestilo v Zbirki</string>
+  <string name="notifications_channel_name_uploads">Napredek nalaganja</string>
   <string name="preference_author_name_toggle">Uporabi ime avtorja po meri</string>
   <string name="preference_author_name_toggle_summary">Pri nalaganju slik namesto uporabniškega imena uporabi ime avtorja po meri</string>
   <string name="preference_author_name">Ime avtorja po meri</string>
   <string name="contributions_fragment">Prispevki</string>
   <string name="nearby_fragment">Bližnje</string>
   <string name="notifications">Obvestila</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Obvestila (prebrana)</string>
   <string name="display_nearby_notification">Prikaži bližnje obvestilo</string>
   <string name="display_nearby_notification_summary">V aplikaciji prikaži obvestilo za najbližji kraj, ki potrebuje slike</string>
@@ -574,7 +584,7 @@
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Kategorija %1$s je dodana.</item>
     <item quantity="two">Kategoriji %1$s sta dodani</item>
-    <item quantity="few">Kategorije %1$ so dodane</item>
+    <item quantity="few">Kategorije %1$s so dodane</item>
     <item quantity="other">Kategorije %1$s so dodane.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategorij ni mogoče dodati.</string>
@@ -889,4 +899,12 @@
   <string name="error_applying_blur">Napaka pri uporabi zameglitve</string>
   <string name="failed_to_apply_crop">Obrezovanja ni bilo mogoče uporabiti</string>
   <string name="failed_to_save_image">Shranjevanje slike ni uspelo</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (avdio)</string>
+  <string name="unsupported_format_title">Nepodprt format</string>
+  <string name="unsupported_format_desc">Izbranih datotek ni bilo mogoče odpreti. Wikimedijina zbirka strogo zahteva naslednje formate: \n\n %s</string>
+  <string name="unsupported_files_skipped_title">Nepodprte datoteke preskočene</string>
+  <string name="unsupported_files_skipped_desc">Nekatere datoteke so bile preskočene zaradi nepodprtega formata. Aplikacija bo nadaljevala z nalaganjem preostalih datotek, ki ustrezajo naslednjim podprtim formatom: \n\n %s</string>
 </resources>
