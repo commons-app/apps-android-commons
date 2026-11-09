@@ -169,20 +169,24 @@ class FileProcessor
                 }
         }
 
-        private fun readImageCoordinates(file: File) =
+        private fun readImageCoordinates(file: File): ImageCoordinates? {
             try {
-            /* Used null location as location for similar images captured before is not available
-               in case it is not present in the EXIF. */
-                ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
+                /* Used null location as location for similar images captured before is not available
+                   in case it is not present in the EXIF. */
+                val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+                if (inputStream != null) {
+                    return ImageCoordinates(inputStream, null)
+                }
             } catch (e: IOException) {
                 Timber.e(e)
-                try {
-                    ImageCoordinates(file.absolutePath, null)
-                } catch (ex: IOException) {
-                    Timber.e(ex)
-                    null
-                }
             }
+            return try {
+                ImageCoordinates(file.absolutePath, null)
+            } catch (ex: IOException) {
+                Timber.e(ex)
+                null
+            }
+        }
 
         /**
          * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then

@@ -26,7 +26,6 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -165,80 +164,45 @@ class WikidataItemDetailsActivity :
      * This method handles the logic on item select in toolbar menu
      * Currently only 1 choice is available to open Wikidata item details page in browser
      */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.browser_actions_menu_items -> {
-                val entityId = intent.getStringExtra("entityId")
-                val uri = Uri.parse("https://www.wikidata.org/wiki/$entityId")
-                handleWebUrl(this, uri)
-                return true
+                handleWebUrl(
+                    this,
+                    Uri.parse("https://www.wikidata.org/wiki/${intent.getStringExtra("entityId")}"),
+                )
+                true
             }
 
             R.id.menu_bookmark_current_item -> {
+                fun showBookmarkResult(bookmarkExists: Boolean) {
+                    val message = if (bookmarkExists) R.string.add_bookmark else R.string.remove_bookmark
+                    Snackbar.make(findViewById(R.id.toolbar_layout), message, Snackbar.LENGTH_LONG).show()
+                    updateBookmarkState(item)
+                }
                 if (intent.getStringExtra("fragment") != null) {
                     compositeDisposable!!.add(
                         depictModel!!
-                            .getDepictions(
-                                intent.getStringExtra("entityId")!!,
-                            ).subscribeOn(Schedulers.io())
+                            .getDepictions(intent.getStringExtra("entityId")!!)
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                Consumer<List<DepictedItem?>> { depictedItems: List<DepictedItem?> ->
-                                    val bookmarkExists =
-                                        bookmarkItemsDao!!.updateBookmarkItem(
-                                            depictedItems[0]!!,
-                                        )
-                                    val snackbar =
-                                        if (bookmarkExists) {
-                                            Snackbar.make(
-                                                findViewById(R.id.toolbar_layout),
-                                                R.string.add_bookmark,
-                                                Snackbar.LENGTH_LONG,
-                                            )
-                                        } else {
-                                            Snackbar.make(
-                                                findViewById(R.id.toolbar_layout),
-                                                R.string.remove_bookmark,
-                                                Snackbar.LENGTH_LONG,
-                                            )
-                                        }
-
-                                    snackbar.show()
-                                    updateBookmarkState(item)
-                                },
-                            ),
+                            .subscribe { items ->
+                                showBookmarkResult(bookmarkItemsDao!!.updateBookmarkItem(items[0]!!))
+                            },
                     )
                 } else {
-                    val bookmarkExists = bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!)
-                    val snackbar =
-                        if (bookmarkExists) {
-                            Snackbar.make(
-                                findViewById(R.id.toolbar_layout),
-                                R.string.add_bookmark,
-                                Snackbar.LENGTH_LONG,
-                            )
-                        } else {
-                            Snackbar.make(
-                                findViewById(R.id.toolbar_layout),
-                                R.string.remove_bookmark,
-                                Snackbar.LENGTH_LONG,
-                            )
-                        }
-
-                    snackbar.show()
-                    updateBookmarkState(item)
+                    showBookmarkResult(bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!))
                 }
-                return true
+                true
             }
 
             android.R.id.home -> {
                 onBackPressedDispatcher.onBackPressed()
-                return true
+                true
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
-    }
 
     private fun updateBookmarkState(item: MenuItem) {
         val isBookmarked: Boolean =

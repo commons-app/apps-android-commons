@@ -382,9 +382,7 @@ class NearbyParentFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        if (Label.TEXT_TO_DESCRIPTION.isEmpty()) {
-            Label.init(requireContext().applicationContext)
-        }
+        Label.init(requireContext().applicationContext)
         loadExploreMapData()
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
@@ -3591,3 +3589,4 @@ class NearbyParentFragment :
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
     }
 }
+
