@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.profile
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Looper
@@ -20,7 +21,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import java.lang.reflect.Method
+import org.robolectric.shadows.ShadowAlertDialog
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -85,20 +86,24 @@ class ProfileActivityTest {
     @Throws(Exception::class)
     fun testShowAlert() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        activity.showAlert(bitmap)
+        ProfileScreenshotSharer(activity).showAlert(bitmap)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShareScreen() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            ProfileActivity::class.java.getDeclaredMethod(
-                "shareScreen",
-                Bitmap::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(activity, bitmap)
+        val screenshot = Bitmap.createBitmap(2, 2, Bitmap.Config.ARGB_8888)
+        ProfileScreenshotSharer(activity).showAlert(screenshot)
+        ShadowAlertDialog.getLatestAlertDialog().getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val chooser = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(android.content.Intent.ACTION_CHOOSER, chooser.action)
+        val sendIntent = chooser.getParcelableExtra<android.content.Intent>(android.content.Intent.EXTRA_INTENT)
+        Assert.assertNotNull(sendIntent)
+        Assert.assertEquals(android.content.Intent.ACTION_SEND, sendIntent!!.action)
+        Assert.assertEquals("image/png", sendIntent.type)
+        Assert.assertNotNull(sendIntent.getParcelableExtra<android.net.Uri>(android.content.Intent.EXTRA_STREAM))
     }
 
     @Test

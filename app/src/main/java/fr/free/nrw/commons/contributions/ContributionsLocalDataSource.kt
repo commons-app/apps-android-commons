@@ -17,16 +17,6 @@ class ContributionsLocalDataSource
         private val contributionDao: ContributionDao,
     ) {
         /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getString(key: String): String? = defaultKVStore.getString(key)
-
-        /**
-         * Fetch default number of contributions to be show, based on user preferences
-         */
-        fun getLong(key: String): Long = defaultKVStore.getLong(key)
-
-        /**
          * Get contribution object from cursor
          *
          * @param uri
@@ -72,16 +62,23 @@ class ContributionsLocalDataSource
         fun deleteContributionsWithStates(states: List<Int>): Completable =
             contributionDao.deleteContributionsWithStates(states)
 
-        fun getContributions(): DataSource.Factory<Int, Contribution> = contributionDao.fetchContributions()
-
         /**
          * Fetches contributions with specific states.
          *
          * @param states The states of the contributions to fetch.
+         * @param sortedByDateUploadStarted Whether the contributions are sorted by the date the upload
+         * started.
          * @return A DataSource factory for paginated contributions with the specified states.
          */
-        fun getContributionsWithStates(states: List<Int>): DataSource.Factory<Int, Contribution> =
-            contributionDao.getContributions(states)
+        fun getContributionsWithStates(
+            states: List<Int>,
+            sortedByDateUploadStarted: Boolean = false,
+        ): DataSource.Factory<Int, Contribution> =
+            if (sortedByDateUploadStarted) {
+                contributionDao.getContributionsSortedByDateUploadStarted(states)
+            } else {
+                contributionDao.getContributions(states)
+            }
 
         /**
          * Fetches all contributions with specific states at once, not page by page.
@@ -91,17 +88,6 @@ class ContributionsLocalDataSource
          */
         fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
             contributionDao.getContribution(states)
-
-        /**
-         * Fetches contributions with specific states sorted by the date the upload started.
-         *
-         * @param states The states of the contributions to fetch.
-         * @return A DataSource factory for paginated contributions with the specified states sorted by
-         * date upload started.
-         */
-        fun getContributionsWithStatesSortedByDateUploadStarted(
-            states: List<Int>,
-        ): DataSource.Factory<Int, Contribution> = contributionDao.getContributionsSortedByDateUploadStarted(states)
 
         fun saveContributions(contributions: List<Contribution>): Single<List<Long>> {
             val contributionList: MutableList<Contribution> = ArrayList()
@@ -126,8 +112,6 @@ class ContributionsLocalDataSource
         ) {
             defaultKVStore.putLong(key, value)
         }
-
-        fun updateContribution(contribution: Contribution): Completable = contributionDao.update(contribution)
 
         fun updateContributionsWithStates(
             states: List<Int>,

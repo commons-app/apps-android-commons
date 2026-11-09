@@ -133,6 +133,22 @@ class NotificationClientTest {
         notificationClient.markNotificationAsRead("test", "commonswiki").test().assertValue(false)
     }
 
+    @Test
+    fun getUnreadCountReadsRawCount() {
+        val response = Mockito.mock(MwQueryResponse::class.java)
+        val result = Mockito.mock(MwQueryResult::class.java)
+        val notifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
+
+        Mockito.`when`(response.query()).thenReturn(result)
+        Mockito.`when`(result.notifications()).thenReturn(notifications)
+        Mockito.`when`(notifications.rawCount()).thenReturn(100)
+        Mockito
+            .`when`(service.getUnreadNotificationCount(anyString()))
+            .thenReturn(Observable.just(response))
+
+        assertEquals(100, notificationClient.getUnreadCount().blockingGet())
+    }
+
     @Suppress("SameParameterValue")
     private fun createWikimediaNotification(
         primaryUrl: String,
