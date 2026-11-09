@@ -17,6 +17,7 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.utils.SystemThemeUtils
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -153,5 +154,23 @@ class ExploreMapFragmentUnitTest {
         val result =
             fragment.markerOverlayHelper.getMediaFromImageURL("http://example.com/image.jpg", mediaList)
         assertNull(result)
+    }
+
+    /**
+     * Verifies delegated ExploreMapContract.View calls forward to initialized helpers on attached fragment.
+     */
+    @Test
+    fun testDelegatedContractCallsOnAttachedFragment() {
+        assertFalse(fragment.isDetailsBottomSheetVisible())
+        fragment.hideBottomDetailsSheet()
+
+        assertNotNull(fragment.getMapCenter())
+        fragment.disableFABRecenter()
+        fragment.enableFABRecenter()
+
+        fragment.clearAllMarkers()
+        fragment.addMarkersToMap(emptyList())
+
+        assertNotNull(fragment.isNetworkConnectionEstablished())
     }
 }

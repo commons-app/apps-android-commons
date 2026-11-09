@@ -50,10 +50,10 @@ import javax.inject.Named
  * place markers, location tracking, camera viewports, and place detail sheets.
  */
 class ExploreMapFragment(
-    @JvmField @Inject var detailsSheetHelper: ExploreMapDetailsSheetHelper = ExploreMapDetailsSheetHelper(),
-    @JvmField @Inject var markerOverlayHelper: ExploreMapMarkerOverlayHelper = ExploreMapMarkerOverlayHelper(),
-    @JvmField @Inject var viewportHelper: ExploreMapViewportHelper = ExploreMapViewportHelper(),
-    @JvmField @Inject var locationHelper: ExploreMapLocationHelper = ExploreMapLocationHelper(),
+    val detailsSheetHelper: ExploreMapDetailsSheetHelper = ExploreMapDetailsSheetHelper(),
+    val markerOverlayHelper: ExploreMapMarkerOverlayHelper = ExploreMapMarkerOverlayHelper(),
+    val viewportHelper: ExploreMapViewportHelper = ExploreMapViewportHelper(),
+    val locationHelper: ExploreMapLocationHelper = ExploreMapLocationHelper(),
 ) : CommonsDaggerSupportFragment(),
     ExploreMapContract.View,
     ExploreMapContract.BottomSheet by detailsSheetHelper,

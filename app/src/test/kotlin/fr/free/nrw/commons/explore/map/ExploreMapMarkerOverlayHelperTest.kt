@@ -195,6 +195,16 @@ class ExploreMapMarkerOverlayHelperTest {
     }
 
     /**
+     * Verifies clearAllMarkers adds scale disk overlay when mapCenter is provided.
+     */
+    @Test
+    fun testClearAllMarkersWithMapCenter() {
+        helper.mapCenterProvider = { GeoPoint(10.0, 20.0) }
+        helper.clearAllMarkers()
+        assertTrue(mapView.overlays.any { it is ScaleDiskOverlay })
+    }
+
+    /**
      * Verifies addMarkersToMap handles empty or null marker lists.
      */
     @Test

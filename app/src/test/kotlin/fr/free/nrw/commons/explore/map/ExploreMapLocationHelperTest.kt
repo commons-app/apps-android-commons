@@ -111,12 +111,14 @@ class ExploreMapLocationHelperTest {
     @Test
     fun testOnLocationPermissionGranted() {
         whenever(locationPermissionsHelper.isLocationAccessToAppsTurnedOn()).thenReturn(true)
-        var callbackInvoked = false
-        helper.onPermissionGrantedCallback = { callbackInvoked = true }
+        val expectedLatLng = LatLng(10.0, 20.0, 0f)
+        whenever(locationManager.getLastLocation()).thenReturn(expectedLatLng)
+        var populatedLatLng: LatLng? = null
+        helper.onPermissionGrantedPlacesPopulator = { populatedLatLng = it }
 
         helper.onLocationPermissionGranted()
         verify(locationManager).registerLocationManager()
-        assertTrue(callbackInvoked)
+        assertEquals(expectedLatLng, populatedLatLng)
     }
 
     /**
