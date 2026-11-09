@@ -4,6 +4,7 @@
 * Beqabai
 * David1010
 * Mehman97
+* Nicolas Raoul
 * Გიო ოქრო
 -->
 <resources>
@@ -81,12 +82,12 @@
   <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა.</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
   <string name="uploading_queued">ატვირთვა რიგშია (შეზღუდული კავშირის რეჟიმი ჩართულია)</string>
-  <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
+  <string name="upload_completed_notification_title">%1$s ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
   <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
-  <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
-  <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
+  <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$s</string>
+  <string name="upload_failed_notification_title">%1$s ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_paused_notification_title">%1$s-ის ატვირთვა შეჩერებულია</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
   <string name="upload_paused_notification_subtitle">სანახავად დააჭირეთ</string>

@@ -68,7 +68,6 @@
     <ID>LongMethod:CategoriesModelTest.kt$CategoriesModelTest$@Test fun `searchAll with empty search terms creates results from gps, title search &amp; recents`()</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
     <ID>LongMethod:CommonsApplicationModule.kt$CommonsApplicationModule.Companion.&lt;no name provided&gt;$override fun migrate(db: SupportSQLiteDatabase)</ID>
-    <ID>LongMethod:ContributionsFragment.kt$ContributionsFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>LongMethod:DeleteHelper.kt$DeleteHelper$@SuppressLint("CheckResult") fun askReasonAndExecute( media: Media?, context: Context, question: String, problem: ReviewController.DeleteReason, reviewCallback: ReviewController.ReviewCallback, )</ID>
     <ID>LongMethod:DeleteHelper.kt$DeleteHelper$private fun delete( media: Media, reason: String, ): Observable&lt;Boolean&gt;</ID>
     <ID>LongMethod:DescriptionEditActivity.kt$DescriptionEditActivity$private fun editDescription( media: Media, updatedWikiText: String, uploadMediaDetails: ArrayList&lt;UploadMediaDetail&gt;, )</ID>

@@ -110,6 +110,10 @@
   <string name="menu_view_file_page">Menu item.</string>
   <string name="share_title_hint">{{Identical|Title}}</string>
   <string name="add_caption_toast">A notice during the upload process.</string>
+  <string name="file_name_blacklisted_toast">A notice during the upload process, shown when the caption, which is used as the file name, is on the title blacklist of Commons (for example \"Photo\").</string>
+  <string name="file_name_too_long_toast">A notice during the upload process, shown when the caption, which is used as the file name, is longer than Commons allows.</string>
+  <string name="file_name_invalid_toast">A notice during the upload process, shown when the caption, which is used as the file name, is not a valid page title on Commons (for example when it contains \"~~~\").</string>
+  <string name="file_name_banned_extension_toast">A notice during the upload process, shown when the caption, which is used as the file name, contains a file type that Commons does not accept, for example \"Visit konga.com\". \".com\" is a file extension and should not be translated.</string>
   <string name="share_description_hint">{{Identical|Description}}</string>
   <string name="share_caption_hint">Label of the caption of the image.</string>
   <string name="login_failed_network">Error message shown to user when login can not be completed due to network issues.</string>

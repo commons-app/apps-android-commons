@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Dr Lotus Black
+* Nicolas Raoul
 * Ninjastrikers
 * Teitei Para
 * Whym
@@ -91,7 +92,7 @@
   <string name="refresh_button">ပြန်လည်ဆန်းသစ်ရန်</string>
   <string name="display_list_button">စာရင်း</string>
   <string name="contributions_subtitle_zero">(ဖိုင်မတင်ရသေးပါ)</string>
-  <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
+  <string name="categories_not_found">%1$s နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
   <string name="title_activity_signup">မှတ်ပုံတင်ရန်</string>
