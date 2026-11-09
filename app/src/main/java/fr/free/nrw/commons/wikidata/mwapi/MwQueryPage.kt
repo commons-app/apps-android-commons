@@ -81,6 +81,7 @@ class MwQueryPage : BaseModel() {
 
     fun checkWhetherFileIsUsedInWikis(): Boolean = checkWhetherFileIsUsedInWikis(globalUsages, fileUsages)
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Revision {
         @SerializedName("revid")
         private val revisionId: Long = 0
@@ -114,6 +115,7 @@ class MwQueryPage : BaseModel() {
         fun lon(): Double? = lon
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class CategoryInfo {
         val isHidden: Boolean = false
         private val size = 0
@@ -122,6 +124,7 @@ class MwQueryPage : BaseModel() {
         private val subcats = 0
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     internal class Thumbnail {
         private val source: String? = null
         private val width = 0

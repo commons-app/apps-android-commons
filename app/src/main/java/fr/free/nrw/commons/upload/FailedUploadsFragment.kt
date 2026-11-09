@@ -44,8 +44,6 @@ class FailedUploadsFragment :
 
     private lateinit var adapter: FailedUploadsAdapter
 
-    var contributionsList = mutableListOf<Contribution>()
-
     private lateinit var uploadProgressActivity: UploadProgressActivity
 
     override fun onAttach(context: Context) {
@@ -102,12 +100,6 @@ class FailedUploadsFragment :
             viewLifecycleOwner,
         ) { list: PagedList<Contribution> ->
             adapter.submitList(list)
-            contributionsList = mutableListOf()
-            list.forEach {
-                if (it != null) {
-                    contributionsList.add(it)
-                }
-            }
             if (list.size == 0) {
                 uploadProgressActivity.setErrorIconsVisibility(false)
                 binding.nofailedTextView.visibility = View.VISIBLE
@@ -125,9 +117,8 @@ class FailedUploadsFragment :
      * Restarts all the failed uploads.
      */
     fun restartUploads() {
-        pendingUploadsPresenter.restartUploads(
-            contributionsList,
-            0,
+        ViewUtil.showShortToast(context, R.string.retrying_failed_uploads)
+        pendingUploadsPresenter.restartFailedUploads(
             requireContext().applicationContext,
         )
     }
@@ -135,12 +126,14 @@ class FailedUploadsFragment :
     /**
      * Restarts a specific upload.
      */
-    override fun restartUpload(index: Int) {
-        pendingUploadsPresenter.restartUpload(
-            contributionsList,
-            index,
-            requireContext().applicationContext,
-        )
+    override fun restartUpload(contribution: Contribution?) {
+        contribution?.let {
+            ViewUtil.showShortToast(context, R.string.retrying_upload)
+            pendingUploadsPresenter.restartUpload(
+                it,
+                requireContext().applicationContext,
+            )
+        }
     }
 
     /**

@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module
  */
-open class ImageInfo : Serializable {
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
+open class ImageInfo {
     private val size = 0
     private val width = 0
     private val height = 0

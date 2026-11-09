@@ -155,24 +155,22 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         val uriType = uriMatcher.match(uri)
         var rowsUpdated: Int = 0
         when (uriType) {
-            RECENT_SEARCHES_ID ->
-                if (selection.isNullOrEmpty()) {
-                    val id = uri.lastPathSegment!!.toInt()
-                    contentValues?.let {
-                        rowsUpdated =
-                            requireDb().update(
-                                TABLE_NAME,
-                                SQLiteDatabase.CONFLICT_NONE,
-                                it,
-                                "$COLUMN_ID = ?",
-                                arrayOf(id.toString()),
-                            )
-                    }
-                } else {
-                    throw IllegalArgumentException(
-                        "Parameter `selection` should be empty when updating an ID",
-                    )
+            RECENT_SEARCHES_ID -> {
+                require(selection.isNullOrEmpty()) {
+                    "Parameter `selection` should be empty when updating an ID"
                 }
+                val id = uri.lastPathSegment!!.toInt()
+                contentValues?.let {
+                    rowsUpdated =
+                        requireDb().update(
+                            TABLE_NAME,
+                            SQLiteDatabase.CONFLICT_NONE,
+                            it,
+                            "$COLUMN_ID = ?",
+                            arrayOf(id.toString()),
+                        )
+                }
+            }
 
             else -> throw IllegalArgumentException("Unknown URI: $uri with type $uriType")
         }

@@ -11,7 +11,9 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -76,8 +78,8 @@ class UploadClient
                 chunkInfo.set(contribution.chunkInfo)
                 Timber.d(
                     "Chunk: Next Chunk: %s, Total Chunks: %s",
-                    contribution.chunkInfo!!.indexOfNextChunkToUpload,
-                    contribution.chunkInfo!!.totalChunks,
+                    contribution.chunkInfo?.indexOfNextChunkToUpload,
+                    contribution.chunkInfo?.totalChunks,
                 )
             }
 
@@ -127,7 +129,7 @@ class UploadClient
                     Observable.just(
                         StashUploadResult(
                             StashUploadState.SUCCESS,
-                            chunkInfo.get()!!.uploadResult!!.filekey,
+                            chunkInfo.get()?.uploadResult?.filekey,
                             "success",
                         ),
                     )
@@ -160,10 +162,10 @@ class UploadClient
 
             index.getAndIncrement()
 
-            val offset = if (chunkInfo.get() != null) chunkInfo.get()!!.uploadResult!!.offset else 0
+            val offset = chunkInfo.get()?.uploadResult?.offset ?: 0
             Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset)
 
-            val filekey = chunkInfo.get()?.let { it.uploadResult!!.filekey }
+            val filekey = chunkInfo.get()?.uploadResult?.filekey
             val requestBody = chunkFile.asRequestBody(mediaType)
             val listener = { transferred: Long, total: Long ->
                 notificationUpdater.onProgress(transferred, total)
@@ -273,7 +275,7 @@ class UploadClient
                         if (uploadResult.upload == null) {
                             val exception = gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
-                            throw Exception(exception.errorCode)
+                            throw IOException(exception.errorCode, exception)
                         }
                         uploadResult.upload
                     }
@@ -281,7 +283,41 @@ class UploadClient
                 Timber.e(throwable, "Exception occurred in uploading file from stash")
                 Observable.error(throwable)
             }
+
+        /**
+         * Checks if Commons would refuse a file name, because it is on the title blacklist or
+         * because it is not a valid title. Commons only checks the title blacklist when publishing,
+         * after the whole file has been uploaded.
+         *
+         * @param fileName Photo.jpg
+         */
+        fun checkFileName(fileName: String): Single<FileNameCheck> =
+            uploadInterface
+                // MediaWiki replaces these characters with "-" when uploading, so the same name is checked
+                .checkTitleBlacklist("File:" + fileName.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"))
+                .map {
+                    if (it.titleblacklist?.result == "blacklisted") FileNameCheck.BLACKLISTED else FileNameCheck.OK
+                }.onErrorResumeNext { throwable: Throwable ->
+                    // After the characters above are replaced, the upload fails with illegal-filename too
+                    if (throwable is MwIOException && throwable.error.code == "invalidtitle") {
+                        Single.just(FileNameCheck.INVALID)
+                    } else {
+                        Single.error(throwable)
+                    }
+                }
     }
+
+/**
+ * Result of [UploadClient.checkFileName]
+ */
+enum class FileNameCheck {
+    OK,
+    BLACKLISTED,
+    INVALID,
+}
+
+// Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
+private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
 
 private fun canProcess(
     contributionDao: ContributionDao,
@@ -300,4 +336,4 @@ private fun canProcess(
 private fun shouldSkip(
     chunkInfo: AtomicReference<ChunkInfo?>,
     index: AtomicInteger,
-): Boolean = chunkInfo.get() != null && index.get() < chunkInfo.get()!!.indexOfNextChunkToUpload
+): Boolean = chunkInfo.get()?.let { index.get() < it.indexOfNextChunkToUpload } ?: false

@@ -14,6 +14,7 @@
 * Matlin
 * Matma Rex
 * Mazab IZW
+* Nicolas Raoul
 * Olaf
 * PanWor
 * Rail
@@ -123,7 +124,7 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
-  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
+  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$s</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="title_activity_contributions">Niedawno przesłane</string>
@@ -314,6 +315,7 @@
   <string name="file_deleted_from_commons">Ten plik został usunięty z Commons.</string>
   <string name="contribution_deleted">Usunięto</string>
   <string name="deleted_file_activity_title">Usunięto plik</string>
+  <string name="deleted_file_explanation">Wikimedia Commons usuwa pliki niemające charakteru edukacyjnego lub naruszające obowiązujące zasady, w tym przypadki naruszenia praw autorskich. Przesyłaj zdjęcia wykonane przez Ciebie. Zdjęcia skopiowane z Internetu, zrzuty ekranu, logo i plakaty to najczęstsze powody usunięcia pliku.</string>
   <string name="deleted_file_view_page">Zobacz stronę pliku</string>
   <string name="deleted_file_view_discussion">Przeczytaj dyskusję o usunięciu</string>
   <string name="deleted_file_policies">Polityka i wytyczne Wikimedia Commons</string>
@@ -436,12 +438,14 @@
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimediów</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="notifications_channel_name_uploads">Postęp przesyłania</string>
   <string name="preference_author_name_toggle">Użyj niestandardowej nazwy autora</string>
   <string name="preference_author_name_toggle_summary">Podczas przesyłania zdjęć użyj niestandardowej nazwy autora zamiast nazwy użytkownika</string>
   <string name="preference_author_name">Niestandardowa nazwa autora</string>
   <string name="contributions_fragment">Wkład</string>
   <string name="nearby_fragment">W pobliżu</string>
   <string name="notifications">Powiadomienia</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
   <string name="display_nearby_notification_summary">Pokazuj w aplikacji powiadomienia o pobliskich miejscach wymagających zilustrowania</string>
@@ -713,6 +717,8 @@
   <string name="resuming_upload">Wznawianie przesyłania…</string>
   <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
+  <string name="retrying_upload">Ponawianie próby przesyłania…</string>
+  <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>

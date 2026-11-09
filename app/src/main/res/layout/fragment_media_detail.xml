@@ -26,7 +26,7 @@
 
     <FrameLayout
       android:id="@+id/mediaDetailMediaContainer"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="@dimen/dimen_250"
       android:layout_gravity="center_horizontal">
 
@@ -60,15 +60,20 @@
           android:visibility="gone" />
     </FrameLayout>
 
+    <ProgressBar
+      android:id="@+id/mediaDetailImageProgressBar"
+      style="?android:attr/progressBarStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="@dimen/dimen_250"
+      android:layout_gravity="center_horizontal" />
+
     <ScrollView
       android:id="@+id/mediaDetailScrollView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@android:color/transparent"
       android:cacheColorHint="@android:color/transparent"
-      android:fillViewport="true"
-      android:visibility="invisible"
-      tools:visibility="visible">
+      android:fillViewport="true">
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -84,8 +89,10 @@
 
                 <FrameLayout
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="@dimen/dimen_250"
                   android:id="@+id/mediaDetailImageViewSpacer"
+                  android:clickable="true"
+                  android:focusable="true"
                   >
 
                     <androidx.media3.ui.PlayerView

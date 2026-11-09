@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 23,
-    "identityHash": "1d9ee87333837a0ab70eb7c3824cd587",
+    "identityHash": "2f9d3e740abb45f434c3fb06db7e513d",
     "entities": [
       {
         "tableName": "contribution",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_mimeType` TEXT, `media_mediaType` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
         "fields": [
           {
             "fieldPath": "pageId",
@@ -217,17 +217,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "media.mimeType",
-            "columnName": "media_mimeType",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "media.mediaType",
-            "columnName": "media_mediaType",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
             "fieldPath": "media.addedCategories",
             "columnName": "media_addedCategories",
             "affinity": "TEXT"
@@ -354,7 +343,7 @@
       },
       {
         "tableName": "place",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`language` TEXT, `name` TEXT, `label` TEXT, `longDescription` TEXT, `entityID` TEXT NOT NULL, `category` TEXT, `pic` TEXT, `exists` INTEGER, `distance` TEXT, `siteLinks` TEXT, `isMonument` INTEGER NOT NULL, `thumb` TEXT, `latitude` REAL, `longitude` REAL, `accuracy` REAL, PRIMARY KEY(`entityID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`language` TEXT, `name` TEXT, `label` TEXT, `longDescription` TEXT, `entityID` TEXT NOT NULL, `category` TEXT, `pic` TEXT, `exists` INTEGER, `distance` TEXT, `siteLinks` TEXT, `isMonument` INTEGER NOT NULL, `thumb` TEXT, `cachedAt` INTEGER NOT NULL DEFAULT 0, `latitude` REAL, `longitude` REAL, `accuracy` REAL, PRIMARY KEY(`entityID`))",
         "fields": [
           {
             "fieldPath": "language",
@@ -417,6 +406,13 @@
             "fieldPath": "thumb",
             "columnName": "thumb",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "cachedAt",
+            "columnName": "cachedAt",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
           },
           {
             "fieldPath": "location.latitude",
@@ -743,7 +739,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1d9ee87333837a0ab70eb7c3824cd587')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2f9d3e740abb45f434c3fb06db7e513d')"
     ]
   }
 }

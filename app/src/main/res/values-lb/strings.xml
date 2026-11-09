@@ -522,7 +522,7 @@
   <string name="wallpaper_set_unsuccessfully">Et ass eppes schif gaangen. D\'Hannergrondbild konnt net agestallt ginn</string>
   <string name="setting_wallpaper_dialog_title">Als Hannergrondbild festleeën</string>
   <string name="setting_wallpaper_dialog_message">Hannergrondbild gëtt agestallt. Waart wgl...</string>
-  <string name="theme_default_name">System suivéieren</string>
+  <string name="theme_default_name">Systemastellungen</string>
   <string name="theme_dark_name">Däischter</string>
   <string name="theme_light_name">Hell</string>
   <string name="ask_to_turn_location_on">Standuert aktivéieren?</string>
@@ -723,5 +723,8 @@
   <string name="license_cc_by_description">Attribution. Anerer kënnen d\'Wierk fräi deelen an upassen, soulaang se Iech als Auteur uginn.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Anerer kënnen d\'Wierk deelen an adaptéieren, mee se mussen Iech als Auteur nennen an déi selwecht Lizenz benotzen.</string>
   <string name="failed_to_save_image">D\'Bild konnt net gespäichert ginn</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
   <string name="format_ogg_audio">OGG (Audio)</string>
 </resources>

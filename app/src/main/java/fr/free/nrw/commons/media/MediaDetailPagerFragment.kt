@@ -1,11 +1,7 @@
 package fr.free.nrw.commons.media
 
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,15 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.snackbar.Snackbar
-import fr.free.nrw.commons.CommonsApplication
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
@@ -41,24 +33,15 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.ProfileActivity.Companion.startYourself
 import fr.free.nrw.commons.utils.ClipboardUtils.copy
 import fr.free.nrw.commons.utils.DownloadUtils.downloadMedia
-import fr.free.nrw.commons.utils.ImageUtils.setAvatarFromImageUrl
-import fr.free.nrw.commons.utils.ImageUtils.setWallpaperFromImageUrl
 import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.ViewUtil.showShortSnackbar
 import fr.free.nrw.commons.utils.handleWebUrl
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.net.URL
-import java.util.concurrent.Callable
 import javax.inject.Inject
 
 class MediaDetailPagerFragment :
     CommonsDaggerSupportFragment(),
-    OnPageChangeListener,
     MediaDetailFragment.Callback {
     @JvmField
     @Inject
@@ -71,6 +54,14 @@ class MediaDetailPagerFragment :
     @JvmField
     @Inject
     var sessionManager: SessionManager? = null
+
+    @JvmField
+    @Inject
+    var mediaReportHelper: MediaReportHelper? = null
+
+    @JvmField
+    @Inject
+    var mediaDetailMenuHandler: MediaDetailMenuHandler? = null
 
     var binding: FragmentMediaDetailPagerBinding? = null
     var editable: Boolean = false
@@ -92,15 +83,43 @@ class MediaDetailPagerFragment :
 
     var removedItems: ArrayList<Int> = ArrayList()
 
-    fun clearRemoved() = removedItems.clear()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false)
-        binding!!.mediaDetailsPager.addOnPageChangeListener(this)
+        binding!!.mediaDetailsPager.addOnPageChangeListener(
+            object : ViewPager.SimpleOnPageChangeListener() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) {
+                    if (activity != null) {
+                        requireActivity().invalidateOptionsMenu()
+                    }
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    pagerScrollState = state
+
+                    when (state) {
+                        ViewPager.SCROLL_STATE_DRAGGING -> {
+                            // Dragging can start again mid-settle, when the current page is
+                            // already the one being scrolled to.
+                            if (mediaFragmentBeforeScroll == null) {
+                                pageBeforeScroll = binding!!.mediaDetailsPager.currentItem
+                                mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
+                            }
+                        }
+                        ViewPager.SCROLL_STATE_IDLE -> {
+                            pauseOutgoingMedia()
+                        }
+                    }
+                }
+            },
+        )
         // Initialize the ProgressBar by finding it in the layout
         imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
         adapter = MediaDetailAdapter(this, childFragmentManager)
@@ -144,7 +163,13 @@ class MediaDetailPagerFragment :
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage", false)
         }
         setHasOptionsMenu(true)
-        initProvider()
+        if (parentFragment is MediaDetailProvider) {
+            mediaDetailProvider = parentFragment as MediaDetailProvider
+        } else if (activity is MediaDetailProvider) {
+            mediaDetailProvider = activity as MediaDetailProvider?
+        } else {
+            throw ClassCastException("Parent must implement MediaDetailProvider")
+        }
     }
 
     override fun onDestroyView() {
@@ -156,20 +181,6 @@ class MediaDetailPagerFragment :
         // Temporarily disable it.
         // Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567
         // binding = null
-    }
-
-    /**
-     * initialise the provider, based on from where the fragment was started, as in from an activity
-     * or a fragment
-     */
-    private fun initProvider() {
-        if (parentFragment is MediaDetailProvider) {
-            mediaDetailProvider = parentFragment as MediaDetailProvider
-        } else if (activity is MediaDetailProvider) {
-            mediaDetailProvider = activity as MediaDetailProvider?
-        } else {
-            throw ClassCastException("Parent must implement MediaDetailProvider")
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -198,7 +209,12 @@ class MediaDetailPagerFragment :
                         )
                     }
                 snackbar.show()
-                updateBookmarkState(item)
+                mediaDetailMenuHandler?.updateBookmarkState(
+                    item,
+                    bookmark,
+                    binding!!.mediaDetailsPager.currentItem,
+                    removedItems,
+                )
                 return true
             }
 
@@ -257,13 +273,13 @@ ${m.pageTitle.canonicalUri}""",
 
             R.id.menu_set_as_wallpaper -> {
                 // Set wallpaper
-                setWallpaper(m!!)
+                mediaDetailMenuHandler?.setWallpaper(requireActivity(), m!!)
                 return true
             }
 
             R.id.menu_set_as_avatar -> {
                 // Set avatar
-                setAvatar(m!!)
+                mediaDetailMenuHandler?.setAvatar(requireActivity(), m!!)
                 return true
             }
 
@@ -279,7 +295,7 @@ ${m.pageTitle.canonicalUri}""",
             }
 
             R.id.menu_view_report -> {
-                showReportDialog(m)
+                mediaReportHelper?.showReportDialog(requireActivity(), m)
                 mediaDetailFragment?.onImageBackgroundChanged(
                     ContextCompat.getColor(
                         requireContext(),
@@ -311,130 +327,6 @@ ${m.pageTitle.canonicalUri}""",
 
             else -> return super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun showReportDialog(media: Media?) {
-        if (media == null) {
-            return
-        }
-        val builder = AlertDialog.Builder(requireActivity())
-        val values =
-            requireContext()
-                .resources
-                .getStringArray(R.array.report_violation_options)
-        builder.setTitle(R.string.report_violation)
-        builder.setItems(
-            R.array.report_violation_options,
-        ) { dialog: DialogInterface?, which: Int ->
-            sendReportEmail(media, values[which])
-        }
-        builder.setNegativeButton(
-            R.string.cancel,
-        ) { dialog: DialogInterface?, which: Int -> }
-        builder.setCancelable(false)
-        builder.show()
-    }
-
-    private fun sendReportEmail(
-        media: Media,
-        type: String,
-    ) {
-        val technicalInfo = getTechInfo(media, type)
-
-        val feedbackIntent = Intent(Intent.ACTION_SENDTO)
-        feedbackIntent.setType("message/rfc822")
-        feedbackIntent.setData(Uri.parse("mailto:"))
-        feedbackIntent.putExtra(
-            Intent.EXTRA_EMAIL,
-            arrayOf(CommonsApplication.REPORT_EMAIL),
-        )
-        feedbackIntent.putExtra(
-            Intent.EXTRA_SUBJECT,
-            CommonsApplication.REPORT_EMAIL_SUBJECT,
-        )
-        feedbackIntent.putExtra(Intent.EXTRA_TEXT, technicalInfo)
-        try {
-            startActivity(feedbackIntent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(activity, R.string.no_email_client, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun getTechInfo(
-        media: Media,
-        type: String,
-    ): String {
-        val builder = StringBuilder()
-
-        builder
-            .append("Report type: ")
-            .append(type)
-            .append("\n\n")
-
-        builder
-            .append("Image that you want to report: ")
-            .append(media.imageUrl)
-            .append("\n\n")
-
-        builder
-            .append("User that you want to report: ")
-            .append(media.user)
-            .append("\n\n")
-
-        if (sessionManager!!.userName != null) {
-            builder
-                .append("Your username: ")
-                .append(sessionManager!!.userName)
-                .append("\n\n")
-        }
-
-        builder
-            .append("Violation reason: ")
-            .append("\n")
-
-        builder
-            .append("----------------------------------------------")
-            .append("\n")
-            .append("(please write reason here)")
-            .append("\n")
-            .append("----------------------------------------------")
-            .append("\n\n")
-            .append("Thank you for your report! Our team will investigate as soon as possible.")
-            .append("\n")
-            .append("Please note that images also have a `Nominate for deletion` button.")
-
-        return builder.toString()
-    }
-
-    /**
-     * Set the media as the device's wallpaper if the imageUrl is not null
-     * Fails silently if setting the wallpaper fails
-     * @param media
-     */
-    private fun setWallpaper(media: Media) {
-        if (media.imageUrl == null || media.imageUrl!!.isEmpty()) {
-            Timber.d("Media URL not present")
-            return
-        }
-        setWallpaperFromImageUrl(requireActivity(), media.imageUrl!!.toUri())
-    }
-
-    /**
-     * Set the media as user's leaderboard avatar
-     * @param media
-     */
-    private fun setAvatar(media: Media) {
-        if (media.imageUrl == null || media.imageUrl!!.isEmpty()) {
-            Timber.d("Media URL not present")
-            return
-        }
-        setAvatarFromImageUrl(
-            requireActivity(),
-            media.imageUrl!!,
-            sessionManager!!.currentAccount!!.name,
-            okHttpJsonApiClient!!,
-            Companion.compositeDisposable,
-        )
     }
 
     override fun onCreateOptionsMenu(
@@ -480,7 +372,7 @@ ${m.pageTitle.canonicalUri}""",
                     if (isImage) {
                         try {
                             val mediaUrl = URL(m.imageUrl)
-                            handleBackgroundColorMenuItems({
+                            mediaDetailMenuHandler?.handleBackgroundColorMenuItems({
                                 BitmapFactory.decodeStream(
                                     mediaUrl.openConnection().getInputStream(),
                                 )
@@ -497,7 +389,12 @@ ${m.pageTitle.canonicalUri}""",
                             m.getAuthorOrUser(),
                             BookmarkPicturesContentProvider.uriForName(m.filename!!),
                         )
-                    updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image))
+                    mediaDetailMenuHandler?.updateBookmarkState(
+                        menu.findItem(R.id.menu_bookmark_current_image),
+                        bookmark,
+                        binding!!.mediaDetailsPager.currentItem,
+                        removedItems,
+                    )
                     val contributionState = provider.getContributionStateAt(position)
                     if (contributionState != null) {
                         when (contributionState) {
@@ -565,67 +462,12 @@ ${m.pageTitle.canonicalUri}""",
         }
     }
 
-    /**
-     * Decide wether or not we should display the background color menu items
-     * We display them if the image is transparent
-     * @param getBitmap
-     * @param menu
-     */
-    private fun handleBackgroundColorMenuItems(
-        getBitmap: Callable<Bitmap>,
-        menu: Menu,
-    ) {
-        Observable
-            .fromCallable(
-                getBitmap,
-            ).subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                Consumer { image: Bitmap ->
-                    if (image.hasAlpha()) {
-                        menu
-                            .findItem(R.id.menu_view_set_white_background)
-                            .setVisible(true)
-                            .setEnabled(true)
-                        menu
-                            .findItem(R.id.menu_view_set_black_background)
-                            .setVisible(true)
-                            .setEnabled(true)
-                    }
-                },
-            )
-    }
-
-    private fun updateBookmarkState(item: MenuItem) {
-        val isBookmarked = bookmarkDao!!.findBookmark(bookmark)
-        if (isBookmarked) {
-            if (removedItems.contains(binding!!.mediaDetailsPager.currentItem)) {
-                removedItems.remove(binding!!.mediaDetailsPager.currentItem)
-            }
-        } else {
-            if (!removedItems.contains(binding!!.mediaDetailsPager.currentItem)) {
-                removedItems.add(binding!!.mediaDetailsPager.currentItem)
-            }
-        }
-
-        item.setIcon(
-            if (isBookmarked) {
-                R.drawable.menu_ic_round_star_filled_24px
-            } else {
-                R.drawable.menu_ic_round_star_border_24px
-            },
-        )
-    }
-
+    @JvmOverloads
     fun showImage(
         i: Int,
-        isWikipediaButtonDisplayed: Boolean,
+        isWikipediaButtonDisplayed: Boolean = false,
     ) {
         this.isWikipediaButtonDisplayed = isWikipediaButtonDisplayed
-        setViewPagerCurrentItem(i)
-    }
-
-    fun showImage(i: Int) {
         setViewPagerCurrentItem(i)
     }
 
@@ -665,22 +507,6 @@ ${m.pageTitle.canonicalUri}""",
         }
     }
 
-    override fun onPageScrolled(
-        i: Int,
-        v: Float,
-        i2: Int,
-    ) {
-        if (activity == null) {
-            Timber.d("Returning as activity is destroyed!")
-            return
-        }
-
-        requireActivity().invalidateOptionsMenu()
-    }
-
-    override fun onPageSelected(i: Int) {
-    }
-
     fun onPrimaryMediaChanging(
         position: Int,
         fragment: MediaDetailFragment,
@@ -707,35 +533,11 @@ ${m.pageTitle.canonicalUri}""",
         mediaFragmentBeforeScroll = null
     }
 
-    override fun onPageScrollStateChanged(i: Int) {
-        pagerScrollState = i
-
-        when (i) {
-            ViewPager.SCROLL_STATE_DRAGGING -> {
-                // Dragging can start again mid-settle, when the current page is
-                // already the one being scrolled to.
-                if (mediaFragmentBeforeScroll == null) {
-                    pageBeforeScroll = binding!!.mediaDetailsPager.currentItem
-                    mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
-                }
-            }
-            ViewPager.SCROLL_STATE_IDLE -> {
-                pauseOutgoingMedia()
-            }
-        }
-    }
-
     /**
      * Enables or disables swiping between media detail pages.
      */
     fun setPagerSwipeEnabled(enabled: Boolean) {
         binding!!.mediaDetailsPager.setPagerSwipeEnabled(enabled)
-    }
-
-    fun onDataSetChanged() {
-        if (null != adapter) {
-            adapter!!.notifyDataSetChanged()
-        }
     }
 
     /**
@@ -748,8 +550,6 @@ ${m.pageTitle.canonicalUri}""",
     }
 
     companion object {
-        private val compositeDisposable = CompositeDisposable()
-
         /**
          * Use this factory method to create a new instance of this fragment using the provided
          * parameters.
@@ -774,3 +574,8 @@ ${m.pageTitle.canonicalUri}""",
         }
     }
 }
+
+/**
+ * Clears the removed items list for the media detail pager fragment.
+ */
+fun MediaDetailPagerFragment.clearRemoved() = removedItems.clear()

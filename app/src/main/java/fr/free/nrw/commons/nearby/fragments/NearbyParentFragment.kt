@@ -30,15 +30,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
@@ -52,7 +53,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo
@@ -62,6 +62,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
+import fr.free.nrw.commons.contributions.loadExploreMapFromNearby
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -80,6 +81,7 @@ import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.BottomSheetAdapter.ItemClickListener
 import fr.free.nrw.commons.nearby.CheckBoxTriStates
 import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
@@ -116,6 +118,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.events.MapListener
@@ -216,8 +219,12 @@ class NearbyParentFragment :
     @Inject
     lateinit var commonPlaceClickActions: CommonPlaceClickActions
 
+    @Inject
+    lateinit var placeTypeLabelsClient: PlaceTypeLabelsClient
+
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
+    private var searchQueryDisposable: Disposable? = null
     private var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
     private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
     private var rotateBackward: Animation? = null
@@ -227,6 +234,7 @@ class NearbyParentFragment :
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
     private var snackbar: Snackbar? = null
+    private var hasShownOfflinePinsMessage = false
     private var view: View? = null
     private var scope: LifecycleCoroutineScope? = null
     private var presenter: NearbyParentFragmentPresenter? = null
@@ -268,10 +276,7 @@ class NearbyParentFragment :
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
 
-    private val updatedLatLng: LatLng? = null
     private var searchable = false
-
-    private val nearbyLegend: ConstraintLayout? = null
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
@@ -377,9 +382,7 @@ class NearbyParentFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        if (Label.TEXT_TO_DESCRIPTION.isEmpty()) {
-            Label.init(requireContext().applicationContext)
-        }
+        Label.init(requireContext().applicationContext)
         loadExploreMapData()
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
@@ -418,7 +421,7 @@ class NearbyParentFragment :
             try {
                 emptyCache()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -442,7 +445,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsGPX()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -452,7 +455,7 @@ class NearbyParentFragment :
                 progressDialog!!.show()
                 savePlacesAsKML()
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw IllegalStateException(e)
             }
             false
         }
@@ -521,6 +524,7 @@ class NearbyParentFragment :
         initThemePreferences()
         initViews()
         presenter?.setActionListeners(applicationKvStore)
+        presenter?.removeOldCachedPlaces(applicationKvStore)
         org.osmdroid.config.Configuration
             .getInstance()
             .load(requireContext(), PreferenceManager.getDefaultSharedPreferences(requireContext()))
@@ -540,14 +544,19 @@ class NearbyParentFragment :
             val locationLatLng = applicationKvStore!!.getString("LastLocation")!!.split(",")
             lastMapFocus = GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble())
         } else if (lastMapFocus == null) {
-            lastMapFocus = GeoPoint(51.50550, -0.07520)
+            lastMapFocus = GeoPoint(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
         }
 
         val scaleBarOverlay = ScaleBarOverlay(binding?.map)
-        scaleBarOverlay.setScaleBarOffset(15, 25)
+        scaleBarOverlay.setScaleBarOffset(SCALE_BAR_OFFSET_X, SCALE_BAR_OFFSET_Y)
         val barPaint =
             Paint().apply {
-                setARGB(200, 255, 250, 250)
+                setARGB(
+                    SCALE_BAR_BACKGROUND_ALPHA,
+                    SCALE_BAR_BACKGROUND_RED,
+                    SCALE_BAR_BACKGROUND_GREEN,
+                    SCALE_BAR_BACKGROUND_BLUE,
+                )
             }
         scaleBarOverlay.setBackgroundPaint(barPaint)
         scaleBarOverlay.enableScaleBar()
@@ -628,9 +637,7 @@ class NearbyParentFragment :
                         }
 
                         override fun reset() {
-                            presenter?.setAdvancedQuery(null.toString())
-                            presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-                            showHideAdvancedQueryFragment(false)
+                            resetAdvancedQuery()
                         }
 
                         override fun apply(query: String) {
@@ -663,6 +670,7 @@ class NearbyParentFragment :
         if (!locationPermissionsHelper?.checkLocationPermission(requireActivity())!!) {
             askForLocationPermission()
         }
+        applyNearbyFabLayout()
     }
 
     fun addPhotoMarkerIfDepictsMode() {
@@ -816,7 +824,7 @@ class NearbyParentFragment :
             val boundingBoxZoom =
                 binding!!.map.calculateBoundingBoxZoom(
                     photoPinBoundingBox!!,
-                    100,
+                    BOUNDING_BOX_BORDER_SIZE_PX,
                 )
             // BoundingBox might zoom out too far if pins are situated far apart ,
             // which makes the query very slow. so we restrict it
@@ -827,7 +835,7 @@ class NearbyParentFragment :
                 binding?.map?.zoomToBoundingBox(
                     photoPinBoundingBox,
                     true,
-                    100,
+                    BOUNDING_BOX_BORDER_SIZE_PX,
                 )
             }
             needsZoomOut = false
@@ -882,8 +890,8 @@ class NearbyParentFragment :
         val mapHeight = (height - padding * 2).toDouble()
         if (mapWidth <= 0 || mapHeight <= 0) return 15.0
 
-        val zoomLat = ln(mapHeight * 360.0 / (256.0 * boundingBox.latitudeSpan)) / ln(2.0)
-        val zoomLng = ln(mapWidth * 360.0 / (256.0 * boundingBox.longitudeSpan)) / ln(2.0)
+        val zoomLat = ln(mapHeight * DEGREES_IN_FULL_CIRCLE / (MAP_TILE_SIZE_PX * boundingBox.latitudeSpan)) / ln(2.0)
+        val zoomLng = ln(mapWidth * DEGREES_IN_FULL_CIRCLE / (MAP_TILE_SIZE_PX * boundingBox.longitudeSpan)) / ln(2.0)
 
         return minOf(zoomLat, zoomLng)
     }
@@ -917,7 +925,7 @@ class NearbyParentFragment :
     }
 
     /**
-     * Starts the map without GPS and without permission By default it points to 51.50550,-0.07520
+     * Starts the map without GPS and without permission By default it points to DEFAULT_LATITUDE,DEFAULT_LONGITUDE
      * coordinates, other than that it points to the last known location which can be get by the key
      * "LastLocation" from applicationKvStore
      */
@@ -976,6 +984,8 @@ class NearbyParentFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
+        searchQueryDisposable?.dispose()
+        searchQueryDisposable = null
         searchRunnable?.let {
             searchHandler.removeCallbacks(it)
         } ?: run {
@@ -1029,12 +1039,12 @@ class NearbyParentFragment :
             val orientation = resources.configuration.orientation
             return if (bottomSheetAdapter != null) {
                 if ((orientation == Configuration.ORIENTATION_PORTRAIT)) {
-                    3
+                    PORTRAIT_SPAN_COUNT
                 } else {
                     bottomSheetAdapter!!.itemCount
                 }
             } else {
-                if ((orientation == Configuration.ORIENTATION_PORTRAIT)) 3 else 6
+                if ((orientation == Configuration.ORIENTATION_PORTRAIT)) PORTRAIT_SPAN_COUNT else LANDSCAPE_SPAN_COUNT
             }
         }
 
@@ -1049,7 +1059,7 @@ class NearbyParentFragment :
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
-                1.25,
+                FILTER_LIST_HEIGHT_TO_WIDTH_RATIO,
                 binding!!.nearbyFilterList.root,
             )
             if (hasFocus) {
@@ -1095,27 +1105,39 @@ class NearbyParentFragment :
             },
         )
         restoreStoredFilterSelection()
+        loadLocalizedPlaceTypeNames()
         binding!!
             .nearbyFilterList.root
             .layoutParams.width =
             getScreenWidth(
                 requireActivity(),
-                0.75,
+                FILTER_LIST_WIDTH_FRACTION,
             ).toInt()
         binding!!.nearbyFilterList.searchListView.adapter = nearbyFilterSearchRecyclerViewAdapter
-        setLayoutHeightAlignedToWidth(1.25, binding!!.nearbyFilterList.root)
-        compositeDisposable.add(
+        setLayoutHeightAlignedToWidth(FILTER_LIST_HEIGHT_TO_WIDTH_RATIO, binding!!.nearbyFilterList.root)
+        searchQueryDisposable?.dispose()
+        searchQueryDisposable =
             binding!!
                 .nearbyFilter.searchViewLayout.searchView
                 .queryTextChanges()
-                .takeUntil(RxView.detaches(binding!!.nearbyFilter.searchViewLayout.searchView))
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(FILTER_SEARCH_DEBOUNCE_MS, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { query: CharSequence ->
-                    (binding!!.nearbyFilterList.searchListView.adapter as NearbyFilterSearchRecyclerViewAdapter)
-                        .filter
-                        .filter(query.toString())
-                },
+                    nearbyFilterSearchRecyclerViewAdapter?.filter?.filter(query.toString())
+                }
+    }
+
+    private fun loadLocalizedPlaceTypeNames() {
+        compositeDisposable.add(
+            placeTypeLabelsClient.getLabels(Locale.getDefault().language)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ names ->
+                    Label.setLocalizedNames(names)
+                    nearbyFilterSearchRecyclerViewAdapter?.notifyDataSetChanged()
+                }, { throwable ->
+                    Timber.e(throwable, "Failed to load localized place type names")
+                })
         )
     }
 
@@ -1179,11 +1201,7 @@ class NearbyParentFragment :
                     prepareViewsForSheetPosition(newState)
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
 
@@ -1201,7 +1219,7 @@ class NearbyParentFragment :
             .bottomSheetNearby.bottomSheet.layoutParams.height =
             requireActivity()
                 .windowManager
-                .defaultDisplay.height / 16 * 9
+                .defaultDisplay.height / BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
         bottomSheetListBehavior =
             BottomSheetBehavior.from<View>(binding!!.bottomSheetNearby.bottomSheet)
         bottomSheetListBehavior?.setState(BottomSheetBehavior.STATE_COLLAPSED)
@@ -1216,11 +1234,7 @@ class NearbyParentFragment :
                     }
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
         if (isDepictsPickerMode) {
@@ -1313,7 +1327,7 @@ class NearbyParentFragment :
             LatLng(
                 lastMapFocus!!.latitude,
                 lastMapFocus!!.longitude,
-                100f,
+                LOCATION_ACCURACY_METERS,
             )
         return latLng
     }
@@ -1340,8 +1354,8 @@ class NearbyParentFragment :
         } else {
             lastKnownLocation =
                 LatLng(
-                    51.50550,
-                    -0.07520,
+                    DEFAULT_LATITUDE,
+                    DEFAULT_LONGITUDE,
                     1f,
                 )
         }
@@ -1351,7 +1365,7 @@ class NearbyParentFragment :
                 LatLng(
                     mapCenter!!.latitude,
                     mapCenter!!.longitude,
-                    100f,
+                    LOCATION_ACCURACY_METERS,
                 )
         }
         return latLnge
@@ -1362,12 +1376,21 @@ class NearbyParentFragment :
             LatLng(
                 binding!!.map.mapCenter.latitude,
                 binding!!.map.mapCenter.longitude,
-                100f,
+                LOCATION_ACCURACY_METERS,
             )
         return mapFocusedLatLng
     }
 
     override fun isAdvancedQueryFragmentVisible(): Boolean = isAdvancedQueryFragmentVisible
+
+    /**
+     * Drops a custom Nearby query and loads places for the current map center again.
+     * The advanced query editor stays open so the restored query text remains visible.
+     */
+    fun resetAdvancedQuery() {
+        presenter?.setAdvancedQuery("")
+        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
 
     override fun showHideAdvancedQueryFragment(shouldShow: Boolean) {
         setHasOptionsMenu(!shouldShow)
@@ -1398,6 +1421,7 @@ class NearbyParentFragment :
                                 snackbar!!.dismiss()
                                 snackbar = null
                             }
+                            hasShownOfflinePinsMessage = false
                         } else {
                             if (snackbar == null) {
                                 snackbar =
@@ -1406,6 +1430,7 @@ class NearbyParentFragment :
                                         fr.free.nrw.commons.R.string.no_internet,
                                         Snackbar.LENGTH_INDEFINITE,
                                     )
+                                hasShownOfflinePinsMessage = false
                                 searchable = false
                                 setProgressBarVisibility(false)
                             }
@@ -1427,10 +1452,10 @@ class NearbyParentFragment :
         if (!isNetworkErrorOccurred || snackbar == null) {
             return
         }
-        if (offlinePinsShown) {
+        // Avoid flickering between offline messages while panning; switch once per offline session.
+        if (offlinePinsShown && !hasShownOfflinePinsMessage) {
             snackbar!!.setText(fr.free.nrw.commons.R.string.nearby_showing_pins_offline)
-        } else {
-            snackbar!!.setText(fr.free.nrw.commons.R.string.no_internet)
+            hasShownOfflinePinsMessage = true
         }
     }
 
@@ -1501,7 +1526,7 @@ class NearbyParentFragment :
             screenBottomLeftLatLng?.latitude == 0.0 &&
             screenBottomLeftLatLng.longitude == 0.0
         ) {
-            val delta = 0.009
+            val delta = FALLBACK_BOUNDS_DELTA_DEGREES
             val westCornerLat = currentLatLng.latitude - delta
             val westCornerLong = currentLatLng.longitude - delta
             val eastCornerLat = currentLatLng.latitude + delta
@@ -1769,7 +1794,7 @@ class NearbyParentFragment :
             fos.close()
             return true
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not save KML file")
             return false
         }
     }
@@ -1787,7 +1812,9 @@ class NearbyParentFragment :
                 getString(fr.free.nrw.commons.R.string.do_you_want_to_open_kml_file)
             }
         val runnable = Runnable { openFile(context, fileName, isGPX) }
-        showAlertDialog(requireActivity(), title, message, runnable) {}
+        showAlertDialog(requireActivity(), title, message, runnable) {
+            // No action needed when the dialog is dismissed
+        }
     }
 
     private fun openFile(
@@ -1818,6 +1845,7 @@ class NearbyParentFragment :
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
+            Timber.e(e, "No application available to open the GPX/KML file")
             Toast
                 .makeText(
                     context,
@@ -2261,11 +2289,9 @@ class NearbyParentFragment :
         return presenter?.backButtonClicked() ?: false
     }
 
-    override fun onLocationPermissionDenied(toastMessage: String) {
-    }
+    override fun onLocationPermissionDenied(toastMessage: String) = Unit
 
-    override fun onLocationPermissionGranted() {
-    }
+    override fun onLocationPermissionGranted() = Unit
 
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
@@ -2520,9 +2546,9 @@ class NearbyParentFragment :
                     place.longDescription
                 }
         }
-        marker.textLabelFontSize = 40
+        marker.textLabelFontSize = MARKER_LABEL_FONT_SIZE
         // anchorV is 21.707/28.0 as icon height is 28dp while the pin base is at 21.707dp from top
-        marker.setAnchor(Marker.ANCHOR_CENTER, 0.77525f)
+        marker.setAnchor(Marker.ANCHOR_CENTER, MARKER_ANCHOR_V)
         marker.setOnMarkerClickListener { marker1: Marker, mapView: MapView? ->
             if (clickedMarker != null) {
                 clickedMarker!!.closeInfoWindow()
@@ -2572,17 +2598,17 @@ class NearbyParentFragment :
         when (getIconFor(place, isBookmarked)) {
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked,
-            -> 5
+            -> MARKER_PRIORITY_PURPLE
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked,
-            -> 4
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> 3
+            -> MARKER_PRIORITY_RED
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> MARKER_PRIORITY_MONUMENT
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked,
-            -> 2
+            -> MARKER_PRIORITY_GREEN
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked,
-            -> 1
+            -> MARKER_PRIORITY_GREY
             else -> 0 // ic_clear_black_24dp – place does not exist in the real world
         }
 
@@ -2651,7 +2677,7 @@ class NearbyParentFragment :
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished) {
                     searchable =
-                        if (distance > 2000.0) {
+                        if (distance > SEARCH_RADIUS_METERS) {
                             true
                         } else {
                             false
@@ -3107,9 +3133,14 @@ class NearbyParentFragment :
         updateUserLocationOverlays(geoPoint, false)
 
         val scaleBarOverlay = ScaleBarOverlay(binding!!.map)
-        scaleBarOverlay.setScaleBarOffset(15, 25)
+        scaleBarOverlay.setScaleBarOffset(SCALE_BAR_OFFSET_X, SCALE_BAR_OFFSET_Y)
         val barPaint = Paint()
-        barPaint.setARGB(200, 255, 250, 250)
+        barPaint.setARGB(
+            SCALE_BAR_BACKGROUND_ALPHA,
+            SCALE_BAR_BACKGROUND_RED,
+            SCALE_BAR_BACKGROUND_GREEN,
+            SCALE_BAR_BACKGROUND_BLUE,
+        )
         scaleBarOverlay.setBackgroundPaint(barPaint)
         scaleBarOverlay.enableScaleBar()
         binding!!.map.overlays.add(scaleBarOverlay)
@@ -3244,8 +3275,8 @@ class NearbyParentFragment :
                 fr.free.nrw.commons.R.drawable.current_location_marker,
             )
         currentLocationOverlay.title = "Your Location"
-        currentLocationOverlay.textLabelFontSize = 24
-        currentLocationOverlay.setAnchor(0.5f, 0.5f)
+        currentLocationOverlay.textLabelFontSize = CURRENT_LOCATION_LABEL_FONT_SIZE
+        currentLocationOverlay.setAnchor(CURRENT_LOCATION_ANCHOR, CURRENT_LOCATION_ANCHOR)
 
         return currentLocationOverlay
     }
@@ -3271,7 +3302,7 @@ class NearbyParentFragment :
 
         scaleDisk.setCirclePaint2(
             Paint().apply {
-                color = Color.rgb(128, 128, 128)
+                color = Color.rgb(LOCATION_CIRCLE_GRAY, LOCATION_CIRCLE_GRAY, LOCATION_CIRCLE_GRAY)
                 style = Paint.Style.STROKE
                 strokeWidth = 2f
             },
@@ -3279,7 +3310,13 @@ class NearbyParentFragment :
 
         scaleDisk.setCirclePaint1(
             Paint().apply {
-                color = Color.argb(40, 128, 128, 128)
+                color =
+                    Color.argb(
+                        LOCATION_CIRCLE_FILL_ALPHA,
+                        LOCATION_CIRCLE_GRAY,
+                        LOCATION_CIRCLE_GRAY,
+                        LOCATION_CIRCLE_GRAY,
+                    )
                 style = Paint.Style.FILL_AND_STROKE
             },
         )
@@ -3362,7 +3399,7 @@ class NearbyParentFragment :
                 }
             }
 
-            else -> {}
+            else -> Unit
         }
     }
 
@@ -3395,16 +3432,64 @@ class NearbyParentFragment :
         this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback
     }
 
+    private fun applyNearbyFabLayout() {
+        val res = resources
+        val spacer1Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer1_height)
+        val spacer2Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer2_height)
+        val spacer3Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer3_height)
+        val spacingPx = res.getDimensionPixelSize(R.dimen.nearby_fab_spread_spacing)
+        val marginPx = res.getDimensionPixelSize(R.dimen.nearby_fab_container_margin)
+        val alignStart = res.getBoolean(R.bool.nearby_fab_container_align_start)
+
+        binding!!.emptyView1.layoutParams.height = spacer1Px
+        binding!!.emptyView1.requestLayout()
+        binding!!.emptyView.layoutParams.height = spacer2Px
+        binding!!.emptyView.requestLayout()
+        binding!!.emptyView2.layoutParams.height = spacer3Px
+        binding!!.emptyView2.requestLayout()
+
+        binding!!.fabContainer.updateLayoutParams<RelativeLayout.LayoutParams> {
+            if (alignStart) {
+                addRule(RelativeLayout.ALIGN_PARENT_START)
+                removeRule(RelativeLayout.ALIGN_PARENT_END)
+                marginStart = marginPx
+                marginEnd = 0
+            } else {
+                addRule(RelativeLayout.ALIGN_PARENT_END)
+                removeRule(RelativeLayout.ALIGN_PARENT_START)
+                marginStart = 0
+                marginEnd = marginPx
+            }
+        }
+
+        if (spacingPx == 0) {
+            binding!!.fabCamera.translationX = 0f
+            binding!!.fabGallery.translationX = 0f
+            binding!!.fabCustomGallery.translationX = 0f
+        } else {
+            val direction = if (binding!!.root.layoutDirection == View.LAYOUT_DIRECTION_RTL) 1 else -1
+            listOf(
+                binding!!.fabCustomGallery,
+                binding!!.fabGallery,
+                binding!!.fabCamera,
+            ).forEachIndexed { index, fab ->
+                fab.translationX = direction * spacingPx * (index + 1f)
+            }
+        }
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val rlBottomSheetLayoutParams = binding!!.bottomSheetNearby.bottomSheet.layoutParams
         rlBottomSheetLayoutParams.height =
-            requireActivity().windowManager.defaultDisplay.height / 16 * 9
+            requireActivity().windowManager.defaultDisplay.height /
+                BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
         binding!!.bottomSheetNearby.bottomSheet.layoutParams = rlBottomSheetLayoutParams
         val spanCount = spanCount
         if (gridLayoutManager != null) {
             gridLayoutManager!!.spanCount = spanCount
         }
+        applyNearbyFabLayout()
     }
 
     fun onLearnMoreClicked() {
@@ -3415,6 +3500,38 @@ class NearbyParentFragment :
 
     companion object {
         private const val ZOOM_LEVEL = 15f
+        private const val DEFAULT_LATITUDE = 51.50550
+        private const val DEFAULT_LONGITUDE = -0.07520
+        private const val SCALE_BAR_OFFSET_X = 15
+        private const val SCALE_BAR_OFFSET_Y = 25
+        private const val SCALE_BAR_BACKGROUND_ALPHA = 200
+        private const val SCALE_BAR_BACKGROUND_RED = 255
+        private const val SCALE_BAR_BACKGROUND_GREEN = 250
+        private const val SCALE_BAR_BACKGROUND_BLUE = 250
+        private const val BOUNDING_BOX_BORDER_SIZE_PX = 100
+        private const val DEGREES_IN_FULL_CIRCLE = 360.0
+        private const val MAP_TILE_SIZE_PX = 256.0
+        private const val PORTRAIT_SPAN_COUNT = 3
+        private const val LANDSCAPE_SPAN_COUNT = 6
+        private const val BOTTOM_SHEET_HEIGHT_DIVISOR = 16
+        private const val BOTTOM_SHEET_HEIGHT_MULTIPLIER = 9
+        private const val FILTER_LIST_HEIGHT_TO_WIDTH_RATIO = 1.25
+        private const val FILTER_LIST_WIDTH_FRACTION = 0.75
+        private const val FILTER_SEARCH_DEBOUNCE_MS = 500L
+        private const val LOCATION_ACCURACY_METERS = 100f
+        private const val FALLBACK_BOUNDS_DELTA_DEGREES = 0.009
+        private const val MARKER_LABEL_FONT_SIZE = 40
+        private const val MARKER_ANCHOR_V = 0.77525f
+        private const val MARKER_PRIORITY_PURPLE = 5
+        private const val MARKER_PRIORITY_RED = 4
+        private const val MARKER_PRIORITY_MONUMENT = 3
+        private const val MARKER_PRIORITY_GREEN = 2
+        private const val MARKER_PRIORITY_GREY = 1
+        private const val SEARCH_RADIUS_METERS = 2000.0
+        private const val CURRENT_LOCATION_LABEL_FONT_SIZE = 24
+        private const val CURRENT_LOCATION_ANCHOR = 0.5f
+        private const val LOCATION_CIRCLE_GRAY = 128
+        private const val LOCATION_CIRCLE_FILL_ALPHA = 40
         const val ARG_PICKER_MODE = "is_picker_mode"
         const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"
         const val PICKER_RESULT_PLACE = "map_picked_place"
@@ -3474,3 +3591,4 @@ class NearbyParentFragment :
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
     }
 }
+

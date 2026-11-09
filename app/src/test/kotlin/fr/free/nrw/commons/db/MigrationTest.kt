@@ -10,6 +10,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
+import fr.free.nrw.commons.di.MIGRATION_23_24
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -35,37 +36,46 @@ private fun latestVersion(context: Context): Int {
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class MigrationTest {
-
     @get:Rule
-    val helper = MigrationTestHelper(
-        InstrumentationRegistry.getInstrumentation(),
-        AppDatabase::class.java
-    )
+    val helper =
+        MigrationTestHelper(
+            InstrumentationRegistry.getInstrumentation(),
+            AppDatabase::class.java,
+        )
 
     @Test
     fun testMigration() {
-
         val context = ApplicationProvider.getApplicationContext<Context>()
 
         // legacy "commons.db", mock old data.
         val legacyOpenHelper = DBOpenHelper(context, null)
         val legacyDb = legacyOpenHelper.writableDatabase
-        legacyDb.execSQL("INSERT INTO categories (name, description, thumbnail, " +
-            "last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)")
+        legacyDb.execSQL(
+            "INSERT INTO categories (name, description, thumbnail, " +
+                "last_used, times_used) VALUES ('Nature', 'desc', 'thumb', 0, 1)",
+        )
         legacyDb.execSQL("INSERT INTO bookmarks (media_name, media_creator) VALUES ('media1', 'creator1')")
-        legacyDb.execSQL("INSERT INTO bookmarksItems (item_name, item_description, item_image_url, " +
-            "item_instance_of, item_name_categories, item_description_categories, " +
-            "item_thumbnail_categories, item_is_selected, item_id) VALUES " +
-            "('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')")
+        legacyDb.execSQL(
+            "INSERT INTO bookmarksItems (item_name, item_description, item_image_url, " +
+                "item_instance_of, item_name_categories, item_description_categories, " +
+                "item_thumbnail_categories, item_is_selected, item_id) VALUES " +
+                "('item1', 'desc', 'url', 'inst', 'cat', 'cdesc', 'cthumb', 1, 'id1')",
+        )
         legacyDb.execSQL("INSERT INTO recent_searches (name, last_used) VALUES ('search1', 123)")
         legacyDb.execSQL("INSERT INTO recent_languages (language_name, language_code) VALUES ('English', 'en')")
         legacyDb.close()
 
         // build "commons_room.db" as it was at version 21, then migrate it.
         helper.createDatabase(ROOM_DB, 21).close()
-        val migratedDb = helper.runMigrationsAndValidate(
-            ROOM_DB, latestVersion(context), true, MIGRATION_21_22, MIGRATION_22_23
-        )
+        val migratedDb =
+            helper.runMigrationsAndValidate(
+                ROOM_DB,
+                latestVersion(context),
+                true,
+                MIGRATION_21_22,
+                MIGRATION_22_23,
+                MIGRATION_23_24,
+            )
 
         // tests
         try {
@@ -98,7 +108,6 @@ class MigrationTest {
             Assert.assertTrue("recent_languages migrated", cursor.moveToFirst())
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
-
         } finally {
             migratedDb.close()
             context.deleteDatabase(LEGACY_DB)
@@ -128,13 +137,19 @@ class MigrationTest {
                     NULL, '6428847', 'File:Example.jpg',
                     '{}', '{}', '[]', '[]', '{}'
                 )
-            """.trimIndent()
+            """.trimIndent(),
         )
         oldDb.close()
 
-        val migratedDb = helper.runMigrationsAndValidate(
-            ROOM_DB, latestVersion(context), true, MIGRATION_21_22, MIGRATION_22_23
-        )
+        val migratedDb =
+            helper.runMigrationsAndValidate(
+                ROOM_DB,
+                latestVersion(context),
+                true,
+                MIGRATION_21_22,
+                MIGRATION_22_23,
+                MIGRATION_23_24,
+            )
 
         try {
             var cursor: Cursor =
@@ -143,12 +158,12 @@ class MigrationTest {
             Assert.assertTrue("contribution migrated", cursor.moveToFirst())
             Assert.assertEquals(
                 "File:Big Buck Bunny medium.ogv",
-                cursor.getString(cursor.getColumnIndex("media_filename"))
+                cursor.getString(cursor.getColumnIndex("media_filename")),
             )
             // application/ogg with a .ogv name, so the extension fallback decides.
             Assert.assertEquals(
                 "VIDEO",
-                cursor.getString(cursor.getColumnIndex("media_mediaType"))
+                cursor.getString(cursor.getColumnIndex("media_mediaType")),
             )
             cursor.close()
 
@@ -157,7 +172,7 @@ class MigrationTest {
             Assert.assertTrue("contribution migrated", cursor.moveToFirst())
             Assert.assertEquals(
                 "OTHER",
-                cursor.getString(cursor.getColumnIndex("media_mediaType"))
+                cursor.getString(cursor.getColumnIndex("media_mediaType")),
             )
             cursor.close()
         } finally {

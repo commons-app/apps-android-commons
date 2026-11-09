@@ -7,7 +7,6 @@ import com.nhaarman.mockitokotlin2.times
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.campaigns.CampaignConfig
 import fr.free.nrw.commons.campaigns.models.Campaign
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
@@ -21,6 +20,7 @@ import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -29,15 +29,13 @@ import org.mockito.Mockito
 import org.mockito.Mockito.eq
 import org.mockito.MockitoAnnotations
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.Exception
 
 class OkHttpJsonApiClientTests {
     @Mock
     lateinit var okhttpClient: OkHttpClient
-
-    @Mock
-    lateinit var depictsClient: DepictsClient
 
     @Mock
     lateinit var wikiMediaToolforgeUrl: HttpUrl
@@ -70,7 +68,6 @@ class OkHttpJsonApiClientTests {
         mockWebServer.setUp()
         okHttpJsonApiClient = OkHttpJsonApiClient(
             okhttpClient,
-            depictsClient,
             wikiMediaToolforgeUrl,
             sparqlQueryUrl,
             mockWebServer.getUrl(), //use the mock server for the campaignsUrl
@@ -129,22 +126,6 @@ class OkHttpJsonApiClientTests {
         }
         verify(okhttpClient, times(3)).newCall(any())
         verify(call, times(3)).execute()
-    }
-
-    @Test
-    fun testGetNearbyItemCount() {
-        try {
-            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Radial(latLng, 10f))
-        } catch (e: Exception) {
-            assertEquals("test", e.message)
-        }
-        try {
-            okHttpJsonApiClient.getNearbyItemCount(NearbyQueryParams.Rectangular(latLng, latLng))
-        } catch (e: Exception) {
-            assertEquals("test", e.message)
-        }
-        verify(okhttpClient, times(2)).newCall(any())
-        verify(call, times(2)).execute()
     }
 
     @Test
@@ -252,5 +233,22 @@ class OkHttpJsonApiClientTests {
             "Resource $fileName not found. Please ensure the file is located " +
                 "in app/src/test/resources/raw/",
         )
+    }
+
+    /**
+     * Test that an unsuccessful response is reported as an IOException
+     */
+    @Test
+    fun testNearbyQueriesThrowIOExceptionOnUnsuccessfulResponse() {
+        val queries =
+            listOf<() -> Any?>(
+                { okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, "test") },
+                { okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, null) },
+            )
+
+        queries.forEach { query ->
+            val exception = assertThrows(IOException::class.java) { query() }
+            assertEquals("test", exception.message)
+        }
     }
 }

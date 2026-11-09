@@ -6,7 +6,11 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BANNED_EXTENSION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_INVALID
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_TOO_LONG
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
@@ -15,15 +19,64 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
+import java.io.FileNotFoundException
 import java.io.InputStream
 import javax.inject.Inject
 import javax.inject.Singleton
+
+// MediaWiki rejects file names longer than 240 bytes (filename-toolong)
+private const val MAX_FILE_NAME_BYTES = 240
+
+// UploadWorker.findUniqueFileName adds " (12345)" when the file name already exists
+private const val UNIQUE_SUFFIX_BYTES = 8
+
+// MediaWiki rejects a file name if any part after a dot is one of these (filetype-banned), for
+// example "Visit konga.com.jpg". No API returns this list. It is MediaWiki's default
+// $wgProhibitedFileExtensions (includes/MainConfigSchema.php) plus the Wikimedia additions
+// in $wmgProhibitedFileExtensions (operations/mediawiki-config, wmf-config/InitialiseSettings.php).
+private val BANNED_FILE_EXTENSIONS =
+    setOf(
+        "html",
+        "htm",
+        "js",
+        "jsb",
+        "mhtml",
+        "mht",
+        "xhtml",
+        "xht",
+        "php",
+        "phtml",
+        "php3",
+        "php4",
+        "php5",
+        "phps",
+        "phar",
+        "shtml",
+        "jhtml",
+        "pl",
+        "py",
+        "cgi",
+        "exe",
+        "scr",
+        "dll",
+        "msi",
+        "vbs",
+        "bat",
+        "com",
+        "pif",
+        "cmd",
+        "vxd",
+        "cpl",
+        "xml",
+        "txt",
+    )
 
 /**
  * Methods for pre-processing images to be uploaded
  */
 @Singleton
 class ImageProcessingService
+    @Suppress("LongParameterList")
     @Inject
     constructor(
         private val fileUtilsWrapper: FileUtilsWrapper,
@@ -31,6 +84,7 @@ class ImageProcessingService
         private val readFBMD: ReadFBMD,
         private val exifReader: EXIFReader,
         private val mediaClient: MediaClient,
+        private val uploadClient: UploadClient,
         private val appContext: Context,
     ) {
         /**
@@ -53,33 +107,44 @@ class ImageProcessingService
 
             Timber.d("Checking the validity of image")
             val filePath = uploadItem.mediaUri?.path
+            // Geolocation, darkness, FBMD, and EXIF are image-specific checks,
+            // so they do not apply to other media types, such as audio.
+            val isImage = uploadItem.mimeType?.startsWith("image/") ?: true
 
-            return Single.zip(
+            return if (isImage) {
+                Single.zip(
+                    checkIfFileAlreadyExists(
+                        originalFilePath = uploadItem.contentUri!!,
+                        modifiedFilePath = uploadItem.mediaUri!!,
+                    ),
+                    checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
+                    checkDarkImage(filePath!!),
+                    checkFBMD(filePath),
+                    checkEXIF(filePath),
+                ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
+                    val unsupportedFormatResult =
+                        if (uploadItem.hasUnsupportedFormat) {
+                            fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED
+                        } else {
+                            0
+                        }
+                    Timber.d(
+                        "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d, unsupported: %d",
+                        duplicateImage,
+                        wrongGeoLocation,
+                        darkImage,
+                        fbmd,
+                        exif,
+                        unsupportedFormatResult,
+                    )
+                    return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif or
+                        unsupportedFormatResult
+                }
+            } else {
                 checkIfFileAlreadyExists(
                     originalFilePath = uploadItem.contentUri!!,
                     modifiedFilePath = uploadItem.mediaUri!!,
-                ),
-                checkImageGeoLocation(uploadItem.place, filePath, inAppPictureLocation),
-                checkDarkImage(filePath!!),
-                checkFBMD(filePath),
-                checkEXIF(filePath),
-            ) { duplicateImage: Int, wrongGeoLocation: Int, darkImage: Int, fbmd: Int, exif: Int ->
-                val unsupportedFormatResult =
-                    if (uploadItem.hasUnsupportedFormat) {
-                        fr.free.nrw.commons.utils.ImageUtils.IMAGE_FORMAT_UNSUPPORTED
-                    } else {
-                        0
-                    }
-                Timber.d(
-                    "duplicate: %d, geo: %d, dark: %d, fbmd: %d, exif: %d, unsupported: %d",
-                    duplicateImage,
-                    wrongGeoLocation,
-                    darkImage,
-                    fbmd,
-                    exif,
-                    unsupportedFormatResult,
                 )
-                return@zip duplicateImage or wrongGeoLocation or darkImage or fbmd or exif or unsupportedFormatResult
             }
         }
 
@@ -116,21 +181,42 @@ class ImageProcessingService
         private fun checkEXIF(filepath: String): Single<Int> = exifReader.processMetadata(filepath)
 
         /**
-         * Checks item caption - empty caption - existing caption
+         * Checks item caption - empty caption - too long, banned extension, blacklisted or invalid caption -
+         * existing caption
          */
         private fun validateItemTitle(uploadItem: UploadItem): Single<Int> {
             Timber.d("Checking for image title %s", uploadItem.uploadMediaDetails)
             val captions = uploadItem.uploadMediaDetails
-            if (captions.isEmpty()) {
-                return Single.just(EMPTY_CAPTION)
+            val fileNameBytes = uploadItem.filename.toByteArray().size
+            val hasBannedExtension =
+                uploadItem.filename
+                    .split(".")
+                    .drop(1)
+                    .any { it.lowercase() in BANNED_FILE_EXTENSIONS }
+            return when {
+                captions.isEmpty() -> Single.just(EMPTY_CAPTION)
+                // Commons rejects these names anyway, so there is no need to ask it about the name
+                fileNameBytes > MAX_FILE_NAME_BYTES -> Single.just(FILE_NAME_TOO_LONG)
+                hasBannedExtension -> Single.just(FILE_NAME_BANNED_EXTENSION)
+                else ->
+                    Single
+                        .zip(
+                            uploadClient.checkFileName(uploadItem.filename),
+                            mediaClient.checkPageExistsUsingTitle("File:" + uploadItem.filename),
+                        ) { fileNameCheck: FileNameCheck, doesFileExist: Boolean ->
+                            Timber.d("Result for valid title is %s, file name check %s", doesFileExist, fileNameCheck)
+                            // A blacklisted, invalid or too long name can never be uploaded,
+                            // so it is reported before an existing name
+                            when {
+                                fileNameCheck == FileNameCheck.BLACKLISTED -> FILE_NAME_BLACKLISTED
+                                fileNameCheck == FileNameCheck.INVALID -> FILE_NAME_INVALID
+                                doesFileExist && fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
+                                    FILE_NAME_TOO_LONG
+                                doesFileExist -> FILE_NAME_EXISTS
+                                else -> IMAGE_OK
+                            }
+                        }.subscribeOn(Schedulers.io())
             }
-
-            return mediaClient
-                .checkPageExistsUsingTitle("File:" + uploadItem.filename)
-                .map { doesFileExist: Boolean ->
-                    Timber.d("Result for valid title is %s", doesFileExist)
-                    if (doesFileExist) FILE_NAME_EXISTS else IMAGE_OK
-                }.subscribeOn(Schedulers.io())
         }
 
         /**
@@ -147,9 +233,17 @@ class ImageProcessingService
             val originalStreamResult =
                 Single
                     .fromCallable {
-                        appContext.contentResolver.openInputStream(originalFilePath)!!
+                        appContext.contentResolver.openInputStream(originalFilePath)
+                            ?: throw FileNotFoundException("Original file not found at $originalFilePath")
                     }.flatMap { inputStream ->
                         checkDuplicateImage(inputStream)
+                    }.onErrorResumeNext { throwable ->
+                        if (throwable is FileNotFoundException) {
+                            Timber.d("Original file not found, treating as non-duplicate")
+                            Single.just(IMAGE_OK)
+                        } else {
+                            Single.error(throwable)
+                        }
                     }
 
             val modifiedStreamResult =
@@ -159,12 +253,12 @@ class ImageProcessingService
                         if (path != null && java.io.File(path).exists()) {
                             fileUtilsWrapper.getFileInputStream(path)
                         } else {
-                            throw java.io.FileNotFoundException("Modified file not found at $path")
+                            throw FileNotFoundException("Modified file not found at $path")
                         }
                     }.flatMap { inputStream ->
                         checkDuplicateImage(inputStream)
                     }.onErrorResumeNext { throwable ->
-                        if (throwable is java.io.FileNotFoundException) {
+                        if (throwable is FileNotFoundException) {
                             Timber.d("Modified file not found, treating as non-duplicate")
                             Single.just(IMAGE_OK)
                         } else {

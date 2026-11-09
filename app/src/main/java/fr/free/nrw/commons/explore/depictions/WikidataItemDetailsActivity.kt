@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.Media
@@ -17,9 +16,7 @@ import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
-import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
-import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.theme.BaseActivity
@@ -29,7 +26,6 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -71,8 +67,9 @@ class WikidataItemDetailsActivity :
         wikidataItem = intent.getParcelableExtra(WikidataConstants.BOOKMARKS_ITEMS)
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        setTabs()
-        setPageTitle()
+        val tabs = WikidataItemDetailsTabs(this, binding!!, viewPagerAdapter!!)
+        depictionImagesListFragment = tabs.setTabs()
+        tabs.setPageTitle()
 
         onBackPressedDispatcher.addCallback(
             this,
@@ -92,15 +89,6 @@ class WikidataItemDetailsActivity :
     }
 
     /**
-     * Gets the passed wikidataItemName from the intents and displays it as the page title
-     */
-    private fun setPageTitle() {
-        if (intent != null && intent.getStringExtra("wikidataItemName") != null) {
-            title = intent.getStringExtra("wikidataItemName")
-        }
-    }
-
-    /**
      * This method is called on success of API call for featured Images.
      * The viewpager will notified that number of items have changed.
      */
@@ -108,36 +96,6 @@ class WikidataItemDetailsActivity :
         if (mediaDetailPagerFragment != null) {
             mediaDetailPagerFragment!!.notifyDataSetChanged()
         }
-    }
-
-    /**
-     * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
-     * Set the fragments according to the tab selected in the viewPager.
-     */
-    private fun setTabs() {
-        depictionImagesListFragment = DepictedImagesFragment()
-        val childDepictionsFragment = ChildDepictionsFragment()
-        val parentDepictionsFragment = ParentDepictionsFragment()
-        val wikidataItemName = intent.getStringExtra("wikidataItemName")
-        val entityId = intent.getStringExtra("entityId")
-        if (intent != null && wikidataItemName != null) {
-            val arguments =
-                bundleOf(
-                    "wikidataItemName" to wikidataItemName,
-                    "entityId" to entityId,
-                )
-            depictionImagesListFragment!!.arguments = arguments
-            parentDepictionsFragment.arguments = arguments
-            childDepictionsFragment.arguments = arguments
-        }
-
-        viewPagerAdapter!!.setTabs(
-            R.string.title_for_media to depictionImagesListFragment!!,
-            R.string.title_for_child_classes to childDepictionsFragment,
-            R.string.title_for_parent_classes to parentDepictionsFragment,
-        )
-        binding!!.viewPager.offscreenPageLimit = 2
-        viewPagerAdapter!!.notifyDataSetChanged()
     }
 
     /**
@@ -206,80 +164,45 @@ class WikidataItemDetailsActivity :
      * This method handles the logic on item select in toolbar menu
      * Currently only 1 choice is available to open Wikidata item details page in browser
      */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.browser_actions_menu_items -> {
-                val entityId = intent.getStringExtra("entityId")
-                val uri = Uri.parse("https://www.wikidata.org/wiki/$entityId")
-                handleWebUrl(this, uri)
-                return true
+                handleWebUrl(
+                    this,
+                    Uri.parse("https://www.wikidata.org/wiki/${intent.getStringExtra("entityId")}"),
+                )
+                true
             }
 
             R.id.menu_bookmark_current_item -> {
+                fun showBookmarkResult(bookmarkExists: Boolean) {
+                    val message = if (bookmarkExists) R.string.add_bookmark else R.string.remove_bookmark
+                    Snackbar.make(findViewById(R.id.toolbar_layout), message, Snackbar.LENGTH_LONG).show()
+                    updateBookmarkState(item)
+                }
                 if (intent.getStringExtra("fragment") != null) {
                     compositeDisposable!!.add(
                         depictModel!!
-                            .getDepictions(
-                                intent.getStringExtra("entityId")!!,
-                            ).subscribeOn(Schedulers.io())
+                            .getDepictions(intent.getStringExtra("entityId")!!)
+                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                Consumer<List<DepictedItem?>> { depictedItems: List<DepictedItem?> ->
-                                    val bookmarkExists =
-                                        bookmarkItemsDao!!.updateBookmarkItem(
-                                            depictedItems[0]!!,
-                                        )
-                                    val snackbar =
-                                        if (bookmarkExists) {
-                                            Snackbar.make(
-                                                findViewById(R.id.toolbar_layout),
-                                                R.string.add_bookmark,
-                                                Snackbar.LENGTH_LONG,
-                                            )
-                                        } else {
-                                            Snackbar.make(
-                                                findViewById(R.id.toolbar_layout),
-                                                R.string.remove_bookmark,
-                                                Snackbar.LENGTH_LONG,
-                                            )
-                                        }
-
-                                    snackbar.show()
-                                    updateBookmarkState(item)
-                                },
-                            ),
+                            .subscribe { items ->
+                                showBookmarkResult(bookmarkItemsDao!!.updateBookmarkItem(items[0]!!))
+                            },
                     )
                 } else {
-                    val bookmarkExists = bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!)
-                    val snackbar =
-                        if (bookmarkExists) {
-                            Snackbar.make(
-                                findViewById(R.id.toolbar_layout),
-                                R.string.add_bookmark,
-                                Snackbar.LENGTH_LONG,
-                            )
-                        } else {
-                            Snackbar.make(
-                                findViewById(R.id.toolbar_layout),
-                                R.string.remove_bookmark,
-                                Snackbar.LENGTH_LONG,
-                            )
-                        }
-
-                    snackbar.show()
-                    updateBookmarkState(item)
+                    showBookmarkResult(bookmarkItemsDao!!.updateBookmarkItem(wikidataItem!!))
                 }
-                return true
+                true
             }
 
             android.R.id.home -> {
                 onBackPressedDispatcher.onBackPressed()
-                return true
+                true
             }
 
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
-    }
 
     private fun updateBookmarkState(item: MenuItem) {
         val isBookmarked: Boolean =

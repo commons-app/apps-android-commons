@@ -31,6 +31,7 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
 import fr.free.nrw.commons.explore.SearchActivity
+import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
@@ -49,7 +50,6 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Field
-import java.lang.reflect.Method
 import java.util.concurrent.Callable
 
 @RunWith(RobolectricTestRunner::class)
@@ -59,6 +59,7 @@ class MediaDetailPagerFragmentUnitTests {
     private lateinit var fragment: MediaDetailPagerFragment
     private lateinit var context: Context
     private lateinit var fragmentManager: FragmentManager
+    private lateinit var activity: SearchActivity
 
     private lateinit var binding: FragmentMediaDetailPagerBinding
 
@@ -70,6 +71,12 @@ class MediaDetailPagerFragmentUnitTests {
 
     @Mock
     internal var sessionManager: SessionManager? = null
+
+    @Mock
+    private lateinit var bookmarkDao: BookmarkPicturesDao
+
+    @Mock
+    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
 
     @Mock
     private lateinit var menu: Menu
@@ -97,7 +104,7 @@ class MediaDetailPagerFragmentUnitTests {
 
         Fresco.initialize(context)
 
-        val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         binding = FragmentMediaDetailPagerBinding.inflate(activity.layoutInflater)
 
         fragment = MediaDetailPagerFragment.newInstance(false, false)
@@ -112,6 +119,10 @@ class MediaDetailPagerFragmentUnitTests {
         fieldContext.set(sessionManager, context)
 
         Whitebox.setInternalState(fragment, "binding", binding)
+
+        val mediaDetailMenuHandler =
+            MediaDetailMenuHandler(bookmarkDao, sessionManager!!, okHttpJsonApiClient)
+        fragment.mediaDetailMenuHandler = mediaDetailMenuHandler
 
         doReturn(menuItem).`when`(menu).findItem(any())
         doReturn(menuItem).`when`(menuItem).isEnabled = any()
@@ -204,13 +215,7 @@ class MediaDetailPagerFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetWallpaperCaseNull() {
-        val method: Method =
-            MediaDetailPagerFragment::class.java.getDeclaredMethod(
-                "setWallpaper",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.mediaDetailMenuHandler?.setWallpaper(activity, media)
     }
 
     @Test
@@ -218,25 +223,13 @@ class MediaDetailPagerFragmentUnitTests {
     fun testSetWallpaperCaseNonNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(media.imageUrl).thenReturn("url")
-        val method: Method =
-            MediaDetailPagerFragment::class.java.getDeclaredMethod(
-                "setWallpaper",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.mediaDetailMenuHandler?.setWallpaper(activity, media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetAvatarCaseNull() {
-        val method: Method =
-            MediaDetailPagerFragment::class.java.getDeclaredMethod(
-                "setAvatar",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.mediaDetailMenuHandler?.setAvatar(activity, media)
     }
 
     @Test
@@ -259,46 +252,12 @@ class MediaDetailPagerFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnPageScrolled() {
-        fragment.onPageScrolled(0, 0.0F, 0)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPageScrolledCaseNull() {
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.remove(fragment)
-        fragmentTransaction.commit()
-        fragment.onPageScrolled(0, 0.0F, 0)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPageSelected() {
-        fragment.onPageSelected(0)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPageScrollStateChanged() {
-        fragment.onPageScrollStateChanged(0)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnDataSetChanged() {
-        fragment.onDataSetChanged()
+        fragment.notifyDataSetChanged()
     }
 
     private fun invokeHandleBackgroundColorMenuItems(getBitmap: Callable<Bitmap>) {
-        val method: Method =
-            MediaDetailPagerFragment::class.java.getDeclaredMethod(
-                "handleBackgroundColorMenuItems",
-                Callable::class.java,
-                Menu::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, getBitmap, menu)
+        fragment.mediaDetailMenuHandler?.handleBackgroundColorMenuItems(getBitmap, menu)
     }
 
     @Test

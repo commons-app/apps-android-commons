@@ -145,8 +145,6 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var textView: TextView
 
-    @Mock
-    private lateinit var htmlTextView: HtmlTextView
 
     @Mock
     private lateinit var linearLayout: LinearLayout
@@ -163,17 +161,11 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
-    @Mock
-    private lateinit var webView: WebView
 
     @Mock
     private lateinit var progressBar: ProgressBar
 
-    @Mock
-    private lateinit var listView: ListView
 
-    @Mock
-    private lateinit var intent: Intent
 
     private lateinit var activity: SearchActivity
 
@@ -414,6 +406,25 @@ class MediaDetailFragmentUnitTests {
             linkedMapOf(
                 "en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}",
             )
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithNearbyWikidataTemplate() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s =
+            "== {{int:filedesc}} ==\n" +
+                "{{Information\n" +
+                "|description={{en|1=A nearby place}}\n" +
+                "{{ on Wikidata|Q42}}|source={{own}}\n" +
+                "|author=[[User:Example|Example]]\n" +
+                "|date=2020-01-01\n" +
+                "}}\n" +
+                "{{Location|1.2|3.4}}\n"
+        val map = linkedMapOf("en" to "A nearby place")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
 
