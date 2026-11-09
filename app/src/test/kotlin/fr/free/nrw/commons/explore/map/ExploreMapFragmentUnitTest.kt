@@ -30,8 +30,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.lang.reflect.Field
-import java.lang.reflect.Method
 
 @Suppress("DEPRECATION")
 @RunWith(RobolectricTestRunner::class)
@@ -116,45 +114,26 @@ class ExploreMapFragmentUnitTest {
 
     @Test
     fun testGetOverlayWithNullItem() {
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getOverlay", OverlayItem::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, null as OverlayItem?)
+        val result = fragment.markerOverlayHelper.getOverlay(null)
         assertNull(result)
     }
 
     @Test
     fun testGetOverlayWithNullBinding() {
-        val field: Field = ExploreMapFragment::class.java.getDeclaredField("binding")
-        field.isAccessible = true
-        field.set(fragment, null)
-
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getOverlay", OverlayItem::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, overlayItem)
+        fragment.markerOverlayHelper.mapView = null
+        val result = fragment.markerOverlayHelper.getOverlay(overlayItem)
         assertNull(result)
     }
 
     @Test
     fun testGetMediaFromImageURLWithNullUrl() {
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getMediaFromImageURL", String::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, null as String?)
+        val result = fragment.markerOverlayHelper.getMediaFromImageURL(null, fragment.mediaList)
         assertNull(result)
     }
 
     @Test
     fun testGetMediaFromImageURLWithNullMediaList() {
-        val field: Field = ExploreMapFragment::class.java.getDeclaredField("mediaList")
-        field.isAccessible = true
-        field.set(fragment, null)
-
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getMediaFromImageURL", String::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, "http://example.com/image.jpg")
+        val result = fragment.markerOverlayHelper.getMediaFromImageURL("http://example.com/image.jpg", null)
         assertNull(result)
     }
 
@@ -162,12 +141,8 @@ class ExploreMapFragmentUnitTest {
     fun testGetMediaFromImageURLWithMatchingMedia() {
         whenever(media.imageUrl).thenReturn("http://example.com/image.jpg")
         val mediaList = mutableListOf(media)
-        Whitebox.setInternalState(fragment, "mediaList", mediaList)
-
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getMediaFromImageURL", String::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, "http://example.com/image.jpg")
+        val result =
+            fragment.markerOverlayHelper.getMediaFromImageURL("http://example.com/image.jpg", mediaList)
         assertEquals(media, result)
     }
 
@@ -175,12 +150,8 @@ class ExploreMapFragmentUnitTest {
     fun testGetMediaFromImageURLWithNonMatchingMedia() {
         whenever(media.imageUrl).thenReturn("http://example.com/other.jpg")
         val mediaList = mutableListOf(media)
-        Whitebox.setInternalState(fragment, "mediaList", mediaList)
-
-        val method: Method =
-            ExploreMapFragment::class.java.getDeclaredMethod("getMediaFromImageURL", String::class.java)
-        method.isAccessible = true
-        val result = method.invoke(fragment, "http://example.com/image.jpg")
+        val result =
+            fragment.markerOverlayHelper.getMediaFromImageURL("http://example.com/image.jpg", mediaList)
         assertNull(result)
     }
 }
