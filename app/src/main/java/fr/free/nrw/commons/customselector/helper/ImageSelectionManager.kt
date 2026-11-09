@@ -227,7 +227,7 @@ class ImageSelectionManager(
         holder: ImageAdapter.ImageViewHolder,
         position: Int,
         image: Image,
-        imageSHA1: String,
+        imageSHA1: String?,
         notifyItemChanged: (Int, Any?) -> Unit,
     ) {
         if (holder.isItemUploaded()) {
@@ -240,7 +240,18 @@ class ImageSelectionManager(
             return
         }
 
-        if (imageSHA1.isNotEmpty() && imageLoader.getFromUploaded(imageSHA1) != null) {
+        val uploadedStatus =
+            if (!imageSHA1.isNullOrEmpty()) {
+                imageLoader.getFromUploaded(imageSHA1)
+            } else {
+                null
+            }
+        val isUploaded =
+            uploadedStatus?.let {
+                imageLoader.getResultFromUploadedStatus(it) == ImageLoader.Result.TRUE
+            } ?: false
+
+        if (isUploaded) {
             holder.itemUploaded()
             Toast
                 .makeText(
@@ -249,18 +260,6 @@ class ImageSelectionManager(
                     Toast.LENGTH_SHORT,
                 ).show()
             return
-        }
-
-        if (!holder.isItemUploaded() &&
-            imageSHA1.isNotEmpty() &&
-            imageLoader.getFromUploaded(imageSHA1) != null
-        ) {
-            Toast
-                .makeText(
-                    context,
-                    R.string.custom_selector_already_uploaded_image_text,
-                    Toast.LENGTH_SHORT,
-                ).show()
         }
 
         if (holder.isItemNotForUpload()) {
