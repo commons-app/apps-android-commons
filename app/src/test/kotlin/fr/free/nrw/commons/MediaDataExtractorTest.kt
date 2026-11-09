@@ -63,6 +63,20 @@ class MediaDataExtractorTest {
         assertEquals("Test", mediaDataExtractor!!.getCurrentWikiText("File:Test.jpg").blockingGet())
     }
 
+    /** A failed refresh must leave the media already displayed by the caller alone. */
+    @Test
+    fun refreshDoesNotReplaceMediaWhenBothRequestsFail() {
+        val media = Media(pageId = "1", filename = "File:Example.jpg")
+        `when`(mediaClient!!.getMediaById(PAGE_ID_PREFIX + "1"))
+            .thenReturn(Single.error(IOException("offline")))
+        `when`(mediaClient!!.getMediaSuppressingErrors("File:Example.jpg"))
+            .thenReturn(Single.error(IOException("offline")))
+
+        val observer = mediaDataExtractor!!.refresh(media).test()
+        observer.assertNoValues().assertNotComplete().assertNoErrors()
+        observer.dispose()
+    }
+
     @Test
     fun refreshReportsAFileTheMediaLoadAlreadyFoundMissing() {
         val media = Media(pageId = "1", filename = "File:Gone.jpg")
