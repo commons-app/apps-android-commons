@@ -117,7 +117,8 @@ class DeleteHelper
                 """.trimIndent()
 
             val logPageString = "\n{{Commons:Deletion requests/${media.filename}}}\n"
-            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            // The log page title needs Western digits whatever the device language is
+            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
             val date = sdf.format(calendar.time)
 
             val userPageString = "\n{{subst:idw|${media.filename}}} ~~~~"

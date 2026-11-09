@@ -5,8 +5,10 @@ import android.content.Context
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.google.android.material.textfield.TextInputEditText
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
@@ -29,6 +31,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.util.Locale
 
 /**
  * Tests for delete helper
@@ -121,6 +124,54 @@ class DeleteHelperTest {
         verify(
             pageEditClient,
         ).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+    }
+
+    /**
+     * The deletion log page title uses Western digits even when the device language writes numbers differently
+     */
+    @Test
+    fun makeDeletionWritesLogPageDateWithWesternDigits() {
+        val defaultLocale = Locale.getDefault()
+        Locale.setDefault(Locale.forLanguageTag("bn"))
+        try {
+            whenever(
+                pageEditClient.prependEdit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(true))
+            whenever(
+                pageEditClient.edit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(true))
+            whenever(
+                pageEditClient.appendEdit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(true))
+            whenever(media.displayTitle).thenReturn("Test file")
+            whenever(context.getString(ArgumentMatchers.anyInt())).thenReturn("")
+            whenever(context.getString(R.string.delete_helper_show_deletion_message_if, "Test file")).thenReturn("")
+            whenever(media.getAuthorOrUser()).thenReturn("Creator")
+            whenever(media.filename).thenReturn("Test file.jpg")
+
+            deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
+
+            val titles = argumentCaptor<String>()
+            verify(pageEditClient, times(2))
+                .appendEdit(titles.capture(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
+            val logPageTitle = titles.firstValue
+            val westernDate = Regex("Commons:Deletion_requests/[0-9]{4}/[0-9]{2}/[0-9]{2}")
+            assertTrue(logPageTitle, logPageTitle.matches(westernDate))
+        } finally {
+            Locale.setDefault(defaultLocale)
+        }
     }
 
     /**
