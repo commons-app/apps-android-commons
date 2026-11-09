@@ -190,18 +190,4 @@ class ImageFileLoader(
         val dateFormat = DateFormat.getMediumDateFormat(context)
         return dateFormat.format(calendar.time)
     }
-
-    /**
-     * Abort loading images.
-     */
-    fun abortLoadImage() {
-        // todo Abort loading images.
-    }
-
-    /*
-     *
-     * TODO
-     * Sha1 for image (original image).
-     *
-     */
 }
