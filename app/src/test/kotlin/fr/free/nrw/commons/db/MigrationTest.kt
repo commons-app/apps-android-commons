@@ -8,6 +8,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
+import fr.free.nrw.commons.di.MIGRATION_23_24
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -57,7 +58,7 @@ class MigrationTest {
                     context,
                     AppDatabase::class.java,
                     "commons_room.db",
-                ).addMigrations(MIGRATION_21_22, MIGRATION_22_23)
+                ).addMigrations(MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24)
                 .allowMainThreadQueries()
                 .build()
 
@@ -92,10 +93,51 @@ class MigrationTest {
             Assert.assertTrue("recent_languages migrated", cursor.moveToFirst())
             Assert.assertEquals("en", cursor.getString(cursor.getColumnIndex("language_code")))
             cursor.close()
+
+            // bookmarks_categories table must exist after migrating to the latest version
+            cursor = migratingRoomDatabase.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
+            Assert.assertNotNull("bookmarks_categories table exists", cursor)
+            cursor.close()
         } finally {
             migratingRoomDatabase.close()
             context.deleteDatabase("commons.db")
             context.deleteDatabase("commons_room.db")
+        }
+    }
+
+    @Test
+    fun testMigration23To24() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val db23 =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room_23.db",
+                ).allowMainThreadQueries()
+                .build()
+        db23.openHelper.writableDatabase.version = 23
+        db23.openHelper.writableDatabase.execSQL("DROP TABLE IF EXISTS bookmarks_categories")
+        db23.close()
+
+        val db24 =
+            Room
+                .databaseBuilder(
+                    context,
+                    AppDatabase::class.java,
+                    "commons_room_23.db",
+                ).addMigrations(MIGRATION_23_24)
+                .allowMainThreadQueries()
+                .build()
+
+        try {
+            val cursor = db24.query("SELECT * FROM bookmarks_categories WHERE 0=1", null)
+            Assert.assertNotNull("bookmarks_categories table exists after 23→24 migration", cursor)
+            cursor.close()
+        } finally {
+            db24.close()
+            context.deleteDatabase("commons_room_23.db")
         }
     }
 }
