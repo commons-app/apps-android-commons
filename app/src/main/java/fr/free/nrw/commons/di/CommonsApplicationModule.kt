@@ -27,6 +27,7 @@ import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.appContext
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.mediaTypeFrom
 import fr.free.nrw.commons.nearby.PlaceDao
 import fr.free.nrw.commons.review.ReviewDao
 import fr.free.nrw.commons.settings.Prefs
@@ -201,6 +202,7 @@ open class CommonsApplicationModule(
             MIGRATION_19_TO_20,
             MIGRATION_21_22,
             MIGRATION_22_23,
+            MIGRATION_23_24,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -547,3 +549,39 @@ val MIGRATION_22_23 =
             }
         }
     }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_23_24 =
+    object : Migration(23, 24) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mimeType TEXT")
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mediaType TEXT NOT NULL DEFAULT 'OTHER'")
+            backfillMediaTypes(db)
+        }
+    }
+
+/**
+ * Fills in media_mediaType for rows that predate the column.
+ *
+ * Uses the same mime type and extension fallback the app applies when the API reports no media
+ * type. Rows those two can't classify keep the 'OTHER' default until the API refreshes them.
+ */
+private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
+    val mediaTypesByPageId = mutableMapOf<String, String>()
+
+    db.query("SELECT pageId, mimeType, media_filename FROM contribution").use { cursor ->
+        while (cursor.moveToNext()) {
+            val pageId = cursor.getString(0)
+            val mimeType = if (cursor.isNull(1)) null else cursor.getString(1)
+            val filename = if (cursor.isNull(2)) null else cursor.getString(2)
+            mediaTypesByPageId[pageId] = mediaTypeFrom(mimeType, filename).name
+        }
+    }
+
+    mediaTypesByPageId.forEach { (pageId, mediaType) ->
+        db.execSQL(
+            "UPDATE contribution SET media_mediaType = ? WHERE pageId = ?",
+            arrayOf(mediaType, pageId),
+        )
+    }
+}

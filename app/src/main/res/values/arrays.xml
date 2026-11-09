@@ -47,6 +47,18 @@
         <item>0</item>
     </string-array>
 
+    <array name="pref_video_quality_entries">
+        <item>@string/video_quality_auto</item>
+        <item>@string/video_quality_higher</item>
+        <item>@string/video_quality_data_saver</item>
+    </array>
+
+    <string-array name="pref_video_quality_values">
+        <item>auto</item>
+        <item>higher</item>
+        <item>data_saver</item>
+    </string-array>
+
     <string-array name="leaderboard_categories">
         <item>@string/leaderboard_upload</item>
         <item>@string/leaderboard_used</item>
