@@ -11,7 +11,9 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -281,7 +283,41 @@ class UploadClient
                 Timber.e(throwable, "Exception occurred in uploading file from stash")
                 Observable.error(throwable)
             }
+
+        /**
+         * Checks if Commons would refuse a file name, because it is on the title blacklist or
+         * because it is not a valid title. Commons only checks the title blacklist when publishing,
+         * after the whole file has been uploaded.
+         *
+         * @param fileName Photo.jpg
+         */
+        fun checkFileName(fileName: String): Single<FileNameCheck> =
+            uploadInterface
+                // MediaWiki replaces these characters with "-" when uploading, so the same name is checked
+                .checkTitleBlacklist("File:" + fileName.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"))
+                .map {
+                    if (it.titleblacklist?.result == "blacklisted") FileNameCheck.BLACKLISTED else FileNameCheck.OK
+                }.onErrorResumeNext { throwable: Throwable ->
+                    // After the characters above are replaced, the upload fails with illegal-filename too
+                    if (throwable is MwIOException && throwable.error.code == "invalidtitle") {
+                        Single.just(FileNameCheck.INVALID)
+                    } else {
+                        Single.error(throwable)
+                    }
+                }
     }
+
+/**
+ * Result of [UploadClient.checkFileName]
+ */
+enum class FileNameCheck {
+    OK,
+    BLACKLISTED,
+    INVALID,
+}
+
+// Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
+private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
 
 private fun canProcess(
     contributionDao: ContributionDao,
