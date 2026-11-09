@@ -15,7 +15,11 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BANNED_EXTENSION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_INVALID
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_TOO_LONG
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
@@ -224,6 +228,46 @@ class UploadMediaPresenterTest {
     fun duplicateFileNameTest() {
         uploadMediaPresenter.handleCaptionResult(FILE_NAME_EXISTS, uploadItem)
         verify(view).showDuplicatePicturePopup(uploadItem)
+    }
+
+    /**
+     * Test for a blacklisted file name when the user presses the NEXT button
+     */
+    @Test
+    fun handleCaptionResultForBlacklistedFileName() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_BLACKLISTED, uploadItem)
+        verify(view).showMessage(R.string.file_name_blacklisted_toast, R.color.color_error)
+        verify(view, never()).onImageValidationSuccess()
+    }
+
+    /**
+     * Test for a file name that is too long when the user presses the NEXT button
+     */
+    @Test
+    fun handleCaptionResultForTooLongFileName() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_TOO_LONG, uploadItem)
+        verify(view).showMessage(R.string.file_name_too_long_toast, R.color.color_error)
+        verify(view, never()).onImageValidationSuccess()
+    }
+
+    /**
+     * Test for a file name that is not a valid title when the user presses the NEXT button
+     */
+    @Test
+    fun handleCaptionResultForInvalidFileName() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_INVALID, uploadItem)
+        verify(view).showMessage(R.string.file_name_invalid_toast, R.color.color_error)
+        verify(view, never()).onImageValidationSuccess()
+    }
+
+    /**
+     * Test for a file name with a banned extension when the user presses the NEXT button
+     */
+    @Test
+    fun handleCaptionResultForFileNameWithBannedExtension() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_BANNED_EXTENSION, uploadItem)
+        verify(view).showMessage(R.string.file_name_banned_extension_toast, R.color.color_error)
+        verify(view, never()).onImageValidationSuccess()
     }
 
     /**
