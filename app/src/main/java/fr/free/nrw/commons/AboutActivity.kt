@@ -36,7 +36,9 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
-    @SuppressLint("StringFormatInvalid") // TODO:
+    // Some translations (e.g. fo, and the qq documentation locale) lack the format
+    // placeholder; translations are managed on translatewiki, so suppress rather than edit.
+    @SuppressLint("StringFormatInvalid")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,7 +60,6 @@ class AboutActivity : BaseActivity() {
          */
         binding!!.aboutLicense.setHtmlText(aboutText)
 
-        @SuppressLint("StringFormatMatches") // TODO:
         val improveText =
             String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL)
         binding!!.aboutImprove.setHtmlText(improveText)
