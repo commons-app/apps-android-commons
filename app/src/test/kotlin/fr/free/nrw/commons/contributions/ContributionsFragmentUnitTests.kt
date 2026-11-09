@@ -24,6 +24,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
@@ -35,6 +36,7 @@ import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
@@ -149,11 +151,21 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnCreateOptionsMenu() {
+    fun testOnCreateOptionsMenuUploadBadgeOpensUploadProgress() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(menu.findItem(anyInt())).thenReturn(menuItem)
+        val uploadBadge = TextView(context).apply { id = R.id.pending_uploads_count_badge }
+        val uploadMenuItem = mock(MenuItem::class.java)
+        `when`(menu.findItem(R.id.notifications)).thenReturn(menuItem)
         `when`(menuItem.actionView).thenReturn(notification)
+        `when`(menu.findItem(R.id.upload_tab)).thenReturn(uploadMenuItem)
+        `when`(uploadMenuItem.actionView).thenReturn(uploadBadge)
         fragment.onCreateOptionsMenu(menu, menuInflater)
+        uploadBadge.performClick()
+        val startedIntent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(
+            UploadProgressActivity::class.java.name,
+            startedIntent.component?.className,
+        )
     }
 
     @Test
