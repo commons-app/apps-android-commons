@@ -10,7 +10,6 @@ import java.util.Locale
 
 /** Updates the metadata fields and image for the current file. */
 internal fun MediaDetailFragment.setTextFields(media: Media) {
-    setupImageView()
     binding.mediaDetailTitle.text = media.displayTitle
     binding.mediaDetailDesc.setHtmlText(prettyDescription(media))
     binding.mediaDetailLicense.text = prettyLicense(media)

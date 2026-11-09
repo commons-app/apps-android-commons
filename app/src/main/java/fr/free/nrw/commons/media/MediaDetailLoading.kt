@@ -43,6 +43,9 @@ internal fun MediaDetailFragment.getContributionsFragmentParent(): Contributions
 
 /** Renders the supplied media and refreshes its details. */
 internal fun MediaDetailFragment.displayMediaDetails() {
+    if (mediaDetailPlayer.player == null) {
+        setupMediaView(media!!)
+    }
     setTextFields(media!!)
     viewDisposables.addAll(
         mediaDataExtractor
@@ -92,6 +95,9 @@ internal fun MediaDetailFragment.onMediaRefreshed(media: Media) {
     media.categories = this.media!!.categories
     this.media = media
     setTextFields(media)
+    if (mediaDetailPlayer.player == null) {
+        setupMediaView(media)
+    }
     viewDisposables.addAll(
         mediaDataExtractor
             .fetchDepictionIdsAndLabels(media)

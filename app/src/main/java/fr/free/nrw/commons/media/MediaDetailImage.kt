@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.interfaces.DraweeController
 import com.facebook.imagepipeline.request.ImageRequest
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.DEFAULT_IMAGE_BACKGROUND_COLOR
 
@@ -16,14 +18,6 @@ private const val IMAGE_BACKGROUND_COLOR_KEY = "image_background_color"
 
 /** Opens the full-size image. */
 internal fun MediaDetailFragment.launchZoomActivity(view: View) {
-    launchZoomActivityAfterPermissionCheck(view)
-}
-
-/**
- * launch zoom acitivity after permission check
- * @param view as ImageView
- */
-internal fun MediaDetailFragment.launchZoomActivityAfterPermissionCheck(view: View) {
     if (media!!.imageUrl != null) {
         val ctx: Context = view.context
         val zoomableIntent = Intent(ctx, ZoomableActivity::class.java)
@@ -60,9 +54,11 @@ internal fun MediaDetailFragment.launchZoomActivityAfterPermissionCheck(view: Vi
  * @param scrollWidth the current width of the scrollView
  */
 internal fun MediaDetailFragment.updateAspectRatio(scrollWidth: Int) {
-    if (imageInfoCache != null) {
-        var finalHeight: Int = (scrollWidth * imageInfoCache!!.height) / imageInfoCache!!.width
-        val params: ViewGroup.LayoutParams = binding.mediaDetailImageView.layoutParams
+    val width = mediaDetailPlayer.selected?.width() ?: imageInfoCache?.width ?: 0
+    val height = mediaDetailPlayer.selected?.height() ?: imageInfoCache?.height ?: 0
+    if (width > 0 && height > 0) {
+        var finalHeight: Int = (scrollWidth * height) / width
+        val params: ViewGroup.LayoutParams = binding.mediaDetailMediaContainer.layoutParams
         val spacerParams: ViewGroup.LayoutParams =
             binding.mediaDetailImageViewSpacer.layoutParams
         params.width = scrollWidth
@@ -75,7 +71,7 @@ internal fun MediaDetailFragment.updateAspectRatio(scrollWidth: Int) {
         }
         params.height = finalHeight
         spacerParams.height = finalHeight
-        binding.mediaDetailImageView.layoutParams = params
+        binding.mediaDetailMediaContainer.layoutParams = params
         binding.mediaDetailImageViewSpacer.layoutParams = spacerParams
     }
 }
@@ -85,7 +81,7 @@ internal fun MediaDetailFragment.updateAspectRatio(scrollWidth: Int) {
  * - low resolution thumbnail is shown initially
  * - when the high resolution image is available, it replaces the low resolution image
  */
-internal fun MediaDetailFragment.setupImageView() {
+internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
     val imageBackgroundColor: Int = imageBackgroundColor
     if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
         binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
@@ -95,16 +91,93 @@ internal fun MediaDetailFragment.setupImageView() {
     binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
     binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
+    val fullImageUrl =
+        if (media?.mediaType == MediaType.VIDEO ||
+            media?.mediaType == MediaType.AUDIO
+        ) {
+            media.thumbUrl
+        } else {
+            media?.imageUrl
+        }
     val controller: DraweeController =
         Fresco
             .newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(if (media != null) media!!.thumbUrl else null))
+            .setLowResImageRequest(ImageRequest.fromUri(media?.thumbUrl))
             .setRetainImageOnFailure(true)
-            .setImageRequest(ImageRequest.fromUri(if (media != null) media!!.imageUrl else null))
+            .setImageRequest(ImageRequest.fromUri(fullImageUrl))
             .setControllerListener(aspectRatioListener)
             .setOldController(binding.mediaDetailImageView.controller)
             .build()
     binding.mediaDetailImageView.controller = controller
+}
+
+/**
+ * Sets up the media view based on the media type.
+ *
+ * For audio and video, a play button and thumbnail are shown until playback starts. Images
+ * render without an overlay.
+ */
+internal fun MediaDetailFragment.setupMediaView(media: Media) {
+    // A thumbnail is always shown initially because audio and video have thumbnails.
+    setupImageView(media)
+    configureFullscreenButton(media.mediaType)
+
+    when (media.mediaType) {
+        MediaType.VIDEO,
+        MediaType.AUDIO,
+        -> showMediaPoster(playButton = true)
+        MediaType.IMAGE,
+        MediaType.OTHER,
+        -> Unit
+    }
+}
+
+/** Handles clicks on the media view container by starting playback or opening the zoom view. */
+internal fun MediaDetailFragment.onMediaClicked() {
+    val media = media ?: return
+
+    when (media.mediaType) {
+        MediaType.VIDEO,
+        MediaType.AUDIO,
+        -> prepareMedia()
+        MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
+        MediaType.OTHER -> Unit
+    }
+}
+
+/** Displays the media poster thumbnail with an optional play button overlay. */
+internal fun MediaDetailFragment.showMediaPoster(playButton: Boolean = false) {
+    val isAudio = media?.mediaType == MediaType.AUDIO
+    val playLabel = if (isAudio) R.string.play_audio else R.string.play_video
+
+    binding.mediaDetailMediaContainer.contentDescription =
+        if (playButton) getString(playLabel) else null
+    binding.mediaDetailPlayerView.visibility = View.GONE
+    binding.mediaDetailPlayButton.visibility = if (playButton) View.VISIBLE else View.GONE
+    binding.mediaDetailMediaUnavailable.visibility = View.GONE
+    binding.mediaDetailImageView.visibility = View.VISIBLE
+}
+
+/** Displays the active media player view in place of the poster thumbnail. */
+internal fun MediaDetailFragment.showMediaPlayer() {
+    binding.mediaDetailMediaContainer.contentDescription = null
+    binding.mediaDetailImageView.visibility = View.GONE
+    binding.mediaDetailPlayButton.visibility = View.GONE
+    binding.mediaDetailMediaUnavailable.visibility = View.GONE
+    binding.mediaDetailPlayerView.visibility = View.VISIBLE
+}
+
+/** Displays an unavailable media overlay over the poster thumbnail. */
+internal fun MediaDetailFragment.showMediaUnavailable() {
+    val isAudio = media?.mediaType == MediaType.AUDIO
+    val unavailableLabel =
+        if (isAudio) R.string.audio_unavailable else R.string.video_unavailable
+    binding.mediaDetailMediaUnavailable.setText(unavailableLabel)
+    binding.mediaDetailMediaContainer.contentDescription = getString(unavailableLabel)
+    binding.mediaDetailPlayerView.visibility = View.GONE
+    binding.mediaDetailPlayButton.visibility = View.GONE
+    binding.mediaDetailMediaUnavailable.visibility = View.VISIBLE
+    binding.mediaDetailImageView.visibility = View.VISIBLE
 }
 
 /**
@@ -121,12 +194,12 @@ internal fun MediaDetailFragment.revealMediaDetailWithoutImage(allowRetry: Boole
             scrollView.post { revealMediaDetailWithoutImage(allowRetry = false) }
         } else if (scrollWidth > 0) {
             val height = resources.getDimensionPixelSize(R.dimen.dimen_250)
-            val params = currentBinding.mediaDetailImageView.layoutParams
+            val params = currentBinding.mediaDetailMediaContainer.layoutParams
             val spacerParams = currentBinding.mediaDetailImageViewSpacer.layoutParams
             params.width = scrollWidth
             params.height = height
             spacerParams.height = height
-            currentBinding.mediaDetailImageView.layoutParams = params
+            currentBinding.mediaDetailMediaContainer.layoutParams = params
             currentBinding.mediaDetailImageViewSpacer.layoutParams = spacerParams
             scrollView.visibility = View.VISIBLE
         }

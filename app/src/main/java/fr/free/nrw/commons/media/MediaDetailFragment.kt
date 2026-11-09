@@ -73,8 +73,8 @@ import fr.free.nrw.commons.review.ReviewHelper
 import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.utils.setUnderlinedText
+import okhttp3.OkHttpClient
 import timber.log.Timber
-import java.lang.String.format
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -106,6 +106,13 @@ class MediaDetailFragment :
 
     @Inject
     lateinit var contributionsRepository: ContributionsRepository
+
+    @Inject
+    lateinit var mediaClient: MediaClient
+
+    @Inject
+    @field:Named("media_playback")
+    lateinit var playbackHttpClient: OkHttpClient
 
     @Inject
     lateinit var reasonBuilder: ReasonBuilder
@@ -143,7 +150,12 @@ class MediaDetailFragment :
     internal val onBackPressedCallback =
         object : OnBackPressedCallback(false) {
             override fun handleOnBackPressed() {
-                binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+                if (mediaFullscreen) {
+                    setMediaFullscreen(false)
+                } else {
+                    binding.dummyCaptionDescriptionContainer.visibility = View.GONE
+                    isEnabled = false
+                }
             }
         }
 
@@ -174,6 +186,13 @@ class MediaDetailFragment :
     // Had to make this class variable, to implement various onClicks, which access the media,
     // also I fell why make separate variables when one can serve the purpose
     internal var media: Media? = null
+
+    internal val mediaDetailPlayer by lazy {
+        MediaDetailPlayer(requireContext(), playbackHttpClient, ::handleMediaUnavailable)
+    }
+    internal var mediaRequestInProgress: Boolean = false
+    internal var mediaFullscreen: Boolean = false
+
     internal lateinit var reasonList: ArrayList<String>
     internal lateinit var reasonListEnglishMappings: ArrayList<String>
 
@@ -299,12 +318,8 @@ class MediaDetailFragment :
         binding.mediaDetailCoordinates.setOnClickListener { onMediaDetailCoordinatesClicked() }
         binding.sendThanks.setOnClickListener { sendThanksToAuthor() }
         binding.dummyCaptionDescriptionContainer.setOnClickListener { showCaptionAndDescription() }
-        // The spacer sits over the image so the details can scroll. Clicks on the image hit the spacer.
-        binding.mediaDetailImageViewSpacer.setOnClickListener {
-            launchZoomActivity(
-                binding.mediaDetailImageView,
-            )
-        }
+        binding.mediaDetailMediaContainer.setOnClickListener { onMediaClicked() }
+        binding.mediaDetailImageViewSpacer.setOnClickListener { onMediaClicked() }
         binding.categoryEditButton.setOnClickListener { onCategoryEditButtonClicked() }
         binding.depictionsEditButton.setOnClickListener { onDepictionsEditButtonClicked() }
         binding.seeMore.setOnClickListener { onSeeMoreClicked() }
@@ -500,6 +515,25 @@ class MediaDetailFragment :
             }
         }
 
+    /**
+     * Pauses media playback.
+     *
+     * Called when the user navigates away from this media.
+     */
+    fun pauseMedia() {
+        // The pager can call this method on a fragment that has already been
+        // detached, and creating the player (lazy) needs an attached fragment,
+        // so skip the pause as there's nothing to pause anyway.
+        if (isAdded) {
+            mediaDetailPlayer.pause()
+        }
+    }
+
+    override fun onStop() {
+        mediaDetailPlayer.pause()
+        super.onStop()
+    }
+
     override fun onDestroyView() {
         if (layoutListener != null && view != null) {
             // old Android was on crack. CRACK IS WHACK
@@ -507,7 +541,9 @@ class MediaDetailFragment :
             layoutListener = null
         }
 
+        setMediaFullscreen(false)
         compositeDisposable.clear()
+        cleanupMediaPlayer()
 
         super.onDestroyView()
     }
@@ -518,6 +554,8 @@ class MediaDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+        configureMediaPlayerView(binding.mediaDetailPlayerView)
+        configureMediaPlayerView(binding.mediaDetailFullscreenPlayerView)
         if (activity is MainActivity) {
             // explicitly hides the tabs when the media details screen is opened.
             (activity as MainActivity).hideTabs()
