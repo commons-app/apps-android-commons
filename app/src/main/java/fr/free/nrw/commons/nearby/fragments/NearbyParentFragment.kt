@@ -2121,7 +2121,6 @@ class NearbyParentFragment :
 
     fun setTabItemContributions() {
         (activity as MainActivity).binding?.pager?.currentItem
-        // TODO
     }
 
     /**
