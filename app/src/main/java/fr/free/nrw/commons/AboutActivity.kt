@@ -36,9 +36,9 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
+    @SuppressLint("StringFormatInvalid")
     // Some translations (e.g. fo, and the qq documentation locale) lack the format
     // placeholder; translations are managed on translatewiki, so suppress rather than edit.
-    @SuppressLint("StringFormatInvalid")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
