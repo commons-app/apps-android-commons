@@ -298,36 +298,7 @@ class ContributionsFragment :
             uploadMenuItemActionView.findViewById(
                 R.id.pending_uploads_image_view,
             )
-        if (pendingUploadsImageView != null) {
-            pendingUploadsImageView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
-        if (pendingUploadsCountTextView != null) {
-            pendingUploadsCountTextView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
-        if (uploadsErrorTextView != null) {
-            uploadsErrorTextView!!.setOnClickListener { view: View? ->
-                startActivity(
-                    Intent(
-                        context,
-                        UploadProgressActivity::class.java,
-                    ),
-                )
-            }
-        }
+        setupUploadClickListeners()
         notification.setOnClickListener { view: View? ->
             context?.let {
                 startYourself(
@@ -336,6 +307,16 @@ class ContributionsFragment :
                 )
             }
         }
+    }
+
+    private fun setupUploadClickListeners() {
+        val listener =
+            View.OnClickListener {
+                startActivity(Intent(context, UploadProgressActivity::class.java))
+            }
+        pendingUploadsImageView?.setOnClickListener(listener)
+        pendingUploadsCountTextView?.setOnClickListener(listener)
+        uploadsErrorTextView?.setOnClickListener(listener)
     }
 
     @SuppressLint("CheckResult")

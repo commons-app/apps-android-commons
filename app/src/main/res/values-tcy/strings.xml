@@ -5,6 +5,7 @@
 * Chidananda Kampa
 * Kiranpoojary
 * Lokesha kunchadka
+* Nicolas Raoul
 * Ravi Mundkur
 * Vishwanatha Badikana
 -->
@@ -242,7 +243,7 @@
   <string name="error_loading_categories">ವರ್ಗೊಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="search_tab_title_media" fuzzy="true">ಮಾಧ್ಯಮ</string>
   <string name="search_tab_title_categories" fuzzy="true">ವರ್ಗೊಲು</string>
-  <string name="successful_wikidata_edit">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ %1$ ಗು ಸೇರಾಂಡ್!</string>
+  <string name="successful_wikidata_edit">ವಿಕಿಡೇಟೊಡು ಆಕೃತಿನ್ %1$s ಗು ಸೇರಾಂಡ್!</string>
   <string name="wikidata_edit_failure">ಹೊಂದಿಕೆ ಆಪಿನ ವಿಕಿಡೇಟಾ ವಸ್ತುನು ಕಾಲನವಿ ಮಲ್ಪುನ ವಿಫಲವಾಂಡ್!</string>
   <string name="menu_set_wallpaper">ಗೋಡೆಕಾಕಜಿ ಆದ್ ಗೋಡಿಸಾಲೆ</string>
   <string name="wallpaper_set_successfully">ಗೋಡೆಕಾಕಜಿ  ಸಫಲವಾದ್ ಗೋಡಣೆಯಾಂಡ್!</string>
@@ -257,7 +258,7 @@
   <string name="screenshot_answer">ಜಾಲತಾನೊಲೆನ ಪರದೆಚಿತ್ರೊಲು ನಿಷ್ಪನ್ನ ಕಾಯಕೊಲು ಇಂದ್ ಪಿನೊಲಿ, ಬುಕ್ಕೊ ಜಾಲತಾನೊಡೆ ಒವ್ವೆ ಕೃತಿಸ್ವಾಮ್ಯೊದ ಉಲಾಯಿ ಬರ್ಪುಂಡು. ಇಂಚಿನವೆನ್ ಲೇಖಕನ ಅನುಮತಿ ಗೆತೊಂದು ಬಳಸೊಲಿ. ಅನುಮತಿದಾಂತೆ ಅರೆನ ಕಾಯಕೊದ ಆಧಾರೊಡು ಈರ್ ರಚಿಸಾಯಿನ ಒವ್ವೆ ಕಲಾಕೃತಿ,  ನ್ಯಾಯವಾದ್ ಮೂಲ ಲೇಖಕನ ಸೊತ್ತಾದ್ ಲೈಸನ್ಸ್ ಆವಂದಿನ ಪ್ರತಿ ಇಂದ್ ಪಿನೊಡಾಪುಂಡು.</string>
   <string name="blurry_image_answer">ಗುಣಮಾನದ  ಆಕೃತಿಲೆನ್ ಒಟ್ಟು ಮಲ್ಪುನವು ಕಾಮನ್ಸ್\'ದ ಗುರಿಕುಲೆಡ್ ಒಂಜಿ ಆದುಂಡು. ಆಯಿನೆರ್ದಾವರಾ, ಮಂಜಾದಿಪ್ಪುನ ಆಕೃತಿಲೆನ್ ಮಿತೇರಾವರೆ ಬಲ್ಲಿ. ಏಪಲಾ ಎಡ್ಡೆ ಬೊಲ್ಪುದ  ಪೊರ್ಲುದ ಚಿತ್ರೊಲೆನ್ ದೆಪ್ಪರೆ ಯತ್ನ ಮಲ್ಪುಲೆ.</string>
   <string name="construction_event_answer">ತಂತ್ರಜ್ಞಾನ ಇಜಿಂಡ ಸಂಸ್ಕೃತಿ ತೋಜಾವುನ ಚಿತ್ರೊಲೆಗ್ ಕಾಮನ್ಸ್\'ಡು ಬಾರೀ ಸ್ವಾಗತ ಉಂಡು.</string>
-  <string name="congratulatory_message_quiz">ಇರೆನ  %1$ ಉತ್ತರೊಲು ಸರಿಯಾದುಂಡು. ಧನ್ಯವಾದೊಲು!</string>
+  <string name="congratulatory_message_quiz">ಇರೆನ  %1$s ಉತ್ತರೊಲು ಸರಿಯಾದುಂಡು. ಧನ್ಯವಾದೊಲು!</string>
   <string name="warning_for_no_answer">ಪ್ರಶ್ನೆಗ್ ಉತ್ತರ ಕೊರಿಯರೆ ರಡ್ಡ್ ಆಯ್ಲೆಲೆಡ್ ಒಂಜೆನ್ ಪೆಜಿಲೆ.</string>
   <string name="user_not_logged_in" fuzzy="true">ಉಳಗಮನದ ಕಲಾಪ ಮುಗಿದಿಂಡ್, ದಯಮಲ್ತ್ ಕುಡಾ ಉಳಗಮನ ಮಲ್ಪುಲೆ.</string>
   <string name="quiz_result_share_message">ಇರೆನ ರಸಪ್ರಶ್ನೆನ್ ಇರೆನ ದೋಸ್ತಿಲೆಗ್ ಪಟ್ಟುಲೆ.</string>
