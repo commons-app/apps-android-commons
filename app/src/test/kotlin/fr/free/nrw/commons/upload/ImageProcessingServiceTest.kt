@@ -263,4 +263,12 @@ class ImageProcessingServiceTest {
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
         assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
     }
+
+    @Test
+    fun checkIfFileAlreadyExistsReturnsOkWhenOriginalStreamIsNull() {
+        val uri = mock(Uri::class.java)
+        `when`(appContext.contentResolver.openInputStream(uri)).thenReturn(null)
+        val result = imageProcessingService!!.checkIfFileAlreadyExists(uri, uri).blockingGet()
+        assertEquals(ImageUtils.IMAGE_OK, result)
+    }
 }
