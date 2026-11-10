@@ -34,7 +34,6 @@
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
-    <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: Remove when we're able to initialize Fresco in test builds.</ID>
     <ID>ForbiddenComment:CommonsApplication.kt$CommonsApplication$// TODO: fix preference manager</ID>
     <ID>ForbiddenComment:ContributionsFragment.kt$ContributionsFragment$// TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562</ID>
@@ -43,7 +42,6 @@
     <ID>ForbiddenComment:LoginClient.kt$LoginClient$// TODO: Find a better way to boil up the warning about 2FA</ID>
     <ID>ForbiddenComment:MwQueryPage.kt$MwQueryPage$// TODO: Handle null values in lists during deserialization, perhaps with a new</ID>
     <ID>ForbiddenComment:MwQueryResult.kt$MwQueryResult$// TODO: Looks like result pages and redirects can also be matched on the "index"</ID>
-    <ID>ForbiddenComment:NamespaceTypeAdapter.kt$NamespaceTypeAdapter$// TODO: remove after April 2017, when all older namespaces have been deserialized.</ID>
     <ID>ForbiddenComment:NearbyParentFragment.kt$NearbyParentFragment$/* * FIXME: With the revamp of the location permission helper in the MR * #5494[1], there is a doubt that the following code is redundant. * If we could confirm the same, the following code can be removed. If it * turns out to be necessary, we could replace this with a comment * clarifying why it is necessary. * * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794 */</ID>
     <ID>ForbiddenComment:NearbyParentFragment.kt$NearbyParentFragment$// TODO: Decide button text for fitting in the screen</ID>
     <ID>ForbiddenComment:PageProperties.kt$PageProperties$* True if the user who first requested this page can edit this page * FIXME: This is not a true page property, since it depends on current user.</ID>
