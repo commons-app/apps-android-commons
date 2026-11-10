@@ -67,7 +67,7 @@ class QuizChecker
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                        { uploadCount -> setTotalUploadCount(uploadCount) },
+                        { uploadCount -> setTotalUploadCount(uploadCount.count) },
                         { t -> Timber.e(t, "Fetching upload count failed") },
                     ),
             )

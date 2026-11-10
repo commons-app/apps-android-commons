@@ -36,24 +36,30 @@ class CommonsUserStats
         }
 
         /**
-         * Current files for [userName], at most [MAX_FALLBACK_UPLOADS].
-         * Contributions requests this on launch, so a prolific uploader must not page the whole list.
+         * Current files for [userName], at most [MAX_FALLBACK_UPLOADS]. The count is capped when
+         * more files are left. Contributions requests this on launch, so a prolific uploader must
+         * not page the whole list.
          */
-        internal fun countUploadsFromCommonsApi(userName: String): Int {
+        internal fun countUploadsFromCommonsApi(userName: String): UploadCount {
             var uploads = 0
-            queryCommonsApi(
-                mapOf(
-                    "list" to "allimages",
-                    "aiuser" to userName,
-                    "aisort" to "timestamp",
-                    "aiprop" to "timestamp",
-                    "ailimit" to "500",
-                ),
-                stopAfterBatch = { uploads >= MAX_FALLBACK_UPLOADS },
-            ) { query ->
-                uploads += query.getAsJsonArray("allimages")?.size() ?: 0
+            val hasMoreFiles =
+                queryCommonsApi(
+                    mapOf(
+                        "list" to "allimages",
+                        "aiuser" to userName,
+                        "aisort" to "timestamp",
+                        "aiprop" to "timestamp",
+                        "ailimit" to "500",
+                    ),
+                    stopAfterBatch = { uploads >= MAX_FALLBACK_UPLOADS },
+                ) { query ->
+                    uploads += query.getAsJsonArray("allimages")?.size() ?: 0
+                }
+            return if (hasMoreFiles || uploads > MAX_FALLBACK_UPLOADS) {
+                UploadCount(MAX_FALLBACK_UPLOADS, isCapped = true)
+            } else {
+                UploadCount(uploads)
             }
-            return minOf(uploads, MAX_FALLBACK_UPLOADS)
         }
 
         /**
@@ -179,13 +185,14 @@ class CommonsUserStats
 
         /**
          * Runs an action=query request against Commons, following continuation, and passes each
-         * "query" object to [onBatch].
+         * "query" object to [onBatch]. Returns true when [stopAfterBatch] stopped it before the
+         * last page.
          */
         private fun queryCommonsApi(
             params: Map<String, String>,
             stopAfterBatch: () -> Boolean = { false },
             onBatch: (JsonObject) -> Unit,
-        ) {
+        ): Boolean {
             var continuation = emptyMap<String, String>()
             do {
                 val urlBuilder =
@@ -203,13 +210,14 @@ class CommonsUserStats
                 }
                 val json = JsonParser.parseString(body.string()).asJsonObject
                 json.getAsJsonObject("query")?.let(onBatch)
-                if (stopAfterBatch()) {
-                    return
-                }
                 continuation = json
                     .getAsJsonObject("continue")
                     ?.entrySet()
                     ?.associate { it.key to it.value.asString } ?: emptyMap()
+                if (continuation.isNotEmpty() && stopAfterBatch()) {
+                    return true
+                }
             } while (continuation.isNotEmpty())
+            return false
         }
     }

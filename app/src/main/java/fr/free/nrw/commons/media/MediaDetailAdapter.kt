@@ -25,8 +25,12 @@ class MediaDetailAdapter(
                 Timber.d("Skipping getItem. Returning as activity is destroyed!")
                 return Fragment()
             }
-            mediaDetailPagerFragment.binding!!.mediaDetailsPager.postDelayed(
-                { mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu() },
+            mediaDetailPagerFragment.binding?.mediaDetailsPager?.postDelayed(
+                {
+                    if (mediaDetailPagerFragment.activity != null) {
+                        mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu()
+                    }
+                },
                 5,
             )
         }

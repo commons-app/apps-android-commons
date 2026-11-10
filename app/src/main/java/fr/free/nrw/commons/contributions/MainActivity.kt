@@ -15,6 +15,7 @@ import fr.free.nrw.commons.databinding.MainBinding
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.navtab.NavTabLayout
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
@@ -291,7 +292,7 @@ fun MainActivity.showNearby() {
     tabHandler.showNearby()
 }
 
-fun MainActivity.setNumOfUploads(uploadCount: Int) {
+fun MainActivity.setNumOfUploads(uploadCount: UploadCount) {
     tabHandler.setNumOfUploads(uploadCount, activeFragment)
 }
 
