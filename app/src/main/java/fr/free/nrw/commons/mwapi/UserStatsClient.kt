@@ -30,7 +30,7 @@ class UserStatsClient
         private val commonsUserStats: CommonsUserStats,
     ) {
         /** Counts uploads using Toolforge, with a bounded Commons fallback. */
-        fun getUploadCount(userName: String?): Single<Int> {
+        fun getUploadCount(userName: String?): Single<UploadCount> {
             val urlBuilder: HttpUrl.Builder =
                 wikiMediaToolforgeUrl
                     .newBuilder()
@@ -55,14 +55,14 @@ class UserStatsClient
                         Timber.w(e, "uploadsbyuser.py failed, counting uploads from the Commons API")
                         null
                     }
-                counted ?: userName?.let {
+                counted?.let { UploadCount(it) } ?: userName?.let {
                     try {
                         commonsUserStats.countUploadsFromCommonsApi(it)
                     } catch (e: IOException) {
                         Timber.e(e, "Commons API upload count failed")
-                        0
+                        UploadCount(0)
                     }
-                } ?: 0
+                } ?: UploadCount(0)
             }
         }
 

@@ -44,6 +44,7 @@ import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
@@ -528,14 +529,14 @@ class ContributionsFragment :
                 compositeDisposable.add(
                     it
                         .subscribe(
-                            { uploadCount: Int -> this.displayUploadCount(uploadCount) },
+                            { uploadCount: UploadCount -> this.displayUploadCount(uploadCount) },
                             { t: Throwable? -> Timber.e(t, "Fetching upload count failed") },
                         ),
                 )
             }
     }
 
-    private fun displayUploadCount(uploadCount: Int) {
+    private fun displayUploadCount(uploadCount: UploadCount) {
         if (requireActivity().isFinishing ||
             resources == null
         ) {
