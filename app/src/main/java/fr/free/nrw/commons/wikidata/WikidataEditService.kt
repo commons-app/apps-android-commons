@@ -30,6 +30,12 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+/** Outcome of the optional Wikidata image edit after a Commons upload. */
+internal data class ImageClaimResult(
+    val revisionId: Long? = null,
+    val skipped: Boolean = false,
+)
+
 /**
  * This class is meant to handle the Wikidata edits made through the app It will talk with MediaWiki
  * Apis to make the necessary calls, log the edits and fire listeners on successful edits
@@ -90,24 +96,34 @@ class WikidataEditService
             }
         }
 
-        fun createClaim(
+        /** Checks the current item before writing a claim because saved places can be stale. */
+        internal fun createClaim(
             wikidataPlace: WikidataPlace?,
             fileName: String,
             captions: Map<String, String>,
-        ): Long? {
+        ): ImageClaimResult {
             if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
                 Timber.d(
                     "Image location and nearby place location mismatched, so Wikidata item won't be edited",
                 )
-                return null
+                return ImageClaimResult()
             }
-            return addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
+            val place = checkNotNull(wikidataPlace)
+            val entity = wikidataClient.getItemForImageEdit(place.id)
+            val statements = checkNotNull(entity.statements)
+            return if (!statements[IMAGE.propertyName].isNullOrEmpty()) {
+                ImageClaimResult(skipped = true)
+            } else {
+                val baseRevision = checkNotNull(entity.lastRevisionId)
+                ImageClaimResult(addImageAndMediaLegends(place, fileName, captions, baseRevision))
+            }
         }
 
-        fun addImageAndMediaLegends(
+        private fun addImageAndMediaLegends(
             wikidataItem: WikidataItem,
             fileName: String,
             captions: Map<String, String>,
+            baseRevision: Long,
         ): Long {
             val p18 =
                 SnakPartial(
@@ -143,7 +159,7 @@ class WikidataEditService
                     Arrays.asList(MEDIA_LEGENDS.propertyName),
                 )
 
-            return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
+            return wikidataClient.setClaim(claim, COMMONS_APP_TAG, baseRevision).blockingSingle()
         }
 
         fun handleImageClaimResult(
