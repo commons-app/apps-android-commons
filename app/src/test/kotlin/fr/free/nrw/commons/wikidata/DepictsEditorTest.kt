@@ -86,9 +86,31 @@ class DepictsEditorTest {
     }
 
     @Test
-    fun `failed deletion completes without adding replacement claims`() {
+    fun `no existing claims skips the deletion and adds the replacements`() {
         whenever(wikiBaseClient.getClaimIdsByProperty("M123", WikidataProperties.DEPICTS.propertyName))
             .thenReturn(Observable.just(emptyList()))
+        whenever(wikiBaseClient.postDeleteClaims(eq("M123"), any())).thenReturn(Observable.just(true))
+        whenever(wikiBaseClient.postEditEntity(eq("M123"), any())).thenReturn(Observable.just(true))
+
+        editor
+            .updateDepictsProperty("123", listOf("Q12"))
+            .test()
+            .await()
+            .assertValue(true)
+            .assertComplete()
+        // Beta builds always remove Q10, so they still send the deletion
+        if (isBetaFlavour) {
+            verify(wikiBaseClient).postDeleteClaims(eq("M123"), any())
+        } else {
+            verify(wikiBaseClient, never()).postDeleteClaims(any(), any())
+        }
+        verify(wikiBaseClient).postEditEntity(eq("M123"), any())
+    }
+
+    @Test
+    fun `failed deletion completes without adding replacement claims`() {
+        whenever(wikiBaseClient.getClaimIdsByProperty("M123", WikidataProperties.DEPICTS.propertyName))
+            .thenReturn(Observable.just(listOf("M123\$claim")))
         whenever(wikiBaseClient.postDeleteClaims(eq("M123"), any())).thenReturn(Observable.just(false))
 
         editor

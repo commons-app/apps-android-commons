@@ -59,8 +59,14 @@ class DepictsEditor
                 .getClaimIdsByProperty(entityId, DEPICTS.propertyName)
                 .switchMap { claimIds ->
                     // Please consider removeClaim scenario for BetaDebug
-                    val data = RemoveClaim.from(if (isBetaFlavour) listOf("Q10") else claimIds)
-                    wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
+                    val claimIdsToRemove = if (isBetaFlavour) listOf("Q10") else claimIds
+                    if (claimIdsToRemove.isEmpty()) {
+                        // Nothing to remove, for example a file without structured data
+                        Observable.just(true)
+                    } else {
+                        val data = RemoveClaim.from(claimIdsToRemove)
+                        wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
+                    }
                 }.doOnError { throwable: Throwable? ->
                     Timber.e(
                         throwable,
