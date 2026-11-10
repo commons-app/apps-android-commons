@@ -2749,11 +2749,10 @@ class NearbyParentFragment :
     private fun passInfoToSheet(place: Place) {
         selectedPlace = place
         dataList = ArrayList()
-        // TODO: Decide button text for fitting in the screen
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_round_star_border_24px,
-                "",
+                resources.getString(fr.free.nrw.commons.R.string.nearby_bookmark),
             ),
         )
         (dataList as ArrayList<BottomSheetItem>).add(
@@ -2773,7 +2772,7 @@ class NearbyParentFragment :
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_feedback_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk),
+                resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk_short),
             ),
         )
         if (place.hasWikipediaLink()) {
