@@ -27,6 +27,7 @@
 * McDutchie
 * Mishidexfc
 * NACHOgao3
+* Nicolas Raoul
 * Peterxy
 * Peterxy12
 * Qiyue2001
@@ -183,7 +184,7 @@
   <string name="display_list_button">列表</string>
   <string name="contributions_subtitle_zero">（尚无上传）</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="depictions_not_found">未找到符合%1$的维基数据项目。</string>
+  <string name="depictions_not_found">未找到符合%1$s的维基数据项目。</string>
   <string name="no_child_classes">%1$s没有子类别</string>
   <string name="no_parent_classes">%1$s没有父类别</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
@@ -556,7 +557,7 @@
   <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
   <string name="review_thanks_explanation">你的感谢会鼓励%1$s</string>
   <string name="review_no_category">该文件未被分类！</string>
-  <string name="review_category_explanation">该图片是在%1$s类别下</string>
+  <string name="review_category_explanation">此图像属于%1$s个分类。</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_thanks_yes_button_text">下一张图片</string>
@@ -604,7 +605,7 @@
   <string name="default_description_language">默认描述语言</string>
   <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if">已提出将%1删除</string>
+  <string name="delete_helper_show_deletion_message_if">已提出将%1$s删除</string>
   <string name="delete_helper_show_deletion_title_failed">失败了</string>
   <string name="delete_helper_show_deletion_message_else">不能请求删除</string>
   <string name="delete_helper_ask_spam_selfie">未在任何条目中使用的自拍</string>
@@ -735,6 +736,8 @@
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
   <string name="cancelling_upload">正在取消上传…</string>
+  <string name="retrying_upload">正在重试上传…</string>
+  <string name="retrying_failed_uploads">正在重试所有失败的上传…</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
   <string name="limited_connection_is_on">限制连接模式启用中。</string>
@@ -916,7 +919,8 @@
   <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
   <string name="nominated_for_deletion_btn">已提名删除</string>
-  <string name="custom_selector_max_image_limit_reached">您最多只能选择%d张图片。</string>
+  <string name="custom_selector_max_image_limit_reached">您最多只能选择%d个图像。</string>
+  <string name="upload_limit_exceeded">只会上传前%1$d个图像。</string>
   <string name="edit_unsupported_format_explanation">应用内编辑仅支持JPEG文件。若要编辑其他格式，请使用第三方工具。</string>
   <string name="license_cc0_description">无版权。您放弃所有权利，任何人都可以以任意形式使用此作品。</string>
   <string name="license_cc_by_description">署名。其他人只要注明您为原作者，即可自由分享和演绎。</string>

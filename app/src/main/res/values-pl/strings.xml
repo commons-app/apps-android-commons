@@ -14,6 +14,7 @@
 * Matlin
 * Matma Rex
 * Mazab IZW
+* Nicolas Raoul
 * Olaf
 * PanWor
 * Rail
@@ -123,7 +124,7 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
-  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
+  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$s</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="title_activity_contributions">Niedawno przesłane</string>
@@ -444,6 +445,7 @@
   <string name="contributions_fragment">Wkład</string>
   <string name="nearby_fragment">W pobliżu</string>
   <string name="notifications">Powiadomienia</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
   <string name="display_nearby_notification_summary">Pokazuj w aplikacji powiadomienia o pobliskich miejscach wymagających zilustrowania</string>
@@ -715,6 +717,8 @@
   <string name="resuming_upload">Wznawianie przesyłania…</string>
   <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
+  <string name="retrying_upload">Ponawianie próby przesyłania…</string>
+  <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>

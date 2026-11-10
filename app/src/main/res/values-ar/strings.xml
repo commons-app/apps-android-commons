@@ -21,6 +21,7 @@
 * Mr. Ibrahem
 * NEHAOUA
 * NancyMilad
+* Nicolas Raoul
 * OsamaK
 * Tala Ali
 * XIDME
@@ -176,9 +177,9 @@
   <string name="display_list_button">القائمة</string>
   <string name="contributions_subtitle_zero">(لا يوجد تحميلات حتى الآن)</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="depictions_not_found">لا توجد عناصر ويكي بيانات مطابقة لـ s$%1</string>
+  <string name="depictions_not_found">لا توجد عناصر ويكي بيانات مطابقة لـ %1$s</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
-  <string name="no_parent_classes">لا يملك تصنيف الأهل  s$%1</string>
+  <string name="no_parent_classes">لا يملك تصنيف الأهل  %1$s</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="title_activity_settings">الإعدادات</string>
@@ -452,12 +453,14 @@
   <string name="images_used_explanation">عدد الصور التي قمت برفعها إلى كومنز والتي تم استخدامها في مقالات ويكيميديا</string>
   <string name="error_occurred">حدث خطأ!</string>
   <string name="notifications_channel_name_all">إشعار كومنز</string>
+  <string name="notifications_channel_name_uploads">تقدم التحميل</string>
   <string name="preference_author_name_toggle">استخدم اسم مؤلف مخصصا</string>
   <string name="preference_author_name_toggle_summary">استخدم اسم مؤلف مخصصا بدلا من اسم المستخدم الخاص بك أثناء رفع الصور</string>
   <string name="preference_author_name">اسم المؤلف المخصص</string>
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary">عرض إشعار داخل-التطبيق In-app لأقرب مكان يحتاج إلى صور</string>
@@ -734,6 +737,8 @@
   <string name="resuming_upload">جاري استئناف التحميل ...</string>
   <string name="pausing_upload">جاري إيقاف التحميل مؤقتًا ..</string>
   <string name="cancelling_upload">الغاء التحميل</string>
+  <string name="retrying_upload">إعادة محاولة التحميل…</string>
+  <string name="retrying_failed_uploads">إعادة محاولة جميع عمليات التحميل الفاشلة...</string>
   <string name="cancel_upload">إلغاء الرفع</string>
   <string name="limited_connection_explanation">لقد قمت بتمكين وضع الاتصال المحدود. جميع عمليات التحميل متوقفة مؤقتًا وستستأنف بمجرد تعطيل هذا الوضع.</string>
   <string name="limited_connection_is_on">وضع الاتصال المحدود قيد التشغيل.</string>
@@ -921,6 +926,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
   <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
+  <string name="upload_limit_exceeded">سيتم تحميل أول %1$d صورة فقط.</string>
   <string name="edit_unsupported_format_explanation">تتوفر خاصية التحرير داخل التطبيق لملفات JPEG فقط. لتحرير الصيغ الأخرى، يُرجى استخدام أداة خارجية.</string>
   <string name="license_cc0_description">لا توجد حقوق ملكية فكرية. أنت تتنازل عن جميع الحقوق، لذا يمكن لأي شخص استخدام هذا العمل بأي شكل من الأشكال.</string>
   <string name="license_cc_by_description">الإسناد. يحق للآخرين المشاركة والتعديل طالما أنهم ينسبون الفضل إليك.</string>
@@ -934,6 +940,8 @@
   <string name="failed_to_apply_crop">فشل في تطبيق المحصول</string>
   <string name="failed_to_save_image">فشل حفظ الصورة</string>
   <string name="format_jpeg">جيه بي إي جي</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
   <string name="format_ogg_audio">OGG (صوتي)</string>
   <string name="unsupported_format_title">تنسيق غير مدعوم</string>
   <string name="unsupported_format_desc">تعذر فتح الملفات المحددة. يتطلب ويكيميديا كومنز التنسيقات التالية بشكل صارم: \n\n%s</string>

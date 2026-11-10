@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -20,9 +21,10 @@ import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
 import fr.free.nrw.commons.notification.NotificationController
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
@@ -34,7 +36,9 @@ import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -86,7 +90,10 @@ class ContributionsFragmentUnitTests {
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
-    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    private lateinit var userStatsClient: UserStatsClient
+
+    @Mock
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
@@ -124,7 +131,7 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
-        Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "userStatsClient", userStatsClient)
     }
 
     @Test
@@ -144,11 +151,21 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnCreateOptionsMenu() {
+    fun testOnCreateOptionsMenuUploadBadgeOpensUploadProgress() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(menu.findItem(anyInt())).thenReturn(menuItem)
+        val uploadBadge = TextView(context).apply { id = R.id.pending_uploads_count_badge }
+        val uploadMenuItem = mock(MenuItem::class.java)
+        `when`(menu.findItem(R.id.notifications)).thenReturn(menuItem)
         `when`(menuItem.actionView).thenReturn(notification)
+        `when`(menu.findItem(R.id.upload_tab)).thenReturn(uploadMenuItem)
+        `when`(uploadMenuItem.actionView).thenReturn(uploadBadge)
         fragment.onCreateOptionsMenu(menu, menuInflater)
+        uploadBadge.performClick()
+        val startedIntent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(
+            UploadProgressActivity::class.java.name,
+            startedIntent.component?.className,
+        )
     }
 
     @Test
@@ -358,5 +375,39 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
+    }
+
+    @Test
+    fun testRetryUploadSkipsPermanentFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "filetype-banned",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(0, contribution.retries)
+        verifyNoInteractions(contributionsPresenter)
+    }
+
+    @Test
+    fun testRetryUploadRetriesTemporaryFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "stashfailed",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(1, contribution.retries)
+        verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
     }
 }

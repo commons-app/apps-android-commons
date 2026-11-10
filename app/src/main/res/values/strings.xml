@@ -105,6 +105,10 @@
   <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>
   <string name="add_caption_toast">Please provide a caption for this file</string>
+  <string name="file_name_blacklisted_toast">Commons does not accept this file name. Please use a more descriptive caption.</string>
+  <string name="file_name_too_long_toast">This caption is too long to be used as a file name. Please shorten it.</string>
+  <string name="file_name_invalid_toast">This caption cannot be used as a file name on Commons. Please change it.</string>
+  <string name="file_name_banned_extension_toast">This caption contains a file type like \".com\". Please change it.</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
   <string name="login_failed_network">Unable to log in - network failure</string>
@@ -124,6 +128,7 @@
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
   <string name="contributions_subtitle_zero">(No uploads yet)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="depictions_not_found">No Wikidata items matching %1$s found</string>
   <string name="no_child_classes">%1$s has no child classes</string>
@@ -220,6 +225,12 @@
   <string name="media_detail_license">License</string>
   <string name="media_detail_coordinates">Coordinates</string>
   <string name="media_detail_coordinates_empty">None provided</string>
+  <string name="playback_quality">Playback quality</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Video quality</string>
+  <string name="video_quality_auto">Automatic</string>
+  <string name="video_quality_higher">Higher picture quality</string>
+  <string name="video_quality_data_saver">Data saver</string>
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
@@ -723,6 +734,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="resuming_upload">Resuming upload…</string>
   <string name="pausing_upload">Pausing upload…</string>
   <string name="cancelling_upload">Cancelling upload…</string>
+  <string name="retrying_upload">Retrying upload…</string>
+  <string name="retrying_failed_uploads">Retrying all failed uploads…</string>
   <string name="cancel_upload">Cancel Upload</string>
   <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
@@ -894,6 +907,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="grey_pin">Now checking whether this place has a picture.</string>
 
   <string name="error_while_loading">Error while loading</string>
+  <string name="play_video">Play video</string>
+  <string name="play_audio">Play audio</string>
+  <string name="video_unavailable">Video unavailable. Tap to try again.</string>
+  <string name="audio_unavailable">Audio unavailable. Tap to try again.</string>
   <string name="no_usages_found">No usages found</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Other wikis</string>
@@ -913,6 +930,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
   <string name="nominated_for_deletion_btn">Nominated for Deletion</string>
   <string name="custom_selector_max_image_limit_reached">You can only select a maximum of %d images.</string>
+  <string name="upload_limit_exceeded">Only the first %1$d images will be uploaded.</string>
   <string name="edit_unsupported_format_explanation">In-app editing is only available for JPEG files. To edit other formats, please use a third-party tool.</string>
   <string name="license_cc0_description">No copyright. You release all rights so anyone can use this work in any way.</string>
   <string name="license_cc_by_description">Attribution. Others are free to share and adapt as long as they give you credit.</string>

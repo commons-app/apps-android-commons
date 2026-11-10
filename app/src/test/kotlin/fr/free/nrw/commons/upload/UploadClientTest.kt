@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.KArgumentCaptor
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -16,8 +17,11 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
+import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
+import io.reactivex.Single
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import junit.framework.TestCase.assertTrue
@@ -292,6 +296,76 @@ class UploadClientTest {
         result.assertNoErrors()
         assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
         assertEquals(filekey, result.values()[0].fileKey)
+    }
+
+    @Test
+    fun uploadFileToStash_handlesNullUploadResultInChunkInfoGracefully() {
+        val mockFile = mock<File>()
+        val chunkInfo = mock<ChunkInfo>()
+        whenever(mockFile.length()).thenReturn(10)
+        whenever(chunkInfo.uploadResult).thenReturn(null)
+        whenever(chunkInfo.indexOfNextChunkToUpload).thenReturn(0)
+
+        whenever(contribution.isCompleted()).thenReturn(false)
+        whenever(contribution.pageId).thenReturn(pageId)
+        whenever(contributionDao.getContribution(pageId)).thenReturn(contribution)
+        whenever(contribution.chunkInfo).thenReturn(chunkInfo)
+        whenever(contribution.dateModified).thenReturn(Date(System.currentTimeMillis()))
+        whenever(timeProvider.currentTimeMillis()).thenReturn(System.currentTimeMillis())
+
+        whenever(contribution.localUriPath).thenReturn(mockFile)
+        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize)))
+            .thenReturn(listOf(mockFile))
+
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(uploadResponse))
+
+        val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
+        result.assertNoErrors()
+    }
+
+    @Test
+    fun testCheckFileName_Blacklisted() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("blacklisted"))))
+
+        uploadClient.checkFileName("Photo.jpg").test().assertValue(FileNameCheck.BLACKLISTED)
+    }
+
+    @Test
+    fun testCheckFileName_Ok() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Market in Lagos.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.checkFileName("Market in Lagos.jpg").test().assertValue(FileNameCheck.OK)
+    }
+
+    @Test
+    fun testCheckFileName_ChecksNameAsMediaWikiUploadsIt() {
+        // MediaWiki uploads "Market {Lagos}.jpg" as "Market -Lagos-.jpg"
+        whenever(uploadInterface.checkTitleBlacklist("File:Market -Lagos-.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.checkFileName("Market {Lagos}.jpg").test().assertValue(FileNameCheck.OK)
+    }
+
+    @Test
+    fun testCheckFileName_InvalidTitle() {
+        val error = mock<MwLegacyServiceError> { on { code } doReturn "invalidtitle" }
+        whenever(uploadInterface.checkTitleBlacklist("File:A~~~b.jpg"))
+            .thenReturn(Single.error(MwIOException("MediaWiki API returned error", error)))
+
+        uploadClient.checkFileName("A~~~b.jpg").test().assertValue(FileNameCheck.INVALID)
+    }
+
+    @Test
+    fun testCheckFileName_OtherErrorsArePassedOn() {
+        val exception = IOException("Unsuccessful response")
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.error(exception))
+
+        uploadClient.checkFileName("Photo.jpg").test().assertError(exception)
     }
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()

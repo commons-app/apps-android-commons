@@ -678,6 +678,8 @@
   <string name="resuming_upload">Yükləmə davam etdirilir…</string>
   <string name="pausing_upload">Yükləmə dayandırılır…</string>
   <string name="cancelling_upload">Yükləmə ləğv edilir…</string>
+  <string name="retrying_upload">Yükləməyə yenidən cəhd edilir…</string>
+  <string name="retrying_failed_uploads">Bütün uğursuz yükləmələr yenidən cəhd edilir…</string>
   <string name="cancel_upload">Yükləməni ləğv et</string>
   <string name="limited_connection_explanation">Siz məhdud bağlantı rejimini aktiv etmisiniz. Bütün yükləmələr dayandırılıb və siz bu rejimi söndürdükdən sonra davam edəcək.</string>
   <string name="limited_connection_is_on">Məhdud bağlantı rejimi aktivdir.</string>
@@ -860,6 +862,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">%1$s tərəfindən yaradılmış və %2$s tərəfindən yüklənmişdir</string>
   <string name="nominated_for_deletion_btn">Silinməyə namizəd göstərilib</string>
   <string name="custom_selector_max_image_limit_reached">Siz maksimum %d şəkil seçə bilərsiniz.</string>
+  <string name="upload_limit_exceeded">Yalnız ilk %1$d şəkil yüklənəcək.</string>
   <string name="edit_unsupported_format_explanation">Tətbiqdaxili redaktə yalnız JPEG faylları üçün mümkündür. Digər formatları redaktə etmək üçün üçüncü partiya alətlərdən istifadə edin.</string>
   <string name="license_cc0_description">Müəllif hüquqları yoxdur. Siz bütün hüquqları buraxırsınız ki, hər kəs bu əsərdən istənilən şəkildə istifadə edə bilsin.</string>
   <string name="license_cc_by_description">Atribusiya. Digərləri sizə istinad verdikləri müddətcə paylaşmaqda və uyğunlaşdırmaqda sərbəstdirlər.</string>

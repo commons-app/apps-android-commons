@@ -4,6 +4,7 @@
 * Fwolff
 * Joris Darlington Quarshie
 * Naudefj
+* Nicolas Raoul
 * Whym
 -->
 <resources>
@@ -239,7 +240,7 @@
   <string name="showcase_view_whole_nearby_activity">Dit is die plekke in jou omgewing wat foto\'s benodig om hul Wikipedia-artikels te illustreer.\n\nAs u op \'SOEK HIERDIE GEBIED\' klik, word die kaart gesluit en \'n nabygeleë soektog na daardie plek begin.</string>
   <string name="no_images_found">Geen afbeeldings gevind!</string>
   <string name="error_loading_images">Daar is \'n fout opgetree tydens se die laden van die afbeeldings.</string>
-  <string name="image_uploaded_by">Opgelaai deur:%$1s</string>
+  <string name="image_uploaded_by">Opgelaai deur: %1$s</string>
   <string name="block_notification_title">geblokkeer</string>
   <string name="block_notification">U word geblokkeer om Commons te redigeer</string>
   <string name="app_widget_heading">Foto van die dag</string>

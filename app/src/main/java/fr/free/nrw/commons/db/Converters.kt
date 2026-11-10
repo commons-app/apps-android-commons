@@ -5,6 +5,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.location.LatLng
@@ -41,6 +42,20 @@ object Converters {
     @JvmStatic
     fun stringToDepicts(objectList: String?): DepictedItem? =
         readObjectWithTypeToken(objectList, object : TypeToken<DepictedItem>() {})
+
+    /**
+     * Converts a media type to the name stored in the Room database.
+     */
+    @TypeConverter
+    @JvmStatic
+    fun mediaTypeToString(mediaType: MediaType): String = mediaType.name
+
+    /**
+     * Converts a name stored in the Room database back to a media type.
+     */
+    @TypeConverter
+    @JvmStatic
+    fun stringToMediaType(name: String): MediaType = MediaType.valueOf(name)
 
     @TypeConverter
     @JvmStatic

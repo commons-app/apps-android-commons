@@ -406,6 +406,7 @@
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
   <string name="display_nearby_notification_summary">Прикажувај известувања во прилогот за најблиското место без слика</string>
@@ -673,6 +674,8 @@
   <string name="resuming_upload">Продолжувам со подигањето…</string>
   <string name="pausing_upload">Го паузирам подигањето…</string>
   <string name="cancelling_upload">Го откажувам подигањето…</string>
+  <string name="retrying_upload">Повторно се обидувам да подигнам…</string>
+  <string name="retrying_failed_uploads">Повторно се обидувам да ги извршам сите неуспешни подигања…</string>
   <string name="cancel_upload">Откажи подигање</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
@@ -857,6 +860,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
   <string name="nominated_for_deletion_btn">Предложено за бришење</string>
   <string name="custom_selector_max_image_limit_reached">Можете да изберете највеќе %d слики.</string>
+  <string name="upload_limit_exceeded">Ќе се подигнат само првите %1$d слики.</string>
   <string name="edit_unsupported_format_explanation">Уредувањето во прилог е достпано само за JPEG-податотеки. За да уредувате други формати послужете се со други алатки.</string>
   <string name="license_cc0_description">Без авторски права. Ги препуштате сите права на секого што сака да го користи делово на било кој начин.</string>
   <string name="license_cc_by_description">Наведи извор. Другите слободно можат да го споделуваат и прилагодуваат делото под услов да ве наведат.</string>
