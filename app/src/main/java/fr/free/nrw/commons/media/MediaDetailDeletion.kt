@@ -64,6 +64,12 @@ internal fun MediaDetailFragment.onDeletionPageExists(deletionPageExists: Boolea
 /** Opens the file nomination dialog. */
 @SuppressLint("StringFormatInvalid")
 internal fun MediaDetailFragment.onDeleteButtonClicked() {
+    /** Lets Back cancel the dialog while a tap outside still keeps it open. */
+    fun AlertDialog.cancelOnBackOnly() {
+        setCancelable(true)
+        setCanceledOnTouchOutside(false)
+    }
+
     if (isOwnUpload()) {
         val languageAdapter: ArrayAdapter<String> =
             ArrayAdapter(
@@ -93,6 +99,7 @@ internal fun MediaDetailFragment.onDeleteButtonClicked() {
                 },
                 spinner,
             )
+        dialog?.cancelOnBackOnly()
         if (isDeleted) {
             dialog!!.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
         }
@@ -115,6 +122,7 @@ internal fun MediaDetailFragment.onDeleteButtonClicked() {
                 },
                 input,
             )
+        d?.cancelOnBackOnly()
         input.addTextChangedListener(
             object : TextWatcher {
                 fun handleText() {
