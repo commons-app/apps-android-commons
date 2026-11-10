@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.any
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import io.reactivex.Single
@@ -50,7 +51,7 @@ class QuizCheckerUnitTest {
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         quizChecker = QuizChecker(sessionManager, userStatsClient, jsonKvStore)
         Mockito.`when`(sessionManager.userName).thenReturn("")
-        Mockito.`when`(userStatsClient.getUploadCount(any())).thenReturn(Single.just(0))
+        Mockito.`when`(userStatsClient.getUploadCount(any())).thenReturn(Single.just(UploadCount(0)))
         Mockito
             .`when`(userStatsClient.getAchievements(any()))
             .thenReturn(Single.just(feedbackResponse))
