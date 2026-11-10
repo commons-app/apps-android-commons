@@ -128,6 +128,7 @@
   <string name="refresh_button">Refresh</string>
   <string name="display_list_button">List</string>
   <string name="contributions_subtitle_zero">(No uploads yet)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="depictions_not_found">No Wikidata items matching %1$s found</string>
   <string name="no_child_classes">%1$s has no child classes</string>

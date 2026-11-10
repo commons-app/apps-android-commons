@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.navtab.NavTabLayout
 import fr.free.nrw.commons.navtab.NavTabLoggedOut
@@ -86,21 +87,25 @@ class MainTabHandler(
 
     /**
      * Updates activity title with upload count when Contributions tab is active.
+     * A capped count is shown with a plus, for example "(1000+)".
      */
     fun setNumOfUploads(
-        uploadCount: Int,
+        uploadCount: UploadCount,
         activeFragment: ActiveFragment?,
     ) {
         if (activeFragment == ActiveFragment.CONTRIBUTIONS) {
+            val count = uploadCount.count
             val subtitle =
-                if (uploadCount != 0) {
-                    activity.resources.getQuantityString(
-                        R.plurals.contributions_subtitle,
-                        uploadCount,
-                        uploadCount,
-                    )
-                } else {
-                    activity.getString(R.string.contributions_subtitle_zero)
+                when {
+                    uploadCount.isCapped ->
+                        activity.getString(R.string.contributions_subtitle_capped, count)
+                    count != 0 ->
+                        activity.resources.getQuantityString(
+                            R.plurals.contributions_subtitle,
+                            count,
+                            count,
+                        )
+                    else -> activity.getString(R.string.contributions_subtitle_zero)
                 }
             activity.title = "${activity.resources.getString(R.string.contributions_fragment)} $subtitle"
         }
