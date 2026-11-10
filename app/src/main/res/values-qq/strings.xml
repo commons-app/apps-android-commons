@@ -133,6 +133,7 @@
   <string name="refresh_button">{{Identical|Refresh}}</string>
   <string name="display_list_button">This is an action button, usually a verb (just like Continue, Cancel, Delete, Search, and so on).\n{{Identical|List}}</string>
   <string name="contributions_subtitle_zero">Notice in the Contributions screen when the user didn\'t upload anything. (Lego.)</string>
+  <string name="contributions_subtitle_capped">Shown after the Contributions screen title when the user has more uploads than the app could count, for example \"(1000+)\". %1$d is that number. (Lego.)</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="depictions_not_found">%1$s - search query.</string>
   <string name="no_child_classes">%1$s is a Wikidata item name.</string>
