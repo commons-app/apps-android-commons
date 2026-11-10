@@ -126,7 +126,7 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2$MEDIA_PARAMS_WITH_CATEGORY_DETAILS")
-    @Headers(SUPPRESS_ERROR_LOG_HEADER)
+    @Headers(SUPPRESS_ERROR_LOG_HEADER, "Cache-Control: no-cache")
     fun getMediaSuppressingErrors(
         @Query("titles") title: String?,
     ): Single<MwQueryResponse>
@@ -138,7 +138,7 @@ interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2$MEDIA_PARAMS")
-    @Headers(SUPPRESS_ERROR_LOG_HEADER)
+    @Headers(SUPPRESS_ERROR_LOG_HEADER, "Cache-Control: no-cache")
     fun getMediaById(
         @Query("pageids") pageIds: String?,
     ): Single<MwQueryResponse>
