@@ -56,7 +56,6 @@ import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.ThanksClient
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.auth.getUserName
 import fr.free.nrw.commons.category.CategoryClient
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.contributions.ContributionsFragment
@@ -425,12 +424,7 @@ class MediaDetailFragment :
             enableProgressBar()
         }
 
-        if (getUserName(requireContext()) != null &&
-            media != null &&
-            getUserName(
-                requireContext(),
-            ) == media!!.author
-        ) {
+        if (isOwnUpload()) {
             binding.sendThanks.visibility = View.GONE
         } else {
             binding.sendThanks.visibility = View.VISIBLE

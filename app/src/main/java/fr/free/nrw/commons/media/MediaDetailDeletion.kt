@@ -21,6 +21,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.String.format
 
+/** Returns true when the current logged-in user is the uploader of the media. */
+internal fun MediaDetailFragment.isOwnUpload(): Boolean {
+    val currentUser = getUserName(requireContext())?.trim()
+    val uploader = media?.user?.trim()
+
+    if (currentUser.isNullOrEmpty() || uploader.isNullOrEmpty()) {
+        return false
+    }
+
+    return currentUser.first().equals(uploader.first(), ignoreCase = true) &&
+        currentUser.drop(1) == uploader.drop(1)
+}
+
 /** Updates nomination controls based on the deletion request state. */
 internal fun MediaDetailFragment.onDeletionPageExists(deletionPageExists: Boolean) {
     if (fileWasDeletedFromCommons) {
@@ -28,10 +41,7 @@ internal fun MediaDetailFragment.onDeletionPageExists(deletionPageExists: Boolea
         binding.nominatedDeletionBanner.visibility = View.GONE
         return
     }
-    if (getUserName(requireContext()) == null && getUserName(requireContext()) != media!!.author) {
-        binding.nominateDeletion.visibility = View.GONE
-        binding.nominatedDeletionBanner.visibility = View.GONE
-    } else if (deletionPageExists) {
+    if (deletionPageExists) {
         if (applicationKvStore.getBoolean(
                 String.format(NOMINATING_FOR_DELETION_MEDIA, media!!.imageUrl),
                 false,
@@ -54,7 +64,7 @@ internal fun MediaDetailFragment.onDeletionPageExists(deletionPageExists: Boolea
 /** Opens the file nomination dialog. */
 @SuppressLint("StringFormatInvalid")
 internal fun MediaDetailFragment.onDeleteButtonClicked() {
-    if (getUserName(requireContext()) != null && getUserName(requireContext()) == media!!.author) {
+    if (isOwnUpload()) {
         val languageAdapter: ArrayAdapter<String> =
             ArrayAdapter(
                 requireActivity(),
