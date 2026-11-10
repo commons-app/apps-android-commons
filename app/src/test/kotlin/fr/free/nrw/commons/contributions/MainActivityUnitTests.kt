@@ -15,6 +15,7 @@ import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.navtab.NavTabLayout
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
@@ -149,7 +150,7 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetNumOfUploads() {
-        activity.setNumOfUploads(0)
+        activity.setNumOfUploads(UploadCount(0))
     }
 
     @Test
