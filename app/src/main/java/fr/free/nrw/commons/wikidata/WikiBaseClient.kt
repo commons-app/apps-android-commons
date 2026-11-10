@@ -5,12 +5,16 @@ import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikiBaseInterface
+import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+
+// Error code from Wikibase when the entity does not exist
+private const val NO_SUCH_ENTITY = "no-such-entity"
 
 /**
  * Wikibase Client for calling WikiBase APIs
@@ -53,9 +57,18 @@ class WikiBaseClient
             fileEntityId: String,
             property: String,
         ): Observable<List<String>> =
-            wikiBaseInterface.getClaimsByProperty(fileEntityId, property).map { claimsResponse ->
-                claimsResponse.claims[property]?.mapNotNull { claim -> claim.id } ?: emptyList()
-            }
+            wikiBaseInterface
+                .getClaimsByProperty(fileEntityId, property)
+                .map { claimsResponse ->
+                    claimsResponse.claims[property]?.mapNotNull { claim -> claim.id } ?: emptyList()
+                }.onErrorResumeNext { throwable: Throwable ->
+                    // A file without structured data has no entity yet, so it has no claims
+                    if (throwable is MwException && throwable.errorCode == NO_SUCH_ENTITY) {
+                        Observable.just(emptyList())
+                    } else {
+                        Observable.error(throwable)
+                    }
+                }
 
         fun postDeleteClaims(
             entityId: String,
