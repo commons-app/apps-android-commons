@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.os.BundleCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -147,7 +149,8 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
             ContributionsListFabHelper(
                 fragment = this,
                 bindingProvider = { binding },
-                controllerProvider = { controller },
+                cameraCoordinatorProvider = { cameraCoordinator },
+                imagePickerProvider = { imagePicker },
                 launchers = fabLaunchers,
             )
     }
@@ -243,10 +246,6 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
                     ContributionsListRecyclerViewHelper.spanCountForOrientation(newConfig.orientation),
                 ),
             )
-    }
-
-    fun scrollToTop() {
-        rvContributionsList!!.smoothScrollToPosition(0)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
