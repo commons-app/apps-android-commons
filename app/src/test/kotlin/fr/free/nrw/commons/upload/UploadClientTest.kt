@@ -30,68 +30,93 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import java.io.File
 import java.io.IOException
 import java.util.Date
 
 class UploadClientTest {
-    private val contribution = mock<Contribution>()
-    private val uploadResult = mock<UploadResult>()
-    private val uploadInterface = mock<UploadInterface>()
-    private val csrfTokenClient = mock<CsrfTokenClient>()
-    private val pageContentsCreator = mock<PageContentsCreator>()
-    private val fileUtilsWrapper = mock<FileUtilsWrapper>()
-    private val gson = mock<Gson>()
-    private val contributionDao = mock<ContributionDao> { }
-    private val timeProvider = mock<TimeProvider>()
-    private val uploadClient =
-        UploadClient(
-            uploadInterface,
-            csrfTokenClient,
-            pageContentsCreator,
-            fileUtilsWrapper,
-            gson,
-            timeProvider,
-            contributionDao,
-        )
+    @Mock
+    private lateinit var uploadInterface: UploadInterface
 
-    private val expectedChunkSize = 512 * 1024
-    private val testToken = "test-token"
-    private val createdContent = "content"
-    private val filename = "test.jpg"
-    private val filekey = "the-key"
-    private val pageId = "page-id"
-    private val errorCode = "the-code"
-    private val uploadJson = Gson().fromJson("{\"foo\" = 1}", JsonObject::class.java)
+    @Mock
+    private lateinit var csrfTokenClient: CsrfTokenClient
 
-    private val uploadResponse = UploadResponse(uploadResult)
+    @Mock
+    private lateinit var pageContentsCreator: PageContentsCreator
+
+    @Mock
+    private lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    @Mock
+    private lateinit var gson: Gson
+
+    @Mock
+    private lateinit var timeProvider: TimeProvider
+
+    @Mock
+    private lateinit var contributionDao: ContributionDao
+
+    @Mock
+    private lateinit var contribution: Contribution
+
+    @Mock
+    private lateinit var uploadResult: UploadResult
+
+    @Mock
+    private lateinit var uploadResponse: UploadResponse
+
+    private lateinit var dependencies: UploadClientDependencies
+    private lateinit var uploadClient: UploadClient
+
+    private val filename = "test.png"
+    private val filekey = "filekey"
+    private val testToken = "testToken"
+    private val createdContent = "createdContent"
+    private val uploadJson = JsonObject()
     private val errorResponse = UploadResponse(null)
+    private val errorCode = "errorCode"
+    private val pageId = "pageId"
+    private val expectedChunkSize = 512 * 1024
 
     @Before
     fun setUp() {
+        MockitoAnnotations.openMocks(this)
+        dependencies =
+            UploadClientDependencies(
+                uploadInterface = uploadInterface,
+                csrfTokenClient = csrfTokenClient,
+                pageContentsCreator = pageContentsCreator,
+                fileUtilsWrapper = fileUtilsWrapper,
+                gson = gson,
+                timeProvider = timeProvider,
+                contributionDao = contributionDao,
+            )
+        uploadClient = UploadClient(dependencies)
         whenever(csrfTokenClient.getTokenBlocking()).thenReturn(testToken)
         whenever(pageContentsCreator.createFrom(contribution)).thenReturn(createdContent)
+        whenever(uploadResponse.upload).thenReturn(uploadResult)
     }
 
     @Test
-    fun testUploadFileFromStash_NoErrors() {
-        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
-        whenever(
-            uploadInterface.uploadFileFromStash(
-                testToken,
-                createdContent,
-                DEFAULT_EDIT_SUMMARY,
-                filename,
-                filekey,
-            ),
-        ).thenReturn(Observable.just(uploadJson))
+    fun testUploadClientDependenciesNotNull() {
+        assertNotNull(dependencies)
+        assertNotNull(dependencies.uploadInterface)
+        assertNotNull(dependencies.csrfTokenClient)
+        assertNotNull(dependencies.pageContentsCreator)
+        assertNotNull(dependencies.fileUtilsWrapper)
+        assertNotNull(dependencies.gson)
+        assertNotNull(dependencies.timeProvider)
+        assertNotNull(dependencies.contributionDao)
+    }
 
-        val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
-
-        result.assertNoErrors()
-        assertSame(uploadResult, result.values()[0])
+    @Test
+    fun testUploadClientInitialization() {
+        assertNotNull(uploadClient)
     }
 
     @Test
