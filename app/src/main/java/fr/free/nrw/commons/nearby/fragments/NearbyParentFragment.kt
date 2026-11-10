@@ -382,9 +382,7 @@ class NearbyParentFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        if (Label.TEXT_TO_DESCRIPTION.isEmpty()) {
-            Label.init(requireContext().applicationContext)
-        }
+        Label.init(requireContext().applicationContext)
         loadExploreMapData()
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
@@ -2981,6 +2979,8 @@ class NearbyParentFragment :
                             descriptions = mediaResponse.descriptions ?: emptyMap(),
                             depictionIds = mediaResponse.depictionIds ?: emptyList(),
                             categoriesHiddenStatus = mediaResponse.categoriesHiddenStatus ?: emptyMap(),
+                            mimeType = mediaResponse.mimeType,
+                            mediaType = mediaResponse.mediaType,
                         )
                     // Remove existing fragment before showing new details
                     if (::mediaDetails.isInitialized && mediaDetails.isAdded) {
@@ -3591,3 +3591,4 @@ class NearbyParentFragment :
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
     }
 }
+

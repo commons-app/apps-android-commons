@@ -1,0 +1,130 @@
+{
+  "pageid": 176947,
+  "title": "File:Tromboon-sample.ogg",
+  "imagerepository": "local",
+  "videoinfo": [
+    {
+      "size": 382185,
+      "width": 0,
+      "height": 0,
+      "duration": 28.656009070294786,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Tromboon-sample.ogg",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=176947",
+      "metadata": [
+        {
+          "name": "version",
+          "value": 2
+        },
+        {
+          "name": "streams",
+          "value": [
+            {
+              "name": 267878888,
+              "value": [
+                {
+                  "name": "serial",
+                  "value": 267878888
+                },
+                {
+                  "name": "group",
+                  "value": 0
+                },
+                {
+                  "name": "type",
+                  "value": "Vorbis"
+                },
+                {
+                  "name": "vendor",
+                  "value": "Xiph.Org libVorbis I 20030909"
+                },
+                {
+                  "name": "length",
+                  "value": 28.656009070294786
+                },
+                {
+                  "name": "size",
+                  "value": 382185
+                },
+                {
+                  "name": "header",
+                  "value": [
+                    {
+                      "name": "vorbis_version",
+                      "value": 0
+                    },
+                    {
+                      "name": "audio_channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "audio_sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "bitrate_maximum",
+                      "value": 0
+                    },
+                    {
+                      "name": "bitrate_nominal",
+                      "value": 128003
+                    },
+                    {
+                      "name": "bitrate_minimum",
+                      "value": 0
+                    },
+                    {
+                      "name": "blocksize_0",
+                      "value": 8
+                    },
+                    {
+                      "name": "blocksize_1",
+                      "value": 11
+                    },
+                    {
+                      "name": "framing_flag",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "name": "comments",
+                  "value": [
+                    {
+                      "name": "title",
+                      "value": "Tromboon sound clip"
+                    },
+                    {
+                      "name": "artist",
+                      "value": "Gregory Maxwell <gmaxwell@gmail.com>"
+                    },
+                    {
+                      "name": "date",
+                      "value": "2005/06/05"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "length",
+          "value": 28.656009070294786
+        }
+      ],
+      "mime": "application/ogg",
+      "derivatives": [
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/Tromboon-sample.ogg/Tromboon-sample.ogg.mp3",
+          "type": "audio/mpeg",
+          "transcodekey": "mp3",
+          "width": 0,
+          "height": 0,
+          "bandwidth": 199728
+        }
+      ],
+      "timedtext": []
+    }
+  ]
+}

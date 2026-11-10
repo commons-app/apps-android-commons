@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.models.Bookmark
@@ -70,6 +71,9 @@ class MediaDetailPagerFragment :
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
+    private var pageBeforeScroll: Int? = null
+    private var mediaFragmentBeforeScroll: MediaDetailFragment? = null
+    private var pagerScrollState: Int = ViewPager.SCROLL_STATE_IDLE
 
     var removedItems: ArrayList<Int> = ArrayList()
 
@@ -88,6 +92,24 @@ class MediaDetailPagerFragment :
                 ) {
                     if (activity != null) {
                         requireActivity().invalidateOptionsMenu()
+                    }
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    pagerScrollState = state
+
+                    when (state) {
+                        ViewPager.SCROLL_STATE_DRAGGING -> {
+                            // Dragging can start again mid-settle, when the current page is
+                            // already the one being scrolled to.
+                            if (mediaFragmentBeforeScroll == null) {
+                                pageBeforeScroll = binding!!.mediaDetailsPager.currentItem
+                                mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
+                            }
+                        }
+                        ViewPager.SCROLL_STATE_IDLE -> {
+                            pauseOutgoingMedia()
+                        }
                     }
                 }
             },
@@ -334,20 +356,26 @@ ${m.pageTitle.canonicalUri}""",
                         .findItem(R.id.menu_bookmark_current_image)
                         .setEnabled(true)
                         .setVisible(true)
-                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true)
+                    val isImage = m.mediaType == MediaType.IMAGE
+                    menu
+                        .findItem(R.id.menu_set_as_wallpaper)
+                        .setEnabled(isImage)
+                        .setVisible(isImage)
                     if (m.user != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true)
                     }
 
-                    try {
-                        val mediaUrl = URL(m.imageUrl)
-                        mediaDetailMenuHandler?.handleBackgroundColorMenuItems({
-                            BitmapFactory.decodeStream(
-                                mediaUrl.openConnection().getInputStream(),
-                            )
-                        }, menu)
-                    } catch (e: Exception) {
-                        Timber.e("Cant detect media transparency")
+                    if (isImage) {
+                        try {
+                            val mediaUrl = URL(m.imageUrl)
+                            mediaDetailMenuHandler?.handleBackgroundColorMenuItems({
+                                BitmapFactory.decodeStream(
+                                    mediaUrl.openConnection().getInputStream(),
+                                )
+                            }, menu)
+                        } catch (e: Exception) {
+                            Timber.e("Cant detect media transparency")
+                        }
                     }
 
                     // Initialize bookmark object
@@ -423,7 +451,7 @@ ${m.pageTitle.canonicalUri}""",
                         .setVisible(false)
                 }
 
-                if (!sessionManager!!.isUserLoggedIn) {
+                if (m?.mediaType != MediaType.IMAGE || !sessionManager!!.isUserLoggedIn) {
                     menu.findItem(R.id.menu_set_as_avatar).setVisible(false)
                 }
             }
@@ -475,6 +503,39 @@ ${m.pageTitle.canonicalUri}""",
         if (null != adapter) {
             adapter!!.notifyDataSetChanged()
         }
+    }
+
+    fun onPrimaryMediaChanging(
+        position: Int,
+        fragment: MediaDetailFragment,
+    ) {
+        if (mediaFragmentBeforeScroll == null) {
+            pageBeforeScroll = position
+            mediaFragmentBeforeScroll = fragment
+        }
+
+        val pager = binding!!.mediaDetailsPager
+        pager.post {
+            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                pauseOutgoingMedia()
+            }
+        }
+    }
+
+    private fun pauseOutgoingMedia() {
+        if (pageBeforeScroll != binding!!.mediaDetailsPager.currentItem) {
+            mediaFragmentBeforeScroll?.pauseMedia()
+        }
+
+        pageBeforeScroll = null
+        mediaFragmentBeforeScroll = null
+    }
+
+    /**
+     * Enables or disables swiping between media detail pages.
+     */
+    fun setPagerSwipeEnabled(enabled: Boolean) {
+        binding!!.mediaDetailsPager.setPagerSwipeEnabled(enabled)
     }
 
     /**
