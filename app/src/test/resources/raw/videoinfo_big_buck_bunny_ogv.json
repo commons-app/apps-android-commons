@@ -1,0 +1,290 @@
+{
+  "pageid": 9000029,
+  "title": "File:Big Buck Bunny medium.ogv",
+  "imagerepository": "local",
+  "videoinfo": [
+    {
+      "size": 98231849,
+      "width": 896,
+      "height": 504,
+      "duration": 596.468,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Big_Buck_Bunny_medium.ogv",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Big_Buck_Bunny_medium.ogv",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=9000029",
+      "metadata": [
+        {
+          "name": "version",
+          "value": 2
+        },
+        {
+          "name": "streams",
+          "value": [
+            {
+              "name": 10411,
+              "value": [
+                {
+                  "name": "serial",
+                  "value": 10411
+                },
+                {
+                  "name": "group",
+                  "value": 0
+                },
+                {
+                  "name": "type",
+                  "value": "Theora"
+                },
+                {
+                  "name": "vendor",
+                  "value": "Xiph.Org libtheora 1.1 20090822 (Thusnelda)"
+                },
+                {
+                  "name": "length",
+                  "value": 596.4583333333334
+                },
+                {
+                  "name": "size",
+                  "value": 90974430
+                },
+                {
+                  "name": "header",
+                  "value": [
+                    {
+                      "name": "VMAJ",
+                      "value": 3
+                    },
+                    {
+                      "name": "VMIN",
+                      "value": 2
+                    },
+                    {
+                      "name": "VREV",
+                      "value": 1
+                    },
+                    {
+                      "name": "FMBW",
+                      "value": 56
+                    },
+                    {
+                      "name": "FMBH",
+                      "value": 32
+                    },
+                    {
+                      "name": "PICW",
+                      "value": 896
+                    },
+                    {
+                      "name": "PICH",
+                      "value": 504
+                    },
+                    {
+                      "name": "PICX",
+                      "value": 0
+                    },
+                    {
+                      "name": "PICY",
+                      "value": 4
+                    },
+                    {
+                      "name": "FRN",
+                      "value": 24
+                    },
+                    {
+                      "name": "FRD",
+                      "value": 1
+                    },
+                    {
+                      "name": "PARN",
+                      "value": 0
+                    },
+                    {
+                      "name": "PARD",
+                      "value": 0
+                    },
+                    {
+                      "name": "CS",
+                      "value": 0
+                    },
+                    {
+                      "name": "NOMBR",
+                      "value": 1227398
+                    },
+                    {
+                      "name": "QUAL",
+                      "value": 0
+                    },
+                    {
+                      "name": "KFGSHIFT",
+                      "value": 6
+                    },
+                    {
+                      "name": "PF",
+                      "value": 0
+                    },
+                    {
+                      "name": "NSBS",
+                      "value": 672
+                    },
+                    {
+                      "name": "NBS",
+                      "value": 10752
+                    },
+                    {
+                      "name": "NMBS",
+                      "value": 1792
+                    }
+                  ]
+                },
+                {
+                  "name": "comments",
+                  "value": [
+                    {
+                      "name": "ENCODER",
+                      "value": "ffmpeg2theora-0.25"
+                    },
+                    {
+                      "name": "SOURCE_OSHASH",
+                      "value": "cc9e38e85baf7573"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": 2950,
+              "value": [
+                {
+                  "name": "serial",
+                  "value": 2950
+                },
+                {
+                  "name": "group",
+                  "value": 0
+                },
+                {
+                  "name": "type",
+                  "value": "Vorbis"
+                },
+                {
+                  "name": "vendor",
+                  "value": "Xiph.Org libVorbis I 20090709"
+                },
+                {
+                  "name": "length",
+                  "value": 596.468
+                },
+                {
+                  "name": "size",
+                  "value": 7257110
+                },
+                {
+                  "name": "header",
+                  "value": [
+                    {
+                      "name": "vorbis_version",
+                      "value": 0
+                    },
+                    {
+                      "name": "audio_channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "audio_sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "bitrate_maximum",
+                      "value": 4294967295
+                    },
+                    {
+                      "name": "bitrate_nominal",
+                      "value": 96000
+                    },
+                    {
+                      "name": "bitrate_minimum",
+                      "value": 4294967295
+                    },
+                    {
+                      "name": "blocksize_0",
+                      "value": 8
+                    },
+                    {
+                      "name": "blocksize_1",
+                      "value": 11
+                    },
+                    {
+                      "name": "framing_flag",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "name": "comments",
+                  "value": [
+                    {
+                      "name": "ENCODER",
+                      "value": "ffmpeg2theora-0.25"
+                    },
+                    {
+                      "name": "SOURCE_OSHASH",
+                      "value": "cc9e38e85baf7573"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "length",
+          "value": 596.468
+        }
+      ],
+      "mime": "application/ogg",
+      "derivatives": [
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.240p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "240p.vp9.webm",
+          "width": 426,
+          "height": 240,
+          "bandwidth": 333320
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.360p.mpeg4.mov",
+          "type": "video/quicktime; codecs=\"mp4v\"",
+          "transcodekey": "360p.mpeg4.mov",
+          "width": 640,
+          "height": 360,
+          "bandwidth": 931488
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.480p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "480p.vp9.webm",
+          "width": 854,
+          "height": 480,
+          "bandwidth": 892608
+        }
+      ],
+      "timedtext": [
+        {
+          "src": "https://commons.wikimedia.org/w/api.php?action=timedtext&title=File%3ABig_Buck_Bunny_medium.ogv&lang=ar&trackformat=vtt&origin=%2A",
+          "kind": "subtitles",
+          "type": "text/vtt",
+          "srclang": "ar",
+          "dir": "rtl",
+          "label": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u202a(ar)\u202c"
+        },
+        {
+          "src": "https://commons.wikimedia.org/w/api.php?action=timedtext&title=File%3ABig_Buck_Bunny_medium.ogv&lang=cs&trackformat=vtt&origin=%2A",
+          "kind": "subtitles",
+          "type": "text/vtt",
+          "srclang": "cs",
+          "dir": "ltr",
+          "label": "\u010de\u0161tina \u202a(cs)\u202c"
+        }
+      ]
+    }
+  ]
+}

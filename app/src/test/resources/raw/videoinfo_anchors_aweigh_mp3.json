@@ -1,0 +1,212 @@
+{
+  "pageid": 154002185,
+  "title": "File:\"Anchors Aweigh\", sung by the U.S. Naval Academy's Midshipmen Glee Club.mp3",
+  "imagerepository": "local",
+  "videoinfo": [
+    {
+      "size": 2478805,
+      "width": 0,
+      "height": 0,
+      "duration": 92.52481275704199,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/%22Anchors_Aweigh%22%2C_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:%22Anchors_Aweigh%22,_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=154002185",
+      "metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.23-202310190849"
+        },
+        {
+          "name": "filesize",
+          "value": 2478805
+        },
+        {
+          "name": "avdataoffset",
+          "value": 4373
+        },
+        {
+          "name": "avdataend",
+          "value": 2478805
+        },
+        {
+          "name": "fileformat",
+          "value": "mp3"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "mp3"
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "sample_rate",
+              "value": 48000
+            },
+            {
+              "name": "bitrate",
+              "value": 213892.1161825726
+            },
+            {
+              "name": "channelmode",
+              "value": "joint stereo"
+            },
+            {
+              "name": "bitrate_mode",
+              "value": "vbr"
+            },
+            {
+              "name": "codec",
+              "value": "LAME"
+            },
+            {
+              "name": "encoder",
+              "value": "LAME3.98r"
+            },
+            {
+              "name": "lossless",
+              "value": false
+            },
+            {
+              "name": "encoder_options",
+              "value": "--preset standard -b32 --lowpass 18600"
+            },
+            {
+              "name": "compression_ratio",
+              "value": 0.13925267980636236
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "mp3"
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "bitrate",
+                      "value": 213892.1161825726
+                    },
+                    {
+                      "name": "channelmode",
+                      "value": "joint stereo"
+                    },
+                    {
+                      "name": "bitrate_mode",
+                      "value": "vbr"
+                    },
+                    {
+                      "name": "codec",
+                      "value": "LAME"
+                    },
+                    {
+                      "name": "encoder",
+                      "value": "LAME3.98r"
+                    },
+                    {
+                      "name": "lossless",
+                      "value": false
+                    },
+                    {
+                      "name": "encoder_options",
+                      "value": "--preset standard -b32 --lowpass 18600"
+                    },
+                    {
+                      "name": "compression_ratio",
+                      "value": 0.13925267980636236
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "Too much data in file: expecting 2474304 bytes of audio data, found 2474432 (128 bytes too many)"
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "audio/mpeg"
+        },
+        {
+          "name": "replay_gain",
+          "value": [
+            {
+              "name": "track",
+              "value": [
+                {
+                  "name": "originator",
+                  "value": "determined automatically"
+                },
+                {
+                  "name": "adjustment",
+                  "value": -8.4
+                },
+                {
+                  "name": "volume",
+                  "value": 97.4
+                }
+              ]
+            },
+            {
+              "name": "reference_volume",
+              "value": 89
+            }
+          ]
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 92.52481275704199
+        },
+        {
+          "name": "bitrate",
+          "value": 213892.1161825726
+        },
+        {
+          "name": "playtime_string",
+          "value": "1:33"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "mime": "audio/mpeg",
+      "derivatives": [
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/%22Anchors_Aweigh%22%2C_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3/%22Anchors_Aweigh%22%2C_sung_by_the_U.S._Naval_Academy%27s_Midshipmen_Glee_Club.mp3.ogg",
+          "type": "audio/ogg; codecs=\"vorbis\"",
+          "transcodekey": "ogg",
+          "width": 0,
+          "height": 0,
+          "bandwidth": 110552
+        }
+      ],
+      "timedtext": []
+    }
+  ]
+}

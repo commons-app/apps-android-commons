@@ -6,10 +6,10 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.ViewTreeObserver
 import android.webkit.WebView
 import android.widget.Button
 import android.widget.LinearLayout
@@ -28,6 +28,7 @@ import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
@@ -40,11 +41,13 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.ui.widget.HtmlTextView
+import fr.free.nrw.commons.wikidata.model.gallery.MediaDerivative
 import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import okhttp3.OkHttpClient
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -67,9 +70,30 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
 import java.lang.reflect.Field
-import java.lang.reflect.Method
 import java.util.Date
 import java.util.Locale
+
+private const val ORIGINAL_SRC =
+    "https://upload.wikimedia.org/wikipedia/commons/4/41/Big_Buck_Bunny_medium.ogv"
+
+private const val TRANSCODE_SRC_240 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
+        "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.240p.vp9.webm"
+
+private const val TRANSCODE_SRC_480 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
+        "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.480p.vp9.webm"
+
+private const val TRANSCODE_SRC_720 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/41/" +
+        "Big_Buck_Bunny_medium.ogv/Big_Buck_Bunny_medium.ogv.720p.vp9.webm"
+
+private const val AUDIO_ORIGINAL_SRC =
+    "https://upload.wikimedia.org/wikipedia/commons/a/a9/Tromboon-sample.ogg"
+
+private const val AUDIO_TRANSCODE_SRC_MP3 =
+    "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a9/" +
+        "Tromboon-sample.ogg/Tromboon-sample.ogg.mp3"
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -304,41 +328,26 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnDestroyView() {
-        val layoutListener = mock(ViewTreeObserver.OnGlobalLayoutListener::class.java)
-        Whitebox.setInternalState(fragment, "layoutListener", layoutListener)
         fragment.onDestroyView()
     }
 
     @Test
     @Throws(Exception::class)
     fun testExtractDescription() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "extractDescription",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "")
+        fragment.extractDescription("")
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescription() {
         `when`(media.filename).thenReturn("")
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "getDescription",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.description
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithComma() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
@@ -352,15 +361,13 @@ class MediaDetailFragmentUnitTests {
                 "{{Location|27.043186|88.267003}}\n" +
                 "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithNestedBrackets() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
@@ -380,15 +387,13 @@ class MediaDetailFragmentUnitTests {
             linkedMapOf(
                 "en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}",
             )
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithNearbyWikidataTemplate() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "== {{int:filedesc}} ==\n" +
                 "{{Information\n" +
@@ -399,15 +404,13 @@ class MediaDetailFragmentUnitTests {
                 "}}\n" +
                 "{{Location|1.2|3.4}}\n"
         val map = linkedMapOf("en" to "A nearby place")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithInvalidLanguageCode() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
@@ -424,15 +427,13 @@ class MediaDetailFragmentUnitTests {
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithSpaces() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "=={{int:filedesc}}==\n" +
                 "{{Artwork\n" +
@@ -483,15 +484,13 @@ class MediaDetailFragmentUnitTests {
                     "''Ricchi giardini nel Palazzo di Monforte a Palermo'', " +
                     "bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).",
             )
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionsWithLongSpaces() {
         `when`(media.filename).thenReturn("")
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
-        method.isAccessible = true
         val s =
             "=={{int:filedesc}}==\n" +
                 "{{Information\n" +
@@ -503,43 +502,28 @@ class MediaDetailFragmentUnitTests {
                 "|other_versions=\n" +
                 "}}\n"
         val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        Assert.assertEquals(map, MediaDetailDescriptionParser.parse(s))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptionList() {
         `when`(media.filename).thenReturn("")
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "getDescriptionList",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.descriptionList
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCaptions() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "b")))
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "getCaptions",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.captions
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCaptionsCaseEmpty() {
         `when`(media.captions).thenReturn(mapOf())
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "getCaptions",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.captions
     }
 
     @Test
@@ -550,12 +534,7 @@ class MediaDetailFragmentUnitTests {
             MediaDetailFragment::class.java.getDeclaredField("descriptionHtmlCode")
         field.isAccessible = true
         field.set(fragment, null)
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "setUpCaptionAndDescriptionLayout",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.setUpCaptionAndDescriptionLayout()
     }
 
     @Test
@@ -596,176 +575,93 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testPrettyCoordinatesCaseNull() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyCoordinates",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyCoordinates(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyCoordinates() {
         `when`(media.coordinates).thenReturn(LatLng(-0.000001, -0.999999, 0f))
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyCoordinates",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyCoordinates(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyUploadedDateCaseNull() {
         `when`(media.dateUploaded).thenReturn(null)
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyUploadedDate",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyUploadedDate(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyUploadedDateCaseNonNull() {
         `when`(media.dateUploaded).thenReturn(Date(2000, 1, 1))
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyUploadedDate",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyUploadedDate(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyLicenseCaseNull() {
         `when`(media.license).thenReturn(null)
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyLicense",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyLicense(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyLicenseCaseNonNull() {
         `when`(media.license).thenReturn("licence")
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyLicense",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyLicense(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyDiscussion() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyDiscussion",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "mock")
+        fragment.prettyDiscussion("mock")
     }
 
     @Test
     @Throws(Exception::class)
     fun testExtractCaptionDescription() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "extractCaptionDescription",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "mock")
+        fragment.extractCaptionDescription("mock")
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetDescriptions() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "getDescriptions",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "mock")
+        MediaDetailDescriptionParser.parse("mock")
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyCaptionCaseEmpty() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "")))
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyCaption",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyCaption(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyCaptionCaseNonEmpty() {
         `when`(media.captions).thenReturn(mapOf(Pair("a", "b")))
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyCaption",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyCaption(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testPrettyCaption() {
         `when`(media.captions).thenReturn(mapOf())
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "prettyCaption",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        fragment.prettyCaption(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetupImageView() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "setupImageView",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.setupImageView(media)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "onDiscussionLoaded",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "")
+        fragment.onDiscussionLoaded("")
     }
 
     @Test
@@ -797,13 +693,7 @@ class MediaDetailFragmentUnitTests {
             ArgumentMatchers.any(),
         )
 
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "onDeleteClicked",
-                Spinner::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, spinner)
+        fragment.onDeleteClicked(spinner)
     }
 
     @Test
@@ -838,37 +728,22 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testDisplayMediaDetails() {
         whenever(media.filename).thenReturn("File:Example.jpg")
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "displayMediaDetails",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        whenever(media.mediaType).thenReturn(MediaType.IMAGE)
+        fragment.displayMediaDetails()
         verify(media, times(4)).filename
     }
 
     @Test
     @Throws(Exception::class)
     fun testGotoCategoryEditor() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "gotoCategoryEditor",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "[[Category:Test]]")
+        fragment.gotoCategoryEditor("[[Category:Test]]")
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnMediaRefreshed() {
-        val method: Method =
-            MediaDetailFragment::class.java.getDeclaredMethod(
-                "onMediaRefreshed",
-                Media::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, media)
+        whenever(media.mediaType).thenReturn(MediaType.IMAGE)
+        fragment.onMediaRefreshed(media)
     }
 
     @Test
@@ -894,5 +769,184 @@ class MediaDetailFragmentUnitTests {
         spyFragment.onImageBackgroundChanged(color)
         verify(simpleDraweeView, never()).setBackgroundColor(anyInt())
         verify(mockSharedPreferencesEditor, never()).putInt(anyString(), anyInt())
+    }
+
+    private fun displayMetrics(widthPixels: Int, heightPixels: Int): DisplayMetrics =
+        DisplayMetrics().apply {
+            this.widthPixels = widthPixels
+            this.heightPixels = heightPixels
+        }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAutoVideoQualityCapsAtTheShorterScreenSide() {
+        Assert.assertEquals(1080, maxPlaybackResolution("auto", displayMetrics(1080, 2400)))
+        Assert.assertEquals(1080, maxPlaybackResolution("auto", displayMetrics(2400, 1080)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHigherVideoQualityHasNoCap() {
+        Assert.assertEquals(Int.MAX_VALUE, maxPlaybackResolution("higher", displayMetrics(1080, 2400)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDataSaverVideoQualityCapsAtZero() {
+        Assert.assertEquals(0, maxPlaybackResolution("data_saver", displayMetrics(1080, 2400)))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUnknownVideoQualityBehavesLikeAuto() {
+        Assert.assertEquals(1080, maxPlaybackResolution("bogus", displayMetrics(1080, 2400)))
+        Assert.assertEquals(1080, maxPlaybackResolution(null, displayMetrics(1080, 2400)))
+    }
+
+    private fun playbackSource(
+        src: String,
+        transcodeKey: String?,
+        bandwidth: Int = 0,
+        height: Int = 0,
+        mediaType: MediaType = MediaType.VIDEO,
+    ): MediaDerivative {
+        val playbackSource = mock(MediaDerivative::class.java)
+        whenever(playbackSource.src()).thenReturn(src)
+        whenever(playbackSource.transcodeKey()).thenReturn(transcodeKey)
+        whenever(playbackSource.bandwidth()).thenReturn(bandwidth)
+        whenever(playbackSource.height()).thenReturn(height)
+        whenever(playbackSource.mediaType()).thenReturn(mediaType)
+        return playbackSource
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testTranscodeIsPreferredOverTheOriginal() {
+        val original = playbackSource(ORIGINAL_SRC, null)
+        val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+
+        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 1080)
+
+        Assert.assertEquals(transcode.src(), preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testResumedSourceIsPreferredOverTheTranscode() {
+        val original = playbackSource(ORIGINAL_SRC, null)
+        val transcode = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+
+        val preferred =
+            preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 1080, resume = original)
+
+        Assert.assertEquals(original.src(), preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testLargestTranscodeWithinTheCapIsPreferred() {
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        val transcode720 = playbackSource(TRANSCODE_SRC_720, "720p.vp9.webm")
+
+        val preferred =
+            preferredMediaPlaybackSource(listOf(transcode240, transcode480, transcode720), maxResolution = 480)
+
+        Assert.assertEquals(TRANSCODE_SRC_480, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSmallestTranscodeIsPreferredWhenNoneFitsTheCap() {
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+
+        val preferred = preferredMediaPlaybackSource(listOf(transcode480, transcode240), maxResolution = 0)
+
+        Assert.assertEquals(TRANSCODE_SRC_240, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHighestTranscodeIsPreferredWithoutACap() {
+        val original = playbackSource(ORIGINAL_SRC, null)
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode720 = playbackSource(TRANSCODE_SRC_720, "720p.vp9.webm")
+
+        val preferred =
+            preferredMediaPlaybackSource(listOf(original, transcode240, transcode720), maxResolution = Int.MAX_VALUE)
+
+        Assert.assertEquals(TRANSCODE_SRC_720, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAudioTranscodeIsPreferredRegardlessOfTheCap() {
+        val original = playbackSource(AUDIO_ORIGINAL_SRC, null, mediaType = MediaType.AUDIO)
+        val transcode = playbackSource(AUDIO_TRANSCODE_SRC_MP3, "mp3", mediaType = MediaType.AUDIO)
+
+        val preferred = preferredMediaPlaybackSource(listOf(original, transcode), maxResolution = 0)
+
+        Assert.assertEquals(AUDIO_TRANSCODE_SRC_MP3, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testTranscodeHeightIsUsedWhenTheKeyHasNoResolution() {
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "vp9.webm", height = 480)
+
+        val preferred = preferredMediaPlaybackSource(listOf(transcode240, transcode480), maxResolution = 480)
+
+        Assert.assertEquals(TRANSCODE_SRC_480, preferred?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSaveResumeStateKeepsTheSourceBeingPlayed() {
+        val player = MediaDetailPlayer(context, OkHttpClient()) {}
+        val transcode240 = playbackSource(TRANSCODE_SRC_240, "240p.vp9.webm")
+        val transcode480 = playbackSource(TRANSCODE_SRC_480, "480p.vp9.webm")
+        Whitebox.setInternalState(player, "selected", transcode480)
+
+        player.saveResumeState()
+        player.release()
+        player.setSources(listOf(transcode240, transcode480), emptyList())
+
+        Assert.assertNull(player.selected)
+        Assert.assertEquals(TRANSCODE_SRC_480, player.preferredSource(1080)?.src())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testVideoQualityLabelUsesTheTranscodeResolution() {
+        val transcode =
+            MediaDerivative(TRANSCODE_SRC_240, "video/webm; codecs=\"vp9, opus\"", transcodeKey = "240p.vp9.webm")
+
+        Assert.assertEquals("240p", transcode.qualityLabel(context))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testVideoQualityLabelNamesTheOriginal() {
+        val original = MediaDerivative(ORIGINAL_SRC, "video/webm; codecs=\"vp8, vorbis\"")
+
+        Assert.assertEquals("Original", original.qualityLabel(context))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAudioQualityLabelIsRoundedToKbps() {
+        val transcode = MediaDerivative(AUDIO_TRANSCODE_SRC_MP3, "audio/mpeg", bandwidth = 199728, transcodeKey = "mp3")
+
+        Assert.assertEquals("200 kbps", transcode.qualityLabel(context))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testAudioQualityLabelNamesTheOriginal() {
+        val original = MediaDerivative(AUDIO_ORIGINAL_SRC, "audio/ogg; codecs=\"vorbis\"", bandwidth = 106695)
+
+        Assert.assertEquals("107 kbps (Original)", original.qualityLabel(context))
     }
 }

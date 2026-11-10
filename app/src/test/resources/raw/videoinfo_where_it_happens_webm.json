@@ -1,0 +1,409 @@
+{
+  "pageid": 197381691,
+  "title": "File:Where it Happens (1017746).webm",
+  "imagerepository": "local",
+  "videoinfo": [
+    {
+      "size": 16264042,
+      "width": 1920,
+      "height": 1080,
+      "duration": 59.852000000000004,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Where_it_Happens_%281017746%29.webm",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Where_it_Happens_(1017746).webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=197381691",
+      "metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.25-202603080933"
+        },
+        {
+          "name": "filesize",
+          "value": 16264042
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 16264042
+        },
+        {
+          "name": "fileformat",
+          "value": "webm"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "A_OPUS"
+            },
+            {
+              "name": "sample_rate",
+              "value": 48000
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "eng"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": "79a15fd99ed39709",
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "A_OPUS"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 48000
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "eng"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "V_AV1"
+            },
+            {
+              "name": "resolution_x",
+              "value": 1920
+            },
+            {
+              "name": "resolution_y",
+              "value": 1080
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 1920
+            },
+            {
+              "name": "display_y",
+              "value": 1080
+            },
+            {
+              "name": "frame_rate",
+              "value": 23.976
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": "7ba353aa28c4e737",
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "V_AV1"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 1920
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 1080
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 1920
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 1080
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 23.976
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "warning",
+          "value": [
+            {
+              "name": 0,
+              "value": "skipping check for id3v2 tags since option_tag_id3v2=FALSE"
+            },
+            {
+              "name": 1,
+              "value": "skipping check for id3v1 tags since option_tag_id3v1=FALSE"
+            },
+            {
+              "name": 2,
+              "value": "skipping check for apetag tags since option_tag_apetag=FALSE"
+            },
+            {
+              "name": 3,
+              "value": "skipping check for lyrics3 tags since option_tag_lyrics3=FALSE"
+            },
+            {
+              "name": 4,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [1 bytes]) at 63"
+            },
+            {
+              "name": 5,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [1 bytes]) at 77"
+            },
+            {
+              "name": 6,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [2 bytes]) at 91"
+            },
+            {
+              "name": 7,
+              "value": "Unhandled seekhead element [module.audio-video.matroska.php:660] (5036::SeekPosition [3 bytes]) at 106"
+            },
+            {
+              "name": 8,
+              "value": "Unhandled track.video element [module.audio-video.matroska.php:745] (5552::15b0 [24 bytes]) at 343"
+            },
+            {
+              "name": 9,
+              "value": "Unhandled track element [module.audio-video.matroska.php:852] (5802::16aa [3 bytes]) at 434"
+            },
+            {
+              "name": 10,
+              "value": "Unhandled track element [module.audio-video.matroska.php:852] (5819::16bb [4 bytes]) at 440"
+            },
+            {
+              "name": 11,
+              "value": "Unhandled audio type \"A_OPUS\""
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "matroska",
+          "value": [
+            {
+              "name": "comments",
+              "value": [
+                {
+                  "name": "muxingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf61.7.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "writingapp",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf61.7.100"
+                    }
+                  ]
+                },
+                {
+                  "name": "major_brand",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "M4V "
+                    }
+                  ]
+                },
+                {
+                  "name": "minor_version",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "1"
+                    }
+                  ]
+                },
+                {
+                  "name": "compatible_brands",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "isomavc1mp42"
+                    }
+                  ]
+                },
+                {
+                  "name": "encoder",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "Lavf61.7.100"
+                    },
+                    {
+                      "name": 1,
+                      "value": "Lavc61.19.101 libsvtav1"
+                    },
+                    {
+                      "name": 2,
+                      "value": "Lavc61.19.101 libopus"
+                    }
+                  ]
+                },
+                {
+                  "name": "handler_name",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "ETI ISO Video Media Handler"
+                    },
+                    {
+                      "name": 1,
+                      "value": "ETI ISO Audio Media Handler"
+                    }
+                  ]
+                },
+                {
+                  "name": "vendor_id",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "[0][0][0][0]"
+                    },
+                    {
+                      "name": 1,
+                      "value": "[0][0][0][0]"
+                    }
+                  ]
+                },
+                {
+                  "name": "duration",
+                  "value": [
+                    {
+                      "name": 0,
+                      "value": "00:00:59.852000000\ufffd"
+                    },
+                    {
+                      "name": 1,
+                      "value": "00:00:59.836000000\ufffd"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 59.852000000000004
+        },
+        {
+          "name": "bitrate",
+          "value": 2173901.2230167747
+        },
+        {
+          "name": "playtime_string",
+          "value": "1:00"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "mime": "video/webm",
+      "derivatives": [
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3e/Where_it_Happens_%281017746%29.webm/Where_it_Happens_%281017746%29.webm.240p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "240p.vp9.webm",
+          "width": 426,
+          "height": 240,
+          "bandwidth": 263760
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3e/Where_it_Happens_%281017746%29.webm/Where_it_Happens_%281017746%29.webm.360p.mpeg4.mov",
+          "type": "video/quicktime; codecs=\"mp4v\"",
+          "transcodekey": "360p.mpeg4.mov",
+          "width": 640,
+          "height": 360,
+          "bandwidth": 934488
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3e/Where_it_Happens_%281017746%29.webm/Where_it_Happens_%281017746%29.webm.480p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "480p.vp9.webm",
+          "width": 854,
+          "height": 480,
+          "bandwidth": 724496
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3e/Where_it_Happens_%281017746%29.webm/Where_it_Happens_%281017746%29.webm.1080p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "1080p.vp9.webm",
+          "width": 1920,
+          "height": 1080,
+          "bandwidth": 2598432
+        }
+      ],
+      "timedtext": [
+        {
+          "src": "https://commons.wikimedia.org/w/api.php?action=timedtext&title=File%3AWhere_it_Happens_%281017746%29.webm&lang=en&trackformat=vtt&origin=%2A",
+          "kind": "subtitles",
+          "type": "text/vtt",
+          "srclang": "en",
+          "dir": "ltr",
+          "label": "English \u202a(en)\u202c"
+        }
+      ]
+    }
+  ]
+}
