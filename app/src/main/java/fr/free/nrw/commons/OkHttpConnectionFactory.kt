@@ -51,11 +51,9 @@ object OkHttpConnectionFactory {
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    setLevel(HttpLoggingInterceptor.Level.BASIC)
-                    redactHeader("Authorization")
-                    redactHeader("Cookie")
-                },
+                HttpLoggingInterceptor()
+                    .apply { level = HttpLoggingInterceptor.Level.BASIC }
+                    .redactSensitiveHeaders(),
             ).addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()

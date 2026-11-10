@@ -84,7 +84,7 @@ class PageContentsCreator
             dateCreated: Date?,
             dateCreatedSource: String?,
         ) = dateCreated?.let {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             String.format(
                 Locale.ENGLISH,
                 if (isExif(dateCreatedSource)) TEMPLATE_DATE_ACC_TO_EXIF else TEMPLATE_DATA_OTHER_SOURCE,
