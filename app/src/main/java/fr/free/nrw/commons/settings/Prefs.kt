@@ -7,6 +7,7 @@ object Prefs {
     const val DESCRIPTION_LANGUAGE = "languageDescription"
     const val APP_UI_LANGUAGE = "appUiLanguage"
     const val KEY_THEME_VALUE = "appThemePref"
+    const val VIDEO_QUALITY = "videoQualityPref"
 
     object Licenses {
         const val CC_BY_SA_3 = "CC BY-SA 3.0"

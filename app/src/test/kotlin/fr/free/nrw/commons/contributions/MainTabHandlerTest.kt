@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.navtab.NavTab
 import fr.free.nrw.commons.navtab.NavTabLayout
 import org.junit.Assert.assertEquals
@@ -61,7 +62,7 @@ class MainTabHandlerTest {
 
     @Test
     fun testSetNumOfUploadsZero() {
-        tabHandler.setNumOfUploads(0, MainActivity.ActiveFragment.CONTRIBUTIONS)
+        tabHandler.setNumOfUploads(UploadCount(0), MainActivity.ActiveFragment.CONTRIBUTIONS)
         val expected =
             activity.resources.getString(R.string.contributions_fragment) + " " +
                 activity.getString(R.string.contributions_subtitle_zero)
@@ -70,7 +71,7 @@ class MainTabHandlerTest {
 
     @Test
     fun testSetNumOfUploadsPositive() {
-        tabHandler.setNumOfUploads(5, MainActivity.ActiveFragment.CONTRIBUTIONS)
+        tabHandler.setNumOfUploads(UploadCount(5), MainActivity.ActiveFragment.CONTRIBUTIONS)
         val expected =
             activity.resources.getString(R.string.contributions_fragment) + " " +
                 activity.resources.getQuantityString(R.plurals.contributions_subtitle, 5, 5)
@@ -78,9 +79,24 @@ class MainTabHandlerTest {
     }
 
     @Test
+    fun testSetNumOfUploadsCapped() {
+        tabHandler.setNumOfUploads(
+            UploadCount(1000, isCapped = true),
+            MainActivity.ActiveFragment.CONTRIBUTIONS,
+        )
+        assertEquals("Contributions (1000+)", activity.title)
+    }
+
+    @Test
+    fun testSetNumOfUploadsAtTheCapButNotCapped() {
+        tabHandler.setNumOfUploads(UploadCount(1000), MainActivity.ActiveFragment.CONTRIBUTIONS)
+        assertEquals("Contributions (1000)", activity.title)
+    }
+
+    @Test
     fun testSetNumOfUploadsOtherFragment() {
         activity.title = "Original Title"
-        tabHandler.setNumOfUploads(5, MainActivity.ActiveFragment.NEARBY)
+        tabHandler.setNumOfUploads(UploadCount(5), MainActivity.ActiveFragment.NEARBY)
         assertEquals("Original Title", activity.title)
     }
 
