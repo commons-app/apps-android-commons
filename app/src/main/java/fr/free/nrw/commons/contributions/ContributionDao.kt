@@ -14,6 +14,9 @@ import io.reactivex.Single
 import java.util.Calendar
 
 @Dao
+// Suppressed TooManyFunctions because all functions are queries, CRUD operations,
+// or asynchronous wrappers managing the single contribution table.
+@Suppress("TooManyFunctions")
 abstract class ContributionDao {
     @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
     abstract fun fetchContributions(): DataSource.Factory<Int, Contribution>
