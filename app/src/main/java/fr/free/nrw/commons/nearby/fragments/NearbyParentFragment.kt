@@ -2119,11 +2119,6 @@ class NearbyParentFragment :
         }
     }
 
-    fun setTabItemContributions() {
-        (activity as MainActivity).binding?.pager?.currentItem
-        // TODO
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
@@ -2754,11 +2749,10 @@ class NearbyParentFragment :
     private fun passInfoToSheet(place: Place) {
         selectedPlace = place
         dataList = ArrayList()
-        // TODO: Decide button text for fitting in the screen
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_round_star_border_24px,
-                "",
+                resources.getString(fr.free.nrw.commons.R.string.nearby_bookmark),
             ),
         )
         (dataList as ArrayList<BottomSheetItem>).add(
@@ -2778,7 +2772,7 @@ class NearbyParentFragment :
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_feedback_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk),
+                resources.getString(fr.free.nrw.commons.R.string.nearby_report_problem_short),
             ),
         )
         if (place.hasWikipediaLink()) {
@@ -3414,7 +3408,7 @@ class NearbyParentFragment :
                 R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
                 R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
                 R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
-                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
+                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_report_problem)
                 R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
                 R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
                 else -> "Long click"

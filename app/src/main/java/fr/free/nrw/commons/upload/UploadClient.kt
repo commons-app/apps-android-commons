@@ -245,7 +245,15 @@ class UploadClient
                         toRequestBody(fileKey),
                         toRequestBody(csrfTokenClient.getTokenBlocking()),
                         filePart,
-                    ).map(UploadResponse::upload)
+                    ).map { uploadResponse: JsonObject? ->
+                        val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
+                        if (uploadResult.upload == null) {
+                            val exception = gson.fromJson(uploadResponse, MwException::class.java)
+                            Timber.e(exception, "Error in uploading chunk to stash")
+                            throw IOException(exception.errorCode, exception)
+                        }
+                        uploadResult.upload
+                    }
             } catch (throwable: Throwable) {
                 Timber.e(throwable, "Failed to upload chunk to stash")
                 Observable.error(throwable)
