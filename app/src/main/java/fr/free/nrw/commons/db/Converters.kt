@@ -14,9 +14,13 @@ import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import java.util.Date
 
+// Suppressed TooManyFunctions because all functions are Room type converters
+// or internal serialization helpers for SQLite storage.
+
 /**
  * This object supplies converters to write/read types to/from the database.
  */
+@Suppress("TooManyFunctions")
 object Converters {
     fun getGson(): Gson =
         ApplicationlessInjection

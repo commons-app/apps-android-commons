@@ -47,6 +47,9 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
     exportSchema = true,
 )
 @TypeConverters(Converters::class)
+// Suppressed TooManyFunctions because Room requires an abstract DAO getter
+// for each table registered in the database.
+@Suppress("TooManyFunctions")
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contributionDao(): ContributionDao
 
