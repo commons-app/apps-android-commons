@@ -87,8 +87,8 @@ class FileUtilsWrapper
                 FileOutputStream(file).use { fos ->
                     fos.write(data, 0, size)
                 }
-            } catch (throwable: Exception) {
-                Timber.e(throwable, "Failed to create file")
+            } catch (e: IOException) {
+                Timber.e(e, "Failed to create file")
             }
             return file
         }

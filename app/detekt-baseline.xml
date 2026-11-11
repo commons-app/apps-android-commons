@@ -607,13 +607,10 @@
     <ID>TooGenericExceptionCaught:FeedbackDialog.kt$FeedbackDialog$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePickerIntents.kt$FilePickerIntents$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:FileUtils.kt$FileUtils$e: Throwable</ID>
-    <ID>TooGenericExceptionCaught:FileUtilsWrapper.kt$FileUtilsWrapper$throwable: Exception</ID>
     <ID>TooGenericExceptionCaught:ImageFragment.kt$ImageFragment$ex: Exception</ID>
     <ID>TooGenericExceptionCaught:ImageUtils.kt$ImageUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LeaderboardFragment.kt$LeaderboardFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LocationPickerActivity.kt$LocationPickerActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:LocationUtils.kt$LocationUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LoginActivity.kt$LoginActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MapUtils.kt$MapUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: Exception</ID>
