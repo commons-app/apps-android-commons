@@ -11,8 +11,18 @@ class LoginResponse {
     @SerializedName("error")
     val error: MwServiceError? = null
 
+    /** API errors sent with `errorformat=plaintext`, e.g. `badtoken`. */
+    @SerializedName("errors")
+    val errors: List<MwServiceError>? = null
+
     @SerializedName("clientlogin")
     private val clientLogin: ClientLogin? = null
+
+    /**
+     * Returns the text of the first API error in [errors] (or its code when the text is empty),
+     * or null when the response has no API error.
+     */
+    fun errorMessage(): String? = errors?.firstOrNull()?.let { it.details.ifBlank { it.title }.ifBlank { null } }
 
     fun toLoginResult(password: String): LoginResult? = clientLogin?.toLoginResult(password)
 }

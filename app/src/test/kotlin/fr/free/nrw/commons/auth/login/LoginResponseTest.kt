@@ -46,4 +46,32 @@ class LoginResponseTest {
         assertTrue(result?.pass == true)
         assertEquals("TestUser", result?.userName)
     }
+
+    @Test
+    fun apiErrorsArrayGivesErrorMessage() {
+        val response =
+            gson.fromJson(
+                """{"errors":[{"code":"badtoken","text":"Invalid CSRF token."}]}""",
+                LoginResponse::class.java,
+            )
+
+        assertNull(response.toLoginResult("pw"))
+        assertEquals("Invalid CSRF token.", response.errorMessage())
+    }
+
+    @Test
+    fun apiErrorWithoutTextFallsBackToCode() {
+        val response =
+            gson.fromJson("""{"errors":[{"code":"badtoken"}]}""", LoginResponse::class.java)
+
+        assertEquals("badtoken", response.errorMessage())
+    }
+
+    @Test
+    fun responseWithoutApiErrorHasNoErrorMessage() {
+        val response =
+            gson.fromJson("""{"clientlogin":{"status":"PASS"}}""", LoginResponse::class.java)
+
+        assertNull(response.errorMessage())
+    }
 }
