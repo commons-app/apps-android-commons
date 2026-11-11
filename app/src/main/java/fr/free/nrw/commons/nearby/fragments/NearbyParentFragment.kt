@@ -2772,7 +2772,7 @@ class NearbyParentFragment :
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_feedback_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk_short),
+                resources.getString(fr.free.nrw.commons.R.string.nearby_report_problem_short),
             ),
         )
         if (place.hasWikipediaLink()) {
@@ -3408,7 +3408,7 @@ class NearbyParentFragment :
                 R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
                 R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
                 R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
-                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
+                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_report_problem)
                 R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
                 R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
                 else -> "Long click"
