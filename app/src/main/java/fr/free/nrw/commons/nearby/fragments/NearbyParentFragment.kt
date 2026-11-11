@@ -12,7 +12,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
@@ -275,8 +274,6 @@ class NearbyParentFragment :
 
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
-
-    private var searchable = false
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
@@ -1431,7 +1428,6 @@ class NearbyParentFragment :
                                         Snackbar.LENGTH_INDEFINITE,
                                     )
                                 hasShownOfflinePinsMessage = false
-                                searchable = false
                                 setProgressBarVisibility(false)
                             }
 
@@ -2649,38 +2645,6 @@ class NearbyParentFragment :
         }
         if (currentLatLng == null) {
             recenterToUserLocation = true
-            return
-        }
-
-        /*
-         * FIXME: With the revamp of the location permission helper in the MR
-         *  #5494[1], there is a doubt that the following code is redundant.
-         *  If we could confirm the same, the following code can be removed. If it
-         *  turns out to be necessary, we could replace this with a comment
-         *  clarifying why it is necessary.
-         *
-         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794
-         */
-        if (lastMapFocus != null) {
-            val myLocation = Location("")
-            val destLocation = Location("")
-            destLocation.latitude = binding!!.map.mapCenter.latitude
-            destLocation.longitude = binding!!.map.mapCenter.longitude
-            myLocation.latitude = lastMapFocus!!.latitude
-            myLocation.longitude = lastMapFocus!!.longitude
-            val distance = myLocation.distanceTo(destLocation) // in meters
-            if (lastMapFocus != null) {
-                if (isNetworkConnectionEstablished) {
-                    searchable =
-                        if (distance > SEARCH_RADIUS_METERS) {
-                            true
-                        } else {
-                            false
-                        }
-                }
-            } else {
-                searchable = false
-            }
         }
     }
 
@@ -3521,7 +3485,6 @@ class NearbyParentFragment :
         private const val MARKER_PRIORITY_MONUMENT = 3
         private const val MARKER_PRIORITY_GREEN = 2
         private const val MARKER_PRIORITY_GREY = 1
-        private const val SEARCH_RADIUS_METERS = 2000.0
         private const val CURRENT_LOCATION_LABEL_FONT_SIZE = 24
         private const val CURRENT_LOCATION_ANCHOR = 0.5f
         private const val LOCATION_CIRCLE_GRAY = 128
