@@ -53,17 +53,24 @@ class DepictsEditor
             depictedItems: List<String>,
         ): Observable<Boolean> {
             val entityId: String = PAGE_ID_PREFIX + fileEntityId
-            val claimIds = getDepictionsClaimIds(entityId)
 
-            // Please consider removeClaim scenario for BetaDebug
-            val data = RemoveClaim.from(if (isBetaFlavour) listOf("Q10") else claimIds)
-
+            // The existing claims are read when subscribing, so that an error reaches the caller
             return wikiBaseClient
-                .postDeleteClaims(entityId, gson.toJson(data))
-                .doOnError { throwable: Throwable? ->
+                .getClaimIdsByProperty(entityId, DEPICTS.propertyName)
+                .switchMap { claimIds ->
+                    // Please consider removeClaim scenario for BetaDebug
+                    val claimIdsToRemove = if (isBetaFlavour) listOf("Q10") else claimIds
+                    if (claimIdsToRemove.isEmpty()) {
+                        // Nothing to remove, for example a file without structured data
+                        Observable.just(true)
+                    } else {
+                        val data = RemoveClaim.from(claimIdsToRemove)
+                        wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
+                    }
+                }.doOnError { throwable: Throwable? ->
                     Timber.e(
                         throwable,
-                        "Error occurred while removing existing claims for DEPICTS property",
+                        "Error occurred while reading or removing existing claims for DEPICTS property",
                     )
                     showLongToast(
                         context,
@@ -79,11 +86,4 @@ class DepictsEditor
                     }
                 }
         }
-
-        @SuppressLint("CheckResult")
-        private fun getDepictionsClaimIds(entityId: String): List<String> =
-            wikiBaseClient
-                .getClaimIdsByProperty(entityId, DEPICTS.propertyName)
-                .subscribeOn(Schedulers.io())
-                .blockingFirst()
     }
