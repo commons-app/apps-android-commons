@@ -877,7 +877,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
   <string name="nearby_report_problem">Report a problem about this item to Wikidata</string>
-  <string name="nearby_report_problem">Report problem</string>
+  <string name="nearby_report_problem_short">Report problem</string>
   <string name="please_enter_some_comments">Please enter some comments</string>
   <string name="talk">Talk</string>
   <string name="write_something_about_the_item">Write something about the \'%1$s\' item. It will be publicly visible.</string>
