@@ -26,7 +26,7 @@ interface UploadInterface {
         @Part("filekey") fileKey: RequestBody?,
         @Part("token") token: RequestBody?,
         @Part filePart: MultipartBodyPart,
-    ): Observable<UploadResponse>
+    ): Observable<JsonObject>
 
     @Headers("Cache-Control: no-cache")
     @POST(WikidataConstants.MW_API_PREFIX + "action=upload&ignorewarnings=1")

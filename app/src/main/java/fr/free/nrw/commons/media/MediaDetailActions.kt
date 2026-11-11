@@ -52,7 +52,7 @@ internal fun MediaDetailFragment.onMediaDetailCoordinatesClicked() {
 internal fun MediaDetailFragment.onCopyWikicodeClicked() {
     val item = media ?: return
     val filename = item.filename ?: return
-    val data = formatMediaWikitext(filename, item.fallbackDescription)
+    val data = formatMediaWikitext(filename, item.fallbackDescription, item.captions)
     requireContext().copyToClipboard("wikiCode", data)
     Timber.d("Generated wikidata copy code: %s", data)
 
