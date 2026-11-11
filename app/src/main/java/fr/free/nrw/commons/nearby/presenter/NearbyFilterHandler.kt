@@ -21,7 +21,6 @@ class NearbyFilterHandler(
             when (state) {
                 CheckBoxTriStates.UNKNOWN -> {}
                 CheckBoxTriStates.UNCHECKED -> {
-                    // TODO
                     view.filterOutAllMarkers()
                     view.setRecyclerViewAdapterItemsGreyedOut()
                 }
