@@ -63,7 +63,7 @@ class UploadClient
             contribution: Contribution,
             notificationUpdater: NotificationUpdateProgressListener,
         ): Observable<StashUploadResult> {
-            if (contribution.isCompleted()) {
+            if (contribution.isCompleted() && isStashValid(contribution)) {
                 return Observable.just(
                     StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey, null),
                 )
@@ -206,11 +206,11 @@ class UploadClient
          */
         private fun isStashValid(contribution: Contribution): Boolean =
             contribution.chunkInfo != null &&
-                contribution.dateModified!!.after(
+                contribution.dateModified?.after(
                     Date(
                         timeProvider.currentTimeMillis() - maxChunkAge,
                     ),
-                )
+                ) == true
 
         /**
          * Uploads a file chunk to stash

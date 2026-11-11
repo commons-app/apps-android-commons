@@ -17,11 +17,10 @@ import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
-import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
+import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
-import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -176,67 +175,32 @@ class PendingUploadsPresenter
             context: Context,
         ) {
             CommonsApplication.isPaused = false
-            if (index >= contributionList.size) {
+            val toRestart = contributionList.drop(index)
+            if (toRestart.isEmpty()) {
                 return
             }
-            val contribution = contributionList[index]
-            if (contribution.state == STATE_FAILED) {
-                contribution.dateUploadStarted = Calendar.getInstance().time
-                if (contribution.errorInfo == null) {
-                    contribution.chunkInfo = null
-                    contribution.transferred = 0
-                }
-                compositeDisposable.add(
-                    uploadRepository
-                        .checkDuplicateImage(
-                            originalFilePath = contribution.contentUri!!,
-                            modifiedFilePath = contribution.localUri!!,
-                        ).subscribeOn(ioThreadScheduler)
-                        .subscribe({ imageCheckResult: Int ->
-                            if (imageCheckResult == IMAGE_OK) {
-                                contribution.state = STATE_QUEUED
-                                compositeDisposable.add(
-                                    contributionsRepository
-                                        .save(contribution)
-                                        .subscribeOn(ioThreadScheduler)
-                                        .doOnComplete {
-                                            restartUploads(contributionList, index + 1, context)
-                                        }.subscribe {
-                                            makeOneTimeWorkRequest(
-                                                context,
-                                                ExistingWorkPolicy.KEEP,
-                                            )
-                                        },
-                                )
-                            } else {
-                                Timber.e("Contribution already exists")
-                                compositeDisposable.add(
-                                    contributionsRepository
-                                        .deleteContributionFromDB(contribution)
-                                        .subscribeOn(ioThreadScheduler)
-                                        .doOnComplete {
-                                            restartUploads(contributionList, index + 1, context)
-                                        }.subscribe(),
-                                )
+            compositeDisposable.add(
+                Observable
+                    .fromIterable(toRestart)
+                    .concatMapSingle { contribution ->
+                        queueContributionForRetry(
+                            contribution,
+                            uploadRepository,
+                            contributionsRepository,
+                        )
+                    }.toList()
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe(
+                        { results ->
+                            if (results.any { it }) {
+                                makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
                             }
-                        }, { throwable: Throwable? ->
-                            Timber.e(throwable)
-                            restartUploads(contributionList, index + 1, context)
-                        }),
-                )
-            } else {
-                contribution.state = STATE_QUEUED
-                compositeDisposable.add(
-                    contributionsRepository
-                        .save(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .doOnComplete {
-                            restartUploads(contributionList, index + 1, context)
-                        }.subscribe {
-                            makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
                         },
-                )
-            }
+                        { throwable ->
+                            Timber.e(throwable, "Failed to restart uploads")
+                        },
+                    ),
+            )
         }
 
         /**
@@ -248,52 +212,5 @@ class PendingUploadsPresenter
         fun restartUpload(
             contribution: Contribution,
             context: Context,
-        ) {
-            CommonsApplication.isPaused = false
-            if (contribution.state == STATE_FAILED) {
-                contribution.dateUploadStarted = Calendar.getInstance().time
-                if (contribution.errorInfo == null) {
-                    contribution.chunkInfo = null
-                    contribution.transferred = 0
-                }
-                compositeDisposable.add(
-                    uploadRepository
-                        .checkDuplicateImage(
-                            originalFilePath = contribution.contentUri!!,
-                            modifiedFilePath = contribution.localUri!!,
-                        ).subscribeOn(ioThreadScheduler)
-                        .subscribe { imageCheckResult: Int ->
-                            if (imageCheckResult == IMAGE_OK) {
-                                contribution.state = STATE_QUEUED
-                                compositeDisposable.add(
-                                    contributionsRepository
-                                        .save(contribution)
-                                        .subscribeOn(ioThreadScheduler)
-                                        .subscribe {
-                                            makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
-                                        },
-                                )
-                            } else {
-                                Timber.e("Contribution already exists")
-                                compositeDisposable.add(
-                                    contributionsRepository
-                                        .deleteContributionFromDB(contribution)
-                                        .subscribeOn(ioThreadScheduler)
-                                        .subscribe(),
-                                )
-                            }
-                        },
-                )
-            } else {
-                contribution.state = STATE_QUEUED
-                compositeDisposable.add(
-                    contributionsRepository
-                        .save(contribution)
-                        .subscribeOn(ioThreadScheduler)
-                        .subscribe {
-                            makeOneTimeWorkRequest(context, ExistingWorkPolicy.KEEP)
-                        },
-                )
-            }
-        }
+        ) = restartUploads(listOf(contribution), 0, context)
     }

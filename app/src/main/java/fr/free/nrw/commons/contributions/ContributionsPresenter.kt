@@ -4,8 +4,8 @@ import androidx.work.ExistingWorkPolicy
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
+import fr.free.nrw.commons.upload.queueContributionForRetry
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
-import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -49,25 +49,26 @@ class ContributionsPresenter
          */
         fun checkDuplicateImageAndRestartContribution(contribution: Contribution) {
             compositeDisposable!!.add(
-                uploadRepository
-                    .checkDuplicateImage(
-                        contribution.contentUri,
-                        contribution.localUri,
-                    ).subscribeOn(ioThreadScheduler)
-                    .subscribe { imageCheckResult: Int ->
-                        if (imageCheckResult == ImageUtils.IMAGE_OK) {
-                            contribution.state = Contribution.STATE_QUEUED
-                            saveContribution(contribution)
-                        } else {
-                            Timber.e("Contribution already exists")
-                            compositeDisposable!!.add(
-                                contributionsRepository
-                                    .deleteContributionFromDB(contribution)
-                                    .subscribeOn(ioThreadScheduler)
-                                    .subscribe(),
-                            )
-                        }
-                    },
+                queueContributionForRetry(
+                    contribution,
+                    uploadRepository,
+                    contributionsRepository,
+                ).subscribeOn(ioThreadScheduler)
+                    .subscribe(
+                        { queued ->
+                            if (queued) {
+                                view?.getContext()?.applicationContext?.let {
+                                    makeOneTimeWorkRequest(
+                                        it,
+                                        ExistingWorkPolicy.APPEND_OR_REPLACE,
+                                    )
+                                }
+                            }
+                        },
+                        { throwable: Throwable ->
+                            Timber.e(throwable, "Failed to restart contribution")
+                        },
+                    ),
             )
         }
 
@@ -82,14 +83,19 @@ class ContributionsPresenter
                 contributionsRepository
                     .save(contribution)
                     .subscribeOn(ioThreadScheduler)
-                    .subscribe {
-                        view!!.getContext()?.applicationContext?.let {
-                            makeOneTimeWorkRequest(
-                                it,
-                                ExistingWorkPolicy.KEEP,
-                            )
-                        }
-                    },
+                    .subscribe(
+                        {
+                            view?.getContext()?.applicationContext?.let {
+                                makeOneTimeWorkRequest(
+                                    it,
+                                    ExistingWorkPolicy.APPEND_OR_REPLACE,
+                                )
+                            }
+                        },
+                        { throwable: Throwable ->
+                            Timber.e(throwable, "Failed to save contribution")
+                        },
+                    ),
             )
         }
     }

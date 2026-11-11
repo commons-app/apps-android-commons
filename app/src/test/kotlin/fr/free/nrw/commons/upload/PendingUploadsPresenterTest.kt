@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.net.Uri
+import androidx.work.ExistingWorkPolicy
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
@@ -9,6 +10,7 @@ import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper
+import fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.mockk.Runs
 import io.mockk.every
@@ -22,8 +24,10 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
 
 /**
  * The unit test class for PendingUploadsPresenter
@@ -41,6 +45,7 @@ class PendingUploadsPresenterTest {
         every { WorkRequestHelper.makeOneTimeWorkRequest(any(), any()) } just Runs
         every { uploadRepository.checkDuplicateImage(any(), any()) } returns Single.just(IMAGE_OK)
         every { contributionsRepository.save(any<Contribution>()) } returns Completable.complete()
+        every { contributionsRepository.deleteContributionFromDB(any()) } returns Completable.complete()
         presenter =
             PendingUploadsPresenter(
                 mockk(relaxed = true),
@@ -69,8 +74,14 @@ class PendingUploadsPresenterTest {
 
         presenter.restartFailedUploads(context)
 
-        failedContributions.forEach { assertEquals(STATE_QUEUED, it.state) }
+        failedContributions.forEach {
+            assertEquals(STATE_QUEUED, it.state)
+            assertNull(it.errorInfo)
+        }
         verify(exactly = 40) { contributionsRepository.save(any<Contribution>()) }
+        verify(exactly = 1) {
+            WorkRequestHelper.makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
+        }
     }
 
     /**
@@ -78,19 +89,103 @@ class PendingUploadsPresenterTest {
      */
     @Test
     fun testRestartUploadQueuesTheGivenUpload() {
-        val contribution = failedContribution()
+        val contribution = failedContribution(errorInfo = "Unsuccessful response")
+
+        presenter.restartUpload(contribution, context)
+
+        assertEquals(STATE_QUEUED, contribution.state)
+        assertNull(contribution.errorInfo)
+        verify(exactly = 1) { contributionsRepository.save(contribution) }
+        verify(exactly = 1) {
+            WorkRequestHelper.makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
+        }
+    }
+
+    /**
+     * Test that retrying a failed upload still queues it when the duplicate check fails
+     * (e.g., offline or expired URI access)
+     */
+    @Test
+    fun testRestartUploadQueuesUploadWhenDuplicateCheckFails() {
+        val contribution = failedContribution(errorInfo = "Unsuccessful response")
+        every {
+            uploadRepository.checkDuplicateImage(any(), any())
+        } returns Single.error(IOException("Unsuccessful response"))
+
+        presenter.restartUpload(contribution, context)
+
+        assertEquals(STATE_QUEUED, contribution.state)
+        assertNull(contribution.errorInfo)
+        verify(exactly = 1) { contributionsRepository.save(contribution) }
+        verify(exactly = 1) {
+            WorkRequestHelper.makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
+        }
+    }
+
+    /**
+     * Test that retrying a failed upload with null URIs queues safely without throwing
+     */
+    @Test
+    fun testRestartUploadHandlesNullUris() {
+        val contribution = failedContribution(localUri = null, contentUri = null)
 
         presenter.restartUpload(contribution, context)
 
         assertEquals(STATE_QUEUED, contribution.state)
         verify(exactly = 1) { contributionsRepository.save(contribution) }
+        verify(exactly = 1) {
+            WorkRequestHelper.makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
+        }
     }
 
-    private fun failedContribution() =
-        Contribution(
-            media = Media(),
-            state = STATE_FAILED,
-            localUri = mockk<Uri>(),
-            contentUri = mockk<Uri>(),
-        )
+    /**
+     * Test that retrying all failed uploads still queues items whose duplicate check fails
+     */
+    @Test
+    fun testRestartFailedUploadsQueuesUploadWhenDuplicateCheckFails() {
+        val first = failedContribution(errorInfo = "Unsuccessful response")
+        val second = failedContribution()
+        every {
+            contributionsRepository.getAllContributionsWithStates(listOf(STATE_FAILED))
+        } returns Single.just(listOf(first, second))
+        every {
+            uploadRepository.checkDuplicateImage(any(), any())
+        } returnsMany listOf(Single.error(SecurityException("Permission denied")), Single.just(IMAGE_OK))
+
+        presenter.restartFailedUploads(context)
+
+        assertEquals(STATE_QUEUED, first.state)
+        assertEquals(STATE_QUEUED, second.state)
+        verify(exactly = 2) { contributionsRepository.save(any<Contribution>()) }
+        verify(exactly = 1) {
+            WorkRequestHelper.makeOneTimeWorkRequest(context, ExistingWorkPolicy.APPEND_OR_REPLACE)
+        }
+    }
+
+    /**
+     * Test that a failed upload already present on Commons is removed instead of re-queued
+     */
+    @Test
+    fun testRestartUploadDeletesConfirmedDuplicate() {
+        val contribution = failedContribution()
+        every { uploadRepository.checkDuplicateImage(any(), any()) } returns Single.just(IMAGE_DUPLICATE)
+
+        presenter.restartUpload(contribution, context)
+
+        verify(exactly = 1) { contributionsRepository.deleteContributionFromDB(contribution) }
+        verify(exactly = 0) { contributionsRepository.save(any<Contribution>()) }
+        verify(exactly = 0) { WorkRequestHelper.makeOneTimeWorkRequest(any(), any()) }
+    }
+
+    private fun failedContribution(
+        errorInfo: String? = null,
+        localUri: Uri? = mockk<Uri>(),
+        contentUri: Uri? = mockk<Uri>(),
+    ) = Contribution(
+        media = Media(),
+        state = STATE_FAILED,
+        errorInfo = errorInfo,
+        localUri = localUri,
+        contentUri = contentUri,
+    )
 }
