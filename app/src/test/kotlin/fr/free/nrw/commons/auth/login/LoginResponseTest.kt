@@ -74,4 +74,22 @@ class LoginResponseTest {
 
         assertNull(response.errorMessage())
     }
+
+    @Test
+    fun emptyErrorsArrayHasNoErrorMessage() {
+        val response = gson.fromJson("""{"errors":[]}""", LoginResponse::class.java)
+
+        assertNull(response.errorMessage())
+    }
+
+    @Test
+    fun legacyErrorFieldGivesErrorMessage() {
+        val response =
+            gson.fromJson(
+                """{"error":{"code":"badtoken","text":"Bad token."}}""",
+                LoginResponse::class.java,
+            )
+
+        assertEquals("Bad token.", response.errorMessage())
+    }
 }

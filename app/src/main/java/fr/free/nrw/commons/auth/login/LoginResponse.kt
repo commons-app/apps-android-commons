@@ -19,10 +19,11 @@ class LoginResponse {
     private val clientLogin: ClientLogin? = null
 
     /**
-     * Returns the text of the first API error in [errors] (or its code when the text is empty),
-     * or null when the response has no API error.
+     * Returns the text of the first API error (or its code when the text is empty), looking at
+     * [errors] first and then the legacy [error]. Returns null when there is no API error.
      */
-    fun errorMessage(): String? = errors?.firstOrNull()?.let { it.details.ifBlank { it.title }.ifBlank { null } }
+    fun errorMessage(): String? =
+        (errors?.firstOrNull() ?: error)?.let { e -> e.details.ifBlank { e.title }.ifBlank { null } }
 
     fun toLoginResult(password: String): LoginResult? = clientLogin?.toLoginResult(password)
 }
