@@ -422,7 +422,7 @@ class UploadWorker(
         if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
-                val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
+                var p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
                 try {
                     if (!p18WasSkipped) {
                         // Only set P18 if the place does not already have a picture
@@ -435,12 +435,14 @@ class UploadWorker(
                         // the pre-upload title, which can differ from the real
                         // uploaded title when findUniqueFileName had to rename the
                         // file to avoid a collision with an existing Commons page.
-                        revisionID =
+                        val imageClaim =
                             wikidataEditService.createClaim(
                                 wikiDataPlace,
                                 uniqueFileName,
                                 contribution.media.captions,
                             )
+                        revisionID = imageClaim.revisionId
+                        p18WasSkipped = imageClaim.skipped
                         if (null != revisionID) {
                             withContext(Dispatchers.IO) {
                                 val place = placesRepository.fetchPlace(wikiDataPlace.id)

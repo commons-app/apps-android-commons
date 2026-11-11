@@ -4,6 +4,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikiBaseInterface
+import fr.free.nrw.commons.upload.depicts.Claims
+import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
@@ -12,6 +14,7 @@ import io.reactivex.Observable
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import junit.framework.TestCase.assertTrue
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -52,6 +55,27 @@ class WikiBaseClientUnitTest {
     }
 
     @Test
+    fun getClaimIdsByProperty_fileWithoutStructuredDataHasNoClaims() {
+        whenever(wikiBaseInterface.getClaimsByProperty("M123", "P180"))
+            .thenReturn(Observable.error(mwException(NO_SUCH_ENTITY)))
+
+        val result = wikiBaseClient.getClaimIdsByProperty("M123", "P180").blockingFirst()
+
+        assertEquals(emptyList<String>(), result)
+    }
+
+    @Test
+    fun getClaimIdsByProperty_otherErrorsArePassedOn() {
+        val error = mwException(PARAM_INVALID)
+        whenever(wikiBaseInterface.getClaimsByProperty("M123", "P180"))
+            .thenReturn(Observable.error(error))
+
+        val result = wikiBaseClient.getClaimIdsByProperty("M123", "P180").test()
+
+        result.assertError(error)
+    }
+
+    @Test
     fun getFileEntityId() {
         val upload = UploadResult("result", "key", 0, "Example.jpg")
 
@@ -84,5 +108,22 @@ class WikiBaseClientUnitTest {
         val result = wikiBaseClient.addLabelsToWikidata(123L, "en", "caption").blockingFirst()
 
         assertSame(mwPostResponse, result)
+    }
+
+    /**
+     * Reads an "errors" answer from Commons, the same way Retrofit does, and returns the exception
+     */
+    private fun mwException(json: String): MwException =
+        assertThrows(MwException::class.java) {
+            GsonUtil.defaultGson.fromJson(json, Claims::class.java)
+        }
+
+    private companion object {
+        // Answers from Commons to action=wbgetclaims with errorformat=plaintext
+        const val NO_SUCH_ENTITY =
+            """{"errors":[{"code":"no-such-entity","text":"⧼no-such-entity⧽","module":"main"}]}"""
+        const val PARAM_INVALID =
+            """{"errors":[{"code":"param-invalid","text":"The serialization \"M0\" is not recognized""" +
+                """ by the configured id builders","module":"wbgetclaims"}]}"""
     }
 }

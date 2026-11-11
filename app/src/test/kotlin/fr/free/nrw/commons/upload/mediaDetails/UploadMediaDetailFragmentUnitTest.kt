@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.FragmentManager
@@ -30,6 +32,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.locationpicker.LocationPicker
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
@@ -173,6 +176,35 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnCreateView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreateView(layoutInflater, null, savedInstanceState)
+    }
+
+    @Test
+    fun landscapePreviewStartsAtTheTopWithoutStretching() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
+        fragment.recentLanguagesDao = mock()
+        Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
+
+        val preview =
+            fragment
+                .onCreateView(layoutInflater, null, null)
+                .findViewById<PhotoView>(R.id.backgroundImage)
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(400, View.MeasureSpec.EXACTLY)
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY)
+        preview.setImageBitmap(Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888))
+        preview.measure(widthSpec, heightSpec)
+        preview.layout(0, 0, 400, 600)
+
+        val bounds = checkNotNull(preview.displayRect)
+        Assert.assertEquals(0f, bounds.top, 0.01f)
+        Assert.assertEquals(200f, bounds.height(), 0.01f)
+
+        preview.setImageBitmap(Bitmap.createBitmap(300, 600, Bitmap.Config.ARGB_8888))
+        preview.measure(widthSpec, heightSpec)
+        preview.layout(0, 0, 400, 600)
+
+        val tallBounds = checkNotNull(preview.displayRect)
+        Assert.assertEquals(50f, tallBounds.left, 0.01f)
+        Assert.assertEquals(350f, tallBounds.right, 0.01f)
     }
 
     @Test

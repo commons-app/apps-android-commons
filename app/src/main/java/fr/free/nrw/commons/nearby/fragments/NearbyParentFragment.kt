@@ -2116,11 +2116,6 @@ class NearbyParentFragment :
         }
     }
 
-    fun setTabItemContributions() {
-        (activity as MainActivity).binding?.pager?.currentItem
-        // TODO
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
