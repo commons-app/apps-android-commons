@@ -516,7 +516,7 @@
   </plurals>
   <string name="multiple_files_depiction">გთხოვთ, გაითვალისწინოთ, რომ მრავალჯერადი ატვირთვისას ყველა სურათს ერთნაირი კატეგორიები და გამოსახულებები აქვს. თუ სურათებს საერთო გამოსახულებები და კატეგორიები არ აქვთ, გთხოვთ, ატვირთოთ ისინი ცალ-ცალკე.</string>
   <string name="multiple_files_depiction_header">შენიშვნა მრავალჯერადი ატვირთვის შესახებ</string>
-  <string name="nearby_wikitalk">ამ ნივთთან დაკავშირებული პრობლემის შესახებ Wikidata-ს შეატყობინეთ</string>
+  <string name="nearby_report_problem">ამ ნივთთან დაკავშირებული პრობლემის შესახებ Wikidata-ს შეატყობინეთ</string>
   <string name="please_enter_some_comments">გთხოვთ, შეიყვანოთ რამდენიმე კომენტარი</string>
   <string name="talk">განხილვა</string>
   <string name="write_something_about_the_item">დაწერეთ რამე „ %1$s “ ერთეულის შესახებ. ის საჯაროდ ხილული იქნება.</string>

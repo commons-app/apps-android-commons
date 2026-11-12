@@ -597,7 +597,7 @@
   <string name="saving_kml_file">Đang lưu dưới dạng tập tin KML...</string>
   <string name="saving_gpx_file">Đang lưu dưới dạng tập tin GPX...</string>
   <string name="multiple_files_depiction_header">Lưu ý về việc tải lên nhiều tập tin cùng lúc</string>
-  <string name="nearby_wikitalk">Báo cáo sự cố về mục này cho Wikidata</string>
+  <string name="nearby_report_problem">Báo cáo sự cố về mục này cho Wikidata</string>
   <string name="talk">Thảo luận</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Bạn có chắc muốn hủy tất cả các tác vụ đang tải lên không?</string>
   <string name="cancelling_all_the_uploads">Đang hủy tất cả tác vụ tải lên...</string>

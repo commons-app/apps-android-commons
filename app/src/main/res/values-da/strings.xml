@@ -110,6 +110,10 @@
   <string name="menu_view_file_page">Vis filside</string>
   <string name="share_title_hint">Billedtekst (påkrævet)</string>
   <string name="add_caption_toast">Angiv venligst en billedtekst til denne fil</string>
+  <string name="file_name_blacklisted_toast">Commons accepterer ikke dette filnavn. Brug venligst en mere beskrivende billedtekst.</string>
+  <string name="file_name_too_long_toast">Denne billedtekst er for lang til at blive brugt som filnavn. Forkort den venligst.</string>
+  <string name="file_name_invalid_toast">Denne billedtekst kan ikke bruges som filnavn på Commons. Ændr den venligst.</string>
+  <string name="file_name_banned_extension_toast">Denne billedtekst indeholder en filtype som \".com\". Ret den venligst.</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="share_caption_hint">Billedtekst</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
@@ -224,6 +228,12 @@
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
   <string name="media_detail_coordinates_empty">Ingen angivet</string>
+  <string name="playback_quality">Afspilningskvalitet</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Videokvalitet</string>
+  <string name="video_quality_auto">Automatisk</string>
+  <string name="video_quality_higher">Højere billedkvalitet</string>
+  <string name="video_quality_data_saver">Databesparelse</string>
   <string name="become_a_tester_title">Bliv betatester</string>
   <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig adgang til nye funktioner og fejlrettelser</string>
   <string name="_2fa_code">2FA-kode</string>
@@ -818,7 +828,7 @@
   </plurals>
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
-  <string name="nearby_wikitalk">Rapporter et problem omkring dette element til Wikidata</string>
+  <string name="nearby_report_problem">Rapporter et problem omkring dette element til Wikidata</string>
   <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
   <string name="talk">Tal</string>
   <string name="write_something_about_the_item">Skriv noget om elementet \'%1$s\'. Det vil være offentligt synligt.</string>
@@ -847,6 +857,10 @@
   <string name="green_pin">Dette sted har allerede et billede.</string>
   <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
   <string name="error_while_loading">Fejl under indlæsning</string>
+  <string name="play_video">Afspil video</string>
+  <string name="play_audio">Afspil lyd</string>
+  <string name="video_unavailable">Videoen er ikke tilgængelig. Tryk for at prøve igen.</string>
+  <string name="audio_unavailable">Lyd ikke tilgængelig. Tryk for at prøve igen.</string>
   <string name="no_usages_found">Ingen anvendelser fundet</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andre wikier</string>

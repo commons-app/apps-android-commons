@@ -792,7 +792,7 @@
   </plurals>
   <string name="multiple_files_depiction">Savez ke omna imaji, kande sendesas kune, recevas la sama kategorii, e deskripturi. Se ta imaji ne havas la sama deskripti e kategorii, voluntez facar diversa sendaji separata.</string>
   <string name="multiple_files_depiction_header">Noto pri multopla sendado di imaji</string>
-  <string name="nearby_wikitalk">Informez Wikipedio pri problemo en ca temo</string>
+  <string name="nearby_report_problem">Informez Wikipedio pri problemo en ca temo</string>
   <string name="please_enter_some_comments">Voluntez facar kelka komenti</string>
   <string name="talk">Diskuto</string>
   <string name="write_something_about_the_item">Dicez irgu pri l\'arkivo \'%1$s\'. Ol esos videbla publike.</string>
