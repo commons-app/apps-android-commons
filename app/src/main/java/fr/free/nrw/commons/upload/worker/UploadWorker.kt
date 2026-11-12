@@ -413,7 +413,6 @@ class UploadWorker(
     /**
      * Saves captions, depicts and P18 for a file that is already on Commons
      */
-    @SuppressLint("MissingPermission")
     private suspend fun finishPublishedUpload(
         contribution: Contribution,
         filename: String,
