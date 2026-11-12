@@ -530,7 +530,7 @@
     <ID>NestedBlockDepth:UploadModel.kt$UploadModel$fun onDepictItemClicked( depictedItem: DepictedItem, media: Media?, )</ID>
     <ID>NestedBlockDepth:UploadProgressActivity.kt$UploadProgressActivity$fun updateMenuItems(currentPosition: Int)</ID>
     <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
-    <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$private suspend fun makeWikiDataEdit( uploadResult: UploadResult, contribution: Contribution, uniqueFileName: String, )</ID>
+    <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$private suspend fun makeWikiDataEdit( filename: String, contribution: Contribution, uniqueFileName: String, )</ID>
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getPreviousActionableImage(index: Int): Int</ID>

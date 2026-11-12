@@ -34,6 +34,7 @@ class ImageFolderManager
                         Contribution.STATE_FAILED,
                         Contribution.STATE_QUEUED,
                         Contribution.STATE_PAUSED,
+                        Contribution.STATE_METADATA_PENDING,
                     ),
                 )?.subscribeOn(Schedulers.io())
                 ?.blockingGet() ?: emptyList()
