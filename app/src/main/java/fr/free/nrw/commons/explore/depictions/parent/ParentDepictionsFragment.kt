@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.explore.depictions.PageableDepictionsFragment
+import fr.free.nrw.commons.utils.getStringSafe
 import javax.inject.Inject
 
 class ParentDepictionsFragment : PageableDepictionsFragment() {
@@ -14,7 +15,10 @@ class ParentDepictionsFragment : PageableDepictionsFragment() {
         get() = presenter
 
     override fun getEmptyText(query: String) =
-        getString(R.string.no_parent_classes, requireArguments().getString("wikidataItemName")!!)
+        requireContext().getStringSafe(
+            R.string.no_parent_classes,
+            requireArguments().getString("wikidataItemName")!!,
+        )
 
     override fun onViewCreated(
         view: View,

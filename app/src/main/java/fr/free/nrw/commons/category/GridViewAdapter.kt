@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.utils.getStringSafe
 
 /**
  * This is created to only display UI implementation. Needs to be changed in real implementation
@@ -101,7 +102,7 @@ class GridViewAdapter(
         uploader: TextView,
     ) {
         uploader.text =
-            context.getString(
+            context.getStringSafe(
                 R.string.image_uploaded_by,
                 item.getAuthorOrUser(),
             )

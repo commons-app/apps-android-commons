@@ -16,11 +16,11 @@ object MediaAttributionUtil {
         val uploader = media.user
         val author = media.getAttributedAuthor()
         return if (author.isNullOrEmpty()) {
-            context.getString(R.string.image_uploaded_by, uploader)
+            context.getStringSafe(R.string.image_uploaded_by, uploader)
         } else if (author == uploader) {
-            context.getString(R.string.image_tag_line_created_and_uploaded_by, author)
+            context.getStringSafe(R.string.image_tag_line_created_and_uploaded_by, author)
         } else {
-            context.getString(
+            context.getStringSafe(
                 R.string.image_tag_line_created_by_and_uploaded_by,
                 author,
                 uploader,

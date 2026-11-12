@@ -9,6 +9,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
+import fr.free.nrw.commons.utils.getQuantityStringSafe
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
@@ -115,7 +116,7 @@ class CategoryEditHelper
                 }
 
                 message =
-                    context.resources.getQuantityString(
+                    context.getQuantityStringSafe(
                         R.plurals.category_edit_helper_show_edit_message_if,
                         mediaCategoryList.size,
                         categoriesInMessage.toString(),
