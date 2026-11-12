@@ -11,11 +11,11 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.rx2.await
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.FileNotFoundException
 import java.io.IOException
-import java.net.UnknownHostException
 
 /**
  * Util Class for Custom Selector
@@ -85,17 +85,13 @@ object CustomSelectorUtils {
         withContext(ioDispatcher) {
             var result: ImageLoader.Result = ImageLoader.Result.FALSE
             try {
-                if (mediaClient.checkFileExistsUsingSha(sha1).blockingGet()) {
+                if (mediaClient.checkFileExistsUsingSha(sha1).await()) {
                     result = ImageLoader.Result.TRUE
                 }
-            } catch (e: UnknownHostException) {
-                // Handle no network connection.
+            } catch (e: IOException) {
+                // Covers UnknownHostException, ConnectException and other network/IO failures.
                 Timber.e(e, "Network Connection Error")
                 result = ImageLoader.Result.ERROR
-                e.printStackTrace()
-            } catch (e: Exception) {
-                result = ImageLoader.Result.ERROR
-                e.printStackTrace()
             }
             result
         }

@@ -42,12 +42,8 @@ class BookmarkPicturesStatusView(
         isGridEmpty: Boolean,
     ) {
         Timber.e(throwable, "Error occurred while loading images inside a category")
-        try {
-            showShortSnackbar(binding.root, R.string.error_loading_images)
-            showErrorView(isGridEmpty)
-        } catch (e: Exception) {
-            Timber.e(e)
-        }
+        showShortSnackbar(binding.root, R.string.error_loading_images)
+        showErrorView(isGridEmpty)
     }
 
     /**

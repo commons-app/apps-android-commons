@@ -595,21 +595,17 @@
     <ID>TooGenericExceptionCaught:CryptoUtils.kt$CryptoUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CsrfTokenClient.kt$CsrfTokenClient$t: Throwable</ID>
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CustomSelectorUtils.kt$CustomSelectorUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExploreMapController.kt$ExploreMapController$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:FeedbackDialog.kt$FeedbackDialog$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePickerIntents.kt$FilePickerIntents$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ImageFragment.kt$ImageFragment$ex: Exception</ID>
     <ID>TooGenericExceptionCaught:ImageUtils.kt$ImageUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LeaderboardFragment.kt$LeaderboardFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LocationPickerActivity.kt$LocationPickerActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:LoginActivity.kt$LoginActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:MapUtils.kt$MapUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MediaDetailViewModel.kt$MediaDetailViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:NearbyParentFragment.kt$NearbyParentFragment$e: Exception</ID>
