@@ -37,6 +37,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
@@ -409,5 +410,26 @@ class ContributionsFragmentUnitTests {
 
         Assert.assertEquals(1, contribution.retries)
         verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
+    }
+
+    @Test
+    fun testRetryUploadOfUploadedFileOnlyQueuesItAgain() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_METADATA_PENDING,
+                errorInfo = "internal_api_error_DBQueryError",
+                uploadedFilename = "Example.jpg",
+            )
+
+        fragment.retryUpload(contribution)
+
+        // The duplicate check would find the file on Commons and delete the upload
+        Assert.assertEquals(1, contribution.retries)
+        Assert.assertEquals(Contribution.STATE_QUEUED, contribution.state)
+        verify(contributionsPresenter).saveContribution(contribution)
+        verify(contributionsPresenter, never()).checkDuplicateImageAndRestartContribution(contribution)
     }
 }

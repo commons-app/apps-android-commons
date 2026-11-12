@@ -203,6 +203,7 @@ open class CommonsApplicationModule(
             MIGRATION_21_22,
             MIGRATION_22_23,
             MIGRATION_23_24,
+            MIGRATION_24_25,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -557,6 +558,14 @@ val MIGRATION_23_24 =
             db.execSQL("ALTER TABLE contribution ADD COLUMN media_mimeType TEXT")
             db.execSQL("ALTER TABLE contribution ADD COLUMN media_mediaType TEXT NOT NULL DEFAULT 'OTHER'")
             backfillMediaTypes(db)
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_24_25 =
+    object : Migration(24, 25) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
         }
     }
 
