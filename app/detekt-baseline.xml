@@ -516,7 +516,6 @@
     <ID>NestedBlockDepth:MediaDetailFragment.kt$MediaDetailFragment$private fun getDescriptions(s: String): LinkedHashMap&lt;String, String&gt;</ID>
     <ID>NestedBlockDepth:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$override fun onCreateOptionsMenu( menu: Menu, inflater: MenuInflater, )</ID>
     <ID>NestedBlockDepth:MwQueryResult.kt$MwQueryResult$private fun resolveRedirectedTitles()</ID>
-    <ID>NestedBlockDepth:NearbyParentFragment.kt$NearbyParentFragment$override fun recenterMap(currentLatLng: LatLng?)</ID>
     <ID>NestedBlockDepth:OkHttpConnectionFactory.kt$UnsuccessfulResponseInterceptor$@Throws(IOException::class) override fun intercept(chain: Interceptor.Chain): Response</ID>
     <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsGPX(leftLatLng: LatLng, rightLatLng: LatLng): String?</ID>
     <ID>NestedBlockDepth:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$@Throws(Exception::class) fun getPlacesAsKML(leftLatLng: LatLng, rightLatLng: LatLng): String?</ID>
@@ -633,7 +632,6 @@
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
-    <ID>TooManyFunctions:BasicKvStore.kt$BasicKvStore : KeyValueStore</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
     <ID>TooManyFunctions:CommonsApplicationModule.kt$CommonsApplicationModule</ID>
@@ -648,11 +646,9 @@
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
     <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
-    <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
-    <ID>TooManyFunctions:MediaInterface.kt$MediaInterface</ID>
     <ID>TooManyFunctions:MwQueryPage.kt$MwQueryPage : BaseModel</ID>
     <ID>TooManyFunctions:MwQueryResult.kt$MwQueryResult : BaseModelPostProcessable</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>

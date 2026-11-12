@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.kvstore
 
+// Suppressed TooManyFunctions because this is the whole key-value storage API: a getter
+// with and without a default and a setter for each supported type, plus contains,
+// remove and clearAll.
+@Suppress("TooManyFunctions")
 interface KeyValueStore {
     fun getString(key: String): String?
 
