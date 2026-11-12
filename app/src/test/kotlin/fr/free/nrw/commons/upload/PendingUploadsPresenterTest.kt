@@ -6,6 +6,7 @@ import androidx.work.ExistingWorkPolicy
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.repository.UploadRepository
@@ -176,6 +177,30 @@ class PendingUploadsPresenterTest {
         verify(exactly = 0) { contributionsRepository.save(any<Contribution>()) }
         verify(exactly = 0) { WorkRequestHelper.makeOneTimeWorkRequest(any(), any()) }
     }
+
+    /**
+     * Test that retrying an upload whose file is already on Commons queues it again, instead of
+     * deleting it as a duplicate of that file
+     */
+    @Test
+    fun testRestartUploadKeepsAnUploadAlreadyOnCommons() {
+        every { uploadRepository.checkDuplicateImage(any(), any()) } returns Single.just(IMAGE_DUPLICATE)
+        every { contributionsRepository.deleteContributionFromDB(any()) } returns Completable.complete()
+        val single = metadataPendingContribution()
+        val all = List(2) { metadataPendingContribution() }
+
+        presenter.restartUpload(single, context)
+        presenter.restartUploads(all, 0, context)
+
+        (all + single).forEach { assertEquals(STATE_QUEUED, it.state) }
+        verify(exactly = 0) { contributionsRepository.deleteContributionFromDB(any()) }
+    }
+
+    private fun metadataPendingContribution() =
+        failedContribution().apply {
+            state = STATE_METADATA_PENDING
+            uploadedFilename = "Example.jpg"
+        }
 
     private fun failedContribution(
         errorInfo: String? = null,

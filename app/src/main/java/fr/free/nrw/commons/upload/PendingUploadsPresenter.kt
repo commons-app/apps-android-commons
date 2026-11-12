@@ -9,6 +9,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionBoundaryCallback
@@ -56,7 +57,7 @@ class PendingUploadsPresenter
 
             val factory =
                 contributionsRepository.fetchContributionsWithStates(
-                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED),
+                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED, STATE_METADATA_PENDING),
                     sortedByDateUploadStarted = true,
                 )
             totalContributionList = LivePagedListBuilder(factory, pagedListConfig).build()

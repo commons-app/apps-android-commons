@@ -87,6 +87,8 @@
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Failed to upload %1$s</string>
+  <string name="upload_metadata_pending_notification_title">%1$s is uploaded, but its captions and depicts are not saved yet</string>
+  <string name="upload_metadata_pending">Uploaded, captions and depicts not saved yet</string>
   <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <string name="upload_paused_notification_subtitle">Tap to view</string>
@@ -314,6 +316,7 @@
   <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
 
 
+  <string name="nearby_bookmark">Bookmark</string>
   <string name="nearby_directions">Directions</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -875,7 +878,8 @@ Upload your first media by tapping on the add button.</string>
   </plurals>
   <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
-  <string name="nearby_wikitalk">Report a problem about this item to Wikidata</string>
+  <string name="nearby_report_problem">Report a problem about this item to Wikidata</string>
+  <string name="nearby_report_problem_short">Report problem</string>
   <string name="please_enter_some_comments">Please enter some comments</string>
   <string name="talk">Talk</string>
   <string name="write_something_about_the_item">Write something about the \'%1$s\' item. It will be publicly visible.</string>

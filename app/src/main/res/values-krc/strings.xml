@@ -771,7 +771,7 @@
   </plurals>
   <string name="multiple_files_depiction">Мультиджюклеудеги бютеу суратлаула бир категорияла эмда танытыула алгъанларын унутмагъыз. Суратлау ангылатыула эмда категориялары юлюшлемей эселе, тилейбиз, талай айры джюклеу этигиз.</string>
   <string name="multiple_files_depiction_header">Мультиджюклеулеуни юсюнден эсгертиу</string>
-  <string name="nearby_wikitalk">Викибилгилеге бу элемент бла проблеманы юсюнден билдирме эт</string>
+  <string name="nearby_report_problem">Викибилгилеге бу элемент бла проблеманы юсюнден билдирме эт</string>
   <string name="please_enter_some_comments">Къаллай болса да комментарий киргизигиз</string>
   <string name="talk">Сюзюу</string>
   <string name="write_something_about_the_item">%1$s элементни юсюнден бир затла джазыгъыз. Буну хар ким да кёрлюкдю.</string>

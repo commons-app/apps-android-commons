@@ -822,7 +822,7 @@
   </plurals>
   <string name="multiple_files_depiction">Να θυμάστε ότι όλες οι εικόνες σε μια πολλαπλή μεταφόρτωση έχουν τις ίδιες κατηγορίες και απεικονίσεις. Εάν οι εικόνες δεν μοιράζονται απεικονίσεις και κατηγορίες, πραγματοποιήστε πολλές ξεχωριστές μεταφορτώσεις.</string>
   <string name="multiple_files_depiction_header">Σημείωση για τις πολλαπλές μεταφορτώσεις</string>
-  <string name="nearby_wikitalk">Αναφορά προβλήματος σχετικά με αυτό το αντικείμενο των Wikidata</string>
+  <string name="nearby_report_problem">Αναφορά προβλήματος σχετικά με αυτό το αντικείμενο των Wikidata</string>
   <string name="please_enter_some_comments">Παρακαλώ εισάγετε κάποια σχόλια</string>
   <string name="talk">Συζήτηση</string>
   <string name="write_something_about_the_item">Γράψτε κάτι για το αντικείμενο \'%1$s\'. Θα είναι δημόσια ορατό.</string>
