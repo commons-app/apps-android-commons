@@ -8,9 +8,13 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
+// Suppressed TooManyFunctions because each function is one Retrofit endpoint for
+// Commons media queries, and splitting them would only move endpoints between interfaces.
+
 /**
  * Interface for interacting with Commons media related APIs
  */
+@Suppress("TooManyFunctions")
 interface MediaInterface {
     /**
      * Checks if a page exists or not.
