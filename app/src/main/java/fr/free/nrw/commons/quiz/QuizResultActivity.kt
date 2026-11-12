@@ -24,6 +24,7 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 
 /**
  * Displays the final score of quiz and congratulates the user
@@ -187,7 +188,7 @@ class QuizResultActivity : AppCompatActivity() {
                     type = "image/png"
                 }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Timber.e(e, "Could not share screenshot")
         }
     }

@@ -148,4 +148,20 @@ internal class OnSwipeTouchListenerTest {
         whenever(motionEvent2.y).thenReturn(1f)
         gesListener.onFling(motionEvent1, motionEvent2, 0f, 2000f)
     }
+
+    /**
+     * Test that a failing swipe callback does not propagate out of onFling
+     */
+    @Test
+    fun `Test onFling swallows exceptions from swipe callbacks`() {
+        val throwingListener =
+            object : OnSwipeTouchListener(context) {
+                override fun onSwipeRight() {
+                    error("Swipe callback failed")
+                }
+            }
+        whenever(motionEvent1.x).thenReturn(1f)
+        whenever(motionEvent2.x).thenReturn(110f)
+        throwingListener.GestureListener().onFling(motionEvent1, motionEvent2, 2000f, 0f)
+    }
 }
