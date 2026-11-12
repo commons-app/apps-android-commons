@@ -8,6 +8,7 @@ import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.wikidata.WikidataProperties.DEPICTS
+import fr.free.nrw.commons.wikidata.WikidataProperties.LOCATION_OF_CREATION
 import fr.free.nrw.commons.wikidata.model.EditClaim
 import fr.free.nrw.commons.wikidata.model.RemoveClaim
 import io.reactivex.Observable
@@ -44,6 +45,39 @@ class DepictsEditor
                 }.doOnError { throwable: Throwable ->
                     Timber.e(throwable, "Error occurred while setting DEPICTS property")
                     showLongToast(context, throwable.toString())
+                }.subscribeOn(Schedulers.io())
+        }
+
+        /**
+         * Adds a "location of creation" (P1071) statement to the file, for a place where the
+         * picture was taken but which the picture does not really depict.
+         *
+         * @param fileEntityId the MediaInfo entity id of the file, without the "M" prefix
+         * @param locationId the Wikidata item id (for example Q12439) of the place
+         * @return emits true if the statement was saved
+         */
+        fun addLocationOfCreationProperty(
+            fileEntityId: String,
+            locationId: String,
+        ): Observable<Boolean> {
+            // Beta Commons does not know real Wikidata items, so it uses the same placeholder
+            // item as the depicts statement
+            val data =
+                EditClaim.from(
+                    listOf(if (isBetaFlavour) "Q10" else locationId),
+                    LOCATION_OF_CREATION.propertyName,
+                )
+
+            return wikiBaseClient
+                .postEditEntity(PAGE_ID_PREFIX + fileEntityId, gson.toJson(data))
+                .doOnNext { success: Boolean ->
+                    if (success) {
+                        Timber.d("LOCATION_OF_CREATION property was set successfully for %s", fileEntityId)
+                    } else {
+                        Timber.d("Unable to set LOCATION_OF_CREATION property for %s", fileEntityId)
+                    }
+                }.doOnError { throwable: Throwable ->
+                    Timber.e(throwable, "Error occurred while setting LOCATION_OF_CREATION property")
                 }.subscribeOn(Schedulers.io())
         }
 
