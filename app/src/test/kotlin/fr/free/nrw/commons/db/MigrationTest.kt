@@ -11,6 +11,7 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
 import fr.free.nrw.commons.di.MIGRATION_23_24
+import fr.free.nrw.commons.di.MIGRATION_24_25
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -75,6 +76,7 @@ class MigrationTest {
                 MIGRATION_21_22,
                 MIGRATION_22_23,
                 MIGRATION_23_24,
+                MIGRATION_24_25,
             )
 
         // tests
@@ -149,6 +151,7 @@ class MigrationTest {
                 MIGRATION_21_22,
                 MIGRATION_22_23,
                 MIGRATION_23_24,
+                MIGRATION_24_25,
             )
 
         try {
@@ -175,6 +178,42 @@ class MigrationTest {
                 cursor.getString(cursor.getColumnIndex("media_mediaType")),
             )
             cursor.close()
+        } finally {
+            migratedDb.close()
+            context.deleteDatabase(ROOM_DB)
+        }
+    }
+
+    @Test
+    fun testLocationOfCreationColumnAddedByMigration() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val oldDb = helper.createDatabase(ROOM_DB, 24)
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                mimeType, media_pageId, media_filename, media_captions, media_descriptions,
+                media_depictionIds, media_creatorIds, media_categoriesHiddenStatus,
+                media_mimeType, media_mediaType
+            ) VALUES (
+                '1', 1, 0, '[]', 0, 0, 0,
+                'image/jpeg', '1', 'File:Example.jpg',
+                '{}', '{}', '[]', '[]', '{}',
+                'image/jpeg', 'BITMAP'
+            )
+            """.trimIndent(),
+        )
+        oldDb.close()
+
+        val migratedDb =
+            helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_24_25)
+
+        try {
+            migratedDb.query("SELECT locationOfCreation FROM contribution WHERE pageId = '1'").use {
+                Assert.assertTrue("contribution survived migration", it.moveToFirst())
+                Assert.assertTrue("existing rows have no location", it.isNull(0))
+            }
         } finally {
             migratedDb.close()
             context.deleteDatabase(ROOM_DB)

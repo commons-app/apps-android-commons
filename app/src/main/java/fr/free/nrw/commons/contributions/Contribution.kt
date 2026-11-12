@@ -35,6 +35,11 @@ data class Contribution constructor(
      * is in turn used to upload depictions to wikibase
      */
     val depictedItems: List<DepictedItem> = ArrayList(),
+    /**
+     * Optional place where the picture was taken but which it does not really depict. It is saved
+     * as "location of creation" (P1071) instead of "depicts" (P180).
+     */
+    val locationOfCreation: DepictedItem? = null,
     var mimeType: String? = null,
     val localUri: Uri? = null,
     var dataLength: Long = 0,
@@ -59,6 +64,7 @@ data class Contribution constructor(
         depictedItems: List<DepictedItem>,
         categories: List<String>,
         imageSHA1: String,
+        locationOfCreation: DepictedItem? = null,
     ) : this(
         Media(
             formatCaptions(item.uploadMediaDetails),
@@ -72,6 +78,7 @@ data class Contribution constructor(
         decimalCoords = item.gpsCoords?.decimalCoords,
         dateCreatedSource = "",
         depictedItems = depictedItems,
+        locationOfCreation = locationOfCreation,
         wikidataPlace = from(item.place),
         contentUri = item.contentUri,
         dateCreatedString = item.fileCreatedDateString,

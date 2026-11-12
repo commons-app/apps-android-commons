@@ -132,6 +132,35 @@
               android:textStyle="bold" />
         </LinearLayout>
 
+        <LinearLayout
+          android:id="@+id/location_of_creation_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/standard_gap"
+          android:layout_marginEnd="@dimen/standard_gap"
+          android:layout_marginBottom="@dimen/small_gap"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+            <TextView
+              android:id="@+id/location_of_creation_text"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:textSize="@dimen/normal_text"
+              tools:text="Photo taken at: Detroit" />
+
+            <ImageButton
+              android:id="@+id/location_of_creation_clear"
+              android:layout_width="48dp"
+              android:layout_height="48dp"
+              android:background="?attr/selectableItemBackgroundBorderless"
+              android:contentDescription="@string/location_of_creation_clear"
+              android:src="@drawable/ic_clear_black_24dp" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/depicts_recycler_view"
           android:layout_width="match_parent"
