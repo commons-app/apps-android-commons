@@ -92,6 +92,8 @@
   <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name\n{{Identical|Uploading}}</string>
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
+  <string name="upload_metadata_pending_notification_title">Title for notification when a file was uploaded but saving its captions and depicts failed, so only those will be retried. %1$s represents file name</string>
+  <string name="upload_metadata_pending">Status in the pending uploads list for a file that is uploaded but whose captions and depicts are not saved yet.</string>
   <string name="upload_paused_notification_title">A notice that the current upload is paused.\n\n%1$s is the media\'s display title.</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
   <string name="upload_paused_notification_subtitle">Subtitle for {{msg-wm|Commons-android-strings-upload paused notification title}}.</string>

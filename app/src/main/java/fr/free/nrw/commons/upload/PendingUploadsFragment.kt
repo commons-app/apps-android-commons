@@ -11,6 +11,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
@@ -86,13 +87,10 @@ class PendingUploadsFragment :
                 var pausedOrQueuedUploads = 0
                 list.forEach {
                     if (it != null) {
-                        if (it.state == STATE_PAUSED ||
-                            it.state == STATE_QUEUED ||
-                            it.state == STATE_IN_PROGRESS
-                        ) {
+                        if (it.state in setOf(STATE_PAUSED, STATE_QUEUED, STATE_IN_PROGRESS, STATE_METADATA_PENDING)) {
                             contributionsList.add(it)
                         }
-                        if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
+                        if (it.state in setOf(STATE_PAUSED, STATE_QUEUED, STATE_METADATA_PENDING)) {
                             pausedOrQueuedUploads++
                         }
                     }
@@ -173,6 +171,7 @@ class PendingUploadsFragment :
                         STATE_QUEUED,
                         STATE_IN_PROGRESS,
                         STATE_PAUSED,
+                        STATE_METADATA_PENDING,
                     ),
                 )
             },
