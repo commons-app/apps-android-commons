@@ -49,6 +49,7 @@ class ContributionController
                             Contribution.STATE_IN_PROGRESS,
                             Contribution.STATE_QUEUED,
                             Contribution.STATE_PAUSED,
+                            Contribution.STATE_METADATA_PENDING,
                         ),
                     )
 

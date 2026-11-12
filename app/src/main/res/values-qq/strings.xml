@@ -92,6 +92,8 @@
   <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name\n{{Identical|Uploading}}</string>
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
+  <string name="upload_metadata_pending_notification_title">Title for notification when a file was uploaded but saving its captions and depicts failed, so only those will be retried. %1$s represents file name</string>
+  <string name="upload_metadata_pending">Status in the pending uploads list for a file that is uploaded but whose captions and depicts are not saved yet.</string>
   <string name="upload_paused_notification_title">A notice that the current upload is paused.\n\n%1$s is the media\'s display title.</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
   <string name="upload_paused_notification_subtitle">Subtitle for {{msg-wm|Commons-android-strings-upload paused notification title}}.</string>
@@ -112,7 +114,7 @@
   <string name="add_caption_toast">A notice during the upload process.</string>
   <string name="file_name_blacklisted_toast">A notice during the upload process, shown when the caption, which is used as the file name, is on the title blacklist of Commons (for example \"Photo\").</string>
   <string name="file_name_too_long_toast">A notice during the upload process, shown when the caption, which is used as the file name, is longer than Commons allows.</string>
-  <string name="file_name_invalid_toast">A notice during the upload process, shown when the caption, which is used as the file name, is not a valid page title on Commons (for example when it contains \"~~~\").</string>
+  <string name="file_name_invalid_toast">A notice during the upload process, shown when the caption, which is used as the file name, is not a valid page title on Commons (for example when it contains \"[[User:FuzzyBot|FuzzyBot]] ([[User talk:FuzzyBot|talk]])\").</string>
   <string name="file_name_banned_extension_toast">A notice during the upload process, shown when the caption, which is used as the file name, contains a file type that Commons does not accept, for example \"Visit konga.com\". \".com\" is a file extension and should not be translated.</string>
   <string name="share_description_hint">{{Identical|Description}}</string>
   <string name="share_caption_hint">Label of the caption of the image.</string>
@@ -169,10 +171,6 @@
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>
   <string name="preference_theme">Settings menu item.</string>
-  <string name="video_quality">Settings menu item for choosing which video transcode to play.</string>
-  <string name="video_quality_auto">Video quality option that picks a transcode matching the screen size.</string>
-  <string name="video_quality_higher">Video quality option that picks the highest-resolution transcode.</string>
-  <string name="video_quality_data_saver">Video quality option that picks the lowest-resolution transcode.</string>
   <string name="license_name_cc_by_sa_four">A license name.</string>
   <string name="license_name_cc_by_four">A license name.</string>
   <string name="license_name_cc_by_sa"> Attribution-Sharelike License display name.</string>
@@ -234,6 +232,10 @@
   <string name="media_detail_license">{{Identical|License}}</string>
   <string name="media_detail_coordinates">{{Identical|Coordinate}}</string>
   <string name="media_detail_coordinates_empty">Describes \"coordinates\".</string>
+  <string name="video_quality">Settings menu item for choosing which video transcode to play.</string>
+  <string name="video_quality_auto">Video quality option that picks a transcode matching the screen size.</string>
+  <string name="video_quality_higher">Video quality option that picks the highest-resolution transcode.</string>
+  <string name="video_quality_data_saver">Video quality option that picks the lowest-resolution transcode.</string>
   <string name="become_a_tester_title">Settings menu item.</string>
   <string name="become_a_tester_description">Settings menu item explanation.</string>
   <string name="_2fa_code">Login form label.</string>
@@ -801,7 +803,7 @@
   <string name="custom_picker_images_selected_title_appendix">Custom selector indicator.</string>
   <string name="multiple_files_depiction">{{Doc-commons-app-depicts}}</string>
   <string name="multiple_files_depiction_header">Notice when uploading several files.</string>
-  <string name="nearby_wikitalk">Notice in the Nearby screen.</string>
+  <string name="nearby_report_problem">Notice in the Nearby screen.</string>
   <string name="please_enter_some_comments">Error message.</string>
   <string name="talk">Talk page link.</string>
   <string name="write_something_about_the_item">Title of feedback form about the Wikidata item. %1$s is the item\'s label.</string>
