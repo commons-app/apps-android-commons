@@ -12,6 +12,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 fun uploadDepictsDelegate(
     onDepictClicked: (DepictedItem) -> Unit,
     nearbyPlace: Place?,
+    onDepictLongClicked: ((DepictedItem) -> Unit)? = null,
 ) = adapterDelegateViewBinding<DepictedItem, DepictedItem, LayoutUploadDepictsItemBinding>({ layoutInflater, parent ->
     LayoutUploadDepictsItemBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -24,6 +25,12 @@ fun uploadDepictsDelegate(
     }
     binding.root.setOnClickListener(onClickListener)
     binding.depictCheckbox.setOnClickListener(onClickListener)
+    if (onDepictLongClicked != null) {
+        binding.root.setOnLongClickListener {
+            onDepictLongClicked(item)
+            true
+        }
+    }
     bind {
         if (item.name == nearbyPlace?.name) {
             item.isSelected = true

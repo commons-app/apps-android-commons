@@ -200,6 +200,15 @@ class WikidataEditService
                         return@switchMap Observable.concat<Boolean>(
                             depictionEdits(contribution, fileEntityId),
                             captionEdits(contribution, fileEntityId),
+                            // The optional place where the picture was taken goes last. A
+                            // failure is logged and ignored so that it cannot undo the
+                            // depictions and captions that were already saved.
+                            contribution.locationOfCreation
+                                ?.let {
+                                    depictsEditor
+                                        .addLocationOfCreationProperty(fileEntityId.toString(), it.id)
+                                        .onErrorReturnItem(false)
+                                } ?: Observable.empty(),
                         )
                     } else {
                         Timber.d("Error acquiring EntityId for image: %s", uploadResult)

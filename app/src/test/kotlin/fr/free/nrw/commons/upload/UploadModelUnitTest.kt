@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import depictedItem
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import media
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -141,5 +144,16 @@ class UploadModelUnitTest {
     @Test
     fun testSetSelectedExistingDepictions() {
         uploadModel.selectedExistingDepictions = mutableListOf("")
+    }
+
+    @Test
+    fun `location of creation is empty by default and cleared by cleanUp`() {
+        assertNull(uploadModel.selectedLocationOfCreation)
+
+        uploadModel.selectedLocationOfCreation = depictedItem(id = "Q12439")
+        assertEquals("Q12439", uploadModel.selectedLocationOfCreation?.id)
+
+        uploadModel.cleanUp()
+        assertNull(uploadModel.selectedLocationOfCreation)
     }
 }

@@ -203,6 +203,7 @@ open class CommonsApplicationModule(
             MIGRATION_21_22,
             MIGRATION_22_23,
             MIGRATION_23_24,
+            MIGRATION_24_25,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -585,3 +586,21 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
         )
     }
 }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_24_25 =
+    object : Migration(24, 25) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            // Add column if it is not there yet, so running this twice does not crash
+            val hasLocationOfCreation =
+                db.query("PRAGMA table_info(contribution)").use { cursor ->
+                    generateSequence {
+                        if (cursor.moveToNext()) cursor.getString(cursor.getColumnIndexOrThrow("name")) else null
+                    }.any { it == "locationOfCreation" }
+                }
+            if (!hasLocationOfCreation) {
+                // Existing contributions have no separate location of creation
+                db.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+            }
+        }
+    }
