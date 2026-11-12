@@ -2,10 +2,14 @@ package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
 
+// Fields deserialized by Gson via reflection.
+// Suppressed TooManyFunctions because every method is a field accessor or setter for one
+// MediaWiki imageinfo API response object.
+
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module
  */
-@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
+@Suppress("UnusedPrivateProperty", "TooManyFunctions")
 open class ImageInfo {
     private val size = 0
     private val width = 0
