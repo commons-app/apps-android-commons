@@ -644,21 +644,14 @@
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
-    <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
-    <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
-    <ID>TooManyFunctions:MwQueryPage.kt$MwQueryPage : BaseModel</ID>
-    <ID>TooManyFunctions:MwQueryResult.kt$MwQueryResult : BaseModelPostProcessable</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
-    <ID>TooManyFunctions:NearbyResultItem.kt$NearbyResultItem</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:PageTitle.kt$PageTitle : Parcelable</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
     <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$UserActionListener : BasePresenter</ID>
-    <ID>TooManyFunctions:WikiSite.kt$WikiSite : Parcelable</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
