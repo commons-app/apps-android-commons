@@ -955,7 +955,7 @@ class ContributionsFragment :
         if (isInternetConnectionEstablished(context)) {
             if (contribution.state == Contribution.STATE_PAUSED) {
                 restartUpload(contribution)
-            } else if (contribution.state == Contribution.STATE_FAILED &&
+            } else if (contribution.isRetriedAfterFailure() &&
                 isPermanentUploadError(contribution.errorInfo)
             ) {
                 // Retrying cannot fix this failure, so it is not retried automatically
@@ -964,7 +964,7 @@ class ContributionsFragment :
                     contribution.media.filename,
                     contribution.errorInfo,
                 )
-            } else if (contribution.state == Contribution.STATE_FAILED) {
+            } else if (contribution.isRetriedAfterFailure()) {
                 val retries = contribution.retries
                 // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
                 // Limit the number of retries for a failed upload
@@ -994,6 +994,13 @@ class ContributionsFragment :
             context?.let { showLongToast(it, R.string.this_function_needs_network_connection) }
         }
     }
+
+    /**
+     * True for an upload that failed, or whose captions and depicts failed after the file was
+     * published. Both are retried with the same limit.
+     */
+    private fun Contribution.isRetriedAfterFailure() =
+        state == Contribution.STATE_FAILED || state == Contribution.STATE_METADATA_PENDING
 
     /**
      * Reload media detail fragment once media is nominated

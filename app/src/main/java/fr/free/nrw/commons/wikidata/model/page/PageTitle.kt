@@ -13,6 +13,9 @@ import java.text.Normalizer
 import java.util.Arrays
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are URL/text accessors, equality
+// contracts, and Parcelable serialization belonging to this single page-title model.
+
 /**
  * Represents certain vital information about a page, including the title, namespace,
  * and fragment (section anchor target).  It can also contain a thumbnail URL for the
@@ -22,6 +25,7 @@ import java.util.Locale
  * description can be altered after construction. Therefore do NOT rely on all the fields
  * of a PageTitle to remain constant for the lifetime of the object.
  */
+@Suppress("TooManyFunctions")
 class PageTitle : Parcelable {
     // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
     //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.wikidata
 
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikiBaseInterface
 import fr.free.nrw.commons.upload.depicts.Claims
 import fr.free.nrw.commons.wikidata.mwapi.MwException
@@ -76,9 +75,18 @@ class WikiBaseClientUnitTest {
     }
 
     @Test
-    fun getFileEntityId() {
-        val upload = UploadResult("result", "key", 0, "Example.jpg")
+    fun getClaimItemIdsByProperty_readsTheDepictedItems() {
+        whenever(wikiBaseInterface.getClaimsByProperty("M123", "P180"))
+            .thenReturn(Observable.just(GsonUtil.defaultGson.fromJson(DEPICTS_CLAIMS, Claims::class.java)))
 
+        val result = wikiBaseClient.getClaimItemIdsByProperty("M123", "P180").blockingFirst()
+
+        // The "unknown value" claim has no item, so it is left out
+        assertEquals(listOf("Q146"), result)
+    }
+
+    @Test
+    fun getFileEntityId() {
         val response = mock<MwQueryResponse>()
         val query = mock<MwQueryResult>()
         val page = mock<MwQueryPage>()
@@ -88,7 +96,7 @@ class WikiBaseClientUnitTest {
         whenever(wikiBaseInterface.getFileEntityId("File:Example.jpg"))
             .thenReturn(Observable.just(response))
 
-        val result = wikiBaseClient.getFileEntityId(upload).blockingFirst()
+        val result = wikiBaseClient.getFileEntityId("Example.jpg").blockingFirst()
 
         assertEquals(123L, result)
     }
@@ -119,6 +127,15 @@ class WikiBaseClientUnitTest {
         }
 
     private companion object {
+        // Answer from Commons to action=wbgetclaims for a file depicting a cat and an unknown value
+        const val DEPICTS_CLAIMS =
+            """{"claims":{"P180":[""" +
+                """{"mainsnak":{"snaktype":"value","property":"P180","datavalue":{"value":""" +
+                """{"entity-type":"item","numeric-id":146,"id":"Q146"},"type":"wikibase-entityid"},""" +
+                """"datatype":"wikibase-item"},"type":"statement","id":"M123-a","rank":"normal"},""" +
+                """{"mainsnak":{"snaktype":"somevalue","property":"P180","datatype":"wikibase-item"},""" +
+                """"type":"statement","id":"M123-b","rank":"normal"}]}}"""
+
         // Answers from Commons to action=wbgetclaims with errorformat=plaintext
         const val NO_SUCH_ENTITY =
             """{"errors":[{"code":"no-such-entity","text":"⧼no-such-entity⧽","module":"main"}]}"""

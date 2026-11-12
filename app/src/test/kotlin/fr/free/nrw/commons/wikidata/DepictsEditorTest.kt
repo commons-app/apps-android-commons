@@ -48,6 +48,36 @@ class DepictsEditorTest {
     }
 
     @Test
+    fun `retrying depictions only adds the items the file does not depict yet`() {
+        whenever(wikiBaseClient.getClaimItemIdsByProperty("M123", WikidataProperties.DEPICTS.propertyName))
+            .thenReturn(Observable.just(listOf("Q12")))
+        // Beta builds always send Q10, which the file does not depict yet
+        val missingItems = if (isBetaFlavour) listOf("Q10") else listOf("Q234")
+        val json = gson.toJson(EditClaim.from(missingItems, WikidataProperties.DEPICTS.propertyName))
+        whenever(wikiBaseClient.postEditEntity("M123", json)).thenReturn(Observable.just(true))
+
+        editor
+            .addMissingDepicts("123", listOf("Q12", "Q234"))
+            .test()
+            .await()
+            .assertValue(true)
+        verify(wikiBaseClient).postEditEntity("M123", json)
+    }
+
+    @Test
+    fun `retrying depictions adds nothing when the file depicts every item`() {
+        whenever(wikiBaseClient.getClaimItemIdsByProperty("M123", WikidataProperties.DEPICTS.propertyName))
+            .thenReturn(Observable.just(listOf("Q10", "Q12", "Q234")))
+
+        editor
+            .addMissingDepicts("123", listOf("Q12", "Q234"))
+            .test()
+            .await()
+            .assertValue(true)
+        verify(wikiBaseClient, never()).postEditEntity(any(), any())
+    }
+
+    @Test
     fun `updating depictions deletes existing claims before adding replacements`() {
         val claimIds = listOf("M123\$claim")
         whenever(wikiBaseClient.getClaimIdsByProperty("M123", WikidataProperties.DEPICTS.propertyName))

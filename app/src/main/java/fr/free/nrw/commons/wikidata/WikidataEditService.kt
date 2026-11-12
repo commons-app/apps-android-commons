@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
@@ -179,12 +178,16 @@ class WikidataEditService
             }
         }
 
+        /**
+         * @param retrying true when depicts may already be on the file from an earlier attempt
+         */
         fun addDepictionsAndCaptions(
-            uploadResult: UploadResult,
+            filename: String,
             contribution: Contribution,
+            retrying: Boolean = false,
         ): Observable<Boolean> {
             return wikiBaseClient
-                .getFileEntityId(uploadResult)
+                .getFileEntityId(filename)
                 .doOnError { throwable: Throwable? ->
                     Timber.e(
                         throwable,
@@ -198,11 +201,11 @@ class WikidataEditService
                     if (fileEntityId != null) {
                         Timber.d("EntityId for image was received successfully: %s", fileEntityId)
                         return@switchMap Observable.concat<Boolean>(
-                            depictionEdits(contribution, fileEntityId),
+                            depictionEdits(contribution, fileEntityId, retrying),
                             captionEdits(contribution, fileEntityId),
                         )
                     } else {
-                        Timber.d("Error acquiring EntityId for image: %s", uploadResult)
+                        Timber.d("Error acquiring EntityId for image: %s", filename)
                         return@switchMap Observable.empty<Boolean>()
                     }
                 }
@@ -219,15 +222,20 @@ class WikidataEditService
         private fun depictionEdits(
             contribution: Contribution,
             fileEntityId: Long,
-        ): Observable<Boolean> =
-            depictsEditor.addDepictsProperty(
-                fileEntityId.toString(),
+            retrying: Boolean,
+        ): Observable<Boolean> {
+            val depictedItems =
                 buildList {
                     for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
                         add(id)
                     }
-                },
-            )
+                }
+            return if (retrying) {
+                depictsEditor.addMissingDepicts(fileEntityId.toString(), depictedItems)
+            } else {
+                depictsEditor.addDepictsProperty(fileEntityId.toString(), depictedItems)
+            }
+        }
 
         companion object {
             const val COMMONS_APP_TAG: String = "wikimedia-commons-app"

@@ -860,7 +860,7 @@
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
   <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
-  <string name="nearby_wikitalk">Signaler un problème concernant cet élément à Wikidata</string>
+  <string name="nearby_report_problem">Signaler un problème concernant cet élément à Wikidata</string>
   <string name="please_enter_some_comments">Merci de saisir vos commentaires</string>
   <string name="talk">Discussion</string>
   <string name="write_something_about_the_item">Écrivez quelque chose à propos de l’élément « %1$s ». Il sera visible publiquement.</string>

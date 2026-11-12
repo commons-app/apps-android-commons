@@ -11,6 +11,7 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
 import fr.free.nrw.commons.di.MIGRATION_23_24
+import fr.free.nrw.commons.di.MIGRATION_24_25
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -75,6 +76,7 @@ class MigrationTest {
                 MIGRATION_21_22,
                 MIGRATION_22_23,
                 MIGRATION_23_24,
+                MIGRATION_24_25,
             )
 
         // tests
@@ -149,6 +151,7 @@ class MigrationTest {
                 MIGRATION_21_22,
                 MIGRATION_22_23,
                 MIGRATION_23_24,
+                MIGRATION_24_25,
             )
 
         try {
