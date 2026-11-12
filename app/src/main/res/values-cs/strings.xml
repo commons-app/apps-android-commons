@@ -816,7 +816,7 @@
   </plurals>
   <string name="multiple_files_depiction">Nezapomeňte, že všechny obrázky ve hromadném nahrání získají stejné kategorie a znázornění. Pokud obrázky nesdílí znázornění a kategorie, nahrajte je prosím zvlášť.</string>
   <string name="multiple_files_depiction_header">Informace o hromadných nahráních</string>
-  <string name="nearby_wikitalk">Nahlásit problém s touto položkou do Wikidat</string>
+  <string name="nearby_report_problem">Nahlásit problém s touto položkou do Wikidat</string>
   <string name="please_enter_some_comments">Zadejte prosím komentář</string>
   <string name="talk">Diskuze</string>
   <string name="write_something_about_the_item">Napište komentář o položce „%1$s“. Bude veřejně viditelný.</string>
