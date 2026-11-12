@@ -787,7 +787,7 @@
   </plurals>
   <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
   <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
-  <string name="nearby_wikitalk">Signalar a Wikidata un problema sur iste elemento</string>
+  <string name="nearby_report_problem">Signalar a Wikidata un problema sur iste elemento</string>
   <string name="please_enter_some_comments">Per favor insere alcun commentos</string>
   <string name="talk">Discussion</string>
   <string name="write_something_about_the_item">Scribe qualcosa sur le elemento ‘%1$s’. Isto essera visibile publicamente.</string>
