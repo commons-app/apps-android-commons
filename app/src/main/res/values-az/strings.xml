@@ -112,6 +112,10 @@
   <string name="menu_view_file_page">Faylın səhifəsinə bax</string>
   <string name="share_title_hint">Başlıq (Zəruri)</string>
   <string name="add_caption_toast">Zəhmət olmasa, bu fayl üçün başlıq təqdim et</string>
+  <string name="file_name_blacklisted_toast">Commons bu fayl adını qəbul etmir. Zəhmət olmasa, daha fərqli başlıqdan istifadə edin.</string>
+  <string name="file_name_too_long_toast">Bu başlıq fayl adı üçün çox uzundur. Zəhmət olmasa, onu qısaldın.</string>
+  <string name="file_name_invalid_toast">Bu başlıq Commons-da fayl adı kimi istifadə edilə bilməz. Zəhmət olmasa, onu dəyişdirin.</string>
+  <string name="file_name_banned_extension_toast">Bu başlıq \".com\" kimi fayl növü ehtiva edir. Zəhmət olmasa, onu dəyişdirin.</string>
   <string name="share_description_hint">Açıqlama</string>
   <string name="share_caption_hint">Başlıq</string>
   <string name="login_failed_network">Daxil olmaq mümkün deyil - şəbəkə xətası</string>
@@ -222,6 +226,12 @@
   <string name="media_detail_license">Lisenziya</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
   <string name="media_detail_coordinates_empty">Heç biri göstərilməyib</string>
+  <string name="playback_quality">Oxutma keyfiyyəti</string>
+  <string name="original">Orijinal</string>
+  <string name="video_quality">Video keyfiyyəti</string>
+  <string name="video_quality_auto">Avtomatik</string>
+  <string name="video_quality_higher">Daha yüksək şəkil keyfiyyəti</string>
+  <string name="video_quality_data_saver">Data qənaətçisi</string>
   <string name="become_a_tester_title">Beta Tester ol</string>
   <string name="become_a_tester_description">Google Play-də beta kanalımıza qoşulun və yeni funksiyalara və xəta həllərinə erkən giriş əldə edin</string>
   <string name="_2fa_code">2FA kodu</string>
@@ -816,7 +826,7 @@
   </plurals>
   <string name="multiple_files_depiction">Xahiş edirik unutmayın ki, çoxlu yükləmədəki bütün şəkillər eyni kateqoriyalara və təsvirlərə sahib olacaq. Şəkillər təsvirləri və kateqoriyaları paylaşmırsa, zəhmət olmasa, bir neçə ayrı yükləmə həyata keçirin.</string>
   <string name="multiple_files_depiction_header">Çoxlu yükləmələr haqqında qeyd</string>
-  <string name="nearby_wikitalk">Bu elementlə bağlı problemi Vikidataya bildir</string>
+  <string name="nearby_report_problem">Bu elementlə bağlı problemi Vikidataya bildir</string>
   <string name="please_enter_some_comments">Zəhmət olmasa, şərh yazın.</string>
   <string name="talk">Müzakirə</string>
   <string name="write_something_about_the_item">\'%1$s\' elementi haqqında nəsə yazın. O, hamıya görünəcək.</string>
@@ -845,6 +855,10 @@
   <string name="green_pin">Bu yerin artıq şəkli var.</string>
   <string name="grey_pin">İndi bu yerdə şəklin olub-olmaması yoxlanılır.</string>
   <string name="error_while_loading">Yükləyərkən xəta baş verdi</string>
+  <string name="play_video">Videonu başlat</string>
+  <string name="play_audio">Audionu oxut</string>
+  <string name="video_unavailable">Video əlçatan deyil. Yenidən cəhd etmək üçün toxunun.</string>
+  <string name="audio_unavailable">Audio mövcud deyil. Yenidən cəhd etmək üçün toxunun.</string>
   <string name="no_usages_found">Heç bir istifadə tapılmadı</string>
   <string name="usages_on_commons_heading">Vikianbar</string>
   <string name="usages_on_other_wikis_heading">Digər vikilər</string>

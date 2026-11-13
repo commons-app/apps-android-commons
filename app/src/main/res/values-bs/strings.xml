@@ -2,12 +2,21 @@
 <!-- Authors:
 * CERminator
 * DzWiki
+* Panasko
 * Semso98
 * Srdjan m
 * Srđan
 -->
 <resources>
+  <string name="commons_facebook">Facebook stranica Commonsa</string>
+  <string name="commons_github">Izvorni kod Commons GitHub-a</string>
   <string name="commons_logo">Logo Commonsa</string>
+  <string name="commons_website">Web stranica Commonsa</string>
+  <string name="exit_location_picker">Izlaz iz birača lokacije</string>
+  <string name="submit">Pošalji</string>
+  <string name="add_another_description">Dodajte još jedan opis</string>
+  <string name="add_new_contribution">Dodaj novi doprinos</string>
+  <string name="add_contribution_from_camera">Dodaj doprinos s kamere</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">postavlja se %1$d datoteka</item>
     <item quantity="other">postavlja se %1$d datoteka</item>

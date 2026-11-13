@@ -6,6 +6,9 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.edit
 import timber.log.Timber
 
+// Suppressed TooManyFunctions because this class implements the KeyValueStore API on
+// SharedPreferences, adding only string-set and bulk-put methods for the same store.
+@Suppress("TooManyFunctions")
 open class BasicKvStore : KeyValueStore {
     /*
     This class only performs puts, sets and clears.

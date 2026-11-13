@@ -842,7 +842,7 @@
   </plurals>
   <string name="multiple_files_depiction">Pamätajte, že všetkým obrázkom vo viacnásobnom nahratí budú pridelené rovnaké kategórie a popisy. Ak obrázky nezdieľajú rovnaký popis a kategórie, vykonajte niekoľko samostatných nahratí, prosím.</string>
   <string name="multiple_files_depiction_header">Poznámka k viacnásobnému nahrávaniu</string>
-  <string name="nearby_wikitalk">Oznámte problém s touto položkou na Wikiúdajoch</string>
+  <string name="nearby_report_problem">Oznámte problém s touto položkou na Wikiúdajoch</string>
   <string name="please_enter_some_comments">Prosím, pridajte poznámky</string>
   <string name="talk">Diskusia</string>
   <string name="write_something_about_the_item">Napíšte niečo o „%1$s“. Bude to verejne viditeľné.</string>
