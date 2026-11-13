@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.quiz
 
 import android.app.Activity
-
 import com.nhaarman.mockitokotlin2.any
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UploadCount
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import io.reactivex.Single
 import org.junit.Assert
@@ -32,7 +32,7 @@ class QuizCheckerUnitTest {
     private lateinit var sessionManager: SessionManager
 
     @Mock
-    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    private lateinit var userStatsClient: UserStatsClient
 
     @Mock
     private lateinit var jsonKvStore: JsonKvStore
@@ -44,11 +44,11 @@ class QuizCheckerUnitTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
-        quizChecker = QuizChecker(sessionManager, okHttpJsonApiClient, jsonKvStore)
+        quizChecker = QuizChecker(sessionManager, userStatsClient, jsonKvStore)
         Mockito.`when`(sessionManager.userName).thenReturn("")
-        Mockito.`when`(okHttpJsonApiClient.getUploadCount(any())).thenReturn(Single.just(0))
+        Mockito.`when`(userStatsClient.getUploadCount(any())).thenReturn(Single.just(UploadCount(0)))
         Mockito
-            .`when`(okHttpJsonApiClient.getAchievements(any()))
+            .`when`(userStatsClient.getAchievements(any()))
             .thenReturn(Single.just(feedbackResponse))
     }
 

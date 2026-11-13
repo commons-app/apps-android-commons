@@ -3,6 +3,7 @@ package fr.free.nrw.commons.utils
 import android.content.Context
 import android.content.pm.PackageManager
 import fr.free.nrw.commons.BuildConfig
+import timber.log.Timber
 
 // TODO - this can be constructed in a Dagger provider method, in a module and injected.  No need
 //        to compute these values every time, and it means we can avoid having a Context in various
@@ -16,6 +17,7 @@ object ConfigUtils {
         try {
             packageManager.getPackageInfo(packageName, 0).versionName ?: BuildConfig.VERSION_NAME
         } catch (e: PackageManager.NameNotFoundException) {
+            Timber.e(e, "Failed to read the version name from the package info")
             BuildConfig.VERSION_NAME
         }
 

@@ -103,6 +103,10 @@
   <string name="menu_view_file_page">Погл. податотечната страница</string>
   <string name="share_title_hint">Толкување (задолж.)</string>
   <string name="add_caption_toast">Ставете ѝ толкување на податотеката</string>
+  <string name="file_name_blacklisted_toast">Ризницата не го прифаќа ова податотечно име. Внесете поописно толкување.</string>
+  <string name="file_name_too_long_toast">Ова толкување е предолго за да се користи како податотечно име. Скратете го.</string>
+  <string name="file_name_invalid_toast">Ова толкување не може да се користи како податотечно име на Ризницата. Изменете го.</string>
+  <string name="file_name_banned_extension_toast">Ова толкување содржи податотечен тип како „.com“. Изменете го.</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Толкување</string>
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
@@ -122,6 +126,7 @@
   <string name="refresh_button">Превчитај</string>
   <string name="display_list_button">Список</string>
   <string name="contributions_subtitle_zero">(Сè уште нема подигања)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
   <string name="depictions_not_found">Не најдов предмети од Википодатоците што одговараат на %1$s</string>
   <string name="no_child_classes">%1$s нема зависни класи</string>
@@ -217,6 +222,12 @@
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координати</string>
   <string name="media_detail_coordinates_empty">не се укажани</string>
+  <string name="playback_quality">Квалитет на приказот</string>
+  <string name="original">Изворен</string>
+  <string name="video_quality">Квалитет на видеото</string>
+  <string name="video_quality_auto">Автоматски</string>
+  <string name="video_quality_higher">Повисок квалитет</string>
+  <string name="video_quality_data_saver">Штедлив на податоци</string>
   <string name="become_a_tester_title">Станете бета-испробувач</string>
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="_2fa_code">2ЧЗ-код</string>
@@ -273,6 +284,13 @@
   <string name="null_url">Грешка! Не ја пронајдов URL</string>
   <string name="nominate_deletion">Предложи за бришење</string>
   <string name="nominated_for_deletion">Сликава е предложена за бришење.</string>
+  <string name="file_deleted_from_commons">Оваа податотека е избришана од Ризницата.</string>
+  <string name="contribution_deleted">Избришано</string>
+  <string name="deleted_file_activity_title">Податотеката е избришана</string>
+  <string name="deleted_file_explanation">Ризницата ги брише податотеките кои не се од образовен карактер или ги кршат нејзините правила, меѓу кои и нарушување на авторски права. Подигајте фотографии што сте ги направиле самите. Сликите прекопирани од семрежјето, екрански снимки, логоа и плакати обично се бришат.</string>
+  <string name="deleted_file_view_page">Погл. податотечната страница</string>
+  <string name="deleted_file_view_discussion">Прочитајте го разговорот за бришење</string>
+  <string name="deleted_file_policies">Правила и напатствија на Ризницата</string>
   <string name="nominated_see_more">Поподробно ќе најдете на мрежното место</string>
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
@@ -392,12 +410,14 @@
   <string name="images_used_explanation">Бројот на слики што сте ги подигнале на Ризницата кои се користат во статии</string>
   <string name="error_occurred">Се појави грешка!</string>
   <string name="notifications_channel_name_all">Известување од Ризницата</string>
+  <string name="notifications_channel_name_uploads">Напредок на подигањето</string>
   <string name="preference_author_name_toggle">Употреби прилагодено авторско име</string>
   <string name="preference_author_name_toggle_summary">При подигањето користете прилагодено авторско име наместо вашето корисничко име</string>
   <string name="preference_author_name">Прилагодено авторско име</string>
   <string name="contributions_fragment">Придонеси</string>
   <string name="nearby_fragment">Во близина</string>
   <string name="notifications">Известувања</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Известувања (прочитани)</string>
   <string name="display_nearby_notification">Известувај ме за места во близина</string>
   <string name="display_nearby_notification_summary">Прикажувај известувања во прилогот за најблиското место без слика</string>
@@ -665,6 +685,8 @@
   <string name="resuming_upload">Продолжувам со подигањето…</string>
   <string name="pausing_upload">Го паузирам подигањето…</string>
   <string name="cancelling_upload">Го откажувам подигањето…</string>
+  <string name="retrying_upload">Повторно се обидувам да подигнам…</string>
+  <string name="retrying_failed_uploads">Повторно се обидувам да ги извршам сите неуспешни подигања…</string>
   <string name="cancel_upload">Откажи подигање</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
@@ -802,7 +824,7 @@
   </plurals>
   <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
   <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
-  <string name="nearby_wikitalk">Пријавете проблем со овој предмет на Википодатоци</string>
+  <string name="nearby_report_problem">Пријавете проблем со овој предмет на Википодатоци</string>
   <string name="please_enter_some_comments">Внесете коментар</string>
   <string name="talk">Разговор</string>
   <string name="write_something_about_the_item">Напишете нешто за предметот „%1$s“. Ова ќе биде јавно видливо.</string>
@@ -831,6 +853,10 @@
   <string name="green_pin">Местово веќе има слика.</string>
   <string name="grey_pin">Проверувам дали местово има слика.</string>
   <string name="error_while_loading">Грешка при вчитување</string>
+  <string name="play_video">Пушти видео</string>
+  <string name="play_audio">Пушти снимка</string>
+  <string name="video_unavailable">Видеото е недостапно. Допрете за да се обидете пак.</string>
+  <string name="audio_unavailable">Снимката е недостапна. Допрете за да се обидете пак.</string>
   <string name="no_usages_found">Не најдов употреби</string>
   <string name="usages_on_commons_heading">Ризница</string>
   <string name="usages_on_other_wikis_heading">Други викија</string>
@@ -849,6 +875,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Создал %1$s, а подигнал %2$s</string>
   <string name="nominated_for_deletion_btn">Предложено за бришење</string>
   <string name="custom_selector_max_image_limit_reached">Можете да изберете највеќе %d слики.</string>
+  <string name="upload_limit_exceeded">Ќе се подигнат само првите %1$d слики.</string>
   <string name="edit_unsupported_format_explanation">Уредувањето во прилог е достпано само за JPEG-податотеки. За да уредувате други формати послужете се со други алатки.</string>
   <string name="license_cc0_description">Без авторски права. Ги препуштате сите права на секого што сака да го користи делово на било кој начин.</string>
   <string name="license_cc_by_description">Наведи извор. Другите слободно можат да го споделуваат и прилагодуваат делото под услов да ве наведат.</string>
@@ -861,4 +888,12 @@
   <string name="error_applying_blur">Не успеав да заматам</string>
   <string name="failed_to_apply_crop">Не успеав да поткастрам</string>
   <string name="failed_to_save_image">Не успеав да ја зачувам сликата</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (аудио)</string>
+  <string name="unsupported_format_title">Неподдржан формат</string>
+  <string name="unsupported_format_desc">Избраните податотеки не можеа да се отворат. Ризницата ги бара строго овие формати:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Неподдржаните податотеки се прескокнати</string>
+  <string name="unsupported_files_skipped_desc">Некои податотеки беа прескокнати поради неподдржан формат. Прилогот ќе продолжи да ги подига останатите податотеки што одговараат на следниве поддржани формати:\n\n%s</string>
 </resources>

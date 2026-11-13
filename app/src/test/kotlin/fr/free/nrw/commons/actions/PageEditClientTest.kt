@@ -3,6 +3,7 @@ package fr.free.nrw.commons.actions
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.wikidata.model.edit.Edit
 import io.reactivex.Observable
 import org.junit.Before
@@ -97,5 +98,41 @@ class PageEditClientTest {
             eq("test"),
             eq("test"),
         )
+    }
+
+    /**
+     * Test that an invalid login token is propagated to the caller
+     */
+    @Test(expected = InvalidLoginTokenException::class)
+    fun testEditRethrowsInvalidLoginToken() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(InvalidLoginTokenException("invalid"))
+        pageEditClient.edit("test", "test", "test")
+    }
+
+    /**
+     * Test that any other failure is reported as an unsuccessful edit
+     */
+    @Test
+    fun testEditReturnsFalseOnOtherFailure() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+        pageEditClient.edit("test", "test", "test").test().assertValue(false)
+    }
+
+    /**
+     * Test that an invalid login token is propagated to the caller
+     */
+    @Test(expected = InvalidLoginTokenException::class)
+    fun testSetCaptionsRethrowsInvalidLoginToken() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(InvalidLoginTokenException("invalid"))
+        pageEditClient.setCaptions("test", "test", "en", "test")
+    }
+
+    /**
+     * Test that any other failure is reported as zero updated captions
+     */
+    @Test
+    fun testSetCaptionsReturnsZeroOnOtherFailure() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+        pageEditClient.setCaptions("test", "test", "en", "test").test().assertValue(0)
     }
 }

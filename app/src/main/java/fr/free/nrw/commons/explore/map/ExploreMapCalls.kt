@@ -2,7 +2,7 @@ package fr.free.nrw.commons.explore.map
 
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,7 +12,7 @@ class ExploreMapCalls
     constructor() {
         @Inject
         @JvmField
-        var mediaClient: MediaClient? = null
+        var mediaCollectionClient: MediaCollectionClient? = null
 
         /**
          * Calls method to query Commons for uploads around a location
@@ -22,6 +22,6 @@ class ExploreMapCalls
          */
         fun callCommonsQuery(currentLatLng: LatLng): List<Media> {
             val coordinates = currentLatLng.latitude.toString() + "|" + currentLatLng.longitude
-            return mediaClient!!.getMediaListFromGeoSearch(coordinates).blockingGet()
+            return mediaCollectionClient!!.getMediaListFromGeoSearch(coordinates).blockingGet()
         }
     }

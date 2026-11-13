@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert

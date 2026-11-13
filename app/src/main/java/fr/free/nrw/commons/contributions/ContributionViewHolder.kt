@@ -7,8 +7,8 @@ import android.webkit.URLUtil
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
-import coil3.request.placeholder
 import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -65,17 +65,19 @@ an upload might take a dozen seconds. */
         binding.contributionTitle.text = contribution.media.mostRelevantCaption
         setAuthorText(contribution.media)
 
-        val imageSource = chooseImageSource(
-            contribution.media.thumbUrl,
-            contribution.localUri
-        )
+        val imageSource =
+            chooseImageSource(
+                contribution.media.thumbUrl,
+                contribution.localUri,
+            )
         if (!TextUtils.isEmpty(imageSource)) {
-            val data: Any = when {
-                URLUtil.isHttpsUrl(imageSource) -> imageSource!!
-                URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
-                imageSource != null -> File(imageSource)
-                else -> R.drawable.image_placeholder
-            }
+            val data: Any =
+                when {
+                    URLUtil.isHttpsUrl(imageSource) -> imageSource!!
+                    URLUtil.isFileUrl(imageSource) -> Uri.parse(imageSource)
+                    imageSource != null -> File(imageSource)
+                    else -> R.drawable.image_placeholder
+                }
             binding.contributionImage.load(data) {
                 placeholder(R.drawable.image_placeholder)
                 error(R.drawable.image_placeholder)

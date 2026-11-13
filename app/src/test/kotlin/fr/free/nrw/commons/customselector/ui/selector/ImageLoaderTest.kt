@@ -18,7 +18,6 @@ import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
-import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -60,9 +59,6 @@ class ImageLoaderTest {
 
     @Mock
     private lateinit var mediaClient: MediaClient
-
-    @Mock
-    private lateinit var single: Single<Boolean>
 
     @Mock
     private lateinit var fileProcessor: FileProcessor

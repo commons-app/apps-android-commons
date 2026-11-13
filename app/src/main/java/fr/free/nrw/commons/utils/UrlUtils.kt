@@ -13,18 +13,27 @@ import timber.log.Timber
  * Opens Custom Tab Activity with in-app browser for the specified URL.
  * Launches intent for web URL
  */
-fun handleWebUrl(context: Context, url: Uri) {
+fun handleWebUrl(
+    context: Context,
+    url: Uri,
+) {
     Timber.d("Launching web url %s", url.toString())
 
-    val color = CustomTabColorSchemeParams.Builder()
-        .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))
-        .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor))
-        .build()
+    val color =
+        CustomTabColorSchemeParams
+            .Builder()
+            .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))
+            .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor))
+            .build()
 
-    val customTabsIntent = CustomTabsIntent.Builder()
+    val customTabsIntent =
+        CustomTabsIntent
+            .Builder()
             .setDefaultColorSchemeParams(color)
             .setExitAnimations(
-                context, android.R.anim.slide_in_left, android.R.anim.slide_out_right
+                context,
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right,
             ).build()
 
     // Clear previous browser tasks, so that back/exit buttons work as intended.

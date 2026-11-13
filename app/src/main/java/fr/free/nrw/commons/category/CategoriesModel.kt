@@ -48,8 +48,10 @@ class CategoriesModel
             // with separators [., /, -]
             val isIrrelevantCategory =
                 item.contains(
-                    """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
-                        .toRegex(),
+                    (
+                        """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}""" +
+                            """|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
+                    ).toRegex(),
                 )
 
             if (spammyCategory) {
@@ -173,14 +175,16 @@ class CategoriesModel
                                         categoryItem.name,
                                         categoryItem.name,
                                         SEARCH_CATS_LIMIT,
-                                    ).map {
-                                        CategoryItem(
-                                            it[0].name,
-                                            it[0].description,
-                                            it[0].thumbnail,
-                                            it[0].isSelected,
-                                        )
-                                    }.blockingGet()
+                                    ).blockingGet()
+                            }.filter { it.isNotEmpty() }
+                            .map { categories ->
+                                val category = categories.first()
+                                CategoryItem(
+                                    category.name,
+                                    category.description,
+                                    category.thumbnail,
+                                    category.isSelected,
+                                )
                             }.toList()
                             .toObservable()
                     }
@@ -274,33 +278,38 @@ class CategoriesModel
             media: Media?,
         ) {
             if (media == null) {
-                if (item.isSelected) {
-                    selectedCategories.add(item)
-                    updateCategoryCount(item)
-                } else {
-                    selectedCategories.remove(item)
+                updateSelection(item)
+                return
+            }
+
+            val isExistingCategory = media.categories?.contains(item.name) == true
+            when {
+                item.isSelected && isExistingCategory -> selectedExistingCategories.add(item.name)
+                item.isSelected -> updateSelection(item)
+                isExistingCategory -> {
+                    selectedExistingCategories.remove(item.name)
+                    restoreCategoryIfMissing(item, media)
                 }
+                else -> selectedCategories.remove(item)
+            }
+        }
+
+        private fun restoreCategoryIfMissing(
+            item: CategoryItem,
+            media: Media,
+        ) {
+            val categories = media.categories ?: return
+            if (!categories.contains(item.name)) {
+                media.categories = listOf(item.name) + categories
+            }
+        }
+
+        private fun updateSelection(item: CategoryItem) {
+            if (item.isSelected) {
+                selectedCategories.add(item)
+                updateCategoryCount(item)
             } else {
-                if (item.isSelected) {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.add(item.name)
-                    } else {
-                        selectedCategories.add(item)
-                        updateCategoryCount(item)
-                    }
-                } else {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.remove(item.name)
-                        if (!media.categories?.contains(item.name)!!) {
-                            val categoriesList: MutableList<String> = ArrayList()
-                            categoriesList.add(item.name)
-                            categoriesList.addAll(media.categories!!)
-                            media.categories = categoriesList
-                        }
-                    } else {
-                        selectedCategories.remove(item)
-                    }
-                }
+                selectedCategories.remove(item)
             }
         }
 

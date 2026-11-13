@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.leaderboard
 
 import android.content.Context
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
-import android.widget.ImageView
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardList
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter

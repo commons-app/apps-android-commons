@@ -2,6 +2,10 @@ package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
 
+// Fields deserialized by Gson via reflection.
+// Suppressed TooManyFunctions because every function is an accessor for one Commons
+// extmetadata response field on this single Gson data holder.
+@Suppress("UnusedPrivateProperty", "TooManyFunctions")
 class ExtMetadata {
     @SerializedName("DateTime")
     private val dateTime: Values? = null

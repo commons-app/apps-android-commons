@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
-
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
@@ -35,9 +34,6 @@ class ZoomableActivityUnitTests {
 
     @Mock
     private lateinit var uri: Uri
-
-    @Mock
-    private lateinit var images: ArrayList<Image>
 
     @Before
     fun setUp() {

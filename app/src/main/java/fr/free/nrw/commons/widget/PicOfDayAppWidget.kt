@@ -25,6 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.io.IOException
 
 /**
  * Implementation of App Widget functionality.
@@ -141,7 +142,7 @@ class PicOfDayAppWidget : AppWidgetProvider() {
                     views.setImageViewBitmap(R.id.appwidget_image, bitmap)
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 Timber.e(e, "Error loading image for widget")
             }
         }

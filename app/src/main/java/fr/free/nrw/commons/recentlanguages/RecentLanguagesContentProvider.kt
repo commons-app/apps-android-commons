@@ -72,22 +72,21 @@ class RecentLanguagesContentProvider : CommonsDaggerContentProvider() {
         selectionArgs: Array<String>?,
     ): Int {
         var rowsUpdated: Int = 0
-        if (selection.isNullOrEmpty()) {
-            val id =
-                uri.lastPathSegment?.toInt()
-                    ?: throw IllegalArgumentException("Invalid URI: $uri")
-            contentValues?.let {
-                rowsUpdated =
-                    requireDb().update(
-                        TABLE_NAME,
-                        SQLiteDatabase.CONFLICT_NONE,
-                        it,
-                        "$COLUMN_NAME = ?",
-                        arrayOf(id.toString()),
-                    )
-            }
-        } else {
-            throw IllegalArgumentException("Parameter `selection` should be empty when updating an ID")
+        require(selection.isNullOrEmpty()) {
+            "Parameter `selection` should be empty when updating an ID"
+        }
+        val id =
+            uri.lastPathSegment?.toInt()
+                ?: throw IllegalArgumentException("Invalid URI: $uri")
+        contentValues?.let {
+            rowsUpdated =
+                requireDb().update(
+                    TABLE_NAME,
+                    SQLiteDatabase.CONFLICT_NONE,
+                    it,
+                    "$COLUMN_NAME = ?",
+                    arrayOf(id.toString()),
+                )
         }
 
         context?.contentResolver?.notifyChange(uri, null)

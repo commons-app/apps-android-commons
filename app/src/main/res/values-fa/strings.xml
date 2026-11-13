@@ -304,7 +304,7 @@
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
-  <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفاً برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
+  <string name="error_review">خطا در دریافت تصویر برای بررسی. برای تلاش دوباره، دکمه تازه‌سازی را کلیک کنید.</string>
   <string name="no_notifications">هیج آگاه‌سازی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>

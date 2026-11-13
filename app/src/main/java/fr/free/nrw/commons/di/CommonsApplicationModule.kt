@@ -27,6 +27,7 @@ import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.appContext
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
+import fr.free.nrw.commons.mediaTypeFrom
 import fr.free.nrw.commons.nearby.PlaceDao
 import fr.free.nrw.commons.review.ReviewDao
 import fr.free.nrw.commons.settings.Prefs
@@ -200,6 +201,9 @@ open class CommonsApplicationModule(
             MIGRATION_1_2,
             MIGRATION_19_TO_20,
             MIGRATION_21_22,
+            MIGRATION_22_23,
+            MIGRATION_23_24,
+            MIGRATION_24_25,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -443,7 +447,8 @@ val MIGRATION_21_22 =
                 var cursor = oldDb.rawQuery("SELECT * FROM categories", null)
                 while (cursor.moveToNext()) {
                     db.execSQL(
-                        "INSERT OR IGNORE INTO categories (_id, name, description, thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
+                        "INSERT OR IGNORE INTO categories (_id, name, description, " +
+                            "thumbnail, last_used, times_used) VALUES (?, ?, ?, ?, ?, ?)",
                         arrayOf(
                             cursor.getLong(cursor.getColumnIndexOrThrow("_id")),
                             cursor.getString(cursor.getColumnIndexOrThrow("name")) ?: "",
@@ -473,7 +478,10 @@ val MIGRATION_21_22 =
                 cursor = oldDb.rawQuery("SELECT * FROM bookmarksItems", null)
                 while (cursor.moveToNext()) {
                     db.execSQL(
-                        "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, item_image_url, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "INSERT OR IGNORE INTO bookmarksItems (item_name, item_description, " +
+                            "item_image_url, item_instance_of, item_name_categories, " +
+                            "item_description_categories, item_thumbnail_categories, " +
+                            "item_is_selected, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         arrayOf(
                             cursor.getString(cursor.getColumnIndexOrThrow("item_name")) ?: "",
                             cursor.getString(cursor.getColumnIndexOrThrow("item_description")),
@@ -524,3 +532,65 @@ val MIGRATION_21_22 =
             }
         }
     }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_22_23 =
+    object : Migration(22, 23) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            // Add column if it is not there yet, so running this twice does not crash
+            val hasCachedAt =
+                db.query("PRAGMA table_info(place)").use { cursor ->
+                    generateSequence {
+                        if (cursor.moveToNext()) cursor.getString(cursor.getColumnIndexOrThrow("name")) else null
+                    }.any { it == "cachedAt" }
+                }
+            if (!hasCachedAt) {
+                // Old cached places get 0, so they are fetched again once
+                db.execSQL("ALTER TABLE place ADD COLUMN cachedAt INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_23_24 =
+    object : Migration(23, 24) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mimeType TEXT")
+            db.execSQL("ALTER TABLE contribution ADD COLUMN media_mediaType TEXT NOT NULL DEFAULT 'OTHER'")
+            backfillMediaTypes(db)
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_24_25 =
+    object : Migration(24, 25) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+        }
+    }
+
+/**
+ * Fills in media_mediaType for rows that predate the column.
+ *
+ * Uses the same mime type and extension fallback the app applies when the API reports no media
+ * type. Rows those two can't classify keep the 'OTHER' default until the API refreshes them.
+ */
+private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
+    val mediaTypesByPageId = mutableMapOf<String, String>()
+
+    db.query("SELECT pageId, mimeType, media_filename FROM contribution").use { cursor ->
+        while (cursor.moveToNext()) {
+            val pageId = cursor.getString(0)
+            val mimeType = if (cursor.isNull(1)) null else cursor.getString(1)
+            val filename = if (cursor.isNull(2)) null else cursor.getString(2)
+            mediaTypesByPageId[pageId] = mediaTypeFrom(mimeType, filename).name
+        }
+    }
+
+    mediaTypesByPageId.forEach { (pageId, mediaType) ->
+        db.execSQL(
+            "UPDATE contribution SET media_mediaType = ? WHERE pageId = ?",
+            arrayOf(mediaType, pageId),
+        )
+    }
+}

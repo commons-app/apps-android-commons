@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.text.TextUtils
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
 import java.util.Date
 
 /**
@@ -133,7 +134,7 @@ private fun marshal(location: Location?): String? {
                 put(LATITUDE, location.latitude)
                 put(LONGITUDE, location.longitude)
             } catch (e: JSONException) {
-                throw RuntimeException(e)
+                throw IllegalArgumentException(e)
             }
         }
 
@@ -152,6 +153,7 @@ private fun unmarshal(json: String?): Location? {
             longitude = jsonObject.optDouble(LONGITUDE)
         }
     } catch (e: JSONException) {
+        Timber.e(e, "Failed to parse the location JSON")
         null
     }
 }

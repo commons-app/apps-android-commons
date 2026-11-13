@@ -14,5 +14,5 @@ data class BookmarkItemsRoomEntity(
     @ColumnInfo(name = "item_description_categories") val categoryDescriptions: String,
     @ColumnInfo(name = "item_thumbnail_categories") val categoryThumbnails: String,
     @ColumnInfo(name = "item_is_selected") var isSelected: Boolean,
-    @PrimaryKey @ColumnInfo(name = "item_id") val id: String
+    @PrimaryKey @ColumnInfo(name = "item_id") val id: String,
 )

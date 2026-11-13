@@ -12,3 +12,11 @@ style:
     # Preview composables are only used by Android Studio's preview tooling.
     ignoreAnnotated:
       - "Preview"
+  MagicNumber:
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '100'
+      - '100.0'

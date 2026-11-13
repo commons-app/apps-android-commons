@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
+import coil3.request.error
 import coil3.request.placeholder
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
@@ -49,9 +50,10 @@ class BookmarkItemsAdapter(
         holder.depictsLabel.text = depictedItem.name
         holder.description.text = depictedItem.description
 
-        if (depictedItem.imageUrl?.isNotBlank() == true) {
-            holder.depictsImage.load(depictedItem.imageUrl) {
+        if (depictedItem.thumbnailUrl?.isNotBlank() == true) {
+            holder.depictsImage.load(depictedItem.thumbnailUrl) {
                 placeholder(R.drawable.ic_wikidata_logo_24dp)
+                error(R.drawable.ic_wikidata_logo_24dp)
             }
         } else {
             holder.depictsImage.setImageResource(R.drawable.ic_wikidata_logo_24dp)

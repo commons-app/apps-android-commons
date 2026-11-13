@@ -19,6 +19,9 @@ import fr.free.nrw.commons.language.AppLanguageLookUpTable.Companion.TRADITIONAL
 import org.apache.commons.lang3.StringUtils
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are scheme/authority/URL/language accessors,
+// equality contracts, and Parcelable serialization for one MediaWiki site value object.
+
 /**
  * The base URL and Wikipedia language code for a MediaWiki site. Examples:
  *
@@ -43,6 +46,7 @@ import java.util.Locale
  *  * Incorrect: "wikipedia.org", "test"
  *
  */
+@Suppress("TooManyFunctions")
 class WikiSite : Parcelable {
     // TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added
     @SerializedName("domain")
@@ -133,7 +137,7 @@ class WikiSite : Parcelable {
      * Eg. https://en.m.wikipedia.org
      * @return
      */
-    fun mobileUrl(): String = String.format("%1\$s://%2\$s", scheme(), mobileAuthority())
+    fun mobileUrl(): String = String.format(Locale.ROOT, "%1\$s://%2\$s", scheme(), mobileAuthority())
 
     fun subdomain(): String = languageCodeToSubdomain(languageCode!!)
 
@@ -205,7 +209,7 @@ class WikiSite : Parcelable {
         dest.writeString(languageCode)
     }
 
-    protected constructor(`in`: Parcel) {
+    private constructor(`in`: Parcel) {
         uri = `in`.readParcelable(Uri::class.java.classLoader)!!
         languageCode = `in`.readString()
     }

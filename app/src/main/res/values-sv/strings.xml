@@ -111,6 +111,10 @@
   <string name="menu_view_file_page">Visa filsida</string>
   <string name="share_title_hint">Bildtext (obligatoriskt)</string>
   <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
+  <string name="file_name_blacklisted_toast">Commons accepterar inte detta filnamn. Använd en mer beskrivande beskrivning.</string>
+  <string name="file_name_too_long_toast">Den här bildtexten är för lång för att användas som filnamn. Korta ner den.</string>
+  <string name="file_name_invalid_toast">Denna beskrivning kan inte användas som filnamn på Commons. Ändra den.</string>
+  <string name="file_name_banned_extension_toast">Den här bildtexten innehåller en filtyp som \".com\". Ändra det.</string>
   <string name="share_description_hint">Beskrivning</string>
   <string name="share_caption_hint">Bildtext</string>
   <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
@@ -225,6 +229,12 @@
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
   <string name="media_detail_coordinates_empty">Inte angivet</string>
+  <string name="playback_quality">Uppspelningskvalitet</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Videokvalitet</string>
+  <string name="video_quality_auto">Automatisk</string>
+  <string name="video_quality_higher">Högre bildkvalitet</string>
+  <string name="video_quality_data_saver">Databesparing</string>
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
   <string name="_2fa_code">2-stegsverif.kod</string>
@@ -281,6 +291,13 @@
   <string name="null_url">Fel! Webbadressen hittades inte</string>
   <string name="nominate_deletion">Nominera för radering</string>
   <string name="nominated_for_deletion">Denna bild har nominerats för radering.</string>
+  <string name="file_deleted_from_commons">Den här filen har raderats från Commons.</string>
+  <string name="contribution_deleted">Raderad</string>
+  <string name="deleted_file_activity_title">Filen raderades</string>
+  <string name="deleted_file_explanation">Wikimedia Commons tar bort filer som inte är utbildande eller som bryter mot dess regler, inklusive upphovsrättsintrång. Ladda upp foton du tagit själv. Bilder kopierade från internet, skärmdumpar, logotyper och affischer är vanliga anledningar till att en fil tas bort.</string>
+  <string name="deleted_file_view_page">Visa filsidan</string>
+  <string name="deleted_file_view_discussion">Läs raderingsdiskussionen</string>
+  <string name="deleted_file_policies">Commons policyer och riktlinjer</string>
   <string name="nominated_see_more">Se webbplatsen för information</string>
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
@@ -294,6 +311,7 @@
   <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="location_permission_rationale_explore">Behörighet krävs för att visa en lista över bilder i närheten</string>
+  <string name="nearby_bookmark">Bokmärk</string>
   <string name="nearby_directions">Vägbeskrivning</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -400,6 +418,7 @@
   <string name="images_used_explanation">Antalet bilder du har laddat upp till Commons som användes i Wikimedia-artiklar</string>
   <string name="error_occurred">Ett fel uppstod!</string>
   <string name="notifications_channel_name_all">Commons-aviseringar</string>
+  <string name="notifications_channel_name_uploads">Uppladdningsstatus</string>
   <string name="preference_author_name_toggle">Använd anpassat författarnamn</string>
   <string name="preference_author_name_toggle_summary">Använd ett anpassat författarnamn istället för ditt användarnamn när du laddar upp foton</string>
   <string name="preference_author_name">Anpassat författarnamn</string>
@@ -673,6 +692,8 @@
   <string name="resuming_upload">Återupptar uppladdning…</string>
   <string name="pausing_upload">Pausar uppladdning…</string>
   <string name="cancelling_upload">Avbryter uppladdning…</string>
+  <string name="retrying_upload">Försöker ladda upp igen...</string>
+  <string name="retrying_failed_uploads">Försöker ladda upp alla misslyckade igen...</string>
   <string name="cancel_upload">Avbryt uppladdning</string>
   <string name="limited_connection_explanation">Du har aktiverat läget för begränsad anslutning. Alla uppladdningar har pausats och kommer återupptas när du har inaktiverat detta läge.</string>
   <string name="limited_connection_is_on">Läget för begränsad anslutning är aktiverat.</string>
@@ -808,7 +829,8 @@
   </plurals>
   <string name="multiple_files_depiction">Kom ihåg att när du laddar upp flera bilder får alla bilder samma kategorier och motiv. Om bilder inte bör dela beskrivningar och motiv bör du ladda upp de en och en istället.</string>
   <string name="multiple_files_depiction_header">Anmärkning om att ladda upp flera bilder</string>
-  <string name="nearby_wikitalk">Rapportera ett problem om detta objekt till Wikidata</string>
+  <string name="nearby_report_problem">Rapportera ett problem om detta objekt till Wikidata</string>
+  <string name="nearby_report_problem_short">Rapportera problem</string>
   <string name="please_enter_some_comments">Skriv en kommentar</string>
   <string name="talk">Diskussion</string>
   <string name="write_something_about_the_item">Skriv någonting om objektet \"%1$s\". Det kommer att visas offentligt.</string>
@@ -837,6 +859,10 @@
   <string name="green_pin">Det här platsen har redan en bild.</string>
   <string name="grey_pin">Kollar nu om den här platsen har en bild.</string>
   <string name="error_while_loading">Fel med inladdning</string>
+  <string name="play_video">Spela video</string>
+  <string name="play_audio">Spela ljud</string>
+  <string name="video_unavailable">Videon är inte tillgänglig. Tryck för att försöka igen.</string>
+  <string name="audio_unavailable">Ljudet inte tillgängligt. Tryck för att försöka igen.</string>
   <string name="no_usages_found">Inga användningar hittades</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andra wikier</string>
@@ -854,6 +880,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Skapad av %1$s och laddades upp av %2$s</string>
   <string name="nominated_for_deletion_btn">Nominerad för radering</string>
   <string name="custom_selector_max_image_limit_reached">Du kan välja högst %d bilder.</string>
+  <string name="upload_limit_exceeded">Bara de första %1$d bilderna kommer laddas upp.</string>
   <string name="edit_unsupported_format_explanation">Redigering i appen är endast tillgängligt för JPEG-filer. Om du vill redigera andra format behöver du använda ett tredjepartsverktyg.</string>
   <string name="license_cc0_description">Ingen upphovsrätt. Du avstår från alla rättigheter så att vem som helst kan använda detta verk på valfritt sätt.</string>
   <string name="license_cc_by_description">Erkännande. Andra är fria att dela och anpassa så länge de anger dig som upphovsperson.</string>
@@ -866,4 +893,12 @@
   <string name="error_applying_blur">Fel när oskärpa tillämpades</string>
   <string name="failed_to_apply_crop">Misslyckades när beskärning tillämpades</string>
   <string name="failed_to_save_image">Misslyckades att spara bilden</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (ljud)</string>
+  <string name="unsupported_format_title">Format som inte stöds</string>
+  <string name="unsupported_format_desc">De valda filerna kunde inte öppnas. Wikimedia Commons kräver något av följande format:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Filer som inte stöds hoppades över</string>
+  <string name="unsupported_files_skipped_desc">Vissa filer hoppades över på grund av ett format som inte stöds. Appen kommer fortsätta ladda upp kvarvarande filer som överensstämmer med format som stöds:\n\n%s</string>
 </resources>

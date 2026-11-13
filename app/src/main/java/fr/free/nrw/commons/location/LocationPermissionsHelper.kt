@@ -94,10 +94,15 @@ class LocationPermissionsHelper(
      *
      * @param activity Activity object
      * @param dialogTextResource int id of the required string resource
+     * @param toastTextResource int id of the string shown in a toast if the user cancels,
+     * defaults to dialogTextResource
+     * @param onCancel invoked after the toast if the user cancels
      */
     fun showLocationOffDialog(
         activity: Activity,
         dialogTextResource: Int,
+        toastTextResource: Int = dialogTextResource,
+        onCancel: (() -> Unit)? = null,
     ) {
         DialogUtil.showAlertDialog(
             activity,
@@ -110,9 +115,10 @@ class LocationPermissionsHelper(
                 Toast
                     .makeText(
                         activity,
-                        activity.getString(dialogTextResource),
+                        activity.getString(toastTextResource),
                         Toast.LENGTH_LONG,
                     ).show()
+                onCancel?.invoke()
             },
         )
     }

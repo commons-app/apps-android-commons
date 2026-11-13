@@ -16,16 +16,20 @@ class Entities : MwResponse() {
 
     override fun postProcess() {
         first?.let {
-            if (it.isMissing()) throw RuntimeException("The requested entity was not found.")
+            if (it.isMissing()) throw NoSuchElementException("The requested entity was not found.")
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Entity {
         private val type: String? = null
         private val id: String? = null
         private val labels: Map<String, Label>? = null
         private val descriptions: Map<String, Label>? = null
         private val sitelinks: Map<String, SiteLink>? = null
+
+        @SerializedName("lastrevid")
+        val lastRevisionId: Long? = null
 
         @SerializedName(value = "statements", alternate = ["claims"])
         val statements: Map<String, List<StatementPartial>>? = null
@@ -51,6 +55,7 @@ class Entities : MwResponse() {
         fun value(): String = StringUtils.defaultString(value)
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class SiteLink {
         val site: String? = null
             get() = StringUtils.defaultString(field)

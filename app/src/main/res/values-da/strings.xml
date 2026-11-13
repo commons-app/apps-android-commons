@@ -110,6 +110,10 @@
   <string name="menu_view_file_page">Vis filside</string>
   <string name="share_title_hint">Billedtekst (påkrævet)</string>
   <string name="add_caption_toast">Angiv venligst en billedtekst til denne fil</string>
+  <string name="file_name_blacklisted_toast">Commons accepterer ikke dette filnavn. Brug venligst en mere beskrivende billedtekst.</string>
+  <string name="file_name_too_long_toast">Denne billedtekst er for lang til at blive brugt som filnavn. Forkort den venligst.</string>
+  <string name="file_name_invalid_toast">Denne billedtekst kan ikke bruges som filnavn på Commons. Ændr den venligst.</string>
+  <string name="file_name_banned_extension_toast">Denne billedtekst indeholder en filtype som \".com\". Ret den venligst.</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="share_caption_hint">Billedtekst</string>
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
@@ -224,6 +228,12 @@
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
   <string name="media_detail_coordinates_empty">Ingen angivet</string>
+  <string name="playback_quality">Afspilningskvalitet</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Videokvalitet</string>
+  <string name="video_quality_auto">Automatisk</string>
+  <string name="video_quality_higher">Højere billedkvalitet</string>
+  <string name="video_quality_data_saver">Databesparelse</string>
   <string name="become_a_tester_title">Bliv betatester</string>
   <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig adgang til nye funktioner og fejlrettelser</string>
   <string name="_2fa_code">2FA-kode</string>
@@ -280,6 +290,13 @@
   <string name="null_url">Fejl! Adressen blev ikke fundet</string>
   <string name="nominate_deletion">Nominer til sletning</string>
   <string name="nominated_for_deletion">Dette billede er blevet nomineret til sletning.</string>
+  <string name="file_deleted_from_commons">Denne fil blev slettet fra Commons.</string>
+  <string name="contribution_deleted">Slettet</string>
+  <string name="deleted_file_activity_title">Fil slettet</string>
+  <string name="deleted_file_explanation">Wikimedia Commons sletter filer, der ikke har et uddannelsesmæssigt formål, eller som overtræder reglerne, herunder krænkelser af ophavsretten. Upload fotos, du selv har taget. Billeder kopieret fra internettet, skærmbilleder, logoer og plakater er almindelige årsager til, at en fil fjernes.</string>
+  <string name="deleted_file_view_page">Se filsiden</string>
+  <string name="deleted_file_view_discussion">Læs diskussionen om sletning</string>
+  <string name="deleted_file_policies">Commons politikker og retningslinjer</string>
   <string name="nominated_see_more">Se webstedet for information</string>
   <string name="skip_login">Spring over</string>
   <string name="navigation_item_login">Log ind</string>
@@ -399,12 +416,14 @@
   <string name="images_used_explanation">Antallet af billeder, du har uploadet til Commons, som blev brugt i Wikimedia-artikler</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="notifications_channel_name_all">Commons-notifikationer</string>
+  <string name="notifications_channel_name_uploads">Status for upload</string>
   <string name="preference_author_name_toggle">Brug brugerdefineret forfatternavn</string>
   <string name="preference_author_name_toggle_summary">Brug et brugerdefineret forfatternavn i stedet for dit brugernavn, når du uploader billeder</string>
   <string name="preference_author_name">Brugerdefineret forfatternavn</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheden</string>
   <string name="notifications">Notifikationer</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Notifikationer (læst)</string>
   <string name="display_nearby_notification">Vis notifikationer for steder i nærheden</string>
   <string name="display_nearby_notification_summary">Vis notifikation i appen for det nærmeste sted, der har brug for billeder</string>
@@ -672,6 +691,8 @@
   <string name="resuming_upload">Genoptager upload...</string>
   <string name="pausing_upload">Sætter upload på pause...</string>
   <string name="cancelling_upload">Annullerer upload...</string>
+  <string name="retrying_upload">Prøver at uploade igen…</string>
+  <string name="retrying_failed_uploads">Prøver alle mislykkede uploads igen…</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
@@ -807,7 +828,7 @@
   </plurals>
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
-  <string name="nearby_wikitalk">Rapporter et problem omkring dette element til Wikidata</string>
+  <string name="nearby_report_problem">Rapporter et problem omkring dette element til Wikidata</string>
   <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
   <string name="talk">Tal</string>
   <string name="write_something_about_the_item">Skriv noget om elementet \'%1$s\'. Det vil være offentligt synligt.</string>
@@ -836,6 +857,10 @@
   <string name="green_pin">Dette sted har allerede et billede.</string>
   <string name="grey_pin">Tjekker nu, om dette sted har et billede.</string>
   <string name="error_while_loading">Fejl under indlæsning</string>
+  <string name="play_video">Afspil video</string>
+  <string name="play_audio">Afspil lyd</string>
+  <string name="video_unavailable">Videoen er ikke tilgængelig. Tryk for at prøve igen.</string>
+  <string name="audio_unavailable">Lyd ikke tilgængelig. Tryk for at prøve igen.</string>
   <string name="no_usages_found">Ingen anvendelser fundet</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Andre wikier</string>
@@ -854,6 +879,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>
   <string name="nominated_for_deletion_btn">Nomineret til sletning</string>
   <string name="custom_selector_max_image_limit_reached">Du kan højst vælge %d billeder.</string>
+  <string name="upload_limit_exceeded">Kun de første %1$d billeder vil blive uploadet.</string>
   <string name="edit_unsupported_format_explanation">Redigering i appen er kun tilgængelig for JPEG-filer. Brug et tredjepartsværktøj til at redigere andre formater.</string>
   <string name="license_cc0_description">Ingen ophavsret. Du frasiger dig alle rettigheder, så alle kan bruge dette værk på enhver måde.</string>
   <string name="license_cc_by_description">Kreditering. Andre må gerne dele og tilpasse, så længe de angiver dig som kilde.</string>

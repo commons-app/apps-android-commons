@@ -124,24 +124,21 @@ class CategoryContentProvider : CommonsDaggerContentProvider() {
         var rowsUpdated: Int = 0
         when (uriType) {
             CATEGORIES_ID -> {
-                if (TextUtils.isEmpty(selection)) {
-                    val id =
-                        uri.lastPathSegment?.toInt()
-                            ?: throw IllegalArgumentException("Invalid ID")
-                    contentValues?.let {
-                        rowsUpdated =
-                            requireDb().update(
-                                TABLE_NAME,
-                                SQLiteDatabase.CONFLICT_NONE,
-                                it,
-                                "$COLUMN_ID = ?",
-                                arrayOf(id.toString()),
-                            )
-                    }
-                } else {
-                    throw IllegalArgumentException(
-                        "Parameter `selection` should be empty when updating an ID",
-                    )
+                require(TextUtils.isEmpty(selection)) {
+                    "Parameter `selection` should be empty when updating an ID"
+                }
+                val id =
+                    uri.lastPathSegment?.toInt()
+                        ?: throw IllegalArgumentException("Invalid ID")
+                contentValues?.let {
+                    rowsUpdated =
+                        requireDb().update(
+                            TABLE_NAME,
+                            SQLiteDatabase.CONFLICT_NONE,
+                            it,
+                            "$COLUMN_ID = ?",
+                            arrayOf(id.toString()),
+                        )
                 }
             }
             else -> throw IllegalArgumentException("Unknown URI: $uri with type $uriType")

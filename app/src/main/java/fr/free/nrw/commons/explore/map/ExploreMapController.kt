@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.map
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Bitmap
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import coil3.SingletonImageLoader
 import coil3.request.ImageRequest
@@ -120,7 +119,8 @@ class ExploreMapController
                     }
                 }
 
-                // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+                // Our radius searched around us, will be used to understand when user search their own location, we
+                // will follow them
                 if (checkingAroundCurrentLocation) {
                     currentLocationSearchRadius = latestSearchRadius
                     currentLocation = currentLatLng
@@ -140,6 +140,9 @@ class ExploreMapController
         }
 
         companion object {
+            private const val MAP_MARKER_IMAGE_SIZE = 96
+            private const val MAP_MARKER_BORDER_WIDTH = 6
+
             /**
              * Loads attractions from location for map view, we need to return places in Place data type
              *
@@ -166,7 +169,7 @@ class ExploreMapController
                             R.drawable.ic_custom_map_marker_dark,
                             context.theme,
                         )
-                } catch (e: Resources.NotFoundException) {
+                } catch (_: Resources.NotFoundException) {
                     // ignore when running tests.
                 }
                 if (vectorDrawable != null) {
@@ -185,39 +188,60 @@ class ExploreMapController
                             )
                         baseMarker.place = explorePlace
 
-                        val imageLoader = SingletonImageLoader.get(context)
-                        val request = ImageRequest.Builder(context)
-                            .data(explorePlace.thumb)
-                            .size(96, 96)
-                            .allowHardware(false)
-                            .target(
-                                onSuccess = { image ->
-                                    val bitmap = image.toBitmap()
-                                    baseMarker.icon = addRedBorder(bitmap, 6, context)
-                                    baseMarkerList.add(baseMarker)
-                                    if (baseMarkerList.size == placeList.size) {
-                                        callback.onNearbyBaseMarkerThumbsReady(
-                                            baseMarkerList,
-                                            explorePlacesInfo,
-                                        )
-                                    }
-                                },
-                                onError = { _ ->
-                                    baseMarker.fromResource(context, R.drawable.image_placeholder_96)
-                                    baseMarkerList.add(baseMarker)
-                                    if (baseMarkerList.size == placeList.size) {
-                                        callback.onNearbyBaseMarkerThumbsReady(
-                                            baseMarkerList,
-                                            explorePlacesInfo,
-                                        )
-                                    }
-                                },
+                        val request =
+                            buildMarkerImageRequest(
+                                context,
+                                explorePlace,
+                                baseMarker,
+                                baseMarkerList,
+                                placeList.size,
+                                callback,
+                                explorePlacesInfo,
                             )
-                            .build()
-                        imageLoader.enqueue(request)
+                        SingletonImageLoader.get(context).enqueue(request)
                     }
                 }
                 return baseMarkerList
             }
+
+            @Suppress("LongParameterList")
+            private fun buildMarkerImageRequest(
+                context: Context,
+                explorePlace: Place,
+                baseMarker: BaseMarker,
+                baseMarkerList: MutableList<BaseMarker>,
+                placeCount: Int,
+                callback: NearbyBaseMarkerThumbCallback,
+                explorePlacesInfo: ExplorePlacesInfo?,
+            ): ImageRequest =
+                ImageRequest
+                    .Builder(context)
+                    .data(explorePlace.thumb)
+                    .size(MAP_MARKER_IMAGE_SIZE, MAP_MARKER_IMAGE_SIZE)
+                    .allowHardware(false)
+                    .target(
+                        onSuccess = { image ->
+                            val bitmap = image.toBitmap()
+                            baseMarker.icon =
+                                addRedBorder(bitmap, MAP_MARKER_BORDER_WIDTH, context)
+                            baseMarkerList.add(baseMarker)
+                            if (baseMarkerList.size == placeCount) {
+                                callback.onNearbyBaseMarkerThumbsReady(
+                                    baseMarkerList,
+                                    explorePlacesInfo,
+                                )
+                            }
+                        },
+                        onError = {
+                            baseMarker.fromResource(context, R.drawable.image_placeholder_96)
+                            baseMarkerList.add(baseMarker)
+                            if (baseMarkerList.size == placeCount) {
+                                callback.onNearbyBaseMarkerThumbsReady(
+                                    baseMarkerList,
+                                    explorePlacesInfo,
+                                )
+                            }
+                        },
+                    ).build()
         }
     }

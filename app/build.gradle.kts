@@ -361,6 +361,9 @@ dependencies {
     implementation(libs.rxjava)
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.datasource.okhttp)
+    implementation(libs.media3.ui)
     implementation(libs.apache.commons.lang3)
 
     // UI
@@ -433,6 +436,7 @@ dependencies {
     testImplementation(libs.mockwebserver)
     testImplementation(libs.livedata.testing.ktx)
     testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.androidx.room.testing)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlinx.coroutines.test)

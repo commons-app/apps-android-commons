@@ -83,9 +83,13 @@ class UploadRepositoryUnitTest {
     @Mock
     private lateinit var media: Media
 
+    @Mock
+    private lateinit var imageProcessingService: ImageProcessingService
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        whenever(uploadModel.imageProcessingService).thenReturn(imageProcessingService)
         repository =
             UploadRepository(
                 uploadModel,
@@ -195,7 +199,7 @@ class UploadRepositoryUnitTest {
     fun testGetImageQuality() {
         assertEquals(
             repository.getImageQuality(uploadItem, location),
-            uploadModel.getImageQuality(uploadItem, location),
+            imageProcessingService.validateImage(uploadItem, location),
         )
     }
 
@@ -203,7 +207,7 @@ class UploadRepositoryUnitTest {
     fun testGetCaptionQuality() {
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            uploadModel.getCaptionQuality(uploadItem),
+            imageProcessingService.validateCaption(uploadItem),
         )
     }
 

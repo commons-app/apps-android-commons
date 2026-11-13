@@ -177,31 +177,9 @@ class DepictsFragment :
      * bundles the latitude and longitude (if present)
      */
     private fun launchDepictsPicker() {
-        // hide keyboard if in case  its left open
-        val imm =
-            view?.context?.let {
-                ContextCompat.getSystemService(
-                    it,
-                    InputMethodManager::class.java,
-                )
-            }
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        hideKeyboard()
 
-        val allPhotoCoordinates = ArrayList<LatLng>()
-        val uploads = presenter.getUploads()
-        if (media == null && callback != null) {
-            // when in upload flow
-            uploads.forEach { item ->
-                item.gpsCoords?.let {
-                    if (it.imageCoordsExists) {
-                        it.latLng?.let { v -> allPhotoCoordinates.add(v) }
-                    }
-                }
-            }
-        } else {
-            // when in edit flow
-            media?.coordinates?.let { allPhotoCoordinates.add(it) }
-        }
+        val allPhotoCoordinates = getPhotoCoordinates()
 
         if (allPhotoCoordinates.isEmpty()) {
             Toast
@@ -219,6 +197,31 @@ class DepictsFragment :
             )
             mapPickerLauncher.launch(this)
         }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            view?.context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    InputMethodManager::class.java,
+                )
+            }
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun getPhotoCoordinates(): ArrayList<LatLng> {
+        val allPhotoCoordinates = ArrayList<LatLng>()
+        if (media == null && callback != null) {
+            val coords =
+                presenter.getUploads().mapNotNull { item ->
+                    item.gpsCoords?.takeIf { it.imageCoordsExists }?.latLng
+                }
+            allPhotoCoordinates.addAll(coords)
+        } else {
+            media?.coordinates?.let { allPhotoCoordinates.add(it) }
+        }
+        return allPhotoCoordinates
     }
 
     /**

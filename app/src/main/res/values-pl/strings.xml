@@ -14,6 +14,7 @@
 * Matlin
 * Matma Rex
 * Mazab IZW
+* Nicolas Raoul
 * Olaf
 * PanWor
 * Rail
@@ -123,7 +124,7 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
-  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
+  <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$s</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="title_activity_contributions">Niedawno przesłane</string>
@@ -141,6 +142,10 @@
   <string name="menu_view_file_page">Pokaż stronę pliku</string>
   <string name="share_title_hint">Podpis (wymagany)</string>
   <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
+  <string name="file_name_blacklisted_toast">Commons nie akceptuje tej nazwy pliku. Użyj bardziej opisowego tytułu.</string>
+  <string name="file_name_too_long_toast">Ten podpis jest zbyt długi, by można go było wykorzystać jako nazwę pliku. Skróć go.</string>
+  <string name="file_name_invalid_toast">Tego podpisu nie można używać jako nazwy pliku w Commons. Zmień go.</string>
+  <string name="file_name_banned_extension_toast">Ten podpis zawiera rozszerzenie pliku, np. „.com”. Zmień to.</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Podpis</string>
   <string name="login_failed_network">Nie można się zalogować – błąd sieci</string>
@@ -160,6 +165,7 @@
   <string name="refresh_button">Odśwież</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Nie ma jeszcze przesłanych plików)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
   <string name="depictions_not_found">Nie znaleziono elementów Wikidanych pasujących do %1$s</string>
   <string name="no_child_classes">%1$s nie ma klas podrzędnych</string>
@@ -255,6 +261,12 @@
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
   <string name="media_detail_coordinates_empty">Niedostarczone</string>
+  <string name="playback_quality">Jakość odtwarzania</string>
+  <string name="original">Oryginalna</string>
+  <string name="video_quality">Jakość wideo</string>
+  <string name="video_quality_auto">Automatyczna</string>
+  <string name="video_quality_higher">Wyższa jakość obrazu</string>
+  <string name="video_quality_data_saver">Oszczędzanie danych</string>
   <string name="become_a_tester_title">Zostań betatesterem</string>
   <string name="become_a_tester_description">Dołącz do kanału beta w Google Play i otrzymaj wczesny dostęp do nowych funkcji i poprawek błędów</string>
   <string name="_2fa_code">Kod 2FA</string>
@@ -311,6 +323,13 @@
   <string name="null_url">Błąd! Nie znaleziono adresu URL</string>
   <string name="nominate_deletion">Zgłoszone do usunięcia</string>
   <string name="nominated_for_deletion">Ta grafika została zgłoszona do usunięcia.</string>
+  <string name="file_deleted_from_commons">Ten plik został usunięty z Commons.</string>
+  <string name="contribution_deleted">Usunięto</string>
+  <string name="deleted_file_activity_title">Usunięto plik</string>
+  <string name="deleted_file_explanation">Wikimedia Commons usuwa pliki niemające charakteru edukacyjnego lub naruszające obowiązujące zasady, w tym przypadki naruszenia praw autorskich. Przesyłaj zdjęcia wykonane przez Ciebie. Zdjęcia skopiowane z Internetu, zrzuty ekranu, logo i plakaty to najczęstsze powody usunięcia pliku.</string>
+  <string name="deleted_file_view_page">Zobacz stronę pliku</string>
+  <string name="deleted_file_view_discussion">Przeczytaj dyskusję o usunięciu</string>
+  <string name="deleted_file_policies">Polityka i wytyczne Wikimedia Commons</string>
   <string name="nominated_see_more">Szczegółowe informacje można znaleźć na stronie internetowej</string>
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
@@ -430,12 +449,14 @@
   <string name="images_used_explanation">Liczba zdjęć przesłanych do Commons, które zostały wykorzystane w artykułach Wikimediów</string>
   <string name="error_occurred">Wystąpił błąd!</string>
   <string name="notifications_channel_name_all">Powiadomienia Commons</string>
+  <string name="notifications_channel_name_uploads">Postęp przesyłania</string>
   <string name="preference_author_name_toggle">Użyj niestandardowej nazwy autora</string>
   <string name="preference_author_name_toggle_summary">Podczas przesyłania zdjęć użyj niestandardowej nazwy autora zamiast nazwy użytkownika</string>
   <string name="preference_author_name">Niestandardowa nazwa autora</string>
   <string name="contributions_fragment">Wkład</string>
   <string name="nearby_fragment">W pobliżu</string>
   <string name="notifications">Powiadomienia</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Powiadomienia (przeczytaj)</string>
   <string name="display_nearby_notification">Wyświetl powiadomienie w pobliżu</string>
   <string name="display_nearby_notification_summary">Pokazuj w aplikacji powiadomienia o pobliskich miejscach wymagających zilustrowania</string>
@@ -707,6 +728,8 @@
   <string name="resuming_upload">Wznawianie przesyłania…</string>
   <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
+  <string name="retrying_upload">Ponawianie próby przesyłania…</string>
+  <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>
@@ -845,7 +868,8 @@
   </plurals>
   <string name="multiple_files_depiction">Pamiętaj, że wszystkie obrazy w wielokrotnym przesłaniu mają te same kategorie i przedstawienia. Jeśli obrazy nie mają wspólnych przedstawień i kategorii, wykonaj kilka oddzielnych przesłań.</string>
   <string name="multiple_files_depiction_header">Uwaga dotycząca przesyłania wielu obrazów na raz</string>
-  <string name="nearby_wikitalk">Zgłoś problem dotyczący tego elementu do Wikidanych</string>
+  <string name="nearby_report_problem">Zgłoś problem dotyczący tego elementu do Wikidanych</string>
+  <string name="nearby_report_problem_short">Zgłoś problem</string>
   <string name="please_enter_some_comments">Wprowadź komentarz poniżej</string>
   <string name="talk">Dyskusja</string>
   <string name="write_something_about_the_item">Napisz coś o elemencie \' %1$s\'. Będzie to publicznie widoczne.</string>
@@ -874,6 +898,10 @@
   <string name="green_pin">To miejsce już ma zdjęcie.</string>
   <string name="grey_pin">Sprawdzam teraz, czy to miejsce ma zdjęcie.</string>
   <string name="error_while_loading">Błąd podczas wczytywania</string>
+  <string name="play_video">Odtwórz wideo</string>
+  <string name="play_audio">Odtwórz dźwięk</string>
+  <string name="video_unavailable">Wideo niedostępne. Dotknij, aby spróbować ponownie.</string>
+  <string name="audio_unavailable">Dźwięk niedostępny. Dotknij, aby spróbować ponownie.</string>
   <string name="no_usages_found">Nie odnaleziono zastosowań</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Inne wiki</string>
@@ -898,4 +926,17 @@
   <string name="license_cc0_long_description">Niniejsza licencja pozwala na dystrybucję, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, bez żadnych warunków.</string>
   <string name="license_cc_by_long_description">Niniejsza licencja pozwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa.</string>
   <string name="license_cc_by_sa_long_description">Niniejsza licencja zezwala na rozpowszechnianie, remiksowanie, adaptowanie i tworzenie dzieł pochodnych na podstawie materiału w dowolnym medium lub formacie, nawet w celach komercyjnych, pod warunkiem wskazania autorstwa oraz udostępnienia nowego dzieła na tej samej licencji.</string>
+  <string name="error_getting_image_properties">Wystąpił błąd podczas pobierania właściwości obrazu:</string>
+  <string name="error_blur_no_rectangle">Narysuj co najmniej jeden prostokąt na zdjęciu</string>
+  <string name="error_applying_blur">Wystąpił błąd podczas stosowania efektu rozmycia</string>
+  <string name="failed_to_apply_crop">Nie udało się przyciąć obrazu</string>
+  <string name="failed_to_save_image">Nie udało się pobrać obrazu</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG (dźwięk)</string>
+  <string name="unsupported_format_title">Nieobsługiwany format</string>
+  <string name="unsupported_format_desc">Nie udało się otworzyć wybranych plików. Wikimedia Commons obsługuje wyłącznie następujące formaty:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">Pominięto nieobsługiwane pliki</string>
+  <string name="unsupported_files_skipped_desc">Niektóre pliki zostały pominięte z powodu nieobsługiwanego formatu. Aplikacja będzie kontynuować przesyłanie pozostałych plików, które są zgodne z następującymi obsługiwanymi formatami:\n\n%s</string>
 </resources>

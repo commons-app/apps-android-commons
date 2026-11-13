@@ -11,7 +11,6 @@ import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
@@ -46,15 +45,14 @@ class WikidataClientTest {
         val pageInfo = mock(PageInfo::class.java)
         whenever(pageInfo.lastrevid).thenReturn(1)
         whenever(response.pageinfo).thenReturn(pageInfo)
-        `when`(wikidataInterface!!.postSetClaim(anyString(), anyString(), anyString()))
+        `when`(wikidataInterface!!.postSetClaim("claim", "test", "test_token", 42L))
             .thenReturn(Observable.just(response))
         whenever(gson!!.toJson(any(StatementPartial::class.java))).thenReturn("claim")
         val request = mock(StatementPartial::class.java)
 
-        val claim =
-            wikidataClient!!
-                .setClaim(request, "test")
-                .test()
-                .assertValue(1L)
+        wikidataClient!!
+            .setClaim(request, "test", 42L)
+            .test()
+            .assertValue(1L)
     }
 }

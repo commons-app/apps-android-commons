@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
-import android.app.Activity
 import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,19 +17,17 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
-import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
+import fr.free.nrw.commons.customselector.helper.ImageFolderManager
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
-import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.databinding.ProgressDialogBinding
@@ -40,13 +36,11 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.TreeMap
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -55,8 +49,7 @@ import kotlin.collections.ArrayList
  */
 class ImageFragment :
     CommonsDaggerSupportFragment(),
-    RefreshUIListener,
-    PassDataListener {
+    RefreshUIListener {
     private var _binding: FragmentCustomSelectorBinding? = null
     val binding get() = _binding
 
@@ -157,7 +150,16 @@ class ImageFragment :
     @Inject
     lateinit var contributionDao: ContributionDao
 
+    /**
+     * Folder manager for custom selector folder operations.
+     */
+    @Inject
+    lateinit var folderManager: ImageFolderManager
+
     companion object {
+        // todo change span count depending on the device orientation and other factos.
+        private const val SPAN_COUNT = 3
+
         /**
          * Switch state
          */
@@ -197,6 +199,16 @@ class ImageFragment :
             ViewModelProvider(requireActivity(), customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
+        try {
+            (activity as? CustomSelectorActivity)?.setOnDataListener(this)
+        } catch (ex: Exception) {
+            Timber.e(ex, "Could not set data listener on CustomSelectorActivity")
+        }
+        val builder = AlertDialog.Builder(requireActivity()).setCancelable(false)
+        progressDialogLayout = ProgressDialogBinding.inflate(layoutInflater)
+        progressDialog = builder.setView(progressDialogLayout.root).create()
+        val prefs = requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+        showAlreadyActionedImages = prefs.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
     }
 
     /**
@@ -217,51 +229,30 @@ class ImageFragment :
             Timber.d("Initialized imageAdapter in onCreateView")
         }
         // Set single selection mode if needed
-        val singleSelection =
-            (activity as? CustomSelectorActivity)?.intent?.getBooleanExtra(
-                CustomSelectorActivity.EXTRA_SINGLE_SELECTION,
-                false,
-            ) ==
-                true
-        imageAdapter.setSingleSelection(singleSelection)
-        gridLayoutManager = GridLayoutManager(context, getSpanCount())
-        with(binding?.selectorRv) {
-            this?.applyEdgeToEdgeBottomPaddingInsets()
-            this?.layoutManager = gridLayoutManager
-            this?.setHasFixedSize(true)
-            this?.adapter = imageAdapter
-        }
-
-        viewModel?.result?.observe(
-            viewLifecycleOwner,
-            Observer {
-                handleResult(it)
-            },
-        )
-
-        switch = binding?.switchWidget
-        switch?.visibility = View.VISIBLE
-        _switchState.value = switch?.isChecked ?: false
-        switch?.setOnCheckedChangeListener { _, isChecked ->
-            onChangeSwitchState(isChecked)
-            _switchState.value = isChecked
-        }
-        selectorRV = binding?.selectorRv
+        imageAdapter.selectionManager.singleSelection =
+            (activity as? CustomSelectorActivity)
+                ?.intent
+                ?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
+        gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
+        selectorRV =
+            binding?.selectorRv?.apply {
+                applyEdgeToEdgeBottomPaddingInsets()
+                layoutManager = gridLayoutManager
+                setHasFixedSize(true)
+                adapter = imageAdapter
+            }
         loader = binding?.loader
         progressLayout = binding?.progressLayout
-
-        val sharedPreferences: SharedPreferences =
-            requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
-        showAlreadyActionedImages =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-        switch?.isChecked = showAlreadyActionedImages
-
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setCancelable(false)
-        progressDialogLayout = ProgressDialogBinding.inflate(layoutInflater, container, false)
-        builder.setView(progressDialogLayout.root)
-        progressDialog = builder.create()
-
+        switch =
+            binding?.switchWidget?.apply {
+                visibility = View.VISIBLE
+                _switchState.value = isChecked
+                setOnCheckedChangeListener { _, isChecked ->
+                    folderManager.onSwitchChanged(isChecked, allImages, imageAdapter, requireContext())
+                    _switchState.value = isChecked
+                }
+                this.isChecked = showAlreadyActionedImages
+            }
         return binding?.root
     }
 
@@ -274,6 +265,34 @@ class ImageFragment :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel?.result?.observe(
+            viewLifecycleOwner,
+            Observer { result ->
+                loader?.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+                if (result.status is CallbackStatus.SUCCESS) {
+                    if (result.images.isNotEmpty()) {
+                        allImages =
+                            folderManager.processResultImages(
+                                result.images,
+                                bucketId,
+                                imageAdapter,
+                                viewModel?.selectedImages?.value,
+                            )
+                        filteredImages = allImages
+                        selectorRV?.visibility = View.VISIBLE
+                        if (switch?.isChecked == false && lastItemId != null) {
+                            val pos = ImageHelper.getIndexFromId(allImages, lastItemId!!)
+                            (selectorRV?.layoutManager as? GridLayoutManager)?.scrollToPosition(pos)
+                        }
+                    } else {
+                        filteredImages = ArrayList()
+                        allImages = filteredImages
+                        binding?.emptyText?.visibility = View.VISIBLE
+                        selectorRV?.visibility = View.GONE
+                    }
+                }
+            },
+        )
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 combine(
@@ -293,92 +312,6 @@ class ImageFragment :
         }
     }
 
-    private fun onChangeSwitchState(checked: Boolean) {
-        if (checked) {
-            showAlreadyActionedImages = true
-            val sharedPreferences: SharedPreferences =
-                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-            editor.apply()
-        } else {
-            showAlreadyActionedImages = false
-            val sharedPreferences: SharedPreferences =
-                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, false)
-            editor.apply()
-        }
-
-        val uploadingContributions = getUploadingContributions()
-        imageAdapter.init(allImages, allImages, TreeMap(), uploadingContributions)
-        imageAdapter.notifyDataSetChanged()
-    }
-
-    /**
-     * Attaching data listener
-     */
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        try {
-            (getActivity() as CustomSelectorActivity).setOnDataListener(this)
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-    }
-
-    /**
-     * Handle view model result.
-     */
-    private fun handleResult(result: Result) {
-        if (result.status is CallbackStatus.SUCCESS) {
-            val images = result.images
-
-            val uploadingContributions = getUploadingContributions()
-            if (images.isNotEmpty()) {
-                filteredImages = ImageHelper.filterImages(images, bucketId)
-                allImages = ArrayList(filteredImages)
-                imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
-                viewModel?.selectedImages?.value?.let { selectedImages ->
-                    imageAdapter.setSelectedImages(selectedImages)
-                }
-                imageAdapter.notifyDataSetChanged()
-                selectorRV?.let {
-                    it.visibility = View.VISIBLE
-                    if (switch?.isChecked == false) {
-                        lastItemId?.let { pos ->
-                            (it.layoutManager as GridLayoutManager)
-                                .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
-                        }
-                    }
-                }
-            } else {
-                filteredImages = ArrayList()
-                allImages = filteredImages
-                binding?.emptyText?.let {
-                    it.visibility = View.VISIBLE
-                }
-                selectorRV?.let {
-                    it.visibility = View.GONE
-                }
-            }
-        }
-        loader?.let {
-            it.visibility =
-                if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
-        }
-    }
-
-    /**
-     * getSpanCount for GridViewManager.
-     *
-     * @return spanCount.
-     */
-    private fun getSpanCount(): Int {
-        return 3
-        // todo change span count depending on the device orientation and other factos.
-    }
-
     /**
      * onResume
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
@@ -393,49 +326,13 @@ class ImageFragment :
         super.onResume()
     }
 
-    /**
-     * OnDestroy
-     * Cleanup the imageLoader coroutine.
-     * Save the Image Fragment state.
-     */
-    override fun onDestroy() {
-        if (::imageAdapter.isInitialized) {
-            imageAdapter.cleanUp()
-            Timber.d("Cleaned up imageAdapter in onDestroy")
-        } else {
-            Timber.w("imageAdapter not initialized in onDestroy, skipping cleanup")
-        }
-
+    override fun onDestroyView() {
         val position =
             (selectorRV?.layoutManager as? GridLayoutManager)
                 ?.findFirstVisibleItemPosition() ?: -1
-
-        // check for valid position and non-empty image list
-        if (position != -1 && filteredImages.isNotEmpty() && ::imageAdapter.isInitialized) {
-            context?.let { context ->
-                context
-                    .getSharedPreferences(
-                        "CustomSelector",
-                        MODE_PRIVATE,
-                    )?.let { prefs ->
-                        prefs.edit()?.let { editor ->
-                            editor.putLong("ItemId", imageAdapter.getImageIdAt(position))?.apply()
-                            Timber.d("Saved last visible item ID: %d", imageAdapter.getImageIdAt(position))
-                        }
-                    }
-            }
-        } else {
-            Timber.d(
-                "Skipped saving item ID: position=%d, filteredImages.size=%d, imageAdapter initialized=%b",
-                position,
-                filteredImages.size,
-                ::imageAdapter.isInitialized,
-            )
-        }
-        super.onDestroy()
-    }
-
-    override fun onDestroyView() {
+        val adapter = if (::imageAdapter.isInitialized) imageAdapter else null
+        folderManager.cleanup(adapter)
+        folderManager.saveLastVisibleItemId(position, filteredImages, adapter, context)
         _binding = null
         selectorRV = null
         loader = null
@@ -446,7 +343,8 @@ class ImageFragment :
 
     override fun refresh() {
         if (::imageAdapter.isInitialized) {
-            imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
+            val uploadingContributions = folderManager.getUploadingContributions()
+            imageAdapter.refresh(filteredImages, allImages, uploadingContributions)
             Timber.d("Refreshed imageAdapter")
         } else {
             Timber.w("imageAdapter not initialized in refresh")
@@ -470,29 +368,10 @@ class ImageFragment :
      */
     fun clearSelectedImages() {
         if (::imageAdapter.isInitialized) {
-            imageAdapter.clearSelectedImages()
+            imageAdapter.selectionManager.clearSelectedImages()
             Timber.d("Cleared selected images")
         } else {
             Timber.w("imageAdapter not initialized in clearSelectedImages")
-        }
-    }
-
-    /**
-     * Passes selected images and other information from Activity to Fragment and connects it with
-     * the adapter
-     */
-    override fun passSelectedImages(
-        selectedImages: ArrayList<Image>,
-        shouldRefresh: Boolean,
-    ) {
-        if (::imageAdapter.isInitialized) {
-            imageAdapter.setSelectedImages(selectedImages)
-            if (shouldRefresh) {
-                imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
-            }
-            Timber.d("Passed %d selected images to imageAdapter, shouldRefresh=%b", selectedImages.size, shouldRefresh)
-        } else {
-            Timber.w("imageAdapter not initialized in passSelectedImages")
         }
     }
 
@@ -516,16 +395,4 @@ class ImageFragment :
             Timber.d("Dismissed mark/unmark progress dialog")
         }
     }
-
-    private fun getUploadingContributions(): List<Contribution> =
-        contributionDao
-            .getContribution(
-                listOf(
-                    Contribution.STATE_IN_PROGRESS,
-                    Contribution.STATE_FAILED,
-                    Contribution.STATE_QUEUED,
-                    Contribution.STATE_PAUSED,
-                ),
-            )?.subscribeOn(Schedulers.io())
-            ?.blockingGet() ?: emptyList()
 }

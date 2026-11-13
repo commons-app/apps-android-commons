@@ -44,6 +44,7 @@ class DeleteHelper
         private val notificationHelper: NotificationHelper,
         @Named("commons-page-edit") private val pageEditClient: PageEditClient,
         private val viewUtil: ViewUtilWrapper,
+        @Suppress("UnusedPrivateProperty") // Injected by Dagger, may be used in future
         @Named("username") private val username: String,
     ) {
         private var d: AlertDialog? = null
@@ -116,14 +117,17 @@ class DeleteHelper
                 """.trimIndent()
 
             val logPageString = "\n{{Commons:Deletion requests/${media.filename}}}\n"
-            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            // The log page title needs Western digits whatever the device language is.
+            // Bad:  https://commons.wikimedia.org/wiki/Commons:Deletion_requests/২০২৩/০৭/০৬
+            // Good: https://commons.wikimedia.org/wiki/Commons:Deletion_requests/2023/07/06
+            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
             val date = sdf.format(calendar.time)
 
             val userPageString = "\n{{subst:idw|${media.filename}}} ~~~~"
 
             val creator =
                 media.getAuthorOrUser()
-                    ?: throw RuntimeException("Failed to nominate for deletion")
+                    ?: error("Failed to nominate for deletion")
 
             return pageEditClient
                 .prependEdit(
@@ -316,14 +320,14 @@ class DeleteHelper
                         start: Int,
                         count: Int,
                         after: Int,
-                    ) {}
+                    ) = Unit
 
                     override fun onTextChanged(
                         s: CharSequence?,
                         start: Int,
                         before: Int,
                         count: Int,
-                    ) {}
+                    ) = Unit
                 },
             )
 

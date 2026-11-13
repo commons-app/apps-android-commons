@@ -8,6 +8,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import fr.free.nrw.commons.di.ApplicationlessInjection.Companion.getInstance
 import io.reactivex.disposables.CompositeDisposable
+import java.util.Locale
 import javax.inject.Inject
 
 abstract class CommonsDaggerSupportFragment :
@@ -38,6 +39,7 @@ abstract class CommonsDaggerSupportFragment :
             hasSupportFragmentInjector.supportFragmentInjector()
                 ?: throw NullPointerException(
                     String.format(
+                        Locale.ROOT,
                         "%s.supportFragmentInjector() returned null",
                         hasSupportFragmentInjector.javaClass.canonicalName,
                     ),

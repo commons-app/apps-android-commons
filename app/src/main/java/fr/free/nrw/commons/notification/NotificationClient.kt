@@ -9,10 +9,13 @@ import fr.free.nrw.commons.utils.DateUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 import fr.free.nrw.commons.wikidata.model.notifications.Notification as WikimediaNotification
+
+private const val NOTIFICATION_WIKIS = "wikidatawiki|commonswiki|enwiki"
 
 @Singleton
 class NotificationClient
@@ -24,7 +27,7 @@ class NotificationClient
         fun getNotifications(archived: Boolean): Single<List<Notification>> =
             service
                 .getAllNotifications(
-                    wikiList = "wikidatawiki|commonswiki|enwiki",
+                    wikiList = NOTIFICATION_WIKIS,
                     filter = if (archived) "read" else "!read",
                     continueStr = null,
                 ).map {
@@ -35,20 +38,34 @@ class NotificationClient
                     it.toCommonsNotification()
                 }.toList()
 
-        fun markNotificationAsRead(notificationId: String?): Observable<Boolean> =
+        /**
+         * Unread count across Commons, Wikidata, and English Wikipedia.
+         * Echo answers this with one request and reports at most 100, which means 100 or more.
+         */
+        fun getUnreadCount(): Single<Int> =
+            service
+                .getUnreadNotificationCount(wikiList = NOTIFICATION_WIKIS)
+                .map { response ->
+                    response?.query()?.notifications()?.rawCount() ?: 0
+                }.first(0)
+
+        fun markNotificationAsRead(
+            notificationId: String?,
+            wiki: String,
+        ): Observable<Boolean> =
             try {
                 service
                     .markRead(
                         token = csrfTokenClient.getTokenBlocking(),
                         readList = notificationId,
                         unreadList = "",
+                        wikis = wiki,
                     ).map(MwQueryResponse::success)
+            } catch (throwable: InvalidLoginTokenException) {
+                Observable.error(throwable)
             } catch (throwable: Throwable) {
-                if (throwable is InvalidLoginTokenException) {
-                    Observable.error(throwable)
-                } else {
-                    Observable.just(false)
-                }
+                Timber.e(throwable, "Failed to mark the notification as read")
+                Observable.just(false)
             }
 
         private fun WikimediaNotification.toCommonsNotification(): Notification {
@@ -67,6 +84,7 @@ class NotificationClient
                 link = contents?.links?.getPrimary()?.url ?: "",
                 iconUrl = "",
                 notificationId = id().toString(),
+                wiki = wiki().ifEmpty { "commonswiki" },
             )
         }
     }

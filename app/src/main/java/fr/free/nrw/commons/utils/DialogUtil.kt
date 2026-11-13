@@ -6,6 +6,17 @@ import android.view.View
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
+data class DialogOptions(
+    val title: String? = null,
+    val message: String? = null,
+    val positiveButtonText: String? = null,
+    val negativeButtonText: String? = null,
+    val onPositiveBtnClick: Runnable? = null,
+    val onNegativeBtnClick: Runnable? = null,
+    val customView: View? = null,
+    val cancelable: Boolean = false,
+)
+
 object DialogUtil {
     /**
      * Shows a dialog safely.
@@ -36,22 +47,32 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
+        options: DialogOptions,
+    ): AlertDialog? = createAndShowDialogSafely(activity, options)
+
+    @JvmStatic
+    fun showAlertDialog(
+        activity: Activity,
         title: String?,
         message: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
     ): AlertDialog? =
-        createAndShowDialogSafely(
+        showAlertDialog(
             activity = activity,
-            title = title,
-            message = message,
-            positiveButtonText = activity.getString(R.string.yes),
-            negativeButtonText = activity.getString(R.string.no),
-            onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick,
+            options =
+                DialogOptions(
+                    title = title,
+                    message = message,
+                    positiveButtonText = activity.getString(R.string.yes),
+                    negativeButtonText = activity.getString(R.string.no),
+                    onPositiveBtnClick = onPositiveBtnClick,
+                    onNegativeBtnClick = onNegativeBtnClick,
+                ),
         )
 
     @JvmStatic
+    @Suppress("LongParameterList")
     fun showAlertDialog(
         activity: Activity,
         title: String?,
@@ -62,18 +83,22 @@ object DialogUtil {
         onNegativeBtnClick: Runnable?,
         cancelable: Boolean = false,
     ): AlertDialog? =
-        createAndShowDialogSafely(
+        showAlertDialog(
             activity = activity,
-            title = title,
-            message = message,
-            positiveButtonText = positiveButtonText,
-            negativeButtonText = negativeButtonText,
-            onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick,
-            cancelable = cancelable,
+            options =
+                DialogOptions(
+                    title = title,
+                    message = message,
+                    positiveButtonText = positiveButtonText,
+                    negativeButtonText = negativeButtonText,
+                    onPositiveBtnClick = onPositiveBtnClick,
+                    onNegativeBtnClick = onNegativeBtnClick,
+                    cancelable = cancelable,
+                ),
         )
 
     @JvmStatic
+    @Suppress("LongParameterList")
     fun showAlertDialog(
         activity: Activity,
         title: String?,
@@ -82,18 +107,22 @@ object DialogUtil {
         onNegativeBtnClick: Runnable?,
         customView: View?,
     ): AlertDialog? =
-        createAndShowDialogSafely(
+        showAlertDialog(
             activity = activity,
-            title = title,
-            message = message,
-            positiveButtonText = activity.getString(R.string.yes),
-            negativeButtonText = activity.getString(R.string.no),
-            onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick,
-            customView = customView,
+            options =
+                DialogOptions(
+                    title = title,
+                    message = message,
+                    positiveButtonText = activity.getString(R.string.yes),
+                    negativeButtonText = activity.getString(R.string.no),
+                    onPositiveBtnClick = onPositiveBtnClick,
+                    onNegativeBtnClick = onNegativeBtnClick,
+                    customView = customView,
+                ),
         )
 
     @JvmStatic
+    @Suppress("LongParameterList")
     fun showAlertDialog(
         activity: Activity,
         title: String?,
@@ -104,15 +133,18 @@ object DialogUtil {
         onNegativeBtnClick: Runnable?,
         customView: View?,
     ): AlertDialog? =
-        createAndShowDialogSafely(
+        showAlertDialog(
             activity = activity,
-            title = title,
-            message = message,
-            positiveButtonText = positiveButtonText,
-            negativeButtonText = negativeButtonText,
-            onPositiveBtnClick = onPositiveBtnClick,
-            onNegativeBtnClick = onNegativeBtnClick,
-            customView = customView,
+            options =
+                DialogOptions(
+                    title = title,
+                    message = message,
+                    positiveButtonText = positiveButtonText,
+                    negativeButtonText = negativeButtonText,
+                    onPositiveBtnClick = onPositiveBtnClick,
+                    onNegativeBtnClick = onNegativeBtnClick,
+                    customView = customView,
+                ),
         )
 
     @JvmStatic
@@ -123,42 +155,25 @@ object DialogUtil {
         positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
     ): AlertDialog? =
-        createAndShowDialogSafely(
+        showAlertDialog(
             activity = activity,
-            title = title,
-            message = message,
-            positiveButtonText = positiveButtonText,
-            onPositiveBtnClick = onPositiveBtnClick,
+            options =
+                DialogOptions(
+                    title = title,
+                    message = message,
+                    positiveButtonText = positiveButtonText,
+                    onPositiveBtnClick = onPositiveBtnClick,
+                ),
         )
 
     /**
-     * show a dialog
-     * @param activity
-     * @param title
-     * @param message
-     * @param positiveButtonText
-     * @param negativeButtonText
-     * @param onPositiveBtnClick
-     * @param onNegativeBtnClick
-     * @param customView
-     * @param cancelable
+     * show a dialog safely using DialogOptions
      */
     private fun createAndShowDialogSafely(
         activity: Activity,
-        title: String?,
-        message: String?,
-        positiveButtonText: String? = null,
-        negativeButtonText: String? = null,
-        onPositiveBtnClick: Runnable? = null,
-        onNegativeBtnClick: Runnable? = null,
-        customView: View? = null,
-        cancelable: Boolean = false,
+        options: DialogOptions,
     ): AlertDialog? {
-        /* If the custom view already has a parent, there is already a dialog showing with the view
-         * This happens for on resume - return to avoid creating a second dialog - the first one
-         * will still show
-         */
-        if (customView?.parent != null) {
+        if (options.customView?.parent != null) {
             return null
         }
 
@@ -167,15 +182,15 @@ object DialogUtil {
             AlertDialog
                 .Builder(activity)
                 .apply {
-                    title?.also { setTitle(title) }
-                    message?.also { setMessage(message) }
-                    setView(customView)
-                    setCancelable(cancelable)
-                    positiveButtonText?.let {
-                        setPositiveButton(it) { _, _ -> onPositiveBtnClick?.run() }
+                    options.title?.also { setTitle(it) }
+                    options.message?.also { setMessage(it) }
+                    setView(options.customView)
+                    setCancelable(options.cancelable)
+                    options.positiveButtonText?.let {
+                        setPositiveButton(it) { _, _ -> options.onPositiveBtnClick?.run() }
                     }
-                    negativeButtonText?.let {
-                        setNegativeButton(it) { _, _ -> onNegativeBtnClick?.run() }
+                    options.negativeButtonText?.let {
+                        setNegativeButton(it) { _, _ -> options.onNegativeBtnClick?.run() }
                     }
                 }.create(),
         )

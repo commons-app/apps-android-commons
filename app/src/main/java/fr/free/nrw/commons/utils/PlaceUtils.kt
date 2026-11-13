@@ -6,7 +6,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 
 object PlaceUtils {
-
     @JvmStatic
     fun latLngFromPointString(pointString: String): LatLng? {
         val matcher = Regex("Point\\(([^ ]+) ([^ ]+)\\)").find(pointString) ?: return null
@@ -34,15 +33,16 @@ object PlaceUtils {
                     media.fallbackDescription,
                     media.coordinates,
                     media.categories.toString(),
-                    Sitelinks.Builder()
+                    Sitelinks
+                        .Builder()
                         .setCommonsLink(media.pageTitle.canonicalUri)
                         .setWikipediaLink("") // we don't necessarily have them, can be fetched later
                         .setWikidataLink("") // we don't necessarily have them, can be fetched later
                         .build(),
                     media.imageUrl,
                     media.thumbUrl,
-                    ""
-                )
+                    "",
+                ),
             )
         }
         return explorePlaceList

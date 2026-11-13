@@ -326,6 +326,7 @@
   <string name="contributions_fragment">Ekarpenak</string>
   <string name="nearby_fragment">Hurbilekoak</string>
   <string name="notifications">Jakinarazpenak</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">Jakinarazpenak (irakurriak)</string>
   <string name="list_sheet">Zerrenda</string>
   <string name="storage_permission">Biltegiratze baimena</string>

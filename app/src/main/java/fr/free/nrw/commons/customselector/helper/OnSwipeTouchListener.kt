@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import timber.log.Timber
 import kotlin.math.abs
 
 private const val SWIPE_THRESHOLD_SCREEN_DIVISOR = 3
@@ -78,7 +79,7 @@ open class OnSwipeTouchListener(
                     }
                 }
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                Timber.e(exception, "Could not process fling gesture")
             }
             return false
         }

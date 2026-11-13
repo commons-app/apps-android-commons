@@ -2,11 +2,11 @@ package fr.free.nrw.commons.explore.media
 
 import android.view.View
 import android.view.ViewGroup
-import coil3.load
-import coil3.request.placeholder
-import coil3.request.error
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R

@@ -4,12 +4,12 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
-import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.TABLE_NAME
-import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 import androidx.core.net.toUri
 import androidx.sqlite.db.SupportSQLiteQueryBuilder
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.COLUMN_ID
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable.TABLE_NAME
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider
 
 /**
  * Handles private storage for bookmarked items
@@ -26,14 +26,19 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
      * @param sortOrder : ascending or descending
      */
     override fun query(
-        uri: Uri, projection: Array<String>?, selection: String?,
-        selectionArgs: Array<String>?, sortOrder: String?
+        uri: Uri,
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortOrder: String?,
     ): Cursor {
-        val query = SupportSQLiteQueryBuilder
-            .builder(TABLE_NAME)
-            .columns(projection)
-            .selection(selection, selectionArgs)
-            .orderBy(sortOrder).create()
+        val query =
+            SupportSQLiteQueryBuilder
+                .builder(TABLE_NAME)
+                .columns(projection)
+                .selection(selection, selectionArgs)
+                .orderBy(sortOrder)
+                .create()
         return requireDb().query(query).apply {
             setNotificationUri(context?.contentResolver, uri)
         }
@@ -47,26 +52,25 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
      * @param selectionArgs : the condition of Where clause
      */
     override fun update(
-        uri: Uri, contentValues: ContentValues?,
-        selection: String?, selectionArgs: Array<String>?
+        uri: Uri,
+        contentValues: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<String>?,
     ): Int {
+        require(selection.isNullOrEmpty()) {
+            "Parameter `selection` should be empty when updating an ID"
+        }
+        val id = uri.lastPathSegment!!.toInt()
         val rowsUpdated: Int =
-        if (selection.isNullOrEmpty()) {
-            val id = uri.lastPathSegment!!.toInt()
             contentValues?.let {
                 requireDb().update(
                     TABLE_NAME,
                     SQLiteDatabase.CONFLICT_NONE,
                     it,
                     "$COLUMN_ID = ?",
-                    arrayOf(id.toString())
+                    arrayOf(id.toString()),
                 )
             } ?: 0
-        } else {
-            throw IllegalArgumentException(
-                "Parameter `selection` should be empty when updating an ID"
-            )
-        }
         context?.contentResolver?.notifyChange(uri, null)
         return rowsUpdated
     }
@@ -74,30 +78,38 @@ class BookmarkItemsContentProvider : CommonsDaggerContentProvider() {
     /**
      * Handles the insertion of new bookmark items record to local SQLite Database
      */
-    override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
+    override fun insert(
+        uri: Uri,
+        contentValues: ContentValues?,
+    ): Uri? {
         val id =
             contentValues?.let { requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it) }
         context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
 
-
     /**
      * Handles the deletion of new bookmark items record to local SQLite Database
      */
-    override fun delete(uri: Uri, s: String?, strings: Array<String>?): Int {
-        val rows: Int = requireDb().delete(
-            TABLE_NAME,
-            "$COLUMN_ID = ?",
-            arrayOf(uri.lastPathSegment)
-        )
-       context?.contentResolver?.notifyChange(uri, null)
+    override fun delete(
+        uri: Uri,
+        s: String?,
+        strings: Array<String>?,
+    ): Int {
+        val rows: Int =
+            requireDb().delete(
+                TABLE_NAME,
+                "$COLUMN_ID = ?",
+                arrayOf(uri.lastPathSegment),
+            )
+        context?.contentResolver?.notifyChange(uri, null)
         return rows
     }
 
     companion object {
         private const val BASE_PATH = "bookmarksItems"
         val BASE_URI: Uri = "content://${BuildConfig.BOOKMARK_ITEMS_AUTHORITY}/$BASE_PATH".toUri()
+
         fun uriForName(id: String) = "$BASE_URI/$id".toUri()
     }
 }

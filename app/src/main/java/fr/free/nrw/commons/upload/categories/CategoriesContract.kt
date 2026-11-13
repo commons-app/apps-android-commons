@@ -10,7 +10,15 @@ import fr.free.nrw.commons.category.CategoryItem
  * The contract with with UploadCategoriesFragment and its presenter would talk to each other
  */
 interface CategoriesContract {
-    interface View {
+    interface View :
+        SearchView,
+        EditView {
+        fun goToNextScreen()
+
+        fun showNoCategorySelected()
+    }
+
+    interface SearchView {
         fun showProgress(shouldShow: Boolean)
 
         fun showError(error: String?)
@@ -23,11 +31,9 @@ interface CategoriesContract {
         fun showErrorDialog(message: String)
 
         fun setCategories(categories: List<CategoryItem>?)
+    }
 
-        fun goToNextScreen()
-
-        fun showNoCategorySelected()
-
+    interface EditView {
         /**
          * Gets existing category names from media
          */

@@ -121,6 +121,7 @@
   <string name="refresh_button">تازہ کرو</string>
   <string name="display_list_button">فہرست</string>
   <string name="contributions_subtitle_zero">(اڄاں کوئی اپ لوڈ نئیں)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">%1$s نال ملدیاں کوئی شاہراں نئیں ملئیاں</string>
   <string name="depictions_not_found">%1$s نال ملدے کوئی ویکی ڈیٹا آئٹم نئیں ملے</string>
   <string name="no_child_classes">%1$s دیاں کوئی ذیلی کلاساں نئیں ہن</string>
@@ -215,6 +216,7 @@
   <string name="media_detail_license">لائیسنس</string>
   <string name="media_detail_coordinates">کوآرڈینیٹ</string>
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
+  <string name="original">اصل</string>
   <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="become_a_tester_description">گوگل پلے تے ساݙے بیٹا چینل وچ شامل تھیو تے نویں خصوصیاتاں تے بگ فکساں تیک جلدی رسائی حاصل کرو</string>
   <string name="_2fa_code">2FA کوڈ</string>
@@ -271,6 +273,8 @@
   <string name="null_url">خرابی! URL نئیں لبا</string>
   <string name="nominate_deletion">حذف کرݨ سانگے نامزد کرو</string>
   <string name="nominated_for_deletion">ایہ تصویر حذف کرݨ سانگے نامزد تھی چکی ہے۔</string>
+  <string name="contribution_deleted">مٹا ݙتے</string>
+  <string name="deleted_file_view_page">فائل دا ورقہ ݙیکھو</string>
   <string name="nominated_see_more">تفصیل سانگے ویب صفحہ ݙیکھو</string>
   <string name="skip_login">چھوڑو</string>
   <string name="navigation_item_login">لاگ ان تھیوو</string>
@@ -798,7 +802,7 @@
   </plurals>
   <string name="multiple_files_depiction">یاد رکھو کہ کثیر-اپ لوڈ وچ ساریاں تصویراں کوں ایکو زمرے تے دِکھالے ملدے ہن۔ جے تصویراں وچ دِکھالے تے زمرے سانجھے نہ ہوون، تاں براہ کرم کئی وکھرے اپ لوڈ کرو۔</string>
   <string name="multiple_files_depiction_header">کثیر-اپ لوڈاں دے بارے وچ نوٹ</string>
-  <string name="nearby_wikitalk">اینداݨ چیز دے بارے وچ مسئلے دی وکی ڈیٹا کوں رپورٹ کرو</string>
+  <string name="nearby_report_problem">اینداݨ چیز دے بارے وچ مسئلے دی وکی ڈیٹا کوں رپورٹ کرو</string>
   <string name="please_enter_some_comments">براہ کرم کجھ تبصرے درج کرو</string>
   <string name="talk">ڳالھ مہاڑ</string>
   <string name="write_something_about_the_item">\'%1$s\' آلی چیز دے بارے وچ کجھ لکھو۔ ایہ عوامی طور تے ݙیکھی ونڄسی۔</string>
@@ -827,6 +831,7 @@
   <string name="green_pin">اینداݨ تھاں دی پہلے ای ہک تصویر اے۔</string>
   <string name="grey_pin">ہُݨ جانچ تھیندی پئی اے کہ اینداݨ تھاں دی کوئی تصویر اے یا نہ۔</string>
   <string name="error_while_loading">لوڈ تھیندے ویلے غلطی</string>
+  <string name="play_video">وڈیو چلاؤ</string>
   <string name="no_usages_found">کوئی استعمال نہ لبھا</string>
   <string name="usages_on_commons_heading">کامنز</string>
   <string name="usages_on_other_wikis_heading">بیا وکیاں</string>
@@ -856,4 +861,7 @@
   <string name="error_applying_blur">دھندلا لاوݨ وچ غلطی</string>
   <string name="failed_to_apply_crop">کراپ لاوݨ وچ ناکامی</string>
   <string name="failed_to_save_image">تصویر محفوظ کرݨ وچ ناکامی</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
 </resources>

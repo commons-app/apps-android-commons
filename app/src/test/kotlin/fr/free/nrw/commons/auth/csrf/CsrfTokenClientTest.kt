@@ -4,11 +4,15 @@ import com.google.gson.stream.MalformedJsonException
 import fr.free.nrw.commons.MockWebServerTest
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.login.LoginClient
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import org.junit.Assert.assertSame
+import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.ArgumentMatchers.isA
+import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
@@ -65,6 +69,21 @@ class CsrfTokenClientTest : MockWebServerTest() {
 
         verify(cb, never()).success(any(String::class.java))
         verify(cb).failure(isA(MalformedJsonException::class.java))
+    }
+
+    @Test
+    @Throws(Throwable::class)
+    fun testGetTokenBlockingKeepsLoginFailureAsCause() {
+        val loginFailure = LoginFailedException("Login failed")
+        // The first attempt returns no token, so the client logs in explicitly, which fails.
+        doThrow(loginFailure).`when`(loginClient).loginBlocking("", "")
+
+        val thrown =
+            assertThrows(InvalidLoginTokenException::class.java) {
+                subject.getTokenBlocking()
+            }
+
+        assertSame(loginFailure, thrown.cause)
     }
 
     private fun performRequest() {

@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import coil3.load
-import coil3.request.placeholder
 import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 

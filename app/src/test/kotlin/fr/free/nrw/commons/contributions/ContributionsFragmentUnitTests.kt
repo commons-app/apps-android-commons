@@ -8,24 +8,29 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import fr.free.nrw.commons.MapController
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.models.Notification
-import fr.free.nrw.commons.notification.models.NotificationType
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
@@ -37,7 +42,11 @@ import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
+import org.mockito.Mockito.doThrow
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -80,19 +89,19 @@ class ContributionsFragmentUnitTests {
     private lateinit var notificationController: NotificationController
 
     @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
-
-    @Mock
     private lateinit var notificationCount: TextView
 
     @Mock
-    private lateinit var singleNotification: Single<List<Notification>>
+    private lateinit var singleUnreadCount: Single<Int>
 
     @Mock
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
-    private lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    private lateinit var userStatsClient: UserStatsClient
+
+    @Mock
+    private lateinit var contributionsPresenter: ContributionsPresenter
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
@@ -130,7 +139,7 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
-        Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
+        Whitebox.setInternalState(fragment, "userStatsClient", userStatsClient)
     }
 
     @Test
@@ -150,35 +159,45 @@ class ContributionsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnCreateOptionsMenu() {
+    fun testOnCreateOptionsMenuUploadBadgeOpensUploadProgress() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(menu.findItem(anyInt())).thenReturn(menuItem)
+        val uploadBadge = TextView(context).apply { id = R.id.pending_uploads_count_badge }
+        val uploadMenuItem = mock(MenuItem::class.java)
+        `when`(menu.findItem(R.id.notifications)).thenReturn(menuItem)
         `when`(menuItem.actionView).thenReturn(notification)
+        `when`(menu.findItem(R.id.upload_tab)).thenReturn(uploadMenuItem)
+        `when`(uploadMenuItem.actionView).thenReturn(uploadBadge)
         fragment.onCreateOptionsMenu(menu, menuInflater)
+        uploadBadge.performClick()
+        val startedIntent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(
+            UploadProgressActivity::class.java.name,
+            startedIntent.component?.className,
+        )
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetNotificationCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(notificationController.getNotifications(anyBoolean())).thenReturn(singleNotification)
-        `when`(notificationController.getNotifications(anyBoolean()).subscribeOn(any())).thenReturn(
-            singleNotification,
+        `when`(notificationController.getUnreadCount()).thenReturn(singleUnreadCount)
+        `when`(notificationController.getUnreadCount().subscribeOn(any())).thenReturn(
+            singleUnreadCount,
         )
         `when`(
-            notificationController.getNotifications(anyBoolean()).subscribeOn(any()).observeOn(
+            notificationController.getUnreadCount().subscribeOn(any()).observeOn(
                 any(),
             ),
-        ).thenReturn(singleNotification)
+        ).thenReturn(singleUnreadCount)
         `when`(
             notificationController
-                .getNotifications(anyBoolean())
+                .getUnreadCount()
                 .subscribeOn(any())
                 .observeOn(
                     any(),
                 ).subscribe(),
         ).thenReturn(compositeDisposable)
-        fragment.setNotificationCount()
+        fragment.menuController.setNotificationCount()
     }
 
     @Test
@@ -186,27 +205,40 @@ class ContributionsFragmentUnitTests {
     fun testInitNotificationViewsCaseEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method =
-            ContributionsFragment::class.java.getDeclaredMethod(
+            ContributionsMenuController::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, listOf<Notification>())
+        method.invoke(fragment.menuController, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitNotificationViewsCaseNonEmptyList() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val list: List<Notification> =
-            listOf(Notification(NotificationType.UNKNOWN, "", "", "", "", ""))
         val method: Method =
-            ContributionsFragment::class.java.getDeclaredMethod(
+            ContributionsMenuController::class.java.getDeclaredMethod(
                 "initNotificationViews",
-                List::class.java,
+                Int::class.javaPrimitiveType,
             )
         method.isAccessible = true
-        method.invoke(fragment, list)
+        method.invoke(fragment.menuController, 2)
+        verify(notificationCount).setText("2")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitNotificationViewsAboveBadgeCap() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val method: Method =
+            ContributionsMenuController::class.java.getDeclaredMethod(
+                "initNotificationViews",
+                Int::class.javaPrimitiveType,
+            )
+        method.isAccessible = true
+        method.invoke(fragment.menuController, 100)
+        verify(notificationCount).setText("99+")
     }
 
     @Test
@@ -252,7 +284,7 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun testShowCampaigns() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showCampaigns(Campaign("", "", "2000-01-01", "2000-01-02", ""))
+        fragment.campaigns.showCampaigns(Campaign("", "", "2000-01-01", "2000-01-02", ""))
     }
 
     @Test
@@ -351,5 +383,226 @@ class ContributionsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         `when`(mediaDetailPagerFragment.isVisible).thenReturn(false)
         fragment.showDetail(0, false)
+    }
+
+    @Test
+    fun testRetryUploadSkipsPermanentFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "filetype-banned",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(0, contribution.retries)
+        verifyNoInteractions(contributionsPresenter)
+    }
+
+    @Test
+    fun testRetryUploadRetriesTemporaryFailure() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_FAILED,
+                errorInfo = "stashfailed",
+            )
+
+        fragment.retryUpload(contribution)
+
+        Assert.assertEquals(1, contribution.retries)
+        verify(contributionsPresenter).checkDuplicateImageAndRestartContribution(contribution)
+    }
+
+    @Test
+    fun testRetryUploadOfUploadedFileOnlyQueuesItAgain() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.contributionsPresenter = contributionsPresenter
+        val contribution =
+            Contribution(
+                media = Media(),
+                state = Contribution.STATE_METADATA_PENDING,
+                errorInfo = "internal_api_error_DBQueryError",
+                uploadedFilename = "Example.jpg",
+            )
+
+        fragment.retryUpload(contribution)
+
+        // The duplicate check would find the file on Commons and delete the upload
+        Assert.assertEquals(1, contribution.retries)
+        Assert.assertEquals(Contribution.STATE_QUEUED, contribution.state)
+        verify(contributionsPresenter).saveContribution(contribution)
+        verify(contributionsPresenter, never()).checkDuplicateImageAndRestartContribution(contribution)
+    }
+
+    /** Pending badges keep their space when the count returns to zero. */
+    @Test
+    fun testMenuPendingBadgeVisibility() {
+        val badge = TextView(context)
+        fragment.pendingUploadsCountTextView = badge
+
+        fragment.menuController.updatePendingIcon(2)
+        Assert.assertEquals(View.VISIBLE, badge.visibility)
+        Assert.assertEquals("2", badge.text.toString())
+
+        fragment.menuController.updatePendingIcon(0)
+        Assert.assertEquals(View.INVISIBLE, badge.visibility)
+    }
+
+    /** Error badges disappear when all failed uploads are cleared. */
+    @Test
+    fun testMenuErrorBadgeVisibility() {
+        val badge = TextView(context)
+        fragment.uploadsErrorTextView = badge
+
+        fragment.menuController.updateErrorIcon(1)
+        Assert.assertEquals(View.VISIBLE, badge.visibility)
+        Assert.assertEquals("1", badge.text.toString())
+
+        fragment.menuController.updateErrorIcon(0)
+        Assert.assertEquals(View.GONE, badge.visibility)
+    }
+
+    /** Fetched campaigns are shown on the contributions screen. */
+    @Test
+    fun testCampaignControllerDisplaysCampaign() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.binding = FragmentContributionsBinding.bind(view)
+        val campaign = Campaign("Campaign", "Description", "2000-01-01", "2000-01-02", "")
+        campaignView.visibility = View.GONE
+
+        fragment.campaigns.showCampaigns(campaign)
+
+        Assert.assertEquals(View.VISIBLE, campaignView.visibility)
+        Assert.assertSame(campaign, Whitebox.getInternalState<Campaign>(campaignView, "campaign"))
+    }
+
+    /** Profile screens and null results must not display a campaign. */
+    @Test
+    fun testCampaignControllerSkipsProfileAndNullResults() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.binding = FragmentContributionsBinding.bind(view)
+        campaignView.visibility = View.GONE
+        fragment.isUserProfile = true
+
+        fragment.campaigns.showCampaigns(Campaign("", "", "2000-01-01", "2000-01-02", ""))
+        Assert.assertEquals(View.GONE, campaignView.visibility)
+
+        fragment.isUserProfile = false
+        fragment.campaigns.showCampaigns(null)
+        Assert.assertEquals(View.GONE, campaignView.visibility)
+    }
+
+    /** Nearby cards are hidden if all returned places have images or no longer exist. */
+    @Test
+    fun testNearbyControllerHidesUnsuitablePlaces() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.binding = FragmentContributionsBinding.bind(view)
+        val controller = ContributionsNearbyController(fragment)
+        val places = mock(MapController::class.java).NearbyPlacesInfo()
+        places.placeList =
+            listOf(
+                Place().apply {
+                    pic = "Example.jpg"
+                    exists = true
+                },
+                Place().apply {
+                    pic = ""
+                    exists = false
+                },
+            )
+        nearbyNotificationCardView.visibility = View.VISIBLE
+
+        controller.updateNearbyNotification(places)
+        Assert.assertEquals(View.GONE, nearbyNotificationCardView.visibility)
+
+        nearbyNotificationCardView.visibility = View.VISIBLE
+        controller.updateNearbyNotification(null)
+        Assert.assertEquals(View.GONE, nearbyNotificationCardView.visibility)
+    }
+
+    /** Child removals use the contributions parent's manager, even for detached children. */
+    @Test
+    fun testRendererRemovesFromHostChildManager() {
+        val host = mock(ContributionsFragment::class.java)
+        val manager = mock(FragmentManager::class.java)
+        val transaction = mock(FragmentTransaction::class.java)
+        val child = mock(Fragment::class.java)
+        `when`(host.childFragmentManager).thenReturn(manager)
+        `when`(manager.beginTransaction()).thenReturn(transaction)
+        `when`(transaction.remove(child)).thenReturn(transaction)
+
+        ContributionsFragmentRenderer(host).removeFragment(child)
+
+        verify(transaction).remove(child)
+        verify(transaction).commit()
+        verify(manager).executePendingTransactions()
+        verifyNoInteractions(child)
+    }
+
+    /** Back presses remain available to the activity while the list is displayed. */
+    @Test
+    fun testNavigatorDoesNotConsumeBackOnList() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.mediaDetailPagerFragment = null
+        Assert.assertFalse(fragment.backButtonClicked())
+    }
+
+    /** New list fragments are inserted through the contributions parent's child manager. */
+    @Test
+    fun testRendererAddsToHostChildManager() {
+        val host = mock(ContributionsFragment::class.java)
+        val manager = mock(FragmentManager::class.java)
+        val transaction = mock(FragmentTransaction::class.java)
+        val child = mock(Fragment::class.java)
+        `when`(host.childFragmentManager).thenReturn(manager)
+        `when`(manager.beginTransaction()).thenReturn(transaction)
+
+        ContributionsFragmentRenderer(host).showFragment(child, "list", null)
+
+        verify(transaction).replace(R.id.root_frame, child, "list")
+        verify(transaction).addToBackStack("list")
+        verify(transaction).commit()
+        verify(manager).executePendingTransactions()
+    }
+
+    /** Slight location changes log exceptions but continue to propagate fatal errors. */
+    @Test
+    fun testNearbyControllerPreservesRefreshFailureHandling() {
+        val locationManager = mock(LocationServiceManager::class.java)
+        fragment.locationManager = locationManager
+        val controller = ContributionsNearbyController(fragment)
+        val location = LatLng(0.0, 0.0, 0.0f)
+        `when`(locationManager.getLastLocation()).thenThrow(IllegalStateException("No location"))
+
+        controller.onLocationChangedSlightly(location)
+
+        doThrow(AssertionError("Fatal error")).`when`(locationManager).getLastLocation()
+        Assert.assertThrows(AssertionError::class.java) {
+            controller.onLocationChangedSlightly(location)
+        }
+    }
+
+    /** The nearby controller unregisters the same listener it registered on resume. */
+    @Test
+    fun testNearbyControllerListenerLifetime() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val locationManager = mock(LocationServiceManager::class.java)
+        fragment.locationManager = locationManager
+        val controller = ContributionsNearbyController(fragment)
+        controller.create()
+
+        controller.resumeLocation()
+        controller.resumeSensor()
+        controller.pause()
+
+        verify(locationManager).addLocationListener(controller)
+        verify(locationManager).removeLocationListener(controller)
+        verify(locationManager).unregisterLocationManager()
     }
 }

@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.wikidata.model.gallery
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+
+// Fields deserialized by Gson via reflection.
+// Suppressed TooManyFunctions because every method is a field accessor or setter for one
+// MediaWiki imageinfo API response object.
 
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module
  */
-open class ImageInfo : Serializable {
+@Suppress("UnusedPrivateProperty", "TooManyFunctions")
+open class ImageInfo {
     private val size = 0
     private val width = 0
     private val height = 0
@@ -33,6 +37,9 @@ open class ImageInfo : Serializable {
     @SerializedName("mime")
     private val mimeType: String? = null
 
+    @SerializedName("mediatype")
+    private val mediaType: String? = null
+
     @SerializedName("extmetadata")
     private val metadata: ExtMetadata? = null
     private val user: String? = null
@@ -55,6 +62,8 @@ open class ImageInfo : Serializable {
     fun getThumbHeight(): Int = thumbHeight
 
     fun getMimeType(): String = mimeType ?: "*/*"
+
+    fun getMediaType(): String? = mediaType
 
     fun getThumbUrl(): String = thumbUrl ?: ""
 

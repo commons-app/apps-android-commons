@@ -13,6 +13,9 @@ import java.text.Normalizer
 import java.util.Arrays
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are URL/text accessors, equality
+// contracts, and Parcelable serialization belonging to this single page-title model.
+
 /**
  * Represents certain vital information about a page, including the title, namespace,
  * and fragment (section anchor target).  It can also contain a thumbnail URL for the
@@ -22,6 +25,7 @@ import java.util.Locale
  * description can be altered after construction. Therefore do NOT rely on all the fields
  * of a PageTitle to remain constant for the lifetime of the object.
  */
+@Suppress("TooManyFunctions")
 class PageTitle : Parcelable {
     // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
     //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
@@ -137,10 +141,10 @@ class PageTitle : Parcelable {
         } catch (e: IllegalArgumentException) {
             // Swallow IllegalArgumentException (can happen with malformed encoding), and just
             // return the original string.
-            Timber.d("URL decoding failed. String was: %s", url)
+            Timber.d(e, "URL decoding failed. String was: %s", url)
             return url
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
@@ -175,6 +179,7 @@ class PageTitle : Parcelable {
     fun getUriForAction(action: String?): String {
         try {
             return String.format(
+                Locale.ROOT,
                 "%1\$s://%2\$s/w/index.php?title=%3\$s&action=%4\$s",
                 wikiSite.scheme(),
                 wikiSite.authority(),
@@ -182,7 +187,7 @@ class PageTitle : Parcelable {
                 action,
             )
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
@@ -248,6 +253,7 @@ class PageTitle : Parcelable {
     private fun getUriForDomain(domain: String): String =
         try {
             String.format(
+                Locale.ROOT,
                 "%1\$s://%2\$s/wiki/%3\$s%4\$s",
                 wikiSite.scheme(),
                 domain,
@@ -255,7 +261,7 @@ class PageTitle : Parcelable {
                 if ((fragment != null && fragment.length > 0)) ("#$fragment") else "",
             )
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
 
     private constructor(parcel: Parcel) {

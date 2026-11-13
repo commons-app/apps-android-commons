@@ -1,9 +1,7 @@
 package fr.free.nrw.commons
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -38,7 +36,9 @@ class AboutActivity : BaseActivity() {
      *
      * @param savedInstanceState Data bundle
      */
-    @SuppressLint("StringFormatInvalid") // TODO:
+    @SuppressLint("StringFormatInvalid")
+    // Some translations (e.g. fo, and the qq documentation locale) lack the format
+    // placeholder; translations are managed on translatewiki, so suppress rather than edit.
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,7 +60,6 @@ class AboutActivity : BaseActivity() {
          */
         binding!!.aboutLicense.setHtmlText(aboutText)
 
-        @SuppressLint("StringFormatMatches") // TODO:
         val improveText =
             String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL)
         binding!!.aboutImprove.setHtmlText(improveText)
@@ -76,91 +75,21 @@ class AboutActivity : BaseActivity() {
         /*
           To set listeners, we can create a separate method and use lambda syntax.
          */
-        binding!!.facebookLaunchIcon.setOnClickListener(::launchFacebook)
-        binding!!.githubLaunchIcon.setOnClickListener(::launchGithub)
-        binding!!.websiteLaunchIcon.setOnClickListener(::launchWebsite)
-        binding!!.aboutRateUs.setOnClickListener(::launchRatings)
-        binding!!.aboutCredits.setOnClickListener(::launchCredits)
-        binding!!.aboutPrivacyPolicy.setOnClickListener(::launchPrivacyPolicy)
-        binding!!.aboutUserGuide.setOnClickListener(::launchUserGuide)
-        binding!!.aboutFaq.setOnClickListener(::launchFrequentlyAskedQuesions)
+        val linkHandler = AboutLinkHandler(this)
+        binding!!.facebookLaunchIcon.setOnClickListener(linkHandler::launchFacebook)
+        binding!!.githubLaunchIcon.setOnClickListener(linkHandler::launchGithub)
+        binding!!.websiteLaunchIcon.setOnClickListener(linkHandler::launchWebsite)
+        binding!!.aboutRateUs.setOnClickListener(linkHandler::launchRatings)
+        binding!!.aboutCredits.setOnClickListener(linkHandler::launchCredits)
+        binding!!.aboutPrivacyPolicy.setOnClickListener(linkHandler::launchPrivacyPolicy)
+        binding!!.aboutUserGuide.setOnClickListener(linkHandler::launchUserGuide)
+        binding!!.aboutFaq.setOnClickListener(linkHandler::launchFrequentlyAskedQuesions)
         binding!!.aboutTranslate.setOnClickListener(::launchTranslate)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchFacebook(view: View?) {
-        val intent: Intent
-        try {
-            intent = Intent(ACTION_VIEW, Urls.FACEBOOK_APP_URL.toUri())
-            intent.setPackage(Urls.FACEBOOK_PACKAGE_NAME)
-            startActivity(intent)
-        } catch (e: Exception) {
-            handleWebUrl(this, Urls.FACEBOOK_WEB_URL.toUri())
-        }
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchGithub(view: View?) {
-        val intent: Intent
-        try {
-            intent = Intent(ACTION_VIEW, Urls.GITHUB_REPO_URL.toUri())
-            intent.setPackage(Urls.GITHUB_PACKAGE_NAME)
-            startActivity(intent)
-        } catch (e: Exception) {
-            handleWebUrl(this, Urls.GITHUB_REPO_URL.toUri())
-        }
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchWebsite(view: View?) {
-        handleWebUrl(this, Urls.WEBSITE_URL.toUri())
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchRatings(view: View?) {
-        try {
-            startActivity(
-                Intent(
-                    ACTION_VIEW,
-                    (Urls.PLAY_STORE_PREFIX + packageName).toUri(),
-                ),
-            )
-        } catch (_: ActivityNotFoundException) {
-            handleWebUrl(this, (Urls.PLAY_STORE_URL_PREFIX + packageName).toUri())
-        }
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchCredits(view: View?) {
-        handleWebUrl(this, Urls.CREDITS_URL.toUri())
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchUserGuide(view: View?) {
-        handleWebUrl(this, Urls.USER_GUIDE_URL.toUri())
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchPrivacyPolicy(view: View?) {
-        handleWebUrl(this, BuildConfig.PRIVACY_POLICY_URL.toUri())
-    }
-
-    // View.OnClickListener method reference, see onCreate
-    @Suppress("UnusedParameter")
-    fun launchFrequentlyAskedQuesions(view: View?) {
-        handleWebUrl(this, Urls.FAQ_URL.toUri())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

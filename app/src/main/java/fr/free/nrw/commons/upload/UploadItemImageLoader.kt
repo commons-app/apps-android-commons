@@ -37,10 +37,10 @@ internal fun ImageView.loadUploadItemImage(
                     if (!tryLoadDownsampledImage(imageSource, placeholderResId, result.throwable)) {
                         Timber.e(result.throwable, "Unable to load upload item image: %s", imageSource)
                     }
-                }
+                },
             )
         }
-    } catch (error: Exception) {
+    } catch (error: IllegalArgumentException) {
         Timber.e(error, "Unable to start upload item image load: %s", imageSource)
         setImageResource(placeholderResId)
     }
@@ -67,35 +67,36 @@ private fun ImageView.tryLoadDownsampledImage(
                     onError = { _, result ->
                         Timber.e(result.throwable, "Unable to load downsampled upload item image: %s", imageSource)
                         setImageResource(placeholderResId)
-                    }
+                    },
                 )
             }
-            return true
-        }
-
-        val downsampledBitmap =
-            decodeDownsampledBitmap(
-                imageSource,
-                requestedWidth = targetWidth,
-                requestedHeight = targetHeight
-            ) ?: return false
-
-        load(downsampledBitmap) {
-            placeholder(placeholderResId)
-            error(placeholderResId)
-            listener(
-                onError = { _, result ->
-                    Timber.e(result.throwable, "Unable to load downsampled upload item image: %s", imageSource)
-                    setImageResource(placeholderResId)
+            true
+        } else {
+            val downsampledBitmap =
+                decodeDownsampledBitmap(
+                    imageSource,
+                    requestedWidth = targetWidth,
+                    requestedHeight = targetHeight,
+                )
+            if (downsampledBitmap != null) {
+                load(downsampledBitmap) {
+                    placeholder(placeholderResId)
+                    error(placeholderResId)
+                    listener(
+                        onError = { _, result ->
+                            Timber.e(result.throwable, "Unable to load downsampled upload item image: %s", imageSource)
+                            setImageResource(placeholderResId)
+                        },
+                    )
                 }
-            )
+            }
+            downsampledBitmap != null
         }
-        true
     } catch (oom: OutOfMemoryError) {
         Timber.e(oom, "Out of memory while downsampling upload item image: %s", imageSource)
         setImageResource(placeholderResId)
         true
-    } catch (exception: Exception) {
+    } catch (exception: IllegalArgumentException) {
         Timber.e(exception, "Unable to downsample upload item image: %s", imageSource)
         setImageResource(placeholderResId)
         true

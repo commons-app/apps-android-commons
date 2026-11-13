@@ -11,15 +11,13 @@ import android.os.Build
 import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import androidx.work.WorkManager
 import coil3.ImageLoader
-import coil3.request.crossfade
 import coil3.SingletonImageLoader
 import coil3.disk.DiskCache
 import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
-import okhttp3.OkHttpClient
-import okio.Path.Companion.toPath
-import androidx.work.WorkManager
+import coil3.request.crossfade
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -48,6 +46,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.functions.Functions
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import okio.Path.Companion.toPath
 import org.acra.ACRA.init
 import org.acra.ReportField
 import org.acra.annotation.AcraCore
@@ -59,6 +59,9 @@ import timber.log.Timber.DebugTree
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
+
+private const val MEMORY_CACHE_SIZE_PERCENT = 0.25
+private const val DISK_CACHE_SIZE_PERCENT = 0.02
 
 @AcraCore(
     buildConfigClass = BuildConfig::class,
@@ -130,23 +133,24 @@ class CommonsApplication : MultiDexApplication() {
 
         // Initialize Coil with the shared app OkHttpClient so image requests keep the
         // existing headers, logging, timeout, and HTTP cache configuration.
-        val imageLoader = ImageLoader.Builder(this)
-            .crossfade(true)
-            .components {
-                add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
-            }
-            .memoryCache {
-                MemoryCache.Builder()
-                    .maxSizePercent(this, 0.25)
-                    .build()
-            }
-            .diskCache {
-                DiskCache.Builder()
-                    .directory(cacheDir.resolve("image_cache").absolutePath.toPath())
-                    .maxSizePercent(0.02)
-                    .build()
-            }
-            .build()
+        val imageLoader =
+            ImageLoader
+                .Builder(this)
+                .crossfade(true)
+                .components {
+                    add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+                }.memoryCache {
+                    MemoryCache
+                        .Builder()
+                        .maxSizePercent(this, MEMORY_CACHE_SIZE_PERCENT)
+                        .build()
+                }.diskCache {
+                    DiskCache
+                        .Builder()
+                        .directory(cacheDir.resolve("image_cache").absolutePath.toPath())
+                        .maxSizePercent(DISK_CACHE_SIZE_PERCENT)
+                        .build()
+                }.build()
         SingletonImageLoader.setSafe { imageLoader }
 
         createNotificationChannel(this)
@@ -335,7 +339,8 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for BaseLogoutListener
          *
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page
          * @param loginUsername Username to be pre-filled on the login page
          */
@@ -369,7 +374,8 @@ class CommonsApplication : MultiDexApplication() {
 
     /**
      * This class is an extension of BaseLogoutListener, providing additional functionality or customization
-     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to the login screen.
+     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to
+     * the login screen.
      */
     class ActivityLogoutListener : BaseLogoutListener {
         var activity: Activity
@@ -377,8 +383,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener.
          *
-         * @param activity The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          */
         constructor(activity: Activity, ctx: Context) : super(ctx) {
             this.activity = activity
@@ -387,8 +395,10 @@ class CommonsApplication : MultiDexApplication() {
         /**
          * Constructor for ActivityLogoutListener with additional parameters for the login screen.
          *
-         * @param activity      The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
-         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as
+         * finishing the activity.
+         * @param ctx The application context, used for invoking the LoginActivity and passing relevant intent
+         * parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page after logout.
          * @param loginUsername Username to be pre-filled on the login page after logout.
          */
@@ -430,6 +440,8 @@ class CommonsApplication : MultiDexApplication() {
 
         const val NOTIFICATION_CHANNEL_ID_ALL: String = "CommonsNotificationAll"
 
+        const val NOTIFICATION_CHANNEL_ID_UPLOADS: String = "CommonsNotificationUploads"
+
         const val FEEDBACK_EMAIL_TEMPLATE_HEADER: String = "-- Technical information --"
 
         /**
@@ -460,6 +472,16 @@ class CommonsApplication : MultiDexApplication() {
                             NotificationManager.IMPORTANCE_DEFAULT,
                         )
                     manager.createNotificationChannel(channel)
+                }
+                // Upload progress is shown silently, so that it does not make a sound on every update
+                if (manager.getNotificationChannel(NOTIFICATION_CHANNEL_ID_UPLOADS) == null) {
+                    manager.createNotificationChannel(
+                        NotificationChannel(
+                            NOTIFICATION_CHANNEL_ID_UPLOADS,
+                            context.getString(R.string.notifications_channel_name_uploads),
+                            NotificationManager.IMPORTANCE_LOW,
+                        ),
+                    )
                 }
             }
         }

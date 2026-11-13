@@ -10,7 +10,6 @@ import android.view.ViewTreeObserver
  * Utility class for layout-related operations.
  */
 object LayoutUtils {
-
     /**
      * Can be used for keeping aspect ratios suggested by material guidelines. See:
      * https://material.io/design/layout/spacing-methods.html#containers-aspect-ratios
@@ -20,16 +19,21 @@ object LayoutUtils {
      * @param view View to change height
      */
     @JvmStatic
-    fun setLayoutHeightAlignedToWidth(rate: Double, view: View) {
+    fun setLayoutHeightAlignedToWidth(
+        rate: Double,
+        view: View,
+    ) {
         val vto = view.viewTreeObserver
-        vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val layoutParams = view.layoutParams
-                layoutParams.height = (view.width * rate).toInt()
-                view.layoutParams = layoutParams
-            }
-        })
+        vto.addOnGlobalLayoutListener(
+            object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    val layoutParams = view.layoutParams
+                    layoutParams.height = (view.width * rate).toInt()
+                    view.layoutParams = layoutParams
+                }
+            },
+        )
     }
 
     /**
@@ -39,7 +43,10 @@ object LayoutUtils {
      * @return Calculated screen width multiplied by the rate.
      */
     @JvmStatic
-    fun getScreenWidth(context: Context, rate: Double): Double {
+    fun getScreenWidth(
+        context: Context,
+        rate: Double,
+    ): Double {
         val displayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
         return displayMetrics.widthPixels * rate

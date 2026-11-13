@@ -119,7 +119,7 @@ class PendingUploadsAdapter(
 
             itemImage.loadUploadItemImage(
                 contribution.localUri?.toString(),
-                R.drawable.ic_image_black_24dp
+                R.drawable.ic_image_black_24dp,
             )
 
             bindState(contribution.state)
@@ -127,7 +127,11 @@ class PendingUploadsAdapter(
         }
 
         fun bindState(state: Int) {
-            if (state == Contribution.STATE_QUEUED || state == Contribution.STATE_PAUSED) {
+            if (state == Contribution.STATE_METADATA_PENDING) {
+                errorTextView.setText(R.string.upload_metadata_pending)
+                errorTextView.visibility = View.VISIBLE
+                itemProgress.visibility = View.GONE
+            } else if (state == Contribution.STATE_QUEUED || state == Contribution.STATE_PAUSED) {
                 errorTextView.text = "Queued"
                 errorTextView.visibility = View.VISIBLE
                 itemProgress.visibility = View.GONE
@@ -142,7 +146,9 @@ class PendingUploadsAdapter(
             total: Long,
             state: Int,
         ) {
-            if (transferred == 0L) {
+            if (state == Contribution.STATE_METADATA_PENDING) {
+                bindState(state)
+            } else if (transferred == 0L) {
                 errorTextView.text = "Queued"
                 errorTextView.visibility = View.VISIBLE
                 itemProgress.visibility = View.GONE
@@ -203,7 +209,7 @@ class PendingUploadsAdapter(
         override fun areContentsTheSame(
             oldItem: Contribution,
             newItem: Contribution,
-        ): Boolean = oldItem.transferred == newItem.transferred
+        ): Boolean = oldItem.transferred == newItem.transferred && oldItem.state == newItem.state
 
         /**
          * Returns a payload representing the change between the old and new items.

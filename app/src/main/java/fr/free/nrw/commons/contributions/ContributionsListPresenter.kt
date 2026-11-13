@@ -20,14 +20,14 @@ class ContributionsListPresenter
         private val contributionBoundaryCallback: ContributionBoundaryCallback,
         private val contributionsRemoteDataSource: ContributionsRemoteDataSource,
         private val repository: ContributionsRepository,
+        @Suppress("UnusedPrivateProperty") // Injected by Dagger, may be used in future
         @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler,
     ) : ContributionsListContract.UserActionListener {
         private val compositeDisposable = CompositeDisposable()
 
         var contributionList: LiveData<PagedList<Contribution>>? = null
 
-        override fun onAttachView(view: ContributionsListContract.View) {
-        }
+        override fun onAttachView(view: ContributionsListContract.View) = Unit
 
         /**
          * Setup the paged list. This method sets the configuration for paged list and ties it up with

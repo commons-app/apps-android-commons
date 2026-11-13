@@ -84,7 +84,7 @@ class PageContentsCreator
             dateCreated: Date?,
             dateCreatedSource: String?,
         ) = dateCreated?.let {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             String.format(
                 Locale.ENGLISH,
                 if (isExif(dateCreatedSource)) TEMPLATE_DATE_ACC_TO_EXIF else TEMPLATE_DATA_OTHER_SOURCE,
@@ -101,7 +101,7 @@ class PageContentsCreator
                 Licenses.CC_BY_SA_3 -> "{{self|cc-by-sa-3.0}}"
                 Licenses.CC_BY_SA_4 -> "{{self|cc-by-sa-4.0}}"
                 Licenses.CC0 -> "{{self|cc-zero}}"
-                else -> throw RuntimeException("Unrecognized license value: $license")
+                else -> throw IllegalArgumentException("Unrecognized license value: $license")
             }
 
         companion object {

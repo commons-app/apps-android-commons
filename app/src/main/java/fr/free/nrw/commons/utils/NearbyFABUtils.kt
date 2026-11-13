@@ -7,16 +7,19 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 object NearbyFABUtils {
-
     /*
      * Add anchors back before making them visible again.
      */
     @JvmStatic
-    fun addAnchorToBigFABs(floatingActionButton: FloatingActionButton, anchorID: Int) {
-        val params = CoordinatorLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+    fun addAnchorToBigFABs(
+        floatingActionButton: FloatingActionButton,
+        anchorID: Int,
+    ) {
+        val params =
+            CoordinatorLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            )
         params.anchorId = anchorID
         params.anchorGravity = Gravity.TOP or Gravity.RIGHT or Gravity.END
         floatingActionButton.layoutParams = params
@@ -27,11 +30,15 @@ object NearbyFABUtils {
      * gravities, therefore there are two methods.
      */
     @JvmStatic
-    fun addAnchorToSmallFABs(floatingActionButton: FloatingActionButton, anchorID: Int) {
-        val params = CoordinatorLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+    fun addAnchorToSmallFABs(
+        floatingActionButton: FloatingActionButton,
+        anchorID: Int,
+    ) {
+        val params =
+            CoordinatorLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            )
         params.anchorId = anchorID
         params.anchorGravity = Gravity.CENTER_HORIZONTAL
         floatingActionButton.layoutParams = params

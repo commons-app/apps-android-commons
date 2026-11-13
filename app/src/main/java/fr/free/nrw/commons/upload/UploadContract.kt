@@ -8,11 +8,12 @@ import fr.free.nrw.commons.kvstore.BasicKvStore
  * The contract using which the UplaodActivity would communicate with its presenter
  */
 interface UploadContract {
-    interface View {
+    /** Displays upload feedback and account prompts. */
+    interface Feedback {
+        /** Reports whether the user has an authenticated session. */
         fun isLoggedIn(): Boolean
 
-        fun finish()
-
+        /** Closes the upload flow. */
         fun returnToMainActivity()
 
         /**
@@ -22,7 +23,36 @@ interface UploadContract {
          */
         fun goToUploadProgressActivity()
 
+        /** Opens the login screen for an unauthenticated user. */
         fun askUserToLogIn()
+
+        /**
+         * Used to check if user has cancelled upload of any image in current upload
+         * so that location compare doesn't show up again in same upload.
+         * Fixes: [Issue](https://github.com/commons-app/apps-android-commons/issues/5511)
+         *
+         * @param isCancelled Is true when user has cancelled upload of any image in current upload
+         */
+        fun setImageCancelled(isCancelled: Boolean)
+
+        /** Shows or dismisses upload progress. */
+        fun showProgress(shouldShow: Boolean)
+
+        /** Displays an upload status message. */
+        fun showMessage(messageResourceId: Int)
+
+        /**
+         * Displays an alert with message given by `messageResourceId`.
+         * `onPositiveClick` is run after acknowledgement.
+         */
+        fun showAlertDialog(
+            messageResourceId: Int,
+            onPositiveClick: Runnable,
+        )
+    }
+
+    interface View : Feedback {
+        fun finish()
 
         /**
          * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
@@ -34,28 +64,6 @@ interface UploadContract {
         fun highlightNextImageOnCancelledImage(
             index: Int,
             maxSize: Int,
-        )
-
-        /**
-         * Used to check if user has cancelled upload of any image in current upload
-         * so that location compare doesn't show up again in same upload.
-         * Fixes: [Issue](https://github.com/commons-app/apps-android-commons/issues/5511)
-         *
-         * @param isCancelled Is true when user has cancelled upload of any image in current upload
-         */
-        fun setImageCancelled(isCancelled: Boolean)
-
-        fun showProgress(shouldShow: Boolean)
-
-        fun showMessage(messageResourceId: Int)
-
-        /**
-         * Displays an alert with message given by `messageResourceId`.
-         * `onPositiveClick` is run after acknowledgement.
-         */
-        fun showAlertDialog(
-            messageResourceId: Int,
-            onPositiveClick: Runnable,
         )
 
         fun getUploadableFiles(): List<UploadableFile>?

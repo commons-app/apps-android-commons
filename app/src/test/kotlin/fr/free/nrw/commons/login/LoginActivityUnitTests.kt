@@ -98,8 +98,14 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnOptionsItemSelected() {
+    fun testOnOptionsItemSelectedCaseDefault() {
         activity.onOptionsItemSelected(menuItem)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetMenuInflater() {
+        activity.menuInflater
     }
 
     @Test

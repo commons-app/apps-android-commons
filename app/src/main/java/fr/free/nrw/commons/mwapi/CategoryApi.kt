@@ -56,11 +56,14 @@ class CategoryApi @Inject constructor(
 
     /**
      * Builds URL with image coords for MediaWiki API calls
-     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&generator=geosearch&redirects=&ggscoord=38.11386944444445|1.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     * Example URL:
+     * Keep the example API URL intact for copy/paste.
+     * https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&generator=geosearch&redirects=&ggscoord=38.11386944444445|1.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      *
      * @param coords Coordinates to build query with
      * @return URL for API query
      */
+    @Suppress("MaxLineLength")
     private fun buildUrl(coords: String): HttpUrl = apiUrl.newBuilder()
         .addQueryParameter("action", "query")
         .addQueryParameter("prop", "categories|coordinates|pageprops")
@@ -78,6 +81,4 @@ class CategoryApi @Inject constructor(
         .addQueryParameter("formatversion", "2")
         .build()
 }
-
-
 

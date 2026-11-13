@@ -7,7 +7,6 @@ import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class BookmarkItemsTableTest : InMemoryDatabaseTest() {
-
     @Test
     fun testTableExists() {
         assertTablesExist(BookmarkItemsTable.TABLE_NAME)
@@ -17,17 +16,18 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
     @Test
     fun testInsertAndRetrieve() {
         val dao = roomDatabase.bookmarkItemsRoomDao()
-        val item = BookmarkItemsRoomEntity(
-            name = "Test Item",
-            description = "Test Description",
-            imageUrl = "http://test.com/image.jpg",
-            instanceOfs = "Test Instance",
-            categoryNames = "Cat1,Cat2",
-            categoryDescriptions = "Desc1,Desc2",
-            categoryThumbnails = "Thumb1,Thumb2",
-            isSelected = true,
-            id = "Q12345"
-        )
+        val item =
+            BookmarkItemsRoomEntity(
+                name = "Test Item",
+                description = "Test Description",
+                imageUrl = "http://test.com/image.jpg",
+                instanceOfs = "Test Instance",
+                categoryNames = "Cat1,Cat2",
+                categoryDescriptions = "Desc1,Desc2",
+                categoryThumbnails = "Thumb1,Thumb2",
+                isSelected = true,
+                id = "Q12345",
+            )
         dao.insert(item)
 
         val allItems = dao.getAll().blockingGet()
@@ -44,10 +44,12 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
         val dao = roomDatabase.bookmarkItemsRoomDao()
 
         // Insert with legacy SQL
-        db.execSQL("""
+        db.execSQL(
+            """
             INSERT INTO bookmarksItems (item_name, item_id, item_instance_of, item_name_categories, item_description_categories, item_thumbnail_categories, item_is_selected) 
             VALUES ('Legacy Item', 'Q6789', 'Instance', 'Cat', 'Desc', 'Thumb', 1);
-        """.trimIndent())
+            """.trimIndent(),
+        )
 
         val exists = dao.findBookmarkItem("Q6789")
         assertTrue(exists)
@@ -61,17 +63,18 @@ class BookmarkItemsTableTest : InMemoryDatabaseTest() {
     @Test
     fun testDelete() {
         val dao = roomDatabase.bookmarkItemsRoomDao()
-        val item = BookmarkItemsRoomEntity(
-            name = "Item to delete",
-            description = null,
-            imageUrl = null,
-            instanceOfs = "",
-            categoryNames = "",
-            categoryDescriptions = "",
-            categoryThumbnails = "",
-            isSelected = false,
-            id = "QToDelete"
-        )
+        val item =
+            BookmarkItemsRoomEntity(
+                name = "Item to delete",
+                description = null,
+                imageUrl = null,
+                instanceOfs = "",
+                categoryNames = "",
+                categoryDescriptions = "",
+                categoryThumbnails = "",
+                isSelected = false,
+                id = "QToDelete",
+            )
         dao.insert(item)
         assertRowCount(BookmarkItemsTable.TABLE_NAME, 1)
 

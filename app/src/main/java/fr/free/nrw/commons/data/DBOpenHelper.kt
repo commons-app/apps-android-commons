@@ -10,13 +10,12 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable
 import fr.free.nrw.commons.category.CategoryTable
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
-
+import timber.log.Timber
 
 class DBOpenHelper(
     context: Context,
-    testDelegate: SupportSQLiteOpenHelper? = null
+    testDelegate: SupportSQLiteOpenHelper? = null,
 ) {
-
     companion object {
         private const val DATABASE_NAME = "commons.db"
         private const val DATABASE_VERSION = 22
@@ -43,31 +42,31 @@ class DBOpenHelper(
      */
     private val delegate: SupportSQLiteOpenHelper =
         testDelegate ?: FrameworkSQLiteOpenHelperFactory().create(
-        SupportSQLiteOpenHelper.Configuration.builder(context)
-            .name(DATABASE_NAME)
-            .callback(object : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
+            SupportSQLiteOpenHelper.Configuration
+                .builder(context)
+                .name(DATABASE_NAME)
+                .callback(
+                    object : SupportSQLiteOpenHelper.Callback(DATABASE_VERSION) {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            createAllTables(db)
+                        }
 
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    createAllTables(db)
-                }
-
-                override fun onUpgrade(
-                    db: SupportSQLiteDatabase,
-                    oldVersion: Int,
-                    newVersion: Int
-                ) {
-                    CategoryTable.onUpdate(db, oldVersion, newVersion)
-                    BookmarksTable.onUpdate(db, oldVersion, newVersion)
-                    BookmarkItemsTable.onUpdate(db, oldVersion, newVersion)
-                    RecentSearchesTable.onUpdate(db, oldVersion, newVersion)
-                    RecentLanguagesTable.onUpdate(db, oldVersion, newVersion)
-                    deleteTable(db, CONTRIBUTIONS_TABLE)
-                    deleteTable(db, BOOKMARKS_LOCATIONS)
-                }
-
-            })
-            .build()
-    )
+                        override fun onUpgrade(
+                            db: SupportSQLiteDatabase,
+                            oldVersion: Int,
+                            newVersion: Int,
+                        ) {
+                            CategoryTable.onUpdate(db, oldVersion, newVersion)
+                            BookmarksTable.onUpdate(db, oldVersion, newVersion)
+                            BookmarkItemsTable.onUpdate(db, oldVersion, newVersion)
+                            RecentSearchesTable.onUpdate(db, oldVersion, newVersion)
+                            RecentLanguagesTable.onUpdate(db, oldVersion, newVersion)
+                            deleteTable(db, CONTRIBUTIONS_TABLE)
+                            deleteTable(db, BOOKMARKS_LOCATIONS)
+                        }
+                    },
+                ).build(),
+        )
 
     val writableDatabase: SupportSQLiteDatabase
         get() = delegate.writableDatabase
@@ -75,18 +74,20 @@ class DBOpenHelper(
     val readableDatabase: SupportSQLiteDatabase
         get() = delegate.readableDatabase
 
-
     /**
      * Delete table in the given db
      * @param db
      * @param tableName
      */
-    fun deleteTable(db: SupportSQLiteDatabase, tableName: String) {
+    fun deleteTable(
+        db: SupportSQLiteDatabase,
+        tableName: String,
+    ) {
         try {
             db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName))
             createAllTables(db)
         } catch (e: SQLiteException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not recreate table %s", tableName)
         }
     }
 }

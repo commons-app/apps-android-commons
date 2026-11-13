@@ -17,8 +17,10 @@ import coil3.toBitmap
 import fr.free.nrw.commons.R
 import timber.log.Timber
 
-class SetWallpaperWorker(context: Context, params: WorkerParameters) :
-    CoroutineWorker(context, params) {
+class SetWallpaperWorker(
+    context: Context,
+    params: WorkerParameters,
+) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         val context = applicationContext
         createNotificationChannel(context)
@@ -28,10 +30,12 @@ class SetWallpaperWorker(context: Context, params: WorkerParameters) :
 
         return try {
             val imageLoader = SingletonImageLoader.get(context)
-            val request = ImageRequest.Builder(context)
-                .data(imageUrl)
-                .allowHardware(false)
-                .build()
+            val request =
+                ImageRequest
+                    .Builder(context)
+                    .data(imageUrl)
+                    .allowHardware(false)
+                    .build()
             val result = imageLoader.execute(request)
             if (result is SuccessResult) {
                 val bitmap = result.image.toBitmap()

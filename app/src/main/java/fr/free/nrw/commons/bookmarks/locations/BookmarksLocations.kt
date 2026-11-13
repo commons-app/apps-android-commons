@@ -23,21 +23,23 @@ data class BookmarksLocations(
     @ColumnInfo(name = "location_wikidata_link") val locationWikidataLink: String,
     @ColumnInfo(name = "location_commons_link") val locationCommonsLink: String,
     @ColumnInfo(name = "location_pic") val locationPic: String,
-    @ColumnInfo(name = "location_exists") val locationExists: Boolean
+    @ColumnInfo(name = "location_exists") val locationExists: Boolean,
 )
 
 fun BookmarksLocations.toPlace(): Place {
-    val location = LatLng(
-        locationLat,
-        locationLong,
-        1F
-    )
+    val location =
+        LatLng(
+            locationLat,
+            locationLong,
+            1F,
+        )
 
-    val builder = Sitelinks.Builder().apply {
-        setWikipediaLink(locationWikipediaLink)
-        setWikidataLink(locationWikidataLink)
-        setCommonsLink(locationCommonsLink)
-    }
+    val builder =
+        Sitelinks.Builder().apply {
+            setWikipediaLink(locationWikipediaLink)
+            setWikidataLink(locationWikidataLink)
+            setCommonsLink(locationCommonsLink)
+        }
 
     return Place(
         locationLanguage,
@@ -48,12 +50,12 @@ fun BookmarksLocations.toPlace(): Place {
         locationCategory,
         builder.build(),
         locationPic,
-        locationExists
+        locationExists,
     )
 }
 
-fun Place.toBookmarksLocations(): BookmarksLocations {
-    return BookmarksLocations(
+fun Place.toBookmarksLocations(): BookmarksLocations =
+    BookmarksLocations(
         locationName = name,
         locationLanguage = language,
         locationDescription = longDescription,
@@ -67,6 +69,5 @@ fun Place.toBookmarksLocations(): BookmarksLocations {
         locationWikidataLink = siteLinks.wikidataLink.toString(),
         locationCommonsLink = siteLinks.commonsLink.toString(),
         locationPic = pic,
-        locationExists = exists
+        locationExists = exists,
     )
-}

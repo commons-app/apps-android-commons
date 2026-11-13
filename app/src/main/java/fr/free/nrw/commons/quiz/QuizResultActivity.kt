@@ -21,6 +21,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
 import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 
@@ -187,7 +188,7 @@ class QuizResultActivity : AppCompatActivity() {
                 }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e, "Could not share screenshot")
         }
     }
 

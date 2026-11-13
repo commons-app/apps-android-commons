@@ -15,8 +15,9 @@ import fr.free.nrw.commons.utils.ViewUtil.showShortToast
  * @param zoomLevel The zoom level
  */
 fun handleGeoCoordinates(
-    context: Context, latLng: LatLng,
-    zoomLevel: Double = 16.0
+    context: Context,
+    latLng: LatLng,
+    zoomLevel: Double = 16.0,
 ) {
     val mapIntent = Intent(Intent.ACTION_VIEW, latLng.getGmmIntentUri(zoomLevel))
     if (mapIntent.resolveActivity(context.packageManager) != null) {

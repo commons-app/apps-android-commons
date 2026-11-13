@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
-
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media

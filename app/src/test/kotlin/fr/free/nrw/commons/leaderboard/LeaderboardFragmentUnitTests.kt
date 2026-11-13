@@ -4,6 +4,7 @@ import android.accounts.Account
 import android.content.Context
 import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -18,6 +19,7 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListViewModel
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardViewController
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import org.junit.Assert
 import org.junit.Before
@@ -162,23 +164,41 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHideProgressBar() {
-        val method: Method =
-            LeaderboardFragment::class.java.getDeclaredMethod(
-                "hideProgressBar",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        LeaderboardViewController(binding).hideProgressBar()
+        Assert.assertEquals(View.GONE, binding.progressBar.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.categorySpinner.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.durationSpinner.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.scroll.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.leaderboardList.visibility)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowProgressBar() {
-        val method: Method =
-            LeaderboardFragment::class.java.getDeclaredMethod(
-                "showProgressBar",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        LeaderboardViewController(binding).showProgressBar()
+        Assert.assertEquals(View.VISIBLE, binding.progressBar.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.scroll.visibility)
+    }
+
+    /** Keeps leaderboard content hidden before the initial response arrives. */
+    @Test
+    fun testHideLayouts() {
+        LeaderboardViewController(binding).hideLayouts()
+        Assert.assertEquals(View.INVISIBLE, binding.categorySpinner.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.durationSpinner.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.leaderboardList.visibility)
+    }
+
+    /** Populates both filters with the existing resource labels and defaults. */
+    @Test
+    fun testSetSpinners() {
+        LeaderboardViewController(binding).setSpinners()
+        val categories = context.resources.getStringArray(R.array.leaderboard_categories)
+        val durations = context.resources.getStringArray(R.array.leaderboard_durations)
+        Assert.assertEquals(categories.size, binding.categorySpinner.adapter.count)
+        Assert.assertEquals(durations.size, binding.durationSpinner.adapter.count)
+        Assert.assertEquals(categories[0], binding.categorySpinner.selectedItem)
+        Assert.assertEquals(durations[0], binding.durationSpinner.selectedItem)
     }
 
     @Test

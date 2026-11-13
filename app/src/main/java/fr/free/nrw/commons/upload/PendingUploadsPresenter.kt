@@ -9,6 +9,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionBoundaryCallback
@@ -16,7 +17,7 @@ import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource
 import fr.free.nrw.commons.contributions.ContributionsRepository
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper.makeOneTimeWorkRequest
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
@@ -56,8 +57,9 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
-                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED),
+                contributionsRepository.fetchContributionsWithStates(
+                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED, STATE_METADATA_PENDING),
+                    sortedByDateUploadStarted = true,
                 )
             totalContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
@@ -76,14 +78,14 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
+                contributionsRepository.fetchContributionsWithStates(
                     listOf(STATE_FAILED),
+                    sortedByDateUploadStarted = true,
                 )
             failedContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
 
-        override fun onAttachView(view: PendingUploadsContract.View) {
-        }
+        override fun onAttachView(view: PendingUploadsContract.View) = Unit
 
         override fun onDetachView() {
             compositeDisposable.clear()
@@ -141,6 +143,24 @@ class PendingUploadsPresenter
                     .deleteContributionsFromDBWithStates(states)
                     .subscribeOn(ioThreadScheduler)
                     .subscribe(),
+            )
+        }
+
+        /**
+         * Restarts all the failed uploads. They are read from the database, because the list
+         * shown on the screen only contains the ones that have been loaded so far.
+         *
+         * @param context The context in which the operation is being performed.
+         */
+        fun restartFailedUploads(context: Context) {
+            compositeDisposable.add(
+                contributionsRepository
+                    .getAllContributionsWithStates(listOf(STATE_FAILED))
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe(
+                        { failedContributions -> restartUploads(failedContributions, 0, context) },
+                        { throwable -> Timber.e(throwable) },
+                    ),
             )
         }
 
@@ -221,22 +241,16 @@ class PendingUploadsPresenter
         }
 
         /**
-         * Restarts the upload for the specified list of contributions for the given index.
+         * Restarts the upload for the specified contribution.
          *
-         * @param contributionList The list of contributions.
-         * @param index            The index in the list which to be restarted.
-         * @param context          The context in which the operation is being performed.
+         * @param contribution The contribution to be restarted.
+         * @param context      The context in which the operation is being performed.
          */
         fun restartUpload(
-            contributionList: List<Contribution>,
-            index: Int,
+            contribution: Contribution,
             context: Context,
         ) {
             CommonsApplication.isPaused = false
-            if (index >= contributionList.size) {
-                return
-            }
-            val contribution = contributionList[index]
             if (contribution.state == STATE_FAILED) {
                 contribution.dateUploadStarted = Calendar.getInstance().time
                 if (contribution.errorInfo == null) {
