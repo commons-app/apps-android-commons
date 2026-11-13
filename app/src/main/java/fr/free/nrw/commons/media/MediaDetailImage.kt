@@ -117,9 +117,12 @@ internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
 }
 
 private fun MediaDetailFragment.loadFullResolutionImage(imageUrl: String?) {
+    val hasExistingImage = binding.mediaDetailImageView.drawable != null
     binding.mediaDetailImageView.load(imageUrl) {
-        placeholder(R.drawable.image_placeholder)
-        error(R.drawable.image_placeholder)
+        if (!hasExistingImage) {
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
+        }
         listener(
             onSuccess = { _, _ ->
                 val drawable = binding.mediaDetailImageView.drawable
