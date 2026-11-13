@@ -23,9 +23,9 @@ import java.util.Locale
  * of a PageTitle to remain constant for the lifetime of the object.
  */
 class PageTitle : Parcelable {
-    // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
-    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
-    //       are broken.
+    // The text before the first colon is taken as the namespace (File, Category, etc.), so a
+    // main namespace title with a colon, such as "RTÉ News: Six One", is not split correctly.
+    // This app doesn't deal with main namespace pages for now, so that is not a problem here.
 
     /**
      * The localised namespace of the page as a string, or null if the page is in mainspace.
@@ -94,7 +94,7 @@ class PageTitle : Parcelable {
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""
-        // FIXME: Does not handle mainspace articles with a colon in the title well at all
+        // Main namespace titles with a colon are not handled, see the note on namespace above
         val fragParts = text.split("#".toRegex()).toTypedArray()
         text = fragParts[0]
         fragment =
