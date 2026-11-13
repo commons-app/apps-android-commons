@@ -2,7 +2,7 @@ package fr.free.nrw.commons.wikidata.cookies
 
 import android.util.Log
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonSyntaxException
+import com.google.gson.JsonParseException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
@@ -72,7 +72,7 @@ class CommonsCookieStorage(
                 cookieMap.putAll(serializedData.cookieMap)
                 true
             }
-        } catch (exception: JsonSyntaxException) {
+        } catch (exception: JsonParseException) {
             discardUnreadableStore("Discarding unreadable cookie store", exception)
             false
         }
