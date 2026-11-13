@@ -83,7 +83,10 @@ class CommonsCookieStorage(
      * Uses [Log] because [load] runs during Dagger injection in application startup,
      * before Timber is planted.
      */
-    private fun discardUnreadableStore(reason: String, exception: Exception? = null) {
+    private fun discardUnreadableStore(
+        reason: String,
+        exception: Exception? = null,
+    ) {
         cookieMap.clear()
         if (exception == null) {
             Log.w(TAG, reason)
