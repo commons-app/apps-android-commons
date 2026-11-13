@@ -275,7 +275,7 @@ private fun MainActivity.checkAndResumeStuckUploads() {
 @SuppressLint("CheckResult")
 private fun MainActivity.retryAllFailedUploads() {
     contributionDao
-        ?.getContribution(listOf(Contribution.STATE_FAILED))
+        ?.getContribution(listOf(Contribution.STATE_FAILED, Contribution.STATE_METADATA_PENDING))
         ?.subscribeOn(Schedulers.io())
         ?.subscribe { failedUploads ->
             failedUploads.forEach { contribution ->
