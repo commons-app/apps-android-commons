@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
@@ -290,10 +290,10 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewModel!!.setParams(duration, category, limit, offset)
         val leaderboardListAdapter = LeaderboardListAdapter()
         val userDetailAdapter = UserDetailAdapter(response)
-        val mergeAdapter = MergeAdapter(userDetailAdapter, leaderboardListAdapter)
+        val concatAdapter = ConcatAdapter(userDetailAdapter, leaderboardListAdapter)
         val linearLayoutManager = LinearLayoutManager(context)
         binding!!.leaderboardList.layoutManager = linearLayoutManager
-        binding!!.leaderboardList.adapter = mergeAdapter
+        binding!!.leaderboardList.adapter = concatAdapter
         viewModel!!.listLiveData.observe(viewLifecycleOwner, leaderboardListAdapter::submitList)
 
         viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->

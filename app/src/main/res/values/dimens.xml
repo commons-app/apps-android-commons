@@ -77,4 +77,10 @@
     <dimen name="dimen_72">72dp</dimen>
     <dimen name="dimen_140">140dp</dimen>
     <dimen name="dimen_200">200dp</dimen>
+
+    <dimen name="nearby_fab_spacer1_height">285dp</dimen>
+    <dimen name="nearby_fab_spacer2_height">174dp</dimen>
+    <dimen name="nearby_fab_spacer3_height">46dp</dimen>
+    <dimen name="nearby_fab_spread_spacing">0dp</dimen>
+    <dimen name="nearby_fab_container_margin">16dp</dimen>
 </resources>

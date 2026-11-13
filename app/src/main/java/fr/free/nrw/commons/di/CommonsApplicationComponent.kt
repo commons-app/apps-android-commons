@@ -47,6 +47,9 @@ import javax.inject.Singleton
         CategoriesModule::class,
     ],
 )
+// Suppressed TooManyFunctions because each function defines an individual
+// injection target for the application component.
+@Suppress("TooManyFunctions")
 interface CommonsApplicationComponent : AndroidInjector<ApplicationlessInjection> {
     fun inject(application: CommonsApplication)
 

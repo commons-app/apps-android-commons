@@ -175,14 +175,16 @@ class CategoriesModel
                                         categoryItem.name,
                                         categoryItem.name,
                                         SEARCH_CATS_LIMIT,
-                                    ).map {
-                                        CategoryItem(
-                                            it[0].name,
-                                            it[0].description,
-                                            it[0].thumbnail,
-                                            it[0].isSelected,
-                                        )
-                                    }.blockingGet()
+                                    ).blockingGet()
+                            }.filter { it.isNotEmpty() }
+                            .map { categories ->
+                                val category = categories.first()
+                                CategoryItem(
+                                    category.name,
+                                    category.description,
+                                    category.thumbnail,
+                                    category.isSelected,
+                                )
                             }.toList()
                             .toObservable()
                     }

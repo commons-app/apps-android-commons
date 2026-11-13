@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.mwapi.WikidataQueryClient;
 import timber.log.Timber;
 
 /**
@@ -29,16 +30,20 @@ public class NearbyPlaces {
     public double radius = INITIAL_RADIUS;
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final WikidataQueryClient wikidataQueryClient;
 
     /**
      * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
      * search. As a point is center of a circle with a radius will be set later.
      *
      * @param okHttpJsonApiClient
+     * @param wikidataQueryClient loads details for known Wikidata items
      */
     @Inject
-    public NearbyPlaces(OkHttpJsonApiClient okHttpJsonApiClient) {
+    public NearbyPlaces(OkHttpJsonApiClient okHttpJsonApiClient,
+        WikidataQueryClient wikidataQueryClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.wikidataQueryClient = wikidataQueryClient;
     }
 
     /**
@@ -144,7 +149,7 @@ public class NearbyPlaces {
         final float latGap = results[0] / 1000f;
 
         if (Math.max(longGap, latGap) < 100f) {
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+            final int itemCount = wikidataQueryClient.getNearbyItemCount(
                 new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
             if (itemCount < upperLimit) {
                 final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
@@ -161,7 +166,7 @@ public class NearbyPlaces {
         int targetRadius = maxRadius / 2;
         while (minRadius < maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+            final int itemCount = wikidataQueryClient.getNearbyItemCount(
                 new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
             if (itemCount >= lowerLimit && itemCount < upperLimit) {
                 break;
@@ -200,7 +205,7 @@ public class NearbyPlaces {
      */
     public List<Place> getPlaces(final List<Place> placeList,
         final String lang) throws Exception {
-        return okHttpJsonApiClient
+        return wikidataQueryClient
             .getPlaces(placeList, lang);
     }
 

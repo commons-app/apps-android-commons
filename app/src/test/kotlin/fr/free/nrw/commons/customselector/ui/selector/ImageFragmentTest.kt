@@ -20,14 +20,15 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.createTestClient
-import fr.free.nrw.commons.customselector.model.CallbackStatus
+import fr.free.nrw.commons.customselector.helper.ImageFolderManager
+import fr.free.nrw.commons.customselector.helper.ImageSelectionManager
 import fr.free.nrw.commons.customselector.model.Image
-import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -92,11 +93,17 @@ class ImageFragmentTest {
         selectorRV = view.findViewById(R.id.selector_rv)
         loader = view.findViewById(R.id.loader)
 
+        val selectionManager = Mockito.mock(ImageSelectionManager::class.java)
+        whenever(adapter.selectionManager).thenReturn(selectionManager)
+
+        val folderManager = Mockito.mock(ImageFolderManager::class.java)
+
         Whitebox.setInternalState(fragment, "imageAdapter", adapter)
         Whitebox.setInternalState(fragment, "selectorRV", selectorRV)
         Whitebox.setInternalState(fragment, "loader", loader)
         Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image, image))
         Whitebox.setInternalState(fragment, "contributionDao", contributionDao)
+        Whitebox.setInternalState(fragment, "folderManager", folderManager)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
         viewModelField.isAccessible = true
@@ -124,25 +131,6 @@ class ImageFragmentTest {
     }
 
     /**
-     * Test handleResult.
-     */
-    @Test
-    fun testHandleResult() {
-        val func = fragment.javaClass.getDeclaredMethod("handleResult", Result::class.java)
-        func.isAccessible = true
-        func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf()))
-        func.invoke(fragment, Result(CallbackStatus.SUCCESS, arrayListOf(image, image)))
-    }
-
-    /**
-     * Test onAttach function.
-     */
-    @Test
-    fun testOnAttach() {
-        fragment.onAttach(activity)
-    }
-
-    /**
      * Test refresh function.
      */
     @Test
@@ -161,15 +149,13 @@ class ImageFragmentTest {
     }
 
     /**
-     * Test onDestroy.
+     * Test onDestroyView.
      */
     @Test
-    fun testOnDestroy() {
+    fun testOnDestroyView() {
         shadowOf(getMainLooper()).idle()
         selectorRV.layoutManager = layoutManager
         whenever(layoutManager.findFirstVisibleItemPosition()).thenReturn(1)
-        val func = fragment.javaClass.getDeclaredMethod("onDestroy")
-        func.isAccessible = true
-        func.invoke(fragment)
+        fragment.onDestroyView()
     }
 }

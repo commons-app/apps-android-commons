@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.wikidata.json
 
-import android.net.Uri
 import com.google.gson.JsonParseException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import fr.free.nrw.commons.wikidata.model.WikiSite
 import java.io.IOException
@@ -26,11 +24,6 @@ class WikiSiteTypeAdapter : TypeAdapter<WikiSite>() {
 
     @Throws(IOException::class)
     override fun read(reader: JsonReader): WikiSite {
-        // todo: legacy; remove reader June 2018
-        if (reader.peek() == JsonToken.STRING) {
-            return WikiSite(Uri.parse(reader.nextString()))
-        }
-
         var domain: String? = null
         var languageCode: String? = null
         reader.beginObject()
@@ -49,12 +42,7 @@ class WikiSiteTypeAdapter : TypeAdapter<WikiSite>() {
             throw JsonParseException("Missing domain")
         }
 
-        // todo: legacy; remove reader June 2018
-        return if (languageCode == null) {
-            WikiSite(domain)
-        } else {
-            WikiSite(domain, languageCode)
-        }
+        return WikiSite(domain, languageCode ?: throw JsonParseException("Missing languageCode"))
     }
 
     companion object {

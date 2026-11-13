@@ -2,11 +2,8 @@ package fr.free.nrw.commons.explore.map
 
 import android.location.Location
 import android.view.View
-import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.explore.map.ExploreMapController.Companion.loadAttractionsFromLocationToBaseMarkerOptions
-import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
@@ -16,14 +13,22 @@ import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 import java.util.concurrent.Callable
 
-class ExploreMapPresenter(
+class ExploreMapPresenter private constructor(
     var bookmarkLocationDao: BookmarkLocationsDao,
+    private val markerHandler: ExploreMapMarkerHandler,
 ) : ExploreMapContract.UserActions,
-    NearbyBaseMarkerThumbCallback {
+    ExploreMapMarkerActions by markerHandler {
+    /** Keeps presenter construction unchanged while giving marker callbacks a separate owner. */
+    constructor(bookmarkLocationDao: BookmarkLocationsDao) : this(bookmarkLocationDao, ExploreMapMarkerHandler())
+
     private var isNearbyLocked = false
     private val currentLatLng: LatLng? = null
     private var exploreMapController: ExploreMapController? = null
     private var exploreMapFragmentView: ExploreMapContract.View? = DUMMY
+
+    init {
+        markerHandler.bind({ exploreMapFragmentView }, ::lockUnlockNearby)
+    }
 
     override fun updateMap(locationChangeType: LocationChangeType) {
         Timber.d("Presenter updates map and list$locationChangeType")
@@ -103,17 +108,14 @@ class ExploreMapPresenter(
 
     override fun backButtonClicked(): Boolean = exploreMapFragmentView!!.backButtonClicked()
 
+    /** Starts the initial map search after registering the controller and search-area action. */
     fun onMapReady(exploreMapController: ExploreMapController?) {
         this.exploreMapController = exploreMapController
         if (null != exploreMapFragmentView) {
             exploreMapFragmentView!!.addSearchThisAreaButtonAction()
-            initializeMapOperations()
+            lockUnlockNearby(false)
+            updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         }
-    }
-
-    fun initializeMapOperations() {
-        lockUnlockNearby(false)
-        updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
     fun loadAttractionsFromLocation(
@@ -130,42 +132,6 @@ class ExploreMapPresenter(
                 )
             },
         )
-
-    /**
-     * Populates places for custom location, should be used for finding nearby places around a
-     * location where you are not at.
-     *
-     * @param explorePlacesInfo This variable has placeToCenter list information and distances.
-     */
-    fun updateMapMarkers(explorePlacesInfo: ExplorePlacesInfo) {
-        if (explorePlacesInfo.mediaList != null) {
-            prepareNearbyBaseMarkers(explorePlacesInfo)
-        } else {
-            lockUnlockNearby(false) // So that new location updates wont come
-            exploreMapFragmentView!!.setProgressBarVisibility(false)
-        }
-    }
-
-    private fun prepareNearbyBaseMarkers(explorePlacesInfo: ExplorePlacesInfo) {
-        loadAttractionsFromLocationToBaseMarkerOptions(
-            explorePlacesInfo.currentLatLng, // Curlatlang will be used to calculate distances
-            explorePlacesInfo.explorePlaceList,
-            exploreMapFragmentView!!.getContext()!!,
-            this,
-            explorePlacesInfo,
-        )
-    }
-
-    override fun onNearbyBaseMarkerThumbsReady(
-        baseMarkers: List<BaseMarker>?,
-        explorePlacesInfo: ExplorePlacesInfo?,
-    ) {
-        if (null != exploreMapFragmentView) {
-            exploreMapFragmentView!!.addMarkersToMap(baseMarkers)
-            lockUnlockNearby(false) // So that new location updates wont come
-            exploreMapFragmentView!!.setProgressBarVisibility(false)
-        }
-    }
 
     fun onSearchThisAreaClicked(): View.OnClickListener =
         View.OnClickListener {
