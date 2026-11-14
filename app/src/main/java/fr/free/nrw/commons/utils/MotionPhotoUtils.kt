@@ -23,12 +23,21 @@ object MotionPhotoUtils {
 
     // shortcut: only the attribute form Google cameras write, not other XMP prefixes or element form.
     private val motionPhotoFlag = Regex("""GCamera:MotionPhoto="1"""")
-    private val containerItem = Regex("""<Container:Item\b[^>]*>""")
+
+    // An empty item, self-closing or as an open/close pair.
+    private const val ITEM = """<Container:Item\b[^>]*(?:/>|>\s*</Container:Item>)"""
+
+    // The item with its <rdf:li> wrapper when it has one, so the whole entry can be blanked out.
+    // Group 1 is an item with children: only its opening tag is matched, so it can't be blanked.
+    private val containerItem =
+        Regex("""<rdf:li\b[^>]*>\s*$ITEM\s*</rdf:li>|$ITEM|(<Container:Item\b[^>]*>)""")
     private val videoLength = Regex("""Item:Length="(\d+)"""")
 
     private class Video(
         val start: Long,
         val flagOffset: Long,
+        val itemOffset: Long,
+        val itemLength: Int,
     )
 
     /**
@@ -46,6 +55,9 @@ object MotionPhotoUtils {
                 // The value is a single ASCII byte, so it can be changed in place without moving anything.
                 raf.seek(video.flagOffset)
                 raf.write('0'.code)
+                // Spaces keep every offset and the segment length valid, and are allowed between XMP elements.
+                raf.seek(video.itemOffset)
+                raf.write(ByteArray(video.itemLength) { ' '.code.toByte() })
             }
             video != null
         }
@@ -53,19 +65,22 @@ object MotionPhotoUtils {
     private fun findVideo(raf: RandomAccessFile): Video? {
         val (xmpStart, xmp) = findXmp(raf) ?: return null
         val flag = motionPhotoFlag.find(xmp)
+        val item = containerItem.findAll(xmp).firstOrNull { it.value.contains(VIDEO_SEMANTIC) }
+        val blank = item?.takeIf { it.groups[1] == null }?.range
         val start =
-            containerItem
-                .findAll(xmp)
-                .map { it.value }
-                .firstOrNull { it.contains(VIDEO_SEMANTIC) }
-                ?.let { videoLength.find(it) }
+            item
+                ?.let { videoLength.find(it.value) }
                 ?.groupValues
                 ?.get(1)
                 ?.toLongOrNull()
                 ?.takeIf { it > FTYP_OFFSET + FTYP.length }
                 ?.let { raf.length() - it }
                 ?.takeIf { it > xmpStart + xmp.length && hasFtypAt(raf, it) }
-        return if (flag != null && start != null) Video(start, xmpStart + flag.range.last - 1) else null
+        return if (flag != null && start != null) {
+            Video(start, xmpStart + flag.range.last - 1, xmpStart + (blank?.first ?: 0), blank?.count() ?: 0)
+        } else {
+            null
+        }
     }
 
     private fun hasFtypAt(

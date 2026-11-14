@@ -80,11 +80,22 @@ class FileProcessorTest {
         val text = String(photo.readBytes(), Charsets.ISO_8859_1)
         assertTrue(text.contains("GCamera:MotionPhoto=\"0\""))
         assertFalse(text.contains("ftyp"))
+        assertEquals(PRIMARY_ITEM, directoryOf(text))
 
         // Running it again (e.g. for the custom selector's SHA1) must not cut the photo itself.
         val once = photo.readBytes()
         fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
         assertArrayEquals(once, photo.readBytes())
+    }
+
+    @Test
+    fun redactExifTagsRemovesVideoItemWrittenAsOpenClosePair() {
+        val photo = motionPhoto(tail = fakeVideo, videoLength = fakeVideo.size, pairedItem = true)
+        val withoutVideo = photo.length() - fakeVideo.size
+
+        fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
+        assertEquals(withoutVideo, photo.length())
+        assertEquals(PRIMARY_ITEM, directoryOf(String(photo.readBytes(), Charsets.ISO_8859_1)))
     }
 
     @Test
@@ -109,6 +120,9 @@ class FileProcessorTest {
 
     private val fakeVideo = byteArrayOf(0, 0, 0, 0x18) + "ftypisom".toByteArray() + ByteArray(100)
 
+    /** What is left in the Container directory, with the blanked-out space trimmed. */
+    private fun directoryOf(text: String) = text.substringAfter("<rdf:Seq>").substringBefore("</rdf:Seq>").trim()
+
     /**
      * Builds a JPEG laid out like a Google motion photo: XMP that points at a video
      * of [videoLength] bytes, then [tail] appended after the image.
@@ -116,16 +130,18 @@ class FileProcessorTest {
     private fun motionPhoto(
         tail: ByteArray,
         videoLength: Int,
+        pairedItem: Boolean = false,
     ): File {
         val jpeg = File(SAMPLE_JPEG).readBytes()
+        val itemEnd = if (pairedItem) "></Container:Item>" else "/>"
         val xmp =
             "http://ns.adobe.com/xap/1.0/\u0000" +
                 "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF><rdf:Description " +
                 "GCamera:MotionPhoto=\"1\" GCamera:MotionPhotoVersion=\"1\">" +
                 "<Container:Directory><rdf:Seq>" +
-                "<rdf:li><Container:Item Item:Semantic=\"Primary\" Item:Mime=\"image/jpeg\"/></rdf:li>" +
+                PRIMARY_ITEM +
                 "<rdf:li><Container:Item Item:Mime=\"video/mp4\" Item:Semantic=\"MotionPhoto\" " +
-                "Item:Length=\"$videoLength\" Item:Padding=\"0\"/></rdf:li>" +
+                "Item:Length=\"$videoLength\" Item:Padding=\"0\"$itemEnd</rdf:li>" +
                 "</rdf:Seq></Container:Directory></rdf:Description></rdf:RDF></x:xmpmeta>"
         val xmpBytes = xmp.toByteArray(Charsets.ISO_8859_1)
         val segmentLength = xmpBytes.size + 2
@@ -140,5 +156,7 @@ class FileProcessorTest {
 
     private companion object {
         const val SAMPLE_JPEG = "src/test/resources/ImageTest/dark2.jpg"
+        const val PRIMARY_ITEM =
+            "<rdf:li><Container:Item Item:Semantic=\"Primary\" Item:Mime=\"image/jpeg\"/></rdf:li>"
     }
 }
