@@ -199,11 +199,7 @@ class ImageFragment :
             ViewModelProvider(requireActivity(), customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
-        try {
-            (activity as? CustomSelectorActivity)?.setOnDataListener(this)
-        } catch (ex: Exception) {
-            Timber.e(ex, "Could not set data listener on CustomSelectorActivity")
-        }
+        (activity as? CustomSelectorActivity)?.setOnDataListener(this)
         val builder = AlertDialog.Builder(requireActivity()).setCancelable(false)
         progressDialogLayout = ProgressDialogBinding.inflate(layoutInflater)
         progressDialog = builder.setView(progressDialogLayout.root).create()
