@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Narazeni
+* Nicolas Raoul
 * Silovan
 -->
 <resources>
@@ -80,11 +81,11 @@
   <string name="authentication_failed">ავთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ კჷნი გენშართით.</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="uploading_queued">ეხარგუა რანწკის გერე (გოხურგილი რსხუშ რეჟიმი ჩართული რე)</string>
-  <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
+  <string name="upload_completed_notification_title">%1$s ეხარგილი რე!</string>
   <string name="upload_completed_notification_text">ქეგუწკანტეთ თქვანი ეხარგუაშ ოძირაფალო</string>
   <string name="upload_progress_notification_title_start">ეთმიხარგუ ფაილი: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ იხარგუ</string>
-  <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
+  <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$s</string>
   <string name="upload_failed_notification_title">%1$s ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_paused_notification_title">%1$s-აშ ეხარგუა გაჩემებული რე</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>

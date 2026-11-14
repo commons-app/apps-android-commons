@@ -9,8 +9,9 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.mwapi.TooManyAchievementsException
+import fr.free.nrw.commons.mwapi.UploadCount
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
@@ -32,7 +33,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     lateinit var sessionManager: SessionManager
 
     @Inject
-    lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    lateinit var userStatsClient: UserStatsClient
 
     // The nullable binding is cleared in onDestroyView; `binding` is the non-null accessor for this class only.
     @Suppress("ktlint:standard:backing-property-naming")
@@ -121,7 +122,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
         if (checkAccount()) {
             try {
                 compositeDisposable.add(
-                    okHttpJsonApiClient
+                    userStatsClient
                         .getAchievements(userName ?: return)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -168,7 +169,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             return
         }
         compositeDisposable.add(
-            okHttpJsonApiClient
+            userStatsClient
                 .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -228,14 +229,14 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     private fun setUploadCount(achievements: Achievements) {
         if (checkAccount()) {
             compositeDisposable.add(
-                okHttpJsonApiClient
+                userStatsClient
                     .getUploadCount(Objects.requireNonNull<String>(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                        { uploadCount: Int? ->
+                        { uploadCount: UploadCount ->
                             statsBinder.bind(
-                                achievements.copy(imagesUploaded = uploadCount ?: 0),
+                                achievements.copy(imagesUploaded = uploadCount.count),
                             )
                         },
                         { t: Throwable? ->

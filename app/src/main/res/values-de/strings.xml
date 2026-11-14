@@ -838,7 +838,7 @@
   </plurals>
   <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
   <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
-  <string name="nearby_wikitalk">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
+  <string name="nearby_report_problem">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
   <string name="please_enter_some_comments">Bitte gib einige Kommentare ein</string>
   <string name="talk">Diskussion</string>
   <string name="write_something_about_the_item">Schreibe etwas über das Objekt ‚%1$s‘. Deine Beschreibung wird öffentlich sichtbar sein.</string>

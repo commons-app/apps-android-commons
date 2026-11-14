@@ -23,6 +23,7 @@
 * McDutchie
 * NFarras
 * Naufal06
+* Nicolas Raoul
 * Pebaryan
 * Penyuwangi
 * Rachmat04
@@ -543,7 +544,7 @@
   <string name="default_description_language">Bahasa deskripsi baku</string>
   <string name="delete_helper_show_deletion_title">Sedang menominasikan untuk dihapus</string>
   <string name="delete_helper_show_deletion_title_success">Sukses</string>
-  <string name="delete_helper_show_deletion_message_if">Berhasil menominasikan %1$ untuk dihapus.</string>
+  <string name="delete_helper_show_deletion_message_if">Berhasil menominasikan %1$s untuk dihapus.</string>
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
   <string name="delete_helper_ask_spam_selfie">swafoto yang tidak digunakan di artikel mana pun</string>

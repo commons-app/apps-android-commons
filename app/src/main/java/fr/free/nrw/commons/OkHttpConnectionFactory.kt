@@ -51,11 +51,9 @@ object OkHttpConnectionFactory {
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    setLevel(HttpLoggingInterceptor.Level.BASIC)
-                    redactHeader("Authorization")
-                    redactHeader("Cookie")
-                },
+                HttpLoggingInterceptor()
+                    .apply { level = HttpLoggingInterceptor.Level.BASIC }
+                    .redactSensitiveHeaders(),
             ).addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
@@ -77,7 +75,7 @@ class CommonHeaderRequestInterceptor : Interceptor {
 private const val SUPPRESS_ERROR_LOG = "x-commons-suppress-error-log"
 const val SUPPRESS_ERROR_LOG_HEADER: String = "$SUPPRESS_ERROR_LOG: true"
 
-private class UnsuccessfulResponseInterceptor : Interceptor {
+internal class UnsuccessfulResponseInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val rq = chain.request()
@@ -101,20 +99,21 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
             try {
                 rsp.peekBody(ERRORS_PREFIX.length.toLong()).use { responseBody ->
                     if (ERRORS_PREFIX == responseBody.string()) {
-                        rsp.body.use { body ->
-                            val bodyString = body!!.string()
+                        // Read a copy of the body, so that the caller can still read it. With
+                        // errorformat=plaintext the JSON has "errors" instead of "error", which
+                        // is not handled here but by MwResponse when the caller reads the body.
+                        val bodyString = rsp.peekBody(MAX_ERROR_BODY_BYTES).string()
 
-                            val errorResponse =
-                                GsonUtil.defaultGson.fromJson(
-                                    bodyString,
-                                    MwErrorResponse::class.java,
-                                )
-                            if (errorResponse?.error != null) {
-                                throw MwIOException(
-                                    "MediaWiki API returned error: $bodyString",
-                                    errorResponse.error,
-                                )
-                            }
+                        val errorResponse =
+                            GsonUtil.defaultGson.fromJson(
+                                bodyString,
+                                MwErrorResponse::class.java,
+                            )
+                        if (errorResponse?.error != null) {
+                            throw MwIOException(
+                                "MediaWiki API returned error: $bodyString",
+                                errorResponse.error,
+                            )
                         }
                     }
                 }
@@ -124,6 +123,7 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                     Timber.d(e, "Suppressed (known / expected) error")
                 } else {
                     Timber.e(e)
+                    rsp.close()
                     throw e
                 }
             }
@@ -148,5 +148,8 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                 "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1",
             )
         const val ERRORS_PREFIX = "{\"error"
+
+        // Error responses are small, this only limits how much of the body is copied to check it
+        private const val MAX_ERROR_BODY_BYTES = 1024L * 1024L
     }
 }

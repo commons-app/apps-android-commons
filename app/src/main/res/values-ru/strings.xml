@@ -860,7 +860,7 @@
   </plurals>
   <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
   <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
-  <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
+  <string name="nearby_report_problem">Сообщить о проблеме с этим элементом в Викиданные</string>
   <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
   <string name="talk">Обсуждение</string>
   <string name="write_something_about_the_item">Напишите что-нибудь об элементе \'%1$s\'. Это будет видно всем.</string>

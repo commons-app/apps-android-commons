@@ -3,8 +3,6 @@ package fr.free.nrw.commons.navtab
 import android.accounts.AccountManager
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import fr.free.nrw.commons.AboutActivity
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener
@@ -27,10 +24,6 @@ import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.logging.CommonsLogSender
-import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.review.ReviewActivity
-import fr.free.nrw.commons.settings.SettingsActivity
-import fr.free.nrw.commons.startWelcome
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -50,10 +43,7 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     @field:Named("commons-page-edit")
     lateinit var pageEditClient: PageEditClient
 
-    companion object {
-        private const val GITHUB_ISSUES_URL =
-            "https://github.com/commons-app/apps-android-commons/issues"
-    }
+    private val navigation = MoreBottomSheetNavigation(this)
 
     private var binding: FragmentMoreBottomSheetBinding? = null
 
@@ -71,24 +61,16 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
         binding?.apply {
             moreLogout.setOnClickListener { onLogoutClicked() }
             moreFeedback.setOnClickListener { onFeedbackClicked() }
-            moreAbout.setOnClickListener { onAboutClicked() }
-            moreTutorial.setOnClickListener { onTutorialClicked() }
-            moreSettings.setOnClickListener { onSettingsClicked() }
-            moreProfile.setOnClickListener { onProfileClicked() }
-            morePeerReview.setOnClickListener { onPeerReviewClicked() }
-            moreFeedbackGithub.setOnClickListener { onFeedbackGithubClicked() }
+            moreAbout.setOnClickListener { navigation.onAboutClicked() }
+            moreTutorial.setOnClickListener { navigation.onTutorialClicked() }
+            moreSettings.setOnClickListener { navigation.onSettingsClicked() }
+            moreProfile.setOnClickListener { navigation.onProfileClicked(getUserName()) }
+            morePeerReview.setOnClickListener { navigation.onPeerReviewClicked() }
+            moreFeedbackGithub.setOnClickListener { navigation.onFeedbackGithubClicked() }
         }
 
         setUserName()
         return binding?.root
-    }
-
-    private fun onFeedbackGithubClicked() {
-        val intent =
-            Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(GITHUB_ISSUES_URL)
-            }
-        startActivity(intent)
     }
 
     override fun onAttach(context: Context) {
@@ -203,33 +185,5 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
                 Timber.e(error)
                 Toast.makeText(requireContext(), R.string.error_feedback, Toast.LENGTH_SHORT).show()
             })
-    }
-
-    fun onAboutClicked() {
-        val intent =
-            Intent(activity, AboutActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            }
-        requireActivity().startActivity(intent)
-    }
-
-    fun onTutorialClicked() {
-        requireContext().startWelcome()
-    }
-
-    fun onSettingsClicked() {
-        val intent =
-            Intent(activity, SettingsActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            }
-        requireActivity().startActivity(intent)
-    }
-
-    fun onProfileClicked() {
-        ProfileActivity.startYourself(requireActivity(), getUserName(), false)
-    }
-
-    fun onPeerReviewClicked() {
-        ReviewActivity.startYourself(requireActivity())
     }
 }

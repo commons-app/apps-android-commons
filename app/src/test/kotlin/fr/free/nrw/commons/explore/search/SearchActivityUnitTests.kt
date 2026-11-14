@@ -7,6 +7,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.explore.SearchActivity
+import fr.free.nrw.commons.explore.SearchQueryController
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
 import fr.free.nrw.commons.explore.media.SearchMediaFragment
@@ -65,6 +66,9 @@ class SearchActivityUnitTests {
 
     private lateinit var context: Context
 
+    private val searchQueryController: SearchQueryController
+        get() = Whitebox.getInternalState(activity, "searchQueryController")
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -82,7 +86,7 @@ class SearchActivityUnitTests {
     @Throws(Exception::class)
     fun testSetTabs() {
         Whitebox.setInternalState(activity, "viewPagerAdapter", viewPagerAdapter)
-        activity.setTabs()
+        searchQueryController.setTabs(viewPagerAdapter, Whitebox.getInternalState(activity, "compositeDisposable"))
         verify(viewPagerAdapter).notifyDataSetChanged()
     }
 
@@ -122,9 +126,9 @@ class SearchActivityUnitTests {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
+            SearchQueryController::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
     }
 
@@ -135,9 +139,9 @@ class SearchActivityUnitTests {
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
         `when`(recentSearchesDao.find(query)).thenReturn(mock(RecentSearch::class.java))
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
+            SearchQueryController::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
     }
 
@@ -146,7 +150,7 @@ class SearchActivityUnitTests {
     fun testGetMediaAtPosition() {
         val pos = 0
         val media = mock(Media::class.java)
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
         `when`(searchMediaFragment.getMediaAtPosition(pos)).thenReturn(media)
         assertEquals(activity.getMediaAtPosition(pos), media)
     }
@@ -155,7 +159,7 @@ class SearchActivityUnitTests {
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
         val num = 1
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
         `when`(searchMediaFragment.getTotalMediaCount()).thenReturn(num)
         assertEquals(activity.getTotalMediaCount(), num)
     }
@@ -163,15 +167,15 @@ class SearchActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHandleSearchCaseEmpty() {
-        Whitebox.setInternalState(activity, "recentSearchesFragment", recentSearchesFragment)
+        Whitebox.setInternalState(searchQueryController, "recentSearchesFragment", recentSearchesFragment)
         val query = ""
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod(
+            SearchQueryController::class.java.getDeclaredMethod(
                 "handleSearch",
                 CharSequence::class.java,
             )
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesFragment).updateRecentSearches()
     }
 
@@ -180,9 +184,9 @@ class SearchActivityUnitTests {
     fun testHandleSearchCaseNotEmpty() {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
-        Whitebox.setInternalState(activity, "searchDepictionsFragment", searchDepictionsFragment)
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
-        Whitebox.setInternalState(activity, "searchCategoryFragment", searchCategoryFragment)
+        Whitebox.setInternalState(searchQueryController, "searchDepictionsFragment", searchDepictionsFragment)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
+        Whitebox.setInternalState(searchQueryController, "searchCategoryFragment", searchCategoryFragment)
 
         `when`(searchDepictionsFragment.activity).thenReturn(activity)
         `when`(searchMediaFragment.activity).thenReturn(activity)
@@ -201,12 +205,12 @@ class SearchActivityUnitTests {
         `when`(searchCategoryFragment.isRemoving).thenReturn(false)
 
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod(
+            SearchQueryController::class.java.getDeclaredMethod(
                 "handleSearch",
                 CharSequence::class.java,
             )
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
         verify(searchDepictionsFragment).onQueryUpdated(query)
         verify(searchMediaFragment).onQueryUpdated(query)

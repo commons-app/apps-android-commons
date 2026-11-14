@@ -16,6 +16,7 @@ class MediaDetailAdapter(
      * Keeps track of the current displayed fragment.
      */
     private var currentFragment: Fragment? = null
+    private var currentPosition: Int = 0
 
     override fun getItem(i: Int): Fragment {
         if (i == 0) {
@@ -24,8 +25,12 @@ class MediaDetailAdapter(
                 Timber.d("Skipping getItem. Returning as activity is destroyed!")
                 return Fragment()
             }
-            mediaDetailPagerFragment.binding!!.mediaDetailsPager.postDelayed(
-                { mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu() },
+            mediaDetailPagerFragment.binding?.mediaDetailsPager?.postDelayed(
+                {
+                    if (mediaDetailPagerFragment.activity != null) {
+                        mediaDetailPagerFragment.requireActivity().invalidateOptionsMenu()
+                    }
+                },
                 5,
             )
         }
@@ -73,8 +78,12 @@ class MediaDetailAdapter(
     ) {
         // Update the current fragment if changed
         if (currentFragment !== obj) {
+            currentMediaDetailFragment?.let {
+                mediaDetailPagerFragment.onPrimaryMediaChanging(currentPosition, it)
+            }
             currentFragment = (obj as Fragment)
         }
+        currentPosition = position
         super.setPrimaryItem(container, position, obj)
     }
 }

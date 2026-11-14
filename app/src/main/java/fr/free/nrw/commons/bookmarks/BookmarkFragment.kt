@@ -77,7 +77,9 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
     }
 
     fun onBackPressed() {
-        if (((adapter!!.getItem(binding!!.tabLayout.selectedTabPosition)) as BookmarkListRootFragment).backPressed()) {
+        val position = binding!!.tabLayout.selectedTabPosition
+        val rootFragment = adapter!!.getItem(position) as BookmarkListRootFragment
+        if (rootFragment.navigator.backPressed()) {
             // The event is handled internally by the adapter , no further action required.
             return
         }

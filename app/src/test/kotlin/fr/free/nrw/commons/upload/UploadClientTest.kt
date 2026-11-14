@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.KArgumentCaptor
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -15,9 +16,13 @@ import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.utils.TimeProvider
+import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.wikidata.mwapi.MwIOException
+import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
+import io.reactivex.Single
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import junit.framework.TestCase.assertTrue
@@ -150,6 +155,7 @@ class UploadClientTest {
         val tokenCaptor = argumentCaptor<RequestBody>()
         val fileCaptor = argumentCaptor<MultipartBody.Part>()
 
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 filenameCaptor.capture(),
@@ -159,7 +165,7 @@ class UploadClientTest {
                 tokenCaptor.capture(),
                 fileCaptor.capture(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result =
             uploadClient.uploadChunkToStash(filename, 100, 10, filekey, countingRequestBody).test()
@@ -185,6 +191,47 @@ class UploadClientTest {
 
         result.assertNoValues()
         assertSame(exception, result.errors()[0])
+    }
+
+    @Test
+    fun testUploadChunkToStash_SuccessWithRealGson() {
+        // Uses the real Gson, to check the JSON Commons sends for an accepted chunk
+        val chunkJson =
+            Gson().fromJson(
+                """{"upload":{"result":"Continue","offset":524288,"filekey":"abc123.jpg"}}""",
+                JsonObject::class.java,
+            )
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(chunkJson))
+
+        val result = uploadClientWithRealGson().uploadChunkToStash(filename, 100, 10, filekey, mock()).test()
+
+        result.assertNoErrors()
+        val uploadResult = result.values()[0]
+        assertEquals("Continue", uploadResult.result)
+        assertEquals(524288, uploadResult.offset)
+        assertEquals("abc123.jpg", uploadResult.filekey)
+    }
+
+    @Test
+    fun testUploadChunkToStash_WithPlaintextErrors() {
+        // Uses the real Gson, to check the "errors" JSON Commons sends for a rejected chunk
+        val client = uploadClientWithRealGson()
+        val errorsJson =
+            Gson().fromJson(
+                """{"errors":[{"code":"illegal-filename","text":"The filename is not allowed.","module":"upload"}]}""",
+                JsonObject::class.java,
+            )
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(errorsJson))
+
+        val result = client.uploadChunkToStash(filename, 100, 10, filekey, mock()).test()
+
+        result.assertNoValues()
+        val thrown = result.errors()[0]
+        assertTrue(thrown is IOException)
+        assertEquals("illegal-filename", thrown.message)
+        assertTrue(thrown.cause is MwException)
     }
 
     @Test
@@ -232,6 +279,7 @@ class UploadClientTest {
                 eq(expectedChunkSize),
             ),
         ).thenReturn(listOf(mockFile))
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 any(),
@@ -241,7 +289,7 @@ class UploadClientTest {
                 any(),
                 any(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -276,6 +324,7 @@ class UploadClientTest {
             ),
         ).thenReturn(listOf(mockFile))
 
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
         whenever(
             uploadInterface.uploadFileToStash(
                 anyOrNull(),
@@ -285,7 +334,7 @@ class UploadClientTest {
                 anyOrNull(),
                 anyOrNull(),
             ),
-        ).thenReturn(Observable.just(uploadResponse))
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -293,6 +342,88 @@ class UploadClientTest {
         assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
         assertEquals(filekey, result.values()[0].fileKey)
     }
+
+    @Test
+    fun uploadFileToStash_handlesNullUploadResultInChunkInfoGracefully() {
+        val mockFile = mock<File>()
+        val chunkInfo = mock<ChunkInfo>()
+        whenever(mockFile.length()).thenReturn(10)
+        whenever(chunkInfo.uploadResult).thenReturn(null)
+        whenever(chunkInfo.indexOfNextChunkToUpload).thenReturn(0)
+
+        whenever(contribution.isCompleted()).thenReturn(false)
+        whenever(contribution.pageId).thenReturn(pageId)
+        whenever(contributionDao.getContribution(pageId)).thenReturn(contribution)
+        whenever(contribution.chunkInfo).thenReturn(chunkInfo)
+        whenever(contribution.dateModified).thenReturn(Date(System.currentTimeMillis()))
+        whenever(timeProvider.currentTimeMillis()).thenReturn(System.currentTimeMillis())
+
+        whenever(contribution.localUriPath).thenReturn(mockFile)
+        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize)))
+            .thenReturn(listOf(mockFile))
+
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
+            .thenReturn(Observable.just(uploadJson))
+
+        val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
+        result.assertNoErrors()
+    }
+
+    @Test
+    fun testCheckFileName_Blacklisted() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("blacklisted"))))
+
+        uploadClient.checkFileName("Photo.jpg").test().assertValue(FileNameCheck.BLACKLISTED)
+    }
+
+    @Test
+    fun testCheckFileName_Ok() {
+        whenever(uploadInterface.checkTitleBlacklist("File:Market in Lagos.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.checkFileName("Market in Lagos.jpg").test().assertValue(FileNameCheck.OK)
+    }
+
+    @Test
+    fun testCheckFileName_ChecksNameAsMediaWikiUploadsIt() {
+        // MediaWiki uploads "Market {Lagos}.jpg" as "Market -Lagos-.jpg"
+        whenever(uploadInterface.checkTitleBlacklist("File:Market -Lagos-.jpg"))
+            .thenReturn(Single.just(TitleBlacklistResponse(TitleBlacklistResult("ok"))))
+
+        uploadClient.checkFileName("Market {Lagos}.jpg").test().assertValue(FileNameCheck.OK)
+    }
+
+    @Test
+    fun testCheckFileName_InvalidTitle() {
+        val error = mock<MwLegacyServiceError> { on { code } doReturn "invalidtitle" }
+        whenever(uploadInterface.checkTitleBlacklist("File:A~~~b.jpg"))
+            .thenReturn(Single.error(MwIOException("MediaWiki API returned error", error)))
+
+        uploadClient.checkFileName("A~~~b.jpg").test().assertValue(FileNameCheck.INVALID)
+    }
+
+    @Test
+    fun testCheckFileName_OtherErrorsArePassedOn() {
+        val exception = IOException("Unsuccessful response")
+        whenever(uploadInterface.checkTitleBlacklist("File:Photo.jpg"))
+            .thenReturn(Single.error(exception))
+
+        uploadClient.checkFileName("Photo.jpg").test().assertError(exception)
+    }
+
+    private fun uploadClientWithRealGson() =
+        UploadClient(
+            uploadInterface,
+            csrfTokenClient,
+            pageContentsCreator,
+            fileUtilsWrapper,
+            GsonUtil.defaultGson,
+            timeProvider,
+            contributionDao,
+        )
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()
 
