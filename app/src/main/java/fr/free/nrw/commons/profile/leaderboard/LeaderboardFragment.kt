@@ -32,6 +32,7 @@ import javax.inject.Inject
 /**
  * This class extends the CommonsDaggerSupportFragment and creates leaderboard fragment
  */
+
 class LeaderboardFragment : CommonsDaggerSupportFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
@@ -119,17 +120,11 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
             scroll.setOnClickListener {
                 val lm = leaderboardList.layoutManager as? LinearLayoutManager
                 val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
-                val targetPos = userRank + 1
-                when {
-                    firstVisible > SCROLL_TO_TOP_THRESHOLD -> smartScrollTo(0)
-                    userRank == 0 -> Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
-                    (leaderboardList.adapter?.itemCount ?: 0) > targetPos -> smartScrollTo(targetPos)
-                    else ->
-                        viewModel?.let {
-                            it.refresh(duration, category, targetPos, 0)
-                            setLeaderboard(duration, category, targetPos, 0)
-                            scrollToRank = true
-                        }
+
+                if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
+                    smartScrollTo(0)
+                } else {
+                    scrollToUserRank()
                 }
             }
 
@@ -225,6 +220,27 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         }
     }
 
+    private fun scrollToUserRank() {
+        if (userRank == 0) {
+            Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
+        } else {
+            if (binding == null) {
+                return
+            }
+            val itemCount = binding?.leaderboardList?.adapter?.itemCount ?: 0
+            val targetPos = userRank + 1
+            if (itemCount > targetPos) {
+                smartScrollTo(targetPos)
+            } else {
+                viewModel?.let {
+                    it.refresh(duration, category, targetPos, 0)
+                    setLeaderboard(duration, category, targetPos, 0)
+                    scrollToRank = true
+                }
+            }
+        }
+    }
+
     /**
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
@@ -256,12 +272,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                             },
                             { t: Throwable? ->
                                 Timber.e(t, "Fetching leaderboard statistics failed")
-                                // Shows a generic error toast when error occurs while loading leaderboard
-                                showLongToast(
-                                    requireActivity(),
-                                    resources.getString(R.string.error_occurred),
-                                )
-                                binding?.let { it.progressBar.visibility = View.GONE }
+                                onError()
                             },
                         ),
                 )
@@ -331,6 +342,14 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
             return false
         }
         return true
+    }
+
+    /**
+     * Shows a generic error toast when error occurs while loading leaderboard
+     */
+    private fun onError() {
+        showLongToast(requireActivity(), resources.getString(R.string.error_occurred))
+        binding?.let { it.progressBar.visibility = View.GONE }
     }
 
     override fun onDestroy() {
