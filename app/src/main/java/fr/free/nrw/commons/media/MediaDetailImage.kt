@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package fr.free.nrw.commons.media
 
 import android.content.Context
@@ -6,9 +8,10 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.drawee.interfaces.DraweeController
-import com.facebook.imagepipeline.request.ImageRequest
+import coil3.dispose
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
@@ -42,7 +45,7 @@ internal fun MediaDetailFragment.launchZoomActivity(view: View) {
 }
 
 /**
- * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
+ * The imageSpacer is basically a transparent overlay for the ImageView
  * which holds the image to be displayed( moreover this image is out of
  * the scroll view )
  *
@@ -54,8 +57,8 @@ internal fun MediaDetailFragment.launchZoomActivity(view: View) {
  * @param scrollWidth the current width of the scrollView
  */
 internal fun MediaDetailFragment.updateAspectRatio(scrollWidth: Int) {
-    val width = mediaDetailPlayer.selected?.width() ?: imageInfoCache?.width ?: 0
-    val height = mediaDetailPlayer.selected?.height() ?: imageInfoCache?.height ?: 0
+    val width = mediaDetailPlayer.selected?.width() ?: cachedImageWidth
+    val height = mediaDetailPlayer.selected?.height() ?: cachedImageHeight
     if (width > 0 && height > 0) {
         var finalHeight: Int = (scrollWidth * height) / width
         val params: ViewGroup.LayoutParams = binding.mediaDetailMediaContainer.layoutParams
@@ -87,8 +90,7 @@ internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
         binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor)
     }
 
-    binding.mediaDetailImageView.hierarchy.setPlaceholderImage(R.drawable.image_placeholder)
-    binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
+    binding.mediaDetailImageView.dispose()
     binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
     val fullImageUrl =
@@ -99,16 +101,42 @@ internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
         } else {
             media?.imageUrl
         }
-    val controller: DraweeController =
-        Fresco
-            .newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(media?.thumbUrl))
-            .setRetainImageOnFailure(true)
-            .setImageRequest(ImageRequest.fromUri(fullImageUrl))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(binding.mediaDetailImageView.controller)
-            .build()
-    binding.mediaDetailImageView.controller = controller
+    val thumbnailUrl = media?.thumbUrl
+    if (!thumbnailUrl.isNullOrBlank() && thumbnailUrl != fullImageUrl) {
+        binding.mediaDetailImageView.load(thumbnailUrl) {
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
+            listener(
+                onSuccess = { _, _ -> loadFullResolutionImage(fullImageUrl) },
+                onError = { _, _ -> loadFullResolutionImage(fullImageUrl) },
+            )
+        }
+    } else {
+        loadFullResolutionImage(fullImageUrl)
+    }
+}
+
+private fun MediaDetailFragment.loadFullResolutionImage(imageUrl: String?) {
+    val hasExistingImage = binding.mediaDetailImageView.drawable != null
+    binding.mediaDetailImageView.load(imageUrl) {
+        if (!hasExistingImage) {
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
+        }
+        listener(
+            onSuccess = { _, _ ->
+                val drawable = binding.mediaDetailImageView.drawable
+                cachedImageWidth = drawable?.intrinsicWidth ?: 0
+                cachedImageHeight = drawable?.intrinsicHeight ?: 0
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+                updateAspectRatio(binding.mediaDetailScrollView.width)
+            },
+            onError = { _, _ ->
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
+                revealMediaDetailWithoutImage()
+            },
+        )
+    }
 }
 
 /**

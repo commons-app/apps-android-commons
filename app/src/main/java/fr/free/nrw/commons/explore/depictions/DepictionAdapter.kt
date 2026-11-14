@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.explore.depictions
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ItemDepictionsBinding
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -39,9 +41,12 @@ class DepictedItemViewHolder(
         depictsLabel.text = item.name
         description.text = item.description
         if (item.thumbnailUrl?.isNotBlank() == true) {
-            depictsImage.setImageURI(Uri.parse(item.thumbnailUrl))
+            depictsImage.load(item.thumbnailUrl) {
+                placeholder(R.drawable.ic_wikidata_logo_24dp)
+                error(R.drawable.ic_wikidata_logo_24dp)
+            }
         } else {
-            depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+            depictsImage.setImageResource(R.drawable.ic_wikidata_logo_24dp)
         }
     }
 }

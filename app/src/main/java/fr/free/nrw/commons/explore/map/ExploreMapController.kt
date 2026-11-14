@@ -2,13 +2,12 @@ package fr.free.nrw.commons.explore.map
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
+import coil3.SingletonImageLoader
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.target
+import coil3.toBitmap
 import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.Media
@@ -141,6 +140,9 @@ class ExploreMapController
         }
 
         companion object {
+            private const val MAP_MARKER_IMAGE_SIZE = 96
+            private const val MAP_MARKER_BORDER_WIDTH = 6
+
             /**
              * Loads attractions from location for map view, we need to return places in Place data type
              *
@@ -186,52 +188,60 @@ class ExploreMapController
                             )
                         baseMarker.place = explorePlace
 
-                        Glide
-                            .with(context)
-                            .asBitmap()
-                            .load(explorePlace.thumb)
-                            .placeholder(R.drawable.image_placeholder_96)
-                            .apply(RequestOptions().override(96, 96).centerCrop())
-                            .into(
-                                object : CustomTarget<Bitmap>() {
-                                    // We add icons to markers when bitmaps are ready
-                                    override fun onResourceReady(
-                                        resource: Bitmap,
-                                        transition: Transition<in Bitmap>?,
-                                    ) {
-                                        baseMarker.icon = addRedBorder(resource, 6, context)
-                                        baseMarkerList.add(baseMarker)
-                                        if (baseMarkerList.size == placeList.size) {
-                                            // if true, we added all markers to list and can trigger the
-                                            // thumbs ready callback
-                                            callback.onNearbyBaseMarkerThumbsReady(
-                                                baseMarkerList,
-                                                explorePlacesInfo,
-                                            )
-                                        }
-                                    }
-
-                                    override fun onLoadCleared(placeholder: Drawable?) = Unit
-
-                                    // We add thumbnail icon for images that couldn't be loaded
-                                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                                        super.onLoadFailed(errorDrawable)
-                                        baseMarker.fromResource(context, R.drawable.image_placeholder_96)
-                                        baseMarkerList.add(baseMarker)
-                                        if (baseMarkerList.size == placeList.size) {
-                                            // if true, we added all markers to list and can trigger the
-                                            // thumbs ready callback
-                                            callback.onNearbyBaseMarkerThumbsReady(
-                                                baseMarkerList,
-                                                explorePlacesInfo,
-                                            )
-                                        }
-                                    }
-                                },
+                        val request =
+                            buildMarkerImageRequest(
+                                context,
+                                explorePlace,
+                                baseMarker,
+                                baseMarkerList,
+                                placeList.size,
+                                callback,
+                                explorePlacesInfo,
                             )
+                        SingletonImageLoader.get(context).enqueue(request)
                     }
                 }
                 return baseMarkerList
             }
+
+            @Suppress("LongParameterList")
+            private fun buildMarkerImageRequest(
+                context: Context,
+                explorePlace: Place,
+                baseMarker: BaseMarker,
+                baseMarkerList: MutableList<BaseMarker>,
+                placeCount: Int,
+                callback: NearbyBaseMarkerThumbCallback,
+                explorePlacesInfo: ExplorePlacesInfo?,
+            ): ImageRequest =
+                ImageRequest
+                    .Builder(context)
+                    .data(explorePlace.thumb)
+                    .size(MAP_MARKER_IMAGE_SIZE, MAP_MARKER_IMAGE_SIZE)
+                    .allowHardware(false)
+                    .target(
+                        onSuccess = { image ->
+                            val bitmap = image.toBitmap()
+                            baseMarker.icon =
+                                addRedBorder(bitmap, MAP_MARKER_BORDER_WIDTH, context)
+                            baseMarkerList.add(baseMarker)
+                            if (baseMarkerList.size == placeCount) {
+                                callback.onNearbyBaseMarkerThumbsReady(
+                                    baseMarkerList,
+                                    explorePlacesInfo,
+                                )
+                            }
+                        },
+                        onError = {
+                            baseMarker.fromResource(context, R.drawable.image_placeholder_96)
+                            baseMarkerList.add(baseMarker)
+                            if (baseMarkerList.size == placeCount) {
+                                callback.onNearbyBaseMarkerThumbsReady(
+                                    baseMarkerList,
+                                    explorePlacesInfo,
+                                )
+                            }
+                        },
+                    ).build()
         }
     }

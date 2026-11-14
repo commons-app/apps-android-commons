@@ -6,8 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doNothing
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -72,10 +70,6 @@ class ReviewActivityTest {
         context = ApplicationProvider.getApplicationContext()
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
-
-        SoLoader.setInTestMode()
-
-        Fresco.initialize(context)
 
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
         binding = ActivityReviewBinding.inflate(activity.layoutInflater)

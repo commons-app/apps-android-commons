@@ -1,14 +1,16 @@
 package fr.free.nrw.commons.bookmarks.items
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.view.SimpleDraweeView
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -25,7 +27,7 @@ class BookmarkItemsAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
         var depictsLabel: TextView = itemView.findViewById(R.id.depicts_label)
         var description: TextView = itemView.findViewById(R.id.description)
-        var depictsImage: SimpleDraweeView = itemView.findViewById(R.id.depicts_image)
+        var depictsImage: ImageView = itemView.findViewById(R.id.depicts_image)
         var layout: ConstraintLayout = itemView.findViewById(R.id.layout_item)
     }
 
@@ -49,9 +51,12 @@ class BookmarkItemsAdapter(
         holder.description.text = depictedItem.description
 
         if (depictedItem.thumbnailUrl?.isNotBlank() == true) {
-            holder.depictsImage.setImageURI(Uri.parse(depictedItem.thumbnailUrl))
+            holder.depictsImage.load(depictedItem.thumbnailUrl) {
+                placeholder(R.drawable.ic_wikidata_logo_24dp)
+                error(R.drawable.ic_wikidata_logo_24dp)
+            }
         } else {
-            holder.depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+            holder.depictsImage.setImageResource(R.drawable.ic_wikidata_logo_24dp)
         }
         holder.layout.setOnClickListener {
             WikidataItemDetailsActivity.startYourself(context, depictedItem)

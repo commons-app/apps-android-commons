@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.media
 
 import android.content.res.Configuration
-import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -48,9 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.viewModels
-import com.facebook.drawee.controller.BaseControllerListener
-import com.facebook.drawee.controller.ControllerListener
-import com.facebook.imagepipeline.image.ImageInfo
+import coil3.dispose
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -75,7 +72,6 @@ import fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import fr.free.nrw.commons.utils.setUnderlinedText
 import okhttp3.OkHttpClient
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -179,7 +175,8 @@ class MediaDetailFragment :
      * However unlike categories depictions is multi-lingual
      * Ex: key: en value: monument
      */
-    internal var imageInfoCache: ImageInfo? = null
+    internal var cachedImageWidth: Int = 0
+    internal var cachedImageHeight: Int = 0
     private var oldWidthOfImageView: Int = 0
     private var newWidthOfImageView: Int = 0
     private var heightVerifyingBoolean: Boolean = true // helps in maintaining aspect ratio
@@ -466,38 +463,6 @@ class MediaDetailFragment :
         }
     }
 
-    internal val aspectRatioListener: ControllerListener<ImageInfo?> =
-        object : BaseControllerListener<ImageInfo?>() {
-            override fun onIntermediateImageSet(
-                id: String,
-                imageInfo: ImageInfo?,
-            ) {
-                imageInfoCache = imageInfo
-                if (_binding == null) return
-                updateAspectRatio(binding.mediaDetailScrollView.width)
-            }
-
-            override fun onFinalImageSet(
-                id: String,
-                imageInfo: ImageInfo?,
-                animatable: Animatable?,
-            ) {
-                imageInfoCache = imageInfo
-                if (_binding == null) return
-                updateAspectRatio(binding.mediaDetailScrollView.width)
-                binding.mediaDetailImageProgressBar.visibility = View.GONE
-            }
-
-            override fun onFailure(
-                id: String,
-                throwable: Throwable,
-            ) {
-                _binding?.mediaDetailImageProgressBar?.visibility = View.GONE
-                Timber.e(throwable, "Failed to load media detail image")
-                revealMediaDetailWithoutImage()
-            }
-        }
-
     /**
      * Pauses media playback.
      *
@@ -525,7 +490,7 @@ class MediaDetailFragment :
         cleanupMediaPlayer()
         _binding?.root?.clearFocus()
         _binding?.root?.setOnKeyListener(null)
-        binding.mediaDetailImageView.controller = null
+        _binding?.mediaDetailImageView?.dispose()
         _binding = null
 
         super.onDestroyView()

@@ -11,6 +11,9 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.getUserName
@@ -203,7 +206,10 @@ class ReviewActivity : BaseActivity() {
             return
         }
 
-        binding.reviewImageView.setImageURI(media.thumbUrl)
+        binding.reviewImageView.load(media.thumbUrl) {
+            placeholder(R.drawable.image_placeholder)
+            error(R.drawable.image_placeholder)
+        }
 
         reviewController.onImageRefreshed(media) // filename is updated
         compositeDisposable.add(

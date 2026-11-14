@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.upload.depicts
 
-import android.net.Uri
 import android.text.TextUtils
 import android.view.View
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.LayoutUploadDepictsItemBinding
@@ -35,11 +37,14 @@ fun uploadDepictsDelegate(
         }
         binding.depictsLabel.text = item.name
         binding.description.text = item.description
-        val thumbnailUrl = item.thumbnailUrl
-        if (TextUtils.isEmpty(thumbnailUrl)) {
-            binding.depictedImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
+        val imageUrl = item.thumbnailUrl
+        if (TextUtils.isEmpty(imageUrl)) {
+            binding.depictedImage.setImageResource(R.drawable.ic_wikidata_logo_24dp)
         } else {
-            binding.depictedImage.setImageURI(Uri.parse(thumbnailUrl))
+            binding.depictedImage.load(imageUrl) {
+                placeholder(R.drawable.ic_wikidata_logo_24dp)
+                error(R.drawable.ic_wikidata_logo_24dp)
+            }
         }
     }
 }

@@ -13,12 +13,6 @@ plugins {
 
 apply(from = "$rootDir/jacoco.gradle")
 
-kapt {
-    arguments {
-        arg("room.schemaLocation", "$projectDir/schemas")
-    }
-}
-
 val ktlintLegacyFiles: Set<String> =
     file("ktlint-legacy-files.txt")
         .readLines()
@@ -59,8 +53,8 @@ android {
         applicationId = "fr.free.nrw.commons"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1070
-        versionName = "6.9.0"
+        versionCode = 1067
+        versionName = "6.8.0"
 
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -74,11 +68,6 @@ android {
     }
 
     sourceSets {
-        getByName("debug") {
-            // Room's MigrationTestHelper reads the exported schemas as assets.
-            assets.srcDirs("schemas")
-        }
-
         getByName("test") {
             // Use kotlin only in tests (for now)
             java.srcDirs("src/test/kotlin")
@@ -363,6 +352,8 @@ dependencies {
     // Utils
     implementation(libs.gson)
     implementation(libs.okhttp)
+    implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.adapter.rxjava)
@@ -370,8 +361,6 @@ dependencies {
     implementation(libs.rxjava)
     implementation(libs.rxbinding)
     implementation(libs.rxbinding.appcompat)
-    implementation(libs.facebook.fresco)
-    implementation(libs.facebook.fresco.middleware)
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.datasource.okhttp)
     implementation(libs.media3.ui)
@@ -447,9 +436,9 @@ dependencies {
     testImplementation(libs.mockwebserver)
     testImplementation(libs.livedata.testing.ktx)
     testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.androidx.room.testing)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.soloader)
     testImplementation(libs.kotlinx.coroutines.test)
     debugImplementation(libs.androidx.fragment.testing)
     testImplementation(libs.commons.io)
@@ -484,7 +473,6 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava)
     kapt(libs.androidx.room.compiler)
-    testImplementation(libs.androidx.room.testing)
 
     // Preferences
     implementation(libs.androidx.preference)
@@ -498,9 +486,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.rx2)
     testImplementation(libs.androidx.work.testing)
 
-    // Glide
-    implementation(libs.glide)
-    annotationProcessor(libs.glide.compiler)
     kaptTest(libs.androidx.databinding.compiler)
     kaptAndroidTest(libs.androidx.databinding.compiler)
 

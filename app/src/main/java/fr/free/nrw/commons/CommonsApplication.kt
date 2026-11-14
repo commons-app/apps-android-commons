@@ -12,8 +12,12 @@ import android.os.Process
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import androidx.work.WorkManager
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipelineConfig
+import coil3.ImageLoader
+import coil3.SingletonImageLoader
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.crossfade
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsTable
@@ -29,7 +33,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
-import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
@@ -43,6 +46,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.functions.Functions
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+import okhttp3.OkHttpClient
+import okio.Path.Companion.toPath
 import org.acra.ACRA.init
 import org.acra.ReportField
 import org.acra.annotation.AcraCore
@@ -54,6 +59,9 @@ import timber.log.Timber.DebugTree
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
+
+private const val MEMORY_CACHE_SIZE_PERCENT = 0.25
+private const val DISK_CACHE_SIZE_PERCENT = 0.02
 
 @AcraCore(
     buildConfigClass = BuildConfig::class,
@@ -90,7 +98,7 @@ class CommonsApplication : MultiDexApplication() {
     lateinit var cookieJar: CommonsCookieJar
 
     @Inject
-    lateinit var customOkHttpNetworkFetcher: CustomOkHttpNetworkFetcher
+    lateinit var okHttpClient: OkHttpClient
 
     var languageLookUpTable: AppLanguageLookUpTable? = null
         private set
@@ -123,19 +131,27 @@ class CommonsApplication : MultiDexApplication() {
             defaultPrefs.putStringSet(Prefs.MANAGED_EXIF_TAGS, defaultExifTagsSet)
         }
 
-        //        Set DownsampleEnabled to True to downsample the image in case it's heavy
-        val config =
-            ImagePipelineConfig
-                .newBuilder(this)
-                .setNetworkFetcher(customOkHttpNetworkFetcher)
-                .setDownsampleEnabled(true)
-                .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
-        }
+        // Initialize Coil with the shared app OkHttpClient so image requests keep the
+        // existing headers, logging, timeout, and HTTP cache configuration.
+        val imageLoader =
+            ImageLoader
+                .Builder(this)
+                .crossfade(true)
+                .components {
+                    add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient }))
+                }.memoryCache {
+                    MemoryCache
+                        .Builder()
+                        .maxSizePercent(this, MEMORY_CACHE_SIZE_PERCENT)
+                        .build()
+                }.diskCache {
+                    DiskCache
+                        .Builder()
+                        .directory(cacheDir.resolve("image_cache").absolutePath.toPath())
+                        .maxSizePercent(DISK_CACHE_SIZE_PERCENT)
+                        .build()
+                }.build()
+        SingletonImageLoader.setSafe { imageLoader }
 
         createNotificationChannel(this)
 
@@ -258,11 +274,12 @@ class CommonsApplication : MultiDexApplication() {
     }
 
     /**
-     * Clear all images cache held by Fresco
+     * Clear all images cache held by Coil
      */
     private fun clearImageCache() {
-        val imagePipeline = Fresco.getImagePipeline()
-        imagePipeline.clearCaches()
+        val imageLoader = SingletonImageLoader.get(this)
+        imageLoader.memoryCache?.clear()
+        imageLoader.diskCache?.clear()
     }
 
     /**

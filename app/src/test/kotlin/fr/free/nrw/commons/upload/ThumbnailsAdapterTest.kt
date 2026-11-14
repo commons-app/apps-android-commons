@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.drawee.backends.pipeline.Fresco
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.filepicker.UploadableFile
 import org.junit.Assert.assertEquals
@@ -31,8 +30,6 @@ class ThumbnailsAdapterTest {
     @Before
     fun setUp() {
         val activity = Robolectric.buildActivity(Activity::class.java).setup().get()
-        Fresco.initialize(activity)
-
         adapter = ThumbnailsAdapter { 0 }
         adapter.uploadableFiles = uploadableFiles
 

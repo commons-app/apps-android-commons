@@ -30,11 +30,11 @@
       android:layout_height="@dimen/dimen_250"
       android:layout_gravity="center_horizontal">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
           android:id="@+id/mediaDetailImageView"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          app:actualImageScaleType="none" />
+          android:scaleType="fitCenter" />
 
         <ImageView
           android:id="@+id/mediaDetailPlayButton"
