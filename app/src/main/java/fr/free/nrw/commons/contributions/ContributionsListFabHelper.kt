@@ -17,7 +17,8 @@ import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 class ContributionsListFabHelper(
     private val fragment: Fragment,
     private val bindingProvider: () -> FragmentContributionsListBinding?,
-    private val controllerProvider: () -> ContributionController?,
+    private val cameraCoordinatorProvider: () -> ContributionCameraCoordinator?,
+    private val imagePickerProvider: () -> ContributionImagePicker?,
     private val launchers: Launchers,
 ) {
     /**
@@ -48,7 +49,7 @@ class ContributionsListFabHelper(
         val binding = bindingProvider() ?: return
         binding.fabPlus.setOnClickListener { animateFAB(isFabOpen) }
         binding.fabCamera.setOnClickListener {
-            controllerProvider()?.initiateCameraPick(
+            cameraCoordinatorProvider()?.initiateCameraPick(
                 fragment.requireActivity(),
                 launchers.inAppCameraLocationPermissionLauncher,
                 launchers.cameraPickLauncherForResult,
@@ -63,7 +64,7 @@ class ContributionsListFabHelper(
             true
         }
         binding.fabGallery.setOnClickListener {
-            controllerProvider()?.initiateGalleryPick(
+            imagePickerProvider()?.initiateGalleryPick(
                 fragment.requireActivity(),
                 launchers.galleryPickLauncherForResult,
                 true,
@@ -85,7 +86,7 @@ class ContributionsListFabHelper(
      * Launch Custom Selector.
      */
     fun launchCustomSelector() {
-        controllerProvider()?.initiateCustomGalleryPickWithPermission(
+        imagePickerProvider()?.initiateCustomGalleryPickWithPermission(
             fragment.requireActivity(),
             launchers.customSelectorLauncherForResult,
         )
