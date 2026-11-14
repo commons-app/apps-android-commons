@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because setting an avatar can fail with a variety of
+ * runtime exceptions while the progress dialog still needs to be dismissed.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.utils
 
 import android.app.NotificationChannel
@@ -25,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.io.IOException
 
 /**
  * Created by blueSir9 on 3/10/17.
@@ -139,7 +146,7 @@ object ImageUtils {
             } else {
                 IMAGE_OK
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Timber.d(e, "Error while checking image darkness.")
             IMAGE_OK
         } finally {

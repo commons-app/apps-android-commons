@@ -591,18 +591,13 @@
     <ID>TooGenericExceptionCaught:CommonsApplication.kt$CommonsApplication$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CommonsApplicationModule.kt$&lt;no name provided&gt;$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ContributionsFragment.kt$ContributionsFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CryptoUtils.kt$CryptoUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CsrfTokenClient.kt$CsrfTokenClient$t: Throwable</ID>
     <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:EXIFReader.kt$EXIFReader$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:ExploreMapController.kt$ExploreMapController$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePickerIntents.kt$FilePickerIntents$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:ImageFragment.kt$ImageFragment$ex: Exception</ID>
-    <ID>TooGenericExceptionCaught:ImageUtils.kt$ImageUtils$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LeaderboardFragment.kt$LeaderboardFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LocationPickerActivity.kt$LocationPickerActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: Exception</ID>
@@ -610,12 +605,8 @@
     <ID>TooGenericExceptionCaught:NearbyParentFragment.kt$NearbyParentFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:NotificationClient.kt$NotificationClient$throwable: Throwable</ID>
     <ID>TooGenericExceptionCaught:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:OnSwipeTouchListener.kt$OnSwipeTouchListener.GestureListener$exception: Exception</ID>
     <ID>TooGenericExceptionCaught:PageEditClient.kt$PageEditClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:PagingDataSource.kt$PagingDataSource$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:QuizResultActivity.kt$QuizResultActivity$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ReasonBuilder.kt$ReasonBuilder$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:SetWallpaperWorker.kt$SetWallpaperWorker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ThanksClient.kt$ThanksClient$throwable: Throwable</ID>
     <ID>TooGenericExceptionCaught:UploadClient.kt$UploadClient$throwable: Throwable</ID>
     <ID>TooGenericExceptionCaught:UploadController.kt$UploadController$e: NullPointerException</ID>
@@ -625,7 +616,6 @@
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:ZoomableDraweeView.kt$ZoomableDraweeView$e: Exception</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
