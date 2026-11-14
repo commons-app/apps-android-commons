@@ -34,7 +34,6 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesTable
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.worker.UploadWorker
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
@@ -222,8 +221,6 @@ class CommonsApplication : MultiDexApplication() {
     ) {
         // Cancel pending uploads when the user logs out
         WorkManager.getInstance(context).cancelUniqueWork(UploadWorker::class.java.simpleName)
-        // Reset the flag in case the worker never started and its finally block wasn't called.
-        WorkRequestHelper.markUploadWorkerAsStopped()
 
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)

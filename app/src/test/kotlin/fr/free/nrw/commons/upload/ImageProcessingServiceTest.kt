@@ -271,4 +271,39 @@ class ImageProcessingServiceTest {
         val result = imageProcessingService!!.checkIfFileAlreadyExists(uri, uri).blockingGet()
         assertEquals(ImageUtils.IMAGE_OK, result)
     }
+
+    @Test
+    fun checkIfFileAlreadyExistsReturnsOkWhenOriginalThrowsSecurityException() {
+        val originalUri = mock(Uri::class.java)
+        val modifiedUri = mock(Uri::class.java)
+        `when`(appContext.contentResolver.openInputStream(originalUri))
+            .thenThrow(SecurityException("Permission expired"))
+
+        val result = imageProcessingService!!.checkIfFileAlreadyExists(originalUri, modifiedUri).blockingGet()
+
+        assertEquals(ImageUtils.IMAGE_OK, result)
+    }
+
+    @Test
+    fun checkIfFileAlreadyExistsChecksModifiedFileWhenOriginalThrowsSecurityException() {
+        val originalUri = mock(Uri::class.java)
+        val modifiedUri = mock(Uri::class.java)
+        val tempFile = java.io.File.createTempFile("modified", ".jpg")
+        tempFile.deleteOnExit()
+        `when`(appContext.contentResolver.openInputStream(originalUri))
+            .thenThrow(SecurityException("Permission expired"))
+        `when`(modifiedUri.path).thenReturn(tempFile.absolutePath)
+        `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+
+        val result = imageProcessingService!!.checkIfFileAlreadyExists(originalUri, modifiedUri).blockingGet()
+
+        assertEquals(ImageUtils.IMAGE_DUPLICATE, result)
+    }
+
+    @Test
+    fun checkIfFileAlreadyExistsReturnsOkWhenUrisAreNull() {
+        val result = imageProcessingService!!.checkIfFileAlreadyExists(null, null).blockingGet()
+        assertEquals(ImageUtils.IMAGE_OK, result)
+    }
 }
