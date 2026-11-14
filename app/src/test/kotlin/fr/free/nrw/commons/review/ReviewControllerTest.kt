@@ -167,7 +167,7 @@ class ReviewControllerTest {
             context.getString(
                 R.string.send_thank_success_message,
                 media.displayTitle,
-                "test_user"
+                "test_user",
             ),
         )
     }
