@@ -1,0 +1,229 @@
+name: Stale Assignee Reminder and Unassign
+
+on:
+  schedule:
+    # runs daily at 08:00 UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without posting comments or unassigning (true/false)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  issues: write
+
+concurrency:
+  group: inactivity-manager
+  cancel-in-progress: false
+
+jobs:
+  check-stale-assignees:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check inactive assigned issues
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const dryRun = context.payload.inputs?.dry_run === true || context.payload.inputs?.dry_run === 'true';
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const DAY_MS = 24 * 60 * 60 * 1000;
+            const STAGE_1_DAYS = 30; // Gentle check-in after 30 days of inactivity
+            const STAGE_2_DAYS = 14; // Warning with #KEEP keyword 14 days after Stage 1 (Day 44)
+            const STAGE_3_DAYS = 14; // Unassign 14 days after Stage 2 (Day 58)
+            const now = Date.now();
+
+            //strip fenced code blocks and quoted lines before checking for #KEEP
+            function stripQuotesAndCode(body) {
+              if (!body) return '';
+              return body
+                .replace(/```[\s\S]*?```/g, '')
+                .replace(/`[^`\n]+`/g, '')
+                .split('\n')
+                .filter(line => !line.trim().startsWith('>'))
+                .join('\n');
+            }
+
+            // strict case-sensitive #KEEP token match per maintainer consensus
+            function hasKeepKeyword(body) {
+              const cleaned = stripQuotesAndCode(body);
+              return /(^|[\s.,!?;:()\[\]"'])#KEEP(?=$|[\s.,!?;:()\[\]"'])/.test(cleaned);
+            }
+
+            function formatAssignees(assignees) {
+              return assignees.map(a => `@${a.login}`).join(', ');
+            }
+
+            // fetch allthe open issues
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const assignedIssues = openIssues.filter(
+              issue => !issue.pull_request && Array.isArray(issue.assignees) && issue.assignees.length > 0
+            );
+
+            core.info(`Found ${assignedIssues.length} open assigned issue(s). Dry run: ${dryRun}`);
+
+            for (const issue of assignedIssues) {
+              const issueNumber = issue.number;
+              const assigneeLogins = new Set(issue.assignees.map(a => a.login.toLowerCase()));
+              const mentions = formatAssignees(issue.assignees);
+
+              // 1. here, find the most recent 'assigned' event for any current assignee
+              const timelineEvents = await github.paginate(github.rest.issues.listEventsForTimeline, {
+                owner,
+                repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              let latestAssignedAt = new Date(issue.created_at).getTime();
+              for (const event of timelineEvents) {
+                if (
+                  event.event === 'assigned' &&
+                  event.assignee &&
+                  assigneeLogins.has(event.assignee.login.toLowerCase()) &&
+                  event.created_at
+                ) {
+                  const ts = new Date(event.created_at).getTime();
+                  if (ts > latestAssignedAt) {
+                    latestAssignedAt = ts;
+                  }
+                }
+              }
+
+              // and also check if an assignee referenced this issue in a PR / cross-reference after assignment
+              let latestAssigneeActivityAt = latestAssignedAt;
+              for (const event of timelineEvents) {
+                if (
+                  event.event === 'cross-referenced' &&
+                  event.actor &&
+                  assigneeLogins.has(event.actor.login.toLowerCase()) &&
+                  event.created_at
+                ) {
+                  const ts = new Date(event.created_at).getTime();
+                  if (ts > latestAssigneeActivityAt) {
+                    latestAssigneeActivityAt = ts;
+                  }
+                }
+              }
+
+              // 2. inspect teh comments to find latest assignee comment (including #KEEP) and existing bot markers
+              const comments = await github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+
+              for (const comment of comments) {
+                if (!comment.user || comment.user.type === 'Bot') continue;
+                const author = comment.user.login.toLowerCase();
+                const commentTs = new Date(comment.created_at).getTime();
+
+                // any comment by a current assignee after assignment (including #KEEP) resets the stale timer
+                if (assigneeLogins.has(author) && commentTs > latestAssigneeActivityAt) {
+                  latestAssigneeActivityAt = commentTs;
+                  if (hasKeepKeyword(comment.body)) {
+                    core.info(`#${issueNumber}: Assignee @${comment.user.login} used #KEEP at ${comment.created_at}; resetting 30-day timer.`);
+                  }
+                }
+              }
+
+              // 3. find bot stage comments posted AFTER the latest assignee activity in this cycle
+              let stage1CommentTs = null;
+              let stage2CommentTs = null;
+
+              for (const comment of comments) {
+                if (!comment.user || comment.user.type !== 'Bot' || !comment.body) continue;
+                const commentTs = new Date(comment.created_at).getTime();
+                if (commentTs <= latestAssigneeActivityAt) continue;
+
+                if (comment.body.includes('<!-- inactivity-manager: stage-1 -->')) {
+                  stage1CommentTs = commentTs;
+                }
+                if (comment.body.includes('<!-- inactivity-manager: stage-2 -->')) {
+                  stage2CommentTs = commentTs;
+                }
+              }
+
+              const daysSinceActivity = (now - latestAssigneeActivityAt) / DAY_MS;
+
+              // Stage 3: 14+ days after Stage 2 warning -> Unassign and leave issue open
+              if (stage2CommentTs !== null) {
+                const daysSinceStage2 = (now - stage2CommentTs) / DAY_MS;
+                if (daysSinceStage2 >= STAGE_3_DAYS) {
+                  const body =
+                    `Hi ${mentions}, I unassign for now, so that others can give it a try. ` +
+                    `If you get some time, feel free to ask to be assigned to this or to another issue, you are always welcome! :-)` +
+                    `\n<!-- inactivity-manager: stage-3 -->`;
+
+                  core.info(`#${issueNumber}: Triggering Stage 3 (unassign) after ${daysSinceStage2.toFixed(1)}d since Stage 2.`);
+                  if (!dryRun) {
+                    await github.rest.issues.removeAssignees({
+                      owner,
+                      repo,
+                      issue_number: issueNumber,
+                      assignees: issue.assignees.map(a => a.login)
+                    });
+                    await github.rest.issues.createComment({
+                      owner,
+                      repo,
+                      issue_number: issueNumber,
+                      body
+                    });
+                  }
+                }
+                continue;
+              }
+
+              // Stage 2: 14+ days after Stage 1 check-in -> Warning asking for #KEEP
+              if (stage1CommentTs !== null) {
+                const daysSinceStage1 = (now - stage1CommentTs) / DAY_MS;
+                if (daysSinceStage1 >= STAGE_2_DAYS) {
+                  const body =
+                    `Hi ${mentions}! Gentle ping, did you have time to look at this issue? ` +
+                    `If you are too busy, we might unassign it in 2 weeks so that someone else gets a chance to give it a try, thank you for your understanding. ` +
+                    `If you want to keep this issue, please comment here with the keyword \`#KEEP\`, thanks!` +
+                    `\n<!-- inactivity-manager: stage-2 -->`;
+
+                  core.info(`#${issueNumber}: Triggering Stage 2 (warning) after ${daysSinceStage1.toFixed(1)}d since Stage 1.`);
+                  if (!dryRun) {
+                    await github.rest.issues.createComment({
+                      owner,
+                      repo,
+                      issue_number: issueNumber,
+                      body
+                    });
+                  }
+                }
+                continue;
+              }
+
+              // stage 1: 30+ days of inactivity -> gentle progress check-in
+              if (daysSinceActivity >= STAGE_1_DAYS) {
+                const body =
+                  `Hi ${mentions}! Any progress to share? Even if you don't have a solution yet, ` +
+                  `would you mind sharing what you found, what you checked/tried, maybe what did not work? ` +
+                  `I assume you still intend to work on this, but if not please let us know. :-)` +
+                  `\n<!-- inactivity-manager: stage-1 -->`;
+
+                core.info(`#${issueNumber}: Triggering Stage 1 (check-in) after ${daysSinceActivity.toFixed(1)}d of inactivity.`);
+                if (!dryRun) {
+                  await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number: issueNumber,
+                    body
+                  });
+                }
+              }
+            }

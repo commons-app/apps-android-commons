@@ -475,6 +475,7 @@ class MediaDetailFragment :
                 imageInfoCache = imageInfo
                 if (_binding == null) return
                 updateAspectRatio(binding.mediaDetailScrollView.width)
+                binding.mediaDetailImageProgressBar.visibility = View.GONE
             }
 
             override fun onFinalImageSet(

@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because the blocking network call can surface a variety of
+ * IO and parsing failures, and an empty result is preferred over crashing the map.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.explore.map
 
 import android.content.Context

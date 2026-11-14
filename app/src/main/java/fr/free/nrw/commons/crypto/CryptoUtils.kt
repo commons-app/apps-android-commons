@@ -1,3 +1,10 @@
+/**
+ * Suppressed TooGenericExceptionCaught because Android Keystore operations can fail with many
+ * different exception types, and encryption/decryption failures are handled by falling back to
+ * null or plaintext.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.crypto
 
 import android.security.keystore.KeyGenParameterSpec
