@@ -130,11 +130,14 @@ class CommonsApplication : MultiDexApplication() {
                 .setNetworkFetcher(customOkHttpNetworkFetcher)
                 .setDownsampleEnabled(true)
                 .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
+        if ("robolectric" != android.os.Build.FINGERPRINT) {
+            try {
+                Fresco.initialize(this, config)
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        } else {
+            Timber.d("Skipping Fresco initialization in Robolectric test builds.")
         }
 
         createNotificationChannel(this)
@@ -247,8 +250,8 @@ class CommonsApplication : MultiDexApplication() {
                 Completable.fromAction {
                     Timber.d("All accounts have been removed")
                     clearImageCache()
-                    // TODO: fix preference manager
-                    defaultPrefs.clearAll()
+                    defaultPrefs.remove("isUserLoggedIn")
+                    defaultPrefs.remove(Prefs.VANISHED_ACCOUNT)
                     defaultPrefs.putBoolean("firstrun", false)
                     updateAllDatabases()
                 },
