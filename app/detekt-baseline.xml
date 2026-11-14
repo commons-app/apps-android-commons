@@ -627,11 +627,8 @@
     <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
     <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
-    <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$UserActionListener : BasePresenter</ID>
-    <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$View</ID>
     <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
     <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
-    <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
@@ -639,7 +636,6 @@
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
     <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
-    <ID>TooManyFunctions:UploadMediaDetailsContract.kt$UploadMediaDetailsContract$UserActionListener : BasePresenter</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
