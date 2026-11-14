@@ -33,7 +33,7 @@ object MapUtils {
                 locationManager.registerLocationManager()
                 Timber.d("Location service manager added and registered")
             }
-        } catch (e: Exception) {
+        } catch (e: SecurityException) {
             Timber.e(e)
             // Broadcasts are tricky, should be caught on onR
         }
