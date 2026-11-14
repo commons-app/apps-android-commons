@@ -1,3 +1,10 @@
+/**
+ * Suppressed TooGenericExceptionCaught because WallpaperManager.setBitmap can fail with
+ * IOException or with runtime exceptions such as SecurityException. These failures must be
+ * reported through a notification instead of escaping the Fresco callback.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.contributions
 
 import android.app.NotificationChannel
@@ -19,7 +26,6 @@ import com.facebook.imagepipeline.image.CloseableImage
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import fr.free.nrw.commons.R
 import timber.log.Timber
-import java.io.IOException
 
 class SetWallpaperWorker(
     context: Context,
@@ -71,7 +77,7 @@ class SetWallpaperWorker(
         try {
             wallpaperManager.setBitmap(bitmap)
             showNotification(context, "Wallpaper Set", "Wallpaper has been updated successfully.")
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Timber.e(e, "Error setting wallpaper")
             showNotification(context, "Setting Wallpaper Failed", " " + e.localizedMessage)
         }

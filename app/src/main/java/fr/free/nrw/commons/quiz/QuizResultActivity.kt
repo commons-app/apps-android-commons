@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.quiz
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -16,6 +16,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
@@ -172,7 +173,6 @@ class QuizResultActivity : AppCompatActivity() {
      * Share the screenshot through social media
      * @param bitmap
      */
-    @SuppressLint("SetWorldReadable")
     fun shareScreen(bitmap: Bitmap) {
         try {
             val file = File(this.externalCacheDir, "screen.png")
@@ -180,11 +180,18 @@ class QuizResultActivity : AppCompatActivity() {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
                 fOut.flush()
             }
-            file.setReadable(true, false)
+
+            val fileUri =
+                FileProvider.getUriForFile(
+                    applicationContext,
+                    "$packageName.provider",
+                    file,
+                )
             val intent =
                 Intent(Intent.ACTION_SEND).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    clipData = ClipData.newRawUri("", fileUri)
+                    putExtra(Intent.EXTRA_STREAM, fileUri)
                     type = "image/png"
                 }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
