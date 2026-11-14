@@ -25,7 +25,8 @@ data class UploadMediaDetail(
     fun javaCopy() = copy()
 
     constructor(place: Place?) : this(
-        place?.language,
+        // null (not empty) makes the language picker fall back to the default language
+        place?.language?.ifEmpty { null },
         place?.longDescription,
         place?.name ?: "",
     )
