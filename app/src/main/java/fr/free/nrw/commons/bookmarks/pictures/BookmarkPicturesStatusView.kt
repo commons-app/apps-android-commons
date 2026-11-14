@@ -36,7 +36,6 @@ class BookmarkPicturesStatusView(
      * @param throwable the error that happened
      * @param isGridEmpty true if the grid has no pictures yet
      */
-    @Suppress("TooGenericExceptionCaught")
     fun showError(
         throwable: Throwable,
         isGridEmpty: Boolean,

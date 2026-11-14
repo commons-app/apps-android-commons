@@ -77,6 +77,7 @@ object CustomSelectorUtils {
      *
      * @return true if the image exists on Commons, false otherwise.
      */
+    @Suppress("TooGenericExceptionCaught")
     suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(
         sha1: String,
         ioDispatcher: CoroutineDispatcher,
@@ -91,6 +92,11 @@ object CustomSelectorUtils {
             } catch (e: IOException) {
                 // Covers UnknownHostException, ConnectException and other network/IO failures.
                 Timber.e(e, "Network Connection Error")
+                result = ImageLoader.Result.ERROR
+            } catch (e: Exception) {
+                // Other failures, such as MwException or a missing API response, must not escape
+                // into ImageLoader's MainScope, where they would crash the custom selector.
+                Timber.e(e, "Unexpected error while checking whether the file exists")
                 result = ImageLoader.Result.ERROR
             }
             result
