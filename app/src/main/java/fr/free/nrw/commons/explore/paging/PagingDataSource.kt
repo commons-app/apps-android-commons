@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because loader functions are supplied by callers and can
+ * throw arbitrary runtime exceptions, which are reported as a LoadingState.Error.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.explore.paging
 
 import androidx.paging.PositionalDataSource

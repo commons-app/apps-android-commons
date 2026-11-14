@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because drawing failures are wrapped with the caller
+ * context and rethrown.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.media.zoomControllers.zoomable
 
 import android.annotation.SuppressLint
