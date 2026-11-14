@@ -107,7 +107,54 @@ class FileProcessorTest {
         assertArrayEquals(before, photo.readBytes())
     }
 
+    @Test
+    fun redactExifTagsRemovesSamsungHeaderBeforeMotionPhotoVideo() {
+        // Laid out like a Galaxy S20 FE photo: Samsung header, video, then the Samsung trailer.
+        val tail = samsungVideoHeader + fakeVideo + samsungTrailer
+        val photo = motionPhoto(tail = tail, videoLength = fakeVideo.size + samsungTrailer.size)
+        val withoutVideo = photo.length() - tail.size
+
+        fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
+        assertEquals(withoutVideo, photo.length())
+        val text = String(photo.readBytes(), Charsets.ISO_8859_1)
+        assertTrue(text.contains("GCamera:MotionPhoto=\"0\""))
+        assertFalse(text.contains("MotionPhoto_Data"))
+    }
+
+    @Test
+    fun redactExifTagsRemovesMicroVideo() {
+        // Laid out like a Galaxy S9 photo: MicroVideo XMP, Samsung header, video, then the Samsung trailer.
+        val tail = samsungVideoHeader + fakeVideo + samsungTrailer
+        val photo = microVideo(tail = tail, videoOffset = fakeVideo.size + samsungTrailer.size)
+        val withoutVideo = photo.length() - tail.size
+
+        fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
+        assertEquals(withoutVideo, photo.length())
+        val text = String(photo.readBytes(), Charsets.ISO_8859_1)
+        assertTrue(text.contains("GCamera:MicroVideo=\"0\""))
+        assertFalse(text.contains("ftyp"))
+        assertFalse(text.contains("MotionPhoto_Data"))
+
+        val once = photo.readBytes()
+        fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
+        assertArrayEquals(once, photo.readBytes())
+    }
+
+    @Test
+    fun redactExifTagsKeepsMicroVideoPhotoWhenVideoIsNotWhereXmpSays() {
+        val notVideo = ByteArray(fakeVideo.size)
+        val photo = microVideo(tail = notVideo, videoOffset = notVideo.size)
+        val before = photo.readBytes()
+
+        fileProcessor.redactExifTags(null, emptySet(), photo.absolutePath)
+        assertArrayEquals(before, photo.readBytes())
+    }
+
     private val fakeVideo = byteArrayOf(0, 0, 0, 0x18) + "ftypisom".toByteArray() + ByteArray(100)
+
+    private val samsungVideoHeader = byteArrayOf(0, 0, 0x30, 0x0A, 0x10, 0, 0, 0) + "MotionPhoto_Data".toByteArray()
+
+    private val samsungTrailer = "SEFH".toByteArray() + ByteArray(20) + "SEFT".toByteArray()
 
     /**
      * Builds a JPEG laid out like a Google motion photo: XMP that points at a video
@@ -116,17 +163,47 @@ class FileProcessorTest {
     private fun motionPhoto(
         tail: ByteArray,
         videoLength: Int,
+    ): File =
+        photoWithXmp(
+            tail = tail,
+            description =
+                "GCamera:MotionPhoto=\"1\" GCamera:MotionPhotoVersion=\"1\">" +
+                    "<Container:Directory><rdf:Seq>" +
+                    "<rdf:li><Container:Item Item:Semantic=\"Primary\" Item:Mime=\"image/jpeg\"/></rdf:li>" +
+                    "<rdf:li><Container:Item Item:Mime=\"video/mp4\" Item:Semantic=\"MotionPhoto\" " +
+                    "Item:Length=\"$videoLength\" Item:Padding=\"0\"/></rdf:li>" +
+                    "</rdf:Seq></Container:Directory></rdf:Description>",
+        )
+
+    /**
+     * Builds a JPEG laid out like an older "MicroVideo" photo: XMP that says the video starts
+     * [videoOffset] bytes before the end of the file, then [tail] appended after the image.
+     */
+    private fun microVideo(
+        tail: ByteArray,
+        videoOffset: Int,
+    ): File =
+        photoWithXmp(
+            tail = tail,
+            description =
+                "GCamera:MicroVideo=\"1\" GCamera:MicroVideoVersion=\"1\" " +
+                    "GCamera:MicroVideoOffset=\"$videoOffset\" GCamera:MicroVideoPresentationTimestampUs=\"-1\"/>",
+        )
+
+    /**
+     * Builds a JPEG with an XMP packet whose rdf:Description holds [description], then [tail]
+     * appended after the image.
+     */
+    private fun photoWithXmp(
+        tail: ByteArray,
+        description: String,
     ): File {
         val jpeg = File(SAMPLE_JPEG).readBytes()
         val xmp =
             "http://ns.adobe.com/xap/1.0/\u0000" +
                 "<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF><rdf:Description " +
-                "GCamera:MotionPhoto=\"1\" GCamera:MotionPhotoVersion=\"1\">" +
-                "<Container:Directory><rdf:Seq>" +
-                "<rdf:li><Container:Item Item:Semantic=\"Primary\" Item:Mime=\"image/jpeg\"/></rdf:li>" +
-                "<rdf:li><Container:Item Item:Mime=\"video/mp4\" Item:Semantic=\"MotionPhoto\" " +
-                "Item:Length=\"$videoLength\" Item:Padding=\"0\"/></rdf:li>" +
-                "</rdf:Seq></Container:Directory></rdf:Description></rdf:RDF></x:xmpmeta>"
+                description +
+                "</rdf:RDF></x:xmpmeta>"
         val xmpBytes = xmp.toByteArray(Charsets.ISO_8859_1)
         val segmentLength = xmpBytes.size + 2
         val app1 =
