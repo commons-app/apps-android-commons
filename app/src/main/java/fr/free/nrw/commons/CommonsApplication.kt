@@ -251,7 +251,6 @@ class CommonsApplication : MultiDexApplication() {
                     Timber.d("All accounts have been removed")
                     clearImageCache()
                     defaultPrefs.remove("isUserLoggedIn")
-                    defaultPrefs.remove(Prefs.DEFAULT_LICENSE)
                     defaultPrefs.remove(Prefs.VANISHED_ACCOUNT)
                     defaultPrefs.putBoolean("firstrun", false)
                     updateAllDatabases()
