@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/deleted_file_explanation"
-                android:textColor="@color/primaryTextColor"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/normal_text" />
 
             <Button
@@ -34,21 +34,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_gap"
-                android:text="@string/deleted_file_view_page" />
+                android:text="@string/deleted_file_view_page"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/viewDeletionDiscussion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_margin_vertical"
-                android:text="@string/deleted_file_view_discussion" />
+                android:text="@string/deleted_file_view_discussion"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/viewPolicies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_margin_vertical"
-                android:text="@string/deleted_file_policies" />
+                android:text="@string/deleted_file_policies"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

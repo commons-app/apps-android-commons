@@ -139,6 +139,11 @@ public class Place implements Parcelable {
         String description =
             (item.getDescription().getValue() != null && !item.getDescription().getValue()
                 .isEmpty()) ? item.getDescription().getValue() : "";
+        // The whole text is tagged with the label's language, so drop a description in another one
+        if (!StringUtils.isBlank(item.getLabel().getValue())
+            && !item.getDescription().getLanguage().equals(item.getLabel().getLanguage())) {
+            description = "";
+        }
         // When description is "?" but we have a valid label, just use the label. So replace "?" by "" in description
         description = (description.equals("?")
             && (item.getLabel().getValue() != null
