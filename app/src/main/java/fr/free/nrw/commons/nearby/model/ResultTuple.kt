@@ -15,7 +15,8 @@ class ResultTuple {
     }
 
     constructor() {
-        language = "bug" // Basa Ugi language -  TODO Respect the `Default description language`　setting.
+        // Empty when WDQS sends no xml:lang, so the upload form uses the default description language
+        language = ""
         type = ""
         value = ""
     }
