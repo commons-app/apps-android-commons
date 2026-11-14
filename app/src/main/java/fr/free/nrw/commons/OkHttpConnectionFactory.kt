@@ -129,7 +129,10 @@ internal class UnsuccessfulResponseInterceptor : Interceptor {
             }
             return rsp
         }
-        throw IOException("Unsuccessful response")
+        // Nobody reads this response, so close it to release its connection
+        rsp.close()
+        // Keep the HTTP status code, so that the error tells what went wrong
+        throw IOException("Unsuccessful response: HTTP ${rsp.code}")
     }
 
     private fun isExcludedUrl(request: Request): Boolean {

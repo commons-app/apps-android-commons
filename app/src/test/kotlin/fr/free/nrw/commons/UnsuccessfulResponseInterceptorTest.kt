@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.io.IOException
 
 class UnsuccessfulResponseInterceptorTest {
     private interface TestApi {
@@ -89,6 +90,32 @@ class UnsuccessfulResponseInterceptorTest {
         val response = client.newCall(request()).execute()
 
         assertEquals(SUCCESS, response.body!!.string())
+    }
+
+    @Test
+    fun httpErrorStatusIsInTheExceptionMessage() {
+        server.enqueue(MockResponse().setResponseCode(503))
+
+        val exception =
+            assertThrows(IOException::class.java) {
+                client.newCall(request()).execute()
+            }
+
+        assertEquals("Unsuccessful response: HTTP 503", exception.message)
+    }
+
+    @Test
+    fun connectionIsReusedAfterHttpError() {
+        // With an empty body the connection is released anyway, so the error page needs a body
+        server.enqueue(MockResponse().setResponseCode(503).setBody("Service Unavailable"))
+        server.enqueue(MockResponse().setBody(SUCCESS))
+
+        assertThrows(IOException::class.java) { client.newCall(request()).execute() }
+        client.newCall(request()).execute().close()
+
+        server.takeRequest()
+        // 0 would mean that a new connection was opened, because the first one was never released
+        assertEquals(1, server.takeRequest().sequenceNumber)
     }
 
     private fun request() = Request.Builder().url(server.url("/w/api.php")).build()
