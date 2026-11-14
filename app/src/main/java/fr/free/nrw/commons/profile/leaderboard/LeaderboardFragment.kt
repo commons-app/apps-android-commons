@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
@@ -31,6 +32,7 @@ import javax.inject.Inject
 /**
  * This class extends the CommonsDaggerSupportFragment and creates leaderboard fragment
  */
+
 class LeaderboardFragment : CommonsDaggerSupportFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
@@ -51,6 +53,12 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
     private var viewController: LeaderboardViewController? = null
+
+    companion object {
+        private const val SCROLL_TO_TOP_THRESHOLD = 20
+        private const val SMART_SCROLL_JUMP_THRESHOLD = 100
+        private const val SCROLL_OFFSET = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,19 +110,52 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         with(binding!!) {
             durationSpinner.onItemSelectedListener =
                 SelectionListener {
-                    duration = durationValues[durationSpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    duration = durationValues[durationSpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
-
             categorySpinner.onItemSelectedListener =
                 SelectionListener {
-                    category = categoryValues[categorySpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    category = categoryValues[categorySpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
 
-            scroll.setOnClickListener { scrollToUserRank() }
+            scroll.setOnClickListener {
+                val lm = leaderboardList.layoutManager as? LinearLayoutManager
+                val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
+
+                if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
+                    smartScrollTo(0)
+                } else {
+                    scrollToUserRank()
+                }
+            }
+
+            leaderboardList.addOnScrollListener(
+                object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(
+                        rv: RecyclerView,
+                        dx: Int,
+                        dy: Int,
+                    ) = updateScrollButtonState()
+                },
+            )
 
             return root
+        }
+    }
+
+    private fun updateScrollButtonState() {
+        val binding = binding ?: return
+        val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
+        val firstVisible = layoutManager.findFirstVisibleItemPosition()
+
+        if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
+            binding.scroll.text = getString(R.string.leaderboard_go_to_top_button_text)
+            binding.scroll.setIconResource(android.R.drawable.arrow_up_float)
+            binding.scroll.visibility = View.VISIBLE
+        } else {
+            // near to the top of the leaderboard
+            binding.scroll.text = getString(R.string.leaderboard_my_rank_button_text)
+            binding.scroll.setIconResource(0)
+            binding.scroll.visibility = View.VISIBLE
         }
     }
 
@@ -155,6 +196,30 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
      * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
+    private fun smartScrollTo(targetPosition: Int) {
+        val binding = binding ?: return
+        val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
+        val currentPosition = layoutManager.findFirstVisibleItemPosition()
+
+        if (Math.abs(currentPosition - targetPosition) > SMART_SCROLL_JUMP_THRESHOLD) {
+            // jump instantly close to the target to skip processing thousands of layouts
+            val offsetPosition =
+                if (targetPosition > currentPosition) {
+                    targetPosition - SCROLL_TO_TOP_THRESHOLD
+                } else {
+                    targetPosition + SCROLL_TO_TOP_THRESHOLD
+                }
+            layoutManager.scrollToPositionWithOffset(offsetPosition, SCROLL_OFFSET)
+
+            binding.leaderboardList.post {
+                binding.leaderboardList.smoothScrollToPosition(targetPosition)
+                updateScrollButtonState()
+            }
+        } else {
+            binding.leaderboardList.smoothScrollToPosition(targetPosition)
+        }
+    }
+
     private fun scrollToUserRank() {
         if (userRank == 0) {
             Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
@@ -163,12 +228,13 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 return
             }
             val itemCount = binding?.leaderboardList?.adapter?.itemCount ?: 0
-            if (itemCount > userRank + 1) {
-                binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
+            val targetPos = userRank + 1
+            if (itemCount > targetPos) {
+                smartScrollTo(targetPos)
             } else {
                 viewModel?.let {
-                    it.refresh(duration, category, userRank + 1, 0)
-                    setLeaderboard(duration, category, userRank + 1, 0)
+                    it.refresh(duration, category, targetPos, 0)
+                    setLeaderboard(duration, category, targetPos, 0)
                     scrollToRank = true
                 }
             }
@@ -249,7 +315,9 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 LOADED -> {
                     viewController?.hideProgressBar()
                     if (scrollToRank) {
-                        binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
+                        smartScrollTo(userRank + 1)
+                    } else {
+                        updateScrollButtonState()
                     }
                 }
             }
