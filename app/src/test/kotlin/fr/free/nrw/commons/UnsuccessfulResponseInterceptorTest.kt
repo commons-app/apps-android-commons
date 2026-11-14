@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.io.IOException
 
 class UnsuccessfulResponseInterceptorTest {
     private interface TestApi {
@@ -89,6 +90,18 @@ class UnsuccessfulResponseInterceptorTest {
         val response = client.newCall(request()).execute()
 
         assertEquals(SUCCESS, response.body!!.string())
+    }
+
+    @Test
+    fun httpErrorStatusIsInTheExceptionMessage() {
+        server.enqueue(MockResponse().setResponseCode(503))
+
+        val exception =
+            assertThrows(IOException::class.java) {
+                client.newCall(request()).execute()
+            }
+
+        assertEquals("Unsuccessful response: HTTP 503", exception.message)
     }
 
     private fun request() = Request.Builder().url(server.url("/w/api.php")).build()
