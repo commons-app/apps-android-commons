@@ -827,7 +827,7 @@
   </plurals>
   <string name="multiple_files_depiction">Cuimhnigh le do thoil go bhfaigheann gach íomhá i il-uaslódáil na catagóirí agus na léirithe céanna. Mura bhfuil léirithe agus catagóirí comhroinnte ag na híomhánna, déan roinnt uaslódálacha ar leithligh.</string>
   <string name="multiple_files_depiction_header">Nóta faoi il-uaslódálacha</string>
-  <string name="nearby_wikitalk">Tuairiscigh fadhb faoin mír seo chuig Wikidata</string>
+  <string name="nearby_report_problem">Tuairiscigh fadhb faoin mír seo chuig Wikidata</string>
   <string name="please_enter_some_comments">Cuir isteach roinnt tuairimí le do thoil</string>
   <string name="talk">Comhrá</string>
   <string name="write_something_about_the_item">Scríobh rud éigin faoin mír \'%1$s\'. Beidh sé le feiceáil go poiblí.</string>

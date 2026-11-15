@@ -40,7 +40,7 @@ object LocationUtils {
                     latLngArray[0].trim().toDouble(),
                     1f,
                 )
-        } catch (e: Exception) {
+        } catch (e: NumberFormatException) {
             Timber.e(e, "Error while parsing user entered lat long")
         }
 

@@ -19,6 +19,9 @@ import fr.free.nrw.commons.language.AppLanguageLookUpTable.Companion.TRADITIONAL
 import org.apache.commons.lang3.StringUtils
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are scheme/authority/URL/language accessors,
+// equality contracts, and Parcelable serialization for one MediaWiki site value object.
+
 /**
  * The base URL and Wikipedia language code for a MediaWiki site. Examples:
  *
@@ -43,6 +46,7 @@ import java.util.Locale
  *  * Incorrect: "wikipedia.org", "test"
  *
  */
+@Suppress("TooManyFunctions")
 class WikiSite : Parcelable {
     // TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added
     @SerializedName("domain")
