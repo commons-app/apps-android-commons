@@ -21,6 +21,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -29,6 +30,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import java.io.IOException
+import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -132,8 +134,25 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnDestroyWithException() {
-        `when`(progressDialog.isShowing).thenThrow(NullPointerException())
+    fun testOnDestroyPropagatesUnexpectedException() {
+        `when`(progressDialog.isShowing).thenThrow(IllegalStateException())
+        val method: Method =
+            LoginActivity::class.java.getDeclaredMethod(
+                "onDestroy",
+            )
+        method.isAccessible = true
+        val exception =
+            Assert.assertThrows(InvocationTargetException::class.java) {
+                method.invoke(activity)
+            }
+        Assert.assertTrue(exception.cause is IllegalStateException)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnDestroyWithIllegalArgumentException() {
+        `when`(progressDialog.isShowing).thenReturn(true)
+        doThrow(IllegalArgumentException()).`when`(progressDialog).dismiss()
         val method: Method =
             LoginActivity::class.java.getDeclaredMethod(
                 "onDestroy",

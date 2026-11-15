@@ -7,6 +7,7 @@ import fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.reactivex.Single
 import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,7 +25,7 @@ class EXIFReader
             Single.just(
                 try {
                     if (ExifInterface(path).hasMakeOrDate) IMAGE_OK else FILE_NO_EXIF
-                } catch (e: Exception) {
+                } catch (e: IOException) {
                     Timber.e(e, "Failed to read EXIF metadata")
                     FILE_NO_EXIF
                 },
