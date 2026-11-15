@@ -1,11 +1,8 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.fileusages.FileUsagesResponse
 import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse
 import fr.free.nrw.commons.location.LatLng
@@ -14,15 +11,10 @@ import fr.free.nrw.commons.nearby.model.ItemsClass
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.nearby.model.NearbyResponse
 import fr.free.nrw.commons.nearby.model.PlaceBindings
-import fr.free.nrw.commons.profile.achievements.FeaturedImages
-import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse
 import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse
 import fr.free.nrw.commons.upload.FileUtils
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
-import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
@@ -40,48 +32,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Usage and award counts for the files a user currently has.
- */
-private data class CommonsFileUsage(
-    val uniqueUsedImages: Int,
-    val articlesUsingImages: Int,
-    val featuredImages: Int,
-    val qualityImages: Int,
-)
-
-/**
  * Test methods in ok http api client
  */
 @Singleton
 class OkHttpJsonApiClient @Inject constructor(
     private val okHttpClient: OkHttpClient,
-    private val depictsClient: DepictsClient,
     private val wikiMediaToolforgeUrl: HttpUrl,
     private val sparqlQueryUrl: String,
     private val campaignsUrl: String,
     private val gson: Gson
 ) {
-    companion object {
-        // Each batch of titles costs another Commons API request, so heavy uploaders keep the error.
-        private const val MAX_FALLBACK_UPLOADS = 1000
-        private const val TITLES_PER_QUERY = 50
-        private const val FEATURED_PICTURES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons"
-        private const val QUALITY_IMAGES_CATEGORY = "Quality_images"
-        private const val FALLBACK_LANGUAGES =
-            "en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb," +
-                "ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq," +
-                "uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war," +
-                "zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar," +
-                "an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am," +
-                "roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk," +
-                "lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls," +
-                "yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky," +
-                "ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na," +
-                "got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn," +
-                "kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd," +
-                "ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh," +
-                "sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr"
-    }
     fun getLeaderboard(
         userName: String?, duration: String?,
         category: String?, limit: String?, offset: String?
@@ -224,326 +184,6 @@ class OkHttpJsonApiClient @Inject constructor(
         })
     }
 
-    fun getUploadCount(userName: String?): Single<Int> {
-        val urlBuilder: HttpUrl.Builder = wikiMediaToolforgeUrl.newBuilder()
-            .addPathSegments("uploadsbyuser.py")
-            .addQueryParameter("user", userName)
-
-        if (isBetaFlavour) {
-            urlBuilder.addQueryParameter("labs", "commonswiki")
-        }
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        return Single.fromCallable {
-            val counted = try {
-                uploadCountFromToolforge(request)
-            } catch (e: IOException) {
-                Timber.w(e, "uploadsbyuser.py failed, counting uploads from the Commons API")
-                null
-            }
-            counted ?: userName?.let {
-                try {
-                    countUploadsFromCommonsApi(it)
-                } catch (e: IOException) {
-                    Timber.e(e, "Commons API upload count failed")
-                    0
-                }
-            } ?: 0
-        }
-    }
-
-    /**
-     * Returns the Toolforge count, or null when that response cannot be used.
-     */
-    private fun uploadCountFromToolforge(request: Request): Int? {
-        val response = okHttpClient.newCall(request).execute()
-        if (!response.isSuccessful) {
-            Timber.w("uploadsbyuser.py failed with HTTP ${response.code}")
-            return null
-        }
-        val count = response.body?.string()?.trim()?.toIntOrNull()
-        if (count == null) {
-            Timber.w("uploadsbyuser.py returned no upload count")
-        }
-        return count
-    }
-
-    /**
-     * Current files for [userName], at most [MAX_FALLBACK_UPLOADS].
-     * Contributions requests this on launch, so a prolific uploader must not page the whole list.
-     */
-    private fun countUploadsFromCommonsApi(userName: String): Int {
-        var uploads = 0
-        queryCommonsApi(
-            mapOf(
-                "list" to "allimages", "aiuser" to userName, "aisort" to "timestamp",
-                "aiprop" to "timestamp", "ailimit" to "500"
-            ),
-            stopAfterBatch = { uploads >= MAX_FALLBACK_UPLOADS },
-        ) { query ->
-            uploads += query.getAsJsonArray("allimages")?.size() ?: 0
-        }
-        return minOf(uploads, MAX_FALLBACK_UPLOADS)
-    }
-
-    fun getWikidataEdits(userName: String?): Single<Int> {
-        val urlBuilder: HttpUrl.Builder = wikiMediaToolforgeUrl.newBuilder()
-            .addPathSegments("wikidataedits.py")
-            .addQueryParameter("user", userName)
-
-        if (isBetaFlavour) {
-            urlBuilder.addQueryParameter("labs", "commonswiki")
-        }
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        return Single.fromCallable {
-            val counted = try {
-                wikidataEditsFromToolforge(request)
-            } catch (e: IOException) {
-                Timber.w(e, "wikidataedits.py failed, reading the edit count from Wikidata")
-                null
-            }
-            counted ?: userName?.let { countWikidataEditsFromApi(it) } ?: 0
-        }
-    }
-
-    /**
-     * Returns the Toolforge edit count, or null when that response cannot be used.
-     */
-    private fun wikidataEditsFromToolforge(request: Request): Int? {
-        val response = okHttpClient.newCall(request).execute()
-        val json = response.body?.takeIf { response.isSuccessful }?.string()
-        val jsonStart = json?.indexOf('{') ?: -1
-        if (json == null) {
-            Timber.w("wikidataedits.py failed with HTTP ${response.code}")
-        }
-        return if (json == null || jsonStart < 0) {
-            null
-        } else {
-            try {
-                gson.fromJson(json.substring(jsonStart), GetWikidataEditCountResponse::class.java)
-                    ?.wikidataEditCount
-            } catch (e: Exception) {
-                Timber.w(e, "wikidataedits.py returned invalid JSON")
-                null
-            }
-        }
-    }
-
-    /**
-     * Edit count from Wikidata's public user list. This replaces wikidataedits.py.
-     */
-    private fun countWikidataEditsFromApi(userName: String): Int {
-        val url = "${BuildConfig.WIKIDATA_URL}/w/api.php".toHttpUrlOrNull()!!.newBuilder()
-            .addQueryParameter("action", "query")
-            .addQueryParameter("format", "json")
-            .addQueryParameter("formatversion", "2")
-            .addQueryParameter("list", "users")
-            .addQueryParameter("ususers", userName)
-            .addQueryParameter("usprop", "editcount")
-            .build()
-        val response = okHttpClient.newCall(Request.Builder().url(url).build()).execute()
-        val body = response.body
-        if (!response.isSuccessful || body == null) {
-            throw IOException("Wikidata edit count request failed: ${response.message}")
-        }
-        val users = JsonParser.parseString(body.string()).asJsonObject
-            .getAsJsonObject("query")
-            ?.getAsJsonArray("users")
-        return users?.firstOrNull()?.asJsonObject?.get("editcount")?.asInt ?: 0
-    }
-
-    fun getAchievements(userName: String?): Single<FeedbackResponse?> {
-        val suffix = if (isBetaFlavour) "/feedback.py?labs=commonswiki" else "/feedback.py"
-        val fetchAchievementUrlTemplate = wikiMediaToolforgeUrl.toString() + suffix
-        return Single.fromCallable {
-            val fromToolforge = try {
-                feedbackFromToolforge(userName, fetchAchievementUrlTemplate)
-            } catch (e: IOException) {
-                Timber.w(e, "feedback.py failed, computing achievements from the Commons API")
-                null
-            }
-            when {
-                fromToolforge != null -> fromToolforge
-                userName != null -> getAchievementsFromCommonsApi(userName)
-                else -> null
-            }
-        }
-    }
-
-    /**
-     * Parsed feedback.py body, or null when the caller should use the Commons API instead.
-     */
-    private fun feedbackFromToolforge(
-        userName: String?,
-        fetchAchievementUrlTemplate: String,
-    ): FeedbackResponse? {
-        val url = String.format(Locale.ENGLISH, fetchAchievementUrlTemplate, userName)
-        val request = Request.Builder()
-            .url(url.toHttpUrlOrNull()!!.newBuilder().addQueryParameter("user", userName).build())
-            .build()
-        val response = okHttpClient.newCall(request).execute()
-        val json = response.body?.takeIf { response.isSuccessful }?.string()
-        val jsonStart = json?.indexOf('{') ?: -1
-        if (json == null) {
-            Timber.w("feedback.py failed with HTTP ${response.code}")
-        } else if (jsonStart < 0) {
-            Timber.w("feedback.py returned no JSON, computing achievements from the Commons API")
-        }
-        return if (json == null || jsonStart < 0) {
-            null
-        } else {
-            try {
-                gson.fromJson(json.substring(jsonStart), FeedbackResponse::class.java)
-            } catch (e: Exception) {
-                Timber.w(e, "feedback.py returned invalid JSON, computing achievements from the Commons API")
-                null
-            }
-        }
-    }
-
-    /**
-     * Computes the same statistics as feedback.py from the public Commons API.
-     * Throws [TooManyAchievementsException] above [MAX_FALLBACK_UPLOADS].
-     */
-    private fun getAchievementsFromCommonsApi(userName: String): FeedbackResponse {
-        val uploadedTitles = collectUploadedTitles(userName)
-        val deletedUploads = countMissingUploads(uploadedTitles)
-        val fileUsage = collectFileUsage(userName)
-        return FeedbackResponse(
-            uniqueUsedImages = fileUsage.uniqueUsedImages,
-            articlesUsingImages = fileUsage.articlesUsingImages,
-            deletedUploads = deletedUploads,
-            featuredImages = FeaturedImages(fileUsage.qualityImages, fileUsage.featuredImages),
-            thanksReceived = countThanks(userName),
-            user = userName
-        )
-    }
-
-    /**
-     * Titles from the user's upload log. Stops once [MAX_FALLBACK_UPLOADS] is passed.
-     */
-    private fun collectUploadedTitles(userName: String): Set<String> {
-        val uploadedTitles = mutableSetOf<String>()
-        queryCommonsApi(
-            mapOf(
-                "list" to "logevents", "letype" to "upload", "leuser" to userName,
-                "leprop" to "title", "lelimit" to "500"
-            )
-        ) { query ->
-            query.getAsJsonArray("logevents")?.forEach {
-                uploadedTitles.add(it.asJsonObject.get("title").asString)
-            }
-            if (uploadedTitles.size > MAX_FALLBACK_UPLOADS) {
-                throw TooManyAchievementsException()
-            }
-        }
-        return uploadedTitles
-    }
-
-    /**
-     * How many of [titles] no longer exist. MediaWiki accepts [TITLES_PER_QUERY] titles per request.
-     */
-    private fun countMissingUploads(titles: Set<String>): Int {
-        var deletedUploads = 0
-        titles.chunked(TITLES_PER_QUERY).forEach { batch ->
-            queryCommonsApi(mapOf("titles" to batch.joinToString("|"))) { query ->
-                deletedUploads += query.getAsJsonArray("pages")
-                    ?.count { it.asJsonObject.get("missing")?.asBoolean == true } ?: 0
-            }
-        }
-        return deletedUploads
-    }
-
-    /**
-     * How often the user's current files are used, and how many are Featured or Quality images.
-     */
-    private fun collectFileUsage(userName: String): CommonsFileUsage {
-        val usagesByPage = mutableMapOf<Int, Int>()
-        val featuredPages = mutableSetOf<Int>()
-        val qualityPages = mutableSetOf<Int>()
-        queryCommonsApi(
-            mapOf(
-                "generator" to "allimages", "gaiuser" to userName, "gaisort" to "timestamp",
-                "gailimit" to TITLES_PER_QUERY.toString(), "prop" to "globalusage|categories", "gulimit" to "500",
-                "cllimit" to "500",
-                "clcategories" to "Category:$FEATURED_PICTURES_CATEGORY|Category:$QUALITY_IMAGES_CATEGORY"
-            )
-        ) { query ->
-            query.getAsJsonArray("pages")?.forEach { element ->
-                val page = element.asJsonObject
-                val pageId = page.get("pageid").asInt
-                val usages = page.getAsJsonArray("globalusage")?.size() ?: 0
-                usagesByPage[pageId] = (usagesByPage[pageId] ?: 0) + usages
-                page.getAsJsonArray("categories")?.forEach {
-                    when (it.asJsonObject.get("title").asString.removePrefix("Category:")) {
-                        FEATURED_PICTURES_CATEGORY -> featuredPages.add(pageId)
-                        QUALITY_IMAGES_CATEGORY -> qualityPages.add(pageId)
-                    }
-                }
-            }
-        }
-        return CommonsFileUsage(
-            uniqueUsedImages = usagesByPage.values.count { it > 0 },
-            articlesUsingImages = usagesByPage.values.sum(),
-            featuredImages = featuredPages.size,
-            qualityImages = qualityPages.size
-        )
-    }
-
-    /**
-     * Thanks logged against the user's user page.
-     */
-    private fun countThanks(userName: String): Int {
-        var thanksReceived = 0
-        queryCommonsApi(
-            mapOf(
-                "list" to "logevents", "letype" to "thanks", "letitle" to "User:$userName",
-                "leprop" to "ids", "lelimit" to "500"
-            )
-        ) { query ->
-            thanksReceived += query.getAsJsonArray("logevents")?.size() ?: 0
-        }
-        return thanksReceived
-    }
-
-    /**
-     * Runs an action=query request against Commons, following continuation, and passes each
-     * "query" object to [onBatch].
-     */
-    private fun queryCommonsApi(
-        params: Map<String, String>,
-        stopAfterBatch: () -> Boolean = { false },
-        onBatch: (JsonObject) -> Unit,
-    ) {
-        var continuation = emptyMap<String, String>()
-        do {
-            val urlBuilder = "${BuildConfig.COMMONS_URL}/w/api.php".toHttpUrlOrNull()!!.newBuilder()
-                .addQueryParameter("action", "query")
-                .addQueryParameter("format", "json")
-                .addQueryParameter("formatversion", "2")
-            (params + continuation).forEach { (key, value) -> urlBuilder.addQueryParameter(key, value) }
-            val response = okHttpClient.newCall(Request.Builder().url(urlBuilder.build()).build()).execute()
-            val body = response.body
-            if (!response.isSuccessful || body == null) {
-                throw IOException("Commons API request failed: ${response.message}")
-            }
-            val json = JsonParser.parseString(body.string()).asJsonObject
-            json.getAsJsonObject("query")?.let(onBatch)
-            if (stopAfterBatch()) {
-                return
-            }
-            continuation = json.getAsJsonObject("continue")?.entrySet()
-                ?.associate { it.key to it.value.asString } ?: emptyMap()
-        } while (continuation.isNotEmpty())
-    }
-
     @JvmOverloads
     @Throws(Exception::class)
     fun getNearbyPlaces(
@@ -585,62 +225,6 @@ class OkHttpJsonApiClient @Inject constructor(
                 places.add(placeFromNearbyItem)
             }
             return places
-        }
-        throw IOException(response.message)
-    }
-
-    /**
-     * Returns the count of items in the specified area by querying Wikidata.
-     *
-     * @param queryParams: a `NearbyQueryParam` specifying the geographical area.
-     * @return The count of items in the specified area.
-     */
-    @Throws(Exception::class)
-    fun getNearbyItemCount(
-        queryParams: NearbyQueryParams
-    ): Int {
-        val wikidataQuery: String = when (queryParams) {
-            is NearbyQueryParams.Rectangular -> {
-                val westCornerLat = queryParams.screenTopRight.latitude
-                val westCornerLong = queryParams.screenTopRight.longitude
-                val eastCornerLat = queryParams.screenBottomLeft.latitude
-                val eastCornerLong = queryParams.screenBottomLeft.longitude
-                FileUtils.readFromResource("/queries/rectangle_query_for_item_count.rq")
-                    .replace("\${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
-                    .replace("\${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
-                    .replace("\${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
-                    .replace("\${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
-            }
-
-            is NearbyQueryParams.Radial -> {
-                FileUtils.readFromResource("/queries/radius_query_for_item_count.rq")
-                    .replace(
-                        "\${LAT}",
-                        String.format(Locale.ROOT, "%.4f", queryParams.center.latitude)
-                    )
-                    .replace(
-                        "\${LONG}",
-                        String.format(Locale.ROOT, "%.4f", queryParams.center.longitude)
-                    )
-                    .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radiusInKm))
-            }
-        }
-
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", wikidataQuery)
-            .addQueryParameter("format", "json")
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
-                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
-                .get("value").asInt
         }
         throw IOException(response.message)
     }
@@ -737,44 +321,6 @@ class OkHttpJsonApiClient @Inject constructor(
             return places
         }
         throw IOException(response.message)
-    }
-
-    @Throws(IOException::class)
-    fun getPlaces(
-        placeList: List<Place>, language: String
-    ): List<Place>? {
-        val wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq")
-        var qids = ""
-        for (place in placeList) {
-            qids += """
-${"wd:" + place.wikiDataEntityId}"""
-        }
-        val query = wikidataQuery
-            .replace("\${ENTITY}", qids)
-            .replace("\${LANG}", language)
-            .replace("\${FALLBACK_LANGUAGES}", FALLBACK_LANGUAGES)
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", query)
-            .addQueryParameter("format", "json")
-
-        val request: Request = Request.Builder().url(urlBuilder.build()).build()
-
-        okHttpClient.newCall(request).execute().use { response ->
-            if (response.isSuccessful) {
-                val json = response.body!!.string()
-                val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
-                val bindings = nearbyResponse.results.bindings
-                val places: MutableList<Place> = ArrayList()
-                for (item in bindings) {
-                    val placeFromNearbyItem = Place.from(item)
-                    places.add(placeFromNearbyItem)
-                }
-                return places
-            } else {
-                throw IOException("Unexpected response code: " + response.code)
-            }
-        }
     }
 
     @Throws(Exception::class)
@@ -882,26 +428,6 @@ ${"wd:" + place.wikiDataEntityId}"""
         return gpxString
     }
 
-    @Throws(IOException::class)
-    fun getChildDepictions(
-        qid: String, startPosition: Int,
-        limit: Int
-    ): Single<List<DepictedItem>> =
-        depictedItemsFrom(sparqlQuery(qid, startPosition, limit, "/queries/subclasses_query.rq"))
-
-    @Throws(IOException::class)
-    fun getParentDepictions(
-        qid: String, startPosition: Int,
-        limit: Int
-    ): Single<List<DepictedItem>> = depictedItemsFrom(
-        sparqlQuery(
-            qid,
-            startPosition,
-            limit,
-            "/queries/parentclasses_query.rq"
-        )
-    )
-
     fun getCampaigns(): Single<CampaignResponseDTO> {
         return Single.fromCallable<CampaignResponseDTO?>({
             val request: Request = Request.Builder().url(campaignsUrl).build()
@@ -915,36 +441,6 @@ ${"wd:" + place.wikiDataEntityId}"""
             }
             null
         })
-    }
-
-    private fun depictedItemsFrom(request: Request): Single<List<DepictedItem>> {
-        return depictsClient.toDepictions(Single.fromCallable({
-            okHttpClient.newCall(request).execute().body.use { body ->
-                return@fromCallable gson.fromJson<SparqlResponse>(
-                    body!!.string(),
-                    SparqlResponse::class.java
-                )
-            }
-        }).doOnError({ t: Throwable? -> Timber.e(t) }))
-    }
-
-    @Throws(IOException::class)
-    private fun sparqlQuery(
-        qid: String,
-        startPosition: Int,
-        limit: Int,
-        fileName: String
-    ): Request {
-        val query = FileUtils.readFromResource(fileName)
-            .replace("\${QID}", qid)
-            .replace("\${LANG}", "\"" + Locale.getDefault().language + "\"")
-            .replace("\${LIMIT}", "" + limit)
-            .replace("\${OFFSET}", "" + startPosition)
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", query)
-            .addQueryParameter("format", "json")
-        return Request.Builder().url(urlBuilder.build()).build()
     }
 
     @Throws(IOException::class)

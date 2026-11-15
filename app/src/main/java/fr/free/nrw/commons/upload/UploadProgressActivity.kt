@@ -213,6 +213,7 @@ class UploadProgressActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_TARGET_TAB = "upload_target_tab"
+        const val TAB_PENDING = 0
         const val TAB_FAILED = 1
     }
 }

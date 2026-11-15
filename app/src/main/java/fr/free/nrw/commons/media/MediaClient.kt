@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.gallery.MediaInfo
 import io.reactivex.Single
 import java.util.Date
 import javax.inject.Inject
@@ -66,6 +67,20 @@ class MediaClient
             responseMapper
                 .map(mediaInterface.getMediaSuppressingErrors(titles))
                 .map { it.first() }
+
+        /**
+         * Fetches playback sources and subtitle tracks from the videoInfo API.
+         *
+         * @param title the title of the media file whose info is to be fetched
+         * @return a single that emits the media info for the requested file
+         */
+        fun getMediaInfo(title: String): Single<MediaInfo> =
+            mediaInterface
+                .getMediaInfo(title)
+                .map {
+                    it.query()?.firstPage()?.mediaInfo()
+                        ?: error("No videoinfo returned for $title")
+                }
 
         /**
          * The method returns the picture of the day

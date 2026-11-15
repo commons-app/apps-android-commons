@@ -31,7 +31,6 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +43,9 @@ import java.util.Random
 import java.util.regex.Pattern
 import javax.inject.Inject
 
+// Suppressed TooManyFunctions because the upload and its retry after the file is published
+// share the steps that save captions, depicts and P18.
+@Suppress("TooManyFunctions")
 class UploadWorker(
     private var appContext: Context,
     workerParams: WorkerParameters,
@@ -259,6 +261,23 @@ class UploadWorker(
      */
     @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
     private suspend fun uploadContribution(contribution: Contribution) {
+        val uploadedFilename = contribution.uploadedFilename
+        if (uploadedFilename != null) {
+            notificationHelper.showUploadStarted(contribution)
+            try {
+                // MediaWiki returns the name with underscores, P18 needs it with spaces
+                val uniqueFileName = uploadedFilename.replace('_', ' ')
+                finishPublishedUpload(contribution, uploadedFilename, uniqueFileName, retrying = true)
+            } catch (exception: Exception) {
+                Timber.e(exception, "Saving captions and depicts failed for %s", uploadedFilename)
+                contribution.state = Contribution.STATE_METADATA_PENDING
+                contribution.errorInfo = exception.uploadErrorCode()
+                notificationHelper.showFailedNotification(contribution)
+                contributionDao.saveSynchronous(contribution)
+            }
+            return
+        }
+
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
         }
@@ -309,39 +328,17 @@ class UploadWorker(
                                     contribution,
                                     uniqueFileName,
                                     stashUploadResult.fileKey,
-                                ).onErrorReturn {
-                                    return@onErrorReturn null
-                                }.blockingSingle()
+                                ).blockingSingle()
 
                         if (null != uploadResult && uploadResult.isSuccessful()) {
                             Timber.d(
                                 "Stash Upload success..proceeding to make wikidata edit",
                             )
 
-                            wikidataEditService
-                                .addDepictionsAndCaptions(uploadResult, contribution)
-                                .blockingSubscribe()
-                            if (contribution.wikidataPlace == null) {
-                                Timber.d(
-                                    "WikiDataEdit not required, upload success",
-                                )
-                                saveCompletedContribution(contribution, uploadResult)
-                            } else {
-                                Timber.d(
-                                    "WikiDataEdit required, making wikidata edit",
-                                )
-                                makeWikiDataEdit(uploadResult, contribution, uniqueFileName)
-                            }
-                            notificationHelper.showSuccessNotification(contribution)
-                            if (appContext.contentResolver.persistedUriPermissions.any {
-                                    it.uri == contribution.contentUri
-                                }
-                            ) {
-                                appContext.contentResolver.releasePersistableUriPermission(
-                                    contribution.contentUri!!,
-                                    Intent.FLAG_GRANT_READ_URI_PERMISSION,
-                                )
-                            }
+                            // Kept until captions and depicts are saved, so a retry does not upload again
+                            contribution.uploadedFilename = uploadResult.filename
+                            contributionDao.saveSynchronous(contribution)
+                            finishPublishedUpload(contribution, uploadResult.filename, uniqueFileName, retrying = false)
                         } else {
                             Timber.e("Stash Upload failed")
                             notificationHelper.showFailedNotification(contribution)
@@ -352,10 +349,18 @@ class UploadWorker(
                     } catch (exception: Exception) {
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
+                        val errorCode = exception.uploadErrorCode()
+                        // Once the file is on Commons, only captions and depicts are left to retry
+                        contribution.state =
+                            if (contribution.uploadedFilename != null) {
+                                Contribution.STATE_METADATA_PENDING
+                            } else {
+                                Contribution.STATE_FAILED
+                            }
+                        contribution.errorInfo = errorCode
                         notificationHelper.showFailedNotification(contribution)
-                        contribution.state = Contribution.STATE_FAILED
                         contributionDao.saveSynchronous(contribution)
-                        if (stashErrorCodes.contains(exception.message)) {
+                        if (stashErrorCodes.contains(errorCode)) {
                             clearChunks(contribution)
                         }
                     }
@@ -405,6 +410,41 @@ class UploadWorker(
         }
     }
 
+    /**
+     * Saves captions, depicts and P18 for a file that is already on Commons
+     */
+    private suspend fun finishPublishedUpload(
+        contribution: Contribution,
+        filename: String,
+        uniqueFileName: String,
+        retrying: Boolean,
+    ) {
+        wikidataEditService
+            .addDepictionsAndCaptions(filename, contribution, retrying)
+            .blockingSubscribe()
+        if (contribution.wikidataPlace == null) {
+            Timber.d(
+                "WikiDataEdit not required, upload success",
+            )
+            saveCompletedContribution(contribution, filename)
+        } else {
+            Timber.d(
+                "WikiDataEdit required, making wikidata edit",
+            )
+            makeWikiDataEdit(filename, contribution, uniqueFileName)
+        }
+        notificationHelper.showSuccessNotification(contribution)
+        if (appContext.contentResolver.persistedUriPermissions.any {
+                it.uri == contribution.contentUri
+            }
+        ) {
+            appContext.contentResolver.releasePersistableUriPermission(
+                contribution.contentUri!!,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION,
+            )
+        }
+    }
+
     private fun clearChunks(contribution: Contribution) {
         contribution.chunkInfo = null
         contributionDao.saveSynchronous(contribution)
@@ -414,7 +454,7 @@ class UploadWorker(
      * Make the WikiData Edit, if applicable
      */
     private suspend fun makeWikiDataEdit(
-        uploadResult: UploadResult,
+        filename: String,
         contribution: Contribution,
         uniqueFileName: String,
     ) {
@@ -422,7 +462,7 @@ class UploadWorker(
         if (wikiDataPlace != null) {
             if (!contribution.hasInvalidLocation()) {
                 var revisionID: Long? = null
-                val p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
+                var p18WasSkipped = !wikiDataPlace.imageValue.isNullOrBlank()
                 try {
                     if (!p18WasSkipped) {
                         // Only set P18 if the place does not already have a picture
@@ -435,17 +475,19 @@ class UploadWorker(
                         // the pre-upload title, which can differ from the real
                         // uploaded title when findUniqueFileName had to rename the
                         // file to avoid a collision with an existing Commons page.
-                        revisionID =
+                        val imageClaim =
                             wikidataEditService.createClaim(
                                 wikiDataPlace,
                                 uniqueFileName,
                                 contribution.media.captions,
                             )
+                        revisionID = imageClaim.revisionId
+                        p18WasSkipped = imageClaim.skipped
                         if (null != revisionID) {
                             withContext(Dispatchers.IO) {
                                 val place = placesRepository.fetchPlace(wikiDataPlace.id)
                                 place.name = wikiDataPlace.name
-                                place.pic = HOME_URL + uploadResult.createCanonicalFileName()
+                                place.pic = HOME_URL + "File:$filename"
                                 placesRepository
                                     .save(place)
                                     .subscribeOn(Schedulers.io())
@@ -476,16 +518,16 @@ class UploadWorker(
                 }
             }
         }
-        saveCompletedContribution(contribution, uploadResult)
+        saveCompletedContribution(contribution, filename)
     }
 
     private fun saveCompletedContribution(
         contribution: Contribution,
-        uploadResult: UploadResult,
+        filename: String,
     ) {
         val contributionFromUpload =
             mediaClient
-                .getMedia("File:" + uploadResult.filename)
+                .getMedia("File:$filename")
                 .map { media: Media? -> contribution.completeWith(media!!) }
                 .blockingGet()
         contributionFromUpload.dateModified = Date()
@@ -502,9 +544,12 @@ class UploadWorker(
         contribution.contentUri?.let {
             val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 =
-                fileUtilsWrapper.getSHA1(
-                    fileUtilsWrapper.getFileInputStream(contribution.localUri?.path),
-                )
+                runCatching {
+                    fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
+                }.getOrElse {
+                    Timber.w(it, "Could not read the local file, skipping its uploaded status")
+                    return
+                }
             CoroutineScope(Dispatchers.IO).launch {
                 uploadedStatusDao.insertUploaded(
                     UploadedStatus(

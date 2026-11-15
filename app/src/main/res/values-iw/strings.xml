@@ -837,7 +837,7 @@
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
   <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
-  <string name="nearby_wikitalk">דווח על בעיה בפריט הזה לוויקינתונים</string>
+  <string name="nearby_report_problem">דווח על בעיה בפריט הזה לוויקינתונים</string>
   <string name="please_enter_some_comments">נא להזין הערות כלשהן</string>
   <string name="talk">שיחה</string>
   <string name="write_something_about_the_item">נא לכתוב משהו על פריט \"%1$s\". זה יוצג לציבור.</string>
