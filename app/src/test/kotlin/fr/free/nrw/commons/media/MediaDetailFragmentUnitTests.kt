@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.controller.ControllerListener
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
@@ -43,7 +44,9 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.ui.widget.HtmlTextView
+import com.facebook.imagepipeline.image.ImageInfo
 import io.reactivex.Single
+import junit.framework.TestCase.assertEquals
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -614,4 +617,11 @@ class MediaDetailFragmentUnitTests {
         verify(mockSharedPreferencesEditor, never()).putInt(anyString(), anyInt())
     }
 
+    @Test
+    fun testOnAspectRatioListenerHidesProgressBar() {
+        val listener = Whitebox.getInternalState(fragment, "aspectRatioListener")
+            as ControllerListener<ImageInfo?>
+        listener.onIntermediateImageSet("id", null)
+        assertEquals(View.GONE, binding.mediaDetailImageProgressBar.visibility)
+    }
 }
