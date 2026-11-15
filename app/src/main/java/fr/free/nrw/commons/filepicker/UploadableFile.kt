@@ -13,6 +13,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.util.Date
+import java.util.Locale
 
 class UploadableFile : Parcelable {
     val contentUri: Uri
@@ -100,7 +101,7 @@ class UploadableFile : Parcelable {
                 val year = dateTimeSubString.substring(0, 4).toInt()
                 val month = dateTimeSubString.substring(5, 7).toInt()
                 val day = dateTimeSubString.substring(8, 10).toInt()
-                val dateCreatedString = "%04d-%02d-%02d".format(year, month, day)
+                val dateCreatedString = "%04d-%02d-%02d".format(Locale.ROOT, year, month, day)
                 if (dateCreatedString.length == 10) {
                     @SuppressLint("RestrictedApi")
                     val dateTime = exif.dateTimeOriginal

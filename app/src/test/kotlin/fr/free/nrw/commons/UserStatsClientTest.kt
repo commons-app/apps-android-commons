@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.mwapi.CommonsUserStats
 import fr.free.nrw.commons.mwapi.TooManyAchievementsException
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.mwapi.UserStatsClient
 import okhttp3.Call
 import okhttp3.HttpUrl.Companion.toHttpUrl
@@ -161,10 +162,10 @@ class UserStatsClientTest {
 
         val count = client.getUploadCount("Test").blockingGet()
 
-        assertEquals(2, count)
+        assertEquals(UploadCount(2), count)
     }
 
-    /** Stops reading continuation pages once the upload count reaches its cap. */
+    /** Stops reading continuation pages at the cap and marks the count as capped. */
     @Test
     fun testGetUploadCountFallbackStopsAfterTheCap() {
         val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
@@ -178,8 +179,36 @@ class UserStatsClientTest {
 
         val count = client.getUploadCount("Test").blockingGet()
 
-        assertEquals(1000, count)
+        assertEquals(UploadCount(1000, isCapped = true), count)
         verify(okhttpClient, times(3)).newCall(any())
+    }
+
+    /** Exactly as many files as the cap, with no page left, is an exact count. */
+    @Test
+    fun testGetUploadCountFallbackWithExactlyTheCapIsNotCapped() {
+        val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
+        Mockito.`when`(response.isSuccessful).thenReturn(false, true)
+        Mockito.`when`(responseBody.string()).thenReturn(
+            """{"continue":{"aicontinue":"x","continue":"-||"},"query":{"allimages":[$page]}}""",
+            """{"query":{"allimages":[$page]}}""",
+        )
+
+        val count = client.getUploadCount("Test").blockingGet()
+
+        assertEquals(UploadCount(1000), count)
+        verify(okhttpClient, times(3)).newCall(any())
+    }
+
+    /** A Toolforge count above the fallback cap is shown as it is. */
+    @Test
+    fun testGetUploadCountFromToolforgeIsNotCapped() {
+        Mockito.`when`(response.isSuccessful).thenReturn(true)
+        Mockito.`when`(responseBody.string()).thenReturn("5000\n")
+
+        val count = client.getUploadCount("Test").blockingGet()
+
+        assertEquals(UploadCount(5000), count)
+        verify(okhttpClient, times(1)).newCall(any())
     }
 
     /** Reads the Wikidata user list when Toolforge cannot return the edit count. */

@@ -7,6 +7,7 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.copyToClipboard
 import fr.free.nrw.commons.utils.handleWebUrl
 import fr.free.nrw.commons.wikidata.model.WikiSite
+import java.util.Locale
 
 /**
  * Helper class handling Wikipedia integration dialogs and actions for contributions.
@@ -22,10 +23,17 @@ class ContributionsListWikipediaHelper(
      */
     fun addImageToWikipedia(contribution: Contribution?) {
         val currentActivity = fragment.activity ?: return
+        val languageName =
+            languageWikipediaSiteProvider()
+                ?.languageCode()
+                ?.takeIf { it.isNotBlank() }
+                ?.let { Locale.forLanguageTag(it).displayLanguage }
+                ?.takeIf { it.isNotBlank() }
+                ?: Locale.getDefault().displayLanguage
         showAlertDialog(
             currentActivity,
             currentActivity.getString(R.string.add_picture_to_wikipedia_article_title),
-            currentActivity.getString(R.string.add_picture_to_wikipedia_article_desc),
+            currentActivity.getString(R.string.add_picture_to_wikipedia_article_desc, languageName),
             {
                 if (contribution != null) {
                     showAddImageToWikipediaInstructions(contribution)

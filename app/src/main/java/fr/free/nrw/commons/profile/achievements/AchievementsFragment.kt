@@ -10,6 +10,7 @@ import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.mwapi.TooManyAchievementsException
+import fr.free.nrw.commons.mwapi.UploadCount
 import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
@@ -233,9 +234,9 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                        { uploadCount: Int? ->
+                        { uploadCount: UploadCount ->
                             statsBinder.bind(
-                                achievements.copy(imagesUploaded = uploadCount ?: 0),
+                                achievements.copy(imagesUploaded = uploadCount.count),
                             )
                         },
                         { t: Throwable? ->
