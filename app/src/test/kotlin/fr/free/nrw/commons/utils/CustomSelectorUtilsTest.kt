@@ -2,6 +2,7 @@ package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -47,6 +48,20 @@ class CustomSelectorUtilsTest {
     @Test
     fun testOtherFailureReturnsError() {
         `when`(mediaClient.checkFileExistsUsingSha("sha1")).thenReturn(Single.error(IOException()))
+
+        assertEquals(ImageLoader.Result.ERROR, checkWhetherFileExists())
+    }
+
+    @Test
+    fun testNullApiResponseReturnsError() {
+        `when`(mediaClient.checkFileExistsUsingSha("sha1")).thenReturn(Single.error(NullPointerException()))
+
+        assertEquals(ImageLoader.Result.ERROR, checkWhetherFileExists())
+    }
+
+    @Test
+    fun testMwExceptionReturnsError() {
+        `when`(mediaClient.checkFileExistsUsingSha("sha1")).thenReturn(Single.error(MwException(null, null)))
 
         assertEquals(ImageLoader.Result.ERROR, checkWhetherFileExists())
     }
