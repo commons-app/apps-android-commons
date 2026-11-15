@@ -1,12 +1,7 @@
 package fr.free.nrw.commons.locationpicker
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.Paint
-import android.location.LocationManager
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.MotionEvent
@@ -16,10 +11,8 @@ import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.IntentCompat
 import androidx.core.os.BundleCompat
@@ -34,11 +27,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
-import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.location.LocationPermissionsHelper
-import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_LOCATION
@@ -48,16 +38,11 @@ import fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
-import fr.free.nrw.commons.utils.handleGeoCoordinates
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.util.constants.GeoConstants
 import org.osmdroid.views.CustomZoomButtonsController
-import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.ScaleDiskOverlay
-import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
@@ -66,9 +51,7 @@ import javax.inject.Named
 /**
  * Helps to pick location and return the result with an intent
  */
-class LocationPickerActivity :
-    BaseActivity(),
-    LocationPermissionCallback {
+class LocationPickerActivity : BaseActivity() {
     /**
      * coordinateEditHelper: helps to edit coordinates
      */
@@ -94,6 +77,8 @@ class LocationPickerActivity :
      * mapView : OSM Map
      */
     private var mapView: org.osmdroid.views.MapView? = null
+    private lateinit var mapManager: LocationPickerMapManager
+    private lateinit var permissionManager: LocationPickerPermissionManager
 
     /**
      * tvAttribution : credit
@@ -161,7 +146,6 @@ class LocationPickerActivity :
 
     @Inject
     lateinit var locationManager: LocationServiceManager
-    private lateinit var locationPermissionsHelper: LocationPermissionsHelper
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -212,12 +196,7 @@ class LocationPickerActivity :
             media = BundleCompat.getParcelable(savedInstanceState, "sMedia", Media::class.java)
         }
 
-        bindViews()
-        addBackButtonListener()
-        addPlaceSelectedButton()
-        addCredits()
-        getToolbarUI()
-        addCenterOnGPSButton()
+        bindViewsAndListeners()
 
         org.osmdroid.config.Configuration
             .getInstance()
@@ -260,6 +239,23 @@ class LocationPickerActivity :
             false
         }
 
+        mapManager =
+            LocationPickerMapManager(
+                this,
+                requireNotNull(mapView),
+                markerImage,
+                locationManager,
+            )
+        permissionManager =
+            LocationPickerPermissionManager(
+                this,
+                locationManager,
+                store,
+                mapManager,
+                { moveToCurrentLocation },
+                { activity },
+            )
+
         if (activity == "UploadActivity") {
             placeSelectedButton.visibility = View.GONE
             modifyLocationButton.visibility = View.VISIBLE
@@ -271,72 +267,16 @@ class LocationPickerActivity :
             markerImage.visibility = View.GONE
             shadow.visibility = View.GONE
             cameraPosition?.let {
-                showSelectedLocationMarker(GeoPoint(it.latitude, it.longitude))
+                mapManager.showSelectedLocationMarker(GeoPoint(it.latitude, it.longitude))
             }
         }
         setupMapView()
     }
 
     /**
-     * Moves the center of the map to the specified coordinates
+     * Binds the location-picker views and their listeners.
      */
-    private fun moveMapTo(
-        latitude: Double,
-        longitude: Double,
-    ) {
-        mapView?.controller?.let {
-            val point = GeoPoint(latitude, longitude)
-            it.setCenter(point)
-            it.animateTo(point)
-        }
-    }
-
-    /**
-     * Moves the center of the map to the specified coordinates
-     * @param point The GeoPoint object which contains the coordinates to move to
-     */
-    private fun moveMapTo(point: GeoPoint?) {
-        point?.let {
-            moveMapTo(it.latitude, it.longitude)
-        }
-    }
-
-    /**
-     * For showing credits
-     */
-    private fun addCredits() {
-        tvAttribution.text =
-            HtmlCompat.fromHtml(
-                getString(R.string.map_attribution),
-                HtmlCompat.FROM_HTML_MODE_LEGACY,
-            )
-        tvAttribution.movementMethod = LinkMovementMethod.getInstance()
-    }
-
-    /**
-     * For setting up Dark Theme
-     */
-    private fun darkThemeSetup() {
-        if (isDarkTheme) {
-            shadow.setColorFilter(Color.argb(255, 255, 255, 255))
-            mapView?.overlayManager?.tilesOverlay?.setColorFilter(TilesOverlay.INVERT_COLORS)
-        }
-    }
-
-    /**
-     * Clicking back button destroy locationPickerActivity
-     */
-    private fun addBackButtonListener() {
-        val backButton = findViewById<ImageView>(R.id.maplibre_place_picker_toolbar_back_button)
-        backButton.setOnClickListener {
-            finish()
-        }
-    }
-
-    /**
-     * Binds mapView and location picker icon
-     */
-    private fun bindViews() {
+    private fun bindViewsAndListeners() {
         mapView = findViewById(R.id.map_view)
         markerImage = findViewById(R.id.location_picker_image_view_marker)
         tvAttribution = findViewById(R.id.tv_attribution)
@@ -345,12 +285,16 @@ class LocationPickerActivity :
         showInMapButton = findViewById(R.id.show_in_map)
         showInMapButton.text = getString(R.string.show_in_map_app).uppercase(Locale.ROOT)
         shadow = findViewById(R.id.location_picker_image_view_shadow)
-    }
+        findViewById<ImageView>(R.id.maplibre_place_picker_toolbar_back_button)
+            .setOnClickListener { finish() }
 
-    /**
-     * Gets toolbar color
-     */
-    private fun getToolbarUI() {
+        tvAttribution.text =
+            HtmlCompat.fromHtml(
+                getString(R.string.map_attribution),
+                HtmlCompat.FROM_HTML_MODE_LEGACY,
+            )
+        tvAttribution.movementMethod = LinkMovementMethod.getInstance()
+
         val toolbar: ConstraintLayout = findViewById(R.id.location_picker_toolbar)
         WindowCompat
             .getInsetsController(window, window.decorView)
@@ -359,58 +303,60 @@ class LocationPickerActivity :
         largeToolbarText = findViewById(R.id.location_picker_toolbar_primary_text_view)
         smallToolbarText = findViewById(R.id.location_picker_toolbar_secondary_text_view)
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor))
+
+        placeSelectedButton = findViewById(R.id.location_chosen_button)
+        applyEdgeToEdgeBottomInsets(placeSelectedButton)
+        placeSelectedButton.setOnClickListener { placeSelected() }
+
+        fabCenterOnLocation = findViewById(R.id.center_on_gps)
+        fabCenterOnLocation.setOnClickListener {
+            moveToCurrentLocation = true
+            permissionManager.requestLocationPermissions()
+        }
     }
 
     private fun setupMapView() {
         val mapBottomLayout: ConstraintLayout = findViewById(R.id.map_bottom_layout)
         mapBottomLayout.applyEdgeToEdgeBottomPaddingInsets()
 
-        requestLocationPermissions()
+        permissionManager.requestLocationPermissions()
 
         // If location metadata is available, move map to that location.
         if (activity == "UploadActivity" || activity == "MediaActivity") {
-            moveMapToMediaLocation()
+            mapManager.moveMapToMediaLocation(cameraPosition)
         } else {
             // If location metadata is not available, move map to device GPS location.
-            moveMapToGPSLocation()
+            mapManager.moveMapToGPSLocation()
         }
 
-        modifyLocationButton.setOnClickListener { onClickModifyLocation() }
-        removeLocationButton.setOnClickListener { onClickRemoveLocation() }
-        showInMapButton.setOnClickListener { showInMapApp() }
-        darkThemeSetup()
-    }
-
-    /**
-     * Handles onClick event of modifyLocationButton
-     */
-    private fun onClickModifyLocation() {
-        placeSelectedButton.visibility = View.VISIBLE
-        modifyLocationButton.visibility = View.GONE
-        removeLocationButton.visibility = View.GONE
-        showInMapButton.visibility = View.GONE
-        markerImage.visibility = View.VISIBLE
-        shadow.visibility = View.VISIBLE
-        largeToolbarText.text = getString(R.string.choose_a_location)
-        smallToolbarText.text = getString(R.string.pan_and_zoom_to_adjust)
-        fabCenterOnLocation.visibility = View.VISIBLE
-        removeSelectedLocationMarker()
-        moveMapToMediaLocation()
-    }
-
-    /**
-     * Handles onClick event of removeLocationButton
-     */
-    private fun onClickRemoveLocation() {
-        DialogUtil.showAlertDialog(
-            this,
-            getString(R.string.remove_location_warning_title),
-            getString(R.string.remove_location_warning_desc),
-            getString(R.string.continue_message),
-            getString(R.string.cancel),
-            { removeLocationFromImage() },
-            null,
-        )
+        modifyLocationButton.setOnClickListener {
+            placeSelectedButton.visibility = View.VISIBLE
+            modifyLocationButton.visibility = View.GONE
+            removeLocationButton.visibility = View.GONE
+            showInMapButton.visibility = View.GONE
+            markerImage.visibility = View.VISIBLE
+            shadow.visibility = View.VISIBLE
+            largeToolbarText.text = getString(R.string.choose_a_location)
+            smallToolbarText.text = getString(R.string.pan_and_zoom_to_adjust)
+            fabCenterOnLocation.visibility = View.VISIBLE
+            mapManager.removeSelectedLocationMarker(cameraPosition)
+            mapManager.moveMapToMediaLocation(cameraPosition)
+        }
+        removeLocationButton.setOnClickListener {
+            DialogUtil.showAlertDialog(
+                this,
+                getString(R.string.remove_location_warning_title),
+                getString(R.string.remove_location_warning_desc),
+                getString(R.string.continue_message),
+                getString(R.string.cancel),
+                { removeLocationFromImage() },
+                null,
+            )
+        }
+        showInMapButton.setOnClickListener {
+            mapManager.showInMapApp(activity, cameraPosition)
+        }
+        mapManager.applyDarkTheme(isDarkTheme, shadow)
     }
 
     /**
@@ -437,65 +383,6 @@ class LocationPickerActivity :
         }
         setResult(RESULT_OK, Intent())
         finish()
-    }
-
-    /**
-     * Show location in map app
-     */
-    private fun showInMapApp() {
-        val position =
-            when {
-                // location metadata is available
-                activity == "UploadActivity" && cameraPosition != null -> {
-                    fr.free.nrw.commons.location.LatLng(
-                        cameraPosition!!.latitude,
-                        cameraPosition!!.longitude,
-                        0.0f,
-                    )
-                }
-                // location metadata is not available
-                mapView != null -> {
-                    fr.free.nrw.commons.location.LatLng(
-                        mapView?.mapCenter?.latitude!!,
-                        mapView?.mapCenter?.longitude!!,
-                        0.0f,
-                    )
-                }
-                else -> null
-            }
-
-        position?.let {
-            mapView?.zoomLevelDouble?.let { zoomLevel ->
-                handleGeoCoordinates(this, it, zoomLevel)
-            } ?: handleGeoCoordinates(this, it)
-        }
-    }
-
-    /**
-     * Moves map to media's location
-     */
-    private fun moveMapToMediaLocation() {
-        cameraPosition?.let {
-            moveMapTo(GeoPoint(it.latitude, it.longitude))
-        }
-    }
-
-    /**
-     * Moves map to GPS location
-     */
-    private fun moveMapToGPSLocation() {
-        locationManager.getLastLocation()?.let {
-            moveMapTo(GeoPoint(it.latitude, it.longitude))
-        }
-    }
-
-    /**
-     * Adds "Place Selected" button
-     */
-    private fun addPlaceSelectedButton() {
-        placeSelectedButton = findViewById(R.id.location_chosen_button)
-        applyEdgeToEdgeBottomInsets(placeSelectedButton)
-        placeSelectedButton.setOnClickListener { placeSelected() }
     }
 
     /**
@@ -578,73 +465,12 @@ class LocationPickerActivity :
         }
     }
 
-    /**
-     * Adds a button to center the map at user's location
-     */
-    private fun addCenterOnGPSButton() {
-        fabCenterOnLocation = findViewById(R.id.center_on_gps)
-        fabCenterOnLocation.setOnClickListener {
-            moveToCurrentLocation = true
-            requestLocationPermissions()
-        }
-    }
-
-    /**
-     * Shows a selected location marker
-     */
-    private fun showSelectedLocationMarker(point: GeoPoint) {
-        val icon = ContextCompat.getDrawable(this, R.drawable.map_default_map_marker)
-        Marker(mapView).apply {
-            position = point
-            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            setIcon(icon)
-            infoWindow = null
-            mapView?.overlays?.add(this)
-        }
-        mapView?.invalidate()
-    }
-
-    /**
-     * Removes selected location marker
-     */
-    private fun removeSelectedLocationMarker() {
-        val overlays = mapView?.overlays
-        overlays
-            ?.filterIsInstance<Marker>()
-            ?.firstOrNull {
-                it.position.latitude ==
-                    cameraPosition?.latitude &&
-                    it.position.longitude == cameraPosition?.longitude
-            }?.let {
-                overlays.remove(it)
-                mapView?.invalidate()
-            }
-    }
-
-    /**
-     * Centers map at user's location
-     */
-    private fun requestLocationPermissions() {
-        locationPermissionsHelper = LocationPermissionsHelper(this, locationManager, this)
-        locationPermissionsHelper.requestForLocationAccess(
-            R.string.location_permission_title,
-            R.string.upload_map_location_access,
-        )
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray,
     ) {
-        if (requestCode == Constants.RequestCodes.LOCATION &&
-            grantResults.isNotEmpty() &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
-        ) {
-            onLocationPermissionGranted()
-        } else {
-            onLocationPermissionDenied(getString(R.string.upload_map_location_access))
-        }
+        permissionManager.onRequestPermissionsResult(requestCode, grantResults)
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
@@ -656,109 +482,6 @@ class LocationPickerActivity :
     override fun onPause() {
         super.onPause()
         mapView?.onPause()
-    }
-
-    override fun onLocationPermissionDenied(toastMessage: String) {
-        val isDeniedBefore = store.getBoolean("isPermissionDenied", false)
-        val showRationale =
-            ActivityCompat.shouldShowRequestPermissionRationale(
-                this,
-                permission.ACCESS_FINE_LOCATION,
-            )
-
-        if (!showRationale) {
-            if (!locationPermissionsHelper.checkLocationPermission(this)) {
-                if (isDeniedBefore) {
-                    locationPermissionsHelper.showAppSettingsDialog(
-                        this,
-                        R.string.upload_map_location_access,
-                    )
-                } else {
-                    Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
-                }
-                store.putBoolean("isPermissionDenied", true)
-            }
-        } else {
-            Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
-        }
-    }
-
-    override fun onLocationPermissionGranted() {
-        if (moveToCurrentLocation || activity != "MediaActivity") {
-            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-                locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
-                addMarkerAtGPSLocation()
-            } else {
-                addMarkerAtGPSLocation()
-                locationPermissionsHelper.showLocationOffDialog(
-                    this,
-                    R.string.ask_to_turn_location_on_text,
-                )
-            }
-        }
-    }
-
-    /**
-     * Adds a marker at the user's GPS location
-     */
-    private fun addMarkerAtGPSLocation() {
-        locationManager.getLastLocation()?.let {
-            addLocationMarker(GeoPoint(it.latitude, it.longitude))
-            markerImage.translationY = 0f
-        }
-    }
-
-    private fun addLocationMarker(geoPoint: GeoPoint) {
-        if (moveToCurrentLocation) {
-            mapView?.overlays?.clear()
-        }
-
-        val diskOverlay =
-            ScaleDiskOverlay(
-                this,
-                geoPoint,
-                2000,
-                GeoConstants.UnitOfMeasure.foot,
-            )
-
-        val circlePaint =
-            Paint().apply {
-                color = Color.rgb(128, 128, 128)
-                style = Paint.Style.STROKE
-                strokeWidth = 2f
-            }
-        diskOverlay.setCirclePaint2(circlePaint)
-
-        val diskPaint =
-            Paint().apply {
-                color = Color.argb(40, 128, 128, 128)
-                style = Paint.Style.FILL_AND_STROKE
-            }
-        diskOverlay.setCirclePaint1(diskPaint)
-
-        diskOverlay.setDisplaySizeMin(900)
-        diskOverlay.setDisplaySizeMax(1700)
-
-        mapView?.overlays?.add(diskOverlay)
-
-        val startMarker =
-            Marker(mapView).apply {
-                position = geoPoint
-                setAnchor(
-                    Marker.ANCHOR_CENTER,
-                    Marker.ANCHOR_BOTTOM,
-                )
-                icon =
-                    ContextCompat.getDrawable(
-                        this@LocationPickerActivity,
-                        R.drawable.current_location_marker,
-                    )
-                title = "Your Location"
-                textLabelFontSize = 24
-            }
-
-        mapView?.overlays?.add(startMarker)
     }
 
     /**

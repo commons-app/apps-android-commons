@@ -98,7 +98,7 @@ object FileUtils {
                         append(line).append("\n")
                     }
                 }
-            } catch (e: Throwable) {
+            } catch (e: IOException) {
                 Timber.e(e)
             }
         }

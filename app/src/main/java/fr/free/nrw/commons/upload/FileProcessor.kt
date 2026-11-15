@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.MotionPhotoUtils
 import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -135,6 +136,12 @@ class FileProcessor
                 } catch (e: IOException) {
                     Timber.w("EXIF redaction failed: %s", e.toString())
                 }
+                // Not a user setting: the video can show things that were not in the photo.
+                try {
+                    if (MotionPhotoUtils.removeVideo(File(filePath))) Timber.d("Motion photo video removed.")
+                } catch (e: IOException) {
+                    Timber.w("Motion photo video removal failed: %s", e.toString())
+                }
             }
         }
 
@@ -169,20 +176,24 @@ class FileProcessor
                 }
         }
 
-        private fun readImageCoordinates(file: File) =
+        private fun readImageCoordinates(file: File): ImageCoordinates? {
             try {
-            /* Used null location as location for similar images captured before is not available
-               in case it is not present in the EXIF. */
-                ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
+                /* Used null location as location for similar images captured before is not available
+                   in case it is not present in the EXIF. */
+                val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+                if (inputStream != null) {
+                    return ImageCoordinates(inputStream, null)
+                }
             } catch (e: IOException) {
                 Timber.e(e)
-                try {
-                    ImageCoordinates(file.absolutePath, null)
-                } catch (ex: IOException) {
-                    Timber.e(ex)
-                    null
-                }
             }
+            return try {
+                ImageCoordinates(file.absolutePath, null)
+            } catch (ex: IOException) {
+                Timber.e(ex)
+                null
+            }
+        }
 
         /**
          * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
