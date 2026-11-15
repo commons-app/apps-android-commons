@@ -11,13 +11,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
+import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.bookmarks.models.Bookmark
@@ -71,11 +71,9 @@ class MediaDetailPagerFragment :
     var mediaDetailProvider: MediaDetailProvider? = null
     var isFromFeaturedRootFragment: Boolean = false
     var position: Int = 0
-
-    /**
-     * ProgressBar used to indicate the loading status of media items.
-     */
-    var imageProgressBar: ProgressBar? = null
+    private var pageBeforeScroll: Int? = null
+    private var mediaFragmentBeforeScroll: MediaDetailFragment? = null
+    private var pagerScrollState: Int = ViewPager.SCROLL_STATE_IDLE
 
     var removedItems: ArrayList<Int> = ArrayList()
 
@@ -96,10 +94,27 @@ class MediaDetailPagerFragment :
                         requireActivity().invalidateOptionsMenu()
                     }
                 }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    pagerScrollState = state
+
+                    when (state) {
+                        ViewPager.SCROLL_STATE_DRAGGING -> {
+                            // Dragging can start again mid-settle, when the current page is
+                            // already the one being scrolled to.
+                            if (mediaFragmentBeforeScroll == null) {
+                                pageBeforeScroll = binding!!.mediaDetailsPager.currentItem
+                                mediaFragmentBeforeScroll = adapter?.currentMediaDetailFragment
+                            }
+                        }
+                        ViewPager.SCROLL_STATE_IDLE -> {
+                            pauseOutgoingMedia()
+                        }
+                    }
+                }
             },
         )
-        // Initialize the ProgressBar by finding it in the layout
-        imageProgressBar = binding!!.root.findViewById(R.id.itemProgressBar)
+
         adapter = MediaDetailAdapter(this, childFragmentManager)
 
         // ActionBar is now supported in both activities - if this crashes something is quite wrong
@@ -129,7 +144,7 @@ class MediaDetailPagerFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current-page", binding!!.mediaDetailsPager.currentItem)
+        outState.putInt("current-page", binding?.mediaDetailsPager?.currentItem ?: 0)
         outState.putBoolean("editable", editable)
         outState.putBoolean("isFeaturedImage", isFeaturedImage)
     }
@@ -151,6 +166,7 @@ class MediaDetailPagerFragment :
     }
 
     override fun onDestroyView() {
+        adapter = null
         super.onDestroyView()
         if (activity is MainActivity) {
             (activity as MainActivity).showTabs()
@@ -167,7 +183,8 @@ class MediaDetailPagerFragment :
             return true
         }
 
-        val m = mediaDetailProvider!!.getMediaAtPosition(binding!!.mediaDetailsPager.currentItem)
+        val pager = binding?.mediaDetailsPager ?: return true
+        val m = mediaDetailProvider!!.getMediaAtPosition(pager.currentItem)
         val mediaDetailFragment = adapter!!.currentMediaDetailFragment
         when (item.itemId) {
             R.id.menu_bookmark_current_image -> {
@@ -314,13 +331,14 @@ ${m.pageTitle.canonicalUri}""",
         if (!editable) { // Disable menu options for editable views
             menu.clear() // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu)
-            if (binding!!.mediaDetailsPager != null) {
+            val pager = binding?.mediaDetailsPager
+            if (pager != null) {
                 val provider = mediaDetailProvider ?: return
                 val position =
                     if (isFromFeaturedRootFragment) {
                         position
                     } else {
-                        binding!!.mediaDetailsPager.currentItem
+                        pager.currentItem
                     }
 
                 val m = provider.getMediaAtPosition(position)
@@ -338,20 +356,26 @@ ${m.pageTitle.canonicalUri}""",
                         .findItem(R.id.menu_bookmark_current_image)
                         .setEnabled(true)
                         .setVisible(true)
-                    menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(true).setVisible(true)
+                    val isImage = m.mediaType == MediaType.IMAGE
+                    menu
+                        .findItem(R.id.menu_set_as_wallpaper)
+                        .setEnabled(isImage)
+                        .setVisible(isImage)
                     if (m.user != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true)
                     }
 
-                    try {
-                        val mediaUrl = URL(m.imageUrl)
-                        mediaDetailMenuHandler?.handleBackgroundColorMenuItems({
-                            BitmapFactory.decodeStream(
-                                mediaUrl.openConnection().getInputStream(),
-                            )
-                        }, menu)
-                    } catch (e: Exception) {
-                        Timber.e("Cant detect media transparency")
+                    if (isImage) {
+                        try {
+                            val mediaUrl = URL(m.imageUrl)
+                            mediaDetailMenuHandler?.handleBackgroundColorMenuItems({
+                                BitmapFactory.decodeStream(
+                                    mediaUrl.openConnection().getInputStream(),
+                                )
+                            }, menu)
+                        } catch (e: Exception) {
+                            Timber.e("Cant detect media transparency")
+                        }
                     }
 
                     // Initialize bookmark object
@@ -427,7 +451,7 @@ ${m.pageTitle.canonicalUri}""",
                         .setVisible(false)
                 }
 
-                if (!sessionManager!!.isUserLoggedIn) {
+                if (m?.mediaType != MediaType.IMAGE || !sessionManager!!.isUserLoggedIn) {
                     menu.findItem(R.id.menu_set_as_avatar).setVisible(false)
                 }
             }
@@ -452,14 +476,16 @@ ${m.pageTitle.canonicalUri}""",
         val runnable: Runnable =
             object : Runnable {
                 override fun run() {
+                    val b = binding ?: return
+                    val a = adapter ?: return
                     // Show the ProgressBar while waiting for the item to load
-                    imageProgressBar!!.visibility = View.VISIBLE
+                    b.itemProgressBar.visibility = View.VISIBLE
                     // Check if the adapter has enough items loaded
-                    if (adapter!!.count > position) {
+                    if (a.count > position) {
                         // Set the current item in the ViewPager
-                        binding!!.mediaDetailsPager.setCurrentItem(position, false)
+                        b.mediaDetailsPager.setCurrentItem(position, false)
                         // Hide the ProgressBar once the item is loaded
-                        imageProgressBar!!.visibility = View.GONE
+                        b.itemProgressBar.visibility = View.GONE
                     } else {
                         // If the item is not ready yet, post the Runnable again
                         handler.post(this)
@@ -477,6 +503,39 @@ ${m.pageTitle.canonicalUri}""",
         if (null != adapter) {
             adapter!!.notifyDataSetChanged()
         }
+    }
+
+    fun onPrimaryMediaChanging(
+        position: Int,
+        fragment: MediaDetailFragment,
+    ) {
+        if (mediaFragmentBeforeScroll == null) {
+            pageBeforeScroll = position
+            mediaFragmentBeforeScroll = fragment
+        }
+
+        val pager = binding!!.mediaDetailsPager
+        pager.post {
+            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                pauseOutgoingMedia()
+            }
+        }
+    }
+
+    private fun pauseOutgoingMedia() {
+        if (pageBeforeScroll != binding!!.mediaDetailsPager.currentItem) {
+            mediaFragmentBeforeScroll?.pauseMedia()
+        }
+
+        pageBeforeScroll = null
+        mediaFragmentBeforeScroll = null
+    }
+
+    /**
+     * Enables or disables swiping between media detail pages.
+     */
+    fun setPagerSwipeEnabled(enabled: Boolean) {
+        binding!!.mediaDetailsPager.setPagerSwipeEnabled(enabled)
     }
 
     /**
