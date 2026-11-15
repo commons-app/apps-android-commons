@@ -431,7 +431,7 @@ class LoginActivity : BaseActivity() {
             if (progressDialog?.isShowing == true) {
                 progressDialog!!.dismiss()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e, "Could not dismiss login progress dialog")
         }
         binding?.let {

@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.MotionPhotoUtils
 import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -134,6 +135,12 @@ class FileProcessor
                     RandomAccessFileExifWriter.redactTags(File(filePath), expandedTags)
                 } catch (e: IOException) {
                     Timber.w("EXIF redaction failed: %s", e.toString())
+                }
+                // Not a user setting: the video can show things that were not in the photo.
+                try {
+                    if (MotionPhotoUtils.removeVideo(File(filePath))) Timber.d("Motion photo video removed.")
+                } catch (e: IOException) {
+                    Timber.w("Motion photo video removal failed: %s", e.toString())
                 }
             }
         }
