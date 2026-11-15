@@ -9,7 +9,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import java.util.HashMap
 
 /**
  * Array adapter for recent languages
@@ -17,7 +16,7 @@ import java.util.HashMap
 class RecentLanguagesAdapter constructor(
     context: Context,
     var recentLanguages: List<Language>,
-    private val selectedLanguages: HashMap<*, String>,
+    private val selectedLanguages: MutableMap<Int, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
     /**
      * Selected language code in UploadMediaDetailAdapter

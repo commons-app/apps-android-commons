@@ -1,6 +1,5 @@
 package fr.free.nrw.commons
 
-import fr.free.nrw.commons.OkHttpConnectionFactory.HttpStatusException
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -9,7 +8,7 @@ import java.io.IOException
 fun createTestClient(): OkHttpClient =
     OkHttpClient
         .Builder()
-        .addInterceptor(UnsuccessfulResponseInterceptor())
+        .addInterceptor(TestUnsuccessfulResponseInterceptor())
         .addInterceptor(TestStubInterceptor())
         .build()
 
@@ -32,13 +31,13 @@ private class TestStubInterceptor : Interceptor {
     }
 }
 
-private class UnsuccessfulResponseInterceptor : Interceptor {
+private class TestUnsuccessfulResponseInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val rsp = chain.proceed(chain.request())
         if (rsp.isSuccessful) {
             return rsp
         }
-        throw HttpStatusException(rsp)
+        throw IOException("Unsuccessful response")
     }
 }

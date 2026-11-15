@@ -1,7 +1,7 @@
 name: "\U0001F41E Bug report"
 description: Create a report to help us improve.
 title: "[Bug]: "
-labels: ["bug"]
+type: Bug  # Retained to categorize the issue as per organization-level type
 body:
   - type: markdown
     attributes:
@@ -70,7 +70,7 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Screen-shots
+      label: Screenshots
       description: Add screenshots related to the issue (if available). Can be created by pressing the Volume Down and Power Button at the same time on Android 4.0 and higher.
     validations:
       required: false

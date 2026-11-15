@@ -3,7 +3,9 @@ package fr.free.nrw.commons.media.zoomControllers
 import android.view.MotionEvent
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.media.zoomControllers.gestures.GestureTransform
 import fr.free.nrw.commons.media.zoomControllers.gestures.MultiPointerGestureDetector
+import fr.free.nrw.commons.media.zoomControllers.gestures.PointerSlots
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
 import org.junit.Assert
 import org.junit.Before
@@ -84,89 +86,89 @@ class TransformGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testIsGestureInProgress() {
-        Assert.assertEquals(detector.isGestureInProgress, false)
+        val pointers = Whitebox.getInternalState<MultiPointerGestureDetector>(detector, "mDetector")
+        Assert.assertEquals(pointers.isGestureInProgress(), false)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.newPointerCount, 0)
+        val pointers = Whitebox.getInternalState<MultiPointerGestureDetector>(detector, "mDetector")
+        Assert.assertEquals(pointers.pointerSlots.newPointerCount, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.pointerCount, 0)
+        val pointers = Whitebox.getInternalState<MultiPointerGestureDetector>(detector, "mDetector")
+        Assert.assertEquals(pointers.pointerSlots.pointerCount, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotX() {
-        Assert.assertEquals(detector.pivotX, 0.0f)
+        Assert.assertEquals(detector.transform.getPivotX(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotY() {
-        Assert.assertEquals(detector.pivotY, 0.0f)
+        Assert.assertEquals(detector.transform.getPivotY(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationX() {
-        Assert.assertEquals(detector.translationX, 0.0f)
+        Assert.assertEquals(detector.transform.getTranslationX(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationY() {
-        Assert.assertEquals(detector.translationY, 0.0f)
+        Assert.assertEquals(detector.transform.getTranslationY(), 0.0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetScaleCaseLessThan2() {
-        Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.scale, 1f)
+        val transformDetector = transformWithPointerCount(1)
+        Assert.assertEquals(transformDetector.transform.getScale(), 1f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetScaleCaseGreaterThan2() {
-        val array = FloatArray(2)
-        array[0] = 0.0f
-        array[1] = 1.0f
-        Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(2)
-        whenever(mDetector.startX).thenReturn(array)
-        whenever(mDetector.startY).thenReturn(array)
-        whenever(mDetector.currentX).thenReturn(array)
-        whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.scale, 1f)
+        val array = floatArrayOf(0.0f, 1.0f)
+        val transformDetector = transformWithCoordinates(array, array, array, array)
+        Assert.assertEquals(transformDetector.transform.getScale(), 1f)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetScaleUsesDistanceRatio() {
+        val transformDetector =
+            transformWithCoordinates(
+                startX = floatArrayOf(0.0f, 1.0f),
+                startY = floatArrayOf(0.0f, 0.0f),
+                currentX = floatArrayOf(0.0f, 2.0f),
+                currentY = floatArrayOf(0.0f, 0.0f),
+            )
+        Assert.assertEquals(transformDetector.transform.getScale(), 2f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetRotationCaseLessThan2() {
-        Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.rotation, 0f)
+        val transformDetector = transformWithPointerCount(1)
+        Assert.assertEquals(transformDetector.transform.getRotation(), 0f)
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetRotationCaseGreaterThan2() {
-        val array = FloatArray(2)
-        array[0] = 0.0f
-        array[1] = 1.0f
-        Whitebox.setInternalState(detector, "mDetector", mDetector)
-        whenever(mDetector.pointerCount).thenReturn(2)
-        whenever(mDetector.startX).thenReturn(array)
-        whenever(mDetector.startY).thenReturn(array)
-        whenever(mDetector.currentX).thenReturn(array)
-        whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.rotation, 0f)
+        val array = floatArrayOf(0.0f, 1.0f)
+        val transformDetector = transformWithCoordinates(array, array, array, array)
+        Assert.assertEquals(transformDetector.transform.getRotation(), 0f)
     }
 
     @Test
@@ -176,12 +178,39 @@ class TransformGestureDetectorUnitTest {
         array[0] = 0.0f
         array[1] = 1.0f
         val method: Method =
-            TransformGestureDetector::class.java.getDeclaredMethod(
+            GestureTransform::class.java.getDeclaredMethod(
                 "calcAverage",
                 FloatArray::class.java,
                 Int::class.java,
             )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(detector, array, 2), 0.5f)
+        val transform = GestureTransform(PointerSlots())
+        Assert.assertEquals(method.invoke(transform, array, 2), 0.5f)
+    }
+
+    private fun transformWithPointerCount(count: Int): TransformGestureDetector =
+        transformWithCoordinates(
+            startX = FloatArray(2),
+            startY = FloatArray(2),
+            currentX = FloatArray(2),
+            currentY = FloatArray(2),
+            count = count,
+        )
+
+    private fun transformWithCoordinates(
+        startX: FloatArray,
+        startY: FloatArray,
+        currentX: FloatArray,
+        currentY: FloatArray,
+        count: Int = 2,
+    ): TransformGestureDetector {
+        val pointers = MultiPointerGestureDetector.newInstance()
+        val slots = pointers.pointerSlots
+        Whitebox.setInternalState(slots, "pointerCount", count)
+        Whitebox.setInternalState(slots, "mStartX", startX)
+        Whitebox.setInternalState(slots, "mStartY", startY)
+        Whitebox.setInternalState(slots, "mCurrentX", currentX)
+        Whitebox.setInternalState(slots, "mCurrentY", currentY)
+        return TransformGestureDetector(pointers)
     }
 }

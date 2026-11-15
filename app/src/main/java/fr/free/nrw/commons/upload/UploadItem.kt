@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import fr.free.nrw.commons.Utils
-import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.Companion.getExtensionFromMimeType
+import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper.getExtensionFromMimeType
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
-import io.reactivex.subjects.BehaviorSubject
+import fr.free.nrw.commons.utils.fixExtension
 
 class UploadItem(
     var mediaUri: Uri?,
@@ -19,8 +18,9 @@ class UploadItem(
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
     var contentUri: Uri?,
-    //according to EXIF data
-    val fileCreatedDateString: String?
+    // according to EXIF data
+    val fileCreatedDateString: String?,
+    val hasUnsupportedFormat: Boolean = false,
 ) {
     var imageQuality: Int = ImageUtils.IMAGE_WAIT
     var uploadMediaDetails: MutableList<UploadMediaDetail> = mutableListOf(UploadMediaDetail())
@@ -33,10 +33,11 @@ class UploadItem(
      * languages have been entered, the first language is used.
      */
     val filename: String
-        get() = Utils.fixExtension(
-            uploadMediaDetails[0].captionText,
-            getExtensionFromMimeType(mimeType)
-        )
+        get() =
+            fixExtension(
+                uploadMediaDetails[0].captionText,
+                getExtensionFromMimeType(mimeType),
+            )
 
     fun hasInvalidLocation(): Boolean = hasInvalidLocation
 
@@ -59,7 +60,5 @@ class UploadItem(
         return mediaUri.toString().contains((other).mediaUri.toString())
     }
 
-    override fun hashCode(): Int {
-        return mediaUri.hashCode()
-    }
+    override fun hashCode(): Int = mediaUri.hashCode()
 }

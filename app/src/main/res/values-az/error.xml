@@ -5,7 +5,7 @@
 * Nemoralis
 -->
 <resources>
-  <string name="crash_dialog_title">Nasazlıq</string>
+  <string name="crash_dialog_title">Commons çökdü</string>
   <string name="crash_dialog_text">Uups. Nəsə düzgün çalışmır!</string>
   <string name="crash_dialog_comment_prompt">Nə etdiyinizi bizə deyin, sonra e-poçt vasitəsilə bizimlə paylaşın. Bu, bizə bunu düzəltməyə kömək edəcək!</string>
   <string name="crash_dialog_ok_toast">Təşəkkürlər!</string>

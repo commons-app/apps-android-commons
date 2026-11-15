@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.FragmentManager
@@ -21,24 +23,27 @@ import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.CameraPosition
-import fr.free.nrw.commons.locationpicker.LocationPicker
-import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.locationpicker.LocationPicker
+import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
+import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -52,13 +57,16 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import java.io.File
 import java.lang.reflect.Method
+import java.util.Locale
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadMediaDetailFragmentUnitTest {
     private lateinit var fragment: UploadMediaDetailFragment
+    private lateinit var mediaView: UploadMediaDetailView
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
     private lateinit var layoutInflater: LayoutInflater
@@ -100,7 +108,7 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var place: Place
 
     @Mock
-    private var location: fr.free.nrw.commons.location.LatLng? = null
+    private lateinit var location: LatLng
 
     @Mock
     private lateinit var defaultKvStore: JsonKvStore
@@ -126,6 +134,7 @@ class UploadMediaDetailFragmentUnitTest {
                 .inflate(R.layout.fragment_upload_media_detail_fragment, null) as View
 
         fragment = UploadMediaDetailFragment()
+        mediaView = Whitebox.getInternalState(fragment, "mediaView")
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -145,18 +154,14 @@ class UploadMediaDetailFragmentUnitTest {
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(defaultKvStore.getString("description_language", "")).thenReturn("en")
     }
 
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
         Assert.assertNotNull(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetCallback() {
-        fragment.setCallback(null)
     }
 
     @Test
@@ -168,15 +173,38 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetImageToBeUploaded() {
+    fun testOnCreateView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageToBeUploaded(null, null, location)
+        fragment.onCreateView(layoutInflater, null, savedInstanceState)
     }
 
     @Test
-    @Throws(Exception::class)
-    fun testOnCreateView() {
-        fragment.onCreateView(layoutInflater, null, savedInstanceState)
+    fun landscapePreviewStartsAtTheTopWithoutStretching() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
+        fragment.recentLanguagesDao = mock()
+        Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
+
+        val preview =
+            fragment
+                .onCreateView(layoutInflater, null, null)
+                .findViewById<PhotoView>(R.id.backgroundImage)
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(400, View.MeasureSpec.EXACTLY)
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY)
+        preview.setImageBitmap(Bitmap.createBitmap(800, 400, Bitmap.Config.ARGB_8888))
+        preview.measure(widthSpec, heightSpec)
+        preview.layout(0, 0, 400, 600)
+
+        val bounds = checkNotNull(preview.displayRect)
+        Assert.assertEquals(0f, bounds.top, 0.01f)
+        Assert.assertEquals(200f, bounds.height(), 0.01f)
+
+        preview.setImageBitmap(Bitmap.createBitmap(300, 600, Bitmap.Config.ARGB_8888))
+        preview.measure(widthSpec, heightSpec)
+        preview.layout(0, 0, 400, 600)
+
+        val tallBounds = checkNotNull(preview.displayRect)
+        Assert.assertEquals(50f, tallBounds.left, 0.01f)
+        Assert.assertEquals(350f, tallBounds.right, 0.01f)
     }
 
     @Test
@@ -189,60 +217,16 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testInit() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitCaseGetIndexInViewFlipperNonZero() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(1)
-        `when`(callback.totalNumberOfSteps).thenReturn(5)
-        val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
-                "init",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowInfoAlert() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method =
-            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+            UploadMediaDetailDialogs::class.java.getDeclaredMethod(
                 "showInfoAlert",
                 Int::class.java,
                 Int::class.java,
             )
         method.isAccessible = true
-        method.invoke(fragment, R.string.media_detail_step_title, R.string.media_details_tooltip)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnNextButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onNextButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPreviousButtonClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onPreviousButtonClicked()
+        method.invoke(mediaView.dialogs, R.string.media_detail_step_title, R.string.media_details_tooltip)
     }
 
     @Test
@@ -258,7 +242,7 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnImageProcessed() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.mediaUri).thenReturn(mediaUri)
-        fragment.onImageProcessed(uploadItem, place)
+        fragment.onImageProcessed(uploadItem)
     }
 
     @Test
@@ -287,9 +271,9 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnBecameVisible() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
-        Whitebox.setInternalState(fragment, "showNearbyFound", true)
-        Whitebox.setInternalState(fragment, "nearbyPlace", place)
-        Whitebox.setInternalState(fragment, "uploadItem", uploadItem)
+        Whitebox.setInternalState(mediaView.metadata, "showNearbyFound", true)
+        Whitebox.setInternalState(mediaView.metadata, "nearbyPlace", place)
+        Whitebox.setInternalState(mediaView.metadata, "uploadItem", uploadItem)
         val method: Method =
             UploadMediaDetailFragment::class.java.getDeclaredMethod(
                 "onBecameVisible",
@@ -339,7 +323,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowExternalMap() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(0.0)
         `when`(imageCoordinates.decLongitude).thenReturn(0.0)
@@ -350,7 +334,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackOnMapIconClicked() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -358,7 +342,10 @@ class UploadMediaDetailFragmentUnitTest {
 
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
-        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
         `when`(latLng.latitude).thenReturn(0.0)
@@ -366,48 +353,161 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod =
+            UploadMediaLocationController::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
-        handleResultMethod.invoke(fragment, activityResult)
+        handleResultMethod.invoke(mediaView.locationController, activityResult)
         Mockito.verify(presenter, Mockito.times(0)).getImageQuality(0, location, activity)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnCameraPositionCallbackAddLocationDialog() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(fragment, "callback", callback)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
         Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
         Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
-        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
-        Whitebox.setInternalState(fragment, "isMissingLocationDialog", true)
+        Whitebox.setInternalState(mediaView.locationController, "isMissingLocationDialog", true)
         Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
         `when`(latLng.latitude).thenReturn(0.0)
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
 
-        val activityResult = ActivityResult(Activity.RESULT_OK,intent)
+        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
 
-        val handleResultMethod = UploadMediaDetailFragment::class.java.getDeclaredMethod("onCameraPosition", ActivityResult::class.java)
+        val handleResultMethod =
+            UploadMediaLocationController::class.java.getDeclaredMethod(
+                "onCameraPosition",
+                ActivityResult::class.java,
+            )
         handleResultMethod.isAccessible = true
 
-        handleResultMethod.invoke(fragment, activityResult)
+        handleResultMethod.invoke(mediaView.locationController, activityResult)
         Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null, false)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnEditActivityResultAppliesEditAfterFragmentIsRecreated() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        // A recreated fragment only knows its position, not the item that was being edited
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(fragment, "indexOfFragment", 1)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(1)
+        `when`(presenter.getUploadItem(1)).thenReturn(uploadItem)
+        val editedPath = "/cache/blurred_1.jpg"
+
+        invokeOnEditActivityResult(editedPath)
+
+        val editedUri = Uri.fromFile(File(editedPath))
+        Mockito.verify(uploadItem).setContentAndMediaUri(editedUri)
+        Assert.assertEquals(editedUri, Whitebox.getInternalState<Uri?>(mediaView, "editedImageUri"))
+        Mockito.verify(callback).changeThumbnail(1, editedPath)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnEditActivityResultWithoutUploadItemDoesNotShowEditedImage() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(-1)
+        `when`(presenter.getUploadItem(-1)).thenReturn(null)
+
+        invokeOnEditActivityResult("/cache/blurred_1.jpg")
+
+        Assert.assertNull(Whitebox.getInternalState<Uri?>(mediaView, "editedImageUri"))
+        Mockito
+            .verify(callback, Mockito.never())
+            .changeThumbnail(ArgumentMatchers.anyInt(), ArgumentMatchers.anyString())
+    }
+
+    private fun invokeOnEditActivityResult(editedPath: String) {
+        val data = Intent().putExtra("editedImageFilePath", editedPath)
+        val handleResultMethod =
+            UploadMediaDetailFragment::class.java.getDeclaredMethod(
+                "onEditActivityResult",
+                ActivityResult::class.java,
+            )
+        handleResultMethod.isAccessible = true
+        handleResultMethod.invoke(fragment, ActivityResult(Activity.RESULT_OK, data))
     }
 
     @Test
     @Throws(Exception::class)
     fun testUpdateMediaDetails() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.updateMediaDetails(null)
+        fragment.updateMediaDetails(mock())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUpdateMediaDetailsWithCaptionOnlyClearsShowNearbyFound() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(mediaView.metadata, "showNearbyFound", true)
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        fragment.updateMediaDetails(details)
+        val showNearbyFound: Boolean = Whitebox.getInternalState(mediaView.metadata, "showNearbyFound")
+        Assert.assertFalse(showNearbyFound)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnBecameVisibleWithCaptionOnlyDoesNotReapplyNearbyPlace() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        UploadActivity.nearbyPopupAnswers = mutableMapOf(place to true)
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        Whitebox.setInternalState(mediaView.metadata, "nearbyPlace", place)
+        Whitebox.setInternalState(fragment, "indexOfFragment", 1)
+        Whitebox.setInternalState(mediaView.metadata, "showNearbyFound", true)
+
+        val details = listOf(UploadMediaDetail(captionText = "Sample Caption", descriptionText = ""))
+        `when`(presenter.fetchTitleAndDescription(1)).thenAnswer {
+            fragment.updateMediaDetails(details)
+        }
+
+        fragment.onBecameVisible()
+        Mockito.verify(presenter, Mockito.never()).onUserConfirmedUploadIsOfPlace(
+            ArgumentMatchers.any(),
+            ArgumentMatchers.anyInt(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnMediaDetailsChangedPersistsAdapterItemsToUploadItem() {
+        // Regression test for #6938: a language row added via "+" must be written back into the
+        // UploadItem backing this fragment to ensure it gets uploaded
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "fragmentCallback", callback)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+        val itemsWithSecondLanguage =
+            mutableListOf(
+                UploadMediaDetail(languageCode = "en", captionText = "test"),
+                UploadMediaDetail(languageCode = "ja", captionText = "テスト"),
+            )
+        `when`(uploadMediaDetailAdapter.items).thenReturn(itemsWithSecondLanguage)
+
+        fragment.onMediaDetailsChanged()
+
+        Mockito
+            .verify(presenter)
+            .setUploadMediaDetails(itemsWithSecondLanguage, 0)
     }
 
     @Test
@@ -415,21 +515,6 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnDestroyView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onDestroyView()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnLlContainerTitleClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onLlContainerTitleClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnIbMapClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onIbMapClicked()
     }
 
     @Test
@@ -444,7 +529,7 @@ class UploadMediaDetailFragmentUnitTest {
     fun testOnButtonCopyTitleDescToSubsequentMedia() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
-        fragment.onButtonCopyTitleDescToSubsequentMedia()
+        mediaView.metadata.onButtonCopyTitleDescToSubsequentMedia()
     }
 
     @Test
@@ -458,7 +543,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
         `when`(uploadItem.gpsCoords).thenReturn(null)
         `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn("13.0")
@@ -474,7 +559,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testRememberedZoomLevelOnNotNull() {
-        shadowOf(Looper.getMainLooper()).idle()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(8.0)
         `when`(imageCoordinates.decLongitude).thenReturn(-8.0)
@@ -486,5 +571,68 @@ class UploadMediaDetailFragmentUnitTest {
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
         Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+    }
+
+    /** Verifies that location edits preserve precision and do not depend on the device locale. */
+    @Test
+    fun testLocationControllerRoundsCoordinatesWithNonEnglishLocale() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val coordinates = ImageCoordinates(exif = null, inAppPictureLocation = null)
+        `when`(uploadItem.gpsCoords).thenReturn(coordinates)
+        fragment.fragmentCallback = callback
+        fragment.presenter = presenter
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
+        val originalLocale = Locale.getDefault()
+        try {
+            Locale.setDefault(Locale.FRANCE)
+            mediaView.locationController.editLocation("12.3456789", "-45.1234567", 14.0)
+
+            Assert.assertEquals(12.345679, coordinates.decLatitude, 0.0)
+            Assert.assertEquals(-45.123457, coordinates.decLongitude, 0.0)
+            Assert.assertEquals("12.345679|-45.123457", coordinates.decimalCoords)
+            Assert.assertEquals(14.0, coordinates.zoomLevel, 0.0)
+            Assert.assertTrue(coordinates.imageCoordsExists)
+        } finally {
+            Locale.setDefault(originalLocale)
+        }
+    }
+
+    /** Verifies that cancelling the picker leaves coordinates and navigation untouched. */
+    @Test
+    fun testLocationControllerIgnoresCancelledResult() {
+        val coordinates = ImageCoordinates(exif = null, inAppPictureLocation = null)
+        coordinates.decLatitude = 12.0
+        coordinates.decLongitude = 34.0
+        `when`(uploadItem.gpsCoords).thenReturn(coordinates)
+        fragment.fragmentCallback = callback
+        fragment.presenter = presenter
+        `when`(callback.getIndexInViewFlipper(fragment)).thenReturn(0)
+        `when`(presenter.getUploadItem(0)).thenReturn(uploadItem)
+        fragment.presenter = presenter
+
+        mediaView.locationController.onCameraPosition(ActivityResult(Activity.RESULT_CANCELED, null))
+
+        Assert.assertEquals(12.0, coordinates.decLatitude, 0.0)
+        Assert.assertEquals(34.0, coordinates.decLongitude, 0.0)
+        Mockito.verifyNoInteractions(presenter)
+    }
+
+    /** Verifies that descriptions alone do not hide a nearby place's caption suggestion. */
+    @Test
+    fun testMetadataControllerRetainsNearbySuggestionForDescriptionOnly() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.fragmentCallback = callback
+        fragment.presenter = presenter
+        fragment.indexOfFragment = 1
+        UploadActivity.nearbyPopupAnswers = mutableMapOf(place to true)
+        mediaView.metadata.onNearbyPlaceFound(uploadItem, place)
+        val details = listOf(UploadMediaDetail(captionText = "", descriptionText = "Description only"))
+
+        mediaView.metadata.updateMediaDetails(details)
+        mediaView.metadata.onBecameVisible()
+
+        Mockito.verify(uploadMediaDetailAdapter).items = details
+        Mockito.verify(presenter).onUserConfirmedUploadIsOfPlace(place, 1)
     }
 }

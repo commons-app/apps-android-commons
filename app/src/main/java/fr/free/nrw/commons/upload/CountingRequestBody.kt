@@ -7,6 +7,7 @@ import okio.BufferedSink
 import okio.ForwardingSink
 import okio.Sink
 import okio.buffer
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -22,28 +23,25 @@ class CountingRequestBody(
     var offset: Long,
     var totalContentLength: Long,
 ) : RequestBody() {
-    protected var countingSink: CountingSink? = null
-
     override fun contentType(): MediaType? = delegate.contentType()
 
     override fun contentLength(): Long {
         try {
             return delegate.contentLength()
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e, "Could not read content length")
         }
         return -1
     }
 
     @Throws(IOException::class)
     override fun writeTo(sink: BufferedSink) {
-        countingSink = CountingSink(sink)
-        val bufferedSink = countingSink!!.buffer()
+        val bufferedSink = CountingSink(sink).buffer()
         delegate.writeTo(bufferedSink)
         bufferedSink.flush()
     }
 
-    protected inner class CountingSink(
+    private inner class CountingSink(
         delegate: Sink?,
     ) : ForwardingSink(delegate!!) {
         private var bytesWritten: Long = 0

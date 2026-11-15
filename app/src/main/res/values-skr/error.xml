@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Saraiki
+* Tauqeerkhansurani
 -->
 <resources>
+  <string name="crash_dialog_title">کامنز کریش تھی ڳیا</string>
   <string name="crash_dialog_text">اوہو۔ کجھ خراب تھی ڳئے!</string>
+  <string name="crash_dialog_comment_prompt">سانوں ݙسو تساں کیا کرینݨدے پیو ہاوے، ول ایہ سانوں ای میل راہیں بھیجو۔ ایں نال سانوں ایہ ٹھیک کرݨ وچ مدد ملسی۔</string>
   <string name="crash_dialog_ok_toast">شکریہ!</string>
 </resources>

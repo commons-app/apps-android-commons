@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.quiz
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -12,30 +12,37 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
-import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
-import java.io.File
-import java.io.FileOutputStream
-
+import androidx.core.content.FileProvider
+import androidx.core.view.WindowCompat
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.MainActivity
-
+import fr.free.nrw.commons.databinding.ActivityQuizResultBinding
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
+import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 /**
  * Displays the final score of quiz and congratulates the user
  */
 class QuizResultActivity : AppCompatActivity() {
-
     private var binding: ActivityQuizResultBinding? = null
     private val numberOfQuestions = 5
     private val multiplierToGetPercentage = 20
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityQuizResultBinding.inflate(layoutInflater)
+        applyEdgeToEdgeAllInsets(binding!!.root)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = true
         setContentView(binding?.root)
 
         setSupportActionBar(binding?.toolbar?.toolbar)
@@ -49,11 +56,30 @@ class QuizResultActivity : AppCompatActivity() {
             setScore(score)
         } ?: run {
             startActivityWithFlags(
-                this, MainActivity::class.java,
-                Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
+                this,
+                MainActivity::class.java,
+                Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP,
             )
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    startActivityWithFlags(
+                        this@QuizResultActivity,
+                        MainActivity::class.java,
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP,
+                    )
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            },
+        )
     }
 
     override fun onDestroy() {
@@ -79,27 +105,26 @@ class QuizResultActivity : AppCompatActivity() {
      */
     fun launchContributionActivity() {
         startActivityWithFlags(
-            this, MainActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
+            this,
+            MainActivity::class.java,
+            Intent.FLAG_ACTIVITY_CLEAR_TOP,
+            Intent.FLAG_ACTIVITY_SINGLE_TOP,
         )
-    }
-
-    override fun onBackPressed() {
-        startActivityWithFlags(
-            this, MainActivity::class.java,
-            Intent.FLAG_ACTIVITY_CLEAR_TOP, Intent.FLAG_ACTIVITY_SINGLE_TOP
-        )
-        super.onBackPressed()
     }
 
     /**
-     * Function to call intent to an activity
-     * @param context
-     * @param cls
-     * @param flags
+     * Starts an activity using the provided context, target class, and intent flags.
+     *
+     * @param context The context used to start the activity.
+     * @param cls The target activity class.
+     * @param flags A variable number of intent flags to apply to the Intent.
      */
     companion object {
-        fun <T> startActivityWithFlags(context: Context, cls: Class<T>, vararg flags: Int) {
+        fun <T> startActivityWithFlags(
+            context: Context,
+            cls: Class<T>,
+            vararg flags: Int,
+        ) {
             val intent = Intent(context, cls)
             flags.forEach { flag -> intent.addFlags(flag) }
             context.startActivity(intent)
@@ -148,7 +173,6 @@ class QuizResultActivity : AppCompatActivity() {
      * Share the screenshot through social media
      * @param bitmap
      */
-    @SuppressLint("SetWorldReadable")
     fun shareScreen(bitmap: Bitmap) {
         try {
             val file = File(this.externalCacheDir, "screen.png")
@@ -156,15 +180,23 @@ class QuizResultActivity : AppCompatActivity() {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
                 fOut.flush()
             }
-            file.setReadable(true, false)
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
-                type = "image/png"
-            }
+
+            val fileUri =
+                FileProvider.getUriForFile(
+                    applicationContext,
+                    "$packageName.provider",
+                    file,
+                )
+            val intent =
+                Intent(Intent.ACTION_SEND).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    clipData = ClipData.newRawUri("", fileUri)
+                    putExtra(Intent.EXTRA_STREAM, fileUri)
+                    type = "image/png"
+                }
             startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)))
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (e: IOException) {
+            Timber.e(e, "Could not share screenshot")
         }
     }
 
@@ -185,7 +217,7 @@ class QuizResultActivity : AppCompatActivity() {
         alertadd.setPositiveButton(R.string.about_translate_proceed) { dialog, _ ->
             shareScreen(screenshot)
         }
-        alertadd.setNegativeButton(android.R.string.cancel) { dialog, _ ->
+        alertadd.setNegativeButton(R.string.cancel) { dialog, _ ->
             dialog.cancel()
         }
         alertadd.show()

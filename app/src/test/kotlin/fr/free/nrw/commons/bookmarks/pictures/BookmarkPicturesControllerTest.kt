@@ -35,7 +35,7 @@ class BookmarkPicturesControllerTest {
     fun setup() {
         MockitoAnnotations.initMocks(this)
         val mockMedia = mockMedia
-        whenever(bookmarkDao!!.allBookmarks)
+        whenever(bookmarkDao!!.getAllBookmarks())
             .thenReturn(mockBookmarkList)
         whenever(
             mediaClient!!.getMedia(

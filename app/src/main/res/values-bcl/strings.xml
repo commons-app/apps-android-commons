@@ -8,17 +8,10 @@
     <item quantity="one">%1$d file uploading</item>
     <item quantity="other">%1$d an mga files ikinakarga</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Nagpuon na %1$d an pagkarga</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d upload</item>
+  <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d mga karga</item>
   </plurals>
   <plurals name="share_license_summary">
@@ -100,8 +93,8 @@
   <string name="menu_download">Kargahon</string>
   <string name="preference_license">Lisensiya</string>
   <string name="use_previous" fuzzy="true">Maggamit nin dating titulo/deskripsiyon</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Mag-ambag kan saimong mga imahe. Magtabang sa mga artikulo nin Wikipedia na magka-igwa nin buhay!</string>
   <string name="welcome_wikipedia_subtext">An mga imahe sa Wikipedia naggigikan sa mga Karugaringan nin Wikimedia.</string>

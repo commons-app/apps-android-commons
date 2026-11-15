@@ -32,7 +32,7 @@ import java.util.concurrent.Executor
 class CustomOkHttpNetworkFetcherUnitTest {
     private lateinit var fetcher: CustomOkHttpNetworkFetcher
     private lateinit var okHttpClient: OkHttpClient
-    private lateinit var state: CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState
+    private lateinit var state: OkHttpNetworkFetchState
 
     @Mock
     private lateinit var callback: NetworkFetcher.Callback
@@ -162,7 +162,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
         val method: Method =
             CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
                 "onFetchResponse",
-                CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
+                OkHttpNetworkFetchState::class.java,
                 Call::class.java,
                 Response::class.java,
                 NetworkFetcher.Callback::class.java,
@@ -196,7 +196,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
         val method: Method =
             CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
                 "onFetchResponse",
-                CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
+                OkHttpNetworkFetchState::class.java,
                 Call::class.java,
                 Response::class.java,
                 NetworkFetcher.Callback::class.java,
@@ -230,7 +230,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
         val method: Method =
             CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
                 "onFetchResponse",
-                CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
+                OkHttpNetworkFetchState::class.java,
                 Call::class.java,
                 Response::class.java,
                 NetworkFetcher.Callback::class.java,

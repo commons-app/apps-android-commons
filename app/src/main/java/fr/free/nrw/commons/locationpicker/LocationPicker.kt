@@ -5,12 +5,10 @@ import android.content.Intent
 import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.Media
 
-
 /**
  * Helper class for starting the activity
  */
 object LocationPicker {
-
     /**
      * Getting camera position from the intent using constants
      *
@@ -18,15 +16,13 @@ object LocationPicker {
      * @return CameraPosition
      */
     @JvmStatic
-    fun getCameraPosition(data: Intent): CameraPosition? {
-        return data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
-    }
+    fun getCameraPosition(data: Intent): CameraPosition? =
+        data.getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION)
 
-    class IntentBuilder
     /**
      * Creates a new builder that creates an intent to launch the place picker activity.
-     */() {
-
+     */
+    class IntentBuilder {
         private val intent: Intent = Intent()
 
         /**

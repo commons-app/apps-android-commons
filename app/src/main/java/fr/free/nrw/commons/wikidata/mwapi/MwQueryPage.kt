@@ -4,13 +4,19 @@ import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.model.BaseModel
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.model.gallery.MediaInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.GlobalUsage
+
+// Suppressed TooManyFunctions because every method is an accessor, redirect/conversion
+// mutator, or usage check for one MediaWiki API query page payload.
 
 /**
  * A class representing a standard page object as returned by the MediaWiki API.
  */
+@Suppress("TooManyFunctions")
 class MwQueryPage : BaseModel() {
     private val pageid = 0
+    private val missing = false
     private val index = 0
     private var title: String? = null
     private val categoryinfo: CategoryInfo? = null
@@ -28,6 +34,9 @@ class MwQueryPage : BaseModel() {
 
     @SerializedName("imageinfo")
     private val imageInfo: List<ImageInfo>? = null
+
+    @SerializedName("videoinfo")
+    private val videoInfo: List<MediaInfo>? = null
     private var redirectFrom: String? = null
     private var convertedFrom: String? = null
     private var convertedTo: String? = null
@@ -48,11 +57,15 @@ class MwQueryPage : BaseModel() {
 
     fun pageId(): Int = pageid
 
+    fun missing(): Boolean = missing
+
     fun thumbUrl(): String? = thumbnail?.source()
 
     fun description(): String? = description
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
+
+    fun mediaInfo(): MediaInfo? = videoInfo?.firstOrNull()
 
     fun redirectFrom(from: String?) {
         redirectFrom = from
@@ -70,18 +83,20 @@ class MwQueryPage : BaseModel() {
         title += "#$fragment"
     }
 
-    fun checkWhetherFileIsUsedInWikis(): Boolean {
-        return checkWhetherFileIsUsedInWikis(globalUsages, fileUsages)
-    }
+    fun checkWhetherFileIsUsedInWikis(): Boolean = checkWhetherFileIsUsedInWikis(globalUsages, fileUsages)
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class Revision {
         @SerializedName("revid")
         private val revisionId: Long = 0
         private val user: String? = null
+
         @SerializedName("contentformat")
         private val contentFormat: String? = null
+
         @SerializedName("contentmodel")
         private val contentModel: String? = null
+
         @SerializedName("timestamp")
         private val timeStamp: String? = null
         private val content: String? = null
@@ -104,6 +119,7 @@ class MwQueryPage : BaseModel() {
         fun lon(): Double? = lon
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class CategoryInfo {
         val isHidden: Boolean = false
         private val size = 0
@@ -112,6 +128,7 @@ class MwQueryPage : BaseModel() {
         private val subcats = 0
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     internal class Thumbnail {
         private val source: String? = null
         private val width = 0
@@ -168,7 +185,7 @@ class MwQueryPage : BaseModel() {
 @VisibleForTesting
 fun checkWhetherFileIsUsedInWikis(
     globalUsages: List<GlobalUsage>?,
-    fileUsages: List<MwQueryPage.FileUsage>?
+    fileUsages: List<MwQueryPage.FileUsage>?,
 ): Boolean {
     if (!globalUsages.isNullOrEmpty()) {
         return true
@@ -180,7 +197,8 @@ fun checkWhetherFileIsUsedInWikis(
 
     /* Ignore usage under https://commons.wikimedia.org/wiki/User:Didym/Mobile_upload/
        which has been a gallery of all of our uploads since 2014 */
-    return fileUsages.filterNot {
-        it.title().contains("User:Didym/Mobile upload")
-    }.isNotEmpty()
+    return fileUsages
+        .filterNot {
+            it.title().contains("User:Didym/Mobile upload")
+        }.isNotEmpty()
 }

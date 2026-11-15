@@ -23,6 +23,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -189,8 +190,8 @@ class ExploreListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
-        `when`(listFragment.totalMediaCount).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        `when`(listFragment.getTotalMediaCount()).thenReturn(1)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 1)
     }
 
     @Test
@@ -199,7 +200,7 @@ class ExploreListRootFragmentUnitTest {
         val field: Field = ExploreListRootFragment::class.java.getDeclaredField("listFragment")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 0)
     }
 
     @Test
@@ -226,6 +227,31 @@ class ExploreListRootFragmentUnitTest {
     fun testViewPagerNotifyDataSetChanged() {
         fragment.viewPagerNotifyDataSetChanged()
         verify(mediaDetails).notifyDataSetChanged()
+    }
+
+    /**
+     * Keeps a visible content list in place when a nomination callback arrives without an open
+     * media-detail screen to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithVisibleContent() {
+        `when`(listFragment.isVisible).thenReturn(true)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
+    }
+
+    /**
+     * Avoids creating a pager or fragment transaction when there are no media details to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithoutDetails() {
+        Whitebox.setInternalState(fragment, "mediaDetails", null as MediaDetailPagerFragment?)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
     }
 
     @Test

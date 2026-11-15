@@ -2,10 +2,11 @@
 <!-- Authors:
 * Delim
 * Garam
+* YeBoy371
 -->
 <resources>
   <string name="commons_facebook">공용 페이스부크 페지</string>
-  <string name="commons_github">공용 GitHub 원천코드</string>
+  <string name="commons_github" fuzzy="true">공용 GitHub 원천코드</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웨브싸이트</string>
   <string name="appwidget_img">오늘의 화상</string>
@@ -13,20 +14,13 @@
     <item quantity="one">%1$d개의 서류를 올리적재하는중</item>
     <item quantity="other">%1$d개의 서류를 올리적재하는중</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">(%1$d)</item>
-    <item quantity="other">(%1$d)</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d장의 올리적재를 시작합니다</item>
+  <plurals name="starting_multiple_uploads">
     <item quantity="other">%1$d장의 올리적재를 시작합니다</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d개 올리적재</item>
     <item quantity="other">%1$d개 올리적재</item>
   </plurals>
-  <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="navigation_item_explore">찾아보기</string>
   <string name="preference_category_appearance">보이기</string>
   <string name="preference_category_general">일반</string>
@@ -49,7 +43,7 @@
   <string name="uploading_started">올리적재를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 서류를 올리적재하였습니다!</string>
   <string name="upload_completed_notification_text">당신의 올리적재를 보려면 두드리세요</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 서류 올리적재를 시작하는중</string>
+  <string name="upload_progress_notification_title_start">서류 올리적재를 시작하는중: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 서류를 올리적재하는중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 서류 올리적재를 완료하는중</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s 서류 올리적재 실패</string>
@@ -90,8 +84,8 @@
   <string name="menu_about">정보</string>
   <string name="about_license">위키매체공용 프로그람은 공개원천 응용프로그람이며 위키매체공동체내의 자원봉사자에 의해 유지됩니다. 위키매체재단은 응용프로그람의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
   <string name="about_improve">프로그람오유나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;개인정보 정책&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;제작진&lt;/u&gt;</string>
+  <string name="about_privacy_policy">개인정보 정책</string>
+  <string name="about_credits">제작진</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(전자우편으로) 반결합 발신하기</string>
   <string name="no_email_client">설치된 전자우편 의뢰기가 없습니다</string>
@@ -134,7 +128,7 @@
   <string name="welcome_copyright_subtext">선전화, 책 표지 등의 그림 뿐만 아니라 인터네트에서 찾은 저작권있는 자료는 피하세요.</string>
   <string name="welcome_final_text">리해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;더많은 정보&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">더많은 정보</string>
   <string name="detail_panel_cats_label">분류</string>
   <string name="detail_panel_cats_loading">적재하는중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
@@ -158,13 +152,12 @@
   <string name="become_a_tester_title">베타 시험자가 되세요</string>
   <string name="_2fa_code">2FA부호</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
-  <string name="mediaimage_failed">매체 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">부모 분류가 없습니다</string>
   <string name="welcome_image_mount_zao">자오련봉</string>
   <string name="welcome_image_rainbow_bridge">레인보우브리즈</string>
   <string name="welcome_image_tulip">울금향</string>
-  <string name="welcome_image_welcome_wikipedia">위키백과에 오신것을 환영합니다</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true">위키백과에 오신것을 환영합니다</string>
   <string name="cancel">취소</string>
   <string name="navigation_drawer_open">열기</string>
   <string name="navigation_drawer_close">닫기</string>
@@ -194,7 +187,7 @@
   <string name="null_url">오유! URL을 찾을수 없습니다</string>
   <string name="nominate_deletion">지우기 신청</string>
   <string name="nominated_for_deletion">이 그림은 지우도록 신청되였습니다.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;상세 내용은 웨브페지를 참고하십시오&lt;/u&gt;</string>
+  <string name="nominated_see_more">상세 내용은 웨브페지를 참고하십시오</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">가입</string>
   <string name="skip_login_title" fuzzy="true">가입을 정말로 건너뛰시겠습니까?</string>
@@ -206,13 +199,13 @@
   <string name="nearby_wikidata" fuzzy="true">위키자료</string>
   <string name="nearby_wikipedia" fuzzy="true">위키백과</string>
   <string name="nearby_commons" fuzzy="true">공용</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;평가&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;자주하는 질문&lt;/u&gt;</string>
+  <string name="about_rate_us">평가</string>
+  <string name="about_faq">자주하는 질문</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터네트 사용 불가</string>
   <string name="error_notifications">알림 가져오기 오유</string>
   <string name="no_notifications">알림이 없습니다</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;번역&lt;/u&gt;</string>
+  <string name="about_translate">번역</string>
   <string name="about_translate_title">언어</string>
   <string name="about_translate_message">번역 제출을 위한 언어를 선택하십시오</string>
   <string name="about_translate_proceed">진행</string>
@@ -257,9 +250,8 @@
   <string name="search_history_deleted">검색 리력이 지워짐</string>
   <string name="nominate_delete">지우기 신청</string>
   <string name="Achievements">성과</string>
-  <string name="statistics" fuzzy="true">통계</string>
   <string name="statistics_featured">알찬 그림</string>
-  <string name="level" fuzzy="true">수준</string>
+  <string name="level" fuzzy="true">수준 %1$d</string>
   <string name="images_uploaded">화상 올리적대됨</string>
   <string name="achievements_share_message">동무와 성과를 공유하세요!</string>
   <string name="achievements_revert_limit_message">최소 요구사항:</string>
@@ -290,4 +282,5 @@
   <string name="search_this_area">여기를 검색</string>
   <string name="nearby_card_permission_title">권한 요청</string>
   <string name="never_ask_again">다시는 묻지 않음</string>
+  <string name="location_permission_rationale">선택적 허가: 분류 추천을 위해 현재 위치를 가져옵니다.</string>
 </resources>

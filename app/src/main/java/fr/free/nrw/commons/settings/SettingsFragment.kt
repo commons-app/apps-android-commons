@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
@@ -34,7 +35,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
@@ -52,6 +52,7 @@ import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
+import fr.free.nrw.commons.utils.handleWebUrl
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -85,7 +86,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
 
     private val cameraPickLauncherForResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(StartActivityForResult()) { result ->
@@ -239,7 +239,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val betaTesterPreference: Preference? = findPreference("becomeBetaTester")
         betaTesterPreference?.setOnPreferenceClickListener {
-            Utils.handleWebUrl(requireActivity(), Uri.parse(getString(R.string.beta_opt_in_link)))
+            handleWebUrl(
+                requireActivity(),
+                Uri.parse(getString(R.string.beta_opt_in_link))
+            )
             true
         }
 
@@ -271,13 +274,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("managed_exif_tags")?.isEnabled = false
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
+            findPreference<Preference>("vanishAccount")?.isEnabled = false
         }
     }
 
     /**
-     * Asks users to provide location access
-     *
-     * @param activity
+     * Asks users to provide location access.
      */
     private fun createDialogsAndHandleLocationPermissions() {
         inAppCameraLocationPermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION))
@@ -297,11 +299,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.ok),
             getString(R.string.read_help_link),
             { },
-            { Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
+            { handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)) },
             null
         )
     }
 
+    // Remove the space for icons in the settings menu.
+    // This uses an internal API that shouldn't be used in app code,
+    // but it appears to be the most robust way to do this at the moment,
+    // disable the warning.
+    @SuppressLint("RestrictedApi")
     override fun onCreateAdapter(preferenceScreen: PreferenceScreen): Adapter<PreferenceViewHolder>
     {
         return object : PreferenceGroupAdapter(preferenceScreen) {
@@ -385,7 +392,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 languagesAdapter.filter.filter(charSequence)
             }
 
-            override fun afterTextChanged(editable: Editable?) {}
+            override fun afterTextChanged(editable: Editable?) = Unit
         })
 
         languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
@@ -511,8 +518,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Suppress("LongLine")
     companion object {
+        const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
-        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
+        private const val VANISH_ACCOUNT_SUCCESS_URL =
+            "https://meta.m.wikimedia.org/wiki/" +
+                "Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode

@@ -1,34 +1,37 @@
 package fr.free.nrw.commons.upload
 
+import java.util.Locale
+
 /**
  * Holds a description of an item being uploaded by [UploadActivity]
  */
 class Description {
     /**
      * The language code, e.g., "en" or "fr".
-     * @param languageCode The language code.
+     * @property languageCode The language code.
      */
     var languageCode: String? = null
 
     /**
      * The description text for the item being uploaded.
-     * @param descriptionText The description text.
+     * @property descriptionText The description text.
      */
     var descriptionText: String? = null
 
     /**
      * The index of the language selected in a spinner with [SpinnerLanguagesAdapter].
-     * @param selectedLanguageIndex The index of the selected language.
+     * @property selectedLanguageIndex The index of the selected language.
      */
     var selectedLanguageIndex = -1
 
     /**
      * Indicates if the description was added manually (by the user or programmatically).
-     * @param manuallyAdded Sets to true if the description was manually added by the user.
-     * @return True if the description was manually added.
      */
     var isManuallyAdded = false
 
+    /**
+     * Returns true if the description text is null or empty.
+     */
     val isEmpty: Boolean
         get() = descriptionText == null || descriptionText!!.isEmpty()
 
@@ -46,6 +49,7 @@ class Description {
                 if (!description.isEmpty) {
                     val individualDescription =
                         String.format(
+                            Locale.ROOT,
                             "{{%s|1=%s}}",
                             description.languageCode,
                             description.descriptionText,

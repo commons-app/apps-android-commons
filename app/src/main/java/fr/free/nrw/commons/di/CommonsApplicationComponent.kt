@@ -6,8 +6,10 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionsModule
+import fr.free.nrw.commons.contributions.ContributionsProvidesModule
 import fr.free.nrw.commons.explore.SearchModule
 import fr.free.nrw.commons.explore.categories.CategoriesModule
 import fr.free.nrw.commons.explore.depictions.DepictionModule
@@ -39,17 +41,23 @@ import javax.inject.Singleton
         ContentProviderBuilderModule::class,
         UploadModule::class,
         ContributionsModule::class,
+        ContributionsProvidesModule::class,
         SearchModule::class,
         DepictionModule::class,
-        CategoriesModule::class
-    ]
+        CategoriesModule::class,
+    ],
 )
+// Suppressed TooManyFunctions because each function defines an individual
+// injection target for the application component.
+@Suppress("TooManyFunctions")
 interface CommonsApplicationComponent : AndroidInjector<ApplicationlessInjection> {
     fun inject(application: CommonsApplication)
 
     fun inject(worker: UploadWorker)
 
     fun inject(activity: LoginActivity)
+
+    fun inject(activity: SingleWebViewActivity)
 
     fun inject(fragment: SettingsFragment)
 

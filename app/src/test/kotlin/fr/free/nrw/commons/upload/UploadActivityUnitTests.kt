@@ -2,6 +2,8 @@ package fr.free.nrw.commons.upload
 
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
+import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
@@ -10,21 +12,31 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
+import fr.free.nrw.commons.filepicker.ExternalImagesResult
+import fr.free.nrw.commons.filepicker.FakeSharedFilesProvider
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowAlertDialog
+import java.io.File
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -32,6 +44,7 @@ import java.lang.reflect.Method
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadActivityUnitTests {
     private lateinit var activity: UploadActivity
+    private lateinit var uploadView: UploadActivityView
     private lateinit var context: Context
 
     @Mock
@@ -55,9 +68,10 @@ class UploadActivityUnitTests {
         list.add(uploadableFile)
         intent.putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, list)
         activity = Robolectric.buildActivity(UploadActivity::class.java, intent).create().get()
+        uploadView = Whitebox.getInternalState(activity, "uploadView")
         context = ApplicationProvider.getApplicationContext()
 
-        Whitebox.setInternalState(activity, "fragments", mutableListOf(uploadBaseFragment))
+        Whitebox.setInternalState(uploadView, "fragments", mutableListOf(uploadBaseFragment))
         Whitebox.setInternalState(activity, "presenter", presenter)
         Whitebox.setInternalState(activity, "contributionController", contributionController)
 
@@ -150,7 +164,7 @@ class UploadActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnUploadMediaDeleted() {
-        Whitebox.setInternalState(activity, "uploadableFiles", mutableListOf(uploadableFile))
+        Whitebox.setInternalState(uploadView, "uploadableFiles", mutableListOf(uploadableFile))
         activity.onUploadMediaDeleted(0)
     }
 
@@ -170,33 +184,71 @@ class UploadActivityUnitTests {
     @Throws(Exception::class)
     fun testReceiveSharedItems() {
         val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
+            UploadStepSetup::class.java.getDeclaredMethod(
                 "receiveSharedItems",
             )
         method.isAccessible = true
-        method.invoke(activity)
+        method.invoke(uploadView.steps)
     }
 
     @Test
     @Throws(Exception::class)
     fun testReceiveExternalSharedItems() {
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 0))
         val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
+            UploadInputController::class.java.getDeclaredMethod(
                 "receiveExternalSharedItems",
             )
         method.isAccessible = true
-        method.invoke(activity)
+        method.invoke(uploadView.input)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUnsupportedFormatDialogShownWhenAllSharedFilesWereSkipped() {
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 2))
+
+        receiveExternalAndSharedItems()
+
+        Assert.assertEquals(
+            activity.getString(R.string.unsupported_format_title),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSkippedFilesDialogShownWhenSomeSharedFilesWereSkipped() {
+        Robolectric.setupContentProvider(FakeSharedFilesProvider::class.java, FakeSharedFilesProvider.AUTHORITY)
+        val jpeg = UploadableFile(FakeSharedFilesProvider.uriFor("PXL_1.jpg"), File("PXL_1.jpg"))
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(listOf(jpeg), 1))
+
+        receiveExternalAndSharedItems()
+
+        Assert.assertEquals(
+            activity.getString(R.string.unsupported_files_skipped_title),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
+        )
+    }
+
+    private fun receiveExternalAndSharedItems() {
+        uploadView.input.receiveExternalSharedItems()
+        uploadView.steps.receiveSharedItems()
+        shadowOf(Looper.getMainLooper()).idle()
     }
 
     @Test
     @Throws(Exception::class)
     fun testReceiveInternalSharedItems() {
         val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
+            UploadInputController::class.java.getDeclaredMethod(
                 "receiveInternalSharedItems",
             )
         method.isAccessible = true
-        method.invoke(activity)
+        method.invoke(uploadView.input)
     }
 
     @Test
@@ -215,11 +267,11 @@ class UploadActivityUnitTests {
     @Throws(Exception::class)
     fun testHandleNullMedia() {
         val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
+            UploadInputController::class.java.getDeclaredMethod(
                 "handleNullMedia",
             )
         method.isAccessible = true
-        method.invoke(activity)
+        method.invoke(uploadView.input)
     }
 
     @Test
@@ -244,12 +296,12 @@ class UploadActivityUnitTests {
     @Throws(Exception::class)
     fun testOnDestroy() {
         Whitebox.setInternalState(
-            activity,
+            uploadView,
             "mediaLicenseFragment",
             mock(MediaLicenseFragment::class.java),
         )
         Whitebox.setInternalState(
-            activity,
+            uploadView,
             "uploadCategoriesFragment",
             mock(
                 UploadCategoriesFragment::class.java,
@@ -263,14 +315,111 @@ class UploadActivityUnitTests {
         method.invoke(activity)
     }
 
+    /** Verifies that the extracted input controller preserves selection order at the upload limit. */
     @Test
-    @Throws(Exception::class)
-    fun testOnBackPressed() {
-        val method: Method =
-            UploadActivity::class.java.getDeclaredMethod(
-                "onBackPressed",
+    fun testInputControllerLimitsFilesInSelectionOrder() {
+        val files = (0..MAX_IMAGE_COUNT).map { UploadableFile(File("image$it.jpg")) }
+
+        val limited = uploadView.input.limitToMaxImageCount(files)
+
+        Assert.assertEquals(files.take(MAX_IMAGE_COUNT), limited)
+        Assert.assertEquals(MAX_IMAGE_COUNT + 1, files.size)
+    }
+
+    /** Verifies that a small selection is copied without dropping any files. */
+    @Test
+    fun testInputControllerKeepsFilesBelowLimit() {
+        val files = mutableListOf(uploadableFile)
+        val limited = uploadView.input.limitToMaxImageCount(files)
+
+        limited.clear()
+
+        Assert.assertEquals(listOf(uploadableFile), files)
+    }
+
+    /** Verifies that internal selection metadata remains visible through the activity. */
+    @Test
+    fun testInputControllerReadsMultipleFiles() {
+        val files = arrayListOf(UploadableFile(File("one.jpg")), UploadableFile(File("two.jpg")))
+        activity.intent.putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, files)
+
+        uploadView.input.receiveInternalSharedItems()
+
+        Assert.assertEquals(files, activity.getUploadableFiles())
+        Assert.assertTrue(activity.isMultipleFilesSelected)
+    }
+
+    /** Verifies that deleting an image removes only its file and page. */
+    @Test
+    fun testViewRemovesDeletedFileAndPage() {
+        val remainingFile = UploadableFile(File("remaining.jpg"))
+        val remainingPage = mock(UploadBaseFragment::class.java)
+        uploadView.uploadableFiles = mutableListOf(uploadableFile, remainingFile)
+        uploadView.fragments = mutableListOf(uploadBaseFragment, remainingPage)
+
+        activity.onUploadMediaDeleted(0)
+
+        Assert.assertEquals(listOf(remainingFile), activity.getUploadableFiles())
+        Assert.assertEquals(listOf(remainingPage), uploadView.fragments)
+        Assert.assertEquals(View.GONE, activity.binding.llContainerTopCard.visibility)
+    }
+
+    /** Verifies that navigation submits the upload from the final step. */
+    @Test
+    fun testNavigationSubmitsFromFinalStep() {
+        uploadView.navigation.onNextButtonClicked(0)
+
+        verify(presenter).handleSubmit()
+    }
+
+    /** Verifies that expanding the title toggles both the strip and the arrow. */
+    @Test
+    fun testNavigationTogglesThumbnailStrip() {
+        uploadView.isTitleExpanded = true
+        val originalRotation = activity.binding.ibToggleTopCard.rotation
+
+        uploadView.navigation.onRlContainerTitleClicked()
+        Assert.assertEquals(View.GONE, activity.binding.rvThumbnails.visibility)
+        Assert.assertFalse(uploadView.isTitleExpanded)
+
+        uploadView.navigation.onRlContainerTitleClicked()
+        Assert.assertEquals(View.VISIBLE, activity.binding.rvThumbnails.visibility)
+        Assert.assertTrue(uploadView.isTitleExpanded)
+        Assert.assertEquals(originalRotation + 360, activity.binding.ibToggleTopCard.rotation, 0f)
+    }
+
+    /** Verifies that closing the delegated view reaches the Android activity implementation. */
+    @Test
+    fun testViewFinishClosesActivity() {
+        uploadView.finish()
+
+        Assert.assertTrue(activity.isFinishing)
+    }
+
+    /** Verifies that recreation reattaches existing pages instead of duplicating them. */
+    @Test
+    fun testStepSetupReattachesSavedPages() {
+        Robolectric.setupContentProvider(FakeSharedFilesProvider::class.java, FakeSharedFilesProvider.AUTHORITY)
+        val jpeg = UploadableFile(FakeSharedFilesProvider.uriFor("saved.jpg"), File("saved.jpg"))
+        val savedMedia = mock(UploadMediaDetailFragment::class.java)
+        val savedPages =
+            mutableListOf<UploadBaseFragment>(
+                savedMedia,
+                mock(UploadBaseFragment::class.java),
+                mock(UploadBaseFragment::class.java),
+                mock(UploadBaseFragment::class.java),
             )
-        method.isAccessible = true
-        method.invoke(activity)
+        uploadView.uploadableFiles = mutableListOf(jpeg)
+        uploadView.fragments = savedPages
+        uploadView.isFragmentsSaved = true
+
+        uploadView.steps.receiveSharedItems()
+
+        Assert.assertSame(savedPages, uploadView.fragments)
+        Assert.assertEquals(4, activity.totalNumberOfSteps)
+        verify(savedMedia).fragmentCallback =
+            any(UploadMediaDetailFragment.UploadMediaDetailFragmentCallback::class.java)
+        verify(savedPages[1]).callback = any(UploadBaseFragment.Callback::class.java)
+        verify(savedMedia).initializeFragment()
     }
 }

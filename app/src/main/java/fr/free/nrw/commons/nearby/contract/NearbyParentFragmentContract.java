@@ -50,6 +50,10 @@ public interface NearbyParentFragmentContract {
 
         boolean isDetailsBottomSheetVisible();
 
+        boolean isNearbyFilterListVisible();
+
+        void hideNearbyFilterList();
+
         void setBottomSheetDetailsSmaller();
 
         void setRecyclerViewAdapterAllSelected();
@@ -134,7 +138,7 @@ public interface NearbyParentFragmentContract {
 
         void setAdvancedQuery(String query);
 
-        void toggleBookmarkedStatus(Place place);
+        void toggleBookmarkedStatus(Place place, LifecycleCoroutineScope scope);
 
         void handleMapScrolled(LifecycleCoroutineScope scope, boolean isNetworkAvailable);
     }

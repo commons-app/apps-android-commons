@@ -1,0 +1,95 @@
+package fr.free.nrw.commons.contributions
+
+import androidx.paging.DataSource
+import io.reactivex.Completable
+import io.reactivex.Single
+import javax.inject.Inject
+
+/**
+ * The repository class for contributions
+ */
+class ContributionsRepository
+    @Inject
+    constructor(
+        private val localDataSource: ContributionsLocalDataSource,
+    ) {
+        /**
+         * Deletes a failed upload from DB
+         *
+         * @param contribution
+         * @return
+         */
+        fun deleteContributionFromDB(contribution: Contribution): Completable =
+            localDataSource.deleteContribution(contribution)
+
+        /**
+         * Marks one completed contribution after a normal request reports that its file page is gone.
+         */
+        fun markCompletedContributionDeleted(fileName: String): Completable =
+            localDataSource.markCompletedContributionDeleted(fileName)
+
+        /**
+         * Deletes contributions from the database with specific states.
+         *
+         * @param states The states of the contributions to delete.
+         * @return A Completable indicating the result of the operation.
+         */
+        fun deleteContributionsFromDBWithStates(states: List<Int>): Completable =
+            localDataSource.deleteContributionsWithStates(states)
+
+        /**
+         * Get contribution object with title
+         *
+         * @param fileName
+         * @return
+         */
+        fun getContributionWithFileName(fileName: String): Contribution =
+            localDataSource.getContributionWithFileName(fileName)
+
+        /**
+         * Fetches contributions with specific states.
+         *
+         * @param states The states of the contributions to fetch.
+         * @param sortedByDateUploadStarted Whether the contributions are sorted by the date the upload
+         * started.
+         * @return A DataSource factory for paginated contributions with the specified states.
+         */
+        fun fetchContributionsWithStates(
+            states: List<Int>,
+            sortedByDateUploadStarted: Boolean = false,
+        ): DataSource.Factory<Int, Contribution> =
+            localDataSource.getContributionsWithStates(states, sortedByDateUploadStarted)
+
+        /**
+         * Fetches all contributions with specific states at once, not page by page.
+         *
+         * @param states The states of the contributions to fetch.
+         * @return A Single with the list of all contributions with the specified states.
+         */
+        fun getAllContributionsWithStates(states: List<Int>): Single<List<Contribution>> =
+            localDataSource.getAllContributionsWithStates(states)
+
+        fun save(contributions: List<Contribution>): Single<List<Long>> =
+            localDataSource.saveContributions(contributions)
+
+        fun save(contributions: Contribution): Completable = localDataSource.saveContributions(contributions)
+
+        operator fun set(
+            key: String,
+            value: Long,
+        ) {
+            localDataSource.set(key, value)
+        }
+
+        /**
+         * Updates the state of contributions with specific states.
+         *
+         * @param states   The current states of the contributions to update.
+         * @param newState The new state to set.
+         * @return A Completable indicating the result of the operation.
+         */
+        fun updateContributionsWithStates(
+            states: List<Int>,
+            newState: Int,
+        ): Completable = localDataSource.updateContributionsWithStates(states, newState)
+    }

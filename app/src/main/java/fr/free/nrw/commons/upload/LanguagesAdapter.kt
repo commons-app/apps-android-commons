@@ -23,7 +23,7 @@ import java.util.Locale
  */
 class LanguagesAdapter constructor(
     context: Context,
-    private val selectedLanguages: HashMap<*, String>,
+    private val selectedLanguages: MutableMap<Int, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
     companion object {
         /**

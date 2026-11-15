@@ -24,6 +24,13 @@ sealed class LoginResult(
         message: String?,
     ) : LoginResult(status, userName, password, message)
 
+    class EmailAuthResult(
+        status: String,
+        userName: String?,
+        password: String?,
+        message: String?,
+    ) : LoginResult(status, userName, password, message)
+
     class ResetPasswordResult(
         status: String,
         userName: String?,

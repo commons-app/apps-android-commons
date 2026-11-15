@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because swipe callbacks are supplied by subclasses and may
+ * throw, and the gesture listener should remain alive.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context
@@ -7,7 +13,11 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import timber.log.Timber
 import kotlin.math.abs
+
+private const val SWIPE_THRESHOLD_SCREEN_DIVISOR = 3
+private const val SWIPE_VELOCITY_THRESHOLD = 1000
 
 /**
  * Class for detecting swipe gestures
@@ -17,9 +27,9 @@ open class OnSwipeTouchListener(
 ) : View.OnTouchListener {
     private val gestureDetector: GestureDetector
 
-    private val swipeThresholdHeight = (getScreenResolution(context!!)).second / 3
-    private val swipeThresholdWidth = (getScreenResolution(context!!)).first / 3
-    private val swipeVelocityThreshold = 1000
+    private val swipeThresholdHeight = (getScreenResolution(context!!)).second / SWIPE_THRESHOLD_SCREEN_DIVISOR
+    private val swipeThresholdWidth = (getScreenResolution(context!!)).first / SWIPE_THRESHOLD_SCREEN_DIVISOR
+    private val swipeVelocityThreshold = SWIPE_VELOCITY_THRESHOLD
 
     override fun onTouch(
         view: View?,
@@ -37,7 +47,7 @@ open class OnSwipeTouchListener(
     }
 
     inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onDown(e: MotionEvent): Boolean = true
+        override fun onDown(e: MotionEvent): Boolean = false
 
         /**
          * Detects the gestures
@@ -75,7 +85,7 @@ open class OnSwipeTouchListener(
                     }
                 }
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                Timber.e(exception, "Could not process fling gesture")
             }
             return false
         }

@@ -25,7 +25,8 @@ class CategoryClient
          *
          * @param filter    The string to be searched
          * @param itemLimit How many results are returned
-         * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
+         * @param offset Starts returning items from the nth result. If offset is 9, the response starts with the 9th
+         * item of the search result
          * @return
          */
         @JvmOverloads
@@ -40,7 +41,8 @@ class CategoryClient
          *
          * @param prefix    The prefix to be searched
          * @param itemLimit How many results are returned
-         * @param offset    Starts returning items from the nth result. If offset is 9, the response starts with the 9th item of the search result
+         * @param offset Starts returning items from the nth result. If offset is 9, the response starts with the 9th
+         * item of the search result
          * @return
          */
         @JvmOverloads
@@ -79,11 +81,30 @@ class CategoryClient
             )
 
         /**
+         * Fetches categories belonging to an image (P18 of some wikidata entity).
+         *
+         * @param image P18 of some wikidata entity
+         * @param itemLimit How many categories to return
+         * @return Single Observable emitting the list of categories
+         */
+        fun getCategoriesOfImage(
+            image: String,
+            itemLimit: Int,
+        ): Single<List<CategoryItem>> =
+            responseMapper(
+                categoryInterface.getCategoriesByTitles(
+                    "File:$image",
+                    itemLimit,
+                ),
+            )
+
+        /**
          * The method takes categoryName as input and returns a List of Subcategories
          * It uses the generator query API to get the subcategories in a category, 500 at a time.
          *
          * @param categoryName Category name as defined on commons
-         * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
+         * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is
+         * emitted.
          */
         fun getSubCategoryList(categoryName: String): Single<List<CategoryItem>> =
             continuationRequest(SUB_CATEGORY_CONTINUATION_PREFIX, categoryName) {

@@ -3,7 +3,6 @@ package fr.free.nrw.commons.navtab
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
@@ -17,17 +16,22 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
 import io.reactivex.Observable
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.anyString
+import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
@@ -41,7 +45,7 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
-import java.lang.reflect.Method
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -120,15 +124,40 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
+        doReturn(
+            observable,
+            observable2,
+        ).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
+    }
+
+    @Test
+    fun testUploadFeedbackWhenTokenIsUnavailableShowsError() {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        try {
+            val feedback = mock(Feedback::class.java)
+            doAnswer { throw InvalidLoginTokenException("offline") }
+                .`when`(pageEditClient)
+                .createNewSection(anyString(), anyString(), anyString(), anyString())
+
+            fragment.uploadFeedback(feedback)
+
+            Assert.assertEquals(
+                context.getString(R.string.error_feedback),
+                ShadowToast.getTextOfLatestToast(),
+            )
+        } finally {
+            RxJavaPlugins.reset()
+            RxAndroidPlugins.reset()
+        }
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnAboutClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onAboutClicked()
+        view.findViewById<View>(R.id.more_about).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
@@ -140,7 +169,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnTutorialClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onTutorialClicked()
+        view.findViewById<View>(R.id.more_tutorial).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
@@ -152,7 +181,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnSettingsClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onSettingsClicked()
+        view.findViewById<View>(R.id.more_settings).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
@@ -164,7 +193,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnProfileClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onProfileClicked()
+        view.findViewById<View>(R.id.more_profile).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
@@ -176,7 +205,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnPeerReviewClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onPeerReviewClicked()
+        view.findViewById<View>(R.id.more_peer_review).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
@@ -185,20 +214,11 @@ class MoreBottomSheetFragmentUnitTests {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun testSendFeedback() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = MoreBottomSheetFragment::class.java.getDeclaredMethod("sendFeedback")
-        method.isAccessible = true
-        method.invoke(fragment)
-        val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
-        val startedIntent = shadowActivity.nextStartedActivity
-        Assert.assertEquals(startedIntent.action, Intent.ACTION_SENDTO)
-        Assert.assertEquals(startedIntent.type, null)
-        Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
-        Assert.assertEquals(
-            startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
-        )
+    fun testOnFeedbackGithubClicked() {
+        view.findViewById<View>(R.id.more_feedback_github).performClick()
+
+        val intent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(Intent.ACTION_VIEW, intent.action)
+        Assert.assertEquals("https://github.com/commons-app/apps-android-commons/issues", intent.dataString)
     }
 }

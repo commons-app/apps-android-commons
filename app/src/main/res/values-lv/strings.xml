@@ -144,8 +144,7 @@
   <string name="search_history_deleted">Meklējumu vēsture izdzēsta</string>
   <string name="delete">Dzēst</string>
   <string name="Profile">Profils</string>
-  <string name="statistics">Statistika</string>
-  <string name="level" fuzzy="true">Līmenis</string>
+  <string name="level" fuzzy="true">Līmenis %1$d</string>
   <string name="nearby_fragment">Tuvumā</string>
   <string name="list_sheet">Saraksts</string>
   <string name="next">Nākamais</string>
@@ -175,6 +174,7 @@
   <string name="delete_helper_show_deletion_title_failed">Neizdevās</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Pašbilde</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">Miglains</string>
+  <string name="delete_helper_ask_spam_other">Cits</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
   <string name="account_created">Konts izveidots!</string>

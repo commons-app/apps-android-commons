@@ -8,20 +8,18 @@
     <item quantity="one">%1$d bestandj up \'nt loade</item>
     <item quantity="other">%1$d bestenj up \'nt loade</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d upload</item>
-    <item quantity="other">%1$d uploads</item>
-  </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Beginnendj mit %1$d upload</item>
     <item quantity="other">Beginnendj mit %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Dit plaetje weurt gelicenseerd ónger %1$s</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Dit plaetje weurt gelicenseerd ónger %1$s</item>
+    <item quantity="other">Dees plaetje weure gelicenseerd ónger %1$s</item>
+  </plurals>
   <string name="preference_category_appearance">Uterlik</string>
   <string name="preference_category_general">Algemein</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -97,10 +95,10 @@
   <string name="preference_license">Standerdlicentie</string>
   <string name="use_previous" fuzzy="true">Gebroek veurige naam/besjrieving</string>
   <string name="preference_theme" fuzzy="true">Nachmodus</string>
-  <string name="license_name_cc_by_sa_four"> Naamsvermeljing-GeliekDeile 4.0</string>
-  <string name="license_name_cc_by_four">Naamsvermeljing 4.0</string>
-  <string name="license_name_cc_by_sa">Naamsvermeljing-GeliekDeile 3.0</string>
-  <string name="license_name_cc_by">Naamsvermeljing 3.0</string>
+  <string name="license_name_cc_by_sa_four" fuzzy="true"> Naamsvermeljing-GeliekDeile 4.0</string>
+  <string name="license_name_cc_by_four" fuzzy="true">Naamsvermeljing 4.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Naamsvermeljing-GeliekDeile 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Naamsvermeljing 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>

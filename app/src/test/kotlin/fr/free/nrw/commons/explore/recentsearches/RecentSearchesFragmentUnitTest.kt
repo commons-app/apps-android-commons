@@ -123,18 +123,4 @@ class RecentSearchesFragmentUnitTest {
         method.isAccessible = true
         method.invoke(fragment, context, 0)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetDeletePositiveButton() {
-        val method: Method =
-            RecentSearchesFragment::class.java.getDeclaredMethod(
-                "setDeletePositiveButton",
-                Context::class.java,
-                DialogInterface::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, context, dialog, 0)
-    }
 }

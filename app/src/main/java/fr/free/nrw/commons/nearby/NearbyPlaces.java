@@ -1,10 +1,14 @@
 package fr.free.nrw.commons.nearby;
 
+import static java.util.Collections.emptyList;
+
 import android.location.Location;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Radial;
+import fr.free.nrw.commons.nearby.model.NearbyQueryParams.Rectangular;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,6 +16,7 @@ import javax.inject.Singleton;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.mwapi.WikidataQueryClient;
 import timber.log.Timber;
 
 /**
@@ -25,16 +30,20 @@ public class NearbyPlaces {
     public double radius = INITIAL_RADIUS;
 
     private final OkHttpJsonApiClient okHttpJsonApiClient;
+    private final WikidataQueryClient wikidataQueryClient;
 
     /**
      * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
      * search. As a point is center of a circle with a radius will be set later.
      *
      * @param okHttpJsonApiClient
+     * @param wikidataQueryClient loads details for known Wikidata items
      */
     @Inject
-    public NearbyPlaces(OkHttpJsonApiClient okHttpJsonApiClient) {
+    public NearbyPlaces(OkHttpJsonApiClient okHttpJsonApiClient,
+        WikidataQueryClient wikidataQueryClient) {
         this.okHttpJsonApiClient = okHttpJsonApiClient;
+        this.wikidataQueryClient = wikidataQueryClient;
     }
 
     /**
@@ -46,13 +55,14 @@ public class NearbyPlaces {
      * @param customQuery
      * @return list of places obtained
      */
+    @NonNull
     List<Place> radiusExpander(final LatLng currentLatLng, final String lang,
         final boolean returnClosestResult, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
         final double maxRadius;
 
-        List<Place> places = Collections.emptyList();
+        List<Place> places = emptyList();
 
         // If returnClosestResult is true, then this means that we are trying to get closest point
         // to use in cardView in Contributions fragment
@@ -113,6 +123,7 @@ public class NearbyPlaces {
      * @return A list of places obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
+    @NonNull
     public List<Place> getFromWikidataQuery(
         final fr.free.nrw.commons.location.LatLng centerPoint,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
@@ -120,11 +131,11 @@ public class NearbyPlaces {
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
         if (customQuery != null) {
-            return okHttpJsonApiClient
-                .getNearbyPlaces(
-                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+            final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
                     shouldQueryForMonuments,
                     customQuery);
+            return nearbyPlaces != null ? nearbyPlaces : emptyList();
         }
 
         final int lowerLimit = 1000, upperLimit = 1500;
@@ -138,12 +149,13 @@ public class NearbyPlaces {
         final float latGap = results[0] / 1000f;
 
         if (Math.max(longGap, latGap) < 100f) {
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+            final int itemCount = wikidataQueryClient.getNearbyItemCount(
                 new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
             if (itemCount < upperLimit) {
-                return okHttpJsonApiClient.getNearbyPlaces(
-                    new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft), lang,
+                final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+                    new Rectangular(screenTopRight, screenBottomLeft), lang,
                     shouldQueryForMonuments, null);
+                return nearbyPlaces != null ? nearbyPlaces : emptyList();
             }
         }
 
@@ -154,7 +166,7 @@ public class NearbyPlaces {
         int targetRadius = maxRadius / 2;
         while (minRadius < maxRadius) {
             targetRadius = minRadius + (maxRadius - minRadius + 1) / 2;
-            final int itemCount = okHttpJsonApiClient.getNearbyItemCount(
+            final int itemCount = wikidataQueryClient.getNearbyItemCount(
                 new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f));
             if (itemCount >= lowerLimit && itemCount < upperLimit) {
                 break;
@@ -175,9 +187,10 @@ public class NearbyPlaces {
                 maxRadius = targetRadius - 1;
             }
         }
-        return okHttpJsonApiClient.getNearbyPlaces(
-            new NearbyQueryParams.Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
+        final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
+            new Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
             null);
+        return nearbyPlaces != null ? nearbyPlaces : emptyList();
     }
 
     /**
@@ -192,7 +205,7 @@ public class NearbyPlaces {
      */
     public List<Place> getPlaces(final List<Place> placeList,
         final String lang) throws Exception {
-        return okHttpJsonApiClient
+        return wikidataQueryClient
             .getPlaces(placeList, lang);
     }
 

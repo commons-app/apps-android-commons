@@ -7,65 +7,65 @@ import java.util.concurrent.ScheduledThreadPoolExecutor
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.TimeUnit
 
-
 /**
  * This class is a thread pool which provides some additional features:
  * - it sets the thread priority to a value lower than foreground priority by default, or you can
  * supply your own priority
  * - it gives you a way to handle exceptions thrown in the thread pool
  */
-class ThreadPoolService private constructor(builder: Builder) : Executor {
-    private val backgroundPool: ScheduledThreadPoolExecutor = ExceptionAwareThreadPoolExecutor(
-        builder.poolSize,
-        object : ThreadFactory {
-            private var count = 0
-            override fun newThread(r: Runnable): Thread {
-                count++
-                val t = Thread(r, "${builder.name}-$count")
-                // If the priority is specified out of range, we set the thread priority to
-                // Thread.MIN_PRIORITY
-                // It's done to prevent IllegalArgumentException and to prevent setting of
-                // improper high priority for a less priority task
-                t.priority =
-                    if (
-                        builder.priority > Thread.MAX_PRIORITY
-                        ||
-                        builder.priority < Thread.MIN_PRIORITY
-                    ) {
-                    Thread.MIN_PRIORITY
-                } else {
-                    builder.priority
+class ThreadPoolService private constructor(
+    builder: Builder,
+) : Executor {
+    private val backgroundPool: ScheduledThreadPoolExecutor =
+        ExceptionAwareThreadPoolExecutor(
+            builder.poolSize,
+            object : ThreadFactory {
+                private var count = 0
+
+                override fun newThread(r: Runnable): Thread {
+                    count++
+                    val t = Thread(r, "${builder.name}-$count")
+                    // If the priority is specified out of range, we set the thread priority to
+                    // Thread.MIN_PRIORITY
+                    // It's done to prevent IllegalArgumentException and to prevent setting of
+                    // improper high priority for a less priority task
+                    t.priority =
+                        if (
+                            builder.priority > Thread.MAX_PRIORITY ||
+                            builder.priority < Thread.MIN_PRIORITY
+                        ) {
+                            Thread.MIN_PRIORITY
+                        } else {
+                            builder.priority
+                        }
+                    return t
                 }
-                return t
-            }
-        },
-        builder.exceptionHandler
-    )
+            },
+            builder.exceptionHandler,
+        )
 
-    fun <V> schedule(callable: Callable<V>, time: Long, timeUnit: TimeUnit): ScheduledFuture<V> {
-        return backgroundPool.schedule(callable, time, timeUnit)
-    }
+    fun <V> schedule(
+        callable: Callable<V>,
+        time: Long,
+        timeUnit: TimeUnit,
+    ): ScheduledFuture<V> = backgroundPool.schedule(callable, time, timeUnit)
 
-    fun schedule(runnable: Runnable): ScheduledFuture<*> {
-        return schedule(runnable, 0, TimeUnit.SECONDS)
-    }
+    fun schedule(runnable: Runnable): ScheduledFuture<*> = schedule(runnable, 0, TimeUnit.SECONDS)
 
-    fun schedule(runnable: Runnable, time: Long, timeUnit: TimeUnit): ScheduledFuture<*> {
-        return backgroundPool.schedule(runnable, time, timeUnit)
-    }
+    fun schedule(
+        runnable: Runnable,
+        time: Long,
+        timeUnit: TimeUnit,
+    ): ScheduledFuture<*> = backgroundPool.schedule(runnable, time, timeUnit)
 
     fun scheduleAtFixedRate(
         task: Runnable,
         initialDelay: Long,
         period: Long,
-        timeUnit: TimeUnit
-    ): ScheduledFuture<*> {
-        return backgroundPool.scheduleWithFixedDelay(task, initialDelay, period, timeUnit)
-    }
+        timeUnit: TimeUnit,
+    ): ScheduledFuture<*> = backgroundPool.scheduleWithFixedDelay(task, initialDelay, period, timeUnit)
 
-    fun executor(): ScheduledThreadPoolExecutor {
-        return backgroundPool
-    }
+    fun executor(): ScheduledThreadPoolExecutor = backgroundPool
 
     fun shutdown() {
         backgroundPool.shutdown()
@@ -78,7 +78,9 @@ class ThreadPoolService private constructor(builder: Builder) : Executor {
     /**
      * Builder class for [ThreadPoolService]
      */
-    class Builder(val name: String) {
+    class Builder(
+        val name: String,
+    ) {
         var poolSize: Int = 1
         var priority: Int = Thread.MIN_PRIORITY
         var exceptionHandler: ExceptionHandler? = null
@@ -88,9 +90,7 @@ class ThreadPoolService private constructor(builder: Builder) : Executor {
          * @throws IllegalArgumentException if size of pool <= 0
          */
         fun setPoolSize(poolSize: Int): Builder {
-            if (poolSize <= 0) {
-                throw IllegalArgumentException("Pool size must be greater than 0")
-            }
+            require(poolSize > 0) { "Pool size must be greater than 0" }
             this.poolSize = poolSize
             return this
         }
@@ -115,8 +115,6 @@ class ThreadPoolService private constructor(builder: Builder) : Executor {
             return this
         }
 
-        fun build(): ThreadPoolService {
-            return ThreadPoolService(this)
-        }
+        fun build(): ThreadPoolService = ThreadPoolService(this)
     }
 }

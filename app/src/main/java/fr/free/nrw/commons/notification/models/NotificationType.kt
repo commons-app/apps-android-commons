@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.notification.models
 
-enum class NotificationType(private val type: String) {
+enum class NotificationType(
+    private val type: String,
+) {
     THANK_YOU_EDIT("thank-you-edit"),
 
     EDIT_USER_TALK("edit-user-talk"),
@@ -11,12 +13,11 @@ enum class NotificationType(private val type: String) {
 
     WELCOME("welcome"),
 
-    UNKNOWN("unknown");
+    UNKNOWN("unknown"),
+    ;
 
     // Getter for the type property
-    fun getType(): String {
-        return type
-    }
+    fun getType(): String = type
 
     companion object {
         // Returns the corresponding NotificationType for a given name or UNKNOWN

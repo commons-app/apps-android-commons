@@ -6,20 +6,19 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
-
 import androidx.exifinterface.media.ExifInterface
-
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.ImageCoordinates
+import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.util.Date
-import timber.log.Timber
+import java.util.Locale
 
 class UploadableFile : Parcelable {
-
     val contentUri: Uri
     val file: File
+    var hasUnsupportedFormat: Boolean = false
 
     constructor(contentUri: Uri, file: File) {
         this.contentUri = contentUri
@@ -34,28 +33,22 @@ class UploadableFile : Parcelable {
     private constructor(parcel: Parcel) {
         contentUri = parcel.readParcelable(Uri::class.java.classLoader)!!
         file = parcel.readSerializable() as File
+        hasUnsupportedFormat = parcel.readInt() == 1
     }
 
-    fun getFilePath(): String {
-        return file.path
-    }
+    fun getFilePath(): String = file.path
 
-    fun getMediaUri(): Uri {
-        return Uri.parse(getFilePath())
-    }
+    fun getMediaUri(): Uri = Uri.parse(getFilePath())
 
-    fun getMimeType(context: Context): String? {
-        return FileUtils.getMimeType(context, getMediaUri())
-    }
+    fun getMimeType(context: Context): String? = FileUtils.getMimeType(context, getMediaUri())
 
     override fun describeContents(): Int = 0
 
     /**
      * First try to get the file creation date from EXIF, else fall back to Content Provider (CP)
      */
-    fun getFileCreatedDate(context: Context): DateTimeWithSource? {
-        return getDateTimeFromExif() ?: getFileCreatedDateFromCP(context)
-    }
+    fun getFileCreatedDate(context: Context): DateTimeWithSource? =
+        getDateTimeFromExif() ?: getFileCreatedDateFromCP(context)
 
     /**
      * Get filePath creation date from URI using all possible content providers
@@ -64,17 +57,20 @@ class UploadableFile : Parcelable {
         return try {
             val cursor: Cursor? = context.contentResolver.query(contentUri, null, null, null, null)
             cursor?.use {
-                val lastModifiedColumnIndex = cursor
-                    .getColumnIndex(
-                        "last_modified"
-                    ).takeIf { it != -1 }
-                    ?: cursor.getColumnIndex("datetaken")
+                val lastModifiedColumnIndex =
+                    cursor
+                        .getColumnIndex(
+                            "last_modified",
+                        ).takeIf { it != -1 }
+                        ?: cursor.getColumnIndex("datetaken")
                 if (lastModifiedColumnIndex == -1) return null // No valid column found
                 cursor.moveToFirst()
                 DateTimeWithSource(
                     cursor.getLong(
-                        lastModifiedColumnIndex
-                    ), DateTimeWithSource.CP_SOURCE)
+                        lastModifiedColumnIndex,
+                    ),
+                    DateTimeWithSource.CP_SOURCE,
+                )
             }
         } catch (e: Exception) {
             Timber.tag("UploadableFile").d(e)
@@ -85,15 +81,14 @@ class UploadableFile : Parcelable {
     /**
      * Indicates whether the EXIF contains the location (both latitude and longitude).
      */
-    fun hasLocation(): Boolean {
-        return try {
+    fun hasLocation(): Boolean =
+        try {
             val exif = ExifInterface(file.absolutePath)
             ImageCoordinates(exif, null).imageCoordsExists
         } catch (e: IOException) {
             Timber.tag("UploadableFile").d(e)
             false
         }
-    }
 
     /**
      * Get filePath creation date from URI using EXIF data
@@ -106,7 +101,7 @@ class UploadableFile : Parcelable {
                 val year = dateTimeSubString.substring(0, 4).toInt()
                 val month = dateTimeSubString.substring(5, 7).toInt()
                 val day = dateTimeSubString.substring(8, 10).toInt()
-                val dateCreatedString = "%04d-%02d-%02d".format(year, month, day)
+                val dateCreatedString = "%04d-%02d-%02d".format(Locale.ROOT, year, month, day)
                 if (dateCreatedString.length == 10) {
                     @SuppressLint("RestrictedApi")
                     val dateTime = exif.dateTimeOriginal
@@ -123,9 +118,13 @@ class UploadableFile : Parcelable {
         }
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeParcelable(contentUri, flags)
         parcel.writeSerializable(file)
+        parcel.writeInt(if (hasUnsupportedFormat) 1 else 0)
     }
 
     class DateTimeWithSource {
@@ -156,12 +155,8 @@ class UploadableFile : Parcelable {
     }
 
     companion object CREATOR : Parcelable.Creator<UploadableFile> {
-        override fun createFromParcel(parcel: Parcel): UploadableFile {
-            return UploadableFile(parcel)
-        }
+        override fun createFromParcel(parcel: Parcel): UploadableFile = UploadableFile(parcel)
 
-        override fun newArray(size: Int): Array<UploadableFile?> {
-            return arrayOfNulls(size)
-        }
+        override fun newArray(size: Int): Array<UploadableFile?> = arrayOfNulls(size)
     }
 }

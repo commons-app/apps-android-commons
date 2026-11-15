@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
  */
 class CampaignConfig {
     @SerializedName("showOnlyLiveCampaigns")
-    private val showOnlyLiveCampaigns = false
+    var showOnlyLiveCampaigns = false
 
     @SerializedName("sortBy")
-    private val sortBy: String? = null
+    var sortBy: String? = null
 }

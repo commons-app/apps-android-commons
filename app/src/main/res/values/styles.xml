@@ -20,6 +20,7 @@
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
         <item name="caption_description_text_color">@color/white</item>
+        <item name="android:statusBarColor">@color/main_background_dark</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -122,6 +123,9 @@
         <item name="custom_selector_back">@drawable/ic_arrow_back_black</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
+        <!--For edge to edge backward compatibility-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">

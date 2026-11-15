@@ -8,15 +8,18 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 abstract class UploadBaseFragment : CommonsDaggerSupportFragment() {
     var callback: Callback? = null
 
-    protected open fun onBecameVisible() = Unit
+    open fun onBecameVisible() = Unit
 
     interface Callback {
         val totalNumberOfSteps: Int
         val isWLMUpload: Boolean
 
         fun onNextButtonClicked(index: Int)
+
         fun onPreviousButtonClicked(index: Int)
+
         fun showProgress(shouldShow: Boolean)
+
         fun getIndexInViewFlipper(fragment: UploadBaseFragment?): Int
     }
 

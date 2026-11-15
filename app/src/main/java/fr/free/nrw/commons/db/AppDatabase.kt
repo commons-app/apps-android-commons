@@ -5,14 +5,26 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomDao
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsRoomEntity
+import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.bookmarks.locations.BookmarksLocations
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPictureRoomEntity
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesRoomDao
+import fr.free.nrw.commons.category.CategoryRoomDao
+import fr.free.nrw.commons.category.CategoryRoomEntity
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchRoomEntity
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesRoomDao
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlaceDao
+import fr.free.nrw.commons.recentlanguages.RecentLanguageRoomEntity
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesRoomDao
 import fr.free.nrw.commons.review.ReviewDao
 import fr.free.nrw.commons.review.ReviewEntity
 import fr.free.nrw.commons.upload.depicts.Depicts
@@ -23,11 +35,21 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
  *
  */
 @Database(
-    entities = [Contribution::class, Depicts::class, UploadedStatus::class, NotForUploadStatus::class, ReviewEntity::class, Place::class, BookmarksCategoryModal::class],
-    version = 19,
-    exportSchema = false,
+    entities = [
+        Contribution::class, Depicts::class,
+        UploadedStatus::class, NotForUploadStatus::class,
+        ReviewEntity::class, Place::class,
+        BookmarksCategoryModal::class, BookmarksLocations::class,
+        BookmarkPictureRoomEntity::class, BookmarkItemsRoomEntity::class,
+        CategoryRoomEntity::class, RecentLanguageRoomEntity::class, RecentSearchRoomEntity::class,
+    ],
+    version = 25,
+    exportSchema = true,
 )
 @TypeConverters(Converters::class)
+// Suppressed TooManyFunctions because Room requires an abstract DAO getter
+// for each table registered in the database.
+@Suppress("TooManyFunctions")
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contributionDao(): ContributionDao
 
@@ -42,4 +64,16 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun ReviewDao(): ReviewDao
 
     abstract fun bookmarkCategoriesDao(): BookmarkCategoriesDao
+
+    abstract fun bookmarkLocationsDao(): BookmarkLocationsDao
+
+    abstract fun categoryRoomDao(): CategoryRoomDao
+
+    abstract fun bookmarkPicturesRoomDao(): BookmarkPicturesRoomDao
+
+    abstract fun bookmarkItemsRoomDao(): BookmarkItemsRoomDao
+
+    abstract fun recentLanguagesRoomDao(): RecentLanguagesRoomDao
+
+    abstract fun recentSearchesRoomDao(): RecentSearchesRoomDao
 }

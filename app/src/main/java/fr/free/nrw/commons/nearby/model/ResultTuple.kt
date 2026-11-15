@@ -15,6 +15,7 @@ class ResultTuple {
     }
 
     constructor() {
+        // Empty when WDQS sends no xml:lang, so the upload form uses the default description language
         language = ""
         type = ""
         value = ""
