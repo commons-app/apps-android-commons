@@ -79,6 +79,9 @@ interface UploadMediaDetailsContract {
         fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>)
     }
 
+    // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
+    // contract for this screen and stay together to maintain contract integrity.
+    @Suppress("TooManyFunctions")
     interface UserActionListener : BasePresenter<View> {
         fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
 

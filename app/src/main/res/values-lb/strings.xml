@@ -199,6 +199,10 @@
   <string name="media_detail_license">Lizenz</string>
   <string name="media_detail_coordinates">Koordinaten</string>
   <string name="media_detail_coordinates_empty">Keng uginn</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Videoqualitéit</string>
+  <string name="video_quality_auto">Automatesch</string>
+  <string name="video_quality_data_saver">Date spueren</string>
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
@@ -683,7 +687,8 @@
   </plurals>
   <string name="multiple_files_depiction">Denkt wgl. drun, datt all d\'Biller beim gläichzäitegen Eroplueden déi selwecht Kategorien a Motiver kréien. Wann d\'Biller net déi selwecht Motiver a Kategorien hunn, luet se wgl. eenzel erop.</string>
   <string name="multiple_files_depiction_header">Hiweis zum gläichzäitegen Eroplueden</string>
-  <string name="nearby_wikitalk">E Problem fir dëst Element u Wikidata mellen</string>
+  <string name="nearby_report_problem">E Problem fir dëst Element u Wikidata mellen</string>
+  <string name="nearby_report_problem_short">Problem mellen</string>
   <string name="please_enter_some_comments">Gitt wgl. Kommentaren an</string>
   <string name="talk">Diskussioun</string>
   <string name="write_something_about_the_item">Schreift eppes iwwer d\'Element „%1$s“. Är Kommentare wäerten ëffentlech siichtbar sinn.</string>
@@ -697,14 +702,22 @@
   <string name="uploads">Eroplueden</string>
   <string name="pending">Am Suspens</string>
   <string name="failed">Feelgeschloen</string>
+  <string name="custom_selector_delete_folder">Dossier läschen</string>
   <string name="custom_selector_confirm_deletion_title">Läsche confirméieren</string>
+  <string name="custom_selector_confirm_deletion_message">Sidd Dir sécher, datt Dir den Dossier %1$s mat %2$d Elementer läsche wëllt?</string>
   <string name="custom_selector_delete">Läschen</string>
   <string name="custom_selector_cancel">Ofbriechen</string>
+  <string name="custom_selector_folder_deleted_success">Dossier %1$s erfollegräich geläscht</string>
   <string name="custom_selector_folder_deleted_failure">De Fichier %1$s konnt net geläscht ginn</string>
+  <string name="custom_selector_error_trashing_folder_contents">Feeler beim Läsche vum Contenu vum Dossier: %1$s</string>
   <string name="red_pin">Vun dëser Plaz gëtt et nach keng Foto, gitt eng maachen!</string>
   <string name="green_pin">Vun dëser Plaz gëtt et schonn eng Foto.</string>
   <string name="grey_pin">Et gëtt grad iwwerpréift, ob et vun dëser Plaz schonn eng Foto gëtt.</string>
   <string name="error_while_loading">Feeler beim Lueden</string>
+  <string name="play_video">Video ofspillen</string>
+  <string name="play_audio">Audio ofspillen</string>
+  <string name="video_unavailable">Video net disponibel. Tippt, fir nach eng Kéier ze probéieren.</string>
+  <string name="audio_unavailable">Audio net disponibel. Tippt, fir nach eng Kéier ze probéieren.</string>
   <string name="no_usages_found">Kee Gebrauch fonnt</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Aner Wikien</string>
@@ -719,9 +732,13 @@
   <string name="image_tag_line_created_and_uploaded_by">Kreéiert an eropgeluede vum: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Vum %1$s kreéiert a vum %2$s eropgelueden</string>
   <string name="nominated_for_deletion_btn">Virgeschloe fir ze läschen</string>
+  <string name="custom_selector_max_image_limit_reached">Dir kënnt maximal %d Biller auswielen.</string>
+  <string name="upload_limit_exceeded">Nëmmen déi éischt %1$d Biller ginn eropgelueden.</string>
   <string name="license_cc0_description">Kee Copyright. Dir gitt all d\'Rechter of, sou datt jiddereen d\'Wierk op all méiglech Aart a Weis benotze kann.</string>
   <string name="license_cc_by_description">Attribution. Anerer kënnen d\'Wierk fräi deelen an upassen, soulaang se Iech als Auteur uginn.</string>
   <string name="license_cc_by_sa_description">Attribution-ShareAlike. Anerer kënnen d\'Wierk deelen an adaptéieren, mee se mussen Iech als Auteur nennen an déi selwecht Lizenz benotzen.</string>
+  <string name="error_getting_image_properties">Feeler beim Ofruffe vun de Bildeegenschaften:</string>
+  <string name="error_blur_no_rectangle">Zeechent wgl. op d\'mannst ee Rechteck op der Foto</string>
   <string name="failed_to_save_image">D\'Bild konnt net gespäichert ginn</string>
   <string name="format_jpeg">JPEG</string>
   <string name="format_png">PNG</string>

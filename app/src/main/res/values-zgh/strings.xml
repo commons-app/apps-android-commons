@@ -79,30 +79,40 @@
   <string name="suggest_unrestricted_mode">ⴰⵙⵙⴽⵜⵔ ⵏ ⵡⵓⴳⴳⴰⵔ ⵏ ⴽⵕⴰⴹⵜ ⵜⵡⵍⴰⴼⵉⵏ ⴰⵔ ⵜⵜⵎⵔⴰⵙ ⵙ ⵜⵎⴰⵎⴽⵜ ⵉⵜⵜⴼⵍⴰⵙⵏ ⵓⴳⴳⴰⵔ ⵏⵏⴰ ⴳ ⵉⵜⵜⵡⴰⴽⴽⴰⵙ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ ⵉⴳ ⴰⵙ ⵜⵓⴼⵉⴷ ⴽⴽⵙ ⴰⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ ⵉⵜⵉⵏⵙⵉ ⵏ ⴽⵓⵎⵏⵣ ⵙⴳ ⵜⵉⵙⵖⴰⵍ ⵉ ⵢⴰⵏ ⵢⵉⵔⵉⵎ ⵏ ⵓⵙⵙⴽⵜⵔ ⵉⵔⵔⵉⵔⵉⵏ.\nⵜⵉⴼⵔⴽⵉⵏ ⵜⵓⵣⴹⵕⵉⵏ ⵏ ⵡⵓⴽⵓⵙ ⵏ ⵓⵙⵖⵓⴷⵓ ⵏ ⵜⴱⵍⴰⴹⵜ:\nⵜⵉⴼⵔⴽⵜ 1: ⴰⴷⴷ ⴼ ⵓⴱⵔⴰ ⵏ ⵜⵉⵙⵖⴰⵍ ⴰⴷⴷⴰⵢ.\nⵜⵉⴼⵔⴽⵜ 2: ⵣⵔⵉ ⵙⴳ ⵓⵔ ⵉⵙⵖⵓⴷⵉ ⵙ \"ⵢⴰⵍ ⵜⵉⵏⵙⵉⵡⵉⵏ\".\nⵜⵉⴼⵔⴽⵜ 3: ⵙⵉⴳⴳⵍ ⵉ \"commns\" mid \"fr.free.nrw.commons\"\nⵜⵉⴼⵔⴽⵜ 4: ⴰⴽⵍ ⵜⵜ ⵜⴼⵔⵏⴷ \"ⴰⴷ ⵓⵔ ⵜⵙⵖⵓⴷⵓⴷ\"\nⵜⵉⴼⵔⴽⵜ 5: ⴰⴽⵍ ⴼ \"done\"</string>
   <string name="authentication_failed">ⴰⵙⵖⵣⵏ ⵉⵣⴳⵍ. ⵉⴳ ⵜⵓⴼⵉⴷ ⴽⵛⵎ ⴷⵉⵖ</string>
   <string name="uploading_started">ⴰⵙⴽⵜⵔ ⵉⵙⵙⵏⵜⵉ!</string>
+  <string name="uploading_queued">ⴰⵙⵙⴽⵜⵔ ⴳⵜⵍⴳⴰⵎⵜ ⵏ ⵓⵙⵓⴳⴳⵎ (ⴰⵏⴷⴰⵣ ⵏ ⵓⵣⴷⴰⵢ ⵉⴳⵍⵉⵏ ⵉⵔⴼⴰ)</string>
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
   <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">ⵉⵙⵙⵏⵜⵉ ⵓⵙⵙⴽⵜⵔ ⵏ %1$s</string>
+  <string name="upload_progress_notification_title_start">ⴰⵙⵙⴽⵜⵔ ⵏ ⵓⴼⴰⵢⵍⵓ: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">ⴰⵙⴽⵜⵓⵔ ⵏ %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
+  <string name="upload_progress_notification_title_finishing">ⵜⵉⴳⵉⵔⴰ ⵏ ⵡⴰⴳⴰⵎ ⵏ %1$s</string>
+  <string name="upload_failed_notification_title">ⵜⴰⴳⴰⵡⵉⵜ ⵏ ⴰⵙⵙⴽⵜⵔ ⵏ %1$s</string>
+  <string name="upload_paused_notification_title">ⴰⴳⴰⵎ ⵏ %1$s ⵉⵜⵜⵓⵙⴱⴷ</string>
   <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵙⴽⵏⴷ</string>
+  <string name="upload_paused_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵙⴽⵏⴷ</string>
   <string name="title_activity_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ ⵉⵎⴳⴳⵓⵔⴰ</string>
+  <string name="contribution_state_queued">ⴳ ⵓⵙⵓⴳⴳⵎ</string>
+  <string name="contribution_state_failed">ⵜⴰⴳⴰⵡⵉⵜ</string>
   <string name="contribution_state_in_progress">ⵉⵙⵎⴷ %1$d%%</string>
   <string name="contribution_state_starting">ⴰⵙⵙⴽⵜⵔ</string>
+  <string name="menu_from_gallery">ⵙⴳ ⵜⴷⵔⴱⵓⵣⵜ</string>
   <string name="menu_from_camera">ⴰⵎⵥ ⵜⴰⵡⵍⴰⴼⵜ</string>
+  <string name="menu_nearby">ⵜⴰⵎⴰ ⵏ</string>
   <string name="provider_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ</string>
+  <string name="menu_copy_link">ⵙⵙⵏⵖⵍ ⴰⵙⵖⵓⵏ</string>
+  <string name="menu_link_copied">ⴰⵙⵖⵓⵏ ⵉⵜⵜⵡⴰⵏⵖⵍ ⴳ ⵜⵎⵒⴹⵉⵜ</string>
   <string name="menu_share">ⴱⴹⵓ</string>
   <string name="share_title_hint">ⴰⴷⵓⵣⵡⵍ (ⵉⵇⵇⴰⵏ ⴷ)</string>
   <string name="share_description_hint">ⴰⴳⵍⴰⵎ</string>
   <string name="login_failed_throttled">ⵎⵏⵏⴰⵡⵜ ⵜⵓⵔⵎⵉⵡⵉⵏ ⵓⵔ ⵉⵎⵓⵔⵙⵏ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴷⴰⵖ ⴷⴼⴼⵉⵔ ⴽⵔⴰ ⵏ ⵜⵓⵙⴷⵉⴷⵉⵏ.</string>
   <string name="login_failed_blocked">ⴰⵙⵙⵓⵔⴼ, ⴰⵎⵙⵙⵎⵔⵙ ⴰⴷ ⵉⵜⵜⵓⴳⴷⴰⵍ ⴳ ⴽⵓⵎⵏⵣ</string>
-  <string name="login_failed_generic" fuzzy="true">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ</string>
+  <string name="login_failed_generic">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ</string>
   <string name="share_upload_button">ⵙⵙⴽⵜⵔ</string>
   <string name="provider_modifications">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
   <string name="menu_upload_single">ⵙⵙⴽⵜⵔ</string>
   <string name="categories_search_text_hint">ⵔⵣⵓ ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="menu_save_categories">ⵃⴹⵓ</string>
   <string name="display_list_button">ⵜⴰⵍⴳⴰⵎⵜ</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
+  <string name="contributions_subtitle_zero">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
   <string name="categories_not_found">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="categories_activity_title">ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="title_activity_settings">ⵜⵉⵙⵖⴰⵍ</string>

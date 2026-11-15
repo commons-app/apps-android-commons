@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.File
 
@@ -65,6 +66,18 @@ class FileUtilsTest {
     @Test
     fun isSupportedFileTypeRejectsRaw() {
         assertEquals(false, isSupportedFileType("image/x-adobe-dng"))
+    }
+
+    @Test
+    fun testReadFromResource() {
+        val content = FileUtils.readFromResource("/queries/places_query.rq")
+
+        assertTrue(content.isNotEmpty())
+    }
+
+    @Test
+    fun testReadFromResourceReturnsEmptyContentForMissingResource() {
+        assertEquals("", FileUtils.readFromResource("/queries/missing.rq"))
     }
 
     private fun isSupportedFileType(mimeType: String): Boolean {

@@ -36,18 +36,13 @@ class BookmarkPicturesStatusView(
      * @param throwable the error that happened
      * @param isGridEmpty true if the grid has no pictures yet
      */
-    @Suppress("TooGenericExceptionCaught")
     fun showError(
         throwable: Throwable,
         isGridEmpty: Boolean,
     ) {
         Timber.e(throwable, "Error occurred while loading images inside a category")
-        try {
-            showShortSnackbar(binding.root, R.string.error_loading_images)
-            showErrorView(isGridEmpty)
-        } catch (e: Exception) {
-            Timber.e(e)
-        }
+        showShortSnackbar(binding.root, R.string.error_loading_images)
+        showErrorView(isGridEmpty)
     }
 
     /**
