@@ -1,17 +1,13 @@
 package fr.free.nrw.commons.explore.search
 
 import android.content.Context
-import android.widget.SearchView
-import androidx.fragment.app.FragmentController
-import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
-import androidx.viewpager.widget.ViewPager
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
-import fr.free.nrw.commons.databinding.ActivitySearchBinding
 import fr.free.nrw.commons.explore.SearchActivity
+import fr.free.nrw.commons.explore.SearchQueryController
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
 import fr.free.nrw.commons.explore.media.SearchMediaFragment
@@ -37,12 +33,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 
-
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SearchActivityUnitTests {
-
     @Mock
     private lateinit var activity: SearchActivity
 
@@ -65,15 +59,15 @@ class SearchActivityUnitTests {
     private lateinit var recentSearchesFragment: RecentSearchesFragment
 
     @Mock
-    private lateinit var supportFragmentManager: FragmentManager
-
-    @Mock
     private lateinit var searchDepictionsFragment: SearchDepictionsFragment
 
     @Mock
     private lateinit var searchCategoryFragment: SearchCategoryFragment
 
     private lateinit var context: Context
+
+    private val searchQueryController: SearchQueryController
+        get() = Whitebox.getInternalState(activity, "searchQueryController")
 
     @Before
     fun setUp() {
@@ -92,7 +86,7 @@ class SearchActivityUnitTests {
     @Throws(Exception::class)
     fun testSetTabs() {
         Whitebox.setInternalState(activity, "viewPagerAdapter", viewPagerAdapter)
-        activity.setTabs()
+        searchQueryController.setTabs(viewPagerAdapter, Whitebox.getInternalState(activity, "compositeDisposable"))
         verify(viewPagerAdapter).notifyDataSetChanged()
     }
 
@@ -132,9 +126,9 @@ class SearchActivityUnitTests {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
+            SearchQueryController::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
     }
 
@@ -145,9 +139,9 @@ class SearchActivityUnitTests {
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
         `when`(recentSearchesDao.find(query)).thenReturn(mock(RecentSearch::class.java))
         val method: Method =
-            SearchActivity::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
+            SearchQueryController::class.java.getDeclaredMethod("saveRecentSearch", String::class.java)
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
     }
 
@@ -156,7 +150,7 @@ class SearchActivityUnitTests {
     fun testGetMediaAtPosition() {
         val pos = 0
         val media = mock(Media::class.java)
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
         `when`(searchMediaFragment.getMediaAtPosition(pos)).thenReturn(media)
         assertEquals(activity.getMediaAtPosition(pos), media)
     }
@@ -165,22 +159,23 @@ class SearchActivityUnitTests {
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
         val num = 1
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
-        `when`(searchMediaFragment.totalMediaCount).thenReturn(num)
-        assertEquals(activity.totalMediaCount, num)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
+        `when`(searchMediaFragment.getTotalMediaCount()).thenReturn(num)
+        assertEquals(activity.getTotalMediaCount(), num)
     }
 
     @Test
     @Throws(Exception::class)
     fun testHandleSearchCaseEmpty() {
-        Whitebox.setInternalState(activity, "recentSearchesFragment", recentSearchesFragment)
+        Whitebox.setInternalState(searchQueryController, "recentSearchesFragment", recentSearchesFragment)
         val query = ""
-        val method: Method = SearchActivity::class.java.getDeclaredMethod(
-            "handleSearch",
-            CharSequence::class.java
-        )
+        val method: Method =
+            SearchQueryController::class.java.getDeclaredMethod(
+                "handleSearch",
+                CharSequence::class.java,
+            )
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesFragment).updateRecentSearches()
     }
 
@@ -189,9 +184,9 @@ class SearchActivityUnitTests {
     fun testHandleSearchCaseNotEmpty() {
         val query = "test"
         Whitebox.setInternalState(activity, "recentSearchesDao", recentSearchesDao)
-        Whitebox.setInternalState(activity, "searchDepictionsFragment", searchDepictionsFragment)
-        Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
-        Whitebox.setInternalState(activity, "searchCategoryFragment", searchCategoryFragment)
+        Whitebox.setInternalState(searchQueryController, "searchDepictionsFragment", searchDepictionsFragment)
+        Whitebox.setInternalState(searchQueryController, "searchMediaFragment", searchMediaFragment)
+        Whitebox.setInternalState(searchQueryController, "searchCategoryFragment", searchCategoryFragment)
 
         `when`(searchDepictionsFragment.activity).thenReturn(activity)
         `when`(searchMediaFragment.activity).thenReturn(activity)
@@ -209,16 +204,16 @@ class SearchActivityUnitTests {
         `when`(searchMediaFragment.isRemoving).thenReturn(false)
         `when`(searchCategoryFragment.isRemoving).thenReturn(false)
 
-        val method: Method = SearchActivity::class.java.getDeclaredMethod(
-            "handleSearch",
-            CharSequence::class.java
-        )
+        val method: Method =
+            SearchQueryController::class.java.getDeclaredMethod(
+                "handleSearch",
+                CharSequence::class.java,
+            )
         method.isAccessible = true
-        method.invoke(activity, query)
+        method.invoke(searchQueryController, query)
         verify(recentSearchesDao).find(query)
         verify(searchDepictionsFragment).onQueryUpdated(query)
         verify(searchMediaFragment).onQueryUpdated(query)
         verify(searchCategoryFragment).onQueryUpdated(query)
     }
-
 }

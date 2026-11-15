@@ -2,11 +2,10 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,14 +13,20 @@ import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
-import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageSelectionManager
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import java.util.TreeMap
 import kotlin.collections.ArrayList
 
 /**
@@ -31,20 +36,27 @@ class ImageAdapter(
     /**
      * Application Context.
      */
-    context: Context,
-
+    private val context: Context,
     /**
      * Image select listener for click events on image.
      */
     private var imageSelectListener: ImageSelectListener,
-
     /**
      * ImageLoader queries images.
      */
-    private var imageLoader: ImageLoader
-):
-
-    RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context), FastScrollRecyclerView.SectionedAdapter {
+    private var imageLoader: ImageLoader,
+    /**
+     * Selection manager for image selection operations.
+     */
+    val selectionManager: ImageSelectionManager =
+        ImageSelectionManager(
+            context,
+            imageSelectListener,
+            imageLoader,
+        ),
+) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
+    FastScrollRecyclerView.SectionedAdapter {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     /**
      * ImageSelectedOrUpdated payload class.
@@ -60,16 +72,6 @@ class ImageAdapter(
      * Determines whether addition of all actionable images is done or not
      */
     private var reachedEndOfFolder: Boolean = false
-
-    /**
-     * Currently selected images.
-     */
-    private var selectedImages = arrayListOf<Image>()
-
-    /**
-     * Number of selected images that are marked as not for upload
-     */
-    private var numberOfSelectedImagesMarkedAsNotForUpload = 0
 
     /**
      * List of all images in adapter.
@@ -104,16 +106,31 @@ class ImageAdapter(
     private var imagePositionAsPerIncreasingOrder = 0
 
     /**
+     * Stores the number of images currently visible on the screen
+     */
+    private val _currentImagesCount = MutableStateFlow(0)
+    val currentImagesCount = _currentImagesCount
+
+    /**
+     * Stores whether images are being loaded or not
+     */
+    private val _isLoadingImages = MutableStateFlow(false)
+    val isLoadingImages = _isLoadingImages
+
+    /**
      * Coroutine Dispatchers and Scope.
      */
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
-    private val scope : CoroutineScope = MainScope()
+    private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val scope: CoroutineScope = MainScope()
 
     /**
      * Create View holder.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ImageViewHolder {
         val itemView = inflater.inflate(R.layout.item_custom_selector_image, parent, false)
         return ImageViewHolder(itemView)
     }
@@ -121,10 +138,15 @@ class ImageAdapter(
     /**
      * Bind View holder, load image, selected view, click listeners.
      */
-    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-
-        var image=images[position]
-        holder.image.setImageDrawable (null)
+    override fun onBindViewHolder(
+        holder: ImageViewHolder,
+        position: Int,
+    ) {
+        if (images.size == 0) {
+            return
+        }
+        var image = images[position]
+        holder.image.setImageDrawable(null)
         if (context.contentResolver.getType(image.uri) == null) {
             // Image does not exist anymore, update adapter.
             holder.itemView.post {
@@ -139,28 +161,24 @@ class ImageAdapter(
             val showAlreadyActionedImages =
                 sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-            // Getting selected index when switch is on
-            val selectedIndex: Int = if (showAlreadyActionedImages) {
-                ImageHelper.getIndex(selectedImages, image)
-
-                // Getting selected index when switch is off
-            } else if (actionableImagesMap.size > position) {
-                ImageHelper
-                    .getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-
-                // For any other case return -1
-            } else {
-                -1
-            }
-
-            val isSelected = selectedIndex != -1
+            val isSelected =
+                selectionManager.isSelected(
+                    position,
+                    image,
+                    showAlreadyActionedImages,
+                    ArrayList(actionableImagesMap.values),
+                )
             if (isSelected) {
                 holder.itemSelected()
             } else {
                 holder.itemUnselected()
             }
             imageLoader.queryAndSetView(
-                holder, image, ioDispatcher, defaultDispatcher ,uploadingContributionList
+                holder,
+                image,
+                ioDispatcher,
+                defaultDispatcher,
+                uploadingContributionList,
             )
             scope.launch {
                 val sharedPreferences: SharedPreferences =
@@ -171,34 +189,55 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(holder, position, uploadingContributionList)
-
-                    // If the position is already visited, that means the image is already present
-                    // inside map, so it will fetch the image from the map and load in the holder
+                        processThumbnailForActionedImage(
+                            holder,
+                            position,
+                            uploadingContributionList,
+                        )
+                        _isLoadingImages.value = false
+                        // If the position is already visited, that means the image is already present
+                        // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
-                        if(actionableImages.size > position) {
+                        if (actionableImages.size > position) {
                             image = actionableImages[position]
-                            Glide.with(holder.image).load(image.uri)
-                                .thumbnail(0.3f).into(holder.image)
+                            Glide
+                                .with(holder.image)
+                                .load(image.uri)
+                                .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
+                                .into(holder.image)
                         }
                     }
 
-                // If switch is turned off, it just fetches the image from all images without any
-                // further operations
+                    // If switch is turned off, it just fetches the image from all images without any
+                    // further operations
                 } else {
-                    Glide.with(holder.image).load(image.uri)
-                        .thumbnail(0.3f).into(holder.image)
+                    Glide
+                        .with(holder.image)
+                        .load(image.uri)
+                        .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
+                        .into(holder.image)
                 }
             }
 
             holder.itemView.setOnClickListener {
-                onThumbnailClicked(position, holder)
+                selectionManager.onThumbnailClicked(
+                    position,
+                    holder,
+                    images,
+                    actionableImagesMap,
+                ) { pos, payload ->
+                    notifyItemChanged(pos, payload)
+                }
             }
 
             // launch media preview on long click.
             holder.itemView.setOnLongClickListener {
-                imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
+                imageSelectListener.onLongPress(
+                    images.indexOf(image),
+                    images,
+                    selectionManager.selectedImages,
+                )
                 true
             }
         }
@@ -210,12 +249,17 @@ class ImageAdapter(
     suspend fun processThumbnailForActionedImage(
         holder: ImageViewHolder,
         position: Int,
-        uploadingContributionList: List<Contribution>
+        uploadingContributionList: List<Contribution>,
     ) {
-        val next = imageLoader.nextActionableImage(
-            allImages, ioDispatcher, defaultDispatcher,
-            nextImagePosition, uploadingContributionList
-        )
+        _isLoadingImages.value = true
+        val next =
+            imageLoader.nextActionableImage(
+                allImages,
+                ioDispatcher,
+                defaultDispatcher,
+                nextImagePosition,
+                uploadingContributionList,
+            )
 
         // If next actionable image is found, saves it, as the the search for
         // finding next actionable image will start from this position
@@ -229,8 +273,12 @@ class ImageAdapter(
                 actionableImagesMap[next] = allImages[next]
                 alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
                 imagePositionAsPerIncreasingOrder++
-                Glide.with(holder.image).load(allImages[next].uri)
-                    .thumbnail(0.3f).into(holder.image)
+                _currentImagesCount.value = imagePositionAsPerIncreasingOrder
+                Glide
+                    .with(holder.image)
+                    .load(allImages[next].uri)
+                    .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
+                    .into(holder.image)
                 notifyItemInserted(position)
                 notifyItemRangeChanged(position, itemCount + 1)
             }
@@ -241,144 +289,51 @@ class ImageAdapter(
             reachedEndOfFolder = true
             notifyItemRemoved(position)
         }
-    }
-
-    /**
-     * Handles click on thumbnail
-     */
-    private fun onThumbnailClicked(
-        position: Int,
-        holder: ImageViewHolder
-    ) {
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-        // While switch is turned off, lets user click on image only if the position is
-        // added inside map
-        if (!switchState) {
-            if (actionableImagesMap.size > position) {
-                selectOrRemoveImage(holder, position)
-            }
-        } else {
-            selectOrRemoveImage(holder, position)
-        }
-    }
-
-    /**
-     * Handle click event on an image, update counter on images.
-     */
-    private fun selectOrRemoveImage(holder: ImageViewHolder, position: Int){
-        val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val showAlreadyActionedImages =
-            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-        // Getting clicked index from all images index when show_already_actioned_images
-        // switch is on
-        val clickedIndex: Int = if(showAlreadyActionedImages) {
-            ImageHelper.getIndex(selectedImages, images[position])
-
-        // Getting clicked index from actionable images when show_already_actioned_images
-        // switch is off
-        } else {
-            ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
-        }
-
-        if (clickedIndex != -1) {
-            selectedImages.removeAt(clickedIndex)
-            if (holder.isItemNotForUpload()) {
-                numberOfSelectedImagesMarkedAsNotForUpload--
-            }
-            notifyItemChanged(position, ImageUnselected())
-
-            // Getting index from all images index when switch is on
-            val indexes = if (showAlreadyActionedImages) {
-                ImageHelper.getIndexList(selectedImages, images)
-
-            // Getting index from actionable images when switch is off
-            } else {
-                ImageHelper.getIndexList(selectedImages, ArrayList(actionableImagesMap.values))
-            }
-            for (index in indexes) {
-                notifyItemChanged(index, ImageSelectedOrUpdated())
-            }
-        } else {
-            if (holder.isItemUploaded()) {
-                Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-            } else {
-                if (holder.isItemNotForUpload()) {
-                    numberOfSelectedImagesMarkedAsNotForUpload++
-                }
-
-                // Getting index from all images index when switch is on
-                val indexes: ArrayList<Int> = if (showAlreadyActionedImages) {
-                    selectedImages.add(images[position])
-                    ImageHelper.getIndexList(selectedImages, images)
-
-                // Getting index from actionable images when switch is off
-                } else {
-                    selectedImages.add(ArrayList(actionableImagesMap.values)[position])
-                    ImageHelper.getIndexList(selectedImages, ArrayList(actionableImagesMap.values))
-                }
-
-                for (index in indexes) {
-                    notifyItemChanged(index, ImageSelectedOrUpdated())
-                }
-            }
-        }
-        imageSelectListener.onSelectedImagesChanged(selectedImages, numberOfSelectedImagesMarkedAsNotForUpload)
+        _isLoadingImages.value = false
     }
 
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>, uploadedImages: List<Contribution> = ArrayList()) {
+    fun init(
+        newImages: List<Image>,
+        fixedImages: List<Image>,
+        emptyMap: TreeMap<Int, Image>,
+        uploadedImages: List<Contribution> = ArrayList(),
+    ) {
+        _isLoadingImages.value = true
         allImages = fixedImages
-        val oldImageList:ArrayList<Image> = images
-        val newImageList:ArrayList<Image> = ArrayList(newImages)
+        val oldImageList: ArrayList<Image> = images
+        val newImageList: ArrayList<Image> = ArrayList(newImages)
         actionableImagesMap = emptyMap
         alreadyAddedPositions = ArrayList()
         uploadingContributionList = uploadedImages
         nextImagePosition = 0
         reachedEndOfFolder = false
-        selectedImages = ArrayList()
+        selectionManager.reset()
         imagePositionAsPerIncreasingOrder = 0
-        val diffResult = DiffUtil.calculateDiff(
-            ImagesDiffCallback(oldImageList, newImageList)
-        )
+        _currentImagesCount.value = imagePositionAsPerIncreasingOrder
+        val diffResult =
+            DiffUtil.calculateDiff(
+                ImagesDiffCallback(oldImageList, newImageList),
+            )
         images = newImageList
         diffResult.dispatchUpdatesTo(this)
     }
 
     /**
-     * Set new selected images
-     */
-    fun setSelectedImages(newSelectedImages: ArrayList<Image>){
-        selectedImages = ArrayList(newSelectedImages)
-        imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
-    }
-    /**
      * Refresh the data in the adapter
      */
-    fun refresh(newImages: List<Image>, fixedImages: List<Image>, uploadingImages: List<Contribution> = ArrayList()) {
-        numberOfSelectedImagesMarkedAsNotForUpload = 0
+    fun refresh(
+        newImages: List<Image>,
+        fixedImages: List<Image>,
+        uploadingImages: List<Contribution> = ArrayList(),
+    ) {
+        selectionManager.reset()
         images.clear()
-        selectedImages = arrayListOf()
-        init(newImages, fixedImages, TreeMap(),uploadingImages)
+        init(newImages, fixedImages, TreeMap(), uploadingImages)
         notifyDataSetChanged()
     }
-
-    /**
-     * Clear selected images and empty the list.
-     */
-    fun clearSelectedImages(){
-        numberOfSelectedImagesMarkedAsNotForUpload = 0
-        selectedImages.clear()
-        selectedImages = arrayListOf()
-    }
-
 
     /**
      * Remove image from actionable images map.
@@ -389,7 +344,7 @@ class ImageAdapter(
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        if(showAlreadyActionedImages) {
+        if (showAlreadyActionedImages) {
             refresh(allImages, allImages, uploadingContributionList)
         } else {
             val iterator = actionableImagesMap.entries.iterator()
@@ -399,18 +354,17 @@ class ImageAdapter(
                 val entry = iterator.next()
                 if (entry.value == image) {
                     imagePositionAsPerIncreasingOrder -= 1
+                    _currentImagesCount.value = imagePositionAsPerIncreasingOrder
                     iterator.remove()
                     alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)
-                    notifyItemRangeChanged(index, itemCount )
+                    notifyItemRangeChanged(index, itemCount)
                     break
                 }
                 index++
             }
         }
-
     }
-
 
     /**
      * Returns the total number of items in the data set held by the adapter.
@@ -424,24 +378,22 @@ class ImageAdapter(
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         // While switch is on initializes the holder with all images size
-        return if(showAlreadyActionedImages) {
+        return if (showAlreadyActionedImages) {
             allImages.size
 
-        // While switch is off and searching for next actionable has ended, initializes the holder
-        // with size of all actionable images
+            // While switch is off and searching for next actionable has ended, initializes the holder
+            // with size of all actionable images
         } else if (actionableImagesMap.size == allImages.size || reachedEndOfFolder) {
             actionableImagesMap.size
 
-        // While switch is off, initializes the holder with and extra view holder so that finding
-        // and addition of the next actionable image in the adapter can be continued
+            // While switch is off, initializes the holder with and extra view holder so that finding
+            // and addition of the next actionable image in the adapter can be continued
         } else {
             actionableImagesMap.size + 1
         }
     }
 
-    fun getImageIdAt(position: Int): Long {
-        return images.get(position).id
-    }
+    fun getImageIdAt(position: Int): Long = images.get(position).id
 
     /**
      * CleanUp function.
@@ -453,7 +405,9 @@ class ImageAdapter(
     /**
      * Image view holder.
      */
-    class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ImageViewHolder(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
         private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
@@ -495,16 +449,12 @@ class ImageAdapter(
             notForUploadGroup.visibility = View.VISIBLE
         }
 
-        fun isItemUploaded():Boolean {
-            return uploadedGroup.visibility == View.VISIBLE
-        }
+        fun isItemUploaded(): Boolean = uploadedGroup.visibility == View.VISIBLE
 
         /**
          * Item is not for upload
          */
-        fun isItemNotForUpload():Boolean {
-            return notForUploadGroup.visibility == View.VISIBLE
-        }
+        fun isItemNotForUpload(): Boolean = notForUploadGroup.visibility == View.VISIBLE
 
         /**
          * Item is not uploading
@@ -533,45 +483,42 @@ class ImageAdapter(
      */
     class ImagesDiffCallback(
         var oldImageList: ArrayList<Image>,
-        var newImageList: ArrayList<Image>
-    ) : DiffUtil.Callback(){
-
+        var newImageList: ArrayList<Image>,
+    ) : DiffUtil.Callback() {
         /**
          * Returns the size of the old list.
          */
-        override fun getOldListSize(): Int {
-            return oldImageList.size
-        }
+        override fun getOldListSize(): Int = oldImageList.size
 
         /**
          * Returns the size of the new list.
          */
-        override fun getNewListSize(): Int {
-            return newImageList.size
-        }
+        override fun getNewListSize(): Int = newImageList.size
 
         /**
          * Called by the DiffUtil to decide whether two object represent the same Item.
          */
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return newImageList[newItemPosition].id == oldImageList[oldItemPosition].id
-        }
+        override fun areItemsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ): Boolean = newImageList[newItemPosition].id == oldImageList[oldItemPosition].id
 
         /**
          * Called by the DiffUtil when it wants to check whether two items have the same data.
          * DiffUtil uses this information to detect if the contents of an item has changed.
          */
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldImageList[oldItemPosition].equals(newImageList[newItemPosition])
-        }
-
+        override fun areContentsTheSame(
+            oldItemPosition: Int,
+            newItemPosition: Int,
+        ): Boolean = oldImageList[oldItemPosition].equals(newImageList[newItemPosition])
     }
 
     /**
      * Returns the text for showing inside the bubble during bubble scroll.
      */
-    override fun getSectionName(position: Int): String {
-        return images[position].date
-    }
+    override fun getSectionName(position: Int): String = images[position].date
 
+    companion object {
+        private const val THUMBNAIL_SIZE_MULTIPLIER = 0.3f
+    }
 }

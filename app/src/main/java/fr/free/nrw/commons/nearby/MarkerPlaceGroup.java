@@ -20,4 +20,8 @@ public class MarkerPlaceGroup {
     public boolean getIsBookmarked() {
         return isBookmarked;
     }
+
+    public void setIsBookmarked(boolean isBookmarked) {
+        this.isBookmarked = isBookmarked;
+    }
 }

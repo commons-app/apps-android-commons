@@ -20,6 +20,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
@@ -34,7 +35,6 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class AdvanceQueryFragmentUnitTests {
-
     private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var layoutInflater: LayoutInflater
@@ -105,7 +105,6 @@ class AdvanceQueryFragmentUnitTests {
         assertEquals(defaultQuery, etQuery.text.toString())
     }
 
-
     @Test
     fun `when no query is passed in fragment argument, nothing is visible in text field`() {
         `when`(bundle.getString("query")).thenReturn("")
@@ -150,6 +149,7 @@ class AdvanceQueryFragmentUnitTests {
         // Verifying if text view is showing initial query and callback is notified
         assertEquals(defaultQuery, etQuery.text.toString())
         verify(callback).reset()
+        verify(callback, never()).close()
     }
 
     @Test

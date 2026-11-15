@@ -4,12 +4,14 @@ import android.content.Context
 import android.os.Looper.getMainLooper
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doNothing
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.ActivityReviewBinding
@@ -20,7 +22,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyInt
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -30,13 +34,13 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.robolectric.shadows.ShadowAlertDialog
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ReviewActivityTest {
-
     private lateinit var activity: ReviewActivity
 
     private lateinit var menuItem: MenuItem
@@ -79,12 +83,11 @@ class ReviewActivityTest {
         menuItem = RoboMenuItem(null)
 
         menu = RoboMenu(context)
-        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager);
-        Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories);
-        Whitebox.setInternalState(activity, "reviewHelper", reviewHelper);
-        Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment);
-        Whitebox.setInternalState(activity, "reviewPagerAdapter", reviewPagerAdapter);
-
+        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager)
+        Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories)
+        Whitebox.setInternalState(activity, "reviewHelper", reviewHelper)
+        Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment)
+        Whitebox.setInternalState(activity, "reviewPagerAdapter", reviewPagerAdapter)
     }
 
     @Test
@@ -103,7 +106,7 @@ class ReviewActivityTest {
     @Throws(Exception::class)
     fun testSwipeToNext() {
         shadowOf(getMainLooper()).idle()
-        doReturn(1,2).`when`(reviewPager)?.currentItem
+        doReturn(1, 2).`when`(reviewPager)?.currentItem
         activity.swipeToNext()
     }
 
@@ -120,7 +123,7 @@ class ReviewActivityTest {
         reviewHelper
             ?.getRandomMedia()
             ?.test()
-            ?.assertValue(media);
+            ?.assertValue(media)
         activity.swipeToNext()
     }
 
@@ -130,34 +133,42 @@ class ReviewActivityTest {
         shadowOf(getMainLooper()).idle()
         val media = mock(Media::class.java)
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
-        doReturn(mock(ReviewImageFragment::class.java)).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())
+        doReturn(
+            mock(ReviewImageFragment::class.java),
+        ).`when`(reviewPagerAdapter).instantiateItem(ArgumentMatchers.any(), anyInt())
         doReturn("").`when`(media).filename
         doNothing().`when`(reviewImageFragment).disableButtons()
 
         var findNonHiddenCategory: Method =
-            ReviewActivity::class.java.getDeclaredMethod("findNonHiddenCategories"
-                , Media::class.java)
+            ReviewActivity::class.java.getDeclaredMethod("findNonHiddenCategories", Media::class.java)
         findNonHiddenCategory.isAccessible = true
         findNonHiddenCategory.invoke(activity, media)
-
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnDestroy() {
-        activity.onDestroy()
+        Robolectric.buildActivity(ReviewActivity::class.java).create().destroy()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowSkipImageInfo() {
-        activity.showSkipImageInfo()
+        ReviewScreenUi(activity, binding).showSkipImageInfo()
+        Assert.assertEquals(
+            activity.getString(R.string.skip_image_explanation),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).message,
+        )
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowReviewImageInfo() {
-        activity.showReviewImageInfo()
+        ReviewScreenUi(activity, binding).showReviewImageInfo()
+        Assert.assertEquals(
+            activity.getString(R.string.review_image_explanation),
+            shadowOf(ShadowAlertDialog.getLatestAlertDialog()).message,
+        )
     }
 
     @Test
@@ -175,19 +186,15 @@ class ReviewActivityTest {
     @Test
     @Throws(Exception::class)
     fun testSetUpMediaDetailFragment() {
-        var setUpMediaDetailFragment: Method =
-            ReviewActivity::class.java.getDeclaredMethod("setUpMediaDetailFragment")
-        setUpMediaDetailFragment.isAccessible = true
-        setUpMediaDetailFragment.invoke(activity)
+        binding.mediaDetailContainer.visibility = View.GONE
+        ReviewScreenUi(activity, binding).setUpMediaDetailFragment(null)
+        Assert.assertEquals(View.GONE, binding.mediaDetailContainer.visibility)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetUpMediaDetailOnOrientation() {
-        var setUpMediaDetailFragment: Method =
-            ReviewActivity::class.java.getDeclaredMethod("setUpMediaDetailOnOrientation")
-        setUpMediaDetailFragment.isAccessible = true
-        setUpMediaDetailFragment.invoke(activity)
+        ReviewScreenUi(activity, binding).setUpMediaDetailOnOrientation()
     }
 
     @Test
@@ -196,4 +203,13 @@ class ReviewActivityTest {
         activity.onBackPressed()
     }
 
+    @Test
+    fun testCurrentReviewImageFragmentIsReturned() {
+        doReturn(2).`when`(reviewPager)?.currentItem
+        doReturn(reviewImageFragment).`when`(reviewPagerAdapter).instantiateItem(binding.viewPagerReview, 2)
+
+        val fragment = ReviewScreenUi(activity, binding).getInstanceOfReviewImageFragment(reviewPagerAdapter)
+
+        Assert.assertSame(reviewImageFragment, fragment)
+    }
 }

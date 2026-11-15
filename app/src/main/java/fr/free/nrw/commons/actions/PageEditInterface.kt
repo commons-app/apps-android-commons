@@ -3,10 +3,15 @@ package fr.free.nrw.commons.actions
 import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.edit.Edit
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * This interface facilitates wiki commons page editing services to the Networking module
@@ -15,6 +20,7 @@ import retrofit2.http.*
  * This interface posts a form encoded request to the wikimedia API
  * with editing action as argument to edit a particular page
  */
+@Suppress("LongParameterList")
 interface PageEditInterface {
     /**
      * This method posts such that the Content which the page
@@ -33,7 +39,7 @@ interface PageEditInterface {
         @Field("summary") summary: String,
         @Field("text") text: String,
         // NOTE: This csrf shold always be sent as the last field of form data
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -60,7 +66,7 @@ interface PageEditInterface {
         @Field("minor") minor: Boolean,
         @Field("recreate") recreate: Boolean,
         // NOTE: This csrf shold always be sent as the last field of form data
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -79,7 +85,7 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("summary") summary: String,
         @Field("appendtext") appendText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     /**
@@ -98,7 +104,7 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("summary") summary: String,
         @Field("prependtext") prependText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     @FormUrlEncoded
@@ -109,7 +115,7 @@ interface PageEditInterface {
         @Field("summary") summary: String,
         @Field("sectiontitle") sectionTitle: String,
         @Field("text") sectionText: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Edit>
 
     @FormUrlEncoded
@@ -120,16 +126,32 @@ interface PageEditInterface {
         @Field("title") title: String,
         @Field("language") language: String,
         @Field("value") value: String,
-        @Field("token") token: String
+        @Field("token") token: String,
     ): Observable<Entities>
 
     /**
-     * Get wiki text for provided file names
-     * @param titles : Name of the file
-     * @return Single<MwQueryResult>
+     * Sets a caption on the file's MediaInfo entity. Upload uses this id form;
+     * site and title lookups from the edit screen were not stored.
+     */
+    @FormUrlEncoded
+    @Headers("Cache-Control: no-cache")
+    @POST(MW_API_PREFIX + "action=wbsetlabel&format=json&formatversion=2")
+    fun postCaptionsByEntityId(
+        @Field("summary") summary: String,
+        @Field("id") entityId: String,
+        @Field("language") language: String,
+        @Field("value") value: String,
+        @Field("token") token: String,
+    ): Observable<Entities>
+
+    /**
+     * Gets the wiki text for the provided file name.
+     *
+     * @param title The title (name) of the file to fetch wiki text for.
+     * @return A Single emitting the wiki query response.
      */
     @GET(MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
     fun getWikiText(
-        @Query("titles") title: String
+        @Query("titles") title: String,
     ): Single<MwQueryResponse?>
 }

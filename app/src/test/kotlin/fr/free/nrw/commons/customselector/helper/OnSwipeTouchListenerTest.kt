@@ -8,8 +8,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.TestUtility.setFinalStatic
+import fr.free.nrw.commons.createTestClient
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,6 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @PrepareForTest(OnSwipeTouchListener::class)
 internal class OnSwipeTouchListenerTest {
-
     private lateinit var context: Context
     private lateinit var onSwipeTouchListener: OnSwipeTouchListener
     private lateinit var gesListener: OnSwipeTouchListener.GestureListener
@@ -49,8 +48,9 @@ internal class OnSwipeTouchListenerTest {
         onSwipeTouchListener = OnSwipeTouchListener(context)
         gesListener = OnSwipeTouchListener(context).GestureListener()
         setFinalStatic(
-                OnSwipeTouchListener::class.java.getDeclaredField("gestureDetector"),
-                gestureDetector)
+            OnSwipeTouchListener::class.java.getDeclaredField("gestureDetector"),
+            gestureDetector,
+        )
     }
 
     /**
@@ -58,12 +58,16 @@ internal class OnSwipeTouchListenerTest {
      */
     @Test
     fun onTouch() {
-        val motionEvent = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0);
-        val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)
+        val motionEvent = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0)
+        val func =
+            onSwipeTouchListener.javaClass.getDeclaredMethod(
+                "onTouch",
+                View::class.java,
+                MotionEvent::class.java,
+            )
         func.isAccessible = true
         func.invoke(onSwipeTouchListener, view, motionEvent)
     }
-
 
     /**
      * Test onSwipeRight
@@ -143,5 +147,21 @@ internal class OnSwipeTouchListenerTest {
         whenever(motionEvent1.y).thenReturn(110f)
         whenever(motionEvent2.y).thenReturn(1f)
         gesListener.onFling(motionEvent1, motionEvent2, 0f, 2000f)
+    }
+
+    /**
+     * Test that a failing swipe callback does not propagate out of onFling
+     */
+    @Test
+    fun `Test onFling swallows exceptions from swipe callbacks`() {
+        val throwingListener =
+            object : OnSwipeTouchListener(context) {
+                override fun onSwipeRight() {
+                    error("Swipe callback failed")
+                }
+            }
+        whenever(motionEvent1.x).thenReturn(1f)
+        whenever(motionEvent2.x).thenReturn(110f)
+        throwingListener.GestureListener().onFling(motionEvent1, motionEvent2, 2000f, 0f)
     }
 }

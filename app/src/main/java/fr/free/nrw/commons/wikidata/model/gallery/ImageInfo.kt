@@ -1,0 +1,77 @@
+package fr.free.nrw.commons.wikidata.model.gallery
+
+import com.google.gson.annotations.SerializedName
+
+// Fields deserialized by Gson via reflection.
+// Suppressed TooManyFunctions because every method is a field accessor or setter for one
+// MediaWiki imageinfo API response object.
+
+/**
+ * Gson POJO for a standard image info object as returned by the API ImageInfo module
+ */
+@Suppress("UnusedPrivateProperty", "TooManyFunctions")
+open class ImageInfo {
+    private val size = 0
+    private val width = 0
+    private val height = 0
+    private var source: String? = null
+
+    @SerializedName("thumburl")
+    private var thumbUrl: String? = null
+
+    @SerializedName("thumbwidth")
+    private var thumbWidth = 0
+
+    @SerializedName("thumbheight")
+    private var thumbHeight = 0
+
+    @SerializedName("url")
+    private val originalUrl: String? = null
+
+    @SerializedName("descriptionurl")
+    private val descriptionUrl: String? = null
+
+    @SerializedName("descriptionshorturl")
+    private val descriptionShortUrl: String? = null
+
+    @SerializedName("mime")
+    private val mimeType: String? = null
+
+    @SerializedName("mediatype")
+    private val mediaType: String? = null
+
+    @SerializedName("extmetadata")
+    private val metadata: ExtMetadata? = null
+    private val user: String? = null
+    private val timestamp: String? = null
+
+    fun getSource(): String = source ?: ""
+
+    fun setSource(source: String?) {
+        this.source = source
+    }
+
+    fun getSize(): Int = size
+
+    fun getWidth(): Int = width
+
+    fun getHeight(): Int = height
+
+    fun getThumbWidth(): Int = thumbWidth
+
+    fun getThumbHeight(): Int = thumbHeight
+
+    fun getMimeType(): String = mimeType ?: "*/*"
+
+    fun getMediaType(): String? = mediaType
+
+    fun getThumbUrl(): String = thumbUrl ?: ""
+
+    fun getOriginalUrl(): String = originalUrl ?: ""
+
+    fun getUser(): String = user ?: ""
+
+    fun getTimestamp(): String = timestamp ?: ""
+
+    fun getMetadata(): ExtMetadata? = metadata
+}

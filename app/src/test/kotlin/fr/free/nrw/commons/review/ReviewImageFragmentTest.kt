@@ -62,7 +62,6 @@ class ReviewImageFragmentTest {
 
     @Before
     fun setUp() {
-
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
@@ -79,8 +78,10 @@ class ReviewImageFragmentTest {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_review_image, null) as View
+        view =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.fragment_review_image, null) as View
         binding = FragmentReviewImageBinding.inflate(LayoutInflater.from(activity))
 
         noButton = view.findViewById(R.id.button_no)
@@ -105,7 +106,6 @@ class ReviewImageFragmentTest {
         assertEquals(noButton.alpha, 0.5f)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun testOnEnableButton() {
@@ -115,7 +115,6 @@ class ReviewImageFragmentTest {
         assertEquals(noButton.isEnabled, true)
         assertEquals(noButton.alpha, 1f)
     }
-
 
     @Test
     @Throws(Exception::class)

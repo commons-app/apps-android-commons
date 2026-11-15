@@ -13,8 +13,10 @@ interface CategoryMediaPresenter : PagingContract.Presenter<Media>
 /**
  * Presenter for DepictedImagesFragment
  */
-class CategoryMediaPresenterImpl @Inject constructor(
-    @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: PageableCategoriesMediaDataSource
-) : BasePagingPresenter<Media>(mainThreadScheduler, dataSourceFactory),
-    CategoryMediaPresenter
+class CategoryMediaPresenterImpl
+    @Inject
+    constructor(
+        @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
+        dataSourceFactory: PageableCategoriesMediaDataSource,
+    ) : BasePagingPresenter<Media>(mainThreadScheduler, dataSourceFactory),
+        CategoryMediaPresenter

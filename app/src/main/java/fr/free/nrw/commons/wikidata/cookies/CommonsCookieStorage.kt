@@ -4,25 +4,32 @@ import com.google.gson.GsonBuilder
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
+import fr.free.nrw.commons.crypto.CryptoUtils
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.wikidata.model.WikiSite
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import fr.free.nrw.commons.wikidata.model.WikiSite
 
 private const val COOKIE_STORE = "cookie_store"
 
-class CommonsCookieStorage(private val preferences: JsonKvStore? = null) {
-    private val gson = GsonBuilder().registerTypeAdapter(
-            CommonsCookieStorage::class.java,
-            CookieStorageTypeAdapter()
-        ).create()
+class CommonsCookieStorage(
+    private val preferences: JsonKvStore? = null,
+) {
+    private val gson =
+        GsonBuilder()
+            .registerTypeAdapter(
+                CommonsCookieStorage::class.java,
+                CookieStorageTypeAdapter(),
+            ).create()
     private val cookieMap: MutableMap<String, List<Cookie>> = mutableMapOf()
 
-    val domains : Set<String> get() = cookieMap.keys.toSet()
+    val domains: Set<String> get() = cookieMap.keys.toSet()
 
-    operator fun set(domainSpec: String, cookies: MutableList<Cookie>) =
-        cookieMap.put(domainSpec, cookies.toList())
+    operator fun set(
+        domainSpec: String,
+        cookies: MutableList<Cookie>,
+    ) = cookieMap.put(domainSpec, cookies.toList())
 
     operator fun get(domainSpec: String): MutableList<Cookie> =
         cookieMap[domainSpec]?.toMutableList() ?: mutableListOf()
@@ -34,29 +41,43 @@ class CommonsCookieStorage(private val preferences: JsonKvStore? = null) {
 
     fun load() {
         cookieMap.clear()
-        val json = preferences!!.getString(COOKIE_STORE, null)
+        val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
+        val json = CryptoUtils.decrypt(encryptedJson)
+
         if (!json.isNullOrEmpty()) {
             val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
             cookieMap.putAll(serializedData.cookieMap)
+
+            // If the loaded json wasn't encrypted (e.g. migrating from older version)
+            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
+            if (encryptedJson == json) {
+                save()
+            }
         }
     }
 
-    fun save() =
-        preferences!!.putString(COOKIE_STORE, gson.toJson(this))
+    fun save() {
+        val json = gson.toJson(this)
+        val encryptedJson = CryptoUtils.encrypt(json)
+        preferences!!.putString(COOKIE_STORE, encryptedJson ?: json)
+    }
 
-    fun contains(domainSpec: String): Boolean =
-        cookieMap.containsKey(domainSpec)
+    fun contains(domainSpec: String): Boolean = cookieMap.containsKey(domainSpec)
 
     companion object {
-        fun from(map: Map<String, List<Cookie>>) = CommonsCookieStorage().apply {
-            cookieMap.clear()
-            cookieMap.putAll(map)
-        }
+        fun from(map: Map<String, List<Cookie>>) =
+            CommonsCookieStorage().apply {
+                cookieMap.clear()
+                cookieMap.putAll(map)
+            }
     }
 }
 
 private class CookieStorageTypeAdapter : TypeAdapter<CommonsCookieStorage>() {
-    override fun write(out: JsonWriter, value: CommonsCookieStorage) {
+    override fun write(
+        out: JsonWriter,
+        value: CommonsCookieStorage,
+    ) {
         out.beginObject()
         value.domains.forEach { domain ->
             out.name(domain).beginArray()

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="top">
@@ -8,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/tiny_margin"
-        android:text="@string/bullet"
+        android:text="&#8226;"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/normal_text" />
+        android:textSize="@dimen/normal_text"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

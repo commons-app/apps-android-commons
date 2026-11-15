@@ -14,38 +14,37 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class QuizQuestionTest {
-
     @Mock
     private lateinit var quizQuestion: QuizQuestion
 
-    private val QUESTION_NUM_SAMPLE_VALUE = 1
-    private val QUESTION_SAMPLE_VALUE = "Is this picture OK to upload?"
-    private val QUESTION_URL_SAMPLE_VALUE_ONE = "https://i.imgur.com/0fMYcpM.jpg"
-    private val QUESTION_URL_SAMPLE_VALUE_TWO = "https://example.com"
-    private val IS_ANSWER_SAMPLE_VALUE = false
-    private val ANSWER_MESSAGE_SAMPLE_VALUE = "Continue"
+    private val questionNumSampleValue = 1
+    private val questionSampleValue = "Is this picture OK to upload?"
+    private val questionUrlSampleValueOne = "https://i.imgur.com/0fMYcpM.jpg"
+    private val questionUrlSampleValueTwo = "https://example.com"
+    private val isAnswerSampleValue = false
+    private val answerMessageSampleValue = "Continue"
 
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        quizQuestion = QuizQuestion(
-            QUESTION_NUM_SAMPLE_VALUE,
-            QUESTION_SAMPLE_VALUE,
-            QUESTION_URL_SAMPLE_VALUE_ONE,
-            IS_ANSWER_SAMPLE_VALUE,
-            ANSWER_MESSAGE_SAMPLE_VALUE
-        )
+        quizQuestion =
+            QuizQuestion(
+                questionNumSampleValue,
+                questionSampleValue,
+                questionUrlSampleValueOne,
+                isAnswerSampleValue,
+                answerMessageSampleValue,
+            )
     }
 
     @Test
     fun testGetUrl() {
-        assertEquals(quizQuestion.getUrl(), Uri.parse(QUESTION_URL_SAMPLE_VALUE_ONE))
+        assertEquals(quizQuestion.getUrl(), Uri.parse(questionUrlSampleValueOne))
     }
 
     @Test
     fun testSetUrl() {
-        quizQuestion.setUrl(QUESTION_URL_SAMPLE_VALUE_TWO)
-        assertEquals(quizQuestion.getUrl(), Uri.parse(QUESTION_URL_SAMPLE_VALUE_TWO))
+        quizQuestion.setUrl(questionUrlSampleValueTwo)
+        assertEquals(quizQuestion.getUrl(), Uri.parse(questionUrlSampleValueTwo))
     }
-
 }

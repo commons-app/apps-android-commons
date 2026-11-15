@@ -14,16 +14,12 @@ import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsPresenterIm
  */
 @Module
 abstract class DepictionModule {
+    @Binds
+    abstract fun ParentDepictionsPresenterImpl.bindsParentDepictionPresenter(): ParentDepictionsPresenter
 
     @Binds
-    abstract fun ParentDepictionsPresenterImpl.bindsParentDepictionPresenter()
-            : ParentDepictionsPresenter
+    abstract fun ChildDepictionsPresenterImpl.bindsChildDepictionPresenter(): ChildDepictionsPresenter
 
     @Binds
-    abstract fun ChildDepictionsPresenterImpl.bindsChildDepictionPresenter()
-            : ChildDepictionsPresenter
-
-    @Binds
-    abstract fun DepictedImagesPresenterImpl.bindsDepictedImagesContractPresenter()
-            : DepictedImagesPresenter
+    abstract fun DepictedImagesPresenterImpl.bindsDepictedImagesContractPresenter(): DepictedImagesPresenter
 }

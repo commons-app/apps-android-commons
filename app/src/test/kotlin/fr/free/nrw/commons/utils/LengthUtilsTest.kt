@@ -131,17 +131,28 @@ class LengthUtilsTest {
 
     // Test assertion helper functions
 
-    private fun assertFormattedDistanceBetween(expected: String, pointA: LatLng, pointB: LatLng) =
-            assertEquals(expected, LengthUtils.formatDistanceBetween(pointA, pointB))
+    private fun assertFormattedDistanceBetween(
+        expected: String,
+        pointA: LatLng,
+        pointB: LatLng,
+    ) = assertEquals(expected, LengthUtils.formatDistanceBetween(pointA, pointB))
 
-    private fun assertFormattedDistance(expected: String, distance: Int) =
-            assertEquals(expected, LengthUtils.formatDistance(distance))
+    private fun assertFormattedDistance(
+        expected: String,
+        distance: Int,
+    ) = assertEquals(expected, LengthUtils.formatDistance(distance))
 
-    private fun assertDistanceBetween(expected: Double, pointA: LatLng, pointB: LatLng) =
-    // Acceptable error: 1cm
-            assertEquals(expected, LengthUtils.computeDistanceBetween(pointA, pointB), 0.01)
+    private fun assertDistanceBetween(
+        expected: Double,
+        pointA: LatLng,
+        pointB: LatLng,
+    ) = // Acceptable error: 1cm
+        assertEquals(expected, LengthUtils.computeDistanceBetween(pointA, pointB), 0.01)
 
-    private fun assertBearing(expected: Double, pointA: LatLng, pointB: LatLng) =
-        // Acceptable error: 1 degree
-        assertEquals(expected, LengthUtils.computeBearing(pointA,pointB), 1.0)
+    private fun assertBearing(
+        expected: Double,
+        pointA: LatLng,
+        pointB: LatLng,
+    ) = // Acceptable error: 1 degree
+        assertEquals(expected, LengthUtils.computeBearing(pointA, pointB), 1.0)
 }

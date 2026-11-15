@@ -21,7 +21,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -40,14 +39,13 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class FolderFragmentTest {
-
     private lateinit var fragment: FolderFragment
     private lateinit var view: View
-    private lateinit var selectorRV : RecyclerView
-    private lateinit var loader : ProgressBar
+    private lateinit var selectorRV: RecyclerView
+    private lateinit var loader: ProgressBar
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var context: Context
-    private lateinit var viewModelField:Field
+    private lateinit var viewModelField: Field
 
     @Mock
     private lateinit var adapter: FolderAdapter
@@ -80,7 +78,7 @@ class FolderFragmentTest {
         loader = view.findViewById(R.id.loader)
 
         Whitebox.setInternalState(fragment, "folderAdapter", adapter)
-        Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
+        Whitebox.setInternalState(fragment, "selectorRV", selectorRV)
         Whitebox.setInternalState(fragment, "loader", loader)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
@@ -109,16 +107,6 @@ class FolderFragmentTest {
     }
 
     /**
-     * Test columnCount.
-     */
-    @Test
-    fun testColumnCount() {
-        val func = fragment.javaClass.getDeclaredMethod("columnCount")
-        func.isAccessible = true
-        assertEquals(2, func.invoke(fragment))
-    }
-
-    /**
      * Test handleResult.
      */
     @Test
@@ -137,5 +125,4 @@ class FolderFragmentTest {
         func.isAccessible = true
         func.invoke(fragment)
     }
-
 }

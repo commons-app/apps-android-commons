@@ -1,17 +1,12 @@
 package fr.free.nrw.commons.nearby
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Configuration
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -24,10 +19,11 @@ import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
@@ -39,9 +35,12 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -49,16 +48,14 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
-import org.robolectric.shadows.ShadowAlertDialog
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyParentFragmentUnitTest {
-
     @Mock
-    private lateinit var mapView: org.osmdroid.views.MapView
+    private lateinit var mapView: MapView
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
@@ -70,9 +67,6 @@ class NearbyParentFragmentUnitTest {
     private lateinit var view: View
 
     @Mock
-    private lateinit var ivToggleChips: AppCompatImageView
-
-    @Mock
     private lateinit var configuration: Configuration
 
     @Mock
@@ -82,7 +76,8 @@ class NearbyParentFragmentUnitTest {
     private lateinit var rlBottomSheetLayoutParams: ViewGroup.LayoutParams
 
     @Mock
-    private lateinit var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
+    private lateinit var nearbyParentFragmentInstanceReadyCallback:
+        NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
 
     @Mock
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
@@ -95,18 +90,6 @@ class NearbyParentFragmentUnitTest {
 
     @Mock
     private lateinit var fab: FloatingActionButton
-
-    @Mock
-    private lateinit var bottomSheetDetails: View
-
-    @Mock
-    private lateinit var linearLayout: LinearLayout
-
-    @Mock
-    private lateinit var textView: TextView
-
-    @Mock
-    private lateinit var imageView: ImageView
 
     @Mock
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao
@@ -133,83 +116,78 @@ class NearbyParentFragmentUnitTest {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        Whitebox.setInternalState(fragment, "mapView", mapView)
         Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(fragment, "presenter", presenter)
-        Whitebox.setInternalState(fragment, "llContainerChips", view)
-        Whitebox.setInternalState(fragment, "ivToggleChips", ivToggleChips)
-        Whitebox.setInternalState(fragment, "rlBottomSheet", rlBottomSheet)
         Whitebox.setInternalState(fragment, "isVisibleToUser", true)
         Whitebox.setInternalState(fragment, "bottomSheetListBehavior", bottomSheetBehavior)
         Whitebox.setInternalState(fragment, "bottomSheetDetailsBehavior", bottomSheetBehavior)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(fragment, "wikidataEditListener", wikidataEditListener)
-        Whitebox.setInternalState(fragment, "fabPlus", fab)
-        Whitebox.setInternalState(fragment, "fabCamera", fab)
-        Whitebox.setInternalState(fragment, "fabGallery", fab)
-        Whitebox.setInternalState(fragment, "fabGallery", fab)
-        Whitebox.setInternalState(fragment, "bottomSheetDetails", bottomSheetDetails)
-        Whitebox.setInternalState(fragment, "transparentView", view)
-        Whitebox.setInternalState(fragment, "bookmarkButton", linearLayout)
-        Whitebox.setInternalState(fragment, "wikipediaButton", linearLayout)
-        Whitebox.setInternalState(fragment, "wikidataButton", linearLayout)
-        Whitebox.setInternalState(fragment, "directionsButton", linearLayout)
-        Whitebox.setInternalState(fragment, "commonsButton", linearLayout)
         Whitebox.setInternalState(fragment, "bookmarkLocationDao", bookmarkLocationDao)
-
-        Whitebox.setInternalState(fragment, "icon", imageView)
-        Whitebox.setInternalState(fragment, "title", textView)
-        Whitebox.setInternalState(fragment, "distance", textView)
-        Whitebox.setInternalState(fragment, "description", textView)
 
         Whitebox.setInternalState(
             fragment,
             "nearbyParentFragmentInstanceReadyCallback",
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
+    }
+
+    @Test
+    fun `reset advanced query reloads the default search and keeps the editor open`() {
+        fragment.resetAdvancedQuery()
+        verify(presenter).setAdvancedQuery("")
+        verify(presenter).updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without gps test when last location known`() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without GPS")
         verify(applicationKvStore, times(1)).getString("LastLocation")
         verify(presenter, times(1)).onMapReady()
-        val position = GeoPoint(51.50550,
-            -0.07520)
+        val position =
+            GeoPoint(
+                51.50550,
+                -0.07520,
+            )
         verify(mapView, times(1))
-            .controller.animateTo(position)
+            .controller
+            .animateTo(position)
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without gps test when last location unknown`() {
         `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without GPS")
         verify(applicationKvStore, times(2)).getString("LastLocation")
         verify(presenter, times(1)).onMapReady()
-        val position = GeoPoint(23.76,56.876)
+        val position = GeoPoint(23.76, 56.876)
         verify(mapView, times(1))
-            .controller.animateTo(position)
+            .controller
+            .animateTo(position)
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun `Start map without location permission test when last location known`() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without Permission")
         verify(applicationKvStore, times(1)).getString("LastLocation")
@@ -222,10 +200,11 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun `Start map without location permission test when last location unknown`() {
         `when`(applicationKvStore.getString("LastLocation")).thenReturn("23.76,56.876")
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "startMapWithCondition",
-            String::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithCondition",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "Without Permission")
         verify(applicationKvStore, times(2)).getString("LastLocation")
@@ -256,20 +235,22 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetNearbyParentFragmentInstanceReadyCallback() {
         fragment.setNearbyParentFragmentInstanceReadyCallback(
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
         Assert.assertEquals(
             nearbyParentFragmentInstanceReadyCallback,
-            nearbyParentFragmentInstanceReadyCallback
+            nearbyParentFragmentInstanceReadyCallback,
         )
     }
 
     @Test @Ignore
     @Throws(Exception::class)
     fun testSetUserVisibleHintCaseFalse() {
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "setUserVisibleHint", Boolean::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "setUserVisibleHint",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, false)
         verify(bottomSheetBehavior, times(2)).state = BottomSheetBehavior.STATE_HIDDEN
@@ -279,9 +260,11 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetUserVisibleHintCaseTrue() {
         Whitebox.setInternalState(fragment, "mState", 4)
-        val method: Method = NearbyParentFragment::class.java.getDeclaredMethod(
-            "setUserVisibleHint", Boolean::class.java
-        )
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "setUserVisibleHint",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
     }
@@ -313,7 +296,7 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnDestroy() {
         fragment.onDestroy()
-        verify(wikidataEditListener).setAuthenticationStateListener(null)
+        verify(wikidataEditListener).authenticationStateListener = null
     }
 
     @Test @Ignore
@@ -361,4 +344,84 @@ class NearbyParentFragmentUnitTest {
         Assert.assertEquals(shadowActivity.nextStartedActivityForResult, null)
     }
 
+    @Test
+    @Ignore
+    @Throws(Exception::class)
+    fun testDepictsPickerInstanceSetsArguments() {
+        val allPhotoCoordinates = ArrayList<LatLng>()
+        val pickerLat = 12.34
+        val pickerLng = 56.78
+        allPhotoCoordinates.add(
+            LatLng(
+                pickerLat,
+                pickerLng,
+                accuracy = 0f,
+            ),
+        )
+        val pickerFragment =
+            NearbyParentFragment.newPickerInstance(allPhotoCoordinates)
+        Assert.assertNotNull(pickerFragment.arguments)
+        Assert.assertTrue(
+            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE),
+        )
+        Assert.assertEquals(
+            allPhotoCoordinates,
+            pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
+                NearbyParentFragment.ARG_PHOTO_LATLNGS,
+            ),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMarkerPriorityOrder() {
+        // Use reflection to access the private getMarkerPriority method
+        val getMarkerPriorityMethod =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "getMarkerPriority",
+                Place::class.java,
+                Boolean::class.java,
+            )
+        getMarkerPriorityMethod.isAccessible = true
+
+        // Mock a place that needs a photo (Red pin)
+        val needsPhotoPlace = mock(Place::class.java)
+        `when`(needsPhotoPlace.isMonument).thenReturn(false)
+        needsPhotoPlace.pic = ""
+        needsPhotoPlace.exists = true
+        needsPhotoPlace.name = "Needs Photo Place"
+
+        // Mock a place that has a photo (Green pin)
+        val hasPhotoPlace = mock(Place::class.java)
+        `when`(hasPhotoPlace.isMonument).thenReturn(false)
+        hasPhotoPlace.pic = "some_pic"
+        hasPhotoPlace.exists = true
+        hasPhotoPlace.name = "Has Photo Place"
+
+        // Mock a monument place
+        val monumentPlace = mock(Place::class.java)
+        `when`(monumentPlace.isMonument).thenReturn(true)
+        monumentPlace.pic = ""
+        monumentPlace.exists = true
+        monumentPlace.name = "Monument Place"
+
+        // Get priorities
+        val priorityNeedsPhoto = getMarkerPriorityMethod.invoke(fragment, needsPhotoPlace, false) as Int
+        val priorityHasPhoto = getMarkerPriorityMethod.invoke(fragment, hasPhotoPlace, false) as Int
+        val priorityMonument = getMarkerPriorityMethod.invoke(fragment, monumentPlace, false) as Int
+
+        // Red (needs photo) should be drawn on top of Green (has photo), so Red > Green priority
+        Assert.assertTrue(
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than " +
+                "Has Photo (Green) priority ($priorityHasPhoto)",
+            priorityNeedsPhoto > priorityHasPhoto,
+        )
+
+        // Red should also be drawn on top of Monuments
+        Assert.assertTrue(
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than " +
+                "Monument priority ($priorityMonument)",
+            priorityNeedsPhoto > priorityMonument,
+        )
+    }
 }

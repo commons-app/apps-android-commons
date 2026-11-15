@@ -8,8 +8,8 @@ import fr.free.nrw.commons.campaigns.models.Campaign
  */
 class CampaignResponseDTO {
     @SerializedName("config")
-    val campaignConfig: CampaignConfig? = null
-    @SerializedName("campaigns")
-    val campaigns: List<Campaign>? = null
+    var campaignConfig: CampaignConfig? = null
 
+    @SerializedName("campaigns")
+    var campaigns: List<Campaign>? = null
 }

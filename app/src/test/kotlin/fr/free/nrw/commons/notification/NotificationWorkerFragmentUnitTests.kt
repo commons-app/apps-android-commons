@@ -5,7 +5,6 @@ import org.junit.Before
 import org.junit.Test
 
 class NotificationWorkerFragmentUnitTests {
-
     private lateinit var fragment: NotificationWorkerFragment
 
     @Before
@@ -36,5 +35,4 @@ class NotificationWorkerFragmentUnitTests {
     fun testGetNotificationList() {
         fragment.notificationList
     }
-
 }

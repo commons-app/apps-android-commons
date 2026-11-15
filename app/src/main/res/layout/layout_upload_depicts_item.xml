@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/depicts_layout"
+  android:layoutDirection="locale"
   android:layout_width="match_parent"
   android:layout_height="wrap_content">
 
@@ -9,26 +10,31 @@
     android:id="@+id/depict_checkbox"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:minWidth="48dp"
+    android:minHeight="48dp"
     android:checkMark="?android:attr/textCheckMark"
     android:checked="false"
     android:gravity="center_vertical"
     android:padding="@dimen/tiny_gap"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toStartOf="@+id/depicted_image"
-    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <com.facebook.drawee.view.SimpleDraweeView
     android:id="@+id/depicted_image"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:paddingRight="@dimen/tiny_gap"
+    android:layout_marginStart="@dimen/tiny_gap"
+    android:layout_marginEnd="@dimen/tiny_gap"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toRightOf="@+id/depict_checkbox"
+    app:layout_constraintStart_toEndOf="@+id/depict_checkbox"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/text_container"
     app:placeholderImage="@drawable/ic_wikidata_logo_24dp" />
 
   <LinearLayout
+    android:id="@+id/text_container"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -41,14 +47,14 @@
       android:id="@+id/depicts_label"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Label"
+      android:text="@string/depicts_label"
       android:textStyle="bold" />
 
     <TextView
       android:id="@+id/description"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Description" />
+      android:text="@string/depicts_description" />
   </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

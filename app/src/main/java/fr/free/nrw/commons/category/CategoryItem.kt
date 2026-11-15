@@ -4,12 +4,13 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CategoryItem(val name: String, val description: String?,
-                        val thumbnail: String?, var isSelected: Boolean) : Parcelable {
-
-    override fun toString(): String {
-        return "CategoryItem: '$name'"
-    }
+data class CategoryItem(
+    val name: String,
+    val description: String?,
+    val thumbnail: String?,
+    var isSelected: Boolean,
+) : Parcelable {
+    override fun toString(): String = "CategoryItem: '$name'"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -22,7 +23,5 @@ data class CategoryItem(val name: String, val description: String?,
         return true
     }
 
-    override fun hashCode(): Int {
-        return name.hashCode()
-    }
+    override fun hashCode(): Int = name.hashCode()
 }

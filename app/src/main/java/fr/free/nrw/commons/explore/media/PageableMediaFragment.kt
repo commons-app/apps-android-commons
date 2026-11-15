@@ -2,26 +2,20 @@ package fr.free.nrw.commons.explore.media
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
-import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.explore.paging.BasePagingFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider
+import fr.free.nrw.commons.media.MediaDetailProvider
+import javax.inject.Inject
 
-abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailProvider {
-
-    /**
-     * ViewBinding
-     */
-    private var _binding: FragmentSearchPaginatedBinding? = null
-    private val binding get() = _binding!!
-
+abstract class PageableMediaFragment :
+    BasePagingFragment<Media>(),
+    MediaDetailProvider {
     override val pagedListAdapter by lazy {
-        PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
+        PagedMediaAdapter(categoryImagesCallback::onMediaClicked, mediaDataExtractor)
     }
 
     override val errorTextId: Int = R.string.error_loading_images
@@ -29,6 +23,9 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
     override fun getEmptyText(query: String) = getString(R.string.no_images_found)
 
     lateinit var categoryImagesCallback: CategoryImagesCallback
+
+    @Inject
+    lateinit var mediaDataExtractor: MediaDataExtractor
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,31 +36,26 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     private val simpleDataObserver =
         SimpleDataObserver { categoryImagesCallback.viewPagerNotifyDataSetChanged() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         pagedListAdapter.registerAdapterDataObserver(simpleDataObserver)
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
         pagedListAdapter.unregisterAdapterDataObserver(simpleDataObserver)
     }
 
     override fun getMediaAtPosition(position: Int): Media? =
-        pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
+        pagedListAdapter.currentList
+            ?.get(position)
+            ?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
                 binding.paginatedSearchResultsList.scrollToPosition(position)
@@ -79,7 +71,7 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
      * @param index item position that has been nominated
      */
     override fun refreshNominatedMedia(index: Int) {
-        activity?.onBackPressed()
+        activity?.onBackPressedDispatcher?.onBackPressed()
         categoryImagesCallback.onMediaClicked(index)
     }
 }

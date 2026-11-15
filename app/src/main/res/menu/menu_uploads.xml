@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".upload.UploadProgressActivity"
+  >
+  <item
+    android:id="@+id/resume_icon"
+    android:title="Resume"
+    android:icon="@drawable/play_icon"
+    android:orderInCategory="1"
+    app:showAsAction="ifRoom"
+    />
+  <item
+    android:id="@+id/pause_icon"
+    android:title="Pause"
+    android:icon="@drawable/pause_icon"
+    android:orderInCategory="1"
+    app:showAsAction="ifRoom"
+    />
+
+  <item
+    android:id="@+id/retry_icon"
+    android:title="Retry"
+    android:icon="@drawable/ic_refresh_24dp"
+    android:orderInCategory="1"
+    app:showAsAction="ifRoom"
+    />
+
+  <item
+    android:id="@+id/cancel_icon"
+    android:title="Cancel"
+    android:icon="@drawable/ic_remove"
+    android:orderInCategory="1"
+    app:showAsAction="ifRoom"
+    />
+</menu>

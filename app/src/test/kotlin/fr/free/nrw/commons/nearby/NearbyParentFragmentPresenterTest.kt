@@ -1,35 +1,51 @@
 package fr.free.nrw.commons.nearby
 
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import io.reactivex.Completable
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
+import org.mockito.Mockito.anyLong
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
-import java.util.*
+import java.util.Collections
+import java.util.TimeZone
+import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
  */
 class NearbyParentFragmentPresenterTest {
-
     @Mock
     internal lateinit var nearbyParentFragmentView: NearbyParentFragmentContract.View
 
     @Mock
     internal lateinit var bookmarkLocationsDao: BookmarkLocationsDao
+
+    @Mock
+    internal lateinit var placesRepository: PlacesRepository
+
+    @Mock
+    internal lateinit var nearbyController: NearbyController
 
     @Mock
     internal lateinit var latestLocation: LatLng
@@ -52,9 +68,9 @@ class NearbyParentFragmentPresenterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
+        nearbyPresenter =
+            NearbyParentFragmentPresenter(bookmarkLocationsDao, placesRepository, nearbyController)
         nearbyPresenter.attachView(nearbyParentFragmentView)
-
     }
 
     /**
@@ -67,7 +83,7 @@ class NearbyParentFragmentPresenterTest {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        verify(nearbyParentFragmentView).disableFABRecenter();
+        verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).`setProgressBarVisibility`(true)
         assertTrue(null == nearbyParentFragmentView.mapCenter)
         verify(nearbyParentFragmentView).populatePlaces(null)
@@ -134,13 +150,14 @@ class NearbyParentFragmentPresenterTest {
      * Test updateMapAndList method updates parent fragment view with latest location of user
      * at significant location change
      */
-     @Test
+    @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         updateMapSignificantly()
     }
+
     /**
      * Test updateMapAndList method updates parent fragment view with latest location of user
      * at map is updated location change type
@@ -148,7 +165,7 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
@@ -167,7 +184,7 @@ class NearbyParentFragmentPresenterTest {
     fun testPlacesPopulatedForCameraTargetLocationWhenSearchCustomArea() {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
         whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
         verify(nearbyParentFragmentView).disableFABRecenter()
@@ -183,7 +200,7 @@ class NearbyParentFragmentPresenterTest {
     fun testUserTrackedWhenCurrentLocationMarkerVisible() {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null);
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.lastMapFocus)
@@ -198,7 +215,7 @@ class NearbyParentFragmentPresenterTest {
         expectMapAndListUpdate()
         verify(nearbyParentFragmentView).enableFABRecenter()
         whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null);
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastMapFocus()
@@ -248,8 +265,8 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             ArgumentMatchers.anyList(),
             ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean()
-        );
+            ArgumentMatchers.anyBoolean(),
+        )
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -263,8 +280,8 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             any(),
             anyBoolean(),
-            anyBoolean()
-        );
+            anyBoolean(),
+        )
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
@@ -294,12 +311,12 @@ class NearbyParentFragmentPresenterTest {
      */
     @Test
     fun testSearchCloseToCurrentLocationWhenFar() {
-        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
+        // 111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
-        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertFalse(isClose!!.equals(false))
+        val isClose = nearbyPresenter.searchCloseToCurrentLocation()
+        assertFalse(!isClose)
     }
 
     /**
@@ -308,10 +325,10 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testSearchCloseToCurrentLocationWhenClose() {
         whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
-        //111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
+        // 111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
-        val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertTrue(isClose!!)
+        val isClose = nearbyPresenter.searchCloseToCurrentLocation()
+        assertTrue(isClose)
     }
 
     fun expectMapAndListUpdate() {
@@ -322,7 +339,7 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testSetActionListeners() {
-        nearbyPresenter.setActionListeners(any())
+        nearbyPresenter.setActionListeners(null)
         verify(nearbyParentFragmentView).setFABPlusAction(any())
         verify(nearbyParentFragmentView).setFABRecenterAction(any())
     }
@@ -361,14 +378,14 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testMarkerUnselected() {
         nearbyPresenter.markerUnselected()
-        verify(nearbyParentFragmentView).hideBottomSheet();
+        verify(nearbyParentFragmentView).hideBottomSheet()
     }
 
     @Test
     fun testOnWikidataEditSuccessful() {
         nearbyPresenter.onWikidataEditSuccessful()
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
@@ -376,8 +393,8 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testOnLocationChangedSignificantly() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
-       latestLocation=LatLng(2.0, 1.0, 0.0F)
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        latestLocation = LatLng(2.0, 1.0, 0.0F)
         nearbyPresenter.onLocationChangedSignificantly(latestLocation)
         updateMapSignificantly()
     }
@@ -454,13 +471,65 @@ class NearbyParentFragmentPresenterTest {
         nearbyPlacesInfo.boundaryCoordinates = arrayOf()
         nearbyPlacesInfo.currentLatLng = latestLocation
         nearbyPlacesInfo.searchLatLng = latestLocation
-        nearbyPlacesInfo.placeList = null
+        nearbyPlacesInfo.placeList = emptyList<Place>()
 
-        whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
-        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, true)
-        Mockito.verify(nearbyParentFragmentView).updateMapMarkers(any())
+        runBlocking {
+            whenever(bookmarkLocationsDao.getAllBookmarksLocations()).thenReturn(Collections.emptyList())
+        }
+        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, null)
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
-        Mockito.verify(nearbyParentFragmentView).updateListFragment(nearbyPlacesInfo.placeList)
+    }
 
+    /**
+     * Test that places cached more than 5 days ago are removed when it was not done today yet
+     */
+    @Test
+    fun testRemoveOldCachedPlacesWhenNotDoneToday() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong())).thenReturn(Completable.complete())
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        val after = System.currentTimeMillis()
+        val fiveDays = TimeUnit.DAYS.toMillis(5)
+        val cutoff = argumentCaptor<Long>()
+        verify(placesRepository).removePlacesCachedBefore(cutoff.capture())
+        assertTrue(cutoff.firstValue in (now - fiveDays)..(after - fiveDays))
+        verify(applicationKvStore).putLong(anyString(), anyLong())
+    }
+
+    /**
+     * Test that old cached places are not removed again on the same day
+     */
+    @Test
+    fun testRemoveOldCachedPlacesOnlyOnceADay() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(today)
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        verify(placesRepository, never()).removePlacesCachedBefore(anyLong())
+    }
+
+    /**
+     * Test that the day is not saved when removing old cached places fails, so it is tried again
+     */
+    @Test
+    fun testRemoveOldCachedPlacesRetriesWhenRemovalFails() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong()))
+            .thenReturn(Completable.error(RuntimeException("Database error")))
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        verify(applicationKvStore, never()).putLong(anyString(), anyLong())
     }
 }

@@ -21,20 +21,23 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.notification.NotificationActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
-
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(LoginActivity::class.java)
 
     @get:Rule
-    var mGrantPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
-        "android.permission.ACCESS_FINE_LOCATION"
-    )
+    var mGrantPermissionRule: GrantPermissionRule =
+        GrantPermissionRule.grant(
+            "android.permission.ACCESS_FINE_LOCATION",
+        )
 
     private val device: UiDevice =
         UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -48,7 +51,8 @@ class MainActivityTest {
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
         Intents.init()
-        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
+        Intents
+            .intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val storeName = context.packageName + "_preferences"
@@ -62,169 +66,149 @@ class MainActivityTest {
 
     @Test
     fun testNearby() {
-        Espresso.onView(
-            Matchers.allOf(
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
                     childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0,
+                        ),
+                        1,
                     ),
-                    1
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
+            ).perform(ViewActions.click())
+        Espresso
+            .onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
         UITestHelper.sleep(10000)
-        val actionMenuItemView2 = Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.list_sheet), ViewMatchers.withContentDescription("List"),
-                childAtPosition(
+        val actionMenuItemView2 =
+            Espresso.onView(
+                Matchers.allOf(
+                    ViewMatchers.withId(R.id.list_sheet),
+                    ViewMatchers.withContentDescription("List"),
                     childAtPosition(
-                        ViewMatchers.withId(R.id.toolbar),
-                        1
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.toolbar),
+                            1,
+                        ),
+                        0,
                     ),
-                    0
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
             )
-        )
         actionMenuItemView2.perform(ViewActions.click())
         UITestHelper.sleep(1000)
     }
 
     @Test
     fun testExplore() {
-        Espresso.onView(
-            Matchers.allOf(
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
                     childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0,
+                        ),
+                        2,
                     ),
-                    2
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
+            ).perform(ViewActions.click())
+        Espresso
+            .onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
         UITestHelper.sleep(1000)
     }
 
     @Test
     fun testContributions() {
-        Espresso.onView(
-            Matchers.allOf(
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
                     childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0,
+                        ),
+                        0,
                     ),
-                    0
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.fragmentContainer))
+            ).perform(ViewActions.click())
+        Espresso
+            .onView(ViewMatchers.withId(R.id.fragmentContainer))
             .check(matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.contributionImage),
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
+                    ViewMatchers.withId(R.id.contributionImage),
                     childAtPosition(
-                        ViewMatchers.withId(R.id.contributionsList),
-                        0
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.contributionsList),
+                            0,
+                        ),
+                        1,
                     ),
-                    1
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        val actionMenuItemView = Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.menu_bookmark_current_image),
-                childAtPosition(
+            ).perform(ViewActions.click())
+        val actionMenuItemView =
+            Espresso.onView(
+                Matchers.allOf(
+                    ViewMatchers.withId(R.id.menu_bookmark_current_image),
                     childAtPosition(
-                        ViewMatchers.withId(R.id.toolbar),
-                        1
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.toolbar),
+                            1,
+                        ),
+                        0,
                     ),
-                    0
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
             )
-        )
         actionMenuItemView.perform(ViewActions.click())
         UITestHelper.sleep(3000)
     }
 
     @Test
     fun testBookmarks() {
-        Espresso.onView(
-            Matchers.allOf(
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
                     childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0,
+                        ),
+                        3,
                     ),
-                    3
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
+            ).perform(ViewActions.click())
         UITestHelper.sleep(1000)
     }
 
     @Test
     fun testNotifications() {
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.notifications),
-                childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
+                    ViewMatchers.withId(R.id.notifications),
                     childAtPosition(
-                        ViewMatchers.withId(R.id.toolbar),
-                        1
+                        childAtPosition(
+                            ViewMatchers.withId(R.id.toolbar),
+                            1,
+                        ),
+                        1,
                     ),
-                    1
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
+            ).perform(ViewActions.click())
         Intents.intended(IntentMatchers.hasComponent(NotificationActivity::class.java.name))
         Espresso.pressBack()
         UITestHelper.sleep(1000)
     }
-
-    @Test
-    fun testLimitedConnectionModeToggle() {
-        val isEnabled = defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withId(R.id.toggle_limited_connection_mode),
-                childAtPosition(
-                    childAtPosition(
-                        ViewMatchers.withId(R.id.toolbar),
-                        1
-                    ),
-                    0
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
-        UITestHelper.sleep(1000)
-        if (isEnabled) {
-            Assert.assertFalse(
-                defaultKvStore
-                    .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-            )
-        } else {
-            Assert.assertTrue(
-                defaultKvStore
-                    .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)
-            )
-        }
-    }
-
 }

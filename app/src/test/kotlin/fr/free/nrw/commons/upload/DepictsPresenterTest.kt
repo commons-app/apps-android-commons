@@ -7,12 +7,14 @@ import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -22,9 +24,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import java.lang.reflect.Method
 
-
 class DepictsPresenterTest {
-
     @get:Rule
     var testRule = InstantTaskExecutorRule()
 
@@ -65,23 +65,23 @@ class DepictsPresenterTest {
 
     @Test
     fun `search results emission returns distinct results + selected items without disambiguations`() {
-        val searchResults = listOf(
-            depictedItem(id="nonUnique"),
-            depictedItem(id="nonUnique"),
-            depictedItem(
-                instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
-                id = "unique"
+        val searchResults =
+            listOf(
+                depictedItem(id = "nonUnique"),
+                depictedItem(id = "nonUnique"),
+                depictedItem(
+                    instanceOfs = listOf(WikidataDisambiguationItems.CATEGORY.id),
+                    id = "unique",
+                ),
             )
-        )
         whenever(repository.searchAllEntities("")).thenReturn(Flowable.just(searchResults))
         val selectedItem = depictedItem(id = "selected")
-        whenever(repository.selectedDepictions).thenReturn(listOf(selectedItem))
+        whenever(repository.getSelectedDepictions()).thenReturn(listOf(selectedItem))
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
         verify(view).showError(true)
     }
-
 
     @Test
     fun `empty search results with empty term do not show error`() {
@@ -125,14 +125,14 @@ class DepictsPresenterTest {
 
     @Test
     fun `verifyDepictions with non empty selectedDepictions goes to next screen`() {
-        whenever(repository.selectedDepictions).thenReturn(listOf(depictedItem()))
+        whenever(repository.getSelectedDepictions()).thenReturn(listOf(depictedItem()))
         depictsPresenter.verifyDepictions()
         verify(view).goToNextScreen()
     }
 
     @Test
     fun `verifyDepictions with empty selectedDepictions goes to noDepictionSelected`() {
-        whenever(repository.selectedDepictions).thenReturn(emptyList())
+        whenever(repository.getSelectedDepictions()).thenReturn(emptyList())
         depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
     }
@@ -151,10 +151,11 @@ class DepictsPresenterTest {
     fun `Test searchResults when media is null`() {
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, "querystring")
         verify(repository, times(1)).searchAllEntities("querystring")
@@ -163,14 +164,15 @@ class DepictsPresenterTest {
     @Test
     fun `Test searchResults when media is not null`() {
         Whitebox.setInternalState(depictsPresenter, "media", media)
-        whenever(repository.getDepictions(repository.selectedExistingDepictions))
+        whenever(repository.getDepictions(repository.getSelectedExistingDepictions()))
             .thenReturn(Flowable.just(listOf(depictedItem())))
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "searchResults",
-            String::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "searchResults",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, "querystring")
         verify(repository, times(1)).searchAllEntities("querystring")
@@ -179,20 +181,37 @@ class DepictsPresenterTest {
     @Test
     fun testSelectNewDepictions() {
         Whitebox.setInternalState(depictsPresenter, "media", media)
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "selectNewDepictions",
-            List::class.java
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "selectNewDepictions",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter, listOf(depictedItem()))
     }
 
     @Test
     fun testClearPreviousSelection() {
-        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
-            "clearPreviousSelection"
-        )
+        val method: Method =
+            DepictsPresenter::class.java.getDeclaredMethod(
+                "clearPreviousSelection",
+            )
         method.isAccessible = true
         method.invoke(depictsPresenter)
+    }
+
+    @Test
+    fun testDepictionFetchAndSelection() {
+        val place = Mockito.mock(Place::class.java)
+        whenever(place.wikiDataEntityId).thenReturn("Q12345")
+
+        val item = depictedItem(id = "Q12345", isSelected = false)
+        whenever(repository.getDepictions(listOf("Q12345")))
+            .thenReturn(Flowable.just(listOf(item)))
+
+        depictsPresenter.onPlaceSelectedFromMap(place)
+        testScheduler.triggerActions()
+
+        Assert.assertTrue(item.isSelected)
     }
 }

@@ -6,23 +6,20 @@ import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListViewModel
+import fr.free.nrw.commons.profile.leaderboard.LeaderboardViewController
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import org.junit.Assert
 import org.junit.Before
@@ -44,12 +41,10 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class LeaderboardFragmentUnitTests {
-
     private lateinit var fragment: LeaderboardFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
     private lateinit var layoutInflater: LayoutInflater
-
 
     @Mock
     private lateinit var viewModel: LeaderboardListViewModel
@@ -104,9 +99,10 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testRefreshLeaderboard() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "refreshLeaderboard"
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "refreshLeaderboard",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -114,9 +110,10 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testScrollToUserRank() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "scrollToUserRank"
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "scrollToUserRank",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -126,9 +123,10 @@ class LeaderboardFragmentUnitTests {
     fun testScrollToUserRankCaseNonZeroTrue() {
         Whitebox.setInternalState(fragment, "userRank", 1)
         `when`(adapter.itemCount).thenReturn(3)
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "scrollToUserRank"
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "scrollToUserRank",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -138,26 +136,27 @@ class LeaderboardFragmentUnitTests {
     fun testScrollToUserRankCaseNonZeroFalse() {
         Whitebox.setInternalState(fragment, "userRank", 1)
         `when`(adapter.itemCount).thenReturn(1)
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "scrollToUserRank"
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "scrollToUserRank",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
-
 
     @Test
     @Throws(Exception::class)
     fun testSetLeaderboard() {
         Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
         `when`(sessionManager.currentAccount).thenReturn(account)
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "setLeaderboard",
-            String::class.java,
-            String::class.java,
-            Int::class.java,
-            Int::class.java
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "setLeaderboard",
+                String::class.java,
+                String::class.java,
+                Int::class.java,
+                Int::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, "", "", 0, 0)
     }
@@ -165,29 +164,50 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHideProgressBar() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "hideProgressBar"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
+        LeaderboardViewController(binding).hideProgressBar()
+        Assert.assertEquals(View.GONE, binding.progressBar.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.categorySpinner.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.durationSpinner.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.scroll.visibility)
+        Assert.assertEquals(View.VISIBLE, binding.leaderboardList.visibility)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowProgressBar() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "showProgressBar"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
+        LeaderboardViewController(binding).showProgressBar()
+        Assert.assertEquals(View.VISIBLE, binding.progressBar.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.scroll.visibility)
+    }
+
+    /** Keeps leaderboard content hidden before the initial response arrives. */
+    @Test
+    fun testHideLayouts() {
+        LeaderboardViewController(binding).hideLayouts()
+        Assert.assertEquals(View.INVISIBLE, binding.categorySpinner.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.durationSpinner.visibility)
+        Assert.assertEquals(View.INVISIBLE, binding.leaderboardList.visibility)
+    }
+
+    /** Populates both filters with the existing resource labels and defaults. */
+    @Test
+    fun testSetSpinners() {
+        LeaderboardViewController(binding).setSpinners()
+        val categories = context.resources.getStringArray(R.array.leaderboard_categories)
+        val durations = context.resources.getStringArray(R.array.leaderboard_durations)
+        Assert.assertEquals(categories.size, binding.categorySpinner.adapter.count)
+        Assert.assertEquals(durations.size, binding.durationSpinner.adapter.count)
+        Assert.assertEquals(categories[0], binding.categorySpinner.selectedItem)
+        Assert.assertEquals(durations[0], binding.durationSpinner.selectedItem)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnError() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "onError"
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "onError",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -195,10 +215,11 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testMenuVisibilityOverrideNotVisible() {
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "setMenuVisibility",
-            Boolean::class.java
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "setMenuVisibility",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, false)
         Assert.assertNull(ShadowToast.getLatestToast())
@@ -209,23 +230,22 @@ class LeaderboardFragmentUnitTests {
     fun testMenuVisibilityOverrideVisibleWithContext() {
         shadowOf(getMainLooper()).idle()
         `when`(parentView.context).thenReturn(context)
-        val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
-            "setMenuVisibility",
-            Boolean::class.java
-        )
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "setMenuVisibility",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(fragment, true)
-        if(isBetaFlavour) {
+        if (isBetaFlavour) {
             Assert.assertEquals(
                 ShadowToast.getTextOfLatestToast().toString(),
-                context.getString(R.string.leaderboard_unavailable_beta)
+                context.getString(R.string.leaderboard_unavailable_beta),
             )
         } else {
             Assert.assertNull(
-                ShadowToast.getTextOfLatestToast()
+                ShadowToast.getTextOfLatestToast(),
             )
         }
-
     }
-
 }

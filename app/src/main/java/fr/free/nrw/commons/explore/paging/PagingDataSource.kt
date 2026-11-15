@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because loader functions are supplied by callers and can
+ * throw arbitrary runtime exceptions, which are reported as a LoadingState.Error.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.explore.paging
 
 import androidx.paging.PositionalDataSource
@@ -8,38 +14,42 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 abstract class PagingDataSource<T>(
-    private val loadingStates: PublishProcessor<LoadingState>
+    private val loadingStates: PublishProcessor<LoadingState>,
 ) : PositionalDataSource<T>() {
-
     private var lastExecutedRequest: (() -> Boolean)? = null
+
     private fun storeAndExecute(function: () -> Boolean) {
         function.also { lastExecutedRequest = it }.invoke()
     }
 
-    private fun performWithTryCatch(function: () -> Unit) = try {
-        function.invoke()
-        loadingStates.offer(LoadingState.Complete)
-    } catch (e: Exception) {
-        Timber.e(e)
-        loadingStates.offer(LoadingState.Error)
-    }
+    private fun performWithTryCatch(function: () -> Unit) =
+        try {
+            function.invoke()
+            loadingStates.offer(LoadingState.Complete)
+        } catch (e: Exception) {
+            Timber.e(e)
+            loadingStates.offer(LoadingState.Error)
+        }
 
     override fun loadInitial(
         params: LoadInitialParams,
-        callback: LoadInitialCallback<T>
+        callback: LoadInitialCallback<T>,
     ) {
         storeAndExecute {
             loadingStates.offer(LoadingState.InitialLoad)
             performWithTryCatch {
                 callback.onResult(
                     getItems(params.requestedLoadSize, params.requestedStartPosition),
-                    params.requestedStartPosition
+                    params.requestedStartPosition,
                 )
             }
         }
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<T>) {
+    override fun loadRange(
+        params: LoadRangeParams,
+        callback: LoadRangeCallback<T>,
+    ) {
         storeAndExecute {
             loadingStates.offer(LoadingState.Loading)
             performWithTryCatch {
@@ -48,10 +58,14 @@ abstract class PagingDataSource<T>(
         }
     }
 
-    protected abstract fun getItems(loadSize: Int, startPosition: Int): List<T>
+    protected abstract fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<T>
 
     fun retryFailedRequest() {
-        Completable.fromAction { lastExecutedRequest?.invoke() }
+        Completable
+            .fromAction { lastExecutedRequest?.invoke() }
             .subscribeOn(Schedulers.io())
             .subscribe()
     }
@@ -59,9 +73,10 @@ abstract class PagingDataSource<T>(
 
 fun <T> dataSource(
     loadingStates: PublishProcessor<LoadingState>,
-    loadFunction: LoadFunction<T>
+    loadFunction: LoadFunction<T>,
 ) = object : PagingDataSource<T>(loadingStates) {
-    override fun getItems(loadSize: Int, startPosition: Int): List<T> {
-        return loadFunction(loadSize, startPosition)
-    }
+    override fun getItems(
+        loadSize: Int,
+        startPosition: Int,
+    ): List<T> = loadFunction(loadSize, startPosition)
 }

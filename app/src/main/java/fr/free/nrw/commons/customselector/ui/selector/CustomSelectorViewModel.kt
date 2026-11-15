@@ -14,8 +14,10 @@ import kotlinx.coroutines.cancel
 /**
  * Custom Selector view model.
  */
-class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFileLoader) : ViewModel() {
-
+class CustomSelectorViewModel(
+    var context: Context,
+    var imageFileLoader: ImageFileLoader,
+) : ViewModel() {
     /**
      * Scope for coroutine task (image fetch).
      */
@@ -37,15 +39,17 @@ class CustomSelectorViewModel(var context: Context,var imageFileLoader: ImageFil
     fun fetchImages() {
         result.postValue(Result(CallbackStatus.FETCHING, arrayListOf()))
         scope.cancel()
-        imageFileLoader.loadDeviceImages(object: ImageLoaderListener {
-            override fun onImageLoaded(images: ArrayList<Image>) {
-                result.postValue(Result(CallbackStatus.SUCCESS, images))
-            }
+        imageFileLoader.loadDeviceImages(
+            object : ImageLoaderListener {
+                override fun onImageLoaded(images: ArrayList<Image>) {
+                    result.postValue(Result(CallbackStatus.SUCCESS, images))
+                }
 
-            override fun onFailed(throwable: Throwable) {
-                result.postValue(Result(CallbackStatus.SUCCESS, arrayListOf()))
-            }
-        })
+                override fun onFailed(throwable: Throwable) {
+                    result.postValue(Result(CallbackStatus.SUCCESS, arrayListOf()))
+                }
+            },
+        )
     }
 
     /**

@@ -4,16 +4,15 @@ import fr.free.nrw.commons.notification.models.Notification
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
-import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
 class NotificationControllerTest {
-
     @Mock
     private lateinit var notificationClient: NotificationClient
+
     @Mock
     private lateinit var notification: Notification
     private lateinit var notificationController: NotificationController
@@ -37,13 +36,20 @@ class NotificationControllerTest {
         verify(notificationClient).getNotifications(ArgumentMatchers.anyBoolean())
     }
 
+    @Test
+    fun testGetUnreadCount() {
+        notificationController.getUnreadCount()
+        verify(notificationClient).getUnreadCount()
+    }
+
     /**
      * Test mark notifications as read
      */
     @Test
     fun testMarkNotificationsAsRead() {
         `when`(notification.notificationId).thenReturn("test")
+        `when`(notification.wiki).thenReturn("enwiki")
         notificationController.markAsRead(notification)
-        verify(notificationClient).markNotificationAsRead(eq("test"))
+        verify(notificationClient).markNotificationAsRead("test", "enwiki")
     }
 }

@@ -4,30 +4,49 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.models.RecentSearch
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.*
-import org.junit.Assert.*
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.BASE_URI
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.Companion.uriForId
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.ALL_FIELDS
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.COLUMN_ID
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.COLUMN_LAST_USED
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.COLUMN_NAME
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.onCreate
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.onDelete
+import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.onUpdate
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
+import java.util.Date
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentSearchesDaoTest {
-
     private val columns = arrayOf(COLUMN_ID, COLUMN_NAME, COLUMN_LAST_USED)
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
     private val queryCaptor = argumentCaptor<Array<String>>()
 
@@ -185,7 +204,7 @@ class RecentSearchesDaoTest {
     /**
      * Unit Test for checking translation exceptions in searching a row from DB using recent search query
      */
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findRecentSearchTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("butterfly")
@@ -238,11 +257,11 @@ class RecentSearchesDaoTest {
         assertEquals(123L, recentSearch?.lastSearched?.time)
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                eq("$COLUMN_NAME=?"),
-                queryCaptor.capture(),
-                isNull()
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            eq("$COLUMN_NAME=?"),
+            queryCaptor.capture(),
+            isNull(),
         )
         assertEquals("butterfly", queryCaptor.firstValue[0])
     }
@@ -274,11 +293,11 @@ class RecentSearchesDaoTest {
         assertEquals("butterfly", result[0])
 
         verify(client).query(
-                eq(BASE_URI),
-                eq(ALL_FIELDS),
-                isNull(),
-                queryCaptor.capture(),
-                eq("$COLUMN_LAST_USED DESC")
+            eq(BASE_URI),
+            eq(ALL_FIELDS),
+            isNull(),
+            queryCaptor.capture(),
+            eq("$COLUMN_LAST_USED DESC"),
         )
         assertEquals(0, queryCaptor.firstValue.size)
     }
@@ -296,13 +315,54 @@ class RecentSearchesDaoTest {
     }
 
     /**
+     * Unit Test for deleting all entries from recent searches database
+     */
+    @Test
+    fun testDeleteAll() {
+        val cursor = createCursor(2)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), isNull(), any(), eq("$COLUMN_LAST_USED DESC")))
+            .thenReturn(cursor)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), eq("$COLUMN_NAME=?"), any(), isNull()))
+            .thenReturn(createCursor(1))
+
+        testObject.deleteAll()
+
+        verify(client, times(2)).delete(eq(uriForId(1)), isNull(), isNull())
+    }
+
+    /**
+     * Unit Test for translating exceptions in deleteAll
+     */
+    @Test(expected = IllegalStateException::class)
+    fun deleteAllTranslatesExceptions() {
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
+            .thenThrow(RemoteException(""))
+
+        testObject.deleteAll()
+    }
+
+    /**
+     * Unit Test for checking exception when contentUri is null in deleteAll
+     */
+    @Test(expected = IllegalStateException::class)
+    fun deleteAllThrowsExceptionWhenContentUriIsNull() {
+        val cursor = createCursor(1)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), isNull(), any(), eq("$COLUMN_LAST_USED DESC")))
+            .thenReturn(cursor)
+        whenever(client.query(eq(BASE_URI), eq(ALL_FIELDS), eq("$COLUMN_NAME=?"), any(), isNull()))
+            .thenReturn(null)
+
+        testObject.deleteAll()
+    }
+
+    /**
      * Unit Test for creating entries in recent searches database.
      * @param rowCount No of rows
      */
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("1", "butterfly", "123"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            repeat(rowCount) {
+                addRow(listOf("1", "butterfly", "123"))
+            }
         }
-    }
-
 }

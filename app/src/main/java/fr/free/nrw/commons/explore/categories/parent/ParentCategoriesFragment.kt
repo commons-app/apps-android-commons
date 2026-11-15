@@ -7,9 +7,7 @@ import fr.free.nrw.commons.category.CATEGORY_PREFIX
 import fr.free.nrw.commons.explore.categories.PageableCategoryFragment
 import javax.inject.Inject
 
-
 class ParentCategoriesFragment : PageableCategoryFragment() {
-
     @Inject
     lateinit var presenter: ParentCategoriesPresenter
 
@@ -18,9 +16,11 @@ class ParentCategoriesFragment : PageableCategoryFragment() {
 
     override fun getEmptyText(query: String) = getString(R.string.no_parentcategory_found)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
-        onQueryUpdated("$CATEGORY_PREFIX${arguments!!.getString("categoryName")!!}")
+        onQueryUpdated("$CATEGORY_PREFIX${requireArguments().getString("categoryName")!!}")
     }
 }
-

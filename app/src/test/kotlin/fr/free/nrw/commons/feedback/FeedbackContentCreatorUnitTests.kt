@@ -22,7 +22,7 @@ class FeedbackContentCreatorUnitTests {
     private lateinit var feedback: Feedback
 
     private lateinit var context: Context
-    
+
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
@@ -37,5 +37,4 @@ class FeedbackContentCreatorUnitTests {
         Assert.assertNotNull(creator.getSectionText())
         Assert.assertNotNull(creator.getSectionTitle())
     }
-
 }

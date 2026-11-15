@@ -16,13 +16,11 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class NearbyFilterSearchRecyclerViewAdapterUnitTests {
-
     private lateinit var context: Context
     private lateinit var adapter: NearbyFilterSearchRecyclerViewAdapter
 
@@ -52,6 +50,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
         viewHolder.placeTypeIcon = imageView
         viewHolder.placeTypeLabel = textView
         viewHolder.placeTypeLayout = linearLayout
+        viewHolder.placeSelected = imageView
     }
 
     @Test
@@ -81,7 +80,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetItemCount() {
-        Assert.assertEquals(adapter.itemCount, 26)
+        Assert.assertEquals(adapter.itemCount, 29)
     }
 
     @Test
@@ -101,5 +100,4 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun testSetRecyclerViewAdapterAllSelected() {
         adapter.setRecyclerViewAdapterAllSelected()
     }
-
 }

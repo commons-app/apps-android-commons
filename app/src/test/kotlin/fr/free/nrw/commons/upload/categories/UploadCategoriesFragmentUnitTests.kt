@@ -1,30 +1,18 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Looper
-import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
-import com.google.android.material.textfield.TextInputLayout
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.UploadCategoriesFragmentBinding
-import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
 import io.reactivex.disposables.Disposable
@@ -33,7 +21,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -47,7 +34,8 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class UploadCategoriesFragmentUnitTests {
-
+    private val searchView = CategorySearchView()
+    private val editView = CategoryEditView()
     private lateinit var fragment: UploadCategoriesFragment
     private lateinit var context: Context
     private lateinit var fragmentManager: FragmentManager
@@ -68,8 +56,7 @@ class UploadCategoriesFragmentUnitTests {
     @Mock
     private lateinit var media: Media
 
-    private lateinit var binding : UploadCategoriesFragmentBinding
-
+    private lateinit var binding: UploadCategoriesFragmentBinding
 
     @Before
     fun setUp() {
@@ -77,7 +64,8 @@ class UploadCategoriesFragmentUnitTests {
         context = ApplicationProvider.getApplicationContext()
         OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
-        fragment = UploadCategoriesFragment()
+        fragment = UploadCategoriesFragment(searchView, editView)
+        fragment.callback = callback
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -86,8 +74,8 @@ class UploadCategoriesFragmentUnitTests {
         layoutInflater = LayoutInflater.from(activity)
         binding = UploadCategoriesFragmentBinding.inflate(layoutInflater)
 
-        Whitebox.setInternalState(fragment, "subscribe", subscribe)
-        Whitebox.setInternalState(fragment, "adapter", adapter)
+        Whitebox.setInternalState(searchView, "subscribe", subscribe)
+        Whitebox.setInternalState(searchView, "adapter", adapter)
         Whitebox.setInternalState(fragment, "presenter", presenter)
         Whitebox.setInternalState(fragment, "wikiText", "[[Category:Test]]")
     }
@@ -102,15 +90,16 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnCreateView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onCreateView(layoutInflater,null, null)
+        fragment.onCreateView(layoutInflater, null, null)
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitMethod() {
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         method.isAccessible = true
         method.invoke(fragment)
@@ -120,9 +109,10 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun `Test init when media is non null`() {
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -130,9 +120,10 @@ class UploadCategoriesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testFragmentOnBecameVisible() {
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "onBecameVisible"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "onBecameVisible",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -142,20 +133,29 @@ class UploadCategoriesFragmentUnitTests {
     fun testOnDestroyView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onDestroyView()
+        org.mockito.Mockito
+            .verify(subscribe)
+            .dispose()
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowProgress() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.binding = binding
         fragment.showProgress(true)
+        Assert.assertEquals(View.VISIBLE, binding.pbCategories.visibility)
+        fragment.showProgress(false)
+        Assert.assertEquals(View.GONE, binding.pbCategories.visibility)
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowErrorString() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showError("")
+        fragment.binding = binding
+        fragment.showError("Search failed")
+        Assert.assertEquals("Search failed", binding.tilContainerSearch.error.toString())
     }
 
     @Test
@@ -163,6 +163,13 @@ class UploadCategoriesFragmentUnitTests {
     fun testShowErrorInt() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showError(R.string.no_categories_found)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowErrorDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.showErrorDialog("")
     }
 
     @Test
@@ -196,14 +203,14 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetExistingCategories() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.existingCategories
+        fragment.getExistingCategories()
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetFragmentContext() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.fragmentContext
+        fragment.getFragmentContext()
     }
 
     @Test
@@ -261,9 +268,10 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnBecameVisible() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "onBecameVisible"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "onBecameVisible",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -272,43 +280,47 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testAddTextChangeListenerToEtSearch() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "addTextChangeListenerToEtSearch"
-        )
+        val method: Method =
+            CategorySearchView::class.java.getDeclaredMethod(
+                "addTextChangeListenerToEtSearch",
+            )
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(searchView)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSearchForCategory() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "searchForCategory",
-            String::class.java
-        )
+        val method: Method =
+            CategorySearchView::class.java.getDeclaredMethod(
+                "searchForCategory",
+                String::class.java,
+            )
         method.isAccessible = true
-        method.invoke(fragment, "")
+        method.invoke(searchView, "")
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitRecyclerView() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "initRecyclerView"
-        )
+        val method: Method =
+            CategorySearchView::class.java.getDeclaredMethod(
+                "initRecyclerView",
+            )
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(searchView)
     }
 
     @Test
     @Throws(Exception::class)
     fun testInit() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -318,9 +330,10 @@ class UploadCategoriesFragmentUnitTests {
     fun `Test init when media is not null`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
@@ -329,11 +342,32 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun `Test init when callback is null`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            UploadCategoriesFragment::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(fragment)
     }
 
+    @Test
+    fun testEditLifecycleBackHandling() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.media = media
+        editView.onResume(fragment)
+        Assert.assertTrue(fragment.onBackPressedCallback.isEnabled)
+        editView.onPause(fragment)
+        Assert.assertFalse(fragment.onBackPressedCallback.isEnabled)
+    }
+
+    @Test
+    fun testDefaultConstructorRestoration() {
+        val restored =
+            androidx.fragment.app.FragmentFactory().instantiate(
+                UploadCategoriesFragment::class.java.classLoader!!,
+                UploadCategoriesFragment::class.java.name,
+            ) as UploadCategoriesFragment
+        restored.showProgress(true)
+        Assert.assertNull(restored.getExistingCategories())
+    }
 }

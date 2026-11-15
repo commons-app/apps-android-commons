@@ -22,7 +22,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class CommonPlaceClickActionsUnitTest {
-
     private lateinit var commonPlaceClickActions: CommonPlaceClickActions
 
     @Mock
@@ -65,10 +64,11 @@ class CommonPlaceClickActionsUnitTest {
     @Test
     @Throws(Exception::class)
     fun testStoreSharedPrefs() {
-        val method: Method = CommonPlaceClickActions::class.java.getDeclaredMethod(
-            "storeSharedPrefs",
-            Place::class.java
-        )
+        val method: Method =
+            CommonPlaceClickActions::class.java.getDeclaredMethod(
+                "storeSharedPrefs",
+                Place::class.java,
+            )
         method.isAccessible = true
         method.invoke(commonPlaceClickActions, place)
     }
@@ -76,10 +76,11 @@ class CommonPlaceClickActionsUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOpenWebView() {
-        val method: Method = CommonPlaceClickActions::class.java.getDeclaredMethod(
-            "openWebView",
-            Uri::class.java
-        )
+        val method: Method =
+            CommonPlaceClickActions::class.java.getDeclaredMethod(
+                "openWebView",
+                Uri::class.java,
+            )
         method.isAccessible = true
         Assert.assertEquals(method.invoke(commonPlaceClickActions, uri), true)
     }
@@ -87,9 +88,10 @@ class CommonPlaceClickActionsUnitTest {
     @Test
     @Throws(Exception::class)
     fun testShowLoginDialog() {
-        val method: Method = CommonPlaceClickActions::class.java.getDeclaredMethod(
-            "showLoginDialog"
-        )
+        val method: Method =
+            CommonPlaceClickActions::class.java.getDeclaredMethod(
+                "showLoginDialog",
+            )
         method.isAccessible = true
         method.invoke(commonPlaceClickActions)
     }
@@ -97,11 +99,11 @@ class CommonPlaceClickActionsUnitTest {
     @Test
     @Throws(Exception::class)
     fun testSetPositiveButton() {
-        val method: Method = CommonPlaceClickActions::class.java.getDeclaredMethod(
-            "setPositiveButton"
-        )
+        val method: Method =
+            CommonPlaceClickActions::class.java.getDeclaredMethod(
+                "setPositiveButton",
+            )
         method.isAccessible = true
         method.invoke(commonPlaceClickActions)
     }
-
 }

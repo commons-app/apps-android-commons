@@ -22,7 +22,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SettingsActivityLoggedInTest {
-
     @get:Rule
     var activityRule: ActivityTestRule<*> = ActivityTestRule(LoginActivity::class.java)
 
@@ -35,31 +34,32 @@ class SettingsActivityLoggedInTest {
         device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
-        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
+        Intents
+            .intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
 
     @Test
     fun testSettings() {
-        Espresso.onView(
-            Matchers.allOf(
-                ViewMatchers.withContentDescription("More"),
-                UITestHelper.childAtPosition(
+        Espresso
+            .onView(
+                Matchers.allOf(
+                    ViewMatchers.withContentDescription("More"),
                     UITestHelper.childAtPosition(
-                        ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        UITestHelper.childAtPosition(
+                            ViewMatchers.withId(R.id.fragment_main_nav_tab_layout),
+                            0,
+                        ),
+                        4,
                     ),
-                    4
+                    ViewMatchers.isDisplayed(),
                 ),
-                ViewMatchers.isDisplayed()
-            )
-        ).perform(ViewActions.click())
+            ).perform(ViewActions.click())
         Espresso.onView(Matchers.allOf(ViewMatchers.withId(R.id.more_settings))).perform(
             ViewActions.scrollTo(),
-            ViewActions.click()
+            ViewActions.click(),
         )
         Intents.intended(IntentMatchers.hasComponent(SettingsActivity::class.java.name))
         UITestHelper.sleep(1000)
     }
-
 }

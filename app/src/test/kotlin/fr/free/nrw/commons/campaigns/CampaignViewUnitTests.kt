@@ -4,9 +4,9 @@ import android.app.Activity
 import android.view.View
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +22,6 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CampaignViewUnitTests {
-
     private lateinit var activityController: ActivityController<Activity>
     private lateinit var activity: MainActivity
     private lateinit var campaignView: CampaignView
@@ -80,11 +79,11 @@ class CampaignViewUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInit() {
-        val method: Method = CampaignView::class.java.getDeclaredMethod(
-            "init"
-        )
+        val method: Method =
+            CampaignView::class.java.getDeclaredMethod(
+                "init",
+            )
         method.isAccessible = true
         method.invoke(campaignView)
     }
-
 }

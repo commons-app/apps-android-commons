@@ -10,8 +10,10 @@ import javax.inject.Named
 
 interface ChildDepictionsPresenter : PagingContract.Presenter<DepictedItem>
 
-class ChildDepictionsPresenterImpl @Inject constructor(
-    @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: PageableChildDepictionsDataSource
-) : BasePagingPresenter<DepictedItem>(mainThreadScheduler, dataSourceFactory),
-    ChildDepictionsPresenter
+class ChildDepictionsPresenterImpl
+    @Inject
+    constructor(
+        @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
+        dataSourceFactory: PageableChildDepictionsDataSource,
+    ) : BasePagingPresenter<DepictedItem>(mainThreadScheduler, dataSourceFactory),
+        ChildDepictionsPresenter

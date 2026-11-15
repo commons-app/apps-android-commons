@@ -16,14 +16,13 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class RecentLanguagesContentProviderUnitTest {
-
     private lateinit var contentProvider: RecentLanguagesContentProvider
 
     @Mock
     lateinit var dbOpenHelper: DBOpenHelper
 
     @Before
-    fun setUp(){
+    fun setUp() {
         MockitoAnnotations.openMocks(this)
         contentProvider = RecentLanguagesContentProvider()
         Whitebox.setInternalState(contentProvider, "dbOpenHelper", dbOpenHelper)

@@ -6,14 +6,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GpsCategoryModel @Inject constructor() {
-    val categoriesFromLocation = BehaviorSubject.createDefault(emptyList<CategoryItem>())
+class GpsCategoryModel
+    @Inject
+    constructor() {
+        val categoriesFromLocation = BehaviorSubject.createDefault(emptyList<CategoryItem>())
 
-    fun clear() {
-        categoriesFromLocation.onNext(emptyList())
-    }
+        fun clear() {
+            categoriesFromLocation.onNext(emptyList())
+        }
 
-    fun setCategoriesFromLocation(categoryList: List<CategoryItem>) {
-        categoriesFromLocation.onNext(categoryList)
+        fun setCategoriesFromLocation(categoryList: List<CategoryItem>) {
+            categoriesFromLocation.onNext(categoryList)
+        }
     }
-}

@@ -23,7 +23,6 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class WikiAccountAuthenticatorUnitTest {
-
     private lateinit var context: Context
     private lateinit var authenticator: WikiAccountAuthenticator
 
@@ -64,7 +63,7 @@ class WikiAccountAuthenticatorUnitTest {
         val intent: Intent? = bundle.getParcelable(AccountManager.KEY_INTENT)
         Assert.assertEquals(
             intent?.extras!![AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE],
-            response
+            response,
         )
     }
 
@@ -87,10 +86,7 @@ class WikiAccountAuthenticatorUnitTest {
 
     @Test
     fun testGetAuthTokenLabelCaseNonNull() {
-        Assert.assertEquals(
-            authenticator.getAuthTokenLabel(BuildConfig.ACCOUNT_TYPE),
-            AccountUtil.AUTH_TOKEN_TYPE
-        )
+        Assert.assertEquals(authenticator.getAuthTokenLabel(BuildConfig.ACCOUNT_TYPE), AUTH_TOKEN_TYPE)
     }
 
     @Test
@@ -110,5 +106,4 @@ class WikiAccountAuthenticatorUnitTest {
         val bundle: Bundle? = authenticator.getAccountRemovalAllowed(response, account)
         Assert.assertEquals(bundle?.getBoolean(AccountManager.KEY_BOOLEAN_RESULT), true)
     }
-
 }

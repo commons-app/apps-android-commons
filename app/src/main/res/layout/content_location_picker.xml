@@ -16,6 +16,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/map_default_map_marker"
+    android:layout_marginBottom="45dp"
     android:contentDescription="@string/location_picker_image_view" />
 
   <ImageView
@@ -24,10 +25,10 @@
     android:layout_height="wrap_content"
     android:contentDescription="@string/location_picker_image_view_shadow"
     android:elevation="1dp"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/location_picker_image_view_marker"
+    app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/map_default_map_marker_shadow" />
 
   <org.osmdroid.views.MapView

@@ -1,12 +1,12 @@
 package fr.free.nrw.commons.utils
 
-import android.Manifest.permission
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import timber.log.Timber
@@ -19,7 +19,10 @@ object DownloadUtils {
      * @param m Media file to download
      */
     @JvmStatic
-    fun downloadMedia(activity: Activity?, m: Media) {
+    fun downloadMedia(
+        activity: Activity?,
+        m: Media,
+    ) {
         val imageUrl = m.imageUrl
         var fileName = m.filename
         if (imageUrl == null || fileName == null || activity == null) {
@@ -29,32 +32,39 @@ object DownloadUtils {
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.substringAfter("File:")
         val imageUri = Uri.parse(imageUrl)
-        val req = DownloadManager.Request(imageUri).apply {
-            setTitle(m.displayTitle)
-            setDescription(activity.getString(R.string.app_name))
-            setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
-            allowScanningByMediaScanner()
-            setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        }
+
+        val req =
+            DownloadManager.Request(imageUri).apply {
+                setTitle(m.displayTitle)
+                setDescription(activity.getString(R.string.app_name))
+                setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
+                allowScanningByMediaScanner()
+                setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                addRequestHeader("User-Agent", CommonsApplication.instance.userAgent)
+            }
         PermissionUtils.checkPermissionsAndPerformAction(
             activity,
             { enqueueRequest(activity, req) },
             {
-                Toast.makeText(
-                    activity,
-                    R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        activity,
+                        R.string.download_failed_we_cannot_download_the_file_without_storage_permission,
+                        Toast.LENGTH_SHORT,
+                    ).show()
             },
             R.string.storage_permission,
             R.string.write_storage_permission_rationale,
-            *PermissionUtils.PERMISSIONS_STORAGE
-            )
+            *PermissionUtils.PERMISSIONS_STORAGE,
+        )
     }
 
-    private fun enqueueRequest(activity: Activity, req: DownloadManager.Request) {
+    private fun enqueueRequest(
+        activity: Activity,
+        req: DownloadManager.Request,
+    ) {
         val systemService =
             activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        systemService?.enqueue(req)
+        systemService.enqueue(req)
     }
 }

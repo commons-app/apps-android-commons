@@ -16,28 +16,36 @@ import fr.free.nrw.commons.nearby.model.BottomSheetItem
 /**
  * RecyclerView Adapter for displaying items in a bottom sheet.
  *
- * @property context The context used for inflating layout resources.
+ * @param context The context used for inflating layout resources.
  * @property itemList The list of BottomSheetItem objects to display.
  * @constructor Creates an instance of BottomSheetAdapter.
  */
-class BottomSheetAdapter(context: Context?, private val itemList: List<BottomSheetItem>) :
-    RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>() {
+class BottomSheetAdapter(
+    context: Context?,
+    private val itemList: List<BottomSheetItem>,
+) : RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>() {
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
     private var itemClickListener: ItemClickListener? = null
 
     @NonNull
-    override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        @NonNull parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet_item_layout, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        @NonNull holder: ViewHolder,
+        position: Int,
+    ) {
         val item = itemList[position]
         holder.imageView.setImageDrawable(
             ContextCompat.getDrawable(
                 getContext(),
-                item.imageResourceId
-            )
+                item.imageResourceId,
+            ),
         )
         holder.title.setText(item.title)
     }
@@ -47,9 +55,7 @@ class BottomSheetAdapter(context: Context?, private val itemList: List<BottomShe
      *
      * @return The total number of items in this adapter.
      */
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount(): Int = itemList.size
 
     /**
      * Updates the icon for bookmark item.
@@ -58,16 +64,35 @@ class BottomSheetAdapter(context: Context?, private val itemList: List<BottomShe
      */
     fun updateBookmarkIcon(icon: Int) {
         itemList.forEachIndexed { index, item ->
-            if (item.imageResourceId == R.drawable.ic_round_star_filled_24px || item.imageResourceId == R.drawable.ic_round_star_border_24px) {
+            if (item.imageResourceId == R.drawable.ic_round_star_filled_24px ||
+                item.imageResourceId == R.drawable.ic_round_star_border_24px
+            ) {
                 item.imageResourceId = icon
-                this.notifyItemChanged(index)
+                notifyItemChanged(index)
                 return
             }
         }
     }
 
-    inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener, OnLongClickListener {
+    fun toggleBookmarkIcon() {
+        itemList.forEachIndexed { index, item ->
+            if (item.imageResourceId == R.drawable.ic_round_star_filled_24px) {
+                item.imageResourceId = R.drawable.ic_round_star_border_24px
+                notifyItemChanged(index)
+                return
+            } else if (item.imageResourceId == R.drawable.ic_round_star_border_24px) {
+                item.imageResourceId = R.drawable.ic_round_star_filled_24px
+                notifyItemChanged(index)
+                return
+            }
+        }
+    }
+
+    inner class ViewHolder internal constructor(
+        itemView: View,
+    ) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener,
+        OnLongClickListener {
         var imageView: ImageView = itemView.findViewById(R.id.buttonImage)
         var title: TextView = itemView.findViewById(R.id.buttonText)
 
@@ -77,17 +102,21 @@ class BottomSheetAdapter(context: Context?, private val itemList: List<BottomShe
         }
 
         override fun onClick(view: View) {
-            if (itemClickListener != null) itemClickListener!!.onBottomSheetItemClick(
-                view,
-                adapterPosition
-            )
+            if (itemClickListener != null) {
+                itemClickListener!!.onBottomSheetItemClick(
+                    view,
+                    adapterPosition,
+                )
+            }
         }
 
         override fun onLongClick(view: View): Boolean {
-            if (itemClickListener != null) itemClickListener!!.onBottomSheetItemLongClick(
-                view,
-                adapterPosition
-            )
+            if (itemClickListener != null) {
+                itemClickListener!!.onBottomSheetItemLongClick(
+                    view,
+                    adapterPosition,
+                )
+            }
             return true
         }
     }
@@ -96,13 +125,17 @@ class BottomSheetAdapter(context: Context?, private val itemList: List<BottomShe
         this.itemClickListener = itemClickListener
     }
 
-    fun getContext(): Context {
-        return layoutInflater.context
-    }
+    fun getContext(): Context = layoutInflater.context
 
     interface ItemClickListener {
-        fun onBottomSheetItemClick(view: View?, position: Int)
-        fun onBottomSheetItemLongClick(view: View?, position: Int)
+        fun onBottomSheetItemClick(
+            view: View?,
+            position: Int,
+        )
+
+        fun onBottomSheetItemLongClick(
+            view: View?,
+            position: Int,
+        )
     }
 }
-

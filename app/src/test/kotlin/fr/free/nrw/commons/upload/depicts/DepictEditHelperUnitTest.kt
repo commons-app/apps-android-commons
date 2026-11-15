@@ -28,7 +28,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class DepictEditHelperUnitTest {
-
     private lateinit var context: Context
     private lateinit var helper: DepictEditHelper
 
@@ -68,7 +67,7 @@ class DepictEditHelperUnitTest {
         helper.makeDepictionEdit(context, media, listOf("Q12"))
         Mockito.verify(viewUtilWrapper, Mockito.times(1)).showShortToast(
             context,
-            context.getString(R.string.depictions_edit_helper_make_edit_toast)
+            context.getString(R.string.depictions_edit_helper_make_edit_toast),
         )
     }
 
@@ -76,34 +75,34 @@ class DepictEditHelperUnitTest {
     @Throws(Exception::class)
     fun testShowCoordinatesEditNotificationCaseTrue() {
         whenever(media.depictionIds).thenReturn(listOf("id", "id2"))
-        val method: Method = DepictEditHelper::class.java.getDeclaredMethod(
-            "showDepictionEditNotification",
-            Context::class.java,
-            Media::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            DepictEditHelper::class.java.getDeclaredMethod(
+                "showDepictionEditNotification",
+                Context::class.java,
+                Media::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         Assertions.assertEquals(
             method.invoke(helper, context, media, true),
-            true
+            true,
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowCoordinatesEditNotificationCaseFalse() {
-        val method: Method = DepictEditHelper::class.java.getDeclaredMethod(
-            "showDepictionEditNotification",
-            Context::class.java,
-            Media::class.java,
-            Boolean::class.java
-        )
+        val method: Method =
+            DepictEditHelper::class.java.getDeclaredMethod(
+                "showDepictionEditNotification",
+                Context::class.java,
+                Media::class.java,
+                Boolean::class.java,
+            )
         method.isAccessible = true
         Assertions.assertEquals(
             method.invoke(helper, context, media, false),
-            false
+            false,
         )
     }
-
-
 }

@@ -15,6 +15,8 @@ import timber.log.Timber
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
+private const val DISABLED_DETAILS_ALPHA = 0.3f
+
 /**
  * Activity for providing feedback about Wikidata items.
  */
@@ -34,6 +36,7 @@ class WikidataFeedback : BaseActivity() {
     lateinit var nearbyController: NearbyController
 
     @SuppressLint("CheckResult")
+    @Suppress("ktlint:standard:max-line-length")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWikidataFeedbackBinding.inflate(layoutInflater)
@@ -49,48 +52,80 @@ class WikidataFeedback : BaseActivity() {
         binding.radioButton1.setText(
             getString(
                 R.string.does_not_exist_anymore_no_picture_can_ever_be_taken_of_it,
-                place
-            ))
+                place,
+            ),
+        )
         binding.radioButton2.setText(
             getString(
+                // Generated resource identifiers are indivisible.
+                @Suppress("MaxLineLength")
                 R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
-                place
-            ))
+                place,
+            ),
+        )
         binding.radioButton3.setText(getString(R.string.other_problem_or_information_please_explain_below))
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
+        binding.detailsEditText.isEnabled = false
+        binding.detailsEditText.alpha = DISABLED_DETAILS_ALPHA
+        binding.radioButton3.setOnCheckedChangeListener { _, isChecked ->
+            binding.detailsEditText.isEnabled = isChecked
+            binding.detailsEditText.alpha = if (isChecked) 1f else DISABLED_DETAILS_ALPHA
+        }
         binding.appCompatButton.setOnClickListener {
-            var desc = findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
+            if (binding.radioGroup.checkedRadioButtonId == -1) {
+                Toast
+                    .makeText(
+                        this,
+                        getString(R.string.warning_for_no_option_selected),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                return@setOnClickListener
+            }
+            var desc =
+                when (binding.radioGroup.checkedRadioButtonId) {
+                    R.id.radioButton2 -> getString(R.string.is_at_a_different_place_wikidata, place)
+                    else -> findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
+                }
             var det = binding.detailsEditText.text.toString()
-            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.please_enter_some_comments), Toast.LENGTH_SHORT
-                ).show()
+            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 &&
+                binding.detailsEditText.text.isNullOrEmpty()
+            ) {
+                Toast
+                    .makeText(
+                        this,
+                        getString(R.string.please_enter_some_comments),
+                        Toast.LENGTH_SHORT,
+                    ).show()
             } else {
                 binding.radioGroup.clearCheck()
                 binding.detailsEditText.setText("")
-                Single.defer<Boolean?>(Callable<SingleSource<Boolean?>> {
-                    pageEditHelper.makePageEdit(
-                        this, pageTitle, preText,
-                        desc.toString(),
-                        det, lat, lng
-                    )
-                } as Callable<SingleSource<Boolean?>>)
-                    .subscribeOn(Schedulers.io())
+                Single
+                    .defer<Boolean?>(
+                        Callable<SingleSource<Boolean?>> {
+                            pageEditHelper.makePageEdit(
+                                this,
+                                pageTitle,
+                                preText,
+                                desc.toString(),
+                                det,
+                                lat,
+                                lng,
+                            )
+                        },
+                    ).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ aBoolean: Boolean? ->
                     }, { throwable: Throwable? ->
                         Timber.e(throwable!!)
                     })
+                finish()
             }
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
-
 }

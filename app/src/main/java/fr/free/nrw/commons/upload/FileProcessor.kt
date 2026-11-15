@@ -11,6 +11,8 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.MotionPhotoUtils
+import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -18,9 +20,21 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
+
+/**
+ * Encapsulates dependencies required by FileProcessor for category and depiction retrieval.
+ */
+class FileProcessorDependencies
+    @Inject
+    constructor(
+        val gpsCategoryModel: GpsCategoryModel,
+        val depictsModel: DepictModel,
+        val apiCall: CategoryApi,
+        val okHttpJsonApiClient: OkHttpJsonApiClient,
+    )
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -31,141 +45,149 @@ private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
 private const val RADIUS_STEP_SIZE_IN_METRES = 100
 private const val MIN_NEARBY_RESULTS = 5
 
-class FileProcessor @Inject constructor(
-    private val context: Context,
-    private val contentResolver: ContentResolver,
-    private val gpsCategoryModel: GpsCategoryModel,
-    private val depictsModel: DepictModel,
-    @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
-    private val apiCall: CategoryApi,
-    private val okHttpJsonApiClient: OkHttpJsonApiClient
-) {
-    private val compositeDisposable = CompositeDisposable()
+class FileProcessor
+    @Inject
+    constructor(
+        private val context: Context,
+        private val contentResolver: ContentResolver,
+        @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
+        private val dependencies: FileProcessorDependencies,
+    ) {
+        private val compositeDisposable = CompositeDisposable()
 
-    fun cleanup() {
-        compositeDisposable.clear()
-    }
-
-    /**
-     * Processes filePath coordinates, either from EXIF data or user location
-     */
-    fun processFileCoordinates(
-        similarImageInterface: SimilarImageInterface,
-        filePath: String?, inAppPictureLocation: LatLng?
-    )
-            : ImageCoordinates {
-        val exifInterface: ExifInterface? = try {
-            ExifInterface(filePath!!)
-        } catch (e: IOException) {
-            Timber.e(e)
-            null
+        fun cleanup() {
+            compositeDisposable.clear()
         }
-        // Redact EXIF data as indicated in preferences.
-        redactExifTags(exifInterface, getExifTagsToRedact())
-        Timber.d("Calling GPSExtractor")
-        val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
-        if (originalImageCoordinates.decimalCoords == null) {
-            //Find other photos taken around the same time which has gps coordinates
-            findOtherImages(
-                File(filePath),
-                similarImageInterface
-            )
-        } else {
-            prePopulateCategoriesAndDepictionsBy(originalImageCoordinates)
-        }
-        return originalImageCoordinates
-    }
 
-    /**
-     * Gets EXIF Tags from preferences to be redacted.
-     *
-     * @return tags to be redacted
-     */
-    fun getExifTagsToRedact(): Set<String> {
-        val prefManageEXIFTags =
-            defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
-        val redactTags: Set<String> =
-            context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
-        return redactTags - prefManageEXIFTags
-    }
-
-    /**
-     * Redacts EXIF metadata as indicated in preferences.
-     *
-     * @param exifInterface ExifInterface object
-     * @param redactTags    tags to be redacted
-     */
-    fun redactExifTags(exifInterface: ExifInterface?, redactTags: Set<String>) {
-        compositeDisposable.add(
-            Observable.fromIterable(redactTags)
-                .flatMap { Observable.fromArray(*FileMetadataUtils.getTagsFromPref(it)) }
-                .subscribe(
-                    { redactTag(exifInterface, it) },
-                    { Timber.d(it) },
-                    { save(exifInterface) }
+        /**
+         * Processes filePath coordinates, either from EXIF data or user location
+         */
+        fun processFileCoordinates(
+            similarImageInterface: SimilarImageInterface?,
+            filePath: String?,
+            inAppPictureLocation: LatLng?,
+        ): ImageCoordinates {
+            val exifInterface: ExifInterface? =
+                try {
+                    ExifInterface(filePath!!)
+                } catch (e: IOException) {
+                    Timber.e(e)
+                    null
+                }
+            // Redact EXIF data as indicated in preferences.
+            redactExifTags(exifInterface, getExifTagsToRedact(), filePath)
+            Timber.d("Calling GPSExtractor")
+            val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
+            if (originalImageCoordinates.decimalCoords == null) {
+                // Find other photos taken around the same time which has gps coordinates
+                findOtherImages(
+                    File(filePath),
+                    similarImageInterface,
                 )
-        )
-    }
-
-    private fun save(exifInterface: ExifInterface?) {
-        try {
-            exifInterface?.saveAttributes()
-        } catch (e: IOException) {
-            Timber.w("EXIF redaction failed: %s", e.toString())
+            } else {
+                prePopulateCategoriesAndDepictionsBy(originalImageCoordinates)
+            }
+            return originalImageCoordinates
         }
-    }
 
-    private fun redactTag(exifInterface: ExifInterface?, tag: String) {
-        Timber.d("Checking for tag: %s", tag)
-        exifInterface?.getAttribute(tag)
-            ?.takeIf { it.isNotEmpty() }
-            ?.let { attributeName ->
-                exifInterface.setAttribute(tag, null).also {
-                    Timber.d("Exif tag $tag with value $attributeName redacted.")
+        /**
+         * Gets EXIF Tags from preferences to be redacted.
+         *
+         * @return tags to be redacted
+         */
+        fun getExifTagsToRedact(): Set<String> {
+            val prefManageEXIFTags =
+                defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS)
+            val redactTags: Set<String> =
+                context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
+            return redactTags - prefManageEXIFTags
+        }
+
+        /**
+         * Redacts EXIF metadata as indicated in preferences.
+         *
+         * @param exifInterface ExifInterface object
+         * @param redactTags    tags to be redacted
+         * @param filePath      path to the file for direct metadata redaction
+         */
+        fun redactExifTags(
+            exifInterface: ExifInterface?,
+            redactTags: Set<String>,
+            filePath: String? = null,
+        ) {
+            // Expand preference-level tags into actual EXIF tag names.
+            val expandedTags = mutableSetOf<String>()
+            for (pref in redactTags) {
+                expandedTags.addAll(FileMetadataUtils.getTagsFromPref(pref))
+            }
+
+            // Redact from in-memory ExifInterface so callers see updated state.
+            for (tag in expandedTags) {
+                exifInterface?.getAttribute(tag)?.takeIf { it.isNotEmpty() }?.let {
+                    exifInterface.setAttribute(tag, null)
+                    Timber.d("Exif tag $tag with value $it redacted.")
                 }
             }
-    }
 
-    /**
-     * Find other images around the same location that were taken within the last 20 sec
-     *
-     * @param originalImageCoordinates
-     * @param fileBeingProcessed
-     * @param similarImageInterface
-     */
-    private fun findOtherImages(
-        fileBeingProcessed: File,
-        similarImageInterface: SimilarImageInterface
-    ) {
-        val oneHundredAndTwentySeconds = 120 * 1000L
-        //Time when the original image was created
-        val timeOfCreation = fileBeingProcessed.lastModified()
-        LongRange
-        val timeOfCreationRange =
-            timeOfCreation - oneHundredAndTwentySeconds..timeOfCreation + oneHundredAndTwentySeconds
-        fileBeingProcessed.parentFile
-            .listFiles()
-            .asSequence()
-            .filter { it.lastModified() in timeOfCreationRange }
-            .map { Pair(it, readImageCoordinates(it)) }
-            .firstOrNull { it.second?.decimalCoords != null }
-            ?.let { fileCoordinatesPair ->
-                similarImageInterface.showSimilarImageFragment(
-                    fileBeingProcessed.path,
-                    fileCoordinatesPair.first.absolutePath,
-                    fileCoordinatesPair.second
-                )
+            // Write redaction to file using RandomAccessFile.
+            if (filePath != null) {
+                try {
+                    RandomAccessFileExifWriter.redactTags(File(filePath), expandedTags)
+                } catch (e: IOException) {
+                    Timber.w("EXIF redaction failed: %s", e.toString())
+                }
+                // Not a user setting: the video can show things that were not in the photo.
+                try {
+                    if (MotionPhotoUtils.removeVideo(File(filePath))) Timber.d("Motion photo video removed.")
+                } catch (e: IOException) {
+                    Timber.w("Motion photo video removal failed: %s", e.toString())
+                }
             }
-    }
+        }
 
-    private fun readImageCoordinates(file: File) =
-        try {
-            /* Used null location as location for similar images captured before is not available
-               in case it is not present in the EXIF. */
-            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
-        } catch (e: IOException) {
-            Timber.e(e)
+        /**
+         * Finds other images around the same location that were taken within a ±120 sec window.
+         *
+         * @param fileBeingProcessed The file currently being checked.
+         * @param similarImageInterface Callback to display similar images if any are found.
+         */
+        private fun findOtherImages(
+            fileBeingProcessed: File,
+            similarImageInterface: SimilarImageInterface?,
+        ) {
+            val oneHundredAndTwentySeconds = 120 * 1000L
+            // Time when the original image was created
+            val timeOfCreation = fileBeingProcessed.lastModified()
+            LongRange
+            val timeOfCreationRange =
+                timeOfCreation - oneHundredAndTwentySeconds..timeOfCreation + oneHundredAndTwentySeconds
+            fileBeingProcessed.parentFile
+                .listFiles()
+                .asSequence()
+                .filter { it.lastModified() in timeOfCreationRange }
+                .map { Pair(it, readImageCoordinates(it)) }
+                .firstOrNull { it.second?.decimalCoords != null }
+                ?.let { fileCoordinatesPair ->
+                    similarImageInterface?.showSimilarImageFragment(
+                        fileBeingProcessed.path,
+                        fileCoordinatesPair.first.absolutePath,
+                        fileCoordinatesPair.second,
+                    )
+                }
+        }
+
+        private fun readImageCoordinates(file: File): ImageCoordinates? {
             try {
+                /* Used null location as location for similar images captured before is not available
+                   in case it is not present in the EXIF. */
+                val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+                if (inputStream != null) {
+                    return ImageCoordinates(inputStream, null)
+                }
+            } catch (e: IOException) {
+                Timber.e(e)
+            }
+            return try {
                 ImageCoordinates(file.absolutePath, null)
             } catch (ex: IOException) {
                 Timber.e(ex)
@@ -173,52 +195,52 @@ class FileProcessor @Inject constructor(
             }
         }
 
-    /**
-     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
-     * initiates the calls to MediaWiki API through an instance of CategoryApi.
-     *
-     * @param imageCoordinates
-     */
-    fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
-        requireNotNull(imageCoordinates.decimalCoords)
-        compositeDisposable.add(
-            apiCall.request(imageCoordinates.decimalCoords)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(
-                    gpsCategoryModel::setCategoriesFromLocation,
-                    {
-                        Timber.e(it)
-                        gpsCategoryModel.clear()
-                    }
-                )
-        )
-
-        compositeDisposable.add(
-            suggestNearbyDepictions(imageCoordinates)
-        )
-    }
-
-    private val radiiProgressionInMetres =
-        (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
-
-    private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
-        return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
-            .concatMap {
-                Observable.fromCallable {
-                    okHttpJsonApiClient.getNearbyPlaces(
-                        imageCoordinates.latLng,
-                        Locale.getDefault().language,
-                        it
-                    )
-                }
-            }
-            .subscribeOn(Schedulers.io())
-            .filter { it.size >= MIN_NEARBY_RESULTS }
-            .take(1)
-            .subscribe(
-                { depictsModel.nearbyPlaces.offer(it) },
-                { Timber.e(it) }
+        /**
+         * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
+         * initiates the calls to MediaWiki API through an instance of CategoryApi.
+         *
+         * @param imageCoordinates
+         */
+        fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
+            requireNotNull(imageCoordinates.decimalCoords)
+            compositeDisposable.add(
+                dependencies.apiCall
+                    .request(imageCoordinates.decimalCoords!!)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .subscribe(
+                        dependencies.gpsCategoryModel::setCategoriesFromLocation,
+                        {
+                            Timber.e(it)
+                            dependencies.gpsCategoryModel.clear()
+                        },
+                    ),
             )
+
+            compositeDisposable.add(
+                suggestNearbyDepictions(imageCoordinates),
+            )
+        }
+
+        private val radiiProgressionInMetres =
+            (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
+
+        private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable =
+            Observable
+                .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
+                .concatMap {
+                    Observable.fromCallable {
+                        dependencies.okHttpJsonApiClient.getNearbyPlaces(
+                            imageCoordinates.latLng!!,
+                            Locale.getDefault().language,
+                            it,
+                        )
+                    }
+                }.subscribeOn(Schedulers.io())
+                .filter { it.size >= MIN_NEARBY_RESULTS }
+                .take(1)
+                .subscribe(
+                    { dependencies.depictsModel.nearbyPlaces.offer(it) },
+                    { Timber.e(it) },
+                )
     }
-}

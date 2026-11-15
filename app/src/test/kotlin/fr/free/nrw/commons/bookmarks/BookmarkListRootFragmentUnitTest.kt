@@ -18,13 +18,16 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
+import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
+import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.ParentViewPager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
+import fr.free.nrw.commons.navtab.NavTab
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -44,7 +47,6 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class BookmarkListRootFragmentUnitTest {
-
     private lateinit var fragment: BookmarkListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
@@ -170,7 +172,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testSetFragment_Case fragment_isAdded && otherFragment != null`() {
         whenever(mediaDetails.isAdded).thenReturn(true)
-        fragment.setFragment(mediaDetails, listFragment)
+        fragment.navigator.setFragment(mediaDetails, listFragment)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).hide(listFragment)
         verify(childFragmentTransaction).show(mediaDetails)
@@ -183,7 +185,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testSetFragment_Case fragment_isAdded && otherFragment == null`() {
         whenever(mediaDetails.isAdded).thenReturn(true)
-        fragment.setFragment(mediaDetails, null)
+        fragment.navigator.setFragment(mediaDetails, null)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).show(mediaDetails)
         verify(childFragmentTransaction).addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
@@ -195,7 +197,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testSetFragment_Case fragment_isNotAdded && otherFragment != null`() {
         whenever(mediaDetails.isAdded).thenReturn(false)
-        fragment.setFragment(mediaDetails, listFragment)
+        fragment.navigator.setFragment(mediaDetails, listFragment)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).hide(listFragment)
         verify(childFragmentTransaction).add(R.id.explore_container, mediaDetails)
@@ -208,7 +210,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testSetFragment_Case fragment_isNotAdded && otherFragment == null`() {
         whenever(mediaDetails.isAdded).thenReturn(false)
-        fragment.setFragment(mediaDetails, null)
+        fragment.navigator.setFragment(mediaDetails, null)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).replace(R.id.explore_container, mediaDetails)
         verify(childFragmentTransaction).addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
@@ -236,7 +238,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testGetTotalMediaCountCaseNull() {
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 0)
     }
 
     @Test
@@ -245,7 +247,7 @@ class BookmarkListRootFragmentUnitTest {
         val listAdapter = mock(ListAdapter::class.java)
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(listAdapter)
         whenever(listAdapter.count).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 1)
     }
 
     @Test
@@ -282,14 +284,8 @@ class BookmarkListRootFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnBackStackChanged() {
-        fragment.onBackStackChanged()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnItemClick() {
-        fragment.onItemClick(null, null, 0, 0)
+        fragment.onItemClick(null, view, 0, 0)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).commit()
         verify(childFragmentManager).executePendingTransactions()
@@ -301,23 +297,52 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isVisible and backButton clicked`() {
         whenever(mediaDetails.isVisible).thenReturn(true)
-        Assert.assertEquals(fragment.backPressed(), false)
+        Assert.assertEquals(fragment.navigator.backPressed(), false)
+        verify(childFragmentTransaction).remove(mediaDetails)
+        Assert.assertEquals(View.VISIBLE, bookmarkFragment.binding?.tabLayout?.visibility)
+        Assert.assertEquals(
+            View.VISIBLE,
+            activity.findViewById<View>(R.id.fragment_main_nav_tab_layout).visibility,
+        )
     }
 
     @Test
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isVisible and backButton not clicked`() {
-        Whitebox.setInternalState(fragment, "listFragment", mock(BookmarkPicturesFragment::class.java))
+        val picturesFragment = BookmarkPicturesFragment()
+        val picturesBinding = FragmentBookmarksPicturesBinding.inflate(LayoutInflater.from(activity))
+        val gridAdapter =
+            GridViewAdapter(
+                activity,
+                R.layout.layout_category_images,
+                mutableListOf(media),
+            )
+        picturesBinding.bookmarkedPicturesList.adapter = gridAdapter
+        Whitebox.setInternalState(picturesFragment, "binding", picturesBinding)
+        Whitebox.setInternalState(fragment, "listFragment", picturesFragment)
         whenever(mediaDetails.isVisible).thenReturn(true)
-        whenever(mediaDetails.removedItems).thenReturn(ArrayList(0))
-        Assert.assertEquals(fragment.backPressed(), false)
+        whenever(mediaDetails.removedItems).thenReturn(arrayListOf(0))
+        Assert.assertEquals(fragment.navigator.backPressed(), false)
+        Assert.assertEquals(0, gridAdapter.count)
+        verify(mediaDetails, times(2)).removedItems
     }
 
     @Test
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isNotVisible and backButton clicked`() {
         whenever(mediaDetails.isVisible).thenReturn(false)
-        Assert.assertEquals(fragment.backPressed(), false)
+        Assert.assertEquals(fragment.navigator.backPressed(), false)
+        Assert.assertEquals(
+            NavTab.CONTRIBUTIONS.code(),
+            activity
+                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.fragment_main_nav_tab_layout,
+                ).selectedItemId,
+        )
+        Assert.assertEquals(
+            View.VISIBLE,
+            activity.findViewById<View>(R.id.fragment_main_nav_tab_layout).visibility,
+        )
     }
 
     @Test
@@ -326,7 +351,13 @@ class BookmarkListRootFragmentUnitTest {
         val field: Field = BookmarkListRootFragment::class.java.getDeclaredField("mediaDetails")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.backPressed(), false)
+        Assert.assertEquals(fragment.navigator.backPressed(), false)
+        Assert.assertEquals(
+            NavTab.CONTRIBUTIONS.code(),
+            activity
+                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.fragment_main_nav_tab_layout,
+                ).selectedItemId,
+        )
     }
-
 }

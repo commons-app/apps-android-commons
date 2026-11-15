@@ -9,7 +9,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import java.util.HashMap
 
 /**
  * Array adapter for recent languages
@@ -17,22 +16,26 @@ import java.util.HashMap
 class RecentLanguagesAdapter constructor(
     context: Context,
     var recentLanguages: List<Language>,
-    private val selectedLanguages: HashMap<*, String>
+    private val selectedLanguages: MutableMap<Int, String>,
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
-
     /**
      * Selected language code in UploadMediaDetailAdapter
      * Used for marking selected ones
      */
     var selectedLangCode = ""
 
-    override fun isEnabled(position: Int) = recentLanguages[position].languageCode.let {
-        it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
-    }
+    override fun isEnabled(position: Int) =
+        recentLanguages[position].languageCode.let {
+            it.isNotEmpty() && !selectedLanguages.containsValue(it) && it != selectedLangCode
+        }
 
     override fun getCount() = recentLanguages.size
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
         val binding: RowItemLanguagesSpinnerBinding
         var rowView = convertView
 
@@ -55,7 +58,7 @@ class RecentLanguagesAdapter constructor(
             } else {
                 it.text =
                     "${StringUtils.capitalize(languageName)}" +
-                            " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
+                    " [${LangCodeUtils.fixLanguageCode(languageCode)}]"
             }
         }
         return rowView
@@ -64,14 +67,10 @@ class RecentLanguagesAdapter constructor(
     /**
      * Provides code of a language from recent languages for a specific position
      */
-    fun getLanguageCode(position: Int): String {
-        return recentLanguages[position].languageCode
-    }
+    fun getLanguageCode(position: Int): String = recentLanguages[position].languageCode
 
     /**
      * Provides name of a language from recent languages for a specific position
      */
-    fun getLanguageName(position: Int): String {
-        return recentLanguages[position].languageName
-    }
+    fun getLanguageName(position: Int): String = recentLanguages[position].languageName
 }

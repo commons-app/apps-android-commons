@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".upload.UploadProgressActivity">
+
+
+  <include
+    android:id="@+id/toolbarBinding"
+    layout="@layout/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/upload_progress_toolbar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/card_light_grey">
+
+      <com.google.android.material.tabs.TabLayout
+        android:id="@+id/upload_progress_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="?attr/tabBackground"
+        app:tabIndicatorColor="?attr/tabIndicatorColor"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="?attr/tabSelectedTextColor"
+        app:tabTextColor="?attr/tabTextColor" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <fr.free.nrw.commons.explore.ParentViewPager
+      android:id="@+id/upload_progress_view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@id/upload_progress_toolbar_layout"
+      android:background="?attr/mainBackground" />
+
+  </RelativeLayout>
+
+</LinearLayout>

@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -38,4 +40,35 @@ public class PlacesRepository {
         return localDataSource.fetchPlace(entityID);
     }
 
+    /**
+     * Retrieves a list of places within the geographical area specified by map's opposite corners.
+     *
+     * @param mapBottomLeft Bottom left corner of the map.
+     * @param mapTopRight Top right corner of the map.
+     * @return The list of saved places within the map's view.
+     */
+    public List<Place> fetchPlaces(final LatLng mapBottomLeft, final LatLng mapTopRight) {
+        return localDataSource.fetchPlaces(mapBottomLeft, mapTopRight);
+    }
+
+    /**
+     * Clears the Nearby cache on an IO thread.
+     *
+     * @return A Completable that completes once the cache has been successfully cleared.
+     */
+    public Completable clearCache() {
+        return localDataSource.clearCache()
+            .subscribeOn(Schedulers.io()); // Ensure it runs on IO thread
+    }
+
+    /**
+     * Removes the places that were cached before the given time, on an IO thread.
+     *
+     * @param cachedBefore Places with an older cachedAt time are removed.
+     * @return A Completable that completes once the old places have been removed.
+     */
+    public Completable removePlacesCachedBefore(final long cachedBefore) {
+        return localDataSource.removePlacesCachedBefore(cachedBefore)
+            .subscribeOn(Schedulers.io());
+    }
 }

@@ -10,6 +10,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ShadowActionBar
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.ActivityNotificationBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.utils.NetworkUtils
@@ -32,7 +33,6 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class, shadows = [ShadowActionBar::class])
 class NotificationActivityUnitTests {
-
     @Mock
     private lateinit var activity: NotificationActivity
 
@@ -53,7 +53,6 @@ class NotificationActivityUnitTests {
 
     @Before
     fun setUp() {
-
         MockitoAnnotations.initMocks(this)
 
         networkUtils = mock(NetworkUtils::class.java)
@@ -77,7 +76,6 @@ class NotificationActivityUnitTests {
             NotificationActivity::class.java.getDeclaredField("notificationMenuItem")
         notificationMenuItem.isAccessible = true
         notificationMenuItem.set(activity, menuItemWithId)
-
     }
 
     @Test
@@ -141,95 +139,61 @@ class NotificationActivityUnitTests {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetEmptyViewIsReadTrue() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, true)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setEmptyView"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setEmptyView(true)
+        Assert.assertEquals(activity.getString(R.string.no_read_notification), binding.noNotificationText.text)
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetEmptyViewIsReadFalse() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, false)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setEmptyView"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setEmptyView(false)
+        Assert.assertEquals(activity.getString(R.string.no_notification), binding.noNotificationText.text)
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetMenuItemTitleIsReadTrue() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, true)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setMenuItemTitle"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setMenuItemTitle(true, menuItemWithId)
+        Assert.assertEquals(activity.getString(R.string.menu_option_unread), menuItemWithId.title)
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetMenuItemTitleIsReadFalse() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, false)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setMenuItemTitle"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setMenuItemTitle(false, menuItemWithId)
+        Assert.assertEquals(activity.getString(R.string.menu_option_read), menuItemWithId.title)
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetPageTitleIsReadTrue() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, true)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setPageTitle"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setPageTitle(true)
+        Assert.assertEquals(activity.getString(R.string.read_notifications), activity.supportActionBar?.title)
     }
 
     @Test
-    @Throws(Exception::class)
     fun testSetPageTitleIsReadFalse() {
-        val isRead: Field =
-            NotificationActivity::class.java.getDeclaredField("isRead")
-        isRead.isAccessible = true
-        isRead.set(activity, false)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setPageTitle"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
+        val binding = ActivityNotificationBinding.inflate(activity.layoutInflater)
+        val labels = NotificationLabels(activity, binding)
+        labels.setPageTitle(false)
+        Assert.assertEquals(activity.getString(R.string.notifications), activity.supportActionBar?.title)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetItemsListNull() {
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setItems", List::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "setItems",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null)
     }
@@ -237,9 +201,11 @@ class NotificationActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSetItemsListNonNull() {
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "setItems", List::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "setItems",
+                List::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, notificationList)
     }
@@ -247,9 +213,11 @@ class NotificationActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHandleUrlNull() {
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "handleUrl", String::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "handleUrl",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, null)
     }
@@ -257,9 +225,11 @@ class NotificationActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testHandleUrlNonNull() {
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "handleUrl", String::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "handleUrl",
+                String::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, "string")
     }
@@ -271,9 +241,11 @@ class NotificationActivityUnitTests {
             NotificationActivity::class.java.getDeclaredField("mNotificationWorkerFragment")
         mNotificationWorkerFragment.isAccessible = true
         mNotificationWorkerFragment.set(activity, null)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "addNotifications", Boolean::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "addNotifications",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, true)
     }
@@ -285,9 +257,11 @@ class NotificationActivityUnitTests {
             NotificationActivity::class.java.getDeclaredField("mNotificationWorkerFragment")
         mNotificationWorkerFragment.isAccessible = true
         mNotificationWorkerFragment.set(activity, notificationWorkerFragment)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "addNotifications", Boolean::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "addNotifications",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, true)
     }
@@ -299,9 +273,10 @@ class NotificationActivityUnitTests {
             NotificationActivity::class.java.getDeclaredField("isRead")
         isRead.isAccessible = true
         isRead.set(activity, false)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "initListView"
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "initListView",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -313,9 +288,10 @@ class NotificationActivityUnitTests {
             NotificationActivity::class.java.getDeclaredField("isRead")
         isRead.isAccessible = true
         isRead.set(activity, true)
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "initListView"
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "initListView",
+            )
         method.isAccessible = true
         method.invoke(activity)
     }
@@ -323,12 +299,12 @@ class NotificationActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testRefreshNull() {
-        val method: Method = NotificationActivity::class.java.getDeclaredMethod(
-            "refresh", Boolean::class.java
-        )
+        val method: Method =
+            NotificationActivity::class.java.getDeclaredMethod(
+                "refresh",
+                Boolean::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, true)
     }
-
-
 }

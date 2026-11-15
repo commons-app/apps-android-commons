@@ -24,13 +24,11 @@ import org.mockito.Mockito.`when`
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.lang.reflect.Method
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ContributionsListFragmentUnitTests {
-
     private lateinit var scenario: FragmentScenario<ContributionsListFragment>
     private lateinit var fragment: ContributionsListFragment
 
@@ -43,17 +41,19 @@ class ContributionsListFragmentUnitTests {
     fun setUp() {
         OkHttpConnectionFactory.CLIENT = createTestClient()
 
-        scenario = launchFragmentInContainer(
-            initialState = Lifecycle.State.RESUMED,
-            themeResId = R.style.LightAppTheme
-        ) {
-            ContributionsListFragment().apply {
-                contributionsListPresenter = mock()
-                callback = mock()
-            }.also {
-                fragment = it
+        scenario =
+            launchFragmentInContainer(
+                initialState = Lifecycle.State.RESUMED,
+                themeResId = R.style.LightAppTheme,
+            ) {
+                ContributionsListFragment()
+                    .apply {
+                        contributionsListPresenter = mock()
+                        callback = mock()
+                    }.also {
+                        fragment = it
+                    }
             }
-        }
 
         scenario.onFragment {
             it.adapter = adapter
@@ -88,7 +88,7 @@ class ContributionsListFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.rvContributionsList = mock()
         fragment.scrollToTop()
-        verify(fragment.rvContributionsList).smoothScrollToPosition(0)
+        verify(fragment.rvContributionsList)?.smoothScrollToPosition(0)
     }
 
     @Test
@@ -98,7 +98,7 @@ class ContributionsListFragmentUnitTests {
         `when`(contribution.media).thenReturn(media)
         `when`(media.wikiCode).thenReturn("")
         `when`(contribution.wikidataPlace).thenReturn(wikidataPlace)
-        fragment.onConfirmClicked(contribution, true)
+        fragment.wikipediaHelper.onConfirmClicked(contribution, true)
     }
 
     @Test
@@ -129,26 +129,7 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testShowAddImageToWikipediaInstructions() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "showAddImageToWikipediaInstructions",
-            Contribution::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testResumeUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.resumeUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPauseUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.pauseUpload(contribution)
+        fragment.wikipediaHelper.showAddImageToWikipediaInstructions(contribution)
     }
 
     @Test
@@ -163,20 +144,6 @@ class ContributionsListFragmentUnitTests {
     fun testOpenMediaDetail() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.openMediaDetail(0, true)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.deleteUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testRetryUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.retryUpload(contribution)
     }
 
     @Test
@@ -221,12 +188,7 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).hide()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, true)
+        fragment.fabHelper.animateFAB(true)
     }
 
     @Test
@@ -236,12 +198,7 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, true)
+        fragment.fabHelper.animateFAB(true)
     }
 
     @Test
@@ -251,34 +208,21 @@ class ContributionsListFragmentUnitTests {
         scenario.onFragment {
             it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
         }
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "animateFAB",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, false)
+        fragment.fabHelper.animateFAB(false)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetListeners() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "setListeners"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.fabHelper.setListeners()
     }
 
     @Test
     @Throws(Exception::class)
     fun testInitializeAnimations() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
-            "initializeAnimations"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.fabHelper.initializeAnimations()
     }
 
     @Test
@@ -288,5 +232,21 @@ class ContributionsListFragmentUnitTests {
         val newConfig: Configuration = mock()
         newConfig.orientation = Configuration.ORIENTATION_LANDSCAPE
         fragment.onConfigurationChanged(newConfig)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testLaunchCustomSelector() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.controller = mock()
+        fragment.fabHelper.launchCustomSelector()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSyncFabOrientation() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.fabHelper.syncFabOrientation(Configuration.ORIENTATION_LANDSCAPE)
+        fragment.fabHelper.syncFabOrientation(Configuration.ORIENTATION_PORTRAIT)
     }
 }

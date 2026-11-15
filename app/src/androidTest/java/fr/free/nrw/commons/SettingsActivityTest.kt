@@ -23,7 +23,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class SettingsActivityTest {
-
     private lateinit var defaultKvStore: JsonKvStore
 
     @get:Rule
@@ -44,22 +43,24 @@ class SettingsActivityTest {
     fun useAuthorNameTogglesOn() {
         // Turn on "Use author name" preference if currently off
         if (!defaultKvStore.getBoolean("useAuthorName", false)) {
-            Espresso.onView(
-                allOf(
-                    withId(R.id.recycler_view),
-                    childAtPosition(withId(android.R.id.list_container), 0)
+            Espresso
+                .onView(
+                    allOf(
+                        withId(R.id.recycler_view),
+                        childAtPosition(withId(android.R.id.list_container), 0),
+                    ),
+                ).perform(
+                    RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(6, click()),
                 )
-            ).perform(
-                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(6, click())
-            )
         }
         // Check authorName preference is enabled
-        Espresso.onView(
-            allOf(
-                withId(R.id.recycler_view),
-                childAtPosition(withId(android.R.id.list_container), 0)
-            )
-        ).check(matches(isEnabled()))
+        Espresso
+            .onView(
+                allOf(
+                    withId(R.id.recycler_view),
+                    childAtPosition(withId(android.R.id.list_container), 0),
+                ),
+            ).check(matches(isEnabled()))
     }
 
     @Test

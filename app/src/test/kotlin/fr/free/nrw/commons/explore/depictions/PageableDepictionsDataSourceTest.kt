@@ -8,7 +8,6 @@ import org.junit.Assert
 import org.junit.Test
 
 class PageableDepictionsDataSourceTest {
-
     @Test
     fun `loadFunction loads depictions`() {
         val depictsClient: DepictsClient = mock()
@@ -18,8 +17,7 @@ class PageableDepictionsDataSourceTest {
         pageableDepictionsDataSource.onQueryUpdated("test")
         Assert.assertEquals(
             pageableDepictionsDataSource.loadFunction.invoke(0, 1),
-            emptyList<String>()
+            emptyList<String>(),
         )
     }
 }
-

@@ -11,8 +11,8 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
@@ -23,6 +23,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -36,7 +37,6 @@ import java.lang.reflect.Field
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ExploreListRootFragmentUnitTest {
-
     private lateinit var fragment: ExploreListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
@@ -82,7 +82,6 @@ class ExploreListRootFragmentUnitTest {
         Whitebox.setInternalState(fragment, "mParentFragment", exploreFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
-
 
         `when`(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)
         `when`(childFragmentTransaction.hide(any())).thenReturn(childFragmentTransaction)
@@ -191,8 +190,8 @@ class ExploreListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
-        `when`(listFragment.totalMediaCount).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        `when`(listFragment.getTotalMediaCount()).thenReturn(1)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 1)
     }
 
     @Test
@@ -201,7 +200,7 @@ class ExploreListRootFragmentUnitTest {
         val field: Field = ExploreListRootFragment::class.java.getDeclaredField("listFragment")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        Assert.assertEquals(fragment.getTotalMediaCount(), 0)
     }
 
     @Test
@@ -230,6 +229,31 @@ class ExploreListRootFragmentUnitTest {
         verify(mediaDetails).notifyDataSetChanged()
     }
 
+    /**
+     * Keeps a visible content list in place when a nomination callback arrives without an open
+     * media-detail screen to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithVisibleContent() {
+        `when`(listFragment.isVisible).thenReturn(true)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
+    }
+
+    /**
+     * Avoids creating a pager or fragment transaction when there are no media details to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithoutDetails() {
+        Whitebox.setInternalState(fragment, "mediaDetails", null as MediaDetailPagerFragment?)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
+    }
+
     @Test
     @Throws(Exception::class)
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isVisible_backButtonClicked`() {
@@ -249,5 +273,4 @@ class ExploreListRootFragmentUnitTest {
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isNotVisible`() {
         Assert.assertEquals(fragment.backPressed(), false)
     }
-
 }

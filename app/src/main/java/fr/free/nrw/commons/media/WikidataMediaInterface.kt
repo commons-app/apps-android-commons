@@ -17,13 +17,14 @@ interface WikidataMediaInterface {
      * @param sroffset number of depictions already fetched,
      * this is useful in implementing pagination
      * @return Single<MwQueryResponse>
-    </MwQueryResponse> */
+     </MwQueryResponse> */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2" +  //Basic parameters
-        "&generator=search&gsrnamespace=6$MEDIA_PARAMS"         //Search parameters
+        "w/api.php?action=query&format=json&formatversion=2" + // Basic parameters
+            "&generator=search&gsrnamespace=6$MEDIA_PARAMS", // Search parameters
     )
     fun fetchImagesForDepictedItem(
         @Query("gsrsearch") query: String?,
-        @Query("gsrlimit") srlimit: String?, @Query("gsroffset") sroffset: String?
+        @Query("gsrlimit") srlimit: String?,
+        @Query("gsroffset") sroffset: String?,
     ): Single<MwQueryResponse>
 }

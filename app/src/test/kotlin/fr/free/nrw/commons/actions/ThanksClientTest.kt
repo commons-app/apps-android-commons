@@ -3,6 +3,10 @@ package fr.free.nrw.commons.actions
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import io.mockk.every
+import io.mockk.mockkObject
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,13 +18,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 @RunWith(RobolectricTestRunner::class)
 @PrepareForTest(CommonsApplication::class)
 class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
+
     @Mock
     private lateinit var service: ThanksInterface
 
@@ -28,7 +32,6 @@ class ThanksClientTest {
     private lateinit var commonsApplication: CommonsApplication
 
     private lateinit var thanksClient: ThanksClient
-    private lateinit var mockedApplication: MockedStatic<CommonsApplication>
 
     /**
      * initial setup, test environment
@@ -37,8 +40,8 @@ class ThanksClientTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        mockedApplication = Mockito.mockStatic(CommonsApplication::class.java)
-        `when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
+        mockkObject(CommonsApplication)
+        every { CommonsApplication.instance }.returns(commonsApplication)
         thanksClient = ThanksClient(csrfTokenClient, service)
     }
 
@@ -51,5 +54,26 @@ class ThanksClientTest {
         `when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))
+    }
+
+    /**
+     * Test that an invalid login token is reported to the subscriber
+     */
+    @Test
+    fun testThanksPropagatesInvalidLoginToken() {
+        val invalidLoginToken = InvalidLoginTokenException("invalid")
+        `when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
+
+        thanksClient.thank(1L).test().assertError(invalidLoginToken)
+    }
+
+    /**
+     * Test that any other failure is reported as an unsuccessful thanks
+     */
+    @Test
+    fun testThanksReturnsFalseOnOtherFailure() {
+        `when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+
+        thanksClient.thank(1L).test().assertValue(false)
     }
 }

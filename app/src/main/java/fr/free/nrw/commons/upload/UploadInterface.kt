@@ -3,15 +3,19 @@ package fr.free.nrw.commons.upload
 import com.google.gson.JsonObject
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.RequestBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 import okhttp3.MultipartBody.Part as MultipartBodyPart
 
+@Suppress("LongParameterList")
 interface UploadInterface {
     @Multipart
     @POST(WikidataConstants.MW_API_PREFIX + "action=upload&stash=1&ignorewarnings=1")
@@ -21,8 +25,8 @@ interface UploadInterface {
         @Part("offset") offset: RequestBody?,
         @Part("filekey") fileKey: RequestBody?,
         @Part("token") token: RequestBody?,
-        @Part filePart: MultipartBodyPart
-    ): Observable<UploadResponse>
+        @Part filePart: MultipartBodyPart,
+    ): Observable<JsonObject>
 
     @Headers("Cache-Control: no-cache")
     @POST(WikidataConstants.MW_API_PREFIX + "action=upload&ignorewarnings=1")
@@ -32,6 +36,16 @@ interface UploadInterface {
         @Field("text") text: String,
         @Field("comment") comment: String,
         @Field("filename") filename: String,
-        @Field("filekey") filekey: String
+        @Field("filekey") filekey: String,
     ): Observable<JsonObject>
+
+    /**
+     * Checks a title against the title blacklist of Commons, as if the user was creating it.
+     *
+     * @param title the title to be checked, e.g. File:Photo.jpg
+     */
+    @GET("w/api.php?format=json&formatversion=2&action=titleblacklist&tbaction=create&tbnooverride=1")
+    fun checkTitleBlacklist(
+        @Query("tbtitle") title: String,
+    ): Single<TitleBlacklistResponse>
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:orientation="vertical"
+  tools:context=".upload.PendingUploadsFragment">
+
+  <TextView
+    android:id="@+id/nopendingTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="You do not have any pending Uploads!"
+    android:visibility="gone" />
+
+  <LinearLayout
+    android:id="@+id/pendingUplaodsLl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:gravity="bottom"
+      android:orientation="horizontal">
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Progress:"
+        android:textSize="22sp" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/progress_text_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="right"
+          android:text=""
+          android:textSize="21sp" />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/pending_uploads_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginHorizontal="10dp" />
+
+  </LinearLayout>
+
+
+</LinearLayout>

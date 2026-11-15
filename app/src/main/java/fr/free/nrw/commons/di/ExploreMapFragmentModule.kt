@@ -6,8 +6,7 @@ import dagger.Provides
 import fr.free.nrw.commons.explore.map.ExploreMapFragment
 
 @Module
-class ExploreMapFragmentModule{
-
+class ExploreMapFragmentModule {
     @Provides
     fun ExploreMapFragment.providesActivity(): Activity = activity!!
 }

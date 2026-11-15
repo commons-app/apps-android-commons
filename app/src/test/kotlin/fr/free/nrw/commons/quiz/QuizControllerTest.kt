@@ -5,13 +5,11 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.any
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
-
 class QuizControllerTest {
-
     @Mock
     private lateinit var quizController: QuizController
 
@@ -35,5 +33,4 @@ class QuizControllerTest {
     fun testGetQuiz() {
         assertNotNull(quizController.getQuiz())
     }
-
 }

@@ -26,7 +26,6 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class CategoryEditHelperUnitTests {
-
     private lateinit var context: Context
     private lateinit var helper: CategoryEditHelper
 
@@ -46,18 +45,25 @@ class CategoryEditHelperUnitTests {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        helper = CategoryEditHelper(notificationHelper, pageEditClient, viewUtilWrapper,
-            "")
-        Mockito.`when`(media.filename).thenReturn("File:Example.jpg")
-        Mockito.`when`(pageEditClient.getCurrentWikiText(ArgumentMatchers.anyString()))
-            .thenReturn(Single.just(""))
-        Mockito.`when`(
-            pageEditClient.edit(
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString()
+        helper =
+            CategoryEditHelper(
+                notificationHelper,
+                pageEditClient,
+                viewUtilWrapper,
+                "",
             )
-        ).thenReturn(Observable.just(true))
+        Mockito.`when`(media.filename).thenReturn("File:Example.jpg")
+        Mockito
+            .`when`(pageEditClient.getCurrentWikiText(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(""))
+        Mockito
+            .`when`(
+                pageEditClient.edit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(true))
     }
 
     @Test
@@ -72,19 +78,23 @@ class CategoryEditHelperUnitTests {
         helper.makeCategoryEdit(context, media, listOf("Test"), "[[Category:Test]]")
         Mockito.verify(viewUtilWrapper, Mockito.times(1)).showShortToast(
             context,
-            context.getString(R.string.category_edit_helper_make_edit_toast)
+            context.getString(R.string.category_edit_helper_make_edit_toast),
         )
         Mockito.verify(pageEditClient, Mockito.times(1)).edit(
             ArgumentMatchers.anyString(),
             ArgumentMatchers.anyString(),
-            ArgumentMatchers.anyString()
+            ArgumentMatchers.anyString(),
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testMakeUnCategoryEdit() {
-        helper.makeCategoryEdit(context, media, listOf("Test"), "== {{int:filedesc}} ==\n" +
+        helper.makeCategoryEdit(
+            context,
+            media,
+            listOf("Test"),
+            "== {{int:filedesc}} ==\n" +
                 "{{Information\n" +
                 "|description=\n" +
                 "|source={{own}}\n" +
@@ -97,15 +107,16 @@ class CategoryEditHelperUnitTests {
                 "{{self|cc-zero}}\n" +
                 "\n" +
                 "{{Uploaded from Mobile|platform=Android|version=3.1.1-debug-master~e7a9ba9ad}}\n" +
-                "{{Uncategorized|year=2022|month=April|day=23}}")
+                "{{Uncategorized|year=2022|month=April|day=23}}",
+        )
         Mockito.verify(viewUtilWrapper, Mockito.times(1)).showShortToast(
             context,
-            context.getString(R.string.category_edit_helper_make_edit_toast)
+            context.getString(R.string.category_edit_helper_make_edit_toast),
         )
         Mockito.verify(pageEditClient, Mockito.times(1)).edit(
             ArgumentMatchers.anyString(),
             ArgumentMatchers.anyString(),
-            ArgumentMatchers.anyString()
+            ArgumentMatchers.anyString(),
         )
     }
 }

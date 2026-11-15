@@ -1,24 +1,40 @@
+/**
+ * Suppressed TooGenericExceptionCaught because swipe callbacks are supplied by subclasses and may
+ * throw, and the gesture listener should remain alive.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context
 import android.util.DisplayMetrics
-import android.view.*
+import android.view.Display
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
+import timber.log.Timber
 import kotlin.math.abs
+
+private const val SWIPE_THRESHOLD_SCREEN_DIVISOR = 3
+private const val SWIPE_VELOCITY_THRESHOLD = 1000
 
 /**
  * Class for detecting swipe gestures
  */
-open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
-
+open class OnSwipeTouchListener(
+    context: Context?,
+) : View.OnTouchListener {
     private val gestureDetector: GestureDetector
 
-    private val SWIPE_THRESHOLD_HEIGHT = (getScreenResolution(context!!)).second / 3
-    private val SWIPE_THRESHOLD_WIDTH = (getScreenResolution(context!!)).first / 3
-    private val SWIPE_VELOCITY_THRESHOLD = 1000
+    private val swipeThresholdHeight = (getScreenResolution(context!!)).second / SWIPE_THRESHOLD_SCREEN_DIVISOR
+    private val swipeThresholdWidth = (getScreenResolution(context!!)).first / SWIPE_THRESHOLD_SCREEN_DIVISOR
+    private val swipeVelocityThreshold = SWIPE_VELOCITY_THRESHOLD
 
-    override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
-        return gestureDetector.onTouchEvent(motionEvent)
-    }
+    override fun onTouch(
+        view: View?,
+        motionEvent: MotionEvent,
+    ): Boolean = gestureDetector.onTouchEvent(motionEvent)
 
     fun getScreenResolution(context: Context): Pair<Int, Int> {
         val wm: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -31,26 +47,25 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
     }
 
     inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-
-        override fun onDown(e: MotionEvent): Boolean {
-            return true
-        }
+        override fun onDown(e: MotionEvent): Boolean = false
 
         /**
          * Detects the gestures
          */
         override fun onFling(
-            event1: MotionEvent,
+            event1: MotionEvent?,
             event2: MotionEvent,
             velocityX: Float,
-            velocityY: Float
+            velocityY: Float,
         ): Boolean {
             try {
-                val diffY: Float = event2.y - event1.y
-                val diffX: Float = event2.x - event1.x
+                val diffY: Float = event2.y - (event1?.y ?: event2.y)
+                val diffX: Float = event2.x - (event1?.x ?: event2.x)
                 if (abs(diffX) > abs(diffY)) {
-                    if (abs(diffX) > SWIPE_THRESHOLD_WIDTH && abs(velocityX) >
-                        SWIPE_VELOCITY_THRESHOLD) {
+                    if (abs(diffX) > swipeThresholdWidth &&
+                        abs(velocityX) >
+                        swipeVelocityThreshold
+                    ) {
                         if (diffX > 0) {
                             onSwipeRight()
                         } else {
@@ -58,8 +73,10 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
                         }
                     }
                 } else {
-                    if (abs(diffY) > SWIPE_THRESHOLD_HEIGHT && abs(velocityY) >
-                        SWIPE_VELOCITY_THRESHOLD) {
+                    if (abs(diffY) > swipeThresholdHeight &&
+                        abs(velocityY) >
+                        swipeVelocityThreshold
+                    ) {
                         if (diffY > 0) {
                             onSwipeDown()
                         } else {
@@ -68,7 +85,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
                     }
                 }
             } catch (exception: Exception) {
-                exception.printStackTrace()
+                Timber.e(exception, "Could not process fling gesture")
             }
             return false
         }

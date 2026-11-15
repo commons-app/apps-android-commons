@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.upload.UploadItem
@@ -28,10 +27,10 @@ data class Contribution constructor(
     var dateCreatedSource: String? = null,
     var wikidataPlace: WikidataPlace? = null,
     var chunkInfo: ChunkInfo? = null,
+    var errorInfo: String? = null,
     /**
      * @return array list of entityids for the depictions
-     */
-    /**
+     *
      * Each depiction loaded in depictions activity is associated with a wikidata entity id, this Id
      * is in turn used to upload depictions to wikibase
      */
@@ -42,43 +41,47 @@ data class Contribution constructor(
     var dateCreated: Date? = null,
     var dateCreatedString: String? = null,
     var dateModified: Date? = null,
-    var hasInvalidLocation : Int =  0,
+    var dateUploadStarted: Date? = null,
+    var hasInvalidLocation: Int = 0,
     var contentUri: Uri? = null,
-    var countryCode : String? = null,
-    var imageSHA1 : String? = null,
+    var countryCode: String? = null,
+    var imageSHA1: String? = null,
     /**
      * Number of times a contribution has been retried after a failure
      */
-    var retries: Int = 0
+    var retries: Int = 0,
+    /**
+     * Filename the file was published under on Commons, set once the file is uploaded and kept
+     * until captions and depicts are saved too
+     */
+    var uploadedFilename: String? = null,
 ) : Parcelable {
-
-    fun completeWith(media: Media): Contribution {
-        return copy(pageId = media.pageId, media = media, state = STATE_COMPLETED)
-    }
+    fun completeWith(media: Media): Contribution =
+        copy(pageId = media.pageId, media = media, state = STATE_COMPLETED, uploadedFilename = null)
 
     constructor(
         item: UploadItem,
         sessionManager: SessionManager,
         depictedItems: List<DepictedItem>,
         categories: List<String>,
-        imageSHA1: String
+        imageSHA1: String,
     ) : this(
         Media(
             formatCaptions(item.uploadMediaDetails),
             categories,
-            item.fileName,
+            item.filename,
             formatDescriptions(item.uploadMediaDetails),
             sessionManager.userName,
-            sessionManager.userName
+            sessionManager.userName,
         ),
         localUri = item.mediaUri,
-        decimalCoords = item.gpsCoords.decimalCoords,
+        decimalCoords = item.gpsCoords?.decimalCoords,
         dateCreatedSource = "",
         depictedItems = depictedItems,
         wikidataPlace = from(item.place),
         contentUri = item.contentUri,
         dateCreatedString = item.fileCreatedDateString,
-        imageSHA1 = imageSHA1
+        imageSHA1 = imageSHA1,
     )
 
     /**
@@ -89,9 +92,7 @@ data class Contribution constructor(
         this.hasInvalidLocation = if (hasInvalidLocation) 1 else 0
     }
 
-    fun hasInvalidLocation(): Boolean {
-        return hasInvalidLocation == 1
-    }
+    fun hasInvalidLocation(): Boolean = hasInvalidLocation == 1
 
     companion object {
         const val STATE_COMPLETED = -1
@@ -99,14 +100,26 @@ data class Contribution constructor(
         const val STATE_QUEUED = 2
         const val STATE_IN_PROGRESS = 3
         const val STATE_PAUSED = 4
-        const val STATE_QUEUED_LIMITED_CONNECTION_MODE=5
+
+        /**
+         * Commons deleted this file. The row stays in the contributions list so it can be shown
+         * differently from a normal upload.
+         */
+        const val STATE_DELETED = 5
+
+        /**
+         * The file is on Commons, but its captions, depicts or Nearby picture are not saved yet.
+         * It waits in the pending uploads, and a retry saves only those.
+         */
+        const val STATE_METADATA_PENDING = 6
 
         /**
          * Formatting captions to the Wikibase format for sending labels
          * @param uploadMediaDetails list of media Details
          */
         fun formatCaptions(uploadMediaDetails: List<UploadMediaDetail>) =
-            uploadMediaDetails.associate { it.languageCode!! to it.captionText }
+            uploadMediaDetails
+                .associate { it.languageCode!! to it.captionText }
                 .filter { it.value.isNotBlank() }
 
         /**
@@ -116,22 +129,15 @@ data class Contribution constructor(
          * @return a string with the pattern of {{en|1=descriptionText}}
          */
         fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
-            descriptions.filter { it.descriptionText.isNotEmpty() }
+            descriptions
+                .filter { !it.descriptionText.isNullOrEmpty() }
                 .joinToString(separator = "") { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 
-    val fileKey : String? get() = chunkInfo?.uploadResult?.filekey
+    val fileKey: String? get() = chunkInfo?.uploadResult?.filekey
     val localUriPath: File? get() = localUri?.path?.let { File(it) }
 
-    fun isCompleted(): Boolean {
-        return chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
-    }
+    fun isCompleted(): Boolean = chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
 
-    fun isPaused(): Boolean {
-        return CommonsApplication.pauseUploads[pageId] ?: false
-    }
-
-    fun unpause() {
-        CommonsApplication.pauseUploads[pageId] = false
-    }
+    fun dateUploadStartedInMillis(): Long = dateUploadStarted!!.time
 }

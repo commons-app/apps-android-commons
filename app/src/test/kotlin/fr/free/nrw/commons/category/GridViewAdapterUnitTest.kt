@@ -26,7 +26,6 @@ import java.lang.reflect.Method
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class GridViewAdapterUnitTest {
-
     private lateinit var gridViewAdapter: GridViewAdapter
     private lateinit var activity: CategoryDetailsActivity
     private lateinit var context: Context
@@ -39,7 +38,7 @@ class GridViewAdapterUnitTest {
     private lateinit var parent: ViewGroup
 
     @Mock
-    private lateinit var images: List<Media>
+    private lateinit var images: MutableList<Media>
 
     @Mock
     private lateinit var textView: TextView
@@ -47,9 +46,7 @@ class GridViewAdapterUnitTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-
         MockitoAnnotations.openMocks(this)
-
 
         context = ApplicationProvider.getApplicationContext()
 
@@ -59,8 +56,10 @@ class GridViewAdapterUnitTest {
 
         activity = Robolectric.buildActivity(CategoryDetailsActivity::class.java).get()
 
-        convertView = LayoutInflater.from(activity)
-            .inflate(R.layout.layout_category_images, null) as View
+        convertView =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.layout_category_images, null) as View
 
         gridViewAdapter = GridViewAdapter(context, 0, images)
     }
@@ -83,20 +82,20 @@ class GridViewAdapterUnitTest {
 
     @Test
     fun testContainsAllDataEmpty() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf())
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf())
         Assert.assertEquals(gridViewAdapter.containsAll(images), false)
     }
 
     @Test
     fun testContainsAll() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         `when`(media1.filename).thenReturn("")
         Assert.assertEquals(gridViewAdapter.containsAll(listOf(media1)), true)
     }
 
     @Test
     fun testGetItem() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         Assert.assertEquals(gridViewAdapter.getItem(0), media1)
     }
 
@@ -108,7 +107,7 @@ class GridViewAdapterUnitTest {
 
     @Test
     fun testGetView() {
-        gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
+        gridViewAdapter = GridViewAdapter(context, 0, mutableListOf(media1))
         `when`(media1.mostRelevantCaption).thenReturn("")
         Assert.assertEquals(gridViewAdapter.getView(0, convertView, parent), convertView)
     }
@@ -116,11 +115,13 @@ class GridViewAdapterUnitTest {
     @Test
     fun testSetUploaderView() {
         `when`(media1.author).thenReturn("author")
-        val method: Method = GridViewAdapter::class.java.getDeclaredMethod(
-            "setUploaderView", Media::class.java, TextView::class.java
-        )
+        val method: Method =
+            GridViewAdapter::class.java.getDeclaredMethod(
+                "setUploaderView",
+                Media::class.java,
+                TextView::class.java,
+            )
         method.isAccessible = true
         method.invoke(gridViewAdapter, media1, textView)
     }
-
 }

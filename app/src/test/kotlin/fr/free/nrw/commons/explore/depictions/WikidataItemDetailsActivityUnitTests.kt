@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
@@ -35,7 +31,6 @@ import org.robolectric.fakes.RoboMenuItem
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class WikidataItemDetailsActivityUnitTests {
-
     private lateinit var activity: WikidataItemDetailsActivity
 
     @Mock
@@ -53,32 +48,31 @@ class WikidataItemDetailsActivityUnitTests {
     @Mock
     private lateinit var wikidataItem: DepictedItem
 
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
-        val intent = Intent(
-            ApplicationProvider.getApplicationContext(),
-            WikidataItemDetailsActivity::class.java
-        )
+        val intent =
+            Intent(
+                ApplicationProvider.getApplicationContext(),
+                WikidataItemDetailsActivity::class.java,
+            )
         intent.putExtra("wikidataItemName", "depictionName")
         intent.putExtra("entityId", 0)
         activity =
-            Robolectric.buildActivity(WikidataItemDetailsActivity::class.java, intent).create()
+            Robolectric
+                .buildActivity(WikidataItemDetailsActivity::class.java, intent)
+                .create()
                 .get()
         Whitebox.setInternalState(activity, "mediaDetailPagerFragment", mediaDetailPagerFragment)
         Whitebox.setInternalState(
             activity,
             "depictionImagesListFragment",
-            depictionImagesListFragment
+            depictionImagesListFragment,
         )
         Whitebox.setInternalState(activity, "supportFragmentManager", supportFragmentManager)
 
-
         Whitebox.setInternalState(activity, "wikidataItem", wikidataItem)
-
-
     }
 
     @Test
@@ -116,7 +110,7 @@ class WikidataItemDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
-        activity.totalMediaCount
+        activity.getTotalMediaCount()
     }
 
     @Test
@@ -142,7 +136,7 @@ class WikidataItemDetailsActivityUnitTests {
     fun testOnOptionsItemSelectedCaseOne() {
         Assert.assertEquals(
             activity.onOptionsItemSelected(RoboMenuItem(R.id.browser_actions_menu_items)),
-            true
+            true,
         )
     }
 
@@ -170,4 +164,37 @@ class WikidataItemDetailsActivityUnitTests {
         activity.onMediaClicked(0)
     }
 
+    @Test
+    fun testItemTabsPassEntityToEveryFragment() {
+        activity.intent = Intent().putExtra("wikidataItemName", "Bird").putExtra("entityId", "Q5113")
+        val binding = ActivityWikidataItemDetailsBinding.inflate(activity.layoutInflater)
+        val adapter = ViewPagerAdapter(activity, activity.supportFragmentManager)
+        val tabs = WikidataItemDetailsTabs(activity, binding, adapter)
+
+        val mediaFragment = tabs.setTabs()
+        tabs.setPageTitle()
+
+        Assert.assertEquals(3, adapter.count)
+        Assert.assertSame(mediaFragment, adapter.getItem(0))
+        for (index in 0 until adapter.count) {
+            Assert.assertEquals("Bird", adapter.getItem(index).arguments?.getString("wikidataItemName"))
+            Assert.assertEquals("Q5113", adapter.getItem(index).arguments?.getString("entityId"))
+        }
+        Assert.assertEquals(2, binding.viewPager.offscreenPageLimit)
+        Assert.assertEquals("Bird", activity.title)
+    }
+
+    @Test
+    fun testItemTabsWithoutNameLeaveArgumentsUnset() {
+        activity.intent = Intent().putExtra("entityId", "Q5113")
+        val binding = ActivityWikidataItemDetailsBinding.inflate(activity.layoutInflater)
+        val adapter = ViewPagerAdapter(activity, activity.supportFragmentManager)
+
+        WikidataItemDetailsTabs(activity, binding, adapter).setTabs()
+
+        Assert.assertEquals(3, adapter.count)
+        for (index in 0 until adapter.count) {
+            Assert.assertNull(adapter.getItem(index).arguments)
+        }
+    }
 }

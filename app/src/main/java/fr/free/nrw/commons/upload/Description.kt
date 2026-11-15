@@ -1,34 +1,37 @@
 package fr.free.nrw.commons.upload
 
+import java.util.Locale
+
 /**
  * Holds a description of an item being uploaded by [UploadActivity]
  */
 class Description {
     /**
-     * @return The language code ie. "en" or "fr"
-     */
-    /**
-     * @param languageCode The language code ie. "en" or "fr"
+     * The language code, e.g., "en" or "fr".
+     * @property languageCode The language code.
      */
     var languageCode: String? = null
-    var descriptionText: String? = null
+
     /**
-     * @return the index of the  language selected in a spinner with [SpinnerLanguagesAdapter]
+     * The description text for the item being uploaded.
+     * @property descriptionText The description text.
      */
+    var descriptionText: String? = null
+
     /**
-     * @param selectedLanguageIndex the index of the language selected in a spinner with [SpinnerLanguagesAdapter]
+     * The index of the language selected in a spinner with [SpinnerLanguagesAdapter].
+     * @property selectedLanguageIndex The index of the selected language.
      */
     var selectedLanguageIndex = -1
+
     /**
-     * returns if the description was added manually (by the user, or we have added it programaticallly)
-     * @return
-     */
-    /**
-     * sets to true if the description was manually added by the user
-     * @param manuallyAdded
+     * Indicates if the description was added manually (by the user or programmatically).
      */
     var isManuallyAdded = false
 
+    /**
+     * Returns true if the description text is null or empty.
+     */
     val isEmpty: Boolean
         get() = descriptionText == null || descriptionText!!.isEmpty()
 
@@ -44,8 +47,13 @@ class Description {
             val descListString = StringBuilder()
             for (description in descriptions) {
                 if (!description.isEmpty) {
-                    val individualDescription = String.format("{{%s|1=%s}}", description.languageCode,
-                            description.descriptionText)
+                    val individualDescription =
+                        String.format(
+                            Locale.ROOT,
+                            "{{%s|1=%s}}",
+                            description.languageCode,
+                            description.descriptionText,
+                        )
                     descListString.append(individualDescription)
                 }
             }

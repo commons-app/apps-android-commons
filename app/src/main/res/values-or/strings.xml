@@ -4,7 +4,10 @@
 * Psubhashish
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</item>
+    <item quantity="other">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</item>
+  </plurals>
   <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
   <string name="menu_settings">ସଂରଚନା</string>
   <string name="username">ସଭ୍ୟ ନାମ</string>

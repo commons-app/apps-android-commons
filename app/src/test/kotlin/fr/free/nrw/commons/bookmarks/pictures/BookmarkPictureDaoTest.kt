@@ -4,29 +4,45 @@ import android.content.ContentProviderClient
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.MatrixCursor
-import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.os.RemoteException
-import com.nhaarman.mockitokotlin2.*
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
+import com.nhaarman.mockitokotlin2.isA
+import com.nhaarman.mockitokotlin2.isNull
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.models.Bookmark
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
-import org.junit.Assert.*
+import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.Companion.BASE_URI
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_CREATOR
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.COLUMN_MEDIA_NAME
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.CREATE_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.DROP_TABLE_STATEMENT
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onCreate
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onDelete
+import fr.free.nrw.commons.bookmarks.pictures.BookmarksTable.onUpdate
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookmarkPictureDaoTest {
-
     private val columns = arrayOf(COLUMN_MEDIA_NAME, COLUMN_CREATOR)
     private val client: ContentProviderClient = mock()
-    private val database: SQLiteDatabase = mock()
+    private val database: SupportSQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
 
     private lateinit var testObject: BookmarkPicturesDao
@@ -68,28 +84,27 @@ class BookmarkPictureDaoTest {
     fun getAllBookmarks() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(14))
 
-        var result = testObject.allBookmarks
+        var result = testObject.getAllBookmarks()
 
-        assertEquals(14,(result.size))
-
+        assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getAllBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
-        testObject.allBookmarks
+        testObject.getAllBookmarks()
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertTrue(testObject.getAllBookmarks().isEmpty())
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertTrue(testObject.getAllBookmarks().isEmpty())
     }
 
     @Test
@@ -98,11 +113,10 @@ class BookmarkPictureDaoTest {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
-        testObject.allBookmarks
+        testObject.getAllBookmarks()
 
         verify(mockCursor).close()
     }
-
 
     @Test
     fun updateNewBookmark() {
@@ -133,7 +147,7 @@ class BookmarkPictureDaoTest {
         assertTrue(testObject.findBookmark(exampleBookmark))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.findBookmark(exampleBookmark)
@@ -210,9 +224,10 @@ class BookmarkPictureDaoTest {
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-        for (i in 0 until rowCount) {
-            addRow(listOf("mediaName", "creatorName"))
+    private fun createCursor(rowCount: Int) =
+        MatrixCursor(columns, rowCount).apply {
+            repeat(rowCount) {
+                addRow(listOf("mediaName", "creatorName"))
+            }
         }
-    }
 }

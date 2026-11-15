@@ -10,5 +10,5 @@ import com.google.gson.annotations.SerializedName
 data class WikiBaseEntityValue(
     @SerializedName("entity-type") val entityType: String,
     val id: String,
-    val numericId: Long
+    val numericId: Long,
 )

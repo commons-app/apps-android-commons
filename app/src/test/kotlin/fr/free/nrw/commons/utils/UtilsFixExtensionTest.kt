@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.utils
 
-import fr.free.nrw.commons.Utils.fixExtension
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class UtilsFixExtensionTest {
-
     @Test
     fun jpegResultsInJpg() {
         assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", "jpeg"))

@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.notification
 
 import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
-import io.reactivex.Observable
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -11,13 +11,18 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface NotificationInterface {
+    @Headers("Cache-Control: no-cache")
+    @GET(MW_API_PREFIX + "action=query&meta=notifications&notprop=count")
+    fun getUnreadNotificationCount(
+        @Query("notwikis") wikiList: String?,
+    ): Observable<MwQueryResponse?>
 
     @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=notifications&notformat=model&notlimit=max")
     fun getAllNotifications(
         @Query("notwikis") wikiList: String?,
         @Query("notfilter") filter: String?,
-        @Query("notcontinue") continueStr: String?
+        @Query("notcontinue") continueStr: String?,
     ): Observable<MwQueryResponse?>
 
     @FormUrlEncoded
@@ -26,6 +31,7 @@ interface NotificationInterface {
     fun markRead(
         @Field("token") token: String,
         @Field("list") readList: String?,
-        @Field("unreadlist") unreadList: String?
+        @Field("unreadlist") unreadList: String?,
+        @Field("wikis") wikis: String?,
     ): Observable<MwQueryResponse?>
 }

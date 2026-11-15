@@ -3,7 +3,10 @@
 * EileenSanda
 -->
 <resources>
-  <string name="share_license_summary" fuzzy="true">Henda myndin kemur undir %1$s lisensin</string>
+  <plurals name="share_license_summary" fuzzy="true">
+    <item quantity="one">Henda myndin kemur undir %1$s lisensin</item>
+    <item quantity="other">Henda myndin kemur undir %1$s lisensin</item>
+  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillingar</string>
   <string name="username">Brúkaranavn</string>

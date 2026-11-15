@@ -24,7 +24,6 @@ import java.lang.reflect.Method
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class SettingsActivityUnitTests {
-
     private lateinit var activity: SettingsActivity
     private lateinit var context: Context
     private lateinit var menuItem: MenuItem
@@ -69,12 +68,12 @@ class SettingsActivityUnitTests {
     @Throws(Exception::class)
     fun testSetTotalUploadCount() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = SettingsActivity::class.java.getDeclaredMethod(
-            "onPostCreate",
-            Bundle::class.java
-        )
+        val method: Method =
+            SettingsActivity::class.java.getDeclaredMethod(
+                "onPostCreate",
+                Bundle::class.java,
+            )
         method.isAccessible = true
         method.invoke(activity, savedInstanceState)
     }
-
 }

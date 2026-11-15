@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.actions
 
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import timber.log.Timber
 
 /**
@@ -15,9 +15,8 @@ import timber.log.Timber
  */
 class PageEditClient(
     private val csrfTokenClient: CsrfTokenClient,
-    private val pageEditInterface: PageEditInterface
+    private val pageEditInterface: PageEditInterface,
 ) {
-
     /**
      * Replace the content of a wiki page
      * @param pageTitle   Title of the page to edit
@@ -25,20 +24,23 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun edit(pageTitle: String, text: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
+    fun edit(
+        pageTitle: String,
+        text: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse ->
-                        editResponse.edit()!!.editSucceeded()
-                    }
+                    editResponse.getEditResult()!!.editSucceeded()
+                }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to edit the page")
+            Observable.just(false)
         }
-    }
 
     /**
      * Creates a new page with the given title, text, and summary.
@@ -49,28 +51,31 @@ class PageEditClient(
      * @return An observable that emits true if the page creation succeeded, false otherwise.
      * @throws InvalidLoginTokenException If an invalid login token is encountered during the process.
      */
-    fun postCreate(pageTitle: String, text: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postCreate(
-                pageTitle,
-                summary,
-                text,
-                "text/x-wiki",
-                "wikitext",
-                true,
-                true,
-                csrfTokenClient.getTokenBlocking()
-            ).map { editResponse ->
-                editResponse.edit()!!.editSucceeded()
-            }
+    fun postCreate(
+        pageTitle: String,
+        text: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postCreate(
+                    pageTitle,
+                    summary,
+                    text,
+                    "text/x-wiki",
+                    "wikitext",
+                    true,
+                    true,
+                    csrfTokenClient.getTokenBlocking(),
+                ).map { editResponse ->
+                    editResponse.getEditResult()!!.editSucceeded()
+                }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to create the page")
+            Observable.just(false)
         }
-    }
 
     /**
      * Append text to the end of a wiki page
@@ -79,18 +84,21 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun appendEdit(pageTitle: String, appendText: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+    fun appendEdit(
+        pageTitle: String,
+        appendText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to append the page")
+            Observable.just(false)
         }
-    }
 
     /**
      * Prepend text to the beginning of a wiki page
@@ -99,19 +107,21 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
+    fun prependEdit(
+        pageTitle: String,
+        prependText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
+                .map { editResponse -> editResponse.getEditResult()?.editSucceeded() ?: false }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to prepend the page")
+            Observable.just(false)
         }
-    }
-
 
     /**
      * Appends a new section to the wiki page
@@ -121,19 +131,22 @@ class PageEditClient(
      * @param summary     Edit summary
      * @return whether the edit was successful
      */
-    fun createNewSection(pageTitle: String, sectionTitle: String, sectionText: String, summary: String): Observable<Boolean> {
-        return try {
-            pageEditInterface.postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+    fun createNewSection(
+        pageTitle: String,
+        sectionTitle: String,
+        sectionText: String,
+        summary: String,
+    ): Observable<Boolean> =
+        try {
+            pageEditInterface
+                .postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
+                .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(false)
-            }
+            Timber.e(throwable, "Failed to create the new section")
+            Observable.just(false)
         }
-    }
-
 
     /**
      * Set new labels to Wikibase server of commons
@@ -143,29 +156,53 @@ class PageEditClient(
      * @param value label
      * @return 1 when the edit was successful
      */
-    fun setCaptions(summary: String, title: String,
-                    language: String, value: String) : Observable<Int>{
-        return try {
-            pageEditInterface.postCaptions(summary, title, language,
-                value, csrfTokenClient.getTokenBlocking()
-            ).map { it.success }
+    fun setCaptions(
+        summary: String,
+        title: String,
+        language: String,
+        value: String,
+    ): Observable<Int> = setCaptions(summary, title, language, value, null)
+
+    /**
+     * @param entityId MediaInfo id (M + page id) when the file has already been uploaded.
+     * Falls back to site and title when the local media object still has a temporary page id.
+     */
+    fun setCaptions(
+        summary: String,
+        title: String,
+        language: String,
+        value: String,
+        entityId: String?,
+    ): Observable<Int> =
+        try {
+            val token = csrfTokenClient.getTokenBlocking()
+            val response =
+                if (entityId != null) {
+                    pageEditInterface.postCaptionsByEntityId(summary, entityId, language, value, token)
+                } else {
+                    pageEditInterface.postCaptions(summary, title, language, value, token)
+                }
+            response.map { it.success }
+        } catch (throwable: InvalidLoginTokenException) {
+            throw throwable
         } catch (throwable: Throwable) {
-            if (throwable is InvalidLoginTokenException) {
-                throw throwable
-            } else {
-                Observable.just(0)
-            }
+            Timber.e(throwable, "Failed to set the captions")
+            Observable.just(0)
         }
-    }
 
     /**
      * Get whole WikiText of required file
      * @param title : Name of the file
      * @return Observable<MwQueryResult>
      */
-    fun getCurrentWikiText(title: String): Single<String?> {
-        return pageEditInterface.getWikiText(title).map {
-            it.query()?.pages()?.get(0)?.revisions()?.get(0)?.content()
+    fun getCurrentWikiText(title: String): Single<String?> =
+        pageEditInterface.getWikiText(title).map {
+            it
+                .query()
+                ?.pages()
+                ?.get(0)
+                ?.revisions()
+                ?.get(0)
+                ?.content()
         }
-    }
 }

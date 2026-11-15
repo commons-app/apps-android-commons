@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Instrumentation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
@@ -26,7 +25,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ProfileActivityTest {
-
     @get:Rule
     var activityRule = IntentsTestRule(LoginActivity::class.java)
 
@@ -38,7 +36,8 @@ class ProfileActivityTest {
         device.freezeRotation()
         UITestHelper.loginUser()
         UITestHelper.skipWelcome()
-        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
+        Intents
+            .intending(CoreMatchers.not(IntentMatchers.isInternal()))
             .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
 
@@ -50,20 +49,19 @@ class ProfileActivityTest {
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.fragment_main_nav_tab_layout),
-                        0
+                        0,
                     ),
-                    4
+                    4,
                 ),
-                ViewMatchers.isDisplayed()
-            )
+                ViewMatchers.isDisplayed(),
+            ),
         ).perform(ViewActions.click())
         onView(Matchers.allOf(withId(R.id.more_profile))).perform(
             ViewActions.scrollTo(),
-            ViewActions.click()
+            ViewActions.click(),
         )
-        device.swipe(1033,1346,531,1346,20)
+        device.swipe(1033, 1346, 531, 1346, 20)
         UITestHelper.sleep(5000)
         Intents.intended(hasComponent(ProfileActivity::class.java.name))
     }
-
 }
