@@ -152,8 +152,9 @@ import javax.inject.Named
 import kotlin.concurrent.Volatile
 import kotlin.math.ln
 
-class NearbyParentFragment :
-    CommonsDaggerSupportFragment(),
+class NearbyParentFragment(
+    val fileExportHelper: NearbyFileExportHelper = NearbyFileExportHelper(),
+) : CommonsDaggerSupportFragment(),
     NearbyParentFragmentContract.View,
     WikidataP18EditListener,
     LocationUpdateListener,
@@ -517,6 +518,42 @@ class NearbyParentFragment :
         }
 
         presenter?.attachView(this)
+        fileExportHelper.init(
+            activityProvider = { activity },
+            nearbyControllerProvider = { nearbyController },
+            compositeDisposableProvider = { compositeDisposable },
+            mapFocusProvider = { mapFocus },
+            viewCallback =
+                object : NearbyFileExportHelper.ExportViewCallback {
+                    override fun showProgressDialog() {
+                        progressDialog?.show()
+                    }
+
+                    override fun hideProgressDialog() {
+                        progressDialog?.hide()
+                    }
+
+                    override fun showErrorMessage(message: String) {
+                        this@NearbyParentFragment.showErrorMessage(message)
+                    }
+
+                    override fun showToast(messageResId: Int) {
+                        Toast.makeText(context, getString(messageResId), Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun setProgressBarVisibility(isVisible: Boolean) {
+                        this@NearbyParentFragment.setProgressBarVisibility(isVisible)
+                    }
+
+                    override fun lockUnlockNearby(isLocked: Boolean) {
+                        presenter?.lockUnlockNearby(isLocked)
+                    }
+
+                    override fun setFilterState() {
+                        this@NearbyParentFragment.setFilterState()
+                    }
+                },
+        )
         isPermissionDenied = false
         recenterToUserLocation = false
         initThemePreferences()
@@ -1677,181 +1714,12 @@ class NearbyParentFragment :
         )
     }
 
-    private fun savePlacesAsKML() {
-        val savePlacesObservable =
-            Observable
-                .fromCallable {
-                    nearbyController?.getPlacesAsKML(mapFocus)
-                }
-        compositeDisposable.add(
-            savePlacesObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { kmlString: String? ->
-                        if (kmlString != null) {
-                            val timeStamp =
-                                SimpleDateFormat(
-                                    "yyyyMMdd_HHmmss",
-                                    Locale.getDefault(),
-                                ).format(Date())
-                            val fileName =
-                                "KML_" + timeStamp + "_" + System.currentTimeMillis() + ".kml"
-                            val saved = saveFile(kmlString, fileName)
-                            progressDialog!!.hide()
-                            if (saved) {
-                                showOpenFileDialog(requireContext(), fileName, false)
-                            } else {
-                                Toast
-                                    .makeText(
-                                        this.context,
-                                        getString(fr.free.nrw.commons.R.string.failed_to_save_kml_file),
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
-                            }
-                        }
-                    },
-                    { throwable: Throwable ->
-                        Timber.d(throwable)
-                        showErrorMessage(
-                            getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places) +
-                                throwable.localizedMessage,
-                        )
-                        setProgressBarVisibility(false)
-                        presenter!!.lockUnlockNearby(false)
-                        setFilterState()
-                    },
-                ),
-        )
+    override fun savePlacesAsKML() {
+        fileExportHelper.savePlacesAsKML()
     }
 
-    private fun savePlacesAsGPX() {
-        val savePlacesObservable =
-            Observable
-                .fromCallable {
-                    nearbyController?.getPlacesAsGPX(mapFocus)
-                }
-        compositeDisposable.add(
-            savePlacesObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { gpxString: String? ->
-                        if (gpxString != null) {
-                            val timeStamp =
-                                SimpleDateFormat(
-                                    "yyyyMMdd_HHmmss",
-                                    Locale.getDefault(),
-                                ).format(Date())
-                            val fileName =
-                                "GPX_" + timeStamp + "_" + System.currentTimeMillis() + ".gpx"
-                            val saved = saveFile(gpxString, fileName)
-                            progressDialog!!.hide()
-                            if (saved) {
-                                showOpenFileDialog(requireContext(), fileName, true)
-                            } else {
-                                Toast
-                                    .makeText(
-                                        this.context,
-                                        getString(fr.free.nrw.commons.R.string.failed_to_save_gpx_file),
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
-                            }
-                        }
-                    },
-                    { throwable: Throwable ->
-                        Timber.d(throwable)
-                        showErrorMessage(
-                            getString(fr.free.nrw.commons.R.string.error_fetching_nearby_places) +
-                                throwable.localizedMessage,
-                        )
-                        setProgressBarVisibility(false)
-                        presenter!!.lockUnlockNearby(false)
-                        setFilterState()
-                    },
-                ),
-        )
-    }
-
-    fun saveFile(
-        string: String,
-        fileName: String?,
-    ): Boolean {
-        if (!isExternalStorageWritable) {
-            return false
-        }
-
-        val downloadsDir =
-            Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS,
-            )
-        val kmlFile = File(downloadsDir, fileName)
-
-        try {
-            val fos = FileOutputStream(kmlFile)
-            fos.write(string.toByteArray())
-            fos.close()
-            return true
-        } catch (e: IOException) {
-            Timber.e(e, "Could not save KML file")
-            return false
-        }
-    }
-
-    private fun showOpenFileDialog(
-        context: Context,
-        fileName: String,
-        isGPX: Boolean,
-    ) {
-        val title = getString(fr.free.nrw.commons.R.string.file_saved_successfully)
-        val message =
-            if ((isGPX)) {
-                getString(fr.free.nrw.commons.R.string.do_you_want_to_open_gpx_file)
-            } else {
-                getString(fr.free.nrw.commons.R.string.do_you_want_to_open_kml_file)
-            }
-        val runnable = Runnable { openFile(context, fileName, isGPX) }
-        showAlertDialog(requireActivity(), title, message, runnable) {
-            // No action needed when the dialog is dismissed
-        }
-    }
-
-    private fun openFile(
-        context: Context,
-        fileName: String,
-        isGPX: Boolean,
-    ) {
-        val file =
-            File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                fileName,
-            )
-        val uri =
-            FileProvider.getUriForFile(
-                context,
-                context.applicationContext.packageName + ".provider",
-                file,
-            )
-        val intent = Intent(Intent.ACTION_VIEW)
-
-        if (isGPX) {
-            intent.setDataAndType(uri, "application/gpx")
-        } else {
-            intent.setDataAndType(uri, "application/kml")
-        }
-
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        try {
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            Timber.e(e, "No application available to open the GPX/KML file")
-            Toast
-                .makeText(
-                    context,
-                    fr.free.nrw.commons.R.string.no_application_available_to_open_gpx_files,
-                    Toast.LENGTH_SHORT,
-                ).show()
-        }
+    override fun savePlacesAsGPX() {
+        fileExportHelper.savePlacesAsGPX()
     }
 
     /**
@@ -3518,12 +3386,6 @@ class NearbyParentFragment :
             fragment.arguments = args
             return fragment
         }
-
-        private val isExternalStorageWritable: Boolean
-            get() {
-                val state = Environment.getExternalStorageState()
-                return Environment.MEDIA_MOUNTED == state
-            }
 
         /**
          * Extracts text between the first occurrence of '(' and its corresponding ')' in the input

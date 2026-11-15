@@ -14,7 +14,15 @@ import java.util.List;
 
 public interface NearbyParentFragmentContract {
 
-    interface View {
+    /** Actions related to exporting places to KML and GPX files. */
+    interface FileExport {
+
+        void savePlacesAsKML();
+
+        void savePlacesAsGPX();
+    }
+
+    interface View extends FileExport {
 
         boolean isNetworkConnectionEstablished();
 
