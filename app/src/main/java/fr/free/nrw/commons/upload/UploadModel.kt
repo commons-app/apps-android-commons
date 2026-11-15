@@ -13,7 +13,6 @@ import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.FileUtils.getSHA1
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import java.util.Date
@@ -89,42 +88,6 @@ class UploadModel
             Observable.just(
                 createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation),
             )
-
-        /**
-         * Calls validateImage() of ImageProcessingService to check quality of image
-         *
-         * @param uploadItem UploadItem whose quality is to be checked
-         * @param inAppPictureLocation In app picture location (if any)
-         * @return Quality of UploadItem
-         */
-        fun getImageQuality(
-            uploadItem: UploadItem,
-            inAppPictureLocation: LatLng?,
-        ): Single<Int> = imageProcessingService.validateImage(uploadItem, inAppPictureLocation)
-
-        /**
-         * Calls checkDuplicateImage() of ImageProcessingService to check if the image is a duplicate.
-         *
-         * @param originalFilePath The original file URI.
-         * @param modifiedFilePath The modified file URI.
-         * @return IMAGE_DUPLICATE if the file already exists, IMAGE_OK otherwise.
-         */
-        fun checkDuplicateImage(
-            originalFilePath: Uri?,
-            modifiedFilePath: Uri?,
-        ): Single<Int> =
-            imageProcessingService.checkIfFileAlreadyExists(
-                originalFilePath = originalFilePath!!,
-                modifiedFilePath = modifiedFilePath!!,
-            )
-
-        /**
-         * Calls validateCaption() of ImageProcessingService to check caption of image
-         *
-         * @param uploadItem UploadItem whose caption is to be checked
-         * @return Quality of caption of the UploadItem
-         */
-        fun getCaptionQuality(uploadItem: UploadItem): Single<Int> = imageProcessingService.validateCaption(uploadItem)
 
         private fun createAndAddUploadItem(
             uploadableFile: UploadableFile?,

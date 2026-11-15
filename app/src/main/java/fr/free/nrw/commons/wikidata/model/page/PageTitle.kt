@@ -13,6 +13,9 @@ import java.text.Normalizer
 import java.util.Arrays
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are URL/text accessors, equality
+// contracts, and Parcelable serialization belonging to this single page-title model.
+
 /**
  * Represents certain vital information about a page, including the title, namespace,
  * and fragment (section anchor target).  It can also contain a thumbnail URL for the
@@ -22,7 +25,12 @@ import java.util.Locale
  * description can be altered after construction. Therefore do NOT rely on all the fields
  * of a PageTitle to remain constant for the lifetime of the object.
  */
+@Suppress("TooManyFunctions")
 class PageTitle : Parcelable {
+    // The text before the first colon is taken as the namespace (File, Category, etc.), so a
+    // main namespace title with a colon, such as "RTÉ News: Six One", is not split correctly.
+    // This app doesn't deal with main namespace pages for now, so that is not a problem here.
+
     /**
      * The localised namespace of the page as a string, or null if the page is in mainspace.
      *
@@ -94,7 +102,7 @@ class PageTitle : Parcelable {
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""
-        // Known limitation: Does not handle mainspace articles with a colon in the title well at all
+        // Main namespace titles with a colon are not handled, see the note on namespace above
         val fragParts = text.split("#".toRegex()).toTypedArray()
         text = fragParts[0]
         fragment =

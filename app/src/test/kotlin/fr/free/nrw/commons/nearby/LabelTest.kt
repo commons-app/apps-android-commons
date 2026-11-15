@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +40,67 @@ class LabelTest {
      */
     @Test
     fun testNullLabelIcon() {
-        var nullLabel: Label = Label.fromText("a random text not exist in label texts")
+        val nullLabel: Label = Label.fromText("a random text not exist in label texts")
         assertThat(nullLabel.icon, equalTo(R.drawable.round_icon_unknown))
+    }
+
+    /**
+     * test Label.fromText with valid, unknown, empty, and null Q-IDs,
+     * including the length=0; index=0 case from earlier review
+     */
+    @Test
+    fun testFromText() {
+        // Valid Q-IDs
+        assertThat(Label.fromText("Q16970"), equalTo(Label.CHURCH))
+        assertThat(Label.fromText("BOOKMARK"), equalTo(Label.BOOKMARKS))
+
+        // Unknown Q-IDs
+        assertThat(Label.fromText("Q999999999"), equalTo(Label.UNKNOWN))
+        assertThat(Label.fromText("unknown_text"), equalTo(Label.UNKNOWN))
+
+        // Empty string - explicitly checks against length=0; index=0 crash
+        assertThat(Label.fromText(""), equalTo(Label.UNKNOWN))
+
+        // Null string
+        assertThat(Label.fromText(null), equalTo(Label.UNKNOWN))
+
+        // Malformed strings starting with Q
+        assertThat(Label.fromText("Q"), equalTo(Label.UNKNOWN))
+        assertThat(Label.fromText("Qabc"), equalTo(Label.UNKNOWN))
+    }
+
+    @After
+    fun tearDown() {
+        Label.setLocalizedNames(emptyMap())
+    }
+
+    /**
+     * test that each place type uses the first Q-ID of its array as its Wikidata item
+     */
+    @Test
+    fun testQid() {
+        assertThat(Label.SCHOOL.qid, equalTo("Q3914"))
+        assertThat(Label.BOOKMARKS.qid, equalTo(null))
+        assertThat(Label.getQids().contains("Q22698"), equalTo(true))
+    }
+
+    /**
+     * test that a readable English name is shown until localized names are loaded
+     */
+    @Test
+    fun testDisplayNameFallback() {
+        assertThat(Label.GAS_STATION.getDisplayName(context), equalTo("Gas station"))
+        assertThat(Label.BOOKMARKS.getDisplayName(context), equalTo(context.getString(R.string.bookmarks)))
+    }
+
+    /**
+     * test that the localized name is used and capitalized once loaded
+     */
+    @Test
+    fun testLocalizedDisplayName() {
+        Label.setLocalizedNames(mapOf("Q3914" to "école", "Q22698" to ""))
+        assertThat(Label.SCHOOL.getDisplayName(context), equalTo("École"))
+        // empty name (no label in any language) falls back to the English name
+        assertThat(Label.PARK.getDisplayName(context), equalTo("Park"))
     }
 }

@@ -252,6 +252,8 @@ class LoginActivity : BaseActivity() {
     internal fun signUp() = startActivity(Intent(this, SignupActivity::class.java))
 
     private fun showLoggingProgressBar() {
+        // Dismiss any existing dialog first so rotation cannot leave a second spinner up.
+        progressDialog?.dismiss()
         progressDialog =
             ProgressDialog(this).apply {
                 isIndeterminate = true
@@ -429,7 +431,7 @@ class LoginActivity : BaseActivity() {
             if (progressDialog?.isShowing == true) {
                 progressDialog!!.dismiss()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e, "Could not dismiss login progress dialog")
         }
         binding?.let {
@@ -437,7 +439,8 @@ class LoginActivity : BaseActivity() {
             it.loginPassword.removeTextChangedListener(textWatcher)
             it.loginTwoFactor.removeTextChangedListener(textWatcher)
         }
-        viewModel.cancel()
+        // Do not cancel ViewModel work here: onDestroy also runs on rotation, and the
+        // ViewModel must keep the in-flight login so LiveData can deliver the result.
         binding = null
         super.onDestroy()
     }
@@ -501,6 +504,11 @@ class LoginActivity : BaseActivity() {
                 else -> RESULT_TYPE_NONE
             }
         outState.putString(SAVE_LAST_LOGIN_RESULT_TYPE, loginResultType)
+        currentFocus?.id?.let {
+            if (it != View.NO_ID) {
+                outState.putInt(SAVE_FOCUSED_VIEW_ID, it)
+            }
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -526,14 +534,25 @@ class LoginActivity : BaseActivity() {
                 lastLoginResult = null
             }
         }
-        if (savedInstanceState.getBoolean(SAVE_PROGRESS_DIALOG)) {
-            performLogin()
-        }
+        // Progress UI is driven by LoginViewModel.loginState (observed in onStart). Do not
+        // re-show the dialog from SAVE_PROGRESS_DIALOG here: that flag can be stale after the
+        // request already failed during rotation, which left the spinner up forever.
         val errorMessage = savedInstanceState.getString(SAVE_ERROR_MESSAGE)
         if (sessionManager.isUserLoggedIn) {
             showMessage(R.string.login_success, R.color.primaryDarkColor)
         } else {
             showMessage(errorMessage, R.color.secondaryDarkColor)
+        }
+
+        val focusedViewId = savedInstanceState.getInt(SAVE_FOCUSED_VIEW_ID, View.NO_ID)
+        if (focusedViewId != View.NO_ID) {
+            binding?.root?.post {
+                binding?.root?.findViewById<View>(focusedViewId)?.let { view ->
+                    view.requestFocus()
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
+                    imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+                }
+            }
         }
     }
 
@@ -546,6 +565,7 @@ class LoginActivity : BaseActivity() {
         const val SAVE_PASSWORD: String = "password"
         const val SAVE_TWO_FACTOR_VISIBILITY: String = "twoFactorVisibility"
         const val SAVE_LAST_LOGIN_RESULT_TYPE: String = "lastLoginResultType"
+        const val SAVE_FOCUSED_VIEW_ID: String = "focusedViewId"
         const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
         const val RESULT_TYPE_2FA = "2FA"
         const val RESULT_TYPE_NONE = "NONE"

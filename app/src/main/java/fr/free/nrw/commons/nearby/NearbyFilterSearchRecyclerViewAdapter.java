@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import fr.free.nrw.commons.R;
 
@@ -81,7 +82,7 @@ public class NearbyFilterSearchRecyclerViewAdapter
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Label label = displayedLabels.get(position);
         holder.placeTypeIcon.setImageResource(label.getIcon());
-        holder.placeTypeLabel.setText(label.toString());
+        holder.placeTypeLabel.setText(label.getDisplayName(context));
         holder.placeTypeLayout.setSelected(label.isSelected());
         holder.placeSelected.setVisibility(label.isSelected() ? View.VISIBLE : View.GONE);
 
@@ -123,9 +124,12 @@ public class NearbyFilterSearchRecyclerViewAdapter
                 if (constraint == null || constraint.length() == 0) {
                     filteredArrayList.addAll(labels);
                 } else {
-                    String filterPattern = constraint.toString().toLowerCase().trim();
-                    for (Label label : labels) { // Iterate over the master list
-                        if (label.getText() != null && label.getText().toLowerCase().contains(filterPattern)) {
+                    String query = constraint.toString().toLowerCase(Locale.getDefault()).trim();
+
+                    for (Label label : labels) {
+                        String name = label.getDisplayName(context).toLowerCase(Locale.getDefault());
+                        String englishName = label.toString().replace('_', ' ').toLowerCase(Locale.ROOT);
+                        if (name.contains(query) || englishName.contains(query)) {
                             filteredArrayList.add(label);
                         }
                     }

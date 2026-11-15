@@ -4,11 +4,16 @@ import androidx.annotation.VisibleForTesting
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.model.BaseModel
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.model.gallery.MediaInfo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage.GlobalUsage
+
+// Suppressed TooManyFunctions because every method is an accessor, redirect/conversion
+// mutator, or usage check for one MediaWiki API query page payload.
 
 /**
  * A class representing a standard page object as returned by the MediaWiki API.
  */
+@Suppress("TooManyFunctions")
 class MwQueryPage : BaseModel() {
     private val pageid = 0
     private val missing = false
@@ -29,6 +34,9 @@ class MwQueryPage : BaseModel() {
 
     @SerializedName("imageinfo")
     private val imageInfo: List<ImageInfo>? = null
+
+    @SerializedName("videoinfo")
+    private val videoInfo: List<MediaInfo>? = null
     private var redirectFrom: String? = null
     private var convertedFrom: String? = null
     private var convertedTo: String? = null
@@ -56,6 +64,8 @@ class MwQueryPage : BaseModel() {
     fun description(): String? = description
 
     fun imageInfo(): ImageInfo? = imageInfo?.get(0)
+
+    fun mediaInfo(): MediaInfo? = videoInfo?.firstOrNull()
 
     fun redirectFrom(from: String?) {
         redirectFrom = from

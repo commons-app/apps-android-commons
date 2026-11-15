@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
@@ -13,7 +12,6 @@ import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
-import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -41,8 +39,10 @@ class CategoriesPresenter
 
         var view = DUMMY
         private val compositeDisposable = CompositeDisposable()
+        private val searchResults = CategorySearchResults(repository, ioScheduler)
+        private val categorySelection = CategorySelection(repository)
         private val searchTerms = PublishSubject.create<String>()
-        private var categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
+        internal val categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
 
         /**
          * Current media
@@ -57,77 +57,53 @@ class CategoriesPresenter
 
         override fun onAttachView(view: CategoriesContract.View) {
             this.view = view
+
+            fun showLoadError(t: Throwable?) {
+                view.showProgress(false)
+                view.showError(R.string.error_loading_categories)
+                val mwException = t as? MwIOException
+                view.showErrorDialog(
+                    if (mwException == null) {
+                        ""
+                    } else {
+                        "\n${mwException.error.title} / ${mwException.error.details}"
+                    },
+                )
+                Timber.e(t)
+            }
+
             compositeDisposable.add(
                 searchTerms
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
-                    }.switchMap(::searchResults)
-                    .map { repository.getSelectedCategories() + it }
-                    .map { it.distinctBy { categoryItem -> categoryItem.name } }
-                    .observeOn(mainThreadScheduler)
+                    }.switchMap { term ->
+                        searchResults
+                            .searchResults(term, media)
+                            .map { Result.success(it) }
+                            .onErrorReturn { Result.failure(it) }
+                    }.map { result ->
+                        result.map { found ->
+                            (repository.getSelectedCategories() + found)
+                                .distinctBy { categoryItem -> categoryItem.name }
+                        }
+                    }.observeOn(mainThreadScheduler)
                     .subscribe(
-                        {
-                            setCategoryListValue(it)
+                        { result ->
                             view.showProgress(false)
-                            if (it.isEmpty()) {
-                                view.showError(R.string.no_categories_found)
-                            }
-                        },
-                        { t: Throwable? ->
-                            view.showProgress(false)
-                            view.showError(R.string.error_loading_categories)
-                            val mwException = t as? MwIOException
-                            view.showErrorDialog(
-                                if (mwException == null) {
-                                    ""
-                                } else {
-                                    "\n${mwException.error.title} / ${mwException.error.details}"
+                            result.fold(
+                                onSuccess = {
+                                    categoryList.postValue(it)
+                                    if (it.isEmpty()) {
+                                        view.showError(R.string.no_categories_found)
+                                    }
                                 },
+                                onFailure = ::showLoadError,
                             )
-                            Timber.e(t)
                         },
+                        ::showLoadError,
                     ),
             )
-        }
-
-        /**
-         * If media is null : Fetches categories from server according to the term
-         * Else : Fetches existing categories by their name, fetches categories from server according
-         * to the term and combines both in a list
-         */
-        private fun searchResults(term: String): Observable<List<CategoryItem>>? {
-            if (media == null) {
-                return repository
-                    .searchAll(term, getImageTitleList(), repository.getSelectedDepictions())
-                    .subscribeOn(ioScheduler)
-                    .map {
-                        it.filter { categoryItem ->
-                            !repository.isSpammyCategory(categoryItem.name) ||
-                                categoryItem.name == term
-                        }
-                    }
-            } else {
-                return Observable
-                    .zip(
-                        repository
-                            .getCategories(repository.getSelectedExistingCategories())
-                            .map { list ->
-                                list.map {
-                                    CategoryItem(it.name, it.description, it.thumbnail, true)
-                                }
-                            },
-                        repository.searchAll(term, getImageTitleList(), repository.getSelectedDepictions()),
-                    ) { it1, it2 ->
-                        it1 + it2
-                    }.subscribeOn(ioScheduler)
-                    .map {
-                        it.filter { categoryItem ->
-                            !repository.isSpammyCategory(categoryItem.name) ||
-                                categoryItem.name == term
-                        }
-                    }.map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
-            }
         }
 
         override fun onDetachView() {
@@ -142,16 +118,6 @@ class CategoriesPresenter
         override fun searchForCategories(query: String) {
             searchTerms.onNext(query)
         }
-
-        /**
-         * Returns image title list from UploadItem
-         * @return
-         */
-        private fun getImageTitleList(): List<String> =
-            repository
-                .getUploads()
-                .map { it.uploadMediaDetails[0].captionText }
-                .filterNot { TextUtils.isEmpty(it) }
 
         /**
          * Verifies the number of categories selected, prompts the user if none selected
@@ -190,13 +156,13 @@ class CategoriesPresenter
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
-                    }.switchMap(::searchResults)
+                    }.switchMap { searchResults.searchResults(it, media) }
                     .map { repository.getSelectedCategories() + it }
                     .map { it.distinctBy { categoryItem -> categoryItem.name } }
                     .observeOn(mainThreadScheduler)
                     .subscribe(
                         {
-                            setCategoryListValue(it)
+                            categoryList.postValue(it)
                             view.showProgress(false)
                             if (it.isEmpty()) {
                                 view.showError(R.string.no_categories_found)
@@ -290,44 +256,11 @@ class CategoriesPresenter
         }
 
         /**
-         * Selects each [CategoryItem] in a given list as if they were clicked by the user by calling
-         * [onCategoryItemClicked] for each category and adding the category to [categoryList]
-         */
-        private fun selectNewCategories(toSelect: List<CategoryItem>) {
-            toSelect.forEach {
-                it.isSelected = true
-                repository.onCategoryClicked(it, media)
-            }
-
-            // Add the new selections to the list of category items so that the selections appear
-            // immediately (i.e. without any search term queries)
-            categoryList.value
-                ?.toMutableList()
-                ?.let { toSelect + it }
-                ?.distinctBy(CategoryItem::name)
-                ?.let { setCategoryListValue(it) }
-        }
-
-        /**
          * Livedata being used to observe category list inside
          * @see UploadCategoriesFragment
          * Any changes to category list reflect immediately to the adapter list
          */
         override fun getCategories(): LiveData<List<CategoryItem>> = categoryList
-
-        /**
-         * needed for tests
-         */
-        fun setCategoryList(categoryList: MutableLiveData<List<CategoryItem>>) {
-            this.categoryList = categoryList
-        }
-
-        /**
-         * needed for tests
-         */
-        fun setCategoryListValue(categoryItems: List<CategoryItem>) {
-            categoryList.postValue(categoryItems)
-        }
 
         override fun selectCategories() {
             compositeDisposable.add(
@@ -335,7 +268,7 @@ class CategoriesPresenter
                     .getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
-                    .subscribe(::selectNewCategories),
+                    .subscribe { categorySelection.selectNewCategories(it, media, categoryList) },
             )
         }
     }

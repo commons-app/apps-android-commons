@@ -10,8 +10,8 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import kotlin.math.max
-import kotlin.math.min
+
+private typealias CropHandle = CropRectEditor.Handle
 
 /**
  * Custom View that draws a resizable crop rectangle with handles.
@@ -91,24 +91,20 @@ class CropOverlayView
                 isAntiAlias = true
             }
 
-        private var activeHandle: Handle? = null
+        private var activeHandle: CropHandle? = null
         private var lastTouchX = 0f
         private var lastTouchY = 0f
 
         // Image bounds within this view (set by EditActivity)
         private var imageBounds = RectF()
 
-        enum class Handle {
-            TOP_LEFT,
-            TOP_RIGHT,
-            BOTTOM_LEFT,
-            BOTTOM_RIGHT,
-            TOP,
-            BOTTOM,
-            LEFT,
-            RIGHT,
-            CENTER,
-        }
+        private val cropEditor =
+            CropRectEditor(
+                cropRect = cropRect,
+                minCropSize = minCropSize,
+                cornerTouchSlop = cornerTouchSlop,
+                edgeTouchSlop = touchSlop,
+            )
 
         override fun onSizeChanged(
             w: Int,
@@ -196,16 +192,16 @@ class CropOverlayView
             drawCenterIndicator(canvas)
 
             // Draw corner handles (larger)
-            drawCornerHandle(canvas, cropRect.left, cropRect.top, Handle.TOP_LEFT)
-            drawCornerHandle(canvas, cropRect.right, cropRect.top, Handle.TOP_RIGHT)
-            drawCornerHandle(canvas, cropRect.left, cropRect.bottom, Handle.BOTTOM_LEFT)
-            drawCornerHandle(canvas, cropRect.right, cropRect.bottom, Handle.BOTTOM_RIGHT)
+            drawCornerHandle(canvas, cropRect.left, cropRect.top, CropHandle.TOP_LEFT)
+            drawCornerHandle(canvas, cropRect.right, cropRect.top, CropHandle.TOP_RIGHT)
+            drawCornerHandle(canvas, cropRect.left, cropRect.bottom, CropHandle.BOTTOM_LEFT)
+            drawCornerHandle(canvas, cropRect.right, cropRect.bottom, CropHandle.BOTTOM_RIGHT)
 
             // Draw edge handles (smaller)
-            drawEdgeHandle(canvas, cropRect.centerX(), cropRect.top, Handle.TOP)
-            drawEdgeHandle(canvas, cropRect.centerX(), cropRect.bottom, Handle.BOTTOM)
-            drawEdgeHandle(canvas, cropRect.left, cropRect.centerY(), Handle.LEFT)
-            drawEdgeHandle(canvas, cropRect.right, cropRect.centerY(), Handle.RIGHT)
+            drawEdgeHandle(canvas, cropRect.centerX(), cropRect.top, CropHandle.TOP)
+            drawEdgeHandle(canvas, cropRect.centerX(), cropRect.bottom, CropHandle.BOTTOM)
+            drawEdgeHandle(canvas, cropRect.left, cropRect.centerY(), CropHandle.LEFT)
+            drawEdgeHandle(canvas, cropRect.right, cropRect.centerY(), CropHandle.RIGHT)
 
             // Update gesture exclusion zones for edge handles near screen edges
             updateGestureExclusion()
@@ -215,7 +211,7 @@ class CropOverlayView
             canvas: Canvas,
             x: Float,
             y: Float,
-            handle: Handle,
+            handle: CropHandle,
         ) {
             val isActive = activeHandle == handle
             val paint = if (isActive) activeHandlePaint else handlePaint
@@ -230,7 +226,7 @@ class CropOverlayView
             canvas: Canvas,
             x: Float,
             y: Float,
-            handle: Handle,
+            handle: CropHandle,
         ) {
             val isActive = activeHandle == handle
             val paint = if (isActive) activeHandlePaint else handlePaint
@@ -268,7 +264,7 @@ class CropOverlayView
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    activeHandle = findHandle(x, y)
+                    activeHandle = cropEditor.findHandle(x, y)
                     if (activeHandle != null) {
                         parent?.requestDisallowInterceptTouchEvent(true)
                         lastTouchX = x
@@ -281,7 +277,13 @@ class CropOverlayView
                     if (activeHandle != null) {
                         val dx = x - lastTouchX
                         val dy = y - lastTouchY
-                        moveHandle(activeHandle!!, dx, dy)
+                        val bounds =
+                            if (!imageBounds.isEmpty) {
+                                imageBounds
+                            } else {
+                                RectF(0f, 0f, width.toFloat(), height.toFloat())
+                            }
+                        cropEditor.moveHandle(activeHandle!!, dx, dy, bounds)
                         lastTouchX = x
                         lastTouchY = y
                         invalidate()
@@ -298,131 +300,6 @@ class CropOverlayView
             }
             return super.onTouchEvent(event)
         }
-
-        private fun findHandle(
-            x: Float,
-            y: Float,
-        ): Handle? {
-            // Check corners first with larger touch zone (priority over edges)
-            val corners =
-                listOf(
-                    Triple(Handle.TOP_LEFT, cropRect.left, cropRect.top),
-                    Triple(Handle.TOP_RIGHT, cropRect.right, cropRect.top),
-                    Triple(Handle.BOTTOM_LEFT, cropRect.left, cropRect.bottom),
-                    Triple(Handle.BOTTOM_RIGHT, cropRect.right, cropRect.bottom),
-                )
-
-            for ((handle, hx, hy) in corners) {
-                if (isNear(x, y, hx, hy, cornerTouchSlop)) return handle
-            }
-
-            // Then check edges with smaller touch zone
-            val edges =
-                listOf(
-                    Triple(Handle.TOP, cropRect.centerX(), cropRect.top),
-                    Triple(Handle.BOTTOM, cropRect.centerX(), cropRect.bottom),
-                    Triple(Handle.LEFT, cropRect.left, cropRect.centerY()),
-                    Triple(Handle.RIGHT, cropRect.right, cropRect.centerY()),
-                )
-
-            for ((handle, hx, hy) in edges) {
-                if (isNear(x, y, hx, hy, touchSlop)) return handle
-            }
-
-            // Check center last (for moving the entire crop area)
-            if (cropRect.contains(x, y)) return Handle.CENTER
-
-            return null
-        }
-
-        private fun isNear(
-            x: Float,
-            y: Float,
-            targetX: Float,
-            targetY: Float,
-            slop: Float,
-        ): Boolean {
-            val dx = x - targetX
-            val dy = y - targetY
-            return dx * dx + dy * dy <= slop * slop
-        }
-
-        private fun moveHandle(
-            handle: Handle,
-            dx: Float,
-            dy: Float,
-        ) {
-            val bounds = if (!imageBounds.isEmpty) imageBounds else RectF(0f, 0f, width.toFloat(), height.toFloat())
-
-            when (handle) {
-                Handle.TOP_LEFT -> {
-                    cropRect.left = constrainMin(cropRect.left + dx, bounds.left, cropRect.right - minCropSize)
-                    cropRect.top = constrainMin(cropRect.top + dy, bounds.top, cropRect.bottom - minCropSize)
-                }
-                Handle.TOP_RIGHT -> {
-                    cropRect.right = constrainMax(cropRect.right + dx, cropRect.left + minCropSize, bounds.right)
-                    cropRect.top = constrainMin(cropRect.top + dy, bounds.top, cropRect.bottom - minCropSize)
-                }
-                Handle.BOTTOM_LEFT -> {
-                    cropRect.left = constrainMin(cropRect.left + dx, bounds.left, cropRect.right - minCropSize)
-                    cropRect.bottom = constrainMax(cropRect.bottom + dy, cropRect.top + minCropSize, bounds.bottom)
-                }
-                Handle.BOTTOM_RIGHT -> {
-                    cropRect.right = constrainMax(cropRect.right + dx, cropRect.left + minCropSize, bounds.right)
-                    cropRect.bottom = constrainMax(cropRect.bottom + dy, cropRect.top + minCropSize, bounds.bottom)
-                }
-                Handle.TOP -> {
-                    cropRect.top = constrainMin(cropRect.top + dy, bounds.top, cropRect.bottom - minCropSize)
-                }
-                Handle.BOTTOM -> {
-                    cropRect.bottom = constrainMax(cropRect.bottom + dy, cropRect.top + minCropSize, bounds.bottom)
-                }
-                Handle.LEFT -> {
-                    cropRect.left = constrainMin(cropRect.left + dx, bounds.left, cropRect.right - minCropSize)
-                }
-                Handle.RIGHT -> {
-                    cropRect.right = constrainMax(cropRect.right + dx, cropRect.left + minCropSize, bounds.right)
-                }
-                Handle.CENTER -> {
-                    var newLeft = cropRect.left + dx
-                    var newTop = cropRect.top + dy
-                    var newRight = cropRect.right + dx
-                    var newBottom = cropRect.bottom + dy
-
-                    // Keep within bounds
-                    if (newLeft < bounds.left) {
-                        newRight += bounds.left - newLeft
-                        newLeft = bounds.left
-                    }
-                    if (newRight > bounds.right) {
-                        newLeft -= newRight - bounds.right
-                        newRight = bounds.right
-                    }
-                    if (newTop < bounds.top) {
-                        newBottom += bounds.top - newTop
-                        newTop = bounds.top
-                    }
-                    if (newBottom > bounds.bottom) {
-                        newTop -= newBottom - bounds.bottom
-                        newBottom = bounds.bottom
-                    }
-
-                    cropRect.set(newLeft, newTop, newRight, newBottom)
-                }
-            }
-        }
-
-        private fun constrainMin(
-            value: Float,
-            min: Float,
-            max: Float,
-        ): Float = max(min, min(value, max))
-
-        private fun constrainMax(
-            value: Float,
-            min: Float,
-            max: Float,
-        ): Float = max(min, min(value, max))
 
         private fun updateGestureExclusion() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
