@@ -460,6 +460,7 @@ class UploadMediaDetailFragmentUnitTest {
      */
     @Test
     fun testRefreshAfterViewRecreationEnablesNextForSavedCaption() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
         fragment.recentLanguagesDao = mock()
         Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
         val firstView = fragment.onCreateView(layoutInflater, null, null)
@@ -478,6 +479,7 @@ class UploadMediaDetailFragmentUnitTest {
      */
     @Test
     fun testRefreshWithEmptyPrimaryCaptionDisablesNext() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
         fragment.recentLanguagesDao = mock()
         Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
         val currentView = fragment.onCreateView(layoutInflater, null, null)
