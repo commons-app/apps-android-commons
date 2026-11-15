@@ -120,12 +120,13 @@
           />
 
         <LinearLayout
+          android:id="@+id/fab_container"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_below="@id/rl_container_wlm_month_message"
           android:layout_alignParentEnd="true"
-          android:layout_marginTop="16dp"
-          android:layout_marginEnd="16dp"
+          android:layout_marginTop="@dimen/nearby_fab_container_margin"
+          android:layout_marginEnd="@dimen/nearby_fab_container_margin"
           android:gravity="center_horizontal"
           android:orientation="vertical">
 
@@ -200,7 +201,7 @@
     <View
       android:id="@+id/empty_view1"
       android:layout_width="56dp"
-      android:layout_height="285dp"
+      android:layout_height="@dimen/nearby_fab_spacer1_height"
       android:visibility="invisible"
       app:layout_anchor="@id/fab_plus"
       app:layout_anchorGravity="center_horizontal" />
@@ -208,7 +209,7 @@
     <View
       android:id="@+id/empty_view"
       android:layout_width="56dp"
-      android:layout_height="174dp"
+      android:layout_height="@dimen/nearby_fab_spacer2_height"
       android:visibility="invisible"
       app:layout_anchor="@id/fab_plus"
       app:layout_anchorGravity="center_horizontal" />
@@ -216,7 +217,7 @@
     <View
       android:id="@+id/empty_view2"
       android:layout_width="56dp"
-      android:layout_height="46dp"
+      android:layout_height="@dimen/nearby_fab_spacer3_height"
       android:visibility="invisible"
       app:layout_anchor="@id/fab_plus"
       app:layout_anchorGravity="center_horizontal" />
