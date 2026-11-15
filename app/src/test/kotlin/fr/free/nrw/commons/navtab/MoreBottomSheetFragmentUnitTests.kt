@@ -16,17 +16,22 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
 import io.reactivex.Observable
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.anyString
+import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
@@ -40,6 +45,7 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
+import org.robolectric.shadows.ShadowToast
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -123,6 +129,28 @@ class MoreBottomSheetFragmentUnitTests {
             observable2,
         ).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
+    }
+
+    @Test
+    fun testUploadFeedbackWhenTokenIsUnavailableShowsError() {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        try {
+            val feedback = mock(Feedback::class.java)
+            doAnswer { throw InvalidLoginTokenException("offline") }
+                .`when`(pageEditClient)
+                .createNewSection(anyString(), anyString(), anyString(), anyString())
+
+            fragment.uploadFeedback(feedback)
+
+            Assert.assertEquals(
+                context.getString(R.string.error_feedback),
+                ShadowToast.getTextOfLatestToast(),
+            )
+        } finally {
+            RxJavaPlugins.reset()
+            RxAndroidPlugins.reset()
+        }
     }
 
     @Test
