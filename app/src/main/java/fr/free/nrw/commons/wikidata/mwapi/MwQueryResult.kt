@@ -6,6 +6,9 @@ import fr.free.nrw.commons.wikidata.model.BaseModel
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
 import org.apache.commons.lang3.StringUtils
 
+// Suppressed TooManyFunctions because the class is a MediaWiki query response holder whose
+// methods only read response fields or post-process redirects and converted titles on pages.
+@Suppress("TooManyFunctions")
 class MwQueryResult :
     BaseModel(),
     PostProcessable {

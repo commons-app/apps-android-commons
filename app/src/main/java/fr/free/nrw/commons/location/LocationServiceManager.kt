@@ -206,7 +206,7 @@ class LocationServiceManager(
         if (changeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED) {
             lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedSignificantly(LatLng.from(location)) }
-        } else if (lastLocationVar?.let { location.distanceTo(it) }!! >= 500) {
+        } else if (lastLocationVar?.let { location.distanceTo(it) >= 500 } == true) {
             lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedMedium(LatLng.from(location)) }
         } else if (changeType == LocationChangeType.LOCATION_SLIGHTLY_CHANGED) {

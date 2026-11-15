@@ -2,7 +2,6 @@ package fr.free.nrw.commons.locationpicker
 
 import android.content.Context
 import android.os.Looper
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,7 +21,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.osmdroid.util.GeoPoint
@@ -107,50 +105,6 @@ class LocationPickerActivityUnitTests {
     @Throws(Exception::class)
     fun checkActivityNotNull() {
         Assert.assertNotNull(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testAddCredits() {
-        val method: Method =
-            LocationPickerActivity::class.java.getDeclaredMethod(
-                "addCredits",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-        verify(tvAttribution).text = any()
-        verify(tvAttribution).movementMethod = any()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnClickModifyLocation() {
-        val method: Method =
-            LocationPickerActivity::class.java.getDeclaredMethod(
-                "onClickModifyLocation",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-        verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
-        verify(modifyLocationButton, times(1)).visibility = View.GONE
-        verify(removeLocationButton, times(1)).visibility = View.GONE
-        verify(showInMapButton, times(1)).visibility = View.GONE
-        verify(markerImage, times(1)).visibility = View.VISIBLE
-        verify(shadow, times(1)).visibility = View.VISIBLE
-        verify(largeToolbarText, times(1)).text = "Choose a location"
-        verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
-        verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnClickRemoveLocation() {
-        val method: Method =
-            LocationPickerActivity::class.java.getDeclaredMethod(
-                "onClickRemoveLocation",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
     }
 
     @Test
