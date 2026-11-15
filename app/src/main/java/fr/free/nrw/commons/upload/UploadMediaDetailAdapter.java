@@ -60,8 +60,6 @@ public class UploadMediaDetailAdapter extends
     private SelectedVoiceIcon selectedVoiceIcon;
     private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
-    private RowItemDescriptionBinding binding;
-
     public UploadMediaDetailAdapter(Fragment fragment, String savedLanguageValue,
         RecentLanguagesDao recentLanguagesDao) {
         uploadMediaDetails = new ArrayList<>();
@@ -102,7 +100,7 @@ public class UploadMediaDetailAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        binding = RowItemDescriptionBinding.inflate(inflater, parent, false);
+        RowItemDescriptionBinding binding = RowItemDescriptionBinding.inflate(inflater, parent, false);
         return new ViewHolder(binding.getRoot());
     }
 
@@ -210,6 +208,8 @@ public class UploadMediaDetailAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final RowItemDescriptionBinding binding;
+
         TextView descriptionLanguages ;
 
         PasteSensitiveTextInputEditText descItemEditText;
@@ -238,6 +238,7 @@ public class UploadMediaDetailAdapter extends
 
         public ViewHolder(View itemView) {
             super(itemView);
+            binding = RowItemDescriptionBinding.bind(itemView);
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
@@ -258,16 +259,13 @@ public class UploadMediaDetailAdapter extends
 
 
             descriptionLanguages.setFocusable(false);
-            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                value -> {
-                    if (position == 0) {
-                        eventListener.onPrimaryCaptionTextChange(value.length() != 0);
-                    }
-                }));
             captionItemEditText.removeTextChangedListener(captionListener);
             descItemEditText.removeTextChangedListener(descriptionListener);
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
+            if (position == 0) {
+                eventListener.onPrimaryCaptionTextChange(captionItemEditText.length() != 0);
+            }
             captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
             captionInputLayout.setEndIconDrawable(R.drawable.baseline_keyboard_voice);
             captionInputLayout.setEndIconOnClickListener(v -> {
@@ -303,9 +301,13 @@ public class UploadMediaDetailAdapter extends
             }
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
-            captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetail.setCaptionText(convertIdeographicSpaceToLatinSpace(
-                        removeLeadingAndTrailingWhitespace(captionText))));
+            captionListener = new AbstractTextWatcher(captionText -> {
+                uploadMediaDetail.setCaptionText(convertIdeographicSpaceToLatinSpace(
+                    removeLeadingAndTrailingWhitespace(captionText)));
+                if (position == 0) {
+                    eventListener.onPrimaryCaptionTextChange(captionText.length() != 0);
+                }
+            });
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetail.setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);

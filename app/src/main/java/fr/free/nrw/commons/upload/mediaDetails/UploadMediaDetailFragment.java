@@ -775,6 +775,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
+        // A page rebuilt after picture removal must not depend on a text-change event to
+        // restore navigation: RecyclerView may not have rebound its caption field yet.
+        onPrimaryCaptionTextChange(uploadMediaDetails != null && !uploadMediaDetails.isEmpty()
+            && !TextUtils.isEmpty(uploadMediaDetails.get(0).getCaptionText()));
         showNearbyFound =
             showNearbyFound && (
                 uploadMediaDetails == null || uploadMediaDetails.isEmpty()

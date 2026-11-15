@@ -392,6 +392,42 @@ class UploadMediaDetailFragmentUnitTest {
         fragment.updateMediaDetails(null)
     }
 
+    /**
+     * Refreshing a recreated upload page must enable navigation from its saved primary caption,
+     * even before RecyclerView has bound its caption field.
+     */
+    @Test
+    fun testRefreshAfterViewRecreationEnablesNextForSavedCaption() {
+        val firstView = fragment.onCreateView(layoutInflater, null, null)!!
+        fragment.onPrimaryCaptionTextChange(true)
+        Assert.assertTrue(firstView.findViewById<View>(R.id.btn_next).isEnabled)
+
+        val recreatedView = fragment.onCreateView(layoutInflater, null, null)!!
+        fragment.updateMediaDetails(listOf(
+            fr.free.nrw.commons.upload.UploadMediaDetail(captionText = "Saved caption")
+        ))
+
+        Assert.assertTrue(recreatedView.findViewById<View>(R.id.btn_next).isEnabled)
+        Assert.assertTrue(recreatedView.findViewById<View>(R.id.btn_copy_subsequent_media).isEnabled)
+    }
+
+    /**
+     * An empty primary caption must disable navigation even if another language has a caption.
+     */
+    @Test
+    fun testRefreshWithEmptyPrimaryCaptionDisablesNext() {
+        val currentView = fragment.onCreateView(layoutInflater, null, null)!!
+        fragment.onPrimaryCaptionTextChange(true)
+
+        fragment.updateMediaDetails(listOf(
+            fr.free.nrw.commons.upload.UploadMediaDetail(),
+            fr.free.nrw.commons.upload.UploadMediaDetail(captionText = "Secondary caption")
+        ))
+
+        Assert.assertFalse(currentView.findViewById<View>(R.id.btn_next).isEnabled)
+        Assert.assertFalse(currentView.findViewById<View>(R.id.btn_copy_subsequent_media).isEnabled)
+    }
+
     @Test
     @Throws(Exception::class)
     fun testOnDestroyView() {
