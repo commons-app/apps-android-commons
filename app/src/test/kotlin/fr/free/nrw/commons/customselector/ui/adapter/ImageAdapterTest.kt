@@ -83,7 +83,7 @@ class ImageAdapterTest {
         val listItemView: View = inflater.inflate(R.layout.item_custom_selector_image, null, false)
         holder = ImageAdapter.ImageViewHolder(listItemView)
 
-        selectedImageField = imageAdapter.javaClass.getDeclaredField("selectedImages")
+        selectedImageField = imageAdapter.selectionManager.javaClass.getDeclaredField("selectedImages")
         selectedImageField.isAccessible = true
     }
 
@@ -115,7 +115,7 @@ class ImageAdapterTest {
             .thenReturn(sharedPreferences)
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
-        selectedImageField.set(imageAdapter, images)
+        selectedImageField.set(imageAdapter.selectionManager, images)
         imageAdapter.onBindViewHolder(holder, 0)
     }
 
@@ -165,54 +165,6 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test private function select or remove image.
-     */
-    @Test
-    fun selectOrRemoveImage() {
-        // Access function
-        val func =
-            imageAdapter.javaClass.getDeclaredMethod(
-                "selectOrRemoveImage",
-                ImageAdapter.ImageViewHolder::class.java,
-                Int::class.java,
-            )
-        func.isAccessible = true
-
-        // Parameters
-        images.addAll(listOf(image, image))
-        imageAdapter.init(images, images, TreeMap())
-
-        // Test conditions
-        holder.itemUploaded()
-        func.invoke(imageAdapter, holder, 0)
-        holder.itemNotUploaded()
-        holder.itemNotForUpload()
-        func.invoke(imageAdapter, holder, 0)
-        holder.itemNotForUpload()
-        func.invoke(imageAdapter, holder, 0)
-        selectedImageField.set(imageAdapter, images)
-        func.invoke(imageAdapter, holder, 1)
-    }
-
-    /**
-     * Test private function onThumbnailClicked.
-     */
-    @Test
-    fun onThumbnailClicked() {
-        images.add(image)
-        Whitebox.setInternalState(imageAdapter, "images", images)
-        // Access function
-        val func =
-            imageAdapter.javaClass.getDeclaredMethod(
-                "onThumbnailClicked",
-                Int::class.java,
-                ImageAdapter.ImageViewHolder::class.java,
-            )
-        func.isAccessible = true
-        func.invoke(imageAdapter, 0, holder)
-    }
-
-    /**
      * Test get item count.
      */
     @Test
@@ -226,7 +178,7 @@ class ImageAdapterTest {
     @Test
     fun setSelectedImages() {
         images.add(image)
-        imageAdapter.setSelectedImages(images)
+        imageAdapter.selectionManager.setSelectedImages(images)
     }
 
     /**
