@@ -13,17 +13,17 @@ body:
     attributes:
       label: What is the user problem or growth opportunity you want to see solved?
     validations:
-      required: false
+      required: true
   - type: textarea
     attributes:
       label: How do you know that this problem exists today? Why is this important?
     validations:
-      required: false
+      required: true
   - type: textarea
     attributes:
       label: Who will benefit from it?
     validations:
-      required: false
+      required: true
   - type: textarea
     attributes:
       label: Anything else you would like to add?

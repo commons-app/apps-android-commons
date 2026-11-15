@@ -56,7 +56,7 @@ class DepictsClient
         private fun Single<String>.mapToDepictions() =
             flatMap(::getEntities)
                 .map { entities ->
-                    entities.entities().values.map { entity ->
+                    entities.getEntityMap().values.map { entity ->
                         mapToDepictItem(entity)
                     }
                 }
@@ -73,7 +73,7 @@ class DepictsClient
                     val entities: Entities = getEntities(instanceOfIDs[0]).blockingGet()
                     val nameAsDescription =
                         entities
-                            .entities()
+                            .getEntityMap()
                             .values
                             .first()
                             .labels()

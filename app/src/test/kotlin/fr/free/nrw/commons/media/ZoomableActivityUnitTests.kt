@@ -37,9 +37,6 @@ class ZoomableActivityUnitTests {
     @Mock
     private lateinit var uri: Uri
 
-    @Mock
-    private lateinit var images: ArrayList<Image>
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -133,9 +130,7 @@ class ZoomableActivityUnitTests {
      */
     @Test
     fun testOnBackPressed() {
-        val func = activity.javaClass.getDeclaredMethod("onBackPressed")
-        func.isAccessible = true
-        func.invoke(activity)
+        activity.onBackPressedDispatcher.onBackPressed()
     }
 
     /**

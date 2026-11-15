@@ -153,7 +153,7 @@ class CategoryDaoTest {
                 eq(category.contentUri)!!,
                 captor.capture(),
                 isNull(),
-                isNull()
+                isNull(),
             )
             captor.firstValue.let { cv ->
                 assertEquals(5, cv.size())
@@ -194,7 +194,7 @@ class CategoryDaoTest {
         }
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun testSaveTranslatesRemoteExceptions() {
         whenever(client.insert(isA(), isA())).thenThrow(RemoteException(""))
         testObject.save(Category())
@@ -247,13 +247,13 @@ class CategoryDaoTest {
         assertEquals("showImageWithItem", queryCaptor.firstValue[0])
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findCategoryTranslatesExceptions() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenThrow(RemoteException(""))
         testObject.find("showImageWithItem")
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun recentCategoriesTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenThrow(RemoteException(""))
         testObject.recentCategories(1)
@@ -312,7 +312,7 @@ class CategoryDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("1", "showImageWithItem", "description", "image", "123", "2"))
             }
         }

@@ -20,29 +20,30 @@ import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 class BookmarkLocationsFragment : DaggerFragment() {
-
     private var binding: FragmentBookmarksLocationsBinding? = null
 
     @Inject lateinit var controller: BookmarkLocationsController
+
     @Inject lateinit var contributionController: ContributionController
+
     @Inject lateinit var bookmarkLocationDao: BookmarkLocationsDao
+
     @Inject lateinit var commonPlaceClickActions: CommonPlaceClickActions
 
     private lateinit var inAppCameraLocationPermissionLauncher:
-            ActivityResultLauncher<Array<String>>
+        ActivityResultLauncher<Array<String>>
     private lateinit var adapter: PlaceAdapter
 
     private val cameraPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
             contributionController.handleActivityResultWithCallback(
-                requireActivity()
+                requireActivity(),
             ) { callbacks ->
                 contributionController.onPictureReturnedFromCamera(
                     result,
                     requireActivity(),
-                    callbacks
+                    callbacks,
                 )
             }
         }
@@ -50,32 +51,33 @@ class BookmarkLocationsFragment : DaggerFragment() {
     private val galleryPickLauncherForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
             contributionController.handleActivityResultWithCallback(
-                requireActivity()
+                requireActivity(),
             ) { callbacks ->
                 contributionController.onPictureReturnedFromGallery(
                     result,
                     requireActivity(),
-                    callbacks
+                    callbacks,
                 )
             }
         }
 
     companion object {
-        fun newInstance(): BookmarkLocationsFragment {
-            return BookmarkLocationsFragment()
-        }
+        fun newInstance(): BookmarkLocationsFragment = BookmarkLocationsFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding?.loadingImagesProgressBar?.visibility = View.VISIBLE
         binding?.listView?.layoutManager = LinearLayoutManager(context)
@@ -91,29 +93,30 @@ class BookmarkLocationsFragment : DaggerFragment() {
                         contributionController.handleShowRationaleFlowCameraLocation(
                             requireActivity(),
                             inAppCameraLocationPermissionLauncher,
-                            cameraPickLauncherForResult
+                            cameraPickLauncherForResult,
                         )
                     } else {
                         contributionController.locationPermissionCallback
                             ?.onLocationPermissionDenied(
-                                getString(R.string.in_app_camera_location_permission_denied)
+                                getString(R.string.in_app_camera_location_permission_denied),
                             )
                     }
                 }
             }
 
-        adapter = PlaceAdapter(
-            bookmarkLocationDao,
-            lifecycleScope,
-            { },
-            { place, _ ->
-                adapter.remove(place)
-            },
-            commonPlaceClickActions,
-            inAppCameraLocationPermissionLauncher,
-            galleryPickLauncherForResult,
-            cameraPickLauncherForResult
-        )
+        adapter =
+            PlaceAdapter(
+                bookmarkLocationDao,
+                lifecycleScope,
+                { },
+                { place, _ ->
+                    adapter.remove(place)
+                },
+                commonPlaceClickActions,
+                inAppCameraLocationPermissionLauncher,
+                galleryPickLauncherForResult,
+                cameraPickLauncherForResult,
+            )
         binding?.listView?.adapter = adapter
     }
 
@@ -124,7 +127,7 @@ class BookmarkLocationsFragment : DaggerFragment() {
 
     fun initList() {
         var places: List<Place>
-        if(view != null) {
+        if (view != null) {
             viewLifecycleOwner.lifecycleScope.launch {
                 places = controller.loadFavoritesLocations()
                 updateUIList(places)

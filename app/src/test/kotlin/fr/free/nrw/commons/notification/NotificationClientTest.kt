@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
@@ -104,11 +105,48 @@ class NotificationClientTest {
     fun markNotificationAsReadTest() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito
-            .`when`(service.markRead(anyString(), anyString(), anyString()))
+            .`when`(service.markRead(anyString(), anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
-        notificationClient.markNotificationAsRead("test")
-        verify(service).markRead(anyString(), anyString(), anyString())
+        notificationClient.markNotificationAsRead("1234", "enwiki")
+        verify(service).markRead("test", "1234", "", "enwiki")
+    }
+
+    /**
+     * Test that an invalid login token is reported to the subscriber
+     */
+    @Test
+    fun markNotificationAsReadPropagatesInvalidLoginToken() {
+        val invalidLoginToken = InvalidLoginTokenException("invalid")
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(invalidLoginToken)
+
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertError(invalidLoginToken)
+    }
+
+    /**
+     * Test that any other failure is reported as unsuccessful
+     */
+    @Test
+    fun markNotificationAsReadReturnsFalseOnOtherFailure() {
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenThrow(IllegalStateException("failure"))
+
+        notificationClient.markNotificationAsRead("test", "commonswiki").test().assertValue(false)
+    }
+
+    @Test
+    fun getUnreadCountReadsRawCount() {
+        val response = Mockito.mock(MwQueryResponse::class.java)
+        val result = Mockito.mock(MwQueryResult::class.java)
+        val notifications = Mockito.mock(MwQueryResult.NotificationList::class.java)
+
+        Mockito.`when`(response.query()).thenReturn(result)
+        Mockito.`when`(result.notifications()).thenReturn(notifications)
+        Mockito.`when`(notifications.rawCount()).thenReturn(100)
+        Mockito
+            .`when`(service.getUnreadNotificationCount(anyString()))
+            .thenReturn(Observable.just(response))
+
+        assertEquals(100, notificationClient.getUnreadCount().blockingGet())
     }
 
     @Suppress("SameParameterValue")
@@ -122,14 +160,18 @@ class NotificationClientTest {
 
         setTimestamp(Notification.Timestamp().apply { setUtciso8601(timestamp) })
 
-        contents = Notification.Contents().apply {
-            this.compactHeader = compactHeader
+        contents =
+            Notification.Contents().apply {
+                this.compactHeader = compactHeader
 
-            links = Notification.Links().apply {
-                setPrimary(GsonUtil.defaultGson.toJsonTree(
-                    Notification.Link().apply { url = primaryUrl }
-                ))
+                links =
+                    Notification.Links().apply {
+                        setPrimary(
+                            GsonUtil.defaultGson.toJsonTree(
+                                Notification.Link().apply { url = primaryUrl },
+                            ),
+                        )
+                    }
             }
-        }
     }
 }

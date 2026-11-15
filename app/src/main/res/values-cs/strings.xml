@@ -4,6 +4,7 @@
 * Aktron
 * Chmee2
 * Clon
+* Comfyquiettree
 * Dvorapa
 * Fjuro
 * Frettie
@@ -554,6 +555,7 @@
   <string name="delete_helper_ask_spam_selfie">selfie, které není použito v žádném článku</string>
   <string name="delete_helper_ask_spam_blurry">úplně rozmazané</string>
   <string name="delete_helper_ask_spam_nonsense">nesmysl, naprosto nepoužitelné v jakémkoli článku</string>
+  <string name="delete_helper_ask_spam_other">Jiné</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tisková fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -814,7 +816,7 @@
   </plurals>
   <string name="multiple_files_depiction">Nezapomeňte, že všechny obrázky ve hromadném nahrání získají stejné kategorie a znázornění. Pokud obrázky nesdílí znázornění a kategorie, nahrajte je prosím zvlášť.</string>
   <string name="multiple_files_depiction_header">Informace o hromadných nahráních</string>
-  <string name="nearby_wikitalk">Nahlásit problém s touto položkou do Wikidat</string>
+  <string name="nearby_report_problem">Nahlásit problém s touto položkou do Wikidat</string>
   <string name="please_enter_some_comments">Zadejte prosím komentář</string>
   <string name="talk">Diskuze</string>
   <string name="write_something_about_the_item">Napište komentář o položce „%1$s“. Bude veřejně viditelný.</string>

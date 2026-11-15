@@ -7,13 +7,17 @@ import androidx.core.text.underline
 object UnderlineUtils {
     // Convenience method for Java usages - remove when those classes are converted
     @JvmStatic
-    fun setUnderlinedText(textView: TextView, stringResourceName: Int) {
+    fun setUnderlinedText(
+        textView: TextView,
+        stringResourceName: Int,
+    ) {
         textView.setUnderlinedText(stringResourceName)
     }
 }
 
 fun TextView.setUnderlinedText(stringResourceName: Int) {
-    text = buildSpannedString {
-        underline { append(context.getString(stringResourceName)) }
-    }
+    text =
+        buildSpannedString {
+            underline { append(context.getString(stringResourceName)) }
+        }
 }

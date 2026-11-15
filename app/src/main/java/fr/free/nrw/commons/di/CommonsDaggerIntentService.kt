@@ -3,7 +3,9 @@ package fr.free.nrw.commons.di
 import android.app.IntentService
 import fr.free.nrw.commons.di.ApplicationlessInjection.Companion.getInstance
 
-abstract class CommonsDaggerIntentService(name: String?) : IntentService(name) {
+abstract class CommonsDaggerIntentService(
+    name: String?,
+) : IntentService(name) {
     override fun onCreate() {
         inject()
         super.onCreate()
@@ -12,8 +14,9 @@ abstract class CommonsDaggerIntentService(name: String?) : IntentService(name) {
     private fun inject() {
         val injection = getInstance(applicationContext)
 
-        val serviceInjector = injection.serviceInjector()
-            ?: throw NullPointerException("ApplicationlessInjection.serviceInjector() returned null")
+        val serviceInjector =
+            injection.serviceInjector()
+                ?: throw NullPointerException("ApplicationlessInjection.serviceInjector() returned null")
 
         serviceInjector.inject(this)
     }

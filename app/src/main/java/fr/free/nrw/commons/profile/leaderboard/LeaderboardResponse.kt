@@ -15,5 +15,5 @@ data class LeaderboardResponse(
     @SerializedName("duration") var duration: String? = null,
     @SerializedName("leaderboard_list") var leaderboardList: List<LeaderboardList>? = null,
     @SerializedName("category") var category: String? = null,
-    @SerializedName("rank") var rank: Int? = null
+    @SerializedName("rank") var rank: Int? = null,
 )

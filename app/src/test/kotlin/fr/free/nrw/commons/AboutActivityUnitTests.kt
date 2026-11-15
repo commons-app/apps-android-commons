@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import org.junit.Assert
 import org.junit.Before
@@ -43,7 +44,7 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchFacebook() {
-        activity.launchFacebook(null)
+        activity.findViewById<View>(R.id.facebook_launch_icon).performClick()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         Assert.assertEquals(startedIntent.action, "android.intent.action.VIEW")
@@ -54,43 +55,43 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testLaunchGithub() {
-        activity.launchGithub(null)
+        activity.findViewById<View>(R.id.github_launch_icon).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchWebsite() {
-        activity.launchWebsite(null)
+        activity.findViewById<View>(R.id.website_launch_icon).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchRatings() {
-        activity.launchRatings(null)
+        activity.findViewById<View>(R.id.about_rate_us).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchCredits() {
-        activity.launchCredits(null)
+        activity.findViewById<View>(R.id.about_credits).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchPrivacyPolicy() {
-        activity.launchPrivacyPolicy(null)
+        activity.findViewById<View>(R.id.about_privacy_policy).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchUserGuide() {
-        activity.launchUserGuide(null)
+        activity.findViewById<View>(R.id.about_user_guide).performClick()
     }
 
     @Test
     @Throws(Exception::class)
     fun testLaunchFrequentlyAskedQuestions() {
-        activity.launchFrequentlyAskedQuesions(null)
+        activity.findViewById<View>(R.id.about_faq).performClick()
     }
 
     @Test

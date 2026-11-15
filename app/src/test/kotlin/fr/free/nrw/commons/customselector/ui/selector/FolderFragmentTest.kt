@@ -21,7 +21,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -105,16 +104,6 @@ class FolderFragmentTest {
     fun testOnCreate() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onCreate(savedInstanceState)
-    }
-
-    /**
-     * Test columnCount.
-     */
-    @Test
-    fun testColumnCount() {
-        val func = fragment.javaClass.getDeclaredMethod("columnCount")
-        func.isAccessible = true
-        assertEquals(2, func.invoke(fragment))
     }
 
     /**

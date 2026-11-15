@@ -546,6 +546,7 @@
   <string name="delete_helper_ask_spam_selfie">um autorretrato que não é usado em nenhum artigo</string>
   <string name="delete_helper_ask_spam_blurry">completamente desfocada</string>
   <string name="delete_helper_ask_spam_nonsense">sem sentido, absolutamente não utilizável em nenhum artigo</string>
+  <string name="delete_helper_ask_spam_other">Outro</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotografia de imprensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografia aleatória da Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
@@ -798,7 +799,7 @@
     <item quantity="other">%1$d imagens selecionadas</item>
   </plurals>
   <string name="multiple_files_depiction_header">Nota sobre múltiplos envios</string>
-  <string name="nearby_wikitalk">Reporte um problema sobre este item no Wikidata</string>
+  <string name="nearby_report_problem">Reporte um problema sobre este item no Wikidata</string>
   <string name="please_enter_some_comments">Por favor, insira alguns comentários</string>
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>

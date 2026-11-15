@@ -3,25 +3,20 @@ package fr.free.nrw.commons.quiz
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
-
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-
 import com.facebook.drawee.drawable.ProgressBarDrawable
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
-
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityQuizBinding
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import java.util.ArrayList
 
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
-
-
 class QuizActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityQuizBinding
     private val quizController = QuizController()
     private var quiz = ArrayList<QuizQuestion>()
@@ -43,7 +38,8 @@ class QuizActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityQuizBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding.root)
-        WindowCompat.getInsetsController(window, window.decorView)
+        WindowCompat
+            .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars = true
         setContentView(binding.root)
 
@@ -51,6 +47,27 @@ class QuizActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar.toolbar)
         binding.nextButton.setOnClickListener { notKnowAnswer() }
         displayQuestion()
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    AlertDialog
+                        .Builder(this@QuizActivity)
+                        .setTitle(getString(R.string.warning))
+                        .setMessage(getString(R.string.quiz_back_button))
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.continue_message) { dialog, _ ->
+                            val intent = Intent(this@QuizActivity, QuizResultActivity::class.java)
+                            dialog.dismiss()
+                            intent.putExtra("QuizResult", score)
+                            startActivity(intent)
+                        }.setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
+                        .create()
+                        .show()
+                }
+            },
+        )
     }
 
     /**
@@ -67,25 +84,6 @@ class QuizActivity : AppCompatActivity() {
     }
 
     /**
-     * To give warning before ending quiz
-     */
-    override fun onBackPressed() {
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.warning))
-            .setMessage(getString(R.string.quiz_back_button))
-            .setCancelable(false)
-            .setPositiveButton(R.string.continue_message) { dialog, _ ->
-                val intent = Intent(this, QuizResultActivity::class.java)
-                dialog.dismiss()
-                intent.putExtra("QuizResult", score)
-                startActivity(intent)
-            }
-            .setNegativeButton("Cancel") { dialogInterface, _ -> dialogInterface.dismiss() }
-            .create()
-            .show()
-    }
-
-    /**
      * To display the question
      */
     @SuppressLint("SetTextI18n")
@@ -94,11 +92,12 @@ class QuizActivity : AppCompatActivity() {
         binding.question.questionText.text = quiz[questionIndex].question
         binding.questionTitle.text = getString(R.string.question) + quiz[questionIndex].questionNumber
 
-        binding.question.questionImage.hierarchy = GenericDraweeHierarchyBuilder
-            .newInstance(resources)
-            .setFailureImage(VectorDrawableCompat.create(resources, R.drawable.ic_error_outline_black_24dp, theme))
-            .setProgressBarImage(ProgressBarDrawable())
-            .build()
+        binding.question.questionImage.hierarchy =
+            GenericDraweeHierarchyBuilder
+                .newInstance(resources)
+                .setFailureImage(VectorDrawableCompat.create(resources, R.drawable.ic_error_outline_black_24dp, theme))
+                .setProgressBarImage(ProgressBarDrawable())
+                .build()
 
         binding.question.questionImage.setImageURI(quiz[questionIndex].getUrl())
         isPositiveAnswerChecked = false
@@ -119,19 +118,18 @@ class QuizActivity : AppCompatActivity() {
      */
     fun evaluateScore() {
         if (
-            (quiz[questionIndex].isAnswer && isPositiveAnswerChecked)
-                ||
+            (quiz[questionIndex].isAnswer && isPositiveAnswerChecked) ||
             (!quiz[questionIndex].isAnswer && isNegativeAnswerChecked)
-            ) {
+        ) {
             customAlert(
                 getString(R.string.correct),
-                quiz[questionIndex].answerMessage
+                quiz[questionIndex].answerMessage,
             )
             score++
         } else {
             customAlert(
                 getString(R.string.wrong),
-                quiz[questionIndex].answerMessage
+                quiz[questionIndex].answerMessage,
             )
         }
     }
@@ -141,12 +139,16 @@ class QuizActivity : AppCompatActivity() {
      * @param title The alert title
      * @param message The alert message
      */
-    fun customAlert(title: String, message: String) {
-        AlertDialog.Builder(this)
+    fun customAlert(
+        title: String,
+        message: String,
+    ) {
+        AlertDialog
+            .Builder(this)
             .setTitle(title)
             .setMessage(message)
             .setCancelable(false)
-            .setNegativeButton(R.string.cancel){_,_ -> }
+            .setNegativeButton(R.string.cancel) { _, _ -> }
             .setPositiveButton(R.string.continue_message) { dialog, _ ->
                 questionIndex++
                 if (questionIndex == quiz.size) {
@@ -157,8 +159,7 @@ class QuizActivity : AppCompatActivity() {
                 } else {
                     displayQuestion()
                 }
-            }
-            .create()
+            }.create()
             .show()
     }
 }

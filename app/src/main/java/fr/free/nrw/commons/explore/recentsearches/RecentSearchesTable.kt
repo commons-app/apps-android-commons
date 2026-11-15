@@ -14,15 +14,17 @@ object RecentSearchesTable {
 
     // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
     @JvmField
-    val ALL_FIELDS = arrayOf(
-        COLUMN_ID,
-        COLUMN_NAME,
-        COLUMN_LAST_USED,
-    )
+    val ALL_FIELDS =
+        arrayOf(
+            COLUMN_ID,
+            COLUMN_NAME,
+            COLUMN_LAST_USED,
+        )
 
     const val DROP_TABLE_STATEMENT: String = "DROP TABLE IF EXISTS $TABLE_NAME"
 
-    const val CREATE_TABLE_STATEMENT: String = ("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);")
+    const val CREATE_TABLE_STATEMENT: String =
+        "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY,$COLUMN_NAME STRING,$COLUMN_LAST_USED INTEGER);"
 
     /**
      * This method creates a RecentSearchesTable in SupportSQLiteDatabase
@@ -48,7 +50,11 @@ object RecentSearchesTable {
      * @param from Version from which we are migrating
      * @param to   Version to which we are migrating
      */
-    fun onUpdate(db: SupportSQLiteDatabase, from: Int, to: Int) {
+    fun onUpdate(
+        db: SupportSQLiteDatabase,
+        from: Int,
+        to: Int,
+    ) {
         if (from == to) {
             return
         }

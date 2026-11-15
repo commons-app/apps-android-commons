@@ -2,7 +2,6 @@ package fr.free.nrw.commons.explore.recentsearches
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.DialogInterface.OnClickListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,8 +31,9 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     private var binding: FragmentSearchHistoryBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchHistoryBinding.inflate(inflater, container, false)
 
@@ -65,26 +65,31 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
     }
 
     private fun showDeleteRecentAlertDialog(context: Context) {
-        AlertDialog.Builder(context)
+        AlertDialog
+            .Builder(context)
             .setMessage(getString(R.string.delete_recent_searches_dialog))
             .setPositiveButton(R.string.yes) { dialog: DialogInterface, _: Int ->
                 setDeleteRecentPositiveButton(context, dialog)
-            }
-            .setNegativeButton(R.string.no, null)
+            }.setNegativeButton(R.string.no, null)
             .setCancelable(false)
             .create()
             .show()
     }
 
-    private fun setDeleteRecentPositiveButton(context: Context, dialog: DialogInterface) {
+    private fun setDeleteRecentPositiveButton(
+        context: Context,
+        dialog: DialogInterface,
+    ) {
         recentSearchesDao!!.deleteAll()
         if (binding != null) {
             binding!!.recentSearchesDeleteButton.visibility = View.GONE
             binding!!.recentSearchesTextView.setText(R.string.no_recent_searches)
-            Toast.makeText(
-                getContext(), getString(R.string.search_history_deleted),
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    getContext(),
+                    getString(R.string.search_history_deleted),
+                    Toast.LENGTH_SHORT,
+                ).show()
             recentSearches = recentSearchesDao!!.recentSearches(10)
             adapter = ArrayAdapter(context, R.layout.item_recent_searches, recentSearches)
             binding!!.recentSearchesList.adapter = adapter
@@ -93,28 +98,37 @@ class RecentSearchesFragment : CommonsDaggerSupportFragment() {
         dialog.dismiss()
     }
 
-    private fun showDeleteAlertDialog(context: Context, position: Int) {
-        AlertDialog.Builder(context)
+    private fun showDeleteAlertDialog(
+        context: Context,
+        position: Int,
+    ) {
+        AlertDialog
+            .Builder(context)
             .setMessage(R.string.delete_search_dialog)
             .setPositiveButton(
                 getString(R.string.delete).uppercase(),
                 { dialog: DialogInterface, _: Int ->
                     setDeletePositiveButton(context, dialog, position)
-                }
-            )
-            .setNegativeButton(R.string.cancel, null)
+                },
+            ).setNegativeButton(R.string.cancel, null)
             .setCancelable(false)
             .create()
             .show()
     }
 
-    private fun setDeletePositiveButton(context: Context, dialog: DialogInterface, position: Int) {
+    private fun setDeletePositiveButton(
+        context: Context,
+        dialog: DialogInterface,
+        position: Int,
+    ) {
         recentSearchesDao!!.delete(recentSearchesDao!!.find(recentSearches[position])!!)
         recentSearches = recentSearchesDao!!.recentSearches(10)
-        adapter = ArrayAdapter(
-            context, R.layout.item_recent_searches,
-            recentSearches
-        )
+        adapter =
+            ArrayAdapter(
+                context,
+                R.layout.item_recent_searches,
+                recentSearches,
+            )
         if (binding != null) {
             binding!!.recentSearchesList.adapter = adapter
             adapter.notifyDataSetChanged()

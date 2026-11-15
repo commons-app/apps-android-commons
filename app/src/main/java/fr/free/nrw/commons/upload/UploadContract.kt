@@ -8,11 +8,12 @@ import fr.free.nrw.commons.kvstore.BasicKvStore
  * The contract using which the UplaodActivity would communicate with its presenter
  */
 interface UploadContract {
-    interface View {
+    /** Displays upload feedback and account prompts. */
+    interface Feedback {
+        /** Reports whether the user has an authenticated session. */
         fun isLoggedIn(): Boolean
 
-        fun finish()
-
+        /** Closes the upload flow. */
         fun returnToMainActivity()
 
         /**
@@ -22,16 +23,8 @@ interface UploadContract {
          */
         fun goToUploadProgressActivity()
 
+        /** Opens the login screen for an unauthenticated user. */
         fun askUserToLogIn()
-
-        /**
-         * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
-         * Fixes: [Issue](https://github.com/commons-app/apps-android-commons/issues/5511)
-         *
-         * @param index Index of image to be removed
-         * @param maxSize Max size of the `uploadableFiles`
-         */
-        fun highlightNextImageOnCancelledImage(index: Int, maxSize: Int)
 
         /**
          * Used to check if user has cancelled upload of any image in current upload
@@ -42,15 +35,36 @@ interface UploadContract {
          */
         fun setImageCancelled(isCancelled: Boolean)
 
+        /** Shows or dismisses upload progress. */
         fun showProgress(shouldShow: Boolean)
 
+        /** Displays an upload status message. */
         fun showMessage(messageResourceId: Int)
 
         /**
          * Displays an alert with message given by `messageResourceId`.
          * `onPositiveClick` is run after acknowledgement.
          */
-        fun showAlertDialog(messageResourceId: Int, onPositiveClick: Runnable)
+        fun showAlertDialog(
+            messageResourceId: Int,
+            onPositiveClick: Runnable,
+        )
+    }
+
+    interface View : Feedback {
+        fun finish()
+
+        /**
+         * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
+         * Fixes: [Issue](https://github.com/commons-app/apps-android-commons/issues/5511)
+         *
+         * @param index Index of image to be removed
+         * @param maxSize Max size of the `uploadableFiles`
+         */
+        fun highlightNextImageOnCancelledImage(
+            index: Int,
+            maxSize: Int,
+        )
 
         fun getUploadableFiles(): List<UploadableFile>?
 
@@ -64,6 +78,8 @@ interface UploadContract {
     }
 
     interface UserActionListener : BasePresenter<View> {
+        fun cleanup()
+
         fun handleSubmit()
 
         fun deletePictureAtIndex(index: Int)

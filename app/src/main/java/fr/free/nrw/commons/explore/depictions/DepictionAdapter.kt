@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.depictions
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -37,8 +38,8 @@ class DepictedItemViewHolder(
         root.setOnClickListener { onDepictionClicked(item) }
         depictsLabel.text = item.name
         description.text = item.description
-        if (item.imageUrl?.isNotBlank() == true) {
-            depictsImage.setImageURI(item.imageUrl)
+        if (item.thumbnailUrl?.isNotBlank() == true) {
+            depictsImage.setImageURI(Uri.parse(item.thumbnailUrl))
         } else {
             depictsImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
         }

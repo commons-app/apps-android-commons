@@ -404,6 +404,7 @@
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Una autofoto</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sense sentit</string>
+  <string name="delete_helper_ask_spam_other">Altre</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto de premsa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatòria d\'Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>

@@ -11,6 +11,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.databinding.FragmentPendingUploadsBinding
@@ -81,38 +82,35 @@ class PendingUploadsFragment :
         pendingUploadsPresenter.setup()
         pendingUploadsPresenter.totalContributionList
             .observe(viewLifecycleOwner) { list: PagedList<Contribution> ->
-            contributionsSize = list.size
-            contributionsList = mutableListOf()
-            var pausedOrQueuedUploads = 0
-            list.forEach {
-                if (it != null) {
-                    if (it.state == STATE_PAUSED ||
-                        it.state == STATE_QUEUED ||
-                        it.state == STATE_IN_PROGRESS
-                    ) {
-                        contributionsList.add(it)
-                    }
-                    if (it.state == STATE_PAUSED || it.state == STATE_QUEUED) {
-                        pausedOrQueuedUploads++
+                contributionsSize = list.size
+                contributionsList = mutableListOf()
+                var pausedOrQueuedUploads = 0
+                list.forEach {
+                    if (it != null) {
+                        if (it.state in setOf(STATE_PAUSED, STATE_QUEUED, STATE_IN_PROGRESS, STATE_METADATA_PENDING)) {
+                            contributionsList.add(it)
+                        }
+                        if (it.state in setOf(STATE_PAUSED, STATE_QUEUED, STATE_METADATA_PENDING)) {
+                            pausedOrQueuedUploads++
+                        }
                     }
                 }
-            }
-            if (contributionsSize == 0) {
-                binding.nopendingTextView.visibility = View.VISIBLE
-                binding.pendingUplaodsLl.visibility = View.GONE
-                uploadProgressActivity.hidePendingIcons()
-            } else {
-                binding.nopendingTextView.visibility = View.GONE
-                binding.pendingUplaodsLl.visibility = View.VISIBLE
-                adapter.submitList(list)
-                binding.progressTextView.setText("$contributionsSize uploads left")
-                if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
-                    uploadProgressActivity.setPausedIcon(true)
+                if (contributionsSize == 0) {
+                    binding.nopendingTextView.visibility = View.VISIBLE
+                    binding.pendingUplaodsLl.visibility = View.GONE
+                    uploadProgressActivity.hidePendingIcons()
                 } else {
-                    uploadProgressActivity.setPausedIcon(false)
+                    binding.nopendingTextView.visibility = View.GONE
+                    binding.pendingUplaodsLl.visibility = View.VISIBLE
+                    adapter.submitList(list)
+                    binding.progressTextView.setText("$contributionsSize uploads left")
+                    if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
+                        uploadProgressActivity.setPausedIcon(true)
+                    } else {
+                        uploadProgressActivity.setPausedIcon(false)
+                    }
                 }
             }
-        }
     }
 
     /**
@@ -130,7 +128,8 @@ class PendingUploadsFragment :
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
-                    contribution, requireContext().applicationContext,
+                    contribution,
+                    requireContext().applicationContext,
                 )
             },
             {},
@@ -140,9 +139,12 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() = pendingUploadsPresenter.restartUploads(
-        contributionsList, 0, requireContext().applicationContext
-    )
+    fun restartUploads() =
+        pendingUploadsPresenter.restartUploads(
+            contributionsList,
+            0,
+            requireContext().applicationContext,
+        )
 
     /**
      * Pauses all the ongoing uploads.
@@ -169,6 +171,7 @@ class PendingUploadsFragment :
                         STATE_QUEUED,
                         STATE_IN_PROGRESS,
                         STATE_PAUSED,
+                        STATE_METADATA_PENDING,
                     ),
                 )
             },

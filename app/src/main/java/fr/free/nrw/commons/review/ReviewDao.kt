@@ -10,7 +10,6 @@ import androidx.room.Query
  */
 @Dao
 interface ReviewDao {
-
     /**
      * Inserts reviewed/skipped image identifier into the database
      *

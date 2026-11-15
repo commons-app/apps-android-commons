@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface BookmarkCategoriesDao {
-
     /**
      * Insert or Delete category bookmark into DB
      *
@@ -22,7 +21,6 @@ interface BookmarkCategoriesDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(bookmarksCategoryModal: BookmarksCategoryModal)
-
 
     /**
      * Delete category bookmark from DB
@@ -48,5 +46,4 @@ interface BookmarkCategoriesDao {
      */
     @Query("SELECT * FROM bookmarks_categories")
     fun getAllCategories(): Flow<List<BookmarksCategoryModal>>
-
 }

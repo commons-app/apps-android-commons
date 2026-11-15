@@ -57,12 +57,12 @@ class AppLanguageLookUpTable(context: Context) {
     }
 
     fun getCanonicalName(code: String?): String? {
-        var name = defaultIndex(getCanonicalNames(), indexOfCode(code), null)
+        var name = getCanonicalNames().getOrNull(indexOfCode(code))
         if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
             name = when (code) {
                 Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.ENGLISH)
                 NORWEGIAN_LEGACY_LANGUAGE_CODE ->
-                    defaultIndex(getCanonicalNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                    getCanonicalNames().getOrNull(indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE))
                 else -> null
             }
         }
@@ -70,12 +70,12 @@ class AppLanguageLookUpTable(context: Context) {
     }
 
     fun getLocalizedName(code: String?): String? {
-        var name = defaultIndex(getLocalizedNames(), indexOfCode(code), null)
+        var name = getLocalizedNames().getOrNull(indexOfCode(code))
         if (name.isNullOrEmpty() && !code.isNullOrEmpty()) {
             name = when (code) {
                 Locale.CHINESE.language -> Locale.CHINESE.getDisplayName(Locale.CHINESE)
                 NORWEGIAN_LEGACY_LANGUAGE_CODE ->
-                    defaultIndex(getLocalizedNames(), indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE), null)
+                    getLocalizedNames().getOrNull(indexOfCode(NORWEGIAN_BOKMAL_LANGUAGE_CODE))
                 else -> null
             }
         }
@@ -104,10 +104,6 @@ class AppLanguageLookUpTable(context: Context) {
         return getCodes().contains(code)
     }
 
-    private fun <T> defaultIndex(list: List<T>, index: Int, defaultValue: T?): T? {
-        return if (inBounds(list, index)) list[index] else defaultValue
-    }
-
     /**
      * Searches #codes for the specified language code and returns the index for use in
      * #canonicalNames and #localizedNames.
@@ -123,10 +119,6 @@ class AppLanguageLookUpTable(context: Context) {
     /** @return Nonnull immutable list. */
     private fun getStringList(id: Int): List<String> {
         return getStringArray(id).toList()
-    }
-
-    private fun inBounds(list: List<*>, index: Int): Boolean {
-        return index in list.indices
     }
 
     fun getStringArray(@ArrayRes id: Int): Array<String> {

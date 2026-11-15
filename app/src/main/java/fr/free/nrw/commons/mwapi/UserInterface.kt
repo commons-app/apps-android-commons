@@ -14,7 +14,11 @@ interface UserInterface {
      * @param continuation continuation params returned in previous query
      * @return query response
      */
-    @GET(WikidataConstants.MW_API_PREFIX + "action=query&list=logevents&letype=upload&leprop=title|timestamp|ids&lelimit=500")
+    @GET(
+        WikidataConstants.MW_API_PREFIX +
+            "action=query&list=logevents&letype=upload&" +
+            "leprop=title|timestamp|ids&lelimit=500",
+    )
     fun getUserLogEvents(
         @Query("leuser") user: String?,
         @QueryMap continuation: Map<String?, String?>?,

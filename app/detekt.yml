@@ -1,0 +1,22 @@
+# Overrides on top of detekt's default config (buildUponDefaultConfig = true).
+
+naming:
+  FunctionNaming:
+    # Composable functions are named in PascalCase, see
+    # https://mrmans0n.github.io/compose-rules/latest/detekt/
+    ignoreAnnotated:
+      - "Composable"
+
+style:
+  UnusedPrivateMember:
+    # Preview composables are only used by Android Studio's preview tooling.
+    ignoreAnnotated:
+      - "Preview"
+  MagicNumber:
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '100'
+      - '100.0'

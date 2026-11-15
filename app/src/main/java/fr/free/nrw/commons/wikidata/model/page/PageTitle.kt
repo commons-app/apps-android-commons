@@ -13,6 +13,9 @@ import java.text.Normalizer
 import java.util.Arrays
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are URL/text accessors, equality
+// contracts, and Parcelable serialization belonging to this single page-title model.
+
 /**
  * Represents certain vital information about a page, including the title, namespace,
  * and fragment (section anchor target).  It can also contain a thumbnail URL for the
@@ -22,7 +25,12 @@ import java.util.Locale
  * description can be altered after construction. Therefore do NOT rely on all the fields
  * of a PageTitle to remain constant for the lifetime of the object.
  */
+@Suppress("TooManyFunctions")
 class PageTitle : Parcelable {
+    // The text before the first colon is taken as the namespace (File, Category, etc.), so a
+    // main namespace title with a colon, such as "RTÉ News: Six One", is not split correctly.
+    // This app doesn't deal with main namespace pages for now, so that is not a problem here.
+
     /**
      * The localised namespace of the page as a string, or null if the page is in mainspace.
      *
@@ -38,9 +46,6 @@ class PageTitle : Parcelable {
      * * [[Utilisateur:Deskana]] on frwiki will have a namespace of "Utilisateur", even if you got
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.
      */
-    // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
-    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
-    //       are broken.
     private val namespace: String?
     private val text: String
     val fragment: String?
@@ -63,7 +68,18 @@ class PageTitle : Parcelable {
         properties = null
     }
 
-    constructor(text: String?, wiki: WikiSite, thumbUrl: String?, description: String?, properties: PageProperties?) : this(text, wiki, thumbUrl, properties) {
+    constructor(
+        text: String?,
+        wiki: WikiSite,
+        thumbUrl: String?,
+        description: String?,
+        properties: PageProperties?,
+    ) : this(
+        text,
+        wiki,
+        thumbUrl,
+        properties,
+    ) {
         this.description = description
     }
 
@@ -74,18 +90,23 @@ class PageTitle : Parcelable {
     constructor(namespace: String?, text: String, wiki: WikiSite) : this(namespace, text, null, null, wiki)
 
     @JvmOverloads
-    constructor(text: String?, wiki: WikiSite, thumbUrl: String? = null) : this(text, wiki, thumbUrl, null as PageProperties?)
+    constructor(
+        text: String?,
+        wiki: WikiSite,
+        thumbUrl: String? = null,
+    ) : this(text, wiki, thumbUrl, null as PageProperties?)
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""
-        // FIXME: Does not handle mainspace articles with a colon in the title well at all
+        // Main namespace titles with a colon are not handled, see the note on namespace above
         val fragParts = text.split("#".toRegex()).toTypedArray()
         text = fragParts[0]
-        fragment = if (fragParts.size > 1) {
-            decodeURL(fragParts[1]).replace(" ", "_")
-        } else {
-            null
-        }
+        fragment =
+            if (fragParts.size > 1) {
+                decodeURL(fragParts[1]).replace(" ", "_")
+            } else {
+                null
+            }
 
         val parts = text.split(":".toRegex()).toTypedArray()
         if (parts.size > 1) {
@@ -120,18 +141,16 @@ class PageTitle : Parcelable {
         } catch (e: IllegalArgumentException) {
             // Swallow IllegalArgumentException (can happen with malformed encoding), and just
             // return the original string.
-            Timber.d("URL decoding failed. String was: %s", url)
+            Timber.d(e, "URL decoding failed. String was: %s", url)
             return url
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
-    private fun getTextWithoutSpaces(): String =
-        text.replace(" ", "_")
+    private fun getTextWithoutSpaces(): String = text.replace(" ", "_")
 
-    fun getConvertedText(): String =
-        if (convertedText == null) prefixedText else convertedText!!
+    fun getConvertedText(): String = if (convertedText == null) prefixedText else convertedText!!
 
     fun setConvertedText(convertedText: String?) {
         this.convertedText = convertedText
@@ -143,8 +162,7 @@ class PageTitle : Parcelable {
     val displayTextWithoutNamespace: String
         get() = text.replace("_", " ")
 
-    fun hasProperties(): Boolean =
-        properties != null
+    fun hasProperties(): Boolean = properties != null
 
     val isMainPage: Boolean
         get() = properties != null && properties.isMainPage
@@ -161,26 +179,30 @@ class PageTitle : Parcelable {
     fun getUriForAction(action: String?): String {
         try {
             return String.format(
+                Locale.ROOT,
                 "%1\$s://%2\$s/w/index.php?title=%3\$s&action=%4\$s",
                 wikiSite.scheme(),
                 wikiSite.authority(),
                 URLEncoder.encode(prefixedText, "utf-8"),
-                action
+                action,
             )
         } catch (e: UnsupportedEncodingException) {
-            throw RuntimeException(e)
+            throw IllegalStateException(e)
         }
     }
 
     // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
-        get() = namespace?.let { addUnderscores(it) + ":" + getTextWithoutSpaces() }
-            ?: getTextWithoutSpaces()
+        get() =
+            namespace?.let { addUnderscores(it) + ":" + getTextWithoutSpaces() }
+                ?: getTextWithoutSpaces()
 
-    private fun addUnderscores(text: String): String =
-        text.replace(" ", "_")
+    private fun addUnderscores(text: String): String = text.replace(" ", "_")
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeString(namespace)
         parcel.writeString(text)
         parcel.writeString(fragment)
@@ -205,12 +227,17 @@ class PageTitle : Parcelable {
     // This should be used when comparing or verifying strings that will be exchanged between
     // different platforms (iOS, desktop, etc) that may encode strings using inconsistent
     // composition, especially for accents, diacritics, etc.
-    private fun normalizedEquals(str1: String?, str2: String?): Boolean {
+    private fun normalizedEquals(
+        str1: String?,
+        str2: String?,
+    ): Boolean {
         if (str1 == null || str2 == null) {
             return (str1 == null && str2 == null)
         }
-        return (Normalizer.normalize(str1, Normalizer.Form.NFC)
-                == Normalizer.normalize(str2, Normalizer.Form.NFC))
+        return (
+            Normalizer.normalize(str1, Normalizer.Form.NFC)
+                == Normalizer.normalize(str2, Normalizer.Form.NFC)
+        )
     }
 
     override fun hashCode(): Int {
@@ -219,22 +246,23 @@ class PageTitle : Parcelable {
         return result
     }
 
-    override fun toString(): String =
-        prefixedText
+    override fun toString(): String = prefixedText
 
     override fun describeContents(): Int = 0
 
-    private fun getUriForDomain(domain: String): String = try {
-        String.format(
-            "%1\$s://%2\$s/wiki/%3\$s%4\$s",
-            wikiSite.scheme(),
-            domain,
-            URLEncoder.encode(prefixedText, "utf-8"),
-            if ((fragment != null && fragment.length > 0)) ("#$fragment") else ""
-        )
-    } catch (e: UnsupportedEncodingException) {
-        throw RuntimeException(e)
-    }
+    private fun getUriForDomain(domain: String): String =
+        try {
+            String.format(
+                Locale.ROOT,
+                "%1\$s://%2\$s/wiki/%3\$s%4\$s",
+                wikiSite.scheme(),
+                domain,
+                URLEncoder.encode(prefixedText, "utf-8"),
+                if ((fragment != null && fragment.length > 0)) ("#$fragment") else "",
+            )
+        } catch (e: UnsupportedEncodingException) {
+            throw IllegalStateException(e)
+        }
 
     private constructor(parcel: Parcel) {
         namespace = parcel.readString()
@@ -249,15 +277,12 @@ class PageTitle : Parcelable {
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<PageTitle> = object : Parcelable.Creator<PageTitle> {
-            override fun createFromParcel(parcel: Parcel): PageTitle {
-                return PageTitle(parcel)
-            }
+        val CREATOR: Parcelable.Creator<PageTitle> =
+            object : Parcelable.Creator<PageTitle> {
+                override fun createFromParcel(parcel: Parcel): PageTitle = PageTitle(parcel)
 
-            override fun newArray(size: Int): Array<PageTitle?> {
-                return arrayOfNulls(size)
+                override fun newArray(size: Int): Array<PageTitle?> = arrayOfNulls(size)
             }
-        }
 
         /**
          * Creates a new PageTitle object.
@@ -270,15 +295,15 @@ class PageTitle : Parcelable {
          */
         fun withSeparateFragment(
             prefixedText: String,
-            fragment: String?, wiki: WikiSite
-        ): PageTitle {
-            return if (TextUtils.isEmpty(fragment)) {
+            fragment: String?,
+            wiki: WikiSite,
+        ): PageTitle =
+            if (TextUtils.isEmpty(fragment)) {
                 PageTitle(prefixedText, wiki, null, null as PageProperties?)
             } else {
                 // TODO: this class needs some refactoring to allow passing in a fragment
                 // without having to do string manipulations.
                 PageTitle("$prefixedText#$fragment", wiki, null, null as PageProperties?)
             }
-        }
     }
 }

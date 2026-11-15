@@ -20,10 +20,10 @@ import fr.free.nrw.commons.databinding.ActivityNotificationBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomPaddingInsets
+import fr.free.nrw.commons.utils.applyEdgeToEdgeTopInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,7 +35,7 @@ import javax.inject.Inject
  * Created by root on 18.12.2017.
  */
 class NotificationActivity : BaseActivity() {
-
+    private lateinit var labels: NotificationLabels
     private lateinit var binding: ActivityNotificationBinding
 
     @Inject
@@ -59,21 +59,23 @@ class NotificationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         isRead = intent.getStringExtra("title") == "read"
         binding = ActivityNotificationBinding.inflate(layoutInflater)
+        labels = NotificationLabels(this, binding)
         ViewGroupCompat.installCompatInsetsDispatch(binding.root)
         applyEdgeToEdgeTopInsets(binding.toolbar.toolbar)
         binding.listView.applyEdgeToEdgeBottomPaddingInsets()
         setContentView(binding.root)
-        mNotificationWorkerFragment = supportFragmentManager.findFragmentByTag(
-            tagNotificationWorkerFragment
-        ) as? NotificationWorkerFragment
+        mNotificationWorkerFragment =
+            supportFragmentManager.findFragmentByTag(
+                tagNotificationWorkerFragment,
+            ) as? NotificationWorkerFragment
         initListView()
-        setPageTitle()
+        labels.setPageTitle(isRead)
         setSupportActionBar(binding.toolbar.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
@@ -81,40 +83,43 @@ class NotificationActivity : BaseActivity() {
     fun removeNotification(notification: Notification) {
         if (isRead) return
 
-        val disposable = Observable.defer { controller.markAsRead(notification) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                if (result) {
-                    notificationList.remove(notification)
-                    setItems(notificationList)
-                    adapter.notifyDataSetChanged()
-                    ViewUtil.showLongSnackbar(binding.container, getString(R.string.notification_mark_read))
-                    if (notificationList.isEmpty()) {
-                        setEmptyView()
-                        binding.container.visibility = View.GONE
-                        binding.noNotificationBackground.visibility = View.VISIBLE
+        val disposable =
+            Observable
+                .defer { controller.markAsRead(notification) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ result ->
+                    if (result) {
+                        notificationList.remove(notification)
+                        setItems(notificationList)
+                        adapter.notifyDataSetChanged()
+                        ViewUtil.showLongSnackbar(binding.container, getString(R.string.notification_mark_read))
+                        if (notificationList.isEmpty()) {
+                            labels.setEmptyView(isRead)
+                            binding.container.visibility = View.GONE
+                            binding.noNotificationBackground.visibility = View.VISIBLE
+                        }
+                    } else {
+                        adapter.notifyDataSetChanged()
+                        setItems(notificationList)
+                        ViewUtil.showLongToast(this, getString(R.string.some_error))
                     }
-                } else {
-                    adapter.notifyDataSetChanged()
-                    setItems(notificationList)
-                    ViewUtil.showLongToast(this, getString(R.string.some_error))
-                }
-            }, { throwable ->
-                if (throwable is InvalidLoginTokenException) {
-                    val username = sessionManager.userName
-                    val logoutListener = CommonsApplication.BaseLogoutListener(
-                        this,
-                        getString(R.string.invalid_login_message),
-                        username
-                    )
-                    CommonsApplication.instance.clearApplicationData(this, logoutListener)
-                } else {
-                    Timber.e(throwable, "Error occurred while loading notifications")
-                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
-                }
-                binding.progressBar.visibility = View.GONE
-            })
+                }, { throwable ->
+                    if (throwable is InvalidLoginTokenException) {
+                        val username = sessionManager.userName
+                        val logoutListener =
+                            CommonsApplication.BaseLogoutListener(
+                                this,
+                                getString(R.string.invalid_login_message),
+                                username,
+                            )
+                        CommonsApplication.instance.clearApplicationData(this, logoutListener)
+                    } else {
+                        Timber.e(throwable, "Error occurred while loading notifications")
+                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
+                    }
+                    binding.progressBar.visibility = View.GONE
+                })
         compositeDisposable.add(disposable)
     }
 
@@ -123,22 +128,24 @@ class NotificationActivity : BaseActivity() {
         val itemDecor = DividerItemDecoration(binding.listView.context, DividerItemDecoration.VERTICAL)
         binding.listView.addItemDecoration(itemDecor)
         refresh(isRead)
-        adapter = NotificationAdapter { item ->
-            Timber.d("Notification clicked %s", item.link)
-            if (item.notificationType == NotificationType.EMAIL) {
-                ViewUtil.showLongSnackbar(binding.container, getString(R.string.check_your_email_inbox))
-            } else {
-                handleUrl(item.link)
+        adapter =
+            NotificationAdapter { item ->
+                Timber.d("Notification clicked %s", item.link)
+                if (item.notificationType == NotificationType.EMAIL) {
+                    ViewUtil.showLongSnackbar(binding.container, getString(R.string.check_your_email_inbox))
+                } else {
+                    handleUrl(item.link)
+                }
+                removeNotification(item)
             }
-            removeNotification(item)
-        }
         binding.listView.adapter = adapter
     }
 
     private fun refresh(archived: Boolean) {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
             binding.progressBar.visibility = View.GONE
-            Snackbar.make(binding.container, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
+            Snackbar
+                .make(binding.container, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry) { refresh(archived) }
                 .show()
         } else {
@@ -154,26 +161,29 @@ class NotificationActivity : BaseActivity() {
         Timber.d("Add notifications")
         if (mNotificationWorkerFragment == null) {
             binding.progressBar.visibility = View.VISIBLE
-            compositeDisposable.add(controller.getNotifications(archived)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ notificationList ->
-                    notificationList.reversed()
-                    Timber.d("Number of notifications is %d", notificationList.size)
-                    this.notificationList = notificationList.toMutableList()
-                    if (notificationList.isEmpty()) {
-                        setEmptyView()
-                        binding.container.visibility = View.GONE
-                        binding.noNotificationBackground.visibility = View.VISIBLE
-                    } else {
-                        setItems(notificationList)
-                    }
-                    binding.progressBar.visibility = View.GONE
-                }, { throwable ->
-                    Timber.e(throwable, "Error occurred while loading notifications")
-                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
-                    binding.progressBar.visibility = View.GONE
-                }))
+            compositeDisposable.add(
+                controller
+                    .getNotifications(archived)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ notificationList ->
+                        notificationList.reversed()
+                        Timber.d("Number of notifications is %d", notificationList.size)
+                        this.notificationList = notificationList.toMutableList()
+                        if (notificationList.isEmpty()) {
+                            labels.setEmptyView(isRead)
+                            binding.container.visibility = View.GONE
+                            binding.noNotificationBackground.visibility = View.VISIBLE
+                        } else {
+                            setItems(notificationList)
+                        }
+                        binding.progressBar.visibility = View.GONE
+                    }, { throwable ->
+                        Timber.e(throwable, "Error occurred while loading notifications")
+                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications)
+                        binding.progressBar.visibility = View.GONE
+                    }),
+            )
         } else {
             notificationList = mNotificationWorkerFragment?.notificationList?.toMutableList() ?: mutableListOf()
             setItems(notificationList)
@@ -183,23 +193,22 @@ class NotificationActivity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_notifications, menu)
         notificationMenuItem = menu.findItem(R.id.archived)
-        setMenuItemTitle()
+        labels.setMenuItemTitle(isRead, notificationMenuItem)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
             R.id.archived -> {
                 if (item.title == getString(R.string.menu_option_read)) {
                     startYourself(this, "read")
                 } else if (item.title == getString(R.string.menu_option_unread)) {
-                    onBackPressed()
+                    onBackPressedDispatcher.onBackPressed()
                 }
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
 
     private fun handleUrl(url: String?) {
         if (url.isNullOrEmpty()) return
@@ -210,7 +219,7 @@ class NotificationActivity : BaseActivity() {
         if (notificationList.isNullOrEmpty()) {
             ViewUtil.showShortSnackbar(binding.container, R.string.no_notifications)
             binding.container.visibility = View.GONE
-            setEmptyView()
+            labels.setEmptyView(isRead)
             binding.noNotificationBackground.visibility = View.VISIBLE
             return
         }
@@ -219,32 +228,11 @@ class NotificationActivity : BaseActivity() {
         adapter.items = notificationList
     }
 
-    private fun setPageTitle() {
-        supportActionBar?.title = if (isRead) {
-            getString(R.string.read_notifications)
-        } else {
-            getString(R.string.notifications)
-        }
-    }
-
-    private fun setEmptyView() {
-        binding.noNotificationText.text = if (isRead) {
-            getString(R.string.no_read_notification)
-        } else {
-            getString(R.string.no_notification)
-        }
-    }
-
-    private fun setMenuItemTitle() {
-        notificationMenuItem?.title = if (isRead) {
-            getString(R.string.menu_option_unread)
-        } else {
-            getString(R.string.menu_option_read)
-        }
-    }
-
     companion object {
-        fun startYourself(context: Context, title: String) {
+        fun startYourself(
+            context: Context,
+            title: String,
+        ) {
             val intent = Intent(context, NotificationActivity::class.java)
             intent.putExtra("title", title)
             context.startActivity(intent)

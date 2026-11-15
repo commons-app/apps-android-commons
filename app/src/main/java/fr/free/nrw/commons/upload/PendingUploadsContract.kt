@@ -21,6 +21,9 @@ class PendingUploadsContract {
         /**
          * Deletes a upload.
          */
-        fun deleteUpload(contribution: Contribution?, context: Context?)
+        fun deleteUpload(
+            contribution: Contribution?,
+            context: Context?,
+        )
     }
 }
