@@ -76,9 +76,6 @@ class BookmarkPicturesFragmentUnitTests {
     @Mock
     private lateinit var mediaClient: MediaClient
 
-    @Mock
-    private lateinit var throwable: Throwable
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -109,6 +106,7 @@ class BookmarkPicturesFragmentUnitTests {
             ),
         )
         Whitebox.setInternalState(fragment, "binding", binding)
+        Whitebox.setInternalState(fragment, "statusView", BookmarkPicturesStatusView(binding))
 
         Whitebox.setInternalState(binding, "statusMessage", statusTextView)
         Whitebox.setInternalState(binding, "loadingImagesProgressBar", progressBar)
@@ -165,27 +163,6 @@ class BookmarkPicturesFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testHandleNoInternet() {
-        val method: Method =
-            BookmarkPicturesFragment::class.java.getDeclaredMethod("handleNoInternet")
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testHandleError() {
-        val method: Method =
-            BookmarkPicturesFragment::class.java.getDeclaredMethod(
-                "handleError",
-                Throwable::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, throwable)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testHandleSuccess() {
         gridAdapter.addItems(listOf(media()))
         val method: Method =
@@ -199,22 +176,5 @@ class BookmarkPicturesFragmentUnitTests {
         verify(statusTextView, times(1)).setVisibility(GONE)
         verify(gridView, times(1)).setVisibility(VISIBLE)
         verify(gridView, times(1)).setAdapter(any())
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitErrorView() {
-        val method: Method = BookmarkPicturesFragment::class.java.getDeclaredMethod("initErrorView")
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitEmptyBookmarkListView() {
-        val method: Method =
-            BookmarkPicturesFragment::class.java.getDeclaredMethod("initEmptyBookmarkListView")
-        method.isAccessible = true
-        method.invoke(fragment)
     }
 }

@@ -28,6 +28,9 @@ class Entities : MwResponse() {
         private val descriptions: Map<String, Label>? = null
         private val sitelinks: Map<String, SiteLink>? = null
 
+        @SerializedName("lastrevid")
+        val lastRevisionId: Long? = null
+
         @SerializedName(value = "statements", alternate = ["claims"])
         val statements: Map<String, List<StatementPartial>>? = null
         private val missing: String? = null
