@@ -35,7 +35,7 @@ fun placeAdapterDelegate(
     onDirectionsLongPressed: () -> Boolean,
     inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>,
     cameraPickLauncherForResult: ActivityResultLauncher<Intent>,
-    galleryPickLauncherForResult: ActivityResultLauncher<Intent>
+    galleryPickLauncherForResult: ActivityResultLauncher<Intent>,
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -58,7 +58,9 @@ fun placeAdapterDelegate(
                 }
             }
         }
-        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult) }
+        nearbyButtonLayout.cameraButton.setOnClickListener {
+            onCameraClicked(item, inAppCameraLocationPermissionLauncher, cameraPickLauncherForResult)
+        }
         nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
 
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item, galleryPickLauncherForResult) }

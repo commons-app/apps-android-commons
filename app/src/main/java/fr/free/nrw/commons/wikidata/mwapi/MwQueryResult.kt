@@ -3,11 +3,15 @@ package fr.free.nrw.commons.wikidata.mwapi
 import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter.PostProcessable
 import fr.free.nrw.commons.wikidata.model.BaseModel
-import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
 import org.apache.commons.lang3.StringUtils
 
-class MwQueryResult : BaseModel(), PostProcessable {
+// Suppressed TooManyFunctions because the class is a MediaWiki query response holder whose
+// methods only read response fields or post-process redirects and converted titles on pages.
+@Suppress("TooManyFunctions")
+class MwQueryResult :
+    BaseModel(),
+    PostProcessable {
     private val pages: List<MwQueryPage>? = null
     private val redirects: List<Redirect>? = null
     private val converted: List<ConvertedTitle>? = null
@@ -38,13 +42,14 @@ class MwQueryResult : BaseModel(), PostProcessable {
     fun getUserResponse(userName: String): ListUserResponse? =
         users?.find { StringUtils.capitalize(userName) == it.name() }
 
-    fun images() = buildMap {
-        pages?.forEach { page ->
-            page.imageInfo()?.let {
-                put(page.title(), it)
+    fun images() =
+        buildMap {
+            pages?.forEach { page ->
+                page.imageInfo()?.let {
+                    put(page.title(), it)
+                }
             }
         }
-    }
 
     override fun postProcess() {
         resolveConvertedTitles()
@@ -85,6 +90,7 @@ class MwQueryResult : BaseModel(), PostProcessable {
         }
     }
 
+    @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     private class Redirect {
         private val index = 0
         private val from: String? = null
@@ -129,6 +135,11 @@ class MwQueryResult : BaseModel(), PostProcessable {
     class NotificationList {
         private val list: List<Notification>? = null
 
+        @SerializedName("rawcount")
+        private val rawCount: Int? = null
+
         fun list(): List<Notification>? = list
+
+        fun rawCount(): Int? = rawCount
     }
 }

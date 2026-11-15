@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -19,7 +19,6 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
-import kotlin.reflect.jvm.internal.impl.builtins.functions.FunctionTypeKind
 
 /**
  * The unit test class for ContributionBoundaryCallbackTest
@@ -32,7 +31,7 @@ class ContributionBoundaryCallbackTest {
     internal lateinit var sessionManager: SessionManager
 
     @Mock
-    internal lateinit var mediaClient: MediaClient
+    internal lateinit var mediaCollectionClient: MediaCollectionClient
 
     private lateinit var contributionBoundaryCallback: ContributionBoundaryCallback
 
@@ -51,7 +50,7 @@ class ContributionBoundaryCallbackTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionBoundaryCallback =
-            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler)
+            ContributionBoundaryCallback(repository, sessionManager, mediaCollectionClient, scheduler)
         contributionBoundaryCallback.userName = "test"
     }
 
@@ -60,11 +59,11 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString()))
+        whenever(mediaCollectionClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onZeroItemsLoaded()
         verify(repository).save(anyList<Contribution>())
-        verify(mediaClient).getMediaListForUser(anyString())
+        verify(mediaCollectionClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -72,11 +71,11 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString()))
+        whenever(mediaCollectionClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtEndLoaded(mock(Contribution::class.java))
         verify(repository).save(anyList())
-        verify(mediaClient).getMediaListForUser(anyString())
+        verify(mediaCollectionClient).getMediaListForUser(anyString())
     }
 
     @Test
@@ -84,7 +83,7 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString()))
+        whenever(mediaCollectionClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
     }
@@ -94,32 +93,32 @@ class ContributionBoundaryCallbackTest {
         whenever(repository.save(anyList<Contribution>()))
             .thenReturn(Single.just(listOf(1L, 2L)))
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
+        whenever(mediaCollectionClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(media())),
         )
         val method: Method =
             ContributionBoundaryCallback::class.java.getDeclaredMethod(
                 "fetchContributions",
-                Function0::class.java
+                Function0::class.java,
             )
         method.isAccessible = true
         method.invoke(contributionBoundaryCallback, {})
         verify(repository).save(anyList())
-        verify(mediaClient).getMediaListForUser(anyString())
+        verify(mediaCollectionClient).getMediaListForUser(anyString())
     }
 
     @Test
     fun testFetchContributionsFailed() {
         whenever(sessionManager.userName).thenReturn("Test")
-        whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
+        whenever(mediaCollectionClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
         val method: Method =
             ContributionBoundaryCallback::class.java.getDeclaredMethod(
                 "fetchContributions",
-                Function0::class.java
+                Function0::class.java,
             )
         method.isAccessible = true
         method.invoke(contributionBoundaryCallback, {})
         verifyNoInteractions(repository)
-        verify(mediaClient).getMediaListForUser(anyString())
+        verify(mediaCollectionClient).getMediaListForUser(anyString())
     }
 }

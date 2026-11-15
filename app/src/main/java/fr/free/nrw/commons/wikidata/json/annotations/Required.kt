@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.wikidata.json.annotations
 
-
 /**
  * Annotate fields in Retrofit POJO classes with this to enforce their presence in order to return
  * an instantiated object.
@@ -9,4 +8,4 @@ package fr.free.nrw.commons.wikidata.json.annotations
  */
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FIELD)
-annotation class Required 
+annotation class Required

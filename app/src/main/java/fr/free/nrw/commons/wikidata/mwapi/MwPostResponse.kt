@@ -6,7 +6,5 @@ open class MwPostResponse : MwResponse() {
     @SerializedName("success")
     val successVal: Int = 0
 
-    fun success(result: String?): Boolean =
-        "success" == result
+    fun success(result: String?): Boolean = "success" == result
 }
-

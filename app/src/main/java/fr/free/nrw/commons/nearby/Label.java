@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Parcel;
 
+import android.util.SparseArray;
 import androidx.annotation.DrawableRes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import fr.free.nrw.commons.R;
@@ -29,7 +32,6 @@ public enum Label {
     COTTAGE(R.array.cottage_QIDs, R.drawable.round_icon_house),
     FARMHOUSE(R.array.farmhouse_QIDs, R.drawable.round_icon_house),
     TEMPLE(R.array.temple_QIDs, R.drawable.round_icon_church),
-
     CHURCH(R.array.church_QIDs, R.drawable.round_icon_church),
     GAS_STATION(R.array.gas_station_QIDs, R.drawable.round_icon_gas_station),
     RAILWAY_STATION(R.array.railway_station_QIDs, R.drawable.round_icon_railway_station),
@@ -53,14 +55,30 @@ public enum Label {
     UNKNOWN(0, R.drawable.round_icon_unknown);
 
     /**
-     * Lookup map which maps Q-ID -> Label.
+     * Sorted array of Q-ID integers for binary-search lookup.
      */
-    public static final Map<String, Label> TEXT_TO_DESCRIPTION = new HashMap<>();
+    private static volatile int[] QIDS = new int[0];
+
+    /**
+     * Labels parallel to {@link #QIDS}: QIDS[i] maps to QID_LABELS[i].
+     */
+    private static volatile Label[] QID_LABELS = new Label[0];
+
+    /**
+     * Localized place type names, mapping Q-ID -> label in the user's language.
+     * Empty until loaded from Wikidata.
+     */
+    private static volatile Map<String, String> localizedNames = new HashMap<>();
 
     private final int arrayResId;
     @DrawableRes
     private final int icon;
     private boolean selected;
+    /**
+     * Q-ID of the Wikidata item for this place type (first entry of its Q-ID array),
+     * used to fetch its localized name.
+     */
+    private String qid;
 
     Label(final int arrayResId, @DrawableRes final int icon) {
         this.arrayResId = arrayResId;
@@ -73,21 +91,50 @@ public enum Label {
     }
 
     /**
-     * Loads Q-IDs from Android resources
+     * Loads Q-IDs from Android resources into sorted primitive arrays.
+     * This method is idempotent; subsequent calls after the first are no-ops.
      *
-     * @param context any Android context applicationContext - much safer
+     * @param context any Android context; applicationContext is safest
      */
-    public static void init(final Context context) {
+    public static synchronized void init(final Context context) {
+        if (QIDS.length != 0) {
+            return;
+        }
         final Resources res = context.getResources();
+        // load all values in temp map which will be sorted by default
+        final SparseArray<Label> tempMap = new SparseArray<>();
         for (final Label label : values()) {
             if (label.arrayResId != 0) {
                 final int[] resArray = res.getIntArray(label.arrayResId);
+                if (resArray.length > 0) {
+                    label.qid = "Q" + resArray[0];
+                }
                 for (final int id : resArray) {
-                    final String qid = "Q" + id;
-                    TEXT_TO_DESCRIPTION.put(qid, label);
+                    tempMap.put(id, label);
                 }
             }
         }
+        //separate the ids and labels into arrays for binary search
+        final int[] ids = new int[tempMap.size()];
+        final Label[] labels = new Label[tempMap.size()];
+        for (int i = 0; i < tempMap.size(); i++) {
+            ids[i] = tempMap.keyAt(i);
+            labels[i] = tempMap.valueAt(i);
+        }
+        tempMap.clear();
+        QIDS = ids;
+        QID_LABELS = labels;
+    }
+
+    /**
+     * Looks up a Label by its numeric Q-ID using binary search.
+     *
+     * @param id the integer Q-ID (e.g. 16970)
+     * @return the matching {@link Label}, or {@link Label#UNKNOWN} if not found
+     */
+    public static Label fromQidInt(final int id) {
+        final int pos = Arrays.binarySearch(QIDS, id);
+        return pos >= 0 ? QID_LABELS[pos] : UNKNOWN;
     }
 
     /**
@@ -112,12 +159,62 @@ public enum Label {
         return icon;
     }
 
+    /**
+     * @return Q-ID of the Wikidata item for this place type, or null if it has none
+     */
+    public String getQid() {
+        return qid;
+    }
+
+    /**
+     * @return Q-IDs of all place types that have a Wikidata item
+     */
+    public static List<String> getQids() {
+        final List<String> qids = new ArrayList<>();
+        for (final Label label : values()) {
+            if (label.qid != null) {
+                qids.add(label.qid);
+            }
+        }
+        return qids;
+    }
+
+    /**
+     * @param names map of Q-ID -> localized name
+     */
+    public static void setLocalizedNames(final Map<String, String> names) {
+        localizedNames = new HashMap<>(names);
+    }
+
+    /**
+     * @param context any Android context
+     * @return name to display for this place type
+     */
+    public String getDisplayName(final Context context) {
+        if (this == BOOKMARKS) {
+            return context.getString(R.string.bookmarks);
+        }
+        final String localized = qid == null ? null : localizedNames.get(qid);
+        if (localized != null && !localized.isEmpty()) {
+            return localized.substring(0, 1).toUpperCase(Locale.getDefault())
+                + localized.substring(1);
+        }
+        final String readable = name().replace('_', ' ').toLowerCase(Locale.ROOT);
+        return readable.substring(0, 1).toUpperCase(Locale.ROOT) + readable.substring(1);
+    }
+
     public static Label fromText(final String text) {
         if ("BOOKMARK".equals(text)) {
             return BOOKMARKS;
         }
-        final Label label = TEXT_TO_DESCRIPTION.get(text);
-        return label == null ? UNKNOWN : label;
+        if (text == null || !text.startsWith("Q")) {
+            return UNKNOWN;
+        }
+        try {
+            return fromQidInt(Integer.parseInt(text.substring(1)));
+        } catch (final NumberFormatException e) {
+            return UNKNOWN;
+        }
     }
 
     public static List<Label> valuesAsList() {

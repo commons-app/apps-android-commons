@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.github.triplet.play) apply false
     alias(libs.plugins.getkeepsafe.dexcount)
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.detekt) apply false
 }
 
 subprojects{

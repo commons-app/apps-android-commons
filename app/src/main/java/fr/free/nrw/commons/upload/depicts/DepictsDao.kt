@@ -80,8 +80,7 @@ abstract class DepictsDao {
     fun savingDepictsInRoomDataBase(listDepictedItem: List<DepictedItem>) {
         CoroutineScope(Dispatchers.IO).launch {
             for (depictsItem in listDepictedItem) {
-                depictsItem.isSelected = false
-                insertDepict(Depicts(depictsItem, Date()))
+                insertDepict(Depicts(depictsItem.copy(isSelected = false), Date()))
             }
 
             // Deletes old Depicts objects from the database if

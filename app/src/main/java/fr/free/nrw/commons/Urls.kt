@@ -7,7 +7,8 @@ internal object Urls {
     const val WEBSITE_URL = "https://commons-app.github.io"
     const val CREDITS_URL = "https://github.com/commons-app/apps-android-commons/blob/master/CREDITS"
     const val USER_GUIDE_URL = "https://commons-app.github.io/docs.html"
-    const val FAQ_URL = "https://github.com/commons-app/commons-app-documentation/blob/master/android/Frequently-Asked-Questions.md"
+    const val FAQ_URL =
+        "https://github.com/commons-app/commons-app-documentation/blob/master/android/Frequently-Asked-Questions.md"
     const val PLAY_STORE_PREFIX = "market://details?id="
     const val PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id="
     const val TRANSLATE_WIKI_URL =

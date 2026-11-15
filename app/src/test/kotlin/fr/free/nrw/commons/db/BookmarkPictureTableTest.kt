@@ -7,7 +7,6 @@ import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class BookmarkPictureTableTest : InMemoryDatabaseTest() {
-
     @Test
     fun testTableExists() {
         assertTablesExist(BookmarksTable.TABLE_NAME)
@@ -17,10 +16,11 @@ class BookmarkPictureTableTest : InMemoryDatabaseTest() {
     @Test
     fun testInsertAndRetrieve() {
         val dao = roomDatabase.bookmarkPicturesRoomDao()
-        val bookmark = BookmarkPictureRoomEntity(
-            mediaName = "Test Image",
-            mediaCreator = "Test Creator"
-        )
+        val bookmark =
+            BookmarkPictureRoomEntity(
+                mediaName = "Test Image",
+                mediaCreator = "Test Creator",
+            )
         dao.insert(bookmark)
 
         val allBookmarks = dao.getAll().blockingGet()

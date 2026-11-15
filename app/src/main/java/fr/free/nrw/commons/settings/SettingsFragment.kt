@@ -392,7 +392,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 languagesAdapter.filter.filter(charSequence)
             }
 
-            override fun afterTextChanged(editable: Editable?) {}
+            override fun afterTextChanged(editable: Editable?) = Unit
         })
 
         languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
@@ -520,7 +520,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     companion object {
         const val GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content"
         private const val VANISH_ACCOUNT_URL = "https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps"
-        private const val VANISH_ACCOUNT_SUCCESS_URL = "https://meta.m.wikimedia.org/wiki/Special:GlobalVanishRequest/vanished"
+        private const val VANISH_ACCOUNT_SUCCESS_URL =
+            "https://meta.m.wikimedia.org/wiki/" +
+                "Special:GlobalVanishRequest/vanished"
         /**
          * Create Locale based on different types of language codes
          * @param languageCode

@@ -10,7 +10,9 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 
 class BookmarksPagerAdapter internal constructor(
-    fm: FragmentManager, context: Context, onlyPictures: Boolean
+    fm: FragmentManager,
+    context: Context,
+    onlyPictures: Boolean,
 ) : FragmentPagerAdapter(fm) {
     private val pages = mutableListOf<BookmarkPages>()
 
@@ -27,31 +29,34 @@ class BookmarksPagerAdapter internal constructor(
                 BookmarkListRootFragment(
                     bundleOf(
                         "categoryName" to context.getString(R.string.title_page_bookmarks_pictures),
-                        "order" to 0
-                    ), this
-                ), context.getString(R.string.title_page_bookmarks_pictures)
-            )
+                        "order" to 0,
+                    ),
+                    this,
+                ),
+                context.getString(R.string.title_page_bookmarks_pictures),
+            ),
         )
         if (!onlyPictures) {
             // if onlyPictures is false we also add the location fragment.
-            val locationBundle = bundleOf(
-                "categoryName" to context.getString(R.string.title_page_bookmarks_locations),
-                "order" to 1
-            )
+            val locationBundle =
+                bundleOf(
+                    "categoryName" to context.getString(R.string.title_page_bookmarks_locations),
+                    "order" to 1,
+                )
 
             pages.add(
                 BookmarkPages(
                     BookmarkListRootFragment(locationBundle, this),
-                    context.getString(R.string.title_page_bookmarks_locations)
-                )
+                    context.getString(R.string.title_page_bookmarks_locations),
+                ),
             )
 
             locationBundle.putInt("orderItem", 2)
             pages.add(
                 BookmarkPages(
                     BookmarkListRootFragment(locationBundle, this),
-                    context.getString(R.string.title_page_bookmarks_items)
-                )
+                    context.getString(R.string.title_page_bookmarks_items),
+                ),
             )
         }
         pages.add(
@@ -59,10 +64,12 @@ class BookmarksPagerAdapter internal constructor(
                 BookmarkListRootFragment(
                     bundleOf(
                         "categoryName" to context.getString(R.string.title_page_bookmarks_categories),
-                        "order" to 3
-                    ), this),
-                context.getString(R.string.title_page_bookmarks_categories)
-            )
+                        "order" to 3,
+                    ),
+                    this,
+                ),
+                context.getString(R.string.title_page_bookmarks_categories),
+            ),
         )
         notifyDataSetChanged()
     }

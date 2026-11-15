@@ -1,11 +1,8 @@
 package fr.free.nrw.commons.mwapi
 
-import android.text.TextUtils
 import com.google.gson.Gson
-import com.google.gson.JsonParser
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.fileusages.FileUsagesResponse
 import fr.free.nrw.commons.fileusages.GlobalFileUsagesResponse
 import fr.free.nrw.commons.location.LatLng
@@ -14,15 +11,10 @@ import fr.free.nrw.commons.nearby.model.ItemsClass
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.nearby.model.NearbyResponse
 import fr.free.nrw.commons.nearby.model.PlaceBindings
-import fr.free.nrw.commons.profile.achievements.FeaturedImages
-import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse
 import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse
 import fr.free.nrw.commons.upload.FileUtils
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
-import fr.free.nrw.commons.wikidata.model.GetWikidataEditCountResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +37,6 @@ import javax.inject.Singleton
 @Singleton
 class OkHttpJsonApiClient @Inject constructor(
     private val okHttpClient: OkHttpClient,
-    private val depictsClient: DepictsClient,
     private val wikiMediaToolforgeUrl: HttpUrl,
     private val sparqlQueryUrl: String,
     private val campaignsUrl: String,
@@ -82,6 +73,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         LeaderboardResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the leaderboard response")
                     return@fromCallable LeaderboardResponse()
                 }
             }
@@ -184,105 +176,8 @@ class OkHttpJsonApiClient @Inject constructor(
                         UpdateAvatarResponse::class.java
                     )
                 } catch (e: Exception) {
+                    Timber.e(e, "Failed to parse the avatar update response")
                     return@fromCallable UpdateAvatarResponse()
-                }
-            }
-            null
-        })
-    }
-
-    fun getUploadCount(userName: String?): Single<Int> {
-        val urlBuilder: HttpUrl.Builder = wikiMediaToolforgeUrl.newBuilder()
-            .addPathSegments("uploadsbyuser.py")
-            .addQueryParameter("user", userName)
-
-        if (isBetaFlavour) {
-            urlBuilder.addQueryParameter("labs", "commonswiki")
-        }
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful) {
-                val responseBody = response.body
-                if (null != responseBody) {
-                    val responseBodyString = responseBody.string().trim { it <= ' ' }
-                    if (!TextUtils.isEmpty(responseBodyString)) {
-                        try {
-                            return@fromCallable responseBodyString.toInt()
-                        } catch (e: NumberFormatException) {
-                            Timber.e(e)
-                        }
-                    }
-                }
-            }
-            0
-        })
-    }
-
-    fun getWikidataEdits(userName: String?): Single<Int> {
-        val urlBuilder: HttpUrl.Builder = wikiMediaToolforgeUrl.newBuilder()
-            .addPathSegments("wikidataedits.py")
-            .addQueryParameter("user", userName)
-
-        if (isBetaFlavour) {
-            urlBuilder.addQueryParameter("labs", "commonswiki")
-        }
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        return Single.fromCallable<Int>({
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response != null && response.isSuccessful && response.body != null) {
-                var json: String = response.body!!.string()
-                // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
-                val countResponse = gson
-                    .fromJson(
-                        json,
-                        GetWikidataEditCountResponse::class.java
-                    )
-                if (null != countResponse) {
-                    return@fromCallable countResponse.wikidataEditCount
-                }
-            }
-            0
-        })
-    }
-
-    fun getAchievements(userName: String?): Single<FeedbackResponse?> {
-        val suffix = if (isBetaFlavour) "/feedback.py?labs=commonswiki" else "/feedback.py"
-        val fetchAchievementUrlTemplate = wikiMediaToolforgeUrl.toString() + suffix
-        return Single.fromCallable<FeedbackResponse?>({
-            val url = String.format(
-                Locale.ENGLISH,
-                fetchAchievementUrlTemplate,
-                userName
-            )
-            val urlBuilder: HttpUrl.Builder = url.toHttpUrlOrNull()!!.newBuilder()
-                .addQueryParameter("user", userName)
-            val request: Request = Request.Builder()
-                .url(urlBuilder.toString())
-                .build()
-            val response: Response = okHttpClient.newCall(request).execute()
-            if (response.body != null && response.isSuccessful) {
-                var json: String = response.body!!.string()
-                // Extract JSON from response
-                json = json.substring(json.indexOf('{'))
-                Timber.d("Response for achievements is %s", json)
-                try {
-                    return@fromCallable gson.fromJson<FeedbackResponse>(
-                        json,
-                        FeedbackResponse::class.java
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    return@fromCallable FeedbackResponse(0, 0, 0, FeaturedImages(0, 0), 0, "")
                 }
             }
             null
@@ -307,6 +202,7 @@ class OkHttpJsonApiClient @Inject constructor(
             .replace("\${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
             .replace("\${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
             .replace("\${LANG}", language)
+            .replace("\${FALLBACK_LANGUAGES}", FALLBACK_LANGUAGES)
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
@@ -330,63 +226,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
-    }
-
-    /**
-     * Returns the count of items in the specified area by querying Wikidata.
-     *
-     * @param queryParams: a `NearbyQueryParam` specifying the geographical area.
-     * @return The count of items in the specified area.
-     */
-    @Throws(Exception::class)
-    fun getNearbyItemCount(
-        queryParams: NearbyQueryParams
-    ): Int {
-        val wikidataQuery: String = when (queryParams) {
-            is NearbyQueryParams.Rectangular -> {
-                val westCornerLat = queryParams.screenTopRight.latitude
-                val westCornerLong = queryParams.screenTopRight.longitude
-                val eastCornerLat = queryParams.screenBottomLeft.latitude
-                val eastCornerLong = queryParams.screenBottomLeft.longitude
-                FileUtils.readFromResource("/queries/rectangle_query_for_item_count.rq")
-                    .replace("\${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
-                    .replace("\${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
-                    .replace("\${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
-                    .replace("\${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
-            }
-
-            is NearbyQueryParams.Radial -> {
-                FileUtils.readFromResource("/queries/radius_query_for_item_count.rq")
-                    .replace(
-                        "\${LAT}",
-                        String.format(Locale.ROOT, "%.4f", queryParams.center.latitude)
-                    )
-                    .replace(
-                        "\${LONG}",
-                        String.format(Locale.ROOT, "%.4f", queryParams.center.longitude)
-                    )
-                    .replace("\${RAD}", String.format(Locale.ROOT, "%.2f", queryParams.radiusInKm))
-            }
-        }
-
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", wikidataQuery)
-            .addQueryParameter("format", "json")
-
-        val request: Request = Request.Builder()
-            .url(urlBuilder.build())
-            .build()
-
-        val response = okHttpClient.newCall(request).execute()
-        if (response.body != null && response.isSuccessful) {
-            val json = response.body!!.string()
-            return JsonParser.parseString(json).getAsJsonObject().getAsJsonObject("results")
-                .getAsJsonArray("bindings").get(0).getAsJsonObject().getAsJsonObject("itemCount")
-                .get("value").asInt
-        }
-        throw Exception(response.message)
+        throw IOException(response.message)
     }
 
     @Throws(Exception::class)
@@ -480,44 +320,7 @@ class OkHttpJsonApiClient @Inject constructor(
             }
             return places
         }
-        throw Exception(response.message)
-    }
-
-    @Throws(IOException::class)
-    fun getPlaces(
-        placeList: List<Place>, language: String
-    ): List<Place>? {
-        val wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq")
-        var qids = ""
-        for (place in placeList) {
-            qids += """
-${"wd:" + place.wikiDataEntityId}"""
-        }
-        val query = wikidataQuery
-            .replace("\${ENTITY}", qids)
-            .replace("\${LANG}", language)
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", query)
-            .addQueryParameter("format", "json")
-
-        val request: Request = Request.Builder().url(urlBuilder.build()).build()
-
-        okHttpClient.newCall(request).execute().use { response ->
-            if (response.isSuccessful) {
-                val json = response.body!!.string()
-                val nearbyResponse = gson.fromJson(json, NearbyResponse::class.java)
-                val bindings = nearbyResponse.results.bindings
-                val places: MutableList<Place> = ArrayList()
-                for (item in bindings) {
-                    val placeFromNearbyItem = Place.from(item)
-                    places.add(placeFromNearbyItem)
-                }
-                return places
-            } else {
-                throw IOException("Unexpected response code: " + response.code)
-            }
-        }
+        throw IOException(response.message)
     }
 
     @Throws(Exception::class)
@@ -583,7 +386,8 @@ ${"wd:" + place.wikiDataEntityId}"""
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://www.topografix.com/GPX/1/0"
  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
-<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
+<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" """ +
+                    """maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
 
         val placeBindings = runQuery(leftLatLng, rightLatLng)
         if (placeBindings != null) {
@@ -624,26 +428,6 @@ ${"wd:" + place.wikiDataEntityId}"""
         return gpxString
     }
 
-    @Throws(IOException::class)
-    fun getChildDepictions(
-        qid: String, startPosition: Int,
-        limit: Int
-    ): Single<List<DepictedItem>> =
-        depictedItemsFrom(sparqlQuery(qid, startPosition, limit, "/queries/subclasses_query.rq"))
-
-    @Throws(IOException::class)
-    fun getParentDepictions(
-        qid: String, startPosition: Int,
-        limit: Int
-    ): Single<List<DepictedItem>> = depictedItemsFrom(
-        sparqlQuery(
-            qid,
-            startPosition,
-            limit,
-            "/queries/parentclasses_query.rq"
-        )
-    )
-
     fun getCampaigns(): Single<CampaignResponseDTO> {
         return Single.fromCallable<CampaignResponseDTO?>({
             val request: Request = Request.Builder().url(campaignsUrl).build()
@@ -657,36 +441,6 @@ ${"wd:" + place.wikiDataEntityId}"""
             }
             null
         })
-    }
-
-    private fun depictedItemsFrom(request: Request): Single<List<DepictedItem>> {
-        return depictsClient.toDepictions(Single.fromCallable({
-            okHttpClient.newCall(request).execute().body.use { body ->
-                return@fromCallable gson.fromJson<SparqlResponse>(
-                    body!!.string(),
-                    SparqlResponse::class.java
-                )
-            }
-        }).doOnError({ t: Throwable? -> Timber.e(t) }))
-    }
-
-    @Throws(IOException::class)
-    private fun sparqlQuery(
-        qid: String,
-        startPosition: Int,
-        limit: Int,
-        fileName: String
-    ): Request {
-        val query = FileUtils.readFromResource(fileName)
-            .replace("\${QID}", qid)
-            .replace("\${LANG}", "\"" + Locale.getDefault().language + "\"")
-            .replace("\${LIMIT}", "" + limit)
-            .replace("\${OFFSET}", "" + startPosition)
-        val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
-            .newBuilder()
-            .addQueryParameter("query", query)
-            .addQueryParameter("format", "json")
-        return Request.Builder().url(urlBuilder.build()).build()
     }
 
     @Throws(IOException::class)

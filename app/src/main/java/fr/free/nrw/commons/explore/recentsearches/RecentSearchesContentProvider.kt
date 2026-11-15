@@ -18,37 +18,44 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable.TABLE_NAME
  * inserting, searching, deleting, editing recent searches in SqLite DB
  */
 class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
-
     /**
      * This functions executes query for searching recent searches in SqLite DB
      */
     override fun query(
-        uri: Uri, projection: Array<String>?, selection: String?,
-        selectionArgs: Array<String>?, sortOrder: String?
+        uri: Uri,
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortOrder: String?,
     ): Cursor {
         val queryBuilder = SupportSQLiteQueryBuilder.builder(TABLE_NAME)
 
         val uriType = uriMatcher.match(uri)
 
-        val cursor = when (uriType) {
-            RECENT_SEARCHES -> requireDb().query(
-                queryBuilder.columns(projection)
-                    .selection(selection, selectionArgs)
-                    .orderBy(sortOrder)
-                    .create()
-            )
-
-            RECENT_SEARCHES_ID -> requireDb().query(
-                queryBuilder.columns(ALL_FIELDS)
-                    .selection(
-                        "$COLUMN_ID = ?", arrayOf(uri.lastPathSegment)
+        val cursor =
+            when (uriType) {
+                RECENT_SEARCHES ->
+                    requireDb().query(
+                        queryBuilder
+                            .columns(projection)
+                            .selection(selection, selectionArgs)
+                            .orderBy(sortOrder)
+                            .create(),
                     )
-                    .orderBy(sortOrder)
-                    .create()
-            )
 
-            else -> throw IllegalArgumentException("Unknown URI$uri")
-        }
+                RECENT_SEARCHES_ID ->
+                    requireDb().query(
+                        queryBuilder
+                            .columns(ALL_FIELDS)
+                            .selection(
+                                "$COLUMN_ID = ?",
+                                arrayOf(uri.lastPathSegment),
+                            ).orderBy(sortOrder)
+                            .create(),
+                    )
+
+                else -> throw IllegalArgumentException("Unknown URI$uri")
+            }
 
         cursor.setNotificationUri(context?.contentResolver, uri)
 
@@ -60,15 +67,20 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
     /**
      * This functions executes query for inserting a recentSearch object in SqLite DB
      */
-    override fun insert(uri: Uri, contentValues: ContentValues?): Uri? {
+    override fun insert(
+        uri: Uri,
+        contentValues: ContentValues?,
+    ): Uri? {
         val uriType = uriMatcher.match(uri)
-        val id: Long? = when (uriType) {
-            RECENT_SEARCHES -> contentValues?.let {
-                requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it)
-            }
+        val id: Long? =
+            when (uriType) {
+                RECENT_SEARCHES ->
+                    contentValues?.let {
+                        requireDb().insert(TABLE_NAME, SQLiteDatabase.CONFLICT_NONE, it)
+                    }
 
-            else -> throw IllegalArgumentException("Unknown URI: $uri")
-        }
+                else -> throw IllegalArgumentException("Unknown URI: $uri")
+            }
         context?.contentResolver?.notifyChange(uri, null)
         return "$BASE_URI/$id".toUri()
     }
@@ -76,16 +88,21 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
     /**
      * This functions executes query for deleting a recentSearch object in SqLite DB
      */
-    override fun delete(uri: Uri, s: String?, strings: Array<String>?): Int {
+    override fun delete(
+        uri: Uri,
+        s: String?,
+        strings: Array<String>?,
+    ): Int {
         val rows: Int
         val uriType = uriMatcher.match(uri)
         when (uriType) {
             RECENT_SEARCHES_ID -> {
-                rows = requireDb().delete(
-                    TABLE_NAME,
-                    "_id = ?",
-                    arrayOf(uri.lastPathSegment)
-                )
+                rows =
+                    requireDb().delete(
+                        TABLE_NAME,
+                        "_id = ?",
+                        arrayOf(uri.lastPathSegment),
+                    )
             }
 
             else -> throw IllegalArgumentException("Unknown URI - $uri")
@@ -97,7 +114,10 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
     /**
      * This functions executes query for inserting multiple recentSearch objects in SqLite DB
      */
-    override fun bulkInsert(uri: Uri, values: Array<ContentValues>): Int {
+    override fun bulkInsert(
+        uri: Uri,
+        values: Array<ContentValues>,
+    ): Int {
         val uriType = uriMatcher.match(uri)
         val sqlDB = requireDb()
         sqlDB.beginTransaction()
@@ -118,8 +138,10 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
      * This functions executes query for updating a particular recentSearch object in SqLite DB
      */
     override fun update(
-        uri: Uri, contentValues: ContentValues?, selection: String?,
-        selectionArgs: Array<String>?
+        uri: Uri,
+        contentValues: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<String>?,
     ): Int {
         /*
         SQL Injection warnings: First, note that we're not exposing this to the
@@ -133,21 +155,21 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         val uriType = uriMatcher.match(uri)
         var rowsUpdated: Int = 0
         when (uriType) {
-            RECENT_SEARCHES_ID -> if (selection.isNullOrEmpty()) {
+            RECENT_SEARCHES_ID -> {
+                require(selection.isNullOrEmpty()) {
+                    "Parameter `selection` should be empty when updating an ID"
+                }
                 val id = uri.lastPathSegment!!.toInt()
                 contentValues?.let {
-                    rowsUpdated = requireDb().update(
-                        TABLE_NAME,
-                        SQLiteDatabase.CONFLICT_NONE,
-                        it,
-                        "$COLUMN_ID = ?",
-                        arrayOf(id.toString())
-                    )
+                    rowsUpdated =
+                        requireDb().update(
+                            TABLE_NAME,
+                            SQLiteDatabase.CONFLICT_NONE,
+                            it,
+                            "$COLUMN_ID = ?",
+                            arrayOf(id.toString()),
+                        )
                 }
-            } else {
-                throw IllegalArgumentException(
-                    "Parameter `selection` should be empty when updating an ID"
-                )
             }
 
             else -> throw IllegalArgumentException("Unknown URI: $uri with type $uriType")
@@ -176,4 +198,3 @@ class RecentSearchesContentProvider : CommonsDaggerContentProvider() {
         fun uriForId(id: Int): Uri = "$BASE_URI/$id".toUri()
     }
 }
-

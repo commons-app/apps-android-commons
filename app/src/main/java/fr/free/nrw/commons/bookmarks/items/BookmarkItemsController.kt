@@ -8,16 +8,16 @@ import javax.inject.Singleton
  * Handles loading bookmarked items from Database
  */
 @Singleton
-class BookmarkItemsController @Inject constructor() {
-    @JvmField
+class BookmarkItemsController
     @Inject
-    var bookmarkItemsDao: BookmarkItemsDao? = null
+    constructor() {
+        @JvmField
+        @Inject
+        var bookmarkItemsDao: BookmarkItemsDao? = null
 
-    /**
-     * Load from DB the bookmarked items
-     * @return a list of DepictedItem objects.
-     */
-    fun loadFavoritesItems(): List<DepictedItem> {
-        return bookmarkItemsDao?.getAllBookmarksItems() ?: emptyList()
+        /**
+         * Load from DB the bookmarked items
+         * @return a list of DepictedItem objects.
+         */
+        fun loadFavoritesItems(): List<DepictedItem> = bookmarkItemsDao?.getAllBookmarksItems() ?: emptyList()
     }
-}

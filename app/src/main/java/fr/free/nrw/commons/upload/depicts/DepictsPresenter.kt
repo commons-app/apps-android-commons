@@ -96,9 +96,15 @@ class DepictsPresenter
                 return repository
                     .searchAllEntities(querystring)
                     .subscribeOn(ioScheduler)
-                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
-                    .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
-                    .map { it.distinctBy(DepictedItem::id) }
+                    .map {
+                        repository.getSelectedDepictions() + it + recentDepictedItemList +
+                            controller.loadFavoritesItems()
+                    }.map {
+                        it.filterNot { item ->
+                            WikidataDisambiguationItems
+                                .isDisambiguationItem(item.instanceOfs)
+                        }
+                    }.map { it.distinctBy(DepictedItem::id) }
             } else {
                 return Flowable
                     .zip(
@@ -121,9 +127,15 @@ class DepictsPresenter
                     ) { it1, it2 ->
                         it1 + it2
                     }.subscribeOn(ioScheduler)
-                    .map { repository.getSelectedDepictions() + it + recentDepictedItemList + controller.loadFavoritesItems() }
-                    .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
-                    .map { it.distinctBy(DepictedItem::id) }
+                    .map {
+                        repository.getSelectedDepictions() + it + recentDepictedItemList +
+                            controller.loadFavoritesItems()
+                    }.map {
+                        it.filterNot { item ->
+                            WikidataDisambiguationItems
+                                .isDisambiguationItem(item.instanceOfs)
+                        }
+                    }.map { it.distinctBy(DepictedItem::id) }
             }
         }
 
@@ -138,7 +150,8 @@ class DepictsPresenter
          */
         override fun selectPlaceDepictions() {
             compositeDisposable.add(
-                repository.getPlaceDepictions()
+                repository
+                    .getPlaceDepictions()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
                     .subscribe(::selectNewDepictions),
@@ -168,27 +181,26 @@ class DepictsPresenter
             repository.cleanup()
         }
 
-    /**
-     * Update Depictions list which are selected from the map
-     */
-    override fun onPlaceSelectedFromMap(place: Place) {
-        place.wikiDataEntityId?.let { qid ->
-            compositeDisposable.add(
-                repository.getDepictions(listOf(qid))
-                    .subscribeOn(ioScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .subscribe({ depictedItems ->
-                        selectNewDepictions(depictedItems)
-                    }, { error ->
-                        Timber.e(error, "Failed to fetch depiction for place from map")
-                    })
-            )
+        /**
+         * Update Depictions list which are selected from the map
+         */
+        override fun onPlaceSelectedFromMap(place: Place) {
+            place.wikiDataEntityId?.let { qid ->
+                compositeDisposable.add(
+                    repository
+                        .getDepictions(listOf(qid))
+                        .subscribeOn(ioScheduler)
+                        .observeOn(mainThreadScheduler)
+                        .subscribe({ depictedItems ->
+                            selectNewDepictions(depictedItems)
+                        }, { error ->
+                            Timber.e(error, "Failed to fetch depiction for place from map")
+                        }),
+                )
+            }
         }
-    }
-    
-    override fun getUploads(): List<UploadItem> {
-        return repository.getUploads()
-    }
+
+        override fun getUploads(): List<UploadItem> = repository.getUploads()
 
         override fun onPreviousButtonClicked() {
             view.goToPreviousScreen()
@@ -315,7 +327,8 @@ class DepictsPresenter
  * This creates a dynamic proxy instance of the class,
  * proxy is to control access to the target object
  * here our target object is the view.
- * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy instance
+ * Thus we when onDettach method of fragment is called we replace the binding of view to our object with the proxy
+ * instance
  */
 inline fun <reified T> proxy() =
     Proxy

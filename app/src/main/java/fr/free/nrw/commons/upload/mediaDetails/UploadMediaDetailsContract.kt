@@ -15,19 +15,9 @@ import fr.free.nrw.commons.upload.UploadMediaDetail
  * The contract with with UploadMediaDetails and its presenter would talk to each other
  */
 interface UploadMediaDetailsContract {
-    interface View : SimilarImageInterface {
-        fun onImageProcessed(uploadItem: UploadItem)
-
-        fun onNearbyPlaceFound(uploadItem: UploadItem, place: Place?)
-
-        fun showProgress(shouldShow: Boolean)
-
-        fun onImageValidationSuccess()
-
-        fun showMessage(stringResourceId: Int, colorResourceId: Int)
-
-        fun showMessage(message: String, colorResourceId: Int)
-
+    /** Dialogs shown while validating an upload image. */
+    interface Dialogs : SimilarImageInterface {
+        /** Confirms whether an upload should keep a duplicate filename. */
         fun showDuplicatePicturePopup(uploadItem: UploadItem)
 
         /**
@@ -43,29 +33,67 @@ interface UploadMediaDetailsContract {
          */
         fun showConnectionErrorPopupForCaptionCheck()
 
+        /** Confirms whether an image with a quality warning should be uploaded. */
+        fun showBadImagePopup(
+            errorCode: Int,
+            index: Int,
+            uploadItem: UploadItem,
+        )
+    }
+
+    /** Location selection and missing-location prompts for an upload image. */
+    interface Location {
+        /** Opens the location picker for the current upload item. */
         fun showExternalMap(uploadItem: UploadItem)
+
+        /** Offers to add coordinates before proceeding with the upload. */
+        fun displayAddLocationDialog(runnable: Runnable)
+    }
+
+    interface View :
+        Dialogs,
+        Location {
+        fun onImageProcessed(uploadItem: UploadItem)
+
+        fun onNearbyPlaceFound(
+            uploadItem: UploadItem,
+            place: Place?,
+        )
+
+        fun showProgress(shouldShow: Boolean)
+
+        fun onImageValidationSuccess()
+
+        fun showMessage(
+            stringResourceId: Int,
+            colorResourceId: Int,
+        )
+
+        fun showMessage(
+            message: String,
+            colorResourceId: Int,
+        )
 
         fun showEditActivity(uploadItem: UploadItem)
 
         fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>)
-
-        fun displayAddLocationDialog(runnable: Runnable)
-
-        fun showBadImagePopup(errorCode: Int, index: Int, uploadItem: UploadItem)
     }
 
+    // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
+    // contract for this screen and stay together to maintain contract integrity.
+    @Suppress("TooManyFunctions")
     interface UserActionListener : BasePresenter<View> {
         fun setupBasicKvStoreFactory(factory: (String) -> BasicKvStore)
 
         fun receiveImage(
             uploadableFile: UploadableFile?,
             place: Place?,
-            inAppPictureLocation: LatLng?
+            inAppPictureLocation: LatLng?,
         )
 
         fun setUploadMediaDetails(
             uploadMediaDetails: List<UploadMediaDetail>,
-            uploadItemIndex: Int
+            uploadItemIndex: Int,
         )
 
         /**
@@ -79,7 +107,7 @@ interface UploadMediaDetailsContract {
         fun getImageQuality(
             uploadItemIndex: Int,
             inAppPictureLocation: LatLng?,
-            activity: Activity
+            activity: Activity,
         ): Boolean
 
         /**
@@ -94,7 +122,7 @@ interface UploadMediaDetailsContract {
         fun displayLocDialog(
             uploadItemIndex: Int,
             inAppPictureLocation: LatLng?,
-            hasUserRemovedLocation: Boolean
+            hasUserRemovedLocation: Boolean,
         )
 
         /**
@@ -103,7 +131,10 @@ interface UploadMediaDetailsContract {
          * @param uploadItem UploadItem whose quality is to be checked
          * @param index Index of the UploadItem whose quality is to be checked
          */
-        fun checkImageQuality(uploadItem: UploadItem, index: Int)
+        fun checkImageQuality(
+            uploadItem: UploadItem,
+            index: Int,
+        )
 
         /**
          * Updates the image qualities stored in JSON, whenever an image is deleted
@@ -111,18 +142,32 @@ interface UploadMediaDetailsContract {
          * @param size Size of uploadableFiles
          * @param index Index of the UploadItem which was deleted
          */
-        fun updateImageQualitiesJSON(size: Int, index: Int)
+        fun updateImageQualitiesJSON(
+            size: Int,
+            index: Int,
+        )
 
         fun copyTitleAndDescriptionToSubsequentMedia(indexInViewFlipper: Int)
 
         fun fetchTitleAndDescription(indexInViewFlipper: Int)
 
-        fun useSimilarPictureCoordinates(imageCoordinates: ImageCoordinates, uploadItemIndex: Int)
+        fun useSimilarPictureCoordinates(
+            imageCoordinates: ImageCoordinates,
+            uploadItemIndex: Int,
+        )
 
         fun onMapIconClicked(indexInViewFlipper: Int)
 
         fun onEditButtonClicked(indexInViewFlipper: Int)
 
-        fun onUserConfirmedUploadIsOfPlace(place: Place?, uploadItemIndex: Int)
+        /**
+         * Returns the upload item at the given index, or null if there is none
+         */
+        fun getUploadItem(indexInViewFlipper: Int): UploadItem?
+
+        fun onUserConfirmedUploadIsOfPlace(
+            place: Place?,
+            uploadItemIndex: Int,
+        )
     }
 }

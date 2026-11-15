@@ -13,6 +13,19 @@
         android:text="@string/place_type"
         android:textColor="@color/white"/>
 
+    <TextView
+        android:id="@+id/filter_count"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/tiny_margin"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:textColor="@color/status_bar_blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="wrap_content"

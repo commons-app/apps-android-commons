@@ -9,7 +9,6 @@ import io.reactivex.Single
 
 @Dao
 interface BookmarkItemsRoomDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(depictedItem: BookmarkItemsRoomEntity)
 

@@ -25,55 +25,60 @@ import fr.free.nrw.commons.R
 fun View.applyEdgeToEdgeInsetsAsMargin(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
     shouldConsumeInsets: Boolean = true,
-    block: MarginLayoutParams.(InsetsAccumulator) -> Unit
+    block: MarginLayoutParams.(InsetsAccumulator) -> Unit,
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
         val insets = windowInsets.getInsets(typeMask)
 
-        val initialTop = if (view.getTag(R.id.initial_margin_top) != null) {
-            view.getTag(R.id.initial_margin_top) as Int
-        } else {
-            view.setTag(R.id.initial_margin_top, view.marginTop)
-            view.marginTop
-        }
+        val initialTop =
+            if (view.getTag(R.id.initial_margin_top) != null) {
+                view.getTag(R.id.initial_margin_top) as Int
+            } else {
+                view.setTag(R.id.initial_margin_top, view.marginTop)
+                view.marginTop
+            }
 
-        val initialBottom = if (view.getTag(R.id.initial_margin_bottom) != null) {
-            view.getTag(R.id.initial_margin_bottom) as Int
-        } else {
-            view.setTag(R.id.initial_margin_bottom, view.marginBottom)
-            view.marginBottom
-        }
+        val initialBottom =
+            if (view.getTag(R.id.initial_margin_bottom) != null) {
+                view.getTag(R.id.initial_margin_bottom) as Int
+            } else {
+                view.setTag(R.id.initial_margin_bottom, view.marginBottom)
+                view.marginBottom
+            }
 
-        val initialLeft = if (view.getTag(R.id.initial_margin_left) != null) {
-            view.getTag(R.id.initial_margin_left) as Int
-        } else {
-            view.setTag(R.id.initial_margin_left, view.marginLeft)
-            view.marginLeft
-        }
+        val initialLeft =
+            if (view.getTag(R.id.initial_margin_left) != null) {
+                view.getTag(R.id.initial_margin_left) as Int
+            } else {
+                view.setTag(R.id.initial_margin_left, view.marginLeft)
+                view.marginLeft
+            }
 
-        val initialRight = if (view.getTag(R.id.initial_margin_right) != null) {
-            view.getTag(R.id.initial_margin_right) as Int
-        } else {
-            view.setTag(R.id.initial_margin_right, view.marginRight)
-            view.marginRight
-        }
+        val initialRight =
+            if (view.getTag(R.id.initial_margin_right) != null) {
+                view.getTag(R.id.initial_margin_right) as Int
+            } else {
+                view.setTag(R.id.initial_margin_right, view.marginRight)
+                view.marginRight
+            }
 
-        val accumulator = InsetsAccumulator(
-            initialTop,
-            insets.top,
-            initialBottom,
-            insets.bottom,
-            initialLeft,
-            insets.left,
-            initialRight,
-            insets.right
-        )
+        val accumulator =
+            InsetsAccumulator(
+                initialTop,
+                insets.top,
+                initialBottom,
+                insets.bottom,
+                initialLeft,
+                insets.left,
+                initialRight,
+                insets.right,
+            )
 
         view.updateLayoutParams<MarginLayoutParams> {
             apply { block(accumulator) }
         }
 
-        if(shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
+        if (shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
     }
 }
 
@@ -90,53 +95,58 @@ fun View.applyEdgeToEdgeInsetsAsMargin(
 fun View.applyEdgeToEdgeInsetsAsPadding(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
     shouldConsumeInsets: Boolean = true,
-    block: View.(InsetsAccumulator) -> Unit
+    block: View.(InsetsAccumulator) -> Unit,
 ) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { view, windowInsets ->
         val insets = windowInsets.getInsets(typeMask)
 
-        val initialTop = if (view.getTag(R.id.initial_padding_top) != null) {
-            view.getTag(R.id.initial_padding_top) as Int
-        } else {
-            view.setTag(R.id.initial_padding_top, view.paddingTop)
-            view.paddingTop
-        }
+        val initialTop =
+            if (view.getTag(R.id.initial_padding_top) != null) {
+                view.getTag(R.id.initial_padding_top) as Int
+            } else {
+                view.setTag(R.id.initial_padding_top, view.paddingTop)
+                view.paddingTop
+            }
 
-        val initialBottom = if (view.getTag(R.id.initial_padding_bottom) != null) {
-            view.getTag(R.id.initial_padding_bottom) as Int
-        } else {
-            view.setTag(R.id.initial_padding_bottom, view.paddingBottom)
-            view.paddingBottom
-        }
+        val initialBottom =
+            if (view.getTag(R.id.initial_padding_bottom) != null) {
+                view.getTag(R.id.initial_padding_bottom) as Int
+            } else {
+                view.setTag(R.id.initial_padding_bottom, view.paddingBottom)
+                view.paddingBottom
+            }
 
-        val initialLeft = if (view.getTag(R.id.initial_padding_left) != null) {
-            view.getTag(R.id.initial_padding_left) as Int
-        } else {
-            view.setTag(R.id.initial_padding_left, view.paddingLeft)
-            view.paddingLeft
-        }
+        val initialLeft =
+            if (view.getTag(R.id.initial_padding_left) != null) {
+                view.getTag(R.id.initial_padding_left) as Int
+            } else {
+                view.setTag(R.id.initial_padding_left, view.paddingLeft)
+                view.paddingLeft
+            }
 
-        val initialRight = if (view.getTag(R.id.initial_padding_right) != null) {
-            view.getTag(R.id.initial_padding_right) as Int
-        } else {
-            view.setTag(R.id.initial_padding_right, view.paddingRight)
-            view.paddingRight
-        }
+        val initialRight =
+            if (view.getTag(R.id.initial_padding_right) != null) {
+                view.getTag(R.id.initial_padding_right) as Int
+            } else {
+                view.setTag(R.id.initial_padding_right, view.paddingRight)
+                view.paddingRight
+            }
 
-        val accumulator = InsetsAccumulator(
-            initialTop,
-            insets.top,
-            initialBottom,
-            insets.bottom,
-            initialLeft,
-            insets.left,
-            initialRight,
-            insets.right
-        )
+        val accumulator =
+            InsetsAccumulator(
+                initialTop,
+                insets.top,
+                initialBottom,
+                insets.bottom,
+                initialLeft,
+                insets.left,
+                initialRight,
+                insets.right,
+            )
 
         block(accumulator)
 
-        if(shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
+        if (shouldConsumeInsets) WindowInsetsCompat.CONSUMED else windowInsets
     }
 }
 
@@ -148,13 +158,13 @@ fun View.applyEdgeToEdgeInsetsAsPadding(
  */
 fun View.applyEdgeToEdgeTopPaddingInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
-    shouldConsumeInsets: Boolean = true
+    shouldConsumeInsets: Boolean = true,
 ) {
     applyEdgeToEdgeInsetsAsPadding(typeMask, shouldConsumeInsets) { insets ->
         updatePadding(
             left = insets.left,
             top = insets.top,
-            right = insets.right
+            right = insets.right,
         )
     }
 }
@@ -167,13 +177,13 @@ fun View.applyEdgeToEdgeTopPaddingInsets(
  */
 fun View.applyEdgeToEdgeBottomPaddingInsets(
     typeMask: Int = WindowInsetsCompat.Type.systemBars(),
-    shouldConsumeInsets: Boolean = true
+    shouldConsumeInsets: Boolean = true,
 ) {
     applyEdgeToEdgeInsetsAsPadding(typeMask, shouldConsumeInsets) { insets ->
         updatePadding(
             left = insets.left,
             right = insets.right,
-            bottom = insets.bottom
+            bottom = insets.bottom,
         )
     }
 }
@@ -186,7 +196,7 @@ fun View.applyEdgeToEdgeBottomPaddingInsets(
  */
 fun applyEdgeToEdgeAllInsets(
     view: View,
-    shouldConsumeInsets: Boolean = true
+    shouldConsumeInsets: Boolean = true,
 ) = view.applyEdgeToEdgeInsetsAsMargin(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
@@ -199,11 +209,12 @@ fun applyEdgeToEdgeAllInsets(
  *
  * @param view The target view.
  */
-fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsetsAsMargin { insets ->
-    leftMargin = insets.left
-    rightMargin = insets.right
-    topMargin = insets.top
-}
+fun applyEdgeToEdgeTopInsets(view: View) =
+    view.applyEdgeToEdgeInsetsAsMargin { insets ->
+        leftMargin = insets.left
+        rightMargin = insets.right
+        topMargin = insets.top
+    }
 
 /**
  * Applies system bar insets to the bottom and horizontal margins of the view.
@@ -212,7 +223,7 @@ fun applyEdgeToEdgeTopInsets(view: View) = view.applyEdgeToEdgeInsetsAsMargin { 
  */
 fun applyEdgeToEdgeBottomInsets(
     view: View,
-    shouldConsumeInsets: Boolean = true
+    shouldConsumeInsets: Boolean = true,
 ) = view.applyEdgeToEdgeInsetsAsMargin(shouldConsumeInsets = shouldConsumeInsets) { insets ->
     leftMargin = insets.left
     rightMargin = insets.right
@@ -228,12 +239,13 @@ fun applyEdgeToEdgeBottomInsets(
  */
 fun View.handleKeyboardInsets() {
     ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
-        val existingBottomMargin = if (view.getTag(R.id.initial_margin_bottom) != null) {
-            view.getTag(R.id.initial_margin_bottom) as Int
-        } else {
-            view.setTag(R.id.initial_margin_bottom, view.marginBottom)
-            view.marginBottom
-        }
+        val existingBottomMargin =
+            if (view.getTag(R.id.initial_margin_bottom) != null) {
+                view.getTag(R.id.initial_margin_bottom) as Int
+            } else {
+                view.setTag(R.id.initial_margin_bottom, view.marginBottom)
+                view.marginBottom
+            }
 
         val lp = layoutParams as MarginLayoutParams
 
@@ -242,9 +254,12 @@ fun View.handleKeyboardInsets() {
         val imeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
         val imeBottomMargin = imeInsets.bottom - navBarInsets.bottom
 
-        lp.bottomMargin = if (imeVisible && imeBottomMargin >= existingBottomMargin)
-            imeBottomMargin + existingBottomMargin
-        else existingBottomMargin
+        lp.bottomMargin =
+            if (imeVisible && imeBottomMargin >= existingBottomMargin) {
+                imeBottomMargin + existingBottomMargin
+            } else {
+                existingBottomMargin
+            }
 
         layoutParams = lp
 
@@ -264,7 +279,7 @@ data class InsetsAccumulator(
     private val initialLeft: Int,
     private val insetLeft: Int,
     private val initialRight: Int,
-    private val insetRight: Int
+    private val insetRight: Int,
 ) {
     val top = initialTop + insetTop
     val bottom = initialBottom + insetBottom

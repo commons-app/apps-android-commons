@@ -50,8 +50,14 @@ data class Contribution constructor(
      * Number of times a contribution has been retried after a failure
      */
     var retries: Int = 0,
+    /**
+     * Filename the file was published under on Commons, set once the file is uploaded and kept
+     * until captions and depicts are saved too
+     */
+    var uploadedFilename: String? = null,
 ) : Parcelable {
-    fun completeWith(media: Media): Contribution = copy(pageId = media.pageId, media = media, state = STATE_COMPLETED)
+    fun completeWith(media: Media): Contribution =
+        copy(pageId = media.pageId, media = media, state = STATE_COMPLETED, uploadedFilename = null)
 
     constructor(
         item: UploadItem,
@@ -94,6 +100,18 @@ data class Contribution constructor(
         const val STATE_QUEUED = 2
         const val STATE_IN_PROGRESS = 3
         const val STATE_PAUSED = 4
+
+        /**
+         * Commons deleted this file. The row stays in the contributions list so it can be shown
+         * differently from a normal upload.
+         */
+        const val STATE_DELETED = 5
+
+        /**
+         * The file is on Commons, but its captions, depicts or Nearby picture are not saved yet.
+         * It waits in the pending uploads, and a retry saves only those.
+         */
+        const val STATE_METADATA_PENDING = 6
 
         /**
          * Formatting captions to the Wikibase format for sending labels

@@ -40,7 +40,7 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentBookmarksBinding.inflate(inflater, container, false)
@@ -49,10 +49,12 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
         // reference to the Fragment from FragmentManager, using findFragmentById()
         val supportFragmentManager = childFragmentManager
 
-        adapter = BookmarksPagerAdapter(
-            supportFragmentManager, requireContext(),
-            applicationKvStore!!.getBoolean("login_skipped")
-        )
+        adapter =
+            BookmarksPagerAdapter(
+                supportFragmentManager,
+                requireContext(),
+                applicationKvStore!!.getBoolean("login_skipped"),
+            )
         binding!!.viewPagerBookmarks.adapter = adapter
         binding!!.tabLayout.setupWithViewPager(binding!!.viewPagerBookmarks)
 
@@ -74,9 +76,10 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
         }
     }
 
-
     fun onBackPressed() {
-        if (((adapter!!.getItem(binding!!.tabLayout.selectedTabPosition)) as BookmarkListRootFragment).backPressed()) {
+        val position = binding!!.tabLayout.selectedTabPosition
+        val rootFragment = adapter!!.getItem(position) as BookmarkListRootFragment
+        if (rootFragment.navigator.backPressed()) {
             // The event is handled internally by the adapter , no further action required.
             return
         }
@@ -91,8 +94,9 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
     }
 
     companion object {
-        fun newInstance(): BookmarkFragment = BookmarkFragment().apply {
-            retainInstance = true
-        }
+        fun newInstance(): BookmarkFragment =
+            BookmarkFragment().apply {
+                retainInstance = true
+            }
     }
 }

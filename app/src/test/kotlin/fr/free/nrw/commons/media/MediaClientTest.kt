@@ -2,7 +2,6 @@ package fr.free.nrw.commons.media
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.media.model.PageMediaListResponse
@@ -32,8 +31,6 @@ class MediaClientTest {
     @Mock
     internal lateinit var pageMediaInterface: PageMediaInterface
 
-    val continuationMap = mapOf("continuation" to "continuation")
-
     private lateinit var mediaClient: MediaClient
 
     @Before
@@ -41,7 +38,12 @@ class MediaClientTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         mediaClient =
-            MediaClient(mediaInterface, pageMediaInterface, mediaDetailInterface, mediaConverter)
+            MediaClient(
+                mediaInterface,
+                pageMediaInterface,
+                mediaDetailInterface,
+                MediaResponseMapper(mediaDetailInterface, mediaConverter),
+            )
     }
 
     @Test
@@ -87,55 +89,6 @@ class MediaClientTest {
         whenever(mediaInterface.checkFileExistsUsingSha(""))
             .thenReturn(Single.just(mwQueryResponse))
         mediaClient.checkFileExistsUsingSha("").test().assertValue(true)
-    }
-
-    @Test
-    fun `getMediaListFromCategory is continuable and returns mapped response`() {
-        val (mwQueryResponse, media) = expectSuccessfulMapping(continuationMap)
-        whenever(mediaInterface.getMediaListFromCategory("", 10, emptyMap()))
-            .thenReturn(Single.just(mwQueryResponse))
-        mediaClient.getMediaListFromCategory("").test().assertValues(listOf(media))
-
-        whenever(mediaInterface.getMediaListFromCategory("", 10, continuationMap))
-            .thenReturn(Single.error(Exception()))
-        mediaClient.getMediaListFromCategory("").test().assertError { true }
-
-        mediaClient.resetCategoryContinuation("")
-        val (resetMwQueryResponse, resetMedia) = expectSuccessfulMapping()
-        whenever(mediaInterface.getMediaListFromCategory("", 10, emptyMap()))
-            .thenReturn(Single.just(resetMwQueryResponse))
-        mediaClient.getMediaListFromCategory("").test().assertValues(listOf(resetMedia))
-    }
-
-    @Test
-    fun `getMediaListForUser is continuable and returns mapped response`() {
-        val (mwQueryResponse, media) = expectSuccessfulMapping(null)
-        whenever(mediaInterface.getMediaListForUser("", 10, emptyMap()))
-            .thenReturn(Single.just(mwQueryResponse))
-        mediaClient.getMediaListForUser("").test().assertValues(listOf(media))
-        mediaClient.getMediaListForUser("").test().assertValue(emptyList())
-    }
-
-    @Test
-    fun `getMediaListFromSearch returns mapped response`() {
-        val (mwQueryResponse, media) = expectSuccessfulMapping()
-        whenever(mediaInterface.getMediaListFromSearch("", 0, 1))
-            .thenReturn(Single.just(mwQueryResponse))
-        mediaClient
-            .getMediaListFromSearch("", 0, 1)
-            .test()
-            .assertValues(listOf(media))
-    }
-
-    @Test
-    fun `fetchImagesForDepictedItem returns mapped response`() {
-        val (mwQueryResponse, media) = expectSuccessfulMapping()
-        whenever(mediaInterface.fetchImagesForDepictedItem("haswbstatement:${BuildConfig.DEPICTS_PROPERTY}=", "0", "1"))
-            .thenReturn(Single.just(mwQueryResponse))
-        mediaClient
-            .fetchImagesForDepictedItem("", 0, 1)
-            .test()
-            .assertValues(listOf(media))
     }
 
     @Test
@@ -222,7 +175,9 @@ class MediaClientTest {
             whenever(mwQueryPage.pageId()).thenReturn(expectedId)
         }
 
-    private fun expectSuccessfulMapping(continuationMap: Map<String, String>? = emptyMap()): Pair<MwQueryResponse, Media> {
+    private fun expectSuccessfulMapping(
+        continuationMap: Map<String, String>? = emptyMap(),
+    ): Pair<MwQueryResponse, Media> {
         val media = media()
         val mwQueryPage = mock<MwQueryPage>()
         val mwQueryResponse =
@@ -234,7 +189,7 @@ class MediaClientTest {
         val entities = mock<Entities>()
         whenever(mediaDetailInterface.getEntity("M1|M2")).thenReturn(Single.just(entities))
         val entity = mock<Entities.Entity>()
-        whenever(entities.entities()).thenReturn(mapOf("a" to entity, "b" to entity))
+        whenever(entities.getEntityMap()).thenReturn(mapOf("a" to entity, "b" to entity))
         val imageInfo = mock<ImageInfo>()
         whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo, null)
         whenever(mediaConverter.convert(mwQueryPage, entity, imageInfo)).thenReturn(media)

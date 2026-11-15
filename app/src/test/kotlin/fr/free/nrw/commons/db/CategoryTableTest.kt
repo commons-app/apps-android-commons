@@ -8,7 +8,6 @@ import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class CategoryTableTest : InMemoryDatabaseTest() {
-
     @Test
     fun testTableExists() {
         assertTablesExist(CategoryTable.TABLE_NAME)
@@ -18,12 +17,13 @@ class CategoryTableTest : InMemoryDatabaseTest() {
     @Test
     fun testInsertAndRetrieve() {
         val categoryDao = roomDatabase.categoryRoomDao()
-        val category = CategoryRoomEntity(
-            name = "Test Category",
-            description = "Test Description",
-            thumbnail = "http://test.com/thumb.jpg",
-            timesUsed = 5
-        )
+        val category =
+            CategoryRoomEntity(
+                name = "Test Category",
+                description = "Test Description",
+                thumbnail = "http://test.com/thumb.jpg",
+                timesUsed = 5,
+            )
         categoryDao.insert(category)
 
         val retrieved = categoryDao.findEntity("Test Category")

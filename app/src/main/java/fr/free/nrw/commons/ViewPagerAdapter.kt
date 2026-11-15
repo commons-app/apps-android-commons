@@ -30,15 +30,19 @@ class ViewPagerAdapter : FragmentPagerAdapter {
 
     fun setTabs(vararg titlesToFragments: Pair<Int, Fragment>) {
         // Enforce that every title must come from strings.xml and all will consistently be uppercase
-        fragmentTitleList = titlesToFragments.map {
-            context.getString(it.first).uppercase(Locale.ROOT)
-        }
+        fragmentTitleList =
+            titlesToFragments.map {
+                context.getString(it.first).uppercase(Locale.ROOT)
+            }
         fragmentList = titlesToFragments.map { it.second }
     }
 
     companion object {
         // Convenience method for Java callers, can be removed when everything is migrated
         @JvmStatic
-        fun pairOf(first: Int, second: Fragment) = first to second
+        fun pairOf(
+            first: Int,
+            second: Fragment,
+        ) = first to second
     }
 }

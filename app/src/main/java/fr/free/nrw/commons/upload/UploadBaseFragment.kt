@@ -15,8 +15,11 @@ abstract class UploadBaseFragment : CommonsDaggerSupportFragment() {
         val isWLMUpload: Boolean
 
         fun onNextButtonClicked(index: Int)
+
         fun onPreviousButtonClicked(index: Int)
+
         fun showProgress(shouldShow: Boolean)
+
         fun getIndexInViewFlipper(fragment: UploadBaseFragment?): Int
     }
 

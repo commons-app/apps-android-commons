@@ -7,7 +7,6 @@ import fr.free.nrw.commons.BasePresenter
  * The contract for Contributions View & Presenter
  */
 interface ContributionsContract {
-
     interface View {
         fun getContext(): Context?
     }
