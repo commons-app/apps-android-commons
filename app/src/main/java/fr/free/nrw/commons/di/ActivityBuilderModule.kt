@@ -31,7 +31,9 @@ import fr.free.nrw.commons.upload.depicts.DepictsPickerActivity
  * then that must be mentioned here to inject the dependencies
  */
 @Module
-@Suppress("unused")
+// Suppressed TooManyFunctions because each function is an activity binding
+// for Dagger dependency injection.
+@Suppress("unused", "TooManyFunctions")
 abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
     abstract fun bindLoginActivity(): LoginActivity

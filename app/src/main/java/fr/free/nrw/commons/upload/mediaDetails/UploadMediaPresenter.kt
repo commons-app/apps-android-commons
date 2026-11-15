@@ -13,7 +13,11 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback
 import fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BANNED_EXTENSION
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_BLACKLISTED
 import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_INVALID
+import fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_TOO_LONG
 import fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Maybe
@@ -171,10 +175,13 @@ class UploadMediaPresenter
             hasUserRemovedLocation: Boolean,
         ) {
             val uploadItem = repository.getUploads()[uploadItemIndex]
-            if (uploadItem.gpsCoords!!.decimalCoords == null &&
-                inAppPictureLocation == null &&
-                !hasUserRemovedLocation
-            ) {
+            // The location prompt is only meant for images, not for other media types, such as audio.
+            val isImage = uploadItem.mimeType?.startsWith("image/") ?: true
+            val hasNoLocation =
+                uploadItem.gpsCoords!!.decimalCoords == null &&
+                    inAppPictureLocation == null &&
+                    !hasUserRemovedLocation
+            if (isImage && hasNoLocation) {
                 view.displayAddLocationDialog { verifyCaptionQuality(uploadItem) }
             } else {
                 verifyCaptionQuality(uploadItem)
@@ -221,6 +228,30 @@ class UploadMediaPresenter
             if (errorCode == EMPTY_CAPTION) {
                 Timber.d("Captions are empty. Showing toast")
                 view.showMessage(R.string.add_caption_toast, R.color.color_error)
+            }
+
+            // Commons would only reject a blacklisted file name after the whole file is uploaded
+            if (errorCode == FILE_NAME_BLACKLISTED) {
+                Timber.d("File name is blacklisted. Showing toast")
+                view.showMessage(R.string.file_name_blacklisted_toast, R.color.color_error)
+            }
+
+            // Commons would reject a file name that is too long, also after the whole file is uploaded
+            if (errorCode == FILE_NAME_TOO_LONG) {
+                Timber.d("File name is too long. Showing toast")
+                view.showMessage(R.string.file_name_too_long_toast, R.color.color_error)
+            }
+
+            // Commons would reject a file name that is not a valid title when the upload starts
+            if (errorCode == FILE_NAME_INVALID) {
+                Timber.d("File name is not valid. Showing toast")
+                view.showMessage(R.string.file_name_invalid_toast, R.color.color_error)
+            }
+
+            // Commons would reject a file name with a banned extension in it when the upload starts
+            if (errorCode == FILE_NAME_BANNED_EXTENSION) {
+                Timber.d("File name has a banned extension. Showing toast")
+                view.showMessage(R.string.file_name_banned_extension_toast, R.color.color_error)
             }
 
             // If image with same file name exists check the bit in errorCode is set or not

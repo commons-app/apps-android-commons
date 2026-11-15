@@ -9,6 +9,7 @@
 * Just Sayori
 * Kaoavi
 * Korrawit
+* Nicolas Raoul
 * Nitisart Jungtrakungrat
 * Octahedron80
 * Patsagorn Y.
@@ -119,7 +120,7 @@
   <string name="refresh_button">รีเฟรช</string>
   <string name="display_list_button">รายการ</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
-  <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
+  <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %1$s</string>
   <string name="depictions_not_found">ไม่พบรายการ Wikidata ที่ตรงกับ %1$s</string>
   <string name="no_child_classes">%1$s ไม่มีชั้นเรียนย่อย</string>
   <string name="no_parent_classes">%1$s ไม่มีคลาสหลัก</string>
