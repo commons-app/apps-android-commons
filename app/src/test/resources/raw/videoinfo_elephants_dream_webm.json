@@ -1,0 +1,273 @@
+{
+  "pageid": 40038529,
+  "title": "File:Elephants Dream(HQ).webm",
+  "imagerepository": "local",
+  "videoinfo": [
+    {
+      "size": 76009641,
+      "width": 640,
+      "height": 360,
+      "duration": 653.854,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Elephants_Dream%28HQ%29.webm",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Elephants_Dream(HQ).webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=40038529",
+      "metadata": [
+        {
+          "name": "GETID3_VERSION",
+          "value": "1.9.6-20130603"
+        },
+        {
+          "name": "filesize",
+          "value": 76009641
+        },
+        {
+          "name": "avdataoffset",
+          "value": 0
+        },
+        {
+          "name": "avdataend",
+          "value": 76009641
+        },
+        {
+          "name": "fileformat",
+          "value": "matroska"
+        },
+        {
+          "name": "audio",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vorbis"
+            },
+            {
+              "name": "sample_rate",
+              "value": 44100
+            },
+            {
+              "name": "channels",
+              "value": 2
+            },
+            {
+              "name": "language",
+              "value": "und"
+            },
+            {
+              "name": "bits_per_sample",
+              "value": 32
+            },
+            {
+              "name": "lossless",
+              "value": false
+            },
+            {
+              "name": "bitrate_mode",
+              "value": "vbr"
+            },
+            {
+              "name": "bitrate",
+              "value": 112000
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vorbis"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "sample_rate",
+                      "value": 44100
+                    },
+                    {
+                      "name": "channels",
+                      "value": 2
+                    },
+                    {
+                      "name": "language",
+                      "value": "und"
+                    },
+                    {
+                      "name": "bits_per_sample",
+                      "value": 32
+                    },
+                    {
+                      "name": "lossless",
+                      "value": false
+                    },
+                    {
+                      "name": "bitrate_mode",
+                      "value": "vbr"
+                    },
+                    {
+                      "name": "bitrate",
+                      "value": 112000
+                    },
+                    {
+                      "name": "compression_ratio",
+                      "value": 0.03968253968253968
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "channelmode",
+              "value": "stereo"
+            },
+            {
+              "name": "compression_ratio",
+              "value": 0.03968253968253968
+            }
+          ]
+        },
+        {
+          "name": "video",
+          "value": [
+            {
+              "name": "dataformat",
+              "value": "vp8"
+            },
+            {
+              "name": "resolution_x",
+              "value": 640
+            },
+            {
+              "name": "resolution_y",
+              "value": 360
+            },
+            {
+              "name": "display_unit",
+              "value": "pixels"
+            },
+            {
+              "name": "display_x",
+              "value": 640
+            },
+            {
+              "name": "display_y",
+              "value": 360
+            },
+            {
+              "name": "frame_rate",
+              "value": 12288.031
+            },
+            {
+              "name": "streams",
+              "value": [
+                {
+                  "name": 0,
+                  "value": [
+                    {
+                      "name": "dataformat",
+                      "value": "vp8"
+                    },
+                    {
+                      "name": "default",
+                      "value": true
+                    },
+                    {
+                      "name": "resolution_x",
+                      "value": 640
+                    },
+                    {
+                      "name": "resolution_y",
+                      "value": 360
+                    },
+                    {
+                      "name": "display_unit",
+                      "value": "pixels"
+                    },
+                    {
+                      "name": "display_x",
+                      "value": 640
+                    },
+                    {
+                      "name": "display_y",
+                      "value": 360
+                    },
+                    {
+                      "name": "frame_rate",
+                      "value": 12288.031
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "bitrate",
+              "value": 817989
+            }
+          ]
+        },
+        {
+          "name": "encoding",
+          "value": "UTF-8"
+        },
+        {
+          "name": "mime_type",
+          "value": "video/webm"
+        },
+        {
+          "name": "playtime_seconds",
+          "value": 653.854
+        },
+        {
+          "name": "bitrate",
+          "value": 929989
+        },
+        {
+          "name": "playtime_string",
+          "value": "10:54"
+        },
+        {
+          "name": "version",
+          "value": 2
+        }
+      ],
+      "mime": "video/webm",
+      "derivatives": [
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/02/Elephants_Dream%28HQ%29.webm/Elephants_Dream%28HQ%29.webm.240p.vp9.webm",
+          "type": "video/webm; codecs=\"vp9, opus\"",
+          "transcodekey": "240p.vp9.webm",
+          "width": 426,
+          "height": 240,
+          "bandwidth": 341648
+        },
+        {
+          "src": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/02/Elephants_Dream%28HQ%29.webm/Elephants_Dream%28HQ%29.webm.360p.mpeg4.mov",
+          "type": "video/quicktime; codecs=\"mp4v\"",
+          "transcodekey": "360p.mpeg4.mov",
+          "width": 640,
+          "height": 360,
+          "bandwidth": 1639912
+        }
+      ],
+      "timedtext": [
+        {
+          "src": "https://commons.wikimedia.org/w/api.php?action=timedtext&title=File%3AElephants_Dream%28HQ%29.webm&lang=de&trackformat=vtt&origin=%2A",
+          "kind": "subtitles",
+          "type": "text/vtt",
+          "srclang": "de",
+          "dir": "ltr",
+          "label": "Deutsch \u202a(de)\u202c"
+        },
+        {
+          "src": "https://commons.wikimedia.org/w/api.php?action=timedtext&title=File%3AElephants_Dream%28HQ%29.webm&lang=en&trackformat=vtt&origin=%2A",
+          "kind": "subtitles",
+          "type": "text/vtt",
+          "srclang": "en",
+          "dir": "ltr",
+          "label": "English \u202a(en)\u202c"
+        }
+      ]
+    }
+  ]
+}

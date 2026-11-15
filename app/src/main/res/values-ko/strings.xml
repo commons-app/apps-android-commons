@@ -809,7 +809,7 @@
   </plurals>
   <string name="multiple_files_depiction">여러 장의 이미지를 한 번에 업로드할 경우 모든 이미지에 동일한 분류와 서술이 적용된다는 점을 유의해 주세요. 이미지들의 서술과 분류가 서로 다른 경우, 각각 따로 업로드해 주시기 바랍니다.</string>
   <string name="multiple_files_depiction_header">다중 업로드에 대한 참고사항</string>
-  <string name="nearby_wikitalk">이 항목에 관한 문제를 위키데이터에 보고하기</string>
+  <string name="nearby_report_problem">이 항목에 관한 문제를 위키데이터에 보고하기</string>
   <string name="please_enter_some_comments">의견을 입력해 주십시오</string>
   <string name="talk">토론</string>
   <string name="write_something_about_the_item">\'%1$s\' 항목에 대한 서술을 작성해 주세요. 이 내용은 공개적으로 표시됩니다.</string>

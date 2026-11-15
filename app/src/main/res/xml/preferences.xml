@@ -58,6 +58,15 @@
           android:summary="@string/show_deletion_button_explanation"
           android:title="@string/show_deletion_button" />
 
+        <ListPreference
+            android:key="videoQualityPref"
+            android:title="@string/video_quality"
+            app:singleLineTitle="false"
+            android:entries="@array/pref_video_quality_entries"
+            android:entryValues="@array/pref_video_quality_values"
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="auto" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
