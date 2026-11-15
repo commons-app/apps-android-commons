@@ -38,6 +38,8 @@ Thank you all for your work!
 
 .. and [many more](https://github.com/commons-app/apps-android-commons/graphs/contributors).
 
+**Shahmeer ([@shaahmeer](https://github.com/shaahmeer))** — Contributed a fix for [#5782](https://github.com/commons-app/apps-android-commons/issues/5782), addressing the “Next” button remaining disabled after removing a picture during multi-upload. Added regression tests for caption state and metadata row rebinding.
+
 ## License ##
 
 This software is open source, licensed under the [Apache License 2.0][10].
