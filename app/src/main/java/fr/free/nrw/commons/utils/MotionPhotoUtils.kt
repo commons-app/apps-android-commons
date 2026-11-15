@@ -22,7 +22,9 @@ object MotionPhotoUtils {
     private const val VIDEO_SEMANTIC = "Item:Semantic=\"MotionPhoto\""
 
     // Samsung puts this 24-byte header right before the video: two zero bytes, the entry type
-    // 0x0A30 and the name length 16 as little-endian numbers, then the name.
+    // 0x0A30 and the name length 16 as little-endian numbers, then the name. For example:
+    // https://commons.wikimedia.org/wiki/File:20230228_131217_February_2023_in_Ramat_Gan.jpg
+    // https://commons.wikimedia.org/wiki/File:20230301_092731_March_2023_in_Ramat_Gan.jpg
     private const val SAMSUNG_VIDEO_HEADER = "\u0000\u0000\u0030\u000A\u0010\u0000\u0000\u0000MotionPhoto_Data"
     private val samsungVideoHeader = SAMSUNG_VIDEO_HEADER.toByteArray(Charsets.ISO_8859_1)
 
@@ -31,7 +33,7 @@ object MotionPhotoUtils {
     private val containerItem = Regex("""<Container:Item\b[^>]*>""")
     private val videoLength = Regex("""Item:Length="(\d+)"""")
 
-    // The older "MicroVideo" format, written for example by the Samsung Galaxy S9.
+    // The older "MicroVideo" format, written for example by the Samsung Galaxy S9 (see the pictures above).
     // The offset counts the bytes from the start of the video to the end of the file.
     private val microVideoFlag = Regex("""GCamera:MicroVideo="1"""")
     private val microVideoOffset = Regex("""GCamera:MicroVideoOffset="(\d+)"""")
