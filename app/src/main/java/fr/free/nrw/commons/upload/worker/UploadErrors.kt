@@ -38,3 +38,29 @@ private val permanentUploadErrors =
  * Returns true if the upload failed for a reason that retrying cannot fix.
  */
 internal fun isPermanentUploadError(errorInfo: String?): Boolean = errorInfo in permanentUploadErrors
+
+private const val HTTP_TOO_MANY_REQUESTS = 429
+private const val HTTP_SERVER_ERROR_FIRST = 500
+private const val HTTP_SERVER_ERROR_LAST = 599
+
+// "HTTP" and a status code, as in "Unsuccessful response: HTTP 503" from UnsuccessfulResponseInterceptor,
+// or "HTTP 503 " from Retrofit for the publish request, which that interceptor skips
+private val httpStatusInError = Regex("""\bHTTP (\d{3})\b""")
+
+/**
+ * Returns the HTTP status code in the error of a failed upload, or null if there is none.
+ */
+internal fun httpStatusCode(errorInfo: String?): Int? =
+    errorInfo
+        ?.let { httpStatusInError.find(it) }
+        ?.groupValues
+        ?.get(1)
+        ?.toInt()
+
+/**
+ * Returns true for server problems (5xx) and too many requests (429),
+ * where trying again later usually works.
+ */
+internal fun isTemporaryServerError(httpStatusCode: Int): Boolean =
+    httpStatusCode == HTTP_TOO_MANY_REQUESTS ||
+        httpStatusCode in HTTP_SERVER_ERROR_FIRST..HTTP_SERVER_ERROR_LAST
