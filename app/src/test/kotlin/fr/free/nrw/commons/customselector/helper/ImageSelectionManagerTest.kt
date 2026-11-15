@@ -4,8 +4,10 @@ import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
@@ -13,6 +15,7 @@ import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -151,10 +154,67 @@ class ImageSelectionManagerTest {
      * Test onThumbnailClicked.
      */
     @Test
-    fun testOnThumbnailClicked() {
+    fun testOnThumbnailClicked() =
+        runBlocking {
+            whenever(imageLoader.getSHA1(image, testDispatcher)).thenReturn("")
+            val map = TreeMap<Int, Image>()
+            map[0] = image
+            selectionManager.onThumbnailClicked(0, holder, images, map) { _, _ -> }
+            testDispatcher.scheduler.advanceUntilIdle()
+            Assertions.assertEquals(1, selectionManager.selectedImages.size)
+        }
+
+    /**
+     * Test onThumbnailClicked when image is not uploaded (negative cache).
+     */
+    @Test
+    fun testOnThumbnailClickedWhenImageNotUploadedInDb() =
+        runBlocking {
+            val uploadedStatus = UploadedStatus("sha1", "sha1", false, false)
+            whenever(imageLoader.getSHA1(image, testDispatcher)).thenReturn("sha1")
+            whenever(imageLoader.getFromUploaded("sha1")).thenReturn(uploadedStatus)
+            whenever(imageLoader.getResultFromUploadedStatus(uploadedStatus)).thenReturn(ImageLoader.Result.FALSE)
+
+            val map = TreeMap<Int, Image>()
+            map[0] = image
+            selectionManager.onThumbnailClicked(0, holder, images, map) { _, _ -> }
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            Assertions.assertEquals(1, selectionManager.selectedImages.size)
+            Assertions.assertFalse(holder.isItemUploaded())
+        }
+
+    /**
+     * Test onThumbnailClicked when image is already uploaded on Commons (positive cache).
+     */
+    @Test
+    fun testOnThumbnailClickedWhenImageAlreadyUploaded() =
+        runBlocking {
+            val uploadedStatus = UploadedStatus("sha1", "sha1", true, false)
+            whenever(imageLoader.getSHA1(image, testDispatcher)).thenReturn("sha1")
+            whenever(imageLoader.getFromUploaded("sha1")).thenReturn(uploadedStatus)
+            whenever(imageLoader.getResultFromUploadedStatus(uploadedStatus)).thenReturn(ImageLoader.Result.TRUE)
+
+            val map = TreeMap<Int, Image>()
+            map[0] = image
+            selectionManager.onThumbnailClicked(0, holder, images, map) { _, _ -> }
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            Assertions.assertEquals(0, selectionManager.selectedImages.size)
+            Assertions.assertTrue(holder.isItemUploaded())
+        }
+
+    /**
+     * Test onThumbnailClicked when holder is already marked as uploaded.
+     */
+    @Test
+    fun testOnThumbnailClickedWhenHolderAlreadyUploaded() {
+        holder.itemUploaded()
         val map = TreeMap<Int, Image>()
         map[0] = image
         selectionManager.onThumbnailClicked(0, holder, images, map) { _, _ -> }
         testDispatcher.scheduler.advanceUntilIdle()
+
+        Assertions.assertEquals(0, selectionManager.selectedImages.size)
     }
 }
