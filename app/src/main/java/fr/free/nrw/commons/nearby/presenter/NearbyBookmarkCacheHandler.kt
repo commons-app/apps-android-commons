@@ -153,7 +153,6 @@ class NearbyBookmarkCacheHandler(
         if (null == view.getLastMapFocus()) {
             return true
         }
-        // TODO
         val myLocation = Location("")
         val destLocation = Location("")
         destLocation.latitude = view.getMapFocus().latitude

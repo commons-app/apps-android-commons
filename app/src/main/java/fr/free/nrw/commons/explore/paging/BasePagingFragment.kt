@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import fr.free.nrw.commons.databinding.FragmentSearchPaginatedBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 
@@ -25,7 +25,7 @@ abstract class BasePagingFragment<T> private constructor(
     abstract val injectedPresenter: PagingContract.Presenter<T>
     abstract val errorTextId: Int
     private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
-    private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
+    private val concatAdapter by lazy { ConcatAdapter(pagedListAdapter, loadingAdapter) }
 
     protected lateinit var binding: FragmentSearchPaginatedBinding
 
@@ -50,7 +50,7 @@ abstract class BasePagingFragment<T> private constructor(
 
         binding.paginatedSearchResultsList.apply {
             layoutManager = GridLayoutManager(context, if (isPortrait) 1 else 2)
-            adapter = mergeAdapter
+            adapter = concatAdapter
         }
         injectedPresenter.listFooterData.observe(
             viewLifecycleOwner,
