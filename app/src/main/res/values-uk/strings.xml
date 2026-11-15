@@ -845,7 +845,7 @@
   </plurals>
   <string name="multiple_files_depiction">Пам\'ятайте, що усі зображення, вивантажені разом, отримають ті самі категорії і підписи. Якщо ці зображення повинні мати різні підписи і категорії, будь ласка, завантажуйте їх окремо.</string>
   <string name="multiple_files_depiction_header">Примітка про завантаження груп файлів</string>
-  <string name="nearby_wikitalk">Повідомити у Вікідані про проблему з цим елементом</string>
+  <string name="nearby_report_problem">Повідомити у Вікідані про проблему з цим елементом</string>
   <string name="please_enter_some_comments">Будь ласка, додайте якийсь коментар</string>
   <string name="talk">Обговорення</string>
   <string name="write_something_about_the_item">Напишіть щось про елемент «%1$s». Це буде видно публічно.</string>

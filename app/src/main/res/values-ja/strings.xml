@@ -762,7 +762,7 @@
   </plurals>
   <string name="multiple_files_depiction">複数アップロードではすべての画像が同一のカテゴリおよび題材となります。画像が題材およびカテゴリを共有していない場合、個別のアップロードを複数実施してください。</string>
   <string name="multiple_files_depiction_header">複数アップロードに関する注記</string>
-  <string name="nearby_wikitalk">この項目に関する問題をウィキデータに報告</string>
+  <string name="nearby_report_problem">この項目に関する問題をウィキデータに報告</string>
   <string name="please_enter_some_comments">コメントを入力してください</string>
   <string name="talk">トーク</string>
   <string name="other_problem_or_information_please_explain_below">その他の問題または情報 (以下に説明してください)。</string>

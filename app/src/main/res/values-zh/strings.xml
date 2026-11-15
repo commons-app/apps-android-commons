@@ -27,6 +27,7 @@
 * McDutchie
 * Mishidexfc
 * NACHOgao3
+* Nicolas Raoul
 * Peterxy
 * Peterxy12
 * Qiyue2001
@@ -163,6 +164,10 @@
   <string name="menu_view_file_page">查看文件页面</string>
   <string name="share_title_hint">说明（必需）</string>
   <string name="add_caption_toast">请提供此文件的说明</string>
+  <string name="file_name_blacklisted_toast">共享资源不接受此文件名。请使用更具描述性的标题。</string>
+  <string name="file_name_too_long_toast">此标题过长，无法用作文件名。请缩短。</string>
+  <string name="file_name_invalid_toast">此标题不能在共享资源上用作文件名。请更改。</string>
+  <string name="file_name_banned_extension_toast">此标题包含类似“.com”的文件类型。请更改。</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
@@ -182,8 +187,9 @@
   <string name="refresh_button">刷新</string>
   <string name="display_list_button">列表</string>
   <string name="contributions_subtitle_zero">（尚无上传）</string>
+  <string name="contributions_subtitle_capped">（%1$d+）</string>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="depictions_not_found">未找到符合%1$的维基数据项目。</string>
+  <string name="depictions_not_found">未找到符合%1$s的维基数据项目。</string>
   <string name="no_child_classes">%1$s没有子类别</string>
   <string name="no_parent_classes">%1$s没有父类别</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
@@ -277,6 +283,12 @@
   <string name="media_detail_license">许可协议</string>
   <string name="media_detail_coordinates">坐标</string>
   <string name="media_detail_coordinates_empty">未提供</string>
+  <string name="playback_quality">播放质量</string>
+  <string name="original">原始</string>
+  <string name="video_quality">视频质量</string>
+  <string name="video_quality_auto">自动</string>
+  <string name="video_quality_higher">更高的图像质量</string>
+  <string name="video_quality_data_saver">节省数据</string>
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试计划，更早获取新功能以及错误修复</string>
   <string name="_2fa_code">2FA代码</string>
@@ -556,7 +568,7 @@
   <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
   <string name="review_thanks_explanation">你的感谢会鼓励%1$s</string>
   <string name="review_no_category">该文件未被分类！</string>
-  <string name="review_category_explanation">该图片是在%1$s类别下</string>
+  <string name="review_category_explanation">此图像属于%1$s个分类。</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_thanks_yes_button_text">下一张图片</string>
@@ -604,7 +616,7 @@
   <string name="default_description_language">默认描述语言</string>
   <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
-  <string name="delete_helper_show_deletion_message_if">已提出将%1删除</string>
+  <string name="delete_helper_show_deletion_message_if">已提出将%1$s删除</string>
   <string name="delete_helper_show_deletion_title_failed">失败了</string>
   <string name="delete_helper_show_deletion_message_else">不能请求删除</string>
   <string name="delete_helper_ask_spam_selfie">未在任何条目中使用的自拍</string>
@@ -735,6 +747,8 @@
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
   <string name="cancelling_upload">正在取消上传…</string>
+  <string name="retrying_upload">正在重试上传…</string>
+  <string name="retrying_failed_uploads">正在重试所有失败的上传…</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
   <string name="limited_connection_is_on">限制连接模式启用中。</string>
@@ -871,7 +885,7 @@
   </plurals>
   <string name="multiple_files_depiction">请记住，多重上传中的所有图片都会标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别多次单独进行上传。</string>
   <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
-  <string name="nearby_wikitalk">向维基数据报告关于该项的问题</string>
+  <string name="nearby_report_problem">向维基数据报告关于该项的问题</string>
   <string name="please_enter_some_comments">请输入一些评论。</string>
   <string name="talk">讨论</string>
   <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
@@ -900,6 +914,10 @@
   <string name="green_pin">这个地点已经有照片了。</string>
   <string name="grey_pin">现在检查这个地点是否有照片。</string>
   <string name="error_while_loading">加载时出错</string>
+  <string name="play_video">播放视频</string>
+  <string name="play_audio">播放音频</string>
+  <string name="video_unavailable">视频不可用。点击以重试。</string>
+  <string name="audio_unavailable">音频不可用。点击以重试。</string>
   <string name="no_usages_found">未找到用法</string>
   <string name="usages_on_commons_heading">维基共享资源</string>
   <string name="usages_on_other_wikis_heading">其它wiki</string>
@@ -916,7 +934,8 @@
   <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
   <string name="nominated_for_deletion_btn">已提名删除</string>
-  <string name="custom_selector_max_image_limit_reached">您最多只能选择%d张图片。</string>
+  <string name="custom_selector_max_image_limit_reached">您最多只能选择%d个图像。</string>
+  <string name="upload_limit_exceeded">只会上传前%1$d个图像。</string>
   <string name="edit_unsupported_format_explanation">应用内编辑仅支持JPEG文件。若要编辑其他格式，请使用第三方工具。</string>
   <string name="license_cc0_description">无版权。您放弃所有权利，任何人都可以以任意形式使用此作品。</string>
   <string name="license_cc_by_description">署名。其他人只要注明您为原作者，即可自由分享和演绎。</string>

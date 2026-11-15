@@ -833,7 +833,7 @@
   </plurals>
   <string name="multiple_files_depiction">Dalc\'hit soñj e vez staget an hevelep rummad hag an hevelep deskrivadur ouzh holl skeudennoù ul liesezkargadenn. Grit meur a ezkargadenn disheñvel mard eo disheñvel deskrivadurioù ha rummadoù ar skeudennoù.</string>
   <string name="multiple_files_depiction_header">Notenn a-zivout al liesezkargadennoù</string>
-  <string name="nearby_wikitalk">Disklêriañ ur gudenn a-zivout an elfenn-mañ da Wikidata.</string>
+  <string name="nearby_report_problem">Disklêriañ ur gudenn a-zivout an elfenn-mañ da Wikidata.</string>
   <string name="please_enter_some_comments">Skrivit evezhiadennoù mar plij.</string>
   <string name="talk">Kaozeadenn</string>
   <string name="write_something_about_the_item">Skrivit un dra bennak a-zivout an elfenn \'%1$s\'. A-wel d\'an holl e vo.</string>

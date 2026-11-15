@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nearby_fab_spacer1_height">0dp</dimen>
+    <dimen name="nearby_fab_spacer2_height">0dp</dimen>
+    <dimen name="nearby_fab_spacer3_height">0dp</dimen>
+    <dimen name="nearby_fab_spread_spacing">70dp</dimen>
+</resources>
+
