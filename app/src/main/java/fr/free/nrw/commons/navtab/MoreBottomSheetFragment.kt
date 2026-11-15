@@ -159,19 +159,17 @@ class MoreBottomSheetFragment : BottomSheetDialogFragment() {
     fun uploadFeedback(feedback: Feedback) {
         val feedbackContentCreator = FeedbackContentCreator(requireContext(), feedback)
 
-        val single =
-            pageEditClient
-                .createNewSection(
-                    "Commons:Mobile_app/Feedback",
-                    feedbackContentCreator.getSectionTitle(),
-                    feedbackContentCreator.getSectionText(),
-                    "New feedback on version ${feedback.version} of the app",
-                ).flatMapSingle { Single.just(it) }
-                .firstOrError()
-
         Single
-            .defer { single }
-            .subscribeOn(Schedulers.io())
+            .defer {
+                pageEditClient
+                    .createNewSection(
+                        "Commons:Mobile_app/Feedback",
+                        feedbackContentCreator.getSectionTitle(),
+                        feedbackContentCreator.getSectionText(),
+                        "New feedback on version ${feedback.version} of the app",
+                    ).flatMapSingle { Single.just(it) }
+                    .firstOrError()
+            }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ success ->
                 val messageResId =
