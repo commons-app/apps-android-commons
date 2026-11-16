@@ -34,17 +34,24 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 /**
- * Encapsulates dependencies required by UploadClient.
+ * Encapsulates network and API dependencies required by UploadClient.
  */
-@Suppress("LongParameterList")
-class UploadClientDependencies
+class UploadApiDependencies
     @Inject
     constructor(
         val uploadInterface: UploadInterface,
         @Named(NetworkingModule.NAMED_COMMONS_CSRF) val csrfTokenClient: CsrfTokenClient,
         val pageContentsCreator: PageContentsCreator,
-        val fileUtilsWrapper: FileUtilsWrapper,
         val gson: Gson,
+    )
+
+/**
+ * Encapsulates storage, DAO, and utility dependencies required by UploadClient.
+ */
+class UploadStorageDependencies
+    @Inject
+    constructor(
+        val fileUtilsWrapper: FileUtilsWrapper,
         val timeProvider: TimeProvider,
         val contributionDao: ContributionDao,
     )
@@ -73,7 +80,8 @@ data class ChunkProcessingRequest(
 class UploadClient
     @Inject
     constructor(
-        private val dependencies: UploadClientDependencies,
+        private val apiDependencies: UploadApiDependencies,
+        private val storageDependencies: UploadStorageDependencies,
     ) {
         private val chunkSize = 512 * 1024 // 512 KB
 
@@ -100,8 +108,8 @@ class UploadClient
             }
 
             val file = contribution.localUriPath
-            val fileChunks = dependencies.fileUtilsWrapper.getFileChunks(file, chunkSize)
-            val mediaType = dependencies.fileUtilsWrapper.getMimeType(file)?.toMediaTypeOrNull()
+            val fileChunks = storageDependencies.fileUtilsWrapper.getFileChunks(file, chunkSize)
+            val mediaType = storageDependencies.fileUtilsWrapper.getMimeType(file)?.toMediaTypeOrNull()
 
             val chunkInfo = AtomicReference<ChunkInfo?>()
             if (isStashValid(contribution)) {
@@ -118,8 +126,8 @@ class UploadClient
             val errorMessage = AtomicReference<String>()
             compositeDisposable.add(
                 Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
-                    if (canProcess(dependencies.contributionDao, contribution, failures)) {
-                        if (dependencies.contributionDao.getContribution(contribution.pageId) == null) {
+                    if (canProcess(storageDependencies.contributionDao, contribution, failures)) {
+                        if (storageDependencies.contributionDao.getContribution(contribution.pageId) == null) {
                             compositeDisposable.clear()
                             return@forEach
                         } else {
@@ -144,10 +152,11 @@ class UploadClient
             )
 
             return when {
-                dependencies.contributionDao.getContribution(contribution.pageId) == null -> {
+                storageDependencies.contributionDao.getContribution(contribution.pageId) == null -> {
                     return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
                 }
-                dependencies.contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED ||
+                storageDependencies.contributionDao.getContribution(contribution.pageId).state ==
+                    Contribution.STATE_PAUSED ||
                     CommonsApplication.isPaused -> {
                     Timber.d("Upload stash paused %s", contribution.pageId)
                     Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
@@ -236,7 +245,7 @@ class UploadClient
             contribution.chunkInfo != null &&
                 contribution.dateModified!!.after(
                     Date(
-                        dependencies.timeProvider.currentTimeMillis() - maxChunkAge,
+                        storageDependencies.timeProvider.currentTimeMillis() - maxChunkAge,
                     ),
                 )
 
@@ -265,18 +274,18 @@ class UploadClient
                         URLEncoder.encode(filename, "utf-8"),
                         countingRequestBody,
                     )
-                dependencies.uploadInterface
+                apiDependencies.uploadInterface
                     .uploadFileToStash(
                         toRequestBody(filename),
                         toRequestBody(fileSize.toString()),
                         toRequestBody(offset.toString()),
                         toRequestBody(fileKey),
-                        toRequestBody(dependencies.csrfTokenClient.getTokenBlocking()),
+                        toRequestBody(apiDependencies.csrfTokenClient.getTokenBlocking()),
                         filePart,
                     ).map { uploadResponse: JsonObject? ->
-                        val uploadResult = gson.fromJson(uploadResponse, UploadResponse::class.java)
+                        val uploadResult = apiDependencies.gson.fromJson(uploadResponse, UploadResponse::class.java)
                         if (uploadResult.upload == null) {
-                            val exception = gson.fromJson(uploadResponse, MwException::class.java)
+                            val exception = apiDependencies.gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading chunk to stash")
                             throw IOException(exception.errorCode, exception)
                         }
@@ -299,17 +308,17 @@ class UploadClient
             fileKey: String?,
         ): Observable<UploadResult?> =
             try {
-                dependencies.uploadInterface
+                apiDependencies.uploadInterface
                     .uploadFileFromStash(
-                        dependencies.csrfTokenClient.getTokenBlocking(),
-                        dependencies.pageContentsCreator.createFrom(contribution),
+                        apiDependencies.csrfTokenClient.getTokenBlocking(),
+                        apiDependencies.pageContentsCreator.createFrom(contribution),
                         CommonsApplication.DEFAULT_EDIT_SUMMARY,
                         uniqueFileName!!,
                         fileKey!!,
                     ).map { uploadResponse: JsonObject? ->
-                        val uploadResult = dependencies.gson.fromJson(uploadResponse, UploadResponse::class.java)
+                        val uploadResult = apiDependencies.gson.fromJson(uploadResponse, UploadResponse::class.java)
                         if (uploadResult.upload == null) {
-                            val exception = dependencies.gson.fromJson(uploadResponse, MwException::class.java)
+                            val exception = apiDependencies.gson.fromJson(uploadResponse, MwException::class.java)
                             Timber.e(exception, "Error in uploading file from stash")
                             throw IOException(exception.errorCode, exception)
                         }
@@ -328,7 +337,7 @@ class UploadClient
          * @param fileName Photo.jpg
          */
         fun checkFileName(fileName: String): Single<FileNameCheck> =
-            dependencies.uploadInterface
+            apiDependencies.uploadInterface
                 // MediaWiki replaces these characters with "-" when uploading, so the same name is checked
                 .checkTitleBlacklist("File:" + fileName.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"))
                 .map {

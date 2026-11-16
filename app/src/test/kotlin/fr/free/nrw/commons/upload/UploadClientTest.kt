@@ -71,7 +71,8 @@ class UploadClientTest {
     @Mock
     private lateinit var uploadResponse: UploadResponse
 
-    private lateinit var dependencies: UploadClientDependencies
+    private lateinit var apiDependencies: UploadApiDependencies
+    private lateinit var storageDependencies: UploadStorageDependencies
     private lateinit var uploadClient: UploadClient
 
     private val filename = "test.png"
@@ -87,17 +88,20 @@ class UploadClientTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        dependencies =
-            UploadClientDependencies(
+        apiDependencies =
+            UploadApiDependencies(
                 uploadInterface = uploadInterface,
                 csrfTokenClient = csrfTokenClient,
                 pageContentsCreator = pageContentsCreator,
-                fileUtilsWrapper = fileUtilsWrapper,
                 gson = gson,
+            )
+        storageDependencies =
+            UploadStorageDependencies(
+                fileUtilsWrapper = fileUtilsWrapper,
                 timeProvider = timeProvider,
                 contributionDao = contributionDao,
             )
-        uploadClient = UploadClient(dependencies)
+        uploadClient = UploadClient(apiDependencies, storageDependencies)
         whenever(csrfTokenClient.getTokenBlocking()).thenReturn(testToken)
         whenever(pageContentsCreator.createFrom(contribution)).thenReturn(createdContent)
         whenever(uploadResponse.upload).thenReturn(uploadResult)
@@ -105,14 +109,15 @@ class UploadClientTest {
 
     @Test
     fun testUploadClientDependenciesNotNull() {
-        assertNotNull(dependencies)
-        assertNotNull(dependencies.uploadInterface)
-        assertNotNull(dependencies.csrfTokenClient)
-        assertNotNull(dependencies.pageContentsCreator)
-        assertNotNull(dependencies.fileUtilsWrapper)
-        assertNotNull(dependencies.gson)
-        assertNotNull(dependencies.timeProvider)
-        assertNotNull(dependencies.contributionDao)
+        assertNotNull(apiDependencies)
+        assertNotNull(apiDependencies.uploadInterface)
+        assertNotNull(apiDependencies.csrfTokenClient)
+        assertNotNull(apiDependencies.pageContentsCreator)
+        assertNotNull(apiDependencies.gson)
+        assertNotNull(storageDependencies)
+        assertNotNull(storageDependencies.fileUtilsWrapper)
+        assertNotNull(storageDependencies.timeProvider)
+        assertNotNull(storageDependencies.contributionDao)
     }
 
     @Test
@@ -441,13 +446,17 @@ class UploadClientTest {
 
     private fun uploadClientWithRealGson() =
         UploadClient(
-            uploadInterface,
-            csrfTokenClient,
-            pageContentsCreator,
-            fileUtilsWrapper,
-            GsonUtil.defaultGson,
-            timeProvider,
-            contributionDao,
+            UploadApiDependencies(
+                uploadInterface = uploadInterface,
+                csrfTokenClient = csrfTokenClient,
+                pageContentsCreator = pageContentsCreator,
+                gson = GsonUtil.defaultGson,
+            ),
+            UploadStorageDependencies(
+                fileUtilsWrapper = fileUtilsWrapper,
+                timeProvider = timeProvider,
+                contributionDao = contributionDao,
+            ),
         )
 
     private fun KArgumentCaptor<RequestBody>.asString(): String = firstValue.asString()
