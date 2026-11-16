@@ -241,13 +241,13 @@ class UploadActivityUnitTests {
     }
 
     @Test
-    @Config(sdk = [29])
+    @Config(sdk = [33])
     fun needsMediaLocationPermissionIsTrueWithoutThePermission() {
         Assert.assertTrue(uploadView.input.needsMediaLocationPermission())
     }
 
     @Test
-    @Config(sdk = [29])
+    @Config(sdk = [33])
     fun needsMediaLocationPermissionIsFalseWithThePermission() {
         shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
 
@@ -255,7 +255,7 @@ class UploadActivityUnitTests {
     }
 
     @Test
-    @Config(sdk = [29])
+    @Config(sdk = [33])
     fun sharedItemsAreReceivedRightAwayWhenMediaLocationIsGranted() {
         shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
         activity.intent = Intent(Intent.ACTION_SEND)
