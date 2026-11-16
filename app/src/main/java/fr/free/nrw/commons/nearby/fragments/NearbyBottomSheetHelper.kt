@@ -284,14 +284,6 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
             ) {
                 currentActions.onBookmarkToggled(place)
                 bottomSheetAdapter?.toggleBookmarkIcon()
-                bookmarkDaoProvider?.invoke()?.let { dao ->
-                    NearbyUtil.getBookmarkLocationExists(
-                        dao,
-                        place.name,
-                        currentActions.getCoroutineScope(),
-                        bottomSheetAdapter!!,
-                    )
-                }
             }
 
             private fun launchFeedback(
