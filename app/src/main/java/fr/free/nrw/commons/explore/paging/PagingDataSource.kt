@@ -10,7 +10,6 @@ import androidx.paging.PositionalDataSource
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import io.reactivex.Completable
 import io.reactivex.processors.BehaviorProcessor
-import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 

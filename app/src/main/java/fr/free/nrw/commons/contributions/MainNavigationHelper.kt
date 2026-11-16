@@ -19,6 +19,7 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFra
  * Handles fragment transactions, back-stack navigation, state restoration,
  * and cross-tab map loading for [MainActivity].
  */
+@Suppress("TooManyFunctions")
 class MainNavigationHelper(
     private val activity: MainActivity,
     private val tabHandler: MainTabHandler,

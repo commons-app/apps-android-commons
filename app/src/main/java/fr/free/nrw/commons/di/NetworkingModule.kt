@@ -6,9 +6,9 @@ import dagger.Module
 import dagger.Provides
 import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.CacheControlInterceptor
 import fr.free.nrw.commons.CommonHeaderRequestInterceptor
 import fr.free.nrw.commons.ForceCacheInterceptor
-import fr.free.nrw.commons.CacheControlInterceptor
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.PageEditInterface

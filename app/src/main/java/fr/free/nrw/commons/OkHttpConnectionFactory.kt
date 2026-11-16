@@ -1,6 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
@@ -16,7 +17,6 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-import fr.free.nrw.commons.utils.NetworkUtils
 
 object OkHttpConnectionFactory {
     private const val CACHE_DIR_NAME = "okhttp-cache"
@@ -76,6 +76,9 @@ class CommonHeaderRequestInterceptor : Interceptor {
     }
 }
 
+private const val OFFLINE_CACHE_MAX_STALE_DAYS = 7
+private const val CACHE_CONTROL_MAX_AGE_SECONDS = 86400
+
 class ForceCacheInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
@@ -94,9 +97,10 @@ class ForceCacheInterceptor : Interceptor {
                 request
                     .newBuilder()
                     .cacheControl(
-                        CacheControl.Builder()
+                        CacheControl
+                            .Builder()
                             .onlyIfCached()
-                            .maxStale(7, TimeUnit.DAYS)
+                            .maxStale(OFFLINE_CACHE_MAX_STALE_DAYS, TimeUnit.DAYS)
                             .build(),
                     ).build()
             return chain.proceed(offlineRequest)
@@ -113,7 +117,7 @@ class CacheControlInterceptor : Interceptor {
                 .newBuilder()
                 .removeHeader("Pragma")
                 .removeHeader("Cache-Control")
-                .header("Cache-Control", "public, max-age=86400")
+                .header("Cache-Control", "public, max-age=$CACHE_CONTROL_MAX_AGE_SECONDS")
                 .build()
         }
         return response
