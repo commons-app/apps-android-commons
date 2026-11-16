@@ -233,6 +233,8 @@
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্ক</string>
   <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
+  <string name="playback_quality">প্লেব্যাকের মান</string>
+  <string name="video_quality">ভিডিওর মান</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন! এতে নতুন বৈশিষ্ট্যের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন</string>
   <string name="_2fa_code">2FA কোড</string>
@@ -562,6 +564,7 @@
   <string name="uploads">আপলোড</string>
   <string name="pending">অমীমাংসিত</string>
   <string name="failed">ব্যর্থ হয়েছে</string>
+  <string name="play_video">ভিডিও চালান</string>
   <string name="caption">ক্যাপশন</string>
   <string name="caption_copied_to_clipboard">ক্যাপশন ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
   <string name="nominated_for_deletion_btn">অপসারণের জন্য মনোনীত</string>

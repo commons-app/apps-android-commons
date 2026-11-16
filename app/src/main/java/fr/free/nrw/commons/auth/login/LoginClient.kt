@@ -152,7 +152,12 @@ class LoginClient(
                             cb.error(LoginFailedException(loginResult.message))
                         }
                     } else {
-                        cb.error(IOException("Login failed. Unexpected response."))
+                        val apiError = response.body()?.errorMessage()
+                        if (apiError != null) {
+                            cb.error(LoginFailedException(apiError))
+                        } else {
+                            cb.error(IOException("Login failed. Unexpected response."))
+                        }
                     }
                 }
 
