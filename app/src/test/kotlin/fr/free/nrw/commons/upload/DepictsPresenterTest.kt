@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -54,6 +57,46 @@ class DepictsPresenterTest {
         testScheduler = TestScheduler()
         depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
         depictsPresenter.onAttachView(view)
+    }
+
+    @Test
+    fun `setting a selected depiction as location of creation keeps it as a depiction`() {
+        val item = depictedItem(id = "Q12439", isSelected = true)
+
+        depictsPresenter.onSetAsLocationOfCreation(item)
+
+        Assert.assertTrue(item.isSelected)
+        verify(repository, never()).onDepictItemClicked(any(), anyOrNull())
+        verify(repository).setLocationOfCreation(item)
+        verify(view).showLocationOfCreation(item)
+    }
+
+    @Test
+    fun `setting an unselected item as location of creation does not select it as a depiction`() {
+        val item = depictedItem(id = "Q12439", isSelected = false)
+
+        depictsPresenter.onSetAsLocationOfCreation(item)
+
+        Assert.assertFalse(item.isSelected)
+        verify(repository, never()).onDepictItemClicked(any(), anyOrNull())
+        verify(repository).setLocationOfCreation(item)
+        verify(view).showLocationOfCreation(item)
+    }
+
+    @Test
+    fun `clearing the location of creation removes it from the repository and the view`() {
+        depictsPresenter.onClearLocationOfCreation()
+
+        verify(repository).setLocationOfCreation(null)
+        verify(view).showLocationOfCreation(null)
+    }
+
+    @Test
+    fun `location of creation is read from the repository`() {
+        val item = depictedItem(id = "Q12439")
+        whenever(repository.getLocationOfCreation()).thenReturn(item)
+
+        Assert.assertSame(item, depictsPresenter.getLocationOfCreation())
     }
 
     @Test

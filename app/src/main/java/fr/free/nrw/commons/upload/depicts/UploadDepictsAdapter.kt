@@ -7,8 +7,9 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 class UploadDepictsAdapter(
     onDepictsClicked: (DepictedItem) -> Unit,
     nearbyPlace: Place?,
+    onDepictsLongClicked: ((DepictedItem) -> Unit)? = null,
 ) : BaseDelegateAdapter<DepictedItem>(
-        uploadDepictsDelegate(onDepictsClicked, nearbyPlace),
+        uploadDepictsDelegate(onDepictsClicked, nearbyPlace, onDepictsLongClicked),
         areItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
         areContentsTheSame = { itemA, itemB -> itemA.isSelected == itemB.isSelected },
     )

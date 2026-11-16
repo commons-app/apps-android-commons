@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -15,6 +16,8 @@ import fr.free.nrw.commons.wikidata.model.EditClaim
 import fr.free.nrw.commons.wikidata.model.RemoveClaim
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.never
@@ -45,6 +48,66 @@ class DepictsEditorTest {
             .assertValue(true)
             .assertComplete()
         verify(wikiBaseClient).postEditEntity("M123", json)
+    }
+
+    @Test
+    fun `location of creation request sends the chosen item under P1071`() {
+        whenever(wikiBaseClient.postEditEntity(eq("M123"), any())).thenReturn(Observable.just(true))
+
+        editor
+            .addLocationOfCreationProperty("123", "Q12439")
+            .test()
+            .await()
+            .assertValue(true)
+            .assertComplete()
+
+        val sentJson = argumentCaptor<String>()
+        verify(wikiBaseClient).postEditEntity(eq("M123"), sentJson.capture())
+        val json = sentJson.firstValue
+        assertTrue(json, json.contains("\"property\":\"P1071\""))
+        // Beta Commons has no real Wikidata items, so the editor sends a placeholder there
+        val expectedItemId = if (isBetaFlavour) "Q10" else "Q12439"
+        assertTrue(json, json.contains("\"id\":\"$expectedItemId\""))
+        assertFalse(json, json.contains("\"property\":\"${WikidataProperties.DEPICTS.propertyName}\""))
+    }
+
+    @Test
+    fun `location of creation property is P1071`() {
+        assertEquals("P1071", WikidataProperties.LOCATION_OF_CREATION.propertyName)
+    }
+
+    @Test
+    fun `retrying an existing location does not write a duplicate statement`() {
+        val itemId = if (isBetaFlavour) "Q10" else "Q12439"
+        whenever(wikiBaseClient.getClaimItemIdsByProperty("M123", "P1071"))
+            .thenReturn(Observable.just(listOf(itemId)))
+
+        editor
+            .addMissingLocationOfCreationProperty("123", "Q12439")
+            .test()
+            .await()
+            .assertValue(true)
+            .assertComplete()
+
+        verify(wikiBaseClient, never()).postEditEntity(any(), any())
+    }
+
+    @Test
+    fun `retrying saves a location that is still missing`() {
+        whenever(wikiBaseClient.getClaimItemIdsByProperty("M123", "P1071"))
+            .thenReturn(Observable.just(emptyList()))
+        whenever(wikiBaseClient.postEditEntity(eq("M123"), any())).thenReturn(Observable.just(true))
+
+        editor
+            .addMissingLocationOfCreationProperty("123", "Q12439")
+            .test()
+            .await()
+            .assertValue(true)
+            .assertComplete()
+
+        val sentJson = argumentCaptor<String>()
+        verify(wikiBaseClient).postEditEntity(eq("M123"), sentJson.capture())
+        assertTrue(sentJson.firstValue.contains("\"property\":\"P1071\""))
     }
 
     @Test

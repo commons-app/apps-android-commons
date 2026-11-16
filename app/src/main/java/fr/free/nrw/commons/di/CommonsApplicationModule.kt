@@ -204,6 +204,7 @@ open class CommonsApplicationModule(
             MIGRATION_22_23,
             MIGRATION_23_24,
             MIGRATION_24_25,
+            MIGRATION_25_26,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -594,3 +595,26 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
         )
     }
 }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_25_26 =
+    object : Migration(25, 26) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            val columns =
+                db.query("PRAGMA table_info(contribution)").use { cursor ->
+                    val nameIndex = cursor.getColumnIndexOrThrow("name")
+                    buildSet {
+                        while (cursor.moveToNext()) {
+                            add(cursor.getString(nameIndex))
+                        }
+                    }
+                }
+            if ("locationOfCreation" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+            }
+            // Earlier APKs from this PR had the location column in their version 25 schema.
+            if ("uploadedFilename" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+            }
+        }
+    }

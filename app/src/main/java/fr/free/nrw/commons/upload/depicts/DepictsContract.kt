@@ -80,6 +80,11 @@ interface DepictsContract {
          * Navigate the user to Login Activity
          */
         fun navigateToLoginScreen()
+
+        /**
+         * Shows the place where the picture was taken, or hides it when [location] is null
+         */
+        fun showLocationOfCreation(location: DepictedItem?)
     }
 
     // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
@@ -117,6 +122,22 @@ interface DepictsContract {
          * Clears previous selections
          */
         fun clearPreviousSelection()
+
+        /**
+         * Uses an item as the place where the picture was taken. This is independent of the
+         * depictions: the item stays selected as a depiction if it already was.
+         */
+        fun onSetAsLocationOfCreation(depictedItem: DepictedItem)
+
+        /**
+         * Removes the place where the picture was taken
+         */
+        fun onClearLocationOfCreation()
+
+        /**
+         * Gets the place where the picture was taken, if the user chose one
+         */
+        fun getLocationOfCreation(): DepictedItem?
 
         /**
          * Handle selected place from the map picker

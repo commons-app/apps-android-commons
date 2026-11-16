@@ -123,6 +123,21 @@ interface UploadDepictionOperations {
     fun getSelectedDepictions(): List<DepictedItem>
 
     /**
+     * Gets the place where the picture was taken, if the user chose one.
+     *
+     * @return the place, or null if none was chosen
+     */
+    fun getLocationOfCreation(): DepictedItem?
+
+    /**
+     * Sets or clears the place where the picture was taken. This place is uploaded as "location of
+     * creation" and not as a depiction.
+     *
+     * @param location the place, or null to clear it
+     */
+    fun setLocationOfCreation(location: DepictedItem?)
+
+    /**
      * Provides selected existing depicts
      *
      * @return selected existing depicts
@@ -316,6 +331,12 @@ class DefaultUploadDepictionOperations(
     }
 
     override fun getSelectedDepictions(): List<DepictedItem> = uploadModel.selectedDepictions
+
+    override fun getLocationOfCreation(): DepictedItem? = uploadModel.selectedLocationOfCreation
+
+    override fun setLocationOfCreation(location: DepictedItem?) {
+        uploadModel.selectedLocationOfCreation = location
+    }
 
     override fun getSelectedExistingDepictions(): List<String> = uploadModel.selectedExistingDepictions
 

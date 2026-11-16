@@ -221,6 +221,7 @@ android {
             buildConfigField("String", "TEST_PASSWORD", "\"" + getTestPassword() + "\"")
             buildConfigField("String", "DEPICTS_PROPERTY", "\"P180\"")
             buildConfigField("String", "CREATOR_PROPERTY", "\"P170\"")
+            buildConfigField("String", "LOCATION_OF_CREATION_PROPERTY", "\"P1071\"")
         }
 
         create("beta") {
@@ -311,6 +312,7 @@ android {
             buildConfigField("String", "TEST_PASSWORD", "\"" + getTestPassword() + "\"")
             buildConfigField("String", "DEPICTS_PROPERTY", "\"P245962\"")
             buildConfigField("String", "CREATOR_PROPERTY", "\"P253075\"")
+            buildConfigField("String", "LOCATION_OF_CREATION_PROPERTY", "\"P1071\"")
         }
     }
     compileOptions {
