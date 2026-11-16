@@ -1,10 +1,16 @@
 package fr.free.nrw.commons.db
 
+import com.google.gson.Gson
 import depictedItem
 import fr.free.nrw.commons.contributions.Contribution
+import io.mockk.every
+import io.mockk.mockkObject
+import io.mockk.unmockkObject
 import media
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -12,6 +18,17 @@ import org.junit.Test
  * the database, separately from its depictions.
  */
 class ContributionLocationOfCreationDaoTest : InMemoryDatabaseTest() {
+    @Before
+    fun provideGson() {
+        mockkObject(Converters)
+        every { Converters.getGson() } returns Gson()
+    }
+
+    @After
+    fun restoreConverters() {
+        unmockkObject(Converters)
+    }
+
     private fun queued(
         pageId: String,
         location: String?,

@@ -12,6 +12,7 @@ import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
 import fr.free.nrw.commons.di.MIGRATION_23_24
 import fr.free.nrw.commons.di.MIGRATION_24_25
+import fr.free.nrw.commons.di.MIGRATION_25_26
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -77,6 +78,7 @@ class MigrationTest {
                 MIGRATION_22_23,
                 MIGRATION_23_24,
                 MIGRATION_24_25,
+                MIGRATION_25_26,
             )
 
         // tests
@@ -152,6 +154,7 @@ class MigrationTest {
                 MIGRATION_22_23,
                 MIGRATION_23_24,
                 MIGRATION_24_25,
+                MIGRATION_25_26,
             )
 
         try {
@@ -188,35 +191,66 @@ class MigrationTest {
     fun testLocationOfCreationColumnAddedByMigration() {
         val context = ApplicationProvider.getApplicationContext<Context>()
 
-        val oldDb = helper.createDatabase(ROOM_DB, 24)
+        val oldDb = helper.createDatabase(ROOM_DB, 25)
         oldDb.execSQL(
             """
             INSERT INTO contribution (
                 pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
                 mimeType, media_pageId, media_filename, media_captions, media_descriptions,
                 media_depictionIds, media_creatorIds, media_categoriesHiddenStatus,
-                media_mimeType, media_mediaType
+                media_mimeType, media_mediaType, uploadedFilename
             ) VALUES (
                 '1', 1, 0, '[]', 0, 0, 0,
                 'image/jpeg', '1', 'File:Example.jpg',
                 '{}', '{}', '[]', '[]', '{}',
-                'image/jpeg', 'BITMAP'
+                'image/jpeg', 'BITMAP', 'Example.jpg'
             )
             """.trimIndent(),
         )
         oldDb.close()
 
         val migratedDb =
-            helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_24_25)
+            helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_25_26)
 
         try {
-            migratedDb.query("SELECT locationOfCreation FROM contribution WHERE pageId = '1'").use {
+            migratedDb.query("SELECT locationOfCreation, uploadedFilename FROM contribution WHERE pageId = '1'").use {
                 Assert.assertTrue("contribution survived migration", it.moveToFirst())
                 Assert.assertTrue("existing rows have no location", it.isNull(0))
+                Assert.assertEquals("published filename is retained for retries", "Example.jpg", it.getString(1))
             }
         } finally {
             migratedDb.close()
             context.deleteDatabase(ROOM_DB)
         }
+    }
+
+    @Test
+    fun testLocationPreservedFromEarlierPrBuild() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val oldDb = helper.createDatabase(ROOM_DB, 24)
+        oldDb.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                media_pageId, media_captions, media_descriptions, media_depictionIds,
+                media_creatorIds, media_categoriesHiddenStatus, media_mediaType, locationOfCreation
+            ) VALUES (
+                '1', 1, 0, '[]', 0, 0, 0,
+                '1', '{}', '{}', '[]', '[]', '{}', 'BITMAP', '{"id":"Q12439"}'
+            )
+            """.trimIndent(),
+        )
+        oldDb.version = 25
+        oldDb.close()
+
+        helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_25_26).use { db ->
+            db.query("SELECT locationOfCreation, uploadedFilename FROM contribution WHERE pageId = '1'").use {
+                Assert.assertTrue("contribution survived migration", it.moveToFirst())
+                Assert.assertEquals("""{"id":"Q12439"}""", it.getString(0))
+                Assert.assertTrue("published filename was unavailable in the earlier build", it.isNull(1))
+            }
+        }
+        context.deleteDatabase(ROOM_DB)
     }
 }

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 25,
-    "identityHash": "a9235fff66eab5b02cdb435bba38227e",
+    "identityHash": "c906aebe8cfa575202b1eace43d4fa7d",
     "entities": [
       {
         "tableName": "contribution",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `locationOfCreation` TEXT, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_mimeType` TEXT, `media_mediaType` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pageId` TEXT NOT NULL, `state` INTEGER NOT NULL, `transferred` INTEGER NOT NULL, `decimalCoords` TEXT, `dateCreatedSource` TEXT, `wikidataPlace` TEXT, `chunkInfo` TEXT, `errorInfo` TEXT, `depictedItems` TEXT NOT NULL, `mimeType` TEXT, `localUri` TEXT, `dataLength` INTEGER NOT NULL, `dateCreated` INTEGER, `dateCreatedString` TEXT, `dateModified` INTEGER, `dateUploadStarted` INTEGER, `hasInvalidLocation` INTEGER NOT NULL, `contentUri` TEXT, `countryCode` TEXT, `imageSHA1` TEXT, `retries` INTEGER NOT NULL, `uploadedFilename` TEXT, `media_pageId` TEXT NOT NULL, `media_thumbUrl` TEXT, `media_imageUrl` TEXT, `media_filename` TEXT, `media_fallbackDescription` TEXT, `media_dateUploaded` INTEGER, `media_license` TEXT, `media_licenseUrl` TEXT, `media_author` TEXT, `media_user` TEXT, `media_creatorName` TEXT, `media_categories` TEXT, `media_coordinates` TEXT, `media_captions` TEXT NOT NULL, `media_descriptions` TEXT NOT NULL, `media_depictionIds` TEXT NOT NULL, `media_creatorIds` TEXT NOT NULL, `media_categoriesHiddenStatus` TEXT NOT NULL, `media_mimeType` TEXT, `media_mediaType` TEXT NOT NULL, `media_addedCategories` TEXT, PRIMARY KEY(`pageId`))",
         "fields": [
           {
             "fieldPath": "pageId",
@@ -56,11 +56,6 @@
             "columnName": "depictedItems",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "locationOfCreation",
-            "columnName": "locationOfCreation",
-            "affinity": "TEXT"
           },
           {
             "fieldPath": "mimeType",
@@ -124,6 +119,11 @@
             "columnName": "retries",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "uploadedFilename",
+            "columnName": "uploadedFilename",
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "media.pageId",
@@ -755,7 +755,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a9235fff66eab5b02cdb435bba38227e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c906aebe8cfa575202b1eace43d4fa7d')"
     ]
   }
 }

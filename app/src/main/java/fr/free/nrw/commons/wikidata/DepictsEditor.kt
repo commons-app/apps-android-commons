@@ -81,6 +81,44 @@ class DepictsEditor
                 }.subscribeOn(Schedulers.io())
         }
 
+        /**
+         * Adds the location if the published file does not already have the selected claim.
+         */
+        fun addMissingLocationOfCreationProperty(
+            fileEntityId: String,
+            locationId: String,
+        ): Observable<Boolean> =
+            wikiBaseClient
+                .getClaimItemIdsByProperty(PAGE_ID_PREFIX + fileEntityId, LOCATION_OF_CREATION.propertyName)
+                .switchMap { existingItems ->
+                    val itemId = if (isBetaFlavour) "Q10" else locationId
+                    if (itemId in existingItems) {
+                        Observable.just(true)
+                    } else {
+                        addLocationOfCreationProperty(fileEntityId, locationId)
+                    }
+                }
+
+        /**
+         * Adds only the items the file does not depict yet, so retrying an upload adds no
+         * duplicate claims
+         */
+        fun addMissingDepicts(
+            fileEntityId: String,
+            depictedItems: List<String>,
+        ): Observable<Boolean> =
+            wikiBaseClient
+                .getClaimItemIdsByProperty(PAGE_ID_PREFIX + fileEntityId, DEPICTS.propertyName)
+                .switchMap { existingItems ->
+                    val missingItems =
+                        (if (isBetaFlavour) listOf("Q10") else depictedItems) - existingItems.toSet()
+                    if (missingItems.isEmpty()) {
+                        Observable.just(true)
+                    } else {
+                        addDepictsProperty(fileEntityId, missingItems)
+                    }
+                }
+
         @SuppressLint("CheckResult")
         fun updateDepictsProperty(
             fileEntityId: String?,

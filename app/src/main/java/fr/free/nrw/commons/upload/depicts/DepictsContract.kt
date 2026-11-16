@@ -12,6 +12,9 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
  * The contract with which DepictsFragment and its presenter would talk to each other
  */
 interface DepictsContract {
+    // Suppress TooManyFunctions: These methods form the cohesive MVP View contract
+    // for this screen and stay together to maintain contract integrity.
+    @Suppress("TooManyFunctions")
     interface View {
         /**
          * Go to category screen
@@ -84,6 +87,9 @@ interface DepictsContract {
         fun showLocationOfCreation(location: DepictedItem?)
     }
 
+    // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
+    // contract for this screen and stay together to maintain contract integrity.
+    @Suppress("TooManyFunctions")
     interface UserActionListener : BasePresenter<View> {
         /**
          * Takes to previous screen

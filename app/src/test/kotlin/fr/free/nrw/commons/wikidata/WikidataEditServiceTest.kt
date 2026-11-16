@@ -10,7 +10,6 @@ import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.Entities
@@ -97,7 +96,7 @@ class WikidataEditServiceTest {
 
         wikidataEditService
             .addDepictionsAndCaptions(
-                UploadResult("Success", "key", 0, "file.jpg"),
+                "file.jpg",
                 contributionWith(depictedItem(id = "Q12439")),
             ).test()
             .assertValues(true, true)
@@ -118,7 +117,7 @@ class WikidataEditServiceTest {
 
         wikidataEditService
             .addDepictionsAndCaptions(
-                UploadResult("Success", "key", 0, "file.jpg"),
+                "file.jpg",
                 Contribution(
                     media = media(captions = emptyMap()),
                     depictedItems = listOf(depictedItem(id = "Q12439")),
@@ -142,7 +141,7 @@ class WikidataEditServiceTest {
 
         wikidataEditService
             .addDepictionsAndCaptions(
-                UploadResult("Success", "key", 0, "file.jpg"),
+                "file.jpg",
                 Contribution(
                     media = media(captions = emptyMap()),
                     depictedItems = listOf(depictedItem(id = "Q_ENGINE")),
@@ -162,7 +161,7 @@ class WikidataEditServiceTest {
 
         wikidataEditService
             .addDepictionsAndCaptions(
-                UploadResult("Success", "key", 0, "file.jpg"),
+                "file.jpg",
                 contributionWith(null),
             ).test()
             .assertValues(true)
@@ -179,12 +178,29 @@ class WikidataEditServiceTest {
 
         wikidataEditService
             .addDepictionsAndCaptions(
-                UploadResult("Success", "key", 0, "file.jpg"),
+                "file.jpg",
                 contributionWith(depictedItem(id = "Q12439")),
             ).test()
             .assertValues(true, false)
             .assertComplete()
             .assertNoErrors()
+    }
+
+    @Test
+    fun `retrying metadata uses the missing claims checks for depicts and location`() {
+        whenever(wikibaseClient.getFileEntityId("file.jpg")).thenReturn(Observable.just(42L))
+        whenever(depictsEditor.addMissingDepicts("42", listOf("Q1"))).thenReturn(Observable.just(true))
+        whenever(depictsEditor.addMissingLocationOfCreationProperty("42", "Q12439"))
+            .thenReturn(Observable.just(true))
+
+        wikidataEditService
+            .addDepictionsAndCaptions("file.jpg", contributionWith(depictedItem(id = "Q12439")), retrying = true)
+            .test()
+            .assertValues(true, true)
+            .assertComplete()
+
+        verify(depictsEditor, never()).addDepictsProperty(any(), any())
+        verify(depictsEditor, never()).addLocationOfCreationProperty(any(), any())
     }
 
     /** Two uploads from the same bookmark must read the live image claim each time. */

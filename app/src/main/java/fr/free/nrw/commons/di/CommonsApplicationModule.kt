@@ -204,6 +204,7 @@ open class CommonsApplicationModule(
             MIGRATION_22_23,
             MIGRATION_23_24,
             MIGRATION_24_25,
+            MIGRATION_25_26,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -561,6 +562,14 @@ val MIGRATION_23_24 =
         }
     }
 
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_24_25 =
+    object : Migration(24, 25) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+        }
+    }
+
 /**
  * Fills in media_mediaType for rows that predate the column.
  *
@@ -588,19 +597,24 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
 }
 
 @Suppress("MagicNumber") // Version numbers of the migration
-val MIGRATION_24_25 =
-    object : Migration(24, 25) {
+val MIGRATION_25_26 =
+    object : Migration(25, 26) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            // Add column if it is not there yet, so running this twice does not crash
-            val hasLocationOfCreation =
+            val columns =
                 db.query("PRAGMA table_info(contribution)").use { cursor ->
-                    generateSequence {
-                        if (cursor.moveToNext()) cursor.getString(cursor.getColumnIndexOrThrow("name")) else null
-                    }.any { it == "locationOfCreation" }
+                    val nameIndex = cursor.getColumnIndexOrThrow("name")
+                    buildSet {
+                        while (cursor.moveToNext()) {
+                            add(cursor.getString(nameIndex))
+                        }
+                    }
                 }
-            if (!hasLocationOfCreation) {
-                // Existing contributions have no separate location of creation
+            if ("locationOfCreation" !in columns) {
                 db.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+            }
+            // Earlier APKs from this PR had the location column in their version 25 schema.
+            if ("uploadedFilename" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
             }
         }
     }
