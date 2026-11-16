@@ -98,6 +98,8 @@ internal class UploadMediaMetadataController(
     /** Displays saved captions and descriptions. */
     fun updateMediaDetails(uploadMediaDetails: List<UploadMediaDetail>) {
         uploadMediaDetailAdapter.items = uploadMediaDetails
+        // Restore navigation before RecyclerView rebinds a recreated page's caption fields.
+        onPrimaryCaptionTextChange(!uploadMediaDetails.firstOrNull()?.captionText.isNullOrEmpty())
         showNearbyFound =
             showNearbyFound &&
             (

@@ -221,17 +221,13 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
             betterDescriptionLinearLayout = binding.llWriteBetterDescription
 
             binding.descriptionLanguages.isFocusable = false
-            binding.captionItemEditText.addTextChangedListener(
-                AbstractTextWatcher { value: String ->
-                    if (position == 0) {
-                        eventListener!!.onPrimaryCaptionTextChange(value.length != 0)
-                    }
-                },
-            )
             binding.captionItemEditText.removeTextChangedListener(captionListener)
             binding.descriptionItemEditText.removeTextChangedListener(descriptionListener)
             binding.captionItemEditText.setText(uploadMediaDetail.captionText)
             binding.descriptionItemEditText.setText(uploadMediaDetail.descriptionText)
+            if (position == 0) {
+                eventListener?.onPrimaryCaptionTextChange(binding.captionItemEditText.length() != 0)
+            }
             binding.captionItemEditTextInputLayout.endIconMode = TextInputLayout.END_ICON_CUSTOM
             binding.captionItemEditTextInputLayout.setEndIconDrawable(R.drawable.baseline_keyboard_voice)
             binding.captionItemEditTextInputLayout.setEndIconOnClickListener { v: View? ->
@@ -283,6 +279,9 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                 AbstractTextWatcher { captionText: String ->
                     uploadMediaDetail.captionText =
                         convertIdeographicSpaceToLatinSpace(captionText.trim())
+                    if (position == 0) {
+                        eventListener?.onPrimaryCaptionTextChange(captionText.isNotEmpty())
+                    }
                 }
             descriptionListener =
                 AbstractTextWatcher { value: String? ->
