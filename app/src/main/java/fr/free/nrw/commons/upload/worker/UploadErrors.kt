@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.worker
 
+import android.content.Context
+import fr.free.nrw.commons.R
 import java.io.IOException
 
 /**
@@ -64,3 +66,19 @@ internal fun httpStatusCode(errorInfo: String?): Int? =
 internal fun isTemporaryServerError(httpStatusCode: Int): Boolean =
     httpStatusCode == HTTP_TOO_MANY_REQUESTS ||
         httpStatusCode in HTTP_SERVER_ERROR_FIRST..HTTP_SERVER_ERROR_LAST
+
+/**
+ * Returns the reason to show for a failed upload: a message the user can understand for server
+ * problems and too many requests, or the saved error as it is for everything else.
+ */
+internal fun uploadErrorMessage(
+    context: Context,
+    errorInfo: String?,
+): String? {
+    val code = httpStatusCode(errorInfo)
+    return if (code != null && isTemporaryServerError(code)) {
+        context.getString(R.string.upload_failed_server_error, code)
+    } else {
+        errorInfo
+    }
+}

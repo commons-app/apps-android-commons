@@ -1,5 +1,9 @@
 package fr.free.nrw.commons.upload.worker
 
+import android.content.Context
+import fr.free.nrw.commons.R
+import io.mockk.every
+import io.mockk.mockk
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -93,5 +97,28 @@ class UploadErrorsTest {
         assertFalse(isTemporaryServerError(413))
         assertFalse(isTemporaryServerError(499))
         assertFalse(isTemporaryServerError(600))
+    }
+
+    @Test
+    fun `uploadErrorMessage shows the friendly message for a temporary server error`() {
+        val context = mockk<Context>()
+        every { context.getString(R.string.upload_failed_server_error, 503) } returns FRIENDLY_503
+
+        assertEquals(FRIENDLY_503, uploadErrorMessage(context, "Unsuccessful response: HTTP 503"))
+        assertEquals(FRIENDLY_503, uploadErrorMessage(context, "HTTP 503 "))
+    }
+
+    @Test
+    fun `uploadErrorMessage keeps other errors as they are`() {
+        // Any call on this context would fail the test, so no friendly message is looked up
+        val context = mockk<Context>()
+
+        assertEquals("Unsuccessful response: HTTP 403", uploadErrorMessage(context, "Unsuccessful response: HTTP 403"))
+        assertEquals("filetype-banned", uploadErrorMessage(context, "filetype-banned"))
+        assertNull(uploadErrorMessage(context, null))
+    }
+
+    private companion object {
+        const val FRIENDLY_503 = "Commons could not handle the request right now. Please try again later. (HTTP 503)"
     }
 }
