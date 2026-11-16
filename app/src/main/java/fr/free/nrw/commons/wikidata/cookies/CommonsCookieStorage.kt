@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.wikidata.cookies
 
+import android.util.Log
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
@@ -12,6 +14,7 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 private const val COOKIE_STORE = "cookie_store"
+private const val TAG = "CommonsCookieStorage"
 
 class CommonsCookieStorage(
     private val preferences: JsonKvStore? = null,
@@ -39,20 +42,39 @@ class CommonsCookieStorage(
         save()
     }
 
+    // The cookie store is read once at startup, before any UI exists to react to a failure, so
+    // any exception here must be treated as "this persisted value is unreadable" rather than
+    // left to crash the app. Catching the specific types seen so far (JsonSyntaxException,
+    // ClassCastException) would silently drop that guarantee for any other unreadable shape.
+    @Suppress("TooGenericExceptionCaught")
     fun load() {
         cookieMap.clear()
-        val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
-        val json = CryptoUtils.decrypt(encryptedJson)
+        try {
+            val encryptedJson = preferences!!.getString(COOKIE_STORE, null)
+            val json = CryptoUtils.decrypt(encryptedJson)
 
-        if (!json.isNullOrEmpty()) {
-            val serializedData = gson.fromJson(json, CommonsCookieStorage::class.java)
-            cookieMap.putAll(serializedData.cookieMap)
+            if (!json.isNullOrBlank()) {
+                val serializedData =
+                    gson.fromJson(json, CommonsCookieStorage::class.java)
+                        ?: throw JsonSyntaxException("Cookie store must be a JSON object")
+                cookieMap.putAll(serializedData.cookieMap)
 
-            // If the loaded json wasn't encrypted (e.g. migrating from older version)
-            // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
-            if (encryptedJson == json) {
-                save()
+                // If the loaded json wasn't encrypted (e.g. migrating from older version)
+                // or if it was successfully decrypted, let's re-save it to ensure it's encrypted on disk.
+                if (encryptedJson == json) {
+                    save()
+                }
+            } else if (encryptedJson != null) {
+                Log.w(TAG, "Discarding empty cookie store")
+                preferences.remove(COOKIE_STORE)
             }
+        } catch (exception: Exception) {
+            // Covers malformed JSON (JsonSyntaxException) as well as any other unreadable
+            // value under this key (e.g. a type mismatch on the underlying preference) so a
+            // corrupted cookie store of any shape can't take startup down with it.
+            Log.w(TAG, "Discarding unreadable cookie store", exception)
+            cookieMap.clear()
+            preferences?.remove(COOKIE_STORE)
         }
     }
 
