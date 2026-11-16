@@ -127,14 +127,12 @@ import org.osmdroid.events.ZoomEvent
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Overlay
 import org.osmdroid.views.overlay.ScaleBarOverlay
-import org.osmdroid.views.overlay.ScaleDiskOverlay
 import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
 import java.io.File
@@ -154,6 +152,7 @@ import kotlin.math.ln
 
 class NearbyParentFragment(
     val fileExportHelper: NearbyFileExportHelper = NearbyFileExportHelper(),
+    val markerOverlayHelper: NearbyMarkerOverlayHelper = NearbyMarkerOverlayHelper(),
 ) : CommonsDaggerSupportFragment(),
     NearbyParentFragmentContract.View,
     WikidataP18EditListener,
@@ -244,7 +243,8 @@ class NearbyParentFragment(
     private var _isDarkTheme = false
     private var isFABsExpanded = false
     private var selectedPlace: Place? = null
-    private var clickedMarker: Marker? = null
+    private val clickedMarker: Marker?
+        get() = markerOverlayHelper.clickedMarker
     private var progressDialog: ProgressDialog? = null
     private var isPermissionDenied = false
     private var recenterToUserLocation = false
@@ -267,7 +267,6 @@ class NearbyParentFragment(
 
     @Volatile
     private var stopQuery = false
-    private var drawableCache: MutableMap<Pair<Context, Int>, Drawable>? = null
 
     // Explore map data (for if we came from Explore)
     private var prevZoom = 0.0
@@ -280,9 +279,6 @@ class NearbyParentFragment(
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
     private var bottomSheetAdapter: BottomSheetAdapter? = null
-
-    private var userLocationOverlay: Overlay? = null
-    private var userLocationErrorOverlay: Overlay? = null
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -554,6 +550,81 @@ class NearbyParentFragment(
                     }
                 },
         )
+        markerOverlayHelper.init(
+            mapViewProvider = { binding?.map },
+            contextProvider = { context },
+            locationManagerProvider = { locationManager },
+            mapStateProvider =
+                object : NearbyMarkerOverlayHelper.MapStateProvider {
+                    override fun getMapCenter(): GeoPoint? = mapCenter
+                    override fun getMapEventsOverlay(): MapEventsOverlay? = mapEventsOverlay
+                    override fun isPermissionDenied(): Boolean = isPermissionDenied
+                    override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
+                    override fun getAllPhotoLatLngs(): List<LatLng>? = allPhotoLatLngs
+                    override fun getNearestPlace(): Place? = nearestPlace
+                },
+            markerCallback =
+                object : NearbyMarkerOverlayHelper.MarkerCallback {
+                    override fun onMarkerClicked(
+                        place: Place,
+                        marker: Marker,
+                        isBookmarked: Boolean,
+                    ) {
+                        if (!isNetworkErrorOccurred) {
+                            binding?.bottomSheetDetails?.dataCircularProgress?.visibility =
+                                View.VISIBLE
+                            binding?.bottomSheetDetails?.icon?.visibility = View.GONE
+                            binding?.bottomSheetDetails?.wikiDataLl?.visibility = View.GONE
+                            if (place.name == "") {
+                                getPlaceData(place, marker, isBookmarked)
+                            } else {
+                                marker.showInfoWindow()
+                                binding?.bottomSheetDetails?.dataCircularProgress?.visibility =
+                                    View.GONE
+                                binding?.bottomSheetDetails?.icon?.visibility = View.VISIBLE
+                                binding?.bottomSheetDetails?.wikiDataLl?.visibility = View.VISIBLE
+                                passInfoToSheet(place)
+                                hideBottomSheet()
+                            }
+                            bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                        } else {
+                            marker.showInfoWindow()
+                        }
+                    }
+
+                    override fun onPhotoMarkerClicked(marker: Marker) {
+                        bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                    }
+
+                    override fun onBoundingBoxZoomCalculated(boundingBox: BoundingBox) {
+                        photoPinBoundingBox = boundingBox
+                        // center on average of all photos coordinates and zoom out and run only once
+                        // only if multiple pins are present
+                        if (needsZoomOut && (allPhotoLatLngs?.size ?: 0) > 1) {
+                            val preferredZoom = if (prevZoom > 0.0) prevZoom else ZOOM_LEVEL.toDouble()
+                            // Calculate what zoom the bounding box WOULD use
+                            val boundingBoxZoom =
+                                binding?.map?.calculateBoundingBoxZoom(
+                                    boundingBox,
+                                    BOUNDING_BOX_BORDER_SIZE_PX,
+                                ) ?: preferredZoom
+                            // BoundingBox might zoom out too far if pins are situated far apart ,
+                            // which makes the query very slow. so we restrict it
+                            if (boundingBoxZoom < preferredZoom) {
+                                binding?.map?.controller?.setZoom(preferredZoom)
+                                binding?.map?.controller?.animateTo(lastMapFocus)
+                            } else {
+                                binding?.map?.zoomToBoundingBox(
+                                    boundingBox,
+                                    true,
+                                    BOUNDING_BOX_BORDER_SIZE_PX,
+                                )
+                            }
+                            needsZoomOut = false
+                        }
+                    }
+                },
+        )
         isPermissionDenied = false
         recenterToUserLocation = false
         initThemePreferences()
@@ -709,9 +780,7 @@ class NearbyParentFragment(
     }
 
     fun addPhotoMarkerIfDepictsMode() {
-        if (isDepictsPickerMode) {
-            addPhotoMarkers(allPhotoLatLngs!!)
-        }
+        markerOverlayHelper.addPhotoMarkerIfDepictsMode()
     }
 
     /**
@@ -821,63 +890,6 @@ class NearbyParentFragment(
         presenter!!.onMapReady()
     }
 
-    private fun addPhotoMarkers(coordList: ArrayList<LatLng>) {
-        var minLat = Double.MAX_VALUE
-        var maxLat = -Double.MAX_VALUE
-        var minLng = Double.MAX_VALUE
-        var maxLng = -Double.MAX_VALUE
-
-        if (coordList.isEmpty()) return
-
-        coordList.forEachIndexed { index, latLng ->
-            // add marker details
-            val marker = Marker(binding?.map)
-            marker.position = GeoPoint(latLng.latitude, latLng.longitude)
-            marker.title = "Photo ${index + 1}"
-            marker.icon = getDrawable(requireContext(), R.drawable.ic_mappin)
-            binding!!.map.overlays.add(marker)
-            // disable zooming in to the pin , only show the info
-            // close details of if open place to avoid confusion
-            marker.setOnMarkerClickListener { m: Marker, mapView: MapView? ->
-                bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-                m.showInfoWindow()
-                true
-            }
-        }
-        allPhotoLatLngs!!.forEach {
-            minLat = minLat.coerceAtMost(it.latitude)
-            maxLat = maxLat.coerceAtLeast(it.latitude)
-            minLng = minLng.coerceAtMost(it.longitude)
-            maxLng = maxLng.coerceAtLeast(it.longitude)
-        }
-        photoPinBoundingBox = BoundingBox(maxLat, maxLng, minLat, minLng)
-        // center on average of all photos coordinates and zoom out and run only once
-        // only if multiple pins are present
-        if (needsZoomOut && allPhotoLatLngs?.size!! > 1) {
-            val preferredZoom = if (prevZoom > 0.0) prevZoom else ZOOM_LEVEL.toDouble()
-            // Calculate what zoom the bounding box WOULD use
-            val boundingBoxZoom =
-                binding!!.map.calculateBoundingBoxZoom(
-                    photoPinBoundingBox!!,
-                    BOUNDING_BOX_BORDER_SIZE_PX,
-                )
-            // BoundingBox might zoom out too far if pins are situated far apart ,
-            // which makes the query very slow. so we restrict it
-            if (boundingBoxZoom < preferredZoom) {
-                binding?.map?.controller?.setZoom(preferredZoom)
-                binding?.map?.controller?.animateTo(lastMapFocus)
-            } else {
-                binding?.map?.zoomToBoundingBox(
-                    photoPinBoundingBox,
-                    true,
-                    BOUNDING_BOX_BORDER_SIZE_PX,
-                )
-            }
-            needsZoomOut = false
-        }
-        binding?.map?.invalidate()
-    }
-
     override fun askForLocationPermission() {
         Timber.d("Asking for location permission")
         locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION)
@@ -956,7 +968,6 @@ class NearbyParentFragment(
                 startMapWithoutPermission()
             }
         }
-        drawableCache = HashMap()
     }
 
     /**
@@ -1723,6 +1734,64 @@ class NearbyParentFragment(
     }
 
     /**
+     * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
+     * draw a circle which represents the user's position with an accuracy of 95%.
+     *
+     *
+     * Should be called only on creation of Map, there is other method to update markers location
+     * with users move.
+     *
+     * @param currentLatLng current location
+     */
+    override fun addCurrentLocationMarker(currentLatLng: LatLng?) {
+        markerOverlayHelper.addCurrentLocationMarker(currentLatLng)
+    }
+
+    /**
+     * Clears all markers from the map and resets certain map overlays and gestures. After clearing
+     * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
+     */
+    override fun clearAllMarkers() {
+        markerOverlayHelper.clearAllMarkers()
+    }
+
+    /**
+     * Adds multiple markers representing places to the map and handles item gestures.
+     * Markers are sorted by priority before being added so that higher-priority pins
+     * (e.g. red "needs photo" pins) are always rendered on top of lower-priority ones
+     * (e.g. green "has photo" pins) in the OSMDroid overlay list.
+     *
+     * @param markerPlaceGroups The list of marker place groups containing the places and
+     * their bookmarked status
+     */
+    override fun replaceMarkerOverlays(markerPlaceGroups: List<MarkerPlaceGroup>) {
+        markerOverlayHelper.replaceMarkerOverlays(markerPlaceGroups)
+    }
+
+    override fun filterOutAllMarkers() {
+        markerOverlayHelper.filterOutAllMarkers()
+    }
+
+    /**
+     * Filters markers based on selectedLabels and chips
+     *
+     * @param selectedLabels       label list that user clicked
+     * @param filterForPlaceState  true if we filter places for place state
+     * @param filterForAllNoneType true if we filter places with all none button
+     */
+    override fun filterMarkersByLabels(
+        selectedLabels: List<Label>?,
+        filterForPlaceState: Boolean,
+        filterForAllNoneType: Boolean,
+    ) {
+        markerOverlayHelper.filterMarkersByLabels(
+            selectedLabels,
+            filterForPlaceState,
+            filterForAllNoneType,
+        )
+    }
+
+    /**
      * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
      *
      * @param place        The Place object containing the initial place data.
@@ -1761,9 +1830,14 @@ class NearbyParentFragment(
                         presenter!!.handlePinClicked(updatedPlace)
                         savePlaceToDatabase(updatedPlace)
                         val icon =
-                            getDrawable(
+                            getCachedDrawable(
                                 requireContext(),
-                                getIconFor(updatedPlace, isBookMarked),
+                                fr.free.nrw.commons.nearby.fragments.getIconFor(
+                                    updatedPlace,
+                                    isBookMarked,
+                                    nearestPlace,
+                                ),
+                                markerOverlayHelper.drawableCache,
                             )
                         marker.icon = icon
                         binding!!.map.invalidate()
@@ -2181,110 +2255,6 @@ class NearbyParentFragment(
         binding!!.fabRecenter.isEnabled = true
     }
 
-    /**
-     * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
-     * draw a circle which represents the user's position with an accuracy of 95%.
-     *
-     *
-     * Should be called only on creation of Map, there is other method to update markers location
-     * with users move.
-     *
-     * @param currentLatLng current location
-     */
-    override fun addCurrentLocationMarker(currentLatLng: LatLng?) {
-        if (null != currentLatLng &&
-            !isPermissionDenied &&
-            locationManager!!.isGPSProviderEnabled()
-        ) {
-            get().submit {
-                Timber.d("Adds current location marker")
-                recenterMarkerToPosition(
-                    GeoPoint(currentLatLng.latitude, currentLatLng.longitude),
-                )
-            }
-        } else {
-            Timber.d("not adding current location marker..current location is null")
-        }
-    }
-
-    override fun filterOutAllMarkers() {
-        clearAllMarkers()
-    }
-
-    /**
-     * Filters markers based on selectedLabels and chips
-     *
-     * @param selectedLabels       label list that user clicked
-     * @param filterForPlaceState  true if we filter places for place state
-     * @param filterForAllNoneType true if we filter places with all none button
-     */
-    override fun filterMarkersByLabels(
-        selectedLabels: List<Label>?,
-        filterForPlaceState: Boolean,
-        filterForAllNoneType: Boolean,
-    ) {
-        val displayExists = false
-        val displayNeedsPhoto = false
-        val displayWlm = false
-        if (selectedLabels == null || selectedLabels.size == 0) {
-            replaceMarkerOverlays(NearbyController.markerLabelList)
-            return
-        }
-        val placeGroupsToShow = ArrayList<MarkerPlaceGroup>()
-        for (markerPlaceGroup in NearbyController.markerLabelList) {
-            val place = markerPlaceGroup.place
-            // When label filter is engaged
-            // then compare it against place's label
-            if (selectedLabels != null &&
-                (selectedLabels.size != 0 || !filterForPlaceState) &&
-                (
-                    !selectedLabels.contains(place.label) &&
-                        !(
-                            selectedLabels.contains(Label.BOOKMARKS) &&
-                                markerPlaceGroup.isBookmarked
-                        )
-                )
-            ) {
-                continue
-            }
-
-            if (!displayWlm && place.isMonument) {
-                continue
-            }
-
-            var shouldUpdateMarker = false
-
-            if (displayWlm && place.isMonument) {
-                shouldUpdateMarker = true
-            } else if (displayExists && displayNeedsPhoto) {
-                // Exists and needs photo
-                if (place.exists && place.pic.trim { it <= ' ' }.isEmpty()) {
-                    shouldUpdateMarker = true
-                }
-            } else if (displayExists) {
-                // Exists and all included needs and doesn't needs photo
-                if (place.exists) {
-                    shouldUpdateMarker = true
-                }
-            } else if (displayNeedsPhoto) {
-                // All and only needs photo
-                if (place.pic.trim { it <= ' ' }.isEmpty()) {
-                    shouldUpdateMarker = true
-                }
-            } else {
-                // all
-                shouldUpdateMarker = true
-            }
-
-            if (shouldUpdateMarker) {
-                placeGroupsToShow.add(
-                    MarkerPlaceGroup(markerPlaceGroup.isBookmarked, place),
-                )
-            }
-        }
-        replaceMarkerOverlays(placeGroupsToShow)
-    }
-
     override fun getCameraTarget(): LatLng? = if (binding!!.map == null) null else mapFocus
 
     /**
@@ -2297,148 +2267,6 @@ class NearbyParentFragment(
         passInfoToSheet(nearestPlace)
         hideBottomSheet()
         bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
-    /**
-     * Returns drawable of marker icon for given place
-     *
-     * @param place        where marker is to be added
-     * @param isBookmarked true if place is bookmarked
-     * @return returns the drawable of marker according to the place information
-     */
-    @DrawableRes
-    private fun getIconFor(
-        place: Place,
-        isBookmarked: Boolean,
-    ): Int {
-        if (nearestPlace != null && place.name == nearestPlace!!.name) {
-            // Highlight nearest place only when user clicks on the home nearby banner
-            // highlightNearestPlace(place);
-            return (
-                if (isBookmarked) {
-                    R.drawable.ic_custom_map_marker_purple_bookmarked
-                } else {
-                    R.drawable.ic_custom_map_marker_purple
-                }
-            )
-        }
-
-        if (place.isMonument) {
-            return R.drawable.ic_custom_map_marker_monuments
-        }
-        if (!place.pic.trim { it <= ' ' }.isEmpty()) {
-            return (
-                if (isBookmarked) {
-                    R.drawable.ic_custom_map_marker_green_bookmarked
-                } else {
-                    R.drawable.ic_custom_map_marker_green
-                }
-            )
-        }
-        if (!place.exists) {
-            // Means that the topic of the Wikidata item does not exist in the real world anymore,
-            // for instance it is a past event, or a place that was destroyed
-            return (R.drawable.ic_clear_black_24dp)
-        }
-        if (place.name.isEmpty()) {
-            return (
-                if (isBookmarked) {
-                    R.drawable.ic_custom_map_marker_grey_bookmarked
-                } else {
-                    R.drawable.ic_custom_map_marker_grey
-                }
-            )
-        }
-        return (
-            if (isBookmarked) {
-                R.drawable.ic_custom_map_marker_red_bookmarked
-            } else {
-                R.drawable.ic_custom_map_marker_red
-            }
-        )
-    }
-
-    /**
-     * Gets the specified Drawable object. This is a wrapper method for ContextCompat.getDrawable().
-     * This method caches results from previous calls for faster retrieval.
-     *
-     * @param context The context to use to get the Drawable
-     * @param id The integer that describes the Drawable resource
-     * @return The Drawable object
-     */
-    private fun getDrawable(
-        context: Context?,
-        id: Int?,
-    ): Drawable? {
-        if (drawableCache == null || context == null || id == null) {
-            return null
-        }
-
-        val key = Pair(context, id)
-        if (!drawableCache!!.containsKey(key)) {
-            val drawable = ContextCompat.getDrawable(context, id)
-
-            if (drawable != null) {
-                drawableCache!![key] = drawable
-            } else {
-                return null
-            }
-        }
-
-        return drawableCache!![key]
-    }
-
-    fun convertToMarker(
-        place: Place,
-        isBookMarked: Boolean,
-    ): Marker {
-        val icon = getDrawable(requireContext(), getIconFor(place, isBookMarked))
-        val point = GeoPoint(place.location.latitude, place.location.longitude)
-        val marker = Marker(binding!!.map)
-        marker.position = point
-        marker.icon = icon
-        if (place.name != "") {
-            marker.title = place.name
-            marker.snippet =
-                if (containsParentheses(place.longDescription)) {
-                    getTextBetweenParentheses(
-                        place.longDescription,
-                    )
-                } else {
-                    place.longDescription
-                }
-        }
-        marker.textLabelFontSize = MARKER_LABEL_FONT_SIZE
-        // anchorV is 21.707/28.0 as icon height is 28dp while the pin base is at 21.707dp from top
-        marker.setAnchor(Marker.ANCHOR_CENTER, MARKER_ANCHOR_V)
-        marker.setOnMarkerClickListener { marker1: Marker, mapView: MapView? ->
-            if (clickedMarker != null) {
-                clickedMarker!!.closeInfoWindow()
-            }
-            clickedMarker = marker1
-            if (!isNetworkErrorOccurred) {
-                binding!!.bottomSheetDetails.dataCircularProgress.visibility =
-                    View.VISIBLE
-                binding!!.bottomSheetDetails.icon.visibility = View.GONE
-                binding!!.bottomSheetDetails.wikiDataLl.visibility = View.GONE
-                if (place.name == "") {
-                    getPlaceData(place, marker1, isBookMarked)
-                } else {
-                    marker.showInfoWindow()
-                    binding!!.bottomSheetDetails.dataCircularProgress.visibility =
-                        View.GONE
-                    binding!!.bottomSheetDetails.icon.visibility = View.VISIBLE
-                    binding!!.bottomSheetDetails.wikiDataLl.visibility = View.VISIBLE
-                    passInfoToSheet(place)
-                    hideBottomSheet()
-                }
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            } else {
-                marker.showInfoWindow()
-            }
-            true
-        }
-        return marker
     }
 
     /**
@@ -2456,45 +2284,7 @@ class NearbyParentFragment(
     private fun getMarkerPriority(
         place: Place,
         isBookmarked: Boolean,
-    ): Int =
-        when (getIconFor(place, isBookmarked)) {
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple,
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_purple_bookmarked,
-            -> MARKER_PRIORITY_PURPLE
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red,
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_red_bookmarked,
-            -> MARKER_PRIORITY_RED
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> MARKER_PRIORITY_MONUMENT
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green,
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked,
-            -> MARKER_PRIORITY_GREEN
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey,
-            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked,
-            -> MARKER_PRIORITY_GREY
-            else -> 0 // ic_clear_black_24dp – place does not exist in the real world
-        }
-
-    /**
-     * Adds multiple markers representing places to the map and handles item gestures.
-     * Markers are sorted by priority before being added so that higher-priority pins
-     * (e.g. red "needs photo" pins) are always rendered on top of lower-priority ones
-     * (e.g. green "has photo" pins) in the OSMDroid overlay list.
-     *
-     * @param markerPlaceGroups The list of marker place groups containing the places and
-     * their bookmarked status
-     */
-    override fun replaceMarkerOverlays(markerPlaceGroups: List<MarkerPlaceGroup>) {
-        // Reverse the list first to make it farthest-first (since it comes nearest-first).
-        // Then sort by priority (stable sort). This ensures that within the same priority,
-        // farthest markers are added first (drawn bottom) and nearest are added last (drawn top).
-        val sortedGroups = markerPlaceGroups.reversed().sortedBy { getMarkerPriority(it.place, it.isBookmarked) }
-        val newMarkers =
-            sortedGroups.map { group ->
-                convertToMarker(group.place, group.isBookmarked)
-            }
-        clearAllMarkers()
-        binding!!.map.overlays.addAll(newMarkers)
-    }
+    ): Int = fr.free.nrw.commons.nearby.fragments.getMarkerPriority(place, isBookmarked, nearestPlace)
 
     override fun recenterMap(currentLatLng: LatLng?) {
         // if user has denied permission twice, then show dialog
@@ -2948,51 +2738,6 @@ class NearbyParentFragment(
     }
 
     /**
-     * Clears all markers from the map and resets certain map overlays and gestures. After clearing
-     * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
-     */
-    override fun clearAllMarkers() {
-        binding!!.map.overlayManager.clear()
-
-        var geoPoint = mapCenter
-        val lastLatLng = locationManager.getLastLocation()
-        if (lastLatLng != null) {
-            geoPoint = GeoPoint(lastLatLng.latitude, lastLatLng.longitude)
-        }
-        updateUserLocationOverlays(geoPoint, false)
-
-        val scaleBarOverlay = ScaleBarOverlay(binding!!.map)
-        scaleBarOverlay.setScaleBarOffset(SCALE_BAR_OFFSET_X, SCALE_BAR_OFFSET_Y)
-        val barPaint = Paint()
-        barPaint.setARGB(
-            SCALE_BAR_BACKGROUND_ALPHA,
-            SCALE_BAR_BACKGROUND_RED,
-            SCALE_BAR_BACKGROUND_GREEN,
-            SCALE_BAR_BACKGROUND_BLUE,
-        )
-        scaleBarOverlay.setBackgroundPaint(barPaint)
-        scaleBarOverlay.enableScaleBar()
-        binding!!.map.overlays.add(scaleBarOverlay)
-        binding!!.map.overlays.add(mapEventsOverlay)
-        addPhotoMarkerIfDepictsMode()
-        binding!!.map.setMultiTouchControls(true)
-        binding!!.map.invalidate()
-    }
-
-    /**
-     * Recenters the map to the Center and adds a scale disk overlay and a marker at the position.
-     *
-     * @param geoPoint The GeoPoint representing the new center position of the map.
-     */
-    private fun recenterMarkerToPosition(geoPoint: GeoPoint?) {
-        geoPoint?.let {
-            binding?.map?.controller?.setCenter(it)
-
-            updateUserLocationOverlays(it, true)
-        }
-    }
-
-    /**
      * Updates the user current location overlays (both the location and error overlays) by
      * replacing any existing location overlays with new overlays at the given GeoPoint. If there
      * are no existing location and error overlays, then new overlays are added.
@@ -3005,152 +2750,7 @@ class NearbyParentFragment(
         geoPoint: GeoPoint?,
         invalidate: Boolean,
     ) {
-        geoPoint?.let {
-            updateUserLocationOverlay(geoPoint)
-            updateUserLocationErrorOverlay(geoPoint)
-        }
-
-        if (invalidate) {
-            binding!!.map.invalidate()
-        }
-    }
-
-    /**
-     * Updates the user location error overlay by either replacing it with or adding a new one.
-     *
-     * If the user location error overlay is null, the new overlay is added. If the
-     * overlay is not null, it is replaced by the new overlay.
-     *
-     * @param geoPoint The GeoPoint representing the user's location
-     */
-    private fun updateUserLocationErrorOverlay(geoPoint: GeoPoint) {
-        val overlays = binding?.map?.overlays ?: return
-
-        // Multiply accuracy by 2 to get 95% confidence interval
-        val accuracy = getCurrentLocationAccuracy() * 2
-        val overlay =
-            createCurrentLocationErrorOverlay(
-                this.context,
-                geoPoint,
-                (accuracy).toInt(),
-                UnitOfMeasure.meter,
-            )
-
-        val index = overlays.indexOf(userLocationErrorOverlay)
-
-        if (userLocationErrorOverlay == null || index == -1) {
-            overlays.add(overlay)
-        } else {
-            overlays[index] = overlay
-        }
-
-        userLocationErrorOverlay = overlay
-    }
-
-    /**
-     * Updates the user location overlay by either replacing it with or adding a new one.
-     *
-     * If the user location overlay is null, the new overlay is added. If the
-     * overlay is not null, it is replaced by the new overlay.
-     *
-     * @param geoPoint The GeoPoint representing the user's location
-     */
-    private fun updateUserLocationOverlay(geoPoint: GeoPoint) {
-        val overlays = binding?.map?.overlays ?: return
-
-        val overlay = createCurrentLocationOverlay(geoPoint)
-
-        val index = overlays.indexOf(userLocationOverlay)
-
-        if (userLocationOverlay == null || index == -1) {
-            overlays.add(overlay)
-        } else {
-            overlays[index] = overlay
-        }
-
-        userLocationOverlay = overlay
-    }
-
-    /**
-     * @return The accuracy of the current location with a confidence at the 68th percentile.
-     * Units are in meters. Returning 0 may indicate failure.
-     */
-    private fun getCurrentLocationAccuracy(): Float {
-        var accuracy = 0f
-        val lastLocation = locationManager.getLastLocation()
-        if (lastLocation != null) {
-            accuracy = lastLocation.accuracy
-        }
-
-        return accuracy
-    }
-
-    /**
-     * Creates the current location overlay
-     *
-     * @param geoPoint The GeoPoint where the current location overlay will be placed.
-     *
-     * @return The current location overlay as a Marker
-     */
-    private fun createCurrentLocationOverlay(geoPoint: GeoPoint): Marker {
-        val currentLocationOverlay =
-            Marker(
-                binding!!.map,
-            )
-        currentLocationOverlay.position = geoPoint
-        currentLocationOverlay.icon =
-            getDrawable(
-                this.requireContext(),
-                fr.free.nrw.commons.R.drawable.current_location_marker,
-            )
-        currentLocationOverlay.title = "Your Location"
-        currentLocationOverlay.textLabelFontSize = CURRENT_LOCATION_LABEL_FONT_SIZE
-        currentLocationOverlay.setAnchor(CURRENT_LOCATION_ANCHOR, CURRENT_LOCATION_ANCHOR)
-
-        return currentLocationOverlay
-    }
-
-    /**
-     * Creates the location error overlay to show the user how accurate the current location
-     * overlay is. The edge of the disk is the 95% confidence interval.
-     *
-     * @param context The Android context
-     * @param point The user's location as a GeoPoint
-     * @param value The radius of the disk
-     * @param unitOfMeasure The unit of measurement of the value/disk radius.
-     *
-     * @return The location error overlay as a ScaleDiskOverlay.
-     */
-    private fun createCurrentLocationErrorOverlay(
-        context: Context?,
-        point: GeoPoint,
-        value: Int,
-        unitOfMeasure: UnitOfMeasure,
-    ): ScaleDiskOverlay {
-        val scaleDisk = ScaleDiskOverlay(context, point, value, unitOfMeasure)
-
-        scaleDisk.setCirclePaint2(
-            Paint().apply {
-                color = Color.rgb(LOCATION_CIRCLE_GRAY, LOCATION_CIRCLE_GRAY, LOCATION_CIRCLE_GRAY)
-                style = Paint.Style.STROKE
-                strokeWidth = 2f
-            },
-        )
-
-        scaleDisk.setCirclePaint1(
-            Paint().apply {
-                color =
-                    Color.argb(
-                        LOCATION_CIRCLE_FILL_ALPHA,
-                        LOCATION_CIRCLE_GRAY,
-                        LOCATION_CIRCLE_GRAY,
-                        LOCATION_CIRCLE_GRAY,
-                    )
-                style = Paint.Style.FILL_AND_STROKE
-            },
-        )
-
-        return scaleDisk
+        markerOverlayHelper.updateUserLocationOverlays(geoPoint, invalidate)
     }
 
     private fun moveCameraToPosition(geoPoint: GeoPoint) {
@@ -3349,17 +2949,6 @@ class NearbyParentFragment(
         private const val FILTER_SEARCH_DEBOUNCE_MS = 500L
         private const val LOCATION_ACCURACY_METERS = 100f
         private const val FALLBACK_BOUNDS_DELTA_DEGREES = 0.009
-        private const val MARKER_LABEL_FONT_SIZE = 40
-        private const val MARKER_ANCHOR_V = 0.77525f
-        private const val MARKER_PRIORITY_PURPLE = 5
-        private const val MARKER_PRIORITY_RED = 4
-        private const val MARKER_PRIORITY_MONUMENT = 3
-        private const val MARKER_PRIORITY_GREEN = 2
-        private const val MARKER_PRIORITY_GREY = 1
-        private const val CURRENT_LOCATION_LABEL_FONT_SIZE = 24
-        private const val CURRENT_LOCATION_ANCHOR = 0.5f
-        private const val LOCATION_CIRCLE_GRAY = 128
-        private const val LOCATION_CIRCLE_FILL_ALPHA = 40
         const val ARG_PICKER_MODE = "is_picker_mode"
         const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"
         const val PICKER_RESULT_PLACE = "map_picked_place"

@@ -22,7 +22,22 @@ public interface NearbyParentFragmentContract {
         void savePlacesAsGPX();
     }
 
-    interface View extends FileExport {
+    /** Actions related to map markers and overlays. */
+    interface MarkerOverlay {
+
+        void addCurrentLocationMarker(LatLng currentLatLng);
+
+        void clearAllMarkers();
+
+        void replaceMarkerOverlays(List<MarkerPlaceGroup> markerPlaceGroups);
+
+        void filterOutAllMarkers();
+
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
+            boolean filterForAllNoneType);
+    }
+
+    interface View extends FileExport, MarkerOverlay {
 
         boolean isNetworkConnectionEstablished();
 
@@ -78,18 +93,7 @@ public interface NearbyParentFragmentContract {
 
         void enableFABRecenter();
 
-        void addCurrentLocationMarker(LatLng currentLatLng);
-
-        void clearAllMarkers();
-
         Context getContext();
-
-        void replaceMarkerOverlays(List<MarkerPlaceGroup> markerPlaceGroups);
-
-        void filterOutAllMarkers();
-
-        void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
-            boolean filterForAllNoneType);
 
         LatLng getCameraTarget();
 
