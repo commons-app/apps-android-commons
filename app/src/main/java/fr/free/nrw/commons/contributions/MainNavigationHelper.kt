@@ -42,8 +42,6 @@ class MainNavigationHelper(
             fragment.arguments = args
         }
 
-        freeUpFragments()
-
         if (fragment == null) {
             if (showBottom) {
                 val isLoggedOut = activity.applicationKvStore?.getBoolean("login_skipped") == true
@@ -60,14 +58,39 @@ class MainNavigationHelper(
         }
 
         if (!isSameTab(fragment)) {
-            updateActiveFragment(fragment)
-            activity.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit()
+            val tag = fragment.javaClass.simpleName
+            val fm = activity.supportFragmentManager
+            val transaction = fm.beginTransaction()
+
+            val currentFragment = getActiveFragmentInstance()
+            if (currentFragment != null && currentFragment.isAdded) {
+                transaction.hide(currentFragment)
+            }
+
+            val existingFragment = fm.findFragmentByTag(tag)
+            if (existingFragment != null) {
+                if (args != null) {
+                    existingFragment.arguments = args
+                }
+                transaction.show(existingFragment)
+                updateActiveFragment(existingFragment)
+            } else {
+                transaction.add(R.id.fragmentContainer, fragment, tag)
+                updateActiveFragment(fragment)
+            }
+            transaction.commit()
         }
         return true
     }
+
+    private fun getActiveFragmentInstance(): Fragment? =
+        when (activeFragment) {
+            ActiveFragment.CONTRIBUTIONS -> contributionsFragment
+            ActiveFragment.NEARBY -> nearbyParentFragment
+            ActiveFragment.EXPLORE -> exploreFragment
+            ActiveFragment.BOOKMARK -> bookmarkFragment
+            ActiveFragment.MORE, null -> null
+        }
 
     /**
      * Checks if the fragment represents the currently active tab, scrolling to top if so.
