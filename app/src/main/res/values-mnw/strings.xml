@@ -268,6 +268,8 @@
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
   <string name="contributions_fragment">ကမၠောန်ဂမၠိုင်</string>
   <string name="list_sheet">စရၚ်</string>
+  <string name="no_notification">ပရေၚ်ကဵုသမ္တီဟွံဂွံဗှ်ဏီဟၟဲ။</string>
+  <string name="no_read_notification">ပရေၚ်ကဵုသမ္တီဟွံဂွံဗှ်ဏီဟၟဲ။</string>
   <string name="title_page_bookmarks_items">ပိုတ်ဂမၠိုၚ်</string>
   <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>
   <string name="done">တုဲဒှ်</string>
