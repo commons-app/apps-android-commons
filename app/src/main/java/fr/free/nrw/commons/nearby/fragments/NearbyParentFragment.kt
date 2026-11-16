@@ -158,6 +158,14 @@ class NearbyParentFragment(
     MediaDetailProvider {
     var binding: FragmentNearbyParentBinding? = null
 
+    /** Filter helper instance. */
+    @VisibleForTesting
+    var filterHelper: NearbyFilterHelper = NearbyFilterHelper()
+
+    /** FAB helper instance. */
+    @VisibleForTesting
+    var fabHelper: NearbyFabHelper = NearbyFabHelper()
+
     val mapEventsOverlay: MapEventsOverlay =
         MapEventsOverlay(
             object : MapEventsReceiver {
@@ -219,8 +227,13 @@ class NearbyParentFragment(
     lateinit var placeTypeLabelsClient: PlaceTypeLabelsClient
 
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
-    private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
-    private var searchQueryDisposable: Disposable? = null
+    /** Adapter for filter list forwarded to [filterHelper] for testing. */
+    @VisibleForTesting
+    var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter?
+        get() = filterHelper.nearbyFilterSearchRecyclerViewAdapter
+        set(value) {
+            filterHelper.nearbyFilterSearchRecyclerViewAdapter = value
+        }
     /** Backing behavior for places list bottom sheet, delegating to [bottomSheetHelper] for testing. */
     @VisibleForTesting
     var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
@@ -238,10 +251,6 @@ class NearbyParentFragment(
             field = value
             bottomSheetHelper.bottomSheetDetailsBehavior = value
         }
-    private var rotateBackward: Animation? = null
-    private var fabClose: Animation? = null
-    private var fabOpen: Animation? = null
-    private var rotateForward: Animation? = null
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
     private var snackbar: Snackbar? = null
@@ -252,7 +261,13 @@ class NearbyParentFragment(
 
     @Suppress("ktlint:standard:backing-property-naming")
     private var _isDarkTheme = false
-    private var isFABsExpanded = false
+    /** FAB expansion state forwarded to [fabHelper] for testing. */
+    @VisibleForTesting
+    var isFABsExpanded: Boolean
+        get() = fabHelper.isFABsExpanded
+        set(value) {
+            fabHelper.isFABsExpanded = value
+        }
     /** Selected place forwarded to [bottomSheetHelper] for testing. */
     @VisibleForTesting
     var selectedPlace: Place?
@@ -319,7 +334,6 @@ class NearbyParentFragment(
         }
     private var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragmentInstanceReadyCallback? =
         null
-    private var isAdvancedQueryFragmentVisible = false
     private var nearestPlace: Place? = null
     private var isDepictsPickerMode: Boolean = false
     private var allPhotoLatLngs: ArrayList<LatLng>? = null
@@ -772,8 +786,7 @@ class NearbyParentFragment(
 
         binding?.map?.setMultiTouchControls(true)
         nearbyParentFragmentInstanceReadyCallback?.onReady()
-        initNearbyFilter()
-        addCheckBoxCallback()
+        initFilterHelper()
         if (!isCameFromExploreMap()) {
             moveCameraToPosition(lastMapFocus!!)
         }
@@ -884,17 +897,9 @@ class NearbyParentFragment(
      * another refactor
      */
     private fun initThemePreferences() {
+        filterHelper.applyTheme(_isDarkTheme)
         if (_isDarkTheme) {
             binding!!.bottomSheetNearby.rvNearbyList.setBackgroundColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.contributionListDarkBackground),
-            )
-            binding!!.nearbyFilterList.checkboxTriStates.setTextColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.white),
-            )
-            binding!!.nearbyFilterList.checkboxTriStates.setTextColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.white),
-            )
-            binding!!.nearbyFilterList.root.setBackgroundColor(
                 requireContext().resources.getColor(fr.free.nrw.commons.R.color.contributionListDarkBackground),
             )
             binding!!
@@ -902,15 +907,6 @@ class NearbyParentFragment(
                 .setColorFilter(TilesOverlay.INVERT_COLORS)
         } else {
             binding!!.bottomSheetNearby.rvNearbyList.setBackgroundColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.white),
-            )
-            binding!!.nearbyFilterList.checkboxTriStates.setTextColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.contributionListDarkBackground),
-            )
-            binding!!.nearbyFilterList.root.setBackgroundColor(
-                requireContext().resources.getColor(fr.free.nrw.commons.R.color.white),
-            )
-            binding!!.nearbyFilterList.root.setBackgroundColor(
                 requireContext().resources.getColor(fr.free.nrw.commons.R.color.white),
             )
         }
@@ -939,17 +935,6 @@ class NearbyParentFragment(
                 cameraPickLauncherForResult = cameraPickLauncherForResult,
             )
         binding!!.bottomSheetNearby.rvNearbyList.adapter = adapter
-    }
-
-    private fun addCheckBoxCallback() {
-        binding!!.nearbyFilterList.checkboxTriStates.setCallback { o, state, b, b1 ->
-            presenter!!.filterByMarkerType(
-                o,
-                state,
-                b,
-                b1,
-            )
-        }
     }
 
     private fun performMapReadyActions() {
@@ -1040,8 +1025,7 @@ class NearbyParentFragment(
 
     override fun onDestroyView() {
         super.onDestroyView()
-        searchQueryDisposable?.dispose()
-        searchQueryDisposable = null
+        filterHelper.onDestroyView()
         searchRunnable?.let {
             searchHandler.removeCallbacks(it)
         } ?: run {
@@ -1057,7 +1041,7 @@ class NearbyParentFragment(
     private fun initViews() {
         Timber.d("init views called")
         initBottomSheetHelper()
-        loadAnimations()
+        initFabHelper()
         if (!isMonumentsEnabled) {
             NearbyFilterState.setWlmSelected(false)
         }
@@ -1201,158 +1185,59 @@ class NearbyParentFragment(
         )
     }
 
-    fun initNearbyFilter() {
-        binding!!.nearbyFilterList.root.visibility = View.GONE
-        hideBottomSheet()
-        binding!!.nearbyFilter.searchViewLayout.searchView.apply {
-            setIconifiedByDefault(false)
-            isIconified = false
-            setQuery("", false)
-            clearFocus()
+    private fun initFabHelper() {
+        fabHelper.init(
+            bindingProvider = { binding },
+            contextProvider = { context },
+            activityProvider = { activity },
+            applicationKvStoreProvider = { applicationKvStore },
+            actions =
+                object : NearbyFabHelper.NearbyFabActions {
+                    override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
 
-            imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
-        }
-        binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
-            setLayoutHeightAlignedToWidth(
-                FILTER_LIST_HEIGHT_TO_WIDTH_RATIO,
-                binding!!.nearbyFilterList.root,
-            )
-            if (hasFocus) {
-                binding!!.nearbyFilterList.root.visibility = View.VISIBLE
-                presenter!!.searchViewGainedFocus()
-            } else {
-                binding!!.nearbyFilterList.root.visibility = View.GONE
-            }
-        }
-        binding!!.nearbyFilterList.searchListView.setHasFixedSize(true)
-        binding!!.nearbyFilterList.searchListView.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL,
-            ),
-        )
-        val linearLayoutManager = LinearLayoutManager(activity)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding!!.nearbyFilterList.searchListView.layoutManager = linearLayoutManager
-        nearbyFilterSearchRecyclerViewAdapter =
-            NearbyFilterSearchRecyclerViewAdapter(
-                context,
-                ArrayList(Label.valuesAsList()),
-                binding!!.nearbyFilterList.searchListView,
-            )
-        nearbyFilterSearchRecyclerViewAdapter!!.setCallback(
-            object : NearbyFilterSearchRecyclerViewAdapter.Callback {
-                override fun setCheckboxUnknown() {
-                    presenter!!.setCheckboxUnknown()
-                }
-
-                override fun filterByMarkerType(
-                    selectedLabels: ArrayList<Label>,
-                    i: Int,
-                    b: Boolean,
-                    b1: Boolean,
-                ) {
-                    presenter!!.filterByMarkerType(selectedLabels, i, b, b1)
-                    updateFilterBadge()
-                }
-
-                override fun isDarkTheme(): Boolean = _isDarkTheme
-            },
-        )
-        restoreStoredFilterSelection()
-        loadLocalizedPlaceTypeNames()
-        binding!!
-            .nearbyFilterList.root
-            .layoutParams.width =
-            getScreenWidth(
-                requireActivity(),
-                FILTER_LIST_WIDTH_FRACTION,
-            ).toInt()
-        binding!!.nearbyFilterList.searchListView.adapter = nearbyFilterSearchRecyclerViewAdapter
-        setLayoutHeightAlignedToWidth(FILTER_LIST_HEIGHT_TO_WIDTH_RATIO, binding!!.nearbyFilterList.root)
-        searchQueryDisposable?.dispose()
-        searchQueryDisposable =
-            binding!!
-                .nearbyFilter.searchViewLayout.searchView
-                .queryTextChanges()
-                .debounce(FILTER_SEARCH_DEBOUNCE_MS, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { query: CharSequence ->
-                    nearbyFilterSearchRecyclerViewAdapter?.filter?.filter(query.toString())
-                }
-    }
-
-    private fun loadLocalizedPlaceTypeNames() {
-        compositeDisposable.add(
-            placeTypeLabelsClient.getLabels(Locale.getDefault().language)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ names ->
-                    Label.setLocalizedNames(names)
-                    nearbyFilterSearchRecyclerViewAdapter?.notifyDataSetChanged()
-                }, { throwable ->
-                    Timber.e(throwable, "Failed to load localized place type names")
-                })
+                    override fun onPhotoMarkerCheckRequested() {
+                        addPhotoMarkerIfDepictsMode()
+                    }
+                },
         )
     }
 
-    private fun restoreStoredFilterSelection() {
-        val adapter = nearbyFilterSearchRecyclerViewAdapter ?: return
-        val savedLabels = ArrayList(NearbyFilterState.getInstance().selectedLabels)
-        adapter.selectedLabels.clear()
-        val savedSet = savedLabels.toSet()
-        Label.valuesAsList().forEach { label ->
-            val isSelected = savedSet.contains(label)
-            label.setSelected(isSelected)
-            if (isSelected) {
-                adapter.selectedLabels.add(label)
-            }
-        }
-        NearbyFilterState.setSelectedLabels(ArrayList(adapter.selectedLabels))
-        adapter.notifyDataSetChanged()
-        updateFilterBadge()
-    }
+    private fun initFilterHelper() {
+        filterHelper.init(
+            bindingProvider = { binding },
+            contextProvider = { context },
+            activityProvider = { activity },
+            dependencies =
+                NearbyFilterHelper.NearbyFilterDependencies(
+                    placeTypeLabelsClientProvider = { placeTypeLabelsClient },
+                    compositeDisposableProvider = { compositeDisposable },
+                    presenterProvider = { presenter },
+                ),
+            actions =
+                object : NearbyFilterHelper.NearbyFilterActions {
+                    override fun hideBottomSheet() {
+                        bottomSheetHelper.hideBottomSheet()
+                    }
 
-    private fun updateFilterBadge() {
-        val count = nearbyFilterSearchRecyclerViewAdapter?.selectedLabels?.size ?: 0
-        val total = Label.values().size
-        binding?.nearbyFilter?.searchViewLayout?.filterCount?.apply {
-            // all or none selected = effectively no filter
-            visibility = if (count in 1 until total) View.VISIBLE else View.GONE
-            text = count.toString()
-        }
+                    override fun isDarkTheme(): Boolean = _isDarkTheme
+
+                    override fun setHasOptionsMenu(hasMenu: Boolean) {
+                        this@NearbyParentFragment.setHasOptionsMenu(hasMenu)
+                    }
+                },
+        )
     }
 
     override fun setCheckBoxAction() {
-        binding!!.nearbyFilterList.checkboxTriStates.addAction()
-        binding!!.nearbyFilterList.checkboxTriStates.state = CheckBoxTriStates.UNKNOWN
+        filterHelper.setCheckBoxAction()
     }
 
     override fun setCheckBoxState(state: Int) {
-        binding!!.nearbyFilterList.checkboxTriStates.state = state
+        filterHelper.setCheckBoxState(state)
     }
 
     override fun setFilterState() {
-        if (NearbyController.currentLocation != null) {
-            presenter!!.filterByMarkerType(
-                nearbyFilterSearchRecyclerViewAdapter!!.selectedLabels,
-                binding!!.nearbyFilterList.checkboxTriStates.state,
-                true,
-                false,
-            )
-        }
-    }
-
-    /**
-     * Loads animations will be used for FABs
-     */
-    private fun loadAnimations() {
-        fabOpen = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_open)
-        fabClose = AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.fab_close)
-        rotateForward =
-            AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_forward)
-        rotateBackward =
-            AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
+        filterHelper.setFilterState()
     }
 
     override fun centerMapToPlace(place: Place?) {
@@ -1371,21 +1256,19 @@ class NearbyParentFragment(
 
     override fun getMapFocus(): LatLng = viewportHelper.getMapFocus()
 
-    override fun isAdvancedQueryFragmentVisible(): Boolean = isAdvancedQueryFragmentVisible
+    override fun isAdvancedQueryFragmentVisible(): Boolean =
+        filterHelper.isAdvancedQueryFragmentVisible()
 
     /**
      * Drops a custom Nearby query and loads places for the current map center again.
      * The advanced query editor stays open so the restored query text remains visible.
      */
     fun resetAdvancedQuery() {
-        presenter?.setAdvancedQuery("")
-        presenter?.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        filterHelper.resetAdvancedQuery(presenter)
     }
 
     override fun showHideAdvancedQueryFragment(shouldShow: Boolean) {
-        setHasOptionsMenu(!shouldShow)
-        binding!!.flContainerNearbyChildren.visibility = if (shouldShow) View.VISIBLE else View.GONE
-        isAdvancedQueryFragmentVisible = shouldShow
+        filterHelper.showHideAdvancedQueryFragment(shouldShow)
     }
 
     override fun isNetworkConnectionEstablished(): Boolean = isInternetConnectionEstablished(activity)
@@ -1920,15 +1803,10 @@ class NearbyParentFragment(
     override fun isDetailsBottomSheetVisible(): Boolean =
         bottomSheetHelper.isDetailsBottomSheetVisible()
 
-    override fun isNearbyFilterListVisible(): Boolean = binding?.nearbyFilterList?.root?.visibility == View.VISIBLE
+    override fun isNearbyFilterListVisible(): Boolean = filterHelper.isNearbyFilterListVisible()
 
     override fun hideNearbyFilterList() {
-        binding?.nearbyFilterList?.root?.visibility = View.GONE
-        binding
-            ?.nearbyFilter
-            ?.searchViewLayout
-            ?.searchView
-            ?.clearFocus()
+        filterHelper.hideNearbyFilterList()
     }
 
     override fun setBottomSheetDetailsSmaller() {
@@ -1936,21 +1814,11 @@ class NearbyParentFragment(
     }
 
     override fun setRecyclerViewAdapterAllSelected() {
-        if (nearbyFilterSearchRecyclerViewAdapter != null &&
-            NearbyController.currentLocation != null
-        ) {
-            nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterAllSelected()
-            updateFilterBadge()
-        }
+        filterHelper.setRecyclerViewAdapterAllSelected()
     }
 
     override fun setRecyclerViewAdapterItemsGreyedOut() {
-        if (nearbyFilterSearchRecyclerViewAdapter != null &&
-            NearbyController.currentLocation != null
-        ) {
-            nearbyFilterSearchRecyclerViewAdapter!!.setRecyclerViewAdapterItemsGreyedOut()
-            updateFilterBadge()
-        }
+        filterHelper.setRecyclerViewAdapterItemsGreyedOut()
     }
 
     override fun setProgressBarVisibility(isVisible: Boolean) {
@@ -1965,105 +1833,15 @@ class NearbyParentFragment(
      * Starts animation of fab plus (turning on opening) and other FABs
      */
     override fun animateFABs() {
-        if (binding!!.fabPlus.isShown) {
-            if (isFABsExpanded) {
-                collapseFABs(true)
-            } else {
-                expandFABs(false)
-            }
-        }
-    }
-
-    private fun showFABs() {
-        addAnchorToBigFABs(
-            binding!!.fabPlus,
-            binding!!.bottomSheetDetails.root.id,
-        )
-        binding!!.fabPlus.show()
-        addAnchorToSmallFABs(
-            binding!!.fabGallery,
-            requireView().findViewById<View>(fr.free.nrw.commons.R.id.empty_view).id,
-        )
-        addAnchorToSmallFABs(
-            binding!!.fabCamera,
-            requireView().findViewById<View>(fr.free.nrw.commons.R.id.empty_view1).id,
-        )
-        addAnchorToSmallFABs(
-            binding!!.fabCustomGallery,
-            requireView().findViewById<View>(fr.free.nrw.commons.R.id.empty_view2).id,
-        )
+        fabHelper.animateFABs()
     }
 
     /**
-     * Expands camera and gallery FABs, turn forward plus FAB
-     *
-     * @param isFABsExpanded true if they are already expanded
+     * onLogoutComplete is called after shared preferences and data stored in local database are
+     * cleared.
      */
-    private fun expandFABs(isFABsExpanded: Boolean) {
-        if (!isFABsExpanded) {
-            showFABs()
-            binding!!.fabPlus.startAnimation(rotateForward)
-            binding!!.fabCamera.startAnimation(fabOpen)
-            binding!!.fabGallery.startAnimation(fabOpen)
-            binding!!.fabCustomGallery.startAnimation(fabOpen)
-            binding!!.fabCustomGallery.show()
-            binding!!.fabCamera.show()
-            binding!!.fabGallery.show()
-            this.isFABsExpanded = true
-        }
-    }
-
-    /**
-     * Hides all fabs
-     */
-    private fun hideFABs() {
-        removeAnchorFromFAB(binding!!.fabPlus)
-        binding!!.fabPlus.hide()
-        removeAnchorFromFAB(binding!!.fabCamera)
-        binding!!.fabCamera.hide()
-        removeAnchorFromFAB(binding!!.fabGallery)
-        binding!!.fabGallery.hide()
-        removeAnchorFromFAB(binding!!.fabCustomGallery)
-        binding!!.fabCustomGallery.hide()
-    }
-
-    /**
-     * Collapses camera and gallery FABs, turn back plus FAB
-     *
-     * @param isFABsExpanded
-     */
-    private fun collapseFABs(isFABsExpanded: Boolean) {
-        if (isFABsExpanded) {
-            binding!!.fabPlus.startAnimation(rotateBackward)
-            binding!!.fabCamera.startAnimation(fabClose)
-            binding!!.fabGallery.startAnimation(fabClose)
-            binding!!.fabCustomGallery.startAnimation(fabClose)
-            binding!!.fabCustomGallery.hide()
-            binding!!.fabCamera.hide()
-            binding!!.fabGallery.hide()
-            this.isFABsExpanded = false
-        }
-    }
-
     override fun displayLoginSkippedWarning() {
-        if (applicationKvStore!!.getBoolean("login_skipped", false)) {
-            // prompt the user to login
-            AlertDialog
-                .Builder(requireContext())
-                .setMessage(fr.free.nrw.commons.R.string.login_alert_message)
-                .setCancelable(false)
-                .setNegativeButton(fr.free.nrw.commons.R.string.cancel) { dialog, which -> }
-                .setPositiveButton(fr.free.nrw.commons.R.string.login) { dialog, which ->
-                    // logout of the app
-                    val logoutListener =
-                        CommonsApplication.BaseLogoutListener(
-                            requireActivity(),
-                        )
-                    val app =
-                        requireActivity().application as CommonsApplication
-                    app.clearApplicationData(requireContext(), logoutListener)
-                }.show()
-        }
+        fabHelper.displayLoginSkippedWarning()
     }
 
     override fun onLocationChangedSignificantly(latLng: LatLng) {
@@ -2119,11 +1897,11 @@ class NearbyParentFragment(
      * cleared.
      */
     override fun setFABPlusAction(onClickListener: View.OnClickListener) {
-        binding!!.fabPlus.setOnClickListener(onClickListener)
+        fabHelper.setFABPlusAction(onClickListener)
     }
 
     override fun setFABRecenterAction(onClickListener: View.OnClickListener) {
-        binding!!.fabRecenter.setOnClickListener(onClickListener)
+        fabHelper.setFABRecenterAction(onClickListener)
     }
 
     /**
@@ -2132,12 +1910,11 @@ class NearbyParentFragment(
      * if nearby places found are null and place markers are not rendered
      */
     override fun disableFABRecenter() {
-        binding!!.fabRecenter.isEnabled = false
-        addPhotoMarkerIfDepictsMode()
+        fabHelper.disableFABRecenter()
     }
 
     override fun enableFABRecenter() {
-        binding!!.fabRecenter.isEnabled = true
+        fabHelper.enableFABRecenter()
     }
 
     override fun getCameraTarget(): LatLng? = viewportHelper.getCameraTarget()
@@ -2195,21 +1972,7 @@ class NearbyParentFragment(
      * @param bottomSheetState see bottom sheet states
      */
     fun prepareViewsForSheetPosition(bottomSheetState: Int) {
-        when (bottomSheetState) {
-            (BottomSheetBehavior.STATE_COLLAPSED) -> {
-                collapseFABs(isFABsExpanded)
-                if (!binding!!.fabPlus.isShown && !isDepictsPickerMode) {
-                    showFABs()
-                }
-            }
-
-            (BottomSheetBehavior.STATE_HIDDEN) -> {
-                binding!!.transparentView.isClickable = false
-                binding!!.transparentView.setAlpha(0F)
-                collapseFABs(isFABsExpanded)
-                hideFABs()
-            }
-        }
+        fabHelper.prepareViewsForSheetPosition(bottomSheetState)
     }
 
     /**
@@ -2419,49 +2182,7 @@ class NearbyParentFragment(
     }
 
     private fun applyNearbyFabLayout() {
-        val res = resources
-        val spacer1Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer1_height)
-        val spacer2Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer2_height)
-        val spacer3Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer3_height)
-        val spacingPx = res.getDimensionPixelSize(R.dimen.nearby_fab_spread_spacing)
-        val marginPx = res.getDimensionPixelSize(R.dimen.nearby_fab_container_margin)
-        val alignStart = res.getBoolean(R.bool.nearby_fab_container_align_start)
-
-        binding!!.emptyView1.layoutParams.height = spacer1Px
-        binding!!.emptyView1.requestLayout()
-        binding!!.emptyView.layoutParams.height = spacer2Px
-        binding!!.emptyView.requestLayout()
-        binding!!.emptyView2.layoutParams.height = spacer3Px
-        binding!!.emptyView2.requestLayout()
-
-        binding!!.fabContainer.updateLayoutParams<RelativeLayout.LayoutParams> {
-            if (alignStart) {
-                addRule(RelativeLayout.ALIGN_PARENT_START)
-                removeRule(RelativeLayout.ALIGN_PARENT_END)
-                marginStart = marginPx
-                marginEnd = 0
-            } else {
-                addRule(RelativeLayout.ALIGN_PARENT_END)
-                removeRule(RelativeLayout.ALIGN_PARENT_START)
-                marginStart = 0
-                marginEnd = marginPx
-            }
-        }
-
-        if (spacingPx == 0) {
-            binding!!.fabCamera.translationX = 0f
-            binding!!.fabGallery.translationX = 0f
-            binding!!.fabCustomGallery.translationX = 0f
-        } else {
-            val direction = if (binding!!.root.layoutDirection == View.LAYOUT_DIRECTION_RTL) 1 else -1
-            listOf(
-                binding!!.fabCustomGallery,
-                binding!!.fabGallery,
-                binding!!.fabCamera,
-            ).forEachIndexed { index, fab ->
-                fab.translationX = direction * spacingPx * (index + 1f)
-            }
-        }
+        fabHelper.applyNearbyFabLayout()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -2505,9 +2226,6 @@ class NearbyParentFragment(
         private const val LANDSCAPE_SPAN_COUNT = 6
         private const val BOTTOM_SHEET_HEIGHT_DIVISOR = 16
         private const val BOTTOM_SHEET_HEIGHT_MULTIPLIER = 9
-        private const val FILTER_LIST_HEIGHT_TO_WIDTH_RATIO = 1.25
-        private const val FILTER_LIST_WIDTH_FRACTION = 0.75
-        private const val FILTER_SEARCH_DEBOUNCE_MS = 500L
         private const val FALLBACK_BOUNDS_DELTA_DEGREES = 0.009
         const val ARG_PICKER_MODE = "is_picker_mode"
         const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"

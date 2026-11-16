@@ -83,27 +83,8 @@ public interface NearbyParentFragmentContract {
         LatLng getScreenBottomLeft();
     }
 
-    interface View extends FileExport, MarkerOverlay, BottomSheet, Location, Viewport {
-
-        boolean isNetworkConnectionEstablished();
-
-        void updateSnackbar(boolean offlinePinsShown);
-
-        void listOptionMenuItemClicked();
-
-        void populatePlaces(LatLng currentLatLng);
-
-        void populatePlaces(LatLng currentLatLng, String customQuery);
-
-        void displayLoginSkippedWarning();
-
-        void setFABPlusAction(android.view.View.OnClickListener onClickListener);
-
-        void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
-
-        void animateFABs();
-
-        void setProgressBarVisibility(boolean isVisible);
+    /** Actions related to place type filtering and advanced query search. */
+    interface Filter {
 
         boolean isNearbyFilterListVisible();
 
@@ -119,15 +100,42 @@ public interface NearbyParentFragmentContract {
 
         void setFilterState();
 
-        void disableFABRecenter();
-
-        void enableFABRecenter();
-
-        Context getContext();
-
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
+    }
+
+    /** Actions related to floating action buttons (FABs) and animations. */
+    interface FabControl {
+
+        void displayLoginSkippedWarning();
+
+        void setFABPlusAction(android.view.View.OnClickListener onClickListener);
+
+        void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
+
+        void animateFABs();
+
+        void disableFABRecenter();
+
+        void enableFABRecenter();
+    }
+
+    interface View extends FileExport, MarkerOverlay, BottomSheet, Location, Viewport, Filter, FabControl {
+
+        boolean isNetworkConnectionEstablished();
+
+        void updateSnackbar(boolean offlinePinsShown);
+
+        void listOptionMenuItemClicked();
+
+        void populatePlaces(LatLng currentLatLng);
+
+        void populatePlaces(LatLng currentLatLng, String customQuery);
+
+        void setProgressBarVisibility(boolean isVisible);
+
+        Context getContext();
 
         void stopQuery();
     }
