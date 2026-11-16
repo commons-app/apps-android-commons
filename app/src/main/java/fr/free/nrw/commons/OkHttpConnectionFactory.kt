@@ -6,6 +6,7 @@ import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import okhttp3.Cache
+import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -15,6 +16,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
+import fr.free.nrw.commons.utils.NetworkUtils
 
 object OkHttpConnectionFactory {
     private const val CACHE_DIR_NAME = "okhttp-cache"
@@ -54,7 +56,9 @@ object OkHttpConnectionFactory {
                 HttpLoggingInterceptor()
                     .apply { level = HttpLoggingInterceptor.Level.BASIC }
                     .redactSensitiveHeaders(),
-            ).addInterceptor(UnsuccessfulResponseInterceptor())
+            ).addInterceptor(ForceCacheInterceptor())
+            .addNetworkInterceptor(CacheControlInterceptor())
+            .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
 }
@@ -69,6 +73,50 @@ class CommonHeaderRequestInterceptor : Interceptor {
                 .header("User-Agent", CommonsApplication.instance.userAgent)
                 .build()
         return chain.proceed(request)
+    }
+}
+
+class ForceCacheInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val appInstance =
+            try {
+                CommonsApplication.instance
+            } catch (_: Exception) {
+                null
+            }
+
+        if (appInstance != null &&
+            request.method.equals("GET", ignoreCase = true) &&
+            !NetworkUtils.isInternetConnectionEstablished(appInstance)
+        ) {
+            val offlineRequest =
+                request
+                    .newBuilder()
+                    .cacheControl(
+                        CacheControl.Builder()
+                            .onlyIfCached()
+                            .maxStale(7, TimeUnit.DAYS)
+                            .build(),
+                    ).build()
+            return chain.proceed(offlineRequest)
+        }
+        return chain.proceed(request)
+    }
+}
+
+class CacheControlInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val response = chain.proceed(chain.request())
+        if (chain.request().method.equals("GET", ignoreCase = true)) {
+            return response
+                .newBuilder()
+                .removeHeader("Pragma")
+                .removeHeader("Cache-Control")
+                .header("Cache-Control", "public, max-age=86400")
+                .build()
+        }
+        return response
     }
 }
 
