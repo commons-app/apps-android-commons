@@ -37,7 +37,53 @@ public interface NearbyParentFragmentContract {
             boolean filterForAllNoneType);
     }
 
-    interface View extends FileExport, MarkerOverlay {
+    /** Actions related to list and details bottom sheets. */
+    interface BottomSheet {
+
+        boolean isListBottomSheetExpanded();
+
+        boolean isDetailsBottomSheetVisible();
+
+        void hideBottomSheet();
+
+        void hideBottomDetailsSheet();
+
+        void setBottomSheetDetailsSmaller();
+
+        void updateListFragment(List<Place> placeList);
+    }
+
+    /** Actions related to device location services, permissions, and location center. */
+    interface Location {
+
+        void askForLocationPermission();
+
+        void recenterMap(LatLng currentLatLng);
+
+        void openLocationSettings();
+
+        LatLng getLastLocation();
+
+        LatLng getMapCenter();
+    }
+
+    /** Actions related to map camera viewport, focus, and screen coordinates. */
+    interface Viewport {
+
+        LatLng getCameraTarget();
+
+        void centerMapToPlace(@Nullable Place placeToCenter);
+
+        LatLng getLastMapFocus();
+
+        LatLng getMapFocus();
+
+        LatLng getScreenTopRight();
+
+        LatLng getScreenBottomLeft();
+    }
+
+    interface View extends FileExport, MarkerOverlay, BottomSheet, Location, Viewport {
 
         boolean isNetworkConnectionEstablished();
 
@@ -49,10 +95,6 @@ public interface NearbyParentFragmentContract {
 
         void populatePlaces(LatLng currentLatLng, String customQuery);
 
-        boolean isListBottomSheetExpanded();
-
-        void askForLocationPermission();
-
         void displayLoginSkippedWarning();
 
         void setFABPlusAction(android.view.View.OnClickListener onClickListener);
@@ -61,23 +103,11 @@ public interface NearbyParentFragmentContract {
 
         void animateFABs();
 
-        void recenterMap(LatLng currentLatLng);
-
-        void openLocationSettings();
-
-        void hideBottomSheet();
-
-        void hideBottomDetailsSheet();
-
         void setProgressBarVisibility(boolean isVisible);
-
-        boolean isDetailsBottomSheetVisible();
 
         boolean isNearbyFilterListVisible();
 
         void hideNearbyFilterList();
-
-        void setBottomSheetDetailsSmaller();
 
         void setRecyclerViewAdapterAllSelected();
 
@@ -94,24 +124,6 @@ public interface NearbyParentFragmentContract {
         void enableFABRecenter();
 
         Context getContext();
-
-        LatLng getCameraTarget();
-
-        void centerMapToPlace(@Nullable Place placeToCenter);
-
-        void updateListFragment(List<Place> placeList);
-
-        LatLng getLastLocation();
-
-        LatLng getLastMapFocus();
-
-        LatLng getMapCenter();
-
-        LatLng getMapFocus();
-
-        LatLng getScreenTopRight();
-
-        LatLng getScreenBottomLeft();
 
         boolean isAdvancedQueryFragmentVisible();
 

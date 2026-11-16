@@ -36,6 +36,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -46,12 +47,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import fr.free.nrw.commons.CommonsApplication
@@ -98,8 +94,6 @@ import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ExecutorUtils.get
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
-import fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE
-import fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT
 import fr.free.nrw.commons.utils.MapUtils.NETWORK_INTENT_ACTION
 import fr.free.nrw.commons.utils.MapUtils.defaultLatLng
 import fr.free.nrw.commons.utils.NearbyFABUtils.addAnchorToBigFABs
@@ -148,11 +142,13 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.concurrent.Volatile
-import kotlin.math.ln
 
 class NearbyParentFragment(
     val fileExportHelper: NearbyFileExportHelper = NearbyFileExportHelper(),
     val markerOverlayHelper: NearbyMarkerOverlayHelper = NearbyMarkerOverlayHelper(),
+    val bottomSheetHelper: NearbyBottomSheetHelper = NearbyBottomSheetHelper(),
+    val locationHelper: NearbyLocationHelper = NearbyLocationHelper(),
+    val viewportHelper: NearbyViewportHelper = NearbyViewportHelper(),
 ) : CommonsDaggerSupportFragment(),
     NearbyParentFragmentContract.View,
     WikidataP18EditListener,
@@ -225,8 +221,23 @@ class NearbyParentFragment(
     private var locationPermissionsHelper: LocationPermissionsHelper? = null
     private var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter? = null
     private var searchQueryDisposable: Disposable? = null
-    private var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
-    private var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
+    /** Backing behavior for places list bottom sheet, delegating to [bottomSheetHelper] for testing. */
+    @VisibleForTesting
+    var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
+        get() = bottomSheetHelper.bottomSheetListBehavior ?: field
+        set(value) {
+            field = value
+            bottomSheetHelper.bottomSheetListBehavior = value
+        }
+
+    /** Backing behavior for place details bottom sheet, delegating to [bottomSheetHelper] for testing. */
+    @VisibleForTesting
+    var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
+        get() = bottomSheetHelper.bottomSheetDetailsBehavior ?: field
+        set(value) {
+            field = value
+            bottomSheetHelper.bottomSheetDetailsBehavior = value
+        }
     private var rotateBackward: Animation? = null
     private var fabClose: Animation? = null
     private var fabOpen: Animation? = null
@@ -242,20 +253,70 @@ class NearbyParentFragment(
     @Suppress("ktlint:standard:backing-property-naming")
     private var _isDarkTheme = false
     private var isFABsExpanded = false
-    private var selectedPlace: Place? = null
+    /** Selected place forwarded to [bottomSheetHelper] for testing. */
+    @VisibleForTesting
+    var selectedPlace: Place?
+        get() = bottomSheetHelper.selectedPlace
+        set(value) {
+            bottomSheetHelper.selectedPlace = value
+        }
     private val clickedMarker: Marker?
-        get() = markerOverlayHelper.clickedMarker
+    get() = markerOverlayHelper.clickedMarker
     private var progressDialog: ProgressDialog? = null
-    private var isPermissionDenied = false
-    private var recenterToUserLocation = false
-    private var mapCenter: GeoPoint? = null
+
+    /** Permission state forwarded to [locationHelper] for testing. */
+    @VisibleForTesting
+    var isPermissionDenied: Boolean
+        get() = locationHelper.isPermissionDenied
+        set(value) {
+            locationHelper.isPermissionDenied = value
+        }
+
+    /** Recenter to user location flag forwarded to [locationHelper] for testing. */
+    @VisibleForTesting
+    var recenterToUserLocation: Boolean
+        get() = locationHelper.recenterToUserLocation
+        set(value) {
+            locationHelper.recenterToUserLocation = value
+        }
+
+    /** Map center coordinate forwarded to [locationHelper] for testing. */
+    @VisibleForTesting
+    var mapCenter: GeoPoint?
+        get() = locationHelper.mapCenter
+        set(value) {
+            locationHelper.mapCenter = value
+        }
+
     var intentFilter: IntentFilter = IntentFilter(NETWORK_INTENT_ACTION)
-    private var lastPlaceToCenter: Place? = null
-    private var lastKnownLocation: LatLng? = null
+
+    /** Last place centered forwarded to [viewportHelper] for testing. */
+    @VisibleForTesting
+    var lastPlaceToCenter: Place?
+        get() = viewportHelper.lastPlaceToCenter
+        set(value) {
+            viewportHelper.lastPlaceToCenter = value
+        }
+
+    /** Last known location coordinates forwarded to [locationHelper] for testing. */
+    @VisibleForTesting
+    var lastKnownLocation: LatLng?
+        get() = locationHelper.lastKnownLocation
+        set(value) {
+            locationHelper.lastKnownLocation = value
+        }
+
     private var isVisibleToUser = false
     private var lastFocusLocation: LatLng? = null
     private var adapter: PlaceAdapter? = null
-    private var lastMapFocus: GeoPoint? = null
+
+    /** Last map focus coordinate forwarded to [viewportHelper] for testing. */
+    @VisibleForTesting
+    var lastMapFocus: GeoPoint?
+        get() = viewportHelper.lastMapFocus
+        set(value) {
+            viewportHelper.lastMapFocus = value
+        }
     private var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragmentInstanceReadyCallback? =
         null
     private var isAdvancedQueryFragmentVisible = false
@@ -276,9 +337,21 @@ class NearbyParentFragment(
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
 
-    private var gridLayoutManager: GridLayoutManager? = null
-    private var dataList: MutableList<BottomSheetItem>? = null
-    private var bottomSheetAdapter: BottomSheetAdapter? = null
+    /** Action items list forwarded to [bottomSheetHelper] for testing. */
+    @VisibleForTesting
+    var dataList: MutableList<BottomSheetItem>?
+        get() = bottomSheetHelper.dataList
+        set(value) {
+            bottomSheetHelper.dataList = value
+        }
+
+    /** Bottom sheet adapter forwarded to [bottomSheetHelper] for testing. */
+    @VisibleForTesting
+    var bottomSheetAdapter: BottomSheetAdapter?
+        get() = bottomSheetHelper.bottomSheetAdapter
+        set(value) {
+            bottomSheetHelper.bottomSheetAdapter = value
+        }
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -583,17 +656,18 @@ class NearbyParentFragment(
                                     View.GONE
                                 binding?.bottomSheetDetails?.icon?.visibility = View.VISIBLE
                                 binding?.bottomSheetDetails?.wikiDataLl?.visibility = View.VISIBLE
-                                passInfoToSheet(place)
-                                hideBottomSheet()
+                                bottomSheetHelper.passInfoToSheet(place)
+                                bottomSheetHelper.hideBottomSheet()
                             }
-                            bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
+                            bottomSheetHelper.bottomSheetDetailsBehavior?.state =
+                                BottomSheetBehavior.STATE_COLLAPSED
                         } else {
                             marker.showInfoWindow()
                         }
                     }
 
                     override fun onPhotoMarkerClicked(marker: Marker) {
-                        bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+                        bottomSheetHelper.hideBottomDetailsSheet()
                     }
 
                     override fun onBoundingBoxZoomCalculated(boundingBox: BoundingBox) {
@@ -625,6 +699,8 @@ class NearbyParentFragment(
                     }
                 },
         )
+        initLocationHelper()
+        initViewportHelper()
         isPermissionDenied = false
         recenterToUserLocation = false
         initThemePreferences()
@@ -891,56 +967,11 @@ class NearbyParentFragment(
     }
 
     override fun askForLocationPermission() {
-        Timber.d("Asking for location permission")
-        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION)
+        locationHelper.askForLocationPermission()
     }
 
-    private fun locationPermissionGranted() {
-        isPermissionDenied = false
-        applicationKvStore.putBoolean("doNotAskForLocationPermission", false)
-        lastKnownLocation = locationManager.getLastLocation()
-        val target = lastKnownLocation
-
-        if (target != null) {
-            val targetP = GeoPoint(target.latitude, target.longitude)
-            mapCenter = targetP
-            binding?.map?.controller?.setCenter(targetP)
-            updateUserLocationOverlays(targetP, true)
-            if (!isCameFromExploreMap() && !isDepictsPickerMode) {
-                moveCameraToPosition(targetP)
-            }
-        } else if (locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()) {
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER)
-            setProgressBarVisibility(true)
-        } else {
-            activity?.let {
-                locationPermissionsHelper?.showLocationOffDialog(
-                    it,
-                    R.string.ask_to_turn_location_on_text,
-                )
-            }
-        }
-
-        presenter?.onMapReady()
-        registerUnregisterLocationListener(false)
-    }
-
-    /**
-     * Helper method to get the zoom level required to show the bounding box
-     */
-    fun MapView.calculateBoundingBoxZoom(
-        boundingBox: BoundingBox,
-        padding: Int,
-    ): Double {
-        val mapWidth = (width - padding * 2).toDouble()
-        val mapHeight = (height - padding * 2).toDouble()
-        if (mapWidth <= 0 || mapHeight <= 0) return 15.0
-
-        val zoomLat = ln(mapHeight * DEGREES_IN_FULL_CIRCLE / (MAP_TILE_SIZE_PX * boundingBox.latitudeSpan)) / ln(2.0)
-        val zoomLng = ln(mapWidth * DEGREES_IN_FULL_CIRCLE / (MAP_TILE_SIZE_PX * boundingBox.longitudeSpan)) / ln(2.0)
-
-        return minOf(zoomLat, zoomLng)
+    fun locationPermissionGranted() {
+        locationHelper.locationPermissionGranted()
     }
 
     override fun onResume() {
@@ -948,7 +979,7 @@ class NearbyParentFragment(
         binding?.map?.onResume()
         clickedMarker?.infoWindow?.isOpen?.let {
             if (!it) {
-                bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetHelper.hideBottomDetailsSheet()
             }
         }
         presenter?.attachView(this)
@@ -975,29 +1006,8 @@ class NearbyParentFragment(
      * coordinates, other than that it points to the last known location which can be get by the key
      * "LastLocation" from applicationKvStore
      */
-    private fun startMapWithoutPermission() {
-        if (applicationKvStore!!.getString("LastLocation") != null) {
-            val locationLatLng =
-                applicationKvStore!!
-                    .getString("LastLocation")!!
-                    .split(",".toRegex())
-                    .dropLastWhile { it.isEmpty() }
-                    .toTypedArray()
-            lastKnownLocation =
-                LatLng(
-                    locationLatLng[0].toDouble(),
-                    locationLatLng[1].toDouble(),
-                    1f,
-                )
-        } else {
-            lastKnownLocation = defaultLatLng
-        }
-        if (binding!!.map != null && !isCameFromExploreMap()) {
-            moveCameraToPosition(
-                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
-            )
-        }
-        presenter!!.onMapReady()
+    fun startMapWithoutPermission() {
+        locationHelper.startMapWithoutPermission()
     }
 
     private fun registerNetworkReceiver() {
@@ -1046,53 +1056,150 @@ class NearbyParentFragment(
 
     private fun initViews() {
         Timber.d("init views called")
-        initBottomSheets()
+        initBottomSheetHelper()
         loadAnimations()
-        setBottomSheetCallbacks()
-        addActionToTitle()
         if (!isMonumentsEnabled) {
             NearbyFilterState.setWlmSelected(false)
         }
     }
 
-    /**
-     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility b)
-     * Gets the touch event on the map to perform following actions: if fab is open then close fab.
-     * if bottom sheet details are expanded then collapse bottom sheet details. if bottom sheet
-     * details are collapsed then hide the bottom sheet details. if listBottomSheet is open then
-     * hide the list bottom sheet.
-     */
-    @SuppressLint("ClickableViewAccessibility")
-    private fun initBottomSheets() {
-        bottomSheetListBehavior =
-            BottomSheetBehavior.from<View>(binding!!.bottomSheetNearby.bottomSheet)
-        bottomSheetDetailsBehavior = BottomSheetBehavior.from(binding!!.bottomSheetDetails.root)
-        bottomSheetDetailsBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
-        binding!!.bottomSheetDetails.root.visibility = View.VISIBLE
-        binding?.bottomSheetNearby?.root?.visibility =
-            if (isDepictsPickerMode) View.GONE else View.VISIBLE
-        bottomSheetListBehavior?.setState(BottomSheetBehavior.STATE_HIDDEN)
+    private fun initBottomSheetHelper() {
+        bottomSheetHelper.init(
+            bindingProvider = { binding },
+            contextProvider = { context },
+            activityProvider = { activity },
+            bookmarkDaoProvider = { bookmarkLocationDao },
+            actions =
+                object : NearbyBottomSheetHelper.NearbyBottomSheetActions {
+                    override fun onCameraCenterRequested(place: Place) {
+                        moveCameraToPosition(GeoPoint(place.location.latitude, place.location.longitude))
+                    }
+
+                    override fun onMediaClicked(imageName: String) {
+                        handleMediaClick(imageName)
+                    }
+
+                    override fun onBookmarkToggled(place: Place) {
+                        presenter?.toggleBookmarkedStatus(place, scope)
+                    }
+
+                    override fun onSheetStateChanged(newState: Int) {
+                        prepareViewsForSheetPosition(newState)
+                    }
+
+                    override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
+
+                    override fun onUploadActionInitiated(
+                        place: Place,
+                        uploadType: NearbyBottomSheetHelper.UploadType,
+                    ) {
+                        storeSharedPrefs(place)
+                        val act = activity ?: return
+                        when (uploadType) {
+                            NearbyBottomSheetHelper.UploadType.CAMERA -> {
+                                Timber.d("Camera button tapped. Place: %s", place.toString())
+                                controller?.initiateCameraPick(
+                                    act,
+                                    inAppCameraLocationPermissionLauncher,
+                                    cameraPickLauncherForResult,
+                                )
+                            }
+                            NearbyBottomSheetHelper.UploadType.GALLERY -> {
+                                Timber.d("Gallery button tapped. Place: %s", place.toString())
+                                controller?.initiateGalleryPick(
+                                    act,
+                                    galleryPickLauncherForResult,
+                                    false,
+                                )
+                            }
+                            NearbyBottomSheetHelper.UploadType.CUSTOM_GALLERY -> {
+                                Timber.d("Gallery button tapped. Place: %s", place.toString())
+                                // Pass singleSelection = true for Nearby flow
+                                controller?.initiateCustomGalleryPickWithPermission(
+                                    act,
+                                    customSelectorLauncherForResult,
+                                    singleSelection = true,
+                                )
+                            }
+                        }
+                    }
+
+                    override fun getCoroutineScope(): LifecycleCoroutineScope? = scope
+
+                    override fun getPlaceAdapter(): PlaceAdapter? = adapter
+                },
+        )
     }
 
-    private val spanCount: Int
-        /**
-         * Determines the number of spans (columns) in the RecyclerView based on device orientation
-         * and adapter item count.
-         *
-         * @return The number of spans to be used in the RecyclerView.
-         */
-        get() {
-            val orientation = resources.configuration.orientation
-            return if (bottomSheetAdapter != null) {
-                if ((orientation == Configuration.ORIENTATION_PORTRAIT)) {
-                    PORTRAIT_SPAN_COUNT
-                } else {
-                    bottomSheetAdapter!!.itemCount
-                }
-            } else {
-                if ((orientation == Configuration.ORIENTATION_PORTRAIT)) PORTRAIT_SPAN_COUNT else LANDSCAPE_SPAN_COUNT
-            }
-        }
+    private fun initLocationHelper() {
+        locationHelper.init(
+            activityProvider = { activity },
+            locationManagerProvider = { locationManager },
+            locationPermissionsHelperProvider = { locationPermissionsHelper },
+            applicationKvStoreProvider = { applicationKvStore },
+            actions =
+                object : NearbyLocationHelper.NearbyLocationActions {
+                    override fun onMapReady() {
+                        presenter?.onMapReady()
+                    }
+
+                    override fun onUpdateMapAndList(locationChangeType: LocationChangeType) {
+                        presenter?.updateMapAndList(locationChangeType)
+                    }
+
+                    override fun onCameraCenterRequested(targetP: GeoPoint) {
+                        binding?.map?.controller?.setCenter(targetP)
+                    }
+
+                    override fun onUserLocationOverlaysUpdated(targetP: GeoPoint, invalidate: Boolean) {
+                        updateUserLocationOverlays(targetP, invalidate)
+                    }
+
+                    override fun onCameraMoveRequested(targetP: GeoPoint) {
+                        moveCameraToPosition(targetP)
+                    }
+
+                    override fun isCameFromExploreMap(): Boolean = this@NearbyParentFragment.isCameFromExploreMap()
+
+                    override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
+
+                    override fun setProgressBarVisibility(isVisible: Boolean) {
+                        this@NearbyParentFragment.setProgressBarVisibility(isVisible)
+                    }
+
+                    override fun showLocationOffDialog() {
+                        activity?.let {
+                            locationPermissionsHelper?.showLocationOffDialog(
+                                it,
+                                R.string.ask_to_turn_location_on_text,
+                            )
+                        }
+                    }
+
+                    override fun askForLocationPermission() {
+                        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION)
+                    }
+                },
+        )
+    }
+
+    private fun initViewportHelper() {
+        viewportHelper.init(
+            mapViewProvider = { binding?.map },
+            activityProvider = { activity },
+            actions =
+                object : NearbyViewportHelper.NearbyViewportActions {
+                    override fun onPlaceHighlighted(place: Place) {
+                        nearestPlace = place
+                        highlightNearestPlace(place)
+                    }
+
+                    override fun onRecenterMapRequested(currentLatLng: LatLng?) {
+                        recenterMap(currentLatLng)
+                    }
+                },
+        )
+    }
 
     fun initNearbyFilter() {
         binding!!.nearbyFilterList.root.visibility = View.GONE
@@ -1237,60 +1344,6 @@ class NearbyParentFragment(
     }
 
     /**
-     * Defines how bottom sheets will act on click
-     */
-    private fun setBottomSheetCallbacks() {
-        bottomSheetDetailsBehavior!!.setBottomSheetCallback(
-            object : BottomSheetCallback() {
-                override fun onStateChanged(
-                    bottomSheet: View,
-                    newState: Int,
-                ) {
-                    prepareViewsForSheetPosition(newState)
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
-            },
-        )
-
-        binding!!.bottomSheetDetails.root.setOnClickListener { v ->
-            if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-            } else if (bottomSheetDetailsBehavior!!.state
-                == BottomSheetBehavior.STATE_EXPANDED
-            ) {
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            }
-        }
-
-        binding!!
-            .bottomSheetNearby.bottomSheet.layoutParams.height =
-            requireActivity()
-                .windowManager
-                .defaultDisplay.height / BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
-        bottomSheetListBehavior =
-            BottomSheetBehavior.from<View>(binding!!.bottomSheetNearby.bottomSheet)
-        bottomSheetListBehavior?.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        bottomSheetListBehavior?.setBottomSheetCallback(
-            object : BottomSheetCallback() {
-                override fun onStateChanged(
-                    bottomSheet: View,
-                    newState: Int,
-                ) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-                    }
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
-            },
-        )
-        if (isDepictsPickerMode) {
-            bottomSheetListBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-        }
-    }
-
-    /**
      * Loads animations will be used for FABs
      */
     private fun loadAnimations() {
@@ -1302,132 +1355,21 @@ class NearbyParentFragment(
             AnimationUtils.loadAnimation(activity, fr.free.nrw.commons.R.anim.rotate_backward)
     }
 
-    /**
-     *
-     */
-    private fun addActionToTitle() {
-        binding!!.bottomSheetDetails.title.setOnLongClickListener { view ->
-            requireContext().copyToClipboard(
-                "place",
-                binding!!
-                    .bottomSheetDetails.title.text
-                    .toString(),
-            )
-            Toast
-                .makeText(requireContext(), fr.free.nrw.commons.R.string.text_copy, Toast.LENGTH_SHORT)
-                .show()
-            true
-        }
-
-        binding!!.bottomSheetDetails.title.setOnClickListener { view ->
-            bottomSheetListBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-            if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-            } else {
-                bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            }
-        }
-    }
-
-    /**
-     * Centers the map in nearby fragment to a given place and updates nearestPlace
-     *
-     * @param place is new center of the map
-     */
     override fun centerMapToPlace(place: Place?) {
-        Timber.d("Map is centered to place")
-        val cameraShift: Double
-        if (null != place) {
-            lastPlaceToCenter = place
-            nearestPlace = place
-        }
-
-        if (null != lastPlaceToCenter) {
-            val configuration = requireActivity().resources.configuration
-            cameraShift =
-                if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT
-                } else {
-                    CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE
-                }
-            recenterMap(
-                LatLng(
-                    lastPlaceToCenter!!.location.latitude - cameraShift,
-                    lastPlaceToCenter!!.getLocation().longitude,
-                    0f,
-                ),
-            )
-        }
-        highlightNearestPlace(place!!)
+        viewportHelper.centerMapToPlace(place)
     }
 
     override fun updateListFragment(placeList: List<Place>) {
-        adapter!!.clear()
-        adapter!!.items = placeList.filter { it.name.isNotEmpty() }
-        binding!!.bottomSheetNearby.noResultsMessage.visibility =
-            if (placeList.isEmpty()) View.VISIBLE else View.GONE
+        bottomSheetHelper.updateListFragment(placeList)
     }
 
-    override fun getLastLocation(): LatLng = lastKnownLocation!!
+    override fun getLastLocation(): LatLng = locationHelper.getLastLocation()
 
-    override fun getLastMapFocus(): LatLng {
-        val latLng =
-            LatLng(
-                lastMapFocus!!.latitude,
-                lastMapFocus!!.longitude,
-                LOCATION_ACCURACY_METERS,
-            )
-        return latLng
-    }
+    override fun getLastMapFocus(): LatLng = viewportHelper.getLastMapFocus()
 
-    /**
-     * Computes location where map should be centered
-     *
-     * @return returns the last location, if available, else returns default location
-     */
-    override fun getMapCenter(): LatLng {
-        if (applicationKvStore!!.getString("LastLocation") != null) {
-            val locationLatLng =
-                applicationKvStore!!
-                    .getString("LastLocation")!!
-                    .split(",".toRegex())
-                    .dropLastWhile { it.isEmpty() }
-                    .toTypedArray()
-            lastKnownLocation =
-                LatLng(
-                    locationLatLng[0].toDouble(),
-                    locationLatLng[1].toDouble(),
-                    1f,
-                )
-        } else {
-            lastKnownLocation =
-                LatLng(
-                    DEFAULT_LATITUDE,
-                    DEFAULT_LONGITUDE,
-                    1f,
-                )
-        }
-        var latLnge = lastKnownLocation!!
-        if (mapCenter != null) {
-            latLnge =
-                LatLng(
-                    mapCenter!!.latitude,
-                    mapCenter!!.longitude,
-                    LOCATION_ACCURACY_METERS,
-                )
-        }
-        return latLnge
-    }
+    override fun getMapCenter(): LatLng = locationHelper.getMapCenter()
 
-    override fun getMapFocus(): LatLng {
-        val mapFocusedLatLng =
-            LatLng(
-                binding!!.map.mapCenter.latitude,
-                binding!!.map.mapCenter.longitude,
-                LOCATION_ACCURACY_METERS,
-            )
-        return mapFocusedLatLng
-    }
+    override fun getMapFocus(): LatLng = viewportHelper.getMapFocus()
 
     override fun isAdvancedQueryFragmentVisible(): Boolean = isAdvancedQueryFragmentVisible
 
@@ -1510,49 +1452,12 @@ class NearbyParentFragment(
      * Hide or expand bottom sheet according to states of all sheets
      */
     override fun listOptionMenuItemClicked() {
-        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-        if (bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_COLLAPSED ||
-            bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN
-        ) {
-            bottomSheetListBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
-        } else if (bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetListBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-        }
+        bottomSheetHelper.listOptionMenuItemClicked()
     }
 
-    /**
-     * Returns the location of the top right corner of the map view.
-     *
-     * @return a `LatLng` object denoting the location of the top right corner of the map.
-     */
-    override fun getScreenTopRight(): LatLng? {
-        val map = binding?.map ?: return null
-        val projection = map.projection ?: return null
+    override fun getScreenTopRight(): LatLng? = viewportHelper.getScreenTopRight()
 
-        val screenTopRight = projection.fromPixels(map.width, 0)
-        return if (screenTopRight != null) {
-            LatLng(screenTopRight.latitude, screenTopRight.longitude, 0f)
-        } else {
-            null
-        }
-    }
-
-    /**
-     * Returns the location of the bottom left corner of the map view.
-     *
-     * @return a `LatLng` object denoting the location of the bottom left corner of the map.
-     */
-    override fun getScreenBottomLeft(): LatLng? {
-        val map = binding?.map ?: return null
-        val projection = map.projection ?: return null
-
-        val screenBottomLeft = projection.fromPixels(0, map.height)
-        return if (screenBottomLeft != null) {
-            LatLng(screenBottomLeft.latitude, screenBottomLeft.longitude, 0f)
-        } else {
-            null
-        }
-    }
+    override fun getScreenBottomLeft(): LatLng? = viewportHelper.getScreenBottomLeft()
 
     override fun populatePlaces(currentLatLng: LatLng) {
         // these two variables have historically been assigned values the opposite of what their
@@ -1844,8 +1749,8 @@ class NearbyParentFragment(
                         binding!!.bottomSheetDetails.dataCircularProgress.visibility = View.GONE
                         binding!!.bottomSheetDetails.icon.visibility = View.VISIBLE
                         binding!!.bottomSheetDetails.wikiDataLl.visibility = View.VISIBLE
-                        passInfoToSheet(updatedPlace)
-                        hideBottomSheet()
+                        bottomSheetHelper.passInfoToSheet(updatedPlace)
+                        bottomSheetHelper.hideBottomSheet()
                     },
                     { throwable: Throwable ->
                         Timber.d(throwable)
@@ -2010,10 +1915,10 @@ class NearbyParentFragment(
     }
 
     override fun isListBottomSheetExpanded(): Boolean =
-        bottomSheetListBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetHelper.isListBottomSheetExpanded()
 
     override fun isDetailsBottomSheetVisible(): Boolean =
-        bottomSheetDetailsBehavior!!.state != BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetHelper.isDetailsBottomSheetVisible()
 
     override fun isNearbyFilterListVisible(): Boolean = binding?.nearbyFilterList?.root?.visibility == View.VISIBLE
 
@@ -2027,11 +1932,7 @@ class NearbyParentFragment(
     }
 
     override fun setBottomSheetDetailsSmaller() {
-        if (bottomSheetDetailsBehavior!!.state == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        } else {
-            bottomSheetDetailsBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
-        }
+        bottomSheetHelper.setBottomSheetDetailsSmaller()
     }
 
     override fun setRecyclerViewAdapterAllSelected() {
@@ -2165,36 +2066,16 @@ class NearbyParentFragment(
         }
     }
 
-    private fun handleLocationUpdate(
-        latLng: LatLng,
-        locationChangeType: LocationChangeType,
-    ) {
-        lastKnownLocation = latLng
-        NearbyController.currentLocation = lastKnownLocation
-        presenter!!.updateMapAndList(locationChangeType)
-
-        updateUserLocationOverlays(GeoPoint(latLng.latitude, latLng.longitude), true)
-    }
-
     override fun onLocationChangedSignificantly(latLng: LatLng) {
-        Timber.d("Location significantly changed")
-        if (latLng != null) {
-            handleLocationUpdate(latLng, LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        }
+        locationHelper.locationUpdateListener.onLocationChangedSignificantly(latLng)
     }
 
     override fun onLocationChangedSlightly(latLng: LatLng) {
-        Timber.d("Location slightly changed")
-        if (latLng != null) { // If the map has never ever shown the current location, lets do it know
-            handleLocationUpdate(latLng, LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
-        }
+        locationHelper.locationUpdateListener.onLocationChangedSlightly(latLng)
     }
 
     override fun onLocationChangedMedium(latLng: LatLng) {
-        Timber.d("Location changed medium")
-        if (latLng != null) { // If the map has never ever shown the current location, lets do it know
-            handleLocationUpdate(latLng, LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
-        }
+        locationHelper.locationUpdateListener.onLocationChangedMedium(latLng)
     }
 
     fun backButtonClicked(): Boolean {
@@ -2225,9 +2106,13 @@ class NearbyParentFragment(
         return presenter?.backButtonClicked() ?: false
     }
 
-    override fun onLocationPermissionDenied(toastMessage: String) = Unit
+    override fun onLocationPermissionDenied(toastMessage: String) {
+        locationHelper.locationPermissionCallback.onLocationPermissionDenied(toastMessage)
+    }
 
-    override fun onLocationPermissionGranted() = Unit
+    override fun onLocationPermissionGranted() {
+        locationHelper.locationPermissionCallback.onLocationPermissionGranted()
+    }
 
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
@@ -2255,7 +2140,7 @@ class NearbyParentFragment(
         binding!!.fabRecenter.isEnabled = true
     }
 
-    override fun getCameraTarget(): LatLng? = if (binding!!.map == null) null else mapFocus
+    override fun getCameraTarget(): LatLng? = viewportHelper.getCameraTarget()
 
     /**
      * Highlights nearest place when user clicks on home nearby banner
@@ -2264,9 +2149,9 @@ class NearbyParentFragment(
      */
     private fun highlightNearestPlace(nearestPlace: Place) {
         binding!!.bottomSheetDetails.icon.visibility = View.VISIBLE
-        passInfoToSheet(nearestPlace)
-        hideBottomSheet()
-        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetHelper.passInfoToSheet(nearestPlace)
+        bottomSheetHelper.hideBottomSheet()
+        bottomSheetHelper.bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     /**
@@ -2287,57 +2172,19 @@ class NearbyParentFragment(
     ): Int = fr.free.nrw.commons.nearby.fragments.getMarkerPriority(place, isBookmarked, nearestPlace)
 
     override fun recenterMap(currentLatLng: LatLng?) {
-        // if user has denied permission twice, then show dialog
-        if (isPermissionDenied) {
-            if (locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
-                // this will run when user has given permission by opening app's settings
-                isPermissionDenied = false
-                locationPermissionGranted()
-                return
-            } else {
-                askForLocationPermission()
-            }
-        } else {
-            if (!locationPermissionsHelper!!.checkLocationPermission(requireActivity())) {
-                askForLocationPermission()
-            } else {
-                locationPermissionGranted()
-            }
-        }
-        if (currentLatLng == null) {
-            recenterToUserLocation = true
-        }
+        locationHelper.recenterMap(currentLatLng)
     }
 
     override fun openLocationSettings() {
-        // This method opens the location settings of the device along with a followup toast.
-        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-        val packageManager = requireActivity().packageManager
-
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-            Toast
-                .makeText(
-                    context,
-                    fr.free.nrw.commons.R.string.recommend_high_accuracy_mode,
-                    Toast.LENGTH_LONG,
-                ).show()
-        } else {
-            Toast
-                .makeText(
-                    context,
-                    fr.free.nrw.commons.R.string.cannot_open_location_settings,
-                    Toast.LENGTH_LONG,
-                ).show()
-        }
+        locationHelper.openLocationSettings()
     }
 
     override fun hideBottomSheet() {
-        bottomSheetListBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetHelper.hideBottomSheet()
     }
 
     override fun hideBottomDetailsSheet() {
-        bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetHelper.hideBottomDetailsSheet()
     }
 
     /**
@@ -2372,202 +2219,7 @@ class NearbyParentFragment(
      * @param place Place of clicked nearby marker
      */
     private fun passInfoToSheet(place: Place) {
-        selectedPlace = place
-        dataList = ArrayList()
-        (dataList as ArrayList<BottomSheetItem>).add(
-            BottomSheetItem(
-                R.drawable.ic_round_star_border_24px,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_bookmark),
-            ),
-        )
-        (dataList as ArrayList<BottomSheetItem>).add(
-            BottomSheetItem(
-                R.drawable.ic_directions_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_directions),
-            ),
-        )
-        if (place.hasWikidataLink()) {
-            (dataList as ArrayList<BottomSheetItem>).add(
-                BottomSheetItem(
-                    R.drawable.ic_wikidata_logo_24dp,
-                    resources.getString(fr.free.nrw.commons.R.string.nearby_wikidata),
-                ),
-            )
-        }
-        (dataList as ArrayList<BottomSheetItem>).add(
-            BottomSheetItem(
-                R.drawable.ic_feedback_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_report_problem_short),
-            ),
-        )
-        if (place.hasWikipediaLink()) {
-            (dataList as ArrayList<BottomSheetItem>).add(
-                BottomSheetItem(
-                    R.drawable.ic_wikipedia_logo_24dp,
-                    resources.getString(fr.free.nrw.commons.R.string.nearby_wikipedia),
-                ),
-            )
-        }
-        if (selectedPlace!!.hasCommonsLink()) {
-            (dataList as ArrayList<BottomSheetItem>).add(
-                BottomSheetItem(
-                    R.drawable.ic_commons_icon_vector,
-                    resources.getString(fr.free.nrw.commons.R.string.nearby_commons),
-                ),
-            )
-        }
-
-        if (isDepictsPickerMode) {
-            // Hide the existing actions recyclerview and show the confirm button
-            binding!!.bottomSheetDetails.bottomSheetRecyclerView.visibility = View.GONE
-            binding!!.bottomSheetDetails.depictionsMapConfirm.visibility = View.VISIBLE
-            // increase the peek height to make the confirm button visible
-            bottomSheetDetailsBehavior!!.peekHeight =
-                (
-                    (resources.getDimension(R.dimen.overflow_button_dimen)) +
-                        (resources.getDimension(R.dimen.big_height))
-                ).toInt()
-            binding!!.bottomSheetDetails.depictionsMapConfirm.setOnClickListener {
-                val intent = Intent()
-                intent.putExtra(PICKER_RESULT_PLACE, selectedPlace)
-                requireActivity().setResult(android.app.Activity.RESULT_OK, intent)
-                requireActivity().finish()
-            }
-        } else {
-            val spanCount = spanCount
-            gridLayoutManager = GridLayoutManager(this.context, spanCount)
-            binding!!.bottomSheetDetails.bottomSheetRecyclerView.layoutManager = gridLayoutManager
-            bottomSheetAdapter =
-                BottomSheetAdapter(
-                    this.context,
-                    dataList as ArrayList<BottomSheetItem>,
-                )
-            bottomSheetAdapter!!.setClickListener(this)
-            binding!!.bottomSheetDetails.bottomSheetRecyclerView.adapter = bottomSheetAdapter
-            updateBookmarkButtonImage(selectedPlace!!)
-        }
-
-        selectedPlace?.pic?.substringAfterLast("/")?.takeIf { it.isNotEmpty() }?.let { imageName ->
-            Glide
-                .with(binding!!.bottomSheetDetails.icon.context)
-                .clear(binding!!.bottomSheetDetails.icon)
-
-            val loadingDrawable =
-                ContextCompat.getDrawable(
-                    binding!!.bottomSheetDetails.icon.context,
-                    R.drawable.loading_icon,
-                )
-            val animation =
-                AnimationUtils.loadAnimation(
-                    binding!!.bottomSheetDetails.icon.context,
-                    R.anim.rotate,
-                )
-
-            Glide
-                .with(binding!!.bottomSheetDetails.icon.context)
-                .load("https://commons.wikimedia.org/wiki/Special:Redirect/file/$imageName?width=25")
-                .placeholder(loadingDrawable)
-                .error(selectedPlace!!.label.icon)
-                .listener(
-                    object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>,
-                            isFirstResource: Boolean,
-                        ): Boolean {
-                            binding!!.bottomSheetDetails.icon.clearAnimation()
-                            return false
-                        }
-
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            model: Any,
-                            target: Target<Drawable>?,
-                            dataSource: com.bumptech.glide.load.DataSource,
-                            isFirstResource: Boolean,
-                        ): Boolean {
-                            binding!!.bottomSheetDetails.icon.clearAnimation()
-                            return false
-                        }
-                    },
-                ).into(binding!!.bottomSheetDetails.icon)
-
-            if (binding!!.bottomSheetDetails.icon.drawable != null &&
-                binding!!
-                    .bottomSheetDetails.icon.drawable.constantState == loadingDrawable?.constantState
-            ) {
-                binding!!.bottomSheetDetails.icon.startAnimation(animation)
-            } else {
-                binding!!.bottomSheetDetails.icon.clearAnimation()
-            }
-
-            binding!!.bottomSheetDetails.icon.setOnClickListener {
-                handleMediaClick(imageName)
-            }
-        } ?: run {
-            binding!!.bottomSheetDetails.icon.setImageResource(selectedPlace!!.label.icon)
-        }
-
-        binding!!.bottomSheetDetails.title.text = selectedPlace!!.name
-        binding!!.bottomSheetDetails.category.text = selectedPlace!!.distance
-        // Remove label since it is double information
-        var descriptionText =
-            selectedPlace!!
-                .longDescription
-                .replace(selectedPlace!!.getName() + " (", "")
-        descriptionText = (
-            if (descriptionText == selectedPlace!!.longDescription) {
-                descriptionText
-            } else {
-                descriptionText.replaceFirst(".$".toRegex(), "")
-            }
-        )
-        // Set the short description after we remove place name from long description
-        binding!!.bottomSheetDetails.description.text = descriptionText
-
-        binding!!.fabCamera.setOnClickListener { view ->
-            if (binding!!.fabCamera.isShown) {
-                Timber.d("Camera button tapped. Place: %s", selectedPlace.toString())
-                storeSharedPrefs(selectedPlace!!)
-                activity?.let {
-                    controller!!.initiateCameraPick(
-                        it,
-                        inAppCameraLocationPermissionLauncher,
-                        cameraPickLauncherForResult,
-                    )
-                }
-            }
-        }
-
-        binding!!.fabGallery.setOnClickListener { view ->
-            if (binding!!.fabGallery.isShown) {
-                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString())
-                storeSharedPrefs(selectedPlace!!)
-                activity?.let {
-                    controller!!.initiateGalleryPick(
-                        it,
-                        galleryPickLauncherForResult,
-                        false,
-                    )
-                }
-            }
-        }
-
-        binding!!.fabCustomGallery.setOnClickListener { view ->
-            if (binding!!.fabCustomGallery.isShown) {
-                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString())
-                storeSharedPrefs(selectedPlace!!)
-                activity?.let {
-                    // Pass singleSelection = true for Nearby flow
-                    controller!!.initiateCustomGalleryPickWithPermission(
-                        it,
-                        customSelectorLauncherForResult,
-                        singleSelection = true,
-                    )
-                }
-            }
-        }
+        bottomSheetHelper.passInfoToSheet(place)
     }
 
     private fun handleMediaClick(imageName: String) {
@@ -2670,19 +2322,6 @@ class NearbyParentFragment(
         Timber.d("Stored place object %s", place.toString())
     }
 
-    private fun updateBookmarkButtonImage(place: Place) {
-        NearbyUtil.getBookmarkLocationExists(
-            bookmarkLocationDao,
-            place.getName(),
-            scope,
-            bottomSheetAdapter!!,
-        )
-    }
-
-    private fun toggleBookmarkButtonImage() {
-        bottomSheetAdapter?.toggleBookmarkIcon()
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         wikidataEditListener!!.authenticationStateListener = this
@@ -2705,20 +2344,7 @@ class NearbyParentFragment(
     }
 
     fun registerUnregisterLocationListener(removeLocationListener: Boolean) {
-        try {
-            if (removeLocationListener) {
-                locationManager!!.unregisterLocationManager()
-                locationManager!!.removeLocationListener(this)
-                Timber.d("Location service manager unregistered and removed")
-            } else {
-                locationManager!!.addLocationListener(this)
-                locationManager!!.registerLocationManager()
-                Timber.d("Location service manager added and registered")
-            }
-        } catch (e: Exception) {
-            Timber.e(e)
-            // Broadcasts are tricky, should be catchedonR
-        }
+        locationHelper.registerUnregisterLocationListener(removeLocationListener)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -2727,13 +2353,8 @@ class NearbyParentFragment(
         if (isResumed && isVisibleToUser) {
             performMapReadyActions()
         } else {
-            if (null != bottomSheetListBehavior) {
-                bottomSheetListBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-            }
-
-            if (null != bottomSheetDetailsBehavior) {
-                bottomSheetDetailsBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
-            }
+            bottomSheetHelper.hideBottomSheet()
+            bottomSheetHelper.hideBottomDetailsSheet()
         }
     }
 
@@ -2754,7 +2375,7 @@ class NearbyParentFragment(
     }
 
     private fun moveCameraToPosition(geoPoint: GeoPoint) {
-        binding!!.map.controller.animateTo(geoPoint)
+        viewportHelper.moveCameraToPosition(geoPoint)
     }
 
     /**
@@ -2770,85 +2391,21 @@ class NearbyParentFragment(
         zoom: Double,
         speed: Long,
     ) {
-        binding!!.map.controller.animateTo(geoPoint, zoom, speed)
+        viewportHelper.moveCameraToPosition(geoPoint, zoom, speed)
     }
 
     override fun onBottomSheetItemClick(
         view: View?,
         position: Int,
     ) {
-        val item = dataList?.get(position) ?: return // Null check for dataList
-        when (item.imageResourceId) {
-            R.drawable.ic_round_star_border_24px -> {
-                presenter?.toggleBookmarkedStatus(selectedPlace, scope)
-                toggleBookmarkButtonImage()
-            }
-
-            R.drawable.ic_round_star_filled_24px -> {
-                presenter?.toggleBookmarkedStatus(selectedPlace, scope)
-                toggleBookmarkButtonImage()
-                selectedPlace?.let { updateBookmarkButtonImage(it) }
-            }
-
-            R.drawable.ic_directions_black_24dp -> {
-                selectedPlace?.let {
-                    handleGeoCoordinates(requireContext(), it.getLocation())
-                    binding?.map?.zoomLevelDouble ?: 0.0
-                }
-            }
-
-            R.drawable.ic_wikidata_logo_24dp -> {
-                selectedPlace?.siteLinks?.wikidataLink?.let {
-                    handleWebUrl(requireContext(), it)
-                }
-            }
-
-            R.drawable.ic_feedback_black_24dp -> {
-                selectedPlace?.let {
-                    val intent =
-                        Intent(this.context, WikidataFeedback::class.java).apply {
-                            putExtra("lat", it.location.latitude)
-                            putExtra("lng", it.location.longitude)
-                            putExtra("place", it.name)
-                            putExtra("qid", it.wikiDataEntityId)
-                        }
-                    startActivity(intent)
-                }
-            }
-
-            R.drawable.ic_wikipedia_logo_24dp -> {
-                selectedPlace?.siteLinks?.wikipediaLink?.let {
-                    handleWebUrl(requireContext(), it)
-                }
-            }
-
-            R.drawable.ic_commons_icon_vector -> {
-                selectedPlace?.siteLinks?.commonsLink?.let {
-                    handleWebUrl(requireContext(), it)
-                }
-            }
-
-            else -> Unit
-        }
+        bottomSheetHelper.itemClickListener.onBottomSheetItemClick(view, position)
     }
 
     override fun onBottomSheetItemLongClick(
         view: View?,
         position: Int,
     ) {
-        val item = dataList!![position]
-        val message =
-            when (item.imageResourceId) {
-                R.drawable.ic_round_star_border_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
-                R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
-                R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
-                R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
-                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_report_problem)
-                R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
-                R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
-                else -> "Long click"
-            }
-        Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show()
+        bottomSheetHelper.itemClickListener.onBottomSheetItemLongClick(view, position)
     }
 
     interface NearbyParentFragmentInstanceReadyCallback {
@@ -2914,10 +2471,16 @@ class NearbyParentFragment(
             requireActivity().windowManager.defaultDisplay.height /
                 BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
         binding!!.bottomSheetNearby.bottomSheet.layoutParams = rlBottomSheetLayoutParams
-        val spanCount = spanCount
-        if (gridLayoutManager != null) {
-            gridLayoutManager!!.spanCount = spanCount
-        }
+        val orientation = resources.configuration.orientation
+        val adapterCount = bottomSheetHelper.bottomSheetAdapter?.itemCount ?: 0
+        val spanCount =
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                PORTRAIT_SPAN_COUNT
+            } else {
+                if (adapterCount > 0) adapterCount else LANDSCAPE_SPAN_COUNT
+            }
+        (binding?.bottomSheetDetails?.bottomSheetRecyclerView?.layoutManager as? GridLayoutManager)?.spanCount =
+            spanCount
         applyNearbyFabLayout()
     }
 
@@ -2938,8 +2501,6 @@ class NearbyParentFragment(
         private const val SCALE_BAR_BACKGROUND_GREEN = 250
         private const val SCALE_BAR_BACKGROUND_BLUE = 250
         private const val BOUNDING_BOX_BORDER_SIZE_PX = 100
-        private const val DEGREES_IN_FULL_CIRCLE = 360.0
-        private const val MAP_TILE_SIZE_PX = 256.0
         private const val PORTRAIT_SPAN_COUNT = 3
         private const val LANDSCAPE_SPAN_COUNT = 6
         private const val BOTTOM_SHEET_HEIGHT_DIVISOR = 16
@@ -2947,7 +2508,6 @@ class NearbyParentFragment(
         private const val FILTER_LIST_HEIGHT_TO_WIDTH_RATIO = 1.25
         private const val FILTER_LIST_WIDTH_FRACTION = 0.75
         private const val FILTER_SEARCH_DEBOUNCE_MS = 500L
-        private const val LOCATION_ACCURACY_METERS = 100f
         private const val FALLBACK_BOUNDS_DELTA_DEGREES = 0.009
         const val ARG_PICKER_MODE = "is_picker_mode"
         const val ARG_PHOTO_LATLNGS = "picker_photo_latlngs"
