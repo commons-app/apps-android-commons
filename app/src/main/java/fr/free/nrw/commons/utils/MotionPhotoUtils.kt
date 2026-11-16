@@ -30,7 +30,14 @@ object MotionPhotoUtils {
 
     // shortcut: only the attribute form Google cameras write, not other XMP prefixes or element form.
     private val motionPhotoFlag = Regex("""GCamera:MotionPhoto="1"""")
-    private val containerItem = Regex("""<Container:Item\b[^>]*>""")
+
+    // An empty item, self-closing or as an open/close pair.
+    private const val ITEM = """<Container:Item\b[^>]*(?:/>|>\s*</Container:Item>)"""
+
+    // The item with its <rdf:li> wrapper when it has one, so the whole entry can be blanked out.
+    // Group 1 is an item with children: only its opening tag is matched, so it can't be blanked.
+    private val containerItem =
+        Regex("""<rdf:li\b[^>]*>\s*$ITEM\s*</rdf:li>|$ITEM|(<Container:Item\b[^>]*>)""")
     private val videoLength = Regex("""Item:Length="(\d+)"""")
 
     // The older "MicroVideo" format, written for example by the Samsung Galaxy S9 (see the pictures above).
@@ -41,6 +48,8 @@ object MotionPhotoUtils {
     private class Video(
         val start: Long,
         val flagOffset: Long,
+        val itemOffset: Long = 0,
+        val itemLength: Int = 0,
     )
 
     /**
@@ -59,18 +68,21 @@ object MotionPhotoUtils {
                 // The value is a single ASCII byte, so it can be changed in place without moving anything.
                 raf.seek(video.flagOffset)
                 raf.write('0'.code)
+                // Spaces keep every offset and the segment length valid, and are allowed between XMP elements.
+                raf.seek(video.itemOffset)
+                raf.write(ByteArray(video.itemLength) { ' '.code.toByte() })
             }
             video != null
         }
 
     private fun findVideo(raf: RandomAccessFile): Video? {
         val (xmpStart, xmp) = findXmp(raf) ?: return null
+        // Read the attributes from the Container:Item tag only, not from its rdf:li wrapper.
+        val item = containerItem.findAll(xmp).firstOrNull { itemTag(it).contains(VIDEO_SEMANTIC) }
+        val blank = item?.takeIf { it.groups[1] == null }?.range
         val motionPhotoLength =
-            containerItem
-                .findAll(xmp)
-                .map { it.value }
-                .firstOrNull { it.contains(VIDEO_SEMANTIC) }
-                ?.let { videoLength.find(it) }
+            item
+                ?.let { videoLength.find(itemTag(it)) }
                 ?.groupValues
                 ?.get(1)
                 ?.toLongOrNull()
@@ -80,9 +92,14 @@ object MotionPhotoUtils {
                 ?.groupValues
                 ?.get(1)
                 ?.toLongOrNull()
+        // MicroVideo has no Container:Item, so only a MotionPhoto video has an entry to blank.
         return videoAtEnd(raf, xmpStart, xmp, motionPhotoFlag.find(xmp), motionPhotoLength)
+            ?.let { Video(it.start, it.flagOffset, xmpStart + (blank?.first ?: 0), blank?.count() ?: 0) }
             ?: videoAtEnd(raf, xmpStart, xmp, microVideoFlag.find(xmp), microVideoLength)
     }
+
+    // Every match of containerItem contains this tag, with or without the wrapper.
+    private fun itemTag(match: MatchResult) = match.value.substring(match.value.indexOf("<Container:Item"))
 
     /**
      * Checks that a video of [length] bytes ends the file, after the XMP packet.
