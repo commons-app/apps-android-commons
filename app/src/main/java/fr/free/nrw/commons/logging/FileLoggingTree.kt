@@ -139,7 +139,7 @@ class FileLoggingTree(
 
         rollingFileAppender.apply {
             this.encoder = encoder
-            rollingPolicy = rollingPolicy
+            rollingPolicy = this@FileLoggingTree.rollingPolicy
             this.triggeringPolicy = triggeringPolicy
             start()
         }
