@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Looper
@@ -232,6 +233,38 @@ class UploadActivityUnitTests {
             activity.getString(R.string.unsupported_files_skipped_title),
             shadowOf(ShadowAlertDialog.getLatestAlertDialog()).title.toString(),
         )
+    }
+
+    @Test
+    fun needsMediaLocationPermissionIsFalseBeforeAndroid10() {
+        Assert.assertFalse(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [29])
+    fun needsMediaLocationPermissionIsTrueWithoutThePermission() {
+        Assert.assertTrue(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [29])
+    fun needsMediaLocationPermissionIsFalseWithThePermission() {
+        shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
+
+        Assert.assertFalse(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [29])
+    fun sharedItemsAreReceivedRightAwayWhenMediaLocationIsGranted() {
+        shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
+        activity.intent = Intent(Intent.ACTION_SEND)
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 0))
+
+        uploadView.input.checkStoragePermissions()
+
+        verify(contributionController).handleExternalImagesPicked(activity, activity.intent)
     }
 
     private fun receiveExternalAndSharedItems() {
