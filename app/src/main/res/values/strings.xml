@@ -744,6 +744,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="cancelling_upload">Cancelling upload…</string>
   <string name="retrying_upload">Retrying upload…</string>
   <string name="retrying_failed_uploads">Retrying all failed uploads…</string>
+  <string name="upload_failed_server_error">Commons could not handle the request right now. Please try again later. (HTTP %1$d)</string>
   <string name="cancel_upload">Cancel Upload</string>
   <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
