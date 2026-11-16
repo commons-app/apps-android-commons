@@ -3,11 +3,13 @@ package fr.free.nrw.commons.upload
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
@@ -68,6 +70,25 @@ class CategoriesPresenterTest {
         whenever(repository.searchAll("mock", emptyList(), repository.getSelectedDepictions()))
             .thenReturn(Observable.just(mutableListOf(categoryItem())))
         CategorySearchResults(repository, testScheduler).searchResults("mock", media())
+    }
+
+    @Test
+    fun `upload suggests its shooting location after editing a different file`() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
+        categoriesPresenter.onDetachView()
+        categoriesPresenter.onAttachView(view)
+
+        val category = categoryItem("Ouagadougou")
+        whenever(repository.getLocationOfCreation()).thenReturn(depictedItem(name = "Ouagadougou"))
+        whenever(repository.getCategories(listOf("Ouagadougou"))).thenReturn(Observable.just(listOf(category)))
+        whenever(repository.searchAll("", emptyList(), emptyList()))
+            .thenReturn(Observable.just(emptyList()))
+
+        categoriesPresenter.searchForCategories("")
+        testScheduler.triggerActions()
+
+        assertEquals(listOf(category), categoriesPresenter.categoryList.value)
+        verify(repository, never()).onCategoryClicked(any(), anyOrNull())
     }
 
     /**
