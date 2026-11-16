@@ -7,6 +7,8 @@ import dagger.Provides
 import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.CommonHeaderRequestInterceptor
+import fr.free.nrw.commons.ForceCacheInterceptor
+import fr.free.nrw.commons.CacheControlInterceptor
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.PageEditInterface
@@ -66,6 +68,8 @@ class NetworkingModule {
             .connectTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(ForceCacheInterceptor())
+            .addNetworkInterceptor(CacheControlInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .readTimeout(120, TimeUnit.SECONDS)
             .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
