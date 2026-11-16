@@ -6,7 +6,7 @@
 
 The Wikimedia Commons Android app allows users to upload pictures from their Android phone/tablet to Wikimedia Commons. Download the app [here][1], or view our [website][2].
 
-Initially started by the Wikimedia Foundation, this app is now maintained by grantees and volunteers of the Wikimedia community. Anyone is welcome to improve it, just choose among the [open issues][3] and send us a pull request! :-) 
+Initially started by the Wikimedia Foundation, this app is now maintained by grantees and volunteers of the Wikimedia community. Anyone is welcome to improve it, just choose among the [open issues][3] and send us a pull request! :-)
 
 <a href="https://f-droid.org/repository/browse/?fdid=fr.free.nrw.commons" target="_blank">
 <img src="https://upload.wikimedia.org/wikipedia/commons/archive/9/96/20200131184248%21%22Get_it_on_F-droid%22_Badge.png" alt="Get it on F-Droid" height="90"/></a>
@@ -38,8 +38,6 @@ Thank you all for your work!
 
 
 .. and [many more](https://github.com/commons-app/apps-android-commons/graphs/contributors).
-
-**Shahmeer ([@shaahmeer](https://github.com/shaahmeer))** — Contributed a fix for [#5782](https://github.com/commons-app/apps-android-commons/issues/5782), addressing the “Next” button remaining disabled after removing a picture during multi-upload. Added regression tests for caption state and metadata row rebinding.
 
 ## License ##
 
