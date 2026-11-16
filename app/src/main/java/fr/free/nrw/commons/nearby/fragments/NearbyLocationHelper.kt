@@ -312,7 +312,7 @@ class NearbyLocationHelper : NearbyParentFragmentContract.Location {
      *
      * @param removeLocationListener True to unregister and remove listener, false to register
      */
-    fun registerUnregisterLocationListener(removeLocationListener: Boolean) {
+    override fun registerUnregisterLocationListener(removeLocationListener: Boolean) {
         val manager = locationManagerProvider?.invoke() ?: return
         try {
             if (removeLocationListener) {

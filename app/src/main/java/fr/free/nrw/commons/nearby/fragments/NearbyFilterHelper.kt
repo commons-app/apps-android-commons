@@ -79,39 +79,13 @@ class NearbyFilterHelper : NearbyParentFragmentContract.Filter {
     @VisibleForTesting
     var activityProvider: (() -> Activity?)? = null
 
+    var presenterProvider: (() -> NearbyParentFragmentContract.UserActions?)? = null
+
     @VisibleForTesting
     var dependencies: NearbyFilterDependencies? = null
 
     @VisibleForTesting
     var actions: NearbyFilterActions? = null
-
-    /**
-     * Initializes filter views, search view listeners, RecyclerView adapters, and callbacks.
-     */
-    fun init(
-        bindingProvider: () -> FragmentNearbyParentBinding?,
-        contextProvider: () -> Context?,
-        activityProvider: () -> Activity?,
-        dependencies: NearbyFilterDependencies,
-        actions: NearbyFilterActions,
-    ) {
-        this.bindingProvider = bindingProvider
-        this.contextProvider = contextProvider
-        this.activityProvider = activityProvider
-        this.dependencies = dependencies
-        this.actions = actions
-
-        val binding = bindingProvider()
-        val context = contextProvider()
-        val activity = activityProvider()
-        if (binding == null || context == null || activity == null) {
-            return
-        }
-
-        setupFilterViews(binding, actions, dependencies.presenterProvider)
-        setupRecyclerView(this, binding, context, activity)
-        setupSearchViewDebounce(this, binding)
-    }
 
     override fun isNearbyFilterListVisible(): Boolean =
         bindingProvider
@@ -175,6 +149,46 @@ class NearbyFilterHelper : NearbyParentFragmentContract.Filter {
             if (shouldShow) View.VISIBLE else View.GONE
         advancedQueryFragmentVisible = shouldShow
     }
+
+    /**
+     * Drops a custom Nearby query and loads places for the current map center again.
+     */
+    override fun resetAdvancedQuery() {
+        val presenter =
+            presenterProvider?.invoke()
+                ?: dependencies?.presenterProvider?.invoke()
+                ?: return
+        presenter.setAdvancedQuery("")
+        presenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+    }
+}
+
+/**
+ * Initializes filter views, search view listeners, RecyclerView adapters, and callbacks.
+ */
+fun NearbyFilterHelper.init(
+    bindingProvider: () -> FragmentNearbyParentBinding?,
+    contextProvider: () -> Context?,
+    activityProvider: () -> Activity?,
+    dependencies: NearbyFilterHelper.NearbyFilterDependencies,
+    actions: NearbyFilterHelper.NearbyFilterActions,
+) {
+    this.bindingProvider = bindingProvider
+    this.contextProvider = contextProvider
+    this.activityProvider = activityProvider
+    this.dependencies = dependencies
+    this.actions = actions
+
+    val binding = bindingProvider()
+    val context = contextProvider()
+    val activity = activityProvider()
+    if (binding == null || context == null || activity == null) {
+        return
+    }
+
+    setupFilterViews(binding, actions, dependencies.presenterProvider)
+    setupRecyclerView(this, binding, context, activity)
+    setupSearchViewDebounce(this, binding)
 }
 
 /**

@@ -202,7 +202,7 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
     /**
      * Hide or expand bottom sheet according to states of all sheets
      */
-    fun listOptionMenuItemClicked() {
+    override fun listOptionMenuItemClicked() {
         bottomSheetDetailsBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
         val listState = bottomSheetListBehavior?.state
         if (listState == BottomSheetBehavior.STATE_COLLAPSED ||

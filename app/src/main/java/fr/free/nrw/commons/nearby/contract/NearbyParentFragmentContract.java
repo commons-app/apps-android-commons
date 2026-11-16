@@ -51,6 +51,11 @@ public interface NearbyParentFragmentContract {
         void setBottomSheetDetailsSmaller();
 
         void updateListFragment(List<Place> placeList);
+
+        /**
+         * Hide or expand bottom sheet according to states of all sheets.
+         */
+        void listOptionMenuItemClicked();
     }
 
     /** Actions related to device location services, permissions, and location center. */
@@ -65,6 +70,13 @@ public interface NearbyParentFragmentContract {
         LatLng getLastLocation();
 
         LatLng getMapCenter();
+
+        /**
+         * Registers or unregisters device location updates.
+         *
+         * @param removeLocationListener True to unregister and remove listener, false to register
+         */
+        void registerUnregisterLocationListener(boolean removeLocationListener);
     }
 
     /** Actions related to map camera viewport, focus, and screen coordinates. */
@@ -103,6 +115,11 @@ public interface NearbyParentFragmentContract {
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
+
+        /**
+         * Drops a custom Nearby query and loads places for the current map center again.
+         */
+        void resetAdvancedQuery();
     }
 
     /** Actions related to floating action buttons (FABs) and animations. */
@@ -119,25 +136,92 @@ public interface NearbyParentFragmentContract {
         void disableFABRecenter();
 
         void enableFABRecenter();
+
+        /**
+         * Adjusts FAB positioning and margins based on bottom sheet state.
+         *
+         * @param bottomSheetState see bottom sheet states
+         */
+        void prepareViewsForSheetPosition(int bottomSheetState);
     }
 
-    interface View extends FileExport, MarkerOverlay, BottomSheet, Location, Viewport, Filter, FabControl {
+    /** Actions related to querying, loading, and stopping place searches. */
+    interface PlacesQuery {
 
-        boolean isNetworkConnectionEstablished();
-
-        void updateSnackbar(boolean offlinePinsShown);
-
-        void listOptionMenuItemClicked();
-
+        /**
+         * Populates nearby places around the specified location.
+         *
+         * @param currentLatLng Current location coordinates
+         */
         void populatePlaces(LatLng currentLatLng);
 
+        /**
+         * Populates nearby places using a custom search query around the specified location.
+         *
+         * @param currentLatLng Current location coordinates
+         * @param customQuery Custom SPARQL or search query string
+         */
         void populatePlaces(LatLng currentLatLng, String customQuery);
 
+        /**
+         * Clears the Nearby local cache and requests places afresh.
+         */
+        void emptyCache();
+
+        /**
+         * Stops any ongoing queries and clears all disposables.
+         */
+        void stopQuery();
+    }
+
+    /** Actions related to network status, progress display, and snackbar notifications. */
+    interface StatusControl {
+
+        /**
+         * Checks whether an active internet connection is currently established.
+         *
+         * @return true if internet connection is established, false otherwise
+         */
+        boolean isNetworkConnectionEstablished();
+
+        /**
+         * Updates the snackbar message depending on whether offline cached pins are displayed.
+         *
+         * @param offlinePinsShown Whether offline pins are currently visible
+         */
+        void updateSnackbar(boolean offlinePinsShown);
+
+        /**
+         * Toggles the visibility of the map loading progress bar.
+         *
+         * @param isVisible true to display progress bar, false to hide
+         */
         void setProgressBarVisibility(boolean isVisible);
 
-        Context getContext();
+        /**
+         * Handles back button press delegation for the fragment and its children.
+         *
+         * @return true if event was consumed, false otherwise
+         */
+        boolean backButtonClicked();
 
-        void stopQuery();
+        /**
+         * Sets callback notified when the fragment instance views and overlays are ready.
+         *
+         * @param callback Ready notification callback
+         */
+        void setNearbyParentFragmentInstanceReadyCallback(
+            fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback callback);
+
+        /**
+         * Handles click on Learn More URL to open Wiki Loves Monuments guide in a browser.
+         */
+        void onLearnMoreClicked();
+    }
+
+    interface View extends FileExport, MarkerOverlay, BottomSheet, Location, Viewport, Filter, FabControl, PlacesQuery, StatusControl {
+
+        Context getContext();
     }
 
     interface NearbyListView {

@@ -177,7 +177,7 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
      *
      * @param bottomSheetState see bottom sheet states
      */
-    fun prepareViewsForSheetPosition(bottomSheetState: Int) {
+    override fun prepareViewsForSheetPosition(bottomSheetState: Int) {
         val binding = bindingProvider?.invoke() ?: return
         when (bottomSheetState) {
             BottomSheetBehavior.STATE_COLLAPSED -> {
