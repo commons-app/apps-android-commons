@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView.ScaleType
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -126,6 +127,13 @@ class UploadMediaDetailFragment private constructor(
     ): View {
         _binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false)
         _binding!!.mediaDetailCardView.handleKeyboardInsets()
+        val preview = binding.backgroundImage
+        preview.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            val image = preview.drawable ?: return@addOnLayoutChangeListener
+            val fillsWidth =
+                image.intrinsicWidth.toLong() * preview.height >= image.intrinsicHeight.toLong() * preview.width
+            preview.scaleType = if (fillsWidth) ScaleType.FIT_START else ScaleType.FIT_CENTER
+        }
         // intialise the adapter early to prevent uninitialized access
         uploadMediaDetailAdapter =
             UploadMediaDetailAdapter(

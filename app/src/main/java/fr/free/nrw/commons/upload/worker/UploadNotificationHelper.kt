@@ -163,16 +163,22 @@ class UploadNotificationHelper
         @SuppressLint("StringFormatInvalid", "MissingPermission")
         fun showFailedNotification(contribution: Contribution) {
             val displayTitle = contribution.media.displayTitle
+            // The file is on Commons, only its captions and depicts wait in the pending uploads
+            val metadataPending = contribution.state == Contribution.STATE_METADATA_PENDING
             currentNotification.setContentIntent(
                 getPendingIntent(
                     UploadProgressActivity::class.java,
-                    UploadProgressActivity.TAB_FAILED,
+                    if (metadataPending) UploadProgressActivity.TAB_PENDING else UploadProgressActivity.TAB_FAILED,
                 ),
             )
             currentNotification
                 .setContentTitle(
                     context.getString(
-                        R.string.upload_failed_notification_title,
+                        if (metadataPending) {
+                            R.string.upload_metadata_pending_notification_title
+                        } else {
+                            R.string.upload_failed_notification_title
+                        },
                         displayTitle,
                     ),
                 ).setContentText(context.getString(R.string.upload_failed_notification_subtitle))

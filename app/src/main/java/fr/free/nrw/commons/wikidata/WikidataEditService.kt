@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
@@ -29,6 +28,12 @@ import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+
+/** Outcome of the optional Wikidata image edit after a Commons upload. */
+internal data class ImageClaimResult(
+    val revisionId: Long? = null,
+    val skipped: Boolean = false,
+)
 
 /**
  * This class is meant to handle the Wikidata edits made through the app It will talk with MediaWiki
@@ -90,24 +95,34 @@ class WikidataEditService
             }
         }
 
-        fun createClaim(
+        /** Checks the current item before writing a claim because saved places can be stale. */
+        internal fun createClaim(
             wikidataPlace: WikidataPlace?,
             fileName: String,
             captions: Map<String, String>,
-        ): Long? {
+        ): ImageClaimResult {
             if (!(directKvStore.getBoolean("Picture_Has_Correct_Location", true))) {
                 Timber.d(
                     "Image location and nearby place location mismatched, so Wikidata item won't be edited",
                 )
-                return null
+                return ImageClaimResult()
             }
-            return addImageAndMediaLegends(wikidataPlace!!, fileName, captions)
+            val place = checkNotNull(wikidataPlace)
+            val entity = wikidataClient.getItemForImageEdit(place.id)
+            val statements = checkNotNull(entity.statements)
+            return if (!statements[IMAGE.propertyName].isNullOrEmpty()) {
+                ImageClaimResult(skipped = true)
+            } else {
+                val baseRevision = checkNotNull(entity.lastRevisionId)
+                ImageClaimResult(addImageAndMediaLegends(place, fileName, captions, baseRevision))
+            }
         }
 
-        fun addImageAndMediaLegends(
+        private fun addImageAndMediaLegends(
             wikidataItem: WikidataItem,
             fileName: String,
             captions: Map<String, String>,
+            baseRevision: Long,
         ): Long {
             val p18 =
                 SnakPartial(
@@ -143,7 +158,7 @@ class WikidataEditService
                     Arrays.asList(MEDIA_LEGENDS.propertyName),
                 )
 
-            return wikidataClient.setClaim(claim, COMMONS_APP_TAG).blockingSingle()
+            return wikidataClient.setClaim(claim, COMMONS_APP_TAG, baseRevision).blockingSingle()
         }
 
         fun handleImageClaimResult(
@@ -163,12 +178,16 @@ class WikidataEditService
             }
         }
 
+        /**
+         * @param retrying true when depicts may already be on the file from an earlier attempt
+         */
         fun addDepictionsAndCaptions(
-            uploadResult: UploadResult,
+            filename: String,
             contribution: Contribution,
+            retrying: Boolean = false,
         ): Observable<Boolean> {
             return wikiBaseClient
-                .getFileEntityId(uploadResult)
+                .getFileEntityId(filename)
                 .doOnError { throwable: Throwable? ->
                     Timber.e(
                         throwable,
@@ -182,11 +201,11 @@ class WikidataEditService
                     if (fileEntityId != null) {
                         Timber.d("EntityId for image was received successfully: %s", fileEntityId)
                         return@switchMap Observable.concat<Boolean>(
-                            depictionEdits(contribution, fileEntityId),
+                            depictionEdits(contribution, fileEntityId, retrying),
                             captionEdits(contribution, fileEntityId),
                         )
                     } else {
-                        Timber.d("Error acquiring EntityId for image: %s", uploadResult)
+                        Timber.d("Error acquiring EntityId for image: %s", filename)
                         return@switchMap Observable.empty<Boolean>()
                     }
                 }
@@ -203,15 +222,20 @@ class WikidataEditService
         private fun depictionEdits(
             contribution: Contribution,
             fileEntityId: Long,
-        ): Observable<Boolean> =
-            depictsEditor.addDepictsProperty(
-                fileEntityId.toString(),
+            retrying: Boolean,
+        ): Observable<Boolean> {
+            val depictedItems =
                 buildList {
                     for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
                         add(id)
                     }
-                },
-            )
+                }
+            return if (retrying) {
+                depictsEditor.addMissingDepicts(fileEntityId.toString(), depictedItems)
+            } else {
+                depictsEditor.addDepictsProperty(fileEntityId.toString(), depictedItems)
+            }
+        }
 
         companion object {
             const val COMMONS_APP_TAG: String = "wikimedia-commons-app"

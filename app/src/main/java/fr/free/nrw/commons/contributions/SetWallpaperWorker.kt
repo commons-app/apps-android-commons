@@ -1,3 +1,10 @@
+/**
+ * Suppressed TooGenericExceptionCaught because WallpaperManager.setBitmap can fail with
+ * IOException or with runtime exceptions such as SecurityException. These failures must be
+ * reported through a notification instead of escaping the Fresco callback.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.contributions
 
 import android.app.NotificationChannel
