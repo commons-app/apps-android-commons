@@ -126,7 +126,7 @@ class FileLoggingTree(
         val triggeringPolicy =
             SizeBasedTriggeringPolicy<ILoggingEvent>().apply {
                 context = loggerContext
-                maxFileSize = "$fileSizeInKb"
+                maxFileSize = "${fileSizeInKb}KB"
                 start()
             }
 
