@@ -269,9 +269,11 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
                 currentActions: NearbyBottomSheetActions,
             ) {
                 when (item.imageResourceId) {
-                    R.drawable.ic_round_star_border_24px,
-                    R.drawable.ic_round_star_filled_24px,
-                    -> handleBookmarkClick(place, currentActions)
+                    R.drawable.ic_round_star_border_24px -> handleBookmarkClick(place, currentActions)
+                    R.drawable.ic_round_star_filled_24px -> {
+                        handleBookmarkClick(place, currentActions)
+                        updateBookmarkButtonImage(place, currentActions)
+                    }
                     R.drawable.ic_directions_black_24dp -> handleGeoCoordinates(context, place.location)
                     R.drawable.ic_feedback_black_24dp -> launchFeedback(context, place)
                     else -> dispatchSiteLink(context, place, item.imageResourceId)
@@ -284,6 +286,22 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
             ) {
                 currentActions.onBookmarkToggled(place)
                 bottomSheetAdapter?.toggleBookmarkIcon()
+            }
+
+            private fun updateBookmarkButtonImage(
+                place: Place,
+                currentActions: NearbyBottomSheetActions,
+            ) {
+                val bookmarkDao = bookmarkDaoProvider?.invoke()
+                val adapter = bottomSheetAdapter
+                if (bookmarkDao != null && adapter != null) {
+                    NearbyUtil.getBookmarkLocationExists(
+                        bookmarkDao,
+                        place.name,
+                        currentActions.getCoroutineScope(),
+                        adapter,
+                    )
+                }
             }
 
             private fun launchFeedback(

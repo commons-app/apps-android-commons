@@ -117,25 +117,16 @@ class NearbyParentFragment(
     MediaDetailProvider by helpers.mediaDetailHelper,
     WikidataP18EditListener by helpers.statusHelper {
 
+    constructor() : this(NearbyHelpers())
+
     val fileExportHelper: NearbyFileExportHelper get() = helpers.fileExportHelper
     val markerOverlayHelper: NearbyMarkerOverlayHelper get() = helpers.markerOverlayHelper
     val bottomSheetHelper: NearbyBottomSheetHelper get() = helpers.bottomSheetHelper
     val locationHelper: NearbyLocationHelper get() = helpers.locationHelper
     val viewportHelper: NearbyViewportHelper get() = helpers.viewportHelper
 
-    @VisibleForTesting
-    var filterHelper: NearbyFilterHelper
-        get() = helpers.filterHelper
-        set(value) {
-            // Backwards-compatible setter for testing
-        }
-
-    @VisibleForTesting
-    var fabHelper: NearbyFabHelper
-        get() = helpers.fabHelper
-        set(value) {
-            // Backwards-compatible setter for testing
-        }
+    val filterHelper: NearbyFilterHelper get() = helpers.filterHelper
+    val fabHelper: NearbyFabHelper get() = helpers.fabHelper
 
     val mediaDetailHelper: NearbyMediaDetailHelper get() = helpers.mediaDetailHelper
     val placesQueryHelper: NearbyPlacesQueryHelper get() = helpers.placesQueryHelper
