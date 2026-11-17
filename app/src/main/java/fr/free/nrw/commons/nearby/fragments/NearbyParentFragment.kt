@@ -591,7 +591,8 @@ class NearbyParentFragment :
         initNearbyFilter()
         addCheckBoxCallback()
         if (!isCameFromExploreMap()) {
-            moveCameraToPosition(lastMapFocus!!)
+            // Jump instead of animating from 0,0: searches use the visible map area
+            binding?.map?.controller?.setCenter(lastMapFocus)
         }
         moveCameraToPosition(lastMapFocus!!)
         initRvNearbyList()
