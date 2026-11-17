@@ -77,13 +77,13 @@ class SettingsFragmentUnitTests {
 
         Whitebox.setInternalState(fragment, "recentLanguagesDao", recentLanguagesDao)
         Whitebox.setInternalState(
-            fragment,
+            fragment.languageController,
             "recentLanguagesTextView",
             recentLanguagesTextView,
         )
-        Whitebox.setInternalState(fragment, "separator", separator)
+        Whitebox.setInternalState(fragment.languageController, "separator", separator)
         Whitebox.setInternalState(
-            fragment,
+            fragment.languageController,
             "languageHistoryListView",
             languageHistoryListView,
         )
@@ -122,40 +122,21 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testGetCurrentLanguageCode() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "getCurrentLanguageCode",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "")
+        fragment.languageController.getCurrentLanguageCode("")
     }
 
     @Test
     @Throws(Exception::class)
     fun testSaveLanguageValueCase_appUiDefaultLanguagePref() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "saveLanguageValue",
-                String::class.java,
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "", "appUiDefaultLanguagePref")
+        fragment.languageController.saveLanguageValue("", "appUiDefaultLanguagePref")
     }
 
     @Test
     @Throws(Exception::class)
     fun `Test prepareAppLanguages when recently used languages is empty`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "prepareAppLanguages",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "appUiDefaultLanguagePref")
+        fragment.languageController.prepareAppLanguages("appUiDefaultLanguagePref")
         verify(recentLanguagesDao, times(1)).getRecentLanguages()
     }
 
@@ -174,13 +155,7 @@ class SettingsFragmentUnitTests {
                     Language("English", "en"),
                 ),
             )
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "prepareAppLanguages",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "appUiDefaultLanguagePref")
+        fragment.languageController.prepareAppLanguages("appUiDefaultLanguagePref")
         verify(recentLanguagesDao, times(2)).getRecentLanguages()
     }
 
@@ -188,26 +163,14 @@ class SettingsFragmentUnitTests {
     @Throws(Exception::class)
     fun testSaveLanguageValueCase_descriptionDefaultLanguagePref() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "saveLanguageValue",
-                String::class.java,
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "", "descriptionDefaultLanguagePref")
+        fragment.languageController.saveLanguageValue("", "descriptionDefaultLanguagePref")
     }
 
     @Test
     @Throws(Exception::class)
     fun testHideRecentLanguagesSection() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "hideRecentLanguagesSection",
-            )
-        method.isAccessible = true
-        method.invoke(fragment)
+        fragment.languageController.hideRecentLanguagesSection()
         verify(recentLanguagesTextView, times(1)).visibility = any()
         verify(separator, times(1)).visibility = any()
         verify(languageHistoryListView, times(1)).visibility = any()
@@ -226,30 +189,14 @@ class SettingsFragmentUnitTests {
                     mutableMapOf(),
                 ),
             )
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "onRecentLanguageClicked",
-                String::class.java,
-                Dialog::class.java,
-                AdapterView::class.java,
-                Int::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, "test", Mockito.mock(Dialog::class.java), adapterView, 0)
+        fragment.languageController.onRecentLanguageClicked("test", Mockito.mock(Dialog::class.java), adapterView, 0)
         verify(recentLanguagesDao, times(1)).findRecentLanguage(any())
         verify(adapterView, times(2)).adapter
     }
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is empty`() {
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "setUpRecentLanguagesSection",
-                List::class.java,
-                HashMap::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(fragment, emptyList<Language>(), hashMapOf<Int, String>())
+        fragment.languageController.setUpRecentLanguagesSection(emptyList<Language>(), hashMapOf<Int, String>())
         verify(languageHistoryListView, times(1)).visibility = View.GONE
         verify(separator, times(1)).visibility = View.GONE
         verify(recentLanguagesTextView, times(1)).visibility = View.GONE
@@ -257,15 +204,7 @@ class SettingsFragmentUnitTests {
 
     @Test
     fun `Test setUpRecentLanguagesSection when list is not empty`() {
-        val method: Method =
-            SettingsFragment::class.java.getDeclaredMethod(
-                "setUpRecentLanguagesSection",
-                List::class.java,
-                HashMap::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(
-            fragment,
+        fragment.languageController.setUpRecentLanguagesSection(
             listOf(
                 Language("Bengali", "bn"),
                 Language("Bengali", "bn"),
