@@ -1,5 +1,10 @@
 package fr.free.nrw.commons.nearby.presenter
 
+import androidx.lifecycle.LifecycleCoroutineScope
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.timeout
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
@@ -11,12 +16,15 @@ import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
+import io.reactivex.Completable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -26,6 +34,8 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 /**
  * Unit test suite for [NearbyPlaceDetailsLoader].
@@ -168,5 +178,77 @@ class NearbyPlaceDetailsLoaderTest {
             verify(view).setFilterState()
             verify(view).updateListFragment(listOf(place))
             verifyNoMoreInteractions(view)
+        }
+
+    @Test
+    fun testLoadPlacesDataAsyncMatchesRowsToPlacesByQid() =
+        runBlocking {
+            stubForLoading()
+            val groups = listOf(greyGroup("Q1"), greyGroup("Q2"))
+            // Wikidata gives one row per class, and not in the order the places were requested
+            whenever(nearbyController.getPlaces(any())).thenReturn(
+                listOf(fetchedPlace("Q2"), fetchedPlace("Q1"), fetchedPlace("Q1")),
+            )
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            verify(nearbyController, times(1)).getPlaces(any())
+            assertEquals(
+                listOf("Name of Q1", "Name of Q2"),
+                NearbyController.markerLabelList.map { it.place.name },
+            )
+        }
+
+    @Test
+    fun testLoadPlacesDataAsyncProcessesBatchesAsTheyArrive() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // 11 places make one batch of 10 and one batch of 1
+            val groups = (0..10).map { greyGroup("Q$it") }
+            val secondBatchCanAnswer = CountDownLatch(1)
+            whenever(nearbyController.getPlaces(any())).thenAnswer {
+                val places = it.getArgument<List<Place>>(0)
+                if (places.size == 1) secondBatchCanAnswer.await(10, TimeUnit.SECONDS)
+                places.map { place -> fetchedPlace(place.entityID) }
+            }
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            try {
+                verify(placesRepository, timeout(5000).times(10)).save(any())
+            } finally {
+                secondBatchCanAnswer.countDown()
+            }
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            verify(placesRepository, times(11)).save(any())
+        }
+
+    private suspend fun stubForLoading() {
+        // the real Main dispatcher, so that the delay in schedulePlacesUpdate ends
+        Dispatchers.setMain(Dispatchers.Unconfined)
+        whenever(placesRepository.save(any())).thenReturn(Completable.complete())
+        whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenReturn(false)
+    }
+
+    private fun scopeWith(job: Job): LifecycleCoroutineScope =
+        mock<LifecycleCoroutineScope>().also {
+            whenever(it.coroutineContext).thenReturn(job)
+        }
+
+    private fun greyGroup(qid: String) =
+        MarkerPlaceGroup(
+            false,
+            Place().apply {
+                entityID = qid
+                name = ""
+                location = LatLng(qid.drop(1).toDouble(), 0.0, 0f)
+            },
+        )
+
+    private fun fetchedPlace(qid: String) =
+        Place().apply {
+            entityID = qid
+            name = "Name of $qid"
         }
 }
