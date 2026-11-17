@@ -27,6 +27,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.logging.CrashLoggingExceptionHandler
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
@@ -172,6 +173,11 @@ class CommonsApplication : MultiDexApplication() {
 
         Timber.plant(tree)
         Timber.plant(DebugTree())
+
+        // Must run after ACRA is set up, so that ACRA still gets the crash
+        Thread.setDefaultUncaughtExceptionHandler(
+            CrashLoggingExceptionHandler(tree::logCrash, Thread.getDefaultUncaughtExceptionHandler()),
+        )
     }
 
     /**
