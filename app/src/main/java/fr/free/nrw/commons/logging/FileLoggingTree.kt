@@ -57,6 +57,19 @@ class FileLoggingTree(
     }
 
     /**
+     * Writes a crash to the log file right away, without the executor,
+     * so that it is saved before the app closes.
+     * @param thread The thread that crashed.
+     * @param throwable The crash.
+     */
+    fun logCrash(
+        thread: Thread,
+        throwable: Throwable,
+    ) {
+        logMessage(Log.ERROR, CRASH_TAG, "Crash on thread ${thread.name}\n${throwable.stackTraceToString()}")
+    }
+
+    /**
      * Logs a message based on the priority.
      * @param priority The priority of the log message.
      * @param tag The tag associated with the log message.
@@ -136,5 +149,9 @@ class FileLoggingTree(
                 Logger.ROOT_LOGGER_NAME,
             ) as ch.qos.logback.classic.Logger
         rootLogger.addAppender(rollingFileAppender)
+    }
+
+    private companion object {
+        const val CRASH_TAG = "Crash"
     }
 }
