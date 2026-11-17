@@ -48,9 +48,6 @@ class PageTitle : Parcelable {
      */
     private val namespace: String?
 
-    // Legacy: This is the localized namespace name (File, Special, Talk, etc) but
-    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
-    //       are broken.
     private val text: String
     val fragment: String?
     var thumbUrl: String?
