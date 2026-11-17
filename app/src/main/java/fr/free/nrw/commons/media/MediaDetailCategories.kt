@@ -44,11 +44,8 @@ internal fun MediaDetailFragment.updateCategoryList(s: String) {
 /**
  * Updates the categories
  */
-internal fun MediaDetailFragment.refreshCategoryList() {
-    val allCategories: MutableList<String> =
-        ArrayList(
-            media?.addedCategories!!,
-        )
+internal fun MediaDetailFragment.refreshCategoryList(categories: List<String>) {
+    val allCategories: MutableList<String> = ArrayList(categories)
     media!!.categories = allCategories
     if (allCategories.isEmpty()) {
         // Stick in a filler element.

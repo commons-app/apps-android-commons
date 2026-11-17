@@ -547,8 +547,8 @@ class MediaDetailFragment :
     }
 
     /** Refreshes categories after the category editor updates the file. */
-    fun updateCategories() {
-        refreshCategoryList()
+    fun updateCategories(categories: List<String>) {
+        refreshCategoryList(categories)
     }
 
     override fun updateCategoryDisplay(categories: List<String>?): Boolean {

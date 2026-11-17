@@ -1,29 +1,41 @@
 package fr.free.nrw.commons.upload
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doThrow
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
 import fr.free.nrw.commons.upload.categories.CategorySearchResults
 import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
 import media
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -211,5 +223,86 @@ class CategoriesPresenterTest {
     fun testUpdateCategories() {
         categoriesPresenter.onAttachView(view)
         categoriesPresenter.updateCategories(media(), "[[Category:Test]]")
+    }
+
+    @Test
+    fun `updateCategories sends the saved categories to the details screen and closes`() {
+        saveCategories(Single.just(true))
+
+        verify(categoryEditHelper).makeCategoryEdit(any(), any(), eq(listOf("New", "Old")), any())
+        verify(view).dismissProgressDialog()
+        verify(repository).cleanup()
+        verify(view).refreshCategories(listOf("New", "Old"))
+        verify(view).goBackToPreviousScreen()
+        assertTrue(swallowedErrors.isEmpty())
+    }
+
+    @Test
+    fun `updateCategories closes the editor even if refreshing the details screen fails`() {
+        val refreshError = NullPointerException()
+        doThrow(refreshError).whenever(view).refreshCategories(any())
+
+        saveCategories(Single.just(true))
+
+        inOrder(view) {
+            verify(view).goBackToPreviousScreen()
+            verify(view).refreshCategories(listOf("New", "Old"))
+        }
+        assertEquals(listOf(refreshError), swallowedErrors)
+    }
+
+    @Test
+    fun `updateCategories keeps the selection if the editor cannot close`() {
+        doThrow(IllegalStateException()).whenever(view).goBackToPreviousScreen()
+
+        saveCategories(Single.just(true))
+
+        verify(repository, never()).cleanup()
+        verify(view, never()).refreshCategories(any())
+    }
+
+    @Test
+    fun `updateCategories keeps the selection when the edit is not saved`() {
+        saveCategories(Single.just(false))
+
+        verify(view).dismissProgressDialog()
+        verify(view).showError(R.string.category_edit_helper_edit_message_else)
+        verify(repository, never()).cleanup()
+        verify(view, never()).goBackToPreviousScreen()
+    }
+
+    @Test
+    fun `updateCategories keeps the selection when the edit fails`() {
+        saveCategories(Single.error(IOException()))
+
+        verify(view).dismissProgressDialog()
+        verify(view).showError(R.string.category_edit_helper_edit_message_else)
+        verify(repository, never()).cleanup()
+        verify(view, never()).goBackToPreviousScreen()
+    }
+
+    private val categoryEditHelper = mock<CategoryEditHelper>()
+    private val swallowedErrors = mutableListOf<Throwable>()
+
+    private fun saveCategories(result: Single<Boolean>) {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        // errors thrown from onSuccess go to this handler, which the app leaves empty
+        RxJavaPlugins.setErrorHandler { swallowedErrors.add(it) }
+        categoriesPresenter.categoryEditHelper = categoryEditHelper
+        categoriesPresenter.onAttachView(view)
+        whenever(view.getFragmentContext()).thenReturn(mock<Context>())
+        whenever(view.getExistingCategories()).thenReturn(listOf("Old"))
+        whenever(repository.getSelectedCategories()).thenReturn(listOf(categoryItem("New")))
+        whenever(repository.getSelectedExistingCategories()).thenReturn(listOf("Old"))
+        whenever(categoryEditHelper.makeCategoryEdit(any(), any(), any(), any())).thenReturn(result)
+
+        categoriesPresenter.updateCategories(media(), "[[Category:Old]]")
+    }
+
+    @After
+    fun tearDown() {
+        RxJavaPlugins.reset()
+        RxAndroidPlugins.reset()
     }
 }
