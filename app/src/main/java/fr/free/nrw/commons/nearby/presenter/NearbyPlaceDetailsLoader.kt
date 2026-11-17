@@ -10,6 +10,7 @@ import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -198,15 +199,23 @@ class NearbyPlaceDetailsLoader(
             try {
                 val fetchedPlaces =
                     nearbyController.getPlaces(indices.map { updatedGroups[it].place })
+                // The query gives one row per class, picture etc. in no fixed order, so match by QID
+                val fetchedPlacesById = fetchedPlaces.groupBy { it.wikiDataEntityId }
                 collectResults.send(
-                    fetchedPlaces.mapIndexed { index, place ->
-                        Pair(
-                            indices[index],
-                            MarkerPlaceGroup(
-                                bookmarkLocationDao.findBookmarkLocation(place.name),
-                                place,
-                            ),
-                        )
+                    indices.map { i ->
+                        val place =
+                            fetchedPlacesById[updatedGroups[i].place.wikiDataEntityId]?.first()
+                        if (place == null) {
+                            Pair(i, updatedGroups[i])
+                        } else {
+                            Pair(
+                                i,
+                                MarkerPlaceGroup(
+                                    bookmarkLocationDao.findBookmarkLocation(place.name),
+                                    place,
+                                ),
+                            )
+                        }
                     },
                 )
             } catch (e: CancellationException) {
@@ -248,7 +257,7 @@ class NearbyPlaceDetailsLoader(
 
     /**
      * Launches a specific number of threads to retrieve Place data in parallel from the
-     * WikiData servers.
+     * WikiData servers. It does not wait for them, so that results can be processed as they arrive.
      *
      * @param numThreads The number of threads to launch in parallel
      * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
@@ -256,12 +265,12 @@ class NearbyPlaceDetailsLoader(
      * @param updatedGroups List containing Place data
      * @param collectResults Holds the Place data fetched from Wikidata.
      */
-    private suspend fun launchFetchPlacesThreads(
+    private fun CoroutineScope.launchFetchPlacesThreads(
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
         collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
-    ) = coroutineScope {
+    ) {
         repeat(numThreads) {
             launch(Dispatchers.IO) {
                 fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
