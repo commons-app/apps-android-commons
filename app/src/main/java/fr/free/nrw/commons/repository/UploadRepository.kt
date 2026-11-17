@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.repository
 
 import android.net.Uri
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
@@ -21,6 +22,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
+import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -534,7 +536,13 @@ class UploadRepository
                         null,
                     )
                 fromWikidataQuery?.firstOrNull()
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e("Error fetching nearby places: %s", e.message)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e("Error fetching nearby places: %s", e.message)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e("Error fetching nearby places: %s", e.message)
                 null
             }
