@@ -47,6 +47,7 @@ class PageTitle : Parcelable {
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.
      */
     private val namespace: String?
+
     private val text: String
     val fragment: String?
     var thumbUrl: String?
@@ -56,7 +57,7 @@ class PageTitle : Parcelable {
     var description: String? = null
     private val properties: PageProperties?
 
-    // TODO: remove after the restbase endpoint supports ZH variants.
+    // Needed until the restbase endpoint supports ZH variants.
     private var convertedText: String? = null
 
     constructor(namespace: String?, text: String, fragment: String?, thumbUrl: String?, wiki: WikiSite) {
@@ -191,7 +192,7 @@ class PageTitle : Parcelable {
         }
     }
 
-    // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
+    // Possible improvement: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
         get() =
             namespace?.let { addUnderscores(it) + ":" + getTextWithoutSpaces() }
@@ -301,7 +302,7 @@ class PageTitle : Parcelable {
             if (TextUtils.isEmpty(fragment)) {
                 PageTitle(prefixedText, wiki, null, null as PageProperties?)
             } else {
-                // TODO: this class needs some refactoring to allow passing in a fragment
+                // This class would need some refactoring to allow passing in a fragment
                 // without having to do string manipulations.
                 PageTitle("$prefixedText#$fragment", wiki, null, null as PageProperties?)
             }

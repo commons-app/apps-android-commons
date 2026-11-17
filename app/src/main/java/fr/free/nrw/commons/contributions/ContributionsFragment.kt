@@ -290,7 +290,8 @@ class ContributionsFragment(
                 )
             } else if (contribution.isRetriedAfterFailure()) {
                 val retries = contribution.retries
-                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
+                // The UX here could be improved, see:
+                // https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
                 // Limit the number of retries for a failed upload
                 // to handle cases like invalid filename as such uploads
                 // will never be successful
@@ -303,7 +304,7 @@ class ContributionsFragment(
                     )
                     restartUpload(contribution)
                 } else {
-                    // TODO: Show the exact reason for failure
+                    // Only a generic message is shown, showing the exact reason for the failure would be more helpful
                     Toast
                         .makeText(
                             context,
