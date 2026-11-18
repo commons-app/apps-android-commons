@@ -99,6 +99,7 @@ class UploadController
             contentResolver: ContentResolver,
             contribution: Contribution,
         ): Long {
+            var resolvedLength = contribution.dataLength
             try {
                 if (contribution.dataLength <= 0) {
                     Timber.d(
@@ -106,26 +107,29 @@ class UploadController
                         contribution.localUri,
                     )
 
-                    contentResolver
-                        .openAssetFileDescriptor(
-                            Uri.fromFile(File(contribution.localUri!!.path!!)),
-                            "r",
-                        )?.use {
-                            return if (it.length != -1L) {
-                                it.length
-                            } else {
-                                countBytes(contentResolver.openInputStream(contribution.localUri))
+                    val localUri = contribution.localUri
+                    val localPath = localUri?.path
+                    if (localUri != null && localPath != null) {
+                        contentResolver
+                            .openAssetFileDescriptor(Uri.fromFile(File(localPath)), "r")
+                            ?.use {
+                                resolvedLength =
+                                    if (it.length != -1L) {
+                                        it.length
+                                    } else {
+                                        contentResolver.openInputStream(localUri)?.let { stream ->
+                                            countBytes(stream)
+                                        } ?: contribution.dataLength
+                                    }
                             }
-                        }
+                    }
                 }
             } catch (e: IOException) {
-                Timber.e(e, "Exception occurred while uploading image")
-            } catch (e: NullPointerException) {
                 Timber.e(e, "Exception occurred while uploading image")
             } catch (e: SecurityException) {
                 Timber.e(e, "Exception occurred while uploading image")
             }
-            return contribution.dataLength
+            return resolvedLength
         }
 
         private fun resolveDateTakenOrNow(

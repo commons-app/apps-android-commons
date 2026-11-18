@@ -21,6 +21,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.activity.ComponentActivity
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.ControllerListener
@@ -35,6 +36,7 @@ import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
@@ -623,5 +625,42 @@ class MediaDetailFragmentUnitTests {
             as ControllerListener<ImageInfo?>
         listener.onIntermediateImageSet("id", null)
         assertEquals(View.GONE, binding.mediaDetailImageProgressBar.visibility)
+    }
+
+    @Test
+    fun testFailedFullImageKeepsTheShapeOfTheLowResolutionImage() {
+        val listener = attachAndLayOut()
+        val lowResolution = mock(ImageInfo::class.java)
+        `when`(lowResolution.width).thenReturn(400)
+        `when`(lowResolution.height).thenReturn(600)
+
+        listener.onIntermediateImageSet("id", lowResolution)
+        listener.onFailure("id", Throwable("unknown image format"))
+
+        val width = binding.mediaDetailScrollView.width
+        assertEquals(width, binding.mediaDetailMediaContainer.layoutParams.width)
+        assertEquals(width * 600 / 400, binding.mediaDetailMediaContainer.layoutParams.height)
+    }
+
+    @Test
+    fun testFailureWithoutAnyImageUsesTheFixedHeight() {
+        val listener = attachAndLayOut()
+
+        listener.onFailure("id", Throwable("not found"))
+
+        assertEquals(
+            activity.resources.getDimensionPixelSize(R.dimen.dimen_250),
+            binding.mediaDetailMediaContainer.layoutParams.height,
+        )
+    }
+
+    /** Shows the binding in a visible activity, lays it out and returns the image listener. */
+    private fun attachAndLayOut(): ControllerListener<ImageInfo?> {
+        Robolectric.buildActivity(ComponentActivity::class.java).setup().get().setContentView(binding.root)
+        shadowOf(Looper.getMainLooper()).idle()
+        // Tall enough that the image is never reduced to leave room for the metadata.
+        fragment.frameLayoutHeight = Int.MAX_VALUE / 2
+        @Suppress("UNCHECKED_CAST")
+        return Whitebox.getInternalState(fragment, "aspectRatioListener") as ControllerListener<ImageInfo?>
     }
 }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import com.google.gson.JsonParseException
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -27,6 +28,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 import java.lang.reflect.Method
 
 class UploadRepositoryUnitTest {
@@ -306,7 +308,25 @@ class UploadRepositoryUnitTest {
                 0.1,
                 null,
             ),
-        ).thenThrow(Exception())
+        ).thenThrow(IOException("offline"))
+        assertEquals(
+            repository.checkNearbyPlaces(0.0, 0.0),
+            null,
+        )
+    }
+
+    @Test
+    fun testCheckNearbyPlacesWithMalformedResponse() {
+        `when`(
+            nearbyPlaces.getFromWikidataQuery(
+                LatLng(0.0, 0.0, 0.0f),
+                java.util.Locale
+                    .getDefault()
+                    .language,
+                0.1,
+                null,
+            ),
+        ).thenThrow(JsonParseException("malformed"))
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
             null,
