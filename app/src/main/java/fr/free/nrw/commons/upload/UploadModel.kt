@@ -27,6 +27,8 @@ class UploadModelLicenseDependencies
     @Inject
     constructor(
         @param:Named("licenses") val licenses: List<String>,
+        // JsonKvStore is included here because UploadModel uses it
+        // specifically for reading and persisting default license preferences
         @param:Named("default_preferences") val store: JsonKvStore,
         @param:Named("licenses_by_name") val licensesByName: Map<String, String>,
     )
