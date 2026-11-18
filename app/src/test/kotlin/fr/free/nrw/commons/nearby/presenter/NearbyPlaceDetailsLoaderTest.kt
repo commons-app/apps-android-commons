@@ -38,6 +38,7 @@ import org.mockito.MockitoAnnotations
 import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Unit test suite for [NearbyPlaceDetailsLoader].
@@ -266,6 +267,52 @@ class NearbyPlaceDetailsLoaderTest {
                 listOf(1.0, 5.0),
                 NearbyController.markerLabelList.map { it.place.location.latitude },
             )
+        }
+
+    @Test
+    fun testBookmarkMadeWhileItsBatchIsLoadingIsKept() =
+        runBlocking<Unit> {
+            Dispatchers.setMain(Dispatchers.Unconfined)
+            // 20 places make batch A (Q0-Q9) and batch B (Q10-Q19)
+            val groups = (0..19).map { greyGroup("Q$it") }
+            val q10Bookmarked = AtomicBoolean(false)
+            whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenAnswer {
+                it.getArgument<String>(0) == "Name of Q10" && q10Bookmarked.get()
+            }
+            // Hold the collector while it applies batch A, until batch B is fetched and waiting
+            val collectorInA = CountDownLatch(1)
+            val releaseCollector = CountDownLatch(1)
+            val firstSave = AtomicBoolean(true)
+            whenever(placesRepository.save(any())).thenAnswer {
+                if (firstSave.getAndSet(false)) {
+                    collectorInA.countDown()
+                    releaseCollector.await(10, TimeUnit.SECONDS)
+                }
+                Completable.complete()
+            }
+            val batchBFetched = CountDownLatch(1)
+            whenever(nearbyController.getPlaces(any())).thenAnswer {
+                val places = it.getArgument<List<Place>>(0)
+                if (places.any { place -> place.entityID == "Q10" }) {
+                    collectorInA.await(10, TimeUnit.SECONDS)
+                    batchBFetched.countDown()
+                }
+                places.map { place -> fetchedPlace(place.entityID) }
+            }
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            assertTrue("collector reached batch A", collectorInA.await(10, TimeUnit.SECONDS))
+            assertTrue("batch B fetched", batchBFetched.await(10, TimeUnit.SECONDS))
+            Thread.sleep(300) // batch B finishes on its worker and waits for the collector
+            // the user opens pin Q10 and bookmarks it, batch A will apply this
+            q10Bookmarked.set(true)
+            val clicked = fetchedPlace("Q10").apply { location = groups[10].place.location }
+            loader.handlePinClicked(clicked)
+            loader.bookmarkChangedPlaces.add(clicked)
+            releaseCollector.countDown()
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertTrue("Q10 still bookmarked", NearbyController.markerLabelList[10].isBookmarked)
         }
 
     private suspend fun stubForLoading() {

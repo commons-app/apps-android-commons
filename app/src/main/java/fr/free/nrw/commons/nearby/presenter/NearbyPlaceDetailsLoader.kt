@@ -192,7 +192,7 @@ class NearbyPlaceDetailsLoader(
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup?>>>,
+        collectResults: Channel<List<Pair<Int, Place?>>>,
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
@@ -204,18 +204,7 @@ class NearbyPlaceDetailsLoader(
                 val usedIds = mutableSetOf<String?>()
                 collectResults.send(
                     indices.map { i ->
-                        val place = fetchedPlacesById.placeFor(updatedGroups[i].place.wikiDataEntityId, usedIds)
-                        if (place == null) {
-                            Pair(i, null)
-                        } else {
-                            Pair(
-                                i,
-                                MarkerPlaceGroup(
-                                    bookmarkLocationDao.findBookmarkLocation(place.name),
-                                    place,
-                                ),
-                            )
-                        }
+                        Pair(i, fetchedPlacesById.placeFor(updatedGroups[i].place.wikiDataEntityId, usedIds))
                     },
                 )
             } catch (e: CancellationException) {
@@ -225,23 +214,13 @@ class NearbyPlaceDetailsLoader(
                 // HTTP request failed. Try individual places
                 for (i in indices) {
                     launch {
-                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup?>>()
+                        val onePlaceBatch = mutableListOf<Pair<Int, Place?>>()
                         try {
                             val fetchedPlace =
                                 nearbyController.getPlaces(
                                     mutableListOf(updatedGroups[i].place),
                                 )
-                            onePlaceBatch.add(
-                                Pair(
-                                    i,
-                                    MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(
-                                            fetchedPlace[0].name,
-                                        ),
-                                        fetchedPlace[0],
-                                    ),
-                                ),
-                            )
+                            onePlaceBatch.add(Pair(i, fetchedPlace[0]))
                         } catch (e: CancellationException) {
                             throw e
                         } catch (e: Exception) {
@@ -269,7 +248,7 @@ class NearbyPlaceDetailsLoader(
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup?>>>,
+        collectResults: Channel<List<Pair<Int, Place?>>>,
     ) {
         repeat(numThreads) {
             launch(Dispatchers.IO) {
@@ -286,17 +265,18 @@ class NearbyPlaceDetailsLoader(
      * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
      * from WikiData
      */
-    private fun processResults(
-        resultList: List<Pair<Int, MarkerPlaceGroup?>>,
+    private suspend fun processResults(
+        resultList: List<Pair<Int, Place?>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
     ) {
-        for ((index, fetched) in resultList) {
-            val fetchedPlaceGroup = fetched ?: continue
+        for ((index, fetchedPlace) in resultList) {
+            fetchedPlace ?: continue
             val existingPlace = updatedGroups[index].place
             val finalPlaceGroup =
                 MarkerPlaceGroup(
-                    fetchedPlaceGroup.isBookmarked,
-                    fetchedPlaceGroup.place.apply {
+                    // Read it now, not when the batch was fetched: the user may have changed it since
+                    bookmarkLocationDao.findBookmarkLocation(fetchedPlace.name),
+                    fetchedPlace.apply {
                         location = existingPlace.location
                         distance = existingPlace.distance
                         isMonument = existingPlace.isMonument
@@ -412,7 +392,7 @@ class NearbyPlaceDetailsLoader(
                 val batchedIndicesToFetch =
                     createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup?>>>(Channel.Factory.UNLIMITED)
+                val collectResults = Channel<List<Pair<Int, Place?>>>(Channel.Factory.UNLIMITED)
 
                 launchFetchPlacesThreads(
                     LoadPlacesAsyncOptions.CONNECTION_COUNT,
