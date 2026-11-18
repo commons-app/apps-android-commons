@@ -20,18 +20,44 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Singleton
-class UploadModel
+/**
+ * Encapsulates license and preference dependencies required by UploadModel.
+ */
+class UploadModelLicenseDependencies
     @Inject
-    internal constructor(
+    constructor(
         @param:Named("licenses") val licenses: List<String>,
         @param:Named("default_preferences") val store: JsonKvStore,
         @param:Named("licenses_by_name") val licensesByName: Map<String, String>,
+    )
+
+/**
+ * Encapsulates Android context, session, and service dependencies required by UploadModel.
+ */
+class UploadModelServiceDependencies
+    @Inject
+    constructor(
         val context: Context,
         val sessionManager: SessionManager,
         val fileProcessor: FileProcessor,
         val imageProcessingService: ImageProcessingService,
+    )
+
+@Singleton
+class UploadModel
+    @Inject
+    internal constructor(
+        val licenseDependencies: UploadModelLicenseDependencies,
+        val serviceDependencies: UploadModelServiceDependencies,
     ) {
+        val licenses: List<String> get() = licenseDependencies.licenses
+        val store: JsonKvStore get() = licenseDependencies.store
+        val licensesByName: Map<String, String> get() = licenseDependencies.licensesByName
+        val context: Context get() = serviceDependencies.context
+        val sessionManager: SessionManager get() = serviceDependencies.sessionManager
+        val fileProcessor: FileProcessor get() = serviceDependencies.fileProcessor
+        val imageProcessingService: ImageProcessingService get() = serviceDependencies.imageProcessingService
+
         var license: String? = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3)
         val items: MutableList<UploadItem> = mutableListOf()
         val compositeDisposable: CompositeDisposable = CompositeDisposable()
