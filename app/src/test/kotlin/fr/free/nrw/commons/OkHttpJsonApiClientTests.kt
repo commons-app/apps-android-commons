@@ -251,4 +251,34 @@ class OkHttpJsonApiClientTests {
             assertEquals("test", exception.message)
         }
     }
+
+    @Test
+    fun testGetPlacesAsGPXContainsValidBounds() {
+        val southwest = LatLng(12.34, 77.56, 1.0f)
+        val northeast = LatLng(12.98, 77.99, 1.0f)
+
+        val result = okHttpJsonApiClient.getPlacesAsGPX(southwest, northeast)
+
+        assertNotNull(result)
+        val expectedBounds =
+            """<bounds minlat="12.34" minlon="77.56" maxlat="12.98" maxlon="77.99"/>"""
+        assertTrue(result!!.contains(expectedBounds))
+        assertFalse(result.contains("\$MIN_LATITUDE"))
+        assertFalse(result.contains("\$MIN_LONGITUDE"))
+        assertFalse(result.contains("\$MAX_LATITUDE"))
+        assertFalse(result.contains("\$MAX_LONGITUDE"))
+    }
+
+    @Test
+    fun testGetPlacesAsGPXSwappedOrderContainsValidBounds() {
+        val point1 = LatLng(15.5, 80.5, 1.0f)
+        val point2 = LatLng(10.0, 75.0, 1.0f)
+
+        val result = okHttpJsonApiClient.getPlacesAsGPX(point1, point2)
+
+        assertNotNull(result)
+        val expectedBounds =
+            """<bounds minlat="10.0" minlon="75.0" maxlat="15.5" maxlon="80.5"/>"""
+        assertTrue(result!!.contains(expectedBounds))
+    }
 }
