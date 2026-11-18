@@ -79,8 +79,6 @@ class NearbyFilterHelper : NearbyParentFragmentContract.Filter {
     @VisibleForTesting
     var activityProvider: (() -> Activity?)? = null
 
-    var presenterProvider: (() -> NearbyParentFragmentContract.UserActions?)? = null
-
     @VisibleForTesting
     var dependencies: NearbyFilterDependencies? = null
 
@@ -154,10 +152,7 @@ class NearbyFilterHelper : NearbyParentFragmentContract.Filter {
      * Drops a custom Nearby query and loads places for the current map center again.
      */
     override fun resetAdvancedQuery() {
-        val presenter =
-            presenterProvider?.invoke()
-                ?: dependencies?.presenterProvider?.invoke()
-                ?: return
+        val presenter = dependencies?.presenterProvider?.invoke() ?: return
         presenter.setAdvancedQuery("")
         presenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }

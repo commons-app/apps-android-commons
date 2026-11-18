@@ -19,6 +19,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -84,17 +85,17 @@ class NearbyFabHelperTest {
     @Test
     fun testInitPreloadsAnimations() {
         initHelper()
-        assertNotNull(helper.fabOpen)
-        assertNotNull(helper.fabClose)
-        assertNotNull(helper.rotateForward)
-        assertNotNull(helper.rotateBackward)
+        assertNotNull(Whitebox.getInternalState<Any?>(helper, "fabOpen"))
+        assertNotNull(Whitebox.getInternalState<Any?>(helper, "fabClose"))
+        assertNotNull(Whitebox.getInternalState<Any?>(helper, "rotateForward"))
+        assertNotNull(Whitebox.getInternalState<Any?>(helper, "rotateBackward"))
     }
 
     @Test
     fun testAnimateFABsTogglesExpandedState() {
         initHelper()
         binding.fabPlus.visibility = View.VISIBLE
-        helper.isFABsExpanded = false
+        Whitebox.setInternalState(helper, "isFABsExpanded", false)
 
         helper.animateFABs()
         assertTrue(helper.isFABsExpanded)

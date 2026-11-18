@@ -26,6 +26,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
@@ -256,8 +257,9 @@ class NearbyBottomSheetHelperTest {
         assertEquals("Brandenburg Gate", titleText.toString())
         assertEquals("100m", categoryText.toString())
         assertEquals("Monument in Berlin", descriptionText.toString())
-        assertNotNull(helper.dataList)
-        assertTrue(helper.dataList!!.isNotEmpty())
+        val dataList: List<*>? = Whitebox.getInternalState(helper, "dataList")
+        assertNotNull(dataList)
+        assertTrue(dataList!!.isNotEmpty())
         assertNotNull(helper.bottomSheetAdapter)
     }
 

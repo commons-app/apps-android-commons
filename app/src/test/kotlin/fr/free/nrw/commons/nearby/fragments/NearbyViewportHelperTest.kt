@@ -146,7 +146,7 @@ class NearbyViewportHelperTest {
 
     @Test
     fun testGetLastMapFocusStored() {
-        helper.lastMapFocus = GeoPoint(10.0, 20.0)
+        helper.setLastMapFocus(GeoPoint(10.0, 20.0))
         val latLng = helper.getLastMapFocus()
         assertEquals(10.0, latLng.latitude, 0.001)
         assertEquals(20.0, latLng.longitude, 0.001)
@@ -154,7 +154,7 @@ class NearbyViewportHelperTest {
 
     @Test
     fun testGetLastMapFocusDefault() {
-        helper.lastMapFocus = null
+        helper.setLastMapFocus(null)
         val latLng = helper.getLastMapFocus()
         assertNotNull(latLng)
     }

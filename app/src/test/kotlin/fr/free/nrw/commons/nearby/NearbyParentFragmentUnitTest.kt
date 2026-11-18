@@ -26,6 +26,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
+import fr.free.nrw.commons.nearby.fragments.NearbyFilterHelper
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.wikidata.WikidataEditListener
@@ -119,8 +120,8 @@ class NearbyParentFragmentUnitTest {
         Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(fragment, "presenter", presenter)
         Whitebox.setInternalState(fragment, "isVisibleToUser", true)
-        Whitebox.setInternalState(fragment, "bottomSheetListBehavior", bottomSheetBehavior)
-        Whitebox.setInternalState(fragment, "bottomSheetDetailsBehavior", bottomSheetBehavior)
+        Whitebox.setInternalState(fragment.bottomSheetHelper, "bottomSheetListBehavior", bottomSheetBehavior)
+        Whitebox.setInternalState(fragment.bottomSheetHelper, "bottomSheetDetailsBehavior", bottomSheetBehavior)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(fragment, "wikidataEditListener", wikidataEditListener)
         Whitebox.setInternalState(fragment, "bookmarkLocationDao", bookmarkLocationDao)
@@ -129,6 +130,15 @@ class NearbyParentFragmentUnitTest {
             fragment,
             "nearbyParentFragmentInstanceReadyCallback",
             nearbyParentFragmentInstanceReadyCallback,
+        )
+        Whitebox.setInternalState(
+            fragment.filterHelper,
+            "dependencies",
+            NearbyFilterHelper.NearbyFilterDependencies(
+                placeTypeLabelsClientProvider = { null },
+                compositeDisposableProvider = { null },
+                presenterProvider = { presenter },
+            ),
         )
     }
 
@@ -302,7 +312,7 @@ class NearbyParentFragmentUnitTest {
     @Test @Ignore
     @Throws(Exception::class)
     fun testPrepareViewsForSheetPositionCaseCollapsed() {
-        Whitebox.setInternalState(fragment, "isFABsExpanded", true)
+        Whitebox.setInternalState(fragment.fabHelper, "isFABsExpanded", true)
         Whitebox.setInternalState(fragment, "mView", view)
         whenever(view.findViewById(R.id.empty_view) as View?).thenReturn(view)
         whenever(view.findViewById(R.id.empty_view1) as View?).thenReturn(view)
@@ -314,7 +324,7 @@ class NearbyParentFragmentUnitTest {
     @Test @Ignore
     @Throws(Exception::class)
     fun testPrepareViewsForSheetPositionCaseHidden() {
-        Whitebox.setInternalState(fragment, "isFABsExpanded", true)
+        Whitebox.setInternalState(fragment.fabHelper, "isFABsExpanded", true)
         Whitebox.setInternalState(fragment, "mView", view)
         whenever(view.findViewById(R.id.empty_view) as View?).thenReturn(view)
         whenever(view.findViewById(R.id.empty_view1) as View?).thenReturn(view)

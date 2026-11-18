@@ -162,7 +162,7 @@ internal fun NearbyParentFragment.initPlacesQueryHelper() {
                     )
 
                 override fun setLastMapFocus(geoPoint: GeoPoint?) {
-                    viewportHelper.lastMapFocus = geoPoint
+                    viewportHelper.setLastMapFocus(geoPoint)
                 }
 
                 override fun isMonumentsEnabled(): Boolean = isMonumentsEnabled
@@ -170,7 +170,7 @@ internal fun NearbyParentFragment.initPlacesQueryHelper() {
                 override fun isRecenterToUserLocation(): Boolean = locationHelper.recenterToUserLocation
 
                 override fun setRecenterToUserLocation(recenter: Boolean) {
-                    locationHelper.recenterToUserLocation = recenter
+                    locationHelper.setRecenterToUserLocation(recenter)
                 }
 
                 override fun showNoNearbyPlacesMessage() {
@@ -225,9 +225,9 @@ internal fun NearbyParentFragment.initStatusHelper() {
             presenterProvider = { presenter },
             locationManagerProvider = { locationManager },
             readyCallbackConsumer = { nearbyParentFragmentInstanceReadyCallback = it },
+            mediaDetailHelperProvider = { mediaDetailHelper },
         ),
     )
-    statusHelper.mediaDetailHelperProvider = { mediaDetailHelper }
     wikidataEditListener.authenticationStateListener = this
 }
 
@@ -286,8 +286,6 @@ internal fun NearbyParentFragment.initRvNearbyList() {
  */
 internal fun NearbyParentFragment.initViews() {
     Timber.d("init views called")
-    initBottomSheetHelper()
-    initFabHelper()
     if (!isMonumentsEnabled) {
         NearbyFilterState.setWlmSelected(false)
     }
@@ -329,7 +327,7 @@ internal fun NearbyParentFragment.getPlaceData(
                         val icon =
                             getCachedDrawable(
                                 requireContext(),
-                                getIconFor(updatedPlace, isBookmarked, nearestPlace),
+                                getIconFor(updatedPlace, isBookmarked, viewportHelper.nearestPlace),
                                 markerOverlayHelper.drawableCache,
                             )
                         marker.icon = icon

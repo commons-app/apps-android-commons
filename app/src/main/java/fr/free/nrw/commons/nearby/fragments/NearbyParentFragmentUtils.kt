@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby.fragments
 
+import android.content.IntentFilter
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.utils.MapUtils.NETWORK_INTENT_ACTION
 import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import timber.log.Timber
@@ -17,9 +19,12 @@ internal fun NearbyParentFragment.applyNearbyFabLayout() {
  */
 internal fun NearbyParentFragment.registerNetworkReceiver() {
     if (activity != null) {
-        val receiver = broadcastReceiver
+        val receiver = statusHelper.broadcastReceiver
         if (receiver != null) {
-            requireActivity().registerReceiver(receiver, intentFilter)
+            requireActivity().registerReceiver(
+                receiver,
+                IntentFilter(NETWORK_INTENT_ACTION),
+            )
         }
     }
 }

@@ -13,6 +13,7 @@ import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -51,7 +52,7 @@ class NearbyStatusHelperTest {
     @Test
     fun testInitializationRegistersBroadcastReceiver() {
         assertNotNull(helper.broadcastReceiver)
-        assertNull(helper.snackbar)
+        assertNull(Whitebox.getInternalState<Any?>(helper, "snackbar"))
     }
 
     @Test
@@ -70,7 +71,7 @@ class NearbyStatusHelperTest {
     fun testBackButtonClickedDelegatesToMediaDetailHelperWhenHandled() {
         val mockMediaHelper = mock<NearbyMediaDetailHelper>()
         whenever(mockMediaHelper.handleBackPress()).thenReturn(true)
-        helper.mediaDetailHelperProvider = { mockMediaHelper }
+        Whitebox.setInternalState(helper, "mediaDetailHelperProvider", { mockMediaHelper })
 
         org.junit.Assert.assertTrue(helper.backButtonClicked())
     }
@@ -80,7 +81,7 @@ class NearbyStatusHelperTest {
         val mockMediaHelper = mock<NearbyMediaDetailHelper>()
         whenever(mockMediaHelper.handleBackPress()).thenReturn(false)
         whenever(presenter.backButtonClicked()).thenReturn(true)
-        helper.mediaDetailHelperProvider = { mockMediaHelper }
+        Whitebox.setInternalState(helper, "mediaDetailHelperProvider", { mockMediaHelper })
 
         org.junit.Assert.assertTrue(helper.backButtonClicked())
         verify(presenter).backButtonClicked()
@@ -102,14 +103,14 @@ class NearbyStatusHelperTest {
     @Test
     fun testUpdateSnackbarWhenNetworkErrorOccurredUpdatesText() {
         val snackbar: com.google.android.material.snackbar.Snackbar = mock()
-        helper.snackbar = snackbar
-        helper.isNetworkErrorOccurred = true
-        helper.hasShownOfflinePinsMessage = false
+        Whitebox.setInternalState(helper, "snackbar", snackbar)
+        Whitebox.setInternalState(helper, "isNetworkErrorOccurred", true)
+        Whitebox.setInternalState(helper, "hasShownOfflinePinsMessage", false)
 
         helper.updateSnackbar(true)
 
         verify(snackbar).setText(fr.free.nrw.commons.R.string.nearby_showing_pins_offline)
-        org.junit.Assert.assertTrue(helper.hasShownOfflinePinsMessage)
+        org.junit.Assert.assertTrue(Whitebox.getInternalState(helper, "hasShownOfflinePinsMessage"))
     }
 
     @Test
@@ -126,10 +127,10 @@ class NearbyStatusHelperTest {
 
     @Test
     fun testBroadcastReceiverResetsHasShownOfflinePinsMessage() {
-        helper.hasShownOfflinePinsMessage = true
+        Whitebox.setInternalState(helper, "hasShownOfflinePinsMessage", true)
         val receiver = helper.broadcastReceiver
         assertNotNull(receiver)
         receiver?.onReceive(activity, android.content.Intent())
-        org.junit.Assert.assertFalse(helper.hasShownOfflinePinsMessage)
+        org.junit.Assert.assertFalse(Whitebox.getInternalState(helper, "hasShownOfflinePinsMessage"))
     }
 }

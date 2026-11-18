@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby.fragments
 
 import android.app.Activity
 import android.content.res.Configuration
+import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
@@ -40,9 +41,35 @@ class NearbyViewportHelper : NearbyParentFragmentContract.Viewport {
 
     @VisibleForTesting
     var lastMapFocus: GeoPoint? = null
+        internal set
 
     @VisibleForTesting
     var lastPlaceToCenter: Place? = null
+
+    internal var prevZoom: Double = 0.0
+    internal var prevLatitude: Double = 0.0
+    internal var prevLongitude: Double = 0.0
+
+    var allPhotoLatLngs: ArrayList<LatLng>? = null
+        internal set
+    var photoPinBoundingBox: BoundingBox? = null
+        internal set
+    var needsZoomOut: Boolean = true
+        internal set
+    var nearestPlace: Place? = null
+        internal set
+
+    /**
+     * Fetch Explore map camera data from fragment arguments if any.
+     */
+    fun loadExploreMapData(arguments: Bundle?) {
+        // get fragment arguments
+        if (arguments != null) {
+            prevZoom = arguments.getDouble("prev_zoom")
+            prevLatitude = arguments.getDouble("prev_latitude")
+            prevLongitude = arguments.getDouble("prev_longitude")
+        }
+    }
 
     private var mapViewProvider: (() -> MapView?)? = null
     private var activityProvider: (() -> Activity?)? = null
@@ -192,4 +219,52 @@ fun MapView.calculateBoundingBoxZoom(
         ln(mapWidth * DEGREES_IN_FULL_CIRCLE / (MAP_TILE_SIZE_PX * boundingBox.longitudeSpan)) / ln(LOG_BASE_TWO)
 
     return minOf(zoomLat, zoomLng)
+}
+
+/**
+ * Checks if fragment arguments contain data from Explore map. if present, then the user
+ * navigated from Explore using 'Show in Nearby'.
+ *
+ * @return true if user navigated from Explore map
+ */
+fun NearbyViewportHelper.isCameFromExploreMap(): Boolean =
+    prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0
+
+/** Returns the Explore map target camera position as a GeoPoint. */
+fun NearbyViewportHelper.getExploreMapGeoPoint(): GeoPoint = GeoPoint(prevLatitude, prevLongitude)
+
+/** Returns the Explore map camera zoom level. */
+fun NearbyViewportHelper.getExploreMapZoom(): Double = prevZoom
+
+/**
+ * Configures viewport camera and photo coordinates for depicts picker mode.
+ */
+fun NearbyViewportHelper.setupDepictsPickerMode(photoLatLngs: ArrayList<LatLng>?) {
+    allPhotoLatLngs = photoLatLngs
+    if (!photoLatLngs.isNullOrEmpty()) {
+        val first = photoLatLngs[0]
+        // center on average of all photos coordinates and zoom out and run only once
+        lastMapFocus = GeoPoint(first.latitude, first.longitude)
+        needsZoomOut = true
+    }
+}
+
+/** Sets the nearest place to the current map focus. */
+fun NearbyViewportHelper.setNearestPlace(place: Place?) {
+    nearestPlace = place
+}
+
+/** Sets the last map focus coordinate. */
+fun NearbyViewportHelper.setLastMapFocus(geoPoint: GeoPoint?) {
+    lastMapFocus = geoPoint
+}
+
+/** Sets the bounding box enclosing depicted photo pins. */
+fun NearbyViewportHelper.setPhotoPinBoundingBox(box: BoundingBox) {
+    photoPinBoundingBox = box
+}
+
+/** Sets whether the map camera needs to zoom out to fit photo pins. */
+fun NearbyViewportHelper.setNeedsZoomOut(needsZoom: Boolean) {
+    needsZoomOut = needsZoom
 }

@@ -75,21 +75,15 @@ fun NearbyParentFragment.initializeHelpersAndViews() {
     arguments?.let {
         isDepictsPickerMode = it.getBoolean(NearbyParentFragment.ARG_PICKER_MODE, false)
         if (isDepictsPickerMode) {
-            allPhotoLatLngs = it.getParcelableArrayList(NearbyParentFragment.ARG_PHOTO_LATLNGS)
-            if (!allPhotoLatLngs.isNullOrEmpty()) {
-                val first = allPhotoLatLngs!![0]
-                // center on average of all photos coordinates and zoom out and run only once
-                lastMapFocus = GeoPoint(first.latitude, first.longitude)
-                mapCenter = lastMapFocus
-                needsZoomOut = true
-            }
+            viewportHelper.setupDepictsPickerMode(it.getParcelableArrayList(NearbyParentFragment.ARG_PHOTO_LATLNGS))
+            locationHelper.setMapCenter(viewportHelper.lastMapFocus)
         }
     }
 
     presenter?.attachView(this)
     initAllHelpers()
-    isPermissionDenied = false
-    recenterToUserLocation = false
+    locationHelper.resetPermissionDenied()
+    locationHelper.setRecenterToUserLocation(false)
     initThemePreferences()
     initViews()
     presenter?.setActionListeners(applicationKvStore)
@@ -124,11 +118,16 @@ internal fun NearbyParentFragment.setupOsmMapAndTiles() {
         .put("Referer", "http://maps.wikimedia.org/")
 
     // Checking for last searched location
-    if (lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) {
+    if (viewportHelper.lastMapFocus == null && applicationKvStore?.getString("LastLocation") != null) {
         val locationLatLng = applicationKvStore.getString("LastLocation")!!.split(",")
-        lastMapFocus = GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble())
-    } else if (lastMapFocus == null) {
-        lastMapFocus = GeoPoint(NearbyParentFragment.DEFAULT_LATITUDE, NearbyParentFragment.DEFAULT_LONGITUDE)
+        viewportHelper.setLastMapFocus(GeoPoint(locationLatLng[0].toDouble(), locationLatLng[1].toDouble()))
+    } else if (viewportHelper.lastMapFocus == null) {
+        viewportHelper.setLastMapFocus(
+            GeoPoint(
+                NearbyParentFragment.DEFAULT_LATITUDE,
+                NearbyParentFragment.DEFAULT_LONGITUDE,
+            ),
+        )
     }
 
     val scaleBarOverlay = ScaleBarOverlay(binding?.map)
@@ -149,10 +148,10 @@ internal fun NearbyParentFragment.setupOsmMapAndTiles() {
     binding?.map?.controller?.setZoom(NearbyParentFragment.ZOOM_LEVEL.toInt())
 
     // if we came from Explore map using 'Show in Nearby', load Explore map camera position
-    if (isCameFromExploreMap()) {
+    if (viewportHelper.isCameFromExploreMap()) {
         moveCameraToPosition(
-            GeoPoint(prevLatitude, prevLongitude),
-            prevZoom,
+            viewportHelper.getExploreMapGeoPoint(),
+            viewportHelper.getExploreMapZoom(),
             1L,
         )
     }
@@ -166,7 +165,7 @@ internal fun NearbyParentFragment.setupOsmAttributionAndOverlays() {
     binding?.map?.addMapListener(
         object : MapListener {
             override fun onScroll(event: ScrollEvent): Boolean {
-                presenter?.handleMapScrolled(scope, !isNetworkErrorOccurred)
+                presenter?.handleMapScrolled(scope, !statusHelper.isNetworkErrorOccurred)
                 return true
             }
 
@@ -177,12 +176,10 @@ internal fun NearbyParentFragment.setupOsmAttributionAndOverlays() {
     binding?.map?.setMultiTouchControls(true)
     nearbyParentFragmentInstanceReadyCallback?.onReady()
     initFilterHelper()
-    if (!isCameFromExploreMap()) {
-        moveCameraToPosition(lastMapFocus!!)
+    if (!viewportHelper.isCameFromExploreMap()) {
+        moveCameraToPosition(viewportHelper.lastMapFocus!!)
     }
-    moveCameraToPosition(lastMapFocus!!)
     initRvNearbyList()
-    onResume()
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         binding?.tvAttribution?.text =
@@ -333,17 +330,17 @@ internal fun NearbyParentFragment.initMarkerOverlayHelper() {
         locationManagerProvider = { locationManager },
         mapStateProvider =
             object : NearbyMarkerOverlayHelper.MapStateProvider {
-                override fun getMapCenter(): GeoPoint? = mapCenter
+                override fun getMapCenter(): GeoPoint? = locationHelper.mapCenter
 
                 override fun getMapEventsOverlay(): MapEventsOverlay? = mapEventsOverlay
 
-                override fun isPermissionDenied(): Boolean = isPermissionDenied
+                override fun isPermissionDenied(): Boolean = locationHelper.isPermissionDenied
 
                 override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
 
-                override fun getAllPhotoLatLngs(): List<LatLng>? = allPhotoLatLngs
+                override fun getAllPhotoLatLngs(): List<LatLng>? = viewportHelper.allPhotoLatLngs
 
-                override fun getNearestPlace(): Place? = nearestPlace
+                override fun getNearestPlace(): Place? = viewportHelper.nearestPlace
             },
         markerCallback =
             object : NearbyMarkerOverlayHelper.MarkerCallback {
@@ -352,7 +349,7 @@ internal fun NearbyParentFragment.initMarkerOverlayHelper() {
                     marker: Marker,
                     isBookmarked: Boolean,
                 ) {
-                    if (!isNetworkErrorOccurred) {
+                    if (!statusHelper.isNetworkErrorOccurred) {
                         binding?.bottomSheetDetails?.dataCircularProgress?.visibility =
                             View.VISIBLE
                         binding?.bottomSheetDetails?.icon?.visibility = View.GONE
@@ -380,10 +377,15 @@ internal fun NearbyParentFragment.initMarkerOverlayHelper() {
                 }
 
                 override fun onBoundingBoxZoomCalculated(boundingBox: BoundingBox) {
-                    photoPinBoundingBox = boundingBox
+                    viewportHelper.setPhotoPinBoundingBox(boundingBox)
                     // only if multiple pins are present
-                    if (needsZoomOut && (allPhotoLatLngs?.size ?: 0) > 1) {
-                        val preferredZoom = if (prevZoom > 0.0) prevZoom else NearbyParentFragment.ZOOM_LEVEL.toDouble()
+                    if (viewportHelper.needsZoomOut && (viewportHelper.allPhotoLatLngs?.size ?: 0) > 1) {
+                        val preferredZoom =
+                            if (viewportHelper.getExploreMapZoom() > 0.0) {
+                                viewportHelper.getExploreMapZoom()
+                            } else {
+                                NearbyParentFragment.ZOOM_LEVEL.toDouble()
+                            }
                         // Calculate what zoom the bounding box WOULD use
                         // BoundingBox might zoom out too far if pins are situated far apart ,
                         // which makes the query very slow. so we restrict it
@@ -394,7 +396,7 @@ internal fun NearbyParentFragment.initMarkerOverlayHelper() {
                             ) ?: preferredZoom
                         if (boundingBoxZoom < preferredZoom) {
                             binding?.map?.controller?.setZoom(preferredZoom)
-                            binding?.map?.controller?.animateTo(lastMapFocus)
+                            binding?.map?.controller?.animateTo(viewportHelper.lastMapFocus)
                         } else {
                             binding?.map?.zoomToBoundingBox(
                                 boundingBox,
@@ -402,7 +404,7 @@ internal fun NearbyParentFragment.initMarkerOverlayHelper() {
                                 NearbyParentFragment.BOUNDING_BOX_BORDER_SIZE_PX,
                             )
                         }
-                        needsZoomOut = false
+                        viewportHelper.setNeedsZoomOut(false)
                     }
                 }
             },
@@ -443,7 +445,7 @@ internal fun NearbyParentFragment.initLocationHelper() {
                     moveCameraToPosition(targetP)
                 }
 
-                override fun isCameFromExploreMap(): Boolean = this@initLocationHelper.isCameFromExploreMap()
+                override fun isCameFromExploreMap(): Boolean = viewportHelper.isCameFromExploreMap()
 
                 override fun isDepictsPickerMode(): Boolean = isDepictsPickerMode
 
@@ -477,7 +479,7 @@ internal fun NearbyParentFragment.initViewportHelper() {
         actions =
             object : NearbyViewportHelper.NearbyViewportActions {
                 override fun onPlaceHighlighted(place: Place) {
-                    nearestPlace = place
+                    viewportHelper.setNearestPlace(place)
                     highlightNearestPlace(place)
                 }
 

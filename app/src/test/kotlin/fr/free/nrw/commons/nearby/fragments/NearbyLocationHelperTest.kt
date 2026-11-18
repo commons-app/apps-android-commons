@@ -21,6 +21,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.osmdroid.util.GeoPoint
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -132,7 +133,7 @@ class NearbyLocationHelperTest {
 
     @Test
     fun testRecenterMapWhenPreviouslyDeniedAndNowGranted() {
-        helper.isPermissionDenied = true
+        helper.markPermissionDenied()
         whenever(locationPermissionsHelper.checkLocationPermission(activity)).thenReturn(true)
         helper.recenterMap(LatLng(10.0, 20.0, 1f))
         assertFalse(helper.isPermissionDenied)
@@ -218,13 +219,13 @@ class NearbyLocationHelperTest {
         assertNotNull(fallback)
 
         val cached = LatLng(30.0, 40.0, 1f)
-        helper.lastKnownLocation = cached
+        Whitebox.setInternalState(helper, "lastKnownLocation", cached)
         assertEquals(cached, helper.getLastLocation())
     }
 
     @Test
     fun testGetMapCenterWithMapCenterGeoPoint() {
-        helper.mapCenter = GeoPoint(11.11, 22.22)
+        helper.setMapCenter(GeoPoint(11.11, 22.22))
         val center = helper.getMapCenter()
         assertEquals(11.11, center.latitude, 0.001)
         assertEquals(22.22, center.longitude, 0.001)
@@ -233,7 +234,7 @@ class NearbyLocationHelperTest {
     @Test
     fun testGetMapCenterWhenMapCenterNullWithStoredLocation() {
         whenever(applicationKvStore.getString("LastLocation")).thenReturn("33.44,55.66")
-        helper.mapCenter = null
+        helper.setMapCenter(null)
         val center = helper.getMapCenter()
         assertEquals(33.44, center.latitude, 0.001)
         assertEquals(55.66, center.longitude, 0.001)
@@ -242,8 +243,8 @@ class NearbyLocationHelperTest {
     @Test
     fun testGetMapCenterWhenMapCenterNullWithoutStoredLocation() {
         whenever(applicationKvStore.getString("LastLocation")).thenReturn(null)
-        helper.mapCenter = null
-        helper.lastKnownLocation = null
+        helper.setMapCenter(null)
+        Whitebox.setInternalState(helper, "lastKnownLocation", null as LatLng?)
         val center = helper.getMapCenter()
         assertEquals(51.50550, center.latitude, 0.001)
         assertEquals(-0.07520, center.longitude, 0.001)

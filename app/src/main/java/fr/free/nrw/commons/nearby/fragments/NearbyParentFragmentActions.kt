@@ -54,27 +54,6 @@ internal fun NearbyParentFragment.addPhotoMarkerIfDepictsMode() {
 }
 
 /**
- * Fetch Explore map camera data from fragment arguments if any.
- */
-internal fun NearbyParentFragment.loadExploreMapData() {
-    // get fragment arguments
-    if (arguments != null) {
-        prevZoom = requireArguments().getDouble("prev_zoom")
-        prevLatitude = requireArguments().getDouble("prev_latitude")
-        prevLongitude = requireArguments().getDouble("prev_longitude")
-    }
-}
-
-/**
- * Checks if fragment arguments contain data from Explore map. if present, then the user
- * navigated from Explore using 'Show in Nearby'.
- *
- * @return true if user navigated from Explore map
- */
-internal fun NearbyParentFragment.isCameFromExploreMap(): Boolean =
-    prevZoom != 0.0 || prevLatitude != 0.0 || prevLongitude != 0.0
-
-/**
  * Performs map-ready setup actions including permission verification and presenter notification.
  */
 internal fun NearbyParentFragment.performMapReadyActions() {
@@ -85,7 +64,7 @@ internal fun NearbyParentFragment.performMapReadyActions() {
         if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
             locationPermissionsHelper?.checkLocationPermission(requireActivity()) != true
         ) {
-            isPermissionDenied = true
+            locationHelper.markPermissionDenied()
         }
     }
     presenter?.onMapReady()

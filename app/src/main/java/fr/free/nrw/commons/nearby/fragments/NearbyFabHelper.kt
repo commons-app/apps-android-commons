@@ -38,35 +38,27 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
         fun onPhotoMarkerCheckRequested()
     }
 
-    @VisibleForTesting
-    var rotateBackward: Animation? = null
+    private var rotateBackward: Animation? = null
 
-    @VisibleForTesting
-    var fabClose: Animation? = null
+    private var fabClose: Animation? = null
 
-    @VisibleForTesting
-    var fabOpen: Animation? = null
+    private var fabOpen: Animation? = null
 
-    @VisibleForTesting
-    var rotateForward: Animation? = null
+    private var rotateForward: Animation? = null
 
     @VisibleForTesting
     var isFABsExpanded: Boolean = false
+        private set
 
-    @VisibleForTesting
-    var bindingProvider: (() -> FragmentNearbyParentBinding?)? = null
+    private var bindingProvider: (() -> FragmentNearbyParentBinding?)? = null
 
-    @VisibleForTesting
-    var contextProvider: (() -> Context?)? = null
+    private var contextProvider: (() -> Context?)? = null
 
-    @VisibleForTesting
-    var activityProvider: (() -> Activity?)? = null
+    private var activityProvider: (() -> Activity?)? = null
 
-    @VisibleForTesting
-    var applicationKvStoreProvider: (() -> JsonKvStore?)? = null
+    private var applicationKvStoreProvider: (() -> JsonKvStore?)? = null
 
-    @VisibleForTesting
-    var actions: NearbyFabActions? = null
+    private var actions: NearbyFabActions? = null
 
     /**
      * Initializes FAB animations, providers, and callback actions.
@@ -85,7 +77,10 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
         this.actions = actions
 
         val context = contextProvider() ?: return
-        loadAnimations(this, context)
+        fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
+        rotateForward = AnimationUtils.loadAnimation(context, R.anim.rotate_forward)
+        rotateBackward = AnimationUtils.loadAnimation(context, R.anim.rotate_backward)
     }
 
     /**
@@ -94,11 +89,7 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
     override fun animateFABs() {
         val binding = bindingProvider?.invoke() ?: return
         if (binding.fabPlus.isShown) {
-            if (isFABsExpanded) {
-                collapseFABs(this, binding)
-            } else {
-                expandFABs(this, binding)
-            }
+            setFABsExpanded(binding, !isFABsExpanded)
         }
     }
 
@@ -181,7 +172,7 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
         val binding = bindingProvider?.invoke() ?: return
         when (bottomSheetState) {
             BottomSheetBehavior.STATE_COLLAPSED -> {
-                collapseFABs(this, binding)
+                setFABsExpanded(binding, false)
                 val isDepictsPicker = actions?.isDepictsPickerMode() ?: false
                 if (!binding.fabPlus.isShown && !isDepictsPicker) {
                     showFABs(binding)
@@ -191,24 +182,37 @@ class NearbyFabHelper : NearbyParentFragmentContract.FabControl {
             BottomSheetBehavior.STATE_HIDDEN -> {
                 binding.transparentView.isClickable = false
                 binding.transparentView.alpha = ALPHA_TRANSPARENT
-                collapseFABs(this, binding)
+                setFABsExpanded(binding, false)
                 hideFABs(binding)
             }
         }
     }
-}
 
-/**
- * Loads animations will be used for FABs
- */
-private fun loadAnimations(
-    helper: NearbyFabHelper,
-    context: Context,
-) {
-    helper.fabOpen = AnimationUtils.loadAnimation(context, R.anim.fab_open)
-    helper.fabClose = AnimationUtils.loadAnimation(context, R.anim.fab_close)
-    helper.rotateForward = AnimationUtils.loadAnimation(context, R.anim.rotate_forward)
-    helper.rotateBackward = AnimationUtils.loadAnimation(context, R.anim.rotate_backward)
+    private fun setFABsExpanded(
+        binding: FragmentNearbyParentBinding,
+        expand: Boolean,
+    ) {
+        if (expand && !isFABsExpanded) {
+            showFABs(binding)
+            binding.fabPlus.startAnimation(rotateForward)
+            binding.fabCamera.startAnimation(fabOpen)
+            binding.fabGallery.startAnimation(fabOpen)
+            binding.fabCustomGallery.startAnimation(fabOpen)
+            binding.fabCustomGallery.show()
+            binding.fabCamera.show()
+            binding.fabGallery.show()
+            isFABsExpanded = true
+        } else if (!expand && isFABsExpanded) {
+            binding.fabPlus.startAnimation(rotateBackward)
+            binding.fabCamera.startAnimation(fabClose)
+            binding.fabGallery.startAnimation(fabClose)
+            binding.fabCustomGallery.startAnimation(fabClose)
+            binding.fabCustomGallery.hide()
+            binding.fabCamera.hide()
+            binding.fabGallery.hide()
+            isFABsExpanded = false
+        }
+    }
 }
 
 private fun showFABs(binding: FragmentNearbyParentBinding) {
@@ -243,49 +247,6 @@ private fun hideFABs(binding: FragmentNearbyParentBinding) {
     binding.fabGallery.hide()
     removeAnchorFromFAB(binding.fabCustomGallery)
     binding.fabCustomGallery.hide()
-}
-
-/**
- * Expands camera and gallery FABs, turn forward plus FAB
- *
- * @param isFABsExpanded true if they are already expanded
- */
-private fun expandFABs(
-    helper: NearbyFabHelper,
-    binding: FragmentNearbyParentBinding,
-) {
-    if (!helper.isFABsExpanded) {
-        showFABs(binding)
-        binding.fabPlus.startAnimation(helper.rotateForward)
-        binding.fabCamera.startAnimation(helper.fabOpen)
-        binding.fabGallery.startAnimation(helper.fabOpen)
-        binding.fabCustomGallery.startAnimation(helper.fabOpen)
-        binding.fabCustomGallery.show()
-        binding.fabCamera.show()
-        binding.fabGallery.show()
-        helper.isFABsExpanded = true
-    }
-}
-
-/**
- * Collapses camera and gallery FABs, turn back plus FAB
- *
- * @param isFABsExpanded
- */
-private fun collapseFABs(
-    helper: NearbyFabHelper,
-    binding: FragmentNearbyParentBinding,
-) {
-    if (helper.isFABsExpanded) {
-        binding.fabPlus.startAnimation(helper.rotateBackward)
-        binding.fabCamera.startAnimation(helper.fabClose)
-        binding.fabGallery.startAnimation(helper.fabClose)
-        binding.fabCustomGallery.startAnimation(helper.fabClose)
-        binding.fabCustomGallery.hide()
-        binding.fabCamera.hide()
-        binding.fabGallery.hide()
-        helper.isFABsExpanded = false
-    }
 }
 
 private fun applySpacerHeights(

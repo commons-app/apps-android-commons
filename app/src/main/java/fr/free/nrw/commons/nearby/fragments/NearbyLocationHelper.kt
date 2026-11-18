@@ -71,15 +71,19 @@ class NearbyLocationHelper : NearbyParentFragmentContract.Location {
 
     @VisibleForTesting
     var lastKnownLocation: LatLng? = null
+        private set
 
     @VisibleForTesting
     var isPermissionDenied: Boolean = false
+        internal set
 
     @VisibleForTesting
     var recenterToUserLocation: Boolean = false
+        internal set
 
     @VisibleForTesting
     var mapCenter: GeoPoint? = null
+        internal set
 
     private var activityProvider: (() -> Activity?)? = null
     private var locationManagerProvider: (() -> LocationServiceManager?)? = null
@@ -342,4 +346,24 @@ class NearbyLocationHelper : NearbyParentFragmentContract.Location {
         actions?.onUpdateMapAndList(locationChangeType)
         actions?.onUserLocationOverlaysUpdated(GeoPoint(latLng.latitude, latLng.longitude), true)
     }
+}
+
+/** Resets location permission denied flag to false. */
+fun NearbyLocationHelper.resetPermissionDenied() {
+    isPermissionDenied = false
+}
+
+/** Marks location permission as denied. */
+fun NearbyLocationHelper.markPermissionDenied() {
+    isPermissionDenied = true
+}
+
+/** Sets whether the map should recenter to user location. */
+fun NearbyLocationHelper.setRecenterToUserLocation(recenter: Boolean) {
+    recenterToUserLocation = recenter
+}
+
+/** Sets the target map center geo point. */
+fun NearbyLocationHelper.setMapCenter(geoPoint: GeoPoint?) {
+    mapCenter = geoPoint
 }

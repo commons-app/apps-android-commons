@@ -134,21 +134,14 @@ class NearbyParentFragment(
 
     val disposables: CompositeDisposable get() = compositeDisposable
 
-    init {
-        helpers.filterHelper.presenterProvider = { presenter }
-        helpers.statusHelper.presenterProvider = { presenter }
-        helpers.statusHelper.readyCallbackConsumer = { nearbyParentFragmentInstanceReadyCallback = it }
-        helpers.statusHelper.mediaDetailHelperProvider = { helpers.mediaDetailHelper }
-    }
-
     var binding: FragmentNearbyParentBinding? = null
 
-    val mapEventsOverlay: MapEventsOverlay =
+    internal val mapEventsOverlay: MapEventsOverlay =
         MapEventsOverlay(
             object : MapEventsReceiver {
                 override fun singleTapConfirmedHelper(p: GeoPoint): Boolean {
-                    if (clickedMarker != null) {
-                        clickedMarker!!.closeInfoWindow()
+                    if (markerOverlayHelper.clickedMarker != null) {
+                        markerOverlayHelper.clickedMarker!!.closeInfoWindow()
                     } else {
                         Timber.e("CLICKED MARKER IS NULL")
                     }
@@ -198,197 +191,30 @@ class NearbyParentFragment(
     @Inject
     lateinit var placeTypeLabelsClient: PlaceTypeLabelsClient
 
-    var locationPermissionsHelper: LocationPermissionsHelper? = null
+    internal var locationPermissionsHelper: LocationPermissionsHelper? = null
 
-    /** Adapter for filter list forwarded to [filterHelper] for testing. */
-    @VisibleForTesting
-    var nearbyFilterSearchRecyclerViewAdapter: NearbyFilterSearchRecyclerViewAdapter?
-        get() = filterHelper.nearbyFilterSearchRecyclerViewAdapter
-        set(value) {
-            filterHelper.nearbyFilterSearchRecyclerViewAdapter = value
-        }
-
-    /** Backing behavior for places list bottom sheet, delegating to [bottomSheetHelper] for testing. */
-    @VisibleForTesting
-    var bottomSheetListBehavior: BottomSheetBehavior<*>? = null
-        get() = bottomSheetHelper.bottomSheetListBehavior ?: field
-        set(value) {
-            field = value
-            bottomSheetHelper.bottomSheetListBehavior = value
-        }
-
-    /** Backing behavior for place details bottom sheet, delegating to [bottomSheetHelper] for testing. */
-    @VisibleForTesting
-    var bottomSheetDetailsBehavior: BottomSheetBehavior<*>? = null
-        get() = bottomSheetHelper.bottomSheetDetailsBehavior ?: field
-        set(value) {
-            field = value
-            bottomSheetHelper.bottomSheetDetailsBehavior = value
-        }
-
-    var broadcastReceiver: android.content.BroadcastReceiver?
-        get() = statusHelper.broadcastReceiver
-        set(value) {
-            statusHelper.broadcastReceiver = value
-        }
-
-    var isNetworkErrorOccurred: Boolean
-        get() = statusHelper.isNetworkErrorOccurred
-        set(value) {
-            statusHelper.isNetworkErrorOccurred = value
-        }
-
-    var snackbar: Snackbar?
-        get() = statusHelper.snackbar
-        set(value) {
-            statusHelper.snackbar = value
-        }
-
-    var hasShownOfflinePinsMessage: Boolean
-        get() = statusHelper.hasShownOfflinePinsMessage
-        set(value) {
-            statusHelper.hasShownOfflinePinsMessage = value
-        }
-
-    var scope: LifecycleCoroutineScope? = null
+    internal var scope: LifecycleCoroutineScope? = null
 
     @VisibleForTesting
     var presenter: NearbyParentFragmentPresenter? = null
 
-    var isDarkTheme = false
+    internal var isDarkTheme = false
 
-    /** FAB expansion state forwarded to [fabHelper] for testing. */
-    @VisibleForTesting
-    var isFABsExpanded: Boolean
-        get() = fabHelper.isFABsExpanded
-        set(value) {
-            fabHelper.isFABsExpanded = value
-        }
+    internal var progressDialog: ProgressDialog? = null
 
-    /** Selected place forwarded to [bottomSheetHelper] for testing. */
-    @VisibleForTesting
-    var selectedPlace: Place?
-        get() = bottomSheetHelper.selectedPlace
-        set(value) {
-            bottomSheetHelper.selectedPlace = value
-        }
+    private var isVisibleToUser = false
 
-    val clickedMarker: Marker?
-        get() = markerOverlayHelper.clickedMarker
-
-    var progressDialog: ProgressDialog? = null
-
-    /** Permission state forwarded to [locationHelper] for testing. */
-    @VisibleForTesting
-    var isPermissionDenied: Boolean
-        get() = locationHelper.isPermissionDenied
-        set(value) {
-            locationHelper.isPermissionDenied = value
-        }
-
-    /** Recenter to user location flag forwarded to [locationHelper] for testing. */
-    @VisibleForTesting
-    var recenterToUserLocation: Boolean
-        get() = locationHelper.recenterToUserLocation
-        set(value) {
-            locationHelper.recenterToUserLocation = value
-        }
-
-    /** Map center coordinate forwarded to [locationHelper] for testing. */
-    @VisibleForTesting
-    var mapCenter: GeoPoint?
-        get() = locationHelper.mapCenter
-        set(value) {
-            locationHelper.mapCenter = value
-        }
-
-    var intentFilter: IntentFilter = IntentFilter(NETWORK_INTENT_ACTION)
-
-    /** Last place centered forwarded to [viewportHelper] for testing. */
-    @VisibleForTesting
-    var lastPlaceToCenter: Place?
-        get() = viewportHelper.lastPlaceToCenter
-        set(value) {
-            viewportHelper.lastPlaceToCenter = value
-        }
-
-    /** Last known location coordinates forwarded to [locationHelper] for testing. */
-    @VisibleForTesting
-    var lastKnownLocation: LatLng?
-        get() = locationHelper.lastKnownLocation
-        set(value) {
-            locationHelper.lastKnownLocation = value
-        }
-
-    var isVisibleToUser = false
-
-    var lastFocusLocation: LatLng?
-        get() = placesQueryHelper.lastFocusLocation
-        set(value) {
-            placesQueryHelper.lastFocusLocation = value
-        }
-
-    var adapter: PlaceAdapter? = null
-
-    /** Last map focus coordinate forwarded to [viewportHelper] for testing. */
-    @VisibleForTesting
-    var lastMapFocus: GeoPoint?
-        get() = viewportHelper.lastMapFocus
-        set(value) {
-            viewportHelper.lastMapFocus = value
-        }
+    internal var adapter: PlaceAdapter? = null
 
     @JvmField
     internal var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragmentInstanceReadyCallback? = null
-    var nearestPlace: Place? = null
-    var isDepictsPickerMode: Boolean = false
-    var allPhotoLatLngs: ArrayList<LatLng>? = null
-    var photoPinBoundingBox: BoundingBox? = null
-    var needsZoomOut: Boolean = true
 
-    var stopQuery: Boolean
-        get() = placesQueryHelper.stopQuery
-        set(value) {
-            placesQueryHelper.stopQuery = value
-        }
+    internal var isDepictsPickerMode: Boolean = false
 
-    // Explore map data (for if we came from Explore)
-    var prevZoom = 0.0
-    var prevLatitude = 0.0
-    var prevLongitude = 0.0
+    private val searchHandler = Handler()
+    private val searchRunnable: Runnable? = null
 
-    val searchHandler = Handler()
-    val searchRunnable: Runnable? = null
-
-    /** Action items list forwarded to [bottomSheetHelper] for testing. */
-    @VisibleForTesting
-    var dataList: MutableList<BottomSheetItem>?
-        get() = bottomSheetHelper.dataList
-        set(value) {
-            bottomSheetHelper.dataList = value
-        }
-
-    /** Bottom sheet adapter forwarded to [bottomSheetHelper] for testing. */
-    @VisibleForTesting
-    var bottomSheetAdapter: BottomSheetAdapter?
-        get() = bottomSheetHelper.bottomSheetAdapter
-        set(value) {
-            bottomSheetHelper.bottomSheetAdapter = value
-        }
-
-    var media: fr.free.nrw.commons.Media?
-        get() = mediaDetailHelper.media
-        set(value) {
-            mediaDetailHelper.media = value
-        }
-
-    var mediaDetails: MediaDetailPagerFragment?
-        get() = mediaDetailHelper.mediaDetails
-        set(value) {
-            mediaDetailHelper.mediaDetails = value
-        }
-
-    val galleryPickLauncherForResult =
+    internal val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             controller?.handleActivityResultWithCallback(
                 requireActivity(),
@@ -401,7 +227,7 @@ class NearbyParentFragment(
             )
         }
 
-    val customSelectorLauncherForResult =
+    internal val customSelectorLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
             controller?.handleActivityResultWithCallback(
                 requireActivity(),
@@ -415,7 +241,7 @@ class NearbyParentFragment(
             )
         }
 
-    val cameraPickLauncherForResult =
+    internal val cameraPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
             controller?.handleActivityResultWithCallback(
                 requireActivity(),
@@ -429,9 +255,9 @@ class NearbyParentFragment(
             )
         }
 
-    lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
+    internal lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
 
-    val locationPermissionLauncher: ActivityResultLauncher<String> =
+    internal val locationPermissionLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 locationPermissionGranted()
@@ -448,14 +274,14 @@ class NearbyParentFragment(
                         null,
                     )
                 } else {
-                    if (isPermissionDenied) {
+                    if (locationHelper.isPermissionDenied) {
                         locationPermissionsHelper?.showAppSettingsDialog(
                             requireActivity(),
                             fr.free.nrw.commons.R.string.nearby_needs_location,
                         )
                     }
                     Timber.d("The user checked 'Don't ask again' or denied the permission twice")
-                    isPermissionDenied = true
+                    locationHelper.markPermissionDenied()
                 }
             }
         }
@@ -466,7 +292,7 @@ class NearbyParentFragment(
         savedInstanceState: Bundle?,
     ): View? {
         Label.init(requireContext().applicationContext)
-        loadExploreMapData()
+        viewportHelper.loadExploreMapData(arguments)
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
 
@@ -554,7 +380,7 @@ class NearbyParentFragment(
     override fun onResume() {
         super.onResume()
         binding?.map?.onResume()
-        clickedMarker?.infoWindow?.isOpen?.let {
+        markerOverlayHelper.clickedMarker?.infoWindow?.isOpen?.let {
             if (!it) {
                 bottomSheetHelper.hideBottomDetailsSheet()
             }
@@ -585,8 +411,9 @@ class NearbyParentFragment(
         presenter?.detachView()
         registerUnregisterLocationListener(true)
         try {
-            if (broadcastReceiver != null && activity != null) {
-                requireContext().unregisterReceiver(broadcastReceiver)
+            val receiver = statusHelper.broadcastReceiver
+            if (receiver != null && activity != null) {
+                requireContext().unregisterReceiver(receiver)
             }
 
             if (locationManager != null && presenter != null) {
@@ -598,8 +425,7 @@ class NearbyParentFragment(
             // Broadcast receivers should always be unregistered inside catch,
             // you never know if they were already registered or not
         }
-        snackbar?.dismiss()
-        snackbar = null
+        statusHelper.dismissSnackbar()
     }
 
     override fun onDestroyView() {
@@ -626,11 +452,12 @@ class NearbyParentFragment(
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        val rlBottomSheetLayoutParams = binding!!.bottomSheetNearby.bottomSheet.layoutParams
+        val currentBinding = binding ?: return
+        val rlBottomSheetLayoutParams = currentBinding.bottomSheetNearby.bottomSheet.layoutParams
         rlBottomSheetLayoutParams.height =
             requireActivity().windowManager.defaultDisplay.height /
                 BOTTOM_SHEET_HEIGHT_DIVISOR * BOTTOM_SHEET_HEIGHT_MULTIPLIER
-        binding!!.bottomSheetNearby.bottomSheet.layoutParams = rlBottomSheetLayoutParams
+        currentBinding.bottomSheetNearby.bottomSheet.layoutParams = rlBottomSheetLayoutParams
         val orientation = resources.configuration.orientation
         val adapterCount = bottomSheetHelper.bottomSheetAdapter?.itemCount ?: 0
         val spanCount =
@@ -639,7 +466,7 @@ class NearbyParentFragment(
             } else {
                 if (adapterCount > 0) adapterCount else LANDSCAPE_SPAN_COUNT
             }
-        (binding?.bottomSheetDetails?.bottomSheetRecyclerView?.layoutManager as? GridLayoutManager)?.spanCount =
+        (currentBinding.bottomSheetDetails.bottomSheetRecyclerView.layoutManager as? GridLayoutManager)?.spanCount =
             spanCount
         applyNearbyFabLayout()
     }
@@ -663,7 +490,7 @@ class NearbyParentFragment(
     private fun getMarkerPriority(
         place: Place,
         isBookmarked: Boolean,
-    ): Int = fr.free.nrw.commons.nearby.fragments.getMarkerPriority(place, isBookmarked, nearestPlace)
+    ): Int = fr.free.nrw.commons.nearby.fragments.getMarkerPriority(place, isBookmarked, viewportHelper.nearestPlace)
 
     interface NearbyParentFragmentInstanceReadyCallback {
         fun onReady()

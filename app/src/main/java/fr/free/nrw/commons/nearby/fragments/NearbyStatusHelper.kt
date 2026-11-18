@@ -28,6 +28,7 @@ data class NearbyStatusDependencies(
     val presenterProvider: () -> NearbyParentFragmentPresenter? = { null },
     val locationManagerProvider: () -> LocationServiceManager? = { null },
     val readyCallbackConsumer: ((NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback?) -> Unit)? = null,
+    val mediaDetailHelperProvider: (() -> NearbyMediaDetailHelper?)? = null,
 )
 
 /**
@@ -40,19 +41,26 @@ class NearbyStatusHelper :
     private var activityProvider: () -> Activity? = { null }
     private var contextProvider: () -> Context? = { null }
     private var bindingProvider: () -> FragmentNearbyParentBinding? = { null }
-    var presenterProvider: () -> NearbyParentFragmentPresenter? = { null }
+    private var presenterProvider: () -> NearbyParentFragmentPresenter? = { null }
     private var locationManagerProvider: () -> LocationServiceManager? = { null }
-    var mediaDetailHelperProvider: () -> NearbyMediaDetailHelper? = { null }
-    var readyCallbackConsumer: (
+    private var mediaDetailHelperProvider: () -> NearbyMediaDetailHelper? = { null }
+    private var readyCallbackConsumer: (
         (
             NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback?,
         ) -> Unit
     )? = null
 
-    var snackbar: Snackbar? = null
+    private var snackbar: Snackbar? = null
     var isNetworkErrorOccurred: Boolean = false
-    var hasShownOfflinePinsMessage: Boolean = false
+        private set
+    private var hasShownOfflinePinsMessage: Boolean = false
     var broadcastReceiver: BroadcastReceiver? = null
+        private set
+
+    fun dismissSnackbar() {
+        snackbar?.dismiss()
+        snackbar = null
+    }
 
     /**
      * Initializes the helper with required providers and configures the broadcast receiver.
@@ -64,6 +72,7 @@ class NearbyStatusHelper :
         this.presenterProvider = dependencies.presenterProvider
         this.locationManagerProvider = dependencies.locationManagerProvider
         this.readyCallbackConsumer = dependencies.readyCallbackConsumer
+        dependencies.mediaDetailHelperProvider?.let { this.mediaDetailHelperProvider = it }
         initNetworkBroadcastReceiver()
     }
 

@@ -97,19 +97,20 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
     /** Currently selected place displayed in the details sheet. */
     @VisibleForTesting
     var selectedPlace: Place? = null
+        private set
 
     /** List of action items displayed in the details sheet recycler view. */
-    @VisibleForTesting
-    var dataList: MutableList<BottomSheetItem>? = null
+    private var dataList: MutableList<BottomSheetItem>? = null
 
     /** Adapter managing action items in the details sheet recycler view. */
     @VisibleForTesting
     var bottomSheetAdapter: BottomSheetAdapter? = null
+        private set
 
     private var bindingProvider: (() -> FragmentNearbyParentBinding?)? = null
     private var contextProvider: (() -> Context?)? = null
     private var activityProvider: (() -> Activity?)? = null
-    internal var bookmarkDaoProvider: (() -> BookmarkLocationsDao?)? = null
+    private var bookmarkDaoProvider: (() -> BookmarkLocationsDao?)? = null
     private var actions: NearbyBottomSheetActions? = null
 
     /**
@@ -234,7 +235,16 @@ class NearbyBottomSheetHelper : NearbyParentFragmentContract.BottomSheet {
                 bindDepictConfirmButton(binding, place, context, activity)
             }
         } else {
-            bindActionItems(binding, place, context, this, currentActions)
+            val (items, adapter) =
+                bindActionItems(
+                    binding,
+                    place,
+                    itemClickListener,
+                    bookmarkDaoProvider?.invoke(),
+                    currentActions,
+                )
+            dataList = items
+            bottomSheetAdapter = adapter
         }
         bindPlaceThumbnail(binding, place, currentActions)
         bindPlaceTexts(binding, place)
@@ -486,12 +496,12 @@ private fun setupTitleActions(
 private fun bindActionItems(
     binding: FragmentNearbyParentBinding,
     place: Place,
-    context: Context,
-    helper: NearbyBottomSheetHelper,
+    clickListener: BottomSheetAdapter.ItemClickListener,
+    bookmarkDao: BookmarkLocationsDao?,
     actions: NearbyBottomSheetHelper.NearbyBottomSheetActions,
-) {
+): Pair<MutableList<BottomSheetItem>, BottomSheetAdapter> {
+    val context = binding.root.context
     val items = buildBottomSheetItems(place, context)
-    helper.dataList = items
     val orientation = context.resources.configuration.orientation
     val spanCount =
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -502,11 +512,9 @@ private fun bindActionItems(
     binding.bottomSheetDetails.bottomSheetRecyclerView.layoutManager =
         GridLayoutManager(context, spanCount)
     val adapter = BottomSheetAdapter(context, items)
-    adapter.setClickListener(helper.itemClickListener)
-    helper.bottomSheetAdapter = adapter
+    adapter.setClickListener(clickListener)
     binding.bottomSheetDetails.bottomSheetRecyclerView.adapter = adapter
 
-    val bookmarkDao = helper.bookmarkDaoProvider?.invoke()
     if (bookmarkDao != null) {
         NearbyUtil.getBookmarkLocationExists(
             bookmarkDao,
@@ -515,6 +523,7 @@ private fun bindActionItems(
             adapter,
         )
     }
+    return Pair(items, adapter)
 }
 
 /** Constructs the list of action items available for a place. */
