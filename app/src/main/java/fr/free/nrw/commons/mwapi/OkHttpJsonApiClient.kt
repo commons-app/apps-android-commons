@@ -379,6 +379,11 @@ class OkHttpJsonApiClient @Inject constructor(
 
     @Throws(Exception::class)
     fun getPlacesAsGPX(leftLatLng: LatLng, rightLatLng: LatLng): String? {
+        val minLat = minOf(leftLatLng.latitude, rightLatLng.latitude)
+        val minLon = minOf(leftLatLng.longitude, rightLatLng.longitude)
+        val maxLat = maxOf(leftLatLng.latitude, rightLatLng.latitude)
+        val maxLon = maxOf(leftLatLng.longitude, rightLatLng.longitude)
+
         var gpxString = ("""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <gpx
  version="1.0"
@@ -386,8 +391,7 @@ class OkHttpJsonApiClient @Inject constructor(
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://www.topografix.com/GPX/1/0"
  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
-<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" """ +
-                    """maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
+<bounds minlat="$minLat" minlon="$minLon" maxlat="$maxLat" maxlon="$maxLon"/>""")
 
         val placeBindings = runQuery(leftLatLng, rightLatLng)
         if (placeBindings != null) {

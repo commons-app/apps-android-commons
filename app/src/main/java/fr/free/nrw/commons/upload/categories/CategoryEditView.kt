@@ -62,8 +62,8 @@ class CategoryEditView :
     /**
      * Refreshes the categories
      */
-    override fun refreshCategories() {
-        (fragment.parentFragment as MediaDetailFragment?)?.updateCategories()
+    override fun refreshCategories(categories: List<String>) {
+        (fragment.parentFragment as MediaDetailFragment?)?.updateCategories(categories)
     }
 
     /**

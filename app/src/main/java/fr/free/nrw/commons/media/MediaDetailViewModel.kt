@@ -34,20 +34,19 @@ class MediaDetailViewModel(
         viewModelScope.launch {
             _commonsContainerState.update { FileUsagesContainerState.Loading }
 
-            try {
-                val result =
-                    okHttpJsonApiClient.getFileUsagesOnCommons(fileName, 10)
-
-                val data =
-                    result
+            val result =
+                runCatching {
+                    okHttpJsonApiClient
+                        .getFileUsagesOnCommons(fileName, 10)
                         ?.query
                         ?.pages
-                        ?.first()
+                        ?.firstOrNull()
                         ?.fileUsage
                         ?.map { it.toUiModel() }
+                }
 
-                _commonsContainerState.update { FileUsagesContainerState.Success(data = data) }
-            } catch (e: Exception) {
+            if (result.isFailure) {
+                Timber.e(result.exceptionOrNull(), javaClass.simpleName)
                 _commonsContainerState.update {
                     FileUsagesContainerState.Error(
                         errorMessage =
@@ -56,9 +55,10 @@ class MediaDetailViewModel(
                             ),
                     )
                 }
-
-                Timber.e(e, javaClass.simpleName)
+                return@launch
             }
+
+            _commonsContainerState.update { FileUsagesContainerState.Success(data = result.getOrNull()) }
         }
     }
 
@@ -66,19 +66,19 @@ class MediaDetailViewModel(
         viewModelScope.launch {
             _globalContainerState.update { FileUsagesContainerState.Loading }
 
-            try {
-                val result = okHttpJsonApiClient.getGlobalFileUsages(fileName, 10)
-
-                val data =
-                    result
+            val result =
+                runCatching {
+                    okHttpJsonApiClient
+                        .getGlobalFileUsages(fileName, 10)
                         ?.query
                         ?.pages
-                        ?.first()
+                        ?.firstOrNull()
                         ?.fileUsage
                         ?.map { it.toUiModel() }
+                }
 
-                _globalContainerState.update { FileUsagesContainerState.Success(data = data) }
-            } catch (e: Exception) {
+            if (result.isFailure) {
+                Timber.e(result.exceptionOrNull(), javaClass.simpleName)
                 _globalContainerState.update {
                     FileUsagesContainerState.Error(
                         errorMessage =
@@ -87,9 +87,10 @@ class MediaDetailViewModel(
                             ),
                     )
                 }
-
-                Timber.e(e, javaClass.simpleName)
+                return@launch
             }
+
+            _globalContainerState.update { FileUsagesContainerState.Success(data = result.getOrNull()) }
         }
     }
 
