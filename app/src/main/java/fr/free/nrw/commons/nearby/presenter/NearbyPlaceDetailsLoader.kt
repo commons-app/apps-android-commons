@@ -201,10 +201,10 @@ class NearbyPlaceDetailsLoader(
                     nearbyController.getPlaces(indices.map { updatedGroups[it].place })
                 // The query gives one row per class, picture etc. in no fixed order, so match by QID
                 val fetchedPlacesById = fetchedPlaces.groupBy { it.wikiDataEntityId }
+                val usedIds = mutableSetOf<String?>()
                 collectResults.send(
                     indices.map { i ->
-                        val place =
-                            fetchedPlacesById[updatedGroups[i].place.wikiDataEntityId]?.first()
+                        val place = fetchedPlacesById.placeFor(updatedGroups[i].place.wikiDataEntityId, usedIds)
                         if (place == null) {
                             Pair(i, null)
                         } else {
@@ -460,3 +460,20 @@ private fun List<Place>.toLocationMap(startIndex: Int): HashMap<LatLng, Place> {
     }
     return map
 }
+
+/**
+ * Returns the fetched Place for the item [id], or a copy of it if an earlier pin already got it:
+ * a custom query can put the same item on two pins, and each pin needs its own Place.
+ *
+ * @param usedIds The ids already given to a pin of the same batch.
+ */
+private fun Map<String?, List<Place>>.placeFor(
+    id: String?,
+    usedIds: MutableSet<String?>,
+): Place? = this[id]?.first()?.let { if (usedIds.add(id)) it else it.copy() }
+
+/**
+ * Returns a new Place with the details of this one, so that two pins never share one object.
+ */
+private fun Place.copy(): Place =
+    Place(language, name, label, longDescription, location, category, siteLinks, pic, exists, entityID)

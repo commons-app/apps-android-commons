@@ -251,6 +251,23 @@ class NearbyPlaceDetailsLoaderTest {
             assertEquals("places saved to the cache", 1, saveCount())
         }
 
+    @Test
+    fun testSameItemTwiceKeepsEachPinAtItsOwnLocation() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // a custom query can return the same item at two locations
+            val groups = listOf(greyGroup("Q1"), greyGroup("Q1").apply { place.location = LatLng(5.0, 5.0, 0f) })
+            whenever(nearbyController.getPlaces(any())).thenReturn(listOf(fetchedPlace("Q1")))
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals(
+                listOf(1.0, 5.0),
+                NearbyController.markerLabelList.map { it.place.location.latitude },
+            )
+        }
+
     private suspend fun stubForLoading() {
         // the real Main dispatcher, so that the delay in schedulePlacesUpdate ends
         Dispatchers.setMain(Dispatchers.Unconfined)
