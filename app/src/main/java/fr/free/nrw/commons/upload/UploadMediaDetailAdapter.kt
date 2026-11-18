@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH
 import android.speech.RecognizerIntent.EXTRA_LANGUAGE
@@ -137,7 +138,11 @@ class UploadMediaDetailAdapter : RecyclerView.Adapter<UploadMediaDetailAdapter.V
                     putExtra(EXTRA_LANGUAGE, locale)
                 },
             )
-        } catch (e: Exception) {
+        } catch (e: ActivityNotFoundException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
+        } catch (e: IllegalStateException) {
             Timber.e(e)
         }
     }

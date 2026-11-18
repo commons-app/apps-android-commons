@@ -25,7 +25,6 @@ import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.Objects
 import javax.inject.Inject
 
 /**
@@ -186,33 +185,30 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         offset: Int,
     ) {
         if (checkAccount()) {
-            try {
-                compositeDisposable.add(
-                    okHttpJsonApiClient
-                        .getLeaderboard(
-                            Objects.requireNonNull(userName),
-                            duration,
-                            category,
-                            null,
-                            null,
-                        ).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { response: LeaderboardResponse? ->
-                                if (response != null && response.status == 200) {
-                                    userRank = response.rank!!
-                                    setViews(response, duration, category, limit, offset)
-                                }
-                            },
-                            { t: Throwable? ->
-                                Timber.e(t, "Fetching leaderboard statistics failed")
-                                onError()
-                            },
-                        ),
-                )
-            } catch (e: Exception) {
-                Timber.d(e, "success")
-            }
+            val userName = userName ?: return
+            compositeDisposable.add(
+                okHttpJsonApiClient
+                    .getLeaderboard(
+                        userName,
+                        duration,
+                        category,
+                        null,
+                        null,
+                    ).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { response: LeaderboardResponse? ->
+                            if (response != null && response.status == 200) {
+                                userRank = response.rank!!
+                                setViews(response, duration, category, limit, offset)
+                            }
+                        },
+                        { t: Throwable? ->
+                            Timber.e(t, "Fetching leaderboard statistics failed")
+                            onError()
+                        },
+                    ),
+            )
         }
     }
 

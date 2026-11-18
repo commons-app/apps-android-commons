@@ -104,7 +104,6 @@
     <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, errorMessage: AtomicReference&lt;String&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( private val uploadInterface: UploadInterface, @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient, private val pageContentsCreator: PageContentsCreator, private val fileUtilsWrapper: FileUtilsWrapper, private val gson: Gson, private val timeProvider: TimeProvider, private val contributionDao: ContributionDao, )</ID>
     <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, // according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false, )</ID>
-    <ID>LongParameterList:UploadModel.kt$UploadModel$( @param:Named("licenses") val licenses: List&lt;String&gt;, @param:Named("default_preferences") val store: JsonKvStore, @param:Named("licenses_by_name") val licensesByName: Map&lt;String, String&gt;, val context: Context, val sessionManager: SessionManager, val fileProcessor: FileProcessor, val imageProcessingService: ImageProcessingService, )</ID>
     <ID>LoopWithTooManyJumpStatements:CsrfTokenClient.kt$CsrfTokenClient$for</ID>
     <ID>LoopWithTooManyJumpStatements:ImageLoader.kt$ImageLoader$for</ID>
     <ID>LoopWithTooManyJumpStatements:NearbyParentFragment.kt$NearbyParentFragment$for</ID>
@@ -586,7 +585,6 @@
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
     <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
-    <ID>TooGenericExceptionCaught:AchievementsFragment.kt$AchievementsFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CommonsApplication.kt$CommonsApplication$e: Exception</ID>
     <ID>TooGenericExceptionCaught:CommonsApplicationModule.kt$&lt;no name provided&gt;$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ContributionsFragment.kt$ContributionsFragment$e: Exception</ID>
@@ -596,25 +594,16 @@
     <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
     <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:FilePickerIntents.kt$FilePickerIntents$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:LeaderboardFragment.kt$LeaderboardFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:LocationPickerActivity.kt$LocationPickerActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:MediaDetailPagerFragment.kt$MediaDetailPagerFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:MediaDetailViewModel.kt$MediaDetailViewModel$e: Exception</ID>
     <ID>TooGenericExceptionCaught:NearbyParentFragment.kt$NearbyParentFragment$e: Exception</ID>
     <ID>TooGenericExceptionCaught:NotificationClient.kt$NotificationClient$throwable: Throwable</ID>
     <ID>TooGenericExceptionCaught:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
     <ID>TooGenericExceptionCaught:PageEditClient.kt$PageEditClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:ReasonBuilder.kt$ReasonBuilder$e: Exception</ID>
     <ID>TooGenericExceptionCaught:ThanksClient.kt$ThanksClient$throwable: Throwable</ID>
     <ID>TooGenericExceptionCaught:UploadClient.kt$UploadClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:UploadController.kt$UploadController$e: NullPointerException</ID>
-    <ID>TooGenericExceptionCaught:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter$e: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:UploadRepository.kt$UploadRepository$e: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$e: Exception</ID>
     <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
-    <ID>TooGenericExceptionCaught:UploadableFile.kt$UploadableFile$e: Exception</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
