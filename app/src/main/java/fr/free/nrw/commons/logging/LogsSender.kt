@@ -31,20 +31,17 @@ abstract class LogsSender(
     var emailBody: String? = null
 
     /**
-     * Overrides the send method of ACRA's ReportSender to send logs.
+     * Zips the log files and opens an email app to send them.
      *
      * @param context The context in which to send the logs.
-     * @param report The crash report data, if any.
+     * @param report The crash report to add, or null when there is none,
+     * as with "Send log file" in Settings.
      */
     fun sendWithNullable(
         context: Context,
         report: CrashReportData?,
     ) {
-        if (report == null) {
-            errorReporter.handleSilentException(null)
-            return
-        }
-        send(context, report)
+        sendLogs(context, report)
     }
 
     override fun send(
