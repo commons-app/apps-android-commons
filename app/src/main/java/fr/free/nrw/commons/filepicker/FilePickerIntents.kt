@@ -119,7 +119,11 @@ object FilePickerIntents {
             // We have to explicitly grant the write permission since Intent.setFlag works only on API Level >=20
             grantWritePermission(context, intent, capturedImageUri)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            Timber.e(e, "Could not prepare camera intent")
+        } catch (e: IllegalArgumentException) {
+            Timber.e(e, "Could not prepare camera intent")
+        } catch (e: SecurityException) {
             Timber.e(e, "Could not prepare camera intent")
         }
 
