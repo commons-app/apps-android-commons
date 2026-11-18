@@ -23,7 +23,7 @@
     <ID>CyclomaticComplexMethod:NearbyParentFragment.kt$NearbyParentFragment$private fun passInfoToSheet(place: Place)</ID>
     <ID>CyclomaticComplexMethod:PageProperties.kt$PageProperties$override fun equals(o: Any?): Boolean</ID>
     <ID>CyclomaticComplexMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
-    <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
+    <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") @VisibleForTesting internal suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$(item1, label, location, clas)</ID>
     <ID>DestructuringDeclarationWithTooManyEntries:WikidataEditService.kt$WikidataEditService$(_, _, _, _, _, _, id)</ID>
     <ID>LargeClass:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
@@ -65,7 +65,7 @@
     <ID>LongMethod:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$internal fun initializeFragment()</ID>
     <ID>LongMethod:UploadProgressActivity.kt$UploadProgressActivity$fun updateMenuItems(currentPosition: Int)</ID>
     <ID>LongMethod:UploadWorker.kt$UploadWorker$@SuppressLint("MissingPermission") override suspend fun doWork(): Result</ID>
-    <ID>LongMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
+    <ID>LongMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") @VisibleForTesting internal suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>LongMethod:WikidataFeedback.kt$WikidataFeedback$@SuppressLint("CheckResult") @Suppress("ktlint:standard:max-line-length") override fun onCreate(savedInstanceState: Bundle?)</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onDownSwiped()</ID>
     <ID>LongMethod:ZoomableActivity.kt$ZoomableActivity$private fun onUpSwiped()</ID>
@@ -505,7 +505,7 @@
     <ID>NestedBlockDepth:UploadMediaDetailAdapter.kt$UploadMediaDetailAdapter.ViewHolder$private fun initLanguage( position: Int, description: UploadMediaDetail, )</ID>
     <ID>NestedBlockDepth:UploadModel.kt$UploadModel$fun onDepictItemClicked( depictedItem: DepictedItem, media: Media?, )</ID>
     <ID>NestedBlockDepth:UploadProgressActivity.kt$UploadProgressActivity$fun updateMenuItems(currentPosition: Int)</ID>
-    <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
+    <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") @VisibleForTesting internal suspend fun uploadContribution(contribution: Contribution)</ID>
     <ID>NestedBlockDepth:UploadWorker.kt$UploadWorker$private suspend fun makeWikiDataEdit( filename: String, contribution: Contribution, uniqueFileName: String, )</ID>
     <ID>NestedBlockDepth:UploadableFile.kt$UploadableFile$private fun getDateTimeFromExif(): DateTimeWithSource?</ID>
     <ID>NestedBlockDepth:ZoomableActivity.kt$ZoomableActivity$private suspend fun getNextActionableImage(index: Int): Int</ID>

@@ -276,7 +276,7 @@ class ImageLoader
 
                     // Otherwise checks in already uploaded table
                 } else {
-                    next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                    next = uploadedStatusDao.countUploadedBySourceSHA1(imageSHA1)
 
                     // If the image is not present in the already uploaded table, checks for its
                     // modified SHA1 in already uploaded table

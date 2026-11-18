@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
+import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
 import androidx.work.CoroutineWorker
@@ -35,9 +36,7 @@ import fr.free.nrw.commons.wikidata.WikidataEditService
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Date
@@ -265,7 +264,8 @@ class UploadWorker(
      * @param contribution
      */
     @SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission")
-    private suspend fun uploadContribution(contribution: Contribution) {
+    @VisibleForTesting
+    internal suspend fun uploadContribution(contribution: Contribution) {
         val uploadedFilename = contribution.uploadedFilename
         if (uploadedFilename != null) {
             notificationHelper.showUploadStarted(contribution)
@@ -349,7 +349,13 @@ class UploadWorker(
                             // Kept until captions and depicts are saved, so a retry does not upload again
                             contribution.uploadedFilename = uploadResult.filename
                             contributionDao.saveSynchronous(contribution)
-                            finishPublishedUpload(contribution, uploadResult.filename, uniqueFileName, retrying = false)
+                            finishPublishedUpload(
+                                contribution,
+                                uploadResult.filename,
+                                uniqueFileName,
+                                retrying = false,
+                                publishedSha1 = uploadResult.imageInfo?.sha1,
+                            )
                         } else {
                             Timber.e("Stash Upload failed")
                             notificationHelper.showFailedNotification(contribution)
@@ -426,14 +432,16 @@ class UploadWorker(
     }
 
     /**
-     * Saves captions, depicts and P18 for a file that is already on Commons
+     * Records publication for the picker before saving captions, depicts and P18.
      */
     private suspend fun finishPublishedUpload(
         contribution: Contribution,
         filename: String,
         uniqueFileName: String,
         retrying: Boolean,
+        publishedSha1: String? = null,
     ) {
+        saveIntoUploadedStatus(contribution, publishedSha1, retrying)
         wikidataEditService
             .addDepictionsAndCaptions(filename, contribution, retrying)
             .blockingSubscribe()
@@ -562,34 +570,37 @@ class UploadWorker(
                 .blockingGet()
         contributionFromUpload.dateModified = Date()
         contributionDao.deleteAndSaveContribution(contribution, contributionFromUpload)
-
-        // Upload success, save to uploaded status.
-        saveIntoUploadedStatus(contribution)
     }
 
     /**
-     * Save to uploadedStatusDao.
+     * Saves the source and published hashes so the picker can hide the original image.
+     * Older pending uploads can fall back to hashing the local upload copy.
      */
-    private fun saveIntoUploadedStatus(contribution: Contribution) {
-        contribution.contentUri?.let {
-            val imageSha1 = contribution.imageSHA1.toString()
-            val modifiedSha1 =
-                runCatching {
-                    fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
-                }.getOrElse {
-                    Timber.w(it, "Could not read the local file, skipping its uploaded status")
-                    return
+    private suspend fun saveIntoUploadedStatus(
+        contribution: Contribution,
+        publishedSha1: String?,
+        retrying: Boolean,
+    ) {
+        val imageSha1 = contribution.imageSHA1?.takeIf(String::isNotBlank) ?: return
+        if (retrying && uploadedStatusDao.countUploadedBySourceSHA1(imageSha1) > 0) return
+        val modifiedSha1 =
+            publishedSha1?.takeIf(String::isNotBlank)
+                ?: contribution.localUri?.path?.let { path ->
+                    runCatching {
+                        fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(path))
+                    }.onFailure { error ->
+                        Timber.w(error, "Could not read the local file, skipping its uploaded status")
+                    }.getOrNull()
                 }
-            CoroutineScope(Dispatchers.IO).launch {
-                uploadedStatusDao.insertUploaded(
-                    UploadedStatus(
-                        imageSha1,
-                        modifiedSha1,
-                        imageSha1 == modifiedSha1,
-                        true,
-                    ),
-                )
-            }
+        if (!modifiedSha1.isNullOrBlank()) {
+            uploadedStatusDao.insertUploaded(
+                UploadedStatus(
+                    imageSha1,
+                    modifiedSha1,
+                    imageSha1 == modifiedSha1,
+                    true,
+                ),
+            )
         }
     }
 

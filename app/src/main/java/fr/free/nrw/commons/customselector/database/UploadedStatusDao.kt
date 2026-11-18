@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import java.util.Calendar
 
@@ -44,21 +45,33 @@ abstract class UploadedStatusDao {
     abstract suspend fun getFromModifiedImageSHA1(modifiedImageSHA1: String): UploadedStatus?
 
     /**
-     * Asynchronous insert into uploaded status table.
+     * Records an upload or lookup result. A negative lookup that finishes after the upload
+     * must not overwrite the confirmed publication.
      */
-    suspend fun insertUploaded(uploadedStatus: UploadedStatus) {
+    @Transaction
+    open suspend fun insertUploaded(uploadedStatus: UploadedStatus) {
+        val foundUpload = uploadedStatus.imageResult || uploadedStatus.modifiedImageResult
+        if (
+            !foundUpload &&
+            (
+                countUploadedBySourceSHA1(uploadedStatus.imageSHA1) > 0 ||
+                    findByModifiedImageSHA1(uploadedStatus.modifiedImageSHA1, true) > 0
+            )
+        ) {
+            return
+        }
         uploadedStatus.lastUpdated = Calendar.getInstance().time
         insert(uploadedStatus)
     }
 
     /**
-     * Check whether the imageSHA1 is present in database
+     * Counts confirmed uploads of the source image, including edited versions.
      */
-    @Query("SELECT COUNT() FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) AND imageResult = (:imageResult) ")
-    abstract suspend fun findByImageSHA1(
-        imageSHA1: String,
-        imageResult: Boolean,
-    ): Int
+    @Query(
+        "SELECT COUNT(*) FROM uploaded_table WHERE imageSHA1 = :imageSHA1 " +
+            "AND (imageResult = 1 OR modifiedImageResult = 1)",
+    )
+    abstract suspend fun countUploadedBySourceSHA1(imageSHA1: String): Int
 
     /**
      * Check whether the modifiedImageSHA1 is present in database
