@@ -59,9 +59,9 @@ jobs:
               return assignees.map(a => `@${a.login}`).join(', ');
             }
 
-            // caache the PR info: { isOpen: boolean, closedUnmergedAt: number | null }
+            // caache the PR info: { isOpen: boolean, authorLogin: string | null, closedUnmergedAt: number | null }
             const prInfoCache = new Map();
-            async function getPullRequestInfo(prNumber, fallbackState, fallbackClosedAt) {
+            async function getPullRequestInfo(prNumber, fallbackIssueObj) {
               if (prInfoCache.has(prNumber)) {
                 return prInfoCache.get(prNumber);
               }
@@ -76,16 +76,24 @@ jobs:
                   !isOpen && !pr.merged_at && pr.closed_at
                     ? new Date(pr.closed_at).getTime()
                     : null;
-                const info = { isOpen, closedUnmergedAt };
+                const info = {
+                  isOpen,
+                  authorLogin: pr.user?.login ? pr.user.login.toLowerCase() : null,
+                  closedUnmergedAt
+                };
                 prInfoCache.set(prNumber, info);
                 return info;
               } catch (err) {
-                const isOpen = fallbackState === 'open';
+                const isOpen = fallbackIssueObj?.state === 'open';
                 const closedUnmergedAt =
-                  !isOpen && fallbackClosedAt
-                    ? new Date(fallbackClosedAt).getTime()
+                  !isOpen && fallbackIssueObj?.closed_at
+                    ? new Date(fallbackIssueObj.closed_at).getTime()
                     : null;
-                const info = { isOpen, closedUnmergedAt };
+                const info = {
+                  isOpen,
+                  authorLogin: fallbackIssueObj?.user?.login ? fallbackIssueObj.user.login.toLowerCase() : null,
+                  closedUnmergedAt
+                };
                 prInfoCache.set(prNumber, info);
                 return info;
               }
@@ -99,46 +107,28 @@ jobs:
               per_page: 100
             });
 
-            const { data: recentClosedPrs } = await github.rest.pulls.list({
-              owner,
-              repo,
-              state: 'closed',
-              sort: 'updated',
-              direction: 'desc',
-              per_page: 100
-            });
-
-            const issuesWithOpenPrBodyRef = new Map();
-            const issuesWithClosedPrBodyRef = new Map();
+            const issuesWithOpenPrClosingRef = new Map();
             const closingKeywordRegex = new RegExp(
               `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\\s*:?\\s*(?:(?:${owner}\\/${repo}|https?:\\/\\/github\\.com\\/${owner}\\/${repo}\\/issues\\/)\\s*)?#(\\d+)\\b`,
               'gi'
             );
 
-            for (const pr of [...openPrs, ...recentClosedPrs]) {
-              const isOpen = pr.state === 'open';
-              const closedUnmergedAt =
-                !isOpen && !pr.merged_at && pr.closed_at
-                  ? new Date(pr.closed_at).getTime()
-                  : null;
-              prInfoCache.set(pr.number, { isOpen, closedUnmergedAt });
+            for (const pr of openPrs) {
+              prInfoCache.set(pr.number, {
+                isOpen: true,
+                authorLogin: pr.user?.login ? pr.user.login.toLowerCase() : null,
+                closedUnmergedAt: null
+              });
 
               const text = `${pr.title || ''}\n${pr.body || ''}`;
               let match;
               closingKeywordRegex.lastIndex = 0;
               while ((match = closingKeywordRegex.exec(text)) !== null) {
                 const refNum = Number(match[1]);
-                if (isOpen) {
-                  if (!issuesWithOpenPrBodyRef.has(refNum)) {
-                    issuesWithOpenPrBodyRef.set(refNum, []);
-                  }
-                  issuesWithOpenPrBodyRef.get(refNum).push(pr.number);
-                } else if (closedUnmergedAt !== null) {
-                  if (!issuesWithClosedPrBodyRef.has(refNum)) {
-                    issuesWithClosedPrBodyRef.set(refNum, []);
-                  }
-                  issuesWithClosedPrBodyRef.get(refNum).push(closedUnmergedAt);
+                if (!issuesWithOpenPrClosingRef.has(refNum)) {
+                  issuesWithOpenPrClosingRef.set(refNum, []);
                 }
+                issuesWithOpenPrClosingRef.get(refNum).push(pr.number);
               }
             }
 
@@ -162,9 +152,9 @@ jobs:
               const mentions = formatAssignees(issue.assignees);
 
               // skip immediately if an open PR explicitly references this issue with a closing keyword
-              const bodyLinkedPrs = issuesWithOpenPrBodyRef.get(issueNumber);
-              if (bodyLinkedPrs && bodyLinkedPrs.length > 0) {
-                core.info(`#${issueNumber}: Skipping - has open linked PR(s) #${bodyLinkedPrs.join(', #')}.`);
+              const closingPrs = issuesWithOpenPrClosingRef.get(issueNumber);
+              if (closingPrs && closingPrs.length > 0) {
+                core.info(`#${issueNumber}: Skipping - has open PR(s) with closing keyword #${closingPrs.join(', #')}.`);
                 continue;
               }
 
@@ -175,43 +165,6 @@ jobs:
                 issue_number: issueNumber,
                 per_page: 100
               });
-
-              // skip if an open PR is explicitly linked via the Development sidebar ('connected')
-              let openLinkedPrNumber = null;
-              let latestClosedPrAt = null;
-
-              for (const event of timelineEvents) {
-                if (
-                  event.event === 'connected' &&
-                  event.source?.issue?.pull_request
-                ) {
-                  const prNumber = event.source.issue.number;
-                  const fallbackState = event.source.issue.state;
-                  const fallbackClosedAt = event.source.issue.closed_at || event.created_at;
-                  const prInfo = await getPullRequestInfo(prNumber, fallbackState, fallbackClosedAt);
-
-                  if (prInfo.isOpen) {
-                    openLinkedPrNumber = prNumber;
-                    break;
-                  }
-                  if (prInfo.closedUnmergedAt !== null && (latestClosedPrAt === null || prInfo.closedUnmergedAt > latestClosedPrAt)) {
-                    latestClosedPrAt = prInfo.closedUnmergedAt;
-                  }
-                }
-              }
-
-              if (openLinkedPrNumber !== null) {
-                core.info(`#${issueNumber}: Skipping - has open linked PR #${openLinkedPrNumber}.`);
-                continue;
-              }
-
-              // also check the closed without merge PRs matched via closing keywords
-              const closedBodyPrTimestamps = issuesWithClosedPrBodyRef.get(issueNumber) || [];
-              for (const closedTs of closedBodyPrTimestamps) {
-                if (latestClosedPrAt === null || closedTs > latestClosedPrAt) {
-                  latestClosedPrAt = closedTs;
-                }
-              }
 
               // find the most recent 'assigned' event for any current assignee
               let latestAssignedAt = new Date(issue.created_at).getTime();
@@ -231,9 +184,50 @@ jobs:
 
               // start timer from assignment, or from when a linked PR was closed without merging (if later)
               let latestAssigneeActivityAt = latestAssignedAt;
-              if (latestClosedPrAt !== null && latestClosedPrAt > latestAssigneeActivityAt) {
-                latestAssigneeActivityAt = latestClosedPrAt;
-                core.info(`#${issueNumber}: Linked PR closed without merging; counting inactivity timer from ${new Date(latestClosedPrAt).toISOString()}.`);
+              let openAssigneePrNumber = null;
+
+              for (const event of timelineEvents) {
+                if (event.event !== 'cross-referenced') continue;
+
+                const actorLogin = event.actor?.login ? event.actor.login.toLowerCase() : null;
+                const sourceIssue = event.source?.issue;
+                const sourceAuthorLogin = sourceIssue?.user?.login ? sourceIssue.user.login.toLowerCase() : actorLogin;
+                const isSameRepo =
+                  !sourceIssue?.repository ||
+                  sourceIssue.repository.full_name?.toLowerCase() === `${owner}/${repo}`.toLowerCase();
+
+                // check if cross-reference comes from a PR in this repo
+                if (sourceIssue?.pull_request && isSameRepo) {
+                  const prNumber = sourceIssue.number;
+                  const prInfo = await getPullRequestInfo(prNumber, sourceIssue);
+                  const prAuthor = prInfo.authorLogin || sourceAuthorLogin;
+
+                  // skip if an assignee has an open PR referencing this issue (e.g. "Part of #N", "Addresses #N")
+                  if (prInfo.isOpen && prAuthor && assigneeLogins.has(prAuthor)) {
+                    openAssigneePrNumber = prNumber;
+                    break;
+                  }
+
+                  // If an assignee's PR was closed without merging, count its closure as activity so timer starts from then
+                  if (prInfo.closedUnmergedAt !== null && prAuthor && assigneeLogins.has(prAuthor)) {
+                    if (prInfo.closedUnmergedAt > latestAssigneeActivityAt) {
+                      latestAssigneeActivityAt = prInfo.closedUnmergedAt;
+                    }
+                  }
+                }
+
+                // keep counting any cross-referenced event triggered by a current assignee as activity
+                if (actorLogin && assigneeLogins.has(actorLogin) && event.created_at) {
+                  const ts = new Date(event.created_at).getTime();
+                  if (ts > latestAssigneeActivityAt) {
+                    latestAssigneeActivityAt = ts;
+                  }
+                }
+              }
+
+              if (openAssigneePrNumber !== null) {
+                core.info(`#${issueNumber}: Skipping - assignee has open referencing PR #${openAssigneePrNumber}.`);
+                continue;
               }
 
               // 2. inspect teh comments to find latest assignee comment (including #KEEP) and existing bot markers
