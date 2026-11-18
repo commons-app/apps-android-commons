@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.filepicker
 
 import android.app.Activity
-import android.app.Application
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
@@ -94,8 +93,8 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        val mockApplication = mock(Application::class.java)
-        `when`(activity.applicationContext).thenReturn(mockApplication)
+        `when`(activity.applicationContext).thenReturn(context)
+        `when`(activity.packageManager).thenReturn(context.packageManager)
         FilePicker.openCameraForImage(activity, mockResultLauncher, 0)
 
         verify(mockResultLauncher).launch(intentCaptor.capture())
