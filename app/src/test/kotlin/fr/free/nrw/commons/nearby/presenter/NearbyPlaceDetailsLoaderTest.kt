@@ -32,8 +32,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
@@ -224,12 +226,43 @@ class NearbyPlaceDetailsLoaderTest {
             verify(placesRepository, times(11)).save(any())
         }
 
+    @Test
+    fun testFailedRequestsDoNotSaveEmptyPlacesToCache() =
+        runBlocking<Unit> {
+            stubForLoading()
+            whenever(nearbyController.getPlaces(any())).thenThrow(IOException("Unexpected response code: 429"))
+
+            loader.loadPlacesDataAsync(listOf(greyGroup("Q1"), greyGroup("Q2")), scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals("places saved to the cache", 0, saveCount())
+        }
+
+    @Test
+    fun testPlaceMissingFromAnswerStaysAsItIsAndIsNotCached() =
+        runBlocking<Unit> {
+            stubForLoading()
+            whenever(nearbyController.getPlaces(any())).thenReturn(listOf(fetchedPlace("Q1")))
+
+            loader.loadPlacesDataAsync(listOf(greyGroup("Q1"), greyGroup("Q2")), scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals(listOf("Name of Q1", ""), NearbyController.markerLabelList.map { it.place.name })
+            assertEquals("places saved to the cache", 1, saveCount())
+        }
+
     private suspend fun stubForLoading() {
         // the real Main dispatcher, so that the delay in schedulePlacesUpdate ends
         Dispatchers.setMain(Dispatchers.Unconfined)
         whenever(placesRepository.save(any())).thenReturn(Completable.complete())
         whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenReturn(false)
     }
+
+    private fun saveCount() =
+        Mockito
+            .mockingDetails(placesRepository)
+            .invocations
+            .count { it.method.name == "save" }
 
     private fun scopeWith(job: Job): LifecycleCoroutineScope =
         mock<LifecycleCoroutineScope>().also {

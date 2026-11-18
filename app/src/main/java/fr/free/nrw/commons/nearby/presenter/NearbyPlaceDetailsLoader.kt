@@ -192,7 +192,7 @@ class NearbyPlaceDetailsLoader(
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup?>>>,
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
@@ -206,7 +206,7 @@ class NearbyPlaceDetailsLoader(
                         val place =
                             fetchedPlacesById[updatedGroups[i].place.wikiDataEntityId]?.first()
                         if (place == null) {
-                            Pair(i, updatedGroups[i])
+                            Pair(i, null)
                         } else {
                             Pair(
                                 i,
@@ -225,7 +225,7 @@ class NearbyPlaceDetailsLoader(
                 // HTTP request failed. Try individual places
                 for (i in indices) {
                     launch {
-                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup?>>()
                         try {
                             val fetchedPlace =
                                 nearbyController.getPlaces(
@@ -246,7 +246,7 @@ class NearbyPlaceDetailsLoader(
                             throw e
                         } catch (e: Exception) {
                             Timber.tag("NearbyPinDetails").e(e)
-                            onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                            onePlaceBatch.add(Pair(i, null))
                         }
                         collectResults.send(onePlaceBatch)
                     }
@@ -269,7 +269,7 @@ class NearbyPlaceDetailsLoader(
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
+        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup?>>>,
     ) {
         repeat(numThreads) {
             launch(Dispatchers.IO) {
@@ -281,15 +281,17 @@ class NearbyPlaceDetailsLoader(
     /**
      * Places the fetched WikiData Place data into associated MarkerPlaceGroups
      *
-     * @param resultList The Place data fetched from WikiData
+     * @param resultList The Place data fetched from WikiData, null for places that could not be
+     * loaded: these keep their current data and are not saved to the cache
      * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
      * from WikiData
      */
     private fun processResults(
-        resultList: List<Pair<Int, MarkerPlaceGroup>>,
+        resultList: List<Pair<Int, MarkerPlaceGroup?>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
     ) {
-        for ((index, fetchedPlaceGroup) in resultList) {
+        for ((index, fetched) in resultList) {
+            val fetchedPlaceGroup = fetched ?: continue
             val existingPlace = updatedGroups[index].place
             val finalPlaceGroup =
                 MarkerPlaceGroup(
@@ -410,7 +412,7 @@ class NearbyPlaceDetailsLoader(
                 val batchedIndicesToFetch =
                     createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Channel.Factory.UNLIMITED)
+                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup?>>>(Channel.Factory.UNLIMITED)
 
                 launchFetchPlacesThreads(
                     LoadPlacesAsyncOptions.CONNECTION_COUNT,

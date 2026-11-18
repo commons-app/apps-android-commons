@@ -485,14 +485,17 @@ class UploadWorker(
                         p18WasSkipped = imageClaim.skipped
                         if (null != revisionID) {
                             withContext(Dispatchers.IO) {
+                                // The place is only cached if Nearby could load its details
                                 val place = placesRepository.fetchPlace(wikiDataPlace.id)
-                                place.name = wikiDataPlace.name
-                                place.pic = HOME_URL + "File:$filename"
-                                placesRepository
-                                    .save(place)
-                                    .subscribeOn(Schedulers.io())
-                                    .blockingAwait()
-                                Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                                if (place != null) {
+                                    place.name = wikiDataPlace.name
+                                    place.pic = HOME_URL + "File:$filename"
+                                    placesRepository
+                                        .save(place)
+                                        .subscribeOn(Schedulers.io())
+                                        .blockingAwait()
+                                    Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                                }
                             }
                         }
                     }
