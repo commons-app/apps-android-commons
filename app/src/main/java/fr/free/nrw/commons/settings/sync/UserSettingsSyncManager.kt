@@ -13,6 +13,7 @@ import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.settings.sync.UserSettingsData.Companion.USER_SETTINGS_PAGE_SUFFIX
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Single
@@ -44,39 +45,26 @@ class UserSettingsSyncManager
     ) {
         companion object {
             private const val EDIT_SUMMARY_BACKUP = "Backing up Commons Android App settings and bookmarks"
-            private val EXCLUDED_PREF_KEYS =
+            private val SYNCABLE_PREFERENCE_KEYS =
                 setOf(
-                    "isUserLoggedIn",
-                    "login_skipped",
-                    "sessionToken",
-                    "cookie",
-                    "cookie_store",
-                    "__version__",
-                    "PLACE_OBJECT",
-                    "last_fetch_timestamp",
-                    "last_opened_nearby",
-                    "firstrun",
-                    "first_edit_depict",
-                    "inAppCameraFirstRun",
-                    "hasAlreadyLaunchedCategoriesDialog",
-                    "hasAlreadyLaunchedBigMultiupload",
-                    "showDuplicatePicturePopup",
-                    "LAST_LOCATION",
-                    "LAST_ZOOM",
+                    Prefs.KEY_THEME_VALUE,
+                    Prefs.APP_UI_LANGUAGE,
+                    "appUiDefaultLanguagePref",
+                    Prefs.DESCRIPTION_LANGUAGE,
+                    "descriptionDefaultLanguagePref",
+                    Prefs.DEFAULT_LICENSE,
+                    Prefs.VIDEO_QUALITY,
+                    Prefs.MANAGED_EXIF_TAGS,
+                    "displayNearbyCardView",
+                    "displayLocationPermissionForCardView",
+                    "displayCampaignsCardView",
+                    "displayDeletionButton",
+                    "useExternalStorage",
+                    "inAppCameraLocationPref",
+                    "openDocumentPhotoPickerPref",
+                    "useAuthorName",
+                    "authorName",
                 )
-
-            private fun isExcludedKey(key: String): Boolean {
-                val lower = key.lowercase()
-                return key in EXCLUDED_PREF_KEYS ||
-                    lower.contains("cookie") ||
-                    lower.contains("token") ||
-                    lower.contains("auth") ||
-                    lower.contains("password") ||
-                    lower.contains("credential") ||
-                    lower.startsWith("last_") ||
-                    lower.startsWith("hasalready") ||
-                    lower.endsWith("firstrun")
-            }
 
             private val KNOWN_BOOLEAN_KEYS =
                 setOf(
@@ -88,9 +76,6 @@ class UserSettingsSyncManager
                     "inAppCameraLocationPref",
                     "openDocumentPhotoPickerPref",
                     "useAuthorName",
-                    "has_user_manually_removed_location",
-                    "isUserLoggedIn",
-                    "login_skipped",
                 )
         }
 
@@ -142,18 +127,7 @@ class UserSettingsSyncManager
                         Single.error(IllegalStateException("No settings backup found on user page."))
                     } else {
                         Single.fromCallable {
-                            val cleanJson =
-                                wikiText
-                                    .trim()
-                                    .removePrefix("<pre>")
-                                    .removeSuffix("</pre>")
-                                    .removePrefix("```json")
-                                    .removeSuffix("```")
-                                    .removePrefix("```")
-                                    .removeSuffix("```")
-                                    .trim()
-
-                            val jsonObject = JsonParser.parseString(cleanJson).asJsonObject
+                            val jsonObject = JsonParser.parseString(wikiText).asJsonObject
                             val userSettingsData = gson.fromJson(jsonObject, UserSettingsData::class.java)
 
                             val prefsElement = jsonObject.getAsJsonObject("preferences")
@@ -186,7 +160,7 @@ class UserSettingsSyncManager
             val filteredPrefs = mutableMapOf<String, PreferenceValueDto>()
 
             for ((key, value) in rawPrefs) {
-                if (!isExcludedKey(key) && value != null) {
+                if (key in SYNCABLE_PREFERENCE_KEYS && value != null) {
                     val prefDto =
                         when (value) {
                             is Boolean -> PreferenceValueDto(PrefType.BOOLEAN, value.toString())
@@ -261,7 +235,7 @@ class UserSettingsSyncManager
         @Suppress("NestedBlockDepth", "TooGenericExceptionCaught")
         private fun applyPreferences(preferences: Map<String, PreferenceValueDto>) {
             for ((key, prefDto) in preferences) {
-                if (!isExcludedKey(key)) {
+                if (key in SYNCABLE_PREFERENCE_KEYS) {
                     try {
                         defaultKvStore.remove(key)
                         when (prefDto.type) {
