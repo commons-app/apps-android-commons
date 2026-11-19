@@ -25,6 +25,7 @@
 * Protnet
 * Tgkarounos
 * Vtalos
+* Warudo
 -->
 <resources>
   <string name="commons_facebook">Σελίδα Commons στο Facebook</string>
@@ -359,7 +360,7 @@
   <string name="question">Ερώτηση</string>
   <string name="quiz_i_am_not_sure">Δεν είμαι σίγουρος/η.</string>
   <string name="result">Αποτέλεσμα</string>
-  <string name="quiz_back_button">Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανότατα θα αποκλειστεί. Είστε βέβαιοι ότι θέλετε να τερματίσετε το κουίζ;</string>
+  <string name="quiz_back_button">Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανότατα θα αποκλειστεί. Είστε βέβαιος/η ότι θέλετε να τερματίσετε το κουίζ;</string>
   <string name="quiz_alert_message">Περισσότερες από %1$s από τις εικόνες που ανεβάσατε έχουν διαγραφεί. Εάν συνεχίσετε να ανεβάζετε εικόνες που απαιτούν διαγραφή, ο λογαριασμός σας πιθανότατα θα αποκλειστεί.\n\nΘα θέλατε να δείτε ξανά το σεμινάριο και μετά να κάνετε ένα κουίζ για να σας βοηθήσει να μάθετε τι είδους εικόνες πρέπει ή όχι να ανεβάσετε;</string>
   <string name="selfie_answer">Οι σέλφι δεν έχουν μεγάλη εγκυκλοπαιδική αξία. Παρακαλούμε μην ανεβάζετε φωτογραφία του εαυτού σας εκτός εάν έχετε ένα λήμμα στη Βικιπαίδεια για εσάς.</string>
   <string name="taj_mahal_answer">Οι φωτογραφίες μνημείων και εξωτερικών τοπίων είναι εντάξει για μεταφόρτωση στις περισσότερες χώρες. Λάβετε υπόψη ότι οι προσωρινές εξωτερικές εγκαταστάσεις τέχνης συχνά προστατεύονται από πνευματικά δικαιώματα και δεν επιτρέπεται η μεταφόρτωση.</string>
@@ -430,7 +431,7 @@
   <string name="step_count">Βήμα %1$d από %2$d: %3$s</string>
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
-  <string name="upload_title_duplicate">Υπάρχει ήδη αρχείο με το όνομα %1$s. Είστε σίγουροι πως θέλετε να προχωρήσετε;\n\nΣημείωση: Ένα κατάλληλο επίθημα θα προστεθεί αυτόματα στο όνομα του αρχείου.</string>
+  <string name="upload_title_duplicate">Υπάρχει ήδη αρχείο με το όνομα %1$s. Είστε σίγουρος/η πως θέλετε να προχωρήσετε;\n\nΣημείωση: Ένα κατάλληλο επίθημα θα προστεθεί αυτόματα στο όνομα του αρχείου.</string>
   <string name="map_application_missing">Δε βρέθηκε καμία συμβατή εφαρμογή χάρτη στη συσκευή σας. Εγκαταστήστε μια εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν τη δυνατότητα.</string>
   <string name="title_page_bookmarks_pictures">Φωτογραφίες</string>
   <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
@@ -831,7 +832,7 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">Το \'%1$s\' βρίσκεται σε διαφορετική θέση. Παρακαλούμε προσδιορίστε τη σωστή θέση παρακαλώ, και αν είναι εφικτό, γράψτε το σωστό γεωγραφικό πλάτος και μήκος.</string>
   <string name="other_problem_or_information_please_explain_below">Άλλο πρόβλημα ή πληροφορίες (παρακαλούμε εξηγήστε παρακάτω).</string>
   <string name="feedback_destination_note">Τα σχόλιά σας δημοσιεύονται στην ακόλουθη σελίδα wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Εφαρμογή για κινητά/Σχόλια&lt;/a&gt;</string>
-  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Είστε βέβαιοι ότι θέλετε να ακυρώσετε όλες τις μεταφορτώσεις;</string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Είστε βέβαιος/η ότι θέλετε να ακυρώσετε όλες τις μεταφορτώσεις;</string>
   <string name="cancelling_all_the_uploads">Ακύρωση όλων των μεταφορτώσεων...</string>
   <string name="uploads">Μεταφορτώσεις</string>
   <string name="pending">Σε εκκρεμότητα</string>
@@ -840,7 +841,7 @@
   <string name="warning_for_no_option_selected">Επιλέξτε οποιαδήποτε από τις επιλογές για να απαντήσετε στην ερώτηση</string>
   <string name="custom_selector_delete_folder">Διαγραφή φακέλου</string>
   <string name="custom_selector_confirm_deletion_title">Επιβεβαίωση διαγραφής</string>
-  <string name="custom_selector_confirm_deletion_message">Είστε βέβαιοι ότι θέλετε να διαγράψετε τον φάκελο %1$s που περιέχει %2$d στοιχεία;</string>
+  <string name="custom_selector_confirm_deletion_message">Σίγουρα θέλετε να διαγράψετε τον φάκελο %1$s που περιέχει %2$d στοιχεία;</string>
   <string name="custom_selector_delete">Διαγραφή</string>
   <string name="custom_selector_cancel">Ακύρωση</string>
   <string name="custom_selector_folder_deleted_success">Ο φάκελος %1$s διαγράφηκε με επιτυχία</string>

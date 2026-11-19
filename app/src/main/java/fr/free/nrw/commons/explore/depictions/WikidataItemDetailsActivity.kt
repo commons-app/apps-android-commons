@@ -68,7 +68,12 @@ class WikidataItemDetailsActivity :
         setSupportActionBar(binding!!.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val tabs = WikidataItemDetailsTabs(this, binding!!, viewPagerAdapter!!)
-        depictionImagesListFragment = tabs.setTabs()
+        val newMediaFragment = tabs.setTabs()
+        // When the screen is recreated, the tabs keep showing the restored fragment,
+        // so use it instead of the new one, which is never shown
+        depictionImagesListFragment =
+            supportFragmentManager!!.fragments.filterIsInstance<DepictedImagesFragment>().firstOrNull()
+                ?: newMediaFragment
         tabs.setPageTitle()
 
         onBackPressedDispatcher.addCallback(
