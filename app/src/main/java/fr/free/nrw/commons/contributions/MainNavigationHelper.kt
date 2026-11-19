@@ -19,10 +19,9 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFra
  * Handles fragment transactions, back-stack navigation, state restoration,
  * and cross-tab map loading for [MainActivity].
  */
-@Suppress("TooManyFunctions")
 class MainNavigationHelper(
     private val activity: MainActivity,
-    private val tabHandler: MainTabHandler,
+    val tabHandler: MainTabHandler,
 ) {
     var contributionsFragment: ContributionsFragment? = null
     var nearbyParentFragment: NearbyParentFragment? = null
@@ -39,10 +38,6 @@ class MainNavigationHelper(
         showBottom: Boolean,
         args: Bundle? = null,
     ): Boolean {
-        if (fragment != null && args != null) {
-            fragment.arguments = args
-        }
-
         if (fragment == null) {
             if (showBottom) {
                 val isLoggedOut = activity.applicationKvStore?.getBoolean("login_skipped") == true
@@ -55,50 +50,68 @@ class MainNavigationHelper(
                 val tag = if (isLoggedOut) "MoreBottomSheetLoggedOut" else "MoreBottomSheet"
                 bottomSheet.show(activity.supportFragmentManager, tag)
             }
-            return false
+        } else if (args != null) {
+            fragment.arguments = args
+            performLoad(fragment, args)
+        } else {
+            performLoad(fragment, null)
         }
-
-        if (!isSameTab(fragment)) {
-            val tag = fragment.javaClass.simpleName
-            val fm = activity.supportFragmentManager
-            val transaction = fm.beginTransaction()
-
-            val currentFragment = getActiveFragmentInstance()
-            if (currentFragment != null && currentFragment.isAdded) {
-                transaction.hide(currentFragment)
-            }
-
-            val existingFragment = fm.findFragmentByTag(tag)
-            if (existingFragment != null) {
-                if (args != null) {
-                    existingFragment.arguments = args
-                }
-                transaction.show(existingFragment)
-                updateActiveFragment(existingFragment)
-            } else {
-                transaction.add(R.id.fragmentContainer, fragment, tag)
-                updateActiveFragment(fragment)
-            }
-            transaction.commit()
-        }
-        return true
+        return fragment != null
     }
 
-    private fun getActiveFragmentInstance(): Fragment? =
-        when (activeFragment) {
-            ActiveFragment.CONTRIBUTIONS -> contributionsFragment
-            ActiveFragment.NEARBY -> nearbyParentFragment
-            ActiveFragment.EXPLORE -> exploreFragment
-            ActiveFragment.BOOKMARK -> bookmarkFragment
-            ActiveFragment.MORE, null -> null
+    private fun performLoad(
+        fragment: Fragment,
+        args: Bundle?,
+    ) {
+        val tag = fragment.javaClass.simpleName
+        val fm = activity.supportFragmentManager
+        val existing = fm.findFragmentByTag(tag)
+        val hasZoom = args?.containsKey("prev_zoom") == true
+        if (hasZoom && existing != null) {
+            when (existing) {
+                is ExploreFragment -> existing.onNearbyMapDataReceived(args)
+                is NearbyParentFragment -> existing.onExploreMapDataReceived(args)
+            }
         }
+        if (isSameTab(fragment)) {
+            if (!hasZoom && fragment is ContributionsFragment) {
+                contributionsFragment?.scrollToTop()
+            }
+            return
+        }
+
+        val transaction = fm.beginTransaction()
+        hideActiveFragment(transaction)
+
+        if (existing != null) {
+            transaction.show(existing)
+            updateActiveFragment(existing)
+        } else {
+            transaction.add(R.id.fragmentContainer, fragment, tag)
+            updateActiveFragment(fragment)
+        }
+        transaction.commit()
+    }
+
+    private fun hideActiveFragment(transaction: androidx.fragment.app.FragmentTransaction) {
+        val current =
+            when (activeFragment) {
+                ActiveFragment.CONTRIBUTIONS -> contributionsFragment
+                ActiveFragment.NEARBY -> nearbyParentFragment
+                ActiveFragment.EXPLORE -> exploreFragment
+                ActiveFragment.BOOKMARK -> bookmarkFragment
+                ActiveFragment.MORE, null -> null
+            }
+        if (current != null && current.isAdded) {
+            transaction.hide(current)
+        }
+    }
 
     /**
      * Checks if the fragment represents the currently active tab, scrolling to top if so.
      */
     private fun isSameTab(fragment: Fragment): Boolean {
         if (fragment is ContributionsFragment && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            contributionsFragment?.scrollToTop()
             return true
         }
         return (fragment is NearbyParentFragment && activeFragment == ActiveFragment.NEARBY) ||
@@ -241,11 +254,12 @@ class MainNavigationHelper(
             },
         )
     }
+}
 
     /**
      * Launches the Explore map with coordinates and zoom level passed from Nearby.
      */
-    fun loadExploreMapFromNearby(
+    fun MainNavigationHelper.loadExploreMapFromNearby(
         zoom: Double,
         latitude: Double,
         longitude: Double,
@@ -263,7 +277,7 @@ class MainNavigationHelper(
     /**
      * Launches the Nearby map with coordinates and zoom level passed from Explore.
      */
-    fun loadNearbyMapFromExplore(
+    fun MainNavigationHelper.loadNearbyMapFromExplore(
         zoom: Double,
         latitude: Double,
         longitude: Double,
@@ -277,4 +291,4 @@ class MainNavigationHelper(
         loadFragment(NearbyParentFragment.newInstance(), false, bundle)
         tabHandler.setSelectedItemId(NavTab.NEARBY.code())
     }
-}
+
