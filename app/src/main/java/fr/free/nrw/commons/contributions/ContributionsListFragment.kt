@@ -4,22 +4,27 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.core.os.BundleCompat
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
+import androidx.recyclerview.widget.SimpleItemAnimator
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding
 import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.filepicker.FilePicker
+import fr.free.nrw.commons.media.DeletedFileActivity
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.wikidata.model.WikiSite
@@ -29,7 +34,9 @@ import javax.inject.Named
 /**
  * Created by root on 01.06.2018.
  */
-class ContributionsListFragment : ContributionsListCallbacksBase() {
+class ContributionsListFragment :
+    BaseContributionsListFragment(),
+    ContributionsListAdapter.Callback {
     @JvmField
     @Inject
     var cameraCoordinator: ContributionCameraCoordinator? = null
@@ -64,10 +71,13 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
     var sessionManager: SessionManager? = null
 
     lateinit var fabHelper: ContributionsListFabHelper
-    override lateinit var wikipediaHelper: ContributionsListWikipediaHelper
+    lateinit var wikipediaHelper: ContributionsListWikipediaHelper
 
     private lateinit var inAppCameraLocationPermissionLauncher:
         ActivityResultLauncher<Array<String>>
+
+    private val spanCountLandscape = 3
+    private val spanCountPortrait = 1
 
     private var userName: String? = null
 
@@ -130,7 +140,14 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
         }
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(RequestMultiplePermissions()) { result ->
-                handleCameraLocationPermissionResult(result)
+                activity?.let { currentActivity ->
+                    cameraCoordinator?.handleLocationPermissionResult(
+                        currentActivity,
+                        result,
+                        inAppCameraLocationPermissionLauncher,
+                        cameraPickLauncherForResult,
+                    )
+                }
             }
 
         wikipediaHelper =
@@ -153,22 +170,6 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
                 imagePickerProvider = { imagePicker },
                 launchers = fabLaunchers,
             )
-    }
-
-    /**
-     * Forwards camera location permission results while this fragment is attached.
-     *
-     * @param results outcomes from the location permission launcher
-     */
-    internal fun handleCameraLocationPermissionResult(results: Map<String, Boolean>) {
-        activity?.let { currentActivity ->
-            cameraCoordinator?.handleLocationPermissionResult(
-                currentActivity,
-                results,
-                inAppCameraLocationPermissionLauncher,
-                cameraPickLauncherForResult,
-            )
-        }
     }
 
     override fun onCreateView(
@@ -198,13 +199,7 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
             binding!!.fabLayout.visibility = View.GONE
         }
 
-        adapter =
-            ContributionsListRecyclerViewHelper.createAdapter(
-                this,
-                mediaClient!!,
-                mediaDataExtractor!!,
-                compositeDisposable,
-            )
+        initAdapter()
 
         // pull down to refresh only enabled for self user.
         if (sessionManager!!.userName == userName) {
@@ -225,15 +220,145 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
         super.onDestroyView()
     }
 
+    private fun initAdapter() {
+        adapter =
+            ContributionsListAdapter(
+                this,
+                mediaClient!!,
+                mediaDataExtractor!!,
+                compositeDisposable,
+            )
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        ContributionsListRecyclerViewHelper.initializeRecyclerView(this, userName)
+        initRecyclerView()
         fabHelper.initializeAnimations()
         fabHelper.setListeners()
     }
+
+    private fun initRecyclerView() {
+        val layoutManager =
+            GridLayoutManager(
+                context,
+                getSpanCount(resources.configuration.orientation),
+            )
+        rvContributionsList!!.layoutManager = layoutManager
+
+        // Setting flicker animation of recycler view to false.
+        val animator = rvContributionsList!!.itemAnimator
+        if (animator is SimpleItemAnimator) {
+            animator.supportsChangeAnimations = false
+        }
+
+        contributionsListPresenter!!.setup(
+            userName,
+            sessionManager!!.userName == userName,
+        )
+        contributionsListPresenter!!.contributionList?.observe(
+            viewLifecycleOwner,
+        ) { list: PagedList<Contribution>? ->
+            if (list != null) {
+                contributionsSize = list.size
+            }
+            adapter!!.submitList(list)
+            if (callback != null) {
+                callback!!.notifyDataSetChanged()
+            }
+        }
+        rvContributionsList!!.adapter = adapter
+        adapter!!.registerAdapterDataObserver(
+            object : AdapterDataObserver() {
+                override fun onItemRangeInserted(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    contributionsSize = adapter!!.itemCount
+                    if (callback != null) {
+                        callback!!.notifyDataSetChanged()
+                    }
+                    if (itemCount > 0 && positionStart == 0) {
+                        if (adapter!!.getContributionForPosition(positionStart) != null) {
+                            rvContributionsList!!
+                                .scrollToPosition(0) // Newly upload items are always added to the top
+                        }
+                    }
+                }
+
+                /**
+                 * Called whenever items in the list have changed
+                 * Calls viewPagerNotifyDataSetChanged() that will notify the viewpager
+                 */
+                override fun onItemRangeChanged(
+                    positionStart: Int,
+                    itemCount: Int,
+                ) {
+                    super.onItemRangeChanged(positionStart, itemCount)
+                    if (callback != null) {
+                        callback!!.viewPagerNotifyDataSetChanged()
+                    }
+                }
+            },
+        )
+
+        // Fab close on touch outside (Scrolling or taping on item triggers this action).
+        rvContributionsList!!.addOnItemTouchListener(
+            object : OnItemTouchListener {
+                /**
+                 * Silently observe and/or take over touch events sent to the RecyclerView before
+                 * they are handled by either the RecyclerView itself or its child views.
+                 */
+                override fun onInterceptTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ): Boolean {
+                    if (e.action == MotionEvent.ACTION_DOWN) {
+                        if (fabHelper.isFabOpen) {
+                            fabHelper.animateFAB(true)
+                        }
+                    }
+                    return false
+                }
+
+                /**
+                 * Process a touch event as part of a gesture that was claimed by returning true
+                 * from a previous call to [.onInterceptTouchEvent].
+                 *
+                 * @param rv
+                 * @param e  MotionEvent describing the touch event. All coordinates are in the
+                 * RecyclerView's coordinate system.
+                 */
+                override fun onTouchEvent(
+                    rv: RecyclerView,
+                    e: MotionEvent,
+                ) {
+                    // required abstract method DO NOT DELETE
+                }
+
+                /**
+                 * Called when a child of RecyclerView does not want RecyclerView and its ancestors
+                 * to intercept touch events with [ViewGroup.onInterceptTouchEvent].
+                 *
+                 * @param disallowIntercept True if the child does not want the parent to intercept
+                 * touch events.
+                 */
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                    // required abstract method DO NOT DELETE
+                }
+            },
+        )
+    }
+
+    private fun getSpanCount(orientation: Int): Int =
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            spanCountLandscape
+        } else {
+            spanCountPortrait
+        }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -241,26 +366,32 @@ class ContributionsListFragment : ContributionsListCallbacksBase() {
         fabHelper.syncFabOrientation(newConfig.orientation)
         rvContributionsList
             ?.setLayoutManager(
-                GridLayoutManager(
-                    context,
-                    ContributionsListRecyclerViewHelper.spanCountForOrientation(newConfig.orientation),
-                ),
+                GridLayoutManager(context, getSpanCount(newConfig.orientation)),
             )
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val layoutManager = rvContributionsList?.layoutManager as GridLayoutManager?
-        outState.putParcelable(RV_STATE, layoutManager!!.onSaveInstanceState())
+    override fun openMediaDetail(
+        contribution: Int,
+        isWikipediaPageExists: Boolean,
+    ) {
+        val item = adapter?.getContributionForPosition(contribution)
+        val filename = item?.media?.filename
+        if (item?.state == Contribution.STATE_DELETED && !filename.isNullOrEmpty()) {
+            DeletedFileActivity.start(requireContext(), filename)
+            return
+        }
+        if (null != callback) { // Just being safe, ideally they won't be called when detached
+            callback!!.showDetail(contribution, isWikipediaPageExists)
+        }
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        if (null != savedInstanceState) {
-            val savedRecyclerLayoutState =
-                BundleCompat.getParcelable(savedInstanceState, RV_STATE, Parcelable::class.java)
-            rvContributionsList!!.layoutManager!!.onRestoreInstanceState(savedRecyclerLayoutState)
-        }
+    /**
+     * Handle callback for wikipedia icon clicked
+     *
+     * @param contribution
+     */
+    override fun addImageToWikipedia(contribution: Contribution?) {
+        wikipediaHelper.addImageToWikipedia(contribution)
     }
 
     interface Callback {

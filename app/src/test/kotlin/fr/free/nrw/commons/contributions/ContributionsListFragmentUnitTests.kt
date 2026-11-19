@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions
 
-import android.Manifest.permission
 import android.app.Activity
 import android.content.res.Configuration
 import android.os.Looper
@@ -70,26 +69,6 @@ class ContributionsListFragmentUnitTests {
     fun checkFragmentNotNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Assert.assertNotNull(fragment)
-    }
-
-    /**
-     * Forwards denied camera location results to the camera coordinator.
-     */
-    @Test
-    fun deniedCameraLocationPermissionResultIsForwardedToCoordinator() {
-        val result = mapOf(permission.ACCESS_FINE_LOCATION to false)
-
-        scenario.onFragment {
-            it.cameraCoordinator = cameraCoordinator
-            it.handleCameraLocationPermissionResult(result)
-        }
-
-        verify(cameraCoordinator).handleLocationPermissionResult(
-            any<Activity>(),
-            eq(result),
-            any(),
-            any(),
-        )
     }
 
     @Test
