@@ -39,6 +39,11 @@ import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.handleWebUrl
+import android.app.ProgressDialog
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.settings.sync.UserSettingsSyncManager
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -60,6 +65,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
     lateinit var locationManager: LocationServiceManager
+
+    @Inject
+    lateinit var sessionManager: SessionManager
+
+    @Inject
+    lateinit var userSettingsSyncManager: UserSettingsSyncManager
+
+    private val compositeDisposable = CompositeDisposable()
 
     internal val languageController = SettingsLanguageController(this)
 
@@ -197,6 +210,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        setupSyncPreferences()
+
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
             findPreference<Preference>("useExternalStorage")?.isEnabled = false
@@ -209,7 +224,103 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
             findPreference<Preference>("vanishAccount")?.isEnabled = false
+            findPreference<Preference>("backupSettings")?.isEnabled = false
+            findPreference<Preference>("restoreSettings")?.isEnabled = false
         }
+    }
+
+    private fun setupSyncPreferences() {
+        val backupPref: Preference? = findPreference("backupSettings")
+        val restorePref: Preference? = findPreference("restoreSettings")
+
+        if (defaultKvStore.getBoolean("login_skipped", false) || !sessionManager.isUserLoggedIn) {
+            backupPref?.isEnabled = false
+            restorePref?.isEnabled = false
+            return
+        }
+
+        backupPref?.setOnPreferenceClickListener {
+            val userName = sessionManager.userName ?: ""
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.sync_backup_confirm_title)
+                .setMessage(getString(R.string.sync_backup_confirm_message, userName))
+                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.submit) { dialog, _ ->
+                    dialog.dismiss()
+                    val progressDialog = @Suppress("DEPRECATION") ProgressDialog(requireContext()).apply {
+                        setMessage(getString(R.string.sync_in_progress))
+                        setCancelable(false)
+                        show()
+                    }
+                    compositeDisposable.add(
+                        userSettingsSyncManager.backupToUserPage()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                { success ->
+                                    progressDialog.dismiss()
+                                    if (success) {
+                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_backup_success))
+                                    } else {
+                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_backup_failed, ""))
+                                    }
+                                },
+                                { throwable ->
+                                    progressDialog.dismiss()
+                                    ViewUtil.showLongToast(
+                                        requireContext(),
+                                        getString(R.string.sync_backup_failed, throwable.localizedMessage ?: "")
+                                    )
+                                }
+                            )
+                    )
+                }
+                .show()
+            true
+        }
+
+        restorePref?.setOnPreferenceClickListener {
+            val userName = sessionManager.userName ?: ""
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.sync_restore_confirm_title)
+                .setMessage(getString(R.string.sync_restore_confirm_message, userName))
+                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.submit) { dialog, _ ->
+                    dialog.dismiss()
+                    val progressDialog = @Suppress("DEPRECATION") ProgressDialog(requireContext()).apply {
+                        setMessage(getString(R.string.sync_in_progress))
+                        setCancelable(false)
+                        show()
+                    }
+                    compositeDisposable.add(
+                        userSettingsSyncManager.restoreFromUserPage()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                { success ->
+                                    progressDialog.dismiss()
+                                    if (success) {
+                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_restore_success))
+                                    } else {
+                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_restore_failed, ""))
+                                    }
+                                },
+                                { throwable ->
+                                    progressDialog.dismiss()
+                                    ViewUtil.showLongToast(
+                                        requireContext(),
+                                        getString(R.string.sync_restore_failed, throwable.localizedMessage ?: "")
+                                    )
+                                }
+                            )
+                    )
+                }
+                .show()
+            true
+        }
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        super.onDestroy()
     }
 
     /**

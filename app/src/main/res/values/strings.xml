@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--accessibility UI description strings-->
+  <string name="preference_category_sync">Cloud Backup &amp; Sync</string>
+  <string name="backup_settings">Backup settings to Commons</string>
+  <string name="backup_settings_summary">Save app settings and bookmarks to your user page on Wikimedia Commons</string>
+  <string name="restore_settings">Restore settings from Commons</string>
+  <string name="restore_settings_summary">Restore app settings and bookmarks from your user page on Wikimedia Commons</string>
+  <string name="sync_backup_confirm_title">Backup Settings to User Page?</string>
+  <string name="sync_backup_confirm_message">This will save your app settings and bookmarks to User:%1$s/commons-android-app.json. Note that Wikimedia user pages are publicly accessible.</string>
+  <string name="sync_backup_success">Settings successfully saved to your user page!</string>
+  <string name="sync_backup_failed">Failed to save settings: %1$s</string>
+  <string name="sync_restore_confirm_title">Restore Settings from User Page?</string>
+  <string name="sync_restore_confirm_message">This will restore your app settings and merge saved bookmarks from User:%1$s/commons-android-app.json.</string>
+  <string name="sync_restore_success">Settings and bookmarks successfully restored!</string>
+  <string name="sync_restore_failed">Failed to restore settings: %1$s</string>
+  <string name="sync_in_progress">Syncing settings with Wikimedia Commons…</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_github">Commons GitHub Source Code</string>
   <string name="commons_logo">Commons Logo</string>
