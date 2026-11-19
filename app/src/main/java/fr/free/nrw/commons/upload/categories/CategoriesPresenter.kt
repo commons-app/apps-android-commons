@@ -256,6 +256,11 @@ class CategoriesPresenter
                         view.navigateToLoginScreen()
                     }
                 }
+            } else if (repository.getSelectedExistingCategories().isNotEmpty()) {
+                // Nothing changed and categories are still selected, so there is
+                // nothing to save: close the editor without a warning
+                view.goBackToPreviousScreen()
+                repository.cleanup()
             } else {
                 repository.cleanup()
                 view.showNoCategorySelected()
