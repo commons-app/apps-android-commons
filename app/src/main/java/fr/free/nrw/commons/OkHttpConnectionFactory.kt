@@ -57,7 +57,6 @@ object OkHttpConnectionFactory {
                     .apply { level = HttpLoggingInterceptor.Level.BASIC }
                     .redactSensitiveHeaders(),
             ).addInterceptor(ForceCacheInterceptor())
-            .addNetworkInterceptor(CacheControlInterceptor())
             .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
@@ -77,7 +76,6 @@ class CommonHeaderRequestInterceptor : Interceptor {
 }
 
 private const val OFFLINE_CACHE_MAX_STALE_DAYS = 7
-private const val CACHE_CONTROL_MAX_AGE_SECONDS = 86400
 
 class ForceCacheInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -89,10 +87,7 @@ class ForceCacheInterceptor : Interceptor {
                 null
             }
 
-        if (appInstance != null &&
-            request.method.equals("GET", ignoreCase = true) &&
-            !NetworkUtils.isInternetConnectionEstablished(appInstance)
-        ) {
+        if (shouldForceCache(appInstance, request)) {
             val offlineRequest =
                 request
                     .newBuilder()
@@ -107,21 +102,22 @@ class ForceCacheInterceptor : Interceptor {
         }
         return chain.proceed(request)
     }
-}
 
-class CacheControlInterceptor : Interceptor {
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val response = chain.proceed(chain.request())
-        if (chain.request().method.equals("GET", ignoreCase = true)) {
-            return response
-                .newBuilder()
-                .removeHeader("Pragma")
-                .removeHeader("Cache-Control")
-                .header("Cache-Control", "public, max-age=$CACHE_CONTROL_MAX_AGE_SECONDS")
-                .build()
-        }
-        return response
-    }
+    private fun shouldForceCache(
+        appInstance: CommonsApplication?,
+        request: Request,
+    ): Boolean =
+        appInstance != null &&
+            request.method.equals("GET", ignoreCase = true) &&
+            !NetworkUtils.isInternetConnectionEstablished(appInstance) &&
+            isExploreRequest(request.url.toString())
+
+    private fun isExploreRequest(url: String): Boolean =
+        url.contains("generator=categorymembers") ||
+            url.contains("generator=search") ||
+            url.contains("generator=allimages") ||
+            url.contains("generator=geosearch") ||
+            url.contains("action=wbgetentities")
 }
 
 private const val SUPPRESS_ERROR_LOG = "x-commons-suppress-error-log"
