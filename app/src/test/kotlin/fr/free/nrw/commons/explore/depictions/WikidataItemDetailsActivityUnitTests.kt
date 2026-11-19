@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.content.Intent
+import android.os.Looper
 import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -12,6 +13,7 @@ import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.wikidata.WikidataConstants
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -22,6 +24,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
@@ -196,5 +199,32 @@ class WikidataItemDetailsActivityUnitTests {
         for (index in 0 until adapter.count) {
             Assert.assertNull(adapter.getItem(index).arguments)
         }
+    }
+
+    @Test
+    fun testImageCountAfterRecreatingTheScreen() {
+        val item =
+            DepictedItem(
+                name = "Bird",
+                description = null,
+                imageUrl = null,
+                instanceOfs = emptyList(),
+                commonsCategories = emptyList(),
+                isSelected = false,
+                id = "Q5113",
+            )
+        val intent =
+            Intent(ApplicationProvider.getApplicationContext(), WikidataItemDetailsActivity::class.java)
+                .putExtra("wikidataItemName", item.name)
+                .putExtra("entityId", item.id)
+                .putExtra(WikidataConstants.BOOKMARKS_ITEMS, item)
+        val controller = Robolectric.buildActivity(WikidataItemDetailsActivity::class.java, intent).setup()
+        // Recreate the screen
+        controller.recreate()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // Tapping an image asks for the image count. This used to crash with
+        // "lateinit property categoryImagesCallback has not been initialized"
+        Assert.assertEquals(0, controller.get().getTotalMediaCount())
     }
 }
