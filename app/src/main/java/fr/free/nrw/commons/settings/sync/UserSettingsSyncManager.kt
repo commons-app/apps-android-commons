@@ -29,6 +29,7 @@ import javax.inject.Singleton
  * to/from the user's Wikimedia Commons user subpage: User:<Username>/commons-android-app.json.
  */
 @Singleton
+@Suppress("LongParameterList")
 class UserSettingsSyncManager
     @Inject
     constructor(
@@ -257,6 +258,7 @@ class UserSettingsSyncManager
                 )
             }
 
+        @Suppress("NestedBlockDepth", "TooGenericExceptionCaught")
         private fun applyPreferences(preferences: Map<String, PreferenceValueDto>) {
             for ((key, prefDto) in preferences) {
                 if (!isExcludedKey(key)) {
