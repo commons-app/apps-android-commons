@@ -192,7 +192,7 @@ class NearbyPlaceDetailsLoader(
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
+        collectResults: Channel<List<Pair<Int, Place?>>>,
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
@@ -201,21 +201,10 @@ class NearbyPlaceDetailsLoader(
                     nearbyController.getPlaces(indices.map { updatedGroups[it].place })
                 // The query gives one row per class, picture etc. in no fixed order, so match by QID
                 val fetchedPlacesById = fetchedPlaces.groupBy { it.wikiDataEntityId }
+                val usedIds = mutableSetOf<String?>()
                 collectResults.send(
                     indices.map { i ->
-                        val place =
-                            fetchedPlacesById[updatedGroups[i].place.wikiDataEntityId]?.first()
-                        if (place == null) {
-                            Pair(i, updatedGroups[i])
-                        } else {
-                            Pair(
-                                i,
-                                MarkerPlaceGroup(
-                                    bookmarkLocationDao.findBookmarkLocation(place.name),
-                                    place,
-                                ),
-                            )
-                        }
+                        Pair(i, fetchedPlacesById.placeFor(updatedGroups[i].place.wikiDataEntityId, usedIds))
                     },
                 )
             } catch (e: CancellationException) {
@@ -225,28 +214,18 @@ class NearbyPlaceDetailsLoader(
                 // HTTP request failed. Try individual places
                 for (i in indices) {
                     launch {
-                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
+                        val onePlaceBatch = mutableListOf<Pair<Int, Place?>>()
                         try {
                             val fetchedPlace =
                                 nearbyController.getPlaces(
                                     mutableListOf(updatedGroups[i].place),
                                 )
-                            onePlaceBatch.add(
-                                Pair(
-                                    i,
-                                    MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(
-                                            fetchedPlace[0].name,
-                                        ),
-                                        fetchedPlace[0],
-                                    ),
-                                ),
-                            )
+                            onePlaceBatch.add(Pair(i, fetchedPlace[0]))
                         } catch (e: CancellationException) {
                             throw e
                         } catch (e: Exception) {
                             Timber.tag("NearbyPinDetails").e(e)
-                            onePlaceBatch.add(Pair(i, updatedGroups[i]))
+                            onePlaceBatch.add(Pair(i, null))
                         }
                         collectResults.send(onePlaceBatch)
                     }
@@ -269,7 +248,7 @@ class NearbyPlaceDetailsLoader(
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
+        collectResults: Channel<List<Pair<Int, Place?>>>,
     ) {
         repeat(numThreads) {
             launch(Dispatchers.IO) {
@@ -281,20 +260,23 @@ class NearbyPlaceDetailsLoader(
     /**
      * Places the fetched WikiData Place data into associated MarkerPlaceGroups
      *
-     * @param resultList The Place data fetched from WikiData
+     * @param resultList The Place data fetched from WikiData, null for places that could not be
+     * loaded: these keep their current data and are not saved to the cache
      * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
      * from WikiData
      */
-    private fun processResults(
-        resultList: List<Pair<Int, MarkerPlaceGroup>>,
+    private suspend fun processResults(
+        resultList: List<Pair<Int, Place?>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
     ) {
-        for ((index, fetchedPlaceGroup) in resultList) {
+        for ((index, fetchedPlace) in resultList) {
+            fetchedPlace ?: continue
             val existingPlace = updatedGroups[index].place
             val finalPlaceGroup =
                 MarkerPlaceGroup(
-                    fetchedPlaceGroup.isBookmarked,
-                    fetchedPlaceGroup.place.apply {
+                    // Read it now, not when the batch was fetched: the user may have changed it since
+                    bookmarkLocationDao.findBookmarkLocation(fetchedPlace.name),
+                    fetchedPlace.apply {
                         location = existingPlace.location
                         distance = existingPlace.distance
                         isMonument = existingPlace.isMonument
@@ -410,7 +392,7 @@ class NearbyPlaceDetailsLoader(
                 val batchedIndicesToFetch =
                     createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Channel.Factory.UNLIMITED)
+                val collectResults = Channel<List<Pair<Int, Place?>>>(Channel.Factory.UNLIMITED)
 
                 launchFetchPlacesThreads(
                     LoadPlacesAsyncOptions.CONNECTION_COUNT,
@@ -458,3 +440,20 @@ private fun List<Place>.toLocationMap(startIndex: Int): HashMap<LatLng, Place> {
     }
     return map
 }
+
+/**
+ * Returns the fetched Place for the item [id], or a copy of it if an earlier pin already got it:
+ * a custom query can put the same item on two pins, and each pin needs its own Place.
+ *
+ * @param usedIds The ids already given to a pin of the same batch.
+ */
+private fun Map<String?, List<Place>>.placeFor(
+    id: String?,
+    usedIds: MutableSet<String?>,
+): Place? = this[id]?.first()?.let { if (usedIds.add(id)) it else it.copy() }
+
+/**
+ * Returns a new Place with the details of this one, so that two pins never share one object.
+ */
+private fun Place.copy(): Place =
+    Place(language, name, label, longDescription, location, category, siteLinks, pic, exists, entityID)
