@@ -752,6 +752,7 @@
   <string name="cancelling_upload">正在取消上传…</string>
   <string name="retrying_upload">正在重试上传…</string>
   <string name="retrying_failed_uploads">正在重试所有失败的上传…</string>
+  <string name="upload_failed_server_error">共享资源目前无法处理此请求。请稍后重试。（HTTP %1$d）</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
   <string name="limited_connection_is_on">限制连接模式启用中。</string>
