@@ -690,6 +690,7 @@
   <string name="cancelling_upload">Го откажувам подигањето…</string>
   <string name="retrying_upload">Повторно се обидувам да подигнам…</string>
   <string name="retrying_failed_uploads">Повторно се обидувам да ги извршам сите неуспешни подигања…</string>
+  <string name="upload_failed_server_error">Ризницата во моментов не може да го сработи барањето. Обидете се подоцна. (HTTP %1$d)</string>
   <string name="cancel_upload">Откажи подигање</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
