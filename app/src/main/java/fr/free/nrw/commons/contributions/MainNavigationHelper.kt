@@ -256,39 +256,38 @@ class MainNavigationHelper(
     }
 }
 
-    /**
-     * Launches the Explore map with coordinates and zoom level passed from Nearby.
-     */
-    fun MainNavigationHelper.loadExploreMapFromNearby(
-        zoom: Double,
-        latitude: Double,
-        longitude: Double,
-    ) {
-        val bundle =
-            Bundle().apply {
-                putDouble("prev_zoom", zoom)
-                putDouble("prev_latitude", latitude)
-                putDouble("prev_longitude", longitude)
-            }
-        loadFragment(ExploreFragment.newInstance(), false, bundle)
-        tabHandler.setSelectedItemId(NavTab.EXPLORE.code())
-    }
+/**
+ * Launches the Explore map with coordinates and zoom level passed from Nearby.
+ */
+fun MainNavigationHelper.loadExploreMapFromNearby(
+    zoom: Double,
+    latitude: Double,
+    longitude: Double,
+) {
+    val bundle =
+        Bundle().apply {
+            putDouble("prev_zoom", zoom)
+            putDouble("prev_latitude", latitude)
+            putDouble("prev_longitude", longitude)
+        }
+    loadFragment(ExploreFragment.newInstance(), false, bundle)
+    tabHandler.setSelectedItemId(NavTab.EXPLORE.code())
+}
 
-    /**
-     * Launches the Nearby map with coordinates and zoom level passed from Explore.
-     */
-    fun MainNavigationHelper.loadNearbyMapFromExplore(
-        zoom: Double,
-        latitude: Double,
-        longitude: Double,
-    ) {
-        val bundle =
-            Bundle().apply {
-                putDouble("prev_zoom", zoom)
-                putDouble("prev_latitude", latitude)
-                putDouble("prev_longitude", longitude)
-            }
-        loadFragment(NearbyParentFragment.newInstance(), false, bundle)
-        tabHandler.setSelectedItemId(NavTab.NEARBY.code())
-    }
-
+/**
+ * Launches the Nearby map with coordinates and zoom level passed from Explore.
+ */
+fun MainNavigationHelper.loadNearbyMapFromExplore(
+    zoom: Double,
+    latitude: Double,
+    longitude: Double,
+) {
+    val bundle =
+        Bundle().apply {
+            putDouble("prev_zoom", zoom)
+            putDouble("prev_latitude", latitude)
+            putDouble("prev_longitude", longitude)
+        }
+    loadFragment(NearbyParentFragment.newInstance(), false, bundle)
+    tabHandler.setSelectedItemId(NavTab.NEARBY.code())
+}
