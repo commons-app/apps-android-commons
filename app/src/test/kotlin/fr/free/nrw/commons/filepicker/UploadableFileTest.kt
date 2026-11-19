@@ -4,6 +4,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -42,6 +43,20 @@ class UploadableFileTest {
         } finally {
             Locale.setDefault(defaultLocale)
         }
+    }
+
+    @Test
+    fun getFileCreatedDateFallsBackWhenExifDateIsMalformed() {
+        val image = temporaryFolder.newFile("bad-date.jpg")
+        File(SAMPLE_IMAGE).copyTo(image, overwrite = true)
+        ExifInterface(image.absolutePath).apply {
+            setAttribute(ExifInterface.TAG_DATETIME_ORIGINAL, "abcd:11:07 10:30:00")
+            saveAttributes()
+        }
+
+        val dateTime = UploadableFile(image).getFileCreatedDate(ApplicationProvider.getApplicationContext())
+
+        assertNotEquals(UploadableFile.DateTimeWithSource.EXIF_SOURCE, dateTime?.source)
     }
 
     private companion object {

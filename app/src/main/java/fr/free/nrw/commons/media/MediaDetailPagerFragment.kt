@@ -36,6 +36,7 @@ import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.ViewUtil.showShortSnackbar
 import fr.free.nrw.commons.utils.handleWebUrl
 import timber.log.Timber
+import java.net.MalformedURLException
 import java.net.URL
 import javax.inject.Inject
 
@@ -373,7 +374,7 @@ ${m.pageTitle.canonicalUri}""",
                                     mediaUrl.openConnection().getInputStream(),
                                 )
                             }, menu)
-                        } catch (e: Exception) {
+                        } catch (e: MalformedURLException) {
                             Timber.e("Cant detect media transparency")
                         }
                     }

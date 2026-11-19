@@ -17,16 +17,20 @@ class UploadModelUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        uploadModel =
-            UploadModel(
+        val licenseDependencies =
+            UploadModelLicenseDependencies(
                 listOf(),
                 mock(JsonKvStore::class.java),
                 mapOf(),
+            )
+        val serviceDependencies =
+            UploadModelServiceDependencies(
                 mock(Context::class.java),
                 mock(SessionManager::class.java),
                 mock(FileProcessor::class.java),
                 mock(ImageProcessingService::class.java),
             )
+        uploadModel = UploadModel(licenseDependencies, serviceDependencies)
     }
 
     @Ignore
