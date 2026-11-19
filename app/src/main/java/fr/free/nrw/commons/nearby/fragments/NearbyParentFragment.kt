@@ -416,11 +416,7 @@ class NearbyParentFragment :
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
         refreshButton.setOnMenuItemClickListener {
-            try {
-                emptyCache()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
-            }
+            runNearbyMenuAction { emptyCache() }
             false
         }
         listMenu.setOnMenuItemClickListener {
@@ -438,24 +434,32 @@ class NearbyParentFragment :
         }
 
         saveAsGPXButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_gpx_file))
                 progressDialog!!.show()
                 savePlacesAsGPX()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
         }
         saveAsKMLButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_kml_file))
                 progressDialog!!.show()
                 savePlacesAsKML()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
+        }
+    }
+
+    // Cache and export actions surface all storage failures as IllegalStateException to the menu host.
+    private inline fun runNearbyMenuAction(action: () -> Unit) {
+        val result = runCatching(action)
+        if (result.isFailure) {
+            val failure = result.exceptionOrNull() ?: return
+            if (failure is IllegalStateException) {
+                throw failure
+            }
+            throw IllegalStateException(failure)
         }
     }
 
@@ -973,10 +977,14 @@ class NearbyParentFragment :
                 locationManager!!.removeLocationListener(presenter!!)
                 locationManager!!.unregisterLocationManager()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcast receivers should always be unregistered inside catch,
             // you never know if they were already registered or not
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 
@@ -3057,9 +3065,13 @@ class NearbyParentFragment :
                 locationManager!!.registerLocationManager()
                 Timber.d("Location service manager added and registered")
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcasts are tricky, should be catchedonR
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 

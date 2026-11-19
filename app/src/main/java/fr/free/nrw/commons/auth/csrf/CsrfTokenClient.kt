@@ -29,46 +29,69 @@ class CsrfTokenClient(
         val password = sessionManager.password ?: ""
 
         for (retry in 0 until MAX_RETRIES_OF_LOGIN_BLOCKING) {
-            try {
-                if (retry > 0) {
-                    // Log in explicitly
-                    loginClient.loginBlocking(userName, password)
-                }
-
-                // Get CSRFToken response off the main thread.
-                val response =
-                    newSingleThreadExecutor()
-                        .submit(
-                            Callable {
-                                csrfTokenInterface.getCsrfTokenCall().execute()
-                            },
-                        ).get()
-
-                if (response
-                        .body()
-                        ?.query()
-                        ?.csrfToken()
-                        .isNullOrEmpty()
-                ) {
-                    continue
-                }
-
-                token = response.body()!!.query()!!.csrfToken()!!
-                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
-                    throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
-                }
-                break
-            } catch (e: LoginFailedException) {
-                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, e)
-            } catch (t: Throwable) {
-                Timber.w(t)
+            if (retry > 0 && !loginForRetry(userName, password)) {
+                continue
             }
+            val csrfToken = fetchCsrfToken() ?: continue
+            token = csrfToken
+            if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
+                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+            }
+            break
         }
 
         if (token.isEmpty() || token == ANON_TOKEN) {
             throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
         }
         return token
+    }
+
+    private fun loginForRetry(
+        userName: String,
+        password: String,
+    ): Boolean {
+        val loginResult = runCatching { loginClient.loginBlocking(userName, password) }
+        if (loginResult.isFailure) {
+            val failure = loginResult.exceptionOrNull()
+            if (failure is LoginFailedException) {
+                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, failure)
+            }
+            logRetryableFailure(failure)
+            return false
+        }
+        return true
+    }
+
+    private fun fetchCsrfToken(): String? {
+        val responseResult =
+            runCatching {
+                // Get CSRFToken response off the main thread.
+                newSingleThreadExecutor()
+                    .submit(
+                        Callable {
+                            csrfTokenInterface.getCsrfTokenCall().execute()
+                        },
+                    ).get()
+            }
+        val response =
+            responseResult.getOrNull()
+                ?: run {
+                    logRetryableFailure(responseResult.exceptionOrNull())
+                    return null
+                }
+        return response
+            .body()
+            ?.query()
+            ?.csrfToken()
+            ?.takeIf { it.isNotEmpty() }
+    }
+
+    // Login and token requests are retried on any transient failure; only explicit login failures are fatal.
+    private fun logRetryableFailure(failure: Throwable?) {
+        if (failure is InterruptedException) {
+            Thread.currentThread().interrupt()
+        }
+        Timber.w(failure)
     }
 
     @VisibleForTesting

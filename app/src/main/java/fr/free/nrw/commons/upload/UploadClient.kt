@@ -228,10 +228,9 @@ class UploadClient
             offset: Long,
             fileKey: String?,
             countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> {
-            val filePart: MultipartBody.Part
-            return try {
-                filePart =
+        ): Observable<UploadResult> =
+            Observable.defer {
+                val filePart =
                     MultipartBody.Part.createFormData(
                         "chunk",
                         URLEncoder.encode(filename, "utf-8"),
@@ -254,11 +253,7 @@ class UploadClient
                         }
                         uploadResult.upload
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Failed to upload chunk to stash")
-                Observable.error(throwable)
             }
-        }
 
         /**
          * Converts string value to request body
@@ -270,7 +265,7 @@ class UploadClient
             uniqueFileName: String?,
             fileKey: String?,
         ): Observable<UploadResult?> =
-            try {
+            Observable.defer {
                 uploadInterface
                     .uploadFileFromStash(
                         csrfTokenClient.getTokenBlocking(),
@@ -287,9 +282,6 @@ class UploadClient
                         }
                         uploadResult.upload
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Exception occurred in uploading file from stash")
-                Observable.error(throwable)
             }
 
         /**

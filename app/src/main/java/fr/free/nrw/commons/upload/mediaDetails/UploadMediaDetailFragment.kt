@@ -38,7 +38,10 @@ import java.util.Objects
 import javax.inject.Inject
 import javax.inject.Named
 
+// File, EXIF and dialog helpers can fail with IO or platform-specific runtime errors at this UI boundary.
+
 /** Owns the lifecycle and setup of one upload media details step. */
+@Suppress("TooGenericExceptionCaught")
 class UploadMediaDetailFragment private constructor(
     private val mediaView: UploadMediaDetailView,
 ) : UploadBaseFragment(),

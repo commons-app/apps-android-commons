@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
+import android.database.CursorIndexOutOfBoundsException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -526,7 +528,19 @@ val MIGRATION_21_22 =
                 }
                 cursor.close()
                 oldDb.close()
-            } catch (e: Exception) {
+            } catch (e: SQLiteException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: CursorIndexOutOfBoundsException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalArgumentException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalStateException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: SecurityException) {
                 Timber.e(e, "Exception during legacy database migration")
                 throw e
             }
