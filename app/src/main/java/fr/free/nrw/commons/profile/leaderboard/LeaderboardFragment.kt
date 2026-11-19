@@ -157,7 +157,15 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      */
     private fun scrollToUserRank() {
         if (userRank == 0) {
-            Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
+            context?.let { ctx ->
+                val message =
+                    if (!userName.isNullOrBlank() && userName != sessionManager.userName) {
+                        ctx.getString(R.string.no_achievements_yet, userName)
+                    } else {
+                        ctx.getString(R.string.you_have_no_achievements_yet)
+                    }
+                Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+            }
         } else {
             if (binding == null) {
                 return
