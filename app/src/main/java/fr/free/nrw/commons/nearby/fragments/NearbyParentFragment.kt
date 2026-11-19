@@ -452,14 +452,12 @@ class NearbyParentFragment :
     }
 
     // Cache and export actions surface all storage failures as IllegalStateException to the menu host.
+    @Suppress("TooGenericExceptionCaught")
     private inline fun runNearbyMenuAction(action: () -> Unit) {
-        val result = runCatching(action)
-        if (result.isFailure) {
-            val failure = result.exceptionOrNull() ?: return
-            if (failure is IllegalStateException) {
-                throw failure
-            }
-            throw IllegalStateException(failure)
+        try {
+            action()
+        } catch (e: Exception) {
+            throw IllegalStateException(e)
         }
     }
 
