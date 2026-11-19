@@ -229,6 +229,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+    @Suppress("LongMethod")
     private fun setupSyncPreferences() {
         val backupPref: Preference? = findPreference("backupSettings")
         val restorePref: Preference? = findPreference("restoreSettings")
@@ -259,19 +260,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
                                 { success ->
                                     progressDialog.dismiss()
                                     if (success) {
-                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_backup_success))
+                                        ViewUtil.showLongToast(
+                                            requireContext(),
+                                            getString(R.string.sync_backup_success),
+                                        )
                                     } else {
-                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_backup_failed, ""))
+                                        ViewUtil.showLongToast(
+                                            requireContext(),
+                                            getString(R.string.sync_backup_failed, ""),
+                                        )
                                     }
                                 },
                                 { throwable ->
                                     progressDialog.dismiss()
                                     ViewUtil.showLongToast(
                                         requireContext(),
-                                        getString(R.string.sync_backup_failed, throwable.localizedMessage ?: "")
+                                        getString(R.string.sync_backup_failed, throwable.localizedMessage ?: ""),
                                     )
-                                }
-                            )
+                                },
+                            ),
                     )
                 }
                 .show()
@@ -298,19 +305,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
                                 { success ->
                                     progressDialog.dismiss()
                                     if (success) {
-                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_restore_success))
+                                        ViewUtil.showLongToast(
+                                            requireContext(),
+                                            getString(R.string.sync_restore_success),
+                                        )
+                                        requireActivity().recreate()
                                     } else {
-                                        ViewUtil.showLongToast(requireContext(), getString(R.string.sync_restore_failed, ""))
+                                        ViewUtil.showLongToast(
+                                            requireContext(),
+                                            getString(R.string.sync_restore_failed, ""),
+                                        )
                                     }
                                 },
                                 { throwable ->
                                     progressDialog.dismiss()
                                     ViewUtil.showLongToast(
                                         requireContext(),
-                                        getString(R.string.sync_restore_failed, throwable.localizedMessage ?: "")
+                                        getString(R.string.sync_restore_failed, throwable.localizedMessage ?: ""),
                                     )
-                                }
-                            )
+                                },
+                            ),
                     )
                 }
                 .show()
