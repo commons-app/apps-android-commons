@@ -29,6 +29,20 @@
 * Ата
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
+  <string name="preference_category_sync">Title for the preference category that lets users backup and restore app settings and bookmarks to their user page on Wikimedia Commons.</string>
+  <string name="backup_settings">Title for the setting item that saves user settings and bookmarks to the user subpage on Commons.</string>
+  <string name="backup_settings_summary">Summary for the setting item that saves user settings and bookmarks to the user subpage on Commons.</string>
+  <string name="restore_settings">Title for the setting item that restores user settings and bookmarks from the user subpage on Commons.</string>
+  <string name="restore_settings_summary">Summary for the setting item that restores user settings and bookmarks from the user subpage on Commons.</string>
+  <string name="sync_backup_confirm_title">Title of the confirmation dialog when backing up settings to user page.</string>
+  <string name="sync_backup_confirm_message">Message of the confirmation dialog when backing up settings, warning that bookmarked places and coordinates will be published to a public user page. %1$s is replaced by the username.</string>
+  <string name="sync_backup_success">Toast message shown when settings are successfully saved to the user page.</string>
+  <string name="sync_backup_failed">Toast message shown when saving settings fails. %1$s is replaced by the error message.</string>
+  <string name="sync_restore_confirm_title">Title of the confirmation dialog when restoring settings from user page.</string>
+  <string name="sync_restore_confirm_message">Message of the confirmation dialog when restoring settings from the user page. %1$s is replaced by the username.</string>
+  <string name="sync_restore_success">Toast message shown when settings are successfully restored from the user page.</string>
+  <string name="sync_restore_failed">Toast message shown when restoring settings fails. %1$s is replaced by the error message.</string>
+  <string name="sync_in_progress">Progress message shown while syncing settings with Wikimedia Commons.</string>
   <string name="commons_facebook">Alternative text for image link.</string>
   <string name="commons_github">Alternative text for image link.</string>
   <string name="commons_logo">Alternative text for image.</string>
