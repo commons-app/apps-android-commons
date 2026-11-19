@@ -678,6 +678,22 @@ class NearbyParentFragment :
     }
 
     /**
+     * called when new location data is received from Explore map without re-creating the fragment
+     */
+    fun onExploreMapDataReceived(bundle: Bundle) {
+        if (bundle.containsKey("prev_zoom")) {
+            prevZoom = bundle.getDouble("prev_zoom")
+            prevLatitude = bundle.getDouble("prev_latitude")
+            prevLongitude = bundle.getDouble("prev_longitude")
+            if (isResumed) {
+                val changeType =
+                    fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED
+                presenter?.updateMapAndList(changeType)
+            }
+        }
+    }
+
+    /**
      * Fetch Explore map camera data from fragment arguments if any.
      */
     fun loadExploreMapData() {

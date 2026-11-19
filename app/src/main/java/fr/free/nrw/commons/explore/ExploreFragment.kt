@@ -127,6 +127,22 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
     }
 
     /**
+     * called when new location data is received from Nearby map without re-creating the fragment
+     */
+    fun onNearbyMapDataReceived(bundle: Bundle) {
+        if (bundle.containsKey("prev_zoom")) {
+            prevZoom = bundle.getDouble("prev_zoom")
+        }
+        if (bundle.containsKey("prev_latitude")) {
+            prevLatitude = bundle.getDouble("prev_latitude")
+        }
+        if (bundle.containsKey("prev_longitude")) {
+            prevLongitude = bundle.getDouble("prev_longitude")
+        }
+        binding?.viewPager?.currentItem = 2
+    }
+
+    /**
      * Fetch Nearby map camera data from fragment arguments if any.
      */
     private fun loadNearbyMapData() {
