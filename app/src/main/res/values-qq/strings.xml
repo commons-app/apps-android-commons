@@ -55,7 +55,6 @@
   <string name="starting_uploads">Widget title.</string>
   <string name="starting_multiple_uploads">Widget title.</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
-  <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license.</string>
   <string name="upload_count_title">Counter in widget.</string>
   <string name="receiving_shared_content">Seems to be unused.</string>
   <string name="navigation_item_explore">{{Identical|Explore}}</string>
@@ -89,7 +88,6 @@
   <string name="upload_completed_notification_title">Title for notification about upload being completed. %1$s represents file name.\n{{Identical|Uploaded}}</string>
   <string name="upload_completed_notification_text">Text for notification about upload being completed.</string>
   <string name="upload_progress_notification_title_start">Title for notificiation about upload being started. %1$s represents file name</string>
-  <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name\n{{Identical|Uploading}}</string>
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_metadata_pending_notification_title">Title for notification when a file was uploaded but saving its captions and depicts failed, so only those will be retried. %1$s represents file name</string>
