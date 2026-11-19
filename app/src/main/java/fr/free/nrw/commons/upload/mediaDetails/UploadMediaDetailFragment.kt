@@ -103,6 +103,9 @@ class UploadMediaDetailFragment private constructor(
         if (savedInstanceState != null && uploadableFile == null) {
             uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE)
         }
+        if (savedInstanceState != null && place == null) {
+            place = savedInstanceState.getParcelable(PLACE)
+        }
         if (savedInstanceState != null) {
             mediaView.editedImageUri = savedInstanceState.getParcelable(EDITED_IMAGE_URI)
         }
@@ -373,6 +376,9 @@ class UploadMediaDetailFragment private constructor(
         if (uploadableFile != null) {
             outState.putParcelable(UPLOADABLE_FILE, uploadableFile)
         }
+        if (place != null) {
+            outState.putParcelable(PLACE, place)
+        }
         if (mediaView.editedImageUri != null) {
             outState.putParcelable(EDITED_IMAGE_URI, mediaView.editedImageUri)
         }
@@ -404,6 +410,7 @@ class UploadMediaDetailFragment private constructor(
         const val LAST_LOCATION: String = "last_location_while_uploading"
         const val LAST_ZOOM: String = "last_zoom_level_while_uploading"
         const val UPLOADABLE_FILE: String = "uploadable_file"
+        const val PLACE: String = "nearby_place"
         const val UPLOAD_MEDIA_DETAILS: String = "upload_media_detail_adapter"
         private const val EDITED_IMAGE_URI: String = "edited_image_uri"
     }
