@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category
 
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import androidx.test.core.app.ApplicationProvider
@@ -22,6 +23,7 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
@@ -147,5 +149,20 @@ class CategoryDetailsActivityUnitTests {
             Assert.assertNull(adapter.getItem(index).arguments)
         }
         verifyNoInteractions(viewModel)
+    }
+
+    @Test
+    fun testImageCountAfterRecreatingTheScreen() {
+        val intent =
+            Intent(context, CategoryDetailsActivity::class.java)
+                .putExtra("categoryName", "Birds")
+        val controller = Robolectric.buildActivity(CategoryDetailsActivity::class.java, intent).setup()
+        // Recreate the screen
+        controller.recreate()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // Tapping an image asks for the image count. This used to crash with
+        // "lateinit property categoryImagesCallback has not been initialized"
+        Assert.assertEquals(0, controller.get().getTotalMediaCount())
     }
 }
