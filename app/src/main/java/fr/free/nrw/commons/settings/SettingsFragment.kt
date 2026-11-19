@@ -28,6 +28,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.databinding.ProgressDialogBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -47,6 +48,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Provider
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -70,7 +72,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var sessionManager: SessionManager
 
     @Inject
-    lateinit var userSettingsSyncManager: UserSettingsSyncManager
+    lateinit var userSettingsSyncManagerProvider: Provider<UserSettingsSyncManager>
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -248,13 +250,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton(R.string.submit) { dialog, _ ->
                     dialog.dismiss()
-                    val progressDialog = @Suppress("DEPRECATION") ProgressDialog(requireContext()).apply {
-                        setMessage(getString(R.string.sync_in_progress))
-                        setCancelable(false)
-                        show()
-                    }
+                    val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
+                    dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
+                    val progressDialog = AlertDialog.Builder(requireContext())
+                        .setView(dialogBinding.root)
+                        .setCancelable(false)
+                        .create()
+                    progressDialog.show()
+
                     compositeDisposable.add(
-                        userSettingsSyncManager.backupToUserPage()
+                        userSettingsSyncManagerProvider.get().backupToUserPage()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                 { success ->
@@ -293,13 +298,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton(R.string.submit) { dialog, _ ->
                     dialog.dismiss()
-                    val progressDialog = @Suppress("DEPRECATION") ProgressDialog(requireContext()).apply {
-                        setMessage(getString(R.string.sync_in_progress))
-                        setCancelable(false)
-                        show()
-                    }
+                    val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
+                    dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
+                    val progressDialog = AlertDialog.Builder(requireContext())
+                        .setView(dialogBinding.root)
+                        .setCancelable(false)
+                        .create()
+                    progressDialog.show()
+
                     compositeDisposable.add(
-                        userSettingsSyncManager.restoreFromUserPage()
+                        userSettingsSyncManagerProvider.get().restoreFromUserPage()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                 { success ->
