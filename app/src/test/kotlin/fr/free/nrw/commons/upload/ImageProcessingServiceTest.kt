@@ -236,6 +236,22 @@ class ImageProcessingServiceTest {
     }
 
     @Test
+    fun validateCaptionForFileNameTooLongOnlyWithBatchNumber() {
+        // 236 bytes fits, but not with the " (12345-1)" that is added because 2 files share the name
+        `when`(uploadItem.filename).thenReturn("a".repeat(232) + ".jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem, 2)
+        assertEquals(ImageUtils.FILE_NAME_TOO_LONG, validateImage.blockingGet())
+    }
+
+    @Test
+    fun validateCaptionForFileNameThatFitsWithBatchNumber() {
+        // 230 bytes + " (12345-1)" is 240 bytes
+        `when`(uploadItem.filename).thenReturn("a".repeat(226) + ".jpg")
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem, 2)
+        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+    }
+
+    @Test
     fun validateCaptionForTooLongFileNameWithMultiByteCharacters() {
         // "é" is 2 bytes, so 121 of them are 242 bytes although they are only 121 characters
         `when`(uploadItem.filename).thenReturn("é".repeat(121))
