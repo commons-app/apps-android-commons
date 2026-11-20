@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.settings.sync
 
+import android.content.Context
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
@@ -22,6 +23,10 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class UserSettingsSyncManagerTest {
+
+    @Mock
+    private lateinit var context: Context
+
     @Mock
     private lateinit var sessionManager: SessionManager
 
@@ -52,15 +57,21 @@ class UserSettingsSyncManagerTest {
         MockitoAnnotations.openMocks(this)
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
 
-        userSettingsSyncManager =
-            UserSettingsSyncManager(
-                sessionManager,
-                pageEditClient,
-                defaultKvStore,
+        val bookmarkDaos =
+            BookmarkDaos(
                 bookmarkLocationsDao,
                 bookmarkCategoriesDao,
                 bookmarkItemsDao,
                 bookmarkPicturesDao,
+            )
+
+        userSettingsSyncManager =
+            UserSettingsSyncManager(
+                context,
+                sessionManager,
+                pageEditClient,
+                defaultKvStore,
+                bookmarkDaos,
                 gson,
             )
     }
@@ -100,6 +111,7 @@ class UserSettingsSyncManagerTest {
     fun restoreFromUserPage_noBackupFound_returnsError() {
         whenever(sessionManager.isUserLoggedIn).thenReturn(true)
         whenever(sessionManager.userName).thenReturn("TestUser")
+        whenever(context.getString(any())).thenReturn("No settings backup found on user page.")
         whenever(pageEditClient.getCurrentWikiText("User:TestUser/commons-android-app.json"))
             .thenReturn(Single.just(""))
 

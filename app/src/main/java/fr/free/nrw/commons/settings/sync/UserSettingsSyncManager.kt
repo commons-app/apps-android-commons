@@ -1,17 +1,15 @@
 package fr.free.nrw.commons.settings.sync
 
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.bookmarks.category.BookmarkCategoriesDao
 import fr.free.nrw.commons.bookmarks.category.BookmarksCategoryModal
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.bookmarks.locations.BookmarksLocations
 import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.settings.sync.UserSettingsData.Companion.USER_SETTINGS_PAGE_SUFFIX
@@ -30,17 +28,14 @@ import javax.inject.Singleton
  * to/from the user's Wikimedia Commons user subpage: User:<Username>/commons-android-app.json.
  */
 @Singleton
-@Suppress("LongParameterList")
 class UserSettingsSyncManager
     @Inject
     constructor(
+        private val context: Context,
         private val sessionManager: SessionManager,
         @param:Named("commons-page-edit") private val pageEditClient: PageEditClient,
         @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
-        private val bookmarkLocationsDao: BookmarkLocationsDao,
-        private val bookmarkCategoriesDao: BookmarkCategoriesDao,
-        private val bookmarkItemsDao: BookmarkItemsDao,
-        private val bookmarkPicturesDao: BookmarkPicturesDao,
+        private val bookmarkDaos: BookmarkDaos,
         private val gson: Gson,
     ) {
         companion object {
@@ -123,8 +118,8 @@ class UserSettingsSyncManager
             return pageEditClient
                 .getCurrentWikiText(pageTitle)
                 .flatMap { wikiText ->
-                    if (wikiText.isNullOrEmpty()) {
-                        Single.error(IllegalStateException("No settings backup found on user page."))
+                    if (wikiText.isEmpty()) {
+                        Single.error(IllegalStateException(context.getString(R.string.sync_no_backup_found)))
                     } else {
                         Single.fromCallable {
                             val jsonObject = JsonParser.parseString(wikiText).asJsonObject
@@ -178,7 +173,7 @@ class UserSettingsSyncManager
         private fun collectBookmarks(): BookmarksData =
             runBlocking {
                 val locations =
-                    bookmarkLocationsDao.getAllBookmarksLocations().map { loc ->
+                    bookmarkDaos.locationsDao.getAllBookmarksLocations().map { loc ->
                         BookmarkLocationDto(
                             name = loc.locationName,
                             language = loc.locationLanguage,
@@ -198,14 +193,14 @@ class UserSettingsSyncManager
                     }
 
                 val categories =
-                    bookmarkCategoriesDao
+                    bookmarkDaos.categoriesDao
                         .getAllCategories()
                         .firstOrNull()
                         ?.map { it.categoryName }
                         ?: emptyList()
 
                 val items =
-                    bookmarkItemsDao.getAllBookmarksItems().map { item ->
+                    bookmarkDaos.itemsDao.getAllBookmarksItems().map { item ->
                         BookmarkItemDto(
                             id = item.id,
                             name = item.name,
@@ -217,7 +212,7 @@ class UserSettingsSyncManager
                     }
 
                 val pictures =
-                    bookmarkPicturesDao.getAllBookmarks().map { pic ->
+                    bookmarkDaos.picturesDao.getAllBookmarks().map { pic ->
                         BookmarkPictureDto(
                             mediaName = pic.mediaName,
                             mediaCreator = pic.mediaCreator,
@@ -232,28 +227,40 @@ class UserSettingsSyncManager
                 )
             }
 
-        @Suppress("NestedBlockDepth", "TooGenericExceptionCaught")
         private fun applyPreferences(preferences: Map<String, PreferenceValueDto>) {
             for ((key, prefDto) in preferences) {
                 if (key in SYNCABLE_PREFERENCE_KEYS) {
-                    try {
-                        defaultKvStore.remove(key)
-                        when (prefDto.type) {
-                            PrefType.BOOLEAN -> defaultKvStore.putBoolean(key, prefDto.value.toBoolean())
-                            PrefType.INT -> defaultKvStore.putInt(key, prefDto.value.toInt())
-                            PrefType.LONG -> defaultKvStore.putLong(key, prefDto.value.toLong())
-                            PrefType.STRING_SET -> {
-                                val set = gson.fromJson(prefDto.value, Array<String>::class.java)?.toSet()
-                                if (set != null) {
-                                    defaultKvStore.putStringSet(key, set)
-                                }
-                            }
-                            PrefType.STRING -> defaultKvStore.putString(key, prefDto.value)
-                        }
-                    } catch (e: Exception) {
-                        Timber.e(e, "Failed to apply preference for key: %s", key)
-                    }
+                    applySinglePreference(key, prefDto)
                 }
+            }
+        }
+
+        @Suppress("TooGenericExceptionCaught")
+        private fun applySinglePreference(
+            key: String,
+            prefDto: PreferenceValueDto,
+        ) {
+            try {
+                defaultKvStore.remove(key)
+                when (prefDto.type) {
+                    PrefType.BOOLEAN -> defaultKvStore.putBoolean(key, prefDto.value.toBoolean())
+                    PrefType.INT -> defaultKvStore.putInt(key, prefDto.value.toInt())
+                    PrefType.LONG -> defaultKvStore.putLong(key, prefDto.value.toLong())
+                    PrefType.STRING_SET -> restoreStringSet(key, prefDto.value)
+                    PrefType.STRING -> defaultKvStore.putString(key, prefDto.value)
+                }
+            } catch (e: Exception) {
+                Timber.e(e, "Failed to apply preference for key: %s", key)
+            }
+        }
+
+        private fun restoreStringSet(
+            key: String,
+            jsonValue: String,
+        ) {
+            val set = gson.fromJson(jsonValue, Array<String>::class.java)?.toSet()
+            if (set != null) {
+                defaultKvStore.putStringSet(key, set)
             }
         }
 
@@ -261,8 +268,8 @@ class UserSettingsSyncManager
             runBlocking {
                 // Restore Location Bookmarks
                 for (loc in bookmarks.locations) {
-                    if (!bookmarkLocationsDao.findBookmarkLocation(loc.name)) {
-                        bookmarkLocationsDao.addBookmarkLocation(
+                    if (!bookmarkDaos.locationsDao.findBookmarkLocation(loc.name)) {
+                        bookmarkDaos.locationsDao.addBookmarkLocation(
                             BookmarksLocations(
                                 locationName = loc.name,
                                 locationLanguage = loc.language,
@@ -285,14 +292,14 @@ class UserSettingsSyncManager
 
                 // Restore Category Bookmarks
                 for (catName in bookmarks.categories) {
-                    if (!bookmarkCategoriesDao.doesExist(catName)) {
-                        bookmarkCategoriesDao.insert(BookmarksCategoryModal(catName))
+                    if (!bookmarkDaos.categoriesDao.doesExist(catName)) {
+                        bookmarkDaos.categoriesDao.insert(BookmarksCategoryModal(catName))
                     }
                 }
 
                 // Restore Item Bookmarks
                 for (itemDto in bookmarks.items) {
-                    if (!bookmarkItemsDao.findBookmarkItem(itemDto.id)) {
+                    if (!bookmarkDaos.itemsDao.findBookmarkItem(itemDto.id)) {
                         val depictedItem =
                             DepictedItem(
                                 name = itemDto.name,
@@ -303,7 +310,7 @@ class UserSettingsSyncManager
                                 isSelected = itemDto.isSelected,
                                 id = itemDto.id,
                             )
-                        bookmarkItemsDao.updateBookmarkItem(depictedItem)
+                        bookmarkDaos.itemsDao.updateBookmarkItem(depictedItem)
                     }
                 }
 
@@ -315,8 +322,8 @@ class UserSettingsSyncManager
                             picDto.mediaCreator,
                             BookmarkPicturesContentProvider.uriForName(picDto.mediaName),
                         )
-                    if (!bookmarkPicturesDao.findBookmark(bookmark)) {
-                        bookmarkPicturesDao.updateBookmark(bookmark)
+                    if (!bookmarkDaos.picturesDao.findBookmark(bookmark)) {
+                        bookmarkDaos.picturesDao.updateBookmark(bookmark)
                     }
                 }
             }
