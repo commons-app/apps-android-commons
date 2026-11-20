@@ -23,7 +23,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class UserSettingsSyncManagerTest {
-
     @Mock
     private lateinit var context: Context
 

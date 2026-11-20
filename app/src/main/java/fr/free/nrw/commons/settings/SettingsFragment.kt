@@ -245,13 +245,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
         backupPref?.setOnPreferenceClickListener {
             val userName = sessionManager.userName ?: ""
             showSyncConfirmationDialog(
-                titleRes = R.string.sync_backup_confirm_title,
-                messageRes = R.string.sync_backup_confirm_message,
-                userName = userName,
-                syncAction = { userSettingsSyncManagerProvider.get().backupToUserPage() },
-                successMsgRes = R.string.sync_backup_success,
-                failedMsgRes = R.string.sync_backup_failed,
-                shouldRecreate = false,
+                SyncDialogConfig(
+                    titleRes = R.string.sync_backup_confirm_title,
+                    messageRes = R.string.sync_backup_confirm_message,
+                    syncAction = { userSettingsSyncManagerProvider.get().backupToUserPage() },
+                    successMsgRes = R.string.sync_backup_success,
+                    failedMsgRes = R.string.sync_backup_failed,
+                    shouldRecreate = false,
+                ),
+                userName,
             )
             true
         }
@@ -259,30 +261,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
         restorePref?.setOnPreferenceClickListener {
             val userName = sessionManager.userName ?: ""
             showSyncConfirmationDialog(
-                titleRes = R.string.sync_restore_confirm_title,
-                messageRes = R.string.sync_restore_confirm_message,
-                userName = userName,
-                syncAction = { userSettingsSyncManagerProvider.get().restoreFromUserPage() },
-                successMsgRes = R.string.sync_restore_success,
-                failedMsgRes = R.string.sync_restore_failed,
-                shouldRecreate = true,
+                SyncDialogConfig(
+                    titleRes = R.string.sync_restore_confirm_title,
+                    messageRes = R.string.sync_restore_confirm_message,
+                    syncAction = { userSettingsSyncManagerProvider.get().restoreFromUserPage() },
+                    successMsgRes = R.string.sync_restore_success,
+                    failedMsgRes = R.string.sync_restore_failed,
+                    shouldRecreate = true,
+                ),
+                userName,
             )
             true
         }
     }
 
     private fun showSyncConfirmationDialog(
-        titleRes: Int,
-        messageRes: Int,
+        config: SyncDialogConfig,
         userName: String,
-        syncAction: () -> Single<Boolean>,
-        successMsgRes: Int,
-        failedMsgRes: Int,
-        shouldRecreate: Boolean,
     ) {
         AlertDialog.Builder(requireContext())
-            .setTitle(titleRes)
-            .setMessage(getString(messageRes, userName))
+            .setTitle(config.titleRes)
+            .setMessage(getString(config.messageRes, userName))
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .setPositiveButton(R.string.submit) { dialog, _ ->
                 dialog.dismiss()
@@ -295,26 +294,28 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 activeProgressDialog?.show()
 
                 compositeDisposable.add(
-                    syncAction()
+                    config.syncAction()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                             { success ->
-                                dismissProgressDialog()
+                                activeProgressDialog?.dismiss()
+                                activeProgressDialog = null
                                 if (!isAdded || context == null) return@subscribe
                                 if (success) {
-                                    ViewUtil.showLongToast(requireContext(), getString(successMsgRes))
-                                    if (shouldRecreate) {
+                                    ViewUtil.showLongToast(requireContext(), getString(config.successMsgRes))
+                                    if (config.shouldRecreate) {
                                         requireActivity().recreate()
                                     }
                                 } else {
-                                    ViewUtil.showLongToast(requireContext(), getString(failedMsgRes, ""))
+                                    ViewUtil.showLongToast(requireContext(), getString(config.failedMsgRes, ""))
                                 }
                             },
                             { throwable ->
-                                dismissProgressDialog()
+                                activeProgressDialog?.dismiss()
+                                activeProgressDialog = null
                                 if (!isAdded || context == null) return@subscribe
                                 val errorMsg = throwable.localizedMessage ?: ""
-                                ViewUtil.showLongToast(requireContext(), getString(failedMsgRes, errorMsg))
+                                ViewUtil.showLongToast(requireContext(), getString(config.failedMsgRes, errorMsg))
                             },
                         ),
                 )
@@ -323,15 +324,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onDestroyView() {
-        dismissProgressDialog()
+        activeProgressDialog?.dismiss()
+        activeProgressDialog = null
         compositeDisposable.clear()
         super.onDestroyView()
     }
 
-    private fun dismissProgressDialog() {
-        activeProgressDialog?.dismiss()
-        activeProgressDialog = null
-    }
+    private data class SyncDialogConfig(
+        val titleRes: Int,
+        val messageRes: Int,
+        val syncAction: () -> Single<Boolean>,
+        val successMsgRes: Int,
+        val failedMsgRes: Int,
+        val shouldRecreate: Boolean = false,
+    )
 
     /**
      * Asks users to provide location access.
