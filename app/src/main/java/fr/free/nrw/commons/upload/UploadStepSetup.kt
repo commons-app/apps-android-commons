@@ -166,6 +166,7 @@ internal class UploadStepSetup {
             val fragment =
                 view.fragments!!.getOrNull(index) as? UploadMediaDetailFragment
                     ?: return
+            fragment.place = view.place ?: fragment.place
             fragment.fragmentCallback = uploadMediaDetailFragmentCallback
             fragment.initializeFragment()
         } else {

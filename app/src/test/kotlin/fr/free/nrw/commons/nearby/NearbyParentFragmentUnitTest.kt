@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.BaseMarker
@@ -20,6 +21,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -94,6 +96,9 @@ class NearbyParentFragmentUnitTest {
     @Mock
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao
 
+    @Mock
+    private lateinit var contributionController: ContributionController
+
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: NearbyParentFragment
     private lateinit var fragmentManager: FragmentManager
@@ -124,6 +129,7 @@ class NearbyParentFragmentUnitTest {
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(fragment, "wikidataEditListener", wikidataEditListener)
         Whitebox.setInternalState(fragment, "bookmarkLocationDao", bookmarkLocationDao)
+        Whitebox.setInternalState(fragment, "controller", contributionController)
 
         Whitebox.setInternalState(
             fragment,
@@ -423,5 +429,21 @@ class NearbyParentFragmentUnitTest {
                 "Monument priority ($priorityMonument)",
             priorityNeedsPhoto > priorityMonument,
         )
+    }
+
+    @Test
+    fun `onDestroyView keeps nearby place while picker result is pending`() {
+        whenever(contributionController.isInternalUploadInProgress).thenReturn(true)
+
+        fragment.onDestroyView()
+
+        verify(presenter, never()).removeNearbyPreferences(applicationKvStore)
+    }
+
+    @Test
+    fun `onDestroyView clears nearby place when no picker result is pending`() {
+        fragment.onDestroyView()
+
+        verify(presenter).removeNearbyPreferences(applicationKvStore)
     }
 }

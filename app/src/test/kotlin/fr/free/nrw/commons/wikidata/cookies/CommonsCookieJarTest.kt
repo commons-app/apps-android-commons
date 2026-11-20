@@ -154,6 +154,140 @@ class CommonsCookieJarTest {
         verify(preferences).putString(eq("cookie_store"), any())
     }
 
+    @Test
+    fun `load never leaks centralauth cookies to third-party https domains`() {
+        val centralAuthToken = cookie("centralauth_Token", "secret_token", "commons.wikimedia.org")
+        val centralAuthSession = cookie("centralauth_Session", "secret_session", "wikimedia.org")
+        storage["commons.wikimedia.org"] = mutableListOf(centralAuthToken)
+        storage["wikimedia.org"] = mutableListOf(centralAuthSession)
+
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://attacker.example.com/collect".toHttpUrl()),
+        )
+        val campaignsUrl =
+            "https://raw.githubusercontent.com/commons-app/campaigns/master/campaigns.json".toHttpUrl()
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest(campaignsUrl),
+        )
+    }
+
+    @Test
+    fun `load blocks suffix-spoofed domains lacking dot boundary`() {
+        val centralAuth = cookie("centralauth_Token", "secret", "commons.wikimedia.org")
+        val commonsSession = cookie("commonswikiSession", "sess", "commons.wikimedia.org")
+        val wikimediaCookie = cookie("WMF-Last-Access", "today", "wikimedia.org")
+        storage["commons.wikimedia.org"] = mutableListOf(centralAuth, commonsSession)
+        storage["wikimedia.org"] = mutableListOf(wikimediaCookie)
+
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://notwikimedia.org/w/api.php".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://fakewikipedia.org/w/api.php".toHttpUrl()),
+        )
+        // evilcommons.wikimedia.org must not receive commons.wikimedia.org local session cookie
+        val subWikimedia = cookieJar.loadForRequest("https://evilcommons.wikimedia.org/".toHttpUrl())
+        assertEquals(listOf(centralAuth, wikimediaCookie), subWikimedia)
+    }
+
+    @Test
+    fun `load and save reject cleartext http urls`() {
+        val centralAuth = cookie("centralauth_Token", "secret", "commons.wikimedia.org")
+        val session = cookie("commonswikiSession", "sess", "commons.wikimedia.org")
+        storage["commons.wikimedia.org"] = mutableListOf(centralAuth, session)
+
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("http://commons.wikimedia.org/w/api.php".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("http://en.wikipedia.org/w/api.php".toHttpUrl()),
+        )
+
+        val injected = cookie("commonswikiSession", "hijacked", "commons.wikimedia.org")
+        cookieJar.saveFromResponse("http://commons.wikimedia.org/w/api.php".toHttpUrl(), listOf(injected))
+        assertEquals(listOf(centralAuth, session), storage["commons.wikimedia.org"])
+    }
+
+    @Test
+    fun `load isolates production centralauth cookies from wmflabs toolforge and beta cluster`() {
+        val prodToken = cookie("centralauth_Token", "prod_secret", "wikimedia.org")
+        storage["wikimedia.org"] = mutableListOf(prodToken)
+
+        // Multi-tenant community cloud hosts must never receive production CentralAuth cookies
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://tools.wmflabs.org/commons-android-app".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://some-tool.toolforge.org/".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://commons.wikimedia.beta.wmflabs.org/w/api.php".toHttpUrl()),
+        )
+
+        // Official Wikimedia SUL sister domains DO receive production CentralAuth cookies over HTTPS
+        assertEquals(
+            listOf(prodToken),
+            cookieJar.loadForRequest("https://www.wikidata.org/w/api.php".toHttpUrl()),
+        )
+        assertEquals(
+            listOf(prodToken),
+            cookieJar.loadForRequest("https://meta.m.wikimedia.org/wiki/Special:Contact/accountvanishapps".toHttpUrl()),
+        )
+    }
+
+    @Test
+    fun `load shares beta cluster centralauth cookies only within matching beta cluster realm`() {
+        val betaSession = cookie("centralauth_Session", "beta_sess", "commons.wikimedia.beta.wmflabs.org")
+        storage["commons.wikimedia.beta.wmflabs.org"] = mutableListOf(betaSession)
+
+        assertEquals(
+            listOf(betaSession),
+            cookieJar.loadForRequest("https://meta.m.wikimedia.beta.wmflabs.org/wiki/Main_Page".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://tools.wmflabs.org/commons-android-app".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://commons.wikimedia.org/w/api.php".toHttpUrl()),
+        )
+    }
+
+    @Test
+    fun `load enforces hostOnly and path matching and blocks cross-domain save injection`() {
+        val commonsUrl = "https://commons.wikimedia.org/w/api.php".toHttpUrl()
+        val hostOnlySession = Cookie.parse(commonsUrl, "commonswikiSession=host_only; Path=/w; Secure; HttpOnly")!!
+        cookieJar.saveFromResponse(commonsUrl, listOf(hostOnlySession))
+
+        assertEquals(
+            listOf(hostOnlySession),
+            cookieJar.loadForRequest("https://commons.wikimedia.org/w/api.php".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://commons.wikimedia.org/wiki/Main_Page".toHttpUrl()),
+        )
+        assertEquals(
+            emptyList<Cookie>(),
+            cookieJar.loadForRequest("https://sub.commons.wikimedia.org/w/api.php".toHttpUrl()),
+        )
+
+        // Unrelated origin must not be able to overwrite commons.wikimedia.org cookies
+        val spoofed = cookie("commonswikiSession", "evil", "commons.wikimedia.org")
+        cookieJar.saveFromResponse("https://evil.example.org/".toHttpUrl(), listOf(spoofed))
+        assertEquals(listOf(hostOnlySession), storage["commons.wikimedia.org"])
+    }
+
     private fun cookie(
         name: String,
         value: String,
