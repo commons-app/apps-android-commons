@@ -252,6 +252,16 @@ class ImageProcessingServiceTest {
     }
 
     @Test
+    fun validateCaptionForSharedFileNameThatExistsAndFitsWithBatchNumber() {
+        // The files are uploaded as "... (12345-1).jpg", so the name that exists does not make it too long
+        `when`(uploadItem.filename).thenReturn("a".repeat(226) + ".jpg")
+        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(true))
+        val validateImage = imageProcessingService!!.validateCaption(uploadItem, 2)
+        assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
+    }
+
+    @Test
     fun validateCaptionForTooLongFileNameWithMultiByteCharacters() {
         // "é" is 2 bytes, so 121 of them are 242 bytes although they are only 121 characters
         `when`(uploadItem.filename).thenReturn("é".repeat(121))

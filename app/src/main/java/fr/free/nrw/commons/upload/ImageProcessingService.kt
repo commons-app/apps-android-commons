@@ -218,7 +218,10 @@ class ImageProcessingService
                             when {
                                 fileNameCheck == FileNameCheck.BLACKLISTED -> FILE_NAME_BLACKLISTED
                                 fileNameCheck == FileNameCheck.INVALID -> FILE_NAME_INVALID
-                                doesFileExist && fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
+                                // A file that shares it name gets a batch number instead of " (12345)"
+                                doesFileExist &&
+                                    filesWithSameName == 1 &&
+                                    fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
                                     FILE_NAME_TOO_LONG
                                 doesFileExist -> FILE_NAME_EXISTS
                                 else -> IMAGE_OK
