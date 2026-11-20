@@ -997,7 +997,7 @@ class NearbyParentFragment :
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
 
-        if (::controller.isInitialized && controller.isInternalUploadInProgress) {
+        if (::uploadCoordinator.isInitialized && uploadCoordinator.isInternalUploadInProgress) {
             return
         }
 
@@ -3014,7 +3014,7 @@ class NearbyParentFragment :
 
     private fun storeSharedPrefs(selectedPlace: Place) {
         applicationKvStore!!.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
-        controller.isInternalUploadInProgress = true
+        uploadCoordinator.isInternalUploadInProgress = true
         val place =
             applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
 

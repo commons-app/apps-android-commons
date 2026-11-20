@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -166,5 +167,92 @@ class ContributionUploadCoordinatorTest {
         assertFalse(uploadIntent.hasExtra(PLACE_OBJECT))
         assertFalse(uploadIntent.hasExtra(UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE))
         assertFalse(uploadIntent.getBooleanExtra(UploadActivity.IN_APP_CAMERA_UPLOAD, true))
+    }
+
+    /**
+     * Truncates picks over the image limit, keeps the first files, and shows the limit toast.
+     */
+    @Test
+    fun pickOverLimitTruncatesFilesAndShowsToast() {
+        val files = (1..MAX_IMAGE_COUNT + 1).map { UploadableFile(File("picked$it.jpg")) }
+        `when`(defaultKvStore.getJson(PLACE_OBJECT, Place::class.java)).thenReturn(null)
+
+        uploadCoordinator.handleActivityResultWithCallback(activity) { resultCallbacks ->
+            resultCallbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, 0)
+        }
+
+        assertEquals(
+            activity.getString(fr.free.nrw.commons.R.string.upload_limit_exceeded, MAX_IMAGE_COUNT),
+            ShadowToast.getTextOfLatestToast().toString(),
+        )
+        val uploadIntent = shadowOf(activity).nextStartedActivity
+        assertNotNull(uploadIntent)
+        val extraFiles =
+            uploadIntent
+                .getParcelableArrayListExtra<UploadableFile>(UploadActivity.EXTRA_FILES)!!
+        assertEquals(MAX_IMAGE_COUNT, extraFiles.size)
+        assertEquals(
+            files.take(MAX_IMAGE_COUNT).map { it.file.path },
+            extraFiles.map { it.file.path },
+        )
+    }
+
+    /**
+     * Keeps every picked file without showing the limit toast when at the image limit.
+     */
+    @Test
+    fun pickAtLimitKeepsAllFilesWithoutToast() {
+        val files = (1..MAX_IMAGE_COUNT).map { UploadableFile(File("picked$it.jpg")) }
+        `when`(defaultKvStore.getJson(PLACE_OBJECT, Place::class.java)).thenReturn(null)
+
+        uploadCoordinator.handleActivityResultWithCallback(activity) { resultCallbacks ->
+            resultCallbacks.onImagesPicked(files, FilePicker.ImageSource.GALLERY, 0)
+        }
+
+        assertNull(ShadowToast.getTextOfLatestToast())
+        val uploadIntent = shadowOf(activity).nextStartedActivity
+        assertNotNull(uploadIntent)
+        val extraFiles =
+            uploadIntent
+                .getParcelableArrayListExtra<UploadableFile>(UploadActivity.EXTRA_FILES)!!
+        assertEquals(MAX_IMAGE_COUNT, extraFiles.size)
+        assertEquals(
+            files.map { it.file.path },
+            extraFiles.map { it.file.path },
+        )
+    }
+
+    /**
+     * Resets the internal upload flag after a successful pick.
+     */
+    @Test
+    fun successfulPickResetsInternalUploadFlag() {
+        val image = UploadableFile(File("picked.jpg"))
+        `when`(defaultKvStore.getJson(PLACE_OBJECT, Place::class.java)).thenReturn(null)
+        uploadCoordinator.isInternalUploadInProgress = true
+
+        uploadCoordinator.handleActivityResultWithCallback(activity) { resultCallbacks ->
+            resultCallbacks.onImagesPicked(listOf(image), FilePicker.ImageSource.GALLERY, 0)
+        }
+
+        assertFalse(uploadCoordinator.isInternalUploadInProgress)
+    }
+
+    /**
+     * Resets the internal upload flag when the picker reports an error.
+     */
+    @Test
+    fun pickerErrorResetsInternalUploadFlag() {
+        uploadCoordinator.isInternalUploadInProgress = true
+
+        uploadCoordinator.handleActivityResultWithCallback(activity) { resultCallbacks ->
+            resultCallbacks.onImagePickerError(
+                IllegalStateException("picker failed"),
+                FilePicker.ImageSource.GALLERY,
+                0,
+            )
+        }
+
+        assertFalse(uploadCoordinator.isInternalUploadInProgress)
     }
 }

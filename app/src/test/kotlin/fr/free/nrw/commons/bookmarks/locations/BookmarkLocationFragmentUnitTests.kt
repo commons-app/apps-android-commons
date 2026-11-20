@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
 import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -71,6 +72,9 @@ class BookmarkLocationFragmentUnitTests {
     private lateinit var cameraCoordinator: ContributionCameraCoordinator
 
     @Mock
+    private lateinit var uploadCoordinator: ContributionUploadCoordinator
+
+    @Mock
     private lateinit var adapter: PlaceAdapter
 
     private lateinit var binding: FragmentBookmarksLocationsBinding
@@ -123,7 +127,13 @@ class BookmarkLocationFragmentUnitTests {
         progressBar = view.findViewById(R.id.loadingImagesProgressBar)
         recyclerView = view.findViewById(R.id.listView)
         commonPlaceClickActions =
-            CommonPlaceClickActions(store, activity, cameraCoordinator, contributionImagePicker)
+            CommonPlaceClickActions(
+                store,
+                activity,
+                cameraCoordinator,
+                contributionImagePicker,
+                uploadCoordinator,
+            )
 
         fragment.bookmarkLocationDao = bookmarkLocationDao
         fragment.controller = controller

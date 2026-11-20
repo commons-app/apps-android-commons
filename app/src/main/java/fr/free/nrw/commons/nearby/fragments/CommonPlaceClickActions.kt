@@ -13,6 +13,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
 import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
@@ -30,6 +31,7 @@ class CommonPlaceClickActions
         private val activity: Activity,
         private val cameraCoordinator: ContributionCameraCoordinator,
         private val contributionImagePicker: ContributionImagePicker,
+        private val uploadCoordinator: ContributionUploadCoordinator,
     ) {
         fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit =
             { place, launcher, resultLauncher ->
@@ -118,7 +120,7 @@ class CommonPlaceClickActions
         private fun storeSharedPrefs(selectedPlace: Place) {
             Timber.d("Store place object %s", selectedPlace.toString())
             applicationKvStore.putJson(WikidataConstants.PLACE_OBJECT, selectedPlace)
-            contributionController.isInternalUploadInProgress = true
+            uploadCoordinator.isInternalUploadInProgress = true
         }
 
         private fun openWebView(link: Uri): Boolean {

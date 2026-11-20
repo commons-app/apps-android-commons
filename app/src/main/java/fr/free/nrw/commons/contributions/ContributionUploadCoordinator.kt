@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions
 import android.app.Activity
 import android.content.Intent
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.filepicker.DefaultCallback
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.filepicker.FilePicker.HandleActivityResult
@@ -10,6 +11,7 @@ import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.UploadActivity
+import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT
 import javax.inject.Inject
@@ -26,6 +28,7 @@ class ContributionUploadCoordinator
         @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
         private val cameraCoordinator: ContributionCameraCoordinator,
     ) {
+        @Volatile
         var isInternalUploadInProgress = false
 
         /**
@@ -60,6 +63,7 @@ class ContributionUploadCoordinator
                         source: FilePicker.ImageSource,
                         type: Int,
                     ) {
+                        isInternalUploadInProgress = false
                         showShortToast(activity, R.string.error_occurred_in_picking_images)
                     }
 
@@ -71,13 +75,25 @@ class ContributionUploadCoordinator
                         source: FilePicker.ImageSource,
                         type: Int,
                     ) {
+                        // enforce the limit here for the internal gallery picks
+                        val filesToUpload =
+                            if (imagesFiles.size > MAX_IMAGE_COUNT) {
+                                showLongToast(
+                                    activity,
+                                    activity.getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT),
+                                )
+                                imagesFiles.take(MAX_IMAGE_COUNT)
+                            } else {
+                                imagesFiles
+                            }
+
                         val cameraMetadata = cameraCoordinator.takeUploadMetadata()
                         val shareIntent = Intent(activity, UploadActivity::class.java)
                         shareIntent.setAction(ContributionController.ACTION_INTERNAL_UPLOADS)
                         shareIntent
                             .putParcelableArrayListExtra(
                                 UploadActivity.EXTRA_FILES,
-                                ArrayList(imagesFiles),
+                                ArrayList(filesToUpload),
                             )
                         val place = defaultKvStore.getJson<Place>(PLACE_OBJECT, Place::class.java)
 
@@ -96,6 +112,7 @@ class ContributionUploadCoordinator
                             UploadActivity.IN_APP_CAMERA_UPLOAD,
                             cameraMetadata.isInAppCameraUpload,
                         )
+                        isInternalUploadInProgress = false
                         activity.startActivity(shareIntent)
                     }
                 },

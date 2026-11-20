@@ -29,8 +29,6 @@ import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
 import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
-import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
