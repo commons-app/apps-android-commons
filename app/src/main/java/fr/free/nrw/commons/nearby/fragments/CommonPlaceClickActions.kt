@@ -85,7 +85,7 @@ class CommonPlaceClickActions
                             "Image desc: ${place.getLongDescription()}",
                     )
                     storeSharedPrefs(place)
-                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
+                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, true)
                 }
             }
 
