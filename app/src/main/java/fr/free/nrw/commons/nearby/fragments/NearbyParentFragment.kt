@@ -688,6 +688,9 @@ class NearbyParentFragment :
             prevZoom = bundle.getDouble("prev_zoom")
             prevLatitude = bundle.getDouble("prev_latitude")
             prevLongitude = bundle.getDouble("prev_longitude")
+            if (binding?.map != null) {
+                moveCameraToPosition(GeoPoint(prevLatitude, prevLongitude), prevZoom, 1L)
+            }
             if (isResumed) {
                 val changeType =
                     fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED
