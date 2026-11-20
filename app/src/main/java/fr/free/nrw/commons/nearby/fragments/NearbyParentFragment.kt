@@ -416,11 +416,7 @@ class NearbyParentFragment :
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
         refreshButton.setOnMenuItemClickListener {
-            try {
-                emptyCache()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
-            }
+            runNearbyMenuAction { emptyCache() }
             false
         }
         listMenu.setOnMenuItemClickListener {
@@ -438,24 +434,30 @@ class NearbyParentFragment :
         }
 
         saveAsGPXButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_gpx_file))
                 progressDialog!!.show()
                 savePlacesAsGPX()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
         }
         saveAsKMLButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_kml_file))
                 progressDialog!!.show()
                 savePlacesAsKML()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
+        }
+    }
+
+    // Cache and export actions surface all storage failures as IllegalStateException to the menu host.
+    @Suppress("TooGenericExceptionCaught")
+    private inline fun runNearbyMenuAction(action: () -> Unit) {
+        try {
+            action()
+        } catch (e: Exception) {
+            throw IllegalStateException(e)
         }
     }
 
@@ -591,7 +593,8 @@ class NearbyParentFragment :
         initNearbyFilter()
         addCheckBoxCallback()
         if (!isCameFromExploreMap()) {
-            moveCameraToPosition(lastMapFocus!!)
+            // Jump instead of animating from 0,0: searches use the visible map area
+            binding?.map?.controller?.setCenter(lastMapFocus)
         }
         moveCameraToPosition(lastMapFocus!!)
         initRvNearbyList()
@@ -989,10 +992,14 @@ class NearbyParentFragment :
                 locationManager!!.removeLocationListener(presenter!!)
                 locationManager!!.unregisterLocationManager()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcast receivers should always be unregistered inside catch,
             // you never know if they were already registered or not
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 
@@ -1008,6 +1015,10 @@ class NearbyParentFragment :
 
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
+
+        if (::controller.isInitialized && controller.isInternalUploadInProgress) {
+            return
+        }
 
         presenter?.removeNearbyPreferences(applicationKvStore ?: return)
     }
@@ -3022,6 +3033,7 @@ class NearbyParentFragment :
 
     private fun storeSharedPrefs(selectedPlace: Place) {
         applicationKvStore!!.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
+        controller.isInternalUploadInProgress = true
         val place =
             applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
 
@@ -3073,9 +3085,13 @@ class NearbyParentFragment :
                 locationManager!!.registerLocationManager()
                 Timber.d("Location service manager added and registered")
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcasts are tricky, should be catchedonR
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 

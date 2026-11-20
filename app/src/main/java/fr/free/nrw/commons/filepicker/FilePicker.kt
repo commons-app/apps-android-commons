@@ -17,6 +17,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
+// Android content providers and camera apps may fail in many ways; report all of them to the caller.
+@Suppress("TooGenericExceptionCaught")
 object FilePicker : Constants {
     internal const val KEY_PHOTO_URI = "photo_uri"
     internal const val KEY_LAST_CAMERA_PHOTO = "last_photo"
