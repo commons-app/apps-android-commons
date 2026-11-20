@@ -227,55 +227,57 @@ class ImageProcessingService
          * @return IMAGE_DUPLICATE or IMAGE_OK
          */
         fun checkIfFileAlreadyExists(
-            originalFilePath: Uri,
-            modifiedFilePath: Uri,
-        ): Single<Int> {
-            val originalStreamResult =
-                Single
-                    .fromCallable {
-                        appContext.contentResolver.openInputStream(originalFilePath)
-                            ?: throw FileNotFoundException("Original file not found at $originalFilePath")
-                    }.flatMap { inputStream ->
-                        checkDuplicateImage(inputStream)
-                    }.onErrorResumeNext { throwable ->
-                        if (throwable is FileNotFoundException) {
-                            Timber.d("Original file not found, treating as non-duplicate")
-                            Single.just(IMAGE_OK)
-                        } else {
-                            Single.error(throwable)
-                        }
-                    }
-
-            val modifiedStreamResult =
-                Single
-                    .fromCallable {
-                        val path = modifiedFilePath.path
+            originalFilePath: Uri?,
+            modifiedFilePath: Uri?,
+        ): Single<Int> =
+            Single.zip(
+                checkStreamDuplicate(
+                    fileUri = originalFilePath,
+                    catchSecurityErrors = true,
+                    openStream = { uri ->
+                        appContext.contentResolver.openInputStream(uri)
+                            ?: throw FileNotFoundException("Original file not found at $uri")
+                    },
+                ),
+                checkStreamDuplicate(
+                    fileUri = modifiedFilePath,
+                    catchSecurityErrors = false,
+                    openStream = { uri ->
+                        val path = uri.path
                         if (path != null && java.io.File(path).exists()) {
                             fileUtilsWrapper.getFileInputStream(path)
                         } else {
                             throw FileNotFoundException("Modified file not found at $path")
                         }
-                    }.flatMap { inputStream ->
-                        checkDuplicateImage(inputStream)
-                    }.onErrorResumeNext { throwable ->
-                        if (throwable is FileNotFoundException) {
-                            Timber.d("Modified file not found, treating as non-duplicate")
-                            Single.just(IMAGE_OK)
-                        } else {
-                            Single.error(throwable)
-                        }
-                    }
-
-            return Single.zip(
-                originalStreamResult,
-                modifiedStreamResult,
+                    },
+                ),
             ) { resultForOriginal, resultForDuplicate ->
-                return@zip if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE) {
+                if (resultForOriginal == IMAGE_DUPLICATE || resultForDuplicate == IMAGE_DUPLICATE) {
                     IMAGE_DUPLICATE
                 } else {
                     IMAGE_OK
                 }
             }
+
+        private fun checkStreamDuplicate(
+            fileUri: Uri?,
+            catchSecurityErrors: Boolean,
+            openStream: (Uri) -> InputStream,
+        ): Single<Int> {
+            if (fileUri == null) {
+                return Single.just(IMAGE_OK)
+            }
+            return Single
+                .fromCallable { openStream(fileUri) }
+                .flatMap(::checkDuplicateImage)
+                .onErrorResumeNext { throwable ->
+                    if (isInaccessibleUriError(throwable, catchSecurityErrors)) {
+                        Timber.d(throwable, "File not accessible for duplicate check, treating as non-duplicate")
+                        Single.just(IMAGE_OK)
+                    } else {
+                        Single.error(throwable)
+                    }
+                }
         }
 
         /**
@@ -336,3 +338,10 @@ class ImageProcessingService
                 }.subscribeOn(Schedulers.io())
         }
     }
+
+private fun isInaccessibleUriError(
+    throwable: Throwable,
+    catchSecurityErrors: Boolean,
+): Boolean =
+    throwable is FileNotFoundException ||
+        (catchSecurityErrors && (throwable is SecurityException || throwable is IllegalArgumentException))

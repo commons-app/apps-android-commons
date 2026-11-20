@@ -140,6 +140,13 @@ class UploadWorker(
     @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
         try {
+            val hasQueuedUploads =
+                withContext(Dispatchers.IO) {
+                    contributionDao.getContribution(statesToProcess).blockingGet().isNotEmpty()
+                }
+            if (!hasQueuedUploads) {
+                return Result.success()
+            }
             var totalUploadsStarted = 0
             // Start a foreground service
             setForeground(createForegroundInfo())
@@ -216,16 +223,10 @@ class UploadWorker(
                 withContext(Dispatchers.IO) {
                     contributionDao.getContribution(statesToProcess).blockingGet()
                 }
-            if (updatedContributionQueue.isNotEmpty()) {
-                return Result.retry()
-            }
-
-            return Result.success()
+            return if (updatedContributionQueue.isNotEmpty()) Result.retry() else Result.success()
         } catch (e: Exception) {
             Timber.e(e, "UploadWorker encountered an error.")
             return Result.failure()
-        } finally {
-            WorkRequestHelper.markUploadWorkerAsStopped()
         }
     }
 
