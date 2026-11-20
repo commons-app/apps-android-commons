@@ -206,7 +206,9 @@ class ContributionsFragment(
                 // Calling nearby card to keep showing it even when user clicks on it and comes back
                 try {
                     nearby.updateClosestNearbyCardViewInfo()
-                } catch (e: Exception) {
+                } catch (e: SecurityException) {
+                    Timber.e(e)
+                } catch (e: IllegalStateException) {
                     Timber.e(e)
                 }
                 if (binding!!.cardViewNearby.cardViewVisibilityState

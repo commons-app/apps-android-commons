@@ -38,6 +38,9 @@ class NearbyBookmarkCacheHandler(
     var lockNearby: ((Boolean) -> Unit)? = null,
     var updateMapAndList: ((LocationChangeType?) -> Unit)? = null,
 ) : NearbyPlaceOperations {
+    // Called when a search shows its places
+    var onPlacesShown: (() -> Unit)? = null
+
     /**
      * Handles the user action of toggling the bookmarked status of a given place. Updates the
      * bookmark status in the database, updates the UI to reflect the new state.
@@ -119,6 +122,7 @@ class NearbyBookmarkCacheHandler(
         lockNearby?.invoke(false) // So that new location updates wont come
         viewProvider().setProgressBarVisibility(false)
         loadPlacesDataAsync(nearbyPlaceGroups, scope)
+        onPlacesShown?.invoke()
     }
 
     /**

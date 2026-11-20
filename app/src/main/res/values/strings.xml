@@ -41,10 +41,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Upload</item>
     <item quantity="other">%1$d Uploads</item>
@@ -84,7 +80,6 @@
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Uploading file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Failed to upload %1$s</string>
   <string name="upload_metadata_pending_notification_title">%1$s is uploaded, but its captions and depicts are not saved yet</string>
@@ -739,6 +734,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="cancelling_upload">Cancelling upload…</string>
   <string name="retrying_upload">Retrying upload…</string>
   <string name="retrying_failed_uploads">Retrying all failed uploads…</string>
+  <string name="upload_failed_server_error">Commons could not handle the request right now. Please try again later. (HTTP %1$d)</string>
   <string name="cancel_upload">Cancel Upload</string>
   <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>

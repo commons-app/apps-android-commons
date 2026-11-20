@@ -27,6 +27,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.logging.CrashLoggingExceptionHandler
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
@@ -97,9 +98,12 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var appDatabase: AppDatabase
 
+    // Fresco's third-party initializer can fail in unit tests after the image pipeline is configured.
+
     /**
      * Used to declare and initialize various components and dependencies
      */
+    @Suppress("TooGenericExceptionCaught")
     override fun onCreate() {
         super.onCreate()
 
@@ -172,6 +176,11 @@ class CommonsApplication : MultiDexApplication() {
 
         Timber.plant(tree)
         Timber.plant(DebugTree())
+
+        // Must run after ACRA is set up, so that ACRA still gets the crash
+        Thread.setDefaultUncaughtExceptionHandler(
+            CrashLoggingExceptionHandler(tree::logCrash, Thread.getDefaultUncaughtExceptionHandler()),
+        )
     }
 
     /**
@@ -190,7 +199,7 @@ class CommonsApplication : MultiDexApplication() {
             if (file.exists() && file.totalSpace > 1000000) { // In Kbs
                 file.delete()
             }
-        } catch (e: Exception) {
+        } catch (e: SecurityException) {
             Timber.e(e)
         }
     }

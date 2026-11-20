@@ -146,6 +146,8 @@
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
+  <string name="upload_metadata_pending_notification_title">已上传%1$s，但其说明和描述尚未保存</string>
+  <string name="upload_metadata_pending">已上传，但说明和图片尚未保存</string>
   <string name="upload_paused_notification_title">上传%1$s已暂停</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <string name="upload_paused_notification_subtitle">点击查看</string>
@@ -164,10 +166,10 @@
   <string name="menu_view_file_page">查看文件页面</string>
   <string name="share_title_hint">说明（必需）</string>
   <string name="add_caption_toast">请提供此文件的说明</string>
-  <string name="file_name_blacklisted_toast">共享资源不接受此文件名。请使用更具描述性的标题。</string>
-  <string name="file_name_too_long_toast">此标题过长，无法用作文件名。请缩短。</string>
-  <string name="file_name_invalid_toast">此标题不能在共享资源上用作文件名。请更改。</string>
-  <string name="file_name_banned_extension_toast">此标题包含类似“.com”的文件类型。请更改。</string>
+  <string name="file_name_blacklisted_toast">共享资源不接受此文件名。请使用更具描述性的说明。</string>
+  <string name="file_name_too_long_toast">此说明过长，无法用作文件名。请缩短。</string>
+  <string name="file_name_invalid_toast">此说明不能在共享资源上用作文件名。请更改。</string>
+  <string name="file_name_banned_extension_toast">此说明包含类似“.com”的文件类型。请更改。</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
@@ -365,6 +367,7 @@
   <string name="upload_location_access_denied">位置权限被拒绝。请手动设置您的位置以使用此功能。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="location_permission_rationale_explore">需要权限以显示附近图片列表</string>
+  <string name="nearby_bookmark">书签</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">维基数据</string>
   <string name="nearby_wikipedia">维基百科</string>
@@ -608,7 +611,7 @@
   <string name="image_info">图像信息</string>
   <string name="upload_categories_dont_show_this_message_again">不再显示此消息</string>
   <string name="no_categories_found">找不到分类</string>
-  <string name="no_depiction_found">找不到描写。</string>
+  <string name="no_depiction_found">找不到描述</string>
   <string name="upload_cancelled">取消上传</string>
   <string name="previous_image_title_description_not_found">没有之前图片的标题或描述对应的数据</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
@@ -749,6 +752,7 @@
   <string name="cancelling_upload">正在取消上传…</string>
   <string name="retrying_upload">正在重试上传…</string>
   <string name="retrying_failed_uploads">正在重试所有失败的上传…</string>
+  <string name="upload_failed_server_error">共享资源目前无法处理此请求。请稍后重试。（HTTP %1$d）</string>
   <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
   <string name="limited_connection_is_on">限制连接模式启用中。</string>
@@ -764,7 +768,7 @@
   <string name="menu_view_category_page">查看分类页面</string>
   <string name="menu_view_item_page">查看项目页面</string>
   <string name="app_ui_language">应用程序用户界面语言</string>
-  <string name="remove">移除标题和描述</string>
+  <string name="remove">移除说明和描述</string>
   <string name="read_help_link">阅读更多</string>
   <string name="media_detail_in_all_languages">在所有语言中</string>
   <string name="choose_a_location">选择一个地点</string>
@@ -859,7 +863,7 @@
   <string name="unable_to_share_upload_item">无法分享此项目</string>
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
-  <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
+  <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的说明</string>
   <string name="see_your_achievements">查看您的成就</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
@@ -886,6 +890,7 @@
   <string name="multiple_files_depiction">请记住，多重上传中的所有图片都会标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别多次单独进行上传。</string>
   <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
   <string name="nearby_report_problem">向维基数据报告关于该项的问题</string>
+  <string name="nearby_report_problem_short">报告问题</string>
   <string name="please_enter_some_comments">请输入一些评论。</string>
   <string name="talk">讨论</string>
   <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
@@ -927,7 +932,7 @@
   <string name="account_vanish_request_confirm_title">隐退账号警告</string>
   <string name="account_vanish_request_confirm">隐退是一个&lt;b&gt;最后的手段&lt;/b&gt;，应该&lt;b&gt;仅在您希望永远停止编辑&lt;/b&gt;，并尽可能隐藏您过去的关联时使用。&lt;br/&gt;&lt;br/&gt;在维基媒体共享资源上删除账户是通过更改您的账户名称，使其他人无法识别您的贡献，这个过程称为账户隐退。&lt;b&gt;隐退并不能保证完全匿名，也无法删除对项目的贡献&lt;/b&gt;。</string>
   <string name="caption">说明</string>
-  <string name="caption_copied_to_clipboard">已复制到剪贴板</string>
+  <string name="caption_copied_to_clipboard">说明已复制到剪贴板</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
   <string name="show_in_explore">在探索中显示</string>
   <string name="show_in_nearby">显示在附近</string>
