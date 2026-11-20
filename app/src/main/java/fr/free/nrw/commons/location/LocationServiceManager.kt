@@ -5,16 +5,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import timber.log.Timber
 import java.util.concurrent.CopyOnWriteArrayList
 
 class LocationServiceManager(
     private val context: Context,
-) : LocationListener {
+) : LocationListenerAdapter() {
     companion object {
         // Maybe these values can be improved for efficiency
         private const val MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100L
@@ -27,6 +25,7 @@ class LocationServiceManager(
     private val locationListeners = CopyOnWriteArrayList<LocationUpdateListener>()
     private var isLocationManagerRegistered = false
     private val locationExplanationDisplayed = mutableSetOf<Activity>()
+    private val locationChangeEvaluator = LocationChangeEvaluator()
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -113,61 +112,6 @@ class LocationServiceManager(
         }
 
     /**
-     * Returns whether a given location is better than the current best location.
-     *
-     * @param location the location to be tested
-     * @param currentBestLocation the current best location
-     * @return LOCATION_SIGNIFICANTLY_CHANGED if location changed significantly
-     * LOCATION_SLIGHTLY_CHANGED if location changed slightly
-     */
-    private fun isBetterLocation(
-        location: Location,
-        currentBestLocation: Location?,
-    ): LocationChangeType {
-        if (currentBestLocation == null) {
-            return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
-        }
-
-        val timeDelta = location.time - currentBestLocation.time
-        val isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS
-        val isNewer = timeDelta > 0
-        val accuracyDelta = (location.accuracy - currentBestLocation.accuracy).toInt()
-        val isMoreAccurate = accuracyDelta < 0
-        val isSignificantlyLessAccurate = accuracyDelta > 200
-        val isFromSameProvider = isSameProvider(location.provider, currentBestLocation.provider)
-
-        val results = FloatArray(5)
-        Location.distanceBetween(
-            currentBestLocation.latitude,
-            currentBestLocation.longitude,
-            location.latitude,
-            location.longitude,
-            results,
-        )
-
-        return when {
-            isSignificantlyNewer ||
-                isMoreAccurate ||
-                (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) -> {
-                if (results[0] < 1000) {
-                    LocationChangeType.LOCATION_SLIGHTLY_CHANGED
-                } else {
-                    LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED
-                }
-            }
-            else -> LocationChangeType.LOCATION_NOT_CHANGED
-        }
-    }
-
-    /**
-     * Checks whether two providers are the same
-     */
-    private fun isSameProvider(
-        provider1: String?,
-        provider2: String?,
-    ): Boolean = provider1 == provider2
-
-    /**
      * Unregisters location manager.
      */
     fun unregisterLocationManager() {
@@ -202,7 +146,7 @@ class LocationServiceManager(
 
     override fun onLocationChanged(location: Location) {
         Timber.d("on location changed")
-        val changeType = isBetterLocation(location, lastLocationVar)
+        val changeType = locationChangeEvaluator.evaluate(location, lastLocationVar)
         if (changeType == LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED) {
             lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedSignificantly(LatLng.from(location)) }
@@ -213,29 +157,6 @@ class LocationServiceManager(
             lastLocationVar = location
             locationListeners.forEach { it.onLocationChangedSlightly(LatLng.from(location)) }
         }
-    }
-
-    @Deprecated(
-        "Deprecated in Java",
-        ReplaceWith(
-            "Timber.d(\"%s's status changed to %d\", provider, status)",
-            "timber.log.Timber",
-        ),
-    )
-    override fun onStatusChanged(
-        provider: String?,
-        status: Int,
-        extras: Bundle?,
-    ) {
-        Timber.d("%s's status changed to %d", provider, status)
-    }
-
-    override fun onProviderEnabled(provider: String) {
-        Timber.d("Provider %s enabled", provider)
-    }
-
-    override fun onProviderDisabled(provider: String) {
-        Timber.d("Provider %s disabled", provider)
     }
 
     fun isNetworkProviderEnabled(): Boolean = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
