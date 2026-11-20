@@ -9,7 +9,9 @@ import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Build
 import android.os.Process
+import android.util.AndroidRuntimeException
 import android.util.Log
+import android.webkit.CookieManager
 import androidx.multidex.MultiDexApplication
 import androidx.work.WorkManager
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -252,8 +254,12 @@ class CommonsApplication : MultiDexApplication() {
 
         sessionManager
             .logout()
-            .andThen(Completable.fromAction { cookieJar.clear() })
             .andThen(
+                Completable.fromAction {
+                    cookieJar.clear()
+                    clearWebViewCookies()
+                },
+            ).andThen(
                 Completable.fromAction {
                     Timber.d("All accounts have been removed")
                     clearImageCache()
@@ -265,6 +271,16 @@ class CommonsApplication : MultiDexApplication() {
             ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ logoutListener.onLogoutComplete() }, { t: Throwable? -> Timber.e(t) })
+    }
+
+    private fun clearWebViewCookies() {
+        try {
+            val cookieManager = CookieManager.getInstance()
+            cookieManager.removeAllCookies(null)
+            cookieManager.flush()
+        } catch (e: AndroidRuntimeException) {
+            Timber.w(e, "Unable to clear WebView cookies")
+        }
     }
 
     /**

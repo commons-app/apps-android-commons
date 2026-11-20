@@ -1,6 +1,5 @@
 app/src/androidTest/java/fr/free/nrw/commons/UploadCancelledTest.kt
 app/src/androidTest/java/fr/free/nrw/commons/WelcomeActivityTest.kt
-app/src/main/java/fr/free/nrw/commons/activity/SingleWebViewActivity.kt
 app/src/main/java/fr/free/nrw/commons/crypto/CryptoUtils.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditActivity.kt
 app/src/main/java/fr/free/nrw/commons/description/DescriptionEditHelper.kt
