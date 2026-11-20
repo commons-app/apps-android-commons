@@ -10,6 +10,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import fr.free.nrw.commons.nearby.presenter.SearchAreaTracker
 import io.reactivex.Completable
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
@@ -531,5 +532,102 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
 
         verify(applicationKvStore, never()).putLong(anyString(), anyLong())
+    }
+
+    @Test
+    fun testResumeDoesNotSearchAgainWhenAreaAlreadyLoaded() {
+        loadPlacesIn(shibuya)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenLastSearchDidNotFinish() {
+        expectSearchableView(shibuya)
+        nearbyPresenter.initializeMapOperations()
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenRefreshFailedAfterEarlierLoad() {
+        loadPlacesIn(shibuya)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        nearbyPresenter.lockUnlockNearby(false) // what the fragment does when the search fails
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainAfterZoomingOut() {
+        loadPlacesIn(shibuya)
+        expectSearchableView(arrayOf(LatLng(35.70, 139.74, 0f), LatLng(35.62, 139.66, 0f)))
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenLoadedPlacesAreOld() {
+        var now = 0L
+        nearbyPresenter.searchAreas = SearchAreaTracker { now }
+        loadPlacesIn(shibuya)
+        now = TimeUnit.MINUTES.toMillis(5) + 1
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainAfterCustomQueryResults() {
+        expectSearchableView(shibuya)
+        nearbyPresenter.setAdvancedQuery("custom query")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testMapScrollDoesNotSearchAgainWhenAreaAlreadyLoaded() {
+        loadPlacesIn(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+
+        nearbyPresenter.searchInTheArea()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+    }
+
+    private val shibuyaCenter = LatLng(35.6595, 139.7005, 0f)
+    private val shibuya = arrayOf(LatLng(35.6698, 139.7081, 0f), LatLng(35.6492, 139.6929, 0f))
+
+    /** Makes the view report a usable map with the given top right and bottom left corners. */
+    private fun expectSearchableView(corners: Array<LatLng>) {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.screenTopRight).thenReturn(corners[0])
+        whenever(nearbyParentFragmentView.screenBottomLeft).thenReturn(corners[1])
+    }
+
+    /** Runs a search in the given area and lets it show its places, then forgets the calls. */
+    private fun loadPlacesIn(corners: Array<LatLng>) {
+        expectSearchableView(corners)
+        nearbyPresenter.initializeMapOperations()
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
     }
 }

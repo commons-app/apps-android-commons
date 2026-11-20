@@ -158,15 +158,10 @@ class EditViewModel : ViewModel() {
                 270 -> RotationDegree.ROTATE_270
                 else -> throw IllegalArgumentException("Unsupported degree: $degree")
             }
-        try {
-            jpegtran!!.rotate(rotationDegree)
-            jpegtran!!.save(output.toUri())
-            this.imagePath = output.absolutePath
-            return output
-        } catch (e: Exception) {
-            Timber.e(e, "saveEditedImage: Failed to rotate image")
-            throw e
-        }
+        jpegtran!!.rotate(rotationDegree)
+        jpegtran!!.save(output.toUri())
+        this.imagePath = output.absolutePath
+        return output
     }
 
     /**
@@ -191,20 +186,15 @@ class EditViewModel : ViewModel() {
         )
         val imagePath = "cropped_${System.currentTimeMillis()}.jpg"
         val output = File(savePath, imagePath)
-        try {
-            jpegtran!!.crop(
-                width,
-                height,
-                left,
-                top,
-            )
-            jpegtran!!.save(output.toUri())
-            this.imagePath = output.absolutePath
-            return output
-        } catch (e: Exception) {
-            Timber.e(e, "saveEditedImage: Failed to crop image")
-            throw e
-        }
+        jpegtran!!.crop(
+            width,
+            height,
+            left,
+            top,
+        )
+        jpegtran!!.save(output.toUri())
+        this.imagePath = output.absolutePath
+        return output
     }
 
     /**
@@ -222,13 +212,8 @@ class EditViewModel : ViewModel() {
         Timber.tag("Trying to blur image").d("Starting blur of ${regions.size} regions")
         val imagePath = "blurred_${System.currentTimeMillis()}.jpg"
         val output = File(savePath, imagePath)
-        try {
-            jpegtran!!.blur(regions)
-            jpegtran!!.save(output.toUri())
-        } catch (e: Exception) {
-            Timber.e(e, "blurImage: Failed to blur image")
-            throw e
-        }
+        jpegtran!!.blur(regions)
+        jpegtran!!.save(output.toUri())
         this.imagePath = output.absolutePath
         return output
     }

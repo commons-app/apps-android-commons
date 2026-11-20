@@ -231,17 +231,24 @@ class CategoriesPresenter
                                     wikiText,
                                 ).subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe({
-                                    Timber.d("Categories are added.")
-                                    media.addedCategories = selectedCategories
-                                    repository.cleanup()
+                                .subscribe({ saved ->
                                     view.dismissProgressDialog()
-                                    view.refreshCategories()
-                                    view.goBackToPreviousScreen()
+                                    if (saved) {
+                                        Timber.d("Categories are added.")
+                                        // Clear the selection only once the editor is closing, so
+                                        // it can never stay open with an empty selection
+                                        view.goBackToPreviousScreen()
+                                        repository.cleanup()
+                                        view.refreshCategories(selectedCategories)
+                                    } else {
+                                        view.showError(R.string.category_edit_helper_edit_message_else)
+                                    }
                                 }, {
                                     Timber.e(
                                         "Failed to update categories",
                                     )
+                                    view.dismissProgressDialog()
+                                    view.showError(R.string.category_edit_helper_edit_message_else)
                                 }),
                         )
                     } catch (e: InvalidLoginTokenException) {
@@ -249,6 +256,11 @@ class CategoriesPresenter
                         view.navigateToLoginScreen()
                     }
                 }
+            } else if (repository.getSelectedExistingCategories().isNotEmpty()) {
+                // Nothing changed and categories are still selected, so there is
+                // nothing to save: close the editor without a warning
+                view.goBackToPreviousScreen()
+                repository.cleanup()
             } else {
                 repository.cleanup()
                 view.showNoCategorySelected()

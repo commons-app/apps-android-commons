@@ -92,6 +92,8 @@
   <string name="upload_progress_notification_title_in_progress">%1$s uploades</string>
   <string name="upload_progress_notification_title_finishing">Afslutter upload af %1$s</string>
   <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
+  <string name="upload_metadata_pending_notification_title">%1$s er uploadet, men billedtekster og beskrivelser er endnu ikke gemt</string>
+  <string name="upload_metadata_pending">Uploadet, billedtekster og beskrivelser er endnu ikke gemt</string>
   <string name="upload_paused_notification_title">Upload af %1$s sat på pause</string>
   <string name="upload_failed_notification_subtitle">Tryk for at se</string>
   <string name="upload_paused_notification_subtitle">Tryk for at se</string>
@@ -133,6 +135,7 @@
   <string name="refresh_button">Opdater</string>
   <string name="display_list_button">Liste</string>
   <string name="contributions_subtitle_zero">(Ingen uploads endnu)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="depictions_not_found">Der blev ikke fundet nogen Wikidata-elementer, der matcher %1$s</string>
   <string name="no_child_classes">%1$s har ingen underklasser</string>
@@ -310,6 +313,7 @@
   <string name="upload_location_access_denied">Placeringsadgang nægtet. Indstil din placering manuelt for at bruge denne funktion.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
   <string name="location_permission_rationale_explore">Der kræves tilladelse til at vise en liste over billeder i nærheden</string>
+  <string name="nearby_bookmark">Bogmærke</string>
   <string name="nearby_directions">Rutevejledning</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -693,6 +697,7 @@
   <string name="cancelling_upload">Annullerer upload...</string>
   <string name="retrying_upload">Prøver at uploade igen…</string>
   <string name="retrying_failed_uploads">Prøver alle mislykkede uploads igen…</string>
+  <string name="upload_failed_server_error">Commons kunne ikke håndtere anmodningen lige nu. Prøv igen senere. (HTTP %1$d)</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
@@ -829,6 +834,7 @@
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
   <string name="nearby_report_problem">Rapporter et problem omkring dette element til Wikidata</string>
+  <string name="nearby_report_problem_short">Rapportér et problem</string>
   <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
   <string name="talk">Tal</string>
   <string name="write_something_about_the_item">Skriv noget om elementet \'%1$s\'. Det vil være offentligt synligt.</string>
