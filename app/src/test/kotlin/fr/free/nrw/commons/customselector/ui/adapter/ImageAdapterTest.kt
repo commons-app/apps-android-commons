@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
@@ -31,6 +33,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.util.TreeMap
@@ -117,6 +120,45 @@ class ImageAdapterTest {
         imageAdapter.onBindViewHolder(holder, 0)
         selectedImageField.set(imageAdapter.selectionManager, images)
         imageAdapter.onBindViewHolder(holder, 0)
+    }
+
+    /**
+     * Test on bind view holder with an image whose file was deleted from the
+     * device: the adapter must shrink its item count accordingly so the
+     * RecyclerView never binds a position that no longer exists.
+     */
+    @Test
+    fun `onBindViewHolder removes deleted image from item count`() {
+        // The deletion is processed through itemView.post(), which only runs
+        // for a view attached to a window, so use a real activity here.
+        val createdActivity =
+            Robolectric
+                .buildActivity(Activity::class.java)
+                .setup()
+                .get()
+        val inflater =
+            createdActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val itemView: View = inflater.inflate(R.layout.item_custom_selector_image, null, false)
+        createdActivity.setContentView(itemView)
+        val attachedHolder = ImageAdapter.ImageViewHolder(itemView)
+        val adapter = ImageAdapter(createdActivity, imageSelectListener, imageLoader)
+
+        // The content resolver returns a null type for these URIs, so the
+        // adapter treats them as deleted from the device.
+        val deletedUri: Uri = Uri.parse("content://media/external/images/media/1")
+        val otherUri: Uri = Uri.parse("content://media/external/images/media/2")
+        images.add(Image(1, "image", deletedUri, "abc/abc", 1, "bucket1"))
+        images.add(Image(2, "image2", otherUri, "abc/def", 1, "bucket1"))
+        adapter.init(images, images, TreeMap())
+
+        adapter.onBindViewHolder(attachedHolder, 0)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+
+        Assertions.assertEquals(1, adapter.itemCount)
+
+        // Binding the former last position must not throw
+        // IndexOutOfBoundsException.
+        adapter.onBindViewHolder(attachedHolder, 1)
     }
 
     /**
