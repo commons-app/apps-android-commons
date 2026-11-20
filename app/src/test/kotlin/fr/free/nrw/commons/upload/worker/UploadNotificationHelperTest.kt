@@ -250,6 +250,25 @@ class UploadNotificationHelperTest {
     }
 
     @Test
+    fun testShowErrorNotification_serverErrorShowsClearReason() {
+        val contribution = createMockContribution()
+        contribution.errorInfo = "Unsuccessful response: HTTP 503"
+
+        val captor = argumentCaptor<Notification>()
+        notificationHelper.showErrorNotification(contribution)
+
+        verify(notificationManager).notify(
+            eq("test-tag"),
+            eq(1001),
+            captor.capture(),
+        )
+        assertEquals(
+            context.getString(R.string.upload_failed_server_error, 503),
+            captor.firstValue.extras.getString(NotificationCompat.EXTRA_TEXT),
+        )
+    }
+
+    @Test
     fun testShowInvalidLoginNotification() {
         val contribution = createMockContribution()
         val captor = argumentCaptor<Notification>()

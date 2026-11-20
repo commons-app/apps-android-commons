@@ -120,42 +120,38 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     private fun setAchievements() {
         binding.progressBar.visibility = View.VISIBLE
         if (checkAccount()) {
-            try {
-                compositeDisposable.add(
-                    userStatsClient
-                        .getAchievements(userName ?: return)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { response ->
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response))
-                                } else {
-                                    Timber.d("Success")
-                                    // TODO Create a Method to Hide all the Statistics
-//                                    binding.layoutImageReverts.visibility = View.INVISIBLE
-//                                    binding.achievementBadgeImage.visibility = View.INVISIBLE
-                                    // If the number of edits made by the user are more than 150,000
-                                    // in some cases such high number of wiki edit counts cause the
-                                    // achievements calculator to fail in some cases, for more details
-                                    // refer Issue: #3295
-                                    showSnackBarWithRetry(
-                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
-                                    )
-                                }
-                            },
-                            { throwable ->
-                                Timber.e(throwable, "Fetching achievements statistics failed")
+            compositeDisposable.add(
+                userStatsClient
+                    .getAchievements(userName ?: return)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { response ->
+                            if (response != null) {
+                                setUploadCount(Achievements.from(response))
+                            } else {
+                                Timber.d("Success")
+                                // TODO Create a Method to Hide all the Statistics
+//                                binding.layoutImageReverts.visibility = View.INVISIBLE
+//                                binding.achievementBadgeImage.visibility = View.INVISIBLE
+                                // If the number of edits made by the user are more than 150,000
+                                // in some cases such high number of wiki edit counts cause the
+                                // achievements calculator to fail in some cases, for more details
+                                // refer Issue: #3295
                                 showSnackBarWithRetry(
-                                    throwable.isTooManyAchievements() ||
-                                        numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                    numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
                                 )
-                            },
-                        ),
-                )
-            } catch (e: Exception) {
-                Timber.d("Exception: ${e.message}")
-            }
+                            }
+                        },
+                        { throwable ->
+                            Timber.e(throwable, "Fetching achievements statistics failed")
+                            showSnackBarWithRetry(
+                                throwable.isTooManyAchievements() ||
+                                    numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                            )
+                        },
+                    ),
+            )
         }
     }
 

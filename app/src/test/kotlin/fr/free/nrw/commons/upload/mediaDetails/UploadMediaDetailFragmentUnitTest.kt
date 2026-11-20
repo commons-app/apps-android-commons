@@ -39,6 +39,7 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.PLACE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -454,6 +455,48 @@ class UploadMediaDetailFragmentUnitTest {
         fragment.updateMediaDetails(mock())
     }
 
+    /**
+     * Refreshing a recreated upload page must enable navigation from its saved primary caption,
+     * even before RecyclerView has bound its caption field.
+     */
+    @Test
+    fun testRefreshAfterViewRecreationEnablesNextForSavedCaption() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
+        fragment.recentLanguagesDao = mock()
+        Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
+        val firstView = fragment.onCreateView(layoutInflater, null, null)
+        fragment.onPrimaryCaptionTextChange(true)
+        Assert.assertTrue(firstView.findViewById<View>(R.id.btn_next).isEnabled)
+
+        val recreatedView = fragment.onCreateView(layoutInflater, null, null)
+        fragment.updateMediaDetails(listOf(UploadMediaDetail(captionText = "Saved caption")))
+
+        Assert.assertTrue(recreatedView.findViewById<View>(R.id.btn_next).isEnabled)
+        Assert.assertTrue(recreatedView.findViewById<View>(R.id.btn_copy_subsequent_media).isEnabled)
+    }
+
+    /**
+     * An empty primary caption must disable navigation even if another language has a caption.
+     */
+    @Test
+    fun testRefreshWithEmptyPrimaryCaptionDisablesNext() {
+        `when`(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "")).thenReturn("en")
+        fragment.recentLanguagesDao = mock()
+        Whitebox.setInternalState(fragment, "voiceInputResultLauncher", mock<ActivityResultLauncher<Intent>>())
+        val currentView = fragment.onCreateView(layoutInflater, null, null)
+        fragment.onPrimaryCaptionTextChange(true)
+
+        fragment.updateMediaDetails(
+            listOf(
+                UploadMediaDetail(),
+                UploadMediaDetail(captionText = "Secondary caption"),
+            ),
+        )
+
+        Assert.assertFalse(currentView.findViewById<View>(R.id.btn_next).isEnabled)
+        Assert.assertFalse(currentView.findViewById<View>(R.id.btn_copy_subsequent_media).isEnabled)
+    }
+
     @Test
     @Throws(Exception::class)
     fun testUpdateMediaDetailsWithCaptionOnlyClearsShowNearbyFound() {
@@ -634,5 +677,24 @@ class UploadMediaDetailFragmentUnitTest {
 
         Mockito.verify(uploadMediaDetailAdapter).items = details
         Mockito.verify(presenter).onUserConfirmedUploadIsOfPlace(place, 1)
+    }
+
+    @Test
+    fun testNearbyPlaceSurvivesSaveAndRestore() {
+        val nearbyPlace =
+            Place("name", "long description", LatLng(12.0, 34.0, 1f), "category", null, "", "", "Q1")
+        `when`(uploadMediaDetailAdapter.items).thenReturn(mutableListOf())
+        fragment.place = nearbyPlace
+
+        val savedState = Bundle()
+        fragment.onSaveInstanceState(savedState)
+
+        Assert.assertNotNull(savedState.getParcelable(PLACE))
+
+        val restoredFragment = UploadMediaDetailFragment()
+        Whitebox.setInternalState(restoredFragment, "mSavedFragmentState", savedState)
+        fragmentManager.beginTransaction().add(restoredFragment, "restoredFragment").commitNow()
+
+        Assert.assertEquals("Q1", restoredFragment.place?.entityID)
     }
 }

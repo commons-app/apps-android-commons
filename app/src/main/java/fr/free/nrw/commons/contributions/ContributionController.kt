@@ -50,6 +50,7 @@ class ContributionController
         private var isInAppCameraUpload = false
 
         // Flag to track if an internal upload is in progress.
+        @Volatile
         var isInternalUploadInProgress = false
 
         @JvmField
@@ -356,6 +357,7 @@ class ContributionController
                         source: FilePicker.ImageSource,
                         type: Int,
                     ) {
+                        isInternalUploadInProgress = false
                         showShortToast(activity, R.string.error_occurred_in_picking_images)
                     }
 
@@ -365,6 +367,7 @@ class ContributionController
                         type: Int,
                     ) {
                         val intent = handleImagesPicked(activity, imagesFiles)
+                        isInternalUploadInProgress = false
                         activity.startActivity(intent)
                     }
                 },

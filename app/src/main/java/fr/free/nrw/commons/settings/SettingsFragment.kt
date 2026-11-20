@@ -3,20 +3,10 @@ package fr.free.nrw.commons.settings
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Dialog
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -38,16 +28,12 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
-import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
-import fr.free.nrw.commons.recentlanguages.Language
-import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.upload.LanguagesAdapter
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
@@ -75,15 +61,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var locationManager: LocationServiceManager
 
+    internal val languageController = SettingsLanguageController(this)
+
     private var vanishAccountPreference: Preference? = null
     private var themeListPreference: ListPreference? = null
-    private var descriptionLanguageListPreference: Preference? = null
-    private var appUiLanguageListPreference: Preference? = null
     private var showDeletionButtonPreference: Preference? = null
-    private var keyLanguageListPreference: String? = null
-    private var recentLanguagesTextView: TextView? = null
-    private var separator: View? = null
-    private var languageHistoryListView: ListView? = null
 
     private lateinit var inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
 
@@ -179,55 +161,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        // Gets current language code from shared preferences
-        var languageCode: String?
-
-        appUiLanguageListPreference = findPreference("appUiDefaultLanguagePref")
-        appUiLanguageListPreference?.let { appUiLanguageListPreference ->
-            keyLanguageListPreference = appUiLanguageListPreference.key
-            languageCode = getCurrentLanguageCode(keyLanguageListPreference!!)
-
-            languageCode?.let { code ->
-                if (code.isEmpty()) {
-                    // If current language code is empty, means none selected by user yet so use
-                    // phone locale
-                    appUiLanguageListPreference.summary = Locale.getDefault().displayLanguage
-                } else {
-                    // If any language is selected by user previously, use it
-                    val defLocale = createLocale(code)
-                    appUiLanguageListPreference.summary = defLocale.getDisplayLanguage(defLocale)
-                }
-            }
-
-            appUiLanguageListPreference.setOnPreferenceClickListener {
-                prepareAppLanguages(keyLanguageListPreference!!)
-                true
-            }
-        }
-
-        descriptionLanguageListPreference = findPreference("descriptionDefaultLanguagePref")
-        descriptionLanguageListPreference?.let { descriptionLanguageListPreference ->
-            languageCode = getCurrentLanguageCode(descriptionLanguageListPreference.key)
-
-            languageCode?.let { code ->
-                if (code.isEmpty()) {
-                    // If current language code is empty, means none selected by user yet so use
-                    // phone locale
-                    descriptionLanguageListPreference.summary = Locale.getDefault().displayLanguage
-                } else {
-                    // If any language is selected by user previously, use it
-                    val defLocale = createLocale(code)
-                    descriptionLanguageListPreference.summary = defLocale.getDisplayLanguage(
-                        defLocale
-                    )
-                }
-            }
-
-            descriptionLanguageListPreference.setOnPreferenceClickListener {
-                prepareAppLanguages(it.key)
-                true
-            }
-        }
+        languageController.setupLanguagePreferences()
 
         showDeletionButtonPreference = findPreference("displayDeletionButton")
         showDeletionButtonPreference?.setOnPreferenceChangeListener { _, newValue ->
@@ -331,189 +265,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     /**
-     * Prepare and Show language selection dialog box
-     * Uses previously saved language if there is any, if not uses phone locale as initial language.
-     * Disable default/already selected language from dialog box
-     * Get ListPreference key and act accordingly for each ListPreference.
-     * saves value chosen by user to shared preferences
-     * to remember later and recall MainActivity to reflect language changes
-     * @param keyListPreference
-     */
-    private fun prepareAppLanguages(keyListPreference: String) {
-        // Gets current language code from shared preferences
-        val languageCode = getCurrentLanguageCode(keyListPreference)
-        val recentLanguages = recentLanguagesDao.getRecentLanguages()
-        val selectedLanguages = hashMapOf<Int, String>()
-
-        if (keyListPreference == "appUiDefaultLanguagePref") {
-            if (languageCode.isNullOrEmpty()) {
-                selectedLanguages[0] = Locale.getDefault().language
-            } else {
-                selectedLanguages[0] = languageCode
-            }
-        } else if (keyListPreference == "descriptionDefaultLanguagePref") {
-            if (languageCode.isNullOrEmpty()) {
-                selectedLanguages[0] = Locale.getDefault().language
-            } else {
-                selectedLanguages[0] = languageCode
-            }
-        }
-
-        val languagesAdapter = LanguagesAdapter(requireActivity(), selectedLanguages)
-
-        val dialog = Dialog(requireActivity())
-        dialog.setContentView(R.layout.dialog_select_language)
-        dialog.setCancelable(false)
-        dialog.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.90).toInt(),
-            (resources.displayMetrics.heightPixels * 0.90).toInt()
-        )
-        dialog.show()
-
-        val editText: EditText = dialog.findViewById(R.id.search_language)
-        val listView: ListView = dialog.findViewById(R.id.language_list)
-        val cancelButton = dialog.findViewById<Button>(R.id.cancel_button)
-        languageHistoryListView = dialog.findViewById(R.id.language_history_list)
-        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches)
-        separator = dialog.findViewById(R.id.separator)
-
-        setUpRecentLanguagesSection(recentLanguages, selectedLanguages)
-
-        listView.adapter = languagesAdapter
-
-        cancelButton.setOnClickListener { dialog.dismiss() }
-
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {
-                hideRecentLanguagesSection()
-            }
-
-            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
-                languagesAdapter.filter.filter(charSequence)
-            }
-
-            override fun afterTextChanged(editable: Editable?) = Unit
-        })
-
-        languageHistoryListView?.setOnItemClickListener { adapterView, _, position, _ ->
-            onRecentLanguageClicked(keyListPreference, dialog, adapterView, position)
-        }
-
-        listView.setOnItemClickListener { adapterView, _, position, _ ->
-            val lCode = (adapterView.adapter as LanguagesAdapter).getLanguageCode(position)
-            val languageName = (adapterView.adapter as LanguagesAdapter).getLanguageName(position)
-            val isExists = recentLanguagesDao.findRecentLanguage(lCode)
-            if (isExists) {
-                recentLanguagesDao.deleteRecentLanguage(lCode)
-            }
-            recentLanguagesDao.addRecentLanguage(Language(languageName, lCode))
-            saveLanguageValue(lCode, keyListPreference)
-            val defLocale = createLocale(lCode)
-            if (keyListPreference == "appUiDefaultLanguagePref") {
-                appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
-                setLocale(requireActivity(), lCode)
-                val intent = Intent(requireActivity(), MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                requireActivity().finish()
-                startActivity(intent)
-            }
-                else {
-                descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
-            }
-            dialog.dismiss()
-        }
-
-        dialog.setOnDismissListener { languagesAdapter.filter.filter("") }
-    }
-
-    /**
-     * Set up recent languages section
-     *
-     * @param recentLanguages recently used languages
-     * @param selectedLanguages selected languages
-     */
-    private fun setUpRecentLanguagesSection(
-        recentLanguages: List<Language>,
-        selectedLanguages: HashMap<Int, String>
-    ) {
-        if (recentLanguages.isEmpty()) {
-            languageHistoryListView?.visibility = View.GONE
-            recentLanguagesTextView?.visibility = View.GONE
-            separator?.visibility = View.GONE
-        } else {
-            if (recentLanguages.size > 5) {
-                for (i in recentLanguages.size - 1 downTo 5) {
-                    recentLanguagesDao.deleteRecentLanguage(recentLanguages[i].languageCode)
-                }
-            }
-            languageHistoryListView?.visibility = View.VISIBLE
-            recentLanguagesTextView?.visibility = View.VISIBLE
-            separator?.visibility = View.VISIBLE
-            val recentLanguagesAdapter = RecentLanguagesAdapter(
-                requireActivity(),
-                recentLanguagesDao.getRecentLanguages(),
-                selectedLanguages
-            )
-            languageHistoryListView?.adapter = recentLanguagesAdapter
-        }
-    }
-
-    /**
-     * Handles click event for recent language section
-     */
-    private fun onRecentLanguageClicked(
-        keyListPreference: String,
-        dialog: Dialog,
-        adapterView: AdapterView<*>,
-        position: Int
-    ) {
-        val recentLanguageCode = (adapterView.adapter as RecentLanguagesAdapter).getLanguageCode(position)
-        val recentLanguageName = (adapterView.adapter as RecentLanguagesAdapter).getLanguageName(position)
-        val isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode)
-        if (isExists) {
-            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode)
-        }
-        recentLanguagesDao.addRecentLanguage(Language(recentLanguageName, recentLanguageCode))
-        saveLanguageValue(recentLanguageCode, keyListPreference)
-        val defLocale = createLocale(recentLanguageCode)
-        if (keyListPreference == "appUiDefaultLanguagePref") {
-            appUiLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
-            setLocale(requireActivity(), recentLanguageCode)
-            requireActivity().recreate()
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
-        } else {
-            descriptionLanguageListPreference?.summary = defLocale.getDisplayLanguage(defLocale)
-        }
-        dialog.dismiss()
-    }
-
-    /**
-     * Remove the section of recent languages
-     */
-    private fun hideRecentLanguagesSection() {
-        languageHistoryListView?.visibility = View.GONE
-        recentLanguagesTextView?.visibility = View.GONE
-        separator?.visibility = View.GONE
-    }
-
-    /**
      * Changing the default app language with selected one and save it to SharedPreferences
      */
     fun setLocale(activity: Activity, userSelectedValue: String) {
-        var selectedLanguage = userSelectedValue
-        if (selectedLanguage == "") {
-            selectedLanguage = Locale.getDefault().language
-        }
-        val locale = createLocale(selectedLanguage)
-        Locale.setDefault(locale)
-        val configuration = Configuration()
-        configuration.locale = locale
-        activity.baseContext.resources.updateConfiguration(configuration, activity.baseContext.resources.displayMetrics)
-
-        val editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit()
-        editor.putString("language", selectedLanguage)
-        editor.apply()
+        SettingsLanguageController.setLocale(activity, userSelectedValue)
     }
 
     @Suppress("LongLine")
@@ -523,49 +278,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         private const val VANISH_ACCOUNT_SUCCESS_URL =
             "https://meta.m.wikimedia.org/wiki/" +
                 "Special:GlobalVanishRequest/vanished"
+
         /**
          * Create Locale based on different types of language codes
          * @param languageCode
          * @return Locale and throws error for invalid language codes
          */
-        fun createLocale(languageCode: String): Locale {
-            val parts = languageCode.split("-")
-            return when (parts.size) {
-                1 -> Locale(parts[0])
-                2 -> Locale(parts[0], parts[1])
-                3 -> Locale(parts[0], parts[1], parts[2])
-                else -> throw IllegalArgumentException("Invalid language code: $languageCode")
-            }
-        }
-    }
-
-    /**
-     * Save userSelected language in List Preference
-     * @param userSelectedValue
-     * @param preferenceKey
-     */
-    private fun saveLanguageValue(userSelectedValue: String, preferenceKey: String) {
-        when (preferenceKey) {
-            "appUiDefaultLanguagePref" -> defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue)
-            "descriptionDefaultLanguagePref" -> defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue)
-        }
-    }
-
-    /**
-     * Gets current language code from shared preferences
-     * @param preferenceKey
-     * @return
-     */
-    private fun getCurrentLanguageCode(preferenceKey: String): String? {
-        return when (preferenceKey) {
-            "appUiDefaultLanguagePref" -> defaultKvStore.getString(
-                Prefs.APP_UI_LANGUAGE, ""
-            )
-            "descriptionDefaultLanguagePref" -> defaultKvStore.getString(
-                Prefs.DESCRIPTION_LANGUAGE, ""
-            )
-            else -> null
-        }
+        fun createLocale(languageCode: String): Locale =
+            SettingsLanguageController.createLocale(languageCode)
     }
 
     /**

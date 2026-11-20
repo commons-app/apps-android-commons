@@ -124,6 +124,8 @@
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
+  <string name="upload_metadata_pending_notification_title">Przesłano plik „%1$s”, ale jego podpisy i przedstawione obiekty nie zostały jeszcze zapisane</string>
+  <string name="upload_metadata_pending">Przesłano plik, ale jego podpisy i przedstawione obiekty nie zostały jeszcze zapisane</string>
   <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$s</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
@@ -730,6 +732,7 @@
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
   <string name="retrying_upload">Ponawianie próby przesyłania…</string>
   <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
+  <string name="upload_failed_server_error">Commons nie może obecnie obsłużyć tego żądania. Spróbuj ponownie później (HTTP %1$d).</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>
