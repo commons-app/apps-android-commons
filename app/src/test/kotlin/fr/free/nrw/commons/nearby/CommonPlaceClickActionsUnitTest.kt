@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.Intent
 import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
+import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -11,6 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -105,5 +109,14 @@ class CommonPlaceClickActionsUnitTest {
             )
         method.isAccessible = true
         method.invoke(commonPlaceClickActions)
+    }
+
+    @Test
+    fun `gallery click marks nearby upload as pending`() {
+        val launcher = mock<ActivityResultLauncher<Intent>>()
+
+        commonPlaceClickActions.onGalleryClicked().invoke(place, launcher)
+
+        verify(contributionController).isInternalUploadInProgress = true
     }
 }
