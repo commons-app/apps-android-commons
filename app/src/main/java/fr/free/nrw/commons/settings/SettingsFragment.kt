@@ -26,29 +26,26 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
-import fr.free.nrw.commons.databinding.ProgressDialogBinding
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.filepicker.FilePicker
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.settings.sync.SettingsSyncUIHandler
+import fr.free.nrw.commons.settings.sync.SyncUIContext
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.handleWebUrl
-import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.settings.sync.UserSettingsSyncManager
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Provider
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -72,10 +69,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var sessionManager: SessionManager
 
     @Inject
-    lateinit var userSettingsSyncManagerProvider: Provider<UserSettingsSyncManager>
+    lateinit var settingsSyncUIHandler: SettingsSyncUIHandler
 
     private val compositeDisposable = CompositeDisposable()
-    private var activeProgressDialog: AlertDialog? = null
 
     internal val languageController = SettingsLanguageController(this)
 
@@ -213,7 +209,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        setupSyncPreferences()
+        settingsSyncUIHandler.setupSyncPreferences(
+            backupPref = findPreference("backupSettings"),
+            restorePref = findPreference("restoreSettings"),
+            uiContext =
+                SyncUIContext(
+                    context = requireContext(),
+                    activity = requireActivity(),
+                    layoutInflater = layoutInflater,
+                    compositeDisposable = compositeDisposable,
+                    isFragmentAdded = { isAdded },
+                ),
+        )
 
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
@@ -232,112 +239,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun setupSyncPreferences() {
-        val backupPref: Preference? = findPreference("backupSettings")
-        val restorePref: Preference? = findPreference("restoreSettings")
-
-        if (defaultKvStore.getBoolean("login_skipped", false) || !sessionManager.isUserLoggedIn) {
-            backupPref?.isEnabled = false
-            restorePref?.isEnabled = false
-            return
-        }
-
-        backupPref?.setOnPreferenceClickListener {
-            val userName = sessionManager.userName ?: ""
-            showSyncConfirmationDialog(
-                SyncDialogConfig(
-                    titleRes = R.string.sync_backup_confirm_title,
-                    messageRes = R.string.sync_backup_confirm_message,
-                    syncAction = { userSettingsSyncManagerProvider.get().backupToUserPage() },
-                    successMsgRes = R.string.sync_backup_success,
-                    failedMsgRes = R.string.sync_backup_failed,
-                    shouldRecreate = false,
-                ),
-                userName,
-            )
-            true
-        }
-
-        restorePref?.setOnPreferenceClickListener {
-            val userName = sessionManager.userName ?: ""
-            showSyncConfirmationDialog(
-                SyncDialogConfig(
-                    titleRes = R.string.sync_restore_confirm_title,
-                    messageRes = R.string.sync_restore_confirm_message,
-                    syncAction = { userSettingsSyncManagerProvider.get().restoreFromUserPage() },
-                    successMsgRes = R.string.sync_restore_success,
-                    failedMsgRes = R.string.sync_restore_failed,
-                    shouldRecreate = true,
-                ),
-                userName,
-            )
-            true
-        }
-    }
-
-    private fun showSyncConfirmationDialog(
-        config: SyncDialogConfig,
-        userName: String,
-    ) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(config.titleRes)
-            .setMessage(getString(config.messageRes, userName))
-            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-            .setPositiveButton(R.string.submit) { dialog, _ ->
-                dialog.dismiss()
-                val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
-                dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
-                activeProgressDialog = AlertDialog.Builder(requireContext())
-                    .setView(dialogBinding.root)
-                    .setCancelable(false)
-                    .create()
-                activeProgressDialog?.show()
-
-                compositeDisposable.add(
-                    config.syncAction()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { success ->
-                                activeProgressDialog?.dismiss()
-                                activeProgressDialog = null
-                                if (!isAdded || context == null) return@subscribe
-                                if (success) {
-                                    ViewUtil.showLongToast(requireContext(), getString(config.successMsgRes))
-                                    if (config.shouldRecreate) {
-                                        requireActivity().recreate()
-                                    }
-                                } else {
-                                    ViewUtil.showLongToast(requireContext(), getString(config.failedMsgRes, ""))
-                                }
-                            },
-                            { throwable ->
-                                activeProgressDialog?.dismiss()
-                                activeProgressDialog = null
-                                if (!isAdded || context == null) return@subscribe
-                                val errorMsg = throwable.localizedMessage ?: ""
-                                ViewUtil.showLongToast(requireContext(), getString(config.failedMsgRes, errorMsg))
-                            },
-                        ),
-                )
-            }
-            .show()
-    }
-
     override fun onDestroyView() {
-        activeProgressDialog?.dismiss()
-        activeProgressDialog = null
+        settingsSyncUIHandler.dismissProgressDialog()
         compositeDisposable.clear()
         super.onDestroyView()
     }
-
-    private data class SyncDialogConfig(
-        val titleRes: Int,
-        val messageRes: Int,
-        val syncAction: () -> Single<Boolean>,
-        val successMsgRes: Int,
-        val failedMsgRes: Int,
-        val shouldRecreate: Boolean = false,
-    )
 
     /**
      * Asks users to provide location access.
