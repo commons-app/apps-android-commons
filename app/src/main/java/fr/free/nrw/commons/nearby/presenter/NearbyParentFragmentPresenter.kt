@@ -124,8 +124,6 @@ class NearbyParentFragmentPresenter(
         }
         // check if an upload is in progress
         if (nearbyController.isInternalUploadInProgress) {
-            // reset the flag and exit early to prevent unnecessary fetchPlaces call
-            nearbyController.isInternalUploadInProgress = false
             Timber.d("Internal upload in progress, skipping map update")
             return
         }
