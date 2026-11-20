@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.InputFilter
 import android.widget.RadioButton
 import android.widget.Toast
 import fr.free.nrw.commons.R
@@ -72,6 +73,9 @@ class WikidataFeedback : BaseActivity() {
             binding.detailsEditText.isEnabled = isChecked
             binding.detailsEditText.alpha = if (isChecked) 1f else DISABLED_DETAILS_ALPHA
         }
+        binding.detailsEditText.filters = arrayOf(InputFilter { source, start, end, _, _, _ ->
+            source.subSequence(start, end).toString().trim()
+        })
         binding.appCompatButton.setOnClickListener {
             if (binding.radioGroup.checkedRadioButtonId == -1) {
                 Toast
