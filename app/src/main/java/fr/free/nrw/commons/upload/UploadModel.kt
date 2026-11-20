@@ -19,6 +19,11 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+import kotlin.random.Random
+
+// One 5-digit number for the whole upload, like the one findUniqueFileName adds
+private const val MIN_BATCH_NUMBER = 10000
+private const val MAX_BATCH_NUMBER = 99999
 
 /**
  * Encapsulates license and preference dependencies required by UploadModel.
@@ -166,8 +171,10 @@ class UploadModel
             return uploadItem
         }
 
-        fun buildContributions(): Observable<Contribution> =
-            Observable.fromIterable(items).map { item: UploadItem ->
+        fun buildContributions(): Observable<Contribution> {
+            val batchNumber = Random.nextInt(MIN_BATCH_NUMBER, MAX_BATCH_NUMBER + 1)
+            val fileNames = numberFilesWithSameName(items.map { it.filename }, batchNumber)
+            return Observable.fromIterable(items.withIndex()).map { (index, item) ->
                 val imageSHA1 =
                     getSHA1(
                         context.contentResolver.openInputStream(item.contentUri!!)!!,
@@ -180,6 +187,7 @@ class UploadModel
                         buildList { addAll(selectedCategories) },
                         imageSHA1,
                     )
+                contribution.media.filename = fileNames[index]
 
                 contribution.setHasInvalidLocation(item.hasInvalidLocation())
 
@@ -201,6 +209,7 @@ class UploadModel
                 contribution.countryCode = item.countryCode
                 contribution
             }
+        }
 
         fun deletePicture(filePath: String) {
             val iterator = items.iterator()
