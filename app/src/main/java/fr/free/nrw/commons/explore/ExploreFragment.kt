@@ -139,6 +139,7 @@ class ExploreFragment : CommonsDaggerSupportFragment() {
         if (bundle.containsKey("prev_longitude")) {
             prevLongitude = bundle.getDouble("prev_longitude")
         }
+        mapRootFragment?.onNearbyMapDataReceived(bundle)
         binding?.viewPager?.currentItem = 2
     }
 
