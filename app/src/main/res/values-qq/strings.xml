@@ -42,6 +42,7 @@
   <string name="sync_restore_confirm_message">Message of the confirmation dialog when restoring settings from the user page. %1$s is replaced by the username.</string>
   <string name="sync_restore_success">Toast message shown when settings are successfully restored from the user page.</string>
   <string name="sync_restore_failed">Toast message shown when restoring settings fails. %1$s is replaced by the error message.</string>
+  <string name="sync_no_backup_found">Error message shown when no settings backup file exists on the user page.</string>
   <string name="sync_in_progress">Progress message shown while syncing settings with Wikimedia Commons.</string>
   <string name="commons_facebook">Alternative text for image link.</string>
   <string name="commons_github">Alternative text for image link.</string>

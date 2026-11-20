@@ -14,6 +14,7 @@
   <string name="sync_restore_confirm_message">This will restore your app settings and merge bookmarked places from User:%1$s/commons-android-app.json.</string>
   <string name="sync_restore_success">Settings and bookmarks successfully restored!</string>
   <string name="sync_restore_failed">Failed to restore settings: %1$s</string>
+  <string name="sync_no_backup_found">No settings backup found on user page.</string>
   <string name="sync_in_progress">Syncing settings with Wikimedia Commons…</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_github">Commons GitHub Source Code</string>

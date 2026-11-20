@@ -40,9 +40,9 @@ import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.handleWebUrl
-import android.app.ProgressDialog
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.settings.sync.UserSettingsSyncManager
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import java.util.Locale
@@ -75,6 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var userSettingsSyncManagerProvider: Provider<UserSettingsSyncManager>
 
     private val compositeDisposable = CompositeDisposable()
+    private var activeProgressDialog: AlertDialog? = null
 
     internal val languageController = SettingsLanguageController(this)
 
@@ -231,7 +232,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    @Suppress("LongMethod")
     private fun setupSyncPreferences() {
         val backupPref: Preference? = findPreference("backupSettings")
         val restorePref: Preference? = findPreference("restoreSettings")
@@ -244,105 +244,93 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         backupPref?.setOnPreferenceClickListener {
             val userName = sessionManager.userName ?: ""
-            AlertDialog.Builder(requireContext())
-                .setTitle(R.string.sync_backup_confirm_title)
-                .setMessage(getString(R.string.sync_backup_confirm_message, userName))
-                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-                .setPositiveButton(R.string.submit) { dialog, _ ->
-                    dialog.dismiss()
-                    val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
-                    dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
-                    val progressDialog = AlertDialog.Builder(requireContext())
-                        .setView(dialogBinding.root)
-                        .setCancelable(false)
-                        .create()
-                    progressDialog.show()
-
-                    compositeDisposable.add(
-                        userSettingsSyncManagerProvider.get().backupToUserPage()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                { success ->
-                                    progressDialog.dismiss()
-                                    if (success) {
-                                        ViewUtil.showLongToast(
-                                            requireContext(),
-                                            getString(R.string.sync_backup_success),
-                                        )
-                                    } else {
-                                        ViewUtil.showLongToast(
-                                            requireContext(),
-                                            getString(R.string.sync_backup_failed, ""),
-                                        )
-                                    }
-                                },
-                                { throwable ->
-                                    progressDialog.dismiss()
-                                    ViewUtil.showLongToast(
-                                        requireContext(),
-                                        getString(R.string.sync_backup_failed, throwable.localizedMessage ?: ""),
-                                    )
-                                },
-                            ),
-                    )
-                }
-                .show()
+            showSyncConfirmationDialog(
+                titleRes = R.string.sync_backup_confirm_title,
+                messageRes = R.string.sync_backup_confirm_message,
+                userName = userName,
+                syncAction = { userSettingsSyncManagerProvider.get().backupToUserPage() },
+                successMsgRes = R.string.sync_backup_success,
+                failedMsgRes = R.string.sync_backup_failed,
+                shouldRecreate = false,
+            )
             true
         }
 
         restorePref?.setOnPreferenceClickListener {
             val userName = sessionManager.userName ?: ""
-            AlertDialog.Builder(requireContext())
-                .setTitle(R.string.sync_restore_confirm_title)
-                .setMessage(getString(R.string.sync_restore_confirm_message, userName))
-                .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
-                .setPositiveButton(R.string.submit) { dialog, _ ->
-                    dialog.dismiss()
-                    val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
-                    dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
-                    val progressDialog = AlertDialog.Builder(requireContext())
-                        .setView(dialogBinding.root)
-                        .setCancelable(false)
-                        .create()
-                    progressDialog.show()
-
-                    compositeDisposable.add(
-                        userSettingsSyncManagerProvider.get().restoreFromUserPage()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                { success ->
-                                    progressDialog.dismiss()
-                                    if (success) {
-                                        ViewUtil.showLongToast(
-                                            requireContext(),
-                                            getString(R.string.sync_restore_success),
-                                        )
-                                        requireActivity().recreate()
-                                    } else {
-                                        ViewUtil.showLongToast(
-                                            requireContext(),
-                                            getString(R.string.sync_restore_failed, ""),
-                                        )
-                                    }
-                                },
-                                { throwable ->
-                                    progressDialog.dismiss()
-                                    ViewUtil.showLongToast(
-                                        requireContext(),
-                                        getString(R.string.sync_restore_failed, throwable.localizedMessage ?: ""),
-                                    )
-                                },
-                            ),
-                    )
-                }
-                .show()
+            showSyncConfirmationDialog(
+                titleRes = R.string.sync_restore_confirm_title,
+                messageRes = R.string.sync_restore_confirm_message,
+                userName = userName,
+                syncAction = { userSettingsSyncManagerProvider.get().restoreFromUserPage() },
+                successMsgRes = R.string.sync_restore_success,
+                failedMsgRes = R.string.sync_restore_failed,
+                shouldRecreate = true,
+            )
             true
         }
     }
 
-    override fun onDestroy() {
+    private fun showSyncConfirmationDialog(
+        titleRes: Int,
+        messageRes: Int,
+        userName: String,
+        syncAction: () -> Single<Boolean>,
+        successMsgRes: Int,
+        failedMsgRes: Int,
+        shouldRecreate: Boolean,
+    ) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(titleRes)
+            .setMessage(getString(messageRes, userName))
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton(R.string.submit) { dialog, _ ->
+                dialog.dismiss()
+                val dialogBinding = ProgressDialogBinding.inflate(layoutInflater)
+                dialogBinding.progressDialogText.text = getString(R.string.sync_in_progress)
+                activeProgressDialog = AlertDialog.Builder(requireContext())
+                    .setView(dialogBinding.root)
+                    .setCancelable(false)
+                    .create()
+                activeProgressDialog?.show()
+
+                compositeDisposable.add(
+                    syncAction()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                            { success ->
+                                dismissProgressDialog()
+                                if (!isAdded || context == null) return@subscribe
+                                if (success) {
+                                    ViewUtil.showLongToast(requireContext(), getString(successMsgRes))
+                                    if (shouldRecreate) {
+                                        requireActivity().recreate()
+                                    }
+                                } else {
+                                    ViewUtil.showLongToast(requireContext(), getString(failedMsgRes, ""))
+                                }
+                            },
+                            { throwable ->
+                                dismissProgressDialog()
+                                if (!isAdded || context == null) return@subscribe
+                                val errorMsg = throwable.localizedMessage ?: ""
+                                ViewUtil.showLongToast(requireContext(), getString(failedMsgRes, errorMsg))
+                            },
+                        ),
+                )
+            }
+            .show()
+    }
+
+    override fun onDestroyView() {
+        dismissProgressDialog()
         compositeDisposable.clear()
-        super.onDestroy()
+        super.onDestroyView()
+    }
+
+    private fun dismissProgressDialog() {
+        activeProgressDialog?.dismiss()
+        activeProgressDialog = null
     }
 
     /**
