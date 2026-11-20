@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.app.Activity
 import android.content.Context
+import androidx.activity.result.ActivityResult
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
@@ -50,6 +53,18 @@ class CustomSelectorViewModel(
                 }
             },
         )
+    }
+
+    /**
+     * When data will be send from full screen mode, it will be passed to fragment
+     */
+    fun onFullScreenDataReceived(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val newSelectedImages: ArrayList<Image> =
+                result.data!!
+                    .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
+            selectedImages.value = newSelectedImages
+        }
     }
 
     /**
