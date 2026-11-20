@@ -732,6 +732,7 @@
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
   <string name="retrying_upload">Ponawianie próby przesyłania…</string>
   <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
+  <string name="upload_failed_server_error">Commons nie może obecnie obsłużyć tego żądania. Spróbuj ponownie później (HTTP %1$d).</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>

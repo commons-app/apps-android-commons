@@ -67,7 +67,12 @@ class CategoryDetailsActivity :
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         categoryName = intent?.getStringExtra("categoryName")
         val tabs = CategoryDetailsTabs(this, viewPagerAdapter, viewModel)
-        categoriesMediaFragment = tabs.setTabs(categoryName)
+        val newMediaFragment = tabs.setTabs(categoryName)
+        // When the screen is recreated, the tabs keep showing the restored fragment,
+        // so use it instead of the new one, which is never shown
+        categoriesMediaFragment =
+            supportFragmentManager.fragments.filterIsInstance<CategoriesMediaFragment>().firstOrNull()
+                ?: newMediaFragment
         tabs.setPageTitle()
 
         lifecycleScope.launch {

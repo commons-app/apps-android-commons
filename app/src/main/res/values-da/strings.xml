@@ -697,6 +697,7 @@
   <string name="cancelling_upload">Annullerer upload...</string>
   <string name="retrying_upload">Prøver at uploade igen…</string>
   <string name="retrying_failed_uploads">Prøver alle mislykkede uploads igen…</string>
+  <string name="upload_failed_server_error">Commons kunne ikke håndtere anmodningen lige nu. Prøv igen senere. (HTTP %1$d)</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
