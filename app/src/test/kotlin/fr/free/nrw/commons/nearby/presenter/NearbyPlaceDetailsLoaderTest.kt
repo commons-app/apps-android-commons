@@ -32,10 +32,13 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Unit test suite for [NearbyPlaceDetailsLoader].
@@ -224,12 +227,106 @@ class NearbyPlaceDetailsLoaderTest {
             verify(placesRepository, times(11)).save(any())
         }
 
+    @Test
+    fun testFailedRequestsDoNotSaveEmptyPlacesToCache() =
+        runBlocking<Unit> {
+            stubForLoading()
+            whenever(nearbyController.getPlaces(any())).thenThrow(IOException("Unexpected response code: 429"))
+
+            loader.loadPlacesDataAsync(listOf(greyGroup("Q1"), greyGroup("Q2")), scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals("places saved to the cache", 0, saveCount())
+        }
+
+    @Test
+    fun testPlaceMissingFromAnswerStaysAsItIsAndIsNotCached() =
+        runBlocking<Unit> {
+            stubForLoading()
+            whenever(nearbyController.getPlaces(any())).thenReturn(listOf(fetchedPlace("Q1")))
+
+            loader.loadPlacesDataAsync(listOf(greyGroup("Q1"), greyGroup("Q2")), scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals(listOf("Name of Q1", ""), NearbyController.markerLabelList.map { it.place.name })
+            assertEquals("places saved to the cache", 1, saveCount())
+        }
+
+    @Test
+    fun testSameItemTwiceKeepsEachPinAtItsOwnLocation() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // a custom query can return the same item at two locations
+            val groups = listOf(greyGroup("Q1"), greyGroup("Q1").apply { place.location = LatLng(5.0, 5.0, 0f) })
+            whenever(nearbyController.getPlaces(any())).thenReturn(listOf(fetchedPlace("Q1")))
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertEquals(
+                listOf(1.0, 5.0),
+                NearbyController.markerLabelList.map { it.place.location.latitude },
+            )
+        }
+
+    @Test
+    fun testBookmarkMadeWhileItsBatchIsLoadingIsKept() =
+        runBlocking<Unit> {
+            Dispatchers.setMain(Dispatchers.Unconfined)
+            // 20 places make batch A (Q0-Q9) and batch B (Q10-Q19)
+            val groups = (0..19).map { greyGroup("Q$it") }
+            val q10Bookmarked = AtomicBoolean(false)
+            whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenAnswer {
+                it.getArgument<String>(0) == "Name of Q10" && q10Bookmarked.get()
+            }
+            // Hold the collector while it applies batch A, until batch B is fetched and waiting
+            val collectorInA = CountDownLatch(1)
+            val releaseCollector = CountDownLatch(1)
+            val firstSave = AtomicBoolean(true)
+            whenever(placesRepository.save(any())).thenAnswer {
+                if (firstSave.getAndSet(false)) {
+                    collectorInA.countDown()
+                    releaseCollector.await(10, TimeUnit.SECONDS)
+                }
+                Completable.complete()
+            }
+            val batchBFetched = CountDownLatch(1)
+            whenever(nearbyController.getPlaces(any())).thenAnswer {
+                val places = it.getArgument<List<Place>>(0)
+                if (places.any { place -> place.entityID == "Q10" }) {
+                    collectorInA.await(10, TimeUnit.SECONDS)
+                    batchBFetched.countDown()
+                }
+                places.map { place -> fetchedPlace(place.entityID) }
+            }
+
+            loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+            assertTrue("collector reached batch A", collectorInA.await(10, TimeUnit.SECONDS))
+            assertTrue("batch B fetched", batchBFetched.await(10, TimeUnit.SECONDS))
+            Thread.sleep(300) // batch B finishes on its worker and waits for the collector
+            // the user opens pin Q10 and bookmarks it, batch A will apply this
+            q10Bookmarked.set(true)
+            val clicked = fetchedPlace("Q10").apply { location = groups[10].place.location }
+            loader.handlePinClicked(clicked)
+            loader.bookmarkChangedPlaces.add(clicked)
+            releaseCollector.countDown()
+            withTimeout(10_000) { loader.loadPlacesDataAyncJob!!.join() }
+
+            assertTrue("Q10 still bookmarked", NearbyController.markerLabelList[10].isBookmarked)
+        }
+
     private suspend fun stubForLoading() {
         // the real Main dispatcher, so that the delay in schedulePlacesUpdate ends
         Dispatchers.setMain(Dispatchers.Unconfined)
         whenever(placesRepository.save(any())).thenReturn(Completable.complete())
         whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenReturn(false)
     }
+
+    private fun saveCount() =
+        Mockito
+            .mockingDetails(placesRepository)
+            .invocations
+            .count { it.method.name == "save" }
 
     private fun scopeWith(job: Job): LifecycleCoroutineScope =
         mock<LifecycleCoroutineScope>().also {

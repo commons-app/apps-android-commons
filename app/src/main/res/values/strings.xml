@@ -55,10 +55,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Upload</item>
     <item quantity="other">%1$d Uploads</item>
@@ -98,7 +94,6 @@
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Uploading file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Failed to upload %1$s</string>
   <string name="upload_metadata_pending_notification_title">%1$s is uploaded, but its captions and depicts are not saved yet</string>

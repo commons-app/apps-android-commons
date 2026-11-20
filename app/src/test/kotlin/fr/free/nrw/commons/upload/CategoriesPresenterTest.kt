@@ -281,6 +281,36 @@ class CategoriesPresenterTest {
         verify(view, never()).goBackToPreviousScreen()
     }
 
+    @Test
+    fun `updateCategories closes the editor without a message when nothing changed`() {
+        categoriesPresenter.categoryEditHelper = categoryEditHelper
+        categoriesPresenter.onAttachView(view)
+        whenever(view.getExistingCategories()).thenReturn(listOf("Old"))
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.getSelectedExistingCategories()).thenReturn(listOf("Old"))
+
+        categoriesPresenter.updateCategories(media(), "[[Category:Old]]")
+
+        verify(view).goBackToPreviousScreen()
+        verify(repository).cleanup()
+        verify(view, never()).showNoCategorySelected()
+        verify(categoryEditHelper, never()).makeCategoryEdit(any(), any(), any(), any())
+    }
+
+    @Test
+    fun `updateCategories says no categories selected when the file has none`() {
+        categoriesPresenter.categoryEditHelper = categoryEditHelper
+        categoriesPresenter.onAttachView(view)
+        whenever(view.getExistingCategories()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.getSelectedExistingCategories()).thenReturn(emptyList())
+
+        categoriesPresenter.updateCategories(media(), "")
+
+        verify(view).showNoCategorySelected()
+        verify(categoryEditHelper, never()).makeCategoryEdit(any(), any(), any(), any())
+    }
+
     private val categoryEditHelper = mock<CategoryEditHelper>()
     private val swallowedErrors = mutableListOf<Throwable>()
 
