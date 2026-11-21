@@ -158,7 +158,7 @@ private fun appendDescriptionsFirst(
                 UploadMediaDetail(
                     language,
                     "",
-                    Objects.requireNonNull(descriptions[language]!!),
+                    Objects.requireNonNull(captions[language]!!),
                 ),
             )
         }

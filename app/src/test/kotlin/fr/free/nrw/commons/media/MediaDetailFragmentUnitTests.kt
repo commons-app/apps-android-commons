@@ -40,12 +40,14 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
+import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.locationpicker.LocationPickerActivity
 import fr.free.nrw.commons.ui.widget.HtmlTextView
+import fr.free.nrw.commons.upload.UploadMediaDetail
 import com.facebook.imagepipeline.image.ImageInfo
 import io.reactivex.Single
 import junit.framework.TestCase.assertEquals
@@ -471,6 +473,28 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testExtractCaptionDescription() {
         fragment.extractCaptionDescription("mock")
+    }
+
+    @Test
+    fun testExtractCaptionDescriptionWithCaptionThatHasNoDescription() {
+        `when`(media.captions).thenReturn(mapOf("de" to "Ein Beispiel"))
+        fragment.extractCaptionDescription(
+            "|description={{fr|1=Un exemple}}{{en|1=An example}}\n|source={{own}}",
+        )
+
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        val details =
+            startedIntent.getParcelableArrayListExtra<UploadMediaDetail>(
+                LIST_OF_DESCRIPTION_AND_CAPTION,
+            )!!
+        Assert.assertEquals(
+            listOf(
+                UploadMediaDetail("fr", "Un exemple", ""),
+                UploadMediaDetail("en", "An example", ""),
+                UploadMediaDetail("de", "", "Ein Beispiel"),
+            ),
+            details,
+        )
     }
 
     @Test
