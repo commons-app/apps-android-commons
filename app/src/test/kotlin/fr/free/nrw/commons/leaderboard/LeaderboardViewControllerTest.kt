@@ -3,7 +3,6 @@ package fr.free.nrw.commons.leaderboard
 import android.app.Activity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
@@ -27,9 +26,6 @@ class LeaderboardViewControllerTest {
     @Mock
     private lateinit var layoutManager: LinearLayoutManager
 
-    @Mock
-    private lateinit var recyclerView: RecyclerView
-
     private lateinit var binding: FragmentLeaderboardBinding
     private lateinit var viewController: LeaderboardViewController
     private lateinit var activity: Activity
@@ -42,16 +38,7 @@ class LeaderboardViewControllerTest {
         activity.setTheme(R.style.LightAppTheme)
 
         binding = FragmentLeaderboardBinding.inflate(android.view.LayoutInflater.from(activity))
-
-        val originalRecycler = binding.leaderboardList
-        val parent = originalRecycler.parent as android.view.ViewGroup
-        val index = parent.indexOfChild(originalRecycler)
-        val layoutParams = originalRecycler.layoutParams
-
-        parent.removeView(originalRecycler)
-        parent.addView(recyclerView, index, layoutParams)
-
-        `when`(recyclerView.layoutManager).thenReturn(layoutManager)
+        binding.leaderboardList.layoutManager = layoutManager
 
         viewController = LeaderboardViewController(binding)
     }
