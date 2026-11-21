@@ -27,6 +27,7 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import fr.free.nrw.commons.logging.CrashLoggingExceptionHandler
@@ -240,12 +241,13 @@ class CommonsApplication : MultiDexApplication() {
         // Reset the flag in case the worker never started and its finally block wasn't called.
         WorkRequestHelper.markUploadWorkerAsStopped()
 
+        val userName = sessionManager.userName
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
         // lib/ holds the app native libraries, databases/ and no_backup/ hold
-        // databases that are still open (Room, WorkManager). Deleting them breaks
-        // later queries, so their contents are cleared in code instead.
-        val foldersKept = setOf("lib", "databases", "no_backup")
+        // databases that are still open (Room, WorkManager), and shared_prefs/
+        // holds SharedPreferences files that are cleared selectively in code.
+        val foldersKept = setOf("lib", "databases", "no_backup", "shared_prefs")
         if (applicationDirectory.exists()) {
             val fileNames = applicationDirectory.list()
             for (fileName in fileNames) {
@@ -269,6 +271,11 @@ class CommonsApplication : MultiDexApplication() {
                     defaultPrefs.remove("isUserLoggedIn")
                     defaultPrefs.remove("useAuthorName")
                     defaultPrefs.remove("authorName")
+                    defaultPrefs.remove("revertCount")
+                    defaultPrefs.remove("uploadCount")
+                    if (!userName.isNullOrBlank()) {
+                        BasicKvStore(context, userName).clearAll()
+                    }
                     defaultPrefs.putBoolean("firstrun", false)
                     updateAllDatabases()
                 },
