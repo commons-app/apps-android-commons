@@ -657,6 +657,7 @@
   <string name="leaderboard_nearby">An option in the leaderboard, to select the kind of activity for which the numbers are calculated. Appears in a list with:\n\n* {{msg-wm|Commons-android-strings-leaderboard upload}}\n* {{msg-wm|Commons-android-strings-leaderboard used}}\n* {{msg-wm|Commons-android-strings-leaderboard nearby}}</string>
   <string name="leaderboard_used">An option in the leaderboard, to select the kind of activity for which the numbers are calculated. Appears in a list with:\n\n* {{msg-wm|Commons-android-strings-leaderboard upload}}\n* {{msg-wm|Commons-android-strings-leaderboard used}}\n* {{msg-wm|Commons-android-strings-leaderboard nearby}}</string>
   <string name="leaderboard_my_rank_button_text">A button at the bottom of the leaderboard. Scrolls the board to the user\'s entry.</string>
+  <string name="leaderboard_go_to_top_button_text">A button at the bottom of the leaderboard. Scrolls the list up to the top.</string>
   <string name="map_attribution">{{Optional}}\n&lt;code&gt;&amp;amp;#169;&lt;/code&gt; is the copyright symbol (©).</string>
   <string name="limited_connection_enabled">Seems to be unused.</string>
   <string name="limited_connection_disabled">Seems to be unused.</string>
