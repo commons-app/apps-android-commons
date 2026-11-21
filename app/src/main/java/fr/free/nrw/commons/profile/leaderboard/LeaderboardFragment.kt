@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
@@ -50,6 +51,12 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
     private var viewController: LeaderboardViewController? = null
+
+    companion object {
+        private const val SCROLL_TO_TOP_THRESHOLD = 20
+        private const val SMART_SCROLL_JUMP_THRESHOLD = 100
+        private const val SCROLL_OFFSET = 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,17 +108,39 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         with(binding!!) {
             durationSpinner.onItemSelectedListener =
                 SelectionListener {
-                    duration = durationValues[durationSpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    duration = durationValues[durationSpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
-
             categorySpinner.onItemSelectedListener =
                 SelectionListener {
-                    category = categoryValues[categorySpinner.selectedItemPosition]
-                    refreshLeaderboard()
+                    category = categoryValues[categorySpinner.selectedItemPosition].also { refreshLeaderboard() }
                 }
 
-            scroll.setOnClickListener { scrollToUserRank() }
+            scroll.setOnClickListener {
+                val lm = leaderboardList.layoutManager as? LinearLayoutManager
+                val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
+
+                val shouldShowGoToTop =
+                    firstVisible > SCROLL_TO_TOP_THRESHOLD && (userRank == 0 || firstVisible > userRank)
+
+                if (shouldShowGoToTop) {
+                    smartScrollTo(0)
+                } else {
+                    scrollToUserRank()
+                }
+            }
+
+            leaderboardList.addOnScrollListener(
+                object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(
+                        rv: RecyclerView,
+                        dx: Int,
+                        dy: Int,
+                    ) = viewController?.updateScrollButtonState(
+                        userRank,
+                        SCROLL_TO_TOP_THRESHOLD,
+                    ) ?: Unit
+                },
+            )
 
             return root
         }
@@ -154,6 +183,30 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      * We use userRank+1 to load one extra user and prevent overlapping of my rank button
      * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
+    private fun smartScrollTo(targetPosition: Int) {
+        val binding = binding ?: return
+        val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
+        val currentPosition = layoutManager.findFirstVisibleItemPosition()
+
+        if (Math.abs(currentPosition - targetPosition) > SMART_SCROLL_JUMP_THRESHOLD) {
+            // jump instantly close to the target to skip processing thousands of layouts
+            val offsetPosition =
+                if (targetPosition > currentPosition) {
+                    targetPosition - SCROLL_TO_TOP_THRESHOLD
+                } else {
+                    targetPosition + SCROLL_TO_TOP_THRESHOLD
+                }
+            layoutManager.scrollToPositionWithOffset(offsetPosition, SCROLL_OFFSET)
+
+            binding.leaderboardList.post {
+                binding.leaderboardList.smoothScrollToPosition(targetPosition)
+                viewController?.updateScrollButtonState(userRank, SCROLL_TO_TOP_THRESHOLD)
+            }
+        } else {
+            binding.leaderboardList.smoothScrollToPosition(targetPosition)
+        }
+    }
+
     private fun scrollToUserRank() {
         if (userRank == 0) {
             context?.let { ctx ->
@@ -170,12 +223,13 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 return
             }
             val itemCount = binding?.leaderboardList?.adapter?.itemCount ?: 0
-            if (itemCount > userRank + 1) {
-                binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
+            val targetPos = userRank + 1
+            if (itemCount > targetPos) {
+                smartScrollTo(targetPos)
             } else {
                 viewModel?.let {
-                    it.refresh(duration, category, userRank + 1, 0)
-                    setLeaderboard(duration, category, userRank + 1, 0)
+                    it.refresh(duration, category, targetPos, 0)
+                    setLeaderboard(duration, category, targetPos, 0)
                     scrollToRank = true
                 }
             }
@@ -184,7 +238,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
 
     /**
      * To call the API to get results
-     * which then sets the views using setLeaderboardUser method
+     * and set up the leaderboard adapter and view model observation
      */
     private fun setLeaderboard(
         duration: String?,
@@ -208,7 +262,39 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                         { response: LeaderboardResponse? ->
                             if (response != null && response.status == 200) {
                                 userRank = response.rank!!
-                                setViews(response, duration, category, limit, offset)
+                                viewModel =
+                                    ViewModelProvider(this, viewModelFactory).get(
+                                        LeaderboardListViewModel::class.java,
+                                    )
+                                viewModel!!.setUserName(userName)
+                                viewModel!!.setParams(duration, category, limit, offset)
+                                val leaderboardListAdapter = LeaderboardListAdapter()
+                                val userDetailAdapter = UserDetailAdapter(response)
+                                val concatAdapter = ConcatAdapter(userDetailAdapter, leaderboardListAdapter)
+                                val linearLayoutManager = LinearLayoutManager(context)
+                                binding!!.leaderboardList.layoutManager = linearLayoutManager
+                                binding!!.leaderboardList.adapter = concatAdapter
+                                viewModel!!.listLiveData.observe(viewLifecycleOwner, leaderboardListAdapter::submitList)
+
+                                viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->
+                                    when (status) {
+                                        LOADING -> {
+                                            viewController?.showProgressBar()
+                                        }
+                                        LOADED -> {
+                                            viewController?.hideProgressBar()
+                                            if (scrollToRank) {
+                                                scrollToRank = false
+                                                smartScrollTo(userRank + 1)
+                                            } else {
+                                                viewController?.updateScrollButtonState(
+                                                    userRank,
+                                                    SCROLL_TO_TOP_THRESHOLD,
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         },
                         { t: Throwable? ->
@@ -221,64 +307,19 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     }
 
     /**
-     * Set the views
-     * @param response Leaderboard Response Object
-     */
-    private fun setViews(
-        response: LeaderboardResponse,
-        duration: String?,
-        category: String?,
-        limit: Int,
-        offset: Int,
-    ) {
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(
-                LeaderboardListViewModel::class.java,
-            )
-        viewModel!!.setUserName(userName)
-        viewModel!!.setParams(duration, category, limit, offset)
-        val leaderboardListAdapter = LeaderboardListAdapter()
-        val userDetailAdapter = UserDetailAdapter(response)
-        val concatAdapter = ConcatAdapter(userDetailAdapter, leaderboardListAdapter)
-        val linearLayoutManager = LinearLayoutManager(context)
-        binding!!.leaderboardList.layoutManager = linearLayoutManager
-        binding!!.leaderboardList.adapter = concatAdapter
-        viewModel!!.listLiveData.observe(viewLifecycleOwner, leaderboardListAdapter::submitList)
-
-        viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                LOADING -> {
-                    viewController?.showProgressBar()
-                }
-                LOADED -> {
-                    viewController?.hideProgressBar()
-                    if (scrollToRank) {
-                        binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * check to ensure that user is logged in
      */
-    private fun checkAccount(): Boolean {
-        // Allow viewing another user's public profile without requiring login
-        if (!userName.isNullOrBlank() &&
-            userName != sessionManager.userName
-        ) {
-            return true
+    private fun checkAccount(): Boolean =
+        when {
+            !userName.isNullOrBlank() && userName != sessionManager.userName -> true
+            sessionManager.currentAccount != null -> true
+            else -> {
+                Timber.d("Current account is null")
+                showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))
+                sessionManager.forceLogin(requireActivity())
+                false
+            }
         }
-
-        if (sessionManager.currentAccount == null) {
-            Timber.d("Current account is null")
-            showLongToast(requireActivity(), resources.getString(R.string.user_not_logged_in))
-            sessionManager.forceLogin(requireActivity())
-            return false
-        }
-        return true
-    }
 
     /**
      * Shows a generic error toast when error occurs while loading leaderboard
@@ -294,17 +335,17 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewController = null
         binding = null
     }
+}
 
-    private class SelectionListener(
-        private val handler: () -> Unit,
-    ) : AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(
-            adapterView: AdapterView<*>?,
-            view: View?,
-            i: Int,
-            l: Long,
-        ) = handler()
+private class SelectionListener(
+    private val handler: () -> Unit,
+) : AdapterView.OnItemSelectedListener {
+    override fun onItemSelected(
+        adapterView: AdapterView<*>?,
+        view: View?,
+        i: Int,
+        l: Long,
+    ) = handler()
 
-        override fun onNothingSelected(p0: AdapterView<*>?) = Unit
-    }
+    override fun onNothingSelected(p0: AdapterView<*>?) = Unit
 }
