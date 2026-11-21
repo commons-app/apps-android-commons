@@ -120,7 +120,9 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 val lm = leaderboardList.layoutManager as? LinearLayoutManager
                 val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
 
-                if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
+                val shouldShowGoToTop = firstVisible > SCROLL_TO_TOP_THRESHOLD && (userRank == 0 || firstVisible > userRank)
+
+                if (shouldShowGoToTop) {
                     smartScrollTo(0)
                 } else {
                     scrollToUserRank()
@@ -142,20 +144,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     }
 
     private fun updateScrollButtonState() {
-        val binding = binding ?: return
-        val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
-        val firstVisible = layoutManager.findFirstVisibleItemPosition()
-
-        if (firstVisible > SCROLL_TO_TOP_THRESHOLD) {
-            binding.scroll.text = getString(R.string.leaderboard_go_to_top_button_text)
-            binding.scroll.setIconResource(android.R.drawable.arrow_up_float)
-            binding.scroll.visibility = View.VISIBLE
-        } else {
-            // near to the top of the leaderboard
-            binding.scroll.text = getString(R.string.leaderboard_my_rank_button_text)
-            binding.scroll.setIconResource(0)
-            binding.scroll.visibility = View.VISIBLE
-        }
+        viewController?.updateScrollButtonState(userRank, SCROLL_TO_TOP_THRESHOLD)
     }
 
     override fun setMenuVisibility(visible: Boolean) {
@@ -319,6 +308,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 LOADED -> {
                     viewController?.hideProgressBar()
                     if (scrollToRank) {
+                        scrollToRank = false
                         smartScrollTo(userRank + 1)
                     } else {
                         updateScrollButtonState()
