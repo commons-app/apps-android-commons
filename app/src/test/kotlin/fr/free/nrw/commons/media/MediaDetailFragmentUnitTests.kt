@@ -32,6 +32,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
@@ -50,6 +51,9 @@ import fr.free.nrw.commons.ui.widget.HtmlTextView
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import com.facebook.imagepipeline.image.ImageInfo
 import io.reactivex.Single
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import junit.framework.TestCase.assertEquals
 import org.junit.Assert
 import org.junit.Before
@@ -77,6 +81,8 @@ import org.robolectric.annotation.LooperMode
 import junit.framework.TestCase.assertTrue
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import org.robolectric.shadows.ShadowToast
+import java.io.IOException
 import java.lang.reflect.Field
 import java.util.Date
 import java.util.Locale
@@ -495,6 +501,40 @@ class MediaDetailFragmentUnitTests {
             ),
             details,
         )
+    }
+
+    @Test
+    fun testDescriptionEditShowsEditButtonAgainWhenWikiTextFailsToLoad() {
+        assertDescriptionEditRecovers(Single.error(IOException()))
+    }
+
+    @Test
+    fun testDescriptionEditShowsEditButtonAgainWhenEditorFailsToOpen() {
+        `when`(media.captions).thenThrow(IllegalStateException())
+        assertDescriptionEditRecovers(Single.just("|description={{en|1=An example}}\n|source={{own}}"))
+    }
+
+    private fun assertDescriptionEditRecovers(wikiText: Single<String>) {
+        RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        try {
+            val mediaDataExtractor = mock(MediaDataExtractor::class.java)
+            `when`(media.filename).thenReturn("File:Example.jpg")
+            `when`(mediaDataExtractor.getCurrentWikiText("File:Example.jpg")).thenReturn(wikiText)
+            fragment.mediaDataExtractor = mediaDataExtractor
+
+            fragment.onDescriptionEditClicked()
+
+            Assert.assertEquals(View.GONE, binding.progressBarEdit.visibility)
+            Assert.assertEquals(View.VISIBLE, binding.descriptionEdit.visibility)
+            Assert.assertEquals(
+                context.getString(R.string.error_occurred),
+                ShadowToast.getTextOfLatestToast(),
+            )
+        } finally {
+            RxJavaPlugins.reset()
+            RxAndroidPlugins.reset()
+        }
     }
 
     @Test
