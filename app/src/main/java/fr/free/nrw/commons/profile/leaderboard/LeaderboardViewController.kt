@@ -67,7 +67,10 @@ class LeaderboardViewController(
     /**
      * update the state of the scroll button based on the list's scroll position and user's rank
      */
-    fun updateScrollButtonState(userRank: Int, threshold: Int) {
+    fun updateScrollButtonState(
+        userRank: Int,
+        threshold: Int,
+    ) {
         val layoutManager = binding.leaderboardList.layoutManager as? LinearLayoutManager ?: return
         val firstVisible = layoutManager.findFirstVisibleItemPosition()
 

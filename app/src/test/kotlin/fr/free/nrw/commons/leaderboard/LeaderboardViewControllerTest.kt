@@ -24,7 +24,6 @@ import org.robolectric.annotation.LooperMode
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class LeaderboardViewControllerTest {
-
     @Mock
     private lateinit var layoutManager: LinearLayoutManager
 

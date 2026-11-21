@@ -120,7 +120,8 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
                 val lm = leaderboardList.layoutManager as? LinearLayoutManager
                 val firstVisible = lm?.findFirstVisibleItemPosition() ?: 0
 
-                val shouldShowGoToTop = firstVisible > SCROLL_TO_TOP_THRESHOLD && (userRank == 0 || firstVisible > userRank)
+                val shouldShowGoToTop =
+                    firstVisible > SCROLL_TO_TOP_THRESHOLD && (userRank == 0 || firstVisible > userRank)
 
                 if (shouldShowGoToTop) {
                     smartScrollTo(0)
