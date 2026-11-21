@@ -177,8 +177,10 @@ internal fun NearbyParentFragment.setupOsmAttributionAndOverlays() {
     nearbyParentFragmentInstanceReadyCallback?.onReady()
     initFilterHelper()
     if (!viewportHelper.isCameFromExploreMap()) {
-        moveCameraToPosition(viewportHelper.lastMapFocus!!)
+        // Jump instead of animating from 0,0: searches use the visible map area
+        binding?.map?.controller?.setCenter(viewportHelper.lastMapFocus)
     }
+    moveCameraToPosition(viewportHelper.lastMapFocus!!)
     initRvNearbyList()
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

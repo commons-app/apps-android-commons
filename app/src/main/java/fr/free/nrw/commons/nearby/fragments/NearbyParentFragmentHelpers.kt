@@ -225,7 +225,7 @@ internal fun NearbyParentFragment.initStatusHelper() {
             presenterProvider = { presenter },
             locationManagerProvider = { locationManager },
             readyCallbackConsumer = { nearbyParentFragmentInstanceReadyCallback = it },
-            mediaDetailHelperProvider = { mediaDetailHelper },
+            backPressInterceptor = { mediaDetailHelper.handleBackPress() },
         ),
     )
     wikidataEditListener.authenticationStateListener = this

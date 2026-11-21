@@ -68,20 +68,18 @@ class NearbyStatusHelperTest {
     }
 
     @Test
-    fun testBackButtonClickedDelegatesToMediaDetailHelperWhenHandled() {
-        val mockMediaHelper = mock<NearbyMediaDetailHelper>()
-        whenever(mockMediaHelper.handleBackPress()).thenReturn(true)
-        Whitebox.setInternalState(helper, "mediaDetailHelperProvider", { mockMediaHelper })
+    fun testBackButtonClickedReturnsTrueWhenBackPressInterceptorHandles() {
+        val interceptor: () -> Boolean = { true }
+        Whitebox.setInternalState(helper, "backPressInterceptor", interceptor)
 
         org.junit.Assert.assertTrue(helper.backButtonClicked())
     }
 
     @Test
-    fun testBackButtonClickedDelegatesToPresenterWhenMediaDetailsNotHandled() {
-        val mockMediaHelper = mock<NearbyMediaDetailHelper>()
-        whenever(mockMediaHelper.handleBackPress()).thenReturn(false)
+    fun testBackButtonClickedDelegatesToPresenterWhenBackPressInterceptorNotHandled() {
+        val interceptor: () -> Boolean = { false }
         whenever(presenter.backButtonClicked()).thenReturn(true)
-        Whitebox.setInternalState(helper, "mediaDetailHelperProvider", { mockMediaHelper })
+        Whitebox.setInternalState(helper, "backPressInterceptor", interceptor)
 
         org.junit.Assert.assertTrue(helper.backButtonClicked())
         verify(presenter).backButtonClicked()

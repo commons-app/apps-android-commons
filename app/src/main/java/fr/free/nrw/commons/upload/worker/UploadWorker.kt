@@ -33,6 +33,7 @@ import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,8 +45,9 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 
 // Suppressed TooManyFunctions because the upload and its retry after the file is published
-// share the steps that save captions, depicts and P18.
-@Suppress("TooManyFunctions")
+// share the steps that save captions, depicts and P18. Network and storage failures must all be
+// mapped to recoverable upload states, so the worker-level handlers stay broad.
+@Suppress("TooManyFunctions", "TooGenericExceptionCaught")
 class UploadWorker(
     private var appContext: Context,
     workerParams: WorkerParameters,
@@ -221,6 +223,8 @@ class UploadWorker(
             }
 
             return Result.success()
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             Timber.e(e, "UploadWorker encountered an error.")
             return Result.failure()

@@ -2,36 +2,20 @@ package fr.free.nrw.commons.nearby.fragments
 
 import android.Manifest.permission
 import android.app.ProgressDialog
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.res.Configuration
-import android.graphics.Paint
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.preference.PreferenceManager
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.VisibleForTesting
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
@@ -45,51 +29,26 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationPermissionsHelper
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback
 import fr.free.nrw.commons.location.LocationServiceManager
-import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.NearbyController
-import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
-import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
-import fr.free.nrw.commons.nearby.model.BottomSheetItem
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.upload.FileUtils
-import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
-import fr.free.nrw.commons.utils.MapUtils.NETWORK_INTENT_ACTION
-import fr.free.nrw.commons.utils.NetworkUtils.isInternetConnectionEstablished
 import fr.free.nrw.commons.utils.SystemThemeUtils
-import fr.free.nrw.commons.utils.ViewUtil.showLongToast
-import fr.free.nrw.commons.utils.isMonumentsEnabled
-import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.WikidataEditListener
 import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import org.osmdroid.events.MapEventsReceiver
-import org.osmdroid.events.MapListener
-import org.osmdroid.events.ScrollEvent
-import org.osmdroid.events.ZoomEvent
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory
-import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.overlay.MapEventsOverlay
-import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.ScaleBarOverlay
-import org.osmdroid.views.overlay.TilesOverlay
 import timber.log.Timber
-import java.io.IOException
 import java.util.ArrayList
 import javax.inject.Inject
 import javax.inject.Named
@@ -211,9 +170,6 @@ class NearbyParentFragment(
 
     internal var isDepictsPickerMode: Boolean = false
 
-    private val searchHandler = Handler()
-    private val searchRunnable: Runnable? = null
-
     internal val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             controller?.handleActivityResultWithCallback(
@@ -326,11 +282,7 @@ class NearbyParentFragment(
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
 
         refreshButton.setOnMenuItemClickListener {
-            try {
-                emptyCache()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
-            }
+            runNearbyMenuAction { emptyCache() }
             false
         }
         listMenu.setOnMenuItemClickListener {
@@ -348,22 +300,18 @@ class NearbyParentFragment(
         }
 
         saveAsGPXButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_gpx_file))
                 progressDialog!!.show()
                 savePlacesAsGPX()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
         }
         saveAsKMLButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_kml_file))
                 progressDialog!!.show()
                 savePlacesAsKML()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
         }
@@ -420,10 +368,14 @@ class NearbyParentFragment(
                 locationManager.removeLocationListener(presenter!!)
                 locationManager.unregisterLocationManager()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcast receivers should always be unregistered inside catch,
             // you never know if they were already registered or not
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
         statusHelper.dismissSnackbar()
     }
@@ -432,16 +384,13 @@ class NearbyParentFragment(
         super.onDestroyView()
         compositeDisposable.clear()
         filterHelper.onDestroyView()
-        searchRunnable?.let {
-            searchHandler.removeCallbacks(it)
-        } ?: run {
-            Timber.w("NearbyParentFragment: searchRunnable is null")
-        }
 
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
 
-        presenter?.removeNearbyPreferences(applicationKvStore ?: return)
+        if (!::controller.isInitialized || !controller.isInternalUploadInProgress) {
+            presenter?.removeNearbyPreferences(applicationKvStore ?: return)
+        }
         binding = null
     }
 
@@ -559,5 +508,15 @@ class NearbyParentFragment(
          * @return `true` if '(' or ')' is found, `false` otherwise.
          */
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
+    }
+}
+
+// Cache and export actions surface all storage failures as IllegalStateException to the menu host.
+@Suppress("TooGenericExceptionCaught")
+private inline fun runNearbyMenuAction(action: () -> Unit) {
+    try {
+        action()
+    } catch (e: Exception) {
+        throw IllegalStateException(e)
     }
 }

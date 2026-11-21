@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.fileusages.FileUsagesResponse
@@ -72,7 +73,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         json,
                         LeaderboardResponse::class.java
                     )
-                } catch (e: Exception) {
+                } catch (e: JsonParseException) {
                     Timber.e(e, "Failed to parse the leaderboard response")
                     return@fromCallable LeaderboardResponse()
                 }
@@ -110,7 +111,13 @@ class OkHttpJsonApiClient @Inject constructor(
                         FileUsagesResponse::class.java
                     )
                 } else null
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e(e)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e(e)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e(e)
                 null
             }
@@ -148,7 +155,13 @@ class OkHttpJsonApiClient @Inject constructor(
                         GlobalFileUsagesResponse::class.java
                     )
                 } else null
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e(e)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e(e)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e(e)
                 null
             }
@@ -175,7 +188,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         json,
                         UpdateAvatarResponse::class.java
                     )
-                } catch (e: Exception) {
+                } catch (e: JsonParseException) {
                     Timber.e(e, "Failed to parse the avatar update response")
                     return@fromCallable UpdateAvatarResponse()
                 }

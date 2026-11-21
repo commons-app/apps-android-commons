@@ -28,7 +28,7 @@ data class NearbyStatusDependencies(
     val presenterProvider: () -> NearbyParentFragmentPresenter? = { null },
     val locationManagerProvider: () -> LocationServiceManager? = { null },
     val readyCallbackConsumer: ((NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback?) -> Unit)? = null,
-    val mediaDetailHelperProvider: (() -> NearbyMediaDetailHelper?)? = null,
+    val backPressInterceptor: (() -> Boolean)? = null,
 )
 
 /**
@@ -43,7 +43,7 @@ class NearbyStatusHelper :
     private var bindingProvider: () -> FragmentNearbyParentBinding? = { null }
     private var presenterProvider: () -> NearbyParentFragmentPresenter? = { null }
     private var locationManagerProvider: () -> LocationServiceManager? = { null }
-    private var mediaDetailHelperProvider: () -> NearbyMediaDetailHelper? = { null }
+    private var backPressInterceptor: (() -> Boolean)? = null
     private var readyCallbackConsumer: (
         (
             NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback?,
@@ -72,7 +72,7 @@ class NearbyStatusHelper :
         this.presenterProvider = dependencies.presenterProvider
         this.locationManagerProvider = dependencies.locationManagerProvider
         this.readyCallbackConsumer = dependencies.readyCallbackConsumer
-        dependencies.mediaDetailHelperProvider?.let { this.mediaDetailHelperProvider = it }
+        dependencies.backPressInterceptor?.let { this.backPressInterceptor = it }
         initNetworkBroadcastReceiver()
     }
 
@@ -108,7 +108,7 @@ class NearbyStatusHelper :
      * Handles back button press delegation for the fragment.
      */
     override fun backButtonClicked(): Boolean {
-        if (mediaDetailHelperProvider()?.handleBackPress() == true) {
+        if (backPressInterceptor?.invoke() == true) {
             return true
         }
         (activityProvider() as? MainActivity)?.setSelectedItemId(NavTab.NEARBY.code())

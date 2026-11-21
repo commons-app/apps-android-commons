@@ -585,25 +585,6 @@
     <ID>SpreadOperator:SettingsFragment.kt$SettingsFragment$(*PermissionUtils.PERMISSIONS_STORAGE)</ID>
     <ID>ThrowsCount:CsrfTokenClient.kt$CsrfTokenClient$@Throws(Throwable::class) fun getTokenBlocking(): String</ID>
     <ID>ThrowsCount:LoginClient.kt$LoginClient$@Throws(Throwable::class) fun loginBlocking( userName: String, password: String, twoFactorCode: String? = null, emailAuthCode: String? = null, )</ID>
-    <ID>TooGenericExceptionCaught:CommonsApplication.kt$CommonsApplication$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CommonsApplicationModule.kt$&lt;no name provided&gt;$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:ContributionsFragment.kt$ContributionsFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:CsrfTokenClient.kt$CsrfTokenClient$t: Throwable</ID>
-    <ID>TooGenericExceptionCaught:CustomOkHttpNetworkFetcher.kt$CustomOkHttpNetworkFetcher$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:EditActivity.kt$EditActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:EditViewModel.kt$EditViewModel$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:ExceptionAwareThreadPoolExecutor.kt$ExceptionAwareThreadPoolExecutor$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:FilePicker.kt$FilePicker$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:LocationPickerActivity.kt$LocationPickerActivity$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:NearbyParentFragment.kt$NearbyParentFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:NotificationClient.kt$NotificationClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:OkHttpJsonApiClient.kt$OkHttpJsonApiClient$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:PageEditClient.kt$PageEditClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:ThanksClient.kt$ThanksClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:UploadClient.kt$UploadClient$throwable: Throwable</ID>
-    <ID>TooGenericExceptionCaught:UploadMediaDetailFragment.kt$UploadMediaDetailFragment$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:UploadWorker.kt$UploadWorker$exception: Exception</ID>
     <ID>TooManyFunctions:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController : DefaultZoomableController</ID>
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>

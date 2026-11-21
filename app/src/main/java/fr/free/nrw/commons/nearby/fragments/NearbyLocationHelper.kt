@@ -328,12 +328,13 @@ class NearbyLocationHelper : NearbyParentFragmentContract.Location {
                 manager.registerLocationManager()
                 Timber.d("Location service manager added and registered")
             }
-        } catch (e: SecurityException) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcasts are tricky, should be catchedonR
         } catch (e: IllegalStateException) {
             Timber.e(e)
-            // Broadcasts are tricky, should be catchedonR
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 

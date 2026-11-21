@@ -7,6 +7,7 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.mockk.every
 import io.mockk.mockkObject
+import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,6 +28,9 @@ class ThanksClientTest {
 
     @Mock
     private lateinit var service: ThanksInterface
+
+    @Mock
+    private lateinit var thankResponse: MwThankPostResponse
 
     @Mock
     private lateinit var commonsApplication: CommonsApplication
@@ -52,6 +56,15 @@ class ThanksClientTest {
     fun testThanks() {
         `when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         `when`(commonsApplication.userAgent).thenReturn("test")
+        Mockito
+            .`when`(
+                service.thank(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.any(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(thankResponse))
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))
     }

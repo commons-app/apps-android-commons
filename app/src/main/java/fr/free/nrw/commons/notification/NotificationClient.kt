@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification
 
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.di.NetworkingModule
@@ -10,6 +11,8 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
+import java.io.IOException
+import java.util.concurrent.ExecutionException
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -53,19 +56,44 @@ class NotificationClient
             notificationId: String?,
             wiki: String,
         ): Observable<Boolean> =
-            try {
+            executeWithToken(false, "Failed to mark the notification as read") { token ->
                 service
                     .markRead(
-                        token = csrfTokenClient.getTokenBlocking(),
+                        token = token,
                         readList = notificationId,
                         unreadList = "",
                         wikis = wiki,
                     ).map(MwQueryResponse::success)
-            } catch (throwable: InvalidLoginTokenException) {
-                Observable.error(throwable)
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Failed to mark the notification as read")
-                Observable.just(false)
+            }
+
+        private fun <T> executeWithToken(
+            fallback: T,
+            errorMessage: String,
+            block: (String) -> Observable<T>,
+        ): Observable<T> =
+            try {
+                block(csrfTokenClient.getTokenBlocking())
+            } catch (e: InvalidLoginTokenException) {
+                Observable.error(e)
+            } catch (e: IOException) {
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
+            } catch (e: JsonParseException) {
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
+            } catch (e: ExecutionException) {
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
+            } catch (e: InterruptedException) {
+                Thread.currentThread().interrupt()
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
+            } catch (e: IllegalArgumentException) {
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
+            } catch (e: IllegalStateException) {
+                Timber.e(e, errorMessage)
+                Observable.just(fallback)
             }
 
         private fun WikimediaNotification.toCommonsNotification(): Notification {
