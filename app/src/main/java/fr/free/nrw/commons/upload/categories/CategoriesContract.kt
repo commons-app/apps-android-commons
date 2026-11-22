@@ -62,7 +62,7 @@ interface CategoriesContract {
         /**
          * Refreshes the categories
          */
-        fun refreshCategories()
+        fun refreshCategories(categories: List<String>)
 
         /**
          * Navigate the user to Login Activity

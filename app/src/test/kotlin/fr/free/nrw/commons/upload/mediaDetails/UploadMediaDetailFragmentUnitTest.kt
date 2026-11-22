@@ -39,6 +39,7 @@ import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.PLACE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -676,5 +677,24 @@ class UploadMediaDetailFragmentUnitTest {
 
         Mockito.verify(uploadMediaDetailAdapter).items = details
         Mockito.verify(presenter).onUserConfirmedUploadIsOfPlace(place, 1)
+    }
+
+    @Test
+    fun testNearbyPlaceSurvivesSaveAndRestore() {
+        val nearbyPlace =
+            Place("name", "long description", LatLng(12.0, 34.0, 1f), "category", null, "", "", "Q1")
+        `when`(uploadMediaDetailAdapter.items).thenReturn(mutableListOf())
+        fragment.place = nearbyPlace
+
+        val savedState = Bundle()
+        fragment.onSaveInstanceState(savedState)
+
+        Assert.assertNotNull(savedState.getParcelable(PLACE))
+
+        val restoredFragment = UploadMediaDetailFragment()
+        Whitebox.setInternalState(restoredFragment, "mSavedFragmentState", savedState)
+        fragmentManager.beginTransaction().add(restoredFragment, "restoredFragment").commitNow()
+
+        Assert.assertEquals("Q1", restoredFragment.place?.entityID)
     }
 }

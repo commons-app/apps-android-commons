@@ -116,6 +116,7 @@ class CommonPlaceClickActions
         private fun storeSharedPrefs(selectedPlace: Place) {
             Timber.d("Store place object %s", selectedPlace.toString())
             applicationKvStore.putJson(WikidataConstants.PLACE_OBJECT, selectedPlace)
+            contributionController.isInternalUploadInProgress = true
         }
 
         private fun openWebView(link: Uri): Boolean {

@@ -1,10 +1,16 @@
 package fr.free.nrw.commons.upload
 
+import android.Manifest
 import android.content.Intent
 import android.location.Location
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.view.View
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.filepicker.UploadableFile
@@ -33,9 +39,11 @@ internal class UploadInputController {
         // so we do not need to obtain storage permissions
         val action = activity.intent.action
         if (Intent.ACTION_SEND == action || Intent.ACTION_SEND_MULTIPLE == action) {
-            // Get the external items first
-            view.input.receiveExternalSharedItems()
-            view.steps.receiveSharedItems()
+            requestMediaLocationThen {
+                // Get the external items first
+                view.input.receiveExternalSharedItems()
+                view.steps.receiveSharedItems()
+            }
             return
         }
 
@@ -74,6 +82,37 @@ internal class UploadInputController {
          */
         view.isShowPermissionsDialog = hasAllPermissions
     }
+
+    /**
+     * Shared photos can be read without any storage permission, but without ACCESS_MEDIA_LOCATION
+     * Android removes their location before the app reads them. Android only grants that
+     * permission together with access to photos, so asks for the same permissions as the app's
+     * own picker if needed, then runs [onDone] whatever the answer.
+     */
+    private fun requestMediaLocationThen(onDone: () -> Unit) {
+        if (!needsMediaLocationPermission()) {
+            onDone()
+            return
+        }
+        Dexter
+            .withActivity(activity)
+            .withPermissions(PERMISSIONS_STORAGE.toList())
+            .withListener(
+                object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport) = onDone()
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        permissions: List<PermissionRequest>,
+                        token: PermissionToken,
+                    ) = token.continuePermissionRequest()
+                },
+            ).check()
+    }
+
+    /** Whether Android would remove the location from shared photos (Android 10 and later). */
+    fun needsMediaLocationPermission(): Boolean =
+        VERSION.SDK_INT >= VERSION_CODES.Q &&
+            !hasPermission(activity, arrayOf(Manifest.permission.ACCESS_MEDIA_LOCATION))
 
     /**
      * Calculate the difference between current location and
