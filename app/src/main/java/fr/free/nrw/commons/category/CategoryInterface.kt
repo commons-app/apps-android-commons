@@ -28,10 +28,29 @@ interface CategoryInterface {
     ): Single<MwQueryResponse>
 
     /**
+     * Same search as [searchCategories], but also asks for categoryinfo so hidden categories
+     * can be dropped. Used by the upload category search.
+     *
+     * @param filter    The string to be searched
+     * @param itemLimit How many results are returned
+     * @param continuation The continuation of the previous page, empty for the first one
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=categoryinfo|" +
+            "description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+    )
+    fun searchCategoriesWithInfo(
+        @Query("gsrsearch") filter: String?,
+        @Query("gsrlimit") itemLimit: Int,
+        @QueryMap continuation: Map<String, String>,
+    ): Single<MwQueryResponse>
+
+    /**
      * Searches for categories starting with the specified prefix.
      *
      * @param prefix    The string to be searched
      * @param itemLimit How many results are returned
+     * @param continuation The continuation of the previous page, empty for the first one
      * @return
      */
     @GET(
@@ -41,7 +60,7 @@ interface CategoryInterface {
     fun searchCategoriesForPrefix(
         @Query("gapprefix") prefix: String?,
         @Query("gaplimit") itemLimit: Int,
-        @Query("gapoffset") offset: Int,
+        @QueryMap continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
     /**
@@ -55,7 +74,7 @@ interface CategoryInterface {
      */
     @GET(
         "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&" +
-            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+            "prop=description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun getCategoriesByName(
         @Query("gapfrom") startingCategory: String?,
