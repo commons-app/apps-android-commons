@@ -47,7 +47,6 @@ class PageTitle : Parcelable {
      * to the page by going to [[User:Deskana]] and having MediaWiki automatically redirect you.
      */
     private val namespace: String?
-
     private val text: String
     val fragment: String?
     var thumbUrl: String?
@@ -56,9 +55,6 @@ class PageTitle : Parcelable {
     val wikiSite: WikiSite
     var description: String? = null
     private val properties: PageProperties?
-
-    // Needed until the restbase endpoint supports ZH variants.
-    private var convertedText: String? = null
 
     constructor(namespace: String?, text: String, fragment: String?, thumbUrl: String?, wiki: WikiSite) {
         this.namespace = namespace
@@ -151,19 +147,11 @@ class PageTitle : Parcelable {
 
     private fun getTextWithoutSpaces(): String = text.replace(" ", "_")
 
-    fun getConvertedText(): String = if (convertedText == null) prefixedText else convertedText!!
-
-    fun setConvertedText(convertedText: String?) {
-        this.convertedText = convertedText
-    }
-
     val displayText: String
         get() = prefixedText.replace("_", " ")
 
     val displayTextWithoutNamespace: String
         get() = text.replace("_", " ")
-
-    fun hasProperties(): Boolean = properties != null
 
     val isMainPage: Boolean
         get() = properties != null && properties.isMainPage
@@ -176,21 +164,6 @@ class PageTitle : Parcelable {
 
     val mobileUri: String
         get() = getUriForDomain(wikiSite.mobileAuthority())
-
-    fun getUriForAction(action: String?): String {
-        try {
-            return String.format(
-                Locale.ROOT,
-                "%1\$s://%2\$s/w/index.php?title=%3\$s&action=%4\$s",
-                wikiSite.scheme(),
-                wikiSite.authority(),
-                URLEncoder.encode(prefixedText, "utf-8"),
-                action,
-            )
-        } catch (e: UnsupportedEncodingException) {
-            throw IllegalStateException(e)
-        }
-    }
 
     // Possible improvement: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
@@ -211,7 +184,6 @@ class PageTitle : Parcelable {
         parcel.writeParcelable(properties, flags)
         parcel.writeString(thumbUrl)
         parcel.writeString(description)
-        parcel.writeString(convertedText)
     }
 
     override fun equals(o: Any?): Boolean {
@@ -273,7 +245,6 @@ class PageTitle : Parcelable {
         properties = parcel.readParcelable(PageProperties::class.java.classLoader)
         thumbUrl = parcel.readString()
         description = parcel.readString()
-        convertedText = parcel.readString()
     }
 
     companion object {
@@ -283,28 +254,6 @@ class PageTitle : Parcelable {
                 override fun createFromParcel(parcel: Parcel): PageTitle = PageTitle(parcel)
 
                 override fun newArray(size: Int): Array<PageTitle?> = arrayOfNulls(size)
-            }
-
-        /**
-         * Creates a new PageTitle object.
-         * Use this if you want to pass in a fragment portion separately from the title.
-         *
-         * @param prefixedText title of the page with optional namespace prefix
-         * @param fragment optional fragment portion
-         * @param wiki the wiki site the page belongs to
-         * @return a new PageTitle object matching the given input parameters
-         */
-        fun withSeparateFragment(
-            prefixedText: String,
-            fragment: String?,
-            wiki: WikiSite,
-        ): PageTitle =
-            if (TextUtils.isEmpty(fragment)) {
-                PageTitle(prefixedText, wiki, null, null as PageProperties?)
-            } else {
-                // This class would need some refactoring to allow passing in a fragment
-                // without having to do string manipulations.
-                PageTitle("$prefixedText#$fragment", wiki, null, null as PageProperties?)
             }
     }
 }

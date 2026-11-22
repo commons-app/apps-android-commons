@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.edit.Edit
 import io.reactivex.Observable
 import org.junit.Before
@@ -28,6 +29,9 @@ class PageEditClientTest {
     @Mock
     lateinit var editResult: Edit.Result
 
+    @Mock
+    lateinit var entities: Entities
+
     /**
      * initial setup, test environment
      */
@@ -44,6 +48,15 @@ class PageEditClientTest {
     @Test
     fun testEdit() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
+        Mockito
+            .`when`(
+                pageEditInterface.postEdit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(edit))
         pageEditClient.edit("test", "test", "test")
         verify(pageEditInterface).postEdit(eq("test"), eq("test"), eq("test"), eq("test"))
     }
@@ -80,6 +93,15 @@ class PageEditClientTest {
     @Test
     fun testPrependEdit() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
+        Mockito
+            .`when`(
+                pageEditInterface.postPrependEdit(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(edit))
         pageEditClient.prependEdit("test", "test", "test")
         verify(pageEditInterface).postPrependEdit(eq("test"), eq("test"), eq("test"), eq("test"))
     }
@@ -90,6 +112,16 @@ class PageEditClientTest {
     @Test
     fun testSetCaptions() {
         Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
+        Mockito
+            .`when`(
+                pageEditInterface.postCaptions(
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                    ArgumentMatchers.anyString(),
+                ),
+            ).thenReturn(Observable.just(entities))
         pageEditClient.setCaptions("test", "test", "en", "test")
         verify(pageEditInterface).postCaptions(
             eq("test"),
