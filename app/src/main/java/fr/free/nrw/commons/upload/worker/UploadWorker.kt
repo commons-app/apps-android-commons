@@ -276,6 +276,7 @@ class UploadWorker(
                 Timber.e(exception, "Saving captions and depicts failed for %s", uploadedFilename)
                 contribution.state = Contribution.STATE_METADATA_PENDING
                 contribution.errorInfo = exception.uploadErrorCode()
+                contribution.setRetryWait(exception.retryAfterMillis())
                 notificationHelper.showFailedNotification(contribution)
                 contributionDao.saveSynchronous(contribution)
             }
@@ -348,6 +349,7 @@ class UploadWorker(
                             notificationHelper.showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
+                            contribution.retryNotBefore = null
                             contributionDao.save(contribution).blockingAwait()
                         }
                     } catch (exception: Exception) {
@@ -362,6 +364,7 @@ class UploadWorker(
                                 Contribution.STATE_FAILED
                             }
                         contribution.errorInfo = errorCode
+                        contribution.setRetryWait(exception.retryAfterMillis())
                         notificationHelper.showFailedNotification(contribution)
                         contributionDao.saveSynchronous(contribution)
                         if (stashErrorCodes.contains(errorCode)) {
@@ -383,6 +386,7 @@ class UploadWorker(
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contribution.errorInfo = stashUploadResult.errorMessage
+                    contribution.setRetryWait(stashUploadResult.retryAfterMillis)
                     notificationHelper.showErrorNotification(contribution)
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(
@@ -409,6 +413,7 @@ class UploadWorker(
             Timber.e("Stash upload failed for contribution: $filename")
             notificationHelper.showFailedNotification(contribution)
             contribution.errorInfo = exception.message
+            contribution.setRetryWait(exception.retryAfterMillis())
             contribution.state = Contribution.STATE_FAILED
             clearChunks(contribution)
         }
@@ -447,6 +452,14 @@ class UploadWorker(
                 Intent.FLAG_GRANT_READ_URI_PERMISSION,
             )
         }
+    }
+
+    /**
+     * Saves when this failed upload may be retried automatically, from the error just put in
+     * errorInfo and the wait the server asked for, or clears it if there is nothing to wait for.
+     */
+    private fun Contribution.setRetryWait(retryAfterMillis: Long?) {
+        retryNotBefore = nextAutomaticRetry(errorInfo, retryAfterMillis, retries, System.currentTimeMillis())
     }
 
     private fun clearChunks(contribution: Contribution) {
