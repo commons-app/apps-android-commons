@@ -183,6 +183,12 @@ class CategoryClient
                 .map {
                     handleContinuationResponse(it.continuation(), key)
                     it.query()?.pages() ?: emptyList()
+                }.map { pages ->
+                    // Search results come unordered, their index is the rank
+                    val isSearch =
+                        key?.startsWith(PREFIX_SEARCH_CONTINUATION_PREFIX) == true ||
+                            key?.startsWith(TEXT_SEARCH_CONTINUATION_PREFIX) == true
+                    if (isSearch) pages.sortedBy { it.index() } else pages
                 }.map {
                     it
                         .filter { page ->

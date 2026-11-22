@@ -109,8 +109,30 @@ class CategoryClientTest {
     }
 
     @Test
+    fun `search results are shown in the order the API ranks them`() {
+        val response =
+            GsonUtil.defaultGson.fromJson(
+                """{"query":{"pages":[
+                    {"title":"Category:Supermarkets in Tokyo by municipality","index":2},
+                    {"title":"Category:Supermarkets in Tokyo","index":1}
+                ]}}""",
+                MwQueryResponse::class.java,
+            )
+        whenever(categoryInterface.searchCategoriesForPrefix(anyString(), anyInt(), anyMap()))
+            .thenReturn(Single.just(response))
+
+        val names =
+            categoryClient
+                .searchCategoriesForPrefix("supermarkets in tokyo", 10)
+                .blockingGet()
+                .map { it.name }
+
+        assertEquals(listOf("Supermarkets in Tokyo", "Supermarkets in Tokyo by municipality"), names)
+    }
+
+    @Test
     fun `prefix search asks for the next page with the continuation of the previous one`() {
-        val continuation = mapOf("gapcontinue" to "Cats_B", "continue" to "gapcontinue||")
+        val continuation = mapOf("gpsoffset" to "10", "continue" to "gpsoffset||")
         val firstPage = withMockResponse("Category:Cats A")
         whenever(firstPage!!.continuation()).thenReturn(continuation)
         val lastPage = withMockResponse("Category:Cats B")

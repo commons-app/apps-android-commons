@@ -46,7 +46,9 @@ interface CategoryInterface {
     ): Single<MwQueryResponse>
 
     /**
-     * Searches for categories starting with the specified prefix.
+     * Searches for categories starting with the specified prefix. Uses the search index behind
+     * the Commons search box, which ignores case, so "supermarkets in tokyo" finds
+     * "Supermarkets in Tokyo".
      *
      * @param prefix    The string to be searched
      * @param itemLimit How many results are returned
@@ -54,12 +56,12 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&" +
+        "w/api.php?action=query&format=json&formatversion=2&generator=prefixsearch&gpsnamespace=14&" +
             "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun searchCategoriesForPrefix(
-        @Query("gapprefix") prefix: String?,
-        @Query("gaplimit") itemLimit: Int,
+        @Query("gpssearch") prefix: String?,
+        @Query("gpslimit") itemLimit: Int,
         @QueryMap continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
