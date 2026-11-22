@@ -85,14 +85,18 @@ public class NearbyNotificationCardView extends SwipableCardView {
 
     private void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
-            ((MainActivity) getContext()).centerMapToPlace(place);
+            if (getContext() instanceof MainActivity) {
+                ((MainActivity) getContext()).centerMapToPlace(place);
+            }
         });
     }
 
     @Override public boolean onSwipe(View view) {
         view.setVisibility(GONE);
         // Save shared preference for nearby card view accordingly
-        ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        if (getContext() instanceof MainActivity) {
+            ((MainActivity) getContext()).defaultKvStore.putBoolean("displayNearbyCardView", false);
+        }
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_notification_dismiss_message));
         return true;

@@ -46,6 +46,9 @@ class ContributionsNearbyController(
 
     /** Loads the closest nearby places using the last known location. */
     fun updateClosestNearbyCardViewInfo() {
+        if (fragment.isUserProfile) {
+            return
+        }
         currentLatLng = fragment.locationManager!!.getLastLocation()
         fragment.subscriptions.add(
             Observable
@@ -75,6 +78,10 @@ class ContributionsNearbyController(
 
     /** Shows the first nearby place without an image and updates its bearing. */
     fun updateNearbyNotification(nearbyPlacesInfo: NearbyPlacesInfo?) {
+        if (fragment.isUserProfile) {
+            fragment.binding?.cardViewNearby?.visibility = View.GONE
+            return
+        }
         if (nearbyPlacesInfo?.placeList != null && nearbyPlacesInfo.placeList.size > 0) {
             var closestNearbyPlace: Place? = null
             // Find the first nearby place that has no image and exists
@@ -137,11 +144,17 @@ class ContributionsNearbyController(
 
     /** Starts listening for location changes. */
     fun resumeLocation() {
+        if (fragment.isUserProfile) {
+            return
+        }
         fragment.locationManager!!.addLocationListener(this)
     }
 
     /** Starts the nearby compass sensor. */
     fun resumeSensor() {
+        if (fragment.isUserProfile) {
+            return
+        }
         mSensorManager!!.registerListener(compassListener, mLight, SensorManager.SENSOR_DELAY_UI)
     }
 

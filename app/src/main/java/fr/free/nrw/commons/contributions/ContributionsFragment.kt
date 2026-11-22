@@ -188,7 +188,9 @@ class ContributionsFragment(
     override fun onResume() {
         super.onResume()
         contributionsPresenter!!.onAttachView(this)
-        nearby.resumeLocation()
+        if (!isUserProfile) {
+            nearby.resumeLocation()
+        }
 
         if (binding == null) {
             return
@@ -230,7 +232,9 @@ class ContributionsFragment(
                 menuController.setUploadIconCount()
             }
         }
-        nearby.resumeSensor()
+        if (!isUserProfile) {
+            nearby.resumeSensor()
+        }
     }
 
     override fun onDestroy() {
