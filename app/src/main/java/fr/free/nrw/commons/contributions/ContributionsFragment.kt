@@ -142,6 +142,9 @@ class ContributionsFragment(
         presenter!!.onAttachView(campaigns)
         contributionsPresenter!!.onAttachView(this)
         binding!!.campaignsView.visibility = View.GONE
+        if (activity is ProfileActivity) {
+            binding!!.cardViewNearby.visibility = View.GONE
+        }
         nearbyPermission.createPermissionView()
 
         if (savedInstanceState != null) {
@@ -188,9 +191,7 @@ class ContributionsFragment(
     override fun onResume() {
         super.onResume()
         contributionsPresenter!!.onAttachView(this)
-        if (!isUserProfile) {
-            nearby.resumeLocation()
-        }
+        nearby.resumeLocation()
 
         if (binding == null) {
             return
@@ -232,9 +233,7 @@ class ContributionsFragment(
                 menuController.setUploadIconCount()
             }
         }
-        if (!isUserProfile) {
-            nearby.resumeSensor()
-        }
+        nearby.resumeSensor()
     }
 
     override fun onDestroy() {

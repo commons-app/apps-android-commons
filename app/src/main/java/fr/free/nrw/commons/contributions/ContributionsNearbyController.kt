@@ -10,6 +10,7 @@ import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationUpdateListener
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.LengthUtils.computeBearing
 import fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween
 import io.reactivex.Observable
@@ -46,7 +47,7 @@ class ContributionsNearbyController(
 
     /** Loads the closest nearby places using the last known location. */
     fun updateClosestNearbyCardViewInfo() {
-        if (fragment.isUserProfile) {
+        if (fragment.activity is ProfileActivity || fragment.isUserProfile) {
             return
         }
         currentLatLng = fragment.locationManager!!.getLastLocation()
@@ -78,7 +79,7 @@ class ContributionsNearbyController(
 
     /** Shows the first nearby place without an image and updates its bearing. */
     fun updateNearbyNotification(nearbyPlacesInfo: NearbyPlacesInfo?) {
-        if (fragment.isUserProfile) {
+        if (fragment.activity is ProfileActivity || fragment.isUserProfile) {
             fragment.binding?.cardViewNearby?.visibility = View.GONE
             return
         }
@@ -144,7 +145,7 @@ class ContributionsNearbyController(
 
     /** Starts listening for location changes. */
     fun resumeLocation() {
-        if (fragment.isUserProfile) {
+        if (fragment.activity is ProfileActivity || fragment.isUserProfile) {
             return
         }
         fragment.locationManager!!.addLocationListener(this)
@@ -152,7 +153,7 @@ class ContributionsNearbyController(
 
     /** Starts the nearby compass sensor. */
     fun resumeSensor() {
-        if (fragment.isUserProfile) {
+        if (fragment.activity is ProfileActivity || fragment.isUserProfile) {
             return
         }
         mSensorManager!!.registerListener(compassListener, mLight, SensorManager.SENSOR_DELAY_UI)

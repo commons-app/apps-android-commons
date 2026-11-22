@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.nearby
 
+import android.view.View
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.profile.ProfileActivity
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -28,10 +30,17 @@ class NearbyNotificationCardViewTest {
             }
     }
 
+    /** Updating content when hosted outside MainActivity forces card GONE and avoids crash. */
+    @Test
+    fun testUpdateContentOutsideMainActivityHidesCard() {
+        cardView.updateContent(testPlace)
+        assertEquals(View.GONE, cardView.visibility)
+    }
+
     /** Clicking the card when hosted outside MainActivity should safely no-op without crashing. */
     @Test
     fun testClickOutsideMainActivityDoesNotCrash() {
-        cardView.updateContent(testPlace)
+        cardView.setActionListeners(testPlace)
         val clickHandled = cardView.performClick()
         assertTrue(clickHandled)
     }

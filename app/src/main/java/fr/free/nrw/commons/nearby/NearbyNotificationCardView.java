@@ -83,7 +83,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     }
 
 
-    private void setActionListeners(Place place) {
+    void setActionListeners(Place place) {
         this.setOnClickListener(view -> {
             if (getContext() instanceof MainActivity) {
                 ((MainActivity) getContext()).centerMapToPlace(place);
@@ -123,6 +123,10 @@ public class NearbyNotificationCardView extends SwipableCardView {
      */
     public void updateContent(Place place) {
         Timber.d("Update nearby card notification content");
+        if (!(getContext() instanceof MainActivity)) {
+            setVisibility(GONE);
+            return;
+        }
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
         permissionRequestButton.setVisibility(GONE);
