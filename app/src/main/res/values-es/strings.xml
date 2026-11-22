@@ -831,7 +831,7 @@
   </plurals>
   <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
   <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
-  <string name="nearby_wikitalk">Informar a Wikidata sobre un problema relacionado con este elemento</string>
+  <string name="nearby_report_problem">Informar a Wikidata sobre un problema relacionado con este elemento</string>
   <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
   <string name="talk">Discusión</string>
   <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>

@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.MotionPhotoUtils
 import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -22,6 +23,18 @@ import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
+
+/**
+ * Encapsulates dependencies required by FileProcessor for category and depiction retrieval.
+ */
+class FileProcessorDependencies
+    @Inject
+    constructor(
+        val gpsCategoryModel: GpsCategoryModel,
+        val depictsModel: DepictModel,
+        val apiCall: CategoryApi,
+        val okHttpJsonApiClient: OkHttpJsonApiClient,
+    )
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -37,11 +50,8 @@ class FileProcessor
     constructor(
         private val context: Context,
         private val contentResolver: ContentResolver,
-        private val gpsCategoryModel: GpsCategoryModel,
-        private val depictsModel: DepictModel,
         @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
-        private val apiCall: CategoryApi,
-        private val okHttpJsonApiClient: OkHttpJsonApiClient,
+        private val dependencies: FileProcessorDependencies,
     ) {
         private val compositeDisposable = CompositeDisposable()
 
@@ -126,6 +136,12 @@ class FileProcessor
                 } catch (e: IOException) {
                     Timber.w("EXIF redaction failed: %s", e.toString())
                 }
+                // Not a user setting: the video can show things that were not in the photo.
+                try {
+                    if (MotionPhotoUtils.removeVideo(File(filePath))) Timber.d("Motion photo video removed.")
+                } catch (e: IOException) {
+                    Timber.w("Motion photo video removal failed: %s", e.toString())
+                }
             }
         }
 
@@ -160,20 +176,24 @@ class FileProcessor
                 }
         }
 
-        private fun readImageCoordinates(file: File) =
+        private fun readImageCoordinates(file: File): ImageCoordinates? {
             try {
-            /* Used null location as location for similar images captured before is not available
-               in case it is not present in the EXIF. */
-                ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
+                /* Used null location as location for similar images captured before is not available
+                   in case it is not present in the EXIF. */
+                val inputStream = contentResolver.openInputStream(Uri.fromFile(file))
+                if (inputStream != null) {
+                    return ImageCoordinates(inputStream, null)
+                }
             } catch (e: IOException) {
                 Timber.e(e)
-                try {
-                    ImageCoordinates(file.absolutePath, null)
-                } catch (ex: IOException) {
-                    Timber.e(ex)
-                    null
-                }
             }
+            return try {
+                ImageCoordinates(file.absolutePath, null)
+            } catch (ex: IOException) {
+                Timber.e(ex)
+                null
+            }
+        }
 
         /**
          * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates. Then
@@ -184,15 +204,15 @@ class FileProcessor
         fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
             requireNotNull(imageCoordinates.decimalCoords)
             compositeDisposable.add(
-                apiCall
+                dependencies.apiCall
                     .request(imageCoordinates.decimalCoords!!)
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
                     .subscribe(
-                        gpsCategoryModel::setCategoriesFromLocation,
+                        dependencies.gpsCategoryModel::setCategoriesFromLocation,
                         {
                             Timber.e(it)
-                            gpsCategoryModel.clear()
+                            dependencies.gpsCategoryModel.clear()
                         },
                     ),
             )
@@ -210,7 +230,7 @@ class FileProcessor
                 .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
                 .concatMap {
                     Observable.fromCallable {
-                        okHttpJsonApiClient.getNearbyPlaces(
+                        dependencies.okHttpJsonApiClient.getNearbyPlaces(
                             imageCoordinates.latLng!!,
                             Locale.getDefault().language,
                             it,
@@ -220,7 +240,7 @@ class FileProcessor
                 .filter { it.size >= MIN_NEARBY_RESULTS }
                 .take(1)
                 .subscribe(
-                    { depictsModel.nearbyPlaces.offer(it) },
+                    { dependencies.depictsModel.nearbyPlaces.offer(it) },
                     { Timber.e(it) },
                 )
     }

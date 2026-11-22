@@ -12,7 +12,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
@@ -29,7 +28,9 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
+import android.view.inputmethod.EditorInfo
 import android.view.animation.AnimationUtils
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -38,6 +39,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
@@ -232,6 +234,7 @@ class NearbyParentFragment :
     private var broadcastReceiver: BroadcastReceiver? = null
     private var isNetworkErrorOccurred = false
     private var snackbar: Snackbar? = null
+    private var hasShownOfflinePinsMessage = false
     private var view: View? = null
     private var scope: LifecycleCoroutineScope? = null
     private var presenter: NearbyParentFragmentPresenter? = null
@@ -272,8 +275,6 @@ class NearbyParentFragment :
 
     private val searchHandler = Handler()
     private val searchRunnable: Runnable? = null
-
-    private var searchable = false
 
     private var gridLayoutManager: GridLayoutManager? = null
     private var dataList: MutableList<BottomSheetItem>? = null
@@ -379,9 +380,7 @@ class NearbyParentFragment :
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        if (Label.TEXT_TO_DESCRIPTION.isEmpty()) {
-            Label.init(requireContext().applicationContext)
-        }
+        Label.init(requireContext().applicationContext)
         loadExploreMapData()
 
         binding = FragmentNearbyParentBinding.inflate(inflater, container, false)
@@ -417,11 +416,7 @@ class NearbyParentFragment :
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
         refreshButton.setOnMenuItemClickListener {
-            try {
-                emptyCache()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
-            }
+            runNearbyMenuAction { emptyCache() }
             false
         }
         listMenu.setOnMenuItemClickListener {
@@ -439,24 +434,30 @@ class NearbyParentFragment :
         }
 
         saveAsGPXButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_gpx_file))
                 progressDialog!!.show()
                 savePlacesAsGPX()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
         }
         saveAsKMLButton.setOnMenuItemClickListener {
-            try {
+            runNearbyMenuAction {
                 progressDialog!!.setTitle(getString(fr.free.nrw.commons.R.string.saving_kml_file))
                 progressDialog!!.show()
                 savePlacesAsKML()
-            } catch (e: Exception) {
-                throw IllegalStateException(e)
             }
             false
+        }
+    }
+
+    // Cache and export actions surface all storage failures as IllegalStateException to the menu host.
+    @Suppress("TooGenericExceptionCaught")
+    private inline fun runNearbyMenuAction(action: () -> Unit) {
+        try {
+            action()
+        } catch (e: Exception) {
+            throw IllegalStateException(e)
         }
     }
 
@@ -592,7 +593,8 @@ class NearbyParentFragment :
         initNearbyFilter()
         addCheckBoxCallback()
         if (!isCameFromExploreMap()) {
-            moveCameraToPosition(lastMapFocus!!)
+            // Jump instead of animating from 0,0: searches use the visible map area
+            binding?.map?.controller?.setCenter(lastMapFocus)
         }
         moveCameraToPosition(lastMapFocus!!)
         initRvNearbyList()
@@ -669,6 +671,7 @@ class NearbyParentFragment :
         if (!locationPermissionsHelper?.checkLocationPermission(requireActivity())!!) {
             askForLocationPermission()
         }
+        applyNearbyFabLayout()
     }
 
     fun addPhotoMarkerIfDepictsMode() {
@@ -973,10 +976,14 @@ class NearbyParentFragment :
                 locationManager!!.removeLocationListener(presenter!!)
                 locationManager!!.unregisterLocationManager()
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcast receivers should always be unregistered inside catch,
             // you never know if they were already registered or not
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 
@@ -992,6 +999,10 @@ class NearbyParentFragment :
 
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
+
+        if (::controller.isInitialized && controller.isInternalUploadInProgress) {
+            return
+        }
 
         presenter?.removeNearbyPreferences(applicationKvStore ?: return)
     }
@@ -1054,6 +1065,8 @@ class NearbyParentFragment :
             isIconified = false
             setQuery("", false)
             clearFocus()
+
+            imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
@@ -1199,11 +1212,7 @@ class NearbyParentFragment :
                     prepareViewsForSheetPosition(newState)
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
 
@@ -1236,11 +1245,7 @@ class NearbyParentFragment :
                     }
                 }
 
-                override fun onSlide(
-                    bottomSheet: View,
-                    slideOffset: Float,
-                ) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             },
         )
         if (isDepictsPickerMode) {
@@ -1427,6 +1432,7 @@ class NearbyParentFragment :
                                 snackbar!!.dismiss()
                                 snackbar = null
                             }
+                            hasShownOfflinePinsMessage = false
                         } else {
                             if (snackbar == null) {
                                 snackbar =
@@ -1435,7 +1441,7 @@ class NearbyParentFragment :
                                         fr.free.nrw.commons.R.string.no_internet,
                                         Snackbar.LENGTH_INDEFINITE,
                                     )
-                                searchable = false
+                                hasShownOfflinePinsMessage = false
                                 setProgressBarVisibility(false)
                             }
 
@@ -1456,10 +1462,10 @@ class NearbyParentFragment :
         if (!isNetworkErrorOccurred || snackbar == null) {
             return
         }
-        if (offlinePinsShown) {
+        // Avoid flickering between offline messages while panning; switch once per offline session.
+        if (offlinePinsShown && !hasShownOfflinePinsMessage) {
             snackbar!!.setText(fr.free.nrw.commons.R.string.nearby_showing_pins_offline)
-        } else {
-            snackbar!!.setText(fr.free.nrw.commons.R.string.no_internet)
+            hasShownOfflinePinsMessage = true
         }
     }
 
@@ -1812,7 +1818,9 @@ class NearbyParentFragment :
                 getString(fr.free.nrw.commons.R.string.do_you_want_to_open_kml_file)
             }
         val runnable = Runnable { openFile(context, fileName, isGPX) }
-        showAlertDialog(requireActivity(), title, message, runnable) {}
+        showAlertDialog(requireActivity(), title, message, runnable) {
+            // No action needed when the dialog is dismissed
+        }
     }
 
     private fun openFile(
@@ -2117,11 +2125,6 @@ class NearbyParentFragment :
         }
     }
 
-    fun setTabItemContributions() {
-        (activity as MainActivity).binding?.pager?.currentItem
-        // TODO
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
@@ -2287,11 +2290,9 @@ class NearbyParentFragment :
         return presenter?.backButtonClicked() ?: false
     }
 
-    override fun onLocationPermissionDenied(toastMessage: String) {
-    }
+    override fun onLocationPermissionDenied(toastMessage: String) = Unit
 
-    override fun onLocationPermissionGranted() {
-    }
+    override fun onLocationPermissionGranted() = Unit
 
     /**
      * onLogoutComplete is called after shared preferences and data stored in local database are
@@ -2643,38 +2644,6 @@ class NearbyParentFragment :
         }
         if (currentLatLng == null) {
             recenterToUserLocation = true
-            return
-        }
-
-        /*
-         * FIXME: With the revamp of the location permission helper in the MR
-         *  #5494[1], there is a doubt that the following code is redundant.
-         *  If we could confirm the same, the following code can be removed. If it
-         *  turns out to be necessary, we could replace this with a comment
-         *  clarifying why it is necessary.
-         *
-         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794
-         */
-        if (lastMapFocus != null) {
-            val myLocation = Location("")
-            val destLocation = Location("")
-            destLocation.latitude = binding!!.map.mapCenter.latitude
-            destLocation.longitude = binding!!.map.mapCenter.longitude
-            myLocation.latitude = lastMapFocus!!.latitude
-            myLocation.longitude = lastMapFocus!!.longitude
-            val distance = myLocation.distanceTo(destLocation) // in meters
-            if (lastMapFocus != null) {
-                if (isNetworkConnectionEstablished) {
-                    searchable =
-                        if (distance > SEARCH_RADIUS_METERS) {
-                            true
-                        } else {
-                            false
-                        }
-                }
-            } else {
-                searchable = false
-            }
         }
     }
 
@@ -2743,11 +2712,10 @@ class NearbyParentFragment :
     private fun passInfoToSheet(place: Place) {
         selectedPlace = place
         dataList = ArrayList()
-        // TODO: Decide button text for fitting in the screen
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_round_star_border_24px,
-                "",
+                resources.getString(fr.free.nrw.commons.R.string.nearby_bookmark),
             ),
         )
         (dataList as ArrayList<BottomSheetItem>).add(
@@ -2767,7 +2735,7 @@ class NearbyParentFragment :
         (dataList as ArrayList<BottomSheetItem>).add(
             BottomSheetItem(
                 R.drawable.ic_feedback_black_24dp,
-                resources.getString(fr.free.nrw.commons.R.string.nearby_wikitalk),
+                resources.getString(fr.free.nrw.commons.R.string.nearby_report_problem_short),
             ),
         )
         if (place.hasWikipediaLink()) {
@@ -2968,6 +2936,8 @@ class NearbyParentFragment :
                             descriptions = mediaResponse.descriptions ?: emptyMap(),
                             depictionIds = mediaResponse.depictionIds ?: emptyList(),
                             categoriesHiddenStatus = mediaResponse.categoriesHiddenStatus ?: emptyMap(),
+                            mimeType = mediaResponse.mimeType,
+                            mediaType = mediaResponse.mediaType,
                         )
                     // Remove existing fragment before showing new details
                     if (::mediaDetails.isInitialized && mediaDetails.isAdded) {
@@ -3032,6 +3002,7 @@ class NearbyParentFragment :
 
     private fun storeSharedPrefs(selectedPlace: Place) {
         applicationKvStore!!.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
+        controller.isInternalUploadInProgress = true
         val place =
             applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
 
@@ -3083,9 +3054,13 @@ class NearbyParentFragment :
                 locationManager!!.registerLocationManager()
                 Timber.d("Location service manager added and registered")
             }
-        } catch (e: Exception) {
+        } catch (e: IllegalArgumentException) {
             Timber.e(e)
             // Broadcasts are tricky, should be catchedonR
+        } catch (e: IllegalStateException) {
+            Timber.e(e)
+        } catch (e: SecurityException) {
+            Timber.e(e)
         }
     }
 
@@ -3386,7 +3361,7 @@ class NearbyParentFragment :
                 }
             }
 
-            else -> {}
+            else -> Unit
         }
     }
 
@@ -3401,7 +3376,7 @@ class NearbyParentFragment :
                 R.drawable.ic_round_star_filled_24px -> getString(fr.free.nrw.commons.R.string.menu_bookmark)
                 R.drawable.ic_directions_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_directions)
                 R.drawable.ic_wikidata_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikidata)
-                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikitalk)
+                R.drawable.ic_feedback_black_24dp -> getString(fr.free.nrw.commons.R.string.nearby_report_problem)
                 R.drawable.ic_wikipedia_logo_24dp -> getString(fr.free.nrw.commons.R.string.nearby_wikipedia)
                 R.drawable.ic_commons_icon_vector -> getString(fr.free.nrw.commons.R.string.nearby_commons)
                 else -> "Long click"
@@ -3419,6 +3394,52 @@ class NearbyParentFragment :
         this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback
     }
 
+    private fun applyNearbyFabLayout() {
+        val res = resources
+        val spacer1Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer1_height)
+        val spacer2Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer2_height)
+        val spacer3Px = res.getDimensionPixelSize(R.dimen.nearby_fab_spacer3_height)
+        val spacingPx = res.getDimensionPixelSize(R.dimen.nearby_fab_spread_spacing)
+        val marginPx = res.getDimensionPixelSize(R.dimen.nearby_fab_container_margin)
+        val alignStart = res.getBoolean(R.bool.nearby_fab_container_align_start)
+
+        binding!!.emptyView1.layoutParams.height = spacer1Px
+        binding!!.emptyView1.requestLayout()
+        binding!!.emptyView.layoutParams.height = spacer2Px
+        binding!!.emptyView.requestLayout()
+        binding!!.emptyView2.layoutParams.height = spacer3Px
+        binding!!.emptyView2.requestLayout()
+
+        binding!!.fabContainer.updateLayoutParams<RelativeLayout.LayoutParams> {
+            if (alignStart) {
+                addRule(RelativeLayout.ALIGN_PARENT_START)
+                removeRule(RelativeLayout.ALIGN_PARENT_END)
+                marginStart = marginPx
+                marginEnd = 0
+            } else {
+                addRule(RelativeLayout.ALIGN_PARENT_END)
+                removeRule(RelativeLayout.ALIGN_PARENT_START)
+                marginStart = 0
+                marginEnd = marginPx
+            }
+        }
+
+        if (spacingPx == 0) {
+            binding!!.fabCamera.translationX = 0f
+            binding!!.fabGallery.translationX = 0f
+            binding!!.fabCustomGallery.translationX = 0f
+        } else {
+            val direction = if (binding!!.root.layoutDirection == View.LAYOUT_DIRECTION_RTL) 1 else -1
+            listOf(
+                binding!!.fabCustomGallery,
+                binding!!.fabGallery,
+                binding!!.fabCamera,
+            ).forEachIndexed { index, fab ->
+                fab.translationX = direction * spacingPx * (index + 1f)
+            }
+        }
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         val rlBottomSheetLayoutParams = binding!!.bottomSheetNearby.bottomSheet.layoutParams
@@ -3430,6 +3451,7 @@ class NearbyParentFragment :
         if (gridLayoutManager != null) {
             gridLayoutManager!!.spanCount = spanCount
         }
+        applyNearbyFabLayout()
     }
 
     fun onLearnMoreClicked() {
@@ -3467,7 +3489,6 @@ class NearbyParentFragment :
         private const val MARKER_PRIORITY_MONUMENT = 3
         private const val MARKER_PRIORITY_GREEN = 2
         private const val MARKER_PRIORITY_GREY = 1
-        private const val SEARCH_RADIUS_METERS = 2000.0
         private const val CURRENT_LOCATION_LABEL_FONT_SIZE = 24
         private const val CURRENT_LOCATION_ANCHOR = 0.5f
         private const val LOCATION_CIRCLE_GRAY = 128
@@ -3548,3 +3569,4 @@ class NearbyParentFragment :
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
     }
 }
+

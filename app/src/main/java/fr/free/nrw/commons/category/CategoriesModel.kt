@@ -120,10 +120,39 @@ class CategoriesModel
                     Function4(::combine),
                 )
             } else {
-                categoryClient
-                    .searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
-                    .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
-                    .toObservable()
+                categoriesMatching(term)
+            }
+
+        /**
+         * Prefix search is alphabetical and capped, so a short word such as "Cat" does not reach
+         * "Cats". Also request the plural form, then rank the combined list by similarity to the
+         * text the user typed.
+         */
+        private fun categoriesMatching(term: String): Observable<List<CategoryItem>> {
+            val searches =
+                searchPrefixes(term).map { prefix ->
+                    categoryClient
+                        .searchCategoriesForPrefix(prefix, SEARCH_CATS_LIMIT)
+                        .onErrorReturnItem(emptyList())
+                        .toObservable()
+                }
+            return Observable.zip(searches) { results ->
+                results
+                    .filterIsInstance<List<CategoryItem>>()
+                    .flatten()
+                    .distinctBy { it.name }
+                    .sortedWith(StringSortingUtils.sortBySimilarity(term))
+            }
+        }
+
+        /**
+         * Returns the typed prefix, plus a trailing "s" when that can name the plural category.
+         */
+        private fun searchPrefixes(term: String): List<String> =
+            if (term.length >= MIN_PLURAL_PREFIX_LENGTH && !term.endsWith("s", ignoreCase = true)) {
+                listOf(term, term + "s")
+            } else {
+                listOf(term)
             }
 
         /**
@@ -175,14 +204,16 @@ class CategoriesModel
                                         categoryItem.name,
                                         categoryItem.name,
                                         SEARCH_CATS_LIMIT,
-                                    ).map {
-                                        CategoryItem(
-                                            it[0].name,
-                                            it[0].description,
-                                            it[0].thumbnail,
-                                            it[0].isSelected,
-                                        )
-                                    }.blockingGet()
+                                    ).blockingGet()
+                            }.filter { it.isNotEmpty() }
+                            .map { categories ->
+                                val category = categories.first()
+                                CategoryItem(
+                                    category.name,
+                                    category.description,
+                                    category.thumbnail,
+                                    category.isSelected,
+                                )
                             }.toList()
                             .toObservable()
                     }
@@ -327,6 +358,7 @@ class CategoriesModel
 
         companion object {
             const val SEARCH_CATS_LIMIT = 25
+            private const val MIN_PLURAL_PREFIX_LENGTH = 3
         }
 
         /**

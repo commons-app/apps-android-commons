@@ -9,7 +9,9 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
-import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
+import fr.free.nrw.commons.mwapi.TooManyAchievementsException
+import fr.free.nrw.commons.mwapi.UploadCount
+import fr.free.nrw.commons.mwapi.UserStatsClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
 import fr.free.nrw.commons.utils.ViewUtil.showDismissibleSnackBar
@@ -21,12 +23,17 @@ import timber.log.Timber
 import java.util.Objects
 import javax.inject.Inject
 
+private const val WIKIDATA_EDITS_THAT_BREAK_CALCULATOR = 150_000
+
+private fun Throwable?.isTooManyAchievements(): Boolean =
+    this is TooManyAchievementsException || this?.cause is TooManyAchievementsException
+
 class AchievementsFragment : CommonsDaggerSupportFragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
     @Inject
-    lateinit var okHttpJsonApiClient: OkHttpJsonApiClient
+    lateinit var userStatsClient: UserStatsClient
 
     // The nullable binding is cleared in onDestroyView; `binding` is the non-null accessor for this class only.
     @Suppress("ktlint:standard:backing-property-naming")
@@ -113,45 +120,38 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     private fun setAchievements() {
         binding.progressBar.visibility = View.VISIBLE
         if (checkAccount()) {
-            try {
-                compositeDisposable.add(
-                    okHttpJsonApiClient
-                        .getAchievements(userName ?: return)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { response ->
-                                if (response != null) {
-                                    setUploadCount(Achievements.from(response))
-                                } else {
-                                    Timber.d("Success")
-                                    // TODO Create a Method to Hide all the Statistics
-//                                    binding.layoutImageReverts.visibility = View.INVISIBLE
-//                                    binding.achievementBadgeImage.visibility = View.INVISIBLE
-                                    // If the number of edits made by the user are more than 150,000
-                                    // in some cases such high number of wiki edit counts cause the
-                                    // achievements calculator to fail in some cases, for more details
-                                    // refer Issue: #3295
-                                    if (numberOfEdits <= 150_000) {
-                                        showSnackBarWithRetry(false)
-                                    } else {
-                                        showSnackBarWithRetry(true)
-                                    }
-                                }
-                            },
-                            { throwable ->
-                                Timber.e(throwable, "Fetching achievements statistics failed")
-                                if (numberOfEdits <= 150_000) {
-                                    showSnackBarWithRetry(false)
-                                } else {
-                                    showSnackBarWithRetry(true)
-                                }
-                            },
-                        ),
-                )
-            } catch (e: Exception) {
-                Timber.d("Exception: ${e.message}")
-            }
+            compositeDisposable.add(
+                userStatsClient
+                    .getAchievements(userName ?: return)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { response ->
+                            if (response != null) {
+                                setUploadCount(Achievements.from(response))
+                            } else {
+                                Timber.d("Success")
+                                // TODO Create a Method to Hide all the Statistics
+//                                binding.layoutImageReverts.visibility = View.INVISIBLE
+//                                binding.achievementBadgeImage.visibility = View.INVISIBLE
+                                // If the number of edits made by the user are more than 150,000
+                                // in some cases such high number of wiki edit counts cause the
+                                // achievements calculator to fail in some cases, for more details
+                                // refer Issue: #3295
+                                showSnackBarWithRetry(
+                                    numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                                )
+                            }
+                        },
+                        { throwable ->
+                            Timber.e(throwable, "Fetching achievements statistics failed")
+                            showSnackBarWithRetry(
+                                throwable.isTooManyAchievements() ||
+                                    numberOfEdits > WIKIDATA_EDITS_THAT_BREAK_CALCULATOR,
+                            )
+                        },
+                    ),
+            )
         }
     }
 
@@ -165,7 +165,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             return
         }
         compositeDisposable.add(
-            okHttpJsonApiClient
+            userStatsClient
                 .getWikidataEdits(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -192,7 +192,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             } else {
                 binding.progressBar.visibility = View.GONE
                 showDismissibleSnackBar(
-                    requireView().findViewById(android.R.id.content),
+                    requireActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed_ultimate_achievement,
                     R.string.retry,
                 ) { setAchievements() }
@@ -203,7 +203,7 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
             }
             binding.progressBar.visibility = View.GONE
             showDismissibleSnackBar(
-                requireView().findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 R.string.achievements_fetch_failed,
                 R.string.retry,
             ) { setAchievements() }
@@ -225,14 +225,14 @@ class AchievementsFragment : CommonsDaggerSupportFragment() {
     private fun setUploadCount(achievements: Achievements) {
         if (checkAccount()) {
             compositeDisposable.add(
-                okHttpJsonApiClient
+                userStatsClient
                     .getUploadCount(Objects.requireNonNull<String>(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                        { uploadCount: Int? ->
+                        { uploadCount: UploadCount ->
                             statsBinder.bind(
-                                achievements.copy(imagesUploaded = uploadCount ?: 0),
+                                achievements.copy(imagesUploaded = uploadCount.count),
                             )
                         },
                         { t: Throwable? ->

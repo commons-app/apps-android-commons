@@ -838,7 +838,7 @@
   </plurals>
   <string name="multiple_files_depiction">Lütfen çoklu yüklemedeki tüm görsellerin aynı kategorilere ve tasvirlere sahip olduğunu unutmayın. Görseller tasvirleri ve kategorileri paylaşmıyorsa, lütfen birkaç ayrı yükleme gerçekleştirin.</string>
   <string name="multiple_files_depiction_header">Çoklu yüklemelerle ilgili not</string>
-  <string name="nearby_wikitalk">Bu öge ile ilgili bir sorunu Vikiveri\'ye bildirin</string>
+  <string name="nearby_report_problem">Bu öge ile ilgili bir sorunu Vikiveri\'ye bildirin</string>
   <string name="please_enter_some_comments">Lütfen bir yorum girin</string>
   <string name="talk">Tartışma</string>
   <string name="write_something_about_the_item">\' %1$s \' öğesi hakkında bir şeyler yazın. Herkes tarafından görülebilir olacaktır.</string>

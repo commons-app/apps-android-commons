@@ -35,6 +35,8 @@ class UploadNotificationHelper
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_UPLOADS)
 
         companion object {
+            /** Id of the foreground service notification, which also shows the progress of the current upload */
+            const val FOREGROUND_NOTIFICATION_ID = 1
             private const val PROGRESS_MAX = 100
             private const val PROGRESS_ZERO = 0
         }
@@ -59,6 +61,7 @@ class UploadNotificationHelper
                 .setOnlyAlertOnce(true)
                 .setProgress(PROGRESS_MAX, PROGRESS_ZERO, true)
                 .setOngoing(true)
+                .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
 
         /**
          * Initializes and posts the initial notification when an upload begins.
@@ -80,9 +83,10 @@ class UploadNotificationHelper
                     displayTitle,
                 ),
             )
+            // Show the progress in the foreground service notification instead of a second
+            // notification, the result of the upload is shown in its own notification
             notificationManager.notify(
-                currentNotificationTag,
-                currentNotificationID,
+                FOREGROUND_NOTIFICATION_ID,
                 currentNotification.build(),
             )
         }
@@ -121,8 +125,7 @@ class UploadNotificationHelper
                 notificationManager.cancel(startingTag, startingId)
             }
             notificationManager.notify(
-                currentNotificationTag,
-                currentNotificationID,
+                FOREGROUND_NOTIFICATION_ID,
                 currentNotification.build(),
             )
         }
@@ -160,16 +163,22 @@ class UploadNotificationHelper
         @SuppressLint("StringFormatInvalid", "MissingPermission")
         fun showFailedNotification(contribution: Contribution) {
             val displayTitle = contribution.media.displayTitle
+            // The file is on Commons, only its captions and depicts wait in the pending uploads
+            val metadataPending = contribution.state == Contribution.STATE_METADATA_PENDING
             currentNotification.setContentIntent(
                 getPendingIntent(
                     UploadProgressActivity::class.java,
-                    UploadProgressActivity.TAB_FAILED,
+                    if (metadataPending) UploadProgressActivity.TAB_PENDING else UploadProgressActivity.TAB_FAILED,
                 ),
             )
             currentNotification
                 .setContentTitle(
                     context.getString(
-                        R.string.upload_failed_notification_title,
+                        if (metadataPending) {
+                            R.string.upload_metadata_pending_notification_title
+                        } else {
+                            R.string.upload_failed_notification_title
+                        },
                         displayTitle,
                     ),
                 ).setContentText(context.getString(R.string.upload_failed_notification_subtitle))
@@ -201,7 +210,7 @@ class UploadNotificationHelper
                         R.string.upload_failed_notification_title,
                         displayTitle,
                     ),
-                ).setContentText(contribution.errorInfo)
+                ).setContentText(uploadErrorMessage(context, contribution.errorInfo))
                 .setProgress(PROGRESS_ZERO, PROGRESS_ZERO, false)
                 .setOngoing(false)
                 .useUploadResultChannel()

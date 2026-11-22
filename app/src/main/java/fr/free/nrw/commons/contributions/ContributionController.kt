@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.filepicker.DefaultCallback
 import fr.free.nrw.commons.filepicker.ExternalImagesResult
 import fr.free.nrw.commons.filepicker.FilePicker
@@ -49,6 +50,7 @@ class ContributionController
         private var isInAppCameraUpload = false
 
         // Flag to track if an internal upload is in progress.
+        @Volatile
         var isInternalUploadInProgress = false
 
         @JvmField
@@ -355,6 +357,7 @@ class ContributionController
                         source: FilePicker.ImageSource,
                         type: Int,
                     ) {
+                        isInternalUploadInProgress = false
                         showShortToast(activity, R.string.error_occurred_in_picking_images)
                     }
 
@@ -364,6 +367,7 @@ class ContributionController
                         type: Int,
                     ) {
                         val intent = handleImagesPicked(activity, imagesFiles)
+                        isInternalUploadInProgress = false
                         activity.startActivity(intent)
                     }
                 },
@@ -383,10 +387,19 @@ class ContributionController
             context: Context,
             imagesFiles: List<UploadableFile>,
         ): Intent {
+            // enforce the limit here for the internal gallery picks
+            val filesToUpload =
+                if (imagesFiles.size > MAX_IMAGE_COUNT) {
+                    showLongToast(context, context.getString(R.string.upload_limit_exceeded, MAX_IMAGE_COUNT))
+                    imagesFiles.take(MAX_IMAGE_COUNT)
+                } else {
+                    imagesFiles
+                }
+
             val shareIntent = Intent(context, UploadActivity::class.java)
             shareIntent.setAction(ACTION_INTERNAL_UPLOADS)
             shareIntent
-                .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(imagesFiles))
+                .putParcelableArrayListExtra(UploadActivity.EXTRA_FILES, ArrayList(filesToUpload))
             val place = defaultKvStore.getJson<Place>(PLACE_OBJECT, Place::class.java)
 
             if (place != null) {
@@ -425,6 +438,7 @@ class ContributionController
                             Contribution.STATE_IN_PROGRESS,
                             Contribution.STATE_QUEUED,
                             Contribution.STATE_PAUSED,
+                            Contribution.STATE_METADATA_PENDING,
                         ),
                     )
 

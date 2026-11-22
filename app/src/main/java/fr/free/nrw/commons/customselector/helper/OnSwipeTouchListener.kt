@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because swipe callbacks are supplied by subclasses and may
+ * throw, and the gesture listener should remain alive.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context

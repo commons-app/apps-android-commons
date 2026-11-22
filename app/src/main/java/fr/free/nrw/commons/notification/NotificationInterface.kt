@@ -12,6 +12,12 @@ import retrofit2.http.Query
 
 interface NotificationInterface {
     @Headers("Cache-Control: no-cache")
+    @GET(MW_API_PREFIX + "action=query&meta=notifications&notprop=count")
+    fun getUnreadNotificationCount(
+        @Query("notwikis") wikiList: String?,
+    ): Observable<MwQueryResponse?>
+
+    @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=notifications&notformat=model&notlimit=max")
     fun getAllNotifications(
         @Query("notwikis") wikiList: String?,

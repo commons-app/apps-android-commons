@@ -256,6 +256,7 @@
   <string name="wikicode_copied">विकिटेक्सट क्लिपबोर्ड पर कॉपी किया जा चुका है</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं है।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
+  <string name="nearby_bookmark">बुकमार्क</string>
   <string name="nearby_directions">दिशा-निर्देश</string>
   <string name="nearby_wikidata">विकीडाटा</string>
   <string name="nearby_wikipedia">विकीपीडिया</string>

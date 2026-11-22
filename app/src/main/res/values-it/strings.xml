@@ -241,6 +241,10 @@
   <string name="media_detail_license">Licenza</string>
   <string name="media_detail_coordinates">Coordinate</string>
   <string name="media_detail_coordinates_empty">Non fornito</string>
+  <string name="playback_quality">Qualità di riproduzione</string>
+  <string name="original">Originale</string>
+  <string name="video_quality">Qualità video</string>
+  <string name="video_quality_auto">Automatico</string>
   <string name="become_a_tester_title">Diventa un Beta Tester</string>
   <string name="become_a_tester_description">Accedi al nostro canale beta su Google Play per ottenere subito le nuove funzionalità e gli errori corretti</string>
   <string name="_2fa_code">Codice 2FA</string>
@@ -310,6 +314,7 @@
   <string name="upload_location_access_denied">Accesso alla posizione negato. Impostala manualmente per utilizzare questa funzione.</string>
   <string name="location_permission_rationale_nearby">È richiesta l\'autorizzazione per visualizzare un elenco di luoghi nelle vicinanze</string>
   <string name="location_permission_rationale_explore">È richiesta l\'autorizzazione per visualizzare un elenco di luoghi nelle vicinanze</string>
+  <string name="nearby_bookmark">Segnalibro</string>
   <string name="nearby_directions">Indicazioni</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -826,7 +831,8 @@
   </plurals>
   <string name="multiple_files_depiction">Ricorda che tutte le immagini in un caricamento multiplo hanno le stesse categorie e descrizioni. Se le immagini non condividono descrizioni e categorie, esegui caricamenti separati.</string>
   <string name="multiple_files_depiction_header">Osservazione sui caricamenti multipli</string>
-  <string name="nearby_wikitalk">Segnala un problema su questo elemento su Wikidata</string>
+  <string name="nearby_report_problem">Segnala un problema su questo elemento su Wikidata</string>
+  <string name="nearby_report_problem_short">Segnala problema</string>
   <string name="please_enter_some_comments">Inserisci dei commenti</string>
   <string name="talk">Discussione</string>
   <string name="write_something_about_the_item">Scrivi qualcosa su \' %1$s \'. Sarà visibile pubblicamente.</string>
@@ -855,6 +861,10 @@
   <string name="green_pin">Questo posto ha già una foto.</string>
   <string name="grey_pin">Ora controlliamo se questo posto ha una foto.</string>
   <string name="error_while_loading">Errore durante il caricamento</string>
+  <string name="play_video">Riproduci video</string>
+  <string name="play_audio">Riproduci audio</string>
+  <string name="video_unavailable">Video non disponibile. Tocca per riprovare.</string>
+  <string name="audio_unavailable">Audio non disponibile. Tocca per riprovare.</string>
   <string name="no_usages_found">Nessun uso trovato</string>
   <string name="usages_on_commons_heading">Commons</string>
   <string name="usages_on_other_wikis_heading">Altri wiki</string>

@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
 import java.util.concurrent.Callable
+import java.util.concurrent.CancellationException
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
 class CsrfTokenClient(
@@ -22,6 +23,7 @@ class CsrfTokenClient(
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
 
+    @Suppress("TooGenericExceptionCaught")
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
@@ -44,25 +46,38 @@ class CsrfTokenClient(
                             },
                         ).get()
 
-                token =
-                    response
-                        .body()
-                        ?.query()
-                        ?.csrfToken()
-                        .orEmpty()
-                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
-                    throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
-                }
-                if (token.isNotEmpty()) {
+                val receivedToken = response.body()?.query()?.csrfToken()
+                if (!receivedToken.isNullOrEmpty()) {
+                    token = verifyToken(receivedToken)
                     break
                 }
             } catch (e: LoginFailedException) {
-                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, e)
-            } catch (t: Throwable) {
-                Timber.w(t)
+                invalidLoginToken(e)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: InterruptedException) {
+                Thread.currentThread().interrupt()
+                Timber.w(e)
+            } catch (e: Exception) {
+                // External login and token calls can fail in many ways, so transient failures are retried.
+                Timber.w(e)
             }
         }
 
+        return requireToken(token)
+    }
+
+    private fun invalidLoginToken(cause: Throwable?): Nothing =
+        throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE, cause)
+
+    private fun verifyToken(token: String): String {
+        if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
+            throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+        }
+        return token
+    }
+
+    private fun requireToken(token: String): String {
         if (token.isEmpty() || token == ANON_TOKEN) {
             throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
         }

@@ -13,6 +13,9 @@ import java.text.Normalizer
 import java.util.Arrays
 import java.util.Locale
 
+// Suppressed TooManyFunctions because its methods are URL/text accessors, equality
+// contracts, and Parcelable serialization belonging to this single page-title model.
+
 /**
  * Represents certain vital information about a page, including the title, namespace,
  * and fragment (section anchor target).  It can also contain a thumbnail URL for the
@@ -22,10 +25,11 @@ import java.util.Locale
  * description can be altered after construction. Therefore do NOT rely on all the fields
  * of a PageTitle to remain constant for the lifetime of the object.
  */
+@Suppress("TooManyFunctions")
 class PageTitle : Parcelable {
-    // TODO: remove. This legacy code is the localized namespace name (File, Special, Talk, etc) but
-    //       isn't consistent across titles. e.g., articles with colons, such as RTÉ News: Six One,
-    //       are broken.
+    // The text before the first colon is taken as the namespace (File, Category, etc.), so a
+    // main namespace title with a colon, such as "RTÉ News: Six One", is not split correctly.
+    // This app doesn't deal with main namespace pages for now, so that is not a problem here.
 
     /**
      * The localised namespace of the page as a string, or null if the page is in mainspace.
@@ -51,9 +55,6 @@ class PageTitle : Parcelable {
     val wikiSite: WikiSite
     var description: String? = null
     private val properties: PageProperties?
-
-    // TODO: remove after the restbase endpoint supports ZH variants.
-    private var convertedText: String? = null
 
     constructor(namespace: String?, text: String, fragment: String?, thumbUrl: String?, wiki: WikiSite) {
         this.namespace = namespace
@@ -94,7 +95,7 @@ class PageTitle : Parcelable {
 
     private constructor(input: String?, wiki: WikiSite, thumbUrl: String?, properties: PageProperties?) {
         var text = input ?: ""
-        // FIXME: Does not handle mainspace articles with a colon in the title well at all
+        // Main namespace titles with a colon are not handled, see the note on namespace above
         val fragParts = text.split("#".toRegex()).toTypedArray()
         text = fragParts[0]
         fragment =
@@ -146,19 +147,11 @@ class PageTitle : Parcelable {
 
     private fun getTextWithoutSpaces(): String = text.replace(" ", "_")
 
-    fun getConvertedText(): String = if (convertedText == null) prefixedText else convertedText!!
-
-    fun setConvertedText(convertedText: String?) {
-        this.convertedText = convertedText
-    }
-
     val displayText: String
         get() = prefixedText.replace("_", " ")
 
     val displayTextWithoutNamespace: String
         get() = text.replace("_", " ")
-
-    fun hasProperties(): Boolean = properties != null
 
     val isMainPage: Boolean
         get() = properties != null && properties.isMainPage
@@ -171,21 +164,6 @@ class PageTitle : Parcelable {
 
     val mobileUri: String
         get() = getUriForDomain(wikiSite.mobileAuthority())
-
-    fun getUriForAction(action: String?): String {
-        try {
-            return String.format(
-                Locale.ROOT,
-                "%1\$s://%2\$s/w/index.php?title=%3\$s&action=%4\$s",
-                wikiSite.scheme(),
-                wikiSite.authority(),
-                URLEncoder.encode(prefixedText, "utf-8"),
-                action,
-            )
-        } catch (e: UnsupportedEncodingException) {
-            throw IllegalStateException(e)
-        }
-    }
 
     // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
@@ -206,7 +184,6 @@ class PageTitle : Parcelable {
         parcel.writeParcelable(properties, flags)
         parcel.writeString(thumbUrl)
         parcel.writeString(description)
-        parcel.writeString(convertedText)
     }
 
     override fun equals(o: Any?): Boolean {
@@ -268,7 +245,6 @@ class PageTitle : Parcelable {
         properties = parcel.readParcelable(PageProperties::class.java.classLoader)
         thumbUrl = parcel.readString()
         description = parcel.readString()
-        convertedText = parcel.readString()
     }
 
     companion object {
@@ -278,28 +254,6 @@ class PageTitle : Parcelable {
                 override fun createFromParcel(parcel: Parcel): PageTitle = PageTitle(parcel)
 
                 override fun newArray(size: Int): Array<PageTitle?> = arrayOfNulls(size)
-            }
-
-        /**
-         * Creates a new PageTitle object.
-         * Use this if you want to pass in a fragment portion separately from the title.
-         *
-         * @param prefixedText title of the page with optional namespace prefix
-         * @param fragment optional fragment portion
-         * @param wiki the wiki site the page belongs to
-         * @return a new PageTitle object matching the given input parameters
-         */
-        fun withSeparateFragment(
-            prefixedText: String,
-            fragment: String?,
-            wiki: WikiSite,
-        ): PageTitle =
-            if (TextUtils.isEmpty(fragment)) {
-                PageTitle(prefixedText, wiki, null, null as PageProperties?)
-            } else {
-                // TODO: this class needs some refactoring to allow passing in a fragment
-                // without having to do string manipulations.
-                PageTitle("$prefixedText#$fragment", wiki, null, null as PageProperties?)
             }
     }
 }

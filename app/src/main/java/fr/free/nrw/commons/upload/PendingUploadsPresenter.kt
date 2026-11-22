@@ -9,6 +9,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_FAILED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_IN_PROGRESS
+import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_METADATA_PENDING
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_PAUSED
 import fr.free.nrw.commons.contributions.Contribution.Companion.STATE_QUEUED
 import fr.free.nrw.commons.contributions.ContributionBoundaryCallback
@@ -56,8 +57,9 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
-                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED),
+                contributionsRepository.fetchContributionsWithStates(
+                    listOf(STATE_QUEUED, STATE_IN_PROGRESS, STATE_PAUSED, STATE_METADATA_PENDING),
+                    sortedByDateUploadStarted = true,
                 )
             totalContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
@@ -76,14 +78,14 @@ class PendingUploadsPresenter
                     .build()
 
             val factory =
-                contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
+                contributionsRepository.fetchContributionsWithStates(
                     listOf(STATE_FAILED),
+                    sortedByDateUploadStarted = true,
                 )
             failedContributionList = LivePagedListBuilder(factory, pagedListConfig).build()
         }
 
-        override fun onAttachView(view: PendingUploadsContract.View) {
-        }
+        override fun onAttachView(view: PendingUploadsContract.View) = Unit
 
         override fun onDetachView() {
             compositeDisposable.clear()

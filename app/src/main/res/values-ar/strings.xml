@@ -21,6 +21,7 @@
 * Mr. Ibrahem
 * NEHAOUA
 * NancyMilad
+* Nicolas Raoul
 * OsamaK
 * Tala Ali
 * XIDME
@@ -138,6 +139,8 @@
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">الفشل في التحميل</string>
+  <string name="upload_metadata_pending_notification_title">يتم تحميل %1$s ، ولكن لا يتم حفظ أسمائها وصورها بعد</string>
+  <string name="upload_metadata_pending">تم تحميل، الأسطوانات والصور لم يتم حفظها بعد</string>
   <string name="upload_paused_notification_title">جرى إيقاف تحميل %1$s مؤقتًا</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <string name="upload_paused_notification_subtitle">انقر للعرض</string>
@@ -156,6 +159,10 @@
   <string name="menu_view_file_page">عرض صفحة الملف</string>
   <string name="share_title_hint">العنوان (مطلوب)</string>
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
+  <string name="file_name_blacklisted_toast">لا يقبل كومنز هذا الاسم الملفي من فضلكم استخدموا أسمائكم أكثر وصفية</string>
+  <string name="file_name_too_long_toast">هذا العنوان طويل جداً لا يمكن استخدامه باسم الملف من فضلك اقصر</string>
+  <string name="file_name_invalid_toast">لا يمكن استخدام هذا العنوان باسم ملف في كومنز. أرجوكِ غيره</string>
+  <string name="file_name_banned_extension_toast">هذا العنوان يحتوي على نوع ملف مثل \".com\". أرجوكِ غيره</string>
   <string name="share_description_hint">الوصف</string>
   <string name="share_caption_hint">التعليق</string>
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
@@ -175,10 +182,11 @@
   <string name="refresh_button">أنعش</string>
   <string name="display_list_button">القائمة</string>
   <string name="contributions_subtitle_zero">(لا يوجد تحميلات حتى الآن)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="depictions_not_found">لا توجد عناصر ويكي بيانات مطابقة لـ s$%1</string>
+  <string name="depictions_not_found">لا توجد عناصر ويكي بيانات مطابقة لـ %1$s</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
-  <string name="no_parent_classes">لا يملك تصنيف الأهل  s$%1</string>
+  <string name="no_parent_classes">لا يملك تصنيف الأهل  %1$s</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="title_activity_settings">الإعدادات</string>
@@ -270,6 +278,12 @@
   <string name="media_detail_license">الترخيص</string>
   <string name="media_detail_coordinates">الإحداثيات</string>
   <string name="media_detail_coordinates_empty">غير متوفر</string>
+  <string name="playback_quality">جودة التشغيل</string>
+  <string name="original">الأصلية</string>
+  <string name="video_quality">جودة الفيديو</string>
+  <string name="video_quality_auto">تلقائي</string>
+  <string name="video_quality_higher">جودة الصورة أعلى</string>
+  <string name="video_quality_data_saver">محفظة البيانات</string>
   <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
@@ -346,6 +360,7 @@
   <string name="upload_location_access_denied">رُفض الوصول إلى الموقع. يرجى ضبط موقعك يدويًا لاستخدام هذه الميزة.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
   <string name="location_permission_rationale_explore">الإذن مطلوب لعرض قائمة الصور القريبة</string>
+  <string name="nearby_bookmark">علامة الكتاب</string>
   <string name="nearby_directions">الاتجاهات</string>
   <string name="nearby_wikidata">ويكي بيانات</string>
   <string name="nearby_wikipedia">ويكيبيديا</string>
@@ -452,12 +467,14 @@
   <string name="images_used_explanation">عدد الصور التي قمت برفعها إلى كومنز والتي تم استخدامها في مقالات ويكيميديا</string>
   <string name="error_occurred">حدث خطأ!</string>
   <string name="notifications_channel_name_all">إشعار كومنز</string>
+  <string name="notifications_channel_name_uploads">تقدم التحميل</string>
   <string name="preference_author_name_toggle">استخدم اسم مؤلف مخصصا</string>
   <string name="preference_author_name_toggle_summary">استخدم اسم مؤلف مخصصا بدلا من اسم المستخدم الخاص بك أثناء رفع الصور</string>
   <string name="preference_author_name">اسم المؤلف المخصص</string>
   <string name="contributions_fragment">مساهمات</string>
   <string name="nearby_fragment">مجاور</string>
   <string name="notifications">الإشعارات</string>
+  <string name="notification_count_cap">99+</string>
   <string name="read_notifications">الإخطارات (مقروءة)</string>
   <string name="display_nearby_notification">عرض الإخطار القريب</string>
   <string name="display_nearby_notification_summary">عرض إشعار داخل-التطبيق In-app لأقرب مكان يحتاج إلى صور</string>
@@ -734,6 +751,8 @@
   <string name="resuming_upload">جاري استئناف التحميل ...</string>
   <string name="pausing_upload">جاري إيقاف التحميل مؤقتًا ..</string>
   <string name="cancelling_upload">الغاء التحميل</string>
+  <string name="retrying_upload">إعادة محاولة التحميل…</string>
+  <string name="retrying_failed_uploads">إعادة محاولة جميع عمليات التحميل الفاشلة...</string>
   <string name="cancel_upload">إلغاء الرفع</string>
   <string name="limited_connection_explanation">لقد قمت بتمكين وضع الاتصال المحدود. جميع عمليات التحميل متوقفة مؤقتًا وستستأنف بمجرد تعطيل هذا الوضع.</string>
   <string name="limited_connection_is_on">وضع الاتصال المحدود قيد التشغيل.</string>
@@ -875,7 +894,8 @@
   </plurals>
   <string name="multiple_files_depiction">يرجى تذكر أن جميع الصور في التحميل المتعدد تحصل على نفس الفئات والأوصاف. إذا لم تتشارك الصور في الأوصاف والفئات، فيرجى إجراء عدة عمليات تحميل منفصلة.</string>
   <string name="multiple_files_depiction_header">ملاحظة حول التحميلات المتعددة</string>
-  <string name="nearby_wikitalk">الإبلاغ عن مشكلة حول هذا العنصر إلى ويكي بيانات</string>
+  <string name="nearby_report_problem">الإبلاغ عن مشكلة حول هذا العنصر إلى ويكي بيانات</string>
+  <string name="nearby_report_problem_short">مشكلة الإبلاغ</string>
   <string name="please_enter_some_comments">الرجاء إدخال بعض التعليقات</string>
   <string name="talk">نقاش</string>
   <string name="write_something_about_the_item">اكتب شيئًا عن العنصر \'%1$s\'. سيكون مرئيًا للعامة.</string>
@@ -904,6 +924,10 @@
   <string name="green_pin">هذا المكان لديه صورة بالفعل.</string>
   <string name="grey_pin">الآن التحقق ما إذا كان هذا المكان لديه صورة.</string>
   <string name="error_while_loading">خطأ أثناء التحميل</string>
+  <string name="play_video">ألعاب الفيديو</string>
+  <string name="play_audio">تشغيل الصوت</string>
+  <string name="video_unavailable">لا يوجد فيديو اضغط على محاولة ثانية</string>
+  <string name="audio_unavailable">الصوت غير متوفر اضغط على محاولة ثانية</string>
   <string name="no_usages_found">لم يتم العثور على حالات استخدام</string>
   <string name="usages_on_commons_heading">كومنز</string>
   <string name="usages_on_other_wikis_heading">مواقع ويكي أخرى</string>
@@ -921,6 +945,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">تم إنشاؤه بواسطة %1$s وتم تحميله بواسطة %2$s</string>
   <string name="nominated_for_deletion_btn">مرشح للحذف</string>
   <string name="custom_selector_max_image_limit_reached">يمكنك فقط تحديد الحد الأقصى من الصور %d.</string>
+  <string name="upload_limit_exceeded">سيتم تحميل أول %1$d صورة فقط.</string>
   <string name="edit_unsupported_format_explanation">تتوفر خاصية التحرير داخل التطبيق لملفات JPEG فقط. لتحرير الصيغ الأخرى، يُرجى استخدام أداة خارجية.</string>
   <string name="license_cc0_description">لا توجد حقوق ملكية فكرية. أنت تتنازل عن جميع الحقوق، لذا يمكن لأي شخص استخدام هذا العمل بأي شكل من الأشكال.</string>
   <string name="license_cc_by_description">الإسناد. يحق للآخرين المشاركة والتعديل طالما أنهم ينسبون الفضل إليك.</string>
@@ -934,6 +959,8 @@
   <string name="failed_to_apply_crop">فشل في تطبيق المحصول</string>
   <string name="failed_to_save_image">فشل حفظ الصورة</string>
   <string name="format_jpeg">جيه بي إي جي</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
   <string name="format_ogg_audio">OGG (صوتي)</string>
   <string name="unsupported_format_title">تنسيق غير مدعوم</string>
   <string name="unsupported_format_desc">تعذر فتح الملفات المحددة. يتطلب ويكيميديا كومنز التنسيقات التالية بشكل صارم: \n\n%s</string>

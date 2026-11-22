@@ -23,7 +23,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:ellipsize="end"
+    android:gravity="center_horizontal"
+    android:maxLines="2"
     android:paddingTop="@dimen/activity_margin_horizontal"
-    android:text="CAMERA"
-    android:visibility="gone" />
+    android:textAlignment="center" />
 </LinearLayout>
