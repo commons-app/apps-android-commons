@@ -324,9 +324,6 @@ class ContributionsFragment(
     private fun Contribution.isRetriedAfterFailure() =
         state == Contribution.STATE_FAILED || state == Contribution.STATE_METADATA_PENDING
 
-    private fun hasLoggedInAccount(): Boolean =
-        sessionManager!!.isUserLoggedIn && sessionManager!!.currentAccount != null
-
     companion object {
         const val MEDIA_DETAIL_PAGER_FRAGMENT_TAG: String = "MediaDetailFragmentTag"
         private const val MAX_RETRIES = 10
@@ -340,3 +337,6 @@ class ContributionsFragment(
         }
     }
 }
+
+private fun ContributionsFragment.hasLoggedInAccount(): Boolean =
+    sessionManager!!.isUserLoggedIn && sessionManager!!.currentAccount != null
