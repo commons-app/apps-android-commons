@@ -1,3 +1,9 @@
+/**
+ * Suppressed TooGenericExceptionCaught because setting an avatar can fail with a variety of
+ * runtime exceptions while the progress dialog still needs to be dismissed.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.utils
 
 import android.app.NotificationChannel
@@ -25,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.io.IOException
 
 /**
  * Created by blueSir9 on 3/10/17.
@@ -72,6 +79,27 @@ object ImageUtils {
     const val FILE_NAME_EXISTS = 1 shl 6 // 64
     const val NO_CATEGORY_SELECTED = -5
     const val IMAGE_FORMAT_UNSUPPORTED = 1 shl 7 // 128
+
+    /**
+     * The file name is on the title blacklist of Commons, so the upload would be rejected
+     */
+    const val FILE_NAME_BLACKLISTED = 1 shl 8 // 256
+
+    /**
+     * The file name is longer than Commons allows, so the upload would be rejected
+     */
+    const val FILE_NAME_TOO_LONG = 1 shl 9 // 512
+
+    /**
+     * The file name is not a valid title on Commons, so the upload would be rejected
+     */
+    const val FILE_NAME_INVALID = 1 shl 10 // 1024
+
+    /**
+     * A part of the file name after a dot is an extension that Commons does not accept, for
+     * example "com" in "Visit konga.com.jpg", so the upload would be rejected
+     */
+    const val FILE_NAME_BANNED_EXTENSION = 1 shl 11 // 2048
     private const val MAX_GEOLOCATION_DIFFERENCE_METERS = 1000
     private const val BRIGHT_PIXEL_RATIO_THRESHOLD = 0.025
     private const val MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD = 0.3
@@ -118,7 +146,7 @@ object ImageUtils {
             } else {
                 IMAGE_OK
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Timber.d(e, "Error while checking image darkness.")
             IMAGE_OK
         } finally {
@@ -169,9 +197,13 @@ object ImageUtils {
         val brightPixelThreshold = BRIGHT_PIXEL_RATIO_THRESHOLD * allPixelsCount
         val mediumBrightPixelThreshold = MEDIUM_BRIGHT_PIXEL_RATIO_THRESHOLD * allPixelsCount
 
-        for (x in 0 until bitmapWidth) {
-            for (y in 0 until bitmapHeight) {
-                val pixel = bitmap.getPixel(x, y)
+        val highBrightnessLuminance = HIGH_BRIGHTNESS_LUMINANCE
+        val mediumBrightnessLuminance = MEDIUM_BRIGHTNESS_LUMINANCE
+
+        val rowPixels = IntArray(bitmapWidth)
+        for (y in 0 until bitmapHeight) {
+            bitmap.getPixels(rowPixels, 0, bitmapWidth, 0, y, bitmapWidth, 1)
+            for (pixel in rowPixels) {
                 val r = Color.red(pixel)
                 val g = Color.green(pixel)
                 val b = Color.blue(pixel)
@@ -180,9 +212,6 @@ object ImageUtils {
                 val min = minOf(r, g, b) / MAX_RGB_VALUE
 
                 val luminance = ((max + min) / 2.0) * 100
-
-                val highBrightnessLuminance = HIGH_BRIGHTNESS_LUMINANCE
-                val mediumBrightnessLuminance = MEDIUM_BRIGHTNESS_LUMINANCE
 
                 if (luminance < highBrightnessLuminance) {
                     if (luminance > mediumBrightnessLuminance) {

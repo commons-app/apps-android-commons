@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.MergeAdapter
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
@@ -26,7 +25,6 @@ import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import java.util.Objects
 import javax.inject.Inject
 
 /**
@@ -51,6 +49,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     private var scrollToRank = false
     private var userName: String? = null
     private var binding: FragmentLeaderboardBinding? = null
+    private var viewController: LeaderboardViewController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +62,9 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
+        viewController = LeaderboardViewController(binding!!)
 
-        hideLayouts()
+        viewController?.hideLayouts()
 
         // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
         if (isBetaFlavour) {
@@ -74,7 +74,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         }
 
         binding!!.progressBar.visibility = View.VISIBLE
-        setSpinners()
+        viewController?.setSpinners()
 
         /*
          * This array is for the duration filter, we have three filters weekly, yearly and all-time
@@ -156,7 +156,15 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
      */
     private fun scrollToUserRank() {
         if (userRank == 0) {
-            Toast.makeText(context, R.string.no_achievements_yet, Toast.LENGTH_SHORT).show()
+            context?.let { ctx ->
+                val message =
+                    if (!userName.isNullOrBlank() && userName != sessionManager.userName) {
+                        ctx.getString(R.string.no_achievements_yet, userName)
+                    } else {
+                        ctx.getString(R.string.you_have_no_achievements_yet)
+                    }
+                Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show()
+            }
         } else {
             if (binding == null) {
                 return
@@ -175,29 +183,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     }
 
     /**
-     * Set the spinners for the leaderboard filters
-     */
-    private fun setSpinners() {
-        val categoryAdapter =
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.leaderboard_categories,
-                android.R.layout.simple_spinner_item,
-            )
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.categorySpinner.adapter = categoryAdapter
-
-        val durationAdapter =
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.leaderboard_durations,
-                android.R.layout.simple_spinner_item,
-            )
-        durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.durationSpinner.adapter = durationAdapter
-    }
-
-    /**
      * To call the API to get results
      * which then sets the views using setLeaderboardUser method
      */
@@ -208,33 +193,30 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         offset: Int,
     ) {
         if (checkAccount()) {
-            try {
-                compositeDisposable.add(
-                    okHttpJsonApiClient
-                        .getLeaderboard(
-                            Objects.requireNonNull(userName),
-                            duration,
-                            category,
-                            null,
-                            null,
-                        ).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            { response: LeaderboardResponse? ->
-                                if (response != null && response.status == 200) {
-                                    userRank = response.rank!!
-                                    setViews(response, duration, category, limit, offset)
-                                }
-                            },
-                            { t: Throwable? ->
-                                Timber.e(t, "Fetching leaderboard statistics failed")
-                                onError()
-                            },
-                        ),
-                )
-            } catch (e: Exception) {
-                Timber.d(e, "success")
-            }
+            val userName = userName ?: return
+            compositeDisposable.add(
+                okHttpJsonApiClient
+                    .getLeaderboard(
+                        userName,
+                        duration,
+                        category,
+                        null,
+                        null,
+                    ).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { response: LeaderboardResponse? ->
+                            if (response != null && response.status == 200) {
+                                userRank = response.rank!!
+                                setViews(response, duration, category, limit, offset)
+                            }
+                        },
+                        { t: Throwable? ->
+                            Timber.e(t, "Fetching leaderboard statistics failed")
+                            onError()
+                        },
+                    ),
+            )
         }
     }
 
@@ -257,19 +239,19 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
         viewModel!!.setParams(duration, category, limit, offset)
         val leaderboardListAdapter = LeaderboardListAdapter()
         val userDetailAdapter = UserDetailAdapter(response)
-        val mergeAdapter = MergeAdapter(userDetailAdapter, leaderboardListAdapter)
+        val concatAdapter = ConcatAdapter(userDetailAdapter, leaderboardListAdapter)
         val linearLayoutManager = LinearLayoutManager(context)
         binding!!.leaderboardList.layoutManager = linearLayoutManager
-        binding!!.leaderboardList.adapter = mergeAdapter
+        binding!!.leaderboardList.adapter = concatAdapter
         viewModel!!.listLiveData.observe(viewLifecycleOwner, leaderboardListAdapter::submitList)
 
         viewModel!!.progressLoadStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
                 LOADING -> {
-                    showProgressBar()
+                    viewController?.showProgressBar()
                 }
                 LOADED -> {
-                    hideProgressBar()
+                    viewController?.hideProgressBar()
                     if (scrollToRank) {
                         binding!!.leaderboardList.smoothScrollToPosition(userRank + 1)
                     }
@@ -277,37 +259,6 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
             }
         }
     }
-
-    /**
-     * to hide progressbar
-     */
-    private fun hideProgressBar() =
-        binding?.let {
-            it.progressBar.visibility = View.GONE
-            it.categorySpinner.visibility = View.VISIBLE
-            it.durationSpinner.visibility = View.VISIBLE
-            it.scroll.visibility = View.VISIBLE
-            it.leaderboardList.visibility = View.VISIBLE
-        }
-
-    /**
-     * to show progressbar
-     */
-    private fun showProgressBar() =
-        binding?.let {
-            it.progressBar.visibility = View.VISIBLE
-            it.scroll.visibility = View.INVISIBLE
-        }
-
-    /**
-     * used to hide the layouts while fetching results from api
-     */
-    private fun hideLayouts() =
-        binding?.let {
-            it.categorySpinner.visibility = View.INVISIBLE
-            it.durationSpinner.visibility = View.INVISIBLE
-            it.leaderboardList.visibility = View.INVISIBLE
-        }
 
     /**
      * check to ensure that user is logged in
@@ -340,6 +291,7 @@ class LeaderboardFragment : CommonsDaggerSupportFragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        viewController = null
         binding = null
     }
 

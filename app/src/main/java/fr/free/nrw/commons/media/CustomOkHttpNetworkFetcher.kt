@@ -21,6 +21,7 @@ import okhttp3.Response
 import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.Executor
+import java.util.concurrent.RejectedExecutionException
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -93,8 +94,12 @@ class CustomOkHttpNetworkFetcher
                 }
 
                 fetchWithRequest(fetchState, callback, requestBuilder.build())
-            } catch (e: Exception) {
+            } catch (e: IllegalArgumentException) {
                 // handle error while creating the request
+                callback.onFailure(e)
+            } catch (e: IllegalStateException) {
+                callback.onFailure(e)
+            } catch (e: RejectedExecutionException) {
                 callback.onFailure(e)
             }
         }
@@ -157,7 +162,12 @@ class CustomOkHttpNetworkFetcher
         ) {
             fetchState.responseTime = SystemClock.elapsedRealtime()
             try {
-                response.body.use { body ->
+                val body = response.body
+                if (body == null) {
+                    handleException(call, IOException("Empty response body"), callback)
+                    return
+                }
+                body.use { responseBody ->
                     if (!response.isSuccessful) {
                         handleException(call, IOException("Unexpected HTTP code $response"), callback)
                         return
@@ -172,13 +182,17 @@ class CustomOkHttpNetworkFetcher
                         fetchState.onNewResultStatusFlags = Consumer.IS_PARTIAL_RESULT
                     }
 
-                    var contentLength = body!!.contentLength()
+                    var contentLength = responseBody.contentLength()
                     if (contentLength < 0) {
                         contentLength = 0
                     }
-                    callback.onResponse(body.byteStream(), contentLength.toInt())
+                    callback.onResponse(responseBody.byteStream(), contentLength.toInt())
                 }
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                handleException(call, e, callback)
+            } catch (e: IllegalStateException) {
+                handleException(call, e, callback)
+            } catch (e: IllegalArgumentException) {
                 handleException(call, e, callback)
             }
         }

@@ -52,16 +52,14 @@ class UploadProgressActivity : BaseActivity() {
                     position: Int,
                     positionOffset: Float,
                     positionOffsetPixels: Int,
-                ) {
-                }
+                ) = Unit
 
                 override fun onPageSelected(position: Int) {
                     updateMenuItems(position)
                     binding.uploadProgressViewPager.canScroll = (position != 2)
                 }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                }
+                override fun onPageScrollStateChanged(state: Int) = Unit
             },
         )
         setTabs()
@@ -215,6 +213,7 @@ class UploadProgressActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_TARGET_TAB = "upload_target_tab"
+        const val TAB_PENDING = 0
         const val TAB_FAILED = 1
     }
 }

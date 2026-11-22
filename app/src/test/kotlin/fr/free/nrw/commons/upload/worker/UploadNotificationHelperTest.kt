@@ -17,6 +17,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -24,6 +25,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -142,6 +144,33 @@ class UploadNotificationHelperTest {
     }
 
     @Test
+    fun testShowFailedNotificationForUploadedFileOpensPendingUploads() {
+        val contribution = createMockContribution()
+        contribution.state = Contribution.STATE_METADATA_PENDING
+        val captor = argumentCaptor<Notification>()
+        notificationHelper.showFailedNotification(contribution)
+
+        verify(notificationManager).notify(
+            eq("test-tag"),
+            eq(1001),
+            captor.capture(),
+        )
+        val notification = captor.firstValue
+        assertEquals(
+            context.getString(
+                R.string.upload_metadata_pending_notification_title,
+                contribution.media.displayTitle,
+            ),
+            notification.extras.getString(NotificationCompat.EXTRA_TITLE),
+        )
+        val intent = shadowOf(notification.contentIntent).savedIntent
+        assertEquals(
+            UploadProgressActivity.TAB_PENDING,
+            intent.getIntExtra(UploadProgressActivity.EXTRA_TARGET_TAB, -1),
+        )
+    }
+
+    @Test
     fun testShowFailedNotification() {
         val contribution = createMockContribution()
         val captor = argumentCaptor<Notification>()
@@ -217,6 +246,25 @@ class UploadNotificationHelperTest {
         assertEquals(
             "Stash upload failed with verification error",
             notification.extras.getString(NotificationCompat.EXTRA_TEXT),
+        )
+    }
+
+    @Test
+    fun testShowErrorNotification_serverErrorShowsClearReason() {
+        val contribution = createMockContribution()
+        contribution.errorInfo = "Unsuccessful response: HTTP 503"
+
+        val captor = argumentCaptor<Notification>()
+        notificationHelper.showErrorNotification(contribution)
+
+        verify(notificationManager).notify(
+            eq("test-tag"),
+            eq(1001),
+            captor.capture(),
+        )
+        assertEquals(
+            context.getString(R.string.upload_failed_server_error, 503),
+            captor.firstValue.extras.getString(NotificationCompat.EXTRA_TEXT),
         )
     }
 

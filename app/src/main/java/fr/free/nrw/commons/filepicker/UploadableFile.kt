@@ -3,6 +3,7 @@ package fr.free.nrw.commons.filepicker
 import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
+import android.database.CursorIndexOutOfBoundsException
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
@@ -13,6 +14,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.util.Date
+import java.util.Locale
 
 class UploadableFile : Parcelable {
     val contentUri: Uri
@@ -71,7 +73,13 @@ class UploadableFile : Parcelable {
                     DateTimeWithSource.CP_SOURCE,
                 )
             }
-        } catch (e: Exception) {
+        } catch (e: SecurityException) {
+            Timber.tag("UploadableFile").d(e)
+            null
+        } catch (e: IllegalArgumentException) {
+            Timber.tag("UploadableFile").d(e)
+            null
+        } catch (e: CursorIndexOutOfBoundsException) {
             Timber.tag("UploadableFile").d(e)
             null
         }
@@ -96,11 +104,11 @@ class UploadableFile : Parcelable {
         return try {
             val exif = ExifInterface(file.absolutePath)
             val dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL)
-            if (dateTimeSubString != null) {
+            if (dateTimeSubString != null && dateTimeSubString.length >= 10) {
                 val year = dateTimeSubString.substring(0, 4).toInt()
                 val month = dateTimeSubString.substring(5, 7).toInt()
                 val day = dateTimeSubString.substring(8, 10).toInt()
-                val dateCreatedString = "%04d-%02d-%02d".format(year, month, day)
+                val dateCreatedString = "%04d-%02d-%02d".format(Locale.ROOT, year, month, day)
                 if (dateCreatedString.length == 10) {
                     @SuppressLint("RestrictedApi")
                     val dateTime = exif.dateTimeOriginal
@@ -111,7 +119,10 @@ class UploadableFile : Parcelable {
                 }
             }
             null
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            Timber.tag("UploadableFile").d(e)
+            null
+        } catch (e: NumberFormatException) {
             Timber.tag("UploadableFile").d(e)
             null
         }

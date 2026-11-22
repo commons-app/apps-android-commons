@@ -71,13 +71,33 @@ class BookmarkFragment : CommonsDaggerSupportFragment() {
      */
     fun setupTabLayout() {
         binding!!.tabLayout.visibility = View.VISIBLE
+        context?.resources?.configuration?.orientation?.let { orientation ->
+            updateTabMode(orientation)
+        }
         if (adapter!!.count == 1) {
             binding!!.tabLayout.visibility = View.GONE
         }
     }
 
+    override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
+        super.onConfigurationChanged(newConfig)
+        updateTabMode(newConfig.orientation)
+    }
+
+    private fun updateTabMode(orientation: Int) {
+        if (orientation == android.content.res.Configuration.ORIENTATION_LANDSCAPE) {
+            binding?.tabLayout?.tabMode = com.google.android.material.tabs.TabLayout.MODE_FIXED
+            binding?.tabLayout?.tabGravity = com.google.android.material.tabs.TabLayout.GRAVITY_FILL
+        } else {
+            binding?.tabLayout?.tabMode = com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
+            binding?.tabLayout?.tabGravity = com.google.android.material.tabs.TabLayout.GRAVITY_FILL
+        }
+    }
+
     fun onBackPressed() {
-        if (((adapter!!.getItem(binding!!.tabLayout.selectedTabPosition)) as BookmarkListRootFragment).backPressed()) {
+        val position = binding!!.tabLayout.selectedTabPosition
+        val rootFragment = adapter!!.getItem(position) as BookmarkListRootFragment
+        if (rootFragment.navigator.backPressed()) {
             // The event is handled internally by the adapter , no further action required.
             return
         }

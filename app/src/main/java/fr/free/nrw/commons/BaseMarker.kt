@@ -39,9 +39,6 @@ class BaseMarker {
             _icon = value
         }
 
-    constructor() {
-    }
-
     fun fromResource(
         context: Context,
         drawableResId: Int,

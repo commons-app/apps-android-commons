@@ -152,7 +152,12 @@ class LoginClient(
                             cb.error(LoginFailedException(loginResult.message))
                         }
                     } else {
-                        cb.error(IOException("Login failed. Unexpected response."))
+                        val apiError = response.body()?.errorMessage()
+                        if (apiError != null) {
+                            cb.error(LoginFailedException(apiError))
+                        } else {
+                            cb.error(IOException("Login failed. Unexpected response."))
+                        }
                     }
                 }
 
@@ -197,36 +202,57 @@ class LoginClient(
         lastLoginResult: LoginResult?,
         loginCallback: LoginCallback,
     ) {
-        getLoginToken().enqueue(
+        cancel()
+
+        tokenCall = getLoginToken()
+        tokenCall!!.enqueue(
             object : Callback<MwQueryResponse?> {
                 override fun onResponse(
                     call: Call<MwQueryResponse?>,
                     response: Response<MwQueryResponse?>,
-                ) = if (response.isSuccessful) {
-                    val loginToken = response.body()?.query()?.loginToken()
-                    loginToken?.let {
-                        login(
-                            LoginRequest(
-                                username = request.username,
-                                password = request.password,
-                                twoFactorCode = if (lastLoginResult is OAuthResult) request.twoFactorCode else null,
-                                emailAuthCode = if (lastLoginResult is EmailAuthResult) request.twoFactorCode else null,
-                                loginToken = it,
-                                userLanguage = request.userLanguage,
-                            ),
-                            loginCallback,
-                        )
-                    } ?: run {
+                ) {
+                    if (call.isCanceled) {
+                        return
+                    }
+                    if (response.isSuccessful) {
+                        val loginToken = response.body()?.query()?.loginToken()
+                        loginToken?.let {
+                            login(
+                                LoginRequest(
+                                    username = request.username,
+                                    password = request.password,
+                                    twoFactorCode =
+                                        if (lastLoginResult is OAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
+                                    emailAuthCode =
+                                        if (lastLoginResult is EmailAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
+                                    loginToken = it,
+                                    userLanguage = request.userLanguage,
+                                ),
+                                loginCallback,
+                            )
+                        } ?: run {
+                            loginCallback.error(IOException("Failed to retrieve login token"))
+                        }
+                    } else {
                         loginCallback.error(IOException("Failed to retrieve login token"))
                     }
-                } else {
-                    loginCallback.error(IOException("Failed to retrieve login token"))
                 }
 
                 override fun onFailure(
                     call: Call<MwQueryResponse?>,
                     t: Throwable,
                 ) {
+                    if (call.isCanceled) {
+                        return
+                    }
                     loginCallback.error(t)
                 }
             },

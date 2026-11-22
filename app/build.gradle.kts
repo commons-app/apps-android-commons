@@ -13,6 +13,12 @@ plugins {
 
 apply(from = "$rootDir/jacoco.gradle")
 
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+}
+
 val ktlintLegacyFiles: Set<String> =
     file("ktlint-legacy-files.txt")
         .readLines()
@@ -68,6 +74,11 @@ android {
     }
 
     sourceSets {
+        getByName("debug") {
+            // Room's MigrationTestHelper reads the exported schemas as assets.
+            assets.srcDirs("schemas")
+        }
+
         getByName("test") {
             // Use kotlin only in tests (for now)
             java.srcDirs("src/test/kotlin")
@@ -337,6 +348,7 @@ android {
         }
         unitTests.all {
             it.jvmArgs("-noverify")
+            it.maxHeapSize = "2g"
         }
     }
     lint {
@@ -361,6 +373,9 @@ dependencies {
     implementation(libs.rxbinding.appcompat)
     implementation(libs.facebook.fresco)
     implementation(libs.facebook.fresco.middleware)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.datasource.okhttp)
+    implementation(libs.media3.ui)
     implementation(libs.apache.commons.lang3)
 
     // UI
@@ -470,6 +485,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava)
     kapt(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
 
     // Preferences
     implementation(libs.androidx.preference)

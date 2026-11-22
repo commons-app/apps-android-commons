@@ -48,7 +48,9 @@ import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
  * then that must be mentioned here to inject the dependencies
  */
 @Module
-@Suppress("unused")
+// Suppressed TooManyFunctions because each function is a fragment binding
+// for Dagger dependency injection.
+@Suppress("unused", "TooManyFunctions")
 abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract fun bindContributionsListFragment(): ContributionsListFragment
