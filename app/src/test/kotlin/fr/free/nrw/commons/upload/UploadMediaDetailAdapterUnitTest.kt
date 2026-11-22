@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -218,6 +219,68 @@ class UploadMediaDetailAdapterUnitTest {
         verify(uploadMediaDetail).isManuallyAdded
     }
 
+    /**
+     * Binding another language row must not redirect the primary holder to that row's views.
+     */
+    @Test
+    fun testRebindingPrimaryHolderKeepsItsOwnCaptionView() {
+        adapter.items =
+            listOf(
+                UploadMediaDetail(languageCode = "en", captionText = "Primary caption"),
+                UploadMediaDetail(languageCode = "fr", captionText = "Secondary caption"),
+            )
+        adapter.onBindViewHolder(viewHolder, 0)
+        val secondaryHolder = adapter.onCreateViewHolder(GridLayout(activity), 0)
+        adapter.onBindViewHolder(secondaryHolder, 1)
+        adapter.onBindViewHolder(viewHolder, 0)
+
+        Assert.assertEquals(
+            "Primary caption",
+            viewHolder.binding.captionItemEditText.text
+                .toString(),
+        )
+        Assert.assertEquals(
+            "Secondary caption",
+            secondaryHolder.binding.captionItemEditText.text
+                .toString(),
+        )
+    }
+
+    /**
+     * Rebinding must replace the previous caption listener rather than accumulate callbacks.
+     */
+    @Test
+    fun testRebindingDoesNotDuplicatePrimaryCaptionCallbacks() {
+        adapter.items = listOf(UploadMediaDetail(languageCode = "en", captionText = "Caption"))
+        adapter.onBindViewHolder(viewHolder, 0)
+        adapter.onBindViewHolder(viewHolder, 0)
+        Mockito.clearInvocations(eventListener)
+
+        viewHolder.binding.captionItemEditText.setText("")
+
+        verify(eventListener, times(1)).onPrimaryCaptionTextChange(false)
+    }
+
+    /**
+     * A holder reused for another language must stop reporting primary-caption changes.
+     */
+    @Test
+    fun testRecycledSecondaryRowDoesNotChangePrimaryCaptionState() {
+        adapter.items =
+            listOf(
+                UploadMediaDetail(languageCode = "en", captionText = "Primary caption"),
+                UploadMediaDetail(languageCode = "fr", captionText = "Secondary caption"),
+            )
+        adapter.onBindViewHolder(viewHolder, 0)
+        adapter.onBindViewHolder(viewHolder, 1)
+        Mockito.clearInvocations(eventListener)
+
+        viewHolder.binding.captionItemEditText.setText("")
+
+        Mockito.verifyNoInteractions(eventListener)
+        Assert.assertEquals("Primary caption", adapter.items[0].captionText)
+    }
+
     @Test
     fun testHideRecentLanguagesSection() {
         val method: Method =
@@ -307,5 +370,18 @@ class UploadMediaDetailAdapterUnitTest {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
         Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1))
+    }
+
+    @Test
+    fun testSpeechInputWithoutRecognizerDoesNotCrash() {
+        val launcher = mock<ActivityResultLauncher<Intent>>()
+        Mockito.`when`(launcher.launch(any<Intent>())).thenThrow(ActivityNotFoundException())
+        Whitebox.setInternalState(adapter, "voiceInputResultLauncher", launcher)
+        val method = UploadMediaDetailAdapter::class.java.getDeclaredMethod("startSpeechInput", String::class.java)
+        method.isAccessible = true
+
+        method.invoke(adapter, "en")
+
+        verify(launcher).launch(any<Intent>())
     }
 }

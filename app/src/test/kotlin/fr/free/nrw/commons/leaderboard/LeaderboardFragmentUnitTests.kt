@@ -82,6 +82,7 @@ class LeaderboardFragmentUnitTests {
 
         Whitebox.setInternalState(fragment, "viewModel", viewModel)
         Whitebox.setInternalState(fragment, "mView", parentView)
+        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
     }
 
     @Test
@@ -109,13 +110,52 @@ class LeaderboardFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testScrollToUserRank() {
+    fun testScrollToUserRankForCurrentUser() {
+        Whitebox.setInternalState(fragment, "userName", "testUser")
+        `when`(sessionManager.userName).thenReturn("testUser")
         val method: Method =
             LeaderboardFragment::class.java.getDeclaredMethod(
                 "scrollToUserRank",
             )
         method.isAccessible = true
         method.invoke(fragment)
+        Assert.assertEquals(
+            context.getString(R.string.you_have_no_achievements_yet),
+            ShadowToast.getTextOfLatestToast().toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testScrollToUserRankForOtherUser() {
+        Whitebox.setInternalState(fragment, "userName", "otherUser")
+        `when`(sessionManager.userName).thenReturn("currentUser")
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "scrollToUserRank",
+            )
+        method.isAccessible = true
+        method.invoke(fragment)
+        Assert.assertEquals(
+            context.getString(R.string.no_achievements_yet, "otherUser"),
+            ShadowToast.getTextOfLatestToast().toString(),
+        )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testScrollToUserRankWhenUserNameNull() {
+        Whitebox.setInternalState(fragment, "userName", null as String?)
+        val method: Method =
+            LeaderboardFragment::class.java.getDeclaredMethod(
+                "scrollToUserRank",
+            )
+        method.isAccessible = true
+        method.invoke(fragment)
+        Assert.assertEquals(
+            context.getString(R.string.you_have_no_achievements_yet),
+            ShadowToast.getTextOfLatestToast().toString(),
+        )
     }
 
     @Test

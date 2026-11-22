@@ -19,6 +19,7 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.upload.worker.uploadErrorMessage
 import java.io.File
 
 /**
@@ -97,7 +98,7 @@ class FailedUploadsAdapter(
         if (item != null) {
             if (item.state == Contribution.STATE_FAILED) {
                 if (item.errorInfo != null) {
-                    holder.errorTextView.setText(item.errorInfo)
+                    holder.errorTextView.setText(uploadErrorMessage(holder.itemView.context, item.errorInfo))
                 } else {
                     holder.errorTextView.setText("Failed")
                 }

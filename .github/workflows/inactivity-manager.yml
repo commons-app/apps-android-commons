@@ -14,6 +14,7 @@ on:
 
 permissions:
   issues: write
+  pull-requests: read
 
 concurrency:
   group: inactivity-manager
@@ -58,7 +59,80 @@ jobs:
               return assignees.map(a => `@${a.login}`).join(', ');
             }
 
+            // caache the PR info: { isOpen: boolean, authorLogin: string | null, closedUnmergedAt: number | null }
+            const prInfoCache = new Map();
+            async function getPullRequestInfo(prNumber, fallbackIssueObj) {
+              if (prInfoCache.has(prNumber)) {
+                return prInfoCache.get(prNumber);
+              }
+              try {
+                const { data: pr } = await github.rest.pulls.get({
+                  owner,
+                  repo,
+                  pull_number: prNumber
+                });
+                const isOpen = pr.state === 'open';
+                const closedUnmergedAt =
+                  !isOpen && !pr.merged_at && pr.closed_at
+                    ? new Date(pr.closed_at).getTime()
+                    : null;
+                const info = {
+                  isOpen,
+                  authorLogin: pr.user?.login ? pr.user.login.toLowerCase() : null,
+                  closedUnmergedAt
+                };
+                prInfoCache.set(prNumber, info);
+                return info;
+              } catch (err) {
+                const isOpen = fallbackIssueObj?.state === 'open';
+                const closedUnmergedAt =
+                  !isOpen && fallbackIssueObj?.closed_at
+                    ? new Date(fallbackIssueObj.closed_at).getTime()
+                    : null;
+                const info = {
+                  isOpen,
+                  authorLogin: fallbackIssueObj?.user?.login ? fallbackIssueObj.user.login.toLowerCase() : null,
+                  closedUnmergedAt
+                };
+                prInfoCache.set(prNumber, info);
+                return info;
+              }
+            }
+
             // fetch allthe open issues
+            const openPrs = await github.paginate(github.rest.pulls.list, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const issuesWithOpenPrClosingRef = new Map();
+            const closingKeywordRegex = new RegExp(
+              `\\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\\s*:?\\s*(?:(?:${owner}\\/${repo}|https?:\\/\\/github\\.com\\/${owner}\\/${repo}\\/issues\\/)\\s*)?#(\\d+)\\b`,
+              'gi'
+            );
+
+            for (const pr of openPrs) {
+              prInfoCache.set(pr.number, {
+                isOpen: true,
+                authorLogin: pr.user?.login ? pr.user.login.toLowerCase() : null,
+                closedUnmergedAt: null
+              });
+
+              const text = `${pr.title || ''}\n${pr.body || ''}`;
+              let match;
+              closingKeywordRegex.lastIndex = 0;
+              while ((match = closingKeywordRegex.exec(text)) !== null) {
+                const refNum = Number(match[1]);
+                if (!issuesWithOpenPrClosingRef.has(refNum)) {
+                  issuesWithOpenPrClosingRef.set(refNum, []);
+                }
+                issuesWithOpenPrClosingRef.get(refNum).push(pr.number);
+              }
+            }
+
+            // fetch the all open issues
             const openIssues = await github.paginate(github.rest.issues.listForRepo, {
               owner,
               repo,
@@ -77,7 +151,14 @@ jobs:
               const assigneeLogins = new Set(issue.assignees.map(a => a.login.toLowerCase()));
               const mentions = formatAssignees(issue.assignees);
 
-              // 1. here, find the most recent 'assigned' event for any current assignee
+              // skip immediately if an open PR explicitly references this issue with a closing keyword
+              const closingPrs = issuesWithOpenPrClosingRef.get(issueNumber);
+              if (closingPrs && closingPrs.length > 0) {
+                core.info(`#${issueNumber}: Skipping - has open PR(s) with closing keyword #${closingPrs.join(', #')}.`);
+                continue;
+              }
+
+              // 1. fetch the timeline events for assignment timestamps & Development-sidebar linked PRs
               const timelineEvents = await github.paginate(github.rest.issues.listEventsForTimeline, {
                 owner,
                 repo,
@@ -85,6 +166,7 @@ jobs:
                 per_page: 100
               });
 
+              // find the most recent 'assigned' event for any current assignee
               let latestAssignedAt = new Date(issue.created_at).getTime();
               for (const event of timelineEvents) {
                 if (
@@ -100,20 +182,52 @@ jobs:
                 }
               }
 
-              // and also check if an assignee referenced this issue in a PR / cross-reference after assignment
+              // start timer from assignment, or from when a linked PR was closed without merging (if later)
               let latestAssigneeActivityAt = latestAssignedAt;
+              let openAssigneePrNumber = null;
+
               for (const event of timelineEvents) {
-                if (
-                  event.event === 'cross-referenced' &&
-                  event.actor &&
-                  assigneeLogins.has(event.actor.login.toLowerCase()) &&
-                  event.created_at
-                ) {
+                if (event.event !== 'cross-referenced') continue;
+
+                const actorLogin = event.actor?.login ? event.actor.login.toLowerCase() : null;
+                const sourceIssue = event.source?.issue;
+                const sourceAuthorLogin = sourceIssue?.user?.login ? sourceIssue.user.login.toLowerCase() : actorLogin;
+                const isSameRepo =
+                  !sourceIssue?.repository ||
+                  sourceIssue.repository.full_name?.toLowerCase() === `${owner}/${repo}`.toLowerCase();
+
+                // check if cross-reference comes from a PR in this repo
+                if (sourceIssue?.pull_request && isSameRepo) {
+                  const prNumber = sourceIssue.number;
+                  const prInfo = await getPullRequestInfo(prNumber, sourceIssue);
+                  const prAuthor = prInfo.authorLogin || sourceAuthorLogin;
+
+                  // skip if an assignee has an open PR referencing this issue (e.g. "Part of #N", "Addresses #N")
+                  if (prInfo.isOpen && prAuthor && assigneeLogins.has(prAuthor)) {
+                    openAssigneePrNumber = prNumber;
+                    break;
+                  }
+
+                  // If an assignee's PR was closed without merging, count its closure as activity so timer starts from then
+                  if (prInfo.closedUnmergedAt !== null && prAuthor && assigneeLogins.has(prAuthor)) {
+                    if (prInfo.closedUnmergedAt > latestAssigneeActivityAt) {
+                      latestAssigneeActivityAt = prInfo.closedUnmergedAt;
+                    }
+                  }
+                }
+
+                // keep counting any cross-referenced event triggered by a current assignee as activity
+                if (actorLogin && assigneeLogins.has(actorLogin) && event.created_at) {
                   const ts = new Date(event.created_at).getTime();
                   if (ts > latestAssigneeActivityAt) {
                     latestAssigneeActivityAt = ts;
                   }
                 }
+              }
+
+              if (openAssigneePrNumber !== null) {
+                core.info(`#${issueNumber}: Skipping - assignee has open referencing PR #${openAssigneePrNumber}.`);
+                continue;
               }
 
               // 2. inspect teh comments to find latest assignee comment (including #KEEP) and existing bot markers

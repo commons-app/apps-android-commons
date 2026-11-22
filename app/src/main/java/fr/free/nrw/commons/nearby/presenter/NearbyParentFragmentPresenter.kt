@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
@@ -20,6 +21,10 @@ import timber.log.Timber
 
 private const val SCROLL_DELAY = 800L // Delay for debounce of onscroll, in milliseconds.
 private const val LOCAL_SCROLL_DELAY = 200L // SCROLL_DELAY but for local db place search
+
+/** Returns the area visible on the map, or null if the map can't tell yet. */
+private fun NearbyParentFragmentContract.View.visibleArea(): SearchArea? =
+    screenTopRight?.let { topRight -> screenBottomLeft?.let { SearchArea(topRight, it) } }
 
 /**
  * Presenter for NearbyParentFragment that coordinates map updates, location
@@ -65,17 +70,24 @@ class NearbyParentFragmentPresenter(
     private var isSearchInProgress = false
     private var localPlaceSearchJob: Job? = null
 
+    @VisibleForTesting
+    internal var searchAreas = SearchAreaTracker()
+
     init {
         uiInteractionHandler.currentLatLngProvider = { currentLatLng }
         if (placeOperations is NearbyBookmarkCacheHandler) {
             placeOperations.lockNearby = ::lockUnlockNearby
             placeOperations.updateMapAndList = ::updateMapAndList
+            placeOperations.onPlacesShown = { searchAreas.onPlacesShown() }
         }
     }
 
     fun initializeMapOperations() {
-        lockUnlockNearby(false)
-        updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        // Coming back to the screen only needs a new search if the visible area isn't loaded yet
+        if (!searchAreas.isLoaded(nearbyParentFragmentView.visibleArea())) {
+            lockUnlockNearby(false)
+            updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        }
         nearbyParentFragmentView.setCheckBoxAction()
     }
 
@@ -88,6 +100,8 @@ class NearbyParentFragmentPresenter(
     override fun lockUnlockNearby(isNearbyLocked: Boolean) {
         this.isNearbyLocked = isNearbyLocked
         if (isNearbyLocked) {
+            // Nearby is only locked when a search starts
+            searchAreas.onSearchStarted(nearbyParentFragmentView.visibleArea())
             nearbyParentFragmentView.disableFABRecenter()
         } else {
             nearbyParentFragmentView.enableFABRecenter()
@@ -124,8 +138,6 @@ class NearbyParentFragmentPresenter(
         }
         // check if an upload is in progress
         if (nearbyController.isInternalUploadInProgress) {
-            // reset the flag and exit early to prevent unnecessary fetchPlaces call
-            nearbyController.isInternalUploadInProgress = false
             Timber.d("Internal upload in progress, skipping map update")
             return
         }
@@ -142,6 +154,7 @@ class NearbyParentFragmentPresenter(
         if (locationChangeType == LocationChangeType.CUSTOM_QUERY) {
             Timber.d("ADVANCED_QUERY_SEARCH")
             lockUnlockNearby(true)
+            searchAreas.onSearchStarted(null)
             nearbyParentFragmentView.setProgressBarVisibility(true)
             var updatedLocationByUser =
                 LocationUtils.deriveUpdatedLocationFromSearchQuery(
@@ -181,6 +194,9 @@ class NearbyParentFragmentPresenter(
      * accordingly.
      */
     fun searchInTheArea() {
+        if (searchAreas.isLoaded(nearbyParentFragmentView.visibleArea())) {
+            return
+        }
         if (searchCloseToCurrentLocation()) {
             updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         } else {

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Looper
@@ -16,6 +17,7 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMA
 import fr.free.nrw.commons.filepicker.ExternalImagesResult
 import fr.free.nrw.commons.filepicker.FakeSharedFilesProvider
 import fr.free.nrw.commons.filepicker.UploadableFile
+import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
@@ -234,6 +236,38 @@ class UploadActivityUnitTests {
         )
     }
 
+    @Test
+    fun needsMediaLocationPermissionIsFalseBeforeAndroid10() {
+        Assert.assertFalse(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [33])
+    fun needsMediaLocationPermissionIsTrueWithoutThePermission() {
+        Assert.assertTrue(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [33])
+    fun needsMediaLocationPermissionIsFalseWithThePermission() {
+        shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
+
+        Assert.assertFalse(uploadView.input.needsMediaLocationPermission())
+    }
+
+    @Test
+    @Config(sdk = [33])
+    fun sharedItemsAreReceivedRightAwayWhenMediaLocationIsGranted() {
+        shadowOf(activity.application).grantPermissions(Manifest.permission.ACCESS_MEDIA_LOCATION)
+        activity.intent = Intent(Intent.ACTION_SEND)
+        `when`(contributionController.handleExternalImagesPicked(activity, activity.intent))
+            .thenReturn(ExternalImagesResult(emptyList(), 0))
+
+        uploadView.input.checkStoragePermissions()
+
+        verify(contributionController).handleExternalImagesPicked(activity, activity.intent)
+    }
+
     private fun receiveExternalAndSharedItems() {
         uploadView.input.receiveExternalSharedItems()
         uploadView.steps.receiveSharedItems()
@@ -420,6 +454,30 @@ class UploadActivityUnitTests {
         verify(savedMedia).fragmentCallback =
             any(UploadMediaDetailFragment.UploadMediaDetailFragmentCallback::class.java)
         verify(savedPages[1]).callback = any(UploadBaseFragment.Callback::class.java)
+        verify(savedMedia).initializeFragment()
+    }
+
+    @Test
+    fun testStepSetupRestoresNearbyPlaceOnSavedPages() {
+        Robolectric.setupContentProvider(FakeSharedFilesProvider::class.java, FakeSharedFilesProvider.AUTHORITY)
+        val jpeg = UploadableFile(FakeSharedFilesProvider.uriFor("saved.jpg"), File("saved.jpg"))
+        val savedMedia = mock(UploadMediaDetailFragment::class.java)
+        val savedPages =
+            mutableListOf<UploadBaseFragment>(
+                savedMedia,
+                mock(UploadBaseFragment::class.java),
+                mock(UploadBaseFragment::class.java),
+                mock(UploadBaseFragment::class.java),
+            )
+        val nearbyPlace = mock(Place::class.java)
+        uploadView.uploadableFiles = mutableListOf(jpeg)
+        uploadView.fragments = savedPages
+        uploadView.isFragmentsSaved = true
+        uploadView.place = nearbyPlace
+
+        uploadView.steps.receiveSharedItems()
+
+        verify(savedMedia).place = nearbyPlace
         verify(savedMedia).initializeFragment()
     }
 }

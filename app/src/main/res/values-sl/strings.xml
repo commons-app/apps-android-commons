@@ -106,6 +106,8 @@
   <string name="upload_progress_notification_title_in_progress">Nalagam %1$s</string>
   <string name="upload_progress_notification_title_finishing">Končujem nalaganje datoteke »%1$s«</string>
   <string name="upload_failed_notification_title">Nalaganje datoteke »%1$s« ni uspelo</string>
+  <string name="upload_metadata_pending_notification_title">%1$s je naložena, vendar njeni napisi in upodobitve še niso shranjeni</string>
+  <string name="upload_metadata_pending">Naloženo, napisi in upodobitve še niso shranjeni</string>
   <string name="upload_paused_notification_title">Nalaganje datoteke »%1$s« je ustavljeno</string>
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>
