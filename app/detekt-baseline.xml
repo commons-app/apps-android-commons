@@ -630,7 +630,6 @@
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:SettingsFragment.kt$SettingsFragment : PreferenceFragmentCompat</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
