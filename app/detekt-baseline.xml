@@ -771,8 +771,6 @@
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
     <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$UserActionListener : BasePresenter</ID>
     <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$View</ID>
-    <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
-    <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
     <ID>TooManyFunctions:ExploreListRootFragment.kt$ExploreListRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
     <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
