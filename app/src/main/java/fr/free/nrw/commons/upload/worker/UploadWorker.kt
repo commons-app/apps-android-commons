@@ -32,6 +32,7 @@ import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -276,7 +277,11 @@ class UploadWorker(
                 Timber.e(exception, "Saving captions and depicts failed for %s", uploadedFilename)
                 contribution.state = Contribution.STATE_METADATA_PENDING
                 contribution.errorInfo = exception.uploadErrorCode()
-                contribution.setRetryWait(exception.retryAfterMillis())
+                // Wikidata errors keep their code apart from the readable message saved above
+                contribution.setRetryWait(
+                    exception.retryAfterMillis(),
+                    (exception as? MwException)?.errorCode ?: contribution.errorInfo,
+                )
                 notificationHelper.showFailedNotification(contribution)
                 contributionDao.saveSynchronous(contribution)
             }
@@ -316,6 +321,7 @@ class UploadWorker(
                             StashUploadState.FAILED,
                             fileKey = null,
                             errorMessage = it.message,
+                            retryAfterMillis = it.retryAfterMillis(),
                         )
                     }.blockingSingle()
             when (stashUploadResult.state) {
@@ -455,11 +461,15 @@ class UploadWorker(
     }
 
     /**
-     * Saves when this failed upload may be retried automatically, from the error just put in
-     * errorInfo and the wait the server asked for, or clears it if there is nothing to wait for.
+     * Saves when this failed upload may be retried automatically, from the error code (by default
+     * the one just put in errorInfo) and the wait the server asked for, or clears it if there is
+     * nothing to wait for.
      */
-    private fun Contribution.setRetryWait(retryAfterMillis: Long?) {
-        retryNotBefore = nextAutomaticRetry(errorInfo, retryAfterMillis, retries, System.currentTimeMillis())
+    private fun Contribution.setRetryWait(
+        retryAfterMillis: Long?,
+        errorCode: String? = errorInfo,
+    ) {
+        retryNotBefore = nextAutomaticRetry(errorCode, retryAfterMillis, retries, System.currentTimeMillis())
     }
 
     private fun clearChunks(contribution: Contribution) {
