@@ -146,8 +146,11 @@
         <item name="android:textColor">@color/primaryDarkColor</item>
     </style>
 
-    <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
-        <item name="colorControlActivated">@android:color/white</item>
+    <style name="NearbySearchBarTheme" parent="DarkAppTheme">
+        <item name="colorControlActivated">@color/primaryDarkColor</item>
+        <item name="colorControlNormal">@color/primaryDarkColor</item>
+        <item name="android:textColor">@color/primaryDarkColor</item>
+        <item name="android:textColorHint">@color/secondaryTextColor</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
