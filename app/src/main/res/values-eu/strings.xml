@@ -44,10 +44,6 @@
     <item quantity="one">igoera %1$d</item>
     <item quantity="other">%1$d igoera</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Irudi hau %1$s lizentziapean egongo da</item>
-    <item quantity="other">Irudi hauek %1$s lizentziapean egongo dira</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">igoera %1$d</item>
     <item quantity="other">%1$d igoera</item>
@@ -77,7 +73,6 @@
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s fitxategia igotzen</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>

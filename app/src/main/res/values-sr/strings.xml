@@ -47,10 +47,6 @@
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
-    <item quantity="other">Слике ће се водити под лиценцом %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
@@ -90,7 +86,6 @@
   <string name="upload_completed_notification_title">Датотека „%1$s” је отпремљена.</string>
   <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
   <string name="upload_progress_notification_title_start">Отпремање датотеке: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
   <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
   <string name="upload_paused_notification_title">Отпремање %1$s паузирано</string>

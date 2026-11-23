@@ -29,10 +29,6 @@
     <item quantity="one">%1$d ఎక్కింపు</item>
     <item quantity="other">%1$d ఎక్కింపులు</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ఈ బొమ్మ %1$s లైసెన్సు కింద విడుదల అవుతుంది</item>
-    <item quantity="other">ఈ బొమ్మలు %1$s లైసెన్సు కింద విడుదల అవుతాయి</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ఎక్కింపు</item>
     <item quantity="other">%1$d ఎక్కింపులు</item>
@@ -68,7 +64,6 @@
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
   <string name="upload_completed_notification_text">మీ ఎక్కింపును చూసేందుకు నొక్కండి</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ను ఎక్కిస్తున్నాం</string>
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
   <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
   <string name="upload_paused_notification_title">%1$s ఎక్కింపు నిలిచింది</string>
