@@ -12,7 +12,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
  * The contract with which DepictsFragment and its presenter would talk to each other
  */
 interface DepictsContract {
-
     interface ProgressView {
         /**
          * Show progress/Hide progress depending on the boolean value
@@ -36,7 +35,6 @@ interface DepictsContract {
     }
 
     interface NavigationView {
-
         /**
          * Go to category screen
          */

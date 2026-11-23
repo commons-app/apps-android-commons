@@ -64,6 +64,10 @@ class DepictsFragment(
         fragmentRef.fragment = this
     }
 
+    companion object {
+        private const val SEARCH_DEBOUNCE_MILLIS = 500L
+    }
+
     @Inject
     @field:Named("default_preferences")
     lateinit var applicationKvStore: JsonKvStore
@@ -303,7 +307,7 @@ class DepictsFragment(
                         binding.depictsSearchContainer.error =
                             null
                     }.takeUntil(RxView.detaches(binding.depictsSearch))
-                    .debounce(500, TimeUnit.MILLISECONDS)
+                    .debounce(SEARCH_DEBOUNCE_MILLIS, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         { filter: CharSequence -> searchForDepictions(filter.toString()) },
@@ -434,7 +438,7 @@ class DepictsProgressViewHandler(
      */
     override fun showProgress(shouldShow: Boolean) {
         val fragment = ref.fragment
-        if (!fragment.hasBinding)  {
+        if (!fragment.hasBinding) {
             return
         }
         fragment.binding.depictsSearchInProgress.visibility =

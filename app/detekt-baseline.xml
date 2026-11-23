@@ -593,24 +593,6 @@
     <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
     <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
-
-    <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$UserActionListener : BasePresenter</ID>
-    <ID>TooManyFunctions:DepictsContract.kt$DepictsContract$View</ID>
-    <ID>TooManyFunctions:DescriptionEditActivity.kt$DescriptionEditActivity : BaseActivityEventListener</ID>
-    <ID>TooManyFunctions:ExploreListRootFragment.kt$ExploreListRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
-    <ID>TooManyFunctions:ExploreMapContract.kt$ExploreMapContract$View</ID>
-    <ID>TooManyFunctions:ExploreMapFragment.kt$ExploreMapFragment : CommonsDaggerSupportFragmentViewLocationUpdateListenerLocationPermissionCallback</ID>
-    <ID>TooManyFunctions:ExploreMapPresenter.kt$ExploreMapPresenter : UserActionsNearbyBaseMarkerThumbCallback</ID>
-    <ID>TooManyFunctions:ExploreMapRootFragment.kt$ExploreMapRootFragment : CommonsDaggerSupportFragmentMediaDetailProviderCategoryImagesCallback</ID>
-    <ID>TooManyFunctions:ExtMetadata.kt$ExtMetadata</ID>
-    <ID>TooManyFunctions:FilePicker.kt$FilePicker : Constants</ID>
-    <ID>TooManyFunctions:FragmentBuilderModule.kt$FragmentBuilderModule</ID>
-    <ID>TooManyFunctions:ImageAdapter.kt$ImageAdapter : AdapterSectionedAdapter</ID>
-    <ID>TooManyFunctions:ImageFragment.kt$ImageFragment : CommonsDaggerSupportFragmentRefreshUIListenerPassDataListener</ID>
-    <ID>TooManyFunctions:ImageInfo.kt$ImageInfo</ID>
-    <ID>TooManyFunctions:KeyValueStore.kt$KeyValueStore</ID>
-    <ID>TooManyFunctions:LeaderboardFragment.kt$LeaderboardFragment : CommonsDaggerSupportFragment</ID>
-    <ID>TooManyFunctions:LocationPickerActivity.kt$LocationPickerActivity : BaseActivityLocationPermissionCallback</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
