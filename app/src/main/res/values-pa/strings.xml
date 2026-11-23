@@ -35,10 +35,6 @@
     <item quantity="one">&amp;1$d ਅੱਪਲੋਡ</item>
     <item quantity="other">%1$d ਅੱਪਲੋਡਾਂ</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ਇਹ ਤਸਵੀਰ ਨੂੰ %1$s ਲਸੰਸ ਹੇਠ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</item>
-    <item quantity="other">ਇਹਨਾਂ ਤਸਵੀਰਾਂ ਨੂੰ %1$s ਲਸੰਸ ਹੇਠ ਜਾਰੀ ਕੀਤਾ ਜਾਵੇਗਾ</item>
-  </plurals>
   <string name="navigation_item_explore">ਪੜਚੋਲ ਕਰੋ</string>
   <string name="preference_category_appearance">ਦਿੱਖ</string>
   <string name="preference_category_general">ਆਮ</string>
@@ -64,7 +60,6 @@
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
   <string name="upload_progress_notification_title_start">ਫਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਐ: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਨੂੰ ਚੜ੍ਹਾਉਣ ਵਿੱਚ ਨਾਕਾਮ</string>
   <string name="upload_paused_notification_title">%1$s ਚੜ੍ਹਾਉਣਾ ਰੋਕਿਆ ਗਿਆ</string>

@@ -46,10 +46,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dette billede vil blive licenseret under %1$s</item>
-    <item quantity="other">Disse billeder vil blive licenseret under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -89,7 +85,6 @@
   <string name="upload_completed_notification_title">%1$s uploadet!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist dit upload</string>
   <string name="upload_progress_notification_title_start">Uploader fil: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s uploades</string>
   <string name="upload_progress_notification_title_finishing">Afslutter upload af %1$s</string>
   <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
   <string name="upload_metadata_pending_notification_title">%1$s er uploadet, men billedtekster og beskrivelser er endnu ikke gemt</string>

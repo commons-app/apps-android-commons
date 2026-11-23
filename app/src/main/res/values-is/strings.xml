@@ -38,10 +38,6 @@
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Þessi mynd verður birt með %1$s notkunarleyfi</item>
-    <item quantity="other">Þessar myndir verða birtar með %1$s notkunarleyfi</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
@@ -77,7 +73,6 @@
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
   <string name="upload_completed_notification_text">Bankaðu til að skoða sem þú ert að senda inn</string>
   <string name="upload_progress_notification_title_start">Sendi inn skrá: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Verið er að senda %1$s inn</string>
   <string name="upload_progress_notification_title_finishing">Lýk innsendingu á %1$s</string>
   <string name="upload_failed_notification_title">Mistókst að senda inn %1$s</string>
   <string name="upload_paused_notification_title">Innsending %1$s er í bið</string>

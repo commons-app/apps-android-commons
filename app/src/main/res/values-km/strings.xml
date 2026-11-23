@@ -34,9 +34,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d បានផ្ទុកឡើង</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="other">រូបភាពទាំងនេះនឹងត្រូវបានផ្តល់អាជ្ញាបណ្ណក្រោម %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ផ្ទុកឡើង</item>
     <item quantity="other">%1$d បានផ្ទុកឡើង</item>
@@ -68,7 +65,6 @@
   <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
   <string name="upload_completed_notification_text">ចុចដើម្បីមើលអ្វីដែលអ្នកផ្ទុកឡើង</string>
   <string name="upload_progress_notification_title_start">កំពុងអាប់ឡូដឯកសារ៖ %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">កំពុងផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
   <string name="upload_failed_notification_title">អាប់ឡូដ %1$s ត្រូវបានបរាជ័យ</string>
   <string name="upload_paused_notification_title">ការផ្ទុកឡើង %1$s បានផ្អាក</string>

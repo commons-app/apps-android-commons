@@ -6,10 +6,6 @@
 * UV
 -->
 <resources>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Haec imago sub licentia %1$s communicabitur.</item>
-    <item quantity="other">Hae imagines sub licentia %1$s communicabintur.</item>
-  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Modi</string>
   <string name="username">Nomen usoris</string>
@@ -22,7 +18,6 @@
   <string name="upload_completed_notification_title">%1$s inmissum!</string>
   <string name="upload_completed_notification_text">Tangere ad conlationem tuam videndam</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Incipere immissio %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s inmittens</string>
   <string name="upload_progress_notification_title_finishing">Conficiens immissio %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Inmissio %1$s non perfecta</string>
   <string name="upload_failed_notification_subtitle">Tangere ad videndum</string>

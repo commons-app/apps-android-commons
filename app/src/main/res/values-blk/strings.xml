@@ -42,7 +42,6 @@
   <string name="uploading_started">ဒင်ႏစလဲဉ်းအပ်လိုတ်</string>
   <string name="upload_completed_notification_title">%1$s ဒင်ႏထွူလဲဉ်း!</string>
   <string name="upload_progress_notification_title_start">အဝ်ႏဒင်ႏဖုဲင်ကျာꩻ- %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s အဝ်ႏဒင်ႏအပ်လိုတ်ကျာꩻ</string>
   <string name="upload_failed_notification_subtitle">နျꩻထွား</string>
   <string name="upload_paused_notification_subtitle">နျꩻထွား</string>
   <string name="contribution_state_failed">အောင်ႏတဝ်း</string>
