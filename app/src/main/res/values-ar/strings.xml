@@ -81,14 +81,6 @@
     <item quantity="many">مرفوع</item>
     <item quantity="other">%1$d تحميلات</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="zero">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="one">سيتم ترخيص هذه الصورة تحت %1$s</item>
-    <item quantity="two">سيتم ترخيص هاتين الصورتين تحت ترخيص %1$s</item>
-    <item quantity="few">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="many">سيتم ترخيص هذه الصور تحت %1$s</item>
-    <item quantity="other">سيتم ترخيص هذه الصور تحت %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="zero">%1$d رفع</item>
     <item quantity="one">%1$d رفع</item>
@@ -136,7 +128,6 @@
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
   <string name="upload_completed_notification_text">انقر لعرض ملفك المرفوع</string>
   <string name="upload_progress_notification_title_start">تحميل ملف: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">الفشل في التحميل</string>
   <string name="upload_metadata_pending_notification_title">يتم تحميل %1$s ، ولكن لا يتم حفظ أسمائها وصورها بعد</string>

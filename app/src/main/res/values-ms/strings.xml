@@ -38,9 +38,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d muatnaik</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="other">Gambar ini akan dilesenkan di bawah %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">Jelajah</string>
   <string name="preference_category_appearance">Paparan</string>
   <string name="preference_category_general">Umum</string>
@@ -72,7 +69,6 @@
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
   <string name="upload_progress_notification_title_start">Memuat naik fail: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s sedang dimuat naik</string>
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">Gagal untuk muat naik %1$s</string>
   <string name="upload_paused_notification_title">Muat naik %1$s tertunda</string>

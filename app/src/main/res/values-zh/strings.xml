@@ -101,10 +101,6 @@
     <item quantity="one">%1$d个上传</item>
     <item quantity="other">%1$d个上传</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">该图像的授权协议是 %1$s</item>
-    <item quantity="other">这些图像的授权协议是 %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d次上传</item>
     <item quantity="other">%1$d次上传</item>
@@ -143,7 +139,6 @@
   <string name="upload_completed_notification_title">%1$s已上传！</string>
   <string name="upload_completed_notification_text">点击查看您的上传</string>
   <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_metadata_pending_notification_title">已上传%1$s，但其说明和描述尚未保存</string>

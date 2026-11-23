@@ -40,11 +40,6 @@
     <item quantity="few">%1$d încărcări</item>
     <item quantity="other">%1$d de încărcări</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Această imagine va fi licențiată sub %1$s</item>
-    <item quantity="few">Aceste imagini vor fi licențiate sub %1$s</item>
-    <item quantity="other">Aceste imagini vor fi licențiate sub %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Încarcă</item>
     <item quantity="few">%1$d Încărcări</item>
@@ -85,7 +80,6 @@
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
   <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
   <string name="upload_progress_notification_title_start">Se încarcă fișierul: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_paused_notification_title">Încărcarea fișierului %1$s a fost întreruptă</string>

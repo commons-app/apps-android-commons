@@ -3569,4 +3569,3 @@ class NearbyParentFragment :
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
     }
 }
-

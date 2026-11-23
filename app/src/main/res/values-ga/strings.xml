@@ -46,13 +46,6 @@
     <item quantity="many">%1$d uaslódálacha</item>
     <item quantity="other">%1$d uaslódálacha</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Beidh an íomhá seo ceadúnaithe faoi %1$s</item>
-    <item quantity="two">Beidh na híomhánna seo ceadúnaithe faoi %1$s</item>
-    <item quantity="few">Beidh na híomhánna seo ceadúnaithe faoi %1$s</item>
-    <item quantity="many">Beidh na híomhánna seo ceadúnaithe faoi %1$s</item>
-    <item quantity="other">Beidh na híomhánna seo ceadúnaithe faoi %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Uaslódála</item>
     <item quantity="two">%1$d Uaslódálacha</item>
@@ -98,7 +91,6 @@
   <string name="upload_completed_notification_title">%1$s uaslódáilte!</string>
   <string name="upload_completed_notification_text">Tapáil chun d’uaslódáil a fheiceáil</string>
   <string name="upload_progress_notification_title_start">Ag uaslódáil comhaid: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ag uaslódáil</string>
   <string name="upload_progress_notification_title_finishing">Ag críochnú uaslódáil %1$s</string>
   <string name="upload_failed_notification_title">Theip ar %1$s a uaslódáil</string>
   <string name="upload_paused_notification_title">Tá uaslódáil %1$s curtha ar sos</string>

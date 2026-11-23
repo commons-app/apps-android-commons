@@ -4,10 +4,6 @@
 * Paul Beppler
 -->
 <resources>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Tas pilt wërt uner %1$s lisensiirt</item>
-    <item quantity="other">Ti pilter wëre uner %1$s lisensiirt</item>
-  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons (Wikimedia Allmend)</string>
   <string name="menu_settings">Instellunge</string>
   <string name="username">Benutzernoome</string>
@@ -22,7 +18,6 @@
   <string name="upload_completed_notification_title">„%1$s“ hochgelood!</string>
   <string name="upload_completed_notification_text">Tippe mit dein Fingerspitze, um dein Upload (Ufflloodung) oonzusiehn</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Hochloode von „%1$s“ oonfänge</string>
-  <string name="upload_progress_notification_title_in_progress">„%1$s“ hochloode</string>
   <string name="upload_progress_notification_title_finishing">Hochloode von „%1$s“ abschliesse</string>
   <string name="upload_failed_notification_title" fuzzy="true">Hochloode von „%1$s“ fehlgeschlooht</string>
   <string name="upload_failed_notification_subtitle">Tipp mit deine Fingerspitze für se siehn</string>
