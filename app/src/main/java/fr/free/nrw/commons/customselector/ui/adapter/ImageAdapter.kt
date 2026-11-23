@@ -142,7 +142,7 @@ class ImageAdapter(
         holder: ImageViewHolder,
         position: Int,
     ) {
-        if (images.size == 0) {
+        if (position >= images.size) {
             return
         }
         var image = images[position]
@@ -151,9 +151,15 @@ class ImageAdapter(
             // Image does not exist anymore, update adapter.
             holder.itemView.post {
                 val updatedPosition = images.indexOf(image)
-                images.remove(image)
-                notifyItemRemoved(updatedPosition)
-                notifyItemRangeChanged(updatedPosition, images.size)
+                if (updatedPosition != -1) {
+                    images.removeAt(updatedPosition)
+                    // Keep allImages in sync: getItemCount() reports its size, so
+                    // leaving it unchanged makes the RecyclerView bind positions
+                    // that no longer exist in images.
+                    allImages = allImages - image
+                    notifyItemRemoved(updatedPosition)
+                    notifyItemRangeChanged(updatedPosition, images.size)
+                }
             }
         } else {
             val sharedPreferences: SharedPreferences =

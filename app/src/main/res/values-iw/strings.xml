@@ -62,12 +62,6 @@
     <item quantity="many">%1$d העלאות</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
-    <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%1$d העלאות</item>
@@ -111,7 +105,6 @@
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">נא ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">העלאת קובץ: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_metadata_pending_notification_title">הקובץ %1$s הועלה, אך הכיתובים והמידע על הפריטים המתוארים בו טרם נשמרו</string>

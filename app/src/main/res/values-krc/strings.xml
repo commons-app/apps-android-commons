@@ -39,10 +39,6 @@
     <item quantity="one">%1$d джюклеу</item>
     <item quantity="other">%1$d джюклеу</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Бу сурат %1$s лицензнияны тамалында боллукъду</item>
-    <item quantity="other">Бу суратла %1$s лицензнияны тамалында боллукъдула</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d джюклеу</item>
     <item quantity="other">%1$d джюклеу</item>
@@ -82,7 +78,6 @@
   <string name="upload_completed_notification_title">%1$s джюкленди!</string>
   <string name="upload_completed_notification_text">Джюкленнген файлгъа къарар ючюн басыгъыз</string>
   <string name="upload_progress_notification_title_start">Файл джюклене турады: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s джюклене турады</string>
   <string name="upload_progress_notification_title_finishing">%1$s джюклениб бошалды</string>
   <string name="upload_failed_notification_title">%1$s джюклеу джетишимсиз болду</string>
   <string name="upload_paused_notification_title">%1$s джюклеу туракълады</string>

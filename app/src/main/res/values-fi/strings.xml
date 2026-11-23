@@ -55,10 +55,6 @@
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
-    <item quantity="other">Tiedostot tallennetaan lisenssin %1$s ehtojen mukaisesti</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d tallennus</item>
     <item quantity="other">%1$d tallennusta</item>
@@ -92,7 +88,6 @@
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
   <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
   <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_paused_notification_title">Tiedoston %1$s tallentaminen pysäytetty</string>
