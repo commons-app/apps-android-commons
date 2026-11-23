@@ -40,10 +40,6 @@
     <item quantity="one">%1$d ⴰⴷⴽⴰⵍ</item>
     <item quantity="other">%1$d ⵉⴷⴽⴰⵍⵏ</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ⵜⴰⵡⵍⴰⴼⵜ ⴰⴷ ⵔⴰⴷ ⵜⵉⵍⵉ ⵜⵓⵔⴰⴳⵜ ⴷⴷⴰⵡ %1$s</item>
-    <item quantity="other">ⵜⵉⵡⴰⴼⵉⵏ ⴰⴷ ⵔⴰⴷ ⵉⵍⵉⵏⵜ ⵜⵓⵔⴰⴳⵜ ⴷⴷⴰⵡ %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ⴰⴷⴽⴰⵍ</item>
     <item quantity="other">%1$d ⵉⴷⴽⴰⵍⵏ</item>
@@ -83,7 +79,6 @@
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
   <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
   <string name="upload_progress_notification_title_start">ⴰⵙⵙⴽⵜⵔ ⵏ ⵓⴼⴰⵢⵍⵓ: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">ⴰⵙⴽⵜⵓⵔ ⵏ %1$s</string>
   <string name="upload_progress_notification_title_finishing">ⵜⵉⴳⵉⵔⴰ ⵏ ⵡⴰⴳⴰⵎ ⵏ %1$s</string>
   <string name="upload_failed_notification_title">ⵜⴰⴳⴰⵡⵉⵜ ⵏ ⴰⵙⵙⴽⵜⵔ ⵏ %1$s</string>
   <string name="upload_paused_notification_title">ⴰⴳⴰⵎ ⵏ %1$s ⵉⵜⵜⵓⵙⴱⴷ</string>
@@ -167,6 +162,7 @@
   <string name="navigation_item_settings">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="navigation_item_feedback">ⴰⵖⴼⴰⵡⴰⵍ</string>
   <string name="navigation_item_notification">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
+  <string name="navigation_item_review">ⵣⵣⵔⵉ</string>
   <string name="nearby_info_menu_commons_article">ⵜⴰⵙⵏⴰ ⵏ ⵓⴼⴰⵢⵍⵓ ⵏ ⴽⵓⵎⵏⵙ</string>
   <string name="nearby_info_menu_wikidata_article">ⴰⴳⵎⴰⵎ ⵏ ⵡⵉⴽⵉⵙⴼⴽⴰ</string>
   <string name="nearby_info_menu_wikipedia_article">ⴰⵎⴳⵔⴰⴷ ⵏ ⵡⵉⴽⵉⴱⵉⴷⵢⴰ</string>
@@ -203,7 +199,7 @@
   <string name="autoblur">ⴰⵙⵉⵍⵍⵙ ⴰⵡⵓⵔⵎⴰⵏ</string>
   <string name="delete">ⴽⴽⵙ</string>
   <string name="Profile">ⵉⴼⵔⵙ</string>
-  <string name="nominate_for_deletion_done">ⵉⵜⵜⵓⵙⴽⴰⵔ</string>
+  <string name="nominate_for_deletion_done">ⵉⵎⴷⴰ</string>
   <string name="exif_tag_name_location">ⴰⴷⵖⴰⵔ</string>
   <string name="image_info">ⵉⵏⵖⵎⵉⵙⵏ ⵏ ⵜⵡⵍⴰⴼⵜ</string>
   <string name="no_categories_found">ⵓⵔ ⵉⵍⵍⵉ ⴽⴰ ⵏ ⵉⵙⵎⵉⵍⵏ</string>
@@ -218,7 +214,7 @@
   <string name="depicts_description">ⴰⴳⵍⴰⵎ</string>
   <string name="license_step_title">ⵜⵓⵔⴰⴳⵜ ⵏ ⵎⵉⴷⵢⴰ</string>
   <string name="description">ⴰⴳⵍⴰⵎ</string>
-  <string name="done">ⵉⵜⵜⵓⵙⴽⴰⵔ</string>
+  <string name="done">ⵉⵎⴷⴰ</string>
   <string name="android_version">ⵜⴰⵍⵇⵇⵎⵜ ⵏ ⵡⴰⵏⴷⵔⵡⵉⴷ</string>
   <string name="caption">ⴰⵡⵏⵏⵉⵜ</string>
 </resources>

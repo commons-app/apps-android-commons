@@ -26,10 +26,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -58,7 +54,6 @@
   <string name="upload_completed_notification_title">%1$s opgelaai!</string>
   <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Begin oplaai van %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Besig om %1$s op te laai</string>
   <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Oplaai van %1$s het gefaal</string>
   <string name="upload_failed_notification_subtitle">Vat om te kyk</string>

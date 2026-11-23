@@ -63,12 +63,6 @@
     <item quantity="many">%1$d завантажень</item>
     <item quantity="other">%1$d завантажень</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Це зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="few">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="many">Ці зображення буде ліцензовано на умовах %1$s</item>
-    <item quantity="other">Ці зображення буде ліцензовано на умовах %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d завантаження</item>
     <item quantity="few">%1$d завантаження</item>
@@ -112,7 +106,6 @@
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
   <string name="upload_progress_notification_title_start">Завантаження файлу: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
   <string name="upload_paused_notification_title">Завантаження %1$s призупинене</string>

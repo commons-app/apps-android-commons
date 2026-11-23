@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.explore.search
 
 import android.content.Context
+import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.SearchQueryController
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
@@ -21,6 +24,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -29,6 +33,7 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
@@ -72,6 +77,7 @@ class SearchActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         context = ApplicationProvider.getApplicationContext()
     }
@@ -80,6 +86,25 @@ class SearchActivityUnitTests {
     @Throws(Exception::class)
     fun checkActivityNotNull() {
         Assert.assertNotNull(activity)
+    }
+
+    @Test
+    fun testTabsAfterRecreatingTheScreen() {
+        val controller = Robolectric.buildActivity(SearchActivity::class.java).setup()
+        // Recreate the screen
+        controller.recreate()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        // The tabs the controller talks to must be the ones that are shown
+        val queryController: SearchQueryController =
+            Whitebox.getInternalState(controller.get(), "searchQueryController")
+        assertTrue(queryController.searchMediaFragment!!.isAdded)
+        assertTrue(
+            Whitebox.getInternalState<SearchCategoryFragment>(queryController, "searchCategoryFragment").isAdded,
+        )
+        assertTrue(
+            Whitebox.getInternalState<SearchDepictionsFragment>(queryController, "searchDepictionsFragment").isAdded,
+        )
     }
 
     @Test

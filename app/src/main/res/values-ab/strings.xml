@@ -23,7 +23,6 @@
   <string name="upload_completed_notification_title">%1$s иҭагалоуп!</string>
   <string name="upload_completed_notification_text">Шәақәыӷәӷәа иҭагалоу афаил ахәаԥшраз</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Аҭагалара %1$s иалагоуп</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s иаҿуп аҭагалара</string>
   <string name="upload_progress_notification_title_finishing">Аҭагалара ахыркәшамҭа %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Аҭагалара %1$s амуӡеит</string>
   <string name="upload_failed_notification_subtitle">Шәақәыӷәӷәа ахәаԥшразы</string>

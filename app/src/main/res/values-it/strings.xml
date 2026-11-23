@@ -63,10 +63,6 @@
     <item quantity="one">%1$d caricamento</item>
     <item quantity="other">%1$d caricamenti</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
-    <item quantity="other">Queste immagini saranno rilasciate in base alla licenza %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d caricamento</item>
     <item quantity="other">%1$d caricamenti</item>
@@ -106,7 +102,6 @@
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Tocca per visualizzare il tuo caricamento</string>
   <string name="upload_progress_notification_title_start">Caricamento file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
   <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>

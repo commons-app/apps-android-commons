@@ -19,10 +19,6 @@
     <item quantity="one">%1$d cargament</item>
     <item quantity="other">%1$d cargaments</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Aqueste imatge serà jos licéncia %1$s</item>
-    <item quantity="other">Aquestes imatges seràn jos licencia %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">Explorar</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Paramètres</string>
@@ -40,7 +36,6 @@
   <string name="upload_completed_notification_title">%1$s telecargats !</string>
   <string name="upload_completed_notification_text">Quichar per veire vòstre telecargament</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Començament de telecargament %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s telecargats</string>
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
