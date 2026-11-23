@@ -38,7 +38,6 @@
   <string name="upload_completed_notification_title">%1$s ацалгдв!</string>
   <string name="upload_completed_notification_text">Ацаллтын җигсәлтиг үзх</string>
   <string name="upload_progress_notification_title_start">Файл ацалгдҗана: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ацалгдҗана</string>
   <string name="upload_progress_notification_title_finishing">%1$s ацалгдҗ дуусчана</string>
   <string name="upload_failed_notification_title">%1$s ацалҗ чадсн уга</string>
   <string name="upload_failed_notification_subtitle">Энд дарҗ хәләтн</string>

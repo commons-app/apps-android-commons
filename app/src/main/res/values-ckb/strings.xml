@@ -12,10 +12,6 @@
   <string name="commons_logo">لۆگۆی کۆمنز</string>
   <string name="commons_website">وێبگەی کۆمنز</string>
   <string name="show_captions">لێدوانەکان</string>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">ئەم پەڕەیە مۆڵەتنامەی %1$s پێ دەدرێت</item>
-    <item quantity="other">ئەم پەڕەیە مۆڵەتیان %1$s پێ دەدرێت</item>
-  </plurals>
   <string name="navigation_item_explore">بگەڕێ</string>
   <string name="preference_category_appearance">ڕواڵەت</string>
   <string name="preference_category_general">گشتی</string>
@@ -39,7 +35,6 @@
   <string name="upload_completed_notification_title">%1$s بارکرا!</string>
   <string name="upload_completed_notification_text">کرتە بکە بۆ بینینی بارەکەت</string>
   <string name="upload_progress_notification_title_start">دەستپێکردنی بارکردنی %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$ بار دەکرێت</string>
   <string name="upload_progress_notification_title_finishing">تەواو بوونی بارکردنی %1$s</string>
   <string name="upload_failed_notification_title">بارکردنی %1$s شکستی ھێنا</string>
   <string name="upload_failed_notification_subtitle">کرتە بکە بۆ بینین</string>

@@ -56,7 +56,6 @@
   <string name="upload_completed_notification_title">%1$s bajásluđejuvvon!</string>
   <string name="upload_completed_notification_text">Deaddel vai oidno du bajásluđen</string>
   <string name="upload_progress_notification_title_start">Bajásluđeme fiilla: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s bajásluđeme</string>
   <string name="upload_progress_notification_title_finishing">Gárvvisteme bajásluđema %1$s</string>
   <string name="upload_failed_notification_title">Fiila %1$s vurken ii lihkostuvvan</string>
   <string name="upload_paused_notification_title">%1$s bajásluđen gaskaboddosaččat bissehuvvon</string>

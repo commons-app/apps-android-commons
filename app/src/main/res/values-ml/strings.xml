@@ -41,10 +41,6 @@
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">ഈ ചിത്രം %1$s ന് കീഴിൽ ലൈസൻസ് ചെയ്യപ്പെടും </item>
-    <item quantity="other">ഈ ചിത്രങ്ങൾ %1$s ന് കീഴിൽ ലൈസൻസ് ചെയ്യപ്പെടും</item>
-  </plurals>
   <string name="navigation_item_explore">പര്യവേഷണം</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
@@ -74,7 +70,6 @@
   <string name="upload_completed_notification_title">%1$s  അപ്‌ലോഡ് ചെയ്തിരിക്കുന്നു!</string>
   <string name="upload_completed_notification_text">താങ്കളുടെ അപ്‌ലോഡ് കാണാനായി ടാപ് ചെയ്യുക</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s അപ്‌ലോഡ് തുടങ്ങുന്നു</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s അപ്‌ലോഡ് ചെയ്യുന്നു</string>
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
