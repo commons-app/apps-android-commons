@@ -3,7 +3,8 @@ package fr.free.nrw.commons.utils
 import android.graphics.Typeface
 import android.text.style.StyleSpan
 import androidx.core.text.getSpans
-import org.junit.Assert.*
+import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
