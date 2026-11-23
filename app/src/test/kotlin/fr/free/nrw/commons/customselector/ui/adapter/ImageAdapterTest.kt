@@ -9,11 +9,13 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
+import android.widget.TextView
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
@@ -101,6 +103,53 @@ class ImageAdapterTest {
     @Test
     fun onCreateViewHolder() {
         imageAdapter.createViewHolder(GridLayout(activity), 0)
+    }
+
+    /**
+     * Test that list mode inflates the row with the extra detail views.
+     */
+    @Test
+    fun `onCreateViewHolder uses list layout in list mode`() {
+        images.add(image)
+        imageAdapter.selectionManager.setSelectedImages(images)
+        imageAdapter.viewMode = ImageViewMode.LIST
+
+        val listHolder = imageAdapter.createViewHolder(GridLayout(activity), 0)
+
+        Assertions.assertNotNull(listHolder.itemView.findViewById<View>(R.id.image_name))
+        Assertions.assertNotNull(listHolder.itemView.findViewById<View>(R.id.location_indicator))
+        Assertions.assertEquals(1, imageAdapter.selectionManager.selectedImages.size)
+    }
+
+    /**
+     * Test that metadata and the geolocation indicator are bound to list rows.
+     */
+    @Test
+    fun `list holder binds metadata and geolocation indicator`() {
+        val listItemView =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.item_custom_selector_image_list, null, false)
+        val listHolder = ImageAdapter.ImageViewHolder(listItemView)
+
+        listHolder.imageName?.text = "photo.jpg"
+        listHolder.imageDetails?.text = "4032 × 3024 · 2.1 MB"
+        listHolder.locationIndicator?.visibility = View.VISIBLE
+        Assertions.assertEquals("photo.jpg", listItemView.findViewById<TextView>(R.id.image_name).text.toString())
+        Assertions.assertEquals(
+            "4032 × 3024 · 2.1 MB",
+            listItemView.findViewById<TextView>(R.id.image_details).text.toString(),
+        )
+        Assertions.assertEquals(
+            View.VISIBLE,
+            listItemView.findViewById<View>(R.id.location_indicator).visibility,
+        )
+
+        listHolder.locationIndicator?.visibility = View.GONE
+        Assertions.assertEquals(
+            View.GONE,
+            listItemView.findViewById<View>(R.id.location_indicator).visibility,
+        )
     }
 
     /**

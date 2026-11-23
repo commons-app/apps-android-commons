@@ -2,10 +2,12 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +17,11 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageMetadataHelper
 import fr.free.nrw.commons.customselector.helper.ImageSelectionManager
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -26,12 +30,14 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.TreeMap
 import kotlin.collections.ArrayList
 
 /**
  * Custom selector ImageAdapter.
  */
+@Suppress("TooManyFunctions")
 class ImageAdapter(
     /**
      * Application Context.
@@ -54,9 +60,15 @@ class ImageAdapter(
             imageSelectListener,
             imageLoader,
         ),
+    initialViewMode: ImageViewMode = ImageViewMode.GRID,
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
+
+    /**
+     * Currently displayed layout. Changing it does not reset the selection state.
+     */
+    var viewMode: ImageViewMode = initialViewMode
 
     /**
      * ImageSelectedOrUpdated payload class.
@@ -127,11 +139,18 @@ class ImageAdapter(
     /**
      * Create View holder.
      */
+    override fun getItemViewType(position: Int): Int = viewMode.ordinal
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): ImageViewHolder {
-        val itemView = inflater.inflate(R.layout.item_custom_selector_image, parent, false)
+        val itemLayout =
+            when (viewMode) {
+                ImageViewMode.GRID -> R.layout.item_custom_selector_image
+                ImageViewMode.LIST -> R.layout.item_custom_selector_image_list
+            }
+        val itemView = inflater.inflate(itemLayout, parent, false)
         return ImageViewHolder(itemView)
     }
 
@@ -224,6 +243,7 @@ class ImageAdapter(
                         .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                         .into(holder.image)
                 }
+                bindListItemDetails(holder, position, image)
             }
 
             holder.itemView.setOnClickListener {
@@ -245,6 +265,54 @@ class ImageAdapter(
                     selectionManager.selectedImages,
                 )
                 true
+            }
+        }
+    }
+
+    /**
+     * Loads and binds the extra information shown for pictures in the list layout.
+     */
+    private fun bindListItemDetails(
+        holder: ImageViewHolder,
+        position: Int,
+        image: Image,
+    ) {
+        if (viewMode != ImageViewMode.LIST) return
+
+        holder.imageName?.text = image.name
+        holder.imageDetails?.text = null
+        holder.locationIndicator?.visibility = View.GONE
+        scope.launch(ioDispatcher) {
+            val metadata = ImageMetadataHelper.getOrLoad(image)
+            val details =
+                buildList {
+                    if (metadata.width > 0 && metadata.height > 0) {
+                        add(
+                            context.getString(
+                                R.string.custom_selector_image_dimensions,
+                                metadata.width,
+                                metadata.height,
+                            ),
+                        )
+                    }
+                    if (metadata.sizeBytes > 0) {
+                        add(Formatter.formatFileSize(context, metadata.sizeBytes))
+                    }
+                    add(
+                        if (metadata.hasGeolocation) {
+                            context.getString(R.string.custom_selector_image_has_location)
+                        } else {
+                            context.getString(R.string.custom_selector_image_no_location)
+                        },
+                    )
+                }.joinToString(" · ")
+            withContext(Dispatchers.Main) {
+                if (holder.bindingAdapterPosition == position && viewMode == ImageViewMode.LIST) {
+                    holder.imageName?.text = image.name
+                    holder.imageDetails?.text = details
+                    holder.locationIndicator?.visibility =
+                        if (metadata.hasGeolocation) View.VISIBLE else View.GONE
+                }
             }
         }
     }
@@ -419,6 +487,9 @@ class ImageAdapter(
         private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
+        val imageName: TextView? = itemView.findViewById(R.id.image_name)
+        val imageDetails: TextView? = itemView.findViewById(R.id.image_details)
+        val locationIndicator: ImageView? = itemView.findViewById(R.id.location_indicator)
 
         /**
          * Item selected view.

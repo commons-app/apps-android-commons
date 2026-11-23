@@ -50,9 +50,11 @@ import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
 import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
 import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
@@ -374,7 +376,7 @@ class CustomSelectorActivity :
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
             withContext(Dispatchers.Main) {
-                imageFragment?.showMarkUnmarkProgressDialog(text = progressDialogText)
+                imageFragment?.setMarkUnmarkProgressDialog(text = progressDialogText, show = true)
             }
 
             var allImagesAlreadyNotForUpload = true
@@ -428,7 +430,7 @@ class CustomSelectorActivity :
             }
 
             withContext(Dispatchers.Main) {
-                imageFragment?.dismissMarkUnmarkProgressDialog()
+                imageFragment?.setMarkUnmarkProgressDialog(text = "", show = false)
                 val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
                 bottomLayout.visibility = View.GONE
                 changeTitle(bucketName, 0)
@@ -477,6 +479,11 @@ class CustomSelectorActivity :
         limitError.visibility = View.INVISIBLE
         limitError.setOnClickListener { displayUploadLimitWarning() }
 
+        val viewModeToggle: ImageButton = findViewById(R.id.layout_toggle)
+        viewModeToggle.visibility = if (isImageFragmentOpen) View.VISIBLE else View.GONE
+        viewModeToggle.setOnClickListener { imageFragment?.toggleViewMode() }
+        updateViewModeToggleIcon()
+
         val overflowMenu: ImageButton = findViewById(R.id.menu_overflow)
         if (defaultKvStore.getBoolean("displayDeletionButton")) {
             overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
@@ -484,6 +491,22 @@ class CustomSelectorActivity :
         } else {
             overflowMenu.visibility = View.GONE
         }
+    }
+
+    /**
+     * Shows the icon for the layout the user will switch to.
+     */
+    fun updateViewModeToggleIcon() {
+        val viewModeToggle: ImageButton = findViewById(R.id.layout_toggle)
+        val (iconRes, descriptionRes) =
+            when (ImageHelper.getImageViewMode(this)) {
+                ImageViewMode.GRID ->
+                    R.drawable.ic_list_white_24dp to R.string.custom_selector_switch_to_list_view
+                ImageViewMode.LIST ->
+                    R.drawable.ic_view_grid_24dp to R.string.custom_selector_switch_to_grid_view
+            }
+        viewModeToggle.setImageResource(iconRes)
+        viewModeToggle.contentDescription = getString(descriptionRes)
     }
 
     private fun showPopupMenu(anchorView: View) {
