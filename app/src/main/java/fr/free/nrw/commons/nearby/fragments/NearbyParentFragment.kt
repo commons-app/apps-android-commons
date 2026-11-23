@@ -2389,7 +2389,8 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
-        val onlyNeedsPhoto = NearbyFilterState.getInstance().isNeedPhotoSelected
+        // The upload picker must show every place, also the ones that already have a picture
+        val onlyNeedsPhoto = NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
         if (selectedLabels == null || selectedLabels.size == 0) {
             replaceMarkerOverlays(placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto))
             return
