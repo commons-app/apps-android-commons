@@ -247,12 +247,15 @@ class ZoomableActivity : BaseActivity() {
             val images = result.images
             if (images.isNotEmpty()) {
                 this@ZoomableActivity.images = ImageHelper.filterImages(images, bucketId)
-                imageUri =
-                    if (this@ZoomableActivity.images.isNullOrEmpty()) {
-                        intent.data as Uri
-                    } else {
-                        this@ZoomableActivity.images!![position].uri
-                    }
+                if (this@ZoomableActivity.images.isNullOrEmpty()) {
+                    // The folder no longer contains any image, nothing to display.
+                    finish()
+                    return
+                }
+                // The requested image may have been deleted from the device while the
+                // picker still showed it, making the passed position out of bounds.
+                position = position.coerceIn(0, this@ZoomableActivity.images!!.size - 1)
+                imageUri = this@ZoomableActivity.images!![position].uri
                 Timber.d("URL = $imageUri")
                 init(imageUri)
                 onSwipe()
