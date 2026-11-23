@@ -612,6 +612,51 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
     }
 
+    @Test
+    fun `switching only places that need a photo searches the loaded area again`() {
+        loadPlacesIn(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun `switching during a search searches again when that search ends`() {
+        expectSearchableView(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+        nearbyPresenter.initializeMapOperations()
+        Mockito.clearInvocations(nearbyParentFragmentView)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+
+        // The running search shows its places, which were searched with the toggle off
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun `switching keeps the places of an advanced query`() {
+        expectSearchableView(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        nearbyPresenter.setAdvancedQuery("SELECT ?item WHERE {}")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java), anyString())
+    }
+
     private val shibuyaCenter = LatLng(35.6595, 139.7005, 0f)
     private val shibuya = arrayOf(LatLng(35.6698, 139.7081, 0f), LatLng(35.6492, 139.6929, 0f))
 
