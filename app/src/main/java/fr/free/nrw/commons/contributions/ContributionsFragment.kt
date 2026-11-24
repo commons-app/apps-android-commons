@@ -142,6 +142,9 @@ class ContributionsFragment(
         presenter!!.onAttachView(campaigns)
         contributionsPresenter!!.onAttachView(this)
         binding!!.campaignsView.visibility = View.GONE
+        if (activity is ProfileActivity) {
+            binding!!.cardViewNearby.visibility = View.GONE
+        }
         nearbyPermission.createPermissionView()
 
         if (savedInstanceState != null) {
