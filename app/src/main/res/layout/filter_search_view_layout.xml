@@ -35,9 +35,9 @@
         android:layout_marginEnd="@dimen/filter_padding"
         android:background="@drawable/nearby_search_view_background"
         android:queryBackground="@android:color/transparent"
-        android:searchIcon="@drawable/ic_search_blue_24dp"
+        app:queryHint="@string/nearby_search_hint"
         app:queryBackground="@android:color/transparent"
-        app:searchIcon="@drawable/ic_search_blue_24dp"
+        app:searchIcon="?attr/search_icon"
         app:theme="@style/NearbySearchBarTheme"/>
 
 </LinearLayout>

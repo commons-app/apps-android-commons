@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.Context
+import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import fr.free.nrw.commons.R
 
 internal fun SearchView.enableSearchIconFocus(
@@ -20,7 +22,15 @@ internal fun SearchView.enableSearchIconFocus(
         }
     }
     findViewById<TextView>(androidx.appcompat.R.id.search_src_text)?.apply {
-        setTextColor(ContextCompat.getColor(context, R.color.primaryDarkColor))
-        setHintTextColor(ContextCompat.getColor(context, R.color.secondaryTextColor))
+        setTextColor(context.themeColor(R.attr.nearbySearchTextColor))
+        setHintTextColor(context.themeColor(R.attr.nearbySearchHintColor))
     }
+}
+
+private fun Context.themeColor(
+    @AttrRes attr: Int,
+): Int {
+    val value = TypedValue()
+    theme.resolveAttribute(attr, value, true)
+    return value.data
 }
