@@ -27,7 +27,7 @@ class MediaConverter
          */
         fun convert(
             page: MwQueryPage,
-            entity: Entities.Entity,
+            entity: Entities.Entity?,
             imageInfo: ImageInfo,
         ): Media {
             val metadata = imageInfo.getMetadata()
@@ -50,10 +50,10 @@ class MediaConverter
                 null,
                 MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories()),
                 metadata.latLng,
-                entity.labels().mapValues { it.value.value() },
-                entity.descriptions().mapValues { it.value.value() },
-                entity.depictionIds(),
-                entity.creatorIds(),
+                entity?.labels()?.mapValues { it.value.value() } ?: emptyMap(),
+                entity?.descriptions()?.mapValues { it.value.value() } ?: emptyMap(),
+                entity?.depictionIds() ?: emptyList(),
+                entity?.creatorIds() ?: emptyList(),
                 myMap,
                 imageInfo.getMimeType(),
                 mediaTypeFrom(

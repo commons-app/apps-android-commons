@@ -41,10 +41,6 @@
     <item quantity="few">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">თე სურათი გიბჟინუ %1$s ლიცენზიათ</item>
-    <item quantity="other">თე სურათეფი გიბჟინუ %1$s ლიცენზიათ</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>
@@ -84,7 +80,6 @@
   <string name="upload_completed_notification_title">%1$s ეხარგილი რე!</string>
   <string name="upload_completed_notification_text">ქეგუწკანტეთ თქვანი ეხარგუაშ ოძირაფალო</string>
   <string name="upload_progress_notification_title_start">ეთმიხარგუ ფაილი: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$ იხარგუ</string>
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$s</string>
   <string name="upload_failed_notification_title">%1$s ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_paused_notification_title">%1$s-აშ ეხარგუა გაჩემებული რე</string>

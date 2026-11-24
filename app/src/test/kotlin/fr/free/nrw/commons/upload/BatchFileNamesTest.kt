@@ -63,4 +63,21 @@ class BatchFileNamesTest {
             numberFilesWithSameName(fileNames, 48213),
         )
     }
+
+    @Test
+    fun `nothing is added to a name used by one file`() {
+        assertEquals(0, batchNumberBytes(1))
+    }
+
+    @Test
+    fun `batchNumberBytes matches what is added to the name`() {
+        for (fileCount in listOf(2, 9, 10, 20, 100)) {
+            val numbered = numberFilesWithSameName(List(fileCount) { "Cross.jpg" }, MAX_BATCH_NUMBER)
+
+            assertEquals(
+                numbered.last().toByteArray().size - "Cross.jpg".toByteArray().size,
+                batchNumberBytes(fileCount),
+            )
+        }
+    }
 }

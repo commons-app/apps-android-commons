@@ -858,6 +858,8 @@
   <string name="caption_copied_to_clipboard">Toast.</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Notice when finishing upload.</string>
   <string name="show_in_explore">An option in the three-dots menu in the map. Switches to the Explore mode.\n\n“Explore” should be translated as in {{msg-wm|Commons-android-strings-navigation item explore}}</string>
+  <string name="nearby_show_only_needs_photo">Label of the Nearby map toolbar button that hides the places which already have a picture (green pins), leaving the ones that need a photo (red pins).</string>
+  <string name="nearby_show_all_places">Label of the same Nearby map toolbar button once it is on. Shows the places that already have a picture again.</string>
   <string name="show_in_nearby">An option in the three-dots menu in the map. Switches to the Nearby mode.\n\n‘Nearby’ should be translated as in {{msg-wm|Commons-android-strings-navigation item nearby}}</string>
   <string name="image_tag_line_created_and_uploaded_by">A little caption in a list of uploads when the image was created and uploaded by the same user. %1$s is a username.</string>
   <string name="image_tag_line_created_by_and_uploaded_by">A little caption in a list of uploads when the image was created by one user, but the latest version was uploaded by another. %1$s and %2$s are usernames.</string>

@@ -18,7 +18,7 @@ import java.lang.reflect.Field
  * BEWARE: This means that a List or other Collection of objects that have @Required fields can
  * contain null elements after deserialization!
  *
- * TODO: Handle null values in lists during deserialization, perhaps with a new @RequiredElements
+ * Possible improvement: Handle null values in lists during deserialization, perhaps with a new @RequiredElements
  * annotation and another corresponding TypeAdapter(Factory).
  */
 class RequiredFieldsCheckOnReadTypeAdapterFactory : TypeAdapterFactory {
