@@ -6,6 +6,7 @@ import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.nearby.model.NearbyResponse
+import fr.free.nrw.commons.retryAfterMillis
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Single
@@ -102,7 +103,7 @@ ${"wd:" + place.wikiDataEntityId}"""
                 }
                 return places
             } else {
-                throw IOException("Unexpected response code: " + response.code)
+                throw SparqlResponseException(response.code, response.headers.retryAfterMillis())
             }
         }
     }
@@ -213,3 +214,14 @@ ${"wd:" + place.wikiDataEntityId}"""
         return Request.Builder().url(urlBuilder.build()).build()
     }
 }
+
+/**
+ * The query service answered with an error, for example 429 when it is refusing queries for a while.
+ *
+ * @param code the HTTP status code
+ * @param retryAfterMillis how long the service asked to wait before trying again, or null
+ */
+class SparqlResponseException(
+    val code: Int,
+    val retryAfterMillis: Long?,
+) : IOException("Unexpected response code: $code")
