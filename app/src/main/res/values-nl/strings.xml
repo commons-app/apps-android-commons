@@ -61,10 +61,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Deze afbeelding krijgt de licentie %1$s</item>
-    <item quantity="other">Deze afbeeldingen krijgen de licentie %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -104,7 +100,6 @@
   <string name="upload_completed_notification_title">%1$s geüpload</string>
   <string name="upload_completed_notification_text">Tik om uw upload te bekijken</string>
   <string name="upload_progress_notification_title_start">Bestand wordt geüpload: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s aan het uploaden</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s wordt afgerond</string>
   <string name="upload_failed_notification_title">Fout bij het uploaden van %1$s</string>
   <string name="upload_paused_notification_title">Het uploaden van %1$s is gepauzeerd</string>

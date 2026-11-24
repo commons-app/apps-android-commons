@@ -3,10 +3,6 @@
 * Kolonahe
 -->
 <resources>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">E laikini ana kēia kiʻi ma lalo o %1$s</item>
-    <item quantity="other">E laikini ʻia kēia mau kiʻi ma lalo o %1$s</item>
-  </plurals>
   <string name="app_name" fuzzy="true">Kahilehulehu Wikimedia</string>
   <string name="menu_settings">Makemake</string>
   <string name="username">Inoa mea hoʻohana</string>
@@ -21,7 +17,6 @@
   <string name="upload_completed_notification_title">Ua hoʻouka ʻia ʻo %1$s</string>
   <string name="upload_completed_notification_text">Kīkē no ka ʻike ʻana o kāu hoʻouka</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Hoʻomaka nei i ka hoʻouka ʻana o %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Hoʻouka nei ʻo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Hele a pau ka hoʻouka ʻana o %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>
   <string name="upload_failed_notification_subtitle">Kīkē no ka ʻike ʻana</string>

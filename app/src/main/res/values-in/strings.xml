@@ -63,9 +63,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="other">Gambar ini akan diberi lisensi %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d Unggahan</item>
   </plurals>
@@ -104,7 +101,6 @@
   <string name="upload_completed_notification_title">%1$s terunggah!</string>
   <string name="upload_completed_notification_text">Tekan untuk melihat unggahan Anda</string>
   <string name="upload_progress_notification_title_start">Mengunggah berkas: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
   <string name="upload_failed_notification_title">Pengunggaha %1$s gagal</string>
   <string name="upload_paused_notification_title">Mengunggah %1$s tertunda</string>

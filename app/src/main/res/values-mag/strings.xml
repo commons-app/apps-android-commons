@@ -37,10 +37,6 @@
     <item quantity="one">%1$d उपारोपण</item>
     <item quantity="other">%1$d उपारोपण</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ई चित्रके प्रयोग %1$s लाइसेन्सके अन्तर्गत होतै</item>
-    <item quantity="other">ईसभ चित्रके प्रयोग %1$s लाइसेन्सके अन्तर्गत होतै</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d उपारोपण</item>
     <item quantity="other">%1$d उपारोपण</item>
@@ -74,7 +70,6 @@
   <string name="upload_completed_notification_title">%1$s उपारोपित होलै !</string>
   <string name="upload_completed_notification_text">अपन अपलोड देखेला टैप करथिन</string>
   <string name="upload_progress_notification_title_start">सञ्चिका अपलोड होवैत: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s अपलोड होवैत</string>
   <string name="upload_progress_notification_title_finishing">%1$s के अपलोड पूर्ण</string>
   <string name="upload_failed_notification_title">%1$s के अपलोड विफल</string>
   <string name="upload_paused_notification_title">%1$s के अपलोड रोकल गेलै</string>

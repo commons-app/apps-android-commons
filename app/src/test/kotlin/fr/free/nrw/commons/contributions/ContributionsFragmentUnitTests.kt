@@ -605,4 +605,41 @@ class ContributionsFragmentUnitTests {
         verify(locationManager).removeLocationListener(controller)
         verify(locationManager).unregisterLocationManager()
     }
+
+    /** Nearby cards are hidden when viewing user profile. */
+    @Test
+    fun testNearbyControllerHidesCardWhenUserProfile() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.binding = FragmentContributionsBinding.bind(view)
+        fragment.isUserProfile = true
+        val controller = ContributionsNearbyController(fragment)
+        val places = mock(MapController::class.java).NearbyPlacesInfo()
+        places.placeList =
+            listOf(
+                Place().apply {
+                    pic = ""
+                    exists = true
+                },
+            )
+        nearbyNotificationCardView.visibility = View.VISIBLE
+
+        controller.updateNearbyNotification(places)
+        Assert.assertEquals(View.GONE, nearbyNotificationCardView.visibility)
+    }
+
+    /** The nearby controller suppresses location registration when viewing user profile. */
+    @Test
+    fun testNearbyControllerSuppressedWhenUserProfile() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val locationManager = mock(LocationServiceManager::class.java)
+        fragment.locationManager = locationManager
+        fragment.isUserProfile = true
+        val controller = ContributionsNearbyController(fragment)
+        controller.create()
+
+        controller.resumeLocation()
+        controller.resumeSensor()
+
+        verifyNoInteractions(locationManager)
+    }
 }
