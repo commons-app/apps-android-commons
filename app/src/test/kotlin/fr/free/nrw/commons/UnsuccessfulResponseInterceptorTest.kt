@@ -4,12 +4,14 @@ import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import okhttp3.Headers
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
@@ -102,6 +104,47 @@ class UnsuccessfulResponseInterceptorTest {
             }
 
         assertEquals("Unsuccessful response: HTTP 503", exception.message)
+    }
+
+    @Test
+    fun httpErrorKeepsRetryAfterInSeconds() {
+        server.enqueue(MockResponse().setResponseCode(503).setHeader("Retry-After", "120"))
+
+        val exception =
+            assertThrows(UnsuccessfulResponseException::class.java) {
+                client.newCall(request()).execute()
+            }
+
+        assertEquals("Unsuccessful response: HTTP 503", exception.message)
+        assertEquals(120_000L, exception.retryAfterMillis)
+    }
+
+    @Test
+    fun httpErrorWithoutRetryAfterHasNoWait() {
+        server.enqueue(MockResponse().setResponseCode(429))
+
+        val exception =
+            assertThrows(UnsuccessfulResponseException::class.java) {
+                client.newCall(request()).execute()
+            }
+
+        assertNull(exception.retryAfterMillis)
+    }
+
+    @Test
+    fun retryAfterCanBeAnHttpDate() {
+        val headers = Headers.headersOf("Retry-After", "Wed, 21 Oct 2015 07:28:00 GMT")
+        val twoMinutesBefore = 1_445_412_480_000L - 120_000L
+
+        assertEquals(120_000L, headers.retryAfterMillis(twoMinutesBefore))
+    }
+
+    @Test
+    fun retryAfterInThePastOrUnreadableIsNoWait() {
+        val past = Headers.headersOf("Retry-After", "Wed, 21 Oct 2015 07:28:00 GMT")
+
+        assertEquals(0L, past.retryAfterMillis(2_000_000_000_000L))
+        assertNull(Headers.headersOf("Retry-After", "soon").retryAfterMillis())
     }
 
     @Test
