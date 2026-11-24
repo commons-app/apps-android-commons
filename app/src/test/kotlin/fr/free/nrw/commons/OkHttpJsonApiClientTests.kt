@@ -2,6 +2,7 @@ package fr.free.nrw.commons
 
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.times
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
@@ -95,6 +96,29 @@ class OkHttpJsonApiClientTests {
         }
         verify(okhttpClient, times(2)).newCall(any())
         verify(call, times(2)).execute()
+    }
+
+    @Test
+    fun `nearby places query leaves out places with a picture only when asked`() {
+        for (params in listOf(
+            NearbyQueryParams.Rectangular(latLng, latLng, true),
+            NearbyQueryParams.Radial(latLng, 10f, true),
+            NearbyQueryParams.Rectangular(latLng, latLng),
+        )) {
+            try {
+                okHttpJsonApiClient.getNearbyPlaces(params, "test", false, null)
+            } catch (e: IOException) {
+                assertEquals("test", e.message)
+            }
+        }
+
+        val requests = argumentCaptor<Request>()
+        verify(okhttpClient, times(3)).newCall(requests.capture())
+        val queries = requests.allValues.map { it.url.queryParameter("query")!! }
+        assertTrue(queries[0].contains("MINUS {?item wdt:P18 ?image}"))
+        assertTrue(queries[1].contains("MINUS {?item wdt:P18 ?image}"))
+        assertFalse(queries[2].contains("P18"))
+        assertFalse(queries.any { it.contains("PICTURE_FILTER") })
     }
 
     @Test
