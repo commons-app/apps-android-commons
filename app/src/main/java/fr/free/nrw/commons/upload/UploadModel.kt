@@ -21,10 +21,6 @@ import javax.inject.Named
 import javax.inject.Singleton
 import kotlin.random.Random
 
-// One 5-digit number for the whole upload, like the one findUniqueFileName adds
-private const val MIN_BATCH_NUMBER = 10000
-private const val MAX_BATCH_NUMBER = 99999
-
 /**
  * Encapsulates license and preference dependencies required by UploadModel.
  */

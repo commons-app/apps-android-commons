@@ -2,10 +2,12 @@ package fr.free.nrw.commons.explore.search
 
 import android.content.Context
 import android.os.Looper
+import androidx.fragment.app.Fragment
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.createTestClient
@@ -113,6 +115,29 @@ class SearchActivityUnitTests {
         Whitebox.setInternalState(activity, "viewPagerAdapter", viewPagerAdapter)
         searchQueryController.setTabs(viewPagerAdapter, Whitebox.getInternalState(activity, "compositeDisposable"))
         verify(viewPagerAdapter).notifyDataSetChanged()
+    }
+
+    @Test
+    fun testResumeKeepsOpenFilePage() {
+        val controller =
+            Robolectric
+                .buildActivity(SearchActivity::class.java)
+                .create()
+                .start()
+                .resume()
+        val searchActivity = controller.get()
+        searchActivity.supportFragmentManager
+            .beginTransaction()
+            .add(R.id.mediaContainer, Fragment())
+            .addToBackStack(null)
+            .commit()
+        searchActivity.supportFragmentManager.executePendingTransactions()
+
+        // Coming back to the screen, for example from an editor, must not close the open page
+        controller.pause().resume()
+        shadowOf(Looper.getMainLooper()).idle()
+
+        assertEquals(1, searchActivity.supportFragmentManager.backStackEntryCount)
     }
 
     @Test

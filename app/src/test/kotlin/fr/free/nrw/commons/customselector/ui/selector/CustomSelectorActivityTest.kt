@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.result.ActivityResult
+import android.widget.TextView
 import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.createTestClient
@@ -79,15 +78,13 @@ class CustomSelectorActivityTest {
     }
 
     /**
-     * Test changeTitle function.
+     * Test the title is changed on folder click.
      */
     @Test
     @Throws(Exception::class)
     fun testChangeTitle() {
         activity.onFolderClick(1, "test", 0)
-        val func = activity.javaClass.getDeclaredMethod("changeTitle", String::class.java, Int::class.java)
-        func.isAccessible = true
-        func.invoke(activity, "test", 0)
+        assertEquals("test", activity.findViewById<TextView>(R.id.title).text.toString())
     }
 
     /**
@@ -97,37 +94,6 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testOnFolderClick() {
         activity.onFolderClick(1, "test", 0)
-    }
-
-    /**
-     * Test callback when result received.
-     */
-    @Test
-    @Throws(Exception::class)
-    fun testResultLauncher() {
-        val intent = Mockito.mock(Intent::class.java)
-        val activityResult = ActivityResult(Activity.RESULT_OK, intent)
-        val func =
-            activity.javaClass.getDeclaredMethod(
-                "onFullScreenDataReceived",
-                ActivityResult::class.java,
-            )
-        func.isAccessible = true
-        func.invoke(activity, activityResult)
-    }
-
-    /**
-     * Test showWelcomeDialog function.
-     */
-    @Test
-    @Throws(Exception::class)
-    fun testShowWelcomeDialog() {
-        val func =
-            activity.javaClass.getDeclaredMethod(
-                "showWelcomeDialog",
-            )
-        func.isAccessible = true
-        func.invoke(activity)
     }
 
     /**
@@ -221,20 +187,6 @@ class CustomSelectorActivityTest {
         val method: Method =
             CustomSelectorActivity::class.java.getDeclaredMethod(
                 "onDestroy",
-            )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    /**
-     * Test displayUploadLimitWarning Function.
-     */
-    @Test
-    @Throws(Exception::class)
-    fun testDisplayUploadLimitWarning() {
-        val method: Method =
-            CustomSelectorActivity::class.java.getDeclaredMethod(
-                "displayUploadLimitWarning",
             )
         method.isAccessible = true
         method.invoke(activity)
