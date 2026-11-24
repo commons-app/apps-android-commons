@@ -121,6 +121,7 @@ class MwQueryPage : BaseModel() {
 
     @Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
     class CategoryInfo {
+        @SerializedName("hidden")
         val isHidden: Boolean = false
         private val size = 0
         private val pages = 0

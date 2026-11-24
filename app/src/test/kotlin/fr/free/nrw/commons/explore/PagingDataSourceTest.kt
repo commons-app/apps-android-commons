@@ -10,7 +10,7 @@ import fr.free.nrw.commons.explore.depictions.search.LoadingStates
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource
 import io.reactivex.plugins.RxJavaPlugins
-import io.reactivex.processors.PublishProcessor
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
@@ -20,7 +20,7 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceTest {
-    private lateinit var loadingStates: PublishProcessor<LoadingState>
+    private lateinit var loadingStates: BehaviorProcessor<LoadingState>
     private lateinit var searchDepictionsDataSource: TestPagingDataSource
 
     @Mock
@@ -30,7 +30,7 @@ class PagingDataSourceTest {
     fun setUp() {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         MockitoAnnotations.openMocks(this)
-        loadingStates = PublishProcessor.create()
+        loadingStates = BehaviorProcessor.create()
         searchDepictionsDataSource =
             TestPagingDataSource(
                 loadingStates,

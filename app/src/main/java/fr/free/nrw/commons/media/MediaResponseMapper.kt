@@ -40,6 +40,12 @@ class MediaResponseMapper
                                         mediaConverter.convert(page, entity, it)
                                     }
                                 }
+                        }.onErrorReturn {
+                            pages.mapNotNull { page ->
+                                page.imageInfo()?.let {
+                                    mediaConverter.convert(page, null, it)
+                                }
+                            }
                         }
             }
     }

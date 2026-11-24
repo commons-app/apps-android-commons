@@ -56,7 +56,6 @@ class CategoriesModelTest {
             categoryClient.searchCategoriesForPrefix(
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.anyInt(),
-                ArgumentMatchers.anyInt(),
             ),
         ).thenReturn(Single.just(expectedList))
 
@@ -94,11 +93,7 @@ class CategoriesModelTest {
     @Test
     fun `typed search includes the plural category missing from the singular prefix page`() {
         whenever(
-            categoryClient.searchCategoriesForPrefix(
-                ArgumentMatchers.eq("Cat"),
-                ArgumentMatchers.anyInt(),
-                ArgumentMatchers.anyInt(),
-            ),
+            categoryClient.searchCategoriesForPrefix("Cat", CategoriesModel.SEARCH_CATS_LIMIT),
         ).thenReturn(
             Single.just(
                 listOf(
@@ -108,11 +103,7 @@ class CategoriesModelTest {
             ),
         )
         whenever(
-            categoryClient.searchCategoriesForPrefix(
-                ArgumentMatchers.eq("Cats"),
-                ArgumentMatchers.anyInt(),
-                ArgumentMatchers.anyInt(),
-            ),
+            categoryClient.searchCategoriesForPrefix("Cats", CategoriesModel.SEARCH_CATS_LIMIT),
         ).thenReturn(Single.just(listOf(categoryItem("Cats"))))
 
         val names =
@@ -122,6 +113,48 @@ class CategoriesModelTest {
                 .map { it.name }
 
         Assert.assertEquals(listOf("Cat", "Cats", "Cat's Eye Nebula"), names)
+    }
+
+    @Test
+    fun `searchMore alternates the text search and the next prefix page`() {
+        whenever(categoryClient.hasMoreTextSearchPages("Cats")).thenReturn(true)
+        whenever(categoryClient.hasMorePrefixPages("Cats")).thenReturn(true)
+        whenever(categoryClient.nextTextSearchPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Black cats"))))
+        whenever(categoryClient.nextPrefixPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Cats in art"))))
+
+        val pages = (1..3).map { categoriesModel.searchMore("Cats").blockingGet().map { it.name } }
+
+        Assert.assertEquals(listOf(listOf("Black cats"), listOf("Cats in art"), listOf("Black cats")), pages)
+    }
+
+    @Test
+    fun `searchMore finds a category that differs in case after the first word`() {
+        // The prefix search has nothing for this, "Tokyo" is capitalised in the category name
+        whenever(categoryClient.hasMoreTextSearchPages("Supermarkets in tokyo")).thenReturn(true)
+        whenever(categoryClient.nextTextSearchPage("Supermarkets in tokyo", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Supermarkets in Tokyo"))))
+
+        val names = categoriesModel.searchMore("Supermarkets in tokyo").blockingGet().map { it.name }
+
+        Assert.assertEquals(listOf("Supermarkets in Tokyo"), names)
+    }
+
+    @Test
+    fun `searchMore skips an empty page and is empty once both searches are used up`() {
+        whenever(categoryClient.hasMoreTextSearchPages("Cats")).thenReturn(true, false)
+        whenever(categoryClient.hasMorePrefixPages("Cats")).thenReturn(true, true, false)
+        whenever(categoryClient.nextTextSearchPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(emptyList()))
+        whenever(categoryClient.nextPrefixPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Cats in art"))))
+
+        Assert.assertEquals(
+            listOf("Cats in art"),
+            categoriesModel.searchMore("Cats").blockingGet().map { it.name },
+        )
+        Assert.assertEquals(emptyList<CategoryItem>(), categoriesModel.searchMore("Cats").blockingGet())
     }
 
     @Test
