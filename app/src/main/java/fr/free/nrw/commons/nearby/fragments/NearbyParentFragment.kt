@@ -25,6 +25,7 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -415,6 +416,14 @@ class NearbyParentFragment :
         val showInExploreButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_show_in_explore)
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
+        val onlyNeedsPhotoButton = menu.findItem(fr.free.nrw.commons.R.id.item_only_needs_photo)
+        showOnlyNeedsPhotoState(onlyNeedsPhotoButton)
+        onlyNeedsPhotoButton.setOnMenuItemClickListener {
+            NearbyFilterState.setNeedPhotoSelected(!NearbyFilterState.getInstance().isNeedPhotoSelected)
+            showOnlyNeedsPhotoState(it)
+            setFilterState()
+            true
+        }
         refreshButton.setOnMenuItemClickListener {
             runNearbyMenuAction { emptyCache() }
             false
@@ -448,6 +457,17 @@ class NearbyParentFragment :
                 savePlacesAsKML()
             }
             false
+        }
+    }
+
+    /** Shows a red pin when only places without a picture are shown, red and green pins otherwise. */
+    private fun showOnlyNeedsPhotoState(item: MenuItem) {
+        if (NearbyFilterState.getInstance().isNeedPhotoSelected) {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_red_pin)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_all_places)
+        } else {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_all_pins)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_only_needs_photo)
         }
     }
 
@@ -2388,8 +2408,10 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
+        // The upload picker must show every place, also the ones that already have a picture
+        val onlyNeedsPhoto = NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
         if (selectedLabels == null || selectedLabels.size == 0) {
-            replaceMarkerOverlays(NearbyController.markerLabelList)
+            replaceMarkerOverlays(placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto))
             return
         }
         val placeGroupsToShow = ArrayList<MarkerPlaceGroup>()
@@ -2444,7 +2466,7 @@ class NearbyParentFragment :
                 )
             }
         }
-        replaceMarkerOverlays(placeGroupsToShow)
+        replaceMarkerOverlays(placesToShow(placeGroupsToShow, onlyNeedsPhoto))
     }
 
     override fun getCameraTarget(): LatLng? = if (binding!!.map == null) null else mapFocus
@@ -3584,5 +3606,18 @@ class NearbyParentFragment :
          * @return `true` if '(' or ')' is found, `false` otherwise.
          */
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
+
+        /**
+         * Drops the places that already have a picture (green pins) when [onlyNeedsPhoto] is set.
+         */
+        fun placesToShow(
+            placeGroups: List<MarkerPlaceGroup>,
+            onlyNeedsPhoto: Boolean,
+        ): List<MarkerPlaceGroup> =
+            if (onlyNeedsPhoto) {
+                placeGroups.filter { it.place.pic.isNullOrBlank() }
+            } else {
+                placeGroups
+            }
     }
 }
