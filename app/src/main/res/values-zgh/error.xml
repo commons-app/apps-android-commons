@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Daoudsfouli
 * Hakim1bal
 -->
 <resources>
+  <string name="crash_dialog_title">ⴽⵓⵎⵏⵣ ⵜⴱⴷⴹⵍ</string>
+  <string name="crash_dialog_text">ⴰⵀⵢⵓ.ⵉⵎⵙⴰⵔ ⴽⴰ!</string>
+  <string name="crash_dialog_comment_prompt">ⵉⵏⵉ ⴰⵖ ⵎⴰ ⵜⵙⴽⴰⵔⴷ, ⴷⴼⴼⵉⵔ ⴷⵔⵓ ⴰⵖ ⵜ ⴳ ⵉⵎⴰⵢⵍ. ⴰⵢⴰ ⴰⴷ ⴰⵖ ⵢⴰⵡⵙ  ⴰⴷ ⵜ ⵏⵙⵙⵓⴽⵏ!</string>
   <string name="crash_dialog_ok_toast">ⵜⴰⵏⵎⵎⵉⵔⵜ!</string>
 </resources>

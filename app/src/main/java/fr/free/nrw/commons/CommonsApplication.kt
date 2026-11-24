@@ -9,7 +9,9 @@ import android.content.Intent
 import android.database.sqlite.SQLiteException
 import android.os.Build
 import android.os.Process
+import android.util.AndroidRuntimeException
 import android.util.Log
+import android.webkit.CookieManager
 import androidx.multidex.MultiDexApplication
 import androidx.work.WorkManager
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -25,8 +27,10 @@ import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.db.AppDatabase
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesTable
+import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.logging.CrashLoggingExceptionHandler
 import fr.free.nrw.commons.logging.FileLoggingTree
 import fr.free.nrw.commons.logging.LogUtils
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher
@@ -97,9 +101,12 @@ class CommonsApplication : MultiDexApplication() {
     @Inject
     lateinit var appDatabase: AppDatabase
 
+    // Fresco's third-party initializer can fail in unit tests after the image pipeline is configured.
+
     /**
      * Used to declare and initialize various components and dependencies
      */
+    @Suppress("TooGenericExceptionCaught")
     override fun onCreate() {
         super.onCreate()
 
@@ -129,11 +136,14 @@ class CommonsApplication : MultiDexApplication() {
                 .setNetworkFetcher(customOkHttpNetworkFetcher)
                 .setDownsampleEnabled(true)
                 .build()
-        try {
-            Fresco.initialize(this, config)
-        } catch (e: Exception) {
-            Timber.e(e)
-            // TODO: Remove when we're able to initialize Fresco in test builds.
+        if ("robolectric" != android.os.Build.FINGERPRINT) {
+            try {
+                Fresco.initialize(this, config)
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        } else {
+            Timber.d("Skipping Fresco initialization in Robolectric test builds.")
         }
 
         createNotificationChannel(this)
@@ -172,6 +182,11 @@ class CommonsApplication : MultiDexApplication() {
 
         Timber.plant(tree)
         Timber.plant(DebugTree())
+
+        // Must run after ACRA is set up, so that ACRA still gets the crash
+        Thread.setDefaultUncaughtExceptionHandler(
+            CrashLoggingExceptionHandler(tree::logCrash, Thread.getDefaultUncaughtExceptionHandler()),
+        )
     }
 
     /**
@@ -190,7 +205,7 @@ class CommonsApplication : MultiDexApplication() {
             if (file.exists() && file.totalSpace > 1000000) { // In Kbs
                 file.delete()
             }
-        } catch (e: Exception) {
+        } catch (e: SecurityException) {
             Timber.e(e)
         }
     }
@@ -226,12 +241,13 @@ class CommonsApplication : MultiDexApplication() {
         // Reset the flag in case the worker never started and its finally block wasn't called.
         WorkRequestHelper.markUploadWorkerAsStopped()
 
+        val userName = sessionManager.userName
         val cacheDirectory = context.cacheDir
         val applicationDirectory = File(cacheDirectory.parent)
         // lib/ holds the app native libraries, databases/ and no_backup/ hold
-        // databases that are still open (Room, WorkManager). Deleting them breaks
-        // later queries, so their contents are cleared in code instead.
-        val foldersKept = setOf("lib", "databases", "no_backup")
+        // databases that are still open (Room, WorkManager), and shared_prefs/
+        // holds SharedPreferences files that are cleared selectively in code.
+        val foldersKept = setOf("lib", "databases", "no_backup", "shared_prefs")
         if (applicationDirectory.exists()) {
             val fileNames = applicationDirectory.list()
             for (fileName in fileNames) {
@@ -243,19 +259,39 @@ class CommonsApplication : MultiDexApplication() {
 
         sessionManager
             .logout()
-            .andThen(Completable.fromAction { cookieJar.clear() })
             .andThen(
+                Completable.fromAction {
+                    cookieJar.clear()
+                    clearWebViewCookies()
+                },
+            ).andThen(
                 Completable.fromAction {
                     Timber.d("All accounts have been removed")
                     clearImageCache()
-                    // TODO: fix preference manager
-                    defaultPrefs.clearAll()
+                    defaultPrefs.remove("isUserLoggedIn")
+                    defaultPrefs.remove("useAuthorName")
+                    defaultPrefs.remove("authorName")
+                    defaultPrefs.remove("revertCount")
+                    defaultPrefs.remove("uploadCount")
+                    if (!userName.isNullOrBlank()) {
+                        BasicKvStore(context, userName).clearAll()
+                    }
                     defaultPrefs.putBoolean("firstrun", false)
                     updateAllDatabases()
                 },
             ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ logoutListener.onLogoutComplete() }, { t: Throwable? -> Timber.e(t) })
+    }
+
+    private fun clearWebViewCookies() {
+        try {
+            val cookieManager = CookieManager.getInstance()
+            cookieManager.removeAllCookies(null)
+            cookieManager.flush()
+        } catch (e: AndroidRuntimeException) {
+            Timber.w(e, "Unable to clear WebView cookies")
+        }
     }
 
     /**

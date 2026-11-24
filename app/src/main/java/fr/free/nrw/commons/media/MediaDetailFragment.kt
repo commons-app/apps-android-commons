@@ -495,7 +495,17 @@ class MediaDetailFragment :
             ) {
                 _binding?.mediaDetailImageProgressBar?.visibility = View.GONE
                 Timber.e(throwable, "Failed to load media detail image")
-                revealMediaDetailWithoutImage()
+                if (imageInfoCache == null) {
+                    revealMediaDetailWithoutImage()
+                } else {
+                    // The low resolution image stays on screen, so keep its shape instead of
+                    // the fixed height used when no image could be loaded at all.
+                    _binding
+                        ?.mediaDetailScrollView
+                        ?.width
+                        ?.takeIf { it > 0 }
+                        ?.let { updateAspectRatio(it) }
+                }
             }
         }
 
@@ -547,8 +557,8 @@ class MediaDetailFragment :
     }
 
     /** Refreshes categories after the category editor updates the file. */
-    fun updateCategories() {
-        refreshCategoryList()
+    fun updateCategories(categories: List<String>) {
+        refreshCategoryList(categories)
     }
 
     override fun updateCategoryDisplay(categories: List<String>?): Boolean {

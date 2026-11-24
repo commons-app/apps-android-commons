@@ -39,10 +39,6 @@
     <item quantity="one">%1$d подигање</item>
     <item quantity="other">%1$d подигања</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Сликава ќе се води под лиценцата %1$s</item>
-    <item quantity="other">Сликиве ќе се водат под лиценците %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d подигање</item>
     <item quantity="other">%1$d подигања</item>
@@ -82,9 +78,10 @@
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
   <string name="upload_progress_notification_title_start">Подигање на податотеката: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на %1$s не успеа</string>
+  <string name="upload_metadata_pending_notification_title">%1$s е подигната, но нејзините описи и прикажувања сѐ уште не се зачувани</string>
+  <string name="upload_metadata_pending">Подигнато, описи и прикажувања сѐ уште не се зачувани</string>
   <string name="upload_paused_notification_title">Подигањето на %1$s е запрено</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <string name="upload_paused_notification_subtitle">Допрете за да погледате</string>
@@ -304,6 +301,7 @@
   <string name="upload_location_access_denied">Пристапот до местоположбата е одбиен. Задајте ја местоположбата рачно за да ја користите оваа функција.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="location_permission_rationale_explore">Се бара дозвола за приказ на список на околни слики</string>
+  <string name="nearby_bookmark">Обележувач</string>
   <string name="nearby_directions">Насоки</string>
   <string name="nearby_wikidata">Википодатоци</string>
   <string name="nearby_wikipedia">Википедија</string>
@@ -687,6 +685,7 @@
   <string name="cancelling_upload">Го откажувам подигањето…</string>
   <string name="retrying_upload">Повторно се обидувам да подигнам…</string>
   <string name="retrying_failed_uploads">Повторно се обидувам да ги извршам сите неуспешни подигања…</string>
+  <string name="upload_failed_server_error">Ризницата во моментов не може да го сработи барањето. Обидете се подоцна. (HTTP %1$d)</string>
   <string name="cancel_upload">Откажи подигање</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
@@ -825,6 +824,7 @@
   <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
   <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
   <string name="nearby_report_problem">Пријавете проблем со овој предмет на Википодатоци</string>
+  <string name="nearby_report_problem_short">Пријави проблем</string>
   <string name="please_enter_some_comments">Внесете коментар</string>
   <string name="talk">Разговор</string>
   <string name="write_something_about_the_item">Напишете нешто за предметот „%1$s“. Ова ќе биде јавно видливо.</string>

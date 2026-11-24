@@ -37,10 +37,6 @@
     <item quantity="one">%1$d cariament</item>
     <item quantity="other">%1$d cariament</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Costa plancia a sarà sota la licensa %1$s</item>
-    <item quantity="other">Coste plance a saran sota la licensa %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d cariament</item>
     <item quantity="other">%1$d cariament</item>
@@ -80,9 +76,10 @@
   <string name="upload_completed_notification_title">%1$s carià!</string>
   <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
   <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Falì a carué %1$s</string>
+  <string name="upload_metadata_pending_notification_title">%1$s a l\'é carià, ma soe legende e descrission a son ancor nen argistrà</string>
+  <string name="upload_metadata_pending">Carià, legende e descrission ancor nen argistrà</string>
   <string name="upload_paused_notification_title">Cariament %1$s an pàusa</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
   <string name="upload_paused_notification_subtitle">Sgnaché për vëdde</string>
@@ -101,6 +98,10 @@
   <string name="menu_view_file_page">Vëdde la pàgina dl\'archivi</string>
   <string name="share_title_hint">Legenda (obligatòria)</string>
   <string name="add_caption_toast">Për piasì, ch\'a-j buta na legenda a s\'archivi</string>
+  <string name="file_name_blacklisted_toast">Commons a aceta nen cost nòm d\'archivi. Për piasì ch\'a deuvra na legenda pi descritiva.</string>
+  <string name="file_name_too_long_toast">Costa legensa a l\'é tròp longa për esse dovrà tanme nòm d\'archivi. Për piasì, ch\'a la scursa.</string>
+  <string name="file_name_invalid_toast">Costa legenda a peul pa esse dovrà tanme nòm d\'archivi su Commons. Për piasì, ch\'a la modìfica.</string>
+  <string name="file_name_banned_extension_toast">Costa legenda a conten na sòrt d\'archivi tanme «.com». Për piasì, ch\'a la modìfica.</string>
   <string name="share_description_hint">Descrission</string>
   <string name="share_caption_hint">Legenda</string>
   <string name="login_failed_network">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
@@ -120,6 +121,7 @@
   <string name="refresh_button">Agiorné</string>
   <string name="display_list_button">Lista</string>
   <string name="contributions_subtitle_zero">(Ancor gnun cariament)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
   <string name="depictions_not_found">Gnun element Wikidata trovà ch\'a corësponda a %1$s</string>
   <string name="no_child_classes">%1$s a l\'ha gnun-e classe masnà</string>
@@ -215,6 +217,11 @@
   <string name="media_detail_license">Licensa</string>
   <string name="media_detail_coordinates">Coordinà</string>
   <string name="media_detail_coordinates_empty">Nen fornì</string>
+  <string name="playback_quality">Qualità dël son argistrà</string>
+  <string name="original">Original</string>
+  <string name="video_quality">Qualità dël filmà</string>
+  <string name="video_quality_auto">Automàtica</string>
+  <string name="video_quality_data_saver">Risparmi ëd dàit</string>
   <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
   <string name="_2fa_code">Còdes 2FA</string>
@@ -291,6 +298,7 @@
   <string name="upload_location_access_denied">Acess a la localisassion arfudà. Për piasì, ch\'a definissa soa localisassion a man për dovré costa fonsionalità.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
   <string name="location_permission_rationale_explore">A-i é da manca dël përmess pr\'ësmon-e na lista dle plance pijà lì-davzin</string>
+  <string name="nearby_bookmark">Marcapàgine</string>
   <string name="nearby_directions">Diression</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>

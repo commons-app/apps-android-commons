@@ -40,10 +40,6 @@
     <item quantity="one">%1$d чуйаккхар</item>
     <item quantity="other">%1$d чуйаккхар</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ХIара суртан лицензи йийра йу кху бухахь %1$s</item>
-    <item quantity="other">ХIокху сурташна лицензи йийра йу кху бухахь %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ДӀахӀоттор</item>
     <item quantity="other">%1$d ДӀахӀиттор</item>
@@ -83,7 +79,6 @@
   <string name="upload_completed_notification_title">%1$s чуйаьккхина!</string>
   <string name="upload_completed_notification_text">Чуйаьккхина файле хьажа тӀетаӀайe</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s чуйаккхар долина</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s чуйоккхуш йу</string>
   <string name="upload_progress_notification_title_finishing">%1$s чуйаккхар чекхдолуш ду</string>
   <string name="upload_failed_notification_title">%1$s чуяккхуш гӀалат даьлла</string>
   <string name="upload_paused_notification_title">Чуйакхар  %1$s сацийна</string>

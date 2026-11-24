@@ -62,7 +62,7 @@ interface CategoriesContract {
         /**
          * Refreshes the categories
          */
-        fun refreshCategories()
+        fun refreshCategories(categories: List<String>)
 
         /**
          * Navigate the user to Login Activity
@@ -72,6 +72,11 @@ interface CategoriesContract {
 
     interface UserActionListener : BasePresenter<View> {
         fun searchForCategories(query: String)
+
+        /**
+         * Adds the next page of results for the current search to the end of the list
+         */
+        fun loadMoreCategories()
 
         fun verifyCategories()
 

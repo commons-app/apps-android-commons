@@ -210,7 +210,7 @@ class UploadNotificationHelper
                         R.string.upload_failed_notification_title,
                         displayTitle,
                     ),
-                ).setContentText(contribution.errorInfo)
+                ).setContentText(uploadErrorMessage(context, contribution.errorInfo))
                 .setProgress(PROGRESS_ZERO, PROGRESS_ZERO, false)
                 .setOngoing(false)
                 .useUploadResultChannel()

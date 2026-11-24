@@ -1,14 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
+  <item android:id="@+id/item_only_needs_photo"
+    android:title="@string/nearby_show_only_needs_photo"
+    app:showAsAction="always"
+    android:icon="@drawable/ic_nearby_all_pins" />
+
   <item android:id="@+id/item_refresh"
     android:title="Refresh"
-    app:showAsAction="ifRoom"
+    app:showAsAction="always"
     android:icon="@drawable/ic_refresh_24dp_nearby" />
 
   <item android:id="@+id/list_sheet"
     android:title="@string/list_sheet"
-    app:showAsAction="ifRoom|withText"
+    app:showAsAction="always"
     android:icon="@drawable/ic_list_white_24dp"
     />
 

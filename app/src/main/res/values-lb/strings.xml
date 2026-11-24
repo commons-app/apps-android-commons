@@ -36,10 +36,6 @@
     <item quantity="one">%1$d Fichier eropgelueden</item>
     <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
-    <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d eropgeluedene Fichier</item>
     <item quantity="other">%1$d eropgeluede Fichieren</item>
@@ -73,7 +69,6 @@
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Tippt fir de Fichier ze gesinn, deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_paused_notification_title">Eropluede vu(n) %1$s pauséiert</string>
@@ -348,6 +343,7 @@
   <string name="badges">Badgen</string>
   <string name="statistics_thanks">Mercie kritt</string>
   <string name="statistics_featured">Bemierkenswäert Biller</string>
+  <string name="statistics_wikidata_edits">Biller iwwer „Plazen an der Géigend“</string>
   <string name="level">Niveau %1$d</string>
   <string name="profile_withLevel">%1$s (Niveau %2$s)</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
@@ -361,6 +357,7 @@
   <string name="images_used_explanation">D\'Zuel vu Biller, déi Dir op Commons eroplueden hutt an déi a Wikimedia-Artikele benotzt goufen</string>
   <string name="error_occurred">Feeler opgetrueden!</string>
   <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
+  <string name="notifications_channel_name_uploads">Fortschrëtt vum Eroplueden</string>
   <string name="preference_author_name_toggle">Benotzerdefinéierten Auteursnumm benotzen</string>
   <string name="preference_author_name_toggle_summary">E benotzerdefinéierten Auteursnumm amplaz vun Ärem Benotzernumm beim Eropluede benotzen</string>
   <string name="preference_author_name">Benotzerdefinéierten Auteursnumm</string>
@@ -372,9 +369,12 @@
   <string name="display_nearby_notification_summary">Notifikatiounen an der App uweise fir déi nächstgeleeë Plaz, déi Biller brauch</string>
   <string name="list_sheet">Lëscht</string>
   <string name="storage_permission">Späicherberechtegung</string>
+  <string name="write_storage_permission_rationale_for_image_share">Mir brauchen Är Erlabnes, fir op den externe Späicher vun Ärem Apparat zouzegräifen, fir Biller eroplueden ze kënnen.</string>
   <string name="step_count">Schrëtt %1$d vu(n) %2$d: %3$s</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
+  <string name="upload_title_duplicate">Et gëtt e Fichier mam Numm %1$s. Sidd Dir sécher, datt Dir virufuere wëllt?\n\nHiweis: Et gëtt automatesch e passende Suffix hannert den Numm vum Fichier gesat.</string>
+  <string name="map_application_missing">Op Ärem Apparat gouf keng kompatibel Kaarten-App fonnt. Installéiert wgl. eng Kaarten-App, fir dës Funktioun benotzen ze kënnen.</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
   <string name="title_page_bookmarks_categories">Kategorien</string>
@@ -405,6 +405,7 @@
   <string name="show_deletion_button">Läschknäppche weisen</string>
   <string name="option_allow">Erlaben</string>
   <string name="option_dismiss">Verwerfen</string>
+  <string name="error_processing_image">Beim Traitéiere vum Bild ass e Feeler geschitt. Probéiert wgl. nach eng Kéier!</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="send_thank_success_title">Merci schécken: Huet geklappt</string>
   <string name="send_thank_success_message">Dem Benotzer %1$s e Merci geschéckt</string>

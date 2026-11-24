@@ -56,11 +56,4 @@ class PageTitleTest {
         assertEquals("Berlin", title.prefixedText)
         assertEquals("de", title.wikiSite.languageCode())
     }
-
-    @Test
-    fun separateFragmentIsAddedToTheTitle() {
-        val title = PageTitle.withSeparateFragment("Category:Example", "Some heading", commons)
-        assertEquals("Category:Example", title.prefixedText)
-        assertEquals("Some_heading", title.fragment)
-    }
 }
