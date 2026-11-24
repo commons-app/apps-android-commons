@@ -3,11 +3,13 @@ package fr.free.nrw.commons.media
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.description.DescriptionEditActivity
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadMediaDetail
+import fr.free.nrw.commons.utils.ViewUtil.showShortToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -31,12 +33,19 @@ internal val MediaDetailFragment.descriptionList: Unit
                     Objects.requireNonNull(media?.filename!!),
                 ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { s: String? -> extractCaptionDescription(s!!) },
-                    { t: Throwable? -> Timber.e(t) },
-                ),
+                .doOnSuccess { wikiText -> extractCaptionDescription(wikiText) }
+                .subscribe({}, { t -> onDescriptionLoadFailed(t) }),
         )
     }
+
+/** Hides the spinner and shows the edit button again, so the user can retry. */
+private fun MediaDetailFragment.onDescriptionLoadFailed(t: Throwable) {
+    Timber.e(t)
+    val binding = currentBinding ?: return
+    binding.progressBarEdit.visibility = View.GONE
+    binding.descriptionEdit.visibility = View.VISIBLE
+    showShortToast(context, R.string.error_occurred)
+}
 
 /**
  * Gets captions and descriptions and merge them according to language code and arranges it in a
@@ -158,7 +167,7 @@ private fun appendDescriptionsFirst(
                 UploadMediaDetail(
                     language,
                     "",
-                    Objects.requireNonNull(descriptions[language]!!),
+                    Objects.requireNonNull(captions[language]!!),
                 ),
             )
         }

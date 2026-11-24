@@ -207,10 +207,25 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetCaptionQuality() {
+        whenever(uploadModel.items).thenReturn(mutableListOf(uploadItem))
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            imageProcessingService.validateCaption(uploadItem),
+            imageProcessingService.validateCaption(uploadItem, 1),
         )
+    }
+
+    @Test
+    fun testGetCaptionQualityCountsFilesWithTheSameName() {
+        val otherItem = mock<UploadItem>()
+        val differentItem = mock<UploadItem>()
+        whenever(uploadItem.filename).thenReturn("Cross.jpg")
+        whenever(otherItem.filename).thenReturn("Cross.jpg")
+        whenever(differentItem.filename).thenReturn("Tree.jpg")
+        whenever(uploadModel.items).thenReturn(mutableListOf(uploadItem, otherItem, differentItem))
+
+        repository.getCaptionQuality(uploadItem)
+
+        verify(imageProcessingService).validateCaption(uploadItem, 2)
     }
 
     @Test
