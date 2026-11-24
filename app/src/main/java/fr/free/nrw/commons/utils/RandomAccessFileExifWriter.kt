@@ -1,11 +1,20 @@
 package fr.free.nrw.commons.utils
 
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.utils.ExifValueEncoder.LONG_SIZE_BYTES
+import fr.free.nrw.commons.utils.ExifValueEncoder.TYPE_ASCII
+import fr.free.nrw.commons.utils.ExifValueEncoder.TYPE_BYTE
+import fr.free.nrw.commons.utils.ExifValueEncoder.TYPE_LONG
+import fr.free.nrw.commons.utils.ExifValueEncoder.TYPE_RATIONAL
+import fr.free.nrw.commons.utils.ExifValueEncoder.TYPE_SHORT
+import fr.free.nrw.commons.utils.ExifValueEncoder.encodeValue
+import fr.free.nrw.commons.utils.ExifValueEncoder.readU16
+import fr.free.nrw.commons.utils.ExifValueEncoder.readU32
+import fr.free.nrw.commons.utils.ExifValueEncoder.typeUnitSize
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.io.RandomAccessFile
-import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.collections.iterator
 
@@ -23,15 +32,6 @@ import kotlin.collections.iterator
  * - [copyExif]       – copies EXIF from an [androidx.exifinterface.media.ExifInterface] and writes into a file.
  */
 object RandomAccessFileExifWriter {
-
-    private const val TYPE_BYTE = 1
-    private const val TYPE_ASCII = 2
-    private const val TYPE_SHORT = 3
-    private const val TYPE_LONG = 4
-    private const val TYPE_RATIONAL = 5
-    private const val TYPE_UNDEFINED = 7
-    private const val TYPE_SLONG = 9
-    private const val TYPE_SRATIONAL = 10
 
     private enum class IfdGroup { IFD0, EXIF, GPS }
 
@@ -98,9 +98,6 @@ object RandomAccessFileExifWriter {
     private const val EXIF_SIGNATURE_LENGTH = 4 // Length of "Exif" prefix
     private const val IFD_ENTRY_SIZE_BYTES = 12 // Each TIFF IFD directory entry is 12 bytes
     private const val IFD_VALUE_OR_OFFSET_SIZE_BYTES = 4 // Values > 4 bytes are stored as offsets
-    private const val SHORT_SIZE_BYTES = 2
-    private const val LONG_SIZE_BYTES = 4
-    private const val RATIONAL_SIZE_BYTES = 8 // 4-byte numerator + 4-byte denominator
 
     /**
      * Update a single EXIF tag in a JPEG file.
@@ -311,82 +308,5 @@ object RandomAccessFileExifWriter {
                 )
             }
         }
-    }
-
-    /**
-     * Encodes a string value into a byte array matching the given EXIF
-     * [type], using [order] for multi-byte integers.
-     */
-    private fun encodeValue(type: Int, value: String, order: ByteOrder): ByteArray? {
-        return try {
-            when (type) {
-                TYPE_BYTE ->
-                    byteArrayOf(value.toInt().toByte())
-
-                TYPE_ASCII ->
-                    "$value\u0000".toByteArray(Charsets.US_ASCII)
-
-                TYPE_SHORT ->
-                    ByteBuffer.allocate(SHORT_SIZE_BYTES).order(order)
-                        .putShort(value.toInt().toShort()).array()
-
-                TYPE_LONG ->
-                    ByteBuffer.allocate(LONG_SIZE_BYTES).order(order)
-                        .putInt(value.toLong().toInt()).array()
-
-                TYPE_RATIONAL, TYPE_SRATIONAL -> {
-                    val parts = value.split(",")
-                    val buf = ByteBuffer.allocate(parts.size * RATIONAL_SIZE_BYTES).order(order)
-                    for (part in parts) {
-                        val nd = part.trim().split("/")
-                        if (nd.size != 2) return null
-                        buf.putInt(nd[0].trim().toInt())
-                        buf.putInt(nd[1].trim().toInt())
-                    }
-                    buf.array()
-                }
-
-                TYPE_SLONG ->
-                    ByteBuffer.allocate(LONG_SIZE_BYTES).order(order)
-                        .putInt(value.toInt()).array()
-
-                TYPE_UNDEFINED ->
-                    value.toByteArray(Charsets.US_ASCII)
-
-                else -> null
-            }
-        } catch (e: NumberFormatException) {
-            Timber.w("Cannot encode value '%s' for EXIF type %d", value, type)
-            null
-        }
-    }
-
-    /** Size in bytes of one unit of the given EXIF [type]. */
-    private fun typeUnitSize(type: Int): Int = when (type) {
-        TYPE_BYTE, TYPE_ASCII, TYPE_UNDEFINED -> 1
-        TYPE_SHORT -> SHORT_SIZE_BYTES
-        TYPE_LONG, TYPE_SLONG -> LONG_SIZE_BYTES
-        TYPE_RATIONAL, TYPE_SRATIONAL -> RATIONAL_SIZE_BYTES
-        else -> 1
-    }
-
-    @Suppress("MagicNumber") // Standard bit manipulation
-    private fun readU16(raf: RandomAccessFile, order: ByteOrder): Int {
-        val b1 = raf.readUnsignedByte()
-        val b2 = raf.readUnsignedByte()
-        return if (order == ByteOrder.LITTLE_ENDIAN) (b2 shl 8) or b1
-        else (b1 shl 8) or b2
-    }
-
-    @Suppress("MagicNumber") // Standard bit manipulation
-    private fun readU32(raf: RandomAccessFile, order: ByteOrder): Int {
-        val b1 = raf.readUnsignedByte()
-        val b2 = raf.readUnsignedByte()
-        val b3 = raf.readUnsignedByte()
-        val b4 = raf.readUnsignedByte()
-        return if (order == ByteOrder.LITTLE_ENDIAN)
-            (b4 shl 24) or (b3 shl 16) or (b2 shl 8) or b1
-        else
-            (b1 shl 24) or (b2 shl 16) or (b3 shl 8) or b4
     }
 }
