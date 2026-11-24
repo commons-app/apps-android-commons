@@ -21,10 +21,6 @@
     <item quantity="one">%1$d اپلوڈ</item>
     <item quantity="other">%1$d اپلوڈز</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</item>
-    <item quantity="other">یہ تصاویر %1$s کے تحت لائسنس یافتہ ہوں گی</item>
-  </plurals>
   <string name="navigation_item_explore">ایکسپلور</string>
   <string name="preference_category_appearance">ظاہریت</string>
   <string name="preference_category_general">عمومی</string>
@@ -45,7 +41,6 @@
   <string name="upload_completed_notification_title">%1$s اپلوڈ شد!</string>
   <string name="upload_completed_notification_text">اپنی اپلوڈ دیکھنے کے لیے ٹیپ کریں۔</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s کی اپلوڈنگ شروع ہو رہی ہے</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s اپلوڈ جاری</string>
   <string name="upload_progress_notification_title_finishing">%1$s کی اپلوڈنگ مکمل ہو رہی ہے</string>
   <string name="upload_failed_notification_title" fuzzy="true">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>

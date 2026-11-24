@@ -2,6 +2,7 @@ package fr.free.nrw.commons
 
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.times
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
@@ -95,6 +96,29 @@ class OkHttpJsonApiClientTests {
         }
         verify(okhttpClient, times(2)).newCall(any())
         verify(call, times(2)).execute()
+    }
+
+    @Test
+    fun `nearby places query leaves out places with a picture only when asked`() {
+        for (params in listOf(
+            NearbyQueryParams.Rectangular(latLng, latLng, true),
+            NearbyQueryParams.Radial(latLng, 10f, true),
+            NearbyQueryParams.Rectangular(latLng, latLng),
+        )) {
+            try {
+                okHttpJsonApiClient.getNearbyPlaces(params, "test", false, null)
+            } catch (e: IOException) {
+                assertEquals("test", e.message)
+            }
+        }
+
+        val requests = argumentCaptor<Request>()
+        verify(okhttpClient, times(3)).newCall(requests.capture())
+        val queries = requests.allValues.map { it.url.queryParameter("query")!! }
+        assertTrue(queries[0].contains("MINUS {?item wdt:P18 ?image}"))
+        assertTrue(queries[1].contains("MINUS {?item wdt:P18 ?image}"))
+        assertFalse(queries[2].contains("P18"))
+        assertFalse(queries.any { it.contains("PICTURE_FILTER") })
     }
 
     @Test
@@ -250,5 +274,35 @@ class OkHttpJsonApiClientTests {
             val exception = assertThrows(IOException::class.java) { query() }
             assertEquals("test", exception.message)
         }
+    }
+
+    @Test
+    fun testGetPlacesAsGPXContainsValidBounds() {
+        val southwest = LatLng(12.34, 77.56, 1.0f)
+        val northeast = LatLng(12.98, 77.99, 1.0f)
+
+        val result = okHttpJsonApiClient.getPlacesAsGPX(southwest, northeast)
+
+        assertNotNull(result)
+        val expectedBounds =
+            """<bounds minlat="12.34" minlon="77.56" maxlat="12.98" maxlon="77.99"/>"""
+        assertTrue(result!!.contains(expectedBounds))
+        assertFalse(result.contains("\$MIN_LATITUDE"))
+        assertFalse(result.contains("\$MIN_LONGITUDE"))
+        assertFalse(result.contains("\$MAX_LATITUDE"))
+        assertFalse(result.contains("\$MAX_LONGITUDE"))
+    }
+
+    @Test
+    fun testGetPlacesAsGPXSwappedOrderContainsValidBounds() {
+        val point1 = LatLng(15.5, 80.5, 1.0f)
+        val point2 = LatLng(10.0, 75.0, 1.0f)
+
+        val result = okHttpJsonApiClient.getPlacesAsGPX(point1, point2)
+
+        assertNotNull(result)
+        val expectedBounds =
+            """<bounds minlat="10.0" minlon="75.0" maxlat="15.5" maxlon="80.5"/>"""
+        assertTrue(result!!.contains(expectedBounds))
     }
 }

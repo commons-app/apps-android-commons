@@ -16,7 +16,7 @@ public class NearbyFilterState {
      */
     private NearbyFilterState() {
         existsSelected = true;
-        needPhotoSelected = true;
+        needPhotoSelected = false; // true hides the places that already have a picture
         wlmSelected = true;
         checkBoxTriState = -1; // Unknown
         selectedLabels = new ArrayList<>(); // Initially empty

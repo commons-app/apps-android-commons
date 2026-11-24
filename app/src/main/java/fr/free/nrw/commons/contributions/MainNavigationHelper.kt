@@ -21,7 +21,7 @@ import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFra
  */
 class MainNavigationHelper(
     private val activity: MainActivity,
-    private val tabHandler: MainTabHandler,
+    val tabHandler: MainTabHandler,
 ) {
     var contributionsFragment: ContributionsFragment? = null
     var nearbyParentFragment: NearbyParentFragment? = null
@@ -38,12 +38,6 @@ class MainNavigationHelper(
         showBottom: Boolean,
         args: Bundle? = null,
     ): Boolean {
-        if (fragment != null && args != null) {
-            fragment.arguments = args
-        }
-
-        freeUpFragments()
-
         if (fragment == null) {
             if (showBottom) {
                 val isLoggedOut = activity.applicationKvStore?.getBoolean("login_skipped") == true
@@ -56,17 +50,61 @@ class MainNavigationHelper(
                 val tag = if (isLoggedOut) "MoreBottomSheetLoggedOut" else "MoreBottomSheet"
                 bottomSheet.show(activity.supportFragmentManager, tag)
             }
-            return false
+        } else if (args != null) {
+            fragment.arguments = args
+            performLoad(fragment, args)
+        } else {
+            performLoad(fragment, null)
+        }
+        return fragment != null
+    }
+
+    private fun performLoad(
+        fragment: Fragment,
+        args: Bundle?,
+    ) {
+        val tag = fragment.javaClass.simpleName
+        val fm = activity.supportFragmentManager
+        val existing = fm.findFragmentByTag(tag)
+        val hasZoom = args?.containsKey("prev_zoom") == true
+        if (hasZoom && existing != null) {
+            when (existing) {
+                is ExploreFragment -> existing.onNearbyMapDataReceived(args)
+                is NearbyParentFragment -> existing.onExploreMapDataReceived(args)
+            }
+        }
+        if (isSameTab(fragment)) {
+            if (!hasZoom && fragment is ContributionsFragment) {
+                contributionsFragment?.scrollToTop()
+            }
+            return
         }
 
-        if (!isSameTab(fragment)) {
+        val transaction = fm.beginTransaction()
+        hideActiveFragment(transaction)
+
+        if (existing != null) {
+            transaction.show(existing)
+            updateActiveFragment(existing)
+        } else {
+            transaction.add(R.id.fragmentContainer, fragment, tag)
             updateActiveFragment(fragment)
-            activity.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit()
         }
-        return true
+        transaction.commit()
+    }
+
+    private fun hideActiveFragment(transaction: androidx.fragment.app.FragmentTransaction) {
+        val current =
+            when (activeFragment) {
+                ActiveFragment.CONTRIBUTIONS -> contributionsFragment
+                ActiveFragment.NEARBY -> nearbyParentFragment
+                ActiveFragment.EXPLORE -> exploreFragment
+                ActiveFragment.BOOKMARK -> bookmarkFragment
+                ActiveFragment.MORE, null -> null
+            }
+        if (current != null && current.isAdded) {
+            transaction.hide(current)
+        }
     }
 
     /**
@@ -74,7 +112,6 @@ class MainNavigationHelper(
      */
     private fun isSameTab(fragment: Fragment): Boolean {
         if (fragment is ContributionsFragment && activeFragment == ActiveFragment.CONTRIBUTIONS) {
-            contributionsFragment?.scrollToTop()
             return true
         }
         return (fragment is NearbyParentFragment && activeFragment == ActiveFragment.NEARBY) ||
@@ -217,40 +254,40 @@ class MainNavigationHelper(
             },
         )
     }
+}
 
-    /**
-     * Launches the Explore map with coordinates and zoom level passed from Nearby.
-     */
-    fun loadExploreMapFromNearby(
-        zoom: Double,
-        latitude: Double,
-        longitude: Double,
-    ) {
-        val bundle =
-            Bundle().apply {
-                putDouble("prev_zoom", zoom)
-                putDouble("prev_latitude", latitude)
-                putDouble("prev_longitude", longitude)
-            }
-        loadFragment(ExploreFragment.newInstance(), false, bundle)
-        tabHandler.setSelectedItemId(NavTab.EXPLORE.code())
-    }
+/**
+ * Launches the Explore map with coordinates and zoom level passed from Nearby.
+ */
+fun MainNavigationHelper.loadExploreMapFromNearby(
+    zoom: Double,
+    latitude: Double,
+    longitude: Double,
+) {
+    val bundle =
+        Bundle().apply {
+            putDouble("prev_zoom", zoom)
+            putDouble("prev_latitude", latitude)
+            putDouble("prev_longitude", longitude)
+        }
+    loadFragment(ExploreFragment.newInstance(), false, bundle)
+    tabHandler.setSelectedItemId(NavTab.EXPLORE.code())
+}
 
-    /**
-     * Launches the Nearby map with coordinates and zoom level passed from Explore.
-     */
-    fun loadNearbyMapFromExplore(
-        zoom: Double,
-        latitude: Double,
-        longitude: Double,
-    ) {
-        val bundle =
-            Bundle().apply {
-                putDouble("prev_zoom", zoom)
-                putDouble("prev_latitude", latitude)
-                putDouble("prev_longitude", longitude)
-            }
-        loadFragment(NearbyParentFragment.newInstance(), false, bundle)
-        tabHandler.setSelectedItemId(NavTab.NEARBY.code())
-    }
+/**
+ * Launches the Nearby map with coordinates and zoom level passed from Explore.
+ */
+fun MainNavigationHelper.loadNearbyMapFromExplore(
+    zoom: Double,
+    latitude: Double,
+    longitude: Double,
+) {
+    val bundle =
+        Bundle().apply {
+            putDouble("prev_zoom", zoom)
+            putDouble("prev_latitude", latitude)
+            putDouble("prev_longitude", longitude)
+        }
+    loadFragment(NearbyParentFragment.newInstance(), false, bundle)
+    tabHandler.setSelectedItemId(NavTab.NEARBY.code())
 }

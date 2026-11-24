@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.repository
 
 import android.net.Uri
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
@@ -21,6 +22,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
+import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -49,6 +51,14 @@ interface UploadCategoryOperations {
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>,
     ): Observable<List<CategoryItem>>
+
+    /**
+     * Next page of results for a typed category search
+     *
+     * @param query
+     * @return
+     */
+    fun searchMore(query: String): Single<List<CategoryItem>>
 
     /**
      * Sets the list of selected categories for the current upload
@@ -266,6 +276,8 @@ class DefaultUploadCategoryOperations(
         selectedDepictions: List<DepictedItem>,
     ): Observable<List<CategoryItem>> = categoriesModel.searchAll(query, imageTitleList, selectedDepictions)
 
+    override fun searchMore(query: String): Single<List<CategoryItem>> = categoriesModel.searchMore(query)
+
     override fun setSelectedCategories(categoryStringList: List<String>) {
         uploadModel.setSelectedCategories(categoryStringList)
     }
@@ -391,7 +403,10 @@ class DefaultUploadQualityOperations(
         )
 
     override fun getCaptionQuality(uploadItem: UploadItem): Single<Int> =
-        uploadModel.imageProcessingService.validateCaption(uploadItem)
+        uploadModel.imageProcessingService.validateCaption(
+            uploadItem,
+            uploadModel.items.count { it.filename == uploadItem.filename },
+        )
 
     override fun useSimilarPictureCoordinates(
         imageCoordinates: ImageCoordinates,
@@ -534,7 +549,13 @@ class UploadRepository
                         null,
                     )
                 fromWikidataQuery?.firstOrNull()
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e("Error fetching nearby places: %s", e.message)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e("Error fetching nearby places: %s", e.message)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e("Error fetching nearby places: %s", e.message)
                 null
             }

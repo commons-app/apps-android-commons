@@ -55,7 +55,6 @@
   <string name="starting_uploads">Widget title.</string>
   <string name="starting_multiple_uploads">Widget title.</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
-  <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license.</string>
   <string name="upload_count_title">Counter in widget.</string>
   <string name="receiving_shared_content">Seems to be unused.</string>
   <string name="navigation_item_explore">{{Identical|Explore}}</string>
@@ -89,7 +88,6 @@
   <string name="upload_completed_notification_title">Title for notification about upload being completed. %1$s represents file name.\n{{Identical|Uploaded}}</string>
   <string name="upload_completed_notification_text">Text for notification about upload being completed.</string>
   <string name="upload_progress_notification_title_start">Title for notificiation about upload being started. %1$s represents file name</string>
-  <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name\n{{Identical|Uploading}}</string>
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_metadata_pending_notification_title">Title for notification when a file was uploaded but saving its captions and depicts failed, so only those will be retried. %1$s represents file name</string>
@@ -670,6 +668,7 @@
   <string name="cancelling_upload">A notice after canceling the upload.</string>
   <string name="retrying_upload">A notice after the user taps the retry button on a failed upload.</string>
   <string name="retrying_failed_uploads">A notice after the user taps the button to retry all failed uploads.</string>
+  <string name="upload_failed_server_error">The reason shown for a failed upload, on the failed uploads screen and in the notification, when the Commons server had a problem (HTTP status code 500 to 599) or received too many requests (HTTP status code 429). %1$d is the HTTP status code, for example 503.</string>
   <string name="cancel_upload">Button for canceling an upload</string>
   <string name="limited_connection_explanation">Seems to be unused.</string>
   <string name="limited_connection_is_on">Seems to be unused.</string>
@@ -844,6 +843,8 @@
   <string name="caption_copied_to_clipboard">Toast.</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Notice when finishing upload.</string>
   <string name="show_in_explore">An option in the three-dots menu in the map. Switches to the Explore mode.\n\n“Explore” should be translated as in {{msg-wm|Commons-android-strings-navigation item explore}}</string>
+  <string name="nearby_show_only_needs_photo">Label of the Nearby map toolbar button that hides the places which already have a picture (green pins), leaving the ones that need a photo (red pins).</string>
+  <string name="nearby_show_all_places">Label of the same Nearby map toolbar button once it is on. Shows the places that already have a picture again.</string>
   <string name="show_in_nearby">An option in the three-dots menu in the map. Switches to the Nearby mode.\n\n‘Nearby’ should be translated as in {{msg-wm|Commons-android-strings-navigation item nearby}}</string>
   <string name="image_tag_line_created_and_uploaded_by">A little caption in a list of uploads when the image was created and uploaded by the same user. %1$s is a username.</string>
   <string name="image_tag_line_created_by_and_uploaded_by">A little caption in a list of uploads when the image was created by one user, but the latest version was uploaded by another. %1$s and %2$s are usernames.</string>

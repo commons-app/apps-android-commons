@@ -68,12 +68,6 @@
     <item quantity="many">%1$d nahrávání</item>
     <item quantity="other">%1$d nahrávání</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Tento obrázek bude zveřejněn pod licencí %1$s</item>
-    <item quantity="few">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
-    <item quantity="many">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
-    <item quantity="other">Tyto obrázky budou zveřejněny pod licencí %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d nahrání</item>
     <item quantity="few">%1$d nahrání</item>
@@ -117,7 +111,6 @@
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
   <string name="upload_progress_notification_title_start">Načítání souboru: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Nepodařilo se nahrát soubor %1$s</string>
   <string name="upload_paused_notification_title">Načítání souboru %1$s bylo pozastaveno</string>

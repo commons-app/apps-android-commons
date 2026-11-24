@@ -30,6 +30,7 @@ import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -142,6 +143,9 @@ class ContributionsFragment(
         presenter!!.onAttachView(campaigns)
         contributionsPresenter!!.onAttachView(this)
         binding!!.campaignsView.visibility = View.GONE
+        if (activity is ProfileActivity) {
+            binding!!.cardViewNearby.visibility = View.GONE
+        }
         nearbyPermission.createPermissionView()
 
         if (savedInstanceState != null) {
@@ -206,7 +210,9 @@ class ContributionsFragment(
                 // Calling nearby card to keep showing it even when user clicks on it and comes back
                 try {
                     nearby.updateClosestNearbyCardViewInfo()
-                } catch (e: Exception) {
+                } catch (e: SecurityException) {
+                    Timber.e(e)
+                } catch (e: IllegalStateException) {
                     Timber.e(e)
                 }
                 if (binding!!.cardViewNearby.cardViewVisibilityState
@@ -288,9 +294,17 @@ class ContributionsFragment(
                     contribution.media.filename,
                     contribution.errorInfo,
                 )
+            } else if (contribution.isRetriedAfterFailure() && contribution.retryNotBefore?.after(Date()) == true) {
+                // Retried on a later resume, and the wait does not use up a retry
+                Timber.d(
+                    "Waiting until %s before re-uploading %s",
+                    contribution.retryNotBefore,
+                    contribution.media.filename,
+                )
             } else if (contribution.isRetriedAfterFailure()) {
                 val retries = contribution.retries
-                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
+                // The UX here could be improved, see:
+                // https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
                 // Limit the number of retries for a failed upload
                 // to handle cases like invalid filename as such uploads
                 // will never be successful
@@ -303,7 +317,7 @@ class ContributionsFragment(
                     )
                     restartUpload(contribution)
                 } else {
-                    // TODO: Show the exact reason for failure
+                    // Only a generic message is shown, showing the exact reason for the failure would be more helpful
                     Toast
                         .makeText(
                             context,

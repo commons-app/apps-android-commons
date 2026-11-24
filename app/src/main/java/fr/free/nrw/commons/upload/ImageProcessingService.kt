@@ -152,9 +152,13 @@ class ImageProcessingService
          * Checks caption of the given UploadItem
          *
          * @param uploadItem UploadItem whose caption is to be verified
+         * @param filesWithSameName How many files in the upload have this file name
          * @return Quality of caption of the UploadItem
          */
-        fun validateCaption(uploadItem: UploadItem): Single<Int> {
+        fun validateCaption(
+            uploadItem: UploadItem,
+            filesWithSameName: Int = 1,
+        ): Single<Int> {
             val currentImageQuality = uploadItem.imageQuality
             Timber.d("Current image quality is %d", currentImageQuality)
             if (currentImageQuality == IMAGE_KEEP) {
@@ -162,7 +166,7 @@ class ImageProcessingService
             }
             Timber.d("Checking the validity of caption")
 
-            return validateItemTitle(uploadItem)
+            return validateItemTitle(uploadItem, filesWithSameName)
         }
 
         /**
@@ -184,10 +188,14 @@ class ImageProcessingService
          * Checks item caption - empty caption - too long, banned extension, blacklisted or invalid caption -
          * existing caption
          */
-        private fun validateItemTitle(uploadItem: UploadItem): Single<Int> {
+        private fun validateItemTitle(
+            uploadItem: UploadItem,
+            filesWithSameName: Int,
+        ): Single<Int> {
             Timber.d("Checking for image title %s", uploadItem.uploadMediaDetails)
             val captions = uploadItem.uploadMediaDetails
-            val fileNameBytes = uploadItem.filename.toByteArray().size
+            // The batch number is added when the upload starts, so the final name is longer
+            val fileNameBytes = uploadItem.filename.toByteArray().size + batchNumberBytes(filesWithSameName)
             val hasBannedExtension =
                 uploadItem.filename
                     .split(".")
@@ -210,7 +218,10 @@ class ImageProcessingService
                             when {
                                 fileNameCheck == FileNameCheck.BLACKLISTED -> FILE_NAME_BLACKLISTED
                                 fileNameCheck == FileNameCheck.INVALID -> FILE_NAME_INVALID
-                                doesFileExist && fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
+                                // A file that shares it name gets a batch number instead of " (12345)"
+                                doesFileExist &&
+                                    filesWithSameName == 1 &&
+                                    fileNameBytes > MAX_FILE_NAME_BYTES - UNIQUE_SUFFIX_BYTES ->
                                     FILE_NAME_TOO_LONG
                                 doesFileExist -> FILE_NAME_EXISTS
                                 else -> IMAGE_OK

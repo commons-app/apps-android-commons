@@ -38,7 +38,9 @@ import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.PLACE
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -615,6 +617,30 @@ class UploadMediaDetailFragmentUnitTest {
         Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
     }
 
+    @Test
+    fun testExternalMapOpensAtLastPickedLocationForImageWithoutLocation() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(uploadItem.gpsCoords).thenReturn(null)
+        `when`(defaultKvStore.getString(LAST_LOCATION)).thenReturn("35.683,139.76")
+        fragment.showExternalMap(uploadItem)
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        val position = LocationPicker.getCameraPosition(startedIntent)!!
+        Assert.assertEquals(35.683, position.latitude, 0.0)
+        Assert.assertEquals(139.76, position.longitude, 0.0)
+    }
+
+    @Test
+    fun testExternalMapSendsNoPositionWhenNoLocationWasPickedBefore() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(uploadItem.gpsCoords).thenReturn(null)
+        `when`(defaultKvStore.getString(LAST_LOCATION)).thenReturn(null)
+        fragment.showExternalMap(uploadItem)
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        Assert.assertNull(LocationPicker.getCameraPosition(startedIntent))
+    }
+
     /** Verifies that location edits preserve precision and do not depend on the device locale. */
     @Test
     fun testLocationControllerRoundsCoordinatesWithNonEnglishLocale() {
@@ -676,5 +702,24 @@ class UploadMediaDetailFragmentUnitTest {
 
         Mockito.verify(uploadMediaDetailAdapter).items = details
         Mockito.verify(presenter).onUserConfirmedUploadIsOfPlace(place, 1)
+    }
+
+    @Test
+    fun testNearbyPlaceSurvivesSaveAndRestore() {
+        val nearbyPlace =
+            Place("name", "long description", LatLng(12.0, 34.0, 1f), "category", null, "", "", "Q1")
+        `when`(uploadMediaDetailAdapter.items).thenReturn(mutableListOf())
+        fragment.place = nearbyPlace
+
+        val savedState = Bundle()
+        fragment.onSaveInstanceState(savedState)
+
+        Assert.assertNotNull(savedState.getParcelable(PLACE))
+
+        val restoredFragment = UploadMediaDetailFragment()
+        Whitebox.setInternalState(restoredFragment, "mSavedFragmentState", savedState)
+        fragmentManager.beginTransaction().add(restoredFragment, "restoredFragment").commitNow()
+
+        Assert.assertEquals("Q1", restoredFragment.place?.entityID)
     }
 }

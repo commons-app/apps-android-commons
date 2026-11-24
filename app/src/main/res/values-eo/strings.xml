@@ -47,10 +47,6 @@
     <item quantity="one">%1$d alŝuto</item>
     <item quantity="other">%1$d alŝutoj</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ĉi tiu bildo estos sub permesilo %1$s</item>
-    <item quantity="other">Ĉi tiuj bildoj estos sub permesilo %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Alŝuto</item>
     <item quantity="other">%1$d Alŝutoj</item>
@@ -90,7 +86,6 @@
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
   <string name="upload_completed_notification_text">Tuŝetu por vidi vian alŝutadon</string>
   <string name="upload_progress_notification_title_start">Alŝutas dosieron: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
   <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>
   <string name="upload_paused_notification_title">Alŝutado de %1$s paŭzita</string>

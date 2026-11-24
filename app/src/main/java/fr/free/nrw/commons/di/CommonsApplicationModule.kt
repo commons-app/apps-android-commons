@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
+import android.database.CursorIndexOutOfBoundsException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -204,6 +206,7 @@ open class CommonsApplicationModule(
             MIGRATION_22_23,
             MIGRATION_23_24,
             MIGRATION_24_25,
+            MIGRATION_25_26,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -526,7 +529,19 @@ val MIGRATION_21_22 =
                 }
                 cursor.close()
                 oldDb.close()
-            } catch (e: Exception) {
+            } catch (e: SQLiteException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: CursorIndexOutOfBoundsException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalArgumentException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalStateException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: SecurityException) {
                 Timber.e(e, "Exception during legacy database migration")
                 throw e
             }
@@ -566,6 +581,14 @@ val MIGRATION_24_25 =
     object : Migration(24, 25) {
         override fun migrate(db: SupportSQLiteDatabase) {
             db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_25_26 =
+    object : Migration(25, 26) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
         }
     }
 

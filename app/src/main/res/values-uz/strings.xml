@@ -42,10 +42,6 @@
     <item quantity="one">%1$d yuklandi</item>
     <item quantity="other">%1$d yuklandi</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ushbu rasm %1$s litsenziyasi asosidadir</item>
-    <item quantity="other">Ushbu rasmlar %1$s litsenziyasi asosidadir</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d yuklandi</item>
     <item quantity="other">%1$d yuklandi</item>
@@ -85,7 +81,6 @@
   <string name="upload_completed_notification_title">%1$s yuklanmoqda!</string>
   <string name="upload_completed_notification_text">Yuklashni ko‘rish uchun bosing</string>
   <string name="upload_progress_notification_title_start">Fayl yuklanmoqda: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s yuklanmoqda</string>
   <string name="upload_progress_notification_title_finishing">%1$s yuklab boʻlindi</string>
   <string name="upload_failed_notification_title">%1$s faylini joylab boʻlmadi</string>
   <string name="upload_paused_notification_title">%1$sʼni yuklash toʻxtatildi</string>

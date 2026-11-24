@@ -31,6 +31,8 @@ import timber.log.Timber
 import kotlin.math.min
 import kotlin.time.Duration.Companion.milliseconds
 
+// Native JPEG editing and preview refresh can fail in ways that are specific to the native library.
+
 /**
  * An activity class for editing and rotating images using Jpegtran.
  *
@@ -39,6 +41,7 @@ import kotlin.time.Duration.Companion.milliseconds
  * for initializing the UI, animating image rotations and handling
  * the image-saving process.
  */
+@Suppress("TooGenericExceptionCaught")
 class EditActivity : BaseActivity() {
     private lateinit var vm: EditViewModel
     private lateinit var binding: ActivityEditBinding

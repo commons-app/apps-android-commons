@@ -72,12 +72,6 @@
     <item quantity="many">%1$d przesłań</item>
     <item quantity="other">%1$d przesłań</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ten obraz będzie udostępniany na licencji %1$s</item>
-    <item quantity="few">Te obrazy będą udostępniane na licencji %1$s</item>
-    <item quantity="many">Te obrazy będą udostępniane na licencji %1$s</item>
-    <item quantity="other">Te obrazy będą udostępniane na licencji %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Przesłany</item>
     <item quantity="few">%1$d Przesłane</item>
@@ -121,9 +115,10 @@
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
   <string name="upload_progress_notification_title_start">Przesyłanie pliku: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
+  <string name="upload_metadata_pending_notification_title">Przesłano plik „%1$s”, ale jego podpisy i przedstawione obiekty nie zostały jeszcze zapisane</string>
+  <string name="upload_metadata_pending">Przesłano plik, ale jego podpisy i przedstawione obiekty nie zostały jeszcze zapisane</string>
   <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$s</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
@@ -730,6 +725,7 @@
   <string name="cancelling_upload">Anulowanie przesyłania…</string>
   <string name="retrying_upload">Ponawianie próby przesyłania…</string>
   <string name="retrying_failed_uploads">Ponawianie wszystkich nieudanych prób przesyłania…</string>
+  <string name="upload_failed_server_error">Commons nie może obecnie obsłużyć tego żądania. Spróbuj ponownie później (HTTP %1$d).</string>
   <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączono tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
   <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>

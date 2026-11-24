@@ -65,10 +65,6 @@
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</item>
-    <item quantity="other">এই ছবিগুলো %1$s এর অধীনে লাইসেন্স করা হবে</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$dটি আপলোড</item>
     <item quantity="other">%1$dটি আপলোড</item>
@@ -107,7 +103,6 @@
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
   <string name="upload_progress_notification_title_start">ফাইল আপলোড করা হচ্ছে: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড করা শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড করা যায়নি</string>
   <string name="upload_paused_notification_title">%1$s আপলোড স্থগিত রয়েছে</string>
@@ -233,6 +228,8 @@
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্ক</string>
   <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
+  <string name="playback_quality">প্লেব্যাকের মান</string>
+  <string name="video_quality">ভিডিওর মান</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন! এতে নতুন বৈশিষ্ট্যের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন</string>
   <string name="_2fa_code">2FA কোড</string>
@@ -562,6 +559,7 @@
   <string name="uploads">আপলোড</string>
   <string name="pending">অমীমাংসিত</string>
   <string name="failed">ব্যর্থ হয়েছে</string>
+  <string name="play_video">ভিডিও চালান</string>
   <string name="caption">ক্যাপশন</string>
   <string name="caption_copied_to_clipboard">ক্যাপশন ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
   <string name="nominated_for_deletion_btn">অপসারণের জন্য মনোনীত</string>

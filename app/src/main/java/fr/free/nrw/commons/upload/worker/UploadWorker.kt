@@ -32,7 +32,9 @@ import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,8 +46,9 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 
 // Suppressed TooManyFunctions because the upload and its retry after the file is published
-// share the steps that save captions, depicts and P18.
-@Suppress("TooManyFunctions")
+// share the steps that save captions, depicts and P18. Network and storage failures must all be
+// mapped to recoverable upload states, so the worker-level handlers stay broad.
+@Suppress("TooManyFunctions", "TooGenericExceptionCaught")
 class UploadWorker(
     private var appContext: Context,
     workerParams: WorkerParameters,
@@ -223,10 +226,18 @@ class UploadWorker(
                 withContext(Dispatchers.IO) {
                     contributionDao.getContribution(statesToProcess).blockingGet()
                 }
-            return if (updatedContributionQueue.isNotEmpty()) Result.retry() else Result.success()
+            if (updatedContributionQueue.isNotEmpty()) {
+                return Result.retry()
+            }
+
+            return Result.success()
+        } catch (e: CancellationException) {
+            throw e
         } catch (e: Exception) {
             Timber.e(e, "UploadWorker encountered an error.")
             return Result.failure()
+        } finally {
+            WorkRequestHelper.markUploadWorkerAsStopped()
         }
     }
 
@@ -273,6 +284,11 @@ class UploadWorker(
                 Timber.e(exception, "Saving captions and depicts failed for %s", uploadedFilename)
                 contribution.state = Contribution.STATE_METADATA_PENDING
                 contribution.errorInfo = exception.uploadErrorCode()
+                // Wikidata errors keep their code apart from the readable message saved above
+                contribution.setRetryWait(
+                    exception.retryAfterMillis(),
+                    (exception as? MwException)?.errorCode ?: contribution.errorInfo,
+                )
                 notificationHelper.showFailedNotification(contribution)
                 contributionDao.saveSynchronous(contribution)
             }
@@ -312,6 +328,7 @@ class UploadWorker(
                             StashUploadState.FAILED,
                             fileKey = null,
                             errorMessage = it.message,
+                            retryAfterMillis = it.retryAfterMillis(),
                         )
                     }.blockingSingle()
             when (stashUploadResult.state) {
@@ -345,6 +362,7 @@ class UploadWorker(
                             notificationHelper.showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
+                            contribution.retryNotBefore = null
                             contributionDao.save(contribution).blockingAwait()
                         }
                     } catch (exception: Exception) {
@@ -359,6 +377,7 @@ class UploadWorker(
                                 Contribution.STATE_FAILED
                             }
                         contribution.errorInfo = errorCode
+                        contribution.setRetryWait(exception.retryAfterMillis())
                         notificationHelper.showFailedNotification(contribution)
                         contributionDao.saveSynchronous(contribution)
                         if (stashErrorCodes.contains(errorCode)) {
@@ -380,6 +399,7 @@ class UploadWorker(
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contribution.errorInfo = stashUploadResult.errorMessage
+                    contribution.setRetryWait(stashUploadResult.retryAfterMillis)
                     notificationHelper.showErrorNotification(contribution)
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(
@@ -406,6 +426,7 @@ class UploadWorker(
             Timber.e("Stash upload failed for contribution: $filename")
             notificationHelper.showFailedNotification(contribution)
             contribution.errorInfo = exception.message
+            contribution.setRetryWait(exception.retryAfterMillis())
             contribution.state = Contribution.STATE_FAILED
             clearChunks(contribution)
         }
@@ -444,6 +465,18 @@ class UploadWorker(
                 Intent.FLAG_GRANT_READ_URI_PERMISSION,
             )
         }
+    }
+
+    /**
+     * Saves when this failed upload may be retried automatically, from the error code (by default
+     * the one just put in errorInfo) and the wait the server asked for, or clears it if there is
+     * nothing to wait for.
+     */
+    private fun Contribution.setRetryWait(
+        retryAfterMillis: Long?,
+        errorCode: String? = errorInfo,
+    ) {
+        retryNotBefore = nextAutomaticRetry(errorCode, retryAfterMillis, retries, System.currentTimeMillis())
     }
 
     private fun clearChunks(contribution: Contribution) {
@@ -486,14 +519,17 @@ class UploadWorker(
                         p18WasSkipped = imageClaim.skipped
                         if (null != revisionID) {
                             withContext(Dispatchers.IO) {
+                                // The place is only cached if Nearby could load its details
                                 val place = placesRepository.fetchPlace(wikiDataPlace.id)
-                                place.name = wikiDataPlace.name
-                                place.pic = HOME_URL + "File:$filename"
-                                placesRepository
-                                    .save(place)
-                                    .subscribeOn(Schedulers.io())
-                                    .blockingAwait()
-                                Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                                if (place != null) {
+                                    place.name = wikiDataPlace.name
+                                    place.pic = HOME_URL + "File:$filename"
+                                    placesRepository
+                                        .save(place)
+                                        .subscribeOn(Schedulers.io())
+                                        .blockingAwait()
+                                    Timber.d("Updated WikiItem place ${place.name} with image ${place.pic}")
+                                }
                             }
                         }
                     }

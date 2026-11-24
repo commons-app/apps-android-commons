@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO
 import fr.free.nrw.commons.fileusages.FileUsagesResponse
@@ -72,7 +73,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         json,
                         LeaderboardResponse::class.java
                     )
-                } catch (e: Exception) {
+                } catch (e: JsonParseException) {
                     Timber.e(e, "Failed to parse the leaderboard response")
                     return@fromCallable LeaderboardResponse()
                 }
@@ -110,7 +111,13 @@ class OkHttpJsonApiClient @Inject constructor(
                         FileUsagesResponse::class.java
                     )
                 } else null
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e(e)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e(e)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e(e)
                 null
             }
@@ -148,7 +155,13 @@ class OkHttpJsonApiClient @Inject constructor(
                         GlobalFileUsagesResponse::class.java
                     )
                 } else null
-            } catch (e: Exception) {
+            } catch (e: IOException) {
+                Timber.e(e)
+                null
+            } catch (e: JsonParseException) {
+                Timber.e(e)
+                null
+            } catch (e: IllegalArgumentException) {
                 Timber.e(e)
                 null
             }
@@ -175,7 +188,7 @@ class OkHttpJsonApiClient @Inject constructor(
                         json,
                         UpdateAvatarResponse::class.java
                     )
-                } catch (e: Exception) {
+                } catch (e: JsonParseException) {
                     Timber.e(e, "Failed to parse the avatar update response")
                     return@fromCallable UpdateAvatarResponse()
                 }
@@ -296,7 +309,7 @@ class OkHttpJsonApiClient @Inject constructor(
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
-            .addQueryParameter("query", wikidataQuery)
+            .addQueryParameter("query", queryParams.withPictureFilter(wikidataQuery))
             .addQueryParameter("format", "json")
 
         val request: Request = Request.Builder()
@@ -379,6 +392,11 @@ class OkHttpJsonApiClient @Inject constructor(
 
     @Throws(Exception::class)
     fun getPlacesAsGPX(leftLatLng: LatLng, rightLatLng: LatLng): String? {
+        val minLat = minOf(leftLatLng.latitude, rightLatLng.latitude)
+        val minLon = minOf(leftLatLng.longitude, rightLatLng.longitude)
+        val maxLat = maxOf(leftLatLng.latitude, rightLatLng.latitude)
+        val maxLon = maxOf(leftLatLng.longitude, rightLatLng.longitude)
+
         var gpxString = ("""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <gpx
  version="1.0"
@@ -386,8 +404,7 @@ class OkHttpJsonApiClient @Inject constructor(
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://www.topografix.com/GPX/1/0"
  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
-<bounds minlat="${"$"}MIN_LATITUDE" minlon="${"$"}MIN_LONGITUDE" """ +
-                    """maxlat="${"$"}MAX_LATITUDE" maxlon="${"$"}MAX_LONGITUDE"/>""")
+<bounds minlat="$minLat" minlon="$minLon" maxlat="$maxLat" maxlon="$maxLon"/>""")
 
         val placeBindings = runQuery(leftLatLng, rightLatLng)
         if (placeBindings != null) {
