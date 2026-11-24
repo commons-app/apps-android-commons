@@ -9,6 +9,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
+import fr.free.nrw.commons.upload.worker.retryAfterMillis
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
@@ -86,7 +87,7 @@ class UploadClient
 
             val index = AtomicInteger()
             val failures = AtomicBoolean()
-            val errorMessage = AtomicReference<String>()
+            val error = AtomicReference<Throwable?>()
             compositeDisposable.add(
                 Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                     if (canProcess(contributionDao, contribution, failures)) {
@@ -102,7 +103,7 @@ class UploadClient
                                 failures,
                                 chunkInfo,
                                 index,
-                                errorMessage,
+                                error,
                                 mediaType!!,
                                 file!!,
                                 fileChunks.size,
@@ -123,7 +124,14 @@ class UploadClient
                 }
                 failures.get() -> {
                     Timber.d("Upload stash contains failures %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, errorMessage.get()))
+                    Observable.just(
+                        StashUploadResult(
+                            StashUploadState.FAILED,
+                            null,
+                            error.get()?.message,
+                            error.get()?.retryAfterMillis(),
+                        ),
+                    )
                 }
                 chunkInfo.get() != null -> {
                     Timber.d("Upload stash success %s", contribution.pageId)
@@ -150,7 +158,7 @@ class UploadClient
             failures: AtomicBoolean,
             chunkInfo: AtomicReference<ChunkInfo?>,
             index: AtomicInteger,
-            errorMessage: AtomicReference<String>,
+            error: AtomicReference<Throwable?>,
             mediaType: MediaType,
             file: File,
             totalChunks: Int,
@@ -192,7 +200,7 @@ class UploadClient
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-                        errorMessage.set(throwable?.message)
+                        error.set(throwable)
                         failures.set(true)
                     },
                 ),

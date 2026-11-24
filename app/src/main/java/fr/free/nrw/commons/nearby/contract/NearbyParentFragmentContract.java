@@ -18,6 +18,17 @@ public interface NearbyParentFragmentContract {
 
         boolean isNetworkConnectionEstablished();
 
+        /**
+         * Whether only places that need a photo should be searched for and shown. Always false
+         * when picking a place for an upload.
+         */
+        boolean isOnlyNeedsPhoto();
+
+        /**
+         * Shows that a search found no places, so no places from an earlier search stay visible.
+         */
+        void showNoPlaces();
+
         void updateSnackbar(boolean offlinePinsShown);
 
         void listOptionMenuItemClicked();
@@ -137,6 +148,12 @@ public interface NearbyParentFragmentContract {
         void setCheckboxUnknown();
 
         void setAdvancedQuery(String query);
+
+        /**
+         * Searches the visible area again after "only places that need a photo" was switched,
+         * since the search itself depends on it.
+         */
+        void onOnlyNeedsPhotoChanged();
 
         void toggleBookmarkedStatus(Place place, LifecycleCoroutineScope scope);
 
