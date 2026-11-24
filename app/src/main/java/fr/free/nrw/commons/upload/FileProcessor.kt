@@ -11,6 +11,7 @@ import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
+import fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween
 import fr.free.nrw.commons.utils.MotionPhotoUtils
 import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Observable
@@ -44,6 +45,7 @@ private const val DEFAULT_SUGGESTION_RADIUS_IN_METRES = 100
 private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
 private const val RADIUS_STEP_SIZE_IN_METRES = 100
 private const val MIN_NEARBY_RESULTS = 5
+private const val SAME_PLACE_RADIUS_IN_METRES = 50
 
 class FileProcessor
     @Inject
@@ -55,8 +57,12 @@ class FileProcessor
     ) {
         private val compositeDisposable = CompositeDisposable()
 
+        // Places this upload already looked up categories for
+        private val lookedUpPlaces = mutableListOf<LatLng>()
+
         fun cleanup() {
             compositeDisposable.clear()
+            synchronized(lookedUpPlaces) { lookedUpPlaces.clear() }
         }
 
         /**
@@ -203,24 +209,43 @@ class FileProcessor
          */
         fun prePopulateCategoriesAndDepictionsBy(imageCoordinates: ImageCoordinates) {
             requireNotNull(imageCoordinates.decimalCoords)
-            compositeDisposable.add(
-                dependencies.apiCall
-                    .request(imageCoordinates.decimalCoords!!)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.io())
-                    .subscribe(
-                        dependencies.gpsCategoryModel::setCategoriesFromLocation,
-                        {
-                            Timber.e(it)
-                            dependencies.gpsCategoryModel.clear()
-                        },
-                    ),
-            )
+            if (markPlaceLookedUp(imageCoordinates.latLng!!)) {
+                compositeDisposable.add(
+                    dependencies.apiCall
+                        .request(imageCoordinates.decimalCoords!!)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(
+                            dependencies.gpsCategoryModel::setCategoriesFromLocation,
+                            {
+                                Timber.e(it)
+                                dependencies.gpsCategoryModel.clear()
+                                // so a later picture of this place can try again
+                                synchronized(lookedUpPlaces) { lookedUpPlaces.remove(imageCoordinates.latLng) }
+                            },
+                        ),
+                )
+            }
 
             compositeDisposable.add(
                 suggestNearbyDepictions(imageCoordinates),
             )
         }
+
+        /**
+         * Pictures of a multi-upload are often taken at the same spot, and nearby pictures have the
+         * same categories, so look a place up only once (#5316).
+         *
+         * @return false if this upload already looked up a place within [SAME_PLACE_RADIUS_IN_METRES]
+         */
+        private fun markPlaceLookedUp(place: LatLng): Boolean =
+            synchronized(lookedUpPlaces) {
+                if (lookedUpPlaces.any { computeDistanceBetween(it, place) <= SAME_PLACE_RADIUS_IN_METRES }) {
+                    false
+                } else {
+                    lookedUpPlaces.add(place)
+                }
+            }
 
         private val radiiProgressionInMetres =
             (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
