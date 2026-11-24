@@ -2,7 +2,6 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
-import fr.free.nrw.commons.customselector.helper.ImageMetadataHelper
 import fr.free.nrw.commons.customselector.helper.ImageSelectionManager
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -30,14 +28,12 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.TreeMap
 import kotlin.collections.ArrayList
 
 /**
  * Custom selector ImageAdapter.
  */
-@Suppress("TooManyFunctions")
 class ImageAdapter(
     /**
      * Application Context.
@@ -135,6 +131,7 @@ class ImageAdapter(
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+    private val listItemDetailsBinder = ListItemDetailsBinder(context, scope, ioDispatcher)
 
     /**
      * Create View holder.
@@ -243,7 +240,7 @@ class ImageAdapter(
                         .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                         .into(holder.image)
                 }
-                bindListItemDetails(holder, position, image)
+                listItemDetailsBinder.bind(holder, position, image, viewMode)
             }
 
             holder.itemView.setOnClickListener {
@@ -265,54 +262,6 @@ class ImageAdapter(
                     selectionManager.selectedImages,
                 )
                 true
-            }
-        }
-    }
-
-    /**
-     * Loads and binds the extra information shown for pictures in the list layout.
-     */
-    private fun bindListItemDetails(
-        holder: ImageViewHolder,
-        position: Int,
-        image: Image,
-    ) {
-        if (viewMode != ImageViewMode.LIST) return
-
-        holder.imageName?.text = image.name
-        holder.imageDetails?.text = null
-        holder.locationIndicator?.visibility = View.GONE
-        scope.launch(ioDispatcher) {
-            val metadata = ImageMetadataHelper.getOrLoad(image)
-            val details =
-                buildList {
-                    if (metadata.width > 0 && metadata.height > 0) {
-                        add(
-                            context.getString(
-                                R.string.custom_selector_image_dimensions,
-                                metadata.width,
-                                metadata.height,
-                            ),
-                        )
-                    }
-                    if (metadata.sizeBytes > 0) {
-                        add(Formatter.formatFileSize(context, metadata.sizeBytes))
-                    }
-                    add(
-                        if (metadata.hasGeolocation) {
-                            context.getString(R.string.custom_selector_image_has_location)
-                        } else {
-                            context.getString(R.string.custom_selector_image_no_location)
-                        },
-                    )
-                }.joinToString(" · ")
-            withContext(Dispatchers.Main) {
-                if (holder.bindingAdapterPosition == position && viewMode == ImageViewMode.LIST) {
-                    holder.imageName?.text = image.name
-                    holder.imageDetails?.text = details
-                    holder.locationIndicator?.visibility =
-                        if (metadata.hasGeolocation) View.VISIBLE else View.GONE
-                }
             }
         }
     }
@@ -467,7 +416,7 @@ class ImageAdapter(
         }
     }
 
-    fun getImageIdAt(position: Int): Long = images.get(position).id
+    val imageIds: List<Long> get() = images.map { it.id }
 
     /**
      * CleanUp function.

@@ -299,11 +299,11 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test getImageId
+     * Test imageIds
      */
     @Test
-    fun getImageIdAt() {
+    fun imageIds() {
         imageAdapter.init(listOf(image), listOf(image), TreeMap())
-        Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
+        Assertions.assertEquals(1, imageAdapter.imageIds[0])
     }
 }

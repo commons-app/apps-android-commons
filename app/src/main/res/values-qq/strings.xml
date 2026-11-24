@@ -712,6 +712,11 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Button text in the custom selector.</string>
   <string name="custom_selector_button_limit_text">Indicator in the custom selector. %1$d is a number.</string>
   <string name="custom_selector_limit_error_desc">Error message in the custom selector.</string>
+  <string name="custom_selector_switch_to_list_view">Content description of the layout toggle button in the image picker while the grid layout is shown. Tapping the button switches to the list layout.</string>
+  <string name="custom_selector_switch_to_grid_view">Content description of the layout toggle button in the image picker while the list layout is shown. Tapping the button switches to the grid layout.</string>
+  <string name="custom_selector_image_dimensions">Dimensions shown for an image in the list layout of the image picker. %1$d is the width and %2$d is the height in pixels.</string>
+  <string name="custom_selector_image_has_location">Indicator in the list layout of the image picker, shown when an image contains geolocation data.</string>
+  <string name="custom_selector_image_no_location">Indicator in the list layout of the image picker, shown when an image contains no geolocation data.</string>
   <string name="place_state_wlm">Seems to be unused.</string>
   <string name="wlm_upload_info">A note in the license selector.</string>
   <string name="display_monuments">Seems to be unused.</string>
