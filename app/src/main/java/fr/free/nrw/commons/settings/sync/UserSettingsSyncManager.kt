@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.settings.sync
 
 import android.content.Context
+import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import com.google.gson.JsonSyntaxException
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.auth.SessionManager
@@ -235,6 +237,8 @@ class UserSettingsSyncManager
             }
         }
 
+        // Justification: catches unexpected parsing exceptions per preference key
+        // so an error in one key does not fail full restore
         @Suppress("TooGenericExceptionCaught")
         private fun applySinglePreference(
             key: String,
@@ -249,6 +253,16 @@ class UserSettingsSyncManager
                     PrefType.STRING_SET -> restoreStringSet(key, prefDto.value)
                     PrefType.STRING -> defaultKvStore.putString(key, prefDto.value)
                 }
+
+                if (key == Prefs.APP_UI_LANGUAGE || key == "appUiDefaultLanguagePref") {
+                    context.getSharedPreferences("Settings", Context.MODE_PRIVATE).edit {
+                        putString("language", prefDto.value)
+                    }
+                }
+            } catch (e: NumberFormatException) {
+                Timber.e(e, "Failed to parse numerical preference for key: %s", key)
+            } catch (e: JsonSyntaxException) {
+                Timber.e(e, "Failed to parse JSON string set preference for key: %s", key)
             } catch (e: Exception) {
                 Timber.e(e, "Failed to apply preference for key: %s", key)
             }
