@@ -430,6 +430,7 @@ class NearbyParentFragment :
             NearbyFilterState.setNeedPhotoSelected(!NearbyFilterState.getInstance().isNeedPhotoSelected)
             showOnlyNeedsPhotoState(it)
             setFilterState()
+            presenter?.onOnlyNeedsPhotoChanged()
             true
         }
         refreshButton.setOnMenuItemClickListener {
@@ -1982,6 +1983,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -1992,6 +1994,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -2038,6 +2041,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -2048,6 +2052,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -2405,8 +2410,7 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
-        // The upload picker must show every place, also the ones that already have a picture
-        val onlyNeedsPhoto = NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
+        val onlyNeedsPhoto = isOnlyNeedsPhoto()
         if (selectedLabels == null || selectedLabels.size == 0) {
             replaceMarkerOverlays(placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto))
             return
@@ -3137,6 +3141,16 @@ class NearbyParentFragment :
      * Clears all markers from the map and resets certain map overlays and gestures. After clearing
      * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
      */
+    override fun isOnlyNeedsPhoto(): Boolean =
+        NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
+
+    override fun showNoPlaces() {
+        presenter?.placeDetailsLoader?.loadPlacesDataAyncJob?.cancel()
+        NearbyController.markerLabelList.clear()
+        replaceMarkerOverlays(emptyList())
+        updateListFragment(emptyList())
+    }
+
     override fun clearAllMarkers() {
         binding!!.map.overlayManager.clear()
 
