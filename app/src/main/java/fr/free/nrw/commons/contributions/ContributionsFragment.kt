@@ -30,6 +30,7 @@ import fr.free.nrw.commons.utils.ViewUtil.showLongToast
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -292,6 +293,13 @@ class ContributionsFragment(
                     "Skipping re-upload of %s, it failed with %s",
                     contribution.media.filename,
                     contribution.errorInfo,
+                )
+            } else if (contribution.isRetriedAfterFailure() && contribution.retryNotBefore?.after(Date()) == true) {
+                // Retried on a later resume, and the wait does not use up a retry
+                Timber.d(
+                    "Waiting until %s before re-uploading %s",
+                    contribution.retryNotBefore,
+                    contribution.media.filename,
                 )
             } else if (contribution.isRetriedAfterFailure()) {
                 val retries = contribution.retries

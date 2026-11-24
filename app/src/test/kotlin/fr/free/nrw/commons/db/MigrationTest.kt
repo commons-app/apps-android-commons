@@ -12,6 +12,7 @@ import fr.free.nrw.commons.di.MIGRATION_21_22
 import fr.free.nrw.commons.di.MIGRATION_22_23
 import fr.free.nrw.commons.di.MIGRATION_23_24
 import fr.free.nrw.commons.di.MIGRATION_24_25
+import fr.free.nrw.commons.di.MIGRATION_25_26
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -77,6 +78,7 @@ class MigrationTest {
                 MIGRATION_22_23,
                 MIGRATION_23_24,
                 MIGRATION_24_25,
+                MIGRATION_25_26,
             )
 
         // tests
@@ -152,6 +154,7 @@ class MigrationTest {
                 MIGRATION_22_23,
                 MIGRATION_23_24,
                 MIGRATION_24_25,
+                MIGRATION_25_26,
             )
 
         try {
@@ -177,6 +180,40 @@ class MigrationTest {
                 "OTHER",
                 cursor.getString(cursor.getColumnIndex("media_mediaType")),
             )
+            cursor.close()
+        } finally {
+            migratedDb.close()
+            context.deleteDatabase(ROOM_DB)
+        }
+    }
+
+    @Test
+    fun testQueuedUploadSurvivesRetryWaitMigration() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val oldDb = helper.createDatabase(ROOM_DB, 25)
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                media_pageId, media_filename, media_captions, media_descriptions,
+                media_depictionIds, media_creatorIds, media_categoriesHiddenStatus, media_mediaType
+            ) VALUES (
+                '6428847', 2, 0, '[]', 0, 0, 3,
+                '6428847', 'File:Example.jpg', '{}', '{}', '[]', '[]', '{}', 'IMAGE'
+            )
+            """.trimIndent(),
+        )
+        oldDb.close()
+
+        val migratedDb = helper.runMigrationsAndValidate(ROOM_DB, 26, true, MIGRATION_25_26)
+
+        try {
+            val cursor = migratedDb.query("SELECT * FROM contribution WHERE pageId = '6428847'")
+            Assert.assertTrue("queued upload kept", cursor.moveToFirst())
+            Assert.assertEquals(3, cursor.getInt(cursor.getColumnIndex("retries")))
+            // An upload from before this version can be retried right away
+            Assert.assertTrue(cursor.isNull(cursor.getColumnIndex("retryNotBefore")))
             cursor.close()
         } finally {
             migratedDb.close()

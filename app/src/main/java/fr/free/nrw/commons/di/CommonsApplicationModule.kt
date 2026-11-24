@@ -206,6 +206,7 @@ open class CommonsApplicationModule(
             MIGRATION_22_23,
             MIGRATION_23_24,
             MIGRATION_24_25,
+            MIGRATION_25_26,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -580,6 +581,14 @@ val MIGRATION_24_25 =
     object : Migration(24, 25) {
         override fun migrate(db: SupportSQLiteDatabase) {
             db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+        }
+    }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_25_26 =
+    object : Migration(25, 26) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
         }
     }
 

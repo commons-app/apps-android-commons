@@ -8,6 +8,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import okhttp3.Cache
 import okhttp3.CacheControl
+import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -180,7 +181,7 @@ internal class UnsuccessfulResponseInterceptor : Interceptor {
         // Nobody reads this response, so close it to release its connection
         rsp.close()
         // Keep the HTTP status code, so that the error tells what went wrong
-        throw IOException("Unsuccessful response: HTTP ${rsp.code}")
+        throw UnsuccessfulResponseException(rsp.code, rsp.headers.retryAfterMillis())
     }
 
     private fun isExcludedUrl(request: Request): Boolean {
@@ -203,4 +204,29 @@ internal class UnsuccessfulResponseInterceptor : Interceptor {
         // Error responses are small, this only limits how much of the body is copied to check it
         private const val MAX_ERROR_BODY_BYTES = 1024L * 1024L
     }
+}
+
+/**
+ * An unsuccessful HTTP response, with how long the server asked to wait before trying again.
+ *
+ * @param retryAfterMillis the wait from the Retry-After header, or null if there was none
+ */
+internal class UnsuccessfulResponseException(
+    code: Int,
+    val retryAfterMillis: Long?,
+) : IOException("Unsuccessful response: HTTP $code")
+
+/**
+ * Returns the wait the Retry-After header asks for, given either in seconds or as an HTTP date,
+ * or null if the header is missing or can't be read.
+ */
+internal fun Headers.retryAfterMillis(nowMillis: Long = System.currentTimeMillis()): Long? {
+    val seconds = get("Retry-After")?.trim()?.toLongOrNull()
+    val wait =
+        if (seconds != null) {
+            TimeUnit.SECONDS.toMillis(seconds)
+        } else {
+            getDate("Retry-After")?.let { it.time - nowMillis }
+        }
+    return wait?.coerceAtLeast(0)
 }
