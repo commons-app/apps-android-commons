@@ -377,7 +377,6 @@ class ImageFragment :
         }
 
         ImageHelper.saveImageViewMode(requireContext(), newMode)
-        (activity as? CustomSelectorActivity)?.updateViewModeToggleIcon()
     }
 
     override fun refresh() {

@@ -2,16 +2,23 @@ package fr.free.nrw.commons.upload.worker
 
 import android.content.Context
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.UnsuccessfulResponseException
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Observable
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
+import java.util.Date
 
 class UploadErrorsTest {
     @Test
@@ -118,7 +125,67 @@ class UploadErrorsTest {
         assertNull(uploadErrorMessage(context, null))
     }
 
+    @Test
+    fun `nextAutomaticRetry waits as long as Retry-After asks`() {
+        assertEquals(Date(NOW + 120_000), nextAutomaticRetry("Unsuccessful response: HTTP 503", 120_000, 0, NOW))
+        assertEquals(Date(NOW + 30_000), nextAutomaticRetry("HTTP 429 ", 30_000, 3, NOW))
+    }
+
+    @Test
+    fun `nextAutomaticRetry doubles a 5 second wait for every retry without Retry-After`() {
+        assertEquals(Date(NOW + 5_000), nextAutomaticRetry("Unsuccessful response: HTTP 503", null, 0, NOW))
+        assertEquals(Date(NOW + 10_000), nextAutomaticRetry("Unsuccessful response: HTTP 503", null, 1, NOW))
+        assertEquals(Date(NOW + 2_560_000), nextAutomaticRetry("Unsuccessful response: HTTP 503", null, 9, NOW))
+    }
+
+    @Test
+    fun `nextAutomaticRetry waits for MediaWiki's rate limit too`() {
+        assertEquals(Date(NOW + 5_000), nextAutomaticRetry("ratelimited", null, 0, NOW))
+    }
+
+    @Test
+    fun `nextAutomaticRetry waits at most one hour`() {
+        val oneHour = 3_600_000L
+        assertEquals(Date(NOW + oneHour), nextAutomaticRetry("Unsuccessful response: HTTP 503", 86_400_000, 0, NOW))
+        assertEquals(Date(NOW + oneHour), nextAutomaticRetry("Unsuccessful response: HTTP 503", null, 50, NOW))
+    }
+
+    @Test
+    fun `nextAutomaticRetry does not wait for other errors`() {
+        assertNull(nextAutomaticRetry("Unsuccessful response: HTTP 403", 120_000, 0, NOW))
+        assertNull(nextAutomaticRetry("stashfailed", null, 0, NOW))
+        assertNull(nextAutomaticRetry(null, null, 0, NOW))
+    }
+
+    @Test
+    fun `retryAfterMillis comes from the interceptor exception, also when wrapped`() {
+        val exception = UnsuccessfulResponseException(503, 120_000)
+
+        assertEquals(120_000L, exception.retryAfterMillis())
+        assertEquals(120_000L, RuntimeException(exception).retryAfterMillis())
+        assertNull(IOException("stashfailed").retryAfterMillis())
+    }
+
+    @Test
+    fun `retryAfterMillis comes from the Retrofit error of the publish request`() {
+        val response =
+            Response.error<Any>(
+                "".toResponseBody(),
+                okhttp3.Response
+                    .Builder()
+                    .request(Request.Builder().url("https://commons.wikimedia.org/w/api.php").build())
+                    .protocol(Protocol.HTTP_1_1)
+                    .code(429)
+                    .message("Too Many Requests")
+                    .header("Retry-After", "30")
+                    .build(),
+            )
+
+        assertEquals(30_000L, HttpException(response).retryAfterMillis())
+    }
+
     private companion object {
+        const val NOW = 1_000_000_000_000L
         const val FRIENDLY_503 = "Commons could not handle the request right now. Please try again later. (HTTP 503)"
     }
 }

@@ -130,6 +130,93 @@ class CategoriesPresenterTest {
     }
 
     @Test
+    fun `loadMoreCategories adds only new results to the end of the list`() {
+        categoriesPresenter.onAttachView(view)
+        whenever(repository.getUploads()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
+        whenever(repository.searchMore("Cats"))
+            .thenReturn(Single.just(listOf(categoryItem("Cats"), categoryItem("Black cats"))))
+        categoriesPresenter.searchForCategories("Cats")
+        testScheduler.triggerActions()
+
+        categoriesPresenter.loadMoreCategories()
+        testScheduler.triggerActions()
+
+        assertEquals(
+            listOf("Cats", "Black cats"),
+            categoriesPresenter.categoryList.value!!.map { it.name },
+        )
+    }
+
+    @Test
+    fun `loadMoreCategories does nothing for the suggestions shown before typing`() {
+        categoriesPresenter.onAttachView(view)
+        whenever(repository.getUploads()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.just(listOf(categoryItem("Recent"))))
+        categoriesPresenter.searchForCategories("")
+        testScheduler.triggerActions()
+
+        categoriesPresenter.loadMoreCategories()
+        testScheduler.triggerActions()
+
+        verify(repository, never()).searchMore(any())
+    }
+
+    @Test
+    fun `leaving the screen while a page loads does not stop later pages`() {
+        whenever(repository.getUploads()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.searchAll(any(), any(), any()))
+            .thenReturn(Observable.just(listOf(categoryItem("Cats"))))
+        whenever(repository.searchMore("Cats"))
+            .thenReturn(Single.just(listOf(categoryItem("Black cats"))))
+        categoriesPresenter.onAttachView(view)
+        categoriesPresenter.searchForCategories("Cats")
+        testScheduler.triggerActions()
+        categoriesPresenter.loadMoreCategories()
+        categoriesPresenter.onDetachView()
+
+        categoriesPresenter.onAttachView(view)
+        categoriesPresenter.searchForCategories("Cats")
+        testScheduler.triggerActions()
+        categoriesPresenter.loadMoreCategories()
+        testScheduler.triggerActions()
+
+        assertEquals(
+            listOf("Cats", "Black cats"),
+            categoriesPresenter.categoryList.value!!.map { it.name },
+        )
+    }
+
+    @Test
+    fun `a new search can load its next page while the old search's page is still loading`() {
+        whenever(repository.getUploads()).thenReturn(emptyList())
+        whenever(repository.getSelectedCategories()).thenReturn(emptyList())
+        whenever(repository.searchAll(eq("A"), any(), any()))
+            .thenReturn(Observable.just(listOf(categoryItem("A"))))
+        whenever(repository.searchAll(eq("b"), any(), any()))
+            .thenReturn(Observable.just(emptyList()))
+        // The old search's page never arrives
+        whenever(repository.searchMore("A")).thenReturn(Single.never())
+        whenever(repository.searchMore("b")).thenReturn(Single.just(listOf(categoryItem("B"))))
+        categoriesPresenter.onAttachView(view)
+        categoriesPresenter.searchForCategories("A")
+        testScheduler.triggerActions()
+        categoriesPresenter.loadMoreCategories()
+
+        categoriesPresenter.searchForCategories("b")
+        testScheduler.triggerActions()
+        categoriesPresenter.loadMoreCategories()
+        testScheduler.triggerActions()
+
+        assertEquals(listOf("B"), categoriesPresenter.categoryList.value!!.map { it.name })
+    }
+
+    @Test
     fun `searchForCategoriesTest sets Error when list is empty`() {
         categoriesPresenter.onAttachView(view)
         val liveData = categoriesPresenter.categoryList

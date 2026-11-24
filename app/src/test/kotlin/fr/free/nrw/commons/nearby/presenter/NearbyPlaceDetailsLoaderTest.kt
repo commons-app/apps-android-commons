@@ -10,6 +10,7 @@ import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.mwapi.SparqlResponseException
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
@@ -36,9 +37,12 @@ import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.io.IOException
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Unit test suite for [NearbyPlaceDetailsLoader].
@@ -70,6 +74,8 @@ class NearbyPlaceDetailsLoaderTest {
                 placesRepository,
                 nearbyController,
             ) { view }
+        // No waiting between tries in tests
+        loader.throttle = QueryServiceThrottle(0)
     }
 
     @After
@@ -228,6 +234,134 @@ class NearbyPlaceDetailsLoaderTest {
         }
 
     @Test
+    fun testAtMostTwentyDetailRequestsRunAtTheSameTime() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val running = AtomicInteger()
+            val mostRunning = AtomicInteger()
+            whenever(nearbyController.getPlaces(any())).thenAnswer {
+                mostRunning.accumulateAndGet(running.incrementAndGet(), ::maxOf)
+                Thread.sleep(50)
+                running.decrementAndGet()
+                it.getArgument<List<Place>>(0).map { place -> fetchedPlace(place.entityID) }
+            }
+
+            // 300 places make 30 batches
+            loadAndWait((0..299).map { greyGroup("Q$it") })
+
+            assertEquals("most requests at once", 20, mostRunning.get())
+            assertEquals("places saved to the cache", 300, saveCount())
+        }
+
+    @Test
+    fun testRefusedBatchIsSentAgainWholeAfterThePause() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val sizes = requestSizes { call -> if (call == 0) throw SparqlResponseException(429, 0) }
+
+            loadAndWait((0..9).map { greyGroup("Q$it") })
+
+            assertEquals("sizes of the requests sent", listOf(10, 10), sizes)
+            assertEquals("places saved to the cache", 10, saveCount())
+        }
+
+    @Test
+    fun testRejectedQueryIsNotSentAgainOrSplit() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val sizes = requestSizes { throw SparqlResponseException(400, null) }
+
+            loadAndWait((0..9).map { greyGroup("Q$it") })
+
+            assertEquals("sizes of the requests sent", listOf(10), sizes)
+            assertEquals("places saved to the cache", 0, saveCount())
+        }
+
+    @Test
+    fun testBatchIsSentAgainOnlyOnce() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val sizes = requestSizes { throw SparqlResponseException(503, 0) }
+
+            loadAndWait((0..9).map { greyGroup("Q$it") })
+
+            assertEquals("sizes of the requests sent", listOf(10, 10), sizes)
+        }
+
+    @Test
+    fun testOneLoadSendsAtMostThreeBatchesAgain() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val sizes = requestSizes { throw SparqlResponseException(429, 0) }
+
+            // 50 places make 5 batches
+            loadAndWait((0..49).map { greyGroup("Q$it") })
+
+            assertEquals("requests sent", 5 + 3, sizes.size)
+        }
+
+    @Test
+    fun testPauseIsWaitedOutAndLoadingGoesOn() =
+        runBlocking<Unit> {
+            stubForLoading()
+            val sizes = requestSizes { call -> if (call == 0) throw SparqlResponseException(429, 300) }
+
+            // 300 places make 30 batches
+            loadAndWait((0..299).map { greyGroup("Q$it") })
+
+            assertEquals("requests sent", 30 + 1, sizes.size)
+            assertEquals("places saved to the cache", 300, saveCount())
+        }
+
+    @Test
+    fun testPauseMadeLongerWhileWaitingIsWaitedOut() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // The first batch is told to wait 200 ms. While it waits, the second one is told 1 s.
+            val longPauseFrom = AtomicLong()
+            val sentAt = CopyOnWriteArrayList<Long>()
+            requestSizes { call ->
+                sentAt.add(System.currentTimeMillis())
+                when (call) {
+                    0 -> throw SparqlResponseException(429, 200)
+                    1 -> {
+                        Thread.sleep(100)
+                        longPauseFrom.set(System.currentTimeMillis())
+                        throw SparqlResponseException(429, 1000)
+                    }
+                }
+            }
+
+            // 20 places make 2 batches
+            loadAndWait((0..19).map { greyGroup("Q$it") })
+
+            assertEquals("requests sent", 4, sentAt.size)
+            sentAt.drop(2).forEach {
+                assertTrue("sent again before the longer pause ended", it >= longPauseFrom.get() + 1000)
+            }
+        }
+
+    @Test
+    fun testPauseOfAnOutageEndsTheLoadWithoutWaiting() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // The service refuses only once the 20 workers have each sent a batch
+            val allSent = CountDownLatch(20)
+            val sizes =
+                requestSizes {
+                    allSent.countDown()
+                    allSent.await(5, TimeUnit.SECONDS)
+                    throw SparqlResponseException(429, TimeUnit.MINUTES.toMillis(3))
+                }
+
+            // 210 places make 21 batches: 20 go out at once, the 21st isn't sent during the pause
+            withTimeout(10_000) { loadAndWait((0..209).map { greyGroup("Q$it") }) }
+
+            assertEquals("requests sent", 20, sizes.size)
+            assertTrue("the pause stays for the next load", loader.throttle.waitMillis() > 0)
+        }
+
+    @Test
     fun testFailedRequestsDoNotSaveEmptyPlacesToCache() =
         runBlocking<Unit> {
             stubForLoading()
@@ -320,6 +454,25 @@ class NearbyPlaceDetailsLoaderTest {
         Dispatchers.setMain(Dispatchers.Unconfined)
         whenever(placesRepository.save(any())).thenReturn(Completable.complete())
         whenever(bookmarkLocationDao.findBookmarkLocation(any())).thenReturn(false)
+    }
+
+    /** Answers every request with its places, after [fail] had the chance to throw for the nth call */
+    private fun requestSizes(fail: (call: Int) -> Unit): List<Int> {
+        val sizes = CopyOnWriteArrayList<Int>()
+        // Requests are sent from many threads, so number them with a counter, not with sizes.size
+        val calls = AtomicInteger()
+        whenever(nearbyController.getPlaces(any())).thenAnswer {
+            val places = it.getArgument<List<Place>>(0)
+            sizes.add(places.size)
+            fail(calls.getAndIncrement())
+            places.map { place -> fetchedPlace(place.entityID) }
+        }
+        return sizes
+    }
+
+    private suspend fun loadAndWait(groups: List<MarkerPlaceGroup>) {
+        loader.loadPlacesDataAsync(groups, scopeWith(Job()))
+        withTimeout(20_000) { loader.loadPlacesDataAyncJob!!.join() }
     }
 
     private fun saveCount() =

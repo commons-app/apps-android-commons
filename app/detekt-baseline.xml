@@ -81,7 +81,7 @@
     <ID>LongParameterList:PlaceAdapter.kt$PlaceAdapter$( bookmarkLocationsDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope? = null, onPlaceClicked: ((Place) -&gt; Unit)? = null, onBookmarkClicked: (Place, Boolean) -&gt; Unit, commonPlaceClickActions: CommonPlaceClickActions, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, )</ID>
     <ID>LongParameterList:PlaceAdapterDelegate.kt$( bookmarkLocationDao: BookmarkLocationsDao, scope: LifecycleCoroutineScope?, onItemClick: ((Place) -&gt; Unit)? = null, onCameraClicked: (Place, ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onCameraLongPressed: () -&gt; Boolean, onGalleryClicked: (Place, ActivityResultLauncher&lt;Intent&gt;) -&gt; Unit, onGalleryLongPressed: () -&gt; Boolean, onBookmarkClicked: (Place, Boolean) -&gt; Unit, onBookmarkLongPressed: () -&gt; Boolean, onOverflowIconClicked: (Place, View) -&gt; Unit, onOverFlowLongPressed: () -&gt; Boolean, onDirectionsClicked: (Place) -&gt; Unit, onDirectionsLongPressed: () -&gt; Boolean, inAppCameraLocationPermissionLauncher: ActivityResultLauncher&lt;Array&lt;String&gt;&gt;, cameraPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, galleryPickLauncherForResult: ActivityResultLauncher&lt;Intent&gt;, )</ID>
     <ID>LongParameterList:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter$( raf: RandomAccessFile, tiffBase: Long, ifdPos: Long, order: ByteOrder, updates: Map&lt;Int, String?&gt;, isMainIfd: Boolean = true, )</ID>
-    <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, errorMessage: AtomicReference&lt;String&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
+    <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, error: AtomicReference&lt;Throwable?&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( private val uploadInterface: UploadInterface, @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient, private val pageContentsCreator: PageContentsCreator, private val fileUtilsWrapper: FileUtilsWrapper, private val gson: Gson, private val timeProvider: TimeProvider, private val contributionDao: ContributionDao, )</ID>
     <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, // according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false, )</ID>
     <ID>LoopWithTooManyJumpStatements:CsrfTokenClient.kt$CsrfTokenClient$for</ID>
@@ -570,16 +570,12 @@
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
     <ID>TooManyFunctions:CommonsApplicationModule.kt$CommonsApplicationModule</ID>
     <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
-    <ID>TooManyFunctions:CustomSelectorActivity.kt$CustomSelectorActivity : BaseActivityFolderClickListenerImageSelectListener</ID>
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
-    <ID>TooManyFunctions:DepictsFragment.kt$DepictsFragment : UploadBaseFragmentView</ID>
-    <ID>TooManyFunctions:DepictsPresenter.kt$DepictsPresenter : UserActionListener</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>

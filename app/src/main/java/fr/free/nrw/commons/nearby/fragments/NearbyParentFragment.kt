@@ -25,6 +25,7 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -415,6 +416,15 @@ class NearbyParentFragment :
         val showInExploreButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_show_in_explore)
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
+        val onlyNeedsPhotoButton = menu.findItem(fr.free.nrw.commons.R.id.item_only_needs_photo)
+        showOnlyNeedsPhotoState(onlyNeedsPhotoButton)
+        onlyNeedsPhotoButton.setOnMenuItemClickListener {
+            NearbyFilterState.setNeedPhotoSelected(!NearbyFilterState.getInstance().isNeedPhotoSelected)
+            showOnlyNeedsPhotoState(it)
+            setFilterState()
+            presenter?.onOnlyNeedsPhotoChanged()
+            true
+        }
         refreshButton.setOnMenuItemClickListener {
             runNearbyMenuAction { emptyCache() }
             false
@@ -448,6 +458,17 @@ class NearbyParentFragment :
                 savePlacesAsKML()
             }
             false
+        }
+    }
+
+    /** Shows a red pin when only places without a picture are shown, red and green pins otherwise. */
+    private fun showOnlyNeedsPhotoState(item: MenuItem) {
+        if (NearbyFilterState.getInstance().isNeedPhotoSelected) {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_red_pin)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_all_places)
+        } else {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_all_pins)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_only_needs_photo)
         }
     }
 
@@ -677,6 +698,25 @@ class NearbyParentFragment :
     fun addPhotoMarkerIfDepictsMode() {
         if (isDepictsPickerMode) {
             addPhotoMarkers(allPhotoLatLngs!!)
+        }
+    }
+
+    /**
+     * called when new location data is received from Explore map without re-creating the fragment
+     */
+    fun onExploreMapDataReceived(bundle: Bundle) {
+        if (bundle.containsKey("prev_zoom")) {
+            prevZoom = bundle.getDouble("prev_zoom")
+            prevLatitude = bundle.getDouble("prev_latitude")
+            prevLongitude = bundle.getDouble("prev_longitude")
+            if (binding?.map != null) {
+                moveCameraToPosition(GeoPoint(prevLatitude, prevLongitude), prevZoom, 1L)
+            }
+            if (isResumed) {
+                val changeType =
+                    fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED
+                presenter?.updateMapAndList(changeType)
+            }
         }
     }
 
@@ -1946,6 +1986,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -1956,6 +1997,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -2002,6 +2044,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -2012,6 +2055,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -2369,8 +2413,9 @@ class NearbyParentFragment :
         val displayExists = false
         val displayNeedsPhoto = false
         val displayWlm = false
+        val onlyNeedsPhoto = isOnlyNeedsPhoto()
         if (selectedLabels == null || selectedLabels.size == 0) {
-            replaceMarkerOverlays(NearbyController.markerLabelList)
+            replaceMarkerOverlays(placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto))
             return
         }
         val placeGroupsToShow = ArrayList<MarkerPlaceGroup>()
@@ -2425,7 +2470,7 @@ class NearbyParentFragment :
                 )
             }
         }
-        replaceMarkerOverlays(placeGroupsToShow)
+        replaceMarkerOverlays(placesToShow(placeGroupsToShow, onlyNeedsPhoto))
     }
 
     override fun getCameraTarget(): LatLng? = if (binding!!.map == null) null else mapFocus
@@ -3099,6 +3144,16 @@ class NearbyParentFragment :
      * Clears all markers from the map and resets certain map overlays and gestures. After clearing
      * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
      */
+    override fun isOnlyNeedsPhoto(): Boolean =
+        NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
+
+    override fun showNoPlaces() {
+        presenter?.placeDetailsLoader?.loadPlacesDataAyncJob?.cancel()
+        NearbyController.markerLabelList.clear()
+        replaceMarkerOverlays(emptyList())
+        updateListFragment(emptyList())
+    }
+
     override fun clearAllMarkers() {
         binding!!.map.overlayManager.clear()
 
@@ -3565,5 +3620,18 @@ class NearbyParentFragment :
          * @return `true` if '(' or ')' is found, `false` otherwise.
          */
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
+
+        /**
+         * Drops the places that already have a picture (green pins) when [onlyNeedsPhoto] is set.
+         */
+        fun placesToShow(
+            placeGroups: List<MarkerPlaceGroup>,
+            onlyNeedsPhoto: Boolean,
+        ): List<MarkerPlaceGroup> =
+            if (onlyNeedsPhoto) {
+                placeGroups.filter { it.place.pic.isNullOrBlank() }
+            } else {
+                placeGroups
+            }
     }
 }

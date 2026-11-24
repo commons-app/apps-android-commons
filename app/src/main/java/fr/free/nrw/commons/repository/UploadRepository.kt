@@ -53,6 +53,14 @@ interface UploadCategoryOperations {
     ): Observable<List<CategoryItem>>
 
     /**
+     * Next page of results for a typed category search
+     *
+     * @param query
+     * @return
+     */
+    fun searchMore(query: String): Single<List<CategoryItem>>
+
+    /**
      * Sets the list of selected categories for the current upload
      *
      * @param categoryStringList
@@ -268,6 +276,8 @@ class DefaultUploadCategoryOperations(
         selectedDepictions: List<DepictedItem>,
     ): Observable<List<CategoryItem>> = categoriesModel.searchAll(query, imageTitleList, selectedDepictions)
 
+    override fun searchMore(query: String): Single<List<CategoryItem>> = categoriesModel.searchMore(query)
+
     override fun setSelectedCategories(categoryStringList: List<String>) {
         uploadModel.setSelectedCategories(categoryStringList)
     }
@@ -393,7 +403,10 @@ class DefaultUploadQualityOperations(
         )
 
     override fun getCaptionQuality(uploadItem: UploadItem): Single<Int> =
-        uploadModel.imageProcessingService.validateCaption(uploadItem)
+        uploadModel.imageProcessingService.validateCaption(
+            uploadItem,
+            uploadModel.items.count { it.filename == uploadItem.filename },
+        )
 
     override fun useSimilarPictureCoordinates(
         imageCoordinates: ImageCoordinates,
