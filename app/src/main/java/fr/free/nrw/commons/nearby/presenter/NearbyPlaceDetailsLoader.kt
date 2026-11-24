@@ -481,12 +481,16 @@ private suspend fun NearbyController.getPlacesThrottled(
 ): List<Place> {
     var retried = false
     while (true) {
-        val wait = throttle.waitMillis()
+        var wait = throttle.waitMillis()
+        // Another refusal can make the pause longer while waiting, so look again after waking up
+        while (wait in 1..MAX_WAIT_DURING_LOAD_MILLIS) {
+            delay(wait)
+            wait = throttle.waitMillis()
+        }
         val error =
             if (wait > MAX_WAIT_DURING_LOAD_MILLIS) {
                 IOException("Query service paused for $wait ms")
             } else {
-                delay(wait)
                 try {
                     return getPlaces(places).also { throttle.onSuccess() }
                 } catch (e: IOException) {

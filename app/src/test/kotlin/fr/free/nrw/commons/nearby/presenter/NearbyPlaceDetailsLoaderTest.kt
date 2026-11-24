@@ -42,6 +42,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Unit test suite for [NearbyPlaceDetailsLoader].
@@ -310,6 +311,34 @@ class NearbyPlaceDetailsLoaderTest {
 
             assertEquals("requests sent", 30 + 1, sizes.size)
             assertEquals("places saved to the cache", 300, saveCount())
+        }
+
+    @Test
+    fun testPauseMadeLongerWhileWaitingIsWaitedOut() =
+        runBlocking<Unit> {
+            stubForLoading()
+            // The first batch is told to wait 200 ms. While it waits, the second one is told 1 s.
+            val longPauseFrom = AtomicLong()
+            val sentAt = CopyOnWriteArrayList<Long>()
+            requestSizes { call ->
+                sentAt.add(System.currentTimeMillis())
+                when (call) {
+                    0 -> throw SparqlResponseException(429, 200)
+                    1 -> {
+                        Thread.sleep(100)
+                        longPauseFrom.set(System.currentTimeMillis())
+                        throw SparqlResponseException(429, 1000)
+                    }
+                }
+            }
+
+            // 20 places make 2 batches
+            loadAndWait((0..19).map { greyGroup("Q$it") })
+
+            assertEquals("requests sent", 4, sentAt.size)
+            sentAt.drop(2).forEach {
+                assertTrue("sent again before the longer pause ended", it >= longPauseFrom.get() + 1000)
+            }
         }
 
     @Test
