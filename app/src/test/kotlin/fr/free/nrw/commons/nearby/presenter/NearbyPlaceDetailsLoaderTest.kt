@@ -459,10 +459,12 @@ class NearbyPlaceDetailsLoaderTest {
     /** Answers every request with its places, after [fail] had the chance to throw for the nth call */
     private fun requestSizes(fail: (call: Int) -> Unit): List<Int> {
         val sizes = CopyOnWriteArrayList<Int>()
+        // Requests are sent from many threads, so number them with a counter, not with sizes.size
+        val calls = AtomicInteger()
         whenever(nearbyController.getPlaces(any())).thenAnswer {
             val places = it.getArgument<List<Place>>(0)
             sizes.add(places.size)
-            fail(sizes.size - 1)
+            fail(calls.getAndIncrement())
             places.map { place -> fetchedPlace(place.entityID) }
         }
         return sizes
