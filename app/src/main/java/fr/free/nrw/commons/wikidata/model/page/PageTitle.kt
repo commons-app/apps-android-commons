@@ -165,7 +165,7 @@ class PageTitle : Parcelable {
     val mobileUri: String
         get() = getUriForDomain(wikiSite.mobileAuthority())
 
-    // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
+    // Possible improvement: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
     val prefixedText: String
         get() =
             namespace?.let { addUnderscores(it) + ":" + getTextWithoutSpaces() }

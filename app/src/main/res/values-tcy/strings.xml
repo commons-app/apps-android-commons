@@ -22,10 +22,6 @@
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
     <item quantity="other">%1$d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ಈ ಆಕೃತಿಗ್ ಲೈಸನ್ಸ್ ಆಪುಂಡು%1$ ಅಡಿಟ್</item>
-    <item quantity="other">ಈ ಆಕೃತಿಲೆಗ್ ಲೈಸನ್ಸ್ ಆಪುಂಡು %1$ ಅಡಿಟ್</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">ಒಂಜಿ=%1$d ಮಿತೇರಾಯಿನ</item>
   </plurals>
@@ -52,7 +48,6 @@
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
   <string name="upload_progress_notification_title_start">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆತಿಜಿ</string>
   <string name="upload_failed_notification_subtitle">ತುಯಾರ ಮೆಲ್ಲ ಒತ್ತುಲೆ</string>

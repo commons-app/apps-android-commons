@@ -26,10 +26,6 @@
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Tugna-a ad  tili s turagt %1$s.</item>
-    <item quantity="other">Tugniwin-a ad ilint s turagt %1$s.</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d n usali</item>
     <item quantity="other">%1$d n usali</item>
@@ -59,7 +55,6 @@
   <string name="upload_completed_notification_title">%1$s yuli!</string>
   <string name="upload_completed_notification_text">Senned akken ad twaliḍ asali-ik</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Beddu n usali n %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ulin</string>
   <string name="upload_progress_notification_title_finishing">Tagara n usali n %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Asali n  %1$s ur yeddi ara</string>
   <string name="upload_failed_notification_subtitle">Senned akken ad sekneḍ</string>

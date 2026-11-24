@@ -54,13 +54,6 @@
     <item quantity="many">%1$d enporzhiadur</item>
     <item quantity="other">%1$d enporzhiadur</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dindan an aotre %1$s e vo ar skeudenn-mañ</item>
-    <item quantity="two">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
-    <item quantity="few">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
-    <item quantity="many">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
-    <item quantity="other">Dindan an aotre %1$s e vo ar skeudennoù-mañ</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d enporzhiadur</item>
     <item quantity="two">%1$d enporzhiadur</item>
@@ -106,7 +99,6 @@
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
   <string name="upload_progress_notification_title_start">Oc\'h enporzhiañ ar restr: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_paused_notification_title">Ehanet emañ ezkargañ %1$s</string>

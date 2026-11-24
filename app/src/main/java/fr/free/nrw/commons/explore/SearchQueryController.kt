@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore
 
 import android.text.TextUtils
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxSearchView
@@ -55,9 +56,11 @@ internal class SearchQueryController(
         viewPagerAdapter: ViewPagerAdapter,
         compositeDisposable: CompositeDisposable,
     ) {
-        searchMediaFragment = SearchMediaFragment()
-        searchDepictionsFragment = SearchDepictionsFragment()
-        searchCategoryFragment = SearchCategoryFragment()
+        // When the screen is recreated, the tabs keep showing the restored fragments,
+        // so reuse them instead of creating new ones.
+        searchMediaFragment = restoredOrNew { SearchMediaFragment() }
+        searchDepictionsFragment = restoredOrNew { SearchDepictionsFragment() }
+        searchCategoryFragment = restoredOrNew { SearchCategoryFragment() }
 
         viewPagerAdapter.setTabs(
             R.string.search_tab_title_media to searchMediaFragment!!,
@@ -74,6 +77,12 @@ internal class SearchQueryController(
                 .subscribe(::handleSearch, Timber::e),
         )
     }
+
+    /**
+     * Returns the tab Android brought back after the screen was recreated, or creates a new one if there isn't one.
+     */
+    private inline fun <reified T : Fragment> restoredOrNew(create: () -> T): T =
+        fragmentManager.fragments.filterIsInstance<T>().firstOrNull() ?: create()
 
     /**
      * Switches between history and results, sending nonempty queries only to active result views.

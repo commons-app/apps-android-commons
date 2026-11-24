@@ -41,14 +41,6 @@
     <item quantity="many">%1$d uwchlwythiad</item>
     <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="zero">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-    <item quantity="one">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s</item>
-    <item quantity="two">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-    <item quantity="few">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-    <item quantity="many">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-    <item quantity="other">Caiff y delweddau hyn eu trwyddedu dan %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">Archwilio</string>
   <string name="preference_category_appearance">Ymddangosiad</string>
   <string name="preference_category_general">Cyffredinol</string>
@@ -74,7 +66,6 @@
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
   <string name="upload_progress_notification_title_start">Wrthi\'n uwchlwytho ffeil: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Wedi methu uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>

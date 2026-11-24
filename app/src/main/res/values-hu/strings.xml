@@ -49,10 +49,6 @@
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ez a kép %1$s licenc alatt lesz feltöltve</item>
-    <item quantity="other">Ezek a képek %1$s licenc alatt lesznek feltöltve</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d feltöltés</item>
     <item quantity="other">%1$d feltöltés</item>
@@ -92,7 +88,6 @@
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
   <string name="upload_progress_notification_title_start">Fájl feltöltése: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
