@@ -9,7 +9,6 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.mwapi.SparqlResponseException
 import fr.free.nrw.commons.mwapi.WikidataQueryClient
-import fr.free.nrw.commons.mwapi.retryAfterMillis
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem

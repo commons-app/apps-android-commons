@@ -6,10 +6,10 @@ import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.model.NearbyQueryParams
 import fr.free.nrw.commons.nearby.model.NearbyResponse
+import fr.free.nrw.commons.retryAfterMillis
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Single
-import okhttp3.Headers
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -17,7 +17,6 @@ import okhttp3.Request
 import timber.log.Timber
 import java.io.IOException
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 internal const val FALLBACK_LANGUAGES =
     "en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb," +
@@ -226,18 +225,3 @@ class SparqlResponseException(
     val code: Int,
     val retryAfterMillis: Long?,
 ) : IOException("Unexpected response code: $code")
-
-/**
- * Returns the wait asked for by the Retry-After header, given in seconds or as an HTTP date, or
- * null if there is none or it can't be read. A wait in the past counts as no wait.
- */
-internal fun Headers.retryAfterMillis(nowMillis: Long = System.currentTimeMillis()): Long? {
-    val seconds = get("Retry-After")?.trim()?.toLongOrNull()
-    val wait =
-        if (seconds != null) {
-            TimeUnit.SECONDS.toMillis(seconds)
-        } else {
-            getDate("Retry-After")?.let { it.time - nowMillis }
-        }
-    return wait?.coerceAtLeast(0)
-}
