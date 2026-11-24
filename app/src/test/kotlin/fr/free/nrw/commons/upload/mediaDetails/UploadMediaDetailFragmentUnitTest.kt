@@ -38,6 +38,7 @@ import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.LAST_ZOOM
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.Companion.PLACE
 import org.junit.Assert
@@ -614,6 +615,30 @@ class UploadMediaDetailFragmentUnitTest {
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
         Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+    }
+
+    @Test
+    fun testExternalMapOpensAtLastPickedLocationForImageWithoutLocation() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(uploadItem.gpsCoords).thenReturn(null)
+        `when`(defaultKvStore.getString(LAST_LOCATION)).thenReturn("35.683,139.76")
+        fragment.showExternalMap(uploadItem)
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        val position = LocationPicker.getCameraPosition(startedIntent)!!
+        Assert.assertEquals(35.683, position.latitude, 0.0)
+        Assert.assertEquals(139.76, position.longitude, 0.0)
+    }
+
+    @Test
+    fun testExternalMapSendsNoPositionWhenNoLocationWasPickedBefore() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(uploadItem.gpsCoords).thenReturn(null)
+        `when`(defaultKvStore.getString(LAST_LOCATION)).thenReturn(null)
+        fragment.showExternalMap(uploadItem)
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        Assert.assertNull(LocationPicker.getCameraPosition(startedIntent))
     }
 
     /** Verifies that location edits preserve precision and do not depend on the device locale. */

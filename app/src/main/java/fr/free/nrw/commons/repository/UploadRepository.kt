@@ -393,7 +393,10 @@ class DefaultUploadQualityOperations(
         )
 
     override fun getCaptionQuality(uploadItem: UploadItem): Single<Int> =
-        uploadModel.imageProcessingService.validateCaption(uploadItem)
+        uploadModel.imageProcessingService.validateCaption(
+            uploadItem,
+            uploadModel.items.count { it.filename == uploadItem.filename },
+        )
 
     override fun useSimilarPictureCoordinates(
         imageCoordinates: ImageCoordinates,

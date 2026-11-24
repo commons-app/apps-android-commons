@@ -59,7 +59,8 @@ internal class UploadMediaLocationController : UploadMediaDetailsContract.Locati
                     .activityKey("UploadActivity")
                     .build(fragment.requireActivity())
         } else {
-            if (fragment.defaultKvStore.getString(UploadMediaDetailFragment.LAST_LOCATION) != null) {
+            val hasLastLocation = fragment.defaultKvStore.getString(UploadMediaDetailFragment.LAST_LOCATION) != null
+            if (hasLastLocation) {
                 val locationLatLng =
                     fragment.defaultKvStore
                         .getString(UploadMediaDetailFragment.LAST_LOCATION)!!
@@ -73,10 +74,13 @@ internal class UploadMediaLocationController : UploadMediaDetailsContract.Locati
                 defaultZoom = fragment.defaultKvStore.getString(UploadMediaDetailFragment.LAST_ZOOM)!!.toDouble()
             }
 
+            val intentBuilder = LocationPicker.IntentBuilder()
+            // Without a saved location, the picker falls back to the device location.
+            if (hasLastLocation) {
+                intentBuilder.defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
+            }
             locationPickerIntent =
-                LocationPicker
-                    .IntentBuilder()
-                    .defaultLocation(CameraPosition(defaultLatitude, defaultLongitude, defaultZoom))
+                intentBuilder
                     .activityKey("NoLocationUploadActivity")
                     .build(fragment.requireActivity())
         }

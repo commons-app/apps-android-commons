@@ -152,12 +152,12 @@ class UserStatsClientTest {
         assertEquals(2, result.articlesUsingImages)
     }
 
-    /** Counts files through Commons after a failed Toolforge upload-count request. */
+    /** Counts upload-log events through Commons after a failed Toolforge upload-count request. */
     @Test
     fun testGetUploadCountFallsBackWhenToolforgeFails() {
         Mockito.`when`(response.isSuccessful).thenReturn(false, true)
         Mockito.`when`(responseBody.string()).thenReturn(
-            """{"query":{"allimages":[{"name":"A.jpg"},{"name":"B.jpg"}]}}""",
+            """{"query":{"logevents":[{"logid":1},{"logid":2}]}}""",
         )
 
         val count = client.getUploadCount("Test").blockingGet()
@@ -168,13 +168,13 @@ class UserStatsClientTest {
     /** Stops reading continuation pages at the cap and marks the count as capped. */
     @Test
     fun testGetUploadCountFallbackStopsAfterTheCap() {
-        val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
-        val continued = """{"continue":{"aicontinue":"x","continue":"-||"},"query":{"allimages":[$page]}}"""
+        val page = (1..500).joinToString(",") { """{"logid":$it}""" }
+        val continued = """{"continue":{"lecontinue":"x","continue":"-||"},"query":{"logevents":[$page]}}"""
         Mockito.`when`(response.isSuccessful).thenReturn(false, true)
         Mockito.`when`(responseBody.string()).thenReturn(
             continued,
             continued,
-            """{"query":{"allimages":[$page]}}""",
+            """{"query":{"logevents":[$page]}}""",
         )
 
         val count = client.getUploadCount("Test").blockingGet()
@@ -183,14 +183,14 @@ class UserStatsClientTest {
         verify(okhttpClient, times(3)).newCall(any())
     }
 
-    /** Exactly as many files as the cap, with no page left, is an exact count. */
+    /** Exactly as many uploads as the cap, with no page left, is an exact count. */
     @Test
     fun testGetUploadCountFallbackWithExactlyTheCapIsNotCapped() {
-        val page = (1..500).joinToString(",") { """{"name":"F$it.jpg"}""" }
+        val page = (1..500).joinToString(",") { """{"logid":$it}""" }
         Mockito.`when`(response.isSuccessful).thenReturn(false, true)
         Mockito.`when`(responseBody.string()).thenReturn(
-            """{"continue":{"aicontinue":"x","continue":"-||"},"query":{"allimages":[$page]}}""",
-            """{"query":{"allimages":[$page]}}""",
+            """{"continue":{"lecontinue":"x","continue":"-||"},"query":{"logevents":[$page]}}""",
+            """{"query":{"logevents":[$page]}}""",
         )
 
         val count = client.getUploadCount("Test").blockingGet()
