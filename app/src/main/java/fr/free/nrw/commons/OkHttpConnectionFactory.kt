@@ -1,11 +1,13 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import okhttp3.Cache
+import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -54,7 +56,8 @@ object OkHttpConnectionFactory {
                 HttpLoggingInterceptor()
                     .apply { level = HttpLoggingInterceptor.Level.BASIC }
                     .redactSensitiveHeaders(),
-            ).addInterceptor(UnsuccessfulResponseInterceptor())
+            ).addInterceptor(ForceCacheInterceptor())
+            .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
 }
@@ -70,6 +73,51 @@ class CommonHeaderRequestInterceptor : Interceptor {
                 .build()
         return chain.proceed(request)
     }
+}
+
+private const val OFFLINE_CACHE_MAX_STALE_DAYS = 7
+
+class ForceCacheInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val appInstance =
+            try {
+                CommonsApplication.instance
+            } catch (_: Exception) {
+                null
+            }
+
+        if (shouldForceCache(appInstance, request)) {
+            val offlineRequest =
+                request
+                    .newBuilder()
+                    .cacheControl(
+                        CacheControl
+                            .Builder()
+                            .onlyIfCached()
+                            .maxStale(OFFLINE_CACHE_MAX_STALE_DAYS, TimeUnit.DAYS)
+                            .build(),
+                    ).build()
+            return chain.proceed(offlineRequest)
+        }
+        return chain.proceed(request)
+    }
+
+    private fun shouldForceCache(
+        appInstance: CommonsApplication?,
+        request: Request,
+    ): Boolean =
+        appInstance != null &&
+            request.method.equals("GET", ignoreCase = true) &&
+            !NetworkUtils.isInternetConnectionEstablished(appInstance) &&
+            isExploreRequest(request.url.toString())
+
+    private fun isExploreRequest(url: String): Boolean =
+        url.contains("generator=categorymembers") ||
+            url.contains("generator=search") ||
+            url.contains("generator=allimages") ||
+            url.contains("generator=geosearch") ||
+            url.contains("action=wbgetentities")
 }
 
 private const val SUPPRESS_ERROR_LOG = "x-commons-suppress-error-log"

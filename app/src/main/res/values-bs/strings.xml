@@ -31,11 +31,6 @@
     <item quantity="few">%1$d postavljanja</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Ova slika će se voditi pod licencom %1$s</item>
-    <item quantity="few">Ove slike će se voditi pod licencom %1$s</item>
-    <item quantity="other">Ove slike će se voditi pod licencom %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Općenito</string>
@@ -59,7 +54,6 @@
   <string name="upload_completed_notification_title">Datoteka %1$s je postavljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
   <string name="upload_progress_notification_title_start">Postavljam datoteku: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Postavljanje datoteke %1$s u toku</string>
   <string name="upload_progress_notification_title_finishing">Postavljanje datoteke %1$s završeno</string>
   <string name="upload_failed_notification_title" fuzzy="true">Postavljanje datoteke %1$s nije uspjelo</string>
   <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>

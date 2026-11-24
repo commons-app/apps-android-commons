@@ -50,7 +50,6 @@
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
   <string name="upload_completed_notification_text">உமது தரவேற்றத்தைக் காணத் தட்டுக</string>
   <string name="upload_progress_notification_title_start">கோப்பு பதிவேறுகிறது: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
   <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
   <string name="upload_failed_notification_title">%1$s பதிவேற்றம் தோற்றது</string>
   <string name="upload_paused_notification_title">%1$s பதிவேற்றம் இடைநின்றது</string>

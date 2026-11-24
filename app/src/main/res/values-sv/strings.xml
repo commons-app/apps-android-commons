@@ -47,10 +47,6 @@
     <item quantity="one">%1$d uppladdning</item>
     <item quantity="other">%1$d uppladdningar</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Denna bild kommer att licensieras under %1$s</item>
-    <item quantity="other">Dessa bilder kommer att licensieras under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d uppladdning</item>
     <item quantity="other">%1$d uppladdningar</item>
@@ -90,7 +86,6 @@
   <string name="upload_completed_notification_title">%1$s överförd!</string>
   <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
   <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Kunde inte ladda upp %1$s</string>
   <string name="upload_paused_notification_title">Uppladdning av %1$s pausades</string>

@@ -16,10 +16,6 @@
     <item quantity="one">%1$d huuchschüürd datei</item>
     <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Detdiar bil feit det lisens %1$s</item>
-    <item quantity="other">Detdiar bil feit det lisens %1$s</item>
-  </plurals>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Iinstelangen</string>
   <string name="username">Brükernööm</string>
@@ -36,7 +32,6 @@
   <string name="upload_completed_notification_title">%1$s huuchschüürd!</string>
   <string name="upload_completed_notification_text">Tipe, am din huuchschüürd bil uuntulukin</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Huuchschüüren faan „%1$s“ began</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s huuchschüür</string>
   <string name="upload_progress_notification_title_finishing">Huuchschüüren faan „%1$s“ klaar fu</string>
   <string name="upload_failed_notification_title" fuzzy="true">Huuchschüüren faan „%1$s“ skiaf gingen</string>
   <string name="upload_failed_notification_subtitle">Tipe, am det uuntulukin</string>

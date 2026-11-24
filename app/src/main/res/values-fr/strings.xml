@@ -89,10 +89,6 @@
     <item quantity="one">%1$d téléversement</item>
     <item quantity="other">%1$d téléversements</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Cette image sera sous licence %1$s</item>
-    <item quantity="other">Ces images seront sous licence %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d téléversement</item>
     <item quantity="other">%1$d téléversements</item>
@@ -132,7 +128,6 @@
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
   <string name="upload_progress_notification_title_start">Téléversement du fichier : %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s en cours de téléversement</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement de %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_paused_notification_title">Téléversement de %1$s en pause</string>

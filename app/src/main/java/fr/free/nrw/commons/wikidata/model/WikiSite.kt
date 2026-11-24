@@ -48,7 +48,7 @@ import java.util.Locale
  */
 @Suppress("TooManyFunctions")
 class WikiSite : Parcelable {
-    // TODO: remove @SerializedName. this is now in the TypeAdapter and a "uri" case may be added
+    // @SerializedName could be removed since this is now in the TypeAdapter and a "uri" case may be added
     @SerializedName("domain")
     private val uri: Uri
 

@@ -925,6 +925,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
 
   <string name="show_in_explore">Show in Explore</string>
+  <string name="nearby_show_only_needs_photo">Show only places that need a photo</string>
+  <string name="nearby_show_all_places">Show all places</string>
   <string name="show_in_nearby">Show in Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
