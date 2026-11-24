@@ -6,7 +6,7 @@ abstract class ContinuationClient<Network, Domain> {
     private val continuationStore: MutableMap<String, Map<String, String>?> = mutableMapOf()
     private val continuationExists: MutableMap<String, Boolean> = mutableMapOf()
 
-    private fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
+    protected fun hasMorePagesFor(key: String) = continuationExists[key] ?: true
 
     fun continuationRequest(
         prefix: String,

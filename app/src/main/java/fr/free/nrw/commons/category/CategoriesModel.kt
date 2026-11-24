@@ -6,6 +6,7 @@ import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.Function4
 import java.util.Date
 import javax.inject.Inject
@@ -26,6 +27,11 @@ class CategoriesModel
          * Existing categories which are selected
          */
         private var selectedExistingCategories: MutableList<String> = mutableListOf()
+
+        /**
+         * Whether the next [searchMore] page comes from the full text search or the prefix search
+         */
+        private var textSearchNext = true
 
         /**
          * Returns true if an item is considered to be a spammy category which should be ignored
@@ -129,6 +135,8 @@ class CategoriesModel
          * text the user typed.
          */
         private fun categoriesMatching(term: String): Observable<List<CategoryItem>> {
+            categoryClient.resetTextSearch(term)
+            textSearchNext = true
             val searches =
                 searchPrefixes(term).map { prefix ->
                     categoryClient
@@ -144,6 +152,28 @@ class CategoriesModel
                     .sortedWith(StringSortingUtils.sortBySimilarity(term))
             }
         }
+
+        /**
+         * Next page of results for a typed search, shown when the user scrolls to the end.
+         * Alternates the full text search, which ignores case, with the next prefix page (#3179).
+         * Empty once both are used up.
+         */
+        fun searchMore(term: String): Single<List<CategoryItem>> =
+            Single.defer {
+                val textLeft = categoryClient.hasMoreTextSearchPages(term)
+                val prefixLeft = categoryClient.hasMorePrefixPages(term)
+                val useText = textLeft && (textSearchNext || !prefixLeft)
+                val page =
+                    when {
+                        useText -> categoryClient.nextTextSearchPage(term, SEARCH_CATS_LIMIT)
+                        prefixLeft -> categoryClient.nextPrefixPage(term, SEARCH_CATS_LIMIT)
+                        else -> return@defer Single.just(emptyList())
+                    }
+                page
+                    .doOnSuccess { textSearchNext = !useText }
+                    // A page can be empty when all of it was hidden categories, so try the next one
+                    .flatMap { if (it.isEmpty()) searchMore(term) else Single.just(it) }
+            }
 
         /**
          * Returns the typed prefix, plus a trailing "s" when that can name the plural category.

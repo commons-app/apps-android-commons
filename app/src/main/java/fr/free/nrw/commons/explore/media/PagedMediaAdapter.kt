@@ -1,9 +1,14 @@
 package fr.free.nrw.commons.explore.media
 
+import android.net.Uri
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.facebook.imagepipeline.request.ImageRequest
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaDataExtractor
 import fr.free.nrw.commons.R
@@ -15,6 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.io.File
 
 class PagedMediaAdapter(
     private val onImageClicked: (Int) -> Unit,
@@ -78,7 +84,28 @@ class SearchImagesViewHolder(
         val media = item.first
         binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
         binding.categoryImageTitle.text = media.mostRelevantCaption
-        binding.categoryImageView.setImageURI(media.thumbUrl)
+
+        val imageSource = media.thumbUrl
+        if (!TextUtils.isEmpty(imageSource)) {
+            var imageRequest: ImageRequest? = null
+            if (URLUtil.isHttpsUrl(imageSource)) {
+                imageRequest =
+                    ImageRequestBuilder
+                        .newBuilderWithSource(Uri.parse(imageSource))
+                        .setProgressiveRenderingEnabled(true)
+                        .build()
+            } else if (URLUtil.isFileUrl(imageSource)) {
+                imageRequest = ImageRequest.fromUri(Uri.parse(imageSource))
+            } else if (imageSource != null) {
+                val file = File(imageSource)
+                imageRequest = ImageRequest.fromFile(file)
+            }
+
+            if (imageRequest != null) {
+                binding.categoryImageView.setImageRequest(imageRequest)
+            }
+        }
+
         setAuthorText(media)
     }
 
