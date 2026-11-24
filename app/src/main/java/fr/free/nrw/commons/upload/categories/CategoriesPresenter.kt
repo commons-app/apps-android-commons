@@ -15,6 +15,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -23,8 +24,10 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 /**
- * The presenter class for UploadCategoriesFragment
+ * The presenter class for UploadCategoriesFragment.
+ * TooManyFunctions is suppressed because every function is one action from the categories screen.
  */
+@Suppress("TooManyFunctions")
 @Singleton
 class CategoriesPresenter
     @Inject
@@ -43,6 +46,16 @@ class CategoriesPresenter
         private val categorySelection = CategorySelection(repository)
         private val searchTerms = PublishSubject.create<String>()
         internal val categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
+
+        /**
+         * The typed search whose results are shown, empty while a new search loads
+         */
+        private var shownTerm = ""
+
+        /**
+         * The request for the next page of results, if one is running
+         */
+        private var loadMoreRequest: Disposable? = null
 
         /**
          * Current media
@@ -77,23 +90,25 @@ class CategoriesPresenter
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
+                        startNewSearch()
                     }.switchMap { term ->
                         searchResults
                             .searchResults(term, media)
-                            .map { Result.success(it) }
+                            .map { Result.success(term to it) }
                             .onErrorReturn { Result.failure(it) }
                     }.map { result ->
-                        result.map { found ->
-                            (repository.getSelectedCategories() + found)
-                                .distinctBy { categoryItem -> categoryItem.name }
+                        result.map { (term, found) ->
+                            term to
+                                (repository.getSelectedCategories() + found)
+                                    .distinctBy { categoryItem -> categoryItem.name }
                         }
                     }.observeOn(mainThreadScheduler)
                     .subscribe(
                         { result ->
                             view.showProgress(false)
                             result.fold(
-                                onSuccess = {
-                                    categoryList.postValue(it)
+                                onSuccess = { (term, it) ->
+                                    showResults(term, it)
                                     if (it.isEmpty()) {
                                         view.showError(R.string.no_categories_found)
                                     }
@@ -109,6 +124,27 @@ class CategoriesPresenter
         override fun onDetachView() {
             view = DUMMY
             compositeDisposable.clear()
+            startNewSearch()
+        }
+
+        /**
+         * Forgets the shown search and cancels loading its next page
+         */
+        private fun startNewSearch() {
+            shownTerm = ""
+            loadMoreRequest?.dispose()
+        }
+
+        /**
+         * Shows the results of a search. Both are set at once, so a next page is never added to
+         * the results of another search.
+         */
+        private fun showResults(
+            term: String,
+            categories: List<CategoryItem>,
+        ) {
+            shownTerm = term
+            categoryList.value = categories
         }
 
         /**
@@ -117,6 +153,34 @@ class CategoriesPresenter
          */
         override fun searchForCategories(query: String) {
             searchTerms.onNext(query)
+        }
+
+        override fun loadMoreCategories() {
+            val term = shownTerm
+            if (term.isEmpty() || loadMoreRequest?.isDisposed == false) {
+                return
+            }
+            loadMoreRequest =
+                searchResults
+                    .moreResults(term)
+                    .observeOn(mainThreadScheduler)
+                    .subscribe(
+                        { found ->
+                            if (term != shownTerm) {
+                                return@subscribe
+                            }
+                            val shown = categoryList.value.orEmpty()
+                            val merged = (shown + found).distinctBy { it.name }
+                            if (merged.size > shown.size) {
+                                view.showError(null)
+                                categoryList.value = merged
+                            } else if (found.isNotEmpty()) {
+                                // Everything on this page is already shown, so get the next one
+                                loadMoreCategories()
+                            }
+                        },
+                        { t: Throwable -> Timber.e(t) },
+                    )
         }
 
         /**
@@ -156,13 +220,15 @@ class CategoriesPresenter
                     .observeOn(mainThreadScheduler)
                     .doOnNext {
                         view.showProgress(true)
-                    }.switchMap { searchResults.searchResults(it, media) }
-                    .map { repository.getSelectedCategories() + it }
-                    .map { it.distinctBy { categoryItem -> categoryItem.name } }
-                    .observeOn(mainThreadScheduler)
+                        startNewSearch()
+                    }.switchMap { term ->
+                        searchResults.searchResults(term, media).map { term to it }
+                    }.map { (term, found) ->
+                        term to (repository.getSelectedCategories() + found).distinctBy { it.name }
+                    }.observeOn(mainThreadScheduler)
                     .subscribe(
-                        {
-                            categoryList.postValue(it)
+                        { (term, it) ->
+                            showResults(term, it)
                             view.showProgress(false)
                             if (it.isEmpty()) {
                                 view.showError(R.string.no_categories_found)

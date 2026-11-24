@@ -53,6 +53,14 @@ interface UploadCategoryOperations {
     ): Observable<List<CategoryItem>>
 
     /**
+     * Next page of results for a typed category search
+     *
+     * @param query
+     * @return
+     */
+    fun searchMore(query: String): Single<List<CategoryItem>>
+
+    /**
      * Sets the list of selected categories for the current upload
      *
      * @param categoryStringList
@@ -267,6 +275,8 @@ class DefaultUploadCategoryOperations(
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>,
     ): Observable<List<CategoryItem>> = categoriesModel.searchAll(query, imageTitleList, selectedDepictions)
+
+    override fun searchMore(query: String): Single<List<CategoryItem>> = categoriesModel.searchMore(query)
 
     override fun setSelectedCategories(categoryStringList: List<String>) {
         uploadModel.setSelectedCategories(categoryStringList)
