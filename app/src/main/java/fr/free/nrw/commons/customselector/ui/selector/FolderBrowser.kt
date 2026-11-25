@@ -12,6 +12,8 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.appcompat.app.AppCompatActivity
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
+import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import java.io.File
 
@@ -162,6 +164,16 @@ class FolderBrowser(
         limitError.visibility = View.INVISIBLE
         limitError.setOnClickListener { onUploadLimitErrorClick() }
 
+        val viewModeToggle: ImageButton = activity.findViewById(R.id.layout_toggle)
+        viewModeToggle.visibility = if (isImageFragmentOpen) View.VISIBLE else View.GONE
+        viewModeToggle.setOnClickListener {
+            val imageFragment =
+                activity.supportFragmentManager.findFragmentById(R.id.fragment_container) as? ImageFragment
+            imageFragment?.toggleViewMode()
+            updateViewModeToggleIcon()
+        }
+        updateViewModeToggleIcon()
+
         val overflowMenu: ImageButton = activity.findViewById(R.id.menu_overflow)
         if (defaultKvStore.getBoolean("displayDeletionButton")) {
             overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
@@ -169,6 +181,22 @@ class FolderBrowser(
         } else {
             overflowMenu.visibility = View.GONE
         }
+    }
+
+    /**
+     * Shows the icon of the layout the user will switch to, and updates its description.
+     */
+    fun updateViewModeToggleIcon() {
+        val viewModeToggle: ImageButton = activity.findViewById(R.id.layout_toggle)
+        val (iconRes, descriptionRes) =
+            when (ImageHelper.getImageViewMode(activity)) {
+                ImageViewMode.GRID ->
+                    R.drawable.ic_list_white_24dp to R.string.custom_selector_switch_to_list_view
+                ImageViewMode.LIST ->
+                    R.drawable.ic_view_grid_24dp to R.string.custom_selector_switch_to_grid_view
+            }
+        viewModeToggle.setImageResource(iconRes)
+        viewModeToggle.contentDescription = activity.getString(descriptionRes)
     }
 
     /**
