@@ -18,15 +18,27 @@ class GpsCategoryModelTest {
     }
 
     @Test
-    fun `setCategoriesFromLocation emits the new value`() {
+    fun `addCategoriesFromLocation emits the new value`() {
         val expectedList =
             listOf(
                 CategoryItem("category", "", "", false),
             )
         gpsCategoryModel.categoriesFromLocation
             .test()
-            .also { gpsCategoryModel.setCategoriesFromLocation(expectedList) }
+            .also { gpsCategoryModel.addCategoriesFromLocation(expectedList) }
             .assertValues(emptyList(), expectedList)
+    }
+
+    @Test
+    fun `addCategoriesFromLocation keeps the categories of the places before`() {
+        val first = CategoryItem("first", "", "", false)
+        val second = CategoryItem("second", "", "", false)
+        gpsCategoryModel.addCategoriesFromLocation(listOf(first))
+        gpsCategoryModel.addCategoriesFromLocation(listOf(second, first))
+
+        gpsCategoryModel.categoriesFromLocation
+            .test()
+            .assertValue(listOf(first, second))
     }
 
     @Test

@@ -72,6 +72,8 @@ class FileProcessor
             compositeDisposable.clear()
             synchronized(lookedUpPlaces) { lookedUpPlaces.clear() }
             synchronized(searchedNearbyPlaces) { searchedNearbyPlaces.clear() }
+            // Location categories add up during an upload, so they are cleared when it ends
+            dependencies.gpsCategoryModel.clear()
         }
 
         /**
@@ -229,10 +231,9 @@ class FileProcessor
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(
-                            dependencies.gpsCategoryModel::setCategoriesFromLocation,
+                            dependencies.gpsCategoryModel::addCategoriesFromLocation,
                             {
                                 Timber.e(it)
-                                dependencies.gpsCategoryModel.clear()
                                 // so a later picture of this place can try again
                                 synchronized(lookedUpPlaces) { lookedUpPlaces.remove(place) }
                             },
