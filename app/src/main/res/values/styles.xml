@@ -46,6 +46,10 @@
         <item name="navbar_item_text_color">@color/color_state_nav_tab_dark</item>
         <item name="nav_bar_background">@color/main_background_dark</item>
         <item name="toolbar_text_color">@color/white</item>
+        <item name="nearbySearchBackground">@color/main_background_dark</item>
+        <item name="nearbySearchTextColor">@color/white</item>
+        <item name="nearbySearchHintColor">@color/layout_light_grey</item>
+        <item name="nearbySearchStrokeColor">@color/primary_color_night</item>
         <item name="more_bottom_sheet_style">@style/DarkMoreBottomSheetStyle</item>
         <item name="more_bottom_sheet_drawable_color">@color/white</item>
         <item name="card_item_color">@color/white</item>
@@ -108,6 +112,10 @@
         <item name="navbar_item_text_color">@color/color_state_nav_tab_light</item>
         <item name="nav_bar_background">@color/white</item>
         <item name="toolbar_text_color">@color/primaryDarkColor</item>
+        <item name="nearbySearchBackground">@color/white</item>
+        <item name="nearbySearchTextColor">@color/primaryDarkColor</item>
+        <item name="nearbySearchHintColor">@color/secondaryTextColor</item>
+        <item name="nearbySearchStrokeColor">@color/status_bar_blue</item>
         <item name="more_bottom_sheet_style">@style/LightMoreBottomSheetStyle</item>
         <item name="more_bottom_sheet_drawable_color">@color/black</item>
         <item name="card_item_color">@color/primaryDarkColor</item>
@@ -146,8 +154,11 @@
         <item name="android:textColor">@color/primaryDarkColor</item>
     </style>
 
-    <style name="WhiteSearchBarTheme" parent="DarkAppTheme">
-        <item name="colorControlActivated">@android:color/white</item>
+    <style name="NearbySearchBarTheme" parent="ThemeOverlay.AppCompat">
+        <item name="colorControlActivated">?attr/nearbySearchTextColor</item>
+        <item name="colorControlNormal">?attr/nearbySearchTextColor</item>
+        <item name="android:textColor">?attr/nearbySearchTextColor</item>
+        <item name="android:textColorHint">?attr/nearbySearchHintColor</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
