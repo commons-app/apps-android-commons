@@ -26,6 +26,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.activity.SingleWebViewActivity
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.di.ApplicationlessInjection
@@ -34,11 +35,14 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.logging.CommonsLogSender
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
+import fr.free.nrw.commons.settings.sync.SettingsSyncUIHandler
+import fr.free.nrw.commons.settings.sync.SyncUIContext
 import fr.free.nrw.commons.utils.DialogUtil
 import fr.free.nrw.commons.utils.PermissionUtils
 import fr.free.nrw.commons.utils.StringUtil
 import fr.free.nrw.commons.utils.ViewUtil
 import fr.free.nrw.commons.utils.handleWebUrl
+import io.reactivex.disposables.CompositeDisposable
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -60,6 +64,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     @Inject
     lateinit var locationManager: LocationServiceManager
+
+    @Inject
+    lateinit var sessionManager: SessionManager
+
+    @Inject
+    lateinit var settingsSyncUIHandler: SettingsSyncUIHandler
+
+    private val compositeDisposable = CompositeDisposable()
 
     internal val languageController = SettingsLanguageController(this)
 
@@ -197,6 +209,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        settingsSyncUIHandler.setupSyncPreferences(
+            backupPref = findPreference("backupSettings"),
+            restorePref = findPreference("restoreSettings"),
+            uiContext =
+                SyncUIContext(
+                    context = requireContext(),
+                    activity = requireActivity(),
+                    layoutInflater = layoutInflater,
+                    compositeDisposable = compositeDisposable,
+                    isFragmentAdded = { isAdded },
+                ),
+        )
+
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
             findPreference<Preference>("useExternalStorage")?.isEnabled = false
@@ -209,7 +234,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>("openDocumentPhotoPickerPref")?.isEnabled = false
             findPreference<Preference>("inAppCameraLocationPref")?.isEnabled = false
             findPreference<Preference>("vanishAccount")?.isEnabled = false
+            findPreference<Preference>("backupSettings")?.isEnabled = false
+            findPreference<Preference>("restoreSettings")?.isEnabled = false
         }
+    }
+
+    override fun onDestroyView() {
+        settingsSyncUIHandler.dismissProgressDialog()
+        compositeDisposable.clear()
+        super.onDestroyView()
     }
 
     /**

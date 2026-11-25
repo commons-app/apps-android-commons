@@ -123,6 +123,23 @@
           Do not reuse this key unless you revive the same feature with the changes mentioned at #1599.-->
 
     <PreferenceCategory
+      android:title="@string/preference_category_sync">
+
+        <Preference
+          android:key="backupSettings"
+          app:singleLineTitle="false"
+          android:summary="@string/backup_settings_summary"
+          android:title="@string/backup_settings" />
+
+        <Preference
+          android:key="restoreSettings"
+          app:singleLineTitle="false"
+          android:summary="@string/restore_settings_summary"
+          android:title="@string/restore_settings" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
       android:title="@string/preference_category_feedback">
 
         <Preference
