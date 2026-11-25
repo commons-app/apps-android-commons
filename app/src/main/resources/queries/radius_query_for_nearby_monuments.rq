@@ -9,6 +9,7 @@ WHERE {
     bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral.
     bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
   }
+  ${PICTURE_FILTER}
 
   # Wiki Loves Monuments
   OPTIONAL {?item p:P1435 ?monument}

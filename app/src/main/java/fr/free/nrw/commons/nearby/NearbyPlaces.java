@@ -130,6 +130,24 @@ public class NearbyPlaces {
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
         final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
+        return getFromWikidataQuery(centerPoint, screenTopRight, screenBottomLeft, lang,
+            shouldQueryForMonuments, customQuery, false);
+    }
+
+    /**
+     * Same as above, and when onlyNeedsPhoto is set, places that already have a picture are
+     * left out of the query. The search area is chosen by counting all places as before, so it
+     * stays the same and only fewer places are fetched.
+     *
+     * @param onlyNeedsPhoto Whether to only fetch places without a picture
+     */
+    @NonNull
+    public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng centerPoint,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
+        final boolean shouldQueryForMonuments,
+        @Nullable final String customQuery, final boolean onlyNeedsPhoto) throws Exception {
         if (customQuery != null) {
             final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
                     new Rectangular(screenTopRight, screenBottomLeft), lang,
@@ -153,7 +171,7 @@ public class NearbyPlaces {
                 new NearbyQueryParams.Rectangular(screenTopRight, screenBottomLeft));
             if (itemCount < upperLimit) {
                 final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
-                    new Rectangular(screenTopRight, screenBottomLeft), lang,
+                    new Rectangular(screenTopRight, screenBottomLeft, onlyNeedsPhoto), lang,
                     shouldQueryForMonuments, null);
                 return nearbyPlaces != null ? nearbyPlaces : emptyList();
             }
@@ -188,8 +206,8 @@ public class NearbyPlaces {
             }
         }
         final List<Place> nearbyPlaces = okHttpJsonApiClient.getNearbyPlaces(
-            new Radial(centerPoint, targetRadius / 100f), lang, shouldQueryForMonuments,
-            null);
+            new Radial(centerPoint, targetRadius / 100f, onlyNeedsPhoto), lang,
+            shouldQueryForMonuments, null);
         return nearbyPlaces != null ? nearbyPlaces : emptyList();
     }
 
