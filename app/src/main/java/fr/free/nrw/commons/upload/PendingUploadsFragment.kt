@@ -139,22 +139,28 @@ class PendingUploadsFragment :
     /**
      * Restarts all the paused uploads.
      */
-    fun restartUploads() =
+    fun restartUploads() {
+        if (!::pendingUploadsPresenter.isInitialized) return
         pendingUploadsPresenter.restartUploads(
             contributionsList,
             0,
             requireContext().applicationContext,
         )
+    }
 
     /**
      * Pauses all the ongoing uploads.
      */
-    fun pauseUploads() = pendingUploadsPresenter.pauseUploads()
+    fun pauseUploads() {
+        if (!::pendingUploadsPresenter.isInitialized) return
+        pendingUploadsPresenter.pauseUploads()
+    }
 
     /**
      * Cancels all the uploads after getting a confirmation from the user using Dialog.
      */
     fun deleteUploads() {
+        if (!::pendingUploadsPresenter.isInitialized) return
         val activity = requireActivity()
         val locale = Locale.getDefault()
         showAlertDialog(
