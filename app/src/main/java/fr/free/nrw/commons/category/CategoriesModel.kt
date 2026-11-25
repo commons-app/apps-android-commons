@@ -327,7 +327,11 @@ class CategoriesModel
          * @return
          */
         private fun getTitleCategories(title: String): Observable<List<CategoryItem>> =
-            categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
+            categoryClient
+                .searchCategories(title, SEARCH_CATS_LIMIT)
+                // One failed search would otherwise remove all the other suggestions (#7429)
+                .onErrorReturnItem(emptyList())
+                .toObservable()
 
         /**
          * Handles category item selection
