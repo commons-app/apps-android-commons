@@ -1,7 +1,9 @@
 package fr.free.nrw.commons.customselector.helper
 
+import android.content.Context
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 
 /**
  * Image Helper object, includes all the static functions and variables required by custom selector.
@@ -16,6 +18,34 @@ object ImageHelper {
      * Switch state preference key
      */
     const val SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY: String = "show_already_actioned_images"
+
+    /**
+     * Preferred layout of the picture selection screen.
+     */
+    const val IMAGE_VIEW_MODE_PREFERENCE_KEY: String = "image_view_mode"
+
+    /**
+     * Reads the remembered picture selection layout.
+     */
+    fun getImageViewMode(context: Context): ImageViewMode {
+        val preferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, Context.MODE_PRIVATE)
+        return ImageViewMode.from(preferences.getString(IMAGE_VIEW_MODE_PREFERENCE_KEY, null))
+    }
+
+    /**
+     * Remembers the picture selection layout for future sessions.
+     */
+    fun saveImageViewMode(
+        context: Context,
+        mode: ImageViewMode,
+    ) {
+        context
+            .getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .putString(IMAGE_VIEW_MODE_PREFERENCE_KEY, mode.preferenceValue)
+            .apply()
+    }
 
     /**
      * Returns the list of folders from given image list.

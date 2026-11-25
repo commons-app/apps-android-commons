@@ -88,6 +88,7 @@ import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
+import fr.free.nrw.commons.nearby.enableSearchIconFocus
 import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.NearbyUtil
 import fr.free.nrw.commons.nearby.Place
@@ -1104,6 +1105,7 @@ class NearbyParentFragment :
             clearFocus()
 
             imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
+            enableSearchIconFocus(R.string.nearby_filter_search)
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(

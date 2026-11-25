@@ -780,6 +780,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_duplicates_warning">Some selected images are duplicates and will be removed before upload.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
+  <string name="custom_selector_switch_to_list_view">Switch to list view</string>
+  <string name="custom_selector_switch_to_grid_view">Switch to grid view</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">Has location data</string>
+  <string name="custom_selector_image_no_location">No location data</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
   <string name="display_monuments">Display monuments</string>

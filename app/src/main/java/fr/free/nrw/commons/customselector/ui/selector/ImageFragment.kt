@@ -28,6 +28,7 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
 import fr.free.nrw.commons.databinding.ProgressDialogBinding
@@ -75,6 +76,11 @@ class ImageFragment :
     private var loader: ProgressBar? = null
     private var switch: SwitchMaterial? = null
     private var filteredImages: ArrayList<Image> = arrayListOf()
+
+    /**
+     * Layout currently used for the picture selection screen.
+     */
+    private lateinit var viewMode: ImageViewMode
 
     /**
      * Stores all images
@@ -157,9 +163,6 @@ class ImageFragment :
     lateinit var folderManager: ImageFolderManager
 
     companion object {
-        // todo change span count depending on the device orientation and other factos.
-        private const val SPAN_COUNT = 3
-
         /**
          * Switch state
          */
@@ -205,6 +208,7 @@ class ImageFragment :
         progressDialog = builder.setView(progressDialogLayout.root).create()
         val prefs = requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
         showAlreadyActionedImages = prefs.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        viewMode = ImageHelper.getImageViewMode(requireContext())
     }
 
     /**
@@ -221,15 +225,23 @@ class ImageFragment :
 
         // ensures imageAdapter is initialized
         if (!::imageAdapter.isInitialized) {
-            imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+            imageAdapter =
+                ImageAdapter(
+                    requireActivity(),
+                    activity as ImageSelectListener,
+                    imageLoader!!,
+                    initialViewMode = viewMode,
+                )
             Timber.d("Initialized imageAdapter in onCreateView")
+        } else {
+            imageAdapter.viewMode = viewMode
         }
         // Set single selection mode if needed
         imageAdapter.selectionManager.singleSelection =
             (activity as? CustomSelectorActivity)
                 ?.intent
                 ?.getBooleanExtra(CustomSelectorActivity.EXTRA_SINGLE_SELECTION, false) == true
-        gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
+        gridLayoutManager = GridLayoutManager(context, viewMode.spanCount)
         selectorRV =
             binding?.selectorRv?.apply {
                 applyEdgeToEdgeBottomPaddingInsets()
@@ -337,6 +349,36 @@ class ImageFragment :
         super.onDestroyView()
     }
 
+    /**
+     * Switches between grid and list layouts without rebuilding the adapter, so selections are kept.
+     */
+    fun toggleViewMode() {
+        if (!::gridLayoutManager.isInitialized || !::imageAdapter.isInitialized || selectorRV == null) {
+            return
+        }
+
+        val newMode =
+            when (viewMode) {
+                ImageViewMode.GRID -> ImageViewMode.LIST
+                ImageViewMode.LIST -> ImageViewMode.GRID
+            }
+        val firstVisiblePosition = gridLayoutManager.findFirstVisibleItemPosition()
+        val scrollOffset = selectorRV?.getChildAt(0)?.top ?: 0
+
+        viewMode = newMode
+        imageAdapter.viewMode = newMode
+        gridLayoutManager.spanCount = newMode.spanCount
+        imageAdapter.notifyDataSetChanged()
+
+        selectorRV?.post {
+            if (firstVisiblePosition != RecyclerView.NO_POSITION) {
+                gridLayoutManager.scrollToPositionWithOffset(firstVisiblePosition, scrollOffset)
+            }
+        }
+
+        ImageHelper.saveImageViewMode(requireContext(), newMode)
+    }
+
     override fun refresh() {
         if (::imageAdapter.isInitialized) {
             val uploadingContributions = folderManager.getUploadingContributions()
@@ -372,21 +414,17 @@ class ImageFragment :
     }
 
     /**
-     * Shows mark/unmark progress dialog
+     * Shows or dismisses the mark/unmark progress dialog.
      */
-    fun showMarkUnmarkProgressDialog(text: String) {
-        if (!progressDialog.isShowing) {
+    fun setMarkUnmarkProgressDialog(
+        text: String,
+        show: Boolean,
+    ) {
+        if (show && !progressDialog.isShowing) {
             progressDialogLayout.progressDialogText.text = text
             progressDialog.show()
             Timber.d("Showing mark/unmark progress dialog: %s", text)
-        }
-    }
-
-    /**
-     * Dismisses mark/unmark progress dialog
-     */
-    fun dismissMarkUnmarkProgressDialog() {
-        if (progressDialog.isShowing) {
+        } else if (!show && progressDialog.isShowing) {
             progressDialog.dismiss()
             Timber.d("Dismissed mark/unmark progress dialog")
         }

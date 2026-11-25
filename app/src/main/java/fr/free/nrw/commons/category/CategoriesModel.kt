@@ -313,7 +313,8 @@ class CategoriesModel
          */
         private fun titleCategories(titleList: List<String>) =
             if (titleList.isNotEmpty()) {
-                Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
+                // A multi-upload often has the same caption on every picture, search it once (#5316)
+                Observable.combineLatest(titleList.distinct().map { getTitleCategories(it) }) { searchResults ->
                     searchResults.map { it as List<CategoryItem> }.flatten()
                 }
             } else {
