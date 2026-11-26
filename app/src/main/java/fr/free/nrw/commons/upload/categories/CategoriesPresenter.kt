@@ -346,7 +346,10 @@ class CategoriesPresenter
                     .getPlaceCategories()
                     .subscribeOn(ioScheduler)
                     .observeOn(mainThreadScheduler)
-                    .subscribe { categorySelection.selectNewCategories(it, media, categoryList) },
+                    .subscribe(
+                        { categorySelection.selectNewCategories(it, media, categoryList) },
+                        { t: Throwable -> Timber.e(t) },
+                    ),
             )
         }
     }

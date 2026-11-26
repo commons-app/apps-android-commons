@@ -569,7 +569,6 @@
     <ID>TooManyFunctions:CategoriesModel.kt$CategoriesModel</ID>
     <ID>TooManyFunctions:CommonPlaceClickActions.kt$CommonPlaceClickActions</ID>
     <ID>TooManyFunctions:CommonsApplicationModule.kt$CommonsApplicationModule</ID>
-    <ID>TooManyFunctions:ContributionController.kt$ContributionController</ID>
     <ID>TooManyFunctions:DefaultZoomableController.kt$DefaultZoomableController : ZoomableControllerListener</ID>
     <ID>TooManyFunctions:LocationServiceManager.kt$LocationServiceManager : LocationListener</ID>
     <ID>TooManyFunctions:MediaClient.kt$MediaClient</ID>

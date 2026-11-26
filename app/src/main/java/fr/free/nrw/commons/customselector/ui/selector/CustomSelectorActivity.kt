@@ -281,7 +281,7 @@ class CustomSelectorActivity :
         // Insert selected images in the database
         scope.launch {
             withContext(Dispatchers.Main) {
-                imageFragment?.showMarkUnmarkProgressDialog(text = progressDialogText)
+                imageFragment?.setMarkUnmarkProgressDialog(text = progressDialogText, show = true)
             }
 
             // Insert or delete images as necessary, but the UI updates should be posted back to the main thread
@@ -299,7 +299,7 @@ class CustomSelectorActivity :
             }
 
             withContext(Dispatchers.Main) {
-                imageFragment?.dismissMarkUnmarkProgressDialog()
+                imageFragment?.setMarkUnmarkProgressDialog(text = "", show = false)
                 val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
                 bottomLayout.visibility = View.GONE
                 folderBrowser.changeTitle(folderBrowser.bucketName, 0)

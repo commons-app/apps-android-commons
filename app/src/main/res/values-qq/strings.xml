@@ -29,6 +29,21 @@
 * Ата
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
+  <string name="preference_category_sync">Title for the preference category that lets users backup and restore app settings and bookmarks to their user page on Wikimedia Commons.</string>
+  <string name="backup_settings">Title for the setting item that saves user settings and bookmarks to the user subpage on Commons.</string>
+  <string name="backup_settings_summary">Summary for the setting item that saves user settings and bookmarks to the user subpage on Commons.</string>
+  <string name="restore_settings">Title for the setting item that restores user settings and bookmarks from the user subpage on Commons.</string>
+  <string name="restore_settings_summary">Summary for the setting item that restores user settings and bookmarks from the user subpage on Commons.</string>
+  <string name="sync_backup_confirm_title">Title of the confirmation dialog when backing up settings to user page.</string>
+  <string name="sync_backup_confirm_message">Message of the confirmation dialog when backing up settings, warning that bookmarked places and coordinates will be published to a public user page. %1$s is replaced by the username.</string>
+  <string name="sync_backup_success">Toast message shown when settings are successfully saved to the user page.</string>
+  <string name="sync_backup_failed">Toast message shown when saving settings fails. %1$s is replaced by the error message.</string>
+  <string name="sync_restore_confirm_title">Title of the confirmation dialog when restoring settings from user page.</string>
+  <string name="sync_restore_confirm_message">Message of the confirmation dialog when restoring settings from the user page. %1$s is replaced by the username.</string>
+  <string name="sync_restore_success">Toast message shown when settings are successfully restored from the user page.</string>
+  <string name="sync_restore_failed">Toast message shown when restoring settings fails. %1$s is replaced by the error message.</string>
+  <string name="sync_no_backup_found">Error message shown when no settings backup file exists on the user page.</string>
+  <string name="sync_in_progress">Progress message shown while syncing settings with Wikimedia Commons.</string>
   <string name="commons_facebook">Alternative text for image link.</string>
   <string name="commons_github">Alternative text for image link.</string>
   <string name="commons_logo">Alternative text for image.</string>
@@ -712,6 +727,11 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Button text in the custom selector.</string>
   <string name="custom_selector_button_limit_text">Indicator in the custom selector. %1$d is a number.</string>
   <string name="custom_selector_limit_error_desc">Error message in the custom selector.</string>
+  <string name="custom_selector_switch_to_list_view">Content description of the layout toggle button in the image picker while the grid layout is shown. Tapping the button switches to the list layout.</string>
+  <string name="custom_selector_switch_to_grid_view">Content description of the layout toggle button in the image picker while the list layout is shown. Tapping the button switches to the grid layout.</string>
+  <string name="custom_selector_image_dimensions">Dimensions shown for an image in the list layout of the image picker. %1$d is the width and %2$d is the height in pixels.</string>
+  <string name="custom_selector_image_has_location">Indicator in the list layout of the image picker, shown when an image contains geolocation data.</string>
+  <string name="custom_selector_image_no_location">Indicator in the list layout of the image picker, shown when an image contains no geolocation data.</string>
   <string name="place_state_wlm">Seems to be unused.</string>
   <string name="wlm_upload_info">A note in the license selector.</string>
   <string name="display_monuments">Seems to be unused.</string>

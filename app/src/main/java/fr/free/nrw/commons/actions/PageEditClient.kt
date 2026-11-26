@@ -165,17 +165,17 @@ class PageEditClient(
     /**
      * Get whole WikiText of required file
      * @param title : Name of the file
-     * @return Observable<MwQueryResult>
+     * @return Single<String> emitting wiki text or empty string if not found
      */
-    fun getCurrentWikiText(title: String): Single<String?> =
+    fun getCurrentWikiText(title: String): Single<String> =
         pageEditInterface.getWikiText(title).map {
             it
                 .query()
                 ?.pages()
-                ?.get(0)
+                ?.getOrNull(0)
                 ?.revisions()
-                ?.get(0)
-                ?.content()
+                ?.getOrNull(0)
+                ?.content() ?: ""
         }
 
     private fun <T> executeEdit(
