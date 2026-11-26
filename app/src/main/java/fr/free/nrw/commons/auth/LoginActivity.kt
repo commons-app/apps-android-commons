@@ -238,7 +238,7 @@ class LoginActivity : BaseActivity() {
 
             val accessToken = tokenResponse?.accessToken
             if (!accessToken.isNullOrEmpty()) {
-                fetchProfileAndLogin(accessToken, tokenResponse.refreshToken ?: "")
+                fetchProfileAndLogin(accessToken)
             } else {
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
@@ -250,10 +250,7 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun fetchProfileAndLogin(
-        accessToken: String,
-        refreshToken: String,
-    ) {
+    private fun fetchProfileAndLogin(accessToken: String) {
         loginClient.fetchOAuthUserProfile(accessToken) { username, throwable ->
             runOnUiThread {
                 if (isFinishing || isDestroyed) return@runOnUiThread
@@ -269,7 +266,6 @@ class LoginActivity : BaseActivity() {
                 sessionManager.updateOAuthAccount(
                     username = username,
                     accessToken = accessToken,
-                    refreshToken = refreshToken,
                 )
                 showSuccessAndDismissDialog()
                 startMainActivity()

@@ -59,7 +59,6 @@ class SessionManager
         fun updateOAuthAccount(
             username: String,
             accessToken: String,
-            refreshToken: String,
         ) {
             var account = currentAccount
             if (account == null || TextUtils.isEmpty(account.name) || account.name != username) {
@@ -70,7 +69,6 @@ class SessionManager
             }
 
             accountManager.setAuthToken(account, KEY_OAUTH2, accessToken)
-            accountManager.setUserData(account, KEY_REFRESH_TOKEN, refreshToken)
             setUserLoggedIn(true)
         }
 
@@ -120,6 +118,5 @@ class SessionManager
 
         companion object {
             const val KEY_OAUTH2 = "OAuth2"
-            const val KEY_REFRESH_TOKEN = "refresh_token"
         }
     }
