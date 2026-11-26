@@ -8,6 +8,7 @@ import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.Function4
+import io.reactivex.schedulers.Schedulers
 import java.util.Date
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
@@ -322,10 +323,18 @@ class CategoriesModel
             titleList: List<String>,
             lookups: SuggestionLookups,
         ) = if (titleList.isNotEmpty()) {
-            // A multi-upload often has the same caption on every picture, search it once (#5316)
-            Observable.combineLatest(titleList.distinct().map { getTitleCategories(it, lookups) }) { searchResults ->
-                searchResults.map { it as List<CategoryItem> }.flatten()
-            }
+            // A multi-upload often has the same caption on every picture, search it once (#5316).
+            // Each search blocks its thread, so run up to 3 at a time, the most Wikimedia's API
+            // rate limits ask for, instead of one after another (#7438)
+            Observable
+                .fromIterable(titleList.distinct())
+                .concatMapEager(
+                    { getTitleCategories(it, lookups).subscribeOn(Schedulers.io()) },
+                    MAX_PARALLEL_TITLE_SEARCHES,
+                    MAX_PARALLEL_TITLE_SEARCHES,
+                ).toList()
+                .map { it.flatten() }
+                .toObservable()
         } else {
             Observable.just(emptyList())
         }
@@ -405,6 +414,7 @@ class CategoriesModel
         companion object {
             const val SEARCH_CATS_LIMIT = 25
             private const val MIN_PLURAL_PREFIX_LENGTH = 3
+            private const val MAX_PARALLEL_TITLE_SEARCHES = 3
         }
 
         /**
