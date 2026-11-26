@@ -206,23 +206,21 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun handleOAuthCallback(intent: Intent?) {
-        val data: Uri = intent?.data ?: return
-        if (data.scheme != "fr.free.nrw.commons" || data.host != "oauth-callback") return
-
-        val code = data.getQueryParameter("code")
-        if (code.isNullOrEmpty()) {
-            val error = data.getQueryParameter("error_description") ?: "OAuth login failed"
-            showMessageAndCancelDialog(error)
-            return
+        val data = intent?.data
+        if (data != null && data.scheme == "fr.free.nrw.commons" && data.host == "oauth-callback") {
+            val code = data.getQueryParameter("code")
+            val verifier = pkceCodeVerifier
+            when {
+                code.isNullOrEmpty() -> {
+                    val error = data.getQueryParameter("error_description") ?: "OAuth login failed"
+                    showMessageAndCancelDialog(error)
+                }
+                verifier.isNullOrEmpty() -> {
+                    showMessageAndCancelDialog("OAuth verification session expired. Please try logging in again.")
+                }
+                else -> exchangeOAuthCodeForToken(code, verifier)
+            }
         }
-
-        val verifier = pkceCodeVerifier
-        if (verifier.isNullOrEmpty()) {
-            showMessageAndCancelDialog("OAuth verification session expired. Please try logging in again.")
-            return
-        }
-
-        exchangeOAuthCodeForToken(code, verifier)
     }
 
     private fun exchangeOAuthCodeForToken(

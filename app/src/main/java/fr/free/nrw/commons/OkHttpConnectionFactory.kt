@@ -72,10 +72,22 @@ class OAuthTokenInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val requestBuilder = request.newBuilder()
+        val accessToken = CommonsApplication.instance?.sessionManager?.getAccessToken()
 
-        val sessionManager: SessionManager? = CommonsApplication.instance?.sessionManager
-        val accessToken = sessionManager?.getAccessToken()
+        if (shouldAttachToken(request, accessToken)) {
+            requestBuilder.header("Authorization", "Bearer $accessToken")
+        }
 
+        return chain.proceed(requestBuilder.build())
+    }
+
+    private fun shouldAttachToken(
+        request: Request,
+        accessToken: String?,
+    ): Boolean {
+        if (accessToken.isNullOrEmpty() || request.header("Authorization") != null) {
+            return false
+        }
         val allowedHosts =
             setOfNotNull(
                 BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
@@ -83,16 +95,7 @@ class OAuthTokenInterceptor : Interceptor {
                 "meta.wikimedia.org",
                 "meta.wikimedia.beta.wmflabs.org",
             )
-
-        if (!accessToken.isNullOrEmpty() &&
-            request.header("Authorization") == null &&
-            request.url.isHttps &&
-            request.url.host in allowedHosts
-        ) {
-            requestBuilder.header("Authorization", "Bearer $accessToken")
-        }
-
-        return chain.proceed(requestBuilder.build())
+        return request.url.isHttps && request.url.host in allowedHosts
     }
 }
 

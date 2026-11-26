@@ -43,8 +43,6 @@ class LoginClient(
      */
     private var userLanguage = ""
 
-    private fun getLoginToken() = loginInterface.getLoginToken()
-
     fun request(
         userName: String,
         password: String,
@@ -52,7 +50,7 @@ class LoginClient(
     ) {
         cancel()
 
-        tokenCall = getLoginToken()
+        tokenCall = loginInterface.getLoginToken()
         tokenCall!!.enqueue(
             object : Callback<MwQueryResponse?> {
                 override fun onResponse(
@@ -206,7 +204,7 @@ class LoginClient(
     ) {
         cancel()
 
-        tokenCall = getLoginToken()
+        tokenCall = loginInterface.getLoginToken()
         tokenCall!!.enqueue(
             object : Callback<MwQueryResponse?> {
                 override fun onResponse(
@@ -318,7 +316,7 @@ class LoginClient(
         twoFactorCode: String? = null,
         emailAuthCode: String? = null,
     ) {
-        val tokenResponse = getLoginToken().execute()
+        val tokenResponse = loginInterface.getLoginToken().execute()
         if (tokenResponse
                 .body()
                 ?.query()
