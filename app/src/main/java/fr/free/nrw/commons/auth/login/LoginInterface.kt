@@ -51,7 +51,7 @@ interface LoginInterface {
 
     @GET("w/rest.php/oauth2/resource/profile")
     fun getOAuthProfile(
-        @Header("Authorization") bearerToken: String
+        @Header("Authorization") bearerToken: String,
     ): Call<OAuthProfileResponse>
 
     @FormUrlEncoded
@@ -61,6 +61,6 @@ interface LoginInterface {
         @Field("code") code: String,
         @Field("client_id") clientId: String,
         @Field("code_verifier") codeVerifier: String,
-        @Field("redirect_uri") redirectUri: String
+        @Field("redirect_uri") redirectUri: String,
     ): Call<OAuthTokenResponse>
 }

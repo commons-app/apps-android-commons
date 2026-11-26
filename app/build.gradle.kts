@@ -549,7 +549,10 @@ project.gradle.taskGraph.whenReady {
     }
 }
 
-fun getLocalProperty(key: String, defaultValue: String = ""): String {
+fun getLocalProperty(
+    key: String,
+    defaultValue: String = "",
+): String {
     val propFile = rootProject.file("./local.properties")
     if (!propFile.exists()) return defaultValue
     val properties = Properties()
@@ -560,7 +563,6 @@ fun getLocalProperty(key: String, defaultValue: String = ""): String {
 fun getTestUserName(): String? = getLocalProperty("TEST_USER_NAME").takeIf { it.isNotEmpty() }
 
 fun getOAuthClientId(): String = getLocalProperty("OAUTH_CLIENT_ID", "YOUR_OAUTH_CLIENT_ID")
-
 
 fun getTestPassword(): String? = getLocalProperty("TEST_USER_PASSWORD").takeIf { it.isNotEmpty() }
 

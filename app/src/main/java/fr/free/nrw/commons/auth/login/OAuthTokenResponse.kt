@@ -8,5 +8,5 @@ data class OAuthTokenResponse(
     @SerializedName("token_type") val tokenType: String?,
     @SerializedName("expires_in") val expiresIn: Long?,
     @SerializedName("error") val error: String?,
-    @SerializedName("message") val message: String?
+    @SerializedName("message") val message: String?,
 )

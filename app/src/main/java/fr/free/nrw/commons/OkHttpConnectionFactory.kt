@@ -8,11 +8,10 @@ import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
-import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import okhttp3.Cache
-import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.CacheControl
 import okhttp3.Headers
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -57,7 +56,6 @@ object OkHttpConnectionFactory {
             ).connectTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
-
             .addInterceptor(
                 HttpLoggingInterceptor()
                     .apply { level = HttpLoggingInterceptor.Level.BASIC }
@@ -78,12 +76,13 @@ class OAuthTokenInterceptor : Interceptor {
         val sessionManager: SessionManager? = CommonsApplication.instance?.sessionManager
         val accessToken = sessionManager?.getAccessToken()
 
-        val allowedHosts = setOfNotNull(
-            BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
-            BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
-            "meta.wikimedia.org",
-            "meta.wikimedia.beta.wmflabs.org"
-        )
+        val allowedHosts =
+            setOfNotNull(
+                BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
+                BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
+                "meta.wikimedia.org",
+                "meta.wikimedia.beta.wmflabs.org",
+            )
 
         if (!accessToken.isNullOrEmpty() &&
             request.header("Authorization") == null &&
