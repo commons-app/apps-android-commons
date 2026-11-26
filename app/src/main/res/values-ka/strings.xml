@@ -42,10 +42,6 @@
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვები</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">ეს სურათი გავრცელდება %1$s ლიცენზიით</item>
-    <item quantity="other">ეს სურათი გავრცელდება %1$s ლიცენზიით</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d ატვირთვა</item>
     <item quantity="other">%1$d ატვირთვა</item>
@@ -85,7 +81,6 @@
   <string name="upload_completed_notification_title">%1$s ატვირთულია!</string>
   <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
   <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$s</string>
   <string name="upload_failed_notification_title">%1$s ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_paused_notification_title">%1$s-ის ატვირთვა შეჩერებულია</string>

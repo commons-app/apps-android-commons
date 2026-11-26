@@ -12,6 +12,7 @@ import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
+import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.utils.ExecutorUtils.get
@@ -199,16 +200,22 @@ class NearbyMarkerOverlayHelper(
         filterForPlaceState: Boolean,
         filterForAllNoneType: Boolean,
     ) {
+        val onlyNeedsPhoto = isOnlyNeedsPhoto()
         if (selectedLabels == null || selectedLabels.isEmpty()) {
-            replaceMarkerOverlays(NearbyController.markerLabelList)
+            replaceMarkerOverlays(
+                NearbyParentFragment.placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto),
+            )
             return
         }
         val placeGroupsToShow =
             NearbyController.markerLabelList.filter { markerPlaceGroup ->
                 shouldDisplayMarker(markerPlaceGroup, selectedLabels, filterForPlaceState)
             }
-        replaceMarkerOverlays(placeGroupsToShow)
+        replaceMarkerOverlays(NearbyParentFragment.placesToShow(placeGroupsToShow, onlyNeedsPhoto))
     }
+
+    override fun isOnlyNeedsPhoto(): Boolean =
+        NearbyFilterState.getInstance().isNeedPhotoSelected && !(mapStateProvider?.isDepictsPickerMode() ?: false)
 
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
@@ -288,7 +295,12 @@ class NearbyMarkerOverlayHelper(
             mapView.overlays.add(mapEventsOverlay)
         }
 
-        addPhotoMarkerIfDepictsMode()
+        if (mapStateProvider?.isDepictsPickerMode() == true) {
+            val coords = mapStateProvider?.getAllPhotoLatLngs()
+            if (!coords.isNullOrEmpty()) {
+                addPhotoMarkers(coords)
+            }
+        }
         mapView.setMultiTouchControls(true)
         mapView.invalidate()
     }
@@ -344,18 +356,6 @@ class NearbyMarkerOverlayHelper(
 
         if (invalidate) {
             mapView?.invalidate()
-        }
-    }
-
-    /**
-     * Adds photo markers to the map if depicts mode is enabled.
-     */
-    fun addPhotoMarkerIfDepictsMode() {
-        if (mapStateProvider?.isDepictsPickerMode() == true) {
-            val coords = mapStateProvider?.getAllPhotoLatLngs()
-            if (!coords.isNullOrEmpty()) {
-                addPhotoMarkers(coords)
-            }
         }
     }
 

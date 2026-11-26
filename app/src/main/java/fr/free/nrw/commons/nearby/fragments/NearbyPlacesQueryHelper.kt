@@ -32,6 +32,7 @@ data class NearbyPlacesDependencies(
     val presenterProvider: () -> NearbyParentFragmentPresenter? = { null },
     val applicationKvStoreProvider: () -> JsonKvStore? = { null },
     val scopeProvider: () -> LifecycleCoroutineScope? = { null },
+    val isOnlyNeedsPhotoProvider: () -> Boolean = { false },
 )
 
 /**
@@ -69,6 +70,9 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
         fun setProgressBarVisibility(isVisible: Boolean)
 
         fun setFilterState()
+
+        /** Clears rendered map markers and the nearby places list when no places are found. */
+        fun clearPlacesDisplay() {}
     }
 
     private var dependencies: NearbyPlacesDependencies = NearbyPlacesDependencies()
@@ -249,17 +253,6 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
         }
     }
 
-    private fun calculateFallbackBounds(currentLatLng: LatLng): Pair<LatLng, LatLng> {
-        val delta = FALLBACK_BOUNDS_DELTA_DEGREES
-        val westCornerLat = currentLatLng.latitude - delta
-        val westCornerLong = currentLatLng.longitude - delta
-        val eastCornerLat = currentLatLng.latitude + delta
-        val eastCornerLong = currentLatLng.longitude + delta
-        val topRight = LatLng(westCornerLat, westCornerLong, 0f)
-        val bottomLeft = LatLng(eastCornerLat, eastCornerLong, 0f)
-        return Pair(topRight, bottomLeft)
-    }
-
     private fun populatePlacesForCurrentLocation(
         currentLatLng: LatLng?,
         screenTopRight: LatLng?,
@@ -280,6 +273,7 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
                     true,
                     isMonuments,
                     customQuery,
+                    dependencies.isOnlyNeedsPhotoProvider(),
                 )
             }
         subscribePlacesObservable(observable, searchLatLng, isCurrentLocation = true)
@@ -305,6 +299,7 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
                     true,
                     isMonuments,
                     customQuery,
+                    dependencies.isOnlyNeedsPhotoProvider(),
                 )
             }
         subscribePlacesObservable(observable, searchLatLng, isCurrentLocation = false)
@@ -326,6 +321,7 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             queryActions.showNoNearbyPlacesMessage()
                             queryActions.setProgressBarVisibility(false)
                             presenter?.lockUnlockNearby(false)
@@ -361,4 +357,25 @@ class NearbyPlacesQueryHelper : NearbyParentFragmentContract.PlacesQuery {
                 ),
         )
     }
+
+    override fun showNoPlaces() {
+        dependencies
+            .presenterProvider()
+            ?.placeDetailsLoader
+            ?.loadPlacesDataAyncJob
+            ?.cancel()
+        NearbyController.markerLabelList.clear()
+        actions?.clearPlacesDisplay()
+    }
+}
+
+private fun calculateFallbackBounds(currentLatLng: LatLng): Pair<LatLng, LatLng> {
+    val delta = FALLBACK_BOUNDS_DELTA_DEGREES
+    val westCornerLat = currentLatLng.latitude - delta
+    val westCornerLong = currentLatLng.longitude - delta
+    val eastCornerLat = currentLatLng.latitude + delta
+    val eastCornerLong = currentLatLng.longitude + delta
+    val topRight = LatLng(westCornerLat, westCornerLong, 0f)
+    val bottomLeft = LatLng(eastCornerLat, eastCornerLong, 0f)
+    return Pair(topRight, bottomLeft)
 }

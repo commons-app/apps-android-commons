@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions
 
+import android.app.Activity
 import android.content.res.Configuration
 import android.os.Looper
 import androidx.fragment.app.testing.FragmentScenario
@@ -7,6 +8,8 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
@@ -36,6 +39,7 @@ class ContributionsListFragmentUnitTests {
     private val contribution: Contribution = mock()
     private val media: Media = mock()
     private val wikidataPlace: WikidataPlace = mock()
+    private val cameraCoordinator: ContributionCameraCoordinator = mock()
 
     @Before
     fun setUp() {
@@ -238,8 +242,30 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchCustomSelector() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.controller = mock()
         fragment.fabHelper.launchCustomSelector()
+    }
+
+    @Test
+    fun fabActionsUseMigratedPickers() {
+        val imagePicker: ContributionImagePicker = mock()
+
+        scenario.onFragment {
+            it.cameraCoordinator = cameraCoordinator
+            it.imagePicker = imagePicker
+            it.fabHelper.initializeAnimations()
+            it.fabHelper.setListeners()
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_camera).performClick()
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_gallery).performClick()
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_custom_gallery).performClick()
+        }
+
+        verify(cameraCoordinator).initiateCameraPick(any<Activity>(), any(), any())
+        verify(imagePicker).initiateGalleryPick(any(), any(), eq(true))
+        verify(imagePicker).initiateCustomGalleryPickWithPermission(
+            any<Activity>(),
+            any(),
+            eq(false),
+        )
     }
 
     @Test

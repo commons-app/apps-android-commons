@@ -18,6 +18,7 @@ import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
 import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
+import fr.free.nrw.commons.nearby.enableSearchIconFocus
 import fr.free.nrw.commons.utils.LayoutUtils.getScreenWidth
 import fr.free.nrw.commons.utils.LayoutUtils.setLayoutHeightAlignedToWidth
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -209,6 +210,7 @@ private fun setupFilterViews(
         setQuery("", false)
         clearFocus()
         imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
+        enableSearchIconFocus(R.string.nearby_filter_search)
     }
     binding.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
         setLayoutHeightAlignedToWidth(

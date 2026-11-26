@@ -29,6 +29,9 @@
 * Wim b
 -->
 <resources>
+  <string name="preference_category_sync">Backup e sincronizzazione su cloud</string>
+  <string name="restore_settings">Ripristina impostazioni da Commons</string>
+  <string name="sync_in_progress">Sincronizzazione delle impostazioni con Wikimedia Commons…</string>
   <string name="commons_facebook">Pagina Facebook di Commons</string>
   <string name="commons_github">Codice sorgente GitHub di Commons</string>
   <string name="commons_logo">Logo di Commons</string>
@@ -62,10 +65,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d caricamento</item>
     <item quantity="other">%1$d caricamenti</item>
-  </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Questa immagine sarà rilasciata in base alla licenza %1$s</item>
-    <item quantity="other">Queste immagini saranno rilasciate in base alla licenza %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d caricamento</item>
@@ -106,7 +105,6 @@
   <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Tocca per visualizzare il tuo caricamento</string>
   <string name="upload_progress_notification_title_start">Caricamento file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
   <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
@@ -878,6 +876,8 @@
   <string name="caption_copied_to_clipboard">Didascalia copiata negli appunti</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulazioni, tutte le foto di questo album sono state caricate o contrassegnate come non adatte al caricamento.</string>
   <string name="show_in_explore">Mostra in Esplora</string>
+  <string name="nearby_show_only_needs_photo">Mostra solo i luoghi che richiedono una foto</string>
+  <string name="nearby_show_all_places">Mostra tutti i luoghi</string>
   <string name="show_in_nearby">Mostra nelle vicinanze</string>
   <string name="image_tag_line_created_and_uploaded_by">Creato e caricato da: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Creato da %1$s e caricato da %2$s</string>

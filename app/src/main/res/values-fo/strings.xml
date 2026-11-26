@@ -3,10 +3,6 @@
 * EileenSanda
 -->
 <resources>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Henda myndin kemur undir %1$s lisensin</item>
-    <item quantity="other">Henda myndin kemur undir %1$s lisensin</item>
-  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillingar</string>
   <string name="username">Brúkaranavn</string>
@@ -21,7 +17,6 @@
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
   <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Byrjar %1$s útlegging</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
   <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
   <string name="upload_failed_notification_title" fuzzy="true">Tað miseydnaðist at leggja %1$s út</string>
   <string name="upload_failed_notification_subtitle">Trýst fyri at síggja</string>

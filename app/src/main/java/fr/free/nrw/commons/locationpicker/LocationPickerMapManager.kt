@@ -70,11 +70,25 @@ class LocationPickerMapManager(
     }
 
     /**
-     * Moves the map to the device's last known location.
+     * Moves the map to where the picker should open: the image location, the last location
+     * picked for an image without one, or else the device location.
      */
-    fun moveMapToGPSLocation() {
-        locationManager.getLastLocation()?.let {
-            moveMapTo(GeoPoint(it.latitude, it.longitude))
+    fun moveMapToStartLocation(
+        pickerSource: String?,
+        cameraPosition: CameraPosition?,
+    ) {
+        val usePassedPosition =
+            when (pickerSource) {
+                UPLOAD_ACTIVITY, MEDIA_ACTIVITY -> true
+                NO_LOCATION_UPLOAD_ACTIVITY -> cameraPosition != null
+                else -> false
+            }
+        if (usePassedPosition) {
+            moveMapToMediaLocation(cameraPosition)
+        } else {
+            locationManager.getLastLocation()?.let {
+                moveMapTo(GeoPoint(it.latitude, it.longitude))
+            }
         }
     }
 
@@ -194,5 +208,7 @@ class LocationPickerMapManager(
         const val MAXIMUM_DISPLAY_SIZE = 1700
         const val MARKER_LABEL_SIZE = 24
         const val UPLOAD_ACTIVITY = "UploadActivity"
+        const val MEDIA_ACTIVITY = "MediaActivity"
+        const val NO_LOCATION_UPLOAD_ACTIVITY = "NoLocationUploadActivity"
     }
 }

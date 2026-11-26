@@ -112,6 +112,7 @@ class NearbyPlacesQueryHelperTest {
                 eq(true),
                 any(),
                 anyOrNull(),
+                any(),
             ),
         ).thenReturn(placesInfo)
 
@@ -126,6 +127,7 @@ class NearbyPlacesQueryHelperTest {
             eq(true),
             any(),
             anyOrNull(),
+            eq(false),
         )
         verify(presenter).updateMapMarkers(any(), any(), anyOrNull())
         assertEquals(testLatLng, helper.lastFocusLocation)
@@ -164,6 +166,7 @@ class NearbyPlacesQueryHelperTest {
                 eq(true),
                 any(),
                 anyOrNull(),
+                any(),
             ),
         ).thenReturn(placesInfo)
 
@@ -178,6 +181,7 @@ class NearbyPlacesQueryHelperTest {
             eq(true),
             any(),
             eq("custom query"),
+            eq(false),
         )
     }
 
@@ -204,11 +208,13 @@ class NearbyPlacesQueryHelperTest {
                 eq(true),
                 any(),
                 anyOrNull(),
+                any(),
             ),
         ).thenReturn(placesInfo)
 
         helper.populatePlaces(testLatLng)
 
+        verify(actions).clearPlacesDisplay()
         verify(actions).showNoNearbyPlacesMessage()
         verify(actions).setProgressBarVisibility(false)
     }
@@ -225,6 +231,7 @@ class NearbyPlacesQueryHelperTest {
                 eq(true),
                 any(),
                 anyOrNull(),
+                any(),
             ),
         ).thenThrow(RuntimeException("Network failure"))
 

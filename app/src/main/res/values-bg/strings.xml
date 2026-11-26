@@ -24,10 +24,6 @@
     <item quantity="one">%1$d качване</item>
     <item quantity="other">%1$d качвания</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Изображението ще бъде лицензирано под условията на лиценза %1$s</item>
-    <item quantity="other">Изображенията ще бъдат лицензирани под условията на лиценза %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d качване</item>
     <item quantity="other">%1$d качвания</item>
@@ -60,7 +56,6 @@
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
   <string name="upload_progress_notification_title_start">Качване на файл: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
   <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
   <string name="upload_failed_notification_subtitle">Докоснете, за да видите</string>

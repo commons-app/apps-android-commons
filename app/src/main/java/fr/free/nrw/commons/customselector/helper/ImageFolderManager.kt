@@ -108,7 +108,7 @@ class ImageFolderManager
             }
 
             val prefs = context?.getSharedPreferences("CustomSelector", Context.MODE_PRIVATE) ?: return
-            val imageId = imageAdapter.getImageIdAt(position)
+            val imageId = imageAdapter.imageIds.getOrNull(position) ?: 0L
             prefs.edit().putLong("ItemId", imageId).apply()
             Timber.d("Saved last visible item ID: %d", imageId)
         }

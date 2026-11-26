@@ -37,6 +37,9 @@ class NearbyViewportHelper : NearbyParentFragmentContract.Viewport {
 
         /** Invoked to recenter the map to a target coordinate. */
         fun onRecenterMapRequested(currentLatLng: LatLng?)
+
+        /** Invoked after Explore map camera data is applied to refresh the map and list if resumed. */
+        fun onExploreMapDataApplied() {}
     }
 
     @VisibleForTesting
@@ -58,18 +61,6 @@ class NearbyViewportHelper : NearbyParentFragmentContract.Viewport {
         internal set
     var nearestPlace: Place? = null
         internal set
-
-    /**
-     * Fetch Explore map camera data from fragment arguments if any.
-     */
-    fun loadExploreMapData(arguments: Bundle?) {
-        // get fragment arguments
-        if (arguments != null) {
-            prevZoom = arguments.getDouble("prev_zoom")
-            prevLatitude = arguments.getDouble("prev_latitude")
-            prevLongitude = arguments.getDouble("prev_longitude")
-        }
-    }
 
     private var mapViewProvider: (() -> MapView?)? = null
     private var activityProvider: (() -> Activity?)? = null
@@ -199,6 +190,31 @@ class NearbyViewportHelper : NearbyParentFragmentContract.Viewport {
         speed: Long,
     ) {
         mapViewProvider?.invoke()?.controller?.animateTo(geoPoint, zoom, speed)
+    }
+
+    /**
+     * called when new location data is received from Explore map without re-creating the fragment
+     */
+    override fun onExploreMapDataReceived(bundle: Bundle) {
+        if (bundle.containsKey("prev_zoom")) {
+            loadExploreMapData(bundle)
+            if (mapViewProvider?.invoke() != null) {
+                moveCameraToPosition(getExploreMapGeoPoint(), getExploreMapZoom(), 1L)
+            }
+            actions?.onExploreMapDataApplied()
+        }
+    }
+}
+
+/**
+ * Fetch Explore map camera data from fragment arguments if any.
+ */
+fun NearbyViewportHelper.loadExploreMapData(arguments: Bundle?) {
+    // get fragment arguments
+    if (arguments != null) {
+        prevZoom = arguments.getDouble("prev_zoom")
+        prevLatitude = arguments.getDouble("prev_latitude")
+        prevLongitude = arguments.getDouble("prev_longitude")
     }
 }
 

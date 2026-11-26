@@ -21,10 +21,6 @@
     <item quantity="one">1 උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</item>
-    <item quantity="other">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</item>
-  </plurals>
   <string name="app_name">කොමන්ස්</string>
   <string name="menu_settings">සැකසුම්</string>
   <string name="username">පරිශීලක නාමය</string>
@@ -41,7 +37,6 @@
   <string name="upload_completed_notification_title">%1$s උඩුගතකලා!</string>
   <string name="upload_completed_notification_text">ඔබගේ උඩුගතකිරීම පෙන්වන්න තට්ටු කරන්න</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s උඩුගතකිරීම් ආරම්භ කරමින්</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s උඩුගත කෙරිමින්</string>
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title" fuzzy="true">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>

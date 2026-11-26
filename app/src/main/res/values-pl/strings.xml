@@ -72,12 +72,6 @@
     <item quantity="many">%1$d przesłań</item>
     <item quantity="other">%1$d przesłań</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ten obraz będzie udostępniany na licencji %1$s</item>
-    <item quantity="few">Te obrazy będą udostępniane na licencji %1$s</item>
-    <item quantity="many">Te obrazy będą udostępniane na licencji %1$s</item>
-    <item quantity="other">Te obrazy będą udostępniane na licencji %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Przesłany</item>
     <item quantity="few">%1$d Przesłane</item>
@@ -121,7 +115,6 @@
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
   <string name="upload_progress_notification_title_start">Przesyłanie pliku: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
   <string name="upload_metadata_pending_notification_title">Przesłano plik „%1$s”, ale jego podpisy i przedstawione obiekty nie zostały jeszcze zapisane</string>
@@ -777,6 +770,11 @@
   <string name="custom_selector_duplicates_warning">Niektóre wybrane obrazy są duplikatami i zostaną usunięte przed przesłaniem.</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Błąd: przekroczono limit przesyłania</string>
+  <string name="custom_selector_switch_to_list_view">Przełącz na widok listy</string>
+  <string name="custom_selector_switch_to_grid_view">Przełącz na widok siatki</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">Zawiera dane o lokalizacji</string>
+  <string name="custom_selector_image_no_location">Nie zawiera danych o lokalizacji</string>
   <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do akcji Wiki Lubi Zabytki</string>
   <string name="display_monuments">Pokaż zabytki</string>
   <string name="wlm_month_message">To miesiąc akcji „Wiki Lubi Zabytki”!</string>
@@ -796,9 +794,9 @@
   <string name="advanced_query_info_text">Możesz dostosować zapytanie „W pobliżu”. Jeśli pojawią się błędy, zresetuj i zastosuj.</string>
   <string name="apply">Zastosuj</string>
   <string name="reset">Zresetuj</string>
-  <string name="location_message">Dane o lokalizacji pomagają edytujacym wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nTwoje ostatnio przesłane pliki nie zawierają lokalizacji.\nSugerujemy włączenie lokalizacji w ustawieniach aplikacji aparatu.\nDziękujemy za przesłanie!</string>
+  <string name="location_message">Dane o lokalizacji pomagają edytującym wiki znaleźć Twoja grafikę, dzięki czemu jest ona znacznie bardziej przydatna.\nTwoje ostatnio przesłane pliki nie zawierają danych o lokalizacji.\nSugerujemy włączenie lokalizacji w ustawieniach aplikacji aparatu.\nDziękujemy za przesłanie!</string>
   <string name="no_location_found_title">Nie odnaleziono lokalizacji</string>
-  <string name="no_location_found_message">Co powiesz na dodanie miejsca, w którym zrobiono to zdjęcie?\nDane o lokalizacji pomagają edytującym wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nDziękujemy!</string>
+  <string name="no_location_found_message">Co powiesz na dodanie miejsca, w którym zrobiono to zdjęcie?\nDane o lokalizacji pomagają edytującym wiki znaleźć Twoją grafikę, dzięki czemu jest ona znacznie bardziej przydatna.\nDziękujemy!</string>
   <string name="add_location">Dodaj położenie</string>
   <string name="feedback_sharing_data_alert">Usuń z tego e-maila wszelkie informacje, których nie chcesz udostępniać publicznie. Pamiętaj również, że Twój adres e-mail, z którego publikujesz, oraz powiązane imię i nazwisko i zdjęcie profilowe będą widoczne publicznie.</string>
   <string name="explore_map_details">Szczegóły</string>
@@ -917,6 +915,8 @@
   <string name="caption_copied_to_clipboard">Podpis skopiowano do schowka</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Gratulacje, wszystkie zdjęcia w tym albumie zostały przesłane lub zostały oznaczone jako nie do przesłania.</string>
   <string name="show_in_explore">Pokaż w Eksploruj</string>
+  <string name="nearby_show_only_needs_photo">Pokaż tylko miejsca, które wymagają zdjęcia</string>
+  <string name="nearby_show_all_places">Pokaż wszystkie miejsca</string>
   <string name="show_in_nearby">Pokaż w Pobliżu</string>
   <string name="image_tag_line_created_and_uploaded_by">Utworzone i przesłane przez: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Utworzone przez %1$s i przesłane przez %2$s</string>

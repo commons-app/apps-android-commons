@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
+import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleCoroutineScope;
 import fr.free.nrw.commons.BaseMarker;
@@ -35,6 +36,12 @@ public interface NearbyParentFragmentContract {
 
         void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
             boolean filterForAllNoneType);
+
+        /**
+         * Whether only places that need a photo should be searched for and shown. Always false
+         * when picking a place for an upload.
+         */
+        boolean isOnlyNeedsPhoto();
     }
 
     /** Actions related to list and details bottom sheets. */
@@ -93,6 +100,12 @@ public interface NearbyParentFragmentContract {
         LatLng getScreenTopRight();
 
         LatLng getScreenBottomLeft();
+
+        /**
+         * Updates camera position and refreshes places when new Explore map coordinates arrive
+         * without recreating the fragment.
+         */
+        void onExploreMapDataReceived(Bundle bundle);
     }
 
     /** Actions related to place type filtering and advanced query search. */
@@ -172,6 +185,11 @@ public interface NearbyParentFragmentContract {
          * Stops any ongoing queries and clears all disposables.
          */
         void stopQuery();
+
+        /**
+         * Shows that a search found no places, so no places from an earlier search stay visible.
+         */
+        void showNoPlaces();
     }
 
     /** Actions related to network status, progress display, and snackbar notifications. */
@@ -253,6 +271,12 @@ public interface NearbyParentFragmentContract {
         void setCheckboxUnknown();
 
         void setAdvancedQuery(String query);
+
+        /**
+         * Searches the visible area again after "only places that need a photo" was switched,
+         * since the search itself depends on it.
+         */
+        void onOnlyNeedsPhotoChanged();
 
         void toggleBookmarkedStatus(Place place, LifecycleCoroutineScope scope);
 

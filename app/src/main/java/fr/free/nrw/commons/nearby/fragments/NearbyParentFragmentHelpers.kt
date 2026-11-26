@@ -54,7 +54,7 @@ internal fun NearbyParentFragment.initBottomSheetHelper() {
                     when (uploadType) {
                         NearbyBottomSheetHelper.UploadType.CAMERA -> {
                             Timber.d("Camera button tapped. Place: %s", place.toString())
-                            controller?.initiateCameraPick(
+                            cameraCoordinator.initiateCameraPick(
                                 act,
                                 inAppCameraLocationPermissionLauncher,
                                 cameraPickLauncherForResult,
@@ -62,7 +62,7 @@ internal fun NearbyParentFragment.initBottomSheetHelper() {
                         }
                         NearbyBottomSheetHelper.UploadType.GALLERY -> {
                             Timber.d("Gallery button tapped. Place: %s", place.toString())
-                            controller?.initiateGalleryPick(
+                            contributionImagePicker.initiateGalleryPick(
                                 act,
                                 galleryPickLauncherForResult,
                                 false,
@@ -71,7 +71,7 @@ internal fun NearbyParentFragment.initBottomSheetHelper() {
                         NearbyBottomSheetHelper.UploadType.CUSTOM_GALLERY -> {
                             Timber.d("Gallery button tapped. Place: %s", place.toString())
                             // Pass singleSelection = true for Nearby flow
-                            controller?.initiateCustomGalleryPickWithPermission(
+                            contributionImagePicker.initiateCustomGalleryPickWithPermission(
                                 act,
                                 customSelectorLauncherForResult,
                                 singleSelection = true,
@@ -149,6 +149,7 @@ internal fun NearbyParentFragment.initPlacesQueryHelper() {
                 presenterProvider = { presenter },
                 applicationKvStoreProvider = { applicationKvStore },
                 scopeProvider = { scope },
+                isOnlyNeedsPhotoProvider = { isOnlyNeedsPhoto() },
             ),
         actions =
             object : NearbyPlacesQueryHelper.PlacesQueryActions {
@@ -195,6 +196,11 @@ internal fun NearbyParentFragment.initPlacesQueryHelper() {
 
                 override fun setFilterState() {
                     this@initPlacesQueryHelper.setFilterState()
+                }
+
+                override fun clearPlacesDisplay() {
+                    replaceMarkerOverlays(emptyList())
+                    updateListFragment(emptyList())
                 }
             },
     )

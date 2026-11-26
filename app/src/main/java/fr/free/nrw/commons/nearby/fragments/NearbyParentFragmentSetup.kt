@@ -37,22 +37,12 @@ fun NearbyParentFragment.initializeHelpersAndViews() {
     // Initialize the launcher in the appropriate lifecycle method (e.g., onViewCreated)
     inAppCameraLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-            val areAllGranted = result.values.all { it }
-            if (areAllGranted) {
-                controller?.locationPermissionCallback?.onLocationPermissionGranted()
-            } else {
-                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    controller?.handleShowRationaleFlowCameraLocation(
-                        requireActivity(),
-                        inAppCameraLocationPermissionLauncher,
-                        cameraPickLauncherForResult,
-                    )
-                } else {
-                    controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                        getString(fr.free.nrw.commons.R.string.in_app_camera_location_permission_denied),
-                    )
-                }
-            }
+            cameraCoordinator.handleLocationPermissionResult(
+                requireActivity(),
+                result,
+                inAppCameraLocationPermissionLauncher,
+                cameraPickLauncherForResult,
+            )
         }
     isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
     if (isMonumentsEnabled) {
@@ -487,6 +477,12 @@ internal fun NearbyParentFragment.initViewportHelper() {
 
                 override fun onRecenterMapRequested(currentLatLng: LatLng?) {
                     recenterMap(currentLatLng)
+                }
+
+                override fun onExploreMapDataApplied() {
+                    if (isResumed) {
+                        presenter?.updateMapAndList(LocationChangeType.MAP_UPDATED)
+                    }
                 }
             },
     )

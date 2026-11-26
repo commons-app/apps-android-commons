@@ -384,7 +384,7 @@ class NearbyMarkerOverlayHelperTest {
                 LatLng(11.0, 21.0, 0f),
             )
 
-        helper.addPhotoMarkerIfDepictsMode()
+        helper.clearAllMarkers()
 
         assertNotNull(helper.photoPinBoundingBox)
         val photoMarkers = mapView.overlays.filterIsInstance<Marker>().filter { it.title?.startsWith("Photo") == true }
@@ -540,7 +540,7 @@ class NearbyMarkerOverlayHelperTest {
         isDepictsMode = true
         allPhotoCoords = listOf(LatLng(10.0, 20.0, 0f))
 
-        helper.addPhotoMarkerIfDepictsMode()
+        helper.clearAllMarkers()
 
         assertNotNull(helper.photoPinBoundingBox)
         val photoMarkers = mapView.overlays.filterIsInstance<Marker>().filter { it.title?.startsWith("Photo") == true }

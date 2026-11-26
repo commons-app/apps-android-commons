@@ -4,12 +4,6 @@
 * Michawiki
 -->
 <resources>
-  <plurals name="share_license_summary">
-    <item quantity="one">Tutón wobraz so pod %1$s licencuje</item>
-    <item quantity="two">Tutej wobrazaj so pod %1$s licencujetej</item>
-    <item quantity="few">Tute wobrazy so pod %1$s licencuja</item>
-    <item quantity="other">Tute wobrazy so pod %1$s licencuja</item>
-  </plurals>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Nastajenja</string>
   <string name="username">Wužiwarske mjeno</string>
@@ -24,7 +18,6 @@
   <string name="upload_completed_notification_title">%1$s nahraty!</string>
   <string name="upload_completed_notification_text">Dótkń so, zo by swoje nahraće widźał</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Nahraće %1$S startować</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s so nahrawa</string>
   <string name="upload_progress_notification_title_finishing">Nahraće %1$s so kónči</string>
   <string name="upload_failed_notification_title" fuzzy="true">Nahraće %1$s je so njeporadźiło</string>
   <string name="upload_failed_notification_subtitle">Dótkń so, zo by sej wobhladał</string>

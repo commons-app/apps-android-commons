@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
@@ -17,7 +18,9 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
+import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.contributions.loadExploreMapFromNearby
@@ -34,7 +37,9 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.nearby.BottomSheetAdapter
 import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
+import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.PlacesRepository
@@ -136,7 +141,13 @@ class NearbyParentFragment(
     lateinit var placesRepository: PlacesRepository
 
     @Inject
-    lateinit var controller: ContributionController
+    lateinit var cameraCoordinator: ContributionCameraCoordinator
+
+    @Inject
+    lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Inject
+    lateinit var uploadCoordinator: ContributionUploadCoordinator
 
     @Inject
     lateinit var wikidataEditListener: WikidataEditListener
@@ -172,12 +183,12 @@ class NearbyParentFragment(
 
     internal val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         // Handle the result from the gallery
-                        controller?.onPictureReturnedFromGallery(result, requireActivity(), callbacks)
+                        contributionImagePicker.onPictureReturnedFromGallery(result, requireActivity(), callbacks)
                     }
                 },
             )
@@ -185,12 +196,12 @@ class NearbyParentFragment(
 
     internal val customSelectorLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         if (result != null) {
-                            controller?.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks)
+                            FilePicker.onPictureReturnedFromCustomSelector(result, requireActivity(), callbacks)
                         }
                     }
                 },
@@ -199,12 +210,12 @@ class NearbyParentFragment(
 
     internal val cameraPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         if (result != null) {
-                            controller?.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
+                            FilePicker.onPictureReturnedFromCamera(result, requireActivity(), callbacks)
                         }
                     }
                 },
@@ -280,6 +291,15 @@ class NearbyParentFragment(
         val showInExploreButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_show_in_explore)
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
+        val onlyNeedsPhotoButton = menu.findItem(fr.free.nrw.commons.R.id.item_only_needs_photo)
+        showOnlyNeedsPhotoState(onlyNeedsPhotoButton)
+        onlyNeedsPhotoButton.setOnMenuItemClickListener {
+            NearbyFilterState.setNeedPhotoSelected(!NearbyFilterState.getInstance().isNeedPhotoSelected)
+            showOnlyNeedsPhotoState(it)
+            setFilterState()
+            presenter?.onOnlyNeedsPhotoChanged()
+            true
+        }
 
         refreshButton.setOnMenuItemClickListener {
             runNearbyMenuAction { emptyCache() }
@@ -388,7 +408,7 @@ class NearbyParentFragment(
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
 
-        if (!::controller.isInitialized || !controller.isInternalUploadInProgress) {
+        if (!::uploadCoordinator.isInitialized || !uploadCoordinator.isInternalUploadInProgress) {
             presenter?.removeNearbyPreferences(applicationKvStore ?: return)
         }
         binding = null
@@ -508,6 +528,30 @@ class NearbyParentFragment(
          * @return `true` if '(' or ')' is found, `false` otherwise.
          */
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
+
+        /**
+         * Drops the places that already have a picture (green pins) when [onlyNeedsPhoto] is set.
+         */
+        fun placesToShow(
+            placeGroups: List<MarkerPlaceGroup>,
+            onlyNeedsPhoto: Boolean,
+        ): List<MarkerPlaceGroup> =
+            if (onlyNeedsPhoto) {
+                placeGroups.filter { it.place.pic.isNullOrBlank() }
+            } else {
+                placeGroups
+            }
+    }
+}
+
+/** Shows a red pin when only places without a picture are shown, red and green pins otherwise. */
+private fun showOnlyNeedsPhotoState(item: MenuItem) {
+    if (NearbyFilterState.getInstance().isNeedPhotoSelected) {
+        item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_red_pin)
+        item.setTitle(fr.free.nrw.commons.R.string.nearby_show_all_places)
+    } else {
+        item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_all_pins)
+        item.setTitle(fr.free.nrw.commons.R.string.nearby_show_only_needs_photo)
     }
 }
 

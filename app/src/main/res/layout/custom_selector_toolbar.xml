@@ -49,11 +49,27 @@
       android:padding="@dimen/standard_gap"
       android:contentDescription="@string/custom_selector_limit_error_desc"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/menu_overflow"
+      app:layout_constraintEnd_toStartOf="@id/layout_toggle"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="1.0"
       app:layout_constraintStart_toEndOf="@id/title"
       app:srcCompat="@drawable/ic_error_red_24dp" />
+
+    <!-- Layout toggle, visible only while picking pictures in a folder -->
+    <ImageButton
+      android:id="@+id/layout_toggle"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:background="#00FFFFFF"
+      android:padding="@dimen/standard_gap"
+      android:contentDescription="@string/custom_selector_switch_to_list_view"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/menu_overflow"
+      app:layout_constraintStart_toEndOf="@id/image_limit_error"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@drawable/ic_list_white_24dp" />
 
     <!-- Overflow Menu Icon (menu_overflow) -->
     <ImageButton
@@ -67,7 +83,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="1.0"
-      app:layout_constraintStart_toEndOf="@id/image_limit_error"
+      app:layout_constraintStart_toEndOf="@id/layout_toggle"
       app:srcCompat="@drawable/ic_overflow_menu_icon" />
 
 

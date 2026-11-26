@@ -52,12 +52,6 @@
     <item quantity="many">%1$d įkėlimai</item>
     <item quantity="other">%1$d įkėlimų</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Šio paveikslėlio licencija bus %1$s</item>
-    <item quantity="few">Šių paveikslų licencija bus %1$s</item>
-    <item quantity="many">Šių paveikslų licencija bus %1$s</item>
-    <item quantity="other">Šių paveikslų licencija bus %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d įkėlimas</item>
     <item quantity="few">%1$d įkėlimai</item>
@@ -101,7 +95,6 @@
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
   <string name="upload_completed_notification_text">Bakstelėkite norėdami peržiūrėti jūsų įkėlimą</string>
   <string name="upload_progress_notification_title_start">Keliamas failas: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s įkeliamas</string>
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
   <string name="upload_paused_notification_title">%1$s įkėlimas pristabdytas</string>

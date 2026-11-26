@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingStart="@dimen/standard_gap"
+  android:paddingTop="@dimen/dimen_2"
+  android:paddingEnd="@dimen/standard_gap"
+  android:paddingBottom="@dimen/dimen_2">
+
+  <androidx.cardview.widget.CardView
+    android:id="@+id/view"
+    android:layout_width="@dimen/dimen_72"
+    android:layout_height="@dimen/dimen_72"
+    app:cardCornerRadius="@dimen/dimen_6"
+    app:cardElevation="@dimen/dimen_2"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+      <View
+        android:id="@+id/selected_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.25"
+        android:background="@color/divider_grey" />
+
+      <ImageView
+        android:id="@+id/selected_image"
+        android:layout_width="@dimen/dimen_20"
+        android:layout_height="@dimen/dimen_20"
+        android:layout_margin="@dimen/dimen_6"
+        android:background="@drawable/circle_shape"
+        android:gravity="center|center_vertical"
+        android:src="@drawable/ic_done_black"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/selected_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="selected_overlay,selected_image" />
+
+      <View
+        android:id="@+id/uploaded_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.15"
+        android:background="@color/black" />
+
+      <View
+        android:id="@+id/uploading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.15"
+        android:background="@color/black" />
+
+      <ImageView
+        android:id="@+id/uploaded_overlay_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/commons" />
+
+      <ImageView
+        android:id="@+id/uploading_overlay_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        android:rotationX="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu_ic_download_24dp" />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/uploaded_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="uploaded_overlay,uploaded_overlay_icon" />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/uploading_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="uploading_overlay,uploading_overlay_icon" />
+
+      <ImageView
+        android:id="@+id/not_for_upload_overlay_icon"
+        android:layout_width="@dimen/dimen_40"
+        android:layout_height="@dimen/dimen_40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/not_for_upload" />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/not_for_upload_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="selected_overlay,not_for_upload_overlay_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+
+  <TextView
+    android:id="@+id/image_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="?attr/contributionsListTextPrimary"
+    android:textSize="@dimen/subheading_text_size"
+    app:layout_constraintEnd_toStartOf="@id/location_indicator"
+    app:layout_constraintStart_toEndOf="@id/view"
+    app:layout_constraintTop_toTopOf="@id/view" />
+
+  <TextView
+    android:id="@+id/image_details"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/standard_gap"
+    android:layout_marginTop="@dimen/dimen_2"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:textColor="?attr/contributionsListTextSecondary"
+    android:textSize="@dimen/subheading_text_size"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/view"
+    app:layout_constraintTop_toBottomOf="@id/image_name" />
+
+  <ImageView
+    android:id="@+id/location_indicator"
+    android:layout_width="@dimen/dimen_20"
+    android:layout_height="@dimen/dimen_20"
+    android:contentDescription="@string/custom_selector_image_has_location"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/view"
+    app:srcCompat="@drawable/ic_location_on_black_24dp"
+    app:tint="@color/primaryColor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,10 +23,6 @@
     <item quantity="one">%1$d次上傳</item>
     <item quantity="other">%1$d次上傳</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
-    <item quantity="other">這些圖片會按 %1$s 協議授權上傳</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d 個上傳</item>
     <item quantity="other">%1$d 個上傳</item>
@@ -61,7 +57,6 @@
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
   <string name="upload_progress_notification_title_start">開始上傳檔案：%1$s</string>
-  <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_paused_notification_title">已暫停上傳%1$s</string>

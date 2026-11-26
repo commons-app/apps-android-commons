@@ -34,7 +34,7 @@ internal fun NearbyParentFragment.registerNetworkReceiver() {
  */
 internal fun NearbyParentFragment.storeSharedPrefs(selectedPlace: Place) {
     applicationKvStore.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
-    controller.isInternalUploadInProgress = true
+    uploadCoordinator.isInternalUploadInProgress = true
     val place = applicationKvStore.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
     Timber.d("Stored place object %s", place.toString())
 }

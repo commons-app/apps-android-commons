@@ -50,7 +50,12 @@ internal fun NearbyParentFragment.highlightNearestPlace(nearestPlace: Place) {
  * Adds photo marker on map if depicts picker mode is active.
  */
 internal fun NearbyParentFragment.addPhotoMarkerIfDepictsMode() {
-    markerOverlayHelper.addPhotoMarkerIfDepictsMode()
+    if (isDepictsPickerMode) {
+        val coords = viewportHelper.allPhotoLatLngs
+        if (!coords.isNullOrEmpty()) {
+            markerOverlayHelper.addPhotoMarkers(coords)
+        }
+    }
 }
 
 /**

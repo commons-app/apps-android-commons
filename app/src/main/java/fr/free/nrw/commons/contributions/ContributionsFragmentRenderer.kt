@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.ContributionsFragment.Companion.MEDIA_DETAIL_PAGER_FRAGMENT_TAG
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
+import fr.free.nrw.commons.profile.ProfileActivity
 
 /** Owns child fragment transactions and contributions card visibility. */
 class ContributionsFragmentRenderer(
@@ -16,7 +17,9 @@ class ContributionsFragmentRenderer(
      */
     fun showContributionsListFragment() {
         // show nearby card view on contributions list is visible
-        if (fragment.binding!!.cardViewNearby != null && !fragment.isUserProfile) {
+        if (fragment.activity is ProfileActivity) {
+            fragment.binding?.cardViewNearby?.visibility = View.GONE
+        } else if (fragment.binding!!.cardViewNearby != null && !fragment.isUserProfile) {
             if (fragment.store!!.getBoolean("displayNearbyCardView", true)) {
                 if (fragment.binding!!.cardViewNearby.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY
