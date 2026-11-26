@@ -16,6 +16,7 @@ import fr.free.nrw.commons.utils.MotionPhotoUtils
 import fr.free.nrw.commons.utils.RandomAccessFileExifWriter
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -64,9 +65,13 @@ class FileProcessor
         // Places this upload already looked up categories for
         private val lookedUpPlaces = mutableListOf<LatLng>()
 
+        // Places this upload already searched nearby depictions for
+        private val searchedNearbyPlaces = mutableListOf<LatLng>()
+
         fun cleanup() {
             compositeDisposable.clear()
             synchronized(lookedUpPlaces) { lookedUpPlaces.clear() }
+            synchronized(searchedNearbyPlaces) { searchedNearbyPlaces.clear() }
         }
 
         /**
@@ -215,7 +220,7 @@ class FileProcessor
             requireNotNull(imageCoordinates.decimalCoords)
             // Read once, the user can edit the location while the lookup is running
             val place = imageCoordinates.latLng!!
-            if (markPlaceLookedUp(place)) {
+            if (markPlaceLookedUp(lookedUpPlaces, place)) {
                 compositeDisposable.add(
                     dependencies.apiCall
                         .request(imageCoordinates.decimalCoords!!)
@@ -235,23 +240,29 @@ class FileProcessor
                 )
             }
 
-            compositeDisposable.add(
-                suggestNearbyDepictions(imageCoordinates),
-            )
+            // Nearby places are the same for pictures taken together, search them once (#7421)
+            if (markPlaceLookedUp(searchedNearbyPlaces, place)) {
+                compositeDisposable.add(
+                    suggestNearbyDepictions(place),
+                )
+            }
         }
 
         /**
          * Pictures of a multi-upload are often taken at the same spot, and nearby pictures have the
-         * same categories, so look a place up only once (#5316).
+         * same categories and nearby places, so look a place up only once (#5316, #7421).
          *
          * @return false if this upload already looked up a place within [SAME_PLACE_RADIUS_IN_METRES]
          */
-        private fun markPlaceLookedUp(place: LatLng): Boolean =
-            synchronized(lookedUpPlaces) {
-                if (lookedUpPlaces.any { computeDistanceBetween(it, place) <= SAME_PLACE_RADIUS_IN_METRES }) {
+        private fun markPlaceLookedUp(
+            places: MutableList<LatLng>,
+            place: LatLng,
+        ): Boolean =
+            synchronized(places) {
+                if (places.any { computeDistanceBetween(it, place) <= SAME_PLACE_RADIUS_IN_METRES }) {
                     false
                 } else {
-                    lookedUpPlaces.add(place)
+                    places.add(place)
                 }
             }
 
@@ -273,22 +284,30 @@ class FileProcessor
         private val radiiProgressionInMetres =
             (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
 
-        private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable =
+        private fun suggestNearbyDepictions(place: LatLng): Disposable =
             Observable
                 .fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
                 .concatMap {
-                    Observable.fromCallable {
-                        dependencies.okHttpJsonApiClient.getNearbyPlaces(
-                            imageCoordinates.latLng!!,
-                            Locale.getDefault().language,
-                            it,
-                        )
-                    }
+                    Single
+                        .fromCallable {
+                            dependencies.okHttpJsonApiClient.getNearbyPlaces(
+                                place,
+                                Locale.getDefault().language,
+                                it,
+                            )
+                        }
+                        // The other pictures of this place skipped their search, so don't give up at once
+                        .retryWhen { errors -> waitBeforeRetry(errors) }
+                        .toObservable()
                 }.subscribeOn(Schedulers.io())
                 .filter { it.size >= MIN_NEARBY_RESULTS }
                 .take(1)
                 .subscribe(
                     { dependencies.depictsModel.nearbyPlaces.offer(it) },
-                    { Timber.e(it) },
+                    {
+                        Timber.e(it)
+                        // so a later picture of this place can try again
+                        synchronized(searchedNearbyPlaces) { searchedNearbyPlaces.remove(place) }
+                    },
                 )
     }
