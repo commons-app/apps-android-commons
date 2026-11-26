@@ -19,6 +19,7 @@ import fr.free.nrw.commons.auth.csrf.LogoutClient
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginInterface
 import fr.free.nrw.commons.category.CategoryInterface
+import fr.free.nrw.commons.delete.SpeedyDeletionInterface
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailInterface
@@ -291,6 +292,11 @@ class NetworkingModule {
     @Provides
     @Singleton
     fun provideCategoryInterface(factory: CommonsServiceFactory): CategoryInterface =
+        factory.create(BuildConfig.COMMONS_URL)
+
+    @Provides
+    @Singleton
+    fun provideSpeedyDeletionInterface(factory: CommonsServiceFactory): SpeedyDeletionInterface =
         factory.create(BuildConfig.COMMONS_URL)
 
     @Provides

@@ -479,6 +479,9 @@
   <string name="deletion_reason_bad_for_my_privacy">I realized it is bad for my privacy</string>
   <string name="deletion_reason_no_longer_want_public">I changed my mind, I don\'t want it to be publicly visible anymore</string>
   <string name="deletion_reason_not_interesting">Sorry this picture is not interesting for an encyclopedia</string>
+  <string name="deletion_reason_speedy_g7">I uploaded it less than 7 days ago and it is not used anywhere (speedy deletion)</string>
+  <string name="speedy_deletion_file_in_use">This file is used on a wiki, so it cannot be deleted quickly. Please choose another reason to request its deletion.</string>
+  <string name="speedy_deletion_usage_unknown">Could not check whether this file is used. Please try again, or choose another reason.</string>
 
   <string name="uploaded_by_myself">Uploaded by myself on %1$s, used in %2$d article(s) at least.</string>
 

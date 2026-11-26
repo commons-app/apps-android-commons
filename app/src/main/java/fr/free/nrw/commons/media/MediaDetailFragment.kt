@@ -66,6 +66,7 @@ import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
+import fr.free.nrw.commons.delete.SpeedyDeletionHelper
 import fr.free.nrw.commons.description.DescriptionEditHelper
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -120,6 +121,9 @@ class MediaDetailFragment :
 
     @Inject
     lateinit var deleteHelper: DeleteHelper
+
+    @Inject
+    lateinit var speedyDeletionHelper: SpeedyDeletionHelper
 
     @Inject
     lateinit var reviewHelper: ReviewHelper
