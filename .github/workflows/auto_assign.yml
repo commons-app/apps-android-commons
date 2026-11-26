@@ -66,7 +66,8 @@ jobs:
             let authorAssociation;
             let isFirstTime;
 
-            if (github.event_name === 'issues') {
+            // Inside github-script, use context.eventName (github is the Octokit client).
+            if (context.eventName === 'issues') {
               if (!reporterOptedIn(context.payload.issue.body)) {
                 core.info('Reporter did not opt in to work on the issue');
                 return;
@@ -109,7 +110,7 @@ jobs:
 
               if (mergedPullRequests.data.total_count < 6) {
                 core.info(`Skipping assign for ${candidate}: fewer than 6 merged PRs on a non-newcomer issue`);
-                if (github.event_name === 'issues') {
+                if (context.eventName === 'issues') {
                   const marker = `<!-- guide-new-contributors: ${candidate} -->`;
                   let body = `Hi @${candidate}! Thank you for your enthusiasm!`;
                   body += `\n\nWhile we appreciate your interest in fixing this issue, we found out that contributors who are not veterans learn better from fixing bugs (issues with Type=Bug) or working on good first issues (issues with Label=good first issue). [Our documentation](https://github.com/commons-app/commons-app-documentation/blob/master/android/Volunteers-welcome!.md#developers) contains the details and a link to an issue search that gives you the best issues to work on.`;
