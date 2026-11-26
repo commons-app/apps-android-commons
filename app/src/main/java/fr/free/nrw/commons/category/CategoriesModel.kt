@@ -9,6 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.Function4
 import java.util.Date
+import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 /**
@@ -118,13 +119,18 @@ class CategoriesModel
             selectedDepictions: List<DepictedItem>,
         ): Observable<List<CategoryItem>> =
             if (TextUtils.isEmpty(term)) {
-                Observable.combineLatest(
-                    categoriesFromDepiction(selectedDepictions),
-                    gpsCategoryModel.categoriesFromLocation,
-                    titleCategories(imageTitleList),
-                    Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
-                    Function4(::combine),
-                )
+                val lookups = SuggestionLookups()
+                Observable
+                    .combineLatest(
+                        categoriesFromDepiction(selectedDepictions, lookups),
+                        gpsCategoryModel.categoriesFromLocation,
+                        titleCategories(imageTitleList, lookups),
+                        Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
+                        Function4(::combine),
+                    ).flatMap { found ->
+                        lookups.errorIfNothingFound(found)?.let { Observable.error<List<CategoryItem>>(it) }
+                            ?: Observable.just(found)
+                    }
             } else {
                 categoriesMatching(term)
             }
@@ -196,6 +202,7 @@ class CategoriesModel
          */
         private fun categoriesFromDepiction(
             selectedDepictions: List<DepictedItem>,
+            lookups: SuggestionLookups,
         ): Observable<MutableList<CategoryItem>>? {
             val observables =
                 selectedDepictions.map { depictedItem ->
@@ -249,7 +256,7 @@ class CategoriesModel
                     }
                 }
             return Observable
-                .concat(observables)
+                .concat(observables.map { lookups.skipOnError(it, mutableListOf()) })
                 .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
                     accumulator.apply { addAll(currentList) }
                 }
@@ -311,23 +318,31 @@ class CategoriesModel
          * @param titleList
          * @return
          */
-        private fun titleCategories(titleList: List<String>) =
-            if (titleList.isNotEmpty()) {
-                // A multi-upload often has the same caption on every picture, search it once (#5316)
-                Observable.combineLatest(titleList.distinct().map { getTitleCategories(it) }) { searchResults ->
-                    searchResults.map { it as List<CategoryItem> }.flatten()
-                }
-            } else {
-                Observable.just(emptyList())
+        private fun titleCategories(
+            titleList: List<String>,
+            lookups: SuggestionLookups,
+        ) = if (titleList.isNotEmpty()) {
+            // A multi-upload often has the same caption on every picture, search it once (#5316)
+            Observable.combineLatest(titleList.distinct().map { getTitleCategories(it, lookups) }) { searchResults ->
+                searchResults.map { it as List<CategoryItem> }.flatten()
             }
+        } else {
+            Observable.just(emptyList())
+        }
 
         /**
          * Return category for single title
          * @param title
          * @return
          */
-        private fun getTitleCategories(title: String): Observable<List<CategoryItem>> =
-            categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
+        private fun getTitleCategories(
+            title: String,
+            lookups: SuggestionLookups,
+        ): Observable<List<CategoryItem>> =
+            lookups.skipOnError(
+                categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable(),
+                emptyList(),
+            )
 
         /**
          * Handles category item selection
@@ -390,6 +405,29 @@ class CategoriesModel
         companion object {
             const val SEARCH_CATS_LIMIT = 25
             private const val MIN_PLURAL_PREFIX_LENGTH = 3
+        }
+
+        /**
+         * The caption and depiction lookups of one suggestions load. A failed lookup is skipped so
+         * it doesn't remove the other suggestions, but its error is kept so that a load which found
+         * nothing at all (offline, server down) still shows the load error (#6652).
+         */
+        private class SuggestionLookups {
+            private val firstError = AtomicReference<Throwable>()
+
+            fun <T : Any> skipOnError(
+                lookup: Observable<T>,
+                nothingFound: T,
+            ): Observable<T> =
+                lookup.onErrorReturn { error ->
+                    firstError.compareAndSet(null, error)
+                    nothingFound
+                }
+
+            fun errorIfNothingFound(found: List<CategoryItem>): Throwable? =
+                firstError.get()?.takeIf {
+                    found.isEmpty()
+                }
         }
 
         /**
