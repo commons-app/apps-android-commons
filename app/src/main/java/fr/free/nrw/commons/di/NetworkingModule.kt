@@ -69,7 +69,6 @@ class NetworkingModule {
             .writeTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(ForceCacheInterceptor())
-            .addInterceptor(CommonHeaderRequestInterceptor())
             .addInterceptor { chain ->
                 val request = chain.request()
                 val requestBuilder = request.newBuilder()
@@ -79,7 +78,8 @@ class NetworkingModule {
                     requestBuilder.header("Authorization", "Bearer $accessToken")
                 }
                 chain.proceed(requestBuilder.build())
-            }.readTimeout(120, TimeUnit.SECONDS)
+            }.addInterceptor(CommonHeaderRequestInterceptor())
+            .readTimeout(120, TimeUnit.SECONDS)
             .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
             .build()
 
