@@ -4,6 +4,7 @@ import android.content.Context
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.CommonHeaderRequestInterceptor
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.di.NetworkingModule
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import org.junit.Assert.assertEquals
@@ -24,6 +25,7 @@ class MediaPlaybackHttpClientTest {
     private val sharedLoggingInterceptor = module.provideHttpLoggingInterceptor()
     private val playbackLoggingInterceptor = module.provideMediaPlaybackHttpLoggingInterceptor()
     private val context: Context = mock()
+    private val sessionManager: SessionManager = mock()
 
     @Before
     fun setUp() {
@@ -32,7 +34,7 @@ class MediaPlaybackHttpClientTest {
 
     @Test
     fun playbackClientShouldSwapTheLoggingInterceptorInPlace() {
-        val shared = module.provideOkHttpClient(context, sharedLoggingInterceptor)
+        val shared = module.provideOkHttpClient(context, sharedLoggingInterceptor, sessionManager)
         val playback = module.provideMediaPlaybackHttpClient(shared, playbackLoggingInterceptor)
 
         assertSame(playbackLoggingInterceptor, playback.interceptors.first())
@@ -42,7 +44,7 @@ class MediaPlaybackHttpClientTest {
 
     @Test
     fun playbackClientShouldDropTheCacheAndLeaveTheSharedClientAlone() {
-        val shared = module.provideOkHttpClient(context, sharedLoggingInterceptor)
+        val shared = module.provideOkHttpClient(context, sharedLoggingInterceptor, sessionManager)
         val playback = module.provideMediaPlaybackHttpClient(shared, playbackLoggingInterceptor)
 
         assertNull(playback.cache)
