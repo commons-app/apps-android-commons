@@ -93,6 +93,7 @@
   <string name="updating_caption_message">A string in a progress dialog.</string>
   <string name="login_success">Message when login has succeeded.\n{{Identical|Login successful}}</string>
   <string name="login_failed">Message when login has failed.\n{{Identical|Login failed}}</string>
+  <string name="login_with_oauth">Label for the button on the login screen that authenticates the user via Wikimedia OAuth 2.0 in a browser tab.</string>
   <string name="upload_failed">Error message.</string>
   <string name="retry_limit_reached">Error message.</string>
   <string name="unrestricted_battery_mode">An alert when uploading multiple files.</string>
