@@ -177,7 +177,7 @@ class LoginActivity : BaseActivity() {
                 if (!hasFocus) hideKeyboard(v)
             }
 
-            loginButton?.setOnClickListener { performLogin() }
+            loginButton.setOnClickListener { performLogin() }
             oauthLoginButton?.setOnClickListener { startOAuthLogin() }
             skipLogin.setOnClickListener { skipLogin() }
             forgotPassword.setOnClickListener { forgotPassword() }

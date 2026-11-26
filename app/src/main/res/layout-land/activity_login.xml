@@ -179,21 +179,32 @@
                         android:text="@string/signup" />
 
                     <Button
-                      android:id="@+id/oauth_login_button"
-                      style="@style/Widget.AppCompat.Button.Colored"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_below="@id/buttonFrame"
-                      android:layout_marginStart="@dimen/standard_gap"
-                      android:layout_marginLeft="@dimen/standard_gap"
-                      android:layout_marginEnd="@dimen/standard_gap"
-                      android:layout_marginRight="@dimen/standard_gap"
-                      android:layout_marginBottom="@dimen/standard_gap"
-                      android:text="@string/login_with_oauth"
-                      android:textColor="@android:color/white"
-                      android:visibility="visible" />
+                        android:id="@+id/login_button"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="@dimen/dimen_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_gap"
+                        android:layout_marginStart="@dimen/small_gap"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:text="@string/login" />
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/oauth_login_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/buttonFrame"
+                    android:layout_marginBottom="@dimen/standard_gap"
+                    android:layout_marginEnd="@dimen/standard_gap"
+                    android:layout_marginLeft="@dimen/standard_gap"
+                    android:layout_marginRight="@dimen/standard_gap"
+                    android:layout_marginStart="@dimen/standard_gap"
+                    android:text="@string/login_with_oauth"
+                    android:textColor="@android:color/white"
+                    android:visibility="visible" />
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
                     android:visibility="visible"
