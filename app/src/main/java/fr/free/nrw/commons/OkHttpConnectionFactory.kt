@@ -2,7 +2,6 @@ package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
