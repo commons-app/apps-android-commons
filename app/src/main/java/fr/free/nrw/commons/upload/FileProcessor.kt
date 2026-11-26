@@ -47,7 +47,7 @@ private const val DEFAULT_SUGGESTION_RADIUS_IN_METRES = 100
 private const val MAX_SUGGESTION_RADIUS_IN_METRES = 1000
 private const val RADIUS_STEP_SIZE_IN_METRES = 100
 private const val MIN_NEARBY_RESULTS = 5
-private const val SAME_PLACE_RADIUS_IN_METRES = 50
+internal const val SAME_PLACE_RADIUS_IN_METRES = 50
 private const val LOOKUP_ATTEMPTS = 3
 private const val RETRY_WAIT_SECONDS = 5L
 
