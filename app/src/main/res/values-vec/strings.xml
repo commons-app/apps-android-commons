@@ -22,10 +22,6 @@
     <item quantity="one">%1$d cargamento</item>
     <item quantity="other">%1$d cargamenti</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Sta imajine ła vegnarà ridasada in baxe a ła liçensa %1$s</item>
-    <item quantity="other">Ste imajini łe vegnarà ridasae in baxe a ła liçensa %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d cargamento</item>
     <item quantity="other">%1$d cargamenti</item>
@@ -58,7 +54,6 @@
   <string name="upload_completed_notification_title">%1$s cargà!</string>
   <string name="upload_completed_notification_text">Schicia par vardar i to cargamenti</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Scumisio del cargamento de %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s cargà!</string>
   <string name="upload_progress_notification_title_finishing">Finio el cargamento de %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Cargamento de %1$s no riusio</string>
   <string name="upload_failed_notification_subtitle">Schicia par vixuałixare</string>

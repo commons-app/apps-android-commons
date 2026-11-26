@@ -2,21 +2,14 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.Window
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.compose.foundation.BorderStroke
@@ -45,11 +38,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewGroupCompat
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.MAX_IMAGE_COUNT
-import fr.free.nrw.commons.customselector.helper.FolderDeletionHelper
+import fr.free.nrw.commons.customselector.helper.NotForUploadMarker
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -92,15 +84,19 @@ class CustomSelectorActivity :
     private lateinit var viewModel: CustomSelectorViewModel
 
     /**
-     * isImageFragmentOpen is true when the image fragment is in view.
+     * Keeps track of the opened folder, the toolbar and the deletion of the opened folder.
      */
-    private var isImageFragmentOpen = false
-
-    /**
-     * Current ImageFragment attributes.
-     */
-    private var bucketId: Long = 0L
-    private lateinit var bucketName: String
+    private val folderBrowser: FolderBrowser by lazy {
+        FolderBrowser(
+            activity = this,
+            viewModel = viewModel,
+            defaultKvStore = defaultKvStore,
+            folderDeletionLauncher = startForFolderDeletionResult,
+            onUploadLimitErrorClick = {
+                CustomSelectorDialogs.showUploadLimitWarning(this, uploadLimit, uploadLimitExceededBy)
+            },
+        )
+    }
 
     /**
      * Pref for saving selector state.
@@ -148,6 +144,13 @@ class CustomSelectorActivity :
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     /**
+     * Marks and unmarks the selected images as not for upload.
+     */
+    private val notForUploadMarker: NotForUploadMarker by lazy {
+        NotForUploadMarker(notForUploadStatusDao, fileUtilsWrapper, contentResolver, ioDispatcher)
+    }
+
+    /**
      * Image Fragment instance
      */
     var imageFragment: ImageFragment? = null
@@ -157,21 +160,16 @@ class CustomSelectorActivity :
     private var showPartialAccessIndicator by mutableStateOf(false)
 
     /**
-     * Show delete button in folder
-     */
-    private var showOverflowMenu = false
-
-    /**
      * Waits for confirmation of delete folder
      */
     private val startForFolderDeletionResult =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-            onDeleteFolderResultReceived(result)
+            folderBrowser.onDeleteFolderResultReceived(result)
         }
 
     private val startForResult =
         registerForActivityResult(StartActivityForResult()) { result ->
-            onFullScreenDataReceived(result)
+            viewModel.onFullScreenDataReceived(result)
         }
 
     /**
@@ -220,11 +218,15 @@ class CustomSelectorActivity :
         // Check for single selection extra
         uploadLimit = if (intent.getBooleanExtra(EXTRA_SINGLE_SELECTION, false)) 1 else MAX_IMAGE_COUNT
 
-        setupViews()
+        folderBrowser.setUpViews()
+
+        // Set up bottom layout
+        findViewById<Button>(R.id.upload).setOnClickListener { onDone() }
+        findViewById<Button>(R.id.not_for_upload).setOnClickListener { onClickNotForUpload() }
 
         if (prefs.getBoolean("customSelectorFirstLaunch", true)) {
             // show welcome dialog on first launch
-            showWelcomeDialog()
+            CustomSelectorDialogs.showWelcomeDialog(this)
             prefs.edit().putBoolean("customSelectorFirstLaunch", false).apply()
         }
 
@@ -243,15 +245,7 @@ class CustomSelectorActivity :
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                     isEnabled = true
-                    val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-                    if (fragment != null && fragment is FolderFragment) {
-                        isImageFragmentOpen = false
-                        changeTitle(getString(R.string.custom_selector_title), 0)
-                    }
-
-                    // hide overflow menu when not in folder
-                    showOverflowMenu = false
-                    setUpToolbar()
+                    folderBrowser.onNavigatedBack()
                 }
             },
         )
@@ -272,91 +266,49 @@ class CustomSelectorActivity :
 
     override fun onResume() {
         super.onResume()
-        fetchData()
-    }
-
-    /**
-     * When data will be send from full screen mode, it will be passed to fragment
-     */
-    private fun onFullScreenDataReceived(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImages: ArrayList<Image> =
-                result.data!!
-                    .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-            viewModel.selectedImages?.value = selectedImages
-        }
-    }
-
-    private fun onDeleteFolderResultReceived(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
-            navigateToCustomSelector()
-        }
-    }
-
-    /**
-     * Show Custom Selector Welcome Dialog.
-     */
-    private fun showWelcomeDialog() {
-        val dialog = Dialog(this)
-        dialog.setCancelable(false)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.custom_selector_info_dialog)
-        (dialog.findViewById<Button>(R.id.btn_ok))?.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-    }
-
-    /**
-     * Set up view, default folder view.
-     */
-    private fun setupViews() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, FolderFragment.newInstance())
-            .commit()
-        setUpToolbar()
-        setUpBottomLayout()
-    }
-
-    /**
-     * Set up bottom layout
-     */
-    private fun setUpBottomLayout() {
-        val done: Button = findViewById(R.id.upload)
-        done.setOnClickListener { onDone() }
-
-        val notForUpload: Button = findViewById(R.id.not_for_upload)
-        notForUpload.setOnClickListener { onClickNotForUpload() }
+        // Start data fetch in view model.
+        viewModel.fetchImages()
     }
 
     /**
      * Gets selected images and proceed for database operations
      */
     private fun onClickNotForUpload() {
-        val selectedImages = viewModel.selectedImages.value
-        if (selectedImages.isNullOrEmpty()) {
-            markAsNotForUpload(arrayListOf())
-            return
-        }
+        val selectedImages = viewModel.selectedImages.value ?: arrayListOf()
+        val hasSelectedImages = selectedImages.isNotEmpty()
+        selectedImages.removeAll { !File(it.path).exists() }
 
-        val iterator = selectedImages.iterator()
-        while (iterator.hasNext()) {
-            val image = iterator.next()
-            val path = image.path
-            val file = File(path)
-            if (!file.exists()) {
-                iterator.remove()
+        // Insert selected images in the database
+        scope.launch {
+            withContext(Dispatchers.Main) {
+                imageFragment?.setMarkUnmarkProgressDialog(text = progressDialogText, show = true)
+            }
+
+            // Insert or delete images as necessary, but the UI updates should be posted back to the main thread
+            val marked = notForUploadMarker.toggle(selectedImages)
+            withContext(Dispatchers.Main) {
+                if (marked) {
+                    selectedImages.forEach { image ->
+                        imageFragment?.removeImage(image)
+                    }
+                    imageFragment?.clearSelectedImages()
+                } else {
+                    // Refresh the UI
+                    imageFragment?.refresh()
+                }
+            }
+
+            withContext(Dispatchers.Main) {
+                imageFragment?.setMarkUnmarkProgressDialog(text = "", show = false)
+                val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
+                bottomLayout.visibility = View.GONE
+                folderBrowser.changeTitle(folderBrowser.bucketName, 0)
             }
         }
-        markAsNotForUpload(selectedImages)
-        toolbarBinding.imageLimitError.visibility = View.INVISIBLE
-    }
 
-    /**
-     * Insert selected images in the database
-     */
-    private fun markAsNotForUpload(images: ArrayList<Image>) {
-        insertIntoNotForUpload(images)
+        if (hasSelectedImages) {
+            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
+        }
     }
 
     /**
@@ -364,203 +316,6 @@ class CustomSelectorActivity :
      */
     fun setOnDataListener(imageFragment: ImageFragment?) {
         this.imageFragment = imageFragment
-    }
-
-    /**
-     * Insert images into not for upload
-     * Remove images from not for upload
-     * Refresh the UI
-     */
-    private fun insertIntoNotForUpload(images: ArrayList<Image>) {
-        scope.launch {
-            withContext(Dispatchers.Main) {
-                imageFragment?.showMarkUnmarkProgressDialog(text = progressDialogText)
-            }
-
-            var allImagesAlreadyNotForUpload = true
-            images.forEach { image ->
-                val imageSHA1 =
-                    CustomSelectorUtils.getImageSHA1(
-                        image.uri,
-                        ioDispatcher,
-                        fileUtilsWrapper,
-                        contentResolver,
-                    )
-                val exists = notForUploadStatusDao.find(imageSHA1)
-                if (exists < 1) {
-                    allImagesAlreadyNotForUpload = false
-                }
-            }
-
-            if (!allImagesAlreadyNotForUpload) {
-                // Insert or delete images as necessary, but the UI updates should be posted back to the main thread
-                images.forEach { image ->
-                    val imageSHA1 =
-                        CustomSelectorUtils.getImageSHA1(
-                            image.uri,
-                            ioDispatcher,
-                            fileUtilsWrapper,
-                            contentResolver,
-                        )
-                    notForUploadStatusDao.insert(NotForUploadStatus(imageSHA1))
-                }
-                withContext(Dispatchers.Main) {
-                    images.forEach { image ->
-                        imageFragment?.removeImage(image)
-                    }
-                    imageFragment?.clearSelectedImages()
-                }
-            } else {
-                images.forEach { image ->
-                    val imageSHA1 =
-                        CustomSelectorUtils.getImageSHA1(
-                            image.uri,
-                            ioDispatcher,
-                            fileUtilsWrapper,
-                            contentResolver,
-                        )
-                    notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
-                }
-
-                withContext(Dispatchers.Main) {
-                    imageFragment?.refresh()
-                }
-            }
-
-            withContext(Dispatchers.Main) {
-                imageFragment?.dismissMarkUnmarkProgressDialog()
-                val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
-                bottomLayout.visibility = View.GONE
-                changeTitle(bucketName, 0)
-            }
-        }
-    }
-
-    /**
-     * Start data fetch in view model.
-     */
-    private fun fetchData() {
-        viewModel.fetchImages()
-    }
-
-    /**
-     * Change the title of the toolbar.
-     */
-    private fun changeTitle(
-        title: String,
-        selectedImageCount: Int,
-    ) {
-        if (title.isNotEmpty()) {
-            val titleText = findViewById<TextView>(R.id.title)
-            var titleWithAppendedImageCount = title
-            if (selectedImageCount > 0) {
-                titleWithAppendedImageCount += " (${resources.getQuantityString(
-                    R.plurals.custom_picker_images_selected_title_appendix,
-                    selectedImageCount,
-                    selectedImageCount,
-                )})"
-            }
-            if (titleText != null) {
-                titleText.text = titleWithAppendedImageCount
-            }
-        }
-    }
-
-    /**
-     * Set up the toolbar, back listener, done listener.
-     */
-    private fun setUpToolbar() {
-        val back: ImageButton = findViewById(R.id.back)
-        back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
-
-        val limitError: ImageButton = findViewById(R.id.image_limit_error)
-        limitError.visibility = View.INVISIBLE
-        limitError.setOnClickListener { displayUploadLimitWarning() }
-
-        val overflowMenu: ImageButton = findViewById(R.id.menu_overflow)
-        if (defaultKvStore.getBoolean("displayDeletionButton")) {
-            overflowMenu.visibility = if (showOverflowMenu) View.VISIBLE else View.INVISIBLE
-            overflowMenu.setOnClickListener { showPopupMenu(overflowMenu) }
-        } else {
-            overflowMenu.visibility = View.GONE
-        }
-    }
-
-    private fun showPopupMenu(anchorView: View) {
-        val popupMenu = PopupMenu(this, anchorView)
-        popupMenu.menuInflater.inflate(R.menu.menu_custom_selector, popupMenu.menu)
-
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_delete_folder -> {
-                    deleteFolder()
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-
-    /**
-     * Deletes folder based on Android API version.
-     */
-    private fun deleteFolder() {
-        val folderPath =
-            FolderDeletionHelper.getFolderPath(this, bucketId) ?: run {
-                FolderDeletionHelper.showError(this, "Failed to retrieve folder path", bucketName)
-                return
-            }
-
-        val folder = File(folderPath)
-        if (!folder.exists() || !folder.isDirectory) {
-            FolderDeletionHelper.showError(this, "Folder not found or is not a directory", bucketName)
-            return
-        }
-
-        FolderDeletionHelper.confirmAndDeleteFolder(this, folder, startForFolderDeletionResult) { success ->
-            if (success) {
-                // for API 30+, navigation is handled in 'onDeleteFolderResultReceived'
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
-                    FolderDeletionHelper.showSuccess(this, "Folder deleted successfully", bucketName)
-                    navigateToCustomSelector()
-                }
-            } else {
-                FolderDeletionHelper.showError(this, "Failed to delete folder", bucketName)
-            }
-        }
-    }
-
-    /**
-     * Navigates back to the main `FolderFragment`, refreshes the MediaStore, resets UI states,
-     * and reloads folder data.
-     */
-    private fun navigateToCustomSelector() {
-        val folderPath = FolderDeletionHelper.getFolderPath(this, bucketId) ?: ""
-        val folder = File(folderPath)
-
-        supportFragmentManager.popBackStack(
-            null,
-            androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE,
-        )
-
-        // refresh MediaStore for the deleted folder path to ensure metadata updates
-        FolderDeletionHelper.refreshMediaStore(this, folder)
-
-        // replace the current fragment with FolderFragment to go back to the main screen
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, FolderFragment.newInstance())
-            .commitAllowingStateLoss()
-
-        // reset toolbar and flags
-        isImageFragmentOpen = false
-        showOverflowMenu = false
-        setUpToolbar()
-        changeTitle(getString(R.string.custom_selector_title), 0)
-
-        // fetch updated folder data
-        fetchData()
     }
 
     /**
@@ -572,21 +327,7 @@ class CustomSelectorActivity :
         folderName: String,
         lastItemId: Long,
     ) {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_container, ImageFragment.newInstance(folderId, lastItemId))
-            .addToBackStack(null)
-            .commit()
-
-        changeTitle(folderName, 0)
-
-        bucketId = folderId
-        bucketName = folderName
-        isImageFragmentOpen = true
-
-        // show the overflow menu only when a folder is clicked
-        showOverflowMenu = true
-        setUpToolbar()
+        folderBrowser.openFolder(folderId, folderName, lastItemId)
     }
 
     /**
@@ -597,7 +338,7 @@ class CustomSelectorActivity :
         selectedNotForUploadImages: Int,
     ) {
         viewModel.selectedImages.value = selectedImages
-        changeTitle(bucketName, selectedImages.size)
+        folderBrowser.changeTitle(folderBrowser.bucketName, selectedImages.size)
 
         uploadLimitExceeded = selectedImages.size > uploadLimit
         uploadLimitExceededBy = max(selectedImages.size - uploadLimit, 0)
@@ -656,7 +397,7 @@ class CustomSelectorActivity :
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
             selectedImages,
         )
-        intent.putExtra(CustomSelectorConstants.BUCKET_ID, bucketId)
+        intent.putExtra(CustomSelectorConstants.BUCKET_ID, folderBrowser.bucketId)
         startForResult.launch(intent)
     }
 
@@ -665,6 +406,17 @@ class CustomSelectorActivity :
      * Get the selected images. Remove any non existent file, forward the data to finish selector.
      */
     fun onDone() {
+        /**
+         * finishPickImages, Load the data to the intent and set result.
+         * Finish the activity.
+         */
+        fun finishPickImages(images: ArrayList<Image>) {
+            val data = Intent()
+            data.putParcelableArrayListExtra("Images", images)
+            setResult(Activity.RESULT_OK, data)
+            finish()
+        }
+
         val selectedImages = viewModel.selectedImages.value
         if (selectedImages.isNullOrEmpty()) {
             finishPickImages(arrayListOf())
@@ -683,7 +435,7 @@ class CustomSelectorActivity :
 
             withContext(Dispatchers.Main) {
                 if (uniqueImages.size != selectedImages.size) {
-                    showDuplicateSelectionWarning {
+                    CustomSelectorDialogs.showDuplicateSelectionWarning(this@CustomSelectorActivity) {
                         finishPickImages(ArrayList(uniqueImages))
                     }
                 } else {
@@ -694,57 +446,15 @@ class CustomSelectorActivity :
     }
 
     /**
-     * Warns users when duplicate-content images are selected before finishing selection.
-     */
-    private fun showDuplicateSelectionWarning(onConfirm: () -> Unit) {
-        AlertDialog
-            .Builder(this)
-            .setTitle(R.string.warning)
-            .setMessage(R.string.custom_selector_duplicates_warning)
-            .setCancelable(false)
-            .setPositiveButton(R.string.ok) { _, _ -> onConfirm() }
-            .show()
-    }
-
-    /**
-     * finishPickImages, Load the data to the intent and set result.
-     * Finish the activity.
-     */
-    private fun finishPickImages(images: ArrayList<Image>) {
-        val data = Intent()
-        data.putParcelableArrayListExtra("Images", images)
-        setResult(Activity.RESULT_OK, data)
-        finish()
-    }
-
-    /**
-     * Displays a dialog explaining the upload limit warning.
-     */
-    private fun displayUploadLimitWarning() {
-        val dialog = Dialog(this)
-        dialog.setCancelable(false)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.custom_selector_limit_dialog)
-        (dialog.findViewById<Button>(R.id.btn_dismiss_limit_warning))?.setOnClickListener { dialog.dismiss() }
-        (dialog.findViewById<TextView>(R.id.upload_limit_warning))?.text =
-            resources.getString(
-                R.string.custom_selector_over_limit_warning,
-                uploadLimit,
-                uploadLimitExceededBy,
-            )
-        dialog.show()
-    }
-
-    /**
      * On activity destroy
      * If image fragment is open, overwrite its attributes otherwise discard the values.
      */
     override fun onDestroy() {
-        if (isImageFragmentOpen) {
+        if (folderBrowser.isImageFragmentOpen) {
             prefs
                 .edit()
-                .putLong(FOLDER_ID, bucketId)
-                .putString(FOLDER_NAME, bucketName)
+                .putLong(FOLDER_ID, folderBrowser.bucketId)
+                .putString(FOLDER_NAME, folderBrowser.bucketName)
                 .apply()
         } else {
             prefs

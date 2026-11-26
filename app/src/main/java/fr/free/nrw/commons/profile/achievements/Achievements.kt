@@ -14,13 +14,14 @@ data class Achievements(
     val revertCount: Int = 0,
 ) {
     /**
-     * Used to calculate the percentages of images that haven't been reverted.
-     * Returns 100 if imagesUploaded is 0 to avoid division by zero.
+     * Percentage of uploaded images that were not deleted.
+     * Returns 100 when there are no uploads. Floors at 0 when deleted uploads exceed the
+     * upload count, which can happen when those two values come from different sources.
      */
     val notRevertPercentage: Int
         get() =
             if (imagesUploaded > 0) {
-                (imagesUploaded - revertCount) * 100 / imagesUploaded
+                ((imagesUploaded - revertCount) * 100 / imagesUploaded).coerceIn(0, 100)
             } else {
                 100
             }

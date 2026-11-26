@@ -22,14 +22,27 @@ import timber.log.Timber
 private const val SCROLL_DELAY = 800L // Delay for debounce of onscroll, in milliseconds.
 private const val LOCAL_SCROLL_DELAY = 200L // SCROLL_DELAY but for local db place search
 
+/** The location changes that start a new search of places */
+private val SEARCH_TYPES =
+    setOf(
+        LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED,
+        LocationChangeType.MAP_UPDATED,
+        LocationChangeType.SEARCH_CUSTOM_AREA,
+        LocationChangeType.CUSTOM_QUERY,
+    )
+
 /** Returns the area visible on the map, or null if the map can't tell yet. */
 private fun NearbyParentFragmentContract.View.visibleArea(): SearchArea? =
-    screenTopRight?.let { topRight -> screenBottomLeft?.let { SearchArea(topRight, it) } }
+    screenTopRight?.let { topRight ->
+        screenBottomLeft?.let { SearchArea(topRight, it, isOnlyNeedsPhoto) }
+    }
 
 /**
  * Presenter for NearbyParentFragment that coordinates map updates, location
  * changes, area searches, and map scrolling.
+ * TooManyFunctions is suppressed because every function is one user action or map event.
  */
+@Suppress("TooManyFunctions")
 class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
@@ -65,6 +78,12 @@ class NearbyParentFragmentPresenter(
     private var isNearbyLocked = false
     private var currentLatLng: LatLng? = null
     private var customQuery: String? = null
+
+    /** True while the map shows the places of an advanced query */
+    private var showsCustomQuery = false
+
+    /** True when the toggle changed during a search, so the area is searched again after it */
+    private var searchAgainAfterSearch = false
 
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
@@ -105,6 +124,19 @@ class NearbyParentFragmentPresenter(
             nearbyParentFragmentView.disableFABRecenter()
         } else {
             nearbyParentFragmentView.enableFABRecenter()
+            if (searchAgainAfterSearch) {
+                searchAgainAfterSearch = false
+                onOnlyNeedsPhotoChanged()
+            }
+        }
+    }
+
+    override fun onOnlyNeedsPhotoChanged() {
+        when {
+            // Keep the places of an advanced query, the map already hides the green pins
+            showsCustomQuery -> return
+            isNearbyLocked -> searchAgainAfterSearch = true
+            else -> searchInTheArea()
         }
     }
 
@@ -151,6 +183,7 @@ class NearbyParentFragmentPresenter(
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
+        if (locationChangeType in SEARCH_TYPES) showsCustomQuery = locationChangeType == LocationChangeType.CUSTOM_QUERY
         if (locationChangeType == LocationChangeType.CUSTOM_QUERY) {
             Timber.d("ADVANCED_QUERY_SEARCH")
             lockUnlockNearby(true)

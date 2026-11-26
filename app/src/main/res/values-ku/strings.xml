@@ -43,10 +43,6 @@
     <item quantity="one">%1$d barkirin</item>
     <item quantity="other">%1$d barkirin</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Ev wêne wê li bin %1$s were lîsanskirin</item>
-    <item quantity="other">Ev wêne wê li bin %1$s werin lîsanskirin</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Barkirin</item>
     <item quantity="other">%1$d Barkirin</item>
@@ -75,7 +71,6 @@
   <string name="uploading_started">Barkirin dest pê kir!</string>
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s tê barkirin</string>
   <string name="upload_failed_notification_title">Barkirina %1$s biser neket</string>
   <string name="upload_failed_notification_subtitle">Bitikîne û bibîne</string>
   <string name="title_activity_contributions">Barkirinên Min Ên Dawî</string>

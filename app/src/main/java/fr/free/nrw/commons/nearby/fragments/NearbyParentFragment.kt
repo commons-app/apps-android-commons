@@ -25,6 +25,7 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -59,7 +60,9 @@ import fr.free.nrw.commons.MapController.NearbyPlacesInfo
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
+import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.contributions.loadExploreMapFromNearby
@@ -85,6 +88,7 @@ import fr.free.nrw.commons.nearby.PlaceTypeLabelsClient
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter
+import fr.free.nrw.commons.nearby.enableSearchIconFocus
 import fr.free.nrw.commons.nearby.NearbyFilterState
 import fr.free.nrw.commons.nearby.NearbyUtil
 import fr.free.nrw.commons.nearby.Place
@@ -208,7 +212,13 @@ class NearbyParentFragment :
     lateinit var placesRepository: PlacesRepository
 
     @Inject
-    lateinit var controller: ContributionController
+    lateinit var cameraCoordinator: ContributionCameraCoordinator
+
+    @Inject
+    lateinit var contributionImagePicker: ContributionImagePicker
+
+    @Inject
+    lateinit var uploadCoordinator: ContributionUploadCoordinator
 
     @Inject
     lateinit var wikidataEditListener: WikidataEditListener
@@ -285,12 +295,12 @@ class NearbyParentFragment :
 
     private val galleryPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         // Handle the result from the gallery
-                        controller?.onPictureReturnedFromGallery(
+                        contributionImagePicker.onPictureReturnedFromGallery(
                             result,
                             requireActivity(),
                             callbacks,
@@ -302,12 +312,12 @@ class NearbyParentFragment :
 
     private val customSelectorLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         if (result != null) {
-                            controller?.onPictureReturnedFromCustomSelector(
+                            FilePicker.onPictureReturnedFromCustomSelector(
                                 result,
                                 requireActivity(),
                                 callbacks,
@@ -320,12 +330,12 @@ class NearbyParentFragment :
 
     private val cameraPickLauncherForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            controller?.handleActivityResultWithCallback(
+            uploadCoordinator.handleActivityResultWithCallback(
                 requireActivity(),
                 object : FilePicker.HandleActivityResult {
                     override fun onHandleActivityResult(callbacks: FilePicker.Callbacks) {
                         if (result != null) {
-                            controller?.onPictureReturnedFromCamera(
+                            FilePicker.onPictureReturnedFromCamera(
                                 result,
                                 requireActivity(),
                                 callbacks,
@@ -415,6 +425,15 @@ class NearbyParentFragment :
         val showInExploreButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_show_in_explore)
         val saveAsGPXButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_gpx)
         val saveAsKMLButton = menu.findItem(fr.free.nrw.commons.R.id.list_item_kml)
+        val onlyNeedsPhotoButton = menu.findItem(fr.free.nrw.commons.R.id.item_only_needs_photo)
+        showOnlyNeedsPhotoState(onlyNeedsPhotoButton)
+        onlyNeedsPhotoButton.setOnMenuItemClickListener {
+            NearbyFilterState.setNeedPhotoSelected(!NearbyFilterState.getInstance().isNeedPhotoSelected)
+            showOnlyNeedsPhotoState(it)
+            setFilterState()
+            presenter?.onOnlyNeedsPhotoChanged()
+            true
+        }
         refreshButton.setOnMenuItemClickListener {
             runNearbyMenuAction { emptyCache() }
             false
@@ -451,6 +470,17 @@ class NearbyParentFragment :
         }
     }
 
+    /** Shows a red pin when only places without a picture are shown, red and green pins otherwise. */
+    private fun showOnlyNeedsPhotoState(item: MenuItem) {
+        if (NearbyFilterState.getInstance().isNeedPhotoSelected) {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_red_pin)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_all_places)
+        } else {
+            item.setIcon(fr.free.nrw.commons.R.drawable.ic_nearby_all_pins)
+            item.setTitle(fr.free.nrw.commons.R.string.nearby_show_only_needs_photo)
+        }
+    }
+
     // Cache and export actions surface all storage failures as IllegalStateException to the menu host.
     @Suppress("TooGenericExceptionCaught")
     private inline fun runNearbyMenuAction(action: () -> Unit) {
@@ -469,23 +499,12 @@ class NearbyParentFragment :
         // Initialize the launcher in the appropriate lifecycle method (e.g., onViewCreated)
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        controller?.handleShowRationaleFlowCameraLocation(
-                            requireActivity(),
-                            inAppCameraLocationPermissionLauncher, // Reference it directly
-                            cameraPickLauncherForResult,
-                        )
-                    } else {
-                        controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                            getString(fr.free.nrw.commons.R.string.in_app_camera_location_permission_denied),
-                        )
-                    }
-                }
+                cameraCoordinator.handleLocationPermissionResult(
+                    requireActivity(),
+                    result,
+                    inAppCameraLocationPermissionLauncher,
+                    cameraPickLauncherForResult,
+                )
             }
         _isDarkTheme = systemThemeUtils?.isDeviceInNightMode() == true
         if (isMonumentsEnabled) {
@@ -677,6 +696,25 @@ class NearbyParentFragment :
     fun addPhotoMarkerIfDepictsMode() {
         if (isDepictsPickerMode) {
             addPhotoMarkers(allPhotoLatLngs!!)
+        }
+    }
+
+    /**
+     * called when new location data is received from Explore map without re-creating the fragment
+     */
+    fun onExploreMapDataReceived(bundle: Bundle) {
+        if (bundle.containsKey("prev_zoom")) {
+            prevZoom = bundle.getDouble("prev_zoom")
+            prevLatitude = bundle.getDouble("prev_latitude")
+            prevLongitude = bundle.getDouble("prev_longitude")
+            if (binding?.map != null) {
+                moveCameraToPosition(GeoPoint(prevLatitude, prevLongitude), prevZoom, 1L)
+            }
+            if (isResumed) {
+                val changeType =
+                    fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED
+                presenter?.updateMapAndList(changeType)
+            }
         }
     }
 
@@ -1000,7 +1038,7 @@ class NearbyParentFragment :
         if (presenter == null) Timber.w("NearbyParentFragment: presenter is null")
         if (applicationKvStore == null) Timber.w("NearbyParentFragment: applicationKvStore is null")
 
-        if (::controller.isInitialized && controller.isInternalUploadInProgress) {
+        if (::uploadCoordinator.isInitialized && uploadCoordinator.isInternalUploadInProgress) {
             return
         }
 
@@ -1067,6 +1105,7 @@ class NearbyParentFragment :
             clearFocus()
 
             imeOptions = imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
+            enableSearchIconFocus(R.string.nearby_filter_search)
         }
         binding!!.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener { v, hasFocus ->
             setLayoutHeightAlignedToWidth(
@@ -1942,6 +1981,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -1952,6 +1992,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -1998,6 +2039,7 @@ class NearbyParentFragment :
                         true,
                         isMonumentsEnabled,
                         customQuery,
+                        isOnlyNeedsPhoto(),
                     )
                 }
 
@@ -2008,6 +2050,7 @@ class NearbyParentFragment :
                 .subscribe(
                     { nearbyPlacesInfo: NearbyPlacesInfo ->
                         if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
+                            showNoPlaces()
                             showErrorMessage(getString(fr.free.nrw.commons.R.string.no_nearby_places_around))
                             setProgressBarVisibility(false)
                             presenter!!.lockUnlockNearby(false)
@@ -2366,8 +2409,9 @@ class NearbyParentFragment :
         val displayNeedsPhoto = false
         val displayWlm = false
         // When selectedLabels is empty, show all places
+        val onlyNeedsPhoto = isOnlyNeedsPhoto()
         if (selectedLabels == null || selectedLabels.size == 0) {
-            replaceMarkerOverlays(NearbyController.markerLabelList)
+            replaceMarkerOverlays(placesToShow(NearbyController.markerLabelList, onlyNeedsPhoto))
             return
         }
         val placeGroupsToShow = ArrayList<MarkerPlaceGroup>()
@@ -2410,7 +2454,7 @@ class NearbyParentFragment :
                 )
             }
         }
-        replaceMarkerOverlays(placeGroupsToShow)
+        replaceMarkerOverlays(placesToShow(placeGroupsToShow, onlyNeedsPhoto))
     }
 
     override fun getCameraTarget(): LatLng? = if (binding!!.map == null) null else mapFocus
@@ -2869,7 +2913,7 @@ class NearbyParentFragment :
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString())
                 storeSharedPrefs(selectedPlace!!)
                 activity?.let {
-                    controller!!.initiateCameraPick(
+                    cameraCoordinator.initiateCameraPick(
                         it,
                         inAppCameraLocationPermissionLauncher,
                         cameraPickLauncherForResult,
@@ -2883,7 +2927,7 @@ class NearbyParentFragment :
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString())
                 storeSharedPrefs(selectedPlace!!)
                 activity?.let {
-                    controller!!.initiateGalleryPick(
+                    contributionImagePicker.initiateGalleryPick(
                         it,
                         galleryPickLauncherForResult,
                         false,
@@ -2898,7 +2942,7 @@ class NearbyParentFragment :
                 storeSharedPrefs(selectedPlace!!)
                 activity?.let {
                     // Pass singleSelection = true for Nearby flow
-                    controller!!.initiateCustomGalleryPickWithPermission(
+                    contributionImagePicker.initiateCustomGalleryPickWithPermission(
                         it,
                         customSelectorLauncherForResult,
                         singleSelection = true,
@@ -3002,7 +3046,7 @@ class NearbyParentFragment :
 
     private fun storeSharedPrefs(selectedPlace: Place) {
         applicationKvStore!!.putJson<Place>(WikidataConstants.PLACE_OBJECT, selectedPlace)
-        controller.isInternalUploadInProgress = true
+        uploadCoordinator.isInternalUploadInProgress = true
         val place =
             applicationKvStore!!.getJson<Place>(WikidataConstants.PLACE_OBJECT, Place::class.java)
 
@@ -3084,6 +3128,16 @@ class NearbyParentFragment :
      * Clears all markers from the map and resets certain map overlays and gestures. After clearing
      * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
      */
+    override fun isOnlyNeedsPhoto(): Boolean =
+        NearbyFilterState.getInstance().isNeedPhotoSelected && !isDepictsPickerMode
+
+    override fun showNoPlaces() {
+        presenter?.placeDetailsLoader?.loadPlacesDataAyncJob?.cancel()
+        NearbyController.markerLabelList.clear()
+        replaceMarkerOverlays(emptyList())
+        updateListFragment(emptyList())
+    }
+
     override fun clearAllMarkers() {
         binding!!.map.overlayManager.clear()
 
@@ -3567,6 +3621,18 @@ class NearbyParentFragment :
          * @return `true` if '(' or ')' is found, `false` otherwise.
          */
         fun containsParentheses(input: String): Boolean = input.contains("(") || input.contains(")")
+
+        /**
+         * Drops the places that already have a picture (green pins) when [onlyNeedsPhoto] is set.
+         */
+        fun placesToShow(
+            placeGroups: List<MarkerPlaceGroup>,
+            onlyNeedsPhoto: Boolean,
+        ): List<MarkerPlaceGroup> =
+            if (onlyNeedsPhoto) {
+                placeGroups.filter { it.place.pic.isNullOrBlank() }
+            } else {
+                placeGroups
+            }
     }
 }
-

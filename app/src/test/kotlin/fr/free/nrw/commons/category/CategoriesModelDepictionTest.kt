@@ -11,6 +11,7 @@ import io.reactivex.subjects.BehaviorSubject
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
 
 /** Verifies that unavailable depiction categories do not discard other upload suggestions. */
 class CategoriesModelDepictionTest {
@@ -86,6 +87,80 @@ class CategoriesModelDepictionTest {
             .assertValue(
                 listOf("Available", "From image", "From location", "From title", "Recent").map { categoryItem(it) },
             ).assertNoErrors()
+    }
+
+    /** A named-category lookup that fails (e.g. a timeout) must not discard the other suggestion sources. */
+    @Test
+    fun failedNamedLookupPreservesOtherSuggestionSources() {
+        whenever(categoryClient.getCategoriesByName("Unreachable", "Unreachable", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("timeout")))
+        stubLookup("Available", listOf(categoryItem("Available")))
+        whenever(gpsCategoryModel.categoriesFromLocation)
+            .thenReturn(BehaviorSubject.createDefault(listOf(categoryItem("From location"))))
+        whenever(categoryDao.recentCategories(CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(listOf(categoryItem("Recent")))
+        val depictions =
+            listOf(
+                depictedItem(commonsCategories = listOf(categoryItem("Unreachable"))),
+                depictedItem(commonsCategories = listOf(categoryItem("Available"))),
+            )
+
+        model
+            .searchAll("", emptyList(), depictions)
+            .test()
+            .assertNoErrors()
+            .assertValue(listOf("Available", "From location", "Recent").map { categoryItem(it) })
+    }
+
+    /** A picture (P18) category lookup that fails must not discard the other suggestion sources. */
+    @Test
+    fun failedImageLookupPreservesOtherSuggestionSources() {
+        whenever(categoryClient.getCategoriesOfImage("image.jpg", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("timeout")))
+        whenever(categoryClient.searchCategories("Photo title", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("From title"))))
+        whenever(gpsCategoryModel.categoriesFromLocation)
+            .thenReturn(BehaviorSubject.createDefault(listOf(categoryItem("From location"))))
+        whenever(categoryDao.recentCategories(CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(listOf(categoryItem("Recent")))
+
+        model
+            .searchAll("", listOf("Photo title"), listOf(depictedItem(imageUrl = "image.jpg")))
+            .test()
+            .assertNoErrors()
+            .assertValue(listOf("From location", "From title", "Recent").map { categoryItem(it) })
+    }
+
+    /** A load that found nothing because a lookup failed (offline, server down) reports the error. */
+    @Test
+    fun aLoadThatFindsNothingReportsTheError() {
+        whenever(categoryClient.searchCategories("Photo title", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("timeout")))
+
+        model
+            .searchAll("", listOf("Photo title"), emptyList())
+            .test()
+            .assertError(IOException::class.java)
+    }
+
+    /** When every lookup fails, the suggestions that don't need the network are still shown. */
+    @Test
+    fun everyLookupFailingStillShowsRecentCategories() {
+        whenever(categoryClient.getCategoriesByName("Unreachable", "Unreachable", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("timeout")))
+        whenever(categoryClient.searchCategories("Photo title", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("timeout")))
+        whenever(categoryDao.recentCategories(CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(listOf(categoryItem("Recent")))
+
+        model
+            .searchAll(
+                "",
+                listOf("Photo title"),
+                listOf(depictedItem(commonsCategories = listOf(categoryItem("Unreachable")))),
+            ).test()
+            .assertNoErrors()
+            .assertValue(listOf(categoryItem("Recent")))
     }
 
     /** Retains the existing first-match behavior and metadata when the lookup is nonempty. */

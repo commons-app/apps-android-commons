@@ -41,10 +41,6 @@
     <item quantity="one">%1$d xubida</item>
     <item quantity="other">%1$d xubíes</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imaxe quedará baxo la llicencia %1$s</item>
-    <item quantity="other">Estes imaxes quedarán baxo la llicencia %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
@@ -80,7 +76,6 @@
   <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
   <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
   <string name="upload_progress_notification_title_start">Xubiendo archivu: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xubida de %1$s</string>
   <string name="upload_paused_notification_title">Actualizando %1$s pausáu</string>

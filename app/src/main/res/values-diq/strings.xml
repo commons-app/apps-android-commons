@@ -36,10 +36,6 @@
     <item quantity="one">%1$d barkerdış</item>
     <item quantity="other">%1$d barkerdışi</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">No resım bınê %1$s de lisans beno</item>
-    <item quantity="other">Nê resımi bınê %1$s de lisans benê</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d biyo bar</item>
     <item quantity="other">%1$d biyo bar</item>
@@ -69,7 +65,6 @@
   <string name="upload_completed_notification_title">%1$s bar bi!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Barkerdışe %1$s sertera</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>

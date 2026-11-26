@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.helper
 import android.net.Uri
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.Mockito.mock
@@ -50,5 +51,16 @@ internal class ImageHelperTest {
     @Test
     fun getIndexList() {
         assertEquals(ArrayList<Int>(listOf(0)), ImageHelper.getIndexList(mockImageList, folderImageList2))
+    }
+
+    /**
+     * Test resolving the remembered layout preference.
+     */
+    @Test
+    fun imageViewModeFromPreferenceValue() {
+        assertEquals(ImageViewMode.GRID, ImageViewMode.from(null))
+        assertEquals(ImageViewMode.GRID, ImageViewMode.from("grid"))
+        assertEquals(ImageViewMode.LIST, ImageViewMode.from("list"))
+        assertEquals(ImageViewMode.GRID, ImageViewMode.from("unknown"))
     }
 }

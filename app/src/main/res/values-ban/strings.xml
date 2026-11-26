@@ -36,9 +36,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="other">Gambar puniki pacang kaicain lisénsi %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d Unggahan</item>
   </plurals>
@@ -70,7 +67,6 @@
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Gecek antuk nyingakin unggahan Ida</string>
   <string name="upload_progress_notification_title_start">Munggahang berkas: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s kaunggah</string>
   <string name="upload_progress_notification_title_finishing">Muputang pangunggahan %1$s</string>
   <string name="upload_failed_notification_title">Ngunggahang %1$s gagal</string>
   <string name="upload_paused_notification_title">Ngunggahin %1$s katunda</string>

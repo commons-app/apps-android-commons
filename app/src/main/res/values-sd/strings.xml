@@ -39,10 +39,6 @@
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ھن عڪس کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
-    <item quantity="other">ھنن عڪسن کي %1$s ھيٺ اجازتنامو ڏنو ويندو</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھ</item>
@@ -74,7 +70,6 @@
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
   <string name="upload_completed_notification_text">پنھنجو چاڙھ ڏسڻ لاءِ ٺونگو ھڻو</string>
   <string name="upload_progress_notification_title_start">فائيل چاڙھيندي: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s چاڙھيندي</string>
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s چاڙھڻ ۾ ناڪام</string>
   <string name="upload_paused_notification_title">%1$s چاڙھ روڪيل</string>

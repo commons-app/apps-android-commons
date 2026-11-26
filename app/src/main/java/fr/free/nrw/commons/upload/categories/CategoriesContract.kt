@@ -73,6 +73,11 @@ interface CategoriesContract {
     interface UserActionListener : BasePresenter<View> {
         fun searchForCategories(query: String)
 
+        /**
+         * Adds the next page of results for the current search to the end of the list
+         */
+        fun loadMoreCategories()
+
         fun verifyCategories()
 
         fun onCategoryItemClicked(categoryItem: CategoryItem)

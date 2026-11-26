@@ -36,24 +36,25 @@ class CommonsUserStats
         }
 
         /**
-         * Current files for [userName], at most [MAX_FALLBACK_UPLOADS]. The count is capped when
-         * more files are left. Contributions requests this on launch, so a prolific uploader must
-         * not page the whole list.
+         * Total uploads for [userName] from the upload log, at most [MAX_FALLBACK_UPLOADS].
+         * Matches uploadsbyuser.py (logging table), including deleted files and reuploads, so the
+         * count stays comparable with deletedUploads when computing the not-reverted percentage.
+         * Contributions requests this on launch, so a prolific uploader must not page the whole list.
          */
         internal fun countUploadsFromCommonsApi(userName: String): UploadCount {
             var uploads = 0
             val hasMoreFiles =
                 queryCommonsApi(
                     mapOf(
-                        "list" to "allimages",
-                        "aiuser" to userName,
-                        "aisort" to "timestamp",
-                        "aiprop" to "timestamp",
-                        "ailimit" to "500",
+                        "list" to "logevents",
+                        "letype" to "upload",
+                        "leuser" to userName,
+                        "leprop" to "ids",
+                        "lelimit" to "500",
                     ),
                     stopAfterBatch = { uploads >= MAX_FALLBACK_UPLOADS },
                 ) { query ->
-                    uploads += query.getAsJsonArray("allimages")?.size() ?: 0
+                    uploads += query.getAsJsonArray("logevents")?.size() ?: 0
                 }
             return if (hasMoreFiles || uploads > MAX_FALLBACK_UPLOADS) {
                 UploadCount(MAX_FALLBACK_UPLOADS, isCapped = true)

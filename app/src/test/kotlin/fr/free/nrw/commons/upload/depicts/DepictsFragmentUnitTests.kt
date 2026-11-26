@@ -103,24 +103,20 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInit() {
-        val method: Method =
-            DepictsFragment::class.java.getDeclaredMethod(
-                "init",
-            )
+        val uiHandler = Whitebox.getInternalState<Any>(fragment, "uiHandler")
+        val method = uiHandler.javaClass.getDeclaredMethod("init")
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(uiHandler)
     }
 
     @Test
     @Throws(Exception::class)
     fun `Test init when media is not null`() {
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method =
-            DepictsFragment::class.java.getDeclaredMethod(
-                "init",
-            )
+        val uiHandler = Whitebox.getInternalState<Any>(fragment, "uiHandler")
+        val method = uiHandler.javaClass.getDeclaredMethod("init")
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(uiHandler)
     }
 
     @Test
@@ -211,13 +207,15 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testSearchForDepictions() {
-        val method: Method =
-            DepictsFragment::class.java.getDeclaredMethod(
+        val searchViewHandler =
+            Whitebox.getInternalState<Any>(fragment, "searchViewHandler")
+        val method =
+            searchViewHandler.javaClass.getDeclaredMethod(
                 "searchForDepictions",
                 String::class.java,
             )
         method.isAccessible = true
-        method.invoke(fragment, "")
+        method.invoke(searchViewHandler, "")
     }
 
     @Test
@@ -235,24 +233,20 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInitRecyclerView() {
-        val method: Method =
-            DepictsFragment::class.java.getDeclaredMethod(
-                "initRecyclerView",
-            )
+        val uiHandler = Whitebox.getInternalState<Any>(fragment, "uiHandler")
+        val method = uiHandler.javaClass.getDeclaredMethod("initRecyclerView")
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(uiHandler)
     }
 
     @Test
     @Throws(Exception::class)
     fun `Test initRecyclerView when media is not null`() {
         Whitebox.setInternalState(fragment, "media", media)
-        val method: Method =
-            DepictsFragment::class.java.getDeclaredMethod(
-                "initRecyclerView",
-            )
+        val uiHandler = Whitebox.getInternalState<Any>(fragment, "uiHandler")
+        val method = uiHandler.javaClass.getDeclaredMethod("initRecyclerView")
         method.isAccessible = true
-        method.invoke(fragment)
+        method.invoke(uiHandler)
     }
 
     @Test

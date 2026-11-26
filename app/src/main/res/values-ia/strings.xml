@@ -38,10 +38,6 @@
     <item quantity="one">%1$d incargamento</item>
     <item quantity="other">%1$d incargamentos</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Iste imagine essera licentiate sub %1$s</item>
-    <item quantity="other">Iste imagines essera licentiate sub %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d incargamento</item>
     <item quantity="other">%1$d incargamentos</item>
@@ -81,7 +77,6 @@
   <string name="upload_completed_notification_title">%1$s incargate!</string>
   <string name="upload_completed_notification_text">Tocca pro vider tu incargamento</string>
   <string name="upload_progress_notification_title_start">Incargante le file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s es incargate ora</string>
   <string name="upload_progress_notification_title_finishing">Termina incargar %1$s</string>
   <string name="upload_failed_notification_title">Error incargante %1$s</string>
   <string name="upload_paused_notification_title">Incargamento de %1$s in pausa</string>

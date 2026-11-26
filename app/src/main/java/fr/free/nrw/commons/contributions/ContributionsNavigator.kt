@@ -90,7 +90,10 @@ class ContributionsNavigator :
     /** Returns to the contributions list from media details. */
     override fun backButtonClicked(): Boolean {
         if (fragment.mediaDetailPagerFragment != null && fragment.mediaDetailPagerFragment!!.isVisible) {
-            if (fragment.store!!.getBoolean("displayNearbyCardView", true) && !fragment.isUserProfile) {
+            if (fragment.activity !is ProfileActivity &&
+                fragment.store!!.getBoolean("displayNearbyCardView", true) &&
+                !fragment.isUserProfile
+            ) {
                 if (fragment.binding!!.cardViewNearby.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY
                 ) {

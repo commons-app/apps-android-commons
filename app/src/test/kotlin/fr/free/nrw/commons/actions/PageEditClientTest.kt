@@ -2,11 +2,16 @@ package fr.free.nrw.commons.actions
 
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.edit.Edit
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -31,6 +36,18 @@ class PageEditClientTest {
 
     @Mock
     lateinit var entities: Entities
+
+    @Mock
+    lateinit var mwQueryResponse: MwQueryResponse
+
+    @Mock
+    lateinit var mwQueryResult: MwQueryResult
+
+    @Mock
+    lateinit var mwQueryPage: MwQueryPage
+
+    @Mock
+    lateinit var revision: MwQueryPage.Revision
 
     /**
      * initial setup, test environment
@@ -130,6 +147,39 @@ class PageEditClientTest {
             eq("test"),
             eq("test"),
         )
+    }
+
+    /**
+     * test getCurrentWikiText when revisions are null or empty
+     */
+    @Test
+    fun testGetCurrentWikiText_whenRevisionsNull_returnsEmptyString() {
+        whenever(pageEditInterface.getWikiText("test")).thenReturn(Single.just(mwQueryResponse))
+        whenever(mwQueryResponse.query()).thenReturn(mwQueryResult)
+        whenever(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+        whenever(mwQueryPage.revisions()).thenReturn(null)
+
+        pageEditClient
+            .getCurrentWikiText("test")
+            .test()
+            .assertValue("")
+    }
+
+    /**
+     * test getCurrentWikiText when revisions are present
+     */
+    @Test
+    fun testGetCurrentWikiText_whenRevisionsPresent_returnsContent() {
+        whenever(pageEditInterface.getWikiText("test")).thenReturn(Single.just(mwQueryResponse))
+        whenever(mwQueryResponse.query()).thenReturn(mwQueryResult)
+        whenever(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
+        whenever(mwQueryPage.revisions()).thenReturn(listOf(revision))
+        whenever(revision.content()).thenReturn("sample content")
+
+        pageEditClient
+            .getCurrentWikiText("test")
+            .test()
+            .assertValue("sample content")
     }
 
     /**

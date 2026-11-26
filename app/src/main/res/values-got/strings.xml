@@ -42,7 +42,6 @@
   <string name="upload_completed_notification_title">%1$s 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂𐌰𐌽!</string>
   <string name="upload_completed_notification_text">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂 𐌸𐌴𐌹𐌽</string>
   <string name="upload_progress_notification_title_start">𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰 𐍆𐌰𐌾𐌻: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌹𐍂𐌰𐌳𐌰</string>
   <string name="upload_failed_notification_subtitle">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽</string>
   <string name="upload_paused_notification_subtitle">𐌸𐍂𐌿𐌺𐌾𐌰𐌽 𐌳𐌿 𐍃𐌰𐌹𐍈𐌰𐌽</string>
   <string name="title_activity_contributions">𐌰𐍆𐍄𐌿𐌼𐌹𐍃𐍄𐌰 𐌹𐌽𐌽𐌰𐍄𐌱𐌰𐌿𐍂𐌰 𐌼𐌴𐌹𐌽𐌰</string>

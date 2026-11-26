@@ -48,10 +48,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">การอัปโหลด %1$d รายการ</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ภาพนี้จะอยู่ในสัญญาอนุญาต %1$s</item>
-    <item quantity="other">ภาะเหล่านี้จะอยู่อยู่ในสัญญาอนุญาติ %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">สำรวจ</string>
   <string name="preference_category_appearance">การแสดงผล</string>
   <string name="preference_category_general">ทั่วไป</string>
@@ -81,7 +77,6 @@
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">กำลังอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
   <string name="upload_failed_notification_title">อัปโหลดล้มเหลว %1$s</string>
   <string name="upload_paused_notification_title">การอัปโหลด %1$s หยุดชั่วคราว</string>
