@@ -33,6 +33,41 @@ The body should provide a meaningful commit message.
 
 3. Make sure the Wiki pages don't become stale by updating them (if needed)
 
+4. Document every new string for translators
+
+    When you add a string to `app/src/main/res/values/strings.xml` or
+    `values/error.xml`, add a non-empty entry with the same name to the file of
+    the same name in `app/src/main/res/values-qq/`. That folder is not a
+    language: translatewiki.net shows it to translators next to the English
+    text, and they usually translate without seeing the app. If you change what
+    a string means, or add or remove a placeholder, update its qq entry too. If
+    you remove a string, remove its qq entry. Strings with
+    `translatable="false"` don't need one. CI checks all of this.
+
+    A good qq entry says:
+
+    - where the text shows up and what it is (screen title, button, dialog,
+      short pop-up message)
+    - whether a word is a verb, noun or adjective when it could be either, and
+      what an adjective describes
+    - what each placeholder like `%1$s` or `%1$d` stands for, with an example
+      value
+    - which strings it is shown with, linked as
+      `{{msg-wm|Commons-android-strings-<name with spaces instead of underscores>}}`
+    - anything that must not be translated, such as a URL
+
+    translatewiki.net reads qq entries as wikitext, so wrap things like `~~~`
+    in `<nowiki>...</nowiki>`, written as `&lt;nowiki&gt;~~~&lt;/nowiki&gt;`
+    in the XML. Otherwise `~~~` turns into a signature.
+
+    Not helpful: `Button text.`
+
+    Helpful: `Button on the image edit screen. Verb: make the areas the user
+    draws blurry, for example to hide faces.`
+
+    See [Message documentation](https://www.mediawiki.org/wiki/Help:System_message#Message_documentation)
+    for more.
+
 ### Local Validation Before Submitting a Pull Request
 
 Run the checks that are relevant to your changes before opening a pull request.
@@ -129,10 +164,11 @@ the repository's configured rules and the intentional exclusions in
 
 #### How local checks relate to GitHub Actions
 
-The pull request workflow currently validates string-resource XML, runs ktlint
-and Detekt, runs Android Lint for Beta Debug, runs Beta Debug unit tests with
-coverage, and assembles both Beta Debug and Prod Debug APKs. The XML validation
-is an inline GitHub Actions check, not a repository-provided Gradle task.
+The pull request workflow currently validates string-resource XML, checks that
+every translatable string has a qq entry, runs ktlint and Detekt, runs Android
+Lint for Beta Debug, runs Beta Debug unit tests with coverage, and assembles
+both Beta Debug and Prod Debug APKs. The XML validation and the qq check are
+inline GitHub Actions checks, not repository-provided Gradle tasks.
 Instrumentation tests are not currently active in pull request CI. Passing
 local checks is useful, but does not guarantee that every CI check will pass.
 
@@ -157,6 +193,7 @@ local checks is useful, but does not guarantee that every CI check will pass.
 - Run the local checks relevant to your changes and review test failures and
   static-analysis findings.
 - Run `git diff --check` and inspect `git diff`.
+- If you added or changed strings, check that each one has a qq entry.
 - Confirm your changes do not include credentials, local configuration,
   generated build outputs, or unrelated edits.
 

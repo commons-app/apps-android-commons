@@ -36,6 +36,38 @@ jobs:
           done < <(find . -name "strings.xml" -not -path "*/build/*" -print0)
           exit $status
 
+      - name: Check qq documentation
+        run: |
+          # Prints the sorted name attributes matched by an XPath, fails if the file can't be read
+          names() {
+            local out rc=0
+            out=$(xmllint --xpath "$2" "$1") || rc=$?
+            # xmllint exits with 10 when nothing matches, which is fine here
+            if [ "$rc" -ne 0 ] && [ "$rc" -ne 10 ]; then return 1; fi
+            echo "$out" | sed -n 's/.*name="\([^"]*\)".*/\1/p' | sort
+          }
+          status=0
+          for f in strings error; do
+            en="app/src/main/res/values/$f.xml"
+            qq="app/src/main/res/values-qq/$f.xml"
+            # Every translatable string needs a non-empty qq entry, and every qq entry needs a string (see #7425)
+            en_names=$(names "$en" '/resources/*[self::string or self::plurals or self::string-array][not(@translatable="false")]/@name') || { echo "::error file=$en::Could not read string names"; status=1; continue; }
+            all_en=$(names "$en" '/resources/*/@name') || { echo "::error file=$en::Could not read string names"; status=1; continue; }
+            qq_documented=$(names "$qq" '/resources/*[normalize-space()!=""]/@name') || { echo "::error file=$qq::Could not read string names"; status=1; continue; }
+            qq_names=$(names "$qq" '/resources/*/@name') || { echo "::error file=$qq::Could not read string names"; status=1; continue; }
+            missing=$(comm -23 <(echo "$en_names") <(echo "$qq_documented"))
+            unused=$(comm -13 <(echo "$all_en") <(echo "$qq_names"))
+            if [ -n "$missing" ]; then
+              echo "::error file=$qq::Strings with no qq entry or an empty one, see CONTRIBUTING.md:" $missing
+              status=1
+            fi
+            if [ -n "$unused" ]; then
+              echo "::error file=$qq::qq entries with no matching string in $en:" $unused
+              status=1
+            fi
+          done
+          exit $status
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
