@@ -12,6 +12,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -107,6 +108,29 @@ class EditActivity : BaseActivity() {
                 setEditMode(EditMode.BLUR)
             }
         }
+        binding.blurPixelSizeSeek.max = BlurStrength.MAX_PROGRESS
+        binding.blurPixelSizeSeek.progress = BlurStrength.DEFAULT_PROGRESS
+        binding.blurPixelSizeLabel.text =
+            getString(R.string.blur_strength_percent, BlurStrength.DEFAULT_PROGRESS)
+        binding.blurPixelSizeSeek.setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean,
+                ) {
+                    binding.blurPixelSizeLabel.text =
+                        getString(
+                            R.string.blur_strength_percent,
+                            progress.coerceIn(0, BlurStrength.MAX_PROGRESS),
+                        )
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+            },
+        )
         binding.autoblurBtn.setOnClickListener {
             lifecycleScope.launch {
                 // Build and show the progress dialog
@@ -183,6 +207,7 @@ class EditActivity : BaseActivity() {
             EditMode.BLUR -> {
                 // Exit blur mode, restoring the original layout and image view state.
                 binding.blurOverlay.visibility = View.GONE
+                binding.blurPixelSizeLayout.visibility = View.GONE
                 binding.blurOverlay.clearRegions()
                 binding.blurOverlay.resetZoom()
 
@@ -213,6 +238,11 @@ class EditActivity : BaseActivity() {
                 // Hide crop overlay (if visible) to avoid conflict
                 binding.cropOverlay.visibility = View.GONE
                 binding.blurOverlay.visibility = View.VISIBLE
+                binding.blurPixelSizeLayout.visibility = View.VISIBLE
+                // Keep the max privacy default each time blur mode opens.
+                binding.blurPixelSizeSeek.progress = BlurStrength.DEFAULT_PROGRESS
+                binding.blurPixelSizeLabel.text =
+                    getString(R.string.blur_strength_percent, BlurStrength.DEFAULT_PROGRESS)
 
                 // Match the blur overlay size to the ImageView so they share identical bounds.
                 binding.blurOverlay.layoutParams.height = binding.iv.layoutParams.height
@@ -285,7 +315,7 @@ class EditActivity : BaseActivity() {
     }
 
     /**
-     * Applies the blur to the selected regions of the image using Jpegtran.
+     * Applies the blur to the selected regions using the current strength.
      */
     private fun applyBlur() {
         Timber.d(
@@ -299,7 +329,8 @@ class EditActivity : BaseActivity() {
                 vm.originalBitmapWidth,
                 vm.originalBitmapHeight,
             )
-        Timber.d("applyBlur: mappedRegionsCount=${regions.size}")
+        val strength = binding.blurPixelSizeSeek.progress
+        Timber.d("applyBlur: mappedRegionsCount=${regions.size}, strength=$strength")
 
         if (regions.isEmpty()) {
             Toast
@@ -315,7 +346,12 @@ class EditActivity : BaseActivity() {
         setEditMode(EditMode.NONE)
 
         try {
-            vm.blurImage(regions, applicationContext.cacheDir)
+            vm.blurImage(
+                regions,
+                applicationContext.cacheDir,
+                strength,
+                applicationContext,
+            )
             // Apply pending rotation.
             vm.applyPendingRotation(applicationContext.cacheDir)
             // Reload the image displaying the applied blur.

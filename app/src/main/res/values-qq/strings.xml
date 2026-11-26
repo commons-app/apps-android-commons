@@ -400,6 +400,10 @@
   <string name="rotate">Seems to be unused.</string>
   <string name="crop">Button on the image edit screen. Verb: cut the image down to a smaller area.</string>
   <string name="blur">Button on the image edit screen. Verb: make the areas the user draws blurry, for example to hide faces.</string>
+  <string name="blur_strength">Label above the blur strength slider on the image edit screen while {{msg-wm|Commons-android-strings-blur}} mode is open. Noun: how strongly the selected areas will be blurred.</string>
+  <string name="blur_strength_percent">Same label as {{msg-wm|Commons-android-strings-blur strength}}, updated while the user moves the slider. %1$d is the strength as a whole number from 0 to 100, for example 50. The trailing %% becomes a single percent sign in the app.</string>
+  <string name="blur_strength_light">Short label at the left (low) end of the blur strength slider on the image edit screen. Adjective: the lightest blur, where more of the selected area stays recognizable. Shown with {{msg-wm|Commons-android-strings-blur strength max}}.</string>
+  <string name="blur_strength_max">Short label at the right (high) end of the blur strength slider on the image edit screen. Adjective: the strongest blur, which fully hides the selected area. Shown with {{msg-wm|Commons-android-strings-blur strength light}}.</string>
   <string name="autoblur">Button on the image edit screen. Automatically finds faces and license plates in the image and marks them as areas to blur. The user can remove marks before applying the blur.</string>
   <string name="autodetect_title">Title of the progress dialog shown while {{msg-wm|Commons-android-strings-autoblur}} is looking for faces and license plates.</string>
   <string name="autodetect_description">Text in the progress dialog under {{msg-wm|Commons-android-strings-autodetect title}}. The ❌ button is shown on each area marked for blurring and removes that mark before the blur is applied.</string>

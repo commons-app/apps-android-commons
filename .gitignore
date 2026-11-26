@@ -48,3 +48,6 @@ captures/*
 app/jacoco.exec
 app/CommonsContributions
 app/.*
+
+# Local Cursor agent files (may contain credentials)
+.cursor/
