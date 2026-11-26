@@ -35,6 +35,7 @@ You must:
 3. Update or add tests for any functional behavior change
 4. Run build + test commands before producing a final PR output
 5. Generate human-readable commit messages and a complete PR summary
+6. Add a qq entry for every new translatable string in `values/strings.xml` or `values/error.xml`, as described in [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ---
 

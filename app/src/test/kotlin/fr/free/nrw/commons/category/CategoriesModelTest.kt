@@ -17,6 +17,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 
 // class for testing CategoriesModel class
 class CategoriesModelTest {
@@ -281,6 +282,30 @@ class CategoriesModelTest {
             verify(categoryClient).getCategoriesByName(any(), any(), any(), any())
             verify(categoryClient).getCategoriesOfImage(any(), any())
         }
+    }
+
+    @Test
+    fun `one failed caption search keeps the other suggestions`() {
+        whenever(gpsCategoryModel.categoriesFromLocation)
+            .thenReturn(BehaviorSubject.createDefault(listOf(categoryItem("gpsCategory"))))
+        whenever(categoryClient.searchCategories("Olive tree", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Olive trees"))))
+        whenever(categoryClient.searchCategories("Villa Borghese", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.error(IOException("HTTP 429")))
+        whenever(categoryDao.recentCategories(CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(listOf(categoryItem("recentCategories")))
+
+        categoriesModel
+            .searchAll("", listOf("Olive tree", "Villa Borghese"), emptyList())
+            .test()
+            .assertNoErrors()
+            .assertValue(
+                listOf(
+                    categoryItem("gpsCategory"),
+                    categoryItem("Olive trees"),
+                    categoryItem("recentCategories"),
+                ),
+            )
     }
 
     @Test

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTION
 import fr.free.nrw.commons.customselector.helper.ImageSelectionManager
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -54,9 +56,15 @@ class ImageAdapter(
             imageSelectListener,
             imageLoader,
         ),
+    initialViewMode: ImageViewMode = ImageViewMode.GRID,
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>(),
     FastScrollRecyclerView.SectionedAdapter {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
+
+    /**
+     * Currently displayed layout. Changing it does not reset the selection state.
+     */
+    var viewMode: ImageViewMode = initialViewMode
 
     /**
      * ImageSelectedOrUpdated payload class.
@@ -123,15 +131,23 @@ class ImageAdapter(
     private var defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
     private val scope: CoroutineScope = MainScope()
+    private val listItemDetailsBinder = ListItemDetailsBinder(context, scope, ioDispatcher)
 
     /**
      * Create View holder.
      */
+    override fun getItemViewType(position: Int): Int = viewMode.ordinal
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): ImageViewHolder {
-        val itemView = inflater.inflate(R.layout.item_custom_selector_image, parent, false)
+        val itemLayout =
+            when (viewMode) {
+                ImageViewMode.GRID -> R.layout.item_custom_selector_image
+                ImageViewMode.LIST -> R.layout.item_custom_selector_image_list
+            }
+        val itemView = inflater.inflate(itemLayout, parent, false)
         return ImageViewHolder(itemView)
     }
 
@@ -224,6 +240,7 @@ class ImageAdapter(
                         .thumbnail(THUMBNAIL_SIZE_MULTIPLIER)
                         .into(holder.image)
                 }
+                listItemDetailsBinder.bind(holder, position, image, viewMode)
             }
 
             holder.itemView.setOnClickListener {
@@ -399,7 +416,7 @@ class ImageAdapter(
         }
     }
 
-    fun getImageIdAt(position: Int): Long = images.get(position).id
+    val imageIds: List<Long> get() = images.map { it.id }
 
     /**
      * CleanUp function.
@@ -419,6 +436,9 @@ class ImageAdapter(
         private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
+        val imageName: TextView? = itemView.findViewById(R.id.image_name)
+        val imageDetails: TextView? = itemView.findViewById(R.id.image_details)
+        val locationIndicator: ImageView? = itemView.findViewById(R.id.location_indicator)
 
         /**
          * Item selected view.

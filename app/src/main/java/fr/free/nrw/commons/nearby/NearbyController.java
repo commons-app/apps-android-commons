@@ -189,6 +189,23 @@ public class NearbyController extends MapController {
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments, @Nullable final String customQuery)
         throws Exception {
+        return loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
+            searchLatLng, returnClosestResult, checkingAroundCurrentLocation,
+            shouldQueryForMonuments, customQuery, false);
+    }
+
+    /**
+     * Same as above, and when onlyNeedsPhoto is set, places that already have a picture are not
+     * fetched at all.
+     *
+     * @param onlyNeedsPhoto Whether to only fetch places without a picture
+     */
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng currentLatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery,
+        final boolean onlyNeedsPhoto) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -200,7 +217,7 @@ public class NearbyController extends MapController {
 
         List<Place> places = nearbyPlaces.getFromWikidataQuery(currentLatLng, screenTopRight,
             screenBottomLeft, Locale.getDefault().getLanguage(), shouldQueryForMonuments,
-            customQuery);
+            customQuery, onlyNeedsPhoto);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

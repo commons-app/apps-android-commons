@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions
 
-import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
@@ -40,7 +39,15 @@ class ContributionsListFragment :
     ContributionsListAdapter.Callback {
     @JvmField
     @Inject
-    var controller: ContributionController? = null
+    var cameraCoordinator: ContributionCameraCoordinator? = null
+
+    @JvmField
+    @Inject
+    var imagePicker: ContributionImagePicker? = null
+
+    @JvmField
+    @Inject
+    var uploadCoordinator: ContributionUploadCoordinator? = null
 
     @JvmField
     @Inject
@@ -78,10 +85,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromGallery(
+                imagePicker!!.onPictureReturnedFromGallery(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -93,10 +100,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCustomSelector(
+                FilePicker.onPictureReturnedFromCustomSelector(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -108,10 +115,10 @@ class ContributionsListFragment :
         registerForActivityResult<Intent, ActivityResult>(
             StartActivityForResult(),
         ) { result: ActivityResult? ->
-            controller!!.handleActivityResultWithCallback(
+            uploadCoordinator!!.handleActivityResultWithCallback(
                 requireActivity(),
             ) { callbacks: FilePicker.Callbacks? ->
-                controller!!.onPictureReturnedFromCamera(
+                FilePicker.onPictureReturnedFromCamera(
                     result!!,
                     requireActivity(),
                     callbacks!!,
@@ -133,29 +140,13 @@ class ContributionsListFragment :
         }
         inAppCameraLocationPermissionLauncher =
             registerForActivityResult(RequestMultiplePermissions()) { result ->
-                val areAllGranted = result.values.all { it }
-
-                if (areAllGranted) {
-                    controller?.locationPermissionCallback?.onLocationPermissionGranted()
-                } else {
-                    activity?.let { currentActivity ->
-                        if (currentActivity.shouldShowRequestPermissionRationale(
-                                permission.ACCESS_FINE_LOCATION,
-                            )
-                        ) {
-                            controller?.handleShowRationaleFlowCameraLocation(
-                                currentActivity,
-                                inAppCameraLocationPermissionLauncher, // Pass launcher
-                                cameraPickLauncherForResult,
-                            )
-                        } else {
-                            controller?.locationPermissionCallback?.onLocationPermissionDenied(
-                                currentActivity.getString(
-                                    R.string.in_app_camera_location_permission_denied,
-                                ),
-                            )
-                        }
-                    }
+                activity?.let { currentActivity ->
+                    cameraCoordinator?.handleLocationPermissionResult(
+                        currentActivity,
+                        result,
+                        inAppCameraLocationPermissionLauncher,
+                        cameraPickLauncherForResult,
+                    )
                 }
             }
 
@@ -175,7 +166,8 @@ class ContributionsListFragment :
             ContributionsListFabHelper(
                 fragment = this,
                 bindingProvider = { binding },
-                controllerProvider = { controller },
+                cameraCoordinatorProvider = { cameraCoordinator },
+                imagePickerProvider = { imagePicker },
                 launchers = fabLaunchers,
             )
     }

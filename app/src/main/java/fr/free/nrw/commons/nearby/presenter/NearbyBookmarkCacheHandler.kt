@@ -119,10 +119,10 @@ class NearbyBookmarkCacheHandler(
                 }
                 ?: return
 
+        onPlacesShown?.invoke()
         lockNearby?.invoke(false) // So that new location updates wont come
         viewProvider().setProgressBarVisibility(false)
         loadPlacesDataAsync(nearbyPlaceGroups, scope)
-        onPlacesShown?.invoke()
     }
 
     /**

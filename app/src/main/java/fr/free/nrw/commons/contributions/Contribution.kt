@@ -55,6 +55,11 @@ data class Contribution constructor(
      * until captions and depicts are saved too
      */
     var uploadedFilename: String? = null,
+    /**
+     * Time before which a failed upload is not retried automatically, because the server asked to
+     * wait or the last tries failed with a server problem
+     */
+    var retryNotBefore: Date? = null,
 ) : Parcelable {
     fun completeWith(media: Media): Contribution =
         copy(pageId = media.pageId, media = media, state = STATE_COMPLETED, uploadedFilename = null)
