@@ -67,6 +67,21 @@
 * 阿pp
 -->
 <resources>
+  <string name="preference_category_sync">云备份与同步</string>
+  <string name="backup_settings">备份设置到共享资源</string>
+  <string name="backup_settings_summary">将应用设置和书签保存到您在维基共享资源的用户页</string>
+  <string name="restore_settings">从共享资源恢复设置</string>
+  <string name="restore_settings_summary">从您在维基共享资源的用户页恢复应用设置和书签</string>
+  <string name="sync_backup_confirm_title">要备份设置到用户页吗？</string>
+  <string name="sync_backup_confirm_message">这会将您的应用设置和添加到书签的地点（包括坐标）保存到User:%1$s/commons-android-app.json。请注意，维基媒体用户页可公开访问。</string>
+  <string name="sync_backup_success">设置已成功保存到您的用户页！</string>
+  <string name="sync_backup_failed">设置保存失败：%1$s</string>
+  <string name="sync_restore_confirm_title">要从用户页恢复设置吗？</string>
+  <string name="sync_restore_confirm_message">这会恢复您的应用设置，并从User:%1$s/commons-android-app.json中合并添加到书签的地点。</string>
+  <string name="sync_restore_success">设置和书签已成功恢复！</string>
+  <string name="sync_restore_failed">设置恢复失败：%1$s</string>
+  <string name="sync_no_backup_found">未在用户页找到设置备份。</string>
+  <string name="sync_in_progress">正在与维基共享资源同步设置…</string>
   <string name="commons_facebook">共享资源Facebook页面</string>
   <string name="commons_github">共享资源GitHub源代码</string>
   <string name="commons_logo">共享资源标识</string>
@@ -792,6 +807,11 @@
   <string name="custom_selector_duplicates_warning">部分所选图像为重复图像，上传前会将其移除。</string>
   <string name="custom_selector_button_limit_text">最大：%1$d</string>
   <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
+  <string name="custom_selector_switch_to_list_view">切换到列表视图</string>
+  <string name="custom_selector_switch_to_grid_view">切换到网格视图</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">具有位置数据</string>
+  <string name="custom_selector_image_no_location">无位置数据</string>
   <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
@@ -930,6 +950,8 @@
   <string name="caption_copied_to_clipboard">说明已复制到剪贴板</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">恭喜，专辑中的所有图片都已上传或标记为不上传。</string>
   <string name="show_in_explore">在探索中显示</string>
+  <string name="nearby_show_only_needs_photo">仅显示需要照片的地点</string>
+  <string name="nearby_show_all_places">显示所有地点</string>
   <string name="show_in_nearby">显示在附近</string>
   <string name="image_tag_line_created_and_uploaded_by">创建并上传者： %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">由%1$s创建并由%2$s上传</string>
