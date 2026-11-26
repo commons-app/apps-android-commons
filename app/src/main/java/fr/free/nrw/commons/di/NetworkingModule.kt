@@ -12,6 +12,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.PageEditInterface
 import fr.free.nrw.commons.actions.ThanksInterface
+import fr.free.nrw.commons.auth.OAuthTokenInterceptor
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.CsrfTokenInterface
@@ -69,36 +70,11 @@ class NetworkingModule {
             .writeTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(ForceCacheInterceptor())
-            .addInterceptor { chain ->
-                val request = chain.request()
-                val requestBuilder = request.newBuilder()
-                val accessToken = sessionManager.getAccessToken()
-
-                if (shouldAttachOAuthToken(request, accessToken)) {
-                    requestBuilder.header("Authorization", "Bearer $accessToken")
-                }
-                chain.proceed(requestBuilder.build())
-            }.addInterceptor(CommonHeaderRequestInterceptor())
+            .addInterceptor(OAuthTokenInterceptor(sessionManager))
+            .addInterceptor(CommonHeaderRequestInterceptor())
             .readTimeout(120, TimeUnit.SECONDS)
             .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))
             .build()
-
-    private fun shouldAttachOAuthToken(
-        request: okhttp3.Request,
-        accessToken: String?,
-    ): Boolean {
-        if (accessToken.isNullOrEmpty() || request.header("Authorization") != null) {
-            return false
-        }
-        val allowedHosts =
-            setOfNotNull(
-                BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
-                BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
-                "meta.wikimedia.org",
-                "meta.wikimedia.beta.wmflabs.org",
-            )
-        return request.url.isHttps && request.url.host in allowedHosts
-    }
 
     @Provides
     @Singleton
