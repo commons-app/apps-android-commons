@@ -62,12 +62,6 @@
     <item quantity="many">%1$d העלאות</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">התמונה הזאת תפורסם ברישיון %1$s</item>
-    <item quantity="two">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="many">התמונות האלה תפורסמנה ברישיון %1$s</item>
-    <item quantity="other">התמונות האלה תפורסמנה ברישיון %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">העלאה אחת</item>
     <item quantity="two">%1$d העלאות</item>
@@ -111,9 +105,10 @@
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
   <string name="upload_completed_notification_text">נא ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">העלאת קובץ: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
   <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
+  <string name="upload_metadata_pending_notification_title">הקובץ %1$s הועלה, אך הכיתובים והמידע על הפריטים המתוארים בו טרם נשמרו</string>
+  <string name="upload_metadata_pending">הקובץ הועלה, אך הכיתובים והמידע על הפריטים המתוארים בו טרם נשמרו</string>
   <string name="upload_paused_notification_title">ההעלאה של %1$s הושהתה</string>
   <string name="upload_failed_notification_subtitle">לחץ כדי להציג</string>
   <string name="upload_paused_notification_subtitle">יש לגעת כדי לראות</string>
@@ -132,6 +127,10 @@
   <string name="menu_view_file_page">הצגת דף קובץ</string>
   <string name="share_title_hint">כיתוב (נדרש)</string>
   <string name="add_caption_toast">נא לרשום כיתוב לקובץ הזה</string>
+  <string name="file_name_blacklisted_toast">ויקישיתוף אינו מקבל את שם הקובץ הזה. יש להשתמש בכיתוב מפורט יותר.</string>
+  <string name="file_name_too_long_toast">הכיתוב הזה ארוך מדי לשימוש כשם קובץ. יש לקצר אותו.</string>
+  <string name="file_name_invalid_toast">לא ניתן להשתמש בכיתוב הזה כשם קובץ בוויקישיתוף. יש לשנות אותו.</string>
+  <string name="file_name_banned_extension_toast">הכיתוב הזה מכיל סיומת קובץ כגון \".com\". יש לשנות אותו.</string>
   <string name="share_description_hint">תיאור</string>
   <string name="share_caption_hint">כיתוב</string>
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
@@ -151,6 +150,7 @@
   <string name="refresh_button">ריענון</string>
   <string name="display_list_button">רשימה</string>
   <string name="contributions_subtitle_zero">(לא הועלה עדיין שום דבר)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="depictions_not_found">לא נמצאו פריטי ויקינתונים שמתאימים לחיפוש %1$s</string>
   <string name="no_child_classes">ל%1$s אין מחלקות יורשות</string>
@@ -246,6 +246,12 @@
   <string name="media_detail_license">רישיון</string>
   <string name="media_detail_coordinates">נקודות ציון</string>
   <string name="media_detail_coordinates_empty">לא סופקו</string>
+  <string name="playback_quality">איכות הניגון</string>
+  <string name="original">מקורי</string>
+  <string name="video_quality">איכות הווידאו</string>
+  <string name="video_quality_auto">אוטומטי</string>
+  <string name="video_quality_higher">איכות תמונה גבוהה יותר</string>
+  <string name="video_quality_data_saver">חיסכון בנתונים</string>
   <string name="become_a_tester_title">להפוך לבודק בטא</string>
   <string name="become_a_tester_description">להירשם לערוץ הבטא שלנו בחנות גוגל Play ולקבל גישה מוקדמת לאפשרויות חדשות ותיקוני באגים</string>
   <string name="_2fa_code">קוד אימות דו־שלבי</string>
@@ -302,6 +308,13 @@
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">העמדה למחיקה</string>
   <string name="nominated_for_deletion">התמונה הזאת מועמדת למחיקה.</string>
+  <string name="file_deleted_from_commons">הקובץ הזה נמחק מוויקישיתוף.</string>
+  <string name="contribution_deleted">נמחק</string>
+  <string name="deleted_file_activity_title">הקובץ נמחק</string>
+  <string name="deleted_file_explanation">ויקישיתוף מוחק קבצים שאינם בעלי ערך חינוכי או שמפרים את כללי האתר, לרבות הפרות של זכויות יוצרים. יש להעלות תמונות שצולמו באופן עצמאי. תמונות שהועתקו מהאינטרנט, צילומי מסך, סמלי לוגו וכרזות הם סיבות נפוצות להסרת קבצים.</string>
+  <string name="deleted_file_view_page">הצגת דף הקובץ</string>
+  <string name="deleted_file_view_discussion">קריאת דיון המחיקה</string>
+  <string name="deleted_file_policies">מדיניות והנחיות ויקישיתוף</string>
   <string name="nominated_see_more">ר\' את האתר לפרטים</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
@@ -315,6 +328,7 @@
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="location_permission_rationale_explore">נדרשת הרשאה כדי להציג רשימה של תמונות בסביבה</string>
+  <string name="nearby_bookmark">הוספה לסימניות</string>
   <string name="nearby_directions">כיוונים</string>
   <string name="nearby_wikidata">ויקינתונים</string>
   <string name="nearby_wikipedia">ויקיפדיה</string>
@@ -421,6 +435,7 @@
   <string name="images_used_explanation">מספר התמונות שהעלית לוויקישיתוף ושמשמשות בערכים בוויקיפדיה</string>
   <string name="error_occurred">אירעה שגיאה!</string>
   <string name="notifications_channel_name_all">התראה מוויקישיתוף</string>
+  <string name="notifications_channel_name_uploads">התקדמות ההעלאה</string>
   <string name="preference_author_name_toggle">שימוש בשם יוצר מותאם אישית</string>
   <string name="preference_author_name_toggle_summary">שימוש בשם יוצר בהתאמה אישית במקום בשם המשתמש שלך בעת העלאת תמונות</string>
   <string name="preference_author_name">שם יוצר מותאם אישית</string>
@@ -698,6 +713,9 @@
   <string name="resuming_upload">ההעלאה ממשיכה…</string>
   <string name="pausing_upload">ההעלאה מושהית…</string>
   <string name="cancelling_upload">ביטול ההעלאה...</string>
+  <string name="retrying_upload">מנסה להעלות שוב…</string>
+  <string name="retrying_failed_uploads">מתבצעים ניסיונות חוזרים להעלאת כל הקבצים שהעלאתם נכשלה…</string>
+  <string name="upload_failed_server_error">ויקישיתוף אינו יכול לטפל בבקשה כרגע. יש לנסות שוב מאוחר יותר. (HTTP %1$d)</string>
   <string name="cancel_upload">ביטול ההעלאה</string>
   <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות והן תימשכנה לאחר השבתת המצב הזה.</string>
   <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
@@ -837,7 +855,8 @@
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
   <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
-  <string name="nearby_wikitalk">דווח על בעיה בפריט הזה לוויקינתונים</string>
+  <string name="nearby_report_problem">דווח על בעיה בפריט הזה לוויקינתונים</string>
+  <string name="nearby_report_problem_short">דיווח על בעיה</string>
   <string name="please_enter_some_comments">נא להזין הערות כלשהן</string>
   <string name="talk">שיחה</string>
   <string name="write_something_about_the_item">נא לכתוב משהו על פריט \"%1$s\". זה יוצג לציבור.</string>
@@ -866,6 +885,10 @@
   <string name="green_pin">למקום הזה כבר יש תמונה.</string>
   <string name="grey_pin">עכשיו מתבצעת בדיקה האם למקום הזה יש תמונה.</string>
   <string name="error_while_loading">אירעה שגיאה בעת טעינה</string>
+  <string name="play_video">הפעלת סרטון</string>
+  <string name="play_audio">השמעה</string>
+  <string name="video_unavailable">הסרטון אינו זמין. יש להקיש כדי לנסות שוב.</string>
+  <string name="audio_unavailable">השמע אינו זמין. יש להקיש כדי לנסות שוב.</string>
   <string name="no_usages_found">לא נמצאו שימושים</string>
   <string name="usages_on_commons_heading">ויקישיתוף</string>
   <string name="usages_on_other_wikis_heading">אתרי ויקי אחרים</string>
@@ -884,6 +907,7 @@
   <string name="image_tag_line_created_by_and_uploaded_by">נוצר על־ידי %1$s והועלה על־ידי %2$s</string>
   <string name="nominated_for_deletion_btn">הועמדה למחיקה</string>
   <string name="custom_selector_max_image_limit_reached">אפשר לבחור עד %d תמונות.</string>
+  <string name="upload_limit_exceeded">רק %1$d התמונות הראשונות יועלו.</string>
   <string name="edit_unsupported_format_explanation">עריכה פנימית ביישום זמינה רק לקובצי JPEG. Dad l כדי לערוך תסדירים אחרים, נא להשתמש בכלים חיצוניים.</string>
   <string name="license_cc0_description">אין זכויות יוצרים. ויתרת על כל הזכויות כך שכולם יכולים להשתמש ביצירה הזאת כראות עיניהם.</string>
   <string name="license_cc_by_description">ייחוס. אחרים רשאים לשתף ולבצע התאמות כל עוד הם מודים לך.</string>
@@ -896,4 +920,8 @@
   <string name="error_applying_blur">שגיאה בהחלת טשטוש</string>
   <string name="failed_to_apply_crop">החלת חיתוך נכשלה</string>
   <string name="failed_to_save_image">שמירת התמונה נכשלה</string>
+  <string name="unsupported_format_title">פורמט לא נתמך</string>
+  <string name="unsupported_format_desc">לא ניתן לפתוח את הקבצים שנבחרו. ויקישיתוף מאפשר העלאת קבצים בפורמטים הבאים בלבד:\n\n%s</string>
+  <string name="unsupported_files_skipped_title">דולגו קבצים בפורמטים לא נתמכים</string>
+  <string name="unsupported_files_skipped_desc">המערכת דילגה על חלק מהקבצים משום שהפורמט שלהם אינו נתמך. האפליקציה תמשיך להעלות את הקבצים הנותרים שתואמים לפורמטים הנתמכים הבאים:\n\n%s</string>
 </resources>

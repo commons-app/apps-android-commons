@@ -3,11 +3,10 @@ package fr.free.nrw.commons.explore
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource
 import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
-import io.reactivex.processors.PublishProcessor
+import io.reactivex.processors.BehaviorProcessor
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert
 import org.junit.Before
@@ -19,10 +18,7 @@ import org.mockito.MockitoAnnotations
 
 class PagingDataSourceFactoryTest {
     @Mock
-    private lateinit var depictsClient: DepictsClient
-
-    @Mock
-    private lateinit var loadingStates: PublishProcessor<LoadingState>
+    private lateinit var loadingStates: BehaviorProcessor<LoadingState>
     private lateinit var factory: PagingDataSourceFactory<String>
 
     private var function: (Int, Int) -> List<String> = mock()

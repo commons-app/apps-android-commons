@@ -51,10 +51,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d tập tin đã tải lên</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Hình này sẽ được phát hành theo giấy phép %1$s</item>
-    <item quantity="other">Những hình này sẽ được phát hành theo giấy phép %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">Tải lên %1$d</item>
   </plurals>
@@ -87,7 +83,6 @@
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
   <string name="upload_progress_notification_title_start">Đang tải tập tin lên: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Đang tải lên tập tin %1$s</string>
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Không thể tải lên tập tin %1$s</string>
   <string name="upload_paused_notification_title">Đã tạm dừng tải lên %1$s</string>
@@ -597,7 +592,7 @@
   <string name="saving_kml_file">Đang lưu dưới dạng tập tin KML...</string>
   <string name="saving_gpx_file">Đang lưu dưới dạng tập tin GPX...</string>
   <string name="multiple_files_depiction_header">Lưu ý về việc tải lên nhiều tập tin cùng lúc</string>
-  <string name="nearby_wikitalk">Báo cáo sự cố về mục này cho Wikidata</string>
+  <string name="nearby_report_problem">Báo cáo sự cố về mục này cho Wikidata</string>
   <string name="talk">Thảo luận</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Bạn có chắc muốn hủy tất cả các tác vụ đang tải lên không?</string>
   <string name="cancelling_all_the_uploads">Đang hủy tất cả tác vụ tải lên...</string>

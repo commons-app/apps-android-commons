@@ -58,10 +58,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">この画像は%1$sライセンスのもとにアップロードされます</item>
-    <item quantity="other">これらの画像は%1$sライセンスのもとにアップロードされます</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
@@ -99,7 +95,6 @@
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
   <string name="upload_progress_notification_title_start">アップロードを開始中: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_paused_notification_title">%1$sのアップロードに失敗しました</string>
@@ -762,7 +757,7 @@
   </plurals>
   <string name="multiple_files_depiction">複数アップロードではすべての画像が同一のカテゴリおよび題材となります。画像が題材およびカテゴリを共有していない場合、個別のアップロードを複数実施してください。</string>
   <string name="multiple_files_depiction_header">複数アップロードに関する注記</string>
-  <string name="nearby_wikitalk">この項目に関する問題をウィキデータに報告</string>
+  <string name="nearby_report_problem">この項目に関する問題をウィキデータに報告</string>
   <string name="please_enter_some_comments">コメントを入力してください</string>
   <string name="talk">トーク</string>
   <string name="other_problem_or_information_please_explain_below">その他の問題または情報 (以下に説明してください)。</string>

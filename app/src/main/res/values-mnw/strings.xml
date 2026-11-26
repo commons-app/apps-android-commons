@@ -21,10 +21,6 @@
     <item quantity="one">%1$d ပတိုန်ပၠုပ်</item>
     <item quantity="other">%1$d ပတိုန်ပၠုပ်</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ဗီုရုပ်ဏအ်ဂှ် မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵုသၟဝ် %1$s</item>
-    <item quantity="other">ဗီုရုပ်တအ်ဝွံ မကဵုလဝ် အခေါင်လာင်ဇြေန် နကဵု သၟဝ် %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">စဳစောတ်</string>
   <string name="preference_category_appearance">မံက်ပြာကတ်</string>
   <string name="preference_category_general">နာနာ</string>
@@ -49,7 +45,6 @@
   <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
   <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">စဒၟံင် %1$s ပတိုန်ပၠုပ်။</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ပတိုန်ပၠုပ်ဒၟံင်</string>
   <string name="upload_progress_notification_title_finishing">ပတုဲဒၟံင် ပတိုန်ပၠုပ် %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">ပတိုန်ပၠုပ် %1$s ဟွံအံင်ဇၞး</string>
   <string name="upload_failed_notification_subtitle">ဒၞာဲ သွက်ကလေင်ရံင်</string>
@@ -268,6 +263,8 @@
   <string name="images_uploaded">ဗီုရုပ် မတိုန်လဝ်</string>
   <string name="contributions_fragment">ကမၠောန်ဂမၠိုင်</string>
   <string name="list_sheet">စရၚ်</string>
+  <string name="no_notification">ပရေၚ်ကဵုသမ္တီဟွံဂွံဗှ်ဏီဟၟဲ။</string>
+  <string name="no_read_notification">ပရေၚ်ကဵုသမ္တီဟွံဂွံဗှ်ဏီဟၟဲ။</string>
   <string name="title_page_bookmarks_items">ပိုတ်ဂမၠိုၚ်</string>
   <string name="custom_selector_empty_text">ဗီုရုပ် ဟွံမွဲ</string>
   <string name="done">တုဲဒှ်</string>

@@ -57,10 +57,6 @@
     <item quantity="one">%1$d envio</item>
     <item quantity="other">%1$d envios</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imagem será licenciada com a %1$s</item>
-    <item quantity="other">Estas imagens serão licenciadas com a %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d envio</item>
     <item quantity="other">%1$d envios</item>
@@ -100,7 +96,6 @@
   <string name="upload_completed_notification_title">%1$s enviado!</string>
   <string name="upload_completed_notification_text">Toque para ver o seu envio</string>
   <string name="upload_progress_notification_title_start">A enviar o ficheiro %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">A enviar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o envio de %1$s</string>
   <string name="upload_failed_notification_title">O envio de %1$s falhou</string>
   <string name="upload_paused_notification_title">Envio de %1$s pausado</string>
@@ -799,7 +794,7 @@
     <item quantity="other">%1$d imagens selecionadas</item>
   </plurals>
   <string name="multiple_files_depiction_header">Nota sobre múltiplos envios</string>
-  <string name="nearby_wikitalk">Reporte um problema sobre este item no Wikidata</string>
+  <string name="nearby_report_problem">Reporte um problema sobre este item no Wikidata</string>
   <string name="please_enter_some_comments">Por favor, insira alguns comentários</string>
   <string name="talk">Discussão</string>
   <string name="other_problem_or_information_please_explain_below">Outro problema ou informação (por favor, explique em baixo).</string>

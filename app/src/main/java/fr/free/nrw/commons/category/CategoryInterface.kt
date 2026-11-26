@@ -18,7 +18,8 @@ interface CategoryInterface {
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=description|" +
+            "pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
     )
     fun searchCategories(
         @Query("gsrsearch") filter: String?,
@@ -27,19 +28,41 @@ interface CategoryInterface {
     ): Single<MwQueryResponse>
 
     /**
-     * Searches for categories starting with the specified prefix.
+     * Same search as [searchCategories], but also asks for categoryinfo so hidden categories
+     * can be dropped. Used by the upload category search.
+     *
+     * @param filter    The string to be searched
+     * @param itemLimit How many results are returned
+     * @param continuation The continuation of the previous page, empty for the first one
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=search&prop=categoryinfo|" +
+            "description|pageimages&piprop=thumbnail&pithumbsize=70&gsrnamespace=14",
+    )
+    fun searchCategoriesWithInfo(
+        @Query("gsrsearch") filter: String?,
+        @Query("gsrlimit") itemLimit: Int,
+        @QueryMap continuation: Map<String, String>,
+    ): Single<MwQueryResponse>
+
+    /**
+     * Searches for categories starting with the specified prefix. Uses the search index behind
+     * the Commons search box, which ignores case, so "supermarkets in tokyo" finds
+     * "Supermarkets in Tokyo".
      *
      * @param prefix    The string to be searched
      * @param itemLimit How many results are returned
+     * @param continuation The continuation of the previous page, empty for the first one
      * @return
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        "w/api.php?action=query&format=json&formatversion=2&generator=prefixsearch&gpsnamespace=14&" +
+            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun searchCategoriesForPrefix(
-        @Query("gapprefix") prefix: String?,
-        @Query("gaplimit") itemLimit: Int,
-        @Query("gapoffset") offset: Int,
+        @Query("gpssearch") prefix: String?,
+        @Query("gpslimit") itemLimit: Int,
+        @QueryMap continuation: Map<String, String>,
     ): Single<MwQueryResponse>
 
     /**
@@ -52,7 +75,8 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70",
+        "w/api.php?action=query&format=json&formatversion=2&generator=allpages&gapnamespace=14&" +
+            "prop=description|pageimages&piprop=thumbnail&pithumbsize=70",
     )
     fun getCategoriesByName(
         @Query("gapfrom") startingCategory: String?,
@@ -69,14 +93,18 @@ interface CategoryInterface {
      * @return MwQueryResponse
      */
     @GET(
-        "w/api.php?action=query&format=json&formatversion=2&generator=categories&prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
+        "w/api.php?action=query&format=json&formatversion=2&generator=categories&" +
+            "prop=categoryinfo|description|pageimages&piprop=thumbnail&pithumbsize=70&gclshow=!hidden",
     )
     fun getCategoriesByTitles(
         @Query("titles") titles: String?,
         @Query("gcllimit") itemLimit: Int,
     ): Single<MwQueryResponse>
 
-    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=subcat&prop=info&gcmlimit=50")
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&" +
+            "gcmtype=subcat&prop=info&gcmlimit=50",
+    )
     fun getSubCategoryList(
         @Query("gcmtitle") categoryName: String,
         @QueryMap(encoded = true) continuation: Map<String, String>,

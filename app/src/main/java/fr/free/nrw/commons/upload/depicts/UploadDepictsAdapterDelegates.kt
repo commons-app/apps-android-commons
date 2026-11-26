@@ -35,11 +35,11 @@ fun uploadDepictsDelegate(
         }
         binding.depictsLabel.text = item.name
         binding.description.text = item.description
-        val imageUrl = item.imageUrl
-        if (TextUtils.isEmpty(imageUrl)) {
+        val thumbnailUrl = item.thumbnailUrl
+        if (TextUtils.isEmpty(thumbnailUrl)) {
             binding.depictedImage.setActualImageResource(R.drawable.ic_wikidata_logo_24dp)
         } else {
-            binding.depictedImage.setImageURI(Uri.parse(imageUrl))
+            binding.depictedImage.setImageURI(Uri.parse(thumbnailUrl))
         }
     }
 }

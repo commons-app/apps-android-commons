@@ -37,9 +37,6 @@ class ZoomableActivityUnitTests {
     @Mock
     private lateinit var uri: Uri
 
-    @Mock
-    private lateinit var images: ArrayList<Image>
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)

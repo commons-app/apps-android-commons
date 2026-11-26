@@ -2,6 +2,7 @@ package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.mwapi.MwErrorResponse
@@ -9,6 +10,8 @@ import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import fr.free.nrw.commons.wikidata.mwapi.MwLegacyServiceError
 import okhttp3.Cache
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.CacheControl
+import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -23,6 +26,10 @@ object OkHttpConnectionFactory {
     private const val CACHE_DIR_NAME = "okhttp-cache"
     private const val NET_CACHE_SIZE = (64 * 1024 * 1024).toLong()
 
+    /**
+     * Keeps its name: renaming it would change the public API used in tests (such as MockWebServerTest).
+     */
+    @Suppress("ktlint:standard:property-naming")
     @VisibleForTesting
     var CLIENT: OkHttpClient? = null
 
@@ -33,28 +40,32 @@ object OkHttpConnectionFactory {
         return CLIENT!!
     }
 
-    private fun createClient(cookieJar: CommonsCookieJar): OkHttpClient {
-        return OkHttpClient.Builder()
+    private fun createClient(cookieJar: CommonsCookieJar): OkHttpClient =
+        OkHttpClient
+            .Builder()
             .cookieJar(cookieJar)
             .cache(
-                if (CommonsApplication.instance != null) Cache(
-                    File(CommonsApplication.instance.cacheDir, CACHE_DIR_NAME),
-                    NET_CACHE_SIZE
-                ) else null
-            )
-            .connectTimeout(120, TimeUnit.SECONDS)
+                if (CommonsApplication.instance != null) {
+                    Cache(
+                        File(CommonsApplication.instance.cacheDir, CACHE_DIR_NAME),
+                        NET_CACHE_SIZE,
+                    )
+                } else {
+                    null
+                },
+            ).connectTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                setLevel(HttpLoggingInterceptor.Level.BASIC)
-                redactHeader("Authorization")
-                redactHeader("Cookie")
-            })
-            .addInterceptor(OAuthTokenInterceptor())
+
+            .addInterceptor(
+                HttpLoggingInterceptor()
+                    .apply { level = HttpLoggingInterceptor.Level.BASIC }
+                    .redactSensitiveHeaders(),
+            ).addInterceptor(OAuthTokenInterceptor())
+            .addInterceptor(ForceCacheInterceptor())
             .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
-    }
 }
 
 class OAuthTokenInterceptor : Interceptor {
@@ -88,17 +99,65 @@ class OAuthTokenInterceptor : Interceptor {
 class CommonHeaderRequestInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request().newBuilder()
-            .header("User-Agent", CommonsApplication.instance.userAgent)
-            .build()
+        val request =
+            chain
+                .request()
+                .newBuilder()
+                .header("User-Agent", CommonsApplication.instance.userAgent)
+                .build()
         return chain.proceed(request)
     }
+}
+
+private const val OFFLINE_CACHE_MAX_STALE_DAYS = 7
+
+class ForceCacheInterceptor : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val appInstance =
+            try {
+                CommonsApplication.instance
+            } catch (_: Exception) {
+                null
+            }
+
+        if (shouldForceCache(appInstance, request)) {
+            val offlineRequest =
+                request
+                    .newBuilder()
+                    .cacheControl(
+                        CacheControl
+                            .Builder()
+                            .onlyIfCached()
+                            .maxStale(OFFLINE_CACHE_MAX_STALE_DAYS, TimeUnit.DAYS)
+                            .build(),
+                    ).build()
+            return chain.proceed(offlineRequest)
+        }
+        return chain.proceed(request)
+    }
+
+    private fun shouldForceCache(
+        appInstance: CommonsApplication?,
+        request: Request,
+    ): Boolean =
+        appInstance != null &&
+            request.method.equals("GET", ignoreCase = true) &&
+            !NetworkUtils.isInternetConnectionEstablished(appInstance) &&
+            isExploreRequest(request.url.toString())
+
+    private fun isExploreRequest(url: String): Boolean =
+        url.contains("generator=categorymembers") ||
+            url.contains("generator=search") ||
+            url.contains("generator=allimages") ||
+            url.contains("generator=geosearch") ||
+            url.contains("action=wbgetentities")
 }
 
 private const val SUPPRESS_ERROR_LOG = "x-commons-suppress-error-log"
 const val SUPPRESS_ERROR_LOG_HEADER: String = "$SUPPRESS_ERROR_LOG: true"
 
-private class UnsuccessfulResponseInterceptor : Interceptor {
+internal class UnsuccessfulResponseInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val rq = chain.request()
@@ -106,9 +165,11 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
         // If the request contains our special "suppress errors" header, make note of it
         // but don't pass that on to the server.
         val suppressErrors = rq.headers.names().contains(SUPPRESS_ERROR_LOG)
-        val request = rq.newBuilder()
-            .removeHeader(SUPPRESS_ERROR_LOG)
-            .build()
+        val request =
+            rq
+                .newBuilder()
+                .removeHeader(SUPPRESS_ERROR_LOG)
+                .build()
 
         val rsp = chain.proceed(request)
 
@@ -120,19 +181,21 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
             try {
                 rsp.peekBody(ERRORS_PREFIX.length.toLong()).use { responseBody ->
                     if (ERRORS_PREFIX == responseBody.string()) {
-                        rsp.body.use { body ->
-                            val bodyString = body!!.string()
-                            
-                            val errorResponse = GsonUtil.defaultGson.fromJson(
+                        // Read a copy of the body, so that the caller can still read it. With
+                        // errorformat=plaintext the JSON has "errors" instead of "error", which
+                        // is not handled here but by MwResponse when the caller reads the body.
+                        val bodyString = rsp.peekBody(MAX_ERROR_BODY_BYTES).string()
+
+                        val errorResponse =
+                            GsonUtil.defaultGson.fromJson(
                                 bodyString,
-                                MwErrorResponse::class.java
+                                MwErrorResponse::class.java,
                             )
-                            if (errorResponse?.error != null) {
-                                throw MwIOException(
-                                    "MediaWiki API returned error: $bodyString",
-                                    errorResponse.error
-                                )
-                            }
+                        if (errorResponse?.error != null) {
+                            throw MwIOException(
+                                "MediaWiki API returned error: $bodyString",
+                                errorResponse.error,
+                            )
                         }
                     }
                 }
@@ -142,12 +205,16 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
                     Timber.d(e, "Suppressed (known / expected) error")
                 } else {
                     Timber.e(e)
+                    rsp.close()
                     throw e
                 }
             }
             return rsp
         }
-        throw IOException("Unsuccessful response")
+        // Nobody reads this response, so close it to release its connection
+        rsp.close()
+        // Keep the HTTP status code, so that the error tells what went wrong
+        throw UnsuccessfulResponseException(rsp.code, rsp.headers.retryAfterMillis())
     }
 
     private fun isExcludedUrl(request: Request): Boolean {
@@ -161,9 +228,38 @@ private class UnsuccessfulResponseInterceptor : Interceptor {
     }
 
     companion object {
-        val DO_NOT_INTERCEPT = listOf(
-            "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1"
-        )
+        val DO_NOT_INTERCEPT =
+            listOf(
+                "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1",
+            )
         const val ERRORS_PREFIX = "{\"error"
+
+        // Error responses are small, this only limits how much of the body is copied to check it
+        private const val MAX_ERROR_BODY_BYTES = 1024L * 1024L
     }
+}
+
+/**
+ * An unsuccessful HTTP response, with how long the server asked to wait before trying again.
+ *
+ * @param retryAfterMillis the wait from the Retry-After header, or null if there was none
+ */
+internal class UnsuccessfulResponseException(
+    code: Int,
+    val retryAfterMillis: Long?,
+) : IOException("Unsuccessful response: HTTP $code")
+
+/**
+ * Returns the wait the Retry-After header asks for, given either in seconds or as an HTTP date,
+ * or null if the header is missing or can't be read.
+ */
+internal fun Headers.retryAfterMillis(nowMillis: Long = System.currentTimeMillis()): Long? {
+    val seconds = get("Retry-After")?.trim()?.toLongOrNull()
+    val wait =
+        if (seconds != null) {
+            TimeUnit.SECONDS.toMillis(seconds)
+        } else {
+            getDate("Retry-After")?.let { it.time - nowMillis }
+        }
+    return wait?.coerceAtLeast(0)
 }

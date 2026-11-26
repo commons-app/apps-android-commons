@@ -92,10 +92,6 @@
     <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargas</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Esta imagen se publicará bajo la licencia %1$s</item>
-    <item quantity="other">Estas imágenes se publicarán bajo la licencia %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Subida</item>
     <item quantity="other">%1$d Subidas</item>
@@ -135,7 +131,6 @@
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Error al cargar %1$s</string>
   <string name="upload_paused_notification_title">Falló la subida de %1$s</string>
@@ -831,7 +826,7 @@
   </plurals>
   <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
   <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
-  <string name="nearby_wikitalk">Informar a Wikidata sobre un problema relacionado con este elemento</string>
+  <string name="nearby_report_problem">Informar a Wikidata sobre un problema relacionado con este elemento</string>
   <string name="please_enter_some_comments">Por favor, escriba algunos comentarios.</string>
   <string name="talk">Discusión</string>
   <string name="write_something_about_the_item">Escriba algo sobre el elemento \'%1$s\'. Será visible públicamente.</string>

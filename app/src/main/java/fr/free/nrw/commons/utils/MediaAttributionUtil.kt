@@ -9,7 +9,10 @@ import fr.free.nrw.commons.media.IdAndLabels
 import java.util.Locale
 
 object MediaAttributionUtil {
-    fun getTagLine(media: Media, context: Context): String {
+    fun getTagLine(
+        media: Media,
+        context: Context,
+    ): String {
         val uploader = media.user
         val author = media.getAttributedAuthor()
         return if (author.isNullOrEmpty()) {
@@ -20,14 +23,14 @@ object MediaAttributionUtil {
             context.getString(
                 R.string.image_tag_line_created_by_and_uploaded_by,
                 author,
-                uploader
+                uploader,
             )
         }
     }
 
     fun getCreatorName(idAndLabels: List<IdAndLabels>): String? {
         val locale = Locale.getDefault()
-        val names = idAndLabels.map{ x -> x.getLocalizedLabel(locale.language)}
+        val names = idAndLabels.map { x -> x.getLocalizedLabel(locale.language) }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val formatter = ListFormatter.getInstance(locale)
             return formatter.format(names)
@@ -35,5 +38,4 @@ object MediaAttributionUtil {
             return names.joinToString(", ")
         }
     }
-
 }

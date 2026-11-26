@@ -6,9 +6,8 @@ import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.Function4
-import timber.log.Timber
-import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
 
@@ -30,16 +29,21 @@ class CategoriesModel
         private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
         /**
+         * Whether the next [searchMore] page comes from the full text search or the prefix search
+         */
+        private var textSearchNext = true
+
+        /**
          * Returns true if an item is considered to be a spammy category which should be ignored
          *
          * @param item a category item that needs to be validated to know if it is spammy or not
          * @return
          */
         fun isSpammyCategory(item: String): Boolean {
-
             // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-            val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
-                    || item.matches("(.*)taken on(.*)".toRegex())
+            val spammyCategory =
+                item.matches("(.*)needing(.*)".toRegex()) ||
+                    item.matches("(.*)taken on(.*)".toRegex())
 
             // checks for
             // dd/mm/yyyy or yy
@@ -49,14 +53,18 @@ class CategoriesModel
             // for `yy` it is assumed that 20XX is implicit.
             // with separators [., /, -]
             val isIrrelevantCategory =
-                item.contains("""\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}""".toRegex())
-
+                item.contains(
+                    (
+                        """\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{2,4}[-/.]\d{1,2}[-/.]\d{1,2}""" +
+                            """|\d{2,4}[-/.]\d{1,2}|\d{1,2}[-/.]\d{2,4}"""
+                    ).toRegex(),
+                )
 
             if (spammyCategory) {
                 return true
             }
 
-            if(isIrrelevantCategory){
+            if (isIrrelevantCategory) {
                 return true
             }
 
@@ -64,7 +72,7 @@ class CategoriesModel
             val validYearsRange = item.matches(".*(20[0-9]{2}).*".toRegex())
 
             // finally if there's 4 digits year exists in XXXX it should only be in 20XX range.
-            return  hasYear && !validYearsRange
+            return hasYear && !validYearsRange
         }
 
         /**
@@ -76,13 +84,15 @@ class CategoriesModel
 
             // Newly used category...
             if (category == null) {
-                category = Category(
-                    null, item.name,
-                    item.description,
-                    item.thumbnail,
-                    Date(),
-                    0
-                )
+                category =
+                    Category(
+                        null,
+                        item.name,
+                        item.description,
+                        item.thumbnail,
+                        Date(),
+                        0,
+                    )
             }
             category.incTimesUsed()
             categoryDao.save(category)
@@ -116,10 +126,63 @@ class CategoriesModel
                     Function4(::combine),
                 )
             } else {
-                categoryClient
-                    .searchCategoriesForPrefix(term, SEARCH_CATS_LIMIT)
-                    .map { it.sortedWith(StringSortingUtils.sortBySimilarity(term)) }
-                    .toObservable()
+                categoriesMatching(term)
+            }
+
+        /**
+         * Prefix search is alphabetical and capped, so a short word such as "Cat" does not reach
+         * "Cats". Also request the plural form, then rank the combined list by similarity to the
+         * text the user typed.
+         */
+        private fun categoriesMatching(term: String): Observable<List<CategoryItem>> {
+            categoryClient.resetTextSearch(term)
+            textSearchNext = true
+            val searches =
+                searchPrefixes(term).map { prefix ->
+                    categoryClient
+                        .searchCategoriesForPrefix(prefix, SEARCH_CATS_LIMIT)
+                        .onErrorReturnItem(emptyList())
+                        .toObservable()
+                }
+            return Observable.zip(searches) { results ->
+                results
+                    .filterIsInstance<List<CategoryItem>>()
+                    .flatten()
+                    .distinctBy { it.name }
+                    .sortedWith(StringSortingUtils.sortBySimilarity(term))
+            }
+        }
+
+        /**
+         * Next page of results for a typed search, shown when the user scrolls to the end.
+         * Alternates the full text search, which ignores case, with the next prefix page (#3179).
+         * Empty once both are used up.
+         */
+        fun searchMore(term: String): Single<List<CategoryItem>> =
+            Single.defer {
+                val textLeft = categoryClient.hasMoreTextSearchPages(term)
+                val prefixLeft = categoryClient.hasMorePrefixPages(term)
+                val useText = textLeft && (textSearchNext || !prefixLeft)
+                val page =
+                    when {
+                        useText -> categoryClient.nextTextSearchPage(term, SEARCH_CATS_LIMIT)
+                        prefixLeft -> categoryClient.nextPrefixPage(term, SEARCH_CATS_LIMIT)
+                        else -> return@defer Single.just(emptyList())
+                    }
+                page
+                    .doOnSuccess { textSearchNext = !useText }
+                    // A page can be empty when all of it was hidden categories, so try the next one
+                    .flatMap { if (it.isEmpty()) searchMore(term) else Single.just(it) }
+            }
+
+        /**
+         * Returns the typed prefix, plus a trailing "s" when that can name the plural category.
+         */
+        private fun searchPrefixes(term: String): List<String> =
+            if (term.length >= MIN_PLURAL_PREFIX_LENGTH && !term.endsWith("s", ignoreCase = true)) {
+                listOf(term, term + "s")
+            } else {
+                listOf(term)
             }
 
         /**
@@ -131,54 +194,62 @@ class CategoriesModel
          * @param selectedDepictions selected DepictItems
          * @return List of CategoryItem associated with selected depictions
          */
-        private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>): Observable<MutableList<CategoryItem>>? {
-            val observables =  selectedDepictions.map { depictedItem ->
-                if (depictedItem.commonsCategories.isEmpty()) {
-                    if (depictedItem.primaryImage == null) {
-                        return@map Observable.just(emptyList<CategoryItem>())
+        private fun categoriesFromDepiction(
+            selectedDepictions: List<DepictedItem>,
+        ): Observable<MutableList<CategoryItem>>? {
+            val observables =
+                selectedDepictions.map { depictedItem ->
+                    if (depictedItem.commonsCategories.isEmpty()) {
+                        if (depictedItem.primaryImage == null) {
+                            return@map Observable.just(emptyList<CategoryItem>())
+                        }
+                        Observable
+                            .just(
+                                depictedItem.primaryImage,
+                            ).map { image ->
+                                categoryClient
+                                    .getCategoriesOfImage(
+                                        image,
+                                        SEARCH_CATS_LIMIT,
+                                    ).map {
+                                        it.map { category ->
+                                            CategoryItem(
+                                                category.name,
+                                                category.description,
+                                                category.thumbnail,
+                                                category.isSelected,
+                                            )
+                                        }
+                                    }.blockingGet()
+                            }.flatMapIterable { it }
+                            .toList()
+                            .toObservable()
+                    } else {
+                        Observable
+                            .fromIterable(
+                                depictedItem.commonsCategories,
+                            ).map { categoryItem ->
+                                categoryClient
+                                    .getCategoriesByName(
+                                        categoryItem.name,
+                                        categoryItem.name,
+                                        SEARCH_CATS_LIMIT,
+                                    ).blockingGet()
+                            }.filter { it.isNotEmpty() }
+                            .map { categories ->
+                                val category = categories.first()
+                                CategoryItem(
+                                    category.name,
+                                    category.description,
+                                    category.thumbnail,
+                                    category.isSelected,
+                                )
+                            }.toList()
+                            .toObservable()
                     }
-                    Observable.just(
-                            depictedItem.primaryImage
-                        ).map { image ->
-                            categoryClient
-                                .getCategoriesOfImage(
-                                    image,
-                                    SEARCH_CATS_LIMIT,
-                                ).map {
-                                    it.map { category ->
-                                        CategoryItem(
-                                            category.name,
-                                            category.description,
-                                            category.thumbnail,
-                                            category.isSelected,
-                                        )
-                                    }
-                                }.blockingGet()
-                        }.flatMapIterable { it }.toList()
-                        .toObservable()
-                } else {
-                    Observable
-                        .fromIterable(
-                            depictedItem.commonsCategories,
-                        ).map { categoryItem ->
-                            categoryClient
-                                .getCategoriesByName(
-                                    categoryItem.name,
-                                    categoryItem.name,
-                                    SEARCH_CATS_LIMIT,
-                                ).map {
-                                    CategoryItem(
-                                        it[0].name,
-                                        it[0].description,
-                                        it[0].thumbnail,
-                                        it[0].isSelected,
-                                    )
-                                }.blockingGet()
-                        }.toList()
-                        .toObservable()
                 }
-            }
-            return Observable.concat(observables)
+            return Observable
+                .concat(observables)
                 .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
                     accumulator.apply { addAll(currentList) }
                 }
@@ -242,7 +313,8 @@ class CategoriesModel
          */
         private fun titleCategories(titleList: List<String>) =
             if (titleList.isNotEmpty()) {
-                Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
+                // A multi-upload often has the same caption on every picture, search it once (#5316)
+                Observable.combineLatest(titleList.distinct().map { getTitleCategories(it) }) { searchResults ->
                     searchResults.map { it as List<CategoryItem> }.flatten()
                 }
             } else {
@@ -266,33 +338,38 @@ class CategoriesModel
             media: Media?,
         ) {
             if (media == null) {
-                if (item.isSelected) {
-                    selectedCategories.add(item)
-                    updateCategoryCount(item)
-                } else {
-                    selectedCategories.remove(item)
+                updateSelection(item)
+                return
+            }
+
+            val isExistingCategory = media.categories?.contains(item.name) == true
+            when {
+                item.isSelected && isExistingCategory -> selectedExistingCategories.add(item.name)
+                item.isSelected -> updateSelection(item)
+                isExistingCategory -> {
+                    selectedExistingCategories.remove(item.name)
+                    restoreCategoryIfMissing(item, media)
                 }
+                else -> selectedCategories.remove(item)
+            }
+        }
+
+        private fun restoreCategoryIfMissing(
+            item: CategoryItem,
+            media: Media,
+        ) {
+            val categories = media.categories ?: return
+            if (!categories.contains(item.name)) {
+                media.categories = listOf(item.name) + categories
+            }
+        }
+
+        private fun updateSelection(item: CategoryItem) {
+            if (item.isSelected) {
+                selectedCategories.add(item)
+                updateCategoryCount(item)
             } else {
-                if (item.isSelected) {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.add(item.name)
-                    } else {
-                        selectedCategories.add(item)
-                        updateCategoryCount(item)
-                    }
-                } else {
-                    if (media.categories?.contains(item.name) == true) {
-                        selectedExistingCategories.remove(item.name)
-                        if (!media.categories?.contains(item.name)!!) {
-                            val categoriesList: MutableList<String> = ArrayList()
-                            categoriesList.add(item.name)
-                            categoriesList.addAll(media.categories!!)
-                            media.categories = categoriesList
-                        }
-                    } else {
-                        selectedCategories.remove(item)
-                    }
-                }
+                selectedCategories.remove(item)
             }
         }
 
@@ -312,6 +389,7 @@ class CategoriesModel
 
         companion object {
             const val SEARCH_CATS_LIMIT = 25
+            private const val MIN_PLURAL_PREFIX_LENGTH = 3
         }
 
         /**

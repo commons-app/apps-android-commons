@@ -140,7 +140,7 @@ class BookmarkItemsDaoTest {
         Assert.assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getAllItemsBookmarksTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
@@ -239,7 +239,7 @@ class BookmarkItemsDaoTest {
         Assert.assertTrue(testObject.findBookmarkItem(exampleItemBookmark.id))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findItemBookmarkTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
@@ -396,7 +396,7 @@ class BookmarkItemsDaoTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(
                     listOf(
                         "itemName",

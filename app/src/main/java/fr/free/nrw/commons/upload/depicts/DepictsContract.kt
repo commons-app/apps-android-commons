@@ -12,7 +12,29 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
  * The contract with which DepictsFragment and its presenter would talk to each other
  */
 interface DepictsContract {
-    interface View {
+    interface ProgressView {
+        /**
+         * Show progress/Hide progress depending on the boolean value
+         */
+        fun showProgress(shouldShow: Boolean)
+
+        /**
+         * decides whether to show error values or not depending on the boolean value
+         */
+        fun showError(value: Boolean)
+
+        /**
+         * Shows the progress dialog
+         */
+        fun showProgressDialog()
+
+        /**
+         * Hides the progress dialog
+         */
+        fun dismissProgressDialog()
+    }
+
+    interface NavigationView {
         /**
          * Go to category screen
          */
@@ -29,15 +51,17 @@ interface DepictsContract {
         fun noDepictionSelected()
 
         /**
-         * Show progress/Hide progress depending on the boolean value
+         * Returns to previous fragment
          */
-        fun showProgress(shouldShow: Boolean)
+        fun goBackToPreviousScreen()
 
         /**
-         * decides whether to show error values or not depending on the boolean value
+         * Navigate the user to Login Activity
          */
-        fun showError(value: Boolean)
+        fun navigateToLoginScreen()
+    }
 
+    interface DataView {
         /**
          * add depictions to list
          */
@@ -49,36 +73,36 @@ interface DepictsContract {
         fun getFragmentContext(): Context
 
         /**
-         * Returns to previous fragment
-         */
-        fun goBackToPreviousScreen()
-
-        /**
          * Gets existing depictions IDs from media
          */
         fun getExistingDepictions(): List<String>?
 
         /**
-         * Shows the progress dialog
-         */
-        fun showProgressDialog()
-
-        /**
-         * Hides the progress dialog
-         */
-        fun dismissProgressDialog()
-
-        /**
          * Update the depictions
          */
         fun updateDepicts()
-
-        /**
-         * Navigate the user to Login Activity
-         */
-        fun navigateToLoginScreen()
     }
 
+    interface View :
+        ProgressView,
+        NavigationView,
+        DataView
+
+    interface SelectionActions {
+        fun selectPlaceDepictions()
+
+        fun clearPreviousSelection()
+
+        fun onPlaceSelectedFromMap(place: Place)
+
+        fun onDepictItemClicked(depictedItem: DepictedItem)
+
+        fun getDepictedItems(): LiveData<List<DepictedItem>>
+    }
+
+    // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
+    // contract for this screen and stay together to maintain contract integrity.
+    @Suppress("TooManyFunctions")
     interface UserActionListener : BasePresenter<View> {
         /**
          * Takes to previous screen
@@ -116,7 +140,7 @@ interface DepictsContract {
          * Handle selected place from the map picker
          */
         fun onPlaceSelectedFromMap(place: Place)
-        
+
         /**
          * Gets all upload items
          */
@@ -135,6 +159,9 @@ interface DepictsContract {
         /**
          * Attaches view and media
          */
-        fun onAttachViewWithMedia(view: View, media: Media)
+        fun onAttachViewWithMedia(
+            view: View,
+            media: Media,
+        )
     }
 }

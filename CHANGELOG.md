@@ -1,5 +1,17 @@
 # Wikimedia Commons for Android
 
+## v6.9.0
+
+### What's changed
+- The app size has been reduced by 26% due to removal of unused models from commons-ml
+- Uploads are more reliable, with better handling of unsupported files, HEIC/HEIF images, and retries
+- Nearby place filters are easier to use and behave more consistently
+- Upload selections and navigation now work more reliably after returning to screens or recreating the activity
+- Coordinates are trimmed to six decimal places for greater consistency
+- Wikidata image claims now use the original file title
+- Contribution links and upload notifications now provide clearer, more useful destinations
+- Various bug fixes and stability improvements
+
 ## v6.8.0
 
 ### What's changed
@@ -111,7 +123,7 @@
 * Enhanced location updates while using GPS
 * Author/uploader names are now available in Media Details for Commons licensing compliance
 * Improved usage of popups in Nearby
-* Bug fixes and stability improvements 
+* Bug fixes and stability improvements
 
 ## v5.5.0
 
@@ -121,7 +133,7 @@
 * Green labels in Explore map will no longer be hidden by other pins thumbnails
 * Upload wizard's language drop-down now reflects the language used in the pin label
 * Users can now pick only one image at a time while using the custom selector
-* Bug fixes and stability improvements 
+* Bug fixes and stability improvements
 
 ## v5.4.1
 
@@ -466,14 +478,14 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed issue with EXIF data, including coords, being removed from uploads
 
 ## v2.12.2
-- Fixed crash on startup 
+- Fixed crash on startup
 
 ## v2.12.1
 - Fixed issue with Nearby loading in wrong location
 - Various crash fixes
 
 ## v2.12.0
-- Completed codebase overhaul 
+- Completed codebase overhaul
 - Added filters for place type and place state to Nearby
 - Switched to using new data client library, aimed at fixing failed uploads
 - Fixed 2FA not working
@@ -586,7 +598,7 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed crashes caused by Fresco and Dagger
 
 ## v2.6.3 beta
-- Same as 2.6.2 except with localizations added for Google Code-In 
+- Same as 2.6.2 except with localizations added for Google Code-In
 
 ## v2.6.2 beta
 - Reverted temporarily to last stable version while working on crash fix
@@ -604,10 +616,10 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Improved login screen with new design and privacy policy link
 - Improved category display, if a category has an exact name entered, it will be shown first
 - New UI for Nearby list
-- Added product flavors for production and the beta-cluster Wikimedia servers 
+- Added product flavors for production and the beta-cluster Wikimedia servers
 - Various improvements to navigation flow and backstack
 
-## v2.5.0 beta 
+## v2.5.0 beta
 - Added one-time popup for beta users to provide feedback on IEG renewal proposal
 - Added link to Commons policies in ShareActivity
 - Various string fixes
@@ -637,7 +649,7 @@ for an exhaustive list of changes and the various contributors who contributed t
 
 ## v2.4
 - Fixed memory issue with loading contributions on main screen
-- Deleted images don't show up on contributions list 
+- Deleted images don't show up on contributions list
 - Added Fresco library for image loading and LeakCanary for memory profiling
 - Added navigation drawer and overhauled action bar
 - Added logout functionality
@@ -674,8 +686,8 @@ for an exhaustive list of changes and the various contributors who contributed t
 - Fixed lint issues
 - Fixed various crashes
 
-## v2.0.2 
-- Make "View in browser" direct to mobile website 
+## v2.0.2
+- Make "View in browser" direct to mobile website
 
 ## v2.0.1
 - Disabled minify again (reenabling test failed)

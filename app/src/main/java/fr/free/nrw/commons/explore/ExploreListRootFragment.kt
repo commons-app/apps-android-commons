@@ -1,110 +1,57 @@
 package fr.free.nrw.commons.explore
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
-import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
-import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import fr.free.nrw.commons.media.MediaDetailProvider
 import fr.free.nrw.commons.navtab.NavTab
 
-class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvider,
-    CategoryImagesCallback {
-    private var mediaDetails: MediaDetailPagerFragment? = null
+class ExploreListRootFragment : ExploreMediaRootFragment {
     private var listFragment: CategoriesMediaFragment? = null
-    private var binding: FragmentFeaturedRootBinding? = null
+    override val contentFragment: Fragment?
+        get() = listFragment
 
     constructor()
 
     constructor(bundle: Bundle) {
-        listFragment = CategoriesMediaFragment().apply {
-            arguments = bundleOf(
-                "categoryName" to bundle.getString("categoryName")
-            )
+        listFragment =
+            CategoriesMediaFragment().apply {
+                arguments =
+                    bundleOf(
+                        "categoryName" to bundle.getString("categoryName"),
+                    )
+            }
+    }
+
+    /**
+     * Keeps opening list media safe when the root view has already been released.
+     */
+    override fun showMediaContainer() {
+        if (binding != null) {
+            binding!!.exploreContainer.visibility = View.VISIBLE
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        super.onCreate(savedInstanceState)
-
-        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false)
-        return binding!!.root
+    /**
+     * Retains the list shell's allowance for an Explore parent without a current tab-strip view.
+     */
+    override fun setExploreTabsVisibility(visibility: Int) {
+        if ((parentFragment as ExploreFragment).binding != null) {
+            (parentFragment as ExploreFragment).binding!!.tabLayout.visibility = visibility
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
             setFragment(listFragment!!, mediaDetails)
         }
-    }
-
-    fun setFragment(fragment: Fragment, otherFragment: Fragment?) {
-        if (fragment.isAdded && otherFragment != null) {
-            childFragmentManager
-                .beginTransaction()
-                .hide(otherFragment)
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (fragment.isAdded && otherFragment == null) {
-            childFragmentManager
-                .beginTransaction()
-                .show(fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (!fragment.isAdded && otherFragment != null) {
-            childFragmentManager
-                .beginTransaction()
-                .hide(otherFragment)
-                .add(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        } else if (!fragment.isAdded) {
-            childFragmentManager
-                .beginTransaction()
-                .replace(R.id.explore_container, fragment)
-                .addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
-                .commit()
-            childFragmentManager.executePendingTransactions()
-        }
-    }
-
-    private fun removeFragment(fragment: Fragment) {
-        childFragmentManager
-            .beginTransaction()
-            .remove(fragment)
-            .commit()
-        childFragmentManager.executePendingTransactions()
-    }
-
-    override fun onMediaClicked(position: Int) {
-        if (binding != null) {
-            binding!!.exploreContainer.visibility = View.VISIBLE
-        }
-        if ((parentFragment as ExploreFragment).binding != null) {
-            (parentFragment as ExploreFragment).binding!!.tabLayout.visibility =
-                View.GONE
-        }
-        mediaDetails = MediaDetailPagerFragment.newInstance(false, true)
-        (parentFragment as ExploreFragment).setScroll(false)
-        setFragment(mediaDetails!!, listFragment)
-        mediaDetails!!.showImage(position)
     }
 
     /**
@@ -125,26 +72,6 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
     override fun getTotalMediaCount(): Int = listFragment?.getTotalMediaCount() ?: 0
 
     override fun getContributionStateAt(position: Int): Int? = null
-
-    /**
-     * Reload media detail fragment once media is nominated
-     *
-     * @param index item position that has been nominated
-     */
-    override fun refreshNominatedMedia(index: Int) {
-        if (mediaDetails != null && !listFragment!!.isVisible) {
-            removeFragment(mediaDetails!!)
-            onMediaClicked(index)
-        }
-    }
-
-    /**
-     * This method is called on success of API call for featured images or mobile uploads. The
-     * viewpager will notified that number of items have changed.
-     */
-    override fun viewPagerNotifyDataSetChanged() {
-        mediaDetails?.notifyDataSetChanged()
-    }
 
     /**
      * Performs back pressed action on the fragment. Return true if the event was handled by the
@@ -172,11 +99,5 @@ class ExploreListRootFragment : CommonsDaggerSupportFragment, MediaDetailProvide
             (activity as MainActivity).showTabs()
         }
         return false
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        binding = null
     }
 }

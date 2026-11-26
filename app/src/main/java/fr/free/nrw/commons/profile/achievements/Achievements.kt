@@ -11,18 +11,20 @@ data class Achievements(
     val featuredImages: Int = 0,
     val qualityImages: Int = 0,
     val imagesUploaded: Int = 0,
-    val revertCount: Int = 0
+    val revertCount: Int = 0,
 ) {
     /**
-     * Used to calculate the percentages of images that haven't been reverted.
-     * Returns 100 if imagesUploaded is 0 to avoid division by zero.
+     * Percentage of uploaded images that were not deleted.
+     * Returns 100 when there are no uploads. Floors at 0 when deleted uploads exceed the
+     * upload count, which can happen when those two values come from different sources.
      */
     val notRevertPercentage: Int
-        get() = if (imagesUploaded > 0) {
-            (imagesUploaded - revertCount) * 100 / imagesUploaded
-        } else {
-            100
-        }
+        get() =
+            if (imagesUploaded > 0) {
+                ((imagesUploaded - revertCount) * 100 / imagesUploaded).coerceIn(0, 100)
+            } else {
+                100
+            }
 
     companion object {
         /**
@@ -32,14 +34,15 @@ data class Achievements(
          * @return An Achievements object with values from the response.
          */
         @JvmStatic
-        fun from(response: FeedbackResponse): Achievements = Achievements(
-            uniqueUsedImages = response.uniqueUsedImages,
-            articlesUsingImages = response.articlesUsingImages,
-            thanksReceived = response.thanksReceived,
-            featuredImages = response.featuredImages.featuredPicturesOnWikimediaCommons,
-            qualityImages = response.featuredImages.qualityImages,
-            imagesUploaded = 0,  // Assuming imagesUploaded should be 0
-            revertCount = response.deletedUploads
-        )
+        fun from(response: FeedbackResponse): Achievements =
+            Achievements(
+                uniqueUsedImages = response.uniqueUsedImages,
+                articlesUsingImages = response.articlesUsingImages,
+                thanksReceived = response.thanksReceived,
+                featuredImages = response.featuredImages.featuredPicturesOnWikimediaCommons,
+                qualityImages = response.featuredImages.qualityImages,
+                imagesUploaded = 0, // Assuming imagesUploaded should be 0
+                revertCount = response.deletedUploads,
+            )
     }
 }

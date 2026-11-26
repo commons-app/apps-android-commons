@@ -23,6 +23,7 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -226,6 +227,31 @@ class ExploreListRootFragmentUnitTest {
     fun testViewPagerNotifyDataSetChanged() {
         fragment.viewPagerNotifyDataSetChanged()
         verify(mediaDetails).notifyDataSetChanged()
+    }
+
+    /**
+     * Keeps a visible content list in place when a nomination callback arrives without an open
+     * media-detail screen to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithVisibleContent() {
+        `when`(listFragment.isVisible).thenReturn(true)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
+    }
+
+    /**
+     * Avoids creating a pager or fragment transaction when there are no media details to refresh.
+     */
+    @Test
+    fun testRefreshNominatedMediaWithoutDetails() {
+        Whitebox.setInternalState(fragment, "mediaDetails", null as MediaDetailPagerFragment?)
+
+        fragment.refreshNominatedMedia(0)
+
+        verifyNoInteractions(childFragmentManager)
     }
 
     @Test

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.explore.media
 
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.mediaTypeFrom
 import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil
@@ -26,7 +27,7 @@ class MediaConverter
          */
         fun convert(
             page: MwQueryPage,
-            entity: Entities.Entity,
+            entity: Entities.Entity?,
             imageInfo: ImageInfo,
         ): Media {
             val metadata = imageInfo.getMetadata()
@@ -49,11 +50,17 @@ class MediaConverter
                 null,
                 MediaDataExtractorUtil.extractCategoriesFromList(metadata.categories()),
                 metadata.latLng,
-                entity.labels().mapValues { it.value.value() },
-                entity.descriptions().mapValues { it.value.value() },
-                entity.depictionIds(),
-                entity.creatorIds(),
+                entity?.labels()?.mapValues { it.value.value() } ?: emptyMap(),
+                entity?.descriptions()?.mapValues { it.value.value() } ?: emptyMap(),
+                entity?.depictionIds() ?: emptyList(),
+                entity?.creatorIds() ?: emptyList(),
                 myMap,
+                imageInfo.getMimeType(),
+                mediaTypeFrom(
+                    imageInfo.getMediaType(),
+                    imageInfo.getMimeType(),
+                    page.title(),
+                ),
             )
         }
 
@@ -75,17 +82,17 @@ class MediaConverter
             val anchorStartTagTerminalString = "\">"
             val anchorCloseTag = "</a>"
 
-            return if (!authorHtml.contains("<") && !authorHtml.contains(">") ) {
+            return if (!authorHtml.contains("<") && !authorHtml.contains(">")) {
                 authorHtml.trim()
             } else if (!authorHtml.contains(anchorStartTagTerminalString) || !authorHtml.endsWith(anchorCloseTag)) {
                 null
             } else {
-
-                val authorText = authorHtml.substring(
-                    authorHtml.indexOf(anchorStartTagTerminalString) +
+                val authorText =
+                    authorHtml.substring(
+                        authorHtml.indexOf(anchorStartTagTerminalString) +
                             anchorStartTagTerminalString.length,
-                    authorHtml.indexOf(anchorCloseTag),
-                )
+                        authorHtml.indexOf(anchorCloseTag),
+                    )
                 if (authorText.contains("<") || authorText.contains(">")) {
                     null
                 } else {
@@ -115,4 +122,3 @@ private val ExtMetadata.prefixedLicenseUrl: String
 
 private val ExtMetadata.latLng: LatLng?
     get() = LatLng.latLongOrNull(gpsLatitude(), gpsLongitude())
-

@@ -148,24 +148,27 @@ class ZoomableActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!images.isNullOrEmpty()) {
-                    val returnIntent = Intent()
-                    returnIntent.putParcelableArrayListExtra(
-                        CustomSelectorConstants.NEW_SELECTED_IMAGES,
-                        selectedImages,
-                    )
-                    returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
-                    setResult(Activity.RESULT_OK, returnIntent)
-                    finish()
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
-                    isEnabled = true
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (!images.isNullOrEmpty()) {
+                        val returnIntent = Intent()
+                        returnIntent.putParcelableArrayListExtra(
+                            CustomSelectorConstants.NEW_SELECTED_IMAGES,
+                            selectedImages,
+                        )
+                        returnIntent.putExtra(SHOULD_REFRESH, shouldRefresh)
+                        setResult(Activity.RESULT_OK, returnIntent)
+                        finish()
+                    } else {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                        isEnabled = true
+                    }
                 }
-            }
-        })
+            },
+        )
         prefs =
             applicationContext.getSharedPreferences(
                 ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
@@ -182,10 +185,6 @@ class ZoomableActivity : BaseActivity() {
             ViewModelProvider(this, customSelectorViewModelFactory).get(
                 CustomSelectorViewModel::class.java,
             )
-        viewModel.fetchImages()
-        viewModel.result.observe(this) {
-            handleResult(it)
-        }
 
         val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN)
 
@@ -216,6 +215,16 @@ class ZoomableActivity : BaseActivity() {
         if (backgroundColor != MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR) {
             photoBackgroundColor = backgroundColor
         }
+
+        // Media details already pass the file URL. Scanning the device gallery would delay the image.
+        if (origin == "MediaDetails") {
+            intent.data?.let { init(it) }
+        } else {
+            viewModel.fetchImages()
+            viewModel.result.observe(this) {
+                handleResult(it)
+            }
+        }
     }
 
     /**
@@ -238,12 +247,15 @@ class ZoomableActivity : BaseActivity() {
             val images = result.images
             if (images.isNotEmpty()) {
                 this@ZoomableActivity.images = ImageHelper.filterImages(images, bucketId)
-                imageUri =
-                    if (this@ZoomableActivity.images.isNullOrEmpty()) {
-                        intent.data as Uri
-                    } else {
-                        this@ZoomableActivity.images!![position].uri
-                    }
+                if (this@ZoomableActivity.images.isNullOrEmpty()) {
+                    // The folder no longer contains any image, nothing to display.
+                    finish()
+                    return
+                }
+                // The requested image may have been deleted from the device while the
+                // picker still showed it, making the passed position out of bounds.
+                position = position.coerceIn(0, this@ZoomableActivity.images!!.size - 1)
+                imageUri = this@ZoomableActivity.images!![position].uri
                 Timber.d("URL = $imageUri")
                 init(imageUri)
                 onSwipe()
@@ -680,9 +692,11 @@ class ZoomableActivity : BaseActivity() {
                 setHierarchy(hierarchy)
                 setAllowTouchInterceptionWhileZoomed(true)
                 setIsLongpressEnabled(false)
-                setTapListener(DoubleTapGestureListener(this) {
-                    toggleSystemBars()
-                })
+                setTapListener(
+                    DoubleTapGestureListener(this) {
+                        toggleSystemBars()
+                    },
+                )
             }
             val controller: DraweeController =
                 Fresco
@@ -739,7 +753,6 @@ class ZoomableActivity : BaseActivity() {
             ),
         )
     }
-
 
     override fun onDestroy() {
         scope.cancel()

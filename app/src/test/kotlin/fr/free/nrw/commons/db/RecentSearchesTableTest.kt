@@ -8,7 +8,6 @@ import org.junit.Test
 import java.util.Date
 
 class RecentSearchesTableTest : InMemoryDatabaseTest() {
-
     @Test
     fun testTableExists() {
         assertTablesExist(RecentSearchesTable.TABLE_NAME)
@@ -19,10 +18,11 @@ class RecentSearchesTableTest : InMemoryDatabaseTest() {
     fun testInsertAndRetrieve() {
         val dao = roomDatabase.recentSearchesRoomDao()
         val date = Date()
-        val search = RecentSearchRoomEntity(
-            query = "Test Search",
-            lastSearched = date
-        )
+        val search =
+            RecentSearchRoomEntity(
+                query = "Test Search",
+                lastSearched = date,
+            )
         dao.insert(search)
 
         val retrieved = dao.findEntity("Test Search")

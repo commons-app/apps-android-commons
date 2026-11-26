@@ -4,14 +4,20 @@ import com.google.gson.stream.MalformedJsonException
 import fr.free.nrw.commons.MockWebServerTest
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.login.LoginClient
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.wikidata.mwapi.MwException
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertSame
+import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.ArgumentMatchers.isA
+import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import java.io.IOException
 
 class CsrfTokenClientTest : MockWebServerTest() {
@@ -65,6 +71,49 @@ class CsrfTokenClientTest : MockWebServerTest() {
 
         verify(cb, never()).success(any(String::class.java))
         verify(cb).failure(isA(MalformedJsonException::class.java))
+    }
+
+    @Test
+    @Throws(Throwable::class)
+    fun testGetTokenBlockingKeepsLoginFailureAsCause() {
+        val loginFailure = LoginFailedException("Login failed")
+        // The first attempt returns no token, so the client logs in explicitly, which fails.
+        doThrow(loginFailure).`when`(loginClient).loginBlocking("", "")
+
+        val thrown =
+            assertThrows(InvalidLoginTokenException::class.java) {
+                subject.getTokenBlocking()
+            }
+
+        assertSame(loginFailure, thrown.cause)
+    }
+
+    @Test
+    @Throws(Throwable::class)
+    fun testGetTokenBlockingRetriesWhenFirstResponseHasNoToken() {
+        enqueue404()
+        enqueueFromFile("csrf_token.json")
+        val clientWithWebServer =
+            CsrfTokenClient(sessionManager, service(CsrfTokenInterface::class.java), loginClient, logoutClient)
+
+        val token = clientWithWebServer.getTokenBlocking()
+
+        assertEquals("b6f7bd58c013ab30735cb19ecc0aa08258122cba+\\", token)
+    }
+
+    @Test
+    @Throws(Throwable::class)
+    fun testGetTokenBlockingRetriesAfterAnonymousTokenWhenLoggedIn() {
+        `when`(sessionManager.isUserLoggedIn).thenReturn(true)
+        server().enqueue("""{"batchcomplete":true,"query":{"tokens":{"csrftoken":"+\\"}}}""")
+        enqueueFromFile("csrf_token.json")
+        val clientWithWebServer =
+            CsrfTokenClient(sessionManager, service(CsrfTokenInterface::class.java), loginClient, logoutClient)
+
+        val token = clientWithWebServer.getTokenBlocking()
+
+        assertEquals("b6f7bd58c013ab30735cb19ecc0aa08258122cba+\\", token)
+        verify(loginClient).loginBlocking("", "")
     }
 
     private fun performRequest() {

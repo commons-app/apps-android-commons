@@ -1,13 +1,17 @@
 package fr.free.nrw.commons.nearby
 
+import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
+import fr.free.nrw.commons.nearby.presenter.SearchAreaTracker
+import io.reactivex.Completable
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -18,9 +22,15 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.any
 import org.mockito.Mockito.anyBoolean
+import org.mockito.Mockito.anyLong
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.util.Collections
+import java.util.TimeZone
+import java.util.concurrent.TimeUnit
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
@@ -469,5 +479,200 @@ class NearbyParentFragmentPresenterTest {
         }
         nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, null)
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
+    }
+
+    /**
+     * Test that places cached more than 5 days ago are removed when it was not done today yet
+     */
+    @Test
+    fun testRemoveOldCachedPlacesWhenNotDoneToday() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong())).thenReturn(Completable.complete())
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        val after = System.currentTimeMillis()
+        val fiveDays = TimeUnit.DAYS.toMillis(5)
+        val cutoff = argumentCaptor<Long>()
+        verify(placesRepository).removePlacesCachedBefore(cutoff.capture())
+        assertTrue(cutoff.firstValue in (now - fiveDays)..(after - fiveDays))
+        verify(applicationKvStore).putLong(anyString(), anyLong())
+    }
+
+    /**
+     * Test that old cached places are not removed again on the same day
+     */
+    @Test
+    fun testRemoveOldCachedPlacesOnlyOnceADay() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val today = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now))
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(today)
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        verify(placesRepository, never()).removePlacesCachedBefore(anyLong())
+    }
+
+    /**
+     * Test that the day is not saved when removing old cached places fails, so it is tried again
+     */
+    @Test
+    fun testRemoveOldCachedPlacesRetriesWhenRemovalFails() {
+        val applicationKvStore = mock(JsonKvStore::class.java)
+        val now = System.currentTimeMillis()
+        val yesterday = TimeUnit.MILLISECONDS.toDays(now + TimeZone.getDefault().getOffset(now)) - 1
+        whenever(applicationKvStore.getLong(anyString(), anyLong())).thenReturn(yesterday)
+        whenever(placesRepository.removePlacesCachedBefore(anyLong()))
+            .thenReturn(Completable.error(RuntimeException("Database error")))
+
+        nearbyPresenter.removeOldCachedPlaces(applicationKvStore)
+
+        verify(applicationKvStore, never()).putLong(anyString(), anyLong())
+    }
+
+    @Test
+    fun testResumeDoesNotSearchAgainWhenAreaAlreadyLoaded() {
+        loadPlacesIn(shibuya)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenLastSearchDidNotFinish() {
+        expectSearchableView(shibuya)
+        nearbyPresenter.initializeMapOperations()
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenRefreshFailedAfterEarlierLoad() {
+        loadPlacesIn(shibuya)
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        nearbyPresenter.lockUnlockNearby(false) // what the fragment does when the search fails
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainAfterZoomingOut() {
+        loadPlacesIn(shibuya)
+        expectSearchableView(arrayOf(LatLng(35.70, 139.74, 0f), LatLng(35.62, 139.66, 0f)))
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainWhenLoadedPlacesAreOld() {
+        var now = 0L
+        nearbyPresenter.searchAreas = SearchAreaTracker { now }
+        loadPlacesIn(shibuya)
+        now = TimeUnit.MINUTES.toMillis(5) + 1
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testResumeSearchesAgainAfterCustomQueryResults() {
+        expectSearchableView(shibuya)
+        nearbyPresenter.setAdvancedQuery("custom query")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
+
+        nearbyPresenter.initializeMapOperations()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun testMapScrollDoesNotSearchAgainWhenAreaAlreadyLoaded() {
+        loadPlacesIn(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+
+        nearbyPresenter.searchInTheArea()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun `switching only places that need a photo searches the loaded area again`() {
+        loadPlacesIn(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun `switching during a search searches again when that search ends`() {
+        expectSearchableView(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(shibuyaCenter)
+        nearbyPresenter.initializeMapOperations()
+        Mockito.clearInvocations(nearbyParentFragmentView)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+
+        // The running search shows its places, which were searched with the toggle off
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        verify(nearbyParentFragmentView).populatePlaces(any(LatLng::class.java))
+    }
+
+    @Test
+    fun `switching keeps the places of an advanced query`() {
+        expectSearchableView(shibuya)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(shibuyaCenter)
+        nearbyPresenter.setAdvancedQuery("SELECT ?item WHERE {}")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
+        whenever(nearbyParentFragmentView.isOnlyNeedsPhoto).thenReturn(true)
+
+        nearbyPresenter.onOnlyNeedsPhotoChanged()
+
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java))
+        verify(nearbyParentFragmentView, never()).populatePlaces(any(LatLng::class.java), anyString())
+    }
+
+    private val shibuyaCenter = LatLng(35.6595, 139.7005, 0f)
+    private val shibuya = arrayOf(LatLng(35.6698, 139.7081, 0f), LatLng(35.6492, 139.6929, 0f))
+
+    /** Makes the view report a usable map with the given top right and bottom left corners. */
+    private fun expectSearchableView(corners: Array<LatLng>) {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(shibuyaCenter)
+        whenever(nearbyParentFragmentView.screenTopRight).thenReturn(corners[0])
+        whenever(nearbyParentFragmentView.screenBottomLeft).thenReturn(corners[1])
+    }
+
+    /** Runs a search in the given area and lets it show its places, then forgets the calls. */
+    private fun loadPlacesIn(corners: Array<LatLng>) {
+        expectSearchableView(corners)
+        nearbyPresenter.initializeMapOperations()
+        nearbyPresenter.updateMapMarkers(emptyList(), shibuyaCenter, null)
+        Mockito.clearInvocations(nearbyParentFragmentView)
     }
 }

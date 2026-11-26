@@ -1,14 +1,20 @@
+/**
+ * Suppressed TooGenericExceptionCaught because loader functions are supplied by callers and can
+ * throw arbitrary runtime exceptions, which are reported as a LoadingState.Error.
+ */
+@file:Suppress("TooGenericExceptionCaught")
+
 package fr.free.nrw.commons.explore.paging
 
 import androidx.paging.PositionalDataSource
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import io.reactivex.Completable
-import io.reactivex.processors.PublishProcessor
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 abstract class PagingDataSource<T>(
-    private val loadingStates: PublishProcessor<LoadingState>,
+    private val loadingStates: BehaviorProcessor<LoadingState>,
 ) : PositionalDataSource<T>() {
     private var lastExecutedRequest: (() -> Boolean)? = null
 
@@ -66,7 +72,7 @@ abstract class PagingDataSource<T>(
 }
 
 fun <T> dataSource(
-    loadingStates: PublishProcessor<LoadingState>,
+    loadingStates: BehaviorProcessor<LoadingState>,
     loadFunction: LoadFunction<T>,
 ) = object : PagingDataSource<T>(loadingStates) {
     override fun getItems(

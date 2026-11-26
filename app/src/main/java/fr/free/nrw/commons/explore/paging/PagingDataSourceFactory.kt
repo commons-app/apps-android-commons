@@ -6,8 +6,8 @@ import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
-import fr.free.nrw.commons.explore.depictions.search.LoadingStates
 import io.reactivex.Flowable
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
 import javax.inject.Inject
 
@@ -24,9 +24,9 @@ abstract class PageableBaseDataSource<T>(
             loadFunction,
         )
     }
-    private val _loadingStates = PublishProcessor.create<LoadingState>()
+    private val _loadingStates = BehaviorProcessor.create<LoadingState>()
     val loadingStates: Flowable<LoadingState> = _loadingStates
-    private val _pagingResults = PublishProcessor.create<LiveData<PagedList<T>>>()
+    private val _pagingResults = BehaviorProcessor.create<LiveData<PagedList<T>>>()
     val pagingResults: Flowable<LiveData<PagedList<T>>> = _pagingResults
     private val _noItemsLoadedEvent = PublishProcessor.create<String>()
     val noItemsLoadedEvent: Flowable<String> = _noItemsLoadedEvent
@@ -35,6 +35,9 @@ abstract class PageableBaseDataSource<T>(
     abstract val loadFunction: LoadFunction<T>
 
     fun onQueryUpdated(query: String) {
+        if (::query.isInitialized && this.query == query) {
+            return
+        }
         this.query = query
         _pagingResults.offer(
             liveDataConverter.convert(dataSourceFactoryFactory().also { currentFactory = it }) {
@@ -71,7 +74,7 @@ class LiveDataConverter
     }
 
 abstract class PagingDataSourceFactory<T>(
-    val loadingStates: LoadingStates,
+    val loadingStates: BehaviorProcessor<LoadingState>,
 ) : DataSource.Factory<Int, T>() {
     private var currentDataSource: PagingDataSource<T>? = null
     abstract val loadFunction: LoadFunction<T>
@@ -88,7 +91,7 @@ abstract class PagingDataSourceFactory<T>(
 }
 
 fun <T> dataSourceFactory(
-    loadingStates: LoadingStates,
+    loadingStates: BehaviorProcessor<LoadingState>,
     loadFunction: LoadFunction<T>,
 ) = object : PagingDataSourceFactory<T>(loadingStates) {
     override val loadFunction: LoadFunction<T> = loadFunction

@@ -1,17 +1,21 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
+import android.widget.TextView
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.ImageViewMode
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +35,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.util.TreeMap
@@ -83,7 +88,7 @@ class ImageAdapterTest {
         val listItemView: View = inflater.inflate(R.layout.item_custom_selector_image, null, false)
         holder = ImageAdapter.ImageViewHolder(listItemView)
 
-        selectedImageField = imageAdapter.javaClass.getDeclaredField("selectedImages")
+        selectedImageField = imageAdapter.selectionManager.javaClass.getDeclaredField("selectedImages")
         selectedImageField.isAccessible = true
     }
 
@@ -101,6 +106,53 @@ class ImageAdapterTest {
     }
 
     /**
+     * Test that list mode inflates the row with the extra detail views.
+     */
+    @Test
+    fun `onCreateViewHolder uses list layout in list mode`() {
+        images.add(image)
+        imageAdapter.selectionManager.setSelectedImages(images)
+        imageAdapter.viewMode = ImageViewMode.LIST
+
+        val listHolder = imageAdapter.createViewHolder(GridLayout(activity), 0)
+
+        Assertions.assertNotNull(listHolder.itemView.findViewById<View>(R.id.image_name))
+        Assertions.assertNotNull(listHolder.itemView.findViewById<View>(R.id.location_indicator))
+        Assertions.assertEquals(1, imageAdapter.selectionManager.selectedImages.size)
+    }
+
+    /**
+     * Test that metadata and the geolocation indicator are bound to list rows.
+     */
+    @Test
+    fun `list holder binds metadata and geolocation indicator`() {
+        val listItemView =
+            LayoutInflater
+                .from(activity)
+                .inflate(R.layout.item_custom_selector_image_list, null, false)
+        val listHolder = ImageAdapter.ImageViewHolder(listItemView)
+
+        listHolder.imageName?.text = "photo.jpg"
+        listHolder.imageDetails?.text = "4032 × 3024 · 2.1 MB"
+        listHolder.locationIndicator?.visibility = View.VISIBLE
+        Assertions.assertEquals("photo.jpg", listItemView.findViewById<TextView>(R.id.image_name).text.toString())
+        Assertions.assertEquals(
+            "4032 × 3024 · 2.1 MB",
+            listItemView.findViewById<TextView>(R.id.image_details).text.toString(),
+        )
+        Assertions.assertEquals(
+            View.VISIBLE,
+            listItemView.findViewById<View>(R.id.location_indicator).visibility,
+        )
+
+        listHolder.locationIndicator?.visibility = View.GONE
+        Assertions.assertEquals(
+            View.GONE,
+            listItemView.findViewById<View>(R.id.location_indicator).visibility,
+        )
+    }
+
+    /**
      * Test on bind view holder.
      */
     @Test
@@ -115,8 +167,47 @@ class ImageAdapterTest {
             .thenReturn(sharedPreferences)
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
-        selectedImageField.set(imageAdapter, images)
+        selectedImageField.set(imageAdapter.selectionManager, images)
         imageAdapter.onBindViewHolder(holder, 0)
+    }
+
+    /**
+     * Test on bind view holder with an image whose file was deleted from the
+     * device: the adapter must shrink its item count accordingly so the
+     * RecyclerView never binds a position that no longer exists.
+     */
+    @Test
+    fun `onBindViewHolder removes deleted image from item count`() {
+        // The deletion is processed through itemView.post(), which only runs
+        // for a view attached to a window, so use a real activity here.
+        val createdActivity =
+            Robolectric
+                .buildActivity(Activity::class.java)
+                .setup()
+                .get()
+        val inflater =
+            createdActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val itemView: View = inflater.inflate(R.layout.item_custom_selector_image, null, false)
+        createdActivity.setContentView(itemView)
+        val attachedHolder = ImageAdapter.ImageViewHolder(itemView)
+        val adapter = ImageAdapter(createdActivity, imageSelectListener, imageLoader)
+
+        // The content resolver returns a null type for these URIs, so the
+        // adapter treats them as deleted from the device.
+        val deletedUri: Uri = Uri.parse("content://media/external/images/media/1")
+        val otherUri: Uri = Uri.parse("content://media/external/images/media/2")
+        images.add(Image(1, "image", deletedUri, "abc/abc", 1, "bucket1"))
+        images.add(Image(2, "image2", otherUri, "abc/def", 1, "bucket1"))
+        adapter.init(images, images, TreeMap())
+
+        adapter.onBindViewHolder(attachedHolder, 0)
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+
+        Assertions.assertEquals(1, adapter.itemCount)
+
+        // Binding the former last position must not throw
+        // IndexOutOfBoundsException.
+        adapter.onBindViewHolder(attachedHolder, 1)
     }
 
     /**
@@ -165,54 +256,6 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test private function select or remove image.
-     */
-    @Test
-    fun selectOrRemoveImage() {
-        // Access function
-        val func =
-            imageAdapter.javaClass.getDeclaredMethod(
-                "selectOrRemoveImage",
-                ImageAdapter.ImageViewHolder::class.java,
-                Int::class.java,
-            )
-        func.isAccessible = true
-
-        // Parameters
-        images.addAll(listOf(image, image))
-        imageAdapter.init(images, images, TreeMap())
-
-        // Test conditions
-        holder.itemUploaded()
-        func.invoke(imageAdapter, holder, 0)
-        holder.itemNotUploaded()
-        holder.itemNotForUpload()
-        func.invoke(imageAdapter, holder, 0)
-        holder.itemNotForUpload()
-        func.invoke(imageAdapter, holder, 0)
-        selectedImageField.set(imageAdapter, images)
-        func.invoke(imageAdapter, holder, 1)
-    }
-
-    /**
-     * Test private function onThumbnailClicked.
-     */
-    @Test
-    fun onThumbnailClicked() {
-        images.add(image)
-        Whitebox.setInternalState(imageAdapter, "images", images)
-        // Access function
-        val func =
-            imageAdapter.javaClass.getDeclaredMethod(
-                "onThumbnailClicked",
-                Int::class.java,
-                ImageAdapter.ImageViewHolder::class.java,
-            )
-        func.isAccessible = true
-        func.invoke(imageAdapter, 0, holder)
-    }
-
-    /**
      * Test get item count.
      */
     @Test
@@ -226,7 +269,7 @@ class ImageAdapterTest {
     @Test
     fun setSelectedImages() {
         images.add(image)
-        imageAdapter.setSelectedImages(images)
+        imageAdapter.selectionManager.setSelectedImages(images)
     }
 
     /**
@@ -256,11 +299,11 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test getImageId
+     * Test imageIds
      */
     @Test
-    fun getImageIdAt() {
+    fun imageIds() {
         imageAdapter.init(listOf(image), listOf(image), TreeMap())
-        Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
+        Assertions.assertEquals(1, imageAdapter.imageIds[0])
     }
 }

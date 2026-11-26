@@ -69,10 +69,6 @@
     <item quantity="one">%1$d بارگذاری</item>
     <item quantity="other">%1$d بارگذاری</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">این تصویر تحت مجوز %1$s است</item>
-    <item quantity="other">این تصویر تحت مجوز %1$s است</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d بارگذاری</item>
     <item quantity="other">%1$d بارگذاری</item>
@@ -105,7 +101,6 @@
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">بارگذاری پرونده: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
@@ -304,7 +299,7 @@
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
-  <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفاً برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
+  <string name="error_review">خطا در دریافت تصویر برای بررسی. برای تلاش دوباره، دکمه تازه‌سازی را کلیک کنید.</string>
   <string name="no_notifications">هیج آگاه‌سازی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>

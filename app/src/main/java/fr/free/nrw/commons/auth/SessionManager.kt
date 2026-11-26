@@ -18,22 +18,25 @@ import javax.inject.Singleton
  * Manage the current logged in user session.
  */
 @Singleton
-class SessionManager @Inject constructor(
+class SessionManager
+@Inject
+constructor(
     private val context: Context,
-    @param:Named("default_preferences") private val defaultKvStore: JsonKvStore
+    @param:Named("default_preferences") private val defaultKvStore: JsonKvStore,
 ) {
     private val accountManager: AccountManager get() = AccountManager.get(context)
 
     private var _currentAccount: Account? = null // Unlike a savings account...  ;-)
-    val currentAccount: Account? get() {
-        if (_currentAccount == null) {
-            val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
-            if (allAccounts.isNotEmpty()) {
-                _currentAccount = allAccounts[0]
+    val currentAccount: Account?
+        get() {
+            if (_currentAccount == null) {
+                val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
+                if (allAccounts.isNotEmpty()) {
+                    _currentAccount = allAccounts[0]
+                }
             }
+            return _currentAccount
         }
-        return _currentAccount
-    }
 
     val userName: String?
         get() = currentAccount?.name
@@ -53,13 +56,11 @@ class SessionManager @Inject constructor(
         }
     }
 
-    fun invalidateOAuthToken() {
-        currentAccount?.let { account ->
-            accountManager.invalidateAuthToken(ACCOUNT_TYPE, accountManager.peekAuthToken(account, KEY_OAUTH2))
-        }
-    }
-
-    fun updateOAuthAccount(username: String, accessToken: String, refreshToken: String) {
+    fun updateOAuthAccount(
+        username: String,
+        accessToken: String,
+        refreshToken: String,
+    ) {
         var account = currentAccount
         if (account == null || TextUtils.isEmpty(account.name) || account.name != username) {
             removeAccount()
@@ -73,32 +74,31 @@ class SessionManager @Inject constructor(
         setUserLoggedIn(true)
     }
 
-    fun getAccessToken(): String? {
-        return currentAccount?.let { accountManager.peekAuthToken(it, KEY_OAUTH2) }
-    }
+    fun getAccessToken(): String? =
+        currentAccount?.let { accountManager.peekAuthToken(it, KEY_OAUTH2) }
 
-    fun doesAccountExist(): Boolean =
-        currentAccount != null
+    fun doesAccountExist(): Boolean = currentAccount != null
 
-    fun setUserLoggedIn(isLoggedIn: Boolean) =
-        defaultKvStore.putBoolean("isUserLoggedIn", isLoggedIn)
+    fun setUserLoggedIn(isLoggedIn: Boolean) = defaultKvStore.putBoolean("isUserLoggedIn", isLoggedIn)
 
-    fun forceLogin(context: Context?) =
-        context?.let { LoginActivity.startYourself(it) }
+    fun forceLogin(context: Context?) = context?.let { LoginActivity.startYourself(it) }
 
-    fun getPreference(key: String): Boolean =
-        defaultKvStore.getBoolean(key)
+    fun getPreference(key: String): Boolean = defaultKvStore.getBoolean(key)
 
-    fun logout(): Completable = Completable.fromObservable(
-        Observable.empty<Any>()
-            .doOnComplete {
-                removeAccount()
-                invalidateOAuthToken()
-                _currentAccount = null
-            }
-    )
+    fun logout(): Completable =
+        Completable.fromObservable(
+            Observable
+                .empty<Any>()
+                .doOnComplete {
+                    removeAccount()
+                    _currentAccount = null
+                },
+        )
 
-    private fun createAccount(userName: String, password: String): Boolean {
+    private fun createAccount(
+        userName: String,
+        password: String,
+    ): Boolean {
         var account = currentAccount
         if (account == null || TextUtils.isEmpty(account.name) || account.name != userName) {
             removeAccount()
@@ -110,6 +110,7 @@ class SessionManager @Inject constructor(
 
     private fun removeAccount() {
         currentAccount?.let {
+            accountManager.invalidateAuthToken(ACCOUNT_TYPE, accountManager.peekAuthToken(it, KEY_OAUTH2))
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                 accountManager.removeAccountExplicitly(it)
             } else {

@@ -23,7 +23,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
 import fr.free.nrw.commons.profile.ProfileActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -174,11 +173,12 @@ class BookmarkLocationFragmentUnitTests {
      */
     @Test
     @Throws(Exception::class)
-    fun testOnResume() = runBlocking {
-        val fragmentSpy = spy(fragment)
-        whenever(controller.loadFavoritesLocations()).thenReturn(mockBookmarkList)
+    fun testOnResume() =
+        runBlocking {
+            val fragmentSpy = spy(fragment)
+            whenever(controller.loadFavoritesLocations()).thenReturn(mockBookmarkList)
 
-        fragmentSpy.onResume()
-        verify(fragmentSpy).initList()
-    }
+            fragmentSpy.onResume()
+            verify(fragmentSpy).initList()
+        }
 }

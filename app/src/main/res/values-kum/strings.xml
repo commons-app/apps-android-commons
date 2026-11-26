@@ -15,7 +15,6 @@
   <string name="signup">Къайытланмакъ</string>
   <string name="logging_in_title">Гирив</string>
   <string name="upload_completed_notification_title">%1$s юкленген!</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s юкленип тура</string>
   <string name="upload_failed_notification_subtitle">Къарамакъ учун бас</string>
   <string name="contribution_state_queued">Гезикде</string>
   <string name="contribution_state_starting">Юклев</string>

@@ -75,7 +75,6 @@
   <string name="upload_completed_notification_title">%1$s төялде!</string>
   <string name="upload_completed_notification_text">Төялгән файлыгызны карау өчен басыгыз</string>
   <string name="upload_progress_notification_title_start">Файлны төяү: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s йөкләнә</string>
   <string name="upload_progress_notification_title_finishing">%1$s йөкләве тәмамлана</string>
   <string name="upload_failed_notification_title">%1$s йөкләнә алмады</string>
   <string name="upload_paused_notification_title">%1$s йөкләнүе туктатылып калды</string>

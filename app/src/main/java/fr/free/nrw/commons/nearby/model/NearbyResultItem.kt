@@ -2,6 +2,9 @@ package fr.free.nrw.commons.nearby.model
 
 import com.google.gson.annotations.SerializedName
 
+// Suppressed TooManyFunctions because each function is a field accessor for a single
+// Wikidata/SPARQL Nearby query result row.
+@Suppress("TooManyFunctions")
 class NearbyResultItem(
     private val item: ResultTuple?,
     private val wikipediaArticle: ResultTuple?,
@@ -63,5 +66,4 @@ class NearbyResultItem(
     fun getMonument(): ResultTuple? = monument
 
     fun getPointInTime(): ResultTuple = pointInTime ?: ResultTuple()
-
 }

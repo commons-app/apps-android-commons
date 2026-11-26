@@ -16,6 +16,7 @@
 * S099001
 * Simon Shek
 * StephDC
+* SupaplexTW
 * Tranve
 * Wehwei
 * Winston Sung
@@ -62,10 +63,6 @@
     <item quantity="one">%1$d 個上傳</item>
     <item quantity="other">%1$d 個上傳</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
-    <item quantity="other">這些圖片會按 %1$s 協議授權上傳</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d 個上傳</item>
     <item quantity="other">%1$d 個上傳</item>
@@ -105,7 +102,6 @@
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
   <string name="upload_progress_notification_title_start">開始上傳檔案：%1$s</string>
-  <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_paused_notification_title">已暫停上傳%1$s</string>
@@ -296,6 +292,9 @@
   <string name="null_url">錯誤！查無 URL</string>
   <string name="nominate_deletion">提名刪除</string>
   <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
+  <string name="file_deleted_from_commons">該檔案已經從維基共享資源中刪除了。</string>
+  <string name="contribution_deleted">已刪除</string>
+  <string name="deleted_file_activity_title">檔案已刪除</string>
   <string name="nominated_see_more">詳情請參閱網頁</string>
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
@@ -826,7 +825,7 @@
   </plurals>
   <string name="multiple_files_depiction">請記住，多重上傳中的所有圖片都會取得相同的分類和描述。如果圖片不要共享描述和分類，請執行多次單筆上傳。</string>
   <string name="multiple_files_depiction_header">關於多次上傳的註釋</string>
-  <string name="nearby_wikitalk">向維基數據回報關於此項目的問題</string>
+  <string name="nearby_report_problem">向維基數據回報關於此項目的問題</string>
   <string name="please_enter_some_comments">請輸入一些意見。</string>
   <string name="talk">討論</string>
   <string name="write_something_about_the_item">填寫一些關於「%1$s」項目的事物。內容將公開可見。</string>
@@ -884,4 +883,9 @@
   <string name="error_applying_blur">套用模糊出錯</string>
   <string name="failed_to_apply_crop">套用裁剪失敗</string>
   <string name="failed_to_save_image">儲存圖片失敗</string>
+  <string name="format_jpeg">JPEG</string>
+  <string name="format_png">PNG</string>
+  <string name="format_svg">SVG</string>
+  <string name="format_ogg_audio">OGG（音訊）</string>
+  <string name="unsupported_format_title">不支援的格式</string>
 </resources>

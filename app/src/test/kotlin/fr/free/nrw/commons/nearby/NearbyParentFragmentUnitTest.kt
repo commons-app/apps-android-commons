@@ -6,17 +6,14 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.BaseMarker
@@ -24,6 +21,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -71,9 +69,6 @@ class NearbyParentFragmentUnitTest {
     private lateinit var view: View
 
     @Mock
-    private lateinit var ivToggleChips: AppCompatImageView
-
-    @Mock
     private lateinit var configuration: Configuration
 
     @Mock
@@ -83,7 +78,8 @@ class NearbyParentFragmentUnitTest {
     private lateinit var rlBottomSheetLayoutParams: ViewGroup.LayoutParams
 
     @Mock
-    private lateinit var nearbyParentFragmentInstanceReadyCallback: NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
+    private lateinit var nearbyParentFragmentInstanceReadyCallback:
+        NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback
 
     @Mock
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
@@ -98,19 +94,10 @@ class NearbyParentFragmentUnitTest {
     private lateinit var fab: FloatingActionButton
 
     @Mock
-    private lateinit var bottomSheetDetails: View
-
-    @Mock
-    private lateinit var linearLayout: LinearLayout
-
-    @Mock
-    private lateinit var textView: TextView
-
-    @Mock
-    private lateinit var imageView: ImageView
-
-    @Mock
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao
+
+    @Mock
+    private lateinit var contributionController: ContributionController
 
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: NearbyParentFragment
@@ -142,12 +129,20 @@ class NearbyParentFragmentUnitTest {
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(fragment, "wikidataEditListener", wikidataEditListener)
         Whitebox.setInternalState(fragment, "bookmarkLocationDao", bookmarkLocationDao)
+        Whitebox.setInternalState(fragment, "controller", contributionController)
 
         Whitebox.setInternalState(
             fragment,
             "nearbyParentFragmentInstanceReadyCallback",
             nearbyParentFragmentInstanceReadyCallback,
         )
+    }
+
+    @Test
+    fun `reset advanced query reloads the default search and keeps the editor open`() {
+        fragment.resetAdvancedQuery()
+        verify(presenter).setAdvancedQuery("")
+        verify(presenter).updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
     }
 
     @Test @Ignore
@@ -364,21 +359,22 @@ class NearbyParentFragmentUnitTest {
         val pickerLng = 56.78
         allPhotoCoordinates.add(
             LatLng(
-                pickerLat, pickerLng,
-                accuracy = 0f
-            )
+                pickerLat,
+                pickerLng,
+                accuracy = 0f,
+            ),
         )
         val pickerFragment =
             NearbyParentFragment.newPickerInstance(allPhotoCoordinates)
         Assert.assertNotNull(pickerFragment.arguments)
         Assert.assertTrue(
-            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE)
+            pickerFragment.arguments!!.getBoolean(NearbyParentFragment.ARG_PICKER_MODE),
         )
         Assert.assertEquals(
             allPhotoCoordinates,
             pickerFragment.arguments!!.getParcelableArrayList<LatLng>(
-                NearbyParentFragment.ARG_PHOTO_LATLNGS
-            )
+                NearbyParentFragment.ARG_PHOTO_LATLNGS,
+            ),
         )
     }
 
@@ -386,11 +382,12 @@ class NearbyParentFragmentUnitTest {
     @Throws(Exception::class)
     fun testMarkerPriorityOrder() {
         // Use reflection to access the private getMarkerPriority method
-        val getMarkerPriorityMethod = NearbyParentFragment::class.java.getDeclaredMethod(
-            "getMarkerPriority",
-            Place::class.java,
-            Boolean::class.java
-        )
+        val getMarkerPriorityMethod =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "getMarkerPriority",
+                Place::class.java,
+                Boolean::class.java,
+            )
         getMarkerPriorityMethod.isAccessible = true
 
         // Mock a place that needs a photo (Red pin)
@@ -421,14 +418,32 @@ class NearbyParentFragmentUnitTest {
 
         // Red (needs photo) should be drawn on top of Green (has photo), so Red > Green priority
         Assert.assertTrue(
-            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Has Photo (Green) priority ($priorityHasPhoto)",
-            priorityNeedsPhoto > priorityHasPhoto
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than " +
+                "Has Photo (Green) priority ($priorityHasPhoto)",
+            priorityNeedsPhoto > priorityHasPhoto,
         )
-        
+
         // Red should also be drawn on top of Monuments
         Assert.assertTrue(
-            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than Monument priority ($priorityMonument)",
-            priorityNeedsPhoto > priorityMonument
+            "Needs Photo (Red) priority ($priorityNeedsPhoto) should be greater than " +
+                "Monument priority ($priorityMonument)",
+            priorityNeedsPhoto > priorityMonument,
         )
+    }
+
+    @Test
+    fun `onDestroyView keeps nearby place while picker result is pending`() {
+        whenever(contributionController.isInternalUploadInProgress).thenReturn(true)
+
+        fragment.onDestroyView()
+
+        verify(presenter, never()).removeNearbyPreferences(applicationKvStore)
+    }
+
+    @Test
+    fun `onDestroyView clears nearby place when no picker result is pending`() {
+        fragment.onDestroyView()
+
+        verify(presenter).removeNearbyPreferences(applicationKvStore)
     }
 }

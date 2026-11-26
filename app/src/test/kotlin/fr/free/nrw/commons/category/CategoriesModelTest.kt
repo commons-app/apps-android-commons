@@ -56,7 +56,6 @@ class CategoriesModelTest {
             categoryClient.searchCategoriesForPrefix(
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.anyInt(),
-                ArgumentMatchers.anyInt(),
             ),
         ).thenReturn(Single.just(expectedList))
 
@@ -80,6 +79,10 @@ class CategoriesModelTest {
             categoryTerm,
             CategoriesModel.SEARCH_CATS_LIMIT,
         )
+        verify(categoryClient).searchCategoriesForPrefix(
+            "Tests",
+            CategoriesModel.SEARCH_CATS_LIMIT,
+        )
 
         categoriesModel
             .searchAll(categoryTerm, emptyList(), emptyList())
@@ -88,23 +91,90 @@ class CategoriesModelTest {
     }
 
     @Test
+    fun `typed search includes the plural category missing from the singular prefix page`() {
+        whenever(
+            categoryClient.searchCategoriesForPrefix("Cat", CategoriesModel.SEARCH_CATS_LIMIT),
+        ).thenReturn(
+            Single.just(
+                listOf(
+                    categoryItem("Cat"),
+                    categoryItem("Cat's Eye Nebula"),
+                ),
+            ),
+        )
+        whenever(
+            categoryClient.searchCategoriesForPrefix("Cats", CategoriesModel.SEARCH_CATS_LIMIT),
+        ).thenReturn(Single.just(listOf(categoryItem("Cats"))))
+
+        val names =
+            categoriesModel
+                .searchAll("Cat", emptyList(), emptyList())
+                .blockingFirst()
+                .map { it.name }
+
+        Assert.assertEquals(listOf("Cat", "Cats", "Cat's Eye Nebula"), names)
+    }
+
+    @Test
+    fun `searchMore alternates the text search and the next prefix page`() {
+        whenever(categoryClient.hasMoreTextSearchPages("Cats")).thenReturn(true)
+        whenever(categoryClient.hasMorePrefixPages("Cats")).thenReturn(true)
+        whenever(categoryClient.nextTextSearchPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Black cats"))))
+        whenever(categoryClient.nextPrefixPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Cats in art"))))
+
+        val pages = (1..3).map { categoriesModel.searchMore("Cats").blockingGet().map { it.name } }
+
+        Assert.assertEquals(listOf(listOf("Black cats"), listOf("Cats in art"), listOf("Black cats")), pages)
+    }
+
+    @Test
+    fun `searchMore finds a category that differs in case after the first word`() {
+        // The prefix search has nothing for this, "Tokyo" is capitalised in the category name
+        whenever(categoryClient.hasMoreTextSearchPages("Supermarkets in tokyo")).thenReturn(true)
+        whenever(categoryClient.nextTextSearchPage("Supermarkets in tokyo", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Supermarkets in Tokyo"))))
+
+        val names = categoriesModel.searchMore("Supermarkets in tokyo").blockingGet().map { it.name }
+
+        Assert.assertEquals(listOf("Supermarkets in Tokyo"), names)
+    }
+
+    @Test
+    fun `searchMore skips an empty page and is empty once both searches are used up`() {
+        whenever(categoryClient.hasMoreTextSearchPages("Cats")).thenReturn(true, false)
+        whenever(categoryClient.hasMorePrefixPages("Cats")).thenReturn(true, true, false)
+        whenever(categoryClient.nextTextSearchPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(emptyList()))
+        whenever(categoryClient.nextPrefixPage("Cats", CategoriesModel.SEARCH_CATS_LIMIT))
+            .thenReturn(Single.just(listOf(categoryItem("Cats in art"))))
+
+        Assert.assertEquals(
+            listOf("Cats in art"),
+            categoriesModel.searchMore("Cats").blockingGet().map { it.name },
+        )
+        Assert.assertEquals(emptyList<CategoryItem>(), categoriesModel.searchMore("Cats").blockingGet())
+    }
+
+    @Test
     fun `searchAll with empty search terms creates results from gps, title search & recents`() {
         val gpsCategoryModel: GpsCategoryModel = mock()
         val depictedItem =
             depictedItem(
                 commonsCategories =
-                listOf(
-                    CategoryItem(
-                        "depictionCategory",
-                        "",
-                        "",
-                        false,
+                    listOf(
+                        CategoryItem(
+                            "depictionCategory",
+                            "",
+                            "",
+                            false,
+                        ),
                     ),
-                ),
             )
         val depictedItemWithoutCategories =
             depictedItem(
-                imageUrl = "testUrl"
+                imageUrl = "testUrl",
             )
 
         whenever(gpsCategoryModel.categoriesFromLocation)
@@ -293,7 +363,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is selected and media does not contains category`() {
+    fun `Test onCategoryItemClicked when media is not null and item is selected and media lacks category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",
@@ -321,7 +391,7 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
-    fun `Test onCategoryItemClicked when media is not null and item is not selected and media does not contains category`() {
+    fun `Test onCategoryItemClicked when media is not null and item is not selected and media lacks category`() {
         categoriesModel.onCategoryItemClicked(
             CategoryItem(
                 "name",
@@ -369,5 +439,4 @@ class CategoriesModelTest {
         val input = categoriesModel.isSpammyCategory("Japan in the 1400s")
         Assert.assertTrue(input)
     }
-
 }

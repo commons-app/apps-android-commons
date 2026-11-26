@@ -10,12 +10,13 @@ import fr.free.nrw.commons.databinding.ActivityWelcomeBinding
 import fr.free.nrw.commons.databinding.PopupForCopyrightBinding
 import fr.free.nrw.commons.quiz.QuizActivity
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
+import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 
 class WelcomeActivity : BaseActivity() {
     private var binding: ActivityWelcomeBinding? = null
     private var isQuiz = false
+    private var isWarningDialogDismissed = false
 
     /**
      * Initialises exiting fields and dependencies
@@ -24,6 +25,9 @@ class WelcomeActivity : BaseActivity() {
      */
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            isWarningDialogDismissed = savedInstanceState.getBoolean("warning_dismissed", false)
+        }
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         applyEdgeToEdgeAllInsets(binding!!.welcomePager.rootView)
         setContentView(binding!!.root)
@@ -33,16 +37,22 @@ class WelcomeActivity : BaseActivity() {
         // Enable skip button if beta flavor
         if (isBetaFlavour) {
             binding!!.finishTutorialButton.visibility = View.VISIBLE
+            if (!isWarningDialogDismissed) {
+                val copyrightBinding = PopupForCopyrightBinding.inflate(layoutInflater)
 
-            val copyrightBinding = PopupForCopyrightBinding.inflate(layoutInflater)
+                val dialog =
+                    AlertDialog
+                        .Builder(this)
+                        .setView(copyrightBinding.root)
+                        .setCancelable(false)
+                        .create()
+                dialog.show()
 
-            val dialog = AlertDialog.Builder(this)
-                .setView(copyrightBinding.root)
-                .setCancelable(false)
-                .create()
-            dialog.show()
-
-            copyrightBinding.buttonOk.setOnClickListener { v: View? -> dialog.dismiss() }
+                copyrightBinding.buttonOk.setOnClickListener { v: View? ->
+                    dialog.dismiss()
+                    isWarningDialogDismissed = true
+                }
+            }
         }
 
         val adapter = WelcomePagerAdapter()
@@ -50,21 +60,29 @@ class WelcomeActivity : BaseActivity() {
         binding!!.welcomePagerIndicator.setViewPager(binding!!.welcomePager)
         binding!!.finishTutorialButton.setOnClickListener { v: View? -> finishTutorial() }
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (binding!!.welcomePager.currentItem != 0) {
-                    binding!!.welcomePager.setCurrentItem(binding!!.welcomePager.currentItem - 1, true)
-                } else {
-                    if (defaultKvStore.getBoolean("firstrun", true)) {
-                        finishAffinity()
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (binding!!.welcomePager.currentItem != 0) {
+                        binding!!.welcomePager.setCurrentItem(binding!!.welcomePager.currentItem - 1, true)
                     } else {
-                        isEnabled = false
-                        onBackPressedDispatcher.onBackPressed()
-                        isEnabled = true
+                        if (defaultKvStore.getBoolean("firstrun", true)) {
+                            finishAffinity()
+                        } else {
+                            isEnabled = false
+                            onBackPressedDispatcher.onBackPressed()
+                            isEnabled = true
+                        }
                     }
                 }
-            }
-        })
+            },
+        )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("warning_dismissed", isWarningDialogDismissed)
     }
 
     public override fun onDestroy() {

@@ -19,6 +19,7 @@ import com.facebook.imagepipeline.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.upload.worker.uploadErrorMessage
 import java.io.File
 
 /**
@@ -60,16 +61,18 @@ class FailedUploadsAdapter(
             itemView.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
         itemView.setOnLongClickListener {
-            val clip = ClipData.newPlainText(
-                itemView.context.getString(R.string.caption),
-                item?.media?.displayTitle
-            )
+            val clip =
+                ClipData.newPlainText(
+                    itemView.context.getString(R.string.caption),
+                    item?.media?.displayTitle,
+                )
             clipboardManager.setPrimaryClip(clip)
-            Snackbar.make(
-                itemView,
-                itemView.context.getString(R.string.caption_copied_to_clipboard),
-                Snackbar.LENGTH_SHORT
-            ).show()
+            Snackbar
+                .make(
+                    itemView,
+                    itemView.context.getString(R.string.caption_copied_to_clipboard),
+                    Snackbar.LENGTH_SHORT,
+                ).show()
             true
         }
 
@@ -95,7 +98,7 @@ class FailedUploadsAdapter(
         if (item != null) {
             if (item.state == Contribution.STATE_FAILED) {
                 if (item.errorInfo != null) {
-                    holder.errorTextView.setText(item.errorInfo)
+                    holder.errorTextView.setText(uploadErrorMessage(holder.itemView.context, item.errorInfo))
                 } else {
                     holder.errorTextView.setText("Failed")
                 }
@@ -107,7 +110,7 @@ class FailedUploadsAdapter(
             callback.deleteUpload(item)
         }
         holder.retryButton.setOnClickListener {
-            callback.restartUpload(position)
+            callback.restartUpload(item)
         }
         holder.itemImage.setImageRequest(imageRequest)
     }
@@ -161,10 +164,10 @@ class FailedUploadsAdapter(
         fun deleteUpload(contribution: Contribution?)
 
         /**
-         * Restarts the upload for the item at the specified index.
+         * Restarts the failed upload.
          *
-         * @param index The position of the item in the list.
+         * @param contribution to be restarted.
          */
-        fun restartUpload(index: Int)
+        fun restartUpload(contribution: Contribution?)
     }
 }

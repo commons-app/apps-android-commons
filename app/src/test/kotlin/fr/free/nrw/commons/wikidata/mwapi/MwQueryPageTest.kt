@@ -5,9 +5,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MwQueryPageTest {
-    private val didymUsage = MwQueryPage.FileUsage().apply {
-        setTitle("User:Didym/Mobile upload")
-    }
+    private val didymUsage =
+        MwQueryPage.FileUsage().apply {
+            setTitle("User:Didym/Mobile upload")
+        }
 
     @Test
     fun checkWhetherFileIsUsedInWikis_nullGlobalUsages() {
@@ -38,11 +39,12 @@ class MwQueryPageTest {
     fun checkWhetherFileIsUsedInWikis_didymIgnoredInList() {
         assertTrue(
             checkWhetherFileIsUsedInWikis(
-                null, listOf(
-                    didymUsage, MwQueryPage.FileUsage().apply { setTitle("somewhere else") }
-                )
-            )
+                null,
+                listOf(
+                    didymUsage,
+                    MwQueryPage.FileUsage().apply { setTitle("somewhere else") },
+                ),
+            ),
         )
     }
-
 }

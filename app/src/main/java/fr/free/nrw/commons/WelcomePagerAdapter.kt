@@ -22,7 +22,10 @@ class WelcomePagerAdapter : PagerAdapter() {
      * @param obj Adapter object
      * @return Equality between view and object
      */
-    override fun isViewFromObject(view: View, obj: Any): Boolean = (view === obj)
+    override fun isViewFromObject(
+        view: View,
+        obj: Any,
+    ): Boolean = (view === obj)
 
     /**
      * Provides a way to remove an item from container
@@ -30,10 +33,16 @@ class WelcomePagerAdapter : PagerAdapter() {
      * @param position Index of item
      * @param obj Adapter object
      */
-    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =
-        container.removeView(obj as View)
+    override fun destroyItem(
+        container: ViewGroup,
+        position: Int,
+        obj: Any,
+    ) = container.removeView(obj as View)
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+    override fun instantiateItem(
+        container: ViewGroup,
+        position: Int,
+    ): Any {
         val inflater = LayoutInflater.from(container.context)
         val layout = inflater.inflate(PAGE_LAYOUTS[position], container, false) as ViewGroup
 
@@ -45,12 +54,13 @@ class WelcomePagerAdapter : PagerAdapter() {
             moreInfo.setOnClickListener {
                 handleWebUrl(
                     container.context,
-                    "https://commons.wikimedia.org/wiki/Help:Contents".toUri()
+                    "https://commons.wikimedia.org/wiki/Help:Contents".toUri(),
                 )
             }
 
             // Handle click of finishTutorialButton ("YES!" button) inside layout
-            layout.findViewById<View>(R.id.finishTutorialButton)
+            layout
+                .findViewById<View>(R.id.finishTutorialButton)
                 .setOnClickListener { view: View? -> (container.context as WelcomeActivity).finishTutorial() }
         }
 
@@ -59,12 +69,13 @@ class WelcomePagerAdapter : PagerAdapter() {
     }
 
     companion object {
-        private val PAGE_LAYOUTS = intArrayOf(
-            R.layout.welcome_wikipedia,
-            R.layout.welcome_do_upload,
-            R.layout.welcome_dont_upload,
-            R.layout.welcome_image_example,
-            R.layout.welcome_final
-        )
+        private val PAGE_LAYOUTS =
+            intArrayOf(
+                R.layout.welcome_wikipedia,
+                R.layout.welcome_do_upload,
+                R.layout.welcome_dont_upload,
+                R.layout.welcome_image_example,
+                R.layout.welcome_final,
+            )
     }
 }

@@ -91,12 +91,6 @@
     <item quantity="many">%1$d загрузок</item>
     <item quantity="other">%1$d загрузок</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Это изображение будет лицензировано под %1$s</item>
-    <item quantity="few">Эти изображения будут лицензированы под %1$s</item>
-    <item quantity="many">Эти изображения будут лицензированы под %1$s</item>
-    <item quantity="other">Эти изображения будут лицензированы под %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d загрузка</item>
     <item quantity="few">%1$d загрузки</item>
@@ -140,7 +134,6 @@
   <string name="upload_completed_notification_title">%1$s загружен!</string>
   <string name="upload_completed_notification_text">Нажмите для просмотра загруженного файла</string>
   <string name="upload_progress_notification_title_start">Загрузка файла: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
   <string name="upload_failed_notification_title">Не удалось загрузить %1$s</string>
   <string name="upload_paused_notification_title">Загрузка %1$s приостановлена</string>
@@ -860,7 +853,7 @@
   </plurals>
   <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
   <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
-  <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
+  <string name="nearby_report_problem">Сообщить о проблеме с этим элементом в Викиданные</string>
   <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
   <string name="talk">Обсуждение</string>
   <string name="write_something_about_the_item">Напишите что-нибудь об элементе \'%1$s\'. Это будет видно всем.</string>

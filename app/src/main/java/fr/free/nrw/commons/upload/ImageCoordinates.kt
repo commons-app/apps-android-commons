@@ -34,7 +34,10 @@ class ImageCoordinates internal constructor(
     /**
      * Construct from a stream.
      */
-    internal constructor(stream: InputStream, inAppPictureLocation: LatLng?) : this(ExifInterface(stream), inAppPictureLocation)
+    internal constructor(
+        stream: InputStream,
+        inAppPictureLocation: LatLng?,
+    ) : this(ExifInterface(stream), inAppPictureLocation)
 
     /**
      * Construct from the file path of the image.
@@ -113,7 +116,5 @@ class ImageCoordinates internal constructor(
      * @param coordinate the coordinate value to round
      * @return coordinate rounded to 6 decimal places
      */
-    private fun roundCoordinate(coordinate: Double): String {
-        return String.format(Locale.US, "%.6f", coordinate)
-    }
+    private fun roundCoordinate(coordinate: Double): String = String.format(Locale.US, "%.6f", coordinate)
 }

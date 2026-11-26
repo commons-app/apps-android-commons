@@ -4,7 +4,10 @@ import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter.PostProcessable
 import fr.free.nrw.commons.wikidata.model.BaseModel
 
-abstract class MwResponse : BaseModel(), PostProcessable {
+@Suppress("UnusedPrivateProperty") // Fields deserialized by Gson via reflection
+abstract class MwResponse :
+    BaseModel(),
+    PostProcessable {
     private val errors: List<MwServiceError>? = null
 
     @SerializedName("servedby")

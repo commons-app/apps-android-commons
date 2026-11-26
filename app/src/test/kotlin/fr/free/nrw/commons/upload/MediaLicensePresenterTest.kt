@@ -1,12 +1,11 @@
 package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.utils.UnderlineUtils
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.license.MediaLicenseContract
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter
-import fr.free.nrw.commons.utils.toLicenseName
+import fr.free.nrw.commons.utils.UnderlineUtils
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +15,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockedStatic
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner

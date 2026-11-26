@@ -22,9 +22,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="other">Gambar iki bakal dilisènsèkaké nganggo %1$s</item>
-  </plurals>
   <string name="navigation_item_explore">Dlajah</string>
   <string name="preference_category_appearance">Cakrik</string>
   <string name="preference_category_general">Umum</string>
@@ -48,7 +45,6 @@
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Wiwit nguggah %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Ngunggah %1$s</string>
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>

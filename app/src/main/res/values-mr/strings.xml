@@ -24,10 +24,6 @@
     <item quantity="one">१ अपभारण</item>
     <item quantity="other">%1$d अपभारणे</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">ही संचिका %1$s या परवान्यांतर्गत राहील</item>
-    <item quantity="other">ही संचिका %1$s या परवान्यांतर्गत राहील</item>
-  </plurals>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">अभिप्राय</string>
@@ -49,7 +45,6 @@
   <string name="upload_completed_notification_title">%1$s अपभारीत!</string>
   <string name="upload_completed_notification_text">आपले अपभारण बघण्यास अलगद टपली मारा</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s अपभारण सुरू करीत आहे</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s अपभारण करीत आहे</string>
   <string name="upload_progress_notification_title_finishing">%1$s अपभारण पूर्ण करीत आहे</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s अपभारण अयशस्वी</string>
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>

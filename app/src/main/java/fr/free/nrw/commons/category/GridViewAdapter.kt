@@ -11,16 +11,14 @@ import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 
-
 /**
  * This is created to only display UI implementation. Needs to be changed in real implementation
  */
 class GridViewAdapter(
     context: Context,
     layoutResourceId: Int,
-    private var data: MutableList<Media>?
+    private var data: MutableList<Media>?,
 ) : ArrayAdapter<Media>(context, layoutResourceId, data ?: mutableListOf()) {
-
     /**
      * Adds more items to the list
      * It's triggered on scrolling down in the list
@@ -52,9 +50,7 @@ class GridViewAdapter(
         return imageName == fileName
     }
 
-    override fun isEmpty(): Boolean {
-        return data.isNullOrEmpty()
-    }
+    override fun isEmpty(): Boolean = data.isNullOrEmpty()
 
     /**
      * Sets up the UI for the category image item
@@ -63,12 +59,17 @@ class GridViewAdapter(
      * @param parent
      * @return
      */
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(
-            R.layout.layout_category_images,
-            parent,
-            false
-        )
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
+        val view =
+            convertView ?: LayoutInflater.from(context).inflate(
+                R.layout.layout_category_images,
+                parent,
+                false,
+            )
 
         val item = data?.get(position)
         val imageView = view.findViewById<SimpleDraweeView>(R.id.categoryImageView)
@@ -87,9 +88,7 @@ class GridViewAdapter(
     /**
      * @return the Media item at the given position
      */
-    override fun getItem(position: Int): Media? {
-        return data?.get(position)
-    }
+    override fun getItem(position: Int): Media? = data?.get(position)
 
     /**
      * Shows author information if it's present
@@ -97,10 +96,14 @@ class GridViewAdapter(
      * @param uploader
      */
     @SuppressLint("StringFormatInvalid")
-    private fun setUploaderView(item: Media, uploader: TextView) {
-        uploader.text = context.getString(
-            R.string.image_uploaded_by,
-            item.getAuthorOrUser()
-        )
+    private fun setUploaderView(
+        item: Media,
+        uploader: TextView,
+    ) {
+        uploader.text =
+            context.getString(
+                R.string.image_uploaded_by,
+                item.getAuthorOrUser(),
+            )
     }
 }

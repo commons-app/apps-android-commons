@@ -9,6 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.ArgumentMatchers.anyString
+import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import fr.free.nrw.commons.R
 import org.mockito.Mockito.times
@@ -54,9 +55,11 @@ class DescriptionEditHelperUnitTest {
 
     @Test
     fun testAddCaption() {
-        `when`(media.filename).thenReturn("")
+        `when`(media.filename).thenReturn("File:Example.jpg")
+        `when`(media.pageId).thenReturn("12345")
         `when`(
             pageEditClient.setCaptions(
+                anyString(),
                 anyString(),
                 anyString(),
                 anyString(),
@@ -69,6 +72,7 @@ class DescriptionEditHelperUnitTest {
             anyString(),
             anyString(),
             anyString(),
+            eq("M12345"),
         )
     }
 

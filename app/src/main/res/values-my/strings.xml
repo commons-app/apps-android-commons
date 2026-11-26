@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Dr Lotus Black
+* Nicolas Raoul
 * Ninjastrikers
 * Teitei Para
 * Whym
@@ -24,10 +25,6 @@
   <string name="starting_uploads">အပ်ပလုဒ်များ စတင်ခြင်း</string>
   <plurals name="multiple_uploads_title">
     <item quantity="other">%1$d ခု တင်ထားသည်</item>
-  </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">ဤရုပ်ပုံသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
-    <item quantity="other">ဤရုပ်ပုံများသည် %1$ အောက်တွင် လိုင်စင်သတ်မှတ်ထးပါမည်</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d အက်ပလုပ်</item>
@@ -59,7 +56,6 @@
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
   <string name="upload_paused_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
@@ -91,7 +87,7 @@
   <string name="refresh_button">ပြန်လည်ဆန်းသစ်ရန်</string>
   <string name="display_list_button">စာရင်း</string>
   <string name="contributions_subtitle_zero">(ဖိုင်မတင်ရသေးပါ)</string>
-  <string name="categories_not_found">%1$ နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
+  <string name="categories_not_found">%1$s နှင့်ကိုက်ညီသော ကဏ္ဍများ မတွေ့ရှိပါ</string>
   <string name="categories_activity_title">ကဏ္ဍများ</string>
   <string name="title_activity_settings">အပြင်အဆင်များ</string>
   <string name="title_activity_signup">မှတ်ပုံတင်ရန်</string>

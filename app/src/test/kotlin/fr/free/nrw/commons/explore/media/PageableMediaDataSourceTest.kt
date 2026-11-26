@@ -2,7 +2,7 @@ package fr.free.nrw.commons.explore.media
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.media.MediaClient
+import fr.free.nrw.commons.media.MediaCollectionClient
 import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
@@ -15,7 +15,7 @@ class PageableMediaDataSourceTest {
     lateinit var mediaConverter: MediaConverter
 
     @Mock
-    lateinit var mediaClient: MediaClient
+    lateinit var mediaCollectionClient: MediaCollectionClient
 
     @Before
     fun setUp() {
@@ -23,10 +23,10 @@ class PageableMediaDataSourceTest {
     }
 
     @Test
-    fun `loadFunction invokes mediaClient and has Label`() {
-        whenever(mediaClient.getMediaListFromSearch("test", 0, 1))
+    fun `loadFunction invokes mediaCollectionClient and has Label`() {
+        whenever(mediaCollectionClient.getMediaListFromSearch("test", 0, 1))
             .thenReturn(Single.just(emptyList()))
-        val pageableMediaDataSource = PageableMediaDataSource(mock(), mediaClient)
+        val pageableMediaDataSource = PageableMediaDataSource(mock(), mediaCollectionClient)
         pageableMediaDataSource.onQueryUpdated("test")
         Assert.assertEquals(pageableMediaDataSource.loadFunction(0, 1), emptyList<String>())
     }

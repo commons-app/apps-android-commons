@@ -136,13 +136,17 @@
       android:name=".contributions.MainActivity"
       android:configChanges="screenSize|keyboard|orientation"
       android:icon="@mipmap/ic_launcher"
-      />
+      android:windowSoftInputMode="adjustResize" />
     <activity
       android:name=".settings.SettingsActivity"
       android:label="@string/title_activity_settings" />
     <activity
       android:name=".AboutActivity"
       android:label="@string/title_activity_about"
+      android:parentActivityName=".contributions.MainActivity" />
+    <activity
+      android:name=".media.DeletedFileActivity"
+      android:label="@string/deleted_file_activity_title"
       android:parentActivityName=".contributions.MainActivity" />
     <activity
       android:name=".auth.SignupActivity"

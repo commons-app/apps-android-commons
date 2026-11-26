@@ -31,4 +31,16 @@ interface DepictsInterface {
     fun getEntities(
         @Query("ids") ids: String?,
     ): Single<Entities>
+
+    /**
+     * Fetches only the labels of the given entities in one language, falling back
+     * to other languages (e.g. English) when no label exists in that language.
+     * @param ids pipe-separated Q-IDs, at most 50
+     * @param language language code of the labels to fetch
+     */
+    @GET("/w/api.php?format=json&action=wbgetentities&props=labels&languagefallback=1")
+    fun getLabels(
+        @Query("ids") ids: String,
+        @Query("languages") language: String,
+    ): Single<Entities>
 }

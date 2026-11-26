@@ -14,6 +14,16 @@ import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 
+data class LoginRequest(
+    val username: String,
+    val password: String,
+    val retypedPassword: String? = null,
+    val twoFactorCode: String? = null,
+    val emailAuthCode: String? = null,
+    val loginToken: String? = null,
+    val userLanguage: String = "",
+)
+
 /**
  * Responsible for making login related requests to the server.
  */
@@ -49,14 +59,14 @@ class LoginClient(
                     call: Call<MwQueryResponse?>,
                     response: Response<MwQueryResponse?>,
                 ) {
+                    val loginToken = response.body()?.query()?.loginToken()
                     login(
-                        userName,
-                        password,
-                        null,
-                        null,
-                        null,
-                        response.body()!!.query()!!.loginToken(),
-                        userLanguage,
+                        LoginRequest(
+                            username = userName,
+                            password = password,
+                            loginToken = loginToken,
+                            userLanguage = userLanguage,
+                        ),
                         cb,
                     )
                 }
@@ -75,29 +85,32 @@ class LoginClient(
     }
 
     fun login(
-        userName: String,
-        password: String,
-        retypedPassword: String?,
-        twoFactorCode: String?,
-        emailAuthCode: String?,
-        loginToken: String?,
-        userLanguage: String,
+        request: LoginRequest,
         cb: LoginCallback,
     ) {
-        this.userLanguage = userLanguage
+        this.userLanguage = request.userLanguage
 
         loginCall =
-            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
-                loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
+            if (request.twoFactorCode.isNullOrEmpty() &&
+                request.emailAuthCode.isNullOrEmpty() &&
+                request.retypedPassword.isNullOrEmpty()
+            ) {
+                loginInterface.postLogIn(
+                    request.username,
+                    request.password,
+                    request.loginToken,
+                    request.userLanguage,
+                    WIKIPEDIA_URL,
+                )
             } else {
                 loginInterface.postLogIn(
-                    userName,
-                    password,
-                    retypedPassword,
-                    twoFactorCode,
-                    emailAuthCode,
-                    loginToken,
-                    userLanguage,
+                    request.username,
+                    request.password,
+                    request.retypedPassword,
+                    request.twoFactorCode,
+                    request.emailAuthCode,
+                    request.loginToken,
+                    request.userLanguage,
                     true,
                 )
             }
@@ -108,7 +121,7 @@ class LoginClient(
                     call: Call<LoginResponse?>,
                     response: Response<LoginResponse?>,
                 ) {
-                    val loginResult = response.body()?.toLoginResult(password)
+                    val loginResult = response.body()?.toLoginResult(request.password)
                     if (loginResult != null) {
                         if (loginResult.pass && !loginResult.userName.isNullOrEmpty()) {
                             // The server could do some transformations on user names, e.g. on some
@@ -120,17 +133,17 @@ class LoginClient(
                                     cb.twoFactorPrompt(
                                         loginResult,
                                         LoginFailedException(loginResult.message),
-                                        loginToken,
+                                        request.loginToken,
                                     )
 
                                 is EmailAuthResult ->
                                     cb.emailAuthPrompt(
                                         loginResult,
                                         LoginFailedException(loginResult.message),
-                                        loginToken
+                                        request.loginToken,
                                     )
 
-                                is ResetPasswordResult -> cb.passwordResetPrompt(loginToken)
+                                is ResetPasswordResult -> cb.passwordResetPrompt(request.loginToken)
 
                                 is LoginResult.Result ->
                                     cb.error(
@@ -141,7 +154,12 @@ class LoginClient(
                             cb.error(LoginFailedException(loginResult.message))
                         }
                     } else {
-                        cb.error(IOException("Login failed. Unexpected response."))
+                        val apiError = response.body()?.errorMessage()
+                        if (apiError != null) {
+                            cb.error(LoginFailedException(apiError))
+                        } else {
+                            cb.error(IOException("Login failed. Unexpected response."))
+                        }
                     }
                 }
 
@@ -158,6 +176,92 @@ class LoginClient(
         )
     }
 
+    @Suppress("LongParameterList")
+    fun login(
+        userName: String,
+        password: String,
+        retypedPassword: String?,
+        twoFactorCode: String?,
+        emailAuthCode: String?,
+        loginToken: String?,
+        userLanguage: String,
+        cb: LoginCallback,
+    ) = login(
+        LoginRequest(
+            username = userName,
+            password = password,
+            retypedPassword = retypedPassword,
+            twoFactorCode = twoFactorCode,
+            emailAuthCode = emailAuthCode,
+            loginToken = loginToken,
+            userLanguage = userLanguage,
+        ),
+        cb,
+    )
+
+    fun doLogin(
+        request: LoginRequest,
+        lastLoginResult: LoginResult?,
+        loginCallback: LoginCallback,
+    ) {
+        cancel()
+
+        tokenCall = getLoginToken()
+        tokenCall!!.enqueue(
+            object : Callback<MwQueryResponse?> {
+                override fun onResponse(
+                    call: Call<MwQueryResponse?>,
+                    response: Response<MwQueryResponse?>,
+                ) {
+                    if (call.isCanceled) {
+                        return
+                    }
+                    if (response.isSuccessful) {
+                        val loginToken = response.body()?.query()?.loginToken()
+                        loginToken?.let {
+                            login(
+                                LoginRequest(
+                                    username = request.username,
+                                    password = request.password,
+                                    twoFactorCode =
+                                        if (lastLoginResult is OAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
+                                    emailAuthCode =
+                                        if (lastLoginResult is EmailAuthResult) {
+                                            request.twoFactorCode
+                                        } else {
+                                            null
+                                        },
+                                    loginToken = it,
+                                    userLanguage = request.userLanguage,
+                                ),
+                                loginCallback,
+                            )
+                        } ?: run {
+                            loginCallback.error(IOException("Failed to retrieve login token"))
+                        }
+                    } else {
+                        loginCallback.error(IOException("Failed to retrieve login token"))
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<MwQueryResponse?>,
+                    t: Throwable,
+                ) {
+                    if (call.isCanceled) {
+                        return
+                    }
+                    loginCallback.error(t)
+                }
+            },
+        )
+    }
+
+    @Suppress("LongParameterList")
     fun doLogin(
         username: String,
         password: String,
@@ -165,35 +269,16 @@ class LoginClient(
         twoFactorCode: String,
         userLanguage: String,
         loginCallback: LoginCallback,
-    ) {
-        getLoginToken().enqueue(
-            object : Callback<MwQueryResponse?> {
-                override fun onResponse(
-                    call: Call<MwQueryResponse?>,
-                    response: Response<MwQueryResponse?>,
-                ) = if (response.isSuccessful) {
-                    val loginToken = response.body()?.query()?.loginToken()
-                    loginToken?.let {
-                        login(username, password, null,
-                            if (lastLoginResult is OAuthResult) twoFactorCode else null,
-                            if (lastLoginResult is EmailAuthResult) twoFactorCode else null,
-                            it, userLanguage, loginCallback)
-                    } ?: run {
-                        loginCallback.error(IOException("Failed to retrieve login token"))
-                    }
-                } else {
-                    loginCallback.error(IOException("Failed to retrieve login token"))
-                }
-
-                override fun onFailure(
-                    call: Call<MwQueryResponse?>,
-                    t: Throwable,
-                ) {
-                    loginCallback.error(t)
-                }
-            },
-        )
-    }
+    ) = doLogin(
+        LoginRequest(
+            username = username,
+            password = password,
+            twoFactorCode = twoFactorCode,
+            userLanguage = userLanguage,
+        ),
+        lastLoginResult,
+        loginCallback,
+    )
 
     fun fetchOAuthUserProfile(
         accessToken: String,
@@ -226,7 +311,7 @@ class LoginClient(
         userName: String,
         password: String,
         twoFactorCode: String? = null,
-        emailAuthCode: String? = null
+        emailAuthCode: String? = null,
     ) {
         val tokenResponse = getLoginToken().execute()
         if (tokenResponse
@@ -257,11 +342,12 @@ class LoginClient(
 
         val response = tempLoginCall.execute()
         val loginResponse = response.body() ?: throw IOException("Unexpected response when logging in.")
-        val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
+        val loginResult =
+            loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
 
         if ("UI" == loginResult.status) {
             if (loginResult is OAuthResult || loginResult is EmailAuthResult) {
-                // TODO: Find a better way to boil up the warning about 2FA
+                // The 2FA warning is passed up as the exception message
                 throw LoginFailedException(loginResult.message)
             }
             throw LoginFailedException(loginResult.message)

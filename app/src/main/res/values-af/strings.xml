@@ -4,6 +4,7 @@
 * Fwolff
 * Joris Darlington Quarshie
 * Naudefj
+* Nicolas Raoul
 * Whym
 -->
 <resources>
@@ -24,10 +25,6 @@
   <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
-  </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d upload</item>
@@ -57,7 +54,6 @@
   <string name="upload_completed_notification_title">%1$s opgelaai!</string>
   <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Begin oplaai van %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Besig om %1$s op te laai</string>
   <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
   <string name="upload_failed_notification_title" fuzzy="true">Oplaai van %1$s het gefaal</string>
   <string name="upload_failed_notification_subtitle">Vat om te kyk</string>
@@ -239,7 +235,7 @@
   <string name="showcase_view_whole_nearby_activity">Dit is die plekke in jou omgewing wat foto\'s benodig om hul Wikipedia-artikels te illustreer.\n\nAs u op \'SOEK HIERDIE GEBIED\' klik, word die kaart gesluit en \'n nabygeleë soektog na daardie plek begin.</string>
   <string name="no_images_found">Geen afbeeldings gevind!</string>
   <string name="error_loading_images">Daar is \'n fout opgetree tydens se die laden van die afbeeldings.</string>
-  <string name="image_uploaded_by">Opgelaai deur:%$1s</string>
+  <string name="image_uploaded_by">Opgelaai deur: %1$s</string>
   <string name="block_notification_title">geblokkeer</string>
   <string name="block_notification">U word geblokkeer om Commons te redigeer</string>
   <string name="app_widget_heading">Foto van die dag</string>

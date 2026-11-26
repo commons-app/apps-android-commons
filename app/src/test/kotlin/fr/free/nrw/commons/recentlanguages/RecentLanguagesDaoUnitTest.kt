@@ -90,7 +90,7 @@ class RecentLanguagesDaoUnitTest {
         Assert.assertEquals(14, (result.size))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun getGetRecentLanguagesTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
@@ -128,7 +128,7 @@ class RecentLanguagesDaoUnitTest {
         Assert.assertTrue(testObject.findRecentLanguage(exampleLanguage.languageCode))
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = IllegalStateException::class)
     fun findLanguageTranslatesExceptions() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenThrow(
             RemoteException(""),
@@ -316,7 +316,7 @@ class RecentLanguagesDaoUnitTest {
 
     private fun createCursor(rowCount: Int) =
         MatrixCursor(columns, rowCount).apply {
-            for (i in 0 until rowCount) {
+            repeat(rowCount) {
                 addRow(listOf("languageName", "languageCode"))
             }
         }

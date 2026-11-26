@@ -82,10 +82,6 @@
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dieses Bild wird unter %1$s lizenziert</item>
-    <item quantity="other">Diese Bilder werden unter %1$s lizenziert</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%1$d hochgeladene Dateien</item>
@@ -125,7 +121,6 @@
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
   <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
   <string name="upload_progress_notification_title_start">Hochladen von Datei: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von %1$s fehlgeschlagen</string>
   <string name="upload_paused_notification_title">Hochladen von %1$s pausiert</string>
@@ -838,7 +833,7 @@
   </plurals>
   <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
   <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
-  <string name="nearby_wikitalk">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
+  <string name="nearby_report_problem">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
   <string name="please_enter_some_comments">Bitte gib einige Kommentare ein</string>
   <string name="talk">Diskussion</string>
   <string name="write_something_about_the_item">Schreibe etwas über das Objekt ‚%1$s‘. Deine Beschreibung wird öffentlich sichtbar sein.</string>
