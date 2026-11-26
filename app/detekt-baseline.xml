@@ -14,32 +14,6 @@
     <ID>CyclomaticComplexMethod:PageProperties.kt$PageProperties$override fun equals(o: Any?): Boolean</ID>
     <ID>CyclomaticComplexMethod:SettingsFragment.kt$SettingsFragment$override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?)</ID>
     <ID>CyclomaticComplexMethod:UploadWorker.kt$UploadWorker$@SuppressLint("StringFormatInvalid", "CheckResult", "MissingPermission") private suspend fun uploadContribution(contribution: Contribution)</ID>
-    <ID>EmptyClassBlock:ExtendedFileProvider.kt$ExtendedFileProvider${}</ID>
-    <ID>EmptyElseBlock:DatabaseUtils.kt$if (listString.isNullOrEmpty()) return emptyList()</ID>
-    <ID>EmptyElseBlock:LocationPickerActivity.kt$LocationPickerActivity${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionBoundaryCallback.kt$ContributionBoundaryCallback${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionsListPresenter.kt$ContributionsListPresenter${ }</ID>
-    <ID>EmptyFunctionBlock:ContributionsRemoteDataSource.kt$ContributionsRemoteDataSource${ }</ID>
-    <ID>EmptyFunctionBlock:DefaultCallback.kt$DefaultCallback${}</ID>
-    <ID>EmptyFunctionBlock:DeleteHelper.kt$DeleteHelper.&lt;no name provided&gt;${}</ID>
-    <ID>EmptyFunctionBlock:DescriptionEditActivity.kt$DescriptionEditActivity${}</ID>
-    <ID>EmptyFunctionBlock:EditActivity.kt$EditActivity.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:FooterAdapter.kt$FooterAdapter${}</ID>
-    <ID>EmptyFunctionBlock:LatLngTest.kt$LatLngTest${ }</ID>
-    <ID>EmptyFunctionBlock:MediaDetailFragment.kt$MediaDetailFragment.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:MediaDetailPagerFragment.kt$MediaDetailPagerFragment${ }</ID>
-    <ID>EmptyFunctionBlock:MediaLicenseFragment.kt$MediaLicenseFragment${}</ID>
-    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment${ }</ID>
-    <ID>EmptyFunctionBlock:NearbyParentFragment.kt$NearbyParentFragment.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:PagedListMock.kt$MockLimitDataSource${ }</ID>
-    <ID>EmptyFunctionBlock:PendingUploadsPresenter.kt$PendingUploadsPresenter${ }</ID>
-    <ID>EmptyFunctionBlock:SettingsFragment.kt$SettingsFragment.&lt;no name provided&gt;${}</ID>
-    <ID>EmptyFunctionBlock:UploadProgressActivity.kt$UploadProgressActivity.&lt;no name provided&gt;${ }</ID>
-    <ID>EmptyFunctionBlock:ZoomableDraweeView.kt$ZoomableDraweeView.&lt;no name provided&gt;${}</ID>
-    <ID>EmptySecondaryConstructor:BaseMarker.kt$BaseMarker${ }</ID>
-    <ID>EmptySecondaryConstructor:ChunkInfo.kt$ChunkInfo${ }</ID>
-    <ID>EmptySecondaryConstructor:UploadResult.kt$UploadResult${ }</ID>
-    <ID>ForbiddenComment:AboutActivity.kt$AboutActivity$// TODO:</ID>
     <ID>LargeClass:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$@SuppressLint("ClickableViewAccessibility") override fun onTouchEvent(event: MotionEvent): Boolean</ID>
     <ID>LongMethod:BlurOverlayView.kt$BlurOverlayView$override fun onDraw(canvas: Canvas)</ID>
@@ -98,8 +72,6 @@
     <ID>LongParameterList:UploadClient.kt$UploadClient$( filename: String, contribution: Contribution, notificationUpdater: NotificationUpdateProgressListener, chunkFile: File, failures: AtomicBoolean, chunkInfo: AtomicReference&lt;ChunkInfo?&gt;, index: AtomicInteger, error: AtomicReference&lt;Throwable?&gt;, mediaType: MediaType, file: File, totalChunks: Int, )</ID>
     <ID>LongParameterList:UploadClient.kt$UploadClient$( private val uploadInterface: UploadInterface, @Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient, private val pageContentsCreator: PageContentsCreator, private val fileUtilsWrapper: FileUtilsWrapper, private val gson: Gson, private val timeProvider: TimeProvider, private val contributionDao: ContributionDao, )</ID>
     <ID>LongParameterList:UploadItem.kt$UploadItem$( var mediaUri: Uri?, val mimeType: String?, var gpsCoords: ImageCoordinates?, var place: Place?, val createdTimestamp: Long?, val createdTimestampSource: String?, /** * Uri of uploadItem * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10) */ var contentUri: Uri?, // according to EXIF data val fileCreatedDateString: String?, val hasUnsupportedFormat: Boolean = false, )</ID>
-    <ID>LongParameterList:UploadModel.kt$UploadModel$( @param:Named("licenses") val licenses: List&lt;String&gt;, @param:Named("default_preferences") val store: JsonKvStore, @param:Named("licenses_by_name") val licensesByName: Map&lt;String, String&gt;, val context: Context, val sessionManager: SessionManager, val fileProcessor: FileProcessor, val imageProcessingService: ImageProcessingService, )</ID>
-
     <ID>MagicNumber:AboutActivity.kt$AboutActivity$17</ID>
     <ID>MagicNumber:AboutActivity.kt$AboutActivity$50</ID>
     <ID>MagicNumber:AbstractAnimatedZoomableController.kt$AbstractAnimatedZoomableController$8</ID>
@@ -578,7 +550,6 @@
     <ID>TooManyFunctions:MediaDetailPagerFragment.kt$MediaDetailPagerFragment : CommonsDaggerSupportFragmentCallback</ID>
     <ID>TooManyFunctions:NearbyParentFragment.kt$NearbyParentFragment : CommonsDaggerSupportFragmentViewWikidataP18EditListenerLocationUpdateListenerLocationPermissionCallbackItemClickListenerMediaDetailProvider</ID>
     <ID>TooManyFunctions:NetworkingModule.kt$NetworkingModule</ID>
-    <ID>TooManyFunctions:RandomAccessFileExifWriter.kt$RandomAccessFileExifWriter</ID>
     <ID>TooManyFunctions:ZoomableActivity.kt$ZoomableActivity : BaseActivity</ID>
     <ID>TooManyFunctions:ZoomableController.kt$ZoomableController</ID>
     <ID>TooManyFunctions:ZoomableDraweeView.kt$ZoomableDraweeView : DraweeViewScrollingView</ID>
