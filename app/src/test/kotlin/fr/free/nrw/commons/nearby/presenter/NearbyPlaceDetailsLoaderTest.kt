@@ -317,15 +317,25 @@ class NearbyPlaceDetailsLoaderTest {
     fun testPauseMadeLongerWhileWaitingIsWaitedOut() =
         runBlocking<Unit> {
             stubForLoading()
-            // The first batch is told to wait 200 ms. While it waits, the second one is told 1 s.
+            // The first batch is told to wait 500 ms. While it waits, the second one is told 1 s.
+            // Both are sent before either gets an answer, so this doesn't depend on when the threads start.
+            val bothSent = CountDownLatch(2)
             val longPauseFrom = AtomicLong()
             val sentAt = CopyOnWriteArrayList<Long>()
             requestSizes { call ->
                 sentAt.add(System.currentTimeMillis())
+                if (call < 2) {
+                    bothSent.countDown()
+                    bothSent.await(5, TimeUnit.SECONDS)
+                }
                 when (call) {
-                    0 -> throw SparqlResponseException(429, 200)
+                    0 -> throw SparqlResponseException(429, 500)
                     1 -> {
-                        Thread.sleep(100)
+                        // Wait until the first batch is in its pause
+                        val giveUpAt = System.currentTimeMillis() + 5000
+                        while (loader.throttle.waitMillis() == 0L && System.currentTimeMillis() < giveUpAt) {
+                            Thread.sleep(5)
+                        }
                         longPauseFrom.set(System.currentTimeMillis())
                         throw SparqlResponseException(429, 1000)
                     }
