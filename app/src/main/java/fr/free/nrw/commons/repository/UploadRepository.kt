@@ -12,12 +12,14 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyPlaces
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
+import fr.free.nrw.commons.upload.SAME_PLACE_RADIUS_IN_METRES
 import fr.free.nrw.commons.upload.SimilarImageInterface
 import fr.free.nrw.commons.upload.UploadController
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -462,6 +464,20 @@ class UploadRepository
         }
 
         /**
+         * The nearby place lookups of the current upload. Pictures taken at the same spot get the same
+         * answer, so they share one lookup instead of each sending the same query (#7436).
+         */
+        private val nearbyPlaceLookups = mutableListOf<NearbyPlaceLookup>()
+
+        private class NearbyPlaceLookup(
+            val location: LatLng,
+        ) {
+            var isDone = false
+            var hasFailed = false
+            var place: Place? = null
+        }
+
+        /**
          * Asks the RemoteDataSource to build contributions
          *
          * @return
@@ -497,6 +513,7 @@ class UploadRepository
             // won't support this
             categoriesModel.cleanUp()
             depictModel.cleanUp()
+            synchronized(nearbyPlaceLookups) { nearbyPlaceLookups.clear() }
         }
 
         /**
@@ -539,26 +556,43 @@ class UploadRepository
         fun checkNearbyPlaces(
             decLatitude: Double,
             decLongitude: Double,
-        ): Place? =
-            try {
-                val fromWikidataQuery =
-                    nearbyPlaces.getFromWikidataQuery(
-                        LatLng(decLatitude, decLongitude, 0.0f),
-                        Locale.getDefault().language,
-                        NEARBY_RADIUS_IN_KILO_METERS,
-                        null,
-                    )
-                fromWikidataQuery?.firstOrNull()
-            } catch (e: IOException) {
-                Timber.e("Error fetching nearby places: %s", e.message)
-                null
-            } catch (e: JsonParseException) {
-                Timber.e("Error fetching nearby places: %s", e.message)
-                null
-            } catch (e: IllegalArgumentException) {
-                Timber.e("Error fetching nearby places: %s", e.message)
-                null
+        ): Place? {
+            val location = LatLng(decLatitude, decLongitude, 0.0f)
+            val lookup =
+                synchronized(nearbyPlaceLookups) {
+                    nearbyPlaceLookups.firstOrNull {
+                        computeDistanceBetween(it.location, location) <= SAME_PLACE_RADIUS_IN_METRES
+                    } ?: NearbyPlaceLookup(location).also { nearbyPlaceLookups.add(it) }
+                }
+            // The other pictures of this spot wait here and reuse the result
+            return synchronized(lookup) {
+                if (!lookup.isDone && !lookup.hasFailed) {
+                    try {
+                        val fromWikidataQuery =
+                            nearbyPlaces.getFromWikidataQuery(
+                                lookup.location,
+                                Locale.getDefault().language,
+                                NEARBY_RADIUS_IN_KILO_METERS,
+                                null,
+                            )
+                        lookup.place = fromWikidataQuery?.firstOrNull()
+                        lookup.isDone = true
+                    } catch (e: IOException) {
+                        Timber.e("Error fetching nearby places: %s", e.message)
+                    } catch (e: JsonParseException) {
+                        Timber.e("Error fetching nearby places: %s", e.message)
+                    } catch (e: IllegalArgumentException) {
+                        Timber.e("Error fetching nearby places: %s", e.message)
+                    }
+                    if (!lookup.isDone) {
+                        // The pictures waiting for it give up too. A later picture of this spot tries again.
+                        lookup.hasFailed = true
+                        synchronized(nearbyPlaceLookups) { nearbyPlaceLookups.remove(lookup) }
+                    }
+                }
+                lookup.place
             }
+        }
 
         /**
          * Builds a string by joining all IDs divided by "|"

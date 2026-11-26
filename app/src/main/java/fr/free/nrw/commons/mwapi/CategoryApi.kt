@@ -2,8 +2,10 @@ package fr.free.nrw.commons.mwapi
 
 import com.google.gson.Gson
 import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.UnsuccessfulResponseException
 import fr.free.nrw.commons.category.CATEGORY_PREFIX
 import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.retryAfterMillis
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Single
 import okhttp3.HttpUrl
@@ -31,9 +33,15 @@ class CategoryApi @Inject constructor(
 
         val request: Request = Request.Builder().get().url(apiUrl).build()
         val response = okHttpClient.newCall(request).execute()
+        // This client has no UnsuccessfulResponseInterceptor, so an error must not look like "no categories"
+        if (!response.isSuccessful) {
+            response.close()
+            throw UnsuccessfulResponseException(response.code, response.headers.retryAfterMillis())
+        }
         val body = response.body ?: return@fromCallable emptyList<CategoryItem>()
 
-        val apiResponse = gson.fromJson(body.charStream(), MwQueryResponse::class.java)
+        // With errorformat=plaintext, MwQueryResponse throws MwException for an API error
+        val apiResponse = body.use { gson.fromJson(it.charStream(), MwQueryResponse::class.java) }
         val categories: MutableSet<CategoryItem> = mutableSetOf()
         if (apiResponse?.query() != null && apiResponse.query()!!.pages() != null) {
             for (page in apiResponse.query()!!.pages()!!) {
@@ -68,6 +76,7 @@ class CategoryApi @Inject constructor(
         .addQueryParameter("action", "query")
         .addQueryParameter("prop", "categories|coordinates|pageprops")
         .addQueryParameter("format", "json")
+        .addQueryParameter("errorformat", "plaintext")
         .addQueryParameter("clshow", "!hidden")
         .addQueryParameter("coprop", "type|name|dim|country|region|globe")
         .addQueryParameter("codistancefrompoint", coords)
