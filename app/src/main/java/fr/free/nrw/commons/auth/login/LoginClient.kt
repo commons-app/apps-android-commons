@@ -89,7 +89,13 @@ class LoginClient(
         this.userLanguage = request.userLanguage
 
         loginCall =
-            if (request.twoFactorCode.isNullOrEmpty() &&
+            if (request.username.contains("@")) {
+                loginInterface.postBotLogIn(
+                    request.username,
+                    request.password,
+                    request.loginToken,
+                )
+            } else if (request.twoFactorCode.isNullOrEmpty() &&
                 request.emailAuthCode.isNullOrEmpty() &&
                 request.retypedPassword.isNullOrEmpty()
             ) {
@@ -122,9 +128,13 @@ class LoginClient(
                     val loginResult = response.body()?.toLoginResult(request.password)
                     if (loginResult != null) {
                         if (loginResult.pass && !loginResult.userName.isNullOrEmpty()) {
-                            // The server could do some transformations on user names, e.g. on some
-                            // wikis is uppercases the first letter.
-                            getExtendedInfo(loginResult.userName, loginResult, cb)
+                            if (request.username.contains("@")) {
+                                // if it is a bot then verify it has the right permissions first
+                                verifyBotPermissionsAndContinue(loginResult.userName!!, loginResult, cb)
+                            } else {
+                                // if it's a normal account then proceed normally
+                                getExtendedInfo(loginResult.userName!!, loginResult, cb)
+                            }
                         } else if ("UI" == loginResult.status) {
                             when (loginResult) {
                                 is OAuthResult ->
@@ -297,7 +307,9 @@ class LoginClient(
 
         val loginToken = tokenResponse.body()?.query()?.loginToken()
         val tempLoginCall =
-            if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty()) {
+            if (userName.contains("@")) {
+                loginInterface.postBotLogIn(userName, password, loginToken)
+            } else if (twoFactorCode.isNullOrEmpty() && emailAuthCode.isNullOrEmpty()) {
                 loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
             } else {
                 loginInterface.postLogIn(
@@ -358,5 +370,51 @@ class LoginClient(
             it.cancel()
             loginCall = null
         }
+    }
+
+    private fun verifyBotPermissionsAndContinue(
+        userName: String,
+        loginResult: LoginResult,
+        cb: LoginCallback,
+    ) {
+        loginInterface.getBotPermissions().enqueue(
+            object : Callback<BotPermissionsResponse> {
+                override fun onResponse(
+                    call: Call<BotPermissionsResponse>,
+                    response: Response<BotPermissionsResponse>,
+                ) {
+                    val rights =
+                        response
+                            .body()
+                            ?.query
+                            ?.userInfo
+                            ?.rights
+                            ?: emptyList()
+
+                    // The bot must have edit, createpage, and upload rights to fully use the Commons app
+                    val hasRequiredRights =
+                        rights.contains("edit") &&
+                            rights.contains("upload") &&
+                            rights.contains("createpage")
+
+                    if (hasRequiredRights) {
+                        getExtendedInfo(userName, loginResult, cb)
+                    } else {
+                        val msg =
+                            "Insufficient permissions! Please recreate your bot password and ensure " +
+                                "the following are checked: 'Basic rights', 'Edit existing pages', " +
+                                "'Create, edit, and move pages', and 'Upload new files'."
+                        cb.error(LoginFailedException(msg))
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<BotPermissionsResponse>,
+                    t: Throwable,
+                ) {
+                    cb.error(t)
+                }
+            },
+        )
     }
 }
