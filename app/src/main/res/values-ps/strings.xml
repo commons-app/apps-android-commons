@@ -10,6 +10,20 @@
 * شاه زمان پټان
 -->
 <resources>
+  <string name="preference_category_sync">د کلاوډ بيارغونه او همغږي‌کول</string>
+  <string name="backup_settings">د ټولگړي‌خونديځ د بيارغونې اوڼنې</string>
+  <string name="backup_settings_summary">د کاريال اوڼنې او کتاب‌نښې په ويکي‌رسنۍ ټولگړي‌خونديځ کې خپل کارن مخ ته خوندي‌ کړئ</string>
+  <string name="restore_settings">له ټولگړي‌خونديځ څخه اوڼنې بيازېرمل</string>
+  <string name="restore_settings_summary">په ويکي‌رسنۍ ټولگړي‌خونديځ کې د خپل کارن مخ څخه د کاريال اوڼنې او کتاب‌نښې بيازېرمل</string>
+  <string name="sync_backup_confirm_title">د کارن مخ اوڼنې بيا ورغوي؟</string>
+  <string name="sync_backup_success">اوڼنې په برياليتوب سره ستاسو کارن مخ ته خوندي شوې!</string>
+  <string name="sync_backup_failed">د اوڼنو خوندي کولو کې پاتې راغی: %1$s</string>
+  <string name="sync_restore_confirm_title">له کارن مخ څخه اوڼنې بيا وزېرمي؟</string>
+  <string name="sync_restore_confirm_message">دا به ستاسو د کاريال اوڼنې وزېرمي او په User:%1$s/commons-android-app.json کې نښه‌شوي ځايونه به واخږي.</string>
+  <string name="sync_restore_success">اوڼنې او کتاب‌نښې په برياليتوب سره وزېرمل شوې!</string>
+  <string name="sync_restore_failed">د اوڼنو بيازېرملو کې پاتې راغی: %1$s</string>
+  <string name="sync_no_backup_found">په کارن مخ کې هېڅ د اوڼنو بيارغونه ونه موندل شوه.</string>
+  <string name="sync_in_progress">ويکي‌رسنۍ ټولگړي‌خونديځ سره اوڼنې همغږي‌کول...</string>
   <string name="commons_facebook">د خونديځ فيسبوک پاڼه</string>
   <string name="commons_github">خونديځ گيټ‌هاب سرچينه کوډ</string>
   <string name="commons_logo">خونديځ نښان</string>
@@ -365,6 +379,7 @@
   <string name="quiz_continue">پرله‌پورې</string>
   <string name="warning_for_no_answer">د پوښتنې ځواب لپاره له دو خوښنو يوه وټاکئ</string>
   <string name="user_not_logged_in">د ننوتلو موده پای ته ورسېده. مهرباني وکړئ بيا ننوځئ.</string>
+  <string name="quiz_result_share_message">خپل پوښتنليک له ملگرو سره شريکول!</string>
   <string name="continue_message">پرله‌پورې</string>
   <string name="correct">سم ځواب</string>
   <string name="wrong">ناسم ځواب</string>
@@ -374,9 +389,14 @@
   <string name="crop">پرېکون</string>
   <string name="blur">خړپړ</string>
   <string name="autoblur">خپلکاره‌خړپړ</string>
+  <string name="autodetect_title">په خپلکاري ډول مخونه او منښتليک پليټونه خړپړ کېدل.</string>
+  <string name="autodetect_description">تاسو کولی شئ د هرې خړپړې سيمې ناسم مثبتونه د ❌ تڼۍ کارولو سره له منځه يوسئ.</string>
+  <string name="autoblur_failed_to_load">د خپلکاري‌خړپړولو لپاره د انځور راپورته‌کولو کې پاتې راغی</string>
+  <string name="autoblur_no_region_detected">د خپلکاري‌خړپړولو لپاره هېڅ سيمې ونه موندل شوې</string>
   <string name="error_fetching_nearby_places">څېرمه‌ځايونه نشي بارېدی</string>
   <string name="no_pictures_in_this_area">دې سيمه کې هېڅ انځور نشته</string>
   <string name="no_nearby_places_around">شاوخوا څېرمه ځايونه نشته</string>
+  <string name="error_fetching_nearby_monuments">د څېرمه يادگارونو ترلاسنه کې تېروتنه.</string>
   <string name="no_recent_searches">وروستۍ پلټنې نشته</string>
   <string name="delete_recent_searches_dialog">ايا تاسو ډاډه ياست چې خپل د پلټلو پېښليک سپاکول غواړئ؟</string>
   <string name="cancel_upload_dialog">ايا تاسو ډاډه ياست چې دا راپورته‌کول ناگارل غواړئ؟</string>
@@ -396,8 +416,11 @@
   <string name="image_reverts">هغه انځورونه چې په څټ‌گرځول‌شوې نه دي</string>
   <string name="images_used_by_wiki">کارول‌شوي انځورونه</string>
   <string name="achievements_share_message">خپلې لاسته‌راوړنې له ملگرو سره شريکول!</string>
+  <string name="achievements_info_message">کله چې تاسو دا اړتياوې پوره کوئ؛ دې سره ستاسو کچه لوړېږي. د \"شمارنې\" برخه کې شته توکي ستاسو په کچه کې نه شمېرل کېږي.</string>
   <string name="achievements_revert_limit_message">لږ تر لږه اړین:</string>
+  <string name="images_uploaded_explanation">د هغه انځورونو شمېر چې تاسو د راپورته‌کولو پوستغالي له لارې تولگړي‌خونديځ ته راپورته کړې دي</string>
   <string name="images_reverted_explanation">د هغه انځورونو سلنه چې تاسو ټولگړي‌خونديځ ته راپورته کړې دي او ړنگ‌شوي نه دي</string>
+  <string name="images_used_explanation">د هغه انځورونو شمېر چې تاسو ټولگړي‌خونديځ ته راپورته کړې دي او د ويکي‌رسنۍ ليکنو کې کارول شوې دي</string>
   <string name="error_occurred">تېروتنه رامنځته شوه!</string>
   <string name="notifications_channel_name_all">ټولگړې خبرتيا</string>
   <string name="notifications_channel_name_uploads">راپورته‌کولو بهير</string>
@@ -413,9 +436,12 @@
   <string name="display_nearby_notification_summary">د هغه نږدې ځای لپاره چې انځورونو ته اړتيا لري د کاريال دننه خبرتيا وښاياست</string>
   <string name="list_sheet">لړليک</string>
   <string name="storage_permission">زخيره کولو اجازه</string>
+  <string name="write_storage_permission_rationale_for_image_share">موږ ستاسو د سولگر باندني ساتنځي ته د لاسرسي لپاره ستاسو اجازې ته اړتيا لرو؛ ترڅو انځورونه راپورته کړو.</string>
+  <string name="nearby_notification_dismiss_message">تاسو به نور هغه نږدې ځايونه ونه گورئ چې انځورونو ته اړتيا لري. په هر صورت که تاسو وغواړئ؛ نو کولی شئ دا خبرتيا په اوڼنو کې بيا چارن کړئ.</string>
   <string name="step_count">د %2$d، %1$d گام: %3$s</string>
   <string name="next">راتلونکی</string>
   <string name="previous">مخکنی</string>
+  <string name="upload_title_duplicate">د  %1$s په نوم يوه دوتنه شته. ايا تاسو ډاډه ياست چې پرمخ تلل غواړئ؟\n\nيادونه: د دوتنې نوم ته به په خپلکاري ډول يوه مناسبه وروستاړی ورگډ شي.</string>
   <string name="map_application_missing">ستاسو سولگر کې د نخشې کوم انډول‌لرونکی کاريال ونه موندل شو. مهرباني وکړئ د دې ځانگړنې کارولو لپاره د نخشې کاريال نصب کړئ.</string>
   <string name="title_page_bookmarks_pictures">انځورونه</string>
   <string name="title_page_bookmarks_locations">ځايونه</string>
@@ -424,11 +450,14 @@
   <string name="provider_bookmarks">کتاب‌‌نښې</string>
   <string name="bookmark_empty">تاسو هېڅ کتاب‌نښې نه دې ورگډې کړې</string>
   <string name="provider_bookmarks_location">کتاب‌نښې</string>
+  <string name="log_collection_started">د يادښت راټولول پيل شول. مهرباني وکړئ کاريال بيا پيل کړئ؛ هغه چاره ترسره کړئ چې تاسو يې يادښتول غواړئ او بيا د \'يادښت دوتنه لېږل\' باندې کېکاږئ</string>
   <string name="deletion_reason_uploaded_by_mistake">په تېروتنې سره مې راپورته‌کړی دی</string>
   <string name="deletion_reason_publicly_visible">زه نه پوهېدم چې دا به ټولو ته ښکاره شي</string>
   <string name="deletion_reason_bad_for_my_privacy">زه پوه شوم چې دا زما د پټنتيا لپاره بد دی</string>
   <string name="deletion_reason_no_longer_want_public">زما اند توپير وکړ، زه نه غواړم چې دا نور په ټوليزه توگه ښکاره شي</string>
   <string name="deletion_reason_not_interesting">په بښنې سره دا انځور د يو پوهنغونډ لپاره خواپورې نه دی</string>
+  <string name="uploaded_by_myself">زما له‌خوا په %1$s راپورته‌شوی، لږ تر لږه په %2$d ليکنه(ليکنو) کې کارول شوی.</string>
+  <string name="no_uploads">ټولگړي‌خونديځ ته ښه راغلاست!\n\nخپله لومړۍ رسنۍ د ورگډول تڼۍ کېکاږلو سره راپورته کړئ.</string>
   <string name="no_categories_selected">هېڅ وېشنيزې نه دې ټاکل شوې</string>
   <string name="no_depictions_selected">هېڅ ښودنې غوره‌شوې نه دي</string>
   <string name="depictions_choose_from_map">له نخشې څخه خوښول</string>
@@ -436,13 +465,14 @@
   <string name="depictions_map_no_photo_location">انځور هېڅ موقعيت نه‌لري، ستاسو اوسنی موقعيت ښيي</string>
   <string name="back_button_warning">راپورته‌کول ناگارل</string>
   <string name="back_button_continue">راپورته‌کولو ته دوام ورکړئ</string>
-  <string name="upload_flow_all_images_in_set">په ټولگه کې ټولو انځورونو لپاره)</string>
+  <string name="upload_flow_all_images_in_set">(په ټولگه کې ټولو انځور(ونو) لپاره)</string>
   <string name="search_this_area">دا سيمه وپلټئ</string>
   <string name="nearby_card_permission_title">اجازې غوښتنه</string>
   <string name="nearby_card_permission_explanation">ايا تاسو غواړئ چې موږ ستاسو موقعيت وکاروو؛ ترڅو هغه څېرمه‌ځايونه وښيو چې انځورونو ته اړتيا لري؟</string>
   <string name="never_ask_again">دا بيا هېڅکله مه پوښته</string>
   <string name="display_location_permission_title">د ځای غوښتنې پوښتل</string>
   <string name="display_location_permission_explanation">د نږدې خبرتيا کارت ليد ځانگړنې لپاره د اړتيا پرمهال د ځای اجازه وغواړئ.</string>
+  <string name="achievements_fetch_failed">يو څه ناسم پېښ شول او موږ نشو کولی لاسته‌راوړنې ترلاسه کړو</string>
   <string name="achievements_fetch_failed_ultimate_achievement">تاسو دومره ونډې ترسره کړې دي چې زموږ د لاسته راوړنو د شمېرنې غونډال يې نشي اټکلولی. دا يوه ستره بريا ده.</string>
   <string name="ends_on">پای ته رسېږي په:</string>
   <string name="display_campaigns">ټاکنيزې‌سيالۍ ښکاره‌کول</string>
@@ -674,6 +704,7 @@
   <string name="show_in_map_app">په نخشه کاريال کې يې ښکاره کړئ</string>
   <string name="modify_location">ځای سمول</string>
   <string name="location_picker_image_view">د ځای ټاکونکي انځوريزه کتل</string>
+  <string name="location_picker_image_view_shadow">د ځای غوره‌کوونکي د انځور ليد سيوری</string>
   <string name="image_location">انځور ځی</string>
   <string name="check_whether_location_is_correct">وگورئ چې ايا موقعيت سم دی</string>
   <string name="label">نښکه</string>
@@ -691,10 +722,18 @@
   <string name="custom_selector_duplicates_warning">ځينې غوره‌شوي انځورونه غبرگوني دي او له راپورته‌کولو دمخه به لرې شي.</string>
   <string name="custom_selector_button_limit_text">ډېر تر ډېره: %1$d</string>
   <string name="custom_selector_limit_error_desc">تېروتنه: د راپورته‌کول بريد څخه واوښت</string>
+  <string name="custom_selector_switch_to_list_view">لړليک کتنې ته اوښتل</string>
+  <string name="custom_selector_switch_to_grid_view">خانه‌يي کتنې ته اوښتل</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">د موقعيت اومتوکي لري</string>
+  <string name="custom_selector_image_no_location">د موقعيت اومتوکي نشته</string>
+  <string name="wlm_upload_info">دا انځور به د ويکي‌مينې يادگارونو سيالۍ ته ورگډ شي</string>
   <string name="display_monuments">يادگارونه ښکاره‌کول</string>
   <string name="wlm_month_message">دا د ويکي‌مينې د لاسوندونو مياشت ده!</string>
   <string name="learn_more">نور زده کړئ</string>
+  <string name="wlm_campaign_description">د ويکي‌مينې يادگارونه د ويکي‌رسنۍ له‌خوا ترتيب شوې د يادگارونو لپاره يوه نړۍ‌واله انځوريزه سيالۍ ده</string>
   <string name="need_permission">اجازې ته اړتيا لري</string>
+  <string name="read_phone_state_permission_message">څېرمه‌نخشې د سمې کړنچارې لپاره د تليفون دريځ لوستلو لپاره ته اړتيا لري</string>
   <string name="location_off_dialog_text">د څېرمه ځايونو کتلو لپاره مهرباني وکړئ د موقعيت چوپړتياوې بلې کړئ.</string>
   <string name="location_permission_rationale">د موقعيت لاسرسی اړين دی؛ ترڅو په نخشه کې نږدې ځايونه وښيي.</string>
   <string name="contributions_of_user">د کارن ونډې: %1$s</string>
@@ -779,6 +818,7 @@
   <string name="talk">خبرې اترې</string>
   <string name="write_something_about_the_item">د %1$s توکي په اړه يو څه وليکئ. دا به په ټولواله توگه ښکاره شي.</string>
   <string name="is_at_a_different_place_wikidata">\'%1$s\' بل ځای کې دی.</string>
+  <string name="other_problem_or_information_please_explain_below">بله ستونزه يا مالومات (مهرباني وکړئ لاندې يې څرگند کړئ).</string>
   <string name="feedback_destination_note">ستاسو غبرگونونه لاندې ويکي مخ کې خپرېږي: a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;ټولگړی:موبايل کاريال/غبرگون&lt;/a&gt;</string>
   <string name="are_you_sure_that_you_want_cancel_all_the_uploads">ايا تاسو ډاډه ياست چې دا راپورته‌کېدنې ناگارول غواړئ؟</string>
   <string name="cancelling_all_the_uploads">ټولې راپورته‌کېدنې ناگارل...</string>
@@ -795,6 +835,7 @@
   <string name="custom_selector_folder_deleted_success">%1$s پوښۍ په برياليتوب سره ړنگه شوه</string>
   <string name="custom_selector_folder_deleted_failure">د %1$s پوښۍ ړنگولو کې پاتې راغی</string>
   <string name="custom_selector_error_trashing_folder_contents">د پوښۍ د منځپانگو په خځلو کې تېروتنه: %1$s</string>
+  <string name="custom_selector_folder_not_found_error">د سلواغې پېژند لپاره د پوښۍ لارې بياترلاسنه کې پاتې راغی: %1$d</string>
   <string name="red_pin">دا ځای لاتراوسه هېڅ انځور نه لري، لاړ شه يو انځور يې واخله!</string>
   <string name="green_pin">دا ځای لادمخه يو انځور لري.</string>
   <string name="grey_pin">اورس گورو چې دا ځای کوم انځور لري.</string>
@@ -816,6 +857,8 @@
   <string name="caption_copied_to_clipboard">نيونگ ټينگدړې ته ولمېسل شو</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">مبارک شه، دې انځورټولگه کې ټول انځورونه يا راپورته شوي يا د راپورته کولو لپاره نه دي په نښه شوي.</string>
   <string name="show_in_explore">سپړلو کې ښودل</string>
+  <string name="nearby_show_only_needs_photo">يوازې هغه ځايونه وښاياست چې انځور ته اړتيا لري</string>
+  <string name="nearby_show_all_places">ټول ځايونه ښودل</string>
   <string name="show_in_nearby">څېرمه کې ښودل</string>
   <string name="image_tag_line_created_and_uploaded_by">جوړوونکی او راپورته‌‌کوونکی: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">د %1$s له خوا جوړ شوی او د %2$s له خوا راپورته‌شوی</string>
@@ -825,6 +868,8 @@
   <string name="edit_unsupported_format_explanation">کاريال دننه سمون يوازې جی‌پي‌جي دوتنو لپاره شتون لري. د نورو بڼو د سمون لپاره مهرباني وکړئ د درېیمې ډلې کارتوکي وکاروئ.</string>
   <string name="license_cc0_description">بيا خپراوي رښته نشته. تاسو ټولې رښتې بښلې دي؛ نو دا کار هرڅوک، هرڅنگه کارولی شي.</string>
   <string name="license_cc_by_description">ځانگړی‌کونگ. نور د دې شريکول او پلي کولو کې ترهغې ازاد دي؛ ترڅو يې چې تاسو ته منسوبوي.</string>
+  <string name="license_cc_by_sa_description">ورته‌شريکېدنې-ځانگړی‌کونگ. نور کولی شي دا شريک او پلی کړی؛ خو بايد ورته منښتليک وکاروي او تاسو ته يې منسوب کړي.</string>
+  <string name="license_cc0_long_description">دا منښتليک بياکاروونکو ته اجازه ورکوي چې مواد په هره وسيله يا بڼه پرته کوم شرطه ووېشي، بيا يې راټول کړي، تطبيق يې کړي او جوړ يې کړي.</string>
   <string name="error_getting_image_properties">د انځور ځانتياوو ترلاسه کولو کې تېروتنه:</string>
   <string name="error_blur_no_rectangle">مهرباني وکړئ انځور کې لږترلږه يو څلور څنډيز رسم کړئ</string>
   <string name="error_applying_blur">د خپرولو پلي‌کولو کې تېروتنه</string>
