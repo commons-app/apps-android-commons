@@ -212,11 +212,12 @@ class LoginActivity : BaseActivity() {
             val verifier = pkceCodeVerifier
             when {
                 code.isNullOrEmpty() -> {
-                    val error = data.getQueryParameter("error_description") ?: "OAuth login failed"
+                    val error =
+                        data.getQueryParameter("error_description") ?: getString(R.string.oauth_login_failed)
                     showMessageAndCancelDialog(error)
                 }
                 verifier.isNullOrEmpty() -> {
-                    showMessageAndCancelDialog("OAuth verification session expired. Please try logging in again.")
+                    showMessageAndCancelDialog(getString(R.string.oauth_session_expired))
                 }
                 else -> exchangeOAuthCodeForToken(code, verifier)
             }
@@ -243,7 +244,8 @@ class LoginActivity : BaseActivity() {
                 runOnUiThread {
                     if (isFinishing || isDestroyed) return@runOnUiThread
                     progressDialog?.dismiss()
-                    val errorMsg = throwable?.localizedMessage ?: "OAuth Token Exchange Failed"
+                    val errorMsg =
+                        throwable?.localizedMessage ?: getString(R.string.oauth_token_exchange_failed)
                     showMessageAndCancelDialog(errorMsg)
                 }
             }

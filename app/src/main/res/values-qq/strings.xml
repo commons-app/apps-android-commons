@@ -94,6 +94,9 @@
   <string name="login_success">Message when login has succeeded.\n{{Identical|Login successful}}</string>
   <string name="login_failed">Message when login has failed.\n{{Identical|Login failed}}</string>
   <string name="login_with_oauth">Label for the button on the login screen that authenticates the user via Wikimedia OAuth 2.0 in a browser tab.</string>
+  <string name="oauth_login_failed">Generic error message shown when Wikimedia OAuth 2.0 authentication fails.</string>
+  <string name="oauth_session_expired">Error message shown when the PKCE verifier is missing or expired during OAuth 2.0 callback.</string>
+  <string name="oauth_token_exchange_failed">Error message shown when exchanging the OAuth authorization code for an access token fails.</string>
   <string name="upload_failed">Error message.</string>
   <string name="retry_limit_reached">Error message.</string>
   <string name="unrestricted_battery_mode">An alert when uploading multiple files.</string>
