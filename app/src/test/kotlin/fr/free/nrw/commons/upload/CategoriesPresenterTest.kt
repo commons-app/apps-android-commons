@@ -398,6 +398,18 @@ class CategoriesPresenterTest {
         verify(categoryEditHelper, never()).makeCategoryEdit(any(), any(), any(), any())
     }
 
+    @Test
+    fun `Test selectCategories when the place category lookup fails`() {
+        RxJavaPlugins.setErrorHandler { swallowedErrors.add(it) }
+        whenever(repository.getPlaceCategories()).thenReturn(Single.error(IOException("timeout")))
+        categoriesPresenter.onAttachView(view)
+
+        categoriesPresenter.selectCategories()
+        testScheduler.triggerActions()
+
+        assertEquals(emptyList<Throwable>(), swallowedErrors)
+    }
+
     private val categoryEditHelper = mock<CategoryEditHelper>()
     private val swallowedErrors = mutableListOf<Throwable>()
 
