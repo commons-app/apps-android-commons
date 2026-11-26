@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
@@ -21,10 +22,27 @@ import timber.log.Timber
 private const val SCROLL_DELAY = 800L // Delay for debounce of onscroll, in milliseconds.
 private const val LOCAL_SCROLL_DELAY = 200L // SCROLL_DELAY but for local db place search
 
+/** The location changes that start a new search of places */
+private val SEARCH_TYPES =
+    setOf(
+        LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED,
+        LocationChangeType.MAP_UPDATED,
+        LocationChangeType.SEARCH_CUSTOM_AREA,
+        LocationChangeType.CUSTOM_QUERY,
+    )
+
+/** Returns the area visible on the map, or null if the map can't tell yet. */
+private fun NearbyParentFragmentContract.View.visibleArea(): SearchArea? =
+    screenTopRight?.let { topRight ->
+        screenBottomLeft?.let { SearchArea(topRight, it, isOnlyNeedsPhoto) }
+    }
+
 /**
  * Presenter for NearbyParentFragment that coordinates map updates, location
  * changes, area searches, and map scrolling.
+ * TooManyFunctions is suppressed because every function is one user action or map event.
  */
+@Suppress("TooManyFunctions")
 class NearbyParentFragmentPresenter(
     val bookmarkLocationDao: BookmarkLocationsDao,
     val placesRepository: PlacesRepository,
@@ -61,21 +79,34 @@ class NearbyParentFragmentPresenter(
     private var currentLatLng: LatLng? = null
     private var customQuery: String? = null
 
+    /** True while the map shows the places of an advanced query */
+    private var showsCustomQuery = false
+
+    /** True when the toggle changed during a search, so the area is searched again after it */
+    private var searchAgainAfterSearch = false
+
     private var placeSearchJob: Job? = null
     private var isSearchInProgress = false
     private var localPlaceSearchJob: Job? = null
+
+    @VisibleForTesting
+    internal var searchAreas = SearchAreaTracker()
 
     init {
         uiInteractionHandler.currentLatLngProvider = { currentLatLng }
         if (placeOperations is NearbyBookmarkCacheHandler) {
             placeOperations.lockNearby = ::lockUnlockNearby
             placeOperations.updateMapAndList = ::updateMapAndList
+            placeOperations.onPlacesShown = { searchAreas.onPlacesShown() }
         }
     }
 
     fun initializeMapOperations() {
-        lockUnlockNearby(false)
-        updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        // Coming back to the screen only needs a new search if the visible area isn't loaded yet
+        if (!searchAreas.isLoaded(nearbyParentFragmentView.visibleArea())) {
+            lockUnlockNearby(false)
+            updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        }
         nearbyParentFragmentView.setCheckBoxAction()
     }
 
@@ -88,9 +119,24 @@ class NearbyParentFragmentPresenter(
     override fun lockUnlockNearby(isNearbyLocked: Boolean) {
         this.isNearbyLocked = isNearbyLocked
         if (isNearbyLocked) {
+            // Nearby is only locked when a search starts
+            searchAreas.onSearchStarted(nearbyParentFragmentView.visibleArea())
             nearbyParentFragmentView.disableFABRecenter()
         } else {
             nearbyParentFragmentView.enableFABRecenter()
+            if (searchAgainAfterSearch) {
+                searchAgainAfterSearch = false
+                onOnlyNeedsPhotoChanged()
+            }
+        }
+    }
+
+    override fun onOnlyNeedsPhotoChanged() {
+        when {
+            // Keep the places of an advanced query, the map already hides the green pins
+            showsCustomQuery -> return
+            isNearbyLocked -> searchAgainAfterSearch = true
+            else -> searchInTheArea()
         }
     }
 
@@ -124,8 +170,6 @@ class NearbyParentFragmentPresenter(
         }
         // check if an upload is in progress
         if (nearbyController.isInternalUploadInProgress) {
-            // reset the flag and exit early to prevent unnecessary fetchPlaces call
-            nearbyController.isInternalUploadInProgress = false
             Timber.d("Internal upload in progress, skipping map update")
             return
         }
@@ -139,9 +183,11 @@ class NearbyParentFragmentPresenter(
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
+        if (locationChangeType in SEARCH_TYPES) showsCustomQuery = locationChangeType == LocationChangeType.CUSTOM_QUERY
         if (locationChangeType == LocationChangeType.CUSTOM_QUERY) {
             Timber.d("ADVANCED_QUERY_SEARCH")
             lockUnlockNearby(true)
+            searchAreas.onSearchStarted(null)
             nearbyParentFragmentView.setProgressBarVisibility(true)
             var updatedLocationByUser =
                 LocationUtils.deriveUpdatedLocationFromSearchQuery(
@@ -181,6 +227,9 @@ class NearbyParentFragmentPresenter(
      * accordingly.
      */
     fun searchInTheArea() {
+        if (searchAreas.isLoaded(nearbyParentFragmentView.visibleArea())) {
+            return
+        }
         if (searchCloseToCurrentLocation()) {
             updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         } else {

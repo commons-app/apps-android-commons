@@ -46,10 +46,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dette billede vil blive licenseret under %1$s</item>
-    <item quantity="other">Disse billeder vil blive licenseret under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
@@ -89,7 +85,6 @@
   <string name="upload_completed_notification_title">%1$s uploadet!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist dit upload</string>
   <string name="upload_progress_notification_title_start">Uploader fil: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s uploades</string>
   <string name="upload_progress_notification_title_finishing">Afslutter upload af %1$s</string>
   <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
   <string name="upload_metadata_pending_notification_title">%1$s er uploadet, men billedtekster og beskrivelser er endnu ikke gemt</string>
@@ -697,6 +692,7 @@
   <string name="cancelling_upload">Annullerer upload...</string>
   <string name="retrying_upload">Prøver at uploade igen…</string>
   <string name="retrying_failed_uploads">Prøver alle mislykkede uploads igen…</string>
+  <string name="upload_failed_server_error">Commons kunne ikke håndtere anmodningen lige nu. Prøv igen senere. (HTTP %1$d)</string>
   <string name="cancel_upload">Annuller upload</string>
   <string name="limited_connection_explanation">Du har aktiveret begrænset forbindelsestilstand. Alle uploads er sat på pause og genoptages, når du deaktiverer denne tilstand.</string>
   <string name="limited_connection_is_on">Begrænset forbindelsestilstand aktiveret!</string>
@@ -741,6 +737,11 @@
   <string name="custom_selector_duplicates_warning">Nogle valgte billeder er dubletter og vil blive fjernet inden upload.</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fejl: Upload-grænse overskredet</string>
+  <string name="custom_selector_switch_to_list_view">Skift til listevisning</string>
+  <string name="custom_selector_switch_to_grid_view">Skift til gittervisning</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">Har placeringsdata</string>
+  <string name="custom_selector_image_no_location">Ingen placeringsdata</string>
   <string name="wlm_upload_info">Dette billede deltager i Wiki Loves Monuments-konkurrencen</string>
   <string name="display_monuments">Vis monumenter</string>
   <string name="wlm_month_message">Det er Wiki Loves Monuments måned!</string>
@@ -879,6 +880,8 @@
   <string name="caption_copied_to_clipboard">Billedtekst kopieret til udklipsholder</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Tillykke, alle billeder i dette album er enten blevet uploadet eller markeret som ikke til upload.</string>
   <string name="show_in_explore">Vis i Udforsk</string>
+  <string name="nearby_show_only_needs_photo">Vis kun steder, der mangler et foto</string>
+  <string name="nearby_show_all_places">Vis alle steder</string>
   <string name="show_in_nearby">Vis i I nærheden</string>
   <string name="image_tag_line_created_and_uploaded_by">Oprettet og uploadet af: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Oprettet af %1$s og uploadet af %2$s</string>

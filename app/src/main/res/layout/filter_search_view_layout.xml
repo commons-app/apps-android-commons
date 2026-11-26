@@ -1,4 +1,4 @@
-<LinearLayout android:layout_width="wrap_content"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/search_view_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,12 +27,17 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:tint="@color/white"
-        android:queryHint="@string/nearby_search_hint"
-        android:searchIcon="@drawable/ic_search_white_24dp"
-        app:theme="@style/WhiteSearchBarTheme"/>
+        android:layout_marginStart="@dimen/tiny_margin"
+        android:layout_marginEnd="@dimen/filter_padding"
+        android:background="@drawable/nearby_search_view_background"
+        android:queryBackground="@android:color/transparent"
+        app:queryHint="@string/nearby_search_hint"
+        app:queryBackground="@android:color/transparent"
+        app:searchIcon="?attr/search_icon"
+        app:theme="@style/NearbySearchBarTheme"/>
 
 </LinearLayout>

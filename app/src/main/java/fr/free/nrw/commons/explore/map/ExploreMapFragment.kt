@@ -396,3 +396,25 @@ fun ExploreMapFragment.performMapReadyActions() {
     }
     presenter?.onMapReady(exploreMapController)
 }
+
+/**
+ * Updates map viewport camera and fetches places when new location data is received from Nearby.
+ */
+fun ExploreMapFragment.onNearbyMapDataReceived(bundle: Bundle) {
+    if (!bundle.containsKey("prev_zoom")) return
+    val zoom = bundle.getDouble("prev_zoom")
+    val latitude = bundle.getDouble("prev_latitude")
+    val longitude = bundle.getDouble("prev_longitude")
+
+    viewportHelper.prevZoom = zoom
+    viewportHelper.prevLatitude = latitude
+    viewportHelper.prevLongitude = longitude
+    setRecentlyCameFromNearbyMap(true)
+
+    val targetPoint = GeoPoint(latitude, longitude)
+    viewportHelper.mapCenter = targetPoint
+    binding?.mapView?.controller?.setCenter(targetPoint)
+    binding?.mapView?.controller?.setZoom(zoom.coerceIn(MIN_MAP_ZOOM, MAX_MAP_ZOOM))
+    markerOverlayHelper.recenterMarkerToPosition(targetPoint)
+    presenter?.updateMap(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+}

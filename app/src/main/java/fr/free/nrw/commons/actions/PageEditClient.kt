@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.actions
 
+import com.google.gson.JsonParseException
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
+import java.io.IOException
+import java.util.concurrent.ExecutionException
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -29,17 +32,12 @@ class PageEditClient(
         text: String,
         summary: String,
     ): Observable<Boolean> =
-        try {
+        executeEdit("Failed to edit the page", false) { token ->
             pageEditInterface
-                .postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
+                .postEdit(pageTitle, summary, text, token)
                 .map { editResponse ->
                     editResponse.getEditResult()!!.editSucceeded()
                 }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to edit the page")
-            Observable.just(false)
         }
 
     /**
@@ -56,7 +54,7 @@ class PageEditClient(
         text: String,
         summary: String,
     ): Observable<Boolean> =
-        try {
+        executeEdit("Failed to create the page", false) { token ->
             pageEditInterface
                 .postCreate(
                     pageTitle,
@@ -66,15 +64,10 @@ class PageEditClient(
                     "wikitext",
                     true,
                     true,
-                    csrfTokenClient.getTokenBlocking(),
+                    token,
                 ).map { editResponse ->
                     editResponse.getEditResult()!!.editSucceeded()
                 }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to create the page")
-            Observable.just(false)
         }
 
     /**
@@ -89,15 +82,10 @@ class PageEditClient(
         appendText: String,
         summary: String,
     ): Observable<Boolean> =
-        try {
+        executeEdit("Failed to append the page", false) { token ->
             pageEditInterface
-                .postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
+                .postAppendEdit(pageTitle, summary, appendText, token)
                 .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to append the page")
-            Observable.just(false)
         }
 
     /**
@@ -112,15 +100,10 @@ class PageEditClient(
         prependText: String,
         summary: String,
     ): Observable<Boolean> =
-        try {
+        executeEdit("Failed to prepend the page", false) { token ->
             pageEditInterface
-                .postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
+                .postPrependEdit(pageTitle, summary, prependText, token)
                 .map { editResponse -> editResponse.getEditResult()?.editSucceeded() ?: false }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to prepend the page")
-            Observable.just(false)
         }
 
     /**
@@ -137,15 +120,10 @@ class PageEditClient(
         sectionText: String,
         summary: String,
     ): Observable<Boolean> =
-        try {
+        executeEdit("Failed to create the new section", false) { token ->
             pageEditInterface
-                .postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
+                .postNewSection(pageTitle, summary, sectionTitle, sectionText, token)
                 .map { editResponse -> editResponse.getEditResult()!!.editSucceeded() }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to create the new section")
-            Observable.just(false)
         }
 
     /**
@@ -174,8 +152,7 @@ class PageEditClient(
         value: String,
         entityId: String?,
     ): Observable<Int> =
-        try {
-            val token = csrfTokenClient.getTokenBlocking()
+        executeEdit("Failed to set the captions", 0) { token ->
             val response =
                 if (entityId != null) {
                     pageEditInterface.postCaptionsByEntityId(summary, entityId, language, value, token)
@@ -183,26 +160,51 @@ class PageEditClient(
                     pageEditInterface.postCaptions(summary, title, language, value, token)
                 }
             response.map { it.success }
-        } catch (throwable: InvalidLoginTokenException) {
-            throw throwable
-        } catch (throwable: Throwable) {
-            Timber.e(throwable, "Failed to set the captions")
-            Observable.just(0)
         }
 
     /**
      * Get whole WikiText of required file
      * @param title : Name of the file
-     * @return Observable<MwQueryResult>
+     * @return Single<String> emitting wiki text or empty string if not found
      */
-    fun getCurrentWikiText(title: String): Single<String?> =
+    fun getCurrentWikiText(title: String): Single<String> =
         pageEditInterface.getWikiText(title).map {
             it
                 .query()
                 ?.pages()
-                ?.get(0)
+                ?.getOrNull(0)
                 ?.revisions()
-                ?.get(0)
-                ?.content()
+                ?.getOrNull(0)
+                ?.content() ?: ""
+        }
+
+    private fun <T> executeEdit(
+        errorMessage: String,
+        fallback: T,
+        block: (String) -> Observable<T>,
+    ): Observable<T> =
+        try {
+            block(csrfTokenClient.getTokenBlocking())
+        } catch (e: InvalidLoginTokenException) {
+            throw e
+        } catch (e: IOException) {
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
+        } catch (e: JsonParseException) {
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
+        } catch (e: ExecutionException) {
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
+        } catch (e: InterruptedException) {
+            Thread.currentThread().interrupt()
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
+        } catch (e: IllegalArgumentException) {
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
+        } catch (e: IllegalStateException) {
+            Timber.e(e, errorMessage)
+            Observable.just(fallback)
         }
 }

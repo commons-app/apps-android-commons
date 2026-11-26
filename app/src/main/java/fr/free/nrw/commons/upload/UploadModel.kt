@@ -19,19 +19,48 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
+import kotlin.random.Random
+
+/**
+ * Encapsulates license and preference dependencies required by UploadModel.
+ */
+class UploadModelLicenseDependencies
+    @Inject
+    constructor(
+        @param:Named("licenses") val licenses: List<String>,
+        // JsonKvStore is included here because UploadModel uses it
+        // specifically for reading and persisting default license preferences
+        @param:Named("default_preferences") val store: JsonKvStore,
+        @param:Named("licenses_by_name") val licensesByName: Map<String, String>,
+    )
+
+/**
+ * Encapsulates Android context, session, and service dependencies required by UploadModel.
+ */
+class UploadModelServiceDependencies
+    @Inject
+    constructor(
+        val context: Context,
+        val sessionManager: SessionManager,
+        val fileProcessor: FileProcessor,
+        val imageProcessingService: ImageProcessingService,
+    )
 
 @Singleton
 class UploadModel
     @Inject
     internal constructor(
-        @param:Named("licenses") val licenses: List<String>,
-        @param:Named("default_preferences") val store: JsonKvStore,
-        @param:Named("licenses_by_name") val licensesByName: Map<String, String>,
-        val context: Context,
-        val sessionManager: SessionManager,
-        val fileProcessor: FileProcessor,
-        val imageProcessingService: ImageProcessingService,
+        val licenseDependencies: UploadModelLicenseDependencies,
+        val serviceDependencies: UploadModelServiceDependencies,
     ) {
+        val licenses: List<String> get() = licenseDependencies.licenses
+        val store: JsonKvStore get() = licenseDependencies.store
+        val licensesByName: Map<String, String> get() = licenseDependencies.licensesByName
+        val context: Context get() = serviceDependencies.context
+        val sessionManager: SessionManager get() = serviceDependencies.sessionManager
+        val fileProcessor: FileProcessor get() = serviceDependencies.fileProcessor
+        val imageProcessingService: ImageProcessingService get() = serviceDependencies.imageProcessingService
+
         var license: String? = store.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3)
         val items: MutableList<UploadItem> = mutableListOf()
         val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -145,8 +174,10 @@ class UploadModel
             return uploadItem
         }
 
-        fun buildContributions(): Observable<Contribution> =
-            Observable.fromIterable(items).map { item: UploadItem ->
+        fun buildContributions(): Observable<Contribution> {
+            val batchNumber = Random.nextInt(MIN_BATCH_NUMBER, MAX_BATCH_NUMBER + 1)
+            val fileNames = numberFilesWithSameName(items.map { it.filename }, batchNumber)
+            return Observable.fromIterable(items.withIndex()).map { (index, item) ->
                 val imageSHA1 =
                     getSHA1(
                         context.contentResolver.openInputStream(item.contentUri!!)!!,
@@ -160,6 +191,7 @@ class UploadModel
                         imageSHA1,
                         selectedLocationOfCreation,
                     )
+                contribution.media.filename = fileNames[index]
 
                 contribution.setHasInvalidLocation(item.hasInvalidLocation())
 
@@ -181,6 +213,7 @@ class UploadModel
                 contribution.countryCode = item.countryCode
                 contribution
             }
+        }
 
         fun deletePicture(filePath: String) {
             val iterator = items.iterator()

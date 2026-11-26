@@ -9,6 +9,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
+import fr.free.nrw.commons.upload.worker.retryAfterMillis
 import fr.free.nrw.commons.utils.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwIOException
@@ -26,6 +27,7 @@ import java.io.File
 import java.io.IOException
 import java.net.URLEncoder
 import java.util.Date
+import java.util.concurrent.CancellationException
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
@@ -85,7 +87,7 @@ class UploadClient
 
             val index = AtomicInteger()
             val failures = AtomicBoolean()
-            val errorMessage = AtomicReference<String>()
+            val error = AtomicReference<Throwable?>()
             compositeDisposable.add(
                 Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                     if (canProcess(contributionDao, contribution, failures)) {
@@ -101,7 +103,7 @@ class UploadClient
                                 failures,
                                 chunkInfo,
                                 index,
-                                errorMessage,
+                                error,
                                 mediaType!!,
                                 file!!,
                                 fileChunks.size,
@@ -122,7 +124,14 @@ class UploadClient
                 }
                 failures.get() -> {
                     Timber.d("Upload stash contains failures %s", contribution.pageId)
-                    Observable.just(StashUploadResult(StashUploadState.FAILED, null, errorMessage.get()))
+                    Observable.just(
+                        StashUploadResult(
+                            StashUploadState.FAILED,
+                            null,
+                            error.get()?.message,
+                            error.get()?.retryAfterMillis(),
+                        ),
+                    )
                 }
                 chunkInfo.get() != null -> {
                     Timber.d("Upload stash success %s", contribution.pageId)
@@ -149,7 +158,7 @@ class UploadClient
             failures: AtomicBoolean,
             chunkInfo: AtomicReference<ChunkInfo?>,
             index: AtomicInteger,
-            errorMessage: AtomicReference<String>,
+            error: AtomicReference<Throwable?>,
             mediaType: MediaType,
             file: File,
             totalChunks: Int,
@@ -191,7 +200,7 @@ class UploadClient
                     },
                     { throwable: Throwable? ->
                         Timber.e(throwable, "Received error in chunk upload")
-                        errorMessage.set(throwable?.message)
+                        error.set(throwable)
                         failures.set(true)
                     },
                 ),
@@ -222,16 +231,16 @@ class UploadClient
          * @param countingRequestBody Request body with chunk file
          * @return
          */
+        @Suppress("TooGenericExceptionCaught")
         fun uploadChunkToStash(
             filename: String?,
             fileSize: Long,
             offset: Long,
             fileKey: String?,
             countingRequestBody: CountingRequestBody,
-        ): Observable<UploadResult> {
-            val filePart: MultipartBody.Part
-            return try {
-                filePart =
+        ): Observable<UploadResult> =
+            try {
+                val filePart =
                     MultipartBody.Part.createFormData(
                         "chunk",
                         URLEncoder.encode(filename, "utf-8"),
@@ -254,17 +263,20 @@ class UploadClient
                         }
                         uploadResult.upload
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Failed to upload chunk to stash")
-                Observable.error(throwable)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                // Eager token and part creation failures are delivered to subscribers, as before.
+                Timber.e(e, "Failed to upload chunk to stash")
+                Observable.error(e)
             }
-        }
 
         /**
          * Converts string value to request body
          */
         private fun toRequestBody(value: String?): RequestBody? = value?.toRequestBody(MultipartBody.FORM)
 
+        @Suppress("TooGenericExceptionCaught")
         fun uploadFileFromStash(
             contribution: Contribution?,
             uniqueFileName: String?,
@@ -287,9 +299,11 @@ class UploadClient
                         }
                         uploadResult.upload
                     }
-            } catch (throwable: Throwable) {
-                Timber.e(throwable, "Exception occurred in uploading file from stash")
-                Observable.error(throwable)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Timber.e(e, "Exception occurred in uploading file from stash")
+                Observable.error(e)
             }
 
         /**

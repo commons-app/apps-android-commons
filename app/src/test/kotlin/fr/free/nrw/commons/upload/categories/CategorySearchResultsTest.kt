@@ -12,6 +12,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import media
 import org.junit.Test
@@ -22,6 +23,19 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class CategorySearchResultsTest {
+    @Test
+    fun `next page skips a page that the spam filter removed completely`() {
+        val repository = mock<UploadRepository>()
+        whenever(repository.searchMore("Cats"))
+            .thenReturn(Single.just(listOf(categoryItem("Cats 1890"))), Single.just(listOf(categoryItem("Black cats"))))
+        whenever(repository.isSpammyCategory("Cats 1890")).thenReturn(true)
+
+        CategorySearchResults(repository, Schedulers.trampoline())
+            .moreResults("Cats")
+            .test()
+            .assertValue(listOf(categoryItem("Black cats")))
+    }
+
     @Test
     fun `upload search filters spam but preserves exact matches and nonempty captions`() {
         val repository = mock<UploadRepository>()

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -369,5 +370,18 @@ class UploadMediaDetailAdapterUnitTest {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
         Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1))
+    }
+
+    @Test
+    fun testSpeechInputWithoutRecognizerDoesNotCrash() {
+        val launcher = mock<ActivityResultLauncher<Intent>>()
+        Mockito.`when`(launcher.launch(any<Intent>())).thenThrow(ActivityNotFoundException())
+        Whitebox.setInternalState(adapter, "voiceInputResultLauncher", launcher)
+        val method = UploadMediaDetailAdapter::class.java.getDeclaredMethod("startSpeechInput", String::class.java)
+        method.isAccessible = true
+
+        method.invoke(adapter, "en")
+
+        verify(launcher).launch(any<Intent>())
     }
 }

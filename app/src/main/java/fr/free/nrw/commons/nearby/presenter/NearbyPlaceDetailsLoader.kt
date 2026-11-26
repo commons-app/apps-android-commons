@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.nearby.presenter
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleCoroutineScope
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
+import fr.free.nrw.commons.mwapi.SparqlResponseException
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup
 import fr.free.nrw.commons.nearby.NearbyController
 import fr.free.nrw.commons.nearby.Place
@@ -10,6 +12,7 @@ import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -19,7 +22,11 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.IOException
+import java.net.HttpURLConnection
 import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Handles asynchronous loading, caching, batching, and marker synchronization
@@ -44,12 +51,23 @@ class NearbyPlaceDetailsLoader(
 
     /**
      * - **batchSize**: number of places to fetch details of in a single request
-     * - **connnectionCount**: number of parallel requests
+     * - **connnectionCount**: number of parallel requests. The query service allows 5 per IP, but
+     *   on central Paris 3 or 5 made loading several times slower without fewer refusals than 20,
+     *   so refusals are handled by the shared pause of [throttle] instead.
+     * - **retriesPerLoad**: how many failed batches one load sends again, so that a struggling
+     *   service gets only a few more requests
      */
     private object LoadPlacesAsyncOptions {
         const val BATCH_SIZE = 10
         const val CONNECTION_COUNT = 20
+        const val RETRIES_PER_LOAD = 3
     }
+
+    /**
+     * The pause after a refused or failed request, shared by all loads
+     */
+    @VisibleForTesting
+    internal var throttle = QueryServiceThrottle()
 
     /**
      * - **skippedCount**: stores the number of updates skipped
@@ -178,77 +196,49 @@ class NearbyPlaceDetailsLoader(
      * Method used by an individual thread/coroutine to request batch Place data from WikiData.
      * This is intended to be used by many threads in parallel to speed up data retrieval.
      *
-     * If a WikiData server error occurs, this method will launch individual threads for each Place
-     * because a single server error for one Place can cause WikiData to respond with an error
-     * for the entire batch.
+     * A batch that fails for a temporary reason is sent again once after the pause of [throttle],
+     * while [retries] are left. Other failures are not retried. The places of a batch that isn't
+     * loaded keep their current data. Batches are not split into single places, as after a refusal
+     * that would only send more requests.
      *
      * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
      * Places in updatedGroups that need more information fetched from WikiData.
      * @param updatedGroups List containing incomplete Place data
      * @param collectResults Holds the Place data fetched from Wikidata.
+     * @param retries How many failed batches this load can still send again
      */
     @Suppress("TooGenericExceptionCaught")
     private suspend fun fetchPlacesThreadMethod(
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
+        collectResults: Channel<List<Pair<Int, Place?>>>,
+        retries: AtomicInteger,
     ) = coroutineScope {
         for (indices in batchedIndicesToFetch) {
             ensureActive()
-            try {
-                val fetchedPlaces =
-                    nearbyController.getPlaces(indices.map { updatedGroups[it].place })
-                collectResults.send(
-                    fetchedPlaces.mapIndexed { index, place ->
-                        Pair(
-                            indices[index],
-                            MarkerPlaceGroup(
-                                bookmarkLocationDao.findBookmarkLocation(place.name),
-                                place,
-                            ),
-                        )
-                    },
-                )
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                Timber.tag("NearbyPinDetails").e(e)
-                // HTTP request failed. Try individual places
-                for (i in indices) {
-                    launch {
-                        val onePlaceBatch = mutableListOf<Pair<Int, MarkerPlaceGroup>>()
-                        try {
-                            val fetchedPlace =
-                                nearbyController.getPlaces(
-                                    mutableListOf(updatedGroups[i].place),
-                                )
-                            onePlaceBatch.add(
-                                Pair(
-                                    i,
-                                    MarkerPlaceGroup(
-                                        bookmarkLocationDao.findBookmarkLocation(
-                                            fetchedPlace[0].name,
-                                        ),
-                                        fetchedPlace[0],
-                                    ),
-                                ),
-                            )
-                        } catch (e: CancellationException) {
-                            throw e
-                        } catch (e: Exception) {
-                            Timber.tag("NearbyPinDetails").e(e)
-                            onePlaceBatch.add(Pair(i, updatedGroups[i]))
-                        }
-                        collectResults.send(onePlaceBatch)
-                    }
+            val fetchedPlaces =
+                try {
+                    nearbyController.getPlacesThrottled(indices.map { updatedGroups[it].place }, throttle, retries)
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    Timber.tag("NearbyPinDetails").e(e)
+                    null
                 }
-            }
+            // The query gives one row per class, picture etc. in no fixed order, so match by QID
+            val fetchedPlacesById = fetchedPlaces.orEmpty().groupBy { it.wikiDataEntityId }
+            val usedIds = mutableSetOf<String?>()
+            collectResults.send(
+                indices.map { i ->
+                    Pair(i, fetchedPlacesById.placeFor(updatedGroups[i].place.wikiDataEntityId, usedIds))
+                },
+            )
         }
     }
 
     /**
      * Launches a specific number of threads to retrieve Place data in parallel from the
-     * WikiData servers.
+     * WikiData servers. It does not wait for them, so that results can be processed as they arrive.
      *
      * @param numThreads The number of threads to launch in parallel
      * @param batchedIndicesToFetch Contains the batches of indices. These indices correspond to
@@ -256,15 +246,16 @@ class NearbyPlaceDetailsLoader(
      * @param updatedGroups List containing Place data
      * @param collectResults Holds the Place data fetched from Wikidata.
      */
-    private suspend fun launchFetchPlacesThreads(
+    private fun CoroutineScope.launchFetchPlacesThreads(
         numThreads: Int,
         batchedIndicesToFetch: Channel<List<Int>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
-        collectResults: Channel<List<Pair<Int, MarkerPlaceGroup>>>,
-    ) = coroutineScope {
+        collectResults: Channel<List<Pair<Int, Place?>>>,
+    ) {
+        val retries = AtomicInteger(LoadPlacesAsyncOptions.RETRIES_PER_LOAD)
         repeat(numThreads) {
             launch(Dispatchers.IO) {
-                fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults)
+                fetchPlacesThreadMethod(batchedIndicesToFetch, updatedGroups, collectResults, retries)
             }
         }
     }
@@ -272,20 +263,23 @@ class NearbyPlaceDetailsLoader(
     /**
      * Places the fetched WikiData Place data into associated MarkerPlaceGroups
      *
-     * @param resultList The Place data fetched from WikiData
+     * @param resultList The Place data fetched from WikiData, null for places that could not be
+     * loaded: these keep their current data and are not saved to the cache
      * @param updatedGroups The MarkerPlaceGroups which will be updated with the data fetched
      * from WikiData
      */
-    private fun processResults(
-        resultList: List<Pair<Int, MarkerPlaceGroup>>,
+    private suspend fun processResults(
+        resultList: List<Pair<Int, Place?>>,
         updatedGroups: MutableList<MarkerPlaceGroup>,
     ) {
-        for ((index, fetchedPlaceGroup) in resultList) {
+        for ((index, fetchedPlace) in resultList) {
+            fetchedPlace ?: continue
             val existingPlace = updatedGroups[index].place
             val finalPlaceGroup =
                 MarkerPlaceGroup(
-                    fetchedPlaceGroup.isBookmarked,
-                    fetchedPlaceGroup.place.apply {
+                    // Read it now, not when the batch was fetched: the user may have changed it since
+                    bookmarkLocationDao.findBookmarkLocation(fetchedPlace.name),
+                    fetchedPlace.apply {
                         location = existingPlace.location
                         distance = existingPlace.distance
                         isMonument = existingPlace.isMonument
@@ -401,7 +395,7 @@ class NearbyPlaceDetailsLoader(
                 val batchedIndicesToFetch =
                     createBatches(indicesToUpdate, LoadPlacesAsyncOptions.BATCH_SIZE)
 
-                val collectResults = Channel<List<Pair<Int, MarkerPlaceGroup>>>(Channel.Factory.UNLIMITED)
+                val collectResults = Channel<List<Pair<Int, Place?>>>(Channel.Factory.UNLIMITED)
 
                 launchFetchPlacesThreads(
                     LoadPlacesAsyncOptions.CONNECTION_COUNT,
@@ -449,3 +443,79 @@ private fun List<Place>.toLocationMap(startIndex: Int): HashMap<LatLng, Place> {
     }
     return map
 }
+
+/**
+ * Returns the fetched Place for the item [id], or a copy of it if an earlier pin already got it:
+ * a custom query can put the same item on two pins, and each pin needs its own Place.
+ *
+ * @param usedIds The ids already given to a pin of the same batch.
+ */
+private fun Map<String?, List<Place>>.placeFor(
+    id: String?,
+    usedIds: MutableSet<String?>,
+): Place? = this[id]?.first()?.let { if (usedIds.add(id)) it else it.copy() }
+
+/**
+ * Returns a new Place with the details of this one, so that two pins never share one object.
+ */
+private fun Place.copy(): Place =
+    Place(language, name, label, longDescription, location, category, siteLinks, pic, exists, entityID)
+
+private const val TOO_MANY_REQUESTS = 429
+private const val MAX_WAIT_DURING_LOAD_MINUTES = 2L
+
+/**
+ * Pauses up to this are waited out in the background while the map stays usable. A longer one means
+ * the service is down: the load ends and the places not loaded yet keep their data until the next.
+ */
+private val MAX_WAIT_DURING_LOAD_MILLIS = TimeUnit.MINUTES.toMillis(MAX_WAIT_DURING_LOAD_MINUTES)
+
+/**
+ * Fetches the places once the pause of [throttle] is over. A temporary failure pauses all requests,
+ * and the request is sent once more if [retries] are left and the pause isn't too long.
+ */
+private suspend fun NearbyController.getPlacesThrottled(
+    places: List<Place>,
+    throttle: QueryServiceThrottle,
+    retries: AtomicInteger,
+): List<Place> {
+    var retried = false
+    while (true) {
+        var wait = throttle.waitMillis()
+        // Another refusal can make the pause longer while waiting, so look again after waking up
+        while (wait in 1..MAX_WAIT_DURING_LOAD_MILLIS) {
+            delay(wait)
+            wait = throttle.waitMillis()
+        }
+        val error =
+            if (wait > MAX_WAIT_DURING_LOAD_MILLIS) {
+                IOException("Query service paused for $wait ms")
+            } else {
+                try {
+                    return getPlaces(places).also { throttle.onSuccess() }
+                } catch (e: IOException) {
+                    e
+                }
+            }
+        if (wait <= MAX_WAIT_DURING_LOAD_MILLIS && error.isTemporary()) {
+            val pause = throttle.onTemporaryFailure((error as? SparqlResponseException)?.retryAfterMillis)
+            if (!retried && pause <= MAX_WAIT_DURING_LOAD_MILLIS && retries.getAndDecrement() > 0) {
+                retried = true
+                continue
+            }
+        }
+        throw error
+    }
+}
+
+/**
+ * Refusals for a while (429, 502, 503, 504) and failures on the way (timeouts, lost connections)
+ * can work a bit later. Other answers, like a query the service rejects, would fail again.
+ */
+private fun IOException.isTemporary() =
+    when (this) {
+        is SparqlResponseException ->
+            code == TOO_MANY_REQUESTS ||
+                code in HttpURLConnection.HTTP_BAD_GATEWAY..HttpURLConnection.HTTP_GATEWAY_TIMEOUT
+        else -> true
+    }

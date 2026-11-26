@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.upload
 
+import com.google.gson.JsonParseException
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
@@ -27,7 +30,10 @@ import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import java.io.IOException
 import java.lang.reflect.Method
+import java.util.concurrent.CountDownLatch
+import kotlin.concurrent.thread
 
 class UploadRepositoryUnitTest {
     private lateinit var repository: UploadRepository
@@ -205,10 +211,25 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetCaptionQuality() {
+        whenever(uploadModel.items).thenReturn(mutableListOf(uploadItem))
         assertEquals(
             repository.getCaptionQuality(uploadItem),
-            imageProcessingService.validateCaption(uploadItem),
+            imageProcessingService.validateCaption(uploadItem, 1),
         )
+    }
+
+    @Test
+    fun testGetCaptionQualityCountsFilesWithTheSameName() {
+        val otherItem = mock<UploadItem>()
+        val differentItem = mock<UploadItem>()
+        whenever(uploadItem.filename).thenReturn("Cross.jpg")
+        whenever(otherItem.filename).thenReturn("Cross.jpg")
+        whenever(differentItem.filename).thenReturn("Tree.jpg")
+        whenever(uploadModel.items).thenReturn(mutableListOf(uploadItem, otherItem, differentItem))
+
+        repository.getCaptionQuality(uploadItem)
+
+        verify(imageProcessingService).validateCaption(uploadItem, 2)
     }
 
     @Test
@@ -288,6 +309,109 @@ class UploadRepositoryUnitTest {
     }
 
     @Test
+    fun testCheckNearbyPlacesLooksUpTheSameSpotOnce() {
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull())).thenReturn(listOf(place))
+
+        // Two pictures of a multi-upload taken 3 m apart
+        assertEquals(place, repository.checkNearbyPlaces(41.91431, 12.4923))
+        assertEquals(place, repository.checkNearbyPlaces(41.91428, 12.4923))
+
+        verify(nearbyPlaces, times(1)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+    }
+
+    @Test(timeout = 10_000)
+    fun testCheckNearbyPlacesWaitsForTheLookupOfTheSameSpot() {
+        val lookupStarted = CountDownLatch(1)
+        val finishLookup = CountDownLatch(1)
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull())).thenAnswer {
+            lookupStarted.countDown()
+            finishLookup.await()
+            listOf(place)
+        }
+        var firstResult: Place? = null
+        var secondResult: Place? = null
+
+        // The pictures of an upload are checked at the same time
+        val first = thread { firstResult = repository.checkNearbyPlaces(41.91431, 12.4923) }
+        lookupStarted.await()
+        val second = thread { secondResult = repository.checkNearbyPlaces(41.91428, 12.4923) }
+        while (second.state != Thread.State.BLOCKED) {
+            Thread.yield()
+        }
+        finishLookup.countDown()
+        first.join()
+        second.join()
+
+        assertEquals(place, firstResult)
+        assertEquals(place, secondResult)
+        verify(nearbyPlaces, times(1)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+    }
+
+    @Test(timeout = 10_000)
+    fun testCheckNearbyPlacesWaitingPicturesGiveUpWhenTheLookupFails() {
+        val lookupStarted = CountDownLatch(1)
+        val finishLookup = CountDownLatch(1)
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull()))
+            .thenAnswer {
+                lookupStarted.countDown()
+                finishLookup.await()
+                throw IOException("timeout")
+            }.thenReturn(listOf(place))
+        var secondResult: Place? = place
+
+        val first = thread { repository.checkNearbyPlaces(41.91431, 12.4923) }
+        lookupStarted.await()
+        val second = thread { secondResult = repository.checkNearbyPlaces(41.91428, 12.4923) }
+        while (second.state != Thread.State.BLOCKED) {
+            Thread.yield()
+        }
+        finishLookup.countDown()
+        first.join()
+        second.join()
+
+        // The waiting picture doesn't send the query again, but a later one does
+        assertEquals(null, secondResult)
+        verify(nearbyPlaces, times(1)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+        assertEquals(place, repository.checkNearbyPlaces(41.91431, 12.4923))
+    }
+
+    @Test
+    fun testCheckNearbyPlacesLooksUpEachSpot() {
+        val colosseum: Place = mock()
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull()))
+            .thenReturn(listOf(place), listOf(colosseum))
+
+        // Villa Borghese and the Colosseum are about 2.7 km apart
+        assertEquals(place, repository.checkNearbyPlaces(41.91431, 12.4923))
+        assertEquals(colosseum, repository.checkNearbyPlaces(41.8902, 12.4922))
+
+        verify(nearbyPlaces, times(2)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+    }
+
+    @Test
+    fun testCheckNearbyPlacesTriesAFailedLookupAgain() {
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull()))
+            .thenThrow(IOException("timeout"))
+            .thenReturn(listOf(place))
+
+        assertEquals(null, repository.checkNearbyPlaces(41.91431, 12.4923))
+        assertEquals(place, repository.checkNearbyPlaces(41.91428, 12.4923))
+
+        verify(nearbyPlaces, times(2)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+    }
+
+    @Test
+    fun testCheckNearbyPlacesLooksUpAgainForTheNextUpload() {
+        whenever(nearbyPlaces.getFromWikidataQuery(any(), any(), any(), anyOrNull())).thenReturn(listOf(place))
+
+        repository.checkNearbyPlaces(41.91431, 12.4923)
+        repository.cleanup()
+        repository.checkNearbyPlaces(41.91431, 12.4923)
+
+        verify(nearbyPlaces, times(2)).getFromWikidataQuery(any(), any(), any(), anyOrNull())
+    }
+
+    @Test
     fun testCheckNearbyPlacesWithoutExceptionCaseNull() {
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
@@ -306,7 +430,25 @@ class UploadRepositoryUnitTest {
                 0.1,
                 null,
             ),
-        ).thenThrow(Exception())
+        ).thenThrow(IOException("offline"))
+        assertEquals(
+            repository.checkNearbyPlaces(0.0, 0.0),
+            null,
+        )
+    }
+
+    @Test
+    fun testCheckNearbyPlacesWithMalformedResponse() {
+        `when`(
+            nearbyPlaces.getFromWikidataQuery(
+                LatLng(0.0, 0.0, 0.0f),
+                java.util.Locale
+                    .getDefault()
+                    .language,
+                0.1,
+                null,
+            ),
+        ).thenThrow(JsonParseException("malformed"))
         assertEquals(
             repository.checkNearbyPlaces(0.0, 0.0),
             null,

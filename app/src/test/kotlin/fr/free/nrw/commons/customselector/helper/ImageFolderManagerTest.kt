@@ -140,7 +140,7 @@ class ImageFolderManagerTest {
     fun testSaveLastVisibleItemIdValidPosition() {
         val prefs: SharedPreferences =
             context.getSharedPreferences("CustomSelector", Context.MODE_PRIVATE)
-        whenever(imageAdapter.getImageIdAt(2)).thenReturn(12345L)
+        whenever(imageAdapter.imageIds).thenReturn(listOf(1L, 2L, 12345L))
 
         val filteredImages = listOf(image1, image2)
         folderManager.saveLastVisibleItemId(2, filteredImages, imageAdapter, context)

@@ -65,19 +65,14 @@ class ReasonBuilder
             return rxSingle(context = Dispatchers.IO) {
                 if (!checkAccount()) return@rxSingle ""
 
-                try {
-                    val globalFileUsage =
-                        okHttpJsonApiClient.getGlobalFileUsages(
-                            fileName = media.filename,
-                            pageSize = defaultFileUsagePageSize,
-                        )
-                    val globalUsages = globalFileUsage?.query?.pages?.sumOf { it.fileUsage.size } ?: 0
+                val globalFileUsage =
+                    okHttpJsonApiClient.getGlobalFileUsages(
+                        fileName = media.filename,
+                        pageSize = defaultFileUsagePageSize,
+                    )
+                val globalUsages = globalFileUsage?.query?.pages?.sumOf { it.fileUsage.size } ?: 0
 
-                    appendArticlesUsed(globalUsages, media, reason)
-                } catch (e: Exception) {
-                    Timber.e(e, "Error fetching file usage")
-                    throw e
-                }
+                appendArticlesUsed(globalUsages, media, reason)
             }
         }
 

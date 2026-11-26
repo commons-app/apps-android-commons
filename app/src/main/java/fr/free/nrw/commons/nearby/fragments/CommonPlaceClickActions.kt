@@ -11,7 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionCameraCoordinator
+import fr.free.nrw.commons.contributions.ContributionImagePicker
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ActivityUtils
@@ -27,7 +29,9 @@ class CommonPlaceClickActions
     constructor(
         @Named("default_preferences") private val applicationKvStore: JsonKvStore,
         private val activity: Activity,
-        private val contributionController: ContributionController,
+        private val cameraCoordinator: ContributionCameraCoordinator,
+        private val contributionImagePicker: ContributionImagePicker,
+        private val uploadCoordinator: ContributionUploadCoordinator,
     ) {
         fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>, ActivityResultLauncher<Intent>) -> Unit =
             { place, launcher, resultLauncher ->
@@ -38,7 +42,7 @@ class CommonPlaceClickActions
                         "Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}",
                     )
                     storeSharedPrefs(place)
-                    contributionController.initiateCameraPick(activity, launcher, resultLauncher)
+                    cameraCoordinator.initiateCameraPick(activity, launcher, resultLauncher)
                 }
             }
 
@@ -85,7 +89,7 @@ class CommonPlaceClickActions
                             "Image desc: ${place.getLongDescription()}",
                     )
                     storeSharedPrefs(place)
-                    contributionController.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
+                    contributionImagePicker.initiateGalleryPick(activity, galleryPickLauncherForResult, false)
                 }
             }
 
@@ -116,6 +120,7 @@ class CommonPlaceClickActions
         private fun storeSharedPrefs(selectedPlace: Place) {
             Timber.d("Store place object %s", selectedPlace.toString())
             applicationKvStore.putJson(WikidataConstants.PLACE_OBJECT, selectedPlace)
+            uploadCoordinator.isInternalUploadInProgress = true
         }
 
         private fun openWebView(link: Uri): Boolean {

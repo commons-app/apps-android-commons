@@ -41,10 +41,6 @@
     <item quantity="few">%1$d тейәүҙәр</item>
     <item quantity="other">%1$d тейәүҙәре</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Был рәсем %1$s аҫтында лицензия аласаҡ</item>
-    <item quantity="other">Был рәсем %1$s аҫтында лицензия аласаҡ</item>
-  </plurals>
   <string name="navigation_item_explore">Тикшереү</string>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Дөйөм</string>
@@ -75,7 +71,6 @@
   <string name="upload_completed_notification_title">%1$s йөкләнде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып йөкләнгән файлды ҡара</string>
   <string name="upload_progress_notification_title_start">Файлды йөкләү: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s йөкләнә</string>
   <string name="upload_progress_notification_title_finishing">Йөкләү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">%1$s йөкләп булманы</string>
   <string name="upload_paused_notification_title">%1$s йөкләү туҡтатылды</string>

@@ -350,6 +350,7 @@ android {
         }
         unitTests.all {
             it.jvmArgs("-noverify")
+            it.maxHeapSize = "2g"
         }
     }
     lint {

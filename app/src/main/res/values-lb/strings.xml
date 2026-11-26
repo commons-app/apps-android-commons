@@ -36,10 +36,6 @@
     <item quantity="one">%1$d Fichier eropgelueden</item>
     <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
-    <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d eropgeluedene Fichier</item>
     <item quantity="other">%1$d eropgeluede Fichieren</item>
@@ -73,7 +69,6 @@
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Tippt fir de Fichier ze gesinn, deen Dir eropgelueden hutt</string>
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eropluede vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_paused_notification_title">Eropluede vu(n) %1$s pauséiert</string>
@@ -611,6 +606,8 @@
   <string name="custom_selector_info_text2">Am Géigesaz zum Bild op der lénkser Säit, gesäit een um Bild op der rietser Säit de Commons-Logo, wat bedeit, datt et schonn eropgeluede gouf.\n\nTippt an haalt gedréckt, fir eng Virschau vum Bild ze kréien.</string>
   <string name="welcome_custom_selector_ok">Genial</string>
   <string name="custom_selector_already_uploaded_image_text">Dëst Bild gouf schonn op Commons eropgelueden.</string>
+  <string name="custom_selector_image_has_location">Huet Standuertdonnéeën</string>
+  <string name="custom_selector_image_no_location">Keng Standuertdonnéeën</string>
   <string name="wlm_upload_info">Dëst Bild wäert beim Concours Wiki Loves Monuments agereecht ginn.</string>
   <string name="display_monuments">Monumenter weisen</string>
   <string name="wlm_month_message">Et ass de Mount vu Wiki Love Monuments!</string>

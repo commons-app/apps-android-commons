@@ -48,10 +48,6 @@
     <item quantity="one">%1$d yükləmə</item>
     <item quantity="other">%1$d yükləmə</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Bu şəkil %1$s lisenziyası altında yayımlanacaq</item>
-    <item quantity="other">Bu şəkillər %1$s lisenziyası altında yayımlanacaq</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d yükləmə</item>
     <item quantity="other">%1$d yükləmə</item>
@@ -91,7 +87,6 @@
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yükləmənizə baxmaq üçün toxunun</string>
   <string name="upload_progress_notification_title_start">Fayl yüklənir: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s yüklənir</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklənməsi başa çatdı</string>
   <string name="upload_failed_notification_title">%1$s yükləmək alınmadı</string>
   <string name="upload_metadata_pending_notification_title">%1$s yükləndi, lakin başlıqları və təsvirləri hələ yadda saxlanılmayıb</string>
@@ -693,6 +688,7 @@
   <string name="cancelling_upload">Yükləmə ləğv edilir…</string>
   <string name="retrying_upload">Yükləməyə yenidən cəhd edilir…</string>
   <string name="retrying_failed_uploads">Bütün uğursuz yükləmələr yenidən cəhd edilir…</string>
+  <string name="upload_failed_server_error">Commons hazırda sorğunu icra edə bilmədi. Zəhmət olmasa, bir az sonra yenidən cəhd edin. (HTTP %1$d)</string>
   <string name="cancel_upload">Yükləməni ləğv et</string>
   <string name="limited_connection_explanation">Siz məhdud bağlantı rejimini aktiv etmisiniz. Bütün yükləmələr dayandırılıb və siz bu rejimi söndürdükdən sonra davam edəcək.</string>
   <string name="limited_connection_is_on">Məhdud bağlantı rejimi aktivdir.</string>

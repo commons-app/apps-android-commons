@@ -25,7 +25,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.kvstore.BasicKvStore
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -44,6 +44,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import timber.log.Timber
+import java.io.IOException
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
@@ -321,13 +322,7 @@ class LocationPickerActivity : BaseActivity() {
 
         permissionManager.requestLocationPermissions()
 
-        // If location metadata is available, move map to that location.
-        if (activity == "UploadActivity" || activity == "MediaActivity") {
-            mapManager.moveMapToMediaLocation(cameraPosition)
-        } else {
-            // If location metadata is not available, move map to device GPS location.
-            mapManager.moveMapToGPSLocation()
-        }
+        mapManager.moveMapToStartLocation(activity, cameraPosition)
 
         modifyLocationButton.setOnClickListener {
             placeSelectedButton.visibility = View.VISIBLE
@@ -447,20 +442,23 @@ class LocationPickerActivity : BaseActivity() {
                             it1,
                         )
                     }
-            } catch (e: Exception) {
-                if (e.localizedMessage == CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE) {
-                    val username = sessionManager.userName
-                    CommonsApplication
-                        .BaseLogoutListener(
-                            this,
-                            getString(R.string.invalid_login_message),
-                            username,
-                        ).let {
-                            CommonsApplication.instance.clearApplicationData(this, it)
-                        }
-                } else {
-                    Timber.e(e, "Failed to update image coordinates")
-                }
+            } catch (e: InvalidLoginTokenException) {
+                Timber.e(e, "Invalid login token while updating image coordinates")
+                val username = sessionManager.userName
+                CommonsApplication
+                    .BaseLogoutListener(
+                        this,
+                        getString(R.string.invalid_login_message),
+                        username,
+                    ).let {
+                        CommonsApplication.instance.clearApplicationData(this, it)
+                    }
+            } catch (e: IOException) {
+                Timber.e(e, "Failed to update image coordinates")
+            } catch (e: IllegalStateException) {
+                Timber.e(e, "Failed to update image coordinates")
+            } catch (e: IllegalArgumentException) {
+                Timber.e(e, "Failed to update image coordinates")
             }
         }
     }

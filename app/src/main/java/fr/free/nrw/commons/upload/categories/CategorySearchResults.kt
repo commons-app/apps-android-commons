@@ -8,6 +8,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.Single
 import timber.log.Timber
 
 class CategorySearchResults(
@@ -88,6 +89,20 @@ class CategorySearchResults(
                 emptyList()
             }
     }
+
+    /**
+     * Next page of results for a typed search, with the same filter as [searchResults].
+     * Empty only when there are no more pages.
+     */
+    fun moreResults(term: String): Single<List<CategoryItem>> =
+        repository
+            .searchMore(term)
+            .subscribeOn(ioScheduler)
+            .flatMap { page ->
+                val kept = page.filter { !repository.isSpammyCategory(it.name) }
+                // The filter removed the whole page, so get the next one
+                if (page.isNotEmpty() && kept.isEmpty()) moreResults(term) else Single.just(kept)
+            }
 
     /**
      * Returns image title list from UploadItem

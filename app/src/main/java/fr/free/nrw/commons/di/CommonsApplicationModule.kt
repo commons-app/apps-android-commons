@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.ContentProviderClient
 import android.content.ContentResolver
 import android.content.Context
+import android.database.CursorIndexOutOfBoundsException
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.view.inputmethod.InputMethodManager
 import androidx.collection.LruCache
 import androidx.room.Room.databaseBuilder
@@ -205,6 +207,7 @@ open class CommonsApplicationModule(
             MIGRATION_23_24,
             MIGRATION_24_25,
             MIGRATION_25_26,
+            MIGRATION_26_27,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -527,7 +530,19 @@ val MIGRATION_21_22 =
                 }
                 cursor.close()
                 oldDb.close()
-            } catch (e: Exception) {
+            } catch (e: SQLiteException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: CursorIndexOutOfBoundsException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalArgumentException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: IllegalStateException) {
+                Timber.e(e, "Exception during legacy database migration")
+                throw e
+            } catch (e: SecurityException) {
                 Timber.e(e, "Exception during legacy database migration")
                 throw e
             }
@@ -570,6 +585,17 @@ val MIGRATION_24_25 =
         }
     }
 
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_25_26 =
+    object : Migration(25, 26) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
+            if ("uploadedFilename" !in contributionColumns(db)) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+            }
+        }
+    }
+
 /**
  * Fills in media_mediaType for rows that predate the column.
  *
@@ -597,24 +623,26 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
 }
 
 @Suppress("MagicNumber") // Version numbers of the migration
-val MIGRATION_25_26 =
-    object : Migration(25, 26) {
+val MIGRATION_26_27 =
+    object : Migration(26, 27) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            val columns =
-                db.query("PRAGMA table_info(contribution)").use { cursor ->
-                    val nameIndex = cursor.getColumnIndexOrThrow("name")
-                    buildSet {
-                        while (cursor.moveToNext()) {
-                            add(cursor.getString(nameIndex))
-                        }
-                    }
-                }
+            val columns = contributionColumns(db)
             if ("locationOfCreation" !in columns) {
                 db.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
             }
-            // Earlier APKs from this PR had the location column in their version 25 schema.
-            if ("uploadedFilename" !in columns) {
-                db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+            if ("retryNotBefore" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
+            }
+        }
+    }
+
+/** Returns the contribution columns so migrations can also handle earlier preview schemas. */
+private fun contributionColumns(db: SupportSQLiteDatabase): Set<String> =
+    db.query("PRAGMA table_info(contribution)").use { cursor ->
+        val nameIndex = cursor.getColumnIndexOrThrow("name")
+        buildSet {
+            while (cursor.moveToNext()) {
+                add(cursor.getString(nameIndex))
             }
         }
     }

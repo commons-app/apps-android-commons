@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--accessibility UI description strings-->
+  <string name="preference_category_sync">Cloud Backup &amp; Sync</string>
+  <string name="backup_settings">Backup settings to Commons</string>
+  <string name="backup_settings_summary">Save app settings and bookmarks to your user page on Wikimedia Commons</string>
+  <string name="restore_settings">Restore settings from Commons</string>
+  <string name="restore_settings_summary">Restore app settings and bookmarks from your user page on Wikimedia Commons</string>
+  <string name="sync_backup_confirm_title">Backup Settings to User Page?</string>
+  <string name="sync_backup_confirm_message">This will save your app settings and bookmarked places (including coordinates) to User:%1$s/commons-android-app.json. Note that Wikimedia user pages are publicly accessible.</string>
+  <string name="sync_backup_success">Settings successfully saved to your user page!</string>
+  <string name="sync_backup_failed">Failed to save settings: %1$s</string>
+  <string name="sync_restore_confirm_title">Restore Settings from User Page?</string>
+  <string name="sync_restore_confirm_message">This will restore your app settings and merge bookmarked places from User:%1$s/commons-android-app.json.</string>
+  <string name="sync_restore_success">Settings and bookmarks successfully restored!</string>
+  <string name="sync_restore_failed">Failed to restore settings: %1$s</string>
+  <string name="sync_no_backup_found">No settings backup found on user page.</string>
+  <string name="sync_in_progress">Syncing settings with Wikimedia Commons…</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_github">Commons GitHub Source Code</string>
   <string name="commons_logo">Commons Logo</string>
@@ -41,10 +56,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">This image will be licensed under %1$s</item>
-    <item quantity="other">These images will be licensed under %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Upload</item>
     <item quantity="other">%1$d Uploads</item>
@@ -84,7 +95,6 @@
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
   <string name="upload_completed_notification_text">Tap to view your upload</string>
   <string name="upload_progress_notification_title_start">Uploading file: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
   <string name="upload_failed_notification_title">Failed to upload %1$s</string>
   <string name="upload_metadata_pending_notification_title">%1$s is uploaded, but its captions and depicts are not saved yet</string>
@@ -482,7 +492,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
   <string name="depictions_choose_from_map">Choose from map</string>
   <string name="location_of_creation_dialog_title">Photo taken here?</string>
-  <string name="location_of_creation_dialog_message">Save &quot;%1$s&quot; as the place where this photo was taken? This is separate from what the photo shows, so your selected depictions stay as they are.</string>
+  <string name="location_of_creation_dialog_message">Save \"%1$s\" as the place where this photo was taken? This is separate from what the photo shows, so your selected depictions stay as they are.</string>
   <string name="location_of_creation_dialog_positive">Use as location</string>
   <string name="location_of_creation_selected">Photo taken at: %1$s</string>
   <string name="location_of_creation_clear">Remove the place where the photo was taken</string>
@@ -750,7 +760,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
 
   <string name="media_details_tooltip">Please write a short caption that says what your picture shows. In the description, say what makes the picture interesting or typical or rare, and explain the context, visible or not. Use exact terminology as much as you can.</string>
-  <string name="depicts_tooltip">Please find and select all concepts that this image portrays. Be as specific as you can. If the image portrays multiple items, choose them all within reason. Do not choose generic tags if more specific tags are available. If you are uploading a single photo, long-press an item to mark it as the place where the photo was taken instead of something it shows.</string>
+  <string name="depicts_tooltip">Please find and select all concepts that this image portrays. Be as specific as you can. If the image portrays multiple items, choose them all within reason. Do not choose generic tags if more specific tags are available.</string>
+  <string name="depicts_location_tooltip">Long-press an item to use it as the place where the photo was taken.</string>
   <string name="categories_tooltip">Please select the appropriate categories. Unlike depictions, categories are only in English.</string>
   <string name="license_tooltip">Commons makes your pictures reusable and adapted by everyone. Do you want to waive all rights? Do you want to be attributed? Do you want adaptations to use the same license?</string>
   <string name="depicts_step_title">Depicts</string>
@@ -790,6 +801,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_duplicates_warning">Some selected images are duplicates and will be removed before upload.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
+  <string name="custom_selector_switch_to_list_view">Switch to list view</string>
+  <string name="custom_selector_switch_to_grid_view">Switch to grid view</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">Has location data</string>
+  <string name="custom_selector_image_no_location">No location data</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
   <string name="display_monuments">Display monuments</string>
@@ -935,6 +951,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
 
   <string name="show_in_explore">Show in Explore</string>
+  <string name="nearby_show_only_needs_photo">Show only places that need a photo</string>
+  <string name="nearby_show_all_places">Show all places</string>
   <string name="show_in_nearby">Show in Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>
