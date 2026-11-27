@@ -258,6 +258,7 @@ class CategoriesModelTest {
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItem))
             .test()
+            .awaitCount(1)
             .assertValue(
                 listOf(
                     categoryItem("commonsCategories"),
@@ -269,6 +270,7 @@ class CategoriesModelTest {
         CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
             .searchAll("", imageTitleList, listOf(depictedItemWithoutCategories))
             .test()
+            .awaitCount(1)
             .assertValue(
                 listOf(
                     categoryItem("categoriesOfP18"),
@@ -298,6 +300,7 @@ class CategoriesModelTest {
         categoriesModel
             .searchAll("", listOf("Olive tree", "Villa Borghese"), emptyList())
             .test()
+            .awaitCount(1)
             .assertNoErrors()
             .assertValue(
                 listOf(
