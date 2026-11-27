@@ -16,10 +16,6 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <plurals name="share_license_summary" fuzzy="true">
-    <item quantity="one">Dit plaetje weurt gelicenseerd ónger %1$s</item>
-    <item quantity="other">Dees plaetje weure gelicenseerd ónger %1$s</item>
-  </plurals>
   <string name="preference_category_appearance">Uterlik</string>
   <string name="preference_category_general">Algemein</string>
   <string name="preference_category_feedback">Feedback</string>
@@ -41,7 +37,6 @@
   <string name="upload_completed_notification_title">%1$s upgeloadj!</string>
   <string name="upload_completed_notification_text">Wies aan veur dienen upload te betrachte</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Upload van %1$s aan \'nt vange</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s up \'nt loade</string>
   <string name="upload_progress_notification_title_finishing">d\'n Upload van %1$s is vaerdig</string>
   <string name="upload_failed_notification_title" fuzzy="true">d\'n Upload van %1$s is mislök</string>
   <string name="upload_failed_notification_subtitle">Wies aan veur te betrachte</string>

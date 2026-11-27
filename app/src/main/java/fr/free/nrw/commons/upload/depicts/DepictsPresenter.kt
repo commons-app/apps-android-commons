@@ -40,17 +40,23 @@ class DepictsPresenter
         private val repository: UploadRepository,
         @param:Named(IO_THREAD) private val ioScheduler: Scheduler,
         @param:Named(MAIN_THREAD) private val mainThreadScheduler: Scheduler,
-    ) : DepictsContract.UserActionListener {
+        private val session: DepictsSession = DepictsSession(),
+    ) : DepictsContract.UserActionListener,
+        DepictsContract.SelectionActions by DepictsSelectionHandler(
+            repository,
+            session,
+            ioScheduler,
+            mainThreadScheduler,
+        ) {
         companion object {
             private val DUMMY = proxy<DepictsContract.View>()
         }
 
         private var view = DUMMY
-        private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+        private val compositeDisposable get() = session.compositeDisposable
         private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
-        private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
-        private var media: Media? = null
-        private val pendingCreations: MutableSet<String> = mutableSetOf()
+        private val depictedItems get() = session.depictedItems
+        private var media: Media? by session::media
 
         @Inject
         lateinit var depictsDao: DepictsDao
@@ -73,13 +79,20 @@ class DepictsPresenter
         @Inject
         lateinit var sessionManager: SessionManager
 
+        /**
+         * Builds the search results. It reads [controller] and [depictsDao] each time they are
+         * needed, exactly like the presenter did before the search logic was moved.
+         */
+        private val searchHandler =
+            DepictsSearchHandler(repository, { controller }, { depictsDao }, ioScheduler)
+
         override fun onAttachView(view: DepictsContract.View) {
             this.view = view
             compositeDisposable.add(
                 searchTerm
                     .observeOn(mainThreadScheduler)
                     .doOnNext { view.showProgress(true) }
-                    .switchMap(::searchResultsWithTerm)
+                    .switchMap { term -> searchHandler.searchResultsWithTerm(term, media) }
                     .observeOn(mainThreadScheduler)
                     .subscribe(
                         { (results, term) ->
@@ -96,122 +109,10 @@ class DepictsPresenter
             )
         }
 
-        private fun searchResultsWithTerm(term: String): Flowable<Pair<List<DepictedItem>, String>> =
-            searchResults(term).map { Pair(it, term) }
-
-        private fun searchResults(querystring: String): Flowable<List<DepictedItem>> {
-            var recentDepictedItemList: MutableList<DepictedItem> = ArrayList()
-            // show recentDepictedItemList when queryString is empty
-            if (querystring.isEmpty()) {
-                recentDepictedItemList = getRecentDepictedItems().toMutableList()
-            }
-
-            if (media == null) {
-                return repository
-                    .searchAllEntities(querystring)
-                    .subscribeOn(ioScheduler)
-                    .map {
-                        repository.getSelectedDepictions() + it + recentDepictedItemList +
-                            controller.loadFavoritesItems()
-                    }.map {
-                        it.filterNot { item ->
-                            WikidataDisambiguationItems
-                                .isDisambiguationItem(item.instanceOfs)
-                        }
-                    }.map { it.distinctBy(DepictedItem::id) }
-            } else {
-                return Flowable
-                    .zip(
-                        repository
-                            .getDepictions(repository.getSelectedExistingDepictions())
-                            .map { list ->
-                                list.map {
-                                    DepictedItem(
-                                        it.name,
-                                        it.description,
-                                        it.imageUrl,
-                                        it.instanceOfs,
-                                        it.commonsCategories,
-                                        true,
-                                        it.id,
-                                    )
-                                }
-                            },
-                        repository.searchAllEntities(querystring),
-                    ) { it1, it2 ->
-                        it1 + it2
-                    }.subscribeOn(ioScheduler)
-                    .map {
-                        repository.getSelectedDepictions() + it + recentDepictedItemList +
-                            controller.loadFavoritesItems()
-                    }.map {
-                        it.filterNot { item ->
-                            WikidataDisambiguationItems
-                                .isDisambiguationItem(item.instanceOfs)
-                        }
-                    }.map { it.distinctBy(DepictedItem::id) }
-            }
-        }
-
         override fun onDetachView() {
             view = DUMMY
             media = null
             compositeDisposable.clear()
-        }
-
-        /**
-         * Selects the place depictions retrieved by the repository
-         */
-        override fun selectPlaceDepictions() {
-            compositeDisposable.add(
-                repository
-                    .getPlaceDepictions()
-                    .subscribeOn(ioScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .subscribe(::selectNewDepictions),
-            )
-        }
-
-        /**
-         * Selects each [DepictedItem] in a given list as if they were clicked by the user by calling
-         * [onDepictItemClicked] for each depiction and adding the depictions to [depictedItems]
-         */
-        private fun selectNewDepictions(toSelect: List<DepictedItem>) {
-            toSelect.forEach {
-                it.isSelected = true
-                repository.onDepictItemClicked(it, media)
-            }
-
-            // Add the new selections to the list of depicted items so that the selections appear
-            // immediately (i.e. without any search term queries)
-            depictedItems.value
-                ?.toMutableList()
-                ?.let { toSelect + it }
-                ?.distinctBy(DepictedItem::id)
-                ?.let { depictedItems.value = it }
-        }
-
-        override fun clearPreviousSelection() {
-            repository.cleanup()
-        }
-
-        /**
-         * Update Depictions list which are selected from the map
-         */
-        override fun onPlaceSelectedFromMap(place: Place) {
-            place.wikiDataEntityId?.let { qid ->
-                compositeDisposable.add(
-                    repository
-                        .getDepictions(listOf(qid))
-                        .subscribeOn(ioScheduler)
-                        .observeOn(mainThreadScheduler)
-                        .subscribe({ depictedItems ->
-                            selectNewDepictions(depictedItems)
-                        }, { error ->
-                            Timber.e(error, "Failed to fetch depiction for place from map")
-                        }),
-                )
-            }
         }
 
         override fun getUploads(): List<UploadItem> = repository.getUploads()
@@ -221,71 +122,18 @@ class DepictsPresenter
         }
 
         override fun onDepictItemClicked(depictedItem: DepictedItem) {
-            val article = wikipediaArticleClient.articleFromPendingDepictionId(depictedItem.id)
-            when {
-                article == null -> repository.onDepictItemClicked(depictedItem, media)
-                !sessionManager.isUserLoggedIn -> {
-                    revertPendingDepiction(depictedItem)
-                    view.showDepictionCreationMessage(R.string.depicts_item_creation_login_required)
-                }
-                !pendingCreations.add(depictedItem.id) -> Unit
-                else -> createWikidataItem(depictedItem, article)
-            }
+            DepictsItemCreationHandler(
+                repository,
+                session,
+                view,
+                DepictsCreationDependencies(
+                    wikipediaArticleClient,
+                    wikidataItemCreationClient,
+                    sessionManager.isUserLoggedIn,
+                ),
+                DepictsSchedulers(ioScheduler, mainThreadScheduler),
+            ).onDepictItemClicked(depictedItem)
         }
-
-        /** Creates the Wikidata item and replaces the pending depiction with the real item. */
-        private fun createWikidataItem(
-            depictedItem: DepictedItem,
-            article: WikipediaArticleClient.Article,
-        ) {
-            view.showProgressDialog()
-            compositeDisposable.add(
-                wikidataItemCreationClient
-                    .createItem(article.languageCode, article.title)
-                    .flatMap { qid ->
-                        repository
-                            .getDepictions(listOf(qid))
-                            .firstOrError()
-                            .map { it.firstOrNull() }
-                    }.subscribeOn(ioScheduler)
-                    .observeOn(mainThreadScheduler)
-                    .doFinally { pendingCreations.remove(depictedItem.id) }
-                    .subscribe({ createdItem ->
-                        view.dismissProgressDialog()
-                        if (createdItem == null) {
-                            revertPendingDepiction(depictedItem)
-                            view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
-                        } else {
-                            createdItem.isSelected = true
-                            repository.onDepictItemClicked(createdItem, media)
-                            val updated =
-                                depictedItems.value.orEmpty().filterNot { it.id == depictedItem.id } + createdItem
-                            depictedItems.value = updated
-                            view.setDepictsList(updated)
-                            view.showDepictionCreationMessage(R.string.depicts_item_created)
-                        }
-                    }, { error ->
-                        Timber.e(error, "Failed to create Wikidata item")
-                        view.dismissProgressDialog()
-                        revertPendingDepiction(depictedItem)
-                        view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
-                    }),
-            )
-        }
-
-        /** Clears the selection of a depiction whose item could not be created. */
-        private fun revertPendingDepiction(depictedItem: DepictedItem) {
-            depictedItem.isSelected = false
-            view.setDepictsList(depictedItems.value.orEmpty())
-        }
-
-        /** Returns true while a selected item still has a temporary Wikipedia ID. */
-        private fun hasPendingDepiction(): Boolean =
-            repository
-                .getSelectedDepictions()
-                .any { wikipediaArticleClient.isPendingDepictionId(it.id) }
-
-        override fun getDepictedItems(): LiveData<List<DepictedItem>> = depictedItems
 
         /**
          * asks the repository to fetch depictions for the query
@@ -300,10 +148,6 @@ class DepictsPresenter
          * from the depiction list
          */
         override fun verifyDepictions() {
-            if (hasPendingDepiction()) {
-                view.showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
-                return
-            }
             if (repository.getSelectedDepictions().isNotEmpty()) {
                 if (::depictsDao.isInitialized) {
                     // save all the selected Depicted item in room Database
@@ -321,10 +165,6 @@ class DepictsPresenter
          */
         @SuppressLint("CheckResult")
         override fun updateDepictions(media: Media) {
-            if (hasPendingDepiction()) {
-                view.showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
-                return
-            }
             if (repository.getSelectedDepictions().isNotEmpty() ||
                 repository.getSelectedExistingDepictions().size != view.getExistingDepictions()?.size
             ) {
@@ -374,12 +214,12 @@ class DepictsPresenter
         ) {
             this.view = view
             this.media = media
-            repository.setSelectedExistingDepictions(view.getExistingDepictions() ?: emptyList())
+            repository.setSelectedExistingDepictions(view.getExistingDepictions().orEmpty())
             compositeDisposable.add(
                 searchTerm
                     .observeOn(mainThreadScheduler)
                     .doOnNext { view.showProgress(true) }
-                    .switchMap(::searchResultsWithTerm)
+                    .switchMap { term -> searchHandler.searchResultsWithTerm(term, this.media) }
                     .observeOn(mainThreadScheduler)
                     .subscribe(
                         { (results, term) ->
@@ -395,16 +235,307 @@ class DepictsPresenter
                     ),
             )
         }
+    }
+
+/**
+ * Creates Wikidata items for Wikipedia articles shown as pending depictions.
+ */
+data class DepictsSchedulers(
+    val io: Scheduler,
+    val main: Scheduler,
+)
+
+data class DepictsCreationDependencies(
+    val wikipediaArticleClient: WikipediaArticleClient,
+    val wikidataItemCreationClient: WikidataItemCreationClient,
+    val isUserLoggedIn: Boolean,
+)
+
+class DepictsItemCreationHandler(
+    private val repository: UploadRepository,
+    private val session: DepictsSession,
+    private val view: DepictsContract.View,
+    private val dependencies: DepictsCreationDependencies,
+    private val schedulers: DepictsSchedulers,
+) {
+    fun onDepictItemClicked(depictedItem: DepictedItem) {
+        val article =
+            dependencies.wikipediaArticleClient.articleFromPendingDepictionId(depictedItem.id)
+        when {
+            article == null -> repository.onDepictItemClicked(depictedItem, session.media)
+            !dependencies.isUserLoggedIn -> {
+                revertPendingDepiction(depictedItem)
+                view.showDepictionCreationMessage(R.string.depicts_item_creation_login_required)
+            }
+            !session.pendingDepictionIds.add(depictedItem.id) -> Unit
+            else -> createWikidataItem(depictedItem, article)
+        }
+    }
+
+    private fun createWikidataItem(
+        depictedItem: DepictedItem,
+        article: WikipediaArticleClient.Article,
+    ) {
+        view.showProgressDialog()
+        session.compositeDisposable.add(
+            dependencies.wikidataItemCreationClient
+                .createItem(article.languageCode, article.title)
+                .flatMap { qid ->
+                    repository
+                        .getDepictions(listOf(qid))
+                        .firstOrError()
+                        .map { it.firstOrNull() }
+                }.subscribeOn(schedulers.io)
+                .observeOn(schedulers.main)
+                .doFinally { session.pendingDepictionIds.remove(depictedItem.id) }
+                .subscribe({ createdItem ->
+                    view.dismissProgressDialog()
+                    if (createdItem == null) {
+                        revertPendingDepiction(depictedItem)
+                        view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                    } else {
+                        createdItem.isSelected = true
+                        repository.onDepictItemClicked(createdItem, session.media)
+                        val currentItems = session.depictedItems.value.orEmpty()
+                        val updated = currentItems.filterNot { it.id == depictedItem.id } + createdItem
+                        session.depictedItems.value = updated
+                        view.setDepictsList(updated)
+                        view.showDepictionCreationMessage(R.string.depicts_item_created)
+                    }
+                }, { error ->
+                    Timber.e(error, "Failed to create Wikidata item")
+                    view.dismissProgressDialog()
+                    revertPendingDepiction(depictedItem)
+                    view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                }),
+        )
+    }
+
+    private fun revertPendingDepiction(depictedItem: DepictedItem) {
+        depictedItem.isSelected = false
+        view.setDepictsList(session.depictedItems.value.orEmpty())
+    }
+}
+
+/**
+ * Holds the state that [DepictsPresenter] shares with [DepictsSelectionHandler], so that both
+ * always work on the same media, depicted items and disposables.
+ */
+class DepictsSession
+    @Inject
+    constructor() {
+        /**
+         * Disposables of every subscription started by the depicts presenter
+         */
+        val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
         /**
-         * Get the depicts from DepictsRoomdataBase
+         * The depicted items currently shown to the user
          */
-        private fun getRecentDepictedItems(): List<DepictedItem> =
-            runBlocking {
-                val depictsList = depictsDao.depictsList().await()
-                return@runBlocking depictsList.map { it.item }
-            }
+        val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
+
+        /**
+         * Pending Wikipedia articles whose Wikidata items are being created
+         */
+        val pendingDepictionIds: MutableSet<String> = mutableSetOf()
+
+        /**
+         * The media whose depictions are being edited, or null while uploading
+         */
+        var media: Media? = null
     }
+
+/**
+ * Handles selecting depictions for [DepictsPresenter]. The logic was moved out of the presenter
+ * without any behaviour change and works on the state held by [DepictsSession].
+ *
+ * @property repository source of the place depictions and keeper of the selected depictions
+ * @property session state shared with the presenter
+ * @property ioScheduler scheduler on which the depictions are fetched
+ * @property mainThreadScheduler scheduler on which the fetched depictions are selected
+ */
+class DepictsSelectionHandler(
+    private val repository: UploadRepository,
+    private val session: DepictsSession,
+    private val ioScheduler: Scheduler,
+    private val mainThreadScheduler: Scheduler,
+) : DepictsContract.SelectionActions {
+    /**
+     * Selects the place depictions retrieved by the repository
+     */
+    override fun selectPlaceDepictions() {
+        session.compositeDisposable.add(
+            repository
+                .getPlaceDepictions()
+                .subscribeOn(ioScheduler)
+                .observeOn(mainThreadScheduler)
+                .subscribe(::selectNewDepictions),
+        )
+    }
+
+    /**
+     * Selects each [DepictedItem] in a given list as if they were clicked by the user by calling
+     * [onDepictItemClicked] for each depiction and adding the depictions to the depicted items
+     */
+    private fun selectNewDepictions(toSelect: List<DepictedItem>) {
+        toSelect.forEach {
+            it.isSelected = true
+            repository.onDepictItemClicked(it, session.media)
+        }
+
+        // Add the new selections to the list of depicted items so that the selections appear
+        // immediately (i.e. without any search term queries)
+        session.depictedItems.value
+            ?.toMutableList()
+            ?.let { toSelect + it }
+            ?.distinctBy(DepictedItem::id)
+            ?.let { session.depictedItems.value = it }
+    }
+
+    /**
+     * Clears the selections kept by the repository
+     */
+    override fun clearPreviousSelection() {
+        repository.cleanup()
+    }
+
+    /**
+     * Update Depictions list which are selected from the map
+     */
+    override fun onPlaceSelectedFromMap(place: Place) {
+        place.wikiDataEntityId?.let { qid ->
+            session.compositeDisposable.add(
+                repository
+                    .getDepictions(listOf(qid))
+                    .subscribeOn(ioScheduler)
+                    .observeOn(mainThreadScheduler)
+                    .subscribe({ depictedItems ->
+                        selectNewDepictions(depictedItems)
+                    }, { error ->
+                        Timber.e(error, "Failed to fetch depiction for place from map")
+                    }),
+            )
+        }
+    }
+
+    /**
+     * Passes a clicked depicted item to the repository together with the current media
+     */
+    override fun onDepictItemClicked(depictedItem: DepictedItem) {
+        repository.onDepictItemClicked(depictedItem, session.media)
+    }
+
+    /**
+     * Gets the depicted items currently shown to the user
+     */
+    override fun getDepictedItems(): LiveData<List<DepictedItem>> = session.depictedItems
+}
+
+/**
+ * Builds the depiction search results shown in the depicts step of the upload flow.
+ *
+ * It combines the repository search with the already selected depictions, the recently used
+ * depictions and the bookmarked depictions. The logic was moved out of [DepictsPresenter]
+ * without any behaviour change.
+ *
+ * @property repository source of search results and of the currently selected depictions
+ * @property controller provides the bookmarked depiction items when they are needed
+ * @property depictsDao provides the recently used depictions when they are needed
+ * @property ioScheduler scheduler on which the search is subscribed
+ */
+class DepictsSearchHandler(
+    private val repository: UploadRepository,
+    private val controller: () -> BookmarkItemsController,
+    private val depictsDao: () -> DepictsDao,
+    private val ioScheduler: Scheduler,
+) {
+    /**
+     * Searches for depictions and pairs every emitted result list with the term that produced it.
+     *
+     * @param term the search term
+     * @param media the media whose depictions are being edited, or null while uploading
+     * @return a flowable of the results together with [term]
+     */
+    fun searchResultsWithTerm(
+        term: String,
+        media: Media?,
+    ): Flowable<Pair<List<DepictedItem>, String>> = searchResults(term, media).map { Pair(it, term) }
+
+    /**
+     * Searches for depictions matching [querystring]. The result contains the selected,
+     * found, recent (only for an empty query) and bookmarked items, without disambiguation
+     * items and without duplicates.
+     *
+     * @param querystring the search query
+     * @param media the media whose depictions are being edited, or null while uploading
+     * @return a flowable of the matching depicted items
+     */
+    fun searchResults(
+        querystring: String,
+        media: Media?,
+    ): Flowable<List<DepictedItem>> {
+        var recentDepictedItemList: MutableList<DepictedItem> = ArrayList()
+        // show recentDepictedItemList when queryString is empty
+        if (querystring.isEmpty()) {
+            recentDepictedItemList = getRecentDepictedItems().toMutableList()
+        }
+
+        if (media == null) {
+            return repository
+                .searchAllEntities(querystring)
+                .subscribeOn(ioScheduler)
+                .map {
+                    repository.getSelectedDepictions() + it + recentDepictedItemList +
+                        controller().loadFavoritesItems()
+                }.map {
+                    it.filterNot { item ->
+                        WikidataDisambiguationItems
+                            .isDisambiguationItem(item.instanceOfs)
+                    }
+                }.map { it.distinctBy(DepictedItem::id) }
+        } else {
+            return Flowable
+                .zip(
+                    repository
+                        .getDepictions(repository.getSelectedExistingDepictions())
+                        .map { list ->
+                            list.map {
+                                DepictedItem(
+                                    it.name,
+                                    it.description,
+                                    it.imageUrl,
+                                    it.instanceOfs,
+                                    it.commonsCategories,
+                                    true,
+                                    it.id,
+                                )
+                            }
+                        },
+                    repository.searchAllEntities(querystring),
+                ) { it1, it2 ->
+                    it1 + it2
+                }.subscribeOn(ioScheduler)
+                .map {
+                    repository.getSelectedDepictions() + it + recentDepictedItemList +
+                        controller().loadFavoritesItems()
+                }.map {
+                    it.filterNot { item ->
+                        WikidataDisambiguationItems
+                            .isDisambiguationItem(item.instanceOfs)
+                    }
+                }.map { it.distinctBy(DepictedItem::id) }
+        }
+    }
+
+    /**
+     * Get the depicts from DepictsRoomdataBase
+     */
+    private fun getRecentDepictedItems(): List<DepictedItem> =
+        runBlocking {
+            val depictsList = depictsDao().depictsList().await()
+            return@runBlocking depictsList.map { it.item }
+        }
+}
 
 /**
  * This creates a dynamic proxy instance of the class,

@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.content.Context
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.wikidata.WikipediaArticleInterface
@@ -33,6 +35,7 @@ class WikipediaArticleClientTest {
         Locale.setDefault(Locale.ENGLISH)
         client = WikipediaArticleClient(wikipediaArticleInterface, context)
         whenever(wikipediaArticleInterface.getPageProps(anyString())).thenReturn(Single.error(Exception("not found")))
+        stubSiteMatrix("en", "ja", "eo")
     }
 
     @After
@@ -56,6 +59,15 @@ class WikipediaArticleClientTest {
 
         client.findUnlinkedArticle("Test Article").test().assertValue(
             WikipediaArticleClient.Article("en", "Test Article"),
+        )
+    }
+
+    @Test
+    fun `findUnlinkedArticle searches any language from the site matrix`() {
+        stubPage("eo", "Test Article")
+
+        client.findUnlinkedArticle("Test Article").test().assertValue(
+            WikipediaArticleClient.Article("eo", "Test Article"),
         )
     }
 
@@ -120,5 +132,20 @@ class WikipediaArticleClientTest {
             )
         val response = WikipediaArticleResponse(WikipediaArticleResponse.Query(mapOf("123" to page)))
         whenever(wikipediaArticleInterface.getPageProps(url)).thenReturn(Single.just(response))
+    }
+
+    private fun stubSiteMatrix(vararg languageCodes: String) {
+        val siteMatrix = JsonObject()
+        languageCodes.forEach { code ->
+            val site = JsonObject().apply { addProperty("url", "https://$code.wikipedia.org") }
+            val language =
+                JsonObject().apply {
+                    addProperty("code", code)
+                    add("site", JsonArray().apply { add(site) })
+                }
+            siteMatrix.add(code, language)
+        }
+        val response = JsonObject().apply { add("sitematrix", siteMatrix) }
+        whenever(wikipediaArticleInterface.getSiteMatrix(anyString())).thenReturn(Single.just(response))
     }
 }

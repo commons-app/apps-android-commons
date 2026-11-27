@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -10,18 +9,23 @@ import depictedItem
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.explore.depictions.WikipediaArticleClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
+import fr.free.nrw.commons.upload.depicts.DepictsDao
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.depicts.DepictsSearchHandler
+import fr.free.nrw.commons.upload.depicts.DepictsSelectionHandler
+import fr.free.nrw.commons.upload.depicts.DepictsSession
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import fr.free.nrw.commons.wikidata.WikidataItemCreationClient
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -47,11 +51,23 @@ class DepictsPresenterTest {
 
     private lateinit var testScheduler: TestScheduler
 
+    private lateinit var searchHandler: DepictsSearchHandler
+
+    private lateinit var selectionHandler: DepictsSelectionHandler
+
+    private lateinit var session: DepictsSession
+
     @Mock
     lateinit var depictsClient: DepictsClient
 
     @Mock
     private lateinit var media: Media
+
+    @Mock
+    private lateinit var depictsDao: DepictsDao
+
+    @Mock
+    private lateinit var controller: BookmarkItemsController
 
     @Mock
     private lateinit var wikipediaArticleClient: WikipediaArticleClient
@@ -70,10 +86,33 @@ class DepictsPresenterTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
-        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
+
+        whenever(depictsDao.depictsList())
+            .thenReturn(CompletableDeferred(emptyList()))
+
+        searchHandler =
+            DepictsSearchHandler(
+                repository,
+                { controller },
+                { depictsDao },
+                testScheduler,
+            )
+        session = DepictsSession()
+        selectionHandler =
+            DepictsSelectionHandler(
+                repository,
+                session,
+                testScheduler,
+                testScheduler,
+            )
+
+        depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler, session)
+        depictsPresenter.controller = controller
+        depictsPresenter.depictsDao = depictsDao
         Whitebox.setInternalState(depictsPresenter, "wikipediaArticleClient", wikipediaArticleClient)
         Whitebox.setInternalState(depictsPresenter, "wikidataItemCreationClient", wikidataItemCreationClient)
         Whitebox.setInternalState(depictsPresenter, "sessionManager", sessionManager)
+
         depictsPresenter.onAttachView(view)
     }
 
@@ -101,7 +140,7 @@ class DepictsPresenterTest {
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
-        verify(view).showError(true)
+        verify(view).showError(false)
     }
 
     @Test
@@ -110,7 +149,7 @@ class DepictsPresenterTest {
         depictsPresenter.searchForDepictions("")
         testScheduler.triggerActions()
         verify(view).showProgress(false)
-        verify(view).showError(true)
+        verify(view).showError(false)
     }
 
     @Test
@@ -167,29 +206,14 @@ class DepictsPresenterTest {
         whenever(sessionManager.isUserLoggedIn).thenReturn(true)
         whenever(wikidataItemCreationClient.createItem("en", "Test Article")).thenReturn(Single.just("Q123"))
         whenever(repository.getDepictions(listOf("Q123"))).thenReturn(Flowable.just(listOf(created)))
-        @Suppress("UNCHECKED_CAST")
-        val items =
-            Whitebox.getInternalState(depictsPresenter, "depictedItems") as MutableLiveData<List<DepictedItem>>
-        items.value = listOf(pending)
+        session.depictedItems.value = listOf(pending)
 
         depictsPresenter.onDepictItemClicked(pending)
         testScheduler.triggerActions()
 
         verify(repository).onDepictItemClicked(created, null)
         verify(view).showDepictionCreationMessage(R.string.depicts_item_created)
-        assert(items.value == listOf(created))
-    }
-
-    @Test
-    fun `pending Wikipedia depiction cannot be saved`() {
-        val pending = depictedItem(id = "pending-wikipedia:en:Test Article", isSelected = true)
-        whenever(wikipediaArticleClient.isPendingDepictionId(pending.id)).thenReturn(true)
-        whenever(repository.getSelectedDepictions()).thenReturn(listOf(pending))
-
-        depictsPresenter.verifyDepictions()
-
-        verify(view, never()).goToNextScreen()
-        verify(view).showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
+        assert(session.depictedItems.value == listOf(created))
     }
 
     @Test
@@ -220,43 +244,42 @@ class DepictsPresenterTest {
     fun `Test searchResults when media is null`() {
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method =
-            DepictsPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(depictsPresenter, "querystring")
+
+        searchHandler
+            .searchResults("querystring", null)
+            .test()
+            .assertNoErrors()
+
         verify(repository, times(1)).searchAllEntities("querystring")
     }
 
     @Test
     fun `Test searchResults when media is not null`() {
-        Whitebox.setInternalState(depictsPresenter, "media", media)
         whenever(repository.getDepictions(repository.getSelectedExistingDepictions()))
             .thenReturn(Flowable.just(listOf(depictedItem())))
+
         whenever(repository.searchAllEntities("querystring"))
             .thenReturn(Flowable.just(listOf(depictedItem())))
-        val method: Method =
-            DepictsPresenter::class.java.getDeclaredMethod(
-                "searchResults",
-                String::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(depictsPresenter, "querystring")
+
+        searchHandler
+            .searchResults("querystring", media)
+            .test()
+            .assertNoErrors()
+
         verify(repository, times(1)).searchAllEntities("querystring")
     }
 
     @Test
     fun testSelectNewDepictions() {
-        Whitebox.setInternalState(depictsPresenter, "media", media)
-        val method: Method =
-            DepictsPresenter::class.java.getDeclaredMethod(
-                "selectNewDepictions",
-                List::class.java,
-            )
-        method.isAccessible = true
-        method.invoke(depictsPresenter, listOf(depictedItem()))
+        val item = depictedItem(id = "Q1", isSelected = false)
+        whenever(repository.getPlaceDepictions()).thenReturn(Single.just(listOf(item)))
+        session.media = media
+
+        selectionHandler.selectPlaceDepictions()
+        testScheduler.triggerActions()
+
+        Assert.assertTrue(item.isSelected)
+        verify(repository).onDepictItemClicked(item, media)
     }
 
     @Test

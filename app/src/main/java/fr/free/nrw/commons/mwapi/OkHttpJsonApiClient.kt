@@ -309,7 +309,7 @@ class OkHttpJsonApiClient @Inject constructor(
 
         val urlBuilder: HttpUrl.Builder = sparqlQueryUrl.toHttpUrlOrNull()!!
             .newBuilder()
-            .addQueryParameter("query", wikidataQuery)
+            .addQueryParameter("query", queryParams.withPictureFilter(wikidataQuery))
             .addQueryParameter("format", "json")
 
         val request: Request = Request.Builder()

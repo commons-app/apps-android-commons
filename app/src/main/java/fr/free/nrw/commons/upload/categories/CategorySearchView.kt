@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import fr.free.nrw.commons.R
@@ -59,6 +60,20 @@ class CategorySearchView : CategoriesContract.SearchView {
         fragment.binding?.rvCategories?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@CategorySearchView.adapter
+            clearOnScrollListeners()
+            addOnScrollListener(
+                object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(
+                        recyclerView: RecyclerView,
+                        dx: Int,
+                        dy: Int,
+                    ) {
+                        if (dy > 0 && !recyclerView.canScrollVertically(1)) {
+                            fragment.presenter?.loadMoreCategories()
+                        }
+                    }
+                },
+            )
         }
     }
 
@@ -93,6 +108,13 @@ class CategorySearchView : CategoriesContract.SearchView {
             return
         }
 
+        val shown = adapter!!.items.orEmpty()
+        val isAppend =
+            categories != null &&
+                shown.isNotEmpty() &&
+                categories.size > shown.size &&
+                categories.subList(0, shown.size) == shown
+
         if (categories == null) {
             adapter!!.clear()
         } else {
@@ -101,6 +123,16 @@ class CategorySearchView : CategoriesContract.SearchView {
         adapter!!.notifyDataSetChanged()
 
         fragment.binding?.let {
+            it.rvCategories.post {
+                // Also load more when the list is too short to scroll, e.g. no prefix results at all
+                if (!it.rvCategories.canScrollVertically(1)) {
+                    fragment.presenter?.loadMoreCategories()
+                }
+            }
+            if (isAppend) {
+                // More results were added at the end, so stay where the user scrolled to
+                return
+            }
             it.rvCategories.post {
                 it.rvCategories.smoothScrollToPosition(0)
                 it.rvCategories.post {

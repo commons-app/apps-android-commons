@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.explore.map.ExploreMapFragment
+import fr.free.nrw.commons.explore.map.onNearbyMapDataReceived
 import fr.free.nrw.commons.navtab.NavTab
 
 class ExploreMapRootFragment : ExploreMediaRootFragment {
@@ -105,6 +106,13 @@ class ExploreMapRootFragment : ExploreMediaRootFragment {
 
     fun requestLocationIfNeeded() {
         mapFragment?.requestLocationIfNeeded()
+    }
+
+    /**
+     * Forwards location data from Nearby map to Explore map fragment.
+     */
+    fun onNearbyMapDataReceived(bundle: Bundle) {
+        mapFragment?.onNearbyMapDataReceived(bundle)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

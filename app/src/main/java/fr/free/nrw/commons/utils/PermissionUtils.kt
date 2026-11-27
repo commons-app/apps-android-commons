@@ -169,10 +169,58 @@ object PermissionUtils {
         rationaleMessage: Int,
         vararg permissions: String
     ) {
+        performPermissionCheck(
+            activity,
+            onPermissionGranted,
+            PermissionCheckParameters(
+                onPermissionDenied,
+                rationaleTitle,
+                rationaleMessage,
+                permissions.asList(),
+            ),
+        )
+    }
+
+    /**
+     * Checks storage permissions from a collection and performs the granted action.
+     *
+     * @param activity activity requesting permissions
+     * @param onPermissionGranted action to run when permissions are granted
+     * @param rationaleTitle rationale title to display when permission was denied
+     * @param rationaleMessage rationale message to display when permission was denied
+     * @param permissions permissions to request
+     */
+    internal fun checkPermissionsAndPerformActionWithPermissions(
+        activity: Activity,
+        onPermissionGranted: Runnable,
+        rationaleTitle: Int,
+        rationaleMessage: Int,
+        permissions: Collection<String>,
+    ) {
+        if (hasPartialAccess(activity)) {
+            CoroutineScope(Dispatchers.Main).launch { onPermissionGranted.run() }
+            return
+        }
+
+        performPermissionCheck(
+            activity,
+            onPermissionGranted,
+            PermissionCheckParameters(null, rationaleTitle, rationaleMessage, permissions),
+        )
+    }
+
+    /**
+     * Performs the permission request using shared settings.
+     */
+    private fun performPermissionCheck(
+        activity: Activity,
+        onPermissionGranted: Runnable,
+        request: PermissionCheckParameters,
+    ) {
         val scope = CoroutineScope(Dispatchers.Main)
 
         Dexter.withActivity(activity)
-            .withPermissions(*permissions)
+            .withPermissions(request.permissions)
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     when {
@@ -181,8 +229,8 @@ object PermissionUtils {
                         report.isAnyPermissionPermanentlyDenied -> {
                             DialogUtil.showAlertDialog(
                                 activity,
-                                activity.getString(rationaleTitle),
-                                activity.getString(rationaleMessage),
+                                activity.getString(request.rationaleTitle),
+                                activity.getString(request.rationaleMessage),
                                 activity.getString(R.string.navigation_item_settings),
                                 null,
                                 {
@@ -194,21 +242,21 @@ object PermissionUtils {
                                 null, true
                             )
                         }
-                        else -> scope.launch { onPermissionDenied?.run() }
+                        else -> scope.launch { request.onPermissionDenied?.run() }
                     }
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
                     permissions: List<PermissionRequest>, token: PermissionToken
                 ) {
-                    if (rationaleTitle == -1 && rationaleMessage == -1) {
+                    if (request.rationaleTitle == -1 && request.rationaleMessage == -1) {
                         token.continuePermissionRequest()
                         return
                     }
                     DialogUtil.showAlertDialog(
                         activity,
-                        activity.getString(rationaleTitle),
-                        activity.getString(rationaleMessage),
+                        activity.getString(request.rationaleTitle),
+                        activity.getString(request.rationaleMessage),
                         activity.getString(R.string.ok),
                         activity.getString(R.string.cancel),
                         {
@@ -233,4 +281,14 @@ object PermissionUtils {
                 }
             }).onSameThread().check()
     }
+
+    /**
+     * Stores options shared by the permission request entry points.
+     */
+    private data class PermissionCheckParameters(
+        val onPermissionDenied: Runnable?,
+        val rationaleTitle: Int,
+        val rationaleMessage: Int,
+        val permissions: Collection<String>,
+    )
 }

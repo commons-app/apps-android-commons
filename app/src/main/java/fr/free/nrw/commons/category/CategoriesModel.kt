@@ -6,8 +6,11 @@ import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.functions.Function4
+import io.reactivex.schedulers.Schedulers
 import java.util.Date
+import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 /**
@@ -26,6 +29,11 @@ class CategoriesModel
          * Existing categories which are selected
          */
         private var selectedExistingCategories: MutableList<String> = mutableListOf()
+
+        /**
+         * Whether the next [searchMore] page comes from the full text search or the prefix search
+         */
+        private var textSearchNext = true
 
         /**
          * Returns true if an item is considered to be a spammy category which should be ignored
@@ -112,13 +120,18 @@ class CategoriesModel
             selectedDepictions: List<DepictedItem>,
         ): Observable<List<CategoryItem>> =
             if (TextUtils.isEmpty(term)) {
-                Observable.combineLatest(
-                    categoriesFromDepiction(selectedDepictions),
-                    gpsCategoryModel.categoriesFromLocation,
-                    titleCategories(imageTitleList),
-                    Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
-                    Function4(::combine),
-                )
+                val lookups = SuggestionLookups()
+                Observable
+                    .combineLatest(
+                        categoriesFromDepiction(selectedDepictions, lookups),
+                        gpsCategoryModel.categoriesFromLocation,
+                        titleCategories(imageTitleList, lookups),
+                        Observable.just(categoryDao.recentCategories(SEARCH_CATS_LIMIT)),
+                        Function4(::combine),
+                    ).flatMap { found ->
+                        lookups.errorIfNothingFound(found)?.let { Observable.error<List<CategoryItem>>(it) }
+                            ?: Observable.just(found)
+                    }
             } else {
                 categoriesMatching(term)
             }
@@ -129,6 +142,8 @@ class CategoriesModel
          * text the user typed.
          */
         private fun categoriesMatching(term: String): Observable<List<CategoryItem>> {
+            categoryClient.resetTextSearch(term)
+            textSearchNext = true
             val searches =
                 searchPrefixes(term).map { prefix ->
                     categoryClient
@@ -144,6 +159,28 @@ class CategoriesModel
                     .sortedWith(StringSortingUtils.sortBySimilarity(term))
             }
         }
+
+        /**
+         * Next page of results for a typed search, shown when the user scrolls to the end.
+         * Alternates the full text search, which ignores case, with the next prefix page (#3179).
+         * Empty once both are used up.
+         */
+        fun searchMore(term: String): Single<List<CategoryItem>> =
+            Single.defer {
+                val textLeft = categoryClient.hasMoreTextSearchPages(term)
+                val prefixLeft = categoryClient.hasMorePrefixPages(term)
+                val useText = textLeft && (textSearchNext || !prefixLeft)
+                val page =
+                    when {
+                        useText -> categoryClient.nextTextSearchPage(term, SEARCH_CATS_LIMIT)
+                        prefixLeft -> categoryClient.nextPrefixPage(term, SEARCH_CATS_LIMIT)
+                        else -> return@defer Single.just(emptyList())
+                    }
+                page
+                    .doOnSuccess { textSearchNext = !useText }
+                    // A page can be empty when all of it was hidden categories, so try the next one
+                    .flatMap { if (it.isEmpty()) searchMore(term) else Single.just(it) }
+            }
 
         /**
          * Returns the typed prefix, plus a trailing "s" when that can name the plural category.
@@ -166,6 +203,7 @@ class CategoriesModel
          */
         private fun categoriesFromDepiction(
             selectedDepictions: List<DepictedItem>,
+            lookups: SuggestionLookups,
         ): Observable<MutableList<CategoryItem>>? {
             val observables =
                 selectedDepictions.map { depictedItem ->
@@ -219,7 +257,7 @@ class CategoriesModel
                     }
                 }
             return Observable
-                .concat(observables)
+                .concat(observables.map { lookups.skipOnError(it, mutableListOf()) })
                 .scan(mutableListOf<CategoryItem>()) { accumulator, currentList ->
                     accumulator.apply { addAll(currentList) }
                 }
@@ -281,22 +319,39 @@ class CategoriesModel
          * @param titleList
          * @return
          */
-        private fun titleCategories(titleList: List<String>) =
-            if (titleList.isNotEmpty()) {
-                Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
-                    searchResults.map { it as List<CategoryItem> }.flatten()
-                }
-            } else {
-                Observable.just(emptyList())
-            }
+        private fun titleCategories(
+            titleList: List<String>,
+            lookups: SuggestionLookups,
+        ) = if (titleList.isNotEmpty()) {
+            // A multi-upload often has the same caption on every picture, search it once (#5316).
+            // Each search blocks its thread, so run up to 3 at a time, the most Wikimedia's API
+            // rate limits ask for, instead of one after another (#7438)
+            Observable
+                .fromIterable(titleList.distinct())
+                .concatMapEager(
+                    { getTitleCategories(it, lookups).subscribeOn(Schedulers.io()) },
+                    MAX_PARALLEL_TITLE_SEARCHES,
+                    MAX_PARALLEL_TITLE_SEARCHES,
+                ).toList()
+                .map { it.flatten() }
+                .toObservable()
+        } else {
+            Observable.just(emptyList())
+        }
 
         /**
          * Return category for single title
          * @param title
          * @return
          */
-        private fun getTitleCategories(title: String): Observable<List<CategoryItem>> =
-            categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
+        private fun getTitleCategories(
+            title: String,
+            lookups: SuggestionLookups,
+        ): Observable<List<CategoryItem>> =
+            lookups.skipOnError(
+                categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable(),
+                emptyList(),
+            )
 
         /**
          * Handles category item selection
@@ -359,6 +414,30 @@ class CategoriesModel
         companion object {
             const val SEARCH_CATS_LIMIT = 25
             private const val MIN_PLURAL_PREFIX_LENGTH = 3
+            private const val MAX_PARALLEL_TITLE_SEARCHES = 3
+        }
+
+        /**
+         * The caption and depiction lookups of one suggestions load. A failed lookup is skipped so
+         * it doesn't remove the other suggestions, but its error is kept so that a load which found
+         * nothing at all (offline, server down) still shows the load error (#6652).
+         */
+        private class SuggestionLookups {
+            private val firstError = AtomicReference<Throwable>()
+
+            fun <T : Any> skipOnError(
+                lookup: Observable<T>,
+                nothingFound: T,
+            ): Observable<T> =
+                lookup.onErrorReturn { error ->
+                    firstError.compareAndSet(null, error)
+                    nothingFound
+                }
+
+            fun errorIfNothingFound(found: List<CategoryItem>): Throwable? =
+                firstError.get()?.takeIf {
+                    found.isEmpty()
+                }
         }
 
         /**

@@ -62,10 +62,6 @@
     <item quantity="one">%1$d μεταφόρτωση</item>
     <item quantity="other">%1$d μεταφορτώσεις</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
-    <item quantity="other">Αυτές οι εικόνες θα αδειοδοτηθούν υπό την %1$s</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Μεταφόρτωση</item>
     <item quantity="other"> %1$d Μεταφορτώσεις</item>
@@ -105,7 +101,6 @@
   <string name="upload_completed_notification_title">%1$s μεταφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να δείτε τη μεταφόρτωσή σας</string>
   <string name="upload_progress_notification_title_start">Μεταφόρτωση αρχείου: %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s μεταφορτώθηκε!</string>
   <string name="upload_progress_notification_title_finishing">Ολοκληρώνεται η μεταφόρτωση %1$s</string>
   <string name="upload_failed_notification_title">Η μεταφόρτωση του %1$s απέτυχε</string>
   <string name="upload_paused_notification_title">Η μεταφόρτωση %1$s τέθηκε σε παύση</string>
@@ -210,7 +205,7 @@
   <string name="welcome_final_button_text">Ναι!</string>
   <string name="welcome_help_button_text">Περισσότερες πληροφορίες</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
-  <string name="detail_panel_cats_loading">Φόρτωση σε εξέλιξη...</string>
+  <string name="detail_panel_cats_loading">Φορτώνει…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
   <string name="detail_caption_empty">Χωρίς λεζάντα</string>
   <string name="detail_description_empty">Χωρίς περιγραφή</string>

@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.text.format.DateFormat
+import fr.free.nrw.commons.customselector.helper.ImageMetadataHelper
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
 import kotlinx.coroutines.CoroutineScope
@@ -47,6 +48,7 @@ class ImageFileLoader(
      * Load Device Images under coroutine.
      */
     fun loadDeviceImages(listener: ImageLoaderListener) {
+        ImageMetadataHelper.clear()
         launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 getImages(listener)

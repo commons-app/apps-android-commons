@@ -16,7 +16,7 @@
 -->
 <resources>
   <string name="commons_facebook">Commons-en Facebook orria</string>
-  <string name="commons_github" fuzzy="true">Commons Github Iturburu-kodea</string>
+  <string name="commons_github">Commons Github Iturburu Kodea</string>
   <string name="commons_logo">Commonsen logoa</string>
   <string name="commons_website">Commons webgunea</string>
   <string name="exit_location_picker">Kokalekuaren biltzailetik irten</string>
@@ -29,7 +29,11 @@
   <string name="show_captions">Irudi-oineko testuak</string>
   <string name="row_item_language_description">Hizkuntzaren deskribapena</string>
   <string name="row_item_caption">Irudi-oineko testua</string>
+  <string name="show_captions_description">Deskribapena</string>
   <string name="nearby_row_image">Irudia</string>
+  <string name="nearby_all">Guztiak</string>
+  <string name="nearby_filter_toggle">Gora aldatu</string>
+  <string name="nearby_filter_search">Bilaketa-ikuspegia</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Fitxategi %1$d kargatzen</item>
@@ -44,13 +48,13 @@
     <item quantity="one">igoera %1$d</item>
     <item quantity="other">%1$d igoera</item>
   </plurals>
-  <plurals name="share_license_summary">
-    <item quantity="one">Irudi hau %1$s lizentziapean egongo da</item>
-    <item quantity="other">Irudi hauek %1$s lizentziapean egongo dira</item>
-  </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">igoera %1$d</item>
     <item quantity="other">%1$d igoera</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Partekatutako edukia jasotzen. Irudia prozesatzeak denbora pixka bat behar izan dezake, irudiaren tamainaren eta zure gailuaren arabera</item>
+    <item quantity="other">Partekatutako edukia jasotzen. Irudiak prozesatzeak denbora pixka bat behar izan dezake, irudien tamainaren eta zure gailuaren arabera</item>
   </plurals>
   <string name="navigation_item_explore">Esploratu</string>
   <string name="preference_category_appearance">Itxura</string>
@@ -60,6 +64,7 @@
   <string name="app_name">Commons</string>
   <string name="menu_settings">Hobespenak</string>
   <string name="intent_share_upload_label">Commons-en kargatu</string>
+  <string name="upload_in_progress">Kargatzen ari da</string>
   <string name="username">Erabiltzaile izena</string>
   <string name="password">Pasahitza</string>
   <string name="login_credential">Sartu zure Commons Beta kontura</string>
@@ -68,18 +73,25 @@
   <string name="signup">Eman izena</string>
   <string name="logging_in_title">Saioa hasten</string>
   <string name="logging_in_message">Mesedez itxaron…</string>
+  <string name="updating_caption_title">Irudi-oinak eta deskribapenak eguneratzen</string>
   <string name="updating_caption_message">Itxaron mesedez…</string>
   <string name="login_success">Sarrera arrakastatsua!</string>
   <string name="login_failed">Saio hasieran akatsa!</string>
   <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
-  <string name="authentication_failed" fuzzy="true">Autentifikazioan akatsa, mesedez saiatu berriro sartzen</string>
+  <string name="retry_limit_reached">Saiakera kopuru maximoa gainditu da! Mesedez, utzi kargatzeari eta saiatu berriro.</string>
+  <string name="unrestricted_battery_mode">Bateria optimizatzea itzali?</string>
+  <string name="suggest_unrestricted_mode">3 irudi baino gehiago igotzeak fidagarritasun handiagoa du bateriaren optimizazioa itzalita dagoenean. Mesedez, itzali Commons aplikazioaren bateriaren optimizazioa ezarpenetatik, kargatzeko esperientzia lasaiagoa izateko. \n\nBateriaren optimizazioa itzaltzeko urrats posibleak:\n\n1. urratsa: Sakatu beheko \'Ezarpenak\' botoia.\n\n2. urratsa: Aldatu \'Ez optimizatuta\'-tik \'Aplikazio guztiak\'-era.\n\n3. urratsa: Bilatu \"Commons\" edo \"fr.free.nrw.commons\".\n\n4. urratsa: Sakatu eta hautatu \'Ez optimizatu\'.\n\n5. urratsa: Sakatu \'Eginda\'.</string>
+  <string name="authentication_failed">Autentifikazioak huts egin du. Mesedez, hasi saioa berriro.</string>
   <string name="uploading_started">Igoera hasi da!</string>
+  <string name="uploading_queued">Kargatzeko ilaran (konektatzeko modu mugatua aktibatuta)</string>
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s fitxategia igotzen</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
+  <string name="upload_progress_notification_title_start">Fitxategia igotzen: %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
+  <string name="upload_metadata_pending_notification_title">%1$s igo da, baina oraindik ez dira gorde azpitituluak eta zer irudikatzen duen</string>
+  <string name="upload_metadata_pending">Igota, azpitituluak eta zer irudikatzen duen oraindik ez dira gorde</string>
+  <string name="upload_paused_notification_title">%1$s igota pausatuta</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
   <string name="upload_paused_notification_subtitle">Ukitu ikusteko</string>
   <string name="title_activity_contributions">Nire azken igoerak</string>
@@ -91,31 +103,47 @@
   <string name="menu_from_camera">Argazkia egin</string>
   <string name="menu_nearby">Hurbilekoak</string>
   <string name="provider_contributions">Nire igoerak</string>
+  <string name="menu_copy_link">Kopiatu esteka</string>
+  <string name="menu_link_copied">Esteka arbelean kopiatu da</string>
   <string name="menu_share">Partekatu</string>
   <string name="menu_view_file_page">Ikusi fitxategiaren orria</string>
   <string name="share_title_hint">Testua (beharrezkoa)</string>
+  <string name="add_caption_toast">Mesedez jarri irudi-oina fitxategi honi</string>
+  <string name="file_name_blacklisted_toast">Commons-ek ez du fitxategi izen hau onartzen. Mesedez, erabili irudi-oin deskriptiboagoa.</string>
+  <string name="file_name_too_long_toast">Irudi-oin hau luzeegia da fitxategi-izen gisa erabiltzeko. Mesedez, laburtu.</string>
+  <string name="file_name_invalid_toast">Ezin da irudi-oin hau Commons-en erabili. Aldatu mesedez.</string>
+  <string name="file_name_banned_extension_toast">Irudi-oin honek \".com\" bezalako fitxategi mota bat du. Mesedez, aldatu.</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="share_caption_hint">Irudi-oineko testua</string>
-  <string name="login_failed_network" fuzzy="true">Ezin izan da sartu - sarean akatsa</string>
+  <string name="login_failed_network">Ezin da saioa hasi - sareak huts egin du</string>
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
   <string name="login_failed_blocked">Barka, baina erabiltzaile hau blokeatuta dago Commonsen</string>
   <string name="login_failed_2fa_needed">Zure bi faktoreko autentifikazio kodea eman behar duzu.</string>
+  <string name="login_failed_email_auth_needed">Saioa hasteko egiaztapen-kode bat bidali dizugu zure helbide elektronikora. Mesedez, jarri kodea saioa hasteko.</string>
   <string name="login_failed_generic">Saio hasieran akatsa</string>
   <string name="share_upload_button">Igo</string>
   <string name="multiple_share_base_title">Izena eman bilduma honi</string>
   <string name="provider_modifications">Aldaketak</string>
   <string name="menu_upload_single">Igo</string>
   <string name="categories_search_text_hint">Kategoriak bilatu</string>
+  <string name="depicts_search_text_hint">Bilatu zure multimedia-fitxategiak erakusten dituen elementuak (mendia, Taj Mahal, etab.)</string>
   <string name="menu_save_categories">Gorde</string>
+  <string name="menu_overflow_desc">Menu gehigarria</string>
   <string name="refresh_button">Eguneratu</string>
   <string name="display_list_button">Zerrenda</string>
   <string name="contributions_subtitle_zero">(Oraindik ez da ezer igo)</string>
+  <string name="contributions_subtitle_capped">(%1$d+)</string>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
+  <string name="depictions_not_found">Ez da aurkitu %1$s-rekin bat datorren Wikidata elementurik</string>
+  <string name="no_child_classes">%1$s-ek ez du haurren klaseik</string>
+  <string name="no_parent_classes">%1$s ez du guraso klaserik</string>
   <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.\nHasi idazten kategoriak gehitzeko.</string>
   <string name="categories_activity_title">Kategoriak</string>
   <string name="title_activity_settings">Hobespenak</string>
   <string name="title_activity_signup">Eman izena</string>
   <string name="title_activity_featured_images">Nabarmendutako irudiak</string>
+  <string name="images_featured_explanation">Irudi nabarmenak argazkilari eta ilustratzaile oso trebeek egindako ekarpenak dira, Wikimedia Commons komunitateak guneko kalitate gorenekotzat aukeratuak.</string>
+  <string name="title_activity_custom_selector">Hautatzaile pertsonalizatua</string>
   <string name="title_activity_category_details">Kategoria</string>
   <string name="title_activity_review">Parekoen Ebaluazioa</string>
   <string name="menu_about">Honi buruz</string>
@@ -131,15 +159,18 @@
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
+  <string name="language_search_type_language_name">Idatzi hizkuntza-izena</string>
+  <string name="language_search_recent_searches">Azken bilaketak</string>
+  <string name="language_search_all_languages">Hizkuntza guztiak</string>
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Deskargatu</string>
   <string name="preference_license">Berezko lizentzia</string>
   <string name="use_previous">Aurreko izenburu eta deskribapena erabili</string>
   <string name="preference_theme">Gaia</string>
-  <string name="license_name_cc_by_sa_four" fuzzy="true"> Aitortu-PartekatuBerdin 4.0</string>
-  <string name="license_name_cc_by_four" fuzzy="true">Aitortu 4.0</string>
-  <string name="license_name_cc_by_sa" fuzzy="true"> Aitortu-PartekatuBerdin 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">Esleipena 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Aitortu-PartekatuBerdin 4.0</string>
+  <string name="license_name_cc_by_four">Aitortu 4.0</string>
+  <string name="license_name_cc_by_sa"> Aitortu-PartekatuBerdin 3.0</string>
+  <string name="license_name_cc_by">Aitortu 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -169,28 +200,44 @@
   <string name="detail_panel_cats_label">Kategoriak</string>
   <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
+  <string name="detail_caption_empty">Irudi-oinik ez</string>
   <string name="detail_description_empty">Deskribapenik ez</string>
   <string name="detail_discussion_empty">Eztabaidarik ez</string>
   <string name="detail_license_empty">Lizentzia ezezaguna</string>
   <string name="menu_refresh">Eguneratu</string>
+  <string name="storage_permission_title">Biltegiratzeko baimena eskatzen</string>
   <string name="read_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiaren irakurketa. Aplikazioa ezin da zure galeriara sartu hau gabe.</string>
   <string name="write_storage_permission_rationale">Nahitaezko baimena: kanpo-biltegiratzearen idazketa. Aplikazioa ezin da zure kamerara/galeriara sartu hau gabe.</string>
+  <string name="location_permission_title">Kokapen-baimena eskatzen</string>
+  <string name="in_app_camera_location_permission_title">Grabatu kokapena aplikazio barruko argazkietarako</string>
+  <string name="in_app_camera_location_switch_pref_summary">Gaitu hau kokapena aplikazio barruko argazkiekin grabatzeko, gailuaren kamerak grabatzen ez badu.</string>
   <string name="ok">Ados</string>
   <string name="warning">Oharra</string>
+  <string name="duplicate_file_name">Fitxategi-izen bikoiztua aurkitu da</string>
   <string name="upload">Igo</string>
   <string name="yes">Bai</string>
   <string name="no">Ez</string>
   <string name="media_detail_caption">Irudi-oineko testua</string>
   <string name="media_detail_title">Izenburua</string>
+  <string name="media_detail_depiction">Honako hau irudikatzen du</string>
   <string name="media_detail_description">Deskribapena</string>
   <string name="media_detail_discussion">Eztabaida</string>
   <string name="media_detail_author">Egilea</string>
+  <string name="media_detail_uploader">Igotzailea</string>
   <string name="media_detail_uploaded_date">Igoera data</string>
   <string name="media_detail_license">Lizentzia</string>
   <string name="media_detail_coordinates">Koordenatuak</string>
   <string name="media_detail_coordinates_empty">Ez da eskeini</string>
+  <string name="playback_quality">Playback-kalitatea</string>
+  <string name="original">Jatorrizkoa</string>
+  <string name="video_quality">Bideo-kalitatea</string>
+  <string name="video_quality_auto">Automatikoa</string>
+  <string name="video_quality_higher">Irudi-kalitate hobea</string>
+  <string name="video_quality_data_saver">Datuen aurrezlea</string>
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
+  <string name="become_a_tester_description">Sartu Google Play-ren gure beta-kanalera eta lortu lehenbailehen ezaugarri berriak eta akats konponduak</string>
   <string name="_2fa_code">2FA Kodea</string>
+  <string name="email_auth_code">Posta elektroniko bidezko egiaztapen-kodea</string>
   <string name="logout_verification">Benetan saioa itxi nahi duzu ?</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
@@ -198,8 +245,8 @@
   <string name="welcome_image_llamas">Llamak</string>
   <string name="welcome_image_rainbow_bridge">Ortzadar zubia</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia" fuzzy="true">Ongi etorri Wikipediara</string>
-  <string name="welcome_image_welcome_copyright" fuzzy="true">Ongi etorri copyright-a</string>
+  <string name="welcome_image_welcome_wikipedia">Wikipedia artikulu orokor baten irudi eskematikoa.</string>
+  <string name="welcome_image_welcome_copyright">Copyright ikurra gurutzatuta duen paper pila baten marrazkia.</string>
   <string name="welcome_image_sydney_opera_house">Sidney-ko Opera Etxea</string>
   <string name="cancel">Utzi</string>
   <string name="navigation_drawer_open">Ireki</string>
@@ -220,14 +267,20 @@
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipediako artikulua</string>
   <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein ordutan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
+  <string name="caption_info">Idatzi argazkiaren deskribapen laburra. Lehenengo irudi-oina irudiaren izenburua izango da. Muga: 255 karaktere.</string>
   <string name="upload_problem_exist">Irudi honen arazo potentzialak:</string>
   <string name="upload_problem_image_dark">Irudia ilunegia da.</string>
   <string name="upload_problem_image_blurry">Argazkia lausoa da.</string>
   <string name="upload_problem_image_duplicate">Irudia Commonsen badago.</string>
+  <string name="upload_problem_image_format_unsupported">Zure irudia Commons zerbitzariak onartzen ez duen formatu batean dago. Beraz, aplikazioak JPG formatura bihurtu du.</string>
   <string name="upload_problem_different_geolocation">Irudi hau beste leku batean hartu da.</string>
+  <string name="upload_problem_fbmd">Mesedez sartu zure argazkiak bakarrik. Ez igo besteen Facebookeko kontuetan aurkitutako argazkiak.</string>
   <string name="upload_problem_do_you_continue">Oraindik igo nahi al duzu argazki hau?</string>
   <string name="upload_connection_error_alert_title">Konektatzeko Errorea</string>
+  <string name="upload_connection_error_alert_detail">Kargatzeko prozesuak Interneteko sarbidea behar du. Mesedez egiaztatu sare-konexioa.</string>
   <string name="upload_problem_image">Arazoak aurkitu dira irudian</string>
+  <string name="internet_downloaded">Sartu zure argazkiak bakarrik. Ez igo Internetetik deskargatu dituzun argazkiak.</string>
+  <string name="preferences_uploads">Igoerak</string>
   <string name="use_external_storage">Irudiak aplikazioan gorde</string>
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
@@ -237,6 +290,9 @@
   <string name="null_url">Errorea! Ez da URLa aurkitu</string>
   <string name="nominate_deletion">Ezabaketarako izendatu</string>
   <string name="nominated_for_deletion">Irudi hau ezabaketarako izendatua izan da.</string>
+  <string name="file_deleted_from_commons">Fitxategi hau Commons-etik ezabatu da.</string>
+  <string name="contribution_deleted">Ezabatua</string>
+  <string name="deleted_file_activity_title">Fitxategi ezabatua</string>
   <string name="skip_login">Jauzi</string>
   <string name="navigation_item_login">Hasi saioa</string>
   <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>

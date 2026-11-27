@@ -322,13 +322,7 @@ class LocationPickerActivity : BaseActivity() {
 
         permissionManager.requestLocationPermissions()
 
-        // If location metadata is available, move map to that location.
-        if (activity == "UploadActivity" || activity == "MediaActivity") {
-            mapManager.moveMapToMediaLocation(cameraPosition)
-        } else {
-            // If location metadata is not available, move map to device GPS location.
-            mapManager.moveMapToGPSLocation()
-        }
+        mapManager.moveMapToStartLocation(activity, cameraPosition)
 
         modifyLocationButton.setOnClickListener {
             placeSelectedButton.visibility = View.VISIBLE

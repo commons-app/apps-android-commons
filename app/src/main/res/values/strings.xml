@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--accessibility UI description strings-->
+  <string name="preference_category_sync">Cloud Backup &amp; Sync</string>
+  <string name="backup_settings">Backup settings to Commons</string>
+  <string name="backup_settings_summary">Save app settings and bookmarks to your user page on Wikimedia Commons</string>
+  <string name="restore_settings">Restore settings from Commons</string>
+  <string name="restore_settings_summary">Restore app settings and bookmarks from your user page on Wikimedia Commons</string>
+  <string name="sync_backup_confirm_title">Backup Settings to User Page?</string>
+  <string name="sync_backup_confirm_message">This will save your app settings and bookmarked places (including coordinates) to User:%1$s/commons-android-app.json. Note that Wikimedia user pages are publicly accessible.</string>
+  <string name="sync_backup_success">Settings successfully saved to your user page!</string>
+  <string name="sync_backup_failed">Failed to save settings: %1$s</string>
+  <string name="sync_restore_confirm_title">Restore Settings from User Page?</string>
+  <string name="sync_restore_confirm_message">This will restore your app settings and merge bookmarked places from User:%1$s/commons-android-app.json.</string>
+  <string name="sync_restore_success">Settings and bookmarks successfully restored!</string>
+  <string name="sync_restore_failed">Failed to restore settings: %1$s</string>
+  <string name="sync_no_backup_found">No settings backup found on user page.</string>
+  <string name="sync_in_progress">Syncing settings with Wikimedia Commons…</string>
   <string name="commons_facebook">Commons Facebook Page</string>
   <string name="commons_github">Commons GitHub Source Code</string>
   <string name="commons_logo">Commons Logo</string>
@@ -750,7 +765,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="depicts_item_created">Wikidata item created</string>
   <string name="depicts_item_creation_failed">Could not create the Wikidata item. Please try again.</string>
   <string name="depicts_item_creation_login_required">Please log in to create a Wikidata item.</string>
-  <string name="depicts_item_creation_in_progress">Please wait for the Wikidata item to be created.</string>
   <string name="license_step_title">Media License</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>
@@ -785,6 +799,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_duplicates_warning">Some selected images are duplicates and will be removed before upload.</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
+  <string name="custom_selector_switch_to_list_view">Switch to list view</string>
+  <string name="custom_selector_switch_to_grid_view">Switch to grid view</string>
+  <string name="custom_selector_image_dimensions">%1$d × %2$d</string>
+  <string name="custom_selector_image_has_location">Has location data</string>
+  <string name="custom_selector_image_no_location">No location data</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
   <string name="display_monuments">Display monuments</string>
@@ -930,6 +949,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="congratulations_all_pictures_in_this_album_have_been_either_uploaded_or_marked_as_not_for_upload">Congratulations, all pictures in this album have been either uploaded or marked as not for upload.</string>
 
   <string name="show_in_explore">Show in Explore</string>
+  <string name="nearby_show_only_needs_photo">Show only places that need a photo</string>
+  <string name="nearby_show_all_places">Show all places</string>
   <string name="show_in_nearby">Show in Nearby</string>
   <string name="image_tag_line_created_and_uploaded_by">Created and uploaded by: %1$s</string>
   <string name="image_tag_line_created_by_and_uploaded_by">Created by %1$s and uploaded by %2$s</string>

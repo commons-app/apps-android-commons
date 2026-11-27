@@ -13,15 +13,18 @@ private const val SAME_AREA_TOLERANCE = 0.1 // share of the map width and height
 internal data class SearchArea(
     val topRight: LatLng,
     val bottomLeft: LatLng,
+    val onlyNeedsPhoto: Boolean = false,
 ) {
     /**
      * Returns true if both corners of [other] are within [SAME_AREA_TOLERANCE] of the map
      * width and height from the corners of this area, so a zoom or a real pan is not the same.
+     * Places searched with "only places that need a photo" on are not the same as without.
      */
     fun isSameAs(other: SearchArea): Boolean {
         val latTolerance = abs(topRight.latitude - bottomLeft.latitude) * SAME_AREA_TOLERANCE
         val lngTolerance = abs(topRight.longitude - bottomLeft.longitude) * SAME_AREA_TOLERANCE
-        return abs(topRight.latitude - other.topRight.latitude) <= latTolerance &&
+        return onlyNeedsPhoto == other.onlyNeedsPhoto &&
+            abs(topRight.latitude - other.topRight.latitude) <= latTolerance &&
             abs(topRight.longitude - other.topRight.longitude) <= lngTolerance &&
             abs(bottomLeft.latitude - other.bottomLeft.latitude) <= latTolerance &&
             abs(bottomLeft.longitude - other.bottomLeft.longitude) <= lngTolerance

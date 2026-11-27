@@ -52,7 +52,6 @@
   <string name="upload_completed_notification_title">%1$s télévèrsé !</string>
   <string name="upload_completed_notification_text">Pézé pou wè kisa ou télévèrsé</string>
   <string name="upload_progress_notification_title_start">Téléversé di fiché : %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s ka télévèrsé</string>
   <string name="upload_progress_notification_title_finishing">Télévèrsé fini pou %1$s</string>
   <string name="upload_failed_notification_subtitle">Pézé pou afiché</string>
   <string name="upload_paused_notification_subtitle">Tapé pou afiché</string>

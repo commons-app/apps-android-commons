@@ -21,7 +21,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -97,7 +97,7 @@ class NearbyParentFragmentUnitTest {
     private lateinit var bookmarkLocationDao: BookmarkLocationsDao
 
     @Mock
-    private lateinit var contributionController: ContributionController
+    private lateinit var uploadCoordinator: ContributionUploadCoordinator
 
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: NearbyParentFragment
@@ -129,7 +129,7 @@ class NearbyParentFragmentUnitTest {
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
         Whitebox.setInternalState(fragment, "wikidataEditListener", wikidataEditListener)
         Whitebox.setInternalState(fragment, "bookmarkLocationDao", bookmarkLocationDao)
-        Whitebox.setInternalState(fragment, "controller", contributionController)
+        Whitebox.setInternalState(fragment, "uploadCoordinator", uploadCoordinator)
 
         Whitebox.setInternalState(
             fragment,
@@ -433,7 +433,7 @@ class NearbyParentFragmentUnitTest {
 
     @Test
     fun `onDestroyView keeps nearby place while picker result is pending`() {
-        whenever(contributionController.isInternalUploadInProgress).thenReturn(true)
+        whenever(uploadCoordinator.isInternalUploadInProgress).thenReturn(true)
 
         fragment.onDestroyView()
 
