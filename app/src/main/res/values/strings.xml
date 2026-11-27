@@ -978,4 +978,5 @@ Upload your first media by tapping on the add button.</string>
 
   <string name="unsupported_files_skipped_title">Unsupported Files Skipped</string>
   <string name="unsupported_files_skipped_desc">Some files were skipped due to an unsupported format. The app will continue uploading remaining files that match the following supported formats:\n\n%s</string>
+  <string name="custom_selector_folder_handled">All pictures in this folder have been uploaded or marked as not for upload</string>
 </resources>

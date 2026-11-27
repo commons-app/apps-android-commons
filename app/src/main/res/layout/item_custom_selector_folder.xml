@@ -30,6 +30,30 @@
         android:layout_height="match_parent"
         android:alpha="0.15" />
 
+      <View
+        android:id="@+id/folder_handled_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:background="@color/black" />
+
+      <ImageView
+        android:id="@+id/folder_handled_icon"
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:layout_margin="@dimen/dimen_6"
+        android:contentDescription="@string/custom_selector_folder_handled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/commons" />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/folder_handled_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="folder_handled_overlay,folder_handled_icon" />
+
       <LinearLayout
         android:id="@+id/folder_details"
         android:layout_width="match_parent"

@@ -1,10 +1,13 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -30,6 +33,11 @@ class FolderAdapter(
      * List of folders.
      */
     private var folders: MutableList<Folder> = mutableListOf()
+
+    /**
+     * Bucket ids of the folders whose pictures have all been uploaded or marked as not for upload.
+     */
+    private var handledFolders: Set<Long> = emptySet()
 
     /**
      * Create view holder, returns View holder item.
@@ -80,6 +88,7 @@ class FolderAdapter(
             Glide.with(holder.image).load(previewImage.uri).into(holder.image)
             holder.name.text = folder.name
             holder.count.text = count.toString()
+            holder.setHandled(folder.bucketId in handledFolders)
             holder.itemView.setOnClickListener {
                 itemClickListener.onFolderClick(folder.bucketId, folder.name, 0)
             }
@@ -99,6 +108,24 @@ class FolderAdapter(
         folders = newFolderList
         diffResult.dispatchUpdatesTo(this)
     }
+
+    /**
+     * Greys out the folders whose pictures have all been uploaded or marked as not for upload.
+     */
+    fun setHandledFolders(bucketIds: Set<Long>) {
+        val changed = (handledFolders - bucketIds) + (bucketIds - handledFolders)
+        handledFolders = bucketIds
+        folders.forEachIndexed { position, folder ->
+            if (folder.bucketId in changed) {
+                notifyItemChanged(position)
+            }
+        }
+    }
+
+    /**
+     * Whether the folder is shown as handled.
+     */
+    fun isFolderHandled(bucketId: Long): Boolean = bucketId in handledFolders
 
     /**
      * returns item count.
@@ -125,6 +152,24 @@ class FolderAdapter(
          * Item count in Folder/Item
          */
         val count: TextView = itemView.findViewById(R.id.folder_count)
+
+        /**
+         * Grey overlay and Commons icon of a folder whose pictures have all been handled.
+         */
+        val handledGroup: Group = itemView.findViewById(R.id.folder_handled_group)
+
+        /**
+         * Shows the folder as handled, with a grey thumbnail and the Commons icon, or as usual.
+         */
+        fun setHandled(handled: Boolean) {
+            handledGroup.visibility = if (handled) View.VISIBLE else View.GONE
+            image.colorFilter =
+                if (handled) {
+                    ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+                } else {
+                    null
+                }
+        }
     }
 
     /**
