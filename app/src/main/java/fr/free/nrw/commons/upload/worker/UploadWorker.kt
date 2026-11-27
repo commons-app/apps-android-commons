@@ -25,6 +25,7 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
+import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.PlacesRepository
 import fr.free.nrw.commons.upload.FileUtilsWrapper
@@ -40,8 +41,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.io.File
 import java.util.Date
 import java.util.Random
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -223,6 +226,9 @@ class UploadWorker(
                 return Result.retry()
             }
 
+            withContext(Dispatchers.IO) {
+                deleteUnusedUploadCopies()
+            }
             return Result.success()
         } catch (e: CancellationException) {
             throw e
@@ -565,6 +571,8 @@ class UploadWorker(
 
         // Upload success, save to uploaded status.
         saveIntoUploadedStatus(contribution)
+        // The file is on Commons now, so the app's own copy is not needed any more
+        fileUtilsWrapper.deleteUploadFile(contribution.localUriPath)
     }
 
     /**
@@ -591,6 +599,32 @@ class UploadWorker(
                 )
             }
         }
+    }
+
+    /**
+     * Deletes copies of picked pictures that no upload uses any more, for example when the upload
+     * wizard was closed without uploading. Copies from the last day are kept, because they may
+     * belong to an upload wizard that is still open.
+     */
+    internal fun deleteUnusedUploadCopies(copiesDirectory: File = PickedFiles.tempImageDirectory(appContext)) {
+        val inUse =
+            contributionDao
+                .getContribution(
+                    listOf(
+                        Contribution.STATE_QUEUED,
+                        Contribution.STATE_IN_PROGRESS,
+                        Contribution.STATE_PAUSED,
+                        Contribution.STATE_FAILED,
+                        Contribution.STATE_METADATA_PENDING,
+                    ),
+                ).blockingGet()
+                .mapNotNull { it.localUriPath?.canonicalPath }
+                .toSet()
+        val keepNewerThan = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)
+        copiesDirectory
+            .listFiles()
+            ?.filter { it.lastModified() < keepNewerThan && it.canonicalPath !in inUse }
+            ?.forEach { fileUtilsWrapper.deleteUploadFile(it) }
     }
 
     internal fun findUniqueFileName(fileName: String): String {
