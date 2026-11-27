@@ -339,7 +339,7 @@ enum class FileNameCheck {
 }
 
 // Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
-private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
+internal val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
 
 private fun canProcess(
     contributionDao: ContributionDao,
