@@ -205,7 +205,7 @@
   <string name="welcome_final_button_text">Ναι!</string>
   <string name="welcome_help_button_text">Περισσότερες πληροφορίες</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
-  <string name="detail_panel_cats_loading">Φόρτωση σε εξέλιξη...</string>
+  <string name="detail_panel_cats_loading">Φορτώνει…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
   <string name="detail_caption_empty">Χωρίς λεζάντα</string>
   <string name="detail_description_empty">Χωρίς περιγραφή</string>
