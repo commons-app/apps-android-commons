@@ -99,6 +99,38 @@ class FileProcessorLocationTest {
     }
 
     @Test
+    fun `a failed lookup keeps the categories already found at another place`() {
+        whenever(apiCall.request(any())).thenReturn(Single.just(listOf(category)), Single.error(IOException("offline")))
+
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(picture(0))
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(picture(100))
+        clock.advanceTimeBy(15, TimeUnit.SECONDS)
+
+        assertEquals(listOf(category), gpsCategoryModel.categoriesFromLocation.value)
+    }
+
+    @Test
+    fun `pictures from two places show the categories of both`() {
+        val otherCategory = CategoryItem("Pincio", "", "", false)
+        whenever(apiCall.request(any())).thenReturn(Single.just(listOf(category)), Single.just(listOf(otherCategory)))
+
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(picture(0))
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(picture(100))
+
+        assertEquals(listOf(category, otherCategory), gpsCategoryModel.categoriesFromLocation.value)
+    }
+
+    @Test
+    fun `a new upload starts without the location categories of the last one`() {
+        whenever(apiCall.request(any())).thenReturn(Single.just(listOf(category)))
+
+        fileProcessor.prePopulateCategoriesAndDepictionsBy(picture(0))
+        fileProcessor.cleanup()
+
+        assertEquals(emptyList<CategoryItem>(), gpsCategoryModel.categoriesFromLocation.value)
+    }
+
+    @Test
     fun `a lookup that keeps failing lets the next picture of that place try again`() {
         whenever(apiCall.request(any())).thenReturn(Single.error(IOException("offline")), Single.just(emptyList()))
 
