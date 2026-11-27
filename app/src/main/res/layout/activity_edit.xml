@@ -95,7 +95,7 @@
       android:layout_marginBottom="@dimen/tiny_margin"
       android:gravity="end"
       android:orientation="horizontal"
-      app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+      app:layout_constraintBottom_toTopOf="@+id/blur_pixel_size_layout">
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/autoblur_btn"
@@ -106,6 +106,58 @@
         android:text="@string/autoblur"
 
         android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/blur_pixel_size_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="@dimen/small_gap"
+      android:layout_marginBottom="@dimen/tiny_margin"
+      android:background="?attr/mainBackground"
+      android:orientation="vertical"
+      android:paddingHorizontal="@dimen/small_gap"
+      android:paddingVertical="@dimen/tiny_margin"
+      android:visibility="gone"
+      app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
+
+      <TextView
+        android:id="@+id/blur_pixel_size_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/blur_strength"
+        android:textColor="?attr/toolbar_text_color"
+        android:textSize="@dimen/normal_text" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/blur_strength_light"
+          android:textColor="?attr/toolbar_text_color" />
+
+        <SeekBar
+          android:id="@+id/blur_pixel_size_seek"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="@dimen/tiny_margin"
+          android:layout_weight="1"
+          android:max="100"
+          android:progress="100" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/blur_strength_max"
+          android:textColor="?attr/toolbar_text_color" />
+      </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

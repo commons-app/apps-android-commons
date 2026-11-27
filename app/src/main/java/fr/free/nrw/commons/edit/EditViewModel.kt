@@ -201,20 +201,55 @@ class EditViewModel : ViewModel() {
      * Blurs the specified regions of the image file.
      * The blurred file becomes the current [imagePath].
      *
+     * At [strength] 100 the selection is replaced with one solid average color
+     * (lossless jpegtran privacy blur). Lower strengths apply a soft stack blur
+     * whose radius grows with [strength], so mid values stay partly readable.
+     *
      * @param regions The list of regions to blur.
      * @param savePath The directory to save the blurred image in.
+     * @param strength Blur strength in `0`..`100`.
+     * @param context Application context used to reopen jpegtran after a soft blur.
      * @return The blurred image File.
      */
     fun blurImage(
         regions: List<BlurRegion>,
         savePath: File,
+        strength: Int = BlurStrength.DEFAULT_PROGRESS,
+        context: Context? = null,
     ): File {
-        Timber.tag("Trying to blur image").d("Starting blur of ${regions.size} regions")
-        val imagePath = "blurred_${System.currentTimeMillis()}.jpg"
-        val output = File(savePath, imagePath)
-        jpegtran!!.blur(regions)
-        jpegtran!!.save(output.toUri())
+        Timber.tag("Trying to blur image").d(
+            "Starting blur of ${regions.size} regions at strength=$strength",
+        )
+        val output = File(savePath, "blurred_${System.currentTimeMillis()}.jpg")
+        val clamped = strength.coerceIn(0, BlurStrength.MAX_PROGRESS)
+        if (clamped >= BlurStrength.MAX_PROGRESS) {
+            val solidRegions =
+                regions.map { region ->
+                    BlurRegion(
+                        region.width,
+                        region.height,
+                        region.cornerX,
+                        region.cornerY,
+                        -1,
+                        -1,
+                        true,
+                    )
+                }
+            jpegtran!!.blur(solidRegions)
+            jpegtran!!.save(output.toUri())
+            this.imagePath = output.absolutePath
+            return output
+        }
+
+        SoftBlurApplier.apply(imagePath, regions, clamped, output)
         this.imagePath = output.absolutePath
+        // Soft blur writes a new JPEG outside jpegtran; reopen the session on it.
+        val appContext = context?.applicationContext
+        if (appContext != null) {
+            jpegtran?.cleanup()
+            jpegtran = null
+            initJpegtran(appContext, output.absolutePath)
+        }
         return output
     }
 

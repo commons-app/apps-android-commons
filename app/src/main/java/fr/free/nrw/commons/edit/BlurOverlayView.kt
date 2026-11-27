@@ -556,6 +556,7 @@ class BlurOverlayView
                 val h = min(originalHeight - cornerY, fullHeight.toInt())
 
                 if (w > 0 && h > 0) {
+                    // Geometry only; strength is applied in EditViewModel.blurImage.
                     mappedRegions.add(
                         BlurRegion(
                             w,

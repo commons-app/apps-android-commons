@@ -107,7 +107,7 @@
   <string name="title_activity_contributions">Moje nedavne naložitve</string>
   <string name="contribution_state_queued">V čakalni vrsti</string>
   <string name="contribution_state_failed">Spodletelo</string>
-  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;%% nalaganja</string>
+  <string name="contribution_state_in_progress">Opravljeno %1$d&amp;nbsp;%% nalaganja</string>
   <string name="contribution_state_starting">Nalagam</string>
   <string name="menu_from_gallery">Iz galerije</string>
   <string name="menu_from_camera">Posnemi fotografijo</string>
