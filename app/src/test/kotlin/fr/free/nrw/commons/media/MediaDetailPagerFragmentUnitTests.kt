@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -7,10 +8,12 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import androidx.viewpager.widget.PagerAdapter
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
@@ -31,6 +34,8 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
 import fr.free.nrw.commons.explore.SearchActivity
+import fr.free.nrw.commons.explore.SearchQueryController
+import fr.free.nrw.commons.explore.media.SearchMediaFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -286,5 +291,68 @@ class MediaDetailPagerFragmentUnitTests {
         verify(menu, never()).findItem(any())
         verify(menuItem, never()).isEnabled = true
         verify(menuItem, never()).isVisible = true
+    }
+
+    @Test
+    fun testDestroyViewReleasesBinding() {
+        // When the file page closes, it must let go of it views so they can be freed
+        fragment.onDestroyView()
+
+        Assert.assertNull(fragment.binding)
+    }
+
+    @Test
+    fun testSwipeThenCloseDoesNotCrash() {
+        // Let the file page finish opening first (the search screen needs a media tab for that)
+        val queryController: SearchQueryController =
+            Whitebox.getInternalState(activity, "searchQueryController")
+        Whitebox.setInternalState(queryController, "searchMediaFragment", mock<SearchMediaFragment>())
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+
+        // Put the pager on screen, so the work it schedules really runs
+        val shownActivity = Robolectric.buildActivity(Activity::class.java).setup().get()
+        shownActivity.addContentView(
+            fragment.binding!!.root,
+            ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT),
+        )
+
+        // Swipe to another file, then close the file page before the scheduled work runs
+        fragment.onPrimaryMediaChanging(1, mock<MediaDetailFragment>())
+        fragment.onDestroyView()
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+    }
+
+    @Test
+    fun testSavedPageIsKeptAfterViewIsDestroyed() {
+        // Give the pager 5 simple pages and move to the 4th one
+        val pager = fragment.binding!!.mediaDetailsPager
+        pager.adapter =
+            object : PagerAdapter() {
+                override fun getCount(): Int = 5
+
+                override fun isViewFromObject(
+                    view: View,
+                    item: Any,
+                ): Boolean = view === item
+
+                override fun instantiateItem(
+                    container: ViewGroup,
+                    position: Int,
+                ): Any = View(container.context).also { container.addView(it) }
+
+                override fun destroyItem(
+                    container: ViewGroup,
+                    position: Int,
+                    item: Any,
+                ) = container.removeView(item as View)
+            }
+        pager.setCurrentItem(3, false)
+
+        // The views go away first, then the page saves its state
+        fragment.onDestroyView()
+        val savedState = Bundle()
+        fragment.onSaveInstanceState(savedState)
+
+        Assert.assertEquals(3, savedState.getInt("current-page"))
     }
 }
