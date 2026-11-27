@@ -2,17 +2,20 @@ package fr.free.nrw.commons.nearby
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.drawable.LayerDrawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -24,13 +27,18 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
+import fr.free.nrw.commons.mwapi.WikidataQueryClient
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.wikidata.WikidataEditListener
+import okhttp3.OkHttpClient
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
@@ -429,6 +437,108 @@ class NearbyParentFragmentUnitTest {
                 "Monument priority ($priorityMonument)",
             priorityNeedsPhoto > priorityMonument,
         )
+    }
+
+    /**
+     * Loads the details of a monument with a picture (Eiffel Tower, Q243) and one without
+     * (Villa Savoye, Q940746) from a real Wikidata response, as Nearby does before showing them.
+     */
+    private fun loadMonuments(): Map<String, Place> {
+        val server = MockWebServer()
+        try {
+            val json =
+                javaClass.classLoader!!
+                    .getResourceAsStream("nearby/wlm_place_details.json")!!
+                    .bufferedReader()
+                    .use { it.readText() }
+            server.enqueue(MockResponse().setBody(json))
+            val client =
+                WikidataQueryClient(
+                    OkHttpClient(),
+                    mock(DepictsClient::class.java),
+                    server.url("/sparql").toString(),
+                    Gson(),
+                )
+            val requested =
+                listOf("Q243", "Q940746").map { id ->
+                    mock(Place::class.java).also { `when`(it.wikiDataEntityId).thenReturn(id) }
+                }
+            return client
+                .getPlaces(requested, "en")!!
+                .associateBy { it.wikiDataEntityId!! }
+                .onEach { (_, place) -> place.isMonument = true }
+        } finally {
+            server.shutdown()
+        }
+    }
+
+    private fun iconFor(place: Place): Int {
+        val method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "getIconFor",
+                Place::class.java,
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        return method.invoke(fragment, place, false) as Int
+    }
+
+    private fun priorityFor(place: Place): Int {
+        val method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "getMarkerPriority",
+                Place::class.java,
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        return method.invoke(fragment, place, false) as Int
+    }
+
+    @Test
+    fun `monument with a picture gets the green monument marker`() {
+        val eiffelTower = loadMonuments().getValue("Q243")
+
+        Assert.assertTrue(eiffelTower.pic.isNotBlank())
+        Assert.assertEquals(R.drawable.ic_custom_map_marker_monuments_photo, iconFor(eiffelTower))
+    }
+
+    @Test
+    fun `monument without a picture keeps the monument marker`() {
+        val villaSavoye = loadMonuments().getValue("Q940746")
+
+        Assert.assertTrue(villaSavoye.pic.isEmpty())
+        Assert.assertEquals(R.drawable.ic_custom_map_marker_monuments, iconFor(villaSavoye))
+    }
+
+    @Test
+    fun `place with a picture that is not a monument keeps the green marker`() {
+        val eiffelTower = loadMonuments().getValue("Q243")
+        eiffelTower.isMonument = false
+
+        Assert.assertEquals(R.drawable.ic_custom_map_marker_green, iconFor(eiffelTower))
+    }
+
+    @Test
+    fun `monuments that need a picture are drawn above monuments that have one`() {
+        val monuments = loadMonuments()
+        val withPicture = priorityFor(monuments.getValue("Q243"))
+        val withoutPicture = priorityFor(monuments.getValue("Q940746"))
+
+        Assert.assertTrue(withoutPicture > withPicture)
+        // Same place in the stack as other places that already have a picture
+        val greenPlace = loadMonuments().getValue("Q243").apply { isMonument = false }
+        Assert.assertEquals(priorityFor(greenPlace), withPicture)
+    }
+
+    @Test
+    fun `green monument marker is the monument marker with a green frame on top`() {
+        val marker =
+            ContextCompat.getDrawable(context, R.drawable.ic_custom_map_marker_monuments_photo) as LayerDrawable
+        val monument = ContextCompat.getDrawable(context, R.drawable.ic_custom_map_marker_monuments)!!
+
+        Assert.assertEquals(2, marker.numberOfLayers)
+        Assert.assertEquals(monument.intrinsicWidth, marker.intrinsicWidth)
+        Assert.assertEquals(monument.intrinsicHeight, marker.intrinsicHeight)
     }
 
     @Test
