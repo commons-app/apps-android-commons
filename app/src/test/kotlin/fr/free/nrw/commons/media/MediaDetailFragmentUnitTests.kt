@@ -276,6 +276,41 @@ class MediaDetailFragmentUnitTests {
     }
 
     @Test
+    fun testLaunchZoomActivityOpensPngPreviewOfSvg() {
+        // The zoom screen can't draw SVG files, so it gets the PNG preview Commons already sent,
+        // plus the file name so it can ask Commons for a sharper one
+        val previewUrl =
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/BlankMap-World.svg/" +
+                "500px-BlankMap-World.svg.png"
+        `when`(media.imageUrl).thenReturn("https://upload.wikimedia.org/wikipedia/commons/4/4d/BlankMap-World.svg")
+        `when`(media.mimeType).thenReturn("image/svg+xml")
+        `when`(media.thumbUrl).thenReturn(previewUrl)
+        `when`(media.filename).thenReturn("File:BlankMap-World.svg")
+
+        fragment.launchZoomActivity(binding.root)
+
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(previewUrl, startedIntent.data.toString())
+        Assert.assertEquals(
+            "File:BlankMap-World.svg",
+            startedIntent.getStringExtra(ZoomableActivity.ZoomableActivityConstants.SVG_FILE_NAME),
+        )
+    }
+
+    @Test
+    fun testLaunchZoomActivityKeepsOtherImagesAsTheyAre() {
+        val jpgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Some_photo.jpg"
+        `when`(media.imageUrl).thenReturn(jpgUrl)
+        `when`(media.mimeType).thenReturn("image/jpeg")
+        `when`(media.thumbUrl).thenReturn("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/x.jpg")
+
+        fragment.launchZoomActivity(binding.root)
+
+        val startedIntent = shadowOf(activity).nextStartedActivity
+        Assert.assertEquals(jpgUrl, startedIntent.data.toString())
+        Assert.assertNull(startedIntent.getStringExtra(ZoomableActivity.ZoomableActivityConstants.SVG_FILE_NAME))
+    }
+    @Test
     @Throws(Exception::class)
     fun testOnUpdateCoordinatesClickedCurrentLocationNull() {
         `when`(media.coordinates).thenReturn(null)
