@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Marker of a monument that already has a picture on Wikidata: the monument marker in green, like the marker of other places that have a picture. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@drawable/ic_custom_map_marker_monuments" />
+  <item android:drawable="@drawable/ic_custom_map_marker_monuments_photo_frame" />
+</layer-list>

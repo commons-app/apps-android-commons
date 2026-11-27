@@ -1,0 +1,224 @@
+{
+  "head" : {
+    "vars" : [ "item", "itemLabel", "itemDescription", "class", "classLabel", "pic", "destroyed", "endTime", "wikipediaArticle", "commonsArticle", "commonsCategory", "dateOfOfficialClosure", "pointInTime" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q243"
+      },
+      "commonsArticle" : {
+        "type" : "uri",
+        "value" : "https://commons.wikimedia.org/wiki/Tour_Eiffel"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Eiffel_Tower"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1440300"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "pic" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Tour%20Eiffel%20Wikimedia%20Commons.jpg"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "tower located on the Champ de Mars in Paris, France"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "observation tower"
+      }
+    }, {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q243"
+      },
+      "commonsArticle" : {
+        "type" : "uri",
+        "value" : "https://commons.wikimedia.org/wiki/Tour_Eiffel"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Eiffel_Tower"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1440476"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "pic" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Tour%20Eiffel%20Wikimedia%20Commons.jpg"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "tower located on the Champ de Mars in Paris, France"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "lattice tower"
+      }
+    }, {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q243"
+      },
+      "commonsArticle" : {
+        "type" : "uri",
+        "value" : "https://commons.wikimedia.org/wiki/Tour_Eiffel"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Eiffel_Tower"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q2319498"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "pic" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Tour%20Eiffel%20Wikimedia%20Commons.jpg"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Eiffel Tower"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "tower located on the Champ de Mars in Paris, France"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "architectural landmark"
+      }
+    }, {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q940746"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Villa_Savoye"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q3950"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "building by Le Corbusier in Poissy (built 1928-31)"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "villa"
+      }
+    }, {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q940746"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Villa_Savoye"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1307276"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "building by Le Corbusier in Poissy (built 1928-31)"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "single-family detached home"
+      }
+    }, {
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q940746"
+      },
+      "wikipediaArticle" : {
+        "type" : "uri",
+        "value" : "https://en.wikipedia.org/wiki/Villa_Savoye"
+      },
+      "class" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q41176"
+      },
+      "commonsCategory" : {
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Villa Savoye"
+      },
+      "itemDescription" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "building by Le Corbusier in Poissy (built 1928-31)"
+      },
+      "classLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "building"
+      }
+    } ]
+  }
+}

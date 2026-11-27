@@ -1,0 +1,19 @@
+<!-- Green frame drawn over ic_custom_map_marker_monuments when the monument already has a picture on Wikidata. Same outline as that marker. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="24dp"
+  android:height="24dp"
+  android:viewportWidth="24"
+  android:viewportHeight="24">
+  <group
+    android:translateX="-41.19016"
+    android:translateY="-49.61082">
+    <path
+      android:fillAlpha="0.25"
+      android:fillColor="#1F7123"
+      android:pathData="M41.541747 49.962409H64.838564V73.91578H54.770325c0 0 -0.877201 2.276125 -1.313613 2.247791 -0.472978 -0.03077 -1.398455 -2.247791 -1.398455 -2.247791h-10.51651z"
+      android:strokeColor="#1F7123"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"
+      android:strokeWidth="1.4" />
+  </group>
+</vector>

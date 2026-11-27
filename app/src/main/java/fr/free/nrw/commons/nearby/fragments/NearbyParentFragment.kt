@@ -2510,10 +2510,18 @@ class NearbyParentFragment :
             )
         }
 
+        val hasPicture = !place.pic.trim { it <= ' ' }.isEmpty()
         if (place.isMonument) {
-            return R.drawable.ic_custom_map_marker_monuments
+            // Monuments keep their own marker, in green once they have a picture like other places
+            return (
+                if (hasPicture) {
+                    R.drawable.ic_custom_map_marker_monuments_photo
+                } else {
+                    R.drawable.ic_custom_map_marker_monuments
+                }
+            )
         }
-        if (!place.pic.trim { it <= ' ' }.isEmpty()) {
+        if (hasPicture) {
             return (
                 if (isBookmarked) {
                     R.drawable.ic_custom_map_marker_green_bookmarked
@@ -2635,8 +2643,8 @@ class NearbyParentFragment :
      *
      *  5 – Purple  : nearest / highlighted place
      *  4 – Red     : exists, needs a photo  ← must always be above green
-     *  3 – Monument: WLM monument markers
-     *  2 – Green   : already has a photo
+     *  3 – Monument: WLM monument markers that need a photo
+     *  2 – Green   : already has a photo, including WLM monuments
      *  1 – Grey    : loading (no name yet)
      *  0 – Clear   : does not exist in the real world
      */
@@ -2654,6 +2662,7 @@ class NearbyParentFragment :
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments -> MARKER_PRIORITY_MONUMENT
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_green_bookmarked,
+            fr.free.nrw.commons.R.drawable.ic_custom_map_marker_monuments_photo,
             -> MARKER_PRIORITY_GREEN
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey,
             fr.free.nrw.commons.R.drawable.ic_custom_map_marker_grey_bookmarked,
