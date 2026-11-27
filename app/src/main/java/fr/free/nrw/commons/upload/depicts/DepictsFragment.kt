@@ -396,6 +396,15 @@ class DepictsFragment :
     }
 
     /**
+     * Shows the result of creating a Wikidata item for a Wikipedia article.
+     */
+    override fun showDepictionCreationMessage(messageRes: Int) {
+        Toast
+            .makeText(requireContext(), getString(messageRes), Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    /**
      * Navigates to the login Activity
      */
     override fun navigateToLoginScreen() {

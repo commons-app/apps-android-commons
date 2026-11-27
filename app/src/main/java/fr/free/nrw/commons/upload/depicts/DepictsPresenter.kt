@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.explore.depictions.WikipediaArticleClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
+import fr.free.nrw.commons.wikidata.WikidataItemCreationClient
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,6 +50,7 @@ class DepictsPresenter
         private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
         private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
         private var media: Media? = null
+        private val pendingCreations: MutableSet<String> = mutableSetOf()
 
         @Inject
         lateinit var depictsDao: DepictsDao
@@ -58,6 +63,15 @@ class DepictsPresenter
 
         @Inject
         lateinit var depictsHelper: DepictEditHelper
+
+        @Inject
+        lateinit var wikipediaArticleClient: WikipediaArticleClient
+
+        @Inject
+        lateinit var wikidataItemCreationClient: WikidataItemCreationClient
+
+        @Inject
+        lateinit var sessionManager: SessionManager
 
         override fun onAttachView(view: DepictsContract.View) {
             this.view = view
@@ -207,8 +221,69 @@ class DepictsPresenter
         }
 
         override fun onDepictItemClicked(depictedItem: DepictedItem) {
-            repository.onDepictItemClicked(depictedItem, media)
+            val article = wikipediaArticleClient.articleFromPendingDepictionId(depictedItem.id)
+            when {
+                article == null -> repository.onDepictItemClicked(depictedItem, media)
+                !sessionManager.isUserLoggedIn -> {
+                    revertPendingDepiction(depictedItem)
+                    view.showDepictionCreationMessage(R.string.depicts_item_creation_login_required)
+                }
+                !pendingCreations.add(depictedItem.id) -> Unit
+                else -> createWikidataItem(depictedItem, article)
+            }
         }
+
+        /** Creates the Wikidata item and replaces the pending depiction with the real item. */
+        private fun createWikidataItem(
+            depictedItem: DepictedItem,
+            article: WikipediaArticleClient.Article,
+        ) {
+            view.showProgressDialog()
+            compositeDisposable.add(
+                wikidataItemCreationClient
+                    .createItem(article.languageCode, article.title)
+                    .flatMap { qid ->
+                        repository
+                            .getDepictions(listOf(qid))
+                            .firstOrError()
+                            .map { it.firstOrNull() }
+                    }.subscribeOn(ioScheduler)
+                    .observeOn(mainThreadScheduler)
+                    .doFinally { pendingCreations.remove(depictedItem.id) }
+                    .subscribe({ createdItem ->
+                        view.dismissProgressDialog()
+                        if (createdItem == null) {
+                            revertPendingDepiction(depictedItem)
+                            view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                        } else {
+                            createdItem.isSelected = true
+                            repository.onDepictItemClicked(createdItem, media)
+                            val updated =
+                                depictedItems.value.orEmpty().filterNot { it.id == depictedItem.id } + createdItem
+                            depictedItems.value = updated
+                            view.setDepictsList(updated)
+                            view.showDepictionCreationMessage(R.string.depicts_item_created)
+                        }
+                    }, { error ->
+                        Timber.e(error, "Failed to create Wikidata item")
+                        view.dismissProgressDialog()
+                        revertPendingDepiction(depictedItem)
+                        view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                    }),
+            )
+        }
+
+        /** Clears the selection of a depiction whose item could not be created. */
+        private fun revertPendingDepiction(depictedItem: DepictedItem) {
+            depictedItem.isSelected = false
+            view.setDepictsList(depictedItems.value.orEmpty())
+        }
+
+        /** Returns true while a selected item still has a temporary Wikipedia ID. */
+        private fun hasPendingDepiction(): Boolean =
+            repository
+                .getSelectedDepictions()
+                .any { wikipediaArticleClient.isPendingDepictionId(it.id) }
 
         override fun getDepictedItems(): LiveData<List<DepictedItem>> = depictedItems
 
@@ -225,6 +300,10 @@ class DepictsPresenter
          * from the depiction list
          */
         override fun verifyDepictions() {
+            if (hasPendingDepiction()) {
+                view.showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
+                return
+            }
             if (repository.getSelectedDepictions().isNotEmpty()) {
                 if (::depictsDao.isInitialized) {
                     // save all the selected Depicted item in room Database
@@ -242,6 +321,10 @@ class DepictsPresenter
          */
         @SuppressLint("CheckResult")
         override fun updateDepictions(media: Media) {
+            if (hasPendingDepiction()) {
+                view.showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
+                return
+            }
             if (repository.getSelectedDepictions().isNotEmpty() ||
                 repository.getSelectedExistingDepictions().size != view.getExistingDepictions()?.size
             ) {

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.wikidata
 
 import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse
+import fr.free.nrw.commons.wikidata.model.WbCreateEntityResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -26,6 +27,17 @@ interface WikidataInterface {
     @Headers("Cache-Control: no-cache")
     @GET(WikidataConstants.MW_API_PREFIX + "action=query&meta=tokens&type=csrf")
     fun getCsrfToken(): Observable<MwQueryResponse>
+
+    /**
+     * Creates a new item from a Wikipedia article that has no Wikidata item.
+     */
+    @Headers("Cache-Control: no-cache")
+    @FormUrlEncoded
+    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&new=item")
+    fun postCreateItem(
+        @Field("data") data: String,
+        @Field("token") token: String,
+    ): Single<WbCreateEntityResponse>
 
     /**
      * Wikidata create claim API. Posts a new claim for the given entity ID

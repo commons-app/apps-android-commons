@@ -24,6 +24,7 @@ class DepictsClient
     @Inject
     constructor(
         private val depictsInterface: DepictsInterface,
+        private val wikipediaArticleClient: WikipediaArticleClient,
     ) {
         /**
          * Search for depictions using the search item
@@ -40,6 +41,26 @@ class DepictsClient
                 .map { it.search.joinToString("|", transform = DepictSearchItem::id) }
                 .mapToDepictions()
         }
+
+        /**
+         * Creates a pending depiction for an exact Wikipedia article title that has no Wikidata item.
+         */
+        fun searchForUnlinkedWikipediaArticle(query: String): Single<List<DepictedItem>> =
+            wikipediaArticleClient
+                .findUnlinkedArticle(query)
+                .map { article ->
+                    listOf(
+                        DepictedItem(
+                            article.title,
+                            wikipediaArticleClient.descriptionFor(article.languageCode),
+                            null,
+                            emptyList(),
+                            emptyList(),
+                            false,
+                            wikipediaArticleClient.pendingDepictionId(article),
+                        ),
+                    )
+                }.toSingle(emptyList())
 
         fun getEntities(ids: String): Single<Entities> = depictsInterface.getEntities(ids)
 

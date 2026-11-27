@@ -37,6 +37,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.wikidata.CommonsServiceFactory
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.WikidataInterface
+import fr.free.nrw.commons.wikidata.WikipediaArticleInterface
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieStorage
 import fr.free.nrw.commons.wikidata.model.WikiSite
@@ -219,6 +220,11 @@ class NetworkingModule {
     @Provides
     @Singleton
     fun provideDepictsInterface(factory: CommonsServiceFactory): DepictsInterface =
+        factory.create(BuildConfig.WIKIDATA_URL)
+
+    @Provides
+    @Singleton
+    fun provideWikipediaArticleInterface(factory: CommonsServiceFactory): WikipediaArticleInterface =
         factory.create(BuildConfig.WIKIDATA_URL)
 
     @Provides

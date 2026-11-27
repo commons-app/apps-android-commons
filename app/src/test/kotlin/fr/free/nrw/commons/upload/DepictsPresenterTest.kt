@@ -1,23 +1,32 @@
 package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.explore.depictions.DepictsClient
+import fr.free.nrw.commons.explore.depictions.WikipediaArticleClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
+import fr.free.nrw.commons.wikidata.WikidataItemCreationClient
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -44,6 +53,15 @@ class DepictsPresenterTest {
     @Mock
     private lateinit var media: Media
 
+    @Mock
+    private lateinit var wikipediaArticleClient: WikipediaArticleClient
+
+    @Mock
+    private lateinit var wikidataItemCreationClient: WikidataItemCreationClient
+
+    @Mock
+    private lateinit var sessionManager: SessionManager
+
     /**
      * initial setup
      */
@@ -53,6 +71,9 @@ class DepictsPresenterTest {
         MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
         depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
+        Whitebox.setInternalState(depictsPresenter, "wikipediaArticleClient", wikipediaArticleClient)
+        Whitebox.setInternalState(depictsPresenter, "wikidataItemCreationClient", wikidataItemCreationClient)
+        Whitebox.setInternalState(depictsPresenter, "sessionManager", sessionManager)
         depictsPresenter.onAttachView(view)
     }
 
@@ -121,6 +142,54 @@ class DepictsPresenterTest {
         val depictedItem = depictedItem()
         depictsPresenter.onDepictItemClicked(depictedItem)
         verify(repository).onDepictItemClicked(depictedItem, null)
+    }
+
+    @Test
+    fun `pending Wikipedia depiction requires login`() {
+        val pending = depictedItem(id = "pending-wikipedia:en:Test Article")
+        whenever(wikipediaArticleClient.articleFromPendingDepictionId(pending.id))
+            .thenReturn(WikipediaArticleClient.Article("en", "Test Article"))
+        whenever(sessionManager.isUserLoggedIn).thenReturn(false)
+
+        depictsPresenter.onDepictItemClicked(pending)
+
+        verify(view).showDepictionCreationMessage(R.string.depicts_item_creation_login_required)
+        verify(repository, never()).onDepictItemClicked(pending, null)
+        verify(wikidataItemCreationClient, never()).createItem(anyString(), anyString())
+    }
+
+    @Test
+    fun `pending Wikipedia depiction creates item and selects it`() {
+        val pending = depictedItem(id = "pending-wikipedia:en:Test Article")
+        val created = depictedItem(id = "Q123")
+        whenever(wikipediaArticleClient.articleFromPendingDepictionId(pending.id))
+            .thenReturn(WikipediaArticleClient.Article("en", "Test Article"))
+        whenever(sessionManager.isUserLoggedIn).thenReturn(true)
+        whenever(wikidataItemCreationClient.createItem("en", "Test Article")).thenReturn(Single.just("Q123"))
+        whenever(repository.getDepictions(listOf("Q123"))).thenReturn(Flowable.just(listOf(created)))
+        @Suppress("UNCHECKED_CAST")
+        val items =
+            Whitebox.getInternalState(depictsPresenter, "depictedItems") as MutableLiveData<List<DepictedItem>>
+        items.value = listOf(pending)
+
+        depictsPresenter.onDepictItemClicked(pending)
+        testScheduler.triggerActions()
+
+        verify(repository).onDepictItemClicked(created, null)
+        verify(view).showDepictionCreationMessage(R.string.depicts_item_created)
+        assert(items.value == listOf(created))
+    }
+
+    @Test
+    fun `pending Wikipedia depiction cannot be saved`() {
+        val pending = depictedItem(id = "pending-wikipedia:en:Test Article", isSelected = true)
+        whenever(wikipediaArticleClient.isPendingDepictionId(pending.id)).thenReturn(true)
+        whenever(repository.getSelectedDepictions()).thenReturn(listOf(pending))
+
+        depictsPresenter.verifyDepictions()
+
+        verify(view, never()).goToNextScreen()
+        verify(view).showDepictionCreationMessage(R.string.depicts_item_creation_in_progress)
     }
 
     @Test

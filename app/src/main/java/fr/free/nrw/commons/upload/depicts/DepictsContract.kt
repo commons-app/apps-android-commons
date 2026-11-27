@@ -80,6 +80,11 @@ interface DepictsContract {
          * Navigate the user to Login Activity
          */
         fun navigateToLoginScreen()
+
+        /**
+         * Shows the result of creating a Wikidata item for a Wikipedia article
+         */
+        fun showDepictionCreationMessage(messageRes: Int)
     }
 
     // Suppress TooManyFunctions: These methods form the cohesive MVP presenter
