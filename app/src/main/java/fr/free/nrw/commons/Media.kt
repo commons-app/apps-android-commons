@@ -222,6 +222,17 @@ class Media constructor(
 }
 
 /**
+ * Only images can be decoded from the original file. Everything else (video, audio, PDF, DjVu,
+ * 3D models) uses the thumbnail rendered by Commons.
+ */
+fun Media.detailImageUrl(): String? =
+    if (mediaType == MediaType.IMAGE) {
+        imageUrl
+    } else {
+        thumbUrl
+    }
+
+/**
  * Maps the media type reported by the API to a [MediaType].
  *
  * Falls back to guessing based on the mime type when the API doesn't report one.
