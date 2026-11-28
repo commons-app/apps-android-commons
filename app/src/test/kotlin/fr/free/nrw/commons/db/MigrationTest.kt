@@ -13,6 +13,7 @@ import fr.free.nrw.commons.di.MIGRATION_22_23
 import fr.free.nrw.commons.di.MIGRATION_23_24
 import fr.free.nrw.commons.di.MIGRATION_24_25
 import fr.free.nrw.commons.di.MIGRATION_25_26
+import fr.free.nrw.commons.di.MIGRATION_26_27
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -79,6 +80,7 @@ class MigrationTest {
                 MIGRATION_23_24,
                 MIGRATION_24_25,
                 MIGRATION_25_26,
+                MIGRATION_26_27,
             )
 
         // tests
@@ -155,6 +157,7 @@ class MigrationTest {
                 MIGRATION_23_24,
                 MIGRATION_24_25,
                 MIGRATION_25_26,
+                MIGRATION_26_27,
             )
 
         try {
@@ -167,10 +170,7 @@ class MigrationTest {
                 cursor.getString(cursor.getColumnIndex("media_filename")),
             )
             // application/ogg with a .ogv name, so the extension fallback decides.
-            Assert.assertEquals(
-                "VIDEO",
-                cursor.getString(cursor.getColumnIndex("media_mediaType")),
-            )
+            Assert.assertEquals("VIDEO", cursor.getString(cursor.getColumnIndex("media_mediaType")))
             cursor.close()
 
             // Nothing to classify a row with no mime type, so it keeps the default.
@@ -219,5 +219,111 @@ class MigrationTest {
             migratedDb.close()
             context.deleteDatabase(ROOM_DB)
         }
+    }
+
+    @Test
+    fun testLocationOfCreationColumnAddedByMigration() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        val oldDb = helper.createDatabase(ROOM_DB, 26)
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                mimeType, media_pageId, media_filename, media_captions, media_descriptions,
+                media_depictionIds, media_creatorIds, media_categoriesHiddenStatus,
+                media_mimeType, media_mediaType, uploadedFilename, retryNotBefore
+            ) VALUES (
+                '1', 1, 0, '[]', 0, 0, 0,
+                'image/jpeg', '1', 'File:Example.jpg',
+                '{}', '{}', '[]', '[]', '{}',
+                'image/jpeg', 'BITMAP', 'Example.jpg', 1234
+            )
+            """.trimIndent(),
+        )
+        oldDb.close()
+
+        val migratedDb =
+            helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_26_27)
+
+        try {
+            migratedDb
+                .query("SELECT locationOfCreation, uploadedFilename, retryNotBefore FROM contribution")
+                .use {
+                    Assert.assertTrue("contribution survived migration", it.moveToFirst())
+                    Assert.assertTrue("existing rows have no location", it.isNull(0))
+                    Assert.assertEquals("published filename is retained for retries", "Example.jpg", it.getString(1))
+                    Assert.assertEquals("retry deadline is retained", 1234L, it.getLong(2))
+                }
+        } finally {
+            migratedDb.close()
+            context.deleteDatabase(ROOM_DB)
+        }
+    }
+
+    @Test
+    fun testLocationPreservedFromEarlierPrBuild() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val oldDb = helper.createDatabase(ROOM_DB, 24)
+        oldDb.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                media_pageId, media_captions, media_descriptions, media_depictionIds,
+                media_creatorIds, media_categoriesHiddenStatus, media_mediaType, locationOfCreation
+            ) VALUES (
+                '1', 1, 0, '[]', 0, 0, 0,
+                '1', '{}', '{}', '[]', '[]', '{}', 'BITMAP', '{"id":"Q12439"}'
+            )
+            """.trimIndent(),
+        )
+        oldDb.version = 25
+        oldDb.close()
+
+        val migratedDb =
+            helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_25_26, MIGRATION_26_27)
+        migratedDb.use { db ->
+            db.query("SELECT locationOfCreation, uploadedFilename FROM contribution WHERE pageId = '1'").use {
+                Assert.assertTrue("contribution survived migration", it.moveToFirst())
+                Assert.assertEquals("""{"id":"Q12439"}""", it.getString(0))
+                Assert.assertTrue("published filename was unavailable in the earlier build", it.isNull(1))
+            }
+        }
+        context.deleteDatabase(ROOM_DB)
+    }
+
+    @Test
+    fun testLocationAndPublishedFilenamePreservedFromVersion26Preview() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val oldDb = helper.createDatabase(ROOM_DB, 25)
+        oldDb.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+        oldDb.execSQL(
+            """
+            INSERT INTO contribution (
+                pageId, state, transferred, depictedItems, dataLength, hasInvalidLocation, retries,
+                media_pageId, media_captions, media_descriptions, media_depictionIds,
+                media_creatorIds, media_categoriesHiddenStatus, media_mediaType,
+                locationOfCreation, uploadedFilename
+            ) VALUES (
+                '1', 1, 0, '[]', 0, 0, 0,
+                '1', '{}', '{}', '[]', '[]', '{}', 'BITMAP', '{"id":"Q12439"}', 'Example.jpg'
+            )
+            """.trimIndent(),
+        )
+        oldDb.version = 26
+        oldDb.close()
+
+        helper.runMigrationsAndValidate(ROOM_DB, latestVersion(context), true, MIGRATION_26_27).use { db ->
+            db
+                .query("SELECT locationOfCreation, uploadedFilename, retryNotBefore FROM contribution")
+                .use {
+                    Assert.assertTrue("contribution survived migration", it.moveToFirst())
+                    Assert.assertEquals("""{"id":"Q12439"}""", it.getString(0))
+                    Assert.assertEquals("Example.jpg", it.getString(1))
+                    Assert.assertTrue("preview uploads can be retried right away", it.isNull(2))
+                }
+        }
+        context.deleteDatabase(ROOM_DB)
     }
 }

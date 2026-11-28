@@ -713,6 +713,12 @@
   <string name="limited_connection_explanation">Seems to be unused.</string>
   <string name="limited_connection_is_on">Seems to be unused.</string>
   <string name="media_details_tooltip">Explanation about writing a caption while uploading.</string>
+  <string name="depicts_location_tooltip">Additional help in the Depicts step for a single-photo upload. Explains how to select the place where the photo was taken by pressing and holding an item.</string>
+  <string name="location_of_creation_dialog_title">Title of the dialog asking whether to use a selected item as the place where the photo was taken.</string>
+  <string name="location_of_creation_dialog_message">Message asking whether to use the selected place as the photo location. %1$s is the name of the selected place.</string>
+  <string name="location_of_creation_dialog_positive">Button that confirms the selected place as the photo location.</string>
+  <string name="location_of_creation_selected">Label showing where the photo was taken. %1$s is the name of the selected place.</string>
+  <string name="location_of_creation_clear">Accessibility label for the button that clears the selected photo location.</string>
   <string name="depicts_tooltip">Explanation about the \"depicts\" selection.</string>
   <string name="categories_tooltip">{{Doc-commons-app-depicts}}</string>
   <string name="license_tooltip">License explanation.</string>

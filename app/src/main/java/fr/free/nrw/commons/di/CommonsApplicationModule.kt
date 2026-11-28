@@ -207,6 +207,7 @@ open class CommonsApplicationModule(
             MIGRATION_23_24,
             MIGRATION_24_25,
             MIGRATION_25_26,
+            MIGRATION_26_27,
         ).fallbackToDestructiveMigration()
             .build()
 
@@ -589,6 +590,9 @@ val MIGRATION_25_26 =
     object : Migration(25, 26) {
         override fun migrate(db: SupportSQLiteDatabase) {
             db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
+            if ("uploadedFilename" !in contributionColumns(db)) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN uploadedFilename TEXT")
+            }
         }
     }
 
@@ -617,3 +621,28 @@ private fun backfillMediaTypes(db: SupportSQLiteDatabase) {
         )
     }
 }
+
+@Suppress("MagicNumber") // Version numbers of the migration
+val MIGRATION_26_27 =
+    object : Migration(26, 27) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            val columns = contributionColumns(db)
+            if ("locationOfCreation" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN locationOfCreation TEXT")
+            }
+            if ("retryNotBefore" !in columns) {
+                db.execSQL("ALTER TABLE contribution ADD COLUMN retryNotBefore INTEGER")
+            }
+        }
+    }
+
+/** Returns the contribution columns so migrations can also handle earlier preview schemas. */
+private fun contributionColumns(db: SupportSQLiteDatabase): Set<String> =
+    db.query("PRAGMA table_info(contribution)").use { cursor ->
+        val nameIndex = cursor.getColumnIndexOrThrow("name")
+        buildSet {
+            while (cursor.moveToNext()) {
+                add(cursor.getString(nameIndex))
+            }
+        }
+    }

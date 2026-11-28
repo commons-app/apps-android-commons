@@ -353,11 +353,18 @@ class DepictsFragment(
             }
 
             setDepictsSubTitle()
-            binding.tooltip.setOnClickListener { v: View? ->
+            binding.tooltip.setOnClickListener {
+                val instructions = getString(R.string.depicts_tooltip)
+                val message =
+                    if (isSinglePictureUpload()) {
+                        "$instructions\n\n${getString(R.string.depicts_location_tooltip)}"
+                    } else {
+                        instructions
+                    }
                 showAlertDialog(
                     requireActivity(),
                     getString(R.string.depicts_step_title),
-                    getString(R.string.depicts_tooltip),
+                    message,
                     getString(R.string.ok),
                     null,
                 )
@@ -373,6 +380,8 @@ class DepictsFragment(
             binding.chooseFromMap.setOnClickListener { v: View? ->
                 mapPickerHandler.launchDepictsPicker()
             }
+            binding.locationOfCreationClear.setOnClickListener { presenter.onClearLocationOfCreation() }
+            showLocationOfCreation(presenter.getLocationOfCreation())
             binding.depictsNext.setOnClickListener { v: View? -> onNextButtonClicked() }
             binding.depictsPrevious.setOnClickListener { v: View? -> onPreviousButtonClicked() }
         }
@@ -397,9 +406,15 @@ class DepictsFragment(
         private fun initRecyclerView() {
             adapter =
                 if (media == null) {
-                    UploadDepictsAdapter({ categoryItem: DepictedItem? ->
-                        presenter.onDepictItemClicked(categoryItem!!)
-                    }, nearbyPlace)
+                    UploadDepictsAdapter(
+                        { categoryItem: DepictedItem? ->
+                            presenter.onDepictItemClicked(categoryItem!!)
+                        },
+                        nearbyPlace,
+                        // The depictions are shared by all pictures of a batch, so a place where
+                        // the picture was taken can only be chosen when uploading a single picture
+                        if (isSinglePictureUpload()) ::confirmLocationOfCreation else null,
+                    )
                 } else {
                     UploadDepictsAdapter({ item: DepictedItem? ->
                         presenter.onDepictItemClicked(item!!)
@@ -410,6 +425,32 @@ class DepictsFragment(
             }
             binding.depictsRecyclerView.layoutManager = LinearLayoutManager(context)
             binding.depictsRecyclerView.adapter = adapter
+        }
+
+        /**
+         * Whether a single picture is being uploaded, as opposed to a batch or an edit of an existing
+         * file
+         */
+        private fun isSinglePictureUpload(): Boolean {
+            val uploadActivity = activity as? UploadActivity
+            return media == null && uploadActivity != null && !uploadActivity.isMultipleFilesSelected
+        }
+
+        /**
+         * Asks the user to confirm that an item is the place where the picture was taken and not
+         * something it shows
+         */
+        private fun confirmLocationOfCreation(item: DepictedItem) {
+            showAlertDialog(
+                requireActivity(),
+                getString(R.string.location_of_creation_dialog_title),
+                getString(R.string.location_of_creation_dialog_message, item.name),
+                getString(R.string.location_of_creation_dialog_positive),
+                getString(R.string.cancel),
+                { presenter.onSetAsLocationOfCreation(item) },
+                null,
+                true,
+            )
         }
     }
 }
@@ -569,6 +610,18 @@ class DepictsNavigationViewHandler(
 class DepictsDataViewHandler(
     private val ref: DepictsFragmentRef,
 ) : DepictsContract.DataView {
+    /** Shows the chosen photo location when one has been set. */
+    override fun showLocationOfCreation(location: DepictedItem?) {
+        val fragment = ref.fragment
+        if (!fragment.hasBinding) {
+            return
+        }
+        fragment.binding.locationOfCreationContainer.visibility =
+            if (location == null) View.GONE else View.VISIBLE
+        fragment.binding.locationOfCreationText.text =
+            location?.let { fragment.getString(R.string.location_of_creation_selected, it.name) }
+    }
+
     /**
      * Shows the given depicted items in the list
      */

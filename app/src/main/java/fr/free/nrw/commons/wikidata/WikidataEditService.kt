@@ -203,6 +203,22 @@ class WikidataEditService
                         return@switchMap Observable.concat<Boolean>(
                             depictionEdits(contribution, fileEntityId, retrying),
                             captionEdits(contribution, fileEntityId),
+                            // The optional place where the picture was taken goes last. A
+                            // failure is logged and ignored so that it cannot undo the
+                            // depictions and captions that were already saved.
+                            contribution.locationOfCreation
+                                ?.let {
+                                    val edit =
+                                        if (retrying) {
+                                            depictsEditor.addMissingLocationOfCreationProperty(
+                                                fileEntityId.toString(),
+                                                it.id,
+                                            )
+                                        } else {
+                                            depictsEditor.addLocationOfCreationProperty(fileEntityId.toString(), it.id)
+                                        }
+                                    edit.onErrorReturnItem(false)
+                                } ?: Observable.empty(),
                         )
                     } else {
                         Timber.d("Error acquiring EntityId for image: %s", filename)

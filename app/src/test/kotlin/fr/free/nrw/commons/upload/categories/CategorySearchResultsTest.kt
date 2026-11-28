@@ -3,8 +3,10 @@ package fr.free.nrw.commons.upload.categories
 import categoryItem
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.UploadItem
@@ -58,6 +60,77 @@ class CategorySearchResultsTest {
             .assertNoErrors()
 
         verify(repository).searchAll("2026", listOf("Title"), repository.getSelectedDepictions())
+        verify(repository, never()).getLocationOfCreation()
+    }
+
+    @Test
+    fun `photo location suggests its Commons category separately from depictions`() {
+        val repository = mock<UploadRepository>()
+        val category = categoryItem("Ouagadougou")
+        val existing = categoryItem("Roads")
+        val location =
+            depictedItem(
+                name = "Ouaga",
+                id = "Q3777",
+                commonsCategories = listOf(categoryItem("Category:Ouagadougou")),
+            )
+        whenever(repository.getLocationOfCreation()).thenReturn(location)
+        whenever(repository.searchAll("", emptyList(), emptyList()))
+            .thenReturn(Observable.just(listOf(existing, category)))
+        whenever(repository.getCategories(listOf("Ouagadougou")))
+            .thenReturn(Observable.just(listOf(categoryItem("Ouagadougou", selected = true))))
+
+        CategorySearchResults(repository, Schedulers.trampoline())
+            .searchResults("", null)
+            .test()
+            .assertValue { it.map { item -> item.name } == listOf("Ouagadougou", "Roads") && !it.first().isSelected }
+            .assertComplete()
+
+        verify(repository).searchAll("", emptyList(), emptyList())
+        verify(repository, never()).getCategories(listOf("Ouaga"))
+    }
+
+    @Test
+    fun `clearing the photo location removes its suggestions on the next search`() {
+        val repository = mock<UploadRepository>()
+        val category = categoryItem("Ouagadougou")
+        val other = categoryItem("Roads")
+        whenever(repository.getLocationOfCreation()).thenReturn(depictedItem(name = "Ouagadougou"), null)
+        whenever(repository.getCategories(listOf("Ouagadougou")))
+            .thenReturn(Observable.just(listOf(category)))
+        whenever(repository.searchAll("", emptyList(), emptyList()))
+            .thenReturn(Observable.just(listOf(other)))
+        val search = CategorySearchResults(repository, Schedulers.trampoline())
+
+        search
+            .searchResults("", null)
+            .test()
+            .assertValue(listOf(category, other))
+            .assertComplete()
+        search
+            .searchResults("", null)
+            .test()
+            .assertValue(listOf(other))
+            .assertComplete()
+
+        verify(repository).getCategories(listOf("Ouagadougou"))
+    }
+
+    @Test
+    fun `location lookup failure leaves existing suggestions available`() {
+        val repository = mock<UploadRepository>()
+        val other = categoryItem("Roads")
+        whenever(repository.getLocationOfCreation()).thenReturn(depictedItem(name = "Ouagadougou"))
+        whenever(repository.getCategories(listOf("Ouagadougou")))
+            .thenReturn(Observable.error(IllegalStateException("Categories unavailable")))
+        whenever(repository.searchAll("", emptyList(), emptyList()))
+            .thenReturn(Observable.just(listOf(other)))
+
+        CategorySearchResults(repository, Schedulers.trampoline())
+            .searchResults("", null)
+            .test()
+            .assertValue(listOf(other))
+            .assertComplete()
     }
 
     @Test
@@ -81,6 +154,8 @@ class CategorySearchResultsTest {
                     !items[1].isSelected
             }.assertComplete()
             .assertNoErrors()
+
+        verify(repository, never()).getLocationOfCreation()
     }
 
     @Test

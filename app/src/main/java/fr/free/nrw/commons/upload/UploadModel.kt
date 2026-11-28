@@ -68,6 +68,12 @@ class UploadModel
         val selectedDepictions: MutableList<DepictedItem> = mutableListOf()
 
         /**
+         * Optional place where the picture was taken but which it does not really depict.
+         * It is uploaded as "location of creation" instead of "depicts".
+         */
+        var selectedLocationOfCreation: DepictedItem? = null
+
+        /**
          * Existing depicts which are selected
          */
         var selectedExistingDepictions: MutableList<String> = mutableListOf()
@@ -97,6 +103,7 @@ class UploadModel
             items.clear()
             selectedCategories.clear()
             selectedDepictions.clear()
+            selectedLocationOfCreation = null
             selectedExistingDepictions.clear()
         }
 
@@ -182,6 +189,7 @@ class UploadModel
                         buildList { addAll(selectedDepictions) },
                         buildList { addAll(selectedCategories) },
                         imageSHA1,
+                        selectedLocationOfCreation,
                     )
                 contribution.media.filename = fileNames[index]
 

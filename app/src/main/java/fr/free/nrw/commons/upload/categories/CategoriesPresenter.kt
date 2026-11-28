@@ -70,6 +70,7 @@ class CategoriesPresenter
 
         override fun onAttachView(view: CategoriesContract.View) {
             this.view = view
+            media = null
 
             fun showLoadError(t: Throwable?) {
                 view.showProgress(false)

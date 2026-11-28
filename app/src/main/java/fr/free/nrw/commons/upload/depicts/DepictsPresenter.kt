@@ -108,6 +108,18 @@ class DepictsPresenter
             view.goToPreviousScreen()
         }
 
+        override fun onSetAsLocationOfCreation(depictedItem: DepictedItem) {
+            // Depictions and location are independent: a picture can show the place where it
+            // was taken, so an item that is already selected as a depiction stays selected
+            repository.setLocationOfCreation(depictedItem)
+            view.showLocationOfCreation(depictedItem)
+        }
+
+        override fun onClearLocationOfCreation() {
+            repository.setLocationOfCreation(null)
+            view.showLocationOfCreation(null)
+        }
+
         /**
          * asks the repository to fetch depictions for the query
          * @param query
@@ -317,6 +329,9 @@ class DepictsSelectionHandler(
      * Gets the depicted items currently shown to the user
      */
     override fun getDepictedItems(): LiveData<List<DepictedItem>> = session.depictedItems
+
+    /** Reads the selected photo location from the current upload. */
+    override fun getLocationOfCreation(): DepictedItem? = repository.getLocationOfCreation()
 }
 
 /**
