@@ -84,6 +84,7 @@ class CategoriesModelDepictionTest {
         model
             .searchAll("", listOf("Photo title"), depictions)
             .test()
+            .awaitCount(1)
             .assertValue(
                 listOf("Available", "From image", "From location", "From title", "Recent").map { categoryItem(it) },
             ).assertNoErrors()
@@ -127,6 +128,7 @@ class CategoriesModelDepictionTest {
         model
             .searchAll("", listOf("Photo title"), listOf(depictedItem(imageUrl = "image.jpg")))
             .test()
+            .awaitCount(1)
             .assertNoErrors()
             .assertValue(listOf("From location", "From title", "Recent").map { categoryItem(it) })
     }
@@ -140,6 +142,7 @@ class CategoriesModelDepictionTest {
         model
             .searchAll("", listOf("Photo title"), emptyList())
             .test()
+            .awaitCount(1)
             .assertError(IOException::class.java)
     }
 
@@ -159,6 +162,7 @@ class CategoriesModelDepictionTest {
                 listOf("Photo title"),
                 listOf(depictedItem(commonsCategories = listOf(categoryItem("Unreachable")))),
             ).test()
+            .awaitCount(1)
             .assertNoErrors()
             .assertValue(listOf(categoryItem("Recent")))
     }
