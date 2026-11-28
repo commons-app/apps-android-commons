@@ -17,6 +17,10 @@ import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -92,5 +96,58 @@ class FolderAdapterTest {
     @Test
     fun getItemCount() {
         assertEquals(0, folderAdapter.itemCount)
+    }
+
+    private fun folderViewHolder(): FolderAdapter.FolderViewHolder {
+        val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        return FolderAdapter.FolderViewHolder(inflater.inflate(R.layout.item_custom_selector_folder, null, false))
+    }
+
+    /**
+     * A folder whose pictures were all handled is greyed out and shows the Commons icon.
+     */
+    @Test
+    fun handledFolderIsGreyedOut() {
+        val holder = folderViewHolder()
+
+        holder.setHandled(true)
+
+        assertEquals(View.VISIBLE, holder.handledGroup.visibility)
+        assertNotNull(holder.image.colorFilter)
+        assertEquals(
+            activity.getString(R.string.custom_selector_folder_handled),
+            holder.itemView.findViewById<View>(R.id.folder_handled_icon).contentDescription,
+        )
+    }
+
+    /**
+     * A recycled view of a handled folder is shown as usual for a folder that is not handled.
+     */
+    @Test
+    fun folderThatIsNotHandledIsShownAsUsual() {
+        val holder = folderViewHolder()
+        holder.setHandled(true)
+
+        holder.setHandled(false)
+
+        assertEquals(View.GONE, holder.handledGroup.visibility)
+        assertNull(holder.image.colorFilter)
+    }
+
+    /**
+     * Only the folders that were found to be handled are shown as handled.
+     */
+    @Test
+    fun setHandledFolders() {
+        val otherFolder = Folder(2, "bucket2", ArrayList(listOf(image)))
+        folderAdapter.init(listOf(folder, otherFolder))
+
+        folderAdapter.setHandledFolders(setOf(2L))
+        assertFalse(folderAdapter.isFolderHandled(1))
+        assertTrue(folderAdapter.isFolderHandled(2))
+
+        // A picture was added to the folder, so it is not handled anymore
+        folderAdapter.setHandledFolders(emptySet())
+        assertFalse(folderAdapter.isFolderHandled(2))
     }
 }
