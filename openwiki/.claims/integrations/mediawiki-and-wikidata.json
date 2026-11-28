@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f8692cbdeb0d64a28eb3cd0d2cf982fa2d083d8f141bf951916f9adc7dc16c57",
+  "claims": [
+    {
+      "id": "claim_385af1c9e99e4a68b64f1e01ae9ca50d",
+      "statement": "Production builds target live Commons and Wikidata, while beta builds target the Commons beta host but keep Wikidata on www.wikidata.org; beta also uses a beta campaign manifest and beta Commons upload host.",
+      "evidence": [
+        {
+          "resource": "repo://app/build.gradle.kts#L130-L147",
+          "version": "repo-lines-v1:sha256:12556eeb2b828a1faf45a38ecadd38144f4bd9070d1821e9ef0d2e196ef209d3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWRhOWU0NjM5OTRkYzFlYTljMGZmZjUxZjViNmQ1MDkzMjE5NjBiZmE3ZTFiZTdhNzYxOWE1NmE1ZWVkNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NWM2Y2QxNGMwYzQxYmEwNWM4NjRlM2U4MjNiOTZkZDJhMTk4YjJkNmY2OGFiNmY3MTg1ZjE4NzFlZTkwMzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0ODZmMTAwNjI5NzZjZDMzMjJmZTYxMDRkZTc3N2JhNmZiODM0N2M2OGJhNmUwMjkzNDU4NjZkZmU3NzM1NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1NmEzMjlhY2Q3MDE0ZWE4NDM2ZGRiNDg0NmFlNDk2YzUyMzlhODYxZWI2YTc3NTZhZmNlNmJiM2FiNjk4ZGEifQ"
+        },
+        {
+          "resource": "repo://app/build.gradle.kts#L215-L237",
+          "version": "repo-lines-v1:sha256:bdff2b10ae32486f351b88bc355220602466e0016f5ba955b8508849b4bd0b90:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZmQwYjg5NDdlYjEzOTZiNzk1NDU5NWRkMTM3MDg5Zjk4MDBlNmYzNzU0ZjhhMjBlNjJkNmRkNTZkNGJkNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NWM2Y2QxNGMwYzQxYmEwNWM4NjRlM2U4MjNiOTZkZDJhMTk4YjJkNmY2OGFiNmY3MTg1ZjE4NzFlZTkwMzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2YWY1ODBlZWNiMTI1Y2QzN2E4M2RkMzM3ZWNkMjU4NjUwZGIxNWQ1MWFlYmIwNThlZWVkOWQwYTE5NzBiZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NjlhYjhhOTYxODliNGFmN2RiNGYwNjVkZmU1MmE2YWI4NWJlNjQxNzA0MmY0NzY5ZjBhNDYwNDVlYWY4NTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebadede3147f4af5bd60276991825610",
+      "statement": "NetworkingModule constructs named Commons and Wikidata CSRF, page-edit, upload, media, category, review, and Wikidata services from the corresponding configured wiki URL, preventing Commons and Wikidata mutation clients from being interchangeable.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L115-L160",
+          "version": "repo-lines-v1:sha256:6b150cb5185f024df12039803f6db10dd0b1ad865eed54c07234c678c48fb84c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5ZjFlYmE5Y2UwYmQ0MGJiMmFhNWViMzg4Zjc4ZjFkODc2OWMwODk3MzU5OWFjNDU4OWFjZDA2MzM2NGQ5NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiOWY2ZTYzZTMwMWFhYzE1MmMzYTljMjZjZTcxMWQ3Y2FhYjUwOTY5MzRmNjZlOWQyMmJlMTE3ZDU3OWZjOTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwZGEzY2MxOGI4ZGY3YWJmNzk1N2IwMzgzYzgyMWI4OWU4M2M2YmIzMDYxZjUxNmY3NDljNzU3OWIzYTU2NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L193-L241",
+          "version": "repo-lines-v1:sha256:dc066e6353e58e90cbca836ed3ee499f5f1d670f87de5ad7b3c8ea8c4fa495a0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MDU4ZTNlZjUzNDNkYTU0MmRhMTUxMWNlNDhhYmU4ZDI2OGVmYjU0NmY2ODdmNWE1MzU1YzQ2YWI0NmM4MDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4YTBiMzY1YmJmNjU2YWE0ZDcwZTIzZjVkOTU1MDJhNjZjN2VjN2ZiZWZiNjRjZDMzZThmYzIwMDU3OTA4YWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L263-L285",
+          "version": "repo-lines-v1:sha256:dba8d33b14f821563d6904f1b7a4392b40386e9c7cf6df813d7601b3858b466f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3ZWVmMWI1MWM0Y2UwNDAzMDQ3NmNjNmY0N2U4MTIyYjlhNmIwZGU1NTcyOWQyNjc4MDM3YTliYjRlMWM1MWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiZTM3OWE2OTAzYmI0OWYxNmUwMGI2Y2RjMThiMWZhMWRhYzA1MGM4NTZkMGZiMTc1Y2VjM2M5ODNlNjYxODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2NDM0YjUwMTVmZWVmODg4MjY2ZTI3NmJmMGQwZTkyYzg0MjI4ODUxNDc3ZTk2YTc5OTVlMGIwNmQ3ZjQ3YzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3409cef4951b42b08098132d60dbc05f",
+      "statement": "Commons cookies are persisted through CommonsCookieStorage and CommonsCookieJar, and the shared OkHttp client applies common headers, timeouts, caching, and debug-dependent logging.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L102-L113",
+          "version": "repo-lines-v1:sha256:393e1f7d6dd182ae10798a1af2aeebba71df1e9ec3d5493a45865f803395f791:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhMzU1OTE4ZGNmNDY4ZWQyMzQxZjI1NWIzZDU5MTcyMzQ1YWFiN2JiY2M0NmE2MGIwZWU3YzkwNGE4MWYzY2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmZjZhMDU2ZmE1Y2I5ZTFmNmNjYzQ5MTdlYzFmNzAzNTAwODM3YTg4NDQyMmE2MTMzMWVmNzhkYjAxMjZkM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjZTZkYzc3ZmQ5ZWVhNmE0OTUwMzc5NTliMjc1YzRkYTE5MWMxZDYzNWI5OWFkNmJiZjkwNzFkNGE0YjI1MDgifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L57-L83",
+          "version": "repo-lines-v1:sha256:44a5a0a9d07531c79f3607fe0bc9f5febe38657bb39c2485badc1833ace3264e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0Njg1MjExYzJiNjE3Yjg0MTRkN2RmNDQxNzc5OTZkMTljOGY3MmY2NjJmZjQyOTA4ZjY5MGM0MWQ4MGZkMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlNjI3ZTU5ZDJlMDQ3N2RhYTlmNzFlYjRiZWE2NGNhMGFkZmIzYWE2ODQ5NTI3ODU0ZTQyNDliYTRmZWExMTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7b410efc9e504391abcc94d804771a89",
+      "statement": "CsrfTokenClient obtains a wiki-scoped token off the main thread, rejects an anonymous token for an apparently logged-in session, retries login and token acquisition within bounded limits, and fails with InvalidLoginTokenException when no usable token is obtained.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L132-L149",
+          "version": "repo-lines-v1:sha256:c83a173030f779a5ad7d871631d53a958807901232506723d85ae32cb3b26fcf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4ZGI2NTQxYTc0MWZmYWY2NTJhMGFiYWZjZDEzNmNjYzlkNGMzMGY4NzMzMWNiMTA4OWQyNzA4ZGQyZDI5ODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmN2E3ZWU5YThjOTkzMDJjMGQ5ZWM1N2RhMmZiZjVmMzk1ZjkwM2I5ZTQ1NDBhZWRlZWNmYzc5NjllNzRkY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhNGQ1NTMwNDc3ZTJiMGE2MTVlNWIyNDYwMTc3NzVjZDI4M2U2NjJjMjZmNmU0MDc2ODQwZjEwMjdjOGU2ZjkifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L207-L218",
+          "version": "repo-lines-v1:sha256:0beeddce5f32537c617c7998a5006cafd363d194ae22ded2633e05b18d75ff4e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmMzMwMjdiYzIwYjViY2M0YjEzOTBiNjM2YjJhY2E4YjA4NTNiZjUwMjA0YjAyMDlhMTdiOGY0ODQwN2M3OGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkYWFjNmMwYmIxZjJlYjRmMGY2YjU2NmQxZWNhMDA4MTZkYTNjYzE2MTRmMzkwNTVlZWFjYWJjNGU2ZDRkZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2NDdlOWMxMzRkNjYyMzExZGM5YjhjNjcyM2Y5OWEzYzk3YTNlYzAyMDVkYWM3MWNkMWRhYjcwMjdhY2Q1NWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/auth/csrf/CsrfTokenClient.kt#L25-L71",
+          "version": "repo-lines-v1:sha256:9db2aa1339c9b8ec5c81041e64223e28acf32f27bfb7f94a9aad963a99d28d0a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhMTY5OGQwNjhkY2RiOGI4MzEyZmRmMmRhODBmOTFlOWYxYjIxNDBlZTllMTdkYTBjMzRlMjZkZDRiMGJhMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NDk5MjFmYzFhYjcwZjI2ZGVkYjkyNjM3MjUwNTc3NWM1ZDM3MWU4OGQ0ODI2OTRjNmU3MWJhOTlhZjQ3YjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OThlZGM1ODJjMjQxMDQ2YTFlNmY4MGM0OWFmYWRlNWRhZTM5YjczYTg0YzhlNzJmNDQzNDc4ZDNiNzllNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmYzU1MmMxYTYwMWNhZGYwYWYzYWM4YjUzOGUxYzRiZjU2MzYxNjE0MWZlNWQ0MjIxMWQ1NTExZTcwZDQ0NTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce6db6ca67a34a3db7fa0c8ff391fae3",
+      "statement": "UploadClient performs resumable Commons uploads by sending 512 KiB stash chunks with offset and filekey state, treating a stash as valid for six hours and returning explicit success, pause, cancellation, or failure results.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L199-L251",
+          "version": "repo-lines-v1:sha256:62db0ed85d1fc2d8eda2cb65a4e31df0f7629901fb6ce286638bd0a1ccc21b16:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiY2IyOGEwNGY2MDA1YTBjNDMyNzA1Mzg4ZjRlYjJkYjkwOTY3MzQ3YTI2NWY4YmY5YTA4ZDA4OTg5MTQ2ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkYTllYjQ2YTM0YWFlMjJkMzgxYjE0MDJiZTNhYjNkMzE0ZWU0YjZhYTYxN2Y0MTIwOTFjMDIxZWZiZjk0OTIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L46-L50",
+          "version": "repo-lines-v1:sha256:b5cac260b7e3d6bbad4d9e64cab93efd08c715e3179bd520dd489d2acb87c526:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmViY2JhYTE5ZDA2ODAwM2ExY2JlZWNiZjBmMDU0MjEyYWRlOWNmMmQ1NzFiYzA0NDVmNDU1NGJiYWI1N2JiYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDdjOGY2NjhkNjM0YmIwMmE0MWQwYWEyOGEyYWRmNWVmMDE5ODE4ZTUwMWZhMTZkNTI4NWZhNTEwNzE3ZDJkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTMxNTBmZjUzOTA2MjMwMTdhNDFjNWQ1Nzk5NGE3OTBkYzRlMDEwYjU4ZTZkZjQ5YTdmOGQxZGNiNzYzZGM0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTUzZjU1Mzg1YjA2YjViOTVjYWI5MWE1M2Q1OWFjNDJlYjExZjUyNjA2OTFiNDAwMWE1YzE3NzQwN2ZiOGRkMiJ9"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L53-L140",
+          "version": "repo-lines-v1:sha256:478471da0278c51be8fda2026d51d2c73f0b83fe9f370fd21db51730afb733bd:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1ZWM0NGQ0MjE0MDM5YmI0YTk3YjAxMzRlZjUwODJlMDBkNDNmZDIyNjZjODdiMmFmOTQ5MjFlZjE0OTUxMjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4YTdiZmNlNjgxMzk4MjM1OWUwOTNhMDhiOTZkMjJmNTZlZWZhNWU3ZDM4MjdiY2EyYTNkYTQ5MWM4NTEzNTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e66d9ef837cc440fbedd4164a75abba3",
+      "statement": "The upload API has separate stash and publish operations: stash uses multipart action=upload with stash=1, while publish submits the stash filekey, page text, summary, filename, and CSRF token; a response without an upload object is translated into a MediaWiki exception.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadClient.kt#L258-L283",
+          "version": "repo-lines-v1:sha256:11b8f77ee263f652a0bba486a83f43300e0a663fe95dcaec0a60acebf06ee741:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwNjI1ZWZmNmY0YTNmYTE0YjNjNmI2M2Q5ZDU1YjBkNjYzMDJmNTI5MDE4ZmE4NWQ1YmU0ZjIxOTUyYjQ4ZTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0ODA5MDYwY2ZkNDBhZjI2MmMzZDA0OWY1MWQwZDMwNmU2MTBkODI2NTY5NDMwN2Q5ZWYyMDk0MjdlOTRiN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyNDE5NTBmODNiNGJlNGU1NmI3NGM0MDIyZWY4Mjc5N2FlOTI2NWIwZmFjMTg4NDk5Y2M2YjAyZGQ0ZDgyZGEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/upload/UploadInterface.kt#L15-L37",
+          "version": "repo-lines-v1:sha256:7fa91577ac345a2a229f15c4ce8fdd3faf5ca8b4f5afd6e524cc12f4995c2129:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiZjcxYmViNTllMmNjNDcxNjdjYjc0YzA3MzlmMTY5MDZiNjQ5NmVjZTBlMjY0ODkzNmJjMmYxODY4YmE0MWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlZTJjZjE0NjZhYjYwZDc3NWM0MDZkZGJkMWMwZDcyZGQzNTQ3YTExY2FlZjk4ZDIxMDgyODIzZDJiNzUwODYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiNjQ0N2ZlMWU2YWE4MDkwODczM2NkZmMyZDQ0YTU2MDkyZWNkMzZiZTdiZjRhNjhjOTNmMDljYzQxMTFmMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b29124b78cd429c87ec49faf64b719d",
+      "statement": "After a Commons upload, WikidataEditService resolves the Commons file entity ID and performs depiction and caption edits as follow-up operations, so file publication and Wikidata enrichment are separate failure domains.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/WikiBaseClient.kt#L70-L93",
+          "version": "repo-lines-v1:sha256:10208d3aada84b7d0ce3f32432d8159a16fccbfb462f34bc2722a206cd291fb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkNTM0NmI3NWM4NDRiMTZlMDk4MmM0MDdjODVmMGNlYzU3MjY1YzdlOTI1MTI1MGQwMTFjYmQ0YWM4MmFmMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNTU0NmFhZDE4NDhjZDE5Y2I1YTljY2ZlZjU4ZTQ1YTA5NmQzNzgzN2RjYjAyNzEyYzdmZmNmOWE2YjI5NTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5Nzc0NmZkZmI2MDQ0NDU4ODkwNDRkOGE1NDY1NjY4YjZjZGFjYWIwMTlmNjcxZWY1ZjgzNjQ5MTcxODcxNTAifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/WikidataEditService.kt#L233-L281",
+          "version": "repo-lines-v1:sha256:0ec6d9f789b998a7d84fdb513aff7afeca09eb4f12585a668bc51ffb225edb7c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjMmMzYTgyMmY1ZDE2ZTUyYmMxNjNhMzRlZWE4NmYxYWJkNjZkMzA4OWY2MTM5MjAzMjNhZGQyMTNkZmNhZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhOWY4NmQyOGU3ODRmOWZkMzFmYjcyZDE1ZjYwY2JjZWFhZmRkNjY5Y2JkNWI2ZGE3ODg4YTAyMzMyMWViYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3N2NkNzhiYTIwMjYyNzYwYzAxNmVmNzAzNWYzMTMyZTdkYzM0YzIyY2EyNDI1NjM5YTA3NGQ3OWFiMTlmOTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_316d12a8f9d2403790459d745e7298a7",
+      "statement": "Wikidata depiction replacement deletes existing claims before adding replacements, while beta depiction writes substitute Q10; Wikidata claim creation obtains a Wikidata CSRF token, posts a serialized statement tagged wikimedia-commons-app, and returns the last revision ID.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/WikidataClient.kt#L17-L34",
+          "version": "repo-lines-v1:sha256:fd69ffaf42d10a9823ab198c793bec4fc0d8afea3df4b6f92254f52f85d2a054:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlZWVmZmQ1YTNkOTRkOWM3MmYzMzY5NmZlMDcxOWFkNzM4NGNkZjU2ZDk2MmMwZjQ3MDgwNjFlZmIzNDNhZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3YWNjOTQ3NTkxODcwNzViNzFiZmUyYjE2OTFlZjMwNGU1NTBkOWFkMGEzNzJhYzE4NmRjNTBlOTJmMTljOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/wikidata/WikidataEditService.kt#L56-L110",
+          "version": "repo-lines-v1:sha256:76ecb0aa1146b4570981acff7a5d6eaa03ac5d6845a801531d217819a72e3351:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmNmE1ZWJkOTYwOTQ5Y2M2ZDViNWFiNTE4NmMwMGMzMjU3OGMzMDM3Mzg5NzUwNThlOTNkOWRmOTQ3YmQyYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjQ3OWNjMjMwNDQwZmQ0MWU4MjI0MjE4Njc5Njk4NTU5ZDI4OTNiZDY3YjQzODBhZmFiODExYjM4YTU1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0MWE0NDJjNDk1YjM3Yjk3OGQ4NjFmOWZhM2ZkMGRlNGQ0YWFmZGI1MzVkZWRiY2UwNmFhOWM4YjY1NDgyM2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1ZDUwNjY2M2ZkOWViMjU3ODczZTJhZWUyMjAxYTkxNWE5ZDc1NzM5NGI2NGE5ZDI4OWExZDkxZGMzMzRjMzQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2a2311ea2074805acbcc03fc624dfb8",
+      "statement": "PageEditInterface exposes replacement, creation, append, prepend, and new-section MediaWiki edits, and each form-encoded mutation places a CSRF token as the final field.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/actions/PageEditInterface.kt#L23-L119",
+          "version": "repo-lines-v1:sha256:665beeea46f114930a464f44a6a1b160325995c312c6a2c4bd452f44a098d4ee:eyJzZWxlY3RlZExpbmVDb3VudCI6OTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiZjcxYmViNTllMmNjNDcxNjdjYjc0YzA3MzlmMTY5MDZiNjQ5NmVjZTBlMjY0ODkzNmJjMmYxODY4YmE0MWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlOGYyZjVjNTc5YWNkYTgyNDk4NmFjMDkyMzdkYWNjYTYyMmIwMjg0OGZiZTE2ZmFmZDQ0ODUyNTZjY2NlZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2NzUwZDc2MzlmOTdjZTQyZjExY2JhYjJhMDBlODM0MzkxNGE0ZWQ1NTZmNzQ2NDM4OTAwYzVjNmZkZmJmY2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1YzI4MjJiNmJiN2RhODM4NTkwYWU0M2ZjZmZjMDUzZmMwZWE3OTdhZmQ5MTIxNTQ3YmMzOWM3OWM2ZGI1NjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_727e33e861ee42c48205916505ed1444",
+      "statement": "DepictsClient performs locale-aware Wikibase searches, resolves entity IDs into Entities, and falls back from a missing description to an instance-of entity label; OkHttpJsonApiClient also converts SPARQL results into depiction items.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/explore/depictions/DepictsClient.kt#L29-L60",
+          "version": "repo-lines-v1:sha256:9d9093faa8531572febc0161ef7b722da68d38c0f1c4c7bf702cd9edbe3ba04e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYzcyYmM5NWY2NmFmZGQ4MzU3NDQyYjA2YmFjMWE4NmM4NDk0NDNhNTBkMjk1ODYxYTA2NjM1MjMzYjYyMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMWJmNzRkMGQ4MjE1ZjIwOWJhYjg1MWYwMTA0NTliODkxNzUzNWY0Zjk4MWRiNjY1OWUxMDM2MDM2NjUzMTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5OGM3NGNjMjg5MjhlMjhjY2E2YzlkZWNhZmE4ZjViYTkwNTE1ZWIxZGM0OTQyMjM2MTYxMWY1ZjdkMGQ0YjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ZjQ4MDJlY2Y3NmMxMDNhYjYyZmVjMjEzOTkzM2Q1OTZmYzE0ODlhOWRlN2NlZmViMzY0ZTlhZjFmYWUxNjEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/explore/depictions/DepictsClient.kt#L64-L109",
+          "version": "repo-lines-v1:sha256:429f7a267642810b4a6fb73611d1663ca3053eb59472df406e993de20204c60e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjhlNjlkNmVmODY4ZGRmZGY5ZmY4N2E5NTY2YzdiMTVjMmE0ODhiYzQxNDM2NmE4ZjYwMTJjY2EyNDQ2ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzMWIwMDJlYTc1MWMwYWY4YWIwZjVhNWRiMWZkNTE5ZjJmZmFmMDI5NDg4MTM0YjdmODAwZmJlNDc0ODcyMTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4ZjQ4MDJlY2Y3NmMxMDNhYjYyZmVjMjEzOTkzM2Q1OTZmYzE0ODlhOWRlN2NlZmViMzY0ZTlhZjFmYWUxNjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyMzQzNmIxMGE5YTdmNDk2Nzk5NGI5MmJjY2I3NmM4MzI3OWQxZTM1YjMxNTBiNDA1ZWVkYjQyZWYzMjllMTEifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt#L693-L720",
+          "version": "repo-lines-v1:sha256:d23c4d06f05b4f191401c77419a6aeafe00ceb8aee535e7f8fda25f3cb765520:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1M2M5N2NkODE0NGFkOTM2NzUzODg5ODU2MjQ1M2UxYTA1NGZiMDc1MDk2Zjc2MmY1ZGQ1MGQ5MGQ4Y2VmZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlZmM4NDhhZGI0YWM1OGVmY2Y1MWQyYjMwMzA4MWVjYjE1MjNiYjNkZWE0M2JmNmRhZDAzN2E2OWE1MGU5ZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzYmVkYmM4ZmJjZGVmZTg5N2Q0Y2IxYjViNzkxZTg0MjVmMzNiNzg3MzQ3Y2Y3Mzg3MmE2ZGRiZWQ1ODZjODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjMDNjNDFiOGRlMjhlZmE3Njc1NjYzNWFiZjBiMTNhM2RjYjYyZDJjODA2Zjg0ZjA0ZWNjMzZhZjdmMmVmODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d56e2d255f3f4a66b78bb1933fb0acb0",
+      "statement": "OkHttpJsonApiClient uses injected Toolforge, SPARQL, and campaign URLs for auxiliary services, while Commons file-usage queries use the configured file-usage API base and translate unsuccessful or exceptional requests to null or safe default results.",
+      "evidence": [
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/di/NetworkingModule.kt#L85-L100",
+          "version": "repo-lines-v1:sha256:50312990da363fd95e3f481b711e39daf7ca0b1feb2e5611e4bf1c4e1709bf92:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMDNjZDk4OWM2YjgzOTZiZGFhMTNjNTMxNDA3NDFiZjQ3NDcxMmRjZDI4ZThlM2IxNmI4ODQyNmRjMDk4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5MDlhNTNhNjE4ZDAyOGUxZDMwMDBjMGE3YWJjZWVjYmU1ZmIzN2Y0ZTUxMWVmZTQ2NjQzZmFkNmU2Njg3MmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5NTg0YjM1Mjg2ZTY4M2VmNTE0OTNkNjE5MmYwNjAzZWU2NTFjZTI5ZmViZDMyMzE0YjgzMTU1MTk2OWIyYmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMmVhZmQyNTUxMjIxZDE5YzkxYTRmYjQ0MGM0OGYzZTVmZjczZmQwNzkwNzIwOGY1Mjk1YjdjZDdlOGM4MTQifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt#L108-L141",
+          "version": "repo-lines-v1:sha256:a5e6017164419fc19f907a011cce7af22e51acf9b406366592405f7d137a634b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViOWEwOGJjMjlmNmViZWJlOWE1ZjAxOTAzZDk4NDVkYmNiNTg0MmE0NTVmMDdkNWY0MDAyZGFjMzJhNWM2MDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlMmI5ZTIxZmRjODZmYzJjMmVlNDQ3MjE4NWQ2NzY0NjdiZGQxY2JmMmUyNGI0ZGM2NDRhYjFhYmIzMzI1NDcifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt#L144-L180",
+          "version": "repo-lines-v1:sha256:237184cb02a5460aafa697320b0d61eca43c979ee71248c0f3fc139fdeb6e627:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkMTZhYjRlYTRlODY5OGQzOTY0YmI5NjY3YjQ4ZTI5ZThhYjBiMGFiMzk5ZTJlMWRjMWNmMzgwN2JlOWViMzIifQ"
+        },
+        {
+          "resource": "repo://app/src/main/java/fr/free/nrw/commons/mwapi/OkHttpJsonApiClient.kt#L46-L52",
+          "version": "repo-lines-v1:sha256:1e3a5e5b711d745cb4ff439b01d76aa104de2530ad722b67de3003c15cd15c98:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTU4YzIyOGM0ODQwMmViNGJmZDM1ODEyMDIyMDU5MGVkYTU1M2Q0Nzk4N2ZlMTJhZjRiOGI5ZWE2M2UyZGYyOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2FkZmJiOTZlYzIyMmQxOTgxMTNmMjI3ODEwOTg5Zjg1MzAxNzM4ZjUwNjBkNzBkMzg3YTM0NDhkMjE2MzE1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzJmZTZmNmZlYTM4MDdhOTkzNmRhZDdmYTZmNDAyNWNmMjJhZmI2ZTM0YjgyNjNmODgyNGIxMTcxOTI5NWJkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2YyM2NkZmFlNjg2M2UxYzAwZThmZmM0M2IzMDFmYjFiN2U3NzJjZTE3N2JjMjRlZWI0ZTQ1MGNlYWIzNDZmNyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-31T15:07:16.361Z"
+  }
+}
