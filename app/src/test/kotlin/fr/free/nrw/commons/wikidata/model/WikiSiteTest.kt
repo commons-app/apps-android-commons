@@ -83,12 +83,30 @@ class WikiSiteTest {
         val site = WikiSite("https://zh.wikipedia.org/zh-hant/Test")
         assertEquals("zh-hant", site.languageCode())
         assertEquals("zh.wikipedia.org", site.authority())
+        assertEquals("https://zh.m.wikipedia.org", site.mobileUrl())
     }
 
     @Test
     fun wikiPathDoesNotCountAsLanguageVariant() {
         val site = WikiSite("https://zh.wikipedia.org/wiki/Test")
         assertEquals("zh", site.languageCode())
+    }
+
+    @Test
+    fun indexScriptPathKeepsLanguageAndMobileUrl() {
+        val site = WikiSite("https://en.wikipedia.org/w/index.php?title=Sandbox")
+        assertEquals("en", site.languageCode())
+        assertEquals("en", site.subdomain())
+        assertEquals("en.m.wikipedia.org", site.mobileAuthority())
+        assertEquals("https://en.m.wikipedia.org", site.mobileUrl())
+    }
+
+    @Test
+    fun apiScriptPathIdentifiesTheSameWikiAsTheBaseUrl() {
+        val canonicalSite = WikiSite("https://en.wikipedia.org")
+        val apiSite = WikiSite("https://en.wikipedia.org/w/api.php?action=query")
+        assertEquals(canonicalSite, apiSite)
+        assertEquals(canonicalSite.hashCode(), apiSite.hashCode())
     }
 
     @Test

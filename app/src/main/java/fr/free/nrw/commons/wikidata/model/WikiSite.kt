@@ -88,7 +88,7 @@ class WikiSite : Parcelable {
             return ""
         }
         val parts = StringUtils.split(StringUtils.defaultString(uri.path), '/')
-        return if (parts.size > 1 && parts[0] != "wiki") parts[0] else ""
+        return if (parts.size > 1 && parts[0] != "wiki" && parts[0] != "w") parts[0] else ""
     }
 
     constructor(url: String) : this(
