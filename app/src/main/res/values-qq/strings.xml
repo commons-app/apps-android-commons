@@ -469,6 +469,9 @@
   <string name="deletion_reason_bad_for_my_privacy">Answer to a question.</string>
   <string name="deletion_reason_no_longer_want_public">Answer to a question.</string>
   <string name="deletion_reason_not_interesting">Answer to a question.</string>
+  <string name="deletion_reason_speedy_g7">Answer to a question. Shown first in the list of deletion reasons when the user uploaded the file less than 7 days ago. Choosing it asks for a speedy deletion under criterion G7 of Wikimedia Commons, instead of a regular deletion request.</string>
+  <string name="speedy_deletion_file_in_use">Message shown after the user chose {{msg-wm|Commons-android-strings-deletion reason speedy g7}}, when the file turns out to be used on a wiki. Speedy deletion is only allowed for unused files.</string>
+  <string name="speedy_deletion_usage_unknown">Message shown after the user chose {{msg-wm|Commons-android-strings-deletion reason speedy g7}}, when the app could not check whether the file is used on a wiki.</string>
   <string name="uploaded_by_myself">* %1$s is a date.\n* %2$d is the number of articles in which the image is used.</string>
   <string name="no_uploads">Shown in the contributions view when the user has no contributions.</string>
   <string name="no_categories_selected">Warning.</string>

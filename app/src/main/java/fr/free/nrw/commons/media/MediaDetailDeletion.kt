@@ -4,15 +4,13 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.Gravity
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Spinner
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.getUserName
+import fr.free.nrw.commons.delete.SpeedyDeletionHelper
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.NOMINATING_FOR_DELETION_MEDIA
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil
@@ -71,20 +69,8 @@ internal fun MediaDetailFragment.onDeleteButtonClicked() {
     }
 
     if (isOwnUpload()) {
-        val languageAdapter: ArrayAdapter<String> =
-            ArrayAdapter(
-                requireActivity(),
-                R.layout.simple_spinner_dropdown_list,
-                reasonList,
-            )
-        val spinner = Spinner(activity)
-        spinner.layoutParams =
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-            )
-        spinner.adapter = languageAdapter
-        spinner.gravity = Gravity.CENTER
+        val offerSpeedyDeletion = SpeedyDeletionHelper.isWithinTimeLimit(media?.dateUploaded)
+        val spinner = ownUploadReasonSpinner(offerSpeedyDeletion)
 
         val dialog: AlertDialog? =
             showAlertDialog(
@@ -93,7 +79,13 @@ internal fun MediaDetailFragment.onDeleteButtonClicked() {
                 null,
                 getString(R.string.about_translate_proceed),
                 getString(R.string.about_translate_cancel),
-                { onDeleteClicked(spinner) },
+                {
+                    if (offerSpeedyDeletion && spinner.selectedItemPosition == 0) {
+                        onSpeedyDeleteClicked()
+                    } else {
+                        onDeleteClicked(spinner, if (offerSpeedyDeletion) 1 else 0)
+                    }
+                },
                 {
                     // No action needed when the user cancels
                 },
@@ -157,9 +149,16 @@ internal fun MediaDetailFragment.onDeleteButtonClicked() {
     }
 }
 
-/** Submits the selected deletion reason. */
+/**
+ * Submits the selected deletion reason.
+ *
+ * @param reasonOffset how many entries are shown above the regular reasons in the spinner
+ */
 @SuppressLint("CheckResult")
-internal fun MediaDetailFragment.onDeleteClicked(spinner: Spinner) {
+internal fun MediaDetailFragment.onDeleteClicked(
+    spinner: Spinner,
+    reasonOffset: Int = 0,
+) {
     applicationKvStore.putBoolean(
         String.format(
             NOMINATING_FOR_DELETION_MEDIA,
@@ -168,7 +167,7 @@ internal fun MediaDetailFragment.onDeleteClicked(spinner: Spinner) {
         true,
     )
     enableProgressBar()
-    val reason: String = reasonListEnglishMappings[spinner.selectedItemPosition]
+    val reason: String = reasonListEnglishMappings[spinner.selectedItemPosition - reasonOffset]
     val finalReason: String = reason
     val resultSingle: Single<Boolean> =
         reasonBuilder
