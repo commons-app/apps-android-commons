@@ -25,7 +25,6 @@ class WikidataFeedback : BaseActivity() {
     var place: String = ""
     var wikidataQId: String = ""
     var pageTitle: String = ""
-    var preText: String = ""
     var lat: Double = 0.0
     var lng: Double = 0.0
 
@@ -106,7 +105,6 @@ class WikidataFeedback : BaseActivity() {
                             pageEditHelper.makePageEdit(
                                 this,
                                 pageTitle,
-                                preText,
                                 desc.toString(),
                                 det,
                                 lat,

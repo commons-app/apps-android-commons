@@ -33,6 +33,15 @@ import timber.log.Timber;
 @Singleton
 public class PageEditHelper {
 
+    /** Heading of every report, and summary of the edit that adds it. */
+    static final String REPORT_SECTION_TITLE = "Please fix this item";
+
+    /** Template that marks a report that still needs to be handled. */
+    static final String REPORT_TODO_TEMPLATE = "app-report-todo";
+
+    /** Template that a volunteer puts in place of the first one once the report is handled. */
+    static final String REPORT_DONE_TEMPLATE = "app-report-done";
+
     private final NotificationHelper notificationHelper;
     private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
@@ -56,19 +65,18 @@ public class PageEditHelper {
      *
      * @param context     The context for displaying messages.
      * @param title       The title of the page to edit.
-     * @param preText     The existing content of the page.
      * @param description The description of the issue to be fixed.
      * @param details     Additional details about the issue.
      * @param lat         The latitude of the location related to the page.
      * @param lng         The longitude of the location related to the page.
      * @return A Single emitting true if the edit was successful, false otherwise.
      */
-    public Single<Boolean> makePageEdit(Context context, String title, String preText,
+    public Single<Boolean> makePageEdit(Context context, String title,
         String description,
         String details, Double lat, Double lng) {
         viewUtil.showShortToast(context, "Trying to edit " + title);
 
-        return editPage(title, preText, description, details, lat, lng)
+        return editPage(title, description, details, lat, lng)
             .flatMapSingle(result -> Single.just(showNotification(context, title, result)))
             .firstOrError()
             .onErrorResumeNext(throwable -> {
@@ -80,47 +88,48 @@ public class PageEditHelper {
     }
 
     /**
-     * Creates the text content for the page edit based on provided parameters.
+     * Adds the report as a new section of the talk page, so that earlier reports and
+     * discussions on that page are kept. The page is created if it does not exist yet.
      *
-     * @param title       The title of the page to edit.
-     * @param preText     The existing content of the page.
+     * @param title       The title of the talk page.
      * @param description The description of the issue to be fixed.
      * @param details     Additional details about the issue.
      * @param lat         The latitude of the location related to the page.
      * @param lng         The longitude of the location related to the page.
      * @return An Observable emitting true if the edit was successful, false otherwise.
      */
-    private Observable<Boolean> editPage(String title, String preText, String description,
+    private Observable<Boolean> editPage(String title, String description,
         String details, Double lat, Double lng) {
         Timber.d("thread is edit %s", Thread.currentThread().getName());
-        String summary = "Please fix this item";
-        String text = "";
-        String marker = "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!";
-        int markerIndex = preText.indexOf(marker);
-        if (preText == "" || markerIndex == -1) {
-            text = "==Please fix this item==\n"
-                + "Someone using the [[Commons:Mobile_app|Commons Android app]] went to this item's geographical location ("
-                + lat + "," + lng
-                + ") and noted the following problem(s):\n"
-                + "* <i><nowiki>" + description + "</nowiki></i>\n"
-                + "\n"
-                + "Details: <i><nowiki>" + details + "</nowiki></i>\n"
-                + "\n"
-                + "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!\n"
-                + "\n"
-                + "~~~~";
-        } else {
-            text = preText.substring(0, markerIndex);
-            text = text + "* <i><nowiki>" + description + "</nowiki></i>\n"
-                + "\n"
-                + "Details: <i><nowiki>" + details + "</nowiki></i>\n"
-                + "\n"
-                + "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!\n"
-                + "\n"
-                + "~~~~";
-        }
+        return pageEditClient.createNewSection(title, REPORT_SECTION_TITLE,
+            buildReportText(description, details, lat, lng), REPORT_SECTION_TITLE);
+    }
 
-        return pageEditClient.postCreate(title, text, summary);
+    /**
+     * Creates the text of a report. It starts with {{app-report-todo}}, so that volunteers can
+     * search for the reports that still need to be handled, and asks them to change it to
+     * {{app-report-done}} once the item is fixed.
+     *
+     * @param description The description of the issue to be fixed.
+     * @param details     Additional details about the issue.
+     * @param lat         The latitude of the location related to the page.
+     * @param lng         The longitude of the location related to the page.
+     * @return The wikitext of the report, without the section heading.
+     */
+    static String buildReportText(String description, String details, Double lat, Double lng) {
+        return "{{" + REPORT_TODO_TEMPLATE + "}}\n"
+            + "Someone using the [[Commons:Mobile_app|Commons Android app]] went to this item's geographical location ("
+            + lat + "," + lng
+            + ") and noted the following problem(s):\n"
+            + "* <i><nowiki>" + description + "</nowiki></i>\n"
+            + "\n"
+            + "Details: <i><nowiki>" + details + "</nowiki></i>\n"
+            + "\n"
+            + "Please anyone fix the item accordingly, then change <nowiki>{{" + REPORT_TODO_TEMPLATE
+            + "}}</nowiki> to <nowiki>{{" + REPORT_DONE_TEMPLATE
+            + "}}</nowiki> at the top of this section. Thanks a lot for your cooperation!\n"
+            + "\n"
+            + "~~~~";
     }
 
     /**
