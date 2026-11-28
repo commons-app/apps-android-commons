@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
+import android.app.ForegroundServiceStartNotAllowedException
 import android.app.Notification
 import android.content.Context
 import android.content.Intent
@@ -40,6 +41,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.Collections
 import java.util.Date
 import java.util.Random
 import java.util.regex.Pattern
@@ -144,8 +146,21 @@ class UploadWorker(
     override suspend fun doWork(): Result {
         try {
             var totalUploadsStarted = 0
+            withContext(Dispatchers.IO) {
+                resumeInterruptedUploads()
+            }
             // Start a foreground service
-            setForeground(createForegroundInfo())
+            try {
+                setForeground(createForegroundInfo())
+            } catch (e: IllegalStateException) {
+                // Android 12+ does not let a background app start a foreground service,
+                // for example when the worker is retried after the app was killed.
+                // Keep uploading as normal background work instead of failing.
+                if (!isForegroundStartNotAllowed(e)) {
+                    throw e
+                }
+                Timber.w(e, "Could not start the foreground service, uploading in the background")
+            }
             notificationManager = NotificationManagerCompat.from(appContext)
             val processingUploads =
                 notificationHelper.getNotificationBuilder(
@@ -205,7 +220,12 @@ class UploadWorker(
                         contributionDao.saveSynchronous(contribution)
                         setProgressAsync(Data.Builder().putInt("progress", totalUploadsStarted).build())
                         totalUploadsStarted++
-                        uploadContribution(contribution = contribution)
+                        uploadsInThisProcess.add(contribution.pageId)
+                        try {
+                            uploadContribution(contribution = contribution)
+                        } finally {
+                            uploadsInThisProcess.remove(contribution.pageId)
+                        }
                     }
                 }
                 // Dismiss the global notification
@@ -593,6 +613,27 @@ class UploadWorker(
         }
     }
 
+    // ForegroundServiceStartNotAllowedException only exists on Android 12 (API 31) and newer
+    private fun isForegroundStartNotAllowed(e: IllegalStateException): Boolean =
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && e is ForegroundServiceStartNotAllowedException
+
+    /**
+     * Puts uploads that are still marked in progress back in the queue, unless this process is
+     * still uploading them. Those were left behind by a worker that was killed mid upload (for
+     * example with the app process), and the loop in doWork would never start while they stay
+     * in progress.
+     */
+    internal fun resumeInterruptedUploads() {
+        contributionDao
+            .getContribution(listOf(Contribution.STATE_IN_PROGRESS))
+            .blockingGet()
+            .filter { it.pageId !in uploadsInThisProcess }
+            .forEach {
+                it.state = Contribution.STATE_QUEUED
+                contributionDao.saveSynchronous(it)
+            }
+    }
+
     internal fun findUniqueFileName(fileName: String): String {
         var sequenceFileName: String? = fileName
         val random = Random()
@@ -622,5 +663,11 @@ class UploadWorker(
                 }
         }
         return sequenceFileName!!
+    }
+
+    companion object {
+        // Uploads (pageIds) this process is sending right now. Uploads still marked in progress
+        // that are not in here were interrupted, so they can go back in the queue.
+        internal val uploadsInThisProcess: MutableSet<String> = Collections.synchronizedSet(HashSet())
     }
 }

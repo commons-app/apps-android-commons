@@ -1,6 +1,11 @@
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.worker.UploadWorker
 import io.reactivex.Single
@@ -65,5 +70,55 @@ class UploadWorkerTest {
         val regex = Regex("no_extension \\(\\d{5}\\)")
 
         assert(result.matches(regex))
+    }
+
+    @Test
+    fun `resumeInterruptedUploads puts uploads left in progress back in the queue`() {
+        val contributionDao = mock<ContributionDao>()
+        uploadWorker.contributionDao = contributionDao
+        whenever(uploadWorker.contributionDao).thenReturn(contributionDao)
+        whenever(uploadWorker.resumeInterruptedUploads()).thenCallRealMethod()
+        val interrupted = Contribution(media = Media(), state = Contribution.STATE_IN_PROGRESS)
+        whenever(contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)))
+            .thenReturn(Single.just(listOf(interrupted)))
+
+        uploadWorker.resumeInterruptedUploads()
+
+        assertEquals(Contribution.STATE_QUEUED, interrupted.state)
+        verify(contributionDao).saveSynchronous(interrupted)
+    }
+
+    @Test
+    fun `resumeInterruptedUploads leaves an upload this process is still sending`() {
+        val contributionDao = mock<ContributionDao>()
+        uploadWorker.contributionDao = contributionDao
+        whenever(uploadWorker.contributionDao).thenReturn(contributionDao)
+        whenever(uploadWorker.resumeInterruptedUploads()).thenCallRealMethod()
+        val uploading = Contribution(media = Media(), state = Contribution.STATE_IN_PROGRESS)
+        whenever(contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)))
+            .thenReturn(Single.just(listOf(uploading)))
+        UploadWorker.uploadsInThisProcess.add(uploading.pageId)
+        try {
+            uploadWorker.resumeInterruptedUploads()
+        } finally {
+            UploadWorker.uploadsInThisProcess.remove(uploading.pageId)
+        }
+
+        assertEquals(Contribution.STATE_IN_PROGRESS, uploading.state)
+        verify(contributionDao, never()).saveSynchronous(any())
+    }
+
+    @Test
+    fun `resumeInterruptedUploads saves nothing when no upload is in progress`() {
+        val contributionDao = mock<ContributionDao>()
+        uploadWorker.contributionDao = contributionDao
+        whenever(uploadWorker.contributionDao).thenReturn(contributionDao)
+        whenever(uploadWorker.resumeInterruptedUploads()).thenCallRealMethod()
+        whenever(contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)))
+            .thenReturn(Single.just(emptyList()))
+
+        uploadWorker.resumeInterruptedUploads()
+
+        verify(contributionDao, never()).saveSynchronous(any())
     }
 }
