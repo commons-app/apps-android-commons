@@ -20,6 +20,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -29,6 +30,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -51,6 +53,8 @@ import fr.free.nrw.commons.utils.applyEdgeToEdgeAllInsets
 import fr.free.nrw.commons.utils.handleKeyboardInsets
 import fr.free.nrw.commons.utils.handleWebUrl
 import timber.log.Timber
+import java.security.MessageDigest
+import java.security.SecureRandom
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -73,6 +77,7 @@ class LoginActivity : BaseActivity() {
     internal var progressDialog: ProgressDialog? = null
     internal var lastLoginResult: LoginResult? = null
 
+    private var pkceCodeVerifier: String? = null
     private var accountAuthenticatorResponse: AccountAuthenticatorResponse? = null
     private var resultBundle: Bundle? = null
 
@@ -108,6 +113,13 @@ class LoginActivity : BaseActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
         initObservers()
         initViews(viewBinding)
+        handleOAuthCallback(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleOAuthCallback(intent)
     }
 
     private fun initObservers() {
@@ -166,6 +178,7 @@ class LoginActivity : BaseActivity() {
             }
 
             loginButton.setOnClickListener { performLogin() }
+            oauthLoginButton?.setOnClickListener { startOAuthLogin() }
             skipLogin.setOnClickListener { skipLogin() }
             forgotPassword.setOnClickListener { forgotPassword() }
             aboutPrivacyPolicy.setOnClickListener { onPrivacyPolicyClicked() }
@@ -190,6 +203,115 @@ class LoginActivity : BaseActivity() {
         intent.getStringExtra(CommonsApplication.LOGIN_USERNAME_INTENT_KEY)?.let {
             viewBinding.loginUsername.setText(it)
         }
+    }
+
+    private fun handleOAuthCallback(intent: Intent?) {
+        val data = intent?.data
+        if (data != null && data.scheme == "fr.free.nrw.commons" && data.host == "oauth-callback") {
+            val code = data.getQueryParameter("code")
+            val verifier = pkceCodeVerifier
+            when {
+                code.isNullOrEmpty() -> {
+                    val error =
+                        data.getQueryParameter("error_description") ?: getString(R.string.oauth_login_failed)
+                    showMessageAndCancelDialog(error)
+                }
+                verifier.isNullOrEmpty() -> {
+                    showMessageAndCancelDialog(getString(R.string.oauth_session_expired))
+                }
+                else -> exchangeOAuthCodeForToken(code, verifier)
+            }
+        }
+    }
+
+    private fun exchangeOAuthCodeForToken(
+        code: String,
+        verifier: String,
+    ) {
+        showLoggingProgressBar()
+        loginClient.exchangeOAuthCode(
+            code = code,
+            clientId = BuildConfig.OAUTH_CLIENT_ID,
+            codeVerifier = verifier,
+            redirectUri = OAUTH_REDIRECT_URI,
+        ) { tokenResponse, throwable ->
+            if (isFinishing || isDestroyed) return@exchangeOAuthCode
+
+            val accessToken = tokenResponse?.accessToken
+            if (!accessToken.isNullOrEmpty()) {
+                fetchProfileAndLogin(accessToken)
+            } else {
+                runOnUiThread {
+                    if (isFinishing || isDestroyed) return@runOnUiThread
+                    progressDialog?.dismiss()
+                    val errorMsg =
+                        throwable?.localizedMessage ?: getString(R.string.oauth_token_exchange_failed)
+                    showMessageAndCancelDialog(errorMsg)
+                }
+            }
+        }
+    }
+
+    private fun fetchProfileAndLogin(accessToken: String) {
+        loginClient.fetchOAuthUserProfile(accessToken) { username, throwable ->
+            runOnUiThread {
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                progressDialog?.dismiss()
+
+                if (throwable != null || username.isNullOrBlank()) {
+                    showMessageAndCancelDialog(
+                        throwable?.localizedMessage ?: getString(R.string.login_failed),
+                    )
+                    return@runOnUiThread
+                }
+
+                sessionManager.updateOAuthAccount(
+                    username = username,
+                    accessToken = accessToken,
+                )
+                showSuccessAndDismissDialog()
+                startMainActivity()
+            }
+        }
+    }
+
+    private fun generateCodeVerifier(): String {
+        val secureRandom = SecureRandom()
+        val code = ByteArray(PKCE_VERIFIER_BYTE_LENGTH)
+        secureRandom.nextBytes(code)
+        return Base64.encodeToString(code, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
+    }
+
+    private fun generateCodeChallenge(verifier: String): String {
+        val bytes = verifier.toByteArray(Charsets.US_ASCII)
+        val messageDigest = MessageDigest.getInstance("SHA-256")
+        messageDigest.update(bytes, 0, bytes.size)
+        val digest = messageDigest.digest()
+        return Base64.encodeToString(digest, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
+    }
+
+    fun startOAuthLogin() {
+        val verifier = generateCodeVerifier()
+        pkceCodeVerifier = verifier
+        val codeChallenge = generateCodeChallenge(verifier)
+
+        val authBaseUrl =
+            "${BuildConfig.MOBILE_META_URL.removeSuffix("/wiki/")}/w/rest.php/oauth2/authorize"
+                .replace("meta.m.", "meta.")
+
+        val authUrl =
+            Uri
+                .parse(authBaseUrl)
+                .buildUpon()
+                .appendQueryParameter("response_type", "code")
+                .appendQueryParameter("client_id", BuildConfig.OAUTH_CLIENT_ID)
+                .appendQueryParameter("redirect_uri", OAUTH_REDIRECT_URI)
+                .appendQueryParameter("code_challenge", codeChallenge)
+                .appendQueryParameter("code_challenge_method", "S256")
+                .build()
+
+        val customTabsIntent = CustomTabsIntent.Builder().build()
+        customTabsIntent.launchUrl(this, authUrl)
     }
 
     private fun handleEditorAction(
@@ -266,7 +388,6 @@ class LoginActivity : BaseActivity() {
 
     @VisibleForTesting
     fun onLoginSuccess(loginResult: LoginResult) {
-        compositeDisposable.clear()
         sessionManager.setUserLoggedIn(true)
         sessionManager.updateAccount(loginResult)
         progressDialog?.dismiss()
@@ -439,6 +560,7 @@ class LoginActivity : BaseActivity() {
             it.loginPassword.removeTextChangedListener(textWatcher)
             it.loginTwoFactor.removeTextChangedListener(textWatcher)
         }
+        loginClient.cancel()
         // Do not cancel ViewModel work here: onDestroy also runs on rotation, and the
         // ViewModel must keep the in-flight login so LiveData can deliver the result.
         binding = null
@@ -491,6 +613,7 @@ class LoginActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean(SAVE_PROGRESS_DIALOG, progressDialog?.isShowing == true)
+        outState.putString(SAVE_PKCE_VERIFIER, pkceCodeVerifier)
         binding?.let {
             outState.putString(SAVE_ERROR_MESSAGE, it.errorMessage.text.toString())
             outState.putString(SAVE_USERNAME, it.loginUsername.text.toString())
@@ -513,6 +636,7 @@ class LoginActivity : BaseActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        pkceCodeVerifier = savedInstanceState.getString(SAVE_PKCE_VERIFIER)
         binding?.let {
             it.loginUsername.setText(savedInstanceState.getString(SAVE_USERNAME))
             it.loginPassword.setText(savedInstanceState.getString(SAVE_PASSWORD))
@@ -559,6 +683,7 @@ class LoginActivity : BaseActivity() {
     companion object {
         fun startYourself(context: Context) = context.startActivity(Intent(context, LoginActivity::class.java))
 
+        private const val PKCE_VERIFIER_BYTE_LENGTH = 32
         const val SAVE_PROGRESS_DIALOG: String = "ProgressDialog_state"
         const val SAVE_ERROR_MESSAGE: String = "errorMessage"
         const val SAVE_USERNAME: String = "username"
@@ -569,5 +694,7 @@ class LoginActivity : BaseActivity() {
         const val RESULT_TYPE_EMAIL_AUTH = "EMAIL_AUTH"
         const val RESULT_TYPE_2FA = "2FA"
         const val RESULT_TYPE_NONE = "NONE"
+        const val SAVE_PKCE_VERIFIER = "pkce_verifier"
+        const val OAUTH_REDIRECT_URI = "fr.free.nrw.commons://oauth-callback"
     }
 }

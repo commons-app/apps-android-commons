@@ -12,6 +12,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.actions.PageEditInterface
 import fr.free.nrw.commons.actions.ThanksInterface
+import fr.free.nrw.commons.auth.OAuthTokenInterceptor
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.auth.csrf.CsrfTokenInterface
@@ -61,6 +62,7 @@ class NetworkingModule {
     fun provideOkHttpClient(
         context: Context,
         httpLoggingInterceptor: HttpLoggingInterceptor,
+        sessionManager: SessionManager,
     ): OkHttpClient =
         OkHttpClient
             .Builder()
@@ -68,6 +70,7 @@ class NetworkingModule {
             .writeTimeout(120, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(ForceCacheInterceptor())
+            .addInterceptor(OAuthTokenInterceptor(sessionManager))
             .addInterceptor(CommonHeaderRequestInterceptor())
             .readTimeout(120, TimeUnit.SECONDS)
             .cache(Cache(File(context.cacheDir, "okHttpCache"), OK_HTTP_CACHE_SIZE))

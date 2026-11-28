@@ -1,6 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar
@@ -9,6 +10,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwIOException
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.Headers
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -57,10 +59,43 @@ object OkHttpConnectionFactory {
                 HttpLoggingInterceptor()
                     .apply { level = HttpLoggingInterceptor.Level.BASIC }
                     .redactSensitiveHeaders(),
-            ).addInterceptor(ForceCacheInterceptor())
+            ).addInterceptor(OAuthTokenInterceptor())
+            .addInterceptor(ForceCacheInterceptor())
             .addInterceptor(UnsuccessfulResponseInterceptor())
             .addInterceptor(CommonHeaderRequestInterceptor())
             .build()
+}
+
+class OAuthTokenInterceptor : Interceptor {
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request()
+        val requestBuilder = request.newBuilder()
+        val accessToken = CommonsApplication.instance?.sessionManager?.getAccessToken()
+
+        if (shouldAttachToken(request, accessToken)) {
+            requestBuilder.header("Authorization", "Bearer $accessToken")
+        }
+
+        return chain.proceed(requestBuilder.build())
+    }
+
+    private fun shouldAttachToken(
+        request: Request,
+        accessToken: String?,
+    ): Boolean {
+        if (accessToken.isNullOrEmpty() || request.header("Authorization") != null) {
+            return false
+        }
+        val allowedHosts =
+            setOfNotNull(
+                BuildConfig.COMMONS_URL.toHttpUrlOrNull()?.host,
+                BuildConfig.WIKIDATA_URL.toHttpUrlOrNull()?.host,
+                "meta.wikimedia.org",
+                "meta.wikimedia.beta.wmflabs.org",
+            )
+        return request.url.isHttps && request.url.host in allowedHosts
+    }
 }
 
 class CommonHeaderRequestInterceptor : Interceptor {

@@ -32,6 +32,8 @@ class LoginClient(
 ) {
     private var tokenCall: Call<MwQueryResponse?>? = null
     private var loginCall: Call<LoginResponse?>? = null
+    private var profileCall: Call<OAuthProfileResponse>? = null
+    private var oauthCall: Call<OAuthTokenResponse>? = null
 
     /**
      * userLanguage
@@ -41,8 +43,6 @@ class LoginClient(
      */
     private var userLanguage = ""
 
-    private fun getLoginToken() = loginInterface.getLoginToken()
-
     fun request(
         userName: String,
         password: String,
@@ -50,7 +50,7 @@ class LoginClient(
     ) {
         cancel()
 
-        tokenCall = getLoginToken()
+        tokenCall = loginInterface.getLoginToken()
         tokenCall!!.enqueue(
             object : Callback<MwQueryResponse?> {
                 override fun onResponse(
@@ -204,7 +204,7 @@ class LoginClient(
     ) {
         cancel()
 
-        tokenCall = getLoginToken()
+        tokenCall = loginInterface.getLoginToken()
         tokenCall!!.enqueue(
             object : Callback<MwQueryResponse?> {
                 override fun onResponse(
@@ -278,6 +278,37 @@ class LoginClient(
         loginCallback,
     )
 
+    fun fetchOAuthUserProfile(
+        accessToken: String,
+        callback: (String?, Throwable?) -> Unit,
+    ) {
+        profileCall?.cancel()
+        profileCall = loginInterface.getOAuthProfile("Bearer $accessToken")
+        profileCall?.enqueue(
+            object : Callback<OAuthProfileResponse> {
+                override fun onResponse(
+                    call: Call<OAuthProfileResponse>,
+                    response: Response<OAuthProfileResponse>,
+                ) {
+                    if (call.isCanceled) return
+                    if (response.isSuccessful && response.body() != null) {
+                        callback(response.body()?.username, null)
+                    } else {
+                        callback(null, IOException("Failed to fetch user profile"))
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<OAuthProfileResponse>,
+                    t: Throwable,
+                ) {
+                    if (call.isCanceled) return
+                    callback(null, t)
+                }
+            },
+        )
+    }
+
     @Throws(Throwable::class)
     fun loginBlocking(
         userName: String,
@@ -285,7 +316,7 @@ class LoginClient(
         twoFactorCode: String? = null,
         emailAuthCode: String? = null,
     ) {
-        val tokenResponse = getLoginToken().execute()
+        val tokenResponse = loginInterface.getLoginToken().execute()
         if (tokenResponse
                 .body()
                 ?.query()
@@ -330,6 +361,53 @@ class LoginClient(
         }
     }
 
+    fun exchangeOAuthCode(
+        code: String,
+        clientId: String,
+        codeVerifier: String,
+        redirectUri: String,
+        callback: (OAuthTokenResponse?, Throwable?) -> Unit,
+    ) {
+        // cancel the any existing pending call
+        oauthCall?.cancel()
+
+        oauthCall =
+            loginInterface.grantOAuthToken(
+                grantType = "authorization_code",
+                code = code,
+                clientId = clientId,
+                codeVerifier = codeVerifier,
+                redirectUri = redirectUri,
+            )
+
+        oauthCall!!.enqueue(
+            object : Callback<OAuthTokenResponse> {
+                override fun onResponse(
+                    call: Call<OAuthTokenResponse>,
+                    response: Response<OAuthTokenResponse>,
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        callback(response.body(), null)
+                    } else {
+                        val errorBody = response.errorBody()?.string() ?: ""
+                        callback(
+                            null,
+                            IOException("OAuth token exchange failed [${response.code()}]: $errorBody"),
+                        )
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<OAuthTokenResponse>,
+                    t: Throwable,
+                ) {
+                    if (call.isCanceled) return
+                    callback(null, t)
+                }
+            },
+        )
+    }
+
     private fun getExtendedInfo(
         userName: String,
         loginResult: LoginResult,
@@ -357,6 +435,16 @@ class LoginClient(
         loginCall?.let {
             it.cancel()
             loginCall = null
+        }
+
+        oauthCall?.let {
+            it.cancel()
+            oauthCall = null
+        }
+
+        profileCall?.let {
+            it.cancel()
+            profileCall = null
         }
     }
 }

@@ -27,15 +27,16 @@ class SessionManager
         private val accountManager: AccountManager get() = AccountManager.get(context)
 
         private var _currentAccount: Account? = null // Unlike a savings account...  ;-)
-        val currentAccount: Account? get() {
-            if (_currentAccount == null) {
-                val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
-                if (allAccounts.isNotEmpty()) {
-                    _currentAccount = allAccounts[0]
+        val currentAccount: Account?
+            get() {
+                if (_currentAccount == null) {
+                    val allAccounts = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)
+                    if (allAccounts.isNotEmpty()) {
+                        _currentAccount = allAccounts[0]
+                    }
                 }
+                return _currentAccount
             }
-            return _currentAccount
-        }
 
         val userName: String?
             get() = currentAccount?.name
@@ -54,6 +55,24 @@ class SessionManager
                 password = result.password
             }
         }
+
+        fun updateOAuthAccount(
+            username: String,
+            accessToken: String,
+        ) {
+            var account = currentAccount
+            if (account == null || TextUtils.isEmpty(account.name) || account.name != username) {
+                removeAccount()
+                account = Account(username, ACCOUNT_TYPE)
+                accountManager.addAccountExplicitly(account, null, null)
+                _currentAccount = account
+            }
+
+            accountManager.setAuthToken(account, KEY_OAUTH2, accessToken)
+            setUserLoggedIn(true)
+        }
+
+        fun getAccessToken(): String? = currentAccount?.let { accountManager.peekAuthToken(it, KEY_OAUTH2) }
 
         fun doesAccountExist(): Boolean = currentAccount != null
 
@@ -88,11 +107,16 @@ class SessionManager
 
         private fun removeAccount() {
             currentAccount?.let {
+                accountManager.invalidateAuthToken(ACCOUNT_TYPE, accountManager.peekAuthToken(it, KEY_OAUTH2))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
                     accountManager.removeAccountExplicitly(it)
                 } else {
                     accountManager.removeAccount(it, null, null)
                 }
             }
+        }
+
+        companion object {
+            const val KEY_OAUTH2 = "OAuth2"
         }
     }
