@@ -67,4 +67,15 @@ class MediaTest {
     fun uppercaseFileExtensionsShouldStillResolve() {
         assertEquals(MediaType.VIDEO, mediaTypeFrom("application/ogg", "File:Example.OGV"))
     }
+
+    @Test
+    fun detailImageUrlShouldUseTheOriginalOnlyForImages() {
+        fun detailImageUrl(type: MediaType) =
+            Media(thumbUrl = "thumbUrl", imageUrl = "imageUrl", mediaType = type).detailImageUrl()
+
+        assertEquals("imageUrl", detailImageUrl(MediaType.IMAGE))
+        assertEquals("thumbUrl", detailImageUrl(MediaType.VIDEO))
+        assertEquals("thumbUrl", detailImageUrl(MediaType.AUDIO))
+        assertEquals("thumbUrl", detailImageUrl(MediaType.OTHER))
+    }
 }
