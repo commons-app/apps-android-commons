@@ -66,4 +66,9 @@
     <declare-styleable name="PasteSensitiveTextInputEditText">
         <attr name="allowFormatting" format="boolean"/>
     </declare-styleable>
+
+    <!-- Which of Android's loading circle styles (normal, small, large) LoadingCircleDrawable copies -->
+    <declare-styleable name="LoadingCircleDrawable">
+        <attr name="loadingSpinnerStyle" format="reference"/>
+    </declare-styleable>
 </resources>

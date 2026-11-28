@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A still open ring drawn like Android's own loading circle, shown when animations are off -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:tint="?android:attr/colorControlActivated"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <group
+        android:translateX="24.0"
+        android:translateY="24.0">
+        <path
+            android:fillColor="#00000000"
+            android:pathData="M0, 0 m 0, -18 a 18,18 0 1,1 0,36 a 18,18 0 1,1 0,-36"
+            android:strokeWidth="4"
+            android:strokeColor="@android:color/white"
+            android:strokeLineCap="square"
+            android:trimPathStart="0"
+            android:trimPathEnd="0.75" />
+    </group>
+</vector>

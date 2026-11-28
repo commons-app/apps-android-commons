@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From Android 8.0, Android's loading circle draws a "refresh" arrow when animations are off.
+         These show a still open ring instead. See LoadingCircleDrawable. -->
+    <style name="LoadingCircle" parent="android:Widget.Material.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/loading_circle</item>
+    </style>
+
+    <style name="LoadingCircle.Small" parent="android:Widget.Material.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/loading_circle_small</item>
+    </style>
+
+    <style name="LoadingCircle.Large" parent="android:Widget.Material.ProgressBar.Large">
+        <item name="android:indeterminateDrawable">@drawable/loading_circle_large</item>
+    </style>
+</resources>

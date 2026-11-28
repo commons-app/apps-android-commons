@@ -65,6 +65,9 @@
         <item name="custom_selector_back">@drawable/ic_arrow_back_white</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
+        <item name="android:progressBarStyle">@style/LoadingCircle</item>
+        <item name="android:progressBarStyleSmall">@style/LoadingCircle.Small</item>
+        <item name="android:progressBarStyleLarge">@style/LoadingCircle.Large</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
@@ -134,6 +137,9 @@
         <!--For edge to edge backward compatibility-->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:progressBarStyle">@style/LoadingCircle</item>
+        <item name="android:progressBarStyleSmall">@style/LoadingCircle.Small</item>
+        <item name="android:progressBarStyleLarge">@style/LoadingCircle.Large</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
@@ -181,6 +187,12 @@
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
+
+    <!-- Loading circles. On Android 8.0 and newer, values-v26 gives them a picture that
+         does not turn into a refresh arrow when animations are off. -->
+    <style name="LoadingCircle" parent="android:Widget.Material.ProgressBar" />
+    <style name="LoadingCircle.Small" parent="android:Widget.Material.ProgressBar.Small" />
+    <style name="LoadingCircle.Large" parent="android:Widget.Material.ProgressBar.Large" />
 
     <style name="borderless_dialog">
         <item name="android:windowNoTitle">true</item>
