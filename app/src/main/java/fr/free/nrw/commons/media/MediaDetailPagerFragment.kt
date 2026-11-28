@@ -76,6 +76,20 @@ class MediaDetailPagerFragment :
     private var mediaFragmentBeforeScroll: MediaDetailFragment? = null
     private var pagerScrollState: Int = ViewPager.SCROLL_STATE_IDLE
 
+    // onDestroyView() sets binding to null, but onSaveInstanceState() can still be called after
+    // that. The current page is remembered here so the right page is saved instead of 0.
+    private var pageBeforeViewDestroyed: Int = 0
+
+    // Pauses the file that was swiped away, a moment after the swipe ends.
+    // It is a field (not a lambda passed to post {}) so onDestroyView() can cancel it with
+    // removeCallbacks(). Without that, it could run after binding is set to null and crash.
+    private val pauseOutgoingMediaAfterSwipe =
+        Runnable {
+            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
+                pauseOutgoingMedia()
+            }
+        }
+
     var removedItems: ArrayList<Int> = ArrayList()
 
     override fun onCreateView(
@@ -145,7 +159,7 @@ class MediaDetailPagerFragment :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current-page", binding?.mediaDetailsPager?.currentItem ?: 0)
+        outState.putInt("current-page", binding?.mediaDetailsPager?.currentItem ?: pageBeforeViewDestroyed)
         outState.putBoolean("editable", editable)
         outState.putBoolean("isFeaturedImage", isFeaturedImage)
     }
@@ -173,9 +187,15 @@ class MediaDetailPagerFragment :
             (activity as MainActivity).showTabs()
         }
 
-        // Temporarily disable it.
-        // Ref:https://github.com/commons-app/apps-android-commons/issues/6581#issuecomment-3694210567
-        // binding = null
+        // Before letting go of the views, cancel the pause scheduled after a swipe. It would crash
+        // on a null binding and remember the current page for onSaveInstanceState().
+        binding?.mediaDetailsPager?.let {
+            it.removeCallbacks(pauseOutgoingMediaAfterSwipe)
+            pageBeforeViewDestroyed = it.currentItem
+        }
+        // Drop the reference to the old file page too, so it can be freed with the views
+        mediaFragmentBeforeScroll = null
+        binding = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -515,12 +535,7 @@ ${m.pageTitle.canonicalUri}""",
             mediaFragmentBeforeScroll = fragment
         }
 
-        val pager = binding!!.mediaDetailsPager
-        pager.post {
-            if (pagerScrollState == ViewPager.SCROLL_STATE_IDLE) {
-                pauseOutgoingMedia()
-            }
-        }
+        binding!!.mediaDetailsPager.post(pauseOutgoingMediaAfterSwipe)
     }
 
     private fun pauseOutgoingMedia() {
