@@ -18,12 +18,22 @@ import fr.free.nrw.commons.utils.handleWebUrl
 
 private const val IMAGE_BACKGROUND_COLOR_KEY = "image_background_color"
 
+private const val SVG_MIME_TYPE = "image/svg+xml"
+
 /** Opens the full-size image. */
 internal fun MediaDetailFragment.launchZoomActivity(view: View) {
     if (media!!.imageUrl != null) {
         val ctx: Context = view.context
         val zoomableIntent = Intent(ctx, ZoomableActivity::class.java)
-        zoomableIntent.setData(Uri.parse(media!!.imageUrl))
+        val thumbUrl = media!!.thumbUrl
+        if (media!!.mimeType.equals(SVG_MIME_TYPE, ignoreCase = true) && !thumbUrl.isNullOrEmpty()) {
+            // Fresco can't draw SVG files, so open the PNG preview that Commons rendered for it.
+            // The zoom screen then asks Commons for a sharper one, using the file name.
+            zoomableIntent.setData(Uri.parse(thumbUrl))
+            zoomableIntent.putExtra(ZoomableActivity.ZoomableActivityConstants.SVG_FILE_NAME, media!!.filename)
+        } else {
+            zoomableIntent.setData(Uri.parse(media!!.imageUrl))
+        }
         zoomableIntent.putExtra(
             ZoomableActivity.ZoomableActivityConstants.ORIGIN,
             "MediaDetails",

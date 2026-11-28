@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentManager
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -24,6 +26,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.ContributionUploadCoordinator
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
@@ -41,6 +44,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import org.osmdroid.api.IMapController
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.powermock.reflect.Whitebox
@@ -445,5 +449,112 @@ class NearbyParentFragmentUnitTest {
         fragment.onDestroyView()
 
         verify(presenter).removeNearbyPreferences(applicationKvStore)
+    }
+
+    @Test
+    fun `locationPermissionGranted with shouldRecenter true centers map and marks centered`() {
+        val mapController = setupMapForRecenterTest()
+        val gpsLatLng = LatLng(TEST_GPS_LAT, TEST_GPS_LNG, TEST_ACCURACY)
+        whenever(locationManager.getLastLocation()).thenReturn(gpsLatLng)
+
+        invokeLocationPermissionGranted(shouldRecenter = true)
+
+        val expectedPoint = GeoPoint(TEST_GPS_LAT, TEST_GPS_LNG)
+        verify(mapController).setCenter(expectedPoint)
+        verify(mapController).animateTo(expectedPoint)
+        verify(presenter).onMapReady()
+        Assert.assertEquals(expectedPoint, Whitebox.getInternalState<GeoPoint>(fragment, "mapCenter"))
+        Assert.assertTrue(Whitebox.getInternalState<Boolean>(fragment, "hasCenteredMapOnLocation"))
+    }
+
+    @Test
+    fun `locationPermissionGranted with shouldRecenter false preserves mapCenter and skips camera recenter`() {
+        val mapController = setupMapForRecenterTest()
+        val pannedPoint = GeoPoint(TEST_PANNED_LAT, TEST_PANNED_LNG)
+        Whitebox.setInternalState(fragment, "mapCenter", pannedPoint)
+        Whitebox.setInternalState(fragment, "hasCenteredMapOnLocation", true)
+        whenever(locationManager.getLastLocation()).thenReturn(LatLng(TEST_GPS_LAT, TEST_GPS_LNG, TEST_ACCURACY))
+
+        invokeLocationPermissionGranted(shouldRecenter = false)
+
+        verify(mapController, never()).setCenter(any())
+        verify(mapController, never()).animateTo(any())
+        verify(presenter).onMapReady()
+        Assert.assertEquals(pannedPoint, Whitebox.getInternalState<GeoPoint>(fragment, "mapCenter"))
+    }
+
+    @Test
+    fun `locationPermissionGranted with null lastKnownLocation does not mark map as centered`() {
+        setupMapForRecenterTest()
+        whenever(locationManager.getLastLocation()).thenReturn(null)
+        whenever(locationManager.isGPSProviderEnabled()).thenReturn(true)
+
+        invokeLocationPermissionGranted(shouldRecenter = true)
+
+        Assert.assertFalse(Whitebox.getInternalState<Boolean>(fragment, "hasCenteredMapOnLocation"))
+        verify(presenter).onMapReady()
+    }
+
+    @Test
+    fun `startMapWithoutPermission with shouldRecenter false preserves camera position`() {
+        val mapController = setupMapForRecenterTest()
+        Whitebox.setInternalState(fragment, "hasCenteredMapOnLocation", true)
+        whenever(applicationKvStore.getString("LastLocation")).thenReturn("$TEST_GPS_LAT,$TEST_GPS_LNG")
+
+        invokeStartMapWithoutPermission(shouldRecenter = false)
+
+        verify(mapController, never()).animateTo(any())
+        verify(presenter).onMapReady()
+    }
+
+    @Test
+    fun `startMapWithoutPermission with shouldRecenter true moves camera and marks centered`() {
+        val mapController = setupMapForRecenterTest()
+        whenever(applicationKvStore.getString("LastLocation")).thenReturn("$TEST_GPS_LAT,$TEST_GPS_LNG")
+
+        invokeStartMapWithoutPermission(shouldRecenter = true)
+
+        verify(mapController).animateTo(GeoPoint(TEST_GPS_LAT, TEST_GPS_LNG))
+        verify(presenter).onMapReady()
+        Assert.assertTrue(Whitebox.getInternalState<Boolean>(fragment, "hasCenteredMapOnLocation"))
+    }
+
+    private fun setupMapForRecenterTest(): IMapController {
+        val mapController = mock(IMapController::class.java)
+        val binding = mock(FragmentNearbyParentBinding::class.java)
+        Whitebox.setInternalState(binding, "map", mapView)
+        Whitebox.setInternalState(binding, "mapProgressBar", mock(ProgressBar::class.java))
+        Whitebox.setInternalState(fragment, "binding", binding)
+        whenever(mapView.controller).thenReturn(mapController)
+        whenever(mapView.overlays).thenReturn(null)
+        return mapController
+    }
+
+    private fun invokeLocationPermissionGranted(shouldRecenter: Boolean) {
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "locationPermissionGranted",
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, shouldRecenter)
+    }
+
+    private fun invokeStartMapWithoutPermission(shouldRecenter: Boolean) {
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "startMapWithoutPermission",
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, shouldRecenter)
+    }
+
+    companion object {
+        private const val TEST_GPS_LAT = 35.6762
+        private const val TEST_GPS_LNG = 139.6503
+        private const val TEST_PANNED_LAT = 48.8566
+        private const val TEST_PANNED_LNG = 2.3522
+        private const val TEST_ACCURACY = 1f
     }
 }

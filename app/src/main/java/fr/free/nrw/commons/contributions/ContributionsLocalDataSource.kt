@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions
 
 import androidx.paging.DataSource
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.upload.FileUtilsWrapper
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -15,6 +16,7 @@ class ContributionsLocalDataSource
     constructor(
         @param:Named("default_preferences") private val defaultKVStore: JsonKvStore,
         private val contributionDao: ContributionDao,
+        private val fileUtilsWrapper: FileUtilsWrapper,
     ) {
         /**
          * Get contribution object from cursor
@@ -31,12 +33,15 @@ class ContributionsLocalDataSource
         }
 
         /**
-         * Remove a contribution from the contributions table
+         * Remove a contribution from the contributions table, and the app's copy of its file
          *
          * @param contribution
          * @return
          */
-        fun deleteContribution(contribution: Contribution): Completable = contributionDao.delete(contribution)
+        fun deleteContribution(contribution: Contribution): Completable =
+            contributionDao
+                .delete(contribution)
+                .doOnComplete { fileUtilsWrapper.deleteUploadFile(contribution.localUriPath) }
 
         /**
          * Marks a completed contribution deleted after a normal request reports the file page is gone.
@@ -54,13 +59,17 @@ class ContributionsLocalDataSource
             }
 
         /**
-         * Deletes contributions with specific states.
+         * Deletes contributions with specific states, and the app's copies of their files.
          *
          * @param states The states of the contributions to delete.
          * @return A Completable indicating the result of the operation.
          */
         fun deleteContributionsWithStates(states: List<Int>): Completable =
-            contributionDao.deleteContributionsWithStates(states)
+            contributionDao.getContribution(states).flatMapCompletable { contributions ->
+                contributionDao
+                    .deleteContributionsWithStates(states)
+                    .doOnComplete { contributions.forEach { fileUtilsWrapper.deleteUploadFile(it.localUriPath) } }
+            }
 
         /**
          * Fetches contributions with specific states.

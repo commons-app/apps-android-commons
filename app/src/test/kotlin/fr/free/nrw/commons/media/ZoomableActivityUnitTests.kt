@@ -3,10 +3,14 @@ package fr.free.nrw.commons.media
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.drawee.controller.ControllerListener
+import com.facebook.imagepipeline.image.ImageInfo
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.OkHttpConnectionFactory
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -23,6 +27,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowToast
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -131,6 +136,23 @@ class ZoomableActivityUnitTests {
     @Test
     fun testOnBackPressed() {
         activity.onBackPressedDispatcher.onBackPressed()
+    }
+
+    @Test
+    fun testFailedImageHidesLoadingCircle() {
+        // Show the loading circle like a picture that is still loading
+        val loadingCircle = activity.findViewById<View>(R.id.zoom_progress_bar)
+        loadingCircle.visibility = View.VISIBLE
+
+        // The picture can't be loaded (for example an SVG, which Fresco can't draw)
+        val listener: ControllerListener<ImageInfo?> = Whitebox.getInternalState(activity, "loadingListener")
+        listener.onFailure("id", Exception("cannot decode"))
+
+        Assert.assertEquals(View.GONE, loadingCircle.visibility)
+        Assert.assertEquals(
+            activity.getString(R.string.error_loading_images),
+            ShadowToast.getTextOfLatestToast(),
+        )
     }
 
     /**
