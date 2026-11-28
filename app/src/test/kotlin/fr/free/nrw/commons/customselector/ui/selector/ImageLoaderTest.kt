@@ -191,52 +191,27 @@ class ImageLoaderTest {
     @Test
     fun testNextActionableImage() =
         TestScope(testDispacher).runTest {
+            mapImageSHA1[uri] = "sourceHash"
+            mapModifiedImageSHA1[image] = "modifiedHash"
             whenever(notForUploadStatusDao.find(any())).thenReturn(0)
-            whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(0)
+            whenever(uploadedStatusDao.countUploadedBySourceSHA1("sourceHash")).thenReturn(0)
             whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(0)
-//        mockStatic(PickedFiles::class.java)
-            BDDMockito
-                .given(PickedFiles.pickedExistingPicture(context, image.uri))
-                .willReturn(UploadableFile(uri, File("ABC")))
-            whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
-            whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
-            whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
-                uploadableFile,
-            )
-            imageLoader.nextActionableImage(
-                listOf(image),
-                testDispacher,
-                testDispacher,
-                0,
-                emptyList(),
-            )
+
+            suspend fun nextIndex() =
+                imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
+
+            Assert.assertEquals(0, nextIndex())
 
             whenever(notForUploadStatusDao.find(any())).thenReturn(1)
-            imageLoader.nextActionableImage(
-                listOf(image),
-                testDispacher,
-                testDispacher,
-                0,
-                emptyList(),
-            )
+            Assert.assertEquals(-1, nextIndex())
 
-            whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
-            imageLoader.nextActionableImage(
-                listOf(image),
-                testDispacher,
-                testDispacher,
-                0,
-                emptyList(),
-            )
+            whenever(notForUploadStatusDao.find(any())).thenReturn(0)
+            whenever(uploadedStatusDao.countUploadedBySourceSHA1("sourceHash")).thenReturn(1)
+            Assert.assertEquals(-1, nextIndex())
 
-            whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
-            imageLoader.nextActionableImage(
-                listOf(image),
-                testDispacher,
-                testDispacher,
-                0,
-                emptyList(),
-            )
+            whenever(uploadedStatusDao.countUploadedBySourceSHA1("sourceHash")).thenReturn(0)
+            whenever(uploadedStatusDao.findByModifiedImageSHA1("modifiedHash", true)).thenReturn(1)
+            Assert.assertEquals(-1, nextIndex())
         }
 
     /**

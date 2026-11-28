@@ -325,7 +325,7 @@ class ZoomableActivity : BaseActivity() {
                     fileUtilsWrapper,
                     contentResolver,
                 )
-            var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+            var isUploaded = uploadedStatusDao.countUploadedBySourceSHA1(imageSHA1)
             if (isUploaded > 0) {
                 Toast
                     .makeText(
@@ -405,7 +405,7 @@ class ZoomableActivity : BaseActivity() {
                     ).show()
             } else {
                 isNonActionable =
-                    uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                    uploadedStatusDao.countUploadedBySourceSHA1(imageSHA1)
                 if (isNonActionable > 0) {
                     Toast
                         .makeText(
@@ -545,7 +545,7 @@ class ZoomableActivity : BaseActivity() {
                 )
             var isNonActionable = notForUploadStatusDao.find(imageSHA1)
             if (isNonActionable <= 0) {
-                isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                isNonActionable = uploadedStatusDao.countUploadedBySourceSHA1(imageSHA1)
                 if (isNonActionable <= 0) {
                     val imageModifiedSHA1 =
                         CustomSelectorUtils.generateModifiedSHA1(
@@ -594,7 +594,7 @@ class ZoomableActivity : BaseActivity() {
                 )
             var isNonActionable = notForUploadStatusDao.find(imageSHA1)
             if (isNonActionable <= 0) {
-                isNonActionable = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                isNonActionable = uploadedStatusDao.countUploadedBySourceSHA1(imageSHA1)
                 if (isNonActionable <= 0) {
                     val imageModifiedSHA1 =
                         CustomSelectorUtils.generateModifiedSHA1(

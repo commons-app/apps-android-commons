@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 private const val RESULT_SUCCESS = "Success"
 
@@ -10,12 +11,19 @@ data class UploadResult(
     val filekey: String,
     val offset: Int,
     val filename: String,
+    @SerializedName("imageinfo") val imageInfo: ImageInfo? = null,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readString() ?: "",
+        parcel.readString()?.let(::ImageInfo),
+    )
+
+    /** File information included in the MediaWiki upload response. */
+    data class ImageInfo(
+        @SerializedName("sha1") val sha1: String?,
     )
 
     fun isSuccessful(): Boolean = result == RESULT_SUCCESS
@@ -30,6 +38,7 @@ data class UploadResult(
         parcel.writeString(filekey)
         parcel.writeInt(offset)
         parcel.writeString(filename)
+        parcel.writeString(imageInfo?.sha1)
     }
 
     override fun describeContents(): Int = 0
