@@ -47,11 +47,10 @@ class CsrfTokenClient(
                         ).get()
 
                 val receivedToken = response.body()?.query()?.csrfToken()
-                if (receivedToken.isNullOrEmpty()) {
-                    continue
+                if (!receivedToken.isNullOrEmpty()) {
+                    token = verifyToken(receivedToken)
+                    break
                 }
-                token = verifyToken(receivedToken)
-                break
             } catch (e: LoginFailedException) {
                 invalidLoginToken(e)
             } catch (e: CancellationException) {

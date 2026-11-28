@@ -90,4 +90,18 @@ class QuizActivityUnitTest {
     fun testCustomAlert() {
         activity.customAlert(sampleAlertTitleValue, sampleAlertMessageValue)
     }
+
+    @Test
+    fun testIsAnswerCorrectForPositiveQuestion() {
+        Assert.assertTrue(QuizActivity.isAnswerCorrect(true, true, false))
+        Assert.assertFalse(QuizActivity.isAnswerCorrect(true, false, true))
+        Assert.assertFalse(QuizActivity.isAnswerCorrect(true, false, false))
+    }
+
+    @Test
+    fun testIsAnswerCorrectForNegativeQuestion() {
+        Assert.assertTrue(QuizActivity.isAnswerCorrect(false, false, true))
+        Assert.assertFalse(QuizActivity.isAnswerCorrect(false, true, false))
+        Assert.assertFalse(QuizActivity.isAnswerCorrect(false, false, false))
+    }
 }

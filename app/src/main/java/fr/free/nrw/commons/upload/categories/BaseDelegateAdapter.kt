@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.categories
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 abstract class BaseDelegateAdapter<T>(
@@ -20,7 +21,7 @@ abstract class BaseDelegateAdapter<T>(
                 newItem: T & Any,
             ): Boolean = areContentsTheSame(oldItem, newItem)
         },
-        *delegates,
+        AdapterDelegatesManager<List<T>>().apply { delegates.forEach { addDelegate(it) } },
     ) {
     fun addAll(newResults: List<T>) {
         items = itemsOrEmpty + newResults

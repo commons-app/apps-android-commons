@@ -173,11 +173,7 @@ class ContributionsFragment(
             renderer.showContributionsListFragment()
         }
 
-        if (!isBetaFlavour &&
-            sessionManager!!.isUserLoggedIn &&
-            sessionManager!!.currentAccount != null &&
-            !isUserProfile
-        ) {
+        if (!isBetaFlavour && hasLoggedInAccount() && !isUserProfile) {
             menuController.setUploadCount()
         }
         setHasOptionsMenu(true)
@@ -353,3 +349,6 @@ class ContributionsFragment(
         }
     }
 }
+
+private fun ContributionsFragment.hasLoggedInAccount(): Boolean =
+    sessionManager!!.isUserLoggedIn && sessionManager!!.currentAccount != null

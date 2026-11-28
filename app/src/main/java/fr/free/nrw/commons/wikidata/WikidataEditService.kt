@@ -224,12 +224,7 @@ class WikidataEditService
             fileEntityId: Long,
             retrying: Boolean,
         ): Observable<Boolean> {
-            val depictedItems =
-                buildList {
-                    for ((_, _, _, _, _, _, id) in contribution.depictedItems) {
-                        add(id)
-                    }
-                }
+            val depictedItems = contribution.depictedItems.map { it.id }
             return if (retrying) {
                 depictsEditor.addMissingDepicts(fileEntityId.toString(), depictedItems)
             } else {
