@@ -12,7 +12,9 @@ import com.facebook.imagepipeline.request.ImageRequest
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.detailImageUrl
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.DEFAULT_IMAGE_BACKGROUND_COLOR
+import fr.free.nrw.commons.utils.handleWebUrl
 
 private const val IMAGE_BACKGROUND_COLOR_KEY = "image_background_color"
 
@@ -101,14 +103,7 @@ internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
     binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
     binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
-    val fullImageUrl =
-        if (media?.mediaType == MediaType.VIDEO ||
-            media?.mediaType == MediaType.AUDIO
-        ) {
-            media.thumbUrl
-        } else {
-            media?.imageUrl
-        }
+    val fullImageUrl = media?.detailImageUrl()
     val controller: DraweeController =
         Fresco
             .newDraweeControllerBuilder()
@@ -151,7 +146,7 @@ internal fun MediaDetailFragment.onMediaClicked() {
         MediaType.AUDIO,
         -> prepareMedia()
         MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
-        MediaType.OTHER -> Unit
+        MediaType.OTHER -> media.imageUrl?.let { handleWebUrl(requireContext(), Uri.parse(it)) }
     }
 }
 
