@@ -143,6 +143,13 @@ class UploadWorker(
     @SuppressLint("MissingPermission")
     override suspend fun doWork(): Result {
         try {
+            val hasQueuedUploads =
+                withContext(Dispatchers.IO) {
+                    contributionDao.getContribution(statesToProcess).blockingGet().isNotEmpty()
+                }
+            if (!hasQueuedUploads) {
+                return Result.success()
+            }
             var totalUploadsStarted = 0
             // Start a foreground service
             setForeground(createForegroundInfo())

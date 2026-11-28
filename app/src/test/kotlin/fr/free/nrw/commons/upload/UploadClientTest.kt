@@ -236,7 +236,11 @@ class UploadClientTest {
 
     @Test
     fun uploadFileToStash_completedContribution() {
+        val chunkInfo = mock<ChunkInfo>()
         whenever(contribution.isCompleted()).thenReturn(true)
+        whenever(contribution.chunkInfo).thenReturn(chunkInfo)
+        whenever(contribution.dateModified).thenReturn(Date(100))
+        whenever(timeProvider.currentTimeMillis()).thenReturn(200)
         whenever(contribution.fileKey).thenReturn(filekey)
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
@@ -245,6 +249,41 @@ class UploadClientTest {
         val stashResult = result.values()[0]
         assertEquals(filekey, stashResult.fileKey)
         assertEquals(StashUploadState.SUCCESS, stashResult.state)
+    }
+
+    @Test
+    fun uploadFileToStash_reuploadsWhenCompletedStashExpired() {
+        val mockFile = mock<File>()
+        val chunkInfo = mock<ChunkInfo>()
+        val expiredTimestamp = 100L
+        val sevenHoursMs = 7L * 3600L * 1000L
+        whenever(mockFile.length()).thenReturn(10)
+        whenever(contribution.isCompleted()).thenReturn(true)
+        whenever(contribution.chunkInfo).thenReturn(chunkInfo)
+        whenever(contribution.dateModified).thenReturn(Date(expiredTimestamp))
+        whenever(timeProvider.currentTimeMillis()).thenReturn(expiredTimestamp + sevenHoursMs)
+        whenever(contribution.localUriPath).thenReturn(mockFile)
+        whenever(contribution.pageId).thenReturn(pageId)
+        whenever(contributionDao.getContribution(pageId)).thenReturn(contribution)
+        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize)))
+            .thenReturn(listOf(mockFile))
+        whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
+        whenever(
+            uploadInterface.uploadFileToStash(
+                anyOrNull(),
+                anyOrNull(),
+                anyOrNull(),
+                anyOrNull(),
+                anyOrNull(),
+                anyOrNull(),
+            ),
+        ).thenReturn(Observable.just(uploadJson))
+
+        val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
+
+        result.assertNoErrors()
+        assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
     }
 
     @Test

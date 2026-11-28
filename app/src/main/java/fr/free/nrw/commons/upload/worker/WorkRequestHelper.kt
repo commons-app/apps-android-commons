@@ -23,7 +23,7 @@ object WorkRequestHelper {
         existingWorkPolicy: ExistingWorkPolicy,
     ) {
         synchronized(lock) {
-            if (isUploadWorkerRunning) {
+            if (isUploadWorkerRunning && existingWorkPolicy == ExistingWorkPolicy.KEEP) {
                 Timber.e("UploadWorker is already running. Cannot start another instance.")
                 return
             } else {
@@ -62,7 +62,7 @@ object WorkRequestHelper {
     }
 
     /**
-     * Sets the flag isUploadWorkerRunning to`false` allowing new worker to be started.
+     * Sets the flag isUploadWorkerRunning to `false` allowing new worker to be started.
      */
     fun markUploadWorkerAsStopped() {
         synchronized(lock) {

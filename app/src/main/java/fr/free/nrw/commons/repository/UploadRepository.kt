@@ -400,8 +400,8 @@ class DefaultUploadQualityOperations(
         modifiedFilePath: Uri?,
     ): Single<Int> =
         uploadModel.imageProcessingService.checkIfFileAlreadyExists(
-            originalFilePath = originalFilePath!!,
-            modifiedFilePath = modifiedFilePath!!,
+            originalFilePath = originalFilePath,
+            modifiedFilePath = modifiedFilePath,
         )
 
     override fun getCaptionQuality(uploadItem: UploadItem): Single<Int> =

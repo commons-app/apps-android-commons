@@ -101,11 +101,15 @@ class FailedUploadsFragment :
         ) { list: PagedList<Contribution> ->
             adapter.submitList(list)
             if (list.size == 0) {
-                uploadProgressActivity.setErrorIconsVisibility(false)
+                if (::uploadProgressActivity.isInitialized) {
+                    uploadProgressActivity.setErrorIconsVisibility(false)
+                }
                 binding.nofailedTextView.visibility = View.VISIBLE
                 binding.failedUplaodsLl.visibility = View.GONE
             } else {
-                uploadProgressActivity.setErrorIconsVisibility(true)
+                if (::uploadProgressActivity.isInitialized) {
+                    uploadProgressActivity.setErrorIconsVisibility(true)
+                }
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
                 binding.failedUploadsRecyclerView.setAdapter(adapter)
@@ -181,7 +185,9 @@ class FailedUploadsFragment :
             String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                uploadProgressActivity.hidePendingIcons()
+                if (::uploadProgressActivity.isInitialized) {
+                    uploadProgressActivity.hidePendingIcons()
+                }
                 pendingUploadsPresenter.deleteUploads(listOf(STATE_FAILED))
             },
             {},
