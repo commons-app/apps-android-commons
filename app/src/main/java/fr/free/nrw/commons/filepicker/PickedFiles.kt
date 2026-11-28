@@ -24,11 +24,13 @@ import java.util.UUID
 object PickedFiles : Constants {
     /**
      * tempImageDirectory
-     * @return temporary image directory to copy and perform exif changes.
+     * @return directory for the copies of pictures to upload, where exif changes are made.
+     * It is not in the cache folder, because Android deletes cache files when storage is low,
+     * and these copies are needed until the upload is done.
      */
     @JvmStatic
-    private fun tempImageDirectory(context: Context): File {
-        val privateTempDir = File(context.cacheDir, DEFAULT_FOLDER_NAME)
+    fun tempImageDirectory(context: Context): File {
+        val privateTempDir = File(context.noBackupFilesDir, DEFAULT_FOLDER_NAME)
         if (!privateTempDir.exists()) privateTempDir.mkdirs()
         return privateTempDir
     }

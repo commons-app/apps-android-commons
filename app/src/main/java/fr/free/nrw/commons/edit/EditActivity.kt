@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityEditBinding
+import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.utils.applyEdgeToEdgeBottomInsets
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
@@ -315,9 +316,9 @@ class EditActivity : BaseActivity() {
         setEditMode(EditMode.NONE)
 
         try {
-            vm.blurImage(regions, applicationContext.cacheDir)
+            vm.blurImage(regions, PickedFiles.tempImageDirectory(applicationContext))
             // Apply pending rotation.
-            vm.applyPendingRotation(applicationContext.cacheDir)
+            vm.applyPendingRotation(PickedFiles.tempImageDirectory(applicationContext))
             // Reload the image displaying the applied blur.
             updateImagePreview()
         } catch (e: Exception) {
@@ -338,7 +339,7 @@ class EditActivity : BaseActivity() {
     private fun applyCrop() {
         try {
             // Apply pending rotation if any.
-            vm.applyPendingRotation(applicationContext.cacheDir)
+            vm.applyPendingRotation(PickedFiles.tempImageDirectory(applicationContext))
 
             val actualWidth = vm.properties!!.width
             val actualHeight = vm.properties!!.height
@@ -354,7 +355,7 @@ class EditActivity : BaseActivity() {
                     cropCoords.top,
                     cropCoords.width,
                     cropCoords.height,
-                    applicationContext.cacheDir,
+                    PickedFiles.tempImageDirectory(applicationContext),
                 )
                 // Update the image preview.
                 updateImagePreview()
@@ -435,7 +436,7 @@ class EditActivity : BaseActivity() {
      */
     private fun saveEditedImage() {
         try {
-            vm.applyPendingRotation(applicationContext.cacheDir)
+            vm.applyPendingRotation(PickedFiles.tempImageDirectory(applicationContext))
             val finalPath = vm.imagePath.toUri().path
             val resultIntent =
                 Intent().apply {

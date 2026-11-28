@@ -45,6 +45,11 @@ class FileUtilsWrapper
         ): List<File> {
             if (file == null) return emptyList()
 
+            // Chunks are not kept in the cache folder, because Android deletes cache files when
+            // storage is low, and a chunk is needed until it is sent.
+            val chunkDirectory = File(context.noBackupFilesDir, "UploadChunks").apply { mkdirs() }
+            // Leftovers of an upload that was stopped. Only one upload runs at a time.
+            chunkDirectory.listFiles()?.forEach { it.delete() }
             val buffer = ByteArray(chunkSize)
 
             FileInputStream(file).use { fis ->
@@ -54,6 +59,7 @@ class FileUtilsWrapper
                     while ((bis.read(buffer).also { size = it }) > 0) {
                         buffers.add(
                             writeToFile(
+                                chunkDirectory,
                                 buffer,
                                 file.name ?: "",
                                 getFileExt(file.name),
@@ -73,12 +79,13 @@ class FileUtilsWrapper
          */
         @Throws(IOException::class)
         private fun writeToFile(
+            directory: File,
             data: ByteArray,
             fileName: String,
             fileExtension: String,
             size: Int,
         ): File {
-            val file = File.createTempFile(fileName, fileExtension, context.cacheDir)
+            val file = File.createTempFile(fileName, fileExtension, directory)
             try {
                 if (!file.exists()) {
                     file.createNewFile()
@@ -91,5 +98,22 @@ class FileUtilsWrapper
                 Timber.e(e, "Failed to create file")
             }
             return file
+        }
+
+        /**
+         * Deletes a file the app made for an upload, like the copy of a picked picture or a chunk.
+         * Files outside the app's own folders, like the user's original picture, are left alone.
+         */
+        fun deleteUploadFile(file: File?) {
+            if (file == null || !file.exists()) {
+                return
+            }
+            val path = file.canonicalPath
+            val inAppStorage =
+                listOfNotNull(context.cacheDir, context.filesDir, context.noBackupFilesDir)
+                    .any { path.startsWith(it.canonicalPath + File.separator) }
+            if (inAppStorage && !file.delete()) {
+                Timber.w("Could not delete upload file %s", file.path)
+            }
         }
     }
