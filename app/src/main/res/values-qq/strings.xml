@@ -838,6 +838,7 @@
   <string name="error_sending_thanks">Error message.</string>
   <string name="invalid_login_message">Appears when an action requires being logged in.</string>
   <string name="no_application_available_to_open_gpx_files">Error message.</string>
+  <string name="no_application_available_to_open_kml_files">Toast error message shown on the Nearby screen when the user tries to open an exported KML file and no installed app can handle it. Related to {{msg-wm|Commons-android-strings-do you want to open kml file}} and {{msg-wm|Commons-android-strings-no application available to open gpx files}}.</string>
   <string name="file_saved_successfully">Appears after saving a GPX file.</string>
   <string name="do_you_want_to_open_gpx_file">Appears after saving a GPX file.</string>
   <string name="do_you_want_to_open_kml_file">Appears after saving a KML file.</string>

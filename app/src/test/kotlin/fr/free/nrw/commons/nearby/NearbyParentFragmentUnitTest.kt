@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.nearby
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.view.LayoutInflater
@@ -54,6 +57,7 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
+import org.robolectric.shadows.ShadowToast
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -449,6 +453,75 @@ class NearbyParentFragmentUnitTest {
         fragment.onDestroyView()
 
         verify(presenter).removeNearbyPreferences(applicationKvStore)
+    }
+
+    @Test
+    fun `openFile with GPX uses standard application gpx xml MIME type`() {
+        invokeOpenFile(activity, "nearby.gpx", isGPX = true)
+
+        val startedIntent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertNotNull(startedIntent)
+        Assert.assertEquals(Intent.ACTION_VIEW, startedIntent.action)
+        Assert.assertEquals("application/gpx+xml", startedIntent.type)
+        Assert.assertNotNull(startedIntent.data)
+        Assert.assertTrue((startedIntent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION) != 0)
+    }
+
+    @Test
+    fun `openFile with KML uses standard application vnd google earth kml xml MIME type`() {
+        invokeOpenFile(activity, "nearby.kml", isGPX = false)
+
+        val startedIntent = Shadows.shadowOf(activity).nextStartedActivity
+        Assert.assertNotNull(startedIntent)
+        Assert.assertEquals(Intent.ACTION_VIEW, startedIntent.action)
+        Assert.assertEquals("application/vnd.google-earth.kml+xml", startedIntent.type)
+        Assert.assertNotNull(startedIntent.data)
+        Assert.assertTrue((startedIntent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION) != 0)
+    }
+
+    @Test
+    fun `openFile shows GPX error toast when no app can handle GPX intent`() {
+        val throwingContext = createThrowingContext("No GPX viewer")
+
+        invokeOpenFile(throwingContext, "nearby.gpx", isGPX = true)
+
+        Assert.assertEquals(
+            activity.getString(R.string.no_application_available_to_open_gpx_files),
+            ShadowToast.getTextOfLatestToast(),
+        )
+    }
+
+    @Test
+    fun `openFile shows KML error toast when no app can handle KML intent`() {
+        val throwingContext = createThrowingContext("No KML viewer")
+
+        invokeOpenFile(throwingContext, "nearby.kml", isGPX = false)
+
+        Assert.assertEquals(
+            activity.getString(R.string.no_application_available_to_open_kml_files),
+            ShadowToast.getTextOfLatestToast(),
+        )
+    }
+
+    private fun createThrowingContext(errorMessage: String): Context =
+        object : ContextWrapper(activity) {
+            override fun startActivity(intent: Intent?) = throw ActivityNotFoundException(errorMessage)
+        }
+
+    private fun invokeOpenFile(
+        targetContext: Context,
+        fileName: String,
+        isGPX: Boolean,
+    ) {
+        val method: Method =
+            NearbyParentFragment::class.java.getDeclaredMethod(
+                "openFile",
+                Context::class.java,
+                String::class.java,
+                Boolean::class.java,
+            )
+        method.isAccessible = true
+        method.invoke(fragment, targetContext, fileName, isGPX)
     }
 
     @Test

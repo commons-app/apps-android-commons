@@ -1893,9 +1893,9 @@ class NearbyParentFragment :
         val intent = Intent(Intent.ACTION_VIEW)
 
         if (isGPX) {
-            intent.setDataAndType(uri, "application/gpx")
+            intent.setDataAndType(uri, "application/gpx+xml")
         } else {
-            intent.setDataAndType(uri, "application/kml")
+            intent.setDataAndType(uri, "application/vnd.google-earth.kml+xml")
         }
 
         intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -1903,10 +1903,16 @@ class NearbyParentFragment :
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             Timber.e(e, "No application available to open the GPX/KML file")
+            val errorMessageRes =
+                if (isGPX) {
+                    fr.free.nrw.commons.R.string.no_application_available_to_open_gpx_files
+                } else {
+                    fr.free.nrw.commons.R.string.no_application_available_to_open_kml_files
+                }
             Toast
                 .makeText(
                     context,
-                    fr.free.nrw.commons.R.string.no_application_available_to_open_gpx_files,
+                    errorMessageRes,
                     Toast.LENGTH_SHORT,
                 ).show()
         }
