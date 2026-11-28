@@ -257,6 +257,7 @@ class NearbyParentFragment :
     private var progressDialog: ProgressDialog? = null
     private var isPermissionDenied = false
     private var recenterToUserLocation = false
+    private var hasCenteredMapOnLocation = false
     private var mapCenter: GeoPoint? = null
     var intentFilter: IntentFilter = IntentFilter(NETWORK_INTENT_ACTION)
     private var lastPlaceToCenter: Place? = null
@@ -540,6 +541,7 @@ class NearbyParentFragment :
         presenter?.attachView(this)
         isPermissionDenied = false
         recenterToUserLocation = false
+        hasCenteredMapOnLocation = false
         initThemePreferences()
         initViews()
         presenter?.setActionListeners(applicationKvStore)
@@ -887,7 +889,7 @@ class NearbyParentFragment :
         locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION)
     }
 
-    private fun locationPermissionGranted() {
+    private fun locationPermissionGranted(shouldRecenter: Boolean = true) {
         isPermissionDenied = false
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false)
         lastKnownLocation = locationManager.getLastLocation()
@@ -895,11 +897,14 @@ class NearbyParentFragment :
 
         if (target != null) {
             val targetP = GeoPoint(target.latitude, target.longitude)
-            mapCenter = targetP
-            binding?.map?.controller?.setCenter(targetP)
             updateUserLocationOverlays(targetP, true)
-            if (!isCameFromExploreMap() && !isDepictsPickerMode) {
-                moveCameraToPosition(targetP)
+            if (shouldRecenter) {
+                mapCenter = targetP
+                binding?.map?.controller?.setCenter(targetP)
+                if (!isCameFromExploreMap() && !isDepictsPickerMode) {
+                    moveCameraToPosition(targetP)
+                }
+                hasCenteredMapOnLocation = true
             }
         } else if (locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()) {
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER)
@@ -955,9 +960,9 @@ class NearbyParentFragment :
             !isDepictsPickerMode
         ) {
             if (activity?.let { locationPermissionsHelper?.checkLocationPermission(it) } == true) {
-                locationPermissionGranted()
+                locationPermissionGranted(shouldRecenter = !hasCenteredMapOnLocation)
             } else {
-                startMapWithoutPermission()
+                startMapWithoutPermission(shouldRecenter = !hasCenteredMapOnLocation)
             }
         }
         drawableCache = HashMap()
@@ -968,7 +973,7 @@ class NearbyParentFragment :
      * coordinates, other than that it points to the last known location which can be get by the key
      * "LastLocation" from applicationKvStore
      */
-    private fun startMapWithoutPermission() {
+    private fun startMapWithoutPermission(shouldRecenter: Boolean = true) {
         if (applicationKvStore!!.getString("LastLocation") != null) {
             val locationLatLng =
                 applicationKvStore!!
@@ -985,10 +990,13 @@ class NearbyParentFragment :
         } else {
             lastKnownLocation = defaultLatLng
         }
-        if (binding!!.map != null && !isCameFromExploreMap()) {
-            moveCameraToPosition(
-                GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
-            )
+        if (shouldRecenter) {
+            if (binding!!.map != null && !isCameFromExploreMap()) {
+                moveCameraToPosition(
+                    GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude),
+                )
+            }
+            hasCenteredMapOnLocation = true
         }
         presenter!!.onMapReady()
     }
