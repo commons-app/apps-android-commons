@@ -165,6 +165,20 @@ interface MediaInterface {
     ): Single<MwQueryResponse>
 
     /**
+     * Asks Commons for a preview of a file that is at least this wide, for example a PNG of an SVG.
+     * Commons picks one of the widths it serves and returns that preview's link as the thumburl.
+     *
+     * @param title the title of the file, for example "File:Map.svg"
+     * @param width the smallest width wanted, in pixels
+     * @return a single that emits the MediaWiki query response
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url")
+    fun getPreview(
+        @Query("titles") title: String,
+        @Query("iiurlwidth") width: Int,
+    ): Single<MwQueryResponse>
+
+    /**
      * Fetches Media object from the imageInfo API
      * Passes an image generator parameter
      *

@@ -160,6 +160,36 @@ class MediaClientTest {
         whenever(mediaDetailInterface.getWikiText("File:Test.jpg")).thenReturn(Single.just(wikiText))
     }
 
+    @Test
+    fun `getPreviewUrl returns the preview link Commons sends`() {
+        val previewUrl =
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/BlankMap-World.svg/" +
+                "1920px-BlankMap-World.svg.png"
+        val mwQueryResponse = expectPreviewResponse(previewUrl)
+        whenever(mediaInterface.getPreview("File:BlankMap-World.svg", 1440))
+            .thenReturn(Single.just(mwQueryResponse))
+
+        mediaClient.getPreviewUrl("File:BlankMap-World.svg", 1440).test().assertValue(previewUrl)
+    }
+
+    @Test
+    fun `getPreviewUrl fails when Commons sends no preview`() {
+        val mwQueryResponse = expectPreviewResponse("")
+        whenever(mediaInterface.getPreview("File:BlankMap-World.svg", 1440))
+            .thenReturn(Single.just(mwQueryResponse))
+
+        mediaClient.getPreviewUrl("File:BlankMap-World.svg", 1440).test().assertError(IllegalStateException::class.java)
+    }
+
+    private fun expectPreviewResponse(previewUrl: String): MwQueryResponse =
+        mockQuery {
+            val mwQueryPage = mock<MwQueryPage>()
+            val imageInfo = mock<ImageInfo>()
+            whenever(firstPage()).thenReturn(mwQueryPage)
+            whenever(mwQueryPage.imageInfo()).thenReturn(imageInfo)
+            whenever(imageInfo.getThumbUrl()).thenReturn(previewUrl)
+        }
+
     private fun mockQuery(queryReceiver: MwQueryResult.() -> Unit): MwQueryResponse {
         val mwQueryResponse = mock<MwQueryResponse>()
         val mwQueryResult = mock<MwQueryResult>()

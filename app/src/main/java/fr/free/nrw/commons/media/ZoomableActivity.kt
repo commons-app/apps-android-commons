@@ -24,6 +24,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.interfaces.DraweeController
 import com.facebook.imagepipeline.image.ImageInfo
+import com.facebook.imagepipeline.request.ImageRequest
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
@@ -38,12 +39,15 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.databinding.ActivityZoomableBinding
+import fr.free.nrw.commons.media.zoomControllers.zoomable.DefaultZoomableController
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.applyEdgeToEdgeTopPaddingInsets
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,6 +103,12 @@ class ZoomableActivity : BaseActivity() {
      * Determines whether the adapter should refresh
      */
     private var shouldRefresh = false
+
+    /**
+     * Asks Commons for a sharper preview of an SVG.
+     */
+    @Inject
+    lateinit var mediaClient: MediaClient
 
     /**
      * FileUtilsWrapper class to get imageSHA1 from uri
@@ -219,6 +229,7 @@ class ZoomableActivity : BaseActivity() {
         // Media details already pass the file URL. Scanning the device gallery would delay the image.
         if (origin == "MediaDetails") {
             intent.data?.let { init(it) }
+            loadSharperSvgPreviewIfSvg()
         } else {
             viewModel.fetchImages()
             viewModel.result.observe(this) {
@@ -677,7 +688,52 @@ class ZoomableActivity : BaseActivity() {
             ) {
                 binding.zoomProgressBar.visibility = View.GONE
             }
+
+            // Without this, a picture that can't be loaded leaves the loading circle spinning forever
+            override fun onFailure(
+                id: String,
+                throwable: Throwable,
+            ) {
+                binding.zoomProgressBar.visibility = View.GONE
+                Toast.makeText(this@ZoomableActivity, R.string.error_loading_images, Toast.LENGTH_SHORT).show()
+            }
         }
+
+    /**
+     * An SVG is first shown with the small PNG preview that the file page already had, which is
+     * blurry when zoomed in. This asks Commons for a PNG wide enough to stay sharp at the
+     * largest zoom (screen width times the maximum zoom) and shows it once it arrives.
+     * Commons picks the exact width. If that fails, the small preview stays.
+     * Does nothing for files that are not SVGs.
+     */
+    private fun loadSharperSvgPreviewIfSvg() {
+        val svgFileName = intent.getStringExtra(ZoomableActivityConstants.SVG_FILE_NAME) ?: return
+        val smallPreview = intent.data ?: return
+        val maxZoom =
+            (binding.zoomable.getZoomableController() as? DefaultZoomableController)
+                ?.getMaxScaleFactor() ?: 1f
+        val sharpWidth = (resources.displayMetrics.widthPixels * maxZoom).toInt()
+        compositeDisposable.add(
+            mediaClient
+                .getPreviewUrl(svgFileName, sharpWidth)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { sharperPreview ->
+                        binding.zoomable.controller =
+                            Fresco
+                                .newDraweeControllerBuilder()
+                                .setLowResImageRequest(ImageRequest.fromUri(smallPreview))
+                                .setImageRequest(ImageRequest.fromUri(sharperPreview))
+                                .setRetainImageOnFailure(true)
+                                .setOldController(binding.zoomable.controller)
+                                .setControllerListener(loadingListener)
+                                .build()
+                    },
+                    { Timber.w(it, "Could not get a sharper preview of %s", svgFileName) },
+                ),
+        )
+    }
 
     private fun init(imageUri: Uri?) {
         if (imageUri != null) {
@@ -768,5 +824,11 @@ class ZoomableActivity : BaseActivity() {
         const val ORIGIN = "Origin"
 
         const val PHOTO_BACKGROUND_COLOR = "photo_background_color"
+
+        /**
+         * Key for the file name (for example "File:Map.svg") of an SVG opened from media details.
+         * Its small PNG preview is passed as the data, and a sharper one is asked from Commons.
+         */
+        const val SVG_FILE_NAME = "svg_file_name"
     }
 }

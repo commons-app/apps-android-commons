@@ -83,6 +83,32 @@ class MediaClient
                 }
 
         /**
+         * Asks Commons for a bigger picture of a file.
+         * For an SVG, Commons sends back a normal picture (PNG) made from it, because the app
+         * can't show SVGs. The app tells Commons the smallest width it needs, and Commons sends
+         * back a picture that is that wide or wider.
+         *
+         * @param title the title of the file, for example "File:Map.svg"
+         * @param width the smallest width wanted, in pixels
+         * @return a single that emits the preview link
+         */
+        fun getPreviewUrl(
+            title: String,
+            width: Int,
+        ): Single<String> =
+            mediaInterface
+                .getPreview(title, width)
+                .map {
+                    it
+                        .query()
+                        ?.firstPage()
+                        ?.imageInfo()
+                        ?.getThumbUrl()
+                        ?.takeIf { url -> url.isNotBlank() }
+                        ?: error("No preview returned for $title")
+                }
+
+        /**
          * The method returns the picture of the day
          *
          * @return Media object corresponding to the picture of the day
