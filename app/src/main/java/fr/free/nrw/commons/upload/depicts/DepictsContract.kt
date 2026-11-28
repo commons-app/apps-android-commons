@@ -81,6 +81,11 @@ interface DepictsContract {
          * Update the depictions
          */
         fun updateDepicts()
+
+        /**
+         * Shows the result of creating a Wikidata item for a Wikipedia article
+         */
+        fun showDepictionCreationMessage(messageRes: Int)
     }
 
     interface View :

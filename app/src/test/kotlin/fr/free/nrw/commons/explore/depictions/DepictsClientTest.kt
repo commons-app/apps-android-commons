@@ -15,6 +15,7 @@ import fr.free.nrw.commons.wikidata.model.Entities
 import fr.free.nrw.commons.wikidata.model.SnakPartial
 import fr.free.nrw.commons.wikidata.model.StatementPartial
 import fr.free.nrw.commons.wikidata.model.WikiBaseEntityValue
+import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -25,12 +26,15 @@ import java.lang.reflect.Method
 class DepictsClientTest {
     @Mock
     private lateinit var depictsInterface: DepictsInterface
+
+    @Mock
+    private lateinit var wikipediaArticleClient: WikipediaArticleClient
     private lateinit var depictsClient: DepictsClient
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        depictsClient = DepictsClient(depictsInterface)
+        depictsClient = DepictsClient(depictsInterface, wikipediaArticleClient)
     }
 
     @Test
@@ -46,6 +50,23 @@ class DepictsClientTest {
             .searchForDepictions("query", 1, 0)
             .test()
             .assertValue(emptyList())
+    }
+
+    @Test
+    fun `searchForUnlinkedWikipediaArticle returns a pending depiction`() {
+        val article = WikipediaArticleClient.Article("ja", "現代革命勞衝者党")
+        whenever(wikipediaArticleClient.findUnlinkedArticle("query")).thenReturn(Maybe.just(article))
+        whenever(wikipediaArticleClient.descriptionFor("ja")).thenReturn("Japanese article without a Wikidata item")
+        whenever(wikipediaArticleClient.pendingDepictionId(article)).thenReturn("pending-wikipedia:ja:現代革命勞衝者党")
+
+        depictsClient
+            .searchForUnlinkedWikipediaArticle("query")
+            .test()
+            .assertValue { results ->
+                results.size == 1 &&
+                    results[0].id == "pending-wikipedia:ja:現代革命勞衝者党" &&
+                    results[0].name == "現代革命勞衝者党"
+            }
     }
 
     @Test

@@ -761,6 +761,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="depicts_step_title">Depicts</string>
   <string name="depicts_label">Label</string>
   <string name="depicts_description">Description</string>
+  <string name="depicts_unlinked_article_description">Wikipedia article in %1$s without a Wikidata item - tap to create it</string>
+  <string name="depicts_item_created">Wikidata item created</string>
+  <string name="depicts_item_creation_failed">Could not create the Wikidata item. Please try again.</string>
+  <string name="depicts_item_creation_login_required">Please log in to create a Wikidata item.</string>
   <string name="license_step_title">Media License</string>
   <string name="media_detail_step_title">Media Details</string>
   <string name="menu_view_category_page">View category page</string>

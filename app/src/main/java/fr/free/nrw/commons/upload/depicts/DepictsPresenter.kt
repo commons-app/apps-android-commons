@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.IO_THREAD
 import fr.free.nrw.commons.di.CommonsApplicationModule.Companion.MAIN_THREAD
+import fr.free.nrw.commons.explore.depictions.WikipediaArticleClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
+import fr.free.nrw.commons.wikidata.WikidataItemCreationClient
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -66,6 +70,15 @@ class DepictsPresenter
         @Inject
         lateinit var depictsHelper: DepictEditHelper
 
+        @Inject
+        lateinit var wikipediaArticleClient: WikipediaArticleClient
+
+        @Inject
+        lateinit var wikidataItemCreationClient: WikidataItemCreationClient
+
+        @Inject
+        lateinit var sessionManager: SessionManager
+
         /**
          * Builds the search results. It reads [controller] and [depictsDao] each time they are
          * needed, exactly like the presenter did before the search logic was moved.
@@ -106,6 +119,20 @@ class DepictsPresenter
 
         override fun onPreviousButtonClicked() {
             view.goToPreviousScreen()
+        }
+
+        override fun onDepictItemClicked(depictedItem: DepictedItem) {
+            DepictsItemCreationHandler(
+                repository,
+                session,
+                view,
+                DepictsCreationDependencies(
+                    wikipediaArticleClient,
+                    wikidataItemCreationClient,
+                    sessionManager.isUserLoggedIn,
+                ),
+                DepictsSchedulers(ioScheduler, mainThreadScheduler),
+            ).onDepictItemClicked(depictedItem)
         }
 
         /**
@@ -211,6 +238,86 @@ class DepictsPresenter
     }
 
 /**
+ * Creates Wikidata items for Wikipedia articles shown as pending depictions.
+ */
+data class DepictsSchedulers(
+    val io: Scheduler,
+    val main: Scheduler,
+)
+
+data class DepictsCreationDependencies(
+    val wikipediaArticleClient: WikipediaArticleClient,
+    val wikidataItemCreationClient: WikidataItemCreationClient,
+    val isUserLoggedIn: Boolean,
+)
+
+class DepictsItemCreationHandler(
+    private val repository: UploadRepository,
+    private val session: DepictsSession,
+    private val view: DepictsContract.View,
+    private val dependencies: DepictsCreationDependencies,
+    private val schedulers: DepictsSchedulers,
+) {
+    fun onDepictItemClicked(depictedItem: DepictedItem) {
+        val article =
+            dependencies.wikipediaArticleClient.articleFromPendingDepictionId(depictedItem.id)
+        when {
+            article == null -> repository.onDepictItemClicked(depictedItem, session.media)
+            !dependencies.isUserLoggedIn -> {
+                revertPendingDepiction(depictedItem)
+                view.showDepictionCreationMessage(R.string.depicts_item_creation_login_required)
+            }
+            !session.pendingDepictionIds.add(depictedItem.id) -> Unit
+            else -> createWikidataItem(depictedItem, article)
+        }
+    }
+
+    private fun createWikidataItem(
+        depictedItem: DepictedItem,
+        article: WikipediaArticleClient.Article,
+    ) {
+        view.showProgressDialog()
+        session.compositeDisposable.add(
+            dependencies.wikidataItemCreationClient
+                .createItem(article.languageCode, article.title)
+                .flatMap { qid ->
+                    repository
+                        .getDepictions(listOf(qid))
+                        .firstOrError()
+                        .map { it.firstOrNull() }
+                }.subscribeOn(schedulers.io)
+                .observeOn(schedulers.main)
+                .doFinally { session.pendingDepictionIds.remove(depictedItem.id) }
+                .subscribe({ createdItem ->
+                    view.dismissProgressDialog()
+                    if (createdItem == null) {
+                        revertPendingDepiction(depictedItem)
+                        view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                    } else {
+                        createdItem.isSelected = true
+                        repository.onDepictItemClicked(createdItem, session.media)
+                        val currentItems = session.depictedItems.value.orEmpty()
+                        val updated = currentItems.filterNot { it.id == depictedItem.id } + createdItem
+                        session.depictedItems.value = updated
+                        view.setDepictsList(updated)
+                        view.showDepictionCreationMessage(R.string.depicts_item_created)
+                    }
+                }, { error ->
+                    Timber.e(error, "Failed to create Wikidata item")
+                    view.dismissProgressDialog()
+                    revertPendingDepiction(depictedItem)
+                    view.showDepictionCreationMessage(R.string.depicts_item_creation_failed)
+                }),
+        )
+    }
+
+    private fun revertPendingDepiction(depictedItem: DepictedItem) {
+        depictedItem.isSelected = false
+        view.setDepictsList(session.depictedItems.value.orEmpty())
+    }
+}
+
+/**
  * Holds the state that [DepictsPresenter] shares with [DepictsSelectionHandler], so that both
  * always work on the same media, depicted items and disposables.
  */
@@ -226,6 +333,11 @@ class DepictsSession
          * The depicted items currently shown to the user
          */
         val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
+
+        /**
+         * Pending Wikipedia articles whose Wikidata items are being created
+         */
+        val pendingDepictionIds: MutableSet<String> = mutableSetOf()
 
         /**
          * The media whose depictions are being edited, or null while uploading

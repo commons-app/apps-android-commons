@@ -92,7 +92,15 @@ class DepictModel
             depictsClient
                 .searchForDepictions(query, SEARCH_DEPICTS_LIMIT, 0)
                 .onErrorResumeWithEmptyList()
-                .toFlowable()
+                .flatMap { results ->
+                    if (results.isEmpty()) {
+                        depictsClient
+                            .searchForUnlinkedWikipediaArticle(query)
+                            .onErrorResumeWithEmptyList()
+                    } else {
+                        Single.just(results)
+                    }
+                }.toFlowable()
 
         fun cleanUp() {
             nearbyPlaces.offer(emptyList())

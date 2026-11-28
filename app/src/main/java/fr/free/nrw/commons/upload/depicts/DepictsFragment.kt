@@ -619,4 +619,13 @@ class DepictsDataViewHandler(
     override fun updateDepicts() {
         (ref.fragment.parentFragment as MediaDetailFragment?)?.onResume()
     }
+
+    /**
+     * Shows the result of creating a Wikidata item for a Wikipedia article.
+     */
+    override fun showDepictionCreationMessage(messageRes: Int) {
+        Toast
+            .makeText(ref.fragment.requireContext(), ref.fragment.getString(messageRes), Toast.LENGTH_SHORT)
+            .show()
+    }
 }

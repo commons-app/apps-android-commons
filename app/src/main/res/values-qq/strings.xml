@@ -719,6 +719,10 @@
   <string name="depicts_step_title">{{Doc-commons-app-depicts}}</string>
   <string name="depicts_label">Label</string>
   <string name="depicts_description">Description</string>
+  <string name="depicts_unlinked_article_description">Description of a search result in the depicts picker for a Wikipedia article that has no Wikidata item yet. %1$s is the language of the Wikipedia edition, for example Japanese. Tapping the result creates a Wikidata item for that article.</string>
+  <string name="depicts_item_created">Toast shown after a Wikidata item was successfully created for an unlinked Wikipedia article in the depicts picker.</string>
+  <string name="depicts_item_creation_failed">Toast shown when creating a Wikidata item for an unlinked Wikipedia article in the depicts picker failed.</string>
+  <string name="depicts_item_creation_login_required">Toast shown when a logged-out user taps an unlinked Wikipedia article in the depicts picker and needs to log in before a Wikidata item can be created.</string>
   <string name="license_step_title">The title of the license selection screen.</string>
   <string name="media_detail_step_title">Title during the upload process.</string>
   <string name="menu_view_category_page">Item in the three-dots menu on the category screen.</string>
