@@ -571,6 +571,18 @@ class MediaDetailFragmentUnitTests {
     }
 
     @Test
+    fun testOnMediaClickedOpensOtherFilesInTheBrowser() {
+        whenever(media.mediaType).thenReturn(MediaType.OTHER)
+        whenever(media.imageUrl).thenReturn("https://example.org/Example.pdf")
+
+        fragment.onMediaClicked()
+
+        val started = shadowOf(activity).nextStartedActivity
+        assertEquals(Intent.ACTION_VIEW, started.action)
+        assertEquals("https://example.org/Example.pdf", started.dataString)
+    }
+
+    @Test
     @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
         fragment.onDiscussionLoaded("")
