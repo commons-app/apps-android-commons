@@ -115,4 +115,32 @@ interface CategoryInterface {
         @Query("titles") categoryName: String?,
         @QueryMap(encoded = true) continuation: Map<String, String>,
     ): Single<MwQueryResponse>
+
+    /**
+     * Checks whether categories are redirects. Hard redirects and normalized titles are listed in
+     * the response, and a soft redirect page is listed as a member of [redirectCategory].
+     *
+     * @param titles up to 50 category titles separated by "|", such as "Category:Cats"
+     * @param redirectCategory the category that lists soft category redirects
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&redirects=1&prop=categories&cllimit=max",
+    )
+    fun getCategoryRedirectInfo(
+        @Query("titles") titles: String,
+        @Query("clcategories") redirectCategory: String,
+    ): Single<CategoryRedirectResponse>
+
+    /**
+     * Fetches the links to other categories of the given category pages. A soft category
+     * redirect links only to the category it redirects to.
+     *
+     * @param titles up to 50 category titles separated by "|"
+     */
+    @GET(
+        "w/api.php?action=query&format=json&formatversion=2&prop=links&plnamespace=14&pllimit=max",
+    )
+    fun getCategoryLinks(
+        @Query("titles") titles: String,
+    ): Single<CategoryRedirectResponse>
 }
