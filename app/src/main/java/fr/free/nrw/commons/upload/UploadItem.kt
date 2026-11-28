@@ -35,7 +35,8 @@ class UploadItem(
     val filename: String
         get() =
             fixExtension(
-                uploadMediaDetails[0].captionText,
+                // Commons saves these characters as "-", so the app checks and uploads that same name
+                uploadMediaDetails[0].captionText.replace(ILLEGAL_FILE_NAME_CHARACTERS, "-"),
                 getExtensionFromMimeType(mimeType),
             )
 

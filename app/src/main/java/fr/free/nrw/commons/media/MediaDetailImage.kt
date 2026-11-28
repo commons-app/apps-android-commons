@@ -12,16 +12,28 @@ import com.facebook.imagepipeline.request.ImageRequest
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.MediaType
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.detailImageUrl
 import fr.free.nrw.commons.media.MediaDetailFragment.Companion.DEFAULT_IMAGE_BACKGROUND_COLOR
+import fr.free.nrw.commons.utils.handleWebUrl
 
 private const val IMAGE_BACKGROUND_COLOR_KEY = "image_background_color"
+
+private const val SVG_MIME_TYPE = "image/svg+xml"
 
 /** Opens the full-size image. */
 internal fun MediaDetailFragment.launchZoomActivity(view: View) {
     if (media!!.imageUrl != null) {
         val ctx: Context = view.context
         val zoomableIntent = Intent(ctx, ZoomableActivity::class.java)
-        zoomableIntent.setData(Uri.parse(media!!.imageUrl))
+        val thumbUrl = media!!.thumbUrl
+        if (media!!.mimeType.equals(SVG_MIME_TYPE, ignoreCase = true) && !thumbUrl.isNullOrEmpty()) {
+            // Fresco can't draw SVG files, so open the PNG preview that Commons rendered for it.
+            // The zoom screen then asks Commons for a sharper one, using the file name.
+            zoomableIntent.setData(Uri.parse(thumbUrl))
+            zoomableIntent.putExtra(ZoomableActivity.ZoomableActivityConstants.SVG_FILE_NAME, media!!.filename)
+        } else {
+            zoomableIntent.setData(Uri.parse(media!!.imageUrl))
+        }
         zoomableIntent.putExtra(
             ZoomableActivity.ZoomableActivityConstants.ORIGIN,
             "MediaDetails",
@@ -91,14 +103,7 @@ internal fun MediaDetailFragment.setupImageView(media: Media? = this.media) {
     binding.mediaDetailImageView.hierarchy.setFailureImage(R.drawable.image_placeholder)
     binding.mediaDetailImageProgressBar.visibility = View.VISIBLE
 
-    val fullImageUrl =
-        if (media?.mediaType == MediaType.VIDEO ||
-            media?.mediaType == MediaType.AUDIO
-        ) {
-            media.thumbUrl
-        } else {
-            media?.imageUrl
-        }
+    val fullImageUrl = media?.detailImageUrl()
     val controller: DraweeController =
         Fresco
             .newDraweeControllerBuilder()
@@ -141,7 +146,7 @@ internal fun MediaDetailFragment.onMediaClicked() {
         MediaType.AUDIO,
         -> prepareMedia()
         MediaType.IMAGE -> launchZoomActivity(binding.mediaDetailImageView)
-        MediaType.OTHER -> Unit
+        MediaType.OTHER -> media.imageUrl?.let { handleWebUrl(requireContext(), Uri.parse(it)) }
     }
 }
 

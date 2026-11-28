@@ -9,6 +9,7 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.CommonsApplication.Companion.DEFAULT_EDIT_SUMMARY
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
@@ -295,6 +296,7 @@ class UploadClientTest {
 
         result.assertNoErrors()
         assertEquals(StashUploadState.FAILED, result.values()[0].state)
+        verify(fileUtilsWrapper).deleteUploadFile(mockFile)
     }
 
     @Test
@@ -341,6 +343,7 @@ class UploadClientTest {
         result.assertNoErrors()
         assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
         assertEquals(filekey, result.values()[0].fileKey)
+        verify(fileUtilsWrapper).deleteUploadFile(mockFile)
     }
 
     @Test

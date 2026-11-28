@@ -112,6 +112,9 @@ class UploadClient
                     }
                 },
             )
+            // The chunks were sent one after the other above, so they are not needed any more.
+            // A retry splits the file again.
+            fileChunks.forEach { fileUtilsWrapper.deleteUploadFile(it) }
 
             return when {
                 contributionDao.getContribution(contribution.pageId) == null -> {
@@ -339,7 +342,7 @@ enum class FileNameCheck {
 }
 
 // Characters that MediaWiki's wfStripIllegalFilenameChars() replaces with "-" in uploaded file names
-private val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
+internal val ILLEGAL_FILE_NAME_CHARACTERS = Regex("[#<>\\[\\]|{}:/\\\\]")
 
 private fun canProcess(
     contributionDao: ContributionDao,
